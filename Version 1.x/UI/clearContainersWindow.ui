@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>clearContainersWindow</class>
+ <widget class="QMainWindow" name="clearContainersWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>380</width>
+    <height>290</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dooble Web Browser: Clear Containers</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QCheckBox" name="bookmarksCheckBox">
+      <property name="text">
+       <string>Bookmarks</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="cookiesCheckBox">
+      <property name="text">
+       <string>Cookies</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="downloadCheckBox">
+      <property name="text">
+       <string>Download Information</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="errorLogCheckBox">
+      <property name="text">
+       <string>Error Information</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="exceptionsCheckBox">
+      <property name="text">
+       <string>Exceptions</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="faviconsCheckBox">
+      <property name="text">
+       <string>Favicons</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="historyCheckBox">
+      <property name="text">
+       <string>History</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="offlineCacheCheckBox">
+      <property name="text">
+       <string>Offline Cache</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>bookmarksCheckBox</tabstop>
+  <tabstop>cookiesCheckBox</tabstop>
+  <tabstop>downloadCheckBox</tabstop>
+  <tabstop>errorLogCheckBox</tabstop>
+  <tabstop>exceptionsCheckBox</tabstop>
+  <tabstop>faviconsCheckBox</tabstop>
+  <tabstop>historyCheckBox</tabstop>
+  <tabstop>offlineCacheCheckBox</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

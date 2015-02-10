@@ -1,0 +1,10 @@
+OS X (64-bit)
+
+Developers, please download the libgpg-error source from
+ftp://ftp.gnupg.org/gcrypt/libgpg-error and the libgcrypt
+source from ftp://ftp.gnupg.org/gcrypt/libgcrypt.
+
+Windows
+
+Developers, please download the Gpg4win installer from
+http://www.gpg4win.org.

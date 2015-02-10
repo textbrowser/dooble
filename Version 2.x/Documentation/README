@@ -1,0 +1,17 @@
+The Linux distribution(s) will unbundle in /usr/local/dooble.
+
+Unbundling: sudo tar -P -vxzf Dooble_Lin32.tar.gz or
+sudo tar -P -vxzf Dooble_Lin64.tar.gz.
+
+If you see the following warning messages, you may wish to remove qt.conf:
+	QSqlDatabase: QSQLITE driver not loaded
+	QSqlDatabase: available drivers:
+
+If column states appear corrupt, clear the widget's corresponding setting
+in the configuration file (Dooble.ini). Also, please report the issue.
+
+Please don't modify your system's time in order to invalidate Dooble's
+stability. Dooble will function according to design. However, you won't.
+
+Developers, please set LD_LIBRARY_PATH accordingly before launching
+Dooble.

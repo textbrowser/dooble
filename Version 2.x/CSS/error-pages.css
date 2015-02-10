@@ -1,0 +1,53 @@
+<style type=text/css>
+html
+{
+    margin: 0px;
+    padding: 0px;
+}
+body
+{
+    background: lightgray;
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+    font-size: 100%;
+}
+#block
+{
+    background: #fff;
+    border: 1px solid black;
+    padding: 40px;
+    width: 500px;
+    margin: 60px auto;
+    color: #444;
+    -webkit-border-radius: 10px;
+}
+h1
+{
+    font-size: 130%;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+    margin-left: 22px;
+}
+h2
+{
+    font-size: 90%;
+    font-weight: normal;
+    border-bottom: 1px solid lightgray;
+    margin-left: 22px;
+}
+h3
+{
+    font-size: 50%;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-left: 4px;
+}
+ul
+{
+    padding: 0px 105px;
+    margin: 0px;
+    overflow: auto;
+    width: 80%;
+}
+</style>

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Dooble Web Browser
+Name[pt]=Navegador web Dooble
+Comment=Dooble Web Browser
+Comment[pt]=Navegador web
+Exec=/usr/local/dooble/dooble.sh
+Icon=/usr/share/icons/hicolor/48x48/dooble.png
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=text/html;/text/xml;application/xhtml_xml;
+StartupNotify=true

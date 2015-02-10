@@ -1,0 +1,188 @@
+Completed Items
+
+1.    Implement print utilities for the file manager.
+2.    Determine roles of various options when browsing files.
+3.    Page icons are not displayed. Why? Qt 4.6.3 resolves this issue.
+4.    Implement an FTP browser.
+5.    Ability to play MP3s and videos.
+6.    Copy, paste, etc. icons.
+7.    Copy, paste, etc. actions should be disabled/enabled accordingly.
+8.    Must allow global font selection.
+9.    Allow setting of page fonts.
+10.   Search and URL widgets should notify listeners of copy events.
+11.   Implement shortcuts in Full Screen Mode.
+12.   Provide context menu for downloading files via the FTP browser.
+13.   Improve the history menu.
+14.   Pasting in the search and URL widgets should copy the contents
+      from either the clipboard buffer or the widget's buffer.
+15.   Disable copy and paste actions while browsing files and ftp sites.
+16.   Some of the icons are not updated after the current theme is replaced.
+17.   The FTP browser should provide a history.
+18.   The history menu should have a maximum of 15 items. Once the limit is
+      reached, old items should be replaced.
+19.   Ctrl+W does not work when viewing the Desktop. This shortcut is intended
+      to close QMdiSubWindow objects. Replaced with Ctrl+Shift+T.
+20.   Inspect the busy cursor. Seems to be wild at times.
+21.   Functional cookies!
+22.   Implement a history browser.
+23.   Improve the silly history.
+24.   Shortcuts:
+               CTRL + ENTER (.com complete)
+               SHIFT + ENTER (.net complete)
+               CTRL + SHIFT + ENTER (.org complete)
+               ALT + ENTER (open in new tab)
+25.   Close the current tab if the middle mouse button has been clicked.
+26.   Allow user to close many tabs.
+27.   The download list's Clear List button is not enabled under certain
+      conditions.
+28.   Allow URL selection via the up and down keys.
+29    Must differentiate between a JavaScript request to open a new window and
+      an HTML request.
+30.   createWindow() must create a dialog-like window if instructed to do so.
+31.   Implement advanced Web fonts.
+32.   Provide an option for removing Dooble's WebpageIcons.db file.
+33.   Prevent undesired JavaScript actions.
+34.   Provide a cookie browser.
+35.   Dooble must retrieve page icons on its own and pass an empty string to
+      QWebSettings::setIconDatabasePath().
+36.   Retain download information, if instructed to do so.
+37.   Store cookies to permanent storage.
+38.   Expand the file manager's columns. Add permissions, owner, etc.
+39.   Prevent loadStarted() signal flooding. This problem is
+      apparent when the user has initiated a load from beyond the
+      contents of a page. That is, clicked links do not instigate this
+      issue. Navigating from a page via a link will also create this
+      problem.
+40.   An option to automatically delete cookies every so often.
+41.   Support for blocking cookie domains.
+42.   Command-line options.
+43.   Character encodings.
+44.   The Tabs' actions' texts are not always correct.
+45.   Implement the Vault. The Vault will provide users with the capability
+      of total encryption of local data. Local data includes cookies,
+      download information, and histories. As bookmarks become available,
+      they too will be encrypted. GnuPG is the current choice of
+      technology that will provide the encryption as it is available
+      on a variety of systems
+      (http://www.gnupg.org/download/supported_systems.en.html).
+46.   The cookiesChangedForUrl() signal will sometimes result
+      in the removal of good cookies.
+47.   The URL widget's completer should default to a date order whenever the
+      pulldown is clicked.
+48.   Implement URL blocking. Look at QNetworkAccessManager::createRequest().
+49.   Ability to view a frame's source.
+50.   History sidebar.
+51.   The file manager should allow copying and duplicating of directories
+      and files. Hold down the Control key while dragging.
+52.   Display source URLs of downloaded items (Downloads window).
+53.   Implement popup blocker exceptions.
+54.   Encode popup blocker exceptions.
+55.   Flash causes intermittent crashes on Linux systems.
+      QWebView was replaced by QGraphicsWebView for X11 systems.
+56.   Plugin toolbar.
+57.   Prevent HTTP redirection attempts.
+58.   Provide means of selecting data sets for re-encoding:
+      bookmarks, cookies, downloads, exceptions, history.
+59.   Removing database items via URLs is nasty business. Perhaps
+      object ids would be better. One way to avoid this is to encode
+      the information correctly. This is not as easy as rocket science.
+60.   Allow clearing of previously-selected tabs.
+61.   Implement bookmarks.
+62.   Rapid mouse clicks may trigger blocking of acceptable popups.
+63.   The history implementation must consider HTML frames.
+64.   Store history states to temporary (and encoded) files for quick
+      startup after failure.
+65.   Provide a list of tabs and windows that were left open during a crash.
+      This option is only available for authenticated sessions.
+66.   Restoration files need to be renamed whenever a tab is moved and/or
+      becomes the child of a new window.
+67.   Review uses of qobject_cast.
+68.   Add-ons do not properly register actions with the Tabs menu.
+69.   Clicking a link with the middle mouse button should open the link
+      in a new tab.
+70.   Display the date of download items.
+71.   OS X (10.6.8) WebKit Qt 4.7.4, 4.8.0 issue:
+              a. Visit http://wallbase.net.
+              b. Click Login.
+              c. Enter random credentials so that the login process fails.
+              d. Press the Back button.
+      Resolved with Qt 4.8.1.
+72.   Double-clicking on known file types from the file browser should
+      be well-defined. Perhaps a new option to define file types and
+      Dooble's behavior regarding said file types.
+73.   Replace QFtp with QNetworkAccessManager and QNetworkReply.
+      Implemented custom dftp class instead.
+74.   Highlight favorite sites in the Cookies window.
+75.   Use the standard when retrieving a site's favicon.
+      (http://en.wikipedia.org/wiki/Favicon#Standardisation)
+76.   Some suffixes in the Applications panel are questionable. Allow
+      the user to archive them? Context menu.
+77.   dmisc::iconForUrl() and dmisc::saveIconForUrl() are demanding.
+      Introduce strong hashes?
+78.   If the Control key is depressed while a page initiates a load,
+      a new tab will be created containing the new page.
+79.   Create dcrypt. Migrate libgcrypt functions from dmisc into dcrypt.
+      Remove temporary containers related to the re-encoding mechanism.
+80.   Log libspoton errors.
+81.   The clearing of the cache should be performed by a thread.
+82.   X11 systems continue to suffer from Flash problems. It appears
+      that the Adobe plugin is unstable. Also, the problems
+      are version-dependent.
+83.   Save pages in Base64.
+84.   Spot-On integration.
+85.   Add support for SSL errors.
+86.   OS X (10.6.8) Qt 4.8.x issue:
+      	 a. Enable Web plugins.
+	 b. Browse the Web.
+	 c. Unable to input text in the location widget. Closing
+	    the current window is the only known solution.
+      Unable to reproduce on other systems. The problem is caused
+      by an unpleasant mixture of Qt and OS X WebKit libraries.
+      Resolved in Qt 5.1.
+87.   dooble::closeEvent() is damaged on Qt 5.0.1 and OS X. Resolved in
+      Qt 5.1.
+88.   The function gcry_strerror() is not thread-safe.
+89.   Review SQL statements for SQL injections.
+90.   QDataStream::write() failures are ignored in dcrypt.cc.
+91.   A separate key should be used for keyed hashes.
+92.   Store authentication information with encrypted data.
+93.   Display SHA-1 hashes of downloaded files.
+94.   Objects of type size_t may contain negative values.
+
+Remaining Items
+
+1.    Pure privacy mode, including plugins.
+2.    Provide a means for customizing the search engines.
+3.    Syntax highlighting.
+4.    Per-tab proxy settings.
+5.    P2P e-mail.
+6.    Cached items should only be available to owners of the items.
+7.    Resolve persistent authentication-required prompts for proxies.
+8.    Raise the window whose tabs have been modified prior to prompting the
+      user.
+9.    Raise parent windows of dialogs? Navigate to parent tabs?
+10.   Provide a means of configuring a DNS proxy. The proxy
+      shall only be used during the retrieval of a site's IP address.
+11.   Configurable, site-based, HTTP headers.
+12.   Implement as many items as possible from
+      http://trac.webkit.org/wiki/Fingerprinting.
+13.   The URL widget utilizes too much memory. Use the model-view
+      concept.
+14.   Review QWebSettings with respect to recommended fonts.
+15.   Plugins must be identified. Signature files?
+16.   Use unique uuids to identify tabs for restoration purposes. The
+      current implementation is flawed.
+17.   Delayed downloads are not reflected.
+
+Removed Items
+
+1.   Changing to a temporary passphrase and returning to the original
+     passphrase should allow some containers to be repopulated.
+2.   Attempt to derive a class from QNetworkReply and complete
+     dnetworkaccessmanager::slotFinished().
+3.   X11 issue: after clicking a pulldown menu on a Web site, the
+     menu's items may be shown at incorrect coordinates.
+     This problem is caused by QGraphicsWebView. Unable to reproduce
+     this problem when using KDE's default style on KDE.
+4.   The GTK+ style distorts pulldown menus on X11 systems.
+5.   QUrl::StripTrailingSlash is flawed in Qt 5.2.x. It's not flawed.

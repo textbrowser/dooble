@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+    	<file>error-pages.css</file>
+    </qresource>
+</RCC>

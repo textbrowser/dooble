@@ -1,0 +1,5 @@
+The install target is not reliable. If Dooble.app is not copied to
+/Applications/Dooble.d during an install, please copy it manually.
+
+Developers, please install Qt 4.8.x via the online installer. The products
+appear more stable than the ones included with the full installer.
