@@ -4666,16 +4666,15 @@ void dooble::slotAbout(void)
   mb->setText
     (QString("<html>"
              "Dooble Web Browser<br><br>"
-             "Version %1, Douglas & Paine.<br>"
+             "Version %1, Ginger.<br>"
 	     "Copyright (c) 2008 - present.<br>"
 	     "Qt version %3, architecture %4."
 	     "<hr>"
-	     "Please visit <a href='http://dooble.sf.net'>"
+	     "Please visit <a href=\"http://dooble.sf.net\">"
 	     "http://dooble.sf.net</a> for more information."
 	     "<hr>"
-	     "Interested in the latest "
-	     "<a href='https://sourceforge.net/p/dooble/code/HEAD/tree/"
-	     "trunk/browser/Documentation/RELEASE-NOTES'>"
+	     "Are you interested in the latest "
+	     "<a href=\"qrc:/Documentation/RELEASE-NOTES.html\">"
 	     "release notes</a>?"
 	     "</html>").
      arg(DOOBLE_VERSION_STR).
