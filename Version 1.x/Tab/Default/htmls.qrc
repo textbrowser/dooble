@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+	<file>../../../Documentation/RELEASE-NOTES.html</file>
         <file>dooble_logo_round.png</file>
         <file>favicon.ico</file>
         <file>world.png</file>

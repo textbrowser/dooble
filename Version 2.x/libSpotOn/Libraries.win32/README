@@ -1,0 +1,7 @@
+Please keep the files within this directory as current as possible.
+
+The gcrypt files should be downloaded from http://gpg4win.org.
+
+The pthread files should be downloaded from ftp://sourceware.org/pub/pthreads-win32/dll-latest.
+
+The sqlite files should be downloaded from http://sqlite.org/download.html.

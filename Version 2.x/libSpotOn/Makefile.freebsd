@@ -1,0 +1,36 @@
+all:	libspoton.o
+	$(CC) $(LDFLAGS) -shared -Wl,-soname,libspoton.so \
+	-o libspoton.so $? -L/usr/local/lib -lgcrypt -lpthread \
+	-lsqlite3
+	$(CC) $(CFLAGS) -I/usr/local/include \
+	-Wall -Werror -Wextra test.c -o test -L/usr/local/include \
+	-L. -lspoton -Wl,-rpath,.
+
+libspoton.o:	libspoton.c libspoton.h
+	$(CC) $(CFLAGS) \
+	-DLIBSPOTON_IGNORE_GCRY_CONTROL_GCRYCTL_INIT_SECMEM_RETURN_VALUE \
+	-DLIBSPOTON_OS_FREEBSD=1 -I/usr/local/include \
+	-fPIC -fstack-protector-all \
+	-Wall -Werror -Wextra -Wpointer-arith \
+	-Wstack-protector -Wstrict-overflow=5 -Wstrict-prototypes \
+	-c -o libspoton.o libspoton.c
+
+clean:
+	rm -f libspoton.o libspoton.so
+	rm -f shared.db
+	rm -f test
+	rm -f test.core
+
+install: all
+	install -o root -g wheel -d /usr/local/lib
+	install -o root -g wheel libspoton.so /usr/local/lib
+
+library: libspoton.o
+	$(CC) $(LDFLAGS) -shared -Wl,-soname,libspoton.so \
+	-o libspoton.so $? -L/usr/local/lib -lgcrypt -lpthread -lsqlite3
+
+purge:
+	rm -f *~*
+
+uninstall:
+	rm -f /usr/local/lib/libspoton.so
