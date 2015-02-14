@@ -1364,8 +1364,8 @@
         <location filename="../Source/dooble.cc" line="3201"/>
         <location filename="../Source/dooble.cc" line="3378"/>
         <location filename="../Source/dooble.cc" line="3402"/>
-        <location filename="../Source/dooble.cc" line="4937"/>
-        <location filename="../Source/dooble.cc" line="5509"/>
+        <location filename="../Source/dooble.cc" line="4936"/>
+        <location filename="../Source/dooble.cc" line="5508"/>
         <source>(Untitled)</source>
         <translation>(Naamloos)</translation>
     </message>
@@ -1377,9 +1377,9 @@
         <location filename="../Source/dooble.cc" line="3616"/>
         <location filename="../Source/dooble.cc" line="3656"/>
         <location filename="../Source/dooble.cc" line="3860"/>
-        <location filename="../Source/dooble.cc" line="5433"/>
-        <location filename="../Source/dooble.cc" line="6052"/>
-        <location filename="../Source/dooble.cc" line="6372"/>
+        <location filename="../Source/dooble.cc" line="5432"/>
+        <location filename="../Source/dooble.cc" line="6051"/>
+        <location filename="../Source/dooble.cc" line="6371"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1401,7 +1401,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="2988"/>
         <location filename="../Source/dooble.cc" line="3174"/>
-        <location filename="../Source/dooble.cc" line="5435"/>
+        <location filename="../Source/dooble.cc" line="5434"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Browser:Cookies (%1)</translation>
     </message>
@@ -1410,9 +1410,9 @@
         <location filename="../Source/dooble.cc" line="2999"/>
         <location filename="../Source/dooble.cc" line="3182"/>
         <location filename="../Source/dooble.cc" line="3185"/>
-        <location filename="../Source/dooble.cc" line="5443"/>
-        <location filename="../Source/dooble.cc" line="5446"/>
-        <location filename="../Source/dooble.cc" line="6374"/>
+        <location filename="../Source/dooble.cc" line="5442"/>
+        <location filename="../Source/dooble.cc" line="5445"/>
+        <location filename="../Source/dooble.cc" line="6373"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Browser</translation>
     </message>
@@ -1422,87 +1422,87 @@
         <translation>&amp;Wissen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4475"/>
+        <location filename="../Source/dooble.cc" line="4474"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5075"/>
+        <location filename="../Source/dooble.cc" line="5074"/>
         <source>Open</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5210"/>
+        <location filename="../Source/dooble.cc" line="5209"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>De website %1 vraagt om referenties.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5274"/>
+        <location filename="../Source/dooble.cc" line="5273"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>De proxy %1:%2 vraagt om referenties.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6409"/>
+        <location filename="../Source/dooble.cc" line="6408"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Ben je er zeker van om pagina %1 te openen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6562"/>
+        <location filename="../Source/dooble.cc" line="6561"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Ben je er zeker van om gewijzigde pagina te verlaten?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6837"/>
+        <location filename="../Source/dooble.cc" line="6836"/>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
         <translation>dooble::slotRefreshPlugins(): Verwijder actie %1.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6881"/>
+        <location filename="../Source/dooble.cc" line="6880"/>
         <source>Start %1</source>
         <translation>Begin %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6949"/>
+        <location filename="../Source/dooble.cc" line="6948"/>
         <source>Add-on Load Failed</source>
         <translation>Laden van een toepassing Mislukt</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6972"/>
-        <location filename="../Source/dooble.cc" line="7023"/>
+        <location filename="../Source/dooble.cc" line="6971"/>
+        <location filename="../Source/dooble.cc" line="7022"/>
         <source>Add-on</source>
         <translation>Toepassing</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7435"/>
+        <location filename="../Source/dooble.cc" line="7434"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser:Herinnering</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7436"/>
+        <location filename="../Source/dooble.cc" line="7435"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Een wachtwoord is niet ingesteld. Ga naar de Vertrouwd paneel in het venster Instellingen en kies een wachtwoord. Zodra een wachtwoord is geselecteerd, zullen bookmarks, cookies, en alle andere essentiële informatie beschikbaar zijn voor toekomstige sessies. U kunt deze herinnering via de Vertrouwd paneel uitschakelen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7696"/>
+        <location filename="../Source/dooble.cc" line="7695"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Bekijk %1 &amp;Cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7699"/>
-        <location filename="../Source/dooble.cc" line="7703"/>
+        <location filename="../Source/dooble.cc" line="7698"/>
+        <location filename="../Source/dooble.cc" line="7702"/>
         <source>View Site &amp;Cookies</source>
         <translation>Bekijk site &amp;Cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7133"/>
-        <location filename="../Source/dooble.cc" line="7138"/>
+        <location filename="../Source/dooble.cc" line="7132"/>
+        <location filename="../Source/dooble.cc" line="7137"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>De site %1 veroorzaakte een uitzondering. klik AUB om te beoordelen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7372"/>
-        <location filename="../Source/dooble.cc" line="7374"/>
-        <location filename="../Source/dooble.cc" line="7378"/>
+        <location filename="../Source/dooble.cc" line="7371"/>
+        <location filename="../Source/dooble.cc" line="7373"/>
+        <location filename="../Source/dooble.cc" line="7377"/>
         <source>Restore Session</source>
         <translation>Herstel Sessie</translation>
     </message>
@@ -1510,8 +1510,8 @@
         <location filename="../Source/dooble.cc" line="2793"/>
         <location filename="../Source/dooble.cc" line="2845"/>
         <location filename="../Source/dooble.cc" line="3810"/>
-        <location filename="../Source/dooble.cc" line="6406"/>
-        <location filename="../Source/dooble.cc" line="6558"/>
+        <location filename="../Source/dooble.cc" line="6405"/>
+        <location filename="../Source/dooble.cc" line="6557"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser:Bevestiging</translation>
     </message>
@@ -1526,7 +1526,7 @@
         <translation>Ben je er zeker van om gewijzigde tabblad te sluiten?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5072"/>
+        <location filename="../Source/dooble.cc" line="5071"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Welkom bij Dooble Open Map</translation>
     </message>
@@ -1549,7 +1549,7 @@
         <translation>Dooble Web Browser: Over</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4472"/>
+        <location filename="../Source/dooble.cc" line="4471"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Browser: Opslaan Als</translation>
     </message>
@@ -1558,10 +1558,10 @@
         <translation type="obsolete">&amp;Opslaan</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4860"/>
-        <location filename="../Source/dooble.cc" line="4866"/>
-        <location filename="../Source/dooble.cc" line="4868"/>
-        <location filename="../Source/dooble.cc" line="4872"/>
+        <location filename="../Source/dooble.cc" line="4859"/>
+        <location filename="../Source/dooble.cc" line="4865"/>
+        <location filename="../Source/dooble.cc" line="4867"/>
+        <location filename="../Source/dooble.cc" line="4871"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Desktop</translation>
     </message>
