@@ -49,21 +49,6 @@ dnetworkblockreply::dnetworkblockreply
 
   request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
   setRequest(request);
-  m_content.append("<html>");
-  m_content.append(QString("<title>%1</title>").
-		   arg(url.toString(QUrl::StripTrailingSlash)));
-  m_content.append("<small>");
-
-  if(url.host().isEmpty())
-    m_content.append("A connection was denied by Dooble.");
-  else
-    m_content.append
-      (QString("Dooble has denied a connection from "
-	       "%1.").
-       arg(url.host()));
-
-  m_content.append("</small><br>");
-  m_content.append("</html>");
   setUrl(url);
   open(ReadOnly | Unbuffered);
   setHeader(QNetworkRequest::ContentTypeHeader, "text/html; charset=UTF-8");
