@@ -33,16 +33,12 @@
 
 #ifdef LIBSPOTON_OS_WINDOWS
 #include "errno.h"
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include "gcrypt.h"
-#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 #include "pthread.h"
 #include "sqlite3.h"
 #else
 #include <errno.h>
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include <gcrypt.h>
-#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 #include <pthread.h>
 #include <sqlite3.h>
 #endif
