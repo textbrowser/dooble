@@ -30,13 +30,7 @@
 
 extern "C"
 {
-  /*
-  ** Older compilers (GCC 4.2.1) misbehave.
-  */
-
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include <gcrypt.h>
-#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 }
 
 #include <QMutex>
