@@ -200,6 +200,7 @@ class dooble: public QMainWindow
   void saveSettings(void);
   void keyPressEvent(QKeyEvent *event);
   void setUrlHandler(dooble *d);
+  void prepareMenuBar(const bool state);
   void prepareTabsMenu(void);
   void unsetUrlHandler(void);
   void cleanupBeforeExit(void);
@@ -255,6 +256,7 @@ class dooble: public QMainWindow
   void slotCopyLink(const QUrl &url);
   void slotFindNext(void);
   void slotHideFind(void);
+  void slotHideMainMenus(void);
   void slotLoadPage(void);
   void slotLoadPage(const QUrl &url);
   void slotResetUrl(void);

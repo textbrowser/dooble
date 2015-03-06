@@ -1123,6 +1123,11 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #endif
   ui.findFrame->setVisible(false);
   ui.backToolButton->setMenu(new QMenu(this));
+  ui.menuToolButton->setMenu(new QMenu(this));
+  connect(ui.action_Hide_Menubar,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slotHideMainMenus(void)));
   connect(ui.action_Web_Inspector,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -1703,7 +1708,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #ifdef Q_OS_MAC
   foreach(QToolButton *toolButton, findChildren<QToolButton *> ())
     if(toolButton == ui.backToolButton ||
-       toolButton == ui.forwardToolButton)
+       toolButton == ui.forwardToolButton ||
+       toolButton == ui.menuToolButton)
       toolButton->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
@@ -1721,6 +1727,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
   setWindowRole("browser");
 #endif
+  prepareMenuBar(s_settings.value("mainWindow/hideMenuBar", false).toBool());
 }
 
 dooble::dooble
@@ -1986,6 +1993,7 @@ void dooble::slotSetIcons(void)
 
   ui.backToolButton->setIconSize(size);
   ui.forwardToolButton->setIconSize(size);
+  ui.menuToolButton->setIconSize(size);
   ui.reloadToolButton->setIconSize(size);
   ui.stopToolButton->setIconSize(size);
   ui.homeToolButton->setIconSize(size);
@@ -1994,6 +2002,8 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("mainWindow/backToolButton").toString()));
   ui.forwardToolButton->setIcon
     (QIcon(settings.value("mainWindow/forwardToolButton").toString()));
+  ui.menuToolButton->setIcon
+    (QIcon(settings.value("mainWindow/menuToolButton").toString()));
   ui.reloadToolButton->setIcon
     (QIcon(settings.value("mainWindow/reloadToolButton").toString()));
   ui.stopToolButton->setIcon
@@ -8022,4 +8032,36 @@ void dooble::prepareLocationSpotOnWidget(void)
   ui.locationLineEdit->setSpotOnButtonEnabled(false);
   ui.locationLineEdit->setSpotOnColor(false);
 #endif
+}
+
+void dooble::slotHideMainMenus(void)
+{
+  bool state = true;
+
+  if(ui.menuToolButton->isVisible())
+    state = false;
+
+  QSettings settings;
+
+  settings.setValue("mainWindow/hideMenuBar", state);
+  s_settings["mainWindow/hideMenuBar"] = state;
+  prepareMenuBar(state);
+}
+
+void dooble::prepareMenuBar(const bool state)
+{
+  menuBar()->setVisible(!state);
+  ui.menuToolButton->setVisible(state);
+
+  if(!state)
+    foreach(QMenu *menu, ui.menuToolButton->menu()->findChildren<QMenu *> ())
+      menuBar()->addMenu(menu);
+  else
+    foreach(QMenu *menu, menuBar()->findChildren<QMenu *> ())
+      ui.menuToolButton->menu()->addMenu(menu);
+
+  if(state)
+    ui.action_Hide_Menubar->setText(tr("&Show Menu Bar"));
+  else
+    ui.action_Hide_Menubar->setText(tr("&Hide Menu Bar"));
 }
