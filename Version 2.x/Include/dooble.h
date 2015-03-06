@@ -56,7 +56,7 @@
 #include "plugin-spec/extension.h"
 #include "plugin-spec/signal-agent.h"
 
-#define DOOBLE_VERSION_STR "2.00"
+#define DOOBLE_VERSION_STR "2.01"
 
 using namespace simpleplugin;
 
