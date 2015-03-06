@@ -8554,12 +8554,25 @@ void dooble::prepareMenuBar(const bool state)
   menuBar()->setVisible(!state);
   ui.menuToolButton->setVisible(state);
 
-  if(!state)
-    foreach(QMenu *menu, ui.menuToolButton->menu()->findChildren<QMenu *> ())
-      menuBar()->addMenu(menu);
-  else
-    foreach(QMenu *menu, menuBar()->findChildren<QMenu *> ())
-      ui.menuToolButton->menu()->addMenu(menu);
+  if(state)
+    {
+      /*
+      ** findChildren() does not return the menus in the
+      ** desired order.
+      */
+
+      ui.menuToolButton->menu()->clear();
+      ui.menuToolButton->menu()->addMenu(ui.menu_File);
+      ui.menuToolButton->menu()->addMenu(ui.editMenu);
+      ui.menuToolButton->menu()->addMenu(ui.bookmarksMenu);
+      ui.menuToolButton->menu()->addMenu(ui.historyMenu);
+      ui.menuToolButton->menu()->addMenu(ui.menu_Locations);
+      ui.menuToolButton->menu()->addMenu(ui.menu_Tabs);
+      ui.menuToolButton->menu()->addMenu(ui.viewMenu);
+      ui.menuToolButton->menu()->addMenu(ui.menu_Windows);
+      ui.menuToolButton->menu()->addMenu(ui.menu_Plugins);
+      ui.menuToolButton->menu()->addMenu(ui.menu_About);
+    }
 
   if(state)
     ui.action_Hide_Menubar->setText(tr("&Show Menu Bar"));
