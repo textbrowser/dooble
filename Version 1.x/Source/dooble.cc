@@ -4351,7 +4351,7 @@ void dooble::slotAbout(void)
   mb->setText
     (QString("<html>"
              "Dooble Web Browser<br><br>"
-             "Version %1, Ginger.<br>"
+             "Version %1, Data.<br>"
 	     "Copyright (c) 2008 - present.<br>"
 	     "Qt version %3, architecture %4."
 	     "<hr>"
@@ -5696,6 +5696,7 @@ void dooble::slotHideToolBar(void)
 	  ui.backToolButton->setVisible(false);
 	  ui.forwardToolButton->setVisible(false);
 	  ui.homeToolButton->setVisible(false);
+	  ui.menuToolButton->setVisible(false);
 	  ui.reloadStopWidget->setVisible(false);
 	  ui.desktopToolButton->setVisible(false);
 	  ui.searchLineEdit->setVisible(false);
@@ -8052,6 +8053,7 @@ void dooble::prepareMenuBar(const bool state)
 {
   menuBar()->setVisible(!state);
   ui.menuToolButton->setVisible(state);
+  ui.menuToolButtonLine->setVisible(state);
 
   if(state)
     {

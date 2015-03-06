@@ -6122,6 +6122,7 @@ void dooble::slotHideToolBar(void)
 	  ui.backToolButton->setVisible(false);
 	  ui.forwardToolButton->setVisible(false);
 	  ui.homeToolButton->setVisible(false);
+	  ui.menuToolButton->setVisible(false);
 	  ui.reloadStopWidget->setVisible(false);
 	  ui.desktopToolButton->setVisible(false);
 	  ui.searchLineEdit->setVisible(false);
