@@ -5364,7 +5364,8 @@ void dooble::slotFullScreenMode(void)
     ui.locationToolBar->setVisible(setVisible);
   else
     {
-      menuBar()->setVisible(setVisible);
+      if(!s_settings.value("mainWindow/hideMenuBar", false).toBool())
+	menuBar()->setVisible(setVisible);
 
       if(qobject_cast<dview *> (ui.tabWidget->currentWidget()))
 	statusBar()->setVisible(ui.actionStatusbar->isChecked());
@@ -8039,7 +8040,7 @@ void dooble::slotHideMainMenus(void)
 {
   bool state = true;
 
-  if(ui.menuToolButton->isVisible())
+  if(s_settings.value("mainWindow/hideMenuBar", false).toBool())
     state = false;
 
   QSettings settings;
