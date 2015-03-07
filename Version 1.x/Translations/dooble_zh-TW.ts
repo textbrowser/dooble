@@ -1213,6 +1213,14 @@
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Show Menu Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide Menu Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>downloadPromptDialog</name>
@@ -2372,6 +2380,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HTTP-&amp;Only Cookies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
