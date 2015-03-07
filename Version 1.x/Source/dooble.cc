@@ -1123,7 +1123,13 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #endif
   ui.findFrame->setVisible(false);
   ui.backToolButton->setMenu(new QMenu(this));
+#ifdef Q_OS_MAC
+  ui.action_Hide_Menubar->setEnabled(false);
+  ui.menuToolButton->setVisible(false);
+  ui.menuToolButtonLine->setVisible(false);
+#else
   ui.menuToolButton->setMenu(new QMenu(this));
+#endif
   connect(ui.action_Hide_Menubar,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -1727,7 +1733,9 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
   setWindowRole("browser");
 #endif
+#ifndef Q_OS_MAC
   prepareMenuBar(s_settings.value("mainWindow/hideMenuBar", false).toBool());
+#endif
 }
 
 dooble::dooble
