@@ -1884,6 +1884,12 @@ dooble::dooble
     (ui.actionShow_HistorySideBar->isChecked());
   update();
 
+  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+    QMessageBox::critical
+      (this, tr("Dooble Web Browser: Error"),
+       tr("The SQLite database driver QSQLITE is not available. "
+	  "This is a fatal flaw."));
+
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
 }
@@ -1949,6 +1955,12 @@ dooble::dooble
   reinstate();
   update();
 
+  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+    QMessageBox::critical
+      (this, tr("Dooble Web Browser: Error"),
+       tr("The SQLite database driver QSQLITE is not available. "
+	  "This is a fatal flaw."));
+
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
 }
@@ -1985,6 +1997,12 @@ dooble::dooble(dview *p, dooble *d):QMainWindow()
       (ui.tabWidget->indexOf(p),
        ui.tabWidget->tabText(ui.tabWidget->indexOf(p)));
 
+  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+    QMessageBox::critical
+      (this, tr("Dooble Web Browser: Error"),
+       tr("The SQLite database driver QSQLITE is not available. "
+	  "This is a fatal flaw."));
+
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
 }
@@ -2010,6 +2028,12 @@ dooble::dooble(const QByteArray &history, dooble *d):QMainWindow()
   ui.historyFrame->setVisible
     (ui.actionShow_HistorySideBar->isChecked());
   update();
+
+  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+    QMessageBox::critical
+      (this, tr("Dooble Web Browser: Error"),
+       tr("The SQLite database driver QSQLITE is not available. "
+	  "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -2103,6 +2127,12 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
     (ui.actionShow_HistorySideBar->isChecked());
   reinstate();
   update();
+
+  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+    QMessageBox::critical
+      (this, tr("Dooble Web Browser: Error"),
+       tr("The SQLite database driver QSQLITE is not available. "
+	  "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -8018,6 +8048,55 @@ bool dooble::event(QEvent *event)
 #else
 bool dooble::event(QEvent *event)
 {
+  if(event->type() == QEvent::WindowStateChange)
+    {
+      bool setVisible = false;
+
+      if(isFullScreen())
+	{
+	  setVisible = false;
+	  ui.actionFull_Screen_Mode->setText("&Normal Screen Mode");
+	}
+      else
+	{
+	  setVisible = true;
+	  ui.actionFull_Screen_Mode->setText("&Full Screen Tablet Mode");
+	}
+
+      if(!setVisible)
+	m_sizeForFullScreen = size();
+      else
+	ui.locationLineEdit->popdown();
+
+      if(m_isJavaScriptWindow)
+	ui.locationToolBar->setVisible(setVisible);
+      else
+	{
+	  if(!s_settings.value("mainWindow/hideMenuBar", false).toBool())
+	    menuBar()->setVisible(setVisible);
+
+	  if(qobject_cast<dview *> (ui.tabWidget->currentWidget()))
+	    statusBar()->setVisible(ui.actionStatusbar->isChecked());
+	  else
+	    statusBar()->setVisible(false);
+
+	  ui.locationToolBar->setVisible(setVisible);
+	}
+
+      ui.marker->setVisible(!setVisible);
+      ui.tabWidget->setBarVisible
+	(setVisible &&
+	 s_settings.value("settingsWindow/alwaysShowTabBar",
+			  true).toBool());
+#ifndef Q_OS_MAC
+      ui.restoreToolButton->setVisible(!setVisible);
+#else
+#if QT_VERSION < 0x050300
+      ui.restoreToolButton->setVisible(!setVisible);
+#endif
+#endif
+    }
+
   return QMainWindow::event(event);
 }
 #endif
