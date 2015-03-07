@@ -1176,6 +1176,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   dmisc::populateHttpStatusCodesContainer();
   setUrlHandler(this);
   m_isJavaScriptWindow = isJavaScriptWindow;
+  m_sizeForFullScreen = size();
   showFindFrame = false;
   s_instances += 1;
   m_id = QDateTime::currentMSecsSinceEpoch() + s_instances;
@@ -5820,7 +5821,11 @@ void dooble::slotFullScreenMode(void)
   else
     {
       showNormal();
+#ifdef Q_OS_MAC
+#if QT_VERSION < 0x050300
       resize(m_sizeForFullScreen);
+#endif
+#endif
       ui.locationLineEdit->popdown();
     }
 

@@ -1060,6 +1060,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   dmisc::populateHttpStatusCodesContainer();
   setUrlHandler(this);
   m_isJavaScriptWindow = isJavaScriptWindow;
+  m_sizeForFullScreen = size();
   showFindFrame = false;
   s_instances += 1;
   m_id = QDateTime::currentMSecsSinceEpoch() + s_instances;
@@ -1768,11 +1769,12 @@ dooble::dooble
     (ui.actionShow_HistorySideBar->isChecked());
   update();
 
-  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
-    QMessageBox::critical
-      (this, tr("Dooble Web Browser: Error"),
-       tr("The SQLite database driver QSQLITE is not available. "
-	  "This is a fatal flaw."));
+  if(s_instances <= 1)
+    if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+      QMessageBox::critical
+	(this, tr("Dooble Web Browser: Error"),
+	 tr("The SQLite database driver QSQLITE is not available. "
+	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -1834,11 +1836,12 @@ dooble::dooble
   reinstate();
   update();
 
-  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
-    QMessageBox::critical
-      (this, tr("Dooble Web Browser: Error"),
-       tr("The SQLite database driver QSQLITE is not available. "
-	  "This is a fatal flaw."));
+  if(s_instances <= 1)
+    if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+      QMessageBox::critical
+	(this, tr("Dooble Web Browser: Error"),
+	 tr("The SQLite database driver QSQLITE is not available. "
+	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -1876,11 +1879,12 @@ dooble::dooble(dview *p, dooble *d):QMainWindow()
       (ui.tabWidget->indexOf(p),
        ui.tabWidget->tabText(ui.tabWidget->indexOf(p)));
 
-  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
-    QMessageBox::critical
-      (this, tr("Dooble Web Browser: Error"),
-       tr("The SQLite database driver QSQLITE is not available. "
-	  "This is a fatal flaw."));
+  if(s_instances <= 1)
+    if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+      QMessageBox::critical
+	(this, tr("Dooble Web Browser: Error"),
+	 tr("The SQLite database driver QSQLITE is not available. "
+	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -1908,11 +1912,12 @@ dooble::dooble(const QByteArray &history, dooble *d):QMainWindow()
     (ui.actionShow_HistorySideBar->isChecked());
   update();
 
-  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
-    QMessageBox::critical
-      (this, tr("Dooble Web Browser: Error"),
-       tr("The SQLite database driver QSQLITE is not available. "
-	  "This is a fatal flaw."));
+  if(s_instances <= 1)
+    if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+      QMessageBox::critical
+	(this, tr("Dooble Web Browser: Error"),
+	 tr("The SQLite database driver QSQLITE is not available. "
+	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -1999,11 +2004,12 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
   reinstate();
   update();
 
-  if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
-    QMessageBox::critical
-      (this, tr("Dooble Web Browser: Error"),
-       tr("The SQLite database driver QSQLITE is not available. "
-	  "This is a fatal flaw."));
+  if(s_instances <= 1)
+    if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
+      QMessageBox::critical
+	(this, tr("Dooble Web Browser: Error"),
+	 tr("The SQLite database driver QSQLITE is not available. "
+	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
     remindUserToSetPassphrase();
@@ -5394,7 +5400,11 @@ void dooble::slotFullScreenMode(void)
   else
     {
       showNormal();
+#ifdef Q_OS_MAC
+#if QT_VERSION < 0x050300
       resize(m_sizeForFullScreen);
+#endif
+#endif
       ui.locationLineEdit->popdown();
     }
 
