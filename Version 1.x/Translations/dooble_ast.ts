@@ -1221,6 +1221,14 @@
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dooble Web Browser: Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>downloadPromptDialog</name>
@@ -2388,6 +2396,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Hide Menu Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Desktop Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Home Button</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
