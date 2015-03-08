@@ -247,6 +247,7 @@ class dooble: public QMainWindow
   void slotSavePage(void);
   void slotSetIcons(void);
   void slotShowFind(void);
+  void slotShowLocationBarButton(bool state);
   void slotShowLocationToolBar(bool state);
   void slotTabMoved(int from, int to);
   void slotNewWindow(void);

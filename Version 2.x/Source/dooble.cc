@@ -1209,6 +1209,14 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   statusBar()->setSizeGripEnabled(false);
 #endif
   initializeBookmarksMenu();
+  ui.action_Desktop_Button->setChecked
+    (s_settings.value("mainWindow/showDesktopButton", true).toBool());
+  ui.action_Home_Button->setChecked
+    (s_settings.value("mainWindow/showHomeButton", true).toBool());
+  ui.desktopToolButton->setVisible
+    (ui.action_Desktop_Button->isChecked());
+  ui.homeToolButton->setVisible
+    (ui.action_Home_Button->isChecked());
   ui.urlFrame->setParent(0);
   ui.locationToolBar->setVisible(false);
   ui.locationToolBar->addWidget(ui.urlFrame);
@@ -1489,6 +1497,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotStop(void)));
   connect(ui.homeToolButton, SIGNAL(clicked(void)), this,
 	  SLOT(slotGoHome(void)));
+  connect(ui.action_Desktop_Button, SIGNAL(toggled(bool)), this,
+	  SLOT(slotShowLocationBarButton(bool)));
+  connect(ui.action_Home_Button, SIGNAL(toggled(bool)), this,
+	  SLOT(slotShowLocationBarButton(bool)));
   connect(ui.searchLineEdit, SIGNAL(returnPressed(void)), this,
 	  SLOT(slotSearch(void)));
   connect(ui.searchLineEdit->findButton(), SIGNAL(clicked(void)), this,
@@ -8677,4 +8689,24 @@ void dooble::prepareMenuBar(const bool state)
     ui.action_Hide_Menubar->setText(tr("&Show Menu Bar"));
   else
     ui.action_Hide_Menubar->setText(tr("&Hide Menu Bar"));
+}
+
+void dooble::slotShowLocationBarButton(bool state)
+{
+  if(sender() == ui.action_Desktop_Button)
+    {
+      QSettings settings;
+
+      settings.setValue("mainWindow/showDesktopButton", state);
+      s_settings["mainWindow/showDesktopButton"] = state;
+      ui.desktopToolButton->setVisible(state);
+    }
+  else if(sender() == ui.action_Home_Button)
+    {
+      QSettings settings;
+
+      settings.setValue("mainWindow/showHomeButton", state);
+      s_settings["mainWindow/showHomeButton"] = state;
+      ui.homeToolButton->setVisible(state);
+    }
 }

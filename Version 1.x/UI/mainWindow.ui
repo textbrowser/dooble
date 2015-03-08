@@ -454,7 +454,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>27</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -579,6 +579,9 @@
     <addaction name="actionShow_Hidden_Files"/>
     <addaction name="separator"/>
     <addaction name="action_Hide_Menubar"/>
+    <addaction name="separator"/>
+    <addaction name="action_Desktop_Button"/>
+    <addaction name="action_Home_Button"/>
    </widget>
    <widget class="QMenu" name="menu_Tabs">
     <property name="title">
@@ -1039,6 +1042,28 @@
   <action name="action_Hide_Menubar">
    <property name="text">
     <string>&amp;Hide Menu Bar</string>
+   </property>
+  </action>
+  <action name="action_Desktop_Button">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Desktop Button</string>
+   </property>
+  </action>
+  <action name="action_Home_Button">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Home Button</string>
    </property>
   </action>
  </widget>
