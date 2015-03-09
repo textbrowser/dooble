@@ -2522,337 +2522,337 @@
         <translation>Barras &amp;laterais</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="588"/>
+        <location filename="../UI/mainWindow.ui" line="587"/>
         <source>&amp;Tabs</source>
         <translation>&amp;Lapelas</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="593"/>
+        <location filename="../UI/mainWindow.ui" line="592"/>
         <source>&amp;Locations</source>
         <translation>Lu&amp;gares</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="602"/>
+        <location filename="../UI/mainWindow.ui" line="601"/>
         <source>&amp;Addons</source>
         <translation>&amp;Complementos</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="609"/>
+        <location filename="../UI/mainWindow.ui" line="608"/>
         <source>&amp;Bookmarks</source>
         <translation>&amp;Marcadores</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="646"/>
+        <location filename="../UI/mainWindow.ui" line="645"/>
         <source>Location Toolbar</source>
         <translation>Barra de navegación</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="663"/>
+        <location filename="../UI/mainWindow.ui" line="662"/>
         <source>&amp;Quit</source>
         <translation>&amp;Saír</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="668"/>
+        <location filename="../UI/mainWindow.ui" line="667"/>
         <source>New &amp;Tab</source>
         <translation>Nova &amp;lapela</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="671"/>
+        <location filename="../UI/mainWindow.ui" line="670"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="676"/>
+        <location filename="../UI/mainWindow.ui" line="675"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nova xanela</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="679"/>
+        <location filename="../UI/mainWindow.ui" line="678"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="684"/>
+        <location filename="../UI/mainWindow.ui" line="683"/>
         <source>Close &amp;Window</source>
         <translation>Pe&amp;char a xanela</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="687"/>
+        <location filename="../UI/mainWindow.ui" line="686"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Maiús+W</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="692"/>
+        <location filename="../UI/mainWindow.ui" line="691"/>
         <source>Open UR&amp;L</source>
         <translation>Abrir un UR&amp;L</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="695"/>
+        <location filename="../UI/mainWindow.ui" line="694"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="700"/>
+        <location filename="../UI/mainWindow.ui" line="699"/>
         <source>&amp;About Dooble</source>
         <translation>&amp;Sobre Dooble</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="705"/>
+        <location filename="../UI/mainWindow.ui" line="704"/>
         <source>&amp;Save Page</source>
         <translation>&amp;Gardar a páxina</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="708"/>
+        <location filename="../UI/mainWindow.ui" line="707"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="713"/>
+        <location filename="../UI/mainWindow.ui" line="712"/>
         <source>&amp;Downloads</source>
         <translation>&amp;Descargas</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="716"/>
+        <location filename="../UI/mainWindow.ui" line="715"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="721"/>
+        <location filename="../UI/mainWindow.ui" line="720"/>
         <source>&amp;Find</source>
         <translation>&amp;Buscar</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="724"/>
+        <location filename="../UI/mainWindow.ui" line="723"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="729"/>
+        <location filename="../UI/mainWindow.ui" line="728"/>
         <source>&amp;Reload</source>
         <translation>&amp;Cargar de novo</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="732"/>
+        <location filename="../UI/mainWindow.ui" line="731"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="737"/>
+        <location filename="../UI/mainWindow.ui" line="736"/>
         <source>Sto&amp;p</source>
         <translation>&amp;Parar</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="740"/>
+        <location filename="../UI/mainWindow.ui" line="739"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="748"/>
+        <location filename="../UI/mainWindow.ui" line="747"/>
         <source>&amp;Print</source>
         <translation>I&amp;mprimir</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="751"/>
+        <location filename="../UI/mainWindow.ui" line="750"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="756"/>
+        <location filename="../UI/mainWindow.ui" line="755"/>
         <source>Print Pre&amp;view</source>
         <translation>&amp;Vista previa da impresión</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="761"/>
+        <location filename="../UI/mainWindow.ui" line="760"/>
         <source>Settin&amp;gs</source>
         <translation>Ax&amp;ustes</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="764"/>
+        <location filename="../UI/mainWindow.ui" line="763"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="769"/>
+        <location filename="../UI/mainWindow.ui" line="768"/>
         <source>Page So&amp;urce</source>
         <translation>Códi&amp;go da páxina</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="772"/>
+        <location filename="../UI/mainWindow.ui" line="771"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="777"/>
+        <location filename="../UI/mainWindow.ui" line="776"/>
         <source>&amp;My Retrieved Files</source>
         <translation>Os ficheiros obtidos por &amp;min</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="780"/>
+        <location filename="../UI/mainWindow.ui" line="779"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="785"/>
+        <location filename="../UI/mainWindow.ui" line="784"/>
         <source>Zoom &amp;In</source>
         <translation>&amp;Achegar</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="788"/>
+        <location filename="../UI/mainWindow.ui" line="787"/>
         <source>Ctrl+=</source>
         <translation>Ctrl+=</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="793"/>
+        <location filename="../UI/mainWindow.ui" line="792"/>
         <source>Zoom &amp;Out</source>
         <translation>A&amp;fastar</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="796"/>
+        <location filename="../UI/mainWindow.ui" line="795"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="804"/>
+        <location filename="../UI/mainWindow.ui" line="803"/>
         <source>Zoom &amp;Text Only</source>
         <translation>Achegar só o &amp;texto</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="809"/>
+        <location filename="../UI/mainWindow.ui" line="808"/>
         <source>Reset Zoo&amp;m</source>
         <translation>Restaurar o zoo&amp;m</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="812"/>
+        <location filename="../UI/mainWindow.ui" line="811"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="823"/>
+        <location filename="../UI/mainWindow.ui" line="822"/>
         <source>Status&amp;bar</source>
         <translation>Barra de &amp;estado</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="828"/>
+        <location filename="../UI/mainWindow.ui" line="827"/>
         <source>&amp;Open Directory</source>
         <translation>A&amp;brir un directorio</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="831"/>
+        <location filename="../UI/mainWindow.ui" line="830"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="836"/>
+        <location filename="../UI/mainWindow.ui" line="835"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="839"/>
+        <location filename="../UI/mainWindow.ui" line="838"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="844"/>
+        <location filename="../UI/mainWindow.ui" line="843"/>
         <source>&amp;Paste</source>
         <translation>&amp;Pegar</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="847"/>
+        <location filename="../UI/mainWindow.ui" line="846"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="852"/>
+        <location filename="../UI/mainWindow.ui" line="851"/>
         <source>Select &amp;All Content</source>
         <translation>Seleccionar &amp;todo o contido</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="855"/>
+        <location filename="../UI/mainWindow.ui" line="854"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="860"/>
+        <location filename="../UI/mainWindow.ui" line="859"/>
         <source>&amp;Full Screen Tablet Mode</source>
         <translation>Pantalla completa modo &amp;tableta</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="906"/>
+        <location filename="../UI/mainWindow.ui" line="905"/>
         <source>&amp;Favorites Toolbar</source>
         <translation>Barra de ferramentas de &amp;favoritos</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="914"/>
+        <location filename="../UI/mainWindow.ui" line="913"/>
         <source>&amp;History Sidebar</source>
         <translation>Barra lateral do &amp;historial</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="919"/>
+        <location filename="../UI/mainWindow.ui" line="918"/>
         <source>&amp;Authenticate Passphrase</source>
         <translation>Contrasinal de &amp;autenticación</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="939"/>
+        <location filename="../UI/mainWindow.ui" line="938"/>
         <source>JavaScript &amp;Pop-ups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="959"/>
+        <location filename="../UI/mainWindow.ui" line="958"/>
         <source>Error &amp;Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="962"/>
+        <location filename="../UI/mainWindow.ui" line="961"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1008"/>
+        <location filename="../UI/mainWindow.ui" line="1007"/>
         <source>SS&amp;L Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1013"/>
+        <location filename="../UI/mainWindow.ui" line="1012"/>
         <source>HTTP Re&amp;ferrer</source>
         <translation type="unfinished">Re&amp;ferencias HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1018"/>
+        <location filename="../UI/mainWindow.ui" line="1017"/>
         <source>&amp;Allowed SSL Ciphers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1029"/>
+        <location filename="../UI/mainWindow.ui" line="1028"/>
         <source>&amp;Location Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1034"/>
+        <location filename="../UI/mainWindow.ui" line="1033"/>
         <source>&amp;Web Inspector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1039"/>
+        <location filename="../UI/mainWindow.ui" line="1038"/>
         <source>HTTP-&amp;Only Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1044"/>
+        <location filename="../UI/mainWindow.ui" line="1043"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1055"/>
+        <location filename="../UI/mainWindow.ui" line="1054"/>
         <source>&amp;Desktop Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1066"/>
+        <location filename="../UI/mainWindow.ui" line="1065"/>
         <source>&amp;Home Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="934"/>
+        <location filename="../UI/mainWindow.ui" line="933"/>
         <source>Third-Party Frame &amp;Content</source>
         <translation>&amp;Contido dos marcos de terceiros</translation>
     </message>
@@ -2861,17 +2861,17 @@
         <translation type="obsolete">&amp;Xanelas emerxentes de JavaScript</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="944"/>
+        <location filename="../UI/mainWindow.ui" line="943"/>
         <source>&amp;Refresh List</source>
         <translation>Actualizar a &amp;lista</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="949"/>
+        <location filename="../UI/mainWindow.ui" line="948"/>
         <source>HTTP Re&amp;direct</source>
         <translation>Re&amp;dirección HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="954"/>
+        <location filename="../UI/mainWindow.ui" line="953"/>
         <source>DNT (Do Not &amp;Track)</source>
         <translation>DNT (Non facer &amp;seguemento)</translation>
     </message>
@@ -2884,52 +2884,52 @@
         <translation type="obsolete">Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="967"/>
+        <location filename="../UI/mainWindow.ui" line="966"/>
         <source>&amp;Automatically-Loaded Images</source>
         <translation>Cargar as imaxes &amp;automaticamente</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="972"/>
+        <location filename="../UI/mainWindow.ui" line="971"/>
         <source>&amp;IRC Channel</source>
         <translation>Canle &amp;IRC</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="980"/>
+        <location filename="../UI/mainWindow.ui" line="979"/>
         <source>Offlin&amp;e</source>
         <translation>&amp;Desconetado</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="985"/>
+        <location filename="../UI/mainWindow.ui" line="984"/>
         <source>Cac&amp;he</source>
         <translation>Cac&amp;hé</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="990"/>
+        <location filename="../UI/mainWindow.ui" line="989"/>
         <source>&amp;Clear Containers</source>
         <translation>&amp;Limpar contenedores</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="993"/>
+        <location filename="../UI/mainWindow.ui" line="992"/>
         <source>Ctrl+Shift+Del</source>
         <translation>Ctrl+Miús+Supr</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="998"/>
+        <location filename="../UI/mainWindow.ui" line="997"/>
         <source>Always HTTP&amp;S</source>
         <translation>Sempre HTTP&amp;S</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1003"/>
+        <location filename="../UI/mainWindow.ui" line="1002"/>
         <source>Save Page as &amp;Data URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="924"/>
+        <location filename="../UI/mainWindow.ui" line="923"/>
         <source>&amp;JavaScript</source>
         <translation>&amp;JavaScript</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="863"/>
+        <location filename="../UI/mainWindow.ui" line="862"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
@@ -2954,38 +2954,38 @@
         <translation>E&amp;xcepcións</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="626"/>
+        <location filename="../UI/mainWindow.ui" line="625"/>
         <source>Favorites Toolbar</source>
         <translation>Barra de ferramentas de favoritos</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="868"/>
+        <location filename="../UI/mainWindow.ui" line="867"/>
         <source>Close Ta&amp;b</source>
         <translation>Pec&amp;har a lapela</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="871"/>
+        <location filename="../UI/mainWindow.ui" line="870"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="876"/>
-        <location filename="../UI/mainWindow.ui" line="929"/>
+        <location filename="../UI/mainWindow.ui" line="875"/>
+        <location filename="../UI/mainWindow.ui" line="928"/>
         <source>Coo&amp;kies</source>
         <translation>Coo&amp;kies</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="879"/>
+        <location filename="../UI/mainWindow.ui" line="878"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="890"/>
+        <location filename="../UI/mainWindow.ui" line="889"/>
         <source>&amp;Show Hidden Files</source>
         <translation>Amo&amp;sar ficheiros agochados</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="895"/>
+        <location filename="../UI/mainWindow.ui" line="894"/>
         <source>&amp;P2P E-Mail</source>
         <translation>Correo &amp;P2P</translation>
     </message>

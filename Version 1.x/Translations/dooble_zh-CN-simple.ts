@@ -2499,158 +2499,158 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="602"/>
+        <location filename="../UI/mainWindow.ui" line="601"/>
         <source>&amp;Addons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="609"/>
+        <location filename="../UI/mainWindow.ui" line="608"/>
         <source>&amp;Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="646"/>
+        <location filename="../UI/mainWindow.ui" line="645"/>
         <source>Location Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="860"/>
+        <location filename="../UI/mainWindow.ui" line="859"/>
         <source>&amp;Full Screen Tablet Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="876"/>
-        <location filename="../UI/mainWindow.ui" line="929"/>
+        <location filename="../UI/mainWindow.ui" line="875"/>
+        <location filename="../UI/mainWindow.ui" line="928"/>
         <source>Coo&amp;kies</source>
         <translation type="unfinished">饼干 (Cookies)</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="879"/>
+        <location filename="../UI/mainWindow.ui" line="878"/>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="890"/>
+        <location filename="../UI/mainWindow.ui" line="889"/>
         <source>&amp;Show Hidden Files</source>
         <translation type="unfinished">显示隐藏文件</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="895"/>
+        <location filename="../UI/mainWindow.ui" line="894"/>
         <source>&amp;P2P E-Mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="906"/>
+        <location filename="../UI/mainWindow.ui" line="905"/>
         <source>&amp;Favorites Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="914"/>
+        <location filename="../UI/mainWindow.ui" line="913"/>
         <source>&amp;History Sidebar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="919"/>
+        <location filename="../UI/mainWindow.ui" line="918"/>
         <source>&amp;Authenticate Passphrase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="934"/>
+        <location filename="../UI/mainWindow.ui" line="933"/>
         <source>Third-Party Frame &amp;Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="944"/>
+        <location filename="../UI/mainWindow.ui" line="943"/>
         <source>&amp;Refresh List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="949"/>
+        <location filename="../UI/mainWindow.ui" line="948"/>
         <source>HTTP Re&amp;direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="959"/>
+        <location filename="../UI/mainWindow.ui" line="958"/>
         <source>Error &amp;Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="962"/>
+        <location filename="../UI/mainWindow.ui" line="961"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="985"/>
+        <location filename="../UI/mainWindow.ui" line="984"/>
         <source>Cac&amp;he</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="990"/>
+        <location filename="../UI/mainWindow.ui" line="989"/>
         <source>&amp;Clear Containers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="993"/>
+        <location filename="../UI/mainWindow.ui" line="992"/>
         <source>Ctrl+Shift+Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="998"/>
+        <location filename="../UI/mainWindow.ui" line="997"/>
         <source>Always HTTP&amp;S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1003"/>
+        <location filename="../UI/mainWindow.ui" line="1002"/>
         <source>Save Page as &amp;Data URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1008"/>
+        <location filename="../UI/mainWindow.ui" line="1007"/>
         <source>SS&amp;L Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1013"/>
+        <location filename="../UI/mainWindow.ui" line="1012"/>
         <source>HTTP Re&amp;ferrer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1018"/>
+        <location filename="../UI/mainWindow.ui" line="1017"/>
         <source>&amp;Allowed SSL Ciphers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1029"/>
+        <location filename="../UI/mainWindow.ui" line="1028"/>
         <source>&amp;Location Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1034"/>
+        <location filename="../UI/mainWindow.ui" line="1033"/>
         <source>&amp;Web Inspector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1039"/>
+        <location filename="../UI/mainWindow.ui" line="1038"/>
         <source>HTTP-&amp;Only Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1044"/>
+        <location filename="../UI/mainWindow.ui" line="1043"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1055"/>
+        <location filename="../UI/mainWindow.ui" line="1054"/>
         <source>&amp;Desktop Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1066"/>
+        <location filename="../UI/mainWindow.ui" line="1065"/>
         <source>&amp;Home Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="924"/>
+        <location filename="../UI/mainWindow.ui" line="923"/>
         <source>&amp;JavaScript</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2670,12 +2670,12 @@
         <translation>缩放&amp;Z</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="588"/>
+        <location filename="../UI/mainWindow.ui" line="587"/>
         <source>&amp;Tabs</source>
         <translation>标签页&amp;T</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="593"/>
+        <location filename="../UI/mainWindow.ui" line="592"/>
         <source>&amp;Locations</source>
         <translation type="unfinished">地点</translation>
     </message>
@@ -2684,7 +2684,7 @@
         <translation type="obsolete">工具栏</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="663"/>
+        <location filename="../UI/mainWindow.ui" line="662"/>
         <source>&amp;Quit</source>
         <translation>退出&amp;Q</translation>
     </message>
@@ -2693,62 +2693,62 @@
         <translation type="obsolete">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="668"/>
+        <location filename="../UI/mainWindow.ui" line="667"/>
         <source>New &amp;Tab</source>
         <translation>新建标签&amp;T</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="671"/>
+        <location filename="../UI/mainWindow.ui" line="670"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="676"/>
+        <location filename="../UI/mainWindow.ui" line="675"/>
         <source>&amp;New Window</source>
         <translation>新建窗口&amp;N</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="679"/>
+        <location filename="../UI/mainWindow.ui" line="678"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="684"/>
+        <location filename="../UI/mainWindow.ui" line="683"/>
         <source>Close &amp;Window</source>
         <translation>关闭窗口&amp;W</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="828"/>
+        <location filename="../UI/mainWindow.ui" line="827"/>
         <source>&amp;Open Directory</source>
         <translation type="unfinished">打开目录</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="836"/>
+        <location filename="../UI/mainWindow.ui" line="835"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="839"/>
+        <location filename="../UI/mainWindow.ui" line="838"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="844"/>
+        <location filename="../UI/mainWindow.ui" line="843"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="847"/>
+        <location filename="../UI/mainWindow.ui" line="846"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="852"/>
+        <location filename="../UI/mainWindow.ui" line="851"/>
         <source>Select &amp;All Content</source>
         <translation type="unfinished">选择全部内容</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="855"/>
+        <location filename="../UI/mainWindow.ui" line="854"/>
         <source>Ctrl+A</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2757,22 +2757,22 @@
         <translation type="obsolete">全屏幕平板模式</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="863"/>
+        <location filename="../UI/mainWindow.ui" line="862"/>
         <source>F11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="871"/>
+        <location filename="../UI/mainWindow.ui" line="870"/>
         <source>Ctrl+W</source>
         <translation type="unfinished">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="868"/>
+        <location filename="../UI/mainWindow.ui" line="867"/>
         <source>Close Ta&amp;b</source>
         <translation type="unfinished">关闭标签</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="687"/>
+        <location filename="../UI/mainWindow.ui" line="686"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Shift+W</translation>
     </message>
@@ -2781,12 +2781,12 @@
         <translation type="obsolete">打开网址&amp;O</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="831"/>
+        <location filename="../UI/mainWindow.ui" line="830"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="700"/>
+        <location filename="../UI/mainWindow.ui" line="699"/>
         <source>&amp;About Dooble</source>
         <translation>关于Dooble&amp;A</translation>
     </message>
@@ -2816,102 +2816,102 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="626"/>
+        <location filename="../UI/mainWindow.ui" line="625"/>
         <source>Favorites Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="692"/>
+        <location filename="../UI/mainWindow.ui" line="691"/>
         <source>Open UR&amp;L</source>
         <translation type="unfinished">打开网址</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="695"/>
+        <location filename="../UI/mainWindow.ui" line="694"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="705"/>
+        <location filename="../UI/mainWindow.ui" line="704"/>
         <source>&amp;Save Page</source>
         <translation>保存&amp;S</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="708"/>
+        <location filename="../UI/mainWindow.ui" line="707"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="713"/>
+        <location filename="../UI/mainWindow.ui" line="712"/>
         <source>&amp;Downloads</source>
         <translation>下载&amp;D</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="716"/>
+        <location filename="../UI/mainWindow.ui" line="715"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="721"/>
+        <location filename="../UI/mainWindow.ui" line="720"/>
         <source>&amp;Find</source>
         <translation>查找&amp;F</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="724"/>
+        <location filename="../UI/mainWindow.ui" line="723"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="729"/>
+        <location filename="../UI/mainWindow.ui" line="728"/>
         <source>&amp;Reload</source>
         <translation>刷新&amp;R</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="732"/>
+        <location filename="../UI/mainWindow.ui" line="731"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="737"/>
+        <location filename="../UI/mainWindow.ui" line="736"/>
         <source>Sto&amp;p</source>
         <translation>停止&amp;p</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="740"/>
+        <location filename="../UI/mainWindow.ui" line="739"/>
         <source>Esc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="748"/>
+        <location filename="../UI/mainWindow.ui" line="747"/>
         <source>&amp;Print</source>
         <translation>打印&amp;P</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="751"/>
+        <location filename="../UI/mainWindow.ui" line="750"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="939"/>
+        <location filename="../UI/mainWindow.ui" line="938"/>
         <source>JavaScript &amp;Pop-ups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="954"/>
+        <location filename="../UI/mainWindow.ui" line="953"/>
         <source>DNT (Do Not &amp;Track)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="967"/>
+        <location filename="../UI/mainWindow.ui" line="966"/>
         <source>&amp;Automatically-Loaded Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="972"/>
+        <location filename="../UI/mainWindow.ui" line="971"/>
         <source>&amp;IRC Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="980"/>
+        <location filename="../UI/mainWindow.ui" line="979"/>
         <source>Offlin&amp;e</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2924,17 +2924,17 @@
         <translation type="obsolete">RetroMessenger</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="756"/>
+        <location filename="../UI/mainWindow.ui" line="755"/>
         <source>Print Pre&amp;view</source>
         <translation>打印预览&amp;v</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="761"/>
+        <location filename="../UI/mainWindow.ui" line="760"/>
         <source>Settin&amp;gs</source>
         <translation>设置&amp;g</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="764"/>
+        <location filename="../UI/mainWindow.ui" line="763"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
@@ -2947,22 +2947,22 @@
         <translation type="obsolete">Dooble桌面&amp;D</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="769"/>
+        <location filename="../UI/mainWindow.ui" line="768"/>
         <source>Page So&amp;urce</source>
         <translation type="unfinished">页面源代码</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="788"/>
+        <location filename="../UI/mainWindow.ui" line="787"/>
         <source>Ctrl+=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="809"/>
+        <location filename="../UI/mainWindow.ui" line="808"/>
         <source>Reset Zoo&amp;m</source>
         <translation type="unfinished">复位变焦</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="823"/>
+        <location filename="../UI/mainWindow.ui" line="822"/>
         <source>Status&amp;bar</source>
         <translation type="unfinished">状态栏</translation>
     </message>
@@ -2971,17 +2971,17 @@
         <translation type="obsolete">源文件&amp;S</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="772"/>
+        <location filename="../UI/mainWindow.ui" line="771"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="777"/>
+        <location filename="../UI/mainWindow.ui" line="776"/>
         <source>&amp;My Retrieved Files</source>
         <translation type="unfinished">我检索到的文件</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="780"/>
+        <location filename="../UI/mainWindow.ui" line="779"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
@@ -2994,17 +2994,17 @@
         <translation type="obsolete">Ctrl++</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="793"/>
+        <location filename="../UI/mainWindow.ui" line="792"/>
         <source>Zoom &amp;Out</source>
         <translation>缩小&amp;O</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="796"/>
+        <location filename="../UI/mainWindow.ui" line="795"/>
         <source>Ctrl+-</source>
         <translation>Ctrl--</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="804"/>
+        <location filename="../UI/mainWindow.ui" line="803"/>
         <source>Zoom &amp;Text Only</source>
         <translation>只缩放文字&amp;T</translation>
     </message>
@@ -3013,12 +3013,12 @@
         <translation type="obsolete">恢复大小</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="812"/>
+        <location filename="../UI/mainWindow.ui" line="811"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="785"/>
+        <location filename="../UI/mainWindow.ui" line="784"/>
         <source>Zoom &amp;In</source>
         <translation>放大&amp;I</translation>
     </message>
