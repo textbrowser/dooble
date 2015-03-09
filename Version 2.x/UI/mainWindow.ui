@@ -454,7 +454,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -564,6 +564,7 @@
     </widget>
     <addaction name="action_Desktop_Button"/>
     <addaction name="action_Home_Button"/>
+    <addaction name="separator"/>
     <addaction name="menu_Sidebars"/>
     <addaction name="actionStatusbar"/>
     <addaction name="menu_Toolbars"/>
