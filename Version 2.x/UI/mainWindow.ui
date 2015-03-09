@@ -454,7 +454,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -562,10 +562,11 @@
      </property>
      <addaction name="actionShow_HistorySideBar"/>
     </widget>
+    <addaction name="action_Desktop_Button"/>
+    <addaction name="action_Home_Button"/>
     <addaction name="menu_Sidebars"/>
-    <addaction name="menu_Toolbars"/>
-    <addaction name="separator"/>
     <addaction name="actionStatusbar"/>
+    <addaction name="menu_Toolbars"/>
     <addaction name="separator"/>
     <addaction name="actionReload"/>
     <addaction name="actionStop"/>
@@ -576,12 +577,9 @@
     <addaction name="separator"/>
     <addaction name="actionFull_Screen_Mode"/>
     <addaction name="separator"/>
-    <addaction name="actionShow_Hidden_Files"/>
-    <addaction name="separator"/>
     <addaction name="action_Hide_Menubar"/>
     <addaction name="separator"/>
-    <addaction name="action_Desktop_Button"/>
-    <addaction name="action_Home_Button"/>
+    <addaction name="actionShow_Hidden_Files"/>
    </widget>
    <widget class="QMenu" name="menu_Tabs">
     <property name="title">
