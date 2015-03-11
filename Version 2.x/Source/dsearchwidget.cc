@@ -81,6 +81,7 @@ dsearchwidget::dsearchwidget(QWidget *parent):QLineEdit(parent)
   menu->addAction(QIcon("Icons/16x16/ixquick.png"), "Ixquick");
   menu->addAction(QIcon("Icons/16x16/metager.png"), "MetaGer");
   menu->addAction(QIcon("Icons/16x16/startpage.png"), "Startpage");
+  menu->addAction(QIcon("Icons/16x16/wikibooks.png"), "Wikibooks");
   menu->addAction(QIcon("Icons/16x16/wikinews.png"), "Wikinews");
   menu->addAction(QIcon("Icons/16x16/wikipedia.png"), "Wikipedia");
   menu->addAction(QIcon("Icons/16x16/wolframalpha.png"), "WolframAlpha");

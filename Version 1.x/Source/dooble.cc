@@ -4198,10 +4198,10 @@ void dooble::slotSearch(void)
 	urlText = QString("https://www.blekko.com/ws/%1").arg
 	  (ui.searchLineEdit->text().trimmed().replace(" ", "+"));
       else if(searchName == "dogpile")
-	urlText = QString("http://www.dogpile.com/dogpile_other/ws/results/"
+	urlText = QString("https://www.dogpile.com/dogpile_other/ws/results/"
 			  "Web/%1/1/417/TopNavigation/Relevance/iq=true/"
 			  "zoom=off/_iceUrlFlag=7?_IceUrl=true").arg
-	  (ui.searchLineEdit->text().trimmed());
+	  (ui.searchLineEdit->text().trimmed().replace(" ", "+"));
       else if(searchName == "duckduckgo")
 	/*
 	** kd=1: Redirect (Prevent Information Sharing)
@@ -4242,13 +4242,13 @@ void dooble::slotSearch(void)
 	  postText = QString("query=%1").
 	    arg(ui.searchLineEdit->text().trimmed());
 	}
-      else if(searchName == "wikipedia")
+      else if(searchName == "wikibooks")
 	{
 	  QLocale locale;
 
 	  urlText = QString
-            ("https://%1.wikipedia.org/wiki/Special:"
-	     "Search?search=%2").
+	    ("https://%1.wikibooks.org/w/index.php?"
+	     "search=%2&title=Special%3ASearch&go=Go").
 	    arg(locale.name().left(2)).
 	    arg(ui.searchLineEdit->text().trimmed().replace(" ", "+"));
 	}
@@ -4259,6 +4259,16 @@ void dooble::slotSearch(void)
 	  urlText = QString
 	    ("https://secure.wikimedia.org/wikinews/%1/w/index.php?"
 	     "search=%2").
+	    arg(locale.name().left(2)).
+	    arg(ui.searchLineEdit->text().trimmed().replace(" ", "+"));
+	}
+      else if(searchName == "wikipedia")
+	{
+	  QLocale locale;
+
+	  urlText = QString
+            ("https://%1.wikipedia.org/wiki/Special:"
+	     "Search?search=%2").
 	    arg(locale.name().left(2)).
 	    arg(ui.searchLineEdit->text().trimmed().replace(" ", "+"));
 	}
