@@ -209,6 +209,10 @@ class dooble: public QMainWindow
   void addPluginAction(const QString &pluginFileName);
   QString pluginFileName(const QString &plugName);
   QString pluginPath(void);
+  QMenu *createPopupMenu(void)
+  {
+    return 0;
+  }
 
  protected:
   void showEvent(QShowEvent *event);
@@ -248,7 +252,6 @@ class dooble: public QMainWindow
   void slotSetIcons(void);
   void slotShowFind(void);
   void slotShowLocationBarButton(bool state);
-  void slotShowLocationToolBar(bool state);
   void slotTabMoved(int from, int to);
   void slotNewWindow(void);
   void slotReloadTab(const int index);

@@ -554,7 +554,6 @@
       <string>&amp;Toolbars</string>
      </property>
      <addaction name="actionShow_FavoritesToolBar"/>
-     <addaction name="action_Location_Toolbar"/>
     </widget>
     <widget class="QMenu" name="menu_Sidebars">
      <property name="title">
@@ -1015,17 +1014,6 @@
   <action name="action_SSL_Ciphers">
    <property name="text">
     <string>&amp;Allowed SSL Ciphers</string>
-   </property>
-  </action>
-  <action name="action_Location_Toolbar">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>&amp;Location Toolbar</string>
    </property>
   </action>
   <action name="action_Web_Inspector">

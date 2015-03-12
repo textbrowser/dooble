@@ -542,9 +542,7 @@ int main(int argc, char *argv[])
   if(thread)
     thread->setPriority(QThread::Priority(priority));
 
-  settings.remove("containers_cleared_v145");
-  settings.remove("containers_cleared_v147");
-  settings.remove("containers_cleared_v148");
+  settings.remove("mainWindow/showLocationToolBar");
   settings.remove("vidalia/hostName");
   settings.remove("vidalia/isConnected");
   settings.remove("vidalia/port");
@@ -1105,6 +1103,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.locationToolBar->setVisible(false);
   ui.locationToolBar->addWidget(ui.urlFrame);
   ui.locationToolBar->setVisible(true);
+  ui.locationToolBar->setContextMenuPolicy(Qt::NoContextMenu);
   ui.favoritesFrame->setParent(0);
   ui.favoritesToolBar->setVisible(false);
   ui.favoritesToolBar->addWidget(ui.favoritesFrame);
@@ -1455,8 +1454,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  this, SLOT(slotFullScreenMode(void)));
   connect(ui.actionShow_FavoritesToolBar, SIGNAL(toggled(bool)),
 	  this, SLOT(slotShowFavoritesToolBar(bool)));
-  connect(ui.action_Location_Toolbar, SIGNAL(toggled(bool)),
-	  this, SLOT(slotShowLocationToolBar(bool)));
   connect(ui.actionShow_HistorySideBar, SIGNAL(toggled(bool)),
 	  this, SLOT(slotShowHistorySideBar(bool)));
   connect(ui.action_Authenticate, SIGNAL(triggered(void)),
@@ -1506,10 +1503,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   connect(ui.favoritesToolBar,
 	  SIGNAL(visibilityChanged(bool)),
 	  ui.actionShow_FavoritesToolBar,
-	  SLOT(setChecked(bool)));
-  connect(ui.locationToolBar,
-	  SIGNAL(visibilityChanged(bool)),
-	  ui.action_Location_Toolbar,
 	  SLOT(setChecked(bool)));
   connect(s_cookies,
 	  SIGNAL(exceptionRaised(dexceptionswindow *,
@@ -1714,21 +1707,16 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.favoritesToolBar->setVisible
     (s_settings.value("mainWindow/showFavoritesToolBar", false).
      toBool());
-  ui.locationToolBar->setVisible
-    (s_settings.value("mainWindow/showLocationToolBar", true).toBool());
   ui.actionShow_FavoritesToolBar->setChecked
     (s_settings.value("mainWindow/showFavoritesToolBar", false).
      toBool());
-  ui.action_Location_Toolbar->setChecked
-    (s_settings.value("mainWindow/showLocationToolBar", true).toBool());
   ui.action_Authenticate->setEnabled
     (!dmisc::passphraseWasAuthenticated() && dmisc::passphraseWasPrepared());
   slotSetIcons();
 #ifdef Q_OS_MAC
   foreach(QToolButton *toolButton, findChildren<QToolButton *> ())
     if(toolButton == ui.backToolButton ||
-       toolButton == ui.forwardToolButton ||
-       toolButton == ui.menuToolButton)
+       toolButton == ui.forwardToolButton)
       toolButton->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
@@ -2586,7 +2574,7 @@ void dooble::slotQuitAndRestart(void)
 
 void dooble::saveSettings(void)
 {
-  if(!m_isJavaScriptWindow && !isFullScreen())
+  if(!m_isJavaScriptWindow)
     {
       QSettings settings;
 
@@ -2596,10 +2584,13 @@ void dooble::saveSettings(void)
 			ui.splitter->saveState());
       settings.setValue("mainWindow/state2", saveState());
 
-      if(dmisc::isGnome())
-	settings.setValue("mainWindow/geometry", geometry());
-      else
-	settings.setValue("mainWindow/geometry", saveGeometry());
+      if(!isFullScreen())
+	{
+	  if(dmisc::isGnome())
+	    settings.setValue("mainWindow/geometry", geometry());
+	  else
+	    settings.setValue("mainWindow/geometry", saveGeometry());
+	}
 
       settings.setValue
 	("mainWindow/ftpManagerColumnsState1",
@@ -2609,12 +2600,6 @@ void dooble::saveSettings(void)
 	("mainWindow/fileManagerColumnsState1",
 	 s_settings.value
 	 ("mainWindow/fileManagerColumnsState1").toByteArray());
-      s_settings["mainWindow/state2"] = saveState();
-
-      if(dmisc::isGnome())
-	s_settings["mainWindow/geometry"] = geometry();
-      else
-	s_settings["mainWindow/geometry"] = saveGeometry();
     }
 }
 
@@ -6306,27 +6291,6 @@ void dooble::slotShowFavoritesToolBar(bool checked)
 
   if(checked)
     prepareMostVisited();
-}
-
-void dooble::slotShowLocationToolBar(bool checked)
-{
-  if(!isVisible())
-    return;
-
-  disconnect(ui.locationToolBar,
-	     SIGNAL(visibilityChanged(bool)),
-	     ui.action_Location_Toolbar,
-	     SLOT(setChecked(bool)));
-  ui.locationToolBar->setVisible(checked);
-  connect(ui.locationToolBar,
-	  SIGNAL(visibilityChanged(bool)),
-	  ui.action_Location_Toolbar,
-	  SLOT(setChecked(bool)));
-
-  QSettings settings;
-
-  settings.setValue("mainWindow/showLocationToolBar", checked);
-  s_settings["mainWindow/showLocationToolBar"] = checked;
 }
 
 void dooble::prepareMostVisited(void)
