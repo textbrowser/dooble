@@ -1219,7 +1219,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.locationToolBar->setVisible(false);
   ui.locationToolBar->addWidget(ui.urlFrame);
   ui.locationToolBar->setVisible(true);
-  ui.locationToolBar->setContextMenuPolicy(Qt::NoContextMenu);
   ui.favoritesFrame->setParent(0);
   ui.favoritesToolBar->setVisible(false);
   ui.favoritesToolBar->addWidget(ui.favoritesFrame);
@@ -5842,7 +5841,9 @@ void dooble::slotFullScreenMode(void)
     }
 
   if(m_isJavaScriptWindow)
-    ui.locationToolBar->setVisible(setVisible);
+    {
+      ui.locationToolBar->setVisible(setVisible);
+    }
   else
     {
       if(!s_settings.value("mainWindow/hideMenuBar", false).toBool())
@@ -6137,6 +6138,10 @@ void dooble::slotHideMenuBar(void)
 	{
 	  menuBar()->setVisible(false);
 	  ui.historyFrame->setVisible(false);
+#ifndef Q_OS_MAC
+	  ui.locationToolBar->setVisible(true);
+	  ui.menuToolButton->setVisible(true);
+#endif
 	}
     }
 }
@@ -8073,7 +8078,9 @@ bool dooble::event(QEvent *event)
 	ui.locationLineEdit->popdown();
 
       if(m_isJavaScriptWindow)
-	ui.locationToolBar->setVisible(setVisible);
+	{
+	  ui.locationToolBar->setVisible(setVisible);
+	}
       else
 	{
 	  if(!s_settings.value("mainWindow/hideMenuBar", false).toBool())
@@ -8637,6 +8644,7 @@ void dooble::slotHideMainMenus(void)
 void dooble::prepareMenuBar(const bool state)
 {
   menuBar()->setVisible(!state);
+  ui.locationToolBar->setVisible(true);
   ui.menuToolButton->setVisible(state);
 
   if(state)
