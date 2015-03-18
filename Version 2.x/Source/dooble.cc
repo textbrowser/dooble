@@ -2800,7 +2800,7 @@ void dooble::saveSettings(void)
 			ui.splitter->saveState());
       settings.setValue("mainWindow/state2", saveState());
 
-      if(!isFullScreen)
+      if(!isFullScreen())
 	{
 	  if(dmisc::isGnome())
 	    settings.setValue("mainWindow/geometry", geometry());
