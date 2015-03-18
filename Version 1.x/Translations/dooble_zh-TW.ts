@@ -2371,10 +2371,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Location Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
