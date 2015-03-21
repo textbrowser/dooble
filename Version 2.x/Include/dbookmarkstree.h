@@ -38,15 +38,15 @@ class dbookmarkstree: public QTreeView
   dbookmarkstree(QWidget *parent);
 
  private:
-  void dropEvent(QDropEvent *event);
-  void dragMoveEvent(QDragMoveEvent *event);
-  void keyPressEvent(QKeyEvent *event);
   void dragEnterEvent(QDragEnterEvent *event);
+  void dragMoveEvent(QDragMoveEvent *event);
+  void dropEvent(QDropEvent *event);
+  void keyPressEvent(QKeyEvent *event);
   void mouseReleaseEvent(QMouseEvent *event);
 
  signals:
-  void itemSelected(const QModelIndex &index);
   void bookmarkReceived(const QModelIndex &index);
+  void itemSelected(const QModelIndex &index);
 };
 
 #endif

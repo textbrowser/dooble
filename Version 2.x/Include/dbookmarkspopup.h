@@ -42,8 +42,8 @@ class dbookmarkspopup: public QWidget
   void populate(const QUrl &url);
 
  private:
-  QUrl m_url;
   QString m_title;
+  QUrl m_url;
   Ui_bookmarksPopup ui;
   qint64 m_folderOid;
   void updateBookmark(void);
@@ -53,16 +53,16 @@ class dbookmarkspopup: public QWidget
 
  private slots:
   void slotAddFolder(void);
-  void slotTitleChanged(void);
   void slotDeleteBookmark(void);
-  void slotFolderSelected(const QModelIndex &index);
-  void slotFolderDataChanged
-    (const QModelIndex &topLeft, const QModelIndex &bottomRight);
   void slotDescriptionChanged(void);
+  void slotFolderDataChanged(const QModelIndex &topLeft,
+			     const QModelIndex &bottomRight);
+  void slotFolderSelected(const QModelIndex &index);
+  void slotTitleChanged(void);
 
  signals:
-  void closed(void);
   void changed(void);
+  void closed(void);
   void iconsChanged(void);
 };
 

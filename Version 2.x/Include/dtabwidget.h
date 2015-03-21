@@ -43,9 +43,9 @@ class dtabbar: public QTabBar
   QSize tabSizeHint(int index) const;
 
  private:
-  void dropEvent(QDropEvent *event);
-  void dragMoveEvent(QDragMoveEvent *event);
   void dragEnterEvent(QDragEnterEvent *event);
+  void dragMoveEvent(QDragMoveEvent *event);
+  void dropEvent(QDropEvent *event);
   void mouseDoubleClickEvent(QMouseEvent *event);
 
  signals:
@@ -61,38 +61,38 @@ class dtabwidget: public QTabWidget
   dtabwidget(QWidget *parent);
   ~dtabwidget();
   void animateIndex(const int index, const bool state, const QIcon &icon);
-  void setTabButton(int index);
   void setBarVisible(const bool state);
+  void setTabButton(int index);
 
  private:
-  int m_selectedTabIndex;
   QString m_spinningIconPath;
   dtabbar *m_tabBar;
+  int m_selectedTabIndex;
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dragMoveEvent(QDragMoveEvent *event);
   void dropEvent(QDropEvent *event);
-  void tabRemoved(int index);
+  void mouseDoubleClickEvent(QMouseEvent *event);
+  void mousePressEvent(QMouseEvent *event);
   void resizeEvent(QResizeEvent *event);
   void tabInserted(int index);
-  void dragMoveEvent(QDragMoveEvent *event);
-  void dragEnterEvent(QDragEnterEvent *event);
-  void mousePressEvent(QMouseEvent *event);
-  void mouseDoubleClickEvent(QMouseEvent *event);
+  void tabRemoved(int index);
 
  public slots:
-  void slotSetIcons(void);
   void slotIconChange(QWidget *tab, const QIcon &icon);
+  void slotSetIcons(void);
   void slotTitleChange(QWidget *tab, const QString &title);
 
  private slots:
   void slotBookmark(void);
-  void slotCloseTab(void);
+  void slotCloseOtherTabs(void);
   void slotCloseTab(int index);
+  void slotCloseTab(void);
   void slotCreateTab(void);
   void slotJavaScript(void);
-  void slotReloadTab(void);
-  void slotCloseOtherTabs(void);
+  void slotOpenInNewWindow(void);
   void slotPrivateBrowsing(void);
   void slotPrivateCookies(void);
-  void slotOpenInNewWindow(void);
+  void slotReloadTab(void);
   void slotShowContextMenu(const QPoint &point);
   void slotViewPrivateCookies(void);
   void slotWebPlugins(void);
@@ -100,11 +100,11 @@ class dtabwidget: public QTabWidget
  signals:
   void bookmark(const int index);
   void closeTab(const int index);
-  void tabMoved(int from, int to);
   void createTab(void);
-  void reloadTab(const int index);
   void openInNewWindow(const int index);
   void openLinkInNewTab(const QUrl &url);
+  void reloadTab(const int index);
+  void tabMoved(int from, int to);
   void urlsReceivedViaDrop(const QList<QUrl> &list);
 };
 

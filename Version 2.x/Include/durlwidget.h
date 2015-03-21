@@ -28,8 +28,8 @@
 #ifndef _durlwidget_h_
 #define _durlwidget_h_
 
-#include <QLineEdit>
 #include <QCompleter>
+#include <QLineEdit>
 #include <QTableView>
 #include <QToolButton>
 
@@ -46,8 +46,8 @@ class durlcompleterview: public QTableView
 
  private:
   QLineEdit *m_lineEdit;
-  void wheelEvent(QWheelEvent *event);
   void mouseMoveEvent(QMouseEvent *event);
+  void wheelEvent(QWheelEvent *event);
 };
 
 class durlcompleter: public QCompleter
@@ -59,16 +59,16 @@ class durlcompleter: public QCompleter
   ~durlcompleter();
   bool exists(const QString &text) const;
   void clear(void);
-  void setModel(QStandardItemModel *model);
+  void copyContentsOf(durlcompleter *c);
   void saveItemUrl(const QString &url);
   void setCompletion(const QString &completion);
-  void copyContentsOf(durlcompleter *c);
+  void setModel(QStandardItemModel *model);
 
  private:
+  QList<QStandardItem *> m_purgedItems;
+  QStandardItemModel *m_model;
   QStringList m_allUrls;
   durlcompleterview *m_tableView;
-  QStandardItemModel *m_model;
-  QList<QStandardItem *> m_purgedItems;
 };
 
 class durlwidgettoolbutton: public QToolButton
@@ -88,41 +88,41 @@ class durlwidget: public QLineEdit
 
  public:
   durlwidget(QWidget *parent);
-  int findText(const QString &text) const;
-  bool isBookmarkButtonEnabled(void) const;
-  bool isIconButtonEnabled(void) const;
-  void addItem(const QString &text);
-  void addItem(const QString &text, const QIcon &icon);
-  void popdown(void) const;
-  void setIcon(const QIcon &icon);
-  void setText(const QString &text);
-  void selectAll(void);
-  void appendItem(const QString &text, const QIcon &icon);
-  void appendItems(const QMultiMap<QDateTime, QVariantList> &items);
-  void resizeEvent(QResizeEvent *);
-  void setItemIcon(const int index, const QIcon &icon);
-  void clearHistory(void);
-  void copyContentsOf(durlwidget *c);
-  void setSecureColor(const bool isHttps);
-  void setBookmarkColor(const bool isBookmarked);
-  void setBookmarkButtonEnabled(const bool state);
-  void setIconButtonEnabled(const bool state);
-  void setSpotOnButtonEnabled(const bool state);
-  void setSpotOnColor(const bool isLoaded);
   QPoint bookmarkButtonPopupPosition(void) const;
   QPoint iconButtonPopupPosition(void) const;
+  bool isBookmarkButtonEnabled(void) const;
+  bool isIconButtonEnabled(void) const;
+  int findText(const QString &text) const;
+  void addItem(const QString &text);
+  void addItem(const QString &text, const QIcon &icon);
+  void appendItem(const QString &text, const QIcon &icon);
+  void appendItems(const QMultiMap<QDateTime, QVariantList> &items);
+  void clearHistory(void);
+  void copyContentsOf(durlwidget *c);
+  void popdown(void) const;
+  void resizeEvent(QResizeEvent *);
+  void selectAll(void);
+  void setBookmarkButtonEnabled(const bool state);
+  void setBookmarkColor(const bool isBookmarked);
+  void setIcon(const QIcon &icon);
+  void setIconButtonEnabled(const bool state);
+  void setItemIcon(const int index, const QIcon &icon);
+  void setSecureColor(const bool isHttps);
+  void setSpotOnButtonEnabled(const bool state);
+  void setSpotOnColor(const bool isLoaded);
+  void setText(const QString &text);
 
  private:
-  int m_counter;
   QIcon m_bookmarkButtonIcon;
   QIcon m_secureButtonIcon;
   QIcon m_spotonIcon;
-  QToolButton *goToolButton;
-  QToolButton *m_iconToolButton;
   QToolButton *bookmarkToolButton;
+  QToolButton *goToolButton;
   QToolButton *m_fakePulldownMenu;
+  QToolButton *m_iconToolButton;
   QToolButton *m_spotonButton;
   durlcompleter *m_completer;
+  int m_counter;
   bool event(QEvent *e);
   void keyPressEvent(QKeyEvent *event);
 
@@ -131,17 +131,17 @@ class durlwidget: public QLineEdit
 
  private slots:
   void slotBookmark(void);
-  void slotLoadPage(void);
   void slotLoadPage(const QString &url);
-  void slotReturnPressed(void);
+  void slotLoadPage(void);
   void slotPulldownClicked(void);
+  void slotReturnPressed(void);
 
  signals:
   void bookmark(void);
   void iconToolButtonClicked(void);
   void loadPage(const QUrl &url);
-  void resetUrl(void);
   void openLinkInNewTab(const QUrl &url);
+  void resetUrl(void);
   void submitUrlToSpotOn(void);
 };
 
