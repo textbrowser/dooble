@@ -25,77 +25,46 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QUrl>
-#include <QMenu>
-#include <QStack>
-#include <QStyle>
-#include <QDialog>
-#ifdef DOOBLE_USE_WEBENGINE
-#include <QWebEngineView>
-#else
-#include <QWebView>
-#endif
-#include <QFileInfo>
-#include <QSslError>
 #include <QBoxLayout>
 #include <QClipboard>
-#include <QPushButton>
-#ifdef DOOBLE_USE_WEBENGINE
-#include <QWebEngineHistory>
-#else
-#include <QWebElement>
-#include <QWebHistory>
-#endif
-#include <QNetworkProxy>
 #include <QContextMenuEvent>
+#include <QDialog>
 #include <QFileIconProvider>
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-#include <QWebHitTestResult>
-#endif
+#include <QFileInfo>
+#include <QMenu>
+#include <QNetworkProxy>
+#include <QPushButton>
+#include <QSslError>
+#include <QStack>
+#include <QStyle>
+#include <QUrl>
+#include <QWebEngineHistory>
+#include <QWebEngineView>
 
-#include "dmisc.h"
-#include "dview.h"
-#include "dooble.h"
-#include "dwebpage.h"
-#include "dwebview.h"
-#include "dsettings.h"
-#include "durlwidget.h"
-#include "dftpbrowser.h"
-#include "ddownloadprompt.h"
 #include "dbookmarkswindow.h"
+#include "ddownloadprompt.h"
+#include "dmisc.h"
 #include "dnetworkaccessmanager.h"
 #include "dnetworkcache.h"
+#include "dooble.h"
+#include "dsettings.h"
+#include "durlwidget.h"
+#include "dview.h"
+#include "dwebpage.h"
+#include "dwebview.h"
 
 dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
-#ifdef DOOBLE_USE_WEBENGINE
 	     const QHash<QWebEngineSettings::WebAttribute,
-			 bool> &webAttributes):
-#else
-	     const QHash<QWebSettings::WebAttribute, bool> &webAttributes):
-#endif
+	     bool> &webAttributes):
   QStackedWidget(parent)
 {
   m_action = 0;
-  m_cookies = 0;
   m_cookieWindow = 0;
+  m_cookies = 0;
   m_hasSslError = false;
+  m_history = history;
   m_lastInfoLookupId = 0;
   webView = new dwebview(this);
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  webView->setRenderHints(QPainter::Antialiasing |
-			  QPainter::TextAntialiasing |
-			  QPainter::SmoothPixmapTransform |
-			  QPainter::HighQualityAntialiasing |
-			  QPainter::NonCosmeticDefaultPen);
-  webView->settings()->setAttribute
-    (QWebSettings::ZoomTextOnly,
-     dooble::s_settings.value("mainWindow/zoomTextOnly", false).toBool());
-#endif
-  ftpBrowser = 0;
-  fileManager = 0;
-  m_history = history;
   webView->setPage(new dwebpage(webView));
   setWebAttributes(webAttributes);
 
@@ -115,22 +84,13 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   if(multiplier < 1.0)
     multiplier = 1.0;
 
-#ifdef DOOBLE_USE_WEBENGINE
   webView->setZoomFactor(multiplier);
-#else
-  webView->setTextSizeMultiplier(multiplier);
-  webView->page()->setLinkDelegationPolicy(QWebPage::DontDelegateLinks);
-#endif
   addWidget(webView);
   setCurrentWidget(webView);
   m_pageLoaded = false;
   m_percentLoaded = 0;
   m_selectedUrl = QUrl();
   selectedImageUrl = QUrl();
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  webView->setContextMenuPolicy(Qt::CustomContextMenu);
-#endif
   connect(webView, SIGNAL(urlChanged(const QUrl &)), this,
 	  SLOT(slotUrlChanged(const QUrl &)));
   connect(webView->page(), SIGNAL(iconChanged(void)), this,
@@ -145,11 +105,6 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	  SLOT(slotLoadProgress(int)));
   connect(webView, SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this, SLOT(slotCustomContextMenuRequested(const QPoint &)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(webView, SIGNAL(linkClicked(const QUrl &)),
-	  this, SLOT(slotLinkClicked(const QUrl &)));
-#endif
   connect(dooble::s_settingsWindow,
 	  SIGNAL(textSizeMultiplierChanged(const qreal)),
 	  this,
@@ -158,13 +113,6 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	  SIGNAL(reencodeRestorationFile(void)),
 	  this,
 	  SLOT(slotReencodeRestorationFile(void)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError> &)),
-	  this,
-	  SLOT(slotSslErrors(QNetworkReply *, const QList<QSslError> &)));
-#endif
   connect(webView->page(),
 	  SIGNAL(selectionChanged(void)),
 	  this,
@@ -175,58 +123,16 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   ** a queued connection is necessary.
   */
 
-#ifdef DOOBLE_USE_WEBENGINE
   connect(webView->page(),
 	  SIGNAL(loadErrorPage(const QUrl &)),
 	  this,
 	  SLOT(slotLoadErrorPage(const QUrl &)),
 	  Qt::QueuedConnection);
-#else
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(finished(dnetworkblockreply *)),
-	  this,
-	  SLOT(slotFinished(dnetworkblockreply *)));
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(finished(dnetworkftpreply *)),
-	  this,
-	  SLOT(slotFinished(dnetworkftpreply *)));
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(finished(dnetworkdirreply *)),
-	  this,
-	  SLOT(slotFinished(dnetworkdirreply *)));
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(finished(dnetworkerrorreply *)),
-	  this,
-	  SLOT(slotFinished(dnetworkerrorreply *)));
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(finished(dnetworksslerrorreply *)),
-	  this,
-	  SLOT(slotFinished(dnetworksslerrorreply *)));
-  connect(webView->page()->networkAccessManager(),
-	  SIGNAL(loadErrorPage(const QUrl &)),
-	  this,
-	  SLOT(slotLoadErrorPage(const QUrl &)),
-	  Qt::QueuedConnection);
-#endif
   connect(webView->page(),
 	  SIGNAL(loadErrorPage(const QUrl &)),
 	  this,
 	  SLOT(slotLoadErrorPage(const QUrl &)),
 	  Qt::QueuedConnection);
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(webView->page()->mainFrame(),
-	  SIGNAL(initialLayoutCompleted(void)),
-	  this,
-	  SLOT(slotInitialLayoutCompleted(void)));
-#endif
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(webView->page(),
-	  SIGNAL(downloadRequested(const QNetworkRequest &)),
-	  this,
-	  SLOT(slotDownloadRequested(const QNetworkRequest &)));
-#endif
   connect(this,
 	  SIGNAL(sslError(const QString &,
 			  const QUrl &,
@@ -255,41 +161,12 @@ dview::~dview()
 
 void dview::slotLoadFinished(bool ok)
 {
-  /*
-  ** We need to be careful here. Remember, both dfilemanager
-  ** and dftpbrowser extend WebKit. The extensions cause QWebView to emit
-  ** loadFinished() signals on their behalf. We need to ignore
-  ** those signals and capture the signals from the appropriate senders.
-  */
-
   m_pageLoaded = true;
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  if(webView == sender())
-    {
-      if(isDir() || isFtp())
-	{
-	  /*
-	  ** We should emit a loadFinished() signal if the load
-	  ** finished with or without an error.
-	  */
-
-	  emit loadFinished(false);
-	  return;
-	}
-    }
-#endif
-
-#ifdef DOOBLE_USE_WEBENGINE
   webView->page()->toHtml
     ([this](const QString &html)
      {
        m_html = html;
      });
-#else
-  webView->page()->history()->currentItem().setUserData(description());
-#endif
 
   if(webView == sender())
     webView->update();
@@ -340,115 +217,7 @@ bool dview::isLoaded(void) const
 
 void dview::slotCustomContextMenuRequested(const QPoint &pos)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(pos);
-#else
-  QWebView *view = qobject_cast<QWebView *> (sender());
-
-  if(!view)
-    return;
-
-  QMenu menu(this);
-  QWebHitTestResult result = view->page()->currentFrame()->hitTestContent(pos);
-
-  if(!result.linkUrl().isEmpty())
-    {
-      m_selectedUrl = result.linkUrl();
-
-      if(m_selectedUrl.scheme().toLower().trimmed() == "mailto")
-	menu.addAction(tr("Copy &E-Mail Address"),
-		       this, SLOT(slotCopyLinkLocation(void)));
-      else
-	{
-	  menu.addAction(tr("Copy &Link Location"),
-			 this, SLOT(slotCopyLinkLocation(void)));
-
-	  QAction *action = menu.addAction
-	    (tr("Copy &Selected Text"),
-	     this, SLOT(slotCopySelectedText(void)));
-
-	  if(view->page()->selectedText().trimmed().isEmpty())
-	    action->setEnabled(false);
-
-	  menu.addSeparator();
-	  menu.addAction(tr("Open Link in New &Tab"),
-			 this, SLOT(slotOpenLinkInNewTab(void)));
-	  menu.addAction(tr("Open Link in &New Window"),
-			 this, SLOT(slotOpenLinkInNewWindow(void)));
-	  menu.addSeparator();
-	  menu.addAction(tr("S&ave Link"),
-			 this, SLOT(slotSaveLink(void)));
-	}
-    }
-
-  if(!result.imageUrl().isEmpty())
-    {
-      selectedImageUrl = result.imageUrl();
-
-      if(!result.linkUrl().isEmpty())
-	menu.addSeparator();
-
-      menu.addSeparator();
-      menu.addAction(tr("Copy &Image Location"),
-		     this, SLOT(slotCopyImageLocation(void)));
-      menu.addAction(tr("Sa&ve Image"),
-		     this, SLOT(slotSaveImage(void)));
-      menu.addAction(tr("View I&mage"),
-		     this, SLOT(slotViewImage(void)));
-      menu.addAction(tr("View Ima&ge in New Tab"),
-		     this, SLOT(slotOpenImageInNewTab(void)));
-      menu.addAction(tr("View Imag&e in New Window"),
-		     this, SLOT(slotOpenImageInNewWindow(void)));
-    }
-
-  if(menu.isEmpty())
-    {
-      menu.addAction(tr("&Copy"),
-		     this,
-		     SLOT(slotCopySelectedText(void)));
-      menu.addAction(tr("&Paste"),
-		     this,
-		     SLOT(slotPaste(void)));
-    }
-
-  if(!menu.isEmpty())
-    menu.addSeparator();
-
-  QAction *action = 0;
-
-  action = menu.addAction(tr("&Back"),
-			  this,
-			  SIGNAL(goBack(void)));
-  action->setEnabled(canGoBack());
-  action = menu.addAction(tr("&Forward"),
-			  this,
-			  SIGNAL(goForward(void)));
-  action->setEnabled(canGoForward());
-  menu.addAction(tr("&Reload"),
-		 this,
-		 SIGNAL(goReload(void)));
-  action = menu.addAction(tr("Sto&p"),
-			  this,
-			  SLOT(slotStop(void)));
-  action->setEnabled(!m_pageLoaded);
-  menu.addSeparator();
-  menu.addAction(tr("&Print Frame"),
-		 this,
-		 SLOT(slotPrintCurrentFrame(void)));
-  menu.addSeparator();
-
-  if(view->page()->mainFrame() !=
-     view->page()->currentFrame())
-    menu.addAction(tr("View Frame S&ource"),
-		   this,
-		   SLOT(slotViewPageSource(void)));
-  else
-    menu.addAction(tr("View Page S&ource"),
-		   this,
-		   SLOT(slotViewPageSource(void)));
-
-  menu.exec(mapToGlobal(pos));
-#endif
 }
 
 void dview::slotViewImage(void)
@@ -545,22 +314,11 @@ void dview::slotClearHistory(void)
 
 void dview::load(const QUrl &url)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   if(url.isEmpty() || !url.isValid())
     {
       m_pageLoaded = true;
       return;
     }
-#else
-  emit loadStarted();
-
-  if(url.isEmpty() || !url.isValid())
-    {
-      m_pageLoaded = true;
-      emit loadFinished(!m_pageLoaded);
-      return;
-    }
-#endif
 
   m_hasSslError = false;
   m_html.clear();
@@ -580,40 +338,17 @@ void dview::load(const QUrl &url)
       m_url.setScheme(scheme);
     }
 
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  if(scheme == "data")
-    webView->page()->networkAccessManager()->setNetworkAccessible
-      (QNetworkAccessManager::NotAccessible);
-  else
-    webView->page()->networkAccessManager()->setNetworkAccessible
-      (QNetworkAccessManager::Accessible);
-
-  webView->page()->networkAccessManager()->setProxy
-    (dmisc::proxyByUrl(m_url));
-#endif
-
   if(scheme == "http" || scheme == "https")
     {
       if(dooble::s_javaScriptExceptionsWindow->allowed(m_url.host()))
 	/*
 	** Exempt hosts must be prevented from executing JavaScript.
 	*/
-#ifdef DOOBLE_USE_WEBENGINE
 	webView->settings()->setAttribute
 	  (QWebEngineSettings::JavascriptEnabled, false);
-#else
-	webView->settings()->setAttribute
-	  (QWebSettings::JavascriptEnabled, false);
-#endif
       else
-#ifdef DOOBLE_USE_WEBENGINE
 	webView->settings()->setAttribute
 	  (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
-#else
-	webView->settings()->setAttribute
-	  (QWebSettings::JavascriptEnabled, isJavaScriptEnabled());
-#endif
 
       webView->load(m_url);
     }
@@ -638,11 +373,7 @@ QIcon dview::icon(void) const
 
 void dview::slotCopySelectedText(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   webView->triggerPageAction(QWebEnginePage::Copy);
-#else
-  webView->triggerPageAction(QWebPage::Copy);
-#endif
 }
 
 dwebpage *dview::page(void) const
@@ -663,22 +394,12 @@ void dview::stop(void)
 
   m_pageLoaded = true;
   webView->stop();
-
-  if(ftpBrowser)
-    ftpBrowser->stop();
-
-  if(fileManager)
-    fileManager->stop();
 }
 
 void dview::reload(void)
 {
   if(!webView->url().isEmpty())
-#ifdef DOOBLE_USE_WEBENGINE
     webView->page()->triggerAction(QWebEnginePage::Reload);
-#else
-    webView->page()->triggerAction(QWebPage::ReloadAndBypassCache);
-#endif
   else
     load(url());
 }
@@ -695,11 +416,7 @@ void dview::forward(void)
   webView->forward();
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dview::goToItem(const QWebEngineHistoryItem &item)
-#else
-void dview::goToItem(const QWebHistoryItem &item)
-#endif
 {
   stop();
   webView->page()->history()->goToItem(item);
@@ -724,20 +441,11 @@ void dview::slotUrlChanged(const QUrl &url)
     ** Exempt hosts must be prevented from executing JavaScript.
     */
 
-#ifdef DOOBLE_USE_WEBENGINE
     webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled,
 				      false);
-#else
-    webView->settings()->setAttribute(QWebSettings::JavascriptEnabled, false);
-#endif
   else
-#ifdef DOOBLE_USE_WEBENGINE
     webView->settings()->setAttribute
       (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
-#else
-    webView->settings()->setAttribute
-      (QWebSettings::JavascriptEnabled, isJavaScriptEnabled());
-#endif
 
   QString scheme(m_url.scheme().toLower().trimmed());
 
@@ -800,79 +508,33 @@ bool dview::canGoForward(void) const
   return webView->page()->history()->canGoForward();
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 QList<QWebEngineHistoryItem> dview::backItems(const int n) const
-#else
-QList<QWebHistoryItem> dview::backItems(const int n) const
-#endif
 {
   return webView->page()->history()->backItems(n);
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 QList<QWebEngineHistoryItem> dview::forwardItems(const int n) const
-#else
-QList<QWebHistoryItem> dview::forwardItems(const int n) const
-#endif
 {
   return webView->page()->history()->forwardItems(n);
 }
 
 void dview::print(QPrinter *printer)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(printer);
-#else
-  if(!printer)
-    return;
-
-  QWebFrame *frame = currentFrame();
-
-  if(frame)
-    frame->print(printer);
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 QWebEnginePage *dview::currentFrame(void)
-#else
-QWebFrame *dview::currentFrame(void)
-#endif
 {
-  if(fileManager)
-    if(fileManager == currentWidget())
-      return fileManager->mainFrame();
-
-  if(ftpBrowser)
-    if(ftpBrowser == currentWidget())
-      return ftpBrowser->mainFrame();
-
   if(webView == currentWidget())
-#ifdef DOOBLE_USE_WEBENGINE
     return webView->page();
-#else
-    return webView->page()->currentFrame();
-#endif
 
   return 0;
 }
 
 QString dview::html(void)
 {
-  if(fileManager)
-    if(fileManager == currentWidget())
-      return fileManager->html();
-
-  if(ftpBrowser)
-    if(ftpBrowser == currentWidget())
-      return ftpBrowser->html();
-
   if(webView == currentWidget())
-#ifdef DOOBLE_USE_WEBENGINE
     return m_html;
-#else
-    return webView->page()->currentFrame()->toHtml();
-#endif
 
   return QString("");
 }
@@ -898,13 +560,8 @@ void dview::slotSslErrors(QNetworkReply *reply,
 {
   if(reply)
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QWebEnginePage *frame = qobject_cast<QWebEnginePage *>
 	(reply->request().originatingObject());
-#else
-      QWebFrame *frame = qobject_cast<QWebFrame *>
-	(reply->request().originatingObject());
-#endif
 
       if(!frame || reply->url().host() != url().host())
 	{
@@ -950,11 +607,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 		      l_url.setScheme(QString("dooblessl%1").
 				      arg(reply->url().scheme()));
 		      request.setUrl(l_url);
-#ifdef DOOBLE_USE_WEBENGINE
 		      webView->load(l_url);
-#else
-		      webView->load(request);
-#endif
 		    }
 		}
 	    }
@@ -988,11 +641,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 
       l_url.setScheme(QString("dooblessl%1").arg(reply->url().scheme()));
       request.setUrl(l_url);
-#ifdef DOOBLE_USE_WEBENGINE
       webView->load(l_url);
-#else
-      webView->load(request);
-#endif
       emit exceptionRaised(dooble::s_sslExceptionsWindow, reply->url());
       emit sslError(reply->url().host(),
 		    reply->url(),
@@ -1008,10 +657,6 @@ void dview::setFocus(void)
 
 void dview::slotHandleUnsupportedContent(const QUrl &url)
 {
-  /*
-  ** The dftpbrowser object emits a signal connected to this slot.
-  */
-
   if(dooble::s_networkCache)
     dooble::s_networkCache->remove(url);
 
@@ -1031,9 +676,6 @@ void dview::slotFinished(dnetworkdirreply *reply)
 		       ** The QWebView object must be stopped. Remember,
 		       ** we may have nagivated to a directory via a link.
 		       */
-      initializeFileManager();
-      setCurrentWidget(fileManager);
-      fileManager->load(reply->url());
     }
 }
 
@@ -1060,9 +702,6 @@ void dview::slotFinished(dnetworkftpreply *reply)
 	    slotLoadErrorPage(reply->url());
 	  else
 	    {
-	      initializeFtpBrowser();
-	      setCurrentWidget(ftpBrowser);
-	      ftpBrowser->load(reply->url(), reply->ftp());
 	    }
 	}
     }
@@ -1072,18 +711,6 @@ void dview::slotFinished(dnetworkblockreply *reply)
 {
   if(reply)
     {
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-      QWebFrame *frame = qobject_cast<QWebFrame *>
-	(reply->request().originatingObject());
-
-      if(frame)
-	{
-	  QWebElement document(frame->documentElement());
-
-	  document.prependInside(reply->html());
-	}
-#endif
     }
 }
 
@@ -1091,13 +718,8 @@ void dview::slotFinished(dnetworkerrorreply *reply)
 {
   if(reply)
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QWebEnginePage *frame = qobject_cast<QWebEnginePage *>
 	(reply->request().originatingObject());
-#else
-      QWebFrame *frame = qobject_cast<QWebFrame *>
-	(reply->request().originatingObject());
-#endif
 
       if(frame)
 	frame->setHtml(reply->html(), reply->url());
@@ -1110,13 +732,8 @@ void dview::slotFinished(dnetworksslerrorreply *reply)
 {
   if(reply)
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QWebEnginePage *frame = qobject_cast<QWebEnginePage *>
 	(reply->request().originatingObject());
-#else
-      QWebFrame *frame = qobject_cast<QWebFrame *>
-	(reply->request().originatingObject());
-#endif
 
       if(frame)
 	frame->setHtml(reply->html(), reply->url());
@@ -1256,11 +873,7 @@ void dview::slotSelectionChanged(void)
 
 void dview::slotPaste(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   webView->triggerPageAction(QWebEnginePage::Paste);
-#else
-  webView->triggerPageAction(QWebPage::Paste);
-#endif
 }
 
 void dview::setTabAction(QAction *action)
@@ -1305,11 +918,7 @@ void dview::setZoomFactor(const qreal factor)
 
 void dview::zoomTextOnly(const bool state)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(state);
-#else
-  webView->settings()->setAttribute(QWebSettings::ZoomTextOnly, state);
-#endif
   webView->update();
 }
 
@@ -1323,73 +932,9 @@ void dview::slotViewPageSource(void)
   emit viewPageSource();
 }
 
-void dview::initializeFtpBrowser(void)
-{
-  if(!ftpBrowser)
-    {
-      ftpBrowser = new dftpbrowser(this);
-      connect(ftpBrowser, SIGNAL(loadPage(const QUrl &)),
-	      this, SLOT(slotLoadPage(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(loadFinished(bool)),
-	      this, SLOT(slotLoadFinished(bool)));
-      connect(ftpBrowser, SIGNAL(loadStarted(void)),
-	      this, SLOT(slotLoadStarted(void)));
-      connect(ftpBrowser, SIGNAL(urlChanged(const QUrl &)),
-	      this, SLOT(slotUrlChanged(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(titleChanged(const QString &)),
-	      this, SLOT(slotTitleChanged(const QString &)));
-      connect(ftpBrowser, SIGNAL(iconChanged(void)),
-	      this, SLOT(slotIconChanged(void)));
-      connect(ftpBrowser, SIGNAL(saveUrl(const QUrl &)),
-	      this, SLOT(slotSaveLink(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(copyLink(const QUrl &)),
-	      this, SLOT(slotCopyLinkLocation(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(openLinkInNewTab(const QUrl &)),
-	      this, SLOT(slotOpenLinkInNewTab(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(openLinkInNewWindow(const QUrl &)),
-	      this, SLOT(slotOpenLinkInNewWindow(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(loadProgress(int)),
-	      this, SLOT(slotLoadProgress(int)));
-      connect(ftpBrowser,
-	      SIGNAL(unsupportedContent(const QUrl &)),
-	      this,
-	      SLOT(slotHandleUnsupportedContent(const QUrl &)));
-      connect(ftpBrowser, SIGNAL(loadProgress(int)),
-	      this, SLOT(slotLoadProgress(int)));
-      addWidget(ftpBrowser);
-    }
-}
-
-void dview::initializeFileManager(void)
-{
-  if(!fileManager)
-    {
-      fileManager = new dfilemanager(this);
-      connect(fileManager, SIGNAL(loadPage(const QUrl &)),
-	      this, SLOT(slotLoadPage(const QUrl &)));
-      connect(fileManager, SIGNAL(loadFinished(bool)),
-	      this, SLOT(slotLoadFinished(bool)));
-      connect(fileManager, SIGNAL(loadStarted(void)),
-	      this, SLOT(slotLoadStarted(void)));
-      connect(fileManager, SIGNAL(urlChanged(const QUrl &)),
-	      this, SLOT(slotUrlChanged(const QUrl &)));
-      connect(fileManager, SIGNAL(titleChanged(const QString &)),
-	      this, SLOT(slotTitleChanged(const QString &)));
-      connect(fileManager, SIGNAL(iconChanged(void)),
-	      this, SLOT(slotIconChanged(void)));
-      connect(fileManager, SIGNAL(loadProgress(int)),
-	      this, SLOT(slotLoadProgress(int)));
-      addWidget(fileManager);
-    }
-}
-
 void dview::slotSetTextSizeMultiplier(const qreal multiplier)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   webView->setZoomFactor(multiplier);
-#else
-  webView->setTextSizeMultiplier(multiplier);
-#endif
 }
 
 bool dview::hasSecureConnection(void) const
@@ -1457,33 +1002,18 @@ QString dview::ipAddress(void) const
 bool dview::isModified(void) const
 {
   if(webView == currentWidget())
-#ifdef DOOBLE_USE_WEBENGINE
     return false;
-#else
-    return webView->isModified();
-#endif
   else
     return false;
 }
 
 void dview::post(const QUrl &url, const QString &text)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   if(url.isEmpty() || !url.isValid())
     {
       m_pageLoaded = true;
       return;
     }
-#else
-  emit loadStarted();
-
-  if(url.isEmpty() || !url.isValid())
-    {
-      m_pageLoaded = true;
-      emit loadFinished(!m_pageLoaded);
-      return;
-    }
-#endif
 
   m_hasSslError = false;
   m_html.clear();
@@ -1496,21 +1026,11 @@ void dview::post(const QUrl &url, const QString &text)
     ** Exempt hosts must be prevented from executing JavaScript.
     */
 
-#ifdef DOOBLE_USE_WEBENGINE
     webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled,
 				      false);
-#else
-    webView->settings()->setAttribute(QWebSettings::JavascriptEnabled,
-				      false);
-#endif
   else
-#ifdef DOOBLE_USE_WEBENGINE
     webView->settings()->setAttribute
       (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
-#else
-    webView->settings()->setAttribute
-      (QWebSettings::JavascriptEnabled, isJavaScriptEnabled());
-#endif
 
   /*
   ** We don't need to set HTTP Pipelining here since
@@ -1524,11 +1044,7 @@ void dview::post(const QUrl &url, const QString &text)
 		    "text/html; charset=UTF-8");
   request.setHeader(QNetworkRequest::ContentLengthHeader,
 		    text.toUtf8().length());
-#ifdef DOOBLE_USE_WEBENGINE
   webView->load(m_url);
-#else
-  webView->load(request, QNetworkAccessManager::PostOperation, text.toUtf8());
-#endif
 }
 
 void dview::update(void)
@@ -1569,27 +1085,7 @@ QString dview::description(void) const
   if(webView == currentWidget())
     {
       if(webView->page())
-	{
-#ifdef DOOBLE_USE_WEBENGINE
-	  str = webviewUrl().toString(QUrl::StripTrailingSlash);
-#else
-	  QWebFrame *frame = webView->page()->mainFrame();
-
-	  if(frame)
-	    {
-	      QList<QString> list;
-	      QMultiMap<QString, QString> map(frame->QWebFrame::metaData());
-
-	      if(map.contains("description"))
-		list = map.values("description");
-	      else if(map.contains("Description"))
-		list = map.values("Description");
-
-	      while(!list.isEmpty())
-		str += list.takeFirst();
-	    }
-#endif
-	}
+	str = webviewUrl().toString(QUrl::StripTrailingSlash);
     }
   else
     str = webviewUrl().toString(QUrl::StripTrailingSlash);
@@ -1599,10 +1095,6 @@ QString dview::description(void) const
 
 void dview::slotLoadPage(const QUrl &url)
 {
-  /*
-  ** dfilemanager and dftpbrowser issue loadPage() signals.
-  */
-
   load(url);
 }
 
@@ -1724,14 +1216,6 @@ int dview::downloadPrompt(const QString &fileName)
 
 QString dview::statusMessage(void) const
 {
-  if(fileManager)
-    if(fileManager == currentWidget())
-      return fileManager->statusMessage();
-
-  if(ftpBrowser)
-    if(ftpBrowser == currentWidget())
-      return ftpBrowser->statusMessage();
-
   return QString("");
 }
 
@@ -1744,11 +1228,7 @@ void dview::slotLoadErrorPage(const QUrl &url)
   else
     l_url.setScheme(QString("dooble%1").arg(url.scheme()));
 
-#ifdef DOOBLE_USE_WEBENGINE
   webView->load(l_url);
-#else
-  webView->load(QNetworkRequest(l_url));
-#endif
 }
 
 QUrl dview::webviewUrl(void) const
@@ -1787,57 +1267,7 @@ bool dview::arePrivateCookiesEnabled(void) const
 
 void dview::setPrivateCookies(const bool state)
 {
-#ifdef DOOBLE_USE_WEBENGINE
-  dnetworkaccessmanager *networkAccessManager = 0;
-#else
-  dnetworkaccessmanager *networkAccessManager = qobject_cast
-    <dnetworkaccessmanager *> (page()->networkAccessManager());
-#endif
-
-  if(networkAccessManager)
-    {
-      if(state)
-	{
-	  if(!m_cookies)
-	    {
-	      m_cookies = new dcookies(true);
-	      networkAccessManager->setCookieJar(m_cookies);
-	    }
-
-	  if(!m_cookieWindow)
-	    m_cookieWindow = new dcookiewindow(m_cookies, this);
-
-	  connect(m_cookies,
-		  SIGNAL(exceptionRaised(dexceptionswindow *,
-					 const QUrl &)),
-		  this,
-		  SIGNAL(exceptionRaised(dexceptionswindow *,
-					 const QUrl &)));
-	  connect(m_cookies,
-		  SIGNAL(changed(void)),
-		  m_cookieWindow,
-		  SLOT(slotCookiesChanged(void)));
-	  connect(m_cookies,
-		  SIGNAL(domainsRemoved(const QStringList &)),
-		  m_cookieWindow,
-		  SLOT(slotDomainsRemoved(const QStringList &)));
-	  connect(dooble::s_settingsWindow,
-		  SIGNAL(cookieTimerChanged(void)),
-		  m_cookies,
-		  SLOT(slotCookieTimerChanged(void)));
-	}
-      else
-	{
-	  if(m_cookies)
-	    m_cookies->deleteLater();
-
-	  if(m_cookieWindow)
-	    m_cookieWindow->deleteLater();
-
-	  networkAccessManager->setCookieJar(dooble::s_cookies);
-	  dooble::s_cookies->setParent(0);
-	}
-    }
+  Q_UNUSED(state);
 }
 
 void dview::viewPrivateCookies(void)
@@ -1868,44 +1298,23 @@ void dview::setJavaScriptEnabled(const bool state)
 
 void dview::setPrivateBrowsingEnabled(const bool state)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(state);
-#else
-  page()->settings()->setAttribute
-    (QWebSettings::PrivateBrowsingEnabled, state);
-#endif
 }
 
 void dview::setWebPluginsEnabled(const bool state)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(state);
-#else
-  page()->settings()->setAttribute(QWebSettings::PluginsEnabled, state);
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 QHash<QWebEngineSettings::WebAttribute, bool> dview::webAttributes(void) const
-#else
-QHash<QWebSettings::WebAttribute, bool> dview::webAttributes(void) const
-#endif
 {
   return page()->webAttributes();
 }
 
 void dview::setWebAttributes
-#ifdef DOOBLE_USE_WEBENGINE
 (const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes)
-#else
-(const QHash<QWebSettings::WebAttribute, bool> &webAttributes)
-#endif
 {
-#ifdef DOOBLE_USE_WEBENGINE
   QHashIterator<QWebEngineSettings::WebAttribute, bool> it(webAttributes);
-#else
-  QHashIterator<QWebSettings::WebAttribute, bool> it(webAttributes);
-#endif
 
   while(it.hasNext())
     {

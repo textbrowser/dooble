@@ -33,257 +33,191 @@
 #include <QNetworkRequest>
 #include <QPointer>
 #include <QStackedWidget>
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEngineSettings>
-#else
-#include <QWebSettings>
-#endif
 
 class dcookies;
+class dcookiewindow;
 class dooble;
+class dexceptionswindow;
+class dfilemanager;
+class dnetworkblockreply;
+class dnetworkdirreply;
+class dnetworkerrorreply;
+class dnetworkftpreply;
+class dnetworksslerrorreply;
 class dwebpage;
 class dwebview;
-class dftpbrowser;
-class dfilemanager;
-class dcookiewindow;
 class dwebviewsimple;
-class dnetworkdirreply;
-class dnetworkftpreply;
-class dexceptionswindow;
-class dnetworkblockreply;
-class dnetworkerrorreply;
-class dnetworksslerrorreply;
 
+class QNetworkReply;
 class QPrinter;
-#ifdef DOOBLE_USE_WEBENGINE
+class QSslError;
+class QWebEngineHistoryItem;
 class QWebEnginePage;
 class QWebEngineView;
-#else
-class QWebView;
-#endif
-class QSslError;
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-class QWebFrame;
-#endif
-class QNetworkReply;
-#ifdef DOOBLE_USE_WEBENGINE
-class QWebEngineHistoryItem;
-#else
-class QWebHistoryItem;
-#endif
 
 class dview: public QStackedWidget
 {
   Q_OBJECT
 
  public:
-#ifdef DOOBLE_USE_WEBENGINE
   dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
-#else
-  dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
-	const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-#endif
   ~dview();
-  int progress(void) const;
-  bool areWebPluginsEnabled(void) const;
-  bool isDir(void) const;
-  bool isFtp(void) const;
-  bool isLoaded(void) const;
-  bool isPrivateBrowsingEnabled(void) const;
-  bool canGoBack(void) const;
-  bool isModified(void) const;
-  bool canGoForward(void) const;
-  bool isBookmarked(void) const;
-  bool isBookmarkWorthy(void) const;
-  bool isJavaScriptEnabled(void) const;
-  bool hasSecureConnection(void) const;
-  bool arePrivateCookiesEnabled(void) const;
-  QUrl url(void) const;
-  QUrl webviewUrl(void) const;
-  void back(void);
-  void load(const QUrl &url);
-  void post(const QUrl &url, const QString &text);
-  void stop(void);
-  void print(QPrinter *printer);
-  void reload(void);
-  void update(void);
-  void forward(void);
-#ifdef DOOBLE_USE_WEBENGINE
-  void goToItem(const QWebEngineHistoryItem &item);
-#else
-  void goToItem(const QWebHistoryItem &item);
-#endif
-  void setFocus(void);
-  void setTabAction(QAction *action);
-  void zoomTextOnly(const bool state);
-  void findIpAddress(const QUrl &url);
-  void setZoomFactor(const qreal factor);
-  void setPrivateCookies(const bool state);
-  void viewPrivateCookies(void);
-  void initializeFtpBrowser(void);
-  void initializeFileManager(void);
-  void removeRestorationFiles(void);
-  void recordRestorationHistory(void);
-  void setJavaScriptEnabled(const bool state);
-  void setPrivateBrowsingEnabled(const bool state);
-  void setWebPluginsEnabled(const bool state);
-  qreal zoomFactor(void) const;
+  QAction *tabAction(void) const;
+  QByteArray history(void);
   QIcon icon(void) const;
   QIcon webviewIcon(void) const;
-  QAction *tabAction(void) const;
-  QString html(void);
-  QString title(void) const;
-  QString ipAddress(void) const;
-  QString description(void) const;
-  QString statusMessage(void) const;
-  dwebpage *page(void) const;
-#ifdef DOOBLE_USE_WEBENGINE
-  QWebEnginePage *currentFrame(void);
-#else
-  QWebFrame *currentFrame(void);
-#endif
-  QByteArray history(void);
-#ifdef DOOBLE_USE_WEBENGINE
   QList<QWebEngineHistoryItem> backItems(const int n) const;
   QList<QWebEngineHistoryItem> forwardItems(const int n) const;
-#else
-  QList<QWebHistoryItem> backItems(const int n) const;
-  QList<QWebHistoryItem> forwardItems(const int n) const;
-#endif
+  QString description(void) const;
+  QString html(void);
+  QString ipAddress(void) const;
+  QString statusMessage(void) const;
+  QString title(void) const;
+  QUrl url(void) const;
+  QUrl webviewUrl(void) const;
+  QWebEnginePage *currentFrame(void);
+  bool arePrivateCookiesEnabled(void) const;
+  bool areWebPluginsEnabled(void) const;
+  bool canGoBack(void) const;
+  bool canGoForward(void) const;
+  bool hasSecureConnection(void) const;
+  bool isBookmarkWorthy(void) const;
+  bool isBookmarked(void) const;
+  bool isDir(void) const;
+  bool isFtp(void) const;
+  bool isJavaScriptEnabled(void) const;
+  bool isLoaded(void) const;
+  bool isModified(void) const;
+  bool isPrivateBrowsingEnabled(void) const;
+  dwebpage *page(void) const;
+  int progress(void) const;
+  qreal zoomFactor(void) const;
+  void back(void);
+  void findIpAddress(const QUrl &url);
+  void forward(void);
+  void goToItem(const QWebEngineHistoryItem &item);
+  void load(const QUrl &url);
+  void post(const QUrl &url, const QString &text);
+  void print(QPrinter *printer);
+  void recordRestorationHistory(void);
+  void reload(void);
+  void removeRestorationFiles(void);
+  void setFocus(void);
+  void setJavaScriptEnabled(const bool state);
+  void setPrivateBrowsingEnabled(const bool state);
+  void setPrivateCookies(const bool state);
+  void setTabAction(QAction *action);
+  void setWebPluginsEnabled(const bool state);
+  void setZoomFactor(const qreal factor);
+  void stop(void);
+  void update(void);
+  void viewPrivateCookies(void);
+  void zoomTextOnly(const bool state);
 
  private:
-  int m_percentLoaded;
-  int m_lastInfoLookupId;
-  bool m_hasSslError;
-  bool m_pageLoaded;
-  QUrl m_url;
-  QUrl m_selectedUrl;
-  QUrl selectedImageUrl;
-  QString m_html;
-  QString m_title;
-  QString m_ipAddress;
-  QString m_historyRestorationFileName;
-  dwebview *webView;
   QByteArray m_history;
-  dftpbrowser *ftpBrowser;
-  dfilemanager *fileManager;
   QPointer<QAction> m_action;
   QPointer<dcookies> m_cookies;
   QPointer<dcookiewindow> m_cookieWindow;
-#ifdef DOOBLE_USE_WEBENGINE
+  QString m_historyRestorationFileName;
+  QString m_html;
+  QString m_ipAddress;
+  QString m_title;
+  QUrl m_selectedUrl;
+  QUrl m_url;
+  QUrl selectedImageUrl;
+  bool m_hasSslError;
+  bool m_pageLoaded;
+  dwebview *webView;
+  int m_lastInfoLookupId;
+  int m_percentLoaded;
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes(void) const;
-#else
-  QHash<QWebSettings::WebAttribute, bool> webAttributes(void) const;
-#endif
   dooble *findDooble(void);
-  int tabIndex(void);
   int downloadPrompt(const QString &fileName);
+  int tabIndex(void);
+  quint64 parentId(void);
   void enterEvent(QEvent *event);
   void prepareRestorationFileNames(void);
   void setUrlForUnsupportedContent(const QUrl &url);
-#ifdef DOOBLE_USE_WEBENGINE
   void setWebAttributes
     (const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
-#else
-  void setWebAttributes
-    (const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-#endif
-  quint64 parentId(void);
 
  private slots:
-  void slotStop(void);
-  void slotPaste(void);
-  void slotFinished(dnetworkdirreply *reply);
-  void slotFinished(dnetworkftpreply *reply);
-  void slotFinished(dnetworkblockreply *reply);
-  void slotFinished(dnetworkerrorreply *reply);
-  void slotFinished(dnetworksslerrorreply *reply);
-  void slotLoadPage(const QUrl &url);
-  void slotSaveLink(void);
-  void slotSaveLink(const QUrl &url);
-  void slotSaveImage(void);
-  void slotSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
-  void slotViewImage(void);
-  void slotUrlChanged(const QUrl &url);
-  void slotIconChanged(void);
-  void slotLinkClicked(const QUrl &url);
-  void slotLoadStarted(void);
   void slotClearCookies(void);
   void slotClearHistory(void);
-  void slotHostLookedUp(const QHostInfo &hostInfo);
-  void slotLoadFinished(bool ok);
-  void slotLoadProgress(int progress);
-  void slotTitleChanged(const QString &title);
-  void slotLoadErrorPage(const QUrl &url);
-  void slotViewPageSource(void);
-  void slotCopyLinkLocation(void);
-  void slotCopyLinkLocation(const QUrl &url);
-  void slotCopySelectedText(void);
-  void slotOpenLinkInNewTab(void);
-  void slotOpenLinkInNewTab(const QUrl &url);
-  void slotSelectionChanged(void);
   void slotCopyImageLocation(void);
-  void slotDownloadRequested(const QNetworkRequest &request);
-  void slotOpenImageInNewTab(void);
-  void slotPrintCurrentFrame(void);
-  void slotOpenLinkInNewWindow(void);
-  void slotOpenLinkInNewWindow(const QUrl &url);
-  void slotOpenImageInNewWindow(void);
-  void slotSetTextSizeMultiplier(const qreal multiplier);
-  void slotInitialLayoutCompleted(void);
-  void slotReencodeRestorationFile(void);
-  void slotHandleUnsupportedContent(const QUrl &url);
-  void slotHandleUnsupportedContent(QNetworkReply *reply);
+  void slotCopyLinkLocation(const QUrl &url);
+  void slotCopyLinkLocation(void);
+  void slotCopySelectedText(void);
   void slotCustomContextMenuRequested(const QPoint &pos);
+  void slotDownloadRequested(const QNetworkRequest &request);
+  void slotFinished(dnetworkblockreply *reply);
+  void slotFinished(dnetworkdirreply *reply);
+  void slotFinished(dnetworkerrorreply *reply);
+  void slotFinished(dnetworkftpreply *reply);
+  void slotFinished(dnetworksslerrorreply *reply);
+  void slotHandleUnsupportedContent(QNetworkReply *reply);
+  void slotHandleUnsupportedContent(const QUrl &url);
+  void slotHostLookedUp(const QHostInfo &hostInfo);
+  void slotIconChanged(void);
+  void slotInitialLayoutCompleted(void);
+  void slotLinkClicked(const QUrl &url);
+  void slotLoadErrorPage(const QUrl &url);
+  void slotLoadFinished(bool ok);
+  void slotLoadPage(const QUrl &url);
+  void slotLoadProgress(int progress);
+  void slotLoadStarted(void);
+  void slotOpenImageInNewTab(void);
+  void slotOpenImageInNewWindow(void);
+  void slotOpenLinkInNewTab(const QUrl &url);
+  void slotOpenLinkInNewTab(void);
+  void slotOpenLinkInNewWindow(const QUrl &url);
+  void slotOpenLinkInNewWindow(void);
+  void slotPaste(void);
+  void slotPrintCurrentFrame(void);
+  void slotReencodeRestorationFile(void);
+  void slotSaveImage(void);
+  void slotSaveLink(const QUrl &url);
+  void slotSaveLink(void);
+  void slotSelectionChanged(void);
+  void slotSetTextSizeMultiplier(const qreal multiplier);
+  void slotSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
+  void slotStop(void);
+  void slotTitleChanged(const QString &title);
+  void slotUrlChanged(const QUrl &url);
+  void slotViewImage(void);
+  void slotViewPageSource(void);
 
  signals:
-  void goBack(void);
-  void saveUrl(const QUrl &url, const int choice);
   void copyLink(const QUrl &url);
-  void goReload(void);
-  void saveFile(const QString &fileName, const QUrl &url, const int choice);
+  void exceptionRaised(dexceptionswindow *window, const QUrl &url);
+  void goBack(void);
   void goForward(void);
-  void viewImage(const QUrl &url);
-  void urlChanged(const QUrl &url);
+  void goReload(void);
   void iconChanged(void);
-  void loadStarted(void);
-  void viewEntered(void);
+  void ipAddressChanged(const QString &ipAddress);
   void loadFinished(bool);
   void loadProgress(const int);
-  void titleChanged(const QString &title);
-  void sslError(const QString &host,
-		const QUrl &url,
-		const QDateTime &dateTime);
-#ifdef DOOBLE_USE_WEBENGINE
+  void loadStarted(void);
+  void openLinkInNewTab
+    (const QUrl &url, dcookies *cookies,
+     const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
+  void openLinkInNewWindow
+    (const QUrl &url, dcookies *cookies,
+     const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
   void printRequested(QWebEnginePage *frame);
-#else
-  void printRequested(QWebFrame *frame);
-#endif
-  void viewPageSource(void);
-  void exceptionRaised(dexceptionswindow *window,
-		       const QUrl &url);
-  void ipAddressChanged(const QString &ipAddress);
-#ifdef DOOBLE_USE_WEBENGINE
-  void openLinkInNewTab
-    (const QUrl &url, dcookies *cookies,
-     const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
-#else
-  void openLinkInNewTab
-    (const QUrl &url, dcookies *cookies,
-     const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-#endif
+  void saveFile(const QString &fileName, const QUrl &url, const int choice);
+  void saveUrl(const QUrl &url, const int choice);
   void selectionChanged(const QString &text);
-#ifdef DOOBLE_USE_WEBENGINE
-  void openLinkInNewWindow
-    (const QUrl &url, dcookies *cookies,
-     const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
-#else
-  void openLinkInNewWindow
-    (const QUrl &url, dcookies *cookies,
-     const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-#endif
+  void sslError
+    (const QString &host, const QUrl &url, const QDateTime &dateTime);
+  void titleChanged(const QString &title);
+  void urlChanged(const QUrl &url);
+  void viewEntered(void);
+  void viewImage(const QUrl &url);
+  void viewPageSource(void);
 };
 
 #endif
