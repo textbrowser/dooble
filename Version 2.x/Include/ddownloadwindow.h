@@ -30,14 +30,14 @@
 
 #include <QMainWindow>
 
-#include "ui_downloadWindow.h"
 #include "ddownloadwindowitem.h"
+#include "ui_downloadWindow.h"
 
-class QUrl;
-class QString;
 class QCloseEvent;
-class QProgressBar;
 class QNetworkReply;
+class QProgressBar;
+class QString;
+class QUrl;
 
 class ddownloadwindow: public QMainWindow
 {
@@ -47,54 +47,54 @@ class ddownloadwindow: public QMainWindow
   ddownloadwindow(void);
   ~ddownloadwindow();
   bool isActive(void) const;
-  void show(QWidget *parent);
+  qint64 size(void) const;
   void abort(void);
-  void clear(void);
-  void populate(void);
-  void reencode(QProgressBar *progress);
+  void addFileItem(const QString &srcFileName, const QString &dstFileName,
+		   const bool isNew, const QDateTime &dateTime);
+  void addHtmlItem(const QString &html, const QString &dstFileName);
   void addUrlItem(const QUrl &url, const QString &fileName,
 		  const bool isNew,
 		  const QDateTime &dateTime,
 		  const int choice);
-  void addFileItem(const QString &srcFileName, const QString &dstFileName,
-		   const bool isNew, const QDateTime &dateTime);
-  void addHtmlItem(const QString &html, const QString &dstFileName);
+  void clear(void);
   void closeEvent(QCloseEvent *event);
-  qint64 size(void) const;
+  void populate(void);
+  void reencode(QProgressBar *progress);
+  void show(QWidget *parent);
 
  private:
   Ui_downloadWindow ui;
   bool event(QEvent *event);
+  void createDownloadDatabase(void);
+  void keyPressEvent(QKeyEvent *event);
   void purge(void);
   void saveState(void);
-  void keyPressEvent(QKeyEvent *event);
-  void createDownloadDatabase(void);
 
  public slots:
   void slotSetIcons(void);
 
  private slots:
-  void slotClear(void);
-  void slotClose(void);
-  void slotEnterUrl(void);
-  void slotClearList(void);
-  void slotDownloadUrl(void);
-  void slotTextChanged(const QString &text);
+  void slotAuthenticationRequired(QNetworkReply *reply,
+				  QAuthenticator *authenticator);
   void slotBitRateChanged(int state);
+  void slotCancelDownloadUrl(void);
+  void slotCellDoubleClicked(int row, int col);
+  void slotClear(void);
+  void slotClearList(void);
+  void slotClose(void);
+  void slotDownloadFinished(void);
+  void slotDownloadUrl(void);
+  void slotEnterUrl(void);
+  void slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
+				       QAuthenticator *authenticator);
   void slotRecordDownload(const QString &fileName,
 			  const QUrl &url,
 			  const QDateTime &dateTime);
-  void slotDownloadFinished(void);
-  void slotCancelDownloadUrl(void);
-  void slotCellDoubleClicked(int row, int col);
-  void slotAuthenticationRequired(QNetworkReply *reply,
-				  QAuthenticator *authenticator);
-  void slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
-				       QAuthenticator *authenticator);
+  void slotTextChanged(const QString &text);
 
  signals:
-  void saveUrl(const QUrl &url, const int choice);
   void iconsChanged(void);
+  void saveUrl(const QUrl &url, const int choice);
 };
 
 #endif

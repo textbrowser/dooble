@@ -49,8 +49,8 @@ class dfilesystemmodel: public QFileSystemModel
   void slotDirectoryLoaded(const QString &path);
 
  signals:
-  void suffixesAdded(const QMap<QString, QString> &suffixes);
   void suffixUpdated(const QString &suffix, const QString &action);
+  void suffixesAdded(const QMap<QString, QString> &suffixes);
 };
 
 #endif

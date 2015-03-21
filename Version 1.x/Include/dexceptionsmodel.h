@@ -45,7 +45,7 @@ class dexceptionsmodel: public QStandardItemModel
   void add(const QString &host,
 	   const QUrl &url,
 	   const QDateTime &dateTime);
-  void populate(void) ;
+  void populate(void);
   void reencode(QProgressBar *progress);
   void deleteList(const QModelIndexList &list);
   QStringList allowedHosts(void) const;

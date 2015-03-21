@@ -38,9 +38,9 @@ class dsearchwidget: public QLineEdit
 
  public:
   dsearchwidget(QWidget *parent);
-  void resizeEvent(QResizeEvent *);
   QString type(void) const;
   QToolButton *findButton(void) const;
+  void resizeEvent(QResizeEvent *);
 
  private:
   QString m_type;

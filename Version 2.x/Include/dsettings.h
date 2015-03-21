@@ -34,8 +34,8 @@
 
 #include "ui_settings.h"
 
-class dooble;
 class QKeyEvent;
+class dooble;
 
 class dsettings: public QMainWindow
 {
@@ -44,15 +44,15 @@ class dsettings: public QMainWindow
  public:
   dsettings(void);
   ~dsettings();
-  void exec(dooble *parent);
-  dooble *parentDooble(void) const;
   Ui_settingsWindow UI(void) const;
+  dooble *parentDooble(void) const;
+  void exec(dooble *parent);
 
  private:
-  QTimer m_updateLabelTimer;
-  QTimer m_purgeMemoryCachesTimer;
-  QString m_previousIconSet;
   QPointer<dooble> m_parentDooble;
+  QString m_previousIconSet;
+  QTimer m_purgeMemoryCachesTimer;
+  QTimer m_updateLabelTimer;
   Ui_settingsWindow ui;
   bool event(QEvent *event);
   void closeEvent(QCloseEvent *event);
@@ -60,39 +60,39 @@ class dsettings: public QMainWindow
   void updateFontWidgets(const QString &fontName, QComboBox *fontSizeWidget);
 
  public slots:
-  void slotPopulateApplications(const QMap<QString, QString> &suffixes);
   void slotPassphraseWasAuthenticated(const bool state);
+  void slotPopulateApplications(const QMap<QString, QString> &suffixes);
 
  private slots:
-  void slotClicked(QAbstractButton *button);
-  void slotSetIcons(void);
-  void slotChangePage(bool checked);
-  void slotDeleteSuffix(void);
-  void slotIconsPreview(void);
-  void slotUpdateLabels(void);
-  void slotClearFavicons(void);
-  void slotClearDiskCache(void);
-  void slotWebFontChanged(const QString &text);
-  void slotGroupBoxClicked(bool checked);
-  void slotEnablePassphrase(void);
-  void slotPurgeMemoryCaches(void);
-  void slotSelectIconCfgFile(void);
-  void slotUpdateApplication(const QString &suffix, const QString &action);
-  void slotCookieTimerTimeChanged(int index);
-  void slotCustomContextMenuRequested(const QPoint &point);
   void slotApplicationPulldownActivated(int index);
+  void slotChangePage(bool checked);
+  void slotChooseMyRetrievedFilesDirectory(void);
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   void slotChooseSpotOnSharedDatabaseFile(void);
 #endif
-  void slotChooseMyRetrievedFilesDirectory(void);
+  void slotClearDiskCache(void);
+  void slotClearFavicons(void);
+  void slotClicked(QAbstractButton *button);
+  void slotCookieTimerTimeChanged(int index);
+  void slotCustomContextMenuRequested(const QPoint &point);
+  void slotDeleteSuffix(void);
+  void slotEnablePassphrase(void);
+  void slotGroupBoxClicked(bool checked);
+  void slotIconsPreview(void);
+  void slotPurgeMemoryCaches(void);
+  void slotSelectIconCfgFile(void);
+  void slotSetIcons(void);
+  void slotUpdateApplication(const QString &suffix, const QString &action);
+  void slotUpdateLabels(void);
+  void slotWebFontChanged(const QString &text);
 
  signals:
-  void showTabBar(const bool state);
+  void cookieTimerChanged(void);
   void iconsChanged(void);
+  void reencodeRestorationFile(void);
   void settingsReset(void);
   void showIpAddress(const bool state);
-  void cookieTimerChanged(void);
-  void reencodeRestorationFile(void);
+  void showTabBar(const bool state);
   void textSizeMultiplierChanged(const qreal multiplier);
 };
 

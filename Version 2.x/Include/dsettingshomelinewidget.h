@@ -47,8 +47,8 @@ class dsettingshomelinewidget: public QLineEdit
   void slotSetIcons(void);
 
  private slots:
-  void slotSetUrls(void);
   void slotMenuActionTriggered(QAction *action);
+  void slotSetUrls(void);
 };
 
 #endif

@@ -41,8 +41,8 @@ class dgenericsearchwidget: public QLineEdit
   void resizeEvent(QResizeEvent *);
 
  private:
-  void keyPressEvent(QKeyEvent *event);
   QToolButton *findToolButton;
+  void keyPressEvent(QKeyEvent *event);
 
  public slots:
   void slotSetIcons(void);

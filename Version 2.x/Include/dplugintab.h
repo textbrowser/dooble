@@ -40,44 +40,37 @@ class dplugintab: public QWidget
   Q_OBJECT
 
  public:
-
   dplugintab(Extension *ext, QWidget *parent = 0);
   ~dplugintab();
-
-  QIcon   icon(void) const;
-  QString title(void) const;
-  bool    canClose(void) const;
-  void    setTabAction(QAction *action);
-  QAction *tabAction(void) const;
-  QWidget *pluginWidget(void) const;
   Extension *extension(void) const;
+  QAction *tabAction(void) const;
+  QIcon icon(void) const;
+  QString title(void) const;
+  QWidget *pluginWidget(void) const;
+  bool canClose(void) const;
+  void setTabAction(QAction *action);
 
  public slots:
-
   void close(void);
   void slotIconChange(Extension *ext);
   void slotTitleChange(Extension *ext);
 
  signals:
-
   void exiting(dplugintab *dp, int status);
   void iconChange(QWidget *tab, const QIcon &icon);
   void titleChange(QWidget *tab, const QString &title);
 
  private slots:
-
   void emitExiting(Extension *ex, int status);
 
  protected:
-
   void resizeEvent(QResizeEvent *event);
 
  private:
-
-  QWidget     *extWidget;
-  Extension   *m_extension;
-  SignalAgent *sagent;
+  Extension *m_extension;
   QPointer<QAction> m_action;
+  QWidget *extWidget;
+  SignalAgent *sagent;
 };
 
 #endif

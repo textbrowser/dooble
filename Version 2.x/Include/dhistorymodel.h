@@ -41,14 +41,14 @@ class dhistorymodel: public QStandardItemModel
   dhistorymodel(void);
   ~dhistorymodel();
   bool deletePage(const QString &text);
-  void populate(void);
-  void deleteAll(void);
   void addWatchers(const int watcher);
+  void deleteAll(void);
+  void populate(void);
 
  private:
-  int m_watchers;
-  QTimer *m_timer;
   QDateTime m_lastModificationTime;
+  QTimer *m_timer;
+  int m_watchers;
   QMimeData *mimeData(const QModelIndexList &indexes) const;
 
  private slots:

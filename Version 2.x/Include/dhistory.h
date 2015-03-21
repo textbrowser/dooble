@@ -28,14 +28,14 @@
 #ifndef _dhistory_h_
 #define _dhistory_h_
 
-#include <QPointer>
 #include <QMainWindow>
+#include <QPointer>
 
 #include "ui_historyWindow.h"
 
-class QTimer;
 class QProgressBar;
 class QStandardItemModel;
+class QTimer;
 
 class dhistory: public QMainWindow
 {
@@ -44,50 +44,49 @@ class dhistory: public QMainWindow
  public:
   dhistory(void);
   ~dhistory();
-  void show(QWidget *parent);
+  qint64 size(void) const;
   void populate(void);
   void reencode(QProgressBar *progress);
-  qint64 size(void) const;
+  void show(QWidget *parent);
 
  private:
-  QTimer *m_timer;
-  QTimer *m_searchTimer;
-  Ui_historyWindow ui;
   QPointer<QWidget> m_parent;
   QStandardItemModel *m_model;
+  QTimer *m_searchTimer;
+  QTimer *m_timer;
+  Ui_historyWindow ui;
   bool event(QEvent *event);
-  void purge(void);
-  void saveState(void);
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void purge(void);
+  void saveState(void);
 
  public slots:
   void slotSetIcons(void);
 
  private slots:
+  void slotBookmark(void);
+  void slotCopyUrl(void);
+  void slotDeleteAll(void);
+  void slotDeletePage(void);
+  void slotItemDoubleClicked(const QModelIndex &index);
+  void slotItemSelectionChanged(void);
+  void slotItemsSelected(const QItemSelection &selected,
+			 const QItemSelection &deselected);
   void slotOpen(void);
-  void slotSort(int column, Qt::SortOrder order);
+  void slotOpenInNewTab(void);
+  void slotOpenInNewWindow(void);
+  void slotParentDestroyed(void);
+  void slotPopulate(void);
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   void slotShare(void);
 #endif
-  void slotCopyUrl(void);
-  void slotTimeout(void);
-  void slotBookmark(void);
-  void slotPopulate(void);
-  void slotDeleteAll(void);
-  void slotDeletePage(void);
-  void slotTextChanged(const QString &text);
-  void slotOpenInNewTab(void);
-  void slotItemsSelected(const QItemSelection &selected,
-			 const QItemSelection &deselected);
-  void slotOpenInNewWindow(void);
-  void slotParentDestroyed(void);
   void slotShowContextMenu(const QPoint &point);
-  void slotItemDoubleClicked(const QModelIndex &index);
-  void slotItemSelectionChanged(void);
+  void slotSort(int column, Qt::SortOrder order);
+  void slotTextChanged(const QString &text);
+  void slotTimeout(void);
 
  signals:
-  void open(const QUrl &url);
   void bookmark(const QUrl &url,
 		const QIcon &icon,
 		const QString &title,
@@ -96,6 +95,7 @@ class dhistory: public QMainWindow
 		const QDateTime &lastModified);
   void createTab(const QUrl &url);
   void iconsChanged(void);
+  void open(const QUrl &url);
   void openInNewWindow(const QUrl &url);
 };
 

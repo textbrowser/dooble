@@ -36,9 +36,9 @@
 
 #include "ui_downloadWindowItem.h"
 
-class QNetworkReply;
 class QAuthenticator;
 class QNetworkAccessManager;
+class QNetworkReply;
 
 class ddownloadwindowitem: public QWidget
 {
@@ -47,64 +47,66 @@ class ddownloadwindowitem: public QWidget
  public:
   ddownloadwindowitem(QWidget *parent);
   ~ddownloadwindowitem();
-  int choice(void) const;
+  QDateTime dateTime(void) const;
+  QString fileName(void) const;
+  QString text(void) const;
+  QUrl url(void) const;
   bool abortedByUser(void) const;
   bool isDownloading(void) const;
-  QUrl url(void) const;
+  int choice(void) const;
   void abort(void);
-  void downloadUrl(const QUrl &url, const QString &fileName,
+  void downloadFile(const QString &srcFileName,
+		    const QString &dstFileName,
+		    const bool isNew, const QDateTime &dateTime);
+  void downloadHtml(const QString &html, const QString &dstFileName);
+  void downloadUrl(const QUrl &url,
+		   const QString &fileName,
 		   const bool isNew,
 		   const QDateTime &dateTime,
 		   const int choice);
-  void downloadFile(const QString &srcFileName, const QString &dstFileName,
-		    const bool isNew, const QDateTime &dateTime);
-  void downloadHtml(const QString &html, const QString &dstFileName);
-  QString text(void) const;
-  QString fileName(void) const;
-  QDateTime dateTime(void) const;
 
  private:
-  int m_choice;
-  bool m_paused;
-  bool m_abortedByUser;
-  QUrl m_url;
+  QDateTime m_dateTime;
+  QPointer<QNetworkAccessManager> m_networkAccessManager;
+  QString m_dstFileName;
+  QString m_html;
+  QString m_srcFileName;
   QTime m_lastTime;
+  QUrl m_url;
+  Ui_downloadWindowItem ui;
+  bool m_abortedByUser;
+  bool m_paused;
+  int m_choice;
+  qint64 m_lastSize;
   qint64 m_rate;
   qint64 m_total;
-  qint64 m_lastSize;
-  QString m_html;
-  QString m_dstFileName;
-  QString m_srcFileName;
-  QDateTime m_dateTime;
-  Ui_downloadWindowItem ui;
-  QPointer<QNetworkAccessManager> m_networkAccessManager;
-  void updateProgress(const qint64 done, const qint64 total);
   void downloadFinished(const qint64 fileSize);
   void init_ddownloadwindowitem(void);
+  void updateProgress(const qint64 done, const qint64 total);
 
  public slots:
   void slotSetIcons(void);
 
  private slots:
-  void slotComputeFileHash(void);
-  void slotError(QNetworkReply::NetworkError code);
-  void slotReadyRead(void);
   void slotAbortDownload(void);
-  void slotDownloadAgain(void);
-  void slotPauseDownload(void);
-  void slotMetaDataChanged(void);
-  void slotDownloadFinished(void);
+  void slotComputeFileHash(void);
   void slotDataTransferProgress(qint64 done, qint64 total);
+  void slotDownloadAgain(void);
+  void slotDownloadFinished(void);
+  void slotError(QNetworkReply::NetworkError code);
+  void slotMetaDataChanged(void);
+  void slotPauseDownload(void);
+  void slotReadyRead(void);
 
  signals:
+  void authenticationRequired(QNetworkReply *reply,
+			      QAuthenticator *authenticator);
+  void downloadFinished(void);
+  void proxyAuthenticationRequired(const QNetworkProxy &proxy,
+				   QAuthenticator *authenticator);
   void recordDownload(const QString &fileName,
 		      const QUrl &url,
 		      const QDateTime &dateTime);
-  void downloadFinished(void);
-  void authenticationRequired(QNetworkReply *reply,
-			      QAuthenticator *authenticator);
-  void proxyAuthenticationRequired(const QNetworkProxy &proxy,
-				   QAuthenticator *authenticator);
 };
 
 #endif

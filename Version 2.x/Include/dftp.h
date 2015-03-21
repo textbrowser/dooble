@@ -44,6 +44,21 @@ class dftpfileinfo
     m_size = 0;
   }
 
+  QDateTime lastModified(void) const
+  {
+    return m_lastModified;
+  }
+
+  QString name(void) const
+  {
+    return m_name;
+  }
+
+  QString path(void) const
+  {
+    return m_path;
+  }
+
   bool isDir(void) const
   {
     return m_isDir;
@@ -52,6 +67,11 @@ class dftpfileinfo
   bool isFile(void) const
   {
     return m_isFile;
+  }
+  
+  qint64 size(void) const
+  {
+    return m_size;
   }
 
   void setDir(const bool isDir)
@@ -74,43 +94,23 @@ class dftpfileinfo
     m_path = path;
   }
 
-  void setSize(const qint64 size)
-  {
-    m_size = size;
-  }
-
   void setLastModified(const QDateTime &lastModified)
   {
     m_lastModified = lastModified;
   }
 
-  qint64 size(void) const
+  void setSize(const qint64 size)
   {
-    return m_size;
-  }
-
-  QString name(void) const
-  {
-    return m_name;
-  }
-
-  QString path(void) const
-  {
-    return m_path;
-  }
-
-  QDateTime lastModified(void) const
-  {
-    return m_lastModified;
+    m_size = size;
   }
 
  private:
+  QDateTime m_lastModified;
+  QString m_name;
+  QString m_path;
   bool m_isDir;
   bool m_isFile;
   qint64 m_size;
-  QString m_name;
-  QString m_path;
-  QDateTime m_lastModified;
 };
 
 class dftp: public QObject
@@ -120,48 +120,48 @@ class dftp: public QObject
  private:
   enum CommandType
   {
-    UnknownCommand = -1,
     GetCommand = 0,
-    ListCommand = 1
+    ListCommand = 1,
+    UnknownCommand = -1
   };
 
  public:
   dftp(QObject *parent);
   ~dftp();
-  void get(const QUrl &url, const QString &command = QString(""));
+  QByteArray readAll(void);
+  QUrl url(void) const;
   void abort(void);
   void close(void);
   void fetchList(const QUrl &url);
-  QUrl url(void) const;
-  QByteArray readAll(void);
+  void get(const QUrl &url, const QString &command = QString(""));
 
  private:
+  CommandType m_commandType;
+  QByteArray m_commandBytes;
+  QPointer<QTcpSocket> m_commandSocket;
+  QPointer<QTcpSocket> m_downloadSocket;
+  QString m_command;
   QUrl m_url;
   qint64 m_downloadSize;
   qint64 m_totalBytesDownloaded;
-  QString m_command;
-  QByteArray m_commandBytes;
-  CommandType m_commandType;
-  QPointer<QTcpSocket> m_commandSocket;
-  QPointer<QTcpSocket> m_downloadSocket;
 
  private slots:
-  void slotSocketError(QAbstractSocket::SocketError error);
   void slotCommandReadyRead(void);
   void slotDownloadReadyRead(void);
   void slotDownloadSocketConnected(void);
+  void slotSocketError(QAbstractSocket::SocketError error);
 
  signals:
-  void finished(void);
-  void finished(const bool ok);
-  void listInfos(const QList<dftpfileinfo> &infos);
-  void readyRead(void);
-  void loadStarted(void);
+  void aboutToReceiveDirectoryContents(void);
   void directoryChanged(const QUrl &url);
   void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
-  void unsupportedContent(const QUrl &url);
+  void finished(const bool ok);
+  void finished(void);
+  void listInfos(const QList<dftpfileinfo> &infos);
+  void loadStarted(void);
+  void readyRead(void);
   void statusMessageReceived(const QString &message);
-  void aboutToReceiveDirectoryContents(void);
+  void unsupportedContent(const QUrl &url);
 };
 
 #endif

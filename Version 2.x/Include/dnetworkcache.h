@@ -43,26 +43,26 @@ class dnetworkcache: public QAbstractNetworkCache
  public:
   dnetworkcache(void);
   ~dnetworkcache();
-  qint64 cacheSize(void) const;
   QIODevice *data(const QUrl &url);
-  void insert(QIODevice *device);
-  QNetworkCacheMetaData metaData(const QUrl &url);
-  void populate(void);
   QIODevice *prepare(const QNetworkCacheMetaData &metaData);
-  void reencode(QProgressBar *progress);
+  QNetworkCacheMetaData metaData(const QUrl &url);
   bool remove(const QUrl &url);
+  qint64 cacheSize(void) const;
+  void insert(QIODevice *device);
+  void populate(void);
+  void reencode(QProgressBar *progress);
   void updateMetaData(const QNetworkCacheMetaData &metaData);
 
  private:
   QDir m_dir;
-  QFuture<void> m_future;
   QFuture<void> m_clearFuture;
+  QFuture<void> m_future;
   QTimer m_timer;
   mutable QReadWriteLock m_cacheSizeMutex;
   qint64 m_cacheSize;
   bool prepareEntry(const QNetworkCacheMetaData &metaData);
-  void clearTemp(void);
   void clearInThread(const QDir &dir);
+  void clearTemp(void);
   void computeCacheSizeAndCleanDirectory(const int cacheSizeDesired,
 					 const QString &path);
   void insertEntry(const QByteArray &data, const QUrl &url);

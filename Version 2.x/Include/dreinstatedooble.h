@@ -42,9 +42,9 @@ class dreinstatedooble: public QWidget
  public:
   dreinstatedooble(QWidget *parent);
   ~dreinstatedooble();
+  QAction *tabAction(void) const;
   bool isEmpty(void) const;
   void setTabAction(QAction *action);
-  QAction *tabAction(void) const;
 
  private:
   QPointer<QAction> m_action;

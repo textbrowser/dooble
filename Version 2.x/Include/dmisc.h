@@ -39,11 +39,11 @@ extern "C"
 #include "dcrypt.h"
 #include "dtypes.h"
 
-class QUrl;
 class QIcon;
-class QRect;
-class QProgressBar;
 class QNetworkProxy;
+class QProgressBar;
+class QRect;
+class QUrl;
 
 class dmisc
 {
@@ -51,85 +51,69 @@ class dmisc
   static QHash<int, int> s_httpStatusCodes;
   static dcrypt *s_crypt;
   static dcrypt *s_reencodeCrypt;
-  static int levenshteinDistance(const QString &str1,
-				 const QString &str);
+  static QByteArray daa(const QByteArray &byteArray, bool *ok);
+  static QByteArray daa(dcrypt *crypt,const QByteArray &byteArray,bool *ok);
+  static QByteArray etm(const QByteArray &byteArray,
+			const bool shouldEncode,
+			bool *ok);
+  static QByteArray hashedString(const QByteArray &byteArray, bool *ok);
+  static QByteArray passphraseHash(const QString &passphrase,
+				   const QByteArray &salt,
+				   const QString &hashType);
+  static QIcon iconForFileSuffix(const QString &suffix);
+  static QIcon iconForUrl(const QUrl &url);
+  static QNetworkProxy proxyByFunctionAndUrl
+    (const DoobleDownloadType::DoobleDownloadTypeEnum functionType,
+     const QUrl &url);
+  static QNetworkProxy proxyByUrl(const QUrl &url);
+  static QRect balancedGeometry(const QRect &geometry, QWidget *widget);
+  static QString elidedTitleText(const QString &text);
+  static QString fileNameFromUrl(const QUrl &url);
+  static QString findUniqueFileName(const QString &fileName,
+				    const QDir &path = QDir());
+  static QString formattedSize(const qint64 fileSize);
+  static QStringList cipherTypes(void);
+  static QStringList hashTypes(void);
   static QUrl correctedUrlPath(const QUrl &url);
+  static bool canDoobleOpenLocalFile(const QUrl &url);
   static bool compareByteArrays(const QByteArray &a, const QByteArray &b);
   static bool hostblocked(const QString &host);
-  static bool isKDE(void);
   static bool isGnome(void);
   static bool isHashTypeSupported(const QString &hashType);
-  static bool passphraseWasPrepared(void);
-  static bool canDoobleOpenLocalFile(const QUrl &url);
+  static bool isKDE(void);
   static bool isSchemeAcceptedByDooble(const QString &scheme);
   static bool passphraseWasAuthenticated(void);
-  static bool shouldIgnoreProxyFor
-    (const QString &host, const QString &type);
+  static bool passphraseWasPrepared(void);
+  static bool shouldIgnoreProxyFor(const QString &host, const QString &type);
+  static int levenshteinDistance(const QString &str1, const QString &str);
+  static qint64 faviconsSize(void);
   static void centerChildWithParent(QWidget *child, QWidget *parent);
-  static void createPreferencesDatabase(void);
-  static void initializeBlockedHosts(void);
-  static void logError(const QString &error);
-  static void destroyCrypt(void);
   static void clearFavicons(void);
-  static void saveIconForUrl(const QIcon &icon, const QUrl &url);
+  static void createPreferencesDatabase(void);
+  static void destroyCrypt(void);
+  static void destroyReencodeCrypt(void);
+  static void initializeBlockedHosts(void);
   static void initializeCrypt(void);
-  static void reencodeFavicons(QProgressBar *progress);
   static void launchApplication(const QString &program,
 				const QStringList &arguments);
+  static void logError(const QString &error);
   static void populateHttpStatusCodesContainer(void);
+  static void prepareProxyIgnoreLists(void);
+  static void prepareReencodeCrypt(void);
   static void purgeTemporaryData(void);
+  static void reencodeFavicons(QProgressBar *progress);
+  static void removeRestorationFiles(const QUuid &id = QUuid());
+  static void removeRestorationFiles(const QUuid &pid, const quint64 wid);
+  static void saveIconForUrl(const QIcon &icon, const QUrl &url);
+  static void setActionForFileSuffix(const QString &suffix,
+				     const QString &action);
   static void setCipherPassphrase(const QString &passphrase,
 				  const bool save,
 				  const QString &hashType,
 				  const QString &cipherType,
 				  const int iterationCount,
 				  const QByteArray &salt);
-  static void destroyReencodeCrypt(void);
-  static void prepareProxyIgnoreLists(void);
-  static void prepareReencodeCrypt(void);
-  static void removeRestorationFiles(const QUuid &id = QUuid());
-  static void removeRestorationFiles(const QUuid &pid, const quint64 wid);
-  static void setActionForFileSuffix(const QString &suffix,
-				     const QString &action);
   static void updateHttpStatusCodes(const QHash<int, int> &statusCodes);
-  static QIcon iconForUrl(const QUrl &url);
-  static QIcon iconForFileSuffix(const QString &suffix);
-  static QRect balancedGeometry(const QRect &geometry,
-				QWidget *widget);
-  static qint64 faviconsSize(void);
-  static QByteArray passphraseHash(const QString &passphrase,
-				   const QByteArray &salt,
-				   const QString &hashType);
-  static QString formattedSize(const qint64 fileSize);
-  static QString elidedTitleText(const QString &text);
-  static QString fileNameFromUrl(const QUrl &url);
-  static QString findUniqueFileName(const QString &fileName,
-				    const QDir &path = QDir());
-  static QByteArray hashedString(const QByteArray &byteArray,
-				 bool *ok);
-
-  /*
-  ** Decrypt after authentication (daa).
-  */
-
-  static QByteArray daa(dcrypt *crypt,
-			const QByteArray &byteArray,
-			bool *ok);
-  static QByteArray daa(const QByteArray &byteArray, bool *ok);
-
-  /*
-  ** Encrypt then mac (etm).
-  */
-
-  static QByteArray etm(const QByteArray &byteArray,
-			const bool shouldEncode,
-			bool *ok);
-  static QStringList hashTypes(void);
-  static QStringList cipherTypes(void);
-  static QNetworkProxy proxyByUrl(const QUrl &url);
-  static QNetworkProxy proxyByFunctionAndUrl
-    (const DoobleDownloadType::DoobleDownloadTypeEnum functionType,
-     const QUrl &url);
 
  private:
   dmisc(void);

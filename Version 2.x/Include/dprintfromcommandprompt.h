@@ -29,38 +29,21 @@
 #include <QPainter>
 #include <QPrinter>
 #include <QUrl>
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEnginePage>
-#else
-#include <QWebFrame>
-#include <QWebPage>
-#endif
 
-#ifdef DOOBLE_USE_WEBENGINE
 class dprintfromcommandprompt: public QWebEnginePage
-#else
-class dprintfromcommandprompt: public QWebPage
-#endif
 {
   Q_OBJECT
 
  public:
-#ifdef DOOBLE_USE_WEBENGINE
   dprintfromcommandprompt(const QUrl &url, const int index):QWebEnginePage()
-#else
-  dprintfromcommandprompt(const QUrl &url, const int index):QWebPage()
-#endif
   {
     connect(this,
 	    SIGNAL(loadFinished(bool)),
 	    this,
 	    SLOT(slotLoadFinished(bool)));
     m_index = index;
-#ifdef DOOBLE_USE_WEBENGINE
     load(url);
-#else
-    mainFrame()->load(url);
-#endif
   }
 
   static int s_count;
@@ -84,11 +67,6 @@ class dprintfromcommandprompt: public QWebPage
 	printer.setOutputFileName
 	  (QString("dooble_print_%1.pdf").arg(m_index));
 	printer.setOutputFormat(QPrinter::PdfFormat);
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-	mainFrame()->render(&painter);
-	mainFrame()->print(&printer);
-#endif
       }
 
     s_count -= 1;

@@ -28,15 +28,14 @@
 #ifndef _dnetworkaccessmanager_h_
 #define _dnetworkaccessmanager_h_
 
-#include <QPointer>
-#include <QNetworkCookie>
 #include <QNetworkAccessManager>
+#include <QNetworkCookie>
 #include <QNetworkReply>
+#include <QPointer>
 
 class QNetworkRequest;
-
-class dftp;
 class dexceptionswindow;
+class dftp;
 
 class dnetworkblockreply: public QNetworkReply
 {
@@ -54,9 +53,9 @@ class dnetworkblockreply: public QNetworkReply
 
   dnetworkblockreply(const dnetworkblockreply &reply):QNetworkReply(0)
   {
-    setUrl(reply.url());
-    setRequest(reply.request());
     setOperation(reply.operation());
+    setRequest(reply.request());
+    setUrl(reply.url());
   }
 
   ~dnetworkblockreply()
@@ -64,11 +63,11 @@ class dnetworkblockreply: public QNetworkReply
   }
 
   dnetworkblockreply(QObject *parent, const QNetworkRequest &request);
-  bool isSequential(void) const;
-  void load(void);
-  void abort(void);
-  qint64 bytesAvailable(void) const;
   QByteArray html(void) const;
+  bool isSequential(void) const;
+  qint64 bytesAvailable(void) const;
+  void abort(void);
+  void load(void);
 
  private:
   QByteArray m_content;
@@ -96,9 +95,9 @@ class dnetworkdirreply: public QNetworkReply
 
   dnetworkdirreply(const dnetworkdirreply &reply):QNetworkReply(0)
   {
-    setUrl(reply.url());
-    setRequest(reply.request());
     setOperation(reply.operation());
+    setRequest(reply.request());
+    setUrl(reply.url());
   }
 
   ~dnetworkdirreply()
@@ -107,9 +106,9 @@ class dnetworkdirreply: public QNetworkReply
 
   dnetworkdirreply(QObject *parent, const QUrl &url);
   bool isSequential(void) const;
-  void load(void);
-  void abort(void);
   qint64 bytesAvailable(void) const;
+  void abort(void);
+  void load(void);
 
  protected:
   qint64 readData(char *data, qint64 maxSize);
@@ -134,9 +133,9 @@ class dnetworkerrorreply: public QNetworkReply
 
   dnetworkerrorreply(const dnetworkerrorreply &reply):QNetworkReply(0)
   {
-    setUrl(reply.url());
-    setRequest(reply.request());
     setOperation(reply.operation());
+    setRequest(reply.request());
+    setUrl(reply.url());
   }
 
   ~dnetworkerrorreply()
@@ -144,11 +143,11 @@ class dnetworkerrorreply: public QNetworkReply
   }
 
   dnetworkerrorreply(QObject *parent, const QNetworkRequest &request);
-  bool isSequential(void) const;
-  void load(void);
-  void abort(void);
-  qint64 bytesAvailable(void) const;
   QByteArray html(void) const;
+  bool isSequential(void) const;
+  qint64 bytesAvailable(void) const;
+  void abort(void);
+  void load(void);
 
  private:
   QByteArray m_content;
@@ -176,9 +175,9 @@ class dnetworkftpreply: public QNetworkReply
 
   dnetworkftpreply(const dnetworkftpreply &reply):QNetworkReply(0)
   {
-    setUrl(reply.url());
-    setRequest(reply.request());
     setOperation(reply.operation());
+    setRequest(reply.request());
+    setUrl(reply.url());
   }
 
   ~dnetworkftpreply()
@@ -186,11 +185,11 @@ class dnetworkftpreply: public QNetworkReply
   }
 
   dnetworkftpreply(QObject *parent, const QUrl &url);
-  bool isSequential(void) const;
-  void load(void);
-  void abort(void);
-  qint64 bytesAvailable(void) const;
   QPointer<dftp> ftp(void) const;
+  bool isSequential(void) const;
+  qint64 bytesAvailable(void) const;
+  void abort(void);
+  void load(void);
 
  private:
   QPointer<dftp> m_ftp;
@@ -222,9 +221,9 @@ class dnetworksslerrorreply: public QNetworkReply
 
   dnetworksslerrorreply(const dnetworksslerrorreply &reply):QNetworkReply(0)
   {
-    setUrl(reply.url());
-    setRequest(reply.request());
     setOperation(reply.operation());
+    setRequest(reply.request());
+    setUrl(reply.url());
   }
 
   ~dnetworksslerrorreply()
@@ -232,11 +231,11 @@ class dnetworksslerrorreply: public QNetworkReply
   }
 
   dnetworksslerrorreply(QObject *parent, const QNetworkRequest &request);
-  bool isSequential(void) const;
-  void load(void);
-  void abort(void);
-  qint64 bytesAvailable(void) const;
   QByteArray html(void) const;
+  bool isSequential(void) const;
+  qint64 bytesAvailable(void) const;
+  void abort(void);
+  void load(void);
 
  private:
   QByteArray m_content;
@@ -266,29 +265,23 @@ class dnetworkaccessmanager: public QNetworkAccessManager
   void slotFinished(QNetworkReply *reply);
 
  signals:
-  void finished(dnetworkdirreply *reply);
-  void finished(dnetworkftpreply *reply);
-  void finished(dnetworkblockreply *reply);
-  void finished(dnetworkerrorreply *reply);
-  void finished(dnetworksslerrorreply *reply);
-  void doNotTrack(const QString &host,
-		  const QUrl &url,
-		  const QDateTime &dateTime);
-  void loadStarted(void);
-  void exceptionRaised(dexceptionswindow *window,
-		       const QUrl &url);
-  void loadErrorPage(const QUrl &url);
-  void loadImageRequest(const QString &host,
-			const QUrl &url,
-			const QDateTime &dateTime);
-  void blockThirdPartyHost(const QString &host,
-			   const QUrl &url,
+  void blockThirdPartyHost(const QString &host, const QUrl &url,
 			   const QDateTime &dateTime);
-  void suppressHttpReferrer(const QString &host,
-			    const QUrl &url,
+  void doNotTrack(const QString &host, const QUrl &url,
+		  const QDateTime &dateTime);
+  void exceptionRaised(dexceptionswindow *window, const QUrl &url);
+  void finished(dnetworkblockreply *reply);
+  void finished(dnetworkdirreply *reply);
+  void finished(dnetworkerrorreply *reply);
+  void finished(dnetworkftpreply *reply);
+  void finished(dnetworksslerrorreply *reply);
+  void loadErrorPage(const QUrl &url);
+  void loadImageRequest(const QString &host, const QUrl &url,
+			const QDateTime &dateTime);
+  void loadStarted(void);
+  void suppressHttpReferrer(const QString &host, const QUrl &url,
 			    const QDateTime &dateTime);
-  void urlRedirectionRequest(const QString &host,
-			     const QUrl &url,
+  void urlRedirectionRequest(const QString &host, const QUrl &url,
 			     const QDateTime &dateTime);
 };
 

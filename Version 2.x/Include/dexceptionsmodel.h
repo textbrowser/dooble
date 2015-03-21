@@ -39,21 +39,19 @@ class dexceptionsmodel: public QStandardItemModel
  public:
   dexceptionsmodel(const QString &tableName);
   ~dexceptionsmodel();
+  QStringList allowedHosts(void) const;
   bool allow(const QString &host);
   bool allowed(const QString &host) const;
   bool contains(const QString &host) const;
-  void add(const QString &host,
-	   const QUrl &url,
-	   const QDateTime &dateTime);
-  void populate(void) ;
-  void reencode(QProgressBar *progress);
+  void add(const QString &host, const QUrl &url, const QDateTime &dateTime);
   void deleteList(const QModelIndexList &list);
-  QStringList allowedHosts(void) const;
+  void populate(void);
+  void reencode(QProgressBar *progress);
 
  private:
   QString m_tableName;
-  void purge(void);
   void createExceptionsDatabase(void);
+  void purge(void);
 
  private slots:
   void slotCheckBoxItemChanged(QStandardItem *item);

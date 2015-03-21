@@ -45,8 +45,8 @@ class dpagesourcewindow: public QMainWindow
   void closeEvent(QCloseEvent *event);
 
  private:
-  QString fileName;
   QPalette m_findLineEditPalette;
+  QString fileName;
   Ui_pageSourceWindow ui;
   bool event(QEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -56,17 +56,17 @@ class dpagesourcewindow: public QMainWindow
 
  private slots:
   void slotClose(void);
-  void slotPrint(void);
   void slotHideFind(void);
-  void slotNextFind(void);
   void slotNextFind(const QString &text);
-  void slotShowFind(void);
-  void slotWrapLines(bool checked);
-  void slotSavePageAs(void);
-  void slotPreviousFind(void);
+  void slotNextFind(void);
   void slotPreviousFind(const QString &text);
+  void slotPreviousFind(void);
+  void slotPrint(void);
   void slotPrintPreview(void);
+  void slotSavePageAs(void);
+  void slotShowFind(void);
   void slotTextEditPrintPreview(QPrinter *printer);
+  void slotWrapLines(bool checked);
 };
 
 #endif

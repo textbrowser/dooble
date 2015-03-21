@@ -35,13 +35,8 @@
 #include "dfilesystemmodel.h"
 #include "ui_fileManagerForm.h"
 
-#ifdef DOOBLE_USE_WEBENGINE
-class QWebEnginePage;
-#else
-class QWebPage;
-class QWebFrame;
-#endif
 class QFileSystemModel;
+class QWebEnginePage;
 
 class dfilemanager: public QWidget
 {
@@ -50,56 +45,48 @@ class dfilemanager: public QWidget
  public:
   dfilemanager(QWidget *parent);
   ~dfilemanager();
+  QString html(void) const;
+  QString statusMessage(void) const;
+  QString title(void) const;
+  QUrl url(void) const;
+  QWebEnginePage *mainFrame(void) const;
   static QPointer<QFileSystemModel> treeModel;
   static QPointer<dfilesystemmodel> tableModel;
-  QUrl url(void) const;
   void load(const QUrl &url);
   void stop(void);
-  QString html(void) const;
-  QString title(void) const;
-  QString statusMessage(void) const;
-#ifdef DOOBLE_USE_WEBENGINE
-  QWebEnginePage *mainFrame(void) const;
-#else
-  QWebFrame *mainFrame(void) const;
-#endif
 
  private:
-  QUrl m_url;
   QString pathLabelPlainText;
-#ifdef DOOBLE_USE_WEBENGINE
+  QUrl m_url;
   QWebEnginePage *m_webPage;
-#else
-  QWebPage *m_webPage;
-#endif
   Ui_FileManagerForm ui;
+  void deleteSelections(QAbstractItemView *view);
+  void keyPressEvent(QKeyEvent *event);
   void menuAction(const QString &action, QAbstractItemView *view);
   void prepareLabel(const QUrl &url);
-  void keyPressEvent(QKeyEvent *event);
-  void deleteSelections(QAbstractItemView *view);
 
  private slots:
-  void slotLoad(const QUrl &url);
   void slotCloseEditor(QWidget *editor,
 		       QAbstractItemDelegate::EndEditHint hint);
-  void slotTreeClicked(const QModelIndex &index);
-  void slotLabelClicked(const QString &link);
-  void slotTableClicked(const QModelIndex &index);
-  void slotTreeMenuAction(void);
-  void slotTableMenuAction(void);
-  void slotDirectoryRemoved(const QModelIndex &index, int start, int end);
-  void slotSaveTableHeaderState(void);
-  void slotTableDirectoryLoaded(const QString &path);
   void slotCustomContextMenuRequest(const QPoint &pos);
+  void slotDirectoryRemoved(const QModelIndex &index, int start, int end);
+  void slotLabelClicked(const QString &link);
+  void slotLoad(const QUrl &url);
+  void slotSaveTableHeaderState(void);
+  void slotTableClicked(const QModelIndex &index);
+  void slotTableDirectoryLoaded(const QString &path);
+  void slotTableMenuAction(void);
+  void slotTreeClicked(const QModelIndex &index);
+  void slotTreeMenuAction(void);
 
  signals:
-  void loadPage(const QUrl &url);
-  void urlChanged(const QUrl &url);
   void iconChanged(void);
-  void loadStarted(void);
   void loadFinished(bool ok);
+  void loadPage(const QUrl &url);
   void loadProgress(int progress);
+  void loadStarted(void);
   void titleChanged(const QString &title);
+  void urlChanged(const QUrl &url);
 };
 
 #endif

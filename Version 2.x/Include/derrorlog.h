@@ -43,26 +43,26 @@ class derrorlog: public QMainWindow
   void logError(const QString &error);
 
  private:
-  QString m_lastError;
   QPalette m_findLineEditPalette;
+  QString m_lastError;
   Ui_errorLog ui;
   bool event(QEvent *event);
-  void saveState(void);
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void saveState(void);
 
  private slots:
-  void slotShow(void);
+  void slotAppendToLog(const QString &error);
   void slotClear(void);
   void slotClose(void);
   void slotHideFind(void);
-  void slotNextFind(void);
   void slotNextFind(const QString &text);
-  void slotSetIcons(void);
-  void slotShowFind(void);
-  void slotAppendToLog(const QString &error);
-  void slotPreviousFind(void);
+  void slotNextFind(void);
   void slotPreviousFind(const QString &text);
+  void slotPreviousFind(void);
+  void slotSetIcons(void);
+  void slotShow(void);
+  void slotShowFind(void);
 
  signals:
   void appendToLog(const QString &error);

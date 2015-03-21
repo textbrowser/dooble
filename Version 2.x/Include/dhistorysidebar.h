@@ -43,44 +43,44 @@ class dhistorysidebar: public QWidget
   QTimer *m_searchTimer;
   Ui_historySideBar ui;
   void hideEvent(QHideEvent *event);
+  void keyPressEvent(QKeyEvent *event);
   void saveState(void);
   void showEvent(QShowEvent *event);
   void textChanged(const QString &text);
-  void keyPressEvent(QKeyEvent *event);
 
  public slots:
   void slotSetIcons(void);
 
  private slots:
+  void slotBookmark(void);
+  void slotCopyUrl(void);
+  void slotDeletePage(void);
+  void slotItemDoubleClicked(const QModelIndex &index);
+  void slotModelAboutToBeReset(void);
+  void slotModelReset(void);
   void slotOpen(void);
-  void slotSort(int index);
+  void slotOpenInNewTab(void);
+  void slotOpenInNewWindow(void);
+  void slotPopulate(void);
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   void slotShare(void);
 #endif
-  void slotCopyUrl(void);
-  void slotBookmark(void);
-  void slotPopulate(void);
-  void slotDeletePage(void);
-  void slotModelReset(void);
-  void slotTextChanged(const QString &text);
-  void slotOpenInNewTab(void);
-  void slotOpenInNewWindow(void);
   void slotShowContextMenu(const QPoint &point);
-  void slotItemDoubleClicked(const QModelIndex &index);
+  void slotSort(int index);
+  void slotTextChanged(const QString &text);
   void slotVisibilityChanged(const bool state);
-  void slotModelAboutToBeReset(void);
 
  signals:
-  void open(const QUrl &url);
-  void closed(void);
   void bookmark(const QUrl &url,
 		const QIcon &icon,
 		const QString &title,
 		const QString &description,
 		const QDateTime &addDate,
 		const QDateTime &lastModified);
+  void closed(void);
   void createTab(const QUrl &url);
   void iconsChanged(void);
+  void open(const QUrl &url);
   void openInNewWindow(const QUrl &url);
   void visibilityChanged(const bool state);
 };

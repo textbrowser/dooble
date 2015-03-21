@@ -35,8 +35,8 @@
 using namespace simpleplugin;
 
 dplugintab::dplugintab(Extension *ext, QWidget *parent):QWidget(parent),
-							extWidget(0),
 							m_extension(ext),
+							extWidget(0),
 							sagent(0)
 {
   setLayout(new QHBoxLayout());
