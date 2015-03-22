@@ -32,9 +32,9 @@
 
 #include "ui_cookieWindow.h"
 
-class dcookies;
 class QStandardItem;
 class QStandardItemModel;
+class dcookies;
 
 class dcookiewindow: public QMainWindow
 {
@@ -44,32 +44,32 @@ class dcookiewindow: public QMainWindow
   dcookiewindow(dcookies *cookies, QWidget *parent = 0);
   ~dcookiewindow();
   void find(const QString &text);
-  void show(QWidget *parent);
   void populate(void);
+  void show(QWidget *parent);
 
  private:
-  dcookies *m_cookies;
-  Ui_cookieWindow ui;
   QStandardItemModel *m_model;
+  Ui_cookieWindow ui;
+  dcookies *m_cookies;
   bool event(QEvent *event);
-  void saveState(void);
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void saveState(void);
 
  public slots:
-  void slotSetIcons(void);
   void slotDeleteAll(void);
   void slotDomainsRemoved(const QStringList &list);
+  void slotSetIcons(void);
 
  private slots:
-  void slotSort(int column, Qt::SortOrder order);
-  void slotPopulate(void);
-  void slotCollapsed(const QModelIndex &index);
-  void slotTextChanged(const QString &text);
-  void slotDeleteCookie(void);
   void slotActionToggled(bool checked);
-  void slotCookiesChanged(void);
   void slotCheckBoxItemChanged(QStandardItem *item);
+  void slotCollapsed(const QModelIndex &index);
+  void slotCookiesChanged(void);
+  void slotDeleteCookie(void);
+  void slotPopulate(void);
+  void slotSort(int column, Qt::SortOrder order);
+  void slotTextChanged(const QString &text);
 
  signals:
   void iconsChanged(void);

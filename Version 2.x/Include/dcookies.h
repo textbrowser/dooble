@@ -28,15 +28,14 @@
 #ifndef _dcookies_h_
 #define _dcookies_h_
 
+#include <QFuture>
 #include <QHash>
 #include <QMutex>
-#include <QFuture>
 #include <QNetworkCookieJar>
 #include <QReadWriteLock>
 
-class QTimer;
 class QProgressBar;
-
+class QTimer;
 class dexceptionswindow;
 
 class dcookies: public QNetworkCookieJar
@@ -46,6 +45,10 @@ class dcookies: public QNetworkCookieJar
  public:
   dcookies(const bool arePrivate, QObject *parent = 0);
   ~dcookies();
+  QHash<QString, bool> favorites(void) const;
+  QList<QNetworkCookie> allCookies(void) const;
+  QList<QNetworkCookie> allCookiesAndFavorites(void) const;
+  QList<QNetworkCookie> cookiesForUrl(const QUrl &url) const;
   bool arePrivate(void) const;
   bool deleteCookie(const QNetworkCookie &cookie);
   bool insertCookie(const QNetworkCookie &cookie);
@@ -53,8 +56,8 @@ class dcookies: public QNetworkCookieJar
   bool setCookiesFromUrl(const QList<QNetworkCookie> &cookieList,
 			 const QUrl &url);
   bool updateCookie(const QNetworkCookie &cookie);
-  void allowDomain(const QString &domain,
-		   const bool allowed);
+  qint64 size(void) const;
+  void allowDomain(const QString &domain,const bool allowed);
   void clear(void);
   void populate(void);
   void reencode(QProgressBar *progress);
@@ -62,26 +65,21 @@ class dcookies: public QNetworkCookieJar
   void removeDomains(const QStringList &domains);
   void setAllCookies(const QList<QNetworkCookie> &cookies);
   void setFavorites(const QHash<QString, bool> &favorites);
-  qint64 size(void) const;
-  QHash<QString, bool> favorites(void) const;
-  QList<QNetworkCookie> allCookies(void) const;
-  QList<QNetworkCookie> allCookiesAndFavorites(void) const;
-  QList<QNetworkCookie> cookiesForUrl(const QUrl &url) const;
 
  private:
+  QFuture<void> m_future;
+  QHash<QString, bool> m_favorites;
   QMutex m_writeMutex;
   QReadWriteLock m_stopMutex;
   QTimer *m_timer;
   QTimer *m_writeTimer;
-  QFuture<void> m_future;
-  QHash<QString, bool> m_favorites;
   bool m_arePrivate;
   bool m_stopWriteThread;
   int computedTimerInterval(void) const;
-  void makeTimeToWrite(void);
   void createCookieDatabase(void);
   void deleteAndSaveCookies(const QList<QNetworkCookie> &all);
   void deleteAndSaveFavorites(void);
+  void makeTimeToWrite(void);
 
  public slots:
   void slotCookieTimerChanged(void);

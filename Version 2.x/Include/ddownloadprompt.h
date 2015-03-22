@@ -39,15 +39,15 @@ class ddownloadprompt: public QDialog
  public:
   enum DialogType
     {
-      SingleChoice,
-      MultipleChoice
+      MultipleChoice,
+      SingleChoice
     };
 
   Q_ENUMS(DialogType);
 
  public:
-  static const int SINGLE_CHOICE = 1;
   static const int MULTIPLE_CHOICE = 2;
+  static const int SINGLE_CHOICE = 1;
   ddownloadprompt(QWidget *parent, const QString &fileName,
 		  const DialogType dialogType);
   ~ddownloadprompt();
@@ -58,12 +58,12 @@ class ddownloadprompt: public QDialog
   Ui_downloadPromptDialog ui;
 
  private slots:
-  void slotRadioButtonToggled(bool state);
   void slotApplicationPulldownActivated(int index);
+  void slotRadioButtonToggled(bool state);
 
  signals:
-  void suffixesAdded(const QMap<QString, QString> &suffixes);
   void suffixUpdated(const QString &suffix, const QString &action);
+  void suffixesAdded(const QMap<QString, QString> &suffixes);
 };
 
 #endif

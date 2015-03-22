@@ -40,9 +40,9 @@ class ddesktopwidget: public QMdiArea
  public:
   ddesktopwidget(QWidget *parent);
   ~ddesktopwidget();
+  QAction *tabAction(void) const;
   void setTabAction(QAction *action);
   void showFileManagerWindow(const QUrl &url = QUrl());
-  QAction *tabAction(void) const;
 
  private:
   QPointer<QAction> m_action;
@@ -53,15 +53,15 @@ class ddesktopwidget: public QMdiArea
   void slotBackgroundImageChanged(void);
 
  private slots:
-  void slotOK(void);
-  void slotLaunchTerminal(void);
   void slotAddApplicationIcon(void);
-  void slotChangeDesktopBackground(void);
   void slotBackgroundDialogFinished(int result);
+  void slotChangeDesktopBackground(void);
+  void slotLaunchTerminal(void);
+  void slotOK(void);
 
  signals:
-  void viewEntered(void);
   void backgroundImageChanged(void);
+  void viewEntered(void);
 };
 
 #endif
