@@ -28,41 +28,24 @@
 #ifndef _dwebpage_h_
 #define _dwebpage_h_
 
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
-#else
-#include <QWebPage>
-#endif
 
 #include "dtypes.h"
 
 class QDateTime;
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-class QWebInspector;
-#endif
-
 class dexceptionswindow;
 class dnetworkaccessmanager;
 class dooble;
 
-#ifdef DOOBLE_USE_WEBENGINE
 class dwebpage: public QWebEnginePage
-#else
-class dwebpage: public QWebPage
-#endif
 {
   Q_OBJECT
 
  public:
   dwebpage(QObject *parent = 0);
   ~dwebpage();
-#ifdef DOOBLE_USE_WEBENGINE
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes(void) const;
-#else
-  QHash<QWebSettings::WebAttribute, bool> webAttributes(void) const;
-#endif
   bool areWebPluginsEnabled(void) const;
   bool isJavaScriptEnabled(void) const;
   bool isPrivateBrowsingEnabled(void) const;
@@ -71,51 +54,23 @@ class dwebpage: public QWebPage
 
  private:
   QUrl m_requestedUrl;
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  QWebInspector *m_webInspector;
-#endif
   bool m_isJavaScriptEnabled;
   dnetworkaccessmanager *m_networkAccessManager;
   QString userAgentForUrl(const QUrl &url) const;
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEnginePage *createWindow(WebWindowType type);
-#else
-  QWebPage *createWindow(WebWindowType type);
-#endif
-#ifdef DOOBLE_USE_WEBENGINE
   bool javaScriptConfirm(const QUrl &url, const QString &msg);
   bool javaScriptPrompt(const QUrl &url, const QString &msg,
 			const QString &defaultValue, QString *result);
-#else
-  bool acceptNavigationRequest(QWebFrame *frame,
-			       const QNetworkRequest &request,
-			       NavigationType type);
-  bool javaScriptConfirm(QWebFrame *frame, const QString &msg);
-  bool javaScriptPrompt(QWebFrame *frame, const QString &msg,
-			const QString &defaultValue, QString *result);
-#endif
   dooble *findDooble(void);
   void downloadFavicon(const QUrl &faviconUrl, const QUrl &url);
-#ifdef DOOBLE_USE_WEBENGINE
   void javaScriptAlert(const QUrl &url, const QString &msg);
-#else
-  void fetchFaviconPathFromFrame(QWebFrame *frame);
-  void javaScriptAlert(QWebFrame *frame, const QString &msg);
-#endif
 
  private slots:
   bool shouldInterruptJavaScript(void);
   void slotFinished(QNetworkReply *reply);
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  void slotFrameCreated(QWebFrame *frame);
-#endif
   void slotHttpToHttps(void);
   void slotIconDownloadFinished(void);
-#ifdef DOOBLE_USE_WEBENGINE
   void slotIconUrlChanged(const QUrl &url);
-#endif
   void slotInitialLayoutCompleted(void);
   void slotUrlChanged(const QUrl &url);
 

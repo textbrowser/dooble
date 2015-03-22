@@ -28,8 +28,8 @@
 #ifndef _dbookmarkswindow_h_
 #define _dbookmarkswindow_h_
 
-#include <QPointer>
 #include <QMainWindow>
+#include <QPointer>
 
 #include "ui_bookmarksWindow.h"
 
@@ -45,86 +45,83 @@ class dbookmarkswindow: public QMainWindow
  public:
   dbookmarkswindow(void);
   ~dbookmarkswindow();
+  QList<QAction *> actions(QWidget *parent) const;
   bool isBookmarked(const QUrl &url) const;
-  void show(QWidget *parent);
+  qint64 size(void) const;
+  void addFolder(void);
   void clear(void);
   void populate(void);
   void reencode(QProgressBar *progress);
-  void addFolder(void);
   void renameFolder(const QModelIndex &index);
-  qint64 size(void) const;
-  QList<QAction *> actions(QWidget *parent) const;
+  void show(QWidget *parent);
 
  private:
   QPointer<QWidget> m_parent;
-  Ui_bookmarksWindow ui;
   QStandardItemModel *m_urlModel;
-  QUrl titleChanged(void) const;
+  Ui_bookmarksWindow ui;
   QUrl locationChanged(void) const;
+  QUrl titleChanged(void) const;
   bool event(QEvent *event);
-  void purge(void);
-  void saveState(void);
   void closeEvent(QCloseEvent *event);
-  void saveFolder(QStandardItem *item);
-  void updateFolder(const QString &name,
-		    const qint64 oid);
-  void keyPressEvent(QKeyEvent *event);
-  void populateTable(void);
-  void populateTable(const qint64 folderOid);
-  void updateBookmark(const QUrl &originalUrl);
   void createBookmarksDatabase(void);
+  void keyPressEvent(QKeyEvent *event);
+  void populateTable(const qint64 folderOid);
+  void populateTable(void);
+  void purge(void);
+  void saveFolder(QStandardItem *item);
+  void saveState(void);
+  void updateBookmark(const QUrl &originalUrl);
+  void updateFolder(const QString &name, const qint64 oid);
 
  public slots:
-  void slotSetIcons(void);
   void slotAddBookmark(const QUrl &url,
 		       const QIcon &icon,
 		       const QString &title,
 		       const QString &description,
 		       const QDateTime &addDate,
 		       const QDateTime &lastModified);
+  void slotSetIcons(void);
 
  private slots:
+  void slotAboutToHideMenu(void);
+  void slotAboutToShowMenu(void);
+  void slotAddFolder(void);
+  void slotAddFolderOffParent(void);
+  void slotBookmarkDeleted(const int folderOid, const QUrl &url);
+  void slotBookmarkReceived(const QModelIndex &index);
+  void slotCopyUrl(void);
+  void slotDeleteBookmark(void);
+  void slotDeleteFolder(void);
+  void slotDescriptionChanged(void);
+  void slotExport(void);
+  void slotFolderDataChanged(const QModelIndex &topLeft,
+			     const QModelIndex &bottomRight);
+  void slotFolderSelected(const QModelIndex &index);
+  void slotImport(void);
+  void slotItemDoubleClicked(const QModelIndex &index);
+  void slotLocationChanged(void);
   void slotOpen(void);
+  void slotOpenInNewTab(void);
+  void slotOpenInNewWindow(void);
+  void slotParentDestroyed(void);
+  void slotRefresh(void);
   void slotSort(int column, Qt::SortOrder order);
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   void slotShare(void);
 #endif
-  void slotExport(void);
-  void slotImport(void);
-  void slotCopyUrl(void);
-  void slotRefresh(void);
-  void slotAddFolder(void);
-  void slotTextChanged(const QString &text);
-  void slotUrlSelected(const QItemSelection &selected,
-		       const QItemSelection &deselected);
-  void slotDeleteFolder(void);
-  void slotOpenInNewTab(void);
-  void slotTitleChanged(void);
-  void slotTitleChanged(const int folderOid,
-			const QUrl &url,
-			const QString &title);
-  void slotDeleteBookmark(void);
-  void slotFolderSelected(const QModelIndex &index);
-  void slotAboutToHideMenu(void);
-  void slotAboutToShowMenu(void);
-  void slotBookmarkDeleted(const int folderOid,
-			   const QUrl &url);
-  void slotLocationChanged(void);
-  void slotOpenInNewWindow(void);
-  void slotParentDestroyed(void);
   void slotShowContextMenu(const QPoint &point);
-  void slotBookmarkReceived(const QModelIndex &index);
-  void slotFolderDataChanged(const QModelIndex &topLeft,
-			     const QModelIndex &bottomRight);
-  void slotItemDoubleClicked(const QModelIndex &index);
-  void slotAddFolderOffParent(void);
-  void slotDescriptionChanged(void);
+  void slotTextChanged(const QString &text);
+  void slotTitleChanged(const int folderOid, const QUrl &url,
+                        const QString &title);
+  void slotTitleChanged(void);
+  void slotUrlSelected(const QItemSelection &selected,
+    const QItemSelection &deselected);
 
  signals:
-  void open(const QUrl &url);
   void changed(void);
   void createTab(const QUrl &url);
   void iconsChanged(void);
+  void open(const QUrl &url);
   void openInNewWindow(const QUrl &url);
 };
 

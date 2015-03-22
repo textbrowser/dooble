@@ -28,28 +28,20 @@
 #ifndef _dwebview_h_
 #define _dwebview_h_
 
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEngineView>
-#else
-#include <QWebView>
-#endif
 
-#ifdef DOOBLE_USE_WEBENGINE
 class dwebview: public QWebEngineView
-#else
-class dwebview: public QWebView
-#endif
 {
   Q_OBJECT
 
  public:
   dwebview(QWidget *parent);
-  bool checkAndClearPopup(void);
   Qt::MouseButton mouseButtonPressed(void) const;
+  bool checkAndClearPopup(void);
 
  private:
-  bool m_allowPopup;
   Qt::MouseButton m_lastButtonPressed;
+  bool m_allowPopup;
   void mousePressEvent(QMouseEvent *event);
 
  private slots:

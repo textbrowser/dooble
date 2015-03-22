@@ -35,9 +35,14 @@
 #include <QStackedWidget>
 #include <QWebEngineSettings>
 
+class QNetworkReply;
+class QPrinter;
+class QSslError;
+class QWebEngineHistoryItem;
+class QWebEnginePage;
+class QWebEngineView;
 class dcookies;
 class dcookiewindow;
-class dooble;
 class dexceptionswindow;
 class dfilemanager;
 class dnetworkblockreply;
@@ -45,16 +50,10 @@ class dnetworkdirreply;
 class dnetworkerrorreply;
 class dnetworkftpreply;
 class dnetworksslerrorreply;
+class dooble;
 class dwebpage;
 class dwebview;
 class dwebviewsimple;
-
-class QNetworkReply;
-class QPrinter;
-class QSslError;
-class QWebEngineHistoryItem;
-class QWebEnginePage;
-class QWebEngineView;
 
 class dview: public QStackedWidget
 {
@@ -145,8 +144,7 @@ class dview: public QStackedWidget
     (const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
 
  private slots:
-  void slotClearCookies(void);
-  void slotClearHistory(void);
+    void slotClearHistory(void);
   void slotCopyImageLocation(void);
   void slotCopyLinkLocation(const QUrl &url);
   void slotCopyLinkLocation(void);
@@ -189,6 +187,7 @@ class dview: public QStackedWidget
   void slotUrlChanged(const QUrl &url);
   void slotViewImage(void);
   void slotViewPageSource(void);
+void slotClearCookies(void);
 
  signals:
   void copyLink(const QUrl &url);
