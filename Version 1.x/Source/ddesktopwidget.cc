@@ -39,7 +39,7 @@
 #include <QMdiSubWindow>
 #include <QDesktopServices>
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
-#if QT_VERSION < 0x050000
+#if QT_VERSION < 0x050000 && defined(Q_WS_X11)
 #include <QX11EmbedContainer>
 #endif
 #endif
@@ -251,7 +251,7 @@ void ddesktopwidget::showFileManagerWindow(const QUrl &url)
 }
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
-#if QT_VERSION < 0x050000
+#if QT_VERSION < 0x050000 && defined(Q_WS_X11)
 void ddesktopwidget::slotLaunchTerminal(void)
 {
   QSettings settings(dooble::s_settings.value("iconSet").toString(),
