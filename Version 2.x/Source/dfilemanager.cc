@@ -25,24 +25,20 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDir>
-#include <QMenu>
-#include <QStack>
-#include <QSettings>
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-#include <QWebFrame>
-#endif
-#include <QTreeView>
-#include <QScrollBar>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QFileInfoList>
 #include <QContextMenuEvent>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileInfoList>
+#include <QMenu>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QSettings>
+#include <QStack>
+#include <QTreeView>
 
+#include "dfilemanager.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dfilemanager.h"
 
 QPointer<dfilesystemmodel> dfilemanager::tableModel = 0;
 QPointer<QFileSystemModel> dfilemanager::treeModel = 0;
@@ -50,11 +46,7 @@ QPointer<QFileSystemModel> dfilemanager::treeModel = 0;
 dfilemanager::dfilemanager(QWidget *parent):QWidget(parent)
 {
   ui.setupUi(this);
-#ifdef DOOBLE_USE_WEBENGINE
   m_webPage = new QWebEnginePage(this);
-#else
-  m_webPage = new QWebPage(this);
-#endif
 
   if(!qobject_cast<dview *> (parent))
     connect(this,
@@ -756,19 +748,11 @@ void dfilemanager::slotLoad(const QUrl &url)
   load(url);
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 QWebEnginePage *dfilemanager::mainFrame(void) const
 {
   m_webPage->setHtml(html());
   return m_webPage;
 }
-#else
-QWebFrame *dfilemanager::mainFrame(void) const
-{
-  m_webPage->mainFrame()->setHtml(html());
-  return m_webPage->mainFrame();
-}
-#endif
 
 QString dfilemanager::statusMessage(void) const
 {

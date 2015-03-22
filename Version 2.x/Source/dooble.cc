@@ -25,56 +25,41 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <string>
 #include <iostream>
+#include <string>
 
-#include <QDir>
-#include <QDebug>
-#include <QTimer>
-#include <QtCore>
+#include <QApplication>
+#include <QAuthenticator>
 #include <QBuffer>
+#include <QClipboard>
+#include <QCloseEvent>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QDesktopServices>
+#include <QDesktopWidget>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileIconProvider>
+#include <QLineEdit>
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QPaintEngine>
+#include <QPluginLoader>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 #include <QPrinter>
 #include <QProcess>
-#include <QLineEdit>
-#ifdef Q_OS_MAC
-#if QT_VERSION < 0x050000
-#include <QMacStyle>
-#endif
-#endif
 #include <QSettings>
 #include <QSplitter>
-#include <QSqlQuery>
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-#include <QWebFrame>
-#endif
-#include <QClipboard>
-#include <QTextCodec>
-#include <QCloseEvent>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QTranslator>
-#include <QApplication>
-#include <QPaintEngine>
-#include <QPrintDialog>
 #include <QSqlDatabase>
-#include <QPluginLoader>
-#include <QNetworkReply>
-#include <QWidgetAction>
-#include <QAuthenticator>
-#include <QDesktopWidget>
-#ifdef DOOBLE_USE_WEBENGINE
+#include <QSqlQuery>
+#include <QTextCodec>
+#include <QTimer>
+#include <QTranslator>
 #include <QWebEngineHistoryItem>
-#else
-#include <QWebHistoryItem>
-#endif
-#include <QDesktopServices>
-#include <QCoreApplication>
-#include <QFileIconProvider>
-#include <QPrintPreviewDialog>
-#if QT_VERSION >= 0x050000
+#include <QWidgetAction>
 #include <QtConcurrent>
-#endif
+#include <QtCore>
 
 extern "C"
 {
@@ -91,28 +76,28 @@ extern "C"
 #endif
 }
 
-#include "dmisc.h"
-#include "dooble.h"
-#include "dprintfromcommandprompt.h"
-#include "dhistory.h"
-#include "dwebpage.h"
-#include "dwebview.h"
-#include "derrorlog.h"
-#include "dplugintab.h"
-#include "dnetworkcache.h"
-#include "dbookmarkspopup.h"
-#include "dbookmarkswindow.h"
-#include "dclearcontainers.h"
-#include "dreinstatedooble.h"
-#include "dpagesourcewindow.h"
-#include "ui_passwordPrompt.h"
-#include "ui_passphrasePrompt.h"
-#include "dnetworkaccessmanager.h"
 #ifdef Q_OS_MAC
 #if QT_VERSION >= 0x050000
 #include "CocoaInitializer.h"
 #endif
 #endif
+#include "dbookmarkspopup.h"
+#include "dbookmarkswindow.h"
+#include "dclearcontainers.h"
+#include "derrorlog.h"
+#include "dhistory.h"
+#include "dmisc.h"
+#include "dnetworkaccessmanager.h"
+#include "dnetworkcache.h"
+#include "dooble.h"
+#include "dpagesourcewindow.h"
+#include "dplugintab.h"
+#include "dprintfromcommandprompt.h"
+#include "dreinstatedooble.h"
+#include "dwebpage.h"
+#include "dwebview.h"
+#include "ui_passphrasePrompt.h"
+#include "ui_passwordPrompt.h"
 
 using namespace simpleplugin;
 
@@ -510,31 +495,6 @@ int main(int argc, char *argv[])
   qapp.installTranslator(&myappTranslator);
 
   /*
-  ** Disable Web page icons.
-  */
-
-#ifdef DOOBLE_USE_WEBENGINE
-  
-#else
-  QWebSettings::globalSettings()->setIconDatabasePath("");
-
-  /*
-  ** Disable caches.
-  */
-
-  QWebSettings::globalSettings()->setMaximumPagesInCache(0);
-  QWebSettings::globalSettings()->setOfflineStorageDefaultQuota(0);
-  QWebSettings::globalSettings()->setOfflineWebApplicationCacheQuota(0);
-
-  /*
-  ** Other Web settings.
-  */
-
-  QWebSettings::globalSettings()->setWebGraphic
-    (QWebSettings::MissingImageGraphic, QPixmap());
-#endif
-
-  /*
   ** Remove old configuration settings.
   */
 
@@ -595,7 +555,6 @@ int main(int argc, char *argv[])
   ** gets populated!
   */
 
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled,
      dooble::s_settings.value("settingsWindow/javascriptEnabled",
@@ -632,84 +591,14 @@ int main(int argc, char *argv[])
      dooble::s_settings.
      value("settingsWindow/localContentMayAccessLocalContent",
 	   true).toBool());
-#else
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::DeveloperExtrasEnabled, true);
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::JavaEnabled,
-     dooble::s_settings.value("settingsWindow/javaEnabled", false).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::JavascriptEnabled,
-     dooble::s_settings.value("settingsWindow/javascriptEnabled",
-			      false).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::JavascriptCanOpenWindows,
-     dooble::s_settings.value("settingsWindow/javascriptEnabled",
-			      false).toBool() &&
-     dooble::s_settings.value("settingsWindow/javascriptAllowNewWindows",
-			      true).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::AutoLoadImages,
-     dooble::s_settings.value("settingsWindow/automaticallyLoadImages",
-			      true).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::PluginsEnabled,
-     dooble::s_settings.value("settingsWindow/enableWebPlugins",
-			      true).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::DnsPrefetchEnabled, true);
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::PrivateBrowsingEnabled,
-     dooble::s_settings.value("settingsWindow/privateBrowsing",
-			      true).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::SpatialNavigationEnabled,
-     dooble::s_settings.value("settingsWindow/spatialNavigation",
-			      false).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::XSSAuditingEnabled,
-     dooble::s_settings.value("settingsWindow/javascriptEnabled",
-			      false).toBool() &&
-     dooble::s_settings.value("settingsWindow/xssAuditingEnabled",
-			      false).toBool());
-#if QT_VERSION >= 0x050000
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::ScrollAnimatorEnabled, true);
-  QWebSettings::globalSettings()->setThirdPartyCookiePolicy
-    (QWebSettings::ThirdPartyCookiePolicy(dooble::s_settings.
-					  value("settingsWindow/"
-						"thirdPartyCookiesPolicy", 1).
-					  toInt()));
-#endif
-#if QT_VERSION >= 0x040800
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::HyperlinkAuditingEnabled,
-     dooble::s_settings.
-     value("settingsWindow/"
-	   "hyperlinkAuditing", false).toBool());
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::WebGLEnabled, dooble::s_settings.value("settingsWindow/"
-							  "webglEnabled",
-							  false).toBool());
-#endif
-  QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::LocalContentCanAccessFileUrls,
-     dooble::s_settings.
-     value("settingsWindow/localContentMayAccessLocalContent",
-	   true).toBool());
-#endif
 
   QString str(dooble::s_settings.value("settingsWindow/characterEncoding",
 				       "").toString().toLower());
   QTextCodec *codec = 0;
 
   if((codec = QTextCodec::codecForName(str.toUtf8().constData())))
-#ifdef DOOBLE_USE_WEBENGINE
     QWebEngineSettings::globalSettings()->
       setDefaultTextEncoding(codec->name());
-#else
-    QWebSettings::globalSettings()->setDefaultTextEncoding(codec->name());
-#endif
 
   QFont font;
 
@@ -732,17 +621,10 @@ int main(int argc, char *argv[])
 #endif
 
   font.setWeight(QFont::Normal);
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontFamily
     (QWebEngineSettings::StandardFont, font.family());
   QWebEngineSettings::globalSettings()->setFontSize
     (QWebEngineSettings::DefaultFontSize, font.pointSize());
-#else
-  QWebSettings::globalSettings()->setFontFamily
-    (QWebSettings::StandardFont, font.family());
-  QWebSettings::globalSettings()->setFontSize
-    (QWebSettings::DefaultFontSize, font.pointSize());
-#endif
 
   if(!font.fromString(dooble::s_settings.value
 		      ("settingsWindow/cursiveWebFont", "").
@@ -750,15 +632,9 @@ int main(int argc, char *argv[])
     font = QFont("Serif");
 
   font.setWeight(QFont::Normal);
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontFamily
     (QWebEngineSettings::CursiveFont,
      font.family());
-#else
-  QWebSettings::globalSettings()->setFontFamily
-    (QWebSettings::CursiveFont,
-     font.family());
-#endif
 
   if(!font.fromString(dooble::s_settings.value
 		      ("settingsWindow/fantasyWebFont", "").
@@ -766,15 +642,9 @@ int main(int argc, char *argv[])
     font = QFont("Serif");
 
   font.setWeight(QFont::Normal);
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontFamily
     (QWebEngineSettings::FantasyFont,
      font.family());
-#else
-  QWebSettings::globalSettings()->setFontFamily
-    (QWebSettings::FantasyFont,
-     font.family());
-#endif
 
   if(!font.fromString(dooble::s_settings.value
 		      ("settingsWindow/fixedWebFont", "").
@@ -797,21 +667,12 @@ int main(int argc, char *argv[])
 #endif
 
   font.setWeight(QFont::Normal);
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontFamily
     (QWebEngineSettings::FixedFont,
      font.family());
   QWebEngineSettings::globalSettings()->setFontSize
     (QWebEngineSettings::DefaultFixedFontSize,
      font.pointSize());
-#else
-  QWebSettings::globalSettings()->setFontFamily
-    (QWebSettings::FixedFont,
-     font.family());
-  QWebSettings::globalSettings()->setFontSize
-    (QWebSettings::DefaultFixedFontSize,
-     font.pointSize());
-#endif
 
   if(!font.fromString(dooble::s_settings.value
 		      ("settingsWindow/sansSerifWebFont", "").
@@ -825,15 +686,9 @@ int main(int argc, char *argv[])
 #endif
 
   font.setWeight(QFont::Normal);
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontFamily
     (QWebEngineSettings::SansSerifFont,
      font.family());
-#else
-  QWebSettings::globalSettings()->setFontFamily
-    (QWebSettings::SansSerifFont,
-     font.family());
-#endif
 
   if(!font.fromString(dooble::s_settings.value
 		      ("settingsWindow/serifWebFont", "").
@@ -847,15 +702,9 @@ int main(int argc, char *argv[])
 #endif
 
   font.setWeight(QFont::Normal);
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontFamily
     (QWebEngineSettings::SerifFont,
      font.family());
-#else
-  QWebSettings::globalSettings()->setFontFamily
-    (QWebSettings::SerifFont,
-     font.family());
-#endif
 
   int fontSize = dooble::s_settings.value("settingsWindow/minimumWebFontSize",
 					  12).toInt();
@@ -863,14 +712,8 @@ int main(int argc, char *argv[])
   if(fontSize <= 0)
     fontSize = 12;
 
-#ifdef DOOBLE_USE_WEBENGINE
   QWebEngineSettings::globalSettings()->setFontSize
     (QWebEngineSettings::MinimumFontSize, fontSize);
-#else
-  QWebSettings::globalSettings()->setFontSize
-    (QWebSettings::MinimumFontSize, fontSize);
-  QWebSettings::globalSettings()->setObjectCacheCapacities(0, 0, 0);
-#endif
 
   /*
   ** Initialize static members.
@@ -943,34 +786,6 @@ int main(int argc, char *argv[])
     (QObject::tr("Dooble Web Browser: "
 		 "SSL Errors Exceptions"));
   dooble::s_sslCiphersWindow = new dsslcipherswindow();
-#if DOOBLE_USE_WEBENGINE
-#else
-  dfilemanager::treeModel = new QFileSystemModel();
-
-  /*
-  ** Please create dfilemanager::tableModel before using
-  ** dooble::s_settingsWindow.
-  */
-
-  dfilemanager::tableModel = new dfilesystemmodel();
-  dfilemanager::treeModel->setReadOnly(false);
-  dfilemanager::tableModel->setReadOnly(false);
-  dfilemanager::treeModel->setFilter(QDir::Drives | QDir::AllDirs |
-				     QDir::System |
-				     QDir::NoDotAndDotDot);
-  dfilemanager::treeModel->setRootPath(QDir::rootPath());
-  dfilemanager::tableModel->setFilter(QDir::AllEntries |
-                                      QDir::System | QDir::NoDotAndDotDot);
-  dfilemanager::tableModel->setRootPath(QDir::rootPath());
-
-  if(dooble::s_settings.value("mainWindow/showHiddenFiles", true).toBool())
-    {
-      dfilemanager::treeModel->setFilter
-	(dfilemanager::treeModel->filter() | QDir::Hidden);
-      dfilemanager::tableModel->setFilter
-	(dfilemanager::tableModel->filter() | QDir::Hidden);
-    }
-#endif
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "applications");
@@ -1127,25 +942,11 @@ int main(int argc, char *argv[])
     }
   else
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	dooble::s_settings.value("settingsWindow/javascriptEnabled",
 				 false).toBool();
-#else
-      QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-      webAttributes[QWebSettings::JavascriptEnabled] =
-	dooble::s_settings.value("settingsWindow/javascriptEnabled",
-				 false).toBool();
-      webAttributes[QWebSettings::PluginsEnabled] =
-	dooble::s_settings.value("settingsWindow/enableWebPlugins",
-				 true).toBool();
-      webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	dooble::s_settings.value("settingsWindow/privateBrowsing",
-				 true).toBool();
-#endif
       Q_UNUSED(new dooble(url.toString(QUrl::StripTrailingSlash), 0, 0,
 			  webAttributes));
     }
@@ -1253,14 +1054,12 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #else
   ui.menuToolButton->setMenu(new QMenu(this));
 #endif
-#ifdef DOOBLE_USE_WEBENGINE
   ui.action_Web_Inspector->setEnabled(false);
   ui.action_Web_Inspector->setToolTip(tr("WebEngine does not yet "
 					 "support Web inspectors."));
   ui.actionShow_Hidden_Files->setEnabled(false);
   ui.actionShow_Hidden_Files->setToolTip(tr("WebEngine supports the browsing "
 					    "of directories."));
-#endif
   connect(ui.action_Hide_Menubar,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -1905,12 +1704,8 @@ dooble::dooble
 
 dooble::dooble
 (const QUrl &url, dooble *d, dcookies *cookies,
-#ifdef DOOBLE_USE_WEBENGINE
  const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes):
   QMainWindow()
-#else
- const QHash<QWebSettings::WebAttribute, bool> &webAttributes):QMainWindow()
-#endif
 {
   m_parentWindow = 0;
   init_dooble(false);
@@ -2097,25 +1892,11 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 
       if(url.isValid())
 	{
-#ifdef DOOBLE_USE_WEBENGINE
 	  QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
 	  webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	    s_settings.value("settingsWindow/javascriptEnabled",
 			     false).toBool();
-#else
-	  QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-	  webAttributes[QWebSettings::JavascriptEnabled] =
-	    s_settings.value("settingsWindow/javascriptEnabled",
-			     false).toBool();
-	  webAttributes[QWebSettings::PluginsEnabled] =
-	    s_settings.value("settingsWindow/enableWebPlugins",
-			     true).toBool();
-	  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	    s_settings.value("settingsWindow/privateBrowsing",
-			     true).toBool();
-#endif
 	  newTab
 	    (QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash)), 0,
 	     webAttributes);
@@ -2345,7 +2126,6 @@ void dooble::newTabInit(dview *p)
 	  SLOT(slotIconChanged(void)));
   connect(p, SIGNAL(loadStarted(void)), this,
 	  SLOT(slotLoadStarted(void)));
-#ifdef DOOBLE_USE_WEBENGINE
   connect
     (p,
      SIGNAL(openLinkInNewTab(const QUrl &, dcookies *,
@@ -2364,26 +2144,6 @@ void dooble::newTabInit(dview *p)
      SLOT(slotOpenLinkInNewWindow(const QUrl &, dcookies *,
 				  const QHash<QWebEngineSettings::WebAttribute,
 				  bool> &)));
-#else
-  connect
-    (p,
-     SIGNAL(openLinkInNewTab(const QUrl &, dcookies *,
-			     const QHash<QWebSettings::WebAttribute,
-			     bool> &)),
-     this,
-     SLOT(slotOpenLinkInNewTab(const QUrl &, dcookies *,
-			       const QHash<QWebSettings::WebAttribute,
-			       bool> &)));
-  connect
-    (p,
-     SIGNAL(openLinkInNewWindow(const QUrl &, dcookies *,
-				const QHash<QWebSettings::WebAttribute,
-				bool> &)),
-     this,
-     SLOT(slotOpenLinkInNewWindow(const QUrl &, dcookies *,
-				  const QHash<QWebSettings::WebAttribute,
-				  bool> &)));
-#endif
   connect(p, SIGNAL(copyLink(const QUrl &)), this,
 	  SLOT(slotCopyLink(const QUrl &)));
   connect(p, SIGNAL(saveUrl(const QUrl &, const int)), this,
@@ -2394,25 +2154,10 @@ void dooble::newTabInit(dview *p)
 	  SLOT(slotLoadPage(const QUrl &)));
   connect(p, SIGNAL(ipAddressChanged(const QString &)), this,
 	  SLOT(slotIpAddressChanged(const QString &)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(p, SIGNAL(printRequested(QWebFrame *)), this,
-	  SLOT(slotPrintRequested(QWebFrame *)));
-#endif
-#ifdef DOOBLE_USE_WEBENGINE
   connect(p->page(),
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
 	  SLOT(slotLinkHovered(const QString &)));
-#else
-  connect(p->page(),
-	  SIGNAL(linkHovered(const QString &, const QString &,
-			     const QString &)),
-	  this,
-	  SLOT(slotLinkHovered(const QString &, const QString &,
-			       const QString &)));
-#endif
-#ifdef DOOBLE_USE_WEBENGINE
   connect(p->page(),
 	  SIGNAL(authenticationRequired(const QUrl &, QAuthenticator *)),
 	  this,
@@ -2425,38 +2170,10 @@ void dooble::newTabInit(dview *p)
 	  SLOT(slotProxyAuthenticationRequired(const QUrl &,
 					       QAuthenticator *,
 					       const QString &)));
-#else
-  connect(p->page()->networkAccessManager(),
-	  SIGNAL(authenticationRequired(QNetworkReply *, QAuthenticator *)),
-	  this,
-	  SLOT(slotAuthenticationRequired(QNetworkReply *, QAuthenticator *)));
-  connect(p->page()->networkAccessManager(),
-	  SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &,
-					     QAuthenticator *)),
-	  this,
-	  SLOT(slotProxyAuthenticationRequired(const QNetworkProxy &,
-					       QAuthenticator *)));
-#endif
   connect(p->page(), SIGNAL(windowCloseRequested(void)),
 	  this, SLOT(slotCloseWindow(void)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(p->page(), SIGNAL(menuBarVisibilityChangeRequested(bool)),
-	  this, SLOT(slotHideMenuBar(void)));
-  connect(p->page(), SIGNAL(statusBarVisibilityChangeRequested(bool)),
-	  this, SLOT(slotHideStatusBar(void)));
-  connect(p->page(), SIGNAL(toolBarVisibilityChangeRequested(bool)),
-	  this, SLOT(slotHideToolBar(void)));
-  connect(p->page(), SIGNAL(printRequested(QWebFrame *)),
-	  this, SLOT(slotPrintRequested(QWebFrame *)));
-#endif
   connect(p->page(), SIGNAL(geometryChangeRequested(const QRect &)),
 	  this, SLOT(slotGeometryChangeRequested(const QRect &)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  connect(p->page(), SIGNAL(repaintRequested(const QRect &)),
-	  this, SLOT(slotRepaintRequested(const QRect &)));
-#endif
   connect(this,
 	  SIGNAL(clearHistory(void)),
 	  p,
@@ -2485,21 +2202,12 @@ void dooble::newTabInit(dview *p)
 	  this,
 	  SLOT(slotExceptionRaised(dexceptionswindow *,
 				   const QUrl &)));
-#ifdef DOOBLE_USE_WEBENGINE
   connect(p->page(),
 	  SIGNAL(exceptionRaised(dexceptionswindow *,
 				 const QUrl &)),
 	  this,
 	  SLOT(slotExceptionRaised(dexceptionswindow *,
 				   const QUrl &)));
-#else
-  connect(p->page()->networkAccessManager(),
-	  SIGNAL(exceptionRaised(dexceptionswindow *,
-				 const QUrl &)),
-	  this,
-	  SLOT(slotExceptionRaised(dexceptionswindow *,
-				   const QUrl &)));
-#endif
   connect(s_clearContainersWindow,
 	  SIGNAL(clearCookies(void)),
 	  p,
@@ -2591,11 +2299,7 @@ dview *dooble::newTab(dview *p)
 
 dview *dooble::newTab
 (const QUrl &url, dcookies *cookies,
-#ifdef DOOBLE_USE_WEBENGINE
  const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes)
-#else
- const QHash<QWebSettings::WebAttribute, bool> &webAttributes)
-#endif
 {
   dview *p = new dview(this, QByteArray(), cookies, webAttributes);
 
@@ -2627,29 +2331,13 @@ dview *dooble::newTab
 dview *dooble::newTab(const QByteArray &history)
 {
   QUrl url;
-#ifdef DOOBLE_USE_WEBENGINE
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
-#else
-  QHash<QWebSettings::WebAttribute, bool> webAttributes;
-#endif
   QIcon icon;
   dview *p = 0;
 
-#ifdef DOOBLE_USE_WEBENGINE
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
-#else
-  webAttributes[QWebSettings::JavascriptEnabled] =
-    s_settings.value("settingsWindow/javascriptEnabled",
-		     false).toBool();
-  webAttributes[QWebSettings::PluginsEnabled] =
-    s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
-  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-    s_settings.value("settingsWindow/privateBrowsing",
-		     true).toBool();
-#endif
   p = new dview(this, history, 0, webAttributes);
   newTabInit(p);
 
@@ -2860,43 +2548,18 @@ void dooble::loadPage(const QUrl &url)
 	p->tabAction()->setIcon(dmisc::iconForUrl(QUrl()));
 
       p->load(l_url);
-#ifdef DOOBLE_USE_WEBENGINE
       ui.zoomMenu->setEnabled(true);
       ui.actionSelect_All_Content->setEnabled(true);
       ui.actionFind->setEnabled(true);
       ui.findFrame->setVisible(showFindFrame);
-#else
-      ui.zoomMenu->setEnabled(!p->isDir() && !p->isFtp());
-      ui.actionSelect_All_Content->setEnabled(!p->isDir() && !p->isFtp());
-      ui.actionFind->setEnabled(!p->isDir() && !p->isFtp());
-
-      if(p->isDir() || p->isFtp())
-	ui.findFrame->setVisible(false);
-      else
-	ui.findFrame->setVisible(showFindFrame);
-#endif
     }
   else
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	s_settings.value("settingsWindow/javascriptEnabled",
 			 false).toBool();
-#else
-      QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-      webAttributes[QWebSettings::JavascriptEnabled] =
-	s_settings.value("settingsWindow/javascriptEnabled",
-			 false).toBool();
-      webAttributes[QWebSettings::PluginsEnabled] =
-	s_settings.value("settingsWindow/enableWebPlugins",
-			 true).toBool();
-      webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	s_settings.value("settingsWindow/privateBrowsing",
-			 true).toBool();
-#endif
       newTab(l_url, 0, webAttributes);
       ui.tabWidget->update();
     }
@@ -2961,25 +2624,11 @@ void dooble::slotNewTab(void)
   else
     url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
-#ifdef DOOBLE_USE_WEBENGINE
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
-#else
-  QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-  webAttributes[QWebSettings::JavascriptEnabled] =
-    s_settings.value("settingsWindow/javascriptEnabled",
-		     false).toBool();
-  webAttributes[QWebSettings::PluginsEnabled] =
-    s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
-  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-    s_settings.value("settingsWindow/privateBrowsing",
-		     true).toBool();
-#endif
   p = newTab(url, 0, webAttributes);
 
   if(p)
@@ -3013,25 +2662,11 @@ void dooble::slotNewWindow(void)
     launchDooble(url);
   else
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	s_settings.value("settingsWindow/javascriptEnabled",
 			 false).toBool();
-#else
-      QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-      webAttributes[QWebSettings::JavascriptEnabled] =
-	s_settings.value("settingsWindow/javascriptEnabled",
-			 false).toBool();
-      webAttributes[QWebSettings::PluginsEnabled] =
-	s_settings.value("settingsWindow/enableWebPlugins",
-			 true).toBool();
-      webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	s_settings.value("settingsWindow/privateBrowsing",
-			 true).toBool();
-#endif
       Q_UNUSED(new dooble(url, this, 0, webAttributes));
     }
 }
@@ -3559,14 +3194,7 @@ void dooble::slotLoadProgress(int progress)
 
   if(p && p == qobject_cast<dview *> (ui.tabWidget->currentWidget()))
     {
-#ifdef DOOBLE_USE_WEBENGINE
       sb.progressBar->setMaximum(100);
-#else
-      if(p->isDir() || p->isFtp())
-	sb.progressBar->setMaximum(0);
-      else
-	sb.progressBar->setMaximum(100);
-#endif
       sb.progressBar->setVisible(!p->isLoaded());
       ui.reloadStopWidget->setCurrentIndex(p->isLoaded() ? 1 : 0);
       ui.stopToolButton->setEnabled(!p->isLoaded());
@@ -3704,11 +3332,7 @@ void dooble::slotLoadFinished(bool ok)
 	  action->setText(title);
 	}
 
-#ifdef DOOBLE_USE_WEBENGINE
       QWebEngineHistoryItem item(p->page()->history()->currentItem());
-#else
-      QWebHistoryItem item(p->page()->history()->currentItem());
-#endif
 
       if(item.isValid() &&
 	 dmisc::isSchemeAcceptedByDooble(item.url().scheme()))
@@ -3740,11 +3364,7 @@ void dooble::slotLoadFinished(bool ok)
 
 	      list.append(item.url());
 	      list.append(item.title());
-#ifdef DOOBLE_USE_WEBENGINE
 	      list.append(bytes);
-#else
-	      list.append(item.userData());
-#endif
 	      list.append(bytes);
 	      list.append(dmisc::passphraseWasAuthenticated() ? 0 : 1);
 	      list.append
@@ -3899,11 +3519,7 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
     {
       ui.backToolButton->menu()->clear();
 
-#ifdef DOOBLE_USE_WEBENGINE
       QList<QWebEngineHistoryItem> list(p->backItems(MAX_HISTORY_ITEMS));
-#else
-      QList<QWebHistoryItem> list(p->backItems(MAX_HISTORY_ITEMS));
-#endif
 
       for(int i = list.size() - 1; i >= 0; i--)
 	{
@@ -3940,11 +3556,7 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
     {
       ui.forwardToolButton->menu()->clear();
 
-#ifdef DOOBLE_USE_WEBENGINE
       QList<QWebEngineHistoryItem> list(p->forwardItems(MAX_HISTORY_ITEMS));
-#else
-      QList<QWebHistoryItem> list(p->forwardItems(MAX_HISTORY_ITEMS));
-#endif
 
       for(int i = 0; i < list.size(); i++)
 	{
@@ -4014,25 +3626,11 @@ void dooble::slotGoHome(void)
 
 	  if(!urlFound)
 	    {
-#ifdef DOOBLE_USE_WEBENGINE
 	      QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
 	      webAttributes[QWebEngineSettings::JavascriptEnabled] =
 		s_settings.value("settingsWindow/javascriptEnabled",
 				 false).toBool();
-#else
-	      QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-	      webAttributes[QWebSettings::JavascriptEnabled] =
-		s_settings.value("settingsWindow/javascriptEnabled",
-				 false).toBool();
-	      webAttributes[QWebSettings::PluginsEnabled] =
-		s_settings.value("settingsWindow/enableWebPlugins",
-				 true).toBool();
-	      webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-		s_settings.value("settingsWindow/privateBrowsing",
-				 true).toBool();
-#endif
 	      newTab(url, 0, webAttributes);
 	      ui.tabWidget->update();
 	    }
@@ -4062,28 +3660,12 @@ void dooble::slotGoHome(void)
 
       if(!urlFound)
 	{
-#ifdef DOOBLE_USE_WEBENGINE
 	  QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
-#else
-	  QHash<QWebSettings::WebAttribute, bool> webAttributes;
-#endif
 	  dview *p = 0;
 
-#ifdef DOOBLE_USE_WEBENGINE
 	  webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	    s_settings.value("settingsWindow/javascriptEnabled",
 			     false).toBool();
-#else
-	  webAttributes[QWebSettings::JavascriptEnabled] =
-	    s_settings.value("settingsWindow/javascriptEnabled",
-			     false).toBool();
-	  webAttributes[QWebSettings::PluginsEnabled] =
-	    s_settings.value("settingsWindow/enableWebPlugins",
-			     true).toBool();
-	  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	    s_settings.value("settingsWindow/privateBrowsing",
-			     true).toBool();
-#endif
 	  p = newTab(url, 0, webAttributes);
 	  ui.tabWidget->update();
 	  ui.tabWidget->setCurrentWidget(p);
@@ -4351,11 +3933,8 @@ void dooble::slotGoToBackHistoryItem(void)
       if(p)
 	{
 	  int index = action->data().toInt();
-#ifdef DOOBLE_USE_WEBENGINE
 	  QList<QWebEngineHistoryItem> list(p->backItems(MAX_HISTORY_ITEMS));
-#else
-	  QList<QWebHistoryItem> list(p->backItems(MAX_HISTORY_ITEMS));
-#endif
+
 	  if(index >= 0 && index < list.size())
 	    p->goToItem(list.at(index));
 	}
@@ -4373,12 +3952,9 @@ void dooble::slotGoToForwardHistoryItem(void)
       if(p)
 	{
 	  int index = action->data().toInt();
-#ifdef DOOBLE_USE_WEBENGINE
 	  QList<QWebEngineHistoryItem> list
 	    (p->forwardItems(MAX_HISTORY_ITEMS));
-#else
-	  QList<QWebHistoryItem> list(p->forwardItems(MAX_HISTORY_ITEMS));
-#endif
+
 	  if(index >= 0 && index < list.size())
 	    p->goToItem(list.at(index));
 	}
@@ -4436,14 +4012,7 @@ void dooble::slotLoadStarted(void)
       if(p->tabAction())
 	p->tabAction()->setIcon(dmisc::iconForUrl(QUrl()));
 
-#ifdef DOOBLE_USE_WEBENGINE
       sb.progressBar->setMaximum(100);
-#else
-      if(p->isDir() || p->isFtp())
-	sb.progressBar->setMaximum(0);
-      else
-	sb.progressBar->setMaximum(100);
-#endif
       sb.statusLabel->clear();
       sb.progressBar->setValue(0);
       sb.progressBar->setVisible(true);
@@ -4583,35 +4152,17 @@ void dooble::slotCopyLink(const QUrl &url)
 
 void dooble::slotOpenLinkInNewTab(const QUrl &url)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
-#else
-  QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-  webAttributes[QWebSettings::JavascriptEnabled] =
-    s_settings.value("settingsWindow/javascriptEnabled",
-		     false).toBool();
-  webAttributes[QWebSettings::PluginsEnabled] =
-    s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
-  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-    s_settings.value("settingsWindow/privateBrowsing",
-		     true).toBool();
-#endif
   slotOpenLinkInNewTab(url, 0, webAttributes);
 }
 
 void dooble::slotOpenLinkInNewTab
 (const QUrl &url, dcookies *cookies,
-#ifdef DOOBLE_USE_WEBENGINE
  const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes)
-#else
- const QHash<QWebSettings::WebAttribute, bool> &webAttributes)
-#endif
 {
   dview *p = newTab(url, cookies, webAttributes);
 
@@ -4627,35 +4178,17 @@ void dooble::slotOpenLinkInNewTab
 
 void dooble::slotOpenLinkInNewWindow(const QUrl &url)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
-#else
-  QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-  webAttributes[QWebSettings::JavascriptEnabled] =
-    s_settings.value("settingsWindow/javascriptEnabled",
-		     false).toBool();
-  webAttributes[QWebSettings::PluginsEnabled] =
-    s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
-  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-    s_settings.value("settingsWindow/privateBrowsing",
-		     true).toBool();
-#endif
   slotOpenLinkInNewWindow(url, 0, webAttributes);
 }
 
 void dooble::slotOpenLinkInNewWindow
 (const QUrl &url, dcookies *cookies,
-#ifdef DOOBLE_USE_WEBENGINE
  const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes)
-#else
- const QHash<QWebSettings::WebAttribute, bool> &webAttributes)
-#endif
 {
   if(s_settings.value("settingsWindow/openUserWindowsInNewProcesses",
 		      false).toBool())
@@ -4689,19 +4222,8 @@ void dooble::slotOpenPageInNewWindow(const int index)
     }
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dooble::slotLinkHovered(const QString &link)
-#else
-void dooble::slotLinkHovered(const QString &link, const QString &title,
-			     const QString &textContent)
-#endif
 {
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  Q_UNUSED(title);
-  Q_UNUSED(textContent);
-#endif
-
   if(link.isEmpty())
     sb.statusLabel->clear();
   else
@@ -4958,27 +4480,9 @@ void dooble::slotShowFind(void)
 {
   if(qobject_cast<dview *> (ui.tabWidget->currentWidget()))
     {
-#ifdef DOOBLE_USE_WEBENGINE
       showFindFrame = true;
       ui.findFrame->setVisible(true);
-#else
-      dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
-
-      if(p && (p->isDir() || p->isFtp()))
-	ui.findFrame->setVisible(false);
-      else
-	{
-	  showFindFrame = true;
-	  ui.findFrame->setVisible(true);
-	}
-#endif
-
-#ifdef DOOBLE_USE_WEBENGINE
       ui.actionFind->setEnabled(true);
-#else
-      if(p)
-	ui.actionFind->setEnabled(!p->isDir() && !p->isFtp());
-#endif
 
       if(ui.tabWidget->isVisible())
 	{
@@ -5011,34 +4515,19 @@ void dooble::slotHideFind(void)
 
 void dooble::slotFindNext(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   if(ui.matchCaseCheckBox->isChecked())
     find(QWebEnginePage::FindCaseSensitively);
   else
     find(QWebEnginePage::FindCaseSensitively);
-#else
-  if(ui.matchCaseCheckBox->isChecked())
-    find(QWebPage::FindWrapsAroundDocument | QWebPage::FindCaseSensitively);
-  else
-    find(QWebPage::FindWrapsAroundDocument);
-#endif
 }
 
 void dooble::slotFindPrevious(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   if(ui.matchCaseCheckBox->isChecked())
     find(QWebEnginePage::FindFlag(QWebEnginePage::FindBackward |
 				  QWebEnginePage::FindCaseSensitively));
   else
     find(QWebEnginePage::FindBackward);
-#else
-  if(ui.matchCaseCheckBox->isChecked())
-    find(QWebPage::FindBackward | QWebPage::FindWrapsAroundDocument |
-	 QWebPage::FindCaseSensitively);
-  else
-    find(QWebPage::FindBackward | QWebPage::FindWrapsAroundDocument);
-#endif
 }
 
 void dooble::slotFind(void)
@@ -5047,51 +4536,20 @@ void dooble::slotFind(void)
 
   if(p)
     {
-#ifdef DOOBLE_USE_WEBENGINE
       p->page()->findText(QString(""), 0);
 
       if(ui.highlightAllCheckBox->isChecked())
 	find(0);
-#else
-      p->page()->findText(QString(""), QWebPage::HighlightAllOccurrences);
-
-      if(ui.highlightAllCheckBox->isChecked())
-	find(QWebPage::HighlightAllOccurrences);
-#endif
     }
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dooble::find(QWebEnginePage::FindFlags flags)
-#else
-void dooble::find(QWebPage::FindFlags flags)
-#endif
 {
   QString text(ui.findLineEdit->text());
   dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
 
-#ifdef DOOBLE_USE_WEBENGINE
   if(p)
     p->page()->findText(text, flags);
-#else
-  static QPalette lineEditPalette(ui.findLineEdit->palette());
-
-  if(p && !p->page()->findText(text, flags))
-    {
-      if(!text.isEmpty())
-	{
-	  QColor color(240, 128, 128); // Light Coral
-	  QPalette palette(ui.findLineEdit->palette());
-
-	  palette.setColor(ui.findLineEdit->backgroundRole(), color);
-	  ui.findLineEdit->setPalette(palette);
-	}
-      else
-	ui.findLineEdit->setPalette(lineEditPalette);
-    }
-  else if(p)
-    ui.findLineEdit->setPalette(lineEditPalette);
-#endif
 }
 
 void dooble::keyPressEvent(QKeyEvent *event)
@@ -5217,28 +4675,10 @@ void dooble::slotPrint(void)
     }
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dooble::slotPrintRequested(QWebEnginePage *frame)
 {
   Q_UNUSED(frame);
 }
-#else
-void dooble::slotPrintRequested(QWebFrame *frame)
-{
-  if(frame)
-    {
-      QPrinter printer;
-      QPrintDialog printDialog(&printer, this);
-
-#ifdef Q_OS_MAC
-      printDialog.setAttribute(Qt::WA_MacMetalStyle, false);
-#endif
-
-      if(printDialog.exec() == QDialog::Accepted)
-	frame->print(&printer);
-    }
-}
-#endif
 
 void dooble::slotPrintPreview(void)
 {
@@ -5600,13 +5040,8 @@ void dooble::slotCopy(void)
     {
       dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
 
-#ifdef DOOBLE_USE_WEBENGINE
       if(p)
 	p->page()->triggerAction(QWebEnginePage::Copy);
-#else
-      if(p && !p->isDir() && !p->isFtp())
-	p->page()->triggerAction(QWebPage::Copy);
-#endif
     }
 }
 
@@ -5620,13 +5055,8 @@ void dooble::slotPaste(void)
     {
       dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
 
-#ifdef DOOBLE_USE_WEBENGINE
       if(p)
 	p->page()->triggerAction(QWebEnginePage::Paste);
-#else
-      if(p && !p->isDir() && !p->isFtp())
-	p->page()->triggerAction(QWebPage::Paste);
-#endif
     }
 }
 
@@ -5635,30 +5065,16 @@ void dooble::slotSelectAllContent(void)
   dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
 
   if(p)
-#ifdef DOOBLE_USE_WEBENGINE
     p->page()->triggerAction(QWebEnginePage::SelectAll);
-#else
-    p->page()->triggerAction(QWebPage::SelectAll);
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dooble::slotAuthenticationRequired(const QUrl &url,
 					QAuthenticator *authenticator)
-#else
-void dooble::slotAuthenticationRequired(QNetworkReply *reply,
-					QAuthenticator *authenticator)
-#endif
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(url);
 
   if(!authenticator)
     return;
-#else
-  if(!reply || !authenticator)
-    return;
-#endif
 
   QDialog dialog(this);
   Ui_passwordDialog ui_p;
@@ -5673,11 +5089,7 @@ void dooble::slotAuthenticationRequired(QNetworkReply *reply,
   ui_p.messageLabel->setText
     (QString(tr("The site %1 is requesting "
 		"credentials.").
-#ifdef DOOBLE_USE_WEBENGINE
 	     arg(url.
-#else
-	     arg(reply->url().
-#endif
 		 toString(QUrl::RemovePath | QUrl::RemovePassword |
 			  QUrl::RemoveQuery | QUrl::StripTrailingSlash))));
 
@@ -5721,24 +5133,15 @@ void dooble::slotAuthenticationRequired(QNetworkReply *reply,
     }
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dooble::slotProxyAuthenticationRequired(const QUrl &url,
 					     QAuthenticator *authenticator,
 					     const QString &proxyHost)
-#else
-void dooble::slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
-					     QAuthenticator *authenticator)
-#endif
 {
   if(!authenticator)
     return;
 
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(url);
   Q_UNUSED(proxyHost);
-#else
-  Q_UNUSED(proxy);
-#endif
   QDialog dialog(this);
   Ui_passwordDialog ui_p;
 
@@ -5750,16 +5153,9 @@ void dooble::slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
 #endif
 #endif
   ui_p.messageLabel->setText
-#ifdef DOOBLE_USE_WEBENGINE
     (QString(tr("The proxy %1 is requesting "
 		"credentials.").
 	     arg(proxyHost)));
-#else
-    (QString(tr("The proxy %1:%2 is requesting "
-		"credentials.").
-	     arg(proxy.hostName()).
-	     arg(proxy.port())));
-#endif
 
   QSettings settings(s_settings.value("iconSet").toString(),
 		     QSettings::IniFormat);
@@ -6207,23 +5603,11 @@ void dooble::prepareWidgetsBasedOnView(dview *p)
   if(!p)
     return;
 
-#ifdef DOOBLE_USE_WEBENGINE
   ui.zoomMenu->setEnabled(true);
   ui.actionFind->setEnabled(true);
   ui.actionSelect_All_Content->setEnabled(true);
   ui.actionShow_Hidden_Files->setEnabled(false);
   ui.findFrame->setVisible(showFindFrame);
-#else
-  ui.zoomMenu->setEnabled(!p->isDir() && !p->isFtp());
-  ui.actionFind->setEnabled(!p->isDir() && !p->isFtp());
-  ui.actionSelect_All_Content->setEnabled(!p->isDir() && !p->isFtp());
-  ui.actionShow_Hidden_Files->setEnabled(p->isDir());
-
-  if(p->isDir() || p->isFtp())
-    ui.findFrame->setVisible(false);
-  else
-    ui.findFrame->setVisible(showFindFrame);
-#endif
 }
 
 void dooble::slotLocationSplitterMoved(int pos, int index)
@@ -6702,14 +6086,7 @@ void dooble::slotOpenIrcChannel(void)
 
 void dooble::slotRepaintRequested(const QRect &dirtyRect)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(dirtyRect);
-#else
-  dwebpage *p = qobject_cast<dwebpage *> (sender());
-
-  if(p && p->mainFrame())
-    p->mainFrame()->render(0, dirtyRect);
-#endif
 }
 
 void dooble::slotShowFavoritesToolBar(bool checked)
@@ -6823,28 +6200,12 @@ void dooble::slotFavoritesToolButtonClicked(void)
 
   if(toolButton)
     {
-#ifdef DOOBLE_USE_WEBENGINE
       QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
-#else
-      QHash<QWebSettings::WebAttribute, bool> webAttributes;
-#endif
       dview *p = 0;
 
-#ifdef DOOBLE_USE_WEBENGINE
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	s_settings.value("settingsWindow/javascriptEnabled",
 			 false).toBool();
-#else
-      webAttributes[QWebSettings::JavascriptEnabled] =
-	s_settings.value("settingsWindow/javascriptEnabled",
-			 false).toBool();
-      webAttributes[QWebSettings::PluginsEnabled] =
-	s_settings.value("settingsWindow/enableWebPlugins",
-			 true).toBool();
-      webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	s_settings.value("settingsWindow/privateBrowsing",
-			 true).toBool();
-#endif
       p = newTab(toolButton->property("url").toUrl(), 0, webAttributes);
 
       if(p)
@@ -6945,25 +6306,11 @@ void dooble::slotOpenUrlsFromDrop(const QList<QUrl> &list)
       }
     else
       {
-#ifdef DOOBLE_USE_WEBENGINE
 	QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
 
 	webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	  s_settings.value("settingsWindow/javascriptEnabled",
 			   false).toBool();
-#else
-	QHash<QWebSettings::WebAttribute, bool> webAttributes;
-
-	webAttributes[QWebSettings::JavascriptEnabled] =
-	  s_settings.value("settingsWindow/javascriptEnabled",
-			   false).toBool();
-	webAttributes[QWebSettings::PluginsEnabled] =
-	  s_settings.value("settingsWindow/enableWebPlugins",
-			   true).toBool();
-	webAttributes[QWebSettings::PrivateBrowsingEnabled] =
-	  s_settings.value("settingsWindow/privateBrowsing",
-			   true).toBool();
-#endif
 	newTab(list.at(i), 0, webAttributes);
       }
 
@@ -8131,7 +7478,6 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     SLOT(slotIconChanged(void)));
   disconnect(p, SIGNAL(loadStarted(void)), d,
 	     SLOT(slotLoadStarted(void)));
-#ifdef DOOBLE_USE_WEBENGINE
   disconnect
     (p,
      SIGNAL(openLinkInNewTab(const QUrl &, dcookies *,
@@ -8151,26 +7497,6 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
      (slotOpenLinkInNewWindow(const QUrl &, dcookies *,
 			      const QHash<QWebEngineSettings::WebAttribute,
 					  bool> &)));
-#else
-  disconnect
-    (p,
-     SIGNAL(openLinkInNewTab(const QUrl &, dcookies *,
-			     const QHash<QWebSettings::WebAttribute,
-			     bool> &)),
-     d,
-     SLOT(slotOpenLinkInNewTab(const QUrl &, dcookies *,
-			       const QHash<QWebSettings::WebAttribute,
-			       bool> &)));
-  disconnect
-    (p,
-     SIGNAL(openLinkInNewWindow(const QUrl &, dcookies *,
-				const QHash<QWebSettings::WebAttribute,
-				bool> &)),
-     d,
-     SLOT(slotOpenLinkInNewWindow(const QUrl &, dcookies *,
-				  const QHash<QWebSettings::WebAttribute,
-				  bool> &)));
-#endif
   disconnect(p, SIGNAL(copyLink(const QUrl &)), d,
 	     SLOT(slotCopyLink(const QUrl &)));
   disconnect(p, SIGNAL(saveUrl(const QUrl &, const int)), d,
@@ -8182,25 +7508,10 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     SLOT(slotLoadPage(const QUrl &)));
   disconnect(p, SIGNAL(ipAddressChanged(const QString &)), d,
 	     SLOT(slotIpAddressChanged(const QString &)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  disconnect(p, SIGNAL(printRequested(QWebFrame *)), d,
-	     SLOT(slotPrintRequested(QWebFrame *)));
-#endif
-#ifdef DOOBLE_USE_WEBENGINE
   connect(p->page(),
 	  SIGNAL(linkHovered(const QString &)),
 	  d,
 	  SLOT(slotLinkHovered(const QString &)));
-#else
-  disconnect(p->page(),
-	     SIGNAL(linkHovered(const QString &, const QString &,
-				const QString &)),
-	     d,
-	     SLOT(slotLinkHovered(const QString &, const QString &,
-				  const QString &)));
-#endif
-#ifdef DOOBLE_USE_WEBENGINE
   disconnect
     (p->page(),
      SIGNAL(authenticationRequired(const QUrl &, QAuthenticator *)),
@@ -8214,39 +7525,10 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     SLOT(slotProxyAuthenticationRequired(const QUrl &,
 						  QAuthenticator *,
 						  const QString &)));
-#else
-  disconnect
-    (p->page()->networkAccessManager(),
-     SIGNAL(authenticationRequired(QNetworkReply *, QAuthenticator *)),
-     d,
-     SLOT(slotAuthenticationRequired(QNetworkReply *, QAuthenticator *)));
-  disconnect(p->page()->networkAccessManager(),
-	     SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &,
-						QAuthenticator *)),
-	     d,
-	     SLOT(slotProxyAuthenticationRequired(const QNetworkProxy &,
-						  QAuthenticator *)));
-#endif
   disconnect(p->page(), SIGNAL(windowCloseRequested(void)),
 	     d, SLOT(slotCloseWindow(void)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  disconnect(p->page(), SIGNAL(menuBarVisibilityChangeRequested(bool)),
-	     d, SLOT(slotHideMenuBar(void)));
-  disconnect(p->page(), SIGNAL(statusBarVisibilityChangeRequested(bool)),
-	     d, SLOT(slotHideStatusBar(void)));
-  disconnect(p->page(), SIGNAL(toolBarVisibilityChangeRequested(bool)),
-	     d, SLOT(slotHideToolBar(void)));
-  disconnect(p->page(), SIGNAL(printRequested(QWebFrame *)),
-	     d, SLOT(slotPrintRequested(QWebFrame *)));
-#endif
   disconnect(p->page(), SIGNAL(geometryChangeRequested(const QRect &)),
 	     d, SLOT(slotGeometryChangeRequested(const QRect &)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  disconnect(p->page(), SIGNAL(repaintRequested(const QRect &)),
-	     d, SLOT(slotRepaintRequested(const QRect &)));
-#endif
   disconnect(d,
 	     SIGNAL(clearHistory(void)),
 	     p,
@@ -8275,21 +7557,12 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     d,
 	     SLOT(slotExceptionRaised(dexceptionswindow *,
 				      const QUrl &)));
-#ifdef DOOBLE_USE_WEBENGINE
   disconnect(p->page(),
 	     SIGNAL(exceptionRaised(dexceptionswindow *,
 				    const QUrl &)),
 	     d,
 	     SLOT(slotExceptionRaised(dexceptionswindow *,
 				      const QUrl &)));
-#else
-  disconnect(p->page()->networkAccessManager(),
-	     SIGNAL(exceptionRaised(dexceptionswindow *,
-				    const QUrl &)),
-	     d,
-	     SLOT(slotExceptionRaised(dexceptionswindow *,
-				      const QUrl &)));
-#endif
   disconnect(s_clearContainersWindow,
 	     SIGNAL(clearCookies(void)),
 	     p,

@@ -30,15 +30,8 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QUrl>
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEngineHistory>
 #include <QWebEnginePage>
-#else
-#include <QWebElementCollection>
-#include <QWebFrame>
-#include <QWebHistory>
-#include <QWebInspector>
-#endif
 
 #include "dexceptionswindow.h"
 #include "dmisc.h"
@@ -47,59 +40,22 @@
 #include "dwebpage.h"
 #include "dwebview.h"
 
-#ifdef DOOBLE_USE_WEBENGINE
 dwebpage::dwebpage(QObject *parent):QWebEnginePage(parent)
-#else
-dwebpage::dwebpage(QObject *parent):QWebPage(parent)
-#endif
 {
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  m_webInspector = new QWebInspector();
-  m_webInspector->setPage(this);
-#endif
   m_isJavaScriptEnabled = dooble::s_settings.
     value("settingsWindow/javascriptEnabled", false).
     toBool();
   m_networkAccessManager = new dnetworkaccessmanager(this);
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  setNetworkAccessManager(m_networkAccessManager);
-  history()->setMaximumItemCount(dooble::MAX_HISTORY_ITEMS);
-#endif
 
   /*
   ** The initialLayoutCompleted() signal is not emitted by every
   ** page.
   */
 
-#ifdef DOOBLE_USE_WEBENGINE
   connect(this,
 	  SIGNAL(iconUrlChanged(const QUrl &)),
 	  this,
 	  SLOT(slotIconUrlChanged(const QUrl &)));
-#else
-  connect(mainFrame(),
-	  SIGNAL(initialLayoutCompleted(void)),
-	  this,
-	  SLOT(slotHttpToHttps(void)));
-  connect(mainFrame(),
-	  SIGNAL(initialLayoutCompleted(void)),
-	  this,
-	  SLOT(slotInitialLayoutCompleted(void)));
-  connect(mainFrame(),
-	  SIGNAL(loadFinished(bool)),
-	  this,
-	  SLOT(slotHttpToHttps(void)));
-  connect(mainFrame(),
-	  SIGNAL(urlChanged(const QUrl &)),
-	  this,
-	  SLOT(slotUrlChanged(const QUrl &)));
-  connect(this,
-	  SIGNAL(frameCreated(QWebFrame *)),
-	  this,
-	  SLOT(slotFrameCreated(QWebFrame *)));
-#endif
   connect(this,
 	  SIGNAL(popupRequested(const QString &,
 				const QUrl &,
@@ -168,34 +124,18 @@ dwebpage::dwebpage(QObject *parent):QWebPage(parent)
 	  SIGNAL(finished(QNetworkReply *)),
 	  this,
 	  SLOT(slotFinished(QNetworkReply *)));
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  setForwardUnsupportedContent(true);
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dwebpage::javaScriptAlert(const QUrl &url, const QString &msg)
-#else
-void dwebpage::javaScriptAlert(QWebFrame *frame, const QString &msg)
-#endif
 {
   /*
   ** The default implementation of javaScriptAlert() causes
   ** segmentation faults when viewing certain Web pages.
   */
 
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(url);
-#else
-  Q_UNUSED(frame);
-#endif
 
-#ifdef DOOBLE_USE_WEBENGINE
   if(settings()->testAttribute(QWebEngineSettings::JavascriptEnabled) &&
-#else
-  if(settings()->testAttribute(QWebSettings::JavascriptEnabled) &&
-#endif
      !dooble::s_settings.value("settingsWindow/javascriptAcceptAlerts",
 			       true).toBool())
     return;
@@ -233,23 +173,11 @@ void dwebpage::javaScriptAlert(QWebFrame *frame, const QString &msg)
   mb->show();
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 bool dwebpage::javaScriptConfirm(const QUrl &url, const QString &msg)
-#else
-bool dwebpage::javaScriptConfirm(QWebFrame *frame, const QString &msg)
-#endif
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(url);
-#else
-  Q_UNUSED(frame);
-#endif
 
-#ifdef DOOBLE_USE_WEBENGINE
   if(settings()->testAttribute(QWebEngineSettings::JavascriptEnabled) &&
-#else
-  if(settings()->testAttribute(QWebSettings::JavascriptEnabled) &&
-#endif
      !dooble::s_settings.value("settingsWindow/javascriptAcceptConfirmations",
 			       true).toBool())
     return false;
@@ -299,36 +227,17 @@ bool dwebpage::javaScriptConfirm(QWebFrame *frame, const QString &msg)
 
 bool dwebpage::shouldInterruptJavaScript(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
   return javaScriptConfirm
     (QUrl(), tr("Dooble has detected a stagnant JavaScript "
 		"script. Should the script be terminated?"));
-#else
-  return javaScriptConfirm
-    (0, tr("Dooble has detected a stagnant JavaScript "
-	   "script. Should the script be terminated?"));
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 bool dwebpage::javaScriptPrompt(const QUrl &url, const QString &msg,
 				const QString &defaultValue, QString *result)
-#else
-bool dwebpage::javaScriptPrompt(QWebFrame *frame, const QString &msg,
-				const QString &defaultValue, QString *result)
-#endif
 {
-#ifdef DOOBLE_USE_WEBENGINE
   Q_UNUSED(url);
-#else
-  Q_UNUSED(frame);
-#endif
 
-#ifdef DOOBLE_USE_WEBENGINE
   if(settings()->testAttribute(QWebEngineSettings::JavascriptEnabled) &&
-#else
-  if(settings()->testAttribute(QWebSettings::JavascriptEnabled) &&
-#endif
      !dooble::s_settings.value("settingsWindow/javascriptAcceptPrompts",
 			       true).toBool())
     return false;
@@ -387,11 +296,7 @@ bool dwebpage::javaScriptPrompt(QWebFrame *frame, const QString &msg,
     }
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 QWebEnginePage *dwebpage::createWindow(WebWindowType type)
-#else
-QWebPage *dwebpage::createWindow(WebWindowType type)
-#endif
 {
   Q_UNUSED(type);
 
@@ -401,61 +306,17 @@ QWebPage *dwebpage::createWindow(WebWindowType type)
       ** This is a difficult situation. The createWindow() method
       ** doesn't provide us with a URL.
       */
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-      bool allowPopup = false;
-      dwebview *v = qobject_cast<dwebview *> (parent());
-
-      if(v)
-	allowPopup = v->checkAndClearPopup();
-
-      if(!allowPopup)
-	{
-	  if(!dooble::s_popupsWindow->allowed(m_requestedUrl.host()))
-	    {
-	      emit exceptionRaised(dooble::s_popupsWindow, m_requestedUrl);
-	      emit popupRequested(m_requestedUrl.host(),
-				  m_requestedUrl,
-				  QDateTime::currentDateTime());
-	      return 0;
-	    }
-	  else
-	    allowPopup = true;
-	}
-
-      if(!allowPopup)
-	return 0;
-#endif
     }
 
-#ifdef DOOBLE_USE_WEBENGINE
   if(settings()->testAttribute(QWebEngineSettings::JavascriptEnabled))
-#else
-  if(settings()->testAttribute(QWebSettings::JavascriptEnabled))
-#endif
     {
       if(dooble::s_settings.value("settingsWindow/javascriptAllowNewWindows",
 				  true).toBool())
 	{
 	  dooble *dbl = 0;
-#ifdef DOOBLE_USE_WEBENGINE
+
 	  if(type == QWebEnginePage::WebBrowserTab)
 	    dbl = findDooble();
-#else
-	  dwebview *webview = qobject_cast<dwebview *> (parent());
-	  Qt::MouseButton lastMouseButton = Qt::NoButton;
-
-	  if(webview)
-	    lastMouseButton = webview->mouseButtonPressed();
-
-	  if(lastMouseButton == Qt::MiddleButton || (lastMouseButton !=
-						     Qt::NoButton &&
-						     QApplication::
-						     keyboardModifiers() ==
-						     Qt::ControlModifier))
-	    dbl = findDooble();
-#endif
 
 	  if(!dbl)
 	    dbl = new dooble(true, findDooble());
@@ -496,11 +357,7 @@ dooble *dwebpage::findDooble(void)
 
 QString dwebpage::userAgentForUrl(const QUrl &url) const
 {
-#ifdef DOOBLE_USE_WEBENGINE
   QString agent("");
-#else
-  QString agent(QWebPage::userAgentForUrl(url));
-#endif
 
   if(url.host().contains("gmail.com") ||
      url.host().contains("google.com"))
@@ -531,124 +388,7 @@ QString dwebpage::userAgentForUrl(const QUrl &url) const
 
 dwebpage::~dwebpage()
 {
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  m_webInspector->deleteLater();
-#endif
 }
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-bool dwebpage::acceptNavigationRequest(QWebFrame *frame,
-				       const QNetworkRequest &request,
-				       NavigationType type)
-{
-  if(!request.url().isValid())
-    return false;
-
-  m_requestedUrl = request.url();
-
-  if(frame == mainFrame())
-    {
-      if(dooble::s_javaScriptExceptionsWindow->allowed(m_requestedUrl.host()))
-	/*
-	** Exempt hosts must be prevented from executing JavaScript.
-	*/
-
-	settings()->setAttribute(QWebSettings::JavascriptEnabled, false);
-      else
-	settings()->setAttribute
-	  (QWebSettings::JavascriptEnabled, isJavaScriptEnabled());
-    }
-
-  if(m_requestedUrl.scheme().toLower().trimmed() == "data")
-    /*
-    ** Disable the page's network access manager.
-    */
-
-    networkAccessManager()->setNetworkAccessible
-      (QNetworkAccessManager::NotAccessible);
-
-  if(type == QWebPage::NavigationTypeLinkClicked)
-    {
-      if(!frame)
-	{
-	  if(dooble::s_settings.value("settingsWindow/openInNewTab",
-				      true).toBool())
-	    {
-	      dooble *dbl = findDooble();
-
-	      if(!dbl)
-		dbl = new dooble(false, 0);
-
-	      dview *v = dbl->newTab
-		(m_requestedUrl,
-		 qobject_cast<dcookies *> (m_networkAccessManager->
-					   cookieJar()),
-		 webAttributes());
-
-	      if(dooble::s_settings.value("settingsWindow/proceedToNewTab",
-					  true).toBool())
-		dbl->setCurrentPage(v);
-
-	      return false;
-	    }
-	  else
-	    {
-	      dooble *dbl = new dooble(false, findDooble());
-
-	      dbl->newTab(m_requestedUrl,
-			  qobject_cast<dcookies *> (m_networkAccessManager->
-						    cookieJar()),
-			  webAttributes());
-	      return false;
-	    }
-	}
-      else
-	{
-	  dwebview *v = qobject_cast<dwebview *> (parent());
-	  Qt::MouseButton lastMouseButton = Qt::NoButton;
-
-	  if(v)
-	    lastMouseButton = v->mouseButtonPressed();
-
-	  if(lastMouseButton == Qt::MiddleButton ||
-	     (lastMouseButton != Qt::NoButton &&
-	      QApplication::keyboardModifiers() == Qt::ControlModifier))
-	    {
-	      dooble *dbl = findDooble();
-
-	      if(!dbl)
-		dbl = new dooble(false, 0);
-
-	      dview *v = dbl->newTab
-		(m_requestedUrl,
-		 qobject_cast<dcookies *> (m_networkAccessManager->
-					   cookieJar()),
-		 webAttributes());
-
-	      if(dooble::s_settings.value("settingsWindow/proceedToNewTab",
-					  true).toBool())
-		dbl->setCurrentPage(v);
-
-	      return false;
-	    }
-	}
-    }
-
-  m_networkAccessManager->setLinkClicked(m_requestedUrl);
-
-  if(frame == mainFrame())
-    /*
-    ** Let's set the proxy, but only if the navigation request
-    ** occurs within the main frame.
-    */
-
-    m_networkAccessManager->setProxy(dmisc::proxyByUrl(m_requestedUrl));
-
-  return QWebPage::acceptNavigationRequest(frame, request, type);
-}
-#endif
 
 void dwebpage::downloadFavicon(const QUrl &faviconUrl, const QUrl &url)
 {
@@ -766,11 +506,6 @@ void dwebpage::slotInitialLayoutCompleted(void)
   if(!dooble::s_settings.value("settingsWindow/enableFaviconsDatabase",
 			       false).toBool())
     return;
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  fetchFaviconPathFromFrame(qobject_cast<QWebFrame *> (sender()));
-#endif
 }
 
 void dwebpage::slotFinished(QNetworkReply *reply)
@@ -845,206 +580,34 @@ void dwebpage::slotFinished(QNetworkReply *reply)
       }
     }
 
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  if(mainFrame() !=
-     qobject_cast<QWebFrame *> (reply->request().originatingObject()))
-    /*
-    ** We only wish to process replies that originated from the page's
-    ** main frame.
-    */
-
-    return;
-#endif
-
   if(reply->url().toString(QUrl::StripTrailingSlash) ==
      m_requestedUrl.toString(QUrl::StripTrailingSlash))
     emit loadErrorPage(m_requestedUrl);
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-void dwebpage::slotFrameCreated(QWebFrame *frame)
-{
-  if(!frame)
-    return;
-
-  disconnect(frame,
-	     SIGNAL(initialLayoutCompleted(void)),
-	     this,
-	     SLOT(slotHttpToHttps(void)));
-  disconnect(frame,
-	     SIGNAL(loadFinished(bool)),
-	     this,
-	     SLOT(slotHttpToHttps(void)));
-  connect(frame,
-	  SIGNAL(initialLayoutCompleted(void)),
-	  this,
-	  SLOT(slotHttpToHttps(void)));
-  connect(frame,
-	  SIGNAL(loadFinished(bool)),
-	  this,
-	  SLOT(slotHttpToHttps(void)));
-}
-#endif
-
 void dwebpage::slotHttpToHttps(void)
 {
   if(!dooble::s_settings.value("settingsWindow/alwaysHttps", false).toBool())
     return;
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  QWebFrame *frame = qobject_cast<QWebFrame *> (sender());
-
-  if(!frame)
-    return;
-
-  foreach(QWebElement element, frame->findAllElements("a").toList())
-    {
-      QString href(element.attribute("href"));
-
-      if(!href.isEmpty())
-	{
-	  QUrl url(href);
-	  QUrl baseUrl(frame->baseUrl());
-
-	  url = baseUrl.resolved(url);
-
-	  if(!dooble::s_alwaysHttpsExceptionsWindow->allowed(url.host()))
-	    if(url.scheme().toLower().trimmed() == "http")
-	      {
-		url.setScheme("https");
-
-		if(url.port() == 80)
-		  url.setPort(443);
-
-		element.setAttribute
-		  ("href", url.toString(QUrl::StripTrailingSlash));
-	      }
-	}
-    }
-#endif
 }
 
 void dwebpage::slotUrlChanged(const QUrl &url)
 {
   Q_UNUSED(url);
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  fetchFaviconPathFromFrame(qobject_cast<QWebFrame *> (sender()));
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-void dwebpage::fetchFaviconPathFromFrame(QWebFrame *frame)
-{
-  if(frame)
-    {
-      bool relFound = false;
-      QWebElementCollection elements(frame->findAllElements("link"));
-
-      foreach(QWebElement element, elements)
-	{
-	  QStringList attributesList = element.attributeNames();
-
-	  qSort(attributesList.begin(), attributesList.end(),
-		qGreater<QString> ());
-
-	  foreach(QString attributeName, attributesList)
-	    {
-	      if(attributeName.toLower() == "rel" && (element.
-						      attribute(attributeName).
-						      toLower() == "icon" ||
-						      element.
-						      attribute(attributeName).
-						      toLower() ==
-						      "shortcut icon"))
-		relFound = true;
-
-	      if(relFound)
-		if(attributeName.toLower() == "href")
-		  {
-		    QUrl url;
-		    QString href(element.attribute(attributeName).trimmed());
-
-		    if(href.startsWith("http://") ||
-		       href.startsWith("https://"))
-		      url = QUrl::fromUserInput(href);
-		    else if(href.startsWith("//"))
-		      {
-			url = QUrl::fromUserInput(href);
-			url.setScheme(frame->url().scheme());
-		      }
-		    else
-		      {
-			url.setHost(frame->url().host());
-
-			if(!href.startsWith("/"))
-			  url.setPath("/" + href);
-			else
-			  url.setPath(href);
-
-			url.setScheme(frame->url().scheme());
-		      }
-
-		    if(!url.isEmpty() && url.isValid())
-		      {
-			downloadFavicon
-			  (dmisc::correctedUrlPath(url), frame->url());
-			break;
-		      }
-		  }
-	    }
-
-	  if(relFound)
-	    break;
-	}
-
-      if(!relFound)
-	{
-	  QUrl url;
-
-	  url.setHost(frame->url().host());
-	  url.setPath("/favicon.ico");
-	  url.setScheme(frame->url().scheme());
-	  downloadFavicon(url, frame->url());
-	}
-    }
-}
-#endif
-
-#ifdef DOOBLE_USE_WEBENGINE
 QHash<QWebEngineSettings::WebAttribute, bool> dwebpage::
-  webAttributes(void) const
-#else
-QHash<QWebSettings::WebAttribute, bool> dwebpage::webAttributes(void) const
-#endif
+webAttributes(void) const
 {
-#ifdef DOOBLE_USE_WEBENGINE
   QHash<QWebEngineSettings::WebAttribute, bool> hash;
 
   hash[QWebEngineSettings::JavascriptEnabled] = m_isJavaScriptEnabled;
-#else
-  QHash<QWebSettings::WebAttribute, bool> hash;
-
-  hash[QWebSettings::JavascriptEnabled] = m_isJavaScriptEnabled;
-  hash[QWebSettings::PluginsEnabled] = settings()->testAttribute
-    (QWebSettings::PluginsEnabled);
-  hash[QWebSettings::PrivateBrowsingEnabled] = settings()->testAttribute
-    (QWebSettings::PrivateBrowsingEnabled);
-#endif
   return hash;
 }
 
 bool dwebpage::areWebPluginsEnabled(void) const
 {
-#ifdef DOOBLE_USE_WEBENGINE
   return false;
-#else
-  return settings()->testAttribute(QWebSettings::PluginsEnabled);
-#endif
 }
 
 bool dwebpage::isJavaScriptEnabled(void) const
@@ -1054,11 +617,7 @@ bool dwebpage::isJavaScriptEnabled(void) const
 
 bool dwebpage::isPrivateBrowsingEnabled(void) const
 {
-#ifdef DOOBLE_USE_WEBENGINE
   return false;
-#else
-  return settings()->testAttribute(QWebSettings::PrivateBrowsingEnabled);
-#endif
 }
 
 void dwebpage::setJavaScriptEnabled(const bool state)
@@ -1070,24 +629,14 @@ void dwebpage::setJavaScriptEnabled(const bool state)
   */
 
   m_isJavaScriptEnabled = state;
-#ifdef DOOBLE_USE_WEBENGINE
   settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, state);
-#else
-  settings()->setAttribute(QWebSettings::JavascriptEnabled, state);
-#endif
 }
 
 void dwebpage::showWebInspector(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  m_webInspector->setVisible(true);
-#endif
 }
 
-#ifdef DOOBLE_USE_WEBENGINE
 void dwebpage::slotIconUrlChanged(const QUrl &url)
 {
   downloadFavicon(url, this->url());
 }
-#endif

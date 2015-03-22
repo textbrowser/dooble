@@ -38,11 +38,7 @@
 #include <QTextCodec>
 #include <QThread>
 #include <QUrl>
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEngineSettings>
-#else
-#include <QWebSettings>
-#endif
 
 #include "dbookmarkswindow.h"
 #include "dbookmarkswindow.h"
@@ -422,15 +418,6 @@ dsettings::dsettings():QMainWindow()
     (dooble::s_settings.value("settingsWindow/cookieTimerUnit",
 			      1).toInt());
   m_updateLabelTimer.setInterval(2500);
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  m_purgeMemoryCachesTimer.setInterval(10000);
-
-  if(dooble::s_settings.value("settingsWindow/purgeMemoryCaches",
-			      true).toBool())
-    m_purgeMemoryCachesTimer.start();
-#endif
 }
 
 dsettings::~dsettings()
@@ -1064,14 +1051,9 @@ void dsettings::exec(dooble *parent)
   codecs.sort();
   ui.encodingCombinationBox->clear();
   ui.encodingCombinationBox->addItems(codecs);
-#ifdef DOOBLE_USE_WEBENGINE
   ui.purgeMemoryCachesCheckBox->setEnabled(false);
   ui.webkitButton->setText(tr("WebEngine"));
   ui.webkitButton->setToolTip(tr("WebEngine"));
-#else
-  ui.webkitButton->setText(tr("WebKit"));
-  ui.webkitButton->setToolTip(tr("WebKit"));
-#endif
 
   QString text(dooble::s_settings.value("settingsWindow/characterEncoding",
 					"").toString());
@@ -1081,11 +1063,7 @@ void dsettings::exec(dooble *parent)
       (ui.encodingCombinationBox->findText(text));
   else
     {
-#ifdef DOOBLE_USE_WEBENGINE
       text = QWebEngineSettings::globalSettings()->defaultTextEncoding();
-#else
-      text = QWebSettings::globalSettings()->defaultTextEncoding();
-#endif
 
       for(int i = 0; i < ui.encodingCombinationBox->count(); i++)
 	{
@@ -1989,7 +1967,6 @@ void dsettings::slotClicked(QAbstractButton *button)
 	  dmisc::destroyReencodeCrypt();
 	}
 
-#ifdef DOOBLE_USE_WEBENGINE
       QWebEngineSettings::globalSettings()->setDefaultTextEncoding
 	(ui.encodingCombinationBox->currentText().toLower());
       QWebEngineSettings::globalSettings()->setAttribute
@@ -2039,78 +2016,6 @@ void dsettings::slotClicked(QAbstractButton *button)
       QWebEngineSettings::globalSettings()->setAttribute
 	(QWebEngineSettings::HyperlinkAuditingEnabled,
 	 ui.hyperlinkAuditing->isChecked());
-#else
-      QWebSettings::globalSettings()->setDefaultTextEncoding
-	(ui.encodingCombinationBox->currentText().toLower());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::JavaEnabled,
-	 ui.javaCheckBox->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::JavascriptEnabled,
-	 ui.javascriptGroupBox->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::JavascriptCanOpenWindows,
-	 ui.jsAllowNewWindowsCheckBox->isChecked() &&
-	 ui.javascriptGroupBox->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::AutoLoadImages,
-	 ui.automaticallyLoadImagesCheckBox->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::PluginsEnabled,
-	 ui.webPluginsCheckBox->isChecked());
-      QWebSettings::globalSettings()->setFontFamily
-	(QWebSettings::StandardFont,
-	 ui.defaultFontSizeCombinationBox->currentText());
-      QWebSettings::globalSettings()->setFontSize
-	(QWebSettings::DefaultFontSize,
-	 ui.defaultFontSizeCombinationBox->currentText().toInt());
-      QWebSettings::globalSettings()->setFontFamily
-	(QWebSettings::CursiveFont,
-	 ui.cursiveFontCombinationBox->currentFont().family());
-      QWebSettings::globalSettings()->setFontFamily
-	(QWebSettings::FantasyFont,
-	 ui.fantasyFontCombinationBox->currentFont().family());
-      QWebSettings::globalSettings()->setFontFamily
-	(QWebSettings::FixedFont,
-	 ui.fixedFontCombinationBox->currentFont().family());
-      QWebSettings::globalSettings()->setFontSize
-	(QWebSettings::DefaultFixedFontSize,
-	 ui.fixedFontSizeCombinationBox->currentText().toInt());
-      QWebSettings::globalSettings()->setFontFamily
-	(QWebSettings::SansSerifFont,
-	 ui.sansSerifFontCombinationBox->currentFont().family());
-      QWebSettings::globalSettings()->setFontFamily
-	(QWebSettings::SerifFont,
-	 ui.serifFontCombinationBox->currentFont().family());
-      QWebSettings::globalSettings()->setFontSize
-	(QWebSettings::MinimumFontSize,
-	 ui.minimumFontSizeCombinationBox->currentText().toInt());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::SpatialNavigationEnabled,
-	 ui.spatialNavigationCheckBox->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::XSSAuditingEnabled,
-	 ui.javascriptGroupBox->isChecked() &&
-	 ui.xssAuditingCheckBox->isChecked());
-#if QT_VERSION >= 0x050000
-      QWebSettings::globalSettings()->setThirdPartyCookiePolicy
-	(QWebSettings::ThirdPartyCookiePolicy(ui.thirdPartyCookiesComboBox->
-					      currentIndex()));
-#endif
-#if QT_VERSION >= 0x040800
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::HyperlinkAuditingEnabled,
-	 ui.hyperlinkAuditing->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::WebGLEnabled, ui.webglCheckBox->isChecked());
-#endif
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::LocalContentCanAccessFileUrls,
-	 ui.localContentMayAccessLocalContent->isChecked());
-      QWebSettings::globalSettings()->setAttribute
-	(QWebSettings::PrivateBrowsingEnabled,
-	 ui.privateBrowsing->isChecked());
-#endif
 
       /*
       ** Populate the dooble::s_settings container.
@@ -2661,10 +2566,6 @@ dooble *dsettings::parentDooble(void) const
 
 void dsettings::slotPurgeMemoryCaches(void)
 {
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-  QWebSettings::globalSettings()->clearMemoryCaches();
-#endif
 }
 
 void dsettings::slotPopulateApplications

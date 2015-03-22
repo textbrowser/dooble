@@ -26,39 +26,27 @@
 */
 
 #include <QApplication>
-#include <QDir>
-#include <QUrl>
-#include <QIcon>
-#include <QMenu>
 #include <QBuffer>
-#ifdef DOOBLE_USE_WEBENGINE
-#include <QWebEnginePage>
-#else
-#include <QWebPage>
-#endif
+#include <QClipboard>
+#include <QDesktopServices>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileIconProvider>
+#include <QIcon>
 #include <QKeyEvent>
+#include <QMenu>
+#include <QProgressBar>
+#include <QScrollBar>
 #include <QSettings>
 #include <QSqlQuery>
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-#include <QWebFrame>
-#endif
-#include <QClipboard>
-#include <QScrollBar>
 #include <QSqlRecord>
-#include <QFileDialog>
-#include <QProgressBar>
-#include <QDesktopServices>
-#include <QFileIconProvider>
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-#include <QWebElementCollection>
-#endif
+#include <QUrl>
+#include <QWebEnginePage>
 
-#include "dmisc.h"
-#include "dooble.h"
 #include "dbookmarkspopup.h"
 #include "dbookmarkswindow.h"
+#include "dmisc.h"
+#include "dooble.h"
 
 dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
 {
@@ -175,12 +163,10 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
 	  this,
 	  SLOT(slotShare(void)));
 #endif
-#ifdef DOOBLE_USE_WEBENGINE
   ui.action_Import->setEnabled(false);
   ui.action_Import->setToolTip(tr("WebEngine does not yet support "
 				  "Web elements. Web elements are required "
 				  "for importing bookmarks."));
-#endif
   ui.folders->setContextMenuPolicy(Qt::CustomContextMenu);
   connect(ui.folders, SIGNAL(customContextMenuRequested(const QPoint &)),
 	  SLOT(slotShowContextMenu(const QPoint &)));
@@ -2878,87 +2864,10 @@ void dbookmarkswindow::slotImport(void)
 
       if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-#ifdef DOOBLE_USE_WEBENGINE
 	  QWebEnginePage page;
-#else
-	  QWebPage page;
-#endif
 
-#ifdef DOOBLE_USE_WEBENGINE
 	  page.setHtml(QString::fromUtf8(file.readAll()));
-#else
-	  page.mainFrame()->setHtml(QString::fromUtf8(file.readAll()));
-#endif
 	  file.close();
-
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-	  QWebElementCollection elements(page.mainFrame()->
-					 findAllElements("a"));
-
-	  foreach(QWebElement element, elements)
-	    {
-	      QUrl url;
-	      QIcon icon;
-	      QString title(element.toPlainText());
-	      QDateTime addDate;
-	      QDateTime lastModified;
-	      QStringList attributesList = element.attributeNames();
-
-	      foreach(QString attributeName, attributesList)
-		if(attributeName == "add_date")
-		  addDate.setMSecsSinceEpoch(element.attribute("add_date").
-					     toLongLong());
-		else if(attributeName == "href")
-		  url = QUrl::fromUserInput(element.attribute("href"));
-		else if(attributeName == "icon")
-		  {
-		    QBuffer buffer;
-		    QString attribute(element.attribute("icon"));
-		    QByteArray bytes;
-
-		    if(attribute.contains(","))
-		      bytes = QByteArray::fromBase64
-			(attribute.mid(attribute.indexOf(",")).
-			 toLatin1());
-		    else
-		      bytes = QByteArray::fromBase64
-			(attribute.toLatin1());
-
-		    buffer.setBuffer(&bytes);
-
-		    if(buffer.open(QIODevice::ReadOnly))
-		      {
-			QDataStream in(&buffer);
-
-			in >> icon;
-
-			if(in.status() != QDataStream::Ok)
-			  icon = QIcon();
-
-			buffer.close();
-		      }
-		    else
-		      icon = QIcon();
-		  }
-		else if(attributeName == "last_modified")
-		  lastModified.setMSecsSinceEpoch(element.
-						  attribute("last_modified").
-						  toLongLong());
-
-	      if(!url.isEmpty() && url.isValid())
-		{
-		  if(icon.isNull())
-		    icon = dmisc::iconForUrl(url);
-
-		  if(title.isEmpty())
-		    title = url.toString(QUrl::StripTrailingSlash);
-
-		  slotAddBookmark(url, icon, title, QString(""), addDate,
-				  lastModified);
-		}
-	    }
-#endif
 	}
 
       QApplication::restoreOverrideCursor();

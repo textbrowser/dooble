@@ -27,21 +27,12 @@
 
 #include <QMouseEvent>
 #include <QNetworkProxy>
-#ifdef DOOBLE_USE_WEBENGINE
-#else
-#include <QWebHitTestResult>
-#include <QWebElementCollection>
-#endif
 
 #include "dmisc.h"
 #include "dooble.h"
 #include "dwebview.h"
 
-#ifdef DOOBLE_USE_WEBENGINE
 dwebview::dwebview(QWidget *parent):QWebEngineView(parent)
-#else
-dwebview::dwebview(QWidget *parent):QWebView(parent)
-#endif
 {
   m_allowPopup = false;
   m_lastButtonPressed = Qt::NoButton;
@@ -66,98 +57,8 @@ void dwebview::mousePressEvent(QMouseEvent *event)
   */
 
   m_allowPopup = false;
-#ifdef DOOBLE_USE_WEBENGINE
   m_allowPopup = true;
   QWebEngineView::mousePressEvent(event);
-#else
-  if(event)
-    {
-      m_lastButtonPressed = event->button();
-
-      QWebFrame *frame = page()->currentFrame();
-
-      if(frame)
-	{
-	  QWebHitTestResult hit = frame->hitTestContent(event->pos());
-
-	  if(hit.linkUrl().isValid())
-	    m_allowPopup = true;
-	  else if(!hit.isNull())
-	    {
-	      bool found = false;
-	      QWebElementCollection collection = frame->
-		documentElement().findAll("input[type=button]");
-
-	      foreach(QWebElement element, collection)
-		{
-		  if(element == hit.element())
-		    {
-		      found = true;
-		      break;
-		    }
-		}
-
-	      if(!found)
-		{
-		  collection = frame->
-		    documentElement().findAll("input[type=image]");
-
-		  foreach(QWebElement element, collection)
-		    {
-		      if(element == hit.element())
-			{
-			  found = true;
-			  break;
-			}
-		    }
-		}
-
-	      if(!found)
-		{
-		  collection = frame->
-		    documentElement().findAll("input[type=submit]");
-
-		  foreach(QWebElement element, collection)
-		    {
-		      if(element == hit.element())
-			{
-			  found = true;
-			  break;
-			}
-		    }
-		}
-
-	      if(found)
-		m_allowPopup = true;
-	      else
-		{
-		  foreach(QWebElement element, frame->documentElement().
-			  findAll("*"))
-		    if(element.geometry().contains(hit.pos()))
-		      {
-			if(element.attribute("role").toLower() == "link" ||
-			   element.attribute("method").toLower() == "post" ||
-			   element.hasAttribute("href") ||
-			   element.hasAttribute("onclick") ||
-			   (element.hasAttribute("id") &&
-			    QUrl(element.attribute("id")).isValid()) ||
-			   (element.hasAttribute("src") &&
-			    QUrl(element.attribute("src")).isValid()))
-			  {
-			    found = true;
-			    break;
-			  }
-		      }
-
-		  if(found)
-		    m_allowPopup = true;
-		}
-	    }
-	}
-    }
-
-  QWebView::mousePressEvent(event);
-#endif
 }
 
 Qt::MouseButton dwebview::mouseButtonPressed(void) const

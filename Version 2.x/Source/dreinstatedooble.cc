@@ -25,13 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEngineHistory>
 #include <QWebEnginePage>
-#else
-#include <QWebPage>
-#include <QWebHistory>
-#endif
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -96,11 +91,7 @@ dreinstatedooble::dreinstatedooble(QWidget *parent):QWidget(parent)
 		    continue;
 		  }
 
-#ifdef DOOBLE_USE_WEBENGINE
 		QWebEnginePage page;
-#else
-		QWebPage page;
-#endif
 
 		in >> *page.history();
 

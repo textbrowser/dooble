@@ -26,18 +26,14 @@
 */
 
 #include <QDialog>
-#ifdef DOOBLE_USE_WEBENGINE
 #include <QWebEnginePage>
-#else
-#include <QWebFrame>
-#endif
 
 #include "dftp.h"
 #include "dmisc.h"
+#include "dnetworkaccessmanager.h"
+#include "dnetworkcache.h"
 #include "dooble.h"
 #include "dwebpage.h"
-#include "dnetworkcache.h"
-#include "dnetworkaccessmanager.h"
 
 /*
 ** The dnetworkblockreply, dnetworkdirreply, dnetworkerrorreply,
@@ -559,31 +555,18 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	  */
 
 	  bool userRequested = false;
-#ifdef DOOBLE_USE_WEBENGINE
 	  QWebEnginePage *frame = qobject_cast<QWebEnginePage *>
 	    (req.originatingObject());
-#else
-	  QWebFrame *frame = qobject_cast<QWebFrame *>
-	    (req.originatingObject());
-#endif
 
 	  if(frame)
 	    {
 	      dwebpage *page = qobject_cast<dwebpage *> (frame->parent());
 
-#ifdef DOOBLE_USE_WEBENGINE
 	      if(page &&
 		 req.url().toString(QUrl::StripTrailingSlash) ==
 		 page->requestedUrl().
 		 toString(QUrl::StripTrailingSlash))
 		userRequested = true;
-#else
-	      if(page &&
-		 req.url().toString(QUrl::StripTrailingSlash) ==
-		 page->mainFrame()->requestedUrl().
-		 toString(QUrl::StripTrailingSlash))
-		userRequested = true;
-#endif
 	    }
 
 	  if(!userRequested)
@@ -685,13 +668,8 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	    block = true;
 	  else
 	    {
-#ifdef DOOBLE_USE_WEBENGINE
 	      QWebEnginePage *frame = qobject_cast<QWebEnginePage *>
 		(req.originatingObject());
-#else
-	      QWebFrame *frame = qobject_cast<QWebFrame *>
-		(req.originatingObject());
-#endif
 
 	      if(frame && !qobject_cast<dwebpage *> (frame->parent()))
 		{
@@ -873,7 +851,6 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
 
 	  if(!dooble::s_httpRedirectWindow->allowed(url.host()))
 	    {
-#ifdef DOOBLE_USE_WEBENGINE
 	      QWebEnginePage *frame = qobject_cast<QWebEnginePage *>
 		 (reply->request().originatingObject());
 
@@ -882,19 +859,6 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
 		  frame->triggerAction(QWebEnginePage::Stop);
 		  emit loadErrorPage(reply->url());
 		}
-#else
-	      QWebFrame *frame = qobject_cast<QWebFrame *>
-		 (reply->request().originatingObject());
-
-	      if(frame && frame->page() &&
-		 frame == frame->page()->mainFrame())
-		{
-		  frame->page()->triggerAction
-		    (QWebPage::StopScheduledPageRefresh);
-		  frame->page()->triggerAction(QWebPage::Stop);
-		  emit loadErrorPage(reply->url());
-		}
-#endif
 
 	      emit exceptionRaised(dooble::s_httpRedirectWindow, url);
 	      emit urlRedirectionRequest(url.host(),

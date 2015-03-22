@@ -18,8 +18,7 @@ TEMPLATE	= app
 
 DEFINES         += DOOBLE_LINKED_WITH_LIBSPOTON \
                    DOOBLE_MINIMUM_GCRYPT_VERSION=0x010500 \
-		   DOOBLE_USE_PTHREADS \
-		   DOOBLE_USE_WEBENGINE
+		   DOOBLE_USE_PTHREADS
 
 # Unfortunately, the clean target assumes too much knowledge
 # about the internals of libspoton.
