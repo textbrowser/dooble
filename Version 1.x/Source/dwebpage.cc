@@ -193,7 +193,7 @@ void dwebpage::javaScriptAlert(QWebFrame *frame, const QString &msg)
 
   mb->setWindowIcon
     (QIcon(settings.value("mainWindow/windowIcon").toString()));
-  mb->show();
+  mb->exec();
 }
 
 bool dwebpage::javaScriptConfirm(QWebFrame *frame, const QString &msg)
