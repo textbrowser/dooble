@@ -240,24 +240,30 @@ void dsslcipherswindow::populate(void)
   QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
 
 #if QT_VERSION >= 0x050000
-  if(tlsv12)
+  if(sslv3 && tlsv10)
+    protocol = QSsl::TlsV1SslV3;
+  else if(tlsv12)
     protocol = QSsl::TlsV1_2;
-
-  if(tlsv11)
+  else if(tlsv11)
     protocol = QSsl::TlsV1_1;
-
-  if(tlsv10)
+  else if(tlsv10)
     protocol = QSsl::TlsV1_0;
-#else
-  if(tlsv11 || tlsv12)
-    protocol = QSsl::UnknownProtocol;
-
-  if(tlsv10)
-    protocol = QSsl::TlsV1;
-#endif
-
-  if(sslv3)
+  else if(sslv3)
     protocol = QSsl::SslV3;
+  else
+    protocol = QSsl::UnknownProtocol;
+#else
+  if(sslv3 && tlsv10)
+    protocol = QSsl::TlsV1SslV3;
+  else if(tlsv11 || tlsv12)
+   protocol =  QSsl::UnknownProtocol;
+  else if(tlsv10)
+    protocol = QSsl::TlsV1;
+  else if(sslv3)
+    protocol = QSsl::SslV3;
+  else
+    protocol = QSsl::UnknownProtocol;
+#endif
 
   configuration.setProtocol(protocol);
   QSslConfiguration::setDefaultConfiguration(configuration);
