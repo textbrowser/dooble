@@ -28,6 +28,7 @@
 #include <QKeyEvent>
 #include <QSettings>
 #include <QSslCipher>
+#include <QSslConfiguration>
 #include <QSslSocket>
 
 #include "dmisc.h"
@@ -142,7 +143,7 @@ void dsslcipherswindow::populate(void)
 		  (query.value(0).toString(), QSsl::TlsV1_1);
 #else
 	      cipher = QSslCipher
-		(query.value(0).toString(), QSsl::TlsV1);
+		(query.value(0).toString(), QSsl::UnknownProtocol);
 #endif
 #if QT_VERSION >= 0x050000
 	      else if(protocol.contains("tlsv1.2"))
@@ -205,6 +206,61 @@ void dsslcipherswindow::populate(void)
   }
 
   QSqlDatabase::removeDatabase("allowedsslciphers");
+
+  bool sslv3 = false;
+  bool tlsv10 = false;
+  bool tlsv11 = false;
+  bool tlsv12 = false;
+
+  for(int i = 0; i < ui.listWidget->count(); i++)
+    {
+      QListWidgetItem *item = ui.listWidget->item(i);
+
+      if(!item)
+	continue;
+
+      if(item->text().toLower().contains("sslv3"))
+	if(item->checkState() == Qt::Checked)
+	  sslv3 = true;
+
+      if(item->text().toLower().contains("tlsv1.0"))
+	if(item->checkState() == Qt::Checked)
+	  tlsv10 = true;
+
+      if(item->text().toLower().contains("tlsv1.1"))
+	if(item->checkState() == Qt::Checked)
+	  tlsv11 = true;
+
+      if(item->text().toLower().contains("tlsv1.2"))
+	if(item->checkState() == Qt::Checked)
+	  tlsv12 = true;
+    }
+
+  QSsl::SslProtocol protocol = QSsl::SslProtocol(0);
+  QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
+
+#if QT_VERSION >= 0x050000
+  if(tlsv12)
+    protocol = QSsl::TlsV1_2;
+
+  if(tlsv11)
+    protocol = QSsl::TlsV1_1;
+
+  if(tlsv10)
+    protocol = QSsl::TlsV1_0;
+#else
+  if(tlsv11 || tlsv12)
+    protocol = QSsl::UnknownProtocol;
+
+  if(tlsv10)
+    protocol = QSsl::TlsV1;
+#endif
+
+  if(sslv3)
+    protocol = QSsl::SslV3;
+
+  configuration.setProtocol(protocol);
+  QSslConfiguration::setDefaultConfiguration(configuration);
   QSslSocket::setDefaultCiphers(allowed);
 
   if(allChecked.value("ssl"))
