@@ -11,7 +11,8 @@ libspoton.o:	libspoton.c libspoton.h
 	-DLIBSPOTON_IGNORE_GCRY_CONTROL_GCRYCTL_INIT_SECMEM_RETURN_VALUE \
 	-DLIBSPOTON_OS_FREEBSD=1 -I/usr/local/include \
 	-fPIC -fstack-protector-all \
-	-Wall -Werror -Wextra -Wpointer-arith \
+	-Wall -Wconversion -Werror -Wextra -Wpointer-arith \
+	-Wsign-conversion \
 	-Wstack-protector -Wstrict-overflow=5 -Wstrict-prototypes \
 	-c -o libspoton.o libspoton.c
 

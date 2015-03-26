@@ -3,13 +3,14 @@ LDFLAGS	  =
 LIBGCRYPT = /usr/local/lib
 
 all:	libspoton.o
-	gcc $(LDFLAGS) -dynamiclib -o libspoton.dylib $? \
+	$(CC) $(LDFLAGS) -dynamiclib -o libspoton.dylib $? \
 	-L$(LIBGCRYPT) -lgcrypt -lpthread -lsqlite3
-	gcc $(CFLAGS) -Wall -Werror test.c -o test -L. -lspoton
+	$(CC) $(CFLAGS) -Wall -Werror test.c -o test -L. -lspoton
 
 libspoton.o:	libspoton.c libspoton.h
-	gcc $(CFLAGS) -fPIC -fstack-protector-all \
-	-Wall -Werror -Wextra -Wpointer-arith \
+	$(CC) $(CFLAGS) -fPIC -fstack-protector-all \
+	-Wall -Wconversion -Werror -Wextra -Wpointer-arith \
+	-Wsign-conversion \
 	-Wstack-protector -Wstrict-overflow=5 -Wstrict-prototypes \
         -DLIBSPOTON_OS_MAC=1 -c -o libspoton.o libspoton.c
 
@@ -23,7 +24,7 @@ install: all
 	install -o root -g wheel libspoton.dylib /usr/local/lib
 
 library: libspoton.o
-	gcc $(LDFLAGS) -dynamiclib -o libspoton.dylib $? \
+	$(CC) $(LDFLAGS) -dynamiclib -o libspoton.dylib $? \
 	-L$(LIBGCRYPT) -lgcrypt -lpthread -lsqlite3
 
 purge:

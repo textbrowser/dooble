@@ -6,8 +6,8 @@ all:	libspoton.o
 	-lpthread -lspoton -lsqlite3
 
 libspoton.o:	libspoton.c libspoton.h
-	gcc $(CFLAGS) -Wall -Werror -Wextra \
-	-Wpointer-arith -Wstrict-overflow=5 \
+	gcc $(CFLAGS) -Wall -Wconversion -Werror -Wextra \
+	-Wpointer-arith -Wsign-conversion -Wstrict-overflow=5 \
 	-Wstrict-prototypes -DLIBSPOTON_OS_WINDOWS=1 \
 	-c -o libspoton.o libspoton.c -I Include.win32
 
