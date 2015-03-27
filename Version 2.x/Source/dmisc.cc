@@ -74,7 +74,7 @@ extern "C"
 
   int gcry_qmutex_init(void **mutex)
   {
-    *mutex = static_cast<void *> (new QMutex());
+    *mutex = static_cast<void *> (new (std::nothrow) QMutex());
 
     if(*mutex)
       return 0;
