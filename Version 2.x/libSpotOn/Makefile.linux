@@ -1,11 +1,11 @@
 all:	libspoton.o
-	gcc $(LDFLAGS) -shared -Wl,-soname,libspoton.so \
+	$(CC) $(LDFLAGS) -shared -Wl,-soname,libspoton.so \
 	-o libspoton.so $? -lgcrypt -lpthread -lsqlite3
-	gcc $(CFLAGS) -Wall -Werror -Wextra \
+	$(CC) $(CFLAGS) -Wall -Werror -Wextra \
 	test.c -o test -L. -lspoton -Wl,-rpath,.
 
 libspoton.o:	libspoton.c libspoton.h
-	gcc $(CFLAGS) -fPIC -fstack-protector-all \
+	$(CC) $(CFLAGS) -fPIC -fstack-protector-all \
 	-Wall -Wconversion -Werror -Wextra -Wpointer-arith \
 	-Wsign-conversion \
 	-Wstack-protector -Wstrict-overflow=5 -Wstrict-prototypes \
@@ -21,7 +21,7 @@ install: all
 	install -o root -g root libspoton.so /usr/local/lib
 
 library: libspoton.o
-	gcc $(LDFLAGS) -shared -Wl,-soname,libspoton.so \
+	$(CC) $(LDFLAGS) -shared -Wl,-soname,libspoton.so \
 	-o libspoton.so $? -lgcrypt -lpthread -lsqlite3
 
 purge:
