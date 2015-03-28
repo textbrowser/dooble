@@ -13,7 +13,7 @@ make
 
 FreeBSD:
 qmake -o Makefile dooble.freebsd.pro
-gmake or make
+gmake
 
 Linux:
 qmake -o Makefile dooble.qt5.pro
