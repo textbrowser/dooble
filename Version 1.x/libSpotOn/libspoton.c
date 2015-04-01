@@ -651,10 +651,10 @@ libspoton_error_t libspoton_save_url(const char *url,
 	  */
 
 #ifdef LIBSPOTON_OS_WINDOWS
-	  lengthArray[3] = length & 0xff;
-	  lengthArray[2] = (length >> 8)  & 0xff;
-	  lengthArray[1] = (length >> 16) & 0xff;
-	  lengthArray[0] = (length >> 24) & 0xff;
+	  lengthArray[3] = (char) (length & 0xff);
+	  lengthArray[2] = (char) ((length >> 8)  & 0xff);
+	  lengthArray[1] = (char) ((length >> 16) & 0xff);
+	  lengthArray[0] = (char) ((length >> 24) & 0xff);
 	  encodedBuffer[encodedBufferLength - 4] = lengthArray[0];
 	  encodedBuffer[encodedBufferLength - 3] = lengthArray[1];
 	  encodedBuffer[encodedBufferLength - 2] = lengthArray[2];
