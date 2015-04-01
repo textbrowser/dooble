@@ -1,12 +1,12 @@
 all:	libspoton.o
-	$(CC) $(LDFLAGS) -shared -o libspoton.dll libspoton.o \
+	gcc $(LDFLAGS) -shared -o libspoton.dll libspoton.o \
 	-LLibraries.win32 -lgcrypt-20 -lpthread -lsqlite3
-	$(CC) $(CFLAGS) -Wall -Werror -Wextra test.c -o test.exe \
+	gcc $(CFLAGS) -Wall -Werror -Wextra test.c -o test.exe \
 	-I Include.win32 -L. -LLibraries.win32 \
 	-lpthread -lspoton -lsqlite3
 
 libspoton.o:	libspoton.c libspoton.h
-	$(CC) $(CFLAGS) -Wall -Wconversion -Werror -Wextra \
+	gcc $(CFLAGS) -Wall -Wconversion -Werror -Wextra \
 	-Wpointer-arith -Wsign-conversion -Wstrict-overflow=5 \
 	-Wstrict-prototypes -DLIBSPOTON_OS_WINDOWS=1 \
 	-c -o libspoton.o libspoton.c -I Include.win32
@@ -17,7 +17,7 @@ clean:
 	del /f test.exe
 
 library: libspoton.o
-	$(CC) $(LDFLAGS) -shared -o libspoton.dll libspoton.o \
+	gcc $(LDFLAGS) -shared -o libspoton.dll libspoton.o \
 	-LLibraries.win32 -lgcrypt-20 -lpthread -lsqlite3
 
 purge:
