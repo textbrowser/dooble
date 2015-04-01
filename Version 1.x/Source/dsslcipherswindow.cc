@@ -239,11 +239,15 @@ void dsslcipherswindow::populate(void)
   QSsl::SslProtocol protocol = QSsl::UnknownProtocol;
 
 #if QT_VERSION >= 0x050000
-  if(sslv3 && tlsv10)
+  if(sslv3 && tlsv10 && tlsv11 && tlsv12)
+    protocol = QSsl::UnknownProtocol;
+  else if(sslv3 && tlsv10)
     protocol = QSsl::TlsV1SslV3;
-  else if(tlsv12)
+  else if(sslv3 && (tlsv11 || tlsv12))
+    protocol = QSsl::UnknownProtocol;
+  else if(tlsv12 && !tlsv10 && !tlsv11)
     protocol = QSsl::TlsV1_2;
-  else if(tlsv11)
+  else if(tlsv11 && !tlsv10)
     protocol = QSsl::TlsV1_1;
   else if(tlsv10)
     protocol = QSsl::TlsV1_0;
@@ -252,7 +256,9 @@ void dsslcipherswindow::populate(void)
   else
     protocol = QSsl::UnknownProtocol;
 #else
-  if(sslv3 && tlsv10)
+  if(sslv3 && tlsv10 && tlsv11 && tlsv12)
+    protocol = QSsl::UnknownProtocol;
+  else if(sslv3 && tlsv10)
     protocol = QSsl::TlsV1SslV3;
   else if(tlsv11 || tlsv12)
     protocol = QSsl::UnknownProtocol;
