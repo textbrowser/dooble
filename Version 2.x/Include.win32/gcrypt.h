@@ -1,8 +1,6 @@
 /* gcrypt.h -  GNU Cryptographic Library Interface              -*- c -*-
- * Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004,
- *               2006, 2007, 2008, 2009, 2010, 2011,
- *               2012  Free Software Foundation, Inc.
- * Copyright (C) 2012, 2013  g10 Code GmbH
+ * Copyright (C) 1998-2015 Free Software Foundation, Inc.
+ * Copyright (C) 2012-2015 g10 Code GmbH
  *
  * This file is part of Libgcrypt.
  *
@@ -64,11 +62,11 @@ extern "C" {
    return the same version.  The purpose of this macro is to let
    autoconf (using the AM_PATH_GCRYPT macro) check that this header
    matches the installed library.  */
-#define GCRYPT_VERSION "1.6.1"
+#define GCRYPT_VERSION "1.6.3"
 
 /* The version number of this header.  It may be used to handle minor
    API incompatibilities.  */
-#define GCRYPT_VERSION_NUMBER 0x010601
+#define GCRYPT_VERSION_NUMBER 0x010603
 
 
 /* Internal: We can't use the convenience macros for the multi
@@ -102,7 +100,7 @@ extern "C" {
 
 #define _GCRY_GCC_ATTR_PRINTF(f,a)  __attribute__ ((format (printf,f,a)))
 
-#if _GCRT_GCC_VERSION >= 40000
+#if _GCRY_GCC_VERSION >= 40000
 #define _GCRY_GCC_ATTR_SENTINEL(a) __attribute__ ((sentinel(a)))
 #endif
 

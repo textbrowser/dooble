@@ -1,22 +1,22 @@
-/* Output of mkheader.awk.  DO NOT EDIT.  -*- buffer-read-only: t -*- */
-
-/* gpg-error.h - Public interface to libgpg-error.
-   Copyright (C) 2003, 2004, 2010 g10 Code GmbH
+/* gpg-error.h - Public interface to libgpg-error.               -*- c -*-
+   Copyright (C) 2003, 2004, 2010, 2013, 2014 g10 Code GmbH
 
    This file is part of libgpg-error.
- 
+
    libgpg-error is free software; you can redistribute it and/or
    modify it under the terms of the GNU Lesser General Public License
    as published by the Free Software Foundation; either version 2.1 of
    the License, or (at your option) any later version.
- 
+
    libgpg-error is distributed in the hope that it will be useful, but
    WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Lesser General Public License for more details.
- 
+
    You should have received a copy of the GNU Lesser General Public
    License along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+   Do not edit.  Generated from gpg-error.h.in for i686-w64-mingw32.
  */
 
 
@@ -27,12 +27,14 @@
 
 #ifdef __GNUC__
 #define GPG_ERR_INLINE __inline__
+#elif _MSC_VER >= 1300
+#define GPG_ERR_INLINE __inline
 #elif __STDC_VERSION__ >= 199901L
 #define GPG_ERR_INLINE inline
 #else
 #ifndef GPG_ERR_INLINE
 #define GPG_ERR_INLINE
-#endif 
+#endif
 #endif
 
 
@@ -64,7 +66,10 @@ extern "C" {
 
    GPG_ERR_ENABLE_GETTEXT_MACROS: Define to provide macros to map the
    internal gettext API to standard names.  This has only an effect on
-   Windows platforms.  */
+   Windows platforms.
+
+   In addition to the error codes, Libgpg-error also provides a set of
+   functions used by most GnuPG components.  */
 
 
 /* The error source type gpg_err_source_t.
@@ -92,6 +97,7 @@ typedef enum
     GPG_ERR_SOURCE_GPA = 12,
     GPG_ERR_SOURCE_KLEO = 13,
     GPG_ERR_SOURCE_G13 = 14,
+    GPG_ERR_SOURCE_ASSUAN = 15,
     GPG_ERR_SOURCE_ANY = 31,
     GPG_ERR_SOURCE_USER_1 = 32,
     GPG_ERR_SOURCE_USER_2 = 33,
@@ -295,6 +301,18 @@ typedef enum
     GPG_ERR_LIMIT_REACHED = 183,
     GPG_ERR_NOT_INITIALIZED = 184,
     GPG_ERR_MISSING_ISSUER_CERT = 185,
+    GPG_ERR_NO_KEYSERVER = 186,
+    GPG_ERR_INV_CURVE = 187,
+    GPG_ERR_UNKNOWN_CURVE = 188,
+    GPG_ERR_DUP_KEY = 189,
+    GPG_ERR_AMBIGUOUS = 190,
+    GPG_ERR_NO_CRYPT_CTX = 191,
+    GPG_ERR_WRONG_CRYPT_CTX = 192,
+    GPG_ERR_BAD_CRYPT_CTX = 193,
+    GPG_ERR_CRYPT_CTX_CONFLICT = 194,
+    GPG_ERR_BROKEN_PUBKEY = 195,
+    GPG_ERR_BROKEN_SECKEY = 196,
+    GPG_ERR_MAC_ALGO = 197,
     GPG_ERR_FULLY_CANCELED = 198,
     GPG_ERR_UNFINISHED = 199,
     GPG_ERR_BUFFER_TOO_SHORT = 200,
@@ -311,6 +329,8 @@ typedef enum
     GPG_ERR_SEXP_BAD_HEX_CHAR = 211,
     GPG_ERR_SEXP_ODD_HEX_NUMBERS = 212,
     GPG_ERR_SEXP_BAD_OCT_CHAR = 213,
+    GPG_ERR_KEY_ON_CARD = 253,
+    GPG_ERR_INV_LOCK_OBJ = 254,
     GPG_ERR_ASS_GENERAL = 257,
     GPG_ERR_ASS_ACCEPT_FAILED = 258,
     GPG_ERR_ASS_CONNECT_FAILED = 259,
@@ -648,6 +668,51 @@ gpg_err_code_t gpg_err_code_from_syserror (void);
    ERRNO due to peculiarities on WindowsCE.  */
 void gpg_err_set_errno (int err);
 
+/* Return or check the version.  */
+const char *gpg_error_check_version (const char *req_version);
+
+/* The version string of this header. */
+#define GPG_ERROR_VERSION "1.13"
+
+/* The version number of this header. */
+#define GPG_ERROR_VERSION_NUMBER 0x010d00
+
+
+/* Decide whether to use the format_arg attribute.  */
+#if _GPG_ERR_GCC_VERSION > 20800
+# define _GPG_ERR_ATTR_FORMAT_ARG(a)  __attribute__ ((__format_arg__ (a)))
+#else
+# define _GPG_ERR_ATTR_FORMAT_ARG(a)
+#endif
+
+/* A lean gettext implementation based on GNU style mo files which are
+   required to be encoded in UTF-8.  There is a limit on 65534 entries
+   to save some RAM.  Only Germanic plural rules are supported.  */
+const char *_gpg_w32_bindtextdomain (const char *domainname,
+                                     const char *dirname);
+const char *_gpg_w32_textdomain (const char *domainname);
+const char *_gpg_w32_gettext (const char *msgid)
+            _GPG_ERR_ATTR_FORMAT_ARG (1);
+const char *_gpg_w32_dgettext (const char *domainname, const char *msgid)
+            _GPG_ERR_ATTR_FORMAT_ARG (2);
+const char *_gpg_w32_dngettext (const char *domainname, const char *msgid1,
+                                const char *msgid2, unsigned long int n)
+            _GPG_ERR_ATTR_FORMAT_ARG (2) _GPG_ERR_ATTR_FORMAT_ARG (3);
+const char *_gpg_w32_gettext_localename (void);
+int _gpg_w32_gettext_use_utf8 (int value);
+
+#ifdef GPG_ERR_ENABLE_GETTEXT_MACROS
+# define bindtextdomain(a,b) _gpg_w32_bindtextdomain ((a), (b))
+# define textdomain(a)       _gpg_w32_textdomain ((a))
+# define gettext(a)          _gpg_w32_gettext ((a))
+# define dgettext(a,b)       _gpg_w32_dgettext ((a), (b))
+# define ngettext(a,b,c)     _gpg_w32_dngettext (NULL, (a), (b), (c))
+# define dngettext(a,b,c,d)  _gpg_w32_dngettext ((a), (b), (c), (d))
+# define gettext_localename() _gpg_w32_gettext_localename ()
+# define gettext_use_utf8(a) _gpg_w32_gettext_use_utf8 (a)
+#endif /*GPG_ERR_ENABLE_GETTEXT_MACROS*/
+
+
 
 /* Self-documenting convenience functions.  */
 
@@ -670,9 +735,68 @@ gpg_error_from_syserror (void)
   return gpg_error (gpg_err_code_from_syserror ());
 }
 
+
+
+/* Lock functions.  */
+
+
+#ifdef _WIN64
+
+#pragma pack(push, 8)
+typedef struct
+{
+  volatile char priv[56];
+} gpgrt_lock_t;
+#pragma pack(pop)
+
+#define GPGRT_LOCK_INITIALIZER {1,0,0,0,0,0,0,0,255,255,255,255, \
+                                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                                0,0,0,0,0,0,0,0,0,0,0,0}
+
+#else
+
+#pragma pack(push, 8)
+typedef struct
+{
+  volatile char priv[36];
+} gpgrt_lock_t;
+#pragma pack(pop)
+
+#define GPGRT_LOCK_INITIALIZER {1,0,0,0,0,0,0,0,255,255,255,255, \
+                                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                                0,0,0,0,0,0,0,0}
+#endif
+
+#define GPGRT_LOCK_DEFINE(name) \
+  static gpgrt_lock_t name  = GPGRT_LOCK_INITIALIZER
+
+/* NB: If GPGRT_LOCK_DEFINE is not used, zero out the lock variable
+   before passing it to gpgrt_lock_init.  */
+gpg_err_code_t gpgrt_lock_init (gpgrt_lock_t *lockhd);
+gpg_err_code_t gpgrt_lock_lock (gpgrt_lock_t *lockhd);
+gpg_err_code_t gpgrt_lock_unlock (gpgrt_lock_t *lockhd);
+gpg_err_code_t gpgrt_lock_destroy (gpgrt_lock_t *lockhd);
+
+
+
+/* Thread functions.  */
+
+gpg_err_code_t gpgrt_yield (void);
+
+
+
+
+/* Estream */
+
+
+
 #ifdef __cplusplus
 }
 #endif
-
-
 #endif	/* GPG_ERROR_H */
+/*
+Local Variables:
+buffer-read-only: t
+End:
+*/
