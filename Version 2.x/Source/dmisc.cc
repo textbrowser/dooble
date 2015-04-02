@@ -25,22 +25,22 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDir>
 #include <QBuffer>
-#include <QtEndian>
-#include <QProcess>
-#include <QSettings>
-#include <QSqlQuery>
-#include <QProgressBar>
-#include <QSqlDatabase>
-#include <QtCore/qmath.h>
-#include <QDesktopWidget>
-#include <QFileIconProvider>
 #include <QCryptographicHash>
+#include <QDesktopWidget>
+#include <QDir>
+#include <QFileIconProvider>
+#include <QProcess>
+#include <QProgressBar>
+#include <QSettings>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QtCore/qmath.h>
+#include <QtEndian>
 
+#include "derrorlog.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "derrorlog.h"
 
 /*
 ** One of the below proxy methods (a static one)
@@ -763,7 +763,7 @@ QByteArray dmisc::passphraseHash(const QString &passphrase,
 			       "Qt's sha1 "
 			       "implementation."));
 	  hash = QCryptographicHash::hash(saltedPassphrase,
-					  QCryptographicHash::Sha1);
+					  QCryptographicHash::Sha3_512);
 	}
     }
   else
@@ -774,7 +774,7 @@ QByteArray dmisc::passphraseHash(const QString &passphrase,
 			   "implementation.").arg(hashType).
 	       arg(algorithm));
       hash = QCryptographicHash::hash
-	(saltedPassphrase, QCryptographicHash::Sha1);
+	(saltedPassphrase, QCryptographicHash::Sha3_512);
     }
 
   return hash;

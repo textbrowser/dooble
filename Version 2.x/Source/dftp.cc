@@ -448,11 +448,7 @@ void dftp::slotDownloadReadyRead(void)
 		{
 		  QDate d = lastModified.date();
 
-#if QT_VERSION >= 0x050000
 		  d.setDate(d.year() - 1, d.month(), d.day());
-#else
-		  d.setYMD(d.year() - 1, d.month(), d.day());
-#endif
 		  lastModified.setDate(d);
 		}
 	    }

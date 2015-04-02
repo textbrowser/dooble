@@ -170,7 +170,7 @@ void dwebpage::javaScriptAlert(const QUrl &url, const QString &msg)
 
   mb->setWindowIcon
     (QIcon(settings.value("mainWindow/windowIcon").toString()));
-  mb->exec()();
+  mb->exec();
 }
 
 bool dwebpage::javaScriptConfirm(const QUrl &url, const QString &msg)

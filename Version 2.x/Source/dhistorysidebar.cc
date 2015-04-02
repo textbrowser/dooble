@@ -53,11 +53,7 @@ dhistorysidebar::dhistorysidebar(QWidget *parent):QWidget(parent)
   ui.history->setObjectName("dooble_history_sidebar");
   ui.history->setModel(dooble::s_historyModel);
   ui.history->setContextMenuPolicy(Qt::CustomContextMenu);
-#if QT_VERSION >= 0x050000
   ui.history->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-#else
-  ui.history->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-#endif
   connect(this,
 	  SIGNAL(iconsChanged(void)),
 	  ui.searchLineEdit,

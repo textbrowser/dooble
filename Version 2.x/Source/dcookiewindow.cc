@@ -45,9 +45,7 @@ dcookiewindow::dcookiewindow(dcookies *cookies, QWidget *parent):
   ui.setupUi(this);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   ui.deleteAllPushButton->setMenu(new QMenu(this));
@@ -82,11 +80,7 @@ dcookiewindow::dcookiewindow(dcookies *cookies, QWidget *parent):
   for(int i = 0; i < ui.cookies->header()->count(); i++)
     ui.cookies->resizeColumnToContents(i);
 
-#if QT_VERSION >= 0x050000
   ui.cookies->header()->setSectionResizeMode(QHeaderView::Interactive);
-#else
-  ui.cookies->header()->setResizeMode(QHeaderView::Interactive);
-#endif
   ui.searchLineEdit->setPlaceholderText(tr("Search Sites"));
   connect(ui.cookies,
 	  SIGNAL(collapsed(const QModelIndex &)),
@@ -133,11 +127,7 @@ dcookiewindow::dcookiewindow(dcookies *cookies, QWidget *parent):
 	  ui.cookies->resizeColumnToContents(i);
       }
 
-#if QT_VERSION >= 0x050000
   ui.cookies->header()->setSectionsMovable(true);
-#else
-  ui.cookies->header()->setMovable(true);
-#endif
   slotSetIcons();
 }
 
@@ -873,38 +863,10 @@ void dcookiewindow::slotPopulate(void)
     populate();
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dcookiewindow::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show(0); // A parent is not used.
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dcookiewindow::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dcookiewindow::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif
 
 void dcookiewindow::find(const QString &text)
 {

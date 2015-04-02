@@ -77,9 +77,7 @@ extern "C"
 }
 
 #ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000
 #include "CocoaInitializer.h"
-#endif
 #endif
 #include "dbookmarkspopup.h"
 #include "dbookmarkswindow.h"
@@ -176,7 +174,6 @@ static void sig_handler(int signum)
   _Exit(signum);
 }
 
-#if QT_VERSION >= 0x050000
 static void qt_message_handler(QtMsgType type,
 			       const QMessageLogContext &context,
 			       const QString &msg)
@@ -185,13 +182,6 @@ static void qt_message_handler(QtMsgType type,
   Q_UNUSED(context);
   dmisc::logError(msg);
 }
-#else
-static void qt_message_handler(QtMsgType type, const char *msg)
-{
-  Q_UNUSED(type);
-  dmisc::logError(msg);
-}
-#endif
 
 int main(int argc, char *argv[])
 {
@@ -257,28 +247,16 @@ int main(int argc, char *argv[])
   ** Prepare the style before creating a QApplication object, per Qt.
   */
 
-#ifdef Q_OS_MAC
-#if QT_VERSION < 0x050000
-  QApplication::setStyle(new QMacStyle());
-#endif
-#endif
-
 #ifdef Q_OS_WIN32
-#if QT_VERSION >= 0x050000
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle("fusion");
-#endif
 #endif
 
   /*
   ** Proceed to Qt initialization.
   */
 
-#if QT_VERSION >= 0x050000
   qInstallMessageHandler(qt_message_handler);
-#else
-  qInstallMsgHandler(qt_message_handler);
-#endif
 
   QApplication qapp(argc, argv);
 
@@ -341,13 +319,11 @@ int main(int argc, char *argv[])
   qRegisterMetaType<dnetworkftpreply *> ("dnetworkftpreply *");
   qRegisterMetaType<dnetworksslerrorreply *> ("dnetworksslerrorreply *");
 #ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000
   /*
   ** Eliminate pool errors on OS X.
   */
 
   CocoaInitializer ci;
-#endif
 #endif
 
   /*
@@ -992,11 +968,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.actionZoom_Text_Only->setChecked
     (s_settings.value("mainWindow/zoomTextOnly", false).toBool());
 #ifdef Q_OS_MAC
-#if QT_VERSION < 0x050000
-  setAttribute(Qt::WA_MacMetalStyle, true);
-#else
   setAttribute(Qt::WA_MacMetalStyle, false);
-#endif
+
   /*
   ** Fixes shuffling.
   */
@@ -1020,7 +993,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.favoritesToolBar->setVisible(false);
   ui.favoritesToolBar->addWidget(ui.favoritesFrame);
   ui.favoritesToolBar->setVisible(true);
-  ui.restoreToolButton->setVisible(false);
   sbWidget = new QWidget(this);
   m_desktopWidget = 0;
   sb.setupUi(sbWidget);
@@ -1627,7 +1599,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	    toolButton == ui.reloadToolButton ||
 	    toolButton == ui.homeToolButton ||
 	    toolButton == ui.desktopToolButton ||
-	    toolButton == ui.restoreToolButton ||
 	    toolButton == sb.exceptionsToolButton ||
 	    toolButton == sb.errorLogToolButton)
       toolButton->setStyleSheet
@@ -1992,8 +1963,6 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("mainWindow/actionOpen_Directory").toString()));
   ui.actionMy_Retrieved_Files->setIcon
     (QIcon(settings.value("mainWindow/actionMy_Retrieved_Files").toString()));
-  ui.restoreToolButton->setIcon
-    (QIcon(settings.value("mainWindow/restoreToolButton").toString()));
   ui.actionCopy->setIcon
     (QIcon(settings.value("mainWindow/actionCopy").toString()));
   ui.actionPaste->setIcon
@@ -3856,16 +3825,6 @@ void dooble::closeTab(const int index)
       count += 1;
     }
 
-#if QT_VERSION < 0x050000
-  /*
-  ** If the second-to-the-last tab is closed in Qt 5.x, the last tab's
-  ** close button will appear distorted. This only occurs if the tab
-  ** was closed via the menu.
-  */
-
-  ui.tabWidget->setTabsClosable(count > 1);
-#endif
-
   if(count == 1)
     ui.tabWidget->setBarVisible
       (s_settings.value("settingsWindow/alwaysShowTabBar",
@@ -4320,12 +4279,7 @@ void dooble::saveHandler(const QUrl &url, const QString &html,
   QFileInfo fileInfo(path);
 
   if(!fileInfo.isReadable() || !fileInfo.isWritable())
-#if QT_VERSION >= 0x050000
     path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-#else
-    path = QDesktopServices::storageLocation
-      (QDesktopServices::DesktopLocation);
-#endif
 
   if(!parent)
     parent = this;
@@ -5046,9 +5000,6 @@ void dooble::slotAuthenticationRequired(const QUrl &url,
   ui_p.setupUi(&dialog);
 #ifdef Q_OS_MAC
   dialog.setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050200
-  ui_p.passwordLineEdit->setEchoMode(QLineEdit::NoEcho);
-#endif
 #endif
   ui_p.messageLabel->setText
     (QString(tr("The site %1 is requesting "
@@ -5112,9 +5063,6 @@ void dooble::slotProxyAuthenticationRequired(const QUrl &url,
   ui_p.setupUi(&dialog);
 #ifdef Q_OS_MAC
   dialog.setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050200
-  ui_p.passwordLineEdit->setEchoMode(QLineEdit::NoEcho);
-#endif
 #endif
   ui_p.messageLabel->setText
     (QString(tr("The proxy %1 is requesting "
@@ -5529,7 +5477,6 @@ bool dooble::promptForPassphrase(const bool override)
      dmisc::passphraseWasPrepared())
     {
       show();
-#if QT_VERSION >= 0x050000
 #ifndef Q_OS_MAC
       /*
       ** This will help center the passphrase dialog.
@@ -5538,7 +5485,6 @@ bool dooble::promptForPassphrase(const bool override)
       update();
       QApplication::processEvents();
 #endif
-#endif
 
       QDialog dialog(this);
       Ui_passphrasePrompt ui_p;
@@ -5546,9 +5492,6 @@ bool dooble::promptForPassphrase(const bool override)
       ui_p.setupUi(&dialog);
 #ifdef Q_OS_MAC
       dialog.setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050200
-      ui_p.passphraseLineEdit->setEchoMode(QLineEdit::NoEcho);
-#endif
 #endif
       QPixmap pixmap;
       QPixmap scaledPixmap;
@@ -5600,11 +5543,9 @@ bool dooble::promptForPassphrase(const bool override)
 	    ui_p.buttonBox->buttons().at(i)->setIconSize(QSize(16, 16));
 	  }
 
-#if QT_VERSION >= 0x050000
 #ifndef Q_OS_MAC
       dialog.setWindowModality(Qt::ApplicationModal);
       dialog.show();
-#endif
 #endif
 
       if(dialog.exec() == QDialog::Accepted)
@@ -5652,7 +5593,7 @@ bool dooble::promptForPassphrase(const bool override)
 	  else
 	    {
 	      ui_p.passphraseLineEdit->clear();
-#if QT_VERSION >= 0x050000 && defined(Q_OS_MAC)
+#ifdef Q_OS_MAC
 	      dialog.hide();
 	      QApplication::processEvents();
 #endif

@@ -167,7 +167,6 @@ class dooble: public QMainWindow
     return 0;
   }
 
-  QSize m_sizeForFullScreen;
   QString pluginFileName(const QString &plugName);
   QString pluginPath(void);
   bool event(QEvent *event);
@@ -242,7 +241,6 @@ class dooble: public QMainWindow
   void slotFindNext(void);
   void slotFindPrevious(void);
   void slotForward(void);
-  void slotFullScreenMode(void);
   void slotGeometryChangeRequested(const QRect &geometry);
   void slotGoHome(void);
   void slotGoToBackHistoryItem(void);

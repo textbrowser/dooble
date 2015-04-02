@@ -49,9 +49,7 @@ ddownloadwindow::ddownloadwindow(void):QMainWindow()
   ui.urlLineEdit->setMaxLength(2500);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   ui.searchLineEdit->setPlaceholderText(tr("Search Downloads"));
@@ -822,9 +820,6 @@ void ddownloadwindow::slotAuthenticationRequired
   ui_p.setupUi(&dialog);
 #ifdef Q_OS_MAC
   dialog.setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050200
-  ui_p.passwordLineEdit->setEchoMode(QLineEdit::NoEcho);
-#endif
 #endif
   ui_p.messageLabel->setText
     (QString(tr("The site %1 is requesting "
@@ -885,9 +880,6 @@ void ddownloadwindow::slotProxyAuthenticationRequired
   ui_p.setupUi(&dialog);
 #ifdef Q_OS_MAC
   dialog.setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050200
-  ui_p.passwordLineEdit->setEchoMode(QLineEdit::NoEcho);
-#endif
 #endif
   ui_p.messageLabel->setText
     (QString(tr("The proxy %1:%2 is requesting "
@@ -1034,35 +1026,7 @@ void ddownloadwindow::slotBitRateChanged(int state)
   settings.setValue("downloadWindow/showDownloadRateInBits", state);
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool ddownloadwindow::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show(0);
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool ddownloadwindow::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool ddownloadwindow::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif

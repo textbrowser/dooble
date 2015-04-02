@@ -649,13 +649,11 @@ QNetworkReply *dnetworkaccessmanager::createRequest
       request.setAttribute(QNetworkRequest::HttpPipeliningAllowedAttribute,
 			   true);
 
-#if QT_VERSION >= 0x050300
       if(scheme == "http" || scheme == "https")
 	request.setAttribute
 	  (QNetworkRequest::SpdyAllowedAttribute,
 	   dooble::s_settings.value("settingsWindow/speedy", false).
 	   toBool());
-#endif
 
       if(request.attribute(QNetworkRequest::User) != "dooble-favicon" &&
 	 request.url() != m_linkClicked &&

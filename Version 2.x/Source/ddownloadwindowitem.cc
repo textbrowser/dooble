@@ -69,11 +69,7 @@ ddownloadwindowitem::ddownloadwindowitem(QWidget *parent):QWidget(parent)
 	  SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &,
 					     QAuthenticator *)));
   init_ddownloadwindowitem();
-#if QT_VERSION < 0x050000
-  ui.computeFileHash->setToolTip(tr("Compute SHA-1 Hash"));
-#else
   ui.computeFileHash->setToolTip(tr("Compute SHA-256 Hash"));
-#endif
 #ifdef Q_OS_MAC
   ui.abortToolButton->setStyleSheet
     ("QToolButton {border: none;}"
@@ -256,12 +252,10 @@ void ddownloadwindowitem::downloadUrl
 	  request.setUrl(m_url);
 	  request.setAttribute
 	    (QNetworkRequest::HttpPipeliningAllowedAttribute, true);
-#if QT_VERSION >= 0x050300
 	  request.setAttribute
 	    (QNetworkRequest::SpdyAllowedAttribute,
 	     dooble::s_settings.value("settingsWindow/speedy", false).
 	     toBool());
-#endif
 	  reply = m_networkAccessManager->get(request);
 	  reply->setParent(this);
 	  reply->ignoreSslErrors();
@@ -663,12 +657,10 @@ void ddownloadwindowitem::slotPauseDownload(void)
 	  request.setUrl(m_url);
 	  request.setAttribute
 	    (QNetworkRequest::HttpPipeliningAllowedAttribute, true);
-#if QT_VERSION >= 0x050300
 	  request.setAttribute
 	    (QNetworkRequest::SpdyAllowedAttribute,
 	     dooble::s_settings.value("settingsWindow/speedy", false).
 	     toBool());
-#endif
 
 	  QFile *file = findChild<QFile *> ();
 
@@ -852,11 +844,7 @@ void ddownloadwindowitem::slotError(QNetworkReply::NetworkError code)
 void ddownloadwindowitem::slotComputeFileHash(void)
 {
   QByteArray buffer(4096, 0);
-#if QT_VERSION < 0x050000
-  QCryptographicHash hash(QCryptographicHash::Sha1);
-#else
-  QCryptographicHash hash(QCryptographicHash::Sha256);
-#endif
+  QCryptographicHash hash(QCryptographicHash::Sha3_512);
   QFile file(ui.destinationLabel->text());
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));

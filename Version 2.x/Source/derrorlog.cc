@@ -38,9 +38,7 @@ derrorlog::derrorlog(void):QMainWindow()
   ui.setupUi(this);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   m_findLineEditPalette = ui.findLineEdit->palette();
@@ -373,35 +371,7 @@ void derrorlog::clear(void)
   slotClear();
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool derrorlog::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show();
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool derrorlog::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool derrorlog::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif

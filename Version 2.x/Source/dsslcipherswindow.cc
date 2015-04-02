@@ -41,9 +41,7 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
   ui.setupUi(this);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   connect(ui.allSSL, SIGNAL(toggled(bool)), this,
@@ -130,26 +128,14 @@ void dsslcipherswindow::populate(void)
 		cipher = QSslCipher
 		  (query.value(0).toString(), QSsl::SslV3);
 	      else if(protocol.contains("tlsv1.0"))
-#if QT_VERSION >= 0x050000
 		cipher = QSslCipher
 		  (query.value(0).toString(), QSsl::TlsV1_0);
-#else
-	        cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::TlsV1);
-#endif
 	      else if(protocol.contains("tlsv1.1"))
-#if QT_VERSION >= 0x050000
 		cipher = QSslCipher
 		  (query.value(0).toString(), QSsl::TlsV1_1);
-#else
-	        cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::UnknownProtocol);
-#endif
-#if QT_VERSION >= 0x050000
 	      else if(protocol.contains("tlsv1.2"))
 		cipher = QSslCipher
 		  (query.value(0).toString(), QSsl::TlsV1_2);
-#endif
 	      else
 		cipher = QSslCipher
 		  (query.value(0).toString(), QSsl::UnknownProtocol);
@@ -238,7 +224,6 @@ void dsslcipherswindow::populate(void)
 
   QSsl::SslProtocol protocol = QSsl::UnknownProtocol;
 
-#if QT_VERSION >= 0x050000
   if(sslv3 && tlsv10 && tlsv11 && tlsv12)
     protocol = QSsl::UnknownProtocol;
   else if(sslv3 && tlsv10)
@@ -255,20 +240,6 @@ void dsslcipherswindow::populate(void)
     protocol = QSsl::SslV3;
   else
     protocol = QSsl::UnknownProtocol;
-#else
-  if(sslv3 && tlsv10 && tlsv11 && tlsv12)
-    protocol = QSsl::UnknownProtocol;
-  else if(sslv3 && tlsv10)
-    protocol = QSsl::TlsV1SslV3;
-  else if(tlsv11 || tlsv12)
-    protocol = QSsl::UnknownProtocol;
-  else if(tlsv10)
-    protocol = QSsl::TlsV1;
-  else if(sslv3)
-    protocol = QSsl::SslV3;
-  else
-    protocol = QSsl::UnknownProtocol;
-#endif
 
   QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
 
@@ -405,38 +376,10 @@ void dsslcipherswindow::keyPressEvent(QKeyEvent *event)
   QMainWindow::keyPressEvent(event);
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dsslcipherswindow::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show();
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dsslcipherswindow::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dsslcipherswindow::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif
 
 void dsslcipherswindow::createTable(void)
 {
@@ -499,21 +442,11 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
   if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "sslv3")
     cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::SslV3);
   else if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "tlsv1.0")
-#if QT_VERSION >= 0x050000
     cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1_0);
-#else
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1);
-#endif
   else if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "tlsv1.1")
-#if QT_VERSION >= 0x050000
     cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1_1);
-#else
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1);
-#endif
-#if QT_VERSION >= 0x050000
   else if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "tlsv1.2")
     cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1_2);
-#endif
   else
     cipher = QSslCipher
       (item->data(Qt::UserRole).toString(), QSsl::UnknownProtocol);

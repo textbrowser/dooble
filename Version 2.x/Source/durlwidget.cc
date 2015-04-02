@@ -99,11 +99,7 @@ durlcompleter::durlcompleter(QWidget *parent):QCompleter(parent)
   m_tableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   m_tableView->verticalHeader()->setVisible(false);
   m_tableView->horizontalHeader()->setVisible(false);
-#if QT_VERSION >= 0x050000
   m_tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-#else
-  m_tableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-#endif
   setPopup(m_tableView);
 }
 

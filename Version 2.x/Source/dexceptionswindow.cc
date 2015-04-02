@@ -48,9 +48,7 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   ui.lineEdit->setMaxLength(2500);
@@ -130,13 +128,8 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 	    (0, Qt::AscendingOrder);
 	  ui.tableView->horizontalHeader()->setSortIndicatorShown(true);
 	  ui.tableView->horizontalHeader()->setStretchLastSection(true);
-#if QT_VERSION >= 0x050000
 	  ui.tableView->horizontalHeader()->setSectionResizeMode
 	    (QHeaderView::Interactive);
-#else
-	  ui.tableView->horizontalHeader()->setResizeMode
-	    (QHeaderView::Interactive);
-#endif
 	}
       else
 	ui.tableView->resizeColumnToContents(0);
@@ -562,38 +555,10 @@ qint64 dexceptionswindow::size(void) const
 		   QString("%1.db").arg(objectName())).size();
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dexceptionswindow::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show();
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dexceptionswindow::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dexceptionswindow::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif
 
 void dexceptionswindow::slotRadioToggled(bool state)
 {

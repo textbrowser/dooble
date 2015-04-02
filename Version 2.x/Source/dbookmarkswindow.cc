@@ -54,9 +54,7 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
   ui.bookmarks->setObjectName("dooble_bookmarks_table");
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   m_urlModel = new QStandardItemModel(this);
@@ -82,13 +80,8 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
   for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 2; i++)
     ui.bookmarks->resizeColumnToContents(i);
 
-#if QT_VERSION >= 0x050000
   ui.bookmarks->horizontalHeader()->setSectionResizeMode
     (QHeaderView::Interactive);
-#else
-  ui.bookmarks->horizontalHeader()->setResizeMode
-    (QHeaderView::Interactive);
-#endif
   ui.searchLineEdit->setPlaceholderText(tr("Search Bookmarks"));
   slotSetIcons();
   connect(dooble::s_bookmarksFolderModel,
@@ -201,20 +194,11 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
 	  (0, Qt::AscendingOrder);
 	ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
 	ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
-#if QT_VERSION >= 0x050000
 	ui.bookmarks->horizontalHeader()->setSectionResizeMode
 	  (QHeaderView::Interactive);
-#else
-	ui.bookmarks->horizontalHeader()->setResizeMode
-	  (QHeaderView::Interactive);
-#endif
       }
 
-#if QT_VERSION >= 0x050000
   ui.bookmarks->horizontalHeader()->setSectionsMovable(true);
-#else
-  ui.bookmarks->horizontalHeader()->setMovable(true);
-#endif
   createBookmarksDatabase();
 
   /*
@@ -2677,12 +2661,7 @@ void dbookmarkswindow::slotExport(void)
   QFileDialog fileDialog(this);
 
   if(!fileInfo.isReadable() || !fileInfo.isWritable())
-#if QT_VERSION >= 0x050000
     path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-#else
-    path = QDesktopServices::storageLocation
-      (QDesktopServices::DesktopLocation);
-#endif
 
 #ifdef Q_OS_MAC
   fileDialog.setAttribute(Qt::WA_MacMetalStyle, false);
@@ -2831,13 +2810,8 @@ void dbookmarkswindow::slotImport(void)
   QFileDialog fileDialog(this);
 
   if(!fileInfo.isReadable() || !fileInfo.isWritable())
-#if QT_VERSION >= 0x050000
     path = QStandardPaths::writableLocation
       (QStandardPaths::DesktopLocation);
-#else
-    path = QDesktopServices::storageLocation
-      (QDesktopServices::DesktopLocation);
-#endif
 
 #ifdef Q_OS_MAC
   fileDialog.setAttribute(Qt::WA_MacMetalStyle, false);
@@ -2950,35 +2924,7 @@ void dbookmarkswindow::clear(void)
   populate();
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dbookmarkswindow::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show(m_parent);
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dbookmarkswindow::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dbookmarkswindow::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif

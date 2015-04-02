@@ -30,9 +30,7 @@
 #include <QSqlQuery>
 #include <QProgressBar>
 #include <QSqlDatabase>
-#if QT_VERSION >= 0x050000
 #include <QtConcurrent>
-#endif
 #include <QNetworkCookie>
 
 #include "dmisc.h"
@@ -178,42 +176,12 @@ bool dcookies::setCookiesFromUrl(const QList<QNetworkCookie> &cookieList,
   */
 
   bool added = false;
-#if QT_VERSION < 0x050000
-  int thirdPartyCookiesPolicy = dooble::s_settings.value
-    ("settingsWindow/thirdPartyCookiesPolicy", 1).toInt();
-#endif
 
   for(int i = 0; i < cookieList.size(); i++)
     {
-#if QT_VERSION < 0x050000
-      if(thirdPartyCookiesPolicy != 0)
-	if(url.host() != cookieList.at(i).domain())
-	  if(cookieList.at(i).domain() != "" &&
-	     cookieList.at(i).domain() != ".")
-	    /*
-	    ** Sorry, but third-party cookies are not
-	    ** allowed. Goodbye!
-	    */
-
-	    continue;
-#endif
-
       QNetworkCookie test(cookieList.at(i));
 
-#if QT_VERSION < 0x050000
-      if(test.domain().isEmpty())
-	{
-	  if(url.host().isEmpty())
-	    continue;
-
-	  test.setDomain(url.host().toLower());
-	}
-
-      if(test.path().isEmpty())
-	test.setPath("/");
-#else
       test.normalize(url);
-#endif
 
       if(httpOnly)
 	{
@@ -827,7 +795,6 @@ void dcookies::setAllCookies(const QList<QNetworkCookie> &cookies)
 
 bool dcookies::deleteCookie(const QNetworkCookie &cookie)
 {
-#if QT_VERSION >= 0x050000
   bool rc = QNetworkCookieJar::deleteCookie(cookie);
 
   if(rc)
@@ -839,15 +806,10 @@ bool dcookies::deleteCookie(const QNetworkCookie &cookie)
     }
 
   return rc;
-#else
-  Q_UNUSED(cookie);
-  return false;
-#endif
 }
 
 bool dcookies::insertCookie(const QNetworkCookie &cookie)
 {
-#if QT_VERSION >= 0x050000
   if(!dooble::s_settings.value("settingsWindow/cookiesEnabled", true).
      toBool())
     return false;
@@ -879,15 +841,10 @@ bool dcookies::insertCookie(const QNetworkCookie &cookie)
     }
 
   return rc;
-#else
-  Q_UNUSED(cookie);
-  return false;
-#endif
 }
 
 bool dcookies::updateCookie(const QNetworkCookie &cookie)
 {
-#if QT_VERSION >= 0x050000
   if(!dooble::s_settings.value("settingsWindow/cookiesEnabled", true).
      toBool())
     return false;
@@ -903,8 +860,4 @@ bool dcookies::updateCookie(const QNetworkCookie &cookie)
     }
 
   return rc;
-#else
-  Q_UNUSED(cookie);
-  return false;
-#endif
 }

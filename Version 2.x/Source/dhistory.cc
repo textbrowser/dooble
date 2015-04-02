@@ -48,9 +48,7 @@ dhistory::dhistory(void):QMainWindow()
   ui.setupUi(this);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   m_model = new QStandardItemModel(this);
@@ -75,12 +73,8 @@ dhistory::dhistory(void):QMainWindow()
   for(int i = 0; i < ui.history->horizontalHeader()->count() - 2; i++)
     ui.history->resizeColumnToContents(i);
 
-#if QT_VERSION >= 0x050000
   ui.history->horizontalHeader()->setSectionResizeMode
     (QHeaderView::Interactive);
-#else
-  ui.history->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
-#endif
   ui.searchLineEdit->setPlaceholderText(tr("Search History"));
   slotSetIcons();
   connect(ui.history->horizontalHeader(),
@@ -281,20 +275,11 @@ dhistory::dhistory(void):QMainWindow()
 							 Qt::AscendingOrder);
 	ui.history->horizontalHeader()->setSortIndicatorShown(true);
 	ui.history->horizontalHeader()->setStretchLastSection(true);
-#if QT_VERSION >= 0x050000
 	ui.history->horizontalHeader()->setSectionResizeMode
 	  (QHeaderView::Interactive);
-#else
-	ui.history->horizontalHeader()->setResizeMode
-	  (QHeaderView::Interactive);
-#endif
       }
 
-#if QT_VERSION >= 0x050000
   ui.history->horizontalHeader()->setSectionsMovable(true);
-#else
-  ui.history->horizontalHeader()->setMovable(true);
-#endif
   ui.sharePushButton->setEnabled(false);
 
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
@@ -1526,35 +1511,7 @@ void dhistory::slotShare(void)
 }
 #endif
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dhistory::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show(m_parent);
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dhistory::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dhistory::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif

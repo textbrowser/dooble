@@ -38,11 +38,6 @@
 #include <QMouseEvent>
 #include <QMdiSubWindow>
 #include <QDesktopServices>
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
-#if QT_VERSION < 0x050000
-#include <QX11EmbedContainer>
-#endif
-#endif
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -99,18 +94,6 @@ void ddesktopwidget::mousePressEvent(QMouseEvent *event)
 
       menu.addAction(tr("&Change Desktop Background"),
 		     this, SLOT(slotChangeDesktopBackground(void)));
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
-#if QT_VERSION < 0x050000
-      QFileInfo fileInfo("/usr/bin/xterm");
-
-      if(fileInfo.isExecutable() && fileInfo.isReadable())
-	{
-	  menu.addSeparator();
-	  menu.addAction(tr("&Launch Terminal"),
-			 this, SLOT(slotLaunchTerminal(void)));
-	}
-#endif
-#endif
       menu.exec(QCursor::pos());
     }
 
@@ -250,76 +233,9 @@ void ddesktopwidget::showFileManagerWindow(const QUrl &url)
   fileManagerWindow->showNormal();
 }
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
-#if QT_VERSION < 0x050000
-void ddesktopwidget::slotLaunchTerminal(void)
-{
-  QSettings settings(dooble::s_settings.value("iconSet").toString(),
-		     QSettings::IniFormat);
-  QMdiSubWindow *terminalWindow = new QMdiSubWindow(this);
-  QX11EmbedWidget *container = new QX11EmbedWidget(this);
-
-  connect(terminalWindow,
-	  SIGNAL(destroyed(void)),
-	  container,
-	  SLOT(deleteLater(void)));
-  connect(terminalWindow,
-	  SIGNAL(destroyed(void)),
-	  this,
-	  SLOT(update(void)));
-  terminalWindow->setWindowTitle
-    (tr("Dooble Web Browser: Terminal"));
-  terminalWindow->setWindowIcon
-    (QIcon(settings.value("windowIcon").toString()));
-  terminalWindow->setWidget(container);
-  terminalWindow->setAttribute(Qt::WA_DeleteOnClose);
-  terminalWindow->setWindowFlags
-    ((terminalWindow->windowFlags() | Qt::CustomizeWindowHint) &
-     ~Qt::WindowMaximizeButtonHint);
-  terminalWindow->show();
-
-  QProcess *process = new QProcess(this);
-
-  connect(process,
-	  SIGNAL(error(QProcess::ProcessError)),
-	  terminalWindow,
-	  SLOT(deleteLater(void)));
-  connect(process,
-	  SIGNAL(finished(int, QProcess::ExitStatus)),
-	  terminalWindow,
-	  SLOT(deleteLater(void)));
-
-  QStringList arguments;
-
-  arguments << "-sb";
-  arguments << "-into" << QString::number(container->winId());
-  process->start("/usr/bin/xterm", arguments);
-  connect(terminalWindow,
-	  SIGNAL(destroyed(QObject *)),
-	  process,
-	  SLOT(kill(void)));
-  connect(process,
-	  SIGNAL(finished(int, QProcess::ExitStatus)),
-	  process,
-	  SLOT(deleteLater(void)));
-  terminalWindow->resize(530, 370);
-
-  /*
-  ** Enable a simple focus to prevent premature exits.
-  */
-
-  terminalWindow->setFocusPolicy(Qt::ClickFocus);
-}
-#else
 void ddesktopwidget::slotLaunchTerminal(void)
 {
 }
-#endif
-#else
-void ddesktopwidget::slotLaunchTerminal(void)
-{
-}
-#endif
 
 void ddesktopwidget::enterEvent(QEvent *event)
 {

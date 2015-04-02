@@ -68,14 +68,10 @@ dsettings::dsettings():QMainWindow()
     progressBar->setVisible(false);
 
   ui.rememberClosedTabsSpinBox->setMaximum(dooble::MAX_HISTORY_ITEMS);
-#if QT_VERSION >= 0x050000
   ui.thirdPartyCookiesComboBox->addItem(tr("allowed with existing cookies"));
-#endif
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
 
   /*
   ** Move the title so that the box's border remains clean.
@@ -86,15 +82,6 @@ dsettings::dsettings():QMainWindow()
 			    "top: -1px;"
 			    "subcontrol-origin: border;}");
 
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050200
-  ui.browsingFtpProxyPassword->setEchoMode(QLineEdit::NoEcho);
-  ui.browsingHttpProxyPassword->setEchoMode(QLineEdit::NoEcho);
-  ui.downloadFtpProxyPassword->setEchoMode(QLineEdit::NoEcho);
-  ui.downloadHttpProxyPassword->setEchoMode(QLineEdit::NoEcho);
-  ui.pass1LineEdit->setEchoMode(QLineEdit::NoEcho);
-  ui.pass2LineEdit->setEchoMode(QLineEdit::NoEcho);
-#endif
-#else
   statusBar()->setSizeGripEnabled(true);
 #endif
 
@@ -179,19 +166,11 @@ dsettings::dsettings():QMainWindow()
   if(dooble::s_settings.value("settingsWindow/myRetrievedFiles", "").
      toString().trimmed().isEmpty())
     {
-#if QT_VERSION >= 0x050000
       settings.setValue
 	("settingsWindow/myRetrievedFiles",
 	 QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
       dooble::s_settings["settingsWindow/myRetrievedFiles"] =
 	QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-#else
-      settings.setValue
-	("settingsWindow/myRetrievedFiles",
-	 QDesktopServices::storageLocation(QDesktopServices::DesktopLocation));
-      dooble::s_settings["settingsWindow/myRetrievedFiles"] =
-	QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
-#endif
     }
 
   if(dooble::s_settings.value("settingsWindow/spotOnSharedDatabase", "").
@@ -494,19 +473,11 @@ void dsettings::exec(dooble *parent)
   ui.url11lineEdit->setText
     (dooble::s_settings.value("settingsWindow/url11",
 			      "").toString().trimmed());
-#if QT_VERSION >= 0x050000
   ui.myRetrievedFilesLineEdit->setText
     (dooble::s_settings.
      value("settingsWindow/myRetrievedFiles",
 	   QStandardPaths::writableLocation(QStandardPaths::DesktopLocation)).
      toString());
-#else
-  ui.myRetrievedFilesLineEdit->setText
-    (dooble::s_settings.
-     value("settingsWindow/myRetrievedFiles",
-	   QDesktopServices::storageLocation(QDesktopServices::
-					     DesktopLocation)).toString());
-#endif
   ui.spotOnSharedDatabaseLineEdit->setText
     (dooble::s_settings.value("settingsWindow/spotOnSharedDatabase",
 			      QDir::homePath() + QDir::separator() +
@@ -803,7 +774,6 @@ void dsettings::exec(dooble *parent)
     (dooble::s_settings.value("settingsWindow/cookiesEnabled", true).toBool());
   ui.blockPopupsCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/blockPopups", true).toBool());
-#if QT_VERSION >= 0x040800
   ui.hyperlinkAuditing->setChecked
     (dooble::s_settings.value("settingsWindow/hyperlinkAuditing",
 			      false).toBool());
@@ -811,12 +781,6 @@ void dsettings::exec(dooble *parent)
   ui.webglCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/webglEnabled", false).toBool());
   ui.webglCheckBox->setEnabled(true);
-#else
-  ui.hyperlinkAuditing->setChecked(false);
-  ui.hyperlinkAuditing->setEnabled(false);
-  ui.webglCheckBox->setChecked(false);
-  ui.webglCheckBox->setEnabled(false);
-#endif
 
   QFont font;
 
@@ -1280,13 +1244,8 @@ void dsettings::exec(dooble *parent)
      toBool());
   ui.sightSslErrorsPushButton->setEnabled
     (ui.sightSslErrorsCheckBox->isChecked());
-#if QT_VERSION >= 0x050300
   ui.speedyCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/speedy", false).toBool());
-#else
-  ui.speedyCheckBox->setChecked(false);
-  ui.speedyCheckBox->setEnabled(false);
-#endif
   ui.browsingProxyIgnore->setPlainText
     (dooble::s_settings.value("settingsWindow/browsingProxyIgnore",
 			      "localhost, 127.0.0.1").toString().trimmed());
@@ -2876,35 +2835,7 @@ Ui_settingsWindow dsettings::UI(void) const
   return ui;
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dsettings::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show();
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dsettings::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dsettings::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif

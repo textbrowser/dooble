@@ -46,9 +46,7 @@ dpagesourcewindow::dpagesourcewindow(QWidget *parent,
   ui.setupUi(this);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   m_findLineEditPalette = ui.findLineEdit->palette();
@@ -298,12 +296,7 @@ void dpagesourcewindow::slotSavePageAs(void)
   QFileDialog fileDialog(this);
 
   if(!fileInfo.isReadable() || !fileInfo.isWritable())
-#if QT_VERSION >= 0x050000
     path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-#else
-    path = QDesktopServices::storageLocation
-      (QDesktopServices::DesktopLocation);
-#endif
 
 #ifdef Q_OS_MAC
   fileDialog.setAttribute(Qt::WA_MacMetalStyle, false);
@@ -373,35 +366,7 @@ void dpagesourcewindow::slotSetIcons(void)
   setWindowIcon(QIcon(settings.value("windowIcon").toString()));
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dpagesourcewindow::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show();
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dpagesourcewindow::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dpagesourcewindow::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif

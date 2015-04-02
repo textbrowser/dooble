@@ -40,9 +40,7 @@ dclearcontainers::dclearcontainers(void):QMainWindow()
   ui.setupUi(this);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
-#if QT_VERSION >= 0x050000
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
-#endif
   statusBar()->setSizeGripEnabled(false);
 #endif
   connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton *)),
@@ -236,35 +234,7 @@ void dclearcontainers::slotChecked(bool state)
     settings.setValue("clearContainersWindow/offlineCache", state);
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dclearcontainers::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show(m_parent);
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dclearcontainers::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dclearcontainers::event(QEvent *event)
-{
-  return QMainWindow::event(event);
-}
-#endif
