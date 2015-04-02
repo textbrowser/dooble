@@ -1907,9 +1907,6 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 		      false).toBool())
     slotShowDesktopTab(false);
 
-  if(hash.contains("full-screen-mode"))
-    slotFullScreenMode();
-
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
 			      false).toBool())
     dmisc::centerChildWithParent(this, d);
@@ -1920,6 +1917,14 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
     (ui.actionShow_HistorySideBar->isChecked());
   reinstate();
   update();
+
+  if(hash.contains("full-screen-mode"))
+    /*
+    ** Resolve X11 behavior. The event() method does not
+    ** appear to cause this problem.
+    */
+
+    QTimer::singleShot(750, this, SLOT(slotFullScreenMode(void)));
 
   if(s_instances <= 1)
     if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
