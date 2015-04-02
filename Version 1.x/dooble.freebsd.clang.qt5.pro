@@ -93,7 +93,6 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dhistory.h \
 		  Include/dhistorymodel.h \
 		  Include/dhistorysidebar.h \
-                  Include/dmarker.h \
 		  Include/dmisc.h \
 		  Include/dnetworkaccessmanager.h \
 		  Include/dnetworkcache.h \
@@ -140,7 +139,6 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dhistory.cc \
 		  Source/dhistorymodel.cc \
 		  Source/dhistorysidebar.cc \
-                  Source/dmarker.cc \
 		  Source/dmisc.cc \
 		  Source/dnetworkaccessmanager.cc \
 		  Source/dnetworkcache.cc \

@@ -214,7 +214,6 @@ void slotClearCookies(void);
     (const QString &host, const QUrl &url, const QDateTime &dateTime);
   void titleChanged(const QString &title);
   void urlChanged(const QUrl &url);
-  void viewEntered(void);
   void viewImage(const QUrl &url);
   void viewPageSource(void);
 };

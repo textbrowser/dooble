@@ -1096,7 +1096,6 @@ void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 void dview::enterEvent(QEvent *event)
 {
   QStackedWidget::enterEvent(event);
-  emit viewEntered();
 }
 
 void dview::slotSelectionChanged(void)

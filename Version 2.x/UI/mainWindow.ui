@@ -185,30 +185,7 @@
          <widget class="dsearchwidget" name="searchLineEdit"/>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="restoreToolButton">
-         <property name="toolTip">
-          <string>Restore</string>
-         </property>
-         <property name="autoRaise">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="dmarker" name="marker">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>5</height>
-       </size>
-      </property>
-      <property name="textInteractionFlags">
-       <set>Qt::NoTextInteraction</set>
-      </property>
      </widget>
     </item>
     <item>
@@ -454,7 +431,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -574,8 +551,6 @@
     <addaction name="actionPage_Source"/>
     <addaction name="action_Web_Inspector"/>
     <addaction name="zoomMenu"/>
-    <addaction name="separator"/>
-    <addaction name="actionFull_Screen_Mode"/>
     <addaction name="separator"/>
     <addaction name="action_Hide_Menubar"/>
     <addaction name="separator"/>
@@ -853,14 +828,6 @@
     <string>Ctrl+A</string>
    </property>
   </action>
-  <action name="actionFull_Screen_Mode">
-   <property name="text">
-    <string>&amp;Full Screen Tablet Mode</string>
-   </property>
-   <property name="shortcut">
-    <string>F11</string>
-   </property>
-  </action>
   <action name="actionClose_Tab">
    <property name="text">
     <string>Close Ta&amp;b</string>
@@ -1071,11 +1038,6 @@
    <extends>QLineEdit</extends>
    <header>durlwidget.h</header>
   </customwidget>
-  <customwidget>
-   <class>dmarker</class>
-   <extends>QLabel</extends>
-   <header>dmarker.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>menuToolButton</tabstop>
@@ -1087,7 +1049,6 @@
   <tabstop>desktopToolButton</tabstop>
   <tabstop>locationLineEdit</tabstop>
   <tabstop>searchLineEdit</tabstop>
-  <tabstop>restoreToolButton</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>hideFindToolButton</tabstop>
   <tabstop>findLineEdit</tabstop>

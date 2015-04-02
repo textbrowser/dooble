@@ -324,7 +324,6 @@ void ddesktopwidget::slotLaunchTerminal(void)
 void ddesktopwidget::enterEvent(QEvent *event)
 {
   QMdiArea::enterEvent(event);
-  emit viewEntered();
 }
 
 void ddesktopwidget::setTabAction(QAction *action)

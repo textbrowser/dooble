@@ -434,7 +434,6 @@ int main(int argc, char *argv[])
 
       usage.append("Usage: Dooble [OPTION] --load-url URL\n\n");
       usage.append("Options:\n");
-      usage.append("--full-screen-mode\n");
 
       for(int i = 1; i < argc; i++)
 	{
@@ -445,9 +444,7 @@ int main(int argc, char *argv[])
 
 	  option = option.toLower().trimmed();
 
-	  if(option == "--full-screen-mode")
-	    argumentsHash["full-screen-mode"] = true;
-	  else if(option == "--load-url")
+	  if(option == "--load-url")
 	    {
 	      i += 1;
 
@@ -975,7 +972,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   dmisc::populateHttpStatusCodesContainer();
   setUrlHandler(this);
   m_isJavaScriptWindow = isJavaScriptWindow;
-  m_sizeForFullScreen = size();
   showFindFrame = false;
   s_instances += 1;
   m_id = QDateTime::currentMSecsSinceEpoch() + s_instances;
@@ -1024,15 +1020,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.favoritesToolBar->setVisible(false);
   ui.favoritesToolBar->addWidget(ui.favoritesFrame);
   ui.favoritesToolBar->setVisible(true);
-#ifdef Q_OS_MAC
-#if QT_VERSION < 0x050300
-  ui.actionFull_Screen_Mode->setShortcut
-    (QKeySequence(Qt::ControlModifier + Qt::Key_F11));
-#else
-  ui.actionFull_Screen_Mode->setVisible(false);
-#endif
-#endif
-  ui.marker->setVisible(false);
   ui.restoreToolButton->setVisible(false);
   sbWidget = new QWidget(this);
   m_desktopWidget = 0;
@@ -1366,14 +1353,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotPaste(void)));
   connect(ui.actionSelect_All_Content, SIGNAL(triggered(void)), this,
 	  SLOT(slotSelectAllContent(void)));
-  connect(ui.actionFull_Screen_Mode, SIGNAL(triggered(void)), this,
-	  SLOT(slotFullScreenMode(void)));
   connect(ui.actionApplication_Cookies, SIGNAL(triggered(void)), this,
 	  SLOT(slotShowApplicationCookies(void)));
-  connect(ui.marker, SIGNAL(markerEntered(void)), this,
-	  SLOT(slotMarkerEntered(void)));
-  connect(ui.restoreToolButton, SIGNAL(clicked(void)),
-	  this, SLOT(slotFullScreenMode(void)));
   connect(ui.actionShow_FavoritesToolBar, SIGNAL(toggled(bool)),
 	  this, SLOT(slotShowFavoritesToolBar(bool)));
   connect(ui.actionShow_HistorySideBar, SIGNAL(toggled(bool)),
@@ -1918,14 +1899,6 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
   reinstate();
   update();
 
-  if(hash.contains("full-screen-mode"))
-    /*
-    ** Resolve X11 behavior. The event() method does not
-    ** appear to cause this problem.
-    */
-
-    QTimer::singleShot(750, this, SLOT(slotFullScreenMode(void)));
-
   if(s_instances <= 1)
     if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
       QMessageBox::critical
@@ -2029,8 +2002,6 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("mainWindow/actionSelect_All_Content").toString()));
   ui.zoomMenu->setIcon
     (QIcon(settings.value("mainWindow/zoomMenu").toString()));
-  ui.actionFull_Screen_Mode->setIcon
-    (QIcon(settings.value("mainWindow/actionFull_Screen_Mode").toString()));
   ui.nextToolButton->setIcon
     (QIcon(settings.value("mainWindow/nextToolButton").toString()));
   ui.previousToolButton->setIcon
@@ -2183,8 +2154,6 @@ void dooble::newTabInit(dview *p)
 	  SIGNAL(clearHistory(void)),
 	  p,
 	  SLOT(slotClearHistory(void)));
-  connect(p, SIGNAL(viewEntered(void)), this,
-	  SLOT(slotViewEntered(void)));
   connect(p, SIGNAL(selectionChanged(const QString &)),
 	  this, SLOT(slotSelectionChanged(const QString &)));
   connect(p, SIGNAL(viewPageSource(void)),
@@ -3919,9 +3888,6 @@ void dooble::slotCloseTab(const int index)
 
 void dooble::slotOpenUrl(void)
 {
-  if(isFullScreen())
-    slotMarkerEntered();
-
   ui.locationLineEdit->setFocus();
   ui.locationLineEdit->selectAll();
   update();
@@ -4579,9 +4545,6 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	{
 	  processed = true;
 	  slotStop();
-
-	  if(isFullScreen())
-	    slotViewEntered();
 	}
       else if(userKeys ==
 	      QKeySequence(Qt::ControlModifier + Qt::ShiftModifier +
@@ -4713,10 +4676,6 @@ void dooble::slotShowDesktopTab(const bool state)
   if(!m_desktopWidget)
     {
       m_desktopWidget = new ddesktopwidget(this);
-      connect(m_desktopWidget,
-	      SIGNAL(viewEntered(void)),
-	      this,
-	      SLOT(slotViewEntered(void)));
       connect(m_desktopWidget,
 	      SIGNAL(backgroundImageChanged(void)),
 	      this,
@@ -5200,103 +5159,6 @@ void dooble::slotProxyAuthenticationRequired(const QUrl &url,
       authenticator->setUser(ui_p.usernameLineEdit->text());
       authenticator->setPassword(ui_p.passwordLineEdit->text());
     }
-}
-
-void dooble::slotFullScreenMode(void)
-{
-  bool setVisible = false;
-
-  if(ui.actionFull_Screen_Mode->text().contains("Full"))
-    {
-      setVisible = false;
-      ui.actionFull_Screen_Mode->setText("&Normal Screen Mode");
-    }
-  else
-    {
-      setVisible = true;
-      ui.actionFull_Screen_Mode->setText("&Full Screen Tablet Mode");
-    }
-
-  if(!setVisible)
-    {
-      m_sizeForFullScreen = size();
-#ifdef Q_OS_MAC
-#if QT_VERSION < 0x050300
-      showMaximized();
-#else
-      showFullScreen();
-#endif
-#else
-      showFullScreen();
-#endif
-    }
-  else
-    {
-      showNormal();
-#ifdef Q_OS_MAC
-#if QT_VERSION < 0x050300
-      resize(m_sizeForFullScreen);
-#endif
-#endif
-      ui.locationLineEdit->popdown();
-    }
-
-  if(m_isJavaScriptWindow)
-    {
-      ui.locationToolBar->setVisible(setVisible);
-    }
-  else
-    {
-      if(!s_settings.value("mainWindow/hideMenuBar", false).toBool())
-	menuBar()->setVisible(setVisible);
-
-      if(qobject_cast<dview *> (ui.tabWidget->currentWidget()))
-	statusBar()->setVisible(ui.actionStatusbar->isChecked());
-      else
-	statusBar()->setVisible(false);
-
-      ui.locationToolBar->setVisible(setVisible);
-    }
-
-  ui.marker->setVisible(!setVisible);
-  ui.tabWidget->setBarVisible
-    (setVisible &&
-     s_settings.value("settingsWindow/alwaysShowTabBar",
-		      true).toBool());
-#ifndef Q_OS_MAC
-  ui.restoreToolButton->setVisible(!setVisible);
-#else
-#if QT_VERSION < 0x050300
-  ui.restoreToolButton->setVisible(!setVisible);
-#endif
-#endif
-  activateWindow();
-}
-
-void dooble::slotMarkerEntered(void)
-{
-  ui.marker->setVisible(false);
-  ui.locationToolBar->setVisible(true);
-  ui.tabWidget->setBarVisible(true);
-#ifndef Q_OS_MAC
-  ui.restoreToolButton->setVisible(true);
-#else
-#if QT_VERSION < 0x050300
-  ui.restoreToolButton->setVisible(true);
-#endif
-#endif
-}
-
-void dooble::slotViewEntered(void)
-{
-  if(isFullScreen())
-    if(!ui.locationLineEdit->hasFocus())
-      {
-	ui.locationToolBar->setVisible(false);
-	ui.tabWidget->setBarVisible(false);
-	ui.restoreToolButton->setVisible(false);
-	ui.marker->setVisible(true);
-      }
 }
 
 void dooble::slotSelectionChanged(const QString &text)
@@ -7380,89 +7242,10 @@ void dooble::showEvent(QShowEvent *event)
   slotRefreshPlugins();
 }
 
-#ifdef Q_OS_MAC
-#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050300
-bool dooble::event(QEvent *event)
-{
-  if(event)
-    if(event->type() == QEvent::WindowStateChange)
-      if(windowState() == Qt::WindowNoState)
-	{
-	  /*
-	  ** Minimizing the window on OS 10.6.8 and Qt 5.x will cause
-	  ** the window to become stale once it has resurfaced.
-	  */
-
-	  hide();
-	  show();
-	  update();
-	}
-
-  return QMainWindow::event(event);
-}
-#else
 bool dooble::event(QEvent *event)
 {
   return QMainWindow::event(event);
 }
-#endif
-#else
-bool dooble::event(QEvent *event)
-{
-  if(event->type() == QEvent::WindowStateChange)
-    {
-      bool setVisible = false;
-
-      if(isFullScreen())
-	{
-	  setVisible = false;
-	  ui.actionFull_Screen_Mode->setText("&Normal Screen Mode");
-	}
-      else
-	{
-	  setVisible = true;
-	  ui.actionFull_Screen_Mode->setText("&Full Screen Tablet Mode");
-	}
-
-      if(!setVisible)
-	m_sizeForFullScreen = size();
-      else
-	ui.locationLineEdit->popdown();
-
-      if(m_isJavaScriptWindow)
-	{
-	  ui.locationToolBar->setVisible(setVisible);
-	}
-      else
-	{
-	  if(!s_settings.value("mainWindow/hideMenuBar", false).toBool())
-	    menuBar()->setVisible(setVisible);
-
-	  if(qobject_cast<dview *> (ui.tabWidget->currentWidget()))
-	    statusBar()->setVisible(ui.actionStatusbar->isChecked());
-	  else
-	    statusBar()->setVisible(false);
-
-	  ui.locationToolBar->setVisible(setVisible);
-	}
-
-      ui.marker->setVisible(!setVisible);
-      ui.tabWidget->setBarVisible
-	(setVisible &&
-	 s_settings.value("settingsWindow/alwaysShowTabBar",
-			  true).toBool());
-#ifndef Q_OS_MAC
-      ui.restoreToolButton->setVisible(!setVisible);
-#else
-#if QT_VERSION < 0x050300
-      ui.restoreToolButton->setVisible(!setVisible);
-#endif
-#endif
-    }
-
-  return QMainWindow::event(event);
-}
-#endif
 
 void dooble::disconnectPageSignals(dview *p, dooble *d)
 {
@@ -7538,8 +7321,6 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     SIGNAL(clearHistory(void)),
 	     p,
 	     SLOT(slotClearHistory(void)));
-  disconnect(p, SIGNAL(viewEntered(void)), d,
-	     SLOT(slotViewEntered(void)));
   disconnect(p, SIGNAL(selectionChanged(const QString &)),
 	     d, SLOT(slotSelectionChanged(const QString &)));
   disconnect(p, SIGNAL(viewPageSource(void)),

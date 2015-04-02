@@ -60,7 +60,6 @@ class ddesktopwidget: public QMdiArea
   void slotBackgroundDialogFinished(int result);
 
  signals:
-  void viewEntered(void);
   void backgroundImageChanged(void);
 };
 

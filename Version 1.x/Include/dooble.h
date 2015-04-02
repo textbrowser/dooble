@@ -169,7 +169,6 @@ class dooble: public QMainWindow
   bool warnAboutDownloads(void);
   bool promptForPassphrase(const bool override = false);
   bool warnAboutLeavingModifiedTab(void);
-  QSize m_sizeForFullScreen;
   void find(const QWebPage::FindFlags flags);
   void loadPage(const QUrl &url);
   void reinstate(void);
@@ -273,7 +272,6 @@ class dooble: public QMainWindow
   void slotLoadStarted(void);
   void slotTabSelected(const int index);
   void slotTextChanged(const QString &text);
-  void slotViewEntered(void);
   void slotAuthenticate(void);
   void slotClearHistory(void);
   void slotFindPrevious(void);
@@ -282,13 +280,11 @@ class dooble: public QMainWindow
   void slotOpenP2PEmail(void);
   void slotPrintPreview(void);
   void slotTitleChanged(const QString &title);
-  void slotMarkerEntered(void);
   void slotOpenDirectory(void);
   void slotHideStatusBar(void);
   void slotShowBookmarks(void);
   void slotShowIpAddress(const bool state);
   void slotViewResetZoom(void);
-  void slotFullScreenMode(void);
   void slotOpenIrcChannel(void);
   void slotPrintRequested(QWebFrame *frame);
   void slotQuitAndRestart(void);

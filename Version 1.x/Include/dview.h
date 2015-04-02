@@ -205,7 +205,6 @@ class dview: public QStackedWidget
   void urlChanged(const QUrl &url);
   void iconChanged(void);
   void loadStarted(void);
-  void viewEntered(void);
   void loadFinished(bool);
   void loadProgress(const int);
   void titleChanged(const QString &title);

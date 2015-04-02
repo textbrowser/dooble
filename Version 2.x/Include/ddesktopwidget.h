@@ -61,7 +61,6 @@ class ddesktopwidget: public QMdiArea
 
  signals:
   void backgroundImageChanged(void);
-  void viewEntered(void);
 };
 
 #endif

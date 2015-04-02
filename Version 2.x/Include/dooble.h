@@ -266,7 +266,6 @@ class dooble: public QMainWindow
   void slotLoadProgress(int progress);
   void slotLoadStarted(void);
   void slotLocationSplitterMoved(int post, int index);
-  void slotMarkerEntered(void);
   void slotNewTab(void);
   void slotNewWindow(void);
   void slotObjectDestroyed(QObject *object);
@@ -337,7 +336,6 @@ class dooble: public QMainWindow
   void slotTextChanged(const QString &text);
   void slotTitleChanged(const QString &title);
   void slotUrlChanged(const QUrl &url);
-  void slotViewEntered(void);
   void slotViewResetZoom(void);
   void slotViewSiteCookies(void);
   void slotViewZoomIn(void);
