@@ -12,62 +12,62 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Source/dooble.cc" line="787"/>
+        <location filename="../Source/dooble.cc" line="784"/>
         <source>Dooble Web Browser: DNT (Do Not Track) Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="792"/>
+        <location filename="../Source/dooble.cc" line="789"/>
         <source>Dooble Web Browser: JavaScript Pop-ups Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="797"/>
+        <location filename="../Source/dooble.cc" line="794"/>
         <source>Dooble Web Browser: Third-Party Blocking Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="803"/>
+        <location filename="../Source/dooble.cc" line="800"/>
         <source>Dooble Web Browser: Cookies Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="808"/>
+        <location filename="../Source/dooble.cc" line="805"/>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="813"/>
+        <location filename="../Source/dooble.cc" line="810"/>
         <source>Dooble Web Browser: Suppress HTTP Referrer Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="818"/>
+        <location filename="../Source/dooble.cc" line="815"/>
         <source>Dooble Web Browser: Suppress HTTP Redirect Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="823"/>
+        <location filename="../Source/dooble.cc" line="820"/>
         <source>Dooble Web Browser: JavaScript Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="828"/>
+        <location filename="../Source/dooble.cc" line="825"/>
         <source>Dooble Web Browser: Automatically-Loaded Images Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="833"/>
+        <location filename="../Source/dooble.cc" line="830"/>
         <source>Dooble Web Browser: Cache Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="838"/>
+        <location filename="../Source/dooble.cc" line="835"/>
         <source>Dooble Web Browser: Always HTTPS Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="843"/>
+        <location filename="../Source/dooble.cc" line="840"/>
         <source>Dooble Web Browser: SSL Errors Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1317,232 +1317,232 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="2317"/>
-        <location filename="../Source/dooble.cc" line="2373"/>
-        <location filename="../Source/dooble.cc" line="2413"/>
-        <location filename="../Source/dooble.cc" line="2478"/>
-        <location filename="../Source/dooble.cc" line="3251"/>
-        <location filename="../Source/dooble.cc" line="3428"/>
-        <location filename="../Source/dooble.cc" line="3452"/>
-        <location filename="../Source/dooble.cc" line="4996"/>
-        <location filename="../Source/dooble.cc" line="5575"/>
+        <location filename="../Source/dooble.cc" line="2287"/>
+        <location filename="../Source/dooble.cc" line="2343"/>
+        <location filename="../Source/dooble.cc" line="2383"/>
+        <location filename="../Source/dooble.cc" line="2448"/>
+        <location filename="../Source/dooble.cc" line="3221"/>
+        <location filename="../Source/dooble.cc" line="3398"/>
+        <location filename="../Source/dooble.cc" line="3422"/>
+        <location filename="../Source/dooble.cc" line="4956"/>
+        <location filename="../Source/dooble.cc" line="5438"/>
         <source>(Untitled)</source>
         <translation type="unfinished">Tab</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3036"/>
-        <location filename="../Source/dooble.cc" line="3105"/>
-        <location filename="../Source/dooble.cc" line="3222"/>
-        <location filename="../Source/dooble.cc" line="3528"/>
-        <location filename="../Source/dooble.cc" line="3666"/>
-        <location filename="../Source/dooble.cc" line="3706"/>
-        <location filename="../Source/dooble.cc" line="3910"/>
-        <location filename="../Source/dooble.cc" line="5499"/>
-        <location filename="../Source/dooble.cc" line="6123"/>
-        <location filename="../Source/dooble.cc" line="6422"/>
+        <location filename="../Source/dooble.cc" line="3006"/>
+        <location filename="../Source/dooble.cc" line="3075"/>
+        <location filename="../Source/dooble.cc" line="3192"/>
+        <location filename="../Source/dooble.cc" line="3498"/>
+        <location filename="../Source/dooble.cc" line="3636"/>
+        <location filename="../Source/dooble.cc" line="3676"/>
+        <location filename="../Source/dooble.cc" line="3880"/>
+        <location filename="../Source/dooble.cc" line="5362"/>
+        <location filename="../Source/dooble.cc" line="5986"/>
+        <location filename="../Source/dooble.cc" line="6285"/>
         <source>Dooble Web Browser</source>
         <translation type="unfinished">Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3046"/>
-        <location filename="../Source/dooble.cc" line="3049"/>
-        <location filename="../Source/dooble.cc" line="3232"/>
-        <location filename="../Source/dooble.cc" line="3235"/>
-        <location filename="../Source/dooble.cc" line="5509"/>
-        <location filename="../Source/dooble.cc" line="5512"/>
-        <location filename="../Source/dooble.cc" line="6424"/>
+        <location filename="../Source/dooble.cc" line="3016"/>
+        <location filename="../Source/dooble.cc" line="3019"/>
+        <location filename="../Source/dooble.cc" line="3202"/>
+        <location filename="../Source/dooble.cc" line="3205"/>
+        <location filename="../Source/dooble.cc" line="5372"/>
+        <location filename="../Source/dooble.cc" line="5375"/>
+        <location filename="../Source/dooble.cc" line="6287"/>
         <source> - Dooble Web Browser</source>
         <translation type="unfinished"> - Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1546"/>
+        <location filename="../Source/dooble.cc" line="1526"/>
         <source>&amp;Clear History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1552"/>
+        <location filename="../Source/dooble.cc" line="1532"/>
         <source>Show &amp;History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2848"/>
+        <location filename="../Source/dooble.cc" line="2818"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2851"/>
+        <location filename="../Source/dooble.cc" line="2821"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3038"/>
-        <location filename="../Source/dooble.cc" line="3224"/>
-        <location filename="../Source/dooble.cc" line="5501"/>
+        <location filename="../Source/dooble.cc" line="3008"/>
+        <location filename="../Source/dooble.cc" line="3194"/>
+        <location filename="../Source/dooble.cc" line="5364"/>
         <source>Dooble Web Browser (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4534"/>
+        <location filename="../Source/dooble.cc" line="4501"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5134"/>
+        <location filename="../Source/dooble.cc" line="5094"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6459"/>
+        <location filename="../Source/dooble.cc" line="6322"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6612"/>
+        <location filename="../Source/dooble.cc" line="6475"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2843"/>
-        <location filename="../Source/dooble.cc" line="2895"/>
-        <location filename="../Source/dooble.cc" line="3860"/>
-        <location filename="../Source/dooble.cc" line="6456"/>
-        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="2813"/>
+        <location filename="../Source/dooble.cc" line="2865"/>
+        <location filename="../Source/dooble.cc" line="3830"/>
+        <location filename="../Source/dooble.cc" line="6319"/>
+        <location filename="../Source/dooble.cc" line="6471"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1558"/>
+        <location filename="../Source/dooble.cc" line="1538"/>
         <source>&amp;Recently-Closed Tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1774"/>
-        <location filename="../Source/dooble.cc" line="1841"/>
-        <location filename="../Source/dooble.cc" line="1884"/>
-        <location filename="../Source/dooble.cc" line="1917"/>
-        <location filename="../Source/dooble.cc" line="2009"/>
+        <location filename="../Source/dooble.cc" line="1753"/>
+        <location filename="../Source/dooble.cc" line="1820"/>
+        <location filename="../Source/dooble.cc" line="1863"/>
+        <location filename="../Source/dooble.cc" line="1896"/>
+        <location filename="../Source/dooble.cc" line="1985"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1775"/>
-        <location filename="../Source/dooble.cc" line="1842"/>
-        <location filename="../Source/dooble.cc" line="1885"/>
-        <location filename="../Source/dooble.cc" line="1918"/>
-        <location filename="../Source/dooble.cc" line="2010"/>
+        <location filename="../Source/dooble.cc" line="1754"/>
+        <location filename="../Source/dooble.cc" line="1821"/>
+        <location filename="../Source/dooble.cc" line="1864"/>
+        <location filename="../Source/dooble.cc" line="1897"/>
+        <location filename="../Source/dooble.cc" line="1986"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2898"/>
+        <location filename="../Source/dooble.cc" line="2868"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3863"/>
+        <location filename="../Source/dooble.cc" line="3833"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3932"/>
+        <location filename="../Source/dooble.cc" line="3902"/>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4399"/>
+        <location filename="../Source/dooble.cc" line="4366"/>
         <source>Dooble Web Browser: About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4531"/>
+        <location filename="../Source/dooble.cc" line="4498"/>
         <source>Dooble Web Browser: Save As</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4919"/>
-        <location filename="../Source/dooble.cc" line="4925"/>
-        <location filename="../Source/dooble.cc" line="4927"/>
-        <location filename="../Source/dooble.cc" line="4931"/>
+        <location filename="../Source/dooble.cc" line="4879"/>
+        <location filename="../Source/dooble.cc" line="4885"/>
+        <location filename="../Source/dooble.cc" line="4887"/>
+        <location filename="../Source/dooble.cc" line="4891"/>
         <source>Dooble Desktop</source>
         <translation type="unfinished">Dooble Desktop</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5131"/>
+        <location filename="../Source/dooble.cc" line="5091"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5269"/>
+        <location filename="../Source/dooble.cc" line="5229"/>
         <source>The site %1 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5333"/>
+        <location filename="../Source/dooble.cc" line="5293"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6887"/>
+        <location filename="../Source/dooble.cc" line="6750"/>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6931"/>
+        <location filename="../Source/dooble.cc" line="6794"/>
         <source>Start %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6999"/>
+        <location filename="../Source/dooble.cc" line="6862"/>
         <source>Add-on Load Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7022"/>
-        <location filename="../Source/dooble.cc" line="7073"/>
+        <location filename="../Source/dooble.cc" line="6885"/>
+        <location filename="../Source/dooble.cc" line="6936"/>
         <source>Add-on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7485"/>
+        <location filename="../Source/dooble.cc" line="7348"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7486"/>
+        <location filename="../Source/dooble.cc" line="7349"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7797"/>
+        <location filename="../Source/dooble.cc" line="7607"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7800"/>
-        <location filename="../Source/dooble.cc" line="7804"/>
+        <location filename="../Source/dooble.cc" line="7610"/>
+        <location filename="../Source/dooble.cc" line="7614"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8171"/>
+        <location filename="../Source/dooble.cc" line="7981"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8173"/>
+        <location filename="../Source/dooble.cc" line="7983"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7183"/>
-        <location filename="../Source/dooble.cc" line="7188"/>
+        <location filename="../Source/dooble.cc" line="7046"/>
+        <location filename="../Source/dooble.cc" line="7051"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7422"/>
-        <location filename="../Source/dooble.cc" line="7424"/>
-        <location filename="../Source/dooble.cc" line="7428"/>
+        <location filename="../Source/dooble.cc" line="7285"/>
+        <location filename="../Source/dooble.cc" line="7287"/>
+        <location filename="../Source/dooble.cc" line="7291"/>
         <source>Restore Session</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2325,238 +2325,228 @@
         <translation type="unfinished">Dooble Desktop</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="191"/>
-        <source>Restore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/mainWindow.ui" line="370"/>
+        <location filename="../UI/mainWindow.ui" line="347"/>
         <source>&amp;Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="389"/>
+        <location filename="../UI/mainWindow.ui" line="366"/>
         <source>&amp;Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="408"/>
+        <location filename="../UI/mainWindow.ui" line="385"/>
         <source>&amp;Highlight All Occurrences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="421"/>
+        <location filename="../UI/mainWindow.ui" line="398"/>
         <source>&amp;Match Case</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="462"/>
+        <location filename="../UI/mainWindow.ui" line="439"/>
         <source>&amp;File</source>
         <translation type="unfinished">Fail</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="487"/>
+        <location filename="../UI/mainWindow.ui" line="464"/>
         <source>Hi&amp;story</source>
         <translation type="unfinished">Ajalugu</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="492"/>
+        <location filename="../UI/mainWindow.ui" line="469"/>
         <source>&amp;Help</source>
         <translation type="unfinished">abi</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="498"/>
+        <location filename="../UI/mainWindow.ui" line="475"/>
         <source>&amp;Windows</source>
         <translation type="unfinished">aknad</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="554"/>
+        <location filename="../UI/mainWindow.ui" line="531"/>
         <source>&amp;Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="560"/>
+        <location filename="../UI/mainWindow.ui" line="537"/>
         <source>Si&amp;debars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="600"/>
+        <location filename="../UI/mainWindow.ui" line="575"/>
         <source>&amp;Addons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="607"/>
+        <location filename="../UI/mainWindow.ui" line="582"/>
         <source>&amp;Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="644"/>
+        <location filename="../UI/mainWindow.ui" line="619"/>
         <source>Location Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="858"/>
-        <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/mainWindow.ui" line="874"/>
-        <location filename="../UI/mainWindow.ui" line="927"/>
+        <location filename="../UI/mainWindow.ui" line="841"/>
+        <location filename="../UI/mainWindow.ui" line="894"/>
         <source>Coo&amp;kies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="877"/>
+        <location filename="../UI/mainWindow.ui" line="844"/>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="888"/>
+        <location filename="../UI/mainWindow.ui" line="855"/>
         <source>&amp;Show Hidden Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="893"/>
+        <location filename="../UI/mainWindow.ui" line="860"/>
         <source>&amp;P2P E-Mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="904"/>
+        <location filename="../UI/mainWindow.ui" line="871"/>
         <source>&amp;Favorites Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="912"/>
+        <location filename="../UI/mainWindow.ui" line="879"/>
         <source>&amp;History Sidebar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="917"/>
+        <location filename="../UI/mainWindow.ui" line="884"/>
         <source>&amp;Authenticate Passphrase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="932"/>
+        <location filename="../UI/mainWindow.ui" line="899"/>
         <source>Third-Party Frame &amp;Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="942"/>
+        <location filename="../UI/mainWindow.ui" line="909"/>
         <source>&amp;Refresh List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="947"/>
+        <location filename="../UI/mainWindow.ui" line="914"/>
         <source>HTTP Re&amp;direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="957"/>
+        <location filename="../UI/mainWindow.ui" line="924"/>
         <source>Error &amp;Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="960"/>
+        <location filename="../UI/mainWindow.ui" line="927"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="983"/>
+        <location filename="../UI/mainWindow.ui" line="950"/>
         <source>Cac&amp;he</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="988"/>
+        <location filename="../UI/mainWindow.ui" line="955"/>
         <source>&amp;Clear Containers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="991"/>
+        <location filename="../UI/mainWindow.ui" line="958"/>
         <source>Ctrl+Shift+Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="996"/>
+        <location filename="../UI/mainWindow.ui" line="963"/>
         <source>Always HTTP&amp;S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1001"/>
+        <location filename="../UI/mainWindow.ui" line="968"/>
         <source>Save Page as &amp;Data URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1006"/>
+        <location filename="../UI/mainWindow.ui" line="973"/>
         <source>SS&amp;L Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1011"/>
+        <location filename="../UI/mainWindow.ui" line="978"/>
         <source>HTTP Re&amp;ferrer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1016"/>
+        <location filename="../UI/mainWindow.ui" line="983"/>
         <source>&amp;Allowed SSL Ciphers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1021"/>
+        <location filename="../UI/mainWindow.ui" line="988"/>
         <source>&amp;Web Inspector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1026"/>
+        <location filename="../UI/mainWindow.ui" line="993"/>
         <source>HTTP-&amp;Only Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1031"/>
+        <location filename="../UI/mainWindow.ui" line="998"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1042"/>
+        <location filename="../UI/mainWindow.ui" line="1009"/>
         <source>&amp;Desktop Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="1053"/>
+        <location filename="../UI/mainWindow.ui" line="1020"/>
         <source>&amp;Home Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="922"/>
+        <location filename="../UI/mainWindow.ui" line="889"/>
         <source>&amp;JavaScript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="528"/>
+        <location filename="../UI/mainWindow.ui" line="505"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="539"/>
+        <location filename="../UI/mainWindow.ui" line="516"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="543"/>
+        <location filename="../UI/mainWindow.ui" line="520"/>
         <source>&amp;Zoom</source>
         <translation type="unfinished">&amp;Zoom</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="586"/>
+        <location filename="../UI/mainWindow.ui" line="561"/>
         <source>&amp;Tabs</source>
         <translation type="unfinished">&amp;Tabs</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="591"/>
+        <location filename="../UI/mainWindow.ui" line="566"/>
         <source>&amp;Locations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="661"/>
+        <location filename="../UI/mainWindow.ui" line="636"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2565,92 +2555,87 @@
         <translation type="obsolete">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="666"/>
+        <location filename="../UI/mainWindow.ui" line="641"/>
         <source>New &amp;Tab</source>
         <translation type="unfinished">Uus vahekaart</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="669"/>
+        <location filename="../UI/mainWindow.ui" line="644"/>
         <source>Ctrl+T</source>
         <translation type="unfinished">Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="674"/>
+        <location filename="../UI/mainWindow.ui" line="649"/>
         <source>&amp;New Window</source>
         <translation type="unfinished">uues aknas</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="677"/>
+        <location filename="../UI/mainWindow.ui" line="652"/>
         <source>Ctrl+N</source>
         <translation type="unfinished">Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="682"/>
+        <location filename="../UI/mainWindow.ui" line="657"/>
         <source>Close &amp;Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="826"/>
+        <location filename="../UI/mainWindow.ui" line="801"/>
         <source>&amp;Open Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="834"/>
+        <location filename="../UI/mainWindow.ui" line="809"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="837"/>
+        <location filename="../UI/mainWindow.ui" line="812"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="842"/>
+        <location filename="../UI/mainWindow.ui" line="817"/>
         <source>&amp;Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="845"/>
+        <location filename="../UI/mainWindow.ui" line="820"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="850"/>
+        <location filename="../UI/mainWindow.ui" line="825"/>
         <source>Select &amp;All Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="853"/>
+        <location filename="../UI/mainWindow.ui" line="828"/>
         <source>Ctrl+A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="861"/>
-        <source>F11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/mainWindow.ui" line="869"/>
+        <location filename="../UI/mainWindow.ui" line="836"/>
         <source>Ctrl+W</source>
         <translation type="unfinished">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="866"/>
+        <location filename="../UI/mainWindow.ui" line="833"/>
         <source>Close Ta&amp;b</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="685"/>
+        <location filename="../UI/mainWindow.ui" line="660"/>
         <source>Ctrl+Shift+W</source>
         <translation type="unfinished">Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="829"/>
+        <location filename="../UI/mainWindow.ui" line="804"/>
         <source>Ctrl+O</source>
         <translation type="unfinished">Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="698"/>
+        <location filename="../UI/mainWindow.ui" line="673"/>
         <source>&amp;About Dooble</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2675,107 +2660,107 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="502"/>
+        <location filename="../UI/mainWindow.ui" line="479"/>
         <source>E&amp;xceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="624"/>
+        <location filename="../UI/mainWindow.ui" line="599"/>
         <source>Favorites Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="690"/>
+        <location filename="../UI/mainWindow.ui" line="665"/>
         <source>Open UR&amp;L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="693"/>
+        <location filename="../UI/mainWindow.ui" line="668"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="703"/>
+        <location filename="../UI/mainWindow.ui" line="678"/>
         <source>&amp;Save Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="706"/>
+        <location filename="../UI/mainWindow.ui" line="681"/>
         <source>Ctrl+S</source>
         <translation type="unfinished">Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="711"/>
+        <location filename="../UI/mainWindow.ui" line="686"/>
         <source>&amp;Downloads</source>
         <translation type="unfinished">&amp;Downloads</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="714"/>
+        <location filename="../UI/mainWindow.ui" line="689"/>
         <source>Ctrl+D</source>
         <translation type="unfinished">Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="719"/>
+        <location filename="../UI/mainWindow.ui" line="694"/>
         <source>&amp;Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="722"/>
+        <location filename="../UI/mainWindow.ui" line="697"/>
         <source>Ctrl+F</source>
         <translation type="unfinished">Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="727"/>
+        <location filename="../UI/mainWindow.ui" line="702"/>
         <source>&amp;Reload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="730"/>
+        <location filename="../UI/mainWindow.ui" line="705"/>
         <source>Ctrl+R</source>
         <translation type="unfinished">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="735"/>
+        <location filename="../UI/mainWindow.ui" line="710"/>
         <source>Sto&amp;p</source>
         <translation type="unfinished">Sto&amp;p</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="738"/>
+        <location filename="../UI/mainWindow.ui" line="713"/>
         <source>Esc</source>
         <translation type="unfinished">Esc</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="746"/>
+        <location filename="../UI/mainWindow.ui" line="721"/>
         <source>&amp;Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="749"/>
+        <location filename="../UI/mainWindow.ui" line="724"/>
         <source>Ctrl+P</source>
         <translation type="unfinished">Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="937"/>
+        <location filename="../UI/mainWindow.ui" line="904"/>
         <source>JavaScript &amp;Pop-ups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="952"/>
+        <location filename="../UI/mainWindow.ui" line="919"/>
         <source>DNT (Do Not &amp;Track)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="965"/>
+        <location filename="../UI/mainWindow.ui" line="932"/>
         <source>&amp;Automatically-Loaded Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="970"/>
+        <location filename="../UI/mainWindow.ui" line="937"/>
         <source>&amp;IRC Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="978"/>
+        <location filename="../UI/mainWindow.ui" line="945"/>
         <source>Offlin&amp;e</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2788,17 +2773,17 @@
         <translation type="obsolete">RetroMessenger</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="754"/>
+        <location filename="../UI/mainWindow.ui" line="729"/>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="759"/>
+        <location filename="../UI/mainWindow.ui" line="734"/>
         <source>Settin&amp;gs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="762"/>
+        <location filename="../UI/mainWindow.ui" line="737"/>
         <source>Ctrl+G</source>
         <translation type="unfinished">Ctrl+G</translation>
     </message>
@@ -2811,37 +2796,37 @@
         <translation type="obsolete">&amp;Dooble Desktop</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="767"/>
+        <location filename="../UI/mainWindow.ui" line="742"/>
         <source>Page So&amp;urce</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="786"/>
+        <location filename="../UI/mainWindow.ui" line="761"/>
         <source>Ctrl+=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="807"/>
+        <location filename="../UI/mainWindow.ui" line="782"/>
         <source>Reset Zoo&amp;m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="821"/>
+        <location filename="../UI/mainWindow.ui" line="796"/>
         <source>Status&amp;bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="770"/>
+        <location filename="../UI/mainWindow.ui" line="745"/>
         <source>Ctrl+U</source>
         <translation type="unfinished">Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="775"/>
+        <location filename="../UI/mainWindow.ui" line="750"/>
         <source>&amp;My Retrieved Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="778"/>
+        <location filename="../UI/mainWindow.ui" line="753"/>
         <source>Ctrl+M</source>
         <translation type="unfinished">Ctrl+M</translation>
     </message>
@@ -2850,27 +2835,27 @@
         <translation type="obsolete">Ctrl++</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="791"/>
+        <location filename="../UI/mainWindow.ui" line="766"/>
         <source>Zoom &amp;Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="794"/>
+        <location filename="../UI/mainWindow.ui" line="769"/>
         <source>Ctrl+-</source>
         <translation type="unfinished">Ctrl--</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="802"/>
+        <location filename="../UI/mainWindow.ui" line="777"/>
         <source>Zoom &amp;Text Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="810"/>
+        <location filename="../UI/mainWindow.ui" line="785"/>
         <source>Ctrl+0</source>
         <translation type="unfinished">Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="783"/>
+        <location filename="../UI/mainWindow.ui" line="758"/>
         <source>Zoom &amp;In</source>
         <translation type="unfinished"></translation>
     </message>
