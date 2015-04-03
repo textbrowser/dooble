@@ -110,14 +110,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="760"/>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
-        <translation>dmisc::passphraseHash(): gcry_md_get_algo_dlen() gab Null zurück. Benutze Qt&apos;s sha1 Implementierung.</translation>
+        <translation type="vanished">dmisc::passphraseHash(): gcry_md_get_algo_dlen() gab Null zurück. Benutze Qt&apos;s sha1 Implementierung.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="771"/>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation>dmisc::passphraseHash(): Nicht unterstützter Hashtyp %1 (%2). Benutze Qt&apos;s sha1 Implementierung.</translation>
+        <translation type="vanished">dmisc::passphraseHash(): Nicht unterstützter Hashtyp %1 (%2). Benutze Qt&apos;s sha1 Implementierung.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1465"/>
@@ -145,6 +143,16 @@
         <location filename="../Source/dmisc.cc" line="181"/>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
         <translation>dmisc::initializeCrypt(): Es scheint, dass die gcrypt-Bibliothek bereits initialisiert ist.</translation>
+    </message>
+    <message>
+        <location filename="../Source/dmisc.cc" line="760"/>
+        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dmisc.cc" line="771"/>
+        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1459"/>

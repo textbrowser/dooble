@@ -59,15 +59,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -204,6 +196,14 @@
     </message>
     <message>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
