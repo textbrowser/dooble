@@ -760,7 +760,7 @@ QByteArray dmisc::passphraseHash(const QString &passphrase,
 	  logError(QObject::tr("dmisc::passphraseHash(): "
 			       "gcry_md_get_algo_dlen() "
 			       "returned zero. Using "
-			       "Qt's sha1 "
+			       "Qt's SHA3-512 "
 			       "implementation."));
 	  hash = QCryptographicHash::hash(saltedPassphrase,
 					  QCryptographicHash::Sha3_512);
@@ -770,7 +770,7 @@ QByteArray dmisc::passphraseHash(const QString &passphrase,
     {
       logError(QObject::tr("dmisc::passphraseHash(): Unsupported "
 			   "hash type %1 (%2). Using "
-			   "Qt's sha1 "
+			   "Qt's SHA3-512 "
 			   "implementation.").arg(hashType).
 	       arg(algorithm));
       hash = QCryptographicHash::hash

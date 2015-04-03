@@ -69,7 +69,7 @@ ddownloadwindowitem::ddownloadwindowitem(QWidget *parent):QWidget(parent)
 	  SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &,
 					     QAuthenticator *)));
   init_ddownloadwindowitem();
-  ui.computeFileHash->setToolTip(tr("Compute SHA-256 Hash"));
+  ui.computeFileHash->setToolTip(tr("Compute SHA3-512 Hash"));
 #ifdef Q_OS_MAC
   ui.abortToolButton->setStyleSheet
     ("QToolButton {border: none;}"
