@@ -1709,7 +1709,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	("QToolButton {border: none;}"
 	 "QToolButton::menu-button {border: none;}");
 #endif
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
+#if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
   setWindowRole("browser");
 #endif
 #ifndef Q_OS_MAC
@@ -4764,7 +4764,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	  ** and the event's modifier, issue the action's trigger() method.
 	  */
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
+#if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
 	  if(QKeySequence(event->modifiers() + event->key()) ==
 	     QKeySequence(Qt::ControlModifier + Qt::Key_Equal) ||
 	     QKeySequence(event->modifiers() + event->key()) ==

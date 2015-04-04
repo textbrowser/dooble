@@ -100,7 +100,7 @@ QVariant dfilesystemmodel::data(const QModelIndex &index, int role) const
 	      QString p("");
 	      QFile::Permissions permissions(fileInfo(index).permissions());
 
-#ifdef Q_OS_UNIX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 	      static QString s_array[] = {"r", "w", "x",
 					  "r", "w", "x",
 					  "r", "w", "x"};

@@ -38,7 +38,7 @@
 #include <QMouseEvent>
 #include <QMdiSubWindow>
 #include <QDesktopServices>
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
+#if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
 #if QT_VERSION < 0x050000 && defined(Q_WS_X11)
 #include <QX11EmbedContainer>
 #endif
@@ -99,7 +99,7 @@ void ddesktopwidget::mousePressEvent(QMouseEvent *event)
 
       menu.addAction(tr("&Change Desktop Background"),
 		     this, SLOT(slotChangeDesktopBackground(void)));
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
+#if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
 #if QT_VERSION < 0x050000
       QFileInfo fileInfo("/usr/bin/xterm");
 
@@ -250,7 +250,7 @@ void ddesktopwidget::showFileManagerWindow(const QUrl &url)
   fileManagerWindow->showNormal();
 }
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
+#if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
 #if QT_VERSION < 0x050000 && defined(Q_WS_X11)
 void ddesktopwidget::slotLaunchTerminal(void)
 {

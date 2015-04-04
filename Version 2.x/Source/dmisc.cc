@@ -1084,7 +1084,7 @@ QRect dmisc::balancedGeometry(const QRect &geometry, QWidget *widget)
     {
       rect.setX(rect.x() + available.x());
       rect.setY(rect.y() + available.y());
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
+#if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
       /*
       ** X11 is quite difficult to predict. Let's add this simple
       ** offset.
