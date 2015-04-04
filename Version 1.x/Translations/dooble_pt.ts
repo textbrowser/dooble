@@ -90,14 +90,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="760"/>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
-        <translation>dmisc::passphraseHash(): gcry_md_get_algo_dlen() devolveu zero. A utilizar a implementação Qt sha 1.</translation>
+        <translation type="vanished">dmisc::passphraseHash(): gcry_md_get_algo_dlen() devolveu zero. A utilizar a implementação Qt sha 1.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="771"/>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation>dmisc::passphraseHash(): Tipo não suportado %1 (%2). A utilizar a implementação Qt sha 1.</translation>
+        <translation type="vanished">dmisc::passphraseHash(): Tipo não suportado %1 (%2). A utilizar a implementação Qt sha 1.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1465"/>
@@ -133,6 +131,16 @@
         <location filename="../Source/dmisc.cc" line="181"/>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
         <translation>dmisc::initializeCrypt(): Parece quer a biblioteca gcrypt ja foi iniciada.</translation>
+    </message>
+    <message>
+        <location filename="../Source/dmisc.cc" line="760"/>
+        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dmisc.cc" line="771"/>
+        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1459"/>

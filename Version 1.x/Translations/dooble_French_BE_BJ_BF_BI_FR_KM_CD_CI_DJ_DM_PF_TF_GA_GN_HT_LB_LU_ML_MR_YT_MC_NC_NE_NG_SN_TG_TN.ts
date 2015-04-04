@@ -17,16 +17,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="760"/>
-        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Source/dmisc.cc" line="771"/>
-        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../Source/dmisc.cc" line="1465"/>
         <source>%1 KiB</source>
         <translation type="unfinished"></translation>
@@ -44,6 +34,16 @@
     <message>
         <location filename="../Source/dmisc.cc" line="169"/>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure. Secure memory was not explicitly initialized!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dmisc.cc" line="760"/>
+        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dmisc.cc" line="771"/>
+        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
