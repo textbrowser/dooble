@@ -1335,6 +1335,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  this, SLOT(slotAuthenticate(void)));
   connect(ui.actionRefreshPlugins, SIGNAL(triggered()),
           this, SLOT(slotRefreshPlugins()));
+  connect(ui.menuToolButton, SIGNAL(clicked(void)),
+	  ui.menuToolButton, SLOT(showMenu(void)));
   connect(ui.menu_Plugins, SIGNAL (triggered(QAction *)),
           this, SLOT(slotPluginAction(QAction *)));
   connect(ui.tabWidget, SIGNAL(urlsReceivedViaDrop(const QList<QUrl> &)),
