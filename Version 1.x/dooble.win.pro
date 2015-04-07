@@ -80,6 +80,7 @@ HEADERS		= Include\\dbookmarkspopup.h \
 		  Include\\dftp.h \
                   Include\\dftpbrowser.h \
 		  Include\\dgenericsearchwidget.h \
+		  Include\\dgopher.h \
 		  Include\\dhistory.h \
 		  Include\\dhistorymodel.h \
 		  Include\\dhistorysidebar.h \
@@ -123,6 +124,7 @@ SOURCES		= Source\\dbookmarkspopup.cc \
 		  Source\\dftp.cc \
 		  Source\\dftpbrowser.cc \
                   Source\\dgenericsearchwidget.cc \
+		  Source\\dgopher.cc \
 		  Source\\dhistory.cc \
 		  Source\\dhistorymodel.cc \
 		  Source\\dhistorysidebar.cc \

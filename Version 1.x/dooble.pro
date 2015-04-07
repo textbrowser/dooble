@@ -36,7 +36,7 @@ QMAKE_EXTRA_TARGETS = libspoton purge
 QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib
 
 INCLUDEPATH	+= . Include
-LIBS     	+= -L/usr/local/lib -LlibSpotOn -lgcrypt -lgpg-error -lspoton
+LIBS     	+= -LlibSpotOn -lgcrypt -lgpg-error -lspoton
 PRE_TARGETDEPS = libspoton.so
 
 MOC_DIR = temp/moc
@@ -87,6 +87,7 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dftp.h \
 		  Include/dftpbrowser.h \
 		  Include/dgenericsearchwidget.h \
+		  Include/dgopher.h \
 		  Include/dhistory.h \
 		  Include/dhistorymodel.h \
 		  Include/dhistorysidebar.h \
@@ -133,6 +134,7 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dftp.cc \
 		  Source/dftpbrowser.cc \
 		  Source/dgenericsearchwidget.cc \
+		  Source/dgopher.cc \
 		  Source/dhistory.cc \
 		  Source/dhistorymodel.cc \
 		  Source/dhistorysidebar.cc \
