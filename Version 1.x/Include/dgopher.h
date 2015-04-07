@@ -27,4 +27,60 @@
 
 #ifndef _dgopher_h_
 #define _dgopher_h_
+
+#include <QNetworkReply>
+#include <QTcpSocket>
+
+class dgopher: public QNetworkReply
+{
+  Q_OBJECT
+
+ public:
+  /*
+  ** qRegisterMetaType() requires a public default contructor,
+  ** a public copy constructor, and a public destructor.
+  */
+
+  dgopher(void):QNetworkReply(0)
+  {
+    m_offset = 0;
+  }
+
+  dgopher(const dgopher &reply):QNetworkReply(0)
+  {
+    m_offset = 0;
+    setOperation(reply.operation());
+    setRequest(reply.request());
+    setUrl(reply.url());
+  }
+
+  ~dgopher()
+  {
+  }
+
+  dgopher(QObject *parent, const QNetworkRequest &request);
+  QByteArray html(void) const;
+  qint64 bytesAvailable(void) const;
+  void abort(void);
+  void load(void);
+
+ private:
+  QByteArray m_content;
+  QByteArray m_html;
+  QTcpSocket m_socket;
+  qint64 m_offset;
+  static QByteArray s_eol;
+
+ private slots:
+  void slotConnected(void);
+  void slotDisonnected(void);
+  void slotReadyRead(void);
+
+ protected:
+  qint64 readData(char *data, qint64 maxSize);
+
+ signals:
+  void finished(dgopher *reply);
+};
+
 #endif

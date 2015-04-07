@@ -36,7 +36,7 @@ QMAKE_EXTRA_TARGETS = libspoton purge
 QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib
 
 INCLUDEPATH	+= . Include
-LIBS     	+= -LlibSpotOn -lgcrypt -lgpg-error -lspoton
+LIBS     	+= -L/usr/local/lib -LlibSpotOn -lgcrypt -lgpg-error -lspoton
 PRE_TARGETDEPS = libspoton.so
 
 MOC_DIR = temp/moc

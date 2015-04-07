@@ -25,46 +25,46 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <string>
 #include <iostream>
+#include <string>
 
-#include <QDir>
-#include <QDebug>
-#include <QTimer>
-#include <QtCore>
+#include <QApplication>
+#include <QAuthenticator>
 #include <QBuffer>
-#include <QPrinter>
-#include <QProcess>
+#include <QClipboard>
+#include <QCloseEvent>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QDesktopServices>
+#include <QDesktopWidget>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileIconProvider>
 #include <QLineEdit>
 #ifdef Q_OS_MAC
 #if QT_VERSION < 0x050000
 #include <QMacStyle>
 #endif
 #endif
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QPaintEngine>
+#include <QPluginLoader>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include <QPrinter>
+#include <QProcess>
 #include <QSettings>
 #include <QSplitter>
-#include <QSqlQuery>
-#include <QWebFrame>
-#include <QClipboard>
-#include <QTextCodec>
-#include <QCloseEvent>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QTranslator>
-#include <QApplication>
-#include <QPaintEngine>
-#include <QPrintDialog>
 #include <QSqlDatabase>
-#include <QPluginLoader>
-#include <QNetworkReply>
-#include <QWidgetAction>
-#include <QAuthenticator>
-#include <QDesktopWidget>
+#include <QSqlQuery>
+#include <QTextCodec>
+#include <QTimer>
+#include <QTranslator>
+#include <QWebFrame>
 #include <QWebHistoryItem>
-#include <QDesktopServices>
-#include <QCoreApplication>
-#include <QFileIconProvider>
-#include <QPrintPreviewDialog>
+#include <QWidgetAction>
+#include <QtCore>
 #if QT_VERSION >= 0x050000
 #include <QtConcurrent>
 #endif
@@ -73,80 +73,80 @@ extern "C"
 {
 #include <fcntl.h>
 #include <signal.h>
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
-#include <unistd.h>
-#endif
 #if defined(Q_OS_MAC)
 #include <sys/resource.h>
 #endif
 #if defined(Q_OS_FREEBSD)
 #include <sys/stat.h>
 #endif
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#include <unistd.h>
+#endif
 }
 
-#include "dmisc.h"
-#include "dooble.h"
-#include "dprintfromcommandprompt.h"
-#include "dhistory.h"
-#include "dwebpage.h"
-#include "dwebview.h"
-#include "derrorlog.h"
-#include "dplugintab.h"
-#include "dnetworkcache.h"
-#include "dbookmarkspopup.h"
-#include "dbookmarkswindow.h"
-#include "dclearcontainers.h"
-#include "dreinstatedooble.h"
-#include "dpagesourcewindow.h"
-#include "ui_passwordPrompt.h"
-#include "ui_passphrasePrompt.h"
-#include "dnetworkaccessmanager.h"
 #ifdef Q_OS_MAC
 #if QT_VERSION >= 0x050000
 #include "CocoaInitializer.h"
 #endif
 #endif
+#include "dbookmarkspopup.h"
+#include "dbookmarkswindow.h"
+#include "dclearcontainers.h"
+#include "derrorlog.h"
+#include "dgopher.h"
+#include "dhistory.h"
+#include "dmisc.h"
+#include "dnetworkaccessmanager.h"
+#include "dnetworkcache.h"
+#include "dooble.h"
+#include "dpagesourcewindow.h"
+#include "dplugintab.h"
+#include "dprintfromcommandprompt.h"
+#include "dreinstatedooble.h"
+#include "dwebpage.h"
+#include "dwebview.h"
+#include "ui_passphrasePrompt.h"
+#include "ui_passwordPrompt.h"
 
 using namespace simpleplugin;
 
-quint64 dooble::s_instances = 0;
-QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
-QUuid dooble::s_id = QUuid::createUuid();
+QHash<QString, QVariant> dooble::s_settings;
+QHash<QString, qint64> dooble::s_mostVisitedHosts;
+QMap<QString, QString> dooble::s_applicationsActions;
 QMutex dooble::s_saveHistoryMutex;
-QString dooble::s_homePath = "";
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-QPointer<dspoton> dooble::s_spoton = 0;
-#endif
-QPointer<dcookies> dooble::s_cookies = 0;
-QPointer<dhistory> dooble::s_historyWindow = 0;
-QPointer<derrorlog> dooble::s_errorLog = 0;
-QPointer<dsettings> dooble::s_settingsWindow = 0;
-QPointer<dcookiewindow> dooble::s_cookieWindow = 0;
-QPointer<dhistorymodel> dooble::s_historyModel = 0;
-QPointer<dnetworkcache> dooble::s_networkCache = 0;
-QPointer<ddownloadwindow> dooble::s_downloadWindow = 0;
+QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
+QPointer<QStandardItemModel> dooble::s_bookmarksFolderModel = 0;
 QPointer<dbookmarkspopup> dooble::s_bookmarksPopup = 0;
 QPointer<dbookmarkswindow> dooble::s_bookmarksWindow = 0;
 QPointer<dclearcontainers> dooble::s_clearContainersWindow = 0;
-QPointer<dexceptionswindow> dooble::s_dntWindow = 0;
-QPointer<dexceptionswindow> dooble::s_popupsWindow = 0;
+QPointer<dcookies> dooble::s_cookies = 0;
+QPointer<dcookiewindow> dooble::s_cookieWindow = 0;
+QPointer<ddownloadwindow> dooble::s_downloadWindow = 0;
+QPointer<derrorlog> dooble::s_errorLog = 0;
 QPointer<dexceptionswindow> dooble::s_adBlockWindow = 0;
+QPointer<dexceptionswindow> dooble::s_alwaysHttpsExceptionsWindow = 0;
+QPointer<dexceptionswindow> dooble::s_cacheExceptionsWindow = 0;
+QPointer<dexceptionswindow> dooble::s_cookiesBlockWindow = 0;
+QPointer<dexceptionswindow> dooble::s_dntWindow = 0;
 QPointer<dexceptionswindow> dooble::s_httpOnlyExceptionsWindow = 0;
+QPointer<dexceptionswindow> dooble::s_httpRedirectWindow = 0;
 QPointer<dexceptionswindow> dooble::s_httpReferrerWindow = 0;
 QPointer<dexceptionswindow> dooble::s_imageBlockWindow = 0;
-QPointer<dexceptionswindow> dooble::s_cookiesBlockWindow = 0;
-QPointer<dexceptionswindow> dooble::s_httpRedirectWindow = 0;
-QPointer<dexceptionswindow> dooble::s_cacheExceptionsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_javaScriptExceptionsWindow = 0;
-QPointer<dexceptionswindow> dooble::s_alwaysHttpsExceptionsWindow = 0;
+QPointer<dexceptionswindow> dooble::s_popupsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_sslExceptionsWindow = 0;
+QPointer<dhistory> dooble::s_historyWindow = 0;
+QPointer<dhistorymodel> dooble::s_historyModel = 0;
+QPointer<dnetworkcache> dooble::s_networkCache = 0;
+QPointer<dsettings> dooble::s_settingsWindow = 0;
+#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
+QPointer<dspoton> dooble::s_spoton = 0;
+#endif
 QPointer<dsslcipherswindow> dooble::s_sslCiphersWindow = 0;
-QPointer<QStandardItemModel> dooble::s_bookmarksFolderModel = 0;
-QHash<QString, qint64> dooble::s_mostVisitedHosts;
-QMap<QString, QString> dooble::s_applicationsActions;
-QHash<QString, QVariant> dooble::s_settings;
+QString dooble::s_homePath = "";
+QUuid dooble::s_id = QUuid::createUuid();
 int dprintfromcommandprompt::s_count = 0;
-
+quint64 dooble::s_instances = 0;
 static char *s_crashFileName = 0;
 
 static void sig_handler(int signum)
@@ -343,6 +343,7 @@ int main(int argc, char *argv[])
 	}
     }
 
+  qRegisterMetaType<dgopher *> ("dgopher *");
   qRegisterMetaType<dnetworkblockreply *> ("dnetworkblockreply *");
   qRegisterMetaType<dnetworkdirreply *> ("dnetworkdirreply *");
   qRegisterMetaType<dnetworkerrorreply *> ("dnetworkerrorreply *");

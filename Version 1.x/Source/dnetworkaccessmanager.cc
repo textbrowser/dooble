@@ -30,10 +30,10 @@
 
 #include "dftp.h"
 #include "dmisc.h"
+#include "dnetworkaccessmanager.h"
+#include "dnetworkcache.h"
 #include "dooble.h"
 #include "dwebpage.h"
-#include "dnetworkcache.h"
-#include "dnetworkaccessmanager.h"
 
 /*
 ** The dnetworkblockreply, dnetworkdirreply, dnetworkerrorreply,
@@ -611,6 +611,18 @@ QNetworkReply *dnetworkaccessmanager::createRequest
       setLinkClicked(QUrl());
       return reply;
     }
+  else if(scheme == "gopher")
+    {
+      QPointer<dgopher> reply = new dgopher(this, req);
+
+      connect(reply,
+	      SIGNAL(finished(dgopher *)),
+	      this,
+	      SIGNAL(finished(dgopher *)));
+      reply->load();
+      setLinkClicked(QUrl());
+      return reply;
+    }
   else if(QFileInfo(req.url().toLocalFile()).isDir())
     {
       QPointer<dnetworkdirreply> reply = new dnetworkdirreply(this, req.url());
@@ -767,11 +779,12 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
   if(!reply)
     return;
 
-  if(qobject_cast<dnetworkdirreply *> (reply) ||
-     qobject_cast<dnetworkftpreply *> (reply) ||
+  if(qobject_cast<dgopher *> (reply) ||
      qobject_cast<dnetworkblockreply *> (reply) ||
      qobject_cast<dnetworkerrorreply *> (reply) ||
-     qobject_cast<dnetworksslerrorreply *> (reply))
+     qobject_cast<dnetworkftpreply *> (reply) ||
+     qobject_cast<dnetworksslerrorreply *> (reply) ||
+     qobject_cast<dnetworkdirreply *> (reply))
     {
       reply->deleteLater();
       return;

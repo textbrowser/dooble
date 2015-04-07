@@ -530,7 +530,8 @@ void dmisc::saveIconForUrl(const QIcon &icon, const QUrl &url)
 	  {
 	    QDataStream out(&buffer);
 
-	    if(url.scheme().toLower().trimmed() == "ftp")
+	    if(url.scheme().toLower().trimmed() == "ftp" ||
+	       url.scheme().toLower().trimmed() == "gopher")
 	      out << icon.pixmap(16, QIcon::Normal, QIcon::On);
 	    else
 	      out << icon;
@@ -563,7 +564,9 @@ QIcon dmisc::iconForUrl(const QUrl &url)
   QString scheme(url.scheme().toLower().trimmed());
   QFileIconProvider iconProvider;
 
-  if(scheme == "ftp" || scheme == "http" || scheme == "https" ||
+  if(scheme == "ftp" ||
+     scheme == "gopher" ||
+     scheme == "http" || scheme == "https" ||
      scheme == "qrc")
     {
       QIcon icon;
@@ -610,7 +613,7 @@ QIcon dmisc::iconForUrl(const QUrl &url)
 		      {
 			QDataStream in(&buffer);
 
-			if(scheme == "ftp")
+			if(scheme == "ftp" || scheme == "gopher")
 			  in >> pixmap;
 			else
 			  in >> icon;
@@ -655,7 +658,7 @@ QIcon dmisc::iconForUrl(const QUrl &url)
 
       QSqlDatabase::removeDatabase("favicons");
 
-      if(scheme == "ftp")
+      if(scheme == "ftp" || scheme == "gopher")
 	icon = QIcon(pixmap);
 
       if(!icon.isNull())
@@ -1110,6 +1113,7 @@ bool dmisc::isSchemeAcceptedByDooble(const QString &scheme)
   if(l_scheme == "data" ||
      l_scheme == "file" ||
      l_scheme == "ftp" ||
+     l_scheme == "gopher" ||
      l_scheme == "http" ||
      l_scheme == "https" ||
      l_scheme == "qrc")

@@ -28,15 +28,16 @@
 #ifndef _dnetworkaccessmanager_h_
 #define _dnetworkaccessmanager_h_
 
-#include <QPointer>
-#include <QNetworkCookie>
 #include <QNetworkAccessManager>
+#include <QNetworkCookie>
 #include <QNetworkReply>
+#include <QPointer>
+
+#include "dgopher.h"
 
 class QNetworkRequest;
-
-class dftp;
 class dexceptionswindow;
+class dftp;
 
 class dnetworkblockreply: public QNetworkReply
 {
@@ -266,24 +267,24 @@ class dnetworkaccessmanager: public QNetworkAccessManager
   void slotFinished(QNetworkReply *reply);
 
  signals:
-  void finished(dnetworkdirreply *reply);
-  void finished(dnetworkftpreply *reply);
-  void finished(dnetworkblockreply *reply);
-  void finished(dnetworkerrorreply *reply);
-  void finished(dnetworksslerrorreply *reply);
+  void blockThirdPartyHost(const QString &host,
+			   const QUrl &url,
+			   const QDateTime &dateTime);
   void doNotTrack(const QString &host,
 		  const QUrl &url,
 		  const QDateTime &dateTime);
-  void loadStarted(void);
-  void exceptionRaised(dexceptionswindow *window,
-		       const QUrl &url);
+  void exceptionRaised(dexceptionswindow *window, const QUrl &url);
+  void finished(dgopher *reply);
+  void finished(dnetworkblockreply *reply);
+  void finished(dnetworkdirreply *reply);
+  void finished(dnetworkerrorreply *reply);
+  void finished(dnetworkftpreply *reply);
+  void finished(dnetworksslerrorreply *reply);
   void loadErrorPage(const QUrl &url);
   void loadImageRequest(const QString &host,
 			const QUrl &url,
 			const QDateTime &dateTime);
-  void blockThirdPartyHost(const QString &host,
-			   const QUrl &url,
-			   const QDateTime &dateTime);
+  void loadStarted(void);
   void suppressHttpReferrer(const QString &host,
 			    const QUrl &url,
 			    const QDateTime &dateTime);

@@ -35,27 +35,27 @@
 #include <QStackedWidget>
 #include <QWebSettings>
 
+class QNetworkReply;
+class QPrinter;
+class QSslError;
+class QWebFrame;
+class QWebHistoryItem;
+class QWebView;
 class dcookies;
+class dcookiewindow;
+class dexceptionswindow;
+class dfilemanager;
+class dftpbrowser;
+class dgopher;
+class dnetworkblockreply;
+class dnetworkdirreply;
+class dnetworkerrorreply;
+class dnetworkftpreply;
+class dnetworksslerrorreply;
 class dooble;
 class dwebpage;
 class dwebview;
-class dftpbrowser;
-class dfilemanager;
-class dcookiewindow;
 class dwebviewsimple;
-class dnetworkdirreply;
-class dnetworkftpreply;
-class dexceptionswindow;
-class dnetworkblockreply;
-class dnetworkerrorreply;
-class dnetworksslerrorreply;
-
-class QPrinter;
-class QWebView;
-class QSslError;
-class QWebFrame;
-class QNetworkReply;
-class QWebHistoryItem;
 
 class dview: public QStackedWidget
 {
@@ -151,6 +151,7 @@ class dview: public QStackedWidget
  private slots:
   void slotStop(void);
   void slotPaste(void);
+  void slotFinished(dgopher *reply);
   void slotFinished(dnetworkdirreply *reply);
   void slotFinished(dnetworkftpreply *reply);
   void slotFinished(dnetworkblockreply *reply);

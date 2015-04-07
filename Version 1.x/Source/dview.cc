@@ -149,6 +149,10 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	  SLOT(slotHandleUnsupportedContent(QNetworkReply *)),
 	  Qt::QueuedConnection);
   connect(webView->page()->networkAccessManager(),
+	  SIGNAL(finished(dgopher *)),
+	  this,
+	  SLOT(slotFinished(dgopher *)));
+  connect(webView->page()->networkAccessManager(),
 	  SIGNAL(finished(dnetworkblockreply *)),
 	  this,
 	  SLOT(slotFinished(dnetworkblockreply *)));
@@ -525,7 +529,9 @@ void dview::load(const QUrl &url)
   webView->page()->networkAccessManager()->setProxy
     (dmisc::proxyByUrl(m_url));
 
-  if(scheme == "http" || scheme == "https")
+  if(scheme == "gopher")
+    webView->load(m_url);
+  else if(scheme == "http" || scheme == "https")
     {
       if(dooble::s_javaScriptExceptionsWindow->allowed(m_url.host()))
 	/*
@@ -651,7 +657,7 @@ void dview::slotUrlChanged(const QUrl &url)
       scheme = scheme.mid(static_cast<int> (qstrlen("dooble")));
       m_url.setScheme(scheme);
     }
-  else if(scheme == "http" || scheme == "https")
+  else if(scheme == "gopher" || scheme == "http" || scheme == "https")
     setCurrentWidget(webView);
 
   if(m_action)
@@ -931,6 +937,12 @@ void dview::slotFinished(dnetworkftpreply *reply)
     }
 }
 
+void dview::slotFinished(dgopher *reply)
+{
+  if(reply)
+    webView->setHtml(reply->html(), reply->url());
+}
+
 void dview::slotFinished(dnetworkblockreply *reply)
 {
   if(reply)
@@ -979,10 +991,11 @@ void dview::slotFinished(dnetworksslerrorreply *reply)
 
 void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 {
-  if(qobject_cast<dnetworkdirreply *> (reply) ||
-     qobject_cast<dnetworkftpreply *> (reply) ||
+  if(qobject_cast<dgopher *> (reply) ||
      qobject_cast<dnetworkblockreply *> (reply) ||
+     qobject_cast<dnetworkdirreply *> (reply) ||
      qobject_cast<dnetworkerrorreply *> (reply) ||
+     qobject_cast<dnetworkftpreply *> (reply) ||
      qobject_cast<dnetworksslerrorreply *> (reply))
     return;
 
