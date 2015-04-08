@@ -67,7 +67,7 @@ dgopher::dgopher
 	  SIGNAL(finished(dgopher *)),
 	  this,
 	  SIGNAL(finished(void)));
-  open(QIODevice::ReadWrite);
+  open(QIODevice::ReadOnly | QIODevice::Unbuffered);
   m_html.append("<html><head></head><p><body>");
 }
 
@@ -138,7 +138,8 @@ void dgopher::slotReadyRead(void)
 
       char c = bytes.at(0);
 
-      if(c == '0' || c == '1' || c == '2')
+      if(c == '0' || c == '1' || c == '2' || c == '6' || c == '7' ||
+	 c == '+')
 	{
 	  bytes.remove(0, 1);
 
@@ -157,7 +158,7 @@ void dgopher::slotReadyRead(void)
 	    (QString("<a href=\"%1\">%2%3</a><br>").
 	     arg(url.toEncoded().constData()).
 	     arg(list.value(0).constData()).
-	     arg(c == '0' ? "" : "..."));
+	     arg(c == '1' ? "..." : ""));
 	}
       else if(c == '3')
 	abort();
