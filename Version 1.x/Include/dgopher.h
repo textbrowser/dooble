@@ -67,7 +67,7 @@ class dgopher: public QNetworkReply
  private:
   QByteArray m_content;
   QByteArray m_html;
-  QTcpSocket m_socket;
+  QTcpSocket *m_socket;
   qint64 m_offset;
   static QByteArray s_eol;
 
