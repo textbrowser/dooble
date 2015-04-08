@@ -223,7 +223,7 @@ libspoton_error_t libspoton_init_a(const char *databasePath,
 
       libspotonHandle->m_keyLength = keyLength;
 
-      if(!(libspotonHandle->m_key = (char *)
+      if(!(libspotonHandle->m_key =
 	   gcry_calloc_secure(libspotonHandle->m_keyLength,
 			      sizeof(char))))
 	{
@@ -317,7 +317,7 @@ libspoton_error_t libspoton_init_b(const char *databasePath,
 	  goto error_label;
 	}
 
-      if(!(libspotonHandle->m_key = (char *)
+      if(!(libspotonHandle->m_key =
 	   gcry_calloc_secure(libspotonHandle->m_keyLength,
 			      sizeof(char))))
 	{
@@ -576,7 +576,7 @@ libspoton_error_t libspoton_save_url(const char *url,
     {
       if(encrypt)
 	{
-	  iv = (char *) gcry_calloc(blockLength, sizeof(char));
+	  iv = gcry_calloc(blockLength, sizeof(char));
 
 	  if(iv)
 	    {
@@ -632,8 +632,7 @@ libspoton_error_t libspoton_save_url(const char *url,
 	    }
 
 	  if(sizeofchar > 0 && encodedBufferLength <= SIZE_MAX / sizeofchar)
-	    encodedBuffer = (char *) calloc(encodedBufferLength,
-					    sizeof(char));
+	    encodedBuffer = calloc(encodedBufferLength, sizeof(char));
 	  else
 	    encodedBuffer = 0;
 
@@ -680,8 +679,8 @@ libspoton_error_t libspoton_save_url(const char *url,
 
 	      if(sizeofchar > 0 &&
 		 encodedBufferAndIVLength <= SIZE_MAX / sizeofchar)
-		encodedBufferAndIV = (char *) calloc(encodedBufferAndIVLength,
-						     sizeof(char));
+		encodedBufferAndIV = calloc(encodedBufferAndIVLength,
+					    sizeof(char));
 	      else
 		encodedBufferAndIV = 0;
 

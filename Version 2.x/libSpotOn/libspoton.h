@@ -28,17 +28,21 @@
 #ifndef LIBSPOTON_H
 #define LIBSPOTON_H
 
-#define LIBSPOTON_VERSION 0x000008
-#define LIBSPOTON_VERSION_STR "0.08"
+#define LIBSPOTON_VERSION 0x000009
+#define LIBSPOTON_VERSION_STR "0.09"
 
 #ifdef LIBSPOTON_OS_WINDOWS
 #include "errno.h"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include "gcrypt.h"
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 #include "pthread.h"
 #include "sqlite3.h"
 #else
 #include <errno.h>
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include <gcrypt.h>
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 #include <pthread.h>
 #include <sqlite3.h>
 #endif
