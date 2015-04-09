@@ -405,12 +405,14 @@ dnetworksslerrorreply::dnetworksslerrorreply
 
   if(url.host().isEmpty())
     m_content.append("<h2>Dooble cannot establish a secure connection to "
-		     "the requested site.</h2>"
+		     "the requested site. Please visit the Allowed "
+		     "SSL Ciphers panel and review your selections.</h2>"
 		     "</td>");
   else
     m_content.append
       (QString("<h2>Dooble cannot establish a secure connection to "
-	       "%1.</h2>"
+	       "%1. Please visit the Allowed SSL Ciphers panel "
+	       "and review your selections.</h2>"
 	       "</td>").arg(url.host()));
 
   m_content.append("</tr></tbody></table>");
