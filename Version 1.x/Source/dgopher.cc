@@ -124,7 +124,7 @@ void dgopher::slotDisonnected(void)
 
 void dgopher::slotReadyRead(void)
 {
-  m_content.append(m_socket->readAll());qDebug()<<m_content;
+  m_content.append(m_socket->readAll());
 
   while(m_content.contains(s_eol))
     {
