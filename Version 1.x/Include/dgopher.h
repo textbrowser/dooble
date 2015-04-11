@@ -43,12 +43,20 @@ class dgopher: public QNetworkReply
 
   dgopher(void):QNetworkReply(0)
   {
+    m_download = false;
+    m_hasBeenPreFetched = false;
+    m_itemType = 0;
     m_offset = 0;
+    m_preFetch = false;
   }
 
   dgopher(const dgopher &reply):QNetworkReply(0)
   {
+    m_download = false;
+    m_hasBeenPreFetched = false;
+    m_itemType = 0;
     m_offset = 0;
+    m_preFetch = false;
     setOperation(reply.operation());
     setRequest(reply.request());
     setUrl(reply.url());
@@ -67,14 +75,21 @@ class dgopher: public QNetworkReply
  private:
   QByteArray m_content;
   QByteArray m_html;
+  QString m_path;
   QTcpSocket *m_socket;
+  bool m_download;
+  bool m_hasBeenPreFetched;
+  bool m_preFetch;
+  char m_itemType;
   qint64 m_offset;
   static QByteArray s_eol;
 
  private slots:
   void slotConnected(void);
+  void slotConnectedForText(void);
   void slotDisonnected(void);
   void slotReadyRead(void);
+  void slotReadyReadForText(void);
 
  protected:
   qint64 readData(char *data, qint64 maxSize);

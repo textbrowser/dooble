@@ -26,6 +26,7 @@
 */
 
 #include <QDateTime>
+#include <QStringList>
 #include <QtDebug>
 
 #include "dgopher.h"
@@ -38,7 +39,11 @@ dgopher::dgopher
   QNetworkRequest request(req);
   QUrl url(request.url());
 
+  m_download = false;
+  m_hasBeenPreFetched = false;
+  m_itemType = 0;
   m_offset = 0;
+  m_preFetch = true;
   m_socket = new QTcpSocket(this);
 
   if(url.port() == -1)
@@ -51,24 +56,11 @@ dgopher::dgopher
   setOperation(QNetworkAccessManager::GetOperation);
   setRequest(request);
   setUrl(url);
-  connect(m_socket,
-	  SIGNAL(connected(void)),
-	  this,
-	  SLOT(slotConnected(void)));
-  connect(m_socket,
-	  SIGNAL(disconnected(void)),
-	  this,
-	  SLOT(slotDisonnected(void)));
-  connect(m_socket,
-	  SIGNAL(readyRead(void)),
-	  this,
-	  SLOT(slotReadyRead(void)));
   connect(this,
 	  SIGNAL(finished(dgopher *)),
 	  this,
 	  SIGNAL(finished(void)));
   open(QIODevice::ReadOnly | QIODevice::Unbuffered);
-  m_html.append("<html><head></head><p><body>");
 }
 
 QByteArray dgopher::html(void) const
@@ -107,18 +99,67 @@ void dgopher::abort(void)
 
 void dgopher::load(void)
 {
+  disconnect(m_socket, SIGNAL(connected(void)), 0, 0);
+  disconnect(m_socket, SIGNAL(disconnected(void)), 0, 0);
+  disconnect(m_socket, SIGNAL(readyRead(void)), 0, 0);
+  connect(m_socket,
+	  SIGNAL(connected(void)),
+	  this,
+	  SLOT(slotConnected(void)));
+  connect(m_socket,
+	  SIGNAL(disconnected(void)),
+	  this,
+	  SLOT(slotDisonnected(void)));
+  connect(m_socket,
+	  SIGNAL(readyRead(void)),
+	  this,
+	  SLOT(slotReadyRead(void)));
+  m_content.clear();
+  m_download = false;
+  m_html.clear();
+  m_itemType = 0;
+  m_path.clear();
+  m_preFetch = false;
   m_socket->abort();
   m_socket->connectToHost(url().host(), url().port());
 }
 
 void dgopher::slotConnected(void)
 {
-  m_socket->write((url().path()).toUtf8().append(s_eol));
+  QString path(url().path().trimmed());
+
+  if(path.isEmpty())
+    {
+      m_html.append("<html><head></head><p><body>");
+      m_socket->write(s_eol);
+    }
+  else
+    {
+      QStringList list(path.split("/", QString::SkipEmptyParts));
+
+      if(!list.isEmpty())
+	m_path = list.at(list.length() - 1);
+
+      m_preFetch = true;
+      m_socket->write(list.value(list.length() - 2).toUtf8().append(s_eol));
+    }
+}
+
+void dgopher::slotConnectedForText(void)
+{
+  connect(m_socket,
+	  SIGNAL(readyRead(void)),
+	  this,
+	  SLOT(slotReadyReadForText(void)));
+  m_socket->write(url().path().toUtf8().append(s_eol));
 }
 
 void dgopher::slotDisonnected(void)
 {
-  m_html.append("</body></p></html>");
+  if(m_preFetch)
+    m_html.append("</body></p></html>");
+
+  m_hasBeenPreFetched = false;
   emit finished(this);
 }
 
@@ -133,20 +174,59 @@ void dgopher::slotReadyRead(void)
       m_content.remove(0, bytes.length());
       bytes = bytes.trimmed();
 
-      if(bytes == "." || bytes.isEmpty())
-	break;
-
       char c = bytes.at(0);
+
+      bytes.remove(0, 1);
+
+      QList<QByteArray> list(bytes.split('\t'));
+
+      if(!m_hasBeenPreFetched && m_preFetch)
+	{
+	  if(list.value(1).trimmed().endsWith(m_path.toUtf8().constData()))
+	    {
+	      m_hasBeenPreFetched = true;
+
+	      if(c == '0')
+		{
+		  m_content.clear();
+		  m_download = false;
+		  m_html.clear();
+		  m_itemType = c;
+		  m_preFetch = false;
+		  disconnect(m_socket, SIGNAL(connected(void)), 0, 0);
+		  disconnect(m_socket, SIGNAL(disconnected(void)), 0, 0);
+		  disconnect(m_socket, SIGNAL(readyRead(void)), 0, 0);
+		  abort();
+		  connect(m_socket,
+			  SIGNAL(connected(void)),
+			  this,
+			  SLOT(slotConnectedForText(void)));
+		  connect(m_socket,
+			  SIGNAL(disconnected(void)),
+			  this,
+			  SLOT(slotDisonnected(void)));
+		  m_socket->connectToHost(url().host(), url().port());
+		  return;
+		}
+	      else if(c == '1')
+		{
+		  m_socket->blockSignals(true);
+		  m_socket->abort();
+		  m_socket->blockSignals(false);
+		  load();
+		  return;
+		}
+	    }
+	  else
+	    continue;
+	}
 
       if(c == '+' || c == '0' || c == '1' || c == 'h')
 	{
-	  bytes.remove(0, 1);
-
-	  QList<QByteArray> list(bytes.split('\t'));
 	  QUrl url;
 
-	  url.setHost(list.value(2));
-	  url.setPath(list.value(1));
+	  url.setHost(list.value(2).trimmed());
+	  url.setPath(list.value(1).trimmed());
 	  url.setPort(list.value(3).toInt());
 
 	  if(url.port() == -1)
@@ -161,12 +241,7 @@ void dgopher::slotReadyRead(void)
 	}
       else if(c == '3' || c == 'i')
 	{
-	  bytes.remove(0, 1);
-
-	  QByteArray information;
-	  QList<QByteArray> list(bytes.split('\t'));
-
-	  information = list.value(0).trimmed();
+	  QByteArray information(list.value(0).trimmed());
 
 	  if(!information.isEmpty())
 	    {
@@ -174,5 +249,23 @@ void dgopher::slotReadyRead(void)
 	      m_html.append("<br>\n");
 	    }
 	}
+    }
+}
+
+void dgopher::slotReadyReadForText(void)
+{
+  m_content.append(m_socket->readAll());
+
+  while(m_content.contains(s_eol))
+    {
+      QByteArray bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
+
+      m_content.remove(0, bytes.length());
+      bytes = bytes.trimmed();
+
+      if(bytes == ".")
+	break;
+      else
+	m_html.append(bytes.append("<br>"));
     }
 }
