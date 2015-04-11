@@ -124,7 +124,7 @@ void dgopher::slotDisonnected(void)
 
 void dgopher::slotReadyRead(void)
 {
-  m_content.append(m_socket->readAll());
+  m_content.append(m_socket->readAll());qDebug()<<m_content;
 
   while(m_content.contains(s_eol))
     {
@@ -138,8 +138,7 @@ void dgopher::slotReadyRead(void)
 
       char c = bytes.at(0);
 
-      if(c == '0' || c == '1' || c == '2' || c == '6' || c == '7' ||
-	 c == '+')
+      if(c == '+' || c == '0' || c == '1' || c == 'h')
 	{
 	  bytes.remove(0, 1);
 
@@ -155,7 +154,7 @@ void dgopher::slotReadyRead(void)
 
 	  url.setScheme("gopher");
 	  m_html.append
-	    (QString("<a href=\"%1\">%2%3</a><br>").
+	    (QString("<a href=\"%1\">%2%3</a><br>\n").
 	     arg(url.toEncoded().constData()).
 	     arg(list.value(0).constData()).
 	     arg(c == '1' ? "..." : ""));
@@ -172,7 +171,7 @@ void dgopher::slotReadyRead(void)
 	  if(!information.isEmpty())
 	    {
 	      m_html.append(information);
-	      m_html.append("<br>");
+	      m_html.append("<br>\n");
 	    }
 	}
     }
