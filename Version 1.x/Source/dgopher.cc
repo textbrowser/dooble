@@ -125,7 +125,7 @@ void dgopher::slotDisonnected(void)
 void dgopher::slotReadyRead(void)
 {
   m_content.append(m_socket->readAll());
-  qDebug()<<m_content;
+
   while(m_content.contains(s_eol))
     {
       QByteArray bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
@@ -160,9 +160,7 @@ void dgopher::slotReadyRead(void)
 	     arg(list.value(0).constData()).
 	     arg(c == '1' ? "..." : ""));
 	}
-      else if(c == '3')
-	abort();
-      else if(c == 'i')
+      else if(c == '3' || c == 'i')
 	{
 	  bytes.remove(0, 1);
 
