@@ -125,7 +125,7 @@ void dgopher::slotDisonnected(void)
 void dgopher::slotReadyRead(void)
 {
   m_content.append(m_socket->readAll());
-
+  qDebug()<<m_content;
   while(m_content.contains(s_eol))
     {
       QByteArray bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
@@ -162,5 +162,20 @@ void dgopher::slotReadyRead(void)
 	}
       else if(c == '3')
 	abort();
+      else if(c == 'i')
+	{
+	  bytes.remove(0, 1);
+
+	  QByteArray information;
+	  QList<QByteArray> list(bytes.split('\t'));
+
+	  information = list.value(0).trimmed();
+
+	  if(!information.isEmpty())
+	    {
+	      m_html.append(information);
+	      m_html.append("<br>");
+	    }
+	}
     }
 }
