@@ -36,14 +36,12 @@ QByteArray dgopher::s_eol = "\r\n";
 dgopher::dgopher
 (QObject *parent, const QNetworkRequest &req):QNetworkReply(parent)
 {
+  initialize();
+  m_hasBeenPreFetched = false;
+
   QNetworkRequest request(req);
   QUrl url(request.url());
 
-  m_download = false;
-  m_hasBeenPreFetched = false;
-  m_itemType = 0;
-  m_offset = 0;
-  m_preFetch = true;
   m_socket = new QTcpSocket(this);
 
   if(url.port() == -1)
@@ -60,7 +58,6 @@ dgopher::dgopher
 	  SIGNAL(finished(dgopher *)),
 	  this,
 	  SIGNAL(finished(void)));
-  open(QIODevice::ReadOnly | QIODevice::Unbuffered);
 }
 
 QByteArray dgopher::html(void) const
@@ -93,7 +90,22 @@ qint64 dgopher::readData(char *data, qint64 maxSize)
 
 void dgopher::abort(void)
 {
+  close();
   m_socket->abort();
+}
+
+void dgopher::initialize(void)
+{
+  m_content.clear();
+  m_download = false;
+  m_html.clear();
+  m_itemType = 0;
+  m_offset = 0;
+  m_path.clear();
+  m_preFetch = false;
+
+  if(!isOpen())
+    open(QIODevice::ReadOnly | QIODevice::Unbuffered);
 }
 
 void dgopher::load(void)
@@ -101,6 +113,8 @@ void dgopher::load(void)
   disconnect(m_socket, SIGNAL(connected(void)), 0, 0);
   disconnect(m_socket, SIGNAL(disconnected(void)), 0, 0);
   disconnect(m_socket, SIGNAL(readyRead(void)), 0, 0);
+  abort();
+  initialize();
   connect(m_socket,
 	  SIGNAL(connected(void)),
 	  this,
@@ -113,13 +127,6 @@ void dgopher::load(void)
 	  SIGNAL(readyRead(void)),
 	  this,
 	  SLOT(slotReadyRead(void)));
-  m_content.clear();
-  m_download = false;
-  m_html.clear();
-  m_itemType = 0;
-  m_path.clear();
-  m_preFetch = false;
-  m_socket->abort();
   m_socket->connectToHost(url().host(), url().port());
 }
 
@@ -134,6 +141,11 @@ void dgopher::slotConnected(void)
     }
   else
     {
+      /*
+      ** Determine the current path's type by proceeding to its
+      ** parent directory.
+      */
+
       if(m_hasBeenPreFetched)
 	m_socket->write(url().path().toUtf8().append(s_eol));
       else
@@ -195,15 +207,11 @@ void dgopher::slotReadyRead(void)
 
 	      if(c == '0' || c == 'h' || c == 'i')
 		{
-		  m_content.clear();
-		  m_download = false;
-		  m_html.clear();
-		  m_itemType = c;
-		  m_preFetch = false;
 		  disconnect(m_socket, SIGNAL(connected(void)), 0, 0);
 		  disconnect(m_socket, SIGNAL(disconnected(void)), 0, 0);
 		  disconnect(m_socket, SIGNAL(readyRead(void)), 0, 0);
 		  abort();
+		  initialize();
 		  connect(m_socket,
 			  SIGNAL(connected(void)),
 			  this,
@@ -217,9 +225,6 @@ void dgopher::slotReadyRead(void)
 		}
 	      else if(c == '1')
 		{
-		  m_socket->blockSignals(true);
-		  m_socket->abort();
-		  m_socket->blockSignals(false);
 		  load();
 		  return;
 		}

@@ -51,10 +51,12 @@ class dnetworkblockreply: public QNetworkReply
 
   dnetworkblockreply(void):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
   }
 
   dnetworkblockreply(const dnetworkblockreply &reply):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
     setUrl(reply.url());
     setRequest(reply.request());
     setOperation(reply.operation());
@@ -93,10 +95,12 @@ class dnetworkdirreply: public QNetworkReply
 
   dnetworkdirreply(void):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
   }
 
   dnetworkdirreply(const dnetworkdirreply &reply):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
     setUrl(reply.url());
     setRequest(reply.request());
     setOperation(reply.operation());
@@ -131,10 +135,12 @@ class dnetworkerrorreply: public QNetworkReply
 
   dnetworkerrorreply(void):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
   }
 
   dnetworkerrorreply(const dnetworkerrorreply &reply):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
     setUrl(reply.url());
     setRequest(reply.request());
     setOperation(reply.operation());
@@ -173,10 +179,12 @@ class dnetworkftpreply: public QNetworkReply
 
   dnetworkftpreply(void):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
   }
 
   dnetworkftpreply(const dnetworkftpreply &reply):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
     setUrl(reply.url());
     setRequest(reply.request());
     setOperation(reply.operation());
@@ -219,10 +227,12 @@ class dnetworksslerrorreply: public QNetworkReply
 
   dnetworksslerrorreply(void):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
   }
 
   dnetworksslerrorreply(const dnetworksslerrorreply &reply):QNetworkReply(0)
   {
+    open(ReadOnly | Unbuffered);
     setUrl(reply.url());
     setRequest(reply.request());
     setOperation(reply.operation());
