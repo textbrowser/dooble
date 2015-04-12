@@ -235,7 +235,8 @@ void dgopher::slotReadyRead(void)
 
       if(!m_hasBeenPreFetched && m_preFetch)
 	{
-	  if(list.value(1).endsWith(m_path.toUtf8().constData()))
+	  if(list.value(1).replace("/", "").
+	     endsWith(m_path.toUtf8().constData()))
 	    {
 	      m_hasBeenPreFetched = true;
 
