@@ -94,6 +94,28 @@ void dgopher::abort(void)
   m_socket->abort();
 }
 
+void dgopher::download(void)
+{
+  disconnect(m_socket, SIGNAL(connected(void)), 0, 0);
+  disconnect(m_socket, SIGNAL(disconnected(void)), 0, 0);
+  disconnect(m_socket, SIGNAL(readyRead(void)), 0, 0);
+  abort();
+  initialize();
+  connect(m_socket,
+	  SIGNAL(connected(void)),
+	  this,
+	  SLOT(slotConnectedForDownload(void)));
+  connect(m_socket,
+	  SIGNAL(disconnected(void)),
+	  this,
+	  SLOT(slotDisonnected(void)));
+  connect(m_socket,
+	  SIGNAL(readyRead(void)),
+	  this,
+	  SLOT(slotReadyReadForDownload(void)));
+  m_socket->connectToHost(url().host(), url().port());
+}
+
 void dgopher::initialize(void)
 {
   m_content.clear();
@@ -169,6 +191,11 @@ void dgopher::slotConnected(void)
 	  m_socket->write(path.toUtf8().append(s_eol));
 	}
     }
+}
+
+void dgopher::slotConnectedForDownload(void)
+{
+  m_socket->write(url().path().toUtf8().append(s_eol));
 }
 
 void dgopher::slotConnectedForText(void)
@@ -274,6 +301,14 @@ void dgopher::slotReadyRead(void)
 	    }
 	}
     }
+}
+
+void dgopher::slotReadyReadForDownload(void)
+{
+  m_content.append(m_socket->readAll());
+  m_html.append(m_content);
+  m_content.clear();
+  emit readyRead();
 }
 
 void dgopher::slotReadyReadForText(void)

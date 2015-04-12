@@ -64,7 +64,7 @@ class dgopher: public QNetworkReply
   QByteArray html(void) const;
   qint64 bytesAvailable(void) const;
   void abort(void);
-  void initialize(void);
+  void download(void);
   void load(void);
 
  private:
@@ -78,12 +78,15 @@ class dgopher: public QNetworkReply
   char m_itemType;
   qint64 m_offset;
   static QByteArray s_eol;
+  void initialize(void);
 
  private slots:
   void slotConnected(void);
+  void slotConnectedForDownload(void);
   void slotConnectedForText(void);
   void slotDisonnected(void);
   void slotReadyRead(void);
+  void slotReadyReadForDownload(void);
   void slotReadyReadForText(void);
 
  protected:

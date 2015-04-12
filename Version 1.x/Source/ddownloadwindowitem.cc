@@ -37,6 +37,7 @@
 
 #include "ddownloadwindowitem.h"
 #include "dftp.h"
+#include "dgopher.h"
 #include "dmisc.h"
 #include "dooble.h"
 
@@ -222,7 +223,15 @@ void ddownloadwindowitem::downloadUrl
     }
 
   ui.abortToolButton->setVisible(true);
-  ui.pauseToolButton->setVisible(true);
+
+  if(m_url.scheme().toLower().trimmed() != "gopher")
+    ui.pauseToolButton->setVisible(true);
+  else
+    {
+      ui.pauseToolButton->setVisible(false);
+      ui.progressBar->setMaximum(0);
+    }
+
   ui.progressBar->setVisible(true);
 
   QFile *file = new QFile(m_dstFileName, this);
@@ -240,6 +249,22 @@ void ddownloadwindowitem::downloadUrl
 	  connect(ftp, SIGNAL(finished(void)),
 		  this, SLOT(slotDownloadFinished(void)));
 	  ftp->get(m_url);
+	  emit recordDownload(QFileInfo(m_dstFileName).absoluteFilePath(),
+			      m_url, m_dateTime);
+	}
+      else if(m_url.scheme().toLower().trimmed() == "gopher")
+	{
+	  dgopher *reply = new dgopher(this, QNetworkRequest(m_url));
+
+	  reply->download();
+	  connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+		  this, SLOT(slotError(QNetworkReply::NetworkError)));
+	  connect(reply, SIGNAL(readyRead(void)),
+		  this, SLOT(slotReadyRead(void)));
+	  connect(reply, SIGNAL(metaDataChanged(void)),
+		  this, SLOT(slotMetaDataChanged(void)));
+	  connect(reply, SIGNAL(finished(void)),
+		  this, SLOT(slotDownloadFinished(void)));
 	  emit recordDownload(QFileInfo(m_dstFileName).absoluteFilePath(),
 			      m_url, m_dateTime);
 	}
