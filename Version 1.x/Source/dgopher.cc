@@ -93,7 +93,6 @@ qint64 dgopher::readData(char *data, qint64 maxSize)
 
 void dgopher::abort(void)
 {
-  close();
   m_socket->abort();
 }
 
@@ -126,7 +125,7 @@ void dgopher::load(void)
 
 void dgopher::slotConnected(void)
 {
-  QString path(url().path().trimmed());
+  QString path(url().path());
 
   if(path.isEmpty())
     {
@@ -135,13 +134,21 @@ void dgopher::slotConnected(void)
     }
   else
     {
-      QStringList list(path.split("/", QString::SkipEmptyParts));
+      if(m_hasBeenPreFetched)
+	m_socket->write(url().path().toUtf8().append(s_eol));
+      else
+	{
+	  QStringList list(path.split("/", QString::SkipEmptyParts));
 
-      if(!list.isEmpty())
-	m_path = list.at(list.length() - 1);
+	  if(!list.isEmpty())
+	    {
+	      m_path = list.at(list.length() - 1);
+	      m_preFetch = true;
+	    }
 
-      m_preFetch = true;
-      m_socket->write(list.value(list.length() - 2).toUtf8().append(s_eol));
+	  m_socket->write
+	    (list.value(list.length() - 2).toUtf8().append(s_eol));
+	}
     }
 }
 
@@ -182,11 +189,11 @@ void dgopher::slotReadyRead(void)
 
       if(!m_hasBeenPreFetched && m_preFetch)
 	{
-	  if(list.value(1).trimmed().endsWith(m_path.toUtf8().constData()))
+	  if(list.value(1).endsWith(m_path.toUtf8().constData()))
 	    {
 	      m_hasBeenPreFetched = true;
 
-	      if(c == '0')
+	      if(c == '0' || c == 'h' || c == 'i')
 		{
 		  m_content.clear();
 		  m_download = false;
@@ -216,26 +223,29 @@ void dgopher::slotReadyRead(void)
 		  load();
 		  return;
 		}
+	      else
+		{
+		  abort();
+		  setError
+		    (QNetworkReply::UnknownContentError,
+		     "Unknown content error.");
+		  return;
+		}
 	    }
-	  else
-	    continue;
 	}
 
       if(c == '+' || c == '0' || c == '1' || c == 'h')
 	{
-	  QUrl url;
+	  int port = list.value(3).toInt();
 
-	  url.setHost(list.value(2).trimmed());
-	  url.setPath(list.value(1).trimmed());
-	  url.setPort(list.value(3).toInt());
+	  if(port <= 0)
+	    port = 70;
 
-	  if(url.port() == -1)
-	    url.setPort(70);
-
-	  url.setScheme("gopher");
 	  m_html.append
-	    (QString("<a href=\"%1\">%2%3</a><br>\n").
-	     arg(url.toEncoded().constData()).
+	    (QString("<a href=\"gopher://%1:%2%3\">%4</a>%5<br>\n").
+	     arg(list.value(2).trimmed().constData()).
+	     arg(port).
+	     arg(list.value(1).constData()).
 	     arg(list.value(0).constData()).
 	     arg(c == '1' ? "..." : ""));
 	}
@@ -255,17 +265,7 @@ void dgopher::slotReadyRead(void)
 void dgopher::slotReadyReadForText(void)
 {
   m_content.append(m_socket->readAll());
-
-  while(m_content.contains(s_eol))
-    {
-      QByteArray bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
-
-      m_content.remove(0, bytes.length());
-      bytes = bytes.trimmed();
-
-      if(bytes == ".")
-	break;
-      else
-	m_html.append(bytes.append("<br>"));
-    }
+  m_content.replace("\n", "<br>");
+  m_html.append(m_content);
+  m_content.clear();
 }
