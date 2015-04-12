@@ -158,8 +158,15 @@ void dgopher::slotConnected(void)
 	      m_preFetch = true;
 	    }
 
-	  m_socket->write
-	    (list.value(list.length() - 2).toUtf8().append(s_eol));
+	  path.clear();
+
+	  for(int i = 0; i < list.size() - 1; i++)
+	    {
+	      path.append(list.at(i));
+	      path.append("/");
+	    }
+
+	  m_socket->write(path.toUtf8().append(s_eol));
 	}
     }
 }
@@ -230,16 +237,18 @@ void dgopher::slotReadyRead(void)
 		}
 	      else
 		{
-		  abort();
 		  setError
 		    (QNetworkReply::UnknownContentError,
 		     "Unknown content error.");
+		  abort();
 		  return;
 		}
 	    }
 	}
 
-      if(c == '+' || c == '0' || c == '1' || c == 'h')
+      if(c == '+' ||
+	 c == '0' || c == '1' || c == '4' || c == '5' || c == '6' ||
+	 c == '9' || c == 'g' || c == 'h' || c == 'l' || c == 's')
 	{
 	  int port = list.value(3).toInt();
 

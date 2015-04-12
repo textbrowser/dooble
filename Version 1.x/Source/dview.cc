@@ -940,7 +940,12 @@ void dview::slotFinished(dnetworkftpreply *reply)
 void dview::slotFinished(dgopher *reply)
 {
   if(reply)
-    webView->setHtml(reply->html(), reply->url());
+    {
+      if(reply->error() == QNetworkReply::UnknownContentError)
+	slotHandleUnsupportedContent(reply->url());
+      else
+	webView->setHtml(reply->html(), reply->url());
+    }
 }
 
 void dview::slotFinished(dnetworkblockreply *reply)
