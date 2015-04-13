@@ -225,7 +225,16 @@ void dgopher::slotReadyRead(void)
 
       char c = bytes.at(0);
 
-      bytes.remove(0, 1);
+      if(c == '+' ||
+	 c == '0' || c == '1' || c == '3' || c == '4' || c == '5' ||
+	 c == '6' ||
+	 c == '9' || c == 'g' || c == 'h' || c == 'i' || c == 'l' ||
+	 c == 's')
+	/*
+	** Some things, we understand.
+	*/
+
+	bytes.remove(0, 1);
 
       QList<QByteArray> list(bytes.split('\t'));
 
@@ -296,6 +305,11 @@ void dgopher::slotReadyRead(void)
 	      m_html.append(information);
 	      m_html.append("<br>\n");
 	    }
+	}
+      else
+	{
+	  m_html.append(bytes);
+	  m_html.append("<br>\n");
 	}
     }
 }
