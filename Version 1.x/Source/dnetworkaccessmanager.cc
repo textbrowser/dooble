@@ -617,10 +617,6 @@ QNetworkReply *dnetworkaccessmanager::createRequest
     {
       QPointer<dgopher> reply = new dgopher(this, req);
 
-      connect(reply,
-	      SIGNAL(finished(dgopher *)),
-	      this,
-	      SIGNAL(finished(dgopher *)));
       reply->load();
       setLinkClicked(QUrl());
       return reply;

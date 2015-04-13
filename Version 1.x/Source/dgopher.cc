@@ -54,10 +54,6 @@ dgopher::dgopher
   setOperation(QNetworkAccessManager::GetOperation);
   setRequest(request);
   setUrl(url);
-  connect(this,
-	  SIGNAL(finished(dgopher *)),
-	  this,
-	  SIGNAL(finished(void)));
 }
 
 QByteArray dgopher::html(void) const
@@ -213,7 +209,7 @@ void dgopher::slotDisonnected(void)
     m_html.append("</body></p></html>");
 
   m_hasBeenPreFetched = false;
-  emit finished(this);
+  emit finished();
 }
 
 void dgopher::slotReadyRead(void)

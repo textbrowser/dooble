@@ -91,9 +91,6 @@ class dgopher: public QNetworkReply
 
  protected:
   qint64 readData(char *data, qint64 maxSize);
-
- signals:
-  void finished(dgopher *reply);
 };
 
 #endif

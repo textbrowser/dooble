@@ -413,6 +413,7 @@ void durlwidget::addItem(const QString &text, const QIcon &icon)
   if(!(l_text.startsWith("data:") |
        l_text.startsWith("file://") ||
        l_text.startsWith("ftp://") ||
+       l_text.startsWith("gopher://") ||
        l_text.startsWith("http://") ||
        l_text.startsWith("https://") ||
        l_text.startsWith("qrc:/")))
