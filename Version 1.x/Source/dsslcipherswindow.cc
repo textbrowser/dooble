@@ -258,7 +258,7 @@ void dsslcipherswindow::populate(void)
 #else
   if(sslv3 && tlsv10 && tlsv11 && tlsv12)
     protocol = QSsl::UnknownProtocol;
-  else if(sslv3 && tlsv10)
+  else if(sslv3 && (tlsv10 || tlsv11 || tlsv12))
 #if QT_VERSION >= 0x040800
     protocol = QSsl::TlsV1SslV3;
 #else
