@@ -49,7 +49,6 @@ dgopher::dgopher
 
   request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
   request.setUrl(url);
-  setHeader(QNetworkRequest::ContentTypeHeader, "text/html; charset=UTF-8");
   setHeader(QNetworkRequest::LocationHeader, url);
   setOperation(QNetworkAccessManager::GetOperation);
   setRequest(request);
