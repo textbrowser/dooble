@@ -153,7 +153,7 @@ void dgopher::slotConnected(void)
 
   if(path.isEmpty())
     {
-      m_html.append("<html><head></head><p><body>");
+      m_html.append("<html><head></head><body><p><pre>");
       m_socket->write(s_eol);
     }
   else
@@ -205,7 +205,7 @@ void dgopher::slotConnectedForText(void)
 void dgopher::slotDisonnected(void)
 {
   if(m_preFetch)
-    m_html.append("</body></p></html>");
+    m_html.append("</pre></p></body></html>");
 
   m_hasBeenPreFetched = false;
   emit finished();
