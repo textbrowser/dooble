@@ -1,5 +1,5 @@
 /*
-** Copyright (c) 2008 - present, Alexis Megas.
+** Copyright (c) 2008 - present, Alexis Megas, Mattias Andrée.
 ** All rights reserved.
 **
 ** Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,9 @@ dgopher::dgopher
 (QObject *parent, const QNetworkRequest &req):QNetworkReply(parent)
 {
   initialize();
+#ifdef DOOBLE_GOPHER_PREFETCH
   m_hasBeenPreFetched = false;
-
+#endif
   QNetworkRequest request(req);
   QUrl url(request.url());
 
@@ -58,6 +59,17 @@ dgopher::dgopher
 QByteArray dgopher::html(void) const
 {
   return m_html;
+}
+
+QByteArray dgopher::plainToHtml(const QByteArray &bytes) const
+{
+  QByteArray b(bytes);
+
+  b.replace("&", "&amp;");
+  b.replace("<", "&lt;");
+  b.replace(">", "&gt;");
+  b.replace(" ", "&nbsp;");
+  return b;
 }
 
 qint64 dgopher::bytesAvailable(void) const
@@ -119,7 +131,9 @@ void dgopher::initialize(void)
   m_itemType = 0;
   m_offset = 0;
   m_path.clear();
+#ifdef DOOBLE_GOPHER_PREFETCH
   m_preFetch = false;
+#endif
 
   if(!isOpen())
     open(QIODevice::ReadOnly | QIODevice::Unbuffered);
@@ -147,6 +161,7 @@ void dgopher::load(void)
   m_socket->connectToHost(url().host(), url().port());
 }
 
+#ifdef DOOBLE_GOPHER_PREFETCH
 void dgopher::slotConnected(void)
 {
   QString path(url().path());
@@ -187,10 +202,46 @@ void dgopher::slotConnected(void)
 	}
     }
 }
+#else
+void dgopher::slotConnected(void)
+{
+  QString output("");
+  QString path(url().path());
+  QString query(url().encodedQuery());
+
+  if(path.isEmpty())
+    {
+      m_itemType = '1';
+      output.append("/");
+    }
+  else
+    {
+      m_itemType = path.at(1).toLatin1();
+      path.remove(1, 1);
+      output.append(path);
+     }
+
+  if(!query.isEmpty())
+    {
+      output.append("?");
+      output.append(query);
+    }
+
+  m_socket->write(output.toUtf8().append(s_eol));
+}
+#endif
 
 void dgopher::slotConnectedForDownload(void)
 {
+#ifdef DOOBLE_GOPHER_PREFETCH
   m_socket->write(url().path().toUtf8().append(s_eol));
+#else
+  QString path(url().path());
+
+  m_itemType = path.at(1).toLatin1();
+  path.remove(1, 1);
+  m_socket->write(path.toUtf8().append(s_eol));
+#endif
 }
 
 void dgopher::slotConnectedForText(void)
@@ -199,18 +250,29 @@ void dgopher::slotConnectedForText(void)
 	  SIGNAL(readyRead(void)),
 	  this,
 	  SLOT(slotReadyReadForText(void)));
+#ifdef DOOBLE_GOPHER_PREFETCH
   m_socket->write(url().path().toUtf8().append(s_eol));
+#else
+  QString path(url().path());
+
+  m_itemType = path.at(1).toLatin1();
+  path.remove(1, 1);
+  m_socket->write(path.toUtf8().append(s_eol));
+#endif
 }
 
 void dgopher::slotDisonnected(void)
 {
+#ifdef DOOBLE_GOPHER_PREFETCH
   if(m_preFetch)
     m_html.append("</pre></p></body></html>");
 
   m_hasBeenPreFetched = false;
+#endif
   emit finished();
 }
 
+#ifdef DOOBLE_GOPHER_PREFETCH
 void dgopher::slotReadyRead(void)
 {
   m_content.append(m_socket->readAll());
@@ -312,6 +374,101 @@ void dgopher::slotReadyRead(void)
 	}
     }
 }
+#else
+void dgopher::slotReadyRead(void)
+{
+  m_content.append(m_socket->readAll());
+
+  if(m_itemType == 'h') /* HTML File */
+    m_html.append(m_content);
+  else if(m_itemType == '0') /* Plaintext */
+    {
+      m_html.append
+	("<html><head></head><body style=\"font-family: monospace\">");
+      m_html.append(plainToHtml(m_content));
+      m_html.append("</body></html>");
+    }
+  else if(m_itemType == '4'); /* TODO BinHex Encoded Text File */
+  else if(m_itemType == '5'); /* TODO Binary Archive File */
+  else if(m_itemType == '6'); /* TODO UUEncoded Text File */
+  else if(m_itemType == '9'); /* TODO Binary File */
+  else if(m_itemType == 'g'); /* TODO GIF Image */
+  else if(m_itemType == 'I'); /* TODO Image File of Unspecified Format */
+  else if(m_itemType == 's'); /* TODO Audio File Format */
+  else
+    {
+      m_html.append
+	("<html><head></head><body style=\"font-family: monospace\">");
+
+      while(m_content.contains(s_eol))
+	{
+	  QByteArray bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
+
+	  m_content.remove(0, bytes.length());
+	  bytes = bytes.trimmed();
+
+	  char c = bytes.at(0);
+
+	  if(c == '+' ||
+	     c == '0' || c == '1' || c == '3' || c == '4' || c == '5' ||
+	     c == '6' ||
+	     c == '9' || c == 'g' || c == 'h' || c == 'i' || c == 'I' ||
+	     c == 's')
+	    /*
+	    ** Some things, we understand.
+	    */
+
+	    bytes.remove(0, 1);
+
+	  QList<QByteArray> list(bytes.split('\t'));
+
+	  if(c == '+' ||
+	     c == '0' || c == '1' || c == '4' || c == '5' || c == '6' ||
+	     c == '9' || c == 'g' || c == 'h' || c == 'I' || c == 's')
+	    {
+	      int port = list.value(3).toInt();
+
+	      if(port <= 0)
+		port = 70;
+
+	      m_html.append
+		(QString("<a href=\"gopher://%1:%2/%3%4\" "
+			 "style=\"text-decoration: none;\">%5</a>%6<br>").
+		 arg(list.value(2).trimmed().constData()).
+		 arg(port).
+		 arg(c).
+		 arg(list.value(1).constData() + (list.value(1)[0] == '/')).
+		 arg(plainToHtml(list.value(0)).constData()).
+		 arg(c == '1' ? "..." : ""));
+	    }
+	  else if(c == '3' || c == 'i')
+ 	    {
+	      QByteArray information(list.value(0));
+
+	      if(c == 'i')
+ 		{
+		  m_html.append(plainToHtml(information));
+		  m_html.append("<br>");
+ 		}
+ 	      else
+ 		{
+		  m_html.append("<span style=\"color: red;\">");
+		  m_html.append(plainToHtml(information));
+		  m_html.append("</span>");
+		  m_html.append("<br>");
+ 		}
+ 	    }
+	  else
+ 	    {
+	      m_html.append(plainToHtml(bytes));
+	      m_html.append("<br>");
+ 	    }
+ 	}
+
+      m_html.append("</body></html>");
+    }
+}
+#endif
 
 void dgopher::slotReadyReadForDownload(void)
 {
