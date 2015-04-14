@@ -259,6 +259,10 @@ void dsslcipherswindow::populate(void)
   if(sslv3 && tlsv10 && tlsv11 && tlsv12)
     protocol = QSsl::UnknownProtocol;
   else if(sslv3 && (tlsv10 || tlsv11 || tlsv12))
+    /*
+    ** Qt's default protocol is QSsl::SecureProtocols on Qt 4.8.6.
+    ** Test https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre.
+    */
 #if QT_VERSION >= 0x040800
     protocol = QSsl::TlsV1SslV3;
 #else
