@@ -44,27 +44,18 @@ class dgopher: public QNetworkReply
   dgopher(void):QNetworkReply(0)
   {
     initialize();
-#ifdef DOOBLE_GOPHER_PREFETCH
-    m_hasBeenPreFetched = false;
-#endif
   }
 
   dgopher(const dgopher &reply):QNetworkReply(0)
   {
     initialize();
-#ifdef DOOBLE_GOPHER_PREFETCH
-    m_hasBeenPreFetched = false;
-#endif
     setOperation(reply.operation());
     setRequest(reply.request());
     setUrl(reply.url());
   }
 
-  ~dgopher()
-  {
-  }
-
   dgopher(QObject *parent, const QNetworkRequest &request);
+  ~dgopher();
   QByteArray html(void) const;
   QByteArray plainToHtml(const QByteArray &bytes) const;
   qint64 bytesAvailable(void) const;
@@ -78,10 +69,6 @@ class dgopher: public QNetworkReply
   QString m_path;
   QTcpSocket *m_socket;
   bool m_download;
-#ifdef DOOBLE_GOPHER_PREFETCH
-  bool m_hasBeenPreFetched;
-  bool m_preFetch;
-#endif
   char m_itemType;
   qint64 m_offset;
   static QByteArray s_eol;
