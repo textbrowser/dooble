@@ -207,7 +207,11 @@ void dgopher::slotConnected(void)
 {
   QString output("");
   QString path(url().path());
+#if QT_VERSION < 0x050000
   QString query(url().encodedQuery());
+#else
+  QString query(url().query());
+#endif
 
   if(path.isEmpty())
     {
