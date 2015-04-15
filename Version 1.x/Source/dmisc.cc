@@ -140,6 +140,8 @@ void dmisc::destroyCrypt(void)
   if(s_reencodeCrypt)
     delete s_reencodeCrypt;
 
+  s_crypt = 0;
+  s_reencodeCrypt = 0;
   dcrypt::terminate();
 }
 
