@@ -760,6 +760,10 @@ void dwebpage::slotFinished(QNetworkReply *reply)
   if(reply->url().toString(QUrl::StripTrailingSlash) ==
      m_requestedUrl.toString(QUrl::StripTrailingSlash))
     emit loadErrorPage(m_requestedUrl);
+
+  if(reply->url().scheme().toLower().trimmed() == "gopher")
+    if(reply->error() == QNetworkReply::UnknownContentError)
+      emit unsupportedContent(reply);
 }
 
 void dwebpage::slotFrameCreated(QWebFrame *frame)

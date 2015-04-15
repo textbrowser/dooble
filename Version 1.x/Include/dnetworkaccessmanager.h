@@ -33,8 +33,6 @@
 #include <QNetworkReply>
 #include <QPointer>
 
-#include "dgopher.h"
-
 class QNetworkRequest;
 class dexceptionswindow;
 class dftp;
@@ -284,7 +282,6 @@ class dnetworkaccessmanager: public QNetworkAccessManager
 		  const QUrl &url,
 		  const QDateTime &dateTime);
   void exceptionRaised(dexceptionswindow *window, const QUrl &url);
-  void finished(dgopher *reply);
   void finished(dnetworkblockreply *reply);
   void finished(dnetworkdirreply *reply);
   void finished(dnetworkerrorreply *reply);

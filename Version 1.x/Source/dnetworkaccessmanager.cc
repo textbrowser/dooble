@@ -29,6 +29,7 @@
 #include <QWebFrame>
 
 #include "dftp.h"
+#include "dgopher.h"
 #include "dmisc.h"
 #include "dnetworkaccessmanager.h"
 #include "dnetworkcache.h"
@@ -777,8 +778,7 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
   if(!reply)
     return;
 
-  if(qobject_cast<dgopher *> (reply) ||
-     qobject_cast<dnetworkblockreply *> (reply) ||
+  if(qobject_cast<dnetworkblockreply *> (reply) ||
      qobject_cast<dnetworkerrorreply *> (reply) ||
      qobject_cast<dnetworkftpreply *> (reply) ||
      qobject_cast<dnetworksslerrorreply *> (reply) ||

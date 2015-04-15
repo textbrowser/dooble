@@ -46,7 +46,6 @@ class dcookiewindow;
 class dexceptionswindow;
 class dfilemanager;
 class dftpbrowser;
-class dgopher;
 class dnetworkblockreply;
 class dnetworkdirreply;
 class dnetworkerrorreply;
@@ -151,7 +150,6 @@ class dview: public QStackedWidget
  private slots:
   void slotStop(void);
   void slotPaste(void);
-  void slotFinished(dgopher *reply);
   void slotFinished(dnetworkdirreply *reply);
   void slotFinished(dnetworkftpreply *reply);
   void slotFinished(dnetworkblockreply *reply);

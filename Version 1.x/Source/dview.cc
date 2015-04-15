@@ -149,10 +149,6 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	  SLOT(slotHandleUnsupportedContent(QNetworkReply *)),
 	  Qt::QueuedConnection);
   connect(webView->page()->networkAccessManager(),
-	  SIGNAL(finished(dgopher *)),
-	  this,
-	  SLOT(slotFinished(dgopher *)));
-  connect(webView->page()->networkAccessManager(),
 	  SIGNAL(finished(dnetworkblockreply *)),
 	  this,
 	  SLOT(slotFinished(dnetworkblockreply *)));
@@ -937,17 +933,6 @@ void dview::slotFinished(dnetworkftpreply *reply)
     }
 }
 
-void dview::slotFinished(dgopher *reply)
-{
-  if(reply)
-    {
-      if(reply->error() == QNetworkReply::UnknownContentError)
-	slotHandleUnsupportedContent(reply->url());
-      else
-	webView->setHtml(reply->html(), reply->url());
-    }
-}
-
 void dview::slotFinished(dnetworkblockreply *reply)
 {
   if(reply)
@@ -996,8 +981,7 @@ void dview::slotFinished(dnetworksslerrorreply *reply)
 
 void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 {
-  if(qobject_cast<dgopher *> (reply) ||
-     qobject_cast<dnetworkblockreply *> (reply) ||
+  if(qobject_cast<dnetworkblockreply *> (reply) ||
      qobject_cast<dnetworkdirreply *> (reply) ||
      qobject_cast<dnetworkerrorreply *> (reply) ||
      qobject_cast<dnetworkftpreply *> (reply) ||
@@ -1106,6 +1090,17 @@ void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 	  else
 	    reply->abort();
 	}
+    }
+  else if(reply &&
+	  reply->error() == QNetworkReply::UnknownContentError &&
+	  reply->url().scheme().toLower().trimmed() == "gopher")
+    {
+      QString fileName(dmisc::fileNameFromUrl(reply->url()));
+      QUrl url(reply->url());
+      int choice = downloadPrompt(fileName);
+
+      if(choice != QDialog::Rejected)
+	emit saveUrl(url, choice);
     }
   else if(reply)
     reply->abort();
