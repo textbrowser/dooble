@@ -76,7 +76,7 @@
         <translation>Dooble Web Nabigatzailea: SSL Akats Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="157"/>
+        <location filename="../Source/dmisc.cc" line="159"/>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
         <translation>dmisc::initializeCrypt(): gcry_threads_qt&apos;s helbidea erabiltzen gcry_control()-rako bigarren parametro bezala.</translation>
     </message>
@@ -85,7 +85,7 @@
         <translation type="obsolete">dmisc::initializeCrypt(): gcry_check_version() hutsegitea.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="169"/>
+        <location filename="../Source/dmisc.cc" line="171"/>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure. Secure memory was not explicitly initialized!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,12 +98,12 @@
         <translation type="vanished">dmisc::passphraseHash(): Hash mota sostengugabea %1 (%2). Qt-ren sha1 inplementazioa erabiltzen.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1469"/>
+        <location filename="../Source/dmisc.cc" line="1471"/>
         <source>%1 KiB</source>
         <translation>%1 KiB</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1472"/>
+        <location filename="../Source/dmisc.cc" line="1474"/>
         <source>%1 MiB</source>
         <translation>%1 MiB</translation>
     </message>
@@ -120,32 +120,32 @@
         <translation type="obsolete">dmisc::hashedString(): gcry_md_read() huts itzuli du.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="181"/>
+        <location filename="../Source/dmisc.cc" line="183"/>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
         <translation>dmisc::initializeCrypt(): gcrypt liburutegia jadanik abiarazita dagoela dirudi.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="763"/>
+        <location filename="../Source/dmisc.cc" line="765"/>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="774"/>
+        <location filename="../Source/dmisc.cc" line="776"/>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1463"/>
+        <location filename="../Source/dmisc.cc" line="1465"/>
         <source>0 Bytes</source>
         <translation>0 Byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1465"/>
+        <location filename="../Source/dmisc.cc" line="1467"/>
         <source>1 Byte</source>
         <translation>1 Byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1467"/>
+        <location filename="../Source/dmisc.cc" line="1469"/>
         <source>%1 Bytes</source>
         <translation>%1 Byte</translation>
     </message>
@@ -2020,107 +2020,107 @@
 <context>
     <name>dview</name>
     <message>
-        <location filename="../Source/dview.cc" line="312"/>
+        <location filename="../Source/dview.cc" line="308"/>
         <source>Copy &amp;Link Location</source>
         <translation>Kopiatu &amp;Lotura Kokalekua</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="316"/>
+        <location filename="../Source/dview.cc" line="312"/>
         <source>Copy &amp;Selected Text</source>
         <translation>Kopiatu &amp;Hautaturiko Idazkia</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="323"/>
+        <location filename="../Source/dview.cc" line="319"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ir&amp;eki Lotura Hegats Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="325"/>
+        <location filename="../Source/dview.cc" line="321"/>
         <source>Open Link in &amp;New Window</source>
         <translation>Ireki Lo&amp;tura Leiho Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="347"/>
+        <location filename="../Source/dview.cc" line="343"/>
         <source>View Ima&amp;ge in New Tab</source>
         <translation>Ikusi Iru&amp;dia Hegats Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="349"/>
+        <location filename="../Source/dview.cc" line="345"/>
         <source>View Imag&amp;e in New Window</source>
         <translation>Iku&amp;si Irudia Leiho Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="355"/>
+        <location filename="../Source/dview.cc" line="351"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopiatu</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="358"/>
+        <location filename="../Source/dview.cc" line="354"/>
         <source>&amp;Paste</source>
         <translation>It&amp;satsi</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="368"/>
+        <location filename="../Source/dview.cc" line="364"/>
         <source>&amp;Back</source>
         <translation>&amp;Atzera</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="372"/>
+        <location filename="../Source/dview.cc" line="368"/>
         <source>&amp;Forward</source>
         <translation>A&amp;urrera</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="376"/>
+        <location filename="../Source/dview.cc" line="372"/>
         <source>&amp;Reload</source>
         <translation>&amp;Birgertatu</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="379"/>
+        <location filename="../Source/dview.cc" line="375"/>
         <source>Sto&amp;p</source>
         <translation>&amp;Gelditu</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="384"/>
+        <location filename="../Source/dview.cc" line="380"/>
         <source>&amp;Print Frame</source>
         <translation>Irarkitu Fra&amp;mea</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="391"/>
+        <location filename="../Source/dview.cc" line="387"/>
         <source>View Frame S&amp;ource</source>
         <translation>Ikusi &amp;Frame Iturburua</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="395"/>
+        <location filename="../Source/dview.cc" line="391"/>
         <source>View Page S&amp;ource</source>
         <translation>Ikusi &amp;Orrialde Iturburua</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="683"/>
+        <location filename="../Source/dview.cc" line="679"/>
         <source>(Untitled)</source>
         <translation>(Izenburugabea)</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="341"/>
+        <location filename="../Source/dview.cc" line="337"/>
         <source>Copy &amp;Image Location</source>
         <translation>Kopiatu Irudi &amp;Kokalekua</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="308"/>
+        <location filename="../Source/dview.cc" line="304"/>
         <source>Copy &amp;E-Mail Address</source>
         <translation>Kopiatu &amp;Post@ Helbidea</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="328"/>
+        <location filename="../Source/dview.cc" line="324"/>
         <source>S&amp;ave Link</source>
         <translation>G&amp;orde Lotura</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="343"/>
+        <location filename="../Source/dview.cc" line="339"/>
         <source>Sa&amp;ve Image</source>
         <translation>Go&amp;rde Irudia</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="345"/>
+        <location filename="../Source/dview.cc" line="341"/>
         <source>View I&amp;mage</source>
         <translation>&amp;Ikusi Irudia</translation>
     </message>

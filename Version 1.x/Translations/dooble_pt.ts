@@ -76,7 +76,7 @@
         <translation>Exceções de HTTPS (sempre)</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="157"/>
+        <location filename="../Source/dmisc.cc" line="159"/>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
         <translation>dmisc::initializeCrypt(): A utilizar o endereço gcry_threads_qt&apos;s como parâmetro secundário de gcry_control().</translation>
     </message>
@@ -85,7 +85,7 @@
         <translation type="obsolete">dmisc::initializeCrypt(): gcry_check_version() falhou.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="169"/>
+        <location filename="../Source/dmisc.cc" line="171"/>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure. Secure memory was not explicitly initialized!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,12 +98,12 @@
         <translation type="vanished">dmisc::passphraseHash(): Tipo não suportado %1 (%2). A utilizar a implementação Qt sha 1.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1469"/>
+        <location filename="../Source/dmisc.cc" line="1471"/>
         <source>%1 KiB</source>
         <translation>%1 KiB</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1472"/>
+        <location filename="../Source/dmisc.cc" line="1474"/>
         <source>%1 MiB</source>
         <translation>%1 MiB</translation>
     </message>
@@ -128,32 +128,32 @@
         <translation type="obsolete">dmisc::hashedString(): gcry_md_read() devolveu zero.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="181"/>
+        <location filename="../Source/dmisc.cc" line="183"/>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
         <translation>dmisc::initializeCrypt(): Parece quer a biblioteca gcrypt ja foi iniciada.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="763"/>
+        <location filename="../Source/dmisc.cc" line="765"/>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="774"/>
+        <location filename="../Source/dmisc.cc" line="776"/>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1463"/>
+        <location filename="../Source/dmisc.cc" line="1465"/>
         <source>0 Bytes</source>
         <translation>0 bytes</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1465"/>
+        <location filename="../Source/dmisc.cc" line="1467"/>
         <source>1 Byte</source>
         <translation>1 byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1467"/>
+        <location filename="../Source/dmisc.cc" line="1469"/>
         <source>%1 Bytes</source>
         <translation>%1 bytes</translation>
     </message>
@@ -2169,17 +2169,17 @@
 <context>
     <name>dview</name>
     <message>
-        <location filename="../Source/dview.cc" line="312"/>
+        <location filename="../Source/dview.cc" line="308"/>
         <source>Copy &amp;Link Location</source>
         <translation>Copiar endereço da &amp;ligação</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="316"/>
+        <location filename="../Source/dview.cc" line="312"/>
         <source>Copy &amp;Selected Text</source>
         <translation>Copiar texto &amp;selecionado</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="323"/>
+        <location filename="../Source/dview.cc" line="319"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Abrir ligação em novo &amp;separador</translation>
     </message>
@@ -2188,7 +2188,7 @@
         <translation type="obsolete">Abrir link em uma nova janela</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="325"/>
+        <location filename="../Source/dview.cc" line="321"/>
         <source>Open Link in &amp;New Window</source>
         <translation>Abrir ligação em &amp;nova janela</translation>
     </message>
@@ -2197,77 +2197,77 @@
         <translation type="obsolete">&amp;Salvar Link</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="355"/>
+        <location filename="../Source/dview.cc" line="351"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="358"/>
+        <location filename="../Source/dview.cc" line="354"/>
         <source>&amp;Paste</source>
         <translation>Co&amp;lar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="376"/>
+        <location filename="../Source/dview.cc" line="372"/>
         <source>&amp;Reload</source>
         <translation>&amp;Recarregar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="341"/>
+        <location filename="../Source/dview.cc" line="337"/>
         <source>Copy &amp;Image Location</source>
         <translation>Copiar endereço da &amp;imagem</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="308"/>
+        <location filename="../Source/dview.cc" line="304"/>
         <source>Copy &amp;E-Mail Address</source>
         <translation>Copiar &amp;endereço eletrónico</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="328"/>
+        <location filename="../Source/dview.cc" line="324"/>
         <source>S&amp;ave Link</source>
         <translation>Gr&amp;avar ligação</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="343"/>
+        <location filename="../Source/dview.cc" line="339"/>
         <source>Sa&amp;ve Image</source>
         <translation>Gra&amp;var imagem</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="345"/>
+        <location filename="../Source/dview.cc" line="341"/>
         <source>View I&amp;mage</source>
         <translation>Ver i&amp;magem</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="347"/>
+        <location filename="../Source/dview.cc" line="343"/>
         <source>View Ima&amp;ge in New Tab</source>
         <translation>Ver ima&amp;gem em novo separador</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="349"/>
+        <location filename="../Source/dview.cc" line="345"/>
         <source>View Imag&amp;e in New Window</source>
         <translation>Ver ima&amp;gem em nova página</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="379"/>
+        <location filename="../Source/dview.cc" line="375"/>
         <source>Sto&amp;p</source>
         <translation>&amp;Parar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="384"/>
+        <location filename="../Source/dview.cc" line="380"/>
         <source>&amp;Print Frame</source>
         <translation>Im&amp;primir moldura</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="391"/>
+        <location filename="../Source/dview.cc" line="387"/>
         <source>View Frame S&amp;ource</source>
         <translation>Ver código f&amp;onte da moldura</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="395"/>
+        <location filename="../Source/dview.cc" line="391"/>
         <source>View Page S&amp;ource</source>
         <translation>Ver código f&amp;onte da página</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="683"/>
+        <location filename="../Source/dview.cc" line="679"/>
         <source>(Untitled)</source>
         <translation>(Sem nome)</translation>
     </message>
@@ -2280,12 +2280,12 @@
         <translation type="obsolete">Exibir ima&amp;gens em uma nova janela</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="368"/>
+        <location filename="../Source/dview.cc" line="364"/>
         <source>&amp;Back</source>
         <translation>&amp;Recuar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="372"/>
+        <location filename="../Source/dview.cc" line="368"/>
         <source>&amp;Forward</source>
         <translation>&amp;Avançar</translation>
     </message>
