@@ -1,5 +1,5 @@
 /*
-** Copyright (c) 2008 - present, Alexis Megas, Mattias Andrée.
+** Copyright (c) 2008 - present, Mattias Andrée, Alexis Megas.
 ** All rights reserved.
 **
 ** Redistribution and use in source and binary forms, with or without
@@ -350,7 +350,7 @@ void dgopher::slotReadyRead(void)
 	    port = 70;
 
 	  m_html.append
-	    (QString("<a href=\"gopher://%1:%2%3\">%4</a>%5<br>\n").
+	    (QString("<a href=\"gopher://%1:%2%3\">%4</a>%5\n").
 	     arg(list.value(2).trimmed().constData()).
 	     arg(port).
 	     arg(list.value(1).constData()).
@@ -364,13 +364,13 @@ void dgopher::slotReadyRead(void)
 	  if(!information.isEmpty())
 	    {
 	      m_html.append(information);
-	      m_html.append("<br>\n");
+	      m_html.append("\n");
 	    }
 	}
       else
 	{
 	  m_html.append(bytes);
-	  m_html.append("<br>\n");
+	  m_html.append("\n");
 	}
     }
 }
@@ -481,7 +481,6 @@ void dgopher::slotReadyReadForDownload(void)
 void dgopher::slotReadyReadForText(void)
 {
   m_content.append(m_socket->readAll());
-  m_content.replace("\n", "<br>");
   m_html.append(m_content);
   m_content.clear();
 }

@@ -2220,6 +2220,9 @@ QUrl dbookmarkswindow::locationChanged(void) const
 							   locationLineEdit->
 							   text().trimmed())));
 
+	    if(url.host().toLower().trimmed().startsWith("gopher"))
+	      url.setScheme("gopher");
+
 	    if(url.isValid())
 	      {
 		originalUrl = QUrl::fromUserInput(item2->text());

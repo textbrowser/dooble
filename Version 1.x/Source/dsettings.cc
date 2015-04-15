@@ -543,6 +543,9 @@ void dsettings::exec(dooble *parent)
 	QUrl url(dmisc::correctedUrlPath(QUrl::fromUserInput(widget->
 							     text())));
 
+	if(url.host().toLower().trimmed().startsWith("gopher"))
+	  url.setScheme("gopher");
+
 	if(!url.isEmpty() && url.isValid())
 	  widget->setText(url.toString(QUrl::StripTrailingSlash));
       }

@@ -317,6 +317,9 @@ int main(int argc, char *argv[])
 		    {
 		      QUrl url(QUrl::fromUserInput(argv[i]));
 
+		      if(url.host().toLower().trimmed().startsWith("gopher"))
+			url.setScheme("gopher");
+
 		      urls.append(url.toString(QUrl::StripTrailingSlash));
 		    }
 		  else
@@ -462,6 +465,9 @@ int main(int argc, char *argv[])
 		  if(QUrl::fromUserInput(argv[i]).isValid())
 		    {
 		      QUrl url(QUrl::fromUserInput(argv[i]));
+
+		      if(url.host().toLower().trimmed().startsWith("gopher"))
+			url.setScheme("gopher");
 
 		      urls.append(url.toString(QUrl::StripTrailingSlash));
 		    }
@@ -1008,6 +1014,9 @@ int main(int argc, char *argv[])
 		  toString());
 
   url = QUrl::fromUserInput(urlText);
+
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
 
   if(argc > 1)
     {
@@ -2651,9 +2660,12 @@ void dooble::slotLoadPage(void)
     return;
 
   QString str(ui.locationLineEdit->text().trimmed());
+  QUrl url(QUrl::fromUserInput(str));
 
-  loadPage(QUrl::fromEncoded(QUrl::fromUserInput(str).
-			     toEncoded(QUrl::StripTrailingSlash)));
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
+
+  loadPage(QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash)));
 
   if(ui.tabWidget->currentWidget())
     ui.tabWidget->currentWidget()->setFocus();
@@ -2697,6 +2709,9 @@ void dooble::slotNewTab(void)
   url = QUrl::fromUserInput(s_settings.value("settingsWindow/homeUrl",
 					     "").toString());
 
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
+
   if(!url.isValid())
     url = QUrl();
   else
@@ -2735,6 +2750,9 @@ void dooble::slotNewWindow(void)
 
   url = QUrl::fromUserInput(s_settings.value("settingsWindow/homeUrl", "").
 			    toString());
+
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
 
   if(!url.isValid())
     url = QUrl();
@@ -3705,6 +3723,9 @@ void dooble::slotGoHome(void)
 	    (QUrl::fromUserInput(s_settings.value(allKeys.at(i),
 						  "").toString().trimmed()));
 
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
+
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
 	  for(int j = 0; j < ui.tabWidget->count(); j++)
@@ -3743,6 +3764,9 @@ void dooble::slotGoHome(void)
       QUrl url
 	(QUrl::fromUserInput(s_settings.value("settingsWindow/homeUrl"
 					      "").toString().trimmed()));
+
+      if(url.host().toLower().trimmed().startsWith("gopher"))
+	url.setScheme("gopher");
 
       url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
@@ -6209,6 +6233,10 @@ void dooble::prepareMostVisited(void)
 	       !addedHosts.contains(keys.at(k)))
 	      {
 		QUrl url(QUrl::fromUserInput(keys.at(k)));
+
+		if(url.host().toLower().trimmed().startsWith("gopher"))
+		  url.setScheme("gopher");
+
 		QIcon icon(dmisc::iconForUrl(url));
 		QToolButton *toolButton = new QToolButton
 		  (ui.favoritesToolButtonsFrame);

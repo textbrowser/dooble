@@ -480,6 +480,9 @@ void ddownloadwindow::slotDownloadUrl(void)
 						       urlLineEdit->
 						       text().trimmed())));
 
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
+
   if(url.isValid())
     {
       url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));

@@ -182,6 +182,9 @@ void dexceptionswindow::slotAllow(void)
 
       url = QUrl::fromUserInput(host);
 
+      if(host.toLower().trimmed().startsWith("gopher"))
+	url.setScheme("gopher");
+
       if(!url.isEmpty() && url.isValid())
 	if(model->allow(url.host()))
 	  {

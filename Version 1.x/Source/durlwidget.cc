@@ -448,6 +448,9 @@ void durlwidget::addItem(const QString &text, const QIcon &icon)
 	{
 	  QUrl url(QUrl::fromUserInput(text));
 
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
+
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 	  item = new QStandardItem(dmisc::iconForUrl(url), text);
 	}
@@ -495,6 +498,9 @@ void durlwidget::appendItem(const QString &text, const QIcon &icon)
 	{
 	  QUrl url(QUrl::fromUserInput(text));
 
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
+
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 	  item = new QStandardItem(dmisc::iconForUrl(url), text);
 	}
@@ -513,6 +519,9 @@ void durlwidget::setIcon(const QIcon &icon)
   if(icon.isNull())
     {
       QUrl url(QUrl::fromUserInput(text()));
+
+      if(url.host().toLower().trimmed().startsWith("gopher"))
+	url.setScheme("gopher");
 
       url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
       m_iconToolButton->setIcon(dmisc::iconForUrl(url));
@@ -584,6 +593,9 @@ void durlwidget::setItemIcon(const int index , const QIcon &icon)
       if(icon.isNull())
 	{
 	  QUrl url(QUrl::fromUserInput(item->text()));
+
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
 
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 	  item->setIcon(dmisc::iconForUrl(url));
@@ -733,6 +745,9 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 
 	  QUrl url(QUrl::fromUserInput(text().trimmed()));
 
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
+
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 	  emit openLinkInNewTab(url);
 	}
@@ -742,6 +757,9 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 				       Qt::Key_Return))
 	{
 	  QUrl url(QUrl::fromUserInput(text().trimmed()));
+
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
 
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
@@ -755,6 +773,9 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 	      userKeys == QKeySequence(Qt::ShiftModifier + Qt::Key_Return))
 	{
 	  QUrl url(QUrl::fromUserInput(text().trimmed()));
+
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
 
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
@@ -772,6 +793,9 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 			   Qt::Key_Return))
 	{
 	  QUrl url(QUrl::fromUserInput(text().trimmed()));
+
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
 
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
@@ -797,6 +821,9 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 	  state = false;
 
 	  QUrl url(QUrl::fromUserInput(text().trimmed()));
+
+	  if(url.host().toLower().trimmed().startsWith("gopher"))
+	    url.setScheme("gopher");
 
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 	  emit loadPage(url);
@@ -849,6 +876,9 @@ void durlwidget::slotLoadPage(void)
 {
   QUrl url(QUrl::fromUserInput(text().trimmed()));
 
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
+
   url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
   emit loadPage(url);
 }
@@ -861,6 +891,9 @@ void durlwidget::slotLoadPage(const QString &urlText)
 #endif
 
   QUrl url(QUrl::fromUserInput(urlText));
+
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
 
   url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
   emit loadPage(url);
