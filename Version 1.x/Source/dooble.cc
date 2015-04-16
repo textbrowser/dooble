@@ -2938,7 +2938,9 @@ void dooble::closeEvent(QCloseEvent *event)
     }
 
   unsetUrlHandler();
-  deleteLater();
+
+  if(s_instances > 1)
+    deleteLater();
 
   if(s_instances <= 1)
     slotQuit();
