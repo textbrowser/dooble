@@ -2775,7 +2775,6 @@ void dooble::closeEvent(QCloseEvent *event)
     }
 
   unsetUrlHandler();
-  QMainWindow::closeEvent(event);
   deleteLater();
 
   if(s_instances <= 1)

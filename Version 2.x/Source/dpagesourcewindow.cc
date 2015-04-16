@@ -137,7 +137,7 @@ void dpagesourcewindow::slotClose(void)
 
 void dpagesourcewindow::closeEvent(QCloseEvent *event)
 {
-  QMainWindow::closeEvent(event);
+  Q_UNUSED(event);
   deleteLater();
 }
 
