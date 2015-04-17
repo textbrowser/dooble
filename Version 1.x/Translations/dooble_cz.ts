@@ -1370,25 +1370,25 @@
         <location filename="../Source/dooble.cc" line="2355"/>
         <location filename="../Source/dooble.cc" line="2395"/>
         <location filename="../Source/dooble.cc" line="2460"/>
-        <location filename="../Source/dooble.cc" line="3242"/>
-        <location filename="../Source/dooble.cc" line="3419"/>
-        <location filename="../Source/dooble.cc" line="3443"/>
-        <location filename="../Source/dooble.cc" line="4983"/>
-        <location filename="../Source/dooble.cc" line="5465"/>
+        <location filename="../Source/dooble.cc" line="3243"/>
+        <location filename="../Source/dooble.cc" line="3420"/>
+        <location filename="../Source/dooble.cc" line="3444"/>
+        <location filename="../Source/dooble.cc" line="4984"/>
+        <location filename="../Source/dooble.cc" line="5466"/>
         <source>(Untitled)</source>
         <translation>(Bez názvu)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3027"/>
-        <location filename="../Source/dooble.cc" line="3096"/>
-        <location filename="../Source/dooble.cc" line="3213"/>
-        <location filename="../Source/dooble.cc" line="3519"/>
-        <location filename="../Source/dooble.cc" line="3657"/>
-        <location filename="../Source/dooble.cc" line="3697"/>
-        <location filename="../Source/dooble.cc" line="3907"/>
-        <location filename="../Source/dooble.cc" line="5389"/>
-        <location filename="../Source/dooble.cc" line="6013"/>
-        <location filename="../Source/dooble.cc" line="6316"/>
+        <location filename="../Source/dooble.cc" line="3028"/>
+        <location filename="../Source/dooble.cc" line="3097"/>
+        <location filename="../Source/dooble.cc" line="3214"/>
+        <location filename="../Source/dooble.cc" line="3520"/>
+        <location filename="../Source/dooble.cc" line="3658"/>
+        <location filename="../Source/dooble.cc" line="3698"/>
+        <location filename="../Source/dooble.cc" line="3908"/>
+        <location filename="../Source/dooble.cc" line="5390"/>
+        <location filename="../Source/dooble.cc" line="6014"/>
+        <location filename="../Source/dooble.cc" line="6317"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1426,129 +1426,129 @@
         <translation>Obsah karet byl změněn. Jste si jistý, že chcete zavřít?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3029"/>
-        <location filename="../Source/dooble.cc" line="3215"/>
-        <location filename="../Source/dooble.cc" line="5391"/>
+        <location filename="../Source/dooble.cc" line="3030"/>
+        <location filename="../Source/dooble.cc" line="3216"/>
+        <location filename="../Source/dooble.cc" line="5392"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Browser (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3037"/>
-        <location filename="../Source/dooble.cc" line="3040"/>
-        <location filename="../Source/dooble.cc" line="3223"/>
-        <location filename="../Source/dooble.cc" line="3226"/>
-        <location filename="../Source/dooble.cc" line="5399"/>
-        <location filename="../Source/dooble.cc" line="5402"/>
-        <location filename="../Source/dooble.cc" line="6318"/>
+        <location filename="../Source/dooble.cc" line="3038"/>
+        <location filename="../Source/dooble.cc" line="3041"/>
+        <location filename="../Source/dooble.cc" line="3224"/>
+        <location filename="../Source/dooble.cc" line="3227"/>
+        <location filename="../Source/dooble.cc" line="5400"/>
+        <location filename="../Source/dooble.cc" line="5403"/>
+        <location filename="../Source/dooble.cc" line="6319"/>
         <source> - Dooble Web Browser</source>
         <translation>- Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3929"/>
+        <location filename="../Source/dooble.cc" line="3930"/>
         <source>&amp;Clear</source>
         <translation>&amp;Vyprázdnit</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4528"/>
+        <location filename="../Source/dooble.cc" line="4529"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5121"/>
+        <location filename="../Source/dooble.cc" line="5122"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5256"/>
+        <location filename="../Source/dooble.cc" line="5257"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>Stránka %1 požaduje heslo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5320"/>
+        <location filename="../Source/dooble.cc" line="5321"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>Proxy %1:%2 požaduje heslo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6353"/>
+        <location filename="../Source/dooble.cc" line="6354"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Jste si jistý, že chcete otevřít %1 stránek?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6506"/>
+        <location filename="../Source/dooble.cc" line="6507"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Jste si jistý, že chcete opustit změněné stránky?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6781"/>
+        <location filename="../Source/dooble.cc" line="6782"/>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
         <translation>dooble::slotRefreshPlugins(): Odstranit proces %1.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6825"/>
+        <location filename="../Source/dooble.cc" line="6826"/>
         <source>Start %1</source>
         <translation>Spustit %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6893"/>
+        <location filename="../Source/dooble.cc" line="6894"/>
         <source>Add-on Load Failed</source>
         <translation>Nahrání doplňku se nezdařilo</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6916"/>
-        <location filename="../Source/dooble.cc" line="6967"/>
+        <location filename="../Source/dooble.cc" line="6917"/>
+        <location filename="../Source/dooble.cc" line="6968"/>
         <source>Add-on</source>
         <translation>Doplněk</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7379"/>
+        <location filename="../Source/dooble.cc" line="7380"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Připomenutí</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7380"/>
+        <location filename="../Source/dooble.cc" line="7381"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Heslo nebylo připraveno. Navštivte, prosím, panel s trezorem v okně s nastavením a zvolte heslo. Jakmile je heslo vybráno, budou záložky, koláčky a všechny ostatní podstatné informace dostupné v budoucích sezeních. Tuto připomínku můžete zakázat v panelu s trezorem.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7638"/>
+        <location filename="../Source/dooble.cc" line="7639"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Zobrazit &amp;koláčky %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7641"/>
-        <location filename="../Source/dooble.cc" line="7645"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
+        <location filename="../Source/dooble.cc" line="7646"/>
         <source>View Site &amp;Cookies</source>
         <translation>Zobrazit &amp;koláčky stránek</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8012"/>
+        <location filename="../Source/dooble.cc" line="8013"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8014"/>
+        <location filename="../Source/dooble.cc" line="8015"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7077"/>
-        <location filename="../Source/dooble.cc" line="7082"/>
+        <location filename="../Source/dooble.cc" line="7078"/>
+        <location filename="../Source/dooble.cc" line="7083"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Stránka %1 zapříčinila výjimku. Klepněte, prosím, pro její přezkoušení.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7316"/>
-        <location filename="../Source/dooble.cc" line="7318"/>
-        <location filename="../Source/dooble.cc" line="7322"/>
+        <location filename="../Source/dooble.cc" line="7317"/>
+        <location filename="../Source/dooble.cc" line="7319"/>
+        <location filename="../Source/dooble.cc" line="7323"/>
         <source>Restore Session</source>
         <translation>Obnovit sezení</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2834"/>
         <location filename="../Source/dooble.cc" line="2886"/>
-        <location filename="../Source/dooble.cc" line="3857"/>
-        <location filename="../Source/dooble.cc" line="6350"/>
-        <location filename="../Source/dooble.cc" line="6502"/>
+        <location filename="../Source/dooble.cc" line="3858"/>
+        <location filename="../Source/dooble.cc" line="6351"/>
+        <location filename="../Source/dooble.cc" line="6503"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Potvrzení</translation>
     </message>
@@ -1558,12 +1558,12 @@
         <translation>Ukončení Dooble povede ke zrušení probíhajících stahování. Jste si jistý, že chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3860"/>
+        <location filename="../Source/dooble.cc" line="3861"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Jste si jistý, že chcete zavřít tuto změněnou kartu?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5118"/>
+        <location filename="../Source/dooble.cc" line="5119"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Browser: Otevřít adresář</translation>
     </message>
@@ -1577,12 +1577,12 @@
         <translation type="obsolete">Vymazat historii</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4393"/>
+        <location filename="../Source/dooble.cc" line="4394"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Browser: O programu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4525"/>
+        <location filename="../Source/dooble.cc" line="4526"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Browser: Uložit jako</translation>
     </message>
@@ -1591,10 +1591,10 @@
         <translation type="obsolete">&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4906"/>
-        <location filename="../Source/dooble.cc" line="4912"/>
-        <location filename="../Source/dooble.cc" line="4914"/>
-        <location filename="../Source/dooble.cc" line="4918"/>
+        <location filename="../Source/dooble.cc" line="4907"/>
+        <location filename="../Source/dooble.cc" line="4913"/>
+        <location filename="../Source/dooble.cc" line="4915"/>
+        <location filename="../Source/dooble.cc" line="4919"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Desktop</translation>
     </message>
