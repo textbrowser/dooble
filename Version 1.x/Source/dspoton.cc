@@ -61,9 +61,7 @@ bool dspoton::isKernelRegistered(void)
 {
   bool registered = false;
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  if(dmisc::passphraseWasPrepared())
-    if(dmisc::s_crypt)
-      registered = true;
+  registered = true;
 #endif
   return registered;
 }
@@ -85,33 +83,42 @@ void dspoton::share(const QUrl &url,
 		    const QString &description)
 {
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  if(dmisc::passphraseWasAuthenticated())
-    if(dmisc::s_crypt)
-      {
-	libspoton_error_t err = LIBSPOTON_ERROR_NONE;
-	libspoton_handle_t libspotonHandle;
+  libspoton_error_t err = LIBSPOTON_ERROR_NONE;
+  libspoton_handle_t libspotonHandle;
 
-	if((err = libspoton_init_a(dooble::s_settings.
-				   value("settingsWindow/"
-					 "spotOnSharedDatabase").toString().
-				   toStdString().c_str(),
-				   dmisc::s_crypt->cipherType().toStdString().
-				   c_str(),
-				   dmisc::s_crypt->encryptionKey(),
-				   dmisc::s_crypt->encryptionKeyLength(),
-				   &libspotonHandle,
-				   16384)) == LIBSPOTON_ERROR_NONE)
-	  err = libspoton_save_url
-	    (url.toEncoded(QUrl::StripTrailingSlash).constData(),
-	     url.toEncoded(QUrl::StripTrailingSlash).length(),
-	     title.toUtf8().constData(),
-	     title.toUtf8().length(),
-	     description.toUtf8().constData(),
-	     description.toUtf8().length(),
-	     &libspotonHandle);
+  if(dmisc::passphraseWasAuthenticated() && dmisc::s_crypt)
+    err = libspoton_init_a(dooble::s_settings.
+			   value("settingsWindow/"
+				 "spotOnSharedDatabase").toString().
+			   toStdString().c_str(),
+			   dmisc::s_crypt->cipherType().toStdString().
+			   c_str(),
+			   dmisc::s_crypt->encryptionKey(),
+			   dmisc::s_crypt->encryptionKeyLength(),
+			   &libspotonHandle,
+			   16384);
+  else
+    err = libspoton_init_a(dooble::s_settings.
+			   value("settingsWindow/"
+				 "spotOnSharedDatabase").toString().
+			   toStdString().c_str(),
+			   0,
+			   0,
+			   0,
+			   &libspotonHandle,
+			   16384);
 
-	libspoton_close(&libspotonHandle);
-      }
+  if(err == LIBSPOTON_ERROR_NONE)
+    err = libspoton_save_url
+      (url.toEncoded(QUrl::StripTrailingSlash).constData(),
+       url.toEncoded(QUrl::StripTrailingSlash).length(),
+       title.toUtf8().constData(),
+       title.toUtf8().length(),
+       description.toUtf8().constData(),
+       description.toUtf8().length(),
+       &libspotonHandle);
+
+  libspoton_close(&libspotonHandle);
 #else
   Q_UNUSED(description);
   Q_UNUSED(title);

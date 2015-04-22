@@ -25,13 +25,13 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QUrl>
-#include <QStyle>
-#include <QSettings>
+#include <QAbstractItemView>
 #include <QBoxLayout>
 #include <QPushButton>
 #include <QResizeEvent>
-#include <QAbstractItemView>
+#include <QSettings>
+#include <QStyle>
+#include <QUrl>
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -339,7 +339,7 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
      "}");
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   m_spotonButton->setToolTip
-    (tr("Submit URL to Spot-On. Authentication required."));
+    (tr("Submit URL to Spot-On."));
 #else
   m_spotonButton->setToolTip(tr("Spot-On support is not available."));
 #endif
@@ -353,8 +353,7 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
 #ifndef DOOBLE_LINKED_WITH_LIBSPOTON
   setSpotOnColor(false);
 #else
-  if(!dmisc::passphraseWasAuthenticated())
-    setSpotOnColor(false);
+  setSpotOnColor(true);
 #endif
   connect(this, SIGNAL(returnPressed(void)), this,
 	  SLOT(slotReturnPressed(void)));
@@ -948,9 +947,6 @@ void durlwidget::setSpotOnColor(const bool isLoaded)
 
 #ifndef DOOBLE_LINKED_WITH_LIBSPOTON
   state = false;
-#else
-  if(!dmisc::passphraseWasAuthenticated())
-    state = false;
 #endif
 
   if(state)
@@ -1020,11 +1016,8 @@ void durlwidget::setIconButtonEnabled(const bool state)
 
 void durlwidget::setSpotOnButtonEnabled(const bool state)
 {
-#if DOOBLE_LINKED_WITH_LIBSPOTON
-  if(dmisc::passphraseWasAuthenticated())
-    m_spotonButton->setEnabled(state);
-  else
-    m_spotonButton->setEnabled(false);
+#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
+  m_spotonButton->setEnabled(state);
 #else
   Q_UNUSED(state);
   m_spotonButton->setEnabled(false);
