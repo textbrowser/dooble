@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ" sourcelanguage="en_US">
+<TS version="2.0" language="cs_CZ" sourcelanguage="en_US">
 <context>
     <name>FileManagerForm</name>
     <message>
         <location filename="../UI/fileManagerForm.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
 </context>
 <context>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="812"/>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble Web Browser: Výjimky pro pouze-HTTPS</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="817"/>
@@ -74,7 +74,7 @@
     <message>
         <location filename="../Source/dmisc.cc" line="159"/>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="unfinished"></translation>
+        <translation>dmisc::initializeCrypt(): Používá se adresa gcry_threads_qt&apos;s jako druhý parametr ke gcry_control().</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure.</source>
@@ -98,17 +98,17 @@
     <message>
         <location filename="../Source/dmisc.cc" line="171"/>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure. Secure memory was not explicitly initialized!</source>
-        <translation type="unfinished"></translation>
+        <translation>dmisc::initializeCrypt(): Chyba gcry_check_version(). Bezpečná paměť nebyla přímo zapnuta!</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="765"/>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
-        <translation type="unfinished"></translation>
+        <translation>dmisc::passphraseHash(): gcry_md_get_algo_dlen() vrátil nulu. Používá se provedení SHA-1 Qt.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="776"/>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
-        <translation type="unfinished"></translation>
+        <translation>dmisc::passphraseHash(): Nepodporovaný typ hash %1 (%2). Používá se provedení SHA-1 Qt.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1465"/>
@@ -133,38 +133,38 @@
         <location filename="../Source/dcrypt.cc" line="108"/>
         <location filename="../Source/dcrypt.cc" line="123"/>
         <source>dcrypt::dcrypt(): gcry_calloc_secure() failure.</source>
-        <translation>dcrypt::dcrypt(): gcry_calloc_secure() selhání.</translation>
+        <translation>dcrypt::dcrypt(): Chyba gcry_calloc_secure().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="138"/>
         <source>dcrypt::dcrypt(): gcry_cipher_setkey() failure.</source>
-        <translation>dcrypt::dcrypt(): gcry_cipher_setkey() selhání.</translation>
+        <translation>dcrypt::dcrypt(): Chyba gcry_cipher_setkey().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="202"/>
         <source>dcrypt::decodedString(): setInitializationVector() failure.</source>
-        <translation>dcrypt::decodedString(): setInitializationVector() selhání.</translation>
+        <translation>dcrypt::decodedString(): Chyba setInitializationVector().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="261"/>
         <source>dcrypt::decodedString(): gcry_cipher_decrypt() failure (%1).</source>
-        <translation>dcrypt::decodedString(): gcry_cipher_decrypt() selhání (%1).</translation>
+        <translation>dcrypt::decodedString(): Chyba gcry_cipher_decrypt() (%1).</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="297"/>
         <source>dcrypt::encodedString(): setInitializationVector() failure.</source>
-        <translation>dcrypt::encodedString(): setInitializationVector() selhání.</translation>
+        <translation>dcrypt::encodedString(): Chyba setInitializationVector().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="310"/>
         <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() selhalo.</translation>
+        <translation>dcrypt::encodedString(): Chyba gcry_cipher_get_algo_blklen().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="512"/>
         <location filename="../Source/dcrypt.cc" line="656"/>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() failed.</source>
-        <translation>dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() selhalo.</translation>
+        <translation>dcrypt::setCipherPassphrase(): Chyba gcry_cipher_get_algo_keylen().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="524"/>
@@ -172,23 +172,23 @@
         <location filename="../Source/dcrypt.cc" line="668"/>
         <location filename="../Source/dcrypt.cc" line="740"/>
         <source>dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() failed.</source>
-        <translation>dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() selhalo.</translation>
+        <translation>dcrypt::setCipherPassphrase(): Chyba gcry_md_get_algo_dlen().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="627"/>
         <location filename="../Source/dcrypt.cc" line="750"/>
         <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() failed.</source>
-        <translation>dcrypt::setCipherPassphrase(): gcry_calloc_secure() selhalo.</translation>
+        <translation>dcrypt::setCipherPassphrase(): Chyba gcry_calloc_secure().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="817"/>
         <source>dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation>dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() selhalo.</translation>
+        <translation>dcrypt::setInitializationVector(): Chyba gcry_cipher_get_algo_blklen().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="863"/>
         <source>dcrypt::setInitializationVector(): gcry_calloc() failed.</source>
-        <translation>dcrypt::setInitializationVector(): gcry_calloc() selhalo.</translation>
+        <translation>dcrypt::setInitializationVector(): Chyba gcry_calloc().</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="958"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../Source/dcrypt.cc" line="634"/>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the keys.</source>
-        <translation type="unfinished"></translation>
+        <translation>dcrypt::setCipherPassphrase(): gcry_kdf_derive() není stanoven. Používá se hash poskytnutého hesla jako klíče.</translation>
     </message>
     <message>
         <location filename="../Source/dcrypt.cc" line="972"/>
@@ -797,12 +797,12 @@
     <message>
         <location filename="../Source/ddownloadwindowitem.cc" line="74"/>
         <source>Compute SHA-1 Hash</source>
-        <translation type="unfinished">Spočítat SHA-1 Hash</translation>
+        <translation>Spočítat SHA-1 Hash</translation>
     </message>
     <message>
         <location filename="../Source/ddownloadwindowitem.cc" line="76"/>
         <source>Compute SHA-256 Hash</source>
-        <translation type="unfinished">Spočítat SHA-1 Hash {256 ?}</translation>
+        <translation>Spočítat SHA-256 Hash</translation>
     </message>
     <message>
         <location filename="../Source/ddownloadwindowitem.cc" line="115"/>
@@ -1172,73 +1172,73 @@
         <location filename="../Source/dhistory.cc" line="175"/>
         <location filename="../Source/dhistory.cc" line="209"/>
         <source>January</source>
-        <translation type="unfinished"></translation>
+        <translation>Leden</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="177"/>
         <location filename="../Source/dhistory.cc" line="211"/>
         <source>February</source>
-        <translation type="unfinished"></translation>
+        <translation>Únor</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="179"/>
         <location filename="../Source/dhistory.cc" line="213"/>
         <source>March</source>
-        <translation type="unfinished"></translation>
+        <translation>Březen</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="181"/>
         <location filename="../Source/dhistory.cc" line="215"/>
         <source>April</source>
-        <translation type="unfinished"></translation>
+        <translation>Duben</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="183"/>
         <location filename="../Source/dhistory.cc" line="217"/>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>Květen</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="185"/>
         <location filename="../Source/dhistory.cc" line="219"/>
         <source>June</source>
-        <translation type="unfinished"></translation>
+        <translation>Červen</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="187"/>
         <location filename="../Source/dhistory.cc" line="221"/>
         <source>July</source>
-        <translation type="unfinished"></translation>
+        <translation>Červenec</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="189"/>
         <location filename="../Source/dhistory.cc" line="223"/>
         <source>August</source>
-        <translation type="unfinished"></translation>
+        <translation>Srpen</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="191"/>
         <location filename="../Source/dhistory.cc" line="225"/>
         <source>September</source>
-        <translation type="unfinished"></translation>
+        <translation>Září</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="193"/>
         <location filename="../Source/dhistory.cc" line="227"/>
         <source>October</source>
-        <translation type="unfinished"></translation>
+        <translation>Říjen</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="195"/>
         <location filename="../Source/dhistory.cc" line="229"/>
         <source>November</source>
-        <translation type="unfinished"></translation>
+        <translation>Listopad</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="197"/>
         <location filename="../Source/dhistory.cc" line="231"/>
         <source>December</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosinec</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="304"/>
@@ -1409,7 +1409,7 @@
         <location filename="../Source/dooble.cc" line="1908"/>
         <location filename="../Source/dooble.cc" line="1997"/>
         <source>Dooble Web Browser: Error</source>
-        <translation type="unfinished">Dooble Web Browser: Chyba</translation>
+        <translation>Dooble Web Browser: Chyba</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1766"/>
@@ -1418,7 +1418,7 @@
         <location filename="../Source/dooble.cc" line="1909"/>
         <location filename="../Source/dooble.cc" line="1998"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovladač databáze SQLite QSQLITE není dostupný. To je vážný nedostatek.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2842"/>
@@ -1523,12 +1523,12 @@
     <message>
         <location filename="../Source/dooble.cc" line="8013"/>
         <source>&amp;Show Menu Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukázat pruh s hlavní nabídkou</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="8015"/>
         <source>&amp;Hide Menu Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skrýt pruh s hlavní nabídkou</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="7078"/>
@@ -1730,7 +1730,7 @@
     <message>
         <location filename="../UI/downloadWindowItem.ui" line="86"/>
         <source>File Hash</source>
-        <translation type="unfinished"></translation>
+        <translation>Hash souboru</translation>
     </message>
     <message>
         <location filename="../UI/downloadWindowItem.ui" line="136"/>
@@ -2039,17 +2039,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../Source/durlwidget.cc" line="342"/>
         <source>Submit URL to Spot-On. Authentication required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat adresu (URL) Spot-On. Je požadováno ověření.</translation>
     </message>
     <message>
         <location filename="../Source/durlwidget.cc" line="344"/>
         <source>Spot-On support is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpora pro Spot-On není dostupná.</translation>
     </message>
     <message>
         <location filename="../Source/durlwidget.cc" line="350"/>
         <source>durlwidget::durlwidget(): dooble::s_spoton is 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>durlwidget::durlwidget(): dooble::s_spoton je 0.</translation>
     </message>
 </context>
 <context>
@@ -2454,7 +2454,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Obnovit</translation>
+        <translation>Obnovit</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="347"/>
@@ -2523,7 +2523,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">Režim pro tablet na &amp;celou obrazovku</translation>
+        <translation>Režim pro tablet na &amp;celou obrazovku</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="841"/>
@@ -2628,7 +2628,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Location Toolbar</source>
-        <translation type="vanished">&amp;Umístění</translation>
+        <translation>&amp;Umístění</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="988"/>
@@ -2638,22 +2638,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/mainWindow.ui" line="993"/>
         <source>HTTP-&amp;Only Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Koláčky &amp;pouze-HTTP</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="998"/>
         <source>&amp;Hide Menu Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skrýt pruh s hlavní nabídkou</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="1009"/>
         <source>&amp;Desktop Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítko pro &amp;plochu</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="1020"/>
         <source>&amp;Home Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítko pro &amp;domů</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="889"/>
@@ -2756,7 +2756,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation>F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="836"/>
@@ -2790,7 +2790,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/mainWindow.ui" line="54"/>
         <source>Menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Nabídky</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="74"/>
@@ -3651,47 +3651,47 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/settings.ui" line="353"/>
         <source>Display Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Přednost zobrazení</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="367"/>
         <source>High Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Vysoká přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="372"/>
         <source>Highest Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejvyšší přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="377"/>
         <source>Idle Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Nečinná přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="382"/>
         <source>Inherit Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Zděděná přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="387"/>
         <source>Low Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Nízká přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="392"/>
         <source>Lowest Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejnižší přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="397"/>
         <source>Normal Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="402"/>
         <source>Time-Critical Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Časově kritická přednost</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="703"/>
@@ -3788,7 +3788,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/settings.ui" line="3130"/>
         <source>Accept HTTP cookies only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijmout pouze koláčky HTTP.</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="3449"/>
@@ -4067,7 +4067,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/settings.ui" line="3388"/>
         <source>Enable hyperlink auditing. Proper understanding of this option is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit prověrku hyperodkazu. Požaduje se řádné porozumění této volbě.</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="3418"/>
@@ -4258,7 +4258,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/settings.ui" line="2509"/>
         <source>If a passphrase is not set, bookmarks, cache, cookies, download information, exceptions information, favicons, and history entries will be encoded with a temporary passphrase. As a result, the data will not be available in future sessions. A passphrase will also enable session restoration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud není heslo nastaveno, budou záložky, koláčky, informace o stahování, informace o výjimkách, oblíbené a historické záznamy zakódovány pomocí dočasného hesla. Ve výsledku data nebudou dostupná v budoucích sezeních. Heslo rovněž umožní obnovu sezení.</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="2538"/>
@@ -4333,17 +4333,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/sslciphers.ui" line="36"/>
         <source>Please close all active tabs after updating the below contents. Please restart Dooble if the settings do not agree with your expectations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřete, prosím, po aktualizaci obsahu níže všechny činné karty. Spusťte, prosím, Dooble znovu, pokud nastavení nesouhlasí s vašimi očekáváními.</translation>
     </message>
     <message>
         <location filename="../UI/sslciphers.ui" line="61"/>
         <source>Negate All &amp;SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyloučit veškeré &amp;SSL</translation>
     </message>
     <message>
         <location filename="../UI/sslciphers.ui" line="68"/>
         <source>Negate All &amp;TLS</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyloučit veškeré &amp;TLS</translation>
     </message>
     <message>
         <location filename="../UI/sslciphers.ui" line="127"/>
