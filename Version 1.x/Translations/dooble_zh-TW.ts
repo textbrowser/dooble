@@ -1599,15 +1599,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Submit URL to Spot-On. Authentication required.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Spot-On support is not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>durlwidget::durlwidget(): dooble::s_spoton is 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Submit URL to Spot-On.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

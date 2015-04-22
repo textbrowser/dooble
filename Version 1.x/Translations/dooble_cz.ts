@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ" sourcelanguage="en_US">
+<TS version="2.1" language="cs_CZ" sourcelanguage="en_US">
 <context>
     <name>FileManagerForm</name>
     <message>
@@ -2038,8 +2038,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../Source/durlwidget.cc" line="342"/>
+        <source>Submit URL to Spot-On.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Submit URL to Spot-On. Authentication required.</source>
-        <translation>Odeslat adresu (URL) Spot-On. Je požadováno ověření.</translation>
+        <translation type="vanished">Odeslat adresu (URL) Spot-On. Je požadováno ověření.</translation>
     </message>
     <message>
         <location filename="../Source/durlwidget.cc" line="344"/>
@@ -2454,7 +2458,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Restore</source>
-        <translation>Obnovit</translation>
+        <translation type="vanished">Obnovit</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="347"/>
@@ -2523,7 +2527,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation>Režim pro tablet na &amp;celou obrazovku</translation>
+        <translation type="vanished">Režim pro tablet na &amp;celou obrazovku</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="841"/>
@@ -2628,7 +2632,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Location Toolbar</source>
-        <translation>&amp;Umístění</translation>
+        <translation type="vanished">&amp;Umístění</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="988"/>
@@ -2756,7 +2760,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>F11</source>
-        <translation>F11</translation>
+        <translation type="vanished">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="836"/>

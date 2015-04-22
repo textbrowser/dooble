@@ -1963,7 +1963,7 @@
     </message>
     <message>
         <location filename="../Source/durlwidget.cc" line="342"/>
-        <source>Submit URL to Spot-On. Authentication required.</source>
+        <source>Submit URL to Spot-On.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
