@@ -250,9 +250,19 @@ bool dwebpage::javaScriptConfirm(QWebFrame *frame, const QString &msg)
 
 bool dwebpage::shouldInterruptJavaScript(void)
 {
-  return javaScriptConfirm
-    (0, tr("Dooble has detected a stagnant JavaScript "
-	   "script. Should the script be terminated?"));
+  int value = qBound
+    (0, dooble::s_settings.
+     value("settingsWindow/javascriptStagnantScripts",
+	   2).toInt(), 2);
+
+  if(value == 0) // Continue.
+    return false;
+  else if(value == 1) // Interrupt.
+    return true;
+  else
+    return javaScriptConfirm
+      (0, tr("Dooble has detected a stagnant JavaScript "
+	     "script. Should the script be terminated?"));
 }
 
 bool dwebpage::javaScriptPrompt(QWebFrame *frame, const QString &msg,

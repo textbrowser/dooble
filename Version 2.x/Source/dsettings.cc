@@ -1255,6 +1255,10 @@ void dsettings::exec(dooble *parent)
   ui.privateBrowsing->setChecked
     (dooble::s_settings.value("settingsWindow/privateBrowsing",
 			      true).toBool());
+  ui.jsStagnantScripts->setCurrentIndex
+    (qBound(0, dooble::s_settings.
+	    value("settingsWindow/javascriptStagnantScripts",
+		  2).toInt(), 2));
 
   if(dooble::s_settings.contains("settingsWindow/"
 				 "applicationsTableColumnsState"))
@@ -1858,6 +1862,9 @@ void dsettings::slotClicked(QAbstractButton *button)
 	("settingsWindow/displaypriority",
 	 ui.displaypriority->itemData(ui.displaypriority->currentIndex()).
 	 toInt());
+      settings.setValue
+	("settingsWindow/javascriptStagnantScripts",
+	 ui.jsStagnantScripts->currentIndex());
 
       QThread *thread = QApplication::instance()->thread();
 

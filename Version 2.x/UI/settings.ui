@@ -37,8 +37,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>106</width>
-         <height>576</height>
+         <width>110</width>
+         <height>582</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -340,8 +340,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>624</width>
-               <height>503</height>
+               <width>546</width>
+               <height>453</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1132,8 +1132,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>291</width>
-               <height>544</height>
+               <width>312</width>
+               <height>536</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1449,7 +1449,7 @@
                <x>0</x>
                <y>0</y>
                <width>608</width>
-               <height>928</height>
+               <height>861</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2440,8 +2440,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>678</width>
-               <height>768</height>
+               <width>689</width>
+               <height>715</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2937,9 +2937,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>556</width>
-               <height>1461</height>
+               <y>-529</y>
+               <width>628</width>
+               <height>1295</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -3653,6 +3653,55 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="10" column="0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_64">
+                   <item>
+                    <widget class="QLabel" name="label_79">
+                     <property name="text">
+                      <string>Stagnant Scripts Default Action</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="jsStagnantScripts">
+                     <property name="currentIndex">
+                      <number>2</number>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Continue</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Interrupt</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Prompt</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_53">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
                 </layout>
                </widget>
               </item>
@@ -4364,6 +4413,7 @@
   <tabstop>jsHideToolBarCheckBox</tabstop>
   <tabstop>jsAllowNewWindowsCheckBox</tabstop>
   <tabstop>xssAuditingCheckBox</tabstop>
+  <tabstop>jsStagnantScripts</tabstop>
   <tabstop>localContentMayAccessLocalContent</tabstop>
   <tabstop>notifyExceptionsCheckBox</tabstop>
   <tabstop>privateBrowsing</tabstop>
@@ -4392,6 +4442,8 @@
   <tabstop>closeDownloadsCheckBox</tabstop>
   <tabstop>openUserWindowsInNewProcessesCheckBox</tabstop>
   <tabstop>useNativeFileDialogs</tabstop>
+  <tabstop>displaypriority</tabstop>
+  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>
