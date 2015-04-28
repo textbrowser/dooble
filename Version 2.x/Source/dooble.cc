@@ -3170,15 +3170,11 @@ void dooble::slotLoadFinished(bool ok)
 
       if(ok)
 	{
-	  if(!ui.locationLineEdit->hasFocus() &&
-	     !ui.locationLineEdit->isModified())
-	    {
-	      ui.locationLineEdit->
-		setText(p->url().toString(QUrl::StripTrailingSlash));
+	  ui.locationLineEdit->
+	    setText(p->url().toString(QUrl::StripTrailingSlash));
 
-	      if(!ui.locationLineEdit->text().isEmpty())
-		ui.locationLineEdit->setToolTip(ui.locationLineEdit->text());
-	    }
+	  if(!ui.locationLineEdit->text().isEmpty())
+	    ui.locationLineEdit->setToolTip(ui.locationLineEdit->text());
 	}
       else if(p->url().toString(QUrl::StripTrailingSlash) ==
 	      p->webviewUrl().toString(QUrl::StripTrailingSlash))
