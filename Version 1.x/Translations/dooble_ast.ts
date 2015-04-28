@@ -3472,6 +3472,22 @@ p, li { white-space: pre-wrap; }
         <source>Time-Critical Priority</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Stagnant Scripts Default Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interrupt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prompt</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>sslCiphersWindow</name>
