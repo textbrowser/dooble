@@ -3471,9 +3471,9 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 	  QString title(list.at(i).title());
 	  QString scheme(url.scheme().toLower().trimmed());
 
-	  if(scheme.startsWith("dooblessl"))
+	  if(scheme.startsWith("dooble-ssl"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooblessl"))));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl"))));
 	  else if(scheme.startsWith("dooble"))
 	    url.setScheme
 	      (scheme.mid(static_cast<int> (qstrlen("dooble"))));
@@ -3508,9 +3508,9 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 	  QString title(list.at(i).title());
 	  QString scheme(url.scheme().toLower().trimmed());
 
-	  if(scheme.startsWith("dooblessl"))
+	  if(scheme.startsWith("dooble-ssl"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooblessl"))));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl"))));
 	  else if(scheme.startsWith("dooble"))
 	    url.setScheme
 	      (scheme.mid(static_cast<int> (qstrlen("dooble"))));
