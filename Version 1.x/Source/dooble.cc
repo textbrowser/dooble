@@ -3188,8 +3188,7 @@ void dooble::slotUrlChanged(const QUrl &url)
   ** the widget reflect the current URL?
   */
 
-  if(p->isDir() || (!ui.locationLineEdit->hasFocus() &&
-		    !ui.locationLineEdit->isModified()))
+  if(!ui.locationLineEdit->isModified())
     if(p && p == qobject_cast<dview *> (ui.tabWidget->currentWidget()))
       {
 	ui.locationLineEdit->setText(url.toString(QUrl::StripTrailingSlash));
@@ -3338,11 +3337,14 @@ void dooble::slotLoadFinished(bool ok)
 
       if(ok)
 	{
-	  ui.locationLineEdit->
-	    setText(p->url().toString(QUrl::StripTrailingSlash));
-
-	  if(!ui.locationLineEdit->text().isEmpty())
-	    ui.locationLineEdit->setToolTip(ui.locationLineEdit->text());
+	  if(!ui.locationLineEdit->isModified())
+	    {
+	      ui.locationLineEdit->
+		setText(p->url().toString(QUrl::StripTrailingSlash));
+	      
+	      if(!ui.locationLineEdit->text().isEmpty())
+		ui.locationLineEdit->setToolTip(ui.locationLineEdit->text());
+	    }
 	}
       else if(p->url().toString(QUrl::StripTrailingSlash) ==
 	      p->webviewUrl().toString(QUrl::StripTrailingSlash))
