@@ -522,6 +522,8 @@ void dwebpage::slotFinished(QNetworkReply *reply)
 {
   if(!reply)
     return;
+  else if(reply->property("dooble-favicon").toBool())
+    return;
   else if(!reply->url().isValid() || !m_requestedUrl.isValid())
     return;
   else if(!dmisc::isSchemeAcceptedByDooble(reply->url().scheme()) ||
