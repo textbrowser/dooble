@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>290</height>
+    <height>291</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,6 +72,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QCheckBox" name="spotonCheckBox">
+      <property name="text">
+       <string>Spot-On Shared Links</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="standardButtons">
        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
@@ -91,6 +98,7 @@
   <tabstop>faviconsCheckBox</tabstop>
   <tabstop>historyCheckBox</tabstop>
   <tabstop>offlineCacheCheckBox</tabstop>
+  <tabstop>spotonCheckBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>

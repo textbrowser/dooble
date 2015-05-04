@@ -132,3 +132,28 @@ void dspoton::slotTimeout(void)
   emit spotonKernelRegistered(isKernelRegistered());
 }
 #endif
+
+void dspoton::clear(void)
+{
+#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
+  libspoton_error_t err = LIBSPOTON_ERROR_NONE;
+  libspoton_handle_t libspotonHandle;
+
+  err = libspoton_init_a(dooble::s_settings.
+			 value("settingsWindow/"
+			       "spotOnSharedDatabase").toString().
+			 toStdString().c_str(),
+			 0,
+			 0,
+			 0,
+			 &libspotonHandle,
+			 16384);
+
+  if(err == LIBSPOTON_ERROR_NONE)
+    err = libspoton_delete_urls
+      (&libspotonHandle,
+       dmisc::passphraseWasAuthenticated() && dmisc::s_crypt);
+
+  libspoton_close(&libspotonHandle);
+#endif
+}

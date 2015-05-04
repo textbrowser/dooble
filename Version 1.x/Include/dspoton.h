@@ -42,6 +42,7 @@ class dspoton: public QObject
   dspoton(void);
   ~dspoton();
   bool isKernelRegistered(void);
+  void clear(void);
   void registerWidget(QWidget *widget);
   void share(const QUrl &url,
 	     const QString &title,

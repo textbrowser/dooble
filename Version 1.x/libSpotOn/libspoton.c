@@ -57,6 +57,7 @@ static char *libspoton_error_strings[] =
     "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_DESCRIPTION",
     "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_TITLE",
     "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_URL",
+    "LIBSPOTON_ERROR_SQLITE_BIND_INT",
     "LIBSPOTON_ERROR_SQLITE_BIND_INT64",
     "LIBSPOTON_ERROR_SQLITE_BIND_INT_ENCRYPT",
     "LIBSPOTON_ERROR_SQLITE_CREATE_KERNEL_REGISTRATION_TABLE",
@@ -129,6 +130,58 @@ const char *libspoton_strerror(const libspoton_error_t error)
     return "";
   else
     return libspoton_error_strings[error];
+}
+
+libspoton_error_t libspoton_delete_urls(libspoton_handle_t *libspotonHandle,
+					const int encrypted)
+{
+  const char *sql = "DELETE FROM urls WHERE encrypted = ?";
+  int rv = 0;
+  libspoton_error_t rerr = LIBSPOTON_ERROR_NONE;
+  sqlite3_stmt *stmt = 0;
+
+  if(!libspotonHandle)
+    {
+      rerr = LIBSPOTON_ERROR_NULL_LIBSPOTON_HANDLE;
+      goto error_label;
+    }
+  else if(!libspotonHandle->m_sqliteHandle)
+    {
+      rerr = LIBSPOTON_ERROR_NOT_CONNECTED_TO_SQLITE_DATABASE;
+      goto error_label;
+    }
+
+  pthread_mutex_lock(&sqlite_mutex);
+  rv = sqlite3_prepare_v2(libspotonHandle->m_sqliteHandle,
+			  sql,
+			  (int) strlen(sql),
+			  &stmt,
+			  0);
+  pthread_mutex_unlock(&sqlite_mutex);
+
+  if(rv != SQLITE_OK)
+    {
+      rerr = LIBSPOTON_ERROR_SQLITE_PREPARE_V2;
+      goto error_label;
+    }
+
+  if(sqlite3_bind_int(stmt, 1, encrypted) != SQLITE_OK)
+    {
+      rerr = LIBSPOTON_ERROR_SQLITE_BIND_INT;
+      goto error_label;
+    }
+
+  rv = sqlite3_step(stmt);
+
+  if(!(rv == 0 || rv == SQLITE_DONE))
+    {
+      rerr = LIBSPOTON_ERROR_SQLITE_STEP;
+      goto error_label;
+    }
+
+ error_label:
+  sqlite3_finalize(stmt);
+  return rerr;
 }
 
 libspoton_error_t libspoton_deregister_kernel

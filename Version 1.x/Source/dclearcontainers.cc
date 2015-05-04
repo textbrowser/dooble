@@ -103,6 +103,8 @@ void dclearcontainers::show(dooble *parent)
     (settings.value("clearContainersWindow/history", false).toBool());
   ui.offlineCacheCheckBox->setChecked
     (settings.value("clearContainersWindow/offlineCache", false).toBool());
+  ui.spotonCheckBox->setChecked
+    (settings.value("clearContainersWindow/spoton", false).toBool());
 
   if(parent)
     {
@@ -203,6 +205,10 @@ void dclearcontainers::slotClicked(QAbstractButton *button)
       if(ui.offlineCacheCheckBox->isChecked())
 	dooble::s_networkCache->clear();
 
+      if(ui.spotonCheckBox->isChecked())
+	if(dooble::s_spoton)
+	  dooble::s_spoton->clear();
+
       QApplication::restoreOverrideCursor();
     }
 
@@ -234,6 +240,8 @@ void dclearcontainers::slotChecked(bool state)
     settings.setValue("clearContainersWindow/history", state);
   else if(checkBox == ui.offlineCacheCheckBox)
     settings.setValue("clearContainersWindow/offlineCache", state);
+  else if(checkBox == ui.spotonCheckBox)
+    settings.setValue("clearContainersWindow/spoton", state);
 }
 
 #ifdef Q_OS_MAC

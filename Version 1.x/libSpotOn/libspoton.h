@@ -28,8 +28,8 @@
 #ifndef LIBSPOTON_H
 #define LIBSPOTON_H
 
-#define LIBSPOTON_VERSION 0x000009
-#define LIBSPOTON_VERSION_STR "0.09"
+#define LIBSPOTON_VERSION 0x001000
+#define LIBSPOTON_VERSION_STR "0.10"
 
 #ifdef LIBSPOTON_OS_WINDOWS
 #include "errno.h"
@@ -83,6 +83,7 @@ typedef enum
     LIBSPOTON_ERROR_SQLITE_BIND_BLOB_DESCRIPTION,
     LIBSPOTON_ERROR_SQLITE_BIND_BLOB_TITLE,
     LIBSPOTON_ERROR_SQLITE_BIND_BLOB_URL,
+    LIBSPOTON_ERROR_SQLITE_BIND_INT,
     LIBSPOTON_ERROR_SQLITE_BIND_INT64,
     LIBSPOTON_ERROR_SQLITE_BIND_INT_ENCRYPT,
     LIBSPOTON_ERROR_SQLITE_CREATE_KERNEL_REGISTRATION_TABLE,
@@ -118,6 +119,13 @@ bool libspoton_is_kernel_registered(libspoton_handle_t *libspotonHandle,
 */
 
 const char *libspoton_strerror(const libspoton_error_t error);
+
+/*
+** Delete URLs.
+*/
+
+libspoton_error_t libspoton_delete_urls(libspoton_handle_t *libspotonHandle,
+					const int encrypted);
 
 /*
 ** Deregister the kernel process.
