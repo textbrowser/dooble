@@ -288,7 +288,7 @@ dhistory::dhistory(void):QMainWindow()
   else
     dmisc::logError(tr("dhistory::dhistory(): dooble::s_spoton is 0."));
 #else
-  ui.sharePushButton->setVisible(false);
+  ui.sharePushButton->setEnabled(false);
 #endif
 }
 

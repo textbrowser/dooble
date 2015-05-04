@@ -42,9 +42,7 @@
 #include "dhistorysidebar.h"
 #include "dmisc.h"
 #include "dsettings.h"
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
 #include "dspoton.h"
-#endif
 #include "dsslcipherswindow.h"
 #include "dview.h"
 #include "plugin-spec/extension.h"
@@ -98,9 +96,7 @@ class dooble: public QMainWindow
   static QPointer<dhistorymodel> s_historyModel;
   static QPointer<dnetworkcache> s_networkCache;
   static QPointer<dsettings> s_settingsWindow;
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   static QPointer<dspoton> s_spoton;
-#endif
   static QPointer<dsslcipherswindow> s_sslCiphersWindow;
   static QString s_homePath;
   static QUuid s_id; // Unique process ID.

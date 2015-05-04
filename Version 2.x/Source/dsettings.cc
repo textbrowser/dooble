@@ -483,9 +483,11 @@ void dsettings::exec(dooble *parent)
 			      QDir::homePath() + QDir::separator() +
 			      ".spot-on" + QDir::separator() + "shared.db").
      toString());
-  ui.spotOnChooseDatabasePushButton->setVisible(false);
-  ui.spotOnLabel->setVisible(false);
-  ui.spotOnSharedDatabaseLineEdit->setVisible(false);
+#ifndef DOOBLE_LINKED_WITH_LIBSPOTON
+  ui.spotOnChooseDatabasePushButton->setEnabled(false);
+  ui.spotOnLabel->setEnabled(false);
+  ui.spotOnSharedDatabaseLineEdit->setEnabled(false);
+#endif
   ui.ircLineEdit->setText
     (dooble::s_settings.value("settingsWindow/ircChannel",
 			      "https://webchat.freenode.net?channels=dooble").
