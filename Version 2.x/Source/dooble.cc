@@ -104,9 +104,7 @@ QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
 QUuid dooble::s_id = QUuid::createUuid();
 QMutex dooble::s_saveHistoryMutex;
 QString dooble::s_homePath = "";
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
 QPointer<dspoton> dooble::s_spoton = 0;
-#endif
 QPointer<dcookies> dooble::s_cookies = 0;
 QPointer<dhistory> dooble::s_historyWindow = 0;
 QPointer<derrorlog> dooble::s_errorLog = 0;
@@ -1019,6 +1017,17 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.actionShow_Hidden_Files->setEnabled(false);
   ui.actionShow_Hidden_Files->setToolTip(tr("WebEngine supports the browsing "
 					    "of directories."));
+
+  if(dooble::s_spoton)
+    ui.action_Clear_Spot_On_Shared_Links->setEnabled
+      (dooble::s_spoton->isKernelRegistered());
+  else
+    ui.action_Clear_Spot_On_Shared_Links->setEnabled(false);
+
+  connect(ui.action_Clear_Spot_On_Shared_Links,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slotClearSpotOnSharedLinks(void)));
   connect(ui.action_Hide_Menubar,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -2358,9 +2367,10 @@ void dooble::cleanupBeforeExit(void)
   s_sslExceptionsWindow->deleteLater();
   s_networkCache->deleteLater();
   s_clearContainersWindow->deleteLater();
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  s_spoton->deleteLater();
-#endif
+
+  if(s_spoton)
+    s_spoton->deleteLater();
+
   s_sslExceptionsWindow->deleteLater();
 
   if(dfilemanager::tableModel)
@@ -7691,5 +7701,15 @@ void dooble::slotShowLocationBarButton(bool state)
       settings.setValue("mainWindow/showHomeButton", state);
       s_settings["mainWindow/showHomeButton"] = state;
       ui.homeToolButton->setVisible(state);
+    }
+}
+
+void dooble::slotClearSpotOnSharedLinks(void)
+{
+  if(dooble::s_spoton)
+    {
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+      dooble::s_spoton->clear();
+      QApplication::restoreOverrideCursor();
     }
 }

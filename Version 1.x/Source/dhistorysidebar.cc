@@ -252,7 +252,6 @@ void dhistorysidebar::slotShowContextMenu(const QPoint &point)
 			 this, SLOT(slotOpenInNewTab(void)));
 	  menu.addAction(tr("Open in &New Window"),
 			 this, SLOT(slotOpenInNewWindow(void)));
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
 	  menu.addSeparator();
 
 	  QAction *action = menu.addAction(tr("&Spot-On Share"),
@@ -262,7 +261,6 @@ void dhistorysidebar::slotShowContextMenu(const QPoint &point)
 	    action->setEnabled(dooble::s_spoton->isKernelRegistered());
 	  else
 	    action->setEnabled(false);
-#endif
 	}
       else
 	{
@@ -273,7 +271,6 @@ void dhistorysidebar::slotShowContextMenu(const QPoint &point)
 	  menu.addSeparator();
 	  menu.addAction(tr("Open in &New Tabs"),
 			 this, SLOT(slotOpenInNewTab(void)));
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
 	  menu.addSeparator();
 
 	  QAction *action = menu.addAction(tr("&Spot-On Share"),
@@ -283,7 +280,6 @@ void dhistorysidebar::slotShowContextMenu(const QPoint &point)
 	    action->setEnabled(dooble::s_spoton->isKernelRegistered());
 	  else
 	    action->setEnabled(false);
-#endif
 	}
 
       menu.exec(ui.history->mapToGlobal(point));

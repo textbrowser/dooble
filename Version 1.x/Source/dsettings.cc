@@ -518,9 +518,9 @@ void dsettings::exec(dooble *parent)
 			      ".spot-on" + QDir::separator() + "shared.db").
      toString());
 #ifndef DOOBLE_LINKED_WITH_LIBSPOTON
-  ui.spotOnChooseDatabasePushButton->setVisible(false);
-  ui.spotOnLabel->setVisible(false);
-  ui.spotOnSharedDatabaseLineEdit->setVisible(false);
+  ui.spotOnChooseDatabasePushButton->setEnabled(false);
+  ui.spotOnLabel->setEnabled(false);
+  ui.spotOnSharedDatabaseLineEdit->setEnabled(false);
 #endif
   ui.ircLineEdit->setText
     (dooble::s_settings.value("settingsWindow/ircChannel",

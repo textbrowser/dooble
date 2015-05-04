@@ -34,9 +34,7 @@
 
 #include "dmisc.h"
 #include "dview.h"
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
 #include "dspoton.h"
-#endif
 #include "dcookies.h"
 #include "dhistory.h"
 #include "dsettings.h"
@@ -79,9 +77,7 @@ class dooble: public QMainWindow
   static const int MAX_HISTORY_ITEMS = 15;
   static const int MAX_MOST_VISITED_ITEMS = 15;
   static const int MAX_NUMBER_OF_MENU_TITLE_CHARACTERS = 100;
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   static QPointer<dspoton> s_spoton;
-#endif
   static QPointer<dhistory> s_historyWindow;
   static QPointer<derrorlog> s_errorLog;
   static QPointer<dsettings> s_settingsWindow;
@@ -223,6 +219,7 @@ class dooble: public QMainWindow
   void slotQuit(void);
   void slotStop(void);
   void slotAbout(void);
+  void slotClearSpotOnSharedLinks(void);
   void slotClose(void);
   void slotPaste(void);
   void slotPrint(void);

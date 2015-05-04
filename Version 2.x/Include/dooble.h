@@ -226,6 +226,7 @@ class dooble: public QMainWindow
   void slotClearContainers(void);
   void slotClearHistory(void);
   void slotClearRecentlyClosedTabs(void);
+  void slotClearSpotOnSharedLinks(void);
   void slotClose(void);
   void slotCloseTab(const int index);
   void slotCloseTab(void);

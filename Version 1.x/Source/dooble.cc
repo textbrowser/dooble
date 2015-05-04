@@ -139,9 +139,7 @@ QPointer<dhistory> dooble::s_historyWindow = 0;
 QPointer<dhistorymodel> dooble::s_historyModel = 0;
 QPointer<dnetworkcache> dooble::s_networkCache = 0;
 QPointer<dsettings> dooble::s_settingsWindow = 0;
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
 QPointer<dspoton> dooble::s_spoton = 0;
-#endif
 QPointer<dsslcipherswindow> dooble::s_sslCiphersWindow = 0;
 QString dooble::s_homePath = "";
 QUuid dooble::s_id = QUuid::createUuid();
@@ -1133,6 +1131,17 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #else
   ui.menuToolButton->setMenu(new QMenu(this));
 #endif
+
+  if(dooble::s_spoton)
+    ui.action_Clear_Spot_On_Shared_Links->setEnabled
+      (dooble::s_spoton->isKernelRegistered());
+  else
+    ui.action_Clear_Spot_On_Shared_Links->setEnabled(false);
+
+  connect(ui.action_Clear_Spot_On_Shared_Links,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slotClearSpotOnSharedLinks(void)));
   connect(ui.action_Hide_Menubar,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -2495,9 +2504,10 @@ void dooble::cleanupBeforeExit(void)
   s_sslExceptionsWindow->deleteLater();
   s_networkCache->deleteLater();
   s_clearContainersWindow->deleteLater();
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  s_spoton->deleteLater();
-#endif
+
+  if(s_spoton)
+    s_spoton->deleteLater();
+
   s_sslExceptionsWindow->deleteLater();
   dfilemanager::tableModel->deleteLater();
   dfilemanager::treeModel->deleteLater();
@@ -8030,5 +8040,15 @@ void dooble::slotShowLocationBarButton(bool state)
       settings.setValue("mainWindow/showHomeButton", state);
       s_settings["mainWindow/showHomeButton"] = state;
       ui.homeToolButton->setVisible(state);
+    }
+}
+
+void dooble::slotClearSpotOnSharedLinks(void)
+{
+  if(dooble::s_spoton)
+    {
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+      dooble::s_spoton->clear();
+      QApplication::restoreOverrideCursor();
     }
 }
