@@ -1097,8 +1097,12 @@ void dsettings::exec(dooble *parent)
   ui.historySpinBox->setValue
     (dooble::s_settings.value("settingsWindow/historyDays", 8).toInt());
   ui.historySpinBox->setEnabled(ui.historyCheckBox->isChecked());
+  ui.sightSslErrorsCheckBox->setChecked
+    (dooble::s_settings.value("settingsWindow/sightSslErrors",
+			      true).toBool());
   ui.sightSslErrorsPushButton->setEnabled
     (ui.sightSslErrorsCheckBox->isChecked());
+  ui.sslLevel->setEnabled(ui.sightSslErrorsCheckBox->isChecked());
   ui.sslLevel->setCurrentIndex
     (dooble::s_settings.value("settingsWindow/sslLevel", 1).toInt());
   ui.jsHideMenuBarCheckBox->setChecked
@@ -1278,15 +1282,10 @@ void dsettings::exec(dooble *parent)
   ui.recordFaviconsCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/enableFaviconsDatabase",
 			      false).toBool());
-  ui.sightSslErrorsCheckBox->setChecked
-    (dooble::s_settings.value("settingsWindow/sightSslErrors",
-			      true).toBool());
   ui.localContentMayAccessLocalContent->setChecked
     (dooble::s_settings.
      value("settingsWindow/localContentMayAccessLocalContent", true).
      toBool());
-  ui.sightSslErrorsPushButton->setEnabled
-    (ui.sightSslErrorsCheckBox->isChecked());
 #if QT_VERSION >= 0x050300
   ui.speedyCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/speedy", false).toBool());
