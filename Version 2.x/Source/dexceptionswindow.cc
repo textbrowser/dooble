@@ -246,6 +246,7 @@ void dexceptionswindow::closeEvent(QCloseEvent *event)
 void dexceptionswindow::slotShow(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
+  QPushButton *pushButton = qobject_cast<QPushButton *> (sender());
   QRect rect(100, 100, 800, 600);
   QToolButton *toolButton = qobject_cast<QToolButton *> (sender());
   QWidget *parent = 0;
@@ -264,17 +265,33 @@ void dexceptionswindow::slotShow(void)
       rect.setHeight(600);
       rect.setWidth(800);
     }
-  else if(toolButton && toolButton->parentWidget())
+  else
     {
-      parent = toolButton->parentWidget();
-      rect = parent->geometry();
+      if(pushButton && pushButton->parentWidget())
+	parent = pushButton->parentWidget();
+      else if(toolButton && toolButton->parentWidget())
+	parent = toolButton->parentWidget();
+
+      if(parent)
+	rect = parent->geometry();
 
       while(parent)
 	{
-	  if(qobject_cast<dooble *> (parent))
+	  if(pushButton)
 	    {
-	      rect = parent->geometry();
-	      break;
+	      if(qobject_cast<dsettings *> (parent))
+		{
+		  rect = parent->geometry();
+		  break;
+		}
+	    }
+	  else
+	    {
+	      if(qobject_cast<dooble *> (parent))
+		{
+		  rect = parent->geometry();
+		  break;
+		}
 	    }
 
 	  parent = parent->parentWidget();
