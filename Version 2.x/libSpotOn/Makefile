@@ -6,6 +6,8 @@ else ifeq ($(UNAME), FreeBSD)
 	MAKEFILE=Makefile.freebsd
 else ifeq ($(UNAME), Linux)
 	MAKEFILE=Makefile.linux
+else ifeq ($(UNAME), OS/2)
+	MAKEFILE=Makefile.os2
 else
 	MAKEFILE=Makefile.windows
 endif
