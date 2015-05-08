@@ -890,6 +890,8 @@ void libspoton_close(libspoton_handle_t *libspotonHandle)
 void libspoton_enable_sqlite_cache(void)
 {
 #ifndef LIBSPOTON_OS_MAC
+#ifndef LIBSPOTON_OS_OS2
   sqlite3_enable_shared_cache(1);
+#endif
 #endif
 }
