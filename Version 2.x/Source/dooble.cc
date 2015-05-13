@@ -5474,7 +5474,7 @@ bool dooble::promptForPassphrase(const bool override)
 
   int iterationCount = qMax(1000,
 			    s_settings.value("settingsWindow/iterationCount",
-					     1000).toInt());
+					     10000).toInt());
   bool showAuthentication = s_settings.value
     ("settingsWindow/showAuthentication", true).toBool();
   QString hashType(s_settings.
