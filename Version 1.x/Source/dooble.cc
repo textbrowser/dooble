@@ -6787,8 +6787,8 @@ void dooble::slotRefreshPlugins(void)
         {
           QAction *dead = actions.at(a);
 
-	  dmisc::logError(tr("dooble::slotRefreshPlugins(): "
-			     "Removing action %1.").
+	  dmisc::logError(QString("dooble::slotRefreshPlugins(): "
+				  "Removing action %1.").
 			  arg(dead->objectName()));
           ui.menu_Plugins->removeAction(dead);
           dead->deleteLater();

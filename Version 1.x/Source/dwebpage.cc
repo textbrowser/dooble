@@ -708,8 +708,8 @@ void dwebpage::slotFinished(QNetworkReply *reply)
       QVariant variant(reply->header(QNetworkRequest::ContentLengthHeader));
 
       dmisc::logError
-	(tr("dwebpage::slotFinished(): "
-	    "The URL %1 generated an error (HTTP %2).").
+	(QString("dwebpage::slotFinished(): "
+		 "The URL %1 generated an error (HTTP %2).").
 	 arg(reply->url().toString(QUrl::StripTrailingSlash)).
 	 arg(status));
 
@@ -739,8 +739,8 @@ void dwebpage::slotFinished(QNetworkReply *reply)
     default:
       {
 	dmisc::logError
-	  (tr("dwebpage::slotFinished(): "
-	      "The URL %1 generated an error (%2:%3).").
+	  (QString("dwebpage::slotFinished(): "
+		   "The URL %1 generated an error (%2:%3).").
 	   arg(reply->url().toString(QUrl::StripTrailingSlash)).
 	   arg(reply->error()).
 	   arg(reply->errorString()));
