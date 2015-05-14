@@ -213,8 +213,8 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
   if(dooble::s_spoton)
     dooble::s_spoton->registerWidget(ui.sharePushButton);
   else
-    dmisc::logError(tr("dbookmarkswindow::dbookmarkswindow(): "
-		       "dooble::s_spoton is 0."));
+    dmisc::logError("dbookmarkswindow::dbookmarkswindow(): "
+		    "dooble::s_spoton is 0.");
 #endif
 }
 

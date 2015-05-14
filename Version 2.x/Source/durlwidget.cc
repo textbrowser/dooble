@@ -343,7 +343,7 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
   if(dooble::s_spoton)
     dooble::s_spoton->registerWidget(m_spotonButton);
   else
-    dmisc::logError(tr("durlwidget::durlwidget(): dooble::s_spoton is 0."));
+    dmisc::logError("durlwidget::durlwidget(): dooble::s_spoton is 0.");
 #endif
   slotSetIcons();
 #ifndef DOOBLE_LINKED_WITH_LIBSPOTON

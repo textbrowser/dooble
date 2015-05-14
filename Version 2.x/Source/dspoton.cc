@@ -109,14 +109,25 @@ void dspoton::share(const QUrl &url,
 			   16384);
 
   if(err == LIBSPOTON_ERROR_NONE)
-    err = libspoton_save_url
-      (url.toEncoded(QUrl::StripTrailingSlash).constData(),
-       url.toEncoded(QUrl::StripTrailingSlash).length(),
-       title.toUtf8().constData(),
-       title.toUtf8().length(),
-       description.toUtf8().constData(),
-       description.toUtf8().length(),
-       &libspotonHandle);
+    {
+      if((err = libspoton_save_url(url.
+				   toEncoded(QUrl::StripTrailingSlash).
+				   constData(),
+				   url.toEncoded(QUrl::StripTrailingSlash).
+				   length(),
+				   title.toUtf8().constData(),
+				   title.toUtf8().length(),
+				   description.toUtf8().constData(),
+				   description.toUtf8().length(),
+				   &libspotonHandle)) != LIBSPOTON_ERROR_NONE)
+	dmisc::logError(QString("dspoton::share(): "
+				"libspoton_save_url() failure (%1).").
+			arg(libspoton_strerror(err)));
+    }
+  else
+    dmisc::logError(QString("dspoton::share(): "
+			    "libspoton_init_a() failure (%1).").
+		    arg(libspoton_strerror(err)));
 
   libspoton_close(&libspotonHandle);
 #else
@@ -150,9 +161,18 @@ void dspoton::clear(void)
 			 16384);
 
   if(err == LIBSPOTON_ERROR_NONE)
-    err = libspoton_delete_urls
-      (&libspotonHandle,
-       dmisc::passphraseWasAuthenticated() && dmisc::s_crypt);
+    {
+      if((err = libspoton_delete_urls(&libspotonHandle,
+				      dmisc::passphraseWasAuthenticated() &&
+				      dmisc::s_crypt)) != LIBSPOTON_ERROR_NONE)
+	dmisc::logError(QString("dspoton::clear(): "
+				"libspoton_delete_urls() failure (%1).").
+			arg(libspoton_strerror(err)));
+    }
+  else
+    dmisc::logError(QString("dspoton::clear(): "
+			    "libspoton_init_a() failure (%1).").
+		    arg(libspoton_strerror(err)));
 
   libspoton_close(&libspotonHandle);
 #endif

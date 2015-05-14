@@ -154,9 +154,9 @@ void dmisc::initializeCrypt(void)
 #endif
 #else
       logError
-	(QObject::tr("dmisc::initializeCrypt(): Using gcry_threads_qt's "
-		     "address as the second parameter to "
-		     "gcry_control()."));
+	("dmisc::initializeCrypt(): Using gcry_threads_qt's "
+	 "address as the second parameter to "
+	 "gcry_control().");
       gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_qt, 0);
 #endif
     }
@@ -166,9 +166,9 @@ void dmisc::initializeCrypt(void)
       gcry_control(GCRYCTL_ENABLE_M_GUARD);
 
       if(!gcry_check_version(GCRYPT_VERSION))
-	logError(QObject::tr("dmisc::initializeCrypt(): "
-			     "gcry_check_version() failure. Secure memory "
-			     "was not explicitly initialized!"));
+	logError("dmisc::initializeCrypt(): "
+		 "gcry_check_version() failure. Secure memory "
+		 "was not explicitly initialized!");
       else
 	{
 	  gcry_control(GCRYCTL_SUSPEND_SECMEM_WARN);
@@ -178,8 +178,8 @@ void dmisc::initializeCrypt(void)
 	}
     }
   else
-    logError(QObject::tr("dmisc::initializeCrypt(): It appears that "
-			 "the gcrypt library is already initialized."));
+    logError("dmisc::initializeCrypt(): It appears that "
+	     "the gcrypt library is already initialized.");
 }
 
 void dmisc::setCipherPassphrase(const QString &passphrase,
@@ -757,21 +757,21 @@ QByteArray dmisc::passphraseHash(const QString &passphrase,
 	}
       else
 	{
-	  logError(QObject::tr("dmisc::passphraseHash(): "
-			       "gcry_md_get_algo_dlen() "
-			       "returned zero. Using "
-			       "Qt's SHA3-512 "
-			       "implementation."));
+	  logError("dmisc::passphraseHash(): "
+		   "gcry_md_get_algo_dlen() "
+		   "returned zero. Using "
+		   "Qt's SHA3-512 "
+		   "implementation.");
 	  hash = QCryptographicHash::hash(saltedPassphrase,
 					  QCryptographicHash::Sha3_512);
 	}
     }
   else
     {
-      logError(QObject::tr("dmisc::passphraseHash(): Unsupported "
-			   "hash type %1 (%2). Using "
-			   "Qt's SHA3-512 "
-			   "implementation.").arg(hashType).
+      logError(QString("dmisc::passphraseHash(): Unsupported "
+		       "hash type %1 (%2). Using "
+		       "Qt's SHA3-512 "
+		       "implementation.").arg(hashType).
 	       arg(algorithm));
       hash = QCryptographicHash::hash
 	(saltedPassphrase, QCryptographicHash::Sha3_512);

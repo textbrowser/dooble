@@ -105,8 +105,8 @@ dcrypt::dcrypt(dcrypt *other)
 	{
 	  ok = false;
 	  dmisc::logError
-	    (QObject::tr("dcrypt::dcrypt(): "
-			 "gcry_calloc_secure() failure."));
+	    ("dcrypt::dcrypt(): "
+	     "gcry_calloc_secure() failure.");
 	}
 
       if(m_hashKey)
@@ -120,8 +120,8 @@ dcrypt::dcrypt(dcrypt *other)
 	{
 	  ok = false;
 	  dmisc::logError
-	    (QObject::tr("dcrypt::dcrypt(): "
-			 "gcry_calloc_secure() failure."));
+	    ("dcrypt::dcrypt(): "
+	     "gcry_calloc_secure() failure.");
 	}
 
       setSalt(other->m_salt);
@@ -135,8 +135,8 @@ dcrypt::dcrypt(dcrypt *other)
 	      {
 		ok = false;
 		dmisc::logError
-		  (QObject::tr("dcrypt::dcrypt(): "
-			       "gcry_cipher_setkey() failure."));
+		  ("dcrypt::dcrypt(): "
+		   "gcry_cipher_setkey() failure.");
 	      }
 	}
 
@@ -199,8 +199,8 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
       if(ok)
 	*ok = false;
 
-      dmisc::logError(QObject::tr("dcrypt::decodedString(): "
-				  "setInitializationVector() failure."));
+      dmisc::logError("dcrypt::decodedString(): "
+		      "setInitializationVector() failure.");
       return byteArray;
     }
   else
@@ -258,8 +258,8 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 	  QByteArray buffer(64, '0');
 
 	  gpg_strerror_r(err, buffer.data(), buffer.length());
-	  dmisc::logError(QObject::tr("dcrypt::decodedString(): "
-				      "gcry_cipher_decrypt() failure (%1).").
+	  dmisc::logError(QString("dcrypt::decodedString(): "
+				  "gcry_cipher_decrypt() failure (%1).").
 			  arg(buffer.constData()));
 	  return byteArray;
 	}
@@ -294,8 +294,8 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
       if(ok)
 	*ok = false;
 
-      dmisc::logError(QObject::tr("dcrypt::encodedString(): "
-				  "setInitializationVector() failure."));
+      dmisc::logError("dcrypt::encodedString(): "
+		      "setInitializationVector() failure.");
       return byteArray;
     }
   else
@@ -307,9 +307,9 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	  if(ok)
 	    *ok = false;
 
-	  dmisc::logError(QObject::tr("dcrypt::encodedString(): "
-				      "gcry_cipher_get_algo_blklen() "
-				      "failed."));
+	  dmisc::logError("dcrypt::encodedString(): "
+			  "gcry_cipher_get_algo_blklen() "
+			  "failed.");
 	  return byteArray;
 	}
 
@@ -335,8 +335,8 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	    *ok = false;
 
 	  dmisc::logError
-	    (QObject::tr("dcrypt::encodedString(): "
-			 "QDataStream error."));
+	    ("dcrypt::encodedString(): "
+	     "QDataStream error.");
 	  return byteArray;
 	}
 
@@ -363,8 +363,8 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	  QByteArray buffer(64, '0');
 
 	  gpg_strerror_r(err, buffer.data(), buffer.length());
-	  dmisc::logError(QObject::tr("dcrypt::encodedString(): "
-				      "gcry_cipher_encrypt() failure (%1).").
+	  dmisc::logError(QString("dcrypt::encodedString(): "
+				  "gcry_cipher_encrypt() failure (%1).").
 			  arg(buffer.constData()));
 	  return byteArray;
 	}
@@ -453,12 +453,12 @@ bool dcrypt::openCipherHandle(void)
 			     GCRY_CIPHER_CBC_CTS)) != 0 || !m_cipherHandle)
     {
       if(err != 0)
-	dmisc::logError(QObject::tr("dcrypt::openCipherHandle(): "
-				    "gcry_cipher_open() failure (%1).").
+	dmisc::logError(QString("dcrypt::openCipherHandle(): "
+				"gcry_cipher_open() failure (%1).").
 			arg(gcry_strerror(err)));
       else
-	dmisc::logError(QObject::tr("dcrypt::openCipherHandle(): "
-				    "gcry_cipher_open() failure."));
+	dmisc::logError("dcrypt::openCipherHandle(): "
+			"gcry_cipher_open() failure.");
 
       return false;
     }
@@ -510,9 +510,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       err = GPG_ERR_INV_KEYLEN;
       dmisc::logError
-	(QObject::tr("dcrypt::setCipherPassphrase(): "
-		     "gcry_cipher_get_algo_keylen() "
-		     "failed."));
+	("dcrypt::setCipherPassphrase(): "
+	 "gcry_cipher_get_algo_keylen() "
+	 "failed.");
       goto error_label;
     }
 
@@ -522,9 +522,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       err = GPG_ERR_INV_KEYLEN;
       dmisc::logError
-	(QObject::tr("dcrypt::setCipherPassphrase(): "
-		     "gcry_md_get_algo_dlen() "
-		     "failed."));
+	("dcrypt::setCipherPassphrase(): "
+	 "gcry_md_get_algo_dlen() "
+	 "failed.");
       goto error_label;
     }
 
@@ -585,9 +585,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	    {
 	      err = GPG_ERR_INV_LENGTH;
 	      dmisc::logError
-		(QObject::tr("dcrypt::setCipherPassphrase(): "
-			     "gcry_md_get_algo_dlen() "
-			     "failed."));
+		("dcrypt::setCipherPassphrase(): "
+		 "gcry_md_get_algo_dlen() "
+		 "failed.");
 	      goto error_label;
 	    }
 
@@ -598,8 +598,8 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 					   m_encryptionKeyLength)) != 0)
 		{
 		  dmisc::logError
-		    (QObject::tr("dcrypt::setCipherPassphrase(): "
-				 "gcry_cipher_setkey() failure (%1).").
+		    (QString("dcrypt::setCipherPassphrase(): "
+			     "gcry_cipher_setkey() failure (%1).").
 		     arg(gcry_strerror(err)));
 		  goto error_label;
 		}
@@ -607,16 +607,16 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	  else
 	    {
 	      dmisc::logError
-		(QObject::tr("dcrypt::setCipherPassphrase(): "
-			     "m_cipherHandle is 0."));
+		("dcrypt::setCipherPassphrase(): "
+		 "m_cipherHandle is 0.");
 	      goto error_label;
 	    }
 	}
       else
 	{
 	  dmisc::logError
-	    (QObject::tr("dcrypt::setCipherPassphrase(): "
-			 "gcry_kdf_derive() failure (%1).").
+	    (QString("dcrypt::setCipherPassphrase(): "
+		     "gcry_kdf_derive() failure (%1).").
 	     arg(gcry_strerror(err)));
 	  goto error_label;
 	}
@@ -625,16 +625,16 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       err = GPG_ERR_ENOMEM;
       dmisc::logError
-	(QObject::tr("dcrypt::setCipherPassphrase(): "
-		     "gcry_calloc_secure() "
-		     "failed."));
+	("dcrypt::setCipherPassphrase(): "
+	 "gcry_calloc_secure() "
+	 "failed.");
       goto error_label;
     }
 #else
   dmisc::logError
-    (QObject::tr("dcrypt::setCipherPassphrase(): "
-		 "gcry_kdf_derive() is not defined. "
-		 "Using the provided passphrase's hash as the keys."));
+    ("dcrypt::setCipherPassphrase(): "
+     "gcry_kdf_derive() is not defined. "
+     "Using the provided passphrase's hash as the keys.");
 
   if(m_encryptionKey)
     {
@@ -654,9 +654,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       err = GPG_ERR_INV_KEYLEN;
       dmisc::logError
-	(QObject::tr("dcrypt::setCipherPassphrase(): "
-		     "gcry_cipher_get_algo_keylen() "
-		     "failed."));
+	("dcrypt::setCipherPassphrase(): "
+	 "gcry_cipher_get_algo_keylen() "
+	 "failed.");
       goto error_label;
     }
 
@@ -666,9 +666,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       err = GPG_ERR_INV_KEYLEN;
       dmisc::logError
-	(QObject::tr("dcrypt::setCipherPassphrase(): "
-		     "gcry_md_get_algo_dlen() "
-		     "failed."));
+	("dcrypt::setCipherPassphrase(): "
+	 "gcry_md_get_algo_dlen() "
+	 "failed.");
       goto error_label;
     }
 
@@ -720,8 +720,8 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 				     m_encryptionKeyLength)) != 0)
 		{
 		  dmisc::logError
-		    (QObject::tr("dcrypt::setCipherPassphrase(): "
-				 "gcry_cipher_setkey() failure (%1).").
+		    (QString("dcrypt::setCipherPassphrase(): "
+			     "gcry_cipher_setkey() failure (%1).").
 		     arg(gcry_strerror(err)));
 		  goto error_label;
 		}
@@ -729,8 +729,8 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	  else
 	    {
 	      dmisc::logError
-		(QObject::tr("dcrypt::setCipherPassphrase(): "
-			     "m_cipherHandle is 0."));
+		("dcrypt::setCipherPassphrase(): "
+		 "m_cipherHandle is 0.");
 	      goto error_label;
 	    }
 	}
@@ -738,9 +738,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	{
 	  err = GPG_ERR_INV_LENGTH;
 	  dmisc::logError
-	    (QObject::tr("dcrypt::setCipherPassphrase(): "
-			 "gcry_md_get_algo_dlen() "
-			 "failed."));
+	    ("dcrypt::setCipherPassphrase(): "
+	     "gcry_md_get_algo_dlen() "
+	     "failed.");
 	  goto error_label;
 	}
     }
@@ -748,9 +748,9 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       err = GPG_ERR_ENOMEM;
       dmisc::logError
-	(QObject::tr("dcrypt::setCipherPassphrase(): "
-		     "gcry_calloc_secure() "
-		     "failed."));
+	("dcrypt::setCipherPassphrase(): "
+	 "gcry_calloc_secure() "
+	 "failed.");
       goto error_label;
     }
 #endif
@@ -815,9 +815,9 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
     {
       err = GPG_ERR_INV_LENGTH;
       dmisc::logError
-	(QObject::tr("dcrypt::setInitializationVector(): "
-		     "gcry_cipher_get_algo_blklen() "
-		     "failed."));
+	("dcrypt::setInitializationVector(): "
+	 "gcry_cipher_get_algo_blklen() "
+	 "failed.");
     }
   else
     {
@@ -850,8 +850,8 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 
 	      gpg_strerror_r(err, buffer.data(), buffer.length());
 	      dmisc::logError
-		(QObject::tr("dcrypt::setInitializationVector(): "
-			     "gcry_cipher_setiv() failure (%1).").
+		(QString("dcrypt::setInitializationVector(): "
+			 "gcry_cipher_setiv() failure (%1).").
 		 arg(buffer.constData()));
 	    }
 
@@ -861,9 +861,9 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 	{
 	  err = GPG_ERR_ENOMEM;
 	  dmisc::logError
-	    (QObject::tr("dcrypt::setInitializationVector(): "
-			 "gcry_calloc() "
-			 "failed."));
+	    ("dcrypt::setInitializationVector(): "
+	     "gcry_calloc() "
+	     "failed.");
 	}
     }
 
@@ -956,9 +956,9 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
       if(ok)
 	*ok = false;
 
-      dmisc::logError(QObject::tr("dcrypt::keyedHash(): "
-				  "m_hashKey or m_hashKeyLength "
-				  "is peculiar."));
+      dmisc::logError("dcrypt::keyedHash(): "
+		      "m_hashKey or m_hashKeyLength "
+		      "is peculiar.");
       goto done_label;
     }
 
@@ -970,12 +970,12 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
 	*ok = false;
 
       if(err != 0)
-	dmisc::logError(QObject::tr("dcrypt::keyedHash(): "
-				    "gcry_md_open() failure (%1).").
+	dmisc::logError(QString("dcrypt::keyedHash(): "
+				"gcry_md_open() failure (%1).").
 			arg(gcry_strerror(err)));
       else
-	dmisc::logError(QObject::tr("dcrypt::keyedHash(): "
-				    "gcry_md_open() failure."));
+	dmisc::logError("dcrypt::keyedHash(): "
+			"gcry_md_open() failure.");
     }
   else
     {
@@ -986,8 +986,8 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
 	  if(ok)
 	    *ok = false;
 
-	  dmisc::logError(QObject::tr("dcrypt::keyedHash(): "
-				      "gcry_md_setkey() failure (%1).").
+	  dmisc::logError(QString("dcrypt::keyedHash(): "
+				  "gcry_md_setkey() failure (%1).").
 			  arg(gcry_strerror(err)));
 	}
       else
@@ -1019,9 +1019,9 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
 		  if(ok)
 		    *ok = false;
 
-		  dmisc::logError(QObject::tr("dcrypt::keyedHash(): "
-					      "gcry_md_get_algo_dlen() "
-					      "failed."));
+		  dmisc::logError("dcrypt::keyedHash(): "
+				  "gcry_md_get_algo_dlen() "
+				  "failed.");
 		}
 	    }
 	  else
@@ -1029,8 +1029,8 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
 	      if(ok)
 		*ok = false;
 
-	      dmisc::logError(QObject::tr("dcrypt::keyedHash(): "
-					  "gcry_md_read() failed."));
+	      dmisc::logError("dcrypt::keyedHash(): "
+			      "gcry_md_read() failed.");
 	    }
 	}
     }

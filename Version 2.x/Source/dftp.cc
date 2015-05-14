@@ -258,9 +258,9 @@ void dftp::slotCommandReadyRead(void)
 
 	  if(pattern.indexIn(bytes) == -1)
 	    {
-	      dmisc::logError(tr("dftp::slotReadyRead(): "
-				 "Invalid IP address. "
-				 "Aborting connection."));
+	      dmisc::logError("dftp::slotReadyRead(): "
+			      "Invalid IP address. "
+			      "Aborting connection.");
 	      abort();
 	    }
 	  else
