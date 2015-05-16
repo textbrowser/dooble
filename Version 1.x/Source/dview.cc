@@ -1384,11 +1384,6 @@ QString dview::description(void) const
 {
   QString str("");
 
-  /*
-  ** Simple and supported method for retrieving a Web page's
-  ** description. Parsing? Dooble is intelligent.
-  */
-
   if(webView == currentWidget())
     {
       if(webView->page())
@@ -1401,16 +1396,24 @@ QString dview::description(void) const
 	      QMultiMap<QString, QString> map(frame->QWebFrame::metaData());
 
 	      if(map.contains("description"))
-		list = map.values("description");
-	      else if(map.contains("Description"))
-		list = map.values("Description");
+		list += map.values("description");
+
+	      if(map.contains("Description"))
+		list += map.values("Description");
+
+	      if(map.contains("keywords"))
+		list += map.values("keywords");
+
+	      if(map.contains("Keywords"))
+		list += map.values("Keywords");
 
 	      while(!list.isEmpty())
 		str += list.takeFirst();
 	    }
 	}
     }
-  else
+
+  if(str.isEmpty())
     str = webviewUrl().toString(QUrl::StripTrailingSlash);
 
   return str;

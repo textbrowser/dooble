@@ -1076,17 +1076,13 @@ QString dview::description(void) const
 {
   QString str("");
 
-  /*
-  ** Simple and supported method for retrieving a Web page's
-  ** description. Parsing? Dooble is intelligent.
-  */
-
   if(webView == currentWidget())
     {
       if(webView->page())
 	str = webviewUrl().toString(QUrl::StripTrailingSlash);
     }
-  else
+
+  if(str.isEmpty())
     str = webviewUrl().toString(QUrl::StripTrailingSlash);
 
   return str;
