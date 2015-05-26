@@ -26,6 +26,7 @@
 */
 
 #include <QDialog>
+#include <QSslConfiguration>
 #include <QWebFrame>
 
 #include "dftp.h"
@@ -530,7 +531,7 @@ QNetworkReply *dnetworkaccessmanager::createRequest
   if(dooble::s_settings.value("settingsWindow/automaticallyLoadImages",
 			      true).toBool())
     {
-      QString path(req.url().path().toLower().trimmed());
+      QString path(request.url().path().toLower().trimmed());
 
       if(path.endsWith(".bmp") ||
 	 path.endsWith(".gif") ||
@@ -544,24 +545,24 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 
 	  bool userRequested = false;
 	  QWebFrame *frame = qobject_cast<QWebFrame *>
-	    (req.originatingObject());
+	    (request.originatingObject());
 
 	  if(frame)
 	    {
 	      dwebpage *page = qobject_cast<dwebpage *> (frame->parent());
 
 	      if(page &&
-		 req.url().toString(QUrl::StripTrailingSlash) ==
+		 request.url().toString(QUrl::StripTrailingSlash) ==
 		 page->mainFrame()->requestedUrl().
 		 toString(QUrl::StripTrailingSlash))
 		userRequested = true;
 	    }
 
 	  if(!userRequested)
-	    if(dooble::s_imageBlockWindow->allowed(req.url().host()))
+	    if(dooble::s_imageBlockWindow->allowed(request.url().host()))
 	      {
-		emit exceptionRaised(dooble::s_adBlockWindow, req.url());
-		emit loadImageRequest(req.url().host(), req.url(),
+		emit exceptionRaised(dooble::s_adBlockWindow, request.url());
+		emit loadImageRequest(request.url().host(), request.url(),
 				      QDateTime::currentDateTime());
 
 		QPointer<QNetworkReply> reply =
@@ -574,7 +575,7 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	}
     }
 
-  QString scheme(req.url().scheme().toLower().trimmed());
+  QString scheme(request.url().scheme().toLower().trimmed());
 
   if(scheme.startsWith("dooble-ssl"))
     {
@@ -604,7 +605,8 @@ QNetworkReply *dnetworkaccessmanager::createRequest
     }
   else if(scheme == "ftp")
     {
-      QPointer<dnetworkftpreply> reply = new dnetworkftpreply(this, req.url());
+      QPointer<dnetworkftpreply> reply = new dnetworkftpreply
+	(this, request.url());
 
       connect(reply,
 	      SIGNAL(finished(dnetworkftpreply *)),
@@ -622,9 +624,10 @@ QNetworkReply *dnetworkaccessmanager::createRequest
       setLinkClicked(QUrl());
       return reply;
     }
-  else if(QFileInfo(req.url().toLocalFile()).isDir())
+  else if(QFileInfo(request.url().toLocalFile()).isDir())
     {
-      QPointer<dnetworkdirreply> reply = new dnetworkdirreply(this, req.url());
+      QPointer<dnetworkdirreply> reply = new dnetworkdirreply
+	(this, request.url());
 
       connect(reply,
 	      SIGNAL(finished(dnetworkdirreply *)),
@@ -637,6 +640,16 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 
   if(scheme == "http" || scheme == "https")
     {
+      if(scheme == "https")
+	if(dooble::s_sslCiphersWindow)
+	  {
+	    QSslConfiguration configuration = request.sslConfiguration();
+
+	    configuration.setProtocol
+	      (dooble::s_sslCiphersWindow->protocol());
+	    request.setSslConfiguration(configuration);
+	  }
+
       if(op == QNetworkAccessManager::PostOperation)
 	if(request.header(QNetworkRequest::ContentTypeHeader).isNull())
 	  request.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -660,12 +673,12 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	{
 	  bool block = false;
 
-	  if(dmisc::hostblocked(req.url().host()))
+	  if(dmisc::hostblocked(request.url().host()))
 	    block = true;
 	  else
 	    {
 	      QWebFrame *frame = qobject_cast<QWebFrame *>
-		(req.originatingObject());
+		(request.originatingObject());
 
 	      if(frame && !qobject_cast<dwebpage *> (frame->parent()))
 		{
@@ -676,12 +689,12 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 		  ** referer.
 		  */
 
-		  QString domain1(req.url().host());
+		  QString domain1(request.url().host());
 
 		  if(!dooble::s_adBlockWindow->allowed(domain1))
 		    {
 		      QString domain2
-			(QUrl::fromUserInput(req.rawHeader("Referer")).
+			(QUrl::fromUserInput(request.rawHeader("Referer")).
 			 host());
 
 		      if(!domain2.isEmpty())
@@ -713,13 +726,13 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 
 	  if(block)
 	    {
-	      QUrl url(QUrl::fromUserInput(req.rawHeader("Referer")));
+	      QUrl url(QUrl::fromUserInput(request.rawHeader("Referer")));
 
 	      url = QUrl::fromEncoded
 		(url.toEncoded(QUrl::StripTrailingSlash));
-	      emit exceptionRaised(dooble::s_adBlockWindow, req.url());
+	      emit exceptionRaised(dooble::s_adBlockWindow, request.url());
 	      emit blockThirdPartyHost
-		(req.url().host(), url, QDateTime::currentDateTime());
+		(request.url().host(), url, QDateTime::currentDateTime());
 
 	      QPointer<dnetworkblockreply> reply = new
 		dnetworkblockreply(this, req);
@@ -736,13 +749,14 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 
       if(dooble::s_settings.value("settingsWindow/suppressHttpReferrer1",
 				  false).toBool())
-	if(!dooble::s_httpReferrerWindow->allowed(req.url().host()))
+	if(!dooble::s_httpReferrerWindow->allowed(request.url().host()))
 	  {
-	    emit exceptionRaised(dooble::s_httpReferrerWindow, req.url());
-	    emit suppressHttpReferrer(req.url().host(), req.url(),
+	    emit exceptionRaised
+	      (dooble::s_httpReferrerWindow, request.url());
+	    emit suppressHttpReferrer(request.url().host(), request.url(),
 				      QDateTime::currentDateTime());
 
-	    QUrl url(QUrl::fromUserInput(req.url().host()));
+	    QUrl url(QUrl::fromUserInput(request.url().host()));
 
 	    if(!url.isEmpty() && url.isValid())
 	      {
@@ -757,10 +771,10 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	  }
 
       if(dooble::s_settings.value("settingsWindow/doNotTrack", false).toBool())
-	if(!dooble::s_dntWindow->allowed(req.url().host()))
+	if(!dooble::s_dntWindow->allowed(request.url().host()))
 	  {
-	    emit exceptionRaised(dooble::s_dntWindow, req.url());
-	    emit doNotTrack(req.url().host(), req.url(),
+	    emit exceptionRaised(dooble::s_dntWindow, request.url());
+	    emit doNotTrack(request.url().host(), request.url(),
 			    QDateTime::currentDateTime());
 	    request.setRawHeader("DNT", "1");
 	  }

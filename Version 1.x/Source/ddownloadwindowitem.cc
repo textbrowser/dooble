@@ -34,6 +34,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSettings>
+#include <QSslConfiguration>
 
 #include "ddownloadwindowitem.h"
 #include "dftp.h"
@@ -287,6 +288,17 @@ void ddownloadwindowitem::downloadUrl
 	     dooble::s_settings.value("settingsWindow/speedy", false).
 	     toBool());
 #endif
+
+	  if(m_url.scheme().toLower().trimmed() == "https")
+	    if(dooble::s_sslCiphersWindow)
+	      {
+		QSslConfiguration configuration = request.sslConfiguration();
+
+		configuration.setProtocol
+		  (dooble::s_sslCiphersWindow->protocol());
+		request.setSslConfiguration(configuration);
+	      }
+
 	  reply = m_networkAccessManager->get(request);
 	  reply->setParent(this);
 	  reply->ignoreSslErrors();
@@ -694,6 +706,16 @@ void ddownloadwindowitem::slotPauseDownload(void)
 	     dooble::s_settings.value("settingsWindow/speedy", false).
 	     toBool());
 #endif
+
+	  if(m_url.scheme().toLower().trimmed() == "https")
+	    if(dooble::s_sslCiphersWindow)
+	      {
+		QSslConfiguration configuration = request.sslConfiguration();
+
+		configuration.setProtocol
+		  (dooble::s_sslCiphersWindow->protocol());
+		request.setSslConfiguration(configuration);
+	      }
 
 	  QFile *file = findChild<QFile *> ();
 

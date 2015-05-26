@@ -29,6 +29,7 @@
 #define _dsslcipherswindow_h_
 
 #include <QMainWindow>
+#include <QSsl>
 
 #include "ui_sslciphers.h"
 
@@ -41,6 +42,7 @@ class dsslcipherswindow: public QMainWindow
  public:
   dsslcipherswindow(void);
   ~dsslcipherswindow();
+  QSsl::SslProtocol protocol(void) const;
   void closeEvent(QCloseEvent *event);
   void populate(void);
 

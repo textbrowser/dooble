@@ -29,6 +29,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QSettings>
+#include <QSslConfiguration>
 #include <QUrl>
 #include <QWebElementCollection>
 #include <QWebFrame>
@@ -579,6 +580,17 @@ void dwebpage::downloadFavicon(const QUrl &faviconUrl, const QUrl &url)
 	QNetworkRequest request(faviconUrl);
 
 	request.setAttribute(QNetworkRequest::User, "dooble-favicon");
+
+	if(faviconUrl.scheme().toLower().trimmed() == "https")
+	  if(dooble::s_sslCiphersWindow)
+	    {
+	      QSslConfiguration configuration = request.sslConfiguration();
+
+	      configuration.setProtocol
+		(dooble::s_sslCiphersWindow->protocol());
+	      request.setSslConfiguration(configuration);
+	    }
+
 	m_networkAccessManager->setProxy(dmisc::proxyByUrl(faviconUrl));
 	reply = m_networkAccessManager->get(request);
 	m_networkAccessManager->setProxy(proxy);
@@ -627,6 +639,18 @@ void dwebpage::slotIconDownloadFinished(void)
 	      QNetworkRequest request(url);
 
 	      request.setAttribute(QNetworkRequest::User, "dooble-favicon");
+
+	      if(url.scheme().toLower().trimmed() == "https")
+		if(dooble::s_sslCiphersWindow)
+		  {
+		    QSslConfiguration configuration =
+		      request.sslConfiguration();
+
+		    configuration.setProtocol
+		      (dooble::s_sslCiphersWindow->protocol());
+		    request.setSslConfiguration(configuration);
+		  }
+
 	      m_networkAccessManager->setProxy(dmisc::proxyByUrl(url));
 	      r = m_networkAccessManager->get(request);
 	      m_networkAccessManager->setProxy(proxy);
