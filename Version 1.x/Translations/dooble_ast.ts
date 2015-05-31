@@ -59,67 +59,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::decodedString(): setInitializationVector() failure.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::decodedString(): gcry_cipher_decrypt() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::encodedString(): setInitializationVector() failure.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::encodedString(): gcry_cipher_encrypt() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): gcry_cipher_setkey() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setInitializationVector(): gcry_cipher_setiv() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 KiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 MiB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::dcrypt(): gcry_cipher_setkey() failure.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::dcrypt(): gcry_calloc_secure() failure.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): m_cipherHandle is 0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -135,75 +79,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dcrypt::encodedString(): QDataStream error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::keyedHash(): gcry_md_open() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::keyedHash(): gcry_md_open() failure.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::keyedHash(): gcry_md_setkey() failure (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the keys.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::setInitializationVector(): gcry_calloc() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::keyedHash(): m_hashKey or m_hashKeyLength is peculiar.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::keyedHash(): gcry_md_get_algo_dlen() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dcrypt::keyedHash(): gcry_md_read() failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dmisc::initializeCrypt(): gcry_check_version() failure. Secure memory was not explicitly initialized!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,6 +234,10 @@
         <source>Error Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Spot-On Shared Links</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>cookieWindow</name>
@@ -462,10 +342,6 @@
     </message>
     <message>
         <source>&amp;Spot-On Share</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton is 0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -826,13 +702,6 @@
     </message>
 </context>
 <context>
-    <name>dftp</name>
-    <message>
-        <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>dftpbrowser</name>
     <message>
         <source>Name</source>
@@ -970,10 +839,6 @@
     </message>
     <message>
         <source>%1 Item(s) / %2 Item(s) Selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1187,10 +1052,6 @@
     </message>
     <message>
         <source>&amp;Recently-Closed Tabs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1603,10 +1464,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>durlwidget::durlwidget(): dooble::s_spoton is 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Submit URL to Spot-On.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1746,14 +1603,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dooble has detected a stagnant JavaScript script. Should the script be terminated?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dwebpage::slotFinished(): The URL %1 generated an error (%2:%3).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dwebpage::slotFinished(): The URL %1 generated an error (HTTP %2).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1984,7 +1833,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="obsolete">Ctrl+Q</translation>
+        <translation type="unfinished">Ctrl+Q</translation>
     </message>
     <message>
         <source>New &amp;Tab</source>
@@ -2388,6 +2237,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Home Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear Spot-On Shared Links</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
