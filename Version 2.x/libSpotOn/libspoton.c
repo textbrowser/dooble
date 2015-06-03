@@ -173,7 +173,7 @@ libspoton_error_t libspoton_delete_urls(libspoton_handle_t *libspotonHandle,
 
   rv = sqlite3_step(stmt);
 
-  if(!(rv == 0 || rv == SQLITE_DONE))
+  if(!(rv == SQLITE_OK || rv == SQLITE_DONE))
     {
       rerr = LIBSPOTON_ERROR_SQLITE_STEP;
       goto error_label;
@@ -225,7 +225,7 @@ libspoton_error_t libspoton_deregister_kernel
 
   rv = sqlite3_step(stmt);
 
-  if(!(rv == 0 || rv == SQLITE_DONE))
+  if(!(rv == SQLITE_OK || rv == SQLITE_DONE))
     {
       rerr = LIBSPOTON_ERROR_SQLITE_STEP;
       goto error_label;
@@ -511,7 +511,7 @@ libspoton_error_t libspoton_register_kernel
 
   rv = sqlite3_step(stmt);
 
-  if(!(rv == 0 || rv == SQLITE_DONE))
+  if(!(rv == SQLITE_OK || rv == SQLITE_DONE))
     {
       rerr = LIBSPOTON_ERROR_SQLITE_STEP;
       goto error_label;
@@ -811,7 +811,7 @@ libspoton_error_t libspoton_save_url(const char *url,
 
   rv = sqlite3_step(stmt);
 
-  if(!(rv == 0 || rv == SQLITE_DONE))
+  if(!(rv == SQLITE_OK || rv == SQLITE_DONE))
     {
       rerr = LIBSPOTON_ERROR_SQLITE_STEP;
       goto error_label;
@@ -854,7 +854,7 @@ pid_t libspoton_registered_kernel_pid(libspoton_handle_t *libspotonHandle,
 	{
 	  if(rv == SQLITE_BUSY || rv == SQLITE_LOCKED)
 	    *error = LIBSPOTON_ERROR_SQLITE_DATABASE_LOCKED;
-	  else if(!(rv == 0 || rv == SQLITE_DONE))
+	  else if(!(rv == SQLITE_OK || rv == SQLITE_DONE))
 	    *error = LIBSPOTON_ERROR_SQLITE_STEP;
 	}
     }
