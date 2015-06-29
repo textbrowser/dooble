@@ -78,7 +78,7 @@ int main(void)
 			    &libspotonHandle, 65536)) !=
      LIBSPOTON_ERROR_NONE)
     printf("libspoton_init_a() error (%s).\n", libspoton_strerror(rc));
-  
+
   description = "knowledge, science";
   title = "Wikipedia";
   url = "http://www.wikipedia.org";

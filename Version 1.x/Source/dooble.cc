@@ -7636,14 +7636,9 @@ void dooble::slotIconToolButtonClicked(void)
 
   if(p)
     {
-      QString text("");
-      QStringList list(p->url().host().split('.'));
+      QString text(p->url().host().trimmed());
 
-      text.append(list.value(list.size() - 2));
-      text.append(".");
-      text.append(list.value(list.size() - 1));
-
-      if(text.length() > 1)
+      if(!text.isEmpty())
 	menu.addAction(tr("View %1 &Cookies").arg(text), this,
 		       SLOT(slotViewSiteCookies(void)));
       else
@@ -7664,14 +7659,9 @@ void dooble::slotViewSiteCookies(void)
 
   if(p)
     {
-      QString text("");
-      QStringList list(p->url().host().split('.'));
+      QString text(p->url().host().trimmed());
 
-      text.append(list.value(list.size() - 2));
-      text.append(".");
-      text.append(list.value(list.size() - 1));
-
-      if(text.length() > 1)
+      if(!text.isEmpty())
 	s_cookieWindow->find(text);
     }
 
