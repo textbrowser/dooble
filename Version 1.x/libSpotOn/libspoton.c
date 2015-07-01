@@ -599,7 +599,7 @@ libspoton_error_t libspoton_save_url(const char *url,
 		    "url BLOB PRIMARY KEY NOT NULL, "
 		    "title BLOB, "
 		    "description BLOB, "
-		    "encrypted INTEGER NOT NULL)",
+		    "encrypted INTEGER NOT NULL DEFAULT 0)",
 		    0,
 		    0,
 		    0);
