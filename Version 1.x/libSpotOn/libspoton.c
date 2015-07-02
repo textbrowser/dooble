@@ -132,6 +132,45 @@ const char *libspoton_strerror(const libspoton_error_t error)
     return libspoton_error_strings[error];
 }
 
+libspoton_error_t libspoton_create_urls_table
+(libspoton_handle_t *libspotonHandle)
+{
+  int rv = 0;
+  libspoton_error_t rerr = LIBSPOTON_ERROR_NONE;
+
+  if(!libspotonHandle)
+    {
+      rerr = LIBSPOTON_ERROR_NULL_LIBSPOTON_HANDLE;
+      goto error_label;
+    }
+  else if(!libspotonHandle->m_sqliteHandle)
+    {
+      rerr = LIBSPOTON_ERROR_NOT_CONNECTED_TO_SQLITE_DATABASE;
+      goto error_label;
+    }
+
+  pthread_mutex_lock(&sqlite_mutex);
+  rv = sqlite3_exec(libspotonHandle->m_sqliteHandle,
+		    "CREATE TABLE IF NOT EXISTS urls ("
+		    "url BLOB PRIMARY KEY NOT NULL, "
+		    "title BLOB, "
+		    "description BLOB, "
+		    "encrypted INTEGER NOT NULL DEFAULT 0)",
+		    0,
+		    0,
+		    0);
+  pthread_mutex_unlock(&sqlite_mutex);
+
+  if(rv != SQLITE_OK)
+    {
+      rerr = LIBSPOTON_ERROR_SQLITE_CREATE_URLS_TABLE;
+      goto error_label;
+    }
+
+ error_label:
+  return rerr;
+}
+
 libspoton_error_t libspoton_delete_urls(libspoton_handle_t *libspotonHandle,
 					const int encrypted)
 {
@@ -593,17 +632,7 @@ libspoton_error_t libspoton_save_url(const char *url,
 	goto error_label;
       }
 
-  pthread_mutex_lock(&sqlite_mutex);
-  rv = sqlite3_exec(libspotonHandle->m_sqliteHandle,
-		    "CREATE TABLE IF NOT EXISTS urls ("
-		    "url BLOB PRIMARY KEY NOT NULL, "
-		    "title BLOB, "
-		    "description BLOB, "
-		    "encrypted INTEGER NOT NULL DEFAULT 0)",
-		    0,
-		    0,
-		    0);
-  pthread_mutex_unlock(&sqlite_mutex);
+  rv = libspoton_create_urls_table(libspotonHandle);
 
   if(rv != SQLITE_OK)
     {

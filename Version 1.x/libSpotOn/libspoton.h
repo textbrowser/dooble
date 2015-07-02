@@ -120,6 +120,9 @@ bool libspoton_is_kernel_registered(libspoton_handle_t *libspotonHandle,
 
 const char *libspoton_strerror(const libspoton_error_t error);
 
+libspoton_error_t libspoton_create_urls_table
+(libspoton_handle_t *libspotonHandle);
+
 /*
 ** Delete URLs.
 */
