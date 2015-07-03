@@ -1525,23 +1525,23 @@
         <translation>Gehigarria</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7647"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Ikusi %1 &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7650"/>
-        <location filename="../Source/dooble.cc" line="7654"/>
+        <location filename="../Source/dooble.cc" line="7645"/>
+        <location filename="../Source/dooble.cc" line="7649"/>
         <source>View Site &amp;Cookies</source>
         <translation>Ikusi Gune &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8021"/>
+        <location filename="../Source/dooble.cc" line="8011"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8023"/>
+        <location filename="../Source/dooble.cc" line="8013"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>

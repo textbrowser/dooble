@@ -35,7 +35,7 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 
 ICON		= Icons/AxB/dooble.icns
 INCLUDEPATH	+= . Include Include.osx64
-LIBS		+= -LLibraries.osx64 -LlibSpotOn -lgcrypt -lgpg-error \
+LIBS		+= -L/usr/local/lib -LlibSpotOn -lgcrypt -lgpg-error \
 		   -lspoton -lstdc++.6
 PRE_TARGETDEPS = libspoton.dylib
 
@@ -246,8 +246,6 @@ icons.path		= /Applications/Dooble.d
 icons.files		= Icons
 images.path		= /Applications/Dooble.d
 images.files		= Images
-libmisc_install.path    = .
-libmisc_install.extra   = cp ./Libraries.osx64/*.dylib ./Dooble.app/Contents/Frameworks/.
 libspoton_install.path  = .
 libspoton_install.extra = cp ./libSpotOn/libspoton.dylib ./Dooble.app/Contents/Frameworks/libspoton.dylib && install_name_tool -change /usr/local/lib/libgcrypt.20.dylib @loader_path/libgcrypt.20.dylib ./Dooble.app/Contents/Frameworks/libspoton.dylib && install_name_tool -change ./libSpotOn/libspoton.dylib @executable_path/../Frameworks/libspoton.dylib ./Dooble.app/Contents/MacOS/Dooble
 lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.osx.pro
@@ -267,7 +265,6 @@ translations.files	= Translations/*.qm
 
 INSTALLS	= macdeployqt \
                   preinstall \
-                  libmisc_install \
                   libspoton_install \
                   icons \
                   images \

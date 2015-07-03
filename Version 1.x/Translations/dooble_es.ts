@@ -1364,23 +1364,23 @@
         <translation>Frase de contraseña no ha sido preparada. Favor de visitar el panel Seguridad en Configuraciones y elegir frase de contraseña. Una vez que una frase de contraseña se ha seleccionado, favoritos, cookies, y toda la demás información esencial seguirá disponible en futuras sesiones. Puede deshabilitar este recordatorio vía panel de Seguridad.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7647"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7650"/>
-        <location filename="../Source/dooble.cc" line="7654"/>
+        <location filename="../Source/dooble.cc" line="7645"/>
+        <location filename="../Source/dooble.cc" line="7649"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8021"/>
+        <location filename="../Source/dooble.cc" line="8011"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8023"/>
+        <location filename="../Source/dooble.cc" line="8013"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>

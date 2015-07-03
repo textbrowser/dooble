@@ -1,4 +1,0 @@
-Some of the libraries were prepared via install_name_tool:
-install_name_tool -change /usr/local/lib/libgpg-error.0.dylib @loader_path/libgpg-error.0.dylib libgcrypt.dylib
-install_name_tool -change /usr/local/lib/libgpg-error.0.dylib @loader_path/libgpg-error.0.dylib libgcrypt.20.dylib
-install_name_tool -change /usr/local/lib/libgcc_s.1.dylib @loader_path/libgcc_s.1.dylib libstdc++.6.dylib

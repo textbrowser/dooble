@@ -1468,23 +1468,23 @@
         <translation>Heslo nebylo připraveno. Navštivte, prosím, panel s trezorem v okně s nastavením a zvolte heslo. Jakmile je heslo vybráno, budou záložky, koláčky a všechny ostatní podstatné informace dostupné v budoucích sezeních. Tuto připomínku můžete zakázat v panelu s trezorem.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7647"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Zobrazit &amp;koláčky %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7650"/>
-        <location filename="../Source/dooble.cc" line="7654"/>
+        <location filename="../Source/dooble.cc" line="7645"/>
+        <location filename="../Source/dooble.cc" line="7649"/>
         <source>View Site &amp;Cookies</source>
         <translation>Zobrazit &amp;koláčky stránek</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8021"/>
+        <location filename="../Source/dooble.cc" line="8011"/>
         <source>&amp;Show Menu Bar</source>
         <translation>&amp;Ukázat pruh s hlavní nabídkou</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8023"/>
+        <location filename="../Source/dooble.cc" line="8013"/>
         <source>&amp;Hide Menu Bar</source>
         <translation>&amp;Skrýt pruh s hlavní nabídkou</translation>
     </message>
