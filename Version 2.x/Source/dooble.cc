@@ -340,7 +340,7 @@ int main(int argc, char *argv[])
   */
 
 #ifdef Q_OS_WIN32
-  QByteArray tmp(qgetenv("USERNAME"));
+  QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
   QDir homeDir(QDir::current());
   QFileInfo fileInfo(homeDir.absolutePath());
   QString username(tmp);
@@ -451,7 +451,7 @@ int main(int argc, char *argv[])
   ** Configure translations.
   */
 
-  QByteArray env(qgetenv("DOOBLE_SYSTEM_NAME"));
+  QByteArray env(qgetenv("DOOBLE_SYSTEM_NAME").mid(0, 6));
   QTranslator qtTranslator;
 
   if(env.isEmpty())
