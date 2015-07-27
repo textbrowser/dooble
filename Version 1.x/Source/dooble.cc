@@ -3620,6 +3620,7 @@ void dooble::slotLoadFinished(bool ok)
       if(!ui.findLineEdit->hasFocus() &&
 	 !ui.locationLineEdit->hasFocus() &&
 	 !ui.locationLineEdit->isModified() &&
+	 !ui.searchLineEdit->hasFocus() &&
 	 !p->isDir() &&
 	 !p->url().isEmpty() && p->url().isValid())
 	p->setFocus();

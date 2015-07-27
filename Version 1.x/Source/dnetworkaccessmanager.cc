@@ -408,13 +408,15 @@ dnetworksslerrorreply::dnetworksslerrorreply
   if(url.host().isEmpty())
     m_content.append("<h2>Dooble cannot establish a secure connection to "
 		     "the requested site. Please visit the Allowed "
-		     "SSL Ciphers panel and review your selections.</h2>"
+		     "SSL Ciphers panel and review your selections. "
+		     "You may also wish to prepare exceptions.</h2>"
 		     "</td>");
   else
     m_content.append
       (QString("<h2>Dooble cannot establish a secure connection to "
 	       "%1. Please visit the Allowed SSL Ciphers panel "
-	       "and review your selections.</h2>"
+	       "and review your selections. You may also wish "
+	       "to prepare exceptions.</h2>"
 	       "</td>").arg(url.host()));
 
   m_content.append("</tr></tbody></table>");
@@ -780,8 +782,8 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	  }
     }
 
-  QPointer<QNetworkReply> reply = QNetworkAccessManager::createRequest
-    (op, request, outgoingData);
+  QNetworkReply *reply =
+    QNetworkAccessManager::createRequest(op, request, outgoingData);
 
   setLinkClicked(QUrl());
   return reply;
@@ -883,14 +885,11 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
 
   /*
   ** Deleting the reply object may cause Dooble to terminate if
-  ** a new event loop is initiated. We'll ask Qt to delete the object
-  ** at a later time.
+  ** a new event loop is initiated.
   */
 
   if(this != reply->parent())
     reply->setParent(this);
-
-  QTimer::singleShot(60000, reply, SLOT(deleteLater(void)));
 }
 
 void dnetworkaccessmanager::setLinkClicked(const QUrl &url)

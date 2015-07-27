@@ -56,6 +56,7 @@
 </ol>
 1.54
 <ol>
+<li>Deleting the QNetworkReply object in dnetworkaccessmanager::slotFinished() continues to cause sporadic termination. Removed deleteLater().</li>
 <li>Limit results of qgetenv().</li>
 </ol>
 1.53 (07/04/2015)
