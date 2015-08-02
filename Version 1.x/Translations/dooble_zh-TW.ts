@@ -1436,6 +1436,10 @@ p, li { white-space: pre-wrap; }
         <source>&amp;Private Browsing</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New Pr&amp;ivate Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>durlwidget</name>
@@ -2241,6 +2245,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Clear Spot-On Shared Links</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Pr&amp;ivate Tab</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
