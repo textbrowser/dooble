@@ -1326,8 +1326,12 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  this, SLOT(slotHistorySideBarClosed(void)));
   connect(ui.tabWidget, SIGNAL(currentChanged(int)), this,
 	  SLOT(slotTabSelected(int)));
+  connect(ui.actionNew_Private_Tab, SIGNAL(triggered(void)), this,
+	  SLOT(slotNewPrivateTab(void)));
   connect(ui.actionNew_Tab, SIGNAL(triggered(void)), this,
 	  SLOT(slotNewTab(void)));
+  connect(ui.tabWidget, SIGNAL(createPrivateTab(void)), this,
+	  SLOT(slotNewPrivateTab(void)));
   connect(ui.tabWidget, SIGNAL(createTab(void)), this,
 	  SLOT(slotNewTab(void)));
   connect(ui.tabWidget, SIGNAL(openInNewWindow(const int)), this,
@@ -2052,6 +2056,8 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("mainWindow/homeToolButton").toString()));
   ui.hideFindToolButton->setIcon
     (QIcon(settings.value("mainWindow/hideFindToolButton").toString()));
+  ui.actionNew_Private_Tab->setIcon
+    (QIcon(settings.value("mainWindow/actionNew_Private_Tab").toString()));
   ui.actionNew_Tab->setIcon
     (QIcon(settings.value("mainWindow/actionNew_Tab").toString()));
   ui.actionNew_Window->setIcon
@@ -2716,8 +2722,8 @@ void dooble::slotNewTab(void)
   QUrl url;
   dview *p = 0;
 
-  url = QUrl::fromUserInput(s_settings.value("settingsWindow/homeUrl",
-					     "").toString());
+  url = QUrl::fromUserInput
+    (s_settings.value("settingsWindow/homeUrl", "").toString());
 
   if(url.host().toLower().trimmed().startsWith("gopher"))
     url.setScheme("gopher");
@@ -8041,5 +8047,43 @@ void dooble::slotClearSpotOnSharedLinks(void)
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
       dooble::s_spoton->clear();
       QApplication::restoreOverrideCursor();
+    }
+}
+
+void dooble::slotNewPrivateTab(void)
+{
+  QUrl url;
+  dview *p = 0;
+
+  url = QUrl::fromUserInput
+    (s_settings.value("settingsWindow/homeUrl", "").toString());
+
+  if(url.host().toLower().trimmed().startsWith("gopher"))
+    url.setScheme("gopher");
+
+  if(!url.isValid())
+    url = QUrl();
+  else
+    url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
+
+  QHash<QWebSettings::WebAttribute, bool> webAttributes;
+
+  webAttributes[QWebSettings::JavascriptEnabled] = false;
+  webAttributes[QWebSettings::PluginsEnabled] = false;
+  webAttributes[QWebSettings::PrivateBrowsingEnabled] = true;
+  p = newTab(url, 0, webAttributes);
+
+  if(p)
+    {
+      p->setPrivateCookies(true);
+      ui.tabWidget->setCurrentWidget(p);
+      ui.tabWidget->update();
+
+      if(url.isEmpty() || !url.isValid())
+	/*
+	** p's url may be empty at this point.
+	*/
+
+	slotOpenUrl();
     }
 }

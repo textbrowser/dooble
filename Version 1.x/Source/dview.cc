@@ -25,36 +25,36 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QUrl>
-#include <QMenu>
-#include <QStack>
-#include <QStyle>
-#include <QDialog>
-#include <QWebView>
-#include <QFileInfo>
-#include <QSslError>
 #include <QBoxLayout>
 #include <QClipboard>
+#include <QContextMenuEvent>
+#include <QDialog>
+#include <QFileIconProvider>
+#include <QFileInfo>
+#include <QMenu>
+#include <QNetworkProxy>
 #include <QPushButton>
+#include <QSslError>
+#include <QStack>
+#include <QStyle>
+#include <QUrl>
 #include <QWebElement>
 #include <QWebHistory>
-#include <QNetworkProxy>
-#include <QContextMenuEvent>
-#include <QFileIconProvider>
 #include <QWebHitTestResult>
+#include <QWebView>
 
-#include "dmisc.h"
-#include "dview.h"
-#include "dooble.h"
-#include "dwebpage.h"
-#include "dwebview.h"
-#include "dsettings.h"
-#include "durlwidget.h"
-#include "dftpbrowser.h"
-#include "ddownloadprompt.h"
 #include "dbookmarkswindow.h"
+#include "ddownloadprompt.h"
+#include "dftpbrowser.h"
+#include "dmisc.h"
 #include "dnetworkaccessmanager.h"
 #include "dnetworkcache.h"
+#include "dooble.h"
+#include "dsettings.h"
+#include "durlwidget.h"
+#include "dview.h"
+#include "dwebpage.h"
+#include "dwebview.h"
 
 dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	     const QHash<QWebSettings::WebAttribute, bool> &webAttributes):
@@ -1704,6 +1704,10 @@ void dview::setWebAttributes
   while(it.hasNext())
     {
       it.next();
+
+      if(it.key() == QWebSettings::JavascriptEnabled)
+	page()->setJavaScriptEnabled(it.value());
+
       page()->settings()->setAttribute(it.key(), it.value());
     }
 }

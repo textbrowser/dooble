@@ -25,13 +25,13 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QMenu>
-#include <QMovie>
-#include <QTabBar>
 #include <QCheckBox>
-#include <QMimeData>
-#include <QSettings>
 #include <QDropEvent>
+#include <QMenu>
+#include <QMimeData>
+#include <QMovie>
+#include <QSettings>
+#include <QTabBar>
 #include <QToolButton>
 #include <QWidgetAction>
 
@@ -215,6 +215,8 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 				  this, SLOT(slotCloseOtherTabs(void)));
 	  action->setEnabled(count() > 1);
 	  menu.addSeparator();
+	  menu.addAction(tr("New Pr&ivate Tab"),
+			 this, SIGNAL(createPrivateTab(void)));
 	  menu.addAction(tr("New &Tab"),
 			 this, SLOT(slotCreateTab(void)));
 	  action = menu.addAction(tr("Open in &New Window"),
@@ -233,6 +235,8 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 				  this, SLOT(slotCloseOtherTabs(void)));
 	  action->setEnabled(count() > 1);
 	  menu.addSeparator();
+	  menu.addAction(tr("New Pr&ivate Tab"),
+			 this, SIGNAL(createPrivateTab(void)));
 	  menu.addAction(tr("New &Tab"),
 			 this, SLOT(slotCreateTab(void)));
 	}

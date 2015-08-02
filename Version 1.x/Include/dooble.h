@@ -32,120 +32,116 @@
 #include <QSqlQuery>
 #include <QWebPage>
 
-#include "dmisc.h"
-#include "dview.h"
-#include "dspoton.h"
 #include "dcookies.h"
-#include "dhistory.h"
-#include "dsettings.h"
-#include "ui_statusBar.h"
 #include "dcookiewindow.h"
-#include "dhistorymodel.h"
-#include "ui_mainWindow.h"
 #include "ddesktopwidget.h"
 #include "ddownloadwindow.h"
-#include "dhistorysidebar.h"
 #include "dexceptionswindow.h"
+#include "dhistory.h"
+#include "dhistorymodel.h"
+#include "dhistorysidebar.h"
+#include "dmisc.h"
+#include "dsettings.h"
+#include "dspoton.h"
 #include "dsslcipherswindow.h"
+#include "dview.h"
 #include "plugin-spec/extension.h"
 #include "plugin-spec/signal-agent.h"
+#include "ui_mainWindow.h"
+#include "ui_statusBar.h"
 
 #define DOOBLE_VERSION_STR "1.54"
 
 using namespace simpleplugin;
 
 class QCloseEvent;
-
-class derrorlog;
-class dplugintab;
-class dnetworkcache;
 class dbookmarkspopup;
 class dbookmarkswindow;
 class dclearcontainers;
+class derrorlog;
+class dnetworkcache;
+class dplugintab;
 
 class dooble: public QMainWindow
 {
   Q_OBJECT
 
  public:
-  static quint64 s_instances;
-  static QPointer<QMenu> s_bookmarksPopupMenu;
-  static QUuid s_id; // Unique process ID.
+  static QHash<QString, QVariant> s_settings;
+  static QHash<QString, qint64> s_mostVisitedHosts;
+  static QMap<QString, QString> s_applicationsActions;
   static QMutex s_saveHistoryMutex;
-  static QString s_homePath;
+  static QPointer<QMenu> s_bookmarksPopupMenu;
+  static QPointer<QStandardItemModel> s_bookmarksFolderModel;
+  static QPointer<dbookmarkspopup> s_bookmarksPopup;
+  static QPointer<dbookmarkswindow> s_bookmarksWindow;
+  static QPointer<dclearcontainers> s_clearContainersWindow;
   static QPointer<dcookies> s_cookies;
+  static QPointer<dcookiewindow> s_cookieWindow;
+  static QPointer<ddownloadwindow> s_downloadWindow;
+  static QPointer<derrorlog> s_errorLog;
+  static QPointer<dexceptionswindow> s_adBlockWindow;
+  static QPointer<dexceptionswindow> s_alwaysHttpsExceptionsWindow;
+  static QPointer<dexceptionswindow> s_cacheExceptionsWindow;
+  static QPointer<dexceptionswindow> s_cookiesBlockWindow;
+  static QPointer<dexceptionswindow> s_dntWindow;
+  static QPointer<dexceptionswindow> s_httpOnlyExceptionsWindow;
+  static QPointer<dexceptionswindow> s_httpRedirectWindow;
+  static QPointer<dexceptionswindow> s_httpReferrerWindow;
+  static QPointer<dexceptionswindow> s_imageBlockWindow;
+  static QPointer<dexceptionswindow> s_javaScriptExceptionsWindow;
+  static QPointer<dexceptionswindow> s_popupsWindow;
+  static QPointer<dexceptionswindow> s_sslExceptionsWindow;
+  static QPointer<dhistory> s_historyWindow;
+  static QPointer<dhistorymodel> s_historyModel;
+  static QPointer<dnetworkcache> s_networkCache;
+  static QPointer<dsettings> s_settingsWindow;
+  static QPointer<dspoton> s_spoton;
+  static QPointer<dsslcipherswindow> s_sslCiphersWindow;
+  static QString s_homePath;
+  static QUuid s_id; // Unique process ID.
   static const int MAX_HISTORY_ITEMS = 15;
   static const int MAX_MOST_VISITED_ITEMS = 15;
   static const int MAX_NUMBER_OF_MENU_TITLE_CHARACTERS = 100;
-  static QPointer<dspoton> s_spoton;
-  static QPointer<dhistory> s_historyWindow;
-  static QPointer<derrorlog> s_errorLog;
-  static QPointer<dsettings> s_settingsWindow;
-  static QPointer<dcookiewindow> s_cookieWindow;
-  static QPointer<dhistorymodel> s_historyModel;
-  static QPointer<dnetworkcache> s_networkCache;
-  static QPointer<dbookmarkspopup> s_bookmarksPopup;
-  static QPointer<ddownloadwindow> s_downloadWindow;
-  static QPointer<dbookmarkswindow> s_bookmarksWindow;
-  static QPointer<dclearcontainers> s_clearContainersWindow;
-  static QPointer<dexceptionswindow> s_dntWindow;
-  static QPointer<dexceptionswindow> s_popupsWindow;
-  static QPointer<dexceptionswindow> s_adBlockWindow;
-  static QPointer<dexceptionswindow> s_httpOnlyExceptionsWindow;
-  static QPointer<dexceptionswindow> s_httpReferrerWindow;
-  static QPointer<dexceptionswindow> s_imageBlockWindow;
-  static QPointer<dexceptionswindow> s_cookiesBlockWindow;
-  static QPointer<dexceptionswindow> s_httpRedirectWindow;
-  static QPointer<dexceptionswindow> s_cacheExceptionsWindow;
-  static QPointer<dexceptionswindow> s_javaScriptExceptionsWindow;
-  static QPointer<dexceptionswindow> s_alwaysHttpsExceptionsWindow;
-  static QPointer<dexceptionswindow> s_sslExceptionsWindow;
-  static QPointer<QStandardItemModel> s_bookmarksFolderModel;
-  static QPointer<dsslcipherswindow> s_sslCiphersWindow;
-  static QHash<QString, qint64> s_mostVisitedHosts;
-  static QMap<QString, QString> s_applicationsActions;
-  static QHash<QString, QVariant> s_settings;
+  static quint64 s_instances;
   static void s_makeCrashFile(void);
   static void s_removeCrashFile(void);
   /*
   ** Used for JavaScript windows.
   */
-  dooble(const bool isJavaScriptWindow, dooble *d);
+  dooble(const QByteArray &history, dooble *d);
+  dooble(const QHash<QString, QVariant> &hash, dooble *d);
   dooble(const QUrl &url, dooble *d, dcookies *cookies,
 	 const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-  dooble(const QByteArray &history, dooble *d);
+  dooble(const bool isJavaScriptWindow, dooble *d);
   dooble(dview *p, dooble *d);
-  dooble(const QHash<QString, QVariant> &hash, dooble *d);
   ~dooble();
-  void copyLink(const QUrl &url);
-  void closeTab(const int index);
-  void closeEvent(QCloseEvent *event);
-  void setCurrentPage(dview *p);
+  QList<QVariantList> tabUrls(void) const;
   dview *newTab(const QByteArray &history);
   quint64 id(void) const;
-  QList<QVariantList> tabUrls(void) const;
+  void closeEvent(QCloseEvent *event);
+  void closeTab(const int index);
+  void copyLink(const QUrl &url);
+  void setCurrentPage(dview *p);
 
  private:
   struct
   {
-    int choice;
-    QUrl url;
     QString html;
+    QUrl url;
+    int choice;
   } m_saveDialogHackContainer;
 
-  bool m_isJavaScriptWindow;
-  bool showFindFrame;
-  quint64 m_id;
-  QWidget *sbWidget;
-  Ui_statusBar sb;
-  Ui_mainWindow ui;
-  dhistorysidebar *m_historySideBar;
-  QPointer<dooble> m_parentWindow; /*
-				   ** Used for positioning JavaScript
-				   ** windows.
-				   */
   QList<QByteArray> m_closedTabs;
   QPointer<ddesktopwidget> m_desktopWidget;
+  QPointer<dooble> m_parentWindow; // Position JavaScript windows.
+  QWidget *sbWidget;
+  Ui_mainWindow ui;
+  Ui_statusBar sb;
+  bool m_isJavaScriptWindow;
+  bool showFindFrame;
+  dhistorysidebar *m_historySideBar;
+  quint64 m_id;
 
   struct PluginRec
   {
@@ -158,198 +154,196 @@ class dooble: public QMainWindow
     QString fileName;
   };
 
-  QMap<QWidget *, PluginRec> pluginMap;
-  QMap<QString, int>         pluginLoadCount;
-  bool event(QEvent *event);
-  bool warnAboutTabs(QObject *object);
-  bool warnAboutDownloads(void);
-  bool promptForPassphrase(const bool override = false);
-  bool warnAboutLeavingModifiedTab(void);
-  void find(const QWebPage::FindFlags flags);
-  void loadPage(const QUrl &url);
-  void reinstate(void);
-  void copyDooble(dooble *d);
-  void newTabInit(dview *p);
-  void init_dooble(const bool isJavaScriptWindow);
-  void saveHandler(const QUrl &url,
-		   const QString &html,
-		   const QString &fileName,
-		   const int choice);
-  void saveHistoryThread(const QList<QVariant> &list);
-  void closeDesktop(void);
-  void disconnectPageSignals(dview *p, dooble *parent);
-  void launchDooble(const QUrl &url);
-  void saveSettings(void);
-  void keyPressEvent(QKeyEvent *event);
-  void setUrlHandler(dooble *d);
-  void prepareMenuBar(const bool state);
-  void prepareTabsMenu(void);
-  void unsetUrlHandler(void);
-  void cleanupBeforeExit(void);
-  void initializeHistory(void);
-  void prepareMostVisited(void);
-  void clearHistoryWidgets(void);
-  void highlightBookmarkButton(void);
-  void initializeBookmarksMenu(void);
-  void prepareWidgetsBasedOnView(dview *p);
-  void remindUserToSetPassphrase(void);
-  void prepareLocationSpotOnWidget(void);
-  void prepareNavigationButtonMenus(dview *p, QMenu *menu);
-  dview *newTab
-    (const QUrl &url, dcookies *cookies,
-     const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-  dview *newTab(dview *p);
-  void startPlugin(const QString &pluginName);
   Extension *loadPlugin(const QString &pluginName);
-  void addPluginAction(const QString &pluginFileName);
-  QString pluginFileName(const QString &plugName);
-  QString pluginPath(void);
+  QMap<QString, int>         pluginLoadCount;
+  QMap<QWidget *, PluginRec> pluginMap;
+
   QMenu *createPopupMenu(void)
   {
     return 0;
   }
 
+  QString pluginFileName(const QString &plugName);
+  QString pluginPath(void);
+  bool event(QEvent *event);
+  bool promptForPassphrase(const bool override = false);
+  bool warnAboutDownloads(void);
+  bool warnAboutLeavingModifiedTab(void);
+  bool warnAboutTabs(QObject *object);
+  dview *newTab(const QUrl &url, dcookies *cookies,
+		const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
+  dview *newTab(dview *p);
+  void addPluginAction(const QString &pluginFileName);
+  void cleanupBeforeExit(void);
+  void clearHistoryWidgets(void);
+  void closeDesktop(void);
+  void copyDooble(dooble *d);
+  void disconnectPageSignals(dview *p, dooble *parent);
+  void find(const QWebPage::FindFlags flags);
+  void highlightBookmarkButton(void);
+  void init_dooble(const bool isJavaScriptWindow);
+  void initializeBookmarksMenu(void);
+  void initializeHistory(void);
+  void keyPressEvent(QKeyEvent *event);
+  void launchDooble(const QUrl &url);
+  void loadPage(const QUrl &url);
+  void newTabInit(dview *p);
+  void prepareLocationSpotOnWidget(void);
+  void prepareMenuBar(const bool state);
+  void prepareMostVisited(void);
+  void prepareNavigationButtonMenus(dview *p, QMenu *menu);
+  void prepareTabsMenu(void);
+  void prepareWidgetsBasedOnView(dview *p);
+  void reinstate(void);
+  void remindUserToSetPassphrase(void);
+  void saveHandler(const QUrl &url, const QString &html,
+		   const QString &fileName,const int choice);
+  void saveHistoryThread(const QList<QVariant> &list);
+  void saveSettings(void);
+  void setUrlHandler(dooble *d);
+  void startPlugin(const QString &pluginName);
+  void unsetUrlHandler(void);
+
  protected:
   void showEvent(QShowEvent *event);
 
  private slots:
-  void slotBack(void);
-  void slotCopy(void);
-  void slotFind(void);
-  void slotQuit(void);
-  void slotStop(void);
   void slotAbout(void);
+  void slotAboutToShowBackForwardMenu(void);
+  void slotAboutToShowBookmarksMenu(void);
+  void slotAuthenticate(void);
+  void slotAuthenticationRequired(QNetworkReply *reply,
+				  QAuthenticator *authenticator);
+  void slotBack(void);
+  void slotBookmark(const int index);
+  void slotBookmark(void);
+  void slotBookmarksChanged(void);
+  void slotChangeDesktopBackgrounds(void);
+  void slotClearContainers(void);
+  void slotClearHistory(void);
+  void slotClearRecentlyClosedTabs(void);
   void slotClearSpotOnSharedLinks(void);
   void slotClose(void);
-  void slotPaste(void);
-  void slotPrint(void);
-  void slotGoHome(void);
-  void slotNewTab(void);
-  void slotReload(void);
-  void slotSearch(void);
-  void slotForward(void);
-  void slotOffline(bool state);
-  void slotOpenUrl(void);
-  void slotSaveUrl(const QUrl &url, const int choice);
-  void slotBookmark(void);
-  void slotBookmark(const int index);
-  void slotCloseTab(void);
   void slotCloseTab(const int index);
-  void slotCopyLink(const QUrl &url);
-  void slotFindNext(void);
-  void slotHideFind(void);
-  void slotHideMainMenus(void);
-  void slotLoadPage(void);
-  void slotLoadPage(const QUrl &url);
-  void slotResetUrl(void);
-  void slotSaveFile(const QString &fileName, const QUrl &url,
-		    const int choice);
-  void slotSavePage(void);
-  void slotSetIcons(void);
-  void slotShowFind(void);
-  void slotShowLocationBarButton(bool state);
-  void slotTabMoved(int from, int to);
-  void slotNewWindow(void);
-  void slotReloadTab(const int index);
-  void slotShowAddOns(void);
-  void slotUrlChanged(const QUrl &url);
-  void slotViewSiteCookies(void);
-  void slotViewZoomIn(void);
+  void slotCloseTab(void);
   void slotCloseWindow(void);
+  void slotCopy(void);
+  void slotCopyLink(const QUrl &url);
+  void slotDisplayDownloadWindow(void);
   void slotEnablePaste(void);
   void slotErrorLogged(void);
+  void slotExceptionRaised(dexceptionswindow *window, const QUrl &url);
+  void slotFavoritesToolButtonClicked(void);
+  void slotFind(void);
+  void slotFindNext(void);
+  void slotFindPrevious(void);
+  void slotForward(void);
+  void slotGeometryChangeRequested(const QRect &geometry);
+  void slotGoHome(void);
+  void slotGoToBackHistoryItem(void);
+  void slotGoToForwardHistoryItem(void);
+  void slotHandleQuirkySaveDialog(int result);
+  void slotHideFind(void);
+  void slotHideMainMenus(void);
   void slotHideMenuBar(void);
+  void slotHideStatusBar(void);
   void slotHideToolBar(void);
+  void slotHistorySideBarClosed(void);
+  void slotHistoryTabSplitterMoved(int pos, int index);
   void slotIconChanged(void);
   void slotIconToolButtonClicked(void);
+  void slotIpAddressChanged(const QString &ipAddress);
+  void slotLinkActionTriggered(void);
   void slotLinkHovered(const QString &link, const QString &title,
 		       const QString &textContent);
-  void slotShowHistory(void);
-  void slotViewZoomOut(void);
-  void slotLoadStarted(void);
-  void slotTabSelected(const int index);
-  void slotTextChanged(const QString &text);
-  void slotAuthenticate(void);
-  void slotClearHistory(void);
-  void slotFindPrevious(void);
   void slotLoadFinished(bool ok);
+  void slotLoadPage(const QUrl &url);
+  void slotLoadPage(void);
   void slotLoadProgress(int progress);
-  void slotOpenP2PEmail(void);
-  void slotPrintPreview(void);
-  void slotTitleChanged(const QString &title);
-  void slotOpenDirectory(void);
-  void slotHideStatusBar(void);
-  void slotShowBookmarks(void);
-  void slotShowIpAddress(const bool state);
-  void slotViewResetZoom(void);
-  void slotOpenIrcChannel(void);
-  void slotPrintRequested(QWebFrame *frame);
-  void slotQuitAndRestart(void);
-  void slotShowDesktopTab(const bool state = true);
-  void slotShowPageSource(void);
-  void slotClearContainers(void);
-  void slotExceptionRaised(dexceptionswindow *window,
-			   const QUrl &url);
+  void slotLoadStarted(void);
+  void slotLocationSplitterMoved(int post, int index);
+  void slotNewPrivateTab(void);
+  void slotNewTab(void);
+  void slotNewWindow(void);
   void slotObjectDestroyed(QObject *object);
-  void slotReopenClosedTab(void);
-  void slotShowHiddenFiles(bool state);
-  void slotBookmarksChanged(void);
-  void slotIpAddressChanged(const QString &ipAddress);
+  void slotOffline(bool state);
+  void slotOpenDirectory(void);
+  void slotOpenIrcChannel(void);
   void slotOpenLinkInNewTab(const QUrl &url);
   void slotOpenLinkInNewTab
     (const QUrl &url, dcookies *cookies,
      const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-  void slotOpenUrlsFromDrop(const QList<QUrl> &list);
-  void slotRepaintRequested(const QRect &dirtyRect);
-  void slotSelectAllContent(void);
-  void slotSelectionChanged(void);
-  void slotSelectionChanged(const QString &text);
-  void slotSetTabBarVisible(const bool state);
-  void slotStatusBarDisplay(bool state);
-  void slotStatusBarMessage(const QString &text);
-  void slotViewZoomTextOnly(bool enable);
-  void slotShowSettingsWindow(void);
-  void slotShowHistorySideBar(bool state);
-  void slotGoToBackHistoryItem(void);
-  void slotLinkActionTriggered(void);
   void slotOpenLinkInNewWindow(const QUrl &url);
   void slotOpenLinkInNewWindow
     (const QUrl &url, dcookies *cookies,
      const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
-  void slotOpenPageInNewWindow(const int index);
-  void slotHistorySideBarClosed(void);
   void slotOpenMyRetrievedFiles(void);
-  void slotShowFavoritesToolBar(bool checked);
-  void slotDisplayDownloadWindow(void);
-  void slotLocationSplitterMoved(int post, int index);
-  void slotShowRestoreSessionTab(void);
-  void slotAuthenticationRequired(QNetworkReply *reply,
-				  QAuthenticator *authenticator);
-  void slotGoToForwardHistoryItem(void);
-  void slotHandleQuirkySaveDialog(int result);
-  void slotShowApplicationCookies(void);
-  void slotShowWebInspector(void);
-  void slotClearRecentlyClosedTabs(void);
-  void slotGeometryChangeRequested(const QRect &geometry);
-  void slotHistoryTabSplitterMoved(int pos, int index);
-  void slotAboutToShowBookmarksMenu(void);
-  void slotChangeDesktopBackgrounds(void);
-  void slotAboutToShowBackForwardMenu(void);
-  void slotFavoritesToolButtonClicked(void);
-  void slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
-				       QAuthenticator *authenticator);
-  void slotRefreshPlugins(void);
+  void slotOpenP2PEmail(void);
+  void slotOpenPageInNewWindow(const int index);
+  void slotOpenUrl(void);
+  void slotOpenUrlsFromDrop(const QList<QUrl> &list);
+  void slotPaste(void);
   void slotPluginAction(QAction *plugAction);
   void slotPluginExiting(Extension *plugin, int status);
+  void slotPrint(void);
+  void slotPrintPreview(void);
+  void slotPrintRequested(QWebFrame *frame);
+  void slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
+				       QAuthenticator *authenticator);
+  void slotQuit(void);
+  void slotQuitAndRestart(void);
+  void slotRefreshPlugins(void);
+  void slotReload(void);
+  void slotReloadTab(const int index);
+  void slotReopenClosedTab(void);
+  void slotRepaintRequested(const QRect &dirtyRect);
+  void slotResetUrl(void);
+  void slotSaveFile(const QString &fileName, const QUrl &url, const int choice);
+  void slotSavePage(void);
+  void slotSaveUrl(const QUrl &url, const int choice);
+  void slotSearch(void);
+  void slotSelectAllContent(void);
+  void slotSelectionChanged(const QString &text);
+  void slotSelectionChanged(void);
+  void slotSetIcons(void);
+  void slotSetTabBarVisible(const bool state);
+  void slotShowAddOns(void);
+  void slotShowApplicationCookies(void);
+  void slotShowBookmarks(void);
+  void slotShowDesktopTab(const bool state = true);
+  void slotShowFavoritesToolBar(bool checked);
+  void slotShowFind(void);
+  void slotShowHiddenFiles(bool state);
+  void slotShowHistory(void);
+  void slotShowHistorySideBar(bool state);
+  void slotShowIpAddress(const bool state);
+  void slotShowLocationBarButton(bool state);
+  void slotShowPageSource(void);
+  void slotShowRestoreSessionTab(void);
+  void slotShowSettingsWindow(void);
+  void slotShowWebInspector(void);
+  void slotStatusBarDisplay(bool state);
+  void slotStatusBarMessage(const QString &text);
+  void slotStop(void);
   void slotSubmitUrlToSpotOn(void);
+  void slotTabMoved(int from, int to);
+  void slotTabSelected(const int index);
+  void slotTextChanged(const QString &text);
+  void slotTitleChanged(const QString &title);
+  void slotUrlChanged(const QUrl &url);
+  void slotViewResetZoom(void);
+  void slotViewSiteCookies(void);
+  void slotViewZoomIn(void);
+  void slotViewZoomOut(void);
+  void slotViewZoomTextOnly(bool enable);
   friend class dwebpage;
 
  signals:
+  void bookmarkUpdated(void);
   void clearHistory(void);
   void iconsChanged(void);
-  void bookmarkUpdated(void);
-  void updateDesktopBackground(void);
   void passphraseWasAuthenticated(const bool state);
+  void updateDesktopBackground(void);
 };
 
 #endif
