@@ -1314,6 +1314,10 @@ void dview::setWebAttributes
   while(it.hasNext())
     {
       it.next();
+
+      if(it.key() == QWebEngineSettings::JavascriptEnabled)
+	page()->setJavaScriptEnabled(it.value());
+
       page()->settings()->setAttribute(it.key(), it.value());
     }
 }
