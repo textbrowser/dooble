@@ -71,13 +71,6 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="menuToolButtonLine">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QToolButton" name="backToolButton">
          <property name="toolTip">
           <string>Back</string>
@@ -588,6 +581,7 @@
     </widget>
     <addaction name="action_Desktop_Button"/>
     <addaction name="action_Home_Button"/>
+    <addaction name="actionSearch_Widget"/>
     <addaction name="separator"/>
     <addaction name="menu_Sidebars"/>
     <addaction name="actionStatusbar"/>
@@ -1079,6 +1073,17 @@
   <action name="actionNew_Private_Tab">
    <property name="text">
     <string>New Pr&amp;ivate Tab</string>
+   </property>
+  </action>
+  <action name="actionSearch_Widget">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Search &amp;Widget</string>
    </property>
   </action>
  </widget>

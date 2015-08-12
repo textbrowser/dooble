@@ -960,6 +960,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.actionShow_HistorySideBar->setChecked
     (s_settings.value("mainWindow/showHistorySideBar", false).
      toBool());
+  ui.actionSearch_Widget->setChecked
+    (s_settings.value("mainWindow/showSearchWidget", true).toBool());
   ui.actionOffline->setChecked
     (s_settings.value("mainWindow/offlineMode", false).toBool());
   ui.historyFrame->setVisible(false);
@@ -1007,10 +1009,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #ifdef Q_OS_MAC
   ui.action_Hide_Menubar->setEnabled(false);
   ui.menuToolButton->setVisible(false);
-  ui.menuToolButtonLine->setVisible(false);
 #else
   ui.menuToolButton->setMenu(new QMenu(this));
 #endif
+  ui.searchLineEdit->setVisible(ui.actionSearch_Widget->isChecked());
   ui.action_Web_Inspector->setEnabled(false);
   ui.action_Web_Inspector->setToolTip(tr("WebEngine does not yet "
 					 "support Web inspectors."));
@@ -1312,6 +1314,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotStatusBarDisplay(bool)));
   connect(ui.actionShow_Hidden_Files, SIGNAL(triggered(bool)), this,
 	  SLOT(slotShowHiddenFiles(bool)));
+  connect(ui.actionSearch_Widget, SIGNAL(triggered(bool)), this,
+	  SLOT(slotShowSearchWidget(bool)));
   connect(ui.actionOpen_Directory, SIGNAL(triggered(void)), this,
 	  SLOT(slotOpenDirectory(void)));
   connect(ui.actionZoom_In, SIGNAL(triggered(void)), this,
@@ -2855,7 +2859,6 @@ void dooble::slotTabSelected(const int index)
   if(p)
     {
       ui.homeToolButton->setEnabled(true);
-      ui.searchLineEdit->setVisible(!m_isJavaScriptWindow);
       ui.locationLineEdit->setVisible(true);
       ui.reloadToolButton->setEnabled(true);
       ui.searchLineEdit->setEnabled(true);
@@ -7703,4 +7706,13 @@ void dooble::slotClearSpotOnSharedLinks(void)
       dooble::s_spoton->clear();
       QApplication::restoreOverrideCursor();
     }
+}
+
+void dooble::slotShowSearchWidget(bool state)
+{
+  QSettings settings;
+
+  settings.setValue("mainWindow/showSearchWidget", state);
+  s_settings["mainWindow/showSearchWidget"] = state;
+  ui.searchLineEdit->setVisible(state);
 }
