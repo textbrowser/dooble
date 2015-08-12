@@ -123,8 +123,8 @@ struct gcry_thread_cbs gcry_threads_qt =
   };
 #endif
 
+QHash<QString, char> dmisc::s_blockedhosts;
 QHash<int, int> dmisc::s_httpStatusCodes;
-QList<QString> dmisc::s_blockedhosts;
 QList<QString> dmisc::s_browsingProxyIgnoreList;
 QList<QString> dmisc::s_downloadProxyIgnoreList;
 bool dmisc::s_passphraseWasAuthenticated = false;
@@ -1817,7 +1817,7 @@ void dmisc::initializeBlockedHosts(void)
 	  str = str.trimmed();
 
 	  if(!str.isEmpty() && !str.startsWith("#"))
-	    s_blockedhosts.append(str);
+	    s_blockedhosts[str] = 0;
 	}
     }
 

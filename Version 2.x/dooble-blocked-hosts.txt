@@ -2,7 +2,11 @@
 # will be ignored.
 # Dooble must be restarted if this file is modified.
 
+ad.turn.com
+adnxs.com
 beanstock.co
 beanstock.com
 cdn.beanstock.com
+cdn.syndication.twimg.com
+doubleclick.com
 doubleclick.net

@@ -117,7 +117,7 @@ class dmisc
 
  private:
   dmisc(void);
-  static QList<QString> s_blockedhosts;
+  static QHash<QString, char> s_blockedhosts;
   static QList<QString> s_browsingProxyIgnoreList;
   static QList<QString> s_downloadProxyIgnoreList;
   static bool s_passphraseWasAuthenticated;
