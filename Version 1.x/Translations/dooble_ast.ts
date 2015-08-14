@@ -2251,6 +2251,10 @@ p, li { white-space: pre-wrap; }
         <source>New Pr&amp;ivate Tab</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search &amp;Widget</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>pageSourceWindow</name>
