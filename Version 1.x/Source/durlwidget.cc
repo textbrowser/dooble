@@ -298,16 +298,6 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
 			      "padding-bottom: 0px; "
 			      "}");
   bookmarkToolButton = new QToolButton(this);
-
-  if(dooble::s_settings.value("settingsWindow/"
-			      "disableAllEncryptedDatabaseWrites",
-			      false).toBool())
-    bookmarkToolButton->setToolTip(tr("Encrypted database writes are "
-				      "disabled. Therefore, bookmarks "
-				      "are also disabled."));
-  else
-    bookmarkToolButton->setToolTip(tr("Bookmark"));
-
   bookmarkToolButton->setIconSize(QSize(16, 16));
   bookmarkToolButton->setCursor(Qt::ArrowCursor);
   m_iconToolButton = new QToolButton(this);
@@ -400,6 +390,7 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
 	  this,
 	  SLOT(slotLoadPage(const QString &)));
   setCompleter(m_completer);
+  updateToolTips();
 }
 
 void durlwidget::addItem(const QString &text)
@@ -1063,4 +1054,16 @@ void durlwidget::popdown(void) const
 {
   if(m_completer)
     m_completer->popup()->setVisible(false);
+}
+
+void durlwidget::updateToolTips(void)
+{
+  if(dooble::s_settings.value("settingsWindow/"
+			      "disableAllEncryptedDatabaseWrites",
+			      false).toBool())
+    bookmarkToolButton->setToolTip(tr("Encrypted database writes are "
+				      "disabled. Therefore, bookmarks "
+				      "are also disabled."));
+  else
+    bookmarkToolButton->setToolTip(tr("Bookmark"));
 }

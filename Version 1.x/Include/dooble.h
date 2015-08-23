@@ -307,6 +307,7 @@ class dooble: public QMainWindow
   void slotSelectionChanged(void);
   void slotSetIcons(void);
   void slotSetTabBarVisible(const bool state);
+  void slotSettingsChanged(void);
   void slotShowAddOns(void);
   void slotShowApplicationCookies(void);
   void slotShowBookmarks(void);

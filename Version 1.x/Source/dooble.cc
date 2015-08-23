@@ -1218,6 +1218,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  this,
 	  SLOT(slotSetTabBarVisible(const bool)));
   connect(s_settingsWindow,
+	  SIGNAL(settingsChanged(void)),
+	  this,
+	  SLOT(slotSettingsChanged(void)));
+  connect(s_settingsWindow,
 	  SIGNAL(settingsReset(void)),
 	  this,
 	  SLOT(slotQuitAndRestart(void)));
@@ -8097,4 +8101,9 @@ void dooble::slotShowSearchWidget(bool state)
   settings.setValue("mainWindow/showSearchWidget", state);
   s_settings["mainWindow/showSearchWidget"] = state;
   ui.searchLineEdit->setVisible(state);
+}
+
+void dooble::slotSettingsChanged(void)
+{
+  ui.locationLineEdit->updateToolTips();
 }

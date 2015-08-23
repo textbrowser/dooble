@@ -2090,6 +2090,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 
       emit cookieTimerChanged();
       emit iconsChanged();
+      emit settingsChanged();
       emit showIpAddress(ui.displayIpAddressCheckBox->isChecked());
       emit showTabBar(ui.alwaysShowTabBarCheckBox->isChecked());
       emit textSizeMultiplierChanged(ui.textSizeMultiplierSpinBox->value());

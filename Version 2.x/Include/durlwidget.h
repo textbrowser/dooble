@@ -111,6 +111,7 @@ class durlwidget: public QLineEdit
   void setSpotOnButtonEnabled(const bool state);
   void setSpotOnColor(const bool isLoaded);
   void setText(const QString &text);
+  void updateToolTips(void);
 
  private:
   QIcon m_bookmarkButtonIcon;

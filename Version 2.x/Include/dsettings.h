@@ -90,6 +90,7 @@ class dsettings: public QMainWindow
   void cookieTimerChanged(void);
   void iconsChanged(void);
   void reencodeRestorationFile(void);
+  void settingsChanged(void);
   void settingsReset(void);
   void showIpAddress(const bool state);
   void showTabBar(const bool state);
