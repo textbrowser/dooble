@@ -68,7 +68,7 @@ class dftpfileinfo
   {
     return m_isFile;
   }
-  
+
   qint64 size(void) const
   {
     return m_size;
