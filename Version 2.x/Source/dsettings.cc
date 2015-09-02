@@ -678,6 +678,7 @@ void dsettings::exec(dooble *parent)
     (dooble::s_settings.
      value("settingsWindow/httpOnlyCookies", false).toBool());
 
+#ifdef QT_HAS_THREAD_PRIORITY_SCHEDULING
   int priority = dooble::s_settings.value("settingsWindow/displaypriority",
 					  3).toInt();
 
@@ -690,6 +691,11 @@ void dsettings::exec(dooble *parent)
 	ui.displaypriority->setCurrentIndex(i);
 	break;
       }
+#else
+  ui.displaypriority->setCurrentIndex(3); // Inherit Priority
+  ui.displaypriority->setEnabled(false);
+  ui.displaypriority->setToolTip(tr("Thread scheduling is not supported."));
+#endif
 
   QStringList allKeys(dooble::s_settings.keys());
   QMap<QString, QString> itemsMap;
@@ -1867,6 +1873,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 	("settingsWindow/javascriptStagnantScripts",
 	 ui.jsStagnantScripts->currentIndex());
 
+#ifdef QT_HAS_THREAD_PRIORITY_SCHEDULING
       QThread *thread = QApplication::instance()->thread();
 
       if(thread)
@@ -1874,6 +1881,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 	  (QThread::Priority(ui.displaypriority->
 			     itemData(ui.displaypriority->
 				      currentIndex()).toInt()));
+#endif
 
       if(shouldReencode)
 	{
