@@ -530,8 +530,6 @@ int main(int argc, char *argv[])
   */
 
   QSettings settings;
-
-#ifdef QT_HAS_THREAD_PRIORITY_SCHEDULING
   int priority = dooble::s_settings.value("settingsWindow/displaypriority",
 					  3).toInt();
 
@@ -545,7 +543,6 @@ int main(int argc, char *argv[])
 
   if(thread)
     thread->setPriority(QThread::Priority(priority));
-#endif
 
   settings.remove("mainWindow/showLocationToolBar");
   settings.remove("vidalia/hostName");
