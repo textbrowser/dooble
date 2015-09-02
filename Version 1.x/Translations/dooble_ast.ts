@@ -1471,6 +1471,10 @@ p, li { white-space: pre-wrap; }
         <source>Submit URL to Spot-On.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Encrypted database writes are disabled. Therefore, bookmarks are also disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dview</name>
