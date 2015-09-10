@@ -1101,6 +1101,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotSetIcons(void)));  
   connect(s_settingsWindow,
 	  SIGNAL(settingsChanged(void)),
+	  ui.tabWidget,
+	  SLOT(slotSetPosition(void)));
+  connect(s_settingsWindow,
+	  SIGNAL(settingsChanged(void)),
 	  this,
 	  SLOT(slotSettingsChanged(void)));
   connect(s_settingsWindow,

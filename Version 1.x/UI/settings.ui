@@ -340,8 +340,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>546</width>
-               <height>453</height>
+               <width>646</width>
+               <height>529</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -452,6 +452,57 @@
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_32">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_65">
+                <item>
+                 <widget class="QLabel" name="label_80">
+                  <property name="text">
+                   <string>Tab Bar Position</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="tab_bar_position">
+                  <property name="currentIndex">
+                   <number>1</number>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>East</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>North</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>South</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>West</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_54">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -2937,8 +2988,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-529</y>
-               <width>628</width>
+               <y>0</y>
+               <width>566</width>
                <height>1295</height>
               </rect>
              </property>
@@ -4276,6 +4327,7 @@
   <tabstop>applicationsTable</tabstop>
   <tabstop>scrollArea</tabstop>
   <tabstop>locationToolbarIconSizeComboBox</tabstop>
+  <tabstop>tab_bar_position</tabstop>
   <tabstop>iconSetComboBox</tabstop>
   <tabstop>chooseIconSetPushButton</tabstop>
   <tabstop>encodingCombinationBox</tabstop>

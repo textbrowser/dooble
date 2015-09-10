@@ -25,13 +25,13 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QMenu>
-#include <QMovie>
-#include <QTabBar>
 #include <QCheckBox>
-#include <QMimeData>
-#include <QSettings>
 #include <QDropEvent>
+#include <QMenu>
+#include <QMimeData>
+#include <QMovie>
+#include <QSettings>
+#include <QTabBar>
 #include <QToolButton>
 #include <QWidgetAction>
 
@@ -41,6 +41,7 @@
 
 dtabbar::dtabbar(QWidget *parent):QTabBar(parent)
 {
+  m_tabPosition = QTabWidget::North;
   setAcceptDrops(true);
   setDocumentMode(true);
   setElideMode(Qt::ElideRight);
@@ -116,20 +117,45 @@ void dtabbar::mouseDoubleClickEvent(QMouseEvent *event)
 
 QSize dtabbar::tabSizeHint(int index) const
 {
-  int preferredTabWidth = 225;
   QSize size(QTabBar::tabSizeHint(index));
 
-  if(parentWidget() &&
-     count() * rect().width() < parentWidget()->size().width())
-    preferredTabWidth = 225;
-  else
-    preferredTabWidth = qBound
-      (125,
-       qMax(size.width(), rect().width() / qMax(1, count())),
-       225);
+  if(m_tabPosition == QTabWidget::East || m_tabPosition == QTabWidget::West)
+    {
+      int preferredTabHeight = 225;
 
-  size.setWidth(preferredTabWidth);
+      if(parentWidget() &&
+	 count() * rect().height() < parentWidget()->size().height())
+	preferredTabHeight = 225;
+      else
+	preferredTabHeight = qBound
+	  (125,
+	   qMax(size.height(), rect().height() / qMax(1, count())),
+	   225);
+
+      size.setHeight(preferredTabHeight);
+    }
+  else
+    {
+      int preferredTabWidth = 225;
+
+      if(parentWidget() &&
+	 count() * rect().width() < parentWidget()->size().width())
+	preferredTabWidth = 225;
+      else
+	preferredTabWidth = qBound
+	  (125,
+	   qMax(size.width(), rect().width() / qMax(1, count())),
+	   225);
+
+      size.setWidth(preferredTabWidth);
+    }
+
   return size;
+}
+
+void dtabbar::setTabPosition(const QTabWidget::TabPosition position)
+{
+  m_tabPosition = position;
 }
 
 dtabwidget::dtabwidget(QWidget *parent):QTabWidget(parent)
@@ -187,6 +213,7 @@ dtabwidget::dtabwidget(QWidget *parent):QTabWidget(parent)
 			      "QToolButton::menu-button {border: none;}");
 
   slotSetIcons();
+  slotSetPosition();
 }
 
 dtabwidget::~dtabwidget()
@@ -619,4 +646,25 @@ void dtabwidget::slotPrivateBrowsing(void)
       if(p)
 	p->setPrivateBrowsingEnabled(action->isChecked());
     }
+}
+
+void dtabwidget::slotSetPosition(void)
+{
+  QString str
+    (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
+     toString().toLower().trimmed());
+
+  if(str == "east")
+    setTabPosition(QTabWidget::East);
+  else if(str == "north")
+    setTabPosition(QTabWidget::North);
+  else if(str == "south")
+    setTabPosition(QTabWidget::South);
+  else if(str == "west")
+    setTabPosition(QTabWidget::West);
+  else
+    setTabPosition(QTabWidget::North);
+
+  m_tabBar->setTabPosition(tabPosition());
+  m_tabBar->resize(m_tabBar->sizeHint());
 }

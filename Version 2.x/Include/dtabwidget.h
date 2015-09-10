@@ -41,8 +41,10 @@ class dtabbar: public QTabBar
  public:
   dtabbar(QWidget *parent);
   QSize tabSizeHint(int index) const;
+  void setTabPosition(const QTabWidget::TabPosition position);
 
  private:
+  QTabWidget::TabPosition m_tabPosition;
   void dragEnterEvent(QDragEnterEvent *event);
   void dragMoveEvent(QDragMoveEvent *event);
   void dropEvent(QDropEvent *event);
@@ -93,6 +95,7 @@ class dtabwidget: public QTabWidget
   void slotPrivateBrowsing(void);
   void slotPrivateCookies(void);
   void slotReloadTab(void);
+  void slotSetPosition(void);
   void slotShowContextMenu(const QPoint &point);
   void slotViewPrivateCookies(void);
   void slotWebPlugins(void);

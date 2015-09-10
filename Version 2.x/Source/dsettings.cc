@@ -483,6 +483,22 @@ void dsettings::exec(dooble *parent)
 			      QDir::homePath() + QDir::separator() +
 			      ".spot-on" + QDir::separator() + "shared.db").
      toString());
+
+  QString str
+    (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
+     toString().toLower().trimmed());
+
+  if(str == "east")
+    ui.tab_bar_position->setCurrentIndex(0);
+  else if(str == "north")
+    ui.tab_bar_position->setCurrentIndex(1);
+  else if(str == "south")
+    ui.tab_bar_position->setCurrentIndex(2);
+  else if(str == "west")
+    ui.tab_bar_position->setCurrentIndex(3);
+  else
+    ui.tab_bar_position->setCurrentIndex(1);
+
 #ifndef DOOBLE_LINKED_WITH_LIBSPOTON
   ui.spotOnChooseDatabasePushButton->setEnabled(false);
   ui.spotOnLabel->setEnabled(false);
@@ -1866,6 +1882,19 @@ void dsettings::slotClicked(QAbstractButton *button)
       settings.setValue
 	("settingsWindow/javascriptStagnantScripts",
 	 ui.jsStagnantScripts->currentIndex());
+
+      QString str("");
+
+      if(ui.tab_bar_position->currentIndex() == 0)
+	str = "east";
+      else if(ui.tab_bar_position->currentIndex() == 1)
+	str = "north";
+      else if(ui.tab_bar_position->currentIndex() == 2)
+	str = "south";
+      else
+	str = "west";
+
+      settings.setValue("settingsWindow/tabBarPosition", str);
 
       QThread *thread = QApplication::instance()->thread();
 
