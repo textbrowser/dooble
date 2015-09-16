@@ -3357,6 +3357,26 @@ p, li { white-space: pre-wrap; }
         <source>Prompt</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tab Bar Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>East</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>North</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>South</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>West</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>sslCiphersWindow</name>
