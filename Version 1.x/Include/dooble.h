@@ -100,8 +100,8 @@ class dooble: public QMainWindow
   static QPointer<dsslcipherswindow> s_sslCiphersWindow;
   static QString s_homePath;
   static QUuid s_id; // Unique process ID.
-  static const int MAX_HISTORY_ITEMS = 15;
-  static const int MAX_MOST_VISITED_ITEMS = 15;
+  static const int MAX_HISTORY_ITEMS = 30;
+  static const int MAX_MOST_VISITED_ITEMS = 30;
   static const int MAX_NUMBER_OF_MENU_TITLE_CHARACTERS = 100;
   static quint64 s_instances;
   static void s_makeCrashFile(void);
