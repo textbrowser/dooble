@@ -121,16 +121,16 @@ QSize dtabbar::tabSizeHint(int index) const
 
   if(m_tabPosition == QTabWidget::East || m_tabPosition == QTabWidget::West)
     {
-      int preferredTabHeight = 225;
+      int preferredTabHeight = 175;
 
       if(parentWidget() &&
 	 count() * rect().height() < parentWidget()->size().height())
-	preferredTabHeight = 225;
+	preferredTabHeight = 175;
       else
 	preferredTabHeight = qBound
 	  (125,
 	   qMax(size.height(), rect().height() / qMax(1, count())),
-	   225);
+	   175);
 
       size.setHeight(preferredTabHeight);
     }
@@ -178,22 +178,22 @@ dtabwidget::dtabwidget(QWidget *parent):QTabWidget(parent)
 		"QTabWidget::tab-bar {"
 		"alignment: left;"
 		"}");
-  tabBar()->setStyleSheet
+  m_tabBar->setStyleSheet
     ("QTabBar::tear {"
      "image: none;"
      "}"
      );
-  tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
-  tabBar()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
-  connect(tabBar(), SIGNAL(customContextMenuRequested(const QPoint &)),
+  m_tabBar->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_tabBar->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
+  connect(m_tabBar, SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slotShowContextMenu(const QPoint &)));
-  connect(tabBar(), SIGNAL(tabMoved(int, int)),
+  connect(m_tabBar, SIGNAL(tabMoved(int, int)),
 	  this,
 	  SIGNAL(tabMoved(int, int)));
-  connect(tabBar(), SIGNAL(urlsReceivedViaDrop(const QList<QUrl> &)),
+  connect(m_tabBar, SIGNAL(urlsReceivedViaDrop(const QList<QUrl> &)),
 	  this, SIGNAL(urlsReceivedViaDrop(const QList<QUrl> &)));
-  connect(tabBar(), SIGNAL(createTab(void)),
+  connect(m_tabBar, SIGNAL(createTab(void)),
 	  this, SIGNAL(createTab(void)));
   setMovable(true);
   connect(this,
@@ -222,7 +222,7 @@ dtabwidget::~dtabwidget()
 
 void dtabwidget::slotShowContextMenu(const QPoint &point)
 {
-  m_selectedTabIndex = tabBar()->tabAt(point);
+  m_selectedTabIndex = m_tabBar->tabAt(point);
 
   if(m_selectedTabIndex > -1)
     {
@@ -319,7 +319,7 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 	(tr("&View Private Cookies"),
 	 this, SLOT(slotViewPrivateCookies(void)))->
 	setEnabled(action->isChecked());
-      menu.exec(tabBar()->mapToGlobal(point));
+      menu.exec(m_tabBar->mapToGlobal(point));
     }
 }
 
@@ -348,7 +348,7 @@ void dtabwidget::slotOpenInNewWindow(void)
 
 void dtabwidget::setBarVisible(const bool state)
 {
-  tabBar()->setVisible(state);
+  m_tabBar->setVisible(state);
 }
 
 void dtabwidget::slotSetIcons(void)
@@ -368,7 +368,7 @@ void dtabwidget::mousePressEvent(QMouseEvent *event)
 				   true).toBool())
 	return;
 
-      int index = tabBar()->tabAt(event->pos());
+      int index = m_tabBar->tabAt(event->pos());
 
       if(index != -1)
 	emit closeTab(index);
@@ -414,36 +414,36 @@ void dtabwidget::setTabButton(int index)
     return;
 
   QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
-    (QStyle::SH_TabBar_CloseButtonPosition, 0, tabBar());
+    (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tabBar);
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
-  QLabel *label = qobject_cast<QLabel *> (tabBar()->tabButton(index, side));
+  QLabel *label = qobject_cast<QLabel *> (m_tabBar->tabButton(index, side));
 
   if(!label)
     {
-      label = new QLabel(tabBar());
+      label = new QLabel(m_tabBar);
 
       QPixmap pixmap(16, 16);
 
-      pixmap.fill(tabBar()->backgroundRole());
+      pixmap.fill(m_tabBar->backgroundRole());
       label->setPixmap(pixmap);
     }
 
-  tabBar()->setTabButton(index, side, 0);
-  tabBar()->setTabButton(index, side, label);
+  m_tabBar->setTabButton(index, side, 0);
+  m_tabBar->setTabButton(index, side, label);
 }
 
 void dtabwidget::animateIndex(const int index, const bool state,
 			      const QIcon &icon)
 {
   QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
-    (QStyle::SH_TabBar_CloseButtonPosition, 0, tabBar());
+    (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tabBar);
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
   QLabel *label = qobject_cast<QLabel*>
-    (tabBar()->tabButton(index, side));
+    (m_tabBar->tabButton(index, side));
 
   if(label)
     {
@@ -658,12 +658,20 @@ void dtabwidget::slotSetPosition(void)
     (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
      toString().toLower().trimmed());
 
+  m_tabBar->setDocumentMode(false);
+
   if(str == "east")
     setTabPosition(QTabWidget::East);
   else if(str == "north")
-    setTabPosition(QTabWidget::North);
+    {
+      m_tabBar->setDocumentMode(true);
+      setTabPosition(QTabWidget::North);
+    }
   else if(str == "south")
-    setTabPosition(QTabWidget::South);
+    {
+      m_tabBar->setDocumentMode(true);
+      setTabPosition(QTabWidget::South);
+    }
   else if(str == "west")
     setTabPosition(QTabWidget::West);
   else
