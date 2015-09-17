@@ -654,20 +654,12 @@ void dtabwidget::slotSetPosition(void)
     (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
      toString().toLower().trimmed());
 
-  m_tabBar->setDocumentMode(false);
-
   if(str == "east")
     setTabPosition(QTabWidget::East);
   else if(str == "north")
-    {
-      m_tabBar->setDocumentMode(true);
-      setTabPosition(QTabWidget::North);
-    }
+    setTabPosition(QTabWidget::North);
   else if(str == "south")
-    {
-      m_tabBar->setDocumentMode(true);
-      setTabPosition(QTabWidget::South);
-    }
+    setTabPosition(QTabWidget::South);
   else if(str == "west")
     setTabPosition(QTabWidget::West);
   else
