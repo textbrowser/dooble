@@ -50,7 +50,7 @@
 #include "ui_mainWindow.h"
 #include "ui_statusBar.h"
 
-#define DOOBLE_VERSION_STR "1.54"
+#define DOOBLE_VERSION_STR "1.55"
 
 using namespace simpleplugin;
 
