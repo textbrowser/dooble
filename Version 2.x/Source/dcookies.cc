@@ -117,6 +117,17 @@ QList<QNetworkCookie> dcookies::cookiesForUrl(const QUrl &url) const
 
   QList<QNetworkCookie> list(QNetworkCookieJar::cookiesForUrl(url));
 
+  if(url.scheme().toLower().trimmed() == "http")
+    for(int i = list.size() - 1; i >= 0; i--)
+      if(list.at(i).isSecure())
+	{
+	  dmisc::logError
+	    (QString("Secure cookie %1 removed because "
+		     "%2 is requesting it.").
+	     arg(list.at(i).toRawForm().constData()).arg(url.toString()));
+	  list.removeAt(i);
+	}
+
   if(dooble::s_settings.value("settingsWindow/cookiesShouldBe", 0).
      toInt() == 2)
     {
