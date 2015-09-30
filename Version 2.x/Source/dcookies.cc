@@ -216,6 +216,16 @@ bool dcookies::setCookiesFromUrl(const QList<QNetworkCookie> &cookieList,
 	if(dooble::s_cookiesBlockWindow->approach() == "accept")
 	  continue;
 
+      if(url.scheme().toLower().trimmed() == "http")
+	if(cookieList.at(i).isSecure())
+	  {
+	    dmisc::logError
+	      (QString("Secure cookie %1 declined because "
+		       "%2 is providing it.").
+	       arg(list.at(i).toRawForm().constData()).arg(url.toString()));
+	    continue;
+	  }
+
       QList<QNetworkCookie> cookie;
 
       cookie.append(cookieList.at(i));
