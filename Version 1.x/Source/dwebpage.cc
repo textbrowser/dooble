@@ -898,13 +898,14 @@ void dwebpage::fetchFaviconPathFromFrame(QWebFrame *frame)
 		    QUrl url;
 		    QString href(element.attribute(attributeName).trimmed());
 
-		    if(href.startsWith("http://") ||
-		       href.startsWith("https://"))
+		    if(href.toLower().startsWith("http://") ||
+		       href.toLower().startsWith("https://"))
 		      url = QUrl::fromUserInput(href);
 		    else if(href.startsWith("//"))
 		      {
 			url = QUrl::fromUserInput(href);
-			url.setScheme(frame->url().scheme());
+			url.setScheme(frame->url().scheme().toLower().
+				      trimmed());
 		      }
 		    else
 		      {
@@ -915,7 +916,8 @@ void dwebpage::fetchFaviconPathFromFrame(QWebFrame *frame)
 			else
 			  url.setPath(href);
 
-			url.setScheme(frame->url().scheme());
+			url.setScheme(frame->url().scheme().toLower().
+				      trimmed());
 		      }
 
 		    if(!url.isEmpty() && url.isValid())
@@ -937,7 +939,7 @@ void dwebpage::fetchFaviconPathFromFrame(QWebFrame *frame)
 
 	  url.setHost(frame->url().host());
 	  url.setPath("/favicon.ico");
-	  url.setScheme(frame->url().scheme());
+	  url.setScheme(frame->url().scheme().toLower().trimmed());
 	  downloadFavicon(url, frame->url());
 	}
     }

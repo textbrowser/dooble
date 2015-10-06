@@ -151,7 +151,7 @@ dnetworkerrorreply::dnetworkerrorreply
 {
   QNetworkRequest request(req);
   QUrl url(request.url());
-  QString scheme(url.scheme());
+  QString scheme(url.scheme().toLower().trimmed());
 
   request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
   setRequest(request);
@@ -367,7 +367,7 @@ dnetworksslerrorreply::dnetworksslerrorreply
 {
   QNetworkRequest request(req);
   QUrl url(request.url());
-  QString scheme(url.scheme());
+  QString scheme(url.scheme().toLower().trimmed());
 
   request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
   setRequest(request);
