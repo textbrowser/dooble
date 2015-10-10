@@ -147,18 +147,24 @@ void dmisc::initializeCrypt(void)
 {
   if(!gcryctl_set_thread_cbs_set)
     {
-      gcryctl_set_thread_cbs_set = true;
+      gcry_error_t err = 0;
+
 #ifdef DOOBLE_USE_PTHREADS
 #if !defined(GCRYPT_VERSION_NUMBER) || GCRYPT_VERSION_NUMBER < 0x010600
-      gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_pthread, 0);
+      err = gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_pthread, 0);
 #endif
 #else
       logError
 	("dmisc::initializeCrypt(): Using gcry_threads_qt's "
 	 "address as the second parameter to "
 	 "gcry_control().");
-      gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_qt, 0);
+      err = gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_qt, 0);
 #endif
+
+      if(err == 0)
+	gcryctl_set_thread_cbs_set = true;
+      else
+	logError("dmisc::initializeCrypt(): gcry_control() failure.");
     }
 
   if(!gcry_control(GCRYCTL_INITIALIZATION_FINISHED_P))

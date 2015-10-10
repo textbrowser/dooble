@@ -88,10 +88,17 @@ static libspoton_error_t initialize_libgcrypt
 
   if(!gcryctl_set_thread_cbs_set)
     {
-      gcryctl_set_thread_cbs_set = true;
+      gcry_error_t err = 0;
+
 #if !defined(GCRYPT_VERSION_NUMBER) || GCRYPT_VERSION_NUMBER < 0x010600
-      gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_pthread, 0);
+      err = gcry_control(GCRYCTL_SET_THREAD_CBS, &gcry_threads_pthread, 0);
 #endif
+
+      if(err == 0)
+	gcryctl_set_thread_cbs_set = true;
+      else
+	fprintf(stderr, "libspoton::initialize_libgcrypt(): "
+		"error initializing threads. Proceeding.\n");
     }
 
   if(!gcry_control(GCRYCTL_INITIALIZATION_FINISHED_P))
