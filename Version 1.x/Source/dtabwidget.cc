@@ -30,7 +30,9 @@
 #include <QMenu>
 #include <QMimeData>
 #include <QMovie>
+#include <QProgressBar>
 #include <QSettings>
+#include <QStackedWidget>
 #include <QTabBar>
 #include <QToolButton>
 #include <QWidgetAction>
@@ -250,8 +252,10 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 				  this, SLOT(slotOpenInNewWindow(void)));
 	  action->setEnabled(count() > 1);
 	  menu.addSeparator();
-	  menu.addAction(tr("Reload &Tab"),
+	  menu.addAction(tr("&Reload"),
 			 this, SLOT(slotReloadTab(void)));
+	  menu.addAction(tr("&Stop"),
+			 this, SLOT(slotStopTab(void)));
 	}
       else
 	{
@@ -418,32 +422,84 @@ void dtabwidget::setTabButton(int index)
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
-  QLabel *label = qobject_cast<QLabel *> (m_tabBar->tabButton(index, side));
+  QStackedWidget *widget = qobject_cast<QStackedWidget *>
+    (m_tabBar->tabButton(index, side));
 
-  if(!label)
+  if(!widget)
     {
-      label = new QLabel(m_tabBar);
+      widget = new QStackedWidget(m_tabBar);
 
+      QLabel *label = new QLabel(widget);
       QPixmap pixmap(16, 16);
+      QProgressBar *progressBar = new QProgressBar(widget);
+
+      if(tabPosition() == QTabWidget::East ||
+	 tabPosition() == QTabWidget::West)
+	progressBar->setOrientation(Qt::Vertical);
+      else
+	progressBar->setOrientation(Qt::Vertical);
 
       pixmap.fill(m_tabBar->backgroundRole());
+      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
       label->setPixmap(pixmap);
+      progressBar->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      progressBar->setFormat("");
+
+      if(tabPosition() == QTabWidget::East ||
+	 tabPosition() == QTabWidget::West)
+	progressBar->resize
+	  (static_cast<int> (0.80 * m_tabBar->tabSizeHint(index).width()),
+	   static_cast<int> (0.15 * m_tabBar->tabSizeHint(index).
+			     height()));
+      else
+	progressBar->resize
+	  (static_cast<int> (0.15 * m_tabBar->tabSizeHint(index).width()),
+	   static_cast<int> (0.80 * m_tabBar->tabSizeHint(index).
+			     height()));
+
+      widget->addWidget(label);
+      widget->addWidget(progressBar);
+      widget->setContentsMargins(0, 0, 0, 0);
+      widget->setCurrentIndex(0);
+      widget->setMaximumWidth(progressBar->width());
+      widget->setMaximumHeight(progressBar->height());
     }
 
   m_tabBar->setTabButton(index, side, 0);
-  m_tabBar->setTabButton(index, side, label);
+  m_tabBar->setTabButton(index, side, widget);
 }
 
 void dtabwidget::animateIndex(const int index, const bool state,
-			      const QIcon &icon)
+			      const QIcon &icon, const int progress)
 {
   QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tabBar);
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
-  QLabel *label = qobject_cast<QLabel*>
+  QLabel *label = 0;
+  QStackedWidget *widget = qobject_cast<QStackedWidget *>
     (m_tabBar->tabButton(index, side));
+
+  if(widget)
+    {
+      label = qobject_cast<QLabel *> (widget->widget(0));
+
+      if(progress >= 100 || !state)
+	widget->setCurrentIndex(0);
+      else if(currentIndex() != index)
+	{
+	  QProgressBar *progressBar = qobject_cast<QProgressBar *>
+	    (widget->widget(1));
+
+	  if(progressBar)
+	    progressBar->setValue(progress);
+
+	  widget->setCurrentIndex(1);
+	}
+      else
+	widget->setCurrentIndex(0);
+    }
 
   if(label)
     {
@@ -580,6 +636,11 @@ void dtabwidget::mouseDoubleClickEvent(QMouseEvent *event)
 void dtabwidget::slotReloadTab(void)
 {
   emit reloadTab(m_selectedTabIndex);
+}
+
+void dtabwidget::slotStopTab(void)
+{
+  emit stopTab(m_selectedTabIndex);
 }
 
 void dtabwidget::tabInserted(int index)

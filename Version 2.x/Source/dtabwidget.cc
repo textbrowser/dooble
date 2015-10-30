@@ -438,7 +438,7 @@ void dtabwidget::animateIndex(const int index, const bool state,
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
-  QLabel *label = qobject_cast<QLabel*>
+  QLabel *label = qobject_cast<QLabel *>
     (m_tabBar->tabButton(index, side));
 
   if(label)

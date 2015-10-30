@@ -327,6 +327,7 @@ class dooble: public QMainWindow
   void slotStatusBarDisplay(bool state);
   void slotStatusBarMessage(const QString &text);
   void slotStop(void);
+  void slotStopTab(const int index);
   void slotSubmitUrlToSpotOn(void);
   void slotTabMoved(int from, int to);
   void slotTabSelected(const int index);
