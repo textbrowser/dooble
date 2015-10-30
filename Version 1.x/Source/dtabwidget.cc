@@ -457,6 +457,7 @@ void dtabwidget::setTabButton(int index)
 	   static_cast<int> (0.80 * m_tabBar->tabSizeHint(index).
 			     height()));
 
+      progressBar->setMaximumWidth(15);
       widget->addWidget(label);
       widget->addWidget(progressBar);
       widget->setContentsMargins(0, 0, 0, 0);
