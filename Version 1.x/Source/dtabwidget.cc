@@ -494,7 +494,10 @@ void dtabwidget::animateIndex(const int index, const bool state,
 	    (widget->widget(1));
 
 	  if(progressBar)
-	    progressBar->setValue(progress);
+	    {
+	      progressBar->setToolTip(QString("%1%").arg(progress));
+	      progressBar->setValue(progress);
+	    }
 
 	  widget->setCurrentIndex(1);
 	}
