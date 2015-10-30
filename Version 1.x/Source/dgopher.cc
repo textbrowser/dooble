@@ -37,6 +37,7 @@ dgopher::dgopher
 (QObject *parent, const QNetworkRequest &req):QNetworkReply(parent)
 {
   initialize();
+
   QNetworkRequest request(req);
   QUrl url(request.url());
 
