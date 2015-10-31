@@ -41,7 +41,21 @@
 
 dtabbar::dtabbar(QWidget *parent):QTabBar(parent)
 {
-  m_tabPosition = QTabWidget::North;
+  QString str
+    (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
+     toString().toLower().trimmed());
+
+  if(str == "east")
+    m_tabPosition = QTabWidget::East;
+  else if(str == "north")
+    m_tabPosition = QTabWidget::North;
+  else if(str == "south")
+    m_tabPosition = QTabWidget::South;
+  else if(str == "west")
+    m_tabPosition = QTabWidget::West;
+  else
+    m_tabPosition = QTabWidget::North;
+
   setAcceptDrops(true);
   setDocumentMode(true);
   setElideMode(Qt::ElideRight);
@@ -653,18 +667,23 @@ void dtabwidget::slotSetPosition(void)
   QString str
     (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
      toString().toLower().trimmed());
+  QTabWidget::TabPosition position = QTabWidget::East;
 
   if(str == "east")
-    setTabPosition(QTabWidget::East);
+    position = QTabWidget::East;
   else if(str == "north")
-    setTabPosition(QTabWidget::North);
+    position = QTabWidget::North;
   else if(str == "south")
-    setTabPosition(QTabWidget::South);
+    position = QTabWidget::South;
   else if(str == "west")
-    setTabPosition(QTabWidget::West);
+    position = QTabWidget::West;
   else
-    setTabPosition(QTabWidget::North);
+    position = QTabWidget::North;
 
+  if(position == tabPosition())
+    return;
+
+  setTabPosition(position);
   m_tabBar->setTabPosition(tabPosition());
   m_tabBar->resize(m_tabBar->sizeHint());
 }
