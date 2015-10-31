@@ -433,31 +433,14 @@ void dtabwidget::setTabButton(int index)
       QPixmap pixmap(16, 16);
       QProgressBar *progressBar = new QProgressBar(widget);
 
-      if(tabPosition() == QTabWidget::East ||
-	 tabPosition() == QTabWidget::West)
-	progressBar->setOrientation(Qt::Vertical);
-      else
-	progressBar->setOrientation(Qt::Vertical);
-
       pixmap.fill(m_tabBar->backgroundRole());
       label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
       label->setPixmap(pixmap);
       progressBar->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
       progressBar->setFormat("");
-
-      if(tabPosition() == QTabWidget::East ||
-	 tabPosition() == QTabWidget::West)
-	progressBar->resize
-	  (static_cast<int> (0.80 * m_tabBar->tabSizeHint(index).width()),
-	   static_cast<int> (0.15 * m_tabBar->tabSizeHint(index).
-			     height()));
-      else
-	progressBar->resize
-	  (static_cast<int> (0.15 * m_tabBar->tabSizeHint(index).width()),
-	   static_cast<int> (0.80 * m_tabBar->tabSizeHint(index).
-			     height()));
-
-      progressBar->setMaximumWidth(label->sizeHint().width());
+      progressBar->setMaximumHeight(18); // 16 + something.
+      progressBar->setMaximumWidth(18); // 16 + something.
+      progressBar->setOrientation(Qt::Vertical);
       widget->addWidget(label);
       widget->addWidget(progressBar);
       widget->setContentsMargins(0, 0, 0, 0);
