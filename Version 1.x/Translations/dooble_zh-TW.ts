@@ -1413,10 +1413,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reload &amp;Tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Private Cookies</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1438,6 +1434,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New Pr&amp;ivate Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reload</source>
+        <translation type="unfinished">重新載入(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Stop</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
