@@ -1745,71 +1745,71 @@
         <translation type="obsolete">Yeni Pencerede &amp;Aç</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="237"/>
+        <location filename="../Source/dtabwidget.cc" line="251"/>
         <source>&amp;Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="240"/>
-        <location filename="../Source/dtabwidget.cc" line="262"/>
+        <location filename="../Source/dtabwidget.cc" line="254"/>
+        <location filename="../Source/dtabwidget.cc" line="276"/>
         <source>Close Ta&amp;b</source>
         <translation type="unfinished">Sekmeyi Kapat</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="243"/>
-        <location filename="../Source/dtabwidget.cc" line="265"/>
+        <location filename="../Source/dtabwidget.cc" line="257"/>
+        <location filename="../Source/dtabwidget.cc" line="279"/>
         <source>Close &amp;Other Tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="247"/>
-        <location filename="../Source/dtabwidget.cc" line="269"/>
+        <location filename="../Source/dtabwidget.cc" line="261"/>
+        <location filename="../Source/dtabwidget.cc" line="283"/>
         <source>New Pr&amp;ivate Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="249"/>
-        <location filename="../Source/dtabwidget.cc" line="271"/>
+        <location filename="../Source/dtabwidget.cc" line="263"/>
+        <location filename="../Source/dtabwidget.cc" line="285"/>
         <source>New &amp;Tab</source>
         <translation type="unfinished">Yeni Sekme</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="251"/>
+        <location filename="../Source/dtabwidget.cc" line="265"/>
         <source>Open in &amp;New Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="255"/>
+        <location filename="../Source/dtabwidget.cc" line="269"/>
         <source>&amp;Reload</source>
         <translation type="unfinished">Yeniden yükle</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="257"/>
+        <location filename="../Source/dtabwidget.cc" line="271"/>
         <source>&amp;Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="276"/>
+        <location filename="../Source/dtabwidget.cc" line="290"/>
         <source>&amp;JavaScript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="287"/>
+        <location filename="../Source/dtabwidget.cc" line="301"/>
         <source>&amp;Private Browsing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="298"/>
+        <location filename="../Source/dtabwidget.cc" line="312"/>
         <source>&amp;Web Plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="310"/>
+        <location filename="../Source/dtabwidget.cc" line="324"/>
         <source>&amp;Private Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="323"/>
+        <location filename="../Source/dtabwidget.cc" line="337"/>
         <source>&amp;View Private Cookies</source>
         <translation type="unfinished"></translation>
     </message>
