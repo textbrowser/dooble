@@ -40,6 +40,13 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QProgressBar::chunk {
+background-color: #cd96cd; 
+margin: 1px;
+}
+</string>
+     </property>
      <property name="textVisible">
       <bool>false</bool>
      </property>

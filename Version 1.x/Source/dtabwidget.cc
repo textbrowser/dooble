@@ -457,6 +457,8 @@ void dtabwidget::setTabButton(int index)
       progressBar->setOrientation(Qt::Vertical);
       progressBar->setStyleSheet
 	("QProgressBar {"
+	 "background-color: qlineargradient(x1: 0, y1: 0.5, x2: 0.5, "
+	 "y2: 1.0, stop: 0 lightgrey, stop: 1 white); "
 	 "border: 1px solid grey; "
 	 "border-radius: 0px;"
 	 "}"
@@ -505,6 +507,7 @@ void dtabwidget::animateIndex(const int index, const bool state,
 	    {
 	      progressBar->setToolTip(QString("%1%").arg(progress));
 	      progressBar->setValue(progress);
+	      progressBar->repaint();
 	    }
 
 	  widget->setCurrentIndex(1);
