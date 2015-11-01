@@ -1368,6 +1368,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  this, SLOT(slotBookmark(const int)));
   connect(ui.tabWidget, SIGNAL(reloadTab(const int)),
 	  this, SLOT(slotReloadTab(const int)));
+  connect(ui.tabWidget, SIGNAL(stopTab(const int)),
+	  this, SLOT(slotStopTab(const int)));
   connect(ui.action_Cookies, SIGNAL(triggered(void)),
 	  s_cookiesBlockWindow, SLOT(slotShow(void)));
   connect(ui.action_HTTP_Cookies, SIGNAL(triggered(void)),
@@ -2208,7 +2210,8 @@ void dooble::newTabInit(dview *p)
   ** having a "selected" background color (stylesheet).
   */
 
-  ui.tabWidget->animateIndex(index, !p->isLoaded(), p->webviewIcon());
+  ui.tabWidget->animateIndex(index, !p->isLoaded(), p->webviewIcon(),
+			     p->progress());
 
   if(p == qobject_cast<dview *> (ui.tabWidget->currentWidget()))
     sb.statusLabel->clear();
@@ -2832,6 +2835,14 @@ void dooble::slotReload(void)
     }
 }
 
+void dooble::slotStopTab(const int index)
+{
+  dview *p = qobject_cast<dview *> (ui.tabWidget->widget(index));
+
+  if(p)
+    p->stop();
+}
+
 void dooble::slotBack(void)
 {
   dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
@@ -2862,10 +2873,23 @@ void dooble::slotForward(void)
 
 void dooble::slotTabSelected(const int index)
 {
+  for(int i = 0; i < ui.tabWidget->count(); i++)
+    if(i != index)
+      {
+	dview *p = qobject_cast<dview *> (ui.tabWidget->widget(i));
+
+	if(p)
+	  ui.tabWidget->animateIndex
+	    (i, !p->isLoaded(), p->webviewIcon(), p->progress());
+      }
+
   dview *p = qobject_cast<dview *> (ui.tabWidget->widget(index));
 
   if(p)
     {
+      ui.tabWidget->animateIndex
+	(ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
+	 p->progress());
       ui.homeToolButton->setEnabled(true);
       ui.locationLineEdit->setVisible(true);
       ui.reloadToolButton->setEnabled(true);
@@ -3121,7 +3145,8 @@ void dooble::slotIconChanged(void)
     {
       if(ui.tabWidget->indexOf(p) > -1)
 	ui.tabWidget->animateIndex
-	  (ui.tabWidget->indexOf(p), !p->isLoaded(), p->icon());
+	  (ui.tabWidget->indexOf(p), !p->isLoaded(), p->icon(),
+	   p->progress());
 
       int index = ui.locationLineEdit->findText
 	(p->url().toString(QUrl::StripTrailingSlash));
@@ -3162,6 +3187,9 @@ void dooble::slotLoadProgress(int progress)
     {
       sb.progressBar->setMaximum(100);
       sb.progressBar->setVisible(!p->isLoaded());
+      ui.tabWidget->animateIndex
+	(ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
+	 p->progress());
       ui.reloadStopWidget->setCurrentIndex(p->isLoaded() ? 1 : 0);
       ui.stopToolButton->setEnabled(!p->isLoaded());
       ui.actionStop->setEnabled(!p->isLoaded());
@@ -3220,7 +3248,8 @@ void dooble::slotLoadFinished(bool ok)
 	  int index = ui.tabWidget->indexOf(p);
 
 	  if(index > -1)
-	    ui.tabWidget->animateIndex(index, false, p->webviewIcon());
+	    ui.tabWidget->animateIndex(index, false, p->webviewIcon(),
+				       p->progress());
 
 	  if(p->tabAction())
 	    p->tabAction()->setIcon(p->webviewIcon());
@@ -3260,7 +3289,7 @@ void dooble::slotLoadFinished(bool ok)
 
       if(ui.tabWidget->indexOf(p) > -1)
 	ui.tabWidget->animateIndex
-	  (ui.tabWidget->indexOf(p), false, p->icon());
+	  (ui.tabWidget->indexOf(p), false, p->icon(), p->progress());
 
       QString title(p->title());
 
@@ -3952,7 +3981,8 @@ void dooble::slotLoadStarted(void)
 
   if(p)
     if(ui.tabWidget->indexOf(p) > -1)
-      ui.tabWidget->animateIndex(ui.tabWidget->indexOf(p), true, QIcon());
+      ui.tabWidget->animateIndex(ui.tabWidget->indexOf(p), true, QIcon(),
+				 p->progress());
 
   if(p && p == qobject_cast<dview *> (ui.tabWidget->currentWidget()))
     {
@@ -5240,7 +5270,8 @@ void dooble::slotResetUrl(void)
 				   title.replace("&", "&&"));
 	  ui.tabWidget->setTabToolTip(ui.tabWidget->indexOf(p), title);
 	  ui.tabWidget->animateIndex
-	    (ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon());
+	    (ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
+	     p->progress());
 	}
 
       ui.locationLineEdit->setText

@@ -62,7 +62,8 @@ class dtabwidget: public QTabWidget
  public:
   dtabwidget(QWidget *parent);
   ~dtabwidget();
-  void animateIndex(const int index, const bool state, const QIcon &icon);
+  void animateIndex(const int index, const bool state, const QIcon &icon,
+		    const int progress);
   void setBarVisible(const bool state);
   void setTabButton(int index);
 
@@ -97,16 +98,19 @@ class dtabwidget: public QTabWidget
   void slotReloadTab(void);
   void slotSetPosition(void);
   void slotShowContextMenu(const QPoint &point);
+  void slotStopTab(void);
   void slotViewPrivateCookies(void);
   void slotWebPlugins(void);
 
  signals:
   void bookmark(const int index);
   void closeTab(const int index);
+  void createPrivateTab(void);
   void createTab(void);
   void openInNewWindow(const int index);
   void openLinkInNewTab(const QUrl &url);
   void reloadTab(const int index);
+  void stopTab(const int index);
   void tabMoved(int from, int to);
   void urlsReceivedViaDrop(const QList<QUrl> &list);
 };

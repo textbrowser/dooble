@@ -222,7 +222,8 @@ bool dcookies::setCookiesFromUrl(const QList<QNetworkCookie> &cookieList,
 	    dmisc::logError
 	      (QString("Secure cookie %1 declined because "
 		       "%2 is providing it.").
-	       arg(list.at(i).toRawForm().constData()).arg(url.toString()));
+	       arg(cookieList.at(i).toRawForm().constData()).
+	       arg(url.toString()));
 	    continue;
 	  }
 
