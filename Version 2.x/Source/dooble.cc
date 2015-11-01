@@ -3200,6 +3200,10 @@ void dooble::slotLoadProgress(int progress)
 				      sb.progressBar->maximum()));
       sb.statusLabel->setText(p->statusMessage());
     }
+  else if(p)
+    ui.tabWidget->animateIndex
+      (ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
+       p->progress());
 }
 
 void dooble::slotLoadFinished(bool ok)
