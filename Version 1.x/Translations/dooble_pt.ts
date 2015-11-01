@@ -1369,10 +1369,10 @@
         <location filename="../Source/dooble.cc" line="2425"/>
         <location filename="../Source/dooble.cc" line="2490"/>
         <location filename="../Source/dooble.cc" line="3285"/>
-        <location filename="../Source/dooble.cc" line="3465"/>
-        <location filename="../Source/dooble.cc" line="3489"/>
-        <location filename="../Source/dooble.cc" line="5031"/>
-        <location filename="../Source/dooble.cc" line="5513"/>
+        <location filename="../Source/dooble.cc" line="3469"/>
+        <location filename="../Source/dooble.cc" line="3493"/>
+        <location filename="../Source/dooble.cc" line="5035"/>
+        <location filename="../Source/dooble.cc" line="5517"/>
         <source>(Untitled)</source>
         <translation>(Sem nome)</translation>
     </message>
@@ -1380,13 +1380,13 @@
         <location filename="../Source/dooble.cc" line="3071"/>
         <location filename="../Source/dooble.cc" line="3140"/>
         <location filename="../Source/dooble.cc" line="3256"/>
-        <location filename="../Source/dooble.cc" line="3565"/>
-        <location filename="../Source/dooble.cc" line="3704"/>
-        <location filename="../Source/dooble.cc" line="3744"/>
-        <location filename="../Source/dooble.cc" line="3954"/>
-        <location filename="../Source/dooble.cc" line="5437"/>
-        <location filename="../Source/dooble.cc" line="6062"/>
-        <location filename="../Source/dooble.cc" line="6365"/>
+        <location filename="../Source/dooble.cc" line="3569"/>
+        <location filename="../Source/dooble.cc" line="3708"/>
+        <location filename="../Source/dooble.cc" line="3748"/>
+        <location filename="../Source/dooble.cc" line="3958"/>
+        <location filename="../Source/dooble.cc" line="5441"/>
+        <location filename="../Source/dooble.cc" line="6066"/>
+        <location filename="../Source/dooble.cc" line="6369"/>
         <source>Dooble Web Browser</source>
         <translation>Navegador web Dooble</translation>
     </message>
@@ -1426,7 +1426,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="3073"/>
         <location filename="../Source/dooble.cc" line="3258"/>
-        <location filename="../Source/dooble.cc" line="5439"/>
+        <location filename="../Source/dooble.cc" line="5443"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Navegador web Dooble (%1)</translation>
     </message>
@@ -1435,44 +1435,44 @@
         <location filename="../Source/dooble.cc" line="3084"/>
         <location filename="../Source/dooble.cc" line="3266"/>
         <location filename="../Source/dooble.cc" line="3269"/>
-        <location filename="../Source/dooble.cc" line="5447"/>
-        <location filename="../Source/dooble.cc" line="5450"/>
-        <location filename="../Source/dooble.cc" line="6367"/>
+        <location filename="../Source/dooble.cc" line="5451"/>
+        <location filename="../Source/dooble.cc" line="5454"/>
+        <location filename="../Source/dooble.cc" line="6371"/>
         <source> - Dooble Web Browser</source>
         <translation> - Navegador web Dooble</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3976"/>
+        <location filename="../Source/dooble.cc" line="3980"/>
         <source>&amp;Clear</source>
         <translation>&amp;Limpar</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4576"/>
+        <location filename="../Source/dooble.cc" line="4580"/>
         <source>Save</source>
         <translation>Gravar</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5169"/>
+        <location filename="../Source/dooble.cc" line="5173"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5304"/>
+        <location filename="../Source/dooble.cc" line="5308"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>O sítio %1 está a solicitar credenciais.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5368"/>
+        <location filename="../Source/dooble.cc" line="5372"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>O proxy %1:%2 está a solicitar credenciais.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6402"/>
+        <location filename="../Source/dooble.cc" line="6406"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Tem a certeza que quer abrir %1 páginas?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6555"/>
+        <location filename="../Source/dooble.cc" line="6559"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Tem a certeza que quer abandonar a página modificada?</translation>
     </message>
@@ -1481,39 +1481,39 @@
         <translation type="vanished">dooble::slotRefreshPlugins(): A remover a ação %1.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6874"/>
+        <location filename="../Source/dooble.cc" line="6878"/>
         <source>Start %1</source>
         <translation>Iniciar %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6942"/>
+        <location filename="../Source/dooble.cc" line="6946"/>
         <source>Add-on Load Failed</source>
         <translation>Falha ao carregar extra</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6965"/>
-        <location filename="../Source/dooble.cc" line="7016"/>
+        <location filename="../Source/dooble.cc" line="6969"/>
+        <location filename="../Source/dooble.cc" line="7020"/>
         <source>Add-on</source>
         <translation>Extra</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7690"/>
+        <location filename="../Source/dooble.cc" line="7694"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7693"/>
         <location filename="../Source/dooble.cc" line="7697"/>
+        <location filename="../Source/dooble.cc" line="7701"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8058"/>
+        <location filename="../Source/dooble.cc" line="8062"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8060"/>
+        <location filename="../Source/dooble.cc" line="8064"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1522,34 +1522,34 @@
         <translation type="obsolete">Um sítio desconhecido (URL inválido ou vazio) causou uma exceção. Clique para visualizar.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7428"/>
+        <location filename="../Source/dooble.cc" line="7432"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Lembrete</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7429"/>
+        <location filename="../Source/dooble.cc" line="7433"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Ainda não definiu a palavra-chave. Aceda ao painel Proteção das definições e escolha a palavra-chave. Assim que escolher a palavra-chave, os marcadores, cookies e todas as informações essenciais estarão disponíveis nas sessões futuras. Pode desativar este alerta no mesmo painel.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7126"/>
-        <location filename="../Source/dooble.cc" line="7131"/>
+        <location filename="../Source/dooble.cc" line="7130"/>
+        <location filename="../Source/dooble.cc" line="7135"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>O sítio %1 causou uma exceção. Clique para visualizar.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7365"/>
-        <location filename="../Source/dooble.cc" line="7367"/>
+        <location filename="../Source/dooble.cc" line="7369"/>
         <location filename="../Source/dooble.cc" line="7371"/>
+        <location filename="../Source/dooble.cc" line="7375"/>
         <source>Restore Session</source>
         <translation>Restaurar sessão</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2865"/>
         <location filename="../Source/dooble.cc" line="2917"/>
-        <location filename="../Source/dooble.cc" line="3904"/>
-        <location filename="../Source/dooble.cc" line="6399"/>
-        <location filename="../Source/dooble.cc" line="6551"/>
+        <location filename="../Source/dooble.cc" line="3908"/>
+        <location filename="../Source/dooble.cc" line="6403"/>
+        <location filename="../Source/dooble.cc" line="6555"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Confirmação</translation>
     </message>
@@ -1559,12 +1559,12 @@
         <translation>Se fechar o Dooble, as transferências em curso serão interrompidas. Tem a certeza que quer fechar?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3907"/>
+        <location filename="../Source/dooble.cc" line="3911"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Tem a certeza que quer fechar este separador?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5166"/>
+        <location filename="../Source/dooble.cc" line="5170"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Abrir diretório</translation>
     </message>
@@ -1582,12 +1582,12 @@
         <translation type="obsolete">Limpar Histórico</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4441"/>
+        <location filename="../Source/dooble.cc" line="4445"/>
         <source>Dooble Web Browser: About</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4573"/>
+        <location filename="../Source/dooble.cc" line="4577"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Gravar como</translation>
     </message>
@@ -1596,10 +1596,10 @@
         <translation type="obsolete">&amp;Gravar</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4954"/>
-        <location filename="../Source/dooble.cc" line="4960"/>
-        <location filename="../Source/dooble.cc" line="4962"/>
+        <location filename="../Source/dooble.cc" line="4958"/>
+        <location filename="../Source/dooble.cc" line="4964"/>
         <location filename="../Source/dooble.cc" line="4966"/>
+        <location filename="../Source/dooble.cc" line="4970"/>
         <source>Dooble Desktop</source>
         <translation>Área de trabalho Dooble</translation>
     </message>
@@ -3304,7 +3304,7 @@
     </message>
     <message>
         <location filename="../UI/settings.ui" line="1132"/>
-        <location filename="../UI/settings.ui" line="3852"/>
+        <location filename="../UI/settings.ui" line="3855"/>
         <source>&amp;Clear</source>
         <translation>&amp;Limpar</translation>
     </message>
@@ -3434,7 +3434,7 @@
         <location filename="../UI/settings.ui" line="3510"/>
         <location filename="../UI/settings.ui" line="3544"/>
         <location filename="../UI/settings.ui" line="3669"/>
-        <location filename="../UI/settings.ui" line="3943"/>
+        <location filename="../UI/settings.ui" line="3946"/>
         <source>&amp;Exceptions</source>
         <translation>&amp;Exceções</translation>
     </message>
@@ -3467,17 +3467,17 @@
         <translation type="obsolete">Aceitar alertas.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4071"/>
+        <location filename="../UI/settings.ui" line="4074"/>
         <source>Always show the tab bar.</source>
         <translation>Mostrar sempre a barra de separadores.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4081"/>
+        <location filename="../UI/settings.ui" line="4084"/>
         <source>Close the selected tab via middle mouse button click.</source>
         <translation>Fechar o separador selecionado com a roda do rato.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4111"/>
+        <location filename="../UI/settings.ui" line="4114"/>
         <source>Open links in new tabs instead of new windows.</source>
         <translation>Abrir ligações em novos separadores e não em novas janelas.</translation>
     </message>
@@ -3593,42 +3593,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3715"/>
+        <location filename="../UI/settings.ui" line="3718"/>
         <source>Allow hiding of the menu bar.</source>
         <translation>Permitir ocultação da barra de menu.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3725"/>
+        <location filename="../UI/settings.ui" line="3728"/>
         <source>Allow hiding of the status bar.</source>
         <translation>Permitir ocultação da barra de estado.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3732"/>
+        <location filename="../UI/settings.ui" line="3735"/>
         <source>Allow hiding of the location tool bar.</source>
         <translation>Permitir ocultação da barra de endereço.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3739"/>
+        <location filename="../UI/settings.ui" line="3742"/>
         <source>Accept dialog alerts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3749"/>
+        <location filename="../UI/settings.ui" line="3752"/>
         <source>Accept dialog prompts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3764"/>
+        <location filename="../UI/settings.ui" line="3767"/>
         <source>Local documents are allowed to access other local URLs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3791"/>
+        <location filename="../UI/settings.ui" line="3794"/>
         <source>Notify me of console events and exceptions.</source>
         <translation>Notificar eventos de consola e exceções.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3845"/>
+        <location filename="../UI/settings.ui" line="3848"/>
         <source>Record favicon data to favicons.db.</source>
         <translation>Gravar dados e base de dados de favicons.</translation>
     </message>
@@ -3641,7 +3641,7 @@
         <translation type="obsolete">Erros SSL</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3913"/>
+        <location filename="../UI/settings.ui" line="3916"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A relaxed setting allows Dooble to ignore SSL errors that are generated by third-party elements. A strict setting instructs Dooble to observe all SSL errors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se definir a opção permissiva, o Dooble ignora os erros SSL gerados pelos elementos de terceiros e se definir a opção não permissiva, o Dooble mostra todos os erros SSL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3662,27 +3662,27 @@
         <translation type="obsolete">WebGL</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4101"/>
+        <location filename="../UI/settings.ui" line="4104"/>
         <source>Display the Dooble Desktop in new windows.</source>
         <translation>Mostrar área de trabalho Dooble nas novas janelas.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4121"/>
+        <location filename="../UI/settings.ui" line="4124"/>
         <source>New tabs should be added at the end of the tab bar.</source>
         <translation>Os novos separadores são abertos no fim da barra de separadores.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4128"/>
+        <location filename="../UI/settings.ui" line="4131"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Avisar antes de fechar uma página com conteúdo modificado.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4135"/>
+        <location filename="../UI/settings.ui" line="4138"/>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation>Avisar ao abandonar uma página com conteúdo modificado.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4159"/>
+        <location filename="../UI/settings.ui" line="4162"/>
         <source>HTTP Status Codes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3711,7 +3711,7 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4185"/>
+        <location filename="../UI/settings.ui" line="4188"/>
         <source>Periodically purge memory caches.</source>
         <translation>Limpar cache periodicamente.</translation>
     </message>
@@ -3720,12 +3720,12 @@
         <translation type="obsolete">Navegação entre elementos</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4251"/>
+        <location filename="../UI/settings.ui" line="4254"/>
         <source>Center child windows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4265"/>
+        <location filename="../UI/settings.ui" line="4268"/>
         <source>Open user windows as new processes.</source>
         <translation>Abrir janelas de utilizador como novos processos.</translation>
     </message>
@@ -4072,47 +4072,47 @@
         <translation type="unfinished">Perguntar</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3818"/>
+        <location filename="../UI/settings.ui" line="3821"/>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3903"/>
+        <location filename="../UI/settings.ui" line="3906"/>
         <source>Sight SSL errors. Assume a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3923"/>
+        <location filename="../UI/settings.ui" line="3926"/>
         <source>relaxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3928"/>
+        <location filename="../UI/settings.ui" line="3931"/>
         <source>strict</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3936"/>
+        <location filename="../UI/settings.ui" line="3939"/>
         <source>approach.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3967"/>
+        <location filename="../UI/settings.ui" line="3970"/>
         <source>Speedy network protocol.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4172"/>
+        <location filename="../UI/settings.ui" line="4175"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4258"/>
+        <location filename="../UI/settings.ui" line="4261"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4272"/>
+        <location filename="../UI/settings.ui" line="4275"/>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4228,12 +4228,12 @@
         <translation type="obsolete">Suprimir reencaminhamento HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4061"/>
+        <location filename="../UI/settings.ui" line="4064"/>
         <source>After creating a new tab from a Web link, switch to it immediately.</source>
         <translation>Ao abrir um separador através de uma ligação web, trocar imediatamente.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4212"/>
+        <location filename="../UI/settings.ui" line="4215"/>
         <source>Spatial navigation.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4464,12 +4464,12 @@
         <translation>Java</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3698"/>
+        <location filename="../UI/settings.ui" line="3701"/>
         <source>Allow opening of new windows.</source>
         <translation>Permitir abertura de novas janelas.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3708"/>
+        <location filename="../UI/settings.ui" line="3711"/>
         <source>Accept geometry-change requests.</source>
         <translation>Aceitar pedidos de alteração de geometria.</translation>
     </message>
@@ -4485,22 +4485,22 @@
         <translation>Separadores</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3876"/>
+        <location filename="../UI/settings.ui" line="3879"/>
         <source>Session restoration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3991"/>
+        <location filename="../UI/settings.ui" line="3994"/>
         <source>Web plugins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4018"/>
+        <location filename="../UI/settings.ui" line="4021"/>
         <source>WebGL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4091"/>
+        <location filename="../UI/settings.ui" line="4094"/>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation>Criar um novo separador ao clicar duas vezes na barra de separadores.</translation>
     </message>

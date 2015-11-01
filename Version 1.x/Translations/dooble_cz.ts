@@ -1330,10 +1330,10 @@
         <location filename="../Source/dooble.cc" line="2425"/>
         <location filename="../Source/dooble.cc" line="2490"/>
         <location filename="../Source/dooble.cc" line="3285"/>
-        <location filename="../Source/dooble.cc" line="3465"/>
-        <location filename="../Source/dooble.cc" line="3489"/>
-        <location filename="../Source/dooble.cc" line="5031"/>
-        <location filename="../Source/dooble.cc" line="5513"/>
+        <location filename="../Source/dooble.cc" line="3469"/>
+        <location filename="../Source/dooble.cc" line="3493"/>
+        <location filename="../Source/dooble.cc" line="5035"/>
+        <location filename="../Source/dooble.cc" line="5517"/>
         <source>(Untitled)</source>
         <translation>(Bez názvu)</translation>
     </message>
@@ -1341,13 +1341,13 @@
         <location filename="../Source/dooble.cc" line="3071"/>
         <location filename="../Source/dooble.cc" line="3140"/>
         <location filename="../Source/dooble.cc" line="3256"/>
-        <location filename="../Source/dooble.cc" line="3565"/>
-        <location filename="../Source/dooble.cc" line="3704"/>
-        <location filename="../Source/dooble.cc" line="3744"/>
-        <location filename="../Source/dooble.cc" line="3954"/>
-        <location filename="../Source/dooble.cc" line="5437"/>
-        <location filename="../Source/dooble.cc" line="6062"/>
-        <location filename="../Source/dooble.cc" line="6365"/>
+        <location filename="../Source/dooble.cc" line="3569"/>
+        <location filename="../Source/dooble.cc" line="3708"/>
+        <location filename="../Source/dooble.cc" line="3748"/>
+        <location filename="../Source/dooble.cc" line="3958"/>
+        <location filename="../Source/dooble.cc" line="5441"/>
+        <location filename="../Source/dooble.cc" line="6066"/>
+        <location filename="../Source/dooble.cc" line="6369"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1387,7 +1387,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="3073"/>
         <location filename="../Source/dooble.cc" line="3258"/>
-        <location filename="../Source/dooble.cc" line="5439"/>
+        <location filename="../Source/dooble.cc" line="5443"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Browser (%1)</translation>
     </message>
@@ -1396,44 +1396,44 @@
         <location filename="../Source/dooble.cc" line="3084"/>
         <location filename="../Source/dooble.cc" line="3266"/>
         <location filename="../Source/dooble.cc" line="3269"/>
-        <location filename="../Source/dooble.cc" line="5447"/>
-        <location filename="../Source/dooble.cc" line="5450"/>
-        <location filename="../Source/dooble.cc" line="6367"/>
+        <location filename="../Source/dooble.cc" line="5451"/>
+        <location filename="../Source/dooble.cc" line="5454"/>
+        <location filename="../Source/dooble.cc" line="6371"/>
         <source> - Dooble Web Browser</source>
         <translation>- Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3976"/>
+        <location filename="../Source/dooble.cc" line="3980"/>
         <source>&amp;Clear</source>
         <translation>&amp;Vyprázdnit</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4576"/>
+        <location filename="../Source/dooble.cc" line="4580"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5169"/>
+        <location filename="../Source/dooble.cc" line="5173"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5304"/>
+        <location filename="../Source/dooble.cc" line="5308"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>Stránka %1 požaduje heslo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5368"/>
+        <location filename="../Source/dooble.cc" line="5372"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>Proxy %1:%2 požaduje heslo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6402"/>
+        <location filename="../Source/dooble.cc" line="6406"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Jste si jistý, že chcete otevřít %1 stránek?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6555"/>
+        <location filename="../Source/dooble.cc" line="6559"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Jste si jistý, že chcete opustit změněné stránky?</translation>
     </message>
@@ -1442,71 +1442,71 @@
         <translation type="vanished">dooble::slotRefreshPlugins(): Odstranit proces %1.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6874"/>
+        <location filename="../Source/dooble.cc" line="6878"/>
         <source>Start %1</source>
         <translation>Spustit %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6942"/>
+        <location filename="../Source/dooble.cc" line="6946"/>
         <source>Add-on Load Failed</source>
         <translation>Nahrání doplňku se nezdařilo</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6965"/>
-        <location filename="../Source/dooble.cc" line="7016"/>
+        <location filename="../Source/dooble.cc" line="6969"/>
+        <location filename="../Source/dooble.cc" line="7020"/>
         <source>Add-on</source>
         <translation>Doplněk</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7428"/>
+        <location filename="../Source/dooble.cc" line="7432"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Připomenutí</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7429"/>
+        <location filename="../Source/dooble.cc" line="7433"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Heslo nebylo připraveno. Navštivte, prosím, panel s trezorem v okně s nastavením a zvolte heslo. Jakmile je heslo vybráno, budou záložky, koláčky a všechny ostatní podstatné informace dostupné v budoucích sezeních. Tuto připomínku můžete zakázat v panelu s trezorem.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7690"/>
+        <location filename="../Source/dooble.cc" line="7694"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Zobrazit &amp;koláčky %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7693"/>
         <location filename="../Source/dooble.cc" line="7697"/>
+        <location filename="../Source/dooble.cc" line="7701"/>
         <source>View Site &amp;Cookies</source>
         <translation>Zobrazit &amp;koláčky stránek</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8058"/>
+        <location filename="../Source/dooble.cc" line="8062"/>
         <source>&amp;Show Menu Bar</source>
         <translation>&amp;Ukázat pruh s hlavní nabídkou</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8060"/>
+        <location filename="../Source/dooble.cc" line="8064"/>
         <source>&amp;Hide Menu Bar</source>
         <translation>&amp;Skrýt pruh s hlavní nabídkou</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7126"/>
-        <location filename="../Source/dooble.cc" line="7131"/>
+        <location filename="../Source/dooble.cc" line="7130"/>
+        <location filename="../Source/dooble.cc" line="7135"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Stránka %1 zapříčinila výjimku. Klepněte, prosím, pro její přezkoušení.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7365"/>
-        <location filename="../Source/dooble.cc" line="7367"/>
+        <location filename="../Source/dooble.cc" line="7369"/>
         <location filename="../Source/dooble.cc" line="7371"/>
+        <location filename="../Source/dooble.cc" line="7375"/>
         <source>Restore Session</source>
         <translation>Obnovit sezení</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2865"/>
         <location filename="../Source/dooble.cc" line="2917"/>
-        <location filename="../Source/dooble.cc" line="3904"/>
-        <location filename="../Source/dooble.cc" line="6399"/>
-        <location filename="../Source/dooble.cc" line="6551"/>
+        <location filename="../Source/dooble.cc" line="3908"/>
+        <location filename="../Source/dooble.cc" line="6403"/>
+        <location filename="../Source/dooble.cc" line="6555"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Potvrzení</translation>
     </message>
@@ -1516,12 +1516,12 @@
         <translation>Ukončení Dooble povede ke zrušení probíhajících stahování. Jste si jistý, že chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3907"/>
+        <location filename="../Source/dooble.cc" line="3911"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Jste si jistý, že chcete zavřít tuto změněnou kartu?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5166"/>
+        <location filename="../Source/dooble.cc" line="5170"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Browser: Otevřít adresář</translation>
     </message>
@@ -1535,12 +1535,12 @@
         <translation type="obsolete">Vymazat historii</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4441"/>
+        <location filename="../Source/dooble.cc" line="4445"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Browser: O programu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4573"/>
+        <location filename="../Source/dooble.cc" line="4577"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Browser: Uložit jako</translation>
     </message>
@@ -1549,10 +1549,10 @@
         <translation type="obsolete">&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4954"/>
-        <location filename="../Source/dooble.cc" line="4960"/>
-        <location filename="../Source/dooble.cc" line="4962"/>
+        <location filename="../Source/dooble.cc" line="4958"/>
+        <location filename="../Source/dooble.cc" line="4964"/>
         <location filename="../Source/dooble.cc" line="4966"/>
+        <location filename="../Source/dooble.cc" line="4970"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Desktop</translation>
     </message>
@@ -3246,7 +3246,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../UI/settings.ui" line="1132"/>
-        <location filename="../UI/settings.ui" line="3852"/>
+        <location filename="../UI/settings.ui" line="3855"/>
         <source>&amp;Clear</source>
         <translation>&amp;Smazat</translation>
     </message>
@@ -3432,7 +3432,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../UI/settings.ui" line="3510"/>
         <location filename="../UI/settings.ui" line="3544"/>
         <location filename="../UI/settings.ui" line="3669"/>
-        <location filename="../UI/settings.ui" line="3943"/>
+        <location filename="../UI/settings.ui" line="3946"/>
         <source>&amp;Exceptions</source>
         <translation>&amp;Výjimky</translation>
     </message>
@@ -3553,17 +3553,17 @@ p, li { white-space: pre-wrap; }
         <translation>Povolit prověrku přes stránkového skriptu.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3715"/>
+        <location filename="../UI/settings.ui" line="3718"/>
         <source>Allow hiding of the menu bar.</source>
         <translation>Povolit skrývání nabídkového pruhu.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3725"/>
+        <location filename="../UI/settings.ui" line="3728"/>
         <source>Allow hiding of the status bar.</source>
         <translation>Povolit skrývání stavového řádku.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3732"/>
+        <location filename="../UI/settings.ui" line="3735"/>
         <source>Allow hiding of the location tool bar.</source>
         <translation>Povolit skrývání nástrojového pruhu pro umístění.</translation>
     </message>
@@ -3578,62 +3578,62 @@ p, li { white-space: pre-wrap; }
         <translation>JavaScript</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3903"/>
+        <location filename="../UI/settings.ui" line="3906"/>
         <source>Sight SSL errors. Assume a</source>
         <translation>Při zpozorování chyby SSL. Předpokládat, že se má použít</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3923"/>
+        <location filename="../UI/settings.ui" line="3926"/>
         <source>relaxed</source>
         <translation>uvolněný</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3928"/>
+        <location filename="../UI/settings.ui" line="3931"/>
         <source>strict</source>
         <translation>přísný</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3936"/>
+        <location filename="../UI/settings.ui" line="3939"/>
         <source>approach.</source>
         <translation>přístup k záležitosti.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3967"/>
+        <location filename="../UI/settings.ui" line="3970"/>
         <source>Speedy network protocol.</source>
         <translation>Rychlý síťový protokol.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4071"/>
+        <location filename="../UI/settings.ui" line="4074"/>
         <source>Always show the tab bar.</source>
         <translation>Vždy ukazovat pruh s kartami.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4081"/>
+        <location filename="../UI/settings.ui" line="4084"/>
         <source>Close the selected tab via middle mouse button click.</source>
         <translation>Zavřít vybranou kartu pomocí stisknutí prostředního tlačítka myši.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4135"/>
+        <location filename="../UI/settings.ui" line="4138"/>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation>Varovat, pokud se uživatel chystá k zavření stránky, jejíž obsah byl změněn.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4159"/>
+        <location filename="../UI/settings.ui" line="4162"/>
         <source>HTTP Status Codes</source>
         <translation>Stavové kódy HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4185"/>
+        <location filename="../UI/settings.ui" line="4188"/>
         <source>Periodically purge memory caches.</source>
         <translation>Periodicky čistit vyrovnávací paměti.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4212"/>
+        <location filename="../UI/settings.ui" line="4215"/>
         <source>Spatial navigation.</source>
         <translation>Prostorové navádění.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4111"/>
+        <location filename="../UI/settings.ui" line="4114"/>
         <source>Open links in new tabs instead of new windows.</source>
         <translation>Otevírat odkazy v nových kartách namísto v nových oknech.</translation>
     </message>
@@ -3841,72 +3841,72 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Výzva</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3739"/>
+        <location filename="../UI/settings.ui" line="3742"/>
         <source>Accept dialog alerts.</source>
         <translation>Přijmout poplachy dialogů.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3749"/>
+        <location filename="../UI/settings.ui" line="3752"/>
         <source>Accept dialog prompts.</source>
         <translation>Přijmout výzvy dialogů.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3764"/>
+        <location filename="../UI/settings.ui" line="3767"/>
         <source>Local documents are allowed to access other local URLs.</source>
         <translation>Místním dokumentům je dovoleno přistupovat k jiným místním adresám (URL).</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3791"/>
+        <location filename="../UI/settings.ui" line="3794"/>
         <source>Notify me of console events and exceptions.</source>
         <translation>Uvědomit o konzolových událostech a výjimkách.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3818"/>
+        <location filename="../UI/settings.ui" line="3821"/>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
         <translation>Soukromé prohlížení. Pokud je povoleno soukromé prohlížení, ukládání HTML5 bude zakázáno.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3913"/>
+        <location filename="../UI/settings.ui" line="3916"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A relaxed setting allows Dooble to ignore SSL errors that are generated by third-party elements. A strict setting instructs Dooble to observe all SSL errors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uvolněné nastavení umožní Dooble nevšímat si chyb SSL, jež jsou vytvářeny prvky od třetích stran. Přísné nastavení přikáže Dooble sledovat všechny chyby SSL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4101"/>
+        <location filename="../UI/settings.ui" line="4104"/>
         <source>Display the Dooble Desktop in new windows.</source>
         <translation>Ukázat Dooble Desktop v nových oknech.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4121"/>
+        <location filename="../UI/settings.ui" line="4124"/>
         <source>New tabs should be added at the end of the tab bar.</source>
         <translation>Nové karty budou přidány na konec pruhu s kartami.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4128"/>
+        <location filename="../UI/settings.ui" line="4131"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Varovat před zavřením stránky, jejíž obsah byl změněn.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4172"/>
+        <location filename="../UI/settings.ui" line="4175"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation>Zobrazit chybovou stránku Dooble</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4251"/>
+        <location filename="../UI/settings.ui" line="4254"/>
         <source>Center child windows.</source>
         <translation>Vystředit okna potomků.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4258"/>
+        <location filename="../UI/settings.ui" line="4261"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation>Zavřít okno se stahováními, poté co byla stahování dokončena.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4265"/>
+        <location filename="../UI/settings.ui" line="4268"/>
         <source>Open user windows as new processes.</source>
         <translation>Otevřít uživatelská okna jako nové procesy.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4272"/>
+        <location filename="../UI/settings.ui" line="4275"/>
         <source>Use native file dialogs.</source>
         <translation>Použít původní souborové dialogy.</translation>
     </message>
@@ -4115,17 +4115,17 @@ p, li { white-space: pre-wrap; }
         <translation>Nesledovat mě.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3876"/>
+        <location filename="../UI/settings.ui" line="3879"/>
         <source>Session restoration.</source>
         <translation>Obnovení sezení.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3991"/>
+        <location filename="../UI/settings.ui" line="3994"/>
         <source>Web plugins.</source>
         <translation>Přídavné moduly.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4018"/>
+        <location filename="../UI/settings.ui" line="4021"/>
         <source>WebGL.</source>
         <translation>WebGL.</translation>
     </message>
@@ -4275,12 +4275,12 @@ p, li { white-space: pre-wrap; }
         <translation>Java</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3698"/>
+        <location filename="../UI/settings.ui" line="3701"/>
         <source>Allow opening of new windows.</source>
         <translation>Povolit otevření nových oken.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3708"/>
+        <location filename="../UI/settings.ui" line="3711"/>
         <source>Accept geometry-change requests.</source>
         <translation>Dovolit automatické přizpůsobení velikosti okna.</translation>
     </message>
@@ -4348,17 +4348,17 @@ p, li { white-space: pre-wrap; }
         <translation>.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3845"/>
+        <location filename="../UI/settings.ui" line="3848"/>
         <source>Record favicon data to favicons.db.</source>
         <translation>Zapsat data oblíbených do favicons.db.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4061"/>
+        <location filename="../UI/settings.ui" line="4064"/>
         <source>After creating a new tab from a Web link, switch to it immediately.</source>
         <translation>Po vytvoření nové karty z internetového odkazu na ni okamžitě přepnout.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4091"/>
+        <location filename="../UI/settings.ui" line="4094"/>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation>Vytvořit novou kartu dvojitým klepnutím na pruh s kartami.</translation>
     </message>
