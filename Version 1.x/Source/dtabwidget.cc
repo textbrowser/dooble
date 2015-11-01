@@ -455,6 +455,15 @@ void dtabwidget::setTabButton(int index)
       progressBar->setMaximumHeight(18); // 16 + something.
       progressBar->setMaximumWidth(18); // 16 + something.
       progressBar->setOrientation(Qt::Vertical);
+      progressBar->setStyleSheet
+	("QProgressBar {"
+	 "border: 1px solid grey; "
+	 "border-radius: 0px;"
+	 "}"
+	 "QProgressBar::chunk {"
+	 "background-color: #cd96cd; "
+	 "margin: 1px;"
+	 "}");
       widget->addWidget(label);
       widget->addWidget(progressBar);
       widget->setContentsMargins(0, 0, 0, 0);
