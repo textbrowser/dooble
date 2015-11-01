@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>110</width>
+         <width>100</width>
          <height>582</height>
         </rect>
        </property>
@@ -340,8 +340,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>646</width>
-               <height>529</height>
+               <width>512</width>
+               <height>571</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1183,8 +1183,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>312</width>
-               <height>536</height>
+               <width>286</width>
+               <height>550</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1499,8 +1499,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>608</width>
-               <height>861</height>
+               <width>564</width>
+               <height>897</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2491,8 +2491,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>689</width>
-               <height>715</height>
+               <width>616</width>
+               <height>747</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2988,9 +2988,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>566</width>
-               <height>1295</height>
+               <y>-573</y>
+               <width>642</width>
+               <height>1350</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -3689,6 +3689,9 @@
                   <widget class="QCheckBox" name="xssAuditingCheckBox">
                    <property name="text">
                     <string>Enable cross-site script auditing.</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>

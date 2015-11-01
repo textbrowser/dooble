@@ -549,7 +549,7 @@ int main(int argc, char *argv[])
      dooble::s_settings.value("settingsWindow/javascriptEnabled",
 			      false).toBool() &&
      dooble::s_settings.value("settingsWindow/xssAuditingEnabled",
-			      false).toBool());
+			      true).toBool());
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute

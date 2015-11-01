@@ -670,7 +670,7 @@ void dsettings::exec(dooble *parent)
     (dooble::s_settings.value("settingsWindow/suppressHttpReferrer1", false).
      toBool());
   ui.xssAuditingCheckBox->setChecked
-    (dooble::s_settings.value("settingsWindow/xssAuditingEnabled", false).
+    (dooble::s_settings.value("settingsWindow/xssAuditingEnabled", true).
      toBool());
   ui.appendNewTabsCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/appendNewTabs", false).

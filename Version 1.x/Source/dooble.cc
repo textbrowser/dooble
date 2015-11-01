@@ -624,7 +624,7 @@ int main(int argc, char *argv[])
      dooble::s_settings.value("settingsWindow/javascriptEnabled",
 			      false).toBool() &&
      dooble::s_settings.value("settingsWindow/xssAuditingEnabled",
-			      false).toBool());
+			      true).toBool());
 #if QT_VERSION >= 0x050000
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::ScrollAnimatorEnabled, true);
