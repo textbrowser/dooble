@@ -2211,7 +2211,7 @@ void dooble::newTabInit(dview *p)
   */
 
   ui.tabWidget->animateIndex(index, !p->isLoaded(), p->webviewIcon(),
-			     p->progress());
+			     p->progress(), !statusBar()->isHidden());
 
   if(p == qobject_cast<dview *> (ui.tabWidget->currentWidget()))
     sb.statusLabel->clear();
@@ -2880,7 +2880,8 @@ void dooble::slotTabSelected(const int index)
 
 	if(p)
 	  ui.tabWidget->animateIndex
-	    (i, !p->isLoaded(), p->webviewIcon(), p->progress());
+	    (i, !p->isLoaded(), p->webviewIcon(), p->progress(),
+	     !statusBar()->isHidden());
       }
 
   dview *p = qobject_cast<dview *> (ui.tabWidget->widget(index));
@@ -2889,7 +2890,7 @@ void dooble::slotTabSelected(const int index)
     {
       ui.tabWidget->animateIndex
 	(ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
-	 p->progress());
+	 p->progress(), !statusBar()->isHidden());
       ui.homeToolButton->setEnabled(true);
       ui.locationLineEdit->setVisible(true);
       ui.reloadToolButton->setEnabled(true);
@@ -3146,7 +3147,7 @@ void dooble::slotIconChanged(void)
       if(ui.tabWidget->indexOf(p) > -1)
 	ui.tabWidget->animateIndex
 	  (ui.tabWidget->indexOf(p), !p->isLoaded(), p->icon(),
-	   p->progress());
+	   p->progress(), !statusBar()->isHidden());
 
       int index = ui.locationLineEdit->findText
 	(p->url().toString(QUrl::StripTrailingSlash));
@@ -3189,7 +3190,7 @@ void dooble::slotLoadProgress(int progress)
       sb.progressBar->setVisible(!p->isLoaded());
       ui.tabWidget->animateIndex
 	(ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
-	 p->progress());
+	 p->progress(), !statusBar()->isHidden());
       ui.reloadStopWidget->setCurrentIndex(p->isLoaded() ? 1 : 0);
       ui.stopToolButton->setEnabled(!p->isLoaded());
       ui.actionStop->setEnabled(!p->isLoaded());
@@ -3203,7 +3204,7 @@ void dooble::slotLoadProgress(int progress)
   else if(p)
     ui.tabWidget->animateIndex
       (ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
-       p->progress());
+       p->progress(), !statusBar()->isHidden());
 }
 
 void dooble::slotLoadFinished(bool ok)
@@ -3252,8 +3253,9 @@ void dooble::slotLoadFinished(bool ok)
 	  int index = ui.tabWidget->indexOf(p);
 
 	  if(index > -1)
-	    ui.tabWidget->animateIndex(index, false, p->webviewIcon(),
-				       p->progress());
+	    ui.tabWidget->animateIndex
+	      (index, false, p->webviewIcon(),
+	       p->progress(), !statusBar()->isHidden());
 
 	  if(p->tabAction())
 	    p->tabAction()->setIcon(p->webviewIcon());
@@ -3293,7 +3295,8 @@ void dooble::slotLoadFinished(bool ok)
 
       if(ui.tabWidget->indexOf(p) > -1)
 	ui.tabWidget->animateIndex
-	  (ui.tabWidget->indexOf(p), false, p->icon(), p->progress());
+	  (ui.tabWidget->indexOf(p), false, p->icon(), p->progress(),
+	   !statusBar()->isHidden());
 
       QString title(p->title());
 
@@ -3986,7 +3989,7 @@ void dooble::slotLoadStarted(void)
   if(p)
     if(ui.tabWidget->indexOf(p) > -1)
       ui.tabWidget->animateIndex(ui.tabWidget->indexOf(p), true, QIcon(),
-				 p->progress());
+				 p->progress(), !statusBar()->isHidden());
 
   if(p && p == qobject_cast<dview *> (ui.tabWidget->currentWidget()))
     {
@@ -4235,7 +4238,7 @@ void dooble::slotAbout(void)
   mb->setText
     (QString("<html>"
              "Dooble Web Browser<br><br>"
-             "Version %1, Annette.<br>"
+             "Version %1, Sofia.<br>"
 	     "Copyright (c) 2008 - present.<br>"
 	     "Qt version %3, architecture %4."
 	     "<hr>"
@@ -5275,7 +5278,7 @@ void dooble::slotResetUrl(void)
 	  ui.tabWidget->setTabToolTip(ui.tabWidget->indexOf(p), title);
 	  ui.tabWidget->animateIndex
 	    (ui.tabWidget->indexOf(p), !p->isLoaded(), p->webviewIcon(),
-	     p->progress());
+	     p->progress(), !statusBar()->isHidden());
 	}
 
       ui.locationLineEdit->setText

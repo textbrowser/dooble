@@ -63,7 +63,7 @@ class dtabwidget: public QTabWidget
   dtabwidget(QWidget *parent);
   ~dtabwidget();
   void animateIndex(const int index, const bool state, const QIcon &icon,
-		    const int progress);
+		    const int progress, const bool statusBarIsVisible);
   void setBarVisible(const bool state);
   void setTabButton(int index);
 

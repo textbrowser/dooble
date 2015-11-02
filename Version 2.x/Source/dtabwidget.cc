@@ -477,7 +477,8 @@ void dtabwidget::setTabButton(int index)
 }
 
 void dtabwidget::animateIndex(const int index, const bool state,
-			      const QIcon &icon, const int progress)
+			      const QIcon &icon, const int progress,
+			      const bool statusBarIsVisible)
 {
   QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tabBar);
@@ -494,7 +495,7 @@ void dtabwidget::animateIndex(const int index, const bool state,
 
       if(progress >= 100 || !state)
 	widget->setCurrentIndex(0);
-      else if(currentIndex() != index)
+      else if(currentIndex() != index || !statusBarIsVisible)
 	{
 	  QProgressBar *progressBar = qobject_cast<QProgressBar *>
 	    (widget->widget(1));
