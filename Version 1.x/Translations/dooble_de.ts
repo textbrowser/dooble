@@ -1510,25 +1510,25 @@
         <location filename="../Source/dooble.cc" line="2385"/>
         <location filename="../Source/dooble.cc" line="2425"/>
         <location filename="../Source/dooble.cc" line="2490"/>
-        <location filename="../Source/dooble.cc" line="3285"/>
-        <location filename="../Source/dooble.cc" line="3469"/>
-        <location filename="../Source/dooble.cc" line="3493"/>
-        <location filename="../Source/dooble.cc" line="5035"/>
-        <location filename="../Source/dooble.cc" line="5517"/>
+        <location filename="../Source/dooble.cc" line="3286"/>
+        <location filename="../Source/dooble.cc" line="3473"/>
+        <location filename="../Source/dooble.cc" line="3497"/>
+        <location filename="../Source/dooble.cc" line="5039"/>
+        <location filename="../Source/dooble.cc" line="5521"/>
         <source>(Untitled)</source>
         <translation>(Ohne Titel)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3071"/>
-        <location filename="../Source/dooble.cc" line="3140"/>
-        <location filename="../Source/dooble.cc" line="3256"/>
-        <location filename="../Source/dooble.cc" line="3569"/>
-        <location filename="../Source/dooble.cc" line="3708"/>
-        <location filename="../Source/dooble.cc" line="3748"/>
-        <location filename="../Source/dooble.cc" line="3958"/>
-        <location filename="../Source/dooble.cc" line="5441"/>
-        <location filename="../Source/dooble.cc" line="6066"/>
-        <location filename="../Source/dooble.cc" line="6369"/>
+        <location filename="../Source/dooble.cc" line="3072"/>
+        <location filename="../Source/dooble.cc" line="3141"/>
+        <location filename="../Source/dooble.cc" line="3257"/>
+        <location filename="../Source/dooble.cc" line="3573"/>
+        <location filename="../Source/dooble.cc" line="3712"/>
+        <location filename="../Source/dooble.cc" line="3752"/>
+        <location filename="../Source/dooble.cc" line="3962"/>
+        <location filename="../Source/dooble.cc" line="5445"/>
+        <location filename="../Source/dooble.cc" line="6070"/>
+        <location filename="../Source/dooble.cc" line="6373"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1547,55 +1547,55 @@
         <translation type="obsolete">Das schließen von Dooble unterbricht noch nicht abgeschlossenen Downloads. Bist Du Dir sicher, fortfahren zu wollen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3073"/>
-        <location filename="../Source/dooble.cc" line="3258"/>
-        <location filename="../Source/dooble.cc" line="5443"/>
+        <location filename="../Source/dooble.cc" line="3074"/>
+        <location filename="../Source/dooble.cc" line="3259"/>
+        <location filename="../Source/dooble.cc" line="5447"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Browser (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3081"/>
-        <location filename="../Source/dooble.cc" line="3084"/>
-        <location filename="../Source/dooble.cc" line="3266"/>
-        <location filename="../Source/dooble.cc" line="3269"/>
-        <location filename="../Source/dooble.cc" line="5451"/>
-        <location filename="../Source/dooble.cc" line="5454"/>
-        <location filename="../Source/dooble.cc" line="6371"/>
+        <location filename="../Source/dooble.cc" line="3082"/>
+        <location filename="../Source/dooble.cc" line="3085"/>
+        <location filename="../Source/dooble.cc" line="3267"/>
+        <location filename="../Source/dooble.cc" line="3270"/>
+        <location filename="../Source/dooble.cc" line="5455"/>
+        <location filename="../Source/dooble.cc" line="5458"/>
+        <location filename="../Source/dooble.cc" line="6375"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3980"/>
+        <location filename="../Source/dooble.cc" line="3984"/>
         <source>&amp;Clear</source>
         <translation>Leeren</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4580"/>
+        <location filename="../Source/dooble.cc" line="4584"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5173"/>
+        <location filename="../Source/dooble.cc" line="5177"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5308"/>
+        <location filename="../Source/dooble.cc" line="5312"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>Die Seite %1 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5372"/>
+        <location filename="../Source/dooble.cc" line="5376"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>Der Proxy %1:%2 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6406"/>
+        <location filename="../Source/dooble.cc" line="6410"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Möchtest Du wirklich %1 Seiten öffnen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6559"/>
+        <location filename="../Source/dooble.cc" line="6563"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Möchtest Du wirklich die veränderte Seite verlassen?</translation>
     </message>
@@ -1604,39 +1604,39 @@
         <translation type="vanished">dooble::slotRefreshPlugins(): Entferne Prozess %1.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6878"/>
+        <location filename="../Source/dooble.cc" line="6882"/>
         <source>Start %1</source>
         <translation>Starte %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6946"/>
+        <location filename="../Source/dooble.cc" line="6950"/>
         <source>Add-on Load Failed</source>
         <translation>Das Laden des Add-ons scheiterte</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6969"/>
-        <location filename="../Source/dooble.cc" line="7020"/>
+        <location filename="../Source/dooble.cc" line="6973"/>
+        <location filename="../Source/dooble.cc" line="7024"/>
         <source>Add-on</source>
         <translation>Add-on</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7694"/>
+        <location filename="../Source/dooble.cc" line="7698"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7697"/>
         <location filename="../Source/dooble.cc" line="7701"/>
+        <location filename="../Source/dooble.cc" line="7705"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8062"/>
+        <location filename="../Source/dooble.cc" line="8066"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8064"/>
+        <location filename="../Source/dooble.cc" line="8068"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1645,12 +1645,12 @@
         <translation type="obsolete">Eine unbekannte Seite mit einer leeren oder ungültigen URL verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7432"/>
+        <location filename="../Source/dooble.cc" line="7436"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Erinnerung</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7433"/>
+        <location filename="../Source/dooble.cc" line="7437"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Eine Passphrase ist noch nicht eingegeben worden. Bitte besuche den Tresor Bereich in den Einstellungen (Fenster/Einstellungen/Tresor) und wähle eine Passphrase. Alsbald eine Passphrase eingegeben wurde, werden Lesezeichen, Cookies, und alle anderen wichtigen Informationen, Nutzer-Daten und -Einstellungen für zukünftige Sitzungen gespeichert und erneut zur Verfügung stehen. Du kannst diese Erinnerungsmeldung in den Einstellungen unter Sicherheit ausblenden.</translation>
     </message>
@@ -1663,15 +1663,15 @@
         <translation type="obsolete">Das Laden des Addons gelang nicht.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7130"/>
-        <location filename="../Source/dooble.cc" line="7135"/>
+        <location filename="../Source/dooble.cc" line="7134"/>
+        <location filename="../Source/dooble.cc" line="7139"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Die Seite %1 verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7369"/>
-        <location filename="../Source/dooble.cc" line="7371"/>
+        <location filename="../Source/dooble.cc" line="7373"/>
         <location filename="../Source/dooble.cc" line="7375"/>
+        <location filename="../Source/dooble.cc" line="7379"/>
         <source>Restore Session</source>
         <translation>Sitzung wiederherstellen</translation>
     </message>
@@ -1686,9 +1686,9 @@
     <message>
         <location filename="../Source/dooble.cc" line="2865"/>
         <location filename="../Source/dooble.cc" line="2917"/>
-        <location filename="../Source/dooble.cc" line="3908"/>
-        <location filename="../Source/dooble.cc" line="6403"/>
-        <location filename="../Source/dooble.cc" line="6555"/>
+        <location filename="../Source/dooble.cc" line="3912"/>
+        <location filename="../Source/dooble.cc" line="6407"/>
+        <location filename="../Source/dooble.cc" line="6559"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Bestätigung</translation>
     </message>
@@ -1698,12 +1698,12 @@
         <translation>Das Beenden von Dooble wird noch nicht abgeschlossene Downloads abbrechen. Möchtest Du wirklich fortfahren?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3911"/>
+        <location filename="../Source/dooble.cc" line="3915"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Möchtest Du wirklich diesen veränderten Tab schließen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5170"/>
+        <location filename="../Source/dooble.cc" line="5174"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Browser: Öffne Verzeichnis</translation>
     </message>
@@ -1721,12 +1721,12 @@
         <translation type="obsolete">Lösche die Historie</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4445"/>
+        <location filename="../Source/dooble.cc" line="4449"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Browser: Infoseite</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4577"/>
+        <location filename="../Source/dooble.cc" line="4581"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Browser: Speichere als</translation>
     </message>
@@ -1735,10 +1735,10 @@
         <translation type="obsolete">&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4958"/>
-        <location filename="../Source/dooble.cc" line="4964"/>
-        <location filename="../Source/dooble.cc" line="4966"/>
+        <location filename="../Source/dooble.cc" line="4962"/>
+        <location filename="../Source/dooble.cc" line="4968"/>
         <location filename="../Source/dooble.cc" line="4970"/>
+        <location filename="../Source/dooble.cc" line="4974"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Desktop</translation>
     </message>
@@ -3526,7 +3526,7 @@
     <message>
         <location filename="../UI/settings.ui" line="114"/>
         <location filename="../UI/settings.ui" line="117"/>
-        <location filename="../UI/settings.ui" line="1334"/>
+        <location filename="../UI/settings.ui" line="1347"/>
         <source>Home</source>
         <translation>Startseite</translation>
     </message>
@@ -3539,22 +3539,22 @@
         <translation type="obsolete">Schriftart</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="544"/>
-        <location filename="../UI/settings.ui" line="1311"/>
-        <location filename="../UI/settings.ui" line="1465"/>
+        <location filename="../UI/settings.ui" line="557"/>
+        <location filename="../UI/settings.ui" line="1324"/>
+        <location filename="../UI/settings.ui" line="1478"/>
         <source>&amp;Browse</source>
         <translation>&amp;Browse</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="678"/>
-        <location filename="../UI/settings.ui" line="709"/>
-        <location filename="../UI/settings.ui" line="2842"/>
-        <location filename="../UI/settings.ui" line="2849"/>
-        <location filename="../UI/settings.ui" line="2856"/>
-        <location filename="../UI/settings.ui" line="2863"/>
-        <location filename="../UI/settings.ui" line="2870"/>
-        <location filename="../UI/settings.ui" line="2877"/>
-        <location filename="../UI/settings.ui" line="2884"/>
+        <location filename="../UI/settings.ui" line="691"/>
+        <location filename="../UI/settings.ui" line="722"/>
+        <location filename="../UI/settings.ui" line="2855"/>
+        <location filename="../UI/settings.ui" line="2862"/>
+        <location filename="../UI/settings.ui" line="2869"/>
+        <location filename="../UI/settings.ui" line="2876"/>
+        <location filename="../UI/settings.ui" line="2883"/>
+        <location filename="../UI/settings.ui" line="2890"/>
+        <location filename="../UI/settings.ui" line="2897"/>
         <source>Size</source>
         <translation>Größe</translation>
     </message>
@@ -3577,331 +3577,331 @@
         <translation>Engine</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="284"/>
+        <location filename="../UI/settings.ui" line="297"/>
         <source>Please note that modifications to the actions are automatically saved.</source>
         <translation>Bitte beachte, dass Veränderungen für die Aktionen automatisch gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="316"/>
+        <location filename="../UI/settings.ui" line="329"/>
         <source>File Suffix</source>
         <translation>Datei-Endung</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="321"/>
+        <location filename="../UI/settings.ui" line="334"/>
         <source>Action</source>
         <translation>Aktion</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="353"/>
+        <location filename="../UI/settings.ui" line="366"/>
         <source>Display Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="367"/>
+        <location filename="../UI/settings.ui" line="380"/>
         <source>High Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="372"/>
+        <location filename="../UI/settings.ui" line="385"/>
         <source>Highest Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="377"/>
+        <location filename="../UI/settings.ui" line="390"/>
         <source>Idle Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="382"/>
+        <location filename="../UI/settings.ui" line="395"/>
         <source>Inherit Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="387"/>
+        <location filename="../UI/settings.ui" line="400"/>
         <source>Low Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="392"/>
+        <location filename="../UI/settings.ui" line="405"/>
         <source>Lowest Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="397"/>
+        <location filename="../UI/settings.ui" line="410"/>
         <source>Normal Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="402"/>
+        <location filename="../UI/settings.ui" line="415"/>
         <source>Time-Critical Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="427"/>
+        <location filename="../UI/settings.ui" line="440"/>
         <source>Location Toolbar Icon Size</source>
         <translation>Icon-Größe in Locations-Werkzeugleiste</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="448"/>
+        <location filename="../UI/settings.ui" line="461"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="473"/>
+        <location filename="../UI/settings.ui" line="486"/>
         <source>Tab Bar Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="484"/>
+        <location filename="../UI/settings.ui" line="497"/>
         <source>East</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="489"/>
+        <location filename="../UI/settings.ui" line="502"/>
         <source>North</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="494"/>
+        <location filename="../UI/settings.ui" line="507"/>
         <source>South</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="499"/>
+        <location filename="../UI/settings.ui" line="512"/>
         <source>West</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="568"/>
+        <location filename="../UI/settings.ui" line="581"/>
         <source>Web Fonts</source>
         <translation>Web-Schriftarten</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="574"/>
+        <location filename="../UI/settings.ui" line="587"/>
         <source>Fixed</source>
         <translation>Feste Breite</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="591"/>
+        <location filename="../UI/settings.ui" line="604"/>
         <source>Default</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="608"/>
+        <location filename="../UI/settings.ui" line="621"/>
         <source>Cursive</source>
         <translation>Kursiv</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="625"/>
+        <location filename="../UI/settings.ui" line="638"/>
         <source>Sans Serif</source>
         <translation>Ohne Serifen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="642"/>
+        <location filename="../UI/settings.ui" line="655"/>
         <source>Serif</source>
         <translation>Serife</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="659"/>
+        <location filename="../UI/settings.ui" line="672"/>
         <source>Fantasy</source>
         <translation>Fantasy</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="740"/>
+        <location filename="../UI/settings.ui" line="753"/>
         <source>Minimum Size</source>
         <translation>Kleinste Größe</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="754"/>
+        <location filename="../UI/settings.ui" line="767"/>
         <source>6</source>
         <translation type="unfinished">6</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="759"/>
+        <location filename="../UI/settings.ui" line="772"/>
         <source>7</source>
         <translation type="unfinished">7</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="764"/>
+        <location filename="../UI/settings.ui" line="777"/>
         <source>8</source>
         <translation type="unfinished">8</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="769"/>
+        <location filename="../UI/settings.ui" line="782"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="774"/>
+        <location filename="../UI/settings.ui" line="787"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="779"/>
+        <location filename="../UI/settings.ui" line="792"/>
         <source>11</source>
         <translation>11</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="784"/>
+        <location filename="../UI/settings.ui" line="797"/>
         <source>12</source>
         <translation>12</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="789"/>
+        <location filename="../UI/settings.ui" line="802"/>
         <source>13</source>
         <translation>13</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="794"/>
+        <location filename="../UI/settings.ui" line="807"/>
         <source>14</source>
         <translation>14</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="799"/>
+        <location filename="../UI/settings.ui" line="812"/>
         <source>15</source>
         <translation>15</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="819"/>
+        <location filename="../UI/settings.ui" line="832"/>
         <source>19</source>
         <translation type="unfinished">19</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="829"/>
+        <location filename="../UI/settings.ui" line="842"/>
         <source>21</source>
         <translation type="unfinished">21</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="839"/>
+        <location filename="../UI/settings.ui" line="852"/>
         <source>23</source>
         <translation type="unfinished">23</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="849"/>
+        <location filename="../UI/settings.ui" line="862"/>
         <source>25</source>
         <translation type="unfinished">25</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1521"/>
-        <location filename="../UI/settings.ui" line="2002"/>
+        <location filename="../UI/settings.ui" line="1534"/>
+        <location filename="../UI/settings.ui" line="2015"/>
         <source>&amp;Ignore for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1527"/>
-        <location filename="../UI/settings.ui" line="2008"/>
+        <location filename="../UI/settings.ui" line="1540"/>
+        <location filename="../UI/settings.ui" line="2021"/>
         <source>Examples: .nasa.gov, localhost, 192.168.178.0/24.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2504"/>
+        <location filename="../UI/settings.ui" line="2517"/>
         <source>Disable all encrypted database writes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3181"/>
+        <location filename="../UI/settings.ui" line="3194"/>
         <source>Accept HTTP cookies only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3439"/>
+        <location filename="../UI/settings.ui" line="3452"/>
         <source>Enable hyperlink auditing. Proper understanding of this option is required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3610"/>
+        <location filename="../UI/settings.ui" line="3623"/>
         <source>Stagnant Scripts Default Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3624"/>
+        <location filename="../UI/settings.ui" line="3637"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3629"/>
+        <location filename="../UI/settings.ui" line="3642"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3634"/>
+        <location filename="../UI/settings.ui" line="3647"/>
         <source>Prompt</source>
         <translation type="unfinished">Anfrage</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3821"/>
+        <location filename="../UI/settings.ui" line="3834"/>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3906"/>
+        <location filename="../UI/settings.ui" line="3919"/>
         <source>Sight SSL errors. Assume a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3926"/>
+        <location filename="../UI/settings.ui" line="3939"/>
         <source>relaxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3931"/>
+        <location filename="../UI/settings.ui" line="3944"/>
         <source>strict</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3939"/>
+        <location filename="../UI/settings.ui" line="3952"/>
         <source>approach.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3970"/>
+        <location filename="../UI/settings.ui" line="3983"/>
         <source>Speedy network protocol.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4175"/>
+        <location filename="../UI/settings.ui" line="4188"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4261"/>
+        <location filename="../UI/settings.ui" line="4274"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4275"/>
+        <location filename="../UI/settings.ui" line="4288"/>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="438"/>
-        <location filename="../UI/settings.ui" line="804"/>
+        <location filename="../UI/settings.ui" line="451"/>
+        <location filename="../UI/settings.ui" line="817"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="809"/>
+        <location filename="../UI/settings.ui" line="822"/>
         <source>17</source>
         <translation>17</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="814"/>
+        <location filename="../UI/settings.ui" line="827"/>
         <source>18</source>
         <translation>18</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="824"/>
+        <location filename="../UI/settings.ui" line="837"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="834"/>
+        <location filename="../UI/settings.ui" line="847"/>
         <source>22</source>
         <translation>22</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="443"/>
-        <location filename="../UI/settings.ui" line="844"/>
+        <location filename="../UI/settings.ui" line="456"/>
+        <location filename="../UI/settings.ui" line="857"/>
         <source>24</source>
         <translation>24</translation>
     </message>
@@ -3910,22 +3910,22 @@
         <translation type="obsolete">Die Start URL wird geöffnet nachdem der Home-Knopf gedrückt wurde. Um die dreizehn URLs allesamt zu öffnen, drücke bitte die Control-Taste gleichzeitig mit dem Home-Knopf.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2786"/>
+        <location filename="../UI/settings.ui" line="2799"/>
         <source>Re-encode bookmarks.</source>
         <translation>Erneutes Encodieren der Lesezeichen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2800"/>
+        <location filename="../UI/settings.ui" line="2813"/>
         <source>Re-encode cookies.</source>
         <translation>Erneutes Encodieren der Cookies.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2814"/>
+        <location filename="../UI/settings.ui" line="2827"/>
         <source>Re-encode downloads.</source>
         <translation>Erneutes Encodieren der Downloads.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2744"/>
+        <location filename="../UI/settings.ui" line="2757"/>
         <source>Re-encode exceptions.</source>
         <translation>Erneutes Encodieren der Ausnahmen.</translation>
     </message>
@@ -3934,27 +3934,27 @@
         <translation type="obsolete">MB</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1348"/>
+        <location filename="../UI/settings.ui" line="1361"/>
         <source>IRC Channel</source>
         <translation>IRC Kanal</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1355"/>
+        <location filename="../UI/settings.ui" line="1368"/>
         <source>https://webchat.freenode.net?channels=dooble</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1449"/>
+        <location filename="../UI/settings.ui" line="1462"/>
         <source>Spot-On Shared Database</source>
         <translation>Für Spot-On bereitgestellte Datenbank</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1458"/>
+        <location filename="../UI/settings.ui" line="1471"/>
         <source>shared.db</source>
         <translation>shared.db</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1478"/>
+        <location filename="../UI/settings.ui" line="1491"/>
         <source>The Home URL will be opened after the Home button is pressed. To open the first thirteen URLs, please press the Home button while pressing the Control key.</source>
         <translation>Die Start URL wird geöffnet nachdem die Home-Taste gedrückt wurde. Um die ersten dreizehn URLs zu öffnen, drücke bitte die Home-Taste mit der Maus, während auch der &quot;Strg&quot;-Knopf auf der Tastatur gedrückt ist.</translation>
     </message>
@@ -3963,32 +3963,32 @@
         <translation type="obsolete">Dialog zur Passworteingabe nach dem Start anzeigen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2560"/>
+        <location filename="../UI/settings.ui" line="2573"/>
         <source>If a passphrase is not set, bookmarks, cache, cookies, download information, exceptions information, favicons, and history entries will be encoded with a temporary passphrase. As a result, the data will not be available in future sessions. A passphrase will also enable session restoration.</source>
         <translation>Wenn keine Passphrase gesetzt wurde, werden Lesezeichen, Zwischenspeicher, Cookies, Download Informationen, Information zu Ausnahmen, Favicons und der Verlauf mit einer temporären Passphrase verschlüsselt. Daher stehen diese Daten in zukünftigen Sitzungen nicht wieder zur Verfügung. Das Setzen einer Passphrase ermöglicht auch die Wiederherstellung von alten Sitzungen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2589"/>
+        <location filename="../UI/settings.ui" line="2602"/>
         <source>Cipher Type</source>
         <translation>Verschlüsselungsmethode</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2751"/>
+        <location filename="../UI/settings.ui" line="2764"/>
         <source>Re-encode favicons.</source>
         <translation>Erneutes Encodieren meistbesuchter Webseiten.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2758"/>
+        <location filename="../UI/settings.ui" line="2771"/>
         <source>Re-encode history.</source>
         <translation>Erneutes Encodieren des Verlaufs.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2623"/>
+        <location filename="../UI/settings.ui" line="2636"/>
         <source>Hash Type</source>
         <translation>Hashtyp</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2937"/>
+        <location filename="../UI/settings.ui" line="2950"/>
         <source>Passphrase Confirmation</source>
         <translation>Bestätige Passphrase</translation>
     </message>
@@ -4009,7 +4009,7 @@
         <translation type="obsolete">Unterdrücke HTTP-Weiterleitungen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4084"/>
+        <location filename="../UI/settings.ui" line="4097"/>
         <source>Close the selected tab via middle mouse button click.</source>
         <translation>Schließe den ausgewählten Tab über den mittleren Mausknopf.</translation>
     </message>
@@ -4020,27 +4020,27 @@
         <translation>Verlauf</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="872"/>
+        <location filename="../UI/settings.ui" line="885"/>
         <source>Character Encoding</source>
         <translation>Zeichenenencodierung</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="886"/>
+        <location filename="../UI/settings.ui" line="899"/>
         <source>Text Size Multiplier</source>
         <translation>Vervielfältigung der Textgröße</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="944"/>
+        <location filename="../UI/settings.ui" line="957"/>
         <source>Remember browsing history of the last</source>
         <translation>Speichere den Verlauf der letzten</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="991"/>
+        <location filename="../UI/settings.ui" line="1004"/>
         <source>Remember download history.</source>
         <translation>Download-Verlauf merken.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1056"/>
+        <location filename="../UI/settings.ui" line="1069"/>
         <source>Web Cache</source>
         <translation>Web-Cache</translation>
     </message>
@@ -4061,8 +4061,8 @@
         <translation type="obsolete">50 MB des Inhalts ist zwischengespeichert worden.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1132"/>
-        <location filename="../UI/settings.ui" line="3855"/>
+        <location filename="../UI/settings.ui" line="1145"/>
+        <location filename="../UI/settings.ui" line="3868"/>
         <source>&amp;Clear</source>
         <translation>Leeren</translation>
     </message>
@@ -4079,57 +4079,57 @@
         <translation type="obsolete">Der Festplatten-Cache ist kleiner als der Hauptspeicher-Cache. Einige Inhalte werden nicht auf der Festplatte gespeichert, sondern verbleiben im flüchtigen Haupsteicher.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1365"/>
+        <location filename="../UI/settings.ui" line="1378"/>
         <source>URL 01</source>
         <translation>URL 01</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1378"/>
+        <location filename="../UI/settings.ui" line="1391"/>
         <source>URL 02</source>
         <translation>URL 02</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1391"/>
+        <location filename="../UI/settings.ui" line="1404"/>
         <source>URL 03</source>
         <translation>URL 03</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1415"/>
+        <location filename="../UI/settings.ui" line="1428"/>
         <source>URL 04</source>
         <translation>URL 04</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1432"/>
+        <location filename="../UI/settings.ui" line="1445"/>
         <source>URL 05</source>
         <translation>URL 05</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1204"/>
+        <location filename="../UI/settings.ui" line="1217"/>
         <source>URL 06</source>
         <translation>URL 06</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1234"/>
+        <location filename="../UI/settings.ui" line="1247"/>
         <source>URL 07</source>
         <translation>URL 07</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1442"/>
+        <location filename="../UI/settings.ui" line="1455"/>
         <source>URL 08</source>
         <translation>URL 08</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1251"/>
+        <location filename="../UI/settings.ui" line="1264"/>
         <source>URL 09</source>
         <translation>URL 09</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1268"/>
+        <location filename="../UI/settings.ui" line="1281"/>
         <source>URL 10</source>
         <translation>URL 10</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1285"/>
+        <location filename="../UI/settings.ui" line="1298"/>
         <source>URL 11</source>
         <translation>URL 11</translation>
     </message>
@@ -4138,27 +4138,27 @@
         <translation type="obsolete">Dooble Suche</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1299"/>
+        <location filename="../UI/settings.ui" line="1312"/>
         <source>My Retrieved Files</source>
         <translation>Meine heruntergeladenen Dateien</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1327"/>
+        <location filename="../UI/settings.ui" line="1340"/>
         <source>about: blank</source>
         <translation>about: blank</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1320"/>
+        <location filename="../UI/settings.ui" line="1333"/>
         <source>P2P E-Mail URL</source>
         <translation>P2P E-Mail URL</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1018"/>
+        <location filename="../UI/settings.ui" line="1031"/>
         <source>Remember the last</source>
         <translation>Den letzten merken</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1032"/>
+        <location filename="../UI/settings.ui" line="1045"/>
         <source>recently-closed tab(s).</source>
         <translation>zuletzt geschlossene Tab(s).</translation>
     </message>
@@ -4167,35 +4167,35 @@
         <translation type="obsolete">Die folgenden dreizehn URLS werden in neuen Tabs geöffnet nachdem der Heim-Knopf gedrückt wurde.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1512"/>
+        <location filename="../UI/settings.ui" line="1525"/>
         <source>Browsing Proxy Configuration</source>
         <translation>Browsing Proxy Konfiguration</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1550"/>
-        <location filename="../UI/settings.ui" line="2031"/>
+        <location filename="../UI/settings.ui" line="1563"/>
+        <location filename="../UI/settings.ui" line="2044"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1560"/>
-        <location filename="../UI/settings.ui" line="2041"/>
+        <location filename="../UI/settings.ui" line="1573"/>
+        <location filename="../UI/settings.ui" line="2054"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1570"/>
-        <location filename="../UI/settings.ui" line="2051"/>
+        <location filename="../UI/settings.ui" line="1583"/>
+        <location filename="../UI/settings.ui" line="2064"/>
         <source>Manual</source>
         <translation>Manuell</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1860"/>
+        <location filename="../UI/settings.ui" line="1873"/>
         <source>Web 2.0 Browsing (I2P)</source>
         <translation>Web 2.0 Browsing (I2P)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1993"/>
+        <location filename="../UI/settings.ui" line="2006"/>
         <source>Download Proxy Configuration</source>
         <translation>Proxy-Konfiguration herunterladen</translation>
     </message>
@@ -4212,27 +4212,27 @@
         <translation type="obsolete">Unterdrücke HTTP-Weiterleitungen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3742"/>
+        <location filename="../UI/settings.ui" line="3755"/>
         <source>Accept dialog alerts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3752"/>
+        <location filename="../UI/settings.ui" line="3765"/>
         <source>Accept dialog prompts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3767"/>
+        <location filename="../UI/settings.ui" line="3780"/>
         <source>Local documents are allowed to access other local URLs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3794"/>
+        <location filename="../UI/settings.ui" line="3807"/>
         <source>Notify me of console events and exceptions.</source>
         <translation>Bei Konsolenereignissen und Ausnahmen benachrichtigen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3848"/>
+        <location filename="../UI/settings.ui" line="3861"/>
         <source>Record favicon data to favicons.db.</source>
         <translation>Schreibe die Favicondaten in favicons.db.</translation>
     </message>
@@ -4241,7 +4241,7 @@
         <translation type="obsolete">Wiederherstellung der Sitzung</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3916"/>
+        <location filename="../UI/settings.ui" line="3929"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A relaxed setting allows Dooble to ignore SSL errors that are generated by third-party elements. A strict setting instructs Dooble to observe all SSL errors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4254,27 +4254,27 @@
         <translation type="obsolete">WebGL</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4064"/>
+        <location filename="../UI/settings.ui" line="4077"/>
         <source>After creating a new tab from a Web link, switch to it immediately.</source>
         <translation>Sofort zu neuem Tab wechseln, nachdem er hinzugefügt wurde.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4104"/>
+        <location filename="../UI/settings.ui" line="4117"/>
         <source>Display the Dooble Desktop in new windows.</source>
         <translation>Zeige den Dooble-Desktop in neuen Fenstern.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4124"/>
+        <location filename="../UI/settings.ui" line="4137"/>
         <source>New tabs should be added at the end of the tab bar.</source>
         <translation>Neue Tabs am Ende der Tab-Leiste hinzufügen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4138"/>
+        <location filename="../UI/settings.ui" line="4151"/>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation>Warnen, wenn eine Seite mit veränderten Inhalten verlassen wird.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4162"/>
+        <location filename="../UI/settings.ui" line="4175"/>
         <source>HTTP Status Codes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4303,17 +4303,17 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4188"/>
+        <location filename="../UI/settings.ui" line="4201"/>
         <source>Periodically purge memory caches.</source>
         <translation>Regelmäßig den flüchtigen Hauptspeicher löschen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4215"/>
+        <location filename="../UI/settings.ui" line="4228"/>
         <source>Spatial navigation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4254"/>
+        <location filename="../UI/settings.ui" line="4267"/>
         <source>Center child windows.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4322,14 +4322,14 @@
         <translation type="obsolete">Das Download-Fenster nach Beendigung des Downloads schließen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1582"/>
-        <location filename="../UI/settings.ui" line="2063"/>
+        <location filename="../UI/settings.ui" line="1595"/>
+        <location filename="../UI/settings.ui" line="2076"/>
         <source>FTP</source>
         <translation>FTP</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1714"/>
-        <location filename="../UI/settings.ui" line="2195"/>
+        <location filename="../UI/settings.ui" line="1727"/>
+        <location filename="../UI/settings.ui" line="2208"/>
         <source>HTTP</source>
         <translation>HTTP</translation>
     </message>
@@ -4338,7 +4338,7 @@
         <translation type="obsolete">Die folgenden Einstellungen überschreiben die o.g. Einstellungen, wenn der URL Host mit .i2p endet.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2341"/>
+        <location filename="../UI/settings.ui" line="2354"/>
         <source>Web 2.0 Downloads (I2P)</source>
         <translation>Web 2.0 Downloads (I2P)</translation>
     </message>
@@ -4363,8 +4363,8 @@
         <translation type="obsolete">Passphrase ändern</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2917"/>
-        <location filename="../UI/settings.ui" line="2923"/>
+        <location filename="../UI/settings.ui" line="2930"/>
+        <location filename="../UI/settings.ui" line="2936"/>
         <source>Passphrase</source>
         <translation>Passphrase</translation>
     </message>
@@ -4389,29 +4389,29 @@
         <translation type="obsolete">Blockiere Pop-Ups</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1070"/>
-        <location filename="../UI/settings.ui" line="3009"/>
-        <location filename="../UI/settings.ui" line="3043"/>
-        <location filename="../UI/settings.ui" line="3077"/>
-        <location filename="../UI/settings.ui" line="3111"/>
-        <location filename="../UI/settings.ui" line="3150"/>
-        <location filename="../UI/settings.ui" line="3188"/>
-        <location filename="../UI/settings.ui" line="3476"/>
-        <location filename="../UI/settings.ui" line="3510"/>
-        <location filename="../UI/settings.ui" line="3544"/>
-        <location filename="../UI/settings.ui" line="3669"/>
-        <location filename="../UI/settings.ui" line="3946"/>
+        <location filename="../UI/settings.ui" line="1083"/>
+        <location filename="../UI/settings.ui" line="3022"/>
+        <location filename="../UI/settings.ui" line="3056"/>
+        <location filename="../UI/settings.ui" line="3090"/>
+        <location filename="../UI/settings.ui" line="3124"/>
+        <location filename="../UI/settings.ui" line="3163"/>
+        <location filename="../UI/settings.ui" line="3201"/>
+        <location filename="../UI/settings.ui" line="3489"/>
+        <location filename="../UI/settings.ui" line="3523"/>
+        <location filename="../UI/settings.ui" line="3557"/>
+        <location filename="../UI/settings.ui" line="3682"/>
+        <location filename="../UI/settings.ui" line="3959"/>
         <source>&amp;Exceptions</source>
         <translation>Ausnahmen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1094"/>
+        <location filename="../UI/settings.ui" line="1107"/>
         <source>Disk Cache</source>
         <translation>Zwischenspeicher auf der Festplatte</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1872"/>
-        <location filename="../UI/settings.ui" line="2353"/>
+        <location filename="../UI/settings.ui" line="1885"/>
+        <location filename="../UI/settings.ui" line="2366"/>
         <source>The following settings override the above settings if the requested URL&apos;s host ends in i2p.</source>
         <translation>Die folgenden Einstellungen überschreiben die oben festgelegten Einstellungen, wenn die angefragte Domain der URL mit .i2p endet.</translation>
     </message>
@@ -4420,7 +4420,7 @@
         <translation type="obsolete">Wenn eine Passphrase nicht definiert wurde, werden Lesezeichen, Cookies, Download Informationen, Ausnahme Informationen, Favicons und Einträge zur Historie besuchter Seiten mit einer vorläufigen Passphrase verschlüsselt. Im Ergebnis werden die Daten in zukünftigen Sitzungen nicht mehr zur Verfügung stehen. Mit einer definierten Passphrase wird ebenso der Festplatten-Cache sowie die Wiederherstellung von Sitzungen ermöglicht.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2570"/>
+        <location filename="../UI/settings.ui" line="2583"/>
         <source>If the Modify Passphrase button is disabled, the passphrase that you provided does not match the stored passphrase or a passphrase has not been set.</source>
         <translation>Wenn der Knopf &quot;Passphrase verändern&quot; nicht zur Verfügung steht, dann wurde entweder noch keine Passphrase definiert oder die eingegebene Passphrase stimmt nicht mit der definierten Passphrase überein.</translation>
     </message>
@@ -4429,7 +4429,7 @@
         <translation type="obsolete">Derzeitiger Cipher Typ: Ausgewählter Cipher Typ:</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2835"/>
+        <location filename="../UI/settings.ui" line="2848"/>
         <source>Re-encode cache.</source>
         <translation>Erneutes Encodieren des Zwischenspeichers.</translation>
     </message>
@@ -4438,22 +4438,22 @@
         <translation type="obsolete">Derzeitiger Hash Typ: Ausgewählter Hash Typ</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2657"/>
+        <location filename="../UI/settings.ui" line="2670"/>
         <source>Iteration Count</source>
         <translation>Anzahl der Wiederholungen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2697"/>
+        <location filename="../UI/settings.ui" line="2710"/>
         <source>Salt Length</source>
         <translation>Länge des Zufallsmusters</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2895"/>
+        <location filename="../UI/settings.ui" line="2908"/>
         <source>&amp;Modify Passphrase</source>
         <translation>Passphrase ändern</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2951"/>
+        <location filename="../UI/settings.ui" line="2964"/>
         <source>Minimum of 16 characters.</source>
         <translation>Mindestens 16 Zeichen erforderlich.</translation>
     </message>
@@ -4470,57 +4470,57 @@
         <translation type="obsolete">Cookies akzeptieren</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3361"/>
+        <location filename="../UI/settings.ui" line="3374"/>
         <source>Third-party cookies should be</source>
         <translation>Cookies von Drittanbietern sollen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3375"/>
+        <location filename="../UI/settings.ui" line="3388"/>
         <source>always allowed</source>
         <translation>immer erlaubt sein</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3380"/>
+        <location filename="../UI/settings.ui" line="3393"/>
         <source>always blocked</source>
         <translation>immer geblockt werden</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3217"/>
+        <location filename="../UI/settings.ui" line="3230"/>
         <source>Please note that the below setting affects preserved sites.</source>
         <translation>Bitte beachte, dass die unten getroffenen Einstellungen auch markierte Seiten betreffen, deren Cookies vor dem Löschen geschützt werden sollen.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3242"/>
+        <location filename="../UI/settings.ui" line="3255"/>
         <source>preserved forever</source>
         <translation>gesichert sein für immer</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3247"/>
+        <location filename="../UI/settings.ui" line="3260"/>
         <source>preserved until they expire</source>
         <translation>gesichert sein bis zum vom Anbieter vorgesehenen Verfallsdatum</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3284"/>
+        <location filename="../UI/settings.ui" line="3297"/>
         <source>Please note that preserved sites will not be discarded.</source>
         <translation>Bitte beachte, dass Seiten, deren Cookie vom Nutzer vor dem Löschen geschützt wurde, nicht gelöscht werden.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3293"/>
+        <location filename="../UI/settings.ui" line="3306"/>
         <source>Sweep cookies every</source>
         <translation>Lösche Cookies alle</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3317"/>
+        <location filename="../UI/settings.ui" line="3330"/>
         <source>hour(s)</source>
         <translation>Stunde(n)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3322"/>
+        <location filename="../UI/settings.ui" line="3335"/>
         <source>minute(s)</source>
         <translation>Minute(n)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3461"/>
+        <location filename="../UI/settings.ui" line="3474"/>
         <source>HTTP Headers</source>
         <translation>HTTP Headers</translation>
     </message>
@@ -4529,27 +4529,27 @@
         <translation type="obsolete">DNT (Do Not Track - Verfolge mich nicht)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3657"/>
+        <location filename="../UI/settings.ui" line="3670"/>
         <source>Accept dialog confirmations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3691"/>
+        <location filename="../UI/settings.ui" line="3704"/>
         <source>Enable cross-site script auditing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3718"/>
+        <location filename="../UI/settings.ui" line="3731"/>
         <source>Allow hiding of the menu bar.</source>
         <translation>Erlaube das Ausblenden der Menüleiste.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3728"/>
+        <location filename="../UI/settings.ui" line="3741"/>
         <source>Allow hiding of the status bar.</source>
         <translation>Erlaube das Ausblenden der Status-Leiste.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3735"/>
+        <location filename="../UI/settings.ui" line="3748"/>
         <source>Allow hiding of the location tool bar.</source>
         <translation>Erlaube das Ausblenden der Location-Werkzeugleiste.</translation>
     </message>
@@ -4558,17 +4558,17 @@
         <translation type="obsolete">XSS Auditing aktivieren</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3415"/>
+        <location filename="../UI/settings.ui" line="3428"/>
         <source>Display the IP address of the current Web site.</source>
         <translation>Zeige die IP-Adresse der aktuellen Webseite an.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3469"/>
+        <location filename="../UI/settings.ui" line="3482"/>
         <source>Do not track me.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3596"/>
+        <location filename="../UI/settings.ui" line="3609"/>
         <source>JavaScript</source>
         <translation>JavaScript</translation>
     </message>
@@ -4589,7 +4589,7 @@
         <translation type="obsolete">Plugins</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4074"/>
+        <location filename="../UI/settings.ui" line="4087"/>
         <source>Always show the tab bar.</source>
         <translation>Zeige immer die Tab-Leiste an.</translation>
     </message>
@@ -4598,7 +4598,7 @@
         <translation type="obsolete">Ermögliche die Erstellung von Tor-Tabs.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4114"/>
+        <location filename="../UI/settings.ui" line="4127"/>
         <source>Open links in new tabs instead of new windows.</source>
         <translation>Öffne Links in neuen Tabs anstatt in neuen Fenstern.</translation>
     </message>
@@ -4609,62 +4609,62 @@
         <translation>Fenster</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2528"/>
+        <location filename="../UI/settings.ui" line="2541"/>
         <source>Show authentication information after launch. Disabling this feature will inhibit session restoration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3002"/>
+        <location filename="../UI/settings.ui" line="3015"/>
         <source>Always HTTPS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3033"/>
+        <location filename="../UI/settings.ui" line="3046"/>
         <source>Automatically load images.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3067"/>
+        <location filename="../UI/settings.ui" line="3080"/>
         <source>Block pop-up windows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3101"/>
+        <location filename="../UI/settings.ui" line="3114"/>
         <source>Block third-party frame content.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3136"/>
+        <location filename="../UI/settings.ui" line="3149"/>
         <source>Cookies</source>
         <translation type="unfinished">Cookies</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3500"/>
+        <location filename="../UI/settings.ui" line="3513"/>
         <source>Suppress HTTP redirect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3534"/>
+        <location filename="../UI/settings.ui" line="3547"/>
         <source>Suppress HTTP referrer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3879"/>
+        <location filename="../UI/settings.ui" line="3892"/>
         <source>Session restoration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3994"/>
+        <location filename="../UI/settings.ui" line="4007"/>
         <source>Web plugins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4021"/>
+        <location filename="../UI/settings.ui" line="4034"/>
         <source>WebGL.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4131"/>
+        <location filename="../UI/settings.ui" line="4144"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Warne mich vor dem Schließen einer Seite, deren Inhalt verändert wurde.</translation>
     </message>
@@ -4677,7 +4677,7 @@
         <translation type="obsolete">Schließe das Download-Fenster, wenn die Downloads beendet sind.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4268"/>
+        <location filename="../UI/settings.ui" line="4281"/>
         <source>Open user windows as new processes.</source>
         <translation>Öffne Nutzer-Fenster als neuen Prozess.</translation>
     </message>
@@ -4740,7 +4740,7 @@
         <translation type="obsolete">Sprache  / Aktuelle Übersetzung: Markus Müller (mmueller@web.de)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="524"/>
+        <location filename="../UI/settings.ui" line="537"/>
         <source>Theme</source>
         <translation>Grafik-Thema</translation>
     </message>
@@ -4769,76 +4769,76 @@
         <translation type="obsolete">Konfiguration Proxy A</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1594"/>
-        <location filename="../UI/settings.ui" line="1838"/>
-        <location filename="../UI/settings.ui" line="1884"/>
-        <location filename="../UI/settings.ui" line="2075"/>
-        <location filename="../UI/settings.ui" line="2207"/>
-        <location filename="../UI/settings.ui" line="2365"/>
+        <location filename="../UI/settings.ui" line="1607"/>
+        <location filename="../UI/settings.ui" line="1851"/>
+        <location filename="../UI/settings.ui" line="1897"/>
+        <location filename="../UI/settings.ui" line="2088"/>
+        <location filename="../UI/settings.ui" line="2220"/>
+        <location filename="../UI/settings.ui" line="2378"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1610"/>
-        <location filename="../UI/settings.ui" line="1732"/>
-        <location filename="../UI/settings.ui" line="1905"/>
-        <location filename="../UI/settings.ui" line="2091"/>
-        <location filename="../UI/settings.ui" line="2223"/>
-        <location filename="../UI/settings.ui" line="2386"/>
+        <location filename="../UI/settings.ui" line="1623"/>
+        <location filename="../UI/settings.ui" line="1745"/>
+        <location filename="../UI/settings.ui" line="1918"/>
+        <location filename="../UI/settings.ui" line="2104"/>
+        <location filename="../UI/settings.ui" line="2236"/>
+        <location filename="../UI/settings.ui" line="2399"/>
         <source>Socks5</source>
         <translation>Socks5</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1737"/>
-        <location filename="../UI/settings.ui" line="1900"/>
-        <location filename="../UI/settings.ui" line="2228"/>
-        <location filename="../UI/settings.ui" line="2381"/>
+        <location filename="../UI/settings.ui" line="1750"/>
+        <location filename="../UI/settings.ui" line="1913"/>
+        <location filename="../UI/settings.ui" line="2241"/>
+        <location filename="../UI/settings.ui" line="2394"/>
         <source>Http</source>
         <translation>Http</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1633"/>
-        <location filename="../UI/settings.ui" line="1760"/>
-        <location filename="../UI/settings.ui" line="1928"/>
-        <location filename="../UI/settings.ui" line="2114"/>
-        <location filename="../UI/settings.ui" line="2251"/>
-        <location filename="../UI/settings.ui" line="2409"/>
+        <location filename="../UI/settings.ui" line="1646"/>
+        <location filename="../UI/settings.ui" line="1773"/>
+        <location filename="../UI/settings.ui" line="1941"/>
+        <location filename="../UI/settings.ui" line="2127"/>
+        <location filename="../UI/settings.ui" line="2264"/>
+        <location filename="../UI/settings.ui" line="2422"/>
         <source>Host Name</source>
         <translation>Hostname</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1106"/>
+        <location filename="../UI/settings.ui" line="1119"/>
         <source> MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1125"/>
+        <location filename="../UI/settings.ui" line="1138"/>
         <source>50 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1652"/>
-        <location filename="../UI/settings.ui" line="1779"/>
-        <location filename="../UI/settings.ui" line="1950"/>
-        <location filename="../UI/settings.ui" line="2133"/>
-        <location filename="../UI/settings.ui" line="2270"/>
-        <location filename="../UI/settings.ui" line="2431"/>
+        <location filename="../UI/settings.ui" line="1665"/>
+        <location filename="../UI/settings.ui" line="1792"/>
+        <location filename="../UI/settings.ui" line="1963"/>
+        <location filename="../UI/settings.ui" line="2146"/>
+        <location filename="../UI/settings.ui" line="2283"/>
+        <location filename="../UI/settings.ui" line="2444"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1674"/>
-        <location filename="../UI/settings.ui" line="1801"/>
-        <location filename="../UI/settings.ui" line="2155"/>
-        <location filename="../UI/settings.ui" line="2292"/>
+        <location filename="../UI/settings.ui" line="1687"/>
+        <location filename="../UI/settings.ui" line="1814"/>
+        <location filename="../UI/settings.ui" line="2168"/>
+        <location filename="../UI/settings.ui" line="2305"/>
         <source>User Name</source>
         <translation>Benutzername</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1691"/>
-        <location filename="../UI/settings.ui" line="1818"/>
-        <location filename="../UI/settings.ui" line="2172"/>
-        <location filename="../UI/settings.ui" line="2309"/>
+        <location filename="../UI/settings.ui" line="1704"/>
+        <location filename="../UI/settings.ui" line="1831"/>
+        <location filename="../UI/settings.ui" line="2185"/>
+        <location filename="../UI/settings.ui" line="2322"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>
@@ -4847,8 +4847,8 @@
         <translation type="obsolete">Konfiguration Proxy B</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1943"/>
-        <location filename="../UI/settings.ui" line="2424"/>
+        <location filename="../UI/settings.ui" line="1956"/>
+        <location filename="../UI/settings.ui" line="2437"/>
         <source>127.0.0.1</source>
         <translation>127.0.0.1</translation>
     </message>
@@ -4857,22 +4857,22 @@
         <translation type="obsolete">Configuration Proxy C</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3574"/>
+        <location filename="../UI/settings.ui" line="3587"/>
         <source>Java</source>
         <translation>Java</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3701"/>
+        <location filename="../UI/settings.ui" line="3714"/>
         <source>Allow opening of new windows.</source>
         <translation>Erlaube das Öffnen von neuen Fenstern.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3711"/>
+        <location filename="../UI/settings.ui" line="3724"/>
         <source>Accept geometry-change requests.</source>
         <translation>Erlaube automatische Anpassungen der Fenstergröße.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="967"/>
+        <location filename="../UI/settings.ui" line="980"/>
         <source>day(s).</source>
         <translation>Tag(e).</translation>
     </message>
@@ -4887,19 +4887,19 @@
         <translation type="obsolete">Bitte beachte, dass die neue Passphrase nur auf Cookie Daten Anwendung findet. Alle anderen Daten bleiben mit der derzeitigen Passphrase verschlüsselt.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3226"/>
+        <location filename="../UI/settings.ui" line="3239"/>
         <source>Cookies should be</source>
         <translation>Cookies sollen</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3237"/>
+        <location filename="../UI/settings.ui" line="3250"/>
         <source>deleted upon exit</source>
         <translation>beim Beenden gelöscht werden</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3255"/>
-        <location filename="../UI/settings.ui" line="3330"/>
-        <location filename="../UI/settings.ui" line="3388"/>
+        <location filename="../UI/settings.ui" line="3268"/>
+        <location filename="../UI/settings.ui" line="3343"/>
+        <location filename="../UI/settings.ui" line="3401"/>
         <source>.</source>
         <translation>.</translation>
     </message>
@@ -4908,7 +4908,7 @@
         <translation type="obsolete">Schließe das Tab über eines Klick des Mittleren Mausknopfs.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4094"/>
+        <location filename="../UI/settings.ui" line="4107"/>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation>Öffne einen neuen Tab durch Doppelklick auf die Tab-Leiste.</translation>
     </message>

@@ -40,18 +40,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="styleSheet">
-      <string notr="true">QProgressBar {
-background-color: qlineargradient(x1: 0, y1: 0.5, x2: 0.5,  y2: 1.0, stop: 0 lightgrey, stop: 1 white); 
-border: 0px; 
-border-radius: 0px;
-}
-QProgressBar::chunk {
-background-color: #cd96cd; 
-margin: 1px;
-}
-</string>
-     </property>
      <property name="textVisible">
       <bool>false</bool>
      </property>
