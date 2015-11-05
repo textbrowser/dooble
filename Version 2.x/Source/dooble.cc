@@ -998,13 +998,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   sb.setupUi(sbWidget);
   sb.progressBar->setValue(0);
   sb.progressBar->setVisible(false);
-#ifndef Q_OS_MAC
-  sb.progressBar->setStyleSheet
-    ("QProgressBar {\nbackground-color: qlineargradient(x1: 0, y1: "
-     "0.5, x2: 0.5,  y2: 1.0, stop: 0 lightgrey, stop: 1 white); \n"
-     "border: 0px; \nborder-radius: 0px;\n}\nQProgressBar::chunk "
-     "{\nbackground-color: #cd96cd; \nmargin: 1px;\n}\n");
-#endif
   sb.statusLabel->setVisible(true);
   sb.exceptionsToolButton->setVisible(false);
   sb.errorLogToolButton->setVisible(false);
