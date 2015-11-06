@@ -36,6 +36,7 @@ QMAKE_EXTRA_TARGETS = libspoton purge
 
 INCLUDEPATH	+= . Include Include.win32 libSpoton\\Include.win32
 LIBS		+= -LLibraries.win32 -LlibSpotOn \
+                   -LlibSpotOn\\Libraries.win32 \
 		   -lgcrypt-20 -lgpg-error-0 -lpthread -lspoton
 PRE_TARGETDEPS = libspoton.dll
 
