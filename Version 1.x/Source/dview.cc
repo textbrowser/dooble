@@ -1401,12 +1401,6 @@ QString dview::description(void) const
 	      if(map.contains("Description"))
 		list += map.values("Description");
 
-	      if(map.contains("keywords"))
-		list += map.values("keywords");
-
-	      if(map.contains("Keywords"))
-		list += map.values("Keywords");
-
 	      while(!list.isEmpty())
 		str += list.takeFirst();
 	    }
