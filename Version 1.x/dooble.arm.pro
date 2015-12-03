@@ -22,8 +22,8 @@ DEFINES		+= DOOBLE_URLFRAME_LAYOUT_SPACING=1 \
 
 QMAKE_CLEAN     += Dooble
 QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_CXXFLAGS_RELEASE += -fwrapv -mtune=cortex-a8 -Os \
-			  -Wall -Wcast-align -Wcast-qual \
+QMAKE_CXXFLAGS_RELEASE += -fwrapv -mtune=native -Os \
+			  -Wall -Wcast-qual \
 			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstrict-overflow=5
