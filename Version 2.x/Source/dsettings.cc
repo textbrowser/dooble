@@ -139,28 +139,8 @@ dsettings::dsettings():QMainWindow()
 
   if(!dooble::s_settings.contains("settingsWindow/homeUrl"))
     {
-      if(locale.language() == QLocale::C)
-	{
-	  settings.setValue("settingsWindow/homeUrl",
-			    "qrc:/search_c.html");
-	  dooble::s_settings["settingsWindow/homeUrl"] =
-	    "qrc:/search_c.html";
-	}
-      else
-	{
-	  settings.setValue("settingsWindow/homeUrl",
-			    QString("qrc:/search_%1_%2.html").
-			    arg(QLocale::languageToString(locale.language()).
-				toLower().trimmed()).
-			    arg(QLocale::countryToString(locale.country()).
-				toLower().trimmed()));
-	  dooble::s_settings["settingsWindow/homeUrl"] =
-	    QString("qrc:/search_%1_%2.html").
-	    arg(QLocale::languageToString(locale.language()).
-		toLower().trimmed()).
-	    arg(QLocale::countryToString(locale.country()).
-		toLower().trimmed());
-	}
+      settings.setValue("settingsWindow/homeUrl", "qrc:/default.html");
+      dooble::s_settings["settingsWindow/homeUrl"] = "qrc:/default.html";
     }
 
   if(dooble::s_settings.value("settingsWindow/myRetrievedFiles", "").
@@ -513,7 +493,7 @@ void dsettings::exec(dooble *parent)
 
   ui.homeLineEdit->setText
     (dooble::s_settings.value("settingsWindow/homeUrl",
-			      "qrc:/search_c.html").toString());
+			      "qrc:/default.html").toString());
   ui.p2pLineEdit->setText
     (dooble::s_settings.value("settingsWindow/p2pUrl",
 			      "about: blank").toString().trimmed());
