@@ -1729,23 +1729,23 @@
         <translation type="obsolete">Engadidos web (non estábeis)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1517"/>
-        <location filename="../Source/dsettings.cc" line="1551"/>
+        <location filename="../Source/dsettings.cc" line="1497"/>
+        <location filename="../Source/dsettings.cc" line="1531"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Navegador web Dooble: Erro</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1518"/>
+        <location filename="../Source/dsettings.cc" line="1498"/>
         <source>The passphrases do not match.</source>
         <translation>As frases de paso non coinciden.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2149"/>
+        <location filename="../Source/dsettings.cc" line="2129"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Navegador web Dooble: Confirmación</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1400"/>
+        <location filename="../Source/dsettings.cc" line="1380"/>
         <source>unknown</source>
         <translation>descoñecido</translation>
     </message>
@@ -1755,12 +1755,12 @@
         <translation>permitido coas cookies existentes</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="586"/>
+        <location filename="../Source/dsettings.cc" line="566"/>
         <source>Web plugins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1552"/>
+        <location filename="../Source/dsettings.cc" line="1532"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>O contrasinal debe ter como mínimo seis caracteres de lonxitude.</translation>
     </message>
@@ -1769,7 +1769,7 @@
         <translation type="obsolete">Está a piques de restabelecer as opcións de configuración. Se xa foi configurada un contrasinal de paso este manterase. Dooble reiniciarase a fin de completar o proceso de restabelecemento. Como resultado, os datos non gardados perderanse. Quere continuar?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2245"/>
+        <location filename="../Source/dsettings.cc" line="2225"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Navegador web Dooble: Selección do tema</translation>
     </message>
@@ -1778,12 +1778,12 @@
         <translation type="obsolete">&amp;Seleccionar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2263"/>
+        <location filename="../Source/dsettings.cc" line="2243"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Ficheiro de configuración de tema (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2348"/>
+        <location filename="../Source/dsettings.cc" line="2328"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Navegador web Dooble: Selección dos ficheiros obtidos por min</translation>
     </message>
@@ -1792,49 +1792,49 @@
         <translation type="obsolete">&amp;Abrir</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2152"/>
+        <location filename="../Source/dsettings.cc" line="2132"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2262"/>
-        <location filename="../Source/dsettings.cc" line="2734"/>
+        <location filename="../Source/dsettings.cc" line="2242"/>
+        <location filename="../Source/dsettings.cc" line="2714"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2351"/>
-        <location filename="../Source/dsettings.cc" line="2379"/>
+        <location filename="../Source/dsettings.cc" line="2331"/>
+        <location filename="../Source/dsettings.cc" line="2359"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2376"/>
+        <location filename="../Source/dsettings.cc" line="2356"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Navegador web Dooble: Selección da base de datos de Spot-On compartida</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2649"/>
+        <location filename="../Source/dsettings.cc" line="2629"/>
         <source>Prompt</source>
         <translation>Preguntar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2666"/>
+        <location filename="../Source/dsettings.cc" line="2646"/>
         <source>Use other...</source>
         <translation>Usar outro...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2731"/>
+        <location filename="../Source/dsettings.cc" line="2711"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Navegador web Dooble: Seleccione o aplicativo</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2844"/>
+        <location filename="../Source/dsettings.cc" line="2824"/>
         <source>&amp;Delete File Suffix</source>
         <translation>&amp;Eliminar o sufixo do ficheiro</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2905"/>
+        <location filename="../Source/dsettings.cc" line="2885"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>

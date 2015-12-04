@@ -1671,13 +1671,13 @@
         <translation type="obsolete">वर्तमान हैश प्रकार:</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1517"/>
-        <location filename="../Source/dsettings.cc" line="1551"/>
+        <location filename="../Source/dsettings.cc" line="1497"/>
+        <location filename="../Source/dsettings.cc" line="1531"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble वेब ब्राउज़र: त्रुटि</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1518"/>
+        <location filename="../Source/dsettings.cc" line="1498"/>
         <source>The passphrases do not match.</source>
         <translation type="unfinished">Passphrases मेल नहीं खाते.</translation>
     </message>
@@ -1686,12 +1686,12 @@
         <translation type="obsolete">पदबंध में कम से कम बारह वर्ण लंबा होना चाहिए.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2149"/>
+        <location filename="../Source/dsettings.cc" line="2129"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1400"/>
+        <location filename="../Source/dsettings.cc" line="1380"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1701,17 +1701,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="586"/>
+        <location filename="../Source/dsettings.cc" line="566"/>
         <source>Web plugins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1552"/>
+        <location filename="../Source/dsettings.cc" line="1532"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2245"/>
+        <location filename="../Source/dsettings.cc" line="2225"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: विषय चयन</translation>
     </message>
@@ -1720,12 +1720,12 @@
         <translation type="obsolete">&amp;चयन</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2263"/>
+        <location filename="../Source/dsettings.cc" line="2243"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation type="unfinished">विषय विन्यास फाइल (*. cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2348"/>
+        <location filename="../Source/dsettings.cc" line="2328"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: मेरे पुनःप्राप्त फ़ाइलें निर्देशिका चयन</translation>
     </message>
@@ -1734,49 +1734,49 @@
         <translation type="obsolete">खुला</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2152"/>
+        <location filename="../Source/dsettings.cc" line="2132"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2262"/>
-        <location filename="../Source/dsettings.cc" line="2734"/>
+        <location filename="../Source/dsettings.cc" line="2242"/>
+        <location filename="../Source/dsettings.cc" line="2714"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2351"/>
-        <location filename="../Source/dsettings.cc" line="2379"/>
+        <location filename="../Source/dsettings.cc" line="2331"/>
+        <location filename="../Source/dsettings.cc" line="2359"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2376"/>
+        <location filename="../Source/dsettings.cc" line="2356"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2649"/>
+        <location filename="../Source/dsettings.cc" line="2629"/>
         <source>Prompt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2666"/>
+        <location filename="../Source/dsettings.cc" line="2646"/>
         <source>Use other...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2731"/>
+        <location filename="../Source/dsettings.cc" line="2711"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2844"/>
+        <location filename="../Source/dsettings.cc" line="2824"/>
         <source>&amp;Delete File Suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2905"/>
+        <location filename="../Source/dsettings.cc" line="2885"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
