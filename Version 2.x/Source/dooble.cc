@@ -79,6 +79,7 @@ extern "C"
 #ifdef Q_OS_MAC
 #include "CocoaInitializer.h"
 #endif
+#include "architecture.h"
 #include "dbookmarkspopup.h"
 #include "dbookmarkswindow.h"
 #include "dclearcontainers.h"
@@ -4251,22 +4252,7 @@ void dooble::slotAbout(void)
 	     "</html>").
      arg(DOOBLE_VERSION_STR).
      arg(QT_VERSION_STR).
-     arg(
-#if defined(__ARM_ARCH_7__) || defined(__ARM_ARCH_7A__) || \
-    defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7R__)
-	 "arm_7"
-#elif defined(__sparc) || defined(__sparc__)
-	 "sparc"
-#elif defined(__sparc_v9) || defined(__sparc_v9__)
-	 "sparc_v9"
-#elif defined(__x86) || defined(__x86__)
-	 "x86"
-#elif defined(__x86_64) || defined(__x86_64__)
-	 "x86_64"
-#else
-	 "gingerjitter"
-#endif
-         ));
+     arg(ARCHITECTURE_STR));
   mb->setStandardButtons(QMessageBox::Ok);
 
   QSettings settings
