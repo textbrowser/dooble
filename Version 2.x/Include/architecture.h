@@ -1,3 +1,5 @@
+#ifndef _ARCHITECTURE_H_
+#define _ARCHITECTURE_H_
 #if defined(__alpha__)
 #define ARCHITECTURE_STR "__alpha__"
 #elif defined(__alpha_ev4__)
@@ -90,4 +92,5 @@
 #define ARCHITECTURE_STR "__sparcv9"
 #else
 #define ARCHITECTURE_STR "gingerjitter"
+#endif
 #endif
