@@ -46,7 +46,8 @@ class dspoton: public QObject
   void registerWidget(QWidget *widget);
   void share(const QUrl &url,
 	     const QString &title,
-	     const QString &description);
+	     const QString &description,
+	     const QString &content);
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
  private:
   QTimer m_timer;

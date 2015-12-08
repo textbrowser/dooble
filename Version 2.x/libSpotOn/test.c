@@ -41,6 +41,7 @@ int main(void)
      LIBSPOTON_ERROR_NONE)
     printf("libspoton_init_b() error (%s).\n", libspoton_strerror(rc));
 
+  const char *content = "<html><title>Dooble</title></html>";
   const char *description = "Dooble";
   const char *title = "Dooble Web Browser";
   const char *url = "http://dooble.sourceforge.net";
@@ -51,6 +52,8 @@ int main(void)
 			      strlen(title),
 			      description,
 			      strlen(description),
+			      content,
+			      strlen(content),
 			      &libspotonHandle)) !=
      LIBSPOTON_ERROR_NONE)
     printf("libspoton_save_url() error (%s).\n",
@@ -61,6 +64,8 @@ int main(void)
   if((rc = libspoton_save_url(url,
 			      strlen(url),
 			      "",
+			      0,
+			      0,
 			      0,
 			      0,
 			      0,
@@ -79,6 +84,7 @@ int main(void)
      LIBSPOTON_ERROR_NONE)
     printf("libspoton_init_a() error (%s).\n", libspoton_strerror(rc));
 
+  content = "<html><title>Wikipedia</title></html>";
   description = "knowledge, science";
   title = "Wikipedia";
   url = "http://www.wikipedia.org";
@@ -89,6 +95,8 @@ int main(void)
 			      strlen(title),
 			      description,
 			      strlen(description),
+			      content,
+			      strlen(content),
 			      &libspotonHandle)) !=
      LIBSPOTON_ERROR_NONE)
     printf("libspoton_save_url() error (%s).\n",

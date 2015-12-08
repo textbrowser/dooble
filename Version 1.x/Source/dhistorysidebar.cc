@@ -518,11 +518,12 @@ void dhistorysidebar::slotShare(void)
 
   while(!list.isEmpty())
     {
-      QUrl url;
-      QString title("");
-      QString description("");
       QStandardItem *item = dooble::s_historyModel->item
 	(list.first().row(), 3);
+      QString content("");
+      QString description("");
+      QString title("");
+      QUrl url;
 
       if(item)
 	title = item->text();
@@ -540,7 +541,7 @@ void dhistorysidebar::slotShare(void)
       if(item)
 	description = item->text();
 
-      dooble::s_spoton->share(url, title, description);
+      dooble::s_spoton->share(url, title, description, content);
       list.takeFirst();
     }
 

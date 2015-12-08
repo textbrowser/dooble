@@ -54,6 +54,7 @@ static char *libspoton_error_strings[] =
     "LIBSPOTON_ERROR_NOT_CONNECTED_TO_SQLITE_DATABASE",
     "LIBSPOTON_ERROR_NULL_LIBSPOTON_HANDLE",
     "LIBSPOTON_ERROR_NUMERIC_ERROR",
+    "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_CONTENT",
     "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_DESCRIPTION",
     "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_TITLE",
     "LIBSPOTON_ERROR_SQLITE_BIND_BLOB_URL",
@@ -159,10 +160,11 @@ libspoton_error_t libspoton_create_urls_table
   pthread_mutex_lock(&sqlite_mutex);
   rv = sqlite3_exec(libspotonHandle->m_sqliteHandle,
 		    "CREATE TABLE IF NOT EXISTS urls ("
-		    "url BLOB PRIMARY KEY NOT NULL, "
-		    "title BLOB, "
+		    "content BLOB, "
 		    "description BLOB, "
-		    "encrypted INTEGER NOT NULL DEFAULT 0)",
+		    "encrypted INTEGER NOT NULL DEFAULT 0, "
+		    "title BLOB, "
+		    "url BLOB PRIMARY KEY NOT NULL)",
 		    0,
 		    0,
 		    0);
@@ -574,6 +576,8 @@ libspoton_error_t libspoton_save_url(const char *url,
 				     const size_t titleSize,
 				     const char *description,
 				     const size_t descriptionSize,
+				     const char *content,
+				     const size_t contentSize,
 				     libspoton_handle_t *libspotonHandle)
 {
   bool encrypt = true;
@@ -583,7 +587,8 @@ libspoton_error_t libspoton_save_url(const char *url,
   char lengthArray[4];
   const char *buffer = "";
   const char *sql = "INSERT OR REPLACE INTO urls (url, title, "
-    "description, encrypted) VALUES (?, ?, ?, ?)";
+    "description, content, encrypted) VALUES (?, ?, ?, ?, ?)";
+  int FIELDS_COUNT = 4; // Ignore the encrypted field.
   gcry_cipher_hd_t cipherCtx = 0;
   int i = 0;
   int rv = 0;
@@ -661,7 +666,7 @@ libspoton_error_t libspoton_save_url(const char *url,
       goto error_label;
     }
 
-  for(i = 1; i <= 3; i++)
+  for(i = 1; i <= FIELDS_COUNT; i++)
     {
       if(encrypt)
 	{
@@ -696,10 +701,15 @@ libspoton_error_t libspoton_save_url(const char *url,
 	  buffer = title;
 	  length = titleSize;
 	}
-      else
+      else if(i == 3)
 	{
 	  buffer = description;
 	  length = descriptionSize;
+	}
+      else
+	{
+	  buffer = content;
+	  length = contentSize;
 	}
 
       if(encrypt)
@@ -804,8 +814,10 @@ libspoton_error_t libspoton_save_url(const char *url,
 		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_URL;
 	      else if(i == 2)
 		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_TITLE;
-	      else
+	      else if(i == 3)
 		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_DESCRIPTION;
+	      else
+		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_CONTENT;
 
 	      goto error_label;
 	    }
@@ -822,8 +834,10 @@ libspoton_error_t libspoton_save_url(const char *url,
 		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_URL;
 	      else if(i == 2)
 		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_TITLE;
-	      else
+	      else if(i == 3)
 		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_DESCRIPTION;
+	      else
+		rerr = LIBSPOTON_ERROR_SQLITE_BIND_BLOB_CONTENT;
 
 	      goto error_label;
 	    }
@@ -838,7 +852,7 @@ libspoton_error_t libspoton_save_url(const char *url,
     }
 
   if(sqlite3_bind_int(stmt,
-		      4,
+		      5,
 		      encrypt) != SQLITE_OK)
     {
       rerr = LIBSPOTON_ERROR_SQLITE_BIND_INT_ENCRYPT;

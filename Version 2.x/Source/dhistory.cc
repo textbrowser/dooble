@@ -1481,11 +1481,12 @@ void dhistory::slotShare(void)
 
   while(!list.isEmpty())
     {
-      QUrl url;
       QIcon icon;
-      QString title("");
-      QString description("");
       QStandardItem *item = m_model->item(list.first().row(), 0);
+      QString content("");
+      QString description("");
+      QString title("");
+      QUrl url;
 
       if(item)
 	title = item->text();
@@ -1503,7 +1504,7 @@ void dhistory::slotShare(void)
       if(item)
 	description = item->text();
 
-      dooble::s_spoton->share(url, title, description);
+      dooble::s_spoton->share(url, title, description, content);
       list.takeFirst();
     }
 

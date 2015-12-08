@@ -80,7 +80,8 @@ void dspoton::registerWidget(QWidget *widget)
 
 void dspoton::share(const QUrl &url,
 		    const QString &title,
-		    const QString &description)
+		    const QString &description,
+		    const QString &content)
 {
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   libspoton_error_t err = LIBSPOTON_ERROR_NONE;
@@ -119,6 +120,8 @@ void dspoton::share(const QUrl &url,
 				   title.toUtf8().length(),
 				   description.toUtf8().constData(),
 				   description.toUtf8().length(),
+				   content.toUtf8().constData(),
+				   content.toUtf8().length(),
 				   &libspotonHandle)) != LIBSPOTON_ERROR_NONE)
 	dmisc::logError(QString("dspoton::share(): "
 				"libspoton_save_url() failure (%1).").

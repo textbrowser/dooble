@@ -28,8 +28,8 @@
 #ifndef LIBSPOTON_H
 #define LIBSPOTON_H
 
-#define LIBSPOTON_VERSION 0x000103
-#define LIBSPOTON_VERSION_STR "0.1.3"
+#define LIBSPOTON_VERSION 0x000104
+#define LIBSPOTON_VERSION_STR "0.1.4"
 
 #ifdef LIBSPOTON_OS_WINDOWS
 #include "errno.h"
@@ -80,6 +80,7 @@ typedef enum
     LIBSPOTON_ERROR_NOT_CONNECTED_TO_SQLITE_DATABASE,
     LIBSPOTON_ERROR_NULL_LIBSPOTON_HANDLE,
     LIBSPOTON_ERROR_NUMERIC_ERROR,
+    LIBSPOTON_ERROR_SQLITE_BIND_BLOB_CONTENT,
     LIBSPOTON_ERROR_SQLITE_BIND_BLOB_DESCRIPTION,
     LIBSPOTON_ERROR_SQLITE_BIND_BLOB_TITLE,
     LIBSPOTON_ERROR_SQLITE_BIND_BLOB_URL,
@@ -168,10 +169,11 @@ libspoton_error_t libspoton_register_kernel
  libspoton_handle_t *libspotonHandle);
 
 /*
-** Encode the description, title, and url via cipherType and place the
-** encoded values into the urls table. The url field is required while
-** title and description may be 0. Please note that the passphrase must
-** agree with the passphrase understood by Spot-On.
+** Encode the content, description, title, and url via cipherType and
+** place the encoded values into the urls table. The url field is required
+** while content, description, and title may be 0.
+** Please note that the passphrase must agree with the passphrase
+** understood by Spot-On.
 */
 
 libspoton_error_t libspoton_save_url(const char *url,
@@ -180,6 +182,8 @@ libspoton_error_t libspoton_save_url(const char *url,
 				     const size_t titleSize,
 				     const char *description,
 				     const size_t descriptionSize,
+				     const char *content,
+				     const size_t contentSize,
 				     libspoton_handle_t *libspotonHandle);
 
 /*

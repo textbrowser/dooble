@@ -7990,7 +7990,7 @@ void dooble::slotSubmitUrlToSpotOn(void)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  dooble::s_spoton->share(p->url(), p->title(), p->description());
+  dooble::s_spoton->share(p->url(), p->title(), p->description(), p->html());
   QApplication::restoreOverrideCursor();
 #endif
 }

@@ -2961,9 +2961,10 @@ void dbookmarkswindow::slotShare(void)
 
   if(item)
     {
-      QUrl url(QUrl::fromUserInput(item->text()));
-      QString title("");
+      QString content("");
       QString description("");
+      QString title("");
+      QUrl url(QUrl::fromUserInput(item->text()));
 
       url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
@@ -2973,7 +2974,7 @@ void dbookmarkswindow::slotShare(void)
       if((item = m_urlModel->item(item->row(), 5)))
 	description = item->text();
 
-      dooble::s_spoton->share(url, title, description);
+      dooble::s_spoton->share(url, title, description, content);
     }
 
   QApplication::restoreOverrideCursor();

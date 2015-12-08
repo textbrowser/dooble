@@ -2,7 +2,6 @@ all:	libspoton.o
 	gcc -Zomf -Zmap $(LDFLAGS) -shared \
 	-o libspot.dll libspot.def "$?" -lgcrypt -lgpg-error \
 	-lsqlite3 -lpthread -lssp_s
-	emximp -o spoton.a libspot.dll
 	gcc -Zomf -Zexe $(CFLAGS) test.c -o test -L. \
 	-LF:\Qt\spot-on.d\libSpotOn -llibspot.dll
 
@@ -11,11 +10,8 @@ libspoton.o: libspoton.c libspoton.h
 	     -Wpointer-arith -Wsign-conversion -Wstrict-overflow=5 \
 	     -Wstrict-prototypes \
 	     -DLIBSPOTON_OS_OS2=1 -c -o libspoton.o libspoton.c
-	     echo "LIBRARY libspot.dll INITINSTANCE TERMINSTANCE" > \
-	     libspot.def
-	     echo "DATA MULTIPLE" >> libspot.def
-	     echo "EXPORTS" >> libspot.def
-	     emxexp libspoton.o >> libspot.def
+	     dllar -Zomf -o libspot.dll *.o -lgcrypt \
+	     -lgpg-error -lpthread -lsqlite3 -lssp_s
 
 clean:
 	rm -f libspot.*
