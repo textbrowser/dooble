@@ -143,7 +143,7 @@ void dpagesourcewindow::closeEvent(QCloseEvent *event)
 
 void dpagesourcewindow::slotPrint(void)
 {
-  QPrinter printer;
+  QPrinter printer(QPrinter::HighResolution);
   QPrintDialog printDialog(&printer, this);
 
 #ifdef Q_OS_MAC
@@ -156,7 +156,7 @@ void dpagesourcewindow::slotPrint(void)
 
 void dpagesourcewindow::slotPrintPreview(void)
 {
-  QPrinter printer;
+  QPrinter printer(QPrinter::HighResolution);
   QPrintPreviewDialog printDialog(&printer, this);
 
 #ifdef Q_OS_MAC

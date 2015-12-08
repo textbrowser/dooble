@@ -4871,7 +4871,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
 
 void dooble::slotPrint(void)
 {
-  QPrinter printer;
+  QPrinter printer(QPrinter::HighResolution);
   QPrintDialog printDialog(&printer, this);
 
 #ifdef Q_OS_MAC
@@ -4891,7 +4891,7 @@ void dooble::slotPrintRequested(QWebFrame *frame)
 {
   if(frame)
     {
-      QPrinter printer;
+      QPrinter printer(QPrinter::HighResolution);
       QPrintDialog printDialog(&printer, this);
 
 #ifdef Q_OS_MAC
@@ -4909,7 +4909,7 @@ void dooble::slotPrintPreview(void)
 
   if(p)
     {
-      QPrinter printer;
+      QPrinter printer(QPrinter::HighResolution);
       QPrintPreviewDialog printDialog(&printer, this);
 
 #ifdef Q_OS_MAC
