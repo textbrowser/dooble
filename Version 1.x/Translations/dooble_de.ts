@@ -12,7 +12,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Source/dooble.cc" line="789"/>
+        <location filename="../Source/dooble.cc" line="790"/>
         <source>Dooble Web Browser: DNT (Do Not Track) Exceptions</source>
         <translation>Dooble Web Browser: DNT (Do Not Track - Verfolge mich nicht) Ausnahmen</translation>
     </message>
@@ -21,57 +21,57 @@
         <translation type="obsolete">Dooble Web Browser: JavaScript Popup Ausnahmen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="799"/>
+        <location filename="../Source/dooble.cc" line="800"/>
         <source>Dooble Web Browser: Third-Party Blocking Exceptions</source>
         <translation>Dooble Web Browser: Ausnahmen beim Blocken von Drittanbieter-Inhalten</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="805"/>
+        <location filename="../Source/dooble.cc" line="806"/>
         <source>Dooble Web Browser: Cookies Exceptions</source>
         <translation>Dooble Web Browser: Cookie Ausnahmen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="820"/>
+        <location filename="../Source/dooble.cc" line="821"/>
         <source>Dooble Web Browser: Suppress HTTP Redirect Exceptions</source>
         <translation>Dooble Web Browser: Ausnahmen bei der Unterdrückung von HTTP Weiterleitungen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="845"/>
+        <location filename="../Source/dooble.cc" line="846"/>
         <source>Dooble Web Browser: SSL Errors Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="815"/>
+        <location filename="../Source/dooble.cc" line="816"/>
         <source>Dooble Web Browser: Suppress HTTP Referrer Exceptions</source>
         <translation type="unfinished">Dooble Web Browser: Ausnahmen bei der Offenlegung der HTTP-Referenz</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="794"/>
+        <location filename="../Source/dooble.cc" line="795"/>
         <source>Dooble Web Browser: JavaScript Pop-ups Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="810"/>
+        <location filename="../Source/dooble.cc" line="811"/>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="825"/>
+        <location filename="../Source/dooble.cc" line="826"/>
         <source>Dooble Web Browser: JavaScript Exceptions</source>
         <translation>Dooble Web Browser: JavaScript Ausnahmen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="830"/>
+        <location filename="../Source/dooble.cc" line="831"/>
         <source>Dooble Web Browser: Automatically-Loaded Images Exceptions</source>
         <translation>Dooble Web Browser: Ausnahmen automatisch-geladener Bilder</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="835"/>
+        <location filename="../Source/dooble.cc" line="836"/>
         <source>Dooble Web Browser: Cache Exceptions</source>
         <translation>Dooble Web Browser: Ausnahmen für die Zwischenspeicherung</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="840"/>
+        <location filename="../Source/dooble.cc" line="841"/>
         <source>Dooble Web Browser: Always HTTPS Exceptions</source>
         <translation>Dooble Web Browser: Always HTTPS Ausnahmen</translation>
     </message>
@@ -1478,23 +1478,14 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="1571"/>
+        <location filename="../Source/dooble.cc" line="1572"/>
         <source>Show &amp;History</source>
         <translation>Verlauf anzeigen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1577"/>
+        <location filename="../Source/dooble.cc" line="1578"/>
         <source>&amp;Recently-Closed Tabs</source>
         <translation>Zuletzt geschlossene Tabs</translation>
-    </message>
-    <message>
-        <location filename="../Source/dooble.cc" line="1792"/>
-        <location filename="../Source/dooble.cc" line="1859"/>
-        <location filename="../Source/dooble.cc" line="1902"/>
-        <location filename="../Source/dooble.cc" line="1935"/>
-        <location filename="../Source/dooble.cc" line="2024"/>
-        <source>Dooble Web Browser: Error</source>
-        <translation type="unfinished">Dooble Web Browser: Fehler</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1793"/>
@@ -1502,43 +1493,52 @@
         <location filename="../Source/dooble.cc" line="1903"/>
         <location filename="../Source/dooble.cc" line="1936"/>
         <location filename="../Source/dooble.cc" line="2025"/>
+        <source>Dooble Web Browser: Error</source>
+        <translation type="unfinished">Dooble Web Browser: Fehler</translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble.cc" line="1794"/>
+        <location filename="../Source/dooble.cc" line="1861"/>
+        <location filename="../Source/dooble.cc" line="1904"/>
+        <location filename="../Source/dooble.cc" line="1937"/>
+        <location filename="../Source/dooble.cc" line="2026"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2328"/>
-        <location filename="../Source/dooble.cc" line="2385"/>
-        <location filename="../Source/dooble.cc" line="2425"/>
-        <location filename="../Source/dooble.cc" line="2490"/>
-        <location filename="../Source/dooble.cc" line="3286"/>
-        <location filename="../Source/dooble.cc" line="3473"/>
-        <location filename="../Source/dooble.cc" line="3497"/>
-        <location filename="../Source/dooble.cc" line="5042"/>
-        <location filename="../Source/dooble.cc" line="5524"/>
+        <location filename="../Source/dooble.cc" line="2329"/>
+        <location filename="../Source/dooble.cc" line="2386"/>
+        <location filename="../Source/dooble.cc" line="2426"/>
+        <location filename="../Source/dooble.cc" line="2491"/>
+        <location filename="../Source/dooble.cc" line="3287"/>
+        <location filename="../Source/dooble.cc" line="3474"/>
+        <location filename="../Source/dooble.cc" line="3498"/>
+        <location filename="../Source/dooble.cc" line="5028"/>
+        <location filename="../Source/dooble.cc" line="5510"/>
         <source>(Untitled)</source>
         <translation>(Ohne Titel)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3072"/>
-        <location filename="../Source/dooble.cc" line="3141"/>
-        <location filename="../Source/dooble.cc" line="3257"/>
-        <location filename="../Source/dooble.cc" line="3573"/>
-        <location filename="../Source/dooble.cc" line="3712"/>
-        <location filename="../Source/dooble.cc" line="3752"/>
-        <location filename="../Source/dooble.cc" line="3962"/>
-        <location filename="../Source/dooble.cc" line="5448"/>
-        <location filename="../Source/dooble.cc" line="6073"/>
-        <location filename="../Source/dooble.cc" line="6376"/>
+        <location filename="../Source/dooble.cc" line="3073"/>
+        <location filename="../Source/dooble.cc" line="3142"/>
+        <location filename="../Source/dooble.cc" line="3258"/>
+        <location filename="../Source/dooble.cc" line="3574"/>
+        <location filename="../Source/dooble.cc" line="3713"/>
+        <location filename="../Source/dooble.cc" line="3753"/>
+        <location filename="../Source/dooble.cc" line="3963"/>
+        <location filename="../Source/dooble.cc" line="5434"/>
+        <location filename="../Source/dooble.cc" line="6059"/>
+        <location filename="../Source/dooble.cc" line="6362"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2870"/>
+        <location filename="../Source/dooble.cc" line="2871"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation>Der Inhalt von Tabs wurde geändert. Möchtest Du wirklich beenden?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2873"/>
+        <location filename="../Source/dooble.cc" line="2874"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation>Der Inhalt von Tabs wurde geändert. Möchtest Du wirklich schließen?</translation>
     </message>
@@ -1547,55 +1547,55 @@
         <translation type="obsolete">Das schließen von Dooble unterbricht noch nicht abgeschlossenen Downloads. Bist Du Dir sicher, fortfahren zu wollen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3074"/>
-        <location filename="../Source/dooble.cc" line="3259"/>
-        <location filename="../Source/dooble.cc" line="5450"/>
+        <location filename="../Source/dooble.cc" line="3075"/>
+        <location filename="../Source/dooble.cc" line="3260"/>
+        <location filename="../Source/dooble.cc" line="5436"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Browser (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3082"/>
-        <location filename="../Source/dooble.cc" line="3085"/>
-        <location filename="../Source/dooble.cc" line="3267"/>
-        <location filename="../Source/dooble.cc" line="3270"/>
-        <location filename="../Source/dooble.cc" line="5458"/>
-        <location filename="../Source/dooble.cc" line="5461"/>
-        <location filename="../Source/dooble.cc" line="6378"/>
+        <location filename="../Source/dooble.cc" line="3083"/>
+        <location filename="../Source/dooble.cc" line="3086"/>
+        <location filename="../Source/dooble.cc" line="3268"/>
+        <location filename="../Source/dooble.cc" line="3271"/>
+        <location filename="../Source/dooble.cc" line="5444"/>
+        <location filename="../Source/dooble.cc" line="5447"/>
+        <location filename="../Source/dooble.cc" line="6364"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3984"/>
+        <location filename="../Source/dooble.cc" line="3985"/>
         <source>&amp;Clear</source>
         <translation>Leeren</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4587"/>
+        <location filename="../Source/dooble.cc" line="4573"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5180"/>
+        <location filename="../Source/dooble.cc" line="5166"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5315"/>
+        <location filename="../Source/dooble.cc" line="5301"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>Die Seite %1 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5379"/>
+        <location filename="../Source/dooble.cc" line="5365"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>Der Proxy %1:%2 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6413"/>
+        <location filename="../Source/dooble.cc" line="6399"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Möchtest Du wirklich %1 Seiten öffnen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6566"/>
+        <location filename="../Source/dooble.cc" line="6552"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Möchtest Du wirklich die veränderte Seite verlassen?</translation>
     </message>
@@ -1604,39 +1604,39 @@
         <translation type="vanished">dooble::slotRefreshPlugins(): Entferne Prozess %1.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6885"/>
+        <location filename="../Source/dooble.cc" line="6871"/>
         <source>Start %1</source>
         <translation>Starte %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6953"/>
+        <location filename="../Source/dooble.cc" line="6939"/>
         <source>Add-on Load Failed</source>
         <translation>Das Laden des Add-ons scheiterte</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6976"/>
-        <location filename="../Source/dooble.cc" line="7027"/>
+        <location filename="../Source/dooble.cc" line="6962"/>
+        <location filename="../Source/dooble.cc" line="7013"/>
         <source>Add-on</source>
         <translation>Add-on</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7701"/>
+        <location filename="../Source/dooble.cc" line="7687"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7704"/>
-        <location filename="../Source/dooble.cc" line="7708"/>
+        <location filename="../Source/dooble.cc" line="7690"/>
+        <location filename="../Source/dooble.cc" line="7694"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8069"/>
+        <location filename="../Source/dooble.cc" line="8055"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8071"/>
+        <location filename="../Source/dooble.cc" line="8057"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1645,12 +1645,12 @@
         <translation type="obsolete">Eine unbekannte Seite mit einer leeren oder ungültigen URL verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7439"/>
+        <location filename="../Source/dooble.cc" line="7425"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Erinnerung</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7440"/>
+        <location filename="../Source/dooble.cc" line="7426"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Eine Passphrase ist noch nicht eingegeben worden. Bitte besuche den Tresor Bereich in den Einstellungen (Fenster/Einstellungen/Tresor) und wähle eine Passphrase. Alsbald eine Passphrase eingegeben wurde, werden Lesezeichen, Cookies, und alle anderen wichtigen Informationen, Nutzer-Daten und -Einstellungen für zukünftige Sitzungen gespeichert und erneut zur Verfügung stehen. Du kannst diese Erinnerungsmeldung in den Einstellungen unter Sicherheit ausblenden.</translation>
     </message>
@@ -1663,15 +1663,15 @@
         <translation type="obsolete">Das Laden des Addons gelang nicht.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7137"/>
-        <location filename="../Source/dooble.cc" line="7142"/>
+        <location filename="../Source/dooble.cc" line="7123"/>
+        <location filename="../Source/dooble.cc" line="7128"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Die Seite %1 verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7376"/>
-        <location filename="../Source/dooble.cc" line="7378"/>
-        <location filename="../Source/dooble.cc" line="7382"/>
+        <location filename="../Source/dooble.cc" line="7362"/>
+        <location filename="../Source/dooble.cc" line="7364"/>
+        <location filename="../Source/dooble.cc" line="7368"/>
         <source>Restore Session</source>
         <translation>Sitzung wiederherstellen</translation>
     </message>
@@ -1684,26 +1684,26 @@
         <translation type="obsolete">Ladend...</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2865"/>
-        <location filename="../Source/dooble.cc" line="2917"/>
-        <location filename="../Source/dooble.cc" line="3912"/>
-        <location filename="../Source/dooble.cc" line="6410"/>
-        <location filename="../Source/dooble.cc" line="6562"/>
+        <location filename="../Source/dooble.cc" line="2866"/>
+        <location filename="../Source/dooble.cc" line="2918"/>
+        <location filename="../Source/dooble.cc" line="3913"/>
+        <location filename="../Source/dooble.cc" line="6396"/>
+        <location filename="../Source/dooble.cc" line="6548"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Bestätigung</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2920"/>
+        <location filename="../Source/dooble.cc" line="2921"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation>Das Beenden von Dooble wird noch nicht abgeschlossene Downloads abbrechen. Möchtest Du wirklich fortfahren?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3915"/>
+        <location filename="../Source/dooble.cc" line="3916"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Möchtest Du wirklich diesen veränderten Tab schließen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5177"/>
+        <location filename="../Source/dooble.cc" line="5163"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Browser: Öffne Verzeichnis</translation>
     </message>
@@ -1712,7 +1712,7 @@
         <translation type="obsolete">Ö&amp;ffnen</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1565"/>
+        <location filename="../Source/dooble.cc" line="1566"/>
         <source>&amp;Clear History</source>
         <translation>Verlauf leeren</translation>
     </message>
@@ -1721,12 +1721,12 @@
         <translation type="obsolete">Lösche die Historie</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4449"/>
+        <location filename="../Source/dooble.cc" line="4450"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Browser: Infoseite</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4584"/>
+        <location filename="../Source/dooble.cc" line="4570"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Browser: Speichere als</translation>
     </message>
@@ -1735,10 +1735,10 @@
         <translation type="obsolete">&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4965"/>
-        <location filename="../Source/dooble.cc" line="4971"/>
-        <location filename="../Source/dooble.cc" line="4973"/>
-        <location filename="../Source/dooble.cc" line="4977"/>
+        <location filename="../Source/dooble.cc" line="4951"/>
+        <location filename="../Source/dooble.cc" line="4957"/>
+        <location filename="../Source/dooble.cc" line="4959"/>
+        <location filename="../Source/dooble.cc" line="4963"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Desktop</translation>
     </message>
