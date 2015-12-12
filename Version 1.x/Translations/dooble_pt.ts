@@ -2055,12 +2055,12 @@
         <translation>Carregar</translation>
     </message>
     <message>
-        <location filename="../Source/durlwidget.cc" line="1064"/>
+        <location filename="../Source/durlwidget.cc" line="1010"/>
         <source>Encrypted database writes are disabled. Therefore, bookmarks are also disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/durlwidget.cc" line="1068"/>
+        <location filename="../Source/durlwidget.cc" line="1014"/>
         <source>Bookmark</source>
         <translation>Marcador</translation>
     </message>
