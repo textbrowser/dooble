@@ -750,60 +750,6 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 	  emit openLinkInNewTab(url);
 	}
-      else if(userKeys == QKeySequence(Qt::ControlModifier +
-				       Qt::Key_Enter) ||
-	      userKeys == QKeySequence(Qt::ControlModifier +
-				       Qt::Key_Return))
-	{
-	  QUrl url(QUrl::fromUserInput(text().trimmed()));
-
-	  if(url.host().toLower().trimmed().startsWith("gopher"))
-	    url.setScheme("gopher");
-
-	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
-
-	  if(!url.host().isEmpty())
-	    if(!url.host().endsWith(".com"))
-	      url.setHost(url.host() + ".com");
-
-	  emit loadPage(url);
-	}
-      else if(userKeys == QKeySequence(Qt::ShiftModifier + Qt::Key_Enter) ||
-	      userKeys == QKeySequence(Qt::ShiftModifier + Qt::Key_Return))
-	{
-	  QUrl url(QUrl::fromUserInput(text().trimmed()));
-
-	  if(url.host().toLower().trimmed().startsWith("gopher"))
-	    url.setScheme("gopher");
-
-	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
-
-	  if(!url.host().isEmpty())
-	    if(!url.host().endsWith(".net"))
-	      url.setHost(url.host() + ".net");
-
-	  emit loadPage(url);
-	}
-      else if(userKeys ==
-	      QKeySequence(Qt::ControlModifier + Qt::ShiftModifier +
-			   Qt::Key_Enter) ||
-	      userKeys ==
-	      QKeySequence(Qt::ControlModifier + Qt::ShiftModifier +
-			   Qt::Key_Return))
-	{
-	  QUrl url(QUrl::fromUserInput(text().trimmed()));
-
-	  if(url.host().toLower().trimmed().startsWith("gopher"))
-	    url.setScheme("gopher");
-
-	  url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
-
-	  if(!url.host().isEmpty())
-	    if(!url.host().endsWith(".org"))
-	      url.setHost(url.host() + ".org");
-
-	  emit loadPage(url);
-	}
       else if(userKeys == QKeySequence(Qt::Key_Escape))
 	emit resetUrl();
       else if(userKeys == QKeySequence(Qt::ControlModifier + Qt::Key_L))

@@ -4799,8 +4799,8 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	}
       else
 	{
-	  int index = 0;
 	  QList<QKeySequence> list;
+	  int index = -1;
 
 	  list << QKeySequence(Qt::AltModifier + Qt::Key_0)
 	       << QKeySequence(Qt::AltModifier + Qt::Key_1)
