@@ -210,6 +210,7 @@ class dview: public QStackedWidget
   void openLinkInNewWindow
     (const QUrl &url, dcookies *cookies,
      const QHash<QWebSettings::WebAttribute, bool> &webAttributes);
+  void openSslErrorsExceptions(void);
   void printRequested(QWebFrame *frame);
   void saveFile(const QString &fileName, const QUrl &url, const int choice);
   void saveUrl(const QUrl &url, const int choice);

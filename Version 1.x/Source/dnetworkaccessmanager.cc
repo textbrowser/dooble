@@ -448,6 +448,8 @@ dnetworksslerrorreply::dnetworksslerrorreply
       m_content.append("</ul></h3>");
     }
 
+  m_content.append("<ul><a href=\"dooble://open-ssl-errors-exceptions\">"
+		   "SSL Errors Exceptions</a></ul>");
   m_content.append("</div>");
   m_content.append("</body></html>");
   setUrl(url);

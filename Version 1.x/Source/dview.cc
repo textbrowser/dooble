@@ -489,6 +489,12 @@ void dview::slotClearHistory(void)
 
 void dview::load(const QUrl &url)
 {
+  if(url.toString() == "dooble://open-ssl-errors-exceptions")
+    {
+      emit openSslErrorsExceptions();
+      return;
+    }
+
   emit loadStarted();
 
   if(url.isEmpty() || !url.isValid())

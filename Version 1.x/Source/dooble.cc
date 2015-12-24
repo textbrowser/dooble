@@ -2250,6 +2250,8 @@ void dooble::newTabInit(dview *p)
 	  SLOT(slotLoadPage(const QUrl &)));
   connect(p, SIGNAL(ipAddressChanged(const QString &)), this,
 	  SLOT(slotIpAddressChanged(const QString &)));
+  connect(p, SIGNAL(openSslErrorsExceptions(void)),
+	  s_sslExceptionsWindow, SLOT(slotShow(void)));
   connect(p, SIGNAL(printRequested(QWebFrame *)), this,
 	  SLOT(slotPrintRequested(QWebFrame *)));
   connect(p->page(),
@@ -2268,6 +2270,10 @@ void dooble::newTabInit(dview *p)
 	  this,
 	  SLOT(slotProxyAuthenticationRequired(const QNetworkProxy &,
 					       QAuthenticator *)));
+  connect(p->page(),
+	  SIGNAL(openSslErrorsExceptions(void)),
+	  s_sslExceptionsWindow,
+	  SLOT(slotShow(void)));
   connect(p->page(), SIGNAL(windowCloseRequested(void)),
 	  this, SLOT(slotCloseWindow(void)));
   connect(p->page(), SIGNAL(menuBarVisibilityChangeRequested(bool)),
@@ -7603,6 +7609,8 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     SLOT(slotLoadPage(const QUrl &)));
   disconnect(p, SIGNAL(ipAddressChanged(const QString &)), d,
 	     SLOT(slotIpAddressChanged(const QString &)));
+  disconnect(p, SIGNAL(openSslErrorsExceptions(void)),
+	     s_sslExceptionsWindow, SLOT(slotShow(void)));
   disconnect(p, SIGNAL(printRequested(QWebFrame *)), d,
 	     SLOT(slotPrintRequested(QWebFrame *)));
   disconnect(p->page(),
@@ -7622,6 +7630,10 @@ void dooble::disconnectPageSignals(dview *p, dooble *d)
 	     d,
 	     SLOT(slotProxyAuthenticationRequired(const QNetworkProxy &,
 						  QAuthenticator *)));
+  disconnect(p->page(),
+	     SIGNAL(openSslErrorsExceptions(void)),
+	     s_sslExceptionsWindow,
+	     SLOT(slotShow(void)));
   disconnect(p->page(), SIGNAL(windowCloseRequested(void)),
 	     d, SLOT(slotCloseWindow(void)));
   disconnect(p->page(), SIGNAL(menuBarVisibilityChangeRequested(bool)),

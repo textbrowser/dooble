@@ -461,6 +461,14 @@ bool dwebpage::acceptNavigationRequest(QWebFrame *frame,
 				       const QNetworkRequest &request,
 				       NavigationType type)
 {
+  if(request.url().toString() == "dooble://open-ssl-errors-exceptions")
+    {
+      if(type == QWebPage::NavigationTypeLinkClicked)
+	emit openSslErrorsExceptions();
+
+      return false;
+    }
+
   if(!request.url().isValid())
     return false;
 

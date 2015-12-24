@@ -2122,6 +2122,11 @@ QUrl dbookmarkswindow::titleChanged(void) const
 
 void dbookmarkswindow::slotTitleChanged(void)
 {
+  if(!dmisc::isSchemeAcceptedByDooble(QUrl::
+				      fromUserInput(ui.locationLineEdit->
+						    text()).scheme()))
+    return;
+
   QUrl url;
 
   url = titleChanged();
@@ -2233,6 +2238,11 @@ QUrl dbookmarkswindow::locationChanged(void) const
 
 void dbookmarkswindow::slotLocationChanged(void)
 {
+  if(!dmisc::isSchemeAcceptedByDooble(QUrl::
+				      fromUserInput(ui.locationLineEdit->
+						    text()).scheme()))
+    return;
+
   QUrl url;
 
   url = titleChanged();

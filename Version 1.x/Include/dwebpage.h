@@ -88,6 +88,7 @@ class dwebpage: public QWebPage
 		       const QUrl &url);
   void iconChanged(void);
   void loadErrorPage(const QUrl &url);
+  void openSslErrorsExceptions(void);
   void popupRequested(const QString &host,
 		      const QUrl &url,
 		      const QDateTime &dateTime);
