@@ -28,9 +28,9 @@
 #include <QKeyEvent>
 #include <QSettings>
 
+#include "dexceptionswindow.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dexceptionswindow.h"
 
 dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 {
@@ -260,6 +260,7 @@ void dexceptionswindow::slotShow(void)
   QRect rect(100, 100, 800, 600);
   QToolButton *toolButton = qobject_cast<QToolButton *> (sender());
   QWidget *parent = 0;
+  dview *p = qobject_cast<dview *> (sender());
 
   /*
   ** dooble::slotExceptionRaised() connects a toolbutton's clicked()
@@ -277,10 +278,24 @@ void dexceptionswindow::slotShow(void)
     }
   else
     {
-      if(pushButton && pushButton->parentWidget())
+      if(p && p->parentWidget())
+	{
+	  QObject *prnt(p->parentWidget());
+	  dooble *dbl = 0;
+
+	  do
+	    {
+	      prnt = prnt->parent();
+	      dbl = qobject_cast<dooble *> (prnt);
+	    }
+	  while(prnt != 0 && dbl == 0);
+
+	  parent = dbl;
+	}
+      else if(pushButton && pushButton->parentWidget())
 	parent = pushButton->parentWidget();
       else if(toolButton && toolButton->parentWidget())
-	parent = toolButton->parentWidget();
+	parent = toolButton->parentWidget();qDebug()<<p;
 
       if(parent)
 	rect = parent->geometry();

@@ -408,8 +408,8 @@ QWebPage *dwebpage::createWindow(WebWindowType type)
 
 dooble *dwebpage::findDooble(void)
 {
-  dooble *dbl = 0;
   QObject *prnt(this);
+  dooble *dbl = 0;
 
   do
     {

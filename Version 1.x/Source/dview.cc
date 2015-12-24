@@ -134,6 +134,10 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	  this,
 	  SLOT(slotSslErrors(QNetworkReply *, const QList<QSslError> &)));
   connect(webView->page(),
+	  SIGNAL(openSslErrorsExceptions(void)),
+	  this,
+	  SIGNAL(openSslErrorsExceptions(void)));
+  connect(webView->page(),
 	  SIGNAL(selectionChanged(void)),
 	  this,
 	  SLOT(slotSelectionChanged(void)));
