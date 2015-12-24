@@ -371,7 +371,7 @@ dnetworksslerrorreply::dnetworksslerrorreply
 
   request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
   setRequest(request);
-  url.setScheme(scheme.mid(static_cast<int> (qstrlen("dooble-ssl"))));
+  url.setScheme(scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
   m_content.append("<html>");
   m_content.append("<head>");
   m_content.append(QString("<title>%1</title>").
@@ -581,7 +581,7 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 
   QString scheme(request.url().scheme().toLower().trimmed());
 
-  if(scheme.startsWith("dooble-ssl"))
+  if(scheme.startsWith("dooble-ssl-"))
     {
       QPointer<dnetworksslerrorreply> reply = new dnetworksslerrorreply
 	(this, req);

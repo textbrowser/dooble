@@ -3698,9 +3698,9 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 	  QString title(list.at(i).title());
 	  QString scheme(url.scheme().toLower().trimmed());
 
-	  if(scheme.startsWith("dooble-ssl"))
+	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl"))));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
 	  else if(scheme.startsWith("dooble"))
 	    url.setScheme
 	      (scheme.mid(static_cast<int> (qstrlen("dooble"))));
@@ -3735,9 +3735,9 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 	  QString title(list.at(i).title());
 	  QString scheme(url.scheme().toLower().trimmed());
 
-	  if(scheme.startsWith("dooble-ssl"))
+	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl"))));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
 	  else if(scheme.startsWith("dooble"))
 	    url.setScheme
 	      (scheme.mid(static_cast<int> (qstrlen("dooble"))));
@@ -6640,19 +6640,28 @@ void dooble::slotAuthenticate(void)
 
 void dooble::setUrlHandler(dooble *d)
 {
-  QDesktopServices::setUrlHandler("doobleftp",
+  QDesktopServices::setUrlHandler("data",
 				  d,
 				  "slotOpenLinkInNewTab");
-  QDesktopServices::setUrlHandler("dooblehttp",
+  QDesktopServices::setUrlHandler("dooble-ftp",
 				  d,
 				  "slotOpenLinkInNewTab");
-  QDesktopServices::setUrlHandler("dooblehttps",
+  QDesktopServices::setUrlHandler("dooble-gopher",
+				  d,
+				  "slotOpenLinkInNewTab");
+  QDesktopServices::setUrlHandler("dooble-http",
+				  d,
+				  "slotOpenLinkInNewTab");
+  QDesktopServices::setUrlHandler("dooble-https",
 				  d,
 				  "slotOpenLinkInNewTab");
   QDesktopServices::setUrlHandler("file",
 				  d,
 				  "slotOpenLinkInNewTab");
   QDesktopServices::setUrlHandler("ftp",
+				  d,
+				  "slotOpenLinkInNewTab");
+  QDesktopServices::setUrlHandler("gopher",
 				  d,
 				  "slotOpenLinkInNewTab");
   QDesktopServices::setUrlHandler("http",
@@ -6668,12 +6677,14 @@ void dooble::setUrlHandler(dooble *d)
 
 void dooble::unsetUrlHandler(void)
 {
-  QDesktopServices::unsetUrlHandler("doobleftp");
-  QDesktopServices::unsetUrlHandler("dooblehttp");
-  QDesktopServices::unsetUrlHandler("dooblehttps");
   QDesktopServices::unsetUrlHandler("data");
+  QDesktopServices::unsetUrlHandler("dooble-ftp");
+  QDesktopServices::unsetUrlHandler("dooble-gopher");
+  QDesktopServices::unsetUrlHandler("dooble-http");
+  QDesktopServices::unsetUrlHandler("dooble-https");
   QDesktopServices::unsetUrlHandler("file");
   QDesktopServices::unsetUrlHandler("ftp");
+  QDesktopServices::unsetUrlHandler("gopher");
   QDesktopServices::unsetUrlHandler("http");
   QDesktopServices::unsetUrlHandler("https");
   QDesktopServices::unsetUrlHandler("qrc");

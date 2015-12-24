@@ -514,9 +514,9 @@ void dview::load(const QUrl &url)
 
   QString scheme(m_url.scheme().toLower().trimmed());
 
-  if(scheme.startsWith("dooble-ssl"))
+  if(scheme.startsWith("dooble-ssl-"))
     {
-      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl")));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl-")));
       m_url.setScheme(scheme);
     }
   else if(scheme.startsWith("dooble"))
@@ -653,9 +653,9 @@ void dview::slotUrlChanged(const QUrl &url)
 
   QString scheme(m_url.scheme().toLower().trimmed());
 
-  if(scheme.startsWith("dooble-ssl"))
+  if(scheme.startsWith("dooble-ssl-"))
     {
-      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl")));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl-")));
       m_url.setScheme(scheme);
     }
   else if(scheme.startsWith("dooble"))
@@ -830,7 +830,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 					     errors.at(i).errorString().
 					     toLatin1());
 
-		      l_url.setScheme(QString("dooble-ssl%1").
+		      l_url.setScheme(QString("dooble-ssl-%1").
 				      arg(reply->url().scheme()));
 		      request.setUrl(l_url);
 		      webView->load(request);
@@ -865,7 +865,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 	request.setRawHeader(QString("SSL Error %1").arg(i + 1).toLatin1(),
 			     errors.at(i).errorString().toLatin1());
 
-      l_url.setScheme(QString("dooble-ssl%1").arg(reply->url().scheme()));
+      l_url.setScheme(QString("dooble-ssl-%1").arg(reply->url().scheme()));
       request.setUrl(l_url);
       webView->load(request);
       emit exceptionRaised(dooble::s_sslExceptionsWindow, reply->url());
@@ -1566,9 +1566,9 @@ void dview::slotLoadErrorPage(const QUrl &url)
   QUrl l_url(url);
 
   if(l_url.scheme().toLower().trimmed() == "https")
-    l_url.setScheme(QString("dooble-ssl%1").arg(url.scheme()));
+    l_url.setScheme(QString("dooble-ssl-%1").arg(url.scheme()));
   else
-    l_url.setScheme(QString("dooble%1").arg(url.scheme()));
+    l_url.setScheme(QString("dooble-%1").arg(url.scheme()));
 
   webView->load(QNetworkRequest(l_url));
 }

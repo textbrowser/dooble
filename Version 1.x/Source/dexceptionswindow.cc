@@ -295,7 +295,7 @@ void dexceptionswindow::slotShow(void)
       else if(pushButton && pushButton->parentWidget())
 	parent = pushButton->parentWidget();
       else if(toolButton && toolButton->parentWidget())
-	parent = toolButton->parentWidget();qDebug()<<p;
+	parent = toolButton->parentWidget();
 
       if(parent)
 	rect = parent->geometry();
