@@ -168,7 +168,7 @@ dnetworkerrorreply::dnetworkerrorreply
 
   request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
   setRequest(request);
-  url.setScheme(scheme.mid(static_cast<int> (qstrlen("dooble"))));
+  url.setScheme(scheme.mid(static_cast<int> (qstrlen("dooble-"))));
   m_content.append("<html>");
   m_content.append("<head>");
   m_content.append(QString("<title>%1</title>").

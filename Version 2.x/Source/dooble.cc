@@ -3533,9 +3533,9 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
 	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
-	  else if(scheme.startsWith("dooble"))
+	  else if(scheme.startsWith("dooble-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble"))));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-"))));
 
 	  title = dmisc::elidedTitleText(title);
 
@@ -3570,9 +3570,9 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
 	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
-	  else if(scheme.startsWith("dooble"))
+	  else if(scheme.startsWith("dooble-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble"))));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-"))));
 
 	  if(title.isEmpty())
 	    title = url.toString(QUrl::StripTrailingSlash);

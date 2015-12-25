@@ -332,9 +332,9 @@ void dview::load(const QUrl &url)
       scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl-")));
       m_url.setScheme(scheme);
     }
-  else if(scheme.startsWith("dooble"))
+  else if(scheme.startsWith("dooble-"))
     {
-      scheme = scheme.mid(static_cast<int> (qstrlen("dooble")));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-")));
       m_url.setScheme(scheme);
     }
 
@@ -454,9 +454,9 @@ void dview::slotUrlChanged(const QUrl &url)
       scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl-")));
       m_url.setScheme(scheme);
     }
-  else if(scheme.startsWith("dooble"))
+  else if(scheme.startsWith("dooble-"))
     {
-      scheme = scheme.mid(static_cast<int> (qstrlen("dooble")));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-")));
       m_url.setScheme(scheme);
     }
   else if(scheme == "http" || scheme == "https")
