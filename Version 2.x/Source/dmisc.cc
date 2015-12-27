@@ -36,7 +36,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QtCore/qmath.h>
-#include <QtEndian>
+
+#include <bitset>
 
 #include "derrorlog.h"
 #include "dmisc.h"
@@ -140,6 +141,8 @@ void dmisc::destroyCrypt(void)
   if(s_reencodeCrypt)
     delete s_reencodeCrypt;
 
+  s_crypt = 0;
+  s_reencodeCrypt = 0;
   dcrypt::terminate();
 }
 
@@ -1548,7 +1551,13 @@ bool dmisc::compareByteArrays(const QByteArray &a, const QByteArray &b)
   */
 
   for(int i = 0; i < length; i++)
-    rc |= bytes1.at(i) ^ bytes2.at(i);
+    {
+      std::bitset<CHAR_BIT> ba1(static_cast<unsigned long> (bytes1.at(i)));
+      std::bitset<CHAR_BIT> ba2(static_cast<unsigned long> (bytes2.at(i)));
+
+      for(size_t j = 0; j < ba1.size(); j++)
+	rc |= ba1[j] ^ ba2[j];
+    }
 
   return rc == 0; /*
 		  ** Return true if a and b are identical. Should
