@@ -80,12 +80,12 @@
         <translation type="obsolete">dmisc::initializeCrypt(): gcry_check_version() selhání.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1477"/>
+        <location filename="../Source/dmisc.cc" line="1478"/>
         <source>%1 KiB</source>
         <translation>%1 KiB</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1480"/>
+        <location filename="../Source/dmisc.cc" line="1481"/>
         <source>%1 MiB</source>
         <translation>%1 MiB</translation>
     </message>
@@ -106,17 +106,17 @@
         <translation type="vanished">dmisc::passphraseHash(): Nepodporovaný typ hash %1 (%2). Používá se provedení SHA-1 Qt.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1471"/>
+        <location filename="../Source/dmisc.cc" line="1472"/>
         <source>0 Bytes</source>
         <translation>0 bytů</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1473"/>
+        <location filename="../Source/dmisc.cc" line="1474"/>
         <source>1 Byte</source>
         <translation>1 byt</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1475"/>
+        <location filename="../Source/dmisc.cc" line="1476"/>
         <source>%1 Bytes</source>
         <translation>%1 bytů</translation>
     </message>

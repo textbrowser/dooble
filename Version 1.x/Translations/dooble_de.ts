@@ -112,12 +112,12 @@
         <translation type="vanished">dmisc::passphraseHash(): Nicht unterstützter Hashtyp %1 (%2). Benutze Qt&apos;s sha1 Implementierung.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1477"/>
+        <location filename="../Source/dmisc.cc" line="1478"/>
         <source>%1 KiB</source>
         <translation>%1 KiB</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1480"/>
+        <location filename="../Source/dmisc.cc" line="1481"/>
         <source>%1 MiB</source>
         <translation>%1 MiB</translation>
     </message>
@@ -138,17 +138,17 @@
         <translation type="vanished">dmisc::initializeCrypt(): Es scheint, dass die gcrypt-Bibliothek bereits initialisiert ist.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1471"/>
+        <location filename="../Source/dmisc.cc" line="1472"/>
         <source>0 Bytes</source>
         <translation>0 Bytes</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1473"/>
+        <location filename="../Source/dmisc.cc" line="1474"/>
         <source>1 Byte</source>
         <translation>1 Byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1475"/>
+        <location filename="../Source/dmisc.cc" line="1476"/>
         <source>%1 Bytes</source>
         <translation>%1 Bytes</translation>
     </message>

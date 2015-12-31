@@ -76,27 +76,27 @@
         <translation type="unfinished">Dooble Браузер: Cache исключения</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1477"/>
+        <location filename="../Source/dmisc.cc" line="1478"/>
         <source>%1 KiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1480"/>
+        <location filename="../Source/dmisc.cc" line="1481"/>
         <source>%1 MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1471"/>
+        <location filename="../Source/dmisc.cc" line="1472"/>
         <source>0 Bytes</source>
         <translation>0 Байт</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1473"/>
+        <location filename="../Source/dmisc.cc" line="1474"/>
         <source>1 Byte</source>
         <translation>1 Байт</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1475"/>
+        <location filename="../Source/dmisc.cc" line="1476"/>
         <source>%1 Bytes</source>
         <translation>%1 Байт</translation>
     </message>
