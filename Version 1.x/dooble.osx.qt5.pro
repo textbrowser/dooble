@@ -34,7 +34,7 @@ QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv \
 			  -Wstack-protector -Wstrict-overflow=5
 QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_TARGETS = libspoton purge
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
 
 ICON		= Icons/AxB/dooble.icns
 INCLUDEPATH	+= . Include Include.osx64 /usr/local/include
