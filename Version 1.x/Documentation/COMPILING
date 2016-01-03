@@ -1,11 +1,13 @@
-Qt 5.3.x and libgcrypt 1.5.x are highly recommended. Qt 4.7.x
+Qt 5.5.x and libgcrypt 1.5.x are highly recommended. Qt 4.7.x
 may work. Qt 4.8.x is supported.
 
 If header (h) or interface (ui) files have changed, please perform
 a distclean before building Dooble.
 
+OS X developers should consider installing Homebrew.
+
 Absolute cleaning:
-make distclean or mingw32-make distclean
+gmake distclean or make distclean or mingw32-make distclean
 
 ARM
 qmake -o Makefile dooble.arm.pro
@@ -20,7 +22,7 @@ qmake -o Makefile dooble.qt5.pro
 make
 
 OS X:
-qmake -spec macx-g++ -o Makefile dooble.osx.qt5.pro
+qmake -o Makefile dooble.osx.qt5.pro
 make
 
 Windows:
