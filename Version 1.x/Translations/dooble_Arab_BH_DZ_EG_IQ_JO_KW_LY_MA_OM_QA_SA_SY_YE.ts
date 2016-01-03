@@ -1795,7 +1795,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">أعِد تحميل ال&amp;لسان</translation>
+        <translation type="obsolete">أعِد تحميل ال&amp;لسان</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2215,7 +2215,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">استعد</translation>
+        <translation type="obsolete">استعد</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2364,7 +2364,7 @@
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="878"/>
@@ -2558,7 +2558,7 @@
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">نمط &amp;ملء الشاشة</translation>
+        <translation type="obsolete">نمط &amp;ملء الشاشة</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="886"/>

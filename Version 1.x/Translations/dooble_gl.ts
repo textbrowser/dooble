@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Usando enderezos gcry_threads_qt como segundo parámetro de gcry_control().</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Usando enderezos gcry_threads_qt como segundo parámetro de gcry_control().</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure.</source>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): gcry_md_get_algo_dlen() devolveu cero. Usando a implementación sha1 de Qt.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): gcry_md_get_algo_dlen() devolveu cero. Usando a implementación sha1 de Qt.</translation>
     </message>
     <message>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): Tipo de hash non admitido %1 (%2). Usando a implementación sha1 de Qt.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): Tipo de hash non admitido %1 (%2). Usando a implementación sha1 de Qt.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1478"/>
@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Semella que a biblioteca gcrypt xa foi iniciada.</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Semella que a biblioteca gcrypt xa foi iniciada.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1472"/>
@@ -154,7 +154,7 @@
     </message>
     <message>
         <source>dcrypt::decodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::decodedString(): Produciuse un fallo en setInitializationVector().</translation>
+        <translation type="obsolete">dcrypt::decodedString(): Produciuse un fallo en setInitializationVector().</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -162,11 +162,11 @@
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_decrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::decodedString(): Produciuse un fallo en gcry_cipher_decrypt() (%1).</translation>
+        <translation type="obsolete">dcrypt::decodedString(): Produciuse un fallo en gcry_cipher_decrypt() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::encodedString(): Produciuse un fallo en setInitializationVector().</translation>
+        <translation type="obsolete">dcrypt::encodedString(): Produciuse un fallo en setInitializationVector().</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -174,11 +174,11 @@
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_encrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::encodedString(): Produciuse un fallo en gcry_cipher_encrypt() (%1).</translation>
+        <translation type="obsolete">dcrypt::encodedString(): Produciuse un fallo en gcry_cipher_encrypt() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure (%1).</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): Produciuse un fallo en gcry_cipher_open() (%1).</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): Produciuse un fallo en gcry_cipher_open() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() returned zero.</source>
@@ -198,11 +198,11 @@
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_setkey() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): Produciuse un fallo en gcry_cipher_setkey() (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): Produciuse un fallo en gcry_cipher_setkey() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): Produciuse un fallo en gcry_kdf_derive() (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): Produciuse un fallo en gcry_kdf_derive() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the key.</source>
@@ -215,7 +215,7 @@
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_setiv() failure (%1).</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): Produciuse un fallo en gcry_cipher_setiv() (%1).</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): Produciuse un fallo en gcry_cipher_setiv() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_calloc() returned zero.</source>
@@ -475,7 +475,7 @@
     </message>
     <message>
         <source>dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton é 0.</translation>
+        <translation type="obsolete">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton é 0.</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="581"/>
@@ -1023,7 +1023,7 @@
     <name>dftp</name>
     <message>
         <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="vanished">dftp::slotReadyRead(): Enderezo IP incorrecto. Interrompendo a conexión.</translation>
+        <translation type="obsolete">dftp::slotReadyRead(): Enderezo IP incorrecto. Interrompendo a conexión.</translation>
     </message>
 </context>
 <context>
@@ -1198,7 +1198,7 @@
     </message>
     <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dhistory::dhistory(): dooble::s_spoton é 0.</translation>
+        <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton é 0.</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="514"/>
@@ -1500,7 +1500,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): Retirando a acción %1.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): Retirando a acción %1.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -1918,7 +1918,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Recargar a &amp;lapela</translation>
+        <translation type="obsolete">Recargar a &amp;lapela</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2117,7 +2117,7 @@
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (%2:%3).</source>
-        <translation type="vanished">dwebpage::slotFinished(): O URL %1 xerou un erro (%2:%3).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): O URL %1 xerou un erro (%2:%3).</translation>
     </message>
 </context>
 <context>
@@ -2348,7 +2348,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Restaurar</translation>
+        <translation type="obsolete">Restaurar</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2687,7 +2687,7 @@
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">Pantalla completa modo &amp;tableta</translation>
+        <translation type="obsolete">Pantalla completa modo &amp;tableta</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="916"/>
@@ -2838,7 +2838,7 @@
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="76"/>

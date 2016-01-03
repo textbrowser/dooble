@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="vanished">dmisc::initializeCrypt(): A utilizar o endereço gcry_threads_qt&apos;s como parâmetro secundário de gcry_control().</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): A utilizar o endereço gcry_threads_qt&apos;s como parâmetro secundário de gcry_control().</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure.</source>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): gcry_md_get_algo_dlen() devolveu zero. A utilizar a implementação Qt sha 1.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): gcry_md_get_algo_dlen() devolveu zero. A utilizar a implementação Qt sha 1.</translation>
     </message>
     <message>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): Tipo não suportado %1 (%2). A utilizar a implementação Qt sha 1.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): Tipo não suportado %1 (%2). A utilizar a implementação Qt sha 1.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1478"/>
@@ -123,7 +123,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Parece quer a biblioteca gcrypt ja foi iniciada.</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Parece quer a biblioteca gcrypt ja foi iniciada.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1472"/>
@@ -166,15 +166,15 @@
     </message>
     <message>
         <source>dcrypt::dcrypt(): gcry_calloc_secure() failure.</source>
-        <translation type="vanished">dcrypt::dcrypt(): gcry_calloc_secure() falhou.</translation>
+        <translation type="obsolete">dcrypt::dcrypt(): gcry_calloc_secure() falhou.</translation>
     </message>
     <message>
         <source>dcrypt::dcrypt(): gcry_cipher_setkey() failure.</source>
-        <translation type="vanished">dcrypt::dcrypt(): gcry_cipher_setkey() falhou.</translation>
+        <translation type="obsolete">dcrypt::dcrypt(): gcry_cipher_setkey() falhou.</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::decodedString(): setInitializationVector() falhou.</translation>
+        <translation type="obsolete">dcrypt::decodedString(): setInitializationVector() falhou.</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -182,11 +182,11 @@
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_decrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::decodedString(): gcry_cipher_decrypt() falhou (%1).</translation>
+        <translation type="obsolete">dcrypt::decodedString(): gcry_cipher_decrypt() falhou (%1).</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::encodedString(): setInitializationVector() falhou.</translation>
+        <translation type="obsolete">dcrypt::encodedString(): setInitializationVector() falhou.</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -194,15 +194,15 @@
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_encrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::encodedString(): gcry_cipher_encrypt() falhou (%1).</translation>
+        <translation type="obsolete">dcrypt::encodedString(): gcry_cipher_encrypt() falhou (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure (%1).</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): gcry_cipher_open() falhou (%1).</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): gcry_cipher_open() falhou (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure.</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): gcry_cipher_open() falhou.</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): gcry_cipher_open() falhou.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() returned zero.</source>
@@ -226,15 +226,15 @@
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_setkey() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_cipher_setkey() falhou (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_cipher_setkey() falhou (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): m_cipherHandle is 0.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): m_cipherHandle é zero.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): m_cipherHandle é zero.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_kdf_derive() falhou (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_kdf_derive() falhou (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the key.</source>
@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_setiv() failure (%1).</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): gcry_cipher_setiv() falhou (%1).</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): gcry_cipher_setiv() falhou (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_calloc() returned zero.</source>
@@ -506,7 +506,7 @@
     </message>
     <message>
         <source>dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton é 0.</translation>
+        <translation type="obsolete">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton é 0.</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="581"/>
@@ -1058,7 +1058,7 @@
     <name>dftp</name>
     <message>
         <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="vanished">dftp::slotReadyRead(): Endereço IP inválido. Ligação cancelada.</translation>
+        <translation type="obsolete">dftp::slotReadyRead(): Endereço IP inválido. Ligação cancelada.</translation>
     </message>
 </context>
 <context>
@@ -1241,7 +1241,7 @@
     </message>
     <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dhistory::dhistory(): dooble::s_spoton é 0.</translation>
+        <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton é 0.</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="514"/>
@@ -1478,7 +1478,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): A remover a ação %1.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): A remover a ação %1.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -2011,7 +2011,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Recarregar &amp;separador</translation>
+        <translation type="obsolete">Recarregar &amp;separador</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2242,7 +2242,7 @@
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (%2:%3).</source>
-        <translation type="vanished">dwebpage::slotFinished(): O URL %1 originou um erro (%2:%3).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): O URL %1 originou um erro (%2:%3).</translation>
     </message>
 </context>
 <context>
@@ -2479,7 +2479,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Restaurar</translation>
+        <translation type="obsolete">Restaurar</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2548,7 +2548,7 @@
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">Modo de &amp;ecrã completo</translation>
+        <translation type="obsolete">Modo de &amp;ecrã completo</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="886"/>
@@ -2772,7 +2772,7 @@
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="881"/>

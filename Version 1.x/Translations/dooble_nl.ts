@@ -886,7 +886,7 @@
     <name>dftp</name>
     <message>
         <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="vanished">dftp::slotReadyRead():Ongeldig IP Adres. Verbinding Verbreken.</translation>
+        <translation type="obsolete">dftp::slotReadyRead():Ongeldig IP Adres. Verbinding Verbreken.</translation>
     </message>
 </context>
 <context>
@@ -1302,7 +1302,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): Verwijder actie %1.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): Verwijder actie %1.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -1805,7 +1805,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Herlaad &amp;Tabblad</translation>
+        <translation type="obsolete">Herlaad &amp;Tabblad</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2262,7 +2262,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Herstellen</translation>
+        <translation type="obsolete">Herstellen</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2331,7 +2331,7 @@
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">&amp;Volledige Schermtablet-Modus</translation>
+        <translation type="obsolete">&amp;Volledige Schermtablet-Modus</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="886"/>
@@ -2565,7 +2565,7 @@
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="881"/>

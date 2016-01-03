@@ -946,7 +946,7 @@
     <name>dftp</name>
     <message>
         <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="vanished">dftp::slotReadyRead(): Неправильный IP адрес. Отмена соединения.</translation>
+        <translation type="obsolete">dftp::slotReadyRead(): Неправильный IP адрес. Отмена соединения.</translation>
     </message>
 </context>
 <context>
@@ -1386,7 +1386,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): Удалить действие %1.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): Удалить действие %1.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -1940,7 +1940,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Перезагрузить вкладку</translation>
+        <translation type="obsolete">Перезагрузить вкладку</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2187,7 +2187,7 @@
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (%2:%3).</source>
-        <translation type="vanished">dwebpage::slotFinished(): URL %1 сгенерировал ошибку (%2:%3).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): URL %1 сгенерировал ошибку (%2:%3).</translation>
     </message>
 </context>
 <context>
@@ -2424,7 +2424,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Восстановление</translation>
+        <translation type="obsolete">Восстановление</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2493,7 +2493,7 @@
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">Режим полного экрана планшетного</translation>
+        <translation type="obsolete">Режим полного экрана планшетного</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="886"/>
@@ -2730,7 +2730,7 @@
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="881"/>

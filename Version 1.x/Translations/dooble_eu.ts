@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="vanished">dmisc::initializeCrypt(): gcry_threads_qt&apos;s helbidea erabiltzen gcry_control()-rako bigarren parametro bezala.</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): gcry_threads_qt&apos;s helbidea erabiltzen gcry_control()-rako bigarren parametro bezala.</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure.</source>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s sha1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): gcry_md_get_algo_dlen() huts itzuli du. Qt-ren sha1 inplementazioa erabiltzen.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): gcry_md_get_algo_dlen() huts itzuli du. Qt-ren sha1 inplementazioa erabiltzen.</translation>
     </message>
     <message>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s sha1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): Hash mota sostengugabea %1 (%2). Qt-ren sha1 inplementazioa erabiltzen.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): Hash mota sostengugabea %1 (%2). Qt-ren sha1 inplementazioa erabiltzen.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1478"/>
@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
-        <translation type="vanished">dmisc::initializeCrypt(): gcrypt liburutegia jadanik abiarazita dagoela dirudi.</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): gcrypt liburutegia jadanik abiarazita dagoela dirudi.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1472"/>
@@ -150,51 +150,51 @@
     </message>
     <message>
         <source>dcrypt::dcrypt(): gcry_calloc_secure() failure.</source>
-        <translation type="vanished">dcrypt::dcrypt(): gcry_calloc_secure() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::dcrypt(): gcry_calloc_secure() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::dcrypt(): gcry_cipher_setkey() failure.</source>
-        <translation type="vanished">dcrypt::dcrypt(): gcry_cipher_setkey() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::dcrypt(): gcry_cipher_setkey() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::decodedString(): setInitializationVector() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::decodedString(): setInitializationVector() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation type="vanished">dcrypt::encodedString(): gcry_cipher_get_algo_blklen() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::encodedString(): gcry_cipher_get_algo_blklen() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() failed.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() failed.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() failed.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_calloc_secure() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_calloc_secure() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_calloc() failed.</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): gcry_calloc() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): gcry_calloc() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): m_hashKey or m_hashKeyLength is peculiar.</source>
-        <translation type="vanished">dcrypt::keyedHash(): m_hashKey or m_hashKeyLength bitxia da.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): m_hashKey or m_hashKeyLength bitxia da.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_get_algo_dlen() failed.</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_get_algo_dlen() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_get_algo_dlen() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_read() failed.</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_read() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_read() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -202,11 +202,11 @@
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_decrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::decodedString(): gcry_cipher_decrypt() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::decodedString(): gcry_cipher_decrypt() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::encodedString(): setInitializationVector() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::encodedString(): setInitializationVector() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -214,15 +214,15 @@
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_encrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::encodedString(): gcry_cipher_encrypt() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::encodedString(): gcry_cipher_encrypt() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure (%1).</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): gcry_cipher_open() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): gcry_cipher_open() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure.</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): gcry_cipher_open() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): gcry_cipher_open() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() returned zero.</source>
@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>dcrypt::encodedString(): QDataStream error.</source>
-        <translation type="vanished">dcrypt::encodedString(): QDataStream akatsa.</translation>
+        <translation type="obsolete">dcrypt::encodedString(): QDataStream akatsa.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): m_keyHash is zero.</source>
@@ -246,15 +246,15 @@
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_setkey() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_cipher_setkey() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_cipher_setkey() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): m_cipherHandle is 0.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): m_cipherHandle 0 da.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): m_cipherHandle 0 da.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_kdf_derive() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_kdf_derive() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the key.</source>
@@ -262,7 +262,7 @@
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the keys.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_kdf_derive() ez da zehaztu. sar-esaldiak emaniko hasha erabiltzen giltza bezala.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_kdf_derive() ez da zehaztu. sar-esaldiak emaniko hasha erabiltzen giltza bezala.</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() returned zero.</source>
@@ -270,7 +270,7 @@
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_setiv() failure (%1).</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): gcry_cipher_setiv() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): gcry_cipher_setiv() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_calloc() returned zero.</source>
@@ -278,15 +278,15 @@
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_open() failure (%1).</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_open() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_open() hutsegitea (%1).</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_open() failure.</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_open() hutsegitea.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_open() hutsegitea.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_setkey() failure (%1).</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_setkey() hutsegitea (%1).</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_setkey() hutsegitea (%1).</translation>
     </message>
 </context>
 <context>
@@ -542,7 +542,7 @@
     </message>
     <message>
         <source>dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton 0 da.</translation>
+        <translation type="obsolete">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton 0 da.</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="581"/>
@@ -1058,7 +1058,7 @@
     <name>dftp</name>
     <message>
         <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="vanished">dftp::slotReadyRead(): IP helbide baliogabea. Elkarketa uzten.</translation>
+        <translation type="obsolete">dftp::slotReadyRead(): IP helbide baliogabea. Elkarketa uzten.</translation>
     </message>
 </context>
 <context>
@@ -1233,7 +1233,7 @@
     </message>
     <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dhistory::dhistory(): dooble::s_spoton 0 da.</translation>
+        <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton 0 da.</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="514"/>
@@ -1506,7 +1506,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): %1 ekintza kentzen.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): %1 ekintza kentzen.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -1926,7 +1926,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Bi&amp;rgertatu Hegatsa</translation>
+        <translation type="obsolete">Bi&amp;rgertatu Hegatsa</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2125,11 +2125,11 @@
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (HTTP %2).</source>
-        <translation type="vanished">dwebpage::slotFinished(): %1 URL-ak akats bat eragin du (HTTP %2).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): %1 URL-ak akats bat eragin du (HTTP %2).</translation>
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (%2:%3).</source>
-        <translation type="vanished">dwebpage::slotFinished(): %1 URL-ak akats bat eragin du (%2:%3).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): %1 URL-ak akats bat eragin du (%2:%3).</translation>
     </message>
 </context>
 <context>
@@ -2354,7 +2354,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Leheneratu</translation>
+        <translation type="obsolete">Leheneratu</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2503,7 +2503,7 @@
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="878"/>
@@ -2697,7 +2697,7 @@
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">&amp;Ikusleiho Osoko Tablet Modua</translation>
+        <translation type="obsolete">&amp;Ikusleiho Osoko Tablet Modua</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="886"/>
@@ -2762,7 +2762,7 @@
     </message>
     <message>
         <source>&amp;Location Toolbar</source>
-        <translation type="vanished">&amp;Kokapen Tresnabarra</translation>
+        <translation type="obsolete">&amp;Kokapen Tresnabarra</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="1033"/>

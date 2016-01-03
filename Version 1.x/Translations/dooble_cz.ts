@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Používá se adresa gcry_threads_qt&apos;s jako druhý parametr ke gcry_control().</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Používá se adresa gcry_threads_qt&apos;s jako druhý parametr ke gcry_control().</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure.</source>
@@ -91,19 +91,19 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): It appears that the gcrypt library is already initialized.</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Zdá se, že knihovna gcrypt jen již zapnuta.</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Zdá se, že knihovna gcrypt jen již zapnuta.</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure. Secure memory was not explicitly initialized!</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Chyba gcry_check_version(). Bezpečná paměť nebyla přímo zapnuta!</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Chyba gcry_check_version(). Bezpečná paměť nebyla přímo zapnuta!</translation>
     </message>
     <message>
         <source>dmisc::passphraseHash(): gcry_md_get_algo_dlen() returned zero. Using Qt&apos;s SHA-1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): gcry_md_get_algo_dlen() vrátil nulu. Používá se provedení SHA-1 Qt.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): gcry_md_get_algo_dlen() vrátil nulu. Používá se provedení SHA-1 Qt.</translation>
     </message>
     <message>
         <source>dmisc::passphraseHash(): Unsupported hash type %1 (%2). Using Qt&apos;s SHA-1 implementation.</source>
-        <translation type="vanished">dmisc::passphraseHash(): Nepodporovaný typ hash %1 (%2). Používá se provedení SHA-1 Qt.</translation>
+        <translation type="obsolete">dmisc::passphraseHash(): Nepodporovaný typ hash %1 (%2). Používá se provedení SHA-1 Qt.</translation>
     </message>
     <message>
         <location filename="../Source/dmisc.cc" line="1472"/>
@@ -126,103 +126,103 @@
     </message>
     <message>
         <source>dcrypt::dcrypt(): gcry_calloc_secure() failure.</source>
-        <translation type="vanished">dcrypt::dcrypt(): Chyba gcry_calloc_secure().</translation>
+        <translation type="obsolete">dcrypt::dcrypt(): Chyba gcry_calloc_secure().</translation>
     </message>
     <message>
         <source>dcrypt::dcrypt(): gcry_cipher_setkey() failure.</source>
-        <translation type="vanished">dcrypt::dcrypt(): Chyba gcry_cipher_setkey().</translation>
+        <translation type="obsolete">dcrypt::dcrypt(): Chyba gcry_cipher_setkey().</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::decodedString(): Chyba setInitializationVector().</translation>
+        <translation type="obsolete">dcrypt::decodedString(): Chyba setInitializationVector().</translation>
     </message>
     <message>
         <source>dcrypt::decodedString(): gcry_cipher_decrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::decodedString(): Chyba gcry_cipher_decrypt() (%1).</translation>
+        <translation type="obsolete">dcrypt::decodedString(): Chyba gcry_cipher_decrypt() (%1).</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): setInitializationVector() failure.</source>
-        <translation type="vanished">dcrypt::encodedString(): Chyba setInitializationVector().</translation>
+        <translation type="obsolete">dcrypt::encodedString(): Chyba setInitializationVector().</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation type="vanished">dcrypt::encodedString(): Chyba gcry_cipher_get_algo_blklen().</translation>
+        <translation type="obsolete">dcrypt::encodedString(): Chyba gcry_cipher_get_algo_blklen().</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_get_algo_keylen() failed.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): Chyba gcry_cipher_get_algo_keylen().</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): Chyba gcry_cipher_get_algo_keylen().</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_md_get_algo_dlen() failed.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): Chyba gcry_md_get_algo_dlen().</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): Chyba gcry_md_get_algo_dlen().</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_calloc_secure() failed.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): Chyba gcry_calloc_secure().</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): Chyba gcry_calloc_secure().</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_get_algo_blklen() failed.</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): Chyba gcry_cipher_get_algo_blklen().</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): Chyba gcry_cipher_get_algo_blklen().</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_calloc() failed.</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): Chyba gcry_calloc().</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): Chyba gcry_calloc().</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_get_algo_dlen() failed.</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_get_algo_dlen() selhalo.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_get_algo_dlen() selhalo.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_read() failed.</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_read() selhalo.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_read() selhalo.</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): QDataStream error.</source>
-        <translation type="vanished">dcrypt::encodedString(): Chyba QDataStream.</translation>
+        <translation type="obsolete">dcrypt::encodedString(): Chyba QDataStream.</translation>
     </message>
     <message>
         <source>dcrypt::encodedString(): gcry_cipher_encrypt() failure (%1).</source>
-        <translation type="vanished">dcrypt::encodedString(): gcry_cipher_encrypt() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::encodedString(): gcry_cipher_encrypt() selhání (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure (%1).</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): gcry_cipher_open() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): gcry_cipher_open() selhání (%1).</translation>
     </message>
     <message>
         <source>dcrypt::openCipherHandle(): gcry_cipher_open() failure.</source>
-        <translation type="vanished">dcrypt::openCipherHandle(): gcry_cipher_open() selhání.</translation>
+        <translation type="obsolete">dcrypt::openCipherHandle(): gcry_cipher_open() selhání.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() is not defined. Using the provided passphrase&apos;s hash as the keys.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_kdf_derive() není stanoven. Používá se hash poskytnutého hesla jako klíče.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_kdf_derive() není stanoven. Používá se hash poskytnutého hesla jako klíče.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_open() failure (%1).</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_open() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_open() selhání (%1).</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_open() failure.</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_open() selhání.</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_open() selhání.</translation>
     </message>
     <message>
         <source>dcrypt::keyedHash(): gcry_md_setkey() failure (%1).</source>
-        <translation type="vanished">dcrypt::keyedHash(): gcry_md_setkey() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::keyedHash(): gcry_md_setkey() selhání (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_cipher_setkey() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_cipher_setkey() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_cipher_setkey() selhání (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): m_cipherHandle is 0.</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): m_cipherHandle je 0.</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): m_cipherHandle je 0.</translation>
     </message>
     <message>
         <source>dcrypt::setCipherPassphrase(): gcry_kdf_derive() failure (%1).</source>
-        <translation type="vanished">dcrypt::setCipherPassphrase(): gcry_kdf_derive() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::setCipherPassphrase(): gcry_kdf_derive() selhání (%1).</translation>
     </message>
     <message>
         <source>dcrypt::setInitializationVector(): gcry_cipher_setiv() failure (%1).</source>
-        <translation type="vanished">dcrypt::setInitializationVector(): gcry_cipher_setiv() selhání (%1).</translation>
+        <translation type="obsolete">dcrypt::setInitializationVector(): gcry_cipher_setiv() selhání (%1).</translation>
     </message>
 </context>
 <context>
@@ -474,7 +474,7 @@
     </message>
     <message>
         <source>dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton je 0.</translation>
+        <translation type="obsolete">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton je 0.</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="581"/>
@@ -1007,7 +1007,7 @@
     <name>dftp</name>
     <message>
         <source>dftp::slotReadyRead(): Invalid IP address. Aborting connection.</source>
-        <translation type="vanished">dftp::slotReadyRead(): Neplatná IP adresa. Ruší se spojení.</translation>
+        <translation type="obsolete">dftp::slotReadyRead(): Neplatná IP adresa. Ruší se spojení.</translation>
     </message>
 </context>
 <context>
@@ -1202,7 +1202,7 @@
     </message>
     <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dhistory::dhistory(): dooble::s_spoton je 0.</translation>
+        <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton je 0.</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="514"/>
@@ -1439,7 +1439,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): Odstranit proces %1.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): Odstranit proces %1.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -1961,7 +1961,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Nahrát &amp;kartu znovu</translation>
+        <translation type="obsolete">Nahrát &amp;kartu znovu</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2021,7 +2021,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Submit URL to Spot-On. Authentication required.</source>
-        <translation type="vanished">Odeslat adresu (URL) Spot-On. Je požadováno ověření.</translation>
+        <translation type="obsolete">Odeslat adresu (URL) Spot-On. Je požadováno ověření.</translation>
     </message>
     <message>
         <location filename="../Source/durlwidget.cc" line="343"/>
@@ -2030,7 +2030,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>durlwidget::durlwidget(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">durlwidget::durlwidget(): dooble::s_spoton je 0.</translation>
+        <translation type="obsolete">durlwidget::durlwidget(): dooble::s_spoton je 0.</translation>
     </message>
 </context>
 <context>
@@ -2200,11 +2200,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (HTTP %2).</source>
-        <translation type="vanished">dwebpage::slotFinished(): Adresa (URL) %1 vyrobila chybu (HTTP %2).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): Adresa (URL) %1 vyrobila chybu (HTTP %2).</translation>
     </message>
     <message>
         <source>dwebpage::slotFinished(): The URL %1 generated an error (%2:%3).</source>
-        <translation type="vanished">dwebpage::slotFinished(): Adresa (URL) %1 vyrobila chybu (%2:%3).</translation>
+        <translation type="obsolete">dwebpage::slotFinished(): Adresa (URL) %1 vyrobila chybu (%2:%3).</translation>
     </message>
 </context>
 <context>
@@ -2433,7 +2433,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Obnovit</translation>
+        <translation type="obsolete">Obnovit</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
@@ -2502,7 +2502,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Full Screen Tablet Mode</source>
-        <translation type="vanished">Režim pro tablet na &amp;celou obrazovku</translation>
+        <translation type="obsolete">Režim pro tablet na &amp;celou obrazovku</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="886"/>
@@ -2607,7 +2607,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Location Toolbar</source>
-        <translation type="vanished">&amp;Umístění</translation>
+        <translation type="obsolete">&amp;Umístění</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="1033"/>
@@ -2736,7 +2736,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>F11</source>
-        <translation type="vanished">F11</translation>
+        <translation type="obsolete">F11</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="881"/>

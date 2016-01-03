@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>dmisc::initializeCrypt(): Using gcry_threads_qt&apos;s address as the second parameter to gcry_control().</source>
-        <translation type="vanished">dmisc::initializeCrypt(): Usando gcry_threads_qt&apos;s direccion como el segundo parámetro a gcry_control().</translation>
+        <translation type="obsolete">dmisc::initializeCrypt(): Usando gcry_threads_qt&apos;s direccion como el segundo parámetro a gcry_control().</translation>
     </message>
     <message>
         <source>dmisc::initializeCrypt(): gcry_check_version() failure.</source>
@@ -1098,7 +1098,7 @@
     </message>
     <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
-        <translation type="vanished">dhistory::dhistory(): dooble::s_spoton es 0.</translation>
+        <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton es 0.</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="514"/>
@@ -1335,7 +1335,7 @@
     </message>
     <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
-        <translation type="vanished">dooble::slotRefreshPlugins(): Removiendo acción %1.</translation>
+        <translation type="obsolete">dooble::slotRefreshPlugins(): Removiendo acción %1.</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="6884"/>
@@ -1845,7 +1845,7 @@
     </message>
     <message>
         <source>Reload &amp;Tab</source>
-        <translation type="vanished">Recargar Pestaña</translation>
+        <translation type="obsolete">Recargar Pestaña</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="290"/>
@@ -2301,7 +2301,7 @@
     </message>
     <message>
         <source>Restore</source>
-        <translation type="vanished">Restaurar</translation>
+        <translation type="obsolete">Restaurar</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="385"/>
