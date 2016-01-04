@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>546</width>
-               <height>487</height>
+               <width>646</width>
+               <height>529</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -953,6 +953,12 @@
            <layout class="QHBoxLayout" name="horizontalLayout_23">
             <item>
              <widget class="QCheckBox" name="historyCheckBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Remember browsing history of the last</string>
               </property>
@@ -1027,6 +1033,12 @@
            <layout class="QHBoxLayout" name="horizontalLayout_22">
             <item>
              <widget class="QCheckBox" name="rememberClosedTabsCheckBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Remember the last</string>
               </property>
@@ -1195,8 +1207,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>312</width>
+               <y>-44</y>
+               <width>622</width>
                <height>536</height>
               </rect>
              </property>
@@ -1511,8 +1523,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>608</width>
+               <y>-332</y>
+               <width>628</width>
                <height>861</height>
               </rect>
              </property>
@@ -2503,7 +2515,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-204</y>
                <width>689</width>
                <height>715</height>
               </rect>
@@ -2753,6 +2765,12 @@
                <layout class="QGridLayout" name="gridLayout_12">
                 <item row="4" column="0">
                  <widget class="QCheckBox" name="reencodeExceptionsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode exceptions.</string>
                   </property>
@@ -2760,6 +2778,12 @@
                 </item>
                 <item row="5" column="0">
                  <widget class="QCheckBox" name="reencodeFaviconsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode favicons.</string>
                   </property>
@@ -2767,6 +2791,12 @@
                 </item>
                 <item row="6" column="0">
                  <widget class="QCheckBox" name="reencodeHistoryCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode history.</string>
                   </property>
@@ -2795,6 +2825,12 @@
                 </item>
                 <item row="0" column="0">
                  <widget class="QCheckBox" name="reencodeBookmarksCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode bookmarks.</string>
                   </property>
@@ -2809,6 +2845,12 @@
                 </item>
                 <item row="2" column="0">
                  <widget class="QCheckBox" name="reencodeCookiesCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode cookies.</string>
                   </property>
@@ -2823,6 +2865,12 @@
                 </item>
                 <item row="3" column="0">
                  <widget class="QCheckBox" name="reencodeDownloadsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode downloads.</string>
                   </property>
@@ -2844,6 +2892,12 @@
                 </item>
                 <item row="1" column="0">
                  <widget class="QCheckBox" name="reencodeCacheCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Re-encode cache.</string>
                   </property>
@@ -3001,8 +3055,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>566</width>
+               <y>-766</y>
+               <width>628</width>
                <height>1295</height>
               </rect>
              </property>
@@ -3011,6 +3065,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_53">
                 <item>
                  <widget class="QCheckBox" name="alwaysHttpsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Always HTTPS.</string>
                   </property>
@@ -3042,6 +3102,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_15">
                 <item>
                  <widget class="QCheckBox" name="automaticallyLoadImagesCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Automatically load images.</string>
                   </property>
@@ -3076,6 +3142,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_17">
                 <item>
                  <widget class="QCheckBox" name="blockPopupsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Block pop-up windows.</string>
                   </property>
@@ -3110,6 +3182,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_24">
                 <item>
                  <widget class="QCheckBox" name="thirdPartyContentCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Block third-party frame content.</string>
                   </property>
@@ -3190,6 +3268,12 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_62">
                    <item>
                     <widget class="QCheckBox" name="httponlycookies">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>Accept HTTP cookies only.</string>
                      </property>
@@ -3302,6 +3386,12 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_25">
                    <item>
                     <widget class="QCheckBox" name="cookieTimerCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>Sweep cookies every</string>
                      </property>
@@ -3478,6 +3568,12 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_42">
                    <item>
                     <widget class="QCheckBox" name="dntCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>Do not track me.</string>
                      </property>
@@ -3509,6 +3605,12 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_31">
                    <item>
                     <widget class="QCheckBox" name="suppressHttpRedirectCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>Suppress HTTP redirect.</string>
                      </property>
@@ -3543,6 +3645,12 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_28">
                    <item>
                     <widget class="QCheckBox" name="suppressHttpReferrerCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>Suppress HTTP referrer.</string>
                      </property>
@@ -3857,6 +3965,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_52">
                 <item>
                  <widget class="QCheckBox" name="recordFaviconsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Record favicon data to favicons.db.</string>
                   </property>
@@ -3915,6 +4029,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_33">
                 <item>
                  <widget class="QCheckBox" name="sightSslErrorsCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>Sight SSL errors. Assume a</string>
                   </property>
