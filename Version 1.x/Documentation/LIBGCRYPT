@@ -1,8 +1,6 @@
-OS X (64-bit)
+OS X
 
-Developers, please download the libgpg-error source from
-ftp://ftp.gnupg.org/gcrypt/libgpg-error and the libgcrypt
-source from ftp://ftp.gnupg.org/gcrypt/libgcrypt.
+Developers, please install Homebrew from http://brew.sh.
 
 Windows
 
