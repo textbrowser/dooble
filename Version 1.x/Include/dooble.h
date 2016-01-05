@@ -320,6 +320,7 @@ class dooble: public QMainWindow
   void slotShowIpAddress(const bool state);
   void slotShowLocationBarButton(bool state);
   void slotShowPageSource(void);
+  void slotShowReminder(void);
   void slotShowRestoreSessionTab(void);
   void slotShowSearchWidget(bool state);
   void slotShowSettingsWindow(void);

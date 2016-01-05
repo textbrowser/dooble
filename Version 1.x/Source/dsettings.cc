@@ -561,7 +561,7 @@ void dsettings::exec(dooble *parent)
 			      true).toBool());
   ui.webPluginsCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/enableWebPlugins",
-			      true).toBool());
+			      false).toBool());
 #if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
   ui.webPluginsCheckBox->setText(tr("Web plugins."));
 #endif

@@ -164,8 +164,8 @@ static void sig_handler(int signum)
     {
       /*
       ** We shall create a .crashed file in the user's Dooble directory.
-      ** Upon restart of Dooble, Dooble will query the Histories directory and
-      ** adjust itself accordingly if the .crashed file exists.
+      ** Upon a restart of Dooble, Dooble will query the Histories directory
+      ** and adjust itself accordingly.
       */
 
       if(s_crashFileName)
@@ -196,7 +196,11 @@ static void qt_message_handler(QtMsgType type,
 static void qt_message_handler(QtMsgType type, const char *msg)
 {
   Q_UNUSED(type);
-  dmisc::logError(msg);
+
+  if(msg)
+    dmisc::logError(msg);
+  else
+    dmisc::logError("Unknown error.");
 }
 #endif
 
@@ -609,7 +613,7 @@ int main(int argc, char *argv[])
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::PluginsEnabled,
      dooble::s_settings.value("settingsWindow/enableWebPlugins",
-			      true).toBool());
+			      false).toBool());
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::DnsPrefetchEnabled, true);
   QWebSettings::globalSettings()->setAttribute
@@ -1032,7 +1036,7 @@ int main(int argc, char *argv[])
 				 false).toBool();
       webAttributes[QWebSettings::PluginsEnabled] =
 	dooble::s_settings.value("settingsWindow/enableWebPlugins",
-				 true).toBool();
+				 false).toBool();
       webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	dooble::s_settings.value("settingsWindow/privateBrowsing",
 				 true).toBool();
@@ -1795,7 +1799,7 @@ dooble::dooble
 	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
-    remindUserToSetPassphrase();
+    QTimer::singleShot(500, this, SLOT(slotShowReminder(void)));
 }
 
 dooble::dooble
@@ -1862,7 +1866,7 @@ dooble::dooble
 	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
-    remindUserToSetPassphrase();
+    QTimer::singleShot(500, this, SLOT(slotShowReminder(void)));
 }
 
 dooble::dooble(dview *p, dooble *d):QMainWindow()
@@ -1905,7 +1909,7 @@ dooble::dooble(dview *p, dooble *d):QMainWindow()
 	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
-    remindUserToSetPassphrase();
+    QTimer::singleShot(500, this, SLOT(slotShowReminder(void)));
 }
 
 dooble::dooble(const QByteArray &history, dooble *d):QMainWindow()
@@ -1938,7 +1942,7 @@ dooble::dooble(const QByteArray &history, dooble *d):QMainWindow()
 	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
-    remindUserToSetPassphrase();
+    QTimer::singleShot(500, this, SLOT(slotShowReminder(void)));
 }
 
 dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
@@ -1994,7 +1998,7 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 			     false).toBool();
 	  webAttributes[QWebSettings::PluginsEnabled] =
 	    s_settings.value("settingsWindow/enableWebPlugins",
-			     true).toBool();
+			     false).toBool();
 	  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	    s_settings.value("settingsWindow/privateBrowsing",
 			     true).toBool();
@@ -2027,7 +2031,7 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 	    "This is a fatal flaw."));
 
   if(!dmisc::passphraseWasPrepared() && s_instances <= 1)
-    remindUserToSetPassphrase();
+    QTimer::singleShot(500, this, SLOT(slotShowReminder(void)));
 }
 
 dooble::~dooble()
@@ -2449,7 +2453,7 @@ dview *dooble::newTab(const QByteArray &history)
 		     false).toBool();
   webAttributes[QWebSettings::PluginsEnabled] =
     s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
+		     false).toBool();
   webAttributes[QWebSettings::PrivateBrowsingEnabled] =
     s_settings.value("settingsWindow/privateBrowsing",
 		     true).toBool();
@@ -2677,7 +2681,7 @@ void dooble::loadPage(const QUrl &url)
 			 false).toBool();
       webAttributes[QWebSettings::PluginsEnabled] =
 	s_settings.value("settingsWindow/enableWebPlugins",
-			 true).toBool();
+			 false).toBool();
       webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	s_settings.value("settingsWindow/privateBrowsing",
 			 true).toBool();
@@ -2758,7 +2762,7 @@ void dooble::slotNewTab(void)
 		     false).toBool();
   webAttributes[QWebSettings::PluginsEnabled] =
     s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
+		     false).toBool();
   webAttributes[QWebSettings::PrivateBrowsingEnabled] =
     s_settings.value("settingsWindow/privateBrowsing",
 		     true).toBool();
@@ -2805,7 +2809,7 @@ void dooble::slotNewWindow(void)
 			 false).toBool();
       webAttributes[QWebSettings::PluginsEnabled] =
 	s_settings.value("settingsWindow/enableWebPlugins",
-			 true).toBool();
+			 false).toBool();
       webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	s_settings.value("settingsWindow/privateBrowsing",
 			 true).toBool();
@@ -3807,7 +3811,7 @@ void dooble::slotGoHome(void)
 				 false).toBool();
 	      webAttributes[QWebSettings::PluginsEnabled] =
 		s_settings.value("settingsWindow/enableWebPlugins",
-				 true).toBool();
+				 false).toBool();
 	      webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 		s_settings.value("settingsWindow/privateBrowsing",
 				 true).toBool();
@@ -3851,7 +3855,7 @@ void dooble::slotGoHome(void)
 			     false).toBool();
 	  webAttributes[QWebSettings::PluginsEnabled] =
 	    s_settings.value("settingsWindow/enableWebPlugins",
-			     true).toBool();
+			     false).toBool();
 	  webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	    s_settings.value("settingsWindow/privateBrowsing",
 			     true).toBool();
@@ -4349,7 +4353,7 @@ void dooble::slotOpenLinkInNewTab(const QUrl &url)
 		     false).toBool();
   webAttributes[QWebSettings::PluginsEnabled] =
     s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
+		     false).toBool();
   webAttributes[QWebSettings::PrivateBrowsingEnabled] =
     s_settings.value("settingsWindow/privateBrowsing",
 		     true).toBool();
@@ -4381,7 +4385,7 @@ void dooble::slotOpenLinkInNewWindow(const QUrl &url)
 		     false).toBool();
   webAttributes[QWebSettings::PluginsEnabled] =
     s_settings.value("settingsWindow/enableWebPlugins",
-		     true).toBool();
+		     false).toBool();
   webAttributes[QWebSettings::PrivateBrowsingEnabled] =
     s_settings.value("settingsWindow/privateBrowsing",
 		     true).toBool();
@@ -6335,7 +6339,7 @@ void dooble::slotFavoritesToolButtonClicked(void)
 			 false).toBool();
       webAttributes[QWebSettings::PluginsEnabled] =
 	s_settings.value("settingsWindow/enableWebPlugins",
-			 true).toBool();
+			 false).toBool();
       webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	s_settings.value("settingsWindow/privateBrowsing",
 			 true).toBool();
@@ -6446,7 +6450,7 @@ void dooble::slotOpenUrlsFromDrop(const QList<QUrl> &list)
 			   false).toBool();
 	webAttributes[QWebSettings::PluginsEnabled] =
 	  s_settings.value("settingsWindow/enableWebPlugins",
-			   true).toBool();
+			   false).toBool();
 	webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	  s_settings.value("settingsWindow/privateBrowsing",
 			   true).toBool();
@@ -8152,4 +8156,9 @@ void dooble::slotShowSearchWidget(bool state)
 void dooble::slotSettingsChanged(void)
 {
   ui.locationLineEdit->updateToolTips();
+}
+
+void dooble::slotShowReminder(void)
+{
+  remindUserToSetPassphrase();
 }
