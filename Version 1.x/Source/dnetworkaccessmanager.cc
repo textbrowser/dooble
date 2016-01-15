@@ -824,7 +824,10 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
       ** The URL may be relative.
       */
 
-      url = reply->url().resolved(url);
+      if(!reply->attribute(QNetworkRequest::RedirectionTargetAttribute).
+	 isNull())
+	if(url.isRelative())
+	  url = reply->url().resolved(url);
 
       if(url.isEmpty() || !url.isValid() ||
 	 url.toString(QUrl::StripTrailingSlash) ==
