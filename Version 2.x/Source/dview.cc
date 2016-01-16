@@ -344,6 +344,7 @@ void dview::load(const QUrl &url)
 	/*
 	** Exempt hosts must be prevented from executing JavaScript.
 	*/
+
 	webView->settings()->setAttribute
 	  (QWebEngineSettings::JavascriptEnabled, false);
       else
