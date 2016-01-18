@@ -588,7 +588,7 @@ libspoton_error_t libspoton_save_url(const char *url,
   const char *buffer = "";
   const char *sql = "INSERT OR REPLACE INTO urls (url, title, "
     "description, content, encrypted) VALUES (?, ?, ?, ?, ?)";
-  int FIELDS_COUNT = 4; // Ignore the encrypted field.
+  int FIELDS_COUNT = 4; /* Ignore the encrypted field. */
   gcry_cipher_hd_t cipherCtx = 0;
   int i = 0;
   int rv = 0;

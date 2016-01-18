@@ -5,7 +5,7 @@ all:	libspoton.o
 	test.c -o test -L. -lspoton -Wl,-rpath,.
 
 libspoton.o:	libspoton.c libspoton.h
-	$(CC) $(CFLAGS) -fPIC -fstack-protector-all \
+	$(CC) $(CFLAGS) -fPIC -fstack-protector-all -pedantic \
 	-Wall -Wconversion -Werror -Wextra -Wpointer-arith \
 	-Wsign-conversion \
 	-Wstack-protector -Wstrict-overflow=5 -Wstrict-prototypes \
