@@ -108,6 +108,13 @@ static libspoton_error_t initialize_libgcrypt
 
       if(!gcry_check_version(GCRYPT_VERSION))
 	rerr = LIBSPOTON_ERROR_GCRY_CHECK_VERSION;
+      else if(secure_memory_pool_size == 0)
+	{
+	  fprintf(stderr, "libspoton::initialize_libgcrypt(): "
+		  "disabling secure memory.\n");
+	  gcry_control(GCRYCTL_DISABLE_SECMEM, 0);
+	  gcry_control(GCRYCTL_INITIALIZATION_FINISHED, 0);
+	}
       else
 	{
 	  gcry_control(GCRYCTL_SUSPEND_SECMEM_WARN);
