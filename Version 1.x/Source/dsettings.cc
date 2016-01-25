@@ -566,7 +566,7 @@ void dsettings::exec(dooble *parent)
     (dooble::s_settings.value("settingsWindow/enableWebPlugins",
 			      false).toBool());
 #if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
-  ui.webPluginsCheckBox->setText(tr("Web plugins."));
+  ui.webPluginsCheckBox->setText(tr("Web Plugins"));
 #endif
   ui.browsingHttpProxyGroupBox->setChecked
     (dooble::s_settings.value("settingsWindow/httpBrowsingProxyEnabled",
