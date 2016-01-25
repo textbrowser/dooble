@@ -509,6 +509,9 @@ void dsettings::exec(dooble *parent)
 	  widget->setText(url.toString(QUrl::StripTrailingSlash));
       }
 
+  ui.record_file_suffixes->setChecked
+    (dooble::s_settings.value("settingsWindow/record_file_suffixes",
+			      true).toBool());
   ui.showAuthenticationCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/showAuthentication",
 			      true).toBool());
@@ -1222,8 +1225,8 @@ void dsettings::exec(dooble *parent)
     ui.diskWebCacheSpinBox->setValue(50);
 
   ui.iterationCountSpinBox->setValue
-    (qMax(1000, dooble::s_settings.
-	  value("settingsWindow/iterationCount", 10000).toInt()));
+    (qMax(10000, dooble::s_settings.
+	  value("settingsWindow/iterationCount", 25000).toInt()));
   ok = true;
   value = qAbs
     (dooble::s_settings.value("settingsWindow/saltLength", 256).
@@ -1862,6 +1865,12 @@ void dsettings::slotClicked(QAbstractButton *button)
       settings.setValue
 	("settingsWindow/javascriptStagnantScripts",
 	 ui.jsStagnantScripts->currentIndex());
+      settings.setValue("settingsWindow/record_file_suffixes",
+			ui.record_file_suffixes->isChecked());
+
+      if(dfilemanager::tableModel)
+	dfilemanager::tableModel->enable
+	  (ui.record_file_suffixes->isChecked());
 
       QString str("");
 

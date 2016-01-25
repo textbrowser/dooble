@@ -44,10 +44,13 @@ dfilesystemmodel::dfilesystemmodel(QObject *parent):QFileSystemModel(parent)
 	    << tr("Owner")
 	    << tr("Group")
 	    << tr("Permissions");
-  connect(this,
-	  SIGNAL(directoryLoaded(const QString &)),
-	  this,
-	  SLOT(slotDirectoryLoaded(const QString &)));
+
+  if(dooble::s_settings.value("settingsWindow/record_file_suffixes",
+			      true).toBool())
+    connect(this,
+	    SIGNAL(directoryLoaded(const QString &)),
+	    this,
+	    SLOT(slotDirectoryLoaded(const QString &)));
 }
 
 QVariant dfilesystemmodel::headerData(int section, Qt::Orientation orientation,
@@ -251,4 +254,19 @@ void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
   for(int i = 0; i < suffixesU.keys().size(); i++)
     emit suffixUpdated(suffixesU.keys().at(i),
 		       suffixesU.value(suffixesU.keys().at(i)));
+}
+
+void dfilesystemmodel::enable(const bool state)
+{
+  if(state)
+    connect(this,
+	    SIGNAL(directoryLoaded(const QString &)),
+	    this,
+	    SLOT(slotDirectoryLoaded(const QString &)),
+	    Qt::UniqueConnection);
+  else
+    disconnect(this,
+	       SIGNAL(directoryLoaded(const QString &)),
+	       this,
+	       SLOT(slotDirectoryLoaded(const QString &)));
 }

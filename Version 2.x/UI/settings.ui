@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>110</width>
+         <width>104</width>
          <height>582</height>
         </rect>
        </property>
@@ -292,6 +292,33 @@
         <widget class="QWidget" name="page_2">
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_66">
+            <item>
+             <widget class="QCheckBox" name="record_file_suffixes">
+              <property name="text">
+               <string>&amp;Automatically Record Discovered Suffixes</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_55">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QLabel" name="label_3">
             <property name="text">
              <string>Please note that modifications to the actions are automatically saved.</string>
@@ -353,8 +380,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>646</width>
-               <height>529</height>
+               <width>638</width>
+               <height>571</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1208,8 +1235,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>622</width>
-               <height>536</height>
+               <width>632</width>
+               <height>550</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1524,8 +1551,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>628</width>
-               <height>861</height>
+               <width>638</width>
+               <height>897</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2515,9 +2542,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-204</y>
-               <width>689</width>
-               <height>715</height>
+               <y>0</y>
+               <width>643</width>
+               <height>747</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2686,16 +2713,16 @@
                 <item>
                  <widget class="QSpinBox" name="iterationCountSpinBox">
                   <property name="minimum">
-                   <number>1000</number>
+                   <number>10000</number>
                   </property>
                   <property name="maximum">
                    <number>999999999</number>
                   </property>
                   <property name="singleStep">
-                   <number>100</number>
+                   <number>1000</number>
                   </property>
                   <property name="value">
-                   <number>10000</number>
+                   <number>25000</number>
                   </property>
                  </widget>
                 </item>
@@ -2772,7 +2799,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode exceptions.</string>
+                   <string>Re-encode Exceptions</string>
                   </property>
                  </widget>
                 </item>
@@ -2785,7 +2812,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode favicons.</string>
+                   <string>Re-encode Favicons</string>
                   </property>
                  </widget>
                 </item>
@@ -2798,7 +2825,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode history.</string>
+                   <string>Re-encode History</string>
                   </property>
                  </widget>
                 </item>
@@ -2832,7 +2859,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode bookmarks.</string>
+                   <string>Re-encode Bookmarks</string>
                   </property>
                  </widget>
                 </item>
@@ -2852,7 +2879,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode cookies.</string>
+                   <string>Re-encode Cookies</string>
                   </property>
                  </widget>
                 </item>
@@ -2872,7 +2899,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode downloads.</string>
+                   <string>Re-encode Downloads</string>
                   </property>
                  </widget>
                 </item>
@@ -2899,7 +2926,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Re-encode cache.</string>
+                   <string>Re-encode Cache</string>
                   </property>
                  </widget>
                 </item>
@@ -3015,7 +3042,7 @@
                  <item row="0" column="3">
                   <widget class="QLabel" name="label_58">
                    <property name="text">
-                    <string>Minimum of 16 characters.</string>
+                    <string>Minimum of 16 characters, please.</string>
                    </property>
                   </widget>
                  </item>
@@ -3055,9 +3082,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-766</y>
-               <width>628</width>
-               <height>1295</height>
+               <y>0</y>
+               <width>526</width>
+               <height>1350</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -3072,7 +3099,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Always HTTPS.</string>
+                   <string>Always HTTPS</string>
                   </property>
                  </widget>
                 </item>
@@ -3109,7 +3136,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Automatically load images.</string>
+                   <string>Automatically Load Web Images</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
@@ -3149,7 +3176,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Block pop-up windows.</string>
+                   <string>Block Pop-up Windows</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
@@ -3189,7 +3216,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Block third-party frame content.</string>
+                   <string>Block Third-party Frame Content</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
@@ -3275,7 +3302,7 @@
                       </sizepolicy>
                      </property>
                      <property name="text">
-                      <string>Accept HTTP cookies only.</string>
+                      <string>Accept HTTP Cookies Only</string>
                      </property>
                     </widget>
                    </item>
@@ -3575,7 +3602,7 @@
                       </sizepolicy>
                      </property>
                      <property name="text">
-                      <string>Do not track me.</string>
+                      <string>Do Not Track</string>
                      </property>
                     </widget>
                    </item>
@@ -3612,7 +3639,7 @@
                       </sizepolicy>
                      </property>
                      <property name="text">
-                      <string>Suppress HTTP redirect.</string>
+                      <string>Suppress HTTP Redirect</string>
                      </property>
                      <property name="checked">
                       <bool>false</bool>
@@ -3652,7 +3679,7 @@
                       </sizepolicy>
                      </property>
                      <property name="text">
-                      <string>Suppress HTTP referrer.</string>
+                      <string>Suppress HTTP Referrer</string>
                      </property>
                      <property name="checked">
                       <bool>false</bool>
@@ -4003,7 +4030,7 @@
                 <item>
                  <widget class="QCheckBox" name="sessionRestorationCheckBox">
                   <property name="text">
-                   <string>Session restoration.</string>
+                   <string>Session Restoration</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
@@ -4100,7 +4127,7 @@
                 <item>
                  <widget class="QCheckBox" name="speedyCheckBox">
                   <property name="text">
-                   <string>Speedy network protocol.</string>
+                   <string>Speedy Network Protocol</string>
                   </property>
                  </widget>
                 </item>
@@ -4124,10 +4151,7 @@
                 <item>
                  <widget class="QCheckBox" name="webPluginsCheckBox">
                   <property name="text">
-                   <string>Web plugins.</string>
-                  </property>
-                  <property name="checked">
-                   <bool>true</bool>
+                   <string>Web Plugins</string>
                   </property>
                  </widget>
                 </item>
@@ -4151,7 +4175,7 @@
                 <item>
                  <widget class="QCheckBox" name="webglCheckBox">
                   <property name="text">
-                   <string>WebGL.</string>
+                   <string>WebGL</string>
                   </property>
                  </widget>
                 </item>
@@ -4214,7 +4238,7 @@
           <item>
            <widget class="QCheckBox" name="closeViaMiddleCheckBox">
             <property name="text">
-             <string>Close the selected tab via middle mouse button click.</string>
+             <string>Close the selected tab via a middle mouse button click.</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -4345,7 +4369,7 @@
             <item>
              <widget class="QCheckBox" name="spatialNavigationCheckBox">
               <property name="text">
-               <string>Spatial navigation.</string>
+               <string>Spatial Navigation</string>
               </property>
              </widget>
             </item>
@@ -4460,6 +4484,7 @@
   <tabstop>tabsButton</tabstop>
   <tabstop>webkitButton</tabstop>
   <tabstop>windowsButton</tabstop>
+  <tabstop>record_file_suffixes</tabstop>
   <tabstop>applicationsTable</tabstop>
   <tabstop>scrollArea</tabstop>
   <tabstop>locationToolbarIconSizeComboBox</tabstop>
@@ -4631,7 +4656,6 @@
   <tabstop>openUserWindowsInNewProcessesCheckBox</tabstop>
   <tabstop>useNativeFileDialogs</tabstop>
   <tabstop>displaypriority</tabstop>
-  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -40,6 +40,7 @@ class dfilesystemmodel: public QFileSystemModel
   QVariant headerData(int section,
 		      Qt::Orientation orientation,
 		      int role = Qt::DisplayRole ) const;
+  void enable(const bool state);
 
  private:
   QStringList m_headers;
