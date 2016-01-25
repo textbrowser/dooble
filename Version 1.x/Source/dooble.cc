@@ -69,6 +69,8 @@
 #include <QtConcurrent>
 #endif
 
+#include <limits>
+
 extern "C"
 {
 #include <fcntl.h>
@@ -197,7 +199,7 @@ static void qt_message_handler(QtMsgType type, const char *msg)
 {
   Q_UNUSED(type);
 
-  if(msg)
+  if(msg && qstrnlen(msg, std::numeric_limits<uint>::max()) > 0)
     dmisc::logError(msg);
   else
     dmisc::logError("Unknown error.");
