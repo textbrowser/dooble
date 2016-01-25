@@ -1363,7 +1363,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Web plugins.</source>
+        <source>Web Plugins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2926,10 +2926,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close the selected tab via middle mouse button click.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2947,30 +2943,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Warn me before closing a page that has modified content.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode bookmarks.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode cookies.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode downloads.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode exceptions.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode history.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode favicons.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3026,10 +2998,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Minimum of 16 characters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>HTTP Headers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3051,10 +3019,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Iteration Count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Re-encode cache.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3154,46 +3118,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Always HTTPS.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Automatically load images.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Block pop-up windows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Block third-party frame content.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suppress HTTP redirect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suppress HTTP referrer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Session restoration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Web plugins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WebGL.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spatial navigation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3230,10 +3154,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">25</translation>
     </message>
     <message>
-        <source>Do not track me.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sight SSL errors. Assume a</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3247,10 +3167,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>approach.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Speedy network protocol.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3303,10 +3219,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accept HTTP cookies only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3379,6 +3291,98 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>West</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Automatically Record Discovered Suffixes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode Favicons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode Cookies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-encode Cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum of 16 characters, please.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always HTTPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically Load Web Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block Pop-up Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block Third-party Frame Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept HTTP Cookies Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do Not Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suppress HTTP Redirect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suppress HTTP Referrer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Session Restoration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speedy Network Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Web Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WebGL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close the selected tab via a middle mouse button click.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spatial Navigation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

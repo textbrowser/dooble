@@ -12,7 +12,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Source/dooble.cc" line="794"/>
+        <location filename="../Source/dooble.cc" line="796"/>
         <source>Dooble Web Browser: DNT (Do Not Track) Exceptions</source>
         <translation>Dooble Web Nabigatzailea: EZAZT (Ez Aztarnatu) Salbuespenak</translation>
     </message>
@@ -21,57 +21,57 @@
         <translation type="obsolete">Dooble Web Nabigatzailea: JavaScript Oharleiho Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="799"/>
+        <location filename="../Source/dooble.cc" line="801"/>
         <source>Dooble Web Browser: JavaScript Pop-ups Exceptions</source>
         <translation>Dooble Web Nabigatzailea: JavaScript Pop-ups Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="804"/>
+        <location filename="../Source/dooble.cc" line="806"/>
         <source>Dooble Web Browser: Third-Party Blocking Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Hirugarrenen Blokeatze Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="810"/>
+        <location filename="../Source/dooble.cc" line="812"/>
         <source>Dooble Web Browser: Cookies Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Cookie Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="815"/>
+        <location filename="../Source/dooble.cc" line="817"/>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="820"/>
+        <location filename="../Source/dooble.cc" line="822"/>
         <source>Dooble Web Browser: Suppress HTTP Referrer Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Suppress HTTP Referrer Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="825"/>
+        <location filename="../Source/dooble.cc" line="827"/>
         <source>Dooble Web Browser: Suppress HTTP Redirect Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Kendu HTTP Birzuzenketa Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="830"/>
+        <location filename="../Source/dooble.cc" line="832"/>
         <source>Dooble Web Browser: JavaScript Exceptions</source>
         <translation>Dooble Web Nabigatzailea: JavaScript Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="835"/>
+        <location filename="../Source/dooble.cc" line="837"/>
         <source>Dooble Web Browser: Automatically-Loaded Images Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Berezgaitasunez-Gertaturiko Irudi Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="840"/>
+        <location filename="../Source/dooble.cc" line="842"/>
         <source>Dooble Web Browser: Cache Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Katxe Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="845"/>
+        <location filename="../Source/dooble.cc" line="847"/>
         <source>Dooble Web Browser: Always HTTPS Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Betik HTTPS Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="850"/>
+        <location filename="../Source/dooble.cc" line="852"/>
         <source>Dooble Web Browser: SSL Errors Exceptions</source>
         <translation>Dooble Web Nabigatzailea: SSL Akats Salbuespenak</translation>
     </message>
@@ -1340,167 +1340,167 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="2335"/>
-        <location filename="../Source/dooble.cc" line="2392"/>
-        <location filename="../Source/dooble.cc" line="2432"/>
-        <location filename="../Source/dooble.cc" line="2497"/>
-        <location filename="../Source/dooble.cc" line="3293"/>
-        <location filename="../Source/dooble.cc" line="3480"/>
-        <location filename="../Source/dooble.cc" line="3504"/>
-        <location filename="../Source/dooble.cc" line="5034"/>
-        <location filename="../Source/dooble.cc" line="5516"/>
+        <location filename="../Source/dooble.cc" line="2337"/>
+        <location filename="../Source/dooble.cc" line="2394"/>
+        <location filename="../Source/dooble.cc" line="2434"/>
+        <location filename="../Source/dooble.cc" line="2499"/>
+        <location filename="../Source/dooble.cc" line="3295"/>
+        <location filename="../Source/dooble.cc" line="3482"/>
+        <location filename="../Source/dooble.cc" line="3506"/>
+        <location filename="../Source/dooble.cc" line="5036"/>
+        <location filename="../Source/dooble.cc" line="5518"/>
         <source>(Untitled)</source>
         <translation>(Izenburugabea)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3079"/>
-        <location filename="../Source/dooble.cc" line="3148"/>
-        <location filename="../Source/dooble.cc" line="3264"/>
-        <location filename="../Source/dooble.cc" line="3580"/>
-        <location filename="../Source/dooble.cc" line="3719"/>
-        <location filename="../Source/dooble.cc" line="3759"/>
-        <location filename="../Source/dooble.cc" line="3969"/>
-        <location filename="../Source/dooble.cc" line="5440"/>
-        <location filename="../Source/dooble.cc" line="6065"/>
-        <location filename="../Source/dooble.cc" line="6368"/>
+        <location filename="../Source/dooble.cc" line="3081"/>
+        <location filename="../Source/dooble.cc" line="3150"/>
+        <location filename="../Source/dooble.cc" line="3266"/>
+        <location filename="../Source/dooble.cc" line="3582"/>
+        <location filename="../Source/dooble.cc" line="3721"/>
+        <location filename="../Source/dooble.cc" line="3761"/>
+        <location filename="../Source/dooble.cc" line="3971"/>
+        <location filename="../Source/dooble.cc" line="5442"/>
+        <location filename="../Source/dooble.cc" line="6067"/>
+        <location filename="../Source/dooble.cc" line="6370"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Nabigatzailea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3089"/>
-        <location filename="../Source/dooble.cc" line="3092"/>
-        <location filename="../Source/dooble.cc" line="3274"/>
-        <location filename="../Source/dooble.cc" line="3277"/>
-        <location filename="../Source/dooble.cc" line="5450"/>
-        <location filename="../Source/dooble.cc" line="5453"/>
-        <location filename="../Source/dooble.cc" line="6370"/>
+        <location filename="../Source/dooble.cc" line="3091"/>
+        <location filename="../Source/dooble.cc" line="3094"/>
+        <location filename="../Source/dooble.cc" line="3276"/>
+        <location filename="../Source/dooble.cc" line="3279"/>
+        <location filename="../Source/dooble.cc" line="5452"/>
+        <location filename="../Source/dooble.cc" line="5455"/>
+        <location filename="../Source/dooble.cc" line="6372"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Nabigatzailea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1570"/>
+        <location filename="../Source/dooble.cc" line="1572"/>
         <source>&amp;Clear History</source>
         <translation>&amp;Garbitu Historia</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1576"/>
+        <location filename="../Source/dooble.cc" line="1578"/>
         <source>Show &amp;History</source>
         <translation>&amp;Erakutsi Historia</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2877"/>
+        <location filename="../Source/dooble.cc" line="2879"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation>Edukia aldatuta duten hegatsak dituzu. Zihur zaude irtetzea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2880"/>
+        <location filename="../Source/dooble.cc" line="2882"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation>Edukia aldatuta duten hegatsak dituzu. Zihur zaude istea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3081"/>
-        <location filename="../Source/dooble.cc" line="3266"/>
-        <location filename="../Source/dooble.cc" line="5442"/>
+        <location filename="../Source/dooble.cc" line="3083"/>
+        <location filename="../Source/dooble.cc" line="3268"/>
+        <location filename="../Source/dooble.cc" line="5444"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Nabigatzailea (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4579"/>
+        <location filename="../Source/dooble.cc" line="4581"/>
         <source>Save</source>
         <translation>Gorde</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5172"/>
+        <location filename="../Source/dooble.cc" line="5174"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6405"/>
+        <location filename="../Source/dooble.cc" line="6407"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Zihur zaude %1 orrialdeak irekitzea nahi dituzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6558"/>
+        <location filename="../Source/dooble.cc" line="6560"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Zihur zaude aldatutako orrialdea uztea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2872"/>
-        <location filename="../Source/dooble.cc" line="2924"/>
-        <location filename="../Source/dooble.cc" line="3919"/>
-        <location filename="../Source/dooble.cc" line="6402"/>
-        <location filename="../Source/dooble.cc" line="6554"/>
+        <location filename="../Source/dooble.cc" line="2874"/>
+        <location filename="../Source/dooble.cc" line="2926"/>
+        <location filename="../Source/dooble.cc" line="3921"/>
+        <location filename="../Source/dooble.cc" line="6404"/>
+        <location filename="../Source/dooble.cc" line="6556"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Nabigatzailea: Baieztapena</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1582"/>
+        <location filename="../Source/dooble.cc" line="1584"/>
         <source>&amp;Recently-Closed Tabs</source>
         <translation>&amp;Berriki-Itxitako Hegatsak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1797"/>
-        <location filename="../Source/dooble.cc" line="1864"/>
-        <location filename="../Source/dooble.cc" line="1907"/>
-        <location filename="../Source/dooble.cc" line="1940"/>
-        <location filename="../Source/dooble.cc" line="2029"/>
+        <location filename="../Source/dooble.cc" line="1799"/>
+        <location filename="../Source/dooble.cc" line="1866"/>
+        <location filename="../Source/dooble.cc" line="1909"/>
+        <location filename="../Source/dooble.cc" line="1942"/>
+        <location filename="../Source/dooble.cc" line="2031"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble Web Nabigatzailea: Akatsa</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1798"/>
-        <location filename="../Source/dooble.cc" line="1865"/>
-        <location filename="../Source/dooble.cc" line="1908"/>
-        <location filename="../Source/dooble.cc" line="1941"/>
-        <location filename="../Source/dooble.cc" line="2030"/>
+        <location filename="../Source/dooble.cc" line="1800"/>
+        <location filename="../Source/dooble.cc" line="1867"/>
+        <location filename="../Source/dooble.cc" line="1910"/>
+        <location filename="../Source/dooble.cc" line="1943"/>
+        <location filename="../Source/dooble.cc" line="2032"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2927"/>
+        <location filename="../Source/dooble.cc" line="2929"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation>Dooble amaitzeak daueden jeisketak etetea eragingo du. Zihur zaude jarraitzea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3922"/>
+        <location filename="../Source/dooble.cc" line="3924"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Zihur zaude aldaturiko hegats hau istea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3991"/>
+        <location filename="../Source/dooble.cc" line="3993"/>
         <source>&amp;Clear</source>
         <translation>&amp;Garbitu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4456"/>
+        <location filename="../Source/dooble.cc" line="4458"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Nabigatzailea: Honi buruz</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4576"/>
+        <location filename="../Source/dooble.cc" line="4578"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Nabigatzailea: Gorde Honela</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4957"/>
-        <location filename="../Source/dooble.cc" line="4963"/>
+        <location filename="../Source/dooble.cc" line="4959"/>
         <location filename="../Source/dooble.cc" line="4965"/>
-        <location filename="../Source/dooble.cc" line="4969"/>
+        <location filename="../Source/dooble.cc" line="4967"/>
+        <location filename="../Source/dooble.cc" line="4971"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Mahaigaina</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5169"/>
+        <location filename="../Source/dooble.cc" line="5171"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Nabigatzailea: Ireki Zuzenbidea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5307"/>
+        <location filename="../Source/dooble.cc" line="5309"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>%1 guneak egiaztagiriak eskatzen ditu.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5371"/>
+        <location filename="../Source/dooble.cc" line="5373"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>%1:%2 proxyak egiaztagiriak eskatzen ditu.</translation>
     </message>
@@ -1509,39 +1509,39 @@
         <translation type="obsolete">dooble::slotRefreshPlugins(): %1 ekintza kentzen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6888"/>
+        <location filename="../Source/dooble.cc" line="6890"/>
         <source>Start %1</source>
         <translation>Hasi %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6956"/>
+        <location filename="../Source/dooble.cc" line="6958"/>
         <source>Add-on Load Failed</source>
         <translation>Gehigarri Gertaketa Hutsegitea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6979"/>
-        <location filename="../Source/dooble.cc" line="7030"/>
+        <location filename="../Source/dooble.cc" line="6981"/>
+        <location filename="../Source/dooble.cc" line="7032"/>
         <source>Add-on</source>
         <translation>Gehigarria</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7706"/>
+        <location filename="../Source/dooble.cc" line="7708"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Ikusi %1 &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7709"/>
-        <location filename="../Source/dooble.cc" line="7713"/>
+        <location filename="../Source/dooble.cc" line="7711"/>
+        <location filename="../Source/dooble.cc" line="7715"/>
         <source>View Site &amp;Cookies</source>
         <translation>Ikusi Gune &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8074"/>
+        <location filename="../Source/dooble.cc" line="8076"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8076"/>
+        <location filename="../Source/dooble.cc" line="8078"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1550,25 +1550,25 @@
         <translation type="obsolete">Gune ezezagun batek (hutsik edo URL baliogabea) salbuespen bat eragin du. Mesedez klikatu berrikuteko.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7442"/>
+        <location filename="../Source/dooble.cc" line="7444"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Nabigatzailea: Gogoratu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7443"/>
+        <location filename="../Source/dooble.cc" line="7445"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Sar-esaldi bat ez da gertatu. Mesedez ikusi Seguru panela Ezarpenak leihoan eta hautatu sar-esaldi bat. Behin sar-esaldi bat hautaturikoan, lastermarkak, cookieak, eta beste argibide esangurutsu guztiak eskuragarri egongo dira etorkizuneko saioetan. Gogoratze hau Segurua paneletik ezgaitu dezakezu.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7140"/>
-        <location filename="../Source/dooble.cc" line="7145"/>
+        <location filename="../Source/dooble.cc" line="7142"/>
+        <location filename="../Source/dooble.cc" line="7147"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>%1 guneak salbuespen bat eragin du. Mesedez klikatu berrikusteko.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7379"/>
         <location filename="../Source/dooble.cc" line="7381"/>
-        <location filename="../Source/dooble.cc" line="7385"/>
+        <location filename="../Source/dooble.cc" line="7383"/>
+        <location filename="../Source/dooble.cc" line="7387"/>
         <source>Restore Session</source>
         <translation>Leheneratu Saioa</translation>
     </message>
@@ -1760,23 +1760,23 @@
         <translation type="obsolete">Web Pluginak (Ezegonkorra)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1497"/>
-        <location filename="../Source/dsettings.cc" line="1531"/>
+        <location filename="../Source/dsettings.cc" line="1500"/>
+        <location filename="../Source/dsettings.cc" line="1534"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Web Nabigatzailea: Akatsa</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1498"/>
+        <location filename="../Source/dsettings.cc" line="1501"/>
         <source>The passphrases do not match.</source>
         <translation>Sar-esaldiak ez datoz bat.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2129"/>
+        <location filename="../Source/dsettings.cc" line="2138"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Nabigatzailea: Baieztapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1380"/>
+        <location filename="../Source/dsettings.cc" line="1383"/>
         <source>unknown</source>
         <translation>ezezaguna</translation>
     </message>
@@ -1786,7 +1786,12 @@
         <translation>ahalbideturik dauden cookiekin</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1532"/>
+        <location filename="../Source/dsettings.cc" line="569"/>
+        <source>Web Plugins</source>
+        <translation type="unfinished">Web Pluginak</translation>
+    </message>
+    <message>
+        <location filename="../Source/dsettings.cc" line="1535"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Sar-esaldiak gutxienez hamasei hizkiko luzera izan behar du.</translation>
     </message>
@@ -1795,69 +1800,68 @@
         <translation type="obsolete">Zure itxurapen ezarpenak berrezartzear zaude. Sar-esaldi bat itxuratu bada, heutsi egingo zaio. Dooble berrabiarazi egingo da berrezarpen garapena osatzeko. Ondorioz, gorde gabeko datuak galdu egingo dira. Jarraitzea nahi duzu?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2225"/>
+        <location filename="../Source/dsettings.cc" line="2234"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Web Nabigatzailea: Azalgai Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2243"/>
+        <location filename="../Source/dsettings.cc" line="2252"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Azalgai Itxurapen Agiria (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2328"/>
+        <location filename="../Source/dsettings.cc" line="2337"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Nabigatzailea: Nire Berreskuraturiko Agirien Zuzenbide Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2885"/>
+        <location filename="../Source/dsettings.cc" line="2894"/>
         <source>%1 MiB of content is cached.</source>
         <translation>%1 MiB eduki katxeatuta.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2242"/>
-        <location filename="../Source/dsettings.cc" line="2714"/>
+        <location filename="../Source/dsettings.cc" line="2251"/>
+        <location filename="../Source/dsettings.cc" line="2723"/>
         <source>Select</source>
         <translation>Hautatu</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="566"/>
         <source>Web plugins.</source>
-        <translation>Web pluginak.</translation>
+        <translation type="vanished">Web pluginak.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2132"/>
+        <location filename="../Source/dsettings.cc" line="2141"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation>Zure itxurapen ezarpen guztiak berrezartzear zaude. Dooble-ek berrabiarazi egingo da berrezartze prozesua osatzeko. Jarraitzea nahi duzu?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2331"/>
-        <location filename="../Source/dsettings.cc" line="2359"/>
+        <location filename="../Source/dsettings.cc" line="2340"/>
+        <location filename="../Source/dsettings.cc" line="2368"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2356"/>
+        <location filename="../Source/dsettings.cc" line="2365"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Web Nabigatzailea: Spot-On Elkarbanatze Datubase Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2629"/>
+        <location filename="../Source/dsettings.cc" line="2638"/>
         <source>Prompt</source>
         <translation>Galdetu</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2646"/>
+        <location filename="../Source/dsettings.cc" line="2655"/>
         <source>Use other...</source>
         <translation>Erabili beste bat...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2711"/>
+        <location filename="../Source/dsettings.cc" line="2720"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Nabigatzailea: Ezarri Aplikazioa</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2824"/>
+        <location filename="../Source/dsettings.cc" line="2833"/>
         <source>&amp;Delete File Suffix</source>
         <translation>E&amp;zabatu Agiri Aurrizkia</translation>
     </message>
@@ -3080,26 +3084,26 @@
         <translation type="obsolete">Language  (Translation: Nomen Nominandum, translation-team-eu@lists.sourceforge.net)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="557"/>
-        <location filename="../UI/settings.ui" line="1336"/>
-        <location filename="../UI/settings.ui" line="1490"/>
+        <location filename="../UI/settings.ui" line="584"/>
+        <location filename="../UI/settings.ui" line="1363"/>
+        <location filename="../UI/settings.ui" line="1517"/>
         <source>&amp;Browse</source>
         <translation>&amp;Bilatu</translation>
     </message>
     <message>
         <location filename="../UI/settings.ui" line="114"/>
         <location filename="../UI/settings.ui" line="117"/>
-        <location filename="../UI/settings.ui" line="1359"/>
+        <location filename="../UI/settings.ui" line="1386"/>
         <source>Home</source>
         <translation>Etxea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="885"/>
+        <location filename="../UI/settings.ui" line="912"/>
         <source>Character Encoding</source>
         <translation>Hizki-kodeaketa</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1081"/>
+        <location filename="../UI/settings.ui" line="1108"/>
         <source>Web Cache</source>
         <translation>Web Katxea</translation>
     </message>
@@ -3108,110 +3112,110 @@
         <translation type="obsolete">50 MB eduki katxeatzen da.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1157"/>
-        <location filename="../UI/settings.ui" line="3982"/>
+        <location filename="../UI/settings.ui" line="1184"/>
+        <location filename="../UI/settings.ui" line="4009"/>
         <source>&amp;Clear</source>
         <translation>&amp;Garbitu</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1390"/>
+        <location filename="../UI/settings.ui" line="1417"/>
         <source>URL 01</source>
         <translation>URL 01</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1403"/>
+        <location filename="../UI/settings.ui" line="1430"/>
         <source>URL 02</source>
         <translation>URL 02</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1416"/>
+        <location filename="../UI/settings.ui" line="1443"/>
         <source>URL 03</source>
         <translation>URL 03</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1440"/>
+        <location filename="../UI/settings.ui" line="1467"/>
         <source>URL 04</source>
         <translation>URL 04</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1457"/>
+        <location filename="../UI/settings.ui" line="1484"/>
         <source>URL 05</source>
         <translation>URL 05</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1229"/>
+        <location filename="../UI/settings.ui" line="1256"/>
         <source>URL 06</source>
         <translation>URL 06</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1259"/>
+        <location filename="../UI/settings.ui" line="1286"/>
         <source>URL 07</source>
         <translation>URL 07</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1467"/>
+        <location filename="../UI/settings.ui" line="1494"/>
         <source>URL 08</source>
         <translation>URL 08</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1276"/>
+        <location filename="../UI/settings.ui" line="1303"/>
         <source>URL 09</source>
         <translation>URL 09</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1293"/>
+        <location filename="../UI/settings.ui" line="1320"/>
         <source>URL 10</source>
         <translation>URL 10</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1310"/>
+        <location filename="../UI/settings.ui" line="1337"/>
         <source>URL 11</source>
         <translation>URL 11</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1324"/>
+        <location filename="../UI/settings.ui" line="1351"/>
         <source>My Retrieved Files</source>
         <translation>Nire Berreskuraturiko Agiriak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1352"/>
+        <location filename="../UI/settings.ui" line="1379"/>
         <source>about: blank</source>
         <translation>Honi buruz: hutsik</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1345"/>
+        <location filename="../UI/settings.ui" line="1372"/>
         <source>P2P E-Mail URL</source>
         <translation>P2P Post@ URL-a</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1537"/>
+        <location filename="../UI/settings.ui" line="1564"/>
         <source>Browsing Proxy Configuration</source>
         <translation>Nabigatzaile Proxy Itxurapena</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1885"/>
+        <location filename="../UI/settings.ui" line="1912"/>
         <source>Web 2.0 Browsing (I2P)</source>
         <translation>Web 2.0 Nabigazioa (I2P)</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2018"/>
+        <location filename="../UI/settings.ui" line="2045"/>
         <source>Download Proxy Configuration</source>
         <translation>Jeisketa Proxy Itxurapena</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1607"/>
-        <location filename="../UI/settings.ui" line="2088"/>
+        <location filename="../UI/settings.ui" line="1634"/>
+        <location filename="../UI/settings.ui" line="2115"/>
         <source>FTP</source>
         <translation>FTP</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1739"/>
-        <location filename="../UI/settings.ui" line="2220"/>
+        <location filename="../UI/settings.ui" line="1766"/>
+        <location filename="../UI/settings.ui" line="2247"/>
         <source>HTTP</source>
         <translation>HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2366"/>
+        <location filename="../UI/settings.ui" line="2393"/>
         <source>Web 2.0 Downloads (I2P)</source>
         <translation>Web 2.0 Jeisketak (I2P)</translation>
     </message>
@@ -3222,101 +3226,95 @@
         <translation>Segurtasuna</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="899"/>
+        <location filename="../UI/settings.ui" line="926"/>
         <source>Text Size Multiplier</source>
         <translation>Idazki Neurri Biderkatzailea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1043"/>
+        <location filename="../UI/settings.ui" line="1070"/>
         <source>Remember the last</source>
         <translation>Gogoratu azken</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1057"/>
+        <location filename="../UI/settings.ui" line="1084"/>
         <source>recently-closed tab(s).</source>
         <translation>berriki-itxitako hegatsa(k).</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1131"/>
+        <location filename="../UI/settings.ui" line="1158"/>
         <source> MiB</source>
         <translation> MiB</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1150"/>
+        <location filename="../UI/settings.ui" line="1177"/>
         <source>50 MiB of content is cached.</source>
         <translation>50 MiB eduki katxeatuta.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1575"/>
-        <location filename="../UI/settings.ui" line="2056"/>
+        <location filename="../UI/settings.ui" line="1602"/>
+        <location filename="../UI/settings.ui" line="2083"/>
         <source>None</source>
         <translation>Ezer ez</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1585"/>
-        <location filename="../UI/settings.ui" line="2066"/>
+        <location filename="../UI/settings.ui" line="1612"/>
+        <location filename="../UI/settings.ui" line="2093"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1595"/>
-        <location filename="../UI/settings.ui" line="2076"/>
+        <location filename="../UI/settings.ui" line="1622"/>
+        <location filename="../UI/settings.ui" line="2103"/>
         <source>Manual</source>
         <translation>Eskuz</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2553"/>
+        <location filename="../UI/settings.ui" line="2580"/>
         <source>Show authentication information after launch. Disabling this feature will inhibit session restoration.</source>
         <translation>Erakutsi egiaztapen argibideak abiarazi ondoren. Ezaugarri hau ezgaitzeak saioaren leheneratzea eragotziko du.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2835"/>
         <source>Re-encode bookmarks.</source>
-        <translation>Ber-kodeatu lastermarkak.</translation>
+        <translation type="vanished">Ber-kodeatu lastermarkak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2855"/>
         <source>Re-encode cookies.</source>
-        <translation>Ber-kodeatu cookieak.</translation>
+        <translation type="vanished">Ber-kodeatu cookieak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2875"/>
         <source>Re-encode downloads.</source>
-        <translation>Ber-kodeatu jeisketak.</translation>
+        <translation type="vanished">Ber-kodeatu jeisketak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2775"/>
         <source>Re-encode exceptions.</source>
-        <translation>Ber-kodeatu salbuespenak.</translation>
+        <translation type="vanished">Ber-kodeatu salbuespenak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2585"/>
+        <location filename="../UI/settings.ui" line="2612"/>
         <source>If a passphrase is not set, bookmarks, cache, cookies, download information, exceptions information, favicons, and history entries will be encoded with a temporary passphrase. As a result, the data will not be available in future sessions. A passphrase will also enable session restoration.</source>
         <translation>Sar-esaldi bat ez badago ezarrita, lastermarkak, katxea, cookieak, jeisketa argibideak, salbuespen argibideak, ikurrak, eta historia sarrerak aldibaterako sar-esaldi batekin kodeatuko dira. Ondorioz, datuak ez dira eskuragarriak izango etorkizuneko saioetan. Sar-esaldi batek saio leheneratzea ere gaituko du.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2614"/>
+        <location filename="../UI/settings.ui" line="2641"/>
         <source>Cipher Type</source>
         <translation>Zifraketa Mota</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2788"/>
         <source>Re-encode favicons.</source>
-        <translation>Ber-kodeatu ikurrak.</translation>
+        <translation type="vanished">Ber-kodeatu ikurrak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2801"/>
         <source>Re-encode history.</source>
-        <translation>Ber-kodeatu historia.</translation>
+        <translation type="vanished">Ber-kodeatu historia.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2648"/>
+        <location filename="../UI/settings.ui" line="2675"/>
         <source>Hash Type</source>
         <translation>Hash Mota</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2984"/>
-        <location filename="../UI/settings.ui" line="2990"/>
+        <location filename="../UI/settings.ui" line="3011"/>
+        <location filename="../UI/settings.ui" line="3017"/>
         <source>Passphrase</source>
         <translation>Sar-esaldia</translation>
     </message>
@@ -3333,44 +3331,44 @@
         <translation type="obsolete">Onartu Cookieak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3314"/>
+        <location filename="../UI/settings.ui" line="3341"/>
         <source>Please note that the below setting affects preserved sites.</source>
         <translation>Mesedez ohartu azpiko ezarpenak gordetako guneei eragiten diela.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3323"/>
+        <location filename="../UI/settings.ui" line="3350"/>
         <source>Cookies should be</source>
         <translation>Cookieak izan behar dira</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3334"/>
+        <location filename="../UI/settings.ui" line="3361"/>
         <source>deleted upon exit</source>
         <translation>ezabatuak irtetzerakoan</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3352"/>
-        <location filename="../UI/settings.ui" line="3433"/>
-        <location filename="../UI/settings.ui" line="3491"/>
+        <location filename="../UI/settings.ui" line="3379"/>
+        <location filename="../UI/settings.ui" line="3460"/>
+        <location filename="../UI/settings.ui" line="3518"/>
         <source>.</source>
         <translation>.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3381"/>
+        <location filename="../UI/settings.ui" line="3408"/>
         <source>Please note that preserved sites will not be discarded.</source>
         <translation>Mesedez ohartu gordetako guneak ezin direla baztertu.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3396"/>
+        <location filename="../UI/settings.ui" line="3423"/>
         <source>Sweep cookies every</source>
         <translation>Garbitu cookieak behin</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3420"/>
+        <location filename="../UI/settings.ui" line="3447"/>
         <source>hour(s)</source>
         <translation>ordu</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3425"/>
+        <location filename="../UI/settings.ui" line="3452"/>
         <source>minute(s)</source>
         <translation>minutu</translation>
     </message>
@@ -3379,12 +3377,12 @@
         <translation type="obsolete">Gune-Arteko Eskript Aditzea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3518"/>
+        <location filename="../UI/settings.ui" line="3545"/>
         <source>Display the IP address of the current Web site.</source>
         <translation>Erakutsi oraingo Web gunearen IP helbidea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3717"/>
+        <location filename="../UI/settings.ui" line="3744"/>
         <source>JavaScript</source>
         <translation>JavaScript</translation>
     </message>
@@ -3393,26 +3391,26 @@
         <translation type="obsolete">Onartu alertak.</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="3642"/>
         <source>Suppress HTTP Redirect</source>
-        <translation type="obsolete">Ezeztatu HTTP Berzuzenketa</translation>
+        <translation type="unfinished">Ezeztatu HTTP Berzuzenketa</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4204"/>
+        <location filename="../UI/settings.ui" line="4231"/>
         <source>Always show the tab bar.</source>
         <translation>Betik erakutsi hegats barra.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4214"/>
         <source>Close the selected tab via middle mouse button click.</source>
-        <translation>Itxi hautaturiko hegatsa saguaren erdiko botoia klikatuz.</translation>
+        <translation type="vanished">Itxi hautaturiko hegatsa saguaren erdiko botoia klikatuz.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4268"/>
+        <location filename="../UI/settings.ui" line="4295"/>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation>Ohartarazi edukia aldatuta duen orrialde bat utzi behar badut.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4292"/>
+        <location filename="../UI/settings.ui" line="4319"/>
         <source>HTTP Status Codes</source>
         <translation>HTTP Egoera Kodeak</translation>
     </message>
@@ -3441,21 +3439,20 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4318"/>
+        <location filename="../UI/settings.ui" line="4345"/>
         <source>Periodically purge memory caches.</source>
         <translation>Aldizka garbitu oroimen katxeak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4345"/>
         <source>Spatial navigation.</source>
-        <translation>Nabigazio espaziala.</translation>
+        <translation type="vanished">Nabigazio espaziala.</translation>
     </message>
     <message>
         <source>Close the Downloads window after the downloads have completed.</source>
         <translation type="obsolete">Itxi Jeisketa leihoa jeisketak osatu ondoren.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4244"/>
+        <location filename="../UI/settings.ui" line="4271"/>
         <source>Open links in new tabs instead of new windows.</source>
         <translation>Ireki loturak hegats berri batean leiho berri batean ordez.</translation>
     </message>
@@ -3466,38 +3463,37 @@
         <translation>Leihoak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1119"/>
+        <location filename="../UI/settings.ui" line="1146"/>
         <source>Disk Cache</source>
         <translation>Diska Katxea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1373"/>
+        <location filename="../UI/settings.ui" line="1400"/>
         <source>IRC Channel</source>
         <translation>IRC Bidea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1380"/>
+        <location filename="../UI/settings.ui" line="1407"/>
         <source>https://webchat.freenode.net?channels=dooble</source>
         <translation>https://webchat.freenode.net?channels=dooble</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1897"/>
-        <location filename="../UI/settings.ui" line="2378"/>
+        <location filename="../UI/settings.ui" line="1924"/>
+        <location filename="../UI/settings.ui" line="2405"/>
         <source>The following settings override the above settings if the requested URL&apos;s host ends in i2p.</source>
         <translation>Hurrengo ezarpenek gaineko ezarpenak ezeztatzen dituzte eskaturiko URL-aren hostalaria i2p-an amaitzen bada.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2595"/>
+        <location filename="../UI/settings.ui" line="2622"/>
         <source>If the Modify Passphrase button is disabled, the passphrase that you provided does not match the stored passphrase or a passphrase has not been set.</source>
         <translation>Aldatu Sar-esaldia botoia ezgaituta badago, zuk emaniko sar-esaldia ez da bat etorriko biltegiraturiko sar-esaldiarekin edo ez da ezarri sar-esaldi bat.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2902"/>
         <source>Re-encode cache.</source>
-        <translation>Ber-kodeatu katxea.</translation>
+        <translation type="vanished">Ber-kodeatu katxea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2682"/>
+        <location filename="../UI/settings.ui" line="2709"/>
         <source>Iteration Count</source>
         <translation>Berrizte Zenbatekoa</translation>
     </message>
@@ -3506,17 +3502,17 @@
         <translation type="obsolete">MB</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1474"/>
+        <location filename="../UI/settings.ui" line="1501"/>
         <source>Spot-On Shared Database</source>
         <translation>Spot-On Elkarbanatze Datubasea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1483"/>
+        <location filename="../UI/settings.ui" line="1510"/>
         <source>shared.db</source>
         <translation>shared.db</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1503"/>
+        <location filename="../UI/settings.ui" line="1530"/>
         <source>The Home URL will be opened after the Home button is pressed. To open the first thirteen URLs, please press the Home button while pressing the Control key.</source>
         <translation>Etxeko URL-a irekiko da Etxea botoia sakatutakoan. Lehen hamahiru URL-ak irekitzeko, mesedez sakatu Etxea botoia Kontrol tekla sakatuta edukiz.</translation>
     </message>
@@ -3525,46 +3521,66 @@
         <translation type="obsolete">Erakutsi egiaztapen argibideak abiarazi ondoren.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2722"/>
+        <location filename="../UI/settings.ui" line="2749"/>
         <source>Salt Length</source>
         <translation>Gazi Luzera</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2962"/>
+        <location filename="../UI/settings.ui" line="2989"/>
         <source>&amp;Modify Passphrase</source>
         <translation>&amp;Aldatu Sar-esaldia</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3018"/>
         <source>Minimum of 16 characters.</source>
-        <translation>Gutxienez 16 hizki.</translation>
+        <translation type="vanished">Gutxienez 16 hizki.</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="3102"/>
         <source>Always HTTPS</source>
-        <translation type="obsolete">Betik HTTPS</translation>
+        <translation type="unfinished">Betik HTTPS</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3227"/>
+        <location filename="../UI/settings.ui" line="3139"/>
+        <source>Automatically Load Web Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="3179"/>
+        <source>Block Pop-up Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="3219"/>
+        <source>Block Third-party Frame Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="3254"/>
         <source>Cookies</source>
         <translation>Cookieak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3464"/>
+        <location filename="../UI/settings.ui" line="3305"/>
+        <source>Accept HTTP Cookies Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="3491"/>
         <source>Third-party cookies should be</source>
         <translation>Hirugarrenen cookieak izan behar dira</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3478"/>
+        <location filename="../UI/settings.ui" line="3505"/>
         <source>always allowed</source>
         <translation>betik ahalbidetuta</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3483"/>
+        <location filename="../UI/settings.ui" line="3510"/>
         <source>always blocked</source>
         <translation>betik blokeatuta</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3564"/>
+        <location filename="../UI/settings.ui" line="3591"/>
         <source>HTTP Headers</source>
         <translation>HTTP Idazburuak</translation>
     </message>
@@ -3573,111 +3589,126 @@
         <translation type="obsolete">EZAZT (Ez Aztarnatu)</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="3682"/>
         <source>Suppress HTTP Referrer</source>
-        <translation type="obsolete">Ezeztatu HTTP Xehetasuna</translation>
+        <translation type="unfinished">Ezeztatu HTTP Xehetasuna</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3778"/>
+        <location filename="../UI/settings.ui" line="3805"/>
         <source>Accept dialog confirmations.</source>
         <translation>Onartu elkarrizketa baieztapenak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3812"/>
+        <location filename="../UI/settings.ui" line="3839"/>
         <source>Enable cross-site script auditing.</source>
         <translation>Gaitu gune-arteko eskript aditzea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3839"/>
+        <location filename="../UI/settings.ui" line="3866"/>
         <source>Allow hiding of the menu bar.</source>
         <translation>Ahalbidetu menu barra ezkutatzea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3849"/>
+        <location filename="../UI/settings.ui" line="3876"/>
         <source>Allow hiding of the status bar.</source>
         <translation>Ahalbidetu egoera barra ezkutatzea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3856"/>
+        <location filename="../UI/settings.ui" line="3883"/>
         <source>Allow hiding of the location tool bar.</source>
         <translation>Ahalbidetu helbide barra ezkutatzea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3863"/>
+        <location filename="../UI/settings.ui" line="3890"/>
         <source>Accept dialog alerts.</source>
         <translation>Onartu elkarrizketa alertak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3873"/>
+        <location filename="../UI/settings.ui" line="3900"/>
         <source>Accept dialog prompts.</source>
         <translation>Onartu elkarrizketa galekizunak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3888"/>
+        <location filename="../UI/settings.ui" line="3915"/>
         <source>Local documents are allowed to access other local URLs.</source>
         <translation>Tokiko agiriak ahalbidetuta daude beste tokiko URL-tara saribdea izateko.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3915"/>
+        <location filename="../UI/settings.ui" line="3942"/>
         <source>Notify me of console events and exceptions.</source>
         <translation>Jakinarazi kontsolaren gertaera eta salbuespenak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3975"/>
+        <location filename="../UI/settings.ui" line="4002"/>
         <source>Record favicon data to favicons.db.</source>
         <translation>Grabatu ikurraren datuak favicons.db-an.</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="4033"/>
         <source>Session Restoration</source>
-        <translation type="obsolete">Saio Leheneratzea</translation>
+        <translation type="unfinished">Saio Leheneratzea</translation>
     </message>
     <message>
         <source>Sight SSL Errors</source>
         <translation type="obsolete">Behatu SSL Akatsak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4049"/>
+        <location filename="../UI/settings.ui" line="4076"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A relaxed setting allows Dooble to ignore SSL errors that are generated by third-party elements. A strict setting instructs Dooble to observe all SSL errors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ezarpen lasai batek Dooble-ek hirugarrenen elementuek eragindako SSL akatsak ezikustea ahalbidetzen du. Ezarpen zorrotz batek Dooble-ek SSL akats guztiak begiratzeko agintzen du.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="4130"/>
+        <source>Speedy Network Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="4154"/>
         <source>Web Plugins</source>
-        <translation type="obsolete">Web Pluginak</translation>
+        <translation type="unfinished">Web Pluginak</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="4178"/>
         <source>WebGL</source>
-        <translation type="obsolete">WebGL</translation>
+        <translation type="unfinished">WebGL</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4194"/>
+        <location filename="../UI/settings.ui" line="4221"/>
         <source>After creating a new tab from a Web link, switch to it immediately.</source>
         <translation>Web batetik hegats berri bat sortzerakoan, aldatu bertara berehala.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4234"/>
+        <location filename="../UI/settings.ui" line="4241"/>
+        <source>Close the selected tab via a middle mouse button click.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="4261"/>
         <source>Display the Dooble Desktop in new windows.</source>
         <translation>Erakutsi Dooble Mahaigaina leiho berrietan.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4254"/>
+        <location filename="../UI/settings.ui" line="4281"/>
         <source>New tabs should be added at the end of the tab bar.</source>
         <translation>Hegats berriak hegats barraren azkenean gehitu behar dira.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4261"/>
+        <location filename="../UI/settings.ui" line="4288"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Ohartarazi edukia aldatuta duen orrialde bat itxi aurretik.</translation>
     </message>
     <message>
+        <location filename="../UI/settings.ui" line="4372"/>
         <source>Spatial Navigation</source>
-        <translation type="obsolete">Nabigazio Espaziala</translation>
+        <translation type="unfinished">Nabigazio Espaziala</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4384"/>
+        <location filename="../UI/settings.ui" line="4411"/>
         <source>Center child windows.</source>
         <translation>Erdiratu kume leihoak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4398"/>
+        <location filename="../UI/settings.ui" line="4425"/>
         <source>Open user windows as new processes.</source>
         <translation>Ireki erabiltzaile leihoak prozesu berri bezala.</translation>
     </message>
@@ -3706,20 +3737,20 @@
         <translation>WebKita</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="691"/>
-        <location filename="../UI/settings.ui" line="722"/>
-        <location filename="../UI/settings.ui" line="2909"/>
-        <location filename="../UI/settings.ui" line="2916"/>
-        <location filename="../UI/settings.ui" line="2923"/>
-        <location filename="../UI/settings.ui" line="2930"/>
-        <location filename="../UI/settings.ui" line="2937"/>
-        <location filename="../UI/settings.ui" line="2944"/>
-        <location filename="../UI/settings.ui" line="2951"/>
+        <location filename="../UI/settings.ui" line="718"/>
+        <location filename="../UI/settings.ui" line="749"/>
+        <location filename="../UI/settings.ui" line="2936"/>
+        <location filename="../UI/settings.ui" line="2943"/>
+        <location filename="../UI/settings.ui" line="2950"/>
+        <location filename="../UI/settings.ui" line="2957"/>
+        <location filename="../UI/settings.ui" line="2964"/>
+        <location filename="../UI/settings.ui" line="2971"/>
+        <location filename="../UI/settings.ui" line="2978"/>
         <source>Size</source>
         <translation>Neurria</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="537"/>
+        <location filename="../UI/settings.ui" line="564"/>
         <source>Theme</source>
         <translation>Azalgaia</translation>
     </message>
@@ -3730,331 +3761,340 @@
         <translation>Aplikazioak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="297"/>
+        <location filename="../UI/settings.ui" line="299"/>
+        <source>&amp;Automatically Record Discovered Suffixes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="324"/>
         <source>Please note that modifications to the actions are automatically saved.</source>
         <translation>Mesedez ohartu ekintzen aldaketak berezgaitasunez gordetzen direla.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="329"/>
+        <location filename="../UI/settings.ui" line="356"/>
         <source>File Suffix</source>
         <translation>Agiri Aurrizkia</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="334"/>
+        <location filename="../UI/settings.ui" line="361"/>
         <source>Action</source>
         <translation>Ekintza</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="366"/>
+        <location filename="../UI/settings.ui" line="393"/>
         <source>Display Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="380"/>
+        <location filename="../UI/settings.ui" line="407"/>
         <source>High Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="385"/>
+        <location filename="../UI/settings.ui" line="412"/>
         <source>Highest Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="390"/>
+        <location filename="../UI/settings.ui" line="417"/>
         <source>Idle Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="395"/>
+        <location filename="../UI/settings.ui" line="422"/>
         <source>Inherit Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="400"/>
+        <location filename="../UI/settings.ui" line="427"/>
         <source>Low Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="405"/>
+        <location filename="../UI/settings.ui" line="432"/>
         <source>Lowest Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="410"/>
+        <location filename="../UI/settings.ui" line="437"/>
         <source>Normal Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="415"/>
+        <location filename="../UI/settings.ui" line="442"/>
         <source>Time-Critical Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="440"/>
+        <location filename="../UI/settings.ui" line="467"/>
         <source>Location Toolbar Icon Size</source>
         <translation>Kokaleku Tresnabarra Ikur Neurria</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="461"/>
+        <location filename="../UI/settings.ui" line="488"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="486"/>
+        <location filename="../UI/settings.ui" line="513"/>
         <source>Tab Bar Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="497"/>
+        <location filename="../UI/settings.ui" line="524"/>
         <source>East</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="502"/>
+        <location filename="../UI/settings.ui" line="529"/>
         <source>North</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="507"/>
+        <location filename="../UI/settings.ui" line="534"/>
         <source>South</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="512"/>
+        <location filename="../UI/settings.ui" line="539"/>
         <source>West</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="581"/>
+        <location filename="../UI/settings.ui" line="608"/>
         <source>Web Fonts</source>
         <translation>Web Hizkiak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="587"/>
+        <location filename="../UI/settings.ui" line="614"/>
         <source>Fixed</source>
         <translation>Zuzenduta</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="604"/>
+        <location filename="../UI/settings.ui" line="631"/>
         <source>Default</source>
         <translation>Berezkoa</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="621"/>
+        <location filename="../UI/settings.ui" line="648"/>
         <source>Cursive</source>
         <translation>Etzana</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="638"/>
+        <location filename="../UI/settings.ui" line="665"/>
         <source>Sans Serif</source>
         <translation>Sans Serif</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="655"/>
+        <location filename="../UI/settings.ui" line="682"/>
         <source>Serif</source>
         <translation>Serif</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="672"/>
+        <location filename="../UI/settings.ui" line="699"/>
         <source>Fantasy</source>
         <translation>Fantasia</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="753"/>
+        <location filename="../UI/settings.ui" line="780"/>
         <source>Minimum Size</source>
         <translation>Neurri Txikiena</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="767"/>
+        <location filename="../UI/settings.ui" line="794"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="772"/>
+        <location filename="../UI/settings.ui" line="799"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="777"/>
+        <location filename="../UI/settings.ui" line="804"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="782"/>
+        <location filename="../UI/settings.ui" line="809"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="787"/>
+        <location filename="../UI/settings.ui" line="814"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="792"/>
+        <location filename="../UI/settings.ui" line="819"/>
         <source>11</source>
         <translation>11</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="797"/>
+        <location filename="../UI/settings.ui" line="824"/>
         <source>12</source>
         <translation>12</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="802"/>
+        <location filename="../UI/settings.ui" line="829"/>
         <source>13</source>
         <translation>13</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="807"/>
+        <location filename="../UI/settings.ui" line="834"/>
         <source>14</source>
         <translation>14</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="812"/>
+        <location filename="../UI/settings.ui" line="839"/>
         <source>15</source>
         <translation>15</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="832"/>
+        <location filename="../UI/settings.ui" line="859"/>
         <source>19</source>
         <translation>19</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="842"/>
+        <location filename="../UI/settings.ui" line="869"/>
         <source>21</source>
         <translation>21</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="852"/>
+        <location filename="../UI/settings.ui" line="879"/>
         <source>23</source>
         <translation>23</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="862"/>
+        <location filename="../UI/settings.ui" line="889"/>
         <source>25</source>
         <translation>25</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1546"/>
-        <location filename="../UI/settings.ui" line="2027"/>
+        <location filename="../UI/settings.ui" line="1573"/>
+        <location filename="../UI/settings.ui" line="2054"/>
         <source>&amp;Ignore for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1552"/>
-        <location filename="../UI/settings.ui" line="2033"/>
+        <location filename="../UI/settings.ui" line="1579"/>
+        <location filename="../UI/settings.ui" line="2060"/>
         <source>Examples: .nasa.gov, localhost, 192.168.178.0/24.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="2529"/>
+        <location filename="../UI/settings.ui" line="2556"/>
         <source>Disable all encrypted database writes.</source>
         <translation>Ezgaitu enkriptaturiko datubase idazketa guztiak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3278"/>
-        <source>Accept HTTP cookies only.</source>
+        <location filename="../UI/settings.ui" line="3045"/>
+        <source>Minimum of 16 characters, please.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3542"/>
+        <location filename="../UI/settings.ui" line="3569"/>
         <source>Enable hyperlink auditing. Proper understanding of this option is required.</source>
         <translation>Gaitu hiperlotura aditzea. Aukera honen ongi ulertzea beharrezkoa da.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3731"/>
+        <location filename="../UI/settings.ui" line="3605"/>
+        <source>Do Not Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="3758"/>
         <source>Stagnant Scripts Default Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3745"/>
+        <location filename="../UI/settings.ui" line="3772"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3750"/>
+        <location filename="../UI/settings.ui" line="3777"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3755"/>
+        <location filename="../UI/settings.ui" line="3782"/>
         <source>Prompt</source>
         <translation type="unfinished">Galdetu</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3942"/>
+        <location filename="../UI/settings.ui" line="3969"/>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4039"/>
+        <location filename="../UI/settings.ui" line="4066"/>
         <source>Sight SSL errors. Assume a</source>
         <translation>Begiratu SSL akatsak. Hartu</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4059"/>
+        <location filename="../UI/settings.ui" line="4086"/>
         <source>relaxed</source>
         <translation>lasaia</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4064"/>
+        <location filename="../UI/settings.ui" line="4091"/>
         <source>strict</source>
         <translation>zorrotza</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4072"/>
+        <location filename="../UI/settings.ui" line="4099"/>
         <source>approach.</source>
         <translation>hurbila.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4103"/>
         <source>Speedy network protocol.</source>
-        <translation>Bizkortu sare protokoloa.</translation>
+        <translation type="vanished">Bizkortu sare protokoloa.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4305"/>
+        <location filename="../UI/settings.ui" line="4332"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation>Erakutsi Dooble-en Akats Orrialdea</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4391"/>
+        <location filename="../UI/settings.ui" line="4418"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation>Itxi Jeisketa leihoa jeisketak osatu ondoren.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4405"/>
+        <location filename="../UI/settings.ui" line="4432"/>
         <source>Use native file dialogs.</source>
         <translation>Eerabili jatorrizkoa agiri elkarrizketak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="451"/>
-        <location filename="../UI/settings.ui" line="817"/>
+        <location filename="../UI/settings.ui" line="478"/>
+        <location filename="../UI/settings.ui" line="844"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="822"/>
+        <location filename="../UI/settings.ui" line="849"/>
         <source>17</source>
         <translation>17</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="827"/>
+        <location filename="../UI/settings.ui" line="854"/>
         <source>18</source>
         <translation>18</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="837"/>
+        <location filename="../UI/settings.ui" line="864"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="847"/>
+        <location filename="../UI/settings.ui" line="874"/>
         <source>22</source>
         <translation>22</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="456"/>
-        <location filename="../UI/settings.ui" line="857"/>
+        <location filename="../UI/settings.ui" line="483"/>
+        <location filename="../UI/settings.ui" line="884"/>
         <source>24</source>
         <translation>24</translation>
     </message>
@@ -4065,87 +4105,122 @@
         <translation>Historia</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="963"/>
+        <location filename="../UI/settings.ui" line="990"/>
         <source>Remember browsing history of the last</source>
         <translation>Gogoratu nabigazio historiaren azken</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1010"/>
+        <location filename="../UI/settings.ui" line="1037"/>
         <source>Remember download history.</source>
         <translation>Gogoratu jeisketa historia.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1619"/>
-        <location filename="../UI/settings.ui" line="1863"/>
-        <location filename="../UI/settings.ui" line="1909"/>
-        <location filename="../UI/settings.ui" line="2100"/>
-        <location filename="../UI/settings.ui" line="2232"/>
-        <location filename="../UI/settings.ui" line="2390"/>
+        <location filename="../UI/settings.ui" line="1646"/>
+        <location filename="../UI/settings.ui" line="1890"/>
+        <location filename="../UI/settings.ui" line="1936"/>
+        <location filename="../UI/settings.ui" line="2127"/>
+        <location filename="../UI/settings.ui" line="2259"/>
+        <location filename="../UI/settings.ui" line="2417"/>
         <source>Type</source>
         <translation>Mota</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1635"/>
-        <location filename="../UI/settings.ui" line="1757"/>
-        <location filename="../UI/settings.ui" line="1930"/>
-        <location filename="../UI/settings.ui" line="2116"/>
-        <location filename="../UI/settings.ui" line="2248"/>
-        <location filename="../UI/settings.ui" line="2411"/>
+        <location filename="../UI/settings.ui" line="1662"/>
+        <location filename="../UI/settings.ui" line="1784"/>
+        <location filename="../UI/settings.ui" line="1957"/>
+        <location filename="../UI/settings.ui" line="2143"/>
+        <location filename="../UI/settings.ui" line="2275"/>
+        <location filename="../UI/settings.ui" line="2438"/>
         <source>Socks5</source>
         <translation>Socks5</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1762"/>
-        <location filename="../UI/settings.ui" line="1925"/>
-        <location filename="../UI/settings.ui" line="2253"/>
-        <location filename="../UI/settings.ui" line="2406"/>
+        <location filename="../UI/settings.ui" line="1789"/>
+        <location filename="../UI/settings.ui" line="1952"/>
+        <location filename="../UI/settings.ui" line="2280"/>
+        <location filename="../UI/settings.ui" line="2433"/>
         <source>Http</source>
         <translation>Http</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1658"/>
-        <location filename="../UI/settings.ui" line="1785"/>
-        <location filename="../UI/settings.ui" line="1953"/>
-        <location filename="../UI/settings.ui" line="2139"/>
-        <location filename="../UI/settings.ui" line="2276"/>
-        <location filename="../UI/settings.ui" line="2434"/>
+        <location filename="../UI/settings.ui" line="1685"/>
+        <location filename="../UI/settings.ui" line="1812"/>
+        <location filename="../UI/settings.ui" line="1980"/>
+        <location filename="../UI/settings.ui" line="2166"/>
+        <location filename="../UI/settings.ui" line="2303"/>
+        <location filename="../UI/settings.ui" line="2461"/>
         <source>Host Name</source>
         <translation>Hostalari Izena</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1677"/>
-        <location filename="../UI/settings.ui" line="1804"/>
-        <location filename="../UI/settings.ui" line="1975"/>
-        <location filename="../UI/settings.ui" line="2158"/>
-        <location filename="../UI/settings.ui" line="2295"/>
-        <location filename="../UI/settings.ui" line="2456"/>
+        <location filename="../UI/settings.ui" line="1704"/>
+        <location filename="../UI/settings.ui" line="1831"/>
+        <location filename="../UI/settings.ui" line="2002"/>
+        <location filename="../UI/settings.ui" line="2185"/>
+        <location filename="../UI/settings.ui" line="2322"/>
+        <location filename="../UI/settings.ui" line="2483"/>
         <source>Port</source>
         <translation>Ataka</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1699"/>
-        <location filename="../UI/settings.ui" line="1826"/>
-        <location filename="../UI/settings.ui" line="2180"/>
-        <location filename="../UI/settings.ui" line="2317"/>
+        <location filename="../UI/settings.ui" line="1726"/>
+        <location filename="../UI/settings.ui" line="1853"/>
+        <location filename="../UI/settings.ui" line="2207"/>
+        <location filename="../UI/settings.ui" line="2344"/>
         <source>User Name</source>
         <translation>Erabiltzaile Izena</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1716"/>
-        <location filename="../UI/settings.ui" line="1843"/>
-        <location filename="../UI/settings.ui" line="2197"/>
-        <location filename="../UI/settings.ui" line="2334"/>
+        <location filename="../UI/settings.ui" line="1743"/>
+        <location filename="../UI/settings.ui" line="1870"/>
+        <location filename="../UI/settings.ui" line="2224"/>
+        <location filename="../UI/settings.ui" line="2361"/>
         <source>Password</source>
         <translation>Sar-hitza</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1968"/>
-        <location filename="../UI/settings.ui" line="2449"/>
+        <location filename="../UI/settings.ui" line="1995"/>
+        <location filename="../UI/settings.ui" line="2476"/>
         <source>127.0.0.1</source>
         <translation>127.0.0.1</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3004"/>
+        <location filename="../UI/settings.ui" line="2802"/>
+        <source>Re-encode Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="2815"/>
+        <source>Re-encode Favicons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="2828"/>
+        <source>Re-encode History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="2862"/>
+        <source>Re-encode Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="2882"/>
+        <source>Re-encode Cookies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="2902"/>
+        <source>Re-encode Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="2929"/>
+        <source>Re-encode Cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/settings.ui" line="3031"/>
         <source>Passphrase Confirmation</source>
         <translation>Sar-esaldi Baieztapena</translation>
     </message>
@@ -4154,78 +4229,72 @@
         <translation type="obsolete">Blokeatu Oharleihoak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="1095"/>
-        <location filename="../UI/settings.ui" line="3082"/>
-        <location filename="../UI/settings.ui" line="3122"/>
-        <location filename="../UI/settings.ui" line="3162"/>
-        <location filename="../UI/settings.ui" line="3202"/>
-        <location filename="../UI/settings.ui" line="3241"/>
-        <location filename="../UI/settings.ui" line="3285"/>
-        <location filename="../UI/settings.ui" line="3585"/>
-        <location filename="../UI/settings.ui" line="3625"/>
-        <location filename="../UI/settings.ui" line="3665"/>
-        <location filename="../UI/settings.ui" line="3790"/>
-        <location filename="../UI/settings.ui" line="4079"/>
+        <location filename="../UI/settings.ui" line="1122"/>
+        <location filename="../UI/settings.ui" line="3109"/>
+        <location filename="../UI/settings.ui" line="3149"/>
+        <location filename="../UI/settings.ui" line="3189"/>
+        <location filename="../UI/settings.ui" line="3229"/>
+        <location filename="../UI/settings.ui" line="3268"/>
+        <location filename="../UI/settings.ui" line="3312"/>
+        <location filename="../UI/settings.ui" line="3612"/>
+        <location filename="../UI/settings.ui" line="3652"/>
+        <location filename="../UI/settings.ui" line="3692"/>
+        <location filename="../UI/settings.ui" line="3817"/>
+        <location filename="../UI/settings.ui" line="4106"/>
         <source>&amp;Exceptions</source>
         <translation>&amp;Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3075"/>
         <source>Always HTTPS.</source>
-        <translation>Betik HTTPS.</translation>
+        <translation type="vanished">Betik HTTPS.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3112"/>
         <source>Automatically load images.</source>
-        <translation>Berezgaitasunez gertatu irudiak.</translation>
+        <translation type="vanished">Berezgaitasunez gertatu irudiak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3152"/>
         <source>Block pop-up windows.</source>
-        <translation>Blokeatu ohar-leihoak.</translation>
+        <translation type="vanished">Blokeatu ohar-leihoak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3192"/>
         <source>Block third-party frame content.</source>
-        <translation>Blokeatu hirugarrenen frame edukiak.</translation>
+        <translation type="vanished">Blokeatu hirugarrenen frame edukiak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3339"/>
+        <location filename="../UI/settings.ui" line="3366"/>
         <source>preserved forever</source>
         <translation>gordeak betirako</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3344"/>
+        <location filename="../UI/settings.ui" line="3371"/>
         <source>preserved until they expire</source>
         <translation>gordeak epemugara arte</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3615"/>
         <source>Suppress HTTP redirect.</source>
-        <translation>Ezeztatu HTTP berzuzenketak.</translation>
+        <translation type="vanished">Ezeztatu HTTP berzuzenketak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3655"/>
         <source>Suppress HTTP referrer.</source>
-        <translation>Ezeztatu HTTP xehetasunak.</translation>
+        <translation type="vanished">Ezeztatu HTTP xehetasunak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3695"/>
+        <location filename="../UI/settings.ui" line="3722"/>
         <source>Java</source>
         <translation>Java</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3822"/>
+        <location filename="../UI/settings.ui" line="3849"/>
         <source>Allow opening of new windows.</source>
         <translation>Ahalbidetu leiho berriak irekitzea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3832"/>
+        <location filename="../UI/settings.ui" line="3859"/>
         <source>Accept geometry-change requests.</source>
         <translation>Onartu geometria-aldaketa eskaerak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="986"/>
+        <location filename="../UI/settings.ui" line="1013"/>
         <source>day(s).</source>
         <translation>eguna(k).</translation>
     </message>
@@ -4236,27 +4305,23 @@
         <translation>Hegatsak</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="3578"/>
         <source>Do not track me.</source>
-        <translation>Ez nazazu aztarnatu.</translation>
+        <translation type="vanished">Ez nazazu aztarnatu.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4006"/>
         <source>Session restoration.</source>
-        <translation>Saio leheneratzea.</translation>
+        <translation type="vanished">Saio leheneratzea.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4127"/>
         <source>Web plugins.</source>
-        <translation>Web pluginak.</translation>
+        <translation type="vanished">Web pluginak.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4151"/>
         <source>WebGL.</source>
-        <translation>WebGL.</translation>
+        <translation type="vanished">WebGL.</translation>
     </message>
     <message>
-        <location filename="../UI/settings.ui" line="4224"/>
+        <location filename="../UI/settings.ui" line="4251"/>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation>Sortu hegats berri bat klik-bikoitza eginez hegats barran.</translation>
     </message>
