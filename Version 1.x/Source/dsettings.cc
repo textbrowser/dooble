@@ -2830,10 +2830,38 @@ void dsettings::slotCustomContextMenuRequested(const QPoint &point)
     {
       QMenu menu(this);
 
+      menu.addAction(tr("Delete &All File Suffixes"),
+		     this, SLOT(slotDeleteAllSuffixes(void)));
       menu.addAction(tr("&Delete File Suffix"),
 		     this, SLOT(slotDeleteSuffix(void)));
       menu.exec(ui.applicationsTable->mapToGlobal(point));
     }
+}
+
+void dsettings::slotDeleteAllSuffixes(void)
+{
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "applications");
+
+    db.setDatabaseName(dooble::s_homePath + QDir::separator() +
+		       "applications.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	if(query.exec("DELETE FROM applications"))
+	  {
+	    dooble::s_applicationsActions.clear();
+	    ui.applicationsTable->clearContents();
+	    ui.applicationsTable->setRowCount(0);
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase("applications");
 }
 
 void dsettings::slotDeleteSuffix(void)
