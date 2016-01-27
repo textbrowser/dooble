@@ -2825,15 +2825,17 @@ void dsettings::slotUpdateApplication(const QString &suffix,
 
 void dsettings::slotCustomContextMenuRequested(const QPoint &point)
 {
-  if(sender() == ui.applicationsTable &&
-     ui.applicationsTable->currentRow() != -1)
+  if(sender() == ui.applicationsTable)
     {
       QMenu menu(this);
 
       menu.addAction(tr("Delete &All File Suffixes"),
 		     this, SLOT(slotDeleteAllSuffixes(void)));
-      menu.addAction(tr("&Delete File Suffix"),
-		     this, SLOT(slotDeleteSuffix(void)));
+
+      if(ui.applicationsTable->currentRow() != -1)
+	menu.addAction(tr("&Delete File Suffix"),
+		       this, SLOT(slotDeleteSuffix(void)));
+
       menu.exec(ui.applicationsTable->mapToGlobal(point));
     }
 }

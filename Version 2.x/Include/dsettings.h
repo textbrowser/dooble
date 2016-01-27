@@ -75,6 +75,7 @@ class dsettings: public QMainWindow
   void slotClicked(QAbstractButton *button);
   void slotCookieTimerTimeChanged(int index);
   void slotCustomContextMenuRequested(const QPoint &point);
+  void slotDeleteAllSuffixes(void);
   void slotDeleteSuffix(void);
   void slotEnablePassphrase(void);
   void slotGroupBoxClicked(bool checked);
