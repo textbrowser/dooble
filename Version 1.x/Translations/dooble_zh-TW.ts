@@ -1366,6 +1366,10 @@ p, li { white-space: pre-wrap; }
         <source>Web Plugins</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete &amp;All File Suffixes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dsettingshomelinewidget</name>

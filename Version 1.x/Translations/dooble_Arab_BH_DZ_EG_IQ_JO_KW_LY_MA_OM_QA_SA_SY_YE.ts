@@ -1721,12 +1721,17 @@
         <translation>متصفح الويب دووبل: اختيار تطبيق</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2833"/>
+        <location filename="../Source/dsettings.cc" line="2832"/>
+        <source>Delete &amp;All File Suffixes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dsettings.cc" line="2836"/>
         <source>&amp;Delete File Suffix</source>
         <translation>ا&amp;حذف صيغة الملف</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2894"/>
+        <location filename="../Source/dsettings.cc" line="2924"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
