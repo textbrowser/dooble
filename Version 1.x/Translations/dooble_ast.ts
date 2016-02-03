@@ -1011,10 +1011,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1036,14 +1032,6 @@
     </message>
     <message>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add-on Load Failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add-on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2133,10 +2121,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;JavaScript</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Addons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
