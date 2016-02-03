@@ -45,14 +45,10 @@
 #include "dspoton.h"
 #include "dsslcipherswindow.h"
 #include "dview.h"
-#include "plugin-spec/extension.h"
-#include "plugin-spec/signal-agent.h"
 #include "ui_mainWindow.h"
 #include "ui_statusBar.h"
 
 #define DOOBLE_VERSION_STR "2.05"
-
-using namespace simpleplugin;
 
 class QCloseEvent;
 class dbookmarkspopup;
@@ -60,7 +56,6 @@ class dbookmarkswindow;
 class dclearcontainers;
 class derrorlog;
 class dnetworkcache;
-class dplugintab;
 
 class dooble: public QMainWindow
 {
@@ -143,28 +138,11 @@ class dooble: public QMainWindow
   dhistorysidebar *m_historySideBar;
   quint64 m_id;
 
-  struct PluginRec
-  {
-    PluginRec(dplugintab *t = 0, const QString &fn = QString("")):
-      fileName(fn), tab(t)
-    {
-    }
-
-    QString fileName;
-    dplugintab *tab;
-  };
-
-  QMap<QString, int> pluginLoadCount;
-  QMap<QWidget *, PluginRec> pluginMap;
-  Extension *loadPlugin(const QString &pluginName);
-
   QMenu *createPopupMenu(void)
   {
     return 0;
   }
 
-  QString pluginFileName(const QString &plugName);
-  QString pluginPath(void);
   bool event(QEvent *event);
   bool promptForPassphrase(const bool override = false);
   bool warnAboutDownloads(void);
@@ -174,7 +152,6 @@ class dooble: public QMainWindow
     (const QUrl &url, dcookies *cookies,
      const QHash<QWebEngineSettings::WebAttribute, bool> &webAttributes);
   dview *newTab(dview *p);
-  void addPluginAction(const QString &pluginFileName);
   void cleanupBeforeExit(void);
   void clearHistoryWidgets(void);
   void closeDesktop(void);
@@ -201,7 +178,6 @@ class dooble: public QMainWindow
   void saveHistoryThread(const QList<QVariant> &list);
   void saveSettings(void);
   void setUrlHandler(dooble *d);
-  void startPlugin(const QString &pluginName);
   void unsetUrlHandler(void);
 
  protected:
@@ -281,8 +257,6 @@ class dooble: public QMainWindow
   void slotOpenUrl(void);
   void slotOpenUrlsFromDrop(const QList<QUrl> &list);
   void slotPaste(void);
-  void slotPluginAction(QAction *plugAction);
-  void slotPluginExiting(Extension *plugin, int status);
   void slotPrint(void);
   void slotPrintPreview(void);
   void slotPrintRequested(QWebEnginePage *frame);
@@ -291,7 +265,6 @@ class dooble: public QMainWindow
 				       const QString &proxyHost);
   void slotQuit(void);
   void slotQuitAndRestart(void);
-  void slotRefreshPlugins(void);
   void slotReload(void);
   void slotReloadTab(const int index);
   void slotReopenClosedTab(void);
@@ -308,7 +281,6 @@ class dooble: public QMainWindow
   void slotSetIcons(void);
   void slotSetTabBarVisible(const bool state);
   void slotSettingsChanged(void);
-  void slotShowAddOns(void);
   void slotShowApplicationCookies(void);
   void slotShowBookmarks(void);
   void slotShowDesktopTab(const bool state = true);

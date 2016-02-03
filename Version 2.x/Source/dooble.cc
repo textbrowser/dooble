@@ -44,7 +44,6 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QPaintEngine>
-#include <QPluginLoader>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
@@ -90,15 +89,12 @@ extern "C"
 #include "dnetworkcache.h"
 #include "dooble.h"
 #include "dpagesourcewindow.h"
-#include "dplugintab.h"
 #include "dprintfromcommandprompt.h"
 #include "dreinstatedooble.h"
 #include "dwebpage.h"
 #include "dwebview.h"
 #include "ui_passphrasePrompt.h"
 #include "ui_passwordPrompt.h"
-
-using namespace simpleplugin;
 
 quint64 dooble::s_instances = 0;
 QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
@@ -1355,12 +1351,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  this, SLOT(slotShowHistorySideBar(bool)));
   connect(ui.action_Authenticate, SIGNAL(triggered(void)),
 	  this, SLOT(slotAuthenticate(void)));
-  connect(ui.actionRefreshPlugins, SIGNAL(triggered()),
-          this, SLOT(slotRefreshPlugins()));
   connect(ui.menuToolButton, SIGNAL(clicked(void)),
 	  ui.menuToolButton, SLOT(showMenu(void)));
-  connect(ui.menu_Plugins, SIGNAL (triggered(QAction *)),
-          this, SLOT(slotPluginAction(QAction *)));
   connect(ui.tabWidget, SIGNAL(urlsReceivedViaDrop(const QList<QUrl> &)),
 	  this, SLOT(slotOpenUrlsFromDrop(const QList<QUrl> &)));
   connect(ui.tabWidget, SIGNAL(openLinkInNewTab(const QUrl &)),
@@ -2010,8 +2002,6 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("windowIcon").toString()));
   ui.action_Authenticate->setIcon
     (QIcon(settings.value("mainWindow/authenticate_Action").toString()));
-  ui.actionRefreshPlugins->setIcon
-    (QIcon(settings.value("mainWindow/actionRefreshPlugins").toString()));
   ui.actionError_Log->setIcon
     (QIcon(settings.value("mainWindow/actionError_Log").toString()));
   ui.action_Clear_Containers->setIcon
@@ -3683,8 +3673,7 @@ void dooble::closeTab(const int index)
 
   if(count == 1 && s_instances <= 1)
     {
-      if(qobject_cast<dplugintab *> (ui.tabWidget->widget(index)) ||
-	 qobject_cast<dreinstatedooble *> (ui.tabWidget->widget(index)))
+      if(qobject_cast<dreinstatedooble *> (ui.tabWidget->widget(index)))
 	/*
 	** We need to create a new tab, otherwise Dooble will exit.
 	*/
@@ -3698,8 +3687,7 @@ void dooble::closeTab(const int index)
     }
   else if(count == 1)
     {
-      if(qobject_cast<dplugintab *> (ui.tabWidget->widget(index)) ||
-	 qobject_cast<dreinstatedooble *> (ui.tabWidget->widget(index)))
+      if(qobject_cast<dreinstatedooble *> (ui.tabWidget->widget(index)))
 	/*
 	** We need to create a new tab, otherwise Dooble will exit.
 	*/
@@ -3866,14 +3854,6 @@ void dooble::closeTab(const int index)
 
 	  if(reinstateWidget)
 	    reinstateWidget->deleteLater();
-	}
-      else
-	{
-	  dplugintab *plugTab = qobject_cast<dplugintab *>
-	    (ui.tabWidget->widget(index));
-
-	  if(plugTab)
-	    slotPluginExiting(plugTab->extension(), 0);
 	}
 
       count -= 1;
@@ -6509,12 +6489,7 @@ void dooble::prepareTabsMenu(void)
 	    action = reinstateWidget->tabAction();
 	  else
 	    {
-	      dplugintab *plugTab = qobject_cast<dplugintab *>
-		(ui.tabWidget->widget(i));
-
-	      if(plugTab)
-		action = plugTab->tabAction();
-	      else if(m_desktopWidget)
+	      if(m_desktopWidget)
 		action = m_desktopWidget->tabAction();
 	    }
 	}
@@ -6524,275 +6499,6 @@ void dooble::prepareTabsMenu(void)
     }
 
   ui.menu_Tabs->setEnabled(!ui.menu_Tabs->actions().isEmpty());
-}
-
-QString dooble::pluginPath(void)
-{
-  return QCoreApplication::applicationDirPath() + QDir::separator() +
-    "Plugins";
-}
-
-void dooble::slotRefreshPlugins(void)
-{
-  QList<QAction *> actions = ui.menu_Plugins->actions();
-
-  for(int a = 0; a < actions.count(); a++)
-    {
-      if(actions.at(a)->objectName() != "actionRefreshPlugins" &&
-	 !actions.at(a)->isSeparator())
-        {
-          QAction *dead = actions.at(a);
-
-	  dmisc::logError(QString("dooble::slotRefreshPlugins(): "
-				  "Removing action %1.").
-			  arg(dead->objectName()));
-          ui.menu_Plugins->removeAction(dead);
-          dead->deleteLater();
-        }
-    }
-
-  QDir plugDir(pluginPath());
-  QStringList fileList(plugDir.entryList(QDir::Files |
-					 QDir::Readable |
-					 QDir::NoDotAndDotDot,
-					 QDir::IgnoreCase));
-
-  for(int p = 0; p < fileList.count(); p++)
-    {
-      QString fileName(fileList.at(p));
-
-      if(!pluginLoadCount.contains(fileName))
-	pluginLoadCount[fileName] = 0;
-
-      if(pluginLoadCount[fileName] < 1 && fileName != "README")
-	addPluginAction(fileName);
-    }
-}
-
-void dooble::addPluginAction(const QString &pluginFileName)
-{
-  QAction *plugAction = new QAction(this);
-  QStringList ops("start");
-
-  ops.append(pluginFileName);
-  plugAction->setData(ops);
-
-  QString title(pluginFileName);
-
-  if(title.startsWith("lib"))
-    title.remove(0, 3);
-
-  title = title.section(".", 0, 0);
-
-  if(!title.isEmpty())
-    title[0] = title.at(0).toUpper();
-
-  plugAction->setText(tr("Start %1").arg(title));
-  ui.menu_Plugins->addAction(plugAction);
-}
-
-void dooble::slotPluginAction(QAction *plugAction)
-{
-  if(!plugAction)
-    return;
-
-  QVariant plugData = plugAction->data();
-
-  if(plugData.type() != QVariant::StringList)
-    return;
-
-  QStringList ops = plugData.toStringList();
-
-  if(ops.count() != 2)
-    return;
-
-  if(ops.at(0) == "start")
-    startPlugin(ops.at(1));
-}
-
-Extension *dooble::loadPlugin(const QString &plugName)
-{
-  QPluginLoader loader;
-  QString filename(plugName);
-  Extension *loadedPlugin(0);
-  QString fullName(pluginPath() + QDir::separator() + filename);
-
-  loader.setFileName(fullName);
-
-  if(loader.load())
-    {
-      loadedPlugin = qobject_cast<Extension *> (loader.instance());
-
-      if(loadedPlugin)
-	/*
-	** Let's see if any other Dooble window contains this plugin.
-	** If it does, purge the appropriate tab.
-	*/
-
-	foreach(QWidget *widget, QApplication::topLevelWidgets())
-	  if(qobject_cast<dooble *> (widget))
-	    {
-	      bool done = false;
-	      dooble *d = qobject_cast<dooble *> (widget);
-
-	      if(d && d != this)
-		for(int i = 0; i < d->ui.tabWidget->count(); i++)
-		  {
-		    dplugintab *plugTab = qobject_cast<dplugintab *>
-		      (d->ui.tabWidget->widget(i));
-
-		    if(plugTab && plugTab->extension() == loadedPlugin)
-		      {
-			d->slotPluginExiting(plugTab->extension(), 0);
-			done = true;
-			break;
-		      }
-		  }
-
-	      if(done)
-		break;
-	    }
-    }
-  else
-    QMessageBox::information
-      (this, tr("Add-on Load Failed"), loader.errorString());
-
-  return loadedPlugin;
-}
-
-void dooble::startPlugin(const QString &plugName)
-{
-  Extension *plugin = loadPlugin(plugName);
-
-  if(plugin)
-    {
-      dplugintab *plugTab = new dplugintab(plugin, this);
-
-      pluginLoadCount[plugName] += 1;
-      pluginMap[plugin->widget()] = PluginRec(plugTab, plugName);
-
-      if(plugTab)
-        {
-	  QIcon icon(plugTab->icon());
-
-	  if(icon.isNull())
-	    icon = dmisc::iconForUrl(QUrl());
-
-	  QString title(tr("Add-on"));
-
-          ui.tabWidget->addTab(plugTab, icon, title);
-	  ui.tabWidget->setTabsClosable(ui.tabWidget->count() > 1);
-          ui.tabWidget->setCurrentWidget(plugTab);
-	  ui.tabWidget->setTabToolTip(ui.tabWidget->currentIndex(), title);
-
-	  QAction *action = new QAction(icon, title, this);
-
-	  action->setData(title);
-	  connect(action, SIGNAL(triggered(void)), this,
-		  SLOT(slotShowAddOns(void)));
-	  plugTab->setTabAction(action);
-	  prepareTabsMenu();
-
-          SignalAgent *agent = plugin->agent();
-
-          if(agent)
-            {
-              connect(agent, SIGNAL(exiting(Extension *, int)),
-		      this, SLOT(slotPluginExiting(Extension *, int)));
-              connect(agent, SIGNAL(iconChange(Extension *)),
-		      plugTab, SLOT(slotIconChange(Extension *)));
-              connect(agent, SIGNAL(titleChange(Extension *)),
-		      plugTab, SLOT(slotTitleChange(Extension *)));
-              connect(plugTab, SIGNAL(iconChange(QWidget *, const QIcon &)),
-		      ui.tabWidget,
-		      SLOT(slotIconChange(QWidget *, const QIcon &)));
-              connect(plugTab,
-		      SIGNAL(titleChange(QWidget *, const QString &)),
-		      ui.tabWidget,
-		      SLOT(slotTitleChange(QWidget *, const QString &)));
-            }
-        }
-
-      slotRefreshPlugins();
-      plugin->run();
-
-      /*
-      ** After a plugin is started, we need to update icons and titles.
-      ** The plugin should emit some signals when their icons and titles
-      ** change. The following may not produce the intended results.
-      */
-
-      if(plugTab)
-	{
-	  QIcon icon(plugTab->icon());
-
-	  if(icon.isNull())
-	    icon = dmisc::iconForUrl(QUrl());
-
-	  QString title(tr("Add-on"));
-
-	  if(ui.tabWidget->indexOf(plugTab) > -1)
-	    {
-	      ui.tabWidget->setTabIcon
-		(ui.tabWidget->indexOf(plugTab), icon);
-	      ui.tabWidget->setTabText
-		(ui.tabWidget->indexOf(plugTab), title);
-	      ui.tabWidget->setTabToolTip
-		(ui.tabWidget->indexOf(plugTab), title);
-	    }
-
-	  QAction *action = plugTab->tabAction();
-
-	  if(action)
-	    action->setData(title);
-
-	  prepareTabsMenu();
-	}
-    }
-}
-
-void dooble::slotPluginExiting(Extension *plugin, int status)
-{
-  Q_UNUSED(status);
-
-  if(plugin)
-    {
-      QWidget *plugWidget = plugin->widget();
-      int count = ui.tabWidget->count();
-
-      if(plugWidget)
-	{
-	  dplugintab *plugTab = pluginMap[plugWidget].tab;
-
-	  pluginLoadCount[pluginMap[plugWidget].fileName] -= 1;
-
-	  if(plugTab)
-	    {
-	      int index = ui.tabWidget->indexOf(plugTab);
-
-	      if(index >= 0)
-		{
-		  count -= 1;
-		  ui.tabWidget->removeTab(index);
-		}
-	    }
-
-	  pluginMap.remove(plugWidget);
-	}
-
-      /*
-      ** Close this window if the plugin tab was the only
-      ** remaining tab.
-      */
-
-      if(count > 0)
-	{
-	  slotRefreshPlugins();
-	  prepareTabsMenu();
-	}
-      else
-	close();
-    }
 }
 
 void dooble::slotClearRecentlyClosedTabs(void)
@@ -7104,26 +6810,6 @@ void dooble::slotShowRestoreSessionTab(void)
     ui.tabWidget->setCurrentWidget(reinstateWidget);
 }
 
-void dooble::slotShowAddOns(void)
-{
-  QAction *action = qobject_cast<QAction *> (sender());
-
-  if(!action)
-    return;
-
-  for(int i = 0; i < ui.tabWidget->count(); i++)
-    {
-      dplugintab *plugTab = qobject_cast<dplugintab *>
-	(ui.tabWidget->widget(i));
-
-      if(plugTab && action == plugTab->tabAction())
-	{
-	  ui.tabWidget->setCurrentIndex(i);
-	  break;
-	}
-    }
-}
-
 void dooble::remindUserToSetPassphrase(void)
 {
   bool showAuthentication = s_settings.value
@@ -7230,7 +6916,6 @@ void dooble::slotOffline(bool state)
 void dooble::showEvent(QShowEvent *event)
 {
   QMainWindow::showEvent(event);
-  slotRefreshPlugins();
 }
 
 bool dooble::event(QEvent *event)
@@ -7703,7 +7388,6 @@ void dooble::prepareMenuBar(const bool state)
       ui.menuToolButton->menu()->addMenu(ui.menu_Tabs);
       ui.menuToolButton->menu()->addMenu(ui.viewMenu);
       ui.menuToolButton->menu()->addMenu(ui.menu_Windows);
-      ui.menuToolButton->menu()->addMenu(ui.menu_Plugins);
       ui.menuToolButton->menu()->addMenu(ui.menu_About);
     }
 

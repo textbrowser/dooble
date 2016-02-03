@@ -101,7 +101,6 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dnetworkcache.h \
 		  Include/dooble.h \
                   Include/dpagesourcewindow.h \
-                  Include/dplugintab.h \
 		  Include/dprintfromcommandprompt.h \
 		  Include/dreinstatedooble.h \
 		  Include/dsearchwidget.h \
@@ -114,11 +113,6 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dview.h \
                   Include/dwebpage.h \
 		  Include/dwebview.h
-
-PLUGIN_HEADERS =  plugin-spec/extension.h \
-                  plugin-spec/signal-agent.h
-
-HEADERS += $$(PLUGIN_HEADERS)
 
 SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dbookmarkstree.cc \
@@ -148,7 +142,6 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dnetworkcache.cc \
 		  Source/dooble.cc \
                   Source/dpagesourcewindow.cc \
-                  Source/dplugintab.cc \
 		  Source/dreinstatedooble.cc \
 		  Source/dsearchwidget.cc \
                   Source/dsettings.cc \

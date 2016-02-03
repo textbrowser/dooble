@@ -95,7 +95,6 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dnetworkcache.h \
 		  Include/dooble.h \
 		  Include/dpagesourcewindow.h \
-                  Include/dplugintab.h \
 		  Include/dprintfromcommandprompt.h \
 		  Include/dreinstatedooble.h \
                   Include/dsearchwidget.h \
@@ -108,11 +107,6 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dview.h \
                   Include/dwebpage.h \
 		  Include/dwebview.h
-
-PLUGIN_HEADERS =  plugin-spec/extension.h \
-                  plugin-spec/signal-agent.h
-
-HEADERS += $$(PLUGIN_HEADERS)
 
 SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dbookmarkstree.cc \
@@ -142,7 +136,6 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dnetworkcache.cc \
 		  Source/dooble.cc \
 		  Source/dpagesourcewindow.cc \
-                  Source/dplugintab.cc \
 		  Source/dreinstatedooble.cc \
                   Source/dsearchwidget.cc \
                   Source/dsettings.cc \
@@ -257,10 +250,6 @@ lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.freebsd.pro
 lrelease.path           = .
 lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.freebsd.pro
 lupdate.path            = .
-pluginsdir.path         = /usr/local/dooble/Plugins/dooble
-pluginsdir.files        = Plugins/README
-plugspec.path           = /usr/local/include/dooble/plugin-spec
-plugspec.files          = plugin-spec/*.h
 postinstall.path	= /usr/local/dooble
 postinstall.extra	= find /usr/local/dooble -name .svn -exec rm -rf {} \\; 2>/dev/null; echo
 tab.path		= /usr/local/dooble
@@ -279,6 +268,4 @@ INSTALLS	= dooble_sh \
                   dooble \
                   desktop \
                   desktopicon \
-                  pluginsdir \
-                  plugspec \
                   postinstall
