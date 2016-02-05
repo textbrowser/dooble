@@ -548,6 +548,7 @@ int main(int argc, char *argv[])
     thread->setPriority(QThread::Priority(priority));
 
   settings.remove("mainWindow/showLocationToolBar");
+  settings.remove("settingsWindow/javaEnabled");
   settings.remove("vidalia/hostName");
   settings.remove("vidalia/isConnected");
   settings.remove("vidalia/port");
@@ -592,8 +593,7 @@ int main(int argc, char *argv[])
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::DeveloperExtrasEnabled, true);
   QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::JavaEnabled,
-     dooble::s_settings.value("settingsWindow/javaEnabled", false).toBool());
+    (QWebSettings::JavaEnabled, false);
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::JavascriptEnabled,
      dooble::s_settings.value("settingsWindow/javascriptEnabled",

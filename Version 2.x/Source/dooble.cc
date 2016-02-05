@@ -482,6 +482,7 @@ int main(int argc, char *argv[])
     thread->setPriority(QThread::Priority(priority));
 
   settings.remove("mainWindow/showLocationToolBar");
+  settings.remove("settingsWindow/javaEnabled");
   settings.remove("vidalia/hostName");
   settings.remove("vidalia/isConnected");
   settings.remove("vidalia/port");

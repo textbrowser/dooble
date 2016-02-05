@@ -754,8 +754,6 @@ void dsettings::exec(dooble *parent)
 	  SIGNAL(currentIndexChanged(int)),
 	  this,
 	  SLOT(slotIconsPreview(void)));
-  ui.javaCheckBox->setChecked
-    (dooble::s_settings.value("settingsWindow/javaEnabled", false).toBool());
   ui.javascriptGroupBox->setChecked
     (dooble::s_settings.value("settingsWindow/javascriptEnabled", false).
      toBool());
@@ -1593,8 +1591,6 @@ void dsettings::slotClicked(QAbstractButton *button)
 			ui.ircLineEdit->text().trimmed());
       settings.setValue("settingsWindow/p2pUrl",
 			ui.p2pLineEdit->text().trimmed());
-      settings.setValue("settingsWindow/javaEnabled",
-			ui.javaCheckBox->isChecked());
       settings.setValue("settingsWindow/javascriptEnabled",
 			ui.javascriptGroupBox->isChecked());
       settings.setValue("settingsWindow/javascriptAllowNewWindows",
