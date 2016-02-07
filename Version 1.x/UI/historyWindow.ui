@@ -113,6 +113,20 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="deletePushButton">
+        <property name="text">
+         <string>&amp;Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deleteAllPushButton">
+        <property name="text">
+         <string>Delete &amp;All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="sharePushButton">
         <property name="toolTip">
          <string>Submit URL(s) to Spot-On.</string>
@@ -126,20 +140,6 @@
        <widget class="QPushButton" name="closePushButton">
         <property name="text">
          <string>&amp;Close</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="deletePushButton">
-        <property name="text">
-         <string>&amp;Delete</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="deleteAllPushButton">
-        <property name="text">
-         <string>Delete &amp;All</string>
         </property>
        </widget>
       </item>
@@ -160,8 +160,6 @@
   <tabstop>treeWidget</tabstop>
   <tabstop>history</tabstop>
   <tabstop>searchLineEdit</tabstop>
-  <tabstop>sharePushButton</tabstop>
-  <tabstop>closePushButton</tabstop>
   <tabstop>deletePushButton</tabstop>
   <tabstop>deleteAllPushButton</tabstop>
  </tabstops>

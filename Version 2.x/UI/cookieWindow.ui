@@ -77,13 +77,6 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closePushButton">
-        <property name="text">
-         <string>&amp;Close</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="deletePushButton">
         <property name="text">
          <string>&amp;Delete</string>
@@ -103,6 +96,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="closePushButton">
+        <property name="text">
+         <string>&amp;Close</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -119,7 +119,6 @@
  <tabstops>
   <tabstop>cookies</tabstop>
   <tabstop>searchLineEdit</tabstop>
-  <tabstop>closePushButton</tabstop>
   <tabstop>deletePushButton</tabstop>
   <tabstop>deleteAllPushButton</tabstop>
  </tabstops>

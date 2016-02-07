@@ -321,17 +321,17 @@
         <translation>Dooble Web Browser: Cookies</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="82"/>
+        <location filename="../UI/cookieWindow.ui" line="102"/>
         <source>&amp;Close</source>
         <translation>&amp;Cerrar</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="89"/>
+        <location filename="../UI/cookieWindow.ui" line="82"/>
         <source>&amp;Delete</source>
         <translation>&amp;Eliminar</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="96"/>
+        <location filename="../UI/cookieWindow.ui" line="89"/>
         <source>Delete &amp;All</source>
         <translation>Eliminar &amp;Todo</translation>
     </message>
@@ -1518,17 +1518,17 @@
         <translation>URL de Descarga</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="236"/>
+        <location filename="../UI/downloadWindow.ui" line="229"/>
         <source>Enter &amp;URL</source>
         <translation>Introducir &amp;URL</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="229"/>
+        <location filename="../UI/downloadWindow.ui" line="222"/>
         <source>Clear &amp;List</source>
         <translation>Limpiar &amp;Lista</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="222"/>
+        <location filename="../UI/downloadWindow.ui" line="236"/>
         <source>&amp;Close</source>
         <translation>&amp;Cerrar</translation>
     </message>
@@ -2167,17 +2167,17 @@
         <translation type="unfinished">Buscar Excepciones</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="178"/>
+        <location filename="../UI/exceptionsWindow.ui" line="192"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Cerrar</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="185"/>
+        <location filename="../UI/exceptionsWindow.ui" line="178"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">Eliminar</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="192"/>
+        <location filename="../UI/exceptionsWindow.ui" line="185"/>
         <source>Delete &amp;All</source>
         <translation type="unfinished">Eliminar Todo</translation>
     </message>
@@ -2241,27 +2241,27 @@
         <translation type="unfinished">Fecha</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="118"/>
+        <location filename="../UI/historyWindow.ui" line="132"/>
         <source>Submit URL(s) to Spot-On.</source>
         <translation type="unfinished">Subir URL(s) a Spot-On.</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="121"/>
+        <location filename="../UI/historyWindow.ui" line="135"/>
         <source>&amp;Spot-On</source>
         <translation type="unfinished">Spot-On</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="128"/>
+        <location filename="../UI/historyWindow.ui" line="142"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Cerrar</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="135"/>
+        <location filename="../UI/historyWindow.ui" line="118"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">Eliminar</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="142"/>
+        <location filename="../UI/historyWindow.ui" line="125"/>
         <source>Delete &amp;All</source>
         <translation type="unfinished">Eliminar Todo</translation>
     </message>

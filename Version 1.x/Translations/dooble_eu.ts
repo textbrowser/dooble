@@ -493,17 +493,17 @@
         <translation>Dooble Web Nabigatzailea: Cookieak</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="82"/>
+        <location filename="../UI/cookieWindow.ui" line="102"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="89"/>
+        <location filename="../UI/cookieWindow.ui" line="82"/>
         <source>&amp;Delete</source>
         <translation>E&amp;zabatu</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="96"/>
+        <location filename="../UI/cookieWindow.ui" line="89"/>
         <source>Delete &amp;All</source>
         <translation>Ezabatu &amp;Denak</translation>
     </message>
@@ -1630,17 +1630,17 @@
         <translation>Jeisketa &amp;URL-a</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="236"/>
+        <location filename="../UI/downloadWindow.ui" line="229"/>
         <source>Enter &amp;URL</source>
         <translation>&amp;Sartu URL-a</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="229"/>
+        <location filename="../UI/downloadWindow.ui" line="222"/>
         <source>Clear &amp;List</source>
         <translation>G&amp;arbitu Zerrenda</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="222"/>
+        <location filename="../UI/downloadWindow.ui" line="236"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
@@ -2236,17 +2236,17 @@
         <translation>Bilatu Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="178"/>
+        <location filename="../UI/exceptionsWindow.ui" line="192"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="185"/>
+        <location filename="../UI/exceptionsWindow.ui" line="178"/>
         <source>&amp;Delete</source>
         <translation>E&amp;zabatu</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="192"/>
+        <location filename="../UI/exceptionsWindow.ui" line="185"/>
         <source>Delete &amp;All</source>
         <translation>Ezabatu &amp;Denak</translation>
     </message>
@@ -2310,27 +2310,27 @@
         <translation>Eguna</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="118"/>
+        <location filename="../UI/historyWindow.ui" line="132"/>
         <source>Submit URL(s) to Spot-On.</source>
         <translation>Aurkeztu URL-a(k) Spot-Onen.</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="121"/>
+        <location filename="../UI/historyWindow.ui" line="135"/>
         <source>&amp;Spot-On</source>
         <translation>&amp;Spot-On</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="128"/>
+        <location filename="../UI/historyWindow.ui" line="142"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="135"/>
+        <location filename="../UI/historyWindow.ui" line="118"/>
         <source>&amp;Delete</source>
         <translation>E&amp;zabatu</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="142"/>
+        <location filename="../UI/historyWindow.ui" line="125"/>
         <source>Delete &amp;All</source>
         <translation>Ezabatu &amp;Denak</translation>
     </message>

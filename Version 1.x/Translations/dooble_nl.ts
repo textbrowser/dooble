@@ -301,17 +301,17 @@
         <translation>Dooble Web Browser:Cookies</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="82"/>
+        <location filename="../UI/cookieWindow.ui" line="102"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluit</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="89"/>
+        <location filename="../UI/cookieWindow.ui" line="82"/>
         <source>&amp;Delete</source>
         <translation>&amp;Verwijder</translation>
     </message>
     <message>
-        <location filename="../UI/cookieWindow.ui" line="96"/>
+        <location filename="../UI/cookieWindow.ui" line="89"/>
         <source>Delete &amp;All</source>
         <translation>Verwijder &amp;Alles</translation>
     </message>
@@ -1481,17 +1481,17 @@
         <translation>D&amp;ownload URL</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="236"/>
+        <location filename="../UI/downloadWindow.ui" line="229"/>
         <source>Enter &amp;URL</source>
         <translation>Voer &amp;URL in</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="229"/>
+        <location filename="../UI/downloadWindow.ui" line="222"/>
         <source>Clear &amp;List</source>
         <translation>Wis &amp;Lijst</translation>
     </message>
     <message>
-        <location filename="../UI/downloadWindow.ui" line="222"/>
+        <location filename="../UI/downloadWindow.ui" line="236"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluiten</translation>
     </message>
@@ -2135,17 +2135,17 @@
         <translation>Zoek Uitzonderingen</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="178"/>
+        <location filename="../UI/exceptionsWindow.ui" line="192"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluit</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="185"/>
+        <location filename="../UI/exceptionsWindow.ui" line="178"/>
         <source>&amp;Delete</source>
         <translation>&amp;Verwijder</translation>
     </message>
     <message>
-        <location filename="../UI/exceptionsWindow.ui" line="192"/>
+        <location filename="../UI/exceptionsWindow.ui" line="185"/>
         <source>Delete &amp;All</source>
         <translation>Verwijder &amp;Alles</translation>
     </message>
@@ -2209,27 +2209,27 @@
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="118"/>
+        <location filename="../UI/historyWindow.ui" line="132"/>
         <source>Submit URL(s) to Spot-On.</source>
         <translation>Verzend URL(s) naar Spot-On.</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="121"/>
+        <location filename="../UI/historyWindow.ui" line="135"/>
         <source>&amp;Spot-On</source>
         <translation>&amp;Spot-On</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="128"/>
+        <location filename="../UI/historyWindow.ui" line="142"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluiten</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="135"/>
+        <location filename="../UI/historyWindow.ui" line="118"/>
         <source>&amp;Delete</source>
         <translation>&amp;Verwijder</translation>
     </message>
     <message>
-        <location filename="../UI/historyWindow.ui" line="142"/>
+        <location filename="../UI/historyWindow.ui" line="125"/>
         <source>Delete &amp;All</source>
         <translation>Verwijder &amp;Alles</translation>
     </message>

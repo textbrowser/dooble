@@ -217,13 +217,6 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closePushButton">
-        <property name="text">
-         <string>&amp;Close</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="clearListPushButton">
         <property name="text">
          <string>Clear &amp;List</string>
@@ -234,6 +227,13 @@
        <widget class="QPushButton" name="enterUrlPushButton">
         <property name="text">
          <string>Enter &amp;URL</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="closePushButton">
+        <property name="text">
+         <string>&amp;Close</string>
         </property>
        </widget>
       </item>
@@ -258,7 +258,6 @@
   <tabstop>cancelPushButton</tabstop>
   <tabstop>downloadPushButton</tabstop>
   <tabstop>searchLineEdit</tabstop>
-  <tabstop>closePushButton</tabstop>
   <tabstop>clearListPushButton</tabstop>
   <tabstop>enterUrlPushButton</tabstop>
  </tabstops>
