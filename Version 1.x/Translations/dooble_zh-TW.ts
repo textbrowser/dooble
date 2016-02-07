@@ -2692,10 +2692,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Java</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation type="unfinished"></translation>
     </message>
