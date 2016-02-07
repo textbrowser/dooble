@@ -691,6 +691,10 @@ QIcon dmisc::iconForUrl(const QUrl &url)
 
 QByteArray dmisc::daa(dcrypt *crypt, const QByteArray &byteArray, bool *ok)
 {
+  /*
+  ** Decrypt after authenticating.
+  */
+
   if(crypt)
     return crypt->daa(byteArray, ok);
   else if(ok)
@@ -701,6 +705,10 @@ QByteArray dmisc::daa(dcrypt *crypt, const QByteArray &byteArray, bool *ok)
 
 QByteArray dmisc::daa(const QByteArray &byteArray, bool *ok)
 {
+  /*
+  ** Decrypt after authenticating.
+  */
+
   if(s_crypt)
     return s_crypt->daa(byteArray, ok);
   else if(ok)
@@ -713,6 +721,10 @@ QByteArray dmisc::etm(const QByteArray &byteArray,
 		      const bool shouldEncode,
 		      bool *ok)
 {
+  /*
+  ** Encrypt then authenticate.
+  */
+
   if(s_crypt && shouldEncode)
     return s_crypt->etm(byteArray, ok);
   else if(ok)

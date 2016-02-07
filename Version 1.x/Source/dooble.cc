@@ -5901,13 +5901,18 @@ bool dooble::promptForPassphrase(const bool override)
       else
 	{
 	  ui_p.passphraseLineEdit->clear();
-	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	  dmisc::setCipherPassphrase(QString(""), false, hashType, cipherType,
-				     iterationCount, QByteArray());
-	  QApplication::restoreOverrideCursor();
+
+	  if(!dmisc::s_crypt)
+	    {
+	      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	      dmisc::setCipherPassphrase
+		(QString(""), false, hashType, cipherType,
+		 iterationCount, QByteArray());
+	      QApplication::restoreOverrideCursor();
+	    }
 	}
     }
-  else if(!override && s_instances == 1)
+  else if(!dmisc::s_crypt && !override && s_instances == 1)
     {
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
       dmisc::setCipherPassphrase(QString(""), false, hashType, cipherType,
