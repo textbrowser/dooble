@@ -1,26 +1,32 @@
+cache()
+
+libspoton.commands = $(MAKE) -C libSpotOn library
+libspoton.depends =
+libspoton.target = libspoton.so
+
 purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
                  Source/*~ *~
 
-CONFIG		+= debug qt warn_on
+CONFIG		+= qt release warn_on
 LANGUAGE	= C++
-QT		+= network sql webkit
+QT		+= concurrent network printsupport sql \
+	           webkit webkitwidgets widgets xml
 TEMPLATE	= app
 
 # The function gcry_kdf_derive() is available in version
 # 1.5.0 of the gcrypt library.
 
-DEFINES         += DOOBLE_MINIMUM_GCRYPT_VERSION=0x010500
-
-# Please consider setting the macro DOOBLE_URLFRAME_LAYOUT_SPACING if
-# you're experiencing spacing issues with widgets in the URL widget.
-
-DEFINES		+= DOOBLE_URLFRAME_LAYOUT_SPACING=1 \
+DEFINES         += DOOBLE_LINKED_WITH_LIBSPOTON \
+                   DOOBLE_MINIMUM_GCRYPT_VERSION=0x010500 \
 		   DOOBLE_USE_PTHREADS
 
 # QMAKE_DEL_FILE is set in mkspecs/common/linux.conf.
 # Is it safe to override it?
 
-QMAKE_CLEAN     += Dooble
+# Unfortunately, the clean target assumes too much knowledge
+# about the internals of libSpotOn.
+
+QMAKE_CLEAN     += Dooble libSpotOn/*.o libSpotOn/*.so libSpotOn/test
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv \
 			  -mtune=native -pie -Os \
@@ -28,11 +34,13 @@ QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv \
 			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5
-QMAKE_DISTCLEAN += -r temp
-QMAKE_EXTRA_TARGETS = purge
+QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
+QMAKE_EXTRA_TARGETS = libspoton purge
+QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib
 
 INCLUDEPATH	+= . Include
 LIBS     	+= -LlibSpotOn -lgcrypt -lgpg-error -lspoton
+PRE_TARGETDEPS = libspoton.so
 
 MOC_DIR = temp/moc
 OBJECTS_DIR = temp/obj
@@ -240,9 +248,11 @@ icons.path		= /usr/local/dooble
 icons.files		= Icons
 images.path		= /usr/local/dooble
 images.files		= Images
-lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.arm.pro
+libspoton_install.path	= /usr/local/dooble/Lib
+libspoton_install.files = libSpotOn/libspoton.so
+lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.qt5.pro
 lrelease.path           = .
-lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.arm.pro
+lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.qt5.pro
 lupdate.path            = .
 postinstall.path	= /usr/local/dooble
 postinstall.extra	= find /usr/local/dooble -name .svn -exec rm -rf {} \\; 2>/dev/null; echo
@@ -254,6 +264,7 @@ translations.files	= Translations/*.qm
 INSTALLS	= dooble_sh \
                   icons \
                   images \
+		  libspoton_install \
 		  lupdate \
 		  lrelease \
                   tab \
