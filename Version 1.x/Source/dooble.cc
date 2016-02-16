@@ -1065,6 +1065,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   dmisc::createPreferencesDatabase();
   dmisc::populateHttpStatusCodesContainer();
   setUrlHandler(this);
+  m_gridify = false;
   m_isJavaScriptWindow = isJavaScriptWindow;
   showFindFrame = false;
   s_instances += 1;
@@ -2601,10 +2602,13 @@ void dooble::saveSettings(void)
 
       if(!isFullScreen())
 	{
-	  if(dmisc::isGnome())
-	    settings.setValue("mainWindow/geometry", geometry());
-	  else
-	    settings.setValue("mainWindow/geometry", saveGeometry());
+	  if(!m_gridify)
+	    {
+	      if(dmisc::isGnome())
+		settings.setValue("mainWindow/geometry", geometry());
+	      else
+		settings.setValue("mainWindow/geometry", saveGeometry());
+	    }
 	}
 
       settings.setValue
@@ -7870,12 +7874,14 @@ void dooble::slotGridify(void)
   if(!desktopWidget)
     return;
 
+  m_gridify = true;
+
   QRect availableGeometry(desktopWidget->availableGeometry(this));
   int columns = qMax(1, qCeil(qSqrt(n)));
   int rows = qCeil(n / qMax(1.0, static_cast<double> (columns)));
 
-  for(int i = n - 1; i > 0; i--)
-    slotOpenPageInNewWindow(i);
+  for(int i = 0; i < n - 1; i++)
+    slotOpenPageInNewWindow(0);
 
   int columnIdx = 0;
   int h = availableGeometry.height() / rows;
@@ -7889,16 +7895,28 @@ void dooble::slotGridify(void)
 
 	if(d)
 	  {
+	    d->m_gridify = true;
+
+	    QRect geometry;
+
 	    d->statusBar()->setVisible(false);
 	    d->ui.tabWidget->setBarVisible(false);
-	    d->resize(w, h);
 
 	    if(rowIdx == 0)
-	      d->move(w * columnIdx, 0);
+	      {
+		geometry.setX(availableGeometry.x() + w * columnIdx);
+		geometry.setY(availableGeometry.y());
+	      }
 	    else
-	      d->move(w * columnIdx, h * rowIdx);
+	      {
+		geometry.setX(availableGeometry.x() + w * columnIdx);
+		geometry.setY(availableGeometry.y() + h * rowIdx);
+	      }
 
 	    columnIdx += 1;
+	    geometry.setHeight(h);
+	    geometry.setWidth(w);
+	    d->setGeometry(geometry);
 
 	    if(columnIdx >= columns)
 	      {

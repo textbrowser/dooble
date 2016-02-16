@@ -133,6 +133,7 @@ class dooble: public QMainWindow
   QWidget *sbWidget;
   Ui_mainWindow ui;
   Ui_statusBar sb;
+  bool m_gridify;
   bool m_isJavaScriptWindow;
   bool showFindFrame;
   dhistorysidebar *m_historySideBar;
