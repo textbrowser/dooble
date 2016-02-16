@@ -218,6 +218,7 @@ class dooble: public QMainWindow
   void slotGoHome(void);
   void slotGoToBackHistoryItem(void);
   void slotGoToForwardHistoryItem(void);
+  void slotGridify(void);
   void slotHandleQuirkySaveDialog(int result);
   void slotHideFind(void);
   void slotHideMainMenus(void);

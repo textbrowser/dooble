@@ -595,6 +595,8 @@
     <addaction name="action_Home_Button"/>
     <addaction name="actionSearch_Widget"/>
     <addaction name="separator"/>
+    <addaction name="action_Gridify"/>
+    <addaction name="separator"/>
     <addaction name="menu_Sidebars"/>
     <addaction name="actionStatusbar"/>
     <addaction name="menu_Toolbars"/>
@@ -1088,6 +1090,11 @@
    </property>
    <property name="text">
     <string>Search &amp;Widget</string>
+   </property>
+  </action>
+  <action name="action_Gridify">
+   <property name="text">
+    <string>&amp;Gridify</string>
    </property>
   </action>
  </widget>

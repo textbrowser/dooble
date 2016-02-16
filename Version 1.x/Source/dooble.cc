@@ -1147,6 +1147,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SIGNAL(triggered(void)),
 	  this,
 	  SLOT(slotClearSpotOnSharedLinks(void)));
+  connect(ui.action_Gridify,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slotGridify(void)));
   connect(ui.action_Hide_Menubar,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -7852,4 +7856,55 @@ void dooble::slotSettingsChanged(void)
 void dooble::slotShowReminder(void)
 {
   remindUserToSetPassphrase();
+}
+
+void dooble::slotGridify(void)
+{
+  int n = 0;
+
+  if((n = ui.tabWidget->count()) == 1)
+    return;
+
+  QDesktopWidget *desktopWidget = QApplication::desktop();
+
+  if(!desktopWidget)
+    return;
+
+  QRect availableGeometry(desktopWidget->availableGeometry(this));
+  int columns = qMax(1, qCeil(qSqrt(n)));
+  int rows = qCeil(n / qMax(1.0, static_cast<double> (columns)));
+
+  for(int i = n - 1; i > 0; i--)
+    slotOpenPageInNewWindow(i);
+
+  int columnIdx = 0;
+  int h = availableGeometry.height() / rows;
+  int rowIdx = 0;
+  int w = availableGeometry.width() / columns;
+
+  foreach(QWidget *widget, QApplication::topLevelWidgets())
+    if(qobject_cast<dooble *> (widget))
+      {
+	dooble *d = qobject_cast<dooble *> (widget);
+
+	if(d)
+	  {
+	    d->statusBar()->setVisible(false);
+	    d->ui.tabWidget->setBarVisible(false);
+	    d->resize(w, h);
+
+	    if(rowIdx == 0)
+	      d->move(w * columnIdx, 0);
+	    else
+	      d->move(w * columnIdx, h * rowIdx);
+
+	    columnIdx += 1;
+
+	    if(columnIdx >= columns)
+	      {
+		rowIdx += 1;
+		columnIdx = 0;
+	      }
+	  }
+      }
 }
