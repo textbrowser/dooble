@@ -2251,6 +2251,10 @@ p, li { white-space: pre-wrap; }
         <source>Search &amp;Widget</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Gridify</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>pageSourceWindow</name>
