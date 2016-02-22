@@ -7886,6 +7886,7 @@ void dooble::slotGridify(void)
   int columnIdx = 0;
   int h = availableGeometry.height() / rows;
   int rowIdx = 0;
+  int titleHeight = frameGeometry().height() - height();
   int w = availableGeometry.width() / columns;
 
   foreach(QWidget *widget, QApplication::topLevelWidgets())
@@ -7910,11 +7911,12 @@ void dooble::slotGridify(void)
 	    else
 	      {
 		geometry.setX(availableGeometry.x() + w * columnIdx);
-		geometry.setY(availableGeometry.y() + h * rowIdx);
+		geometry.setY(availableGeometry.y() + h * rowIdx +
+			      titleHeight);
 	      }
 
 	    columnIdx += 1;
-	    geometry.setHeight(h);
+	    geometry.setHeight(h - titleHeight);
 	    geometry.setWidth(w);
 	    d->setGeometry(geometry);
 
