@@ -173,6 +173,9 @@ Remaining Items
 16.   Use unique uuids to identify tabs for restoration purposes. The
       current implementation is flawed.
 17.   Delayed downloads are not reflected.
+18.   Allow regular expressions in blocked hosts.
+19.   Review INI values. Extreme iteration count values will overflow
+      the integer container.
 
 Removed Items
 
