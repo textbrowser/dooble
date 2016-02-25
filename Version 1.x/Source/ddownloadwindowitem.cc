@@ -24,9 +24,6 @@
 ** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-
-#include <limits>
-
 #include <QByteArray>
 #include <QCryptographicHash>
 #include <QFile>
@@ -35,6 +32,8 @@
 #include <QNetworkRequest>
 #include <QSettings>
 #include <QSslConfiguration>
+
+#include <limits>
 
 #include "ddownloadwindowitem.h"
 #include "dftp.h"

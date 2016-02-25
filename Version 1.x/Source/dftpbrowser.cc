@@ -25,16 +25,16 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QMenu>
-#include <QWebFrame>
-#include <QHeaderView>
 #include <QContextMenuEvent>
 #include <QFileIconProvider>
+#include <QHeaderView>
+#include <QMenu>
+#include <QWebFrame>
 
 #include "dftp.h"
+#include "dftpbrowser.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dftpbrowser.h"
 
 dftpbrowser::dftpbrowser(QWidget *parent):QWidget(parent)
 {

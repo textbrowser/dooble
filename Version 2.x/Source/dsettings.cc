@@ -2119,8 +2119,10 @@ void dsettings::slotClicked(QAbstractButton *button)
 	       << "downloads.db"
 	       << "favicons.db"
 	       << "history.db"
+	       << "httponlyexceptions.db"
 	       << "javascriptexceptions.db"
 	       << "popupsexceptions.db"
+	       << "preferences.db"
 	       << "sslexceptions.db"
 	       << "suppresshttpredirectexceptions.db"
 	       << "suppresshttpreferrerexceptions.db";

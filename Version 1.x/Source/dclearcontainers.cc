@@ -28,11 +28,11 @@
 #include <QKeyEvent>
 #include <QSettings>
 
-#include "dooble.h"
-#include "derrorlog.h"
-#include "dnetworkcache.h"
 #include "dbookmarkswindow.h"
 #include "dclearcontainers.h"
+#include "derrorlog.h"
+#include "dnetworkcache.h"
+#include "dooble.h"
 
 dclearcontainers::dclearcontainers(void):QMainWindow()
 {

@@ -25,17 +25,17 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QMenu>
-#include <QSettings>
 #include <QClipboard>
 #include <QHideEvent>
+#include <QMenu>
 #include <QScrollBar>
+#include <QSettings>
 
-#include "dmisc.h"
-#include "dooble.h"
+#include "dbookmarkswindow.h"
 #include "dhistorymodel.h"
 #include "dhistorysidebar.h"
-#include "dbookmarkswindow.h"
+#include "dmisc.h"
+#include "dooble.h"
 
 /*
 ** The application's cursor is overridden whenever the model is about to be

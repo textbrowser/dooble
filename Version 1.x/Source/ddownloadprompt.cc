@@ -25,12 +25,12 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QSettings>
 #include <QFileDialog>
+#include <QSettings>
 
+#include "ddownloadprompt.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "ddownloadprompt.h"
 
 ddownloadprompt::ddownloadprompt(QWidget *parent,
 				 const QString &fileName,

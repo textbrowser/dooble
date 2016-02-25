@@ -25,28 +25,28 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QComboBox>
+#include <QDesktopServices>
 #include <QDir>
 #include <QFile>
+#include <QFileDialog>
+#include <QMdiSubWindow>
 #include <QMenu>
-#include <QWidget>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QProcess>
-#include <QComboBox>
 #include <QSettings>
 #include <QSizeGrip>
-#include <QFileDialog>
-#include <QMouseEvent>
-#include <QMdiSubWindow>
-#include <QDesktopServices>
+#include <QWidget>
 #if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
 #if QT_VERSION < 0x050000 && defined(Q_WS_X11)
 #include <QX11EmbedContainer>
 #endif
 #endif
 
+#include "ddesktopwidget.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "ddesktopwidget.h"
 #include "ui_applicationPropertiesWindow.h"
 
 ddesktopwidget::ddesktopwidget(QWidget *parent):QMdiArea(parent)

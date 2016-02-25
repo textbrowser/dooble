@@ -32,8 +32,8 @@
 #endif
 #include <QtCore>
 
-#include "dooble.h"
 #include "dnetworkcache.h"
+#include "dooble.h"
 
 dnetworkcache::dnetworkcache(void):QAbstractNetworkCache()
 {

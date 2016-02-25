@@ -25,21 +25,21 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDir>
-#include <QMenu>
-#include <QStack>
-#include <QSettings>
-#include <QWebFrame>
-#include <QTreeView>
-#include <QScrollBar>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QFileInfoList>
 #include <QContextMenuEvent>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileInfoList>
+#include <QMenu>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QSettings>
+#include <QStack>
+#include <QTreeView>
+#include <QWebFrame>
 
+#include "dfilemanager.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dfilemanager.h"
 
 QPointer<dfilesystemmodel> dfilemanager::tableModel = 0;
 QPointer<QFileSystemModel> dfilemanager::treeModel = 0;

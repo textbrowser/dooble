@@ -29,9 +29,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QtDebug>
 #include <QApplication>
 #include <QNetworkProxy>
+#include <QtDebug>
 
 #include "dftp.h"
 #include "dmisc.h"

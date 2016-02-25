@@ -25,10 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QUrl>
-#include <QtDebug>
 #include <QDropEvent>
 #include <QStandardItemModel>
+#include <QUrl>
+#include <QtDebug>
 
 #include "dbookmarkstree.h"
 

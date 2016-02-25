@@ -25,13 +25,13 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QSqlQuery>
 #include <QProgressBar>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 
+#include "dexceptionsmodel.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dexceptionsmodel.h"
 
 dexceptionsmodel::dexceptionsmodel(const QString &tableName):
   QStandardItemModel()

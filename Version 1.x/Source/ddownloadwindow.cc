@@ -25,22 +25,22 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDir>
+#include <QAuthenticator>
 #include <QDateTime>
+#include <QDir>
 #include <QKeyEvent>
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QProgressBar>
 #include <QSettings>
+#include <QSqlDatabase>
 #include <QSqlIndex>
 #include <QSqlQuery>
-#include <QMessageBox>
-#include <QProgressBar>
-#include <QSqlDatabase>
-#include <QNetworkReply>
-#include <QAuthenticator>
 
-#include "dmisc.h"
-#include "dooble.h"
 #include "ddownloadprompt.h"
 #include "ddownloadwindow.h"
+#include "dmisc.h"
+#include "dooble.h"
 #include "ui_passwordPrompt.h"
 
 ddownloadwindow::ddownloadwindow(void):QMainWindow()

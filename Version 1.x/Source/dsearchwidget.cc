@@ -26,9 +26,9 @@
 */
 
 #include <QMenu>
-#include <QStyle>
-#include <QSettings>
 #include <QResizeEvent>
+#include <QSettings>
+#include <QStyle>
 
 #include "dooble.h"
 #include "dsearchwidget.h"

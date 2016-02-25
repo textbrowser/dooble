@@ -26,29 +26,29 @@
 */
 
 #include <QApplication>
-#include <QDir>
-#include <QUrl>
-#include <QIcon>
-#include <QMenu>
 #include <QBuffer>
-#include <QWebPage>
+#include <QClipboard>
+#include <QDesktopServices>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileIconProvider>
+#include <QIcon>
 #include <QKeyEvent>
+#include <QMenu>
+#include <QProgressBar>
+#include <QScrollBar>
 #include <QSettings>
 #include <QSqlQuery>
-#include <QWebFrame>
-#include <QClipboard>
-#include <QScrollBar>
 #include <QSqlRecord>
-#include <QFileDialog>
-#include <QProgressBar>
-#include <QDesktopServices>
-#include <QFileIconProvider>
+#include <QUrl>
 #include <QWebElementCollection>
+#include <QWebFrame>
+#include <QWebPage>
 
-#include "dmisc.h"
-#include "dooble.h"
 #include "dbookmarkspopup.h"
 #include "dbookmarkswindow.h"
+#include "dmisc.h"
+#include "dooble.h"
 
 dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
 {

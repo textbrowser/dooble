@@ -25,23 +25,23 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDir>
-#include <QUrl>
-#include <QIcon>
-#include <QMenu>
-#include <QTimer>
 #include <QBuffer>
+#include <QClipboard>
+#include <QDir>
+#include <QIcon>
 #include <QKeyEvent>
+#include <QMenu>
+#include <QProgressBar>
+#include <QScrollBar>
 #include <QSettings>
 #include <QSqlQuery>
-#include <QClipboard>
-#include <QScrollBar>
 #include <QSqlRecord>
-#include <QProgressBar>
+#include <QTimer>
+#include <QUrl>
 
+#include "dhistory.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dhistory.h"
 
 dhistory::dhistory(void):QMainWindow()
 {

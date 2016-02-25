@@ -25,8 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QWebPage>
 #include <QWebHistory>
+#include <QWebPage>
 
 #include "dmisc.h"
 #include "dooble.h"

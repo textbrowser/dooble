@@ -25,15 +25,15 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QSettings>
-#include <QSqlQuery>
-#include <QSqlDatabase>
 #include <QFileIconProvider>
+#include <QSettings>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
-#include "dmisc.h"
-#include "dooble.h"
 #include "dbookmarkspopup.h"
 #include "dbookmarkswindow.h"
+#include "dmisc.h"
+#include "dooble.h"
 
 dbookmarkspopup::dbookmarkspopup(void):QWidget()
 {

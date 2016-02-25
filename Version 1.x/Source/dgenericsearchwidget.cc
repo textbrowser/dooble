@@ -25,12 +25,12 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QStyle>
-#include <QSettings>
 #include <QResizeEvent>
+#include <QSettings>
+#include <QStyle>
 
-#include "dooble.h"
 #include "dgenericsearchwidget.h"
+#include "dooble.h"
 
 dgenericsearchwidget::dgenericsearchwidget(QWidget *parent):QLineEdit(parent)
 {

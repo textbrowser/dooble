@@ -25,9 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QStyle>
-#include <QSettings>
 #include <QResizeEvent>
+#include <QSettings>
+#include <QStyle>
 
 #include "dmisc.h"
 #include "dooble.h"

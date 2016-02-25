@@ -25,17 +25,17 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDir>
-#include <QUrl>
-#include <QIcon>
-#include <QTimer>
 #include <QBuffer>
+#include <QDir>
+#include <QIcon>
 #include <QMimeData>
 #include <QSqlQuery>
+#include <QTimer>
+#include <QUrl>
 
+#include "dhistorymodel.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dhistorymodel.h"
 
 dhistorymodel::dhistorymodel(void):QStandardItemModel()
 {
