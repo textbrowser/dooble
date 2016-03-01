@@ -629,83 +629,83 @@
 <context>
     <name>ddownloadwindowitem</name>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="75"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="74"/>
         <source>Compute SHA-1 Hash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="77"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="76"/>
         <source>Compute SHA-256 Hash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="111"/>
-        <location filename="../Source/ddownloadwindowitem.cc" line="631"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="110"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="630"/>
         <source>Pause Download</source>
         <translation>Pausar Descarga</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="116"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="115"/>
         <source>0 kbit/s (0 MiB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="118"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="117"/>
         <source>0 KiB/s (0 MiB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="476"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="475"/>
         <source>%1 bit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="481"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="480"/>
         <source>%1 kbit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="486"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="485"/>
         <source>%1 Mbit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="492"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="491"/>
         <source>%1 Gbit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="499"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="498"/>
         <source>%1 KiB/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="509"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="508"/>
         <source>%1 bit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="513"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="512"/>
         <source>%1 kbit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="517"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="516"/>
         <source>%1 Mbit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="521"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="520"/>
         <source>%1 Gbit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="526"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="525"/>
         <source>%1 KiB/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="581"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="580"/>
         <source>Download Aborted</source>
         <translation>Descarga abortada</translation>
     </message>
@@ -722,12 +722,12 @@
         <translation type="obsolete">%1 KB/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="629"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="628"/>
         <source>Resume Download</source>
         <translation>Continuar Descarga</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="752"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="751"/>
         <source>Paused (%1)</source>
         <translation>Pausada (%1)</translation>
     </message>
@@ -1686,7 +1686,7 @@
         <translation>La frase de contraseña debe ser de al menos 16 caracteres.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2227"/>
+        <location filename="../Source/dsettings.cc" line="2229"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Web Browser: Selección de Tema</translation>
     </message>
@@ -1695,12 +1695,12 @@
         <translation type="obsolete">&amp;Seleccionar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2245"/>
+        <location filename="../Source/dsettings.cc" line="2247"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Archivo de Configuración de Tema (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2330"/>
+        <location filename="../Source/dsettings.cc" line="2332"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Browser: Directorio de Selección de Mis Archivos Recuperados</translation>
     </message>
@@ -1719,49 +1719,49 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2244"/>
-        <location filename="../Source/dsettings.cc" line="2716"/>
+        <location filename="../Source/dsettings.cc" line="2246"/>
+        <location filename="../Source/dsettings.cc" line="2718"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2333"/>
-        <location filename="../Source/dsettings.cc" line="2361"/>
+        <location filename="../Source/dsettings.cc" line="2335"/>
+        <location filename="../Source/dsettings.cc" line="2363"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2358"/>
+        <location filename="../Source/dsettings.cc" line="2360"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2631"/>
+        <location filename="../Source/dsettings.cc" line="2633"/>
         <source>Prompt</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2648"/>
+        <location filename="../Source/dsettings.cc" line="2650"/>
         <source>Use other...</source>
         <translation>Usar otro...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2713"/>
+        <location filename="../Source/dsettings.cc" line="2715"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Browser: Seleccionar Aplicación</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2825"/>
+        <location filename="../Source/dsettings.cc" line="2827"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2829"/>
+        <location filename="../Source/dsettings.cc" line="2831"/>
         <source>&amp;Delete File Suffix</source>
         <translation>&amp;Eliminar Sufijo de Archivo</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2917"/>
+        <location filename="../Source/dsettings.cc" line="2919"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
