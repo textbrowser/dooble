@@ -1557,7 +1557,7 @@ bool dmisc::compareByteArrays(const QByteArray &a, const QByteArray &b)
   QByteArray bytes1;
   QByteArray bytes2;
   int length = qMax(a.length(), b.length());
-  int rc = 0;
+  unsigned long rc = 0;
 
   bytes1 = a.leftJustified(length, 0);
   bytes2 = b.leftJustified(length, 0);
