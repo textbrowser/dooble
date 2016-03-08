@@ -52,6 +52,7 @@ dnetworkcache::~dnetworkcache()
 {
   m_timer.stop();
   clearTemp();
+  m_future.waitForFinished();
 }
 
 void dnetworkcache::populate(void)

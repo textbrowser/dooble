@@ -29,6 +29,7 @@
 #define _dfilesystemmodel_h_
 
 #include <QFileSystemModel>
+#include <QFuture>
 
 class dfilesystemmodel: public QFileSystemModel
 {
@@ -36,6 +37,7 @@ class dfilesystemmodel: public QFileSystemModel
 
  public:
   dfilesystemmodel(QObject *parent = 0);
+  ~dfilesystemmodel();
   QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
   QVariant headerData(int section,
 		      Qt::Orientation orientation,
@@ -43,8 +45,10 @@ class dfilesystemmodel: public QFileSystemModel
   void enable(const bool state);
 
  private:
+  QFuture<void> m_future;
   QStringList m_headers;
   int columnCount(const QModelIndex &parent = QModelIndex()) const;
+  void processDirectory(const QString &path);
 
  private slots:
   void slotDirectoryLoaded(const QString &path);

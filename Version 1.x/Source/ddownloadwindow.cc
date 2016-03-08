@@ -656,10 +656,12 @@ void ddownloadwindow::slotDownloadFinished(void)
 
       QString action("");
       QString suffix(QFileInfo(item->fileName()).suffix().trimmed());
+      QReadLocker locker(&dooble::s_applicationsActionsLock);
 
       if(dooble::s_applicationsActions.contains(suffix))
 	{
 	  action = dooble::s_applicationsActions[suffix];
+	  locker.unlock();
 	  dmisc::launchApplication(action, QStringList(item->fileName()));
 	}
     }
@@ -986,6 +988,7 @@ void ddownloadwindow::slotCellDoubleClicked(int row, int col)
 	    {
 	      QString action("");
 	      QString suffix(QFileInfo(item->fileName()).suffix().trimmed());
+	      QReadLocker locker(&dooble::s_applicationsActionsLock);
 
 	      if(dooble::s_applicationsActions.contains(suffix))
 		{

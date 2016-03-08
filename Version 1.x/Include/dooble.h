@@ -93,6 +93,7 @@ class dooble: public QMainWindow
   static QPointer<dsettings> s_settingsWindow;
   static QPointer<dspoton> s_spoton;
   static QPointer<dsslcipherswindow> s_sslCiphersWindow;
+  static QReadWriteLock s_applicationsActionsLock;
   static QString s_homePath;
   static QUuid s_id; // Unique process ID.
   static const int MAX_HISTORY_ITEMS = 30;

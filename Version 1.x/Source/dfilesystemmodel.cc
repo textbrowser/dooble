@@ -29,6 +29,10 @@
 #include <QDateTime>
 #include <QSqlQuery>
 #include <QSqlDatabase>
+#include <QtCore>
+#if QT_VERSION >= 0x050000
+#include <QtConcurrent>
+#endif
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -51,6 +55,12 @@ dfilesystemmodel::dfilesystemmodel(QObject *parent):QFileSystemModel(parent)
 	    SIGNAL(directoryLoaded(const QString &)),
 	    this,
 	    SLOT(slotDirectoryLoaded(const QString &)));
+}
+
+dfilesystemmodel::~dfilesystemmodel()
+{
+  m_future.cancel();
+  m_future.waitForFinished();
 }
 
 QVariant dfilesystemmodel::headerData(int section, Qt::Orientation orientation,
@@ -147,6 +157,13 @@ QVariant dfilesystemmodel::data(const QModelIndex &index, int role) const
 
 void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
 {
+  if(m_future.isFinished())
+    m_future = QtConcurrent::run
+      (this, &dfilesystemmodel::processDirectory, path);
+}
+
+void dfilesystemmodel::processDirectory(const QString &path)
+{
   QMap<QString, QString> suffixesA;
   QMap<QString, QString> suffixesU;
 
@@ -164,10 +181,14 @@ void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
 		    "file_suffix TEXT PRIMARY KEY NOT NULL, "
 		    "action TEXT DEFAULT NULL, "
 		    "icon BLOB DEFAULT NULL)");
+	query->exec("PRAGMA synchronous = OFF");
       }
 
     for(int i = 0; i < rowCount(index(path)); i++)
       {
+	if(m_future.isCanceled())
+	  break;
+
 	QFileInfo info;
 	QModelIndex idx(index(i, 0, index(path)));
 
@@ -186,6 +207,7 @@ void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
 	    if(!suffix.isEmpty() && !info.completeBaseName().isEmpty())
 	      {
 		QString action("prompt");
+		QReadLocker locker(&dooble::s_applicationsActionsLock);
 
 		if(dooble::s_applicationsActions.contains(suffix))
 		  action = dooble::s_applicationsActions[suffix];
@@ -199,8 +221,9 @@ void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
 		if(query &&
 		   !dooble::s_applicationsActions.contains(suffix))
 		  {
+		    locker.unlock();
 		    query->prepare
-		      ("INSERT OR REPLACE INTO applications ("
+		      ("INSERT INTO applications ("
 		       "file_suffix, action, icon) "
 		       "VALUES (?, ?, ?)");
 		    query->bindValue(0, suffix);
@@ -228,14 +251,20 @@ void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
 		    buffer.close();
 		    query->exec();
 		  }
-
-		if(!dooble::s_applicationsActions.contains(suffix))
-		  {
-		    suffixesA[suffix] = "prompt";
-		    dooble::s_applicationsActions[suffix] = "prompt";
-		  }
 		else
-		  suffixesU[suffix] = action;
+		  locker.unlock();
+
+		{
+		  QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
+		  if(!dooble::s_applicationsActions.contains(suffix))
+		    {
+		      suffixesA[suffix] = "prompt";
+		      dooble::s_applicationsActions[suffix] = "prompt";
+		    }
+		  else
+		    suffixesU[suffix] = action;
+		}
 	      }
 	  }
       }
@@ -247,6 +276,9 @@ void dfilesystemmodel::slotDirectoryLoaded(const QString &path)
   }
 
   QSqlDatabase::removeDatabase("applications");
+
+  if(m_future.isCanceled())
+    return;
 
   if(!suffixesA.isEmpty())
     emit suffixesAdded(suffixesA);

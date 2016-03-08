@@ -140,6 +140,7 @@ QPointer<dnetworkcache> dooble::s_networkCache = 0;
 QPointer<dsettings> dooble::s_settingsWindow = 0;
 QPointer<dspoton> dooble::s_spoton = 0;
 QPointer<dsslcipherswindow> dooble::s_sslCiphersWindow = 0;
+QReadWriteLock dooble::s_applicationsActionsLock;
 QString dooble::s_homePath = "";
 QUuid dooble::s_id = QUuid::createUuid();
 int dprintfromcommandprompt::s_count = 0;
@@ -918,6 +919,8 @@ int main(int argc, char *argv[])
 		    }
 		}
 
+	      QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
 	      dooble::s_applicationsActions[suffix] = action;
 	    }
       }
@@ -929,8 +932,12 @@ int main(int argc, char *argv[])
   dooble::s_historyWindow = new dhistory();
   dooble::s_downloadWindow = new ddownloadwindow();
   dooble::s_settingsWindow = new dsettings();
+
+  QReadLocker locker(&dooble::s_applicationsActionsLock);
+
   dooble::s_settingsWindow->slotPopulateApplications
     (dooble::s_applicationsActions);
+  locker.unlock();
   QObject::connect
     (dfilemanager::tableModel,
      SIGNAL(suffixesAdded(const QMap<QString, QString> &)),

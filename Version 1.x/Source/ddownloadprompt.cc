@@ -64,18 +64,22 @@ ddownloadprompt::ddownloadprompt(QWidget *parent,
 	  dooble::s_settingsWindow,
 	  SLOT(slotUpdateApplication(const QString &, const QString &)));
 
+  QReadLocker locker(&dooble::s_applicationsActionsLock);
+
   if(dooble::s_applicationsActions.contains(m_suffix))
     {
       if(dooble::s_applicationsActions[m_suffix] != "prompt")
 	{
 	  QFileInfo fileInfo(dooble::s_applicationsActions[m_suffix]);
 
+	  locker.unlock();
 	  ui.applicationComboBox->addItem(fileInfo.fileName());
 	  ui.applicationComboBox->insertSeparator(1);
 	}
     }
   else
     {
+      locker.unlock();
       dmisc::setActionForFileSuffix(m_suffix, "prompt");
 
       QMap<QString, QString> suffixes;

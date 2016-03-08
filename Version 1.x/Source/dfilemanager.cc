@@ -299,10 +299,12 @@ void dfilemanager::slotTableClicked(const QModelIndex &index)
 
       QString action("");
       QFileInfo info(model->fileInfo(index));
+      QReadLocker locker(&dooble::s_applicationsActionsLock);
 
       if(dooble::s_applicationsActions.contains(info.suffix().trimmed()))
 	{
 	  action = dooble::s_applicationsActions[info.suffix().trimmed()];
+	  locker.unlock();
 
 	  QFileInfo info(action);
 
@@ -310,7 +312,10 @@ void dfilemanager::slotTableClicked(const QModelIndex &index)
 	    action = "prompt";
 	}
       else
-	action = "prompt";
+	{
+	  locker.unlock();
+	  action = "prompt";
+	}
 
       if(action == "prompt")
 	{

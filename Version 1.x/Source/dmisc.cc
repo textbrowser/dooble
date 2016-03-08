@@ -1209,6 +1209,8 @@ void dmisc::setActionForFileSuffix(const QString &suffix,
 {
   if(!suffix.isEmpty())
     {
+      QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
       if(action.isEmpty())
 	dooble::s_applicationsActions[suffix] = "prompt";
       else

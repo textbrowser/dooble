@@ -2732,7 +2732,10 @@ void dsettings::slotApplicationPulldownActivated(int index)
 	      if(action.isEmpty())
 		action = "prompt";
 
+	      QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
 	      dooble::s_applicationsActions[suffix] = action;
+	      locker.unlock();
 
 	      if(action == "prompt")
 		comboBox->setCurrentIndex(0);
@@ -2759,6 +2762,8 @@ void dsettings::slotApplicationPulldownActivated(int index)
 	      ** the combination box's value to its previous setting.
 	      */
 
+	      QReadLocker locker(&dooble::s_applicationsActionsLock);
+
 	      if(dooble::s_applicationsActions[suffix] == "prompt")
 		comboBox->setCurrentIndex(0);
 	      else
@@ -2770,11 +2775,17 @@ void dsettings::slotApplicationPulldownActivated(int index)
       else if(index == 0)
 	{
 	  action = "prompt";
+
+	  QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
 	  dooble::s_applicationsActions[suffix] = action;
 	}
       else if(index == 2)
 	{
 	  action = comboBox->itemData(index).toString();
+
+	  QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
 	  dooble::s_applicationsActions[suffix] = action;
 	}
 
@@ -2849,7 +2860,10 @@ void dsettings::slotDeleteAllSuffixes(void)
 
 	if(query.exec("DELETE FROM applications"))
 	  {
+	    QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
 	    dooble::s_applicationsActions.clear();
+	    locker.unlock();
 	    ui.applicationsTable->clearContents();
 	    ui.applicationsTable->setRowCount(0);
 	  }
@@ -2887,7 +2901,10 @@ void dsettings::slotDeleteSuffix(void)
 	
 	if(query.exec())
 	  {
+	    QWriteLocker locker(&dooble::s_applicationsActionsLock);
+
 	    dooble::s_applicationsActions.remove(suffix);
+	    locker.unlock();
 	    ui.applicationsTable->removeRow(row);
 	  }
       }
