@@ -107,6 +107,41 @@
     </message>
 </context>
 <context>
+    <name>approveddeniedlists</name>
+    <message>
+        <source>Dooble Web Browser: Approved / Denied Lists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Approved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Approved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">關閉(&amp;C)</translation>
+    </message>
+</context>
+<context>
     <name>bookmarksPopup</name>
     <message>
         <source>Form</source>
