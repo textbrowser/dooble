@@ -136,16 +136,20 @@ static char *s_crashFileName = 0;
 
 static void sig_handler(int signum)
 {
+  /*
+  ** _Exit() and _exit() may be safely called from signal handlers.
+  */
+
   static int fatal_error = 0;
 
   if(fatal_error)
     _Exit(signum);
 
   fatal_error = 1;
-  dcrypt::terminate();
+  dcrypt::terminate(); // Safe.
 
   if(signum == SIGTERM)
-    dmisc::removeRestorationFiles(dooble::s_id);
+    dmisc::removeRestorationFiles(dooble::s_id); // Not safe.
   else
     {
       /*
@@ -156,15 +160,11 @@ static void sig_handler(int signum)
 
       if(s_crashFileName)
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
-	close(open(s_crashFileName, O_CREAT, S_IRUSR | S_IWUSR));
+	close(open(s_crashFileName, O_CREAT, S_IRUSR | S_IWUSR)); // Safe.
 #else
-        close(creat(s_crashFileName, O_CREAT));
+        close(creat(s_crashFileName, O_CREAT)); // Safe.
 #endif
     }
-
-  /*
-  ** _Exit() and _exit() may be safely called from signal handlers.
-  */
 
   _Exit(signum);
 }
