@@ -25,16 +25,16 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QUrl>
+#include <QCloseEvent>
+#include <QDesktopServices>
 #include <QFile>
+#include <QFileDialog>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 #include <QPrinter>
 #include <QSettings>
-#include <QCloseEvent>
-#include <QFileDialog>
 #include <QTextStream>
-#include <QPrintDialog>
-#include <QDesktopServices>
-#include <QPrintPreviewDialog>
+#include <QUrl>
 
 #include "dooble.h"
 #include "dpagesourcewindow.h"

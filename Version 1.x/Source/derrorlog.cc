@@ -29,9 +29,9 @@
 #include <QSettings>
 #include <QScrollBar>
 
+#include "derrorlog.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "derrorlog.h"
 
 derrorlog::derrorlog(void):QMainWindow()
 {

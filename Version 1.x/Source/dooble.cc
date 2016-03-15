@@ -63,10 +63,10 @@
 #include <QWebFrame>
 #include <QWebHistoryItem>
 #include <QWidgetAction>
-#include <QtCore>
 #if QT_VERSION >= 0x050000
 #include <QtConcurrent>
 #endif
+#include <QtCore>
 
 #include <limits>
 

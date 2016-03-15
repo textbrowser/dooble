@@ -30,10 +30,10 @@
 #include <QNetworkCookie>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QtCore>
 #if QT_VERSION >= 0x050000
 #include <QtConcurrent>
 #endif
+#include <QtCore>
 
 #include "dcookies.h"
 #include "dmisc.h"

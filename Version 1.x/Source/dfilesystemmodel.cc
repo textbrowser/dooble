@@ -27,16 +27,16 @@
 
 #include <QBuffer>
 #include <QDateTime>
-#include <QSqlQuery>
 #include <QSqlDatabase>
-#include <QtCore>
+#include <QSqlQuery>
 #if QT_VERSION >= 0x050000
 #include <QtConcurrent>
 #endif
+#include <QtCore>
 
+#include "dfilesystemmodel.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dfilesystemmodel.h"
 
 dfilesystemmodel::dfilesystemmodel(QObject *parent):QFileSystemModel(parent)
 {
