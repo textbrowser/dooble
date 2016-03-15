@@ -30,14 +30,14 @@
 
 #include <QMainWindow>
 
-#include "ui_downloadWindow.h"
 #include "ddownloadwindowitem.h"
+#include "ui_downloadWindow.h"
 
-class QUrl;
-class QString;
 class QCloseEvent;
-class QProgressBar;
 class QNetworkReply;
+class QProgressBar;
+class QString;
+class QUrl;
 
 class ddownloadwindow: public QMainWindow
 {

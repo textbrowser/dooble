@@ -28,8 +28,8 @@
 #ifndef _dbookmarkswindow_h_
 #define _dbookmarkswindow_h_
 
-#include <QPointer>
 #include <QMainWindow>
+#include <QPointer>
 
 #include "ui_bookmarksWindow.h"
 

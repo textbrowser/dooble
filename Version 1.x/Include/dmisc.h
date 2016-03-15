@@ -39,11 +39,11 @@ extern "C"
 #include "dcrypt.h"
 #include "dtypes.h"
 
-class QUrl;
 class QIcon;
-class QRect;
-class QProgressBar;
 class QNetworkProxy;
+class QProgressBar;
+class QRect;
+class QUrl;
 
 class dmisc
 {

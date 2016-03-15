@@ -28,8 +28,8 @@
 #ifndef _dhistory_h_
 #define _dhistory_h_
 
-#include <QPointer>
 #include <QMainWindow>
+#include <QPointer>
 
 #include "ui_historyWindow.h"
 

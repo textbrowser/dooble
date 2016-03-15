@@ -34,9 +34,8 @@
 #include <QNetworkCookieJar>
 #include <QReadWriteLock>
 
-class QTimer;
 class QProgressBar;
-
+class QTimer;
 class dexceptionswindow;
 
 class dcookies: public QNetworkCookieJar

@@ -32,9 +32,9 @@
 
 #include "ui_cookieWindow.h"
 
-class dcookies;
 class QStandardItem;
 class QStandardItemModel;
+class dcookies;
 
 class dcookiewindow: public QMainWindow
 {

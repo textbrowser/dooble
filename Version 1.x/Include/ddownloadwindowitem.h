@@ -36,9 +36,9 @@
 
 #include "ui_downloadWindowItem.h"
 
-class QNetworkReply;
 class QAuthenticator;
 class QNetworkAccessManager;
+class QNetworkReply;
 
 class ddownloadwindowitem: public QWidget
 {

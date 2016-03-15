@@ -33,8 +33,8 @@
 #include "ui_ftpManagerForm.h"
 
 class QTableWidgetItem;
-class QWebPage;
 class QWebFrame;
+class QWebPage;
 
 class dftp;
 class dftpfileinfo;
