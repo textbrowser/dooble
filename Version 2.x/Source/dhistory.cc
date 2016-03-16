@@ -433,8 +433,10 @@ void dhistory::purge(void)
 
 	    deleteQuery.exec("PRAGMA secure_delete = ON");
 	    date = date.addDays
-	      (-dooble::s_settings.value("settingsWindow/historyDays",
-					 8).toInt());
+	      (-qBound(1,
+		       dooble::s_settings.value("settingsWindow/historyDays",
+						8).toInt(),
+		       366));
 
 	    while(query.next())
 	      {

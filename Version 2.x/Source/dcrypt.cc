@@ -892,7 +892,7 @@ size_t dcrypt::encryptionKeyLength(void) const
 
 void dcrypt::setIterationCount(const int iterationCount)
 {
-  m_iterationCount = qMax(1000, iterationCount);
+  m_iterationCount = qBound(1000, iterationCount, 999999999);
 }
 
 void dcrypt::setSalt(const QByteArray &salt)
