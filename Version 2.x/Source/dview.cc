@@ -81,7 +81,7 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   qreal multiplier = dooble::s_settings.value
     ("settingsWindow/textSizeMultiplier").toReal();
 
-  if(multiplier < 1.0)
+  if(multiplier < 1.0 || multiplier > 99.99)
     multiplier = 1.0;
 
   webView->setZoomFactor(multiplier);

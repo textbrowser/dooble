@@ -898,9 +898,10 @@ void dcrypt::setIterationCount(const int iterationCount)
 void dcrypt::setSalt(const QByteArray &salt)
 {
   bool ok = true;
-  int saltLength = qAbs
-    (qMax(256, dooble::s_settings.value("settingsWindow/saltLength",
-					256).toInt(&ok)));
+  int saltLength = qBound
+    (256, dooble::s_settings.value("settingsWindow/saltLength",
+				   256).toInt(&ok),
+     999999999);
 
   if(!ok)
     saltLength = 256;

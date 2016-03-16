@@ -240,9 +240,11 @@ QIODevice *dnetworkcache::prepare(const QNetworkCacheMetaData &metaData)
 
   bool ok = true;
   int cacheSize = 0;
-  int value = qAbs
-    (dooble::s_settings.value("settingsWindow/webDiskCacheSize", 50).
-     toInt(&ok));
+  int value = qBound
+    (1,
+     dooble::s_settings.value("settingsWindow/webDiskCacheSize",
+			      50).toInt(&ok),
+     1024);
   qint64 size = 0;
 
   if(!ok)
@@ -501,8 +503,11 @@ void dnetworkcache::slotTimeout(void)
 {
   if(m_future.isFinished())
     {
-      int diskCacheSize = 1048576 * dooble::s_settings.value
-	("settingsWindow/webDiskCacheSize", 50).toInt();
+      int diskCacheSize = 1048576 *
+	qBound(1,
+	       dooble::s_settings.value("settingsWindow/webDiskCacheSize",
+					50).toInt(),
+	       1024);
 
       m_future = QtConcurrent::run
 	(this, &dnetworkcache::computeCacheSizeAndCleanDirectory,
