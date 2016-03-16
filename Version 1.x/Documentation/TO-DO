@@ -148,6 +148,8 @@ Completed Items
 92.   Store authentication information with encrypted data.
 93.   Display SHA-1 hashes of downloaded files.
 94.   Objects of type size_t may contain negative values.
+95.   Review INI values. Extreme iteration count values will overflow
+      the integer container.
 
 Remaining Items
 
@@ -174,8 +176,6 @@ Remaining Items
       current implementation is flawed.
 17.   Delayed downloads are not reflected.
 18.   Allow regular expressions in blocked hosts.
-19.   Review INI values. Extreme iteration count values will overflow
-      the integer container.
 
 Removed Items
 
