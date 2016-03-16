@@ -678,7 +678,7 @@ int main(int argc, char *argv[])
   int fontSize = dooble::s_settings.value("settingsWindow/minimumWebFontSize",
 					  12).toInt();
 
-  if(fontSize <= 0)
+  if(fontSize <= 0 || fontSize > 25)
     fontSize = 12;
 
   QWebEngineSettings::globalSettings()->setFontSize
