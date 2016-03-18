@@ -50,7 +50,6 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI/applicationPropertiesWindow.ui \
-		  UI/approveddeniedlists.ui \
 		  UI/bookmarksPopup.ui \
 		  UI/bookmarksWindow.ui \
 		  UI/clearContainersWindow.ui \
