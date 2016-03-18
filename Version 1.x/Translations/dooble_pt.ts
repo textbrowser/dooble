@@ -284,44 +284,8 @@
 <context>
     <name>approveddeniedlists</name>
     <message>
-        <location filename="../UI/approveddeniedlists.ui" line="14"/>
-        <source>Dooble Web Browser: Approved / Denied Lists</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="31"/>
-        <source>Approved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="58"/>
-        <source>Denied</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="91"/>
-        <source>New Domain</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="99"/>
-        <source>&amp;Approved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="109"/>
-        <source>&amp;Denied</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="121"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/approveddeniedlists.ui" line="155"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">Fe&amp;char</translation>
+        <translation type="obsolete">Fe&amp;char</translation>
     </message>
 </context>
 <context>
@@ -808,83 +772,83 @@
 <context>
     <name>ddownloadwindowitem</name>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="74"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="75"/>
         <source>Compute SHA-1 Hash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="76"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="77"/>
         <source>Compute SHA-256 Hash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="110"/>
-        <location filename="../Source/ddownloadwindowitem.cc" line="630"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="111"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="631"/>
         <source>Pause Download</source>
         <translation>Parar transferência</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="115"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="116"/>
         <source>0 kbit/s (0 MiB)</source>
         <translation>0 kbit/s (0 MiB)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="117"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="118"/>
         <source>0 KiB/s (0 MiB)</source>
         <translation>0 KiB/s (0 MiB)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="475"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="476"/>
         <source>%1 bit/s (%2 of %3)</source>
         <translation>%1 bit/s (%2 de %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="480"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="481"/>
         <source>%1 kbit/s (%2 of %3)</source>
         <translation>%1 kbit/s (%2 de %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="485"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="486"/>
         <source>%1 Mbit/s (%2 of %3)</source>
         <translation>%1 Mbit/s (%2 de %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="491"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="492"/>
         <source>%1 Gbit/s (%2 of %3)</source>
         <translation>%1 Gbit/s (%2 de %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="498"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="499"/>
         <source>%1 KiB/s (%2 of %3)</source>
         <translation>%1 KiB/s (%2 de %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="508"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="509"/>
         <source>%1 bit/s (%2)</source>
         <translation>%1 bit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="512"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="513"/>
         <source>%1 kbit/s (%2)</source>
         <translation>%1 kbit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="516"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="517"/>
         <source>%1 Mbit/s (%2)</source>
         <translation>%1 Mbit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="520"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="521"/>
         <source>%1 Gbit/s (%2)</source>
         <translation>%1 Gbit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="525"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="526"/>
         <source>%1 KiB/s (%2)</source>
         <translation>%1 KiB/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="580"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="581"/>
         <source>Download Aborted</source>
         <translation>Transferência cancelada</translation>
     </message>
@@ -901,12 +865,12 @@
         <translation type="obsolete">%1 KB/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="628"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="629"/>
         <source>Resume Download</source>
         <translation>Retomar transferência</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="751"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="752"/>
         <source>Paused (%1)</source>
         <translation>parada (%1)</translation>
     </message>
@@ -1287,48 +1251,48 @@
         <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton é 0.</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="514"/>
-        <location filename="../Source/dhistory.cc" line="642"/>
-        <location filename="../Source/dhistory.cc" line="848"/>
-        <location filename="../Source/dhistory.cc" line="909"/>
-        <location filename="../Source/dhistory.cc" line="1114"/>
-        <location filename="../Source/dhistory.cc" line="1188"/>
+        <location filename="../Source/dhistory.cc" line="516"/>
+        <location filename="../Source/dhistory.cc" line="644"/>
+        <location filename="../Source/dhistory.cc" line="850"/>
+        <location filename="../Source/dhistory.cc" line="911"/>
+        <location filename="../Source/dhistory.cc" line="1116"/>
+        <location filename="../Source/dhistory.cc" line="1190"/>
         <source>%1 Item(s) / %2 Item(s) Selected</source>
         <translation>%1 item(ns) / %2 selecionado(s)</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="723"/>
-        <location filename="../Source/dhistory.cc" line="741"/>
+        <location filename="../Source/dhistory.cc" line="725"/>
+        <location filename="../Source/dhistory.cc" line="743"/>
         <source>&amp;Bookmark</source>
         <translation>&amp;Marcador</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="726"/>
+        <location filename="../Source/dhistory.cc" line="728"/>
         <source>&amp;Copy URL</source>
         <translation>&amp;Copiar URL</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="729"/>
+        <location filename="../Source/dhistory.cc" line="731"/>
         <source>&amp;Delete Page</source>
         <translation>E&amp;liminar página</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="732"/>
+        <location filename="../Source/dhistory.cc" line="734"/>
         <source>Open in &amp;Current Tab</source>
         <translation>Abrir no separador a&amp;tual</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="734"/>
+        <location filename="../Source/dhistory.cc" line="736"/>
         <source>Open in New &amp;Tab</source>
         <translation>Abrir em novo &amp;separador</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="736"/>
+        <location filename="../Source/dhistory.cc" line="738"/>
         <source>Open in &amp;New Window</source>
         <translation>Abrir em nova &amp;janela</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="747"/>
+        <location filename="../Source/dhistory.cc" line="749"/>
         <source>Open in &amp;New Tabs</source>
         <translation>Abrir em &amp;novos separadores</translation>
     </message>
@@ -1337,7 +1301,7 @@
         <translation type="obsolete">Abrir em nova janela</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="744"/>
+        <location filename="../Source/dhistory.cc" line="746"/>
         <source>&amp;Delete Pages</source>
         <translation>E&amp;liminar páginas</translation>
     </message>
