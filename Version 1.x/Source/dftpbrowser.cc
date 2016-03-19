@@ -35,6 +35,7 @@
 #include "dftpbrowser.h"
 #include "dmisc.h"
 #include "dooble.h"
+#include "dtablewidgetnumericitem.h"
 
 dftpbrowser::dftpbrowser(QWidget *parent):QWidget(parent)
 {
@@ -225,7 +226,7 @@ void dftpbrowser::slotListInfos(const QList<dftpfileinfo> &infos)
       m_directoryCount += 1;
       ui.tableWidget->setRowCount(1);
 
-      for(int i = 0; i < 3; i++) // Three columns!
+      for(int i = 0; i < ui.tableWidget->columnCount(); i++)
 	{
 	  if(i == 0)
 	    {
@@ -270,7 +271,10 @@ void dftpbrowser::slotListInfos(const QList<dftpfileinfo> &infos)
       if(info.isDir())
 	item = new QTableWidgetItem("", 1);
       else
-	item = new QTableWidgetItem(dmisc::formattedSize(info.size()), 0);
+	{
+	  item = new dtablewidgetnumericitem(info.size(), 0);
+	  item->setText(dmisc::formattedSize(info.size()));
+	}
 
       item->setFlags(flags);
       ui.tableWidget->setItem
