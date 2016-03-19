@@ -370,9 +370,6 @@ void dftp::slotDownloadReadyRead(void)
       QStringList list(QString(bytes.constData()).trimmed().
 		       split(" ", QString::SkipEmptyParts));
 
-      if(list.size() < 9)
-	continue;
-
       if(!list.isEmpty())
 	{
 	  dftpfileinfo info;
