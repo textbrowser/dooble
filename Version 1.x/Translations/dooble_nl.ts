@@ -892,42 +892,42 @@
 <context>
     <name>dftpbrowser</name>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Size</source>
         <translation>Grootte</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Date Modified</source>
         <translation>Wijzigingsdatum</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="355"/>
+        <location filename="../Source/dftpbrowser.cc" line="359"/>
         <source>Copy &amp;Link Location</source>
         <translation>Kopieer &amp;koppeling Locatie</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="361"/>
+        <location filename="../Source/dftpbrowser.cc" line="365"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Open Koppeling in Nieuw &amp;Tabblad</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="363"/>
+        <location filename="../Source/dftpbrowser.cc" line="367"/>
         <source>Open Link in &amp;New Window</source>
         <translation>Open Koppeling in &amp;Nieuw Venster</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="368"/>
+        <location filename="../Source/dftpbrowser.cc" line="372"/>
         <source>S&amp;ave Link</source>
         <translation>K&amp;oppeling opslaan</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="438"/>
+        <location filename="../Source/dftpbrowser.cc" line="442"/>
         <source>%1 Directory(ies) / %2 File(s)</source>
         <translation>%1 Map(pen) / %2 Bestand(en)</translation>
     </message>

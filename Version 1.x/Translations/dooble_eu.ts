@@ -1071,42 +1071,42 @@
 <context>
     <name>dftpbrowser</name>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Name</source>
         <translation>Izena</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Size</source>
         <translation>Neurria</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Date Modified</source>
         <translation>Aldatze Eguna</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="355"/>
+        <location filename="../Source/dftpbrowser.cc" line="359"/>
         <source>Copy &amp;Link Location</source>
         <translation>Kopiatu Lotura &amp;Kokalekua</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="361"/>
+        <location filename="../Source/dftpbrowser.cc" line="365"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ir&amp;eki Lotura Hegats Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="363"/>
+        <location filename="../Source/dftpbrowser.cc" line="367"/>
         <source>Open Link in &amp;New Window</source>
         <translation>Ireki Lo&amp;tura Leiho Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="368"/>
+        <location filename="../Source/dftpbrowser.cc" line="372"/>
         <source>S&amp;ave Link</source>
         <translation>G&amp;orde Lotura</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="438"/>
+        <location filename="../Source/dftpbrowser.cc" line="442"/>
         <source>%1 Directory(ies) / %2 File(s)</source>
         <translation>%1 Zuzenbide / %2 Agiri</translation>
     </message>

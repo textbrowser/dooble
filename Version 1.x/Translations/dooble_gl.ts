@@ -1036,42 +1036,42 @@
 <context>
     <name>dftpbrowser</name>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Size</source>
         <translation>Tamaño</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Date Modified</source>
         <translation>Data de modificación</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="355"/>
+        <location filename="../Source/dftpbrowser.cc" line="359"/>
         <source>Copy &amp;Link Location</source>
         <translation>Copiar a localización da &amp;ligazón</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="361"/>
+        <location filename="../Source/dftpbrowser.cc" line="365"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Abrir a ligazón nunha &amp;nova lapela</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="363"/>
+        <location filename="../Source/dftpbrowser.cc" line="367"/>
         <source>Open Link in &amp;New Window</source>
         <translation>Abrir a ligazón nunha nova &amp;xanela</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="368"/>
+        <location filename="../Source/dftpbrowser.cc" line="372"/>
         <source>S&amp;ave Link</source>
         <translation>&amp;Gardar a ligazón</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="438"/>
+        <location filename="../Source/dftpbrowser.cc" line="442"/>
         <source>%1 Directory(ies) / %2 File(s)</source>
         <translation>%1 directorio(s) / %2 fichero(s)</translation>
     </message>

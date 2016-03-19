@@ -897,42 +897,42 @@
 <context>
     <name>dftpbrowser</name>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Name</source>
         <translation type="unfinished">नाम</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Size</source>
         <translation type="unfinished">आकार</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="75"/>
+        <location filename="../Source/dftpbrowser.cc" line="76"/>
         <source>Date Modified</source>
         <translation type="unfinished">तिथि संशोधित</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="355"/>
+        <location filename="../Source/dftpbrowser.cc" line="359"/>
         <source>Copy &amp;Link Location</source>
         <translation type="unfinished">प्रतिलिपि &amp;कड़ी स्थान</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="361"/>
+        <location filename="../Source/dftpbrowser.cc" line="365"/>
         <source>Open Link in New &amp;Tab</source>
         <translation type="unfinished">नया &amp;तब में कड़ी खोलना</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="363"/>
+        <location filename="../Source/dftpbrowser.cc" line="367"/>
         <source>Open Link in &amp;New Window</source>
         <translation type="unfinished">नई विंडो में लिंक खोलें</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="368"/>
+        <location filename="../Source/dftpbrowser.cc" line="372"/>
         <source>S&amp;ave Link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="438"/>
+        <location filename="../Source/dftpbrowser.cc" line="442"/>
         <source>%1 Directory(ies) / %2 File(s)</source>
         <translation type="unfinished"></translation>
     </message>
