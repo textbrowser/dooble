@@ -97,7 +97,6 @@ HEADERS		= Include\\dbookmarkspopup.h \
                   Include\\dsettingshomelinewidget.h \
 		  Include\\dspoton.h \
 		  Include\\dsslcipherswindow.h \
-		  Include\\dtablewidgetnumericitem.h \
 		  Include\\dtabwidget.h \
 		  Include\\durlwidget.h \
 		  Include\\dview.h \

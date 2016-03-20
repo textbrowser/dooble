@@ -25,16 +25,16 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _dtablewidgetnumericitem_h_
-#define _dtablewidgetnumericitem_h_
+#ifndef _dtablewidgetquint64item_h_
+#define _dtablewidgetquint64item_h_
 
 #include <QTableWidgetItem>
 
-class dtablewidgetnumericitem: public QTableWidgetItem
+class dtablewidgetquint64item: public QTableWidgetItem
 {
  public:
-  dtablewidgetnumericitem(const QVariant &value, int type):
-  QTableWidgetItem(value.toString(), type)
+  dtablewidgetquint64item(const quint64 value, int type):
+  QTableWidgetItem(QString::number(value), type)
   {
     m_value = value;
     setData(Qt::UserRole, m_value);
@@ -42,11 +42,11 @@ class dtablewidgetnumericitem: public QTableWidgetItem
 
   bool operator < (const QTableWidgetItem &other) const
   {
-    return m_value < other.data(Qt::UserRole);
+    return m_value < other.data(Qt::UserRole).toULongLong();
   }
 
  private:
-  QVariant m_value;
+  quint64 m_value;
 };
 
 #endif
