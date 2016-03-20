@@ -35,7 +35,7 @@
 #include "dftpbrowser.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dtablewidgetquint64item.h"
+#include "dtablewidgetqint64item.h"
 
 dftpbrowser::dftpbrowser(QWidget *parent):QWidget(parent)
 {
@@ -272,7 +272,7 @@ void dftpbrowser::slotListInfos(const QList<dftpfileinfo> &infos)
 	item = new QTableWidgetItem("", 1);
       else
 	{
-	  item = new dtablewidgetquint64item(info.size(), 0);
+	  item = new dtablewidgetqint64item(info.size(), 0);
 	  item->setText(dmisc::formattedSize(info.size()));
 	}
 
