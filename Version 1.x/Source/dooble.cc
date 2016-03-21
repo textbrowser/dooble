@@ -614,7 +614,7 @@ int main(int argc, char *argv[])
      dooble::s_settings.value("settingsWindow/enableWebPlugins",
 			      false).toBool());
   QWebSettings::globalSettings()->setAttribute
-    (QWebSettings::DnsPrefetchEnabled, true);
+    (QWebSettings::DnsPrefetchEnabled, false);
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::PrivateBrowsingEnabled,
      dooble::s_settings.value("settingsWindow/privateBrowsing",
