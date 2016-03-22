@@ -2447,9 +2447,10 @@ dview *dooble::newTab
 
 dview *dooble::newTab(const QByteArray &history)
 {
-  QUrl url;
   QHash<QWebSettings::WebAttribute, bool> webAttributes;
   QIcon icon;
+  QUrl url;
+  bool shouldLoad = true;
   dview *p = 0;
 
   webAttributes[QWebSettings::JavascriptEnabled] =
@@ -2478,6 +2479,7 @@ dview *dooble::newTab(const QByteArray &history)
 	    {
 	      url = p->page()->history()->currentItem().url();
 	      icon = dmisc::iconForUrl(url);
+	      shouldLoad = false;
 	    }
 	  else if(p->page()->history())
 	    p->page()->history()->clear();
@@ -2504,7 +2506,12 @@ dview *dooble::newTab(const QByteArray &history)
   connect(action, SIGNAL(triggered(void)), this,
 	  SLOT(slotLinkActionTriggered(void)));
   p->setTabAction(action);
-  p->load(url);
+
+  if(shouldLoad)
+    p->load(url);
+  else
+    p->reload();
+
   prepareTabsMenu();
   prepareWidgetsBasedOnView(p);
   return p;
@@ -7076,6 +7083,8 @@ void dooble::reinstate(void)
 	  toBool())
     return;
   else if(s_instances > 1)
+    return;
+  else if(findChild<dreinstatedooble *> ())
     return;
 
   QFileInfo fileInfo(dooble::s_homePath + QDir::separator() + ".crashed");
