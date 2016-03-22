@@ -151,7 +151,7 @@ Completed Items
 95.   Review INI values. Extreme iteration count values will overflow
       the integer container.
 96.   Pure privacy mode, including plugins. Plugins have been removed.
-97.   Plugins must be identified. Signature files? Plugins have bee
+97.   Plugins must be identified. Signature files? Plugins have been
       removed.
 98.   Use unique uuids to identify tabs for restoration purposes. The
       current implementation is flawed. Already implemented.
