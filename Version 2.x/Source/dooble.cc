@@ -5582,6 +5582,7 @@ bool dooble::promptForPassphrase(const bool override)
       dialog.setWindowModality(Qt::ApplicationModal);
       dialog.show();
 #endif
+      dmisc::centerChildWithParent(&dialog, this);
 
       if(dialog.exec() == QDialog::Accepted)
 	{
