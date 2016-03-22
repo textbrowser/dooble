@@ -152,16 +152,21 @@ QSize dtabbar::tabSizeHint(int index) const
     }
   else
     {
-      int preferredTabWidth = 225;
+#ifdef Q_OS_MAC
+      int preferred = 275;
+#else
+      int preferred = 225;
+#endif
+      int preferredTabWidth = preferred;
 
       if(parentWidget() &&
 	 count() * rect().width() < parentWidget()->size().width())
-	preferredTabWidth = 225;
+	preferredTabWidth = preferred;
       else
 	preferredTabWidth = qBound
 	  (125,
 	   qMax(size.width(), rect().width() / qMax(1, count())),
-	   225);
+	   preferred);
 
       size.setWidth(preferredTabWidth);
     }
