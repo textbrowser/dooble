@@ -4462,7 +4462,7 @@ void dooble::slotAbout(void)
   mb->setText
     (QString("<html>"
              "Dooble Web Browser<br><br>"
-             "Version %1, Sofia.<br>"
+             "Version %1, Violet Moonbeams.<br>"
 	     "Copyright (c) 2008 - present.<br>"
 	     "Qt version %3, architecture %4."
 	     "<hr>"
@@ -4470,7 +4470,8 @@ void dooble::slotAbout(void)
 	     "http://dooble.sf.net</a> for more information."
 	     "<hr>"
 	     "Please visit <a href=\"http://spot-on.sf.net\">"
-	     "http://spot-on.sf.net</a> for information regarding Spot-On."
+	     "http://spot-on.sf.net</a> for information regarding "
+	     "the Spot-On project."
 	     "<hr>"
 	     "Are you interested in the latest "
 	     "<a href=\"qrc:/Documentation/RELEASE-NOTES.html\">"

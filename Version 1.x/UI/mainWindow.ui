@@ -581,13 +581,13 @@
     </widget>
     <widget class="QMenu" name="menu_Toolbars">
      <property name="title">
-      <string>&amp;Toolbars</string>
+      <string>&amp;Tool Bars</string>
      </property>
      <addaction name="actionShow_FavoritesToolBar"/>
     </widget>
     <widget class="QMenu" name="menu_Sidebars">
      <property name="title">
-      <string>Si&amp;debars</string>
+      <string>Si&amp;de Bars</string>
      </property>
      <addaction name="actionShow_HistorySideBar"/>
     </widget>
@@ -644,7 +644,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="favoritesToolBar">
    <property name="windowTitle">
-    <string>Favorites Toolbar</string>
+    <string>Favorites Tool Bar</string>
    </property>
    <property name="movable">
     <bool>true</bool>
@@ -664,7 +664,7 @@
   </widget>
   <widget class="QToolBar" name="locationToolBar">
    <property name="windowTitle">
-    <string>Location Toolbar</string>
+    <string>Location Tool Bar</string>
    </property>
    <property name="movable">
     <bool>false</bool>
@@ -844,7 +844,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Status&amp;bar</string>
+    <string>Status &amp;Bar</string>
    </property>
   </action>
   <action name="actionOpen_Directory">
@@ -919,7 +919,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Favorites Toolbar</string>
+    <string>&amp;Favorites Tool Bar</string>
    </property>
   </action>
   <action name="actionShow_HistorySideBar">
@@ -927,7 +927,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;History Sidebar</string>
+    <string>&amp;History Side Bar</string>
    </property>
   </action>
   <action name="action_Authenticate">
