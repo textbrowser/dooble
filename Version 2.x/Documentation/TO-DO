@@ -151,6 +151,10 @@ Completed Items
 95.   Review INI values. Extreme iteration count values will overflow
       the integer container.
 96.   Pure privacy mode, including plugins. Plugins have been removed.
+97.   Plugins must be identified. Signature files? Plugins have bee
+      removed.
+98.   Use unique uuids to identify tabs for restoration purposes. The
+      current implementation is flawed. Already implemented.
 
 Remaining Items
 
@@ -171,11 +175,8 @@ Remaining Items
 12.   The URL widget utilizes too much memory. Use the model-view
       concept.
 13.   Review QWebSettings with respect to recommended fonts.
-14.   Plugins must be identified. Signature files?
-15.   Use unique uuids to identify tabs for restoration purposes. The
-      current implementation is flawed.
-16.   Delayed downloads are not reflected.
-17.   Allow regular expressions in blocked hosts.
+14.   Delayed downloads are not reflected.
+15.   Allow regular expressions in blocked hosts.
 
 Removed Items
 
