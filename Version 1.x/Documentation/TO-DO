@@ -150,32 +150,32 @@ Completed Items
 94.   Objects of type size_t may contain negative values.
 95.   Review INI values. Extreme iteration count values will overflow
       the integer container.
+96.   Pure privacy mode, including plugins. Plugins have been removed.
 
 Remaining Items
 
-1.    Pure privacy mode, including plugins.
-2.    Provide a means for customizing the search engines.
-3.    Syntax highlighting.
-4.    Per-tab proxy settings.
-5.    P2P e-mail.
-6.    Cached items should only be available to owners of the items.
-7.    Resolve persistent authentication-required prompts for proxies.
-8.    Raise the window whose tabs have been modified prior to prompting the
+1.    Provide a means for customizing the search engines.
+2.    Syntax highlighting.
+3.    Per-tab proxy settings.
+4.    P2P e-mail.
+5.    Cached items should only be available to owners of the items.
+6.    Resolve persistent authentication-required prompts for proxies.
+7.    Raise the window whose tabs have been modified prior to prompting the
       user.
-9.    Raise parent windows of dialogs? Navigate to parent tabs?
-10.   Provide a means of configuring a DNS proxy. The proxy
+8.    Raise parent windows of dialogs? Navigate to parent tabs?
+9.    Provide a means of configuring a DNS proxy. The proxy
       shall only be used during the retrieval of a site's IP address.
-11.   Configurable, site-based, HTTP headers.
-12.   Implement as many items as possible from
+10.   Configurable, site-based, HTTP headers.
+11.   Implement as many items as possible from
       http://trac.webkit.org/wiki/Fingerprinting.
-13.   The URL widget utilizes too much memory. Use the model-view
+12.   The URL widget utilizes too much memory. Use the model-view
       concept.
-14.   Review QWebSettings with respect to recommended fonts.
-15.   Plugins must be identified. Signature files?
-16.   Use unique uuids to identify tabs for restoration purposes. The
+13.   Review QWebSettings with respect to recommended fonts.
+14.   Plugins must be identified. Signature files?
+15.   Use unique uuids to identify tabs for restoration purposes. The
       current implementation is flawed.
-17.   Delayed downloads are not reflected.
-18.   Allow regular expressions in blocked hosts.
+16.   Delayed downloads are not reflected.
+17.   Allow regular expressions in blocked hosts.
 
 Removed Items
 
