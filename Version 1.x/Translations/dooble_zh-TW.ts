@@ -1976,7 +1976,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Status&amp;bar</source>
-        <translation>狀態列(&amp;B)</translation>
+        <translation type="vanished">狀態列(&amp;B)</translation>
     </message>
     <message>
         <source>Page &amp;Source</source>
@@ -2099,31 +2099,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Toolbars</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Si&amp;debars</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Favorites Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;History Sidebar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Authenticate Passphrase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Favorites Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2260,6 +2236,34 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Gridify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tool Bars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Si&amp;de Bars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites Tool Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location Tool Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Favorites Tool Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;History Side Bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

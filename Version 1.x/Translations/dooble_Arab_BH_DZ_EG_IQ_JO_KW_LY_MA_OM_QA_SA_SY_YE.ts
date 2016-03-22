@@ -76,27 +76,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1492"/>
+        <location filename="../Source/dmisc.cc" line="1500"/>
         <source>%1 KiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1495"/>
+        <location filename="../Source/dmisc.cc" line="1503"/>
         <source>%1 MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1486"/>
+        <location filename="../Source/dmisc.cc" line="1494"/>
         <source>0 Bytes</source>
         <translation>0 بايت</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1488"/>
+        <location filename="../Source/dmisc.cc" line="1496"/>
         <source>1 Byte</source>
         <translation>1 بايت</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1490"/>
+        <location filename="../Source/dmisc.cc" line="1498"/>
         <source>%1 Bytes</source>
         <translation>%1 بايت</translation>
     </message>
@@ -1191,37 +1191,37 @@
         <location filename="../Source/dooble.cc" line="2339"/>
         <location filename="../Source/dooble.cc" line="2396"/>
         <location filename="../Source/dooble.cc" line="2436"/>
-        <location filename="../Source/dooble.cc" line="2501"/>
-        <location filename="../Source/dooble.cc" line="3300"/>
-        <location filename="../Source/dooble.cc" line="3487"/>
-        <location filename="../Source/dooble.cc" line="3511"/>
-        <location filename="../Source/dooble.cc" line="5031"/>
-        <location filename="../Source/dooble.cc" line="5513"/>
+        <location filename="../Source/dooble.cc" line="2503"/>
+        <location filename="../Source/dooble.cc" line="3307"/>
+        <location filename="../Source/dooble.cc" line="3494"/>
+        <location filename="../Source/dooble.cc" line="3518"/>
+        <location filename="../Source/dooble.cc" line="5039"/>
+        <location filename="../Source/dooble.cc" line="5521"/>
         <source>(Untitled)</source>
         <translation>(دون عنوان)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3086"/>
-        <location filename="../Source/dooble.cc" line="3155"/>
-        <location filename="../Source/dooble.cc" line="3271"/>
-        <location filename="../Source/dooble.cc" line="3587"/>
-        <location filename="../Source/dooble.cc" line="3726"/>
-        <location filename="../Source/dooble.cc" line="3766"/>
-        <location filename="../Source/dooble.cc" line="3974"/>
-        <location filename="../Source/dooble.cc" line="5437"/>
-        <location filename="../Source/dooble.cc" line="6067"/>
-        <location filename="../Source/dooble.cc" line="6370"/>
+        <location filename="../Source/dooble.cc" line="3093"/>
+        <location filename="../Source/dooble.cc" line="3162"/>
+        <location filename="../Source/dooble.cc" line="3278"/>
+        <location filename="../Source/dooble.cc" line="3594"/>
+        <location filename="../Source/dooble.cc" line="3733"/>
+        <location filename="../Source/dooble.cc" line="3773"/>
+        <location filename="../Source/dooble.cc" line="3981"/>
+        <location filename="../Source/dooble.cc" line="5445"/>
+        <location filename="../Source/dooble.cc" line="6077"/>
+        <location filename="../Source/dooble.cc" line="6380"/>
         <source>Dooble Web Browser</source>
         <translation>متصفح الويب دووبل</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3096"/>
-        <location filename="../Source/dooble.cc" line="3099"/>
-        <location filename="../Source/dooble.cc" line="3281"/>
-        <location filename="../Source/dooble.cc" line="3284"/>
-        <location filename="../Source/dooble.cc" line="5447"/>
-        <location filename="../Source/dooble.cc" line="5450"/>
-        <location filename="../Source/dooble.cc" line="6372"/>
+        <location filename="../Source/dooble.cc" line="3103"/>
+        <location filename="../Source/dooble.cc" line="3106"/>
+        <location filename="../Source/dooble.cc" line="3288"/>
+        <location filename="../Source/dooble.cc" line="3291"/>
+        <location filename="../Source/dooble.cc" line="5455"/>
+        <location filename="../Source/dooble.cc" line="5458"/>
+        <location filename="../Source/dooble.cc" line="6382"/>
         <source> - Dooble Web Browser</source>
         <translation>- متصفح الويب دووبل</translation>
     </message>
@@ -1254,69 +1254,69 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2884"/>
+        <location filename="../Source/dooble.cc" line="2891"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation>لديك ألسنة بها محتوى مُعدّل. هل أنت متأكد من رغبتك في الخروج؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2887"/>
+        <location filename="../Source/dooble.cc" line="2894"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation>لديك ألسنة بها محتوى مُعدّل. هل أنت متأكد من رغبتك في الإغلاق؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3088"/>
-        <location filename="../Source/dooble.cc" line="3273"/>
-        <location filename="../Source/dooble.cc" line="5439"/>
+        <location filename="../Source/dooble.cc" line="3095"/>
+        <location filename="../Source/dooble.cc" line="3280"/>
+        <location filename="../Source/dooble.cc" line="5447"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>متصفح الويب دووبل (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4576"/>
+        <location filename="../Source/dooble.cc" line="4584"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5169"/>
+        <location filename="../Source/dooble.cc" line="5177"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6407"/>
+        <location filename="../Source/dooble.cc" line="6417"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>هل أنت متأكد من رغبتك في فتح %1 نوافذ؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6560"/>
+        <location filename="../Source/dooble.cc" line="6570"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>هل أنت متأكد من رغبتك في مغادرة الصفحة المعدّلة؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7413"/>
+        <location filename="../Source/dooble.cc" line="7425"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7416"/>
-        <location filename="../Source/dooble.cc" line="7420"/>
+        <location filename="../Source/dooble.cc" line="7428"/>
+        <location filename="../Source/dooble.cc" line="7432"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7780"/>
+        <location filename="../Source/dooble.cc" line="7792"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7782"/>
+        <location filename="../Source/dooble.cc" line="7794"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2879"/>
-        <location filename="../Source/dooble.cc" line="2931"/>
-        <location filename="../Source/dooble.cc" line="3924"/>
-        <location filename="../Source/dooble.cc" line="6404"/>
-        <location filename="../Source/dooble.cc" line="6556"/>
+        <location filename="../Source/dooble.cc" line="2886"/>
+        <location filename="../Source/dooble.cc" line="2938"/>
+        <location filename="../Source/dooble.cc" line="3931"/>
+        <location filename="../Source/dooble.cc" line="6414"/>
+        <location filename="../Source/dooble.cc" line="6566"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>متصفح الويب دووبل: تأكيد</translation>
     </message>
@@ -1326,27 +1326,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2934"/>
+        <location filename="../Source/dooble.cc" line="2941"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3927"/>
+        <location filename="../Source/dooble.cc" line="3934"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>هل أنت متأكد من رغبتك في إغلاق هذا اللسان المُعدّل؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3996"/>
+        <location filename="../Source/dooble.cc" line="4003"/>
         <source>&amp;Clear</source>
         <translation>ا&amp;مسح</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4453"/>
+        <location filename="../Source/dooble.cc" line="4460"/>
         <source>Dooble Web Browser: About</source>
         <translation>متصفح الويب دووبل: عنْ</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4573"/>
+        <location filename="../Source/dooble.cc" line="4581"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>متصفح الويب دووبل: حفظ كـ</translation>
     </message>
@@ -1355,15 +1355,15 @@
         <translation type="obsolete">ا&amp;حفظ</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4954"/>
-        <location filename="../Source/dooble.cc" line="4960"/>
         <location filename="../Source/dooble.cc" line="4962"/>
-        <location filename="../Source/dooble.cc" line="4966"/>
+        <location filename="../Source/dooble.cc" line="4968"/>
+        <location filename="../Source/dooble.cc" line="4970"/>
+        <location filename="../Source/dooble.cc" line="4974"/>
         <source>Dooble Desktop</source>
         <translation>سطح مكتب دووبل</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5166"/>
+        <location filename="../Source/dooble.cc" line="5174"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>متصفح الويب دووبل: فتح مجلد</translation>
     </message>
@@ -1372,12 +1372,12 @@
         <translation type="obsolete">ا&amp;فتح</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5304"/>
+        <location filename="../Source/dooble.cc" line="5312"/>
         <source>The site %1 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5368"/>
+        <location filename="../Source/dooble.cc" line="5376"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1394,12 +1394,12 @@
         <translation type="obsolete">موقع مجهول (فارغ أو رابط خاطيء) يتسبب في استثناء. رجاءً انقر للاستعراض.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7150"/>
+        <location filename="../Source/dooble.cc" line="7162"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>متصفح الويب دووبل: تذكير</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7151"/>
+        <location filename="../Source/dooble.cc" line="7163"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1408,15 +1408,15 @@
         <translation type="obsolete">لم تجهز العبارة السرية بعد. من فضلك قم بزيارة تبويب &quot;الوثوق&quot; في نافذة &quot;الإعدادات&quot; واختر عبارة سرّية. حالما تختار عبارة سرّية، فإن العلامات المرجعية، والكعكات، وجميع المعلومات الأساسية الأخرى ستكون متوفرة في الجلسات المقبلة.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6868"/>
-        <location filename="../Source/dooble.cc" line="6873"/>
+        <location filename="../Source/dooble.cc" line="6878"/>
+        <location filename="../Source/dooble.cc" line="6883"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>يتسبب موقع &quot;%1&quot; في استثناء. رجاءً انقر للاستعراض.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7107"/>
-        <location filename="../Source/dooble.cc" line="7109"/>
-        <location filename="../Source/dooble.cc" line="7113"/>
+        <location filename="../Source/dooble.cc" line="7119"/>
+        <location filename="../Source/dooble.cc" line="7121"/>
+        <location filename="../Source/dooble.cc" line="7125"/>
         <source>Restore Session</source>
         <translation>استعادة الجلسة</translation>
     </message>
@@ -2282,6 +2282,16 @@
         <translation>ت&amp;كبير وتصغير</translation>
     </message>
     <message>
+        <location filename="../UI/mainWindow.ui" line="584"/>
+        <source>&amp;Tool Bars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/mainWindow.ui" line="590"/>
+        <source>Si&amp;de Bars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/mainWindow.ui" line="617"/>
         <source>&amp;Tabs</source>
         <translation>الأ&amp;لسنة</translation>
@@ -2292,9 +2302,8 @@
         <translation>أ&amp;مكنة</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="647"/>
         <source>Favorites Toolbar</source>
-        <translation>شريط أدوات المُفضلات</translation>
+        <translation type="vanished">شريط أدوات المُفضلات</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="684"/>
@@ -2310,6 +2319,16 @@
         <location filename="../UI/mainWindow.ui" line="692"/>
         <source>New &amp;Tab</source>
         <translation>&amp;لسان جديد</translation>
+    </message>
+    <message>
+        <location filename="../UI/mainWindow.ui" line="647"/>
+        <source>Favorites Tool Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/mainWindow.ui" line="667"/>
+        <source>Location Tool Bar</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="695"/>
@@ -2330,6 +2349,11 @@
         <location filename="../UI/mainWindow.ui" line="708"/>
         <source>Close &amp;Window</source>
         <translation>أغلق ال&amp;نافذة</translation>
+    </message>
+    <message>
+        <location filename="../UI/mainWindow.ui" line="847"/>
+        <source>Status &amp;Bar</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="852"/>
@@ -2411,14 +2435,12 @@
         <translation>صفحة البداية</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="584"/>
         <source>&amp;Toolbars</source>
-        <translation>أشرطة الأ&amp;دوات</translation>
+        <translation type="vanished">أشرطة الأ&amp;دوات</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="590"/>
         <source>Si&amp;debars</source>
-        <translation>أشرطة &amp;جانبية</translation>
+        <translation type="vanished">أشرطة &amp;جانبية</translation>
     </message>
     <message>
         <source>&amp;Addons</source>
@@ -2430,9 +2452,8 @@
         <translation>&amp;علامات</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="667"/>
         <source>Location Toolbar</source>
-        <translation>شريط أدوات الموقع</translation>
+        <translation type="vanished">شريط أدوات الموقع</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="687"/>
@@ -2540,9 +2561,18 @@
         <translation>استعد ال&amp;مقاس الطبيعي</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="847"/>
+        <location filename="../UI/mainWindow.ui" line="922"/>
+        <source>&amp;Favorites Tool Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/mainWindow.ui" line="930"/>
+        <source>&amp;History Side Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Status&amp;bar</source>
-        <translation>شريط ال&amp;حالة</translation>
+        <translation type="vanished">شريط ال&amp;حالة</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="1076"/>
@@ -2590,14 +2620,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="922"/>
         <source>&amp;Favorites Toolbar</source>
-        <translation>شريط أدوات المُ&amp;فضلات</translation>
+        <translation type="vanished">شريط أدوات المُ&amp;فضلات</translation>
     </message>
     <message>
-        <location filename="../UI/mainWindow.ui" line="930"/>
         <source>&amp;History Sidebar</source>
-        <translation>شريط ال&amp;تأريخ الجانبي</translation>
+        <translation type="vanished">شريط ال&amp;تأريخ الجانبي</translation>
     </message>
     <message>
         <location filename="../UI/mainWindow.ui" line="935"/>
