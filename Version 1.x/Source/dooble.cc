@@ -5900,6 +5900,7 @@ bool dooble::promptForPassphrase(const bool override)
 			(!dmisc::passphraseWasAuthenticated());
 		  }
 
+	      reinstate();
 	      s_makeCrashFile();
 	      return true;
 	    }
