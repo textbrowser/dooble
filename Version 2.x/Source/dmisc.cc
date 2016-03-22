@@ -587,20 +587,28 @@ QIcon dmisc::iconForUrl(const QUrl &url)
 
 	if(db.open())
 	  {
+	    QByteArray bytes(url.toEncoded(QUrl::StripTrailingSlash));
+	    QSqlQuery query(db);
 	    bool ok = true;
 	    int temporary = passphraseWasAuthenticated() ? 0 : 1;
-	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
 	    query.prepare("SELECT favicon FROM favicons "
 			  "INDEXED BY url_hash_index "
 			  "WHERE "
 			  "temporary = ? AND "
-			  "url_hash = ?");
+			  "url_hash IN (?, ?, ?)");
 	    query.bindValue(0, temporary);
 	    query.bindValue
-	      (1, hashedString(url.toEncoded(QUrl::StripTrailingSlash), &ok).
-	       toBase64());
+	      (1, hashedString(bytes, &ok).toBase64());
+	    query.bindValue
+	      (2, hashedString(bytes.lastIndexOf('/') ==
+			       bytes.length() - 1 ?
+			       bytes.mid(0, bytes.length() - 1) :
+			       bytes, &ok).toBase64());
+	    query.bindValue
+	      (3, hashedString(bytes.mid(bytes.length() - 1) == "/" ?
+			       bytes : bytes.append('/'), &ok).toBase64());
 
 	    if(ok && query.exec())
 	      if(query.next())
