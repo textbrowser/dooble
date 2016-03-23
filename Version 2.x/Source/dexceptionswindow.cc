@@ -130,10 +130,12 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 	  ui.tableView->horizontalHeader()->setStretchLastSection(true);
 	  ui.tableView->horizontalHeader()->setSectionResizeMode
 	    (QHeaderView::Interactive);
+
+	  for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)
+	    ui.tableView->resizeColumnToContents(i);
 	}
       else
-	for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)
-	  ui.tableView->resizeColumnToContents(i);
+	ui.tableView->resizeColumnToContents(0);
     }
   else
     for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)
