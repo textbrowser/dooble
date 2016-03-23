@@ -588,6 +588,13 @@
     </message>
 </context>
 <context>
+    <name>derrorlog</name>
+    <message>
+        <source>Search Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>dexceptionswindow</name>
     <message>
         <source>%1 Item(s) / %2 Item(s) Selected</source>
@@ -942,6 +949,10 @@
         <source>&amp;Spot-On Share</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search History</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble</name>
@@ -1083,6 +1094,14 @@
     </message>
     <message>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Page</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1254,6 +1273,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Source</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2969,10 +2992,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Location Toolbar Icon Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>32</source>
         <translation type="unfinished">32</translation>
     </message>
@@ -3382,6 +3401,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Spatial Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location Tool Bar Icon Size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
