@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>104</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,7 +380,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>512</width>
+               <width>638</width>
                <height>571</height>
               </rect>
              </property>
@@ -464,7 +464,7 @@
                 <item>
                  <widget class="QLabel" name="label_57">
                   <property name="text">
-                   <string>Location Toolbar Icon Size</string>
+                   <string>Location Tool Bar Icon Size</string>
                   </property>
                  </widget>
                 </item>
@@ -1234,8 +1234,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>286</width>
+               <y>-60</y>
+               <width>632</width>
                <height>550</height>
               </rect>
              </property>
@@ -1551,7 +1551,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>564</width>
+               <width>638</width>
                <height>897</height>
               </rect>
              </property>
@@ -2542,8 +2542,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>616</width>
+               <y>-232</y>
+               <width>643</width>
                <height>747</height>
               </rect>
              </property>
@@ -3082,8 +3082,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-529</y>
-               <width>642</width>
+               <y>0</y>
+               <width>638</width>
                <height>1320</height>
               </rect>
              </property>

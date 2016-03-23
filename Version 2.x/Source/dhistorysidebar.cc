@@ -54,6 +54,7 @@ dhistorysidebar::dhistorysidebar(QWidget *parent):QWidget(parent)
   ui.history->setModel(dooble::s_historyModel);
   ui.history->setContextMenuPolicy(Qt::CustomContextMenu);
   ui.history->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+  ui.searchLineEdit->setPlaceholderText(tr("Search"));
   connect(this,
 	  SIGNAL(iconsChanged(void)),
 	  ui.searchLineEdit,

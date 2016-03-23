@@ -58,6 +58,7 @@ dhistorysidebar::dhistorysidebar(QWidget *parent):QWidget(parent)
 #else
   ui.history->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
 #endif
+  ui.searchLineEdit->setPlaceholderText(tr("Search"));
   connect(this,
 	  SIGNAL(iconsChanged(void)),
 	  ui.searchLineEdit,
