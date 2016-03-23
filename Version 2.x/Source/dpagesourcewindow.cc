@@ -49,6 +49,7 @@ dpagesourcewindow::dpagesourcewindow(QWidget *parent,
   setWindowFlags(windowFlags() & ~Qt::WindowFullscreenButtonHint);
   statusBar()->setSizeGripEnabled(false);
 #endif
+  ui.findLineEdit->setPlaceholderText(tr("Search Source"));
   m_findLineEditPalette = ui.findLineEdit->palette();
   ui.textBrowser->setPlainText(html);
   connect(ui.actionPrint, SIGNAL(triggered(void)), this,
@@ -91,7 +92,7 @@ dpagesourcewindow::dpagesourcewindow(QWidget *parent,
     fileName = url.path();
 
   ui.actionWrap_Lines->setChecked
-    (dooble::s_settings.value("pageSource/wrapLines", false).toBool());
+    (dooble::s_settings.value("pageSource/wrapLines", true).toBool());
   slotWrapLines(ui.actionWrap_Lines->isChecked());
   slotSetIcons();
   slotHideFind();

@@ -1136,6 +1136,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   sbWidget->layout()->setContentsMargins(0, 5, 15, 5);
 #endif
   ui.findFrame->setVisible(false);
+  ui.findLineEdit->setPlaceholderText(tr("Search Page"));
   ui.backToolButton->setMenu(new QMenu(this));
 #ifdef Q_OS_MAC
   ui.action_Hide_Menubar->setEnabled(false);

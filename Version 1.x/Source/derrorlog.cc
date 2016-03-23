@@ -43,6 +43,7 @@ derrorlog::derrorlog(void):QMainWindow()
 #endif
   statusBar()->setSizeGripEnabled(false);
 #endif
+  ui.findLineEdit->setPlaceholderText(tr("Search Log"));
   m_findLineEditPalette = ui.findLineEdit->palette();
   connect(ui.action_Close,
 	  SIGNAL(triggered(void)),
