@@ -391,6 +391,7 @@ QStringList dcrypt::cipherTypes(void)
 
   types << "aes256"
 	<< "camellia256"
+        << "gost28147"
 	<< "serpent256"
 	<< "twofish";
 
