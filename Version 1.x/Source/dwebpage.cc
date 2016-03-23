@@ -425,29 +425,6 @@ QString dwebpage::userAgentForUrl(const QUrl &url) const
 {
   QString agent(QWebPage::userAgentForUrl(url));
 
-  if(url.host().contains("gmail.com") ||
-     url.host().contains("google.com"))
-    {
-#ifdef Q_OS_MAC
-      QSysInfo::MacVersion version = QSysInfo::MacintoshVersion;
-
-      if(version == QSysInfo::MV_10_3)
-	agent.replace("Mac OS X", "Mac OS X 10_3");
-      else if(version == QSysInfo::MV_10_4)
-	agent.replace("Mac OS X", "Mac OS X 10_4");
-      else if(version == QSysInfo::MV_10_5)
-	agent.replace("Mac OS X", "Mac OS X 10_5");
-      else if(version == QSysInfo::MV_10_6)
-	agent.replace("Mac OS X", "Mac OS X 10_6");
-      else if(version == QSysInfo::MV_10_7)
-	agent.replace("Mac OS X", "Mac OS X 10_7");
-      else if(version == QSysInfo::MV_10_8)
-	agent.replace("Mac OS X", "Mac OS X 10_8");
-      else
-	agent.replace("Mac OS X", "Mac OS X 10");
-#endif
-    }
-
   agent.remove(QString("%1/%2").arg("Dooble").arg(DOOBLE_VERSION_STR));
   return agent;
 }
