@@ -139,10 +139,12 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 #endif
 	}
       else
-	ui.tableView->resizeColumnToContents(0);
+	for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)
+	  ui.tableView->resizeColumnToContents(i);
     }
   else
-    ui.tableView->resizeColumnToContents(0);
+    for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)
+      ui.tableView->resizeColumnToContents(i);
 
   ui.accept->setEnabled(false);
   ui.block->setEnabled(false);
