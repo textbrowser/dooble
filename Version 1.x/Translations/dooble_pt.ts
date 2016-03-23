@@ -1974,46 +1974,46 @@
         <translation type="obsolete">Adicionar novo separador</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="251"/>
+        <location filename="../Source/dtabwidget.cc" line="256"/>
         <source>&amp;Bookmark</source>
         <translation>&amp;Marcador</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="254"/>
-        <location filename="../Source/dtabwidget.cc" line="276"/>
+        <location filename="../Source/dtabwidget.cc" line="259"/>
+        <location filename="../Source/dtabwidget.cc" line="281"/>
         <source>Close Ta&amp;b</source>
         <translation>Fechar s&amp;eparador</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="257"/>
-        <location filename="../Source/dtabwidget.cc" line="279"/>
+        <location filename="../Source/dtabwidget.cc" line="262"/>
+        <location filename="../Source/dtabwidget.cc" line="284"/>
         <source>Close &amp;Other Tabs</source>
         <translation>Fechar &amp;os outros separadores</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="261"/>
-        <location filename="../Source/dtabwidget.cc" line="283"/>
+        <location filename="../Source/dtabwidget.cc" line="266"/>
+        <location filename="../Source/dtabwidget.cc" line="288"/>
         <source>New Pr&amp;ivate Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="263"/>
-        <location filename="../Source/dtabwidget.cc" line="285"/>
+        <location filename="../Source/dtabwidget.cc" line="268"/>
+        <location filename="../Source/dtabwidget.cc" line="290"/>
         <source>New &amp;Tab</source>
         <translation>Novo &amp;separador</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="265"/>
+        <location filename="../Source/dtabwidget.cc" line="270"/>
         <source>Open in &amp;New Window</source>
         <translation>Abrir em &amp;nova janela</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="269"/>
+        <location filename="../Source/dtabwidget.cc" line="274"/>
         <source>&amp;Reload</source>
         <translation type="unfinished">&amp;Recarregar</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="271"/>
+        <location filename="../Source/dtabwidget.cc" line="276"/>
         <source>&amp;Stop</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2022,27 +2022,27 @@
         <translation type="obsolete">Recarregar &amp;separador</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="290"/>
+        <location filename="../Source/dtabwidget.cc" line="295"/>
         <source>&amp;JavaScript</source>
         <translation>&amp;JavaScript</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="301"/>
+        <location filename="../Source/dtabwidget.cc" line="306"/>
         <source>&amp;Private Browsing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="312"/>
+        <location filename="../Source/dtabwidget.cc" line="317"/>
         <source>&amp;Web Plugins</source>
         <translation>Plugins &amp;web</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="324"/>
+        <location filename="../Source/dtabwidget.cc" line="329"/>
         <source>&amp;Private Cookies</source>
         <translation>Cookies &amp;privados</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="337"/>
+        <location filename="../Source/dtabwidget.cc" line="342"/>
         <source>&amp;View Private Cookies</source>
         <translation>&amp;Ver cookies privados</translation>
     </message>

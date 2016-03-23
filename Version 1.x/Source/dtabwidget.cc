@@ -153,7 +153,7 @@ QSize dtabbar::tabSizeHint(int index) const
   else
     {
 #ifdef Q_OS_MAC
-      int preferred = 275;
+      int preferred = 225;
 #else
       int preferred = 225;
 #endif
@@ -477,7 +477,7 @@ void dtabwidget::setTabButton(int index)
       widget->setCurrentIndex(0);
       widget->setMaximumWidth(progressBar->width());
       widget->setMaximumHeight
-	(static_cast<int> (0.60 * qMax(label->height(),
+	(static_cast<int> (0.65 * qMax(label->height(),
 				       progressBar->height())));
     }
 
