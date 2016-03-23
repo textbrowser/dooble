@@ -120,18 +120,23 @@ dcookiewindow::dcookiewindow(dcookies *cookies, QWidget *parent):
 	  SLOT(slotCheckBoxItemChanged(QStandardItem *)));
 
   if(dooble::s_settings.contains("cookiesWindow/tableColumnsState1"))
-    if(!ui.cookies->header()->restoreState
-       (dooble::s_settings.value
-	("cookiesWindow/tableColumnsState1", "").toByteArray()))
-      {
-	ui.cookies->header()->setDefaultAlignment(Qt::AlignLeft);
-	ui.cookies->header()->setSortIndicator(0, Qt::AscendingOrder);
-	ui.cookies->header()->setSortIndicatorShown(true);
-	ui.cookies->header()->setStretchLastSection(true);
+    {
+      if(!ui.cookies->header()->restoreState
+	 (dooble::s_settings.value
+	  ("cookiesWindow/tableColumnsState1", "").toByteArray()))
+	{
+	  ui.cookies->header()->setDefaultAlignment(Qt::AlignLeft);
+	  ui.cookies->header()->setSortIndicator(0, Qt::AscendingOrder);
+	  ui.cookies->header()->setSortIndicatorShown(true);
+	  ui.cookies->header()->setStretchLastSection(true);
 
-	for(int i = 0; i < ui.cookies->header()->count(); i++)
-	  ui.cookies->resizeColumnToContents(i);
-      }
+	  for(int i = 0; i < ui.cookies->header()->count(); i++)
+	    ui.cookies->resizeColumnToContents(i);
+	}
+    }
+  else
+    for(int i = 0; i < ui.cookies->header()->count(); i++)
+      ui.cookies->resizeColumnToContents(i);
 
 #if QT_VERSION >= 0x050000
   ui.cookies->header()->setSectionsMovable(true);

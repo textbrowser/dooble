@@ -72,7 +72,7 @@ dhistory::dhistory(void):QMainWindow()
   ui.history->horizontalHeader()->setSortIndicatorShown(true);
   ui.history->horizontalHeader()->setStretchLastSection(true);
 
-  for(int i = 0; i < ui.history->horizontalHeader()->count() - 2; i++)
+  for(int i = 0; i < ui.history->horizontalHeader()->count() - 1; i++)
     ui.history->resizeColumnToContents(i);
 
 #if QT_VERSION >= 0x050000
@@ -271,24 +271,33 @@ dhistory::dhistory(void):QMainWindow()
 				"").toByteArray());
 
   if(dooble::s_settings.contains("historyWindow/tableColumnsState6"))
-    if(!ui.history->horizontalHeader()->restoreState
-       (dooble::s_settings.value("historyWindow/tableColumnsState6",
-				 "").toByteArray()))
-      {
-	ui.history->horizontalHeader()->setDefaultAlignment
-	  (Qt::AlignLeft);
-	ui.history->horizontalHeader()->setSortIndicator(0,
-							 Qt::AscendingOrder);
-	ui.history->horizontalHeader()->setSortIndicatorShown(true);
-	ui.history->horizontalHeader()->setStretchLastSection(true);
+    {
+      if(!ui.history->horizontalHeader()->restoreState
+	 (dooble::s_settings.value("historyWindow/tableColumnsState6",
+				   "").toByteArray()))
+	{
+	  ui.history->horizontalHeader()->setDefaultAlignment
+	    (Qt::AlignLeft);
+	  ui.history->horizontalHeader()->setSortIndicator(0,
+							   Qt::AscendingOrder);
+	  ui.history->horizontalHeader()->setSortIndicatorShown(true);
+	  ui.history->horizontalHeader()->setStretchLastSection(true);
 #if QT_VERSION >= 0x050000
-	ui.history->horizontalHeader()->setSectionResizeMode
-	  (QHeaderView::Interactive);
+	  ui.history->horizontalHeader()->setSectionResizeMode
+	    (QHeaderView::Interactive);
 #else
-	ui.history->horizontalHeader()->setResizeMode
-	  (QHeaderView::Interactive);
+	  ui.history->horizontalHeader()->setResizeMode
+	    (QHeaderView::Interactive);
 #endif
-      }
+
+	  for(int i = 0; i < ui.history->horizontalHeader()->count() - 1;
+	      i++)
+	    ui.history->resizeColumnToContents(i);
+	}
+    }
+  else
+    for(int i = 0; i < ui.history->horizontalHeader()->count() - 1; i++)
+      ui.history->resizeColumnToContents(i);
 
 #if QT_VERSION >= 0x050000
   ui.history->horizontalHeader()->setSectionsMovable(true);

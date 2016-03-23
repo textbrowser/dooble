@@ -77,7 +77,7 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
   ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
   ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
 
-  for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 2; i++)
+  for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 1; i++)
     ui.bookmarks->resizeColumnToContents(i);
 
   ui.bookmarks->horizontalHeader()->setSectionResizeMode
@@ -183,20 +183,28 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
 				"").toByteArray());
 
   if(dooble::s_settings.contains("bookmarksWindow/tableColumnsState1"))
-    if(!ui.bookmarks->horizontalHeader()->
-       restoreState(dooble::s_settings.value("bookmarksWindow/"
-					     "tableColumnsState1",
-					     "").toByteArray()))
-      {
-	ui.bookmarks->horizontalHeader()->setDefaultAlignment
-	  (Qt::AlignLeft);
-	ui.bookmarks->horizontalHeader()->setSortIndicator
-	  (0, Qt::AscendingOrder);
-	ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
-	ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
-	ui.bookmarks->horizontalHeader()->setSectionResizeMode
-	  (QHeaderView::Interactive);
-      }
+    {
+      if(!ui.bookmarks->horizontalHeader()->
+	 restoreState(dooble::s_settings.value("bookmarksWindow/"
+					       "tableColumnsState1",
+					       "").toByteArray()))
+	{
+	  ui.bookmarks->horizontalHeader()->setDefaultAlignment
+	    (Qt::AlignLeft);
+	  ui.bookmarks->horizontalHeader()->setSortIndicator
+	    (0, Qt::AscendingOrder);
+	  ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
+	  ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
+	  ui.bookmarks->horizontalHeader()->setSectionResizeMode
+	    (QHeaderView::Interactive);
+	  for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 1;
+	      i++)
+	    ui.bookmarks->resizeColumnToContents(i);
+	}
+    }
+  else
+    for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 1; i++)
+      ui.bookmarks->resizeColumnToContents(i);
 
   ui.bookmarks->horizontalHeader()->setSectionsMovable(true);
   createBookmarksDatabase();

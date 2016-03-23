@@ -70,7 +70,7 @@ dhistory::dhistory(void):QMainWindow()
   ui.history->horizontalHeader()->setSortIndicatorShown(true);
   ui.history->horizontalHeader()->setStretchLastSection(true);
 
-  for(int i = 0; i < ui.history->horizontalHeader()->count() - 2; i++)
+  for(int i = 0; i < ui.history->horizontalHeader()->count() - 1; i++)
     ui.history->resizeColumnToContents(i);
 
   ui.history->horizontalHeader()->setSectionResizeMode
@@ -265,19 +265,28 @@ dhistory::dhistory(void):QMainWindow()
 				"").toByteArray());
 
   if(dooble::s_settings.contains("historyWindow/tableColumnsState6"))
-    if(!ui.history->horizontalHeader()->restoreState
-       (dooble::s_settings.value("historyWindow/tableColumnsState6",
-				 "").toByteArray()))
-      {
-	ui.history->horizontalHeader()->setDefaultAlignment
-	  (Qt::AlignLeft);
-	ui.history->horizontalHeader()->setSortIndicator(0,
-							 Qt::AscendingOrder);
-	ui.history->horizontalHeader()->setSortIndicatorShown(true);
-	ui.history->horizontalHeader()->setStretchLastSection(true);
-	ui.history->horizontalHeader()->setSectionResizeMode
-	  (QHeaderView::Interactive);
-      }
+    {
+      if(!ui.history->horizontalHeader()->restoreState
+	 (dooble::s_settings.value("historyWindow/tableColumnsState6",
+				   "").toByteArray()))
+	{
+	  ui.history->horizontalHeader()->setDefaultAlignment
+	    (Qt::AlignLeft);
+	  ui.history->horizontalHeader()->setSortIndicator(0,
+							   Qt::AscendingOrder);
+	  ui.history->horizontalHeader()->setSortIndicatorShown(true);
+	  ui.history->horizontalHeader()->setStretchLastSection(true);
+	  ui.history->horizontalHeader()->setSectionResizeMode
+	    (QHeaderView::Interactive);
+
+	  for(int i = 0; i < ui.history->horizontalHeader()->count() - 1;
+	      i++)
+	    ui.history->resizeColumnToContents(i);
+	}
+    }
+  else
+    for(int i = 0; i < ui.history->horizontalHeader()->count() - 1; i++)
+      ui.history->resizeColumnToContents(i);
 
   ui.history->horizontalHeader()->setSectionsMovable(true);
   ui.sharePushButton->setEnabled(false);

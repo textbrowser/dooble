@@ -134,8 +134,6 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 	  for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)
 	    ui.tableView->resizeColumnToContents(i);
 	}
-      else
-	ui.tableView->resizeColumnToContents(0);
     }
   else
     for(int i = 0; i < ui.tableView->horizontalHeader()->count(); i++)

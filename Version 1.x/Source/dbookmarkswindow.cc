@@ -81,7 +81,7 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
   ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
   ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
 
-  for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 2; i++)
+  for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 1; i++)
     ui.bookmarks->resizeColumnToContents(i);
 
 #if QT_VERSION >= 0x050000
@@ -188,25 +188,34 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
 				"").toByteArray());
 
   if(dooble::s_settings.contains("bookmarksWindow/tableColumnsState1"))
-    if(!ui.bookmarks->horizontalHeader()->
-       restoreState(dooble::s_settings.value("bookmarksWindow/"
-					     "tableColumnsState1",
-					     "").toByteArray()))
-      {
-	ui.bookmarks->horizontalHeader()->setDefaultAlignment
-	  (Qt::AlignLeft);
-	ui.bookmarks->horizontalHeader()->setSortIndicator
-	  (0, Qt::AscendingOrder);
-	ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
-	ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
+    {
+      if(!ui.bookmarks->horizontalHeader()->
+	 restoreState(dooble::s_settings.value("bookmarksWindow/"
+					       "tableColumnsState1",
+					       "").toByteArray()))
+	{
+	  ui.bookmarks->horizontalHeader()->setDefaultAlignment
+	    (Qt::AlignLeft);
+	  ui.bookmarks->horizontalHeader()->setSortIndicator
+	    (0, Qt::AscendingOrder);
+	  ui.bookmarks->horizontalHeader()->setSortIndicatorShown(true);
+	  ui.bookmarks->horizontalHeader()->setStretchLastSection(true);
 #if QT_VERSION >= 0x050000
-	ui.bookmarks->horizontalHeader()->setSectionResizeMode
-	  (QHeaderView::Interactive);
+	  ui.bookmarks->horizontalHeader()->setSectionResizeMode
+	    (QHeaderView::Interactive);
 #else
-	ui.bookmarks->horizontalHeader()->setResizeMode
-	  (QHeaderView::Interactive);
+	  ui.bookmarks->horizontalHeader()->setResizeMode
+	    (QHeaderView::Interactive);
 #endif
-      }
+
+	  for(int i = 0; i < ui.bookmarks->horizontalHeader()->count()  - 1;
+	      i++)
+	    ui.bookmarks->resizeColumnToContents(i);
+	}
+    }
+  else
+    for(int i = 0; i < ui.bookmarks->horizontalHeader()->count() - 1; i++)
+      ui.bookmarks->resizeColumnToContents(i);
 
 #if QT_VERSION >= 0x050000
   ui.bookmarks->horizontalHeader()->setSectionsMovable(true);
