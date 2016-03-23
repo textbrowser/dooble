@@ -1117,6 +1117,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.homeToolButton->setVisible
     (ui.action_Home_Button->isChecked());
   ui.urlFrame->setParent(0);
+  ui.locationLineEdit->setPlaceholderText(tr("Address"));
   ui.locationToolBar->setVisible(false);
   ui.locationToolBar->addWidget(ui.urlFrame);
   ui.locationToolBar->setVisible(true);
