@@ -1078,7 +1078,7 @@ QByteArray dcrypt::etm(const QByteArray &byteArray, bool *ok)
       return byteArray;
     }
   else
-    return bytes2 + bytes1;
+    return bytes2 + bytes1; // Digest || Ciphertext
 }
 
 QByteArray dcrypt::daa(const QByteArray &byteArray, bool *ok)
