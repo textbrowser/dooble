@@ -296,7 +296,7 @@
             <item>
              <widget class="QCheckBox" name="record_file_suffixes">
               <property name="text">
-               <string>&amp;Automatically Record Discovered Suffixes</string>
+               <string>Automatically Record Discovered Suffixes</string>
               </property>
               <property name="checked">
                <bool>true</bool>
@@ -1234,8 +1234,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>303</width>
+               <y>-60</y>
+               <width>632</width>
                <height>550</height>
               </rect>
              </property>
@@ -1550,8 +1550,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>594</width>
+               <y>-368</y>
+               <width>638</width>
                <height>897</height>
               </rect>
              </property>
@@ -2544,7 +2544,7 @@
                <x>0</x>
                <y>0</y>
                <width>643</width>
-               <height>747</height>
+               <height>636</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2653,23 +2653,6 @@
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_43">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_55">
-                <item>
                  <widget class="QLabel" name="passphraseHashTypeLabel">
                   <property name="text">
                    <string>Hash Type</string>
@@ -2686,23 +2669,6 @@
                   </property>
                  </widget>
                 </item>
-                <item>
-                 <spacer name="horizontalSpacer_44">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_50">
                 <item>
                  <widget class="QLabel" name="label_19">
                   <property name="text">
@@ -2727,23 +2693,6 @@
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_39">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_56">
-                <item>
                  <widget class="QLabel" name="label_68">
                   <property name="text">
                    <string>Salt Length</string>
@@ -2767,7 +2716,7 @@
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_45">
+                 <spacer name="horizontalSpacer_26">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -2790,6 +2739,26 @@
               </item>
               <item>
                <layout class="QGridLayout" name="gridLayout_12">
+                <item row="2" column="2">
+                 <widget class="QProgressBar" name="cookiesProgressBar">
+                  <property name="value">
+                   <number>24</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QCheckBox" name="reencodeCookiesCheckBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Re-encode Cookies</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="4" column="0">
                  <widget class="QCheckBox" name="reencodeExceptionsCheckBox">
                   <property name="sizePolicy">
@@ -2829,8 +2798,8 @@
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="2">
-                 <widget class="QProgressBar" name="exceptionsProgressBar">
+                <item row="6" column="2">
+                 <widget class="QProgressBar" name="historyProgressBar">
                   <property name="value">
                    <number>24</number>
                   </property>
@@ -2843,8 +2812,22 @@
                   </property>
                  </widget>
                 </item>
-                <item row="6" column="2">
-                 <widget class="QProgressBar" name="historyProgressBar">
+                <item row="4" column="2">
+                 <widget class="QProgressBar" name="exceptionsProgressBar">
+                  <property name="value">
+                   <number>24</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="2">
+                 <widget class="QProgressBar" name="downloadsProgressBar">
+                  <property name="value">
+                   <number>24</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QProgressBar" name="cacheProgressBar">
                   <property name="value">
                    <number>24</number>
                   </property>
@@ -2863,33 +2846,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="2">
-                 <widget class="QProgressBar" name="bookmarksProgressBar">
-                  <property name="value">
-                   <number>24</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QCheckBox" name="reencodeCookiesCheckBox">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>Re-encode Cookies</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
-                 <widget class="QProgressBar" name="cookiesProgressBar">
-                  <property name="value">
-                   <number>24</number>
-                  </property>
-                 </widget>
-                </item>
                 <item row="3" column="0">
                  <widget class="QCheckBox" name="reencodeDownloadsCheckBox">
                   <property name="sizePolicy">
@@ -2900,20 +2856,6 @@
                   </property>
                   <property name="text">
                    <string>Re-encode Downloads</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="2">
-                 <widget class="QProgressBar" name="downloadsProgressBar">
-                  <property name="value">
-                   <number>24</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QProgressBar" name="cacheProgressBar">
-                  <property name="value">
-                   <number>24</number>
                   </property>
                  </widget>
                 </item>
@@ -2930,6 +2872,13 @@
                   </property>
                  </widget>
                 </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="cookiesSizeLabel">
+                  <property name="text">
+                   <string>Size</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="1">
                  <widget class="QLabel" name="bookmarksSizeLabel">
                   <property name="text">
@@ -2939,13 +2888,6 @@
                 </item>
                 <item row="1" column="1">
                  <widget class="QLabel" name="cacheSizeLabel">
-                  <property name="text">
-                   <string>Size</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="cookiesSizeLabel">
                   <property name="text">
                    <string>Size</string>
                   </property>
@@ -2978,6 +2920,26 @@
                    <string>Size</string>
                   </property>
                  </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QProgressBar" name="bookmarksProgressBar">
+                  <property name="value">
+                   <number>24</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <spacer name="horizontalSpacer_39">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </item>
@@ -3083,7 +3045,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>526</width>
+               <width>638</width>
                <height>1320</height>
               </rect>
              </property>
