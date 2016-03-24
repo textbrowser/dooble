@@ -171,7 +171,7 @@ Remaining Items
       shall only be used during the retrieval of a site's IP address.
 10.   Configurable, site-based, HTTP headers.
 11.   Implement as many items as possible from
-      http://trac.webkit.org/wiki/Fingerprinting.
+      https://trac.webkit.org/wiki/Fingerprinting.
 12.   The URL widget utilizes too much memory. Use the model-view
       concept.
 13.   Review QWebSettings with respect to recommended fonts.
