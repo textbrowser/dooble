@@ -5789,6 +5789,8 @@ bool dooble::promptForPassphrase(const bool override)
   QString hashType(s_settings.
 		   value("settingsWindow/passphraseHashType",
 			 "unknown").toString());
+  QString cipherMode(s_settings.
+		     value("settingsWindow/cipherMode", "CBC").toString());
   QString cipherType(s_settings.
 		     value("settingsWindow/cipherType",
 			   "unknown").toString());
@@ -5899,7 +5901,7 @@ bool dooble::promptForPassphrase(const bool override)
 	      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	      dmisc::setCipherPassphrase
 		(ui_p.passphraseLineEdit->text(), false, hashType, cipherType,
-		 iterationCount, salt);
+		 iterationCount, salt, cipherMode);
 	      QApplication::restoreOverrideCursor();
 	      ui_p.passphraseLineEdit->clear();
 	      emit passphraseWasAuthenticated
@@ -5938,7 +5940,7 @@ bool dooble::promptForPassphrase(const bool override)
 	      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	      dmisc::setCipherPassphrase
 		(QString(""), false, hashType, cipherType,
-		 iterationCount, QByteArray());
+		 iterationCount, QByteArray(), cipherMode);
 	      QApplication::restoreOverrideCursor();
 	    }
 	}
@@ -5947,7 +5949,7 @@ bool dooble::promptForPassphrase(const bool override)
     {
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
       dmisc::setCipherPassphrase(QString(""), false, hashType, cipherType,
-				 iterationCount, QByteArray());
+				 iterationCount, QByteArray(), cipherMode);
       QApplication::restoreOverrideCursor();
     }
 

@@ -83,7 +83,8 @@ class dmisc
 				  const QString &hashType,
 				  const QString &cipherType,
 				  const int iterationCount,
-				  const QByteArray &salt);
+				  const QByteArray &salt,
+				  const QString &cipherMode);
   static void destroyReencodeCrypt(void);
   static void prepareProxyIgnoreLists(void);
   static void prepareReencodeCrypt(void);

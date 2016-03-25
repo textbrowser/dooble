@@ -1588,7 +1588,8 @@ void dsettings::slotClicked(QAbstractButton *button)
 		 /*
 		 ** We'll need a new salt.
 		 */
-		 salt);
+		 salt,
+		 ui.mode->currentText());
 	      QApplication::restoreOverrideCursor();
 	    }
 

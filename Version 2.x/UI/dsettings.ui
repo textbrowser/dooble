@@ -2666,12 +2666,12 @@
                   </property>
                   <item>
                    <property name="text">
-                    <string>CBC</string>
+                    <string notr="true">CBC</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>CTR</string>
+                    <string notr="true">CTR</string>
                    </property>
                   </item>
                  </widget>
@@ -3086,7 +3086,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>526</width>
+               <width>738</width>
                <height>1320</height>
               </rect>
              </property>

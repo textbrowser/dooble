@@ -34,6 +34,7 @@
 #include "dooble.h"
 
 dcrypt::dcrypt(const QByteArray &salt,
+	       const QString &cipherMode,
 	       const QString &cipherType,
 	       const QString &hashType,
 	       const QString &passphrase,
@@ -41,6 +42,7 @@ dcrypt::dcrypt(const QByteArray &salt,
 {
   m_cipherAlgorithm = 0;
   m_cipherHandle = 0;
+  m_cipherMode = cipherMode;
   m_cipherType = cipherType;
   m_encryptionKey = 0;
   m_encryptionKeyLength = 0;
@@ -65,6 +67,7 @@ dcrypt::dcrypt(dcrypt *other)
     {
       m_cipherAlgorithm = other->m_cipherAlgorithm;
       m_cipherHandle = 0;
+      m_cipherMode = other->m_cipherMode;
       m_cipherType = other->m_cipherType;
 
       if(other->m_encryptionKeyLength > 0)
@@ -450,8 +453,7 @@ bool dcrypt::openCipherHandle(void)
   int mode = 0;
   unsigned int flags = 0;
 
-  if(dooble::s_settings.value("settingsWindow/cipherMode", "CBC").
-     toString() == "CTR")
+  if(m_cipherMode == "CTR")
     {
       flags = GCRY_CIPHER_SECURE;
       mode = GCRY_CIPHER_MODE_CTR;
