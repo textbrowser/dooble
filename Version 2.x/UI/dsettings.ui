@@ -2543,8 +2543,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>745</width>
-               <height>636</height>
+               <width>738</width>
+               <height>677</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2653,6 +2653,47 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QLabel" name="label_81">
+                  <property name="text">
+                   <string>Mode</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="mode">
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>CBC</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>CTR</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_26">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_35">
+                <item>
                  <widget class="QLabel" name="passphraseHashTypeLabel">
                   <property name="text">
                    <string>Hash Type</string>
@@ -2693,30 +2734,6 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_81">
-                  <property name="text">
-                   <string>Mode</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="mode">
-                  <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
-                  </property>
-                  <item>
-                   <property name="text">
-                    <string>CBC</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>CTR</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
-                <item>
                  <widget class="QLabel" name="label_68">
                   <property name="text">
                    <string>Salt Length</string>
@@ -2729,7 +2746,7 @@
                    <number>256</number>
                   </property>
                   <property name="maximum">
-                   <number>999999999</number>
+                   <number>8192</number>
                   </property>
                   <property name="singleStep">
                    <number>1</number>
@@ -2740,7 +2757,7 @@
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_26">
+                 <spacer name="horizontalSpacer_43">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -4534,9 +4551,9 @@
   <tabstop>disableAllEncryptedDatabaseWrites</tabstop>
   <tabstop>showAuthenticationCheckBox</tabstop>
   <tabstop>cipherTypeComboBox</tabstop>
+  <tabstop>mode</tabstop>
   <tabstop>hashTypeComboBox</tabstop>
   <tabstop>iterationCountSpinBox</tabstop>
-  <tabstop>mode</tabstop>
   <tabstop>saltLengthSpinBox</tabstop>
   <tabstop>reencodeBookmarksCheckBox</tabstop>
   <tabstop>reencodeCacheCheckBox</tabstop>

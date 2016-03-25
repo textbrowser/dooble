@@ -716,6 +716,9 @@ void dsettings::exec(dooble *parent)
     (ui.mode->findText(dooble::s_settings.value("settingsWindow/cipherMode",
 						"CBC").toString()));
 
+  if(ui.mode->currentIndex() < 0)
+    ui.mode->setCurrentIndex(0);
+
   int priority = dooble::s_settings.value("settingsWindow/displaypriority",
 					  3).toInt();
 
@@ -2573,6 +2576,8 @@ void dsettings::slotEnablePassphrase(void)
   ui.cipherTypeComboBox->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
   ui.hashTypeComboBox->setEnabled
+    (ui.changePassphrasePushButton->isEnabled());
+  ui.mode->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
   ui.pass1LineEdit->setFocus();
 }

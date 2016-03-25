@@ -676,6 +676,12 @@ void dsettings::exec(dooble *parent)
   ui.httponlycookies->setChecked
     (dooble::s_settings.
      value("settingsWindow/httpOnlyCookies", false).toBool());
+  ui.mode->setCurrentIndex
+    (ui.mode->findText(dooble::s_settings.value("settingsWindow/cipherMode",
+						"CBC").toString().trimmed()));
+
+  if(ui.mode->currentIndex() < 0)
+    ui.mode->setCurrentIndex(0);
 
   int priority = dooble::s_settings.value("settingsWindow/displaypriority",
 					  3).toInt();
@@ -1281,6 +1287,7 @@ void dsettings::exec(dooble *parent)
 	  ui.saltLengthSpinBox->setEnabled(false);
 	  ui.cipherTypeComboBox->setEnabled(false);
 	  ui.hashTypeComboBox->setEnabled(false);
+	  ui.mode->setEnabled(false);
 	  ui.changePassphrasePushButton->setEnabled(true);
 	}
       else
@@ -1290,6 +1297,7 @@ void dsettings::exec(dooble *parent)
 	  ui.saltLengthSpinBox->setEnabled(false);
 	  ui.cipherTypeComboBox->setEnabled(false);
 	  ui.hashTypeComboBox->setEnabled(false);
+	  ui.mode->setEnabled(false);
 	  ui.changePassphrasePushButton->setEnabled(false);
 	}
     }
@@ -1304,6 +1312,7 @@ void dsettings::exec(dooble *parent)
       ui.saltLengthSpinBox->setEnabled(true);
       ui.cipherTypeComboBox->setEnabled(true);
       ui.hashTypeComboBox->setEnabled(true);
+      ui.mode->setEnabled(true);
       ui.changePassphrasePushButton->setEnabled(false);
     }
 
@@ -2502,6 +2511,8 @@ void dsettings::slotEnablePassphrase(void)
   ui.cipherTypeComboBox->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
   ui.hashTypeComboBox->setEnabled
+    (ui.changePassphrasePushButton->isEnabled());
+  ui.mode->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
   ui.pass1LineEdit->setFocus();
 }
