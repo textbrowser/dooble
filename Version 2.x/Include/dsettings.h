@@ -32,7 +32,7 @@
 #include <QPointer>
 #include <QTimer>
 
-#include "ui_settings.h"
+#include "ui_dsettings.h"
 
 class QKeyEvent;
 class dooble;

@@ -367,6 +367,8 @@ dooble *dwebpage::findDooble(void)
 
 QString dwebpage::userAgentForUrl(const QUrl &url) const
 {
+  Q_UNUSED(url);
+
   QString agent("");
 
   agent.remove(QString("%1/%2").arg("Dooble").arg(DOOBLE_VERSION_STR));

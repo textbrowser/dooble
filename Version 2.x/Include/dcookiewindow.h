@@ -30,7 +30,7 @@
 
 #include <QMainWindow>
 
-#include "ui_cookieWindow.h"
+#include "ui_dcookieWindow.h"
 
 class QStandardItem;
 class QStandardItemModel;

@@ -31,7 +31,7 @@
 #include <QMainWindow>
 
 #include "dexceptionsmodel.h"
-#include "ui_exceptionsWindow.h"
+#include "ui_dexceptionsWindow.h"
 
 class QCloseEvent;
 class QProgressBar;

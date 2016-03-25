@@ -45,8 +45,8 @@
 #include "dspoton.h"
 #include "dsslcipherswindow.h"
 #include "dview.h"
-#include "ui_mainWindow.h"
-#include "ui_statusBar.h"
+#include "ui_dmainWindow.h"
+#include "ui_dstatusBar.h"
 
 #define DOOBLE_VERSION_STR "2.05"
 

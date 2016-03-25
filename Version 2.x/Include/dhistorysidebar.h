@@ -28,7 +28,7 @@
 #ifndef _dhistorysidebar_h_
 #define _dhistorysidebar_h_
 
-#include "ui_historySideBar.h"
+#include "ui_dhistorySideBar.h"
 
 class dhistorysidebar: public QWidget
 {

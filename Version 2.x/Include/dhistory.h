@@ -31,7 +31,7 @@
 #include <QMainWindow>
 #include <QPointer>
 
-#include "ui_historyWindow.h"
+#include "ui_dhistoryWindow.h"
 
 class QProgressBar;
 class QStandardItemModel;

@@ -33,7 +33,7 @@
 #include <QWidget>
 
 #include "dfilesystemmodel.h"
-#include "ui_fileManagerForm.h"
+#include "ui_dfileManagerForm.h"
 
 class QFileSystemModel;
 class QWebEnginePage;

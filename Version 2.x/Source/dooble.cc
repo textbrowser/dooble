@@ -93,8 +93,8 @@ extern "C"
 #include "dreinstatedooble.h"
 #include "dwebpage.h"
 #include "dwebview.h"
-#include "ui_passphrasePrompt.h"
-#include "ui_passwordPrompt.h"
+#include "ui_dpassphrasePrompt.h"
+#include "ui_dpasswordPrompt.h"
 
 quint64 dooble::s_instances = 0;
 QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
@@ -4630,6 +4630,7 @@ void dooble::slotPrint(void)
 
       if(p)
 	p->print(&printer);
+
     }
 }
 
@@ -7067,6 +7068,7 @@ void dooble::slotIconToolButtonClicked(void)
 		       SLOT(slotViewSiteCookies(void)));
     }
   else
+
     menu.addAction(tr("View Site &Cookies"), this,
 		   SLOT(slotViewSiteCookies(void)));
 

@@ -30,7 +30,7 @@
 
 #include <QUrl>
 
-#include "ui_bookmarksPopup.h"
+#include "ui_dbookmarksPopup.h"
 
 class dbookmarkspopup: public QWidget
 {

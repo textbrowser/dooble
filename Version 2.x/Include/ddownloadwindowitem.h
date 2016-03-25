@@ -34,7 +34,7 @@
 #include <QPointer>
 #include <QWidget>
 
-#include "ui_downloadWindowItem.h"
+#include "ui_ddownloadWindowItem.h"
 
 class QAuthenticator;
 class QNetworkAccessManager;

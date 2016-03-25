@@ -30,7 +30,7 @@
 
 #include <QMainWindow>
 
-#include "ui_pageSourceWindow.h"
+#include "ui_dpageSourceWindow.h"
 
 class QPrinter;
 
