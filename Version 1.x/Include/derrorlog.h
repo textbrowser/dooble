@@ -30,7 +30,7 @@
 
 #include <QMainWindow>
 
-#include "ui_errorLog.h"
+#include "ui_derrorLog.h"
 
 class derrorlog: public QMainWindow
 {

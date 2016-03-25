@@ -106,8 +106,8 @@ extern "C"
 #include "dreinstatedooble.h"
 #include "dwebpage.h"
 #include "dwebview.h"
-#include "ui_passphrasePrompt.h"
-#include "ui_passwordPrompt.h"
+#include "ui_dpassphrasePrompt.h"
+#include "ui_dpasswordPrompt.h"
 
 QHash<QString, QVariant> dooble::s_settings;
 QHash<QString, qint64> dooble::s_mostVisitedHosts;
@@ -265,6 +265,7 @@ int main(int argc, char *argv[])
 
   /*
   ** Prepare the style before creating a QApplication object, per Qt.
+
   */
 
 #ifdef Q_OS_MAC
@@ -6365,6 +6366,7 @@ void dooble::slotFavoritesToolButtonClicked(void)
 	  ui.tabWidget->update();
 	}
     }
+
 }
 
 void dooble::slotShowIpAddress(const bool state)

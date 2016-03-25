@@ -31,7 +31,7 @@
 #include <QMainWindow>
 
 #include "ddownloadwindowitem.h"
-#include "ui_downloadWindow.h"
+#include "ui_ddownloadWindow.h"
 
 class QCloseEvent;
 class QNetworkReply;

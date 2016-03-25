@@ -47,7 +47,7 @@
 #include "ddesktopwidget.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "ui_applicationPropertiesWindow.h"
+#include "ui_dapplicationPropertiesWindow.h"
 
 ddesktopwidget::ddesktopwidget(QWidget *parent):QMdiArea(parent)
 {

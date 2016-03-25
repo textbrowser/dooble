@@ -38,28 +38,28 @@ PRE_TARGETDEPS = libspoton.dll
 
 RC_FILE		= Resources\\dooble.rc
 
-FORMS           = UI\\applicationPropertiesWindow.ui \
-		  UI\\bookmarksPopup.ui \
-		  UI\\bookmarksWindow.ui \
-		  UI\\clearContainersWindow.ui \
-		  UI\\cookieWindow.ui \
-		  UI\\downloadPrompt.ui \
-		  UI\\downloadWindowItem.ui \
-                  UI\\downloadWindow.ui \
-		  UI\\errorLog.ui \
-                  UI\\exceptionsWindow.ui \
-		  UI\\fileManagerForm.ui \
-		  UI\\ftpManagerForm.ui \
-		  UI\\historySideBar.ui \
-		  UI\\historyWindow.ui \
-		  UI\\mainWindow.ui \
-                  UI\\pageSourceWindow.ui \
-                  UI\\passphrasePrompt.ui \
-		  UI\\passwordPrompt.ui \
-		  UI\\reinstateWidget.ui \
-		  UI\\settings.ui \
-		  UI\\sslciphers.ui \
-		  UI\\statusBar.ui
+FORMS           = UI\\dapplicationPropertiesWindow.ui \
+		  UI\\dbookmarksPopup.ui \
+		  UI\\dbookmarksWindow.ui \
+		  UI\\dclearContainersWindow.ui \
+		  UI\\dcookieWindow.ui \
+		  UI\\ddownloadPrompt.ui \
+		  UI\\ddownloadWindowItem.ui \
+                  UI\\ddownloadWindow.ui \
+		  UI\\derrorLog.ui \
+                  UI\\dexceptionsWindow.ui \
+		  UI\\dfileManagerForm.ui \
+		  UI\\dftpManagerForm.ui \
+		  UI\\dhistorySideBar.ui \
+		  UI\\dhistoryWindow.ui \
+		  UI\\dmainWindow.ui \
+                  UI\\dpageSourceWindow.ui \
+                  UI\\dpassphrasePrompt.ui \
+		  UI\\dpasswordPrompt.ui \
+		  UI\\dreinstateWidget.ui \
+		  UI\\dsettings.ui \
+		  UI\\dsslciphers.ui \
+		  UI\\dstatusBar.ui
 
 UI_HEADERS_DIR  = Include
 

@@ -41,7 +41,7 @@
 #include "ddownloadwindow.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "ui_passwordPrompt.h"
+#include "ui_dpasswordPrompt.h"
 
 ddownloadwindow::ddownloadwindow(void):QMainWindow()
 {

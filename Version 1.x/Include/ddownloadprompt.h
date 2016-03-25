@@ -30,7 +30,7 @@
 
 #include <QDialog>
 
-#include "ui_downloadPrompt.h"
+#include "ui_ddownloadPrompt.h"
 
 class ddownloadprompt: public QDialog
 {

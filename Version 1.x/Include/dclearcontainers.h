@@ -30,7 +30,7 @@
 
 #include <QMainWindow>
 
-#include "ui_clearContainersWindow.h"
+#include "ui_dclearContainersWindow.h"
 
 class dooble;
 

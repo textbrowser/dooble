@@ -31,7 +31,7 @@
 #include <QMainWindow>
 #include <QPointer>
 
-#include "ui_bookmarksWindow.h"
+#include "ui_dbookmarksWindow.h"
 
 class QAction;
 class QProgressBar;

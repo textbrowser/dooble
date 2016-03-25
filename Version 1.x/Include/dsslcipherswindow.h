@@ -31,7 +31,7 @@
 #include <QMainWindow>
 #include <QSsl>
 
-#include "ui_sslciphers.h"
+#include "ui_dsslciphers.h"
 
 class QCloseEvent;
 

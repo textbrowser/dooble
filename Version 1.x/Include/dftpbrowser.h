@@ -30,7 +30,7 @@
 
 #include <QPointer>
 
-#include "ui_ftpManagerForm.h"
+#include "ui_dftpManagerForm.h"
 
 class QTableWidgetItem;
 class QWebFrame;

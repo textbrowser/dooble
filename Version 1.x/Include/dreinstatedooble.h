@@ -31,7 +31,7 @@
 #include <QPointer>
 #include <QWidget>
 
-#include "ui_reinstateWidget.h"
+#include "ui_dreinstateWidget.h"
 
 class QAction;
 
