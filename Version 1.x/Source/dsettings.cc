@@ -712,6 +712,9 @@ void dsettings::exec(dooble *parent)
   ui.httponlycookies->setChecked
     (dooble::s_settings.
      value("settingsWindow/httpOnlyCookies", false).toBool());
+  ui.mode->setCurrentIndex
+    (ui.mode->findText(dooble::s_settings.value("settingsWindow/cipherMode",
+						"CBC").toString()));
 
   int priority = dooble::s_settings.value("settingsWindow/displaypriority",
 					  3).toInt();
@@ -1326,6 +1329,7 @@ void dsettings::exec(dooble *parent)
 	  ui.saltLengthSpinBox->setEnabled(false);
 	  ui.cipherTypeComboBox->setEnabled(false);
 	  ui.hashTypeComboBox->setEnabled(false);
+	  ui.mode->setEnabled(false);
 	  ui.changePassphrasePushButton->setEnabled(true);
 	}
       else
@@ -1335,6 +1339,7 @@ void dsettings::exec(dooble *parent)
 	  ui.saltLengthSpinBox->setEnabled(false);
 	  ui.cipherTypeComboBox->setEnabled(false);
 	  ui.hashTypeComboBox->setEnabled(false);
+	  ui.mode->setEnabled(false);
 	  ui.changePassphrasePushButton->setEnabled(false);
 	}
     }
@@ -1349,6 +1354,7 @@ void dsettings::exec(dooble *parent)
       ui.saltLengthSpinBox->setEnabled(true);
       ui.cipherTypeComboBox->setEnabled(true);
       ui.hashTypeComboBox->setEnabled(true);
+      ui.mode->setEnabled(true);
       ui.changePassphrasePushButton->setEnabled(false);
     }
 
@@ -1908,6 +1914,8 @@ void dsettings::slotClicked(QAbstractButton *button)
 	 ui.jsStagnantScripts->currentIndex());
       settings.setValue("settingsWindow/record_file_suffixes",
 			ui.record_file_suffixes->isChecked());
+      settings.setValue("settingsWindow/cipherMode",
+			ui.mode->currentText());
 
       if(dfilemanager::tableModel)
 	dfilemanager::tableModel->enable

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>900</width>
     <height>600</height>
    </rect>
   </property>
@@ -380,7 +380,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>638</width>
+               <width>738</width>
                <height>571</height>
               </rect>
              </property>
@@ -1234,8 +1234,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-60</y>
-               <width>632</width>
+               <y>0</y>
+               <width>732</width>
                <height>550</height>
               </rect>
              </property>
@@ -1550,9 +1550,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-368</y>
-               <width>638</width>
-               <height>897</height>
+               <y>0</y>
+               <width>738</width>
+               <height>865</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2543,7 +2543,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>643</width>
+               <width>745</width>
                <height>636</height>
               </rect>
              </property>
@@ -2690,6 +2690,30 @@
                   <property name="value">
                    <number>25000</number>
                   </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_81">
+                  <property name="text">
+                   <string>Mode</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="mode">
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>CBC</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>CTR</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                 <item>
@@ -3045,7 +3069,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>638</width>
+               <width>526</width>
                <height>1320</height>
               </rect>
              </property>
@@ -4512,6 +4536,7 @@
   <tabstop>cipherTypeComboBox</tabstop>
   <tabstop>hashTypeComboBox</tabstop>
   <tabstop>iterationCountSpinBox</tabstop>
+  <tabstop>mode</tabstop>
   <tabstop>saltLengthSpinBox</tabstop>
   <tabstop>reencodeBookmarksCheckBox</tabstop>
   <tabstop>reencodeCacheCheckBox</tabstop>

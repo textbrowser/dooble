@@ -447,11 +447,23 @@ bool dcrypt::openCipherHandle(void)
   m_cipherHandle = 0;
 
   gcry_error_t err = 0;
+  int mode = 0;
+  unsigned int flags = 0;
+
+  if(dooble::s_settings.value("settingsWindow/cipherMode", "CBC").
+     toString() == "CTR")
+    {
+      flags = GCRY_CIPHER_SECURE;
+      mode = GCRY_CIPHER_MODE_CTR;
+    }
+  else
+    {
+      flags = GCRY_CIPHER_SECURE | GCRY_CIPHER_CBC_CTS;
+      mode = GCRY_CIPHER_MODE_CBC;
+    }
 
   if((err = gcry_cipher_open(&m_cipherHandle, m_cipherAlgorithm,
-			     GCRY_CIPHER_MODE_CBC,
-			     GCRY_CIPHER_SECURE |
-			     GCRY_CIPHER_CBC_CTS)) != 0 || !m_cipherHandle)
+			     mode, flags)) != 0 || !m_cipherHandle)
     {
       if(err != 0)
 	dmisc::logError(QString("dcrypt::openCipherHandle(): "
