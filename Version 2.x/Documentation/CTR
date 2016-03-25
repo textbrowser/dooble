@@ -1,0 +1,4 @@
+Dooble uses the CTR mode of operation.
+
+Authenticated and encrypted values are stored in various databases.
+The format of the stored objects is H(E(P || Length(P))) || E(P || Length(P)).
