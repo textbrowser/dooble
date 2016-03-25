@@ -43,6 +43,10 @@ dcrypt::dcrypt(const QByteArray &salt,
   m_cipherAlgorithm = 0;
   m_cipherHandle = 0;
   m_cipherMode = cipherMode;
+
+  if(!(m_cipherMode == "CBC" || m_cipherMode == "CTR"))
+    m_cipherMode = "CBC";
+
   m_cipherType = cipherType;
   m_encryptionKey = 0;
   m_encryptionKeyLength = 0;
@@ -68,6 +72,10 @@ dcrypt::dcrypt(dcrypt *other)
       m_cipherAlgorithm = other->m_cipherAlgorithm;
       m_cipherHandle = 0;
       m_cipherMode = other->m_cipherMode;
+
+      if(!(m_cipherMode == "CBC" || m_cipherMode == "CTR"))
+	m_cipherMode = "CBC";
+
       m_cipherType = other->m_cipherType;
 
       if(other->m_encryptionKeyLength > 0)
@@ -219,8 +227,10 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 	{
 	  QByteArray originalLength;
 
-	  if(decodedArray.length() > 4)
-	    originalLength = decodedArray.mid(decodedArray.length() - 4, 4);
+	  if(decodedArray.length() > static_cast<int> (sizeof(int)))
+	    originalLength = decodedArray.mid
+	      (decodedArray.length() - static_cast<int> (sizeof(int)),
+	       static_cast<int> (sizeof(int)));
 
 	  if(!originalLength.isEmpty())
 	    {
@@ -321,11 +331,16 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
       if(encodedArray.isEmpty())
 	encodedArray = encodedArray.leftJustified
 	  (static_cast<int> (blockLength), 0);
-      else if(static_cast<size_t> (encodedArray.length()) < blockLength)
+      else
+	/*
+	** Multiple of the block size. CBC-CTS does not require this.
+	*/
+
 	encodedArray = encodedArray.leftJustified
-	  (static_cast<int> (blockLength *
-			     qCeil((qreal) encodedArray.length() /
-				   (qreal) blockLength)), 0);
+	  (static_cast<int> (blockLength * (qCeil((qreal) encodedArray.
+						  length() /
+						  (qreal) blockLength) + 1)),
+	   0);
 
       QByteArray originalLength;
       QDataStream out(&originalLength, QIODevice::WriteOnly);
@@ -343,7 +358,10 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	  return byteArray;
 	}
 
-      encodedArray.append(originalLength);
+      encodedArray.replace
+	(encodedArray.length() -
+	 static_cast<int> (sizeof(int)), static_cast<int> (sizeof(int)),
+	 originalLength);
 
       gcry_error_t err = 0;
 
@@ -453,15 +471,15 @@ bool dcrypt::openCipherHandle(void)
   int mode = 0;
   unsigned int flags = 0;
 
-  if(m_cipherMode == "CTR")
-    {
-      flags = GCRY_CIPHER_SECURE;
-      mode = GCRY_CIPHER_MODE_CTR;
-    }
-  else
+  if(m_cipherMode == "CBC")
     {
       flags = GCRY_CIPHER_SECURE | GCRY_CIPHER_CBC_CTS;
       mode = GCRY_CIPHER_MODE_CBC;
+    }
+  else
+    {
+      flags = GCRY_CIPHER_SECURE;
+      mode = GCRY_CIPHER_MODE_CTR;
     }
 
   if((err = gcry_cipher_open(&m_cipherHandle, m_cipherAlgorithm,
@@ -857,17 +875,35 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 
 	  gcry_cipher_reset(m_cipherHandle);
 
-	  if((err = gcry_cipher_setiv(m_cipherHandle,
-				      iv,
-				      ivLength)) != 0)
+	  if(m_cipherMode == "CBC")
 	    {
-	      QByteArray buffer(64, '0');
+	      if((err = gcry_cipher_setiv(m_cipherHandle,
+					  iv,
+					  ivLength)) != 0)
+		{
+		  QByteArray buffer(64, '0');
 
-	      gpg_strerror_r(err, buffer.data(), buffer.length());
-	      dmisc::logError
-		(QString("dcrypt::setInitializationVector(): "
-			 "gcry_cipher_setiv() failure (%1).").
-		 arg(buffer.constData()));
+		  gpg_strerror_r(err, buffer.data(), buffer.length());
+		  dmisc::logError
+		    (QString("dcrypt::setInitializationVector(): "
+			     "gcry_cipher_setiv() failure (%1).").
+		     arg(buffer.constData()));
+		}
+	    }
+	  else
+	    {
+	      if((err = gcry_cipher_setctr(m_cipherHandle,
+					   iv,
+					   ivLength)) != 0)
+		{
+		  QByteArray buffer(64, '0');
+
+		  gpg_strerror_r(err, buffer.data(), buffer.length());
+		  dmisc::logError
+		    (QString("dcrypt::setInitializationVector(): "
+			     "gcry_cipher_setctr() failure (%1).").
+		     arg(buffer.constData()));
+		}
 	    }
 
 	  gcry_free(iv);
@@ -916,7 +952,7 @@ void dcrypt::setSalt(const QByteArray &salt)
   int saltLength = qBound
     (256, dooble::s_settings.value("settingsWindow/saltLength",
 				   256).toInt(&ok),
-     999999999);
+     8192);
 
   if(!ok)
     saltLength = 256;

@@ -653,6 +653,7 @@ void dcookies::deleteAndSaveCookies(const QList<QNetworkCookie> &p_all)
 	query.exec("PRAGMA secure_delete = ON");
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM cookies");
+	query.exec("VACUUM");
 	query.prepare("INSERT OR REPLACE INTO cookies (raw_form) VALUES (?)");
 	m_stopMutex.lockForWrite();
 	m_stopWriteThread = false;
@@ -714,6 +715,7 @@ void dcookies::deleteAndSaveFavorites(void)
 	query.exec("PRAGMA secure_delete = ON");
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM favorites");
+	query.exec("VACUUM");
 	query.prepare("INSERT OR REPLACE INTO favorites (domain) VALUES (?)");
 
 	for(int i = 0; i < m_favorites.keys().size(); i++)

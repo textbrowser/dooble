@@ -395,6 +395,9 @@ void dexceptionsmodel::deleteList(const QModelIndexList &list)
 		    query.exec();
 		}
 
+	    QSqlQuery query(db);
+
+	    query.exec("VACUUM");
 	    db.close();
 	  }
 

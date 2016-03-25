@@ -227,8 +227,10 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 	{
 	  QByteArray originalLength;
 
-	  if(decodedArray.length() > 4)
-	    originalLength = decodedArray.mid(decodedArray.length() - 4, 4);
+	  if(decodedArray.length() > static_cast<int> (sizeof(int)))
+	    originalLength = decodedArray.mid
+	      (decodedArray.length() - static_cast<int> (sizeof(int)),
+	       static_cast<int> (sizeof(int)));
 
 	  if(!originalLength.isEmpty())
 	    {
@@ -329,11 +331,16 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
       if(encodedArray.isEmpty())
 	encodedArray = encodedArray.leftJustified
 	  (static_cast<int> (blockLength), 0);
-      else if(static_cast<size_t> (encodedArray.length()) < blockLength)
+      else
+	/*
+	** Multiple of the block size. CBC-CTS does not require this.
+	*/
+
 	encodedArray = encodedArray.leftJustified
-	  (static_cast<int> (blockLength *
-			     qCeil((qreal) encodedArray.length() /
-				   (qreal) blockLength)), 0);
+	  (static_cast<int> (blockLength * (qCeil((qreal) encodedArray.
+						  length() /
+						  (qreal) blockLength) + 1)),
+	   0);
 
       QByteArray originalLength;
       QDataStream out(&originalLength, QIODevice::WriteOnly);
@@ -351,7 +358,10 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	  return byteArray;
 	}
 
-      encodedArray.append(originalLength);
+      encodedArray.replace
+	(encodedArray.length() -
+	 static_cast<int> (sizeof(int)), static_cast<int> (sizeof(int)),
+	 originalLength);
 
       gcry_error_t err = 0;
 
@@ -942,7 +952,7 @@ void dcrypt::setSalt(const QByteArray &salt)
   int saltLength = qBound
     (256, dooble::s_settings.value("settingsWindow/saltLength",
 				   256).toInt(&ok),
-     999999999);
+     8192);
 
   if(!ok)
     saltLength = 256;
