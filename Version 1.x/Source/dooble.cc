@@ -205,6 +205,9 @@ static void qt_message_handler(QtMsgType type, const char *msg)
 
 int main(int argc, char *argv[])
 {
+  qputenv("QT_ENABLE_REGEXP_JIT", "0");
+  qputenv("QV4_FORCE_INTERPRETER", "1");
+
 #ifdef Q_OS_MAC
   struct rlimit rlim = {0, 0};
 
