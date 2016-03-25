@@ -2660,7 +2660,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="mode">
+                 <widget class="QComboBox" name="cipherMode">
                   <property name="sizeAdjustPolicy">
                    <enum>QComboBox::AdjustToContents</enum>
                   </property>
@@ -3086,7 +3086,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>738</width>
+               <width>526</width>
                <height>1320</height>
               </rect>
              </property>
@@ -4551,7 +4551,7 @@
   <tabstop>disableAllEncryptedDatabaseWrites</tabstop>
   <tabstop>showAuthenticationCheckBox</tabstop>
   <tabstop>cipherTypeComboBox</tabstop>
-  <tabstop>mode</tabstop>
+  <tabstop>cipherMode</tabstop>
   <tabstop>hashTypeComboBox</tabstop>
   <tabstop>iterationCountSpinBox</tabstop>
   <tabstop>saltLengthSpinBox</tabstop>

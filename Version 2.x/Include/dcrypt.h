@@ -43,6 +43,7 @@ class dcrypt
   static QStringList hashTypes(void);
   static void terminate(void);
   dcrypt(const QByteArray &salt,
+	 const QString &cipherMode,
 	 const QString &cipherType,
 	 const QString &hashType,
 	 const QString &passphrase,
@@ -65,6 +66,7 @@ class dcrypt
  private:
   QByteArray m_salt;
   QMutex m_cipherMutex;
+  QString m_cipherMode;
   QString m_cipherType;
   QString m_hashType;
   char *m_encryptionKey; // Held in secure memory.

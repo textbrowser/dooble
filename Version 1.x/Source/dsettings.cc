@@ -712,12 +712,13 @@ void dsettings::exec(dooble *parent)
   ui.httponlycookies->setChecked
     (dooble::s_settings.
      value("settingsWindow/httpOnlyCookies", false).toBool());
-  ui.mode->setCurrentIndex
-    (ui.mode->findText(dooble::s_settings.value("settingsWindow/cipherMode",
-						"CBC").toString()));
+  ui.cipherMode->setCurrentIndex
+    (ui.cipherMode->findText(dooble::s_settings.
+			     value("settingsWindow/cipherMode",
+				   "CBC").toString()));
 
-  if(ui.mode->currentIndex() < 0)
-    ui.mode->setCurrentIndex(0);
+  if(ui.cipherMode->currentIndex() < 0)
+    ui.cipherMode->setCurrentIndex(0);
 
   int priority = dooble::s_settings.value("settingsWindow/displaypriority",
 					  3).toInt();
@@ -1330,9 +1331,9 @@ void dsettings::exec(dooble *parent)
 	  ui.passphraseGroupBox->setEnabled(false);
 	  ui.iterationCountSpinBox->setEnabled(false);
 	  ui.saltLengthSpinBox->setEnabled(false);
+	  ui.cipherMode->setEnabled(false);
 	  ui.cipherTypeComboBox->setEnabled(false);
 	  ui.hashTypeComboBox->setEnabled(false);
-	  ui.mode->setEnabled(false);
 	  ui.changePassphrasePushButton->setEnabled(true);
 	}
       else
@@ -1340,9 +1341,9 @@ void dsettings::exec(dooble *parent)
 	  ui.passphraseGroupBox->setEnabled(false);
 	  ui.iterationCountSpinBox->setEnabled(false);
 	  ui.saltLengthSpinBox->setEnabled(false);
+	  ui.cipherMode->setEnabled(false);
 	  ui.cipherTypeComboBox->setEnabled(false);
 	  ui.hashTypeComboBox->setEnabled(false);
-	  ui.mode->setEnabled(false);
 	  ui.changePassphrasePushButton->setEnabled(false);
 	}
     }
@@ -1355,9 +1356,9 @@ void dsettings::exec(dooble *parent)
       ui.iterationCountSpinBox->setEnabled(false);
 #endif
       ui.saltLengthSpinBox->setEnabled(true);
+      ui.cipherMode->setEnabled(true);
       ui.cipherTypeComboBox->setEnabled(true);
       ui.hashTypeComboBox->setEnabled(true);
-      ui.mode->setEnabled(true);
       ui.changePassphrasePushButton->setEnabled(false);
     }
 
@@ -1589,7 +1590,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 		 ** We'll need a new salt.
 		 */
 		 salt,
-		 ui.mode->currentText());
+		 ui.cipherMode->currentText());
 	      QApplication::restoreOverrideCursor();
 	    }
 
@@ -1918,8 +1919,6 @@ void dsettings::slotClicked(QAbstractButton *button)
 	 ui.jsStagnantScripts->currentIndex());
       settings.setValue("settingsWindow/record_file_suffixes",
 			ui.record_file_suffixes->isChecked());
-      settings.setValue("settingsWindow/cipherMode",
-			ui.mode->currentText());
 
       if(dfilemanager::tableModel)
 	dfilemanager::tableModel->enable
@@ -2574,11 +2573,11 @@ void dsettings::slotEnablePassphrase(void)
 #endif
   ui.saltLengthSpinBox->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
+  ui.cipherMode->setEnabled
+    (ui.changePassphrasePushButton->isEnabled());
   ui.cipherTypeComboBox->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
   ui.hashTypeComboBox->setEnabled
-    (ui.changePassphrasePushButton->isEnabled());
-  ui.mode->setEnabled
     (ui.changePassphrasePushButton->isEnabled());
   ui.pass1LineEdit->setFocus();
 }

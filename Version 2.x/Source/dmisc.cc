@@ -196,12 +196,14 @@ void dmisc::setCipherPassphrase(const QString &passphrase,
 				const QString &hashType,
 				const QString &cipherType,
 				const int iterationCount,
-				const QByteArray &salt)
+				const QByteArray &salt,
+				const QString &cipherMode)
 {
   if(s_crypt)
     delete s_crypt;
 
-  s_crypt = new dcrypt(salt, cipherType, hashType, passphrase, iterationCount);
+  s_crypt = new dcrypt
+    (salt, cipherMode, cipherType, hashType, passphrase, iterationCount);
 
   if(!s_crypt->initialized())
     {
@@ -219,6 +221,7 @@ void dmisc::setCipherPassphrase(const QString &passphrase,
       QByteArray hash(passphraseHash(passphrase, s_crypt->salt(), hashType));
       QSettings settings;
 
+      settings.setValue("settingsWindow/cipherMode", cipherMode);
       settings.setValue("settingsWindow/cipherType", cipherType);
       settings.setValue("settingsWindow/iterationCount",
 			static_cast<int> (s_crypt->iterationCount()));
@@ -228,6 +231,7 @@ void dmisc::setCipherPassphrase(const QString &passphrase,
 			s_crypt->salt());
       settings.setValue("settingsWindow/saltLength",
 			s_crypt->salt().length());
+      dooble::s_settings["settingsWindow/cipherMode"] = cipherMode;
       dooble::s_settings["settingsWindow/cipherType"] = cipherType;
       dooble::s_settings["settingsWindow/iterationCount"] =
 	static_cast<int> (s_crypt->iterationCount());

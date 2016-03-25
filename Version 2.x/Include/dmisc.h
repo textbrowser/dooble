@@ -112,7 +112,8 @@ class dmisc
 				  const QString &hashType,
 				  const QString &cipherType,
 				  const int iterationCount,
-				  const QByteArray &salt);
+				  const QByteArray &salt,
+				  const QString &cipherMode);
   static void updateHttpStatusCodes(const QHash<int, int> &statusCodes);
 
  private:
