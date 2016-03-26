@@ -591,7 +591,7 @@ libspoton_error_t libspoton_save_url(const char *url,
   char *encodedBuffer = 0;
   char *encodedBufferAndIV = 0;
   char *iv = 0;
-  char lengthArray[4];
+  char lengthArray[4]; // We assume that integers are four bytes wide.
   const char *buffer = "";
   const char *sql = "INSERT OR REPLACE INTO urls (url, title, "
     "description, content, encrypted) VALUES (?, ?, ?, ?, ?)";
