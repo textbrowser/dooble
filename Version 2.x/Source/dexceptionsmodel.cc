@@ -384,6 +384,7 @@ void dexceptionsmodel::deleteList(const QModelIndexList &list)
 		  QString host(items.takeFirst());
 		  bool ok = true;
 
+		  query.exec("PRAGMA secure_delete = ON");
 		  query.prepare(QString("DELETE FROM %1 "
 					"WHERE host_hash = ?").
 				arg(m_tableName));
@@ -491,6 +492,7 @@ void dexceptionsmodel::slotCheckBoxItemChanged(QStandardItem *item)
 		QSqlQuery query(db);
 		bool ok = true;
 
+		query.exec("PRAGMA secure_delete = ON");
 		query.prepare(QString("DELETE FROM %1 WHERE "
 				      "host_hash = ?").arg(m_tableName));
 		query.bindValue
@@ -601,6 +603,7 @@ void dexceptionsmodel::purge(void)
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA secure_delete = ON");
 	query.exec(QString("DELETE FROM %1").arg(m_tableName));
 	query.exec("VACUUM");
       }
