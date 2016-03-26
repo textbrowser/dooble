@@ -83,7 +83,12 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   QDataStream in(&m_history, QIODevice::ReadOnly);
 
   if(in.status() == QDataStream::Ok)
-    in >> *webView->page()->history();
+    {
+      in >> *webView->page()->history();
+
+      if(in.status() != QDataStream::Ok)
+	webView->page()->history()->clear();
+    }
 
   /*
   ** Please set the text size multiplier after creating the dwebpage
