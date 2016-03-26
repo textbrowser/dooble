@@ -3417,6 +3417,10 @@ p, li { white-space: pre-wrap; }
         <source>Automatically Record Discovered Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>sslCiphersWindow</name>

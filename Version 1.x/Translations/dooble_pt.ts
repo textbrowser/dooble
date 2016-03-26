@@ -92,12 +92,12 @@
         <translation type="obsolete">dmisc::passphraseHash(): Tipo não suportado %1 (%2). A utilizar a implementação Qt sha 1.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1500"/>
+        <location filename="../Source/dmisc.cc" line="1504"/>
         <source>%1 KiB</source>
         <translation>%1 KiB</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1503"/>
+        <location filename="../Source/dmisc.cc" line="1507"/>
         <source>%1 MiB</source>
         <translation>%1 MiB</translation>
     </message>
@@ -126,17 +126,17 @@
         <translation type="obsolete">dmisc::initializeCrypt(): Parece quer a biblioteca gcrypt ja foi iniciada.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1494"/>
+        <location filename="../Source/dmisc.cc" line="1498"/>
         <source>0 Bytes</source>
         <translation>0 bytes</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1496"/>
+        <location filename="../Source/dmisc.cc" line="1500"/>
         <source>1 Byte</source>
         <translation>1 byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1498"/>
+        <location filename="../Source/dmisc.cc" line="1502"/>
         <source>%1 Bytes</source>
         <translation>%1 bytes</translation>
     </message>
@@ -1405,8 +1405,8 @@
         <location filename="../Source/dooble.cc" line="3779"/>
         <location filename="../Source/dooble.cc" line="3987"/>
         <location filename="../Source/dooble.cc" line="5451"/>
-        <location filename="../Source/dooble.cc" line="6083"/>
-        <location filename="../Source/dooble.cc" line="6387"/>
+        <location filename="../Source/dooble.cc" line="6085"/>
+        <location filename="../Source/dooble.cc" line="6389"/>
         <source>Dooble Web Browser</source>
         <translation>Navegador web Dooble</translation>
     </message>
@@ -1467,7 +1467,7 @@
         <location filename="../Source/dooble.cc" line="3297"/>
         <location filename="../Source/dooble.cc" line="5461"/>
         <location filename="../Source/dooble.cc" line="5464"/>
-        <location filename="../Source/dooble.cc" line="6389"/>
+        <location filename="../Source/dooble.cc" line="6391"/>
         <source> - Dooble Web Browser</source>
         <translation> - Navegador web Dooble</translation>
     </message>
@@ -1497,12 +1497,12 @@
         <translation>O proxy %1:%2 está a solicitar credenciais.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6424"/>
+        <location filename="../Source/dooble.cc" line="6426"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Tem a certeza que quer abrir %1 páginas?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6577"/>
+        <location filename="../Source/dooble.cc" line="6579"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Tem a certeza que quer abandonar a página modificada?</translation>
     </message>
@@ -1523,23 +1523,23 @@
         <translation type="vanished">Extra</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7432"/>
+        <location filename="../Source/dooble.cc" line="7434"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7435"/>
-        <location filename="../Source/dooble.cc" line="7439"/>
+        <location filename="../Source/dooble.cc" line="7437"/>
+        <location filename="../Source/dooble.cc" line="7441"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7799"/>
+        <location filename="../Source/dooble.cc" line="7801"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7801"/>
+        <location filename="../Source/dooble.cc" line="7803"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1548,25 +1548,25 @@
         <translation type="obsolete">Um sítio desconhecido (URL inválido ou vazio) causou uma exceção. Clique para visualizar.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7169"/>
+        <location filename="../Source/dooble.cc" line="7171"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Lembrete</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7170"/>
+        <location filename="../Source/dooble.cc" line="7172"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Ainda não definiu a palavra-chave. Aceda ao painel Proteção das definições e escolha a palavra-chave. Assim que escolher a palavra-chave, os marcadores, cookies e todas as informações essenciais estarão disponíveis nas sessões futuras. Pode desativar este alerta no mesmo painel.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6885"/>
-        <location filename="../Source/dooble.cc" line="6890"/>
+        <location filename="../Source/dooble.cc" line="6887"/>
+        <location filename="../Source/dooble.cc" line="6892"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>O sítio %1 causou uma exceção. Clique para visualizar.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7126"/>
         <location filename="../Source/dooble.cc" line="7128"/>
-        <location filename="../Source/dooble.cc" line="7132"/>
+        <location filename="../Source/dooble.cc" line="7130"/>
+        <location filename="../Source/dooble.cc" line="7134"/>
         <source>Restore Session</source>
         <translation>Restaurar sessão</translation>
     </message>
@@ -1574,8 +1574,8 @@
         <location filename="../Source/dooble.cc" line="2892"/>
         <location filename="../Source/dooble.cc" line="2944"/>
         <location filename="../Source/dooble.cc" line="3937"/>
-        <location filename="../Source/dooble.cc" line="6421"/>
-        <location filename="../Source/dooble.cc" line="6573"/>
+        <location filename="../Source/dooble.cc" line="6423"/>
+        <location filename="../Source/dooble.cc" line="6575"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Confirmação</translation>
     </message>
@@ -1837,23 +1837,23 @@
         <translation type="obsolete">Plugins web (instável)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1498"/>
-        <location filename="../Source/dsettings.cc" line="1532"/>
+        <location filename="../Source/dsettings.cc" line="1508"/>
+        <location filename="../Source/dsettings.cc" line="1542"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1499"/>
+        <location filename="../Source/dsettings.cc" line="1509"/>
         <source>The passphrases do not match.</source>
         <translation>As palavra-chave não são iguais.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2131"/>
+        <location filename="../Source/dsettings.cc" line="2142"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Confirmação</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1381"/>
+        <location filename="../Source/dsettings.cc" line="1391"/>
         <source>unknown</source>
         <translation>desconhecido</translation>
     </message>
@@ -1863,7 +1863,7 @@
         <translation>permitido com os cookies existentes</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1533"/>
+        <location filename="../Source/dsettings.cc" line="1543"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>A sua palavra-chave tem que ter, no mínimo, 16 caracteres.</translation>
     </message>
@@ -1872,7 +1872,7 @@
         <translation type="obsolete">Está prestes a reiniciar as definições. Se tiver definido uma palavra-chave, esta será mantida. O Dooble será reiniciado para concluir o processo. Todos os dados não gravados serão perdidos. Tem a certeza que quer continuar?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2229"/>
+        <location filename="../Source/dsettings.cc" line="2240"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Seleção de tema</translation>
     </message>
@@ -1881,12 +1881,12 @@
         <translation type="obsolete">&amp;Selecionar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2247"/>
+        <location filename="../Source/dsettings.cc" line="2258"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Ficheiro de tema (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2332"/>
+        <location filename="../Source/dsettings.cc" line="2343"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Seleção do diretório dos ficheiros recebidos</translation>
     </message>
@@ -1900,54 +1900,54 @@
         <translation type="unfinished">Plugins web</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2134"/>
+        <location filename="../Source/dsettings.cc" line="2145"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2246"/>
-        <location filename="../Source/dsettings.cc" line="2718"/>
+        <location filename="../Source/dsettings.cc" line="2257"/>
+        <location filename="../Source/dsettings.cc" line="2731"/>
         <source>Select</source>
         <translation>Seleção</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2335"/>
-        <location filename="../Source/dsettings.cc" line="2363"/>
+        <location filename="../Source/dsettings.cc" line="2346"/>
+        <location filename="../Source/dsettings.cc" line="2374"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2360"/>
+        <location filename="../Source/dsettings.cc" line="2371"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Seleção da base de dados partilhada Spot-On</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2633"/>
+        <location filename="../Source/dsettings.cc" line="2646"/>
         <source>Prompt</source>
         <translation>Perguntar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2650"/>
+        <location filename="../Source/dsettings.cc" line="2663"/>
         <source>Use other...</source>
         <translation>Outra...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2715"/>
+        <location filename="../Source/dsettings.cc" line="2728"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Seleção de aplicação</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2838"/>
+        <location filename="../Source/dsettings.cc" line="2851"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2842"/>
+        <location filename="../Source/dsettings.cc" line="2855"/>
         <source>&amp;Delete File Suffix</source>
         <translation>E&amp;liminar sufixo</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2936"/>
+        <location filename="../Source/dsettings.cc" line="2949"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2114,17 +2114,17 @@
 <context>
     <name>dview</name>
     <message>
-        <location filename="../Source/dview.cc" line="312"/>
+        <location filename="../Source/dview.cc" line="317"/>
         <source>Copy &amp;Link Location</source>
         <translation>Copiar endereço da &amp;ligação</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="316"/>
+        <location filename="../Source/dview.cc" line="321"/>
         <source>Copy &amp;Selected Text</source>
         <translation>Copiar texto &amp;selecionado</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="323"/>
+        <location filename="../Source/dview.cc" line="328"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Abrir ligação em novo &amp;separador</translation>
     </message>
@@ -2133,7 +2133,7 @@
         <translation type="obsolete">Abrir link em uma nova janela</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="325"/>
+        <location filename="../Source/dview.cc" line="330"/>
         <source>Open Link in &amp;New Window</source>
         <translation>Abrir ligação em &amp;nova janela</translation>
     </message>
@@ -2142,77 +2142,77 @@
         <translation type="obsolete">&amp;Salvar Link</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="355"/>
+        <location filename="../Source/dview.cc" line="360"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="358"/>
+        <location filename="../Source/dview.cc" line="363"/>
         <source>&amp;Paste</source>
         <translation>Co&amp;lar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="376"/>
+        <location filename="../Source/dview.cc" line="381"/>
         <source>&amp;Reload</source>
         <translation>&amp;Recarregar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="341"/>
+        <location filename="../Source/dview.cc" line="346"/>
         <source>Copy &amp;Image Location</source>
         <translation>Copiar endereço da &amp;imagem</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="308"/>
+        <location filename="../Source/dview.cc" line="313"/>
         <source>Copy &amp;E-Mail Address</source>
         <translation>Copiar &amp;endereço eletrónico</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="328"/>
+        <location filename="../Source/dview.cc" line="333"/>
         <source>S&amp;ave Link</source>
         <translation>Gr&amp;avar ligação</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="343"/>
+        <location filename="../Source/dview.cc" line="348"/>
         <source>Sa&amp;ve Image</source>
         <translation>Gra&amp;var imagem</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="345"/>
+        <location filename="../Source/dview.cc" line="350"/>
         <source>View I&amp;mage</source>
         <translation>Ver i&amp;magem</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="347"/>
+        <location filename="../Source/dview.cc" line="352"/>
         <source>View Ima&amp;ge in New Tab</source>
         <translation>Ver ima&amp;gem em novo separador</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="349"/>
+        <location filename="../Source/dview.cc" line="354"/>
         <source>View Imag&amp;e in New Window</source>
         <translation>Ver ima&amp;gem em nova página</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="379"/>
+        <location filename="../Source/dview.cc" line="384"/>
         <source>Sto&amp;p</source>
         <translation>&amp;Parar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="384"/>
+        <location filename="../Source/dview.cc" line="389"/>
         <source>&amp;Print Frame</source>
         <translation>Im&amp;primir moldura</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="391"/>
+        <location filename="../Source/dview.cc" line="396"/>
         <source>View Frame S&amp;ource</source>
         <translation>Ver código f&amp;onte da moldura</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="395"/>
+        <location filename="../Source/dview.cc" line="400"/>
         <source>View Page S&amp;ource</source>
         <translation>Ver código f&amp;onte da página</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="689"/>
+        <location filename="../Source/dview.cc" line="694"/>
         <source>(Untitled)</source>
         <translation>(Sem nome)</translation>
     </message>
@@ -2225,12 +2225,12 @@
         <translation type="obsolete">Exibir ima&amp;gens em uma nova janela</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="368"/>
+        <location filename="../Source/dview.cc" line="373"/>
         <source>&amp;Back</source>
         <translation>&amp;Recuar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="372"/>
+        <location filename="../Source/dview.cc" line="377"/>
         <source>&amp;Forward</source>
         <translation>&amp;Avançar</translation>
     </message>
@@ -3372,7 +3372,7 @@
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="1184"/>
-        <location filename="../UI/dsettings.ui" line="3944"/>
+        <location filename="../UI/dsettings.ui" line="3985"/>
         <source>&amp;Clear</source>
         <translation>&amp;Limpar</translation>
     </message>
@@ -3492,17 +3492,17 @@
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="1122"/>
-        <location filename="../UI/dsettings.ui" line="3071"/>
-        <location filename="../UI/dsettings.ui" line="3111"/>
-        <location filename="../UI/dsettings.ui" line="3151"/>
-        <location filename="../UI/dsettings.ui" line="3191"/>
-        <location filename="../UI/dsettings.ui" line="3230"/>
-        <location filename="../UI/dsettings.ui" line="3274"/>
-        <location filename="../UI/dsettings.ui" line="3574"/>
-        <location filename="../UI/dsettings.ui" line="3614"/>
-        <location filename="../UI/dsettings.ui" line="3654"/>
-        <location filename="../UI/dsettings.ui" line="3752"/>
-        <location filename="../UI/dsettings.ui" line="4041"/>
+        <location filename="../UI/dsettings.ui" line="3112"/>
+        <location filename="../UI/dsettings.ui" line="3152"/>
+        <location filename="../UI/dsettings.ui" line="3192"/>
+        <location filename="../UI/dsettings.ui" line="3232"/>
+        <location filename="../UI/dsettings.ui" line="3271"/>
+        <location filename="../UI/dsettings.ui" line="3315"/>
+        <location filename="../UI/dsettings.ui" line="3615"/>
+        <location filename="../UI/dsettings.ui" line="3655"/>
+        <location filename="../UI/dsettings.ui" line="3695"/>
+        <location filename="../UI/dsettings.ui" line="3793"/>
+        <location filename="../UI/dsettings.ui" line="4082"/>
         <source>&amp;Exceptions</source>
         <translation>&amp;Exceções</translation>
     </message>
@@ -3511,17 +3511,17 @@
         <translation type="obsolete">Aceitar cookies</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3328"/>
+        <location filename="../UI/dsettings.ui" line="3369"/>
         <source>preserved forever</source>
         <translation>armazenados eternamente</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3333"/>
+        <location filename="../UI/dsettings.ui" line="3374"/>
         <source>preserved until they expire</source>
         <translation>armazenados até expirarem</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3679"/>
+        <location filename="../UI/dsettings.ui" line="3720"/>
         <source>JavaScript</source>
         <translation>JavaScript</translation>
     </message>
@@ -3530,7 +3530,7 @@
         <translation type="obsolete">Aceitar alertas.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4166"/>
+        <location filename="../UI/dsettings.ui" line="4207"/>
         <source>Always show the tab bar.</source>
         <translation>Mostrar sempre a barra de separadores.</translation>
     </message>
@@ -3539,7 +3539,7 @@
         <translation type="vanished">Fechar o separador selecionado com a roda do rato.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4206"/>
+        <location filename="../UI/dsettings.ui" line="4247"/>
         <source>Open links in new tabs instead of new windows.</source>
         <translation>Abrir ligações em novos separadores e não em novas janelas.</translation>
     </message>
@@ -3580,7 +3580,7 @@
         <translation type="vanished">Recodificar cache.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2675"/>
+        <location filename="../UI/dsettings.ui" line="2716"/>
         <source>Iteration Count</source>
         <translation>Contar interações</translation>
     </message>
@@ -3593,7 +3593,7 @@
         <translation type="obsolete">Mostrar informações de autenticação ao iniciar.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2951"/>
+        <location filename="../UI/dsettings.ui" line="2992"/>
         <source>&amp;Modify Passphrase</source>
         <translation>&amp;Modificar palavra-chave</translation>
     </message>
@@ -3602,47 +3602,47 @@
         <translation type="vanished">No mínimo, 16 caracteres.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3064"/>
+        <location filename="../UI/dsettings.ui" line="3105"/>
         <source>Always HTTPS</source>
         <translation type="unfinished">Sempre HTTPS</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3101"/>
+        <location filename="../UI/dsettings.ui" line="3142"/>
         <source>Automatically Load Web Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3141"/>
+        <location filename="../UI/dsettings.ui" line="3182"/>
         <source>Block Pop-up Windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3181"/>
+        <location filename="../UI/dsettings.ui" line="3222"/>
         <source>Block Third-party Frame Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3216"/>
+        <location filename="../UI/dsettings.ui" line="3257"/>
         <source>Cookies</source>
         <translation type="unfinished">Cookies</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3267"/>
+        <location filename="../UI/dsettings.ui" line="3308"/>
         <source>Accept HTTP Cookies Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3453"/>
+        <location filename="../UI/dsettings.ui" line="3494"/>
         <source>Third-party cookies should be</source>
         <translation>Os cookies de terceiros são</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3467"/>
+        <location filename="../UI/dsettings.ui" line="3508"/>
         <source>always allowed</source>
         <translation>sempre permitidos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3472"/>
+        <location filename="../UI/dsettings.ui" line="3513"/>
         <source>always blocked</source>
         <translation>sempre bloqueados</translation>
     </message>
@@ -3651,7 +3651,7 @@
         <translation type="obsolete">Ativar auditoria de hiperligações.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3553"/>
+        <location filename="../UI/dsettings.ui" line="3594"/>
         <source>HTTP Headers</source>
         <translation>Cabeçalhos HTTP</translation>
     </message>
@@ -3660,62 +3660,62 @@
         <translation type="obsolete">DNT (Do Not Track)</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3644"/>
+        <location filename="../UI/dsettings.ui" line="3685"/>
         <source>Suppress HTTP Referrer</source>
         <translation type="unfinished">Suprimir referência HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3740"/>
+        <location filename="../UI/dsettings.ui" line="3781"/>
         <source>Accept dialog confirmations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3774"/>
+        <location filename="../UI/dsettings.ui" line="3815"/>
         <source>Enable cross-site script auditing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3801"/>
+        <location filename="../UI/dsettings.ui" line="3842"/>
         <source>Allow hiding of the menu bar.</source>
         <translation>Permitir ocultação da barra de menu.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3811"/>
+        <location filename="../UI/dsettings.ui" line="3852"/>
         <source>Allow hiding of the status bar.</source>
         <translation>Permitir ocultação da barra de estado.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3818"/>
+        <location filename="../UI/dsettings.ui" line="3859"/>
         <source>Allow hiding of the location tool bar.</source>
         <translation>Permitir ocultação da barra de endereço.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3825"/>
+        <location filename="../UI/dsettings.ui" line="3866"/>
         <source>Accept dialog alerts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3835"/>
+        <location filename="../UI/dsettings.ui" line="3876"/>
         <source>Accept dialog prompts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3850"/>
+        <location filename="../UI/dsettings.ui" line="3891"/>
         <source>Local documents are allowed to access other local URLs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3877"/>
+        <location filename="../UI/dsettings.ui" line="3918"/>
         <source>Notify me of console events and exceptions.</source>
         <translation>Notificar eventos de consola e exceções.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3937"/>
+        <location filename="../UI/dsettings.ui" line="3978"/>
         <source>Record favicon data to favicons.db.</source>
         <translation>Gravar dados e base de dados de favicons.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3968"/>
+        <location filename="../UI/dsettings.ui" line="4009"/>
         <source>Session Restoration</source>
         <translation type="unfinished">Restauro de sessão</translation>
     </message>
@@ -3724,7 +3724,7 @@
         <translation type="obsolete">Erros SSL</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4011"/>
+        <location filename="../UI/dsettings.ui" line="4052"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A relaxed setting allows Dooble to ignore SSL errors that are generated by third-party elements. A strict setting instructs Dooble to observe all SSL errors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se definir a opção permissiva, o Dooble ignora os erros SSL gerados pelos elementos de terceiros e se definir a opção não permissiva, o Dooble mostra todos os erros SSL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3737,42 +3737,42 @@
         <translation type="obsolete">Não permissiva</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4089"/>
+        <location filename="../UI/dsettings.ui" line="4130"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Plugins web</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4113"/>
+        <location filename="../UI/dsettings.ui" line="4154"/>
         <source>WebGL</source>
         <translation type="unfinished">WebGL</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4176"/>
+        <location filename="../UI/dsettings.ui" line="4217"/>
         <source>Close the selected tab via a middle mouse button click.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4196"/>
+        <location filename="../UI/dsettings.ui" line="4237"/>
         <source>Display the Dooble Desktop in new windows.</source>
         <translation>Mostrar área de trabalho Dooble nas novas janelas.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4216"/>
+        <location filename="../UI/dsettings.ui" line="4257"/>
         <source>New tabs should be added at the end of the tab bar.</source>
         <translation>Os novos separadores são abertos no fim da barra de separadores.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4223"/>
+        <location filename="../UI/dsettings.ui" line="4264"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Avisar antes de fechar uma página com conteúdo modificado.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4230"/>
+        <location filename="../UI/dsettings.ui" line="4271"/>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation>Avisar ao abandonar uma página com conteúdo modificado.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4254"/>
+        <location filename="../UI/dsettings.ui" line="4295"/>
         <source>HTTP Status Codes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3801,22 +3801,22 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4280"/>
+        <location filename="../UI/dsettings.ui" line="4321"/>
         <source>Periodically purge memory caches.</source>
         <translation>Limpar cache periodicamente.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4307"/>
+        <location filename="../UI/dsettings.ui" line="4348"/>
         <source>Spatial Navigation</source>
         <translation type="unfinished">Navegação entre elementos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4346"/>
+        <location filename="../UI/dsettings.ui" line="4387"/>
         <source>Center child windows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4360"/>
+        <location filename="../UI/dsettings.ui" line="4401"/>
         <source>Open user windows as new processes.</source>
         <translation>Abrir janelas de utilizador como novos processos.</translation>
     </message>
@@ -3889,13 +3889,13 @@
     <message>
         <location filename="../UI/dsettings.ui" line="718"/>
         <location filename="../UI/dsettings.ui" line="749"/>
-        <location filename="../UI/dsettings.ui" line="2878"/>
-        <location filename="../UI/dsettings.ui" line="2885"/>
-        <location filename="../UI/dsettings.ui" line="2892"/>
-        <location filename="../UI/dsettings.ui" line="2899"/>
-        <location filename="../UI/dsettings.ui" line="2906"/>
-        <location filename="../UI/dsettings.ui" line="2913"/>
-        <location filename="../UI/dsettings.ui" line="2920"/>
+        <location filename="../UI/dsettings.ui" line="2919"/>
+        <location filename="../UI/dsettings.ui" line="2926"/>
+        <location filename="../UI/dsettings.ui" line="2933"/>
+        <location filename="../UI/dsettings.ui" line="2940"/>
+        <location filename="../UI/dsettings.ui" line="2947"/>
+        <location filename="../UI/dsettings.ui" line="2954"/>
+        <location filename="../UI/dsettings.ui" line="2961"/>
         <source>Size</source>
         <translation>Tamanho</translation>
     </message>
@@ -4132,77 +4132,82 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3007"/>
+        <location filename="../UI/dsettings.ui" line="2658"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="3048"/>
         <source>Minimum of 16 characters, please.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3531"/>
+        <location filename="../UI/dsettings.ui" line="3572"/>
         <source>Enable hyperlink auditing. Proper understanding of this option is required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3567"/>
+        <location filename="../UI/dsettings.ui" line="3608"/>
         <source>Do Not Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3693"/>
+        <location filename="../UI/dsettings.ui" line="3734"/>
         <source>Stagnant Scripts Default Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3707"/>
+        <location filename="../UI/dsettings.ui" line="3748"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3712"/>
+        <location filename="../UI/dsettings.ui" line="3753"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3717"/>
+        <location filename="../UI/dsettings.ui" line="3758"/>
         <source>Prompt</source>
         <translation type="unfinished">Perguntar</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3904"/>
+        <location filename="../UI/dsettings.ui" line="3945"/>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4001"/>
+        <location filename="../UI/dsettings.ui" line="4042"/>
         <source>Sight SSL errors. Assume a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4021"/>
+        <location filename="../UI/dsettings.ui" line="4062"/>
         <source>relaxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4026"/>
+        <location filename="../UI/dsettings.ui" line="4067"/>
         <source>strict</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4034"/>
+        <location filename="../UI/dsettings.ui" line="4075"/>
         <source>approach.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4267"/>
+        <location filename="../UI/dsettings.ui" line="4308"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4353"/>
+        <location filename="../UI/dsettings.ui" line="4394"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4367"/>
+        <location filename="../UI/dsettings.ui" line="4408"/>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4283,22 +4288,22 @@
         <translation type="vanished">Recodificar histórico.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2993"/>
+        <location filename="../UI/dsettings.ui" line="3034"/>
         <source>Passphrase Confirmation</source>
         <translation>Confirmação de palavra-chave</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3604"/>
+        <location filename="../UI/dsettings.ui" line="3645"/>
         <source>Suppress HTTP Redirect</source>
         <translation type="unfinished">Suprimir reencaminhamento HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4065"/>
+        <location filename="../UI/dsettings.ui" line="4106"/>
         <source>Speedy Network Protocol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4156"/>
+        <location filename="../UI/dsettings.ui" line="4197"/>
         <source>After creating a new tab from a Web link, switch to it immediately.</source>
         <translation>Ao abrir um separador através de uma ligação web, trocar imediatamente.</translation>
     </message>
@@ -4453,53 +4458,53 @@
         <translation>Tipo de cifra</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2698"/>
+        <location filename="../UI/dsettings.ui" line="2739"/>
         <source>Salt Length</source>
         <translation>Tamanho dos dados</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2658"/>
+        <location filename="../UI/dsettings.ui" line="2699"/>
         <source>Hash Type</source>
         <translation>Tipo de hash</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2771"/>
+        <location filename="../UI/dsettings.ui" line="2812"/>
         <source>Re-encode Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2784"/>
+        <location filename="../UI/dsettings.ui" line="2825"/>
         <source>Re-encode Favicons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2797"/>
+        <location filename="../UI/dsettings.ui" line="2838"/>
         <source>Re-encode History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2845"/>
+        <location filename="../UI/dsettings.ui" line="2886"/>
         <source>Re-encode Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2758"/>
+        <location filename="../UI/dsettings.ui" line="2799"/>
         <source>Re-encode Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2858"/>
+        <location filename="../UI/dsettings.ui" line="2899"/>
         <source>Re-encode Downloads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2871"/>
+        <location filename="../UI/dsettings.ui" line="2912"/>
         <source>Re-encode Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2973"/>
-        <location filename="../UI/dsettings.ui" line="2979"/>
+        <location filename="../UI/dsettings.ui" line="3014"/>
+        <location filename="../UI/dsettings.ui" line="3020"/>
         <source>Passphrase</source>
         <translation>Palavra-chave</translation>
     </message>
@@ -4508,44 +4513,44 @@
         <translation type="obsolete">Bloquear conteúdo de terceiros</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3303"/>
+        <location filename="../UI/dsettings.ui" line="3344"/>
         <source>Please note that the below setting affects preserved sites.</source>
         <translation>Tenha em atenção que esta definição afeta os sítios armazenados.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3312"/>
+        <location filename="../UI/dsettings.ui" line="3353"/>
         <source>Cookies should be</source>
         <translation>Os cookies devem ser</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3323"/>
+        <location filename="../UI/dsettings.ui" line="3364"/>
         <source>deleted upon exit</source>
         <translation>eliminados ao sair</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3341"/>
-        <location filename="../UI/dsettings.ui" line="3422"/>
-        <location filename="../UI/dsettings.ui" line="3480"/>
+        <location filename="../UI/dsettings.ui" line="3382"/>
+        <location filename="../UI/dsettings.ui" line="3463"/>
+        <location filename="../UI/dsettings.ui" line="3521"/>
         <source>.</source>
         <translation>.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3370"/>
+        <location filename="../UI/dsettings.ui" line="3411"/>
         <source>Please note that preserved sites will not be discarded.</source>
         <translation>Tenha em atenção que os sítios armazenados não serão descartados.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3385"/>
+        <location filename="../UI/dsettings.ui" line="3426"/>
         <source>Sweep cookies every</source>
         <translation>Apagar cookies a cada</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3409"/>
+        <location filename="../UI/dsettings.ui" line="3450"/>
         <source>hour(s)</source>
         <translation>hora(s)</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3414"/>
+        <location filename="../UI/dsettings.ui" line="3455"/>
         <source>minute(s)</source>
         <translation>minuto(s)</translation>
     </message>
@@ -4554,7 +4559,7 @@
         <translation type="obsolete">Auditoria transversal de scripting de sítios</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3507"/>
+        <location filename="../UI/dsettings.ui" line="3548"/>
         <source>Display the IP address of the current Web site.</source>
         <translation>Mostrar o endereço IP do sítio web atual.</translation>
     </message>
@@ -4563,12 +4568,12 @@
         <translation type="vanished">Java</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3784"/>
+        <location filename="../UI/dsettings.ui" line="3825"/>
         <source>Allow opening of new windows.</source>
         <translation>Permitir abertura de novas janelas.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3794"/>
+        <location filename="../UI/dsettings.ui" line="3835"/>
         <source>Accept geometry-change requests.</source>
         <translation>Aceitar pedidos de alteração de geometria.</translation>
     </message>
@@ -4584,7 +4589,7 @@
         <translation>Separadores</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4186"/>
+        <location filename="../UI/dsettings.ui" line="4227"/>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation>Criar um novo separador ao clicar duas vezes na barra de separadores.</translation>
     </message>
