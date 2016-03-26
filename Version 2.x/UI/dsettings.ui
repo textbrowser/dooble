@@ -2577,7 +2577,7 @@
                 <item>
                  <widget class="QCheckBox" name="showAuthenticationCheckBox">
                   <property name="text">
-                   <string>Show authentication information after launch. Disabling this feature will inhibit session restoration.</string>
+                   <string>Show authentication information after launch.</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
