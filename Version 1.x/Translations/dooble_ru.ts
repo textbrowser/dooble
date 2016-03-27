@@ -1280,39 +1280,39 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="1588"/>
+        <location filename="../Source/dooble.cc" line="1590"/>
         <source>Show &amp;History</source>
         <translation>Показать историю</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2345"/>
-        <location filename="../Source/dooble.cc" line="2402"/>
-        <location filename="../Source/dooble.cc" line="2442"/>
-        <location filename="../Source/dooble.cc" line="2509"/>
-        <location filename="../Source/dooble.cc" line="3313"/>
-        <location filename="../Source/dooble.cc" line="3500"/>
-        <location filename="../Source/dooble.cc" line="3524"/>
-        <location filename="../Source/dooble.cc" line="5045"/>
-        <location filename="../Source/dooble.cc" line="5527"/>
+        <location filename="../Source/dooble.cc" line="2352"/>
+        <location filename="../Source/dooble.cc" line="2409"/>
+        <location filename="../Source/dooble.cc" line="2449"/>
+        <location filename="../Source/dooble.cc" line="2516"/>
+        <location filename="../Source/dooble.cc" line="3320"/>
+        <location filename="../Source/dooble.cc" line="3507"/>
+        <location filename="../Source/dooble.cc" line="3531"/>
+        <location filename="../Source/dooble.cc" line="5052"/>
+        <location filename="../Source/dooble.cc" line="5534"/>
         <source>(Untitled)</source>
         <translation>(Без названия)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3099"/>
-        <location filename="../Source/dooble.cc" line="3168"/>
-        <location filename="../Source/dooble.cc" line="3284"/>
-        <location filename="../Source/dooble.cc" line="3600"/>
-        <location filename="../Source/dooble.cc" line="3739"/>
-        <location filename="../Source/dooble.cc" line="3779"/>
-        <location filename="../Source/dooble.cc" line="3987"/>
-        <location filename="../Source/dooble.cc" line="5451"/>
-        <location filename="../Source/dooble.cc" line="6085"/>
-        <location filename="../Source/dooble.cc" line="6389"/>
+        <location filename="../Source/dooble.cc" line="3106"/>
+        <location filename="../Source/dooble.cc" line="3175"/>
+        <location filename="../Source/dooble.cc" line="3291"/>
+        <location filename="../Source/dooble.cc" line="3607"/>
+        <location filename="../Source/dooble.cc" line="3746"/>
+        <location filename="../Source/dooble.cc" line="3786"/>
+        <location filename="../Source/dooble.cc" line="3994"/>
+        <location filename="../Source/dooble.cc" line="5458"/>
+        <location filename="../Source/dooble.cc" line="6096"/>
+        <location filename="../Source/dooble.cc" line="6400"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Браузер</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2897"/>
+        <location filename="../Source/dooble.cc" line="2904"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation>У вас есть вкладки с измененным содержанием. Вы уверены, что хотите выйти?</translation>
     </message>
@@ -1327,83 +1327,83 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1594"/>
+        <location filename="../Source/dooble.cc" line="1596"/>
         <source>&amp;Recently-Closed Tabs</source>
         <translation>Недавно закрытые вкладки</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1809"/>
-        <location filename="../Source/dooble.cc" line="1876"/>
-        <location filename="../Source/dooble.cc" line="1919"/>
-        <location filename="../Source/dooble.cc" line="1952"/>
-        <location filename="../Source/dooble.cc" line="2041"/>
+        <location filename="../Source/dooble.cc" line="1814"/>
+        <location filename="../Source/dooble.cc" line="1881"/>
+        <location filename="../Source/dooble.cc" line="1924"/>
+        <location filename="../Source/dooble.cc" line="1957"/>
+        <location filename="../Source/dooble.cc" line="2046"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble Браузер: Ошибка</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1810"/>
-        <location filename="../Source/dooble.cc" line="1877"/>
-        <location filename="../Source/dooble.cc" line="1920"/>
-        <location filename="../Source/dooble.cc" line="1953"/>
-        <location filename="../Source/dooble.cc" line="2042"/>
+        <location filename="../Source/dooble.cc" line="1815"/>
+        <location filename="../Source/dooble.cc" line="1882"/>
+        <location filename="../Source/dooble.cc" line="1925"/>
+        <location filename="../Source/dooble.cc" line="1958"/>
+        <location filename="../Source/dooble.cc" line="2047"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2900"/>
+        <location filename="../Source/dooble.cc" line="2907"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation>У вас есть вкладки с измененным содержанием. Вы уверены, что хотите закрыть?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3101"/>
-        <location filename="../Source/dooble.cc" line="3286"/>
-        <location filename="../Source/dooble.cc" line="5453"/>
+        <location filename="../Source/dooble.cc" line="3108"/>
+        <location filename="../Source/dooble.cc" line="3293"/>
+        <location filename="../Source/dooble.cc" line="5460"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Браузер (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3109"/>
-        <location filename="../Source/dooble.cc" line="3112"/>
-        <location filename="../Source/dooble.cc" line="3294"/>
-        <location filename="../Source/dooble.cc" line="3297"/>
-        <location filename="../Source/dooble.cc" line="5461"/>
-        <location filename="../Source/dooble.cc" line="5464"/>
-        <location filename="../Source/dooble.cc" line="6391"/>
+        <location filename="../Source/dooble.cc" line="3116"/>
+        <location filename="../Source/dooble.cc" line="3119"/>
+        <location filename="../Source/dooble.cc" line="3301"/>
+        <location filename="../Source/dooble.cc" line="3304"/>
+        <location filename="../Source/dooble.cc" line="5468"/>
+        <location filename="../Source/dooble.cc" line="5471"/>
+        <location filename="../Source/dooble.cc" line="6402"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Браузер</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4009"/>
+        <location filename="../Source/dooble.cc" line="4016"/>
         <source>&amp;Clear</source>
         <translation>Очистить</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4590"/>
+        <location filename="../Source/dooble.cc" line="4597"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5183"/>
+        <location filename="../Source/dooble.cc" line="5190"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5318"/>
+        <location filename="../Source/dooble.cc" line="5325"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>Сайт %1 запрашивает учетные данные.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5382"/>
+        <location filename="../Source/dooble.cc" line="5389"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>Прокси %1:%2 запрашивает учетные данные.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6426"/>
+        <location filename="../Source/dooble.cc" line="6437"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Вы уверены, что вы хотите открыть%1 страницы?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6579"/>
+        <location filename="../Source/dooble.cc" line="6590"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Вы уверены, что хотите покинуть измененную страницу?</translation>
     </message>
@@ -1424,23 +1424,23 @@
         <translation type="vanished">Дополнение</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7434"/>
+        <location filename="../Source/dooble.cc" line="7445"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7437"/>
-        <location filename="../Source/dooble.cc" line="7441"/>
+        <location filename="../Source/dooble.cc" line="7448"/>
+        <location filename="../Source/dooble.cc" line="7452"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7801"/>
+        <location filename="../Source/dooble.cc" line="7812"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7803"/>
+        <location filename="../Source/dooble.cc" line="7814"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1449,12 +1449,12 @@
         <translation type="obsolete">Неизвестный (пустойе или недействительный URL) сайта вызвало исключение. Пожалуйста, нажмите для просмотра.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7171"/>
+        <location filename="../Source/dooble.cc" line="7182"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Веб-браузер: Напоминание</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7172"/>
+        <location filename="../Source/dooble.cc" line="7183"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Пароль не подготовлен. Пожалуйста откройте окно настроек и введите пароль на вкладке &quot;Безопасность&quot;. Когда пароль будет введен вы сможете использовать закладки, cookies и другую важную информацию в следующих сессиях.</translation>
     </message>
@@ -1467,15 +1467,15 @@
         <translation type="obsolete">Заполнение кэш-памяти ... %1% завершено.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6887"/>
-        <location filename="../Source/dooble.cc" line="6892"/>
+        <location filename="../Source/dooble.cc" line="6898"/>
+        <location filename="../Source/dooble.cc" line="6903"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Сайт %1 вызвал исключение. Пожалуйста, нажмите для просмотра.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7128"/>
-        <location filename="../Source/dooble.cc" line="7130"/>
-        <location filename="../Source/dooble.cc" line="7134"/>
+        <location filename="../Source/dooble.cc" line="7139"/>
+        <location filename="../Source/dooble.cc" line="7141"/>
+        <location filename="../Source/dooble.cc" line="7145"/>
         <source>Restore Session</source>
         <translation>Восстановление сессии</translation>
     </message>
@@ -1484,26 +1484,26 @@
         <translation type="obsolete">Загрузка ...</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2892"/>
-        <location filename="../Source/dooble.cc" line="2944"/>
-        <location filename="../Source/dooble.cc" line="3937"/>
-        <location filename="../Source/dooble.cc" line="6423"/>
-        <location filename="../Source/dooble.cc" line="6575"/>
+        <location filename="../Source/dooble.cc" line="2899"/>
+        <location filename="../Source/dooble.cc" line="2951"/>
+        <location filename="../Source/dooble.cc" line="3944"/>
+        <location filename="../Source/dooble.cc" line="6434"/>
+        <location filename="../Source/dooble.cc" line="6586"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble браузер: Подтверждение</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2947"/>
+        <location filename="../Source/dooble.cc" line="2954"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation>Завершение Dooble приведет к прерыванию текущих загрузок. Вы уверены, что хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3940"/>
+        <location filename="../Source/dooble.cc" line="3947"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Вы уверены, что хотите закрыть эту измененную вкладку?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5180"/>
+        <location filename="../Source/dooble.cc" line="5187"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Браузер: Открыть каталог</translation>
     </message>
@@ -1512,7 +1512,7 @@
         <translation type="obsolete">Открыть</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1582"/>
+        <location filename="../Source/dooble.cc" line="1584"/>
         <source>&amp;Clear History</source>
         <translation>Очистить историю</translation>
     </message>
@@ -1521,12 +1521,12 @@
         <translation type="obsolete">Очистить историю</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4466"/>
+        <location filename="../Source/dooble.cc" line="4473"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Браузер: О Программе</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4587"/>
+        <location filename="../Source/dooble.cc" line="4594"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Браузер: Сохранить как</translation>
     </message>
@@ -1535,10 +1535,10 @@
         <translation type="obsolete">&amp;Сохранить</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4968"/>
-        <location filename="../Source/dooble.cc" line="4974"/>
-        <location filename="../Source/dooble.cc" line="4976"/>
-        <location filename="../Source/dooble.cc" line="4980"/>
+        <location filename="../Source/dooble.cc" line="4975"/>
+        <location filename="../Source/dooble.cc" line="4981"/>
+        <location filename="../Source/dooble.cc" line="4983"/>
+        <location filename="../Source/dooble.cc" line="4987"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Рабочий стол</translation>
     </message>
@@ -1766,23 +1766,23 @@
         <translation type="obsolete">Web плагины (нестабильно)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1508"/>
-        <location filename="../Source/dsettings.cc" line="1542"/>
+        <location filename="../Source/dsettings.cc" line="1519"/>
+        <location filename="../Source/dsettings.cc" line="1553"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Браузер: Ошибка</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1509"/>
+        <location filename="../Source/dsettings.cc" line="1520"/>
         <source>The passphrases do not match.</source>
         <translation>Пароль не совпадает.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2142"/>
+        <location filename="../Source/dsettings.cc" line="2156"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Браузер: Подтверждение</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1391"/>
+        <location filename="../Source/dsettings.cc" line="1402"/>
         <source>unknown</source>
         <translation>неизвестный</translation>
     </message>
@@ -1792,7 +1792,7 @@
         <translation>разрешено с существующими cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1543"/>
+        <location filename="../Source/dsettings.cc" line="1554"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Пароль должен быть как минимум 16 символов.</translation>
     </message>
@@ -1801,7 +1801,7 @@
         <translation type="obsolete">Вы собираетесь сбросить настройки конфигурации. Если пароль была настроен,то  он будет сохранен. Dooble будет перезапущен, чтобы завершить процесс сброса конфигурации. В результате, все несохраненные данные будут потеряны. Вы хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2240"/>
+        <location filename="../Source/dsettings.cc" line="2254"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Браузер : Выбор темы</translation>
     </message>
@@ -1810,12 +1810,12 @@
         <translation type="obsolete">&amp;Выбрать</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2258"/>
+        <location filename="../Source/dsettings.cc" line="2272"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Файл конфигурации темы (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2343"/>
+        <location filename="../Source/dsettings.cc" line="2357"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Браузер: Выбор каталога для моих проверенных файлов</translation>
     </message>
@@ -1824,59 +1824,59 @@
         <translation type="obsolete">Открыть</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="569"/>
+        <location filename="../Source/dsettings.cc" line="580"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Веб-расширения</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2145"/>
+        <location filename="../Source/dsettings.cc" line="2159"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2257"/>
-        <location filename="../Source/dsettings.cc" line="2731"/>
+        <location filename="../Source/dsettings.cc" line="2271"/>
+        <location filename="../Source/dsettings.cc" line="2745"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2346"/>
-        <location filename="../Source/dsettings.cc" line="2374"/>
+        <location filename="../Source/dsettings.cc" line="2360"/>
+        <location filename="../Source/dsettings.cc" line="2388"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2371"/>
+        <location filename="../Source/dsettings.cc" line="2385"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Браузер: Выбрать базу данный Spot-On</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2646"/>
+        <location filename="../Source/dsettings.cc" line="2660"/>
         <source>Prompt</source>
         <translation>Подсказка</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2663"/>
+        <location filename="../Source/dsettings.cc" line="2677"/>
         <source>Use other...</source>
         <translation>Используйте другой ...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2728"/>
+        <location filename="../Source/dsettings.cc" line="2742"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Браузер: Выбрать приложение</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2851"/>
+        <location filename="../Source/dsettings.cc" line="2865"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2855"/>
+        <location filename="../Source/dsettings.cc" line="2869"/>
         <source>&amp;Delete File Suffix</source>
         <translation>Удалить суффикс файла</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2949"/>
+        <location filename="../Source/dsettings.cc" line="2963"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3589,8 +3589,9 @@
         <translation>Домашняя страница будет открыта посленажатия клавиши &quot;Home&quot;. Для открытия первых 30 URL, пожалуйста нажмите &quot;Home&quot; с зажатой клавишей &quot;Ctrl&quot;.</translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="2580"/>
         <source>Show authentication information after launch.</source>
-        <translation type="obsolete">Показывать информацию об учетных данных после запуска.</translation>
+        <translation type="unfinished">Показывать информацию об учетных данных после запуска.</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="2739"/>
@@ -3744,7 +3745,7 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4321"/>
+        <location filename="../UI/dsettings.ui" line="4334"/>
         <source>Periodically purge memory caches.</source>
         <translation>Периодически чистить кэш памяти.</translation>
     </message>
@@ -3776,11 +3777,6 @@
     <message>
         <location filename="../UI/dsettings.ui" line="1177"/>
         <source>50 MiB of content is cached.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/dsettings.ui" line="2580"/>
-        <source>Show authentication information after launch. Disabling this feature will inhibit session restoration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3989,17 +3985,17 @@
         <translation>Предупреждать меня перед закрытием вкладки с измененным содержимым.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4348"/>
+        <location filename="../UI/dsettings.ui" line="4361"/>
         <source>Spatial Navigation</source>
         <translation type="unfinished">Пространственная навигация</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4387"/>
+        <location filename="../UI/dsettings.ui" line="4400"/>
         <source>Center child windows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4401"/>
+        <location filename="../UI/dsettings.ui" line="4414"/>
         <source>Open user windows as new processes.</source>
         <translation>Открывать окна пользователа как новые процессы.</translation>
     </message>
@@ -4370,17 +4366,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4308"/>
+        <location filename="../UI/dsettings.ui" line="4301"/>
+        <source>Please see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/a&gt; for descriptions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="4321"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4394"/>
+        <location filename="../UI/dsettings.ui" line="4407"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4408"/>
+        <location filename="../UI/dsettings.ui" line="4421"/>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4623,7 +4624,12 @@
         <translation type="obsolete">Нажмите, чтобы просмотреть содержимое журнала ошибок.</translation>
     </message>
     <message>
-        <location filename="../UI/dstatusBar.ui" line="83"/>
+        <location filename="../UI/dstatusBar.ui" line="30"/>
+        <source>Authenticate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dstatusBar.ui" line="94"/>
         <source>Please click to review the contents of the Error Information window.</source>
         <translation type="unfinished"></translation>
     </message>

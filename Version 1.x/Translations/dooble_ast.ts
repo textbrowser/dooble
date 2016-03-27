@@ -3132,10 +3132,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show authentication information after launch. Disabling this feature will inhibit session restoration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3411,6 +3407,14 @@ p, li { white-space: pre-wrap; }
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show authentication information after launch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/a&gt; for descriptions.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>sslCiphersWindow</name>
@@ -3439,6 +3443,10 @@ p, li { white-space: pre-wrap; }
     <name>statusBar</name>
     <message>
         <source>Please click to review the contents of the Error Information window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authenticate</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
