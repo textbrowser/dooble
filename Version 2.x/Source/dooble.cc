@@ -1421,6 +1421,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SIGNAL(errorLogged(void)),
 	  this,
 	  SLOT(slotErrorLogged(void)));
+  connect(sb.authenticate, SIGNAL(clicked(void)),
+	  this, SLOT(slotAuthenticate(void)));
   connect(sb.errorLogToolButton,
 	  SIGNAL(clicked(void)),
 	  s_errorLog,
@@ -1609,6 +1611,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.actionShow_FavoritesToolBar->setChecked
     (s_settings.value("mainWindow/showFavoritesToolBar", false).
      toBool());
+  sb.authenticate->setEnabled
+    (!dmisc::passphraseWasAuthenticated() && dmisc::passphraseWasPrepared());
   ui.action_Authenticate->setEnabled
     (!dmisc::passphraseWasAuthenticated() && dmisc::passphraseWasPrepared());
   slotSetIcons();
@@ -1623,6 +1627,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	    toolButton == ui.reloadToolButton ||
 	    toolButton == ui.homeToolButton ||
 	    toolButton == ui.desktopToolButton ||
+	    toolButton == sb.authenticate ||
 	    toolButton == sb.exceptionsToolButton ||
 	    toolButton == sb.errorLogToolButton)
       toolButton->setStyleSheet
@@ -2013,6 +2018,8 @@ void dooble::slotSetIcons(void)
   ui.action_Clear_Containers->setIcon
     (QIcon(settings.value("mainWindow/actionClear_Containers").toString()));
   ui.action_SSL_Ciphers->setIcon
+    (QIcon(settings.value("mainWindow/authenticate_Action").toString()));
+  sb.authenticate->setIcon
     (QIcon(settings.value("mainWindow/authenticate_Action").toString()));
   sb.exceptionsToolButton->setIcon
     (QIcon(settings.value("mainWindow/exceptionToolButton").toString()));
@@ -5627,8 +5634,12 @@ bool dooble::promptForPassphrase(const bool override)
 		    dooble *d = qobject_cast<dooble *> (widget);
 
 		    if(d)
-		      d->ui.action_Authenticate->setEnabled
-			(!dmisc::passphraseWasAuthenticated());
+		      {
+			d->sb.authenticate->setEnabled
+			  (!dmisc::passphraseWasAuthenticated());
+			d->ui.action_Authenticate->setEnabled
+			  (!dmisc::passphraseWasAuthenticated());
+		      }
 		  }
 
 	      reinstate();

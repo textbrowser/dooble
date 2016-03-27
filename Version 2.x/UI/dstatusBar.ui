@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>statusBar</class>
  <widget class="QWidget" name="statusBar">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>235</width>
-    <height>35</height>
-   </rect>
-  </property>
   <property name="minimumSize">
    <size>
     <width>0</width>
@@ -32,6 +24,25 @@
    <property name="bottomMargin">
     <number>5</number>
    </property>
+   <item>
+    <widget class="QToolButton" name="authenticate">
+     <property name="toolTip">
+      <string>Authenticate</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QProgressBar" name="progressBar">
      <property name="sizePolicy">
@@ -99,6 +110,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>authenticate</tabstop>
   <tabstop>exceptionsToolButton</tabstop>
   <tabstop>errorLogToolButton</tabstop>
  </tabstops>
