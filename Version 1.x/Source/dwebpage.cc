@@ -710,7 +710,10 @@ void dwebpage::slotFinished(QNetworkReply *reply)
   int status = reply->attribute
     (QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
-  if(status >= 400 && status <= 599 &&
+  if(reply->error() == QNetworkReply::AuthenticationRequiredError)
+    status = 204;
+
+  if((status == 204 || (status >= 400 && status <= 599)) &&
      dmisc::s_httpStatusCodes.contains(status) &&
      dmisc::s_httpStatusCodes.value(status, 1) == 0)
     {

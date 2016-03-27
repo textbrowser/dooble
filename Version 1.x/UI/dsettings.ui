@@ -380,7 +380,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>738</width>
+               <width>520</width>
                <height>571</height>
               </rect>
              </property>
@@ -1235,7 +1235,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>732</width>
+               <width>303</width>
                <height>550</height>
               </rect>
              </property>
@@ -1551,8 +1551,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>738</width>
-               <height>865</height>
+               <width>594</width>
+               <height>897</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2543,8 +2543,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>738</width>
-               <height>677</height>
+               <width>476</width>
+               <height>709</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -4295,6 +4295,19 @@
              <string>HTTP Status Codes</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_24">
+             <item>
+              <widget class="QLabel" name="label_82">
+               <property name="text">
+                <string>Please see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/a&gt; for descriptions.</string>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QTableWidget" name="httpStatusCodes">
                <attribute name="horizontalHeaderDefaultSectionSize">
