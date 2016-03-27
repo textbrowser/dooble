@@ -861,7 +861,12 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 	  if(byteArray.isEmpty())
 	    {
 	      gcry_fast_random_poll();
-	      gcry_create_nonce(iv, ivLength);
+
+	      if(m_cipherMode == "CBC")
+		gcry_create_nonce(iv, ivLength);
+	      else
+		gcry_randomize(iv, ivLength, GCRY_STRONG_RANDOM);
+
 	      byteArray.append(iv, static_cast<int> (ivLength));
 	    }
 	  else

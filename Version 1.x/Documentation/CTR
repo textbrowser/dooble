@@ -1,4 +1,9 @@
-Dooble uses the CTR mode of operation.
+Dooble supports the CTR mode of operation.
 
 Authenticated and encrypted values are stored in various databases.
 The format of the stored objects is H(E(P || Length(P))) || E(P || Length(P)).
+
+Please note that state is not maintained. The function
+gcry_randomize() is used for obtaining a buffer of random data.
+
+If this is a concern, please avoid using the CTR mode.
