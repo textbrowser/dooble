@@ -4719,7 +4719,7 @@ void dooble::slotShowFind(void)
 
 	  if(!fixed)
 	    {
-	      QColor color(255, 255, 255);
+	      QColor color(240, 128, 128); // Light Coral!
 	      QPalette palette(ui.findLineEdit->palette());
 
 	      palette.setColor(ui.findLineEdit->backgroundRole(), color);
