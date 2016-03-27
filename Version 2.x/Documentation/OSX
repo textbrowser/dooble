@@ -1,5 +1,7 @@
+Homebrew is required. Please see http://brew.sh.
+
 The install target is not reliable. If Dooble.app is not copied to
-/Applications/Dooble_Qt5.d during an install, please copy it manually
+/Applications/Dooble.d during an install, please copy it manually
 (cp -r ./Dooble.app /Applications/Dooble_Qt5.d/.).
 
 Developers, please install Qt via the online installer. The products

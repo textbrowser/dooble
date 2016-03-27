@@ -1,10 +1,10 @@
-Qt 5.5.x and libgcrypt 1.5.x are highly recommended. Qt 4.7.x
+Qt 5.5.x and libgcrypt 1.6.x are highly recommended. Qt 4.7.x
 may work. Qt 4.8.x is supported.
 
 If header (h) or interface (ui) files have changed, please perform
 a distclean before building Dooble.
 
-OS X developers should consider installing Homebrew.
+OS X developers should consider installing Homebrew. Please see http://brew.sh.
 
 Absolute cleaning:
 gmake distclean or make distclean or mingw32-make distclean

@@ -1360,96 +1360,96 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="2345"/>
-        <location filename="../Source/dooble.cc" line="2402"/>
-        <location filename="../Source/dooble.cc" line="2442"/>
-        <location filename="../Source/dooble.cc" line="2509"/>
-        <location filename="../Source/dooble.cc" line="3313"/>
-        <location filename="../Source/dooble.cc" line="3500"/>
-        <location filename="../Source/dooble.cc" line="3524"/>
-        <location filename="../Source/dooble.cc" line="5045"/>
-        <location filename="../Source/dooble.cc" line="5527"/>
+        <location filename="../Source/dooble.cc" line="2352"/>
+        <location filename="../Source/dooble.cc" line="2409"/>
+        <location filename="../Source/dooble.cc" line="2449"/>
+        <location filename="../Source/dooble.cc" line="2516"/>
+        <location filename="../Source/dooble.cc" line="3320"/>
+        <location filename="../Source/dooble.cc" line="3507"/>
+        <location filename="../Source/dooble.cc" line="3531"/>
+        <location filename="../Source/dooble.cc" line="5052"/>
+        <location filename="../Source/dooble.cc" line="5534"/>
         <source>(Untitled)</source>
         <translation>(Izenburugabea)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3099"/>
-        <location filename="../Source/dooble.cc" line="3168"/>
-        <location filename="../Source/dooble.cc" line="3284"/>
-        <location filename="../Source/dooble.cc" line="3600"/>
-        <location filename="../Source/dooble.cc" line="3739"/>
-        <location filename="../Source/dooble.cc" line="3779"/>
-        <location filename="../Source/dooble.cc" line="3987"/>
-        <location filename="../Source/dooble.cc" line="5451"/>
-        <location filename="../Source/dooble.cc" line="6085"/>
-        <location filename="../Source/dooble.cc" line="6389"/>
+        <location filename="../Source/dooble.cc" line="3106"/>
+        <location filename="../Source/dooble.cc" line="3175"/>
+        <location filename="../Source/dooble.cc" line="3291"/>
+        <location filename="../Source/dooble.cc" line="3607"/>
+        <location filename="../Source/dooble.cc" line="3746"/>
+        <location filename="../Source/dooble.cc" line="3786"/>
+        <location filename="../Source/dooble.cc" line="3994"/>
+        <location filename="../Source/dooble.cc" line="5458"/>
+        <location filename="../Source/dooble.cc" line="6096"/>
+        <location filename="../Source/dooble.cc" line="6400"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Nabigatzailea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3109"/>
-        <location filename="../Source/dooble.cc" line="3112"/>
-        <location filename="../Source/dooble.cc" line="3294"/>
-        <location filename="../Source/dooble.cc" line="3297"/>
-        <location filename="../Source/dooble.cc" line="5461"/>
-        <location filename="../Source/dooble.cc" line="5464"/>
-        <location filename="../Source/dooble.cc" line="6391"/>
+        <location filename="../Source/dooble.cc" line="3116"/>
+        <location filename="../Source/dooble.cc" line="3119"/>
+        <location filename="../Source/dooble.cc" line="3301"/>
+        <location filename="../Source/dooble.cc" line="3304"/>
+        <location filename="../Source/dooble.cc" line="5468"/>
+        <location filename="../Source/dooble.cc" line="5471"/>
+        <location filename="../Source/dooble.cc" line="6402"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Nabigatzailea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1582"/>
+        <location filename="../Source/dooble.cc" line="1584"/>
         <source>&amp;Clear History</source>
         <translation>&amp;Garbitu Historia</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1588"/>
+        <location filename="../Source/dooble.cc" line="1590"/>
         <source>Show &amp;History</source>
         <translation>&amp;Erakutsi Historia</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2897"/>
+        <location filename="../Source/dooble.cc" line="2904"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation>Edukia aldatuta duten hegatsak dituzu. Zihur zaude irtetzea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2900"/>
+        <location filename="../Source/dooble.cc" line="2907"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation>Edukia aldatuta duten hegatsak dituzu. Zihur zaude istea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3101"/>
-        <location filename="../Source/dooble.cc" line="3286"/>
-        <location filename="../Source/dooble.cc" line="5453"/>
+        <location filename="../Source/dooble.cc" line="3108"/>
+        <location filename="../Source/dooble.cc" line="3293"/>
+        <location filename="../Source/dooble.cc" line="5460"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Nabigatzailea (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4590"/>
+        <location filename="../Source/dooble.cc" line="4597"/>
         <source>Save</source>
         <translation>Gorde</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5183"/>
+        <location filename="../Source/dooble.cc" line="5190"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6426"/>
+        <location filename="../Source/dooble.cc" line="6437"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Zihur zaude %1 orrialdeak irekitzea nahi dituzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6579"/>
+        <location filename="../Source/dooble.cc" line="6590"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Zihur zaude aldatutako orrialdea uztea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2892"/>
-        <location filename="../Source/dooble.cc" line="2944"/>
-        <location filename="../Source/dooble.cc" line="3937"/>
-        <location filename="../Source/dooble.cc" line="6423"/>
-        <location filename="../Source/dooble.cc" line="6575"/>
+        <location filename="../Source/dooble.cc" line="2899"/>
+        <location filename="../Source/dooble.cc" line="2951"/>
+        <location filename="../Source/dooble.cc" line="3944"/>
+        <location filename="../Source/dooble.cc" line="6434"/>
+        <location filename="../Source/dooble.cc" line="6586"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Nabigatzailea: Baieztapena</translation>
     </message>
@@ -1464,73 +1464,73 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1594"/>
+        <location filename="../Source/dooble.cc" line="1596"/>
         <source>&amp;Recently-Closed Tabs</source>
         <translation>&amp;Berriki-Itxitako Hegatsak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1809"/>
-        <location filename="../Source/dooble.cc" line="1876"/>
-        <location filename="../Source/dooble.cc" line="1919"/>
-        <location filename="../Source/dooble.cc" line="1952"/>
-        <location filename="../Source/dooble.cc" line="2041"/>
+        <location filename="../Source/dooble.cc" line="1814"/>
+        <location filename="../Source/dooble.cc" line="1881"/>
+        <location filename="../Source/dooble.cc" line="1924"/>
+        <location filename="../Source/dooble.cc" line="1957"/>
+        <location filename="../Source/dooble.cc" line="2046"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble Web Nabigatzailea: Akatsa</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1810"/>
-        <location filename="../Source/dooble.cc" line="1877"/>
-        <location filename="../Source/dooble.cc" line="1920"/>
-        <location filename="../Source/dooble.cc" line="1953"/>
-        <location filename="../Source/dooble.cc" line="2042"/>
+        <location filename="../Source/dooble.cc" line="1815"/>
+        <location filename="../Source/dooble.cc" line="1882"/>
+        <location filename="../Source/dooble.cc" line="1925"/>
+        <location filename="../Source/dooble.cc" line="1958"/>
+        <location filename="../Source/dooble.cc" line="2047"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2947"/>
+        <location filename="../Source/dooble.cc" line="2954"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation>Dooble amaitzeak daueden jeisketak etetea eragingo du. Zihur zaude jarraitzea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3940"/>
+        <location filename="../Source/dooble.cc" line="3947"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Zihur zaude aldaturiko hegats hau istea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4009"/>
+        <location filename="../Source/dooble.cc" line="4016"/>
         <source>&amp;Clear</source>
         <translation>&amp;Garbitu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4466"/>
+        <location filename="../Source/dooble.cc" line="4473"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Nabigatzailea: Honi buruz</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4587"/>
+        <location filename="../Source/dooble.cc" line="4594"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Nabigatzailea: Gorde Honela</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4968"/>
-        <location filename="../Source/dooble.cc" line="4974"/>
-        <location filename="../Source/dooble.cc" line="4976"/>
-        <location filename="../Source/dooble.cc" line="4980"/>
+        <location filename="../Source/dooble.cc" line="4975"/>
+        <location filename="../Source/dooble.cc" line="4981"/>
+        <location filename="../Source/dooble.cc" line="4983"/>
+        <location filename="../Source/dooble.cc" line="4987"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Mahaigaina</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5180"/>
+        <location filename="../Source/dooble.cc" line="5187"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Nabigatzailea: Ireki Zuzenbidea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5318"/>
+        <location filename="../Source/dooble.cc" line="5325"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>%1 guneak egiaztagiriak eskatzen ditu.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5382"/>
+        <location filename="../Source/dooble.cc" line="5389"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>%1:%2 proxyak egiaztagiriak eskatzen ditu.</translation>
     </message>
@@ -1551,23 +1551,23 @@
         <translation type="vanished">Gehigarria</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7434"/>
+        <location filename="../Source/dooble.cc" line="7445"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Ikusi %1 &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7437"/>
-        <location filename="../Source/dooble.cc" line="7441"/>
+        <location filename="../Source/dooble.cc" line="7448"/>
+        <location filename="../Source/dooble.cc" line="7452"/>
         <source>View Site &amp;Cookies</source>
         <translation>Ikusi Gune &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7801"/>
+        <location filename="../Source/dooble.cc" line="7812"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7803"/>
+        <location filename="../Source/dooble.cc" line="7814"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1576,25 +1576,25 @@
         <translation type="obsolete">Gune ezezagun batek (hutsik edo URL baliogabea) salbuespen bat eragin du. Mesedez klikatu berrikuteko.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7171"/>
+        <location filename="../Source/dooble.cc" line="7182"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Nabigatzailea: Gogoratu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7172"/>
+        <location filename="../Source/dooble.cc" line="7183"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Sar-esaldi bat ez da gertatu. Mesedez ikusi Seguru panela Ezarpenak leihoan eta hautatu sar-esaldi bat. Behin sar-esaldi bat hautaturikoan, lastermarkak, cookieak, eta beste argibide esangurutsu guztiak eskuragarri egongo dira etorkizuneko saioetan. Gogoratze hau Segurua paneletik ezgaitu dezakezu.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6887"/>
-        <location filename="../Source/dooble.cc" line="6892"/>
+        <location filename="../Source/dooble.cc" line="6898"/>
+        <location filename="../Source/dooble.cc" line="6903"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>%1 guneak salbuespen bat eragin du. Mesedez klikatu berrikusteko.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7128"/>
-        <location filename="../Source/dooble.cc" line="7130"/>
-        <location filename="../Source/dooble.cc" line="7134"/>
+        <location filename="../Source/dooble.cc" line="7139"/>
+        <location filename="../Source/dooble.cc" line="7141"/>
+        <location filename="../Source/dooble.cc" line="7145"/>
         <source>Restore Session</source>
         <translation>Leheneratu Saioa</translation>
     </message>
@@ -1791,23 +1791,23 @@
         <translation type="obsolete">Web Pluginak (Ezegonkorra)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1508"/>
-        <location filename="../Source/dsettings.cc" line="1542"/>
+        <location filename="../Source/dsettings.cc" line="1519"/>
+        <location filename="../Source/dsettings.cc" line="1553"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Web Nabigatzailea: Akatsa</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1509"/>
+        <location filename="../Source/dsettings.cc" line="1520"/>
         <source>The passphrases do not match.</source>
         <translation>Sar-esaldiak ez datoz bat.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2142"/>
+        <location filename="../Source/dsettings.cc" line="2156"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Nabigatzailea: Baieztapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1391"/>
+        <location filename="../Source/dsettings.cc" line="1402"/>
         <source>unknown</source>
         <translation>ezezaguna</translation>
     </message>
@@ -1817,12 +1817,12 @@
         <translation>ahalbideturik dauden cookiekin</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="569"/>
+        <location filename="../Source/dsettings.cc" line="580"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Web Pluginak</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1543"/>
+        <location filename="../Source/dsettings.cc" line="1554"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Sar-esaldiak gutxienez hamasei hizkiko luzera izan behar du.</translation>
     </message>
@@ -1831,28 +1831,28 @@
         <translation type="obsolete">Zure itxurapen ezarpenak berrezartzear zaude. Sar-esaldi bat itxuratu bada, heutsi egingo zaio. Dooble berrabiarazi egingo da berrezarpen garapena osatzeko. Ondorioz, gorde gabeko datuak galdu egingo dira. Jarraitzea nahi duzu?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2240"/>
+        <location filename="../Source/dsettings.cc" line="2254"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Web Nabigatzailea: Azalgai Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2258"/>
+        <location filename="../Source/dsettings.cc" line="2272"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Azalgai Itxurapen Agiria (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2343"/>
+        <location filename="../Source/dsettings.cc" line="2357"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Nabigatzailea: Nire Berreskuraturiko Agirien Zuzenbide Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2949"/>
+        <location filename="../Source/dsettings.cc" line="2963"/>
         <source>%1 MiB of content is cached.</source>
         <translation>%1 MiB eduki katxeatuta.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2257"/>
-        <location filename="../Source/dsettings.cc" line="2731"/>
+        <location filename="../Source/dsettings.cc" line="2271"/>
+        <location filename="../Source/dsettings.cc" line="2745"/>
         <source>Select</source>
         <translation>Hautatu</translation>
     </message>
@@ -1861,43 +1861,43 @@
         <translation type="vanished">Web pluginak.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2145"/>
+        <location filename="../Source/dsettings.cc" line="2159"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation>Zure itxurapen ezarpen guztiak berrezartzear zaude. Dooble-ek berrabiarazi egingo da berrezartze prozesua osatzeko. Jarraitzea nahi duzu?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2346"/>
-        <location filename="../Source/dsettings.cc" line="2374"/>
+        <location filename="../Source/dsettings.cc" line="2360"/>
+        <location filename="../Source/dsettings.cc" line="2388"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2371"/>
+        <location filename="../Source/dsettings.cc" line="2385"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Web Nabigatzailea: Spot-On Elkarbanatze Datubase Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2646"/>
+        <location filename="../Source/dsettings.cc" line="2660"/>
         <source>Prompt</source>
         <translation>Galdetu</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2663"/>
+        <location filename="../Source/dsettings.cc" line="2677"/>
         <source>Use other...</source>
         <translation>Erabili beste bat...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2728"/>
+        <location filename="../Source/dsettings.cc" line="2742"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Nabigatzailea: Ezarri Aplikazioa</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2851"/>
+        <location filename="../Source/dsettings.cc" line="2865"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2855"/>
+        <location filename="../Source/dsettings.cc" line="2869"/>
         <source>&amp;Delete File Suffix</source>
         <translation>E&amp;zabatu Agiri Aurrizkia</translation>
     </message>
@@ -3342,9 +3342,8 @@
         <translation>Eskuz</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2580"/>
         <source>Show authentication information after launch. Disabling this feature will inhibit session restoration.</source>
-        <translation>Erakutsi egiaztapen argibideak abiarazi ondoren. Ezaugarri hau ezgaitzeak saioaren leheneratzea eragotziko du.</translation>
+        <translation type="vanished">Erakutsi egiaztapen argibideak abiarazi ondoren. Ezaugarri hau ezgaitzeak saioaren leheneratzea eragotziko du.</translation>
     </message>
     <message>
         <source>Re-encode bookmarks.</source>
@@ -3512,7 +3511,7 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4321"/>
+        <location filename="../UI/dsettings.ui" line="4334"/>
         <source>Periodically purge memory caches.</source>
         <translation>Aldizka garbitu oroimen katxeak.</translation>
     </message>
@@ -3590,8 +3589,9 @@
         <translation>Etxeko URL-a irekiko da Etxea botoia sakatutakoan. Lehen hamahiru URL-ak irekitzeko, mesedez sakatu Etxea botoia Kontrol tekla sakatuta edukiz.</translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="2580"/>
         <source>Show authentication information after launch.</source>
-        <translation type="obsolete">Erakutsi egiaztapen argibideak abiarazi ondoren.</translation>
+        <translation type="unfinished">Erakutsi egiaztapen argibideak abiarazi ondoren.</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="2739"/>
@@ -3771,17 +3771,22 @@
         <translation>Ohartarazi edukia aldatuta duen orrialde bat itxi aurretik.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4348"/>
+        <location filename="../UI/dsettings.ui" line="4301"/>
+        <source>Please see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/a&gt; for descriptions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="4361"/>
         <source>Spatial Navigation</source>
         <translation type="unfinished">Nabigazio Espaziala</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4387"/>
+        <location filename="../UI/dsettings.ui" line="4400"/>
         <source>Center child windows.</source>
         <translation>Erdiratu kume leihoak.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4401"/>
+        <location filename="../UI/dsettings.ui" line="4414"/>
         <source>Open user windows as new processes.</source>
         <translation>Ireki erabiltzaile leihoak prozesu berri bezala.</translation>
     </message>
@@ -4124,17 +4129,17 @@
         <translation type="vanished">Bizkortu sare protokoloa.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4308"/>
+        <location filename="../UI/dsettings.ui" line="4321"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation>Erakutsi Dooble-en Akats Orrialdea</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4394"/>
+        <location filename="../UI/dsettings.ui" line="4407"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation>Itxi Jeisketa leihoa jeisketak osatu ondoren.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4408"/>
+        <location filename="../UI/dsettings.ui" line="4421"/>
         <source>Use native file dialogs.</source>
         <translation>Eerabili jatorrizkoa agiri elkarrizketak.</translation>
     </message>
@@ -4437,7 +4442,12 @@
         <translation type="obsolete">Mesedez klikatu Akats Oharraren edukiak berrikusteko.</translation>
     </message>
     <message>
-        <location filename="../UI/dstatusBar.ui" line="83"/>
+        <location filename="../UI/dstatusBar.ui" line="30"/>
+        <source>Authenticate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dstatusBar.ui" line="94"/>
         <source>Please click to review the contents of the Error Information window.</source>
         <translation>Mesedez klikatu Akats Argibide leihoaren edukiak berrikusteko.</translation>
     </message>
