@@ -3,7 +3,11 @@ Dooble supports the CTR mode of operation.
 Authenticated and encrypted values are stored in various databases.
 The format of the stored objects is H(E(P || Length(P))) || E(P || Length(P)).
 
-Please note that state is not maintained. The function
-gcry_randomize() is used for obtaining a buffer of random data.
+Please note that a session state is maintained. The function
+gcry_randomize() is used for obtaining a partial buffer of random data.
+The remaining portion of the buffer is occupied by the number of milliseconds
+since 1970-01-01T00:00:00 UTC. The number of milliseconds is incremented
+by a session counter. If the selected cipher's block length is less than
+the width of a 64-bit integer, gcry_randomize() is solely used.
 
-If this is a concern, please avoid using the CTR mode.
+If you are concerned, please avoid using the CTR mode.

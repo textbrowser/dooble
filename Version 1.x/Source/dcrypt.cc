@@ -48,6 +48,7 @@ dcrypt::dcrypt(const QByteArray &salt,
     m_cipherMode = "CBC";
 
   m_cipherType = cipherType;
+  m_ctr = 0;
   m_encryptionKey = 0;
   m_encryptionKeyLength = 0;
   m_hashAlgorithm = 0;
@@ -77,6 +78,7 @@ dcrypt::dcrypt(dcrypt *other)
 	m_cipherMode = "CBC";
 
       m_cipherType = other->m_cipherType;
+      m_ctr = 0;
 
       if(other->m_encryptionKeyLength > 0)
 	m_encryptionKey = static_cast<char *>
@@ -865,7 +867,21 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 	      if(m_cipherMode == "CBC")
 		gcry_create_nonce(iv, ivLength);
 	      else
-		gcry_randomize(iv, ivLength, GCRY_STRONG_RANDOM);
+		{
+		  if(ivLength > sizeof(qint64))
+		    {
+		      m_ctr += 1;
+
+		      qint64 msecs = QDateTime::currentMSecsSinceEpoch() +
+			m_ctr;
+
+		      gcry_randomize
+			(iv, ivLength - sizeof(msecs), GCRY_STRONG_RANDOM);
+		      memcpy(iv + sizeof(msecs), &msecs, sizeof(msecs));
+		    }
+		  else
+		    gcry_randomize(iv, ivLength, GCRY_STRONG_RANDOM);
+		}
 
 	      byteArray.append(iv, static_cast<int> (ivLength));
 	    }
