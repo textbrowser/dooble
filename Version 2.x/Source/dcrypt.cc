@@ -335,7 +335,7 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	  (static_cast<int> (blockLength), 0);
       else
 	/*
-	** Multiple of the block size. CBC-CTS does not require this.
+	** Multiple of the block size. CBC-CTS and CTR do not require this.
 	*/
 
 	encodedArray = encodedArray.leftJustified
