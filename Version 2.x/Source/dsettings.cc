@@ -1907,6 +1907,8 @@ void dsettings::slotClicked(QAbstractButton *button)
 	  ** previously set.
 	  */
 
+	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
 	  if(ui.sessionRestorationCheckBox->isChecked())
 	    emit reencodeRestorationFile();
 
@@ -1957,6 +1959,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 	  */
 
 	  dmisc::destroyReencodeCrypt();
+	  QApplication::restoreOverrideCursor();
 	}
 
       QWebEngineSettings::globalSettings()->setDefaultTextEncoding
