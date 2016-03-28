@@ -3,10 +3,16 @@
 # Dooble must be restarted if this file is modified.
 
 ad.turn.com
+adclick.g.doubclick.net
 adnxs.com
 beanstock.co
 beanstock.com
 cdn.beanstock.com
 cdn.syndication.twimg.com
+cs.komoona.com
 doubleclick.com
 doubleclick.net
+googleads.g.doubleclick.net
+mpd.mxptint.net
+ssum-sec.casalemedia.com
+tpc.googlesyndication.com
