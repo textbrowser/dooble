@@ -99,7 +99,7 @@ class dooble: public QMainWindow
   static const int MAX_HISTORY_ITEMS = 30;
   static const int MAX_MOST_VISITED_ITEMS = 30;
   static const int MAX_NUMBER_OF_MENU_TITLE_CHARACTERS = 100;
-  static quint64 s_instances;
+  static qint64 s_instances;
   static void s_makeCrashFile(void);
   static void s_removeCrashFile(void);
   /*

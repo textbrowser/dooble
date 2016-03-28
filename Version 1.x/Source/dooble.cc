@@ -144,7 +144,7 @@ QReadWriteLock dooble::s_applicationsActionsLock;
 QString dooble::s_homePath = "";
 QUuid dooble::s_id = QUuid::createUuid();
 int dprintfromcommandprompt::s_count = 0;
-quint64 dooble::s_instances = 0;
+qint64 dooble::s_instances = 0;
 static char *s_crashFileName = 0;
 
 static void sig_handler(int signum)
@@ -2053,7 +2053,9 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 
 dooble::~dooble()
 {
-  s_instances -= 1;
+  if(s_instances > 0)
+    s_instances -= 1;
+
   m_closedTabs.clear();
 }
 
