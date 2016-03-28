@@ -510,7 +510,7 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
     {
       l_passphrase.resize(256);
       gcry_fast_random_poll();
-      gcry_randomize(reinterpret_cast<unsigned char *> (l_passphrase.data()),
+      gcry_randomize(l_passphrase.data(),
 		     l_passphrase.length(),
 		     GCRY_STRONG_RANDOM);
     }
@@ -854,8 +854,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
     }
   else
     {
-      unsigned char *iv = static_cast<unsigned char *>
-	(gcry_calloc(ivLength, sizeof(unsigned char)));
+      char *iv = static_cast<char *> (gcry_calloc(ivLength, sizeof(char)));
 
       if(iv)
 	{
@@ -869,7 +868,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 		gcry_randomize(iv, ivLength, GCRY_STRONG_RANDOM);
 
 	      byteArray.append
-		(reinterpret_cast<char *> (iv), static_cast<int> (ivLength));
+		(iv, static_cast<int> (ivLength));
 	    }
 	  else
 	    {
@@ -974,7 +973,7 @@ void dcrypt::setSalt(const QByteArray &salt)
 	l_salt.resize(256);
 
       gcry_fast_random_poll();
-      gcry_randomize(reinterpret_cast<unsigned char *> (l_salt.data()),
+      gcry_randomize(l_salt.data(),
 		     l_salt.length(),
 		     GCRY_STRONG_RANDOM);
       m_salt = l_salt;
@@ -996,7 +995,7 @@ QByteArray dcrypt::weakRandomBytes(const size_t size)
   QByteArray bytes(static_cast<int> (size), 0);
 
   gcry_fast_random_poll();
-  gcry_randomize(reinterpret_cast<unsigned char *> (bytes.data()),
+  gcry_randomize(bytes.data(),
 		 bytes.length(), GCRY_WEAK_RANDOM);
   return bytes;
 }
