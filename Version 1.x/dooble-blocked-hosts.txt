@@ -14,7 +14,6 @@ doubleclick.com
 doubleclick.net
 googleads.g.doubleclick.net
 mpd.mxptint.net
-www.redditstatic.com
 s.zkcdn.net
 ssum-sec.casalemedia.com
 tpc.googlesyndication.com
