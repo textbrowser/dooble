@@ -5,6 +5,7 @@
 ad.turn.com
 adclick.g.doubclick.net
 adnxs.com
+adx.g.doubleclick.net
 beanstock.co
 beanstock.com
 cdn.beanstock.com
@@ -14,6 +15,9 @@ doubleclick.com
 doubleclick.net
 googleads.g.doubleclick.net
 mpd.mxptint.net
+pagead2.googlesyndication.com
+s.ytimg.com
 s.zkcdn.net
+s0.2mdn.net
 ssum-sec.casalemedia.com
 tpc.googlesyndication.com
