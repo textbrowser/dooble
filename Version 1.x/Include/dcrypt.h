@@ -74,7 +74,6 @@ class dcrypt
   gcry_cipher_hd_t m_cipherHandle;
   int m_cipherAlgorithm;
   int m_hashAlgorithm;
-  qint64 m_ctr;
   size_t m_encryptionKeyLength;
   size_t m_hashKeyLength;
   unsigned long m_iterationCount;
