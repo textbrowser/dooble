@@ -229,8 +229,7 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 
 	  if(decodedArray.length() > static_cast<int> (sizeof(int)))
 	    originalLength = decodedArray.mid
-	      (decodedArray.length() - static_cast<int> (sizeof(int)),
-	       static_cast<int> (sizeof(int)));
+	      (decodedArray.length() - sizeof(int), sizeof(int));
 
 	  if(!originalLength.isEmpty())
 	    {
@@ -329,17 +328,15 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
       QByteArray encodedArray(byteArray);
 
       if(encodedArray.isEmpty())
-	encodedArray = encodedArray.leftJustified
-	  (static_cast<int> (blockLength), 0);
+	encodedArray = encodedArray.leftJustified(blockLength, 0);
       else
 	/*
 	** Multiple of the block size. CBC-CTS and CTR not require this.
 	*/
 
 	encodedArray = encodedArray.leftJustified
-	  (static_cast<int> (blockLength * (qCeil((qreal) encodedArray.
-						  length() /
-						  (qreal) blockLength) + 1)),
+	  (blockLength * (qCeil(static_cast<qreal> (encodedArray.length()) /
+				static_cast<qreal> (blockLength)) + 1),
 	   0);
 
       QByteArray originalLength;
@@ -359,9 +356,7 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	}
 
       encodedArray.replace
-	(encodedArray.length() -
-	 static_cast<int> (sizeof(int)), static_cast<int> (sizeof(int)),
-	 originalLength);
+	(encodedArray.length() - sizeof(int), sizeof(int), originalLength);
 
       gcry_error_t err = 0;
 
@@ -569,8 +564,7 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
       QByteArray temporary1;
       QByteArray temporary2;
 
-      temporary1.resize(static_cast<int> (m_encryptionKeyLength +
-					  m_hashKeyLength));
+      temporary1.resize(m_encryptionKeyLength + m_hashKeyLength);
       temporary2.resize(temporary1.length());
       gcry_fast_random_poll();
       err = gcry_kdf_derive(l_passphrase.constData(),
@@ -605,13 +599,11 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	    {
 	      memcpy
 		(m_encryptionKey,
-		 temporary2.mid(0, static_cast<int> (m_encryptionKeyLength)).
-		 constData(),
+		 temporary2.mid(0, m_encryptionKeyLength).constData(),
 		 m_encryptionKeyLength);
 	      memcpy
 		(m_hashKey,
-		 temporary2.mid(static_cast<int> (m_encryptionKeyLength)).
-		 constData(),
+		 temporary2.mid(m_encryptionKeyLength).constData(),
 		 m_hashKeyLength);
 	    }
 	  else
@@ -727,22 +719,19 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	     l_passphrase.length());
 	  memcpy
 	    (m_encryptionKey,
-	     byteArray.mid(0, static_cast<int> (m_encryptionKeyLength)).
-	     constData(),
+	     byteArray.mid(0, m_encryptionKeyLength).constData(),
 	     m_encryptionKeyLength);
 
 	  if(byteArray.length() >=
 	     static_cast<int> (m_encryptionKeyLength) + 16)
 	    memcpy
 	      (m_hashKey,
-	       byteArray.mid(static_cast<int> (m_encryptionKeyLength)).
-	       constData(),
+	       byteArray.mid(m_encryptionKeyLength).constData(),
 	       m_hashKeyLength);
 	  else
 	    memcpy
 	      (m_hashKey,
-	       byteArray.mid(0, static_cast<int> (m_hashKeyLength)).
-	       constData(),
+	       byteArray.mid(0, m_hashKeyLength).constData(),
 	       m_hashKeyLength);
 
 	  if(m_cipherHandle)
@@ -867,8 +856,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 	      else
 		gcry_randomize(iv, ivLength, GCRY_STRONG_RANDOM);
 
-	      byteArray.append
-		(iv, static_cast<int> (ivLength));
+	      byteArray.append(iv, ivLength);
 	    }
 	  else
 	    {
@@ -876,7 +864,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 		(iv,
 		 byteArray.constData(),
 		 qMin(ivLength, static_cast<size_t> (byteArray.length())));
-	      byteArray.remove(0, static_cast<int> (ivLength));
+	      byteArray.remove(0, ivLength);
 	    }
 
 	  gcry_cipher_reset(m_cipherHandle);
@@ -992,11 +980,10 @@ QByteArray dcrypt::weakRandomBytes(const size_t size)
   if(size <= 0)
     return QByteArray();
 
-  QByteArray bytes(static_cast<int> (size), 0);
+  QByteArray bytes(size, 0);
 
   gcry_fast_random_poll();
-  gcry_randomize(bytes.data(),
-		 bytes.length(), GCRY_WEAK_RANDOM);
+  gcry_randomize(bytes.data(), bytes.length(), GCRY_WEAK_RANDOM);
   return bytes;
 }
 
