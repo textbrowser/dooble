@@ -103,7 +103,7 @@ class dmisc
   static void purgeTemporaryData(void);
   static void reencodeFavicons(QProgressBar *progress);
   static void removeRestorationFiles(const QUuid &id = QUuid());
-  static void removeRestorationFiles(const QUuid &pid, const quint64 wid);
+  static void removeRestorationFiles(const QUuid &pid, const qint64 wid);
   static void saveIconForUrl(const QIcon &icon, const QUrl &url);
   static void setActionForFileSuffix(const QString &suffix,
 				     const QString &action);

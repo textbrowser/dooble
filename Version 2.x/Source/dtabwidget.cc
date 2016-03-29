@@ -612,9 +612,9 @@ void dtabwidget::slotTitleChange(QWidget *tab, const QString &title)
 void dtabwidget::tabRemoved(int index)
 {
   Q_UNUSED(index);
-  quint64 id = 0;
-  dooble *dbl = 0;
   QObject *prnt(this);
+  dooble *dbl = 0;
+  qint64 id = 0;
 
   do
     {

@@ -91,7 +91,7 @@ qint64 dgopher::readData(char *data, qint64 maxSize)
   if(number < 0)
     return -1;
 
-  memcpy(data, m_html.constData() + m_offset, number);
+  memcpy(data, m_html.constData() + m_offset, number); // number >= 0
   m_offset += number;
   return number;
 }

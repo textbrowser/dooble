@@ -720,7 +720,7 @@ void durlwidget::keyPressEvent(QKeyEvent *event)
 
   if(event)
     {
-      QKeySequence userKeys(event->modifiers() + event->key());
+      QKeySequence userKeys(event->modifiers() + Qt::Key(event->key()));
 
       if(event->modifiers() == Qt::AltModifier)
 	{

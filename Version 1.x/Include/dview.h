@@ -140,7 +140,7 @@ class dview: public QStackedWidget
   int m_lastInfoLookupId;
   int m_percentLoaded;
   int tabIndex(void);
-  quint64 parentId(void);
+  qint64 parentId(void);
   void enterEvent(QEvent *event);
   void prepareRestorationFileNames(void);
   void setUrlForUnsupportedContent(const QUrl &url);

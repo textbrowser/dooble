@@ -89,7 +89,7 @@ class dmisc
   static void prepareProxyIgnoreLists(void);
   static void prepareReencodeCrypt(void);
   static void removeRestorationFiles(const QUuid &id = QUuid());
-  static void removeRestorationFiles(const QUuid &pid, const quint64 wid);
+  static void removeRestorationFiles(const QUuid &pid, const qint64 wid);
   static void setActionForFileSuffix(const QString &suffix,
 				     const QString &action);
   static void updateHttpStatusCodes(const QHash<int, int> &statusCodes);

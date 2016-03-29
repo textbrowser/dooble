@@ -1164,9 +1164,9 @@ int dview::tabIndex(void)
 
 quint64 dview::parentId(void)
 {
-  quint64 id = 0;
-  dooble *dbl = 0;
   QObject *prnt(this);
+  dooble *dbl = 0;
+  qint64 id = 0;
 
   do
     {

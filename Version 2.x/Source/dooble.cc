@@ -96,7 +96,6 @@ extern "C"
 #include "ui_dpassphrasePrompt.h"
 #include "ui_dpasswordPrompt.h"
 
-quint64 dooble::s_instances = 0;
 QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
 QUuid dooble::s_id = QUuid::createUuid();
 QMutex dooble::s_saveHistoryMutex;
@@ -131,6 +130,7 @@ QHash<QString, qint64> dooble::s_mostVisitedHosts;
 QMap<QString, QString> dooble::s_applicationsActions;
 QHash<QString, QVariant> dooble::s_settings;
 int dprintfromcommandprompt::s_count = 0;
+qint64 dooble::s_instances = 0;
 
 static char *s_crashFileName = 0;
 
@@ -1912,7 +1912,9 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 
 dooble::~dooble()
 {
-  s_instances -= 1;
+  if(s_instances > 0)
+    s_instances -= 1;
+
   m_closedTabs.clear();
 }
 
@@ -6776,7 +6778,7 @@ void dooble::slotBookmarksChanged(void)
   highlightBookmarkButton();
 }
 
-quint64 dooble::id(void) const
+qint64 dooble::id(void) const
 {
   return m_id;
 }

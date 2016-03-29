@@ -186,13 +186,13 @@ void dsearchwidget::keyPressEvent(QKeyEvent *event)
       ** not been made visible, the shortcut will not be available.
       */
 
-      if(QKeySequence(event->modifiers() + event->key()) ==
+      if(QKeySequence(event->modifiers() + Qt::Key(event->key())) ==
 	 QKeySequence(Qt::ControlModifier + Qt::Key_B))
 	{
 	  event->ignore();
 	  return;
 	}
-      else if(QKeySequence(event->modifiers() + event->key()) ==
+      else if(QKeySequence(event->modifiers() + Qt::Key(event->key())) ==
 	      QKeySequence(Qt::ControlModifier + Qt::Key_F))
 	{
 	  event->ignore();

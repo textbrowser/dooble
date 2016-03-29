@@ -98,7 +98,7 @@ class dooble: public QMainWindow
   static const int MAX_HISTORY_ITEMS = 30;
   static const int MAX_MOST_VISITED_ITEMS = 30;
   static const int MAX_NUMBER_OF_MENU_TITLE_CHARACTERS = 100;
-  static quint64 s_instances;
+  static qint64 s_instances;
   static void s_makeCrashFile(void);
   static void s_removeCrashFile(void);
   /*
@@ -113,7 +113,7 @@ class dooble: public QMainWindow
   ~dooble();
   QList<QVariantList> tabUrls(void) const;
   dview *newTab(const QByteArray &history);
-  quint64 id(void) const;
+  qint64 id(void) const;
   void closeEvent(QCloseEvent *event);
   void closeTab(const int index);
   void copyLink(const QUrl &url);
@@ -136,7 +136,7 @@ class dooble: public QMainWindow
   bool m_isJavaScriptWindow;
   bool showFindFrame;
   dhistorysidebar *m_historySideBar;
-  quint64 m_id;
+  qint64 m_id;
 
   QMenu *createPopupMenu(void)
   {

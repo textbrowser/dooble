@@ -4797,7 +4797,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
 {
   if(event)
     {
-      QKeySequence userKeys(event->modifiers() + event->key());
+      QKeySequence userKeys(event->modifiers() + Qt::Key(event->key()));
       bool processed = false;
 
       if(userKeys == QKeySequence(Qt::ControlModifier + Qt::Key_B))
@@ -4863,9 +4863,9 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	  */
 
 #if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
-	  if(QKeySequence(event->modifiers() + event->key()) ==
+	  if(QKeySequence(event->modifiers() + Qt::Key(event->key())) ==
 	     QKeySequence(Qt::ControlModifier + Qt::Key_Equal) ||
-	     QKeySequence(event->modifiers() + event->key()) ==
+	     QKeySequence(event->modifiers() + Qt::Key(event->key())) ==
 	     QKeySequence(Qt::ControlModifier + Qt::ShiftModifier +
 			  Qt::Key_Plus))
 	    {
@@ -4874,7 +4874,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	    }
 #endif
 
-	  QKeySequence shortcut(event->modifiers() + event->key());
+	  QKeySequence shortcut(event->modifiers() + Qt::Key(event->key()));
 
 	  foreach(QAction *action, findChildren<QAction *> ())
 	    if(!action->isSeparator() && action->isEnabled())
@@ -7094,7 +7094,7 @@ void dooble::slotBookmarksChanged(void)
   highlightBookmarkButton();
 }
 
-quint64 dooble::id(void) const
+qint64 dooble::id(void) const
 {
   return m_id;
 }

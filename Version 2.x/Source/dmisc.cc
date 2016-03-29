@@ -1188,7 +1188,7 @@ void dmisc::removeRestorationFiles(const QUuid &id)
 }
 
 void dmisc::removeRestorationFiles(const QUuid &pid,
-				   const quint64 wid)
+				   const qint64 wid)
 {
   if(passphraseWasAuthenticated())
     {

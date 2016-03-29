@@ -80,7 +80,7 @@ void dgenericsearchwidget::keyPressEvent(QKeyEvent *event)
 {
   if(event)
     {
-      if(QKeySequence(event->modifiers() + event->key()) ==
+      if(QKeySequence(event->modifiers() + Qt::Key(event->key())) ==
 	 QKeySequence(Qt::ControlModifier + Qt::Key_F))
 	{
 	  event->ignore();
