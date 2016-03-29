@@ -8,7 +8,7 @@ all:	libspoton.o
 libspoton.o:	libspoton.c libspoton.h
 	gcc $(CFLAGS) -Waggregate-return \
 	-Wall -Wconversion -Werror -Wextra -Wformat=2 \
-	-Wpointer-arith -Wsign-conversion -Wstrict-overflow=5 \
+	-Wpointer-arith -Wshadow -Wsign-conversion -Wstrict-overflow=5 \
 	-Wstrict-prototypes -DLIBSPOTON_OS_WINDOWS=1 \
 	-c -o libspoton.o libspoton.c -I Include.win32
 

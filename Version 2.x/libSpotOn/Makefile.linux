@@ -8,7 +8,7 @@ libspoton.o:	libspoton.c libspoton.h
 	$(CC) $(CFLAGS) -ansi -fPIC -fstack-protector-all \
 	-pedantic -Waggregate-return \
 	-Wall -Wconversion -Werror -Wextra -Wformat=2 -Wpointer-arith \
-	-Wsign-conversion \
+	-Wshadow -Wsign-conversion \
 	-Wstack-protector -Wstrict-overflow=5 -Wstrict-prototypes \
 	-c -o libspoton.o libspoton.c
 
