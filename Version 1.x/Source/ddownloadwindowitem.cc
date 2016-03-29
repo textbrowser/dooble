@@ -412,9 +412,9 @@ void ddownloadwindowitem::updateProgress(const qint64 done,
   if(m_total)
     {
       QFileInfo fileInfo(m_dstFileName);
-      int completed = static_cast<int>
-	(100 * static_cast<double> (fileInfo.size()) /
-	 qMax(1.0, static_cast<double> (m_total)));
+      int completed =
+	100 * static_cast<double> (fileInfo.size()) /
+	qMax(1.0, static_cast<double> (m_total));
 
       if(completed <= ui.progressBar->maximum())
 	ui.progressBar->setValue(completed);
@@ -459,13 +459,16 @@ void ddownloadwindowitem::updateProgress(const qint64 done,
 	  if(currentSize >= m_lastSize)
 	    if(200.0 * qAbs(m_rate -
 			    static_cast<long double> (currentSize -
-						      m_lastSize) / secs)
-	       / qMax(static_cast<long double> (1), m_rate +
+						      m_lastSize) /
+			    static_cast<long double> (secs))
+	       / qMax(static_cast<long double> (1),
+		      static_cast<long double> (m_rate) +
 		      static_cast<long double> (currentSize - m_lastSize) /
-		      secs) >= 1.0)
-	      m_rate = static_cast<qint64>
-		(static_cast<long double> (currentSize -
-					   m_lastSize) / secs);
+		      static_cast<long double> (secs)) >= 1.0)
+	      m_rate =
+		static_cast<long double> (currentSize -
+					  m_lastSize) /
+		static_cast<long double> (secs);
 
 	  if(m_total > 0 && m_total >= fileInfo.size())
 	    {
@@ -913,7 +916,7 @@ void ddownloadwindowitem::slotComputeFileHash(void)
       qint64 rc = 0;
 
       while((rc = file.read(buffer.data(), buffer.length())) > 0)
-	hash.addData(buffer, static_cast<int> (rc));
+	hash.addData(buffer, rc);
 
       file.close();
       ui.fileHash->setText(hash.result().toHex());

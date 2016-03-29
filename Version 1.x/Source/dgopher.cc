@@ -86,8 +86,7 @@ qint64 dgopher::readData(char *data, qint64 maxSize)
   else if(maxSize == 0)
     return 0;
 
-  qint64 number = qMin
-    (maxSize, static_cast<qint64> (m_html.size()) - m_offset);
+  qint64 number = qMin(maxSize, m_html.size() - m_offset);
 
   if(number < 0)
     return -1;

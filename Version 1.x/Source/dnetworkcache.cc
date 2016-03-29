@@ -317,25 +317,19 @@ bool dnetworkcache::remove(const QUrl &url)
   if(path.isEmpty())
     path = "xy";
 
-  bit &= static_cast<int>
-    (QFile::remove(m_dir.absolutePath() + QDir::separator() +
-		   path + QDir::separator() +
-		   hash + "_data_" +
-		   QString::
-		   number(static_cast<int> (!dmisc::
-					    passphraseWasAuthenticated()))));
-  bit &= static_cast<int>
-    (QFile::remove(m_dir.absolutePath() + QDir::separator() +
-		   path + QDir::separator() +
-		   hash + "_metadata_" +
-		   QString::
-		   number(static_cast<int> (!dmisc::
-					    passphraseWasAuthenticated()))));
+  bit &= QFile::remove(m_dir.absolutePath() + QDir::separator() +
+		       path + QDir::separator() +
+		       hash + "_data_" +
+		       QString::number(!dmisc::passphraseWasAuthenticated()));
+  bit &= QFile::remove(m_dir.absolutePath() + QDir::separator() +
+		       path + QDir::separator() +
+		       hash + "_metadata_" +
+		       QString::number(!dmisc::passphraseWasAuthenticated()));
 
   QDir dir(m_dir);
 
   dir.rmdir(path);
-  return static_cast<bool> (bit);
+  return bit;
 }
 
 void dnetworkcache::updateMetaData(const QNetworkCacheMetaData &metaData)

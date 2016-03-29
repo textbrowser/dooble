@@ -2599,7 +2599,7 @@ void dooble::slotQuitAndRestart(void)
 		  QDir::separator() +
 		  QCoreApplication::applicationName());
 
-  int rc = (int)
+  int rc = static_cast<int>
     (::ShellExecuteA(0, "open", program.toUtf8().constData(),
 		     0, 0, SW_SHOWNORMAL));
 
@@ -3733,10 +3733,10 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 
 	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
+	      (scheme.mid(qstrlen("dooble-ssl-")));
 	  else if(scheme.startsWith("dooble-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble-"))));
+	      (scheme.mid(qstrlen("dooble-")));
 
 	  title = dmisc::elidedTitleText(title);
 
@@ -3770,10 +3770,10 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 
 	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
+	      (scheme.mid(qstrlen("dooble-ssl-")));
 	  else if(scheme.startsWith("dooble-"))
 	    url.setScheme
-	      (scheme.mid(static_cast<int> (qstrlen("dooble-"))));
+	      (scheme.mid(qstrlen("dooble-")));
 
 	  if(title.isEmpty())
 	    title = url.toString(QUrl::StripTrailingSlash);

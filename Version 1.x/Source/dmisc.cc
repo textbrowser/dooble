@@ -277,9 +277,8 @@ QNetworkProxy dmisc::proxyByUrl(const QUrl &url)
 					"ftpBrowsingProxyHost",
 					"").toString().trimmed());
 	    proxy.setPort
-	      (static_cast<quint16> (dooble::s_settings.value
-				     ("settingsWindow/ftpBrowsingProxyPort",
-				      1080).toInt()));
+	      (dooble::s_settings.value("settingsWindow/ftpBrowsingProxyPort",
+					1080).toInt());
 	    proxy.setUser
 	      (dooble::s_settings.value("settingsWindow/"
 					"ftpBrowsingProxyUser",
@@ -309,9 +308,8 @@ QNetworkProxy dmisc::proxyByUrl(const QUrl &url)
 	      (dooble::s_settings.value("settingsWindow/httpBrowsingProxyHost",
 					"").toString().trimmed());
 	    proxy.setPort
-	      (static_cast<quint16> (dooble::s_settings.value
-				     ("settingsWindow/httpBrowsingProxyPort",
-				      1080).toInt()));
+	      (dooble::s_settings.value("settingsWindow/httpBrowsingProxyPort",
+					1080).toInt());
 	    proxy.setUser
 	      (dooble::s_settings.value("settingsWindow/httpBrowsingProxyUser",
 					"").toString());
@@ -346,9 +344,8 @@ QNetworkProxy dmisc::proxyByUrl(const QUrl &url)
 			("settingsWindow/i2pBrowsingProxyHost",
 			 "127.0.0.1").toString().trimmed());
       proxy.setPort
-	(static_cast<quint16> (dooble::s_settings.value
-			       ("settingsWindow/i2pBrowsingProxyPort",
-				4444).toInt()));
+	(dooble::s_settings.value("settingsWindow/i2pBrowsingProxyPort",
+				  4444).toInt());
     }
 
   return proxy;
@@ -390,9 +387,8 @@ QNetworkProxy dmisc::proxyByFunctionAndUrl
 						       "").toString().
 			      trimmed());
 	    proxy.setPort
-	      (static_cast<quint16> (dooble::s_settings.value
-				     ("settingsWindow/ftpDownloadProxyPort",
-				      1080).toInt()));
+	      (dooble::s_settings.value("settingsWindow/ftpDownloadProxyPort",
+					1080).toInt());
 	    proxy.setUser(dooble::s_settings.value("settingsWindow/"
 						   "ftpDownloadProxyUser",
 						   "").toString());
@@ -434,9 +430,8 @@ QNetworkProxy dmisc::proxyByFunctionAndUrl
 			      ("settingsWindow/httpDownloadProxyHost",
 			       "").toString().trimmed());
 	    proxy.setPort
-	      (static_cast<quint16> (dooble::s_settings.value
-				     ("settingsWindow/httpDownloadProxyPort",
-				      1080).toInt()));
+	      (dooble::s_settings.value("settingsWindow/httpDownloadProxyPort",
+					1080).toInt());
 	    proxy.setUser(dooble::s_settings.value
 			  ("settingsWindow/httpDownloadProxyUser",
 			   "").toString());
@@ -477,9 +472,8 @@ QNetworkProxy dmisc::proxyByFunctionAndUrl
 			("settingsWindow/i2pDownloadProxyHost",
 			 "127.0.0.1").toString().trimmed());
       proxy.setPort
-	(static_cast<quint16> (dooble::s_settings.value
-			       ("settingsWindow/i2pDownloadProxyPort",
-				4444).toInt()));
+	(dooble::s_settings.value("settingsWindow/i2pDownloadProxyPort",
+				  4444).toInt());
     }
 
   return proxy;
@@ -1130,10 +1124,10 @@ QRect dmisc::balancedGeometry(const QRect &geometry, QWidget *widget)
 #endif
 
       if(rect.width() > available.width())
-	rect.setWidth(static_cast<int> (0.85 * available.width()));
+	rect.setWidth(0.85 * available.width());
 
       if(rect.height() > available.height())
-	rect.setHeight(static_cast<int> (0.85 * available.height()));
+	rect.setHeight(0.85 * available.height());
     }
 
   return rect;
@@ -1346,7 +1340,7 @@ void dmisc::launchApplication(const QString &program,
 
   a = a.trimmed();
 
-  int rc = (int)
+  int rc = static_cast<int>
     (::ShellExecuteA(0, "open",
 		     program.toUtf8().constData(),
 		     a.toUtf8().constData(),
@@ -1853,7 +1847,7 @@ void dmisc::initializeBlockedHosts(void)
 
       while((rc = file.readLine(line.data(), line.length())) > 0)
 	{
-	  QString str(line.mid(0, static_cast<int> (rc)).constData());
+	  QString str(line.mid(0, rc).constData());
 
 	  str = str.trimmed();
 

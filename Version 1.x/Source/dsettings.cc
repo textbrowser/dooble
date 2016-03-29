@@ -1441,10 +1441,8 @@ void dsettings::exec(dooble *parent)
 
   if(m_parentDooble)
     {
-      l_width = static_cast<int> (m_parentDooble->width() -
-				  0.15 * m_parentDooble->width());
-      l_height = static_cast<int> (m_parentDooble->height() -
-				   0.05 * m_parentDooble->height());
+      l_width = m_parentDooble->width() - 0.15 * m_parentDooble->width();
+      l_height = m_parentDooble->height() - 0.05 * m_parentDooble->height();
     }
   else
     {
