@@ -72,27 +72,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1504"/>
+        <location filename="../Source/dmisc.cc" line="1498"/>
         <source>%1 KiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1507"/>
+        <location filename="../Source/dmisc.cc" line="1501"/>
         <source>%1 MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1498"/>
+        <location filename="../Source/dmisc.cc" line="1492"/>
         <source>0 Bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1500"/>
+        <location filename="../Source/dmisc.cc" line="1494"/>
         <source>1 Byte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1502"/>
+        <location filename="../Source/dmisc.cc" line="1496"/>
         <source>%1 Bytes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -614,7 +614,7 @@
     <name>ddownloadwindowitem</name>
     <message>
         <location filename="../Source/ddownloadwindowitem.cc" line="111"/>
-        <location filename="../Source/ddownloadwindowitem.cc" line="631"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="634"/>
         <source>Pause Download</source>
         <translation type="unfinished">ठहराव डाउनलोड</translation>
     </message>
@@ -623,7 +623,7 @@
         <translation type="obsolete">फ़ाइल</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="581"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="584"/>
         <source>Download Aborted</source>
         <translation type="unfinished">डाउनलोड निष्फल </translation>
     </message>
@@ -648,62 +648,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="476"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="479"/>
         <source>%1 bit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="481"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="484"/>
         <source>%1 kbit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="486"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="489"/>
         <source>%1 Mbit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="492"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="495"/>
         <source>%1 Gbit/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="499"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="502"/>
         <source>%1 KiB/s (%2 of %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="509"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="512"/>
         <source>%1 bit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="513"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="516"/>
         <source>%1 kbit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="517"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="520"/>
         <source>%1 Mbit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="521"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="524"/>
         <source>%1 Gbit/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="526"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="529"/>
         <source>%1 KiB/s (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="629"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="632"/>
         <source>Resume Download</source>
         <translation type="unfinished">फिर से शुरू डाउनलोड</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="752"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="755"/>
         <source>Paused (%1)</source>
         <translation type="unfinished">रुका हुआ (%1)</translation>
     </message>
@@ -1230,34 +1230,34 @@
         <translation type="unfinished">दिखाएँ इतिहास</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2352"/>
-        <location filename="../Source/dooble.cc" line="2409"/>
-        <location filename="../Source/dooble.cc" line="2449"/>
-        <location filename="../Source/dooble.cc" line="2516"/>
-        <location filename="../Source/dooble.cc" line="3320"/>
-        <location filename="../Source/dooble.cc" line="3507"/>
-        <location filename="../Source/dooble.cc" line="3531"/>
-        <location filename="../Source/dooble.cc" line="5052"/>
-        <location filename="../Source/dooble.cc" line="5534"/>
+        <location filename="../Source/dooble.cc" line="2354"/>
+        <location filename="../Source/dooble.cc" line="2411"/>
+        <location filename="../Source/dooble.cc" line="2451"/>
+        <location filename="../Source/dooble.cc" line="2518"/>
+        <location filename="../Source/dooble.cc" line="3322"/>
+        <location filename="../Source/dooble.cc" line="3509"/>
+        <location filename="../Source/dooble.cc" line="3533"/>
+        <location filename="../Source/dooble.cc" line="5054"/>
+        <location filename="../Source/dooble.cc" line="5536"/>
         <source>(Untitled)</source>
         <translation type="unfinished">Tab</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3106"/>
-        <location filename="../Source/dooble.cc" line="3175"/>
-        <location filename="../Source/dooble.cc" line="3291"/>
-        <location filename="../Source/dooble.cc" line="3607"/>
-        <location filename="../Source/dooble.cc" line="3746"/>
-        <location filename="../Source/dooble.cc" line="3786"/>
-        <location filename="../Source/dooble.cc" line="3994"/>
-        <location filename="../Source/dooble.cc" line="5458"/>
-        <location filename="../Source/dooble.cc" line="6096"/>
-        <location filename="../Source/dooble.cc" line="6400"/>
+        <location filename="../Source/dooble.cc" line="3108"/>
+        <location filename="../Source/dooble.cc" line="3177"/>
+        <location filename="../Source/dooble.cc" line="3293"/>
+        <location filename="../Source/dooble.cc" line="3609"/>
+        <location filename="../Source/dooble.cc" line="3748"/>
+        <location filename="../Source/dooble.cc" line="3788"/>
+        <location filename="../Source/dooble.cc" line="3996"/>
+        <location filename="../Source/dooble.cc" line="5460"/>
+        <location filename="../Source/dooble.cc" line="6098"/>
+        <location filename="../Source/dooble.cc" line="6402"/>
         <source>Dooble Web Browser</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2904"/>
+        <location filename="../Source/dooble.cc" line="2906"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1295,104 +1295,104 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2907"/>
+        <location filename="../Source/dooble.cc" line="2909"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3108"/>
-        <location filename="../Source/dooble.cc" line="3293"/>
-        <location filename="../Source/dooble.cc" line="5460"/>
+        <location filename="../Source/dooble.cc" line="3110"/>
+        <location filename="../Source/dooble.cc" line="3295"/>
+        <location filename="../Source/dooble.cc" line="5462"/>
         <source>Dooble Web Browser (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3116"/>
-        <location filename="../Source/dooble.cc" line="3119"/>
-        <location filename="../Source/dooble.cc" line="3301"/>
-        <location filename="../Source/dooble.cc" line="3304"/>
-        <location filename="../Source/dooble.cc" line="5468"/>
-        <location filename="../Source/dooble.cc" line="5471"/>
-        <location filename="../Source/dooble.cc" line="6402"/>
+        <location filename="../Source/dooble.cc" line="3118"/>
+        <location filename="../Source/dooble.cc" line="3121"/>
+        <location filename="../Source/dooble.cc" line="3303"/>
+        <location filename="../Source/dooble.cc" line="3306"/>
+        <location filename="../Source/dooble.cc" line="5470"/>
+        <location filename="../Source/dooble.cc" line="5473"/>
+        <location filename="../Source/dooble.cc" line="6404"/>
         <source> - Dooble Web Browser</source>
         <translation type="unfinished"> - दुबले वेब  ब्राउजर</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4016"/>
+        <location filename="../Source/dooble.cc" line="4018"/>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4597"/>
+        <location filename="../Source/dooble.cc" line="4599"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5190"/>
+        <location filename="../Source/dooble.cc" line="5192"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5325"/>
+        <location filename="../Source/dooble.cc" line="5327"/>
         <source>The site %1 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5389"/>
+        <location filename="../Source/dooble.cc" line="5391"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6437"/>
+        <location filename="../Source/dooble.cc" line="6439"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6590"/>
+        <location filename="../Source/dooble.cc" line="6592"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7182"/>
+        <location filename="../Source/dooble.cc" line="7184"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7183"/>
+        <location filename="../Source/dooble.cc" line="7185"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7445"/>
+        <location filename="../Source/dooble.cc" line="7447"/>
         <source>View %1 &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7448"/>
-        <location filename="../Source/dooble.cc" line="7452"/>
+        <location filename="../Source/dooble.cc" line="7450"/>
+        <location filename="../Source/dooble.cc" line="7454"/>
         <source>View Site &amp;Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7812"/>
+        <location filename="../Source/dooble.cc" line="7814"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7814"/>
+        <location filename="../Source/dooble.cc" line="7816"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6898"/>
-        <location filename="../Source/dooble.cc" line="6903"/>
+        <location filename="../Source/dooble.cc" line="6900"/>
+        <location filename="../Source/dooble.cc" line="6905"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7139"/>
         <location filename="../Source/dooble.cc" line="7141"/>
-        <location filename="../Source/dooble.cc" line="7145"/>
+        <location filename="../Source/dooble.cc" line="7143"/>
+        <location filename="../Source/dooble.cc" line="7147"/>
         <source>Restore Session</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1401,26 +1401,26 @@
         <translation type="obsolete">लोड हो रहा है ...</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2899"/>
-        <location filename="../Source/dooble.cc" line="2951"/>
-        <location filename="../Source/dooble.cc" line="3944"/>
-        <location filename="../Source/dooble.cc" line="6434"/>
-        <location filename="../Source/dooble.cc" line="6586"/>
+        <location filename="../Source/dooble.cc" line="2901"/>
+        <location filename="../Source/dooble.cc" line="2953"/>
+        <location filename="../Source/dooble.cc" line="3946"/>
+        <location filename="../Source/dooble.cc" line="6436"/>
+        <location filename="../Source/dooble.cc" line="6588"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2954"/>
+        <location filename="../Source/dooble.cc" line="2956"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3947"/>
+        <location filename="../Source/dooble.cc" line="3949"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5187"/>
+        <location filename="../Source/dooble.cc" line="5189"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: खुली निर्देशिका</translation>
     </message>
@@ -1438,12 +1438,12 @@
         <translation type="obsolete">साफ इतिहास</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4473"/>
+        <location filename="../Source/dooble.cc" line="4475"/>
         <source>Dooble Web Browser: About</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: प्रचलित</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4594"/>
+        <location filename="../Source/dooble.cc" line="4596"/>
         <source>Dooble Web Browser: Save As</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: के रूप में सहेजें</translation>
     </message>
@@ -1452,10 +1452,10 @@
         <translation type="obsolete">&amp;बचाओ</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4975"/>
-        <location filename="../Source/dooble.cc" line="4981"/>
+        <location filename="../Source/dooble.cc" line="4977"/>
         <location filename="../Source/dooble.cc" line="4983"/>
-        <location filename="../Source/dooble.cc" line="4987"/>
+        <location filename="../Source/dooble.cc" line="4985"/>
+        <location filename="../Source/dooble.cc" line="4989"/>
         <source>Dooble Desktop</source>
         <translation type="unfinished">दुबले डेस्कटॉप</translation>
     </message>
@@ -1683,13 +1683,13 @@
         <translation type="obsolete">वर्तमान हैश प्रकार:</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1519"/>
-        <location filename="../Source/dsettings.cc" line="1553"/>
+        <location filename="../Source/dsettings.cc" line="1517"/>
+        <location filename="../Source/dsettings.cc" line="1551"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble वेब ब्राउज़र: त्रुटि</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1520"/>
+        <location filename="../Source/dsettings.cc" line="1518"/>
         <source>The passphrases do not match.</source>
         <translation type="unfinished">Passphrases मेल नहीं खाते.</translation>
     </message>
@@ -1698,7 +1698,7 @@
         <translation type="obsolete">पदबंध में कम से कम बारह वर्ण लंबा होना चाहिए.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2156"/>
+        <location filename="../Source/dsettings.cc" line="2153"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1713,12 +1713,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1554"/>
+        <location filename="../Source/dsettings.cc" line="1552"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2254"/>
+        <location filename="../Source/dsettings.cc" line="2251"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: विषय चयन</translation>
     </message>
@@ -1727,12 +1727,12 @@
         <translation type="obsolete">&amp;चयन</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2272"/>
+        <location filename="../Source/dsettings.cc" line="2269"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation type="unfinished">विषय विन्यास फाइल (*. cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2357"/>
+        <location filename="../Source/dsettings.cc" line="2354"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation type="unfinished">दुबले वेब  ब्राउजर: मेरे पुनःप्राप्त फ़ाइलें निर्देशिका चयन</translation>
     </message>
@@ -1746,54 +1746,54 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2159"/>
+        <location filename="../Source/dsettings.cc" line="2156"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2271"/>
-        <location filename="../Source/dsettings.cc" line="2745"/>
+        <location filename="../Source/dsettings.cc" line="2268"/>
+        <location filename="../Source/dsettings.cc" line="2742"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2360"/>
-        <location filename="../Source/dsettings.cc" line="2388"/>
+        <location filename="../Source/dsettings.cc" line="2357"/>
+        <location filename="../Source/dsettings.cc" line="2385"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2385"/>
+        <location filename="../Source/dsettings.cc" line="2382"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2660"/>
+        <location filename="../Source/dsettings.cc" line="2657"/>
         <source>Prompt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2677"/>
+        <location filename="../Source/dsettings.cc" line="2674"/>
         <source>Use other...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2742"/>
+        <location filename="../Source/dsettings.cc" line="2739"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2865"/>
+        <location filename="../Source/dsettings.cc" line="2862"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2869"/>
+        <location filename="../Source/dsettings.cc" line="2866"/>
         <source>&amp;Delete File Suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2963"/>
+        <location filename="../Source/dsettings.cc" line="2960"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
