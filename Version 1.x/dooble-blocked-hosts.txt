@@ -1,6 +1,6 @@
 # If third-party content blocking is enabled, the following hosts
 # will be ignored.
-# Dooble must be restarted if this file is modified.
+# Dooble should be restarted if this file is modified.
 
 ad.turn.com
 adclick.g.doubclick.net
