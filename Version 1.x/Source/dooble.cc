@@ -8008,6 +8008,8 @@ void dooble::slotShowBlockedHosts(void)
 	  str = str.trimmed();
 	  s_blockedHostsUi.textEdit->append(str);
 	}
+
+      s_blockedHostsUi.textEdit->append("");
     }
 
   file.close();
