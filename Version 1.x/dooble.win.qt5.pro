@@ -43,6 +43,7 @@ PRE_TARGETDEPS = libspoton.dll
 RC_FILE		= Resources\\dooble.rc
 
 FORMS           = UI\\dapplicationPropertiesWindow.ui \
+		  UI\\dblockedhosts.ui \
 		  UI\\dbookmarksPopup.ui \
 		  UI\\dbookmarksWindow.ui \
 		  UI\\dclearContainersWindow.ui \

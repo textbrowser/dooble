@@ -50,6 +50,7 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI/dapplicationPropertiesWindow.ui \
+		  UI/dblockedhosts.ui \
 		  UI/dbookmarksPopup.ui \
 		  UI/dbookmarksWindow.ui \
 		  UI/dclearContainersWindow.ui \

@@ -543,6 +543,7 @@
      <addaction name="action_Third_Party_Frame_Content"/>
     </widget>
     <addaction name="action_SSL_Ciphers"/>
+    <addaction name="action_Blocked_Hosts"/>
     <addaction name="action_Clear_Containers"/>
     <addaction name="actionApplication_Cookies"/>
     <addaction name="actionDownloads"/>
@@ -1095,6 +1096,11 @@
   <action name="action_Gridify">
    <property name="text">
     <string>&amp;Gridify</string>
+   </property>
+  </action>
+  <action name="action_Blocked_Hosts">
+   <property name="text">
+    <string>&amp;Blocked Hosts</string>
    </property>
   </action>
  </widget>

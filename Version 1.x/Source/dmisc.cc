@@ -1874,7 +1874,8 @@ bool dmisc::hostblocked(const QString &host)
 
 void dmisc::initializeBlockedHosts(void)
 {
-  QFile file("dooble-blocked-hosts.txt");
+  QFile file
+    (dooble::s_homePath + QDir::separator() + "dooble-blocked-hosts.txt");
 
   if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

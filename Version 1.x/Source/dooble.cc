@@ -111,6 +111,7 @@ extern "C"
 
 QHash<QString, QVariant> dooble::s_settings;
 QHash<QString, qint64> dooble::s_mostVisitedHosts;
+QMainWindow *dooble::s_blockedhostsWindow = 0;
 QMap<QString, QString> dooble::s_applicationsActions;
 QMutex dooble::s_saveHistoryMutex;
 QPointer<QMenu> dooble::s_bookmarksPopupMenu = 0;
@@ -143,6 +144,7 @@ QPointer<dsslcipherswindow> dooble::s_sslCiphersWindow = 0;
 QReadWriteLock dooble::s_applicationsActionsLock;
 QString dooble::s_homePath = "";
 QUuid dooble::s_id = QUuid::createUuid();
+Ui_blockedhosts dooble::s_blockedHostsUi;
 int dprintfromcommandprompt::s_count = 0;
 qint64 dooble::s_instances = 0;
 static char *s_crashFileName = 0;
@@ -1157,6 +1159,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   else
     ui.action_Clear_Spot_On_Shared_Links->setEnabled(false);
 
+  connect(ui.action_Blocked_Hosts,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slotShowBlockedHosts(void)));
   connect(ui.action_Clear_Spot_On_Shared_Links,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -7968,4 +7974,16 @@ void dooble::slotGridify(void)
 	      }
 	  }
       }
+}
+
+void dooble::slotShowBlockedHosts(void)
+{
+  if(!s_blockedhostsWindow)
+    {
+      s_blockedhostsWindow = new QMainWindow(0);
+      s_blockedHostsUi.setupUi(s_blockedhostsWindow);
+    }
+
+  s_blockedhostsWindow->show();
+  dmisc::centerChildWithParent(s_blockedhostsWindow, this);
 }

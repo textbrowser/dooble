@@ -45,6 +45,7 @@
 #include "dspoton.h"
 #include "dsslcipherswindow.h"
 #include "dview.h"
+#include "ui_dblockedhosts.h"
 #include "ui_dmainWindow.h"
 #include "ui_dstatusBar.h"
 
@@ -139,6 +140,8 @@ class dooble: public QMainWindow
   bool showFindFrame;
   dhistorysidebar *m_historySideBar;
   qint64 m_id;
+  static Ui_blockedhosts s_blockedHostsUi;
+  static QMainWindow *s_blockedhostsWindow;
 
   QMenu *createPopupMenu(void)
   {
@@ -285,6 +288,7 @@ class dooble: public QMainWindow
   void slotSetTabBarVisible(const bool state);
   void slotSettingsChanged(void);
   void slotShowApplicationCookies(void);
+  void slotShowBlockedHosts(void);
   void slotShowBookmarks(void);
   void slotShowDesktopTab(const bool state = true);
   void slotShowFavoritesToolBar(bool checked);
