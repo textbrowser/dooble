@@ -64,6 +64,7 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_Save"/>
+    <addaction name="separator"/>
     <addaction name="action_Close"/>
    </widget>
    <addaction name="menu_File"/>
@@ -90,5 +91,22 @@
   <tabstop>textBrowser</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>action_Close</sender>
+   <signal>triggered()</signal>
+   <receiver>blockedhosts</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

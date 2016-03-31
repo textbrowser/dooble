@@ -1070,6 +1070,12 @@ int main(int argc, char *argv[])
 
 void dooble::init_dooble(const bool isJavaScriptWindow)
 {
+  if(!s_blockedhostsWindow)
+    {
+      s_blockedhostsWindow = new QMainWindow(0);
+      s_blockedHostsUi.setupUi(s_blockedhostsWindow);
+    }
+
   /*
   ** This method is used whenever a new Dooble window
   ** is about to be created.
@@ -2176,6 +2182,8 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("mainWindow/exceptionToolButton").toString()));
   sb.errorLogToolButton->setIcon
     (QIcon(settings.value("mainWindow/errorLogToolButton").toString()));
+  s_blockedHostsUi.action_Close->setIcon
+    (QIcon(settings.value("mainWindow/actionClose_Window").toString()));
 
   if(ui.historyMenu->actions().size() > 0)
     {
@@ -7978,12 +7986,29 @@ void dooble::slotGridify(void)
 
 void dooble::slotShowBlockedHosts(void)
 {
-  if(!s_blockedhostsWindow)
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QFile file
+    (dooble::s_homePath + QDir::separator() + "dooble-blocked-hosts.txt");
+
+  if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-      s_blockedhostsWindow = new QMainWindow(0);
-      s_blockedHostsUi.setupUi(s_blockedhostsWindow);
+      s_blockedHostsUi.textBrowser->clear();
+
+      QByteArray line(1024, 0);
+      qint64 rc = 0;
+
+      while((rc = file.readLine(line.data(), line.length())) > 0)
+	{
+	  QString str(line.mid(0, rc).constData());
+
+	  str = str.trimmed();
+	  s_blockedHostsUi.textBrowser->append(str);
+	}
     }
 
+  file.close();
+  QApplication::restoreOverrideCursor();
   s_blockedhostsWindow->show();
   dmisc::centerChildWithParent(s_blockedhostsWindow, this);
 }
