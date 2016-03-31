@@ -1,6 +1,4 @@
-# If third-party content blocking is enabled, the following hosts
-# will be ignored.
-# Dooble should be restarted if this file is modified.
+# If third-party content blocking is enabled, the following hosts will be ignored.
 # Some wildcards (*.example.com) are supported.
 
 *.beanstock.co
