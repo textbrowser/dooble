@@ -137,6 +137,7 @@ class dmisc
   static QHash<QString, char> s_blockedhosts;
   static QList<QString> s_browsingProxyIgnoreList;
   static QList<QString> s_downloadProxyIgnoreList;
+  static QStringList s_blockedhostswildcards;
   static bool s_passphraseWasAuthenticated;
 };
 

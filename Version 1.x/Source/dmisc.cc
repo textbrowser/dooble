@@ -128,6 +128,7 @@ QHash<QString, char> dmisc::s_blockedhosts;
 QHash<int, int> dmisc::s_httpStatusCodes;
 QList<QString> dmisc::s_browsingProxyIgnoreList;
 QList<QString> dmisc::s_downloadProxyIgnoreList;
+QStringList dmisc::s_blockedhostswildcards;
 bool dmisc::s_passphraseWasAuthenticated = false;
 dcrypt *dmisc::s_crypt = 0;
 dcrypt *dmisc::s_reencodeCrypt = 0;
@@ -1831,7 +1832,37 @@ bool dmisc::shouldIgnoreProxyFor(const QString &host, const QString &type)
 
 bool dmisc::hostblocked(const QString &host)
 {
-  return s_blockedhosts.contains(host.toLower().trimmed());
+  if(s_blockedhosts.contains(host.toLower().trimmed()))
+    return true;
+  else
+    {
+      /*
+      ** abc.def.ghi.jkl.org
+      */
+
+      QStringList items;
+      QStringList list(host.toLower().trimmed().split('.'));
+
+      for(int i = 0; i < list.size() - 1; i++)
+	{
+	  QString str("");
+
+	  for(int j = i; j < list.size(); j++)
+	    {
+	      str.append(list.at(j));
+	      str.append(".");
+	    }
+
+	  str.remove(str.length() - 1, 1);
+	  items << str;
+	}
+
+      for(int i = 0; i < items.size(); i++)
+	if(s_blockedhostswildcards.contains(items.at(i)))
+	  return true;
+    }
+
+  return false;
 }
 
 void dmisc::initializeBlockedHosts(void)
@@ -1851,9 +1882,21 @@ void dmisc::initializeBlockedHosts(void)
 
 	  str = str.trimmed();
 
-	  if(!str.isEmpty() && !str.startsWith("#"))
-	    s_blockedhosts[str] = 0;
+	  if(str.length() > 3 && !str.startsWith("#"))
+	    {
+	      if(str.startsWith("*."))
+		{
+		  str.remove(0, 2);
+
+		  if(str.length() > 3)
+		    s_blockedhostswildcards.append(str);
+		}
+	      else
+		s_blockedhosts[str] = 0;
+	    }
 	}
+
+      qSort(s_blockedhostswildcards.begin(), s_blockedhostswildcards.end());
     }
 
   file.close();

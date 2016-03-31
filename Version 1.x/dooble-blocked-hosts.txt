@@ -1,23 +1,20 @@
 # If third-party content blocking is enabled, the following hosts
 # will be ignored.
 # Dooble should be restarted if this file is modified.
+# Some wildcards (*.example.com) are supported.
 
+*.beanstock.co
+*.beanstock.com
+*.casalemedia.com
+*.doubleclick.com
+*.doubleclick.net
+*.google-analytics.com
+*.googlesyndication.com
 ad.turn.com
-adclick.g.doubclick.net
 adnxs.com
-adx.g.doubleclick.net
-beanstock.co
-beanstock.com
-cdn.beanstock.com
 cdn.syndication.twimg.com
 cs.komoona.com
-doubleclick.com
-doubleclick.net
-googleads.g.doubleclick.net
 mpd.mxptint.net
-pagead2.googlesyndication.com
 s.ytimg.com
 s.zkcdn.net
 s0.2mdn.net
-ssum-sec.casalemedia.com
-tpc.googlesyndication.com
