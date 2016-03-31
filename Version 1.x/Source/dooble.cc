@@ -1234,6 +1234,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SIGNAL(passphraseWasAuthenticated(const bool)),
 	  s_settingsWindow,
 	  SLOT(slotPassphraseWasAuthenticated(const bool)));
+  connect(s_blockedHostsUi.action_Save,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slotSaveBlockedHosts(void)));
   connect(s_settingsWindow,
 	  SIGNAL(iconsChanged(void)),
 	  this,
@@ -7987,14 +7991,13 @@ void dooble::slotGridify(void)
 void dooble::slotShowBlockedHosts(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  s_blockedHostsUi.textEdit->clear();
 
   QFile file
     (dooble::s_homePath + QDir::separator() + "dooble-blocked-hosts.txt");
 
   if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-      s_blockedHostsUi.textBrowser->clear();
-
       QByteArray line(1024, 0);
       qint64 rc = 0;
 
@@ -8003,7 +8006,7 @@ void dooble::slotShowBlockedHosts(void)
 	  QString str(line.mid(0, rc).constData());
 
 	  str = str.trimmed();
-	  s_blockedHostsUi.textBrowser->append(str);
+	  s_blockedHostsUi.textEdit->append(str);
 	}
     }
 
@@ -8011,4 +8014,8 @@ void dooble::slotShowBlockedHosts(void)
   QApplication::restoreOverrideCursor();
   s_blockedhostsWindow->show();
   dmisc::centerChildWithParent(s_blockedhostsWindow, this);
+}
+
+void dooble::slotSaveBlockedHosts(void)
+{
 }

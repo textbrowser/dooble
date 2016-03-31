@@ -16,11 +16,17 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QTextBrowser" name="textBrowser">
+     <widget class="QTextEdit" name="textEdit">
       <property name="font">
        <font>
         <family>Monospace</family>
        </font>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="acceptRichText">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -88,7 +94,7 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>textBrowser</tabstop>
+  <tabstop>textEdit</tabstop>
  </tabstops>
  <resources/>
  <connections>
