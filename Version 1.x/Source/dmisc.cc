@@ -1843,6 +1843,13 @@ bool dmisc::hostblocked(const QString &host)
       QStringList items;
       QStringList list(host.toLower().trimmed().split('.'));
 
+      /*
+      ** abc.def.ghi.jkl.org
+      ** def.ghi.jkl.org
+      ** ghi.jkl.org
+      ** jkl.org
+      */
+
       for(int i = 0; i < list.size() - 1; i++)
 	{
 	  QString str("");
@@ -1857,7 +1864,7 @@ bool dmisc::hostblocked(const QString &host)
 	  items << str;
 	}
 
-      for(int i = 0; i < items.size(); i++)
+      for(int i = items.size() - 1; i >= 0; i--)
 	if(s_blockedhostswildcards.contains(items.at(i)))
 	  return true;
     }
