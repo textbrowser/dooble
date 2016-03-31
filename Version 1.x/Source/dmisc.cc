@@ -1880,6 +1880,7 @@ void dmisc::initializeBlockedHosts(void)
   if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
       s_blockedhosts.clear();
+      s_blockedhostswildcards.clear();
 
       QByteArray line(1024, 0);
       qint64 rc = 0;

@@ -8018,4 +8018,18 @@ void dooble::slotShowBlockedHosts(void)
 
 void dooble::slotSaveBlockedHosts(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QFile file
+    (dooble::s_homePath + QDir::separator() + "dooble-blocked-hosts.txt");
+
+  if(file.open(QIODevice::Text | QIODevice::WriteOnly))
+    {
+      file.write(s_blockedHostsUi.textEdit->toPlainText().toLatin1());
+      file.flush();
+    }
+
+  file.close();
+  dmisc::initializeBlockedHosts();
+  QApplication::restoreOverrideCursor();
 }
