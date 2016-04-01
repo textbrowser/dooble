@@ -2188,6 +2188,8 @@ void dooble::slotSetIcons(void)
     (QIcon(settings.value("mainWindow/errorLogToolButton").toString()));
   s_blockedHostsUi.action_Close->setIcon
     (QIcon(settings.value("mainWindow/actionClose_Window").toString()));
+  s_blockedHostsUi.action_Save->setIcon
+    (QIcon(settings.value("mainWindow/actionSave_Page").toString()));
 
   if(ui.historyMenu->actions().size() > 0)
     {
