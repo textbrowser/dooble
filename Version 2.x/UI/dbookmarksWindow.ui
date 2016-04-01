@@ -124,7 +124,16 @@
        </widget>
        <widget class="QFrame" name="frame">
         <layout class="QGridLayout" name="gridLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <property name="spacing">
@@ -251,7 +260,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -278,9 +287,6 @@
   <action name="action_Close">
    <property name="text">
     <string>&amp;Close</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+W</string>
    </property>
   </action>
  </widget>
