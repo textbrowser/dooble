@@ -337,16 +337,10 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  m_spotonButton->setToolTip
-    (tr("Submit URL to Spot-On."));
+  m_spotonButton->setToolTip(tr("Submit URL to Spot-On."));
 #else
+  m_spotonButton->setEnabled(false);
   m_spotonButton->setToolTip(tr("Spot-On support is not available."));
-#endif
-#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  if(dooble::s_spoton)
-    dooble::s_spoton->registerWidget(m_spotonButton);
-  else
-    dmisc::logError("durlwidget::durlwidget(): dooble::s_spoton is 0.");
 #endif
   slotSetIcons();
 #ifndef DOOBLE_LINKED_WITH_LIBSPOTON

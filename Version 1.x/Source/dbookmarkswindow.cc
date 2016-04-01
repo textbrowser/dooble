@@ -230,14 +230,12 @@ dbookmarkswindow::dbookmarkswindow(void):QMainWindow()
   */
 
   populate();
-  ui.sharePushButton->setEnabled(false);
 
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  if(dooble::s_spoton)
-    dooble::s_spoton->registerWidget(ui.sharePushButton);
-  else
-    dmisc::logError("dbookmarkswindow::dbookmarkswindow(): "
-		    "dooble::s_spoton is 0.");
+  ui.sharePushButton->setEnabled(true);
+#else
+  ui.sharePushButton->setEnabled(false);
+  ui.sharePushButton->setToolTip(tr("Spot-On support is not available."));
 #endif
 }
 
@@ -615,13 +613,16 @@ void dbookmarkswindow::slotShowContextMenu(const QPoint &point)
 	      menu.addAction(tr("Open in &New Window"),
 			     this, SLOT(slotOpenInNewWindow(void)));
 	      menu.addSeparator();
+
 	      QAction *action = menu.addAction
 		(tr("&Spot-On Share"), this, SLOT(slotShare(void)));
 
-	      if(dooble::s_spoton)
-		action->setEnabled(dooble::s_spoton->isKernelRegistered());
-	      else
-		action->setEnabled(false);
+#ifdef DOOBLE_LINKED_WITH_LIBSPOTON
+	      action->setEnabled(true);
+#else
+	      action->setEnabled(false);
+	      action->setToolTip(tr("Spot-On support is not available."));
+#endif
 	    }
 
 	  menu.exec(ui.bookmarks->mapToGlobal(point));

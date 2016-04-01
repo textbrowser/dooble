@@ -134,6 +134,7 @@ void dspoton::share(const QUrl &url,
 
   libspoton_close(&libspotonHandle);
 #else
+  Q_UNUSED(content);
   Q_UNUSED(description);
   Q_UNUSED(title);
   Q_UNUSED(url);

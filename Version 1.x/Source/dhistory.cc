@@ -304,15 +304,12 @@ dhistory::dhistory(void):QMainWindow()
 #else
   ui.history->horizontalHeader()->setMovable(true);
 #endif
-  ui.sharePushButton->setEnabled(false);
 
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
-  if(dooble::s_spoton)
-    dooble::s_spoton->registerWidget(ui.sharePushButton);
-  else
-    dmisc::logError("dhistory::dhistory(): dooble::s_spoton is 0.");
+  ui.sharePushButton->setEnabled(true);
 #else
   ui.sharePushButton->setEnabled(false);
+  ui.sharePushButton->setToolTip(tr("Spot-On support is not available."));
 #endif
 }
 
