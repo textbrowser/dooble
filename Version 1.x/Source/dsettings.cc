@@ -60,6 +60,8 @@ dsettings::dsettings():QMainWindow()
   ui.displaypriority->setItemData(6, QThread::NormalPriority);
   ui.displaypriority->setItemData(7, QThread::TimeCriticalPriority);
   ui.applicationsTable->setContextMenuPolicy(Qt::CustomContextMenu);
+  ui.home_path->setText
+    (tr("<b>The settings are defined in %1.</b>").arg(dooble::s_homePath));
   connect(ui.applicationsTable,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this, SLOT(slotCustomContextMenuRequested(const QPoint &)));
