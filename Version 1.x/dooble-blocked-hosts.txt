@@ -2,6 +2,7 @@
 # If third-party content blocking is enabled, the following hosts will be ignored.
 # Some wildcards (*.example.com) are supported.
 
+*.2mdn.net
 *.beanstock.co
 *.beanstock.com
 *.casalemedia.com
@@ -16,4 +17,3 @@ cs.komoona.com
 mpd.mxptint.net
 s.ytimg.com
 s.zkcdn.net
-s0.2mdn.net
