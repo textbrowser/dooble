@@ -224,9 +224,6 @@
    <property name="text">
     <string>&amp;Close</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+W</string>
-   </property>
   </action>
   <action name="actionPrint">
    <property name="text">
