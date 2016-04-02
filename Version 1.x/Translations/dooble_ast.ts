@@ -114,6 +114,33 @@
     </message>
 </context>
 <context>
+    <name>blockedhosts</name>
+    <message>
+        <source>Dooble Web Browser: Blocked Hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Ficheru</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Zarrar</translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished">Esc</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Guardar</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+</context>
+<context>
     <name>bookmarksPopup</name>
     <message>
         <source>Form</source>
@@ -192,7 +219,7 @@
     </message>
     <message>
         <source>Ctrl+Shift+W</source>
-        <translation type="unfinished">Ctrl+Shift+W</translation>
+        <translation type="obsolete">Ctrl+Shift+W</translation>
     </message>
     <message>
         <source>Submit bookmark to Spot-On.</source>
@@ -357,6 +384,10 @@
     </message>
     <message>
         <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spot-On support is not available.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -901,6 +932,10 @@
     </message>
     <message>
         <source>December</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spot-On support is not available.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1652,7 +1687,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ctrl+Shift+W</source>
-        <translation type="unfinished">Ctrl+Shift+W</translation>
+        <translation type="obsolete">Ctrl+Shift+W</translation>
     </message>
     <message>
         <source>Clear &amp;Log</source>
@@ -1685,6 +1720,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Dooble Web Browser: Error Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished">Esc</translation>
     </message>
 </context>
 <context>
@@ -2289,6 +2328,14 @@ p, li { white-space: pre-wrap; }
         <source>&amp;History Side Bar</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Blocked Hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Home</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>pageSourceWindow</name>
@@ -2362,7 +2409,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ctrl+Shift+W</source>
-        <translation type="unfinished">Ctrl+Shift+W</translation>
+        <translation type="obsolete">Ctrl+Shift+W</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
@@ -3408,11 +3455,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show authentication information after launch.</source>
+        <source>Show authentication prompt after launch.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/a&gt; for descriptions.</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please read &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/span&gt;&lt;/a&gt; for descriptions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

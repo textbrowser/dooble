@@ -12,7 +12,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Source/dooble.cc" line="797"/>
+        <location filename="../Source/dooble.cc" line="799"/>
         <source>Dooble Web Browser: DNT (Do Not Track) Exceptions</source>
         <translation>Dooble Web Nabigatzailea: EZAZT (Ez Aztarnatu) Salbuespenak</translation>
     </message>
@@ -21,57 +21,57 @@
         <translation type="obsolete">Dooble Web Nabigatzailea: JavaScript Oharleiho Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="802"/>
+        <location filename="../Source/dooble.cc" line="804"/>
         <source>Dooble Web Browser: JavaScript Pop-ups Exceptions</source>
         <translation>Dooble Web Nabigatzailea: JavaScript Pop-ups Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="807"/>
+        <location filename="../Source/dooble.cc" line="809"/>
         <source>Dooble Web Browser: Third-Party Blocking Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Hirugarrenen Blokeatze Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="813"/>
+        <location filename="../Source/dooble.cc" line="815"/>
         <source>Dooble Web Browser: Cookies Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Cookie Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="818"/>
+        <location filename="../Source/dooble.cc" line="820"/>
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="823"/>
+        <location filename="../Source/dooble.cc" line="825"/>
         <source>Dooble Web Browser: Suppress HTTP Referrer Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Suppress HTTP Referrer Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="828"/>
+        <location filename="../Source/dooble.cc" line="830"/>
         <source>Dooble Web Browser: Suppress HTTP Redirect Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Kendu HTTP Birzuzenketa Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="833"/>
+        <location filename="../Source/dooble.cc" line="835"/>
         <source>Dooble Web Browser: JavaScript Exceptions</source>
         <translation>Dooble Web Nabigatzailea: JavaScript Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="838"/>
+        <location filename="../Source/dooble.cc" line="840"/>
         <source>Dooble Web Browser: Automatically-Loaded Images Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Berezgaitasunez-Gertaturiko Irudi Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="843"/>
+        <location filename="../Source/dooble.cc" line="845"/>
         <source>Dooble Web Browser: Cache Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Katxe Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="848"/>
+        <location filename="../Source/dooble.cc" line="850"/>
         <source>Dooble Web Browser: Always HTTPS Exceptions</source>
         <translation>Dooble Web Nabigatzailea: Betik HTTPS Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="853"/>
+        <location filename="../Source/dooble.cc" line="855"/>
         <source>Dooble Web Browser: SSL Errors Exceptions</source>
         <translation>Dooble Web Nabigatzailea: SSL Akats Salbuespenak</translation>
     </message>
@@ -92,12 +92,12 @@
         <translation type="obsolete">dmisc::passphraseHash(): Hash mota sostengugabea %1 (%2). Qt-ren sha1 inplementazioa erabiltzen.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1498"/>
+        <location filename="../Source/dmisc.cc" line="1499"/>
         <source>%1 KiB</source>
         <translation>%1 KiB</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1501"/>
+        <location filename="../Source/dmisc.cc" line="1502"/>
         <source>%1 MiB</source>
         <translation>%1 MiB</translation>
     </message>
@@ -118,17 +118,17 @@
         <translation type="obsolete">dmisc::initializeCrypt(): gcrypt liburutegia jadanik abiarazita dagoela dirudi.</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1492"/>
+        <location filename="../Source/dmisc.cc" line="1493"/>
         <source>0 Bytes</source>
         <translation>0 Byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1494"/>
+        <location filename="../Source/dmisc.cc" line="1495"/>
         <source>1 Byte</source>
         <translation>1 Byte</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1496"/>
+        <location filename="../Source/dmisc.cc" line="1497"/>
         <source>%1 Bytes</source>
         <translation>%1 Byte</translation>
     </message>
@@ -325,6 +325,39 @@
     </message>
 </context>
 <context>
+    <name>blockedhosts</name>
+    <message>
+        <location filename="../UI/dblockedhosts.ui" line="14"/>
+        <source>Dooble Web Browser: Blocked Hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dblockedhosts.ui" line="70"/>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Agiria</translation>
+    </message>
+    <message>
+        <location filename="../UI/dblockedhosts.ui" line="81"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">It&amp;xi</translation>
+    </message>
+    <message>
+        <location filename="../UI/dblockedhosts.ui" line="84"/>
+        <source>Esc</source>
+        <translation type="unfinished">Irten</translation>
+    </message>
+    <message>
+        <location filename="../UI/dblockedhosts.ui" line="89"/>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dblockedhosts.ui" line="92"/>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+</context>
+<context>
     <name>bookmarksPopup</name>
     <message>
         <location filename="../UI/dbookmarksPopup.ui" line="14"/>
@@ -375,62 +408,61 @@
         <translation>Dooble Web Nabigatzailea: Lastermarkak</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="136"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="145"/>
         <source>&amp;Title</source>
         <translation>&amp;Izenburua</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="153"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="162"/>
         <source>&amp;Location</source>
         <translation>&amp;Kokalekua</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="170"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="179"/>
         <source>D&amp;escription</source>
         <translation>&amp;Azalpena</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="202"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="211"/>
         <source>Submit bookmark to Spot-On.</source>
         <translation>Aurkeztu lastermarka Spot-Onen.</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="205"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="214"/>
         <source>&amp;Spot-On</source>
         <translation>&amp;Spot-On</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="259"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="268"/>
         <source>&amp;File</source>
         <translation>&amp;Agiria</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="270"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="279"/>
         <source>&amp;Export to HTML</source>
         <translation>E&amp;sportatu HTML-ra</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="275"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="284"/>
         <source>&amp;Import from HTML</source>
         <translation>I&amp;nportatu HTML-tik</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="283"/>
         <source>Ctrl+Shift+W</source>
-        <translation>Ctrl+Shift+W</translation>
+        <translation type="vanished">Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="146"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="155"/>
         <source>Press the Enter key to retain the title.</source>
         <translation>Sakatu Sartu tekla izenburuari heusteko.</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="163"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="172"/>
         <source>Press the Enter key to retain the location.</source>
         <translation>Sakatu Sartu tekla kokalekuari heusteko.</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="280"/>
+        <location filename="../UI/dbookmarksWindow.ui" line="289"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
@@ -552,83 +584,89 @@
         <translation type="obsolete">dbookmarkswindow::dbookmarkswindow(): dooble::s_spoton 0 da.</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="590"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="588"/>
         <source>&amp;Create Sub-Folder</source>
         <translation>&amp;Sortu Azpi-Agiritegia</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="605"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="603"/>
         <source>&amp;Copy URL</source>
         <translation>&amp;Kopiatu URL-a</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="608"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="606"/>
         <source>&amp;Delete Bookmark</source>
         <translation>E&amp;zabatu Lastermarka</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="611"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="609"/>
         <source>Open in &amp;Current Tab</source>
         <translation>Ireki &amp;Oraingo Hegatsean</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="613"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="611"/>
         <source>Open in New &amp;Tab</source>
         <translation>Ireki &amp;Hegats Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="615"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="613"/>
         <source>Open in &amp;New Window</source>
         <translation>Ireki &amp;Leiho Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="619"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="618"/>
         <source>&amp;Spot-On Share</source>
         <translation>&amp;Spot-On Elkarbanatzea</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="784"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="785"/>
         <source>Uncategorized</source>
         <translation>Kategoria gabea</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="1223"/>
-        <location filename="../Source/dbookmarkswindow.cc" line="1271"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="1224"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="1272"/>
         <source>New Folder</source>
         <translation>Agiritegi Berria</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2065"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="2066"/>
         <source>Bookmark &amp;Page</source>
         <translation>Lastermarkatu &amp;Orrialdea</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2070"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="2071"/>
         <source>Show &amp;Bookmarks</source>
         <translation>Erakutsi &amp;Lastermarkak</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2679"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="2680"/>
         <source>Empty</source>
         <translation>Hutsik</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2716"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="2717"/>
         <source>Save</source>
         <translation>Gorde</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2871"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="2872"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2720"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="2721"/>
         <source>Dooble Web Browser: Export Bookmarks As</source>
         <translation>Dooble Web Nabigatzailea: Esportatu Lastermarkak Honela</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="2875"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="238"/>
+        <location filename="../Source/dbookmarkswindow.cc" line="624"/>
+        <source>Spot-On support is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dbookmarkswindow.cc" line="2876"/>
         <source>Dooble Web Browser: Import Bookmarks</source>
         <translation>Dooble Web Nabigatzailea: Inportatu Lastermarkak</translation>
     </message>
@@ -1247,57 +1285,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../Source/dhistory.cc" line="312"/>
+        <source>Spot-On support is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
         <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton 0 da.</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="525"/>
-        <location filename="../Source/dhistory.cc" line="653"/>
-        <location filename="../Source/dhistory.cc" line="859"/>
-        <location filename="../Source/dhistory.cc" line="920"/>
-        <location filename="../Source/dhistory.cc" line="1125"/>
-        <location filename="../Source/dhistory.cc" line="1199"/>
+        <location filename="../Source/dhistory.cc" line="522"/>
+        <location filename="../Source/dhistory.cc" line="650"/>
+        <location filename="../Source/dhistory.cc" line="856"/>
+        <location filename="../Source/dhistory.cc" line="917"/>
+        <location filename="../Source/dhistory.cc" line="1122"/>
+        <location filename="../Source/dhistory.cc" line="1196"/>
         <source>%1 Item(s) / %2 Item(s) Selected</source>
         <translation>%1 Gai / %2 Gai Hautaturik</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="734"/>
-        <location filename="../Source/dhistory.cc" line="752"/>
+        <location filename="../Source/dhistory.cc" line="731"/>
+        <location filename="../Source/dhistory.cc" line="749"/>
         <source>&amp;Bookmark</source>
         <translation>Laster&amp;marka</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="737"/>
+        <location filename="../Source/dhistory.cc" line="734"/>
         <source>&amp;Copy URL</source>
         <translation>&amp;Kopiatu URL-a</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="740"/>
+        <location filename="../Source/dhistory.cc" line="737"/>
         <source>&amp;Delete Page</source>
         <translation>E&amp;zabatu Orrialdea</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="743"/>
+        <location filename="../Source/dhistory.cc" line="740"/>
         <source>Open in &amp;Current Tab</source>
         <translation>Ireki &amp;Oraingo Hegatsean</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="745"/>
+        <location filename="../Source/dhistory.cc" line="742"/>
         <source>Open in New &amp;Tab</source>
         <translation>Ireki &amp;Hegats Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="747"/>
+        <location filename="../Source/dhistory.cc" line="744"/>
         <source>Open in &amp;New Window</source>
         <translation>Ireki &amp;Leiho Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="758"/>
+        <location filename="../Source/dhistory.cc" line="755"/>
         <source>Open in &amp;New Tabs</source>
         <translation>Ireki Hegats &amp;Berritan</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="755"/>
+        <location filename="../Source/dhistory.cc" line="752"/>
         <source>&amp;Delete Pages</source>
         <translation>E&amp;zabatu Orrialdeak</translation>
     </message>
@@ -1360,177 +1403,177 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="2354"/>
-        <location filename="../Source/dooble.cc" line="2411"/>
-        <location filename="../Source/dooble.cc" line="2451"/>
-        <location filename="../Source/dooble.cc" line="2518"/>
-        <location filename="../Source/dooble.cc" line="3322"/>
-        <location filename="../Source/dooble.cc" line="3509"/>
+        <location filename="../Source/dooble.cc" line="2378"/>
+        <location filename="../Source/dooble.cc" line="2435"/>
+        <location filename="../Source/dooble.cc" line="2475"/>
+        <location filename="../Source/dooble.cc" line="2542"/>
+        <location filename="../Source/dooble.cc" line="3346"/>
         <location filename="../Source/dooble.cc" line="3533"/>
-        <location filename="../Source/dooble.cc" line="5054"/>
-        <location filename="../Source/dooble.cc" line="5536"/>
+        <location filename="../Source/dooble.cc" line="3557"/>
+        <location filename="../Source/dooble.cc" line="5078"/>
+        <location filename="../Source/dooble.cc" line="5560"/>
         <source>(Untitled)</source>
         <translation>(Izenburugabea)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3108"/>
-        <location filename="../Source/dooble.cc" line="3177"/>
-        <location filename="../Source/dooble.cc" line="3293"/>
-        <location filename="../Source/dooble.cc" line="3609"/>
-        <location filename="../Source/dooble.cc" line="3748"/>
-        <location filename="../Source/dooble.cc" line="3788"/>
-        <location filename="../Source/dooble.cc" line="3996"/>
-        <location filename="../Source/dooble.cc" line="5460"/>
-        <location filename="../Source/dooble.cc" line="6098"/>
-        <location filename="../Source/dooble.cc" line="6402"/>
+        <location filename="../Source/dooble.cc" line="3132"/>
+        <location filename="../Source/dooble.cc" line="3201"/>
+        <location filename="../Source/dooble.cc" line="3317"/>
+        <location filename="../Source/dooble.cc" line="3633"/>
+        <location filename="../Source/dooble.cc" line="3772"/>
+        <location filename="../Source/dooble.cc" line="3812"/>
+        <location filename="../Source/dooble.cc" line="4020"/>
+        <location filename="../Source/dooble.cc" line="5484"/>
+        <location filename="../Source/dooble.cc" line="6122"/>
+        <location filename="../Source/dooble.cc" line="6426"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Nabigatzailea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3118"/>
-        <location filename="../Source/dooble.cc" line="3121"/>
-        <location filename="../Source/dooble.cc" line="3303"/>
-        <location filename="../Source/dooble.cc" line="3306"/>
-        <location filename="../Source/dooble.cc" line="5470"/>
-        <location filename="../Source/dooble.cc" line="5473"/>
-        <location filename="../Source/dooble.cc" line="6404"/>
+        <location filename="../Source/dooble.cc" line="3142"/>
+        <location filename="../Source/dooble.cc" line="3145"/>
+        <location filename="../Source/dooble.cc" line="3327"/>
+        <location filename="../Source/dooble.cc" line="3330"/>
+        <location filename="../Source/dooble.cc" line="5494"/>
+        <location filename="../Source/dooble.cc" line="5497"/>
+        <location filename="../Source/dooble.cc" line="6428"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Nabigatzailea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1584"/>
+        <location filename="../Source/dooble.cc" line="1602"/>
         <source>&amp;Clear History</source>
         <translation>&amp;Garbitu Historia</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1590"/>
+        <location filename="../Source/dooble.cc" line="1608"/>
         <source>Show &amp;History</source>
         <translation>&amp;Erakutsi Historia</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2906"/>
+        <location filename="../Source/dooble.cc" line="2930"/>
         <source>You have tabs with modified content. Are you sure that you wish to exit?</source>
         <translation>Edukia aldatuta duten hegatsak dituzu. Zihur zaude irtetzea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2909"/>
+        <location filename="../Source/dooble.cc" line="2933"/>
         <source>You have tabs with modified content. Are you sure that you wish to close?</source>
         <translation>Edukia aldatuta duten hegatsak dituzu. Zihur zaude istea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3110"/>
-        <location filename="../Source/dooble.cc" line="3295"/>
-        <location filename="../Source/dooble.cc" line="5462"/>
+        <location filename="../Source/dooble.cc" line="3134"/>
+        <location filename="../Source/dooble.cc" line="3319"/>
+        <location filename="../Source/dooble.cc" line="5486"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Nabigatzailea (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4599"/>
+        <location filename="../Source/dooble.cc" line="4623"/>
         <source>Save</source>
         <translation>Gorde</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5192"/>
+        <location filename="../Source/dooble.cc" line="5216"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6439"/>
+        <location filename="../Source/dooble.cc" line="6463"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Zihur zaude %1 orrialdeak irekitzea nahi dituzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6592"/>
+        <location filename="../Source/dooble.cc" line="6616"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Zihur zaude aldatutako orrialdea uztea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2901"/>
-        <location filename="../Source/dooble.cc" line="2953"/>
-        <location filename="../Source/dooble.cc" line="3946"/>
-        <location filename="../Source/dooble.cc" line="6436"/>
-        <location filename="../Source/dooble.cc" line="6588"/>
+        <location filename="../Source/dooble.cc" line="2925"/>
+        <location filename="../Source/dooble.cc" line="2977"/>
+        <location filename="../Source/dooble.cc" line="3970"/>
+        <location filename="../Source/dooble.cc" line="6460"/>
+        <location filename="../Source/dooble.cc" line="6612"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Nabigatzailea: Baieztapena</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1124"/>
+        <location filename="../Source/dooble.cc" line="1132"/>
         <source>Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1144"/>
+        <location filename="../Source/dooble.cc" line="1152"/>
         <source>Search Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1596"/>
+        <location filename="../Source/dooble.cc" line="1614"/>
         <source>&amp;Recently-Closed Tabs</source>
         <translation>&amp;Berriki-Itxitako Hegatsak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1814"/>
-        <location filename="../Source/dooble.cc" line="1881"/>
-        <location filename="../Source/dooble.cc" line="1924"/>
-        <location filename="../Source/dooble.cc" line="1957"/>
-        <location filename="../Source/dooble.cc" line="2046"/>
+        <location filename="../Source/dooble.cc" line="1832"/>
+        <location filename="../Source/dooble.cc" line="1899"/>
+        <location filename="../Source/dooble.cc" line="1942"/>
+        <location filename="../Source/dooble.cc" line="1975"/>
+        <location filename="../Source/dooble.cc" line="2064"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble Web Nabigatzailea: Akatsa</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1815"/>
-        <location filename="../Source/dooble.cc" line="1882"/>
-        <location filename="../Source/dooble.cc" line="1925"/>
-        <location filename="../Source/dooble.cc" line="1958"/>
-        <location filename="../Source/dooble.cc" line="2047"/>
+        <location filename="../Source/dooble.cc" line="1833"/>
+        <location filename="../Source/dooble.cc" line="1900"/>
+        <location filename="../Source/dooble.cc" line="1943"/>
+        <location filename="../Source/dooble.cc" line="1976"/>
+        <location filename="../Source/dooble.cc" line="2065"/>
         <source>The SQLite database driver QSQLITE is not available. This is a fatal flaw.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2956"/>
+        <location filename="../Source/dooble.cc" line="2980"/>
         <source>Terminating Dooble will cause existing downloads to be interrupted. Are you sure that you wish to continue?</source>
         <translation>Dooble amaitzeak daueden jeisketak etetea eragingo du. Zihur zaude jarraitzea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3949"/>
+        <location filename="../Source/dooble.cc" line="3973"/>
         <source>Are you sure that you wish to close this modified tab?</source>
         <translation>Zihur zaude aldaturiko hegats hau istea nahi duzula?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4018"/>
+        <location filename="../Source/dooble.cc" line="4042"/>
         <source>&amp;Clear</source>
         <translation>&amp;Garbitu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4475"/>
+        <location filename="../Source/dooble.cc" line="4499"/>
         <source>Dooble Web Browser: About</source>
         <translation>Dooble Web Nabigatzailea: Honi buruz</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4596"/>
+        <location filename="../Source/dooble.cc" line="4620"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>Dooble Web Nabigatzailea: Gorde Honela</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4977"/>
-        <location filename="../Source/dooble.cc" line="4983"/>
-        <location filename="../Source/dooble.cc" line="4985"/>
-        <location filename="../Source/dooble.cc" line="4989"/>
+        <location filename="../Source/dooble.cc" line="5001"/>
+        <location filename="../Source/dooble.cc" line="5007"/>
+        <location filename="../Source/dooble.cc" line="5009"/>
+        <location filename="../Source/dooble.cc" line="5013"/>
         <source>Dooble Desktop</source>
         <translation>Dooble Mahaigaina</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5189"/>
+        <location filename="../Source/dooble.cc" line="5213"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>Dooble Web Nabigatzailea: Ireki Zuzenbidea</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5327"/>
+        <location filename="../Source/dooble.cc" line="5351"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>%1 guneak egiaztagiriak eskatzen ditu.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5391"/>
+        <location filename="../Source/dooble.cc" line="5415"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>%1:%2 proxyak egiaztagiriak eskatzen ditu.</translation>
     </message>
@@ -1551,23 +1594,23 @@
         <translation type="vanished">Gehigarria</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7447"/>
+        <location filename="../Source/dooble.cc" line="7471"/>
         <source>View %1 &amp;Cookies</source>
         <translation>Ikusi %1 &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7450"/>
-        <location filename="../Source/dooble.cc" line="7454"/>
+        <location filename="../Source/dooble.cc" line="7474"/>
+        <location filename="../Source/dooble.cc" line="7478"/>
         <source>View Site &amp;Cookies</source>
         <translation>Ikusi Gune &amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7814"/>
+        <location filename="../Source/dooble.cc" line="7838"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7816"/>
+        <location filename="../Source/dooble.cc" line="7840"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1576,25 +1619,25 @@
         <translation type="obsolete">Gune ezezagun batek (hutsik edo URL baliogabea) salbuespen bat eragin du. Mesedez klikatu berrikuteko.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7184"/>
+        <location filename="../Source/dooble.cc" line="7208"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Nabigatzailea: Gogoratu</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7185"/>
+        <location filename="../Source/dooble.cc" line="7209"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Sar-esaldi bat ez da gertatu. Mesedez ikusi Seguru panela Ezarpenak leihoan eta hautatu sar-esaldi bat. Behin sar-esaldi bat hautaturikoan, lastermarkak, cookieak, eta beste argibide esangurutsu guztiak eskuragarri egongo dira etorkizuneko saioetan. Gogoratze hau Segurua paneletik ezgaitu dezakezu.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6900"/>
-        <location filename="../Source/dooble.cc" line="6905"/>
+        <location filename="../Source/dooble.cc" line="6924"/>
+        <location filename="../Source/dooble.cc" line="6929"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>%1 guneak salbuespen bat eragin du. Mesedez klikatu berrikusteko.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7141"/>
-        <location filename="../Source/dooble.cc" line="7143"/>
-        <location filename="../Source/dooble.cc" line="7147"/>
+        <location filename="../Source/dooble.cc" line="7165"/>
+        <location filename="../Source/dooble.cc" line="7167"/>
+        <location filename="../Source/dooble.cc" line="7171"/>
         <source>Restore Session</source>
         <translation>Leheneratu Saioa</translation>
     </message>
@@ -2002,17 +2045,17 @@
         <translation>Gertatu</translation>
     </message>
     <message>
-        <location filename="../Source/durlwidget.cc" line="1010"/>
+        <location filename="../Source/durlwidget.cc" line="1004"/>
         <source>Encrypted database writes are disabled. Therefore, bookmarks are also disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/durlwidget.cc" line="1014"/>
+        <location filename="../Source/durlwidget.cc" line="1008"/>
         <source>Bookmark</source>
         <translation>Lastermarka</translation>
     </message>
     <message>
-        <location filename="../Source/durlwidget.cc" line="341"/>
+        <location filename="../Source/durlwidget.cc" line="340"/>
         <source>Submit URL to Spot-On.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2184,52 +2227,56 @@
         <translation>Dooble Web Nabigatzailea: Akats Argibideak</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="94"/>
+        <location filename="../UI/derrorLog.ui" line="103"/>
         <source>&amp;Next</source>
         <translation>Hu&amp;rrengoa</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="113"/>
+        <location filename="../UI/derrorLog.ui" line="122"/>
         <source>&amp;Previous</source>
         <translation>A&amp;urrekoa</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="138"/>
+        <location filename="../UI/derrorLog.ui" line="147"/>
         <source>&amp;Match Case</source>
         <translation>&amp;Bereizi Hizki Larri-xeheak</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="179"/>
+        <location filename="../UI/derrorLog.ui" line="188"/>
         <source>&amp;File</source>
         <translation>&amp;Agiria</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="187"/>
+        <location filename="../UI/derrorLog.ui" line="196"/>
         <source>&amp;Edit</source>
         <translation>&amp;Editatu</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="197"/>
+        <location filename="../UI/derrorLog.ui" line="206"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="200"/>
-        <source>Ctrl+Shift+W</source>
-        <translation>Ctrl+Shift+W</translation>
+        <location filename="../UI/derrorLog.ui" line="209"/>
+        <source>Esc</source>
+        <translation type="unfinished">Irten</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="205"/>
+        <source>Ctrl+Shift+W</source>
+        <translation type="vanished">Ctrl+Shift+W</translation>
+    </message>
+    <message>
+        <location filename="../UI/derrorLog.ui" line="214"/>
         <source>Clear &amp;Log</source>
         <translation>Garbitu &amp;Oharra</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="210"/>
+        <location filename="../UI/derrorLog.ui" line="219"/>
         <source>&amp;Find</source>
         <translation>&amp;Bilatu</translation>
     </message>
     <message>
-        <location filename="../UI/derrorLog.ui" line="213"/>
+        <location filename="../UI/derrorLog.ui" line="222"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
@@ -2442,37 +2489,37 @@
         <translation>&amp;Salbuespenak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="556"/>
+        <location filename="../UI/dmainWindow.ui" line="557"/>
         <source>&amp;Edit</source>
         <translation>&amp;Editatu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="569"/>
+        <location filename="../UI/dmainWindow.ui" line="570"/>
         <source>&amp;View</source>
         <translation>&amp;Ikusi</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="573"/>
+        <location filename="../UI/dmainWindow.ui" line="574"/>
         <source>&amp;Zoom</source>
         <translation>&amp;Zooma</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="584"/>
+        <location filename="../UI/dmainWindow.ui" line="585"/>
         <source>&amp;Tool Bars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="590"/>
+        <location filename="../UI/dmainWindow.ui" line="591"/>
         <source>Si&amp;de Bars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="617"/>
+        <location filename="../UI/dmainWindow.ui" line="618"/>
         <source>&amp;Tabs</source>
         <translation>Hega&amp;tsak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="622"/>
+        <location filename="../UI/dmainWindow.ui" line="623"/>
         <source>&amp;Locations</source>
         <translation>&amp;Kokalekuak</translation>
     </message>
@@ -2481,87 +2528,87 @@
         <translation type="vanished">Gogokoenen Tresnabarra</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="684"/>
+        <location filename="../UI/dmainWindow.ui" line="686"/>
         <source>&amp;Quit</source>
         <translation>U&amp;tzi</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="887"/>
+        <location filename="../UI/dmainWindow.ui" line="889"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="692"/>
+        <location filename="../UI/dmainWindow.ui" line="694"/>
         <source>New &amp;Tab</source>
         <translation>Hegats &amp;Berria</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="647"/>
+        <location filename="../UI/dmainWindow.ui" line="649"/>
         <source>Favorites Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="667"/>
+        <location filename="../UI/dmainWindow.ui" line="669"/>
         <source>Location Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="695"/>
+        <location filename="../UI/dmainWindow.ui" line="697"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="700"/>
+        <location filename="../UI/dmainWindow.ui" line="702"/>
         <source>&amp;New Window</source>
         <translation>&amp;Leiho Berria</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="703"/>
+        <location filename="../UI/dmainWindow.ui" line="705"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="708"/>
+        <location filename="../UI/dmainWindow.ui" line="710"/>
         <source>Close &amp;Window</source>
         <translation>It&amp;xi Leihoa</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="847"/>
+        <location filename="../UI/dmainWindow.ui" line="849"/>
         <source>Status &amp;Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="852"/>
+        <location filename="../UI/dmainWindow.ui" line="854"/>
         <source>&amp;Open Directory</source>
         <translation>Ireki &amp;Zuzenbidea</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="860"/>
+        <location filename="../UI/dmainWindow.ui" line="862"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopiatu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="863"/>
+        <location filename="../UI/dmainWindow.ui" line="865"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="868"/>
+        <location filename="../UI/dmainWindow.ui" line="870"/>
         <source>&amp;Paste</source>
         <translation>It&amp;satsi</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="871"/>
+        <location filename="../UI/dmainWindow.ui" line="873"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="876"/>
+        <location filename="../UI/dmainWindow.ui" line="878"/>
         <source>Select &amp;All Content</source>
         <translation>&amp;Hautatu Eduki Denak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="879"/>
+        <location filename="../UI/dmainWindow.ui" line="881"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
@@ -2570,22 +2617,22 @@
         <translation type="obsolete">F11</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="884"/>
+        <location filename="../UI/dmainWindow.ui" line="886"/>
         <source>Close Ta&amp;b</source>
         <translation>Itxi &amp;Hegatsa</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="711"/>
+        <location filename="../UI/dmainWindow.ui" line="713"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="855"/>
+        <location filename="../UI/dmainWindow.ui" line="857"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="724"/>
+        <location filename="../UI/dmainWindow.ui" line="726"/>
         <source>&amp;About Dooble</source>
         <translation>&amp;Dooble-ri Buruz</translation>
     </message>
@@ -2622,7 +2669,7 @@
         <translation type="vanished">&amp;Gehigarriak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="631"/>
+        <location filename="../UI/dmainWindow.ui" line="633"/>
         <source>&amp;Bookmarks</source>
         <translation>Laster&amp;markak</translation>
     </message>
@@ -2631,118 +2678,128 @@
         <translation type="vanished">Kokaleku Tresnabarra</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="687"/>
+        <location filename="../UI/dmainWindow.ui" line="689"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="716"/>
+        <location filename="../UI/dmainWindow.ui" line="718"/>
         <source>Open UR&amp;L</source>
         <translation>Ireki U&amp;RL-a</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="719"/>
+        <location filename="../UI/dmainWindow.ui" line="721"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="729"/>
+        <location filename="../UI/dmainWindow.ui" line="731"/>
         <source>&amp;Save Page</source>
         <translation>&amp;Gorde Orrialdea</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="732"/>
+        <location filename="../UI/dmainWindow.ui" line="734"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="737"/>
+        <location filename="../UI/dmainWindow.ui" line="739"/>
         <source>&amp;Downloads</source>
         <translation>&amp;Jeisketak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="740"/>
+        <location filename="../UI/dmainWindow.ui" line="742"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="745"/>
+        <location filename="../UI/dmainWindow.ui" line="747"/>
         <source>&amp;Find</source>
         <translation>&amp;Bilatu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="748"/>
+        <location filename="../UI/dmainWindow.ui" line="750"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="753"/>
+        <location filename="../UI/dmainWindow.ui" line="755"/>
         <source>&amp;Reload</source>
         <translation>&amp;Birgertatu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="756"/>
+        <location filename="../UI/dmainWindow.ui" line="758"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="761"/>
+        <location filename="../UI/dmainWindow.ui" line="763"/>
         <source>Sto&amp;p</source>
         <translation>&amp;Gelditu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="764"/>
+        <location filename="../UI/dmainWindow.ui" line="766"/>
         <source>Esc</source>
         <translation>Irten</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="772"/>
+        <location filename="../UI/dmainWindow.ui" line="774"/>
         <source>&amp;Print</source>
         <translation>&amp;Irarkitu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="775"/>
+        <location filename="../UI/dmainWindow.ui" line="777"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="780"/>
+        <location filename="../UI/dmainWindow.ui" line="782"/>
         <source>Print Pre&amp;view</source>
         <translation>Irarketa A&amp;urreikuspena</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="785"/>
+        <location filename="../UI/dmainWindow.ui" line="787"/>
         <source>Settin&amp;gs</source>
         <translation>E&amp;zarpenak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="788"/>
+        <location filename="../UI/dmainWindow.ui" line="790"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="793"/>
+        <location filename="../UI/dmainWindow.ui" line="795"/>
         <source>Page So&amp;urce</source>
         <translation>&amp;Orrialde Iturburua</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="812"/>
+        <location filename="../UI/dmainWindow.ui" line="814"/>
         <source>Ctrl+=</source>
         <translation>Ctrl+=</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="833"/>
+        <location filename="../UI/dmainWindow.ui" line="835"/>
         <source>Reset Zoo&amp;m</source>
         <translation>Berrezarri &amp;Zooma</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="922"/>
+        <location filename="../UI/dmainWindow.ui" line="924"/>
         <source>&amp;Favorites Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="930"/>
+        <location filename="../UI/dmainWindow.ui" line="932"/>
         <source>&amp;History Side Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1104"/>
+        <source>&amp;Blocked Hosts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1109"/>
+        <source>&amp;Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2750,22 +2807,22 @@
         <translation type="vanished">&amp;Egoerabarra</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1076"/>
+        <location filename="../UI/dmainWindow.ui" line="1078"/>
         <source>&amp;Clear Spot-On Shared Links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1081"/>
+        <location filename="../UI/dmainWindow.ui" line="1083"/>
         <source>New Pr&amp;ivate Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1092"/>
+        <location filename="../UI/dmainWindow.ui" line="1094"/>
         <source>Search &amp;Widget</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1097"/>
+        <location filename="../UI/dmainWindow.ui" line="1099"/>
         <source>&amp;Gridify</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2774,23 +2831,23 @@
         <translation type="obsolete">&amp;Ikusleiho Osoko Tablet Modua</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="892"/>
-        <location filename="../UI/dmainWindow.ui" line="945"/>
+        <location filename="../UI/dmainWindow.ui" line="894"/>
+        <location filename="../UI/dmainWindow.ui" line="947"/>
         <source>Coo&amp;kies</source>
         <translation>&amp;Cookieak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="895"/>
+        <location filename="../UI/dmainWindow.ui" line="897"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="906"/>
+        <location filename="../UI/dmainWindow.ui" line="908"/>
         <source>&amp;Show Hidden Files</source>
         <translation>E&amp;rakutsi Ezkutuko Agiriak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="911"/>
+        <location filename="../UI/dmainWindow.ui" line="913"/>
         <source>&amp;P2P E-Mail</source>
         <translation>&amp;P2P Post@</translation>
     </message>
@@ -2803,32 +2860,32 @@
         <translation type="vanished">&amp;Historia Albobarra</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="935"/>
+        <location filename="../UI/dmainWindow.ui" line="937"/>
         <source>&amp;Authenticate Passphrase</source>
         <translation>&amp;Egiaztatu Sar-esaldia</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="950"/>
+        <location filename="../UI/dmainWindow.ui" line="952"/>
         <source>Third-Party Frame &amp;Content</source>
         <translation>Hirugarrenen &amp;Frame Edukia</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="955"/>
+        <location filename="../UI/dmainWindow.ui" line="957"/>
         <source>JavaScript &amp;Pop-ups</source>
         <translation>JavaScript &amp;Ohar-leihoak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="975"/>
+        <location filename="../UI/dmainWindow.ui" line="977"/>
         <source>Error &amp;Information</source>
         <translation>Akats &amp;Argibideak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="978"/>
+        <location filename="../UI/dmainWindow.ui" line="980"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1034"/>
+        <location filename="../UI/dmainWindow.ui" line="1036"/>
         <source>&amp;Allowed SSL Ciphers</source>
         <translation>&amp;Ahalbidetu SSL Zifraketak</translation>
     </message>
@@ -2837,27 +2894,27 @@
         <translation type="obsolete">&amp;Kokapen Tresnabarra</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1039"/>
+        <location filename="../UI/dmainWindow.ui" line="1041"/>
         <source>&amp;Web Inspector</source>
         <translation>&amp;Web Ikertzailea</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1044"/>
+        <location filename="../UI/dmainWindow.ui" line="1046"/>
         <source>HTTP-&amp;Only Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1049"/>
+        <location filename="../UI/dmainWindow.ui" line="1051"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1060"/>
+        <location filename="../UI/dmainWindow.ui" line="1062"/>
         <source>&amp;Desktop Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1071"/>
+        <location filename="../UI/dmainWindow.ui" line="1073"/>
         <source>&amp;Home Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2866,17 +2923,17 @@
         <translation type="obsolete">JavaScript &amp;Oharleihoak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="960"/>
+        <location filename="../UI/dmainWindow.ui" line="962"/>
         <source>&amp;Refresh List</source>
         <translation>&amp;Berritu Zerrenda</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="965"/>
+        <location filename="../UI/dmainWindow.ui" line="967"/>
         <source>HTTP Re&amp;direct</source>
         <translation>H&amp;TTP Berzuzenketa</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="970"/>
+        <location filename="../UI/dmainWindow.ui" line="972"/>
         <source>DNT (Do Not &amp;Track)</source>
         <translation>EZAZT (Ez &amp;Aztarnatu)</translation>
     </message>
@@ -2889,97 +2946,97 @@
         <translation type="obsolete">Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="983"/>
+        <location filename="../UI/dmainWindow.ui" line="985"/>
         <source>&amp;Automatically-Loaded Images</source>
         <translation>&amp;Berezgaitasunez-Gertaturiko Irudiak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="988"/>
+        <location filename="../UI/dmainWindow.ui" line="990"/>
         <source>&amp;IRC Channel</source>
         <translation>&amp;IRC Bidea</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="996"/>
+        <location filename="../UI/dmainWindow.ui" line="998"/>
         <source>Offlin&amp;e</source>
         <translation>Li&amp;neaz-kanpo</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1001"/>
+        <location filename="../UI/dmainWindow.ui" line="1003"/>
         <source>Cac&amp;he</source>
         <translation>&amp;Katxea</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1006"/>
+        <location filename="../UI/dmainWindow.ui" line="1008"/>
         <source>&amp;Clear Containers</source>
         <translation>&amp;Garbitu Edukiontziak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1009"/>
+        <location filename="../UI/dmainWindow.ui" line="1011"/>
         <source>Ctrl+Shift+Del</source>
         <translation>Ctrl+Shift+Del</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1014"/>
+        <location filename="../UI/dmainWindow.ui" line="1016"/>
         <source>Always HTTP&amp;S</source>
         <translation>Betik &amp;HTTPS</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1019"/>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
         <source>Save Page as &amp;Data URI</source>
         <translation>Gorde Orrialdea &amp;Datu URI bezala</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1024"/>
+        <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>SS&amp;L Errors</source>
         <translation>SS&amp;L Akatsak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1029"/>
+        <location filename="../UI/dmainWindow.ui" line="1031"/>
         <source>HTTP Re&amp;ferrer</source>
         <translation>HTTP &amp;Xehetasunak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="940"/>
+        <location filename="../UI/dmainWindow.ui" line="942"/>
         <source>&amp;JavaScript</source>
         <translation>&amp;JavaScript</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="796"/>
+        <location filename="../UI/dmainWindow.ui" line="798"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="801"/>
+        <location filename="../UI/dmainWindow.ui" line="803"/>
         <source>&amp;My Retrieved Files</source>
         <translation>&amp;Nire Berreskuratutako Agiriak</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="804"/>
+        <location filename="../UI/dmainWindow.ui" line="806"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="817"/>
+        <location filename="../UI/dmainWindow.ui" line="819"/>
         <source>Zoom &amp;Out</source>
         <translation>Zoom &amp;Gutxitu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="820"/>
+        <location filename="../UI/dmainWindow.ui" line="822"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="828"/>
+        <location filename="../UI/dmainWindow.ui" line="830"/>
         <source>Zoom &amp;Text Only</source>
         <translation>Zooma &amp;Idazkian Bakarrik</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="836"/>
+        <location filename="../UI/dmainWindow.ui" line="838"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="809"/>
+        <location filename="../UI/dmainWindow.ui" line="811"/>
         <source>Zoom &amp;In</source>
         <translation>Zooma &amp;Handitu</translation>
     </message>
@@ -3027,47 +3084,46 @@
         <translation>It&amp;xi</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="228"/>
         <source>Ctrl+Shift+W</source>
-        <translation>Ctrl+Shift+W</translation>
+        <translation type="vanished">Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="233"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="230"/>
         <source>&amp;Print</source>
         <translation>&amp;Irarkitu</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="236"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="233"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="241"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="238"/>
         <source>Print Pre&amp;view</source>
         <translation>Irarkitu A&amp;urreikuspena</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="246"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="243"/>
         <source>&amp;Find</source>
         <translation>&amp;Bilatu</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="249"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="246"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="254"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="251"/>
         <source>Save &amp;As</source>
         <translation>Gorde &amp;Honela</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="257"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="254"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="268"/>
+        <location filename="../UI/dpageSourceWindow.ui" line="265"/>
         <source>&amp;Wrap Lines</source>
         <translation>Inguratu &amp;Lerroak</translation>
     </message>
@@ -3589,9 +3645,8 @@
         <translation>Etxeko URL-a irekiko da Etxea botoia sakatutakoan. Lehen hamahiru URL-ak irekitzeko, mesedez sakatu Etxea botoia Kontrol tekla sakatuta edukiz.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2580"/>
         <source>Show authentication information after launch.</source>
-        <translation type="unfinished">Erakutsi egiaztapen argibideak abiarazi ondoren.</translation>
+        <translation type="obsolete">Erakutsi egiaztapen argibideak abiarazi ondoren.</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="2739"/>
@@ -3769,11 +3824,6 @@
         <location filename="../UI/dsettings.ui" line="4264"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Ohartarazi edukia aldatuta duen orrialde bat itxi aurretik.</translation>
-    </message>
-    <message>
-        <location filename="../UI/dsettings.ui" line="4301"/>
-        <source>Please see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/a&gt; for descriptions.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="4361"/>
@@ -4060,6 +4110,11 @@
         <translation>Ezgaitu enkriptaturiko datubase idazketa guztiak.</translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="2580"/>
+        <source>Show authentication prompt after launch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dsettings.ui" line="2658"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
@@ -4123,6 +4178,11 @@
         <location filename="../UI/dsettings.ui" line="4075"/>
         <source>approach.</source>
         <translation>hurbila.</translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="4301"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please read &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/span&gt;&lt;/a&gt; for descriptions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Speedy network protocol.</source>
