@@ -895,6 +895,12 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
 
   if(this != reply->parent())
     reply->setParent(this);
+
+  int interval = dooble::s_settings.value
+    ("network_reply_object_timed_delete_interval_ms", 0).toInt();
+
+  if(interval > 0)
+    QTimer::singleShot(interval, reply, SLOT(deleteLater(void)));
 }
 
 void dnetworkaccessmanager::setLinkClicked(const QUrl &url)

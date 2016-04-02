@@ -624,6 +624,7 @@
     </property>
     <addaction name="actionMy_Retrieved_Files"/>
     <addaction name="separator"/>
+    <addaction name="action_Home"/>
     <addaction name="action_IRC_Channel"/>
     <addaction name="actionP2P_Email"/>
    </widget>
@@ -1101,6 +1102,11 @@
   <action name="action_Blocked_Hosts">
    <property name="text">
     <string>&amp;Blocked Hosts</string>
+   </property>
+  </action>
+  <action name="action_Home">
+   <property name="text">
+    <string>&amp;Home</string>
    </property>
   </action>
  </widget>

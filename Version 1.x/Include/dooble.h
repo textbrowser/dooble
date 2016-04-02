@@ -249,6 +249,7 @@ class dooble: public QMainWindow
   void slotNewWindow(void);
   void slotObjectDestroyed(QObject *object);
   void slotOffline(bool state);
+  void slotOpenHome(void);
   void slotOpenDirectory(void);
   void slotOpenIrcChannel(void);
   void slotOpenLinkInNewTab(const QUrl &url);

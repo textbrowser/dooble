@@ -1493,6 +1493,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotOpenMyRetrievedFiles(void)));
   connect(ui.actionP2P_Email, SIGNAL(triggered(void)), this,
 	  SLOT(slotOpenP2PEmail(void)));
+  connect(ui.action_Home, SIGNAL(triggered(void)), this,
+	  SLOT(slotOpenHome(void)));
   connect(ui.action_IRC_Channel, SIGNAL(triggered(void)), this,
 	  SLOT(slotOpenIrcChannel(void)));
   connect(ui.actionCopy, SIGNAL(triggered(void)), this,
@@ -2170,6 +2172,8 @@ void dooble::slotSetIcons(void)
 	   ("mainWindow/actionApplication_Cookies").toString()));
   ui.actionP2P_Email->setIcon
     (QIcon(settings.value("mainWindow/actionP2P_Email").toString()));
+  ui.action_Home->setIcon
+    (QIcon(settings.value("mainWindow/homeToolButton").toString()));
   ui.action_IRC_Channel->setIcon
     (QIcon(settings.value("windowIcon").toString()));
   ui.action_Authenticate->setIcon
@@ -8036,4 +8040,34 @@ void dooble::slotSaveBlockedHosts(void)
   file.close();
   dmisc::initializeBlockedHosts();
   QApplication::restoreOverrideCursor();
+}
+
+void dooble::slotOpenHome(void)
+{
+  if(qobject_cast<ddesktopwidget *> (ui.tabWidget->currentWidget()))
+    {
+      if(m_desktopWidget)
+	{
+	  QUrl url(QUrl::fromLocalFile(s_homePath));
+
+	  url = QUrl::fromEncoded
+	    (url.toEncoded(QUrl::StripTrailingSlash));
+	  m_desktopWidget->showFileManagerWindow(url);
+	}
+    }
+  else
+    {
+      dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
+
+      if(p && p->isModified() && !warnAboutLeavingModifiedTab())
+	return;
+
+      QUrl url(QUrl::fromLocalFile(s_homePath));
+
+      url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
+      loadPage(url);
+
+      if(ui.tabWidget->currentWidget())
+	ui.tabWidget->currentWidget()->setFocus();
+    }
 }
