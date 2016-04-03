@@ -170,8 +170,6 @@ Remaining Items
 9.    Provide a means of configuring a DNS proxy. The proxy
       shall only be used during the retrieval of a site's IP address.
 10.   Configurable, site-based, HTTP headers.
-11.   Implement as many items as possible from
-      https://trac.webkit.org/wiki/Fingerprinting.
 12.   The URL widget utilizes too much memory. Use the model-view
       concept.
 13.   Review QWebSettings with respect to recommended fonts.
@@ -190,3 +188,5 @@ Removed Items
      this problem when using KDE's default style on KDE.
 4.   The GTK+ style distorts pulldown menus on X11 systems.
 5.   QUrl::StripTrailingSlash is flawed in Qt 5.2.x. It's not flawed.
+6.   Implement as many items as possible from
+     https://trac.webkit.org/wiki/Fingerprinting.
