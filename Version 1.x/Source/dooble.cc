@@ -590,6 +590,17 @@ int main(int argc, char *argv[])
     dooble::s_settings[settings.allKeys().at(i)] =
       settings.value(settings.allKeys().at(i));
 
+  if(dooble::s_settings.value("settingsWindow/jit", false).toBool())
+    {
+      qputenv("QT_ENABLE_REGEXP_JIT", "1");
+      qputenv("QV4_FORCE_INTERPRETER", "0");
+    }
+  else
+    {
+      qputenv("QT_ENABLE_REGEXP_JIT", "0");
+      qputenv("QV4_FORCE_INTERPRETER", "1");
+    }
+
   dmisc::prepareProxyIgnoreLists();
 
   /*

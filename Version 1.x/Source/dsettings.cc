@@ -1320,6 +1320,8 @@ void dsettings::exec(dooble *parent)
     (qBound(0, dooble::s_settings.
 	    value("settingsWindow/javascriptStagnantScripts",
 		  2).toInt(), 2));
+  ui.jit->setChecked(dooble::s_settings.value("settingsWindow/jit", false).
+		     toBool());
 
   if(dooble::s_settings.contains("settingsWindow/"
 				 "applicationsTableColumnsState"))
@@ -1927,6 +1929,18 @@ void dsettings::slotClicked(QAbstractButton *button)
 	 ui.jsStagnantScripts->currentIndex());
       settings.setValue("settingsWindow/record_file_suffixes",
 			ui.record_file_suffixes->isChecked());
+      settings.setValue("settingsWindow/jit", ui.jit->isChecked());
+
+      if(ui.jit->isChecked())
+	{
+	  qputenv("QT_ENABLE_REGEXP_JIT", "1");
+	  qputenv("QV4_FORCE_INTERPRETER", "0");
+	}
+      else
+	{
+	  qputenv("QT_ENABLE_REGEXP_JIT", "0");
+	  qputenv("QV4_FORCE_INTERPRETER", "1");
+	}
 
       if(dfilemanager::tableModel)
 	dfilemanager::tableModel->enable
