@@ -96,6 +96,7 @@ durlcompleter::durlcompleter(QWidget *parent):QCompleter(parent)
   m_tableView = new durlcompleterview(qobject_cast<QLineEdit *> (parent));
   m_tableView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+  m_tableView->setShowGrid(false);
   m_tableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   m_tableView->verticalHeader()->setVisible(false);
   m_tableView->horizontalHeader()->setVisible(false);
