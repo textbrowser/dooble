@@ -170,11 +170,11 @@ Remaining Items
 9.    Provide a means of configuring a DNS proxy. The proxy
       shall only be used during the retrieval of a site's IP address.
 10.   Configurable, site-based, HTTP headers.
-12.   The URL widget utilizes too much memory. Use the model-view
+11.   The URL widget utilizes too much memory. Use the model-view
       concept.
-13.   Review QWebSettings with respect to recommended fonts.
-14.   Delayed downloads are not reflected.
-15.   Allow regular expressions in blocked hosts.
+12.   Review QWebSettings with respect to recommended fonts.
+13.   Delayed downloads are not reflected.
+14.   Allow regular expressions in blocked hosts.
 
 Removed Items
 
