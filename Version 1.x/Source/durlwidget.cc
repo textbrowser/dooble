@@ -367,8 +367,7 @@ durlwidget::durlwidget(QWidget *parent):QLineEdit(parent)
   int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   setStyleSheet
-    (QString("QLineEdit {padding-right: %1px; padding-left: %2px; "
-	     "selection-background-color: darkgray;}").
+    (QString("QLineEdit {padding-right: %1px; padding-left: %2px;}").
      arg(goToolButton->sizeHint().width() +
 	 m_fakePulldownMenu->sizeHint().width() + frameWidth + 5).
      arg(m_iconToolButton->sizeHint().width() +
