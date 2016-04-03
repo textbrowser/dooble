@@ -172,9 +172,8 @@ Remaining Items
 10.   Configurable, site-based, HTTP headers.
 11.   The URL widget utilizes too much memory. Use the model-view
       concept.
-12.   Review QWebSettings with respect to recommended fonts.
-13.   Delayed downloads are not reflected.
-14.   Allow regular expressions in blocked hosts.
+12.   Delayed downloads are not reflected.
+13.   Allow regular expressions in blocked hosts.
 
 Removed Items
 
@@ -190,3 +189,4 @@ Removed Items
 5.   QUrl::StripTrailingSlash is flawed in Qt 5.2.x. It's not flawed.
 6.   Implement as many items as possible from
      https://trac.webkit.org/wiki/Fingerprinting.
+7.   Review QWebSettings with respect to recommended fonts.
