@@ -2046,7 +2046,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 	 ui.webPluginsCheckBox->isChecked());
       QWebSettings::globalSettings()->setFontFamily
 	(QWebSettings::StandardFont,
-	 ui.defaultFontSizeCombinationBox->currentText());
+	 ui.defaultFontCombinationBox->currentFont().family());
       QWebSettings::globalSettings()->setFontSize
 	(QWebSettings::DefaultFontSize,
 	 ui.defaultFontSizeCombinationBox->currentText().toInt());

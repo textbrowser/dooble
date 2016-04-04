@@ -1978,7 +1978,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 	 ui.automaticallyLoadImagesCheckBox->isChecked());
       QWebEngineSettings::globalSettings()->setFontFamily
 	(QWebEngineSettings::StandardFont,
-	 ui.defaultFontSizeCombinationBox->currentText());
+	 ui.defaultFontCombinationBox->currentFont().family());
       QWebEngineSettings::globalSettings()->setFontSize
 	(QWebEngineSettings::DefaultFontSize,
 	 ui.defaultFontSizeCombinationBox->currentText().toInt());
