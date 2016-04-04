@@ -92,6 +92,11 @@ QVariant dfilesystemmodel::data(const QModelIndex &index, int role) const
 	    return QVariant(dmisc::formattedSize(fileInfo(index).size()));
 	  else
 	    return QVariant();
+	case 3:
+	  if(role == Qt::DisplayRole)
+	    return QVariant(fileInfo(index).lastModified());
+	  else
+	    return QVariant();
 	case 4:
 	  if(role == Qt::DisplayRole)
 	    return QVariant(fileInfo(index).lastRead());
@@ -111,9 +116,9 @@ QVariant dfilesystemmodel::data(const QModelIndex &index, int role) const
 	  if(role == Qt::DisplayRole)
 	    {
 	      QString p("");
-	      QFile::Permissions permissions(fileInfo(index).permissions());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+	      QFile::Permissions permissions(fileInfo(index).permissions());
 	      static QString s_array[] = {"r", "w", "x",
 					  "r", "w", "x",
 					  "r", "w", "x"};
@@ -128,6 +133,7 @@ QVariant dfilesystemmodel::data(const QModelIndex &index, int role) const
 		else
 		  p += "-";
 #elif defined(Q_OS_WIN32)
+	      QFile::Permissions permissions(fileInfo(index).permissions());
 	      static QString s_array[] = {"r", "w", "x",
 					  "r", "w", "x",
 					  "r", "w", "x"};
