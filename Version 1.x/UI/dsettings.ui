@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>115</width>
+         <width>110</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,8 +380,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>540</width>
-               <height>499</height>
+               <width>546</width>
+               <height>487</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1235,8 +1235,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>350</width>
-               <height>550</height>
+               <width>312</width>
+               <height>536</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1551,8 +1551,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>700</width>
-               <height>882</height>
+               <width>608</width>
+               <height>861</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2543,8 +2543,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>530</width>
-               <height>726</height>
+               <width>504</width>
+               <height>697</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3085,9 +3085,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-761</y>
-               <width>725</width>
-               <height>1320</height>
+               <y>-529</y>
+               <width>728</width>
+               <height>1295</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -3888,7 +3888,7 @@
                 <item>
                  <widget class="QCheckBox" name="jit">
                   <property name="text">
-                   <string>Just-in-time compiler.</string>
+                   <string>Just-in-time Compiler</string>
                   </property>
                   <property name="checked">
                    <bool>false</bool>
