@@ -327,10 +327,10 @@ void dview::slotCustomContextMenuRequested(const QPoint &pos)
 	  menu.addSeparator();
 	  menu.addAction(tr("Open Link in New &Tab"),
 			 this, SLOT(slotOpenLinkInNewTab(void)));
-	  menu.addAction(tr("Open Link in &New Window"),
+	  menu.addAction(tr("Open Link in &New Window..."),
 			 this, SLOT(slotOpenLinkInNewWindow(void)));
 	  menu.addSeparator();
-	  menu.addAction(tr("S&ave Link"),
+	  menu.addAction(tr("S&ave Link..."),
 			 this, SLOT(slotSaveLink(void)));
 	}
     }
@@ -345,13 +345,13 @@ void dview::slotCustomContextMenuRequested(const QPoint &pos)
       menu.addSeparator();
       menu.addAction(tr("Copy &Image Location"),
 		     this, SLOT(slotCopyImageLocation(void)));
-      menu.addAction(tr("Sa&ve Image"),
+      menu.addAction(tr("Sa&ve Image..."),
 		     this, SLOT(slotSaveImage(void)));
       menu.addAction(tr("View I&mage"),
 		     this, SLOT(slotViewImage(void)));
       menu.addAction(tr("View Ima&ge in New Tab"),
 		     this, SLOT(slotOpenImageInNewTab(void)));
-      menu.addAction(tr("View Imag&e in New Window"),
+      menu.addAction(tr("View Imag&e in New Window..."),
 		     this, SLOT(slotOpenImageInNewWindow(void)));
     }
 
@@ -386,18 +386,18 @@ void dview::slotCustomContextMenuRequested(const QPoint &pos)
 			  SLOT(slotStop(void)));
   action->setEnabled(!m_pageLoaded);
   menu.addSeparator();
-  menu.addAction(tr("&Print Frame"),
+  menu.addAction(tr("&Print Frame..."),
 		 this,
 		 SLOT(slotPrintCurrentFrame(void)));
   menu.addSeparator();
 
   if(view->page()->mainFrame() !=
      view->page()->currentFrame())
-    menu.addAction(tr("View Frame S&ource"),
+    menu.addAction(tr("View Frame S&ource..."),
 		   this,
 		   SLOT(slotViewPageSource(void)));
   else
-    menu.addAction(tr("View Page S&ource"),
+    menu.addAction(tr("View Page S&ource..."),
 		   this,
 		   SLOT(slotViewPageSource(void)));
 
