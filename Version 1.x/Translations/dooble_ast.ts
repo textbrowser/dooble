@@ -99,11 +99,15 @@
     </message>
     <message>
         <source>&amp;Browse</source>
-        <translation>&amp;Restolar</translation>
+        <translation type="vanished">&amp;Restolar</translation>
     </message>
     <message>
         <source>Comment</source>
         <translation>Comentariu</translation>
+    </message>
+    <message>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -210,14 +214,6 @@
         <translation type="unfinished">&amp;Ficheru</translation>
     </message>
     <message>
-        <source>&amp;Export to HTML</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Import from HTML</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+Shift+W</source>
         <translation type="obsolete">Ctrl+Shift+W</translation>
     </message>
@@ -227,6 +223,14 @@
     </message>
     <message>
         <source>&amp;Spot-On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export to HTML...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import from HTML...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -347,10 +351,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show &amp;Bookmarks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -388,6 +388,10 @@
     </message>
     <message>
         <source>Spot-On support is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Bookmarks...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -879,10 +883,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open in &amp;New Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 Item(s) / %2 Item(s) Selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -936,6 +936,10 @@
     </message>
     <message>
         <source>Spot-On support is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1024,10 +1028,6 @@
         <translation>Dooble Desktop</translation>
     </message>
     <message>
-        <source>Show &amp;History</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dooble Web Browser: Save As</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1108,14 +1108,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View %1 &amp;Cookies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Site &amp;Cookies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1137,6 +1129,18 @@
     </message>
     <message>
         <source>Search Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;History...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View %1 &amp;Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1557,7 +1561,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Open Link in &amp;New Window</source>
-        <translation>Abrir Enllaz en &amp;Nueva Ventana</translation>
+        <translation type="vanished">Abrir Enllaz en &amp;Nueva Ventana</translation>
     </message>
     <message>
         <source>&amp;Save Link</source>
@@ -1569,7 +1573,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Sa&amp;ve Image</source>
-        <translation>Guardar &amp;Imaxe</translation>
+        <translation type="vanished">Guardar &amp;Imaxe</translation>
     </message>
     <message>
         <source>View I&amp;mage</source>
@@ -1608,15 +1612,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>S&amp;ave Link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View Ima&amp;ge in New Tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Imag&amp;e in New Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1624,20 +1620,36 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Para&amp;r</translation>
     </message>
     <message>
-        <source>&amp;Print Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Frame S&amp;ource</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Page S&amp;ource</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>(Untitled)</source>
         <translation type="unfinished">Tab</translation>
+    </message>
+    <message>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sa&amp;ve Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Imag&amp;e in New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print Frame...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Frame S&amp;ource...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Page S&amp;ource...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1918,7 +1930,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;New Window</source>
-        <translation>&amp;Nueva Ventana</translation>
+        <translation type="vanished">&amp;Nueva Ventana</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
@@ -1950,11 +1962,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;About Dooble</source>
-        <translation>&amp;Tocante a Dooble</translation>
+        <translation type="vanished">&amp;Tocante a Dooble</translation>
     </message>
     <message>
         <source>&amp;Save Page</source>
-        <translation>&amp;Guardar la páxina</translation>
+        <translation type="vanished">&amp;Guardar la páxina</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
@@ -1962,7 +1974,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Downloads</source>
-        <translation>&amp;Descargues</translation>
+        <translation type="vanished">&amp;Descargues</translation>
     </message>
     <message>
         <source>Ctrl+D</source>
@@ -1994,7 +2006,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;prentar</translation>
+        <translation type="vanished">Im&amp;prentar</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
@@ -2010,11 +2022,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation>&amp;Vista previa d&apos;impresión</translation>
+        <translation type="vanished">&amp;Vista previa d&apos;impresión</translation>
     </message>
     <message>
         <source>Settin&amp;gs</source>
-        <translation>Confi&amp;guración</translation>
+        <translation type="vanished">Confi&amp;guración</translation>
     </message>
     <message>
         <source>Ctrl+G</source>
@@ -2030,7 +2042,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Page So&amp;urce</source>
-        <translation>Fonte Páxi&amp;na</translation>
+        <translation type="vanished">Fonte Páxi&amp;na</translation>
     </message>
     <message>
         <source>Reset Zoo&amp;m</source>
@@ -2117,10 +2129,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Open Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2145,10 +2153,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Coo&amp;kies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2161,19 +2165,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Authenticate Passphrase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;JavaScript</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Refresh List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HTTP Re&amp;direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2197,35 +2189,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Third-Party Frame &amp;Content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DNT (Do Not &amp;Track)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Automatically-Loaded Images</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;IRC Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offlin&amp;e</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cac&amp;he</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Clear Containers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Always HTTP&amp;S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2237,35 +2205,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SS&amp;L Errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HTTP Re&amp;ferrer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>JavaScript &amp;Pop-ups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Allowed SSL Ciphers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error &amp;Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Web Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HTTP-&amp;Only Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2329,11 +2273,111 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Blocked Hosts</source>
+        <source>&amp;Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Home</source>
+        <source>&amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About Dooble...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save Page...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Downloads...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settin&amp;gs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page So&amp;urce...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open Directory...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coo&amp;kies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Authenticate Passphrase...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;JavaScript...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third-Party Frame &amp;Content...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JavaScript &amp;Pop-ups...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP Re&amp;direct...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DNT (Do Not &amp;Track)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error &amp;Information...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Automatically-Loaded Images...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cac&amp;he...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear Containers...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always HTTP&amp;S...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SS&amp;L Errors...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP Re&amp;ferrer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Allowed SSL Ciphers...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP-&amp;Only Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Blocked Hosts...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2369,7 +2413,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;prentar</translation>
+        <translation type="vanished">Im&amp;prentar</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
@@ -2377,7 +2421,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation>&amp;Vista previa d&apos;impresión</translation>
+        <translation type="vanished">&amp;Vista previa d&apos;impresión</translation>
     </message>
     <message>
         <source>&amp;Find</source>
@@ -2412,7 +2456,15 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ctrl+Shift+W</translation>
     </message>
     <message>
-        <source>Save &amp;As</source>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2736,7 +2788,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Browse</source>
-        <translation type="unfinished">&amp;Restolar</translation>
+        <translation type="obsolete">&amp;Restolar</translation>
     </message>
     <message>
         <source>My Retrieved Files</source>
@@ -2869,10 +2921,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>24</source>
         <translation type="unfinished">24</translation>
-    </message>
-    <message>
-        <source>&amp;Exceptions</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>JavaScript</source>
@@ -3463,7 +3511,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Just-in-time compiler.</source>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just-in-time Compiler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

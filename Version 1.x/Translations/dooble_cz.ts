@@ -244,8 +244,12 @@
     </message>
     <message>
         <location filename="../UI/dapplicationPropertiesWindow.ui" line="82"/>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Browse</source>
-        <translation>&amp;Prohlížet</translation>
+        <translation type="vanished">&amp;Prohlížet</translation>
     </message>
     <message>
         <location filename="../UI/dapplicationPropertiesWindow.ui" line="91"/>
@@ -374,14 +378,12 @@
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="279"/>
         <source>&amp;Export to HTML</source>
-        <translation>&amp;Vyvést do HTML</translation>
+        <translation type="vanished">&amp;Vyvést do HTML</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="284"/>
         <source>&amp;Import from HTML</source>
-        <translation>&amp;Zavést z HTML</translation>
+        <translation type="vanished">&amp;Zavést z HTML</translation>
     </message>
     <message>
         <source>Ctrl+Shift+W</source>
@@ -396,6 +398,16 @@
         <location filename="../UI/dbookmarksWindow.ui" line="172"/>
         <source>Press the Enter key to retain the location.</source>
         <translation>Stiskněte klávesu Enter pro uchování umístění.</translation>
+    </message>
+    <message>
+        <location filename="../UI/dbookmarksWindow.ui" line="279"/>
+        <source>&amp;Export to HTML...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dbookmarksWindow.ui" line="284"/>
+        <source>&amp;Import from HTML...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dbookmarksWindow.ui" line="289"/>
@@ -574,8 +586,12 @@
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="2071"/>
+        <source>Show &amp;Bookmarks...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show &amp;Bookmarks</source>
-        <translation>Ukázat &amp;záložky</translation>
+        <translation type="vanished">Ukázat &amp;záložky</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="2680"/>
@@ -1259,6 +1275,11 @@
         <translation type="unfinished">Podpora pro Spot-On není dostupná.</translation>
     </message>
     <message>
+        <location filename="../Source/dhistory.cc" line="744"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>dhistory::dhistory(): dooble::s_spoton is 0.</source>
         <translation type="obsolete">dhistory::dhistory(): dooble::s_spoton je 0.</translation>
     </message>
@@ -1299,9 +1320,8 @@
         <translation>Otevřít v nové &amp;kartě</translation>
     </message>
     <message>
-        <location filename="../Source/dhistory.cc" line="744"/>
         <source>Open in &amp;New Window</source>
-        <translation>Otevřít v n&amp;ovém okně</translation>
+        <translation type="vanished">Otevřít v n&amp;ovém okně</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="755"/>
@@ -1383,9 +1403,8 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="1619"/>
         <source>Show &amp;History</source>
-        <translation>Ukázat &amp;průběh</translation>
+        <translation type="vanished">Ukázat &amp;průběh</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2389"/>
@@ -1427,6 +1446,11 @@
     <message>
         <location filename="../Source/dooble.cc" line="1163"/>
         <source>Search Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble.cc" line="1619"/>
+        <source>Show &amp;History...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1511,6 +1535,17 @@
         <translation>Jste si jistý, že chcete opustit změněné stránky?</translation>
     </message>
     <message>
+        <location filename="../Source/dooble.cc" line="7482"/>
+        <source>View %1 &amp;Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble.cc" line="7485"/>
+        <location filename="../Source/dooble.cc" line="7489"/>
+        <source>View Site &amp;Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
         <translation type="obsolete">dooble::slotRefreshPlugins(): Odstranit proces %1.</translation>
     </message>
@@ -1537,15 +1572,12 @@
         <translation>Heslo nebylo připraveno. Navštivte, prosím, panel s trezorem v okně s nastavením a zvolte heslo. Jakmile je heslo vybráno, budou záložky, koláčky a všechny ostatní podstatné informace dostupné v budoucích sezeních. Tuto připomínku můžete zakázat v panelu s trezorem.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7482"/>
         <source>View %1 &amp;Cookies</source>
-        <translation>Zobrazit &amp;koláčky %1</translation>
+        <translation type="vanished">Zobrazit &amp;koláčky %1</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7485"/>
-        <location filename="../Source/dooble.cc" line="7489"/>
         <source>View Site &amp;Cookies</source>
-        <translation>Zobrazit &amp;koláčky stránek</translation>
+        <translation type="vanished">Zobrazit &amp;koláčky stránek</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="7849"/>
@@ -2134,13 +2166,47 @@ p, li { white-space: pre-wrap; }
         <translation>Otevřít odkaz v nové &amp;kartě</translation>
     </message>
     <message>
+        <location filename="../Source/dview.cc" line="330"/>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="333"/>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="348"/>
+        <source>Sa&amp;ve Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="354"/>
+        <source>View Imag&amp;e in New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="389"/>
+        <source>&amp;Print Frame...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="396"/>
+        <source>View Frame S&amp;ource...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="400"/>
+        <source>View Page S&amp;ource...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open Link in New &amp;Window</source>
         <translation type="obsolete">Otevřít odkaz v novém &amp;okně</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="330"/>
         <source>Open Link in &amp;New Window</source>
-        <translation>Otevřít odkaz v &amp;novém okně</translation>
+        <translation type="vanished">Otevřít odkaz v &amp;novém okně</translation>
     </message>
     <message>
         <source>&amp;Save Link</source>
@@ -2172,14 +2238,12 @@ p, li { white-space: pre-wrap; }
         <translation>Kopírovat adresu &amp;e-mailu</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="333"/>
         <source>S&amp;ave Link</source>
-        <translation>&amp;Uložit odkaz</translation>
+        <translation type="vanished">&amp;Uložit odkaz</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="348"/>
         <source>Sa&amp;ve Image</source>
-        <translation>Ul&amp;ožit obrázek</translation>
+        <translation type="vanished">Ul&amp;ožit obrázek</translation>
     </message>
     <message>
         <location filename="../Source/dview.cc" line="350"/>
@@ -2192,9 +2256,8 @@ p, li { white-space: pre-wrap; }
         <translation>Zobrazit obrázek v nové &amp;kartě</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="354"/>
         <source>View Imag&amp;e in New Window</source>
-        <translation>Zobrazit obrázek v novém &amp;okně</translation>
+        <translation type="vanished">Zobrazit obrázek v novém &amp;okně</translation>
     </message>
     <message>
         <location filename="../Source/dview.cc" line="384"/>
@@ -2202,19 +2265,16 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Zastavit</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="389"/>
         <source>&amp;Print Frame</source>
-        <translation>&amp;Vytisknout rámeček</translation>
+        <translation type="vanished">&amp;Vytisknout rámeček</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="396"/>
         <source>View Frame S&amp;ource</source>
-        <translation>Zobrazit z&amp;droj rámečku</translation>
+        <translation type="vanished">Zobrazit z&amp;droj rámečku</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="400"/>
         <source>View Page S&amp;ource</source>
-        <translation>Zobrazit &amp;zdroj stránky</translation>
+        <translation type="vanished">Zobrazit &amp;zdroj stránky</translation>
     </message>
     <message>
         <location filename="../Source/dview.cc" line="694"/>
@@ -2588,10 +2648,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Režim pro tablet na &amp;celou obrazovku</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="894"/>
-        <location filename="../UI/dmainWindow.ui" line="947"/>
         <source>Coo&amp;kies</source>
-        <translation>&amp;Koláčky</translation>
+        <translation type="vanished">&amp;Koláčky</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="897"/>
@@ -2617,14 +2675,12 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">&amp;Historie</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="937"/>
         <source>&amp;Authenticate Passphrase</source>
-        <translation>&amp;Potvrdit heslo</translation>
+        <translation type="vanished">&amp;Potvrdit heslo</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="952"/>
         <source>Third-Party Frame &amp;Content</source>
-        <translation>&amp;Obsah rámečku od třetích stran</translation>
+        <translation type="vanished">&amp;Obsah rámečku od třetích stran</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="962"/>
@@ -2632,14 +2688,12 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Obnovit seznam</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="967"/>
         <source>HTTP Re&amp;direct</source>
-        <translation>&amp;Přesměrování HTTP</translation>
+        <translation type="vanished">&amp;Přesměrování HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="977"/>
         <source>Error &amp;Information</source>
-        <translation>&amp;Informace o chybě</translation>
+        <translation type="vanished">&amp;Informace o chybě</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="980"/>
@@ -2647,14 +2701,12 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1003"/>
         <source>Cac&amp;he</source>
-        <translation>Vyrovnávací &amp;paměť</translation>
+        <translation type="vanished">Vyrovnávací &amp;paměť</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1008"/>
         <source>&amp;Clear Containers</source>
-        <translation>&amp;Smazat kontejnery</translation>
+        <translation type="vanished">&amp;Smazat kontejnery</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1011"/>
@@ -2662,9 +2714,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+Shift+Del</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1016"/>
         <source>Always HTTP&amp;S</source>
-        <translation>Vždy HTTP&amp;S</translation>
+        <translation type="vanished">Vždy HTTP&amp;S</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1021"/>
@@ -2672,19 +2723,16 @@ p, li { white-space: pre-wrap; }
         <translation>Uložit stránku jako &amp;datové URI</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>SS&amp;L Errors</source>
-        <translation>Chyby SS&amp;L</translation>
+        <translation type="vanished">Chyby SS&amp;L</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1031"/>
         <source>HTTP Re&amp;ferrer</source>
-        <translation>&amp;Odkazování HTTP</translation>
+        <translation type="vanished">&amp;Odkazování HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1036"/>
         <source>&amp;Allowed SSL Ciphers</source>
-        <translation>&amp;Povolená šifrování SSL</translation>
+        <translation type="vanished">&amp;Povolená šifrování SSL</translation>
     </message>
     <message>
         <source>&amp;Location Toolbar</source>
@@ -2696,9 +2744,8 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Dohlížitel na web</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1046"/>
         <source>HTTP-&amp;Only Cookies</source>
-        <translation>Koláčky &amp;pouze-HTTP</translation>
+        <translation type="vanished">Koláčky &amp;pouze-HTTP</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1051"/>
@@ -2716,9 +2763,8 @@ p, li { white-space: pre-wrap; }
         <translation>Tlačítko pro &amp;domů</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="942"/>
         <source>&amp;JavaScript</source>
-        <translation>&amp;JavaScript</translation>
+        <translation type="vanished">&amp;JavaScript</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="557"/>
@@ -2786,9 +2832,53 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="702"/>
+        <location filename="../UI/dmainWindow.ui" line="937"/>
+        <source>&amp;Authenticate Passphrase...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="942"/>
+        <source>&amp;JavaScript...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="952"/>
+        <source>Third-Party Frame &amp;Content...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="957"/>
+        <source>JavaScript &amp;Pop-ups...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="967"/>
+        <source>HTTP Re&amp;direct...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="972"/>
+        <source>DNT (Do Not &amp;Track)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="977"/>
+        <source>Error &amp;Information...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="985"/>
+        <source>&amp;Automatically-Loaded Images...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1104"/>
+        <source>&amp;Blocked Hosts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;New Window</source>
-        <translation>&amp;Nové okno</translation>
+        <translation type="vanished">&amp;Nové okno</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="705"/>
@@ -2801,14 +2891,48 @@ p, li { white-space: pre-wrap; }
         <translation>Zavřít &amp;okno</translation>
     </message>
     <message>
+        <location filename="../UI/dmainWindow.ui" line="726"/>
+        <source>&amp;About Dooble...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="731"/>
+        <source>&amp;Save Page...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="739"/>
+        <source>&amp;Downloads...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="774"/>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="782"/>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="787"/>
+        <source>Settin&amp;gs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="795"/>
+        <source>Page So&amp;urce...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dmainWindow.ui" line="849"/>
         <source>Status &amp;Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="854"/>
         <source>&amp;Open Directory</source>
-        <translation>&amp;Otevřít adresář</translation>
+        <translation type="vanished">&amp;Otevřít adresář</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="862"/>
@@ -2841,11 +2965,6 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1104"/>
-        <source>&amp;Blocked Hosts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UI/dmainWindow.ui" line="1109"/>
         <source>&amp;Home</source>
         <translation type="unfinished"></translation>
@@ -2865,6 +2984,11 @@ p, li { white-space: pre-wrap; }
         <translation>Zavřít &amp;kartu</translation>
     </message>
     <message>
+        <location filename="../UI/dmainWindow.ui" line="702"/>
+        <source>&amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dmainWindow.ui" line="713"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Shift+W</translation>
@@ -2879,9 +3003,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="726"/>
         <source>&amp;About Dooble</source>
-        <translation>&amp;O programu Dooble</translation>
+        <translation type="vanished">&amp;O programu Dooble</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="63"/>
@@ -2923,9 +3046,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="731"/>
         <source>&amp;Save Page</source>
-        <translation>&amp;Uložit stránku</translation>
+        <translation type="vanished">&amp;Uložit stránku</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="734"/>
@@ -2933,9 +3055,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="739"/>
         <source>&amp;Downloads</source>
-        <translation>&amp;Stahování</translation>
+        <translation type="vanished">&amp;Stahování</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="742"/>
@@ -2973,14 +3094,24 @@ p, li { white-space: pre-wrap; }
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="774"/>
         <source>&amp;Print</source>
-        <translation>&amp;Tisk</translation>
+        <translation type="vanished">&amp;Tisk</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="777"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="854"/>
+        <source>&amp;Open Directory...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="894"/>
+        <location filename="../UI/dmainWindow.ui" line="947"/>
+        <source>Coo&amp;kies...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="924"/>
@@ -2993,19 +3124,16 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="957"/>
         <source>JavaScript &amp;Pop-ups</source>
-        <translation>V&amp;yskakovací okna JavaScriptu</translation>
+        <translation type="vanished">V&amp;yskakovací okna JavaScriptu</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="972"/>
         <source>DNT (Do Not &amp;Track)</source>
-        <translation>DNT (&amp;Nesledovat)</translation>
+        <translation type="vanished">DNT (&amp;Nesledovat)</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="985"/>
         <source>&amp;Automatically-Loaded Images</source>
-        <translation>&amp;Automaticky nahrávané obrázky</translation>
+        <translation type="vanished">&amp;Automaticky nahrávané obrázky</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="990"/>
@@ -3016,6 +3144,41 @@ p, li { white-space: pre-wrap; }
         <location filename="../UI/dmainWindow.ui" line="998"/>
         <source>Offlin&amp;e</source>
         <translation>&amp;Nepřipojený</translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1003"/>
+        <source>Cac&amp;he...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1008"/>
+        <source>&amp;Clear Containers...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1016"/>
+        <source>Always HTTP&amp;S...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1026"/>
+        <source>SS&amp;L Errors...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1031"/>
+        <source>HTTP Re&amp;ferrer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1036"/>
+        <source>&amp;Allowed SSL Ciphers...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1046"/>
+        <source>HTTP-&amp;Only Cookies...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1078"/>
@@ -3046,14 +3209,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Hi! - Instant Messenger</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="782"/>
         <source>Print Pre&amp;view</source>
-        <translation>Náhled tis&amp;ku</translation>
+        <translation type="vanished">Náhled tis&amp;ku</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="787"/>
         <source>Settin&amp;gs</source>
-        <translation>Nasta&amp;vení</translation>
+        <translation type="vanished">Nasta&amp;vení</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="790"/>
@@ -3069,9 +3230,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Dooble Desktop</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="795"/>
         <source>Page So&amp;urce</source>
-        <translation>&amp;Zdroj stránky</translation>
+        <translation type="vanished">&amp;Zdroj stránky</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="814"/>
@@ -3187,22 +3347,35 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
+        <location filename="../UI/dpageSourceWindow.ui" line="230"/>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpageSourceWindow.ui" line="238"/>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpageSourceWindow.ui" line="251"/>
+        <source>Save &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Ctrl+Shift+W</source>
         <translation type="vanished">Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="251"/>
         <source>Save &amp;As</source>
-        <translation>Uložit &amp;jako</translation>
+        <translation type="vanished">Uložit &amp;jako</translation>
     </message>
     <message>
         <source>Ctrl+W</source>
         <translation type="obsolete">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="230"/>
         <source>&amp;Print</source>
-        <translation>&amp;Tisk</translation>
+        <translation type="vanished">&amp;Tisk</translation>
     </message>
     <message>
         <location filename="../UI/dpageSourceWindow.ui" line="233"/>
@@ -3210,9 +3383,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="238"/>
         <source>Print Pre&amp;view</source>
-        <translation>Náhled tis&amp;ku</translation>
+        <translation type="vanished">Náhled tis&amp;ku</translation>
     </message>
     <message>
         <location filename="../UI/dpageSourceWindow.ui" line="243"/>
@@ -3345,11 +3517,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Mým hlavním URL pro otevřené v záložkách jedním klepnutím na tlačítko domů. Poskytnout maximálně 12 začátek stránky zaměnit</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="584"/>
-        <location filename="../UI/dsettings.ui" line="1363"/>
-        <location filename="../UI/dsettings.ui" line="1517"/>
         <source>&amp;Browse</source>
-        <translation>&amp;Prohlížet</translation>
+        <translation type="vanished">&amp;Prohlížet</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="92"/>
@@ -3548,20 +3717,8 @@ p, li { white-space: pre-wrap; }
         <translation>Heslo</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1122"/>
-        <location filename="../UI/dsettings.ui" line="3112"/>
-        <location filename="../UI/dsettings.ui" line="3152"/>
-        <location filename="../UI/dsettings.ui" line="3192"/>
-        <location filename="../UI/dsettings.ui" line="3232"/>
-        <location filename="../UI/dsettings.ui" line="3271"/>
-        <location filename="../UI/dsettings.ui" line="3315"/>
-        <location filename="../UI/dsettings.ui" line="3615"/>
-        <location filename="../UI/dsettings.ui" line="3655"/>
-        <location filename="../UI/dsettings.ui" line="3695"/>
-        <location filename="../UI/dsettings.ui" line="3793"/>
-        <location filename="../UI/dsettings.ui" line="4109"/>
         <source>&amp;Exceptions</source>
-        <translation>&amp;Výjimky</translation>
+        <translation type="vanished">&amp;Výjimky</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="1146"/>
@@ -3718,6 +3875,11 @@ p, li { white-space: pre-wrap; }
         <translation>JavaScript</translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="3891"/>
+        <source>Just-in-time Compiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dsettings.ui" line="4069"/>
         <source>Sight SSL errors. Assume a</source>
         <translation>Při zpozorování chyby SSL. Předpokládat, že se má použít</translation>
@@ -3861,6 +4023,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="584"/>
+        <location filename="../UI/dsettings.ui" line="1363"/>
+        <location filename="../UI/dsettings.ui" line="1517"/>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dsettings.ui" line="794"/>
         <source>6</source>
         <translation>6</translation>
@@ -3894,6 +4063,22 @@ p, li { white-space: pre-wrap; }
         <location filename="../UI/dsettings.ui" line="889"/>
         <source>25</source>
         <translation>25</translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="1122"/>
+        <location filename="../UI/dsettings.ui" line="3112"/>
+        <location filename="../UI/dsettings.ui" line="3152"/>
+        <location filename="../UI/dsettings.ui" line="3192"/>
+        <location filename="../UI/dsettings.ui" line="3232"/>
+        <location filename="../UI/dsettings.ui" line="3271"/>
+        <location filename="../UI/dsettings.ui" line="3315"/>
+        <location filename="../UI/dsettings.ui" line="3615"/>
+        <location filename="../UI/dsettings.ui" line="3655"/>
+        <location filename="../UI/dsettings.ui" line="3695"/>
+        <location filename="../UI/dsettings.ui" line="3793"/>
+        <location filename="../UI/dsettings.ui" line="4109"/>
+        <source>&amp;Exceptions...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="1158"/>
@@ -3988,11 +4173,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../UI/dsettings.ui" line="3876"/>
         <source>Accept dialog prompts.</source>
         <translation>Přijmout výzvy dialogů.</translation>
-    </message>
-    <message>
-        <location filename="../UI/dsettings.ui" line="3891"/>
-        <source>Just-in-time compiler.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="3918"/>

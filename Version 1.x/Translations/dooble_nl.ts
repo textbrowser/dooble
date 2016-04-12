@@ -116,8 +116,12 @@
     </message>
     <message>
         <location filename="../UI/dapplicationPropertiesWindow.ui" line="82"/>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Browse</source>
-        <translation>&amp;Bladeren</translation>
+        <translation type="vanished">&amp;Bladeren</translation>
     </message>
     <message>
         <location filename="../UI/dapplicationPropertiesWindow.ui" line="91"/>
@@ -239,14 +243,12 @@
         <translation>&amp;Bestand</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="279"/>
         <source>&amp;Export to HTML</source>
-        <translation>&amp;Exporteer naar HTML</translation>
+        <translation type="vanished">&amp;Exporteer naar HTML</translation>
     </message>
     <message>
-        <location filename="../UI/dbookmarksWindow.ui" line="284"/>
         <source>&amp;Import from HTML</source>
-        <translation>&amp;Importeer van HTML</translation>
+        <translation type="vanished">&amp;Importeer van HTML</translation>
     </message>
     <message>
         <source>Ctrl+Shift+W</source>
@@ -261,6 +263,16 @@
         <location filename="../UI/dbookmarksWindow.ui" line="172"/>
         <source>Press the Enter key to retain the location.</source>
         <translation>Druk op de Enter-toets om de locatie te behouden.</translation>
+    </message>
+    <message>
+        <location filename="../UI/dbookmarksWindow.ui" line="279"/>
+        <source>&amp;Export to HTML...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dbookmarksWindow.ui" line="284"/>
+        <source>&amp;Import from HTML...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dbookmarksWindow.ui" line="289"/>
@@ -439,8 +451,12 @@
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="2071"/>
+        <source>Show &amp;Bookmarks...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show &amp;Bookmarks</source>
-        <translation>Toon &amp;Bladwijzer</translation>
+        <translation type="vanished">Toon &amp;Bladwijzer</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="2680"/>
@@ -1156,8 +1172,12 @@
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="744"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open in &amp;New Window</source>
-        <translation>Open in &amp;Nieuw Venster</translation>
+        <translation type="vanished">Open in &amp;Nieuw Venster</translation>
     </message>
     <message>
         <location filename="../Source/dhistory.cc" line="755"/>
@@ -1239,9 +1259,8 @@
 <context>
     <name>dooble</name>
     <message>
-        <location filename="../Source/dooble.cc" line="1619"/>
         <source>Show &amp;History</source>
-        <translation>Toon &amp;Geschiedenis</translation>
+        <translation type="vanished">Toon &amp;Geschiedenis</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2389"/>
@@ -1283,6 +1302,11 @@
     <message>
         <location filename="../Source/dooble.cc" line="1163"/>
         <source>Search Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble.cc" line="1619"/>
+        <source>Show &amp;History...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1367,6 +1391,17 @@
         <translation>Ben je er zeker van om gewijzigde pagina te verlaten?</translation>
     </message>
     <message>
+        <location filename="../Source/dooble.cc" line="7482"/>
+        <source>View %1 &amp;Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble.cc" line="7485"/>
+        <location filename="../Source/dooble.cc" line="7489"/>
+        <source>View Site &amp;Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>dooble::slotRefreshPlugins(): Removing action %1.</source>
         <translation type="obsolete">dooble::slotRefreshPlugins(): Verwijder actie %1.</translation>
     </message>
@@ -1393,15 +1428,12 @@
         <translation>Een wachtwoord is niet ingesteld. Ga naar de Vertrouwd paneel in het venster Instellingen en kies een wachtwoord. Zodra een wachtwoord is geselecteerd, zullen bookmarks, cookies, en alle andere essentiële informatie beschikbaar zijn voor toekomstige sessies. U kunt deze herinnering via de Vertrouwd paneel uitschakelen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7482"/>
         <source>View %1 &amp;Cookies</source>
-        <translation>Bekijk %1 &amp;Cookies</translation>
+        <translation type="vanished">Bekijk %1 &amp;Cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7485"/>
-        <location filename="../Source/dooble.cc" line="7489"/>
         <source>View Site &amp;Cookies</source>
-        <translation>Bekijk site &amp;Cookies</translation>
+        <translation type="vanished">Bekijk site &amp;Cookies</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="7849"/>
@@ -1959,13 +1991,47 @@
         <translation>Open Link in Nieuw &amp;Tabblad</translation>
     </message>
     <message>
+        <location filename="../Source/dview.cc" line="330"/>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="333"/>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="348"/>
+        <source>Sa&amp;ve Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="354"/>
+        <source>View Imag&amp;e in New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="389"/>
+        <source>&amp;Print Frame...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="396"/>
+        <source>View Frame S&amp;ource...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dview.cc" line="400"/>
+        <source>View Page S&amp;ource...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open Link in New &amp;Window</source>
         <translation type="obsolete">Link opent in nieuw venster</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="330"/>
         <source>Open Link in &amp;New Window</source>
-        <translation>Open Link in &amp;Nieuw Venster</translation>
+        <translation type="vanished">Open Link in &amp;Nieuw Venster</translation>
     </message>
     <message>
         <source>&amp;Save Link</source>
@@ -1997,14 +2063,12 @@
         <translation>Kopieer &amp;E-Mail Adres</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="333"/>
         <source>S&amp;ave Link</source>
-        <translation>K&amp;oppeling Opslaan</translation>
+        <translation type="vanished">K&amp;oppeling Opslaan</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="348"/>
         <source>Sa&amp;ve Image</source>
-        <translation>Af&amp;beelding opslaan</translation>
+        <translation type="vanished">Af&amp;beelding opslaan</translation>
     </message>
     <message>
         <location filename="../Source/dview.cc" line="350"/>
@@ -2017,9 +2081,8 @@
         <translation>Toon Afbeel&amp;ding in Nieuw Tabblad</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="354"/>
         <source>View Imag&amp;e in New Window</source>
-        <translation>Bekijk Ima&amp;ge in Nieuw venster</translation>
+        <translation type="vanished">Bekijk Ima&amp;ge in Nieuw venster</translation>
     </message>
     <message>
         <location filename="../Source/dview.cc" line="384"/>
@@ -2027,19 +2090,16 @@
         <translation>Sto&amp;p</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="389"/>
         <source>&amp;Print Frame</source>
-        <translation>&amp;Afdruk Frame</translation>
+        <translation type="vanished">&amp;Afdruk Frame</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="396"/>
         <source>View Frame S&amp;ource</source>
-        <translation>Toon Frame S&amp;ource</translation>
+        <translation type="vanished">Toon Frame S&amp;ource</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="400"/>
         <source>View Page S&amp;ource</source>
-        <translation>Toon Pagina S&amp;ource</translation>
+        <translation type="vanished">Toon Pagina S&amp;ource</translation>
     </message>
     <message>
         <location filename="../Source/dview.cc" line="694"/>
@@ -2406,10 +2466,8 @@
         <translation type="obsolete">&amp;Volledige Schermtablet-Modus</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="894"/>
-        <location filename="../UI/dmainWindow.ui" line="947"/>
         <source>Coo&amp;kies</source>
-        <translation>Coo&amp;kies</translation>
+        <translation type="vanished">Coo&amp;kies</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="897"/>
@@ -2435,19 +2493,12 @@
         <translation type="vanished">&amp;Historie Zijpaneel</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="937"/>
         <source>&amp;Authenticate Passphrase</source>
-        <translation>&amp;Verificatie Wachtwoord</translation>
+        <translation type="vanished">&amp;Verificatie Wachtwoord</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="952"/>
         <source>Third-Party Frame &amp;Content</source>
-        <translation>Derde Frame partij-&amp;Inhoud</translation>
-    </message>
-    <message>
-        <location filename="../UI/dmainWindow.ui" line="977"/>
-        <source>Error &amp;Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Derde Frame partij-&amp;Inhoud</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="980"/>
@@ -2455,18 +2506,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1036"/>
         <source>&amp;Allowed SSL Ciphers</source>
-        <translation>SSL cijfers toest&amp;aan</translation>
+        <translation type="vanished">SSL cijfers toest&amp;aan</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1041"/>
         <source>&amp;Web Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UI/dmainWindow.ui" line="1046"/>
-        <source>HTTP-&amp;Only Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2494,19 +2539,16 @@
         <translation>&amp;Vernieuw Lijst</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="967"/>
         <source>HTTP Re&amp;direct</source>
-        <translation>HTTP Door&amp;sturen</translation>
+        <translation type="vanished">HTTP Door&amp;sturen</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1003"/>
         <source>Cac&amp;he</source>
-        <translation>Cac&amp;he</translation>
+        <translation type="vanished">Cac&amp;he</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1008"/>
         <source>&amp;Clear Containers</source>
-        <translation>&amp;Wis Container</translation>
+        <translation type="vanished">&amp;Wis Container</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1011"/>
@@ -2514,9 +2556,8 @@
         <translation>Ctrl+Shift+Del</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1016"/>
         <source>Always HTTP&amp;S</source>
-        <translation>Altijd HTTP&amp;S</translation>
+        <translation type="vanished">Altijd HTTP&amp;S</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1021"/>
@@ -2524,19 +2565,16 @@
         <translation>Sla Pagina op als &amp;Gegevens URI</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>SS&amp;L Errors</source>
-        <translation>SS&amp;L fouten</translation>
+        <translation type="vanished">SS&amp;L fouten</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1031"/>
         <source>HTTP Re&amp;ferrer</source>
-        <translation>HTTP Ver&amp;wijzer</translation>
+        <translation type="vanished">HTTP Ver&amp;wijzer</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="942"/>
         <source>&amp;JavaScript</source>
-        <translation>&amp;JavaScript</translation>
+        <translation type="vanished">&amp;JavaScript</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="557"/>
@@ -2604,9 +2642,88 @@
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="702"/>
+        <location filename="../UI/dmainWindow.ui" line="937"/>
+        <source>&amp;Authenticate Passphrase...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="942"/>
+        <source>&amp;JavaScript...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="952"/>
+        <source>Third-Party Frame &amp;Content...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="957"/>
+        <source>JavaScript &amp;Pop-ups...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="967"/>
+        <source>HTTP Re&amp;direct...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="972"/>
+        <source>DNT (Do Not &amp;Track)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="977"/>
+        <source>Error &amp;Information...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="985"/>
+        <source>&amp;Automatically-Loaded Images...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1003"/>
+        <source>Cac&amp;he...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1008"/>
+        <source>&amp;Clear Containers...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1016"/>
+        <source>Always HTTP&amp;S...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1026"/>
+        <source>SS&amp;L Errors...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1031"/>
+        <source>HTTP Re&amp;ferrer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1036"/>
+        <source>&amp;Allowed SSL Ciphers...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1046"/>
+        <source>HTTP-&amp;Only Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1104"/>
+        <source>&amp;Blocked Hosts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;New Window</source>
-        <translation>&amp;Nieuw Venster</translation>
+        <translation type="vanished">&amp;Nieuw Venster</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="705"/>
@@ -2624,9 +2741,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="854"/>
         <source>&amp;Open Directory</source>
-        <translation>&amp;Open Map</translation>
+        <translation type="vanished">&amp;Open Map</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="862"/>
@@ -2659,11 +2775,6 @@
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1104"/>
-        <source>&amp;Blocked Hosts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UI/dmainWindow.ui" line="1109"/>
         <source>&amp;Home</source>
         <translation type="unfinished"></translation>
@@ -2683,9 +2794,54 @@
         <translation>Tabblad Sluite&amp;n</translation>
     </message>
     <message>
+        <location filename="../UI/dmainWindow.ui" line="702"/>
+        <source>&amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dmainWindow.ui" line="713"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Shift+W</translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="726"/>
+        <source>&amp;About Dooble...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="731"/>
+        <source>&amp;Save Page...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="739"/>
+        <source>&amp;Downloads...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="774"/>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="782"/>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="787"/>
+        <source>Settin&amp;gs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="795"/>
+        <source>Page So&amp;urce...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="854"/>
+        <source>&amp;Open Directory...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="857"/>
@@ -2693,9 +2849,8 @@
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="726"/>
         <source>&amp;About Dooble</source>
-        <translation>&amp;Over Dooble</translation>
+        <translation type="vanished">&amp;Over Dooble</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="76"/>
@@ -2732,9 +2887,8 @@
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="731"/>
         <source>&amp;Save Page</source>
-        <translation>&amp;Pagina Opslaan</translation>
+        <translation type="vanished">&amp;Pagina Opslaan</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="734"/>
@@ -2742,9 +2896,8 @@
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="739"/>
         <source>&amp;Downloads</source>
-        <translation>&amp;Downloads</translation>
+        <translation type="vanished">&amp;Downloads</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="742"/>
@@ -2782,14 +2935,19 @@
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="774"/>
         <source>&amp;Print</source>
-        <translation>&amp;Afdrukken</translation>
+        <translation type="vanished">&amp;Afdrukken</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="777"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="894"/>
+        <location filename="../UI/dmainWindow.ui" line="947"/>
+        <source>Coo&amp;kies...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="924"/>
@@ -2802,14 +2960,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="957"/>
         <source>JavaScript &amp;Pop-ups</source>
-        <translation>JavaScript &amp;Popups</translation>
-    </message>
-    <message>
-        <location filename="../UI/dmainWindow.ui" line="972"/>
-        <source>DNT (Do Not &amp;Track)</source>
-        <translation></translation>
+        <translation type="vanished">JavaScript &amp;Popups</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="1078"/>
@@ -2840,9 +2992,8 @@
         <translation type="obsolete">Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="985"/>
         <source>&amp;Automatically-Loaded Images</source>
-        <translation>&amp;Afbeeldingen Automatisch Laden</translation>
+        <translation type="vanished">&amp;Afbeeldingen Automatisch Laden</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="990"/>
@@ -2863,14 +3014,12 @@
         <translation type="obsolete">RetroMessenger</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="782"/>
         <source>Print Pre&amp;view</source>
-        <translation>Afdrukvoor&amp;beeld</translation>
+        <translation type="vanished">Afdrukvoor&amp;beeld</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="787"/>
         <source>Settin&amp;gs</source>
-        <translation>Instellin&amp;gen</translation>
+        <translation type="vanished">Instellin&amp;gen</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="790"/>
@@ -2886,9 +3035,8 @@
         <translation type="obsolete">&amp;Dooble Desktop</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="795"/>
         <source>Page So&amp;urce</source>
-        <translation>Pagina So&amp;urce</translation>
+        <translation type="vanished">Pagina So&amp;urce</translation>
     </message>
     <message>
         <location filename="../UI/dmainWindow.ui" line="814"/>
@@ -3004,22 +3152,30 @@
         <translation>&amp;Sluit</translation>
     </message>
     <message>
+        <location filename="../UI/dpageSourceWindow.ui" line="230"/>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpageSourceWindow.ui" line="238"/>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Ctrl+Shift+W</source>
         <translation type="vanished">Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="251"/>
         <source>Save &amp;As</source>
-        <translation>Opslaan &amp;Als</translation>
+        <translation type="vanished">Opslaan &amp;Als</translation>
     </message>
     <message>
         <source>Ctrl+W</source>
         <translation type="obsolete">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="230"/>
         <source>&amp;Print</source>
-        <translation>&amp;Afdrukken</translation>
+        <translation type="vanished">&amp;Afdrukken</translation>
     </message>
     <message>
         <location filename="../UI/dpageSourceWindow.ui" line="233"/>
@@ -3027,9 +3183,8 @@
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/dpageSourceWindow.ui" line="238"/>
         <source>Print Pre&amp;view</source>
-        <translation>Afdrukvoor&amp;beeld</translation>
+        <translation type="vanished">Afdrukvoor&amp;beeld</translation>
     </message>
     <message>
         <location filename="../UI/dpageSourceWindow.ui" line="243"/>
@@ -3040,6 +3195,11 @@
         <location filename="../UI/dpageSourceWindow.ui" line="246"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
+    </message>
+    <message>
+        <location filename="../UI/dpageSourceWindow.ui" line="251"/>
+        <source>Save &amp;As...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dpageSourceWindow.ui" line="254"/>
@@ -3154,11 +3314,8 @@
         <translation type="obsolete">Mijn belangrijkste URL&apos;s te openen in tabbladen met een klik op de home knop. Geef ten hoogste 12 startpagina&apos;s.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="584"/>
-        <location filename="../UI/dsettings.ui" line="1363"/>
-        <location filename="../UI/dsettings.ui" line="1517"/>
         <source>&amp;Browse</source>
-        <translation>&amp;Bladeren</translation>
+        <translation type="vanished">&amp;Bladeren</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="912"/>
@@ -3438,6 +3595,11 @@
         <location filename="../UI/dsettings.ui" line="3720"/>
         <source>JavaScript</source>
         <translation>JavaScript</translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="3891"/>
+        <source>Just-in-time Compiler</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="4069"/>
@@ -3899,6 +4061,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="584"/>
+        <location filename="../UI/dsettings.ui" line="1363"/>
+        <location filename="../UI/dsettings.ui" line="1517"/>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dsettings.ui" line="608"/>
         <source>Web Fonts</source>
         <translation>Web lettertypen</translation>
@@ -4009,6 +4178,22 @@
         <translation type="unfinished">25</translation>
     </message>
     <message>
+        <location filename="../UI/dsettings.ui" line="1122"/>
+        <location filename="../UI/dsettings.ui" line="3112"/>
+        <location filename="../UI/dsettings.ui" line="3152"/>
+        <location filename="../UI/dsettings.ui" line="3192"/>
+        <location filename="../UI/dsettings.ui" line="3232"/>
+        <location filename="../UI/dsettings.ui" line="3271"/>
+        <location filename="../UI/dsettings.ui" line="3315"/>
+        <location filename="../UI/dsettings.ui" line="3615"/>
+        <location filename="../UI/dsettings.ui" line="3655"/>
+        <location filename="../UI/dsettings.ui" line="3695"/>
+        <location filename="../UI/dsettings.ui" line="3793"/>
+        <location filename="../UI/dsettings.ui" line="4109"/>
+        <source>&amp;Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dsettings.ui" line="1573"/>
         <location filename="../UI/dsettings.ui" line="2054"/>
         <source>&amp;Ignore for:</source>
@@ -4069,11 +4254,6 @@
         <location filename="../UI/dsettings.ui" line="3758"/>
         <source>Prompt</source>
         <translation type="unfinished">Gevraagd</translation>
-    </message>
-    <message>
-        <location filename="../UI/dsettings.ui" line="3891"/>
-        <source>Just-in-time compiler.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="3972"/>
@@ -4298,20 +4478,8 @@
         <translation type="obsolete">Blokkeer Popups</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1122"/>
-        <location filename="../UI/dsettings.ui" line="3112"/>
-        <location filename="../UI/dsettings.ui" line="3152"/>
-        <location filename="../UI/dsettings.ui" line="3192"/>
-        <location filename="../UI/dsettings.ui" line="3232"/>
-        <location filename="../UI/dsettings.ui" line="3271"/>
-        <location filename="../UI/dsettings.ui" line="3315"/>
-        <location filename="../UI/dsettings.ui" line="3615"/>
-        <location filename="../UI/dsettings.ui" line="3655"/>
-        <location filename="../UI/dsettings.ui" line="3695"/>
-        <location filename="../UI/dsettings.ui" line="3793"/>
-        <location filename="../UI/dsettings.ui" line="4109"/>
         <source>&amp;Exceptions</source>
-        <translation>&amp;Uitzonderingen</translation>
+        <translation type="vanished">&amp;Uitzonderingen</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="3048"/>
