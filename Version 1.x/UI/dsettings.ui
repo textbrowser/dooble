@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>110</width>
+         <width>104</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,8 +380,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>546</width>
-               <height>487</height>
+               <width>520</width>
+               <height>571</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -581,7 +581,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>&amp;Browse</string>
+                   <string>&amp;Browse...</string>
                   </property>
                  </widget>
                 </item>
@@ -1119,7 +1119,7 @@
                  <item>
                   <widget class="QPushButton" name="webCacheExceptionsPushButton">
                    <property name="text">
-                    <string>&amp;Exceptions</string>
+                    <string>&amp;Exceptions...</string>
                    </property>
                   </widget>
                  </item>
@@ -1235,8 +1235,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>312</width>
-               <height>536</height>
+               <width>303</width>
+               <height>550</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1360,7 +1360,7 @@
                 <item>
                  <widget class="QPushButton" name="chooseMyRetrievedFilesPushButton">
                   <property name="text">
-                   <string>&amp;Browse</string>
+                   <string>&amp;Browse...</string>
                   </property>
                  </widget>
                 </item>
@@ -1514,7 +1514,7 @@
                 <item>
                  <widget class="QPushButton" name="spotOnChooseDatabasePushButton">
                   <property name="text">
-                   <string>&amp;Browse</string>
+                   <string>&amp;Browse...</string>
                   </property>
                  </widget>
                 </item>
@@ -1551,8 +1551,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>608</width>
-               <height>861</height>
+               <width>594</width>
+               <height>897</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2543,8 +2543,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>504</width>
-               <height>697</height>
+               <width>476</width>
+               <height>709</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3086,8 +3086,8 @@
               <rect>
                <x>0</x>
                <y>-529</y>
-               <width>728</width>
-               <height>1295</height>
+               <width>738</width>
+               <height>1350</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -3109,7 +3109,7 @@
                 <item>
                  <widget class="QPushButton" name="alwaysHttpsExceptionsPushButton">
                   <property name="text">
-                   <string>&amp;Exceptions</string>
+                   <string>&amp;Exceptions...</string>
                   </property>
                  </widget>
                 </item>
@@ -3149,7 +3149,7 @@
                 <item>
                  <widget class="QPushButton" name="loadImagesExceptionsPushButton">
                   <property name="text">
-                   <string>&amp;Exceptions</string>
+                   <string>&amp;Exceptions...</string>
                   </property>
                  </widget>
                 </item>
@@ -3189,7 +3189,7 @@
                 <item>
                  <widget class="QPushButton" name="popupExceptionsPushButton">
                   <property name="text">
-                   <string>&amp;Exceptions</string>
+                   <string>&amp;Exceptions...</string>
                   </property>
                  </widget>
                 </item>
@@ -3229,7 +3229,7 @@
                 <item>
                  <widget class="QPushButton" name="thirdPartyExceptionsPushButton">
                   <property name="text">
-                   <string>&amp;Exceptions</string>
+                   <string>&amp;Exceptions...</string>
                   </property>
                  </widget>
                 </item>
@@ -3268,7 +3268,7 @@
                    <item>
                     <widget class="QPushButton" name="cookiesExceptionsPushButton">
                      <property name="text">
-                      <string>&amp;Exceptions</string>
+                      <string>&amp;Exceptions...</string>
                      </property>
                     </widget>
                    </item>
@@ -3312,7 +3312,7 @@
                    <item>
                     <widget class="QPushButton" name="httponlyexceptions">
                      <property name="text">
-                      <string>&amp;Exceptions</string>
+                      <string>&amp;Exceptions...</string>
                      </property>
                     </widget>
                    </item>
@@ -3612,7 +3612,7 @@
                    <item>
                     <widget class="QPushButton" name="dntExceptionsPushButton">
                      <property name="text">
-                      <string>&amp;Exceptions</string>
+                      <string>&amp;Exceptions...</string>
                      </property>
                     </widget>
                    </item>
@@ -3652,7 +3652,7 @@
                    <item>
                     <widget class="QPushButton" name="httpRedirectExceptionsPushButton">
                      <property name="text">
-                      <string>&amp;Exceptions</string>
+                      <string>&amp;Exceptions...</string>
                      </property>
                     </widget>
                    </item>
@@ -3692,7 +3692,7 @@
                    <item>
                     <widget class="QPushButton" name="httpReferrerExceptionsPushButton">
                      <property name="text">
-                      <string>&amp;Exceptions</string>
+                      <string>&amp;Exceptions...</string>
                      </property>
                     </widget>
                    </item>
@@ -3790,7 +3790,7 @@
                    <item>
                     <widget class="QPushButton" name="javaScriptExceptionsPushButton">
                      <property name="text">
-                      <string>&amp;Exceptions</string>
+                      <string>&amp;Exceptions...</string>
                      </property>
                     </widget>
                    </item>
@@ -4106,7 +4106,7 @@
                 <item>
                  <widget class="QPushButton" name="sightSslErrorsPushButton">
                   <property name="text">
-                   <string>&amp;Exceptions</string>
+                   <string>&amp;Exceptions...</string>
                   </property>
                  </widget>
                 </item>

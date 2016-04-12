@@ -1616,7 +1616,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	      SLOT(slotClearHistory(void)));
       action = ui.historyMenu->addAction
 	(QIcon(settings.value("mainWindow/viewHistory").toString()),
-	 tr("Show &History"));
+	 tr("Show &History..."));
       action->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_H));
       action->setEnabled(true);
       connect(action, SIGNAL(triggered(void)), this,

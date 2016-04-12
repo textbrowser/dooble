@@ -2068,7 +2068,7 @@ QList<QAction *> dbookmarkswindow::actions(QWidget *parent) const
   action = new QAction(parent);
   action->setSeparator(true);
   actions.append(action);
-  action = new QAction(tr("Show &Bookmarks"), parent);
+  action = new QAction(tr("Show &Bookmarks..."), parent);
   action->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_B));
   actions.append(action);
 

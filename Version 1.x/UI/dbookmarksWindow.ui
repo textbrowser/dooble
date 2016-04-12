@@ -276,12 +276,12 @@
   </widget>
   <action name="action_Export">
    <property name="text">
-    <string>&amp;Export to HTML</string>
+    <string>&amp;Export to HTML...</string>
    </property>
   </action>
   <action name="action_Import">
    <property name="text">
-    <string>&amp;Import from HTML</string>
+    <string>&amp;Import from HTML...</string>
    </property>
   </action>
   <action name="action_Close">
