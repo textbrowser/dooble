@@ -2422,11 +2422,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1021"/>
-        <source>Save Page as &amp;Data URI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UI/dmainWindow.ui" line="1041"/>
         <source>&amp;Web Inspector</source>
         <translation type="unfinished"></translation>
@@ -2720,6 +2715,11 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/dmainWindow.ui" line="1016"/>
         <source>Always HTTP&amp;S...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
+        <source>Save Page as &amp;Data URI...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -2718,9 +2718,8 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">Vždy HTTP&amp;S</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1021"/>
         <source>Save Page as &amp;Data URI</source>
-        <translation>Uložit stránku jako &amp;datové URI</translation>
+        <translation type="vanished">Uložit stránku jako &amp;datové URI</translation>
     </message>
     <message>
         <source>SS&amp;L Errors</source>
@@ -2869,6 +2868,11 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../UI/dmainWindow.ui" line="985"/>
         <source>&amp;Automatically-Loaded Images...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
+        <source>Save Page as &amp;Data URI...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

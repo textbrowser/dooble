@@ -2938,6 +2938,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
+        <source>Save Page as &amp;Data URI...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>SS&amp;L Errors...</source>
         <translation type="unfinished"></translation>
@@ -3086,11 +3091,6 @@
     <message>
         <source>Always HTTP&amp;S</source>
         <translation type="vanished">Sempre HTTP&amp;S</translation>
-    </message>
-    <message>
-        <location filename="../UI/dmainWindow.ui" line="1021"/>
-        <source>Save Page as &amp;Data URI</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;JavaScript</source>

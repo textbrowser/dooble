@@ -2639,6 +2639,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
+        <source>Save Page as &amp;Data URI...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>SS&amp;L Errors...</source>
         <translation type="unfinished"></translation>
@@ -3140,9 +3145,8 @@
         <translation type="vanished">Betik &amp;HTTPS</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1021"/>
         <source>Save Page as &amp;Data URI</source>
-        <translation>Gorde Orrialdea &amp;Datu URI bezala</translation>
+        <translation type="vanished">Gorde Orrialdea &amp;Datu URI bezala</translation>
     </message>
     <message>
         <source>SS&amp;L Errors</source>

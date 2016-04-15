@@ -2964,6 +2964,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
+        <source>Save Page as &amp;Data URI...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>SS&amp;L Errors...</source>
         <translation type="unfinished"></translation>
@@ -3466,9 +3471,8 @@
         <translation type="vanished">Immer HTTP&amp;S</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1021"/>
         <source>Save Page as &amp;Data URI</source>
-        <translation>Speichere Seite als &amp;Daten-URI</translation>
+        <translation type="vanished">Speichere Seite als &amp;Daten-URI</translation>
     </message>
     <message>
         <source>Nuntius Leo Email</source>

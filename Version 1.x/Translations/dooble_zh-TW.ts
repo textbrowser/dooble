@@ -2201,10 +2201,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save Page as &amp;Data URI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2378,6 +2374,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Blocked Hosts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Page as &amp;Data URI...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2776,9 +2776,8 @@
         <translation type="vanished">Sempre HTTP&amp;S</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1021"/>
         <source>Save Page as &amp;Data URI</source>
-        <translation>Mostrar página como URI de &amp;dados</translation>
+        <translation type="vanished">Mostrar página como URI de &amp;dados</translation>
     </message>
     <message>
         <source>&amp;JavaScript</source>
@@ -2902,6 +2901,11 @@
     <message>
         <location filename="../UI/dmainWindow.ui" line="1016"/>
         <source>Always HTTP&amp;S...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
+        <source>Save Page as &amp;Data URI...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
