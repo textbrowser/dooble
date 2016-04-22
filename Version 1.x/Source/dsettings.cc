@@ -429,11 +429,11 @@ dsettings::~dsettings()
 void dsettings::exec(dooble *parent)
 {
   ui.httpStatusCodes->clearContents();
-  ui.httpStatusCodes->setRowCount(599 - 400 + 2);
+  ui.httpStatusCodes->setRowCount(599 - 400 + 3);
 
   int j = 0;
 
-  for(int i = 204; i <= 204; i++, j++)
+  for(int i = 203; i <= 204; i++, j++)
     {
       QTableWidgetItem *item = new QTableWidgetItem(QString::number(i));
 
