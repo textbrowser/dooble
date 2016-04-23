@@ -251,7 +251,7 @@ void dhistorysidebar::slotShowContextMenu(const QPoint &point)
 			 this, SLOT(slotOpen(void)));
 	  menu.addAction(tr("Open in New &Tab"),
 			 this, SLOT(slotOpenInNewTab(void)));
-	  menu.addAction(tr("Open in &New Window"),
+	  menu.addAction(tr("Open in &New Window..."),
 			 this, SLOT(slotOpenInNewWindow(void)));
 	  menu.addSeparator();
 
