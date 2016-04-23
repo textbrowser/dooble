@@ -369,7 +369,7 @@ void dftpbrowser::slotCustomContextMenuRequest(const QPoint &point)
 	  menu.addSeparator();
 	}
       else
-	menu.addAction(tr("S&ave Link"),
+	menu.addAction(tr("S&ave Link..."),
 		       this, SLOT(slotSaveLink(void)));
 
       menu.exec(ui.tableWidget->mapToGlobal(point));
