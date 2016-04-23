@@ -339,7 +339,7 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 
       menu.addAction(action);
       menu.addAction
-	(tr("&View Private Cookies"),
+	(tr("&View Private Cookies..."),
 	 this, SLOT(slotViewPrivateCookies(void)))->
 	setEnabled(action->isChecked());
       menu.exec(m_tabBar->mapToGlobal(point));
