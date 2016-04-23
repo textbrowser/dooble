@@ -364,7 +364,7 @@ void dftpbrowser::slotCustomContextMenuRequest(const QPoint &point)
 	{
 	  menu.addAction(tr("Open Link in New &Tab"),
 			 this, SLOT(slotOpenLinkInNewTab(void)));
-	  menu.addAction(tr("Open Link in &New Window"),
+	  menu.addAction(tr("Open Link in &New Window..."),
 			 this, SLOT(slotOpenLinkInNewWindow(void)));
 	  menu.addSeparator();
 	}
