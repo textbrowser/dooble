@@ -1291,8 +1291,8 @@
         <location filename="../Source/dooble.cc" line="3357"/>
         <location filename="../Source/dooble.cc" line="3544"/>
         <location filename="../Source/dooble.cc" line="3568"/>
-        <location filename="../Source/dooble.cc" line="5089"/>
-        <location filename="../Source/dooble.cc" line="5571"/>
+        <location filename="../Source/dooble.cc" line="5091"/>
+        <location filename="../Source/dooble.cc" line="5573"/>
         <source>(Untitled)</source>
         <translation>(دون عنوان)</translation>
     </message>
@@ -1304,9 +1304,9 @@
         <location filename="../Source/dooble.cc" line="3783"/>
         <location filename="../Source/dooble.cc" line="3823"/>
         <location filename="../Source/dooble.cc" line="4031"/>
-        <location filename="../Source/dooble.cc" line="5495"/>
-        <location filename="../Source/dooble.cc" line="6133"/>
-        <location filename="../Source/dooble.cc" line="6437"/>
+        <location filename="../Source/dooble.cc" line="5497"/>
+        <location filename="../Source/dooble.cc" line="6135"/>
+        <location filename="../Source/dooble.cc" line="6439"/>
         <source>Dooble Web Browser</source>
         <translation>متصفح الويب دووبل</translation>
     </message>
@@ -1315,9 +1315,9 @@
         <location filename="../Source/dooble.cc" line="3156"/>
         <location filename="../Source/dooble.cc" line="3338"/>
         <location filename="../Source/dooble.cc" line="3341"/>
-        <location filename="../Source/dooble.cc" line="5505"/>
-        <location filename="../Source/dooble.cc" line="5508"/>
-        <location filename="../Source/dooble.cc" line="6439"/>
+        <location filename="../Source/dooble.cc" line="5507"/>
+        <location filename="../Source/dooble.cc" line="5510"/>
+        <location filename="../Source/dooble.cc" line="6441"/>
         <source> - Dooble Web Browser</source>
         <translation>- متصفح الويب دووبل</translation>
     </message>
@@ -1371,48 +1371,48 @@
     <message>
         <location filename="../Source/dooble.cc" line="3145"/>
         <location filename="../Source/dooble.cc" line="3330"/>
-        <location filename="../Source/dooble.cc" line="5497"/>
+        <location filename="../Source/dooble.cc" line="5499"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>متصفح الويب دووبل (%1)</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4634"/>
+        <location filename="../Source/dooble.cc" line="4636"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5227"/>
+        <location filename="../Source/dooble.cc" line="5229"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6474"/>
+        <location filename="../Source/dooble.cc" line="6476"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>هل أنت متأكد من رغبتك في فتح %1 نوافذ؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6627"/>
+        <location filename="../Source/dooble.cc" line="6629"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>هل أنت متأكد من رغبتك في مغادرة الصفحة المعدّلة؟</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7482"/>
+        <location filename="../Source/dooble.cc" line="7484"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7485"/>
-        <location filename="../Source/dooble.cc" line="7489"/>
+        <location filename="../Source/dooble.cc" line="7487"/>
+        <location filename="../Source/dooble.cc" line="7491"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7849"/>
+        <location filename="../Source/dooble.cc" line="7851"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7851"/>
+        <location filename="../Source/dooble.cc" line="7853"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1420,8 +1420,8 @@
         <location filename="../Source/dooble.cc" line="2936"/>
         <location filename="../Source/dooble.cc" line="2988"/>
         <location filename="../Source/dooble.cc" line="3981"/>
-        <location filename="../Source/dooble.cc" line="6471"/>
-        <location filename="../Source/dooble.cc" line="6623"/>
+        <location filename="../Source/dooble.cc" line="6473"/>
+        <location filename="../Source/dooble.cc" line="6625"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>متصفح الويب دووبل: تأكيد</translation>
     </message>
@@ -1456,7 +1456,7 @@
         <translation>متصفح الويب دووبل: عنْ</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="4631"/>
+        <location filename="../Source/dooble.cc" line="4633"/>
         <source>Dooble Web Browser: Save As</source>
         <translation>متصفح الويب دووبل: حفظ كـ</translation>
     </message>
@@ -1465,15 +1465,15 @@
         <translation type="obsolete">ا&amp;حفظ</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5012"/>
-        <location filename="../Source/dooble.cc" line="5018"/>
+        <location filename="../Source/dooble.cc" line="5014"/>
         <location filename="../Source/dooble.cc" line="5020"/>
-        <location filename="../Source/dooble.cc" line="5024"/>
+        <location filename="../Source/dooble.cc" line="5022"/>
+        <location filename="../Source/dooble.cc" line="5026"/>
         <source>Dooble Desktop</source>
         <translation>سطح مكتب دووبل</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5224"/>
+        <location filename="../Source/dooble.cc" line="5226"/>
         <source>Dooble Web Browser: Open Directory</source>
         <translation>متصفح الويب دووبل: فتح مجلد</translation>
     </message>
@@ -1482,12 +1482,12 @@
         <translation type="obsolete">ا&amp;فتح</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5362"/>
+        <location filename="../Source/dooble.cc" line="5364"/>
         <source>The site %1 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5426"/>
+        <location filename="../Source/dooble.cc" line="5428"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1504,12 +1504,12 @@
         <translation type="obsolete">موقع مجهول (فارغ أو رابط خاطيء) يتسبب في استثناء. رجاءً انقر للاستعراض.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7219"/>
+        <location filename="../Source/dooble.cc" line="7221"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>متصفح الويب دووبل: تذكير</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7220"/>
+        <location filename="../Source/dooble.cc" line="7222"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1518,15 +1518,15 @@
         <translation type="obsolete">لم تجهز العبارة السرية بعد. من فضلك قم بزيارة تبويب &quot;الوثوق&quot; في نافذة &quot;الإعدادات&quot; واختر عبارة سرّية. حالما تختار عبارة سرّية، فإن العلامات المرجعية، والكعكات، وجميع المعلومات الأساسية الأخرى ستكون متوفرة في الجلسات المقبلة.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6935"/>
-        <location filename="../Source/dooble.cc" line="6940"/>
+        <location filename="../Source/dooble.cc" line="6937"/>
+        <location filename="../Source/dooble.cc" line="6942"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>يتسبب موقع &quot;%1&quot; في استثناء. رجاءً انقر للاستعراض.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7176"/>
         <location filename="../Source/dooble.cc" line="7178"/>
-        <location filename="../Source/dooble.cc" line="7182"/>
+        <location filename="../Source/dooble.cc" line="7180"/>
+        <location filename="../Source/dooble.cc" line="7184"/>
         <source>Restore Session</source>
         <translation>استعادة الجلسة</translation>
     </message>
