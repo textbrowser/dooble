@@ -97,7 +97,7 @@ void ddesktopwidget::mousePressEvent(QMouseEvent *event)
     {
       QMenu menu(this);
 
-      menu.addAction(tr("&Change Desktop Background"),
+      menu.addAction(tr("&Change Desktop Background..."),
 		     this, SLOT(slotChangeDesktopBackground(void)));
 #if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX)) && !defined(Q_OS_MAC)
 #if QT_VERSION < 0x050000
@@ -106,7 +106,7 @@ void ddesktopwidget::mousePressEvent(QMouseEvent *event)
       if(fileInfo.isExecutable() && fileInfo.isReadable())
 	{
 	  menu.addSeparator();
-	  menu.addAction(tr("&Launch Terminal"),
+	  menu.addAction(tr("&Launch Terminal..."),
 			 this, SLOT(slotLaunchTerminal(void)));
 	}
 #endif

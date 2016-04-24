@@ -712,8 +712,10 @@ void dwebpage::slotFinished(QNetworkReply *reply)
 
   if(reply->error() == QNetworkReply::AuthenticationRequiredError)
     status = 204;
+  else if(reply->error() == QNetworkReply::ContentNotFoundError)
+    status = 203;
 
-  if((status == 204 || (status >= 400 && status <= 599)) &&
+  if((status == 203 || status == 204 || (status >= 400 && status <= 599)) &&
      dmisc::s_httpStatusCodes.contains(status) &&
      dmisc::s_httpStatusCodes.value(status, 1) == 0)
     {

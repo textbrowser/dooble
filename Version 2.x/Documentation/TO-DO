@@ -176,6 +176,7 @@ Remaining Items
 13.   Allow regular expressions in blocked hosts.
 14.   Ellipses.
 15.   WebEngine.
+16.   HTTP error codes (203, 204, etc.).
 
 Removed Items
 

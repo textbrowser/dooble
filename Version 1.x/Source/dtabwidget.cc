@@ -267,7 +267,7 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 			 this, SIGNAL(createPrivateTab(void)));
 	  menu.addAction(tr("New &Tab"),
 			 this, SLOT(slotCreateTab(void)));
-	  action = menu.addAction(tr("Open in &New Window"),
+	  action = menu.addAction(tr("Open in &New Window..."),
 				  this, SLOT(slotOpenInNewWindow(void)));
 	  action->setEnabled(count() > 1);
 	  menu.addSeparator();
@@ -339,7 +339,7 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 
       menu.addAction(action);
       menu.addAction
-	(tr("&View Private Cookies"),
+	(tr("&View Private Cookies..."),
 	 this, SLOT(slotViewPrivateCookies(void)))->
 	setEnabled(action->isChecked());
       menu.exec(m_tabBar->mapToGlobal(point));
