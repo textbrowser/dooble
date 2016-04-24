@@ -417,7 +417,7 @@
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="613"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -546,13 +546,17 @@
         <translation type="obsolete">&amp;Pridať ikonu aplikácie</translation>
     </message>
     <message>
-        <location filename="../Source/ddesktopwidget.cc" line="100"/>
         <source>&amp;Change Desktop Background</source>
-        <translation>&amp;Zmeniť pozadie plochy</translation>
+        <translation type="vanished">&amp;Zmeniť pozadie plochy</translation>
+    </message>
+    <message>
+        <location filename="../Source/ddesktopwidget.cc" line="100"/>
+        <source>&amp;Change Desktop Background...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/ddesktopwidget.cc" line="109"/>
-        <source>&amp;Launch Terminal</source>
+        <source>&amp;Launch Terminal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -943,6 +947,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../Source/dftpbrowser.cc" line="367"/>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dftpbrowser.cc" line="372"/>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>%1 Byte(s)</source>
         <translation type="obsolete">%1 Byte(s)</translation>
     </message>
@@ -963,16 +977,6 @@
         <location filename="../Source/dftpbrowser.cc" line="365"/>
         <source>Open Link in New &amp;Tab</source>
         <translation type="unfinished">Otvoriť odkaz v novom &amp;paneli</translation>
-    </message>
-    <message>
-        <location filename="../Source/dftpbrowser.cc" line="367"/>
-        <source>Open Link in &amp;New Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Source/dftpbrowser.cc" line="372"/>
-        <source>S&amp;ave Link</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="442"/>
@@ -1218,7 +1222,7 @@
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="254"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1508,42 +1512,46 @@
         <translation type="obsolete">Stiahnuť URL</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="155"/>
+        <location filename="../UI/ddownloadWindow.ui" line="164"/>
         <source>Clea&amp;r</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="169"/>
         <source>&amp;Download</source>
-        <translation>&amp;Stiahnuť</translation>
+        <translation type="vanished">&amp;Stiahnuť</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="162"/>
+        <location filename="../UI/ddownloadWindow.ui" line="171"/>
         <source>C&amp;ancel</source>
         <translation>Z&amp;rušiť</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="51"/>
+        <location filename="../UI/ddownloadWindow.ui" line="60"/>
         <source>Show Bit Rates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="121"/>
+        <location filename="../UI/ddownloadWindow.ui" line="130"/>
         <source>D&amp;ownload URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="229"/>
+        <location filename="../UI/ddownloadWindow.ui" line="178"/>
+        <source>&amp;Download...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/ddownloadWindow.ui" line="238"/>
         <source>Enter &amp;URL</source>
         <translation>Zadať &amp;URL</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="222"/>
+        <location filename="../UI/ddownloadWindow.ui" line="231"/>
         <source>Clear &amp;List</source>
         <translation>Zmazať &amp;Zoznam</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="236"/>
+        <location filename="../UI/ddownloadWindow.ui" line="245"/>
         <source>&amp;Close</source>
         <translation>&amp;Zatvoriť</translation>
     </message>
@@ -1859,7 +1867,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="270"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1894,7 +1902,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="342"/>
-        <source>&amp;View Private Cookies</source>
+        <source>&amp;View Private Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -420,7 +420,7 @@
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="613"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -549,13 +549,17 @@
         <translation type="obsolete">&amp;Aggiungi Applicazione Icona</translation>
     </message>
     <message>
-        <location filename="../Source/ddesktopwidget.cc" line="100"/>
         <source>&amp;Change Desktop Background</source>
-        <translation type="unfinished">&amp;Cambia lo sfondo desktop</translation>
+        <translation type="obsolete">&amp;Cambia lo sfondo desktop</translation>
+    </message>
+    <message>
+        <location filename="../Source/ddesktopwidget.cc" line="100"/>
+        <source>&amp;Change Desktop Background...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/ddesktopwidget.cc" line="109"/>
-        <source>&amp;Launch Terminal</source>
+        <source>&amp;Launch Terminal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -941,12 +945,12 @@
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="367"/>
-        <source>Open Link in &amp;New Window</source>
+        <source>Open Link in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="372"/>
-        <source>S&amp;ave Link</source>
+        <source>S&amp;ave Link...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1193,7 +1197,7 @@
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="254"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1483,42 +1487,46 @@
         <translation type="obsolete">URL Herunterladen</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="155"/>
+        <location filename="../UI/ddownloadWindow.ui" line="164"/>
         <source>Clea&amp;r</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="169"/>
         <source>&amp;Download</source>
-        <translation type="unfinished">&amp;Herunterladen</translation>
+        <translation type="obsolete">&amp;Herunterladen</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="162"/>
+        <location filename="../UI/ddownloadWindow.ui" line="171"/>
         <source>C&amp;ancel</source>
         <translation type="unfinished">C&amp;ancellare</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="51"/>
+        <location filename="../UI/ddownloadWindow.ui" line="60"/>
         <source>Show Bit Rates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="121"/>
+        <location filename="../UI/ddownloadWindow.ui" line="130"/>
         <source>D&amp;ownload URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="229"/>
+        <location filename="../UI/ddownloadWindow.ui" line="178"/>
+        <source>&amp;Download...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/ddownloadWindow.ui" line="238"/>
         <source>Enter &amp;URL</source>
         <translation type="unfinished">Inserisci &amp;URL</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="222"/>
+        <location filename="../UI/ddownloadWindow.ui" line="231"/>
         <source>Clear &amp;List</source>
         <translation type="unfinished">Cancella &amp;Lista</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="236"/>
+        <location filename="../UI/ddownloadWindow.ui" line="245"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Chiudere</translation>
     </message>
@@ -1806,7 +1814,7 @@
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="270"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1841,7 +1849,7 @@
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="342"/>
-        <source>&amp;View Private Cookies</source>
+        <source>&amp;View Private Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

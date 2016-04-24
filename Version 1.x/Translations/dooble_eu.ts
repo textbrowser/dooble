@@ -621,9 +621,8 @@
         <translation>Ireki &amp;Hegats Berrian</translation>
     </message>
     <message>
-        <location filename="../Source/dbookmarkswindow.cc" line="613"/>
         <source>Open in &amp;New Window</source>
-        <translation>Ireki &amp;Leiho Berrian</translation>
+        <translation type="vanished">Ireki &amp;Leiho Berrian</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="618"/>
@@ -674,6 +673,11 @@
         <location filename="../Source/dbookmarkswindow.cc" line="238"/>
         <location filename="../Source/dbookmarkswindow.cc" line="624"/>
         <source>Spot-On support is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dbookmarkswindow.cc" line="613"/>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -753,14 +757,22 @@
 <context>
     <name>ddesktopwidget</name>
     <message>
-        <location filename="../Source/ddesktopwidget.cc" line="100"/>
         <source>&amp;Change Desktop Background</source>
-        <translation>&amp;Aldatu Mahaigain Barrena</translation>
+        <translation type="vanished">&amp;Aldatu Mahaigain Barrena</translation>
+    </message>
+    <message>
+        <source>&amp;Launch Terminal</source>
+        <translation type="vanished">&amp;Abiarazi Terminala</translation>
+    </message>
+    <message>
+        <location filename="../Source/ddesktopwidget.cc" line="100"/>
+        <source>&amp;Change Desktop Background...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/ddesktopwidget.cc" line="109"/>
-        <source>&amp;Launch Terminal</source>
-        <translation>&amp;Abiarazi Terminala</translation>
+        <source>&amp;Launch Terminal...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/ddesktopwidget.cc" line="132"/>
@@ -1159,13 +1171,21 @@
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="367"/>
-        <source>Open Link in &amp;New Window</source>
-        <translation>Ireki Lo&amp;tura Leiho Berrian</translation>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="372"/>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Link in &amp;New Window</source>
+        <translation type="vanished">Ireki Lo&amp;tura Leiho Berrian</translation>
+    </message>
+    <message>
         <source>S&amp;ave Link</source>
-        <translation>G&amp;orde Lotura</translation>
+        <translation type="vanished">G&amp;orde Lotura</translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="442"/>
@@ -1400,8 +1420,12 @@
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="254"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open in &amp;New Window</source>
-        <translation>Ireki &amp;Leiho Berrian</translation>
+        <translation type="vanished">Ireki &amp;Leiho Berrian</translation>
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="258"/>
@@ -1710,42 +1734,46 @@
         <translation>Dooble Web Nabigatzailea: Jeisketak</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="51"/>
+        <location filename="../UI/ddownloadWindow.ui" line="60"/>
         <source>Show Bit Rates</source>
         <translation>Erakutsi Bit Neurriak</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="155"/>
+        <location filename="../UI/ddownloadWindow.ui" line="164"/>
         <source>Clea&amp;r</source>
         <translation>&amp;Garbitu</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="169"/>
         <source>&amp;Download</source>
-        <translation>&amp;Jeitsi</translation>
+        <translation type="vanished">&amp;Jeitsi</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="162"/>
+        <location filename="../UI/ddownloadWindow.ui" line="171"/>
         <source>C&amp;ancel</source>
         <translation>E&amp;zeztatu</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="121"/>
+        <location filename="../UI/ddownloadWindow.ui" line="130"/>
         <source>D&amp;ownload URL</source>
         <translation>Jeisketa &amp;URL-a</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="229"/>
+        <location filename="../UI/ddownloadWindow.ui" line="178"/>
+        <source>&amp;Download...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/ddownloadWindow.ui" line="238"/>
         <source>Enter &amp;URL</source>
         <translation>&amp;Sartu URL-a</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="222"/>
+        <location filename="../UI/ddownloadWindow.ui" line="231"/>
         <source>Clear &amp;List</source>
         <translation>G&amp;arbitu Zerrenda</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="236"/>
+        <location filename="../UI/ddownloadWindow.ui" line="245"/>
         <source>&amp;Close</source>
         <translation>It&amp;xi</translation>
     </message>
@@ -2026,8 +2054,17 @@
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="270"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dtabwidget.cc" line="342"/>
+        <source>&amp;View Private Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open in &amp;New Window</source>
-        <translation>Ireki &amp;Leiho Berrian</translation>
+        <translation type="vanished">Ireki &amp;Leiho Berrian</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="274"/>
@@ -2064,9 +2101,8 @@
         <translation>&amp;Cookie Pribatuak</translation>
     </message>
     <message>
-        <location filename="../Source/dtabwidget.cc" line="342"/>
         <source>&amp;View Private Cookies</source>
-        <translation>&amp;Ikusi Cookie Pribatuak</translation>
+        <translation type="vanished">&amp;Ikusi Cookie Pribatuak</translation>
     </message>
 </context>
 <context>

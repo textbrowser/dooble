@@ -339,10 +339,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open in &amp;New Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uncategorized</source>
         <translation type="unfinished"></translation>
     </message>
@@ -392,6 +388,10 @@
     </message>
     <message>
         <source>Show &amp;Bookmarks...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -454,7 +454,7 @@
     </message>
     <message>
         <source>&amp;Change Desktop Background</source>
-        <translation>&amp;Camudar el fondu d&apos;escritoriu</translation>
+        <translation type="vanished">&amp;Camudar el fondu d&apos;escritoriu</translation>
     </message>
     <message>
         <source>Dooble Web Browser: Desktop Background Image Selection</source>
@@ -463,10 +463,6 @@
     <message>
         <source>&amp;Select</source>
         <translation type="obsolete">&amp;Esbillar</translation>
-    </message>
-    <message>
-        <source>&amp;Launch Terminal</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dooble Web Browser: File Manager</source>
@@ -478,6 +474,14 @@
     </message>
     <message>
         <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Change Desktop Background...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Launch Terminal...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -774,7 +778,7 @@
     </message>
     <message>
         <source>Open Link in &amp;New Window</source>
-        <translation type="unfinished">Abrir Enllaz en &amp;Nueva Ventana</translation>
+        <translation type="obsolete">Abrir Enllaz en &amp;Nueva Ventana</translation>
     </message>
     <message>
         <source>&amp;Save Link</source>
@@ -793,11 +797,15 @@
         <translation type="obsolete">%1 MB</translation>
     </message>
     <message>
-        <source>S&amp;ave Link</source>
+        <source>%1 Directory(ies) / %2 File(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 Directory(ies) / %2 File(s)</source>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;ave Link...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -981,15 +989,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open in &amp;New Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Spot-On Share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1179,7 +1187,7 @@
     </message>
     <message>
         <source>&amp;Download</source>
-        <translation>&amp;Descargar</translation>
+        <translation type="vanished">&amp;Descargar</translation>
     </message>
     <message>
         <source>C&amp;ancel</source>
@@ -1207,6 +1215,10 @@
     </message>
     <message>
         <source>Show Bit Rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Download...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1466,19 +1478,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open in &amp;New Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Private Cookies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;View Private Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1503,6 +1507,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;View Private Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

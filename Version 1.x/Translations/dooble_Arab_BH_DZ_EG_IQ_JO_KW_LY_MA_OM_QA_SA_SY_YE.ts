@@ -448,8 +448,12 @@
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="613"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open in &amp;New Window</source>
-        <translation>افتح في نافذة &amp;جديدة</translation>
+        <translation type="vanished">افتح في نافذة &amp;جديدة</translation>
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="618"/>
@@ -581,13 +585,17 @@
 <context>
     <name>ddesktopwidget</name>
     <message>
-        <location filename="../Source/ddesktopwidget.cc" line="100"/>
         <source>&amp;Change Desktop Background</source>
-        <translation>&amp;غيّر خلفية سطح المكتب</translation>
+        <translation type="vanished">&amp;غيّر خلفية سطح المكتب</translation>
+    </message>
+    <message>
+        <location filename="../Source/ddesktopwidget.cc" line="100"/>
+        <source>&amp;Change Desktop Background...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/ddesktopwidget.cc" line="109"/>
-        <source>&amp;Launch Terminal</source>
+        <source>&amp;Launch Terminal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1004,13 +1012,21 @@
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="367"/>
-        <source>Open Link in &amp;New Window</source>
-        <translation>افتح الرابط في نافذة &amp;جديدة</translation>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="372"/>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Link in &amp;New Window</source>
+        <translation type="vanished">افتح الرابط في نافذة &amp;جديدة</translation>
+    </message>
+    <message>
         <source>S&amp;ave Link</source>
-        <translation>ا&amp;حفظ الرابط</translation>
+        <translation type="vanished">ا&amp;حفظ الرابط</translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="442"/>
@@ -1241,8 +1257,12 @@
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="254"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open in &amp;New Window</source>
-        <translation>افتح في نافذة &amp;جديدة</translation>
+        <translation type="vanished">افتح في نافذة &amp;جديدة</translation>
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="258"/>
@@ -1547,42 +1567,46 @@
         <translation>متصفح الويب دووبل: التنزيلات</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="51"/>
+        <location filename="../UI/ddownloadWindow.ui" line="60"/>
         <source>Show Bit Rates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="155"/>
+        <location filename="../UI/ddownloadWindow.ui" line="164"/>
         <source>Clea&amp;r</source>
         <translation>م&amp;سح</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="169"/>
         <source>&amp;Download</source>
-        <translation>&amp;نزّل</translation>
+        <translation type="vanished">&amp;نزّل</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="162"/>
+        <location filename="../UI/ddownloadWindow.ui" line="171"/>
         <source>C&amp;ancel</source>
         <translation>أ&amp;لغِ</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="121"/>
+        <location filename="../UI/ddownloadWindow.ui" line="130"/>
         <source>D&amp;ownload URL</source>
         <translation>رابط الت&amp;نزيل</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="229"/>
+        <location filename="../UI/ddownloadWindow.ui" line="178"/>
+        <source>&amp;Download...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/ddownloadWindow.ui" line="238"/>
         <source>Enter &amp;URL</source>
         <translation>أدرج &amp;رابط</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="222"/>
+        <location filename="../UI/ddownloadWindow.ui" line="231"/>
         <source>Clear &amp;List</source>
         <translation>نظّف ال&amp;قائمة</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="236"/>
+        <location filename="../UI/ddownloadWindow.ui" line="245"/>
         <source>&amp;Close</source>
         <translation>أ&amp;غلق</translation>
     </message>
@@ -1879,8 +1903,17 @@
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="270"/>
+        <source>Open in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dtabwidget.cc" line="342"/>
+        <source>&amp;View Private Cookies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Open in &amp;New Window</source>
-        <translation>افتح في نافذة &amp;جديدة</translation>
+        <translation type="vanished">افتح في نافذة &amp;جديدة</translation>
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="274"/>
@@ -1914,11 +1947,6 @@
     <message>
         <location filename="../Source/dtabwidget.cc" line="329"/>
         <source>&amp;Private Cookies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Source/dtabwidget.cc" line="342"/>
-        <source>&amp;View Private Cookies</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

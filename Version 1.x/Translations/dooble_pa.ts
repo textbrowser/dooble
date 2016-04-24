@@ -424,7 +424,7 @@
     </message>
     <message>
         <location filename="../Source/dbookmarkswindow.cc" line="613"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -553,13 +553,17 @@
         <translation type="obsolete">ਐਪਲੀਕੇਸ਼ਨ ਆਈਕਾਨ ਸ਼ਾਮਲ(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../Source/ddesktopwidget.cc" line="100"/>
         <source>&amp;Change Desktop Background</source>
-        <translation>ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ(&amp;C)</translation>
+        <translation type="vanished">ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../Source/ddesktopwidget.cc" line="100"/>
+        <source>&amp;Change Desktop Background...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/ddesktopwidget.cc" line="109"/>
-        <source>&amp;Launch Terminal</source>
+        <source>&amp;Launch Terminal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -950,6 +954,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../Source/dftpbrowser.cc" line="367"/>
+        <source>Open Link in &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dftpbrowser.cc" line="372"/>
+        <source>S&amp;ave Link...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>%1 Byte(s)</source>
         <translation type="obsolete">%1ਬਾਈਟ</translation>
     </message>
@@ -972,14 +986,8 @@
         <translation type="unfinished">ਨਵੀਂ ਟੈਬ ਵਿੱਚ ਲਿੰਕ ਖੋਲ੍ਹੋ(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../Source/dftpbrowser.cc" line="367"/>
         <source>Open Link in &amp;New Window</source>
-        <translation type="unfinished">ਲਿੰਕ ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੋਲ੍ਹੋ(&amp;N)</translation>
-    </message>
-    <message>
-        <location filename="../Source/dftpbrowser.cc" line="372"/>
-        <source>S&amp;ave Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">ਲਿੰਕ ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੋਲ੍ਹੋ(&amp;N)</translation>
     </message>
     <message>
         <location filename="../Source/dftpbrowser.cc" line="442"/>
@@ -1221,7 +1229,7 @@
     </message>
     <message>
         <location filename="../Source/dhistorysidebar.cc" line="254"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1507,42 +1515,46 @@
         <translation type="obsolete">ਡਾਊਨਲੋਡ: URL</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="155"/>
+        <location filename="../UI/ddownloadWindow.ui" line="164"/>
         <source>Clea&amp;r</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="169"/>
         <source>&amp;Download</source>
-        <translation>ਡਾਊਨਲੋਡ(&amp;D)</translation>
+        <translation type="vanished">ਡਾਊਨਲੋਡ(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="162"/>
+        <location filename="../UI/ddownloadWindow.ui" line="171"/>
         <source>C&amp;ancel</source>
         <translation>ਰੱਦ ਕਰੋ(&amp;a)</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="51"/>
+        <location filename="../UI/ddownloadWindow.ui" line="60"/>
         <source>Show Bit Rates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="121"/>
+        <location filename="../UI/ddownloadWindow.ui" line="130"/>
         <source>D&amp;ownload URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="229"/>
+        <location filename="../UI/ddownloadWindow.ui" line="178"/>
+        <source>&amp;Download...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/ddownloadWindow.ui" line="238"/>
         <source>Enter &amp;URL</source>
         <translation>&amp;URL ਦਿਓ</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="222"/>
+        <location filename="../UI/ddownloadWindow.ui" line="231"/>
         <source>Clear &amp;List</source>
         <translation>ਲਿਸਟ ਸਾਫ਼ ਕਰੋ(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../UI/ddownloadWindow.ui" line="236"/>
+        <location filename="../UI/ddownloadWindow.ui" line="245"/>
         <source>&amp;Close</source>
         <translation>ਬੰਦ ਕਰੋ(&amp;C)</translation>
     </message>
@@ -1846,7 +1858,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="270"/>
-        <source>Open in &amp;New Window</source>
+        <source>Open in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1881,7 +1893,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../Source/dtabwidget.cc" line="342"/>
-        <source>&amp;View Private Cookies</source>
+        <source>&amp;View Private Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
