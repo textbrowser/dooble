@@ -4514,7 +4514,8 @@ void dooble::slotAbout(void)
              "Dooble Web Browser<br><br>"
              "Version %1, Violet Moonbeams.<br>"
 	     "Copyright (c) 2008 - present.<br>"
-	     "Qt version %3, architecture %4."
+	     "Qt version %3, architecture %4.<br>"
+	     "libgcrypt version %5."
 	     "<hr>"
 	     "Please visit <a href=\"http://dooble.sf.net\">"
 	     "http://dooble.sf.net</a> for more information."
@@ -4529,7 +4530,8 @@ void dooble::slotAbout(void)
 	     "</html>").
      arg(DOOBLE_VERSION_STR).
      arg(QT_VERSION_STR).
-     arg(ARCHITECTURE_STR));
+     arg(ARCHITECTURE_STR).
+     arg(GCRYPT_VERSION));
   mb->setStandardButtons(QMessageBox::Ok);
 
   QSettings settings
