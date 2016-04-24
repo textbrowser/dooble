@@ -295,8 +295,6 @@ dhistory::dhistory(void):QMainWindow()
 #else
   ui.sharePushButton->setEnabled(false);
   ui.sharePushButton->setToolTip(tr("Spot-On support is not available."));
-#else
-  ui.sharePushButton->setEnabled(false);
 #endif
 }
 

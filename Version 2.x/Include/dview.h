@@ -136,7 +136,7 @@ class dview: public QStackedWidget
   dooble *findDooble(void);
   int downloadPrompt(const QString &fileName);
   int tabIndex(void);
-  qint64 parentId(void);
+  quint64 parentId(void);
   void enterEvent(QEvent *event);
   void prepareRestorationFileNames(void);
   void setUrlForUnsupportedContent(const QUrl &url);
