@@ -80,6 +80,7 @@ class dsettings: public QMainWindow
   void slotEnablePassphrase(void);
   void slotGroupBoxClicked(bool checked);
   void slotIconsPreview(void);
+  void slotNegateHttpCodes(bool state);
   void slotPurgeMemoryCaches(void);
   void slotSelectIconCfgFile(void);
   void slotSetIcons(void);

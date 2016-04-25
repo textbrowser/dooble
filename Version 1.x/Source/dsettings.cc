@@ -63,6 +63,14 @@ dsettings::dsettings():QMainWindow()
   connect(ui.applicationsTable,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this, SLOT(slotCustomContextMenuRequested(const QPoint &)));
+  connect(ui.negate_disabled_http_codes,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slotNegateHttpCodes(bool)));
+  connect(ui.negate_enabled_http_codes,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slotNegateHttpCodes(bool)));
 
   foreach(QProgressBar *progressBar, findChildren<QProgressBar *> ())
     progressBar->setVisible(false);
@@ -428,6 +436,7 @@ dsettings::~dsettings()
 
 void dsettings::exec(dooble *parent)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   ui.httpStatusCodes->clearContents();
   ui.httpStatusCodes->setRowCount(599 - 400 + 3);
 
@@ -1486,6 +1495,8 @@ void dsettings::exec(dooble *parent)
 
   if(panelButton)
     panelButton->setFocus();
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dsettings::slotClicked(QAbstractButton *button)
@@ -3041,3 +3052,40 @@ bool dsettings::event(QEvent *event)
   return QMainWindow::event(event);
 }
 #endif
+
+void dsettings::slotNegateHttpCodes(bool state)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QHash<int, int> httpStatusCodes;
+
+  for(int i = 0; i < ui.httpStatusCodes->rowCount(); i++)
+    {
+      QTableWidgetItem *item = ui.httpStatusCodes->item(i, 0);
+
+      if(!item)
+	continue;
+
+      if(sender() == ui.negate_disabled_http_codes)
+	{
+	  if(item->checkState() != Qt::Checked)
+	    {
+	      httpStatusCodes[item->text().toInt()] = state;
+	      item->setCheckState(Qt::Checked);
+	    }
+	}
+      else
+	{
+	  if(item->checkState() == Qt::Checked)
+	    {
+	      httpStatusCodes[item->text().toInt()] = state;
+	      item->setCheckState(Qt::Unchecked);
+	    }
+	}
+    }
+
+  if(!httpStatusCodes.isEmpty())
+    dmisc::updateHttpStatusCodes(httpStatusCodes);
+
+  QApplication::restoreOverrideCursor();
+}
