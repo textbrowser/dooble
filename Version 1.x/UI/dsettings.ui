@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>110</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,8 +380,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>520</width>
-               <height>571</height>
+               <width>746</width>
+               <height>529</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -518,6 +518,9 @@
                  <widget class="QComboBox" name="tab_bar_position">
                   <property name="currentIndex">
                    <number>1</number>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
                   </property>
                   <item>
                    <property name="text">
@@ -1234,9 +1237,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>303</width>
-               <height>550</height>
+               <y>-44</y>
+               <width>722</width>
+               <height>536</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1551,8 +1554,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>594</width>
-               <height>897</height>
+               <width>728</width>
+               <height>861</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2543,8 +2546,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>476</width>
-               <height>709</height>
+               <width>728</width>
+               <height>647</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3085,9 +3088,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-529</y>
-               <width>738</width>
-               <height>1350</height>
+               <y>0</y>
+               <width>728</width>
+               <height>1295</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
