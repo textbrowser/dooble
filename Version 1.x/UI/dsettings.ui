@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>110</width>
+         <width>115</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,8 +380,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>746</width>
-               <height>529</height>
+               <width>599</width>
+               <height>499</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1237,9 +1237,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-44</y>
-               <width>722</width>
-               <height>536</height>
+               <y>0</y>
+               <width>350</width>
+               <height>550</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1554,8 +1554,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>728</width>
-               <height>861</height>
+               <width>700</width>
+               <height>882</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2546,8 +2546,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>728</width>
-               <height>647</height>
+               <width>530</width>
+               <height>726</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3089,8 +3089,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>728</width>
-               <height>1295</height>
+               <width>597</width>
+               <height>1320</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -4339,6 +4339,50 @@
               </widget>
              </item>
              <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_50">
+               <item>
+                <spacer name="horizontalSpacer_45">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="negate_disabled_http_codes">
+                 <property name="text">
+                  <string>Negate Disabled</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="negate_enabled_http_codes">
+                 <property name="text">
+                  <string>Negate Enabled</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_44">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
               <widget class="QTableWidget" name="httpStatusCodes">
                <attribute name="horizontalHeaderDefaultSectionSize">
                 <number>150</number>
@@ -4668,6 +4712,8 @@
   <tabstop>appendNewTabsCheckBox</tabstop>
   <tabstop>closeTabWarningCheckBox</tabstop>
   <tabstop>leaveModifiedTabCheckBox</tabstop>
+  <tabstop>negate_disabled_http_codes</tabstop>
+  <tabstop>negate_enabled_http_codes</tabstop>
   <tabstop>httpStatusCodes</tabstop>
   <tabstop>purgeMemoryCachesCheckBox</tabstop>
   <tabstop>spatialNavigationCheckBox</tabstop>
