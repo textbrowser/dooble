@@ -64,11 +64,11 @@ dsettings::dsettings():QMainWindow()
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this, SLOT(slotCustomContextMenuRequested(const QPoint &)));
   connect(ui.negate_disabled_http_codes,
-	  SIGNAL(toggled(bool)),
+	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slotNegateHttpCodes(bool)));
   connect(ui.negate_enabled_http_codes,
-	  SIGNAL(toggled(bool)),
+	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slotNegateHttpCodes(bool)));
 
