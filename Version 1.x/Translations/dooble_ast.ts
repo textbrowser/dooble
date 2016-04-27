@@ -3534,6 +3534,14 @@ p, li { white-space: pre-wrap; }
         <source>Just-in-time Compiler</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Negate Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Negate Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>sslCiphersWindow</name>

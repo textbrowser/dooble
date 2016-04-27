@@ -1928,33 +1928,33 @@
         <translation type="obsolete">Plugins web (instável)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1519"/>
-        <location filename="../Source/dsettings.cc" line="1553"/>
+        <location filename="../Source/dsettings.cc" line="1530"/>
+        <location filename="../Source/dsettings.cc" line="1564"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1520"/>
+        <location filename="../Source/dsettings.cc" line="1531"/>
         <source>The passphrases do not match.</source>
         <translation>As palavra-chave não são iguais.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2167"/>
+        <location filename="../Source/dsettings.cc" line="2178"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Confirmação</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1404"/>
+        <location filename="../Source/dsettings.cc" line="1413"/>
         <source>unknown</source>
         <translation>desconhecido</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="72"/>
+        <location filename="../Source/dsettings.cc" line="80"/>
         <source>allowed with existing cookies</source>
         <translation>permitido com os cookies existentes</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1554"/>
+        <location filename="../Source/dsettings.cc" line="1565"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>A sua palavra-chave tem que ter, no mínimo, 16 caracteres.</translation>
     </message>
@@ -1963,7 +1963,7 @@
         <translation type="obsolete">Está prestes a reiniciar as definições. Se tiver definido uma palavra-chave, esta será mantida. O Dooble será reiniciado para concluir o processo. Todos os dados não gravados serão perdidos. Tem a certeza que quer continuar?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2265"/>
+        <location filename="../Source/dsettings.cc" line="2276"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Seleção de tema</translation>
     </message>
@@ -1972,12 +1972,12 @@
         <translation type="obsolete">&amp;Selecionar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2283"/>
+        <location filename="../Source/dsettings.cc" line="2294"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Ficheiro de tema (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2368"/>
+        <location filename="../Source/dsettings.cc" line="2379"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Seleção do diretório dos ficheiros recebidos</translation>
     </message>
@@ -1986,59 +1986,59 @@
         <translation type="obsolete">&amp;Abrir</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="580"/>
+        <location filename="../Source/dsettings.cc" line="589"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Plugins web</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2170"/>
+        <location filename="../Source/dsettings.cc" line="2181"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2282"/>
-        <location filename="../Source/dsettings.cc" line="2756"/>
+        <location filename="../Source/dsettings.cc" line="2293"/>
+        <location filename="../Source/dsettings.cc" line="2767"/>
         <source>Select</source>
         <translation>Seleção</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2371"/>
-        <location filename="../Source/dsettings.cc" line="2399"/>
+        <location filename="../Source/dsettings.cc" line="2382"/>
+        <location filename="../Source/dsettings.cc" line="2410"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2396"/>
+        <location filename="../Source/dsettings.cc" line="2407"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Seleção da base de dados partilhada Spot-On</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2671"/>
+        <location filename="../Source/dsettings.cc" line="2682"/>
         <source>Prompt</source>
         <translation>Perguntar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2688"/>
+        <location filename="../Source/dsettings.cc" line="2699"/>
         <source>Use other...</source>
         <translation>Outra...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2753"/>
+        <location filename="../Source/dsettings.cc" line="2764"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Seleção de aplicação</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2876"/>
+        <location filename="../Source/dsettings.cc" line="2887"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2880"/>
+        <location filename="../Source/dsettings.cc" line="2891"/>
         <source>&amp;Delete File Suffix</source>
         <translation>E&amp;liminar sufixo</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2974"/>
+        <location filename="../Source/dsettings.cc" line="2985"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3570,7 +3570,7 @@
     <message>
         <location filename="../UI/dsettings.ui" line="114"/>
         <location filename="../UI/dsettings.ui" line="117"/>
-        <location filename="../UI/dsettings.ui" line="1386"/>
+        <location filename="../UI/dsettings.ui" line="1389"/>
         <source>Home</source>
         <translation>Página inicial</translation>
     </message>
@@ -3589,17 +3589,17 @@
         <translation>Histórico</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="990"/>
+        <location filename="../UI/dsettings.ui" line="993"/>
         <source>Remember browsing history of the last</source>
         <translation>Memorizar histórico de navegação dos últimos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1037"/>
+        <location filename="../UI/dsettings.ui" line="1040"/>
         <source>Remember download history.</source>
         <translation>Memorizar histórico de transferências.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1108"/>
+        <location filename="../UI/dsettings.ui" line="1111"/>
         <source>Web Cache</source>
         <translation>Cache web</translation>
     </message>
@@ -3608,63 +3608,63 @@
         <translation type="obsolete">50 MB de conteúdo em cache.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1184"/>
-        <location filename="../UI/dsettings.ui" line="4012"/>
+        <location filename="../UI/dsettings.ui" line="1187"/>
+        <location filename="../UI/dsettings.ui" line="4015"/>
         <source>&amp;Clear</source>
         <translation>&amp;Limpar</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1417"/>
+        <location filename="../UI/dsettings.ui" line="1420"/>
         <source>URL 01</source>
         <translation>URL 01</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1430"/>
+        <location filename="../UI/dsettings.ui" line="1433"/>
         <source>URL 02</source>
         <translation>URL 02</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1443"/>
+        <location filename="../UI/dsettings.ui" line="1446"/>
         <source>URL 03</source>
         <translation>URL 03</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1467"/>
+        <location filename="../UI/dsettings.ui" line="1470"/>
         <source>URL 04</source>
         <translation>URL 04</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1484"/>
+        <location filename="../UI/dsettings.ui" line="1487"/>
         <source>URL 05</source>
         <translation>URL 05</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1256"/>
+        <location filename="../UI/dsettings.ui" line="1259"/>
         <source>URL 06</source>
         <translation>URL 06</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1286"/>
+        <location filename="../UI/dsettings.ui" line="1289"/>
         <source>URL 07</source>
         <translation>URL 07</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1494"/>
+        <location filename="../UI/dsettings.ui" line="1497"/>
         <source>URL 08</source>
         <translation>URL 08</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1303"/>
+        <location filename="../UI/dsettings.ui" line="1306"/>
         <source>URL 09</source>
         <translation>URL 09</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1320"/>
+        <location filename="../UI/dsettings.ui" line="1323"/>
         <source>URL 10</source>
         <translation>URL 10</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1337"/>
+        <location filename="../UI/dsettings.ui" line="1340"/>
         <source>URL 11</source>
         <translation>URL 11</translation>
     </message>
@@ -3673,49 +3673,49 @@
         <translation type="obsolete">Dooble Search</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1351"/>
+        <location filename="../UI/dsettings.ui" line="1354"/>
         <source>My Retrieved Files</source>
         <translation>Ficheiros recebidos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1379"/>
+        <location filename="../UI/dsettings.ui" line="1382"/>
         <source>about: blank</source>
         <translation>about: blank</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1372"/>
+        <location filename="../UI/dsettings.ui" line="1375"/>
         <source>P2P E-Mail URL</source>
         <translation>URL P2P</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1564"/>
+        <location filename="../UI/dsettings.ui" line="1567"/>
         <source>Browsing Proxy Configuration</source>
         <translation>Definições do proxy de navegação</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1912"/>
+        <location filename="../UI/dsettings.ui" line="1915"/>
         <source>Web 2.0 Browsing (I2P)</source>
         <translation>Navegação web 2.0 (I2P)</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2045"/>
+        <location filename="../UI/dsettings.ui" line="2048"/>
         <source>Download Proxy Configuration</source>
         <translation>Definições do proxy de transferência</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1634"/>
-        <location filename="../UI/dsettings.ui" line="2115"/>
+        <location filename="../UI/dsettings.ui" line="1637"/>
+        <location filename="../UI/dsettings.ui" line="2118"/>
         <source>FTP</source>
         <translation>FTP</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1766"/>
-        <location filename="../UI/dsettings.ui" line="2247"/>
+        <location filename="../UI/dsettings.ui" line="1769"/>
+        <location filename="../UI/dsettings.ui" line="2250"/>
         <source>HTTP</source>
         <translation>HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2393"/>
+        <location filename="../UI/dsettings.ui" line="2396"/>
         <source>Web 2.0 Downloads (I2P)</source>
         <translation>Transferências web 2.0 (I2P)</translation>
     </message>
@@ -3736,17 +3736,17 @@
         <translation type="obsolete">Aceitar cookies</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3369"/>
+        <location filename="../UI/dsettings.ui" line="3372"/>
         <source>preserved forever</source>
         <translation>armazenados eternamente</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3374"/>
+        <location filename="../UI/dsettings.ui" line="3377"/>
         <source>preserved until they expire</source>
         <translation>armazenados até expirarem</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3720"/>
+        <location filename="../UI/dsettings.ui" line="3723"/>
         <source>JavaScript</source>
         <translation>JavaScript</translation>
     </message>
@@ -3755,7 +3755,7 @@
         <translation type="obsolete">Aceitar alertas.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4234"/>
+        <location filename="../UI/dsettings.ui" line="4237"/>
         <source>Always show the tab bar.</source>
         <translation>Mostrar sempre a barra de separadores.</translation>
     </message>
@@ -3764,7 +3764,7 @@
         <translation type="vanished">Fechar o separador selecionado com a roda do rato.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4274"/>
+        <location filename="../UI/dsettings.ui" line="4277"/>
         <source>Open links in new tabs instead of new windows.</source>
         <translation>Abrir ligações em novos separadores e não em novas janelas.</translation>
     </message>
@@ -3775,28 +3775,28 @@
         <translation>Janelas</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1146"/>
+        <location filename="../UI/dsettings.ui" line="1149"/>
         <source>Disk Cache</source>
         <translation>Cache de disco</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1400"/>
+        <location filename="../UI/dsettings.ui" line="1403"/>
         <source>IRC Channel</source>
         <translation>Canal IRC</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1407"/>
+        <location filename="../UI/dsettings.ui" line="1410"/>
         <source>https://webchat.freenode.net?channels=dooble</source>
         <translation>https://webchat.freenode.net?channels=dooble</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1924"/>
-        <location filename="../UI/dsettings.ui" line="2405"/>
+        <location filename="../UI/dsettings.ui" line="1927"/>
+        <location filename="../UI/dsettings.ui" line="2408"/>
         <source>The following settings override the above settings if the requested URL&apos;s host ends in i2p.</source>
         <translation>Estas definições substituem as definições acima se o URL do servidor terminar em i2p.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2622"/>
+        <location filename="../UI/dsettings.ui" line="2625"/>
         <source>If the Modify Passphrase button is disabled, the passphrase that you provided does not match the stored passphrase or a passphrase has not been set.</source>
         <translation>Se o botão Modificar palavra-chave estiver inativo, a palavra-chave introduzida não coincide com a que está armazenada ou ainda não foi definida.</translation>
     </message>
@@ -3805,7 +3805,7 @@
         <translation type="vanished">Recodificar cache.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2716"/>
+        <location filename="../UI/dsettings.ui" line="2719"/>
         <source>Iteration Count</source>
         <translation>Contar interações</translation>
     </message>
@@ -3818,7 +3818,7 @@
         <translation type="obsolete">Mostrar informações de autenticação ao iniciar.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2992"/>
+        <location filename="../UI/dsettings.ui" line="2995"/>
         <source>&amp;Modify Passphrase</source>
         <translation>&amp;Modificar palavra-chave</translation>
     </message>
@@ -3827,47 +3827,47 @@
         <translation type="vanished">No mínimo, 16 caracteres.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3105"/>
+        <location filename="../UI/dsettings.ui" line="3108"/>
         <source>Always HTTPS</source>
         <translation type="unfinished">Sempre HTTPS</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3142"/>
+        <location filename="../UI/dsettings.ui" line="3145"/>
         <source>Automatically Load Web Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3182"/>
+        <location filename="../UI/dsettings.ui" line="3185"/>
         <source>Block Pop-up Windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3222"/>
+        <location filename="../UI/dsettings.ui" line="3225"/>
         <source>Block Third-party Frame Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3257"/>
+        <location filename="../UI/dsettings.ui" line="3260"/>
         <source>Cookies</source>
         <translation type="unfinished">Cookies</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3308"/>
+        <location filename="../UI/dsettings.ui" line="3311"/>
         <source>Accept HTTP Cookies Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3494"/>
+        <location filename="../UI/dsettings.ui" line="3497"/>
         <source>Third-party cookies should be</source>
         <translation>Os cookies de terceiros são</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3508"/>
+        <location filename="../UI/dsettings.ui" line="3511"/>
         <source>always allowed</source>
         <translation>sempre permitidos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3513"/>
+        <location filename="../UI/dsettings.ui" line="3516"/>
         <source>always blocked</source>
         <translation>sempre bloqueados</translation>
     </message>
@@ -3876,7 +3876,7 @@
         <translation type="obsolete">Ativar auditoria de hiperligações.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3594"/>
+        <location filename="../UI/dsettings.ui" line="3597"/>
         <source>HTTP Headers</source>
         <translation>Cabeçalhos HTTP</translation>
     </message>
@@ -3885,67 +3885,67 @@
         <translation type="obsolete">DNT (Do Not Track)</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3685"/>
+        <location filename="../UI/dsettings.ui" line="3688"/>
         <source>Suppress HTTP Referrer</source>
         <translation type="unfinished">Suprimir referência HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3781"/>
+        <location filename="../UI/dsettings.ui" line="3784"/>
         <source>Accept dialog confirmations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3815"/>
+        <location filename="../UI/dsettings.ui" line="3818"/>
         <source>Enable cross-site script auditing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3842"/>
+        <location filename="../UI/dsettings.ui" line="3845"/>
         <source>Allow hiding of the menu bar.</source>
         <translation>Permitir ocultação da barra de menu.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3852"/>
+        <location filename="../UI/dsettings.ui" line="3855"/>
         <source>Allow hiding of the status bar.</source>
         <translation>Permitir ocultação da barra de estado.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3859"/>
+        <location filename="../UI/dsettings.ui" line="3862"/>
         <source>Allow hiding of the location tool bar.</source>
         <translation>Permitir ocultação da barra de endereço.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3866"/>
+        <location filename="../UI/dsettings.ui" line="3869"/>
         <source>Accept dialog alerts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3876"/>
+        <location filename="../UI/dsettings.ui" line="3879"/>
         <source>Accept dialog prompts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3891"/>
+        <location filename="../UI/dsettings.ui" line="3894"/>
         <source>Just-in-time Compiler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3918"/>
+        <location filename="../UI/dsettings.ui" line="3921"/>
         <source>Local documents are allowed to access other local URLs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3945"/>
+        <location filename="../UI/dsettings.ui" line="3948"/>
         <source>Notify me of console events and exceptions.</source>
         <translation>Notificar eventos de consola e exceções.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4005"/>
+        <location filename="../UI/dsettings.ui" line="4008"/>
         <source>Record favicon data to favicons.db.</source>
         <translation>Gravar dados e base de dados de favicons.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4036"/>
+        <location filename="../UI/dsettings.ui" line="4039"/>
         <source>Session Restoration</source>
         <translation type="unfinished">Restauro de sessão</translation>
     </message>
@@ -3954,7 +3954,7 @@
         <translation type="obsolete">Erros SSL</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4079"/>
+        <location filename="../UI/dsettings.ui" line="4082"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A relaxed setting allows Dooble to ignore SSL errors that are generated by third-party elements. A strict setting instructs Dooble to observe all SSL errors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se definir a opção permissiva, o Dooble ignora os erros SSL gerados pelos elementos de terceiros e se definir a opção não permissiva, o Dooble mostra todos os erros SSL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3967,42 +3967,42 @@
         <translation type="obsolete">Não permissiva</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4157"/>
+        <location filename="../UI/dsettings.ui" line="4160"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Plugins web</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4181"/>
+        <location filename="../UI/dsettings.ui" line="4184"/>
         <source>WebGL</source>
         <translation type="unfinished">WebGL</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4244"/>
+        <location filename="../UI/dsettings.ui" line="4247"/>
         <source>Close the selected tab via a middle mouse button click.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4264"/>
+        <location filename="../UI/dsettings.ui" line="4267"/>
         <source>Display the Dooble Desktop in new windows.</source>
         <translation>Mostrar área de trabalho Dooble nas novas janelas.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4284"/>
+        <location filename="../UI/dsettings.ui" line="4287"/>
         <source>New tabs should be added at the end of the tab bar.</source>
         <translation>Os novos separadores são abertos no fim da barra de separadores.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4291"/>
+        <location filename="../UI/dsettings.ui" line="4294"/>
         <source>Warn me before closing a page that has modified content.</source>
         <translation>Avisar antes de fechar uma página com conteúdo modificado.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4298"/>
+        <location filename="../UI/dsettings.ui" line="4301"/>
         <source>Warn me if I&apos;m about to leave a page that has modified content.</source>
         <translation>Avisar ao abandonar uma página com conteúdo modificado.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4322"/>
+        <location filename="../UI/dsettings.ui" line="4325"/>
         <source>HTTP Status Codes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4031,22 +4031,22 @@
         <translation type="obsolete">405</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4361"/>
+        <location filename="../UI/dsettings.ui" line="4408"/>
         <source>Periodically purge memory caches.</source>
         <translation>Limpar cache periodicamente.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4388"/>
+        <location filename="../UI/dsettings.ui" line="4435"/>
         <source>Spatial Navigation</source>
         <translation type="unfinished">Navegação entre elementos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4427"/>
+        <location filename="../UI/dsettings.ui" line="4474"/>
         <source>Center child windows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4441"/>
+        <location filename="../UI/dsettings.ui" line="4488"/>
         <source>Open user windows as new processes.</source>
         <translation>Abrir janelas de utilizador como novos processos.</translation>
     </message>
@@ -4117,20 +4117,20 @@
         <translation>WebKit</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="718"/>
-        <location filename="../UI/dsettings.ui" line="749"/>
-        <location filename="../UI/dsettings.ui" line="2919"/>
-        <location filename="../UI/dsettings.ui" line="2926"/>
-        <location filename="../UI/dsettings.ui" line="2933"/>
-        <location filename="../UI/dsettings.ui" line="2940"/>
-        <location filename="../UI/dsettings.ui" line="2947"/>
-        <location filename="../UI/dsettings.ui" line="2954"/>
-        <location filename="../UI/dsettings.ui" line="2961"/>
+        <location filename="../UI/dsettings.ui" line="721"/>
+        <location filename="../UI/dsettings.ui" line="752"/>
+        <location filename="../UI/dsettings.ui" line="2922"/>
+        <location filename="../UI/dsettings.ui" line="2929"/>
+        <location filename="../UI/dsettings.ui" line="2936"/>
+        <location filename="../UI/dsettings.ui" line="2943"/>
+        <location filename="../UI/dsettings.ui" line="2950"/>
+        <location filename="../UI/dsettings.ui" line="2957"/>
+        <location filename="../UI/dsettings.ui" line="2964"/>
         <source>Size</source>
         <translation>Tamanho</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="564"/>
+        <location filename="../UI/dsettings.ui" line="567"/>
         <source>Theme</source>
         <translation>Tema</translation>
     </message>
@@ -4215,314 +4215,324 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="524"/>
+        <location filename="../UI/dsettings.ui" line="527"/>
         <source>East</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="529"/>
+        <location filename="../UI/dsettings.ui" line="532"/>
         <source>North</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="534"/>
+        <location filename="../UI/dsettings.ui" line="537"/>
         <source>South</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="539"/>
+        <location filename="../UI/dsettings.ui" line="542"/>
         <source>West</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="584"/>
-        <location filename="../UI/dsettings.ui" line="1363"/>
-        <location filename="../UI/dsettings.ui" line="1517"/>
+        <location filename="../UI/dsettings.ui" line="587"/>
+        <location filename="../UI/dsettings.ui" line="1366"/>
+        <location filename="../UI/dsettings.ui" line="1520"/>
         <source>&amp;Browse...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="608"/>
+        <location filename="../UI/dsettings.ui" line="611"/>
         <source>Web Fonts</source>
         <translation>Tipos de letra</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="614"/>
+        <location filename="../UI/dsettings.ui" line="617"/>
         <source>Fixed</source>
         <translation>Fixa</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="631"/>
+        <location filename="../UI/dsettings.ui" line="634"/>
         <source>Default</source>
         <translation>Padrão</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="648"/>
+        <location filename="../UI/dsettings.ui" line="651"/>
         <source>Cursive</source>
         <translation>Cursiva</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="665"/>
+        <location filename="../UI/dsettings.ui" line="668"/>
         <source>Sans Serif</source>
         <translation>Sans Serif</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="682"/>
+        <location filename="../UI/dsettings.ui" line="685"/>
         <source>Serif</source>
         <translation>Serif</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="699"/>
+        <location filename="../UI/dsettings.ui" line="702"/>
         <source>Fantasy</source>
         <translation>Fantasia</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="780"/>
+        <location filename="../UI/dsettings.ui" line="783"/>
         <source>Minimum Size</source>
         <translation>Tamanho mínimo</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="794"/>
+        <location filename="../UI/dsettings.ui" line="797"/>
         <source>6</source>
         <translation type="unfinished">6</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="799"/>
+        <location filename="../UI/dsettings.ui" line="802"/>
         <source>7</source>
         <translation type="unfinished">7</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="804"/>
+        <location filename="../UI/dsettings.ui" line="807"/>
         <source>8</source>
         <translation type="unfinished">8</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="809"/>
+        <location filename="../UI/dsettings.ui" line="812"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="814"/>
+        <location filename="../UI/dsettings.ui" line="817"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="819"/>
+        <location filename="../UI/dsettings.ui" line="822"/>
         <source>11</source>
         <translation>11</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="824"/>
+        <location filename="../UI/dsettings.ui" line="827"/>
         <source>12</source>
         <translation>12</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="829"/>
+        <location filename="../UI/dsettings.ui" line="832"/>
         <source>13</source>
         <translation>13</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="834"/>
+        <location filename="../UI/dsettings.ui" line="837"/>
         <source>14</source>
         <translation>14</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="839"/>
+        <location filename="../UI/dsettings.ui" line="842"/>
         <source>15</source>
         <translation>15</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="859"/>
+        <location filename="../UI/dsettings.ui" line="862"/>
         <source>19</source>
         <translation type="unfinished">19</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="869"/>
+        <location filename="../UI/dsettings.ui" line="872"/>
         <source>21</source>
         <translation type="unfinished">21</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="879"/>
+        <location filename="../UI/dsettings.ui" line="882"/>
         <source>23</source>
         <translation type="unfinished">23</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="889"/>
+        <location filename="../UI/dsettings.ui" line="892"/>
         <source>25</source>
         <translation type="unfinished">25</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1122"/>
-        <location filename="../UI/dsettings.ui" line="3112"/>
-        <location filename="../UI/dsettings.ui" line="3152"/>
-        <location filename="../UI/dsettings.ui" line="3192"/>
-        <location filename="../UI/dsettings.ui" line="3232"/>
-        <location filename="../UI/dsettings.ui" line="3271"/>
-        <location filename="../UI/dsettings.ui" line="3315"/>
-        <location filename="../UI/dsettings.ui" line="3615"/>
-        <location filename="../UI/dsettings.ui" line="3655"/>
-        <location filename="../UI/dsettings.ui" line="3695"/>
-        <location filename="../UI/dsettings.ui" line="3793"/>
-        <location filename="../UI/dsettings.ui" line="4109"/>
+        <location filename="../UI/dsettings.ui" line="1125"/>
+        <location filename="../UI/dsettings.ui" line="3115"/>
+        <location filename="../UI/dsettings.ui" line="3155"/>
+        <location filename="../UI/dsettings.ui" line="3195"/>
+        <location filename="../UI/dsettings.ui" line="3235"/>
+        <location filename="../UI/dsettings.ui" line="3274"/>
+        <location filename="../UI/dsettings.ui" line="3318"/>
+        <location filename="../UI/dsettings.ui" line="3618"/>
+        <location filename="../UI/dsettings.ui" line="3658"/>
+        <location filename="../UI/dsettings.ui" line="3698"/>
+        <location filename="../UI/dsettings.ui" line="3796"/>
+        <location filename="../UI/dsettings.ui" line="4112"/>
         <source>&amp;Exceptions...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1573"/>
-        <location filename="../UI/dsettings.ui" line="2054"/>
+        <location filename="../UI/dsettings.ui" line="1576"/>
+        <location filename="../UI/dsettings.ui" line="2057"/>
         <source>&amp;Ignore for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1579"/>
-        <location filename="../UI/dsettings.ui" line="2060"/>
+        <location filename="../UI/dsettings.ui" line="1582"/>
+        <location filename="../UI/dsettings.ui" line="2063"/>
         <source>Examples: .nasa.gov, localhost, 192.168.178.0/24.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2556"/>
+        <location filename="../UI/dsettings.ui" line="2559"/>
         <source>Disable all encrypted database writes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2580"/>
+        <location filename="../UI/dsettings.ui" line="2583"/>
         <source>Show authentication prompt after launch.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2658"/>
+        <location filename="../UI/dsettings.ui" line="2661"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3048"/>
+        <location filename="../UI/dsettings.ui" line="3051"/>
         <source>Minimum of 16 characters, please.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3572"/>
+        <location filename="../UI/dsettings.ui" line="3575"/>
         <source>Enable hyperlink auditing. Proper understanding of this option is required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3608"/>
+        <location filename="../UI/dsettings.ui" line="3611"/>
         <source>Do Not Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3734"/>
+        <location filename="../UI/dsettings.ui" line="3737"/>
         <source>Stagnant Scripts Default Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3748"/>
+        <location filename="../UI/dsettings.ui" line="3751"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3753"/>
+        <location filename="../UI/dsettings.ui" line="3756"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3758"/>
+        <location filename="../UI/dsettings.ui" line="3761"/>
         <source>Prompt</source>
         <translation type="unfinished">Perguntar</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3972"/>
+        <location filename="../UI/dsettings.ui" line="3975"/>
         <source>Private browsing. HTML5 storage will be disabled if private browsing is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4069"/>
+        <location filename="../UI/dsettings.ui" line="4072"/>
         <source>Sight SSL errors. Assume a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4089"/>
+        <location filename="../UI/dsettings.ui" line="4092"/>
         <source>relaxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4094"/>
+        <location filename="../UI/dsettings.ui" line="4097"/>
         <source>strict</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4102"/>
+        <location filename="../UI/dsettings.ui" line="4105"/>
         <source>approach.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4328"/>
+        <location filename="../UI/dsettings.ui" line="4331"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please read &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/span&gt;&lt;/a&gt; for descriptions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4348"/>
+        <location filename="../UI/dsettings.ui" line="4359"/>
+        <source>Negate Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="4366"/>
+        <source>Negate Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dsettings.ui" line="4395"/>
         <source>Display Dooble&apos;s Error Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4434"/>
+        <location filename="../UI/dsettings.ui" line="4481"/>
         <source>Close the Downloads window after downloads have completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4448"/>
+        <location filename="../UI/dsettings.ui" line="4495"/>
         <source>Use native file dialogs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="478"/>
-        <location filename="../UI/dsettings.ui" line="844"/>
+        <location filename="../UI/dsettings.ui" line="847"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="849"/>
+        <location filename="../UI/dsettings.ui" line="852"/>
         <source>17</source>
         <translation>17</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="854"/>
+        <location filename="../UI/dsettings.ui" line="857"/>
         <source>18</source>
         <translation>18</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="864"/>
+        <location filename="../UI/dsettings.ui" line="867"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="874"/>
+        <location filename="../UI/dsettings.ui" line="877"/>
         <source>22</source>
         <translation>22</translation>
     </message>
     <message>
         <location filename="../UI/dsettings.ui" line="483"/>
-        <location filename="../UI/dsettings.ui" line="884"/>
+        <location filename="../UI/dsettings.ui" line="887"/>
         <source>24</source>
         <translation>24</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="912"/>
+        <location filename="../UI/dsettings.ui" line="915"/>
         <source>Character Encoding</source>
         <translation>Codificação de caracteres</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="926"/>
+        <location filename="../UI/dsettings.ui" line="929"/>
         <source>Text Size Multiplier</source>
         <translation>Multiplicador de tamanho</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1070"/>
+        <location filename="../UI/dsettings.ui" line="1073"/>
         <source>Remember the last</source>
         <translation>Memorizar os últimos</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1084"/>
+        <location filename="../UI/dsettings.ui" line="1087"/>
         <source>recently-closed tab(s).</source>
         <translation>separador(es) fechados recentemente.</translation>
     </message>
@@ -4551,22 +4561,22 @@
         <translation type="vanished">Recodificar histórico.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3034"/>
+        <location filename="../UI/dsettings.ui" line="3037"/>
         <source>Passphrase Confirmation</source>
         <translation>Confirmação de palavra-chave</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3645"/>
+        <location filename="../UI/dsettings.ui" line="3648"/>
         <source>Suppress HTTP Redirect</source>
         <translation type="unfinished">Suprimir reencaminhamento HTTP</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4133"/>
+        <location filename="../UI/dsettings.ui" line="4136"/>
         <source>Speedy Network Protocol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4224"/>
+        <location filename="../UI/dsettings.ui" line="4227"/>
         <source>After creating a new tab from a Web link, switch to it immediately.</source>
         <translation>Ao abrir um separador através de uma ligação web, trocar imediatamente.</translation>
     </message>
@@ -4583,40 +4593,40 @@
         <translation type="obsolete">Konfiguration Proxy </translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1646"/>
-        <location filename="../UI/dsettings.ui" line="1890"/>
-        <location filename="../UI/dsettings.ui" line="1936"/>
-        <location filename="../UI/dsettings.ui" line="2127"/>
-        <location filename="../UI/dsettings.ui" line="2259"/>
-        <location filename="../UI/dsettings.ui" line="2417"/>
+        <location filename="../UI/dsettings.ui" line="1649"/>
+        <location filename="../UI/dsettings.ui" line="1893"/>
+        <location filename="../UI/dsettings.ui" line="1939"/>
+        <location filename="../UI/dsettings.ui" line="2130"/>
+        <location filename="../UI/dsettings.ui" line="2262"/>
+        <location filename="../UI/dsettings.ui" line="2420"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1662"/>
-        <location filename="../UI/dsettings.ui" line="1784"/>
-        <location filename="../UI/dsettings.ui" line="1957"/>
-        <location filename="../UI/dsettings.ui" line="2143"/>
-        <location filename="../UI/dsettings.ui" line="2275"/>
-        <location filename="../UI/dsettings.ui" line="2438"/>
+        <location filename="../UI/dsettings.ui" line="1665"/>
+        <location filename="../UI/dsettings.ui" line="1787"/>
+        <location filename="../UI/dsettings.ui" line="1960"/>
+        <location filename="../UI/dsettings.ui" line="2146"/>
+        <location filename="../UI/dsettings.ui" line="2278"/>
+        <location filename="../UI/dsettings.ui" line="2441"/>
         <source>Socks5</source>
         <translation>Socks5</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1789"/>
-        <location filename="../UI/dsettings.ui" line="1952"/>
-        <location filename="../UI/dsettings.ui" line="2280"/>
-        <location filename="../UI/dsettings.ui" line="2433"/>
+        <location filename="../UI/dsettings.ui" line="1792"/>
+        <location filename="../UI/dsettings.ui" line="1955"/>
+        <location filename="../UI/dsettings.ui" line="2283"/>
+        <location filename="../UI/dsettings.ui" line="2436"/>
         <source>Http</source>
         <translation>Http</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1685"/>
-        <location filename="../UI/dsettings.ui" line="1812"/>
-        <location filename="../UI/dsettings.ui" line="1980"/>
-        <location filename="../UI/dsettings.ui" line="2166"/>
-        <location filename="../UI/dsettings.ui" line="2303"/>
-        <location filename="../UI/dsettings.ui" line="2461"/>
+        <location filename="../UI/dsettings.ui" line="1688"/>
+        <location filename="../UI/dsettings.ui" line="1815"/>
+        <location filename="../UI/dsettings.ui" line="1983"/>
+        <location filename="../UI/dsettings.ui" line="2169"/>
+        <location filename="../UI/dsettings.ui" line="2306"/>
+        <location filename="../UI/dsettings.ui" line="2464"/>
         <source>Host Name</source>
         <translation>Nome do servidor</translation>
     </message>
@@ -4631,138 +4641,138 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1158"/>
+        <location filename="../UI/dsettings.ui" line="1161"/>
         <source> MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1177"/>
+        <location filename="../UI/dsettings.ui" line="1180"/>
         <source>50 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1501"/>
+        <location filename="../UI/dsettings.ui" line="1504"/>
         <source>Spot-On Shared Database</source>
         <translation>Base de dados partilhada Spot-On</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1510"/>
+        <location filename="../UI/dsettings.ui" line="1513"/>
         <source>shared.db</source>
         <translation>shared.db</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1530"/>
+        <location filename="../UI/dsettings.ui" line="1533"/>
         <source>The Home URL will be opened after the Home button is pressed. To open the first thirteen URLs, please press the Home button while pressing the Control key.</source>
         <translation>A página inicial será aberta ao premir o respetivo botão. Para abrir os URLs definidos, prima o botão mantendo a tecla Ctrl premida.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1602"/>
-        <location filename="../UI/dsettings.ui" line="2083"/>
+        <location filename="../UI/dsettings.ui" line="1605"/>
+        <location filename="../UI/dsettings.ui" line="2086"/>
         <source>None</source>
         <translation>Nenhum</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1612"/>
-        <location filename="../UI/dsettings.ui" line="2093"/>
+        <location filename="../UI/dsettings.ui" line="1615"/>
+        <location filename="../UI/dsettings.ui" line="2096"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1622"/>
-        <location filename="../UI/dsettings.ui" line="2103"/>
+        <location filename="../UI/dsettings.ui" line="1625"/>
+        <location filename="../UI/dsettings.ui" line="2106"/>
         <source>Manual</source>
         <translation>Manual</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1704"/>
-        <location filename="../UI/dsettings.ui" line="1831"/>
-        <location filename="../UI/dsettings.ui" line="2002"/>
-        <location filename="../UI/dsettings.ui" line="2185"/>
-        <location filename="../UI/dsettings.ui" line="2322"/>
-        <location filename="../UI/dsettings.ui" line="2483"/>
+        <location filename="../UI/dsettings.ui" line="1707"/>
+        <location filename="../UI/dsettings.ui" line="1834"/>
+        <location filename="../UI/dsettings.ui" line="2005"/>
+        <location filename="../UI/dsettings.ui" line="2188"/>
+        <location filename="../UI/dsettings.ui" line="2325"/>
+        <location filename="../UI/dsettings.ui" line="2486"/>
         <source>Port</source>
         <translation>Porta</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1726"/>
-        <location filename="../UI/dsettings.ui" line="1853"/>
-        <location filename="../UI/dsettings.ui" line="2207"/>
-        <location filename="../UI/dsettings.ui" line="2344"/>
+        <location filename="../UI/dsettings.ui" line="1729"/>
+        <location filename="../UI/dsettings.ui" line="1856"/>
+        <location filename="../UI/dsettings.ui" line="2210"/>
+        <location filename="../UI/dsettings.ui" line="2347"/>
         <source>User Name</source>
         <translation>Utilizador</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1743"/>
-        <location filename="../UI/dsettings.ui" line="1870"/>
-        <location filename="../UI/dsettings.ui" line="2224"/>
-        <location filename="../UI/dsettings.ui" line="2361"/>
+        <location filename="../UI/dsettings.ui" line="1746"/>
+        <location filename="../UI/dsettings.ui" line="1873"/>
+        <location filename="../UI/dsettings.ui" line="2227"/>
+        <location filename="../UI/dsettings.ui" line="2364"/>
         <source>Password</source>
         <translation>Palavra-passe</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1995"/>
-        <location filename="../UI/dsettings.ui" line="2476"/>
+        <location filename="../UI/dsettings.ui" line="1998"/>
+        <location filename="../UI/dsettings.ui" line="2479"/>
         <source>127.0.0.1</source>
         <translation>127.0.0.1</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2612"/>
+        <location filename="../UI/dsettings.ui" line="2615"/>
         <source>If a passphrase is not set, bookmarks, cache, cookies, download information, exceptions information, favicons, and history entries will be encoded with a temporary passphrase. As a result, the data will not be available in future sessions. A passphrase will also enable session restoration.</source>
         <translation>Se não definir uma palavra-chave, os marcadores, cookies, cache, transferências, exceções, favicons e o histórico serão codificadas com uma palavra-chave temporária e estarão disponíveis nas sessões futuras. A palavra-chave também possibilita o restaura da sessão.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2641"/>
+        <location filename="../UI/dsettings.ui" line="2644"/>
         <source>Cipher Type</source>
         <translation>Tipo de cifra</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2739"/>
+        <location filename="../UI/dsettings.ui" line="2742"/>
         <source>Salt Length</source>
         <translation>Tamanho dos dados</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2699"/>
+        <location filename="../UI/dsettings.ui" line="2702"/>
         <source>Hash Type</source>
         <translation>Tipo de hash</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2812"/>
+        <location filename="../UI/dsettings.ui" line="2815"/>
         <source>Re-encode Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2825"/>
+        <location filename="../UI/dsettings.ui" line="2828"/>
         <source>Re-encode Favicons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2838"/>
+        <location filename="../UI/dsettings.ui" line="2841"/>
         <source>Re-encode History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2886"/>
+        <location filename="../UI/dsettings.ui" line="2889"/>
         <source>Re-encode Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2799"/>
+        <location filename="../UI/dsettings.ui" line="2802"/>
         <source>Re-encode Cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2899"/>
+        <location filename="../UI/dsettings.ui" line="2902"/>
         <source>Re-encode Downloads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="2912"/>
+        <location filename="../UI/dsettings.ui" line="2915"/>
         <source>Re-encode Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3014"/>
-        <location filename="../UI/dsettings.ui" line="3020"/>
+        <location filename="../UI/dsettings.ui" line="3017"/>
+        <location filename="../UI/dsettings.ui" line="3023"/>
         <source>Passphrase</source>
         <translation>Palavra-chave</translation>
     </message>
@@ -4771,44 +4781,44 @@
         <translation type="obsolete">Bloquear conteúdo de terceiros</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3344"/>
+        <location filename="../UI/dsettings.ui" line="3347"/>
         <source>Please note that the below setting affects preserved sites.</source>
         <translation>Tenha em atenção que esta definição afeta os sítios armazenados.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3353"/>
+        <location filename="../UI/dsettings.ui" line="3356"/>
         <source>Cookies should be</source>
         <translation>Os cookies devem ser</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3364"/>
+        <location filename="../UI/dsettings.ui" line="3367"/>
         <source>deleted upon exit</source>
         <translation>eliminados ao sair</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3382"/>
-        <location filename="../UI/dsettings.ui" line="3463"/>
-        <location filename="../UI/dsettings.ui" line="3521"/>
+        <location filename="../UI/dsettings.ui" line="3385"/>
+        <location filename="../UI/dsettings.ui" line="3466"/>
+        <location filename="../UI/dsettings.ui" line="3524"/>
         <source>.</source>
         <translation>.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3411"/>
+        <location filename="../UI/dsettings.ui" line="3414"/>
         <source>Please note that preserved sites will not be discarded.</source>
         <translation>Tenha em atenção que os sítios armazenados não serão descartados.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3426"/>
+        <location filename="../UI/dsettings.ui" line="3429"/>
         <source>Sweep cookies every</source>
         <translation>Apagar cookies a cada</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3450"/>
+        <location filename="../UI/dsettings.ui" line="3453"/>
         <source>hour(s)</source>
         <translation>hora(s)</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3455"/>
+        <location filename="../UI/dsettings.ui" line="3458"/>
         <source>minute(s)</source>
         <translation>minuto(s)</translation>
     </message>
@@ -4817,7 +4827,7 @@
         <translation type="obsolete">Auditoria transversal de scripting de sítios</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3548"/>
+        <location filename="../UI/dsettings.ui" line="3551"/>
         <source>Display the IP address of the current Web site.</source>
         <translation>Mostrar o endereço IP do sítio web atual.</translation>
     </message>
@@ -4826,17 +4836,17 @@
         <translation type="vanished">Java</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3825"/>
+        <location filename="../UI/dsettings.ui" line="3828"/>
         <source>Allow opening of new windows.</source>
         <translation>Permitir abertura de novas janelas.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="3835"/>
+        <location filename="../UI/dsettings.ui" line="3838"/>
         <source>Accept geometry-change requests.</source>
         <translation>Aceitar pedidos de alteração de geometria.</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="1013"/>
+        <location filename="../UI/dsettings.ui" line="1016"/>
         <source>day(s).</source>
         <translation>dia(s).</translation>
     </message>
@@ -4847,7 +4857,7 @@
         <translation>Separadores</translation>
     </message>
     <message>
-        <location filename="../UI/dsettings.ui" line="4254"/>
+        <location filename="../UI/dsettings.ui" line="4257"/>
         <source>Create a new tab by double-clicking on the tab bar.</source>
         <translation>Criar um novo separador ao clicar duas vezes na barra de separadores.</translation>
     </message>
