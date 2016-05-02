@@ -2113,13 +2113,13 @@
         <translation type="obsolete">Derzeitiger Hash Typ: </translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1546"/>
-        <location filename="../Source/dsettings.cc" line="1580"/>
+        <location filename="../Source/dsettings.cc" line="1553"/>
+        <location filename="../Source/dsettings.cc" line="1587"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Web Browser: Fehler</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1547"/>
+        <location filename="../Source/dsettings.cc" line="1554"/>
         <source>The passphrases do not match.</source>
         <translation>Die Passphrasen stimmen nicht überein.</translation>
     </message>
@@ -2156,12 +2156,12 @@
         <translation type="obsolete">Erneutes Encodieren der Informationen zu Ausnahmen von Drittanbieter-Inhalten...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2199"/>
+        <location filename="../Source/dsettings.cc" line="2206"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Bestätigung</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1429"/>
+        <location filename="../Source/dsettings.cc" line="1433"/>
         <source>unknown</source>
         <translation>unbekannt</translation>
     </message>
@@ -2182,12 +2182,12 @@
         <translation type="obsolete">Dooble sollte die Passphrase über den %1 Hash-Algorithmus generieren. Deine Konfiguration des Hash-Algorithmus: %2.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="81"/>
+        <location filename="../Source/dsettings.cc" line="85"/>
         <source>allowed with existing cookies</source>
         <translation>erlaube mit bestehenden Cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1581"/>
+        <location filename="../Source/dsettings.cc" line="1588"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Die Passphrase muss mindestens sechzehn Zeichen lang sein.</translation>
     </message>
@@ -2196,7 +2196,7 @@
         <translation type="obsolete">Du bist im Begriff, die Konfigurationsdaten zurückzusetzen. Wenn eine Passphrase konfiguriert wurde, wird sie beibehalten. Alle noch nicht gespeicherten Daten werden verloren gehen. Dooble wird neu gestartet, um den Vorgang abzuschließen. Möchtest Du fortfahren?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2298"/>
+        <location filename="../Source/dsettings.cc" line="2305"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Web Browser: Auswahl des Erscheinungsbildes</translation>
     </message>
@@ -2205,12 +2205,12 @@
         <translation type="obsolete">&amp;Auswahl</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2316"/>
+        <location filename="../Source/dsettings.cc" line="2323"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Konfigurationsdatei des Themas (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2401"/>
+        <location filename="../Source/dsettings.cc" line="2408"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Browser: Auswahl des Download-Verzeichnisses</translation>
     </message>
@@ -2219,59 +2219,59 @@
         <translation type="obsolete">Ö&amp;ffnen</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="605"/>
+        <location filename="../Source/dsettings.cc" line="609"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Web Addons</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2202"/>
+        <location filename="../Source/dsettings.cc" line="2209"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2315"/>
-        <location filename="../Source/dsettings.cc" line="2789"/>
+        <location filename="../Source/dsettings.cc" line="2322"/>
+        <location filename="../Source/dsettings.cc" line="2796"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2404"/>
-        <location filename="../Source/dsettings.cc" line="2432"/>
+        <location filename="../Source/dsettings.cc" line="2411"/>
+        <location filename="../Source/dsettings.cc" line="2439"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2429"/>
+        <location filename="../Source/dsettings.cc" line="2436"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Web Browser: Auswahl der Spot-On-Datenbasis</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2704"/>
+        <location filename="../Source/dsettings.cc" line="2711"/>
         <source>Prompt</source>
         <translation>Anfrage</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2721"/>
+        <location filename="../Source/dsettings.cc" line="2728"/>
         <source>Use other...</source>
         <translation>Andere Anwendung benutzen...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2786"/>
+        <location filename="../Source/dsettings.cc" line="2793"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Browser: Wähle Programm</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2909"/>
+        <location filename="../Source/dsettings.cc" line="2916"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2913"/>
+        <location filename="../Source/dsettings.cc" line="2920"/>
         <source>&amp;Delete File Suffix</source>
         <translation>Lösche &amp;Datei-Endung</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3007"/>
+        <location filename="../Source/dsettings.cc" line="3014"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
