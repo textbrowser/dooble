@@ -158,12 +158,6 @@ class dooble: public QMainWindow
   qint64 m_id;
   static Ui_blockedhosts s_blockedHostsUi;
   static QMainWindow *s_blockedhostsWindow;
-
-  QMenu *createPopupMenu(void)
-  {
-    return 0;
-  }
-
   bool event(QEvent *event);
   bool promptForPassphrase(const bool override = false);
   bool warnAboutDownloads(void);
