@@ -88,6 +88,7 @@ class dooble: public QMainWindow
   static QPointer<dexceptionswindow> s_javaScriptExceptionsWindow;
   static QPointer<dexceptionswindow> s_popupsWindow;
   static QPointer<dexceptionswindow> s_sslExceptionsWindow;
+  static QPointer<dexceptionswindow> s_userAgentExceptionsWindow;
   static QPointer<dhistory> s_historyWindow;
   static QPointer<dhistorymodel> s_historyModel;
   static QPointer<dnetworkcache> s_networkCache;

@@ -379,8 +379,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>520</width>
+               <y>-42</y>
+               <width>738</width>
                <height>571</height>
               </rect>
              </property>
@@ -1237,8 +1237,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>303</width>
+               <y>-60</y>
+               <width>732</width>
                <height>550</height>
               </rect>
              </property>
@@ -1553,9 +1553,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>594</width>
-               <height>897</height>
+               <y>-336</y>
+               <width>738</width>
+               <height>865</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2545,9 +2545,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>476</width>
-               <height>709</height>
+               <y>-148</y>
+               <width>738</width>
+               <height>677</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3088,9 +3088,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>526</width>
-               <height>1350</height>
+               <y>-856</y>
+               <width>738</width>
+               <height>1385</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -4153,6 +4153,27 @@
                </layout>
               </item>
               <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_55">
+                <item>
+                 <widget class="QLabel" name="label_83">
+                  <property name="text">
+                   <string>User Agent String</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="user_agent_string"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="userAgentStringExceptions">
+                  <property name="text">
+                   <string>&amp;Exceptions...</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_37">
                 <item>
                  <widget class="QCheckBox" name="webPluginsCheckBox">
@@ -4701,6 +4722,8 @@
   <tabstop>sslLevel</tabstop>
   <tabstop>sightSslErrorsPushButton</tabstop>
   <tabstop>speedyCheckBox</tabstop>
+  <tabstop>user_agent_string</tabstop>
+  <tabstop>userAgentStringExceptions</tabstop>
   <tabstop>webPluginsCheckBox</tabstop>
   <tabstop>webglCheckBox</tabstop>
   <tabstop>proceedToNewTabCheckBox</tabstop>

@@ -135,6 +135,7 @@ QPointer<dexceptionswindow> dooble::s_imageBlockWindow = 0;
 QPointer<dexceptionswindow> dooble::s_javaScriptExceptionsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_popupsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_sslExceptionsWindow = 0;
+QPointer<dexceptionswindow> dooble::s_userAgentExceptionsWindow = 0;
 QPointer<dhistory> dooble::s_historyWindow = 0;
 QPointer<dhistorymodel> dooble::s_historyModel = 0;
 QPointer<dnetworkcache> dooble::s_networkCache = 0;
@@ -601,6 +602,21 @@ int main(int argc, char *argv[])
       qputenv("QV4_FORCE_INTERPRETER", "1");
     }
 
+  QString str(dooble::s_settings.value("settingsWindow/user_agent_string").
+	      toString().trimmed());
+
+  if(str.isEmpty())
+    {
+      dwebpage p;
+
+      str = p.userAgentForUrl(QUrl());
+      dooble::s_settings["settingsWindow/user_agent_string"] = str;
+
+      QSettings settings;
+
+      settings.setValue("settingsWindow/user_agent_string", str);
+    }
+
   dmisc::prepareProxyIgnoreLists();
 
   /*
@@ -672,8 +688,9 @@ int main(int argc, char *argv[])
      value("settingsWindow/localContentMayAccessLocalContent",
 	   true).toBool());
 
-  QString str(dooble::s_settings.value("settingsWindow/characterEncoding",
-				       "").toString().toLower());
+  str = dooble::s_settings.value("settingsWindow/characterEncoding",
+				 "").toString().toLower();
+
   QTextCodec *codec = 0;
 
   if((codec = QTextCodec::codecForName(str.toUtf8().constData())))
@@ -865,6 +882,11 @@ int main(int argc, char *argv[])
   dooble::s_sslExceptionsWindow->setWindowTitle
     (QObject::tr("Dooble Web Browser: "
 		 "SSL Errors Exceptions"));
+  dooble::s_userAgentExceptionsWindow = new dexceptionswindow
+    (new dexceptionsmodel("useragentstringsexceptions"));
+  dooble::s_userAgentExceptionsWindow->setWindowTitle
+    (QObject::tr("Dooble Web Browser: "
+		 "User Agent Strings Exceptions"));
   dooble::s_sslCiphersWindow = new dsslcipherswindow();
   dfilemanager::treeModel = new QFileSystemModel();
 
@@ -1347,6 +1369,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotSetIcons(void)));
   connect(this,
 	  SIGNAL(iconsChanged(void)),
+	  s_userAgentExceptionsWindow,
+	  SLOT(slotSetIcons(void)));
+  connect(this,
+	  SIGNAL(iconsChanged(void)),
 	  s_clearContainersWindow,
 	  SLOT(slotSetIcons(void)));
 
@@ -1558,6 +1584,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  s_alwaysHttpsExceptionsWindow, SLOT(slotShow(void)));
   connect(ui.actionSSLErrors, SIGNAL(triggered(void)),
 	  s_sslExceptionsWindow, SLOT(slotShow(void)));
+  connect(ui.action_User_Agent_Strings, SIGNAL(triggered(void)),
+	  s_userAgentExceptionsWindow, SLOT(slotShow(void)));
   connect(ui.actionError_Log, SIGNAL(triggered(void)),
 	  s_errorLog, SLOT(slotShow(void)));
   connect(ui.action_SSL_Ciphers, SIGNAL(triggered(void)),
@@ -1880,6 +1908,7 @@ dooble::dooble
       s_cacheExceptionsWindow->populate();
       s_alwaysHttpsExceptionsWindow->populate();
       s_sslExceptionsWindow->populate();
+      s_userAgentExceptionsWindow->populate();
       s_networkCache->populate();
       QApplication::restoreOverrideCursor();
     }
@@ -2021,6 +2050,7 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
       s_cacheExceptionsWindow->populate();
       s_alwaysHttpsExceptionsWindow->populate();
       s_sslExceptionsWindow->populate();
+      s_userAgentExceptionsWindow->populate();
       s_networkCache->populate();
       QApplication::restoreOverrideCursor();
     }
@@ -2591,13 +2621,13 @@ void dooble::cleanupBeforeExit(void)
   s_cacheExceptionsWindow->deleteLater();
   s_alwaysHttpsExceptionsWindow->deleteLater();
   s_sslExceptionsWindow->deleteLater();
+  s_userAgentExceptionsWindow->deleteLater();
   s_networkCache->deleteLater();
   s_clearContainersWindow->deleteLater();
 
   if(s_spoton)
     s_spoton->deleteLater();
 
-  s_sslExceptionsWindow->deleteLater();
   dfilemanager::tableModel->deleteLater();
   dfilemanager::treeModel->deleteLater();
   QApplication::restoreOverrideCursor();
@@ -6688,6 +6718,7 @@ void dooble::slotAuthenticate(void)
       s_cacheExceptionsWindow->populate();
       s_alwaysHttpsExceptionsWindow->populate();
       s_sslExceptionsWindow->populate();
+      s_userAgentExceptionsWindow->populate();
       s_networkCache->populate();
       QApplication::restoreOverrideCursor();
 
@@ -8046,7 +8077,8 @@ void dooble::slotSaveBlockedHosts(void)
 
   if(file.open(QIODevice::Text | QIODevice::WriteOnly))
     {
-      file.write(s_blockedHostsUi.textEdit->toPlainText().toLatin1());
+      file.write(s_blockedHostsUi.textEdit->toPlainText().trimmed().
+		 toLatin1());
       file.flush();
     }
 

@@ -46,6 +46,7 @@
 #include "dnetworkcache.h"
 #include "dooble.h"
 #include "dsettings.h"
+#include "dwebpage.h"
 
 dsettings::dsettings():QMainWindow()
 {
@@ -338,6 +339,10 @@ dsettings::dsettings():QMainWindow()
 	  SIGNAL(clicked(void)),
 	  dooble::s_sslExceptionsWindow,
 	  SLOT(slotShow(void)));
+  connect(ui.userAgentStringExceptions,
+	  SIGNAL(clicked(void)),
+	  dooble::s_userAgentExceptionsWindow,
+	  SLOT(slotShow(void)));
   connect(ui.automaticallyLoadImagesCheckBox,
 	  SIGNAL(clicked(bool)),
 	  ui.loadImagesExceptionsPushButton,
@@ -514,6 +519,17 @@ void dsettings::exec(dooble *parent)
   ui.url11lineEdit->setText
     (dooble::s_settings.value("settingsWindow/url11",
 			      "").toString().trimmed());
+  ui.user_agent_string->setText
+    (dooble::s_settings.value("settingsWindow/user_agent_string", "").
+     toString().trimmed());
+
+  if(ui.user_agent_string->text().isEmpty())
+    {
+      dwebpage p;
+
+      ui.user_agent_string->setText(p.userAgentForUrl(QUrl()));
+    }
+
 #if QT_VERSION >= 0x050000
   ui.myRetrievedFilesLineEdit->setText
     (dooble::s_settings.
@@ -1941,6 +1957,9 @@ void dsettings::slotClicked(QAbstractButton *button)
       settings.setValue("settingsWindow/record_file_suffixes",
 			ui.record_file_suffixes->isChecked());
       settings.setValue("settingsWindow/jit", ui.jit->isChecked());
+      settings.setValue
+	("settingsWindow/user_agent_string", ui.user_agent_string->text().
+	 trimmed());
 
       if(ui.jit->isChecked())
 	{
@@ -2023,6 +2042,8 @@ void dsettings::slotClicked(QAbstractButton *button)
 		(ui.exceptionsProgressBar);
 	      dooble::s_popupsWindow->reencode(ui.exceptionsProgressBar);
 	      dooble::s_sslExceptionsWindow->reencode
+		(ui.exceptionsProgressBar);
+	      dooble::s_userAgentExceptionsWindow->reencode
 		(ui.exceptionsProgressBar);
 	    }
 
@@ -2235,7 +2256,8 @@ void dsettings::slotClicked(QAbstractButton *button)
 	       << "preferences.db"
 	       << "sslexceptions.db"
 	       << "suppresshttpredirectexceptions.db"
-	       << "suppresshttpreferrerexceptions.db";
+	       << "suppresshttpreferrerexceptions.db"
+	       << "useragentstringsexceptions.db";
 
 	  while(!list.isEmpty())
 	    QFile::remove
@@ -2991,17 +3013,21 @@ void dsettings::slotUpdateLabels(void)
   ui.downloadsSizeLabel->setText
     (dmisc::formattedSize(dooble::s_downloadWindow->size()));
 
-  qint64 exceptionsSize = 0;
-
-  exceptionsSize += dooble::s_dntWindow->size() +
-    dooble::s_popupsWindow->size() +
-    dooble::s_adBlockWindow->size() + dooble::s_imageBlockWindow->size() +
-    dooble::s_cookiesBlockWindow->size() +
-    dooble::s_httpRedirectWindow->size() +
-    dooble::s_cacheExceptionsWindow->size() +
-    dooble::s_javaScriptExceptionsWindow->size() +
+  qint64 exceptionsSize =
+    dooble::s_adBlockWindow->size() +
     dooble::s_alwaysHttpsExceptionsWindow->size() +
-    dooble::s_sslExceptionsWindow->size();
+    dooble::s_cacheExceptionsWindow->size() +
+    dooble::s_cookiesBlockWindow->size() +
+    dooble::s_dntWindow->size() +
+    dooble::s_httpOnlyExceptionsWindow->size() +
+    dooble::s_httpRedirectWindow->size() +
+    dooble::s_httpReferrerWindow->size() +
+    dooble::s_imageBlockWindow->size() +
+    dooble::s_javaScriptExceptionsWindow->size() +
+    dooble::s_popupsWindow->size() +
+    dooble::s_sslExceptionsWindow->size() +
+    dooble::s_userAgentExceptionsWindow->size();
+
   ui.exceptionsSizeLabel->setText(dmisc::formattedSize(exceptionsSize));
   ui.faviconsSizeLabel->setText(dmisc::formattedSize(dmisc::faviconsSize()));
   ui.historySizeLabel->setText

@@ -2399,8 +2399,6 @@ void dooble::cleanupBeforeExit(void)
   if(s_spoton)
     s_spoton->deleteLater();
 
-  s_sslExceptionsWindow->deleteLater();
-
   if(dfilemanager::tableModel)
     dfilemanager::tableModel->deleteLater();
 

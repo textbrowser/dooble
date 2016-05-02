@@ -194,6 +194,7 @@ void dclearcontainers::slotClicked(QAbstractButton *button)
 	  dooble::s_javaScriptExceptionsWindow->clear();
 	  dooble::s_popupsWindow->clear();
 	  dooble::s_sslExceptionsWindow->clear();
+	  dooble::s_userAgentExceptionsWindow->clear();
 	}
 
       if(ui.faviconsCheckBox->isChecked())

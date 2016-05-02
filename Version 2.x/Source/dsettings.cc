@@ -2877,17 +2877,20 @@ void dsettings::slotUpdateLabels(void)
   ui.downloadsSizeLabel->setText
     (dmisc::formattedSize(dooble::s_downloadWindow->size()));
 
-  qint64 exceptionsSize = 0;
-
-  exceptionsSize += dooble::s_dntWindow->size() +
-    dooble::s_popupsWindow->size() +
-    dooble::s_adBlockWindow->size() + dooble::s_imageBlockWindow->size() +
-    dooble::s_cookiesBlockWindow->size() +
-    dooble::s_httpRedirectWindow->size() +
-    dooble::s_cacheExceptionsWindow->size() +
-    dooble::s_javaScriptExceptionsWindow->size() +
+  qint64 exceptionsSize =
+    dooble::s_adBlockWindow->size() +
     dooble::s_alwaysHttpsExceptionsWindow->size() +
+    dooble::s_cacheExceptionsWindow->size() +
+    dooble::s_cookiesBlockWindow->size() +
+    dooble::s_dntWindow->size() +
+    dooble::s_httpOnlyExceptionsWindow->size() +
+    dooble::s_httpRedirectWindow->size() +
+    dooble::s_httpReferrerWindow->size() +
+    dooble::s_imageBlockWindow->size() +
+    dooble::s_javaScriptExceptionsWindow->size() +
+    dooble::s_popupsWindow->size() +
     dooble::s_sslExceptionsWindow->size();
+
   ui.exceptionsSizeLabel->setText(dmisc::formattedSize(exceptionsSize));
   ui.faviconsSizeLabel->setText(dmisc::formattedSize(dmisc::faviconsSize()));
   ui.historySizeLabel->setText

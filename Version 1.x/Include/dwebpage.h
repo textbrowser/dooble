@@ -47,6 +47,7 @@ class dwebpage: public QWebPage
   dwebpage(QObject *parent = 0);
   ~dwebpage();
   QHash<QWebSettings::WebAttribute, bool> webAttributes(void) const;
+  QString userAgentForUrl(const QUrl &url) const;
   bool areWebPluginsEnabled(void) const;
   bool isJavaScriptEnabled(void) const;
   bool isPrivateBrowsingEnabled(void) const;
@@ -58,7 +59,6 @@ class dwebpage: public QWebPage
   QWebInspector *m_webInspector;
   bool m_isJavaScriptEnabled;
   dnetworkaccessmanager *m_networkAccessManager;
-  QString userAgentForUrl(const QUrl &url) const;
   QWebPage *createWindow(WebWindowType type);
   bool acceptNavigationRequest(QWebFrame *frame,
 			       const QNetworkRequest &request,

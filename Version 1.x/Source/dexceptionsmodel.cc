@@ -102,7 +102,17 @@ bool dexceptionsmodel::allow(const QString &h)
       list << item;
       item = new QStandardItem();
       item->setData("", Qt::UserRole);
-      item->setEditable(false);
+
+      if(objectName() == "useragentstringsexceptions")
+	{
+	  item->setEditable(true);
+	  item->setText
+	    (dooble::s_settings.value("settingsWindow/user_agent_string").
+	     toString().trimmed());
+	}
+      else
+	item->setEditable(false);
+
       list << item;
 
       QDateTime now(QDateTime::currentDateTime());
@@ -114,6 +124,10 @@ bool dexceptionsmodel::allow(const QString &h)
       item = new QStandardItem();
       item->setData(true, Qt::UserRole);
       item->setEditable(false);
+
+      if(objectName() == "useragentstringsexceptions")
+	item->setEnabled(false);
+
       item->setCheckable(true);
       item->setCheckState(Qt::Checked);
       list << item;
@@ -217,7 +231,12 @@ void dexceptionsmodel::add(const QString &host,
   list << item;
   item = new QStandardItem(url.toString(QUrl::StripTrailingSlash));
   item->setData(item->text(), Qt::UserRole);
-  item->setEditable(false);
+
+  if(objectName() == "useragentstringsexceptions")
+    item->setEditable(true);
+  else
+    item->setEditable(false);
+
   list << item;
   item = new QStandardItem(dateTime.toString("MM/dd/yyyy hh:mm:ss AP"));
   item->setData(dateTime, Qt::UserRole);
@@ -226,6 +245,10 @@ void dexceptionsmodel::add(const QString &host,
   item = new QStandardItem();
   item->setData(false, Qt::UserRole);
   item->setEditable(false);
+
+  if(objectName() == "useragentstringsexceptions")
+    item->setEnabled(false);
+
   item->setCheckable(true);
   item->setCheckState(Qt::Unchecked);
   list << item;
@@ -307,7 +330,12 @@ void dexceptionsmodel::populate(void)
 		    list << item;
 		    item = new QStandardItem(url);
 		    item->setData(item->text(), Qt::UserRole);
-		    item->setEditable(false);
+
+		    if(objectName() == "useragentstringsexceptions")
+		      item->setEditable(true);
+		    else
+		      item->setEditable(false);
+
 		    list << item;
 		    item = new QStandardItem(dateTime);
 		    item->setData
@@ -319,6 +347,10 @@ void dexceptionsmodel::populate(void)
 		    item = new QStandardItem();
 		    item->setData(true, Qt::UserRole);
 		    item->setEditable(false);
+
+		    if(objectName() == "useragentstringsexceptions")
+		      item->setEnabled(false);
+
 		    item->setCheckable(true);
 		    item->setCheckState(Qt::Checked);
 		    list << item;

@@ -92,9 +92,18 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 
   QStringList list;
 
-  if(dooble::s_settings.
-     value(QString("%1/accept_or_exempt").arg(objectName()),
-	   "exempt").toString() == "accept")
+  if(model->objectName() == "useragentstringsexceptions")
+    {
+      list << tr("Site");
+      list << tr("User Agent String");
+      list << tr("Add Date");
+      list << tr("Exempt");
+      ui.allowPushButton->setText(tr("&Add"));
+      ui.block->setChecked(true);
+    }
+  else if(dooble::s_settings.value(QString("%1/accept_or_exempt").
+				   arg(objectName()),
+				   "exempt").toString() == "accept")
     {
       list << tr("Site");
       list << tr("Originating URL");

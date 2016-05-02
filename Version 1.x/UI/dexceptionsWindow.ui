@@ -44,7 +44,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Approved sites will be retained for future sessions.</string>
+         <string>&amp;Approved sites will be retained for future sessions.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

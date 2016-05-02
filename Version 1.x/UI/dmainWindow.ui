@@ -541,6 +541,7 @@
      <addaction name="action_JavaScript_Popups"/>
      <addaction name="actionSSLErrors"/>
      <addaction name="action_Third_Party_Frame_Content"/>
+     <addaction name="action_User_Agent_Strings"/>
     </widget>
     <addaction name="action_SSL_Ciphers"/>
     <addaction name="action_Blocked_Hosts"/>
@@ -1107,6 +1108,11 @@
   <action name="action_Home">
    <property name="text">
     <string>&amp;Home</string>
+   </property>
+  </action>
+  <action name="action_User_Agent_Strings">
+   <property name="text">
+    <string>&amp;User Agent Strings...</string>
    </property>
   </action>
  </widget>
