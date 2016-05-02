@@ -190,6 +190,7 @@ void dclearcontainers::slotClicked(QAbstractButton *button)
 	  dooble::s_dntWindow->clear();
 	  dooble::s_httpOnlyExceptionsWindow->clear();
 	  dooble::s_httpRedirectWindow->clear();
+	  dooble::s_httpReferrerWindow->clear();
 	  dooble::s_imageBlockWindow->clear();
 	  dooble::s_javaScriptExceptionsWindow->clear();
 	  dooble::s_popupsWindow->clear();
