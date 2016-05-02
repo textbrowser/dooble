@@ -607,9 +607,9 @@ int main(int argc, char *argv[])
 
   if(str.isEmpty())
     {
-      dwebpage p;
+      dagentstring a;
 
-      str = p.userAgentForUrl(QUrl());
+      str = a.userAgentForUrl(QUrl());
       dooble::s_settings["settingsWindow/user_agent_string"] = str;
 
       QSettings settings;

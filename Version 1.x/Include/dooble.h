@@ -58,6 +58,21 @@ class dclearcontainers;
 class derrorlog;
 class dnetworkcache;
 
+class dagentstring: public QWebPage
+{
+  Q_OBJECT
+
+ public:
+  dagentstring(void):QWebPage(0)
+  {
+  }
+
+  QString userAgentForUrl(const QUrl &url) const
+  {
+    return QWebPage::userAgentForUrl(url);
+  }
+};
+
 class dooble: public QMainWindow
 {
   Q_OBJECT
