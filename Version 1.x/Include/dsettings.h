@@ -82,6 +82,7 @@ class dsettings: public QMainWindow
   void slotIconsPreview(void);
   void slotNegateHttpCodes(bool state);
   void slotPurgeMemoryCaches(void);
+  void slotResetUrlAgentString(void);
   void slotSelectIconCfgFile(void);
   void slotSetIcons(void);
   void slotUpdateApplication(const QString &suffix, const QString &action);

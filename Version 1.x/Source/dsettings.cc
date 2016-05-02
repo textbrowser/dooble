@@ -72,6 +72,10 @@ dsettings::dsettings():QMainWindow()
 	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slotNegateHttpCodes(bool)));
+  connect(ui.user_agent_string,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slotResetUrlAgentString(void)));
 
   foreach(QProgressBar *progressBar, findChildren<QProgressBar *> ())
     progressBar->setVisible(false);
@@ -3117,4 +3121,15 @@ void dsettings::slotNegateHttpCodes(bool state)
     dmisc::updateHttpStatusCodes(httpStatusCodes);
 
   QApplication::restoreOverrideCursor();
+}
+
+void dsettings::slotResetUrlAgentString(void)
+{
+  if(ui.user_agent_string->text().trimmed().isEmpty())
+    {
+      dagentstring a;
+
+      ui.user_agent_string->setText(a.userAgentForUrl(QUrl()));
+      ui.user_agent_string->selectAll();
+    }
 }
