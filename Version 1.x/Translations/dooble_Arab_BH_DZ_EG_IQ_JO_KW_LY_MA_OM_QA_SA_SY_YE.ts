@@ -1745,23 +1745,23 @@
         <translation type="obsolete">ملحقات الويب (غير مستقرة)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1546"/>
-        <location filename="../Source/dsettings.cc" line="1580"/>
+        <location filename="../Source/dsettings.cc" line="1553"/>
+        <location filename="../Source/dsettings.cc" line="1587"/>
         <source>Dooble Web Browser: Error</source>
         <translation>متصفح الويب دووبل: خطأ</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1547"/>
+        <location filename="../Source/dsettings.cc" line="1554"/>
         <source>The passphrases do not match.</source>
         <translation>العبارة السرّية غير متطابقة.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2199"/>
+        <location filename="../Source/dsettings.cc" line="2206"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>متصفح الويب دووبل: تأكيد</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1429"/>
+        <location filename="../Source/dsettings.cc" line="1433"/>
         <source>unknown</source>
         <translation>مجهول</translation>
     </message>
@@ -1782,12 +1782,12 @@
         <translation type="obsolete">يجب أن يولّد دووبل العبارة السرّية باستخدام خوارزمية هاش &quot;%1&quot;. تكوين خوارزمية هاش الخاصة بك: %2.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="81"/>
+        <location filename="../Source/dsettings.cc" line="85"/>
         <source>allowed with existing cookies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1581"/>
+        <location filename="../Source/dsettings.cc" line="1588"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>يجب أن تتكون العبارة السرّية من 16 حرفا على الأقل.</translation>
     </message>
@@ -1796,7 +1796,7 @@
         <translation type="obsolete">أنت على وشك استعادة إعداداتك. إذا كانت العبارة السرّية معيّنة، فسيتم الاحتفاظ بها. سيعاد تشغيل دووبل من أجل إكمال عملية الاستعادة. ونتيجة لذلك، فإن أي بيانات غير محفوظة ستُفقد. هل ترغب بالاستمرار؟</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2298"/>
+        <location filename="../Source/dsettings.cc" line="2305"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>متصفح الويب دووبل: اختيار سمة</translation>
     </message>
@@ -1805,12 +1805,12 @@
         <translation type="obsolete">ا&amp;ختر</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2316"/>
+        <location filename="../Source/dsettings.cc" line="2323"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Theme Configuration File (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2401"/>
+        <location filename="../Source/dsettings.cc" line="2408"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1819,59 +1819,59 @@
         <translation type="obsolete">ا&amp;فتح</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="605"/>
+        <location filename="../Source/dsettings.cc" line="609"/>
         <source>Web Plugins</source>
         <translation type="unfinished">ملحقات الويب</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2202"/>
+        <location filename="../Source/dsettings.cc" line="2209"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2315"/>
-        <location filename="../Source/dsettings.cc" line="2789"/>
+        <location filename="../Source/dsettings.cc" line="2322"/>
+        <location filename="../Source/dsettings.cc" line="2796"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2404"/>
-        <location filename="../Source/dsettings.cc" line="2432"/>
+        <location filename="../Source/dsettings.cc" line="2411"/>
+        <location filename="../Source/dsettings.cc" line="2439"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2429"/>
+        <location filename="../Source/dsettings.cc" line="2436"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2704"/>
+        <location filename="../Source/dsettings.cc" line="2711"/>
         <source>Prompt</source>
         <translation>اسأل</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2721"/>
+        <location filename="../Source/dsettings.cc" line="2728"/>
         <source>Use other...</source>
         <translation>استخدم تطبيق آخر...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2786"/>
+        <location filename="../Source/dsettings.cc" line="2793"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>متصفح الويب دووبل: اختيار تطبيق</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2909"/>
+        <location filename="../Source/dsettings.cc" line="2916"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2913"/>
+        <location filename="../Source/dsettings.cc" line="2920"/>
         <source>&amp;Delete File Suffix</source>
         <translation>ا&amp;حذف صيغة الملف</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3007"/>
+        <location filename="../Source/dsettings.cc" line="3014"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>

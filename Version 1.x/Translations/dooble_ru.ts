@@ -1883,33 +1883,33 @@
         <translation type="obsolete">Web плагины (нестабильно)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1546"/>
-        <location filename="../Source/dsettings.cc" line="1580"/>
+        <location filename="../Source/dsettings.cc" line="1553"/>
+        <location filename="../Source/dsettings.cc" line="1587"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Браузер: Ошибка</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1547"/>
+        <location filename="../Source/dsettings.cc" line="1554"/>
         <source>The passphrases do not match.</source>
         <translation>Пароль не совпадает.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2199"/>
+        <location filename="../Source/dsettings.cc" line="2206"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Браузер: Подтверждение</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1429"/>
+        <location filename="../Source/dsettings.cc" line="1433"/>
         <source>unknown</source>
         <translation>неизвестный</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="81"/>
+        <location filename="../Source/dsettings.cc" line="85"/>
         <source>allowed with existing cookies</source>
         <translation>разрешено с существующими cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1581"/>
+        <location filename="../Source/dsettings.cc" line="1588"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Пароль должен быть как минимум 16 символов.</translation>
     </message>
@@ -1918,7 +1918,7 @@
         <translation type="obsolete">Вы собираетесь сбросить настройки конфигурации. Если пароль была настроен,то  он будет сохранен. Dooble будет перезапущен, чтобы завершить процесс сброса конфигурации. В результате, все несохраненные данные будут потеряны. Вы хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2298"/>
+        <location filename="../Source/dsettings.cc" line="2305"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Браузер : Выбор темы</translation>
     </message>
@@ -1927,12 +1927,12 @@
         <translation type="obsolete">&amp;Выбрать</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2316"/>
+        <location filename="../Source/dsettings.cc" line="2323"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Файл конфигурации темы (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2401"/>
+        <location filename="../Source/dsettings.cc" line="2408"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Браузер: Выбор каталога для моих проверенных файлов</translation>
     </message>
@@ -1941,59 +1941,59 @@
         <translation type="obsolete">Открыть</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="605"/>
+        <location filename="../Source/dsettings.cc" line="609"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Веб-расширения</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2202"/>
+        <location filename="../Source/dsettings.cc" line="2209"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2315"/>
-        <location filename="../Source/dsettings.cc" line="2789"/>
+        <location filename="../Source/dsettings.cc" line="2322"/>
+        <location filename="../Source/dsettings.cc" line="2796"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2404"/>
-        <location filename="../Source/dsettings.cc" line="2432"/>
+        <location filename="../Source/dsettings.cc" line="2411"/>
+        <location filename="../Source/dsettings.cc" line="2439"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2429"/>
+        <location filename="../Source/dsettings.cc" line="2436"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Браузер: Выбрать базу данный Spot-On</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2704"/>
+        <location filename="../Source/dsettings.cc" line="2711"/>
         <source>Prompt</source>
         <translation>Подсказка</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2721"/>
+        <location filename="../Source/dsettings.cc" line="2728"/>
         <source>Use other...</source>
         <translation>Используйте другой ...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2786"/>
+        <location filename="../Source/dsettings.cc" line="2793"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Браузер: Выбрать приложение</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2909"/>
+        <location filename="../Source/dsettings.cc" line="2916"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2913"/>
+        <location filename="../Source/dsettings.cc" line="2920"/>
         <source>&amp;Delete File Suffix</source>
         <translation>Удалить суффикс файла</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3007"/>
+        <location filename="../Source/dsettings.cc" line="3014"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
