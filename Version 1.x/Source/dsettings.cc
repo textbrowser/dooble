@@ -530,7 +530,6 @@ void dsettings::exec(dooble *parent)
       ui.user_agent_string->setText(a.userAgentForUrl(QUrl()));
     }
 
-  ui.user_agent_string->setCursorPosition(0);
 #if QT_VERSION >= 0x050000
   ui.myRetrievedFilesLineEdit->setText
     (dooble::s_settings.
@@ -1477,6 +1476,9 @@ void dsettings::exec(dooble *parent)
       l_width = sizeHint().width();
       l_height = sizeHint().height();
     }
+
+  foreach(QLineEdit *lineEdit, findChildren<QLineEdit *> ())
+    lineEdit->setCursorPosition(0);
 
   resize(l_width, l_height);
 
