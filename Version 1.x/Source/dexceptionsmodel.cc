@@ -662,3 +662,19 @@ QStringList dexceptionsmodel::allowedHosts(void) const
 
   return list;
 }
+
+QString dexceptionsmodel::secondColumn(const QString &h) const
+{
+  QList<QStandardItem *> list;
+  QString host(h.trimmed());
+
+  if(host.startsWith("."))
+    host.remove(0, 1);
+
+  list = findItems(host);
+
+  if(!list.isEmpty())
+    return item(list.at(0)->row(), 1)->text();
+  else
+    return "";
+}

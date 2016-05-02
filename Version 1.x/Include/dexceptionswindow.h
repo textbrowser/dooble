@@ -44,6 +44,7 @@ class dexceptionswindow: public QMainWindow
   dexceptionswindow(dexceptionsmodel *model);
   ~dexceptionswindow();
   QString approach(void) const;
+  QString secondColumn(const QString &host) const;
   QStringList allowedHosts(void) const;
   bool allowed(const QString &host) const;
   bool contains(const QString &host) const;

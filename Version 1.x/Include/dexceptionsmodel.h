@@ -39,6 +39,8 @@ class dexceptionsmodel: public QStandardItemModel
  public:
   dexceptionsmodel(const QString &tableName);
   ~dexceptionsmodel();
+  QString secondColumn(const QString &host) const;
+  QStringList allowedHosts(void) const;
   bool allow(const QString &host);
   bool allowed(const QString &host) const;
   bool contains(const QString &host) const;
@@ -48,12 +50,11 @@ class dexceptionsmodel: public QStandardItemModel
   void populate(void);
   void reencode(QProgressBar *progress);
   void deleteList(const QModelIndexList &list);
-  QStringList allowedHosts(void) const;
 
  private:
   QString m_tableName;
-  void purge(void);
   void createExceptionsDatabase(void);
+  void purge(void);
 
  private slots:
   void slotCheckBoxItemChanged(QStandardItem *item);

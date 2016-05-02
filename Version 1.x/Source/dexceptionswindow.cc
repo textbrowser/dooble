@@ -92,7 +92,7 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
 
   QStringList list;
 
-  if(model->objectName() == "useragentstringsexceptions")
+  if(model && model->objectName() == "useragentstringsexceptions")
     {
       list << tr("Site");
       list << tr("User Agent String");
@@ -122,7 +122,8 @@ dexceptionswindow::dexceptionswindow(dexceptionsmodel *model):QMainWindow()
       ui.block->setChecked(true);
     }
 
-  model->setHorizontalHeaderLabels(list);
+  if(model)
+    model->setHorizontalHeaderLabels(list);
 
   if(dooble::s_settings.contains(QString("%1/tableColumnsState").
 				 arg(objectName())))
@@ -713,4 +714,15 @@ void dexceptionswindow::enableApproachRadioButtons(const bool state)
 {
   ui.accept->setEnabled(state);
   ui.block->setEnabled(state);
+}
+
+QString dexceptionswindow::secondColumn(const QString &host) const
+{
+  dexceptionsmodel *model = qobject_cast<dexceptionsmodel *>
+    (ui.tableView->model());
+
+  if(model)
+    return model->secondColumn(host);
+  else
+    return "";
 }

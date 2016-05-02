@@ -424,8 +424,11 @@ dooble *dwebpage::findDooble(void)
 QString dwebpage::userAgentForUrl(const QUrl &url) const
 {
   QString agent
-    (dooble::s_settings.value("settingsWindow/user_agent_string").
-     toString().trimmed());
+    (dooble::s_userAgentExceptionsWindow->secondColumn(url.host()));
+
+  if(agent.isEmpty())
+    agent = dooble::s_settings.value("settingsWindow/user_agent_string").
+      toString().trimmed();
 
   if(agent.isEmpty())
     agent = QWebPage::userAgentForUrl(url);
