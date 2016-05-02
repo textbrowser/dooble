@@ -82,6 +82,10 @@
         <source>Dooble Web Browser: HTTP-Only Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dooble Web Browser: User Agent Strings Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>applicationPropertiesWindow</name>
@@ -665,6 +669,18 @@
     </message>
     <message>
         <source>&amp;Exempt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Agent String</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1777,15 +1793,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Approved sites will be retained for future sessions.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Accept specified sites.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Exempt specified sites, default behavior.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Approved sites will be retained for future sessions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2217,10 +2233,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Web Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Menus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2390,6 +2402,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save Page as &amp;Data URI...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Web Inspector...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;User Agent Strings...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3550,6 +3570,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Negate Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Agent String</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
