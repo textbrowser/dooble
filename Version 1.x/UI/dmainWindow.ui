@@ -1039,7 +1039,7 @@
   </action>
   <action name="action_Web_Inspector">
    <property name="text">
-    <string>&amp;Web Inspector</string>
+    <string>&amp;Web Inspector...</string>
    </property>
   </action>
   <action name="action_HTTP_Cookies">
