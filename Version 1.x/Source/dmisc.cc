@@ -1341,11 +1341,10 @@ void dmisc::launchApplication(const QString &program,
 
   a = a.trimmed();
 
-  int rc = static_cast<int>
-    (::ShellExecuteA(0, "open",
-		     program.toUtf8().constData(),
-		     a.toUtf8().constData(),
-		     0, SW_SHOWNORMAL));
+  HINSTANCE rc = ::ShellExecuteA(0, "open",
+				 program.toUtf8().constData(),
+				 a.toUtf8().constData(),
+				 0, SW_SHOWNORMAL);
 
   if(rc == SE_ERR_ACCESSDENIED)
     /*

@@ -2660,13 +2660,13 @@ void dooble::slotQuitAndRestart(void)
   QApplication::instance()->exit(0);
 
 #ifdef Q_OS_WIN32
+  HINSTANCE rc = 0;
   QString program(QCoreApplication::applicationDirPath() +
 		  QDir::separator() +
 		  QCoreApplication::applicationName());
 
-  int rc = static_cast<int>
-    (::ShellExecuteA(0, "open", program.toUtf8().constData(),
-		     0, 0, SW_SHOWNORMAL));
+  rc = ::ShellExecuteA(0, "open", program.toUtf8().constData(),
+		       0, 0, SW_SHOWNORMAL);
 
   if(rc == SE_ERR_ACCESSDENIED)
     /*
