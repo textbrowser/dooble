@@ -1514,12 +1514,12 @@
         <translation>Frase de contraseña no ha sido preparada. Favor de visitar el panel Seguridad en Configuraciones y elegir frase de contraseña. Una vez que una frase de contraseña se ha seleccionado, favoritos, cookies, y toda la demás información esencial seguirá disponible en futuras sesiones. Puede deshabilitar este recordatorio vía panel de Seguridad.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7882"/>
+        <location filename="../Source/dooble.cc" line="7887"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7884"/>
+        <location filename="../Source/dooble.cc" line="7889"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>

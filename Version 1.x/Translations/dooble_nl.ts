@@ -1482,12 +1482,12 @@
         <translation type="vanished">Bekijk site &amp;Cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7882"/>
+        <location filename="../Source/dooble.cc" line="7887"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7884"/>
+        <location filename="../Source/dooble.cc" line="7889"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
