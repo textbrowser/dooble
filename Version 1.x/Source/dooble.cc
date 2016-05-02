@@ -8076,6 +8076,15 @@ void dooble::slotShowBlockedHosts(void)
     }
 
   file.close();
+
+  if(s_blockedHostsUi.textEdit->toPlainText().trimmed().isEmpty())
+    {
+      s_blockedHostsUi.textEdit->setText
+	("# Please place the file dooble-blocked-hosts.txt in "
+	 "$HOME/.dooble.");
+      s_blockedHostsUi.textEdit->append("");
+    }
+
   QApplication::restoreOverrideCursor();
   s_blockedhostsWindow->show();
   dmisc::centerChildWithParent(s_blockedhostsWindow, this);
