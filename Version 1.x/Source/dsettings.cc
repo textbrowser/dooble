@@ -525,11 +525,12 @@ void dsettings::exec(dooble *parent)
 
   if(ui.user_agent_string->text().isEmpty())
     {
-      dwebpage p;
+      dagentstring a;
 
-      ui.user_agent_string->setText(p.userAgentForUrl(QUrl()));
+      ui.user_agent_string->setText(a.userAgentForUrl(QUrl()));
     }
 
+  ui.user_agent_string->setCursorPosition(0);
 #if QT_VERSION >= 0x050000
   ui.myRetrievedFilesLineEdit->setText
     (dooble::s_settings.
