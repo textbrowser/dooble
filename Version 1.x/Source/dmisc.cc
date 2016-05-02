@@ -1341,20 +1341,24 @@ void dmisc::launchApplication(const QString &program,
 
   a = a.trimmed();
 
-  HINSTANCE rc = ::ShellExecuteA(0, "open",
+  HINSTANCE rc = ::ShellExecuteA(0,
+				 "open",
 				 program.toUtf8().constData(),
 				 a.toUtf8().constData(),
-				 0, SW_SHOWNORMAL);
+				 0,
+				 SW_SHOWNORMAL);
 
-  if(rc == SE_ERR_ACCESSDENIED)
+  if((int) rc == SE_ERR_ACCESSDENIED)
     /*
     ** Elevated?
     */
 
-    ::ShellExecuteA(0, "runas",
+    ::ShellExecuteA(0,
+		    "runas",
 		    program.toUtf8().constData(),
 		    a.toUtf8().constData(),
-		    0, SW_SHOWNORMAL);
+		    0,
+		    SW_SHOWNORMAL);
 #else
   QProcess::startDetached(program, arguments);
 #endif
