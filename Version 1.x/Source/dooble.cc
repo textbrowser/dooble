@@ -7878,6 +7878,11 @@ void dooble::prepareMenuBar(const bool state)
       ui.menuToolButton->menu()->addMenu(ui.menu_About);
     }
 
+  QAction *action = ui.locationToolBar->toggleViewAction();
+
+  if(action)
+    action->setEnabled(!state);
+
   if(state)
     ui.action_Hide_Menubar->setText(tr("&Show Menu Bar"));
   else
