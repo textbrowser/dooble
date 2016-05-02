@@ -470,7 +470,8 @@ void dexceptionsmodel::slotCheckBoxItemChanged(QStandardItem *item)
     return;
 
   if(dmisc::passphraseWasAuthenticated() &&
-     item && item->isCheckable())
+     item && (item->isCheckable() ||
+	      objectName() == "useragentstringsexceptions"))
     {
       createExceptionsDatabase();
 
