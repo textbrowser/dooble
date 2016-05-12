@@ -242,9 +242,9 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 
   if(m_selectedTabIndex > -1)
     {
-      dview *p = qobject_cast<dview *> (widget(m_selectedTabIndex));
-      QMenu menu(this);
       QAction *action = 0;
+      QMenu menu(this);
+      dview *p = qobject_cast<dview *> (widget(m_selectedTabIndex));
 
       if(p)
 	{
@@ -260,7 +260,7 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 	  menu.addSeparator();
 	  menu.addAction(tr("New &Tab"),
 			 this, SLOT(slotCreateTab(void)));
-	  action = menu.addAction(tr("Open in &New Window"),
+	  action = menu.addAction(tr("Open in &New Window..."),
 				  this, SLOT(slotOpenInNewWindow(void)));
 	  action->setEnabled(count() > 1);
 	  menu.addSeparator();
@@ -330,7 +330,7 @@ void dtabwidget::slotShowContextMenu(const QPoint &point)
 
       menu.addAction(action);
       menu.addAction
-	(tr("&View Private Cookies"),
+	(tr("&View Private Cookies..."),
 	 this, SLOT(slotViewPrivateCookies(void)))->
 	setEnabled(action->isChecked());
       menu.exec(m_tabBar->mapToGlobal(point));

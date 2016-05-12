@@ -7079,15 +7079,15 @@ void dooble::slotIconToolButtonClicked(void)
       QString text(p->url().host().trimmed());
 
       if(!text.isEmpty())
-	menu.addAction(tr("View %1 &Cookies").arg(text), this,
+	menu.addAction(tr("View %1 &Cookies...").arg(text), this,
 		       SLOT(slotViewSiteCookies(void)));
       else
-	menu.addAction(tr("View Site &Cookies"), this,
+	menu.addAction(tr("View Site &Cookies..."), this,
 		       SLOT(slotViewSiteCookies(void)));
     }
   else
 
-    menu.addAction(tr("View Site &Cookies"), this,
+    menu.addAction(tr("View Site &Cookies..."), this,
 		   SLOT(slotViewSiteCookies(void)));
 
   menu.exec(ui.locationLineEdit->mapToGlobal(ui.locationLineEdit->

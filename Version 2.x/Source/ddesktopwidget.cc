@@ -25,23 +25,23 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QComboBox>
+#include <QDesktopServices>
 #include <QDir>
 #include <QFile>
+#include <QFileDialog>
+#include <QMdiSubWindow>
 #include <QMenu>
-#include <QWidget>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QProcess>
-#include <QComboBox>
 #include <QSettings>
 #include <QSizeGrip>
-#include <QFileDialog>
-#include <QMouseEvent>
-#include <QMdiSubWindow>
-#include <QDesktopServices>
+#include <QWidget>
 
+#include "ddesktopwidget.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "ddesktopwidget.h"
 #include "ui_dapplicationPropertiesWindow.h"
 
 ddesktopwidget::ddesktopwidget(QWidget *parent):QMdiArea(parent)

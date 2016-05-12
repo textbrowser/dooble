@@ -31,7 +31,6 @@
 #include <QDialog>
 #include <QFileIconProvider>
 #include <QFileInfo>
-#include <QMenu>
 #include <QNetworkProxy>
 #include <QPushButton>
 #include <QSslError>

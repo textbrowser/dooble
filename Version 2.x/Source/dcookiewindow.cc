@@ -25,18 +25,18 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QUrl>
-#include <QIcon>
-#include <QTimer>
-#include <QKeyEvent>
-#include <QSettings>
-#include <QScrollBar>
-#include <QNetworkCookie>
 #include <QFileIconProvider>
+#include <QIcon>
+#include <QKeyEvent>
+#include <QNetworkCookie>
+#include <QScrollBar>
+#include <QSettings>
+#include <QTimer>
+#include <QUrl>
 
+#include "dcookiewindow.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dcookiewindow.h"
 
 dcookiewindow::dcookiewindow(dcookies *cookies, QWidget *parent):
   QMainWindow(parent)
