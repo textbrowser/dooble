@@ -137,12 +137,6 @@ class dooble: public QMainWindow
   bool showFindFrame;
   dhistorysidebar *m_historySideBar;
   qint64 m_id;
-
-  QMenu *createPopupMenu(void)
-  {
-    return 0;
-  }
-
   bool event(QEvent *event);
   bool promptForPassphrase(const bool override = false);
   bool warnAboutDownloads(void);
