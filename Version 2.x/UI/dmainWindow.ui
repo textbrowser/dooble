@@ -698,7 +698,7 @@
   </action>
   <action name="actionNew_Window">
    <property name="text">
-    <string>&amp;New Window</string>
+    <string>&amp;New Window...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -722,12 +722,12 @@
   </action>
   <action name="actionAbout_Dooble">
    <property name="text">
-    <string>&amp;About Dooble</string>
+    <string>&amp;About Dooble...</string>
    </property>
   </action>
   <action name="actionSave_Page">
    <property name="text">
-    <string>&amp;Save Page</string>
+    <string>&amp;Save Page...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -735,7 +735,7 @@
   </action>
   <action name="actionDownloads">
    <property name="text">
-    <string>&amp;Downloads</string>
+    <string>&amp;Downloads...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+D</string>
@@ -770,7 +770,7 @@
   </action>
   <action name="actionPrint">
    <property name="text">
-    <string>&amp;Print</string>
+    <string>&amp;Print...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -778,12 +778,12 @@
   </action>
   <action name="actionPrint_Preview">
    <property name="text">
-    <string>Print Pre&amp;view</string>
+    <string>Print Pre&amp;view...</string>
    </property>
   </action>
   <action name="actionSettings">
    <property name="text">
-    <string>Settin&amp;gs</string>
+    <string>Settin&amp;gs...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
@@ -791,7 +791,7 @@
   </action>
   <action name="actionPage_Source">
    <property name="text">
-    <string>Page So&amp;urce</string>
+    <string>Page So&amp;urce...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+U</string>
@@ -850,7 +850,7 @@
   </action>
   <action name="actionOpen_Directory">
    <property name="text">
-    <string>&amp;Open Directory</string>
+    <string>&amp;Open Directory...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -890,7 +890,7 @@
   </action>
   <action name="actionApplication_Cookies">
    <property name="text">
-    <string>Coo&amp;kies</string>
+    <string>Coo&amp;kies...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+K</string>
@@ -933,27 +933,27 @@
   </action>
   <action name="action_Authenticate">
    <property name="text">
-    <string>&amp;Authenticate Passphrase</string>
+    <string>&amp;Authenticate Passphrase...</string>
    </property>
   </action>
   <action name="action_JavaScript">
    <property name="text">
-    <string>&amp;JavaScript</string>
+    <string>&amp;JavaScript...</string>
    </property>
   </action>
   <action name="action_Cookies">
    <property name="text">
-    <string>Coo&amp;kies</string>
+    <string>Coo&amp;kies...</string>
    </property>
   </action>
   <action name="action_Third_Party_Frame_Content">
    <property name="text">
-    <string>Third-Party Frame &amp;Content</string>
+    <string>Third-Party Frame &amp;Content...</string>
    </property>
   </action>
   <action name="action_JavaScript_Popups">
    <property name="text">
-    <string>JavaScript &amp;Pop-ups</string>
+    <string>JavaScript &amp;Pop-ups...</string>
    </property>
   </action>
   <action name="actionRefreshPlugins">
@@ -963,17 +963,17 @@
   </action>
   <action name="action_HTTP_Redirect">
    <property name="text">
-    <string>HTTP Re&amp;direct</string>
+    <string>HTTP Re&amp;direct...</string>
    </property>
   </action>
   <action name="action_DNT">
    <property name="text">
-    <string>DNT (Do Not &amp;Track)</string>
+    <string>DNT (Do Not &amp;Track)...</string>
    </property>
   </action>
   <action name="actionError_Log">
    <property name="text">
-    <string>Error &amp;Information</string>
+    <string>Error &amp;Information...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
@@ -981,7 +981,7 @@
   </action>
   <action name="action_Automatically_Loaded_Images">
    <property name="text">
-    <string>&amp;Automatically-Loaded Images</string>
+    <string>&amp;Automatically-Loaded Images...</string>
    </property>
   </action>
   <action name="action_IRC_Channel">
@@ -999,12 +999,12 @@
   </action>
   <action name="action_Cache">
    <property name="text">
-    <string>Cac&amp;he</string>
+    <string>Cac&amp;he...</string>
    </property>
   </action>
   <action name="action_Clear_Containers">
    <property name="text">
-    <string>&amp;Clear Containers</string>
+    <string>&amp;Clear Containers...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+Del</string>
@@ -1012,37 +1012,37 @@
   </action>
   <action name="action_AlwaysHttps">
    <property name="text">
-    <string>Always HTTP&amp;S</string>
+    <string>Always HTTP&amp;S...</string>
    </property>
   </action>
   <action name="actionSave_Page_as_Data_URI">
    <property name="text">
-    <string>Save Page as &amp;Data URI</string>
+    <string>Save Page as &amp;Data URI...</string>
    </property>
   </action>
   <action name="actionSSLErrors">
    <property name="text">
-    <string>SS&amp;L Errors</string>
+    <string>SS&amp;L Errors...</string>
    </property>
   </action>
   <action name="action_HTTP_Referrer">
    <property name="text">
-    <string>HTTP Re&amp;ferrer</string>
+    <string>HTTP Re&amp;ferrer...</string>
    </property>
   </action>
   <action name="action_SSL_Ciphers">
    <property name="text">
-    <string>&amp;Allowed SSL Ciphers</string>
+    <string>&amp;Allowed SSL Ciphers...</string>
    </property>
   </action>
   <action name="action_Web_Inspector">
    <property name="text">
-    <string>&amp;Web Inspector</string>
+    <string>&amp;Web Inspector...</string>
    </property>
   </action>
   <action name="action_HTTP_Cookies">
    <property name="text">
-    <string>HTTP-&amp;Only Cookies</string>
+    <string>HTTP-&amp;Only Cookies...</string>
    </property>
   </action>
   <action name="action_Hide_Menubar">
