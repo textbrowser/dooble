@@ -92,7 +92,7 @@ void ddesktopwidget::mousePressEvent(QMouseEvent *event)
     {
       QMenu menu(this);
 
-      menu.addAction(tr("&Change Desktop Background"),
+      menu.addAction(tr("&Change Desktop Background..."),
 		     this, SLOT(slotChangeDesktopBackground(void)));
       menu.exec(QCursor::pos());
     }
