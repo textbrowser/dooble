@@ -673,45 +673,6 @@ void dview::slotHandleUnsupportedContent(const QUrl &url)
     emit saveUrl(url, choice);
 }
 
-void dview::slotFinished(dnetworkdirreply *reply)
-{
-  if(reply)
-    {
-      webView->stop(); /*
-		       ** The QWebView object must be stopped. Remember,
-		       ** we may have nagivated to a directory via a link.
-		       */
-    }
-}
-
-void dview::slotFinished(dnetworkftpreply *reply)
-{
-  if(reply)
-    {
-      if(reply->error() != QNetworkReply::NoError)
-	{
-	  if(reply->error() == QNetworkReply::UnknownContentError)
-	    slotHandleUnsupportedContent(reply->url());
-	  else
-	    slotLoadErrorPage(reply->url());
-	}
-      else
-	{
-	  webView->stop(); /*
-			   ** The QWebView object must be stopped. Remember,
-			   ** we may have nagivated to an FTP site via a link.
-			   */
-
-	  if(dooble::s_settings.value("mainWindow/offlineMode",
-				      false).toBool())
-	    slotLoadErrorPage(reply->url());
-	  else
-	    {
-	    }
-	}
-    }
-}
-
 void dview::slotFinished(dnetworkblockreply *reply)
 {
   if(reply)
@@ -751,9 +712,7 @@ void dview::slotFinished(dnetworksslerrorreply *reply)
 
 void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 {
-  if(qobject_cast<dnetworkdirreply *> (reply) ||
-     qobject_cast<dnetworkftpreply *> (reply) ||
-     qobject_cast<dnetworkblockreply *> (reply) ||
+  if(qobject_cast<dnetworkblockreply *> (reply) ||
      qobject_cast<dnetworkerrorreply *> (reply) ||
      qobject_cast<dnetworksslerrorreply *> (reply))
     return;

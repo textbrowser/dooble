@@ -28,7 +28,6 @@
 #include <QDialog>
 #include <QWebEnginePage>
 
-#include "dftp.h"
 #include "dmisc.h"
 #include "dnetworkaccessmanager.h"
 #include "dnetworkcache.h"
@@ -36,8 +35,8 @@
 #include "dwebpage.h"
 
 /*
-** The dnetworkblockreply, dnetworkdirreply, dnetworkerrorreply,
-** dnetworkftpreply, and dnetworksslerrorreply classes were created in
+** The dnetworkblockreply, dnetworkerrorreply,
+** and dnetworksslerrorreply classes were created in
 ** order to inject entries into a QWebPage's history.
 */
 
@@ -109,54 +108,6 @@ qint64 dnetworkblockreply::bytesAvailable(void) const
 QByteArray dnetworkblockreply::html(void) const
 {
   return m_content;
-}
-
-dnetworkdirreply::dnetworkdirreply
-(QObject *parent, const QUrl &url):QNetworkReply(parent)
-{
-  setUrl(url);
-  open(ReadOnly | Unbuffered);
-  setHeader(QNetworkRequest::ContentTypeHeader, "text/html; charset=UTF-8");
-  setHeader(QNetworkRequest::ContentLengthHeader, 0);
-  setHeader(QNetworkRequest::LocationHeader, url);
-  setHeader(QNetworkRequest::LastModifiedHeader, QDateTime::currentDateTime());
-  setOperation(QNetworkAccessManager::GetOperation);
-  connect(this,
-	  SIGNAL(finished(dnetworkdirreply *)),
-	  this,
-	  SIGNAL(finished(void)));
-}
-
-void dnetworkdirreply::load(void)
-{
-  QMetaObject::invokeMethod(this,
-			    "readyRead",
-			    Qt::QueuedConnection);
-  QMetaObject::invokeMethod(this,
-			    "finished",
-			    Qt::QueuedConnection,
-			    Q_ARG(dnetworkdirreply *, this));
-}
-
-void dnetworkdirreply::abort(void)
-{
-}
-
-bool dnetworkdirreply::isSequential(void) const
-{
-  return true;
-}
-
-qint64 dnetworkdirreply::readData(char *data, qint64 maxSize)
-{
-  Q_UNUSED(data);
-  Q_UNUSED(maxSize);
-  return 0;
-}
-
-qint64 dnetworkdirreply::bytesAvailable(void) const
-{
-  return 0;
 }
 
 dnetworkerrorreply::dnetworkerrorreply
@@ -294,85 +245,6 @@ qint64 dnetworkerrorreply::bytesAvailable(void) const
 QByteArray dnetworkerrorreply::html(void) const
 {
   return m_content;
-}
-
-dnetworkftpreply::dnetworkftpreply
-(QObject *parent, const QUrl &url):QNetworkReply(parent)
-{
-  m_ftp = new dftp(this);
-  connect(m_ftp,
-	  SIGNAL(finished(bool)),
-	  this,
-	  SLOT(slotFtpFinished(bool)));
-  connect(m_ftp,
-	  SIGNAL(unsupportedContent(const QUrl &)),
-	  this,
-	  SLOT(slotUnsupportedContent(const QUrl &)));
-  m_ftp->fetchList(url);
-  setUrl(url);
-  open(ReadOnly | Unbuffered);
-  setHeader(QNetworkRequest::ContentTypeHeader, "text/html; charset=UTF-8");
-  setHeader(QNetworkRequest::ContentLengthHeader, 0);
-  setHeader(QNetworkRequest::LocationHeader, url);
-  setHeader(QNetworkRequest::LastModifiedHeader, QDateTime::currentDateTime());
-  setOperation(QNetworkAccessManager::GetOperation);
-  connect(this,
-	  SIGNAL(finished(dnetworkftpreply *)),
-	  this,
-	  SIGNAL(finished(void)));
-}
-
-void dnetworkftpreply::slotFtpFinished(bool ok)
-{
-  if(!ok)
-    if(error() == QNetworkReply::NoError)
-      setError
-	(QNetworkReply::ProtocolFailure, "QNetworkReply::ProtocolFailure");
-
-  QMetaObject::invokeMethod(this,
-			    "finished",
-			    Qt::QueuedConnection,
-			    Q_ARG(dnetworkftpreply *, this));
-}
-
-void dnetworkftpreply::slotUnsupportedContent(const QUrl &url)
-{
-  Q_UNUSED(url);
-  setError
-    (QNetworkReply::UnknownContentError, "QNetworkReply::UnknownContentError");
-}
-
-void dnetworkftpreply::load(void)
-{
-  QMetaObject::invokeMethod(this,
-			    "readyRead",
-			    Qt::QueuedConnection);
-}
-
-void dnetworkftpreply::abort(void)
-{
-}
-
-bool dnetworkftpreply::isSequential(void) const
-{
-  return true;
-}
-
-qint64 dnetworkftpreply::readData(char *data, qint64 maxSize)
-{
-  Q_UNUSED(data);
-  Q_UNUSED(maxSize);
-  return 0;
-}
-
-qint64 dnetworkftpreply::bytesAvailable(void) const
-{
-  return 0;
-}
-
-QPointer<dftp> dnetworkftpreply::ftp(void) const
-{
-  return m_ftp;
 }
 
 dnetworksslerrorreply::dnetworksslerrorreply
@@ -614,30 +486,6 @@ QNetworkReply *dnetworkaccessmanager::createRequest
       setLinkClicked(QUrl());
       return reply;
     }
-  else if(scheme == "ftp")
-    {
-      QPointer<dnetworkftpreply> reply = new dnetworkftpreply(this, req.url());
-
-      connect(reply,
-	      SIGNAL(finished(dnetworkftpreply *)),
-	      this,
-	      SIGNAL(finished(dnetworkftpreply *)));
-      reply->load();
-      setLinkClicked(QUrl());
-      return reply;
-    }
-  else if(QFileInfo(req.url().toLocalFile()).isDir())
-    {
-      QPointer<dnetworkdirreply> reply = new dnetworkdirreply(this, req.url());
-
-      connect(reply,
-	      SIGNAL(finished(dnetworkdirreply *)),
-	      this,
-	      SIGNAL(finished(dnetworkdirreply *)));
-      reply->load();
-      setLinkClicked(QUrl());
-      return reply;
-    }
 
   if(scheme == "http" || scheme == "https")
     {
@@ -780,9 +628,7 @@ void dnetworkaccessmanager::slotFinished(QNetworkReply *reply)
   if(!reply)
     return;
 
-  if(qobject_cast<dnetworkdirreply *> (reply) ||
-     qobject_cast<dnetworkftpreply *> (reply) ||
-     qobject_cast<dnetworkblockreply *> (reply) ||
+  if(qobject_cast<dnetworkblockreply *> (reply) ||
      qobject_cast<dnetworkerrorreply *> (reply) ||
      qobject_cast<dnetworksslerrorreply *> (reply))
     {

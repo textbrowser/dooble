@@ -35,7 +35,6 @@
 
 class QNetworkRequest;
 class dexceptionswindow;
-class dftp;
 
 class dnetworkblockreply: public QNetworkReply
 {
@@ -79,44 +78,6 @@ class dnetworkblockreply: public QNetworkReply
   void finished(dnetworkblockreply *reply);
 };
 
-class dnetworkdirreply: public QNetworkReply
-{
-  Q_OBJECT
-
- public:
-  /*
-  ** qRegisterMetaType() requires a public default contructor,
-  ** a public copy constructor, and a public destructor.
-  */
-
-  dnetworkdirreply(void):QNetworkReply(0)
-  {
-  }
-
-  dnetworkdirreply(const dnetworkdirreply &reply):QNetworkReply(0)
-  {
-    setOperation(reply.operation());
-    setRequest(reply.request());
-    setUrl(reply.url());
-  }
-
-  ~dnetworkdirreply()
-  {
-  }
-
-  dnetworkdirreply(QObject *parent, const QUrl &url);
-  bool isSequential(void) const;
-  qint64 bytesAvailable(void) const;
-  void abort(void);
-  void load(void);
-
- protected:
-  qint64 readData(char *data, qint64 maxSize);
-
- signals:
-  void finished(dnetworkdirreply *reply);
-};
-
 class dnetworkerrorreply: public QNetworkReply
 {
   Q_OBJECT
@@ -157,52 +118,6 @@ class dnetworkerrorreply: public QNetworkReply
 
  signals:
   void finished(dnetworkerrorreply *reply);
-};
-
-class dnetworkftpreply: public QNetworkReply
-{
-  Q_OBJECT
-
- public:
-  /*
-  ** qRegisterMetaType() requires a public default contructor,
-  ** a public copy constructor, and a public destructor.
-  */
-
-  dnetworkftpreply(void):QNetworkReply(0)
-  {
-  }
-
-  dnetworkftpreply(const dnetworkftpreply &reply):QNetworkReply(0)
-  {
-    setOperation(reply.operation());
-    setRequest(reply.request());
-    setUrl(reply.url());
-  }
-
-  ~dnetworkftpreply()
-  {
-  }
-
-  dnetworkftpreply(QObject *parent, const QUrl &url);
-  QPointer<dftp> ftp(void) const;
-  bool isSequential(void) const;
-  qint64 bytesAvailable(void) const;
-  void abort(void);
-  void load(void);
-
- private:
-  QPointer<dftp> m_ftp;
-
- protected:
-  qint64 readData(char *data, qint64 maxSize);
-
- private slots:
-  void slotFtpFinished(bool ok);
-  void slotUnsupportedContent(const QUrl &url);
-
- signals:
-  void finished(dnetworkftpreply *reply);
 };
 
 class dnetworksslerrorreply: public QNetworkReply
@@ -271,9 +186,7 @@ class dnetworkaccessmanager: public QNetworkAccessManager
 		  const QDateTime &dateTime);
   void exceptionRaised(dexceptionswindow *window, const QUrl &url);
   void finished(dnetworkblockreply *reply);
-  void finished(dnetworkdirreply *reply);
   void finished(dnetworkerrorreply *reply);
-  void finished(dnetworkftpreply *reply);
   void finished(dnetworksslerrorreply *reply);
   void loadErrorPage(const QUrl &url);
   void loadImageRequest(const QString &host, const QUrl &url,

@@ -312,9 +312,7 @@ int main(int argc, char *argv[])
     }
 
   qRegisterMetaType<dnetworkblockreply *> ("dnetworkblockreply *");
-  qRegisterMetaType<dnetworkdirreply *> ("dnetworkdirreply *");
   qRegisterMetaType<dnetworkerrorreply *> ("dnetworkerrorreply *");
-  qRegisterMetaType<dnetworkftpreply *> ("dnetworkftpreply *");
   qRegisterMetaType<dnetworksslerrorreply *> ("dnetworksslerrorreply *");
 #ifdef Q_OS_MAC
   /*
