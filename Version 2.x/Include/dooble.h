@@ -304,7 +304,6 @@ class dooble: public QMainWindow
   void slotViewSiteCookies(void);
   void slotViewZoomIn(void);
   void slotViewZoomOut(void);
-  void slotViewZoomTextOnly(bool enable);
   friend class dwebpage;
 
  signals:

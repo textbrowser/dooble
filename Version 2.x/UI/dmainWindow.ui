@@ -576,8 +576,6 @@
      <addaction name="actionZoom_Out"/>
      <addaction name="separator"/>
      <addaction name="actionReset_Zoom"/>
-     <addaction name="separator"/>
-     <addaction name="actionZoom_Text_Only"/>
     </widget>
     <widget class="QMenu" name="menu_Toolbars">
      <property name="title">

@@ -483,6 +483,7 @@ int main(int argc, char *argv[])
     thread->setPriority(QThread::Priority(priority));
 
   settings.remove("mainWindow/showLocationToolBar");
+  settings.remove("mainWindow/zoomTextOnly");
   settings.remove("settingsWindow/javaEnabled");
   settings.remove("vidalia/hostName");
   settings.remove("vidalia/isConnected");
@@ -964,8 +965,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.actionOffline->setChecked
     (s_settings.value("mainWindow/offlineMode", false).toBool());
   ui.historyFrame->setVisible(false);
-  ui.actionZoom_Text_Only->setChecked
-    (s_settings.value("mainWindow/zoomTextOnly", false).toBool());
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
 
@@ -1333,8 +1332,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SLOT(slotViewZoomOut(void)));
   connect(ui.actionReset_Zoom, SIGNAL(triggered(void)), this,
 	  SLOT(slotViewResetZoom(void)));
-  connect(ui.actionZoom_Text_Only, SIGNAL(toggled(bool)), this,
-	  SLOT(slotViewZoomTextOnly(bool)));
   connect(ui.actionMy_Retrieved_Files, SIGNAL(triggered(void)), this,
 	  SLOT(slotOpenMyRetrievedFiles(void)));
   connect(ui.actionP2P_Email, SIGNAL(triggered(void)), this,
@@ -4816,23 +4813,6 @@ void dooble::slotViewResetZoom(void)
 
   if(p)
     p->setZoomFactor(1.0);
-}
-
-void dooble::slotViewZoomTextOnly(bool enable)
-{
-  s_settings["mainWindow/zoomTextOnly"] = enable;
-
-  QSettings settings;
-
-  settings.setValue("mainWindow/zoomTextOnly", enable);
-
-  for(int i = 0; i < ui.tabWidget->count(); i++)
-    {
-      dview *p = qobject_cast<dview *> (ui.tabWidget->widget(i));
-
-      if(p)
-	p->zoomTextOnly(enable);
-    }
 }
 
 void dooble::slotStatusBarDisplay(bool state)

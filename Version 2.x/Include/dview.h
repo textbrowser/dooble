@@ -110,7 +110,6 @@ class dview: public QStackedWidget
   void stop(void);
   void update(void);
   void viewPrivateCookies(void);
-  void zoomTextOnly(const bool state);
 
  private:
   QByteArray m_history;

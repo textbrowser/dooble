@@ -879,12 +879,6 @@ void dview::setZoomFactor(const qreal factor)
   webView->update();
 }
 
-void dview::zoomTextOnly(const bool state)
-{
-  Q_UNUSED(state);
-  webView->update();
-}
-
 void dview::slotStop(void)
 {
   stop();
