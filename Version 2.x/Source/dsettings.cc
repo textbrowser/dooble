@@ -38,6 +38,7 @@
 #include <QTextCodec>
 #include <QThread>
 #include <QUrl>
+#include <QWebEngineProfile>
 #include <QWebEngineSettings>
 
 #include "dbookmarkswindow.h"
@@ -63,6 +64,10 @@ dsettings::dsettings():QMainWindow()
   connect(ui.applicationsTable,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this, SLOT(slotCustomContextMenuRequested(const QPoint &)));
+  connect(ui.user_agent_string,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slotResetUrlAgentString(void)));
 
   foreach(QProgressBar *progressBar, findChildren<QProgressBar *> ())
     progressBar->setVisible(false);
@@ -463,6 +468,17 @@ void dsettings::exec(dooble *parent)
 			      QDir::homePath() + QDir::separator() +
 			      ".spot-on" + QDir::separator() + "shared.db").
      toString());
+  ui.user_agent_string->setText
+    (dooble::s_settings.value("settingsWindow/user_agent_string", "").
+     toString().trimmed());
+
+  if(ui.user_agent_string->text().isEmpty())
+    {
+      QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+
+      if(profile)
+	ui.user_agent_string->setText(profile->httpUserAgent());
+    }
 
   QString str
     (dooble::s_settings.value("settingsWindow/tabBarPosition", "north").
@@ -1874,6 +1890,9 @@ void dsettings::slotClicked(QAbstractButton *button)
 	 ui.jsStagnantScripts->currentIndex());
       settings.setValue("settingsWindow/record_file_suffixes",
 			ui.record_file_suffixes->isChecked());
+      settings.setValue
+	("settingsWindow/user_agent_string", ui.user_agent_string->text().
+	 trimmed());
 
       if(dfilemanager::tableModel)
 	dfilemanager::tableModel->enable
@@ -2912,4 +2931,18 @@ Ui_settingsWindow dsettings::UI(void) const
 bool dsettings::event(QEvent *event)
 {
   return QMainWindow::event(event);
+}
+
+void dsettings::slotResetUrlAgentString(void)
+{
+  if(ui.user_agent_string->text().trimmed().isEmpty())
+    {
+      QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+
+      if(profile)
+	{
+	  ui.user_agent_string->setText(profile->httpUserAgent());
+	  ui.user_agent_string->selectAll();
+	}
+    }
 }
