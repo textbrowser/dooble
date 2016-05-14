@@ -155,6 +155,7 @@ Completed Items
       removed.
 98.   Use unique uuids to identify tabs for restoration purposes. The
       current implementation is flawed. Already implemented.
+99.   Ellipses.
 
 Remaining Items
 
@@ -174,9 +175,8 @@ Remaining Items
       concept.
 12.   Delayed downloads are not reflected.
 13.   Allow regular expressions in blocked hosts.
-14.   Ellipses.
-15.   WebEngine.
-16.   HTTP error codes (203, 204, etc.).
+14.   WebEngine.
+15.   HTTP error codes (203, 204, etc.).
 
 Removed Items
 
