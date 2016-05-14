@@ -1449,7 +1449,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	      SLOT(slotClearHistory(void)));
       action = ui.historyMenu->addAction
 	(QIcon(settings.value("mainWindow/viewHistory").toString()),
-	 tr("Show &History"));
+	 tr("Show &History..."));
       action->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_H));
       action->setEnabled(true);
       connect(action, SIGNAL(triggered(void)), this,
@@ -4239,11 +4239,15 @@ void dooble::slotAbout(void)
              "Dooble Web Browser<br><br>"
              "Version %1, Violet Moonbeams.<br>"
 	     "Copyright (c) 2008 - present.<br>"
-	     "Qt version %3, architecture %4."
+	     "Qt version %3, architecture %4.<br>"
 	     "libgcrypt version %5."
 	     "<hr>"
 	     "Please visit <a href=\"http://dooble.sf.net\">"
 	     "http://dooble.sf.net</a> for more information."
+	     "<hr>"
+	     "Please visit <a href=\"http://spot-on.sf.net\">"
+	     "http://spot-on.sf.net</a> for information regarding "
+	     "the Spot-On project."
 	     "<hr>"
 	     "Are you interested in the latest "
 	     "<a href=\"qrc:/Documentation/RELEASE-NOTES.html\">"
