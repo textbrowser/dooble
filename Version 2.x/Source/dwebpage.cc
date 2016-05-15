@@ -57,6 +57,10 @@ dwebpage::dwebpage(QObject *parent):QWebEnginePage(parent)
 	  this,
 	  SLOT(slotIconUrlChanged(const QUrl &)));
   connect(this,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SLOT(slotLoadFinished(bool)));
+  connect(this,
 	  SIGNAL(popupRequested(const QString &,
 				const QUrl &,
 				const QDateTime &)),
@@ -630,4 +634,10 @@ void dwebpage::showWebInspector(void)
 void dwebpage::slotIconUrlChanged(const QUrl &url)
 {
   downloadFavicon(url, this->url());
+}
+
+void dwebpage::slotLoadFinished(bool ok)
+{
+  if(!ok)
+    return;
 }

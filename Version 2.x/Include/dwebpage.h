@@ -71,6 +71,7 @@ class dwebpage: public QWebEnginePage
   void slotHttpToHttps(void);
   void slotIconDownloadFinished(void);
   void slotIconUrlChanged(const QUrl &url);
+  void slotLoadFinished(bool ok);
   void slotInitialLayoutCompleted(void);
   void slotUrlChanged(const QUrl &url);
 
