@@ -40,6 +40,22 @@
 #include "dwebpage.h"
 #include "dwebview.h"
 
+template<typename Arg, typename R, typename C>
+struct InvokeWrapper {
+  R *receiver;
+  void (C::*memberFun)(Arg);
+  void operator()(Arg result) {
+    (receiver->*memberFun)(result);
+  }
+};
+
+template<typename Arg, typename R, typename C>
+InvokeWrapper<Arg, R, C> invoke(R *receiver, void (C::*memberFun)(Arg))
+{
+  InvokeWrapper<Arg, R, C> wrapper = {receiver, memberFun};
+  return wrapper;
+}
+
 dwebpage::dwebpage(QObject *parent):QWebEnginePage(parent)
 {
   m_isJavaScriptEnabled = dooble::s_settings.
@@ -580,10 +596,15 @@ void dwebpage::slotFinished(QNetworkReply *reply)
     emit loadErrorPage(m_requestedUrl);
 }
 
-void dwebpage::slotHttpToHttps(void)
+void dwebpage::slotHttpToHttps(const QString &html)
 {
   if(!dooble::s_settings.value("settingsWindow/alwaysHttps", false).toBool())
     return;
+
+  QString str(html);
+
+  str.replace(QRegExp("[Hh][Tt][Tt][Pp]:"), "https:");
+  qDebug() << str;
 }
 
 void dwebpage::slotUrlChanged(const QUrl &url)
@@ -638,6 +659,8 @@ void dwebpage::slotIconUrlChanged(const QUrl &url)
 
 void dwebpage::slotLoadFinished(bool ok)
 {
-  if(!ok)
-    return;
+  Q_UNUSED(ok);
+
+  if(dooble::s_settings.value("settingsWindow/alwaysHttps", false).toBool())
+    toHtml(invoke(this, &dwebpage::slotHttpToHttps));
 }

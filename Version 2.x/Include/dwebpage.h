@@ -68,7 +68,7 @@ class dwebpage: public QWebEnginePage
  private slots:
   bool shouldInterruptJavaScript(void);
   void slotFinished(QNetworkReply *reply);
-  void slotHttpToHttps(void);
+  void slotHttpToHttps(const QString &html);
   void slotIconDownloadFinished(void);
   void slotIconUrlChanged(const QUrl &url);
   void slotLoadFinished(bool ok);
