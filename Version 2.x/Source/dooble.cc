@@ -4669,9 +4669,7 @@ void dooble::slotPrintPreview(void)
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
       printDialog.show();
       QApplication::restoreOverrideCursor();
-
-      if(printDialog.exec() == QDialog::Accepted)
-	p->view()->render(&printer);
+      printDialog.exec();
     }
 }
 
