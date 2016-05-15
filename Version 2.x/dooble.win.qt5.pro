@@ -10,7 +10,7 @@ purge.commands = del /F Documentation\\*~ && del /F Include\\*~ && \
 
 CONFIG		+= qt release warn_on
 LANGUAGE	= C++
-QT		+= concurrent network printsupport sql \
+QT		+= concurrent gui network printsupport sql \
                    webenginewidgets widgets xml
 TEMPLATE	= app
 

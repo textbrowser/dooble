@@ -9,7 +9,7 @@ purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
 
 CONFIG		+= qt release warn_on
 LANGUAGE	= C++
-QT		+= concurrent network printsupport sql \
+QT		+= concurrent gui network printsupport sql \
 		   webenginewidgets widgets xml
 TEMPLATE	= app
 
