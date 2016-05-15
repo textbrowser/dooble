@@ -4640,8 +4640,7 @@ void dooble::slotPrint(void)
       dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
 
       if(p)
-	p->print(&printer);
-
+	p->slotPrint(&printer);
     }
 }
 
@@ -4665,11 +4664,14 @@ void dooble::slotPrintPreview(void)
       printDialog.setWindowModality(Qt::WindowModal);
       connect(&printDialog,
 	      SIGNAL(paintRequested(QPrinter *)),
-	      p->currentFrame(),
-	      SLOT(print(QPrinter *)));
+	      p,
+	      SLOT(slotPrint(QPrinter *)));
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+      printDialog.show();
+      QApplication::restoreOverrideCursor();
 
       if(printDialog.exec() == QDialog::Accepted)
-	p->print(&printer);
+	p->view()->render(&printer);
     }
 }
 

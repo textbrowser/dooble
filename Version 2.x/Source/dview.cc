@@ -32,10 +32,12 @@
 #include <QFileIconProvider>
 #include <QFileInfo>
 #include <QNetworkProxy>
+#include <QPrinter>
 #include <QPushButton>
 #include <QSslError>
 #include <QStack>
 #include <QStyle>
+#include <QTextBrowser>
 #include <QUrl>
 #include <QWebEngineHistory>
 #include <QWebEngineView>
@@ -54,27 +56,29 @@
 
 dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	     const QHash<QWebEngineSettings::WebAttribute,
-	     bool> &webAttributes):
-  QStackedWidget(parent)
+	     bool> &webAttributes):QWidget(parent)
 {
+  setLayout(new QHBoxLayout());
   m_action = 0;
   m_cookieWindow = 0;
   m_cookies = 0;
   m_hasSslError = false;
   m_history = history;
   m_lastInfoLookupId = 0;
-  webView = new dwebview(this);
-  webView->setPage(new dwebpage(webView));
+  m_webView = new dwebview(this);
+  m_webView->setPage(new dwebpage(m_webView));
+  layout()->addWidget(m_webView);
+  layout()->setContentsMargins(0, 0, 0, 0);
   setWebAttributes(webAttributes);
 
   QDataStream in(&m_history, QIODevice::ReadOnly);
 
   if(in.status() == QDataStream::Ok)
     {
-      in >> *webView->page()->history();
+      in >> *m_webView->page()->history();
 
       if(in.status() != QDataStream::Ok)
-	webView->page()->history()->clear();
+	m_webView->page()->history()->clear();
     }
 
   /*
@@ -88,26 +92,24 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   if(multiplier < 1.0 || multiplier > 99.99)
     multiplier = 1.0;
 
-  webView->setZoomFactor(multiplier);
-  addWidget(webView);
-  setCurrentWidget(webView);
+  m_webView->setZoomFactor(multiplier);
   m_pageLoaded = false;
   m_percentLoaded = 0;
   m_selectedUrl = QUrl();
   selectedImageUrl = QUrl();
-  connect(webView, SIGNAL(urlChanged(const QUrl &)), this,
+  connect(m_webView, SIGNAL(urlChanged(const QUrl &)), this,
 	  SLOT(slotUrlChanged(const QUrl &)));
-  connect(webView->page(), SIGNAL(iconChanged(void)), this,
+  connect(m_webView->page(), SIGNAL(iconChanged(void)), this,
 	  SLOT(slotIconChanged(void)));
-  connect(webView, SIGNAL(titleChanged(const QString &)), this,
+  connect(m_webView, SIGNAL(titleChanged(const QString &)), this,
 	  SLOT(slotTitleChanged(const QString &)));
-  connect(webView, SIGNAL(loadStarted(void)), this,
+  connect(m_webView, SIGNAL(loadStarted(void)), this,
 	  SLOT(slotLoadStarted(void)));
-  connect(webView, SIGNAL(loadFinished(bool)), this,
+  connect(m_webView, SIGNAL(loadFinished(bool)), this,
 	  SLOT(slotLoadFinished(bool)));
-  connect(webView, SIGNAL(loadProgress(int)), this,
+  connect(m_webView, SIGNAL(loadProgress(int)), this,
 	  SLOT(slotLoadProgress(int)));
-  connect(webView, SIGNAL(customContextMenuRequested(const QPoint &)),
+  connect(m_webView, SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this, SLOT(slotCustomContextMenuRequested(const QPoint &)));
   connect(dooble::s_settingsWindow,
 	  SIGNAL(textSizeMultiplierChanged(const qreal)),
@@ -117,7 +119,7 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	  SIGNAL(reencodeRestorationFile(void)),
 	  this,
 	  SLOT(slotReencodeRestorationFile(void)));
-  connect(webView->page(),
+  connect(m_webView->page(),
 	  SIGNAL(selectionChanged(void)),
 	  this,
 	  SLOT(slotSelectionChanged(void)));
@@ -127,12 +129,12 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   ** a queued connection is necessary.
   */
 
-  connect(webView->page(),
+  connect(m_webView->page(),
 	  SIGNAL(loadErrorPage(const QUrl &)),
 	  this,
 	  SLOT(slotLoadErrorPage(const QUrl &)),
 	  Qt::QueuedConnection);
-  connect(webView->page(),
+  connect(m_webView->page(),
 	  SIGNAL(loadErrorPage(const QUrl &)),
 	  this,
 	  SLOT(slotLoadErrorPage(const QUrl &)),
@@ -166,14 +168,14 @@ dview::~dview()
 void dview::slotLoadFinished(bool ok)
 {
   m_pageLoaded = true;
-  webView->page()->toHtml
+  m_webView->page()->toHtml
     ([this](const QString &html)
      {
        m_html = html;
      });
 
-  if(webView == sender())
-    webView->update();
+  if(m_webView == sender())
+    m_webView->update();
 
   emit loadFinished(ok);
 
@@ -183,7 +185,6 @@ void dview::slotLoadFinished(bool ok)
 
 void dview::slotInitialLayoutCompleted(void)
 {
-  setCurrentWidget(webView);
 }
 
 void dview::slotLoadStarted(void)
@@ -195,8 +196,8 @@ void dview::slotLoadStarted(void)
   if(m_action)
     m_action->setIcon(dmisc::iconForUrl(QUrl()));
 
-  if(webView == sender())
-    webView->update();
+  if(m_webView == sender())
+    m_webView->update();
 
   emit loadStarted();
 }
@@ -313,7 +314,7 @@ void dview::slotClearHistory(void)
 {
   m_history.clear();
   removeRestorationFiles();
-  webView->history()->clear();
+  m_webView->history()->clear();
 }
 
 void dview::load(const QUrl &url)
@@ -349,13 +350,13 @@ void dview::load(const QUrl &url)
 	** Exempt hosts must be prevented from executing JavaScript.
 	*/
 
-	webView->settings()->setAttribute
+	m_webView->settings()->setAttribute
 	  (QWebEngineSettings::JavascriptEnabled, false);
       else
-	webView->settings()->setAttribute
+	m_webView->settings()->setAttribute
 	  (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
 
-      webView->load(m_url);
+      m_webView->load(m_url);
     }
   else if("file:" == url.toString(QUrl::StripTrailingSlash))
     {
@@ -365,10 +366,10 @@ void dview::load(const QUrl &url)
 
       QUrl url(QUrl::fromLocalFile(QDir::rootPath()));
 
-      webView->load(url);
+      m_webView->load(url);
     }
   else
-    webView->load(m_url);
+    m_webView->load(m_url);
 }
 
 QIcon dview::icon(void) const
@@ -378,12 +379,12 @@ QIcon dview::icon(void) const
 
 void dview::slotCopySelectedText(void)
 {
-  webView->triggerPageAction(QWebEnginePage::Copy);
+  m_webView->triggerPageAction(QWebEnginePage::Copy);
 }
 
 dwebpage *dview::page(void) const
 {
-  return qobject_cast<dwebpage *> (webView->page());
+  return qobject_cast<dwebpage *> (m_webView->page());
 }
 
 QUrl dview::url(void) const
@@ -398,13 +399,13 @@ void dview::stop(void)
   */
 
   m_pageLoaded = true;
-  webView->stop();
+  m_webView->stop();
 }
 
 void dview::reload(void)
 {
-  if(!webView->url().isEmpty())
-    webView->page()->triggerAction(QWebEnginePage::Reload);
+  if(!m_webView->url().isEmpty())
+    m_webView->page()->triggerAction(QWebEnginePage::Reload);
   else
     load(url());
 }
@@ -412,19 +413,19 @@ void dview::reload(void)
 void dview::back(void)
 {
   stop();
-  webView->back();
+  m_webView->back();
 }
 
 void dview::forward(void)
 {
   stop();
-  webView->forward();
+  m_webView->forward();
 }
 
 void dview::goToItem(const QWebEngineHistoryItem &item)
 {
   stop();
-  webView->page()->history()->goToItem(item);
+  m_webView->page()->history()->goToItem(item);
 }
 
 QString dview::title(void) const
@@ -446,10 +447,10 @@ void dview::slotUrlChanged(const QUrl &url)
     ** Exempt hosts must be prevented from executing JavaScript.
     */
 
-    webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled,
+    m_webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled,
 				      false);
   else
-    webView->settings()->setAttribute
+    m_webView->settings()->setAttribute
       (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
 
   QString scheme(m_url.scheme().toLower().trimmed());
@@ -465,7 +466,8 @@ void dview::slotUrlChanged(const QUrl &url)
       m_url.setScheme(scheme);
     }
   else if(scheme == "http" || scheme == "https")
-    setCurrentWidget(webView);
+    {
+    }
 
   if(m_action)
     m_action->setData(m_url);
@@ -505,43 +507,45 @@ void dview::slotIconChanged(void)
 
 bool dview::canGoBack(void) const
 {
-  return webView->page()->history()->canGoBack();
+  return m_webView->page()->history()->canGoBack();
 }
 
 bool dview::canGoForward(void) const
 {
-  return webView->page()->history()->canGoForward();
+  return m_webView->page()->history()->canGoForward();
 }
 
 QList<QWebEngineHistoryItem> dview::backItems(const int n) const
 {
-  return webView->page()->history()->backItems(n);
+  return m_webView->page()->history()->backItems(n);
 }
 
 QList<QWebEngineHistoryItem> dview::forwardItems(const int n) const
 {
-  return webView->page()->history()->forwardItems(n);
+  return m_webView->page()->history()->forwardItems(n);
 }
 
-void dview::print(QPrinter *printer)
+void dview::slotPrint(QPrinter *printer)
 {
-  Q_UNUSED(printer);
+  if(!printer)
+    return;
+
+  m_webView->render(printer);
+
+  QTextBrowser textBrowser(this);
+
+  textBrowser.setHtml(m_html);
+  textBrowser.print(printer);
 }
 
 QWebEnginePage *dview::currentFrame(void)
 {
-  if(webView == currentWidget())
-    return webView->page();
-
-  return 0;
+  return m_webView->page();
 }
 
 QString dview::html(void)
 {
-  if(webView == currentWidget())
-    return m_html;
-
-  return QString("");
+  return m_html;
 }
 
 bool dview::isDir(void) const
@@ -612,7 +616,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 		      l_url.setScheme(QString("dooble-ssl-%1").
 				      arg(reply->url().scheme()));
 		      request.setUrl(l_url);
-		      webView->load(l_url);
+		      m_webView->load(l_url);
 		    }
 		}
 	    }
@@ -646,7 +650,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 
       l_url.setScheme(QString("dooble-ssl-%1").arg(reply->url().scheme()));
       request.setUrl(l_url);
-      webView->load(l_url);
+      m_webView->load(l_url);
       emit exceptionRaised(dooble::s_sslExceptionsWindow, reply->url());
       emit sslError(reply->url().host(),
 		    reply->url(),
@@ -656,8 +660,7 @@ void dview::slotSslErrors(QNetworkReply *reply,
 
 void dview::setFocus(void)
 {
-  if(currentWidget())
-    currentWidget()->setFocus();
+  m_webView->setFocus();
 }
 
 void dview::slotHandleUnsupportedContent(const QUrl &url)
@@ -690,7 +693,7 @@ void dview::slotFinished(dnetworkerrorreply *reply)
       if(frame)
 	frame->setHtml(reply->html(), reply->url());
       else
-	webView->setHtml(reply->html(), reply->url());
+	m_webView->setHtml(reply->html(), reply->url());
     }
 }
 
@@ -704,7 +707,7 @@ void dview::slotFinished(dnetworksslerrorreply *reply)
       if(frame)
 	frame->setHtml(reply->html(), reply->url());
       else
-	webView->setHtml(reply->html(), reply->url());
+	m_webView->setHtml(reply->html(), reply->url());
 
       m_hasSslError = true;
     }
@@ -826,17 +829,17 @@ void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 
 void dview::enterEvent(QEvent *event)
 {
-  QStackedWidget::enterEvent(event);
+  QWidget::enterEvent(event);
 }
 
 void dview::slotSelectionChanged(void)
 {
-  emit selectionChanged(webView->page()->selectedText());
+  emit selectionChanged(m_webView->page()->selectedText());
 }
 
 void dview::slotPaste(void)
 {
-  webView->triggerPageAction(QWebEnginePage::Paste);
+  m_webView->triggerPageAction(QWebEnginePage::Paste);
 }
 
 void dview::setTabAction(QAction *action)
@@ -870,13 +873,13 @@ void dview::slotLinkClicked(const QUrl &url)
 
 qreal dview::zoomFactor(void) const
 {
-  return webView->zoomFactor();
+  return m_webView->zoomFactor();
 }
 
 void dview::setZoomFactor(const qreal factor)
 {
-  webView->setZoomFactor(factor);
-  webView->update();
+  m_webView->setZoomFactor(factor);
+  m_webView->update();
 }
 
 void dview::slotStop(void)
@@ -891,7 +894,7 @@ void dview::slotViewPageSource(void)
 
 void dview::slotSetTextSizeMultiplier(const qreal multiplier)
 {
-  webView->setZoomFactor(multiplier);
+  m_webView->setZoomFactor(multiplier);
 }
 
 bool dview::hasSecureConnection(void) const
@@ -958,10 +961,7 @@ QString dview::ipAddress(void) const
 
 bool dview::isModified(void) const
 {
-  if(webView == currentWidget())
-    return false;
-  else
-    return false;
+  return m_webView->isWindowModified();
 }
 
 void dview::post(const QUrl &url, const QString &text)
@@ -976,17 +976,16 @@ void dview::post(const QUrl &url, const QString &text)
   m_html.clear();
   m_url = url;
   stop();
-  setCurrentWidget(webView);
 
   if(dooble::s_javaScriptExceptionsWindow->allowed(url.host()))
     /*
     ** Exempt hosts must be prevented from executing JavaScript.
     */
 
-    webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled,
+    m_webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled,
 				      false);
   else
-    webView->settings()->setAttribute
+    m_webView->settings()->setAttribute
       (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
 
   /*
@@ -1001,19 +1000,19 @@ void dview::post(const QUrl &url, const QString &text)
 		    "text/html; charset=UTF-8");
   request.setHeader(QNetworkRequest::ContentLengthHeader,
 		    text.toUtf8().length());
-  webView->load(m_url);
+  m_webView->load(m_url);
 }
 
 void dview::update(void)
 {
-  QStackedWidget::update();
+  QWidget::update();
 }
 
 QByteArray dview::history(void)
 {
   QDataStream out(&m_history, QIODevice::WriteOnly);
 
-  out << *webView->history();
+  out << *m_webView->history();
 
   if(out.status() != QDataStream::Ok)
     m_history.clear();
@@ -1034,11 +1033,7 @@ QString dview::description(void) const
 {
   QString str("");
 
-  if(webView == currentWidget())
-    {
-      if(webView->page())
-	str = webviewUrl().toString(QUrl::StripTrailingSlash);
-    }
+  str = webviewUrl().toString(QUrl::StripTrailingSlash);
 
   if(str.isEmpty())
     str = webviewUrl().toString(QUrl::StripTrailingSlash);
@@ -1065,7 +1060,7 @@ void dview::recordRestorationHistory(void)
   else if(!dooble::s_settings.value("settingsWindow/sessionRestoration",
 				    true).toBool())
     return;
-  else if(webView->history()->count() == 0)
+  else if(m_webView->history()->count() == 0)
     return;
 
   prepareRestorationFileNames();
@@ -1073,7 +1068,7 @@ void dview::recordRestorationHistory(void)
   QByteArray bytes;
   QDataStream out(&bytes, QIODevice::WriteOnly);
 
-  out << *webView->history();
+  out << *m_webView->history();
 
   if(out.status() == QDataStream::Ok)
     {
@@ -1181,12 +1176,12 @@ void dview::slotLoadErrorPage(const QUrl &url)
   else
     l_url.setScheme(QString("dooble-%1").arg(url.scheme()));
 
-  webView->load(l_url);
+  m_webView->load(l_url);
 }
 
 QUrl dview::webviewUrl(void) const
 {
-  return webView->url();
+  return m_webView->url();
 }
 
 QIcon dview::webviewIcon(void) const
@@ -1308,4 +1303,9 @@ dooble *dview::findDooble(void)
   while(prnt != 0 && dbl == 0);
 
   return dbl;
+}
+
+dwebview *dview::view(void) const
+{
+  return m_webView;
 }

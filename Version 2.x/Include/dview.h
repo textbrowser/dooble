@@ -32,8 +32,8 @@
 #include <QIcon>
 #include <QNetworkRequest>
 #include <QPointer>
-#include <QStackedWidget>
 #include <QWebEngineSettings>
+#include <QWidget>
 
 class QNetworkReply;
 class QPrinter;
@@ -52,7 +52,7 @@ class dwebpage;
 class dwebview;
 class dwebviewsimple;
 
-class dview: public QStackedWidget
+class dview: public QWidget
 {
   Q_OBJECT
 
@@ -88,6 +88,7 @@ class dview: public QStackedWidget
   bool isModified(void) const;
   bool isPrivateBrowsingEnabled(void) const;
   dwebpage *page(void) const;
+  dwebview *view(void) const;
   int progress(void) const;
   qreal zoomFactor(void) const;
   void back(void);
@@ -96,7 +97,6 @@ class dview: public QStackedWidget
   void goToItem(const QWebEngineHistoryItem &item);
   void load(const QUrl &url);
   void post(const QUrl &url, const QString &text);
-  void print(QPrinter *printer);
   void recordRestorationHistory(void);
   void reload(void);
   void removeRestorationFiles(void);
@@ -125,7 +125,7 @@ class dview: public QStackedWidget
   QUrl selectedImageUrl;
   bool m_hasSslError;
   bool m_pageLoaded;
-  dwebview *webView;
+  dwebview *m_webView;
   int m_lastInfoLookupId;
   int m_percentLoaded;
   QHash<QWebEngineSettings::WebAttribute, bool> webAttributes(void) const;
@@ -181,7 +181,10 @@ class dview: public QStackedWidget
   void slotUrlChanged(const QUrl &url);
   void slotViewImage(void);
   void slotViewPageSource(void);
-void slotClearCookies(void);
+  void slotClearCookies(void);
+
+ public slots:
+  void slotPrint(QPrinter *printer);
 
  signals:
   void copyLink(const QUrl &url);
