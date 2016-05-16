@@ -604,7 +604,6 @@ void dwebpage::slotHttpToHttps(const QString &html)
   QString str(html);
 
   str.replace(QRegExp("[Hh][Tt][Tt][Pp]:"), "https:");
-  qDebug() << str;
 }
 
 void dwebpage::slotUrlChanged(const QUrl &url)

@@ -5020,8 +5020,6 @@ void dooble::slotSelectAllContent(void)
 void dooble::slotAuthenticationRequired(const QUrl &url,
 					QAuthenticator *authenticator)
 {
-  Q_UNUSED(url);
-
   if(!authenticator)
     return;
 

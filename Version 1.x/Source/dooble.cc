@@ -5451,7 +5451,6 @@ void dooble::slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
   if(!authenticator)
     return;
 
-  Q_UNUSED(proxy);
   QDialog dialog(this);
   Ui_passwordDialog ui_p;
 
