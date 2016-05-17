@@ -1234,6 +1234,9 @@ void dsettings::exec(dooble *parent)
   ui.diskCacheEnableCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/diskCacheEnabled",
 			      false).toBool());
+  ui.alwaysHttpsCheckBox->setChecked(false); // Not supported.
+  ui.alwaysHttpsCheckBox->setEnabled(false); // Not supported.
+  ui.alwaysHttpsExceptionsPushButton->setEnabled(false); // Not supported.
 
   bool ok = true;
   int value = qAbs
