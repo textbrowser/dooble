@@ -5075,6 +5075,8 @@ void dooble::slotAuthenticationRequired(const QUrl &url,
       authenticator->setUser(ui_p.usernameLineEdit->text());
       authenticator->setPassword(ui_p.passwordLineEdit->text());
     }
+  else
+    *authenticator = QAuthenticator(); // Cancel repetitions.
 }
 
 void dooble::slotProxyAuthenticationRequired(const QUrl &url,
@@ -5136,6 +5138,8 @@ void dooble::slotProxyAuthenticationRequired(const QUrl &url,
       authenticator->setUser(ui_p.usernameLineEdit->text());
       authenticator->setPassword(ui_p.passwordLineEdit->text());
     }
+  else
+    *authenticator = QAuthenticator(); // Cancel repetitions.
 }
 
 void dooble::slotSelectionChanged(const QString &text)
