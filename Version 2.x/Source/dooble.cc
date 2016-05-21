@@ -5087,7 +5087,6 @@ void dooble::slotProxyAuthenticationRequired(const QUrl &url,
     return;
 
   Q_UNUSED(url);
-  Q_UNUSED(proxyHost);
   QDialog dialog(this);
   Ui_passwordDialog ui_p;
 
