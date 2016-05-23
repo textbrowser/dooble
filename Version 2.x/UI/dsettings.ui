@@ -219,12 +219,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="webkitButton">
+         <widget class="QToolButton" name="webengineButton">
           <property name="toolTip">
            <string>WebKit</string>
           </property>
           <property name="text">
-           <string>WebKit</string>
+           <string>WebEngine</string>
           </property>
           <property name="iconSize">
            <size>
@@ -379,9 +379,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>520</width>
-               <height>571</height>
+               <y>-102</y>
+               <width>738</width>
+               <height>631</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -460,6 +460,33 @@
                </layout>
               </item>
               <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_69">
+                <item>
+                 <widget class="QCheckBox" name="fullScreenSupport">
+                  <property name="text">
+                   <string>Full Screen Support</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_58">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_41">
                 <item>
                  <widget class="QLabel" name="label_57">
@@ -492,6 +519,33 @@
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_32">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_68">
+                <item>
+                 <widget class="QCheckBox" name="scrollingAnimation">
+                  <property name="text">
+                   <string>Scrolling Animation</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_57">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -1237,8 +1291,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>303</width>
+               <y>-60</y>
+               <width>732</width>
                <height>550</height>
               </rect>
              </property>
@@ -1553,9 +1607,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>594</width>
-               <height>897</height>
+               <y>-336</y>
+               <width>738</width>
+               <height>865</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2545,9 +2599,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>476</width>
-               <height>709</height>
+               <y>-148</y>
+               <width>738</width>
+               <height>677</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3088,7 +3142,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-856</y>
                <width>738</width>
                <height>1385</height>
               </rect>
@@ -4334,114 +4388,6 @@
         <widget class="QWidget" name="stackedWidgetPage7">
          <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>HTTP Status Codes</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_24">
-             <item>
-              <widget class="QLabel" name="label_82">
-               <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please read &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&lt;/span&gt;&lt;/a&gt; for descriptions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="openExternalLinks">
-                <bool>true</bool>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_50">
-               <item>
-                <spacer name="horizontalSpacer_45">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="negate_disabled_http_codes">
-                 <property name="text">
-                  <string>Negate Disabled</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="negate_enabled_http_codes">
-                 <property name="text">
-                  <string>Negate Enabled</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_44">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QTableWidget" name="httpStatusCodes">
-               <attribute name="horizontalHeaderDefaultSectionSize">
-                <number>150</number>
-               </attribute>
-               <attribute name="horizontalHeaderStretchLastSection">
-                <bool>true</bool>
-               </attribute>
-               <column>
-                <property name="text">
-                 <string>Display Dooble's Error Page</string>
-                </property>
-               </column>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_38">
-            <item>
-             <widget class="QCheckBox" name="purgeMemoryCachesCheckBox">
-              <property name="text">
-               <string>Periodically purge memory caches.</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_29">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_39">
             <item>
              <widget class="QCheckBox" name="spatialNavigationCheckBox">
@@ -4559,12 +4505,15 @@
   <tabstop>safeButton</tabstop>
   <tabstop>securityButton</tabstop>
   <tabstop>tabsButton</tabstop>
-  <tabstop>webkitButton</tabstop>
+  <tabstop>webengineButton</tabstop>
   <tabstop>windowsButton</tabstop>
   <tabstop>record_file_suffixes</tabstop>
   <tabstop>applicationsTable</tabstop>
   <tabstop>scrollArea</tabstop>
+  <tabstop>displaypriority</tabstop>
+  <tabstop>fullScreenSupport</tabstop>
   <tabstop>locationToolbarIconSizeComboBox</tabstop>
+  <tabstop>scrollingAnimation</tabstop>
   <tabstop>tab_bar_position</tabstop>
   <tabstop>iconSetComboBox</tabstop>
   <tabstop>chooseIconSetPushButton</tabstop>
@@ -4727,16 +4676,11 @@
   <tabstop>appendNewTabsCheckBox</tabstop>
   <tabstop>closeTabWarningCheckBox</tabstop>
   <tabstop>leaveModifiedTabCheckBox</tabstop>
-  <tabstop>negate_disabled_http_codes</tabstop>
-  <tabstop>negate_enabled_http_codes</tabstop>
-  <tabstop>httpStatusCodes</tabstop>
-  <tabstop>purgeMemoryCachesCheckBox</tabstop>
   <tabstop>spatialNavigationCheckBox</tabstop>
   <tabstop>centerChildWindows</tabstop>
   <tabstop>closeDownloadsCheckBox</tabstop>
   <tabstop>openUserWindowsInNewProcessesCheckBox</tabstop>
   <tabstop>useNativeFileDialogs</tabstop>
-  <tabstop>displaypriority</tabstop>
  </tabstops>
  <resources/>
  <connections/>

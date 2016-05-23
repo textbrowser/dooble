@@ -379,7 +379,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-42</y>
+               <y>0</y>
                <width>738</width>
                <height>571</height>
               </rect>
@@ -1237,8 +1237,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-60</y>
-               <width>732</width>
+               <y>0</y>
+               <width>303</width>
                <height>550</height>
               </rect>
              </property>
@@ -1553,9 +1553,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-336</y>
-               <width>738</width>
-               <height>865</height>
+               <y>0</y>
+               <width>594</width>
+               <height>897</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2545,9 +2545,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-148</y>
-               <width>738</width>
-               <height>677</height>
+               <y>0</y>
+               <width>476</width>
+               <height>709</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3088,8 +3088,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-856</y>
-               <width>738</width>
+               <y>0</y>
+               <width>526</width>
                <height>1385</height>
               </rect>
              </property>
@@ -4571,6 +4571,7 @@
   <tabstop>record_file_suffixes</tabstop>
   <tabstop>applicationsTable</tabstop>
   <tabstop>scrollArea</tabstop>
+  <tabstop>displaypriority</tabstop>
   <tabstop>locationToolbarIconSizeComboBox</tabstop>
   <tabstop>tab_bar_position</tabstop>
   <tabstop>iconSetComboBox</tabstop>
@@ -4744,7 +4745,6 @@
   <tabstop>closeDownloadsCheckBox</tabstop>
   <tabstop>openUserWindowsInNewProcessesCheckBox</tabstop>
   <tabstop>useNativeFileDialogs</tabstop>
-  <tabstop>displaypriority</tabstop>
  </tabstops>
  <resources/>
  <connections/>
