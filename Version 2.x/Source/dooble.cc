@@ -566,11 +566,11 @@ int main(int argc, char *argv[])
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled,
      dooble::s_settings.
-     value("settingsWindow/fullScreenSupport", false).toBool());
+     value("settingsWindow/fullScreenSupport", true).toBool());
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      dooble::s_settings.
-     value("settingsWindow/scrollingAnimation", false).toBool());
+     value("settingsWindow/scrollingAnimation", true).toBool());
 
   QString str(dooble::s_settings.value("settingsWindow/characterEncoding",
 				       "").toString().toLower());
