@@ -347,22 +347,22 @@ int main(int argc, char *argv[])
     homeDir = QDir::home();
 
   if(username.isEmpty())
-    homeDir.mkdir(".dooble");
+    homeDir.mkdir(".dooble_v2");
   else
-    homeDir.mkdir(username + QDir::separator() + ".dooble");
+    homeDir.mkdir(username + QDir::separator() + ".dooble_v2");
 
   if(username.isEmpty())
     dooble::s_homePath = homeDir.absolutePath() +
-      QDir::separator() + ".dooble";
+      QDir::separator() + ".dooble_v2";
   else
     dooble::s_homePath = homeDir.absolutePath() + QDir::separator() +
-      username + QDir::separator() + ".dooble";
+      username + QDir::separator() + ".dooble_v2";
 #else
   QDir homeDir(QDir::home());
 
-  homeDir.mkdir(".dooble");
+  homeDir.mkdir(".dooble_v2");
   dooble::s_homePath = homeDir.absolutePath() +
-    QDir::separator() + ".dooble";
+    QDir::separator() + ".dooble_v2";
 #endif
   QCoreApplication::setApplicationName("Dooble");
   QCoreApplication::setOrganizationName("Dooble");
@@ -563,6 +563,14 @@ int main(int argc, char *argv[])
      dooble::s_settings.
      value("settingsWindow/localContentMayAccessLocalContent",
 	   true).toBool());
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::FullScreenSupportEnabled,
+     dooble::s_settings.
+     value("settingsWindow/fullScreenSupport", false).toBool());
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     dooble::s_settings.
+     value("settingsWindow/scrollingAnimation", false).toBool());
 
   QString str(dooble::s_settings.value("settingsWindow/characterEncoding",
 				       "").toString().toLower());

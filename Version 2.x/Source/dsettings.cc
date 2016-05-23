@@ -1858,6 +1858,12 @@ void dsettings::slotClicked(QAbstractButton *button)
       settings.setValue
 	("settingsWindow/user_agent_string", ui.user_agent_string->text().
 	 trimmed());
+      settings.setValue
+	("settingsWindow/fullScreenSupport",
+	 ui.fullScreenSupport->isChecked());
+      settings.setValue
+	("settingsWindow/scrollingAnimation",
+	 ui.scrollingAnimation->isChecked());
 
       if(dfilemanager::tableModel)
 	dfilemanager::tableModel->enable
@@ -1995,6 +2001,12 @@ void dsettings::slotClicked(QAbstractButton *button)
       QWebEngineSettings::globalSettings()->setAttribute
 	(QWebEngineSettings::HyperlinkAuditingEnabled,
 	 ui.hyperlinkAuditing->isChecked());
+      QWebEngineSettings::globalSettings()->setAttribute
+	(QWebEngineSettings::FullScreenSupportEnabled,
+	 ui.fullScreenSupport->isChecked());
+      QWebEngineSettings::globalSettings()->setAttribute
+	(QWebEngineSettings::ScrollAnimatorEnabled,
+	 ui.scrollingAnimation->isChecked());
 
       /*
       ** Populate the dooble::s_settings container.
