@@ -271,10 +271,6 @@ dsettings::dsettings():QMainWindow()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slotUpdateLabels(void)));
-  connect(&m_purgeMemoryCachesTimer,
-	  SIGNAL(timeout(void)),
-	  this,
-	  SLOT(slotPurgeMemoryCaches(void)));
   connect(ui.dntExceptionsPushButton,
 	  SIGNAL(clicked(void)),
 	  dooble::s_dntWindow,
@@ -386,39 +382,11 @@ dsettings::dsettings():QMainWindow()
 
 dsettings::~dsettings()
 {
-  m_purgeMemoryCachesTimer.stop();
   m_updateLabelTimer.stop();
 }
 
 void dsettings::exec(dooble *parent)
 {
-  ui.httpStatusCodes->clearContents();
-  ui.httpStatusCodes->setRowCount(599 - 400 + 1);
-
-  for(int i = 400, j = 0; i <= 599; i++, j++)
-    {
-      QTableWidgetItem *item = new QTableWidgetItem(QString::number(i));
-
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable |
-		     Qt::ItemIsUserCheckable);
-      ui.httpStatusCodes->setItem(j, 0, item);
-    }
-
-  for(int i = 0; i < ui.httpStatusCodes->rowCount(); i++)
-    {
-      QTableWidgetItem *item = ui.httpStatusCodes->item(i, 0);
-
-      if(!item)
-	continue;
-
-      int value = dmisc::s_httpStatusCodes.value(item->text().toInt(), 1);
-
-      if(value)
-	ui.httpStatusCodes->item(i, 0)->setCheckState(Qt::Checked);
-      else
-	ui.httpStatusCodes->item(i, 0)->setCheckState(Qt::Unchecked);
-    }
-
   m_parentDooble = parent;
   m_previousIconSet.clear();
   slotUpdateLabels();
@@ -1037,9 +1005,8 @@ void dsettings::exec(dooble *parent)
   codecs.sort();
   ui.encodingCombinationBox->clear();
   ui.encodingCombinationBox->addItems(codecs);
-  ui.purgeMemoryCachesCheckBox->setEnabled(false);
-  ui.webkitButton->setText(tr("WebEngine"));
-  ui.webkitButton->setToolTip(tr("WebEngine"));
+  ui.webengineButton->setText(tr("WebEngine"));
+  ui.webengineButton->setToolTip(tr("WebEngine"));
 
   QString text(dooble::s_settings.value("settingsWindow/characterEncoding",
 					"").toString());
@@ -1193,9 +1160,6 @@ void dsettings::exec(dooble *parent)
   ui.notifyExceptionsCheckBox->setChecked
     (dooble::s_settings.value("settingsWindow/notifyOfExceptions",
 			      true).toBool());
-  ui.purgeMemoryCachesCheckBox->setChecked
-    (dooble::s_settings.value("settingsWindow/purgeMemoryCaches", true).
-     toBool());
 
   QSize s
     (dooble::s_settings.value("settingsWindow/locationToolbarIconSize",
@@ -1829,8 +1793,6 @@ void dsettings::slotClicked(QAbstractButton *button)
 			ui.thirdPartyCookiesComboBox->currentIndex());
       settings.setValue("settingsWindow/notifyOfExceptions",
 			ui.notifyExceptionsCheckBox->isChecked());
-      settings.setValue("settingsWindow/purgeMemoryCaches",
-			ui.purgeMemoryCachesCheckBox->isChecked());
       settings.setValue("settingsWindow/applicationsTableColumnsState",
 			ui.applicationsTable->horizontalHeader()->
 			saveState());
@@ -2051,20 +2013,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 	}
 
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-      QHash<int, int> httpStatusCodes;
-
-      for(int i = 0; i < ui.httpStatusCodes->rowCount(); i++)
-	{
-	  QTableWidgetItem *item = ui.httpStatusCodes->item(i, 0);
-
-	  if(item)
-	    httpStatusCodes[item->text().toInt()] =
-	      (item->checkState() == Qt::Checked);
-	}
-
       dmisc::prepareProxyIgnoreLists();
-      dmisc::updateHttpStatusCodes(httpStatusCodes);
       QApplication::restoreOverrideCursor();
 
       /*
@@ -2077,14 +2026,6 @@ void dsettings::slotClicked(QAbstractButton *button)
       emit showIpAddress(ui.displayIpAddressCheckBox->isChecked());
       emit showTabBar(ui.alwaysShowTabBarCheckBox->isChecked());
       emit textSizeMultiplierChanged(ui.textSizeMultiplierSpinBox->value());
-
-      if(ui.purgeMemoryCachesCheckBox->isChecked())
-	{
-	  if(!m_purgeMemoryCachesTimer.isActive())
-	    m_purgeMemoryCachesTimer.start();
-	}
-      else
-	m_purgeMemoryCachesTimer.stop();
 
       if(ui.sessionRestorationCheckBox->isChecked())
 	dooble::s_makeCrashFile();
@@ -2440,8 +2381,8 @@ void dsettings::slotSetIcons(void)
     (QIcon(settings.value("settingsWindow/securityButtonIcon").toString()));
   ui.tabsButton->setIcon
     (QIcon(settings.value("settingsWindow/tabsButtonIcon").toString()));
-  ui.webkitButton->setIcon
-    (QIcon(settings.value("settingsWindow/webkitButtonIcon").toString()));
+  ui.webengineButton->setIcon
+    (QIcon(settings.value("settingsWindow/webengineButtonIcon").toString()));
   ui.windowsButton->setIcon
     (QIcon(settings.value("settingsWindow/windowsButtonIcon").toString()));
   ui.safeButton->setIcon
@@ -2584,10 +2525,6 @@ void dsettings::slotIconsPreview(void)
 dooble *dsettings::parentDooble(void) const
 {
   return m_parentDooble;
-}
-
-void dsettings::slotPurgeMemoryCaches(void)
-{
 }
 
 void dsettings::slotPopulateApplications

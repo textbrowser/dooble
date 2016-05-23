@@ -125,7 +125,6 @@ struct gcry_thread_cbs gcry_threads_qt =
 #endif
 
 QHash<QString, char> dmisc::s_blockedhosts;
-QHash<int, int> dmisc::s_httpStatusCodes;
 QList<QString> dmisc::s_browsingProxyIgnoreList;
 QList<QString> dmisc::s_downloadProxyIgnoreList;
 bool dmisc::s_passphraseWasAuthenticated = false;
@@ -1632,70 +1631,6 @@ void dmisc::createPreferencesDatabase(void)
 	query.exec("CREATE TABLE IF NOT EXISTS http_status_codes ("
 		   "status_code INTEGER PRIMARY KEY NOT NULL, "
 		   "display_default_site_page INTEGER NOT NULL DEFAULT 1)");
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase("preferences");
-}
-
-void dmisc::updateHttpStatusCodes(const QHash<int, int> &statusCodes)
-{
-  s_httpStatusCodes = statusCodes;
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "preferences");
-
-    db.setDatabaseName(dooble::s_homePath + QDir::separator() +
-		       "preferences.db");
-
-    if(db.open())
-      {
-	QHashIterator<int, int> it(s_httpStatusCodes);
-	QSqlQuery query(db);
-
-	query.exec("PRAGMA synchronous = OFF");
-
-	while(it.hasNext())
-	  {
-	    it.next();
-	    query.prepare("INSERT OR REPLACE INTO http_status_codes "
-			  "(status_code, display_default_site_page) "
-			  "VALUES (?, ?)");
-	    query.bindValue(0, it.key());
-	    query.bindValue(1, it.value());
-	    query.exec();
-	  }
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase("preferences");
-}
-
-void dmisc::populateHttpStatusCodesContainer(void)
-{
-  s_httpStatusCodes.clear();
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "preferences");
-
-    db.setDatabaseName(dooble::s_homePath + QDir::separator() +
-		       "preferences.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-
-	query.setForwardOnly(true);
-
-	if(query.exec("SELECT status_code, display_default_site_page "
-		      "FROM http_status_codes ORDER BY status_code"))
-	  while(query.next())
-	    s_httpStatusCodes[query.value(0).toInt()] =
-	      query.value(1).toInt();
       }
 
     db.close();

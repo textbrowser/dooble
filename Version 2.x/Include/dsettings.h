@@ -51,7 +51,6 @@ class dsettings: public QMainWindow
  private:
   QPointer<dooble> m_parentDooble;
   QString m_previousIconSet;
-  QTimer m_purgeMemoryCachesTimer;
   QTimer m_updateLabelTimer;
   Ui_settingsWindow ui;
   bool event(QEvent *event);
@@ -80,7 +79,6 @@ class dsettings: public QMainWindow
   void slotEnablePassphrase(void);
   void slotGroupBoxClicked(bool checked);
   void slotIconsPreview(void);
-  void slotPurgeMemoryCaches(void);
   void slotResetUrlAgentString(void);
   void slotSelectIconCfgFile(void);
   void slotSetIcons(void);

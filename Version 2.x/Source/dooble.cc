@@ -485,6 +485,7 @@ int main(int argc, char *argv[])
   settings.remove("mainWindow/showLocationToolBar");
   settings.remove("mainWindow/zoomTextOnly");
   settings.remove("settingsWindow/javaEnabled");
+  settings.remove("settingsWindow/purgeMemoryCaches");
   settings.remove("vidalia/hostName");
   settings.remove("vidalia/isConnected");
   settings.remove("vidalia/port");
@@ -943,7 +944,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   */
 
   dmisc::createPreferencesDatabase();
-  dmisc::populateHttpStatusCodesContainer();
   setUrlHandler(this);
   m_isJavaScriptWindow = isJavaScriptWindow;
   showFindFrame = false;

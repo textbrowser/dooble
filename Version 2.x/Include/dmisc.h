@@ -48,7 +48,6 @@ class QUrl;
 class dmisc
 {
  public:
-  static QHash<int, int> s_httpStatusCodes;
   static dcrypt *s_crypt;
   static dcrypt *s_reencodeCrypt;
   static QByteArray daa(const QByteArray &byteArray, bool *ok);
@@ -97,7 +96,6 @@ class dmisc
   static void launchApplication(const QString &program,
 				const QStringList &arguments);
   static void logError(const QString &error);
-  static void populateHttpStatusCodesContainer(void);
   static void prepareProxyIgnoreLists(void);
   static void prepareReencodeCrypt(void);
   static void purgeTemporaryData(void);
@@ -114,7 +112,6 @@ class dmisc
 				  const int iterationCount,
 				  const QByteArray &salt,
 				  const QString &cipherMode);
-  static void updateHttpStatusCodes(const QHash<int, int> &statusCodes);
 
  private:
   dmisc(void);
