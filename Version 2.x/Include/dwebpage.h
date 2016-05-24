@@ -34,6 +34,7 @@
 #include "dtypes.h"
 
 class QDateTime;
+class QWebEngineProfile;
 class dexceptionswindow;
 class dnetworkaccessmanager;
 class dooble;
@@ -49,11 +50,13 @@ class dwebpage: public QWebEnginePage
   bool areWebPluginsEnabled(void) const;
   bool isJavaScriptEnabled(void) const;
   bool isPrivateBrowsingEnabled(void) const;
-  void setJavaScriptEnabled(const bool);
+  void setJavaScriptEnabled(const bool state);
+  void setPrivateBrowsingEnabled(const bool state);
   void showWebInspector(void);
 
  private:
   QUrl m_requestedUrl;
+  QWebEngineProfile *m_profile;
   bool m_isJavaScriptEnabled;
   dnetworkaccessmanager *m_networkAccessManager;
   QString userAgentForUrl(const QUrl &url) const;

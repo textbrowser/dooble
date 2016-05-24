@@ -40,7 +40,6 @@ class QPrinter;
 class QSslError;
 class QWebEngineHistoryItem;
 class QWebEnginePage;
-class QWebEngineProfile;
 class QWebEngineView;
 class dcookies;
 class dcookiewindow;
@@ -124,7 +123,6 @@ class dview: public QWidget
   QUrl m_selectedUrl;
   QUrl m_url;
   QUrl selectedImageUrl;
-  QWebEngineProfile *m_profile;
   bool m_hasSslError;
   bool m_pageLoaded;
   dwebview *m_webView;

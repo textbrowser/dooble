@@ -40,7 +40,6 @@
 #include <QTextBrowser>
 #include <QUrl>
 #include <QWebEngineHistory>
-#include <QWebEngineProfile>
 #include <QWebEngineView>
 
 #include "dbookmarkswindow.h"
@@ -66,7 +65,6 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   m_hasSslError = false;
   m_history = history;
   m_lastInfoLookupId = 0;
-  m_profile = 0;
   m_webView = new dwebview(this);
   m_webView->setPage(new dwebpage(m_webView));
   layout()->addWidget(m_webView);
@@ -156,7 +154,6 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 	setPrivateCookies(true);
 	m_cookies->setAllCookies(cookies->allCookies());
 	m_cookies->setFavorites(cookies->favorites());
-	m_profile = new QWebEngineProfile(this);
       }
 }
 
@@ -1249,7 +1246,7 @@ void dview::setJavaScriptEnabled(const bool state)
 
 void dview::setPrivateBrowsingEnabled(const bool state)
 {
-  Q_UNUSED(state);
+  page()->setPrivateBrowsingEnabled(state);
 }
 
 void dview::setWebPluginsEnabled(const bool state)

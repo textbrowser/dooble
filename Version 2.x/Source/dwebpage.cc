@@ -32,6 +32,7 @@
 #include <QUrl>
 #include <QWebEngineHistory>
 #include <QWebEnginePage>
+#include <QWebEngineProfile>
 
 #include "dexceptionswindow.h"
 #include "dmisc.h"
@@ -62,6 +63,7 @@ dwebpage::dwebpage(QObject *parent):QWebEnginePage(parent)
     value("settingsWindow/javascriptEnabled", false).
     toBool();
   m_networkAccessManager = new dnetworkaccessmanager(this);
+  m_profile = 0;
 
   /*
   ** The initialLayoutCompleted() signal is not emitted by every
@@ -630,7 +632,7 @@ bool dwebpage::isJavaScriptEnabled(void) const
 
 bool dwebpage::isPrivateBrowsingEnabled(void) const
 {
-  return false;
+  return m_profile != 0;
 }
 
 void dwebpage::setJavaScriptEnabled(const bool state)
@@ -660,4 +662,20 @@ void dwebpage::slotLoadFinished(bool ok)
 
   if(dooble::s_settings.value("settingsWindow/alwaysHttps", false).toBool())
     toHtml(invoke(this, &dwebpage::slotHttpToHttps));
+}
+
+void dwebpage::setPrivateBrowsingEnabled(const bool state)
+{
+  if(state)
+    {
+      if(!m_profile)
+	m_profile = new QWebEngineProfile(this);
+    }
+  else
+    {
+      if(m_profile)
+	m_profile->deleteLater();
+
+      m_profile = 0;
+    }
 }

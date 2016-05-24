@@ -7496,6 +7496,7 @@ void dooble::slotNewPrivateTab(void)
 
   if(p)
     {
+      p->setPrivateBrowsingEnabled(true);
       p->setPrivateCookies(true);
       ui.tabWidget->setCurrentWidget(p);
       ui.tabWidget->update();
