@@ -1042,6 +1042,10 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SIGNAL(triggered(void)),
 	  this,
 	  SLOT(slotHideMainMenus(void)));
+  connect(ui.actionNew_Private_Tab, SIGNAL(triggered(void)), this,
+	  SLOT(slotNewPrivateTab(void)));
+  connect(ui.tabWidget, SIGNAL(createPrivateTab(void)), this,
+	  SLOT(slotNewPrivateTab(void)));
   connect(ui.action_Web_Inspector,
 	  SIGNAL(triggered(void)),
 	  this,
@@ -7469,4 +7473,38 @@ void dooble::slotShowSearchWidget(bool state)
 void dooble::slotSettingsChanged(void)
 {
   ui.locationLineEdit->updateToolTips();
+}
+
+void dooble::slotNewPrivateTab(void)
+{
+  QUrl url;
+  dview *p = 0;
+
+  url = QUrl::fromUserInput
+    (s_settings.value("settingsWindow/homeUrl", "").toString());
+
+  if(!url.isValid())
+    url = QUrl();
+  else
+    url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
+
+  QHash<QWebEngineSettings::WebAttribute, bool> webAttributes;
+
+  webAttributes[QWebEngineSettings::JavascriptEnabled] = false;
+  webAttributes[QWebEngineSettings::PluginsEnabled] = false;
+  p = newTab(url, 0, webAttributes);
+
+  if(p)
+    {
+      p->setPrivateCookies(true);
+      ui.tabWidget->setCurrentWidget(p);
+      ui.tabWidget->update();
+
+      if(url.isEmpty() || !url.isValid())
+	/*
+	** p's url may be empty at this point.
+	*/
+
+	slotOpenUrl();
+    }
 }

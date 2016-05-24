@@ -48,7 +48,7 @@
 #include "ui_dmainWindow.h"
 #include "ui_dstatusBar.h"
 
-#define DOOBLE_VERSION_STR "2.05"
+#define DOOBLE_VERSION_STR "2.06"
 
 class QCloseEvent;
 class dbookmarkspopup;
@@ -231,6 +231,7 @@ class dooble: public QMainWindow
   void slotLoadProgress(int progress);
   void slotLoadStarted(void);
   void slotLocationSplitterMoved(int post, int index);
+  void slotNewPrivateTab(void);
   void slotNewTab(void);
   void slotNewWindow(void);
   void slotObjectDestroyed(QObject *object);

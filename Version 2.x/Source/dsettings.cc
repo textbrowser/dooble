@@ -1247,6 +1247,12 @@ void dsettings::exec(dooble *parent)
     (qBound(0, dooble::s_settings.
 	    value("settingsWindow/javascriptStagnantScripts",
 		  2).toInt(), 2));
+  ui.fullScreenSupport->setChecked
+    (dooble::s_settings.value("settingsWindow/fullScreenSupport",
+			      true).toBool());
+  ui.scrollingAnimation->setChecked
+    (dooble::s_settings.value("settingsWindow/scrollingAnimation",
+			      true).toBool());
 
   if(dooble::s_settings.contains("settingsWindow/"
 				 "applicationsTableColumnsState"))
