@@ -51,7 +51,7 @@ class dwebpage: public QWebPage
   bool areWebPluginsEnabled(void) const;
   bool isJavaScriptEnabled(void) const;
   bool isPrivateBrowsingEnabled(void) const;
-  void setJavaScriptEnabled(const bool);
+  void setJavaScriptEnabled(const bool state);
   void showWebInspector(void);
 
  private:
