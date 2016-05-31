@@ -5355,7 +5355,12 @@ void dooble::slotCopy(void)
       dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
 
       if(p && !p->isDir() && !p->isFtp())
-	p->page()->triggerAction(QWebPage::Copy);
+	{
+	  QClipboard *clipboard = QApplication::clipboard();
+
+	  if(clipboard)
+	    clipboard->setText(p->page()->selectedText());
+	}
     }
 }
 
