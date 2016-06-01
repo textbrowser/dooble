@@ -1642,7 +1642,7 @@
         <location filename="../Source/dooble.cc" line="3582"/>
         <location filename="../Source/dooble.cc" line="3606"/>
         <location filename="../Source/dooble.cc" line="5129"/>
-        <location filename="../Source/dooble.cc" line="5611"/>
+        <location filename="../Source/dooble.cc" line="5615"/>
         <source>(Untitled)</source>
         <translation>(Ohne Titel)</translation>
     </message>
@@ -1654,9 +1654,9 @@
         <location filename="../Source/dooble.cc" line="3821"/>
         <location filename="../Source/dooble.cc" line="3861"/>
         <location filename="../Source/dooble.cc" line="4069"/>
-        <location filename="../Source/dooble.cc" line="5535"/>
-        <location filename="../Source/dooble.cc" line="6173"/>
-        <location filename="../Source/dooble.cc" line="6477"/>
+        <location filename="../Source/dooble.cc" line="5539"/>
+        <location filename="../Source/dooble.cc" line="6177"/>
+        <location filename="../Source/dooble.cc" line="6481"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1692,7 +1692,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="3183"/>
         <location filename="../Source/dooble.cc" line="3368"/>
-        <location filename="../Source/dooble.cc" line="5537"/>
+        <location filename="../Source/dooble.cc" line="5541"/>
         <source>Dooble Web Browser (%1)</source>
         <translation>Dooble Web Browser (%1)</translation>
     </message>
@@ -1701,9 +1701,9 @@
         <location filename="../Source/dooble.cc" line="3194"/>
         <location filename="../Source/dooble.cc" line="3376"/>
         <location filename="../Source/dooble.cc" line="3379"/>
-        <location filename="../Source/dooble.cc" line="5545"/>
-        <location filename="../Source/dooble.cc" line="5548"/>
-        <location filename="../Source/dooble.cc" line="6479"/>
+        <location filename="../Source/dooble.cc" line="5549"/>
+        <location filename="../Source/dooble.cc" line="5552"/>
+        <location filename="../Source/dooble.cc" line="6483"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Browser</translation>
     </message>
@@ -1723,33 +1723,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5402"/>
+        <location filename="../Source/dooble.cc" line="5407"/>
         <source>The site %1 is requesting credentials.</source>
         <translation>Die Seite %1 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="5466"/>
+        <location filename="../Source/dooble.cc" line="5470"/>
         <source>The proxy %1:%2 is requesting credentials.</source>
         <translation>Der Proxy %1:%2 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6514"/>
+        <location filename="../Source/dooble.cc" line="6518"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Möchtest Du wirklich %1 Seiten öffnen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6667"/>
+        <location filename="../Source/dooble.cc" line="6671"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Möchtest Du wirklich die veränderte Seite verlassen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7523"/>
+        <location filename="../Source/dooble.cc" line="7527"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7526"/>
         <location filename="../Source/dooble.cc" line="7530"/>
+        <location filename="../Source/dooble.cc" line="7534"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1770,12 +1770,12 @@
         <translation type="vanished">Add-on</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7895"/>
+        <location filename="../Source/dooble.cc" line="7899"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7897"/>
+        <location filename="../Source/dooble.cc" line="7901"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1784,12 +1784,12 @@
         <translation type="obsolete">Eine unbekannte Seite mit einer leeren oder ungültigen URL verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7260"/>
+        <location filename="../Source/dooble.cc" line="7264"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Erinnerung</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7261"/>
+        <location filename="../Source/dooble.cc" line="7265"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Eine Passphrase ist noch nicht eingegeben worden. Bitte besuche den Tresor Bereich in den Einstellungen (Fenster/Einstellungen/Tresor) und wähle eine Passphrase. Alsbald eine Passphrase eingegeben wurde, werden Lesezeichen, Cookies, und alle anderen wichtigen Informationen, Nutzer-Daten und -Einstellungen für zukünftige Sitzungen gespeichert und erneut zur Verfügung stehen. Du kannst diese Erinnerungsmeldung in den Einstellungen unter Sicherheit ausblenden.</translation>
     </message>
@@ -1802,15 +1802,15 @@
         <translation type="obsolete">Das Laden des Addons gelang nicht.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6976"/>
-        <location filename="../Source/dooble.cc" line="6981"/>
+        <location filename="../Source/dooble.cc" line="6980"/>
+        <location filename="../Source/dooble.cc" line="6985"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Die Seite %1 verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7217"/>
-        <location filename="../Source/dooble.cc" line="7219"/>
+        <location filename="../Source/dooble.cc" line="7221"/>
         <location filename="../Source/dooble.cc" line="7223"/>
+        <location filename="../Source/dooble.cc" line="7227"/>
         <source>Restore Session</source>
         <translation>Sitzung wiederherstellen</translation>
     </message>
@@ -1826,8 +1826,8 @@
         <location filename="../Source/dooble.cc" line="2974"/>
         <location filename="../Source/dooble.cc" line="3026"/>
         <location filename="../Source/dooble.cc" line="4019"/>
-        <location filename="../Source/dooble.cc" line="6511"/>
-        <location filename="../Source/dooble.cc" line="6663"/>
+        <location filename="../Source/dooble.cc" line="6515"/>
+        <location filename="../Source/dooble.cc" line="6667"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Bestätigung</translation>
     </message>
@@ -2564,7 +2564,7 @@
         <translation type="vanished">Quelltext der &amp;Seite anzeigen</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="694"/>
+        <location filename="../Source/dview.cc" line="697"/>
         <source>(Untitled)</source>
         <translation>(Ohne Titel)</translation>
     </message>
