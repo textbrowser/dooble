@@ -2396,128 +2396,128 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="727"/>
+        <location filename="../UI/dmainWindow.ui" line="731"/>
         <source>&amp;About Dooble...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="732"/>
+        <location filename="../UI/dmainWindow.ui" line="736"/>
         <source>&amp;Save Page...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="740"/>
+        <location filename="../UI/dmainWindow.ui" line="744"/>
         <source>&amp;Downloads...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="775"/>
+        <location filename="../UI/dmainWindow.ui" line="779"/>
         <source>&amp;Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="855"/>
+        <location filename="../UI/dmainWindow.ui" line="859"/>
         <source>&amp;Open Directory...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="895"/>
-        <location filename="../UI/dmainWindow.ui" line="948"/>
+        <location filename="../UI/dmainWindow.ui" line="899"/>
+        <location filename="../UI/dmainWindow.ui" line="952"/>
         <source>Coo&amp;kies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="938"/>
+        <location filename="../UI/dmainWindow.ui" line="942"/>
         <source>&amp;Authenticate Passphrase...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="943"/>
+        <location filename="../UI/dmainWindow.ui" line="947"/>
         <source>&amp;JavaScript...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="953"/>
+        <location filename="../UI/dmainWindow.ui" line="957"/>
         <source>Third-Party Frame &amp;Content...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="958"/>
+        <location filename="../UI/dmainWindow.ui" line="962"/>
         <source>JavaScript &amp;Pop-ups...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="968"/>
+        <location filename="../UI/dmainWindow.ui" line="972"/>
         <source>HTTP Re&amp;direct...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="973"/>
+        <location filename="../UI/dmainWindow.ui" line="977"/>
         <source>DNT (Do Not &amp;Track)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="978"/>
+        <location filename="../UI/dmainWindow.ui" line="982"/>
         <source>Error &amp;Information...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="986"/>
+        <location filename="../UI/dmainWindow.ui" line="990"/>
         <source>&amp;Automatically-Loaded Images...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1004"/>
+        <location filename="../UI/dmainWindow.ui" line="1008"/>
         <source>Cac&amp;he...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1009"/>
+        <location filename="../UI/dmainWindow.ui" line="1013"/>
         <source>&amp;Clear Containers...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1017"/>
+        <location filename="../UI/dmainWindow.ui" line="1021"/>
         <source>Always HTTP&amp;S...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1022"/>
+        <location filename="../UI/dmainWindow.ui" line="1026"/>
         <source>Save Page as &amp;Data URI...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1027"/>
+        <location filename="../UI/dmainWindow.ui" line="1031"/>
         <source>SS&amp;L Errors...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1032"/>
+        <location filename="../UI/dmainWindow.ui" line="1036"/>
         <source>HTTP Re&amp;ferrer...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1037"/>
+        <location filename="../UI/dmainWindow.ui" line="1041"/>
         <source>&amp;Allowed SSL Ciphers...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1042"/>
+        <location filename="../UI/dmainWindow.ui" line="1046"/>
         <source>&amp;Web Inspector...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1047"/>
+        <location filename="../UI/dmainWindow.ui" line="1051"/>
         <source>HTTP-&amp;Only Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1105"/>
+        <location filename="../UI/dmainWindow.ui" line="1109"/>
         <source>&amp;Blocked Hosts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1115"/>
+        <location filename="../UI/dmainWindow.ui" line="1119"/>
         <source>&amp;User Agent Strings...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2536,52 +2536,52 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Fermer &amp;Fenetre</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="815"/>
+        <location filename="../UI/dmainWindow.ui" line="819"/>
         <source>Ctrl+=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="836"/>
+        <location filename="../UI/dmainWindow.ui" line="840"/>
         <source>Reset Zoo&amp;m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="863"/>
+        <location filename="../UI/dmainWindow.ui" line="867"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="866"/>
+        <location filename="../UI/dmainWindow.ui" line="870"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="871"/>
+        <location filename="../UI/dmainWindow.ui" line="875"/>
         <source>&amp;Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="874"/>
+        <location filename="../UI/dmainWindow.ui" line="878"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="879"/>
+        <location filename="../UI/dmainWindow.ui" line="883"/>
         <source>Select &amp;All Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="882"/>
+        <location filename="../UI/dmainWindow.ui" line="886"/>
         <source>Ctrl+A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="890"/>
+        <location filename="../UI/dmainWindow.ui" line="894"/>
         <source>Ctrl+W</source>
         <translation type="unfinished">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="887"/>
+        <location filename="../UI/dmainWindow.ui" line="891"/>
         <source>Close Ta&amp;b</source>
         <translation type="unfinished">Fermer o&amp;nglet</translation>
     </message>
@@ -2595,7 +2595,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Ouvrir le lien</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="858"/>
+        <location filename="../UI/dmainWindow.ui" line="862"/>
         <source>Ctrl+O</source>
         <translation type="unfinished">Ctrl+O</translation>
     </message>
@@ -2673,7 +2673,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Enregistrer la page</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="735"/>
+        <location filename="../UI/dmainWindow.ui" line="739"/>
         <source>Ctrl+S</source>
         <translation type="unfinished">Ctrl+S</translation>
     </message>
@@ -2682,37 +2682,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Téléchargements</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="743"/>
+        <location filename="../UI/dmainWindow.ui" line="747"/>
         <source>Ctrl+D</source>
         <translation type="unfinished">Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="748"/>
+        <location filename="../UI/dmainWindow.ui" line="752"/>
         <source>&amp;Find</source>
         <translation type="unfinished">Ch&amp;ercher</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="751"/>
+        <location filename="../UI/dmainWindow.ui" line="755"/>
         <source>Ctrl+F</source>
         <translation type="unfinished">Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="756"/>
+        <location filename="../UI/dmainWindow.ui" line="760"/>
         <source>&amp;Reload</source>
         <translation type="unfinished">&amp;Actualiser</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="759"/>
+        <location filename="../UI/dmainWindow.ui" line="763"/>
         <source>Ctrl+R</source>
         <translation type="unfinished">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="764"/>
+        <location filename="../UI/dmainWindow.ui" line="768"/>
         <source>Sto&amp;p</source>
         <translation type="unfinished">Ar&amp;reter</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="767"/>
+        <location filename="../UI/dmainWindow.ui" line="771"/>
         <source>Esc</source>
         <translation type="unfinished">Echappe</translation>
     </message>
@@ -2721,117 +2721,117 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Imprimer</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="778"/>
+        <location filename="../UI/dmainWindow.ui" line="782"/>
         <source>Ctrl+P</source>
         <translation type="unfinished">Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="783"/>
+        <location filename="../UI/dmainWindow.ui" line="787"/>
         <source>Print Pre&amp;view...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="788"/>
+        <location filename="../UI/dmainWindow.ui" line="792"/>
         <source>Settin&amp;gs...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="796"/>
+        <location filename="../UI/dmainWindow.ui" line="800"/>
         <source>Page So&amp;urce...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="850"/>
+        <location filename="../UI/dmainWindow.ui" line="854"/>
         <source>Status &amp;Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="898"/>
+        <location filename="../UI/dmainWindow.ui" line="902"/>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="909"/>
+        <location filename="../UI/dmainWindow.ui" line="913"/>
         <source>&amp;Show Hidden Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="914"/>
+        <location filename="../UI/dmainWindow.ui" line="918"/>
         <source>&amp;P2P E-Mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="925"/>
+        <location filename="../UI/dmainWindow.ui" line="929"/>
         <source>&amp;Favorites Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="933"/>
+        <location filename="../UI/dmainWindow.ui" line="937"/>
         <source>&amp;History Side Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="963"/>
+        <location filename="../UI/dmainWindow.ui" line="967"/>
         <source>&amp;Refresh List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="981"/>
+        <location filename="../UI/dmainWindow.ui" line="985"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="991"/>
+        <location filename="../UI/dmainWindow.ui" line="995"/>
         <source>&amp;IRC Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="999"/>
+        <location filename="../UI/dmainWindow.ui" line="1003"/>
         <source>Offlin&amp;e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1012"/>
+        <location filename="../UI/dmainWindow.ui" line="1016"/>
         <source>Ctrl+Shift+Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1052"/>
+        <location filename="../UI/dmainWindow.ui" line="1056"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1063"/>
+        <location filename="../UI/dmainWindow.ui" line="1067"/>
         <source>&amp;Desktop Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1074"/>
+        <location filename="../UI/dmainWindow.ui" line="1078"/>
         <source>&amp;Home Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1079"/>
+        <location filename="../UI/dmainWindow.ui" line="1083"/>
         <source>&amp;Clear Spot-On Shared Links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1084"/>
+        <location filename="../UI/dmainWindow.ui" line="1088"/>
         <source>New Pr&amp;ivate Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1095"/>
+        <location filename="../UI/dmainWindow.ui" line="1099"/>
         <source>Search &amp;Widget</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1100"/>
+        <location filename="../UI/dmainWindow.ui" line="1104"/>
         <source>&amp;Gridify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="1110"/>
+        <location filename="../UI/dmainWindow.ui" line="1114"/>
         <source>&amp;Home</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2852,7 +2852,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Para&amp;métres</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="791"/>
+        <location filename="../UI/dmainWindow.ui" line="795"/>
         <source>Ctrl+G</source>
         <translation type="unfinished">Ctrl+G</translation>
     </message>
@@ -2869,17 +2869,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Affichier la so&amp;urce</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="799"/>
+        <location filename="../UI/dmainWindow.ui" line="803"/>
         <source>Ctrl+U</source>
         <translation type="unfinished">Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="804"/>
+        <location filename="../UI/dmainWindow.ui" line="808"/>
         <source>&amp;My Retrieved Files</source>
         <translation type="unfinished">Mes fichiers téléchar&amp;gés</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="807"/>
+        <location filename="../UI/dmainWindow.ui" line="811"/>
         <source>Ctrl+M</source>
         <translation type="unfinished">Ctrl+M</translation>
     </message>
@@ -2892,17 +2892,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ctrl++</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="820"/>
+        <location filename="../UI/dmainWindow.ui" line="824"/>
         <source>Zoom &amp;Out</source>
         <translation type="unfinished">Rétré&amp;cir</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="823"/>
+        <location filename="../UI/dmainWindow.ui" line="827"/>
         <source>Ctrl+-</source>
         <translation type="unfinished">Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="831"/>
+        <location filename="../UI/dmainWindow.ui" line="835"/>
         <source>Zoom &amp;Text Only</source>
         <translation type="unfinished">Agrandir text &amp;uniquement</translation>
     </message>
@@ -2911,12 +2911,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Rétablir taille</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="839"/>
+        <location filename="../UI/dmainWindow.ui" line="843"/>
         <source>Ctrl+0</source>
         <translation type="unfinished">Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../UI/dmainWindow.ui" line="812"/>
+        <location filename="../UI/dmainWindow.ui" line="816"/>
         <source>Zoom &amp;In</source>
         <translation type="unfinished">Agran&amp;dir</translation>
     </message>
