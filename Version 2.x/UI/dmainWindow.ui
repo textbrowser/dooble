@@ -719,6 +719,10 @@
    </property>
   </action>
   <action name="actionAbout_Dooble">
+   <property name="icon">
+    <iconset>
+     <normaloff>../Icons/AxB/dooble.png</normaloff>../Icons/AxB/dooble.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About Dooble...</string>
    </property>
