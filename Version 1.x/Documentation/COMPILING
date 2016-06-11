@@ -7,7 +7,7 @@ a distclean before building Dooble.
 OS X developers should consider installing Homebrew. Please see http://brew.sh.
 
 To verify the verion of Qt, issue qmake --version. Qt 5.x project files
-include qt5 in their names.
+include qt5 in their names. qmake may be an alias for qmake-qt4 or qmake-qt5.
 
 Absolute cleaning:
 gmake distclean or make distclean or mingw32-make distclean
@@ -17,20 +17,29 @@ qmake or qmake-qt4 -o Makefile dooble.arm.pro
 qmake or qmake-qt5 -o Makefile dooble.arm.qt5.pro
 make
 
-FreeBSD:
+FreeBSD
+
 qmake or qmake-qt4 -o Makefile dooble.freebsd.pro
 qmake or qmake-qt5 -o Makefile dooble.freebsd.qt5.pro
 gmake
 
-Linux:
+Linux
+
 qmake or qmake-qt4 -o Makefile dooble.pro
 qmake or qmake-qt5 -o Makefile dooble.qt5.pro
 make
 
-OS X:
+OS X
+
 qmake -o Makefile dooble.osx.qt5.pro
 make
 
-Windows:
+PowerPC
+
+qmake or qmake-qt4 -o Makefile dooble.powerpc.pro
+qmake or qmake-qt5 -o Makefile dooble.powerpc.qt5.pro
+
+Windows
+
 qmake -o Makefile dooble.win.qt5.pro
 make or mingw32-make

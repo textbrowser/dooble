@@ -8,16 +8,29 @@ OS X developers should consider installing Homebrew. Please see http://brew.sh.
 Absolute cleaning:
 gmake distclean or make distclean or mingw32-make distclean
 
-FreeBSD:
-qmake -o Makefile dooble.freebsd.clang.qt5.pro
-gmake
+ARM
 
-Linux:
-qmake -o Makefile dooble.qt5.pro
+qmake or qmake-qt5 -o Makefile dooble.arm.qt5.pro
 make
 
-OS X:
+FreeBSD
+
+qmake or qmake-qt5 -o Makefile dooble.freebsd.qt5.pro
+gmake
+
+Linux
+
+qmake or qmake-qt5 -o Makefile dooble.qt5.pro
+make
+
+OS X
+
 qmake -o Makefile dooble.osx.qt5.pro
+make
+
+PowerPC
+
+qmake -o Makefile dooble.powerpc.qt5.pro
 make
 
 Windows:
