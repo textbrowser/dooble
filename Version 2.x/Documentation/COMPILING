@@ -33,6 +33,7 @@ PowerPC
 qmake -o Makefile dooble.powerpc.qt5.pro
 make
 
-Windows:
+Windows
+
 qmake -o Makefile dooble.win.qt5.pro
 make or mingw32-make
