@@ -79,7 +79,6 @@ void dsslcipherswindow::populate(void)
   for(int i = 0; i < list.size(); i++)
     if(list.at(i).protocolString().toLower().contains("sslv1") ||
        list.at(i).protocolString().toLower().contains("sslv2") ||
-       list.at(i).protocolString().toLower().contains("sslv3") ||
        list.at(i).supportedBits() < 128 ||
        list.at(i).usedBits() < 128)
       states.append(false);
