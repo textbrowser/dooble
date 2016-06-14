@@ -33,7 +33,7 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>If you would like auto-negotiation, please disable all of the defined ciphers. Please close all active tabs after updating the below contents. Please restart Dooble if the settings do not agree with your expectations.</string>
+       <string>Please close all active tabs after updating the below contents. Please restart Dooble if the settings do not agree with your expectations.</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
