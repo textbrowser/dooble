@@ -205,7 +205,11 @@ void dsslcipherswindow::populate(void)
   }
 
   QSqlDatabase::removeDatabase("allowedsslciphers");
+#if QT_VERSION >= 0x050000
+  QSslConfiguration::defaultConfiguration().setCiphers(allowed);
+#else
   QSslSocket::setDefaultCiphers(allowed);
+#endif
 
   if(allChecked.value("ssl"))
     {
@@ -452,7 +456,11 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
   if(!cipher.isNull())
     {
       list.append(cipher);
+#if QT_VERSION >= 0x050000
+      QSslConfiguration::defaultConfiguration().setCiphers(list);
+#else
       QSslSocket::setDefaultCiphers(list);
+#endif
     }
 }
 
