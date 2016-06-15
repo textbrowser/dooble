@@ -71,22 +71,20 @@ void dsslcipherswindow::populate(void)
 
   QHash<QString, bool> allChecked; // SSL, TLS
   QList<QSslCipher> allowed;
+#if QT_VERSION >= 0x050000
+  QList<QSslCipher> list(QSslConfiguration::supportedCiphers());
+#else
   QList<QSslCipher> list(QSslSocket::supportedCiphers());
+#endif
   QList<bool> states;
 
   allChecked["ssl"] = allChecked["tls"] = true;
 
   for(int i = 0; i < list.size(); i++)
-    if(list.at(i).protocolString().toLower().contains("sslv1") ||
-       list.at(i).protocolString().toLower().contains("sslv2") ||
-       list.at(i).supportedBits() < 128 ||
-       list.at(i).usedBits() < 128)
-      states.append(false);
-    else
-      {
-	allowed.append(list.at(i));
-	states.append(true);
-      }
+    {
+      allowed.append(list.at(i));
+      states.append(true);
+    }
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase
@@ -428,7 +426,11 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
 
   QSqlDatabase::removeDatabase("allowedsslciphers");
 
+#if QT_VERSION >= 0x050000
+  QList<QSslCipher> list(QSslConfiguration::defaultConfiguration().ciphers());
+#else
   QList<QSslCipher> list(QSslSocket::defaultCiphers());
+#endif
   QSslCipher cipher;
 
   if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "sslv3")
