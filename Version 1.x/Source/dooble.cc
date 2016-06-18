@@ -585,6 +585,13 @@ int main(int argc, char *argv[])
 		      QString("%1/%2").arg(QDir::currentPath()).
 		      arg("Icons/nuovext/configuration.cfg"));
 
+  if(!settings.value("v156a_automatic_changes_performed", false).toBool())
+    {
+      QFile::remove
+	(dooble::s_homePath + QDir::separator() + "allowedsslciphers.db");
+      settings.setValue("v156a_automatic_changes_performed", true);
+    }
+
   dooble::s_settings.clear();
 
   for(int i = 0; i < settings.allKeys().size(); i++)
