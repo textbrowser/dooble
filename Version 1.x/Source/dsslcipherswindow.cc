@@ -57,9 +57,20 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
 	  SLOT(slotClose(void)));
   slotSetIcons();
   createTable();
-#if QT_VERSION < 0x050000
+#if QT_VERSION < 0x040800
+  ui.protocol->addItem("Any Protocol");
+  ui.protocol->addItem("SSLv2");
+  ui.protocol->addItem("SSLv3");
+  ui.protocol->addItem("TLSv1.0");
   ui.protocol->addItem("Unknown Protocol");
-  ui.protocol->setEnabled(false);
+#elif QT_VERSION < 0x050000
+  ui.protocol->addItem("Any Protocol");
+  ui.protocol->addItem("SSLv2");
+  ui.protocol->addItem("SSLv3 & TLSv1.0");
+  ui.protocol->addItem("SSLv3");
+  ui.protocol->addItem("Secure Protocols");
+  ui.protocol->addItem("TLSv1.0");
+  ui.protocol->addItem("Unknown Protocol");
 #else
   ui.protocol->addItem("Any Protocol");
   ui.protocol->addItem("SSLv2");
@@ -536,7 +547,33 @@ QSsl::SslProtocol dsslcipherswindow::protocol(void) const
   QSsl::SslProtocol protocol = QSsl::UnknownProtocol;
   QString text(ui.protocol->currentText());
 
-#if QT_VERSION >= 0x050000
+#if QT_VERSION < 0x040800
+  if(text == "Any Protocol")
+    protocol = QSsl::AnyProtocol;
+  else if(text == "SSLv2")
+    protocol = QSsl::SslV2;
+  else if(text == "SSLv3")
+    protocol = QSsl::SslV3;
+  else if(text == "TLSv1.0")
+    protocol = QSsl::TlsV1;
+  else if(text == "Unknown Protocol")
+    protocol = QSsl::UnknownProtocol;
+#elif QT_VERSION < 0x050000
+  if(text == "Any Protocol")
+    protocol = QSsl::AnyProtocol;
+  else if(text == "SSLv2")
+    protocol = QSsl::SslV2;
+  else if(text == "SSLv3 & TLSv1.0")
+    protocol = QSsl::TlsV1SslV3;
+  else if(text == "SSLv3")
+    protocol = QSsl::SslV3;
+  else if(text == "Secure Protocols")
+    protocol = QSsl::SecureProtocols;
+  else if(text == "TLSv1.0")
+    protocol = QSsl::TlsV1;
+  else if(text == "Unknown Protocol")
+    protocol = QSsl::UnknownProtocol;
+#else
   if(text == "Any Protocol")
     protocol = QSsl::AnyProtocol;
   else if(text == "SSLv2")

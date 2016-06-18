@@ -644,7 +644,6 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 
   if(scheme == "http" || scheme == "https")
     {
-#if QT_VERSION >= 0x050000
       if(scheme == "https")
 	if(dooble::s_sslCiphersWindow)
 	  {
@@ -654,7 +653,6 @@ QNetworkReply *dnetworkaccessmanager::createRequest
 	      (dooble::s_sslCiphersWindow->protocol());
 	    request.setSslConfiguration(configuration);
 	  }
-#endif
 
       if(op == QNetworkAccessManager::PostOperation)
 	if(request.header(QNetworkRequest::ContentTypeHeader).isNull())
