@@ -58,6 +58,7 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
   slotSetIcons();
   createTable();
 #if QT_VERSION < 0x050000
+  ui.protocol->addItem("Unknown Protocol");
   ui.protocol->setEnabled(false);
 #else
   ui.protocol->addItem("Any Protocol");
