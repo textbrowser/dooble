@@ -28,7 +28,11 @@
 #include <QKeyEvent>
 #include <QSettings>
 #include <QSslCipher>
+#if QT_VERSION >= 0x050000
 #include <QSslConfiguration>
+#else
+#include <QSslSocket>
+#endif
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -55,6 +59,13 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
   createTable();
 #if QT_VERSION < 0x040800
 #elif QT_VERSION < 0x050000
+  ui.protocol->addItem("Any Protocol");
+  ui.protocol->addItem("SSLv2");
+  ui.protocol->addItem("SSLv3 & TLSv1.0");
+  ui.protocol->addItem("SSLv3");
+  ui.protocol->addItem("Secure Protocols");
+  ui.protocol->addItem("TLSv1.0");
+  ui.protocol->addItem("Unknown Protocol");
 #else
   ui.protocol->addItem("Any Protocol");
   ui.protocol->addItem("SSLv2");
@@ -93,7 +104,11 @@ void dsslcipherswindow::populate(void)
   createTable();
 
   QHash<QString, bool> allChecked; // SSL, TLS
+#if QT_VERSION >= 0x050000
   QList<QSslCipher> list(QSslConfiguration::supportedCiphers());
+#else
+  QList<QSslCipher> list(QSslSocket::supportedCiphers());
+#endif
 
   allChecked["ssl"] = allChecked["tls"] = true;
 
@@ -181,10 +196,14 @@ void dsslcipherswindow::populate(void)
 
   QSqlDatabase::removeDatabase("allowedsslciphers");
 
+#if QT_VERSION >= 0x050000
   QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
 
   configuration.setCiphers(list);
   QSslConfiguration::setDefaultConfiguration(configuration);
+#else
+  QSslSocket::setDefaultCiphers(list);
+#endif
 
   if(allChecked.value("ssl"))
     {
@@ -419,7 +438,11 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
 
   if(item->checkState() == Qt::Checked)
     {
+#if QT_VERSION >= 0x050000
       list = QSslConfiguration::supportedCiphers();
+#else
+      list = QSslSocket::supportedCiphers();
+#endif
 
       QSslCipher cipher;
 
@@ -438,13 +461,21 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
 
       if(!cipher.isNull())
 	{
+#if QT_VERSION >= 0x050000
 	  list = QSslConfiguration::defaultConfiguration().ciphers();
+#else
+	  list = QSslSocket::defaultCiphers();
+#endif
 	  list.append(cipher);
 	}
     }
   else
     {
+#if QT_VERSION >= 0x050000
       list = QSslConfiguration::defaultConfiguration().ciphers();
+#else
+      list = QSslSocket::defaultCiphers();
+#endif
 
       for(int i = list.size() - 1; i >= 0; i--)
 	{
@@ -460,10 +491,14 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
 	}
     }
 
+#if QT_VERSION >= 0x050000
   QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
 
   configuration.setCiphers(list);
   QSslConfiguration::setDefaultConfiguration(configuration);
+#else
+  QSslSocket::setDefaultCiphers(list);
+#endif
 }
 
 void dsslcipherswindow::slotToggleChoices(bool state)
@@ -509,6 +544,20 @@ QSsl::SslProtocol dsslcipherswindow::protocol(void) const
 
 #if QT_VERSION < 0x040800
 #elif QT_VERSION < 0x050000
+  if(text == "Any Protocol")
+    protocol = QSsl::AnyProtocol;
+  else if(text == "SSLv2")
+    protocol = QSsl::SslV2;
+  else if(text == "SSLv3 & TLSv1.0")
+    protocol = QSsl::TlsV1SslV3;
+  else if(text == "SSLv3")
+    protocol = QSsl::SslV3;
+  else if(text == "Secure Protocols")
+    protocol = QSsl::SecureProtocols;
+  else if(text == "TLSv1.0")
+    protocol = QSsl::TlsV1;
+  else if(text == "Unknown Protocol")
+    protocol = QSsl::UnknownProtocol;
 #else
   if(text == "Any Protocol")
     protocol = QSsl::AnyProtocol;
