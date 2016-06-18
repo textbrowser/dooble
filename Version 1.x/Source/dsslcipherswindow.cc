@@ -93,10 +93,6 @@ void dsslcipherswindow::populate(void)
 {
   createTable();
 
-  /*
-  ** Remove archaic ciphers.
-  */
-
   QHash<QString, bool> allChecked; // SSL, TLS
   QList<QSslCipher> allowed;
 #if QT_VERSION >= 0x050000
@@ -572,5 +568,6 @@ QSsl::SslProtocol dsslcipherswindow::protocol(void) const
   else if(text == "Unknown Protocol")
     protocol = QSsl::UnknownProtocol;
 #endif
+
   return protocol;
 }
