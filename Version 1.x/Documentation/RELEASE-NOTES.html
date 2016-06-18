@@ -1,12 +1,15 @@
 <html>
 1.56a (07/04/2016)
 <ol>
+<li>Added a protocol widget to Allowed SSL Ciphers.</li>
 <li>Allow use of all available ciphers.</li>
 <li>Consider SSLv3 when populating Allowed SSL Ciphers.</li>
 <li>Corrected tab order of Display Priority widget; Settings window.</li>
 <li>Do not use QWebPage::triggerPageAction(QWebPage::Copy) as this requires JavaScript. Instead, use QWebPage::selectedText().</li>
 <li>OS X project files used incorrect optimization level O3 instead of Os.</li>
 <li>Qt 5.5 documentation recommends the use of QSslConfiguration::setCiphers() instead of QSslSocket::setDefaultCiphers(). Modified for Qt 5.x and newer.</li>
+<li>Simplified the Allowed SSL Ciphers implementation, including corrections.</li>
+<li>The database allowedsslciphers.db should have the (name, pair) tuple as the primary key. Please remove the database.</li>
 <li>Upgraded OpenSSL to version 1.0.2h on Windows.</li>
 <li>Upgraded SQLite to version 3.13.0 on Windows.</li>
 <li>Upgraded libgcrypt to version 1.7.1 on OS X.</li>

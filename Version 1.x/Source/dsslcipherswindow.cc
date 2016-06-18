@@ -29,7 +29,6 @@
 #include <QSettings>
 #include <QSslCipher>
 #include <QSslConfiguration>
-#include <QSslSocket>
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -94,21 +93,9 @@ void dsslcipherswindow::populate(void)
   createTable();
 
   QHash<QString, bool> allChecked; // SSL, TLS
-  QList<QSslCipher> allowed;
-#if QT_VERSION >= 0x050000
   QList<QSslCipher> list(QSslConfiguration::supportedCiphers());
-#else
-  QList<QSslCipher> list(QSslSocket::supportedCiphers());
-#endif
-  QList<bool> states;
 
   allChecked["ssl"] = allChecked["tls"] = true;
-
-  for(int i = 0; i < list.size(); i++)
-    {
-      allowed.append(list.at(i));
-      states.append(true);
-    }
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase
@@ -130,7 +117,7 @@ void dsslcipherswindow::populate(void)
 			  "VALUES (?, ?, ?)");
 	    query.bindValue(0, list.at(i).name());
 	    query.bindValue(1, list.at(i).protocolString());
-	    query.bindValue(2, states.at(i) ? 1 : 0);
+	    query.bindValue(2, 1);
 	    query.exec();
 	  }
 
@@ -144,68 +131,34 @@ void dsslcipherswindow::populate(void)
 	if(query.exec())
 	  while(query.next())
 	    {
-	      QSslCipher cipher;
-	      QString protocol(query.value(1).toString().toLower());
-
-	      if(protocol.contains("sslv3"))
-		cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::SslV3);
-	      else if(protocol.contains("tlsv1.0"))
-#if QT_VERSION >= 0x050000
-		cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::TlsV1_0);
-#else
-	        cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::TlsV1);
-#endif
-	      else if(protocol.contains("tlsv1.1"))
-#if QT_VERSION >= 0x050000
-		cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::TlsV1_1);
-#else
-	        cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::UnknownProtocol);
-#endif
-#if QT_VERSION >= 0x050000
-	      else if(protocol.contains("tlsv1.2"))
-		cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::TlsV1_2);
-#endif
-	      else
-		cipher = QSslCipher
-		  (query.value(0).toString(), QSsl::UnknownProtocol);
-
-	      if(cipher.isNull())
-		{
-		  QSqlQuery deleteQuery(db);
-
-		  deleteQuery.prepare("DELETE FROM allowedsslciphers "
-				      "WHERE OID = ?");
-		  deleteQuery.bindValue(0, query.value(3));
-		  deleteQuery.exec();
-		  allowed.removeOne(cipher);
-		  continue;
-		}
-
 	      QListWidgetItem *item = new QListWidgetItem
 		(query.value(0).toString() + "-" +
 		 query.value(1).toString());
+	      QString protocol(query.value(1).toString().toLower());
 
 	      item->setData
-		(Qt::UserRole,
-		 query.value(0).toString());
+		(Qt::UserRole, query.value(0).toString());
 	      item->setData
 		(Qt::ItemDataRole(Qt::UserRole + 1),
 		 query.value(1).toString().toLower());
 	      item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 
 	      if(query.value(2).toBool())
-		{
-		  allowed.append(cipher);
-		  item->setCheckState(Qt::Checked);
-		}
+		item->setCheckState(Qt::Checked);
 	      else
 		{
+		  for(int i = list.size() - 1; i >= 0; i--)
+		    {
+		      if(list.at(i).name().toLower() ==
+			 query.value(0).toString().toLower() &&
+			 list.at(i).protocolString().toLower() ==
+			 query.value(1).toString().toLower())
+			{
+			  list.removeAt(i);
+			  break;
+			}
+		    }
+
 		  if(protocol.contains("ssl"))
 		    allChecked["ssl"] = false;
 		  else
@@ -227,11 +180,11 @@ void dsslcipherswindow::populate(void)
   }
 
   QSqlDatabase::removeDatabase("allowedsslciphers");
-#if QT_VERSION >= 0x050000
-  QSslConfiguration::defaultConfiguration().setCiphers(allowed);
-#else
-  QSslSocket::setDefaultCiphers(allowed);
-#endif
+
+  QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
+
+  configuration.setCiphers(list);
+  QSslConfiguration::setDefaultConfiguration(configuration);
 
   if(allChecked.value("ssl"))
     {
@@ -298,8 +251,7 @@ void dsslcipherswindow::slotShow(void)
 	  else
 	    {
 	      QByteArray g(dooble::s_settings.
-			   value(QString("%1/geometry").
-				 arg(objectName())).
+			   value(QString("%1/geometry").arg(objectName())).
 			   toByteArray());
 
 	      if(!restoreGeometry(g))
@@ -418,9 +370,10 @@ void dsslcipherswindow::createTable(void)
 	QSqlQuery query(db);
 
 	query.exec("CREATE TABLE IF NOT EXISTS allowedsslciphers ("
-		   "name TEXT PRIMARY KEY NOT NULL, "
-		   "protocol TEXT KEY NOT NULL, "
-		   "allowed INTEGER NOT NULL DEFAULT 1)");
+		   "allowed INTEGER NOT NULL DEFAULT 1, "
+		   "name TEXT NOT NULL, "
+		   "protocol TEXT NOT NULL, "
+		   "PRIMARY KEY(name, protocol))");
       }
 
     db.close();
@@ -448,9 +401,12 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
 	QSqlQuery query(db);
 
 	query.prepare("UPDATE allowedsslciphers "
-		      "SET allowed = ? WHERE name = ?");
+		      "SET allowed = ? WHERE LOWER(name) = ? "
+		      "AND LOWER(protocol) = ?");
 	query.bindValue(0, item->checkState() == Qt::Checked ? 1 : 0);
-	query.bindValue(1, item->data(Qt::UserRole).toString());
+	query.bindValue(1, item->data(Qt::UserRole).toString().toLower());
+	query.bindValue(2, item->data(Qt::ItemDataRole(Qt::UserRole + 1)).
+			toString().toLower());
 	query.exec();
       }
 
@@ -459,44 +415,55 @@ void dsslcipherswindow::slotItemChanged(QListWidgetItem *item)
 
   QSqlDatabase::removeDatabase("allowedsslciphers");
 
-#if QT_VERSION >= 0x050000
-  QList<QSslCipher> list(QSslConfiguration::defaultConfiguration().ciphers());
-#else
-  QList<QSslCipher> list(QSslSocket::defaultCiphers());
-#endif
-  QSslCipher cipher;
+  QList<QSslCipher> list;
 
-  if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "sslv3")
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::SslV3);
-  else if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "tlsv1.0")
-#if QT_VERSION >= 0x050000
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1_0);
-#else
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1);
-#endif
-  else if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "tlsv1.1")
-#if QT_VERSION >= 0x050000
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1_1);
-#else
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1);
-#endif
-#if QT_VERSION >= 0x050000
-  else if(item->data(Qt::ItemDataRole(Qt::UserRole + 1)) == "tlsv1.2")
-    cipher = QSslCipher(item->data(Qt::UserRole).toString(), QSsl::TlsV1_2);
-#endif
-  else
-    cipher = QSslCipher
-      (item->data(Qt::UserRole).toString(), QSsl::UnknownProtocol);
-
-  if(!cipher.isNull())
+  if(item->checkState() == Qt::Checked)
     {
-      list.append(cipher);
-#if QT_VERSION >= 0x050000
-      QSslConfiguration::defaultConfiguration().setCiphers(list);
-#else
-      QSslSocket::setDefaultCiphers(list);
-#endif
+      list = QSslConfiguration::supportedCiphers();
+
+      QSslCipher cipher;
+
+      for(int i = 0; i < list.size(); i++)
+	{
+	  if(list.at(i).name().toLower() ==
+	     item->data(Qt::UserRole).toString().toLower() &&
+	     list.at(i).protocolString().toLower() ==
+	     item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toString().
+	     toLower())
+	    {
+	      cipher = list.at(i);
+	      break;
+	    }
+	}
+
+      if(!cipher.isNull())
+	{
+	  list = QSslConfiguration::defaultConfiguration().ciphers();
+	  list.append(cipher);
+	}
     }
+  else
+    {
+      list = QSslConfiguration::defaultConfiguration().ciphers();
+
+      for(int i = list.size() - 1; i >= 0; i--)
+	{
+	  if(list.at(i).name().toLower() ==
+	     item->data(Qt::UserRole).toString().toLower() &&
+	     list.at(i).protocolString().toLower() ==
+	     item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toString().
+	     toLower())
+	    {
+	      list.removeAt(i);
+	      break;
+	    }
+	}
+    }
+
+  QSslConfiguration configuration(QSslConfiguration::defaultConfiguration());
+
+  configuration.setCiphers(list);
+  QSslConfiguration::setDefaultConfiguration(configuration);
 }
 
 void dsslcipherswindow::slotToggleChoices(bool state)
