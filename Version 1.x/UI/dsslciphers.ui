@@ -70,6 +70,20 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Preferred Protocol</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="protocol">
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToContents</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -137,6 +151,7 @@
  <tabstops>
   <tabstop>allSSL</tabstop>
   <tabstop>allTLS</tabstop>
+  <tabstop>protocol</tabstop>
   <tabstop>listWidget</tabstop>
   <tabstop>close</tabstop>
  </tabstops>

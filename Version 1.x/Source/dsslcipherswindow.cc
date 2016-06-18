@@ -54,6 +54,18 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
 	  SLOT(slotClose(void)));
   slotSetIcons();
   createTable();
+#if QT_VERSION < 0x040800
+#elif QT_VERSION < 0x050000
+#else
+  ui.protocol->addItem("Any Protocol");
+  ui.protocol->addItem("SSLv3 & TLSv1.0");
+  ui.protocol->addItem("SSLv3");
+  ui.protocol->addItem("Secure Protocols");
+  ui.protocol->addItem("TLSv1.0");
+  ui.protocol->addItem("TLSv1.1");
+  ui.protocol->addItem("TLSv1.2");
+  ui.protocol->addItem("Unknown Protocol");
+#endif
 }
 
 dsslcipherswindow::~dsslcipherswindow()
@@ -504,75 +516,11 @@ void dsslcipherswindow::slotToggleChoices(bool state)
 
 QSsl::SslProtocol dsslcipherswindow::protocol(void) const
 {
-  bool sslv3 = false;
-  bool tlsv10 = false;
-  bool tlsv11 = false;
-  bool tlsv12 = false;
-
-  for(int i = 0; i < ui.listWidget->count(); i++)
-    {
-      QListWidgetItem *item = ui.listWidget->item(i);
-
-      if(!item)
-	continue;
-
-      if(item->text().toLower().contains("sslv3"))
-	if(item->checkState() == Qt::Checked)
-	  sslv3 = true;
-
-      if(item->text().toLower().contains("tlsv1.0"))
-	if(item->checkState() == Qt::Checked)
-	  tlsv10 = true;
-
-      if(item->text().toLower().contains("tlsv1.1"))
-	if(item->checkState() == Qt::Checked)
-	  tlsv11 = true;
-
-      if(item->text().toLower().contains("tlsv1.2"))
-	if(item->checkState() == Qt::Checked)
-	  tlsv12 = true;
-    }
-
   QSsl::SslProtocol protocol = QSsl::UnknownProtocol;
 
-#if QT_VERSION >= 0x050000
-  if(sslv3 && tlsv10 && tlsv11 && tlsv12)
-    protocol = QSsl::UnknownProtocol;
-  else if(sslv3 && tlsv10)
-    protocol = QSsl::TlsV1SslV3;
-  else if(sslv3 && (tlsv11 || tlsv12))
-    protocol = QSsl::UnknownProtocol;
-  else if(tlsv12 && !tlsv10 && !tlsv11)
-    protocol = QSsl::TlsV1_2;
-  else if(tlsv11 && !tlsv10)
-    protocol = QSsl::TlsV1_1;
-  else if(tlsv10)
-    protocol = QSsl::TlsV1_0;
-  else if(sslv3)
-    protocol = QSsl::SslV3;
-  else
-    protocol = QSsl::UnknownProtocol;
+#if QT_VERSION < 0x040800
+#elif QT_VERSION < 0x050000
 #else
-  if(sslv3 && tlsv10 && tlsv11 && tlsv12)
-    protocol = QSsl::UnknownProtocol;
-  else if(sslv3 && (tlsv10 || tlsv11 || tlsv12))
-    /*
-    ** Qt's default protocol is QSsl::SecureProtocols on Qt 4.8.6.
-    ** Test https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre.
-    */
-#if QT_VERSION >= 0x040800
-    protocol = QSsl::TlsV1SslV3;
-#else
-    protocol = QSsl::UnknownProtocol;
-#endif
-  else if(tlsv11 || tlsv12)
-    protocol = QSsl::UnknownProtocol;
-  else if(tlsv10)
-    protocol = QSsl::TlsV1;
-  else if(sslv3)
-    protocol = QSsl::SslV3;
-  else
-    protocol = QSsl::UnknownProtocol;
 #endif
 
   return protocol;
