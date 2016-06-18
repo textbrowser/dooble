@@ -56,6 +56,7 @@ class dsslcipherswindow: public QMainWindow
  private slots:
   void slotClose(void);
   void slotItemChanged(QListWidgetItem *item);
+  void slotProtocolChanged(const QString &text);
   void slotSetIcons(void);
   void slotShow(void);
   void slotToggleChoices(bool state);

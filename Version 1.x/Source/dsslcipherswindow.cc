@@ -58,14 +58,30 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
 #elif QT_VERSION < 0x050000
 #else
   ui.protocol->addItem("Any Protocol");
+  ui.protocol->addItem("SSLv2");
   ui.protocol->addItem("SSLv3 & TLSv1.0");
   ui.protocol->addItem("SSLv3");
   ui.protocol->addItem("Secure Protocols");
   ui.protocol->addItem("TLSv1.0");
+  ui.protocol->addItem("TLSv1.0+");
   ui.protocol->addItem("TLSv1.1");
+  ui.protocol->addItem("TLSv1.1+");
   ui.protocol->addItem("TLSv1.2");
+  ui.protocol->addItem("TLSv1.2+");
   ui.protocol->addItem("Unknown Protocol");
 #endif
+
+  int index = ui.protocol->findText
+    (dooble::s_settings.value(QString("%1/protocol").arg(objectName()),
+			      "Unknown Protocol").toString());
+
+  if(index >= 0)
+    ui.protocol->setCurrentIndex(index);
+  else
+    ui.protocol->setCurrentIndex(ui.protocol->findText("Unknown Protocol"));
+
+  connect(ui.protocol, SIGNAL(currentIndexChanged(const QString &)), this,
+	  SLOT(slotProtocolChanged(const QString &)));
 }
 
 dsslcipherswindow::~dsslcipherswindow()
@@ -245,6 +261,15 @@ void dsslcipherswindow::closeEvent(QCloseEvent *event)
 {
   saveState();
   QMainWindow::closeEvent(event);
+}
+
+void dsslcipherswindow::slotProtocolChanged(const QString &text)
+{
+  dooble::s_settings[QString("%1/protocol").arg(objectName())] = text;
+
+  QSettings settings;
+
+  settings.setValue(QString("%1/protocol").arg(objectName()), text);
 }
 
 void dsslcipherswindow::slotShow(void)
@@ -517,11 +542,35 @@ void dsslcipherswindow::slotToggleChoices(bool state)
 QSsl::SslProtocol dsslcipherswindow::protocol(void) const
 {
   QSsl::SslProtocol protocol = QSsl::UnknownProtocol;
+  QString text(ui.protocol->currentText());
 
 #if QT_VERSION < 0x040800
 #elif QT_VERSION < 0x050000
 #else
+  if(text == "Any Protocol")
+    protocol = QSsl::AnyProtocol;
+  else if(text == "SSLv2")
+    protocol = QSsl::SslV2;
+  else if(text == "SSLv3 & TLSv1.0")
+    protocol = QSsl::TlsV1SslV3;
+  else if(text == "SSLv3")
+    protocol = QSsl::SslV3;
+  else if(text == "Secure Protocols")
+    protocol = QSsl::SecureProtocols;
+  else if(text == "TLSv1.0")
+    protocol = QSsl::TlsV1_0;
+  else if(text == "TLSv1.0+")
+    protocol = QSsl::TlsV1_0OrLater;
+  else if(text == "TLSv1.1")
+    protocol = QSsl::TlsV1_1;
+  else if(text == "TLSv1.1+")
+    protocol = QSsl::TlsV1_1OrLater;
+  else if(text == "TLSv1.2")
+    protocol = QSsl::TlsV1_2;
+  else if(text == "TlsV1_2+")
+    protocol = QSsl::TlsV1_2OrLater;
+  else if(text == "Unknown Protocol")
+    protocol = QSsl::UnknownProtocol;
 #endif
-
   return protocol;
 }
