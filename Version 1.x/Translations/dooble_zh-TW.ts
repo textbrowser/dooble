@@ -3599,6 +3599,10 @@ p, li { white-space: pre-wrap; }
         <source>Negate All &amp;TLS</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Preferred Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>statusBar</name>
