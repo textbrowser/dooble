@@ -407,19 +407,21 @@ dnetworksslerrorreply::dnetworksslerrorreply
 
   if(url.host().isEmpty())
     m_content.append("<h2>Dooble cannot establish a secure connection to "
-		     "the requested site. Please visit the Allowed "
-		     "SSL Ciphers panel and review your selections. "
-		     "You may also wish to prepare exceptions.</h2>"
-		     "</td>");
+		     "the requested site.</h2>");
   else
     m_content.append
       (QString("<h2>Dooble cannot establish a secure connection to "
-	       "%1. Please visit the Allowed SSL Ciphers panel "
-	       "and review your selections. You may also wish "
-	       "to prepare exceptions.</h2>"
-	       "</td>").arg(url.host()));
+	       "%1.</h2>").arg(url.host()));
 
   m_content.append("</tr></tbody></table>");
+  m_content.append("<h3><ul>");
+  m_content.append("<li>Please disable Sight SSL Errors in the Security "
+		   "panel of the Settings window or "
+		   "prepare SSL exceptions.</li>");
+  m_content.append
+    ("<li>Please visit the Allowed SSL Ciphers panel and review your "
+     "selections.</li>");
+  m_content.append("</ul></h3>");
 
   QStringList errors;
 

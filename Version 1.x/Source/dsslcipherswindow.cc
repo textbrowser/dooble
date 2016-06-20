@@ -86,14 +86,22 @@ dsslcipherswindow::dsslcipherswindow(void):QMainWindow()
   ui.protocol->addItem("Unknown Protocol");
 #endif
 
+  QString defaultProtocol("");
+
+#if QT_VERSION < 0x040800
+  defaultProtocol = "SSLv3";
+#else
+  defaultProtocol = "Secure Protocols";
+#endif
+
   int index = ui.protocol->findText
     (dooble::s_settings.value(QString("%1/protocol").arg(objectName()),
-			      "Unknown Protocol").toString());
+			      defaultProtocol).toString());
 
   if(index >= 0)
     ui.protocol->setCurrentIndex(index);
   else
-    ui.protocol->setCurrentIndex(ui.protocol->findText("Unknown Protocol"));
+    ui.protocol->setCurrentIndex(ui.protocol->findText(defaultProtocol));
 
   connect(ui.protocol, SIGNAL(currentIndexChanged(const QString &)), this,
 	  SLOT(slotProtocolChanged(const QString &)));
@@ -544,7 +552,11 @@ void dsslcipherswindow::slotToggleChoices(bool state)
 
 QSsl::SslProtocol dsslcipherswindow::protocol(void) const
 {
-  QSsl::SslProtocol protocol = QSsl::UnknownProtocol;
+#if QT_VERSION < 0x040800
+  QSsl::SslProtocol protocol = QSsl::SslV3;
+#else
+  QSsl::SslProtocol protocol = QSsl::SecureProtocols;
+#endif
   QString text(ui.protocol->currentText());
 
 #if QT_VERSION < 0x040800
