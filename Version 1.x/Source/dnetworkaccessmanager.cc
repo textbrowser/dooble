@@ -416,7 +416,7 @@ dnetworksslerrorreply::dnetworksslerrorreply
   m_content.append("</tr></tbody></table>");
   m_content.append("<h3><ul>");
   m_content.append("<li>Please disable Sight SSL Errors in the Security "
-		   "panel of Settings or "
+		   "panel of the Settings window or "
 		   "prepare SSL exceptions.</li>");
   m_content.append
     ("<li>Please visit the Allowed SSL Ciphers panel and review your "
