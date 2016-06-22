@@ -4779,12 +4779,12 @@
         <translation type="obsolete">Mesedez klikatu Akats Oharraren edukiak berrikusteko.</translation>
     </message>
     <message>
-        <location filename="../UI/dstatusBar.ui" line="30"/>
-        <source>Authenticate</source>
+        <location filename="../UI/dstatusBar.ui" line="38"/>
+        <source>Authenticate Passphrase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dstatusBar.ui" line="94"/>
+        <location filename="../UI/dstatusBar.ui" line="102"/>
         <source>Please click to review the contents of the Error Information window.</source>
         <translation>Mesedez klikatu Akats Argibide leihoaren edukiak berrikusteko.</translation>
     </message>

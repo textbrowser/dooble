@@ -3611,7 +3611,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Authenticate</source>
+        <source>Authenticate Passphrase</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
