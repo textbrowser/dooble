@@ -534,6 +534,8 @@ void dsettings::exec(dooble *parent)
       ui.user_agent_string->setText(a.userAgentForUrl(QUrl()));
     }
 
+  ui.user_agent_string->setToolTip(ui.user_agent_string->text());
+
 #if QT_VERSION >= 0x050000
   ui.myRetrievedFilesLineEdit->setText
     (dooble::s_settings.
@@ -3130,6 +3132,7 @@ void dsettings::slotResetUrlAgentString(void)
       dagentstring a;
 
       ui.user_agent_string->setText(a.userAgentForUrl(QUrl()));
+      ui.user_agent_string->setToolTip(ui.user_agent_string->text());
       ui.user_agent_string->selectAll();
     }
 }
