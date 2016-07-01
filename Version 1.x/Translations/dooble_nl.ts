@@ -1764,23 +1764,23 @@
         <translation type="obsolete">Web Plugins (Onstabiel)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1553"/>
-        <location filename="../Source/dsettings.cc" line="1587"/>
+        <location filename="../Source/dsettings.cc" line="1555"/>
+        <location filename="../Source/dsettings.cc" line="1589"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Web Browser: Fout</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1554"/>
+        <location filename="../Source/dsettings.cc" line="1556"/>
         <source>The passphrases do not match.</source>
         <translation>Het Wachtwoord komt niet overeen.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2206"/>
+        <location filename="../Source/dsettings.cc" line="2208"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser:Bevestiging</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1433"/>
+        <location filename="../Source/dsettings.cc" line="1435"/>
         <source>unknown</source>
         <translation>Onbekend</translation>
     </message>
@@ -1790,7 +1790,7 @@
         <translation>Toestaan met bestaande cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1588"/>
+        <location filename="../Source/dsettings.cc" line="1590"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Het wachtwoord moet minstens uit zestien karakters bestaan.</translation>
     </message>
@@ -1799,7 +1799,7 @@
         <translation type="obsolete">Je staat op het punt om je instellingen te herstellen. Als een wachtwoord is ingesteld, word het bewaard. Dooble wordt opnieuw gestart om het herstel proces te voltooien. Dit houd in dat elk niet opgeslagen data is verloren. Wil je verder gaan?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2305"/>
+        <location filename="../Source/dsettings.cc" line="2307"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Welkom bij Dooble Thema Selektie</translation>
     </message>
@@ -1808,12 +1808,12 @@
         <translation type="obsolete">&amp;Selecteer</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2323"/>
+        <location filename="../Source/dsettings.cc" line="2325"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Thema Instelling Bestand (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2408"/>
+        <location filename="../Source/dsettings.cc" line="2410"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Browser: Mijn opgehaalde Bestanden Map Selektie</translation>
     </message>
@@ -1822,59 +1822,59 @@
         <translation type="obsolete">&amp;Open</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="609"/>
+        <location filename="../Source/dsettings.cc" line="611"/>
         <source>Web Plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2209"/>
+        <location filename="../Source/dsettings.cc" line="2211"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2322"/>
-        <location filename="../Source/dsettings.cc" line="2796"/>
+        <location filename="../Source/dsettings.cc" line="2324"/>
+        <location filename="../Source/dsettings.cc" line="2798"/>
         <source>Select</source>
         <translation>Selecteer</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2411"/>
-        <location filename="../Source/dsettings.cc" line="2439"/>
+        <location filename="../Source/dsettings.cc" line="2413"/>
+        <location filename="../Source/dsettings.cc" line="2441"/>
         <source>Open</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2436"/>
+        <location filename="../Source/dsettings.cc" line="2438"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Web Browser: Spot-On Gedeelde Database Selektie</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2711"/>
+        <location filename="../Source/dsettings.cc" line="2713"/>
         <source>Prompt</source>
         <translation>Gevraagd</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2728"/>
+        <location filename="../Source/dsettings.cc" line="2730"/>
         <source>Use other...</source>
         <translation>Gebruik ander ...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2793"/>
+        <location filename="../Source/dsettings.cc" line="2795"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Browser:Selekteer Programma</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2916"/>
+        <location filename="../Source/dsettings.cc" line="2918"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2920"/>
+        <location filename="../Source/dsettings.cc" line="2922"/>
         <source>&amp;Delete File Suffix</source>
         <translation>&amp;Verwijder Bestand Extensie</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3014"/>
+        <location filename="../Source/dsettings.cc" line="3016"/>
         <source>%1 MiB of content is cached.</source>
         <translation>%1 MB van de inhoud is opgeslagen.</translation>
     </message>
