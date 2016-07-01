@@ -421,7 +421,6 @@ dnetworksslerrorreply::dnetworksslerrorreply
   m_content.append
     ("<li>Please visit the Allowed SSL Ciphers panel and review your "
      "selections.</li>");
-  m_content.append("</ul></h3>");
 
   QStringList errors;
 
@@ -435,7 +434,7 @@ dnetworksslerrorreply::dnetworksslerrorreply
 
   if(!errors.isEmpty())
     {
-      m_content.append("<h3><ul>");
+      qSort(errors.begin(), errors.end());
 
       while(!errors.isEmpty())
 	{
@@ -446,10 +445,9 @@ dnetworksslerrorreply::dnetworksslerrorreply
 	  else
 	    m_content.append(QString("<li>%1.</li>").arg(error));
 	}
-
-      m_content.append("</ul></h3>");
     }
 
+  m_content.append("</ul></h3>");
   m_content.append("<ul><a href=\"dooble://open-ssl-errors-exceptions\">"
 		   "SSL Errors Exceptions</a></ul>");
   m_content.append("</div>");
