@@ -5400,7 +5400,7 @@ void dooble::slotAuthenticationRequired(QNetworkReply *reply,
   if(!reply || !authenticator)
     return;
 
-  QDialog dialog(this);
+  QDialog dialog(0);
   Ui_passwordDialog ui_p;
 
   ui_p.setupUi(&dialog);
@@ -5450,11 +5450,18 @@ void dooble::slotAuthenticationRequired(QNetworkReply *reply,
 	ui_p.buttonBox->buttons().at(i)->setIconSize(QSize(16, 16));
       }
 
+  connect(reply,
+	  SIGNAL(destroyed(void)),
+	  &dialog,
+	  SLOT(reject(void)));
+  dmisc::centerChildWithParent(&dialog, this);
+
   if(dialog.exec() == QDialog::Accepted)
-    {
-      authenticator->setUser(ui_p.usernameLineEdit->text());
-      authenticator->setPassword(ui_p.passwordLineEdit->text());
-    }
+    if(authenticator && reply)
+      {
+	authenticator->setUser(ui_p.usernameLineEdit->text());
+	authenticator->setPassword(ui_p.passwordLineEdit->text());
+      }
 }
 
 void dooble::slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
@@ -5463,7 +5470,7 @@ void dooble::slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
   if(!authenticator)
     return;
 
-  QDialog dialog(this);
+  QDialog dialog(0);
   Ui_passwordDialog ui_p;
 
   ui_p.setupUi(&dialog);
@@ -5512,11 +5519,18 @@ void dooble::slotProxyAuthenticationRequired(const QNetworkProxy &proxy,
 	ui_p.buttonBox->buttons().at(i)->setIconSize(QSize(16, 16));
       }
 
+  connect(this,
+	  SIGNAL(destroyed(void)),
+	  &dialog,
+	  SLOT(reject(void)));
+  dmisc::centerChildWithParent(&dialog, this);
+
   if(dialog.exec() == QDialog::Accepted)
-    {
-      authenticator->setUser(ui_p.usernameLineEdit->text());
-      authenticator->setPassword(ui_p.passwordLineEdit->text());
-    }
+    if(authenticator)
+      {
+	authenticator->setUser(ui_p.usernameLineEdit->text());
+	authenticator->setPassword(ui_p.passwordLineEdit->text());
+      }
 }
 
 void dooble::slotSelectionChanged(const QString &text)
