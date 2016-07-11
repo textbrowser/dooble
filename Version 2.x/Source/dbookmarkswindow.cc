@@ -2343,7 +2343,7 @@ void dbookmarkswindow::slotBookmarkReceived(const QModelIndex &index)
 
 bool dbookmarkswindow::isBookmarked(const QUrl &url) const
 {
-  qint64 count = 0;
+  bool exists = false;
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "bookmarks");
@@ -2358,9 +2358,9 @@ bool dbookmarkswindow::isBookmarked(const QUrl &url) const
 	int temporary = dmisc::passphraseWasAuthenticated() ? 0 : 1;
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT COUNT(*) FROM bookmarks WHERE "
+	query.prepare("SELECT EXISTS(SELECT 1 FROM bookmarks WHERE "
 		      "url_hash = ? AND "
-		      "temporary = ?");
+		      "temporary = ?)");
 	query.bindValue
 	  (0,
 	   dmisc::hashedString(url.
@@ -2371,14 +2371,14 @@ bool dbookmarkswindow::isBookmarked(const QUrl &url) const
 
 	if(ok && query.exec())
 	  if(query.next())
-	    count = query.value(0).toLongLong();
+	    exists = query.value(0).toBool();
       }
 
     db.close();
   }
 
   QSqlDatabase::removeDatabase("bookmarks");
-  return count > 0;
+  return exists;
 }
 
 void dbookmarkswindow::slotRefresh(void)
