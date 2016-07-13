@@ -447,11 +447,11 @@ void dsettings::exec(dooble *parent)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   ui.httpStatusCodes->clearContents();
-  ui.httpStatusCodes->setRowCount(599 - 400 + 3);
+  ui.httpStatusCodes->setRowCount((204 - 203 + 1) + 1 + (599 - 400 + 1));
 
   int j = 0;
 
-  for(int i = 203; i <= 204; i++, j++)
+  for(int i = 203; i <= 204; i++, j++) // 2
     {
       QTableWidgetItem *item = new QTableWidgetItem(QString::number(i));
 
@@ -460,7 +460,14 @@ void dsettings::exec(dooble *parent)
       ui.httpStatusCodes->setItem(j, 0, item);
     }
 
-  for(int i = 400; i <= 599; i++, j++)
+  QTableWidgetItem *item = new QTableWidgetItem(QString::number(299));
+
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable |
+		 Qt::ItemIsUserCheckable);
+  ui.httpStatusCodes->setItem(j, 0, item); // 1
+  j += 1;
+
+  for(int i = 400; i <= 599; i++, j++) // 200
     {
       QTableWidgetItem *item = new QTableWidgetItem(QString::number(i));
 

@@ -723,8 +723,11 @@ void dwebpage::slotFinished(QNetworkReply *reply)
     status = 204;
   else if(reply->error() == QNetworkReply::ContentNotFoundError)
     status = 203;
+  else if(reply->error() == QNetworkReply::UnknownContentError)
+    status = 299;
 
-  if((status == 203 || status == 204 || (status >= 400 && status <= 599)) &&
+  if((status == 203 || status == 204 ||
+      status == 299 || (status >= 400 && status <= 599)) &&
      dmisc::s_httpStatusCodes.contains(status) &&
      dmisc::s_httpStatusCodes.value(status, 1) == 0)
     {
