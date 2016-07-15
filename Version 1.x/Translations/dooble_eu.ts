@@ -1916,23 +1916,23 @@
         <translation type="obsolete">Web Pluginak (Ezegonkorra)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1555"/>
-        <location filename="../Source/dsettings.cc" line="1589"/>
+        <location filename="../Source/dsettings.cc" line="1562"/>
+        <location filename="../Source/dsettings.cc" line="1596"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Web Nabigatzailea: Akatsa</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1556"/>
+        <location filename="../Source/dsettings.cc" line="1563"/>
         <source>The passphrases do not match.</source>
         <translation>Sar-esaldiak ez datoz bat.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2208"/>
+        <location filename="../Source/dsettings.cc" line="2215"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Nabigatzailea: Baieztapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1435"/>
+        <location filename="../Source/dsettings.cc" line="1442"/>
         <source>unknown</source>
         <translation>ezezaguna</translation>
     </message>
@@ -1942,12 +1942,12 @@
         <translation>ahalbideturik dauden cookiekin</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="611"/>
+        <location filename="../Source/dsettings.cc" line="618"/>
         <source>Web Plugins</source>
         <translation type="unfinished">Web Pluginak</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1590"/>
+        <location filename="../Source/dsettings.cc" line="1597"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Sar-esaldiak gutxienez hamasei hizkiko luzera izan behar du.</translation>
     </message>
@@ -1956,28 +1956,28 @@
         <translation type="obsolete">Zure itxurapen ezarpenak berrezartzear zaude. Sar-esaldi bat itxuratu bada, heutsi egingo zaio. Dooble berrabiarazi egingo da berrezarpen garapena osatzeko. Ondorioz, gorde gabeko datuak galdu egingo dira. Jarraitzea nahi duzu?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2307"/>
+        <location filename="../Source/dsettings.cc" line="2314"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Web Nabigatzailea: Azalgai Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2325"/>
+        <location filename="../Source/dsettings.cc" line="2332"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Azalgai Itxurapen Agiria (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2410"/>
+        <location filename="../Source/dsettings.cc" line="2417"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Nabigatzailea: Nire Berreskuraturiko Agirien Zuzenbide Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3016"/>
+        <location filename="../Source/dsettings.cc" line="3023"/>
         <source>%1 MiB of content is cached.</source>
         <translation>%1 MiB eduki katxeatuta.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2324"/>
-        <location filename="../Source/dsettings.cc" line="2798"/>
+        <location filename="../Source/dsettings.cc" line="2331"/>
+        <location filename="../Source/dsettings.cc" line="2805"/>
         <source>Select</source>
         <translation>Hautatu</translation>
     </message>
@@ -1986,43 +1986,43 @@
         <translation type="vanished">Web pluginak.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2211"/>
+        <location filename="../Source/dsettings.cc" line="2218"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation>Zure itxurapen ezarpen guztiak berrezartzear zaude. Dooble-ek berrabiarazi egingo da berrezartze prozesua osatzeko. Jarraitzea nahi duzu?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2413"/>
-        <location filename="../Source/dsettings.cc" line="2441"/>
+        <location filename="../Source/dsettings.cc" line="2420"/>
+        <location filename="../Source/dsettings.cc" line="2448"/>
         <source>Open</source>
         <translation>Ireki</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2438"/>
+        <location filename="../Source/dsettings.cc" line="2445"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Web Nabigatzailea: Spot-On Elkarbanatze Datubase Hautapena</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2713"/>
+        <location filename="../Source/dsettings.cc" line="2720"/>
         <source>Prompt</source>
         <translation>Galdetu</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2730"/>
+        <location filename="../Source/dsettings.cc" line="2737"/>
         <source>Use other...</source>
         <translation>Erabili beste bat...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2795"/>
+        <location filename="../Source/dsettings.cc" line="2802"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Nabigatzailea: Ezarri Aplikazioa</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2918"/>
+        <location filename="../Source/dsettings.cc" line="2925"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2922"/>
+        <location filename="../Source/dsettings.cc" line="2929"/>
         <source>&amp;Delete File Suffix</source>
         <translation>E&amp;zabatu Agiri Aurrizkia</translation>
     </message>
