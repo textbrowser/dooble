@@ -1,123 +1,123 @@
 <html>
-2.06 (12/25/2016)
-<ol>
-<li>Always-HTTPS is not yet available.</li>
-<li>Basic print support through a QTextBrowser widget.</li>
-<li>Cancel repetitive authentication requests.</li>
-<li>Full screen support.</li>
-<li>Private tabs.</li>
-<li>Removed zoom-text-only option.</li>
-<li>Scrolling animation.</li>
-<li>The .dooble directory have been renamed to .dooble_v2. Version 1.x settings will not be transferred.</li>
-<li>User agent strings; without exceptions.</li>
-</ol>
-2.05 (05/01/2016)
-<ol>
-<li>Added GOST support, if available.</li>
-<li>Allow disabling of automatic recording of file suffixes. Please see Settings.</li>
-<li>Allow the user to restore Dooble after a tardy authentication.</li>
-<li>Authenticate via a status bar button.</li>
-<li>Avoid reloading the most current history item after a restoration as this generates an additional history entry.</li>
-<li>Bit-by-bit comparisons; please see dmisc::compareByteArrays().</li>
-<li>Corrected Default font application.</li>
-<li>Corrected dooble::promptForPassphrase(). The method should not reset the current credentials.</li>
-<li>Deleted Include.win32/gcrypt.h and Include.win32/gpg-error.h.</li>
-<li>Disabled JIT (https://en.wikipedia.org/wiki/Just-in-time_compilation).</li>
-<li>Do not assume that an integer has a specific width (dcrypt.cc).</li>
-<li>Enable Spot-On widgets if DOOBLE_LINKED_WITH_LIBSPOTON is defined.</li>
-<li>Enforce limits on numeric INI values according to their widget representations.</li>
-<li>Minimum iteration count set to 10000. Default set to 25000.</li>
-<li>Modes of operation: CBC-CTS, CTR.</li>
-<li>New Applications context menu item in Settings.</li>
-<li>New default.html page. Removed previous pages.</li>
-<li>Please remove shared.db, if such a file exists in the user's Dooble directory.</li>
-<li>Remove the files httponlyexceptions.db and preferences.db during a reset of Dooble.</li>
-<li>Removed Google and OS X-specific logic from agent strings.</li>
-<li>Removed modifier-key URL transformations.</li>
-<li>Salt length maximum set to 8192 bytes.</li>
-<li>Secure database deletes.</li>
-<li>The method dmisc::iconForUrl() must consider variations of the URL parameter with respect to trailing slashes.</li>
-<li>The plugins architecture has been deprecated.</li>
-<li>Upgraded OpenSSL libraries to version 1.0.2g on Windows.</li>
-<li>Upgraded SQLite libraries to version 3.11.1 on Windows.</li>
-<li>Upgraded libgcrypt to version 1.6.5 on Windows.</li>
-<li>Upgraded libspoton to version 0.1.5.</li>
-<li>Verify modified URLs in the Bookmarks window.</li>
-<li>Wrap lines on page source; default of true.</li>
-</ol>
-2.04 (11/05/2015)
-<ol>
-<li>Allow suspending of a page load via a tab's context menu.</li>
-<li>Avoid accepting secure cookies from HTTP sites.</li>
-<li>Avoid serving secure cookies over HTTP.</li>
-<li>Enable cross-site-scripting auditing. New installations only.</li>
-<li>New per-tab progress bars.</li>
-<li>Upgraded Qt to version 5.5.1 on OS X and Windows.</li>
-<li>Upgraded SQLite products to version 3.9.1 on Windows.</li>
-<li>Upgraded libgcrypt to version 1.6.4 on Windows.</li>
-</ol>
-2.03 (09/18/2015)
-<ol>
-<li>Allow hiding of the search widget. Please see the View menu.</li>
-<li>Configurable tab bar position.</li>
-<li>Increased maximum discarded tabs and favorite links from 15 to 30.</li>
-<li>Limit results of qgetenv().</li>
-<li>Thread scheduling may not be available.</li>
-<li>Upgraded Qt products to version 5.5 on OS X and Windows.</li>
-</ol>
-2.02 (07/04/2015)
-<ol>
-<li>Added Stribog-512.
-<li>Allow for automatic cancellation of stagnant JavaScript scripts.</li>
-<li>Allow non-authenticated sessions to share plaintext information with Spot-On.</li>
-<li>Allow removal of Spot-On shared links. Please see Clear Containers and the Edit menu.</li>
-<li>Corrected Qt macro usage.</li>
-<li>Corrected SSL widget states in the Settings panel.</li>
-<li>Corrected Spot-On button state in the URL location widget.</li>
-<li>Corrected retrieval of default iteration count.</li>
-<li>Log libspoton errors.</li>
-<li>Modified the favicon's context menu so that the available option references the site's host instead of the domain.</li>
-<li>Properly center exceptions windows that are activated from Settings.</li>
-<li>Removed all support for Qt 4.x, Qt 5.0.x, Qt 5.1.x, Qt 5.2.x, and Qt 5.3.x. Only Qt 5.4.x and newer will be supported in Dooble 2.x.</li>
-<li>Removed non-native full-screen support.</li>
-<li>Removed translated log entries.</li>
-<li>Replaced QCryptographicHash::Sha1 with QCryptographicHash::Sha3_512.</li>
-<li>Set the location widget's text after a successful page load or an update of the URL if and only if the user has not modified the location widget's text.</li>
-<li>The method dwebpage::slotFinished() must inspect the reply's "dooble-favicon" property as the method may be reached after a download of a favicon.</li>
-<li>Updated Czech translation. Thanks to Pavel Fric.</li>
-<li>Updated SQLite to version 3.8.10.2, Windows.</li>
-<li>Updated libspoton to 0.1.2.</li>
-<li>Upgraded OpenSSL products to version 1.0.2c on Windows.</li>
-<li>Upgraded Qt products to version 5.4.2 on OS X and Windows.</li>
-</ol>
-2.01 (04/01/2015)
-<ol>
-<li>Ability to hide the main window's menu bar.</li>
-<li>Added the search engine wikibooks.org.</li>
-<li>Adjusted full-screen support.</li>
-<li>Allow hiding of the Desktop and Home buttons.</li>
-<li>Corrected dooble::saveSettings() with respect to the full screen mode.</li>
-<li>Display the JavaScript alert in dwebpage::javaScriptAlert() via QMessageBox::exec() instead of show().</li>
-<li>Issue std::nothrow in gcry_qmutex_init().</li>
-<li>Remind the user if the SQLite database driver is missing.</li>
-<li>Removed hiding of the location tool bar.</li>
-<li>The Dogpile search engine supports SSL/TLS.</li>
-<li>The default SSL configuration's protocol must be set according to the available cipher protocols (SSLv3, TLSv1.0, TLSv1.1, TLSv1.2). Please see http://doc.qt.digia.com/qt-maemo/qsslconfiguration.html.</li>
-<li>Upgraded OpenSSL libraries to version 1.0.2a.</li>
-<li>Upgraded libgcrypt to version 1.6.3 on Windows.</li>
-<li>Upgraded libgpg-error to version 1.13 on Windows.</li>
-</ol>
-2.00 (03/01/2015)
-<ol>
-<li>Added a Spot-On button to the location widget.</li>
-<li>Allow configuration of the main thread's priority.</li>
-<li>Avoid real-time storing of splitter states.</li>
-<li>Corrected month translations in the History window.</li>
-<li>Qt 5.4.1 release. Source only. Many, many changes. WebKit has been replaced by WebEngine. Please see dooble.qt5.pro for example preparation. WebKit support persists.</li>
-<li>Removed support for ancient versions of GCC.</li>
-</ol>
+  2.06 (12/25/2016)
+  <ol>
+    <li>Always-HTTPS is not yet available.</li>
+    <li>Basic print support through a QTextBrowser widget.</li>
+    <li>Cancel repetitive authentication requests.</li>
+    <li>Full screen support.</li>
+    <li>Private tabs.</li>
+    <li>Removed zoom-text-only option.</li>
+    <li>Scrolling animation.</li>
+    <li>The .dooble directory have been renamed to .dooble_v2. Version 1.x settings will not be transferred.</li>
+    <li>User agent strings; without exceptions.</li>
+  </ol>
+  2.05 (05/01/2016)
+  <ol>
+    <li>Added GOST support, if available.</li>
+    <li>Allow disabling of automatic recording of file suffixes. Please see Settings.</li>
+    <li>Allow the user to restore Dooble after a tardy authentication.</li>
+    <li>Authenticate via a status bar button.</li>
+    <li>Avoid reloading the most current history item after a restoration as this generates an additional history entry.</li>
+    <li>Bit-by-bit comparisons; please see dmisc::compareByteArrays().</li>
+    <li>Corrected Default font application.</li>
+    <li>Corrected dooble::promptForPassphrase(). The method should not reset the current credentials.</li>
+    <li>Deleted Include.win32/gcrypt.h and Include.win32/gpg-error.h.</li>
+    <li>Disabled JIT (https://en.wikipedia.org/wiki/Just-in-time_compilation).</li>
+    <li>Do not assume that an integer has a specific width (dcrypt.cc).</li>
+    <li>Enable Spot-On widgets if DOOBLE_LINKED_WITH_LIBSPOTON is defined.</li>
+    <li>Enforce limits on numeric INI values according to their widget representations.</li>
+    <li>Minimum iteration count set to 10000. Default set to 25000.</li>
+    <li>Modes of operation: CBC-CTS, CTR.</li>
+    <li>New Applications context menu item in Settings.</li>
+    <li>New default.html page. Removed previous pages.</li>
+    <li>Please remove shared.db, if such a file exists in the user's Dooble directory.</li>
+    <li>Remove the files httponlyexceptions.db and preferences.db during a reset of Dooble.</li>
+    <li>Removed Google and OS X-specific logic from agent strings.</li>
+    <li>Removed modifier-key URL transformations.</li>
+    <li>Salt length maximum set to 8192 bytes.</li>
+    <li>Secure database deletes.</li>
+    <li>The method dmisc::iconForUrl() must consider variations of the URL parameter with respect to trailing slashes.</li>
+    <li>The plugins architecture has been deprecated.</li>
+    <li>Upgraded OpenSSL libraries to version 1.0.2g on Windows.</li>
+    <li>Upgraded SQLite libraries to version 3.11.1 on Windows.</li>
+    <li>Upgraded libgcrypt to version 1.6.5 on Windows.</li>
+    <li>Upgraded libspoton to version 0.1.5.</li>
+    <li>Verify modified URLs in the Bookmarks window.</li>
+    <li>Wrap lines on page source; default of true.</li>
+  </ol>
+  2.04 (11/05/2015)
+  <ol>
+    <li>Allow suspending of a page load via a tab's context menu.</li>
+    <li>Avoid accepting secure cookies from HTTP sites.</li>
+    <li>Avoid serving secure cookies over HTTP.</li>
+    <li>Enable cross-site-scripting auditing. New installations only.</li>
+    <li>New per-tab progress bars.</li>
+    <li>Upgraded Qt to version 5.5.1 on OS X and Windows.</li>
+    <li>Upgraded SQLite products to version 3.9.1 on Windows.</li>
+    <li>Upgraded libgcrypt to version 1.6.4 on Windows.</li>
+  </ol>
+  2.03 (09/18/2015)
+  <ol>
+    <li>Allow hiding of the search widget. Please see the View menu.</li>
+    <li>Configurable tab bar position.</li>
+    <li>Increased maximum discarded tabs and favorite links from 15 to 30.</li>
+    <li>Limit results of qgetenv().</li>
+    <li>Thread scheduling may not be available.</li>
+    <li>Upgraded Qt products to version 5.5 on OS X and Windows.</li>
+  </ol>
+  2.02 (07/04/2015)
+  <ol>
+    <li>Added Stribog-512.
+    <li>Allow for automatic cancellation of stagnant JavaScript scripts.</li>
+    <li>Allow non-authenticated sessions to share plaintext information with Spot-On.</li>
+    <li>Allow removal of Spot-On shared links. Please see Clear Containers and the Edit menu.</li>
+    <li>Corrected Qt macro usage.</li>
+    <li>Corrected SSL widget states in the Settings panel.</li>
+    <li>Corrected Spot-On button state in the URL location widget.</li>
+    <li>Corrected retrieval of default iteration count.</li>
+    <li>Log libspoton errors.</li>
+    <li>Modified the favicon's context menu so that the available option references the site's host instead of the domain.</li>
+    <li>Properly center exceptions windows that are activated from Settings.</li>
+    <li>Removed all support for Qt 4.x, Qt 5.0.x, Qt 5.1.x, Qt 5.2.x, and Qt 5.3.x. Only Qt 5.4.x and newer will be supported in Dooble 2.x.</li>
+    <li>Removed non-native full-screen support.</li>
+    <li>Removed translated log entries.</li>
+    <li>Replaced QCryptographicHash::Sha1 with QCryptographicHash::Sha3_512.</li>
+    <li>Set the location widget's text after a successful page load or an update of the URL if and only if the user has not modified the location widget's text.</li>
+    <li>The method dwebpage::slotFinished() must inspect the reply's "dooble-favicon" property as the method may be reached after a download of a favicon.</li>
+    <li>Updated Czech translation. Thanks to Pavel Fric.</li>
+    <li>Updated SQLite to version 3.8.10.2, Windows.</li>
+    <li>Updated libspoton to 0.1.2.</li>
+    <li>Upgraded OpenSSL products to version 1.0.2c on Windows.</li>
+    <li>Upgraded Qt products to version 5.4.2 on OS X and Windows.</li>
+  </ol>
+  2.01 (04/01/2015)
+  <ol>
+    <li>Ability to hide the main window's menu bar.</li>
+    <li>Added the search engine wikibooks.org.</li>
+    <li>Adjusted full-screen support.</li>
+    <li>Allow hiding of the Desktop and Home buttons.</li>
+    <li>Corrected dooble::saveSettings() with respect to the full screen mode.</li>
+    <li>Display the JavaScript alert in dwebpage::javaScriptAlert() via QMessageBox::exec() instead of show().</li>
+    <li>Issue std::nothrow in gcry_qmutex_init().</li>
+    <li>Remind the user if the SQLite database driver is missing.</li>
+    <li>Removed hiding of the location tool bar.</li>
+    <li>The Dogpile search engine supports SSL/TLS.</li>
+    <li>The default SSL configuration's protocol must be set according to the available cipher protocols (SSLv3, TLSv1.0, TLSv1.1, TLSv1.2). Please see http://doc.qt.digia.com/qt-maemo/qsslconfiguration.html.</li>
+    <li>Upgraded OpenSSL libraries to version 1.0.2a.</li>
+    <li>Upgraded libgcrypt to version 1.6.3 on Windows.</li>
+    <li>Upgraded libgpg-error to version 1.13 on Windows.</li>
+  </ol>
+  2.00 (03/01/2015)
+  <ol>
+    <li>Added a Spot-On button to the location widget.</li>
+    <li>Allow configuration of the main thread's priority.</li>
+    <li>Avoid real-time storing of splitter states.</li>
+    <li>Corrected month translations in the History window.</li>
+    <li>Qt 5.4.1 release. Source only. Many, many changes. WebKit has been replaced by WebEngine. Please see dooble.qt5.pro for example preparation. WebKit support persists.</li>
+    <li>Removed support for ancient versions of GCC.</li>
+  </ol>
 
-Archived Contents
-<br><br>
-https://github.com/textbrowser/dooble/blob/master/Documentation/RELEASE-NOTES.archived
+  Archived Contents
+  <br><br>
+  https://github.com/textbrowser/dooble/blob/master/Documentation/RELEASE-NOTES.archived
 </html>
