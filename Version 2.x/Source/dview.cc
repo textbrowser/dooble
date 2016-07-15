@@ -379,7 +379,10 @@ QIcon dview::icon(void) const
 
 void dview::slotCopySelectedText(void)
 {
-  m_webView->triggerPageAction(QWebEnginePage::Copy);
+  QClipboard *clipboard = QApplication::clipboard();
+
+  if(clipboard)
+    clipboard->setText(m_webView->selectedText());
 }
 
 dwebpage *dview::page(void) const
