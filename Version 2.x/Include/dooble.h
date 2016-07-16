@@ -43,7 +43,6 @@
 #include "dmisc.h"
 #include "dsettings.h"
 #include "dspoton.h"
-#include "dsslcipherswindow.h"
 #include "dview.h"
 #include "ui_dmainWindow.h"
 #include "ui_dstatusBar.h"
@@ -92,7 +91,6 @@ class dooble: public QMainWindow
   static QPointer<dnetworkcache> s_networkCache;
   static QPointer<dsettings> s_settingsWindow;
   static QPointer<dspoton> s_spoton;
-  static QPointer<dsslcipherswindow> s_sslCiphersWindow;
   static QString s_homePath;
   static QUuid s_id; // Unique process ID.
   static const int MAX_HISTORY_ITEMS = 30;

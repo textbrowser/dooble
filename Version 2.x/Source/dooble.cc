@@ -124,7 +124,6 @@ QPointer<dexceptionswindow> dooble::s_cacheExceptionsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_javaScriptExceptionsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_alwaysHttpsExceptionsWindow = 0;
 QPointer<dexceptionswindow> dooble::s_sslExceptionsWindow = 0;
-QPointer<dsslcipherswindow> dooble::s_sslCiphersWindow = 0;
 QPointer<QStandardItemModel> dooble::s_bookmarksFolderModel = 0;
 QHash<QString, qint64> dooble::s_mostVisitedHosts;
 QMap<QString, QString> dooble::s_applicationsActions;
@@ -493,6 +492,13 @@ int main(int argc, char *argv[])
   settings.remove("vidalia/userPwd");
 
   /*
+  ** Remove archived databases.
+  */
+
+  QFile::remove
+    (dooble::s_homePath + QDir::separator() + "allowedsslciphers.db");
+
+  /*
   ** We need to set these before creating some of the support windows.
   */
 
@@ -765,7 +771,6 @@ int main(int argc, char *argv[])
   dooble::s_sslExceptionsWindow->setWindowTitle
     (QObject::tr("Dooble Web Browser: "
 		 "SSL Errors Exceptions"));
-  dooble::s_sslCiphersWindow = new dsslcipherswindow();
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "applications");
@@ -1092,10 +1097,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  s_errorLog,
 	  SLOT(slotSetIcons(void)));
   connect(this,
-	  SIGNAL(iconsChanged(void)),
-	  s_sslCiphersWindow,
-	  SLOT(slotSetIcons(void)));
-  connect(this,
 	  SIGNAL(passphraseWasAuthenticated(const bool)),
 	  s_settingsWindow,
 	  SLOT(slotPassphraseWasAuthenticated(const bool)));
@@ -1107,10 +1108,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  SIGNAL(iconsChanged(void)),
 	  this,
 	  SLOT(slotSetIcons(void)));
-  connect(s_sslCiphersWindow,
-	  SIGNAL(iconsChanged(void)),
-	  this,
-	  SLOT(slotSetIcons(void)));  
   connect(s_settingsWindow,
 	  SIGNAL(settingsChanged(void)),
 	  ui.tabWidget,
@@ -1402,8 +1399,6 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 	  s_sslExceptionsWindow, SLOT(slotShow(void)));
   connect(ui.actionError_Log, SIGNAL(triggered(void)),
 	  s_errorLog, SLOT(slotShow(void)));
-  connect(ui.action_SSL_Ciphers, SIGNAL(triggered(void)),
-	  s_sslCiphersWindow, SLOT(slotShow(void)));
   connect(ui.actionError_Log, SIGNAL(triggered(void)),
 	  sb.errorLogToolButton, SLOT(hide(void)));
   connect(ui.favoritesToolBar,
@@ -1698,7 +1693,6 @@ dooble::dooble
   m_parentWindow = 0;
   init_dooble(false);
   ui.tabWidget->setVisible(false);
-  s_sslCiphersWindow->populate();
 
   if(promptForPassphrase())
     {
@@ -1839,7 +1833,6 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
   m_parentWindow = 0;
   init_dooble(false);
   ui.tabWidget->setVisible(false);
-  s_sslCiphersWindow->populate();
 
   if(promptForPassphrase())
     {

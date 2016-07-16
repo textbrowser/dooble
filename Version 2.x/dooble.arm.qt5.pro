@@ -68,7 +68,6 @@ FORMS           = UI/dapplicationPropertiesWindow.ui \
 		  UI/dpasswordPrompt.ui \
 		  UI/dreinstateWidget.ui \
 		  UI/dsettings.ui \
-		  UI/dsslciphers.ui \
 		  UI/dstatusBar.ui
 
 UI_HEADERS_DIR  = Include
@@ -106,7 +105,6 @@ HEADERS		= Include/dbookmarkspopup.h \
                   Include/dsettings.h \
 		  Include/dsettingshomelinewidget.h \
 		  Include/dspoton.h \
-		  Include/dsslcipherswindow.h \
 		  Include/dtabwidget.h \
 		  Include/durlwidget.h \
 		  Include/dview.h \
@@ -146,7 +144,6 @@ SOURCES		= Source/dbookmarkspopup.cc \
                   Source/dsettings.cc \
 		  Source/dsettingshomelinewidget.cc \
 		  Source/dspoton.cc \
-		  Source/dsslcipherswindow.cc \
 		  Source/dtabwidget.cc \
 		  Source/durlwidget.cc \
 		  Source/dview.cc \

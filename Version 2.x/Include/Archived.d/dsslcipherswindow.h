@@ -29,6 +29,7 @@
 #define _dsslcipherswindow_h_
 
 #include <QMainWindow>
+#include <QSsl>
 
 #include "ui_dsslciphers.h"
 
@@ -41,6 +42,7 @@ class dsslcipherswindow: public QMainWindow
  public:
   dsslcipherswindow(void);
   ~dsslcipherswindow();
+  QSsl::SslProtocol protocol(void) const;
   void closeEvent(QCloseEvent *event);
   void populate(void);
 
@@ -54,6 +56,7 @@ class dsslcipherswindow: public QMainWindow
  private slots:
   void slotClose(void);
   void slotItemChanged(QListWidgetItem *item);
+  void slotProtocolChanged(const QString &text);
   void slotSetIcons(void);
   void slotShow(void);
   void slotToggleChoices(bool state);

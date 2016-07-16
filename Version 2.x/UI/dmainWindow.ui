@@ -481,7 +481,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>27</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -542,7 +542,6 @@
      <addaction name="actionSSLErrors"/>
      <addaction name="action_Third_Party_Frame_Content"/>
     </widget>
-    <addaction name="action_SSL_Ciphers"/>
     <addaction name="action_Clear_Containers"/>
     <addaction name="actionApplication_Cookies"/>
     <addaction name="actionDownloads"/>
