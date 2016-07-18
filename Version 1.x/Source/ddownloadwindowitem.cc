@@ -664,7 +664,7 @@ void ddownloadwindowitem::slotPauseDownload(void)
 
 	  /*
 	  ** According to FTP documentation, REST N instructs the FTP
-	  ** server to restart file transfer at byte N when the client
+	  ** server to restart the file transfer at byte N when the client
 	  ** issues a RETR.
 	  */
 
