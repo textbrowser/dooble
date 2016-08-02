@@ -1134,6 +1134,22 @@ QRect dmisc::balancedGeometry(const QRect &geometry, QWidget *widget)
   return rect;
 }
 
+bool dmisc::isLinkAcceptedByDooble(const QString &link)
+{
+  QString l(link.toLower().trimmed());
+
+  if(l.startsWith("data:") ||
+     l.startsWith("file://") ||
+     l.startsWith("ftp://") ||
+     l.startsWith("gopher://") ||
+     l.startsWith("http://") ||
+     l.startsWith("https://") ||
+     l.startsWith("qrc:/"))
+    return true;
+  else
+    return false;
+}
+
 bool dmisc::isSchemeAcceptedByDooble(const QString &scheme)
 {
   QString l_scheme(scheme.toLower().trimmed());

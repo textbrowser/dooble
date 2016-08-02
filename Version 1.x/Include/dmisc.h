@@ -61,6 +61,7 @@ class dmisc
   static bool isHashTypeSupported(const QString &hashType);
   static bool passphraseWasPrepared(void);
   static bool canDoobleOpenLocalFile(const QUrl &url);
+  static bool isLinkAcceptedByDooble(const QString &scheme);
   static bool isSchemeAcceptedByDooble(const QString &scheme);
   static bool passphraseWasAuthenticated(void);
   static bool shouldIgnoreProxyFor

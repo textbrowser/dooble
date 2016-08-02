@@ -4539,15 +4539,10 @@ void dooble::slotLinkHovered(const QString &link, const QString &title,
     sb.statusLabel->clear();
   else
     {
-      QString s(textContent.trimmed());
       QUrl u1(QUrl::fromUserInput(link));
       QUrl u2(textContent, QUrl::StrictMode);
 
-      if((s.startsWith("dooble:") ||
-	  s.startsWith("file:") ||
-	  s.startsWith("http:") ||
-	  s.startsWith("https:") ||
-	  s.startsWith("gopher:")) && !u2.isEmpty() && u2.isValid())
+      if(dmisc::isLinkAcceptedByDooble(textContent) && u2.isValid())
 	{
 	  if(u1 != u2)
 	    sb.statusLabel->setStyleSheet("QLabel {color: red;}");
