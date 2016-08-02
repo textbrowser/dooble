@@ -1182,6 +1182,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   sb.setupUi(sbWidget);
   sb.progressBar->setValue(0);
   sb.progressBar->setVisible(false);
+  sb.statusLabel->setProperty("stylesheet", sb.statusLabel->styleSheet());
   sb.statusLabel->setVisible(true);
   sb.exceptionsToolButton->setVisible(false);
   sb.errorLogToolButton->setVisible(false);
@@ -4531,12 +4532,29 @@ void dooble::slotLinkHovered(const QString &link, const QString &title,
 			     const QString &textContent)
 {
   Q_UNUSED(title);
-  Q_UNUSED(textContent);
+  sb.statusLabel->setStyleSheet
+    (sb.statusLabel->property("stylesheet").toString());
 
   if(link.isEmpty())
     sb.statusLabel->clear();
   else
-    sb.statusLabel->setText(link.trimmed().mid(0, 100));
+    {
+      QString s(textContent.trimmed());
+      QUrl u1(QUrl::fromUserInput(link));
+      QUrl u2(textContent, QUrl::StrictMode);
+
+      if((s.startsWith("dooble:") ||
+	  s.startsWith("file:") ||
+	  s.startsWith("http:") ||
+	  s.startsWith("https:") ||
+	  s.startsWith("gopher:")) && !u2.isEmpty() && u2.isValid())
+	{
+	  if(u1 != u2)
+	    sb.statusLabel->setStyleSheet("QLabel {color: red;}");
+	}
+
+      sb.statusLabel->setText(link.trimmed().mid(0, 100));
+    }
 }
 
 void dooble::slotAbout(void)
