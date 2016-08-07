@@ -36,7 +36,7 @@ QMAKE_EXTRA_TARGETS = libspoton purge
 QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib
 
 INCLUDEPATH	+= . Include
-LIBS     	+= -LlibSpotOn -lgcrypt -lgpg-error -lspoton
+LIBS		+= -LlibSpotOn -lgcrypt -lgpg-error -lspoton
 PRE_TARGETDEPS = libspoton.so
 
 MOC_DIR = temp/moc
@@ -88,7 +88,7 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dftp.h \
 		  Include/dftpbrowser.h \
 		  Include/dgenericsearchwidget.h \
-  		  Include/dgopher.h \
+		  Include/dgopher.h \
 		  Include/dhistory.h \
 		  Include/dhistorymodel.h \
 		  Include/dhistorysidebar.h \
@@ -256,7 +256,7 @@ postinstall.path	= /usr/local/dooble
 postinstall.extra	= find /usr/local/dooble -name .svn -exec rm -rf {} \\; 2>/dev/null; echo
 tab.path		= /usr/local/dooble
 tab.files		= Tab
-translations.path 	= /usr/local/dooble/Translations
+translations.path	= /usr/local/dooble/Translations
 translations.files	= Translations/*.qm
 
 INSTALLS	= dooble_sh \

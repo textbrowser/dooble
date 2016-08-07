@@ -254,7 +254,7 @@ postinstall.path	= /Applications/Dooble.d
 postinstall.extra	= find /Applications/Dooble.d -name .svn -exec rm -rf {} \\; 2>/dev/null; echo
 supportfiles.path       = /Applications/Dooble_Qt5.d
 supportfiles.files      = dooble-blocked-hosts.txt
-translations.path 	= /Applications/Dooble.d/Translations
+translations.path	= /Applications/Dooble.d/Translations
 translations.files	= Translations/*.qm
 
 INSTALLS	= macdeployqt \
