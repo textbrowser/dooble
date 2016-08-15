@@ -13,6 +13,7 @@ Absolute cleaning:
 gmake distclean or make distclean or mingw32-make distclean
 
 ARM
+
 qmake or qmake-qt4 -o Makefile dooble.arm.pro
 qmake or qmake-qt5 -o Makefile dooble.arm.qt5.pro
 make
