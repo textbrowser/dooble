@@ -1,5 +1,5 @@
 /* gpg-error.h - Public interface to libgpg-error.               -*- c -*-
- * Copyright (C) 2003, 2004, 2010, 2013, 2014, 2015 g10 Code GmbH
+ * Copyright (C) 2003, 2004, 2010, 2013, 2014, 2015, 2016 g10 Code GmbH
  *
  * This file is part of libgpg-error.
  *
@@ -14,7 +14,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, see <http://www.gnu.org/licenses/>.
+ * License along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  * Do not edit.  Generated from gpg-error.h.in for:
                  i686-w64-mingw32
@@ -28,12 +28,12 @@
 #include <stdarg.h>
 
 /* The version string of this header. */
-#define GPG_ERROR_VERSION "1.21"
-#define GPGRT_VERSION     "1.21"
+#define GPG_ERROR_VERSION "1.23"
+#define GPGRT_VERSION     "1.23"
 
 /* The version number of this header. */
-#define GPG_ERROR_VERSION_NUMBER 0x011500
-#define GPGRT_VERSION_NUMBER     0x011500
+#define GPG_ERROR_VERSION_NUMBER 0x011700
+#define GPGRT_VERSION_NUMBER     0x011700
 
 
 #ifdef __GNUC__
@@ -343,6 +343,8 @@ typedef enum
     GPG_ERR_SEXP_BAD_HEX_CHAR = 211,
     GPG_ERR_SEXP_ODD_HEX_NUMBERS = 212,
     GPG_ERR_SEXP_BAD_OCT_CHAR = 213,
+    GPG_ERR_SUBKEYS_EXP_OR_REV = 217,
+    GPG_ERR_DB_CORRUPTED = 218,
     GPG_ERR_SERVER_FAILED = 219,
     GPG_ERR_NO_NAME = 220,
     GPG_ERR_NO_KEY = 221,
@@ -786,9 +788,39 @@ typedef unsigned int gpg_error_t;
 # define GPGRT_HAVE_PRAGMA_GCC_PUSH 1
 #endif
 
+/* Detect LeakSanitizer (LSan) support for GCC and Clang based on
+ * whether AddressSanitizer (ASAN) is enabled via -fsanitize=address).
+ * Note that -fsanitize=leak just affect the linker options which
+ * cannot be detected here.  In that case you have to define the
+ * GPGRT_HAVE_LEAK_SANITIZER macro manually.  */
+#ifdef __GNUC__
+# ifdef __SANITIZE_ADDRESS__
+#  define GPGRT_HAVE_LEAK_SANITIZER
+# elif defined(__has_feature)
+#  if __has_feature(address_sanitizer)
+#   define GPGRT_HAVE_LEAK_SANITIZER
+#  endif
+# endif
+#endif
+
 
 /* The new name for the inline macro.  */
 #define GPGRT_INLINE GPG_ERR_INLINE
+
+#ifdef GPGRT_HAVE_LEAK_SANITIZER
+# include <sanitizer/lsan_interface.h>
+#endif
+
+/* Mark heap objects as non-leaked memory. */
+static GPGRT_INLINE void
+gpgrt_annotate_leaked_object (const void *p)
+{
+#ifdef GPGRT_HAVE_LEAK_SANITIZER
+  __lsan_ignore_object(p);
+#else
+  (void)p;
+#endif
+}
 
 
 /* Initialization function.  */
@@ -952,6 +984,24 @@ int _gpg_w32_gettext_use_utf8 (int value);
 #endif /*GPG_ERR_ENABLE_GETTEXT_MACROS*/
 
 
+/* A simple iconv implementation w/o the need for an extra DLL.  */
+struct _gpgrt_w32_iconv_s;
+typedef struct _gpgrt_w32_iconv_s *gpgrt_w32_iconv_t;
+
+gpgrt_w32_iconv_t gpgrt_w32_iconv_open (const char *tocode,
+                                        const char *fromcode);
+int     gpgrt_w32_iconv_close (gpgrt_w32_iconv_t cd);
+size_t  gpgrt_w32_iconv (gpgrt_w32_iconv_t cd,
+                         const char **inbuf, size_t *inbytesleft,
+                         char **outbuf, size_t *outbytesleft);
+
+#ifdef GPGRT_ENABLE_W32_ICONV_MACROS
+# define ICONV_CONST const
+# define iconv_t gpgrt_w32_iconv_t
+# define iconv_open(a,b)  gpgrt_w32_iconv_open ((a), (b))
+# define iconv_close(a)   gpgrt_w32_iconv_close ((a))
+# define iconv(a,b,c,d,e) gpgrt_w32_iconv ((a),(b),(c),(d),(e))
+#endif /*GPGRT_ENABLE_W32_ICONV_MACROS*/
 
 
 /* Self-documenting convenience functions.  */
