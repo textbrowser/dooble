@@ -132,7 +132,7 @@ Completed Items
 84.   Spot-On integration.
 85.   Add support for SSL errors.
 86.   OS X (10.6.8) Qt 4.8.x issue:
-      	 a. Enable Web plugins.
+	 a. Enable Web plugins.
 	 b. Browse the Web.
 	 c. Unable to input text in the location widget. Closing
 	    the current window is the only known solution.
@@ -177,6 +177,7 @@ Remaining Items
 13.   Review QWebSettings with respect to recommended fonts.
 14.   Delayed downloads are not reflected.
 15.   Allow regular expressions in blocked hosts.
+16.   List Debian packages.
 
 Removed Items
 
