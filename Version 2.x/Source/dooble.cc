@@ -1246,7 +1246,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   connect(ui.tabWidget, SIGNAL(closeTab(const int)), this,
 	  SLOT(slotCloseTab(const int)));
   connect(ui.tabWidget, SIGNAL(tabMoved(int, int)), this,
-	  SLOT(slotTabMoved(int, int)));
+	  SLOT(slotTabMoved(int, int)),
+	  Qt::QueuedConnection);
   connect(ui.actionClose_Window, SIGNAL(triggered(void)), this,
 	  SLOT(slotClose(void)));
   connect(ui.actionQuit, SIGNAL(triggered(void)), this,
@@ -5315,8 +5316,8 @@ void dooble::launchDooble(const QUrl &url)
 
 void dooble::slotTabMoved(int from, int to)
 {
-  if(from < 0 || to < 0)
-    return;
+  Q_UNUSED(from);
+  Q_UNUSED(to);
 
   if(dmisc::passphraseWasAuthenticated() &&
      s_settings.value("settingsWindow/sessionRestoration", true).toBool())
@@ -5332,22 +5333,14 @@ void dooble::slotTabMoved(int from, int to)
 	}
     }
 
-  if(from < ui.menu_Tabs->actions().size() &&
-     to < ui.menu_Tabs->actions().size())
-    {
-      QAction *toAction = ui.menu_Tabs->actions().at(to);
-      QAction *fromAction = ui.menu_Tabs->actions().at(from);
+  ui.menu_Tabs->clear();
 
-      if(to < from)
-	{
-	  ui.menu_Tabs->removeAction(fromAction);
-	  ui.menu_Tabs->insertAction(toAction, fromAction);
-	}
-      else
-	{
-	  ui.menu_Tabs->removeAction(toAction);
-	  ui.menu_Tabs->insertAction(fromAction, toAction);
-	}
+  for(int i = 0; i < ui.tabWidget->count(); i++)
+    {
+      dview *p = qobject_cast<dview *> (ui.tabWidget->widget(i));
+
+      if(p)
+	ui.menu_Tabs->addAction(p->tabAction());
     }
 }
 
