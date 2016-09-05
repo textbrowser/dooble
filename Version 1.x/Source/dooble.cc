@@ -4571,7 +4571,7 @@ void dooble::slotAbout(void)
   mb->setText
     (QString("<html>"
              "Dooble Web Browser<br><br>"
-             "Version %1, Violet Smoke.<br>"
+             "Version %1, Murphy's Law.<br>"
 	     "Copyright (c) 2008 - present.<br>"
 	     "Qt version %3, architecture %4.<br>"
 	     "libgcrypt version %5."
