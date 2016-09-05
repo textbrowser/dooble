@@ -4814,7 +4814,7 @@ void dooble::slotShowFind(void)
 	  ui.findLineEdit->selectAll();
 
 #ifdef Q_OS_MAC
-	  static int fixed = 0;
+	  static int fixed = 0; // Pre-Qt 5.x?
 
 	  if(!fixed)
 	    {
