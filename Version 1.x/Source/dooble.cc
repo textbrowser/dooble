@@ -1130,6 +1130,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   s_instances += 1;
   m_id = QDateTime::currentMSecsSinceEpoch() + s_instances;
   ui.setupUi(this);
+  m_findLineEditPalette = ui.findLineEdit->palette();
   ui.historyFrame->setLayout(new QHBoxLayout(ui.historyFrame));
   ui.historyFrame->layout()->setContentsMargins(1, 0, 1, 0);
 #ifdef DOOBLE_URLFRAME_LAYOUT_SPACING
@@ -4817,7 +4818,7 @@ void dooble::slotShowFind(void)
 
 	  if(!fixed)
 	    {
-	      QColor color(240, 128, 128); // Light Coral!
+	      QColor color(255, 255, 255);
 	      QPalette palette(ui.findLineEdit->palette());
 
 	      palette.setColor(ui.findLineEdit->backgroundRole(), color);
@@ -4870,7 +4871,6 @@ void dooble::find(QWebPage::FindFlags flags)
 {
   QString text(ui.findLineEdit->text());
   dview *p = qobject_cast<dview *> (ui.tabWidget->currentWidget());
-  static QPalette lineEditPalette(ui.findLineEdit->palette());
 
   if(p && !p->page()->findText(text, flags))
     {
@@ -4883,10 +4883,10 @@ void dooble::find(QWebPage::FindFlags flags)
 	  ui.findLineEdit->setPalette(palette);
 	}
       else
-	ui.findLineEdit->setPalette(lineEditPalette);
+	ui.findLineEdit->setPalette(m_findLineEditPalette);
     }
   else if(p)
-    ui.findLineEdit->setPalette(lineEditPalette);
+    ui.findLineEdit->setPalette(m_findLineEditPalette);
 }
 
 void dooble::keyPressEvent(QKeyEvent *event)

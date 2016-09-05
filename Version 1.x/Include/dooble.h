@@ -146,6 +146,7 @@ class dooble: public QMainWindow
   } m_saveDialogHackContainer;
 
   QList<QByteArray> m_closedTabs;
+  QPalette m_findLineEditPalette;
   QPointer<ddesktopwidget> m_desktopWidget;
   QPointer<dooble> m_parentWindow; // Position JavaScript windows.
   QWidget *sbWidget;
