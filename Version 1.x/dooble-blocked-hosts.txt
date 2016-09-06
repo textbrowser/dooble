@@ -3,9 +3,13 @@
 # Some wildcards (*.example.com) are supported.
 
 *.2mdn.net
+*.adnxs.com
+*.adsrvr.org
+*.advertising.com
 *.beanstock.co
 *.beanstock.com
 *.casalemedia.com
+*.fbcdn.net
 *.doubleclick.com
 *.doubleclick.net
 *.google-analytics.com
@@ -14,6 +18,7 @@ ad.turn.com
 adnxs.com
 cdn.syndication.twimg.com
 cs.komoona.com
+fonts.googleapis.com
 mpd.mxptint.net
 s.ytimg.com
 s.zkcdn.net
