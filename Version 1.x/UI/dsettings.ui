@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>99</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,7 +380,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>738</width>
+               <width>743</width>
                <height>571</height>
               </rect>
              </property>
@@ -1238,7 +1238,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>303</width>
+               <width>737</width>
                <height>550</height>
               </rect>
              </property>
@@ -1554,8 +1554,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>594</width>
-               <height>897</height>
+               <width>743</width>
+               <height>865</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2546,8 +2546,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>476</width>
-               <height>709</height>
+               <width>743</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2680,9 +2680,31 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QLabel" name="label_84">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The CBC mode of operation with ciphertext stealing (CTS) is supported. Authenticated and encrypted values are stored in various databases. The format of the stored objects is H(E(P || Length(P))) || E(P || Length(P)). The CTR mode is also supported. Please note that a session state is not maintained. The function gcry_randomize() is used for obtaining a buffer of random data. If you are concerned, please avoid using the CTR mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="textFormat">
+                   <enum>Qt::AutoText</enum>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="horizontalSpacer_26">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Preferred</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -3089,7 +3111,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>526</width>
+               <width>505</width>
                <height>1385</height>
               </rect>
              </property>

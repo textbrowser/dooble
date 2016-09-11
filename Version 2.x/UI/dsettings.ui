@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>99</width>
          <height>582</height>
         </rect>
        </property>
@@ -379,8 +379,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-102</y>
-               <width>738</width>
+               <y>0</y>
+               <width>743</width>
                <height>631</height>
               </rect>
              </property>
@@ -1291,8 +1291,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-60</y>
-               <width>732</width>
+               <y>0</y>
+               <width>737</width>
                <height>550</height>
               </rect>
              </property>
@@ -1607,8 +1607,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-336</y>
-               <width>738</width>
+               <y>0</y>
+               <width>743</width>
                <height>865</height>
               </rect>
              </property>
@@ -2599,9 +2599,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-148</y>
-               <width>738</width>
-               <height>677</height>
+               <y>0</y>
+               <width>743</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -2734,9 +2734,28 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QLabel" name="label_82">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The CBC mode of operation with ciphertext stealing (CTS) is supported. Authenticated and encrypted values are stored in various databases. The format of the stored objects is H(E(P || Length(P))) || E(P || Length(P)). The CTR mode is also supported. Please note that a session state is not maintained. The function gcry_randomize() is used for obtaining a buffer of random data. If you are concerned, please avoid using the CTR mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="horizontalSpacer_26">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Preferred</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -3142,8 +3161,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-856</y>
-               <width>738</width>
+               <y>0</y>
+               <width>505</width>
                <height>1385</height>
               </rect>
              </property>
