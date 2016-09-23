@@ -1477,7 +1477,7 @@ void dhistory::slotBookmark(void)
 	icon = dmisc::iconForUrl(url);
 
       emit bookmark(url, icon, title, description, now, now);
-      list.takeFirst();
+      list.removeFirst();
     }
 }
 
@@ -1528,7 +1528,7 @@ void dhistory::slotShare(void)
 	description = item->text();
 
       dooble::s_spoton->share(url, title, description, content);
-      list.takeFirst();
+      list.removeFirst();
     }
 
   QApplication::restoreOverrideCursor();
