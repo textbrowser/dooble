@@ -3566,6 +3566,10 @@ p, li { white-space: pre-wrap; }
         <source>User Agent String</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The CBC mode of operation with ciphertext stealing (CTS) is supported. Authenticated and encrypted values are stored in various databases. The format of the stored objects is H(E(P || Length(P))) || E(P || Length(P)). The CTR mode is also supported. Please note that a session state is not maintained. The function gcry_randomize() is used for obtaining a buffer of random data. If you are concerned, please avoid using the CTR mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>sslCiphersWindow</name>
