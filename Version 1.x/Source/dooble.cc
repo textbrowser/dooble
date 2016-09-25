@@ -355,6 +355,7 @@ int main(int argc, char *argv[])
 	}
     }
 
+  qRegisterMetaType<QMap<QString, QString> > ("QMap<QString, QString>");
   qRegisterMetaType<dgopher *> ("dgopher *");
   qRegisterMetaType<dnetworkblockreply *> ("dnetworkblockreply *");
   qRegisterMetaType<dnetworkdirreply *> ("dnetworkdirreply *");
