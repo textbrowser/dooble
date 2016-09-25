@@ -9,7 +9,8 @@ OS X developers should consider installing Homebrew. Please see http://brew.sh.
 To verify the version of Qt, issue qmake --version. Qt 5.x project files
 include qt5 in their names. qmake may be an alias for qmake-qt4 or qmake-qt5.
 
-Absolute cleaning:
+Absolute Cleaning
+
 gmake distclean or make distclean or mingw32-make distclean
 
 ARM
