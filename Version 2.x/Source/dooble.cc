@@ -310,6 +310,7 @@ int main(int argc, char *argv[])
 	}
     }
 
+  qRegisterMetaType<QMap<QString, QString> > ("QMap<QString, QString>");
   qRegisterMetaType<dnetworkblockreply *> ("dnetworkblockreply *");
   qRegisterMetaType<dnetworkerrorreply *> ("dnetworkerrorreply *");
   qRegisterMetaType<dnetworksslerrorreply *> ("dnetworksslerrorreply *");
