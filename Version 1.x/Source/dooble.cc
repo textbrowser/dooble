@@ -5996,6 +5996,11 @@ bool dooble::promptForPassphrase(const bool override)
 
       if(dialog.exec() == QDialog::Accepted)
 	{
+	  repaint();
+#ifndef Q_OS_MAC
+	  QApplication::processEvents();
+#endif
+
 	  QByteArray hash;
 	  QByteArray salt
 	    (s_settings.
