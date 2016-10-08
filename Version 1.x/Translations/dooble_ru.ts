@@ -1414,8 +1414,8 @@
         <location filename="../Source/dooble.cc" line="3872"/>
         <location filename="../Source/dooble.cc" line="4080"/>
         <location filename="../Source/dooble.cc" line="5575"/>
-        <location filename="../Source/dooble.cc" line="6205"/>
-        <location filename="../Source/dooble.cc" line="6509"/>
+        <location filename="../Source/dooble.cc" line="6210"/>
+        <location filename="../Source/dooble.cc" line="6514"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Браузер</translation>
     </message>
@@ -1481,7 +1481,7 @@
         <location filename="../Source/dooble.cc" line="3390"/>
         <location filename="../Source/dooble.cc" line="5585"/>
         <location filename="../Source/dooble.cc" line="5588"/>
-        <location filename="../Source/dooble.cc" line="6511"/>
+        <location filename="../Source/dooble.cc" line="6516"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Браузер</translation>
     </message>
@@ -1511,23 +1511,23 @@
         <translation>Прокси %1:%2 запрашивает учетные данные.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6546"/>
+        <location filename="../Source/dooble.cc" line="6551"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Вы уверены, что вы хотите открыть%1 страницы?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6699"/>
+        <location filename="../Source/dooble.cc" line="6704"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Вы уверены, что хотите покинуть измененную страницу?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7555"/>
+        <location filename="../Source/dooble.cc" line="7560"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7558"/>
-        <location filename="../Source/dooble.cc" line="7562"/>
+        <location filename="../Source/dooble.cc" line="7563"/>
+        <location filename="../Source/dooble.cc" line="7567"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1548,12 +1548,12 @@
         <translation type="vanished">Дополнение</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7927"/>
+        <location filename="../Source/dooble.cc" line="7932"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7929"/>
+        <location filename="../Source/dooble.cc" line="7934"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1562,12 +1562,12 @@
         <translation type="obsolete">Неизвестный (пустойе или недействительный URL) сайта вызвало исключение. Пожалуйста, нажмите для просмотра.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7292"/>
+        <location filename="../Source/dooble.cc" line="7297"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Веб-браузер: Напоминание</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7293"/>
+        <location filename="../Source/dooble.cc" line="7298"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Пароль не подготовлен. Пожалуйста откройте окно настроек и введите пароль на вкладке &quot;Безопасность&quot;. Когда пароль будет введен вы сможете использовать закладки, cookies и другую важную информацию в следующих сессиях.</translation>
     </message>
@@ -1580,15 +1580,15 @@
         <translation type="obsolete">Заполнение кэш-памяти ... %1% завершено.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7008"/>
         <location filename="../Source/dooble.cc" line="7013"/>
+        <location filename="../Source/dooble.cc" line="7018"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Сайт %1 вызвал исключение. Пожалуйста, нажмите для просмотра.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7249"/>
-        <location filename="../Source/dooble.cc" line="7251"/>
-        <location filename="../Source/dooble.cc" line="7255"/>
+        <location filename="../Source/dooble.cc" line="7254"/>
+        <location filename="../Source/dooble.cc" line="7256"/>
+        <location filename="../Source/dooble.cc" line="7260"/>
         <source>Restore Session</source>
         <translation>Восстановление сессии</translation>
     </message>
@@ -1600,8 +1600,8 @@
         <location filename="../Source/dooble.cc" line="2985"/>
         <location filename="../Source/dooble.cc" line="3037"/>
         <location filename="../Source/dooble.cc" line="4030"/>
-        <location filename="../Source/dooble.cc" line="6543"/>
-        <location filename="../Source/dooble.cc" line="6695"/>
+        <location filename="../Source/dooble.cc" line="6548"/>
+        <location filename="../Source/dooble.cc" line="6700"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble браузер: Подтверждение</translation>
     </message>
