@@ -1655,8 +1655,8 @@
         <location filename="../Source/dooble.cc" line="3872"/>
         <location filename="../Source/dooble.cc" line="4080"/>
         <location filename="../Source/dooble.cc" line="5575"/>
-        <location filename="../Source/dooble.cc" line="6205"/>
-        <location filename="../Source/dooble.cc" line="6509"/>
+        <location filename="../Source/dooble.cc" line="6210"/>
+        <location filename="../Source/dooble.cc" line="6514"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1703,7 +1703,7 @@
         <location filename="../Source/dooble.cc" line="3390"/>
         <location filename="../Source/dooble.cc" line="5585"/>
         <location filename="../Source/dooble.cc" line="5588"/>
-        <location filename="../Source/dooble.cc" line="6511"/>
+        <location filename="../Source/dooble.cc" line="6516"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Browser</translation>
     </message>
@@ -1733,23 +1733,23 @@
         <translation>Der Proxy %1:%2 verlangt ein Passwort.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6546"/>
+        <location filename="../Source/dooble.cc" line="6551"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Möchtest Du wirklich %1 Seiten öffnen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6699"/>
+        <location filename="../Source/dooble.cc" line="6704"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Möchtest Du wirklich die veränderte Seite verlassen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7555"/>
+        <location filename="../Source/dooble.cc" line="7560"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7558"/>
-        <location filename="../Source/dooble.cc" line="7562"/>
+        <location filename="../Source/dooble.cc" line="7563"/>
+        <location filename="../Source/dooble.cc" line="7567"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1770,12 +1770,12 @@
         <translation type="vanished">Add-on</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7927"/>
+        <location filename="../Source/dooble.cc" line="7932"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7929"/>
+        <location filename="../Source/dooble.cc" line="7934"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1784,12 +1784,12 @@
         <translation type="obsolete">Eine unbekannte Seite mit einer leeren oder ungültigen URL verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7292"/>
+        <location filename="../Source/dooble.cc" line="7297"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Erinnerung</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7293"/>
+        <location filename="../Source/dooble.cc" line="7298"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Eine Passphrase ist noch nicht eingegeben worden. Bitte besuche den Tresor Bereich in den Einstellungen (Fenster/Einstellungen/Tresor) und wähle eine Passphrase. Alsbald eine Passphrase eingegeben wurde, werden Lesezeichen, Cookies, und alle anderen wichtigen Informationen, Nutzer-Daten und -Einstellungen für zukünftige Sitzungen gespeichert und erneut zur Verfügung stehen. Du kannst diese Erinnerungsmeldung in den Einstellungen unter Sicherheit ausblenden.</translation>
     </message>
@@ -1802,15 +1802,15 @@
         <translation type="obsolete">Das Laden des Addons gelang nicht.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7008"/>
         <location filename="../Source/dooble.cc" line="7013"/>
+        <location filename="../Source/dooble.cc" line="7018"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Die Seite %1 verursachte eine Ausnahme. Bitte klicken, um dies zu überprüfen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7249"/>
-        <location filename="../Source/dooble.cc" line="7251"/>
-        <location filename="../Source/dooble.cc" line="7255"/>
+        <location filename="../Source/dooble.cc" line="7254"/>
+        <location filename="../Source/dooble.cc" line="7256"/>
+        <location filename="../Source/dooble.cc" line="7260"/>
         <source>Restore Session</source>
         <translation>Sitzung wiederherstellen</translation>
     </message>
@@ -1826,8 +1826,8 @@
         <location filename="../Source/dooble.cc" line="2985"/>
         <location filename="../Source/dooble.cc" line="3037"/>
         <location filename="../Source/dooble.cc" line="4030"/>
-        <location filename="../Source/dooble.cc" line="6543"/>
-        <location filename="../Source/dooble.cc" line="6695"/>
+        <location filename="../Source/dooble.cc" line="6548"/>
+        <location filename="../Source/dooble.cc" line="6700"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Bestätigung</translation>
     </message>
