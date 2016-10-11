@@ -69,7 +69,8 @@ FORMS           = UI/dapplicationPropertiesWindow.ui \
 		  UI/dreinstateWidget.ui \
 		  UI/dsettings.ui \
 		  UI/dsslciphers.ui \
-		  UI/dstatusBar.ui
+		  UI/dstatusBar.ui \
+		  UI/dstylesheet.ui
 
 UI_HEADERS_DIR  = Include
 

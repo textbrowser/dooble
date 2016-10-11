@@ -74,6 +74,7 @@ class dsettings: public QMainWindow
   void slotClearFavicons(void);
   void slotClicked(QAbstractButton *button);
   void slotCookieTimerTimeChanged(int index);
+  void slotCopyStyleSheet(void);
   void slotCustomContextMenuRequested(const QPoint &point);
   void slotDeleteAllSuffixes(void);
   void slotDeleteSuffix(void);
@@ -85,6 +86,8 @@ class dsettings: public QMainWindow
   void slotResetUrlAgentString(void);
   void slotSelectIconCfgFile(void);
   void slotSetIcons(void);
+  void slotSetStyleSheet(void);
+  void slotSetWidgetStyleSheet(const QPoint &point);
   void slotUpdateApplication(const QString &suffix, const QString &action);
   void slotUpdateLabels(void);
   void slotWebFontChanged(const QString &text);

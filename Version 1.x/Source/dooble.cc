@@ -108,6 +108,7 @@ extern "C"
 #include "dwebview.h"
 #include "ui_dpassphrasePrompt.h"
 #include "ui_dpasswordPrompt.h"
+#include "ui_dstylesheet.h"
 
 QHash<QString, QVariant> dooble::s_settings;
 QHash<QString, qint64> dooble::s_mostVisitedHosts;
@@ -1844,6 +1845,31 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #ifndef Q_OS_MAC
   prepareMenuBar(s_settings.value("mainWindow/hideMenuBar", false).toBool());
 #endif
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  foreach(QWidget *widget, findChildren<QWidget *> ())
+    {
+      if(widget->contextMenuPolicy() == Qt::CustomContextMenu ||
+	 widget->inherits("QLineEdit") ||
+	 widget->inherits("QTextEdit"))
+	continue;
+
+      widget->setContextMenuPolicy(Qt::CustomContextMenu);
+
+      if(s_settings.contains(QString("mainWindow/widget_stylesheet_%1").
+			     arg(widget->objectName())))
+	widget->setStyleSheet
+	  (s_settings.value(QString("mainWindow/widget_stylesheet_%1").
+			    arg(widget->objectName())).toString());
+
+      connect(widget,
+	      SIGNAL(customContextMenuRequested(const QPoint &)),
+	      this,
+	      SLOT(slotSetWidgetStyleSheet(const QPoint &)));
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 dooble::dooble
@@ -8174,4 +8200,83 @@ void dooble::slotOpenHome(void)
       if(ui.tabWidget->currentWidget())
 	ui.tabWidget->currentWidget()->setFocus();
     }
+}
+
+void dooble::slotSetWidgetStyleSheet(const QPoint &point)
+{
+  QWidget *widget = qobject_cast<QWidget *> (sender());
+
+  if(!widget)
+    return;
+
+  QAction *action = 0;
+  QMenu menu(this);
+
+  action = menu.addAction(tr("&Copy Style Sheet"),
+			  this,
+			  SLOT(slotCopyStyleSheet(void)));
+  action->setProperty("widget_name", widget->objectName());
+  action = menu.addAction(tr("Set &Style Sheet..."),
+			  this,
+			  SLOT(slotSetStyleSheet(void)));
+  action->setProperty("widget_name", widget->objectName());
+  action->setProperty("widget_stylesheet", widget->styleSheet());
+  menu.exec(widget->mapToGlobal(point));
+}
+
+void dooble::slotSetStyleSheet(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QWidget *widget =
+    findChild<QWidget *> (action->property("widget_name").toString());
+
+  if(!widget)
+    return;
+
+  QDialog dialog(this);
+  Ui_dstylesheet ui;
+
+  ui.setupUi(&dialog);
+  ui.label->setText(widget->objectName());
+  ui.textEdit->setText(action->property("widget_stylesheet").toString());
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      QString str(ui.textEdit->toPlainText().trimmed());
+
+      widget->setStyleSheet(str);
+
+      QSettings settings;
+
+      s_settings[QString("mainWindow/widget_stylesheet_%1").
+		 arg(widget->objectName())] = str;
+      settings.setValue
+	(QString("mainWindow/widget_stylesheet_%1").
+	 arg(widget->objectName()), str);
+    }
+}
+
+void dooble::slotCopyStyleSheet(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QWidget *widget = findChild<QWidget *> (action->property("widget_name").
+					  toString());
+
+  if(!widget)
+    return;
+
+  QClipboard *clipboard = QApplication::clipboard();
+
+  if(!clipboard)
+    return;
+
+  clipboard->setText(widget->styleSheet());
 }

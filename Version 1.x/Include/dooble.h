@@ -221,6 +221,7 @@ class dooble: public QMainWindow
   void slotCloseWindow(void);
   void slotCopy(void);
   void slotCopyLink(const QUrl &url);
+  void slotCopyStyleSheet(void);
   void slotDisplayDownloadWindow(void);
   void slotEnablePaste(void);
   void slotErrorLogged(void);
@@ -298,7 +299,9 @@ class dooble: public QMainWindow
   void slotSelectionChanged(const QString &text);
   void slotSelectionChanged(void);
   void slotSetIcons(void);
+  void slotSetStyleSheet(void);
   void slotSetTabBarVisible(const bool state);
+  void slotSetWidgetStyleSheet(const QPoint &point);
   void slotSettingsChanged(void);
   void slotShowApplicationCookies(void);
   void slotShowBlockedHosts(void);

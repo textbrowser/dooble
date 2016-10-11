@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QClipboard>
 #include <QDesktopServices>
 #include <QDir>
 #include <QFileDialog>
@@ -47,6 +48,7 @@
 #include "dooble.h"
 #include "dsettings.h"
 #include "dwebpage.h"
+#include "ui_dstylesheet.h"
 
 dsettings::dsettings():QMainWindow()
 {
@@ -435,6 +437,31 @@ dsettings::dsettings():QMainWindow()
   if(dooble::s_settings.value("settingsWindow/purgeMemoryCaches",
 			      true).toBool())
     m_purgeMemoryCachesTimer.start();
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  foreach(QWidget *widget, findChildren<QWidget *> ())
+    {
+      if(widget->contextMenuPolicy() == Qt::CustomContextMenu ||
+	 widget->inherits("QLineEdit") ||
+	 widget->inherits("QTextEdit"))
+	continue;
+
+      widget->setContextMenuPolicy(Qt::CustomContextMenu);
+
+      if(dooble::s_settings.contains(QString("mainWindow/widget_stylesheet_%1").
+				     arg(widget->objectName())))
+	widget->setStyleSheet
+	  (dooble::s_settings.value(QString("mainWindow/widget_stylesheet_%1").
+				    arg(widget->objectName())).toString());
+
+      connect(widget,
+	      SIGNAL(customContextMenuRequested(const QPoint &)),
+	      this,
+	      SLOT(slotSetWidgetStyleSheet(const QPoint &)));
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 dsettings::~dsettings()
@@ -3142,4 +3169,83 @@ void dsettings::slotResetUrlAgentString(void)
       ui.user_agent_string->setToolTip(ui.user_agent_string->text());
       ui.user_agent_string->selectAll();
     }
+}
+
+void dsettings::slotSetWidgetStyleSheet(const QPoint &point)
+{
+  QWidget *widget = qobject_cast<QWidget *> (sender());
+
+  if(!widget)
+    return;
+
+  QAction *action = 0;
+  QMenu menu(this);
+
+  action = menu.addAction(tr("&Copy Style Sheet"),
+			  this,
+			  SLOT(slotCopyStyleSheet(void)));
+  action->setProperty("widget_name", widget->objectName());
+  action = menu.addAction(tr("Set &Style Sheet..."),
+			  this,
+			  SLOT(slotSetStyleSheet(void)));
+  action->setProperty("widget_name", widget->objectName());
+  action->setProperty("widget_stylesheet", widget->styleSheet());
+  menu.exec(widget->mapToGlobal(point));
+}
+
+void dsettings::slotSetStyleSheet(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QWidget *widget =
+    findChild<QWidget *> (action->property("widget_name").toString());
+
+  if(!widget)
+    return;
+
+  QDialog dialog(this);
+  Ui_dstylesheet ui;
+
+  ui.setupUi(&dialog);
+  ui.label->setText(widget->objectName());
+  ui.textEdit->setText(action->property("widget_stylesheet").toString());
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      QString str(ui.textEdit->toPlainText().trimmed());
+
+      widget->setStyleSheet(str);
+
+      QSettings settings;
+
+      dooble::s_settings[QString("settingsWindow/widget_stylesheet_%1").
+			 arg(widget->objectName())] = str;
+      settings.setValue
+	(QString("settingsWindow/widget_stylesheet_%1").
+	 arg(widget->objectName()), str);
+    }
+}
+
+void dsettings::slotCopyStyleSheet(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QWidget *widget = findChild<QWidget *> (action->property("widget_name").
+					  toString());
+
+  if(!widget)
+    return;
+
+  QClipboard *clipboard = QApplication::clipboard();
+
+  if(!clipboard)
+    return;
+
+  clipboard->setText(widget->styleSheet());
 }
