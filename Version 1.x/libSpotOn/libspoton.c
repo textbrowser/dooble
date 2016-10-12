@@ -119,10 +119,10 @@ static libspoton_error_t initialize_libgcrypt
 	{
 	  gcry_control(GCRYCTL_SUSPEND_SECMEM_WARN);
 #ifdef LIBSPOTON_IGNORE_GCRY_CONTROL_GCRYCTL_INIT_SECMEM_RETURN_VALUE
-	  gcry_control(GCRYCTL_INIT_SECMEM, secure_memory_pool_size, 0);
+	  gcry_control(GCRYCTL_INIT_SECMEM, abs(secure_memory_pool_size), 0);
 #else
 	  if(gcry_control(GCRYCTL_INIT_SECMEM,
-			  secure_memory_pool_size, 0) != 0)
+			  abs(secure_memory_pool_size), 0) != 0)
 	    rerr = LIBSPOTON_ERROR_GCRY_CONTROL;
 #endif
 	  gcry_control(GCRYCTL_RESUME_SECMEM_WARN);
