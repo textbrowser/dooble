@@ -1850,7 +1850,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 
   foreach(QWidget *widget, findChildren<QWidget *> ())
     {
-      if(statusBar() == widget ||
+      if(sbWidget == widget ||
+	 statusBar() == widget ||
 	 widget->contextMenuPolicy() == Qt::CustomContextMenu ||
 	 widget->inherits("QLineEdit") ||
 	 widget->inherits("QTextEdit"))
