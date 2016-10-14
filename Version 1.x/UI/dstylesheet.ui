@@ -22,16 +22,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Widget Name</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QTextEdit" name="textEdit"/>
    </item>
    <item>
@@ -46,9 +36,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../Icons/icons.qrc"/>
- </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

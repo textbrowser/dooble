@@ -3210,7 +3210,8 @@ void dsettings::slotSetStyleSheet(void)
   Ui_dstylesheet ui;
 
   ui.setupUi(&dialog);
-  ui.label->setText(widget->objectName());
+  dialog.setWindowTitle(tr("Dooble: Widget Style Sheet (%1)").
+			arg(widget->objectName()));
   ui.textEdit->setText(action->property("widget_stylesheet").toString());
 
   if(dialog.exec() == QDialog::Accepted)

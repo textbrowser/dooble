@@ -1852,7 +1852,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
     {
       if(widget->contextMenuPolicy() == Qt::CustomContextMenu ||
 	 widget->inherits("QLineEdit") ||
-	 widget->inherits("QTextEdit"))
+	 widget->inherits("QTextEdit") ||
+	 widget->styleSheet().size() > 0)
 	continue;
 
       widget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -7319,7 +7320,8 @@ void dooble::remindUserToSetPassphrase(void)
   mb.setAttribute(Qt::WA_MacMetalStyle, false);
 #endif
   mb.setIcon(QMessageBox::Information);
-  mb.setStandardButtons(QMessageBox::Ok);
+  mb.setStandardButtons(QMessageBox::Ok | QMessageBox::Reset);
+  mb.setDefaultButton(QMessageBox::Ok);
   mb.setWindowTitle(tr("Dooble Web Browser: Reminder"));
   mb.setText(tr("A passphrase has not been prepared. "
 		"Please visit the Safe panel in the Settings window and "
@@ -7333,12 +7335,24 @@ void dooble::remindUserToSetPassphrase(void)
     if(mb.buttonRole(mb.buttons().at(i)) == QMessageBox::AcceptRole ||
        mb.buttonRole(mb.buttons().at(i)) == QMessageBox::ApplyRole ||
        mb.buttonRole(mb.buttons().at(i)) == QMessageBox::YesRole)
-      mb.buttons().at(i)->setIcon
-	(QIcon(settings.value("okButtonIcon").toString()));
+      {
+	mb.buttons().at(i)->setIcon
+	  (QIcon(settings.value("okButtonIcon").toString()));
+	mb.setEscapeButton(mb.buttons().at(i));
+      }
+    else if(mb.buttonRole(mb.buttons().at(i)) == QMessageBox::ResetRole)
+      {
+	mb.buttons().at(i)->setIcon
+	  (QIcon(settings.value("mainWindow/actionSettings").toString()));
+	mb.buttons().at(i)->setText(tr("&Settings"));
+      }
 
   mb.setWindowIcon
     (QIcon(settings.value("mainWindow/windowIcon").toString()));
   mb.exec();
+
+  if(mb.result() == QMessageBox::Reset)
+    slotShowSettingsWindow();
 }
 
 void dooble::slotReloadTab(const int index)
@@ -8241,7 +8255,8 @@ void dooble::slotSetStyleSheet(void)
   Ui_dstylesheet ui;
 
   ui.setupUi(&dialog);
-  ui.label->setText(widget->objectName());
+  dialog.setWindowTitle(tr("Dooble: Widget Style Sheet (%1)").
+			arg(widget->objectName()));
   ui.textEdit->setText(action->property("widget_stylesheet").toString());
 
   if(dialog.exec() == QDialog::Accepted)
