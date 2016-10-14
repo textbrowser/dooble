@@ -54,6 +54,7 @@
 #include <QPrinter>
 #include <QProcess>
 #include <QSettings>
+#include <QSplashScreen>
 #include <QSplitter>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -299,6 +300,13 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapp(argc, argv);
+  QSplashScreen splash(QPixmap("Icons/AxB/dooble.png"));
+
+  splash.setFixedSize(500, 500);
+  splash.show();
+  splash.showMessage(QObject::tr("Preparing Dooble."));
+  splash.repaint();
+  qapp.processEvents();
 
   if(argc > 1)
     {
@@ -343,6 +351,7 @@ int main(int argc, char *argv[])
       if(rc > 0)
 	{
 	  fprintf(stdout, "%s\n", usage.toStdString().data());
+	  splash.finish(0);
 	  return rc;
 	}
       else if(!urls.isEmpty())
@@ -352,6 +361,7 @@ int main(int argc, char *argv[])
 	  for(int i = 0; i < urls.size(); i++)
 	    Q_UNUSED(new dprintfromcommandprompt(urls.at(i), i + 1));
 
+	  splash.finish(0);
 	  return qapp.exec();
 	}
     }
@@ -429,12 +439,16 @@ int main(int argc, char *argv[])
   */
 
   dooble::s_errorLog = new derrorlog();
+  splash.showMessage(QObject::tr("Initializing the blocked hosts container."));
+  qapp.processEvents();
   dmisc::initializeBlockedHosts();
 
   /*
   ** The initializeCrypt() method must be called as soon as possible.
   */
 
+  splash.showMessage(QObject::tr("Initializing the gcrypt library."));
+  qapp.processEvents();
   dmisc::initializeCrypt();
 
   /*
@@ -495,6 +509,7 @@ int main(int argc, char *argv[])
       if(rc > 0)
 	{
 	  fprintf(stdout, "%s\n", usage.toStdString().data());
+	  splash.finish(0);
 	  return rc;
 	}
     }
@@ -633,6 +648,8 @@ int main(int argc, char *argv[])
   ** gets populated!
   */
 
+  splash.showMessage(QObject::tr("Initializing WebKit."));
+  qapp.processEvents();
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::DeveloperExtrasEnabled, true);
   QWebSettings::globalSettings()->setAttribute
@@ -825,6 +842,8 @@ int main(int argc, char *argv[])
   ** Initialize static members.
   */
 
+  splash.showMessage(QObject::tr("Initializing Dooble databases."));
+  qapp.processEvents();
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   dooble::s_spoton = new dspoton();
 #endif
@@ -1102,6 +1121,8 @@ int main(int argc, char *argv[])
   ** So, it's not necessary to connect QApplication's
   ** lastWindowClosed() signal.
   */
+
+  splash.finish(0);
 
   int rc = qapp.exec();
 
