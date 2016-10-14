@@ -1687,7 +1687,7 @@ void dsettings::slotClicked(QAbstractButton *button)
 				     QSettings::IniFormat);
 		  QMessageBox mb(QMessageBox::Critical,
 				 tr("Dooble Web Browser: Error"),
-				 tr("An error occurred while preparing "
+				 tr("A critical error occurred while preparing "
 				    "the authentication and encryption "
 				    "keys. Please report this problem."),
 				 QMessageBox::Cancel,

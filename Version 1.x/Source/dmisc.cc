@@ -30,6 +30,7 @@
 #include <QDesktopWidget>
 #include <QDir>
 #include <QFileIconProvider>
+#include <QMessageBox>
 #include <QProcess>
 #include <QProgressBar>
 #include <QSettings>
@@ -1928,4 +1929,35 @@ void dmisc::initializeBlockedHosts(void)
     }
 
   file.close();
+}
+
+void dmisc::showCryptInitializationError(QWidget *parent)
+{
+  if(!s_crypt || !s_crypt->initialized())
+    {
+      QSettings settings(dooble::s_settings.value("iconSet").toString(),
+			 QSettings::IniFormat);
+      QMessageBox mb(QMessageBox::Critical,
+		     QObject::tr("Dooble Web Browser: Error"),
+		     QObject::tr("A critical error occurred while preparing "
+				 "the authentication and encryption "
+				 "keys. Please report this problem."),
+		     QMessageBox::Cancel,
+		     parent);
+
+#ifdef Q_OS_MAC
+      mb.setAttribute(Qt::WA_MacMetalStyle, false);
+#endif
+      mb.setWindowIcon
+	(QIcon(settings.value("mainWindow/windowIcon").toString()));
+
+      for(int i = 0; i < mb.buttons().size(); i++)
+	{
+	  mb.buttons().at(i)->setIcon
+	    (QIcon(settings.value("cancelButtonIcon").toString()));
+	  mb.buttons().at(i)->setIconSize(QSize(16, 16));
+	}
+
+      mb.exec();
+    }
 }

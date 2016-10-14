@@ -1987,11 +1987,13 @@ dooble::dooble
     dmisc::centerChildWithParent(this, d);
 
   show();
+  repaint();
   ui.tabWidget->update();
   ui.historyFrame->setVisible
     (ui.actionShow_HistorySideBar->isChecked());
   reinstate();
   update();
+  dmisc::showCryptInitializationError(this);
 
   if(s_instances <= 1)
     if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
@@ -2153,11 +2155,13 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
     dmisc::centerChildWithParent(this, d);
 
   show();
+  repaint();
   ui.tabWidget->update();
   ui.historyFrame->setVisible
     (ui.actionShow_HistorySideBar->isChecked());
   reinstate();
   update();
+  dmisc::showCryptInitializationError(this);
 
   if(s_instances <= 1)
     if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
@@ -6836,6 +6840,8 @@ void dooble::slotAuthenticate(void)
 	      }
 	  }
     }
+
+  dmisc::showCryptInitializationError(this);
 }
 
 void dooble::setUrlHandler(dooble *d)

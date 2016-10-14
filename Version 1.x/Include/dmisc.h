@@ -93,6 +93,7 @@ class dmisc
   static void removeRestorationFiles(const QUuid &pid, const qint64 wid);
   static void setActionForFileSuffix(const QString &suffix,
 				     const QString &action);
+  static void showCryptInitializationError(QWidget *parent);
   static void updateHttpStatusCodes(const QHash<int, int> &statusCodes);
   static QIcon iconForUrl(const QUrl &url);
   static QIcon iconForFileSuffix(const QString &suffix);
