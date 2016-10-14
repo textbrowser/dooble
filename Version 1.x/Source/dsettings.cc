@@ -1673,7 +1673,9 @@ void dsettings::slotClicked(QAbstractButton *button)
 		 ui.cipherMode->currentText());
 	      QApplication::restoreOverrideCursor();
 
-	      if(!dmisc::s_crypt || !dmisc::s_crypt->initialized())
+	      if((!dmisc::s_crypt || !dmisc::s_crypt->initialized()) ||
+		 (shouldReencode && (!dmisc::s_reencodeCrypt ||
+				     !dmisc::s_reencodeCrypt->initialized())))
 		{
 		  foreach(QToolButton *button,
 			  ui.tabScrollArea->findChildren<QToolButton *> ())

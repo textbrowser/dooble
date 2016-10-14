@@ -783,8 +783,10 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 
   if(err != 0)
     {
+      gcry_cipher_close(m_cipherHandle);
       gcry_free(m_encryptionKey);
       gcry_free(m_hashKey);
+      m_cipherHandle = 0;
       m_encryptionKey = 0;
       m_encryptionKeyLength = 0;
       m_hashKey = 0;
