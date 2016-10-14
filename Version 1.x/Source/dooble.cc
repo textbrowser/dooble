@@ -1201,6 +1201,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 #else
   ui.menuToolButton->setMenu(new QMenu(this));
 #endif
+  ui.menu_Tools->addActions(ui.menu_Windows->actions());
   ui.searchLineEdit->setVisible(ui.actionSearch_Widget->isChecked());
 
   if(dooble::s_spoton)
@@ -7958,6 +7959,7 @@ void dooble::prepareMenuBar(const bool state)
       ui.menuToolButton->menu()->addMenu(ui.historyMenu);
       ui.menuToolButton->menu()->addMenu(ui.menu_Locations);
       ui.menuToolButton->menu()->addMenu(ui.menu_Tabs);
+      ui.menuToolButton->menu()->addMenu(ui.menu_Tools);
       ui.menuToolButton->menu()->addMenu(ui.viewMenu);
       ui.menuToolButton->menu()->addMenu(ui.menu_Windows);
       ui.menuToolButton->menu()->addMenu(ui.menu_About);
