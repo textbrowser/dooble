@@ -8252,11 +8252,30 @@ void dooble::slotSetStyleSheet(void)
     return;
 
   QDialog dialog(this);
+  QSettings settings(s_settings.value("iconSet").toString(),
+		     QSettings::IniFormat);
   Ui_dstylesheet ui;
 
   ui.setupUi(&dialog);
   dialog.setWindowTitle(tr("Dooble: Widget Style Sheet (%1)").
 			arg(widget->objectName()));
+
+  for(int i = 0; i < ui.buttonBox->buttons().size(); i++)
+    if(ui.buttonBox->
+       buttonRole(ui.buttonBox->buttons().at(i)) == QDialogButtonBox::
+       AcceptRole ||
+       ui.buttonBox->
+       buttonRole(ui.buttonBox->buttons().at(i)) == QDialogButtonBox::
+       ApplyRole ||
+       ui.buttonBox->
+       buttonRole(ui.buttonBox->buttons().at(i)) == QDialogButtonBox::
+       YesRole)
+      ui.buttonBox->buttons().at(i)->setIcon
+	(QIcon(settings.value("okButtonIcon").toString()));
+    else
+      ui.buttonBox->buttons().at(i)->setIcon
+	(QIcon(settings.value("cancelButtonIcon").toString()));
+
   ui.textEdit->setText(action->property("widget_stylesheet").toString());
 
   if(dialog.exec() == QDialog::Accepted)
