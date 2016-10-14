@@ -13,11 +13,14 @@
   <property name="windowTitle">
    <string>Dooble: Widget Style Sheet</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/Logo/spot-on-logo.png</normaloff>:/Logo/spot-on-logo.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Dooble cannot yet validate style sheets. Please be careful.</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
