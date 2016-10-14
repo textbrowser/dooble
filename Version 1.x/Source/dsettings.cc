@@ -1672,6 +1672,43 @@ void dsettings::slotClicked(QAbstractButton *button)
 		 salt,
 		 ui.cipherMode->currentText());
 	      QApplication::restoreOverrideCursor();
+
+	      if(!dmisc::s_crypt || !dmisc::s_crypt->initialized())
+		{
+		  foreach(QToolButton *button,
+			  ui.tabScrollArea->findChildren<QToolButton *> ())
+		    if(button->property("page").toInt() == 5)
+		      button->click();
+
+		  QSettings settings(dooble::s_settings.value("iconSet").
+				 toString(),
+				     QSettings::IniFormat);
+		  QMessageBox mb(QMessageBox::Critical,
+				 tr("Dooble Web Browser: Error"),
+				 tr("An error occurred while preparing "
+				    "the authentication and encryption "
+				    "keys. Please report this problem."),
+				 QMessageBox::Cancel,
+				 this);
+
+#ifdef Q_OS_MAC
+		  mb.setAttribute(Qt::WA_MacMetalStyle, false);
+#endif
+		  mb.setWindowIcon
+		    (QIcon(settings.value("mainWindow/windowIcon").toString()));
+
+		  for(int i = 0; i < mb.buttons().size(); i++)
+		    {
+		      mb.buttons().at(i)->setIcon
+			(QIcon(settings.value("cancelButtonIcon").toString()));
+		      mb.buttons().at(i)->setIconSize(QSize(16, 16));
+		    }
+
+		  mb.exec();
+		  ui.pass1LineEdit->selectAll();
+		  ui.pass1LineEdit->setFocus();
+		  return;
+		}
 	    }
 
 	  /*
