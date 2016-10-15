@@ -1096,9 +1096,6 @@ int main(int argc, char *argv[])
   if(url.host().toLower().trimmed().startsWith("gopher"))
     url.setScheme("gopher");
 
-  qthread::msleep(3500);
-  splash.finish(0);
-
   if(argc > 1)
     {
       urls.append(url.toString(QUrl::StripTrailingSlash));
@@ -1127,6 +1124,9 @@ int main(int argc, char *argv[])
   ** So, it's not necessary to connect QApplication's
   ** lastWindowClosed() signal.
   */
+
+  qthread::msleep(250);
+  splash.finish(0);
 
   int rc = qapp.exec();
 
