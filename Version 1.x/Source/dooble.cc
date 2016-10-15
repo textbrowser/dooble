@@ -451,6 +451,7 @@ int main(int argc, char *argv[])
   splash.showMessage
     (QObject::tr("Initializing blocked hosts."),
      Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
   qapp.processEvents();
   dmisc::initializeBlockedHosts();
 
@@ -462,6 +463,8 @@ int main(int argc, char *argv[])
   splash.showMessage
     (QObject::tr("Initializing the gcrypt library."),
      Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapp.processEvents();
   dmisc::initializeCrypt();
 
   /*
@@ -663,6 +666,7 @@ int main(int argc, char *argv[])
 
   splash.showMessage
     (QObject::tr("Initializing WebKit."), Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
   qapp.processEvents();
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::DeveloperExtrasEnabled, true);
@@ -859,6 +863,7 @@ int main(int argc, char *argv[])
   splash.showMessage
     (QObject::tr("Initializing Dooble containers."),
      Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
   qapp.processEvents();
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   dooble::s_spoton = new dspoton();
