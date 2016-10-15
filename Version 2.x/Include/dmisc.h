@@ -112,6 +112,7 @@ class dmisc
 				  const int iterationCount,
 				  const QByteArray &salt,
 				  const QString &cipherMode);
+  static void showCryptInitializationError(QWidget *parent);
 
  private:
   dmisc(void);

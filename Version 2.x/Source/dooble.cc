@@ -1742,6 +1742,7 @@ dooble::dooble
     (ui.actionShow_HistorySideBar->isChecked());
   reinstate();
   update();
+  dmisc::showCryptInitializationError(this);
 
   if(s_instances <= 1)
     if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
@@ -1900,6 +1901,7 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
     (ui.actionShow_HistorySideBar->isChecked());
   reinstate();
   update();
+  dmisc::showCryptInitializationError(this);
 
   if(s_instances <= 1)
     if(!QSqlDatabase::isDriverAvailable("QSQLITE"))
@@ -5577,6 +5579,9 @@ bool dooble::promptForPassphrase(const bool override)
 	    ui_p.buttonBox->buttons().at(i)->setIconSize(QSize(16, 16));
 	  }
 
+      if(dmisc::s_crypt)
+	ui_p.information_label->setVisible(false);
+
 #ifndef Q_OS_MAC
       dialog.setWindowModality(Qt::ApplicationModal);
       dialog.show();
@@ -6353,6 +6358,8 @@ void dooble::slotAuthenticate(void)
 	      }
 	  }
     }
+
+  dmisc::showCryptInitializationError(this);
 }
 
 void dooble::setUrlHandler(dooble *d)
@@ -6851,7 +6858,8 @@ void dooble::remindUserToSetPassphrase(void)
   mb.setAttribute(Qt::WA_MacMetalStyle, false);
 #endif
   mb.setIcon(QMessageBox::Information);
-  mb.setStandardButtons(QMessageBox::Ok);
+  mb.setStandardButtons(QMessageBox::Ok | QMessageBox::Reset);
+  mb.setDefaultButton(QMessageBox::Ok);
   mb.setWindowTitle(tr("Dooble Web Browser: Reminder"));
   mb.setText(tr("A passphrase has not been prepared. "
 		"Please visit the Safe panel in the Settings window and "
@@ -6865,12 +6873,24 @@ void dooble::remindUserToSetPassphrase(void)
     if(mb.buttonRole(mb.buttons().at(i)) == QMessageBox::AcceptRole ||
        mb.buttonRole(mb.buttons().at(i)) == QMessageBox::ApplyRole ||
        mb.buttonRole(mb.buttons().at(i)) == QMessageBox::YesRole)
-      mb.buttons().at(i)->setIcon
-	(QIcon(settings.value("okButtonIcon").toString()));
+      {
+	mb.buttons().at(i)->setIcon
+	  (QIcon(settings.value("okButtonIcon").toString()));
+	mb.setEscapeButton(mb.buttons().at(i));
+      }
+    else if(mb.buttonRole(mb.buttons().at(i)) == QMessageBox::ResetRole)
+      {
+	mb.buttons().at(i)->setIcon
+	  (QIcon(settings.value("mainWindow/actionSettings").toString()));
+	mb.buttons().at(i)->setText(tr("&Settings"));
+      }
 
   mb.setWindowIcon
     (QIcon(settings.value("mainWindow/windowIcon").toString()));
   mb.exec();
+
+  if(mb.result() == QMessageBox::Reset)
+    slotShowSettingsWindow();
 }
 
 void dooble::slotReloadTab(const int index)
