@@ -86,6 +86,14 @@
         <source>Dooble Web Browser: User Agent Strings Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dooble Web Browser: Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A critical error occurred while preparing the authentication and encryption keys. Please report this problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>applicationPropertiesWindow</name>
@@ -1167,6 +1175,22 @@
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Copy Style Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set &amp;Style Sheet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Widget Style Sheet (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>downloadPromptDialog</name>
@@ -1455,11 +1479,38 @@ p, li { white-space: pre-wrap; }
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Copy Style Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set &amp;Style Sheet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A critical error occurred while preparing the authentication and encryption keys. Please report this problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Widget Style Sheet (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dsettingshomelinewidget</name>
     <message>
         <source>Select URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dstylesheet</name>
+    <message>
+        <source>Dooble: Widget Style Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble cannot yet validate style sheets. Please be careful.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2410,6 +2461,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;User Agent Strings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
