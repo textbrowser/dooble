@@ -6043,6 +6043,9 @@ bool dooble::promptForPassphrase(const bool override)
 	    ui_p.buttonBox->buttons().at(i)->setIconSize(QSize(16, 16));
 	  }
 
+      if(dmisc::s_crypt)
+	ui_p.information_label->setVisible(false);
+
 #if QT_VERSION >= 0x050000
 #ifndef Q_OS_MAC
       dialog.setWindowModality(Qt::ApplicationModal);
