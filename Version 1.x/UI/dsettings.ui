@@ -380,7 +380,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>743</width>
+               <width>527</width>
                <height>571</height>
               </rect>
              </property>
@@ -1238,7 +1238,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>737</width>
+               <width>285</width>
                <height>550</height>
               </rect>
              </property>
@@ -1554,8 +1554,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>743</width>
-               <height>865</height>
+               <width>574</width>
+               <height>897</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2546,8 +2546,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>743</width>
-               <height>746</height>
+               <width>463</width>
+               <height>881</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -4515,6 +4515,9 @@
            <widget class="QCheckBox" name="centerChildWindows">
             <property name="text">
              <string>Center child windows.</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

@@ -1936,7 +1936,7 @@ dooble::dooble
       slotShowDesktopTab(false);
 
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool())
+			      true).toBool())
     dmisc::centerChildWithParent(this, d);
 
   show();
@@ -2002,7 +2002,7 @@ dooble::dooble
     slotShowDesktopTab(false);
 
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool())
+			      true).toBool())
     dmisc::centerChildWithParent(this, d);
 
   show();
@@ -2044,7 +2044,7 @@ dooble::dooble(dview *p, dooble *d):QMainWindow()
     slotShowDesktopTab(false);
 
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool())
+			      true).toBool())
     dmisc::centerChildWithParent(this, d);
 
   show();
@@ -2081,7 +2081,7 @@ dooble::dooble(const QByteArray &history, dooble *d):QMainWindow()
     slotShowDesktopTab(false);
 
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool())
+			      true).toBool())
     dmisc::centerChildWithParent(this, d);
 
   show();
@@ -2170,7 +2170,7 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
     slotShowDesktopTab(false);
 
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool())
+			      true).toBool())
     dmisc::centerChildWithParent(this, d);
 
   show();
@@ -8214,8 +8214,13 @@ void dooble::slotShowBlockedHosts(void)
     }
 
   QApplication::restoreOverrideCursor();
-  s_blockedhostsWindow->show();
-  dmisc::centerChildWithParent(s_blockedhostsWindow, this);
+
+  if(dooble::s_settings.value("settingsWindow/centerChildWindows",
+			      true).toBool())
+    dmisc::centerChildWithParent(s_blockedhostsWindow, this);
+
+  s_blockedhostsWindow->showNormal();
+  s_blockedhostsWindow->raise();
 }
 
 void dooble::slotSaveBlockedHosts(void)

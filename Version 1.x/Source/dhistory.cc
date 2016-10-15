@@ -367,7 +367,7 @@ void dhistory::show(QWidget *parent)
     populate();
 
   if(!dooble::s_settings.value("settingsWindow/centerChildWindows",
-			       false).toBool())
+			       true).toBool())
     {
       QRect rect;
 

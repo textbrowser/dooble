@@ -366,7 +366,7 @@ void ddownloadwindow::show(QWidget *parent)
     }
 
   if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool())
+			      true).toBool())
     dmisc::centerChildWithParent(this, parent);
 
   showNormal();
