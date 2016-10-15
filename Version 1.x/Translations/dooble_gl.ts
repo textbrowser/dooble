@@ -1474,8 +1474,8 @@
         <location filename="../Source/dooble.cc" line="3929"/>
         <location filename="../Source/dooble.cc" line="4137"/>
         <location filename="../Source/dooble.cc" line="5632"/>
-        <location filename="../Source/dooble.cc" line="6267"/>
-        <location filename="../Source/dooble.cc" line="6571"/>
+        <location filename="../Source/dooble.cc" line="6270"/>
+        <location filename="../Source/dooble.cc" line="6574"/>
         <source>Dooble Web Browser</source>
         <translation>Navegador web Dooble</translation>
     </message>
@@ -1536,7 +1536,7 @@
         <location filename="../Source/dooble.cc" line="3447"/>
         <location filename="../Source/dooble.cc" line="5642"/>
         <location filename="../Source/dooble.cc" line="5645"/>
-        <location filename="../Source/dooble.cc" line="6573"/>
+        <location filename="../Source/dooble.cc" line="6576"/>
         <source> - Dooble Web Browser</source>
         <translation> - Navegador web Dooble</translation>
     </message>
@@ -1551,53 +1551,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="6611"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Confirma que quere abrir %1 páxinas?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6761"/>
+        <location filename="../Source/dooble.cc" line="6764"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Confirma que quere abandonar a páxina modificada?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7379"/>
+        <location filename="../Source/dooble.cc" line="7382"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7632"/>
+        <location filename="../Source/dooble.cc" line="7635"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7635"/>
-        <location filename="../Source/dooble.cc" line="7639"/>
+        <location filename="../Source/dooble.cc" line="7638"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8005"/>
+        <location filename="../Source/dooble.cc" line="8008"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8007"/>
+        <location filename="../Source/dooble.cc" line="8010"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8262"/>
+        <location filename="../Source/dooble.cc" line="8265"/>
         <source>&amp;Copy Style Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8266"/>
+        <location filename="../Source/dooble.cc" line="8269"/>
         <source>Set &amp;Style Sheet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8293"/>
+        <location filename="../Source/dooble.cc" line="8296"/>
         <source>Dooble: Widget Style Sheet (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1605,8 +1605,8 @@
         <location filename="../Source/dooble.cc" line="3042"/>
         <location filename="../Source/dooble.cc" line="3094"/>
         <location filename="../Source/dooble.cc" line="4087"/>
-        <location filename="../Source/dooble.cc" line="6605"/>
-        <location filename="../Source/dooble.cc" line="6757"/>
+        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="6760"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Navegador web Dooble: Confirmación</translation>
     </message>
@@ -1692,25 +1692,25 @@
         <translation type="obsolete">Un sitio descoñecido (URL baleiro ou incorrecto) provocou unha excepción. Prema para revisalo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7357"/>
+        <location filename="../Source/dooble.cc" line="7360"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Navegador web Dooble: Lembranza</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7358"/>
+        <location filename="../Source/dooble.cc" line="7361"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Non foi preparado un contrasinal. Visite o panel «Seguro» na xanela de «Axustes» e escolla un contrasinal. Unha vez seleccionado un contrasinal, os favoritos, cookies, e toda a outra información esencial estará dispoñíbel en futuras sesións. Pode desactivar esta advertencia a través do panel «Seguro».</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7072"/>
-        <location filename="../Source/dooble.cc" line="7077"/>
+        <location filename="../Source/dooble.cc" line="7075"/>
+        <location filename="../Source/dooble.cc" line="7080"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>O sitio %1 provocou unha excepción. Prema para revisalo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7313"/>
-        <location filename="../Source/dooble.cc" line="7315"/>
-        <location filename="../Source/dooble.cc" line="7319"/>
+        <location filename="../Source/dooble.cc" line="7316"/>
+        <location filename="../Source/dooble.cc" line="7318"/>
+        <location filename="../Source/dooble.cc" line="7322"/>
         <source>Restore Session</source>
         <translation>Restaurar a sesión</translation>
     </message>
@@ -3393,12 +3393,21 @@
         <translation type="obsolete">Benvido/a ao navegador web Dooble</translation>
     </message>
     <message>
-        <location filename="../UI/dpassphrasePrompt.ui" line="14"/>
         <source>Dooble Web Browser</source>
-        <translation type="unfinished">Navegador web Dooble</translation>
+        <translation type="obsolete">Navegador web Dooble</translation>
     </message>
     <message>
-        <location filename="../UI/dpassphrasePrompt.ui" line="25"/>
+        <location filename="../UI/dpassphrasePrompt.ui" line="14"/>
+        <source>Dooble Web Browser: Passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpassphrasePrompt.ui" line="26"/>
+        <source>Please provide your passphrase. If you dismiss this prompt, temporary credentials will be assigned.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpassphrasePrompt.ui" line="41"/>
         <source>&amp;Passphrase</source>
         <translation>Contra&amp;sinal</translation>
     </message>
@@ -3411,17 +3420,17 @@
         <translation>Navegador web Dooble: E necesario autenticarse</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="26"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="32"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeTexto</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="35"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="41"/>
         <source>&amp;Username</source>
         <translation>&amp;Nome de usuario</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="48"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="54"/>
         <source>&amp;Password</source>
         <translation>Contra&amp;sinal</translation>
     </message>

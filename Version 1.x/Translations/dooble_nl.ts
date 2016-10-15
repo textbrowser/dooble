@@ -1340,8 +1340,8 @@
         <location filename="../Source/dooble.cc" line="3929"/>
         <location filename="../Source/dooble.cc" line="4137"/>
         <location filename="../Source/dooble.cc" line="5632"/>
-        <location filename="../Source/dooble.cc" line="6267"/>
-        <location filename="../Source/dooble.cc" line="6571"/>
+        <location filename="../Source/dooble.cc" line="6270"/>
+        <location filename="../Source/dooble.cc" line="6574"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1407,7 +1407,7 @@
         <location filename="../Source/dooble.cc" line="3447"/>
         <location filename="../Source/dooble.cc" line="5642"/>
         <location filename="../Source/dooble.cc" line="5645"/>
-        <location filename="../Source/dooble.cc" line="6573"/>
+        <location filename="../Source/dooble.cc" line="6576"/>
         <source> - Dooble Web Browser</source>
         <translation> - Dooble Web Browser</translation>
     </message>
@@ -1437,43 +1437,43 @@
         <translation>De proxy %1:%2 vraagt om referenties.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="6611"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Ben je er zeker van om pagina %1 te openen?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6761"/>
+        <location filename="../Source/dooble.cc" line="6764"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Ben je er zeker van om gewijzigde pagina te verlaten?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7379"/>
+        <location filename="../Source/dooble.cc" line="7382"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7632"/>
+        <location filename="../Source/dooble.cc" line="7635"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7635"/>
-        <location filename="../Source/dooble.cc" line="7639"/>
+        <location filename="../Source/dooble.cc" line="7638"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8262"/>
+        <location filename="../Source/dooble.cc" line="8265"/>
         <source>&amp;Copy Style Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8266"/>
+        <location filename="../Source/dooble.cc" line="8269"/>
         <source>Set &amp;Style Sheet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8293"/>
+        <location filename="../Source/dooble.cc" line="8296"/>
         <source>Dooble: Widget Style Sheet (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1494,12 +1494,12 @@
         <translation type="vanished">Toepassing</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7357"/>
+        <location filename="../Source/dooble.cc" line="7360"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser:Herinnering</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7358"/>
+        <location filename="../Source/dooble.cc" line="7361"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Een wachtwoord is niet ingesteld. Ga naar de Vertrouwd paneel in het venster Instellingen en kies een wachtwoord. Zodra een wachtwoord is geselecteerd, zullen bookmarks, cookies, en alle andere essentiële informatie beschikbaar zijn voor toekomstige sessies. U kunt deze herinnering via de Vertrouwd paneel uitschakelen.</translation>
     </message>
@@ -1512,25 +1512,25 @@
         <translation type="vanished">Bekijk site &amp;Cookies</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8005"/>
+        <location filename="../Source/dooble.cc" line="8008"/>
         <source>&amp;Show Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8007"/>
+        <location filename="../Source/dooble.cc" line="8010"/>
         <source>&amp;Hide Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7072"/>
-        <location filename="../Source/dooble.cc" line="7077"/>
+        <location filename="../Source/dooble.cc" line="7075"/>
+        <location filename="../Source/dooble.cc" line="7080"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>De site %1 veroorzaakte een uitzondering. klik AUB om te beoordelen.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7313"/>
-        <location filename="../Source/dooble.cc" line="7315"/>
-        <location filename="../Source/dooble.cc" line="7319"/>
+        <location filename="../Source/dooble.cc" line="7316"/>
+        <location filename="../Source/dooble.cc" line="7318"/>
+        <location filename="../Source/dooble.cc" line="7322"/>
         <source>Restore Session</source>
         <translation>Herstel Sessie</translation>
     </message>
@@ -1538,8 +1538,8 @@
         <location filename="../Source/dooble.cc" line="3042"/>
         <location filename="../Source/dooble.cc" line="3094"/>
         <location filename="../Source/dooble.cc" line="4087"/>
-        <location filename="../Source/dooble.cc" line="6605"/>
-        <location filename="../Source/dooble.cc" line="6757"/>
+        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="6760"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser:Bevestiging</translation>
     </message>
@@ -3371,12 +3371,21 @@
         <translation type="obsolete">Welkom bij Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../UI/dpassphrasePrompt.ui" line="14"/>
         <source>Dooble Web Browser</source>
-        <translation type="unfinished">Dooble Web Browser</translation>
+        <translation type="obsolete">Dooble Web Browser</translation>
     </message>
     <message>
-        <location filename="../UI/dpassphrasePrompt.ui" line="25"/>
+        <location filename="../UI/dpassphrasePrompt.ui" line="14"/>
+        <source>Dooble Web Browser: Passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpassphrasePrompt.ui" line="26"/>
+        <source>Please provide your passphrase. If you dismiss this prompt, temporary credentials will be assigned.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpassphrasePrompt.ui" line="41"/>
         <source>&amp;Passphrase</source>
         <translation>&amp;Wachtwoord</translation>
     </message>
@@ -3389,17 +3398,17 @@
         <translation>Dooble Web Browser:Verificatie Verplicht</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="26"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="32"/>
         <source>TextLabel</source>
         <translation>TekstLabel</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="35"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="41"/>
         <source>&amp;Username</source>
         <translation>&amp;Gebruikersnaam</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="48"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="54"/>
         <source>&amp;Password</source>
         <translation>&amp;Paswoord</translation>
     </message>

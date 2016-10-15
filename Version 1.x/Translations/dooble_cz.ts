@@ -1484,8 +1484,8 @@
         <location filename="../Source/dooble.cc" line="3929"/>
         <location filename="../Source/dooble.cc" line="4137"/>
         <location filename="../Source/dooble.cc" line="5632"/>
-        <location filename="../Source/dooble.cc" line="6267"/>
-        <location filename="../Source/dooble.cc" line="6571"/>
+        <location filename="../Source/dooble.cc" line="6270"/>
+        <location filename="../Source/dooble.cc" line="6574"/>
         <source>Dooble Web Browser</source>
         <translation>Dooble Web Browser</translation>
     </message>
@@ -1551,7 +1551,7 @@
         <location filename="../Source/dooble.cc" line="3447"/>
         <location filename="../Source/dooble.cc" line="5642"/>
         <location filename="../Source/dooble.cc" line="5645"/>
-        <location filename="../Source/dooble.cc" line="6573"/>
+        <location filename="../Source/dooble.cc" line="6576"/>
         <source> - Dooble Web Browser</source>
         <translation>- Dooble Web Browser</translation>
     </message>
@@ -1581,43 +1581,43 @@
         <translation>Proxy %1:%2 požaduje heslo.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="6611"/>
         <source>Are you sure that you wish to open %1 pages?</source>
         <translation>Jste si jistý, že chcete otevřít %1 stránek?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="6761"/>
+        <location filename="../Source/dooble.cc" line="6764"/>
         <source>Are you sure that you wish to leave the modified page?</source>
         <translation>Jste si jistý, že chcete opustit změněné stránky?</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7379"/>
+        <location filename="../Source/dooble.cc" line="7382"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7632"/>
+        <location filename="../Source/dooble.cc" line="7635"/>
         <source>View %1 &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7635"/>
-        <location filename="../Source/dooble.cc" line="7639"/>
+        <location filename="../Source/dooble.cc" line="7638"/>
+        <location filename="../Source/dooble.cc" line="7642"/>
         <source>View Site &amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8262"/>
+        <location filename="../Source/dooble.cc" line="8265"/>
         <source>&amp;Copy Style Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8266"/>
+        <location filename="../Source/dooble.cc" line="8269"/>
         <source>Set &amp;Style Sheet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8293"/>
+        <location filename="../Source/dooble.cc" line="8296"/>
         <source>Dooble: Widget Style Sheet (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1638,12 +1638,12 @@
         <translation type="vanished">Doplněk</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7357"/>
+        <location filename="../Source/dooble.cc" line="7360"/>
         <source>Dooble Web Browser: Reminder</source>
         <translation>Dooble Web Browser: Připomenutí</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7358"/>
+        <location filename="../Source/dooble.cc" line="7361"/>
         <source>A passphrase has not been prepared. Please visit the Safe panel in the Settings window and choose a passphrase. Once a passphrase is selected, bookmarks, cookies, and all other essential information will be available in future sessions. You may disable this reminder via the Safe panel.</source>
         <translation>Heslo nebylo připraveno. Navštivte, prosím, panel s trezorem v okně s nastavením a zvolte heslo. Jakmile je heslo vybráno, budou záložky, koláčky a všechny ostatní podstatné informace dostupné v budoucích sezeních. Tuto připomínku můžete zakázat v panelu s trezorem.</translation>
     </message>
@@ -1656,25 +1656,25 @@
         <translation type="vanished">Zobrazit &amp;koláčky stránek</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8005"/>
+        <location filename="../Source/dooble.cc" line="8008"/>
         <source>&amp;Show Menu Bar</source>
         <translation>&amp;Ukázat pruh s hlavní nabídkou</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="8007"/>
+        <location filename="../Source/dooble.cc" line="8010"/>
         <source>&amp;Hide Menu Bar</source>
         <translation>&amp;Skrýt pruh s hlavní nabídkou</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7072"/>
-        <location filename="../Source/dooble.cc" line="7077"/>
+        <location filename="../Source/dooble.cc" line="7075"/>
+        <location filename="../Source/dooble.cc" line="7080"/>
         <source>The site %1 caused an exception. Please click to review.</source>
         <translation>Stránka %1 zapříčinila výjimku. Klepněte, prosím, pro její přezkoušení.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="7313"/>
-        <location filename="../Source/dooble.cc" line="7315"/>
-        <location filename="../Source/dooble.cc" line="7319"/>
+        <location filename="../Source/dooble.cc" line="7316"/>
+        <location filename="../Source/dooble.cc" line="7318"/>
+        <location filename="../Source/dooble.cc" line="7322"/>
         <source>Restore Session</source>
         <translation>Obnovit sezení</translation>
     </message>
@@ -1682,8 +1682,8 @@
         <location filename="../Source/dooble.cc" line="3042"/>
         <location filename="../Source/dooble.cc" line="3094"/>
         <location filename="../Source/dooble.cc" line="4087"/>
-        <location filename="../Source/dooble.cc" line="6605"/>
-        <location filename="../Source/dooble.cc" line="6757"/>
+        <location filename="../Source/dooble.cc" line="6608"/>
+        <location filename="../Source/dooble.cc" line="6760"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Potvrzení</translation>
     </message>
@@ -3578,12 +3578,21 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>passphrasePrompt</name>
     <message>
-        <location filename="../UI/dpassphrasePrompt.ui" line="14"/>
         <source>Dooble Web Browser</source>
-        <translation>Prohlížeč Dooble</translation>
+        <translation type="vanished">Prohlížeč Dooble</translation>
     </message>
     <message>
-        <location filename="../UI/dpassphrasePrompt.ui" line="25"/>
+        <location filename="../UI/dpassphrasePrompt.ui" line="14"/>
+        <source>Dooble Web Browser: Passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpassphrasePrompt.ui" line="26"/>
+        <source>Please provide your passphrase. If you dismiss this prompt, temporary credentials will be assigned.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UI/dpassphrasePrompt.ui" line="41"/>
         <source>&amp;Passphrase</source>
         <translation>&amp;Heslo</translation>
     </message>
@@ -3596,17 +3605,17 @@ p, li { white-space: pre-wrap; }
         <translation>Dooble Web Browser: Požadováno potvrzení</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="26"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="32"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="35"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="41"/>
         <source>&amp;Username</source>
         <translation>&amp;Uživatelské jméno</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="48"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="54"/>
         <source>&amp;Password</source>
         <translation>&amp;Heslo</translation>
     </message>

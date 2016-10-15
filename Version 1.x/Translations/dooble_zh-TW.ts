@@ -2582,7 +2582,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dooble Web Browser</source>
-        <translation type="unfinished">Dooble 網頁瀏覽器</translation>
+        <translation type="obsolete">Dooble 網頁瀏覽器</translation>
+    </message>
+    <message>
+        <source>Dooble Web Browser: Passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please provide your passphrase. If you dismiss this prompt, temporary credentials will be assigned.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
