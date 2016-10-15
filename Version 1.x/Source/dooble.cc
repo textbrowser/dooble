@@ -208,6 +208,15 @@ static void qt_message_handler(QtMsgType type, const char *msg)
 }
 #endif
 
+class qthread: public QThread
+{
+public:
+  static void msleep(unsigned long secs)
+  {
+    QThread::msleep(secs);
+  }
+};
+
 int main(int argc, char *argv[])
 {
   qputenv("QT_ENABLE_REGEXP_JIT", "0");
@@ -302,9 +311,7 @@ int main(int argc, char *argv[])
   QApplication qapp(argc, argv);
   QSplashScreen splash(QPixmap("Icons/AxB/dooble.png"));
 
-  splash.setFixedSize(500, 500);
   splash.show();
-  splash.showMessage(QObject::tr("Preparing Dooble."));
   splash.repaint();
   qapp.processEvents();
 
@@ -439,7 +446,6 @@ int main(int argc, char *argv[])
   */
 
   dooble::s_errorLog = new derrorlog();
-  splash.showMessage(QObject::tr("Initializing the blocked hosts container."));
   qapp.processEvents();
   dmisc::initializeBlockedHosts();
 
@@ -447,7 +453,6 @@ int main(int argc, char *argv[])
   ** The initializeCrypt() method must be called as soon as possible.
   */
 
-  splash.showMessage(QObject::tr("Initializing the gcrypt library."));
   qapp.processEvents();
   dmisc::initializeCrypt();
 
@@ -648,7 +653,6 @@ int main(int argc, char *argv[])
   ** gets populated!
   */
 
-  splash.showMessage(QObject::tr("Initializing WebKit."));
   qapp.processEvents();
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::DeveloperExtrasEnabled, true);
@@ -842,7 +846,6 @@ int main(int argc, char *argv[])
   ** Initialize static members.
   */
 
-  splash.showMessage(QObject::tr("Initializing Dooble databases."));
   qapp.processEvents();
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   dooble::s_spoton = new dspoton();
@@ -1093,6 +1096,9 @@ int main(int argc, char *argv[])
   if(url.host().toLower().trimmed().startsWith("gopher"))
     url.setScheme("gopher");
 
+  qthread::msleep(3500);
+  splash.finish(0);
+
   if(argc > 1)
     {
       urls.append(url.toString(QUrl::StripTrailingSlash));
@@ -1121,8 +1127,6 @@ int main(int argc, char *argv[])
   ** So, it's not necessary to connect QApplication's
   ** lastWindowClosed() signal.
   */
-
-  splash.finish(0);
 
   int rc = qapp.exec();
 
