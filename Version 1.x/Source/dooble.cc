@@ -309,9 +309,11 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapp(argc, argv);
-  QSplashScreen splash(QPixmap("Icons/AxB/dooble.png"));
+  QSplashScreen splash(QPixmap("Icons/AxB/splash.png"));
 
   splash.show();
+  splash.showMessage
+    (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
   qapp.processEvents();
 
@@ -446,6 +448,9 @@ int main(int argc, char *argv[])
   */
 
   dooble::s_errorLog = new derrorlog();
+  splash.showMessage
+    (QObject::tr("Initializing blocked hosts."),
+     Qt::AlignHCenter | Qt::AlignBottom);
   qapp.processEvents();
   dmisc::initializeBlockedHosts();
 
@@ -454,6 +459,9 @@ int main(int argc, char *argv[])
   */
 
   qapp.processEvents();
+  splash.showMessage
+    (QObject::tr("Initializing the gcrypt library."),
+     Qt::AlignHCenter | Qt::AlignBottom);
   dmisc::initializeCrypt();
 
   /*
@@ -653,6 +661,8 @@ int main(int argc, char *argv[])
   ** gets populated!
   */
 
+  splash.showMessage
+    (QObject::tr("Initializing WebKit."), Qt::AlignHCenter | Qt::AlignBottom);
   qapp.processEvents();
   QWebSettings::globalSettings()->setAttribute
     (QWebSettings::DeveloperExtrasEnabled, true);
@@ -846,6 +856,9 @@ int main(int argc, char *argv[])
   ** Initialize static members.
   */
 
+  splash.showMessage
+    (QObject::tr("Initializing Dooble containers."),
+     Qt::AlignHCenter | Qt::AlignBottom);
   qapp.processEvents();
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   dooble::s_spoton = new dspoton();
@@ -1096,11 +1109,13 @@ int main(int argc, char *argv[])
   if(url.host().toLower().trimmed().startsWith("gopher"))
     url.setScheme("gopher");
 
+  dooble *d = 0;
+
   if(argc > 1)
     {
       urls.append(url.toString(QUrl::StripTrailingSlash));
       argumentsHash["urls"] = urls;
-      Q_UNUSED(new dooble(argumentsHash, 0));
+      d = new dooble(argumentsHash, 0);
     }
   else
     {
@@ -1115,8 +1130,8 @@ int main(int argc, char *argv[])
       webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	dooble::s_settings.value("settingsWindow/privateBrowsing",
 				 true).toBool();
-      Q_UNUSED(new dooble(url.toString(QUrl::StripTrailingSlash), 0, 0,
-			  webAttributes));
+      d = new dooble
+	(url.toString(QUrl::StripTrailingSlash), 0, 0, webAttributes);
     }
 
   /*
@@ -1126,7 +1141,7 @@ int main(int argc, char *argv[])
   */
 
   qthread::msleep(250);
-  splash.finish(0);
+  splash.finish(d);
 
   int rc = qapp.exec();
 
