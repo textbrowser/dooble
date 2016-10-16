@@ -1511,6 +1511,57 @@ void dsettings::slotClicked(QAbstractButton *button)
 
 	  if(!pass1.isEmpty())
 	    {
+	      if(ui.iterationCountSpinBox->value() > 25000)
+		{
+		  QMessageBox mb(this);
+
+#ifdef Q_OS_MAC
+		  mb.setAttribute(Qt::WA_MacMetalStyle, false);
+#endif
+		  mb.setIcon(QMessageBox::Question);
+		  mb.setWindowTitle(tr("Dooble Web Browser: Confirmation"));
+		  mb.setWindowModality(Qt::WindowModal);
+		  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+		  mb.setText(tr("You have selected an iteration count which "
+				"exceeds the default value of 25,000. "
+				"You may experience degradation during "
+				"the initialization of Dooble. The "
+				"key-generation process may also require "
+				"a significant amount of time to complete. "
+				"Continue?"));
+
+		  QSettings settings
+		    (dooble::s_settings.value("iconSet").toString(),
+		     QSettings::IniFormat);
+
+		  for(int i = 0; i < mb.buttons().size(); i++)
+		    if(mb.buttonRole(mb.buttons().at(i)) ==
+		       QMessageBox::AcceptRole ||
+		       mb.buttonRole(mb.buttons().at(i)) ==
+		       QMessageBox::ApplyRole ||
+		       mb.buttonRole(mb.buttons().at(i)) ==
+		       QMessageBox::YesRole)
+		      {
+			mb.buttons().at(i)->setIcon
+			  (QIcon(settings.value("okButtonIcon").toString()));
+			mb.buttons().at(i)->setIconSize(QSize(16, 16));
+		      }
+		    else
+		      {
+			mb.buttons().at(i)->setIcon
+			  (QIcon(settings.value("cancelButtonIcon").
+				 toString()));
+			mb.buttons().at(i)->setIconSize(QSize(16, 16));
+		      }
+
+		  mb.setWindowIcon
+		    (QIcon(settings.value("settingsWindow/windowIcon").
+			   toString()));
+
+		  if(mb.exec() != QMessageBox::Yes)
+		    return;
+		}
+
 	      if(ui.changePassphrasePushButton->isEnabled())
 		shouldReencode = true;
 
