@@ -365,12 +365,13 @@ int main(int argc, char *argv[])
 	}
       else if(!urls.isEmpty())
 	{
+	  splash.finish(0);
+
 	  dprintfromcommandprompt::s_count = urls.size();
 
 	  for(int i = 0; i < urls.size(); i++)
 	    Q_UNUSED(new dprintfromcommandprompt(urls.at(i), i + 1));
 
-	  splash.finish(0);
 	  return qapp.exec();
 	}
     }
