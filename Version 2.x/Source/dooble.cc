@@ -49,6 +49,7 @@
 #include <QPrinter>
 #include <QProcess>
 #include <QSettings>
+#include <QSplashScreen>
 #include <QSplitter>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -177,6 +178,15 @@ static void qt_message_handler(QtMsgType type,
   dmisc::logError(msg);
 }
 
+class qthread: public QThread
+{
+public:
+  static void msleep(unsigned long secs)
+  {
+    QThread::msleep(secs);
+  }
+};
+
 int main(int argc, char *argv[])
 {
   qputenv("QT_ENABLE_REGEXP_JIT", "0");
@@ -256,6 +266,13 @@ int main(int argc, char *argv[])
   qInstallMessageHandler(qt_message_handler);
 
   QApplication qapp(argc, argv);
+  QSplashScreen splash(QPixmap("Icons/AxB/splash.png"));
+
+  splash.show();
+  splash.showMessage
+    (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapp.processEvents();
 
   if(argc > 1)
     {
@@ -297,6 +314,7 @@ int main(int argc, char *argv[])
       if(rc > 0)
 	{
 	  fprintf(stdout, "%s\n", usage.toStdString().data());
+	  splash.finish(0);
 	  return rc;
 	}
       else if(!urls.isEmpty())
@@ -306,6 +324,7 @@ int main(int argc, char *argv[])
 	  for(int i = 0; i < urls.size(); i++)
 	    Q_UNUSED(new dprintfromcommandprompt(urls.at(i), i + 1));
 
+	  splash.finish(0);
 	  return qapp.exec();
 	}
     }
@@ -378,12 +397,21 @@ int main(int argc, char *argv[])
   */
 
   dooble::s_errorLog = new derrorlog();
+  splash.showMessage
+    (QObject::tr("Initializing blocked hosts."),
+     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapp.processEvents();
   dmisc::initializeBlockedHosts();
 
   /*
   ** The initializeCrypt() method must be called as soon as possible.
   */
 
+  splash.showMessage
+    (QObject::tr("Initializing the gcrypt library."),
+     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
   dmisc::initializeCrypt();
 
   /*
@@ -441,6 +469,7 @@ int main(int argc, char *argv[])
       if(rc > 0)
 	{
 	  fprintf(stdout, "%s\n", usage.toStdString().data());
+	  splash.finish(0);
 	  return rc;
 	}
     }
@@ -534,6 +563,10 @@ int main(int argc, char *argv[])
   ** gets populated!
   */
 
+  splash.showMessage(QObject::tr("Initializing WebEngine."),
+		     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapp.processEvents();
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled,
      dooble::s_settings.value("settingsWindow/javascriptEnabled",
@@ -706,6 +739,11 @@ int main(int argc, char *argv[])
   ** Initialize static members.
   */
 
+  splash.showMessage
+    (QObject::tr("Initializing Dooble containers."),
+     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapp.processEvents();
 #ifdef DOOBLE_LINKED_WITH_LIBSPOTON
   dooble::s_spoton = new dspoton();
 #endif
@@ -919,6 +957,8 @@ int main(int argc, char *argv[])
 		  toString());
 
   url = QUrl::fromUserInput(urlText);
+  qthread::msleep(250);
+  splash.finish(0);
 
   if(argc > 1)
     {
