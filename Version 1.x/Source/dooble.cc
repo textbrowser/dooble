@@ -1114,7 +1114,7 @@ int main(int argc, char *argv[])
     url.setScheme("gopher");
 
   qthread::msleep(500);
-  splash.finish(0); // Dooble may have its own even loop via a dialog.
+  splash.finish(0); // Dooble may have its own event loop via a dialog.
 
   if(argc > 1)
     {
