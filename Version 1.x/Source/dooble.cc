@@ -459,7 +459,6 @@ int main(int argc, char *argv[])
   ** The initializeCrypt() method must be called as soon as possible.
   */
 
-  qapp.processEvents();
   splash.showMessage
     (QObject::tr("Initializing the gcrypt library."),
      Qt::AlignHCenter | Qt::AlignBottom);
@@ -1114,13 +1113,14 @@ int main(int argc, char *argv[])
   if(url.host().toLower().trimmed().startsWith("gopher"))
     url.setScheme("gopher");
 
-  dooble *d = 0;
+  qthread::msleep(500);
+  splash.finish(0); // Dooble may have its own even loop via a dialog.
 
   if(argc > 1)
     {
       urls.append(url.toString(QUrl::StripTrailingSlash));
       argumentsHash["urls"] = urls;
-      d = new dooble(argumentsHash, 0);
+      Q_UNUSED(new dooble(argumentsHash, 0));
     }
   else
     {
@@ -1135,8 +1135,8 @@ int main(int argc, char *argv[])
       webAttributes[QWebSettings::PrivateBrowsingEnabled] =
 	dooble::s_settings.value("settingsWindow/privateBrowsing",
 				 true).toBool();
-      d = new dooble
-	(url.toString(QUrl::StripTrailingSlash), 0, 0, webAttributes);
+      Q_UNUSED(new dooble(url.toString(QUrl::StripTrailingSlash), 0, 0,
+			  webAttributes));
     }
 
   /*
@@ -1144,9 +1144,6 @@ int main(int argc, char *argv[])
   ** So, it's not necessary to connect QApplication's
   ** lastWindowClosed() signal.
   */
-
-  qthread::msleep(250);
-  splash.finish(d);
 
   int rc = qapp.exec();
 
