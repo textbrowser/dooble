@@ -3659,12 +3659,12 @@
         <translation>Etiqueta de texto</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="41"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="44"/>
         <source>&amp;Username</source>
         <translation>&amp;Utilizador</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="54"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="57"/>
         <source>&amp;Password</source>
         <translation>&amp;Palavra-passe</translation>
     </message>

@@ -3641,12 +3641,12 @@ p, li { white-space: pre-wrap; }
         <translation>Textový štítek</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="41"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="44"/>
         <source>&amp;Username</source>
         <translation>&amp;Uživatelské jméno</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="54"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="57"/>
         <source>&amp;Password</source>
         <translation>&amp;Heslo</translation>
     </message>

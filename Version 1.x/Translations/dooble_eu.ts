@@ -3515,12 +3515,12 @@
         <translation>Idazki-Etiketa</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="41"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="44"/>
         <source>&amp;Username</source>
         <translation>&amp;Erabiltzaile-izena</translation>
     </message>
     <message>
-        <location filename="../UI/dpasswordPrompt.ui" line="54"/>
+        <location filename="../UI/dpasswordPrompt.ui" line="57"/>
         <source>&amp;Password</source>
         <translation>&amp;Sar-hitza</translation>
     </message>
