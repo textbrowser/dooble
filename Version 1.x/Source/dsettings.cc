@@ -1503,36 +1503,10 @@ void dsettings::exec(dooble *parent)
   else
     ui.downloadProxySystemRadio->click();
 
-  int l_width = 0;
-  int l_height = 0;
-
-  if(m_parentDooble)
-    {
-      l_width = m_parentDooble->width() - 0.15 * m_parentDooble->width();
-      l_height = m_parentDooble->height() - 0.05 * m_parentDooble->height();
-    }
-  else
-    {
-      l_width = sizeHint().width();
-      l_height = sizeHint().height();
-    }
-
   foreach(QLineEdit *lineEdit, findChildren<QLineEdit *> ())
     lineEdit->setCursorPosition(0);
 
-  resize(l_width, l_height);
-
-  if(m_parentDooble)
-    {
-      if(height() == m_parentDooble->height() &&
-	 width() == m_parentDooble->width())
-	setGeometry(m_parentDooble->geometry());
-      else
-	dmisc::centerChildWithParent(this, m_parentDooble);
-    }
-  else
-    move(100, 100);
-
+  dmisc::centerChildWithParent(this, m_parentDooble);
   showNormal();
   raise();
 
@@ -2660,7 +2634,7 @@ void dsettings::slotSetIcons(void)
   ui.safeButton->setIcon
     (QIcon(settings.value("settingsWindow/safeButtonIcon").toString()));
 
-  int h = 32; // Based on the icon size. See UI/settings.ui.
+  int h = 32; // Based on the icon size. See UI/dsettings.ui.
   int w = 0;
 
   foreach(QToolButton *button,

@@ -1369,51 +1369,7 @@ void dsettings::exec(dooble *parent)
   else
     ui.downloadProxySystemRadio->click();
 
-  int l_width = 0;
-  int l_height = 0;
-
-  if(m_parentDooble)
-    {
-      l_width = static_cast<int> (m_parentDooble->width() -
-				  0.15 * m_parentDooble->width());
-      l_height = static_cast<int> (m_parentDooble->height() -
-				   0.05 * m_parentDooble->height());
-    }
-  else
-    {
-      l_width = sizeHint().width();
-      l_height = sizeHint().height();
-    }
-
-  resize(l_width, l_height);
-
-  if(m_parentDooble)
-    {
-      if(height() == m_parentDooble->height() &&
-	 width() == m_parentDooble->width())
-	setGeometry(m_parentDooble->geometry());
-      else
-	{
-	  QPoint p(m_parentDooble->pos());
-	  int X = 0;
-	  int Y = 0;
-
-	  if(m_parentDooble->width() >= width())
-	    X = p.x() + (m_parentDooble->width() - width()) / 2;
-	  else
-	    X = p.x() - (width() - m_parentDooble->width()) / 2;
-
-	  if(m_parentDooble && m_parentDooble->height() >= height())
-	    Y = p.y() + (m_parentDooble->height() - height()) / 2;
-	  else
-	    Y = p.y() - (height() - m_parentDooble->height()) / 2;
-
-	  move(X, Y);
-	}
-    }
-  else
-    move(100, 100);
-
+  dmisc::centerChildWindows(this, m_parentDooble);
   showNormal();
   raise();
 
@@ -2496,7 +2452,7 @@ void dsettings::slotSetIcons(void)
   ui.safeButton->setIcon
     (QIcon(settings.value("settingsWindow/safeButtonIcon").toString()));
 
-  int h = 32; // Based on the icon size. See UI/settings.ui.
+  int h = 32; // Based on the icon size. See UI/dsettings.ui.
   int w = 0;
 
   foreach(QToolButton *button,
