@@ -4632,7 +4632,7 @@ void dooble::slotLinkHovered(const QString &link, const QString &title,
   sb.statusLabel->setStyleSheet
     (sb.statusLabel->property("stylesheet").toString());
 
-  if(link.isEmpty())
+  if(link.trimmed().isEmpty())
     sb.statusLabel->clear();
   else
     {
