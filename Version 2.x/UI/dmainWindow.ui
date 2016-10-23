@@ -481,7 +481,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -511,6 +511,9 @@
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="historyMenu">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>Hi&amp;story</string>
     </property>
@@ -522,6 +525,9 @@
     <addaction name="actionAbout_Dooble"/>
    </widget>
    <widget class="QMenu" name="menu_Windows">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>&amp;Windows</string>
     </property>
@@ -564,6 +570,9 @@
     <addaction name="actionFind"/>
    </widget>
    <widget class="QMenu" name="viewMenu">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>&amp;View</string>
     </property>
@@ -610,6 +619,9 @@
     <addaction name="actionShow_Hidden_Files"/>
    </widget>
    <widget class="QMenu" name="menu_Tabs">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>&amp;Tabs</string>
     </property>
@@ -629,12 +641,21 @@
      <string>&amp;Bookmarks</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu_Tools">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+   </widget>
    <addaction name="menu_File"/>
    <addaction name="editMenu"/>
    <addaction name="bookmarksMenu"/>
    <addaction name="historyMenu"/>
    <addaction name="menu_Locations"/>
    <addaction name="menu_Tabs"/>
+   <addaction name="menu_Tools"/>
    <addaction name="viewMenu"/>
    <addaction name="menu_Windows"/>
    <addaction name="menu_About"/>
