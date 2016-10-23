@@ -1617,25 +1617,81 @@ void dmisc::centerChildWithParent(QWidget *child, QWidget *parent)
   if(!child || !parent)
     return;
 
-  if(child->height() == parent->height() &&
-     child->width() == parent->width())
-    child->setGeometry(parent->geometry());
+#ifdef Q_WS_X11
+  if(X11->isSupportedByWM(ATOM(_NET_WM_FULL_PLACEMENT)))
+    return;
+#endif
+
+#ifdef Q_OS_SYMBIAN
+  if(symbianAdjustedPosition())
+    return;
+#endif
+
+  QPoint p(0, 0);
+  int extraw = 0, extrah = 0, scrn = 0;
+
+  if(parent)
+    parent = parent->window();
+
+  QRect desk;
+
+  if(parent)
+    scrn = QApplication::desktop()->screenNumber(parent);
+  else if(QApplication::desktop()->isVirtualDesktop())
+    scrn = QApplication::desktop()->screenNumber(QCursor::pos());
   else
+    scrn = QApplication::desktop()->screenNumber(child);
+
+  desk = QApplication::desktop()->availableGeometry(scrn);
+
+  QWidgetList list = QApplication::topLevelWidgets();
+
+  for(int i = 0; (extraw == 0 || extrah == 0) && i < list.size(); ++i)
     {
-      QPoint p(parent->pos());
+      QWidget *current = list.at(i);
 
-      if(child->width() >= parent->width())
-	p.setX(p.x() - (child->width() / 2 - parent->width() / 2));
-      else
-	p.setX(p.x() + (parent->width() / 2 - child->width() / 2));
+      if(current->isVisible())
+	{
+	  int frameh = current->geometry().y() - current->y();
+	  int framew = current->geometry().x() - current->x();
 
-      if(child->height() <= parent->height())
-	p.setY(p.y() - (child->height() / 2 - parent->height() / 2));
-      else
-	p.setY(p.y() + (parent->height() / 2 - child->height() / 2));
-
-      child->move(p);
+	  extraw = qMax(extraw, framew);
+	  extrah = qMax(extrah, frameh);
+        }
     }
+
+  if(extraw == 0 || extrah == 0 || extraw >= 10 || extrah >= 40)
+    {
+      extrah = 40;
+      extraw = 10;
+    }
+
+  if(parent)
+    {
+      QPoint pp = parent->mapToGlobal(QPoint(0,0));
+
+      p = QPoint(pp.x() + parent->width() / 2,
+		 pp.y() + parent->height() / 2);
+    }
+  else
+    p = QPoint(desk.x() + desk.width() / 2, desk.y() + desk.height() / 2);
+
+  p = QPoint(p.x() - child->width() / 2 - extraw,
+	     p.y() - child->height() / 2 - extrah);
+
+  if(p.x() + extraw + child->width() > desk.x() + desk.width())
+    p.setX(desk.x() + desk.width() - child->width() - extraw);
+
+  if(p.x() < desk.x())
+    p.setX(desk.x());
+
+  if(p.y() + extrah + child->height() > desk.y() + desk.height())
+    p.setY(desk.y() + desk.height() - child->height() - extrah);
+
+  if(p.y() < desk.y())
+    p.setY(desk.y());
+
+  child->move(p);
 }
 
 void dmisc::createPreferencesDatabase(void)

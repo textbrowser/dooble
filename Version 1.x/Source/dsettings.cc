@@ -1528,23 +1528,7 @@ void dsettings::exec(dooble *parent)
 	 width() == m_parentDooble->width())
 	setGeometry(m_parentDooble->geometry());
       else
-	{
-	  QPoint p(m_parentDooble->pos());
-	  int X = 0;
-	  int Y = 0;
-
-	  if(m_parentDooble->width() >= width())
-	    X = p.x() + (m_parentDooble->width() - width()) / 2;
-	  else
-	    X = p.x() - (width() - m_parentDooble->width()) / 2;
-
-	  if(m_parentDooble && m_parentDooble->height() >= height())
-	    Y = p.y() + (m_parentDooble->height() - height()) / 2;
-	  else
-	    Y = p.y() - (height() - m_parentDooble->height()) / 2;
-
-	  move(X, Y);
-	}
+	dmisc::centerChildWithParent(this, m_parentDooble);
     }
   else
     move(100, 100);
