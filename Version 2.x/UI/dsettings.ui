@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>99</width>
+         <width>107</width>
          <height>582</height>
         </rect>
        </property>
@@ -380,8 +380,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>743</width>
-               <height>631</height>
+               <width>549</width>
+               <height>468</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1292,8 +1292,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>737</width>
-               <height>550</height>
+               <width>289</width>
+               <height>446</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
@@ -1608,8 +1608,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>743</width>
-               <height>865</height>
+               <width>578</width>
+               <height>788</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayoutt">
@@ -2600,8 +2600,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>743</width>
-               <height>746</height>
+               <width>486</width>
+               <height>795</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -3162,8 +3162,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>505</width>
-               <height>1385</height>
+               <width>530</width>
+               <height>1231</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -4451,6 +4451,9 @@
            <widget class="QCheckBox" name="centerChildWindows">
             <property name="text">
              <string>Center child windows.</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

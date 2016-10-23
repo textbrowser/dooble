@@ -649,7 +649,7 @@ void dsettings::exec(dooble *parent)
     (dooble::s_settings.value("settingsWindow/doNotTrack", false).toBool());
   ui.centerChildWindows->setChecked
     (dooble::s_settings.value("settingsWindow/centerChildWindows",
-			      false).toBool());
+			      true).toBool());
   ui.useNativeFileDialogs->setChecked
     (dooble::s_settings.value("settingsWindow/useNativeFileDialogs",
 			      false).toBool());
