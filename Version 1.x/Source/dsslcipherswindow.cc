@@ -296,7 +296,7 @@ void dsslcipherswindow::slotShow(void)
 
   if(action)
     if(dooble::s_settings.value("settingsWindow/centerChildWindows",
-				false).toBool())
+				true).toBool())
       dmisc::centerChildWithParent(this, action->parentWidget());
 
   showNormal();
