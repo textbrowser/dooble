@@ -568,6 +568,10 @@ int main(int argc, char *argv[])
 		     Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
   qapp.processEvents();
+#if defined(QWEBENGINEINSPECTOR)
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::DeveloperExtrasEnabled, true);
+#endif
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled,
      dooble::s_settings.value("settingsWindow/javascriptEnabled",
@@ -1068,12 +1072,15 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
   ui.menuToolButton->setMenu(new QMenu(this));
 #endif
   ui.searchLineEdit->setVisible(ui.actionSearch_Widget->isChecked());
+#if !defined(QWEBENGINEINSPECTOR)
   ui.action_Web_Inspector->setEnabled(false);
   ui.action_Web_Inspector->setToolTip(tr("WebEngine does not yet "
 					 "support Web inspectors."));
+#endif
   ui.actionShow_Hidden_Files->setEnabled(false);
   ui.actionShow_Hidden_Files->setToolTip(tr("WebEngine supports the browsing "
 					    "of directories."));
+  ui.menu_Tools->addActions(ui.menu_Windows->actions());
 
   if(dooble::s_spoton)
     ui.action_Clear_Spot_On_Shared_Links->setEnabled
