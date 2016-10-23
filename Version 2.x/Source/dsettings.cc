@@ -1369,7 +1369,7 @@ void dsettings::exec(dooble *parent)
   else
     ui.downloadProxySystemRadio->click();
 
-  dmisc::centerChildWindows(this, m_parentDooble);
+  dmisc::centerChildWithParent(this, m_parentDooble);
   showNormal();
   raise();
 
