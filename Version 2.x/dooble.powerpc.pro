@@ -2,47 +2,45 @@ cache()
 
 libspoton.commands = $(MAKE) -C libSpotOn library
 libspoton.depends =
-libspoton.target = libspoton.dylib
+libspoton.target = libspoton.so
 
 purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
                  Source/*~ *~
 
-CONFIG		+= app_bundle qt release warn_on
+CONFIG		+= qt release warn_on
 LANGUAGE	= C++
 QT		+= concurrent gui network printsupport sql \
-		   webenginewidgets widgets xml
+	           webenginewidgets widgets xml
 TEMPLATE	= app
 
 # The function gcry_kdf_derive() is available in version
 # 1.5.0 of the gcrypt library.
 
 DEFINES         += DOOBLE_LINKED_WITH_LIBSPOTON \
-                   DOOBLE_MINIMUM_GCRYPT_VERSION=0x010500 \
+		   DOOBLE_MINIMUM_GCRYPT_VERSION=0x010500 \
 		   DOOBLE_USE_PTHREADS
+
+# QMAKE_DEL_FILE is set in mkspecs/common/linux.conf.
+# Is it safe to override it?
 
 # Unfortunately, the clean target assumes too much knowledge
 # about the internals of libspoton.
 
-QMAKE_CLEAN     += Dooble libSpotOn/*.dylib libSpotOn/*.o libSpotOn/test
-QMAKE_CXX	= clang++
+QMAKE_CLEAN     += Dooble libSpotOn/*.o libSpotOn/*.so libSpotOn/test
 QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv \
-			  -mtune=generic -std=c++11 -Os \
+QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv -mabi=altivec \
+			  -mpowerpc -mtune=powerpc -pie -Os \
 			  -Wall -Wcast-align -Wcast-qual \
-                          -Werror -Wextra \
+			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5
-QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
+QMAKE_DISTCLEAN += -r temp
 QMAKE_EXTRA_TARGETS = libspoton purge
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib
 
-ICON		= Icons/AxB/dooble.icns
-INCLUDEPATH	+= . Include Include.osx64 /usr/local/include
-LIBS		+= -L/usr/local/lib -LlibSpotOn -lgcrypt -lgpg-error \
-		   -lspoton -lstdc++.6 \
-                   -L/usr/local/opt/openssl/lib -lcrypto -lssl \
-		   -framework Cocoa
-PRE_TARGETDEPS = libspoton.dylib
+INCLUDEPATH	+= . Include
+LIBS     	+= -LlibSpotOn -lgcrypt -lgpg-error -lspoton
+PRE_TARGETDEPS = libspoton.so
 
 MOC_DIR = temp/moc
 OBJECTS_DIR = temp/obj
@@ -50,6 +48,7 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI/dapplicationPropertiesWindow.ui \
+		  UI/dblockedhosts.ui \
 		  UI/dbookmarksPopup.ui \
 		  UI/dbookmarksWindow.ui \
 		  UI/dclearContainersWindow.ui \
@@ -65,7 +64,7 @@ FORMS           = UI/dapplicationPropertiesWindow.ui \
 		  UI/dhistoryWindow.ui \
 		  UI/dmainWindow.ui \
                   UI/dpageSourceWindow.ui \
-                  UI/dpassphrasePrompt.ui \
+		  UI/dpassphrasePrompt.ui \
 		  UI/dpasswordPrompt.ui \
 		  UI/dreinstateWidget.ui \
 		  UI/dsettings.ui \
@@ -89,7 +88,9 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dfilemanager.h \
 		  Include/dfilesystemmodel.h \
 		  Include/dftp.h \
+		  Include/dftpbrowser.h \
 		  Include/dgenericsearchwidget.h \
+  		  Include/dgopher.h \
 		  Include/dhistory.h \
 		  Include/dhistorymodel.h \
 		  Include/dhistorysidebar.h \
@@ -97,12 +98,12 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dnetworkaccessmanager.h \
 		  Include/dnetworkcache.h \
 		  Include/dooble.h \
-                  Include/dpagesourcewindow.h \
+		  Include/dpagesourcewindow.h \
 		  Include/dprintfromcommandprompt.h \
 		  Include/dreinstatedooble.h \
-		  Include/dsearchwidget.h \
+                  Include/dsearchwidget.h \
                   Include/dsettings.h \
-                  Include/dsettingshomelinewidget.h \
+		  Include/dsettingshomelinewidget.h \
 		  Include/dspoton.h \
 		  Include/dtabwidget.h \
 		  Include/durlwidget.h \
@@ -127,7 +128,9 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dfilemanager.cc \
 		  Source/dfilesystemmodel.cc \
 		  Source/dftp.cc \
+		  Source/dftpbrowser.cc \
 		  Source/dgenericsearchwidget.cc \
+		  Source/dgopher.cc \
 		  Source/dhistory.cc \
 		  Source/dhistorymodel.cc \
 		  Source/dhistorysidebar.cc \
@@ -135,20 +138,17 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dnetworkaccessmanager.cc \
 		  Source/dnetworkcache.cc \
 		  Source/dooble.cc \
-                  Source/dpagesourcewindow.cc \
+		  Source/dpagesourcewindow.cc \
 		  Source/dreinstatedooble.cc \
-		  Source/dsearchwidget.cc \
+                  Source/dsearchwidget.cc \
                   Source/dsettings.cc \
-                  Source/dsettingshomelinewidget.cc \
+		  Source/dsettingshomelinewidget.cc \
 		  Source/dspoton.cc \
 		  Source/dtabwidget.cc \
 		  Source/durlwidget.cc \
 		  Source/dview.cc \
                   Source/dwebpage.cc \
 		  Source/dwebview.cc
-
-OBJECTIVE_HEADERS += Include/Cocoainitializer.h
-OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 
 RESOURCES       += CSS/css.qrc \
 		   Tab/Default/htmls.qrc
@@ -161,7 +161,7 @@ TRANSLATIONS    = Translations/dooble_en.ts \
                   Translations/dooble_am.ts \
                   Translations/dooble_as.ts \
                   Translations/dooble_az.ts \
-                  Translations/dooble_ast.ts \
+		  Translations/dooble_ast.ts \
                   Translations/dooble_be.ts \
                   Translations/dooble_bd_bn.ts \
                   Translations/dooble_bg.ts \
@@ -192,7 +192,7 @@ TRANSLATIONS    = Translations/dooble_en.ts \
                   Translations/dooble_kk.ts \
                   Translations/dooble_kn.ts \
                   Translations/dooble_ko.ts \
-                  Translations/dooble_ky.ts \
+		  Translations/dooble_ky.ts \
                   Translations/dooble_ku.ts \
                   Translations/dooble_lt.ts \
                   Translations/dooble_lk.ts \
@@ -234,37 +234,40 @@ TRANSLATIONS    = Translations/dooble_en.ts \
 PROJECTNAME	= Dooble
 TARGET		= Dooble
 
-dooble.path		= /Applications/Dooble_Qt5.d/Dooble.app
-dooble.files		= Dooble.app/*
-icons.path		= /Applications/Dooble_Qt5.d
+dooble.path		= /usr/local/dooble
+dooble.files		= Dooble
+dooble_sh.path		= /usr/local/dooble
+dooble_sh.files		= dooble.sh
+desktop.path            = /usr/share/applications
+desktop.files           = dooble.desktop
+desktopicon.path        = /usr/share/icons/hicolor/48x48
+desktopicon.files       = Icons/48x48/dooble.png
+icons.path		= /usr/local/dooble
 icons.files		= Icons
-images.path		= /Applications/Dooble_Qt5.d
+images.path		= /usr/local/dooble
 images.files		= Images
-libspoton_install.path  = .
-libspoton_install.extra = cp ./libSpotOn/libspoton.dylib ./Dooble.app/Contents/Frameworks/libspoton.dylib && install_name_tool -change /usr/local/lib/libgcrypt.20.dylib @loader_path/libgcrypt.20.dylib ./Dooble.app/Contents/Frameworks/libspoton.dylib && install_name_tool -change ./libSpotOn/libspoton.dylib @executable_path/../Frameworks/libspoton.dylib ./Dooble.app/Contents/MacOS/Dooble
-lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.osx.qt5.pro
+libspoton_install.path	= /usr/local/dooble/Lib
+libspoton_install.files = libSpotOn/libspoton.so
+lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.powerpc.pro
 lrelease.path           = .
-lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.osx.qt5.pro
+lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.powerpc.pro
 lupdate.path            = .
-macdeployqt.path        = ./Dooble.app
-macdeployqt.extra       = $$[QT_INSTALL_BINS]/macdeployqt ./Dooble.app -verbose=0
-preinstall.path         = /Applications/Dooble_Qt5.d
-preinstall.extra        = rm -rf /Applications/Dooble_Qt5.d/Dooble.app/*
-postinstall.path	= /Applications/Dooble_Qt5.d
-postinstall.extra	= find /Applications/Dooble_Qt5.d -name .svn -exec rm -rf {} \\; 2>/dev/null; echo
-supportfiles.path       = /Applications/Dooble_Qt5.d
-supportfiles.files      = dooble-blocked-hosts.txt
-translations.path 	= /Applications/Dooble_Qt5.d/Translations
+postinstall.path	= /usr/local/dooble
+postinstall.extra	= find /usr/local/dooble -name .svn -exec rm -rf {} \\; 2>/dev/null; echo
+tab.path		= /usr/local/dooble
+tab.files		= Tab
+translations.path 	= /usr/local/dooble/Translations
 translations.files	= Translations/*.qm
 
-INSTALLS	= macdeployqt \
-                  preinstall \
-                  libspoton_install \
+INSTALLS	= dooble_sh \
                   icons \
                   images \
-                  lupdate \
-                  lrelease \
-                  supportfiles \
+		  libspoton_install \
+		  lupdate \
+		  lrelease \
+                  tab \
                   translations \
                   dooble \
+                  desktop \
+                  desktopicon \
                   postinstall

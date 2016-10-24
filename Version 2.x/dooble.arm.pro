@@ -9,8 +9,8 @@ purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
 
 CONFIG		+= qt release warn_on
 LANGUAGE	= C++
-QT		+= concurrent gui network printsupport sql \
-	           webenginewidgets widgets xml
+QT		+= concurrent network printsupport sql \
+	           webkit webkitwidgets widgets xml
 TEMPLATE	= app
 
 # The function gcry_kdf_derive() is available in version
@@ -29,8 +29,8 @@ DEFINES         += DOOBLE_LINKED_WITH_LIBSPOTON \
 QMAKE_CLEAN     += Dooble libSpotOn/*.o libSpotOn/*.so libSpotOn/test
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv \
-			  -mtune=generic -pie -std=c++11 -Os \
-			  -Wall -Wcast-align -Wcast-qual \
+			  -mtune=native -pie -Os \
+			  -Wall -Wcast-qual \
 			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5
@@ -48,6 +48,7 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI/dapplicationPropertiesWindow.ui \
+		  UI/dblockedhosts.ui \
 		  UI/dbookmarksPopup.ui \
 		  UI/dbookmarksWindow.ui \
 		  UI/dclearContainersWindow.ui \
@@ -87,7 +88,9 @@ HEADERS		= Include/dbookmarkspopup.h \
 		  Include/dfilemanager.h \
 		  Include/dfilesystemmodel.h \
 		  Include/dftp.h \
+		  Include/dftpbrowser.h \
 		  Include/dgenericsearchwidget.h \
+		  Include/dgopher.h \
 		  Include/dhistory.h \
 		  Include/dhistorymodel.h \
 		  Include/dhistorysidebar.h \
@@ -125,7 +128,9 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dfilemanager.cc \
 		  Source/dfilesystemmodel.cc \
 		  Source/dftp.cc \
+		  Source/dftpbrowser.cc \
 		  Source/dgenericsearchwidget.cc \
+		  Source/dgopher.cc \
 		  Source/dhistory.cc \
 		  Source/dhistorymodel.cc \
 		  Source/dhistorysidebar.cc \
@@ -243,9 +248,9 @@ images.path		= /usr/local/dooble
 images.files		= Images
 libspoton_install.path	= /usr/local/dooble/Lib
 libspoton_install.files = libSpotOn/libspoton.so
-lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.qt5.pro
+lrelease.extra          = $$[QT_INSTALL_BINS]/lrelease dooble.arm.pro
 lrelease.path           = .
-lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.qt5.pro
+lupdate.extra           = $$[QT_INSTALL_BINS]/lupdate dooble.arm.pro
 lupdate.path            = .
 postinstall.path	= /usr/local/dooble
 postinstall.extra	= find /usr/local/dooble -name .svn -exec rm -rf {} \\; 2>/dev/null; echo

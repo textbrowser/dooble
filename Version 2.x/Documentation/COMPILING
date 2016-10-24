@@ -11,30 +11,30 @@ gmake distclean or make distclean or mingw32-make distclean
 
 ARM
 
-qmake or qmake-qt5 -o Makefile dooble.arm.qt5.pro
+qmake or qmake-qt5 -o Makefile dooble.arm.pro
 make
 
 FreeBSD
 
-qmake or qmake-qt5 -o Makefile dooble.freebsd.qt5.pro
+qmake or qmake-qt5 -o Makefile dooble.freebsd.pro
 gmake
 
 Linux
 
-qmake or qmake-qt5 -o Makefile dooble.qt5.pro
+qmake or qmake-qt5 -o Makefile dooble.pro
 make
 
 OS X
 
-qmake -o Makefile dooble.osx.qt5.pro
+qmake -o Makefile dooble.osx.pro
 make
 
 PowerPC
 
-qmake -o Makefile dooble.powerpc.qt5.pro
+qmake -o Makefile dooble.powerpc.pro
 make
 
 Windows
 
-qmake -o Makefile dooble.win.qt5.pro
+qmake -o Makefile dooble.win.pro
 make or mingw32-make
