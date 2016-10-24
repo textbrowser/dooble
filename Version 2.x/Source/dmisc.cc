@@ -1602,8 +1602,9 @@ void dmisc::centerChildWithParent(QWidget *child, QWidget *parent)
 #endif
 
 #ifdef Q_OS_SYMBIAN
-  if(symbianAdjustedPosition())
-    return;
+  /*
+  ** Perhaps implement symbianAdjustedPosition().
+  */
 #endif
 
   QPoint p(0, 0);

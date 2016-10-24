@@ -3320,11 +3320,7 @@ void dooble::slotTabSelected(const int index)
       if(ui.bookmarksMenu->actions().size() > 0)
 	ui.bookmarksMenu->actions().at(0)->setEnabled(isBookmarkWorthy);
 
-      QFontMetrics fm(sb.statusLabel->font());
-
-      sb.statusLabel->setText
-	(fm.elidedText(p->statusMessage().mid(0, 100).trimmed(), Qt::ElideRight,
-		       qAbs(width() - 100)));
+      prepareStatusBarLabel(p->statusMessage());
       statusBar()->setVisible(ui.actionStatusbar->isChecked());
       prepareWidgetsBasedOnView(p);
 
@@ -3564,12 +3560,7 @@ void dooble::slotLoadProgress(int progress)
       sb.progressBar->setValue(qBound(sb.progressBar->minimum(),
 				      progress,
 				      sb.progressBar->maximum()));
-
-      QFontMetrics fm(sb.statusLabel->font());
-
-      sb.statusLabel->setText
-	(fm.elidedText(p->statusMessage().mid(0, 100).trimmed(), Qt::ElideRight,
-		       qAbs(width() - 100)));
+      prepareStatusBarLabel(p->statusMessage());
     }
   else if(p)
     ui.tabWidget->animateIndex
@@ -3612,13 +3603,7 @@ void dooble::slotLoadFinished(bool ok)
 	  ui.locationLineEdit->setBookmarkColor(p->isBookmarked());
 	  ui.locationLineEdit->setSpotOnButtonEnabled(p->isLoaded());
 	  ui.locationLineEdit->setSpotOnColor(p->isLoaded());
-
-	  QFontMetrics fm(sb.statusLabel->font());
-
-	  sb.statusLabel->setText
-	    (fm.elidedText(p->statusMessage().mid(0, 100).
-			   trimmed(), Qt::ElideRight,
-			   qAbs(width() - 100)));
+	  prepareStatusBarLabel(p->statusMessage());
 	}
     }
 
@@ -3660,13 +3645,7 @@ void dooble::slotLoadFinished(bool ok)
 	  ui.locationLineEdit->setSecureColor(p->hasSecureConnection());
 	  ui.locationLineEdit->setSpotOnButtonEnabled(p->isLoaded());
 	  ui.locationLineEdit->setSpotOnColor(p->isLoaded());
-
-	  QFontMetrics fm(sb.statusLabel->font());
-
-	  sb.statusLabel->setText
-	    (fm.elidedText(p->statusMessage().mid(0, 100).
-			   trimmed(), Qt::ElideRight,
-			   qAbs(width() - 100)));
+	  prepareStatusBarLabel(p->statusMessage());
 	}
 
       int index = ui.locationLineEdit->findText
@@ -4647,11 +4626,7 @@ void dooble::slotLinkHovered(const QString &link, const QString &title,
 	    sb.statusLabel->setStyleSheet("QLabel {color: red;}");
 	}
 
-      QFontMetrics fm(sb.statusLabel->font());
-
-      sb.statusLabel->setText
-	(fm.elidedText(link.mid(0, 100).trimmed(),
-		       Qt::ElideRight, qAbs(width() - 100)));
+      prepareStatusBarLabel(link);
     }
 }
 
@@ -6760,11 +6735,7 @@ void dooble::slotStatusBarMessage(const QString &text)
 
   if(d && p && d == p->page())
     {
-      QFontMetrics fm(sb.statusLabel->font());
-
-      sb.statusLabel->setText
-	(fm.elidedText(text.mid(0, 100).trimmed(),
-		       Qt::ElideRight, qAbs(width() - 100)));
+      prepareStatusBarLabel(text);
       QTimer::singleShot(1000, sb.statusLabel, SLOT(clear(void)));
     }
 }
@@ -8401,4 +8372,15 @@ void dooble::slotCopyStyleSheet(void)
     return;
 
   clipboard->setText(widget->styleSheet());
+}
+
+void dooble::prepareStatusBarLabel(const QString &text)
+{
+  QFontMetrics fm(sb.statusLabel->fontMetrics());
+
+  sb.statusLabel->setText
+    (fm.elidedText(text.trimmed(),
+		   Qt::ElideRight,
+		   qAbs(width() - (sb.progressBar->isVisible() ?
+				   sb.progressBar->width() : 0) - 75)));
 }
