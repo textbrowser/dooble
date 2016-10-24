@@ -185,6 +185,7 @@ class dooble: public QMainWindow
   void prepareMenuBar(const bool state);
   void prepareMostVisited(void);
   void prepareNavigationButtonMenus(dview *p, QMenu *menu);
+  void prepareStatusBarLabel(const QString &text);
   void prepareTabsMenu(void);
   void prepareWidgetsBasedOnView(dview *p);
   void reinstate(void);
