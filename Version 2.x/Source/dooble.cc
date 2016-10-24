@@ -3030,7 +3030,7 @@ void dooble::slotTabSelected(const int index)
       QFontMetrics fm(sb.statusLabel->font());
 
       sb.statusLabel->setText
-	(fm.elidedText(p->statusMessage().trimmed(), Qt::ElideRight,
+	(fm.elidedText(p->statusMessage().mid(0, 100).trimmed(), Qt::ElideRight,
 		       qAbs(width() - 100)));
       statusBar()->setVisible(ui.actionStatusbar->isChecked());
       prepareWidgetsBasedOnView(p);
@@ -3270,7 +3270,7 @@ void dooble::slotLoadProgress(int progress)
       QFontMetrics fm(sb.statusLabel->font());
 
       sb.statusLabel->setText
-	(fm.elidedText(p->statusMessage().trimmed(), Qt::ElideRight,
+	(fm.elidedText(p->statusMessage().mid(0, 100).trimmed(), Qt::ElideRight,
 		       qAbs(width() - 100)));
     }
   else if(p)
@@ -3318,7 +3318,8 @@ void dooble::slotLoadFinished(bool ok)
 	  QFontMetrics fm(sb.statusLabel->font());
 
 	  sb.statusLabel->setText
-	    (fm.elidedText(p->statusMessage().trimmed(), Qt::ElideRight,
+	    (fm.elidedText(p->statusMessage().mid(0, 100).
+			   trimmed(), Qt::ElideRight,
 			   qAbs(width() - 100)));
 	}
     }
@@ -3365,7 +3366,8 @@ void dooble::slotLoadFinished(bool ok)
 	  QFontMetrics fm(sb.statusLabel->font());
 
 	  sb.statusLabel->setText
-	    (fm.elidedText(p->statusMessage().trimmed(), Qt::ElideRight,
+	    (fm.elidedText(p->statusMessage().mid(0, 100).
+			   trimmed(), Qt::ElideRight,
 			   qAbs(width() - 100)));
 	}
 
@@ -4293,7 +4295,8 @@ void dooble::slotLinkHovered(const QString &link)
       QFontMetrics fm(sb.statusLabel->font());
 
       sb.statusLabel->setText
-	(fm.elidedText(link.trimmed(), Qt::ElideRight, qAbs(width() - 100)));
+	(fm.elidedText(link.mid(0, 100).trimmed(), Qt::ElideRight,
+		       qAbs(width() - 100)));
     }
 }
 
@@ -6306,7 +6309,8 @@ void dooble::slotStatusBarMessage(const QString &text)
       QFontMetrics fm(sb.statusLabel->font());
 
       sb.statusLabel->setText
-	(fm.elidedText(text.trimmed(), Qt::ElideRight, qAbs(width() - 100)));
+	(fm.elidedText(text.mid(0, 100).trimmed(), Qt::ElideRight,
+		       qAbs(width() - 100)));
       QTimer::singleShot(1000, sb.statusLabel, SLOT(clear(void)));
     }
 }
