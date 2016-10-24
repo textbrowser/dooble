@@ -1506,6 +1506,7 @@ void dsettings::exec(dooble *parent)
   foreach(QLineEdit *lineEdit, findChildren<QLineEdit *> ())
     lineEdit->setCursorPosition(0);
 
+  adjustSize();
   dmisc::centerChildWithParent(this, m_parentDooble);
   showNormal();
   raise();
