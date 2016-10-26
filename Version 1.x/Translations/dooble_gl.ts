@@ -163,12 +163,12 @@
         <translation>%1 Bytes</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1941"/>
+        <location filename="../Source/dmisc.cc" line="2000"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Navegador web Dooble: Erro</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1942"/>
+        <location filename="../Source/dmisc.cc" line="2001"/>
         <source>A critical error occurred while preparing the authentication and encryption keys. Please report this problem.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1932,20 +1932,20 @@
         <translation type="obsolete">Engadidos web (non estábeis)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1589"/>
-        <location filename="../Source/dsettings.cc" line="1623"/>
-        <location filename="../Source/dsettings.cc" line="1740"/>
+        <location filename="../Source/dsettings.cc" line="1548"/>
+        <location filename="../Source/dsettings.cc" line="1582"/>
+        <location filename="../Source/dsettings.cc" line="1699"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Navegador web Dooble: Erro</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1590"/>
+        <location filename="../Source/dsettings.cc" line="1549"/>
         <source>The passphrases do not match.</source>
         <translation>As frases de paso non coinciden.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1659"/>
-        <location filename="../Source/dsettings.cc" line="2332"/>
+        <location filename="../Source/dsettings.cc" line="1618"/>
+        <location filename="../Source/dsettings.cc" line="2291"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Navegador web Dooble: Confirmación</translation>
     </message>
@@ -1960,7 +1960,7 @@
         <translation>permitido coas cookies existentes</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1624"/>
+        <location filename="../Source/dsettings.cc" line="1583"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>O contrasinal debe ter como mínimo seis caracteres de lonxitude.</translation>
     </message>
@@ -1969,7 +1969,7 @@
         <translation type="obsolete">Está a piques de restabelecer as opcións de configuración. Se xa foi configurada un contrasinal de paso este manterase. Dooble reiniciarase a fin de completar o proceso de restabelecemento. Como resultado, os datos non gardados perderanse. Quere continuar?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2431"/>
+        <location filename="../Source/dsettings.cc" line="2390"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Navegador web Dooble: Selección do tema</translation>
     </message>
@@ -1978,12 +1978,12 @@
         <translation type="obsolete">&amp;Seleccionar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2449"/>
+        <location filename="../Source/dsettings.cc" line="2408"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Ficheiro de configuración de tema (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2534"/>
+        <location filename="../Source/dsettings.cc" line="2493"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Navegador web Dooble: Selección dos ficheiros obtidos por min</translation>
     </message>
@@ -1997,79 +1997,79 @@
         <translation type="unfinished">Extensións web</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1662"/>
+        <location filename="../Source/dsettings.cc" line="1621"/>
         <source>You have selected an iteration count which exceeds the default value of 25,000. You may experience degradation during the initialization of Dooble. The key-generation process may also require a significant amount of time to complete. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1741"/>
+        <location filename="../Source/dsettings.cc" line="1700"/>
         <source>A critical error occurred while preparing the authentication and encryption keys. Please report this problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2335"/>
+        <location filename="../Source/dsettings.cc" line="2294"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2448"/>
-        <location filename="../Source/dsettings.cc" line="2922"/>
+        <location filename="../Source/dsettings.cc" line="2407"/>
+        <location filename="../Source/dsettings.cc" line="2881"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2537"/>
-        <location filename="../Source/dsettings.cc" line="2565"/>
+        <location filename="../Source/dsettings.cc" line="2496"/>
+        <location filename="../Source/dsettings.cc" line="2524"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2562"/>
+        <location filename="../Source/dsettings.cc" line="2521"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Navegador web Dooble: Selección da base de datos de Spot-On compartida</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2837"/>
+        <location filename="../Source/dsettings.cc" line="2796"/>
         <source>Prompt</source>
         <translation>Preguntar</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2854"/>
+        <location filename="../Source/dsettings.cc" line="2813"/>
         <source>Use other...</source>
         <translation>Usar outro...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2919"/>
+        <location filename="../Source/dsettings.cc" line="2878"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Navegador web Dooble: Seleccione o aplicativo</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3042"/>
+        <location filename="../Source/dsettings.cc" line="3001"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3046"/>
+        <location filename="../Source/dsettings.cc" line="3005"/>
         <source>&amp;Delete File Suffix</source>
         <translation>&amp;Eliminar o sufixo do ficheiro</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3140"/>
+        <location filename="../Source/dsettings.cc" line="3099"/>
         <source>%1 MiB of content is cached.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3274"/>
+        <location filename="../Source/dsettings.cc" line="3233"/>
         <source>&amp;Copy Style Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3278"/>
+        <location filename="../Source/dsettings.cc" line="3237"/>
         <source>Set &amp;Style Sheet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3303"/>
+        <location filename="../Source/dsettings.cc" line="3262"/>
         <source>Dooble: Widget Style Sheet (%1)</source>
         <translation type="unfinished"></translation>
     </message>

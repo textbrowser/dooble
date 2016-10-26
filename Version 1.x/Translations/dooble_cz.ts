@@ -151,12 +151,12 @@
         <translation>%1 bytů</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1941"/>
+        <location filename="../Source/dmisc.cc" line="2000"/>
         <source>Dooble Web Browser: Error</source>
         <translation type="unfinished">Dooble Web Browser: Chyba</translation>
     </message>
     <message>
-        <location filename="../Source/dmisc.cc" line="1942"/>
+        <location filename="../Source/dmisc.cc" line="2001"/>
         <source>A critical error occurred while preparing the authentication and encryption keys. Please report this problem.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1998,20 +1998,20 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>dsettings</name>
     <message>
-        <location filename="../Source/dsettings.cc" line="1589"/>
-        <location filename="../Source/dsettings.cc" line="1623"/>
-        <location filename="../Source/dsettings.cc" line="1740"/>
+        <location filename="../Source/dsettings.cc" line="1548"/>
+        <location filename="../Source/dsettings.cc" line="1582"/>
+        <location filename="../Source/dsettings.cc" line="1699"/>
         <source>Dooble Web Browser: Error</source>
         <translation>Dooble Web Browser: Chyba</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1590"/>
+        <location filename="../Source/dsettings.cc" line="1549"/>
         <source>The passphrases do not match.</source>
         <translation>Hesla se neshodují.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1659"/>
-        <location filename="../Source/dsettings.cc" line="2332"/>
+        <location filename="../Source/dsettings.cc" line="1618"/>
+        <location filename="../Source/dsettings.cc" line="2291"/>
         <source>Dooble Web Browser: Confirmation</source>
         <translation>Dooble Web Browser: Potvrzení</translation>
     </message>
@@ -2031,22 +2031,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1624"/>
+        <location filename="../Source/dsettings.cc" line="1583"/>
         <source>The passphrase must be at least sixteen characters long.</source>
         <translation>Heslo musí být alespoň šestnáct znaků dlouhé.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1662"/>
+        <location filename="../Source/dsettings.cc" line="1621"/>
         <source>You have selected an iteration count which exceeds the default value of 25,000. You may experience degradation during the initialization of Dooble. The key-generation process may also require a significant amount of time to complete. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="1741"/>
+        <location filename="../Source/dsettings.cc" line="1700"/>
         <source>A critical error occurred while preparing the authentication and encryption keys. Please report this problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2431"/>
+        <location filename="../Source/dsettings.cc" line="2390"/>
         <source>Dooble Web Browser: Theme Selection</source>
         <translation>Dooble Web Browser: Výběr vzhledu</translation>
     </message>
@@ -2055,18 +2055,18 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Vybrat</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2449"/>
+        <location filename="../Source/dsettings.cc" line="2408"/>
         <source>Theme Configuration File (*.cfg)</source>
         <translation>Soubor s nastavením vzhledu (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2534"/>
+        <location filename="../Source/dsettings.cc" line="2493"/>
         <source>Dooble Web Browser: My Retrieved Files Directory Selection</source>
         <translation>Dooble Web Browser: Výběr adresáře pro stahování</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2448"/>
-        <location filename="../Source/dsettings.cc" line="2922"/>
+        <location filename="../Source/dsettings.cc" line="2407"/>
+        <location filename="../Source/dsettings.cc" line="2881"/>
         <source>Select</source>
         <translation>Vybrat</translation>
     </message>
@@ -2075,63 +2075,63 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">Přídavné moduly pro web.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2335"/>
+        <location filename="../Source/dsettings.cc" line="2294"/>
         <source>You are about to reset all of your configuration settings. Dooble will be restarted in order to complete the reset process. Do you wish to continue?</source>
         <translation>Chystáte se znovunastavit všechna nastavení. Dooble bude spuštěn znovu, aby byl proces dokončen. Chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2537"/>
-        <location filename="../Source/dsettings.cc" line="2565"/>
+        <location filename="../Source/dsettings.cc" line="2496"/>
+        <location filename="../Source/dsettings.cc" line="2524"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2562"/>
+        <location filename="../Source/dsettings.cc" line="2521"/>
         <source>Dooble Web Browser: Spot-on Shared Database Selection</source>
         <translation>Dooble Web Browser: Výběr databáze Spot-on</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2837"/>
+        <location filename="../Source/dsettings.cc" line="2796"/>
         <source>Prompt</source>
         <translation>Výzva</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2854"/>
+        <location filename="../Source/dsettings.cc" line="2813"/>
         <source>Use other...</source>
         <translation>Použít jiný program...</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="2919"/>
+        <location filename="../Source/dsettings.cc" line="2878"/>
         <source>Dooble Web Browser: Select Application</source>
         <translation>Dooble Web Browser: Vybrat program</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3042"/>
+        <location filename="../Source/dsettings.cc" line="3001"/>
         <source>Delete &amp;All File Suffixes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3046"/>
+        <location filename="../Source/dsettings.cc" line="3005"/>
         <source>&amp;Delete File Suffix</source>
         <translation>&amp;Smazat příponu souboru</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3140"/>
+        <location filename="../Source/dsettings.cc" line="3099"/>
         <source>%1 MiB of content is cached.</source>
         <translation>%1 MiB obsahu je uloženo ve vyrovnávací paměti.</translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3274"/>
+        <location filename="../Source/dsettings.cc" line="3233"/>
         <source>&amp;Copy Style Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3278"/>
+        <location filename="../Source/dsettings.cc" line="3237"/>
         <source>Set &amp;Style Sheet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dsettings.cc" line="3303"/>
+        <location filename="../Source/dsettings.cc" line="3262"/>
         <source>Dooble: Widget Style Sheet (%1)</source>
         <translation type="unfinished"></translation>
     </message>
