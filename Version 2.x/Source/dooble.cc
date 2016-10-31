@@ -266,7 +266,7 @@ int main(int argc, char *argv[])
   qInstallMessageHandler(qt_message_handler);
 
   QApplication qapp(argc, argv);
-  QSplashScreen splash(QPixmap("Icons/AxB/splash.png"));
+  QSplashScreen splash(QPixmap(":/AxB/splash.png"));
 
   splash.show();
   splash.showMessage
