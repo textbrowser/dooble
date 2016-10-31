@@ -309,7 +309,7 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapp(argc, argv);
-  QSplashScreen splash(QPixmap("Icons/AxB/splash.png"));
+  QSplashScreen splash(QPixmap(":/AxB/splash.png"));
 
   splash.show();
   splash.showMessage
