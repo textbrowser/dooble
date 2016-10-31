@@ -160,6 +160,7 @@ OBJECTIVE_HEADERS += Include/Cocoainitializer.h
 OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 
 RESOURCES       += CSS/css.qrc \
+		   Icons/icons.qrc \
 		   Tab/Default/htmls.qrc
 
 TRANSLATIONS    = Translations/dooble_en.ts \

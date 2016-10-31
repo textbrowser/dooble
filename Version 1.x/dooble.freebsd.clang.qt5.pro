@@ -155,6 +155,7 @@ SOURCES		= Source/dbookmarkspopup.cc \
 		  Source/dwebview.cc
 
 RESOURCES       += CSS/css.qrc \
+		   Icons/icons.qrc \
 		   Tab/Default/htmls.qrc
 
 TRANSLATIONS    = Translations/dooble_en.ts \
