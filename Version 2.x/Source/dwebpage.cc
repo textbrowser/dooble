@@ -617,6 +617,8 @@ webAttributes(void) const
   QHash<QWebEngineSettings::WebAttribute, bool> hash;
 
   hash[QWebEngineSettings::JavascriptEnabled] = m_isJavaScriptEnabled;
+  hash[QWebEngineSettings::PluginsEnabled] = settings()->testAttribute
+    (QWebEngineSettings::PluginsEnabled);
   return hash;
 }
 

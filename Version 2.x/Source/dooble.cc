@@ -560,7 +560,7 @@ int main(int argc, char *argv[])
   dmisc::prepareProxyIgnoreLists();
 
   /*
-  ** QWebSettings changes have to be performed after dooble::s_settings
+  ** QWebEngineSettings changes have to be performed after dooble::s_settings
   ** gets populated!
   */
 
@@ -612,6 +612,10 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::FullScreenSupportEnabled,
      dooble::s_settings.
      value("settingsWindow/fullScreenSupport", true).toBool());
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::PluginsEnabled,
+     dooble::s_settings.value("settingsWindow/enableWebPlugins",
+			      false).toBool());
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      dooble::s_settings.
@@ -977,6 +981,9 @@ int main(int argc, char *argv[])
 
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	dooble::s_settings.value("settingsWindow/javascriptEnabled",
+				 false).toBool();
+      webAttributes[QWebEngineSettings::PluginsEnabled] =
+	dooble::s_settings.value("settingsWindow/enableWebPlugins",
 				 false).toBool();
       Q_UNUSED(new dooble(url.toString(QUrl::StripTrailingSlash), 0, 0,
 			  webAttributes));
@@ -1929,6 +1936,9 @@ dooble::dooble(const QHash<QString, QVariant> &hash, dooble *d):QMainWindow()
 	  webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	    s_settings.value("settingsWindow/javascriptEnabled",
 			     false).toBool();
+	  webAttributes[QWebEngineSettings::PluginsEnabled] =
+	    s_settings.value("settingsWindow/enableWebPlugins",
+			     false).toBool();
 	  newTab
 	    (QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash)), 0,
 	     webAttributes);
@@ -2366,6 +2376,9 @@ dview *dooble::newTab(const QByteArray &history)
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
+  webAttributes[QWebEngineSettings::PluginsEnabled] =
+    s_settings.value("settingsWindow/enableWebPlugins",
+		     false).toBool();
   p = new dview(this, history, 0, webAttributes);
   newTabInit(p);
 
@@ -2593,6 +2606,9 @@ void dooble::loadPage(const QUrl &url)
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	s_settings.value("settingsWindow/javascriptEnabled",
 			 false).toBool();
+      webAttributes[QWebEngineSettings::PluginsEnabled] =
+	s_settings.value("settingsWindow/enableWebPlugins",
+			 false).toBool();
       newTab(l_url, 0, webAttributes);
       ui.tabWidget->update();
     }
@@ -2662,6 +2678,9 @@ void dooble::slotNewTab(void)
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
+  webAttributes[QWebEngineSettings::PluginsEnabled] =
+    s_settings.value("settingsWindow/enableWebPlugins",
+		     false).toBool();
   p = newTab(url, 0, webAttributes);
 
   if(p)
@@ -2699,6 +2718,9 @@ void dooble::slotNewWindow(void)
 
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	s_settings.value("settingsWindow/javascriptEnabled",
+			 false).toBool();
+      webAttributes[QWebEngineSettings::PluginsEnabled] =
+	s_settings.value("settingsWindow/enableWebPlugins",
 			 false).toBool();
       Q_UNUSED(new dooble(url, this, 0, webAttributes));
     }
@@ -3696,6 +3718,9 @@ void dooble::slotGoHome(void)
 	      webAttributes[QWebEngineSettings::JavascriptEnabled] =
 		s_settings.value("settingsWindow/javascriptEnabled",
 				 false).toBool();
+	      webAttributes[QWebEngineSettings::PluginsEnabled] =
+		s_settings.value("settingsWindow/enableWebPlugins",
+				 false).toBool();
 	      newTab(url, 0, webAttributes);
 	      ui.tabWidget->update();
 	    }
@@ -3730,6 +3755,9 @@ void dooble::slotGoHome(void)
 
 	  webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	    s_settings.value("settingsWindow/javascriptEnabled",
+			     false).toBool();
+	  webAttributes[QWebEngineSettings::PluginsEnabled] =
+	    s_settings.value("settingsWindow/enableWebPlugins",
 			     false).toBool();
 	  p = newTab(url, 0, webAttributes);
 	  ui.tabWidget->update();
@@ -4200,6 +4228,9 @@ void dooble::slotOpenLinkInNewTab(const QUrl &url)
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
 		     false).toBool();
+  webAttributes[QWebEngineSettings::PluginsEnabled] =
+    s_settings.value("settingsWindow/enableWebPlugins",
+		     false).toBool();
   slotOpenLinkInNewTab(url, 0, webAttributes);
 }
 
@@ -4225,6 +4256,9 @@ void dooble::slotOpenLinkInNewWindow(const QUrl &url)
 
   webAttributes[QWebEngineSettings::JavascriptEnabled] =
     s_settings.value("settingsWindow/javascriptEnabled",
+		     false).toBool();
+  webAttributes[QWebEngineSettings::PluginsEnabled] =
+    s_settings.value("settingsWindow/enableWebPlugins",
 		     false).toBool();
   slotOpenLinkInNewWindow(url, 0, webAttributes);
 }
@@ -6117,6 +6151,9 @@ void dooble::slotFavoritesToolButtonClicked(void)
       webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	s_settings.value("settingsWindow/javascriptEnabled",
 			 false).toBool();
+      webAttributes[QWebEngineSettings::PluginsEnabled] =
+	s_settings.value("settingsWindow/enableWebPlugins",
+			 false).toBool();
       p = newTab(toolButton->property("url").toUrl(), 0, webAttributes);
 
       if(p)
@@ -6221,6 +6258,9 @@ void dooble::slotOpenUrlsFromDrop(const QList<QUrl> &list)
 
 	webAttributes[QWebEngineSettings::JavascriptEnabled] =
 	  s_settings.value("settingsWindow/javascriptEnabled",
+			   false).toBool();
+	webAttributes[QWebEngineSettings::PluginsEnabled] =
+	  s_settings.value("settingsWindow/enableWebPlugins",
 			   false).toBool();
 	newTab(list.at(i), 0, webAttributes);
       }
