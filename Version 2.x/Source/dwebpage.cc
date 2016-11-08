@@ -622,7 +622,7 @@ webAttributes(void) const
 
 bool dwebpage::areWebPluginsEnabled(void) const
 {
-  return false;
+  return settings()->testAttribute(QWebEngineSettings::PluginsEnabled);
 }
 
 bool dwebpage::isJavaScriptEnabled(void) const

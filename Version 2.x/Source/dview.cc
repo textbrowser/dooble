@@ -1254,7 +1254,7 @@ void dview::setPrivateBrowsingEnabled(const bool state)
 
 void dview::setWebPluginsEnabled(const bool state)
 {
-  Q_UNUSED(state);
+  page()->settings()->setAttribute(QWebEngineSettings::PluginsEnabled, state);
 }
 
 QHash<QWebEngineSettings::WebAttribute, bool> dview::webAttributes(void) const
