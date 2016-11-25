@@ -427,7 +427,8 @@ QStringList dcrypt::hashTypes(void)
 {
   QStringList types;
 
-  types << "sha512"
+  types << "sha3-512"
+	<< "sha512"
 	<< "stribog512"
 	<< "whirlpool";
 
