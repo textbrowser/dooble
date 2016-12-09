@@ -340,36 +340,21 @@ QWebEnginePage *dwebpage::createWindow(WebWindowType type)
       */
     }
 
-  if(settings()->testAttribute(QWebEngineSettings::JavascriptEnabled))
-    {
-      if(dooble::s_settings.value("settingsWindow/javascriptAllowNewWindows",
-				  true).toBool())
-	{
-	  dooble *dbl = 0;
+  dooble *dbl = 0;
 
-	  if(type == QWebEnginePage::WebBrowserTab)
-	    dbl = findDooble();
+  if(QApplication::keyboardModifiers() == Qt::ControlModifier ||
+     dooble::s_settings.value("settingsWindow/openInNewTab", true).toBool())
+    dbl = findDooble();
 
-	  if(!dbl)
-	    dbl = new dooble(true, findDooble());
+  if(!dbl)
+    dbl = new dooble(true, findDooble());
 
-	  dview *v = dbl->newTab
-	    (m_requestedUrl,
-	     qobject_cast<dcookies *> (m_networkAccessManager->
-				       cookieJar()),
-	     webAttributes());
+  dview *v = dbl->newTab(m_requestedUrl, 0, webAttributes());
 
-	  return v->page();
-	}
-      else
-	return 0;
-    }
+  if(dooble::s_settings.value("settingsWindow/proceedToNewTab", true).toBool())
+    dbl->setCurrentPage(v);
 
-  /*
-  ** A new window will not be created.
-  */
-
-  return 0;
+  return v->page();
 }
 
 dooble *dwebpage::findDooble(void)
@@ -680,4 +665,47 @@ void dwebpage::setPrivateBrowsingEnabled(const bool state)
 
       m_profile = 0;
     }
+}
+
+bool dwebpage::acceptNavigationRequest(const QUrl &url,
+				       NavigationType type,
+				       bool isMainFrame)
+{
+  if(url.toString() == "dooble://open-ssl-errors-exceptions")
+    return false;
+
+  if(!url.isValid())
+    return false;
+
+  m_requestedUrl = url;
+
+  if(isMainFrame)
+    {
+      if(dooble::s_javaScriptExceptionsWindow->allowed(m_requestedUrl.host()))
+	/*
+	** Exempt hosts must be prevented from executing JavaScript.
+	*/
+
+	settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
+      else
+	settings()->setAttribute
+	  (QWebEngineSettings::JavascriptEnabled, isJavaScriptEnabled());
+    }
+
+  if(m_requestedUrl.scheme().toLower().trimmed() == "data")
+    {
+      /*
+      ** Disable the page's network access manager.
+      */
+    }
+
+  if(isMainFrame)
+    {
+      /*
+      ** Let's set the proxy, but only if the navigation request
+      ** occurs within the main frame.
+      */
+    }
+
+  return QWebEnginePage::acceptNavigationRequest(url, type, isMainFrame);
 }

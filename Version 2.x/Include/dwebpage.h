@@ -61,6 +61,9 @@ class dwebpage: public QWebEnginePage
   dnetworkaccessmanager *m_networkAccessManager;
   QString userAgentForUrl(const QUrl &url) const;
   QWebEnginePage *createWindow(WebWindowType type);
+  bool acceptNavigationRequest(const QUrl &url,
+			       NavigationType type,
+			       bool isMainFrame);
   bool javaScriptConfirm(const QUrl &url, const QString &msg);
   bool javaScriptPrompt(const QUrl &url, const QString &msg,
 			const QString &defaultValue, QString *result);

@@ -26,7 +26,6 @@
 */
 
 #include <QMouseEvent>
-#include <QNetworkProxy>
 
 #include "dmisc.h"
 #include "dooble.h"
@@ -56,8 +55,8 @@ void dwebview::mousePressEvent(QMouseEvent *event)
   ** We use this method to determine valid popups.
   */
 
-  m_allowPopup = false;
   m_allowPopup = true;
+  m_lastButtonPressed = event ? event->button() : m_lastButtonPressed;
   QWebEngineView::mousePressEvent(event);
 }
 
