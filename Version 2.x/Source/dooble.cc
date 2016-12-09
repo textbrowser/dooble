@@ -1045,6 +1045,8 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
     (s_settings.value("mainWindow/showSearchWidget", true).toBool());
   ui.actionOffline->setChecked
     (s_settings.value("mainWindow/offlineMode", false).toBool());
+  ui.actionOffline->setEnabled(false);
+  ui.actionOffline->setToolTip(tr("The option is not supported."));
   ui.historyFrame->setVisible(false);
 #ifdef Q_OS_MAC
   setAttribute(Qt::WA_MacMetalStyle, false);
