@@ -1200,7 +1200,10 @@ void dsettings::exec(dooble *parent)
 			      false).toBool());
   ui.alwaysHttpsCheckBox->setChecked(false); // Not supported.
   ui.alwaysHttpsCheckBox->setEnabled(false); // Not supported.
+  ui.alwaysHttpsCheckBox->setToolTip(tr("The option is not supported."));
   ui.alwaysHttpsExceptionsPushButton->setEnabled(false); // Not supported.
+  ui.alwaysHttpsExceptionsPushButton->setToolTip
+    (tr("The option is not supported."));
 
   bool ok = true;
   int value = qAbs
