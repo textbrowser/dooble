@@ -370,6 +370,7 @@ QWebPage *dwebpage::createWindow(WebWindowType type)
       if(dooble::s_settings.value("settingsWindow/javascriptAllowNewWindows",
 				  true).toBool())
 	{
+	  bool existing = false;
 	  dooble *dbl = 0;
 	  dwebview *webview = qobject_cast<dwebview *> (parent());
 	  Qt::MouseButton lastMouseButton = Qt::NoButton;
@@ -382,7 +383,12 @@ QWebPage *dwebpage::createWindow(WebWindowType type)
 						     QApplication::
 						     keyboardModifiers() ==
 						     Qt::ControlModifier))
-	    dbl = findDooble();
+	    {
+	      dbl = findDooble();
+
+	      if(dbl)
+		existing = true;
+	    }
 
 	  if(!dbl)
 	    dbl = new dooble(true, findDooble());
@@ -392,6 +398,11 @@ QWebPage *dwebpage::createWindow(WebWindowType type)
 	     qobject_cast<dcookies *> (m_networkAccessManager->
 				       cookieJar()),
 	     webAttributes());
+
+	  if(existing)
+	    if(dooble::s_settings.value("settingsWindow/proceedToNewTab",
+					true).toBool())
+	      dbl->setCurrentPage(v);
 
 	  return v->page();
 	}
