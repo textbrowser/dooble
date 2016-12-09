@@ -57,6 +57,7 @@
 #include <QTimer>
 #include <QTranslator>
 #include <QWebEngineHistoryItem>
+#include <QWebEngineProfile>
 #include <QWidgetAction>
 #include <QtConcurrent>
 #include <QtCore>
@@ -558,6 +559,20 @@ int main(int argc, char *argv[])
       settings.value(settings.allKeys().at(i));
 
   dmisc::prepareProxyIgnoreLists();
+
+  /*
+  ** Prepare QWebEngine's cache and persistent storage paths.
+  */
+
+  QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+
+  if(profile)
+    {
+      profile->setCachePath(dooble::s_homePath);
+      QDir().mkpath(dooble::s_homePath + QDir::separator() + "Persistent");
+      profile->setPersistentStoragePath
+	(dooble::s_homePath + QDir::separator() + "Persistent");
+    }
 
   /*
   ** QWebEngineSettings changes have to be performed after dooble::s_settings

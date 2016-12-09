@@ -26,16 +26,16 @@
 */
 
 #include <QDir>
-#include <QtCore>
-#include <QSqlQuery>
+#include <QNetworkCookie>
 #include <QProgressBar>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QtConcurrent>
-#include <QNetworkCookie>
+#include <QtCore>
 
+#include "dcookies.h"
 #include "dmisc.h"
 #include "dooble.h"
-#include "dcookies.h"
 
 dcookies::dcookies(const bool arePrivate, QObject *parent):
   QNetworkCookieJar(parent)
