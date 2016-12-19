@@ -1557,9 +1557,9 @@ void dsettings::slotClicked(QAbstractButton *button)
 		    if(button->property("page").toInt() == 5)
 		      button->click();
 
-		  QSettings settings(dooble::s_settings.value("iconSet").
-				 toString(),
-				     QSettings::IniFormat);
+		  QSettings settings
+		    (dooble::s_settings.value("iconSet").toString(),
+		     QSettings::IniFormat);
 		  QMessageBox mb(QMessageBox::Critical,
 				 tr("Dooble Web Browser: Error"),
 				 tr("A critical error occurred while preparing "
