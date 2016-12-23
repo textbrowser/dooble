@@ -3067,6 +3067,7 @@ void dooble::slotTabSelected(const int index)
       if(ui.bookmarksMenu->actions().size() > 0)
 	ui.bookmarksMenu->actions().at(0)->setEnabled(isBookmarkWorthy);
 
+      sb.statusLabel->setProperty("text", p->statusMessage());
       prepareStatusBarLabel(p->statusMessage());
       statusBar()->setVisible(ui.actionStatusbar->isChecked());
       prepareWidgetsBasedOnView(p);
@@ -3302,6 +3303,7 @@ void dooble::slotLoadProgress(int progress)
       sb.progressBar->setValue(qBound(sb.progressBar->minimum(),
 				      progress,
 				      sb.progressBar->maximum()));
+      sb.statusLabel->setProperty("text", p->statusMessage());
       prepareStatusBarLabel(p->statusMessage());
     }
   else if(p)
@@ -3345,6 +3347,7 @@ void dooble::slotLoadFinished(bool ok)
 	  ui.locationLineEdit->setBookmarkColor(p->isBookmarked());
 	  ui.locationLineEdit->setSpotOnButtonEnabled(p->isLoaded());
 	  ui.locationLineEdit->setSpotOnColor(p->isLoaded());
+	  sb.statusLabel->setProperty("text", p->statusMessage());
 	  prepareStatusBarLabel(p->statusMessage());
 	}
     }
@@ -3387,6 +3390,7 @@ void dooble::slotLoadFinished(bool ok)
 	  ui.locationLineEdit->setSecureColor(p->hasSecureConnection());
 	  ui.locationLineEdit->setSpotOnButtonEnabled(p->isLoaded());
 	  ui.locationLineEdit->setSpotOnColor(p->isLoaded());
+	  sb.statusLabel->setProperty("text", p->statusMessage());
 	  prepareStatusBarLabel(p->statusMessage());
 	}
 
@@ -4322,7 +4326,10 @@ void dooble::slotLinkHovered(const QString &link)
   if(link.trimmed().isEmpty())
     sb.statusLabel->clear();
   else
-    prepareStatusBarLabel(link);
+    {
+      sb.statusLabel->setProperty("text", link);
+      prepareStatusBarLabel(link);
+    }
 }
 
 void dooble::slotAbout(void)
@@ -6337,6 +6344,7 @@ void dooble::slotStatusBarMessage(const QString &text)
 
   if(d && p && d == p->page())
     {
+      sb.statusLabel->setProperty("text", text);
       prepareStatusBarLabel(text);
       QTimer::singleShot(1000, sb.statusLabel, SLOT(clear(void)));
     }
@@ -6691,6 +6699,7 @@ void dooble::slotExceptionRaised(dexceptionswindow *window,
 		   arg(url.host())));
 
       sb.exceptionsToolButton->setVisible(true);
+      prepareStatusBarLabel(sb.statusLabel->property("text").toString());
       sb.exceptionsToolButton->disconnect(window);
       connect(sb.exceptionsToolButton,
 	      SIGNAL(clicked(void)),
@@ -7042,6 +7051,7 @@ void dooble::s_removeCrashFile(void)
 void dooble::slotErrorLogged(void)
 {
   sb.errorLogToolButton->setVisible(true);
+  prepareStatusBarLabel(sb.statusLabel->property("text").toString());
 }
 
 void dooble::slotAboutToShowBackForwardMenu(void)
@@ -7631,10 +7641,17 @@ void dooble::slotNewPrivateTab(void)
 void dooble::prepareStatusBarLabel(const QString &text)
 {
   QFontMetrics fm(sb.statusLabel->fontMetrics());
+  int other = sb.authenticate->width() + 25;
+
+  if(sb.exceptionsToolButton->isVisible())
+    other += sb.exceptionsToolButton->width();
+
+  if(sb.errorLogToolButton->isVisible())
+    other += sb.errorLogToolButton->width();
 
   sb.statusLabel->setText
     (fm.elidedText(text.trimmed(),
 		   Qt::ElideRight,
 		   qAbs(width() - (sb.progressBar->isVisible() ?
-				   sb.progressBar->width() : 0) - 75)));
+				   sb.progressBar->width() : 0) - other)));
 }
