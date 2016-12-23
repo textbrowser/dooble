@@ -132,6 +132,7 @@ void dclearcontainers::show(dooble *parent)
     move(100, 100);
 
   showNormal();
+  activateWindow();
   raise();
 }
 

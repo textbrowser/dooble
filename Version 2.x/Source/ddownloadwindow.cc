@@ -368,6 +368,7 @@ void ddownloadwindow::show(QWidget *parent)
     dmisc::centerChildWithParent(this, parent);
 
   showNormal();
+  activateWindow();
   raise();
 
   if(ui.stackedWidget->currentIndex() == 1)

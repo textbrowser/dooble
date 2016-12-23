@@ -197,6 +197,7 @@ void derrorlog::slotShow(void)
     dmisc::centerChildWithParent(this, parent);
 
   showNormal();
+  activateWindow();
   raise();
 }
 
