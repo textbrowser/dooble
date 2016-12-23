@@ -8377,10 +8377,17 @@ void dooble::slotCopyStyleSheet(void)
 void dooble::prepareStatusBarLabel(const QString &text)
 {
   QFontMetrics fm(sb.statusLabel->fontMetrics());
+  int other = sb.authenticate->width() + 25;
+
+  if(sb.exceptionsToolButton->isVisible())
+    other += sb.exceptionsToolButton->width();
+  
+  if(sb.errorLogToolButton->isVisible())
+    other += sb.errorLogToolButton->width();
 
   sb.statusLabel->setText
     (fm.elidedText(text.trimmed(),
 		   Qt::ElideRight,
 		   qAbs(width() - (sb.progressBar->isVisible() ?
-				   sb.progressBar->width() : 0) - 75)));
+				   sb.progressBar->width() : 0) - other)));
 }

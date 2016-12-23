@@ -202,6 +202,7 @@ int main(int argc, char *argv[])
 #endif
   /*
   ** See http://trac.webkit.org/wiki/Fingerprinting#vii.DateObject.
+  ** WebKit is not supported.
   */
 
   qputenv("TZ", ":UTC");
