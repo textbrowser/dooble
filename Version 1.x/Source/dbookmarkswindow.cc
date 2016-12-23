@@ -314,6 +314,7 @@ void dbookmarkswindow::show(QWidget *parent)
     dmisc::centerChildWithParent(this, m_parent);
 
   showNormal();
+  activateWindow();
   raise();
 }
 

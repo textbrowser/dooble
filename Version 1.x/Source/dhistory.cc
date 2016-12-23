@@ -417,6 +417,7 @@ void dhistory::show(QWidget *parent)
 
   ui.history->resizeColumnToContents(3);
   showNormal();
+  activateWindow();
   raise();
 
   if(!m_timer->isActive())

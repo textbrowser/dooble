@@ -1509,6 +1509,7 @@ void dsettings::exec(dooble *parent)
   adjustSize();
   dmisc::centerChildWithParent(this, m_parentDooble);
   showNormal();
+  activateWindow();
   raise();
 
   if(panelButton)

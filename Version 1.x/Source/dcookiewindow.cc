@@ -204,6 +204,7 @@ void dcookiewindow::show(QWidget *parent)
     dmisc::centerChildWithParent(this, parent);
 
   showNormal();
+  activateWindow();
   raise();
   ui.cookies->setFocus();
 }

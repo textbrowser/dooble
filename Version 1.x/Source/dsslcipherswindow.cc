@@ -300,6 +300,7 @@ void dsslcipherswindow::slotShow(void)
       dmisc::centerChildWithParent(this, action->parentWidget());
 
   showNormal();
+  activateWindow();
   raise();
 }
 

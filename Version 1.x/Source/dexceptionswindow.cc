@@ -379,6 +379,7 @@ void dexceptionswindow::slotShow(void)
   ui.tableView->resizeColumnToContents(0);
   ui.tableView->resizeColumnToContents(2);
   showNormal();
+  activateWindow();
   raise();
 }
 

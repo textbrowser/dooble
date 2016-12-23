@@ -8231,6 +8231,7 @@ void dooble::slotShowBlockedHosts(void)
     dmisc::centerChildWithParent(s_blockedhostsWindow, this);
 
   s_blockedhostsWindow->showNormal();
+  s_blockedhostsWindow->activateWindow();
   s_blockedhostsWindow->raise();
 }
 
