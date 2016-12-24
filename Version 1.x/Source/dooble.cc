@@ -1159,6 +1159,7 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
     {
       s_blockedhostsWindow = new QMainWindow(0);
       s_blockedHostsUi.setupUi(s_blockedhostsWindow);
+      s_blockedhostsWindow->setWindowIcon(windowIcon());
     }
 
   /*
@@ -2374,6 +2375,10 @@ void dooble::slotSetIcons(void)
       }
 
   setWindowIcon(QIcon(settings.value("mainWindow/windowIcon").toString()));
+
+  if(s_blockedhostsWindow)
+    s_blockedhostsWindow->setWindowIcon(windowIcon());
+
   emit iconsChanged();
 }
 
