@@ -1905,9 +1905,12 @@ void dooble::init_dooble(const bool isJavaScriptWindow)
 
       if(s_settings.contains(QString("mainWindow/widget_stylesheet_%1").
 			     arg(widget->objectName())))
-	widget->setStyleSheet
-	  (s_settings.value(QString("mainWindow/widget_stylesheet_%1").
-			    arg(widget->objectName())).toString());
+	{
+	  widget->setProperty("original_style_sheet", widget->styleSheet());
+	  widget->setStyleSheet
+	    (s_settings.value(QString("mainWindow/widget_stylesheet_%1").
+			      arg(widget->objectName())).toString());
+	}
 
       connect(widget,
 	      SIGNAL(customContextMenuRequested(const QPoint &)),
@@ -8303,12 +8306,56 @@ void dooble::slotSetWidgetStyleSheet(const QPoint &point)
 			  this,
 			  SLOT(slotCopyStyleSheet(void)));
   action->setProperty("widget_name", widget->objectName());
+  menu.addAction(tr("&Reset Dooble Style Sheets"),
+		 this,
+		 SLOT(slotResetStyleSheets(void)));
   action = menu.addAction(tr("Set &Style Sheet..."),
 			  this,
 			  SLOT(slotSetStyleSheet(void)));
   action->setProperty("widget_name", widget->objectName());
   action->setProperty("widget_stylesheet", widget->styleSheet());
   menu.exec(widget->mapToGlobal(point));
+}
+
+void dooble::slotResetStyleSheets(void)
+{
+  QMessageBox mb(this);
+
+#ifdef Q_OS_MAC
+#if QT_VERSION < 0x050000
+  mb.setAttribute(Qt::WA_MacMetalStyle, true);
+#endif
+#endif
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Are you sure that you wish to reset Dooble's custom "
+		"style sheets?"));
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QSettings settings;
+
+  foreach(QWidget *widget, findChildren<QWidget *> ())
+    if(widget->property("original_style_sheet").isValid())
+      {
+	widget->setStyleSheet
+	  (widget->property("original_style_sheet").toString());
+
+	QString str(widget->styleSheet().trimmed());
+
+	s_settings[QString("mainWindow/widget_stylesheet_%1").
+		   arg(widget->objectName())] = str;
+	settings.setValue
+	  (QString("mainWindow/widget_stylesheet_%1").
+	   arg(widget->objectName()), str);
+      }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slotSetStyleSheet(void)

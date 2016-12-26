@@ -290,6 +290,7 @@ class dooble: public QMainWindow
   void slotReloadTab(const int index);
   void slotReopenClosedTab(void);
   void slotRepaintRequested(const QRect &dirtyRect);
+  void slotResetStyleSheets(void);
   void slotResetUrl(void);
   void slotSaveBlockedHosts(void);
   void slotSaveFile(const QString &fileName, const QUrl &url, const int choice);
