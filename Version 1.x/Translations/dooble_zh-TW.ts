@@ -1211,6 +1211,18 @@
         <source>Dooble: Widget Style Sheet (%1)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Reset Dooble Style Sheets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to reset Dooble&apos;s custom style sheets?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>downloadPromptDialog</name>
@@ -1517,6 +1529,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You have selected an iteration count which exceeds the default value of 25,000. You may experience degradation during the initialization of Dooble. The key-generation process may also require a significant amount of time to complete. Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reset Settings Style Sheets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to reset the custom style sheets?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
