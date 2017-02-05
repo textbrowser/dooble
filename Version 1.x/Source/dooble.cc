@@ -8438,7 +8438,7 @@ void dooble::slotCopyStyleSheet(void)
 void dooble::prepareStatusBarLabel(const QString &text)
 {
   QFontMetrics fm(sb.statusLabel->fontMetrics());
-  int other = sb.authenticate->width() + 25;
+  int other = sb.authenticate->width() + 35;
 
   if(sb.exceptionsToolButton->isVisible())
     other += sb.exceptionsToolButton->width();
