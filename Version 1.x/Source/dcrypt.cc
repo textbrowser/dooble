@@ -314,7 +314,7 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
     {
       size_t blockLength = gcry_cipher_get_algo_blklen(m_cipherAlgorithm);
 
-      if(blockLength <= 0)
+      if(blockLength == 0)
 	{
 	  if(ok)
 	    *ok = false;

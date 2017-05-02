@@ -555,19 +555,9 @@ int dcookies::computedTimerInterval(void) const
 	("settingsWindow/cookieTimerInterval", 1).toInt();
 
       if(unit == 0)
-	{
-	  if(interval < 1 || interval > 60)
-	    interval = 1;
-
-	  interval = 3600000 * interval;
-	}
+	interval = 3600000 * qBound(1, interval, 60);
       else
-	{
-	  if(interval < 1 || interval > 3600)
-	    interval = 1;
-
-	  interval = 60000 * interval;
-	}
+	interval = 60000 * qBound(1, interval, 3600);
     }
 
   return interval;
