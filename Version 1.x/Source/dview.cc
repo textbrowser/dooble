@@ -80,14 +80,17 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
   webView->setPage(new dwebpage(webView));
   setWebAttributes(webAttributes);
 
-  QDataStream in(&m_history, QIODevice::ReadOnly);
-
-  if(in.status() == QDataStream::Ok)
+  if(!m_history.isEmpty())
     {
-      in >> *webView->page()->history();
+      QDataStream in(&m_history, QIODevice::ReadOnly);
 
-      if(in.status() != QDataStream::Ok)
-	webView->page()->history()->clear();
+      if(in.status() == QDataStream::Ok)
+	{
+	  in >> *webView->page()->history();
+
+	  if(in.status() != QDataStream::Ok)
+	    webView->page()->history()->clear();
+	}
     }
 
   /*
