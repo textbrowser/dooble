@@ -90,7 +90,11 @@ dview::dview(QWidget *parent, const QByteArray &history, dcookies *cookies,
 
 	  if(in.status() != QDataStream::Ok)
 	    webView->page()->history()->clear();
+	  else
+	    m_history.clear();
 	}
+      else
+	m_history.clear();
     }
 
   /*
