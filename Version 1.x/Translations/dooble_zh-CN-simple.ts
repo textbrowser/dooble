@@ -2110,52 +2110,52 @@
 <context>
     <name>dview</name>
     <message>
-        <location filename="../Source/dview.cc" line="317"/>
+        <location filename="../Source/dview.cc" line="324"/>
         <source>Copy &amp;Link Location</source>
         <translation>复制链接&amp;L</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="321"/>
+        <location filename="../Source/dview.cc" line="328"/>
         <source>Copy &amp;Selected Text</source>
         <translation type="unfinished">复制选定的文本</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="328"/>
+        <location filename="../Source/dview.cc" line="335"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>在新标签打开链接&amp;T</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="330"/>
+        <location filename="../Source/dview.cc" line="337"/>
         <source>Open Link in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="333"/>
+        <location filename="../Source/dview.cc" line="340"/>
         <source>S&amp;ave Link...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="348"/>
+        <location filename="../Source/dview.cc" line="355"/>
         <source>Sa&amp;ve Image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="354"/>
+        <location filename="../Source/dview.cc" line="361"/>
         <source>View Imag&amp;e in New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="389"/>
+        <location filename="../Source/dview.cc" line="396"/>
         <source>&amp;Print Frame...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="396"/>
+        <location filename="../Source/dview.cc" line="403"/>
         <source>View Frame S&amp;ource...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="400"/>
+        <location filename="../Source/dview.cc" line="407"/>
         <source>View Page S&amp;ource...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2172,27 +2172,27 @@
         <translation type="obsolete">保存链接&amp;S</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="360"/>
+        <location filename="../Source/dview.cc" line="367"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="363"/>
+        <location filename="../Source/dview.cc" line="370"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="381"/>
+        <location filename="../Source/dview.cc" line="388"/>
         <source>&amp;Reload</source>
         <translation type="unfinished">刷新&amp;R</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="346"/>
+        <location filename="../Source/dview.cc" line="353"/>
         <source>Copy &amp;Image Location</source>
         <translation>复制图片地址&amp;I</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="313"/>
+        <location filename="../Source/dview.cc" line="320"/>
         <source>Copy &amp;E-Mail Address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2201,22 +2201,22 @@
         <translation type="vanished">保存图片&amp;v</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="350"/>
+        <location filename="../Source/dview.cc" line="357"/>
         <source>View I&amp;mage</source>
         <translation>查看图片&amp;m</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="352"/>
+        <location filename="../Source/dview.cc" line="359"/>
         <source>View Ima&amp;ge in New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="384"/>
+        <location filename="../Source/dview.cc" line="391"/>
         <source>Sto&amp;p</source>
         <translation type="unfinished">停止&amp;p</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="697"/>
+        <location filename="../Source/dview.cc" line="704"/>
         <source>(Untitled)</source>
         <translation type="unfinished">(无主题)</translation>
     </message>
@@ -2229,12 +2229,12 @@
         <translation type="obsolete">在新窗口查看图片&amp;g</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="373"/>
+        <location filename="../Source/dview.cc" line="380"/>
         <source>&amp;Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="377"/>
+        <location filename="../Source/dview.cc" line="384"/>
         <source>&amp;Forward</source>
         <translation type="unfinished"></translation>
     </message>

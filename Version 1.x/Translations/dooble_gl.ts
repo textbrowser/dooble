@@ -2259,17 +2259,17 @@
 <context>
     <name>dview</name>
     <message>
-        <location filename="../Source/dview.cc" line="317"/>
+        <location filename="../Source/dview.cc" line="324"/>
         <source>Copy &amp;Link Location</source>
         <translation>Copiar a localización da &amp;ligazón</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="321"/>
+        <location filename="../Source/dview.cc" line="328"/>
         <source>Copy &amp;Selected Text</source>
         <translation>Copiar o &amp;texo seleccionado</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="328"/>
+        <location filename="../Source/dview.cc" line="335"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Abrir a ligazón nunha &amp;nova lapela</translation>
     </message>
@@ -2278,7 +2278,7 @@
         <translation type="vanished">Abrir a ligazón nunha nova &amp;xanela</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="352"/>
+        <location filename="../Source/dview.cc" line="359"/>
         <source>View Ima&amp;ge in New Tab</source>
         <translation>Ver a ima&amp;xe nunha nova lapela</translation>
     </message>
@@ -2287,67 +2287,67 @@
         <translation type="vanished">Ver a imax&amp;e nunha nova xanela</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="330"/>
+        <location filename="../Source/dview.cc" line="337"/>
         <source>Open Link in &amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="333"/>
+        <location filename="../Source/dview.cc" line="340"/>
         <source>S&amp;ave Link...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="348"/>
+        <location filename="../Source/dview.cc" line="355"/>
         <source>Sa&amp;ve Image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="354"/>
+        <location filename="../Source/dview.cc" line="361"/>
         <source>View Imag&amp;e in New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="360"/>
+        <location filename="../Source/dview.cc" line="367"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="363"/>
+        <location filename="../Source/dview.cc" line="370"/>
         <source>&amp;Paste</source>
         <translation>&amp;Pegar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="373"/>
+        <location filename="../Source/dview.cc" line="380"/>
         <source>&amp;Back</source>
         <translation>&amp;Atrás</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="377"/>
+        <location filename="../Source/dview.cc" line="384"/>
         <source>&amp;Forward</source>
         <translation>A&amp;diante</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="381"/>
+        <location filename="../Source/dview.cc" line="388"/>
         <source>&amp;Reload</source>
         <translation>&amp;Recargar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="384"/>
+        <location filename="../Source/dview.cc" line="391"/>
         <source>Sto&amp;p</source>
         <translation>&amp;Parar</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="389"/>
+        <location filename="../Source/dview.cc" line="396"/>
         <source>&amp;Print Frame...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="396"/>
+        <location filename="../Source/dview.cc" line="403"/>
         <source>View Frame S&amp;ource...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="400"/>
+        <location filename="../Source/dview.cc" line="407"/>
         <source>View Page S&amp;ource...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2364,17 +2364,17 @@
         <translation type="vanished">Ver o &amp;código da páxina</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="697"/>
+        <location filename="../Source/dview.cc" line="704"/>
         <source>(Untitled)</source>
         <translation>(sen título)</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="346"/>
+        <location filename="../Source/dview.cc" line="353"/>
         <source>Copy &amp;Image Location</source>
         <translation>Copiar a localización da &amp;imaxe</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="313"/>
+        <location filename="../Source/dview.cc" line="320"/>
         <source>Copy &amp;E-Mail Address</source>
         <translation>Copiar o &amp;enderezo do correo</translation>
     </message>
@@ -2387,7 +2387,7 @@
         <translation type="vanished">Ga&amp;rdar a imaxe</translation>
     </message>
     <message>
-        <location filename="../Source/dview.cc" line="350"/>
+        <location filename="../Source/dview.cc" line="357"/>
         <source>View I&amp;mage</source>
         <translation>Ver a i&amp;maxe</translation>
     </message>
