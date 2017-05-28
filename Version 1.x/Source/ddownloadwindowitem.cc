@@ -279,7 +279,6 @@ void ddownloadwindowitem::downloadUrl
 
 	  m_networkAccessManager->setProxy
 	    (dmisc::proxyByFunctionAndUrl(DoobleDownloadType::Http, m_url));
-	  request.setUrl(m_url);
 	  request.setAttribute
 	    (QNetworkRequest::HttpPipeliningAllowedAttribute, true);
 #if QT_VERSION >= 0x050300
@@ -288,6 +287,11 @@ void ddownloadwindowitem::downloadUrl
 	     dooble::s_settings.value("settingsWindow/speedy", false).
 	     toBool());
 #endif
+	  request.setRawHeader
+	    ("User-Agent",
+	     dooble::s_settings.value("settingsWindow/user_agent_string").
+	     toString().trimmed().toUtf8());
+	  request.setUrl(m_url);
 
 	  if(m_url.scheme().toLower().trimmed() == "https")
 	    if(dooble::s_sslCiphersWindow)
@@ -700,7 +704,6 @@ void ddownloadwindowitem::slotPauseDownload(void)
 	{
 	  QNetworkRequest request;
 
-	  request.setUrl(m_url);
 	  request.setAttribute
 	    (QNetworkRequest::HttpPipeliningAllowedAttribute, true);
 #if QT_VERSION >= 0x050300
@@ -709,6 +712,11 @@ void ddownloadwindowitem::slotPauseDownload(void)
 	     dooble::s_settings.value("settingsWindow/speedy", false).
 	     toBool());
 #endif
+	  request.setRawHeader
+	    ("User-Agent",
+	     dooble::s_settings.value("settingsWindow/user_agent_string").
+	     toString().trimmed().toUtf8());
+	  request.setUrl(m_url);
 
 	  if(m_url.scheme().toLower().trimmed() == "https")
 	    if(dooble::s_sslCiphersWindow)

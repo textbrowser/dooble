@@ -596,6 +596,10 @@ void dwebpage::downloadFavicon(const QUrl &faviconUrl, const QUrl &url)
 	      request.setSslConfiguration(configuration);
 	    }
 
+	request.setRawHeader
+	  ("User-Agent",
+	   dooble::s_settings.value("settingsWindow/user_agent_string").
+	   toString().trimmed().toUtf8());
 	m_networkAccessManager->setProxy(dmisc::proxyByUrl(faviconUrl));
 	reply = m_networkAccessManager->get(request);
 	m_networkAccessManager->setProxy(proxy);
@@ -656,6 +660,10 @@ void dwebpage::slotIconDownloadFinished(void)
 		    request.setSslConfiguration(configuration);
 		  }
 
+	      request.setRawHeader
+		("User-Agent",
+		 dooble::s_settings.value("settingsWindow/user_agent_string").
+		 toString().trimmed().toUtf8());
 	      m_networkAccessManager->setProxy(dmisc::proxyByUrl(url));
 	      r = m_networkAccessManager->get(request);
 	      m_networkAccessManager->setProxy(proxy);
