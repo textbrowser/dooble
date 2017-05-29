@@ -914,7 +914,7 @@
     <name>ddownloadwindowitem</name>
     <message>
         <location filename="../Source/ddownloadwindowitem.cc" line="111"/>
-        <location filename="../Source/ddownloadwindowitem.cc" line="634"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="638"/>
         <source>Pause Download</source>
         <translation>Download anhalten</translation>
     </message>
@@ -935,7 +935,7 @@
         <translation type="obsolete">%1 kB/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="584"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="588"/>
         <source>Download Aborted</source>
         <translation>Download abgebrochen</translation>
     </message>
@@ -984,62 +984,62 @@
         <translation>0 KiB/s (0 MiB)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="479"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="483"/>
         <source>%1 bit/s (%2 of %3)</source>
         <translation>%1 bit/s (%2 von %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="484"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="488"/>
         <source>%1 kbit/s (%2 of %3)</source>
         <translation>%1 kbit/s (%2 von %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="489"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="493"/>
         <source>%1 Mbit/s (%2 of %3)</source>
         <translation>%1 Mbit/s (%2 von %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="495"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="499"/>
         <source>%1 Gbit/s (%2 of %3)</source>
         <translation>%1 Gbit/s (%2 von %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="502"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="506"/>
         <source>%1 KiB/s (%2 of %3)</source>
         <translation>%1 KiB/s (%2 von %3)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="512"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="516"/>
         <source>%1 bit/s (%2)</source>
         <translation>%1 bit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="516"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="520"/>
         <source>%1 kbit/s (%2)</source>
         <translation>%1 kbit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="520"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="524"/>
         <source>%1 Mbit/s (%2)</source>
         <translation>%1 Mbit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="524"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="528"/>
         <source>%1 Gbit/s (%2)</source>
         <translation>%1 Gbit/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="529"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="533"/>
         <source>%1 KiB/s (%2)</source>
         <translation>%1 KiB/s (%2)</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="632"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="636"/>
         <source>Resume Download</source>
         <translation>Download fortsetzen</translation>
     </message>
     <message>
-        <location filename="../Source/ddownloadwindowitem.cc" line="755"/>
+        <location filename="../Source/ddownloadwindowitem.cc" line="763"/>
         <source>Paused (%1)</source>
         <translation>Angehalten (%1)</translation>
     </message>
