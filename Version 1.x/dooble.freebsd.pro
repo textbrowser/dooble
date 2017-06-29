@@ -237,7 +237,7 @@ TARGET		= Dooble
 
 dooble.path		= /usr/local/dooble
 dooble.files		= Dooble
-dooble_sh.path		= /usr/local/dooble
+dooble_sh.path		= /usr/local/bin
 dooble_sh.files		= dooble.sh
 desktop.path            = /usr/share/applications
 desktop.files           = dooble.desktop
