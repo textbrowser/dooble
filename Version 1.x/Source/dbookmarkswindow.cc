@@ -2974,26 +2974,27 @@ void dbookmarkswindow::slotShare(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QStandardItem *item = 0;
+  QStandardItem *item1 = 0;
   QModelIndexList list(ui.bookmarks->selectionModel()->selectedRows(1));
 
   if(!list.isEmpty())
-    item = m_urlModel->itemFromIndex(list.takeFirst());
+    item1 = m_urlModel->itemFromIndex(list.takeFirst());
 
-  if(item)
+  if(item1)
     {
+      QStandardItem *item2 = 0;
       QString content("");
       QString description("");
       QString title("");
-      QUrl url(QUrl::fromUserInput(item->text()));
+      QUrl url(QUrl::fromUserInput(item1->text()));
 
       url = QUrl::fromEncoded(url.toEncoded(QUrl::StripTrailingSlash));
 
-      if((item = m_urlModel->item(item->row(), 0)))
-	title = item->text();
+      if((item2 = m_urlModel->item(item1->row(), 0)))
+	title = item2->text();
 
-      if((item = m_urlModel->item(item->row(), 5)))
-	description = item->text();
+      if((item2 = m_urlModel->item(item1->row(), 5)))
+	description = item2->text();
 
       dooble::s_spoton->share(url, title, description, content);
     }
