@@ -178,6 +178,7 @@ Remaining Items
 14.   WebEngine.
 15.   HTTP error codes (203, 204, etc.).
 16.   List Debian packages.
+17.   Remove install targets from non-FreeBSD, non-OS X project files.
 
 Removed Items
 
