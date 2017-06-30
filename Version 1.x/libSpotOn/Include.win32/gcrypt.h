@@ -1,6 +1,6 @@
 /* gcrypt.h -  GNU Cryptographic Library Interface              -*- c -*-
- * Copyright (C) 1998-2015 Free Software Foundation, Inc.
- * Copyright (C) 2012-2015 g10 Code GmbH
+ * Copyright (C) 1998-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2012-2016 g10 Code GmbH
  *
  * This file is part of Libgcrypt.
  *
@@ -62,11 +62,11 @@ extern "C" {
    return the same version.  The purpose of this macro is to let
    autoconf (using the AM_PATH_GCRYPT macro) check that this header
    matches the installed library.  */
-#define GCRYPT_VERSION "1.6.6"
+#define GCRYPT_VERSION "1.7.7"
 
 /* The version number of this header.  It may be used to handle minor
    API incompatibilities.  */
-#define GCRYPT_VERSION_NUMBER 0x010606
+#define GCRYPT_VERSION_NUMBER 0x010707
 
 
 /* Internal: We can't use the convenience macros for the multi
@@ -327,7 +327,11 @@ enum gcry_ctl_cmds
     GCRYCTL_SET_CCM_LENGTHS = 69,
     GCRYCTL_CLOSE_RANDOM_DEVICE = 70,
     GCRYCTL_INACTIVATE_FIPS_FLAG = 71,
-    GCRYCTL_REACTIVATE_FIPS_FLAG = 72
+    GCRYCTL_REACTIVATE_FIPS_FLAG = 72,
+    GCRYCTL_SET_SBOX = 73,
+    GCRYCTL_DRBG_REINIT = 74,
+    GCRYCTL_SET_TAGLEN = 75,
+    GCRYCTL_GET_TAGLEN = 76
   };
 
 /* Perform various operations defined by CMD. */
@@ -468,8 +472,51 @@ char *gcry_sexp_nth_string (gcry_sexp_t list, int number);
    value can't be converted to an MPI, `NULL' is returned.  */
 gcry_mpi_t gcry_sexp_nth_mpi (gcry_sexp_t list, int number, int mpifmt);
 
-/* Convenience fucntion to extract parameters from an S-expression
- * using a list of single letter parameters.  */
+/* Extract MPIs from an s-expression using a list of parameters.  The
+ * names of these parameters are given by the string LIST.  Some
+ * special characters may be given to control the conversion:
+ *
+ *    + :: Switch to unsigned integer format (default).
+ *    - :: Switch to standard signed format.
+ *    / :: Switch to opaque format.
+ *    & :: Switch to buffer descriptor mode - see below.
+ *    ? :: The previous parameter is optional.
+ *
+ * In general parameter names are single letters.  To use a string for
+ * a parameter name, enclose the name in single quotes.
+ *
+ * Unless in gcry_buffer_t mode for each parameter name a pointer to
+ * an MPI variable is expected that must be set to NULL prior to
+ * invoking this function, and finally a NULL is expected.  Example:
+ *
+ *   _gcry_sexp_extract_param (key, NULL, "n/x+ed",
+ *                             &mpi_n, &mpi_x, &mpi_e, NULL)
+ *
+ * This stores the parameter "N" from KEY as an unsigned MPI into
+ * MPI_N, the parameter "X" as an opaque MPI into MPI_X, and the
+ * parameter "E" again as an unsigned MPI into MPI_E.
+ *
+ * If in buffer descriptor mode a pointer to gcry_buffer_t descriptor
+ * is expected instead of a pointer to an MPI.  The caller may use two
+ * different operation modes: If the DATA field of the provided buffer
+ * descriptor is NULL, the function allocates a new buffer and stores
+ * it at DATA; the other fields are set accordingly with OFF being 0.
+ * If DATA is not NULL, the function assumes that DATA, SIZE, and OFF
+ * describe a buffer where to but the data; on return the LEN field
+ * receives the number of bytes copied to that buffer; if the buffer
+ * is too small, the function immediately returns with an error code
+ * (and LEN set to 0).
+ *
+ * PATH is an optional string used to locate a token.  The exclamation
+ * mark separated tokens are used to via gcry_sexp_find_token to find
+ * a start point inside SEXP.
+ *
+ * The function returns 0 on success.  On error an error code is
+ * returned, all passed MPIs that might have been allocated up to this
+ * point are deallocated and set to NULL, and all passed buffers are
+ * either truncated if the caller supplied the buffer, or deallocated
+ * if the function allocated the buffer.
+ */
 gpg_error_t gcry_sexp_extract_param (gcry_sexp_t sexp,
                                      const char *path,
                                      const char *list,
@@ -506,7 +553,7 @@ enum gcry_mpi_flag
     GCRYMPI_FLAG_USER1 = 0x0100,/* User flag 1.  */
     GCRYMPI_FLAG_USER2 = 0x0200,/* User flag 2.  */
     GCRYMPI_FLAG_USER3 = 0x0400,/* User flag 3.  */
-    GCRYMPI_FLAG_USER4 = 0x0800,/* User flag 4.  */
+    GCRYMPI_FLAG_USER4 = 0x0800 /* User flag 4.  */
   };
 
 
@@ -578,7 +625,7 @@ gcry_error_t gcry_mpi_print (enum gcry_mpi_format format,
                              size_t *nwritten,
                              const gcry_mpi_t a);
 
-/* Convert the big integer A int the external representation described
+/* Convert the big integer A into the external representation described
    by FORMAT and store it in a newly allocated buffer which address
    will be put into BUFFER.  NWRITTEN receives the actual lengths of the
    external representation. */
@@ -689,6 +736,10 @@ gpg_error_t gcry_mpi_ec_set_mpi (const char *name, gcry_mpi_t newvalue,
 gpg_error_t gcry_mpi_ec_set_point (const char *name, gcry_mpi_point_t newvalue,
                                    gcry_ctx_t ctx);
 
+/* Decode and store VALUE into RESULT.  */
+gpg_error_t gcry_mpi_ec_decode_point (gcry_mpi_point_t result,
+                                      gcry_mpi_t value, gcry_ctx_t ctx);
+
 /* Store the affine coordinates of POINT into X and Y.  */
 int gcry_mpi_ec_get_affine (gcry_mpi_t x, gcry_mpi_t y, gcry_mpi_point_t point,
                             gcry_ctx_t ctx);
@@ -698,6 +749,10 @@ void gcry_mpi_ec_dup (gcry_mpi_point_t w, gcry_mpi_point_t u, gcry_ctx_t ctx);
 
 /* W = U + V.  */
 void gcry_mpi_ec_add (gcry_mpi_point_t w,
+                      gcry_mpi_point_t u, gcry_mpi_point_t v, gcry_ctx_t ctx);
+
+/* W = U - V.  */
+void gcry_mpi_ec_sub (gcry_mpi_point_t w,
                       gcry_mpi_point_t u, gcry_mpi_point_t v, gcry_ctx_t ctx);
 
 /* W = N * U.  */
@@ -878,7 +933,8 @@ enum gcry_cipher_algos
     GCRY_CIPHER_CAMELLIA256 = 312,
     GCRY_CIPHER_SALSA20     = 313,
     GCRY_CIPHER_SALSA20R12  = 314,
-    GCRY_CIPHER_GOST28147   = 315
+    GCRY_CIPHER_GOST28147   = 315,
+    GCRY_CIPHER_CHACHA20    = 316
   };
 
 /* The Rijndael algorithm is basically AES, so provide some macros. */
@@ -892,16 +948,19 @@ enum gcry_cipher_algos
    supported for each algorithm. */
 enum gcry_cipher_modes
   {
-    GCRY_CIPHER_MODE_NONE   = 0,  /* Not yet specified. */
-    GCRY_CIPHER_MODE_ECB    = 1,  /* Electronic codebook. */
-    GCRY_CIPHER_MODE_CFB    = 2,  /* Cipher feedback. */
-    GCRY_CIPHER_MODE_CBC    = 3,  /* Cipher block chaining. */
-    GCRY_CIPHER_MODE_STREAM = 4,  /* Used with stream ciphers. */
-    GCRY_CIPHER_MODE_OFB    = 5,  /* Outer feedback. */
-    GCRY_CIPHER_MODE_CTR    = 6,  /* Counter. */
-    GCRY_CIPHER_MODE_AESWRAP= 7,  /* AES-WRAP algorithm.  */
-    GCRY_CIPHER_MODE_CCM    = 8,  /* Counter with CBC-MAC.  */
-    GCRY_CIPHER_MODE_GCM    = 9   /* Galois Counter Mode. */
+    GCRY_CIPHER_MODE_NONE     = 0,   /* Not yet specified. */
+    GCRY_CIPHER_MODE_ECB      = 1,   /* Electronic codebook. */
+    GCRY_CIPHER_MODE_CFB      = 2,   /* Cipher feedback. */
+    GCRY_CIPHER_MODE_CBC      = 3,   /* Cipher block chaining. */
+    GCRY_CIPHER_MODE_STREAM   = 4,   /* Used with stream ciphers. */
+    GCRY_CIPHER_MODE_OFB      = 5,   /* Outer feedback. */
+    GCRY_CIPHER_MODE_CTR      = 6,   /* Counter. */
+    GCRY_CIPHER_MODE_AESWRAP  = 7,   /* AES-WRAP algorithm.  */
+    GCRY_CIPHER_MODE_CCM      = 8,   /* Counter with CBC-MAC.  */
+    GCRY_CIPHER_MODE_GCM      = 9,   /* Galois Counter Mode. */
+    GCRY_CIPHER_MODE_POLY1305 = 10,  /* Poly1305 based AEAD mode. */
+    GCRY_CIPHER_MODE_OCB      = 11,  /* OCB3 mode.  */
+    GCRY_CIPHER_MODE_CFB8     = 12   /* Cipher feedback (8 bit mode). */
   };
 
 /* Flags used with the open function. */
@@ -919,12 +978,15 @@ enum gcry_cipher_flags
 /* CCM works only with blocks of 128 bits.  */
 #define GCRY_CCM_BLOCK_LEN  (128 / 8)
 
+/* OCB works only with blocks of 128 bits.  */
+#define GCRY_OCB_BLOCK_LEN  (128 / 8)
+
 /* Create a handle for algorithm ALGO to be used in MODE.  FLAGS may
    be given as an bitwise OR of the gcry_cipher_flags values. */
 gcry_error_t gcry_cipher_open (gcry_cipher_hd_t *handle,
                               int algo, int mode, unsigned int flags);
 
-/* Close the cioher handle H and release all resource. */
+/* Close the cipher handle H and release all resource. */
 void gcry_cipher_close (gcry_cipher_hd_t h);
 
 /* Perform various operations on the cipher object H. */
@@ -998,6 +1060,14 @@ gcry_error_t gcry_cipher_checktag (gcry_cipher_hd_t hd, const void *intag,
 #define gcry_cipher_cts(h,on)  gcry_cipher_ctl( (h), GCRYCTL_SET_CBC_CTS, \
                                                                    NULL, on )
 
+#define gcry_cipher_set_sbox(h,oid) gcry_cipher_ctl( (h), GCRYCTL_SET_SBOX, \
+                                                     (void *) oid, 0);
+
+/* Indicate to the encrypt and decrypt functions that the next call
+   provides the final data.  Only used with some modes.  */
+#define gcry_cipher_final(a) \
+            gcry_cipher_ctl ((a), GCRYCTL_FINALIZE, NULL, 0)
+
 /* Set counter for CTR mode.  (CTR,CTRLEN) must denote a buffer of
    block size length, or (NULL,0) to set the CTR to the all-zero block. */
 gpg_error_t gcry_cipher_setctr (gcry_cipher_hd_t hd,
@@ -1030,8 +1100,9 @@ enum gcry_pk_algos
     GCRY_PK_DSA   = 17,     /* Digital Signature Algorithm.  */
     GCRY_PK_ECC   = 18,     /* Generic ECC.  */
     GCRY_PK_ELG   = 20,     /* Elgamal       */
-    GCRY_PK_ECDSA = 301,    /* (deprecated: use 18).  */
-    GCRY_PK_ECDH  = 302     /* (deprecated: use 18).  */
+    GCRY_PK_ECDSA = 301,    /* (only for external use).  */
+    GCRY_PK_ECDH  = 302,    /* (only for external use).  */
+    GCRY_PK_EDDSA = 303     /* (only for external use).  */
   };
 
 /* Flags describing usage capabilities of a PK algorithm. */
@@ -1121,7 +1192,7 @@ gcry_error_t gcry_pubkey_get_sexp (gcry_sexp_t *r_sexp,
  ************************************/
 
 /* Algorithm IDs for the hash functions we know about. Not all of them
-   are implemnted. */
+   are implemented. */
 enum gcry_md_algos
   {
     GCRY_MD_NONE    = 0,
@@ -1135,7 +1206,8 @@ enum gcry_md_algos
     GCRY_MD_SHA384  = 9,
     GCRY_MD_SHA512  = 10,
     GCRY_MD_SHA224  = 11,
-    GCRY_MD_MD4     = 301,
+
+    GCRY_MD_MD4           = 301,
     GCRY_MD_CRC32         = 302,
     GCRY_MD_CRC32_RFC1510 = 303,
     GCRY_MD_CRC24_RFC2440 = 304,
@@ -1144,7 +1216,14 @@ enum gcry_md_algos
     GCRY_MD_TIGER2        = 307, /* TIGER2 variant.   */
     GCRY_MD_GOSTR3411_94  = 308, /* GOST R 34.11-94.  */
     GCRY_MD_STRIBOG256    = 309, /* GOST R 34.11-2012, 256 bit.  */
-    GCRY_MD_STRIBOG512    = 310  /* GOST R 34.11-2012, 512 bit.  */
+    GCRY_MD_STRIBOG512    = 310, /* GOST R 34.11-2012, 512 bit.  */
+    GCRY_MD_GOSTR3411_CP  = 311, /* GOST R 34.11-94 with CryptoPro-A S-Box.  */
+    GCRY_MD_SHA3_224      = 312,
+    GCRY_MD_SHA3_256      = 313,
+    GCRY_MD_SHA3_384      = 314,
+    GCRY_MD_SHA3_512      = 315,
+    GCRY_MD_SHAKE128      = 316,
+    GCRY_MD_SHAKE256      = 317
   };
 
 /* Flags used with the open function.  */
@@ -1208,6 +1287,11 @@ void gcry_md_write (gcry_md_hd_t hd, const void *buffer, size_t length);
 /* Read out the final digest from HD return the digest value for
    algorithm ALGO. */
 unsigned char *gcry_md_read (gcry_md_hd_t hd, int algo);
+
+/* Read more output from algorithm ALGO to BUFFER of size LENGTH from
+ * digest object HD. Algorithm needs to be 'expendable-output function'. */
+gpg_error_t gcry_md_extract (gcry_md_hd_t hd, int algo, void *buffer,
+                             size_t length);
 
 /* Convenience function to calculate the hash from the data in BUFFER
    of size LENGTH using the algorithm ALGO avoiding the creating of a
@@ -1320,6 +1404,11 @@ enum gcry_mac_algos
     GCRY_MAC_HMAC_GOSTR3411_94  = 111,
     GCRY_MAC_HMAC_STRIBOG256    = 112,
     GCRY_MAC_HMAC_STRIBOG512    = 113,
+    GCRY_MAC_HMAC_MD2           = 114,
+    GCRY_MAC_HMAC_SHA3_224      = 115,
+    GCRY_MAC_HMAC_SHA3_256      = 116,
+    GCRY_MAC_HMAC_SHA3_384      = 117,
+    GCRY_MAC_HMAC_SHA3_512      = 118,
 
     GCRY_MAC_CMAC_AES           = 201,
     GCRY_MAC_CMAC_3DES          = 202,
@@ -1337,13 +1426,20 @@ enum gcry_mac_algos
     GCRY_MAC_GMAC_CAMELLIA      = 402,
     GCRY_MAC_GMAC_TWOFISH       = 403,
     GCRY_MAC_GMAC_SERPENT       = 404,
-    GCRY_MAC_GMAC_SEED          = 405
+    GCRY_MAC_GMAC_SEED          = 405,
+
+    GCRY_MAC_POLY1305           = 501,
+    GCRY_MAC_POLY1305_AES       = 502,
+    GCRY_MAC_POLY1305_CAMELLIA  = 503,
+    GCRY_MAC_POLY1305_TWOFISH   = 504,
+    GCRY_MAC_POLY1305_SERPENT   = 505,
+    GCRY_MAC_POLY1305_SEED      = 506
   };
 
 /* Flags used with the open function.  */
 enum gcry_mac_flags
   {
-    GCRY_MAC_FLAG_SECURE = 1,  /* Allocate all buffers in "secure" memory.  */
+    GCRY_MAC_FLAG_SECURE = 1   /* Allocate all buffers in "secure" memory.  */
   };
 
 /* Create a MAC handle for algorithm ALGO.  FLAGS may be given as an bitwise OR
@@ -1382,6 +1478,9 @@ gcry_error_t gcry_mac_read (gcry_mac_hd_t hd, void *buffer, size_t *buflen);
 /* Verify the final authentication code from the MAC object HD with BUFFER. */
 gcry_error_t gcry_mac_verify (gcry_mac_hd_t hd, const void *buffer,
                               size_t buflen);
+
+/* Retrieve the algorithm used with MAC. */
+int gcry_mac_get_algo (gcry_mac_hd_t hd);
 
 /* Retrieve the length in bytes of the MAC yielded by algorithm ALGO. */
 unsigned int gcry_mac_get_algo_maclen (int algo);
@@ -1546,7 +1645,7 @@ gcry_error_t gcry_prime_generate (gcry_mpi_t *prime,
 /* Find a generator for PRIME where the factorization of (prime-1) is
    in the NULL terminated array FACTORS. Return the generator as a
    newly allocated MPI in R_G.  If START_G is not NULL, use this as
-   teh start for the search. */
+   the start for the search. */
 gcry_error_t gcry_prime_group_generator (gcry_mpi_t *r_g,
                                          gcry_mpi_t prime,
                                          gcry_mpi_t *factors,

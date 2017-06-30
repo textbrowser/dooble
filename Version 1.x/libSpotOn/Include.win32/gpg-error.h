@@ -1,5 +1,5 @@
-/* gpg-error.h - Public interface to libgpg-error.               -*- c -*-
- * Copyright (C) 2003, 2004, 2010, 2013, 2014, 2015, 2016 g10 Code GmbH
+/* gpg-error.h or gpgrt.h - Public interface to libgpg-error.   -*- c -*-
+ * Copyright (C) 2003-2004, 2010, 2013-2017 g10 Code GmbH
  *
  * This file is part of libgpg-error.
  *
@@ -21,19 +21,21 @@
  */
 
 #ifndef GPG_ERROR_H
-#define GPG_ERROR_H	1
+#define GPG_ERROR_H 1
+#ifndef GPGRT_H
+#define GPGRT_H 1
 
 #include <stddef.h>
 #include <stdio.h>
 #include <stdarg.h>
 
 /* The version string of this header. */
-#define GPG_ERROR_VERSION "1.23"
-#define GPGRT_VERSION     "1.23"
+#define GPG_ERROR_VERSION "1.27"
+#define GPGRT_VERSION     "1.27"
 
 /* The version number of this header. */
-#define GPG_ERROR_VERSION_NUMBER 0x011700
-#define GPGRT_VERSION_NUMBER     0x011700
+#define GPG_ERROR_VERSION_NUMBER 0x011b00
+#define GPGRT_VERSION_NUMBER     0x011b00
 
 
 #ifdef __GNUC__
@@ -407,6 +409,29 @@ typedef enum
     GPG_ERR_ASS_NO_OUTPUT = 279,
     GPG_ERR_ASS_PARAMETER = 280,
     GPG_ERR_ASS_UNKNOWN_INQUIRE = 281,
+    GPG_ERR_ENGINE_TOO_OLD = 300,
+    GPG_ERR_WINDOW_TOO_SMALL = 301,
+    GPG_ERR_WINDOW_TOO_LARGE = 302,
+    GPG_ERR_MISSING_ENVVAR = 303,
+    GPG_ERR_USER_ID_EXISTS = 304,
+    GPG_ERR_NAME_EXISTS = 305,
+    GPG_ERR_DUP_NAME = 306,
+    GPG_ERR_TOO_YOUNG = 307,
+    GPG_ERR_TOO_OLD = 308,
+    GPG_ERR_UNKNOWN_FLAG = 309,
+    GPG_ERR_INV_ORDER = 310,
+    GPG_ERR_ALREADY_FETCHED = 311,
+    GPG_ERR_TRY_LATER = 312,
+    GPG_ERR_WRONG_NAME = 313,
+    GPG_ERR_SYSTEM_BUG = 666,
+    GPG_ERR_DNS_UNKNOWN = 711,
+    GPG_ERR_DNS_SECTION = 712,
+    GPG_ERR_DNS_ADDRESS = 713,
+    GPG_ERR_DNS_NO_QUERY = 714,
+    GPG_ERR_DNS_NO_ANSWER = 715,
+    GPG_ERR_DNS_CLOSED = 716,
+    GPG_ERR_DNS_VERIFY = 717,
+    GPG_ERR_DNS_TIMEOUT = 718,
     GPG_ERR_LDAP_GENERAL = 721,
     GPG_ERR_LDAP_ATTR_GENERAL = 722,
     GPG_ERR_LDAP_NAME_GENERAL = 723,
@@ -697,7 +722,7 @@ typedef unsigned int gpg_error_t;
 # define _GPG_ERR_CONSTRUCTOR
 #endif
 
-#define GPGRT_GCC_VERSION  _GCC_ERR_GCC_VERSION
+#define GPGRT_GCC_VERSION  _GPG_ERR_GCC_VERSION
 
 #if _GPG_ERR_GCC_VERSION >= 29200
 # define _GPGRT__RESTRICT __restrict__
@@ -844,6 +869,9 @@ void gpg_err_deinit (int mode);
 
 /* Register blocking system I/O clamping functions.  */
 void gpgrt_set_syscall_clamp (void (*pre)(void), void (*post)(void));
+
+/* Get current I/O clamping functions.  */
+void gpgrt_get_syscall_clamp (void (**r_pre)(void), void (**r_post)(void));
 
 /* Register a custom malloc/realloc/free function.  */
 void gpgrt_set_alloc_func  (void *(*f)(void *a, size_t n));
@@ -1035,7 +1063,7 @@ gpg_error_from_syserror (void)
 #pragma pack(push, 8)
 typedef struct
 {
-  volatile char priv[56];
+  volatile unsigned char priv[56];
 } gpgrt_lock_t;
 #pragma pack(pop)
 
@@ -1049,7 +1077,7 @@ typedef struct
 #pragma pack(push, 8)
 typedef struct
 {
-  volatile char priv[36];
+  volatile unsigned char priv[36];
 } gpgrt_lock_t;
 #pragma pack(pop)
 
@@ -1478,10 +1506,21 @@ int gpgrt_vsnprintf (char *buf,size_t bufsize,
 # define es_bsprintf          gpgrt_bsprintf
 # define es_vbsprintf         gpgrt_vbsprintf
 #endif /*GPGRT_ENABLE_ES_MACROS*/
+
+/* Base64 decode functions.  */
+
+struct _gpgrt_b64state;
+typedef struct _gpgrt_b64state *gpgrt_b64state_t;
+
+gpgrt_b64state_t gpgrt_b64dec_start (const char *title);
+gpg_error_t gpgrt_b64dec_proc (gpgrt_b64state_t state,
+                               void *buffer, size_t length, size_t *r_nbytes);
+gpg_error_t gpgrt_b64dec_finish (gpgrt_b64state_t state);
 
 #ifdef __cplusplus
 }
 #endif
+#endif	/* GPGRT_H */
 #endif	/* GPG_ERROR_H */
 /*
 Local Variables:
