@@ -118,8 +118,8 @@ TRANSLATIONS    = Translations\\dooble_en.ts \
                   Translations\\dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_YE.ts \
                   Translations\\dooble_French_BE_BJ_BF_BI_FR_KM_CD_CI_DJ_DM_PF_TF_GA_GN_HT_LB_LU_ML_MR_YT_MC_NC_NE_NG_SN_TG_TN.ts \
                   Translations\\dooble_Portuguese_AO_BR_CV_GW_MO_MZ_ST_TL.ts
-                  
-UI_HEADERS_DIR  = Include
+
+UI_HEADERS_DIR  = Source
 
 PROJECTNAME	= Dooble
 TARGET		= Dooble
