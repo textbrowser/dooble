@@ -1,0 +1,4 @@
+Dooble 2.x supports Mac OS 10.12.5 and newer, Windows 7 and newer. As for
+Linux and FreeBSD, a system capable of supporting Qt 5.9.
+
+Qt 5.9 is required.
