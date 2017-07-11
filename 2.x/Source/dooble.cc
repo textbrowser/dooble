@@ -93,11 +93,6 @@ int main(int argc, char *argv[])
   setrlimit(RLIMIT_NOFILE, &rlim);
 #endif
 
-  /*
-  ** Prepare signal handlers. Clearly, this does not account for
-  ** the user's desire to restore sessions.
-  */
-
   QList<int> list;
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
   struct sigaction signal_action;
@@ -145,6 +140,7 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapplication(argc, argv);
+  int rc = qapplication.exec();
 
-  return qapplication.exec();
+  return rc;
 }
