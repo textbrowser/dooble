@@ -42,6 +42,8 @@ extern "C"
 #endif
 }
 
+#include "dooble.h"
+
 static char *s_doobleAbortedFileName = 0;
 
 static void signal_handler(int signal_number)
@@ -140,6 +142,10 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapplication(argc, argv);
+  dooble *d = new dooble();
+
+  d->show();
+
   int rc = qapplication.exec();
 
   return rc;
