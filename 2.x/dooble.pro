@@ -35,7 +35,7 @@ FORMS           = UI\\dooble.ui \
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_page.h
 
-RESOURCES       +=
+RESOURCES       += Icons\\icons.qrc
 
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_main.cc \
