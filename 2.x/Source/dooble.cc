@@ -26,14 +26,19 @@
 */
 
 #include "dooble.h"
+#include "dooble_page.h"
 
 dooble::dooble(void)
 {
   m_ui.setupUi(this);
+  newPage();
 }
 
 void dooble::newPage(void)
 {
+  dooble_page *page = new dooble_page(this);
+
+  m_ui.tab->addTab(page, tr("Dooble"));
 }
 
 void dooble::show(void)
