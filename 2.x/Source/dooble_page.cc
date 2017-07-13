@@ -25,26 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_h
-#define dooble_h
+#include "dooble_page.h"
 
-#include <QMainWindow>
-
-#include "ui_dooble.h"
-
-class dooble: public QMainWindow
+dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 {
-  Q_OBJECT
-
- public:
-  dooble(void);
-
- private:
-  Ui_dooble m_ui;
-  void newPage(void);
-
- public slots:
-  void show(void);
-};
-
-#endif
+  m_ui.setupUi(this);
+}

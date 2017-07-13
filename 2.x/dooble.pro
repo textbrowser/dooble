@@ -32,12 +32,14 @@ UI_DIR = temp/ui
 FORMS           = UI\\dooble.ui \
                   UI\\dooble_page.ui
 
-HEADERS		= Source\\dooble.h
+HEADERS		= Source\\dooble.h \
+                  Source\\dooble_page.h
 
 RESOURCES       +=
 
 SOURCES		= Source\\dooble.cc \
-                  Source\\dooble_main.cc
+                  Source\\dooble_main.cc \
+                  Source\\dooble_page.cc
 
 TRANSLATIONS    =
 

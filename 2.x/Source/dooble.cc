@@ -32,6 +32,10 @@ dooble::dooble(void)
   m_ui.setupUi(this);
 }
 
+void dooble::newPage(void)
+{
+}
+
 void dooble::show(void)
 {
   QMainWindow::show();
