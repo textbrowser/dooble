@@ -29,7 +29,7 @@ OBJECTS_DIR = temp/obj
 RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
-FORMS           =
+FORMS           = UI\\dooble.ui
 
 HEADERS		=
 
