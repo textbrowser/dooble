@@ -36,6 +36,9 @@
      </property>
      <item>
       <widget class="QToolButton" name="menu">
+       <property name="toolTip">
+        <string>Menus</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -43,6 +46,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="backward">
+       <property name="toolTip">
+        <string>Backward</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -50,6 +56,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="forward">
+       <property name="toolTip">
+        <string>Forward</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -57,6 +66,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="reload">
+       <property name="toolTip">
+        <string>Reload</string>
+       </property>
        <property name="text">
         <string/>
        </property>
