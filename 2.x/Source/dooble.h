@@ -38,9 +38,11 @@ class dooble: public QMainWindow
 
  public:
   dooble(void);
+  static QVariant setting(const QString &key);
 
  private:
   Ui_dooble m_ui;
+  static QMap<QString, QVariant> s_settings;
   void newPage(void);
 
  public slots:

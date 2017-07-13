@@ -38,6 +38,7 @@ class dooble_page: public QWidget
 
  public:
   dooble_page(QWidget *parent);
+  void prepare_icons(void);
 
  private:
   Ui_dooble_page m_ui;

@@ -28,10 +28,18 @@
 #include "dooble.h"
 #include "dooble_page.h"
 
+QMap<QString, QVariant> dooble::s_settings;
+
 dooble::dooble(void)
 {
   m_ui.setupUi(this);
+  s_settings["icon_set"] = "nuoveXT";
   newPage();
+}
+
+QVariant dooble::setting(const QString &key)
+{
+  return s_settings.value(key);
 }
 
 void dooble::newPage(void)
