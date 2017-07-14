@@ -35,6 +35,8 @@
 dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 {
   m_ui.setupUi(this);
+  m_ui.backward->setEnabled(false);
+  m_ui.forward->setEnabled(false);
   m_ui.menus->setMenu(new QMenu(this));
   m_view = new dooble_web_engine_view(this);
   m_ui.frame->layout()->addWidget(m_view);
