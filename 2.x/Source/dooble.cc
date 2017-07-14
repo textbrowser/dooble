@@ -66,6 +66,10 @@ void dooble::new_page(void)
 	  SIGNAL(quit_dooble(void)),
 	  this,
 	  SLOT(slot_quit_dooble(void)));
+  connect(page,
+	  SIGNAL(titleChanged(const QString &)),
+	  this,
+	  SLOT(slot_title_changed(const QString &)));
   m_ui.tab->addTab(page, tr("Dooble"));
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
@@ -132,4 +136,16 @@ void dooble::slot_tab_close_requested(int index)
   page->deleteLater();
   m_ui.tab->removeTab(index);
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+}
+
+void dooble::slot_title_changed(const QString &title)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  m_ui.tab->setTabText(m_ui.tab->indexOf(page), title);
+  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
+  setWindowTitle(tr("%1 - Dooble").arg(title));
 }

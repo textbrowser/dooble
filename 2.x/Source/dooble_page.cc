@@ -46,6 +46,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_standard_menus(void)));
+  connect(m_view,
+	  SIGNAL(titleChanged(const QString &)),
+	  this,
+	  SIGNAL(titleChanged(const QString &)));
   prepare_icons();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }

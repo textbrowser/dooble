@@ -54,6 +54,7 @@ class dooble_page: public QWidget
   void new_tab(void);
   void new_window(void);
   void quit_dooble(void);
+  void titleChanged(const QString &title);
 };
 
 #endif
