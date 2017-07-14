@@ -72,6 +72,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_standard_menus(void)));
+  connect(m_ui.reload,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reload_or_stop(void)));
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
@@ -92,6 +96,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SIGNAL(loadStarted(void)));
+  connect(m_view,
+	  SIGNAL(loadStarted(void)),
+	  this,
+	  SLOT(slot_load_started(void)));
   connect(m_view,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
@@ -132,7 +140,11 @@ void dooble_page::slot_go_forward(void)
 void dooble_page::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
+
+  QString icon_set(dooble::setting("icon_set").toString());
+
   m_ui.progress->setVisible(false);
+  m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
 }
 
 void dooble_page::slot_load_page(void)
@@ -146,6 +158,14 @@ void dooble_page::slot_load_progress(int progress)
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
   m_ui.progress->setVisible(progress < 100);
+}
+
+void dooble_page::slot_load_started(void)
+{
+  QString icon_set(dooble::setting("icon_set").toString());
+
+  m_ui.progress->setVisible(true);
+  m_ui.reload->setIcon(QIcon(QString(":/%1/stop.png").arg(icon_set)));
 }
 
 void dooble_page::slot_open_url(void)
@@ -225,6 +245,14 @@ void dooble_page::slot_prepare_standard_menus(void)
 		  this,
 		  SIGNAL(quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
+}
+
+void dooble_page::slot_reload_or_stop(void)
+{
+  if(m_ui.progress->isVisible())
+    m_view->stop();
+  else
+    m_view->reload();
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)

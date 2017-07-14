@@ -58,10 +58,12 @@ class dooble_page: public QWidget
   void slot_load_finished(bool ok);
   void slot_load_page(void);
   void slot_load_progress(int progress);
+  void slot_load_started(void);
   void slot_open_url(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
   void slot_prepare_standard_menus(void);
+  void slot_reload_or_stop(void);
   void slot_url_changed(const QUrl &url);
 
  signals:
