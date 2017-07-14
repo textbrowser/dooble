@@ -35,6 +35,7 @@ FORMS           = UI\\dooble.ui \
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
                   Source\\dooble_page.h \
+                  Source\\dooble_tab_bar.h \
                   Source\\dooble_tab_widget.h \
                   Source\\dooble_web_engine_page.h \
                   Source\\dooble_web_engine_view.h
@@ -45,6 +46,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
+                  Source\\dooble_tab_bar.cc \
                   Source\\dooble_tab_widget.cc \
                   Source\\dooble_web_engine_page.cc \
                   Source\\dooble_web_engine_view.cc

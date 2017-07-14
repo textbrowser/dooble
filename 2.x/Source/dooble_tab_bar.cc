@@ -25,22 +25,25 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_tab_widget_h
-#define dooble_tab_widget_h
+#include "dooble_tab_bar.h"
 
-#include <QTabWidget>
-
-class dooble_tab_bar;
-
-class dooble_tab_widget: public QTabWidget
+dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
-  Q_OBJECT
+  setElideMode(Qt::ElideRight);
+}
 
- public:
-  dooble_tab_widget(QWidget *parent);
+QSize dooble_tab_bar::tabSizeHint(int index) const
+{
+  QSize size(QTabBar::tabSizeHint(index));
+  int preferred_tab_width = 225;
 
- private:
-  dooble_tab_bar *m_tab_bar;
-};
+  if(!(parentWidget() &&
+       count() * rect().width() < parentWidget()->size().width()))
+    preferred_tab_width = qBound
+      (125,
+       qMax(size.width(), rect().width() / qMax(1, count())),
+       preferred_tab_width);
 
-#endif
+  size.setWidth(preferred_tab_width);
+  return size;
+}

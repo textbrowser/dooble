@@ -25,22 +25,20 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_tab_widget_h
-#define dooble_tab_widget_h
+#ifndef dooble_tab_bar_h
+#define dooble_tab_bar_h
 
-#include <QTabWidget>
+#include <QTabBar>
 
-class dooble_tab_bar;
-
-class dooble_tab_widget: public QTabWidget
+class dooble_tab_bar: public QTabBar
 {
   Q_OBJECT
 
  public:
-  dooble_tab_widget(QWidget *parent);
+  dooble_tab_bar(QWidget *parent);
 
- private:
-  dooble_tab_bar *m_tab_bar;
+ protected:
+  QSize tabSizeHint(int index) const;
 };
 
 #endif

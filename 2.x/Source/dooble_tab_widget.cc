@@ -25,8 +25,11 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
+  m_tab_bar = new dooble_tab_bar(this);
+  setTabBar(m_tab_bar);
 }
