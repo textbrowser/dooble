@@ -38,15 +38,16 @@ class dooble_page: public QWidget
 
  public:
   dooble_page(QWidget *parent);
-  void prepare_icons(void);
-  void prepare_standard_menus(void);
 
  private:
   Ui_dooble_page m_ui;
+  void prepare_icons(void);
 
  private slots:
+  void slot_prepare_standard_menus(void);
 
  signals:
+  void close_tab(void);
   void new_tab(void);
   void new_window(void);
   void quit_dooble(void);

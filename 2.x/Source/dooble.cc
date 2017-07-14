@@ -48,8 +48,12 @@ QVariant dooble::setting(const QString &key)
 
 void dooble::new_page(void)
 {
-  dooble_page *page = new dooble_page(this);
+  dooble_page *page = new dooble_page(m_ui.tab);
 
+  connect(page,
+	  SIGNAL(close_tab(void)),
+	  this,
+	  SLOT(slot_close_tab(void)));
   connect(page,
 	  SIGNAL(new_tab(void)),
 	  this,
@@ -77,6 +81,18 @@ void dooble::set_setting(const QString &key, const QVariant &value)
 void dooble::show(void)
 {
   QMainWindow::show();
+}
+
+void dooble::slot_close_tab(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  page->deleteLater();
 }
 
 void dooble::slot_new_tab(void)

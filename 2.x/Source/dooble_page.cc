@@ -26,6 +26,7 @@
 */
 
 #include <QMenu>
+#include <QStackedWidget>
 
 #include "dooble.h"
 #include "dooble_page.h"
@@ -38,8 +39,11 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(clicked(void)),
 	  m_ui.menus,
 	  SLOT(showMenu(void)));
+  connect(m_ui.menus->menu(),
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_prepare_standard_menus(void)));
   prepare_icons();
-  prepare_standard_menus();
 }
 
 void dooble_page::prepare_icons(void)
@@ -52,10 +56,11 @@ void dooble_page::prepare_icons(void)
   m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
 }
 
-void dooble_page::prepare_standard_menus(void)
+void dooble_page::slot_prepare_standard_menus(void)
 {
   m_ui.menus->menu()->clear();
 
+  QAction *action = 0;
   QMenu *menu = 0;
 
   menu = m_ui.menus->menu()->addMenu("&File");
@@ -67,6 +72,13 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(new_window(void)),
 		  QKeySequence(tr("Ctrl+N")));
+  menu->addSeparator();
+  action = menu->addAction("&Close Tab",
+			   this,
+			   SIGNAL(close_tab(void)),
+			   QKeySequence(tr("Ctrl+W")));
+  action->setEnabled
+    (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
   menu->addSeparator();
   menu->addAction("E&xit Dooble",
 		  this,
