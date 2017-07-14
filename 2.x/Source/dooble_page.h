@@ -44,9 +44,12 @@ class dooble_page: public QWidget
  private:
   Ui_dooble_page m_ui;
   dooble_web_engine_view *m_view;
+  void load_page(const QUrl &url);
   void prepare_icons(void);
 
  private slots:
+  void slot_load_page(void);
+  void slot_open_url(void);
   void slot_prepare_standard_menus(void);
 
  signals:

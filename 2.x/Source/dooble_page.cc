@@ -40,6 +40,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
   m_ui.menus->setMenu(new QMenu(this));
   m_view = new dooble_web_engine_view(this);
   m_ui.frame->layout()->addWidget(m_view);
+  connect(m_ui.address,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_load_page(void)));
   connect(m_ui.menus,
 	  SIGNAL(clicked(void)),
 	  m_ui.menus,
@@ -68,6 +72,11 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
+void dooble_page::load_page(const QUrl &url)
+{
+  m_view->load(url);
+}
+
 void dooble_page::prepare_icons(void)
 {
   QString icon_set(dooble::setting("icon_set").toString());
@@ -78,6 +87,17 @@ void dooble_page::prepare_icons(void)
   m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
 }
 
+void dooble_page::slot_load_page(void)
+{
+  load_page(QUrl::fromUserInput(m_ui.address->text().trimmed()));
+}
+
+void dooble_page::slot_open_url(void)
+{
+  m_ui.address->selectAll();
+  m_ui.address->setFocus();
+}
+
 void dooble_page::slot_prepare_standard_menus(void)
 {
   m_ui.menus->menu()->clear();
@@ -86,16 +106,20 @@ void dooble_page::slot_prepare_standard_menus(void)
   QMenu *menu = 0;
 
   menu = m_ui.menus->menu()->addMenu("&File");
-  menu->addAction("New &Tab",
+  menu->addAction(tr("New &Tab"),
 		  this,
 		  SIGNAL(new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction("&New Window",
+  menu->addAction(tr("&New Window"),
 		  this,
 		  SIGNAL(new_window(void)),
 		  QKeySequence(tr("Ctrl+N")));
+  menu->addAction(tr("&Open URL"),
+		  this,
+		  SLOT(slot_open_url(void)),
+		  QKeySequence(tr("Ctrl+L")));
   menu->addSeparator();
-  action = menu->addAction("&Close Tab",
+  action = menu->addAction(tr("&Close Tab"),
 			   this,
 			   SIGNAL(close_tab(void)),
 			   QKeySequence(tr("Ctrl+W")));
@@ -105,7 +129,7 @@ void dooble_page::slot_prepare_standard_menus(void)
       (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 
   menu->addSeparator();
-  menu->addAction("E&xit Dooble",
+  menu->addAction(tr("E&xit Dooble"),
 		  this,
 		  SIGNAL(quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
