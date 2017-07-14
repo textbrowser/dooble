@@ -46,10 +46,19 @@ void dooble::newPage(void)
 {
   dooble_page *page = new dooble_page(this);
 
+  connect(page,
+	  SIGNAL(newTab(void)),
+	  this,
+	  SLOT(slotNewTab(void)));
   m_ui.tab->addTab(page, tr("Dooble"));
 }
 
 void dooble::show(void)
 {
   QMainWindow::show();
+}
+
+void dooble::slotNewTab(void)
+{
+  newPage();
 }

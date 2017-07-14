@@ -35,7 +35,7 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QToolButton" name="menu">
+      <widget class="QToolButton" name="menus">
        <property name="toolTip">
         <string>Menus</string>
        </property>
@@ -47,6 +47,9 @@
          <width>24</width>
          <height>24</height>
         </size>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>

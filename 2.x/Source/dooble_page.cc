@@ -25,13 +25,21 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QMenu>
+
 #include "dooble.h"
 #include "dooble_page.h"
 
 dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 {
   m_ui.setupUi(this);
+  m_ui.menus->setMenu(new QMenu(this));
+  connect(m_ui.menus,
+	  SIGNAL(clicked(void)),
+	  m_ui.menus,
+	  SLOT(showMenu(void)));
   prepare_icons();
+  prepare_standard_menus();
 }
 
 void dooble_page::prepare_icons(void)
@@ -40,6 +48,25 @@ void dooble_page::prepare_icons(void)
 
   m_ui.backward->setIcon(QIcon(QString(":/%1/backward.png").arg(icon_set)));
   m_ui.forward->setIcon(QIcon(QString(":/%1/forward.png").arg(icon_set)));
-  m_ui.menu->setIcon(QIcon(QString(":/%1/menu.png").arg(icon_set)));
+  m_ui.menus->setIcon(QIcon(QString(":/%1/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
+}
+
+void dooble_page::prepare_standard_menus(void)
+{
+  m_ui.menus->menu()->clear();
+
+  QMenu *menu = 0;
+
+  menu = m_ui.menus->menu()->addMenu("&File");
+  menu->addAction("New &Tab",
+		  this,
+		  SLOT(slotNewTab(void)),
+		  QKeySequence(tr("Ctrl+T")));
+
+}
+
+void dooble_page::slotNewTab(void)
+{
+  emit newTab();
 }

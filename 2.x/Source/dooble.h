@@ -47,6 +47,9 @@ class dooble: public QMainWindow
 
  public slots:
   void show(void);
+
+ private slots:
+  void slotNewTab(void);
 };
 
 #endif
