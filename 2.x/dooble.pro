@@ -34,6 +34,7 @@ FORMS           = UI\\dooble.ui \
 
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_page.h \
+                  Source\\dooble_web_engine_page.h \
                   Source\\dooble_web_engine_view.h
 
 RESOURCES       += Icons\\icons.qrc
@@ -41,6 +42,7 @@ RESOURCES       += Icons\\icons.qrc
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
+                  Source\\dooble_web_engine_page.cc \
                   Source\\dooble_web_engine_view.cc
 
 TRANSLATIONS    =
