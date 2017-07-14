@@ -30,7 +30,7 @@
 
 QMap<QString, QVariant> dooble::s_settings;
 
-dooble::dooble(void)
+dooble::dooble(void):QMainWindow()
 {
   m_ui.setupUi(this);
   connect(m_ui.tab,
@@ -55,6 +55,10 @@ void dooble::new_page(void)
 	  this,
 	  SLOT(slot_new_tab(void)));
   connect(page,
+	  SIGNAL(new_window(void)),
+	  this,
+	  SLOT(slot_new_window(void)));
+  connect(page,
 	  SIGNAL(quit_dooble(void)),
 	  this,
 	  SLOT(slot_quit_dooble(void)));
@@ -78,6 +82,13 @@ void dooble::show(void)
 void dooble::slot_new_tab(void)
 {
   new_page();
+}
+
+void dooble::slot_new_window(void)
+{
+  dooble *d = new dooble();
+
+  d->show();
 }
 
 void dooble::slot_quit_dooble(void)
