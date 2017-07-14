@@ -42,14 +42,24 @@ class dooble_page: public QWidget
   dooble_page(QWidget *parent);
 
  private:
+  enum ConstantsEnum
+  {
+    MAXIMUM_HISTORY_ITEMS = 20
+  };
+
   Ui_dooble_page m_ui;
   dooble_web_engine_view *m_view;
   void load_page(const QUrl &url);
   void prepare_icons(void);
 
  private slots:
+  void slot_go_backward(void);
+  void slot_go_forward(void);
   void slot_load_page(void);
+  void slot_load_progress(int progress);
   void slot_open_url(void);
+  void slot_prepare_backward_menu(void);
+  void slot_prepare_forward_menu(void);
   void slot_prepare_standard_menus(void);
   void slot_url_changed(const QUrl &url);
 

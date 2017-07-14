@@ -27,6 +27,7 @@
 
 #include <QMenu>
 #include <QStackedWidget>
+#include <QWebEngineHistoryItem>
 
 #include "dooble.h"
 #include "dooble_page.h"
@@ -36,7 +37,9 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 {
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
+  m_ui.backward->setMenu(new QMenu(this));
   m_ui.forward->setEnabled(false);
+  m_ui.forward->setMenu(new QMenu(this));
   m_ui.menus->setMenu(new QMenu(this));
   m_view = new dooble_web_engine_view(this);
   m_ui.frame->layout()->addWidget(m_view);
@@ -44,6 +47,22 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_load_page(void)));
+  connect(m_ui.backward,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_go_backward(void)));
+  connect(m_ui.backward->menu(),
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_prepare_backward_menu(void)));
+  connect(m_ui.forward,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_go_forward(void)));
+  connect(m_ui.forward->menu(),
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_prepare_forward_menu(void)));
   connect(m_ui.menus,
 	  SIGNAL(clicked(void)),
 	  m_ui.menus,
@@ -60,6 +79,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(loadFinished(bool)),
 	  this,
 	  SIGNAL(loadFinished(bool)));
+  connect(m_view,
+	  SIGNAL(loadProgress(int)),
+	  this,
+	  SLOT(slot_load_progress(int)));
   connect(m_view,
 	  SIGNAL(loadStarted(void)),
 	  this,
@@ -91,15 +114,68 @@ void dooble_page::prepare_icons(void)
   m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
 }
 
+void dooble_page::slot_go_backward(void)
+{
+  m_view->history()->back();
+}
+
+void dooble_page::slot_go_forward(void)
+{
+  m_view->history()->forward();
+}
+
 void dooble_page::slot_load_page(void)
 {
   load_page(QUrl::fromUserInput(m_ui.address->text().trimmed()));
+}
+
+void dooble_page::slot_load_progress(int progress)
+{
+  Q_UNUSED(progress);
+  m_ui.backward->setEnabled(m_view->history()->canGoBack());
+  m_ui.forward->setEnabled(m_view->history()->canGoForward());
 }
 
 void dooble_page::slot_open_url(void)
 {
   m_ui.address->selectAll();
   m_ui.address->setFocus();
+}
+
+void dooble_page::slot_prepare_backward_menu(void)
+{
+  m_ui.backward->menu()->clear();
+
+  QList<QWebEngineHistoryItem> items
+    (m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
+
+  m_ui.backward->setEnabled(items.size() > 0);
+
+  for(int i = items.size() - 1; i >= 0; i--)
+    {
+      QAction *action = m_ui.backward->menu()->addAction
+	(items.at(i).title());
+
+      action->setProperty("url", items.at(i).url());
+    }
+}
+
+void dooble_page::slot_prepare_forward_menu(void)
+{
+  m_ui.forward->menu()->clear();
+
+  QList<QWebEngineHistoryItem> items
+    (m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
+
+  m_ui.forward->setEnabled(items.size() > 0);
+
+  for(int i = 0; i < items.size(); i++)
+    {
+      QAction *action = m_ui.forward->menu()->addAction
+	(items.at(i).title());
+
+      action->setProperty("url", items.at(i).url());
+    }
 }
 
 void dooble_page::slot_prepare_standard_menus(void)
