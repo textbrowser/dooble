@@ -51,6 +51,7 @@ class dooble_page: public QWidget
   void slot_load_page(void);
   void slot_open_url(void);
   void slot_prepare_standard_menus(void);
+  void slot_url_changed(const QUrl &url);
 
  signals:
   void close_tab(void);

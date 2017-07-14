@@ -68,6 +68,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SIGNAL(titleChanged(const QString &)));
+  connect(m_view,
+	  SIGNAL(urlChanged(const QUrl &)),
+	  this,
+	  SLOT(slot_url_changed(const QUrl &)));
   prepare_icons();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
@@ -133,4 +137,9 @@ void dooble_page::slot_prepare_standard_menus(void)
 		  this,
 		  SIGNAL(quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
+}
+
+void dooble_page::slot_url_changed(const QUrl &url)
+{
+  m_ui.address->setText(url.toString());
 }
