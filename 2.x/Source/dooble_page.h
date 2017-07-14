@@ -32,6 +32,8 @@
 
 #include "ui_dooble_page.h"
 
+class dooble_web_engine_view;
+
 class dooble_page: public QWidget
 {
   Q_OBJECT
@@ -41,6 +43,7 @@ class dooble_page: public QWidget
 
  private:
   Ui_dooble_page m_ui;
+  dooble_web_engine_view *m_view;
   void prepare_icons(void);
 
  private slots:
