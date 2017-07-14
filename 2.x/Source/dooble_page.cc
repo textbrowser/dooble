@@ -26,6 +26,7 @@
 */
 
 #include <QMenu>
+#include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
 
@@ -112,6 +113,7 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
+  new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
   prepare_icons();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
