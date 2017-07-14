@@ -29,7 +29,11 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
+  setDocumentMode(true);
   setElideMode(Qt::ElideRight);
+  setExpanding(true);
+  setMovable(true);
+  setUsesScrollButtons(true);
 }
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
