@@ -49,6 +49,7 @@ class dooble_page: public QWidget
 
  signals:
   void new_tab(void);
+  void quit_dooble(void);
 };
 
 #endif

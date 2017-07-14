@@ -54,6 +54,10 @@ void dooble::new_page(void)
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)));
+  connect(page,
+	  SIGNAL(quit_dooble(void)),
+	  this,
+	  SLOT(slot_quit_dooble(void)));
   m_ui.tab->addTab(page, tr("Dooble"));
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
@@ -74,6 +78,15 @@ void dooble::show(void)
 void dooble::slot_new_tab(void)
 {
   new_page();
+}
+
+void dooble::slot_quit_dooble(void)
+{
+  /*
+  ** May require some confirmation from the user.
+  */
+
+  QApplication::exit(0);
 }
 
 void dooble::slot_tab_close_requested(int index)

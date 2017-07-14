@@ -63,7 +63,11 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
-
+  menu->addSeparator();
+  menu->addAction("E&xit Dooble",
+		  this,
+		  SIGNAL(quit_dooble(void)),
+		  QKeySequence(tr("Ctrl+Q")));
 }
 
 void dooble_page::slot_new_tab(void)
