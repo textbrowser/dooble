@@ -85,6 +85,9 @@ void dooble::show(void)
 
 void dooble::slot_close_tab(void)
 {
+  if(m_ui.tab->count() < 2) // Safety.
+    return;
+
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
@@ -118,7 +121,7 @@ void dooble::slot_quit_dooble(void)
 
 void dooble::slot_tab_close_requested(int index)
 {
-  if(index < 0)
+  if(index < 0 || m_ui.tab->count() < 2) // Safety.
     return;
 
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
