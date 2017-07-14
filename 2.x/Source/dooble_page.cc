@@ -41,6 +41,7 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
   m_ui.forward->setEnabled(false);
   m_ui.forward->setMenu(new QMenu(this));
   m_ui.menus->setMenu(new QMenu(this));
+  m_ui.progress->setVisible(false);
   m_view = new dooble_web_engine_view(this);
   m_ui.frame->layout()->addWidget(m_view);
   connect(m_ui.address,
@@ -79,6 +80,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(loadFinished(bool)),
 	  this,
 	  SIGNAL(loadFinished(bool)));
+  connect(m_view,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SLOT(slot_load_finished(bool)));
   connect(m_view,
 	  SIGNAL(loadProgress(int)),
 	  this,
@@ -124,6 +129,12 @@ void dooble_page::slot_go_forward(void)
   m_view->history()->forward();
 }
 
+void dooble_page::slot_load_finished(bool ok)
+{
+  Q_UNUSED(ok);
+  m_ui.progress->setVisible(false);
+}
+
 void dooble_page::slot_load_page(void)
 {
   load_page(QUrl::fromUserInput(m_ui.address->text().trimmed()));
@@ -131,9 +142,10 @@ void dooble_page::slot_load_page(void)
 
 void dooble_page::slot_load_progress(int progress)
 {
-  Q_UNUSED(progress);
   m_ui.backward->setEnabled(m_view->history()->canGoBack());
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
+  m_ui.progress->setValue(progress);
+  m_ui.progress->setVisible(progress < 100);
 }
 
 void dooble_page::slot_open_url(void)

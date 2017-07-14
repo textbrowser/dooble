@@ -127,12 +127,10 @@ void dooble::slot_icon_changed(const QIcon &icon)
 void dooble::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
-  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_load_started(void)
 {
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 }
 
 void dooble::slot_new_tab(void)
