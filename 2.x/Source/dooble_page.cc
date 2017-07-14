@@ -108,6 +108,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(urlChanged(const QUrl &)),
 	  this,
 	  SLOT(slot_url_changed(const QUrl &)));
+  connect(m_view->page(),
+	  SIGNAL(linkHovered(const QString &)),
+	  this,
+	  SLOT(slot_link_hovered(const QString &)));
   prepare_icons();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
@@ -135,6 +139,17 @@ void dooble_page::slot_go_backward(void)
 void dooble_page::slot_go_forward(void)
 {
   m_view->history()->forward();
+}
+
+void dooble_page::slot_link_hovered(const QString &url)
+{
+  QFontMetrics fm(m_ui.link_hovered->fontMetrics());
+
+  m_ui.link_hovered->setText
+    (fm.elidedText(url.trimmed(),
+		   Qt::ElideRight,
+		   qAbs(width() - (m_ui.progress->isVisible() ?
+				   m_ui.progress->width() : 0) - 15)));
 }
 
 void dooble_page::slot_load_finished(bool ok)

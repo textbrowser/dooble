@@ -55,6 +55,7 @@ class dooble_page: public QWidget
  private slots:
   void slot_go_backward(void);
   void slot_go_forward(void);
+  void slot_link_hovered(const QString &url);
   void slot_load_finished(bool ok);
   void slot_load_page(void);
   void slot_load_progress(int progress);
