@@ -49,6 +49,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  this,
 	  SLOT(slot_prepare_standard_menus(void)));
   connect(m_view,
+	  SIGNAL(iconChanged(const QIcon &)),
+	  this,
+	  SIGNAL(iconChanged(const QIcon &)));
+  connect(m_view,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SIGNAL(titleChanged(const QString &)));

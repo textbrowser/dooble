@@ -55,6 +55,10 @@ void dooble::new_page(void)
 	  this,
 	  SLOT(slot_close_tab(void)));
   connect(page,
+	  SIGNAL(iconChanged(const QIcon &)),
+	  this,
+	  SLOT(slot_icon_changed(const QIcon &)));
+  connect(page,
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)));
@@ -100,6 +104,16 @@ void dooble::slot_close_tab(void)
   m_ui.tab->removeTab(m_ui.tab->indexOf(page));
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
   page->deleteLater();
+}
+
+void dooble::slot_icon_changed(const QIcon &icon)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }
 
 void dooble::slot_new_tab(void)
