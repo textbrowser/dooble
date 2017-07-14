@@ -25,9 +25,11 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
 
 dooble_web_engine_view::dooble_web_engine_view(QWidget *parent):
   QWebEngineView(parent)
 {
+  m_page = new dooble_web_engine_page(this);
 }

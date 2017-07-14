@@ -30,12 +30,17 @@
 
 #include <QWebEngineView>
 
+class dooble_web_engine_page;
+
 class dooble_web_engine_view: public QWebEngineView
 {
   Q_OBJECT
 
  public:
   dooble_web_engine_view(QWidget *parent);
+
+ private:
+  dooble_web_engine_page *m_page;
 };
 
 #endif
