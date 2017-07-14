@@ -33,6 +33,10 @@ QMap<QString, QVariant> dooble::s_settings;
 dooble::dooble(void)
 {
   m_ui.setupUi(this);
+  connect(m_ui.tab,
+	  SIGNAL(tabCloseRequested(int)),
+	  this,
+	  SLOT(slotTabCloseRequested(int)));
   s_settings["icon_set"] = "nuoveXT";
   newPage();
 }
@@ -51,6 +55,7 @@ void dooble::newPage(void)
 	  this,
 	  SLOT(slotNewTab(void)));
   m_ui.tab->addTab(page, tr("Dooble"));
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
 void dooble::show(void)
@@ -61,4 +66,19 @@ void dooble::show(void)
 void dooble::slotNewTab(void)
 {
   newPage();
+}
+
+void dooble::slotTabCloseRequested(int index)
+{
+  if(index < 0)
+    return;
+
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(!page)
+    return;
+
+  page->deleteLater();
+  m_ui.tab->removeTab(index);
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }

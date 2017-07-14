@@ -50,6 +50,7 @@ class dooble: public QMainWindow
 
  private slots:
   void slotNewTab(void);
+  void slotTabCloseRequested(int index);
 };
 
 #endif
