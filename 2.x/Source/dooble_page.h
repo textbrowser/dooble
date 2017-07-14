@@ -45,10 +45,10 @@ class dooble_page: public QWidget
   Ui_dooble_page m_ui;
 
  private slots:
-  void slotNewTab(void);
+  void slot_new_tab(void);
 
  signals:
-  void newTab(void);
+  void new_tab(void);
 };
 
 #endif

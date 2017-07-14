@@ -36,9 +36,9 @@ dooble::dooble(void)
   connect(m_ui.tab,
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
-	  SLOT(slotTabCloseRequested(int)));
+	  SLOT(slot_tab_close_requested(int)));
   s_settings["icon_set"] = "nuoveXT";
-  newPage();
+  new_page();
 }
 
 QVariant dooble::setting(const QString &key)
@@ -46,16 +46,24 @@ QVariant dooble::setting(const QString &key)
   return s_settings.value(key);
 }
 
-void dooble::newPage(void)
+void dooble::new_page(void)
 {
   dooble_page *page = new dooble_page(this);
 
   connect(page,
-	  SIGNAL(newTab(void)),
+	  SIGNAL(new_tab(void)),
 	  this,
-	  SLOT(slotNewTab(void)));
+	  SLOT(slot_new_tab(void)));
   m_ui.tab->addTab(page, tr("Dooble"));
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+}
+
+void dooble::set_setting(const QString &key, const QVariant &value)
+{
+  if(key.trimmed().isEmpty() || value.isNull())
+    return;
+
+  s_settings[key.trimmed()] = value;
 }
 
 void dooble::show(void)
@@ -63,12 +71,12 @@ void dooble::show(void)
   QMainWindow::show();
 }
 
-void dooble::slotNewTab(void)
+void dooble::slot_new_tab(void)
 {
-  newPage();
+  new_page();
 }
 
-void dooble::slotTabCloseRequested(int index)
+void dooble::slot_tab_close_requested(int index)
 {
   if(index < 0)
     return;

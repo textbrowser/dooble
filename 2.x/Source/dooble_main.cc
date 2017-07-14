@@ -26,6 +26,7 @@
 */
 
 #include <QApplication>
+#include <QDir>
 
 extern "C"
 {
@@ -142,11 +143,39 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapplication(argc, argv);
+
+#ifdef Q_OS_WIN32
+  QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
+  QDir home_dir(QDir::current());
+  QFileInfo file_info(home_dir.absolutePath());
+  QString username(tmp);
+
+  if(!(file_info.isReadable() && file_info.isWritable()))
+    home_dir = QDir::home();
+
+  if(username.isEmpty())
+    home_dir.mkdir(".dooble_v2");
+  else
+    home_dir.mkdir(username + QDir::separator() + ".dooble_v2");
+
+  if(username.isEmpty())
+    dooble::set_setting
+      ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+  else
+    dooble::set_setting("home_path",
+			home_dir.absolutePath() + QDir::separator() +
+			username + QDir::separator() + ".dooble_v2");
+#else
+  QDir home_dir(QDir::home());
+
+  home_dir.mkdir(".dooble_v2");
+  dooble::set_setting
+    ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+#endif
+
   dooble *d = new dooble();
 
   d->show();
 
-  int rc = qapplication.exec();
-
-  return rc;
+  return qapplication.exec();
 }

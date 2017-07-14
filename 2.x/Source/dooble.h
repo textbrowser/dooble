@@ -39,18 +39,19 @@ class dooble: public QMainWindow
  public:
   dooble(void);
   static QVariant setting(const QString &key);
+  static void set_setting(const QString &key, const QVariant &value);
 
  private:
   Ui_dooble m_ui;
   static QMap<QString, QVariant> s_settings;
-  void newPage(void);
+  void new_page(void);
 
  public slots:
   void show(void);
 
  private slots:
-  void slotNewTab(void);
-  void slotTabCloseRequested(int index);
+  void slot_new_tab(void);
+  void slot_tab_close_requested(int index);
 };
 
 #endif

@@ -61,12 +61,12 @@ void dooble_page::prepare_standard_menus(void)
   menu = m_ui.menus->menu()->addMenu("&File");
   menu->addAction("New &Tab",
 		  this,
-		  SLOT(slotNewTab(void)),
+		  SLOT(slot_new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
 
 }
 
-void dooble_page::slotNewTab(void)
+void dooble_page::slot_new_tab(void)
 {
-  emit newTab();
+  emit new_tab();
 }
