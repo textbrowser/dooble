@@ -52,6 +52,8 @@ class dooble_page: public QWidget
  signals:
   void close_tab(void);
   void iconChanged(const QIcon &icon);
+  void loadFinished(bool ok);
+  void loadStarted(void);
   void new_tab(void);
   void new_window(void);
   void quit_dooble(void);

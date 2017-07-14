@@ -52,6 +52,8 @@ class dooble: public QMainWindow
  private slots:
   void slot_close_tab(void);
   void slot_icon_changed(const QIcon &icon);
+  void slot_load_finished(bool ok);
+  void slot_load_started(void);
   void slot_new_tab(void);
   void slot_new_window(void);
   void slot_quit_dooble(void);

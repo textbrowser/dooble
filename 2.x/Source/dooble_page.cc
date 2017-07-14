@@ -53,6 +53,14 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  this,
 	  SIGNAL(iconChanged(const QIcon &)));
   connect(m_view,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SIGNAL(loadFinished(bool)));
+  connect(m_view,
+	  SIGNAL(loadStarted(void)),
+	  this,
+	  SIGNAL(loadStarted(void)));
+  connect(m_view,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SIGNAL(titleChanged(const QString &)));

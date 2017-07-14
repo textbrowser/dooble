@@ -59,6 +59,14 @@ void dooble::new_page(void)
 	  this,
 	  SLOT(slot_icon_changed(const QIcon &)));
   connect(page,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SLOT(slot_load_finished(bool)));
+  connect(page,
+	  SIGNAL(loadStarted(void)),
+	  this,
+	  SLOT(slot_load_started(void)));
+  connect(page,
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)));
@@ -114,6 +122,17 @@ void dooble::slot_icon_changed(const QIcon &icon)
     return;
 
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
+}
+
+void dooble::slot_load_finished(bool ok)
+{
+  Q_UNUSED(ok);
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble::slot_load_started(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 }
 
 void dooble::slot_new_tab(void)
