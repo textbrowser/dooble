@@ -32,7 +32,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QTabWidget" name="tab"/>
+     <widget class="dooble_tab_widget" name="tab"/>
     </item>
    </layout>
   </widget>
@@ -59,6 +59,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>dooble_tab_widget</class>
+   <extends>QTabWidget</extends>
+   <header>dooble_tab_widget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tab</tabstop>
  </tabstops>
