@@ -44,6 +44,7 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  this,
 	  SLOT(slot_prepare_standard_menus(void)));
   prepare_icons();
+  slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
 void dooble_page::prepare_icons(void)
@@ -77,8 +78,11 @@ void dooble_page::slot_prepare_standard_menus(void)
 			   this,
 			   SIGNAL(close_tab(void)),
 			   QKeySequence(tr("Ctrl+W")));
-  action->setEnabled
-    (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+
+  if(qobject_cast<QStackedWidget *> (parentWidget()))
+    action->setEnabled
+      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+
   menu->addSeparator();
   menu->addAction("E&xit Dooble",
 		  this,

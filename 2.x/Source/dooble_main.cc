@@ -27,6 +27,8 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QWebEngineProfile>
+#include <QWebEngineSettings>
 
 extern "C"
 {
@@ -172,6 +174,24 @@ int main(int argc, char *argv[])
   dooble::set_setting
     ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
 #endif
+
+  QWebEngineProfile::defaultProfile()->setCachePath
+    (dooble::setting("home_path").toString() +
+     QDir::separator() +
+     "WebEngineCache");
+  QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize(0);
+  QWebEngineProfile::defaultProfile()->setHttpCacheType
+    (QWebEngineProfile::MemoryHttpCache);
+  QWebEngineProfile::defaultProfile()->setPersistentCookiesPolicy
+    (QWebEngineProfile::AllowPersistentCookies);
+  QWebEngineProfile::defaultProfile()->setPersistentStoragePath
+    (dooble::setting("home_path").toString() +
+     QDir::separator() +
+     "WebEnginePersistentStorage");
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::FullScreenSupportEnabled, true);
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
 
   dooble *d = new dooble();
 
