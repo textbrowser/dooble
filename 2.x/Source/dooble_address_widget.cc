@@ -54,6 +54,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-top: 0px; "
      "padding-bottom: 0px; "
      "}");
+  m_pull_down->setToolTip(tr("Show Recent History"));
   prepare_icons();
   setMinimumHeight(sizeHint().height() + 10);
   setStyleSheet
@@ -67,6 +68,7 @@ void dooble_address_widget::prepare_icons(void)
   QString icon_set(dooble::setting("icon_set").toString());
 
   m_bookmark->setIcon(QIcon(QString(":/%1/16/bookmark.png").arg(icon_set)));
+  m_pull_down->setIcon(QIcon(QString(":/%1/16/pulldown.png").arg(icon_set)));
 }
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
