@@ -66,7 +66,7 @@ void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble::setting("icon_set").toString());
 
-  m_bookmark->setIcon(QIcon(QString(":/%1/bookmark.png").arg(icon_set)));
+  m_bookmark->setIcon(QIcon(QString(":/%1/16/bookmark.png").arg(icon_set)));
 }
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)

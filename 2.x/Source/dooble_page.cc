@@ -146,10 +146,10 @@ void dooble_page::prepare_icons(void)
 {
   QString icon_set(dooble::setting("icon_set").toString());
 
-  m_ui.backward->setIcon(QIcon(QString(":/%1/backward.png").arg(icon_set)));
-  m_ui.forward->setIcon(QIcon(QString(":/%1/forward.png").arg(icon_set)));
-  m_ui.menus->setIcon(QIcon(QString(":/%1/menu.png").arg(icon_set)));
-  m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
+  m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
+  m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
+  m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
+  m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
 }
 
 void dooble_page::slot_escape(void)
@@ -202,7 +202,7 @@ void dooble_page::slot_load_finished(bool ok)
   QString icon_set(dooble::setting("icon_set").toString());
 
   m_ui.progress->setVisible(false);
-  m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
+  m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
 }
 
 void dooble_page::slot_load_page(void)
@@ -223,7 +223,7 @@ void dooble_page::slot_load_started(void)
   QString icon_set(dooble::setting("icon_set").toString());
 
   m_ui.progress->setVisible(true);
-  m_ui.reload->setIcon(QIcon(QString(":/%1/stop.png").arg(icon_set)));
+  m_ui.reload->setIcon(QIcon(QString(":/%1/32/stop.png").arg(icon_set)));
 }
 
 void dooble_page::slot_open_url(void)
@@ -311,6 +311,7 @@ void dooble_page::slot_prepare_standard_menus(void)
       (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 
   menu->addSeparator();
+  menu = menu->addMenu("&Tools");
   menu->addAction(tr("E&xit Dooble"),
 		  this,
 		  SIGNAL(quit_dooble(void)),

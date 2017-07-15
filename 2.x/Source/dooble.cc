@@ -37,7 +37,7 @@ dooble::dooble(void):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
-  s_settings["icon_set"] = "nuoveXT";
+  s_settings["icon_set"] = "Snipicons";
   new_page();
 }
 
