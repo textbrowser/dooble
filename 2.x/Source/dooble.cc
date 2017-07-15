@@ -176,7 +176,7 @@ void dooble::slot_title_changed(const QString &title)
   if(!page)
     return;
 
-  m_ui.tab->setTabText(m_ui.tab->indexOf(page), title);
-  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
-  setWindowTitle(tr("%1 - Dooble").arg(title));
+  m_ui.tab->setTabText(m_ui.tab->indexOf(page), title.trimmed());
+  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title.trimmed());
+  setWindowTitle(tr("%1 - Dooble").arg(title.trimmed()));
 }

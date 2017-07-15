@@ -203,9 +203,13 @@ void dooble_page::slot_prepare_backward_menu(void)
 
   for(int i = items.size() - 1; i >= 0; i--)
     {
-      QAction *action = m_ui.backward->menu()->addAction
-	(items.at(i).title());
+      QAction *action = 0;
+      QString title(items.at(i).title().trimmed());
 
+      if(title.isEmpty())
+	title = items.at(i).url().toString().trimmed();
+
+      action = m_ui.backward->menu()->addAction(title);
       action->setProperty("url", items.at(i).url());
     }
 }
@@ -221,9 +225,13 @@ void dooble_page::slot_prepare_forward_menu(void)
 
   for(int i = 0; i < items.size(); i++)
     {
-      QAction *action = m_ui.forward->menu()->addAction
-	(items.at(i).title());
+      QAction *action = 0;
+      QString title(items.at(i).title().trimmed());
 
+      if(title.isEmpty())
+	title = items.at(i).url().toString().trimmed();
+
+      action = m_ui.forward->menu()->addAction(title);
       action->setProperty("url", items.at(i).url());
     }
 }
