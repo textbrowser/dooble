@@ -38,15 +38,20 @@ class dooble_address_widget: public QLineEdit
 
  public:
   dooble_address_widget(QWidget *parent);
+  QMenu *menu(void) const;
   void setText(const QString &text);
 
  protected:
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QMenu *m_menu;
   QToolButton *m_bookmark;
   QToolButton *m_pull_down;
   void prepare_icons(void);
+
+ signals:
+  void pull_down_clicked(void);
 };
 
 #endif

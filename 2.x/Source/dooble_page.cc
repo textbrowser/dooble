@@ -29,6 +29,7 @@
 #include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
+#include <QWidgetAction>
 
 #include "dooble.h"
 #include "dooble_page.h"
@@ -49,6 +50,10 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_load_page(void)));
+  connect(m_ui.address,
+	  SIGNAL(pull_down_clicked(void)),
+	  this,
+	  SLOT(slot_show_pull_down_menu(void)));
   connect(m_ui.backward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -187,6 +192,10 @@ void dooble_page::slot_go_to_forward_item(void)
 
   if(action)
     go_to_forward_item(action->property("index").toInt());
+}
+
+void dooble_page::slot_go_to_item(void)
+{
 }
 
 void dooble_page::slot_link_hovered(const QString &url)
@@ -341,6 +350,51 @@ void dooble_page::slot_reload_or_stop(void)
     m_view->stop();
   else
     m_view->reload();
+}
+
+void dooble_page::slot_show_pull_down_menu(void)
+{
+  m_ui.address->menu()->clear();
+
+  QList<QWebEngineHistoryItem> items(m_view->history()->items());
+
+  if(items.isEmpty())
+    return;
+
+  m_ui.address->menu()->setMaximumWidth(width());
+  m_ui.address->menu()->setMinimumWidth(width());
+
+  QFontMetrics fm(m_ui.address->menu()->fontMetrics());
+
+  for(int i = 0; i < MAXIMUM_HISTORY_ITEMS && i < items.size(); i++)
+    {
+      QLabel *label = 0;
+      QString title(items.at(i).title().trimmed());
+      QString url(items.at(i).url().toString().trimmed());
+      QWidgetAction *widget_action = new QWidgetAction(m_ui.address->menu());
+
+      if(title.isEmpty())
+	title = items.at(i).url().toString().trimmed();
+
+      QString text
+	("<html>" +
+	 title +
+	 " - " +
+	 QString("<font color='blue'><u>%1</u></font>").arg(url) +
+	 "</html>");
+
+      label = new QLabel
+	(fm.elidedText(text,
+		       Qt::ElideRight,
+		       m_ui.address->menu()->width() - 50),
+	 m_ui.address->menu());
+      label->setMargin(5);
+      label->setMinimumHeight(fm.height() + 10);
+      widget_action->setDefaultWidget(label);
+      m_ui.address->menu()->addAction(widget_action);
+    }
+
+  m_ui.address->menu()->popup(mapToGlobal(QPoint(0, m_ui.address->height())));
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)

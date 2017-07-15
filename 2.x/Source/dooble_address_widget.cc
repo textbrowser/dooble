@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QMenu>
 #include <QStyle>
 #include <QToolButton>
 
@@ -45,6 +46,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
   m_bookmark->setToolTip(tr("Bookmark"));
+  m_menu = new QMenu(this);
   m_pull_down = new QToolButton(this);
   m_pull_down->setCursor(Qt::ArrowCursor);
   m_pull_down->setIconSize(QSize(16, 16));
@@ -55,12 +57,21 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
   m_pull_down->setToolTip(tr("Show History"));
+  connect(m_pull_down,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SIGNAL(pull_down_clicked(void)));
   prepare_icons();
   setMinimumHeight(sizeHint().height() + 10);
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(m_bookmark->sizeHint().width() + frame_width + 5).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
+}
+
+QMenu *dooble_address_widget::menu(void) const
+{
+  return m_menu;
 }
 
 void dooble_address_widget::prepare_icons(void)
@@ -92,6 +103,6 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
 
 void dooble_address_widget::setText(const QString &text)
 {
-  QLineEdit::setText(text);
+  QLineEdit::setText(text.trimmed());
   setCursorPosition(0);
 }
