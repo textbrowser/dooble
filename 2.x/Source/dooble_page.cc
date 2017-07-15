@@ -114,6 +114,7 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
   new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
+  new QShortcut(QKeySequence(tr("Esc")), m_view, SLOT(stop(void)));
   prepare_icons();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
