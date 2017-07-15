@@ -49,12 +49,16 @@ class dooble_page: public QWidget
 
   Ui_dooble_page m_ui;
   dooble_web_engine_view *m_view;
+  void go_to_backward_item(int index);
+  void go_to_forward_item(int index);
   void load_page(const QUrl &url);
   void prepare_icons(void);
 
  private slots:
   void slot_go_backward(void);
   void slot_go_forward(void);
+  void slot_go_to_backward_item(void);
+  void slot_go_to_forward_item(void);
   void slot_link_hovered(const QString &url);
   void slot_load_finished(bool ok);
   void slot_load_page(void);

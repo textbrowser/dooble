@@ -119,6 +119,24 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
+void dooble_page::go_to_backward_item(int index)
+{
+  QList<QWebEngineHistoryItem> items
+    (m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
+
+  if(index >= 0 && index < items.size())
+    m_view->history()->goToItem(items.at(index));
+}
+
+void dooble_page::go_to_forward_item(int index)
+{
+  QList<QWebEngineHistoryItem> items
+    (m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
+
+  if(index >= 0 && index < items.size())
+    m_view->history()->goToItem(items.at(index));
+}
+
 void dooble_page::load_page(const QUrl &url)
 {
   m_view->load(url);
@@ -142,6 +160,22 @@ void dooble_page::slot_go_backward(void)
 void dooble_page::slot_go_forward(void)
 {
   m_view->history()->forward();
+}
+
+void dooble_page::slot_go_to_backward_item(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    go_to_backward_item(action->property("index").toInt());
+}
+
+void dooble_page::slot_go_to_forward_item(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    go_to_forward_item(action->property("index").toInt());
 }
 
 void dooble_page::slot_link_hovered(const QString &url)
@@ -209,7 +243,9 @@ void dooble_page::slot_prepare_backward_menu(void)
       if(title.isEmpty())
 	title = items.at(i).url().toString().trimmed();
 
-      action = m_ui.backward->menu()->addAction(title);
+      action = m_ui.backward->menu()->addAction
+	(title, this, SLOT(slot_go_to_backward_item(void)));
+      action->setProperty("index", i);
       action->setProperty("url", items.at(i).url());
     }
 }
@@ -231,7 +267,9 @@ void dooble_page::slot_prepare_forward_menu(void)
       if(title.isEmpty())
 	title = items.at(i).url().toString().trimmed();
 
-      action = m_ui.forward->menu()->addAction(title);
+      action = m_ui.forward->menu()->addAction
+	(title, this, SLOT(slot_go_to_forward_item(void)));
+      action->setProperty("index", i);
       action->setProperty("url", items.at(i).url());
     }
 }
