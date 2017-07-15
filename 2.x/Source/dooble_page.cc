@@ -114,7 +114,7 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
   new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
-  new QShortcut(QKeySequence(tr("Esc")), m_view, SLOT(stop(void)));
+  new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
   prepare_icons();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
@@ -150,6 +150,12 @@ void dooble_page::prepare_icons(void)
   m_ui.forward->setIcon(QIcon(QString(":/%1/forward.png").arg(icon_set)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/reload.png").arg(icon_set)));
+}
+
+void dooble_page::slot_escape(void)
+{
+  m_ui.address->setText(m_view->url().toString());
+  m_view->stop();
 }
 
 void dooble_page::slot_go_backward(void)

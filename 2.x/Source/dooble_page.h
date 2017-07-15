@@ -55,6 +55,7 @@ class dooble_page: public QWidget
   void prepare_icons(void);
 
  private slots:
+  void slot_escape(void);
   void slot_go_backward(void);
   void slot_go_forward(void);
   void slot_go_to_backward_item(void);
