@@ -40,6 +40,7 @@ class dooble_page: public QWidget
 
  public:
   dooble_page(QWidget *parent);
+  QUrl url(void) const;
 
  private:
   enum ConstantsEnum

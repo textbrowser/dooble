@@ -54,7 +54,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-top: 0px; "
      "padding-bottom: 0px; "
      "}");
-  m_pull_down->setToolTip(tr("Show Recent History"));
+  m_pull_down->setToolTip(tr("Show History"));
   prepare_icons();
   setMinimumHeight(sizeHint().height() + 10);
   setStyleSheet
@@ -88,4 +88,10 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
     setCursorPosition(0);
 
   QLineEdit::resizeEvent(event);
+}
+
+void dooble_address_widget::setText(const QString &text)
+{
+  QLineEdit::setText(text);
+  setCursorPosition(0);
 }

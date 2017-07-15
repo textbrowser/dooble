@@ -38,6 +38,7 @@ class dooble_address_widget: public QLineEdit
 
  public:
   dooble_address_widget(QWidget *parent);
+  void setText(const QString &text);
 
  protected:
   void resizeEvent(QResizeEvent *event);

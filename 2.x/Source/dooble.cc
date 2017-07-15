@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QUrl>
+
 #include "dooble.h"
 #include "dooble_page.h"
 
@@ -184,7 +186,14 @@ void dooble::slot_title_changed(const QString &title)
   if(!page)
     return;
 
-  m_ui.tab->setTabText(m_ui.tab->indexOf(page), title.trimmed());
-  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title.trimmed());
-  setWindowTitle(tr("%1 - Dooble").arg(title.trimmed()));
+  if(title.trimmed().isEmpty())
+    m_ui.tab->setTabText
+      (m_ui.tab->indexOf(page), page->url().toString().trimmed());
+  else
+    m_ui.tab->setTabText(m_ui.tab->indexOf(page), title.trimmed());
+
+  m_ui.tab->setTabToolTip
+    (m_ui.tab->indexOf(page), m_ui.tab->tabText(m_ui.tab->indexOf(page)));
+  setWindowTitle
+    (tr("%1 - Dooble").arg(m_ui.tab->tabText(m_ui.tab->indexOf(page))));
 }

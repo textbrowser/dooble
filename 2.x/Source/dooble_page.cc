@@ -119,6 +119,11 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
+QUrl dooble_page::url(void) const
+{
+  return m_view->url();
+}
+
 void dooble_page::go_to_backward_item(int index)
 {
   QList<QWebEngineHistoryItem> items
