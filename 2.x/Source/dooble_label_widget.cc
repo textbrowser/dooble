@@ -25,9 +25,50 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QLineEdit>
+#include <QMouseEvent>
+
 #include "dooble_label_widget.h"
 
-dooble_label_widget::dooble_label_widget(const QString &text,
-					 QWidget *parent):QLabel(text, parent)
+static QLineEdit *line_edit = 0;
+
+dooble_label_widget::dooble_label_widget
+(const QString &text, QWidget *parent):QLabel(text, parent)
 {
+  if(!line_edit)
+    line_edit = new QLineEdit(0);
+
+  m_original_stylesheet = styleSheet();
+}
+
+dooble_label_widget::~dooble_label_widget()
+{
+}
+
+void dooble_label_widget::enterEvent(QEvent *event)
+{
+  QPalette palette(line_edit->palette());
+
+  setStyleSheet
+    (QString("QLabel {background-color: %1; color: white}").
+     arg(palette.color(QPalette::Highlight).name()));
+  QLabel::enterEvent(event);
+}
+
+void dooble_label_widget::leaveEvent(QEvent *event)
+{
+  setStyleSheet(m_original_stylesheet);
+  QLabel::leaveEvent(event);
+}
+
+void dooble_label_widget::mouseReleaseEvent(QMouseEvent *event)
+{
+  if(event)
+    if(rect().contains(event->pos()))
+      {
+	emit clicked();
+	hide();
+      }
+
+  QLabel::mouseReleaseEvent(event);
 }

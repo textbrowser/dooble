@@ -197,6 +197,18 @@ void dooble_page::slot_go_to_forward_item(void)
 
 void dooble_page::slot_go_to_item(void)
 {
+  m_ui.address->menu()->hide();
+
+  QLabel *label = qobject_cast<QLabel *> (sender());
+
+  if(!label)
+    return;
+
+  QList<QWebEngineHistoryItem> items(m_view->history()->items());
+  int index = label->property("index").toInt();
+
+  if(index >= 0 && index < items.size())
+    m_view->history()->goToItem(items.at(index));
 }
 
 void dooble_page::slot_link_hovered(const QString &url)
@@ -235,6 +247,9 @@ void dooble_page::slot_load_progress(int progress)
 
 void dooble_page::slot_load_started(void)
 {
+  emit iconChanged(QIcon());
+  emit titleChanged("Dooble");
+
   QString icon_set(dooble::setting("icon_set").toString());
 
   m_ui.progress->setVisible(true);
@@ -267,7 +282,6 @@ void dooble_page::slot_prepare_backward_menu(void)
       action = m_ui.backward->menu()->addAction
 	(title, this, SLOT(slot_go_to_backward_item(void)));
       action->setProperty("index", i);
-      action->setProperty("url", items.at(i).url());
     }
 }
 
@@ -291,7 +305,6 @@ void dooble_page::slot_prepare_forward_menu(void)
       action = m_ui.forward->menu()->addAction
 	(title, this, SLOT(slot_go_to_forward_item(void)));
       action->setProperty("index", i);
-      action->setProperty("url", items.at(i).url());
     }
 }
 
@@ -387,15 +400,20 @@ void dooble_page::slot_show_pull_down_menu(void)
       label = new dooble_label_widget
 	(fm.elidedText(text,
 		       Qt::ElideRight,
-		       m_ui.address->menu()->width() - 50),
+		       width() - 10),
 	 m_ui.address->menu());
       label->setMargin(5);
       label->setMinimumHeight(fm.height() + 10);
+      label->setProperty("index", i);
+      connect(label,
+	      SIGNAL(clicked(void)),
+	      this,
+	      SLOT(slot_go_to_item(void)));
       widget_action->setDefaultWidget(label);
       m_ui.address->menu()->addAction(widget_action);
     }
 
-  m_ui.address->menu()->popup(mapToGlobal(QPoint(0, m_ui.address->height())));
+  m_ui.address->menu()->popup(mapToGlobal(QPoint(0, m_ui.frame->pos().y())));
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)

@@ -36,6 +36,18 @@ class dooble_label_widget: public QLabel
 
  public:
   dooble_label_widget(const QString &text, QWidget *parent);
+  ~dooble_label_widget();
+
+ protected:
+  void enterEvent(QEvent *event);
+  void leaveEvent(QEvent *event);
+  void mouseReleaseEvent(QMouseEvent *event);
+
+ private:
+  QString m_original_stylesheet;
+
+ signals:
+  void clicked(void);
 };
 
 #endif
