@@ -32,6 +32,7 @@
 #include <QWidgetAction>
 
 #include "dooble.h"
+#include "dooble_label_widget.h"
 #include "dooble_page.h"
 #include "dooble_web_engine_view.h"
 
@@ -368,10 +369,10 @@ void dooble_page::slot_show_pull_down_menu(void)
 
   for(int i = 0; i < MAXIMUM_HISTORY_ITEMS && i < items.size(); i++)
     {
-      QLabel *label = 0;
       QString title(items.at(i).title().trimmed());
       QString url(items.at(i).url().toString().trimmed());
       QWidgetAction *widget_action = new QWidgetAction(m_ui.address->menu());
+      dooble_label_widget *label = 0;
 
       if(title.isEmpty())
 	title = items.at(i).url().toString().trimmed();
@@ -383,7 +384,7 @@ void dooble_page::slot_show_pull_down_menu(void)
 	 QString("<font color='blue'><u>%1</u></font>").arg(url) +
 	 "</html>");
 
-      label = new QLabel
+      label = new dooble_label_widget
 	(fm.elidedText(text,
 		       Qt::ElideRight,
 		       m_ui.address->menu()->width() - 50),
