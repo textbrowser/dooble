@@ -79,6 +79,10 @@ void dooble::new_page(void)
 	  this,
 	  SLOT(slot_quit_dooble(void)));
   connect(page,
+	  SIGNAL(show_blocked_domains(void)),
+	  this,
+	  SLOT(slot_show_blocked_domains(void)));
+  connect(page,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)));
@@ -152,6 +156,10 @@ void dooble::slot_quit_dooble(void)
   */
 
   QApplication::exit(0);
+}
+
+void dooble::slot_show_blocked_domains(void)
+{
 }
 
 void dooble::slot_tab_close_requested(int index)

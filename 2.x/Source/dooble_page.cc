@@ -287,12 +287,16 @@ void dooble_page::slot_prepare_standard_menus(void)
   QAction *action = 0;
   QMenu *menu = 0;
 
-  menu = m_ui.menus->menu()->addMenu("&File");
+  /*
+  ** File Menu
+  */
+
+  menu = m_ui.menus->menu()->addMenu(tr("&File"));
   menu->addAction(tr("New &Tab"),
 		  this,
 		  SIGNAL(new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction(tr("&New Window"),
+  menu->addAction(tr("&New Window..."),
 		  this,
 		  SIGNAL(new_window(void)),
 		  QKeySequence(tr("Ctrl+N")));
@@ -311,11 +315,19 @@ void dooble_page::slot_prepare_standard_menus(void)
       (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 
   menu->addSeparator();
-  menu = menu->addMenu("&Tools");
   menu->addAction(tr("E&xit Dooble"),
 		  this,
 		  SIGNAL(quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
+
+  /*
+  ** Tools Menu
+  */
+
+  menu = m_ui.menus->menu()->addMenu(tr("&Tools"));
+  menu->addAction(tr("&Blocked Domains..."),
+		  this,
+		  SIGNAL(show_blocked_domains(void)));
 }
 
 void dooble_page::slot_reload_or_stop(void)
