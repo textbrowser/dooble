@@ -30,12 +30,22 @@
 
 #include <QLineEdit>
 
+class QToolButton;
+
 class dooble_address_widget: public QLineEdit
 {
   Q_OBJECT
 
  public:
   dooble_address_widget(QWidget *parent);
+
+ protected:
+  void resizeEvent(QResizeEvent *event);
+
+ private:
+  QToolButton *m_bookmark;
+  QToolButton *m_pull_down;
+  void prepare_icons(void);
 };
 
 #endif

@@ -25,8 +25,65 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QStyle>
+#include <QToolButton>
+
+#include "dooble.h"
 #include "dooble_address_widget.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
+  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+
+  m_bookmark = new QToolButton(this);
+  m_bookmark->setCursor(Qt::ArrowCursor);
+  m_bookmark->setIconSize(QSize(16, 16));
+  m_bookmark->setStyleSheet
+    ("QToolButton {"
+     "border: none; "
+     "padding-top: 0px; "
+     "padding-bottom: 0px; "
+     "}");
+  m_bookmark->setToolTip(tr("Bookmark"));
+  m_pull_down = new QToolButton(this);
+  m_pull_down->setCursor(Qt::ArrowCursor);
+  m_pull_down->setIconSize(QSize(16, 16));
+  m_pull_down->setStyleSheet
+    ("QToolButton {"
+     "border: none; "
+     "padding-top: 0px; "
+     "padding-bottom: 0px; "
+     "}");
+  prepare_icons();
+  setMinimumHeight(sizeHint().height() + 10);
+  setStyleSheet
+    (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
+     arg(m_bookmark->sizeHint().width() + frame_width + 5).
+     arg(m_pull_down->sizeHint().width() + frame_width + 5));
+}
+
+void dooble_address_widget::prepare_icons(void)
+{
+  QString icon_set(dooble::setting("icon_set").toString());
+
+  m_bookmark->setIcon(QIcon(QString(":/%1/bookmark.png").arg(icon_set)));
+}
+
+void dooble_address_widget::resizeEvent(QResizeEvent *event)
+{
+  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  QSize size1 = m_bookmark->sizeHint();
+  QSize size2 = m_pull_down->sizeHint();
+
+  m_bookmark->move
+    (frame_width - rect().left() + 6, (rect().bottom() + 2 -
+				       size1.height()) / 2);
+  m_pull_down->move
+    (rect().right() - frame_width - size2.width() - 5, (rect().bottom() + 2 -
+							size2.height()) / 2);
+
+  if(selectedText().isEmpty())
+    setCursorPosition(0);
+
+  QLineEdit::resizeEvent(event);
 }

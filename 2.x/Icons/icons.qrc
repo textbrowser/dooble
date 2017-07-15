@@ -2,6 +2,7 @@
     <qresource prefix="/">
 	<file>Logo/dooble.png</file>
 	<file>nuoveXT/backward.png</file>
+	<file>nuoveXT/bookmark.png</file>
 	<file>nuoveXT/forward.png</file>
 	<file>nuoveXT/menu.png</file>
 	<file>nuoveXT/reload.png</file>
