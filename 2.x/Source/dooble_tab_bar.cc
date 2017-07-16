@@ -44,6 +44,11 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 	  SLOT(slot_show_context_menu(const QPoint &)));
 }
 
+QSize dooble_tab_bar::minimumTabSizeHint(int index) const
+{
+  return tabSizeHint(index);
+}
+
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QSize size(QTabBar::tabSizeHint(index));
