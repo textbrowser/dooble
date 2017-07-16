@@ -84,10 +84,6 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(clicked(void)),
 	  m_ui.menus,
 	  SLOT(showMenu(void)));
-  connect(m_ui.menus->menu(),
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_prepare_standard_menus(void)));
   connect(m_ui.reload,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -136,14 +132,9 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
-  new QShortcut(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
-  new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
-  new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
-  new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
-  new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
   prepare_icons();
+  prepare_standard_menus();
   prepare_tool_buttons_for_mac();
-  slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
 QString dooble_page::title(void) const
@@ -187,6 +178,56 @@ void dooble_page::prepare_icons(void)
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
+}
+
+void dooble_page::prepare_standard_menus(void)
+{
+  m_ui.menus->menu()->clear();
+
+  QAction *action = 0;
+  QMenu *menu = 0;
+
+  /*
+  ** File Menu
+  */
+
+  menu = m_ui.menus->menu()->addMenu(tr("&File"));
+  menu->addAction(tr("New &Tab"),
+		  this,
+		  SIGNAL(new_tab(void)),
+		  QKeySequence(tr("Ctrl+T")));
+  menu->addAction(tr("&New Window..."),
+		  this,
+		  SIGNAL(new_window(void)),
+		  QKeySequence(tr("Ctrl+N")));
+  menu->addAction(tr("&Open URL"),
+		  this,
+		  SLOT(slot_open_url(void)),
+		  QKeySequence(tr("Ctrl+L")));
+  menu->addSeparator();
+  action = menu->addAction(tr("&Close Tab"),
+			   this,
+			   SIGNAL(close_tab(void)),
+			   QKeySequence(tr("Ctrl+W")));
+
+  if(qobject_cast<QStackedWidget *> (parentWidget()))
+    action->setEnabled
+      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+
+  menu->addSeparator();
+  menu->addAction(tr("E&xit Dooble"),
+		  this,
+		  SIGNAL(quit_dooble(void)),
+		  QKeySequence(tr("Ctrl+Q")));
+
+  /*
+  ** Tools Menu
+  */
+
+  menu = m_ui.menus->menu()->addMenu(tr("&Tools"));
+  menu->addAction(tr("&Blocked Domains..."),
+		  this,
+		  SIGNAL(show_blocked_domains(void)));
 }
 
 void dooble_page::prepare_tool_buttons_for_mac(void)
@@ -347,56 +388,6 @@ void dooble_page::slot_prepare_forward_menu(void)
 	(title, this, SLOT(slot_go_to_forward_item(void)));
       action->setProperty("index", i);
     }
-}
-
-void dooble_page::slot_prepare_standard_menus(void)
-{
-  m_ui.menus->menu()->clear();
-
-  QAction *action = 0;
-  QMenu *menu = 0;
-
-  /*
-  ** File Menu
-  */
-
-  menu = m_ui.menus->menu()->addMenu(tr("&File"));
-  menu->addAction(tr("New &Tab"),
-		  this,
-		  SIGNAL(new_tab(void)),
-		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction(tr("&New Window..."),
-		  this,
-		  SIGNAL(new_window(void)),
-		  QKeySequence(tr("Ctrl+N")));
-  menu->addAction(tr("&Open URL"),
-		  this,
-		  SLOT(slot_open_url(void)),
-		  QKeySequence(tr("Ctrl+L")));
-  menu->addSeparator();
-  action = menu->addAction(tr("&Close Tab"),
-			   this,
-			   SIGNAL(close_tab(void)),
-			   QKeySequence(tr("Ctrl+W")));
-
-  if(qobject_cast<QStackedWidget *> (parentWidget()))
-    action->setEnabled
-      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
-
-  menu->addSeparator();
-  menu->addAction(tr("E&xit Dooble"),
-		  this,
-		  SIGNAL(quit_dooble(void)),
-		  QKeySequence(tr("Ctrl+Q")));
-
-  /*
-  ** Tools Menu
-  */
-
-  menu = m_ui.menus->menu()->addMenu(tr("&Tools"));
-  menu->addAction(tr("&Blocked Domains..."),
-		  this,
-		  SIGNAL(show_blocked_domains(void)));
 }
 
 void dooble_page::slot_reload_or_stop(void)

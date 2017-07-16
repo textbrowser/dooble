@@ -55,6 +55,7 @@ class dooble_page: public QWidget
   void go_to_forward_item(int index);
   void load_page(const QUrl &url);
   void prepare_icons(void);
+  void prepare_standard_menus(void);
   void prepare_tool_buttons_for_mac(void);
 
  private slots:
@@ -72,7 +73,6 @@ class dooble_page: public QWidget
   void slot_open_url(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
-  void slot_prepare_standard_menus(void);
   void slot_reload_or_stop(void);
   void slot_show_pull_down_menu(void);
   void slot_url_changed(const QUrl &url);
