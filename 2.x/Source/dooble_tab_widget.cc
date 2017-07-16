@@ -55,6 +55,9 @@ void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
       m_tab_bar->setTabButton(index, side, 0);
       m_tab_bar->setTabButton(index, side, label);
     }
+  else if(!label->movie() || (label->movie() &&
+			      label->movie()->state() != QMovie::Running))
+    label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 
   label->setProperty("icon", icon);
 #else
