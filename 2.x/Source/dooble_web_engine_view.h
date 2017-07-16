@@ -41,6 +41,13 @@ class dooble_web_engine_view: public QWebEngineView
 
  private:
   dooble_web_engine_page *m_page;
+
+ protected:
+  dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
+
+ signals:
+  void create_tab(dooble_web_engine_view *view);
+  void create_window(dooble_web_engine_view *view);
 };
 
 #endif

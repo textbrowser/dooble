@@ -29,8 +29,20 @@
 
 #include "dooble.h"
 #include "dooble_page.h"
+#include "dooble_web_engine_view.h"
 
 QMap<QString, QVariant> dooble::s_settings;
+
+dooble::dooble(dooble_web_engine_view *view):QMainWindow()
+{
+  m_ui.setupUi(this);
+  connect(m_ui.tab,
+	  SIGNAL(tabCloseRequested(int)),
+	  this,
+	  SLOT(slot_tab_close_requested(int)));
+  s_settings["icon_set"] = "Snipicons";
+  new_page(view);
+}
 
 dooble::dooble(void):QMainWindow()
 {
@@ -40,7 +52,7 @@ dooble::dooble(void):QMainWindow()
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
   s_settings["icon_set"] = "Snipicons";
-  new_page();
+  new_page(0);
 }
 
 QVariant dooble::setting(const QString &key)
@@ -48,14 +60,22 @@ QVariant dooble::setting(const QString &key)
   return s_settings.value(key);
 }
 
-void dooble::new_page(void)
+void dooble::new_page(dooble_web_engine_view *view)
 {
-  dooble_page *page = new dooble_page(m_ui.tab);
+  dooble_page *page = new dooble_page(view, m_ui.tab);
 
   connect(page,
 	  SIGNAL(close_tab(void)),
 	  this,
 	  SLOT(slot_close_tab(void)));
+  connect(page,
+	  SIGNAL(create_tab(dooble_web_engine_view *)),
+	  this,
+	  SLOT(slot_create_tab(dooble_web_engine_view *)));
+  connect(page,
+	  SIGNAL(create_window(dooble_web_engine_view *)),
+	  this,
+	  SLOT(slot_create_window(dooble_web_engine_view *)));
   connect(page,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
@@ -120,6 +140,18 @@ void dooble::slot_close_tab(void)
   page->deleteLater();
 }
 
+void dooble::slot_create_tab(dooble_web_engine_view *view)
+{
+  new_page(view);
+}
+
+void dooble::slot_create_window(dooble_web_engine_view *view)
+{
+  dooble *d = new dooble(view);
+
+  d->show();
+}
+
 void dooble::slot_icon_changed(const QIcon &icon)
 {
   dooble_page *page = qobject_cast<dooble_page *> (sender());
@@ -141,7 +173,7 @@ void dooble::slot_load_started(void)
 
 void dooble::slot_new_tab(void)
 {
-  new_page();
+  new_page(0);
 }
 
 void dooble::slot_new_window(void)

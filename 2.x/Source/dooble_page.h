@@ -39,7 +39,7 @@ class dooble_page: public QWidget
   Q_OBJECT
 
  public:
-  dooble_page(QWidget *parent);
+  dooble_page(dooble_web_engine_view *view, QWidget *parent);
   QUrl url(void) const;
 
  private:
@@ -77,6 +77,8 @@ class dooble_page: public QWidget
 
  signals:
   void close_tab(void);
+  void create_tab(dooble_web_engine_view *view);
+  void create_window(dooble_web_engine_view *view);
   void iconChanged(const QIcon &icon);
   void loadFinished(bool ok);
   void loadStarted(void);

@@ -36,7 +36,8 @@
 #include "dooble_page.h"
 #include "dooble_web_engine_view.h"
 
-dooble_page::dooble_page(QWidget *parent):QWidget(parent)
+dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
+  QWidget(parent)
 {
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -45,7 +46,15 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
   m_ui.forward->setMenu(new QMenu(this));
   m_ui.menus->setMenu(new QMenu(this));
   m_ui.progress->setVisible(false);
-  m_view = new dooble_web_engine_view(this);
+
+  if(view)
+    {
+      m_view = view;
+      m_view->setParent(this);
+    }
+  else
+    m_view = new dooble_web_engine_view(this);
+
   m_ui.frame->layout()->addWidget(m_view);
   connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
@@ -83,6 +92,14 @@ dooble_page::dooble_page(QWidget *parent):QWidget(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reload_or_stop(void)));
+  connect(m_view,
+	  SIGNAL(create_tab(dooble_web_engine_view *)),
+	  this,
+	  SIGNAL(create_tab(dooble_web_engine_view *)));
+  connect(m_view,
+	  SIGNAL(create_window(dooble_web_engine_view *)),
+	  this,
+	  SIGNAL(create_window(dooble_web_engine_view *)));
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
@@ -389,18 +406,16 @@ void dooble_page::slot_show_pull_down_menu(void)
       if(title.isEmpty())
 	title = items.at(i).url().toString().trimmed();
 
-      QString text
-	("<html>" +
-	 title +
-	 " - " +
-	 QString("<font color='blue'><u>%1</u></font>").arg(url) +
-	 "</html>");
+      QString text("<html>" +
+		   title +
+		   " - " +
+		   QString("<font color='blue'><u>%1</u></font>").arg(url) +
+		   "</html>");
 
-      label = new dooble_label_widget
-	(fm.elidedText(text,
-		       Qt::ElideRight,
-		       width() - 10),
-	 m_ui.address->menu());
+      label = new dooble_label_widget(fm.elidedText(text,
+						    Qt::ElideRight,
+						    width() - 10),
+				      m_ui.address->menu());
       label->setMargin(5);
       label->setMinimumHeight(fm.height() + 10);
       label->setProperty("index", i);

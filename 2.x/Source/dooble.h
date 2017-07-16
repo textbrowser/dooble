@@ -32,11 +32,14 @@
 
 #include "ui_dooble.h"
 
+class dooble_web_engine_view;
+
 class dooble: public QMainWindow
 {
   Q_OBJECT
 
  public:
+  dooble(dooble_web_engine_view *view);
   dooble(void);
   static QVariant setting(const QString &key);
   static void set_setting(const QString &key, const QVariant &value);
@@ -44,13 +47,15 @@ class dooble: public QMainWindow
  private:
   Ui_dooble m_ui;
   static QMap<QString, QVariant> s_settings;
-  void new_page(void);
+  void new_page(dooble_web_engine_view *view);
 
  public slots:
   void show(void);
 
  private slots:
   void slot_close_tab(void);
+  void slot_create_tab(dooble_web_engine_view *view);
+  void slot_create_window(dooble_web_engine_view *view);
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
   void slot_load_started(void);
