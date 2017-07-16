@@ -60,6 +60,20 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
   return size;
 }
 
+void dooble_tab_bar::slot_close_other_tabs(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    {
+      int index = tabAt(action->property("point").toPoint());
+
+      for(int i = count() - 1; i >= 0; i--)
+	if(i != index)
+	  emit tabCloseRequested(i);
+    }
+}
+
 void dooble_tab_bar::slot_close_tab(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -76,6 +90,11 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action = menu.addAction(tr("Close &Tab"),
 			  this,
 			  SLOT(slot_close_tab(void)));
+  action->setEnabled(count() > 1);
+  action->setProperty("point", point);
+  action = menu.addAction(tr("Close &Other Tabs"),
+			  this,
+			  SLOT(slot_close_other_tabs(void)));
   action->setEnabled(count() > 1);
   action->setProperty("point", point);
   menu.exec(mapToGlobal(point));

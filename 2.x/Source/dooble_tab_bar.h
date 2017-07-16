@@ -41,6 +41,7 @@ class dooble_tab_bar: public QTabBar
   QSize tabSizeHint(int index) const;
 
  private slots:
+  void slot_close_other_tabs(void);
   void slot_close_tab(void);
   void slot_show_context_menu(const QPoint &point);
 };
