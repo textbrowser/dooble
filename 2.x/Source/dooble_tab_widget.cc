@@ -49,7 +49,11 @@ void dooble_tab_widget::slot_load_finished(void)
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
   int index = indexOf(page);
 
+#ifdef Q_OS_MAC
+  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+#endif
 
   QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
@@ -78,7 +82,11 @@ void dooble_tab_widget::slot_load_started(void)
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
   int index = indexOf(page);
 
+#ifdef Q_OS_MAC
+  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+#endif
 
   QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
