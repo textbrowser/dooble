@@ -39,6 +39,9 @@ class dooble_tab_bar: public QTabBar
 
  protected:
   QSize tabSizeHint(int index) const;
+
+ private slots:
+  void slot_show_context_menu(const QPoint &point);
 };
 
 #endif

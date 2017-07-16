@@ -25,15 +25,23 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QMenu>
+
 #include "dooble_tab_bar.h"
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
+  setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
   setElideMode(Qt::ElideRight);
   setExpanding(true);
   setMovable(true);
+  setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
   setUsesScrollButtons(true);
+  connect(this,
+	  SIGNAL(customContextMenuRequested(const QPoint &)),
+	  this,
+	  SLOT(slot_show_context_menu(const QPoint &)));
 }
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
@@ -50,4 +58,11 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 
   size.setWidth(preferred_tab_width);
   return size;
+}
+
+void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
+{
+  QMenu menu(this);
+
+  menu.exec(mapToGlobal(point));
 }
