@@ -98,8 +98,7 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
   QSize size2 = m_pull_down->sizeHint();
 
   d = (rect().height() - size1.height()) / 2;
-  m_bookmark->move
-    (frame_width - rect().left() + 5, rect().top() + d);
+  m_bookmark->move(frame_width - rect().left() + 5, rect().top() + d);
   m_line->move
     (frame_width - rect().left() + size1.width() + 5, rect().top() + 5);
   d = (rect().height() - size2.height()) / 2;

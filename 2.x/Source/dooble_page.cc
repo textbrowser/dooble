@@ -242,7 +242,6 @@ void dooble_page::slot_load_progress(int progress)
   m_ui.backward->setEnabled(m_view->history()->canGoBack());
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
-  m_ui.progress->setVisible(progress < 100);
 }
 
 void dooble_page::slot_load_started(void)

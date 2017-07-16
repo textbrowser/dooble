@@ -2,3 +2,5 @@ Remaining Items
 
 1.     Display cookies in a tree-like structure.
 2.     Restrict domains.
+3.     Hovered link label causes a resize of the main window if a lengthy link is
+       under the mouse cursor.
