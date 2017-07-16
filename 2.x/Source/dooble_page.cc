@@ -136,7 +136,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
+  new QShortcut(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
   new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
   new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
   prepare_icons();
   prepare_tool_buttons_for_mac();
