@@ -56,7 +56,7 @@ void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
       m_tab_bar->setTabButton(index, side, label);
     }
 
-  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+  label->setProperty("icon", icon);
 #else
   QTabWidget::setTabIcon(index, icon);
 #endif
@@ -92,6 +92,12 @@ void dooble_tab_widget::slot_load_finished(void)
 	}
 
       label->setMovie(0);
+
+#ifdef Q_OS_MAC
+      QIcon icon(label->property("icon").value<QIcon> ());
+
+      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+#endif
     }
 }
 
