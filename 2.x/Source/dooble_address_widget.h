@@ -45,6 +45,7 @@ class dooble_address_widget: public QLineEdit
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QFrame *m_line;
   QMenu *m_menu;
   QToolButton *m_bookmark;
   QToolButton *m_pull_down;

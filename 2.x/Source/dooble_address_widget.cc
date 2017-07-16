@@ -46,6 +46,13 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
   m_bookmark->setToolTip(tr("Bookmark"));
+  m_line = new QFrame(this);
+  m_line->setFrameShadow(QFrame::Sunken);
+  m_line->setFrameShape(QFrame::VLine);
+  m_line->setLineWidth(1);
+  m_line->setMaximumHeight(sizeHint().height() - 10);
+  m_line->setMaximumWidth(5);
+  m_line->setMinimumWidth(5);
   m_menu = new QMenu(this);
   m_pull_down = new QToolButton(this);
   m_pull_down->setCursor(Qt::ArrowCursor);
@@ -62,10 +69,11 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
   prepare_icons();
-  setMinimumHeight(sizeHint().height() + 10);
+  setMinimumHeight(sizeHint().height());
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
-     arg(m_bookmark->sizeHint().width() + frame_width + 5).
+     arg(m_bookmark->sizeHint().width() +
+	 frame_width + 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
 }
 
@@ -84,16 +92,19 @@ void dooble_address_widget::prepare_icons(void)
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
 {
+  int d = 0;
   int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   QSize size1 = m_bookmark->sizeHint();
   QSize size2 = m_pull_down->sizeHint();
 
+  d = (rect().height() - size1.height()) / 2;
   m_bookmark->move
-    (frame_width - rect().left() + 6, (rect().bottom() + 2 -
-				       size1.height()) / 2);
+    (frame_width - rect().left() + 5, rect().top() + d);
+  m_line->move
+    (frame_width - rect().left() + size1.width() + 5, rect().top() + 5);
+  d = (rect().height() - size2.height()) / 2;
   m_pull_down->move
-    (rect().right() - frame_width - size2.width() - 5, (rect().bottom() + 2 -
-							size2.height()) / 2);
+    (rect().right() - frame_width - size2.width() - 5, rect().top() + d);
 
   if(selectedText().isEmpty())
     setCursorPosition(0);
