@@ -38,6 +38,7 @@ class dooble_tab_widget: public QTabWidget
 
  public:
   dooble_tab_widget(QWidget *parent);
+  void setTabIcon(int index, const QIcon &icon);
 
  private:
   dooble_tab_bar *m_tab_bar;

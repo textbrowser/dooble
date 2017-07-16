@@ -38,6 +38,29 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   setTabBar(m_tab_bar);
 }
 
+void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
+{
+#ifdef Q_OS_MAC
+  QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
+    (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
+
+  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+
+  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+
+  if(!label)
+    {
+      label = new QLabel(this);
+      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+      m_tab_bar->setTabButton(index, side, 0);
+      m_tab_bar->setTabButton(index, side, label);
+    }
+#else
+  QTabWidget::setTabIcon(index, icon);
+#endif
+}
+
 void dooble_tab_widget::slot_load_finished(void)
 {
   dooble_page *page = qobject_cast<dooble_page *> (sender());
