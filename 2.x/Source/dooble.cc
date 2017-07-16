@@ -82,8 +82,16 @@ void dooble::new_page(dooble_web_engine_view *view)
 	  SLOT(slot_icon_changed(const QIcon &)));
   connect(page,
 	  SIGNAL(loadFinished(bool)),
+	  m_ui.tab,
+	  SLOT(slot_load_finished(void)));
+  connect(page,
+	  SIGNAL(loadFinished(bool)),
 	  this,
 	  SLOT(slot_load_finished(bool)));
+  connect(page,
+	  SIGNAL(loadStarted(void)),
+	  m_ui.tab,
+	  SLOT(slot_load_started(void)));
   connect(page,
 	  SIGNAL(loadStarted(void)),
 	  this,

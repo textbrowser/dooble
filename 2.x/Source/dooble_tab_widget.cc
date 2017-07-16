@@ -25,6 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QLabel>
+#include <QMovie>
+
+#include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
@@ -32,4 +36,76 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
   m_tab_bar = new dooble_tab_bar(this);
   setTabBar(m_tab_bar);
+}
+
+void dooble_tab_widget::slot_load_finished(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
+    (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
+  int index = indexOf(page);
+
+  side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+
+  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+
+  if(label)
+    {
+      QMovie *movie = label->movie();
+
+      if(movie)
+	{
+	  movie->stop();
+	  movie->deleteLater();
+	}
+
+      label->setMovie(0);
+    }
+}
+
+void dooble_tab_widget::slot_load_started(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
+    (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
+  int index = indexOf(page);
+
+  side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+
+  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+
+  if(!label)
+    {
+      QPixmap pixmap(16, 16);
+
+      pixmap.fill(m_tab_bar->backgroundRole());
+      label = new QLabel(this);
+      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setPixmap(pixmap);
+      m_tab_bar->setTabButton(index, side, 0);
+      m_tab_bar->setTabButton(index, side, label);
+    }
+
+  QMovie *movie = label->movie();
+
+  if(!movie)
+    {
+      movie = new QMovie(":/spinning_wheel.gif", QByteArray(), label);
+      label->setMovie(movie);
+      movie->setScaledSize(QSize(16, 16));
+      movie->start();
+    }
+  else
+    {
+      if(movie->state() != QMovie::Running)
+	movie->start();
+    }
 }

@@ -9,5 +9,6 @@
 	<file>Snipicons/32/menu.png</file>
 	<file>Snipicons/32/reload.png</file>
 	<file>Snipicons/32/stop.png</file>
+	<file>spinning_wheel.gif</file>
     </qresource>
 </RCC>

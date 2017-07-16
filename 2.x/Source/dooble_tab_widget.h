@@ -41,6 +41,10 @@ class dooble_tab_widget: public QTabWidget
 
  private:
   dooble_tab_bar *m_tab_bar;
+
+ private slots:
+  void slot_load_finished(void);
+  void slot_load_started(void);
 };
 
 #endif
