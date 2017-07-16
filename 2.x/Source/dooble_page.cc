@@ -139,6 +139,7 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
   new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
   prepare_icons();
+  prepare_tool_buttons_for_mac();
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
@@ -183,6 +184,21 @@ void dooble_page::prepare_icons(void)
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
+}
+
+void dooble_page::prepare_tool_buttons_for_mac(void)
+{
+#ifdef Q_OS_MAC
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    if(m_ui.backward == tool_button ||
+       m_ui.forward == tool_button)
+      tool_button->setStyleSheet
+	("QToolButton {border: none; padding-right: 10px}"
+	 "QToolButton::menu-button {border: none;}");
+    else
+      tool_button->setStyleSheet("QToolButton {border: none;}"
+				 "QToolButton::menu-button {border: none;}");
+#endif
 }
 
 void dooble_page::slot_escape(void)

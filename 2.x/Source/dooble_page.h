@@ -55,6 +55,7 @@ class dooble_page: public QWidget
   void go_to_forward_item(int index);
   void load_page(const QUrl &url);
   void prepare_icons(void);
+  void prepare_tool_buttons_for_mac(void);
 
  private slots:
   void slot_escape(void);
