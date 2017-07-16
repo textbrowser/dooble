@@ -64,6 +64,7 @@ class dooble: public QMainWindow
   void slot_quit_dooble(void);
   void slot_show_blocked_domains(void);
   void slot_tab_close_requested(int index);
+  void slot_tab_index_changed(int index);
   void slot_title_changed(const QString &title);
 };
 

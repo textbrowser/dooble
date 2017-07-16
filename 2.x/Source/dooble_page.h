@@ -40,6 +40,7 @@ class dooble_page: public QWidget
 
  public:
   dooble_page(dooble_web_engine_view *view, QWidget *parent);
+  QString title(void) const;
   QUrl url(void) const;
 
  private:

@@ -142,6 +142,11 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   slot_prepare_standard_menus(); // Enables shortcuts.
 }
 
+QString dooble_page::title(void) const
+{
+  return m_view->title();
+}
+
 QUrl dooble_page::url(void) const
 {
   return m_view->url();
@@ -264,7 +269,7 @@ void dooble_page::slot_load_progress(int progress)
 void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
-  emit titleChanged("Dooble");
+  emit titleChanged("");
 
   QString icon_set(dooble::setting("icon_set").toString());
 

@@ -37,6 +37,10 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   m_ui.setupUi(this);
   connect(m_ui.tab,
+	  SIGNAL(currentChanged(int)),
+	  this,
+	  SLOT(slot_tab_index_changed(int)));
+  connect(m_ui.tab,
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
@@ -44,15 +48,8 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   new_page(view);
 }
 
-dooble::dooble(void):QMainWindow()
+dooble::dooble(void):dooble(0)
 {
-  m_ui.setupUi(this);
-  connect(m_ui.tab,
-	  SIGNAL(tabCloseRequested(int)),
-	  this,
-	  SLOT(slot_tab_close_requested(int)));
-  s_settings["icon_set"] = "Snipicons";
-  new_page(0);
 }
 
 QVariant dooble::setting(const QString &key)
@@ -219,6 +216,19 @@ void dooble::slot_tab_close_requested(int index)
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
+void dooble::slot_tab_index_changed(int index)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(!page)
+    return;
+
+  if(page->title().trimmed().isEmpty())
+    setWindowTitle(tr("Dooble"));
+  else
+    setWindowTitle(tr("%1 - Dooble").arg(page->title().trimmed()));
+}
+
 void dooble::slot_title_changed(const QString &title)
 {
   dooble_page *page = qobject_cast<dooble_page *> (sender());
@@ -226,14 +236,19 @@ void dooble::slot_title_changed(const QString &title)
   if(!page)
     return;
 
-  if(title.trimmed().isEmpty())
-    m_ui.tab->setTabText
-      (m_ui.tab->indexOf(page), page->url().toString().trimmed());
-  else
-    m_ui.tab->setTabText(m_ui.tab->indexOf(page), title.trimmed());
+  QString text(title.trimmed());
 
-  m_ui.tab->setTabToolTip
-    (m_ui.tab->indexOf(page), m_ui.tab->tabText(m_ui.tab->indexOf(page)));
-  setWindowTitle
-    (tr("%1 - Dooble").arg(m_ui.tab->tabText(m_ui.tab->indexOf(page))));
+  if(text.isEmpty())
+    text = page->url().toString().trimmed();
+
+  if(text.isEmpty())
+    {
+      text = tr("Dooble");
+      setWindowTitle(text);
+    }
+  else
+    setWindowTitle(tr("%1 - Dooble").arg(text));
+
+  m_ui.tab->setTabText(m_ui.tab->indexOf(page), text);
+  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
 }
