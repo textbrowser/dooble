@@ -27,6 +27,9 @@
 
 #include <QApplication>
 #include <QDir>
+#ifdef Q_OS_WIN32
+#include <QStyleFactory>
+#endif
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 
@@ -141,7 +144,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_WIN32
   QApplication::addLibraryPath("plugins");
-  QApplication::setStyle("fusion");
+  QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
 
   QApplication qapplication(argc, argv);
