@@ -39,6 +39,9 @@
 dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   QWidget(parent)
 {
+#ifdef Q_OS_MAC
+  m_os_mac_menus_prepared = false;
+#endif
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
@@ -228,6 +231,19 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
 		  SIGNAL(show_blocked_domains(void)));
+
+#ifdef Q_OS_MAC
+  if(!m_os_mac_menus_prepared)
+    {
+      m_os_mac_menus_prepared = true;
+      new QShortcut
+	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
+      new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
+    }
+#endif
 }
 
 void dooble_page::prepare_tool_buttons_for_mac(void)

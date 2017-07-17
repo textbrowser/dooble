@@ -50,6 +50,9 @@ class dooble_page: public QWidget
   };
 
   Ui_dooble_page m_ui;
+#ifdef Q_OS_MAC
+  bool m_os_mac_menus_prepared;
+#endif
   dooble_web_engine_view *m_view;
   void go_to_backward_item(int index);
   void go_to_forward_item(int index);
