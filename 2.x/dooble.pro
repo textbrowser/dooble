@@ -32,7 +32,11 @@ QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_TARGETS = purge
 
 INCLUDEPATH	+= Source
-LIBS		+=
+
+macx {
+LIBS		+= -framework Cocoa
+}
+
 PRE_TARGETDEPS =
 
 MOC_DIR = temp/moc
@@ -51,6 +55,11 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_tab_widget.h \
                   Source\\dooble_web_engine_page.h \
                   Source\\dooble_web_engine_view.h
+
+macx {
+OBJECTIVE_HEADERS += Include/Cocoainitializer.h
+OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
+}
 
 RESOURCES       += Icons\\icons.qrc
 

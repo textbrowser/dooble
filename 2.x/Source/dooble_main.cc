@@ -48,6 +48,9 @@ extern "C"
 #endif
 }
 
+#ifdef Q_OS_MAC
+#include "CocoaInitializer.h"
+#endif
 #include "dooble.h"
 
 static char *s_doobleAbortedFileName = 0;
@@ -148,6 +151,14 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapplication(argc, argv);
+
+#ifdef Q_OS_MAC
+  /*
+  ** Eliminate pool errors on OS X.
+  */
+
+  CocoaInitializer cocoa_initializer;
+#endif
 
 #ifdef Q_OS_WIN32
   QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
