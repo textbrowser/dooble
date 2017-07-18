@@ -241,6 +241,7 @@ void dooble_page::prepare_standard_menus(void)
       new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
       new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
       new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+W")), this, SIGNAL(close_tab(void)));
       new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
     }
 #endif
