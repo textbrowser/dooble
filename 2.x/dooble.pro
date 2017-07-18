@@ -33,6 +33,10 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_TARGETS = purge
 
+macx {
+ICON            = Icons/Logo/dooble.icns
+}
+
 INCLUDEPATH	+= Source
 
 macx {

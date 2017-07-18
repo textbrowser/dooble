@@ -28,6 +28,7 @@
 #include <QUrl>
 
 #include "dooble.h"
+#include "dooble_favicons.h"
 #include "dooble_page.h"
 #include "dooble_web_engine_view.h"
 
@@ -164,6 +165,7 @@ void dooble::slot_icon_changed(const QIcon &icon)
   if(!page)
     return;
 
+  dooble_favicons::save_icon(icon, page->url());
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }
 
