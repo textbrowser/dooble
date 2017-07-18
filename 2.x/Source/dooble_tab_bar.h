@@ -38,7 +38,6 @@ class dooble_tab_bar: public QTabBar
   dooble_tab_bar(QWidget *parent);
 
  protected:
-  QSize minimumTabSizeHint(int index) const;
   QSize tabSizeHint(int index) const;
 
  private slots:
