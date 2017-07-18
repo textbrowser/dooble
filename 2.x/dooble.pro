@@ -1,7 +1,9 @@
 cache()
 
+unix {
 purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
                  Source/*~ *~
+}
 
 CONFIG		+= qt release warn_on
 LANGUAGE	= C++
@@ -49,6 +51,7 @@ FORMS           = UI\\dooble.ui \
 
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
+                  Source\\dooble_favicons.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \
                   Source\\dooble_tab_bar.h \
@@ -65,6 +68,7 @@ RESOURCES       += Icons\\icons.qrc
 
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
+                  Source\\dooble_favicons.cc \
                   Source\\dooble_label_widget.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
