@@ -43,7 +43,11 @@ class dooble_tab_bar: public QTabBar
  private slots:
   void slot_close_other_tabs(void);
   void slot_close_tab(void);
+  void slot_open_tab_as_new_window(void);
   void slot_show_context_menu(const QPoint &point);
+
+ signals:
+  void open_tab_as_new_window(int index);
 };
 
 #endif

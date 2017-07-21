@@ -34,6 +34,25 @@
 
 QMap<QString, QVariant> dooble::s_settings;
 
+dooble::dooble(dooble_page *page):QMainWindow()
+{
+  m_ui.setupUi(this);
+  connect(m_ui.tab,
+	  SIGNAL(currentChanged(int)),
+	  this,
+	  SLOT(slot_tab_index_changed(int)));
+  connect(m_ui.tab,
+	  SIGNAL(open_tab_as_new_window(int)),
+	  this,
+	  SLOT(slot_open_tab_as_new_window(int)));
+  connect(m_ui.tab,
+	  SIGNAL(tabCloseRequested(int)),
+	  this,
+	  SLOT(slot_tab_close_requested(int)));
+  s_settings["icon_set"] = "Snipicons";
+  new_page(page);
+}
+
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   m_ui.setupUi(this);
@@ -42,6 +61,10 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  this,
 	  SLOT(slot_tab_index_changed(int)));
   connect(m_ui.tab,
+	  SIGNAL(open_tab_as_new_window(int)),
+	  this,
+	  SLOT(slot_open_tab_as_new_window(int)));
+  connect(m_ui.tab,
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
@@ -49,7 +72,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   new_page(view);
 }
 
-dooble::dooble(void):dooble(0)
+dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
 {
 }
 
@@ -58,64 +81,114 @@ QVariant dooble::setting(const QString &key)
   return s_settings.value(key);
 }
 
+void dooble::new_page(dooble_page *page)
+{
+  if(!page)
+    return;
+
+  page->setParent(m_ui.tab);
+  prepare_page_connections(page);
+
+  /*
+  ** The page's icon and title should be meaningful.
+  */
+
+  m_ui.tab->addTab(page, page->icon(), page->title());
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+}
+
 void dooble::new_page(dooble_web_engine_view *view)
 {
   dooble_page *page = new dooble_page(view, m_ui.tab);
 
+  prepare_page_connections(page);
+  m_ui.tab->addTab(page, tr("Dooble"));
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+}
+
+void dooble::prepare_page_connections(dooble_page *page)
+{
+  if(!page)
+    return;
+
   connect(page,
 	  SIGNAL(close_tab(void)),
 	  this,
-	  SLOT(slot_close_tab(void)));
+	  SLOT(slot_close_tab(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
-	  SLOT(slot_create_tab(dooble_web_engine_view *)));
+	  SLOT(slot_create_tab(dooble_web_engine_view *)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(create_window(dooble_web_engine_view *)),
 	  this,
-	  SLOT(slot_create_window(dooble_web_engine_view *)));
+	  SLOT(slot_create_window(dooble_web_engine_view *)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
-	  SLOT(slot_icon_changed(const QIcon &)));
+	  SLOT(slot_icon_changed(const QIcon &)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(loadFinished(bool)),
 	  m_ui.tab,
-	  SLOT(slot_load_finished(void)));
+	  SLOT(slot_load_finished(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(loadFinished(bool)),
 	  this,
-	  SLOT(slot_load_finished(bool)));
+	  SLOT(slot_load_finished(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(loadStarted(void)),
 	  m_ui.tab,
-	  SLOT(slot_load_started(void)));
+	  SLOT(slot_load_started(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(loadStarted(void)),
 	  this,
-	  SLOT(slot_load_started(void)));
+	  SLOT(slot_load_started(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(new_tab(void)),
 	  this,
-	  SLOT(slot_new_tab(void)));
+	  SLOT(slot_new_tab(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(new_window(void)),
 	  this,
-	  SLOT(slot_new_window(void)));
+	  SLOT(slot_new_window(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(quit_dooble(void)),
 	  this,
-	  SLOT(slot_quit_dooble(void)));
+	  SLOT(slot_quit_dooble(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(show_blocked_domains(void)),
 	  this,
-	  SLOT(slot_show_blocked_domains(void)));
+	  SLOT(slot_show_blocked_domains(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
-	  SLOT(slot_title_changed(const QString &)));
-  m_ui.tab->addTab(page, tr("Dooble"));
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+	  SLOT(slot_title_changed(const QString &)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
 }
 
 void dooble::set_setting(const QString &key, const QVariant &value)
@@ -180,7 +253,7 @@ void dooble::slot_load_started(void)
 
 void dooble::slot_new_tab(void)
 {
-  new_page(0);
+  new_page(static_cast<dooble_web_engine_view *> (0));
 }
 
 void dooble::slot_new_window(void)
@@ -188,6 +261,20 @@ void dooble::slot_new_window(void)
   dooble *d = new dooble();
 
   d->show();
+}
+
+void dooble::slot_open_tab_as_new_window(int index)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(!page)
+    return;
+
+  dooble *d = new dooble(page);
+
+  d->show();
+  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
 void dooble::slot_quit_dooble(void)
@@ -224,6 +311,8 @@ void dooble::slot_tab_index_changed(int index)
 
   if(!page)
     return;
+  else if(page != m_ui.tab->currentWidget())
+    return;
 
   if(page->title().trimmed().isEmpty())
     setWindowTitle(tr("Dooble"));
@@ -236,6 +325,8 @@ void dooble::slot_title_changed(const QString &title)
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
+    return;
+  else if(page != m_ui.tab->currentWidget())
     return;
 
   QString text(title.trimmed());

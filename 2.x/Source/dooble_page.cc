@@ -139,6 +139,11 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   prepare_tool_buttons_for_mac();
 }
 
+QIcon dooble_page::icon(void) const
+{
+  return m_view->icon();
+}
+
 QString dooble_page::title(void) const
 {
   return m_view->title();
@@ -147,6 +152,11 @@ QString dooble_page::title(void) const
 QUrl dooble_page::url(void) const
 {
   return m_view->url();
+}
+
+dooble_web_engine_view *dooble_page::view(void) const
+{
+  return m_view;
 }
 
 void dooble_page::go_to_backward_item(int index)

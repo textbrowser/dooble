@@ -40,8 +40,10 @@ class dooble_page: public QWidget
 
  public:
   dooble_page(dooble_web_engine_view *view, QWidget *parent);
+  QIcon icon(void) const;
   QString title(void) const;
   QUrl url(void) const;
+  dooble_web_engine_view *view(void) const;
 
  private:
   enum ConstantsEnum

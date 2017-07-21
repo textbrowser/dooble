@@ -46,6 +46,9 @@ class dooble_tab_widget: public QTabWidget
  private slots:
   void slot_load_finished(void);
   void slot_load_started(void);
+
+ signals:
+  void open_tab_as_new_window(int index);
 };
 
 #endif
