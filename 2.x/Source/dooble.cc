@@ -254,6 +254,13 @@ void dooble::slot_icon_changed(const QIcon &icon)
 void dooble::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
+
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  dooble_favicons::save_icon(page->icon(), page->url());
 }
 
 void dooble::slot_load_started(void)

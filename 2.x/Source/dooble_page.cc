@@ -32,6 +32,7 @@
 #include <QWidgetAction>
 
 #include "dooble.h"
+#include "dooble_favicons.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
 #include "dooble_web_engine_view.h"
@@ -480,6 +481,7 @@ void dooble_page::slot_show_pull_down_menu(void)
 
   for(int i = 0; i < MAXIMUM_HISTORY_ITEMS && i < items.size(); i++)
     {
+      QLabel *pixmap_label = 0;
       QString title(items.at(i).title().trimmed());
       QString url(items.at(i).url().toString().trimmed());
       QWidgetAction *widget_action = new QWidgetAction(m_ui.address->menu());
@@ -488,6 +490,8 @@ void dooble_page::slot_show_pull_down_menu(void)
       if(title.isEmpty())
 	title = items.at(i).url().toString().trimmed();
 
+      QWidget *widget = new QWidget(m_ui.address->menu());
+      QIcon icon(dooble_favicons::icon(url));
       QString text("<html>" +
 		   title +
 		   " - " +
@@ -501,11 +505,19 @@ void dooble_page::slot_show_pull_down_menu(void)
       label->setMargin(5);
       label->setMinimumHeight(fm.height() + 10);
       label->setProperty("index", i);
+      pixmap_label = new QLabel(m_ui.address->menu());
+      pixmap_label->setMaximumSize(QSize(16, 16));
+      pixmap_label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+      widget->setLayout(new QHBoxLayout(widget));
+      widget->layout()->addWidget(pixmap_label);
+      widget->layout()->addWidget(label);
+      widget->layout()->setContentsMargins(5, 0, 0, 0);
+      widget->layout()->setSpacing(5);
       connect(label,
 	      SIGNAL(clicked(void)),
 	      this,
 	      SLOT(slot_go_to_item(void)));
-      widget_action->setDefaultWidget(label);
+      widget_action->setDefaultWidget(widget);
       m_ui.address->menu()->addAction(widget_action);
     }
 

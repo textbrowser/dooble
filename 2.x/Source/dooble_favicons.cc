@@ -37,12 +37,62 @@ QAtomicInteger<quint64> dooble_favicons::s_db_id;
 
 QIcon dooble_favicons::icon(const QUrl &url)
 {
-  Q_UNUSED(url);
-  return QIcon();
+  QIcon icon;
+  QString database_name(QString("dooble_favicons_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_favicons.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare("SELECT favicon FROM dooble_favicons "
+		      "INDEXED BY url_digest_index WHERE "
+		      "url_digest IN (?, ?)");
+	query.addBindValue(url.toString());
+	query.addBindValue(url.toString() + "/");
+
+	if(query.exec() && query.next())
+	  if(!query.isNull(0))
+	    {
+	      QBuffer buffer;
+	      QByteArray bytes(query.value(0).toByteArray());
+
+	      buffer.setBuffer(&bytes);
+
+	      if(buffer.open(QIODevice::ReadOnly))
+		{
+		  QDataStream in(&buffer);
+
+		  in >> icon;
+
+		  if(in.status() != QDataStream::Ok)
+		    icon = QIcon();
+
+		  buffer.close();
+		}
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  return icon;
 }
 
 void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 {
+  if(icon.isNull())
+    return;
+
   QString database_name(QString("dooble_favicons_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
 
@@ -75,13 +125,7 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 	  {
 	    QDataStream out(&buffer);
 
-	    if(url.scheme().toLower().trimmed() == "ftp" ||
-	       url.scheme().toLower().trimmed() == "gopher")
-	      out << icon.pixmap(icon.actualSize(QSize(16, 16)),
-				 QIcon::Normal,
-				 QIcon::On);
-	    else
-	      out << icon;
+	    out << icon;
 
 	    if(out.status() != QDataStream::Ok)
 	      bytes.clear();
