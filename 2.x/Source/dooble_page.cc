@@ -39,9 +39,7 @@
 dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   QWidget(parent)
 {
-#ifdef Q_OS_MAC
-  m_os_mac_menus_prepared = false;
-#endif
+  m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
@@ -136,6 +134,7 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
   prepare_icons();
+  prepare_shortcuts();
   prepare_standard_menus();
   prepare_tool_buttons_for_mac();
 }
@@ -181,6 +180,30 @@ void dooble_page::prepare_icons(void)
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
+}
+
+void dooble_page::prepare_shortcuts(void)
+{
+#ifdef Q_OS_MAC
+  if(!m_shortcuts_prepared)
+    {
+      m_shortcuts_prepared = true;
+      new QShortcut
+	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+W")), this, SIGNAL(close_tab(void)));
+      new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
+    }
+#else
+  if(!m_shortcuts_prepared)
+    {
+      m_shortcuts_prepared = true;
+      new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
+      new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
+    }
+#endif
 }
 
 void dooble_page::prepare_standard_menus(void)
@@ -231,20 +254,6 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
 		  SIGNAL(show_blocked_domains(void)));
-
-#ifdef Q_OS_MAC
-  if(!m_os_mac_menus_prepared)
-    {
-      m_os_mac_menus_prepared = true;
-      new QShortcut
-	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+W")), this, SIGNAL(close_tab(void)));
-      new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
-    }
-#endif
 }
 
 void dooble_page::prepare_tool_buttons_for_mac(void)
