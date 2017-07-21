@@ -28,10 +28,12 @@
 #ifndef dooble_page_h
 #define dooble_page_h
 
+#include <QWebEngineSettings>
 #include <QWidget>
 
 #include "ui_dooble_page.h"
 
+class QWebEngineSettings;
 class dooble_web_engine_view;
 
 class dooble_page: public QWidget
@@ -43,7 +45,10 @@ class dooble_page: public QWidget
   QIcon icon(void) const;
   QString title(void) const;
   QUrl url(void) const;
+  QWebEngineSettings *web_engine_settings(void) const;
   dooble_web_engine_view *view(void) const;
+  void enable_web_setting(QWebEngineSettings::WebAttribute setting,
+			  bool state);
 
  private:
   enum ConstantsEnum

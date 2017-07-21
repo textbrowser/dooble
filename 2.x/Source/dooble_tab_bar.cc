@@ -26,8 +26,11 @@
 */
 
 #include <QMenu>
+#include <QWebEngineSettings>
 
+#include "dooble_page.h"
 #include "dooble_tab_bar.h"
+#include "dooble_tab_widget.h"
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
@@ -119,5 +122,52 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  SLOT(slot_open_tab_as_new_window(void)));
   action->setEnabled(count() > 1);
   action->setProperty("point", point);
+  menu.addSeparator();
+  action = menu.addAction(tr("Web &Plugins"),
+			  this,
+			  SLOT(slot_web_plugins(void)));
+  action->setCheckable(true);
+  action->setProperty("point", point);
+
+  dooble_tab_widget *parent = qobject_cast<dooble_tab_widget *>
+    (parentWidget());
+
+  if(parent)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(parent->widget(tabAt(point)));
+
+      if(page)
+	{
+	  QWebEngineSettings *web_engine_settings = page->web_engine_settings();
+
+	  if(web_engine_settings)
+	    action->setChecked
+	      (web_engine_settings->testAttribute(QWebEngineSettings::
+						  PluginsEnabled));
+	}
+    }
+
   menu.exec(mapToGlobal(point));
+}
+
+void dooble_tab_bar::slot_web_plugins(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  dooble_tab_widget *parent = qobject_cast<dooble_tab_widget *>
+    (parentWidget());
+
+  if(parent)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(parent->widget(tabAt(action->property("point").toPoint())));
+
+      if(page)
+	page->enable_web_setting
+	  (QWebEngineSettings::PluginsEnabled, action->isChecked());
+    }
 }

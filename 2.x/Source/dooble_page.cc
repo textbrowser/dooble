@@ -154,9 +154,23 @@ QUrl dooble_page::url(void) const
   return m_view->url();
 }
 
+QWebEngineSettings *dooble_page::web_engine_settings(void) const
+{
+  return m_view->settings();
+}
+
 dooble_web_engine_view *dooble_page::view(void) const
 {
   return m_view;
+}
+
+void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
+				     bool state)
+{
+  QWebEngineSettings *settings = m_view->settings();
+
+  if(settings)
+    settings->setAttribute(setting, state);
 }
 
 void dooble_page::go_to_backward_item(int index)

@@ -30,6 +30,7 @@
 
 #include <QTabWidget>
 
+class dooble_page;
 class dooble_tab_bar;
 
 class dooble_tab_widget: public QTabWidget
@@ -38,6 +39,7 @@ class dooble_tab_widget: public QTabWidget
 
  public:
   dooble_tab_widget(QWidget *parent);
+  dooble_page *page(int index) const;
   void setTabIcon(int index, const QIcon &icon);
 
  private:

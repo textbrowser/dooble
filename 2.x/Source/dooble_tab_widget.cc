@@ -42,6 +42,11 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   setTabBar(m_tab_bar);
 }
 
+dooble_page *dooble_tab_widget::page(int index) const
+{
+  return qobject_cast<dooble_page *> (widget(index));
+}
+
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 {
 #ifdef Q_OS_MAC
