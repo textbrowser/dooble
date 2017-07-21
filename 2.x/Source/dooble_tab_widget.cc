@@ -56,6 +56,7 @@ void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
     {
       label = new QLabel(this);
       label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
       m_tab_bar->setTabButton(index, side, 0);
       m_tab_bar->setTabButton(index, side, label);
     }
