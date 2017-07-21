@@ -28,6 +28,7 @@
 #ifndef dooble_page_h
 #define dooble_page_h
 
+#include <QPointer>
 #include <QWebEngineSettings>
 #include <QWidget>
 
@@ -56,6 +57,7 @@ class dooble_page: public QWidget
     MAXIMUM_HISTORY_ITEMS = 20
   };
 
+  QPointer<QAction> m_action_close_tab;
   Ui_dooble_page m_ui;
   bool m_shortcuts_prepared;
   dooble_web_engine_view *m_view;
@@ -68,6 +70,7 @@ class dooble_page: public QWidget
   void prepare_tool_buttons_for_mac(void);
 
  private slots:
+  void slot_about_to_show_standard_menus(void);
   void slot_escape(void);
   void slot_go_backward(void);
   void slot_go_forward(void);

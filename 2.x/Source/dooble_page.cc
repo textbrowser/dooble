@@ -81,6 +81,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_forward_menu(void)));
+  connect(m_ui.menus->menu(),
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_standard_menus(void)));
   connect(m_ui.menus,
 	  SIGNAL(clicked(void)),
 	  m_ui.menus,
@@ -255,10 +259,10 @@ void dooble_page::prepare_standard_menus(void)
 		  SLOT(slot_open_url(void)),
 		  QKeySequence(tr("Ctrl+L")));
   menu->addSeparator();
-  action = menu->addAction(tr("&Close Tab"),
-			   this,
-			   SIGNAL(close_tab(void)),
-			   QKeySequence(tr("Ctrl+W")));
+  action = m_action_close_tab = menu->addAction(tr("&Close Tab"),
+						this,
+						SIGNAL(close_tab(void)),
+						QKeySequence(tr("Ctrl+W")));
 
   if(qobject_cast<QStackedWidget *> (parentWidget()))
     action->setEnabled
@@ -294,6 +298,14 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
 #endif
+}
+
+void dooble_page::slot_about_to_show_standard_menus(void)
+{
+  if(m_action_close_tab)
+    if(qobject_cast<QStackedWidget *> (parentWidget()))
+      m_action_close_tab->setEnabled
+	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 }
 
 void dooble_page::slot_escape(void)
