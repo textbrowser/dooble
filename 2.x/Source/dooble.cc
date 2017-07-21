@@ -90,10 +90,19 @@ void dooble::new_page(dooble_page *page)
   prepare_page_connections(page);
 
   /*
-  ** The page's icon and title should be meaningful.
+  ** The page's icon and title may not be meaningful.
   */
 
-  m_ui.tab->addTab(page, page->icon(), page->title());
+  QString title(page->title().trimmed());
+
+  if(title.isEmpty())
+    title = page->url().toString().trimmed();
+
+  if(title.isEmpty())
+    title = tr("Dooble");
+
+  m_ui.tab->addTab(page, title);
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
