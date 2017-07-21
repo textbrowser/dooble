@@ -326,9 +326,13 @@ void dooble_page::slot_link_hovered(const QString &url)
 
   m_ui.link_hovered->setText
     (fm.elidedText(url.trimmed(),
-		   Qt::ElideRight,
-		   qAbs(width() - (m_ui.progress->isVisible() ?
-				   m_ui.progress->width() : 0) - 15)));
+		   Qt::ElideMiddle,
+
+		   /*
+		   ** Always consider the progress bar's width.
+		   */
+
+		   qAbs(width() - m_ui.progress->width() - 15)));
 }
 
 void dooble_page::slot_load_finished(bool ok)
