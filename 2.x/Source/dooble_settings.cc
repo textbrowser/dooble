@@ -49,7 +49,30 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(close(void)));
-  set_setting("icon_set", "Snipicons");
+  connect(m_ui.cache,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.display,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.history,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.privacy,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.web,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.windows,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_page_button_clicked(void)));
   restore();
 }
 
@@ -104,6 +127,26 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("cache_type_index", 0).toInt(),
 	    m_ui.cache_type->count() - 1));
+  m_ui.center_child_windows->setChecked
+    (s_settings.value("center_child_windows", true).toBool());
+  m_ui.pages->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("settings_page_index", 0).toInt(),
+	    m_ui.pages->count() - 1));
+
+  static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
+				                           << m_ui.display
+				                           << m_ui.history
+				                           << m_ui.privacy
+				                           << m_ui.web
+				                           << m_ui.windows);
+
+  for(int i = 0; i < list.size(); i++)
+    if(i != m_ui.pages->currentIndex())
+      list.at(i)->setChecked(false);
+    else
+      list.at(i)->setChecked(true);
+
   QApplication::restoreOverrideCursor();
 }
 
@@ -180,5 +223,30 @@ void dooble_settings::slot_apply(void)
 
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
+  set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::slot_page_button_clicked(void)
+{
+  QToolButton *tool_button = qobject_cast<QToolButton *> (sender());
+
+  if(!tool_button)
+    return;
+
+  static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
+				                           << m_ui.display
+				                           << m_ui.history
+				                           << m_ui.privacy
+				                           << m_ui.web
+				                           << m_ui.windows);
+
+  for(int i = 0; i < list.size(); i++)
+    if(list.at(i) != tool_button)
+      list.at(i)->setChecked(false);
+    else
+      m_ui.pages->setCurrentIndex(i);
+
+  set_setting("settings_page_index", m_ui.pages->currentIndex());
+  tool_button->setChecked(true);
 }

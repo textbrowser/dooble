@@ -147,7 +147,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="webengine">
+           <widget class="QToolButton" name="web">
             <property name="text">
              <string>Web</string>
             </property>
@@ -210,7 +210,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QStackedWidget" name="pages">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="cache_page">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
@@ -309,6 +312,133 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="display_page">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Theme</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="theme">
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <item>
+               <property name="text">
+                <string>Snipicons</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="history_page"/>
+        <widget class="QWidget" name="privacy_page"/>
+        <widget class="QWidget" name="web_page"/>
+        <widget class="QWidget" name="windows_page">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QCheckBox" name="center_child_windows">
+              <property name="text">
+               <string>&amp;Center Child Windows</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="save_geometry">
+              <property name="text">
+               <string>Save Geometry</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -329,10 +459,13 @@
   <tabstop>display</tabstop>
   <tabstop>history</tabstop>
   <tabstop>privacy</tabstop>
-  <tabstop>webengine</tabstop>
+  <tabstop>web</tabstop>
   <tabstop>windows</tabstop>
   <tabstop>cache_size</tabstop>
   <tabstop>cache_type</tabstop>
+  <tabstop>theme</tabstop>
+  <tabstop>center_child_windows</tabstop>
+  <tabstop>save_geometry</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
