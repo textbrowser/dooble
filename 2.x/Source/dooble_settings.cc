@@ -52,6 +52,10 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
   s_settings["icon_set"] = "Snipicons";
 }
 
+void dooble_settings::restore(void)
+{
+}
+
 QVariant dooble_settings::setting(const QString &key)
 {
   QReadLocker lock(&s_settings_mutex);
@@ -94,7 +98,6 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
 		   "key TEXT NOT NULL, "
 		   "value TEXT NOT NULL, "
 		   "PRIMARY KEY (key, value))");
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
 	query.addBindValue(key);
