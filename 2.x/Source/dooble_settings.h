@@ -29,6 +29,7 @@
 #define dooble_settings_h
 
 #include <QMainWindow>
+#include <QReadWriteLock>
 
 #include "ui_dooble_settings.h"
 
@@ -44,6 +45,7 @@ class dooble_settings: public QMainWindow
  private:
   Ui_dooble_settings m_ui;
   static QMap<QString, QVariant> s_settings;
+  static QReadWriteLock s_settings_mutex;
 
  private slots:
   void slot_apply(void);

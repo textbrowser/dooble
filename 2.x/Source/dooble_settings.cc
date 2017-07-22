@@ -32,6 +32,7 @@
 #include "dooble_settings.h"
 
 QMap<QString, QVariant> dooble_settings::s_settings;
+QReadWriteLock dooble_settings::s_settings_mutex;
 
 dooble_settings::dooble_settings(void):QMainWindow(0)
 {
@@ -49,6 +50,8 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 
 QVariant dooble_settings::setting(const QString &key)
 {
+  QReadLocker lock(&s_settings_mutex);
+
   return s_settings.value(key);
 }
 
@@ -58,11 +61,16 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
     return;
   else if(value.isNull())
     {
+      QWriteLocker lock(&s_settings_mutex);
+
       s_settings.remove(key);
       return;
     }
 
+  QWriteLocker lock(&s_settings_mutex);
+
   s_settings[key.trimmed()] = value;
+  lock.unlock();
 }
 
 void dooble_settings::slot_apply(void)
