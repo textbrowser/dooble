@@ -101,7 +101,9 @@ void dooble_settings::restore(void)
   lock.unlock();
   m_ui.cache_size->setValue(s_settings.value("cache_size", 0).toInt());
   m_ui.cache_type->setCurrentIndex
-    (s_settings.value("cache_type_index", 0).toInt());
+    (qBound(0,
+	    s_settings.value("cache_type_index", 0).toInt(),
+	    m_ui.cache_type->count() - 1));
   QApplication::restoreOverrideCursor();
 }
 
