@@ -54,6 +54,49 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 
 void dooble_settings::restore(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QWriteLocker lock(&s_settings_mutex);
+
+  s_settings.clear();
+  lock.unlock();
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT key, value FROM dooble_settings"))
+	  while(query.next())
+	    {
+	      QString key(query.value(0).toString().trimmed());
+	      QString value(query.value(1).toString().trimmed());
+
+	      if(key.isEmpty() || value.isEmpty())
+		continue;
+
+	      QWriteLocker lock(&s_settings_mutex);
+
+	      s_settings[key] = value;
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 QVariant dooble_settings::setting(const QString &key)
@@ -95,12 +138,11 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
 	QSqlQuery query(db);
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
-		   "key TEXT NOT NULL, "
-		   "value TEXT NOT NULL, "
-		   "PRIMARY KEY (key, value))");
+		   "key TEXT NOT NULL PRIMARY KEY, "
+		   "value TEXT NOT NULL)");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
-	query.addBindValue(key);
+	query.addBindValue(key.trimmed());
 	query.addBindValue(value.toString());
 	query.exec();
       }
