@@ -218,6 +218,8 @@ void dooble_page::prepare_shortcuts(void)
     {
       m_shortcuts_prepared = true;
       new QShortcut
+	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
+      new QShortcut
 	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
       new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
       new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
@@ -241,6 +243,7 @@ void dooble_page::prepare_standard_menus(void)
 
   QAction *action = 0;
   QMenu *menu = 0;
+  QString icon_set(dooble::setting("icon_set").toString());
 
   /*
   ** File Menu
@@ -274,6 +277,17 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
+
+  /*
+  ** Edit Menu
+  */
+
+  menu = m_ui.menus->menu()->addMenu(tr("&Edit"));
+  menu->addAction(QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+		  tr("Settin&gs..."),
+		  this,
+		  SIGNAL(show_settings(void)),
+		  QKeySequence(tr("Ctrl+G")));
 
   /*
   ** Tools Menu
