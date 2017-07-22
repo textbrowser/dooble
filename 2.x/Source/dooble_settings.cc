@@ -49,17 +49,13 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(close(void)));
-  s_settings["icon_set"] = "Snipicons";
+  set_setting("icon_set", "Snipicons");
+  restore();
 }
 
 void dooble_settings::restore(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  QWriteLocker lock(&s_settings_mutex);
-
-  s_settings.clear();
-  lock.unlock();
 
   QString database_name
     (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
@@ -96,6 +92,16 @@ void dooble_settings::restore(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+
+  QWriteLocker lock(&s_settings_mutex);
+
+  if(!s_settings.contains("icon_set"))
+    s_settings["icon_set"] = "Snipicons";
+
+  lock.unlock();
+  m_ui.cache_size->setValue(s_settings.value("cache_size", 0).toInt());
+  m_ui.cache_type->setCurrentIndex
+    (s_settings.value("cache_type_index", 0).toInt());
   QApplication::restoreOverrideCursor();
 }
 
