@@ -4,6 +4,9 @@ unix {
 purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
                  Source/*~ *~
 }
+else {
+purge.commands =
+}
 
 CONFIG		+= qt release warn_on
 LANGUAGE	= C++
@@ -59,6 +62,7 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_favicons.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \
+                  Source\\dooble_settings.h \
                   Source\\dooble_tab_bar.h \
                   Source\\dooble_tab_widget.h \
                   Source\\dooble_web_engine_page.h \
@@ -78,6 +82,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_label_widget.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
+                  Source\\dooble_settings.cc \
                   Source\\dooble_tab_bar.cc \
                   Source\\dooble_tab_widget.cc \
                   Source\\dooble_web_engine_page.cc \
