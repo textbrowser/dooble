@@ -53,11 +53,11 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT favicon FROM dooble_favicons "
-		      "INDEXED BY url_digest_index WHERE "
-		      "url_digest IN (?, ?)");
+	query.prepare("SELECT favicon FROM dooble_favicons WHERE "
+		      "url_digest IN (?, ?) OR url_host_digest = ?");
 	query.addBindValue(url.toString());
 	query.addBindValue(url.toString() + "/");
+	query.addBindValue(url.host());
 
 	if(query.exec() && query.next())
 	  if(!query.isNull(0))
@@ -109,12 +109,12 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_favicons ("
 		   "favicon BLOB DEFAULT NULL, "
-		   "url_digest TEXT PRIMARY KEY NOT NULL)");
-	query.exec("CREATE INDEX IF NOT EXISTS url_digest_index ON "
-		   "dooble_favicons (url_digest)");
+		   "url_digest TEXT PRIMARY KEY NOT NULL, "
+		   "url_host_digest TEXT NOT NULL)");
 	query.exec("PRAGMA synchronous = OFF");
-	query.prepare("INSERT OR REPLACE INTO dooble_favicons "
-		      "(favicon, url_digest) VALUES (?, ?)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_favicons "
+	   "(favicon, url_digest, url_host_digest) VALUES (?, ?, ?)");
 
 	QBuffer buffer;
 	QByteArray bytes;
@@ -136,6 +136,7 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 	buffer.close();
 	query.addBindValue(bytes);
 	query.addBindValue(url.toString().trimmed());
+	query.addBindValue(url.host().trimmed());
 	query.exec();
       }
 
