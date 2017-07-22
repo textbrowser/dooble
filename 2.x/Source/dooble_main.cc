@@ -52,7 +52,7 @@ extern "C"
 #include "CocoaInitializer.h"
 #endif
 #include "dooble.h"
-#include "dooble_hmac.h"
+#include "dooble_settings.h"
 
 static char *s_doobleAbortedFileName = 0;
 
@@ -176,22 +176,24 @@ int main(int argc, char *argv[])
     home_dir.mkdir(username + QDir::separator() + ".dooble_v2");
 
   if(username.isEmpty())
-    dooble::set_setting
+    dooble_settings::set_setting
       ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
   else
-    dooble::set_setting("home_path",
-			home_dir.absolutePath() + QDir::separator() +
-			username + QDir::separator() + ".dooble_v2");
+    dooble_settings::set_setting("home_path",
+				 home_dir.absolutePath() +
+				 QDir::separator() +
+				 username + QDir::separator() +
+				 ".dooble_v2");
 #else
   QDir home_dir(QDir::home());
 
   home_dir.mkdir(".dooble_v2");
-  dooble::set_setting
+  dooble_settings::set_setting
     ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
 #endif
 
   QWebEngineProfile::defaultProfile()->setCachePath
-    (dooble::setting("home_path").toString() +
+    (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
      "WebEngineCache");
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize(0);
@@ -200,7 +202,7 @@ int main(int argc, char *argv[])
   QWebEngineProfile::defaultProfile()->setPersistentCookiesPolicy
     (QWebEngineProfile::AllowPersistentCookies);
   QWebEngineProfile::defaultProfile()->setPersistentStoragePath
-    (dooble::setting("home_path").toString() +
+    (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
      "WebEnginePersistentStorage");
   QWebEngineSettings::globalSettings()->setAttribute

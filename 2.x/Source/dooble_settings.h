@@ -38,9 +38,12 @@ class dooble_settings: public QMainWindow
 
  public:
   dooble_settings(void);
+  static QVariant setting(const QString &key);
+  static void set_setting(const QString &key, const QVariant &value);
 
  private:
   Ui_dooble_settings m_ui;
+  static QMap<QString, QVariant> s_settings;
 
  private slots:
   void slot_apply(void);

@@ -30,8 +30,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
-#include "dooble.h"
 #include "dooble_favicons.h"
+#include "dooble_settings.h"
 
 QAtomicInteger<quint64> dooble_favicons::s_db_id;
 
@@ -44,7 +44,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(dooble::setting("home_path").toString() +
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
 		       "dooble_favicons.db");
 
@@ -99,7 +99,7 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(dooble::setting("home_path").toString() +
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
 		       "dooble_favicons.db");
 

@@ -31,10 +31,10 @@
 #include <QWebEngineHistoryItem>
 #include <QWidgetAction>
 
-#include "dooble.h"
 #include "dooble_favicons.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
+#include "dooble_settings.h"
 #include "dooble_web_engine_view.h"
 
 dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
@@ -203,7 +203,7 @@ void dooble_page::load_page(const QUrl &url)
 
 void dooble_page::prepare_icons(void)
 {
-  QString icon_set(dooble::setting("icon_set").toString());
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
@@ -243,7 +243,7 @@ void dooble_page::prepare_standard_menus(void)
 
   QAction *action = 0;
   QMenu *menu = 0;
-  QString icon_set(dooble::setting("icon_set").toString());
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
   /*
   ** File Menu
@@ -390,7 +390,7 @@ void dooble_page::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
 
-  QString icon_set(dooble::setting("icon_set").toString());
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.progress->setVisible(false);
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
@@ -413,7 +413,7 @@ void dooble_page::slot_load_started(void)
   emit iconChanged(QIcon());
   emit titleChanged("");
 
-  QString icon_set(dooble::setting("icon_set").toString());
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.progress->setVisible(true);
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/stop.png").arg(icon_set)));

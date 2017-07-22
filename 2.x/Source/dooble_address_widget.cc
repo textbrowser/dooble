@@ -29,8 +29,8 @@
 #include <QStyle>
 #include <QToolButton>
 
-#include "dooble.h"
 #include "dooble_address_widget.h"
+#include "dooble_settings.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
@@ -84,7 +84,7 @@ QMenu *dooble_address_widget::menu(void) const
 
 void dooble_address_widget::prepare_icons(void)
 {
-  QString icon_set(dooble::setting("icon_set").toString());
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_bookmark->setIcon(QIcon(QString(":/%1/16/bookmark.png").arg(icon_set)));
   m_pull_down->setIcon(QIcon(QString(":/%1/16/pulldown.png").arg(icon_set)));

@@ -44,13 +44,10 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
-  static QVariant setting(const QString &key);
-  static void set_setting(const QString &key, const QVariant &value);
 
  private:
   Ui_dooble m_ui;
   dooble_settings *m_settings;
-  static QMap<QString, QVariant> s_settings;
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);

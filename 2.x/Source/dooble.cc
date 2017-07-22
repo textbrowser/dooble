@@ -33,11 +33,9 @@
 #include "dooble_settings.h"
 #include "dooble_web_engine_view.h"
 
-QMap<QString, QVariant> dooble::s_settings;
-
 dooble::dooble(dooble_page *page):QMainWindow()
 {
-  m_settings = 0;
+  m_settings = new dooble_settings();
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -51,13 +49,12 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
-  s_settings["icon_set"] = "Snipicons";
   new_page(page);
 }
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
-  m_settings = 0;
+  m_settings = new dooble_settings();
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -71,17 +68,11 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
-  s_settings["icon_set"] = "Snipicons";
   new_page(view);
 }
 
 dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
 {
-}
-
-QVariant dooble::setting(const QString &key)
-{
-  return s_settings.value(key);
 }
 
 void dooble::new_page(dooble_page *page)
@@ -209,14 +200,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 					   Qt::UniqueConnection));
 }
 
-void dooble::set_setting(const QString &key, const QVariant &value)
-{
-  if(key.trimmed().isEmpty() || value.isNull())
-    return;
-
-  s_settings[key.trimmed()] = value;
-}
-
 void dooble::show(void)
 {
   QMainWindow::show();
@@ -317,9 +300,6 @@ void dooble::slot_show_blocked_domains(void)
 
 void dooble::slot_show_settings(void)
 {
-  if(!m_settings)
-    m_settings = new dooble_settings();
-
   m_settings->showNormal();
   m_settings->activateWindow();
   m_settings->raise();

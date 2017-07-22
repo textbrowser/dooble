@@ -31,6 +31,8 @@
 
 #include "dooble_settings.h"
 
+QMap<QString, QVariant> dooble_settings::s_settings;
+
 dooble_settings::dooble_settings(void):QMainWindow(0)
 {
   m_ui.setupUi(this);
@@ -42,6 +44,25 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(close(void)));
+  s_settings["icon_set"] = "Snipicons";
+}
+
+QVariant dooble_settings::setting(const QString &key)
+{
+  return s_settings.value(key);
+}
+
+void dooble_settings::set_setting(const QString &key, const QVariant &value)
+{
+  if(key.trimmed().isEmpty())
+    return;
+  else if(value.isNull())
+    {
+      s_settings.remove(key);
+      return;
+    }
+
+  s_settings[key.trimmed()] = value;
 }
 
 void dooble_settings::slot_apply(void)
