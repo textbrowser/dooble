@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dooble_settings</class>
+ <widget class="QMainWindow" name="dooble_settings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>789</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dooble: Settings</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../Icons/icons.qrc">
+    <normaloff>:/Logo/dooble.png</normaloff>:/Logo/dooble.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>90</width>
+           <height>738</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QToolButton" name="cache">
+            <property name="text">
+             <string>Cache</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../Icons/icons.qrc">
+              <normaloff>:/Snipicons/64/cache.png</normaloff>:/Snipicons/64/cache.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="display">
+            <property name="text">
+             <string>Display</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../Icons/icons.qrc">
+              <normaloff>:/Snipicons/64/display.png</normaloff>:/Snipicons/64/display.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="history">
+            <property name="text">
+             <string>History</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../Icons/icons.qrc">
+              <normaloff>:/Snipicons/64/history.png</normaloff>:/Snipicons/64/history.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="privacy">
+            <property name="text">
+             <string>Privacy</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../Icons/icons.qrc">
+              <normaloff>:/Snipicons/64/privacy.png</normaloff>:/Snipicons/64/privacy.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="webengine">
+            <property name="text">
+             <string>Web</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../Icons/icons.qrc">
+              <normaloff>:/Snipicons/64/webengine.png</normaloff>:/Snipicons/64/webengine.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="windows">
+            <property name="text">
+             <string>Windows</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../Icons/icons.qrc">
+              <normaloff>:/Snipicons/64/windows.png</normaloff>:/Snipicons/64/windows.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <widget class="QWidget" name="page"/>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>cache</tabstop>
+  <tabstop>display</tabstop>
+  <tabstop>history</tabstop>
+  <tabstop>privacy</tabstop>
+  <tabstop>webengine</tabstop>
+  <tabstop>windows</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../Icons/icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

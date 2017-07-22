@@ -51,7 +51,8 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI\\dooble.ui \
-                  UI\\dooble_page.ui
+                  UI\\dooble_page.ui \
+                  UI\\dooble_settings.ui
 
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
