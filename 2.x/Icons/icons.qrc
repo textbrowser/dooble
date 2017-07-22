@@ -10,6 +10,12 @@
 	<file>Snipicons/32/menu.png</file>
 	<file>Snipicons/32/reload.png</file>
 	<file>Snipicons/32/stop.png</file>
+	<file>Snipicons/64/cache.png</file>
+	<file>Snipicons/64/display.png</file>
+	<file>Snipicons/64/history.png</file>
+	<file>Snipicons/64/privacy.png</file>
+	<file>Snipicons/64/webengine.png</file>
+	<file>Snipicons/64/windows.png</file>
 	<file>spinning_wheel.gif</file>
     </qresource>
 </RCC>
