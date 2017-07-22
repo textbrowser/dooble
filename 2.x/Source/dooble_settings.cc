@@ -26,11 +26,15 @@
 */
 
 #include <QDialogButtonBox>
+#include <QDir>
 #include <QPushButton>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QWebEngineProfile>
 
 #include "dooble_settings.h"
 
+QAtomicInteger<quint64> dooble_settings::s_db_id;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;
 
@@ -71,6 +75,37 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
 
   s_settings[key.trimmed()] = value;
   lock.unlock();
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
+		   "key TEXT NOT NULL, "
+		   "value TEXT NOT NULL, "
+		   "PRIMARY KEY (key, value))");
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
+	query.addBindValue(key);
+	query.addBindValue(value.toString());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_settings::slot_apply(void)
@@ -79,6 +114,7 @@ void dooble_settings::slot_apply(void)
   ** Cache
   */
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
 
@@ -88,4 +124,8 @@ void dooble_settings::slot_apply(void)
   else
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
+
+  set_setting("cache_size", m_ui.cache_size->value());
+  set_setting("cache_type_index", m_ui.cache_type->currentIndex());
+  QApplication::restoreOverrideCursor();
 }

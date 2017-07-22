@@ -28,6 +28,7 @@
 #ifndef dooble_settings_h
 #define dooble_settings_h
 
+#include <QAtomicInteger>
 #include <QMainWindow>
 #include <QReadWriteLock>
 
@@ -44,6 +45,7 @@ class dooble_settings: public QMainWindow
 
  private:
   Ui_dooble_settings m_ui;
+  static QAtomicInteger<quint64> s_db_id;
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
 
