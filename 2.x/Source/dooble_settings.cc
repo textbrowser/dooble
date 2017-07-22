@@ -25,9 +25,38 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QWebEngineProfile>
+
 #include "dooble_settings.h"
 
 dooble_settings::dooble_settings(void):QMainWindow(0)
 {
   m_ui.setupUi(this);
+  connect(m_ui.buttonBox->button(QDialogButtonBox::Apply),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_apply(void)));
+  connect(m_ui.buttonBox->button(QDialogButtonBox::Close),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(close(void)));
+}
+
+void dooble_settings::slot_apply(void)
+{
+  /*
+  ** Cache
+  */
+
+  QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
+    (1024 * 1024 * m_ui.cache_size->value());
+
+  if(m_ui.cache_type->currentIndex() == 0)
+    QWebEngineProfile::defaultProfile()->setHttpCacheType
+      (QWebEngineProfile::MemoryHttpCache);
+  else
+    QWebEngineProfile::defaultProfile()->setHttpCacheType
+      (QWebEngineProfile::NoCache);
 }

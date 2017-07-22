@@ -320,7 +320,9 @@ void dooble::slot_show_settings(void)
   if(!m_settings)
     m_settings = new dooble_settings();
 
-  m_settings->show();
+  m_settings->showNormal();
+  m_settings->activateWindow();
+  m_settings->raise();
 }
 
 void dooble::slot_tab_close_requested(int index)

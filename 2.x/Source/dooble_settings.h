@@ -41,6 +41,9 @@ class dooble_settings: public QMainWindow
 
  private:
   Ui_dooble_settings m_ui;
+
+ private slots:
+  void slot_apply(void);
 };
 
 #endif
