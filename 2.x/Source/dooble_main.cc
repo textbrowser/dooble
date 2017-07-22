@@ -207,8 +207,6 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-  dooble_hmac::sha3_512hmac_test1();
-  dooble_hmac::sha3_512hmac_test2();
 
   dooble *d = new dooble();
 
