@@ -33,6 +33,7 @@
 #include "ui_dooble.h"
 
 class dooble_page;
+class dooble_settings;
 class dooble_web_engine_view;
 
 class dooble: public QMainWindow
@@ -48,6 +49,7 @@ class dooble: public QMainWindow
 
  private:
   Ui_dooble m_ui;
+  dooble_settings *m_settings;
   static QMap<QString, QVariant> s_settings;
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
@@ -68,6 +70,7 @@ class dooble: public QMainWindow
   void slot_open_tab_as_new_window(int index);
   void slot_quit_dooble(void);
   void slot_show_blocked_domains(void);
+  void slot_show_settings(void);
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
   void slot_title_changed(const QString &title);

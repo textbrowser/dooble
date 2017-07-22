@@ -30,12 +30,14 @@
 #include "dooble.h"
 #include "dooble_favicons.h"
 #include "dooble_page.h"
+#include "dooble_settings.h"
 #include "dooble_web_engine_view.h"
 
 QMap<QString, QVariant> dooble::s_settings;
 
 dooble::dooble(dooble_page *page):QMainWindow()
 {
+  m_settings = 0;
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -55,6 +57,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
+  m_settings = 0;
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -193,6 +196,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_settings(void)),
+	  this,
+	  SLOT(slot_show_settings(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)),
@@ -304,6 +313,14 @@ void dooble::slot_quit_dooble(void)
 
 void dooble::slot_show_blocked_domains(void)
 {
+}
+
+void dooble::slot_show_settings(void)
+{
+  if(!m_settings)
+    m_settings = new dooble_settings();
+
+  m_settings->show();
 }
 
 void dooble::slot_tab_close_requested(int index)
