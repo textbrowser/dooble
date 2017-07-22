@@ -73,6 +73,7 @@ RESOURCES       += Icons\\icons.qrc
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
                   Source\\dooble_favicons.cc \
+		  Source\\dooble_hmac.cc \
                   Source\\dooble_label_widget.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
