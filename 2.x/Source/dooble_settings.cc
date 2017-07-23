@@ -74,6 +74,7 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
   restore();
+  s_settings["center_child_windows"] = true;
   s_settings["icon_set"] = "Snipicons";
 }
 
