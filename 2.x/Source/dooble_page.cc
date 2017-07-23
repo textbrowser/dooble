@@ -425,7 +425,7 @@ void dooble_page::slot_link_hovered(const QString &url)
 		   ** Always consider the progress bar's width.
 		   */
 
-		   qAbs(width() - m_ui.progress->width() - 15)));
+		   qAbs(width() - m_ui.progress->width() - 20)));
 }
 
 void dooble_page::slot_load_finished(bool ok)

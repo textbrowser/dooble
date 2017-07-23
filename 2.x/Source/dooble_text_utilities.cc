@@ -25,10 +25,18 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QXmlStreamReader>
+
 #include "dooble_text_utilities.h"
 
 int dooble_text_utilities::visual_length_of_string(const QString &text)
 {
-  Q_UNUSED(text);
-  return 0;
+  QXmlStreamReader xml_stream_reader(text);
+  int length = 0;
+
+  while(!xml_stream_reader.atEnd())
+    if(xml_stream_reader.readNext() == QXmlStreamReader::Characters)
+      length += xml_stream_reader.text().length();
+
+  return length;
 }
