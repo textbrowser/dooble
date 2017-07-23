@@ -85,6 +85,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_settings.cc \
                   Source\\dooble_tab_bar.cc \
                   Source\\dooble_tab_widget.cc \
+                  Source\\dooble_text_utilities.cc \
                   Source\\dooble_ui_utilities.cc \
                   Source\\dooble_web_engine_page.cc \
                   Source\\dooble_web_engine_view.cc
