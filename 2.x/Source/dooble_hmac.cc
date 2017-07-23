@@ -30,10 +30,6 @@
 
 #include "dooble_hmac.h"
 
-dooble_hmac::dooble_hmac(void)
-{
-}
-
 QByteArray dooble_hmac::sha3_512hmac(const QByteArray &key,
 				     const QByteArray &message)
 {

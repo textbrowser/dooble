@@ -31,7 +31,7 @@
 
 #include "dooble_ui_utilities.h"
 
-void dooble_ui_utilities::center_window_widget(QWidget *widget)
+void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 {
   /*
   ** Adapted from qdialog.cpp.
@@ -41,7 +41,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *widget)
     return;
 
   QPoint p(0, 0);
-  QWidget *w = widget->parentWidget();
+  QWidget *w = parent;
   int extraw = 0, extrah = 0, scrn = 0;
 
   if(w)

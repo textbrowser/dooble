@@ -31,6 +31,7 @@
 #include "dooble_favicons.h"
 #include "dooble_page.h"
 #include "dooble_settings.h"
+#include "dooble_ui_utilities.h"
 #include "dooble_web_engine_view.h"
 
 dooble::dooble(dooble_page *page):QMainWindow()
@@ -300,6 +301,9 @@ void dooble::slot_show_blocked_domains(void)
 
 void dooble::slot_show_settings(void)
 {
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, m_settings);
+
   m_settings->showNormal();
   m_settings->activateWindow();
   m_settings->raise();

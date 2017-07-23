@@ -33,7 +33,7 @@ class QWidget;
 class dooble_ui_utilities
 {
  public:
-  void center_window_widget(QWidget *widget);
+  static void center_window_widget(QWidget *parent, QWidget *widget);
 
  private:
   dooble_ui_utilities(void);

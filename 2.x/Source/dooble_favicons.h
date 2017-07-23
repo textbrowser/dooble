@@ -39,10 +39,7 @@ class dooble_favicons
   static void save_icon(const QIcon &icon, const QUrl &url);
 
  private:
-  dooble_favicons(void)
-  {
-  }
-
+  dooble_favicons(void);
   static QAtomicInteger<quint64> s_db_id;
 };
 
