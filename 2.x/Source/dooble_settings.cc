@@ -78,6 +78,14 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
   s_settings["icon_set"] = "Snipicons";
 }
 
+void dooble_settings::closeEvent(QCloseEvent *event)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    set_setting("settings_geometry", saveGeometry().toBase64());
+
+  QMainWindow::closeEvent(event);
+}
+
 void dooble_settings::restore(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -203,6 +211,16 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_settings::show(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("settings_geometry").
+					   toByteArray()));
+
+  QMainWindow::show();
 }
 
 void dooble_settings::slot_apply(void)

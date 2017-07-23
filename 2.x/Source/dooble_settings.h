@@ -43,12 +43,18 @@ class dooble_settings: public QMainWindow
   static QVariant setting(const QString &key);
   static void set_setting(const QString &key, const QVariant &value);
 
+ protected:
+  void closeEvent(QCloseEvent *event);
+
  private:
   Ui_dooble_settings m_ui;
   static QAtomicInteger<quint64> s_db_id;
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
   void restore(void);
+
+ public slots:
+  void show(void);
 
  private slots:
   void slot_apply(void);
