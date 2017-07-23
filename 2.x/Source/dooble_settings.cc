@@ -74,6 +74,7 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
   restore();
+  s_settings["icon_set"] = "Snipicons";
 }
 
 void dooble_settings::restore(void)
@@ -116,12 +117,8 @@ void dooble_settings::restore(void)
 
   QSqlDatabase::removeDatabase(database_name);
 
-  QWriteLocker lock(&s_settings_mutex);
+  QReadLocker lock(&s_settings_mutex);
 
-  if(!s_settings.contains("icon_set"))
-    s_settings["icon_set"] = "Snipicons";
-
-  lock.unlock();
   m_ui.cache_size->setValue(s_settings.value("cache_size", 0).toInt());
   m_ui.cache_type->setCurrentIndex
     (qBound(0,
@@ -133,6 +130,7 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
 	    m_ui.pages->count() - 1));
+  lock.unlock();
 
   static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
 				                           << m_ui.display

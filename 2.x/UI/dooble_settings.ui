@@ -378,7 +378,7 @@
             <item>
              <widget class="QCheckBox" name="center_child_windows">
               <property name="text">
-               <string>&amp;Center Child Windows</string>
+               <string>Center Child Windows</string>
               </property>
               <property name="checked">
                <bool>true</bool>
