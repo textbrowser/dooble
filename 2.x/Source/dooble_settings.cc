@@ -130,6 +130,8 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
 	    m_ui.pages->count() - 1));
+  m_ui.save_geometry->setChecked
+    (s_settings.value("save_geometry", false).toBool());
   lock.unlock();
 
   static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
@@ -222,6 +224,7 @@ void dooble_settings::slot_apply(void)
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
+  set_setting("save_geometry", m_ui.save_geometry->isChecked());
   QApplication::restoreOverrideCursor();
 }
 
