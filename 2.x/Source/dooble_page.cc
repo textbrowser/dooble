@@ -107,6 +107,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  this,
 	  SIGNAL(iconChanged(const QIcon &)));
   connect(m_view,
+	  SIGNAL(iconChanged(const QIcon &)),
+	  this,
+	  SLOT(slot_icon_changed(const QIcon &)));
+  connect(m_view,
 	  SIGNAL(loadFinished(bool)),
 	  this,
 	  SIGNAL(loadFinished(bool)));
@@ -371,6 +375,44 @@ void dooble_page::slot_go_to_item(void)
     m_view->history()->goToItem(items.at(index));
 }
 
+void dooble_page::slot_icon_changed(const QIcon &icon)
+{
+  if(!m_ui.address->menu()->isVisible())
+    return;
+
+  dooble_web_engine_view *view = qobject_cast<dooble_web_engine_view *>
+    (sender());
+
+  if(!view)
+    return;
+
+  QList<QAction *> list(m_ui.address->menu()->actions());
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      QWidgetAction *widget_action = qobject_cast<QWidgetAction *> (list.at(i));
+
+      if(!widget_action)
+	continue;
+      else if(view->url() != widget_action->property("url").toUrl())
+	continue;
+
+      QWidget *widget = widget_action->defaultWidget();
+
+      if(!widget)
+	break;
+
+      QLabel *pixmap_label = widget->findChild<QLabel *> ("pixmap_label");
+
+      if(pixmap_label)
+	pixmap_label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+
+      break;
+    }
+
+  Q_UNUSED(icon);
+}
+
 void dooble_page::slot_link_hovered(const QString &url)
 {
   QFontMetrics fm(m_ui.link_hovered->fontMetrics());
@@ -504,6 +546,8 @@ void dooble_page::slot_show_pull_down_menu(void)
       if(title.isEmpty())
 	title = items.at(i).url().toString().trimmed();
 
+      widget_action->setProperty("url", items.at(i).url());
+
       QWidget *widget = new QWidget(m_ui.address->menu());
       QIcon icon(dooble_favicons::icon(url));
       QString text("<html>" +
@@ -521,6 +565,7 @@ void dooble_page::slot_show_pull_down_menu(void)
       label->setProperty("index", i);
       pixmap_label = new QLabel(m_ui.address->menu());
       pixmap_label->setMaximumSize(QSize(16, 16));
+      pixmap_label->setObjectName("pixmap_label");
       pixmap_label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
       widget->setLayout(new QHBoxLayout(widget));
       widget->layout()->addWidget(pixmap_label);
