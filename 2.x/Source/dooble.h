@@ -45,6 +45,9 @@ class dooble: public QMainWindow
   dooble(dooble_web_engine_view *view);
   dooble(void);
 
+ protected:
+  void closeEvent(QCloseEvent *event);
+
  private:
   Ui_dooble m_ui;
   dooble_settings *m_settings;

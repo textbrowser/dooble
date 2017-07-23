@@ -76,6 +76,14 @@ dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
 {
 }
 
+void dooble::closeEvent(QCloseEvent *event)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
+
+  QMainWindow::closeEvent(event);
+}
+
 void dooble::new_page(dooble_page *page)
 {
   if(!page)
@@ -203,6 +211,11 @@ void dooble::prepare_page_connections(dooble_page *page)
 
 void dooble::show(void)
 {
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("dooble_geometry").
+					   toByteArray()));
+
   QMainWindow::show();
 }
 
@@ -292,6 +305,7 @@ void dooble::slot_quit_dooble(void)
   ** May require some confirmation from the user.
   */
 
+  close();
   QApplication::exit(0);
 }
 
