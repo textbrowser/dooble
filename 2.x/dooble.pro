@@ -9,6 +9,7 @@ purge.commands =
 }
 
 CONFIG		+= qt release warn_on
+DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent gui network printsupport sql \
 	           webenginewidgets widgets xml
