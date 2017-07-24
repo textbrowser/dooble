@@ -82,6 +82,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_label_widget.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
+                  Source\\dooble_random.cc \
                   Source\\dooble_settings.cc \
                   Source\\dooble_tab_bar.cc \
                   Source\\dooble_tab_widget.cc \
