@@ -145,6 +145,16 @@ void dooble_settings::restore(void)
 	    m_ui.pages->count() - 1));
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", false).toBool());
+  QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
+    (1024 * 1024 * m_ui.cache_size->value());
+
+  if(m_ui.cache_type->currentIndex() == 0)
+    QWebEngineProfile::defaultProfile()->setHttpCacheType
+      (QWebEngineProfile::MemoryHttpCache);
+  else
+    QWebEngineProfile::defaultProfile()->setHttpCacheType
+      (QWebEngineProfile::NoCache);
+
   lock.unlock();
 
   static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
