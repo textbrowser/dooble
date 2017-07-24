@@ -315,10 +315,11 @@ void dooble::slot_show_blocked_domains(void)
 
 void dooble::slot_show_settings(void)
 {
+  m_settings->showNormal();
+
   if(dooble_settings::setting("center_child_windows").toBool())
     dooble_ui_utilities::center_window_widget(this, m_settings);
 
-  m_settings->showNormal();
   m_settings->activateWindow();
   m_settings->raise();
 }
