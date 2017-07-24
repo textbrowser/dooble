@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -235,6 +235,13 @@
               </property>
               <property name="maximum">
                <number>2048</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="clear_cache">
+              <property name="text">
+               <string>Clear</string>
               </property>
              </widget>
             </item>
@@ -462,6 +469,7 @@
   <tabstop>web</tabstop>
   <tabstop>windows</tabstop>
   <tabstop>cache_size</tabstop>
+  <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>center_child_windows</tabstop>

@@ -53,6 +53,10 @@ dooble_settings::dooble_settings(void):QMainWindow(0)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.clear_cache,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_clear_cache(void)));
   connect(m_ui.display,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -245,6 +249,11 @@ void dooble_settings::slot_apply(void)
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::slot_clear_cache(void)
+{
+  QWebEngineProfile::defaultProfile()->clearHttpCache();
 }
 
 void dooble_settings::slot_page_button_clicked(void)

@@ -58,6 +58,7 @@ class dooble_settings: public QMainWindow
 
  private slots:
   void slot_apply(void);
+  void slot_clear_cache(void);
   void slot_page_button_clicked(void);
 };
 
