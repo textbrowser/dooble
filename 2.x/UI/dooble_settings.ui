@@ -376,7 +376,158 @@
          </layout>
         </widget>
         <widget class="QWidget" name="history_page"/>
-        <widget class="QWidget" name="privacy_page"/>
+        <widget class="QWidget" name="privacy_page">
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>If you would like Dooble to store your data in authentically-encrypted databases, please prepare your credentials.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Please note that the cryptographic algorithms that are included in Dooble have not been provided by third-parties. If this is a concern, please do not prepare credentials.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>Cipher</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cipher">
+                 <item>
+                  <property name="text">
+                   <string>AES-256</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>Hash</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="hash">
+                 <item>
+                  <property name="text">
+                   <string>SHA3-512</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Key Derivation</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="key_derivation">
+                 <item>
+                  <property name="text">
+                   <string>PBKDF2</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="password_1"/>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>Password</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="password_2"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_10">
+                 <property name="text">
+                  <string>Password Confirmation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QPushButton" name="generate_credentials">
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="web_page"/>
         <widget class="QWidget" name="windows_page">
          <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -472,6 +623,12 @@
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
   <tabstop>theme</tabstop>
+  <tabstop>cipher</tabstop>
+  <tabstop>hash</tabstop>
+  <tabstop>key_derivation</tabstop>
+  <tabstop>password_1</tabstop>
+  <tabstop>password_2</tabstop>
+  <tabstop>generate_credentials</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
  </tabstops>
