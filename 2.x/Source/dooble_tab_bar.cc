@@ -40,7 +40,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
   setExpanding(true);
   setMovable(true);
   setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   setStyleSheet("QTabBar::close-button {"
 		"height: 16px;"
 		"image: url(:/Mac/16/tab_close.png);"

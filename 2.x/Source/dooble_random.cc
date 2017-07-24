@@ -36,8 +36,8 @@ QByteArray dooble_random::random_bytes(int length)
 
   QByteArray bytes;
 
-#ifdef Q_OS_MAC
-  QFile file("/dev/urandom");
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_MACOS)
+  QFile file("/dev/random");
 
   if(file.open(QIODevice::ReadOnly))
     {

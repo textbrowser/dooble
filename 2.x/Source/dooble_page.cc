@@ -217,7 +217,7 @@ void dooble_page::prepare_icons(void)
 
 void dooble_page::prepare_shortcuts(void)
 {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   if(!m_shortcuts_prepared)
     {
       m_shortcuts_prepared = true;
@@ -305,7 +305,7 @@ void dooble_page::prepare_standard_menus(void)
 
 void dooble_page::prepare_tool_buttons_for_mac(void)
 {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
     if(m_ui.backward == tool_button ||
        m_ui.forward == tool_button ||

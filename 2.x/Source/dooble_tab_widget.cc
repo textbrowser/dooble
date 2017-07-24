@@ -49,7 +49,7 @@ dooble_page *dooble_tab_widget::page(int index) const
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
 
@@ -86,7 +86,7 @@ void dooble_tab_widget::slot_load_finished(void)
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
   int index = indexOf(page);
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 #else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
@@ -106,7 +106,7 @@ void dooble_tab_widget::slot_load_finished(void)
 
       label->setMovie(0);
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
       QIcon icon(label->property("icon").value<QIcon> ());
 
       label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
@@ -125,7 +125,7 @@ void dooble_tab_widget::slot_load_started(void)
     (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
   int index = indexOf(page);
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 #else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;

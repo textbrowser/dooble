@@ -37,18 +37,18 @@ extern "C"
 {
 #include <fcntl.h>
 #include <signal.h>
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MACOS)
 #include <sys/resource.h>
 #endif
 #if defined(Q_OS_FREEBSD)
 #include <sys/stat.h>
 #endif
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
 #include <unistd.h>
 #endif
 }
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 #include "CocoaInitializer.h"
 #endif
 #include "dooble.h"
@@ -82,7 +82,7 @@ static void signal_handler(int signal_number)
       */
 
       if(s_doobleAbortedFileName)
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
 	close(open(s_doobleAbortedFileName, O_CREAT, S_IRUSR | S_IWUSR));
 #else
         close(creat(s_doobleAbortedFileName, O_CREAT));
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
   qputenv("QT_ENABLE_REGEXP_JIT", "0");
   qputenv("QV4_FORCE_INTERPRETER", "1");
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   struct rlimit rlim = {0, 0};
 
   getrlimit(RLIMIT_NOFILE, &rlim);
@@ -106,18 +106,18 @@ int main(int argc, char *argv[])
 #endif
 
   QList<int> list;
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
   struct sigaction signal_action;
 #endif
 
   list << SIGABRT
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
 	    << SIGBUS
 #endif
 	    << SIGFPE
 	    << SIGILL
 	    << SIGINT
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
 	    << SIGQUIT
 #endif
 	    << SIGSEGV
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 
   while(!list.isEmpty())
     {
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
       signal_action.sa_handler = signal_handler;
       sigemptyset(&signal_action.sa_mask);
       signal_action.sa_flags = 0;
@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
 #endif
     }
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
   /*
   ** Ignore SIGPIPE.
   */
@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
 
   QApplication qapplication(argc, argv);
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   /*
   ** Eliminate pool errors on OS X.
   */
