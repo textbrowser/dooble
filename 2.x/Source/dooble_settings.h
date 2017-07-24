@@ -55,6 +55,7 @@ class dooble_settings: public QMainWindow
 
  public slots:
   void show(void);
+  void showNormal(void);
 
  private slots:
   void slot_apply(void);

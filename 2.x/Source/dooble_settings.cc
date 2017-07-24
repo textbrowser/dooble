@@ -237,6 +237,16 @@ void dooble_settings::show(void)
   QMainWindow::show();
 }
 
+void dooble_settings::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("settings_geometry").
+					   toByteArray()));
+
+  QMainWindow::showNormal();
+}
+
 void dooble_settings::slot_apply(void)
 {
   /*
