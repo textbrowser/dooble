@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QFile>
+
 #include "dooble_random.h"
 
 QByteArray dooble_random::random_bytes(int length)
@@ -32,17 +34,19 @@ QByteArray dooble_random::random_bytes(int length)
   if(length <= 0)
     return QByteArray();
 
-  QByteArray bytes(length, 0);
+  QByteArray bytes;
 
 #ifdef Q_OS_MAC
-  FILE *fp = fopen("/dev/random", "r");
+  QFile file("/dev/urandom");
 
-  if(fp)
+  if(file.open(QIODevice::ReadOnly))
     {
-      for(int i = 0; i < bytes.length(); i++)
-        bytes[i] = fgetc(fp);
+      bytes.resize(length);
 
-      fclose(fp);
+      if(bytes.length() !=
+	 static_cast<int> (file.read(bytes.data(),
+				     static_cast<qint64> (bytes.length()))))
+	bytes.clear();
     }
 #endif
 
