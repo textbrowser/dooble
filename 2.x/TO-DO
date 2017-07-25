@@ -2,8 +2,9 @@ Completed Items
 
 1.     Apples and shortcuts.
 2.     Tab close buttons on the Mac should be on the right.
-3.     Hovered link label causes a resize of the main window if a lengthy link is
-       under the mouse cursor. Always consider the progress bar's width.
+3.     Hovered link label causes a resize of the main window if a lengthy
+       link is under the mouse cursor. Always consider the progress bar's
+       width.
 4.     Update pull-down menu icons in real-time.
 
 Remaining Items
