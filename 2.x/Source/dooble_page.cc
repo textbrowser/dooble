@@ -360,6 +360,9 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
       tool_button->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
+    else if(m_ui.find_match_case == tool_button)
+      {
+      }
     else
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
@@ -387,7 +390,11 @@ void dooble_page::slot_escape(void)
 
 void dooble_page::slot_find_next(void)
 {
-  find_text(QWebEnginePage::FindFlags(), m_ui.find->text());
+  if(m_ui.find_match_case->isChecked())
+    find_text
+      (QWebEnginePage::QWebEnginePage::FindCaseSensitively, m_ui.find->text());
+  else
+    find_text(QWebEnginePage::FindFlags(), m_ui.find->text());
 }
 
 void dooble_page::slot_go_backward(void)
