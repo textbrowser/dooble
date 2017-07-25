@@ -79,6 +79,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_find_next(void)));
+  connect(m_ui.find,
+	  SIGNAL(textEdited(const QString &)),
+	  this,
+	  SLOT(slot_find_text_edited(const QString &)));
   connect(m_ui.find_stop,
 	  SIGNAL(clicked(void)),
 	  m_ui.find_frame,
@@ -390,11 +394,15 @@ void dooble_page::slot_escape(void)
 
 void dooble_page::slot_find_next(void)
 {
+  slot_find_text_edited(m_ui.find->text());
+}
+
+void dooble_page::slot_find_text_edited(const QString &text)
+{
   if(m_ui.find_match_case->isChecked())
-    find_text
-      (QWebEnginePage::QWebEnginePage::FindCaseSensitively, m_ui.find->text());
+    find_text(QWebEnginePage::QWebEnginePage::FindCaseSensitively, text);
   else
-    find_text(QWebEnginePage::FindFlags(), m_ui.find->text());
+    find_text(QWebEnginePage::FindFlags(), text);
 }
 
 void dooble_page::slot_go_backward(void)
