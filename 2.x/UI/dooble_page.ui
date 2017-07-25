@@ -159,6 +159,22 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QToolButton" name="find_stop">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLineEdit" name="find">
         <property name="placeholderText">
          <string>Find</string>
@@ -310,6 +326,7 @@
   <tabstop>forward</tabstop>
   <tabstop>reload</tabstop>
   <tabstop>address</tabstop>
+  <tabstop>find_stop</tabstop>
   <tabstop>find</tabstop>
   <tabstop>find_next</tabstop>
   <tabstop>find_previous</tabstop>

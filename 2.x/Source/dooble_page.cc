@@ -79,6 +79,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_find_next(void)));
+  connect(m_ui.find_stop,
+	  SIGNAL(clicked(void)),
+	  m_ui.find_frame,
+	  SLOT(hide(void)));
   connect(m_ui.forward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -187,6 +191,34 @@ void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
     settings->setAttribute(setting, state);
 }
 
+void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
+			    const QString &text)
+{
+  m_view->findText
+    (text,
+     find_flags,
+     [=] (bool found)
+     {
+       static QPalette palette(m_ui.find->palette());
+
+       if(!found)
+	 {
+	   if(!text.isEmpty())
+	     {
+	       QColor color(240, 128, 128); // Light Coral
+	       QPalette palette(m_ui.find->palette());
+
+	       palette.setColor(m_ui.find->backgroundRole(), color);
+	       m_ui.find->setPalette(palette);
+	     }
+	   else
+	     m_ui.find->setPalette(palette);
+	 }
+       else
+	 m_ui.find->setPalette(palette);
+     });
+}
+
 void dooble_page::go_to_backward_item(int index)
 {
   QList<QWebEngineHistoryItem> items
@@ -215,10 +247,10 @@ void dooble_page::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
-  m_ui.find_next->setIcon
-    (QIcon(QString(":/%1/20/find_next.png").arg(icon_set)));
+  m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
-    (QIcon(QString(":/%1/20/find_previous.png").arg(icon_set)));
+    (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
+  m_ui.find_stop->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
@@ -355,7 +387,7 @@ void dooble_page::slot_escape(void)
 
 void dooble_page::slot_find_next(void)
 {
-  m_view->findText(m_ui.find->text());
+  find_text(QWebEnginePage::FindFlags(), m_ui.find->text());
 }
 
 void dooble_page::slot_go_backward(void)

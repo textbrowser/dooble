@@ -29,6 +29,7 @@
 #define dooble_page_h
 
 #include <QPointer>
+#include <QWebEnginePage>
 #include <QWebEngineSettings>
 #include <QWidget>
 
@@ -61,6 +62,7 @@ class dooble_page: public QWidget
   Ui_dooble_page m_ui;
   bool m_shortcuts_prepared;
   dooble_web_engine_view *m_view;
+  void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);
   void go_to_backward_item(int index);
   void go_to_forward_item(int index);
   void load_page(const QUrl &url);
