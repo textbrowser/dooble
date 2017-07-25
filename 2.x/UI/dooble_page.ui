@@ -160,6 +160,9 @@
       </property>
       <item>
        <widget class="QToolButton" name="find_stop">
+        <property name="toolTip">
+         <string>Close Find</string>
+        </property>
         <property name="text">
          <string/>
         </property>

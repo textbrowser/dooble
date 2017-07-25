@@ -334,7 +334,8 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_ui.menus->menu()->addMenu(tr("&Edit"));
-  menu->addAction(tr("&Find"),
+  menu->addAction(QIcon(QString(":/%1/16/find.png").arg(icon_set)),
+		  tr("&Find"),
 		  this,
 		  SLOT(slot_show_find(void)),
 		  QKeySequence(tr("Ctrl+F")));
