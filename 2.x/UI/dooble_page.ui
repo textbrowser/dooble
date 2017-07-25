@@ -166,28 +166,34 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="find_next">
-        <property name="minimumSize">
+       <widget class="QToolButton" name="find_next">
+        <property name="toolTip">
+         <string>Next Occurence</string>
+        </property>
+        <property name="iconSize">
          <size>
-          <width>100</width>
-          <height>0</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
-        <property name="text">
-         <string>Next</string>
+        <property name="autoRaise">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="minimumSize">
+       <widget class="QToolButton" name="find_previous">
+        <property name="toolTip">
+         <string>Previous Occurence</string>
+        </property>
+        <property name="iconSize">
          <size>
-          <width>100</width>
-          <height>0</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
-        <property name="text">
-         <string>Previous</string>
+        <property name="autoRaise">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -306,7 +312,7 @@
   <tabstop>address</tabstop>
   <tabstop>find</tabstop>
   <tabstop>find_next</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>find_previous</tabstop>
  </tabstops>
  <resources/>
  <connections/>

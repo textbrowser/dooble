@@ -215,6 +215,10 @@ void dooble_page::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
+  m_ui.find_next->setIcon
+    (QIcon(QString(":/%1/20/find_next.png").arg(icon_set)));
+  m_ui.find_previous->setIcon
+    (QIcon(QString(":/%1/20/find_previous.png").arg(icon_set)));
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
