@@ -44,6 +44,7 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
+  m_ui.find_frame->setVisible(false);
   m_ui.forward->setEnabled(false);
   m_ui.forward->setMenu(new QMenu(this));
   m_ui.menus->setMenu(new QMenu(this));
@@ -222,6 +223,8 @@ void dooble_page::prepare_shortcuts(void)
     {
       m_shortcuts_prepared = true;
       new QShortcut
+	(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_show_find(void)));
+      new QShortcut
 	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
       new QShortcut
 	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
@@ -287,6 +290,10 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_ui.menus->menu()->addMenu(tr("&Edit"));
+  menu->addAction(tr("&Find"),
+		  this,
+		  SLOT(slot_show_find(void)),
+		  QKeySequence(tr("Ctrl+F")));
   menu->addAction(QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
 		  tr("Settin&gs..."),
 		  this,
@@ -519,6 +526,17 @@ void dooble_page::slot_reload_or_stop(void)
     m_view->stop();
   else
     m_view->reload();
+}
+
+void dooble_page::slot_show_find(void)
+{
+  m_ui.find_frame->setVisible(!m_ui.find_frame->isVisible());
+
+  if(m_ui.find_frame->isVisible())
+    {
+      m_ui.find->selectAll();
+      m_ui.find->setFocus();
+    }
 }
 
 void dooble_page::slot_show_pull_down_menu(void)

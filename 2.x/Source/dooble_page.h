@@ -87,6 +87,7 @@ class dooble_page: public QWidget
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
   void slot_reload_or_stop(void);
+  void slot_show_find(void);
   void slot_show_pull_down_menu(void);
   void slot_url_changed(const QUrl &url);
 
