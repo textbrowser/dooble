@@ -75,6 +75,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_backward_menu(void)));
+  connect(m_ui.find,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_find_next(void)));
   connect(m_ui.forward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -336,8 +340,18 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
 void dooble_page::slot_escape(void)
 {
-  m_ui.address->setText(m_view->url().toString());
-  m_view->stop();
+  if(m_ui.find->hasFocus())
+    m_ui.find_frame->setVisible(false);
+  else
+    {
+      m_ui.address->setText(m_view->url().toString());
+      m_view->stop();
+    }
+}
+
+void dooble_page::slot_find_next(void)
+{
+  m_view->findText(m_ui.find->text());
 }
 
 void dooble_page::slot_go_backward(void)
@@ -530,13 +544,9 @@ void dooble_page::slot_reload_or_stop(void)
 
 void dooble_page::slot_show_find(void)
 {
-  m_ui.find_frame->setVisible(!m_ui.find_frame->isVisible());
-
-  if(m_ui.find_frame->isVisible())
-    {
-      m_ui.find->selectAll();
-      m_ui.find->setFocus();
-    }
+  m_ui.find->selectAll();
+  m_ui.find->setFocus();
+  m_ui.find_frame->setVisible(true);
 }
 
 void dooble_page::slot_show_pull_down_menu(void)

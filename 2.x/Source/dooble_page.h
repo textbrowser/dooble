@@ -72,6 +72,7 @@ class dooble_page: public QWidget
  private slots:
   void slot_about_to_show_standard_menus(void);
   void slot_escape(void);
+  void slot_find_next(void);
   void slot_go_backward(void);
   void slot_go_forward(void);
   void slot_go_to_backward_item(void);
