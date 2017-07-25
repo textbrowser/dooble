@@ -83,6 +83,14 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(textEdited(const QString &)),
 	  this,
 	  SLOT(slot_find_text_edited(const QString &)));
+  connect(m_ui.find_next,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_find_next(void)));
+  connect(m_ui.find_previous,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_find_previous(void)));
   connect(m_ui.find_stop,
 	  SIGNAL(clicked(void)),
 	  m_ui.find_frame,
@@ -398,10 +406,23 @@ void dooble_page::slot_find_next(void)
   slot_find_text_edited(m_ui.find->text());
 }
 
+void dooble_page::slot_find_previous(void)
+{
+  QString text(m_ui.find->text());
+
+  if(m_ui.find_match_case->isChecked())
+    find_text
+      (QWebEnginePage::FindFlag(QWebEnginePage::FindBackward |
+				QWebEnginePage::FindCaseSensitively),
+       text);
+  else
+    find_text(QWebEnginePage::FindBackward, text);
+}
+
 void dooble_page::slot_find_text_edited(const QString &text)
 {
   if(m_ui.find_match_case->isChecked())
-    find_text(QWebEnginePage::QWebEnginePage::FindCaseSensitively, text);
+    find_text(QWebEnginePage::FindCaseSensitively, text);
   else
     find_text(QWebEnginePage::FindFlags(), text);
 }
