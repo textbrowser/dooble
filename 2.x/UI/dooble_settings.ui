@@ -518,6 +518,33 @@
                </item>
               </layout>
              </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="reset_credentials">
+                 <property name="toolTip">
+                  <string>Remove credentials. If confirmed, Dooble will store data as clear text.</string>
+                 </property>
+                 <property name="text">
+                  <string>Reset</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
           </item>
@@ -637,6 +664,7 @@
   <tabstop>password_1</tabstop>
   <tabstop>password_2</tabstop>
   <tabstop>generate_credentials</tabstop>
+  <tabstop>reset_credentials</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
  </tabstops>
