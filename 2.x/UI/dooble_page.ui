@@ -274,6 +274,9 @@
      <property name="rightMargin">
       <number>5</number>
      </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QProgressBar" name="progress">
        <property name="sizePolicy">
