@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QAuthenticator>
 #include <QMenu>
 #include <QShortcut>
 #include <QStackedWidget>
@@ -388,6 +389,13 @@ void dooble_page::slot_about_to_show_standard_menus(void)
     if(qobject_cast<QStackedWidget *> (parentWidget()))
       m_action_close_tab->setEnabled
 	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+}
+
+void dooble_page::slot_authentication_required(const QUrl &url,
+					       QAuthenticator *authenticator)
+{
+  if(!authenticator || !url.isValid())
+    return;
 }
 
 void dooble_page::slot_escape(void)

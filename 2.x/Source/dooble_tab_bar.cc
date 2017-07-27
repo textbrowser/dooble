@@ -37,14 +37,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
   foreach(QToolButton *toolButton, findChildren <QToolButton *> ())
     toolButton->setStyleSheet("QToolButton {background-color: lightgray; "
 			      "border: 1px solid #c4c4c3; "
-#ifdef Q_OS_MACOS
 			      "margin-bottom: 1px;"
-#else
-			      "margin-bottom: 0px;"
-#endif
-#ifdef Q_OS_MACOS
 			      "margin-top: 1px;"
-#endif
 			      "}"
 			      "QToolButton::menu-button {border: none;}");
 

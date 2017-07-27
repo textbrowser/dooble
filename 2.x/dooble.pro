@@ -55,6 +55,7 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI\\dooble.ui \
+                  UI\\dooble_authentication_dialog.ui \
                   UI\\dooble_page.ui \
                   UI\\dooble_settings.ui
 
