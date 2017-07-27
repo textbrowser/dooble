@@ -46,7 +46,12 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		"image: url(:/Mac/16/tab_close.png);"
 		"subcontrol-origin: padding;"
 		"subcontrol-position: right;"
-		"width: 16px;}");
+		"width: 16px;}"
+		"QTabBar::tear {"
+		"image: none;}");
+#else
+  setStyleSheet("QTabBar::tear {"
+		"image: none;}");
 #endif
   setUsesScrollButtons(true);
   connect(this,
