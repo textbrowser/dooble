@@ -169,6 +169,14 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
+  connect(m_view->page(),
+	  SIGNAL(proxyAuthenticationRequired(const QUrl &,
+					     QAuthenticator *,
+					     const QString &)),
+	  this,
+	  SLOT(slot_proxy_authentication_required(const QUrl &,
+						  QAuthenticator *,
+						  const QString &)));
   prepare_icons();
   prepare_shortcuts();
   prepare_standard_menus();
@@ -408,6 +416,7 @@ void dooble_page::slot_authentication_required(const QUrl &url,
   ui.setupUi(&dialog);
   ui.label->setText(tr("The site %1 is requesting credentials.").
 		    arg(url.toString().trimmed()));
+  dialog.resize(dialog.sizeHint());
 
   if(dialog.exec() == QDialog::Accepted)
     {
@@ -635,6 +644,32 @@ void dooble_page::slot_prepare_forward_menu(void)
 	(title, this, SLOT(slot_go_to_forward_item(void)));
       action->setProperty("index", i);
     }
+}
+
+void dooble_page::slot_proxy_authentication_required
+(const QUrl &url, QAuthenticator *authenticator, const QString &proxy_host)
+{
+  if(!authenticator ||
+     authenticator->isNull() ||
+     proxy_host.isEmpty() ||
+     !url.isValid())
+    return;
+
+  QDialog dialog(this);
+  Ui_dooble_authentication_dialog ui;
+
+  ui.setupUi(&dialog);
+  dialog.setWindowTitle(tr("Dooble: Proxy Authentication"));
+  ui.label->setText(tr("The proxy %1 is requesting credentials.").
+		    arg(proxy_host));
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      authenticator->setPassword(ui.password->text());
+      authenticator->setUser(ui.username->text());
+    }
+  else
+    m_view->stop();
 }
 
 void dooble_page::slot_reload_or_stop(void)
