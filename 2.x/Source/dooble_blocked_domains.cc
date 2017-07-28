@@ -39,6 +39,15 @@ dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 	  SLOT(slot_add(void)));
 }
 
+void dooble_blocked_domains::closeEvent(QCloseEvent *event)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("blocked_domains_geometry", saveGeometry().toBase64());
+
+  QMainWindow::closeEvent(event);
+}
+
 void dooble_blocked_domains::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())

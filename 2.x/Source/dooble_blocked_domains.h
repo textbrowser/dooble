@@ -43,6 +43,9 @@ class dooble_blocked_domains: public QMainWindow
   void show(void);
   void showNormal(void);
 
+ protected:
+  void closeEvent(QCloseEvent *event);
+
  private:
   Ui_dooble_blocked_domains m_ui;
 

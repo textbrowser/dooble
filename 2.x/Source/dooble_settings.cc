@@ -84,7 +84,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
-  if(dooble_settings::setting("save_geometry").toBool())
+  if(setting("save_geometry").toBool())
     set_setting("settings_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
@@ -100,7 +100,7 @@ void dooble_settings::restore(void)
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+    db.setDatabaseName(setting("home_path").toString() +
 		       QDir::separator() +
 		       "dooble_settings.db");
 
@@ -203,7 +203,7 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+    db.setDatabaseName(setting("home_path").toString() +
 		       QDir::separator() +
 		       "dooble_settings.db");
 
@@ -229,9 +229,8 @@ void dooble_settings::set_setting(const QString &key, const QVariant &value)
 
 void dooble_settings::show(void)
 {
-  if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("settings_geometry").
+  if(setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
 
   QMainWindow::show();
@@ -239,9 +238,8 @@ void dooble_settings::show(void)
 
 void dooble_settings::showNormal(void)
 {
-  if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("settings_geometry").
+  if(setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
 
   QMainWindow::showNormal();
