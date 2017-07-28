@@ -25,12 +25,18 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QInputDialog>
+
 #include "dooble_blocked_domains.h"
 #include "dooble_settings.h"
 
 dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  connect(m_ui.add,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_add(void)));
 }
 
 void dooble_blocked_domains::show(void)
@@ -51,4 +57,44 @@ void dooble_blocked_domains::showNormal(void)
 					   toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_blocked_domains::slot_add(void)
+{
+  QString text = QInputDialog::
+    getText(this, tr("Dooble: New Blocked Domain"), tr("Blocked Domain")).
+    trimmed();
+
+  if(text.isEmpty())
+    return;
+
+  if(!m_ui.table->findItems(text, Qt::MatchFixedString).isEmpty())
+    return;
+
+  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
+  m_ui.table->setSortingEnabled(false);
+
+  for(int i = 0; i < 2; i++)
+    {
+      QTableWidgetItem *item = new QTableWidgetItem();
+
+      if(i == 0)
+	{
+	  item->setFlags(Qt::ItemIsEnabled |
+			 Qt::ItemIsSelectable |
+			 Qt::ItemIsUserCheckable);
+	  item->setCheckState(Qt::Checked);
+	}
+      else
+	{
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  item->setText(text);
+	}
+
+      m_ui.table->setItem(m_ui.table->rowCount() - 1, i, item);
+    }
+
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortByColumn
+    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
 }

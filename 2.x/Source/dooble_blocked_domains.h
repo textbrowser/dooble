@@ -45,6 +45,9 @@ class dooble_blocked_domains: public QMainWindow
 
  private:
   Ui_dooble_blocked_domains m_ui;
+
+ private slots:
+  void slot_add(void);
 };
 
 #endif
