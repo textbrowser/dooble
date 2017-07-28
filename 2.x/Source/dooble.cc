@@ -85,6 +85,15 @@ void dooble::closeEvent(QCloseEvent *event)
     dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
+  deleteLater();
+
+  QWidgetList list(QApplication::topLevelWidgets());
+
+  for(int i = 0; i < list.size(); i++)
+    if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
+      return;
+
+  QApplication::exit(0);
 }
 
 void dooble::new_page(dooble_page *page)
