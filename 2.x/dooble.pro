@@ -56,11 +56,13 @@ UI_DIR = temp/ui
 
 FORMS           = UI\\dooble.ui \
                   UI\\dooble_authentication_dialog.ui \
+                  UI\\dooble_blocked_domains.ui \
                   UI\\dooble_page.ui \
                   UI\\dooble_settings.ui
 
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
+                  Source\\dooble_blocked_domains.h \
                   Source\\dooble_favicons.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \
@@ -79,6 +81,7 @@ RESOURCES       += Icons\\icons.qrc
 
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
+                  Source\\dooble_blocked_domains.cc \
                   Source\\dooble_favicons.cc \
 		  Source\\dooble_hmac.cc \
                   Source\\dooble_label_widget.cc \

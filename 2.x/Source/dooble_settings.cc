@@ -38,7 +38,7 @@ QAtomicInteger<quint64> dooble_settings::s_db_id;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;
 
-dooble_settings::dooble_settings(void):QMainWindow(0)
+dooble_settings::dooble_settings(void):QMainWindow()
 {
   m_ui.setupUi(this);
   connect(m_ui.buttonBox->button(QDialogButtonBox::Apply),
