@@ -414,6 +414,8 @@ void dooble_page::slot_authentication_required(const QUrl &url,
       authenticator->setPassword(ui.password->text());
       authenticator->setUser(ui.username->text());
     }
+  else
+    m_view->stop();
 }
 
 void dooble_page::slot_escape(void)
