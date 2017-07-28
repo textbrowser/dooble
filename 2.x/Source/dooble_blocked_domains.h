@@ -39,6 +39,10 @@ class dooble_blocked_domains: public QMainWindow
  public:
   dooble_blocked_domains(void);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
  private:
   Ui_dooble_blocked_domains m_ui;
 };

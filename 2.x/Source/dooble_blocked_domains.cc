@@ -26,8 +26,29 @@
 */
 
 #include "dooble_blocked_domains.h"
+#include "dooble_settings.h"
 
 dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 {
   m_ui.setupUi(this);
+}
+
+void dooble_blocked_domains::show(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("blocked_domains_geometry").
+					   toByteArray()));
+
+  QMainWindow::show();
+}
+
+void dooble_blocked_domains::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("blocked_domains_geometry").
+					   toByteArray()));
+
+  QMainWindow::showNormal();
 }
