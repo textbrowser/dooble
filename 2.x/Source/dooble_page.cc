@@ -37,6 +37,7 @@
 #include "dooble_page.h"
 #include "dooble_settings.h"
 #include "dooble_web_engine_view.h"
+#include "ui_dooble_authentication_dialog.h"
 
 dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   QWidget(parent)
@@ -160,6 +161,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(urlChanged(const QUrl &)),
 	  this,
 	  SLOT(slot_url_changed(const QUrl &)));
+  connect(m_view->page(),
+	  SIGNAL(authenticationRequired(const QUrl &, QAuthenticator *)),
+	  this,
+	  SLOT(slot_authentication_required(const QUrl &, QAuthenticator *)));
   connect(m_view->page(),
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
@@ -394,8 +399,21 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 void dooble_page::slot_authentication_required(const QUrl &url,
 					       QAuthenticator *authenticator)
 {
-  if(!authenticator || !url.isValid())
+  if(!authenticator || authenticator->isNull() || !url.isValid())
     return;
+
+  QDialog dialog(this);
+  Ui_dooble_authentication_dialog ui;
+
+  ui.setupUi(&dialog);
+  ui.label->setText(tr("The site %1 is requesting credentials.").
+		    arg(url.toString().trimmed()));
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      authenticator->setPassword(ui.password->text());
+      authenticator->setUser(ui.username->text());
+    }
 }
 
 void dooble_page::slot_escape(void)
