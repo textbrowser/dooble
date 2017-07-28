@@ -662,6 +662,7 @@ void dooble_page::slot_proxy_authentication_required
   dialog.setWindowTitle(tr("Dooble: Proxy Authentication"));
   ui.label->setText(tr("The proxy %1 is requesting credentials.").
 		    arg(proxy_host));
+  dialog.resize(dialog.sizeHint());
 
   if(dialog.exec() == QDialog::Accepted)
     {
