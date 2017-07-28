@@ -28,6 +28,7 @@
 #include <QUrl>
 
 #include "dooble.h"
+#include "dooble_blocked_domains.h"
 #include "dooble_favicons.h"
 #include "dooble_page.h"
 #include "dooble_settings.h"
@@ -36,6 +37,7 @@
 
 dooble::dooble(dooble_page *page):QMainWindow()
 {
+  m_blocked_domains = new dooble_blocked_domains();
   m_settings = new dooble_settings();
   m_ui.setupUi(this);
   connect(m_ui.tab,
@@ -55,6 +57,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
+  m_blocked_domains = new dooble_blocked_domains();
   m_settings = new dooble_settings();
   m_ui.setupUi(this);
   connect(m_ui.tab,
@@ -311,6 +314,13 @@ void dooble::slot_quit_dooble(void)
 
 void dooble::slot_show_blocked_domains(void)
 {
+  m_blocked_domains->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, m_settings);
+
+  m_blocked_domains->activateWindow();
+  m_blocked_domains->raise();
 }
 
 void dooble::slot_show_settings(void)

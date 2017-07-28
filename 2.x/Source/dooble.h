@@ -32,6 +32,7 @@
 
 #include "ui_dooble.h"
 
+class dooble_blocked_domains;
 class dooble_page;
 class dooble_settings;
 class dooble_web_engine_view;
@@ -50,6 +51,7 @@ class dooble: public QMainWindow
 
  private:
   Ui_dooble m_ui;
+  dooble_blocked_domains *m_blocked_domains;
   dooble_settings *m_settings;
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
