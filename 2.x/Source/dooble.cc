@@ -93,6 +93,8 @@ void dooble::closeEvent(QCloseEvent *event)
     if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
       return;
 
+  m_blocked_domains->close();
+  m_settings->close();
   QApplication::exit(0);
 }
 

@@ -25,7 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QInputDialog>
+#include <QSqlQuery>
 
 #include "dooble_blocked_domains.h"
 #include "dooble_settings.h"
@@ -46,6 +48,44 @@ void dooble_blocked_domains::closeEvent(QCloseEvent *event)
       ("blocked_domains_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
+}
+
+void dooble_blocked_domains::save_blocked_domain(const QString &domain,
+						 bool state)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name("dooble_blocked_domains");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_blocked_domains.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_blocked_domains ("
+		   "blocked TEXT NOT NULL, "
+		   "domain TEXT NOT NULL, "
+		   "domain_digest TEXT NOT NULL PRIMARY KEY)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_blocked_domains "
+	   "(blocked, domain, domain_digest) VALUES (?, ?, ?)");
+	query.addBindValue(state);
+	query.addBindValue(domain);
+	query.addBindValue(domain);
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_blocked_domains::show(void)
@@ -106,4 +146,5 @@ void dooble_blocked_domains::slot_add(void)
   m_ui.table->setSortingEnabled(true);
   m_ui.table->sortByColumn
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+  save_blocked_domain(text, true);
 }

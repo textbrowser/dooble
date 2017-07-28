@@ -48,6 +48,7 @@ class dooble_blocked_domains: public QMainWindow
 
  private:
   Ui_dooble_blocked_domains m_ui;
+  void save_blocked_domain(const QString &domain, bool state);
 
  private slots:
   void slot_add(void);
