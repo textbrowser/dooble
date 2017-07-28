@@ -115,4 +115,5 @@ void dooble_address_widget::setText(const QString &text)
 {
   QLineEdit::setText(text.trimmed());
   setCursorPosition(0);
+  setToolTip(QLineEdit::text());
 }
