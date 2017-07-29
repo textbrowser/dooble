@@ -36,5 +36,8 @@ dooble_web_engine_url_request_interceptor(void):
 void dooble_web_engine_url_request_interceptor::
 interceptRequest(QWebEngineUrlRequestInfo &info)
 {
-  Q_UNUSED(info);
+  QString host(info.requestUrl().host().toLower());
+
+  if(host.endsWith("doubleclick.net"))
+    info.block(false);
 }

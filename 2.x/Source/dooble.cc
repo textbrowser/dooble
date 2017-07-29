@@ -26,6 +26,7 @@
 */
 
 #include <QUrl>
+#include <QWebEngineProfile>
 
 #include "dooble.h"
 #include "dooble_blocked_domains.h"
@@ -50,8 +51,12 @@ dooble::dooble(dooble_page *page):QMainWindow()
     s_settings = new dooble_settings();
 
   if(!s_url_request_interceptor)
-    s_url_request_interceptor = new
-      dooble_web_engine_url_request_interceptor();
+    {
+      s_url_request_interceptor = new
+	dooble_web_engine_url_request_interceptor();
+      QWebEngineProfile::defaultProfile()->setRequestInterceptor
+	(s_url_request_interceptor);
+    }
 
   m_ui.setupUi(this);
   connect(m_ui.tab,
@@ -78,8 +83,12 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
     s_settings = new dooble_settings();
 
   if(!s_url_request_interceptor)
-    s_url_request_interceptor = new
-      dooble_web_engine_url_request_interceptor();
+    {
+      s_url_request_interceptor = new
+	dooble_web_engine_url_request_interceptor();
+      QWebEngineProfile::defaultProfile()->setRequestInterceptor
+	(s_url_request_interceptor);
+    }
 
   m_ui.setupUi(this);
   connect(m_ui.tab,
