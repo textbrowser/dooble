@@ -55,6 +55,7 @@ class dooble_blocked_domains: public QMainWindow
 
  private slots:
   void slot_add(void);
+  void slot_delete_rows(void);
 };
 
 #endif

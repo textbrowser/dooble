@@ -40,6 +40,10 @@ dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_add(void)));
+  connect(m_ui.delete_rows,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_rows(void)));
   populate();
 }
 
@@ -187,6 +191,7 @@ void dooble_blocked_domains::slot_add(void)
   if(!m_ui.table->findItems(text, Qt::MatchFixedString).isEmpty())
     return;
 
+  m_blocked_domains[text] = 1;
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
 
@@ -207,7 +212,6 @@ void dooble_blocked_domains::slot_add(void)
 	  item->setText(text);
 	}
 
-      m_blocked_domains[text] = 1;
       m_ui.table->setItem(m_ui.table->rowCount() - 1, i, item);
     }
 
@@ -215,4 +219,40 @@ void dooble_blocked_domains::slot_add(void)
   m_ui.table->sortByColumn
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   save_blocked_domain(text, true);
+}
+
+void dooble_blocked_domains::slot_delete_rows(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QModelIndexList list(m_ui.table->selectionModel()->selectedRows(1));
+  QString database_name("dooble_blocked_domains");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_blocked_domains.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	for(int i = list.size() - 1; i >= 0; i--)
+	  {
+	    query.prepare("DELETE FROM dooble_blocked_domains "
+			  "WHERE domain_digest = ?");
+	    query.addBindValue(list.at(i).data().toString());
+
+	    if(query.exec())
+	      m_ui.table->removeRow(list.at(i).row());
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
