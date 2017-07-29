@@ -25,9 +25,32 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble.h"
+#include "dooble_blocked_domains.h"
 #include "dooble_web_engine_page.h"
 
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(parent)
 {
+}
+
+bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
+						     NavigationType type,
+						     bool isMainFrame)
+{
+  Q_UNUSED(type);
+  Q_UNUSED(isMainFrame);
+
+  QString host(url.host().toLower());
+  int index = -1;
+
+  while(!host.isEmpty())
+    if(dooble::s_blocked_domains->contains(host))
+      return false;
+    else if((index = host.indexOf('.')) > 0)
+      host.remove(0, index + 1);
+    else
+      break;
+
+  return true;
 }

@@ -36,6 +36,11 @@ class dooble_web_engine_page: public QWebEnginePage
 
  public:
   dooble_web_engine_page(QWidget *parent);
+
+ protected:
+  bool acceptNavigationRequest(const QUrl &url,
+			       NavigationType type,
+			       bool isMainFrame);
 };
 
 #endif

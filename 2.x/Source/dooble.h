@@ -46,13 +46,13 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
+  static dooble_blocked_domains *s_blocked_domains;
 
  protected:
   void closeEvent(QCloseEvent *event);
 
  private:
   Ui_dooble m_ui;
-  static dooble_blocked_domains *s_blocked_domains;
   static dooble_settings *s_settings;
   static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
   void new_page(dooble_page *page);

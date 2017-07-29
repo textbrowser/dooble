@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble.h"
+#include "dooble_blocked_domains.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 
 dooble_web_engine_url_request_interceptor::
@@ -37,7 +39,16 @@ void dooble_web_engine_url_request_interceptor::
 interceptRequest(QWebEngineUrlRequestInfo &info)
 {
   QString host(info.requestUrl().host().toLower());
+  int index = -1;
 
-  if(host.endsWith("doubleclick.net"))
-    info.block(false);
+  while(!host.isEmpty())
+    if(dooble::s_blocked_domains->contains(host))
+      {
+	info.block(true);
+	return;
+      }
+    else if((index = host.indexOf('.')) > 0)
+      host.remove(0, index + 1);
+    else
+      break;
 }

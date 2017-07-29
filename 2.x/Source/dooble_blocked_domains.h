@@ -38,6 +38,7 @@ class dooble_blocked_domains: public QMainWindow
 
  public:
   dooble_blocked_domains(void);
+  bool contains(const QString &domain) const;
 
  public slots:
   void show(void);
@@ -47,7 +48,9 @@ class dooble_blocked_domains: public QMainWindow
   void closeEvent(QCloseEvent *event);
 
  private:
+  QHash<QString, char> m_blocked_domains;
   Ui_dooble_blocked_domains m_ui;
+  void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
 
  private slots:

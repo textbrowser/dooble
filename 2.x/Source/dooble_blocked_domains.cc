@@ -39,6 +39,12 @@ dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_add(void)));
+  populate();
+}
+
+bool dooble_blocked_domains::contains(const QString &domain) const
+{
+  return m_blocked_domains.contains(domain);
 }
 
 void dooble_blocked_domains::closeEvent(QCloseEvent *event)
@@ -48,6 +54,62 @@ void dooble_blocked_domains::closeEvent(QCloseEvent *event)
       ("blocked_domains_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
+}
+
+void dooble_blocked_domains::populate(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_blocked_domains.clear();
+  m_ui.table->clearContents();
+
+  QString database_name("dooble_blocked_domains");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_blocked_domains.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT blocked, domain FROM dooble_blocked_domains"))
+	  while(query.next())
+	    m_blocked_domains[query.value(1).toString()] =
+	      query.value(0).toBool();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  m_ui.table->setRowCount(m_blocked_domains.size());
+
+  QHashIterator<QString, char> it(m_blocked_domains);
+  int i = 0;
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      QTableWidgetItem *item = new QTableWidgetItem();
+
+      item->setFlags(Qt::ItemIsEnabled |
+		     Qt::ItemIsSelectable |
+		     Qt::ItemIsUserCheckable);
+      item->setCheckState(Qt::Checked);
+      m_ui.table->setItem(i, 0, item);
+      item = new QTableWidgetItem(it.key());
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.table->setItem(i, 1, item);
+      i += 1;
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_blocked_domains::save_blocked_domain(const QString &domain,
@@ -140,6 +202,7 @@ void dooble_blocked_domains::slot_add(void)
 	  item->setText(text);
 	}
 
+      m_blocked_domains[text] = 1;
       m_ui.table->setItem(m_ui.table->rowCount() - 1, i, item);
     }
 
