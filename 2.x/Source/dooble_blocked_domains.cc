@@ -35,6 +35,7 @@
 dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  m_ui.table->sortByColumn(1, Qt::AscendingOrder);
   connect(m_ui.add,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -88,6 +89,7 @@ void dooble_blocked_domains::populate(void)
 
   QSqlDatabase::removeDatabase(database_name);
   m_ui.table->setRowCount(m_blocked_domains.size());
+  m_ui.table->setSortingEnabled(false);
 
   QHashIterator<QString, char> it(m_blocked_domains);
   int i = 0;
@@ -109,6 +111,9 @@ void dooble_blocked_domains::populate(void)
       i += 1;
     }
 
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortByColumn
+    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   QApplication::restoreOverrideCursor();
 }
 
