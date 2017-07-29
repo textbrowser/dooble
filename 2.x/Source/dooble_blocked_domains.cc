@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QInputDialog>
+#include <QMessageBox>
 #include <QSqlQuery>
 
 #include "dooble_blocked_domains.h"
@@ -226,6 +227,27 @@ void dooble_blocked_domains::slot_delete_rows(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QModelIndexList list(m_ui.table->selectionModel()->selectedRows(1));
+
+  if(list.size() > 0)
+    {
+      QApplication::restoreOverrideCursor();
+
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Are you sure that you wish to delete the selected domains?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QString database_name("dooble_blocked_domains");
 
   {
