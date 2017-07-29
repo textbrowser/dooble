@@ -354,7 +354,7 @@ void dooble::slot_show_blocked_domains(void)
   s_blocked_domains->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_settings);
+    dooble_ui_utilities::center_window_widget(this, s_blocked_domains);
 
   s_blocked_domains->activateWindow();
   s_blocked_domains->raise();
