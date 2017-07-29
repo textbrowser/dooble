@@ -35,6 +35,7 @@
 class dooble_blocked_domains;
 class dooble_page;
 class dooble_settings;
+class dooble_web_engine_url_request_interceptor;
 class dooble_web_engine_view;
 
 class dooble: public QMainWindow
@@ -51,8 +52,9 @@ class dooble: public QMainWindow
 
  private:
   Ui_dooble m_ui;
-  dooble_blocked_domains *m_blocked_domains;
-  dooble_settings *m_settings;
+  static dooble_blocked_domains *s_blocked_domains;
+  static dooble_settings *s_settings;
+  static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);

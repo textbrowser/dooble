@@ -33,12 +33,26 @@
 #include "dooble_page.h"
 #include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
+#include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
+
+dooble_blocked_domains *dooble::s_blocked_domains = 0;
+dooble_settings *dooble::s_settings = 0;
+dooble_web_engine_url_request_interceptor *dooble::
+s_url_request_interceptor = 0;
 
 dooble::dooble(dooble_page *page):QMainWindow()
 {
-  m_blocked_domains = new dooble_blocked_domains();
-  m_settings = new dooble_settings();
+  if(!s_blocked_domains)
+    s_blocked_domains = new dooble_blocked_domains();
+
+  if(!s_settings)
+    s_settings = new dooble_settings();
+
+  if(!s_url_request_interceptor)
+    s_url_request_interceptor = new
+      dooble_web_engine_url_request_interceptor();
+
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -57,8 +71,16 @@ dooble::dooble(dooble_page *page):QMainWindow()
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
-  m_blocked_domains = new dooble_blocked_domains();
-  m_settings = new dooble_settings();
+  if(!s_blocked_domains)
+    s_blocked_domains = new dooble_blocked_domains();
+
+  if(!s_settings)
+    s_settings = new dooble_settings();
+
+  if(!s_url_request_interceptor)
+    s_url_request_interceptor = new
+      dooble_web_engine_url_request_interceptor();
+
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -93,8 +115,12 @@ void dooble::closeEvent(QCloseEvent *event)
     if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
       return;
 
-  m_blocked_domains->close();
-  m_settings->close();
+  if(s_blocked_domains)
+    s_blocked_domains->close();
+
+  if(s_settings)
+    s_settings->close();
+
   QApplication::exit(0);
 }
 
@@ -325,24 +351,24 @@ void dooble::slot_quit_dooble(void)
 
 void dooble::slot_show_blocked_domains(void)
 {
-  m_blocked_domains->showNormal();
+  s_blocked_domains->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, m_settings);
+    dooble_ui_utilities::center_window_widget(this, s_settings);
 
-  m_blocked_domains->activateWindow();
-  m_blocked_domains->raise();
+  s_blocked_domains->activateWindow();
+  s_blocked_domains->raise();
 }
 
 void dooble::slot_show_settings(void)
 {
-  m_settings->showNormal();
+  s_settings->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, m_settings);
+    dooble_ui_utilities::center_window_widget(this, s_settings);
 
-  m_settings->activateWindow();
-  m_settings->raise();
+  s_settings->activateWindow();
+  s_settings->raise();
 }
 
 void dooble::slot_tab_close_requested(int index)
