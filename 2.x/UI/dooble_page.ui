@@ -219,7 +219,7 @@
       <item>
        <widget class="QToolButton" name="find_match_case">
         <property name="text">
-         <string>Match Case</string>
+         <string>&amp;Match Case</string>
         </property>
         <property name="checkable">
          <bool>true</bool>

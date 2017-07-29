@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>600</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -75,14 +75,14 @@
       <item>
        <widget class="QPushButton" name="add">
         <property name="text">
-         <string>Add</string>
+         <string>&amp;Add</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="delete_rows">
         <property name="text">
-         <string>Delete</string>
+         <string>&amp;Delete</string>
         </property>
        </widget>
       </item>
