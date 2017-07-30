@@ -237,7 +237,7 @@ void dooble_blocked_domains::slot_delete_rows(void)
       mb.setIcon(QMessageBox::Question);
       mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
       mb.setText
-	(tr("Are you sure that you wish to delete the selected domains?"));
+	(tr("Are you sure that you wish to delete the selected domain(s)?"));
       mb.setWindowIcon(windowIcon());
       mb.setWindowModality(Qt::WindowModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
