@@ -28,13 +28,31 @@
 #include "dooble_pbkdf2.h"
 
 dooble_pbkdf2::dooble_pbkdf2
-(const QByteArray &password,
- dooble_hmac_function hmac_function,
- int iterations_count,
- int output_size)
+(const QByteArray &password, int iterations_count, int output_size)
 {
-  Q_UNUSED(hmac_function);
-  Q_UNUSED(iterations_count);
-  Q_UNUSED(output_size);
-  Q_UNUSED(password);
+  m_iterations_count = qAbs(iterations_count);
+  m_output_size = qAbs(output_size);
+  m_password = password;
+}
+
+dooble_pbkdf2::~dooble_pbkdf2()
+{
+  if(!m_password.isEmpty())
+    {
+      QByteArray zeros(m_password.length(), 0);
+
+      m_password.replace(0, m_password.length(), zeros);
+    }
+
+  m_password.clear();
+}
+
+QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function function) const
+{
+  Q_UNUSED(function);
+  return QByteArray();
+}
+
+void dooble_pbkdf2::interrupt(void)
+{
 }

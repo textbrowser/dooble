@@ -37,9 +37,16 @@ class dooble_pbkdf2
 {
  public:
   dooble_pbkdf2(const QByteArray &password,
-		dooble_hmac_function hmac_function,
 		int iterations_count,
 		int output_size);
+  ~dooble_pbkdf2();
+  QByteArray pbkdf2(dooble_hmac_function hmac_function) const;
+  void interrupt(void);
+
+ private:
+  QByteArray m_password;
+  int m_iterations_count;
+  int m_output_size;
 };
 
 #endif
