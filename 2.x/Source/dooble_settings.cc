@@ -27,6 +27,7 @@
 
 #include <QDialogButtonBox>
 #include <QDir>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -69,6 +70,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.save_credentials,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_save_credentials(void)));
   connect(m_ui.web,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -296,4 +301,38 @@ void dooble_settings::slot_page_button_clicked(void)
 
   set_setting("settings_page_index", m_ui.pages->currentIndex());
   tool_button->setChecked(true);
+}
+
+void dooble_settings::slot_save_credentials(void)
+{
+  if(m_pbkdf2_dialog)
+    return;
+
+  QString password1(m_ui.password_1->text());
+  QString password2(m_ui.password_2->text());
+
+  if(password1.isEmpty())
+    {
+      QMessageBox::critical
+	(this, tr("Dooble: User Error"), tr("Empty password(s)."));
+      return;
+    }
+  else if(password1 != password2)
+    {
+      QMessageBox::critical
+	(this, tr("Dooble: User Error"), tr("Passwords are not equal."));
+      return;
+    }
+
+  m_pbkdf2_dialog = new QProgressDialog(this);
+  m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));
+  m_pbkdf2_dialog->setLabelText
+    (tr("Preparing credentials... Please remain calm."));
+  m_pbkdf2_dialog->setMaximum(0);
+  m_pbkdf2_dialog->setMinimum(0);
+  m_pbkdf2_dialog->setWindowIcon(windowIcon());
+  m_pbkdf2_dialog->setWindowModality(Qt::ApplicationModal);
+  m_pbkdf2_dialog->setWindowTitle(tr("Dooble: Preparing Credentials"));
+  m_pbkdf2_dialog->exec();
+  m_pbkdf2_dialog->deleteLater();
 }

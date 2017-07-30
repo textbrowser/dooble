@@ -30,6 +30,8 @@
 
 #include <QAtomicInteger>
 #include <QMainWindow>
+#include <QPointer>
+#include <QProgressDialog>
 #include <QReadWriteLock>
 
 #include "ui_dooble_settings.h"
@@ -47,6 +49,7 @@ class dooble_settings: public QMainWindow
   void closeEvent(QCloseEvent *event);
 
  private:
+  QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
   static QAtomicInteger<quint64> s_db_id;
   static QMap<QString, QVariant> s_settings;
@@ -61,6 +64,7 @@ class dooble_settings: public QMainWindow
   void slot_apply(void);
   void slot_clear_cache(void);
   void slot_page_button_clicked(void);
+  void slot_save_credentials(void);
 };
 
 #endif

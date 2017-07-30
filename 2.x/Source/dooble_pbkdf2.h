@@ -47,7 +47,7 @@ class dooble_pbkdf2
   void interrupt(void);
 
  private:
-  QAtomicInteger<short> m_interrupt;
+  QAtomicInteger<bool> m_interrupt;
   QByteArray m_password;
   QByteArray m_salt;
   int m_iterations_count;

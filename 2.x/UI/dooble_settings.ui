@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -529,7 +529,7 @@
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QPushButton" name="generate_credentials">
+                <widget class="QPushButton" name="save_credentials">
                  <property name="text">
                   <string>&amp;Save</string>
                  </property>
@@ -696,7 +696,7 @@
   <tabstop>key_derivation</tabstop>
   <tabstop>password_1</tabstop>
   <tabstop>password_2</tabstop>
-  <tabstop>generate_credentials</tabstop>
+  <tabstop>save_credentials</tabstop>
   <tabstop>reset_credentials</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
