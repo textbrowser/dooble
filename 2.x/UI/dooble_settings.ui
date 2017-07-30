@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -411,31 +411,39 @@
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
-               <item>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="1" column="3">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Key Derivation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
                 <widget class="QLabel" name="label_7">
                  <property name="text">
                   <string>Cipher</string>
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QComboBox" name="cipher">
-                 <item>
-                  <property name="text">
-                   <string>AES-256</string>
-                  </property>
-                 </item>
+               <item row="1" column="2">
+                <widget class="QSpinBox" name="iteration_count">
+                 <property name="minimum">
+                  <number>15000</number>
+                 </property>
+                 <property name="maximum">
+                  <number>999999999</number>
+                 </property>
                 </widget>
                </item>
-               <item>
+               <item row="0" column="3">
                 <widget class="QLabel" name="label_8">
                  <property name="text">
                   <string>Hash</string>
                  </property>
                 </widget>
                </item>
-               <item>
+               <item row="0" column="4">
                 <widget class="QComboBox" name="hash">
                  <item>
                   <property name="text">
@@ -444,14 +452,7 @@
                  </item>
                 </widget>
                </item>
-               <item>
-                <widget class="QLabel" name="label_6">
-                 <property name="text">
-                  <string>Key Derivation</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
+               <item row="1" column="4">
                 <widget class="QComboBox" name="key_derivation">
                  <item>
                   <property name="text">
@@ -460,7 +461,23 @@
                  </item>
                 </widget>
                </item>
-               <item>
+               <item row="0" column="1" colspan="2">
+                <widget class="QComboBox" name="cipher">
+                 <item>
+                  <property name="text">
+                   <string>AES-256</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>Iteration Count</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
                 <spacer name="horizontalSpacer_6">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -477,8 +494,8 @@
              </item>
              <item>
               <layout class="QGridLayout" name="gridLayout">
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="password_1">
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="password_2">
                  <property name="echoMode">
                   <enum>QLineEdit::Password</enum>
                  </property>
@@ -494,8 +511,8 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="password_2">
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="password_1">
                  <property name="echoMode">
                   <enum>QLineEdit::Password</enum>
                  </property>
@@ -675,6 +692,7 @@
   <tabstop>theme</tabstop>
   <tabstop>cipher</tabstop>
   <tabstop>hash</tabstop>
+  <tabstop>iteration_count</tabstop>
   <tabstop>key_derivation</tabstop>
   <tabstop>password_1</tabstop>
   <tabstop>password_2</tabstop>

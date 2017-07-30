@@ -26,6 +26,7 @@
 */
 
 #include "dooble_cryptography.h"
+#include "dooble_random.h"
 
 dooble_cryptography::dooble_cryptography(void)
 {
