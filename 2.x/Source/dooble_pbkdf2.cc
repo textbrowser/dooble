@@ -28,11 +28,15 @@
 #include "dooble_pbkdf2.h"
 
 dooble_pbkdf2::dooble_pbkdf2
-(const QByteArray &password, int iterations_count, int output_size)
+(const QByteArray &password,
+ const QByteArray &salt,
+ int iterations_count,
+ int output_size)
 {
   m_iterations_count = qAbs(iterations_count);
   m_output_size = qAbs(output_size);
   m_password = password;
+  m_salt = salt;
 }
 
 dooble_pbkdf2::~dooble_pbkdf2()
