@@ -31,6 +31,10 @@
 
 QByteArray dooble_random::random_bytes(int length)
 {
+  /*
+  ** Returns an empty byte array if an error occurs.
+  */
+
   if(length <= 0)
     return QByteArray();
 
