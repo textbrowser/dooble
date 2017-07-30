@@ -30,8 +30,8 @@
 
 #include <QByteArray>
 
-typedef QByteArray (* dooble_hmac_function(const QByteArray &key,
-					   const QByteArray &message));
+typedef QByteArray dooble_hmac_function(const QByteArray &key,
+					const QByteArray &message);
 
 class dooble_pbkdf2
 {
@@ -41,7 +41,8 @@ class dooble_pbkdf2
 		int iterations_count,
 		int output_size);
   ~dooble_pbkdf2();
-  QByteArray pbkdf2(dooble_hmac_function hmac_function) const;
+  QByteArray pbkdf2(dooble_hmac_function *hmac_function) const;
+  static void test1(void);
   void interrupt(void);
 
  private:
@@ -49,6 +50,7 @@ class dooble_pbkdf2
   QByteArray m_salt;
   int m_iterations_count;
   int m_output_size;
+  QByteArray x_or(const QByteArray &a, const QByteArray &b) const;
 };
 
 #endif

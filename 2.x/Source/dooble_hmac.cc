@@ -30,11 +30,48 @@
 
 #include "dooble_hmac.h"
 
+QByteArray dooble_hmac::sha2_512hmac(const QByteArray &key,
+				     const QByteArray &message)
+{
+  /*
+  ** Block length is 1024 bits.
+  ** Please read https://en.wikipedia.org/wiki/SHA-2.
+  */
+
+  QByteArray k(key);
+  static int block_length = 1024 / CHAR_BIT;
+
+  if(block_length < k.length())
+    k = QCryptographicHash::hash(k, QCryptographicHash::Sha512);
+
+  if(block_length > k.length())
+    k.append(QByteArray(block_length - k.length(), 0));
+
+  static QByteArray ipad(block_length, 0x36);
+  static QByteArray opad(block_length, 0x5c);
+
+  QByteArray left(block_length, 0);
+
+  for(int i = 0; i < block_length; i++)
+    left[i] = k.at(i) ^ opad.at(i);
+
+  QByteArray right(block_length, 0);
+
+  for(int i = 0; i < block_length; i++)
+    right[i] = k.at(i) ^ ipad.at(i);
+
+  return QCryptographicHash::hash
+    (left.append(QCryptographicHash::hash(right.append(message),
+					  QCryptographicHash::Sha512)),
+     QCryptographicHash::Sha512);
+}
+
 QByteArray dooble_hmac::sha3_512hmac(const QByteArray &key,
 				     const QByteArray &message)
 {
   /*
-  ** Block length is 576 (https://en.wikipedia.org/wiki/SHA-3).
+  ** Block length is 576 bits.
+  ** Please read https://en.wikipedia.org/wiki/SHA-3.
   */
 
   QByteArray k(key);
@@ -63,6 +100,11 @@ QByteArray dooble_hmac::sha3_512hmac(const QByteArray &key,
     (left.append(QCryptographicHash::hash(right.append(message),
 					  QCryptographicHash::Sha3_512)),
      QCryptographicHash::Sha3_512);
+}
+
+int dooble_hmac::preferred_output_size_in_bits(void)
+{
+  return 512;
 }
 
 /*
