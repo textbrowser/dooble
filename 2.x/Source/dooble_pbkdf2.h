@@ -28,6 +28,7 @@
 #ifndef dooble_pbkdf2_h
 #define dooble_pbkdf2_h
 
+#include <QAtomicInteger>
 #include <QByteArray>
 
 typedef QByteArray dooble_hmac_function(const QByteArray &key,
@@ -46,6 +47,7 @@ class dooble_pbkdf2
   void interrupt(void);
 
  private:
+  QAtomicInteger<short> m_interrupt;
   QByteArray m_password;
   QByteArray m_salt;
   int m_iterations_count;

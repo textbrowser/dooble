@@ -81,6 +81,9 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 
   for(int i = 1; i <= iterations; i++)
     {
+      if(m_interrupt.load())
+	break;
+
       QByteArray INT_32_BE_i(static_cast<int> (sizeof(int)), 0);
       QByteArray U;
       QByteArray Ua;
@@ -90,6 +93,9 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 
       for(int j = 2; j <= m_iterations_count; j++)
 	{
+	  if(m_interrupt.load())
+	    break;
+
 	  QByteArray Ub(function(m_password, Ua));
 
 	  U = x_or(U, Ub);
@@ -99,12 +105,21 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
       T.append(U);
     }
 
+  if(m_interrupt.load())
+    return QByteArray();
+
   QByteArray bytes;
 
   for(int i = 0; i < T.size(); i++)
-    bytes.append(T.at(i));
+    if(m_interrupt.load())
+      break;
+    else
+      bytes.append(T.at(i));
 
-  return bytes;
+  if(m_interrupt.load())
+    return QByteArray();
+  else
+    return bytes;
 }
 
 QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
@@ -112,13 +127,17 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
   QByteArray c(qMin(a.length(), b.length()), 0);
 
   for(int i = 0; i < c.length(); i++)
-    c[i] = a.at(i) ^ b.at(i);
+    if(m_interrupt.load())
+      break;
+    else
+      c[i] = a.at(i) ^ b.at(i);
 
   return c;
 }
 
 void dooble_pbkdf2::interrupt(void)
 {
+  m_interrupt.store(1);
 }
 
 void dooble_pbkdf2::test1(void)
