@@ -38,7 +38,7 @@ dooble_pbkdf2::dooble_pbkdf2
 (const QByteArray &password,
  const QByteArray &salt,
  int iterations_count,
- int output_size)
+ int output_size):QObject()
 {
   m_iteration_count = qAbs(iterations_count);
   m_output_size = dooble_hmac::preferred_output_size_in_bits() *
@@ -142,7 +142,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 				<< m_salt;
 }
 
-void dooble_pbkdf2::interrupt(void)
+void dooble_pbkdf2::slot_interrupt(void)
 {
   m_interrupt.store(1);
 }

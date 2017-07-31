@@ -30,12 +30,15 @@
 
 #include <QAtomicInteger>
 #include <QByteArray>
+#include <QObject>
 
 typedef QByteArray dooble_hmac_function(const QByteArray &key,
 					const QByteArray &message);
 
-class dooble_pbkdf2
+class dooble_pbkdf2: public QObject
 {
+  Q_OBJECT
+
  public:
   dooble_pbkdf2(const QByteArray &password,
 		const QByteArray &salt,
@@ -45,7 +48,6 @@ class dooble_pbkdf2
   QByteArray salt(void) const;
   QList<QByteArray> pbkdf2(dooble_hmac_function *hmac_function) const;
   static void test1(void);
-  void interrupt(void);
 
  private:
   QAtomicInteger<bool> m_interrupt;
@@ -54,6 +56,9 @@ class dooble_pbkdf2
   int m_iteration_count;
   int m_output_size;
   QByteArray x_or(const QByteArray &a, const QByteArray &b) const;
+
+ private slots:
+  void slot_interrupt(void);
 };
 
 #endif

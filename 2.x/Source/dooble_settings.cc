@@ -358,6 +358,17 @@ void dooble_settings::slot_save_credentials(void)
       return;
     }
 
+  QByteArray salt(dooble_random::random_bytes(64));
+
+  if(salt.isEmpty())
+    {
+      QMessageBox::critical
+	(this,
+	 tr("Dooble: Error"),
+	 tr("Salt-generation failure! This is a curious problem."));
+      return;
+    }
+
   m_pbkdf2_dialog = new QProgressDialog(this);
   m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));
   m_pbkdf2_dialog->setLabelText(tr("Preparing credentials..."));
@@ -367,7 +378,6 @@ void dooble_settings::slot_save_credentials(void)
   m_pbkdf2_dialog->setWindowModality(Qt::ApplicationModal);
   m_pbkdf2_dialog->setWindowTitle(tr("Dooble: Preparing Credentials"));
 
-  QByteArray salt(dooble_random::random_bytes(64));
   QScopedPointer<dooble_pbkdf2> pbkdf2;
 
   pbkdf2.reset(new dooble_pbkdf2(password1.toUtf8(),
@@ -377,5 +387,9 @@ void dooble_settings::slot_save_credentials(void)
   m_pbkdf2_future = QtConcurrent::run
     (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::sha3_512_hmac);
   m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
+  connect(m_pbkdf2_dialog,
+	  SIGNAL(canceled(void)),
+	  pbkdf2.data(),
+	  SLOT(slot_interrupt(void)));
   m_pbkdf2_dialog->exec();
 }
