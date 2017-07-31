@@ -139,6 +139,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
   else
     return QList<QByteArray> () << bytes
 				<< QByteArray::number(m_iteration_count)
+				<< m_password
 				<< m_salt;
 }
 

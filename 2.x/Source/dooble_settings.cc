@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QCryptographicHash>
 #include <QDialogButtonBox>
 #include <QDir>
 #include <QMessageBox>
@@ -329,8 +330,12 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
 
-      set_setting("pbkdf2_iteration_count", list.value(1).toInt());
-      set_setting("pbkdf2_salt", list.value(2).toHex());
+      set_setting("authentication_iteration_count", list.value(1).toInt());
+      set_setting("authentication_salt", list.value(3).toHex());
+      set_setting
+	("authentication_salted_password",
+	 QCryptographicHash::hash(list.value(2) + list.value(3),
+				  QCryptographicHash::Sha3_512).toHex());
     }
 
   m_ui.password_1->clear();
