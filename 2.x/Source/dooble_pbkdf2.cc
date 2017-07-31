@@ -151,5 +151,5 @@ void dooble_pbkdf2::test1(void)
 		       4096,
 		       512);
 
-  qDebug() << pbkdf2.pbkdf2(&dooble_hmac::sha2_512hmac).toHex();
+  qDebug() << pbkdf2.pbkdf2(&dooble_hmac::sha2_512_hmac).toHex();
 }

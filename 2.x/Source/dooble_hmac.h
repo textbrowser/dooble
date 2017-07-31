@@ -33,13 +33,13 @@
 class dooble_hmac
 {
  public:
-  static QByteArray sha2_512hmac(const QByteArray &key,
-				 const QByteArray &message);
-  static QByteArray sha3_512hmac(const QByteArray &key,
-				 const QByteArray &message);
+  static QByteArray sha2_512_hmac(const QByteArray &key,
+				  const QByteArray &message);
+  static QByteArray sha3_512_hmac(const QByteArray &key,
+				  const QByteArray &message);
   static int preferred_output_size_in_bits(void);
-  static void sha3_512hmac_test1(void);
-  static void sha3_512hmac_test2(void);
+  static void sha3_512_hmac_test1(void);
+  static void sha3_512_hmac_test2(void);
 
  private:
   dooble_hmac(void);

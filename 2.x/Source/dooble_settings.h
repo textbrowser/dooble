@@ -29,6 +29,8 @@
 #define dooble_settings_h
 
 #include <QAtomicInteger>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QMainWindow>
 #include <QPointer>
 #include <QProgressDialog>
@@ -49,6 +51,8 @@ class dooble_settings: public QMainWindow
   void closeEvent(QCloseEvent *event);
 
  private:
+  QFuture<void> m_pbkdf2_future;
+  QFutureWatcher<void> m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
   static QAtomicInteger<quint64> s_db_id;

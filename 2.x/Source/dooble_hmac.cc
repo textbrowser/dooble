@@ -30,8 +30,8 @@
 
 #include "dooble_hmac.h"
 
-QByteArray dooble_hmac::sha2_512hmac(const QByteArray &key,
-				     const QByteArray &message)
+QByteArray dooble_hmac::sha2_512_hmac(const QByteArray &key,
+				      const QByteArray &message)
 {
   /*
   ** Block length is 1024 bits.
@@ -66,8 +66,8 @@ QByteArray dooble_hmac::sha2_512hmac(const QByteArray &key,
      QCryptographicHash::Sha512);
 }
 
-QByteArray dooble_hmac::sha3_512hmac(const QByteArray &key,
-				     const QByteArray &message)
+QByteArray dooble_hmac::sha3_512_hmac(const QByteArray &key,
+				      const QByteArray &message)
 {
   /*
   ** Block length is 576 bits.
@@ -111,7 +111,7 @@ int dooble_hmac::preferred_output_size_in_bits(void)
 ** http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/HMAC_SHA3-512.pdf
 */
 
-void dooble_hmac::sha3_512hmac_test1(void)
+void dooble_hmac::sha3_512_hmac_test1(void)
 {
   QByteArray key
     (QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
@@ -122,10 +122,10 @@ void dooble_hmac::sha3_512hmac_test1(void)
 					 "6f72206b65796c656e3c626c6f636b6c"
 					 "656e"));
 
-  qDebug() << sha3_512hmac(key, message).toHex();
+  qDebug() << sha3_512_hmac(key, message).toHex();
 }
 
-void dooble_hmac::sha3_512hmac_test2(void)
+void dooble_hmac::sha3_512_hmac_test2(void)
 {
   QByteArray key(QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
 				     "101112131415161718191a1b1c1d1e1f"
@@ -136,5 +136,5 @@ void dooble_hmac::sha3_512hmac_test2(void)
 					 "6f72206b65796c656e3d626c6f636b6c"
 					 "656e"));
 
-  qDebug() << sha3_512hmac(key, message).toHex();
+  qDebug() << sha3_512_hmac(key, message).toHex();
 }

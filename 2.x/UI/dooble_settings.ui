@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -427,7 +427,7 @@
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QSpinBox" name="iteration_count">
+                <widget class="QSpinBox" name="iterations">
                  <property name="minimum">
                   <number>15000</number>
                  </property>
@@ -473,7 +473,7 @@
                <item row="1" column="0" colspan="2">
                 <widget class="QLabel" name="label_11">
                  <property name="text">
-                  <string>Iteration Count</string>
+                  <string>Iterations</string>
                  </property>
                 </widget>
                </item>
@@ -692,7 +692,7 @@
   <tabstop>theme</tabstop>
   <tabstop>cipher</tabstop>
   <tabstop>hash</tabstop>
-  <tabstop>iteration_count</tabstop>
+  <tabstop>iterations</tabstop>
   <tabstop>key_derivation</tabstop>
   <tabstop>password_1</tabstop>
   <tabstop>password_2</tabstop>

@@ -29,10 +29,15 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QScopedPointer>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QWebEngineProfile>
+#include <QtConcurrent>
 
+#include "dooble_hmac.h"
+#include "dooble_pbkdf2.h"
+#include "dooble_random.h"
 #include "dooble_settings.h"
 
 QAtomicInteger<quint64> dooble_settings::s_db_id;
@@ -305,7 +310,7 @@ void dooble_settings::slot_page_button_clicked(void)
 
 void dooble_settings::slot_save_credentials(void)
 {
-  if(m_pbkdf2_dialog)
+  if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
     return;
 
   QString password1(m_ui.password_1->text());
@@ -333,6 +338,17 @@ void dooble_settings::slot_save_credentials(void)
   m_pbkdf2_dialog->setWindowIcon(windowIcon());
   m_pbkdf2_dialog->setWindowModality(Qt::ApplicationModal);
   m_pbkdf2_dialog->setWindowTitle(tr("Dooble: Preparing Credentials"));
+
+  QByteArray salt(dooble_random::random_bytes(64));
+  QScopedPointer<dooble_pbkdf2> pbkdf2;
+
+  pbkdf2.reset(new dooble_pbkdf2(password1.toUtf8(),
+				 salt,
+				 m_ui.iterations->value(),
+				 1024));
+  m_pbkdf2_future = QtConcurrent::run
+    (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::sha3_512_hmac);
+  m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
   m_pbkdf2_dialog->exec();
   m_pbkdf2_dialog->deleteLater();
 }
