@@ -299,7 +299,10 @@ void dooble_blocked_domains::slot_delete_rows(void)
 	    query.addBindValue(list.at(i).data().toString());
 
 	    if(query.exec())
-	      m_ui.table->removeRow(list.at(i).row());
+	      {
+		m_blocked_domains.remove(list.at(i).data().toString());
+		m_ui.table->removeRow(list.at(i).row());
+	      }
 	  }
       }
 
