@@ -315,6 +315,9 @@ void dooble_settings::slot_page_button_clicked(void)
 
 void dooble_settings::slot_pbkdf2_future_finished(void)
 {
+  m_ui.password_1->clear();
+  m_ui.password_2->clear();
+
   bool was_canceled = false;
 
   if(m_pbkdf2_dialog)
@@ -330,16 +333,25 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
 
-      set_setting("authentication_iteration_count", list.value(1).toInt());
-      set_setting("authentication_salt", list.value(3).toHex());
-      set_setting
-	("authentication_salted_password",
-	 QCryptographicHash::hash(list.value(2) + list.value(3),
-				  QCryptographicHash::Sha3_512).toHex());
+      if(list.size() == 4)
+	{
+	  set_setting("authentication_iteration_count", list.at(1).toInt());
+	  set_setting("authentication_salt", list.at(3).toHex());
+	  set_setting
+	    ("authentication_salted_password",
+	     QCryptographicHash::hash(list.at(2) + list.at(3),
+				      QCryptographicHash::Sha3_512).toHex());
+	  QMessageBox::information
+	    (this,
+	     tr("Dooble: Information"),
+	     tr("Your credentials have been prepared."));
+	}
+      else
+	QMessageBox::critical
+	  (this,
+	   tr("Dooble: Error"),
+	   tr("The PBKDF2 function failed. This is a curious problem."));
     }
-
-  m_ui.password_1->clear();
-  m_ui.password_2->clear();
 }
 
 void dooble_settings::slot_save_credentials(void)
