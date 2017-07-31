@@ -40,7 +40,7 @@ dooble_pbkdf2::dooble_pbkdf2
  int iterations_count,
  int output_size)
 {
-  m_iterations_count = qAbs(iterations_count);
+  m_iteration_count = qAbs(iterations_count);
   m_output_size = dooble_hmac::preferred_output_size_in_bits() *
     qCeil(qAbs(output_size) / dooble_hmac::preferred_output_size_in_bits());
   m_password = password;
@@ -59,14 +59,32 @@ dooble_pbkdf2::~dooble_pbkdf2()
   m_password.clear();
 }
 
-QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
+QByteArray dooble_pbkdf2::salt(void) const
+{
+  return m_salt;
+}
+
+QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
+{
+  QByteArray c(qMin(a.length(), b.length()), 0);
+
+  for(int i = 0; i < c.length(); i++)
+    if(m_interrupt.load())
+      break;
+    else
+      c[i] = a.at(i) ^ b.at(i);
+
+  return c;
+}
+
+QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 {
   if(function == 0 ||
-     m_iterations_count == 0 ||
+     m_iteration_count == 0 ||
      m_output_size == 0 ||
      m_password.isEmpty() ||
      m_salt.isEmpty())
-    return QByteArray();
+    return QList<QByteArray> ();
 
   /*
   ** Partial implementation of https://en.wikipedia.org/wiki/PBKDF2.
@@ -91,7 +109,7 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
       qToBigEndian(i, INT_32_BE_i.data());
       U = Ua = function(m_password, QByteArray(m_salt).append(INT_32_BE_i));
 
-      for(int j = 2; j <= m_iterations_count; j++)
+      for(int j = 2; j <= m_iteration_count; j++)
 	{
 	  if(m_interrupt.load())
 	    break;
@@ -106,7 +124,7 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
     }
 
   if(m_interrupt.load())
-    return QByteArray();
+    return QList<QByteArray> ();
 
   QByteArray bytes;
 
@@ -117,27 +135,11 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
       bytes.append(T.at(i));
 
   if(m_interrupt.load())
-    return QByteArray();
+    return QList<QByteArray> ();
   else
-    return bytes;
-}
-
-QByteArray dooble_pbkdf2::salt(void) const
-{
-  return m_salt;
-}
-
-QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
-{
-  QByteArray c(qMin(a.length(), b.length()), 0);
-
-  for(int i = 0; i < c.length(); i++)
-    if(m_interrupt.load())
-      break;
-    else
-      c[i] = a.at(i) ^ b.at(i);
-
-  return c;
+    return QList<QByteArray> () << bytes
+				<< QByteArray::number(m_iteration_count)
+				<< m_salt;
 }
 
 void dooble_pbkdf2::interrupt(void)
@@ -156,5 +158,5 @@ void dooble_pbkdf2::test1(void)
 		       4096,
 		       512);
 
-  qDebug() << pbkdf2.pbkdf2(&dooble_hmac::sha2_512_hmac).toHex();
+  qDebug() << pbkdf2.pbkdf2(&dooble_hmac::sha2_512_hmac).value(0).toHex();
 }

@@ -51,8 +51,8 @@ class dooble_settings: public QMainWindow
   void closeEvent(QCloseEvent *event);
 
  private:
-  QFuture<void> m_pbkdf2_future;
-  QFutureWatcher<void> m_pbkdf2_future_watcher;
+  QFuture<QList<QByteArray> > m_pbkdf2_future;
+  QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
   static QAtomicInteger<quint64> s_db_id;
@@ -68,6 +68,7 @@ class dooble_settings: public QMainWindow
   void slot_apply(void);
   void slot_clear_cache(void);
   void slot_page_button_clicked(void);
+  void slot_pbkdf2_future_finished(void);
   void slot_save_credentials(void);
 };
 

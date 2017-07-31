@@ -42,8 +42,8 @@ class dooble_pbkdf2
 		int iterations_count,
 		int output_size);
   ~dooble_pbkdf2();
-  QByteArray pbkdf2(dooble_hmac_function *hmac_function) const;
   QByteArray salt(void) const;
+  QList<QByteArray> pbkdf2(dooble_hmac_function *hmac_function) const;
   static void test1(void);
   void interrupt(void);
 
@@ -51,7 +51,7 @@ class dooble_pbkdf2
   QAtomicInteger<bool> m_interrupt;
   QByteArray m_password;
   QByteArray m_salt;
-  int m_iterations_count;
+  int m_iteration_count;
   int m_output_size;
   QByteArray x_or(const QByteArray &a, const QByteArray &b) const;
 };

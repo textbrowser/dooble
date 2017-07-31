@@ -47,6 +47,10 @@ QReadWriteLock dooble_settings::s_settings_mutex;
 dooble_settings::dooble_settings(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  connect(&m_pbkdf2_future_watcher,
+	  SIGNAL(finished(void)),
+	  this,
+	  SLOT(slot_pbkdf2_future_finished(void)));
   connect(m_ui.buttonBox->button(QDialogButtonBox::Apply),
 	  SIGNAL(clicked(void)),
 	  this,
@@ -308,6 +312,31 @@ void dooble_settings::slot_page_button_clicked(void)
   tool_button->setChecked(true);
 }
 
+void dooble_settings::slot_pbkdf2_future_finished(void)
+{
+  bool was_canceled = false;
+
+  if(m_pbkdf2_dialog)
+    {
+      if(m_pbkdf2_dialog->wasCanceled())
+	was_canceled = true;
+
+      m_pbkdf2_dialog->cancel();
+      m_pbkdf2_dialog->deleteLater();
+    }
+
+  if(!was_canceled)
+    {
+      QList<QByteArray> list(m_pbkdf2_future.result());
+
+      set_setting("pbkdf2_iteration_count", list.value(1).toInt());
+      set_setting("pbkdf2_salt", list.value(2).toHex());
+    }
+
+  m_ui.password_1->clear();
+  m_ui.password_2->clear();
+}
+
 void dooble_settings::slot_save_credentials(void)
 {
   if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
@@ -331,8 +360,7 @@ void dooble_settings::slot_save_credentials(void)
 
   m_pbkdf2_dialog = new QProgressDialog(this);
   m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));
-  m_pbkdf2_dialog->setLabelText
-    (tr("Preparing credentials..."));
+  m_pbkdf2_dialog->setLabelText(tr("Preparing credentials..."));
   m_pbkdf2_dialog->setMaximum(0);
   m_pbkdf2_dialog->setMinimum(0);
   m_pbkdf2_dialog->setWindowIcon(windowIcon());
@@ -350,5 +378,4 @@ void dooble_settings::slot_save_credentials(void)
     (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::sha3_512_hmac);
   m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
   m_pbkdf2_dialog->exec();
-  m_pbkdf2_dialog->deleteLater();
 }
