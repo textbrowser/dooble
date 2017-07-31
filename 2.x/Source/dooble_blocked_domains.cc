@@ -51,7 +51,7 @@ dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 
 bool dooble_blocked_domains::contains(const QString &domain) const
 {
-  return m_blocked_domains.contains(domain);
+  return m_blocked_domains.value(domain, 0);
 }
 
 void dooble_blocked_domains::closeEvent(QCloseEvent *event)
@@ -96,6 +96,10 @@ void dooble_blocked_domains::populate(void)
   QSqlDatabase::removeDatabase(database_name);
   m_ui.table->setRowCount(m_blocked_domains.size());
   m_ui.table->setSortingEnabled(false);
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
   QHashIterator<QString, char> it(m_blocked_domains);
   int i = 0;
@@ -109,7 +113,12 @@ void dooble_blocked_domains::populate(void)
       item->setFlags(Qt::ItemIsEnabled |
 		     Qt::ItemIsSelectable |
 		     Qt::ItemIsUserCheckable);
-      item->setCheckState(Qt::Checked);
+
+      if(it.value())
+	item->setCheckState(Qt::Checked);
+      else
+	item->setCheckState(Qt::Unchecked);
+
       m_ui.table->setItem(i, 0, item);
       item = new QTableWidgetItem(it.key());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -117,6 +126,10 @@ void dooble_blocked_domains::populate(void)
       i += 1;
     }
 
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
   m_ui.table->setSortingEnabled(true);
   m_ui.table->sortByColumn
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
@@ -205,6 +218,10 @@ void dooble_blocked_domains::slot_add(void)
   m_blocked_domains[text] = 1;
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
   for(int i = 0; i < 2; i++)
     {
@@ -226,6 +243,10 @@ void dooble_blocked_domains::slot_add(void)
       m_ui.table->setItem(m_ui.table->rowCount() - 1, i, item);
     }
 
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
   m_ui.table->setSortingEnabled(true);
   m_ui.table->sortByColumn
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
@@ -280,6 +301,52 @@ void dooble_blocked_domains::slot_delete_rows(void)
 	    if(query.exec())
 	      m_ui.table->removeRow(list.at(i).row());
 	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_blocked_domains::slot_item_changed(QTableWidgetItem *item)
+{
+  if(!item)
+    return;
+
+  if(item->column() != 0)
+    return;
+
+  bool checked = item->checkState() == Qt::Checked;
+
+  item = m_ui.table->item(item->row(), 1);
+
+  if(!item)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_blocked_domains[item->text()] = checked;
+
+  QString database_name("dooble_blocked_domains");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_blocked_domains.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.prepare("UPDATE dooble_blocked_domains "
+		      "SET blocked = ? "
+		      "WHERE domain_digest = ?");
+	query.addBindValue(checked);
+	query.addBindValue(item->text());
+	query.exec();
       }
 
     db.close();
