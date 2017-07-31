@@ -29,6 +29,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QSqlQuery>
+#include <QUrl>
 
 #include "dooble_blocked_domains.h"
 #include "dooble_settings.h"
@@ -182,9 +183,18 @@ void dooble_blocked_domains::showNormal(void)
 
 void dooble_blocked_domains::slot_add(void)
 {
-  QString text = QInputDialog::
-    getText(this, tr("Dooble: New Blocked Domain"), tr("Blocked Domain")).
-    trimmed();
+  QInputDialog dialog(this);
+
+  dialog.setLabelText(tr("Domain / URL"));
+  dialog.setTextEchoMode(QLineEdit::Normal);
+  dialog.setWindowIcon(windowIcon());
+  dialog.setWindowTitle(tr("Dooble: New Blocked Domain"));
+
+  if(dialog.exec() != QDialog::Accepted)
+    return;
+
+  QString text = QUrl::fromUserInput
+    (dialog.textValue().toLower().trimmed()).host();
 
   if(text.isEmpty())
     return;
@@ -228,10 +238,10 @@ void dooble_blocked_domains::slot_delete_rows(void)
 
   QModelIndexList list(m_ui.table->selectionModel()->selectedRows(1));
 
+  QApplication::restoreOverrideCursor();
+
   if(list.size() > 0)
     {
-      QApplication::restoreOverrideCursor();
-
       QMessageBox mb(this);
 
       mb.setIcon(QMessageBox::Question);
