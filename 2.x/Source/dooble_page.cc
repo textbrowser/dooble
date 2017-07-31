@@ -272,6 +272,8 @@ void dooble_page::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
+  m_ui.authenticate->setIcon
+    (QIcon(QString(":/%1/32/authenticate.png").arg(icon_set)));
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
   m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
@@ -381,15 +383,16 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
 {
 #ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
-    if(m_ui.backward == tool_button ||
+    if(m_ui.authenticate == tool_button ||
+       m_ui.find_match_case == tool_button)
+      {
+      }
+    else if(m_ui.backward == tool_button ||
        m_ui.forward == tool_button ||
        m_ui.menus == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
-    else if(m_ui.find_match_case == tool_button)
-      {
-      }
     else
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
