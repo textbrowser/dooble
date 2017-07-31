@@ -43,6 +43,7 @@ class dooble_pbkdf2
 		int output_size);
   ~dooble_pbkdf2();
   QByteArray pbkdf2(dooble_hmac_function *hmac_function) const;
+  QByteArray salt(void) const;
   static void test1(void);
   void interrupt(void);
 

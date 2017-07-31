@@ -122,6 +122,11 @@ QByteArray dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
     return bytes;
 }
 
+QByteArray dooble_pbkdf2::salt(void) const
+{
+  return m_salt;
+}
+
 QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
 {
   QByteArray c(qMin(a.length(), b.length()), 0);
