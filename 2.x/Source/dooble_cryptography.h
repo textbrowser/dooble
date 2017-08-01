@@ -28,13 +28,20 @@
 #ifndef dooble_cryptography_h
 #define dooble_cryptography_h
 
+#include <QByteArray>
+
 class dooble_cryptography
 {
  public:
   dooble_cryptography(void);
+  QByteArray hmac(const QByteArray &message) const;
   bool authenticated(void) const;
+  void setKeys(const QByteArray &authentication_key,
+	       const QByteArray &encryption_key);
 
  private:
+  QByteArray m_authentication_key;
+  QByteArray m_encryption_key;
   bool m_authenticated;
 };
 

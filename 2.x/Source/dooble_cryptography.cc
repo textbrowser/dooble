@@ -26,6 +26,7 @@
 */
 
 #include "dooble_cryptography.h"
+#include "dooble_hmac.h"
 #include "dooble_random.h"
 
 dooble_cryptography::dooble_cryptography(void)
@@ -33,7 +34,19 @@ dooble_cryptography::dooble_cryptography(void)
   m_authenticated = false;
 }
 
+QByteArray dooble_cryptography::hmac(const QByteArray &message) const
+{
+  return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
+}
+
 bool dooble_cryptography::authenticated(void) const
 {
   return m_authenticated;
+}
+
+void dooble_cryptography::setKeys(const QByteArray &authentication_key,
+				  const QByteArray &encryption_key)
+{
+  m_authentication_key = authentication_key;
+  m_encryption_key = encryption_key;
 }
