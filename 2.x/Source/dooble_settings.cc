@@ -97,6 +97,20 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["icon_set"] = "Snipicons";
 }
 
+bool dooble_settings::has_dooble_credentials(void)
+{
+  return !setting("authentication_iteration_count").isNull() &&
+    !setting("authentication_salt").isNull() &&
+    !setting("authentication_salted_password").isNull();
+}
+
+QVariant dooble_settings::setting(const QString &key)
+{
+  QReadLocker lock(&s_settings_mutex);
+
+  return s_settings.value(key);
+}
+
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
   if(setting("save_geometry").toBool())
@@ -186,13 +200,6 @@ void dooble_settings::restore(void)
       list.at(i)->setChecked(true);
 
   QApplication::restoreOverrideCursor();
-}
-
-QVariant dooble_settings::setting(const QString &key)
-{
-  QReadLocker lock(&s_settings_mutex);
-
-  return s_settings.value(key);
 }
 
 void dooble_settings::set_setting(const QString &key, const QVariant &value)
@@ -341,6 +348,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	    ("authentication_salted_password",
 	     QCryptographicHash::hash(list.at(2) + list.at(3),
 				      QCryptographicHash::Sha3_512).toHex());
+	  emit credentials_created();
 	  QMessageBox::information
 	    (this,
 	     tr("Dooble: Information"),

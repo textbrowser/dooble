@@ -30,6 +30,7 @@
 
 #include "dooble.h"
 #include "dooble_blocked_domains.h"
+#include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_page.h"
 #include "dooble_settings.h"
@@ -38,26 +39,14 @@
 #include "dooble_web_engine_view.h"
 
 dooble_blocked_domains *dooble::s_blocked_domains = 0;
+dooble_cryptography *dooble::s_cryptography = 0;
 dooble_settings *dooble::s_settings = 0;
 dooble_web_engine_url_request_interceptor *dooble::
 s_url_request_interceptor = 0;
 
 dooble::dooble(dooble_page *page):QMainWindow()
 {
-  if(!s_blocked_domains)
-    s_blocked_domains = new dooble_blocked_domains();
-
-  if(!s_settings)
-    s_settings = new dooble_settings();
-
-  if(!s_url_request_interceptor)
-    {
-      s_url_request_interceptor = new
-	dooble_web_engine_url_request_interceptor();
-      QWebEngineProfile::defaultProfile()->setRequestInterceptor
-	(s_url_request_interceptor);
-    }
-
+  initialize_static_members();
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -80,20 +69,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
-  if(!s_blocked_domains)
-    s_blocked_domains = new dooble_blocked_domains();
-
-  if(!s_settings)
-    s_settings = new dooble_settings();
-
-  if(!s_url_request_interceptor)
-    {
-      s_url_request_interceptor = new
-	dooble_web_engine_url_request_interceptor();
-      QWebEngineProfile::defaultProfile()->setRequestInterceptor
-	(s_url_request_interceptor);
-    }
-
+  initialize_static_members();
   m_ui.setupUi(this);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -139,6 +115,26 @@ void dooble::closeEvent(QCloseEvent *event)
     s_settings->close();
 
   QApplication::exit(0);
+}
+
+void dooble::initialize_static_members(void)
+{
+  if(!s_blocked_domains)
+    s_blocked_domains = new dooble_blocked_domains();
+
+  if(!s_cryptography)
+    s_cryptography = new dooble_cryptography();
+
+  if(!s_settings)
+    s_settings = new dooble_settings();
+
+  if(!s_url_request_interceptor)
+    {
+      s_url_request_interceptor = new
+	dooble_web_engine_url_request_interceptor();
+      QWebEngineProfile::defaultProfile()->setRequestInterceptor
+	(s_url_request_interceptor);
+    }
 }
 
 void dooble::new_page(dooble_page *page)

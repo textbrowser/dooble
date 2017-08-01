@@ -32,6 +32,7 @@
 #include <QWebEngineHistoryItem>
 #include <QWidgetAction>
 
+#include "dooble.h"
 #include "dooble_favicons.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
@@ -61,6 +62,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
     m_view = new dooble_web_engine_view(this);
 
   m_ui.frame->layout()->addWidget(m_view);
+  connect(dooble::s_settings,
+	  SIGNAL(credentials_created(void)),
+	  this,
+	  SLOT(slot_credentials_created(void)));
   connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -181,6 +186,7 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   prepare_shortcuts();
   prepare_standard_menus();
   prepare_tool_buttons_for_mac();
+  slot_credentials_created();
 }
 
 QIcon dooble_page::icon(void) const
@@ -428,6 +434,15 @@ void dooble_page::slot_authentication_required(const QUrl &url,
     }
   else
     m_view->stop();
+}
+
+void dooble_page::slot_credentials_created(void)
+{
+  m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
+
+  if(!m_ui.authenticate->isEnabled())
+    m_ui.authenticate->setToolTip
+      (tr("Please prepare Dooble's credentials via Settings -> Privacy."));
 }
 
 void dooble_page::slot_escape(void)

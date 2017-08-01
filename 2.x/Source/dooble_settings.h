@@ -45,6 +45,7 @@ class dooble_settings: public QMainWindow
  public:
   dooble_settings(void);
   static QVariant setting(const QString &key);
+  static bool has_dooble_credentials(void);
   static void set_setting(const QString &key, const QVariant &value);
 
  protected:
@@ -70,6 +71,9 @@ class dooble_settings: public QMainWindow
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);
   void slot_save_credentials(void);
+
+ signals:
+  void credentials_created(void);
 };
 
 #endif

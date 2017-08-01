@@ -30,4 +30,10 @@
 
 dooble_cryptography::dooble_cryptography(void)
 {
+  m_authenticated = false;
+}
+
+bool dooble_cryptography::authenticated(void) const
+{
+  return m_authenticated;
 }

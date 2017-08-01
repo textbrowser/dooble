@@ -32,6 +32,10 @@ class dooble_cryptography
 {
  public:
   dooble_cryptography(void);
+  bool authenticated(void) const;
+
+ private:
+  bool m_authenticated;
 };
 
 #endif
