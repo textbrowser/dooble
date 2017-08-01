@@ -33,6 +33,7 @@
 #include <QWebEngineSettings>
 #include <QWidget>
 
+#include "dooble_settings.h"
 #include "ui_dooble_page.h"
 
 class QWebEngineSettings;
@@ -73,6 +74,7 @@ class dooble_page: public QWidget
 
  private slots:
   void slot_about_to_show_standard_menus(void);
+  void slot_authenticate(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
   void slot_credentials_created(void);
@@ -114,6 +116,7 @@ class dooble_page: public QWidget
   void quit_dooble(void);
   void show_blocked_domains(void);
   void show_settings(void);
+  void show_settings_panel(dooble_settings::Panels panel);
   void titleChanged(const QString &title);
 };
 

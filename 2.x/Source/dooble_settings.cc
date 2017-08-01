@@ -267,6 +267,33 @@ void dooble_settings::showNormal(void)
   QMainWindow::showNormal();
 }
 
+void dooble_settings::show_panel(dooble_settings::Panels panel)
+{
+  switch(panel)
+    {
+    case DISPLAY_PANEL:
+      m_ui.display->click();
+      break;
+    case CACHE_PANEL:
+      m_ui.cache->click();
+      break;
+    case HISTORY_PANEL:
+      m_ui.history->click();
+      break;
+    case PRIVACY_PANEL:
+      m_ui.privacy->click();
+      break;
+    case WEB_PANEL:
+      m_ui.web->click();
+      break;
+    case WINDOWS_PANEL:
+      m_ui.windows->click();
+      break;
+    default:
+      m_ui.display->click();
+    }
+}
+
 void dooble_settings::slot_apply(void)
 {
   /*

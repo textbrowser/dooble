@@ -33,7 +33,6 @@
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_page.h"
-#include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
@@ -255,6 +254,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_settings_panel(dooble_settings::Panels)),
+	  this,
+	  SLOT(slot_show_settings_panel(dooble_settings::Panels)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)),
@@ -385,6 +390,12 @@ void dooble::slot_show_settings(void)
 
   s_settings->activateWindow();
   s_settings->raise();
+}
+
+void dooble::slot_show_settings_panel(dooble_settings::Panels panel)
+{
+  slot_show_settings();
+  s_settings->show_panel(panel);
 }
 
 void dooble::slot_tab_close_requested(int index)

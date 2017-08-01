@@ -33,10 +33,10 @@
 #include <QWidgetAction>
 
 #include "dooble.h"
+#include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
-#include "dooble_settings.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
 
@@ -74,6 +74,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(pull_down_clicked(void)),
 	  this,
 	  SLOT(slot_show_pull_down_menu(void)));
+  connect(m_ui.authenticate,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_authenticate(void)));
   connect(m_ui.backward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -413,6 +417,12 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 }
 
+void dooble_page::slot_authenticate(void)
+{
+  if(!dooble_settings::has_dooble_credentials())
+    emit show_settings_panel(dooble_settings::PRIVACY_PANEL);
+}
+
 void dooble_page::slot_authentication_required(const QUrl &url,
 					       QAuthenticator *authenticator)
 {
@@ -438,11 +448,21 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 
 void dooble_page::slot_credentials_created(void)
 {
-  m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
+  if(dooble::s_cryptography->authenticated())
+    {
+      m_ui.authenticate->setEnabled(false);
+      m_ui.authenticate->setToolTip
+	(tr("Dooble credentials have been authenticated."));
+      return;
+    }
 
-  if(!m_ui.authenticate->isEnabled())
+  if(dooble_settings::has_dooble_credentials())
+    m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
+  else
     m_ui.authenticate->setToolTip
-      (tr("Please prepare Dooble's credentials via Settings -> Privacy."));
+      (tr("Please prepare Dooble's credentials via Settings -> Privacy. "
+	  "Click this button to display the Settings window's "
+	  "Privacy panel."));
 }
 
 void dooble_page::slot_escape(void)

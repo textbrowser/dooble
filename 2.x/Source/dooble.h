@@ -30,12 +30,12 @@
 
 #include <QMainWindow>
 
+#include "dooble_settings.h"
 #include "ui_dooble.h"
 
 class dooble_blocked_domains;
 class dooble_cryptography;
 class dooble_page;
-class dooble_settings;
 class dooble_web_engine_url_request_interceptor;
 class dooble_web_engine_view;
 
@@ -78,6 +78,7 @@ class dooble: public QMainWindow
   void slot_quit_dooble(void);
   void slot_show_blocked_domains(void);
   void slot_show_settings(void);
+  void slot_show_settings_panel(dooble_settings::Panels panel);
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
   void slot_title_changed(const QString &title);

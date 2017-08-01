@@ -43,10 +43,21 @@ class dooble_settings: public QMainWindow
   Q_OBJECT
 
  public:
+  enum Panels
+  {
+    CACHE_PANEL = 0,
+    DISPLAY_PANEL,
+    HISTORY_PANEL,
+    PRIVACY_PANEL,
+    WEB_PANEL,
+    WINDOWS_PANEL
+  };
+
   dooble_settings(void);
   static QVariant setting(const QString &key);
   static bool has_dooble_credentials(void);
   static void set_setting(const QString &key, const QVariant &value);
+  void show_panel(dooble_settings::Panels panel);
 
  protected:
   void closeEvent(QCloseEvent *event);

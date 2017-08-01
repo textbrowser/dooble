@@ -134,9 +134,6 @@
      </item>
      <item>
       <widget class="QToolButton" name="authenticate">
-       <property name="toolTip">
-        <string>Authenticate Dooble Credentials</string>
-       </property>
        <property name="text">
         <string/>
        </property>
