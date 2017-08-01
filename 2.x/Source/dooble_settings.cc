@@ -97,6 +97,13 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["icon_set"] = "Snipicons";
 }
 
+QVariant dooble_settings::setting(const QString &key)
+{
+  QReadLocker lock(&s_settings_mutex);
+
+  return s_settings.value(key);
+}
+
 bool dooble_settings::has_dooble_credentials(void)
 {
   return !setting("authentication_iteration_count").isNull() &&
@@ -104,11 +111,53 @@ bool dooble_settings::has_dooble_credentials(void)
     !setting("authentication_salted_password").isNull();
 }
 
-QVariant dooble_settings::setting(const QString &key)
+bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 {
-  QReadLocker lock(&s_settings_mutex);
+  if(key.trimmed().isEmpty())
+    return false;
+  else if(value.isNull())
+    {
+      QWriteLocker lock(&s_settings_mutex);
 
-  return s_settings.value(key);
+      s_settings.remove(key);
+      return false;
+    }
+
+  QWriteLocker lock(&s_settings_mutex);
+
+  s_settings[key.trimmed()] = value;
+  lock.unlock();
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  bool ok = false;
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
+		   "key TEXT NOT NULL PRIMARY KEY, "
+		   "value TEXT NOT NULL)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
+	query.addBindValue(key.trimmed());
+	query.addBindValue(value.toString());
+	ok = query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  return ok;
 }
 
 void dooble_settings::closeEvent(QCloseEvent *event)
@@ -200,53 +249,6 @@ void dooble_settings::restore(void)
       list.at(i)->setChecked(true);
 
   QApplication::restoreOverrideCursor();
-}
-
-void dooble_settings::set_setting(const QString &key, const QVariant &value)
-{
-  if(key.trimmed().isEmpty())
-    return;
-  else if(value.isNull())
-    {
-      QWriteLocker lock(&s_settings_mutex);
-
-      s_settings.remove(key);
-      return;
-    }
-
-  QWriteLocker lock(&s_settings_mutex);
-
-  s_settings[key.trimmed()] = value;
-  lock.unlock();
-
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
-		   "key TEXT NOT NULL PRIMARY KEY, "
-		   "value TEXT NOT NULL)");
-	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
-	query.addBindValue(key.trimmed());
-	query.addBindValue(value.toString());
-	query.exec();
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_settings::show(void)
@@ -366,26 +368,35 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
   if(!was_canceled)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
+      bool ok = true;
 
       if(list.size() == 4)
 	{
-	  set_setting("authentication_iteration_count", list.at(1).toInt());
-	  set_setting("authentication_salt", list.at(3).toHex());
-	  set_setting
+	  ok &= set_setting
+	    ("authentication_iteration_count", list.at(1).toInt());
+	  ok &= set_setting("authentication_salt", list.at(3).toHex());
+	  ok &= set_setting
 	    ("authentication_salted_password",
 	     QCryptographicHash::hash(list.at(2) + list.at(3),
 				      QCryptographicHash::Sha3_512).toHex());
-	  emit credentials_created();
-	  QMessageBox::information
-	    (this,
-	     tr("Dooble: Information"),
-	     tr("Your credentials have been prepared."));
+
+	  if(ok)
+	    emit credentials_created();
 	}
+      else
+	ok = false;
+
+      if(ok)
+	QMessageBox::information
+	  (this,
+	   tr("Dooble: Information"),
+	   tr("Your credentials have been prepared."));
       else
 	QMessageBox::critical
 	  (this,
 	   tr("Dooble: Error"),
-	   tr("The PBKDF2 function failed. This is a curious problem."));
+	   tr("Credentials could not be generated. "
+	      "This is a curious problem."));
     }
 }
 
