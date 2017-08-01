@@ -50,6 +50,7 @@ class dooble_tab_widget: public QTabWidget
   void slot_load_started(void);
 
  signals:
+  void new_tab(void);
   void open_tab_as_new_window(int index);
 };
 

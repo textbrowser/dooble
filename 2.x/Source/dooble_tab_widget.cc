@@ -36,6 +36,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
   m_tab_bar = new dooble_tab_bar(this);
   connect(m_tab_bar,
+	  SIGNAL(new_tab(void)),
+	  this,
+	  SIGNAL(new_tab(void)));
+  connect(m_tab_bar,
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
 	  SIGNAL(open_tab_as_new_window(int)));

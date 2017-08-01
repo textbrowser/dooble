@@ -48,6 +48,7 @@ class dooble_tab_bar: public QTabBar
   void slot_web_plugins(void);
 
  signals:
+  void new_tab(void);
   void open_tab_as_new_window(int index);
 };
 

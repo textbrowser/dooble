@@ -119,7 +119,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   QAction *action = 0;
   QMenu menu(this);
 
-  action = menu.addAction(tr("Close &Tab"),
+  action = menu.addAction(tr("Close T&ab"),
 			  this,
 			  SLOT(slot_close_tab(void)));
   action->setEnabled(count() > 1);
@@ -135,6 +135,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  SLOT(slot_open_tab_as_new_window(void)));
   action->setEnabled(count() > 1);
   action->setProperty("point", point);
+  menu.addAction(tr("New &Tab"),
+		 this,
+		 SIGNAL(new_tab(void)));
   menu.addSeparator();
   action = menu.addAction(tr("Web &Plugins"),
 			  this,

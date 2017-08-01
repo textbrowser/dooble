@@ -64,6 +64,10 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  this,
 	  SLOT(slot_tab_index_changed(int)));
   connect(m_ui.tab,
+	  SIGNAL(new_tab(void)),
+	  this,
+	  SLOT(slot_new_tab(void)));
+  connect(m_ui.tab,
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
 	  SLOT(slot_open_tab_as_new_window(int)));
@@ -95,6 +99,10 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(currentChanged(int)),
 	  this,
 	  SLOT(slot_tab_index_changed(int)));
+  connect(m_ui.tab,
+	  SIGNAL(new_tab(void)),
+	  this,
+	  SLOT(slot_new_tab(void)));
   connect(m_ui.tab,
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
@@ -336,6 +344,9 @@ void dooble::slot_new_window(void)
 
 void dooble::slot_open_tab_as_new_window(int index)
 {
+  if(m_ui.tab->count() == 1)
+    return;
+
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(!page)
