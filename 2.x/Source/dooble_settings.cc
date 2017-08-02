@@ -36,6 +36,8 @@
 #include <QWebEngineProfile>
 #include <QtConcurrent>
 
+#include "dooble.h"
+#include "dooble_cryptography.h"
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
@@ -381,7 +383,12 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 				      QCryptographicHash::Sha3_512).toHex());
 
 	  if(ok)
-	    emit credentials_created();
+	    {
+	      dooble::s_cryptography->setAuthenticated(true);
+	      dooble::s_cryptography->setKeys
+		(list.value(0).mid(0, 64), list.value(0).mid(64, 32));
+	      emit credentials_created();
+	    }
 	}
       else
 	ok = false;
@@ -410,12 +417,15 @@ void dooble_settings::slot_save_credentials(void)
 
   if(password1.isEmpty())
     {
+      m_ui.password_1->setFocus();
       QMessageBox::critical
 	(this, tr("Dooble: User Error"), tr("Empty password(s)."));
       return;
     }
   else if(password1 != password2)
     {
+      m_ui.password_1->selectAll();
+      m_ui.password_1->setFocus();
       QMessageBox::critical
 	(this, tr("Dooble: User Error"), tr("Passwords are not equal."));
       return;
@@ -425,6 +435,8 @@ void dooble_settings::slot_save_credentials(void)
 
   if(salt.isEmpty())
     {
+      m_ui.password_1->selectAll();
+      m_ui.password_1->setFocus();
       QMessageBox::critical
 	(this,
 	 tr("Dooble: Error"),

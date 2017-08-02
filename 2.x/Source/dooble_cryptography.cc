@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QCryptographicHash>
 #include <QString>
 
 #include "dooble_cryptography.h"
@@ -51,6 +52,38 @@ QByteArray dooble_cryptography::hmac(const QString &message) const
 bool dooble_cryptography::authenticated(void) const
 {
   return m_authenticated;
+}
+
+bool dooble_cryptography::memcmp(const QByteArray &a, const QByteArray &b)
+{
+  QByteArray c1;
+  QByteArray c2;
+  int length = qMax(a.length(), b.length());
+  int rc = 0;
+
+  c1 = a.leftJustified(length, 0);
+  c2 = b.leftJustified(length, 0);
+
+  for(int i = 0; i < length; i++)
+    rc |= c1[i] ^ c2[i];
+
+  return rc == 0;
+}
+
+void dooble_cryptography::authenticate(const QByteArray &salt,
+				       const QByteArray &salted_password,
+				       const QString &password)
+{
+  QByteArray hash
+    (QCryptographicHash::hash(password.toUtf8() + salt,
+			      QCryptographicHash::Sha3_512));
+
+  m_authenticated = memcmp(hash, salted_password);
+}
+
+void dooble_cryptography::setAuthenticated(bool state)
+{
+  m_authenticated = state;
 }
 
 void dooble_cryptography::setKeys(const QByteArray &authentication_key,

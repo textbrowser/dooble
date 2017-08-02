@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QtGlobal>
+
 #ifdef Q_OS_WIN
 #else
 #include <QFile>
@@ -52,11 +54,6 @@ QByteArray dooble_random::random_bytes(int length)
 #else
   QFile file("/dev/urandom");
 #endif
-#elif defined(Q_OS_WIN)
-  /*
-  ** Windows (https://msdn.microsoft.com/en-us/library/windows/desktop/aa382048(v=vs.85).aspx).
-  */
-#else
   if(file.open(QIODevice::ReadOnly))
     {
       bytes.resize(length);

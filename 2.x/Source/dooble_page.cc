@@ -26,6 +26,7 @@
 */
 
 #include <QAuthenticator>
+#include <QInputDialog>
 #include <QMenu>
 #include <QShortcut>
 #include <QStackedWidget>
@@ -421,6 +422,40 @@ void dooble_page::slot_authenticate(void)
 {
   if(!dooble_settings::has_dooble_credentials())
     emit show_settings_panel(dooble_settings::PRIVACY_PANEL);
+  else
+    {
+      QInputDialog dialog(this);
+
+      dialog.setLabelText(tr("Dooble Password"));
+      dialog.setTextEchoMode(QLineEdit::Password);
+      dialog.setWindowIcon(windowIcon());
+      dialog.setWindowTitle(tr("Dooble: Password"));
+
+      if(dialog.exec() != QDialog::Accepted)
+	return;
+
+      QString text = dialog.textValue();
+
+      if(text.isEmpty())
+	return;
+
+      QByteArray salt
+	(QByteArray::fromHex(dooble_settings::setting("authentication_salt").
+			     toByteArray()));
+      QByteArray salted_password
+	(QByteArray::fromHex(dooble_settings::
+			     setting("authentication_salted_password").
+			     toByteArray()));
+
+      dooble::s_cryptography->authenticate(salt, salted_password, text);
+
+      if(dooble::s_cryptography->authenticated())
+	{
+	  m_ui.authenticate->setEnabled(false);
+	  m_ui.authenticate->setToolTip
+	    (tr("Dooble credentials have been authenticated."));
+	}
+    }
 }
 
 void dooble_page::slot_authentication_required(const QUrl &url,
