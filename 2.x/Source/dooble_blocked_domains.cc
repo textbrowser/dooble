@@ -31,7 +31,9 @@
 #include <QSqlQuery>
 #include <QUrl>
 
+#include "dooble.h"
 #include "dooble_blocked_domains.h"
+#include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
 dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
@@ -163,8 +165,18 @@ void dooble_blocked_domains::save_blocked_domain(const QString &domain,
 	   "(blocked, domain, domain_digest) VALUES (?, ?, ?)");
 	query.addBindValue(state);
 	query.addBindValue(domain);
-	query.addBindValue(domain);
-	query.exec();
+
+	QByteArray hmac;
+	bool ok = true;
+
+	hmac = dooble::s_cryptography->hmac(domain);
+	ok &= !hmac.isEmpty();
+
+	if(ok)
+	  query.addBindValue(hmac.toBase64());
+
+	if(ok)
+	  query.exec();
       }
 
     db.close();
@@ -296,7 +308,9 @@ void dooble_blocked_domains::slot_delete_rows(void)
 	  {
 	    query.prepare("DELETE FROM dooble_blocked_domains "
 			  "WHERE domain_digest = ?");
-	    query.addBindValue(list.at(i).data().toString());
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(list.at(i).data().toString()).
+	       toBase64());
 
 	    if(query.exec())
 	      {
@@ -348,7 +362,8 @@ void dooble_blocked_domains::slot_item_changed(QTableWidgetItem *item)
 		      "SET blocked = ? "
 		      "WHERE domain_digest = ?");
 	query.addBindValue(checked);
-	query.addBindValue(item->text());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(item->text()).toBase64());
 	query.exec();
       }
 
