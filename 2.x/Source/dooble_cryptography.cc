@@ -34,6 +34,8 @@
 dooble_cryptography::dooble_cryptography(void)
 {
   m_authenticated = false;
+  m_authentication_key = dooble_random::random_bytes(64);
+  m_encryption_key = dooble_random::random_bytes(32);
 }
 
 QByteArray dooble_cryptography::hmac(const QByteArray &message) const
