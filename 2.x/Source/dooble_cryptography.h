@@ -35,6 +35,7 @@ class dooble_cryptography
  public:
   dooble_cryptography(void);
   QByteArray hmac(const QByteArray &message) const;
+  QByteArray hmac(const QString &message) const;
   bool authenticated(void) const;
   void setKeys(const QByteArray &authentication_key,
 	       const QByteArray &encryption_key);

@@ -30,6 +30,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
+#include "dooble.h"
+#include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_settings.h"
 
@@ -55,9 +57,12 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	query.setForwardOnly(true);
 	query.prepare("SELECT favicon FROM dooble_favicons WHERE "
 		      "url_digest IN (?, ?) OR url_host_digest = ?");
-	query.addBindValue(url.toString());
-	query.addBindValue(url.toString() + "/");
-	query.addBindValue(url.host());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.toString()).toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.toString() + "/").toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.host()));
 
 	if(query.exec() && query.next())
 	  if(!query.isNull(0))
@@ -135,9 +140,24 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 
 	buffer.close();
 	query.addBindValue(bytes);
-	query.addBindValue(url.toString().trimmed());
-	query.addBindValue(url.host().trimmed());
-	query.exec();
+
+	QByteArray hmac;
+	bool ok = true;
+
+	hmac = dooble::s_cryptography->hmac(url.toString().trimmed());
+	ok &= !hmac.isEmpty();
+
+	if(ok)
+	  query.addBindValue(hmac.toBase64());
+
+	hmac = dooble::s_cryptography->hmac(url.host().trimmed());
+	ok &= !hmac.isEmpty();
+
+	if(ok)
+	  query.addBindValue(hmac.toBase64());
+
+	if(ok)
+	  query.exec();
       }
 
     db.close();

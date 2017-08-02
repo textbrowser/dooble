@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QString>
+
 #include "dooble_cryptography.h"
 #include "dooble_hmac.h"
 #include "dooble_random.h"
@@ -37,6 +39,11 @@ dooble_cryptography::dooble_cryptography(void)
 QByteArray dooble_cryptography::hmac(const QByteArray &message) const
 {
   return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
+}
+
+QByteArray dooble_cryptography::hmac(const QString &message) const
+{
+  return dooble_hmac::sha3_512_hmac(m_authentication_key, message.toUtf8());
 }
 
 bool dooble_cryptography::authenticated(void) const
