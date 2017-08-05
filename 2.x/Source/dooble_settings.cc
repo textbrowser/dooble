@@ -167,6 +167,8 @@ void dooble_settings::closeEvent(QCloseEvent *event)
   if(setting("save_geometry").toBool())
     set_setting("settings_geometry", saveGeometry().toBase64());
 
+  m_ui.password_1->clear();
+  m_ui.password_2->clear();
   QMainWindow::closeEvent(event);
 }
 
@@ -431,6 +433,21 @@ void dooble_settings::slot_save_credentials(void)
       QMessageBox::critical
 	(this, tr("Dooble: User Error"), tr("Passwords are not equal."));
       return;
+    }
+
+  if(has_dooble_credentials())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to prepare new credentials?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
     }
 
   QByteArray salt(dooble_random::random_bytes(64));
