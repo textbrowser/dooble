@@ -41,6 +41,9 @@ class dooble_cryptography
   void authenticate(const QByteArray &salt,
 		    const QByteArray &salted_password,
 		    const QString &password);
+  void prepare_keys(const QByteArray &password,
+		    const QByteArray &salt,
+		    int iteration_count);
   void setAuthenticated(const bool state);
   void setKeys(const QByteArray &authentication_key,
 	       const QByteArray &encryption_key);

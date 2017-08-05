@@ -30,6 +30,7 @@
 
 #include "dooble_cryptography.h"
 #include "dooble_hmac.h"
+#include "dooble_pbkdf2.h"
 #include "dooble_random.h"
 
 dooble_cryptography::dooble_cryptography(void)
@@ -79,6 +80,22 @@ void dooble_cryptography::authenticate(const QByteArray &salt,
 			      QCryptographicHash::Sha3_512));
 
   m_authenticated = memcmp(hash, salted_password);
+}
+
+void dooble_cryptography::prepare_keys(const QByteArray &password,
+				       const QByteArray &salt,
+				       int iteration_count)
+{
+  QList<QByteArray> list;
+  dooble_pbkdf2 pbkdf2(password, salt, iteration_count, 1024);
+
+  list = pbkdf2.pbkdf2(dooble_hmac::sha3_512_hmac);
+
+  if(list.size() == 4)
+    {
+      m_authentication_key = list.at(0).mid(0, 64);
+      m_encryption_key = list.at(0).mid(64, 32);
+    }
 }
 
 void dooble_cryptography::setAuthenticated(bool state)

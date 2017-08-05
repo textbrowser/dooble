@@ -446,11 +446,17 @@ void dooble_page::slot_authenticate(void)
 	(QByteArray::fromHex(dooble_settings::
 			     setting("authentication_salted_password").
 			     toByteArray()));
+      int iteration_count = dooble_settings::setting
+	("authentication_iteration_count").toInt();
 
       dooble::s_cryptography->authenticate(salt, salted_password, text);
 
       if(dooble::s_cryptography->authenticated())
 	{
+	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	  dooble::s_cryptography->prepare_keys
+	    (text.toUtf8(), salt, iteration_count);
+	  QApplication::restoreOverrideCursor();
 	  m_ui.authenticate->setEnabled(false);
 	  m_ui.authenticate->setToolTip
 	    (tr("Dooble credentials have been authenticated."));

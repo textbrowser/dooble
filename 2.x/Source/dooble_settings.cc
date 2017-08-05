@@ -390,7 +390,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	    {
 	      dooble::s_cryptography->setAuthenticated(true);
 	      dooble::s_cryptography->setKeys
-		(list.value(0).mid(0, 64), list.value(0).mid(64, 32));
+		(list.at(0).mid(0, 64), list.at(0).mid(64, 32));
 	      emit credentials_created();
 	    }
 	}
