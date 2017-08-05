@@ -28,6 +28,7 @@
 #include <QAuthenticator>
 #include <QInputDialog>
 #include <QMenu>
+#include <QMessageBox>
 #include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
@@ -461,6 +462,11 @@ void dooble_page::slot_authenticate(void)
 	  m_ui.authenticate->setToolTip
 	    (tr("Dooble credentials have been authenticated."));
 	}
+      else
+	QMessageBox::critical
+	  (this,
+	   tr("Dooble: Error"),
+	   tr("Unable to authenticate the provided password."));
     }
 }
 
