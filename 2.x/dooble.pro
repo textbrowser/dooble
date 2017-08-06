@@ -83,6 +83,7 @@ RESOURCES       += Icons\\icons.qrc
 
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
+                  Source\\dooble_aes256.cc \
                   Source\\dooble_blocked_domains.cc \
                   Source\\dooble_cryptography.cc \
                   Source\\dooble_favicons.cc \
