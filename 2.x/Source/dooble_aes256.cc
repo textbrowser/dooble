@@ -180,6 +180,20 @@ void dooble_aes256::key_expansion(void)
     }
 }
 
+void dooble_aes256::shift_rows(void)
+{
+  uint8_t temp[4];
+
+  for(size_t i = 1; i < 4; i++)
+    {
+      for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+	temp[j] = m_state[i][(i + j) % static_cast<size_t> (m_Nb)];
+
+      for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+	m_state[i][j] = temp[j];
+    }
+}
+
 void dooble_aes256::sub_bytes()
 {
   for(size_t i = 0; i < 4; i++)

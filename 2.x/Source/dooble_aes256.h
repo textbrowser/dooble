@@ -47,6 +47,7 @@ class dooble_aes256
   uint8_t m_state[4][4]; // 4 rows, Nb columns.
   void add_round_key(size_t c);
   void key_expansion(void);
+  void shift_rows(void);
   void sub_bytes();
 };
 
