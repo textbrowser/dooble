@@ -114,7 +114,6 @@ dooble_aes256::dooble_aes256(const QByteArray &key)
   m_Nr = 14;
   m_key = key;
   m_key_length = 32;
-  m_round_key = new uint8_t[4 * m_Nb * (m_Nr + 1)];
 
   if(m_key.length() < m_key_length)
     m_key.append(m_key_length - m_key.length(), 0);
@@ -127,7 +126,13 @@ dooble_aes256::~dooble_aes256()
   QByteArray zeros(m_key_length, 0);
 
   m_key.replace(0, m_key.length(), zeros);
-  delete []m_round_key;
+}
+
+void dooble_aes256::add_round_key(size_t c)
+{
+  for(size_t i = 0; i < 4; i++)
+    for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+      m_state[i][j] ^= m_round_key[c * m_Nb + j][i];
 }
 
 void dooble_aes256::key_expansion(void)
@@ -137,7 +142,7 @@ void dooble_aes256::key_expansion(void)
   while(i < static_cast<size_t> (m_Nk))
     {
       for(size_t j = 0; j < 4; j++)
-	m_round_key[4 * i + j] = static_cast<uint8_t>
+	m_round_key[i][j] = static_cast<uint8_t>
 	  (m_key[static_cast<int> (4 * i + j)]);
 
       i += 1;
@@ -148,7 +153,7 @@ void dooble_aes256::key_expansion(void)
   while(i < static_cast<size_t> (m_Nb * (m_Nr + 1)))
     {
       for(size_t j = 0; j < 4; j++)
-	temp[j] = m_round_key[4 * (i - 1) + j];
+	temp[j] = m_round_key[i - 1][j];
 
       if(i % static_cast<size_t> (m_Nk) == 0)
 	{
@@ -160,18 +165,24 @@ void dooble_aes256::key_expansion(void)
 	  temp[3] = t;
 
 	  for(size_t j = 0; j < 4; j++)
-	    temp[j] = s_sbox[static_cast<size_t> (temp[j])];
-
-	  temp[0] ^= s_rcon[i / static_cast<size_t> (m_Nk)];
+	    temp[j] = s_sbox[static_cast<size_t> (temp[j])] ^
+	      s_rcon[i / static_cast<size_t> (m_Nk)];
 	}
       else if(i % static_cast<size_t> (m_Nk) == 4)
 	for(size_t j = 0; j < 4; j++)
 	  temp[j] = s_sbox[static_cast<size_t> (temp[j])];
 
       for(size_t j = 0; j < 4; j++)
-	m_round_key[4 * i + j] =
-	  m_round_key[4 * (i - static_cast<size_t> (m_Nk)) + j] ^ temp[j];
+	m_round_key[i][j] =
+	  m_round_key[i - static_cast<size_t> (m_Nk)][j] ^ temp[j];
 
       i += 1;
     }
+}
+
+void dooble_aes256::sub_bytes()
+{
+  for(size_t i = 0; i < 4; i++)
+    for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+      m_state[i][j] = s_sbox[m_state[i][j]];
 }

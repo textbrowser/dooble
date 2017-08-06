@@ -43,8 +43,11 @@ class dooble_aes256
   int m_Nk;
   int m_Nr;
   int m_key_length;
-  uint8_t *m_round_key;
+  uint8_t m_round_key[60][4];
+  uint8_t m_state[4][4]; // 4 rows, Nb columns.
+  void add_round_key(size_t c);
   void key_expansion(void);
+  void sub_bytes();
 };
 
 #endif
