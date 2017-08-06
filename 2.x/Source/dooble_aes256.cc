@@ -106,6 +106,11 @@ dooble_aes256::~dooble_aes256()
   m_key.replace(0, m_key.length(), zeros);
 }
 
+uint8_t dooble_aes256::xtime(uint8_t x)
+{
+  return (x << 1) ^ (((x >> 7) & 1) * 0x1b);
+}
+
 void dooble_aes256::add_round_key(size_t c)
 {
   for(size_t i = 0; i < 4; i++)
