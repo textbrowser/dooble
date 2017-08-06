@@ -36,6 +36,7 @@ class dooble_aes256
  public:
   dooble_aes256(const QByteArray &key);
   ~dooble_aes256();
+  static void test1_key_expansion(void);
 
  private:
   QByteArray m_key;
