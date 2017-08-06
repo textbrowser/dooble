@@ -39,10 +39,10 @@ class dooble_aes256
 
  private:
   QByteArray m_key;
-  int m_Nb;
-  int m_Nk;
-  int m_Nr;
   int m_key_length;
+  size_t m_Nb;
+  size_t m_Nk;
+  size_t m_Nr;
   uint8_t m_round_key[60][4];
   uint8_t m_state[4][4]; // 4 rows, Nb columns.
   void add_round_key(size_t c);

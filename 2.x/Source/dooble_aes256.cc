@@ -131,7 +131,7 @@ dooble_aes256::~dooble_aes256()
 void dooble_aes256::add_round_key(size_t c)
 {
   for(size_t i = 0; i < 4; i++)
-    for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+    for(size_t j = 0; j < m_Nb; j++)
       m_state[i][j] ^= m_round_key[c * m_Nb + j][i];
 }
 
@@ -139,7 +139,7 @@ void dooble_aes256::key_expansion(void)
 {
   size_t i = 0;
 
-  while(i < static_cast<size_t> (m_Nk))
+  while(i < m_Nk)
     {
       for(size_t j = 0; j < 4; j++)
 	m_round_key[i][j] = static_cast<uint8_t>
@@ -150,12 +150,12 @@ void dooble_aes256::key_expansion(void)
 
   uint8_t temp[4];
 
-  while(i < static_cast<size_t> (m_Nb * (m_Nr + 1)))
+  while(i < m_Nb * (m_Nr + 1))
     {
       for(size_t j = 0; j < 4; j++)
 	temp[j] = m_round_key[i - 1][j];
 
-      if(i % static_cast<size_t> (m_Nk) == 0)
+      if(i % m_Nk == 0)
 	{
 	  uint8_t t = temp[0];
 
@@ -165,16 +165,15 @@ void dooble_aes256::key_expansion(void)
 	  temp[3] = t;
 
 	  for(size_t j = 0; j < 4; j++)
-	    temp[j] = s_sbox[static_cast<size_t> (temp[j])] ^
-	      s_rcon[i / static_cast<size_t> (m_Nk)];
+	    temp[j] = s_sbox[static_cast<size_t> (temp[j])] ^ s_rcon[i / m_Nk];
 	}
-      else if(i % static_cast<size_t> (m_Nk) == 4)
+      else if(i % m_Nk == 4)
 	for(size_t j = 0; j < 4; j++)
 	  temp[j] = s_sbox[static_cast<size_t> (temp[j])];
 
       for(size_t j = 0; j < 4; j++)
 	m_round_key[i][j] =
-	  m_round_key[i - static_cast<size_t> (m_Nk)][j] ^ temp[j];
+	  m_round_key[i - m_Nk][j] ^ temp[j];
 
       i += 1;
     }
@@ -186,10 +185,10 @@ void dooble_aes256::shift_rows(void)
 
   for(size_t i = 1; i < 4; i++)
     {
-      for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
-	temp[j] = m_state[i][(i + j) % static_cast<size_t> (m_Nb)];
+      for(size_t j = 0; j < m_Nb; j++)
+	temp[j] = m_state[i][(i + j) % m_Nb];
 
-      for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+      for(size_t j = 0; j < m_Nb; j++)
 	m_state[i][j] = temp[j];
     }
 }
@@ -197,6 +196,6 @@ void dooble_aes256::shift_rows(void)
 void dooble_aes256::sub_bytes()
 {
   for(size_t i = 0; i < 4; i++)
-    for(size_t j = 0; j < static_cast<size_t> (m_Nb); j++)
+    for(size_t j = 0; j < m_Nb; j++)
       m_state[i][j] = s_sbox[m_state[i][j]];
 }
