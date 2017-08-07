@@ -106,7 +106,41 @@ dooble_aes256::~dooble_aes256()
   m_key.replace(0, m_key.length(), zeros);
 }
 
-uint8_t dooble_aes256::xtime(uint8_t x)
+QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
+{
+  QByteArray b(block);
+
+  if(b.length() < 16)
+    b.append(16 - b.length(), 0);
+  else
+    b.resize(16);
+
+  for(size_t i = 0; i < 4; i++)
+    for(size_t j = 0; j < m_Nb; j++)
+      m_state[i][j] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * j)]);
+
+  add_round_key(0);
+
+  for(size_t i = 1; i < m_Nr; i++)
+    {
+      sub_bytes();
+      shift_rows();
+      mix_columns();
+      add_round_key(i);
+    }
+
+  sub_bytes();
+  shift_rows();
+  add_round_key(m_Nr);
+
+  for(size_t i = 0; i < 4; i++)
+    for(size_t j = 0; j < m_Nb; j++)
+      b[static_cast<int> (i + 4 * j)] = static_cast<char> (m_state[i][j]);
+
+  return b;
+}
+
+uint8_t dooble_aes256::xtime(uint8_t x) const
 {
   return (x << 1) ^ (((x >> 7) & 1) * 0x1b);
 }
@@ -163,6 +197,29 @@ void dooble_aes256::key_expansion(void)
     }
 }
 
+void dooble_aes256::mix_columns(void)
+{
+  uint8_t a[4];
+  uint8_t b[4];
+
+  memset(a, 0, sizeof(a));
+  memset(b, 0, sizeof(b));
+
+  for(size_t i = 0; i < 4; i++)
+    {
+      for(size_t j = 0; j < m_Nb; j++)
+	{
+	  a[j] = m_state[j][i];
+	  b[j] = xtime(m_state[j][i]);
+	}
+
+      m_state[0][i] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
+      m_state[1][i] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
+      m_state[2][i] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
+      m_state[3][i] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
+    }
+}
+
 void dooble_aes256::shift_rows(void)
 {
   uint8_t temp[4];
@@ -182,6 +239,19 @@ void dooble_aes256::sub_bytes()
   for(size_t i = 0; i < 4; i++)
     for(size_t j = 0; j < m_Nb; j++)
       m_state[i][j] = s_sbox[m_state[i][j]];
+}
+
+void dooble_aes256::test1_encrypt_block(void)
+{
+  QByteArray key
+    (QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
+			 "101112131415161718191a1b1c1d1e1f"));
+  dooble_aes256 aes256(key);
+
+  aes256.key_expansion();
+  std::cout << aes256.encrypt_block
+    (QByteArray::fromHex("00112233445566778899aabbccddeeff")).toHex().
+    toStdString() << std::endl;
 }
 
 void dooble_aes256::test1_key_expansion(void)
