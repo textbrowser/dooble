@@ -395,13 +395,12 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
 {
 #ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
-    if(m_ui.authenticate == tool_button ||
-       m_ui.find_match_case == tool_button)
+    if(m_ui.find_match_case == tool_button)
       {
       }
     else if(m_ui.backward == tool_button ||
-       m_ui.forward == tool_button ||
-       m_ui.menus == tool_button)
+	    m_ui.forward == tool_button ||
+	    m_ui.menus == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
@@ -507,7 +506,8 @@ void dooble_page::slot_credentials_created(void)
     m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
   else
     m_ui.authenticate->setToolTip
-      (tr("Please prepare Dooble's credentials via Settings -> Privacy. "
+      (tr("Please prepare Dooble's credentials via the "
+	  "Settings window's Privacy panel. "
 	  "Click this button to display the Settings window's "
 	  "Privacy panel."));
 }
