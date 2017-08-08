@@ -228,11 +228,11 @@ uint8_t dooble_aes256::xtime(uint8_t x) const
 
 uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y) const
 {
-  return ((y & 1) * x) ^
-    ((y>>1 & 1) * xtime(x)) ^
-    ((y>>2 & 1) * xtime(xtime(x))) ^
-    ((y>>3 & 1) * xtime(xtime(xtime(x)))) ^
-    ((y>>4 & 1) * xtime(xtime(xtime(xtime(x)))));
+  return ((x & 1) * y) ^
+    ((x >> 1 & 1) * xtime(y)) ^
+    ((x >> 2 & 1) * xtime(xtime(y))) ^
+    ((x >> 3 & 1) * xtime(xtime(xtime(y)))) ^
+    ((x >> 4 & 1) * xtime(xtime(xtime(xtime(y)))));
 }
 
 void dooble_aes256::add_round_key(size_t c)
@@ -256,14 +256,14 @@ void dooble_aes256::inv_mix_columns(void)
       a[1] = m_state[1][i];
       a[2] = m_state[2][i];
       a[3] = m_state[3][i];
-      m_state[0][i] = xtime_special(a[0], 0x0e) ^ xtime_special(a[1], 0x0b) ^
-	xtime_special(a[2], 0x0d) ^ xtime_special(a[3], 0x09);
-      m_state[1][i] = xtime_special(a[0], 0x09) ^ xtime_special(a[1], 0x0e) ^
-	xtime_special(a[2], 0x0b) ^ xtime_special(a[3], 0x0d);
-      m_state[2][i] = xtime_special(a[0], 0x0d) ^ xtime_special(a[1], 0x09) ^
-	xtime_special(a[2], 0x0e) ^ xtime_special(a[3], 0x0b);
-      m_state[3][i] = xtime_special(a[0], 0x0b) ^ xtime_special(a[1], 0x0d) ^
-	xtime_special(a[2], 0x09) ^ xtime_special(a[3], 0x0e);
+      m_state[0][i] = xtime_special(0x0e, a[0]) ^ xtime_special(0x0b, a[1]) ^
+	xtime_special(0x0d, a[2]) ^ xtime_special(0x09, a[3]);
+      m_state[1][i] = xtime_special(0x09, a[0]) ^ xtime_special(0x0e, a[1]) ^
+	xtime_special(0x0b, a[2]) ^ xtime_special(0x0d, a[3]);
+      m_state[2][i] = xtime_special(0x0d, a[0]) ^ xtime_special(0x09, a[1]) ^
+	xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
+      m_state[3][i] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
+	xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
     }
 }
 
