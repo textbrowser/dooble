@@ -180,19 +180,23 @@ void dooble_aes256::key_expansion(void)
 	  temp[1] = temp[2];
 	  temp[2] = temp[3];
 	  temp[3] = t;
-
-	  for(size_t j = 0; j < 4; j++)
-	    temp[j] = s_sbox[static_cast<size_t> (temp[j])] ^
-	      s_rcon[i / m_Nk][j];
+	  temp[0] = s_sbox[static_cast<size_t> (temp[0])] ^ s_rcon[i / m_Nk][0];
+	  temp[1] = s_sbox[static_cast<size_t> (temp[1])] ^ s_rcon[i / m_Nk][1];
+	  temp[2] = s_sbox[static_cast<size_t> (temp[2])] ^ s_rcon[i / m_Nk][2];
+	  temp[3] = s_sbox[static_cast<size_t> (temp[3])] ^ s_rcon[i / m_Nk][3];
 	}
       else if(i % m_Nk == 4)
-	for(size_t j = 0; j < 4; j++)
-	  temp[j] = s_sbox[static_cast<size_t> (temp[j])];
+	{
+	  temp[0] = s_sbox[static_cast<size_t> (temp[0])];
+	  temp[1] = s_sbox[static_cast<size_t> (temp[1])];
+	  temp[2] = s_sbox[static_cast<size_t> (temp[2])];
+	  temp[3] = s_sbox[static_cast<size_t> (temp[3])];
+	}
 
-      for(size_t j = 0; j < 4; j++)
-	m_round_key[i][j] =
-	  m_round_key[i - m_Nk][j] ^ temp[j];
-
+      m_round_key[i][0] = m_round_key[i - m_Nk][0] ^ temp[0];
+      m_round_key[i][1] = m_round_key[i - m_Nk][1] ^ temp[1];
+      m_round_key[i][2] = m_round_key[i - m_Nk][2] ^ temp[2];
+      m_round_key[i][3] = m_round_key[i - m_Nk][3] ^ temp[3];
       i += 1;
     }
 }
@@ -207,12 +211,14 @@ void dooble_aes256::mix_columns(void)
 
   for(size_t i = 0; i < 4; i++)
     {
-      for(size_t j = 0; j < m_Nb; j++)
-	{
-	  a[j] = m_state[j][i];
-	  b[j] = xtime(m_state[j][i]);
-	}
-
+      a[0] = m_state[0][i];
+      a[1] = m_state[1][i];
+      a[2] = m_state[2][i];
+      a[3] = m_state[3][i];
+      b[0] = xtime(m_state[0][i]);
+      b[1] = xtime(m_state[1][i]);
+      b[2] = xtime(m_state[2][i]);
+      b[3] = xtime(m_state[3][i]);
       m_state[0][i] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
       m_state[1][i] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
       m_state[2][i] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
