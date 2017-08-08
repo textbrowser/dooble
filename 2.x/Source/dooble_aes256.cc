@@ -148,8 +148,12 @@ uint8_t dooble_aes256::xtime(uint8_t x) const
 void dooble_aes256::add_round_key(size_t c)
 {
   for(size_t i = 0; i < 4; i++)
-    for(size_t j = 0; j < m_Nb; j++)
-      m_state[i][j] ^= m_round_key[c * m_Nb + j][i];
+    {
+      m_state[i][0] ^= m_round_key[c * m_Nb + 0][i];
+      m_state[i][1] ^= m_round_key[c * m_Nb + 1][i];
+      m_state[i][2] ^= m_round_key[c * m_Nb + 2][i];
+      m_state[i][3] ^= m_round_key[c * m_Nb + 3][i];
+    }
 }
 
 void dooble_aes256::key_expansion(void)
@@ -158,10 +162,14 @@ void dooble_aes256::key_expansion(void)
 
   while(i < m_Nk)
     {
-      for(size_t j = 0; j < 4; j++)
-	m_round_key[i][j] = static_cast<uint8_t>
-	  (m_key[static_cast<int> (4 * i + j)]);
-
+      m_round_key[i][0] = static_cast<uint8_t>
+	(m_key[static_cast<int> (4 * i + 0)]);
+      m_round_key[i][1] = static_cast<uint8_t>
+	(m_key[static_cast<int> (4 * i + 1)]);
+      m_round_key[i][2] = static_cast<uint8_t>
+	(m_key[static_cast<int> (4 * i + 2)]);
+      m_round_key[i][3] = static_cast<uint8_t>
+	(m_key[static_cast<int> (4 * i + 3)]);
       i += 1;
     }
 
@@ -205,9 +213,6 @@ void dooble_aes256::mix_columns(void)
 {
   uint8_t a[4];
   uint8_t b[4];
-
-  memset(a, 0, sizeof(a));
-  memset(b, 0, sizeof(b));
 
   for(size_t i = 0; i < 4; i++)
     {
