@@ -111,7 +111,7 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   QByteArray b(block);
 
   if(b.length() < 16)
-    b.append(16 - b.length(), 0);
+    b.append(16 - b.length(), 16 - b.length());
   else
     b.resize(16);
 
