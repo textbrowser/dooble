@@ -146,6 +146,11 @@ QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
 {
   QByteArray b(block);
 
+  if(b.length() < 16)
+    b.append(16 - b.length(), 16 - b.length());
+  else
+    b.resize(16);
+
   for(size_t i = 0; i < 4; i++)
     {
       m_state[i][0] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 0)]);
