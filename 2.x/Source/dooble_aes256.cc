@@ -232,19 +232,26 @@ void dooble_aes256::shift_rows(void)
 
   for(size_t i = 1; i < 4; i++)
     {
-      for(size_t j = 0; j < m_Nb; j++)
-	temp[j] = m_state[i][(i + j) % m_Nb];
-
-      for(size_t j = 0; j < m_Nb; j++)
-	m_state[i][j] = temp[j];
+      temp[0] = m_state[i][(i + 0) % m_Nb];
+      temp[1] = m_state[i][(i + 1) % m_Nb];
+      temp[2] = m_state[i][(i + 2) % m_Nb];
+      temp[3] = m_state[i][(i + 3) % m_Nb];
+      m_state[i][0] = temp[0];
+      m_state[i][1] = temp[1];
+      m_state[i][2] = temp[2];
+      m_state[i][3] = temp[3];
     }
 }
 
 void dooble_aes256::sub_bytes()
 {
   for(size_t i = 0; i < 4; i++)
-    for(size_t j = 0; j < m_Nb; j++)
-      m_state[i][j] = s_sbox[m_state[i][j]];
+    {
+      m_state[i][0] = s_sbox[m_state[i][0]];
+      m_state[i][1] = s_sbox[m_state[i][1]];
+      m_state[i][2] = s_sbox[m_state[i][2]];
+      m_state[i][3] = s_sbox[m_state[i][3]];
+    }
 }
 
 void dooble_aes256::test1_encrypt_block(void)
