@@ -29,6 +29,7 @@
 #include <QWebEngineProfile>
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
@@ -38,6 +39,7 @@
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 
+dooble_application *dooble::s_application = 0;
 dooble_blocked_domains *dooble::s_blocked_domains = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
@@ -180,6 +182,12 @@ void dooble::prepare_page_connections(dooble_page *page)
   if(!page)
     return;
 
+  connect(dooble::s_application,
+	  SIGNAL(dooble_credentials_authenticated(void)),
+	  page,
+	  SLOT(slot_dooble_credentials_authenticated(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(close_tab(void)),
 	  this,
@@ -200,7 +208,7 @@ void dooble::prepare_page_connections(dooble_page *page)
 					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(dooble_credentials_authenticated(void)),
-	  this,
+	  dooble::s_application,
 	  SIGNAL(dooble_credentials_authenticated(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
@@ -274,12 +282,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
-  connect(this,
-	  SIGNAL(dooble_credentials_authenticated(void)),
-	  page,
-	  SLOT(slot_dooble_credentials_authenticated(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
 }

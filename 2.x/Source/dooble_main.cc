@@ -25,7 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QApplication>
 #include <QDir>
 #include <QSplashScreen>
 #ifdef Q_OS_WIN32
@@ -54,6 +53,7 @@ extern "C"
 #include "CocoaInitializer.h"
 #endif
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_settings.h"
 
@@ -163,14 +163,19 @@ int main(int argc, char *argv[])
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
 
-  QApplication qapplication(argc, argv);
+  dooble::s_application = new dooble_application(argc, argv);
+
+  /*
+  ** Create a splash screen.
+  */
+
   QSplashScreen splash(QPixmap(":/splash.png"));
 
   splash.show();
   splash.showMessage
     (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
-  qapplication.processEvents();
+  dooble::s_application->processEvents();
 
 #ifdef Q_OS_MACOS
   /*
@@ -215,12 +220,12 @@ int main(int argc, char *argv[])
     (QObject::tr("Purging temporary favicons."),
      Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
-  qapplication.processEvents();
+  dooble::s_application->processEvents();
   dooble_favicons::purge_temporary();
   splash.showMessage
     (QObject::tr("Preparing QWebEngine."), Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
-  qapplication.processEvents();
+  dooble::s_application->processEvents();
   QWebEngineProfile::defaultProfile()->setCachePath
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
@@ -245,8 +250,10 @@ int main(int argc, char *argv[])
 
   d->show();
 
-  int rc = qapplication.exec();
+  int rc = dooble::s_application->exec();
 
   dooble_favicons::purge_temporary();
+  delete dooble::s_application;
+  dooble::s_application = 0;
   return rc;
 }

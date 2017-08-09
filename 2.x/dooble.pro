@@ -62,6 +62,7 @@ FORMS           = UI\\dooble.ui \
 
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
+                  Source\\dooble_application.h \
                   Source\\dooble_blocked_domains.h \
                   Source\\dooble_cookies.h \
                   Source\\dooble_favicons.h \
@@ -85,6 +86,7 @@ RESOURCES       += Icons\\icons.qrc
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
                   Source\\dooble_aes256.cc \
+                  Source\\dooble_application.cc \
                   Source\\dooble_blocked_domains.cc \
                   Source\\dooble_cookies.cc \
                   Source\\dooble_cryptography.cc \

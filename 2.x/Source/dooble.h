@@ -33,6 +33,7 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
+class dooble_application;
 class dooble_blocked_domains;
 class dooble_cookies;
 class dooble_cryptography;
@@ -48,6 +49,7 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
+  static dooble_application *s_application;
   static dooble_blocked_domains *s_blocked_domains;
   static dooble_cookies *s_cookies;
   static dooble_cryptography *s_cryptography;
@@ -84,9 +86,6 @@ class dooble: public QMainWindow
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
   void slot_title_changed(const QString &title);
-
- signals:
-  void dooble_credentials_authenticated(void);
 };
 
 #endif
