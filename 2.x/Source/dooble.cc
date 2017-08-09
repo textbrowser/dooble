@@ -93,7 +93,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 
 dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
 {
-  qDebug() << "Here.";
 }
 
 void dooble::closeEvent(QCloseEvent *event)
