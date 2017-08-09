@@ -23,5 +23,6 @@
 	<file>Snipicons/64/webengine.png</file>
 	<file>Snipicons/64/windows.png</file>
 	<file>spinning_wheel.gif</file>
+	<file>splash.png</file>
     </qresource>
 </RCC>
