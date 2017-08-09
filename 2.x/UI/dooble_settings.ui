@@ -586,7 +586,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>If credentials are not authenticated or not prepared, data will not be recorded in databases.</string>
+                <string>If credentials are not authenticated or not prepared, data will not be available in future sessions.</string>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
