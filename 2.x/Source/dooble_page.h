@@ -60,6 +60,7 @@ class dooble_page: public QWidget
   };
 
   QPointer<QAction> m_action_close_tab;
+  QPointer<QAction> m_authentication_action;
   Ui_dooble_page m_ui;
   bool m_shortcuts_prepared;
   dooble_web_engine_view *m_view;

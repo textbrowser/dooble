@@ -27,9 +27,11 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QSplashScreen>
 #ifdef Q_OS_WIN32
 #include <QStyleFactory>
 #endif
+#include <QThread>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 
@@ -54,6 +56,15 @@ extern "C"
 #include "dooble.h"
 #include "dooble_favicons.h"
 #include "dooble_settings.h"
+
+class dooble_thread: public QThread
+{
+public:
+  static void msleep(unsigned long secs)
+  {
+    QThread::msleep(secs);
+  }
+};
 
 static char *s_doobleAbortedFileName = 0;
 
@@ -153,6 +164,13 @@ int main(int argc, char *argv[])
 #endif
 
   QApplication qapplication(argc, argv);
+  QSplashScreen splash(QPixmap(":/splash.png"));
+
+  splash.show();
+  splash.showMessage
+    (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapplication.processEvents();
 
 #ifdef Q_OS_MACOS
   /*
@@ -193,6 +211,16 @@ int main(int argc, char *argv[])
     ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
 #endif
 
+  splash.showMessage
+    (QObject::tr("Purging temporary favicons."),
+     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapplication.processEvents();
+  dooble_favicons::purge_temporary();
+  splash.showMessage
+    (QObject::tr("Preparing QWebEngine."), Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  qapplication.processEvents();
   QWebEngineProfile::defaultProfile()->setCachePath
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
@@ -210,7 +238,8 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-  dooble_favicons::purge_temporary();
+  dooble_thread::msleep(750);
+  splash.finish(0);
 
   dooble *d = new dooble();
 

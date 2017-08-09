@@ -308,6 +308,8 @@ void dooble_page::prepare_shortcuts(void)
     {
       m_shortcuts_prepared = true;
       new QShortcut
+	(QKeySequence(tr("Ctrl+A")), this, SLOT(slot_authenticate(void)));
+      new QShortcut
 	(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_show_find(void)));
       new QShortcut
 	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
@@ -342,6 +344,11 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_ui.menus->menu()->addMenu(tr("&File"));
+  m_authentication_action = menu->addAction(tr("&Authenticate..."),
+					    this,
+					    SLOT(slot_authenticate(void)),
+					    QKeySequence(tr("Ctrl+A")));
+  menu->addSeparator();
   menu->addAction(tr("New &Tab"),
 		  this,
 		  SIGNAL(new_tab(void)),
