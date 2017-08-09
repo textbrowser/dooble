@@ -36,12 +36,16 @@ class dooble_aes256
  public:
   dooble_aes256(const QByteArray &key);
   ~dooble_aes256();
+  QByteArray decrypt(const QByteArray &data);
+  QByteArray encrypt(const QByteArray &data);
+  static void test1(void);
   static void test1_decrypt_block(void);
   static void test1_encrypt_block(void);
   static void test1_key_expansion(void);
 
  private:
   QByteArray m_key;
+  int m_block_length;
   int m_key_length;
   size_t m_Nb;
   size_t m_Nk;
@@ -50,6 +54,7 @@ class dooble_aes256
   uint8_t m_state[4][4]; // 4 rows, Nb columns.
   QByteArray decrypt_block(const QByteArray &block);
   QByteArray encrypt_block(const QByteArray &block);
+  QByteArray xor_arrays(const QByteArray &a, const QByteArray &b);
   uint8_t xtime(uint8_t x) const;
   uint8_t xtime_special(uint8_t x, uint8_t y) const;
   void add_round_key(size_t c);

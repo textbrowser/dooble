@@ -507,9 +507,7 @@ void dooble_page::slot_credentials_created(void)
   else
     m_ui.authenticate->setToolTip
       (tr("Please prepare Dooble's credentials via the "
-	  "Settings window's Privacy panel. "
-	  "Click this button to display the Settings window's "
-	  "Privacy panel."));
+	  "Settings window's Privacy panel."));
 }
 
 void dooble_page::slot_escape(void)

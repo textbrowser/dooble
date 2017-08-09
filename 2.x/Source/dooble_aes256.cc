@@ -29,9 +29,12 @@
 ** Implementation of http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf.
 */
 
+#include <QDataStream>
+#include <QtMath>
 #include <iostream>
 
 #include "dooble_aes256.h"
+#include "dooble_random.h"
 
 /*
 ** https://en.wikipedia.org/wiki/Rijndael_S-box
@@ -126,6 +129,7 @@ dooble_aes256::dooble_aes256(const QByteArray &key)
   m_Nb = 4;
   m_Nk = 8;
   m_Nr = 14;
+  m_block_length = 16;
   m_key = key;
   m_key_length = 32;
 
@@ -133,6 +137,8 @@ dooble_aes256::dooble_aes256(const QByteArray &key)
     m_key.append(m_key_length - m_key.length(), 0);
   else
     m_key.resize(m_key_length);
+
+  key_expansion();
 }
 
 dooble_aes256::~dooble_aes256()
@@ -140,6 +146,77 @@ dooble_aes256::~dooble_aes256()
   QByteArray zeros(m_key_length, 0);
 
   m_key.replace(0, m_key.length(), zeros);
+}
+
+QByteArray dooble_aes256::decrypt(const QByteArray &data)
+{
+  /*
+  ** CBC
+  */
+
+  QByteArray iv(data.mid(0, m_block_length));
+
+  if(Q_UNLIKELY(iv.length() != m_block_length))
+    return QByteArray();
+
+  QByteArray block(m_block_length, 0);
+  QByteArray c;
+  QByteArray ciphertext(data.mid(iv.length()));
+  QByteArray decrypted;
+  int iterations = ciphertext.length() / m_block_length;
+
+  for(int i = 0; i < iterations; i++)
+    {
+      int position = i * m_block_length;
+
+      block = decrypt_block(ciphertext.mid(position, m_block_length));
+
+      if(Q_UNLIKELY(block.isEmpty()))
+	{
+	  decrypted.clear();
+	  break;
+	}
+
+      if(i == 0)
+	block = xor_arrays(block, iv);
+      else
+	block = xor_arrays(block, c);
+
+      c = ciphertext.mid(position, m_block_length);
+      decrypted.append(block);
+    }
+
+  if(decrypted.isEmpty())
+    return decrypted;
+
+  QByteArray originalLength;
+
+  if(decrypted.length() > static_cast<int> (sizeof(int)))
+    originalLength = decrypted.mid
+      (decrypted.length() - static_cast<int> (sizeof(int)),
+       static_cast<int> (sizeof(int)));
+
+  if(!originalLength.isEmpty())
+    {
+      QDataStream in(&originalLength, QIODevice::ReadOnly);
+      int s = 0;
+
+      in >> s;
+
+      if(in.status() != QDataStream::Ok)
+	decrypted.clear();
+      else
+	{
+	  if(s >= 0 && s <= decrypted.length())
+	    decrypted = decrypted.mid(0, s);
+	  else
+	    decrypted.clear();
+	}
+    }
+  else
+    decrypted.clear();
+
+  return decrypted;
 }
 
 QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
@@ -184,6 +261,76 @@ QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
   return b;
 }
 
+QByteArray dooble_aes256::encrypt(const QByteArray &data)
+{
+  /*
+  ** CBC
+  */
+
+  QByteArray iv(dooble_random::random_bytes(m_block_length));
+
+  if(Q_UNLIKELY(iv.isEmpty()))
+    return QByteArray();
+
+  /*
+  ** Resize the container to the block size.
+  */
+
+  QByteArray block(iv.length(), 0);
+  QByteArray encrypted;
+  QByteArray plaintext(data);
+
+  if(plaintext.isEmpty())
+    plaintext = plaintext.leftJustified(m_block_length, 0);
+  else
+    plaintext = plaintext.leftJustified
+      (m_block_length *
+       static_cast<int> (qCeil(static_cast<qreal> (plaintext.length()) /
+			       static_cast<qreal> (m_block_length)) + 1), 0);
+
+  QByteArray originalLength;
+  QDataStream out(&originalLength, QIODevice::WriteOnly);
+
+  out << data.length();
+
+  if(out.status() != QDataStream::Ok)
+    return QByteArray();
+
+  plaintext.replace
+    (plaintext.length() - static_cast<int> (sizeof(int)),
+     static_cast<int> (sizeof(int)), originalLength);
+
+  int iterations = plaintext.length() / m_block_length;
+
+  for(int i = 0; i < iterations; i++)
+    {
+      QByteArray p;
+      int position = i * m_block_length;
+
+      p = plaintext.mid(position, m_block_length);
+
+      if(i == 0)
+	block = xor_arrays(iv, p);
+      else
+	block = xor_arrays(block, p);
+
+      block = encrypt_block(block);
+
+      if(Q_UNLIKELY(block.isEmpty()))
+	{
+	  encrypted.clear();
+	  break;
+	}
+
+      encrypted.append(block);
+    }
+
+  if(encrypted.isEmpty())
+    return encrypted;
+
+  return iv + encrypted;
+}
+
 QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
 {
   QByteArray b(block);
@@ -224,6 +371,17 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
     }
 
   return b;
+}
+
+QByteArray dooble_aes256::xor_arrays(const QByteArray &a, const QByteArray &b)
+{
+  QByteArray bytes;
+  int length = qMin(a.length(), b.length());
+
+  for(int i = 0; i < length; i++)
+    bytes.append(a[i] ^ b[i]);
+
+  return bytes;
 }
 
 uint8_t dooble_aes256::xtime(uint8_t x) const
@@ -293,10 +451,10 @@ void dooble_aes256::inv_sub_bytes(void)
 {
   for(size_t i = 0; i < 4; i++)
     {
-      m_state[i][0] = s_inv_sbox[m_state[i][0]];
-      m_state[i][1] = s_inv_sbox[m_state[i][1]];
-      m_state[i][2] = s_inv_sbox[m_state[i][2]];
-      m_state[i][3] = s_inv_sbox[m_state[i][3]];
+      m_state[i][0] = s_inv_sbox[static_cast<size_t> (m_state[i][0])];
+      m_state[i][1] = s_inv_sbox[static_cast<size_t> (m_state[i][1])];
+      m_state[i][2] = s_inv_sbox[static_cast<size_t> (m_state[i][2])];
+      m_state[i][3] = s_inv_sbox[static_cast<size_t> (m_state[i][3])];
     }
 }
 
@@ -396,11 +554,28 @@ void dooble_aes256::sub_bytes()
 {
   for(size_t i = 0; i < 4; i++)
     {
-      m_state[i][0] = s_sbox[m_state[i][0]];
-      m_state[i][1] = s_sbox[m_state[i][1]];
-      m_state[i][2] = s_sbox[m_state[i][2]];
-      m_state[i][3] = s_sbox[m_state[i][3]];
+      m_state[i][0] = s_sbox[static_cast<size_t> (m_state[i][0])];
+      m_state[i][1] = s_sbox[static_cast<size_t> (m_state[i][1])];
+      m_state[i][2] = s_sbox[static_cast<size_t> (m_state[i][2])];
+      m_state[i][3] = s_sbox[static_cast<size_t> (m_state[i][3])];
     }
+}
+
+void dooble_aes256::test1(void)
+{
+  QByteArray bytes;
+  dooble_aes256 aes256(dooble_random::random_bytes(32));
+
+  bytes = aes256.encrypt
+    ("for(size_t i = 0; i < 4; i++) "
+     "{"
+     "m_state[i][0] = s_sbox[static_cast<size_t> (m_state[i][0])];"
+     "m_state[i][1] = s_sbox[static_cast<size_t> (m_state[i][1])];"
+     "m_state[i][2] = s_sbox[static_cast<size_t> (m_state[i][2])];"
+     "m_state[i][3] = s_sbox[static_cast<size_t> (m_state[i][3])];"
+     "}");
+  bytes = aes256.decrypt(bytes);
+  std::cout << bytes.toStdString() << std::endl;
 }
 
 void dooble_aes256::test1_decrypt_block(void)
@@ -410,7 +585,6 @@ void dooble_aes256::test1_decrypt_block(void)
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
 
-  aes256.key_expansion();
   std::cout << aes256.decrypt_block
     (QByteArray::fromHex("8ea2b7ca516745bfeafc49904b496089")).toHex().
     toStdString() << std::endl;
@@ -423,7 +597,6 @@ void dooble_aes256::test1_encrypt_block(void)
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
 
-  aes256.key_expansion();
   std::cout << aes256.encrypt_block
     (QByteArray::fromHex("00112233445566778899aabbccddeeff")).toHex().
     toStdString() << std::endl;
@@ -439,8 +612,6 @@ void dooble_aes256::test1_key_expansion(void)
     (QByteArray::fromHex("603deb1015ca71be2b73aef0857d7781"
 			 "1f352c073b6108d72d9810a30914dff4"));
   dooble_aes256 aes256(key);
-
-  aes256.key_expansion();
 
   for(size_t i = 0; i < 60; i++)
     if((i >= 8 && i <= 15) ||
