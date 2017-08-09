@@ -100,6 +100,27 @@ QIcon dooble_favicons::icon(const QUrl &url)
 
 void dooble_favicons::purge_temporary(void)
 {
+  QString database_name(QString("dooble_favicons_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_favicons.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("DELETE FROM dooble_favicons WHERE temporary = 1");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
@@ -154,7 +175,6 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 	  bytes.clear();
 
 	buffer.close();
-	query.addBindValue(dooble::s_cryptography->authenticated() ? 1 : 0);
 	bytes = dooble::s_cryptography->encrypt_then_mac(bytes);
 
 	if(!bytes.isEmpty())
@@ -162,6 +182,7 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 	else
 	  ok = false;
 
+	query.addBindValue(dooble::s_cryptography->authenticated() ? 0 : 1);
 	bytes = dooble::s_cryptography->hmac(url.toString().trimmed());
 	ok &= !bytes.isEmpty();
 
