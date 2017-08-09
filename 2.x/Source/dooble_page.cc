@@ -348,6 +348,8 @@ void dooble_page::prepare_standard_menus(void)
 					    this,
 					    SLOT(slot_authenticate(void)),
 					    QKeySequence(tr("Ctrl+A")));
+  m_authentication_action->setEnabled
+    (dooble_settings::has_dooble_credentials());
   menu->addSeparator();
   menu->addAction(tr("New &Tab"),
 		  this,
@@ -469,6 +471,10 @@ void dooble_page::slot_authenticate(void)
 	  dooble::s_cryptography->prepare_keys
 	    (text.toUtf8(), salt, iteration_count);
 	  QApplication::restoreOverrideCursor();
+
+	  if(m_authentication_action)
+	    m_authentication_action->setEnabled(false);
+
 	  m_ui.authenticate->setEnabled(false);
 	  m_ui.authenticate->setToolTip
 	    (tr("Dooble credentials have been authenticated."));
