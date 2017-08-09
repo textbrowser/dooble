@@ -54,6 +54,7 @@ extern "C"
 #endif
 #include "dooble.h"
 #include "dooble_application.h"
+#include "dooble_cookies.h"
 #include "dooble_favicons.h"
 #include "dooble_settings.h"
 
@@ -248,6 +249,10 @@ int main(int argc, char *argv[])
 
   dooble *d = new dooble();
 
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(void)),
+		   dooble::s_cookies,
+		   SLOT(slot_populate(void)));
   d->show();
 
   int rc = dooble::s_application->exec();

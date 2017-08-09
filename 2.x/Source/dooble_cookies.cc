@@ -29,6 +29,8 @@
 #include <QNetworkCookie>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QWebEngineCookieStore>
+#include <QWebEngineProfile>
 
 #include "dooble.h"
 #include "dooble_cookies.h"
@@ -138,4 +140,48 @@ void dooble_cookies::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
+
+  QString database_name(QString("dooble_cookies_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_cookies.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT raw_form FROM dooble_cookies"))
+	  while(query.next())
+	    {
+	      QByteArray bytes
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
+
+	      if(bytes.isEmpty())
+		continue;
+
+	      QList<QNetworkCookie> cookie = QNetworkCookie::parseCookies
+		(bytes);
+
+	      if(cookie.isEmpty())
+		continue;
+
+	      QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+
+	      profile->cookieStore()->setCookie(cookie.at(0));
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
