@@ -36,6 +36,7 @@
 
 #include "dooble.h"
 #include "dooble_blocked_domains.h"
+#include "dooble_cookies.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_label_widget.h"
@@ -192,6 +193,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   connect(this,
 	  SIGNAL(dooble_credentials_authenticated(void)),
 	  dooble::s_blocked_domains,
+	  SLOT(slot_populate(void)));
+  connect(this,
+	  SIGNAL(dooble_credentials_authenticated(void)),
+	  dooble::s_cookies,
 	  SLOT(slot_populate(void)));
   prepare_icons();
   prepare_shortcuts();
@@ -471,13 +476,6 @@ void dooble_page::slot_authenticate(void)
 	  dooble::s_cryptography->prepare_keys
 	    (text.toUtf8(), salt, iteration_count);
 	  QApplication::restoreOverrideCursor();
-
-	  if(m_authentication_action)
-	    m_authentication_action->setEnabled(false);
-
-	  m_ui.authenticate->setEnabled(false);
-	  m_ui.authenticate->setToolTip
-	    (tr("Dooble credentials have been authenticated."));
 	  emit dooble_credentials_authenticated();
 	}
       else
@@ -527,6 +525,16 @@ void dooble_page::slot_credentials_created(void)
     m_ui.authenticate->setToolTip
       (tr("Please prepare Dooble's credentials via the "
 	  "Settings window's Privacy panel."));
+}
+
+void dooble_page::slot_dooble_credentials_authenticated(void)
+{
+  if(m_authentication_action)
+    m_authentication_action->setEnabled(false);
+
+  m_ui.authenticate->setEnabled(false);
+  m_ui.authenticate->setToolTip
+    (tr("Dooble credentials have been authenticated."));
 }
 
 void dooble_page::slot_escape(void)

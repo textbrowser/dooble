@@ -36,12 +36,12 @@
 
 QAtomicInteger<quint64> dooble_cookies::s_db_id;
 
-dooble_cookies::dooble_cookies(bool is_private)
+dooble_cookies::dooble_cookies(bool is_private, QObject *parent):QObject(parent)
 {
   m_is_private = is_private;
 }
 
-void dooble_cookies::add_cookie(const QNetworkCookie &cookie) const
+void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie) const
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -98,7 +98,7 @@ void dooble_cookies::add_cookie(const QNetworkCookie &cookie) const
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_cookies::remove_cookie(const QNetworkCookie &cookie) const
+void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie) const
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -132,4 +132,10 @@ void dooble_cookies::remove_cookie(const QNetworkCookie &cookie) const
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_cookies::slot_populate(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
 }

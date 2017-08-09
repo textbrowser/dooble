@@ -36,15 +36,36 @@
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(parent)
 {
-  connect(profile()->cookieStore(),
-	  SIGNAL(cookieAdded(const QNetworkCookie &)),
-	  this,
-	  SLOT(slot_cookie_added(const QNetworkCookie &)));
-  connect(profile()->cookieStore(),
-	  SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	  this,
-	  SLOT(slot_cookie_removed(const QNetworkCookie &)));
-  m_cookies = new dooble_cookies(false);
+  m_cookies = 0;
+  m_is_private = false;
+
+  if(m_is_private)
+    {
+      m_cookies = new dooble_cookies(m_is_private, this);
+      connect(profile()->cookieStore(),
+	      SIGNAL(cookieAdded(const QNetworkCookie &)),
+	      m_cookies,
+	      SLOT(slot_cookie_added(const QNetworkCookie &)));
+      connect(profile()->cookieStore(),
+	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	      m_cookies,
+	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+    }
+  else
+    {
+      connect(profile()->cookieStore(),
+	      SIGNAL(cookieAdded(const QNetworkCookie &)),
+	      dooble::s_cookies,
+	      SLOT(slot_cookie_added(const QNetworkCookie &)));
+      connect(profile()->cookieStore(),
+	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	      dooble::s_cookies,
+	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+    }
+}
+
+dooble_web_engine_page::~dooble_web_engine_page()
+{
 }
 
 bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
@@ -66,14 +87,4 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
       break;
 
   return true;
-}
-
-void dooble_web_engine_page::slot_cookie_added(const QNetworkCookie &cookie)
-{
-  m_cookies->add_cookie(cookie);
-}
-
-void dooble_web_engine_page::slot_cookie_removed(const QNetworkCookie &cookie)
-{
-  m_cookies->remove_cookie(cookie);
 }

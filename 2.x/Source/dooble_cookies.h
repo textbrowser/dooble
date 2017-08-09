@@ -29,17 +29,24 @@
 #define dooble_cookies_h
 
 #include <QAtomicInteger>
+#include <QObject>
+#include <QNetworkCookie>
 
-class dooble_cookies
+class dooble_cookies: public QObject
 {
+  Q_OBJECT
+
  public:
-  dooble_cookies(bool is_private);
-  void add_cookie(const QNetworkCookie &cookie) const;
-  void remove_cookie(const QNetworkCookie &cookie) const;
+  dooble_cookies(bool is_private, QObject *parent);
 
  private:
   bool m_is_private;
   static QAtomicInteger<quint64> s_db_id;
+
+ private slots:
+  void slot_cookie_added(const QNetworkCookie &cookie) const;
+  void slot_cookie_removed(const QNetworkCookie &cookie) const;
+  void slot_populate(void);
 };
 
 #endif

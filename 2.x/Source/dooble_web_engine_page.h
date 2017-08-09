@@ -38,6 +38,7 @@ class dooble_web_engine_page: public QWebEnginePage
 
  public:
   dooble_web_engine_page(QWidget *parent);
+  ~dooble_web_engine_page();
 
  protected:
   bool acceptNavigationRequest(const QUrl &url,
@@ -45,11 +46,8 @@ class dooble_web_engine_page: public QWebEnginePage
 			       bool isMainFrame);
 
  private:
+  bool m_is_private;
   dooble_cookies *m_cookies;
-
- private slots:
-  void slot_cookie_added(const QNetworkCookie &cookie);
-  void slot_cookie_removed(const QNetworkCookie &cookie);
 };
 
 #endif

@@ -63,6 +63,7 @@ FORMS           = UI\\dooble.ui \
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
                   Source\\dooble_blocked_domains.h \
+                  Source\\dooble_cookies.h \
                   Source\\dooble_favicons.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \

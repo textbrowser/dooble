@@ -79,6 +79,7 @@ class dooble_page: public QWidget
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
   void slot_credentials_created(void);
+  void slot_dooble_credentials_authenticated(void);
   void slot_escape(void);
   void slot_find_next(void);
   void slot_find_previous(void);
