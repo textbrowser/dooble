@@ -25,55 +25,21 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QWebEngineCookieStore>
-#include <QWebEngineProfile>
+#ifndef dooble_cookies_h
+#define dooble_cookies_h
 
-#include "dooble.h"
-#include "dooble_blocked_domains.h"
-#include "dooble_cookies.h"
-#include "dooble_web_engine_page.h"
+#include <QAtomicInteger>
 
-dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
-  QWebEnginePage(parent)
+class dooble_cookies
 {
-  connect(profile()->cookieStore(),
-	  SIGNAL(cookieAdded(const QNetworkCookie &)),
-	  this,
-	  SLOT(slot_cookie_added(const QNetworkCookie &)));
-  connect(profile()->cookieStore(),
-	  SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	  this,
-	  SLOT(slot_cookie_removed(const QNetworkCookie &)));
-  m_cookies = new dooble_cookies(false);
-}
+ public:
+  dooble_cookies(bool is_private);
+  void add_cookie(const QNetworkCookie &cookie) const;
+  void remove_cookie(const QNetworkCookie &cookie) const;
 
-bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
-						     NavigationType type,
-						     bool isMainFrame)
-{
-  Q_UNUSED(type);
-  Q_UNUSED(isMainFrame);
+ private:
+  bool m_is_private;
+  static QAtomicInteger<quint64> s_db_id;
+};
 
-  QString host(url.host().toLower());
-  int index = -1;
-
-  while(!host.isEmpty())
-    if(dooble::s_blocked_domains->contains(host))
-      return false;
-    else if((index = host.indexOf('.')) > 0)
-      host.remove(0, index + 1);
-    else
-      break;
-
-  return true;
-}
-
-void dooble_web_engine_page::slot_cookie_added(const QNetworkCookie &cookie)
-{
-  m_cookies->add_cookie(cookie);
-}
-
-void dooble_web_engine_page::slot_cookie_removed(const QNetworkCookie &cookie)
-{
-  m_cookies->remove_cookie(cookie);
-}
+#endif

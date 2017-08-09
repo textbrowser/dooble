@@ -30,6 +30,8 @@
 
 #include <QWebEnginePage>
 
+class dooble_cookies;
+
 class dooble_web_engine_page: public QWebEnginePage
 {
   Q_OBJECT
@@ -41,6 +43,9 @@ class dooble_web_engine_page: public QWebEnginePage
   bool acceptNavigationRequest(const QUrl &url,
 			       NavigationType type,
 			       bool isMainFrame);
+
+ private:
+  dooble_cookies *m_cookies;
 
  private slots:
   void slot_cookie_added(const QNetworkCookie &cookie);
