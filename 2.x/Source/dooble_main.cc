@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
   QWebEngineProfile::defaultProfile()->setHttpCacheType
     (QWebEngineProfile::MemoryHttpCache);
   QWebEngineProfile::defaultProfile()->setPersistentCookiesPolicy
-    (QWebEngineProfile::AllowPersistentCookies);
+    (QWebEngineProfile::NoPersistentCookies);
   QWebEngineProfile::defaultProfile()->setPersistentStoragePath
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +

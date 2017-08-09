@@ -25,6 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QNetworkCookie>
+#include <QWebEngineCookieStore>
+#include <QWebEngineProfile>
+
 #include "dooble.h"
 #include "dooble_blocked_domains.h"
 #include "dooble_web_engine_page.h"
@@ -32,6 +36,14 @@
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(parent)
 {
+  connect(profile()->cookieStore(),
+	  SIGNAL(cookieAdded(const QNetworkCookie &)),
+	  this,
+	  SLOT(slot_cookie_added(const QNetworkCookie &)));
+  connect(profile()->cookieStore(),
+	  SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	  this,
+	  SLOT(slot_cookie_removed(const QNetworkCookie &)));
 }
 
 bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
@@ -53,4 +65,14 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
       break;
 
   return true;
+}
+
+void dooble_web_engine_page::slot_cookie_added(const QNetworkCookie &cookie)
+{
+  Q_UNUSED(cookie);
+}
+
+void dooble_web_engine_page::slot_cookie_removed(const QNetworkCookie &cookie)
+{
+  Q_UNUSED(cookie);
 }

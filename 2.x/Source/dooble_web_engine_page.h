@@ -41,6 +41,10 @@ class dooble_web_engine_page: public QWebEnginePage
   bool acceptNavigationRequest(const QUrl &url,
 			       NavigationType type,
 			       bool isMainFrame);
+
+ private slots:
+  void slot_cookie_added(const QNetworkCookie &cookie);
+  void slot_cookie_removed(const QNetworkCookie &cookie);
 };
 
 #endif
