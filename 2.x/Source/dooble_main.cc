@@ -52,7 +52,6 @@ extern "C"
 #include "CocoaInitializer.h"
 #endif
 #include "dooble.h"
-#include "dooble_aes256.h"
 #include "dooble_settings.h"
 
 static char *s_doobleAbortedFileName = 0;
@@ -210,10 +209,6 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-  dooble_aes256::test1();
-  dooble_aes256::test1_decrypt_block();
-  dooble_aes256::test1_encrypt_block();
-  dooble_aes256::test1_key_expansion();
 
   dooble *d = new dooble();
 

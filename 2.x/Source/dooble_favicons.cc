@@ -95,6 +95,9 @@ QIcon dooble_favicons::icon(const QUrl &url)
 
 void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
   if(icon.isNull())
     return;
 

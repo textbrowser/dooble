@@ -108,6 +108,7 @@ class dooble_page: public QWidget
   void close_tab(void);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
+  void dooble_credentials_authenticated(void);
   void iconChanged(const QIcon &icon);
   void loadFinished(bool ok);
   void loadStarted(void);

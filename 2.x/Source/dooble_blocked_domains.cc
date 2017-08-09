@@ -48,7 +48,6 @@ dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_rows(void)));
-  populate();
 }
 
 bool dooble_blocked_domains::contains(const QString &domain) const
@@ -67,10 +66,14 @@ void dooble_blocked_domains::closeEvent(QCloseEvent *event)
 
 void dooble_blocked_domains::populate(void)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_blocked_domains.clear();
   m_ui.table->clearContents();
 
+  QMap<QString, int> oids;
   QString database_name("dooble_blocked_domains");
 
   {
@@ -86,10 +89,29 @@ void dooble_blocked_domains::populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT blocked, domain FROM dooble_blocked_domains"))
+	if(query.exec("SELECT blocked, domain, OID "
+		      "FROM dooble_blocked_domains"))
 	  while(query.next())
-	    m_blocked_domains[query.value(1).toString()] =
-	      query.value(0).toBool();
+	    {
+	      QByteArray data1
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
+
+	      if(data1.isEmpty())
+		continue;
+
+	      QByteArray data2
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+
+	      if(data2.isEmpty())
+		continue;
+
+	      m_blocked_domains[data2.constData()] = QVariant(data1).toBool();
+	      oids[data2.constData()] = query.value(2).toInt();
+	    }
       }
 
     db.close();
@@ -112,17 +134,18 @@ void dooble_blocked_domains::populate(void)
 
       QTableWidgetItem *item = new QTableWidgetItem();
 
-      item->setFlags(Qt::ItemIsEnabled |
-		     Qt::ItemIsSelectable |
-		     Qt::ItemIsUserCheckable);
-
       if(it.value())
 	item->setCheckState(Qt::Checked);
       else
 	item->setCheckState(Qt::Unchecked);
 
+      item->setData(Qt::UserRole, oids.value(it.key()));
+      item->setFlags(Qt::ItemIsEnabled |
+		     Qt::ItemIsSelectable |
+		     Qt::ItemIsUserCheckable);
       m_ui.table->setItem(i, 0, item);
       item = new QTableWidgetItem(it.key());
+      item->setData(Qt::UserRole, oids.value(it.key()));
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.table->setItem(i, 1, item);
       i += 1;
@@ -141,6 +164,9 @@ void dooble_blocked_domains::populate(void)
 void dooble_blocked_domains::save_blocked_domain(const QString &domain,
 						 bool state)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString database_name("dooble_blocked_domains");
@@ -155,6 +181,7 @@ void dooble_blocked_domains::save_blocked_domain(const QString &domain,
     if(db.open())
       {
 	QSqlQuery query(db);
+	bool ok = true;
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_blocked_domains ("
 		   "blocked TEXT NOT NULL, "
@@ -163,17 +190,27 @@ void dooble_blocked_domains::save_blocked_domain(const QString &domain,
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_blocked_domains "
 	   "(blocked, domain, domain_digest) VALUES (?, ?, ?)");
-	query.addBindValue(state);
-	query.addBindValue(domain);
 
-	QByteArray hmac;
-	bool ok = true;
+	QByteArray data
+	  (dooble::s_cryptography->encrypt_then_mac(state ? "true" : "false"));
 
-	hmac = dooble::s_cryptography->hmac(domain);
-	ok &= !hmac.isEmpty();
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac(domain.toUtf8());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(domain);
+	ok &= !data.isEmpty();
 
 	if(ok)
-	  query.addBindValue(hmac.toBase64());
+	  query.addBindValue(data.toBase64());
 
 	if(ok)
 	  query.exec();
@@ -194,6 +231,7 @@ void dooble_blocked_domains::show(void)
 					   toByteArray()));
 
   QMainWindow::show();
+  populate();
 }
 
 void dooble_blocked_domains::showNormal(void)
@@ -204,6 +242,7 @@ void dooble_blocked_domains::showNormal(void)
 					   toByteArray()));
 
   QMainWindow::showNormal();
+  populate();
 }
 
 void dooble_blocked_domains::slot_add(void)
@@ -306,11 +345,8 @@ void dooble_blocked_domains::slot_delete_rows(void)
 
 	for(int i = list.size() - 1; i >= 0; i--)
 	  {
-	    query.prepare("DELETE FROM dooble_blocked_domains "
-			  "WHERE domain_digest = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(list.at(i).data().toString()).
-	       toBase64());
+	    query.prepare("DELETE FROM dooble_blocked_domains WHERE OID = ?");
+	    query.addBindValue(list.at(i).data(Qt::UserRole));
 
 	    if(query.exec())
 	      {
@@ -335,7 +371,7 @@ void dooble_blocked_domains::slot_item_changed(QTableWidgetItem *item)
   if(item->column() != 0)
     return;
 
-  bool checked = item->checkState() == Qt::Checked;
+  bool state = item->checkState() == Qt::Checked;
 
   item = m_ui.table->item(item->row(), 1);
 
@@ -343,33 +379,49 @@ void dooble_blocked_domains::slot_item_changed(QTableWidgetItem *item)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_blocked_domains[item->text()] = checked;
+  m_blocked_domains[item->text()] = state;
 
-  QString database_name("dooble_blocked_domains");
+  if(dooble::s_cryptography)
+    {
+      QString database_name("dooble_blocked_domains");
 
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_blocked_domains.db");
-
-    if(db.open())
       {
-	QSqlQuery query(db);
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	query.prepare("UPDATE dooble_blocked_domains "
-		      "SET blocked = ? "
-		      "WHERE domain_digest = ?");
-	query.addBindValue(checked);
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(item->text()).toBase64());
-	query.exec();
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_blocked_domains.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.prepare("UPDATE dooble_blocked_domains "
+			  "SET blocked = ? "
+			  "WHERE domain_digest = ?");
+
+	    QByteArray data
+	      (dooble::s_cryptography->
+	       encrypt_then_mac(state ? "true" : "false"));
+
+	    if(!data.isEmpty())
+	      query.addBindValue(data.toBase64());
+
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(item->text()).toBase64());
+	    query.exec();
+	  }
+
+	db.close();
       }
 
-    db.close();
-  }
+      QSqlDatabase::removeDatabase(database_name);
+    }
 
-  QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_blocked_domains::slot_populate(void)
+{
+  populate();
 }

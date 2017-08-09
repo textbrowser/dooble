@@ -35,6 +35,7 @@
 #include <QWidgetAction>
 
 #include "dooble.h"
+#include "dooble_blocked_domains.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_label_widget.h"
@@ -188,6 +189,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SLOT(slot_proxy_authentication_required(const QUrl &,
 						  QAuthenticator *,
 						  const QString &)));
+  connect(this,
+	  SIGNAL(dooble_credentials_authenticated(void)),
+	  dooble::s_blocked_domains,
+	  SLOT(slot_populate(void)));
   prepare_icons();
   prepare_shortcuts();
   prepare_standard_menus();
@@ -460,6 +465,7 @@ void dooble_page::slot_authenticate(void)
 	  m_ui.authenticate->setEnabled(false);
 	  m_ui.authenticate->setToolTip
 	    (tr("Dooble credentials have been authenticated."));
+	  emit dooble_credentials_authenticated();
 	}
       else
 	QMessageBox::critical

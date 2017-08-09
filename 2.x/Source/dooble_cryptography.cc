@@ -28,6 +28,7 @@
 #include <QCryptographicHash>
 #include <QString>
 
+#include "dooble_aes256.h"
 #include "dooble_cryptography.h"
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"
@@ -40,6 +41,19 @@ dooble_cryptography::dooble_cryptography(void)
   m_encryption_key = dooble_random::random_bytes(32);
 }
 
+QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
+{
+  QByteArray bytes;
+  dooble_aes256 aes256(m_encryption_key);
+
+  bytes = aes256.encrypt(data);
+
+  if(!bytes.isEmpty())
+    bytes.prepend(hmac(bytes));
+
+  return bytes;
+}
+
 QByteArray dooble_cryptography::hmac(const QByteArray &message) const
 {
   return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
@@ -48,6 +62,24 @@ QByteArray dooble_cryptography::hmac(const QByteArray &message) const
 QByteArray dooble_cryptography::hmac(const QString &message) const
 {
   return dooble_hmac::sha3_512_hmac(m_authentication_key, message.toUtf8());
+}
+
+QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
+{
+  QByteArray computed_mac;
+  QByteArray mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
+
+  computed_mac = hmac(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+
+  if(!computed_mac.isEmpty() && !mac.isEmpty() && memcmp(computed_mac, mac))
+    {
+      dooble_aes256 aes256(m_encryption_key);
+
+      return aes256.decrypt
+	(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+    }
+
+  return data;
 }
 
 bool dooble_cryptography::authenticated(void) const

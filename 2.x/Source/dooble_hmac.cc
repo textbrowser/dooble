@@ -107,6 +107,11 @@ int dooble_hmac::preferred_output_size_in_bits(void)
   return 512;
 }
 
+int dooble_hmac::preferred_output_size_in_bytes(void)
+{
+  return preferred_output_size_in_bits() / CHAR_BIT;
+}
+
 /*
 ** http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/HMAC_SHA3-512.pdf
 */

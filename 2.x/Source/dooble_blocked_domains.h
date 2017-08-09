@@ -57,6 +57,7 @@ class dooble_blocked_domains: public QMainWindow
   void slot_add(void);
   void slot_delete_rows(void);
   void slot_item_changed(QTableWidgetItem *item);
+  void slot_populate(void);
 };
 
 #endif
