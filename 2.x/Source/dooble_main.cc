@@ -59,7 +59,7 @@ extern "C"
 
 class dooble_thread: public QThread
 {
-public:
+ public:
   static void msleep(unsigned long secs)
   {
     QThread::msleep(secs);
