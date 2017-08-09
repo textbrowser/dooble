@@ -242,7 +242,7 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
      find_flags,
      [=] (bool found)
      {
-       static QPalette palette(m_ui.find->palette());
+       static QPalette s_palette(m_ui.find->palette());
 
        if(!found)
 	 {
@@ -255,10 +255,10 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 	       m_ui.find->setPalette(palette);
 	     }
 	   else
-	     m_ui.find->setPalette(palette);
+	     m_ui.find->setPalette(s_palette);
 	 }
        else
-	 m_ui.find->setPalette(palette);
+	 m_ui.find->setPalette(s_palette);
      });
 }
 
