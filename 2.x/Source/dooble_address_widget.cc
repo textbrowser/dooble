@@ -46,6 +46,16 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
   m_bookmark->setToolTip(tr("Bookmark"));
+  m_information = new QToolButton(this);
+  m_information->setCursor(Qt::ArrowCursor);
+  m_information->setIconSize(QSize(16, 16));
+  m_information->setStyleSheet
+    ("QToolButton {"
+     "border: none; "
+     "padding-top: 0px; "
+     "padding-bottom: 0px; "
+     "}");
+  m_information->setToolTip(tr("Site Information"));
   m_line = new QFrame(this);
   m_line->setFrameShadow(QFrame::Sunken);
   m_line->setFrameShape(QFrame::VLine);
@@ -73,6 +83,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(m_bookmark->sizeHint().width() +
+	 m_information->sizeHint().width() +
 	 frame_width + 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
 }
@@ -87,6 +98,8 @@ void dooble_address_widget::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_bookmark->setIcon(QIcon(QString(":/%1/16/bookmark.png").arg(icon_set)));
+  m_information->setIcon
+    (QIcon(QString(":/%1/16/information.png").arg(icon_set)));
   m_pull_down->setIcon(QIcon(QString(":/%1/16/pulldown.png").arg(icon_set)));
 }
 
@@ -95,15 +108,19 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
   int d = 0;
   int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   QSize size1 = m_bookmark->sizeHint();
-  QSize size2 = m_pull_down->sizeHint();
+  QSize size2 = m_information->sizeHint();
+  QSize size3 = m_pull_down->sizeHint();
 
   d = (rect().height() - size1.height()) / 2;
-  m_bookmark->move(frame_width - rect().left() + 5, rect().top() + d);
-  m_line->move
-    (frame_width - rect().left() + size1.width() + 5, rect().top() + 5);
+  m_bookmark->move(frame_width - rect().left() + size2.width() + 5,
+		   rect().top() + d);
   d = (rect().height() - size2.height()) / 2;
+  m_information->move(frame_width - rect().left() + 5, rect().top() + d);
+  m_line->move(frame_width - rect().left() + size1.width() + size2.width() + 5,
+	       rect().top() + 5);
+  d = (rect().height() - size3.height()) / 2;
   m_pull_down->move
-    (rect().right() - frame_width - size2.width() - 5, rect().top() + d);
+    (rect().right() - frame_width - size3.width() - 5, rect().top() + d);
 
   if(selectedText().isEmpty())
     setCursorPosition(0);

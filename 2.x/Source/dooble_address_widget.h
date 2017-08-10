@@ -48,6 +48,7 @@ class dooble_address_widget: public QLineEdit
   QFrame *m_line;
   QMenu *m_menu;
   QToolButton *m_bookmark;
+  QToolButton *m_information;
   QToolButton *m_pull_down;
   void prepare_icons(void);
 
