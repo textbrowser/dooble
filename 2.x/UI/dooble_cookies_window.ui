@@ -41,7 +41,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QTableWidget" name="table">
+     <widget class="QTreeWidget" name="tree">
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
@@ -51,21 +51,15 @@
       <property name="horizontalScrollMode">
        <enum>QAbstractItemView::ScrollPerPixel</enum>
       </property>
+      <property name="uniformRowHeights">
+       <bool>true</bool>
+      </property>
       <property name="sortingEnabled">
        <bool>true</bool>
       </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>150</number>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>150</number>
-      </attribute>
-      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <property name="animated">
        <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
-      </attribute>
+      </property>
       <column>
        <property name="text">
         <string>Site</string>
@@ -293,7 +287,7 @@
  </widget>
  <tabstops>
   <tabstop>domain_filter</tabstop>
-  <tabstop>table</tabstop>
+  <tabstop>tree</tabstop>
   <tabstop>name</tabstop>
   <tabstop>value</tabstop>
   <tabstop>domain</tabstop>
