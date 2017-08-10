@@ -102,6 +102,7 @@ class dooble_page: public QWidget
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);
   void slot_reload_or_stop(void);
+  void slot_show_cookies(void);
   void slot_show_find(void);
   void slot_show_pull_down_menu(void);
   void slot_url_changed(const QUrl &url);

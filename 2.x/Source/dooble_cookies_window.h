@@ -39,6 +39,10 @@ class dooble_cookies_window: public QMainWindow
  public:
   dooble_cookies_window(QWidget *parent);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
  private:
   Ui_dooble_cookies_window m_ui;
 };

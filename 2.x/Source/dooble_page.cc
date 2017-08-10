@@ -37,10 +37,12 @@
 #include "dooble.h"
 #include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
+#include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
+#include "dooble_ui_utilities.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
 
@@ -78,6 +80,10 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
 	  SIGNAL(pull_down_clicked(void)),
 	  this,
 	  SLOT(slot_show_pull_down_menu(void)));
+  connect(m_ui.address,
+	  SIGNAL(show_cookies(void)),
+	  this,
+	  SLOT(slot_show_cookies(void)));
   connect(m_ui.authenticate,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -789,6 +795,17 @@ void dooble_page::slot_reload_or_stop(void)
     m_view->stop();
   else
     m_view->reload();
+}
+
+void dooble_page::slot_show_cookies(void)
+{
+  dooble::s_cookies_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, dooble::s_cookies_window);
+
+  dooble::s_cookies_window->activateWindow();
+  dooble::s_cookies_window->raise();
 }
 
 void dooble_page::slot_show_find(void)

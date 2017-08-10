@@ -52,8 +52,12 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_pull_down;
   void prepare_icons(void);
 
+ private slots:
+  void slot_show_site_information_menu(void);
+
  signals:
   void pull_down_clicked(void);
+  void show_cookies(void);
 };
 
 #endif

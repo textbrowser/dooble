@@ -36,6 +36,7 @@
 class dooble_application;
 class dooble_blocked_domains;
 class dooble_cookies;
+class dooble_cookies_window;
 class dooble_cryptography;
 class dooble_page;
 class dooble_web_engine_url_request_interceptor;
@@ -52,6 +53,7 @@ class dooble: public QMainWindow
   static dooble_application *s_application;
   static dooble_blocked_domains *s_blocked_domains;
   static dooble_cookies *s_cookies;
+  static dooble_cookies_window *s_cookies_window;
   static dooble_cryptography *s_cryptography;
   static dooble_settings *s_settings;
 

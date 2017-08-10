@@ -26,9 +26,32 @@
 */
 
 #include "dooble_cookies_window.h"
+#include "dooble_settings.h"
 
 dooble_cookies_window::dooble_cookies_window(QWidget *parent):
   QMainWindow(parent)
 {
   m_ui.setupUi(this);
+}
+
+void dooble_cookies_window::show(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::
+			      setting("dooble_cookies_window_geometry").
+			      toByteArray()));
+
+  QMainWindow::show();
+}
+
+void dooble_cookies_window::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::
+			      setting("dooble_cookies_window_geometry").
+			      toByteArray()));
+
+  QMainWindow::showNormal();
 }
