@@ -70,8 +70,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie) const
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
-	   "(raw_form, raw_form_digest)"
-	   "VALUES (?, ?)");
+	   "(raw_form, raw_form_digest) VALUES (?, ?)");
 
 	QByteArray bytes;
 	bool ok = true;
