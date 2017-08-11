@@ -30,6 +30,7 @@
 
 #include <QMainWindow>
 #include <QNetworkCookie>
+#include <QTimer>
 
 #include "ui_dooble_cookies_window.h"
 
@@ -48,10 +49,12 @@ class dooble_cookies_window: public QMainWindow
  private:
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
+  QTimer m_domain_filter_timer;
   Ui_dooble_cookies_window m_ui;
 
  private slots:
   void slot_cookie_added(const QNetworkCookie &cookie, bool is_favorite);
+  void slot_domain_filter_timer_timeout(void);
   void slot_item_changed(QTreeWidgetItem *item, int column);
   void slot_item_selection_changed(void);
 };

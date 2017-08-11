@@ -38,6 +38,8 @@
 dooble_cookies_window::dooble_cookies_window(QWidget *parent):
   QMainWindow(parent)
 {
+  m_domain_filter_timer.setInterval(1500);
+  m_domain_filter_timer.setSingleShot(true);
   m_ui.setupUi(this);
   m_ui.domain->setText("");
   m_ui.expiration_date->setText("");
@@ -45,6 +47,14 @@ dooble_cookies_window::dooble_cookies_window(QWidget *parent):
   m_ui.path->setText("");
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
+  connect(&m_domain_filter_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_domain_filter_timer_timeout(void)));
+  connect(m_ui.domain_filter,
+	  SIGNAL(textChanged(const QString &)),
+	  &m_domain_filter_timer,
+	  SLOT(start(void)));
   connect(m_ui.tree,
 	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	  this,
@@ -132,6 +142,25 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 	  this,
 	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
+{
+  QString text(m_ui.domain_filter->text().trimmed());
+
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
+    {
+      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+
+      if(!item)
+	continue;
+      else if(text.isEmpty())
+	item->setHidden(false);
+      else if(item->text(0).contains(text))
+	item->setHidden(false);
+      else
+	item->setHidden(true);
+    }
 }
 
 void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
