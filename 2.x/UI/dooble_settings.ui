@@ -388,6 +388,60 @@
         <widget class="QWidget" name="privacy_page">
          <layout class="QVBoxLayout" name="verticalLayout_7">
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Cookie Policy</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cookie_policy">
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <item>
+               <property name="text">
+                <string>Do Not Save</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Save All</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Save Persistent Only</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QGroupBox" name="groupBox">
             <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>
@@ -445,6 +499,9 @@
                </item>
                <item row="0" column="4">
                 <widget class="QComboBox" name="hash">
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
                  <item>
                   <property name="text">
                    <string>SHA3-512</string>
@@ -454,6 +511,9 @@
                </item>
                <item row="1" column="4">
                 <widget class="QComboBox" name="key_derivation">
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
                  <item>
                   <property name="text">
                    <string>PBKDF2</string>
@@ -463,6 +523,9 @@
                </item>
                <item row="0" column="1" colspan="2">
                 <widget class="QComboBox" name="cipher">
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
                  <item>
                   <property name="text">
                    <string>AES-256</string>
@@ -706,6 +769,7 @@
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
   <tabstop>theme</tabstop>
+  <tabstop>cookie_policy</tabstop>
   <tabstop>cipher</tabstop>
   <tabstop>hash</tabstop>
   <tabstop>iterations</tabstop>
