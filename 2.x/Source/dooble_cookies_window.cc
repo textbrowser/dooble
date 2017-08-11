@@ -107,9 +107,7 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 
 	  hash[cookie.name()] = item;
 	  item->setData(1, Qt::UserRole, cookie.toRawForm());
-	  item->setFlags(Qt::ItemIsEnabled |
-			 Qt::ItemIsSelectable |
-			 Qt::ItemIsUserCheckable);
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	  m_child_items[cookie.domain()] = hash;
 	  m_top_level_items[cookie.domain()]->addChild(item);
 	}
@@ -132,14 +130,35 @@ void dooble_cookies_window::slot_item_selection_changed(void)
     (QNetworkCookie::parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
   if(cookie.isEmpty())
-    return;
+    {
+      m_ui.domain->setText(item->text(0));
+      m_ui.expiration_date->setText("");
+      m_ui.name->setText("");
+      m_ui.path->setText("");
+      m_ui.value->setText("");
+      return;
+    }
 
-  m_ui.domain->setText(cookie.at(0).domain());
-  m_ui.expiration_date->setText(cookie.at(0).expirationDate().toString());
-  m_ui.http_only->setChecked(cookie.at(0).isHttpOnly());
-  m_ui.name->setText(cookie.at(0).name());
-  m_ui.path->setText(cookie.at(0).path());
-  m_ui.secure->setChecked(cookie.at(0).isSecure());
-  m_ui.session->setChecked(cookie.at(0).isSessionCookie());
-  m_ui.value->setText(cookie.at(0).value());
+  if(item->flags() & Qt::ItemIsUserCheckable)
+    {
+      m_ui.domain->setText(cookie.at(0).domain());
+      m_ui.expiration_date->setText("");
+      m_ui.http_only->setChecked(false);
+      m_ui.name->setText("");
+      m_ui.path->setText("");
+      m_ui.secure->setChecked(false);
+      m_ui.session->setChecked(false);
+      m_ui.value->setText("");
+    }
+  else
+    {
+      m_ui.domain->setText(cookie.at(0).domain());
+      m_ui.expiration_date->setText(cookie.at(0).expirationDate().toString());
+      m_ui.http_only->setChecked(cookie.at(0).isHttpOnly());
+      m_ui.name->setText(cookie.at(0).name());
+      m_ui.path->setText(cookie.at(0).path());
+      m_ui.secure->setChecked(cookie.at(0).isSecure());
+      m_ui.session->setChecked(cookie.at(0).isSessionCookie());
+      m_ui.value->setText(cookie.at(0).value());
+    }
 }
