@@ -129,9 +129,9 @@ dooble_aes256::dooble_aes256(const QByteArray &key)
   m_Nb = 4;
   m_Nk = 8;
   m_Nr = 14;
-  m_block_length = 16;
+  m_block_length = 16; // Or, 128 bits.
   m_key = key;
-  m_key_length = 32;
+  m_key_length = 32; // Or, 256 bits.
 
   if(m_key.length() < m_key_length)
     m_key.append(m_key_length - m_key.length(), 0);
@@ -384,12 +384,12 @@ QByteArray dooble_aes256::xor_arrays(const QByteArray &a, const QByteArray &b)
   return bytes;
 }
 
-uint8_t dooble_aes256::xtime(uint8_t x) const
+uint8_t dooble_aes256::xtime(uint8_t x)
 {
   return (x << 1) ^ (((x >> 7) & 1) * 0x1b);
 }
 
-uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y) const
+uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y)
 {
   return ((x & 1) * y) ^
     ((x >> 1 & 1) * xtime(y)) ^

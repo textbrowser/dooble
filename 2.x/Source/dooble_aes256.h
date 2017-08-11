@@ -54,9 +54,9 @@ class dooble_aes256
   uint8_t m_state[4][4]; // 4 rows, Nb columns.
   QByteArray decrypt_block(const QByteArray &block);
   QByteArray encrypt_block(const QByteArray &block);
-  QByteArray xor_arrays(const QByteArray &a, const QByteArray &b);
-  uint8_t xtime(uint8_t x) const;
-  uint8_t xtime_special(uint8_t x, uint8_t y) const;
+  static QByteArray xor_arrays(const QByteArray &a, const QByteArray &b);
+  static uint8_t xtime(uint8_t x);
+  static uint8_t xtime_special(uint8_t x, uint8_t y);
   void add_round_key(size_t c);
   void inv_mix_columns(void);
   void inv_shift_rows(void);
