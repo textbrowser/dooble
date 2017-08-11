@@ -25,7 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble.h"
 #include "dooble_cookies_window.h"
+#include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
 dooble_cookies_window::dooble_cookies_window(QWidget *parent):
@@ -60,12 +62,12 @@ void dooble_cookies_window::showNormal(void)
 void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 					      bool is_favorite)
 {
+  if(!dooble::s_cryptography)
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QTreeWidgetItem *> list
-    (m_ui.tree->findItems(cookie.domain(), Qt::MatchFixedString));
-
-  if(list.isEmpty())
+  if(!m_top_level_items.contains(cookie.domain()))
     {
       QTreeWidgetItem *item = new QTreeWidgetItem
 	(m_ui.tree, QStringList() << cookie.domain());
@@ -76,27 +78,26 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 	item->setCheckState(0, Qt::Unchecked);
 
       item->setFlags
-	(Qt::ItemIsEnabled |Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+      m_top_level_items[cookie.domain()] = item;
       m_ui.tree->addTopLevelItem(item);
     }
   else
     {
-      bool found = false;
+      QByteArray bytes(dooble::s_cryptography->hmac(cookie.toRawForm()));
 
-      for(int i = 0; i < list.at(0)->childCount(); i++)
-	if(cookie.name() == list.at(0)->child(i)->text(1))
-	  {
-	    found = true;
-	    break;
-	  }
-
-      if(!found)
+      if(!m_child_items.contains(bytes))
 	{
 	  QTreeWidgetItem *item = new QTreeWidgetItem
-	    (list.at(0), QStringList() << "" << cookie.name());
+	    (m_top_level_items[cookie.domain()],
+	     QStringList() << "" << cookie.name());
 
 	  item->setData(1, Qt::UserRole, cookie.toRawForm());
-	  m_ui.tree->addTopLevelItem(item);
+	  item->setFlags(Qt::ItemIsEnabled |
+			 Qt::ItemIsSelectable |
+			 Qt::ItemIsUserCheckable);
+	  m_child_items[bytes] = item;
+	  m_top_level_items[cookie.domain()]->addChild(item);
 	}
     }
 
