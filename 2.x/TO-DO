@@ -6,12 +6,13 @@ Completed Items
        link is under the mouse cursor. Always consider the progress bar's
        width.
 4.     Update pull-down menu icons in real-time.
+5.     Display cookies in a tree-like structure.
+6.     Restrict domains.
 
 Remaining Items
 
-1.     Display cookies in a tree-like structure.
-2.     Restrict domains.
-3.     Creating new tabs and windows requires sophistication.
-4.     Elided text in pull-down menus must consider invisible text.
-5.     Windows PRNG.
-6.     Blocked Domains import. Show examples. Restrict input.
+1.     Close non-browser windows via the Esc key.
+2.     Creating new tabs and windows requires sophistication.
+3.     Elided text in pull-down menus must consider invisible text.
+4.     Windows PRNG.
+5.     Blocked Domains import. Show examples. Restrict input.
