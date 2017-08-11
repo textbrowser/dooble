@@ -95,10 +95,6 @@ void dooble_cookies_window::showNormal(void)
 void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 					      bool is_favorite)
 {
-  if(!dooble::s_cryptography)
-    return;
-
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   disconnect(m_ui.tree,
 	     SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	     this,
@@ -151,7 +147,6 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	  this,
 	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
-  QApplication::restoreOverrideCursor();
 }
 
 void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
@@ -193,7 +188,6 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
       {
 	QSqlQuery query(db);
 
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("UPDATE dooble_cookies_domains SET favorite_digest = ? "
 		      "WHERE domain_digest = ?");
 	query.addBindValue
