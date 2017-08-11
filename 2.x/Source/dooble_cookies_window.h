@@ -52,6 +52,7 @@ class dooble_cookies_window: public QMainWindow
 
  private slots:
   void slot_cookie_added(const QNetworkCookie &cookie, bool is_favorite);
+  void slot_item_selection_changed(void);
 };
 
 #endif

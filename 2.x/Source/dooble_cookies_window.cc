@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDateTime>
+
 #include "dooble.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -34,7 +36,16 @@ dooble_cookies_window::dooble_cookies_window(QWidget *parent):
   QMainWindow(parent)
 {
   m_ui.setupUi(this);
+  m_ui.domain->setText("");
+  m_ui.expiration_date->setText("");
+  m_ui.name->setText("");
+  m_ui.path->setText("");
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
+  m_ui.value->setText("");
+  connect(m_ui.tree,
+	  SIGNAL(itemSelectionChanged(void)),
+	  this,
+	  SLOT(slot_item_selection_changed(void)));
 }
 
 void dooble_cookies_window::show(void)
@@ -77,6 +88,7 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
       else
 	item->setCheckState(0, Qt::Unchecked);
 
+      item->setData(1, Qt::UserRole, cookie.toRawForm());
       item->setFlags
 	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
       m_top_level_items[cookie.domain()] = item;
@@ -107,4 +119,27 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
     (m_ui.tree->sortColumn(), m_ui.tree->header()->sortIndicatorOrder());
   m_ui.tree->resizeColumnToContents(0);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_cookies_window::slot_item_selection_changed(void)
+{
+  QTreeWidgetItem *item = m_ui.tree->currentItem();
+
+  if(!item)
+    return;
+
+  QList<QNetworkCookie> cookie
+    (QNetworkCookie::parseCookies(item->data(1, Qt::UserRole).toByteArray()));
+
+  if(cookie.isEmpty())
+    return;
+
+  m_ui.domain->setText(cookie.at(0).domain());
+  m_ui.expiration_date->setText(cookie.at(0).expirationDate().toString());
+  m_ui.http_only->setChecked(cookie.at(0).isHttpOnly());
+  m_ui.name->setText(cookie.at(0).name());
+  m_ui.path->setText(cookie.at(0).path());
+  m_ui.secure->setChecked(cookie.at(0).isSecure());
+  m_ui.session->setChecked(cookie.at(0).isSessionCookie());
+  m_ui.value->setText(cookie.at(0).value());
 }
