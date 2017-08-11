@@ -26,6 +26,9 @@
 */
 
 #include <QDateTime>
+#include <QDir>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 #include "dooble.h"
 #include "dooble_cookies_window.h"
@@ -42,6 +45,10 @@ dooble_cookies_window::dooble_cookies_window(QWidget *parent):
   m_ui.path->setText("");
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
+  connect(m_ui.tree,
+	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
+	  this,
+	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
   connect(m_ui.tree,
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
@@ -77,6 +84,10 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(m_ui.tree,
+	     SIGNAL(itemChanged(QTreeWidgetItem *, int)),
+	     this,
+	     SLOT(slot_item_changed(QTreeWidgetItem *, int)));
 
   if(!m_top_level_items.contains(cookie.domain()))
     {
@@ -116,7 +127,49 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
   m_ui.tree->sortItems
     (m_ui.tree->sortColumn(), m_ui.tree->header()->sortIndicatorOrder());
   m_ui.tree->resizeColumnToContents(0);
+  connect(m_ui.tree,
+	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
+	  this,
+	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
+{
+  if(column != 0 || !item)
+    return;
+  else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name("dooble_cookies_window");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_cookies.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare("UPDATE dooble_cookies_domains SET favorite_digest = ? "
+		      "WHERE domain_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->
+	   hmac(item->checkState(0) == Qt::Checked ?
+		QByteArray("true") : QByteArray("false")).toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(item->text(0)).toBase64());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_cookies_window::slot_item_selection_changed(void)

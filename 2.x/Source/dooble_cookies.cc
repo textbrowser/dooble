@@ -116,7 +116,8 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
 	   "(domain_digest, raw_form, raw_form_digest) VALUES (?, ?, ?)");
-	query.addBindValue(dooble::s_cryptography->hmac(cookie.domain()));
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac(cookie.toRawForm());
 
 	if(!bytes.isEmpty())
