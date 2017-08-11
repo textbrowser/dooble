@@ -84,19 +84,21 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
     }
   else
     {
-      QByteArray bytes(dooble::s_cryptography->hmac(cookie.toRawForm()));
+      QHash<QByteArray, QTreeWidgetItem *> hash
+	(m_child_items.value(cookie.domain()));
 
-      if(!m_child_items.contains(bytes))
+      if(!hash.contains(cookie.name()))
 	{
 	  QTreeWidgetItem *item = new QTreeWidgetItem
 	    (m_top_level_items[cookie.domain()],
 	     QStringList() << "" << cookie.name());
 
+	  hash[cookie.name()] = item;
 	  item->setData(1, Qt::UserRole, cookie.toRawForm());
 	  item->setFlags(Qt::ItemIsEnabled |
 			 Qt::ItemIsSelectable |
 			 Qt::ItemIsUserCheckable);
-	  m_child_items[bytes] = item;
+	  m_child_items[cookie.domain()] = hash;
 	  m_top_level_items[cookie.domain()]->addChild(item);
 	}
     }

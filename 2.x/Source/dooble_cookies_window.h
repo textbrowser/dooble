@@ -46,7 +46,7 @@ class dooble_cookies_window: public QMainWindow
   void showNormal(void);
 
  private:
-  QHash<QByteArray, QTreeWidgetItem *> m_child_items;
+  QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
   Ui_dooble_cookies_window m_ui;
 
