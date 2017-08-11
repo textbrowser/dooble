@@ -101,6 +101,7 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 
   if(!m_top_level_items.contains(cookie.domain()))
     {
+      QString text(m_ui.domain_filter->text().trimmed());
       QTreeWidgetItem *item = new QTreeWidgetItem
 	(m_ui.tree, QStringList() << cookie.domain());
 
@@ -112,6 +113,10 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
       item->setData(1, Qt::UserRole, cookie.toRawForm());
       item->setFlags
 	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+
+      if(!text.isEmpty())
+	item->setHidden(!cookie.domain().contains(text));
+
       m_top_level_items[cookie.domain()] = item;
       m_ui.tree->addTopLevelItem(item);
     }
