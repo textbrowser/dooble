@@ -36,8 +36,8 @@ class dooble_cryptography
   dooble_cryptography(void);
   QByteArray encrypt_then_mac(const QByteArray &data) const;
   QByteArray hmac(const QByteArray &message) const;
-  QByteArray mac_then_decrypt(const QByteArray &data) const;
   QByteArray hmac(const QString &message) const;
+  QByteArray mac_then_decrypt(const QByteArray &data) const;
   bool authenticated(void) const;
   static bool memcmp(const QByteArray &a, const QByteArray &b);
   void authenticate(const QByteArray &salt,

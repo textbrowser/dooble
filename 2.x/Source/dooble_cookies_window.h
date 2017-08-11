@@ -29,6 +29,7 @@
 #define dooble_cookies_window_h
 
 #include <QMainWindow>
+#include <QNetworkCookie>
 
 #include "ui_dooble_cookies_window.h"
 
@@ -38,6 +39,7 @@ class dooble_cookies_window: public QMainWindow
 
  public:
   dooble_cookies_window(QWidget *parent);
+  void populate(void);
 
  public slots:
   void show(void);
@@ -45,6 +47,9 @@ class dooble_cookies_window: public QMainWindow
 
  private:
   Ui_dooble_cookies_window m_ui;
+
+ private slots:
+  void slot_cookie_added(const QNetworkCookie &cookie, bool is_favorite);
 };
 
 #endif

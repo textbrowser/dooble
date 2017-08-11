@@ -116,6 +116,9 @@ void dooble::closeEvent(QCloseEvent *event)
   if(s_blocked_domains)
     s_blocked_domains->close();
 
+  if(s_cookies_window)
+    s_cookies_window->close();
+
   if(s_settings)
     s_settings->close();
 

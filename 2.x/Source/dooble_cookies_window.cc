@@ -32,6 +32,7 @@ dooble_cookies_window::dooble_cookies_window(QWidget *parent):
   QMainWindow(parent)
 {
   m_ui.setupUi(this);
+  m_ui.tree->sortItems(0, Qt::AscendingOrder);
 }
 
 void dooble_cookies_window::show(void)
@@ -54,4 +55,53 @@ void dooble_cookies_window::showNormal(void)
 			      toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
+					      bool is_favorite)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QTreeWidgetItem *> list
+    (m_ui.tree->findItems(cookie.domain(), Qt::MatchFixedString));
+
+  if(list.isEmpty())
+    {
+      QTreeWidgetItem *item = new QTreeWidgetItem
+	(m_ui.tree, QStringList() << cookie.domain());
+
+      if(is_favorite)
+	item->setCheckState(0, Qt::Checked);
+      else
+	item->setCheckState(0, Qt::Unchecked);
+
+      item->setFlags
+	(Qt::ItemIsEnabled |Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+      m_ui.tree->addTopLevelItem(item);
+    }
+  else
+    {
+      bool found = false;
+
+      for(int i = 0; i < list.at(0)->childCount(); i++)
+	if(cookie.name() == list.at(0)->child(i)->text(1))
+	  {
+	    found = true;
+	    break;
+	  }
+
+      if(!found)
+	{
+	  QTreeWidgetItem *item = new QTreeWidgetItem
+	    (list.at(0), QStringList() << "" << cookie.name());
+
+	  item->setData(1, Qt::UserRole, cookie.toRawForm());
+	  m_ui.tree->addTopLevelItem(item);
+	}
+    }
+
+  m_ui.tree->sortItems
+    (m_ui.tree->sortColumn(), m_ui.tree->header()->sortIndicatorOrder());
+  m_ui.tree->resizeColumnToContents(0);
+  QApplication::restoreOverrideCursor();
 }

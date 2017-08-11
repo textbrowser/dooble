@@ -49,6 +49,7 @@
 dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
   QWidget(parent)
 {
+  m_is_private = false;
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);

@@ -43,9 +43,13 @@ dooble_cookies::dooble_cookies(bool is_private, QObject *parent):QObject(parent)
   m_is_private = is_private;
 }
 
-void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie) const
+void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  emit cookie_added(cookie, false);
+
+  if(cookie.isSessionCookie())
+    return;
+  else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_is_private)
     return;
@@ -65,16 +69,19 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie) const
 	QSqlQuery query(db);
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
+		   "favorite_digest TEXT NOT NULL, "
 		   "raw_form BLOB NOT NULL, "
 		   "raw_form_digest TEXT NOT NULL PRIMARY KEY)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
-	   "(raw_form, raw_form_digest) VALUES (?, ?)");
+	   "(favorite_digest, raw_form, raw_form_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
 	bool ok = true;
 
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac(cookie.toRawForm());
 
 	if(!bytes.isEmpty())
@@ -156,11 +163,11 @@ void dooble_cookies::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT raw_form FROM dooble_cookies"))
+	if(query.exec("SELECT favorite_digest, raw_form FROM dooble_cookies"))
 	  while(query.next())
 	    {
 	      QByteArray bytes
-		(QByteArray::fromBase64(query.value(0).toByteArray()));
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
 
 	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
 
@@ -174,8 +181,12 @@ void dooble_cookies::slot_populate(void)
 		continue;
 
 	      QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+	      bool is_favorite = dooble_cryptography::memcmp
+		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
+		 query.value(0).toByteArray());
 
 	      profile->cookieStore()->setCookie(cookie.at(0));
+	      emit cookie_added(cookie.at(0), is_favorite);
 	    }
       }
 

@@ -55,6 +55,7 @@ extern "C"
 #include "dooble.h"
 #include "dooble_application.h"
 #include "dooble_cookies.h"
+#include "dooble_cookies_window.h"
 #include "dooble_favicons.h"
 #include "dooble_settings.h"
 
@@ -249,6 +250,10 @@ int main(int argc, char *argv[])
 
   dooble *d = new dooble();
 
+  QObject::connect(dooble::s_cookies,
+		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),
+		   dooble::s_cookies_window,
+		   SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(void)),
 		   dooble::s_cookies,
