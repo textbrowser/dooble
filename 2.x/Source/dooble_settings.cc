@@ -99,6 +99,16 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["icon_set"] = "Snipicons";
 }
 
+QString dooble_settings::cookie_policy_string(int index)
+{
+  if(index == 0)
+    return "do_not_save";
+  else if(index == 1)
+    return "save_all";
+  else
+    return "save_persistent_only";
+}
+
 QVariant dooble_settings::setting(const QString &key)
 {
   QReadLocker lock(&s_settings_mutex);
