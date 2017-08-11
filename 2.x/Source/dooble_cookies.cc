@@ -86,20 +86,37 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
       {
 	QSqlQuery query(db);
 
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
+		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
+		   "favorite_digest TEXT NOT NULL)");
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
-		   "favorite_digest TEXT NOT NULL, "
+		   "domain_digest TEXT NOT NULL, "
 		   "raw_form BLOB NOT NULL, "
-		   "raw_form_digest TEXT NOT NULL PRIMARY KEY)");
+		   "raw_form_digest TEXT NOT NULL, "
+		   "PRIMARY KEY (domain_digest, raw_form_digest), "
+		   "FOREIGN KEY (domain_digest) REFERENCES "
+		   "dooble_cookies_domains (domain_digest) ON DELETE CASCADE "
+		   ")");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_cookies "
-	   "(favorite_digest, raw_form, raw_form_digest) VALUES (?, ?, ?)");
+	  ("INSERT INTO dooble_cookies_domains "
+	   "(domain_digest, favorite_digest) VALUES (?, ?)");
 
 	QByteArray bytes;
 	bool ok = true;
 
 	query.addBindValue
+	  (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
+	query.addBindValue
 	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+
+	if(ok)
+	  query.exec();
+
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_cookies "
+	   "(domain_digest, raw_form, raw_form_digest) VALUES (?, ?, ?)");
+	query.addBindValue(dooble::s_cryptography->hmac(cookie.domain()));
 	bytes = dooble::s_cryptography->encrypt_then_mac(cookie.toRawForm());
 
 	if(!bytes.isEmpty())
@@ -107,12 +124,8 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	else
 	  ok = false;
 
-	bytes = dooble::s_cryptography->hmac(cookie.toRawForm());
-
-	if(!bytes.isEmpty())
-	  query.addBindValue(bytes.toBase64());
-	else
-	  ok = false;
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(cookie.toRawForm()).toBase64());
 
 	if(ok)
 	  query.exec();
@@ -145,6 +158,7 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie) const
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA foreign_keys = ON");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
 
@@ -181,7 +195,11 @@ void dooble_cookies::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT favorite_digest, raw_form FROM dooble_cookies"))
+	if(query.exec("SELECT "
+		      "(SELECT favorite_digest FROM dooble_cookies_domains a "
+		      "WHERE a.domain_digest = b.domain_digest) "
+		      "AS favorite_digest, "
+		      "raw_form FROM dooble_cookies b"))
 	  while(query.next())
 	    {
 	      QByteArray bytes
