@@ -40,6 +40,7 @@ class dooble_cookies_window: public QMainWindow
 
  public:
   dooble_cookies_window(QWidget *parent);
+  void filter(const QString &text);
   void populate(void);
 
  public slots:

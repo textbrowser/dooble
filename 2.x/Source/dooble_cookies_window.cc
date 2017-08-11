@@ -65,6 +65,11 @@ dooble_cookies_window::dooble_cookies_window(QWidget *parent):
 	  SLOT(slot_item_selection_changed(void)));
 }
 
+void dooble_cookies_window::filter(const QString &text)
+{
+  m_ui.domain_filter->setText(text);
+}
+
 void dooble_cookies_window::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
