@@ -36,6 +36,7 @@
 #include "dooble.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
+#include "dooble_settings.h"
 
 QAtomicInteger<quint64> dooble_cookies::s_db_id;
 
@@ -48,11 +49,22 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
   emit cookie_added(cookie, false);
 
-  if(cookie.isSessionCookie())
-    return;
-  else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_is_private)
+    return;
+
+  if(cookie.isSessionCookie())
+    {
+      if(dooble_settings::cookie_policy_string(dooble::s_settings->
+					       setting("cookie_policy_index").
+					       toInt()) != "save_all")
+	return;
+    }
+  else if(dooble_settings::
+	  cookie_policy_string(dooble::s_settings->
+			       setting("cookie_policy_index").
+			       toInt()) == "do_not_save")
     return;
 
   QDateTime now(QDateTime::currentDateTime());
