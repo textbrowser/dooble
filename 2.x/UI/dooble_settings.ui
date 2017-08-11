@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -417,11 +417,6 @@
               <item>
                <property name="text">
                 <string>Save Persistent Only</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string/>
                </property>
               </item>
              </widget>
