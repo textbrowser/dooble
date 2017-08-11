@@ -8,6 +8,7 @@ Completed Items
 4.     Update pull-down menu icons in real-time.
 5.     Display cookies in a tree-like structure.
 6.     Restrict domains.
+7.     Blocked Domains. Show examples. Restrict input.
 
 Remaining Items
 
@@ -15,5 +16,5 @@ Remaining Items
 2.     Creating new tabs and windows requires sophistication.
 3.     Elided text in pull-down menus must consider invisible text.
 4.     Windows PRNG.
-5.     Blocked Domains import. Show examples. Restrict input.
-6.     Proxy details within Privacy.
+5.     Proxy details within Privacy.
+6.     Allow SSL/TLS exceptions.
