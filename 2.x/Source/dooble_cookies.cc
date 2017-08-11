@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDateTime>
 #include <QDir>
 #include <QNetworkCookie>
 #include <QSqlDatabase>
@@ -52,6 +53,11 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
   else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_is_private)
+    return;
+
+  QDateTime now(QDateTime::currentDateTime());
+
+  if(cookie.expirationDate().toLocalTime() <= now)
     return;
 
   QString database_name(QString("dooble_cookies_%1").
@@ -172,13 +178,39 @@ void dooble_cookies::slot_populate(void)
 	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
 
 	      if(bytes.isEmpty())
-		continue;
+		{
+		  QSqlQuery delete_query(db);
+
+		  delete_query.prepare
+		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
+		  delete_query.addBindValue(query.value(1));
+		  continue;
+		}
 
 	      QList<QNetworkCookie> cookie = QNetworkCookie::parseCookies
 		(bytes);
 
 	      if(cookie.isEmpty())
-		continue;
+		{
+		  QSqlQuery delete_query(db);
+
+		  delete_query.prepare
+		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
+		  delete_query.addBindValue(query.value(1));
+		  continue;
+		}
+
+	      QDateTime now(QDateTime::currentDateTime());
+
+	      if(cookie.at(0).expirationDate().toLocalTime() <= now)
+		{
+		  QSqlQuery delete_query(db);
+
+		  delete_query.prepare
+		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
+		  delete_query.addBindValue(query.value(1));
+		  continue;
+		}
 
 	      QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
 	      bool is_favorite = dooble_cryptography::memcmp
