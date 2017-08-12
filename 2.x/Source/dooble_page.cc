@@ -58,6 +58,7 @@ dooble_page::dooble_page(bool is_private,
   m_ui.find_frame->setVisible(false);
   m_ui.forward->setEnabled(false);
   m_ui.forward->setMenu(new QMenu(this));
+  m_ui.is_private->setVisible(m_is_private);
   m_ui.menus->setMenu(new QMenu(this));
   m_ui.progress->setVisible(false);
 
@@ -310,6 +311,8 @@ void dooble_page::prepare_icons(void)
     (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
   m_ui.find_stop->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
+  m_ui.is_private->setPixmap
+    (QIcon(QString(":/%1/16/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
   m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
 }

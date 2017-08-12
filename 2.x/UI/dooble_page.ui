@@ -341,6 +341,16 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QLabel" name="is_private">
+       <property name="toolTip">
+        <string>This is a private tab.</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
