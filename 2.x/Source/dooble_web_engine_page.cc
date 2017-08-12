@@ -33,11 +33,12 @@
 #include "dooble_cookies.h"
 #include "dooble_web_engine_page.h"
 
-dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
-  QWebEnginePage(parent)
+dooble_web_engine_page::dooble_web_engine_page
+(QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
+  QWebEnginePage(web_engine_profile, parent)
 {
   m_cookies = 0;
-  m_is_private = false;
+  m_is_private = is_private;
 
   if(m_is_private)
     {

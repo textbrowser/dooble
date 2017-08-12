@@ -25,19 +25,29 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QWebEngineProfile>
+
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
 
-dooble_web_engine_view::dooble_web_engine_view(QWidget *parent):
+dooble_web_engine_view::dooble_web_engine_view(bool is_private,
+					       QWidget *parent):
   QWebEngineView(parent)
 {
-  m_page = new dooble_web_engine_page(this);
+  m_is_private = is_private;
+
+  if(m_is_private)
+    m_page = new dooble_web_engine_page
+      (new QWebEngineProfile(this), m_is_private, this);
+  else
+    m_page = new dooble_web_engine_page
+      (QWebEngineProfile::defaultProfile(), m_is_private, this);
 }
 
 dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
-  dooble_web_engine_view *view = new dooble_web_engine_view(0);
+  dooble_web_engine_view *view = new dooble_web_engine_view(m_is_private, 0);
 
   switch(type)
     {

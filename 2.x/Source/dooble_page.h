@@ -44,7 +44,7 @@ class dooble_page: public QWidget
   Q_OBJECT
 
  public:
-  dooble_page(dooble_web_engine_view *view, QWidget *parent);
+  dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
   QIcon icon(void) const;
   QString title(void) const;
   QUrl url(void) const;

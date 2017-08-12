@@ -46,10 +46,11 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
 
-dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
-  QWidget(parent)
+dooble_page::dooble_page(bool is_private,
+			 dooble_web_engine_view *view,
+			 QWidget *parent):QWidget(parent)
 {
-  m_is_private = false;
+  m_is_private = is_private;
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -66,7 +67,7 @@ dooble_page::dooble_page(dooble_web_engine_view *view, QWidget *parent):
       m_view->setParent(this);
     }
   else
-    m_view = new dooble_web_engine_view(this);
+    m_view = new dooble_web_engine_view(m_is_private, this);
 
   m_ui.frame->layout()->addWidget(m_view);
   connect(dooble::s_settings,

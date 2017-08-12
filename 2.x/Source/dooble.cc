@@ -153,7 +153,11 @@ void dooble::initialize_static_members(void)
 
 void dooble::new_page(bool is_private)
 {
-  Q_UNUSED(is_private);
+  dooble_page *page = new dooble_page(is_private, 0, m_ui.tab);
+
+  prepare_page_connections(page);
+  m_ui.tab->addTab(page, tr("Dooble"));
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
 void dooble::new_page(dooble_page *page)
@@ -183,7 +187,7 @@ void dooble::new_page(dooble_page *page)
 
 void dooble::new_page(dooble_web_engine_view *view)
 {
-  dooble_page *page = new dooble_page(view, m_ui.tab);
+  dooble_page *page = new dooble_page(false, view, m_ui.tab);
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("Dooble"));

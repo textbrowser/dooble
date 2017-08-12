@@ -37,9 +37,10 @@ class dooble_web_engine_view: public QWebEngineView
   Q_OBJECT
 
  public:
-  dooble_web_engine_view(QWidget *parent);
+  dooble_web_engine_view(bool is_private, QWidget *parent);
 
  private:
+  bool m_is_private;
   dooble_web_engine_page *m_page;
 
  protected:
