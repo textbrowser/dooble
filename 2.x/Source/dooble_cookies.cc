@@ -181,6 +181,8 @@ void dooble_cookies::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
+  else if(m_is_private)
+    return;
 
   QString database_name(QString("dooble_cookies_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
