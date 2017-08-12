@@ -64,6 +64,7 @@ class dooble: public QMainWindow
   Ui_dooble m_ui;
   static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
   void initialize_static_members(void);
+  void new_page(bool is_private);
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);
@@ -78,6 +79,7 @@ class dooble: public QMainWindow
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
   void slot_load_started(void);
+  void slot_new_private_tab(void);
   void slot_new_tab(void);
   void slot_new_window(void);
   void slot_open_tab_as_new_window(int index);

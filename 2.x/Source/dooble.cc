@@ -151,6 +151,11 @@ void dooble::initialize_static_members(void)
     }
 }
 
+void dooble::new_page(bool is_private)
+{
+  Q_UNUSED(is_private);
+}
+
 void dooble::new_page(dooble_page *page)
 {
   if(!page)
@@ -248,6 +253,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(new_private_tab(void)),
+	  this,
+	  SLOT(slot_new_private_tab(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -356,6 +367,11 @@ void dooble::slot_load_finished(bool ok)
 
 void dooble::slot_load_started(void)
 {
+}
+
+void dooble::slot_new_private_tab(void)
+{
+  new_page(true);
 }
 
 void dooble::slot_new_tab(void)
