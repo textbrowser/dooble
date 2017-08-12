@@ -39,7 +39,7 @@ QAtomicInteger<quint64> dooble_favicons::s_db_id;
 
 QIcon dooble_favicons::icon(const QUrl &url)
 {
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography)
     return QIcon();
 
   QIcon icon;
