@@ -54,6 +54,8 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
     {
       m_cookies = new dooble_cookies(m_is_private, this);
       m_cookies_window = new dooble_cookies_window(m_is_private, this);
+      m_page->profile()->setHttpCacheMaximumSize
+	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
       m_page->profile()->setRequestInterceptor
 	(dooble::s_url_request_interceptor);
       connect(m_cookies,
