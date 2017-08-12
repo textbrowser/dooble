@@ -55,6 +55,7 @@ extern "C"
 #endif
 #include "dooble.h"
 #include "dooble_application.h"
+#include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_favicons.h"
@@ -261,6 +262,14 @@ int main(int argc, char *argv[])
 		   SIGNAL(cookieRemoved(const QNetworkCookie &)),
 		   dooble::s_cookies,
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(void)),
+		   dooble::s_blocked_domains,
+		   SLOT(slot_populate(void)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(void)),
+		   dooble::s_cookies,
+		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),
 		   dooble::s_cookies_window,
@@ -269,10 +278,7 @@ int main(int argc, char *argv[])
 		   SIGNAL(cookie_removed(const QNetworkCookie &)),
 		   dooble::s_cookies_window,
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
-  QObject::connect(dooble::s_application,
-		   SIGNAL(dooble_credentials_authenticated(void)),
-		   dooble::s_cookies,
-		   SLOT(slot_populate(void)));
+
   d->show();
 
   int rc = dooble::s_application->exec();

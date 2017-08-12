@@ -35,7 +35,6 @@
 #include <QWidgetAction>
 
 #include "dooble.h"
-#include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -199,14 +198,6 @@ dooble_page::dooble_page(bool is_private,
 	  SLOT(slot_proxy_authentication_required(const QUrl &,
 						  QAuthenticator *,
 						  const QString &)));
-  connect(this,
-	  SIGNAL(dooble_credentials_authenticated(void)),
-	  dooble::s_blocked_domains,
-	  SLOT(slot_populate(void)));
-  connect(this,
-	  SIGNAL(dooble_credentials_authenticated(void)),
-	  dooble::s_cookies,
-	  SLOT(slot_populate(void)));
   prepare_icons();
   prepare_shortcuts();
   prepare_standard_menus();

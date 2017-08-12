@@ -45,10 +45,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 
   if(m_is_private)
     m_page = new dooble_web_engine_page
-      (new QWebEngineProfile(this), m_is_private, this);
+      (new QWebEngineProfile(this), true, this);
   else
     m_page = new dooble_web_engine_page
-      (QWebEngineProfile::defaultProfile(), m_is_private, this);
+      (QWebEngineProfile::defaultProfile(), false, this);
 
   if(m_is_private)
     {
