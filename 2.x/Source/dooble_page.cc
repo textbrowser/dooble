@@ -807,14 +807,20 @@ void dooble_page::slot_reload_or_stop(void)
 
 void dooble_page::slot_show_cookies(void)
 {
-  dooble::s_cookies_window->filter(m_view->url().host());
-  dooble::s_cookies_window->showNormal();
+  if(m_is_private)
+    m_view->show_private_cookies();
+  else
+    {
+      dooble::s_cookies_window->filter(m_view->url().host());
+      dooble::s_cookies_window->showNormal();
 
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, dooble::s_cookies_window);
+      if(dooble_settings::setting("center_child_windows").toBool())
+	dooble_ui_utilities::center_window_widget
+	  (this, dooble::s_cookies_window);
 
-  dooble::s_cookies_window->activateWindow();
-  dooble::s_cookies_window->raise();
+      dooble::s_cookies_window->activateWindow();
+      dooble::s_cookies_window->raise();
+    }
 }
 
 void dooble_page::slot_show_find(void)

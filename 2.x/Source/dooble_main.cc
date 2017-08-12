@@ -31,6 +31,7 @@
 #include <QStyleFactory>
 #endif
 #include <QThread>
+#include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 
@@ -245,11 +246,21 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, false);
   dooble_thread::msleep(750);
   splash.finish(0);
 
   dooble *d = new dooble();
 
+  QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+		   SIGNAL(cookieAdded(const QNetworkCookie &)),
+		   dooble::s_cookies,
+		   SLOT(slot_cookie_added(const QNetworkCookie &)));
+  QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+		   SIGNAL(cookieRemoved(const QNetworkCookie &)),
+		   dooble::s_cookies,
+		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),
 		   dooble::s_cookies_window,

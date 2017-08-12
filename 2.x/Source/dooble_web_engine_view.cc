@@ -25,15 +25,22 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 
+#include "dooble.h"
+#include "dooble_cookies.h"
+#include "dooble_cookies_window.h"
+#include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
+#include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 
 dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 					       QWidget *parent):
   QWebEngineView(parent)
 {
+  m_cookies = 0;
   m_is_private = is_private;
 
   if(m_is_private)
@@ -42,6 +49,30 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
   else
     m_page = new dooble_web_engine_page
       (QWebEngineProfile::defaultProfile(), m_is_private, this);
+
+  if(m_is_private)
+    {
+      m_cookies = new dooble_cookies(m_is_private, this);
+      m_cookies_window = new dooble_cookies_window(m_is_private, this);
+      m_page->profile()->setRequestInterceptor
+	(dooble::s_url_request_interceptor);
+      connect(m_cookies,
+	      SIGNAL(cookie_added(const QNetworkCookie &, bool)),
+	      m_cookies_window,
+	      SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
+      connect(m_cookies,
+	      SIGNAL(cookie_removed(const QNetworkCookie &)),
+	      m_cookies_window,
+	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+      connect(m_page->profile()->cookieStore(),
+	      SIGNAL(cookieAdded(const QNetworkCookie &)),
+	      m_cookies,
+	      SLOT(slot_cookie_added(const QNetworkCookie &)));
+      connect(m_page->profile()->cookieStore(),
+	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	      m_cookies,
+	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+    }
 }
 
 dooble_web_engine_view *dooble_web_engine_view::createWindow
@@ -62,4 +93,19 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     }
 
   return view;
+}
+
+void dooble_web_engine_view::show_private_cookies(void)
+{
+  if(!m_cookies_window)
+    return;
+
+  m_cookies_window->filter(url().host());
+  m_cookies_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, m_cookies_window);
+
+  m_cookies_window->activateWindow();
+  m_cookies_window->raise();
 }

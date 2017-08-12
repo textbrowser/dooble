@@ -30,8 +30,6 @@
 
 #include <QWebEnginePage>
 
-class dooble_cookies;
-
 class dooble_web_engine_page: public QWebEnginePage
 {
   Q_OBJECT
@@ -49,7 +47,6 @@ class dooble_web_engine_page: public QWebEnginePage
 
  private:
   bool m_is_private;
-  dooble_cookies *m_cookies;
 };
 
 #endif

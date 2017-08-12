@@ -30,39 +30,13 @@
 
 #include "dooble.h"
 #include "dooble_blocked_domains.h"
-#include "dooble_cookies.h"
 #include "dooble_web_engine_page.h"
 
 dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
   QWebEnginePage(web_engine_profile, parent)
 {
-  m_cookies = 0;
   m_is_private = is_private;
-
-  if(m_is_private)
-    {
-      m_cookies = new dooble_cookies(m_is_private, this);
-      connect(profile()->cookieStore(),
-	      SIGNAL(cookieAdded(const QNetworkCookie &)),
-	      m_cookies,
-	      SLOT(slot_cookie_added(const QNetworkCookie &)));
-      connect(profile()->cookieStore(),
-	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	      m_cookies,
-	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
-    }
-  else
-    {
-      connect(profile()->cookieStore(),
-	      SIGNAL(cookieAdded(const QNetworkCookie &)),
-	      dooble::s_cookies,
-	      SLOT(slot_cookie_added(const QNetworkCookie &)));
-      connect(profile()->cookieStore(),
-	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	      dooble::s_cookies,
-	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
-    }
 }
 
 dooble_web_engine_page::~dooble_web_engine_page()

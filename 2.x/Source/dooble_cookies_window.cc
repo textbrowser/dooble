@@ -35,11 +35,12 @@
 #include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
-dooble_cookies_window::dooble_cookies_window(QWidget *parent):
+dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QMainWindow(parent)
 {
   m_domain_filter_timer.setInterval(1500);
   m_domain_filter_timer.setSingleShot(true);
+  m_is_private = is_private;
   m_ui.setupUi(this);
   m_ui.domain->setText("");
   m_ui.expiration_date->setText("");
@@ -63,6 +64,21 @@ dooble_cookies_window::dooble_cookies_window(QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
+}
+
+void dooble_cookies_window::closeEvent(QCloseEvent *event)
+{
+  if(m_is_private)
+    {
+      QMainWindow::closeEvent(event);
+      return;
+    }
+
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("dooble_cookies_window_geometry", saveGeometry().toBase64());
+
+  QMainWindow::closeEvent(event);
 }
 
 void dooble_cookies_window::filter(const QString &text)

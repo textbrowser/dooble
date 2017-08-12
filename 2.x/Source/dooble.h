@@ -56,13 +56,13 @@ class dooble: public QMainWindow
   static dooble_cookies_window *s_cookies_window;
   static dooble_cryptography *s_cryptography;
   static dooble_settings *s_settings;
+  static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
 
  protected:
   void closeEvent(QCloseEvent *event);
 
  private:
   Ui_dooble m_ui;
-  static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
   void initialize_static_members(void);
   void new_page(bool is_private);
   void new_page(dooble_page *page);

@@ -39,19 +39,23 @@ class dooble_cookies_window: public QMainWindow
   Q_OBJECT
 
  public:
-  dooble_cookies_window(QWidget *parent);
+  dooble_cookies_window(bool is_private, QWidget *parent);
   void filter(const QString &text);
   void populate(void);
 
- public slots:
-  void show(void);
-  void showNormal(void);
+ protected:
+  void closeEvent(QCloseEvent *event);
 
  private:
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
   QTimer m_domain_filter_timer;
   Ui_dooble_cookies_window m_ui;
+  bool m_is_private;
+
+ public slots:
+  void show(void);
+  void showNormal(void);
 
  private slots:
   void slot_cookie_added(const QNetworkCookie &cookie, bool is_favorite);
