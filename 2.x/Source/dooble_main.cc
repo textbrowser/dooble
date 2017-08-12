@@ -254,6 +254,10 @@ int main(int argc, char *argv[])
 		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),
 		   dooble::s_cookies_window,
 		   SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
+  QObject::connect(dooble::s_cookies,
+		   SIGNAL(cookie_removed(const QNetworkCookie &)),
+		   dooble::s_cookies_window,
+		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(void)),
 		   dooble::s_cookies,

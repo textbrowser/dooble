@@ -149,6 +149,37 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
 }
 
+void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
+{
+  QHash<QByteArray, QTreeWidgetItem *> hash
+    (m_child_items.value(cookie.domain()));
+
+  if(hash.isEmpty())
+    return;
+
+  QTreeWidgetItem *item = hash.value(cookie.name());
+
+  if(item && item->parent())
+    delete item->parent()->takeChild(item->parent()->indexOfChild(item));
+
+  hash.remove(cookie.name());
+
+  if(hash.isEmpty())
+    {
+      m_child_items.remove(cookie.domain());
+      item = m_top_level_items.value(cookie.domain());
+
+      if(item && item->checkState(0) != Qt::Checked)
+	{
+	  m_top_level_items.remove(cookie.domain());
+	  delete m_ui.tree->takeTopLevelItem
+	    (m_ui.tree->indexOfTopLevelItem(item));
+	}
+    }
+  else
+    m_child_items[cookie.domain()] = hash;
+}
+
 void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 {
   QString text(m_ui.domain_filter->text().trimmed());

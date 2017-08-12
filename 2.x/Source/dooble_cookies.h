@@ -45,11 +45,12 @@ class dooble_cookies: public QObject
 
  private slots:
   void slot_cookie_added(const QNetworkCookie &cookie);
-  void slot_cookie_removed(const QNetworkCookie &cookie) const;
+  void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_populate(void);
 
  signals:
   void cookie_added(const QNetworkCookie &cookie, bool is_favorite);
+  void cookie_removed(const QNetworkCookie &cookie);
 };
 
 #endif

@@ -138,8 +138,10 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie) const
+void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
 {
+  emit cookie_removed(cookie);
+
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_is_private)
