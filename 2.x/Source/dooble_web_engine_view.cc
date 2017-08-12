@@ -27,6 +27,7 @@
 
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
+#include <QWebEngineSettings>
 
 #include "dooble.h"
 #include "dooble_cookies.h"
@@ -58,6 +59,12 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
       m_page->profile()->setRequestInterceptor
 	(dooble::s_url_request_interceptor);
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::FullScreenSupportEnabled, true);
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::LocalStorageEnabled, false);
       connect(m_cookies,
 	      SIGNAL(cookie_added(const QNetworkCookie &, bool)),
 	      m_cookies_window,

@@ -278,7 +278,6 @@ int main(int argc, char *argv[])
 		   SIGNAL(cookie_removed(const QNetworkCookie &)),
 		   dooble::s_cookies_window,
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
-
   d->show();
 
   int rc = dooble::s_application->exec();
