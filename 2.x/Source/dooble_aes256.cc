@@ -138,6 +138,9 @@ dooble_aes256::dooble_aes256(const QByteArray &key)
   else
     m_key.resize(m_key_length);
 
+  for(size_t i = 0; i < 4; i++)
+    m_state[i][0] = m_state[i][1] = m_state[i][2] = m_state[i][3] = 0;
+
   key_expansion();
 }
 
