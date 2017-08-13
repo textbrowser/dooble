@@ -44,13 +44,11 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
   m_cookies = 0;
   m_is_private = is_private;
 
-#ifdef DOOBLE_PRIVATE_COOKIES_AVAILABLE
   if(m_is_private)
     m_page = new dooble_web_engine_page
       (new QWebEngineProfile(this), m_is_private, this);
   else
-    m_page = new dooble_web_engine_page
-      (QWebEngineProfile::defaultProfile(), m_is_private, this);
+    m_page = new dooble_web_engine_page(this);
 
   if(m_is_private)
     {
@@ -83,10 +81,8 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	      m_cookies,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
     }
-#else
-  m_page = new dooble_web_engine_page
-    (QWebEngineProfile::defaultProfile(), m_is_private, this);
-#endif
+
+  setPage(m_page);
 }
 
 dooble_web_engine_view *dooble_web_engine_view::createWindow
@@ -107,6 +103,11 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     }
 
   return view;
+}
+
+void dooble_web_engine_view::load(const QUrl &url)
+{
+  m_page->load(url);
 }
 
 void dooble_web_engine_view::show_private_cookies(void)

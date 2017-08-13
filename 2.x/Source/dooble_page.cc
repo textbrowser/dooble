@@ -42,6 +42,7 @@
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
 #include "dooble_ui_utilities.h"
+#include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
 
@@ -798,11 +799,9 @@ void dooble_page::slot_reload_or_stop(void)
 
 void dooble_page::slot_show_cookies(void)
 {
-#ifdef DOOBLE_PRIVATE_COOKIES_AVAILABLE
   if(m_is_private)
     m_view->show_private_cookies();
   else
-#endif
     {
       dooble::s_cookies_window->filter(m_view->url().host());
       dooble::s_cookies_window->showNormal();

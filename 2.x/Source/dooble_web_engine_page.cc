@@ -39,6 +39,12 @@ dooble_web_engine_page::dooble_web_engine_page
   m_is_private = is_private;
 }
 
+dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
+  QWebEnginePage(parent)
+{
+  m_is_private = false;
+}
+
 dooble_web_engine_page::~dooble_web_engine_page()
 {
 }

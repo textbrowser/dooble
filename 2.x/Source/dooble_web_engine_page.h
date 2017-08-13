@@ -38,6 +38,7 @@ class dooble_web_engine_page: public QWebEnginePage
   dooble_web_engine_page(QWebEngineProfile *web_engine_profile,
 			 bool is_private,
 			 QWidget *parent);
+  dooble_web_engine_page(QWidget *parent);
   ~dooble_web_engine_page();
 
  protected:
