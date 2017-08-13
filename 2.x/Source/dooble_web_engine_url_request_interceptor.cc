@@ -30,8 +30,8 @@
 #include "dooble_web_engine_url_request_interceptor.h"
 
 dooble_web_engine_url_request_interceptor::
-dooble_web_engine_url_request_interceptor(void):
-  QWebEngineUrlRequestInterceptor()
+dooble_web_engine_url_request_interceptor(QObject *parent):
+  QWebEngineUrlRequestInterceptor(parent)
 {
 }
 

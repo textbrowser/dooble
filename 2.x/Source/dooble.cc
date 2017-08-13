@@ -145,7 +145,7 @@ void dooble::initialize_static_members(void)
   if(!s_url_request_interceptor)
     {
       s_url_request_interceptor = new
-	dooble_web_engine_url_request_interceptor();
+	dooble_web_engine_url_request_interceptor(0);
       QWebEngineProfile::defaultProfile()->setRequestInterceptor
 	(s_url_request_interceptor);
     }

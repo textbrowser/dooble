@@ -37,7 +37,7 @@ public QWebEngineUrlRequestInterceptor
   Q_OBJECT
 
  public:
-  dooble_web_engine_url_request_interceptor(void);
+  dooble_web_engine_url_request_interceptor(QObject *parent);
   void interceptRequest(QWebEngineUrlRequestInfo &info);
 };
 
