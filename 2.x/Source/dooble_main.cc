@@ -279,9 +279,9 @@ int main(int argc, char *argv[])
 		   dooble::s_cookies_window,
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
   QObject::connect(dooble::s_cookies_window,
-		   SIGNAL(delete_cookie(const QByteArray &)),
+		   SIGNAL(delete_cookie(const QNetworkCookie &)),
 		   dooble::s_cookies,
-		   SLOT(slot_delete_cookie(const QByteArray &)));
+		   SLOT(slot_delete_cookie(const QNetworkCookie &)));
   d->show();
 
   int rc = dooble::s_application->exec();

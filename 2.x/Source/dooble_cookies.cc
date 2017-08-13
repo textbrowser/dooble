@@ -177,20 +177,12 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_cookies::slot_delete_cookie(const QByteArray &bytes)
+void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_is_private)
     return;
-
-  QList<QNetworkCookie> cookie(QNetworkCookie::parseCookies(bytes));
-
-  if(cookie.isEmpty())
-    return;
-
-  QWebEngineProfile::defaultProfile()->cookieStore()->deleteCookie
-    (cookie.at(0));
 
   QString database_name(QString("dooble_cookies_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
@@ -210,7 +202,7 @@ void dooble_cookies::slot_delete_cookie(const QByteArray &bytes)
 	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
 
 	QByteArray bytes
-	  (dooble::s_cryptography->hmac(cookie.at(0).toRawForm()));
+	  (dooble::s_cryptography->hmac(cookie.toRawForm()));
 
 	query.addBindValue(bytes.toBase64());
 	query.exec();

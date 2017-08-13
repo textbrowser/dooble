@@ -30,9 +30,12 @@
 
 #include <QMainWindow>
 #include <QNetworkCookie>
+#include <QPointer>
 #include <QTimer>
 
 #include "ui_dooble_cookies_window.h"
+
+class QWebEngineCookieStore;
 
 class dooble_cookies_window: public QMainWindow
 {
@@ -42,6 +45,7 @@ class dooble_cookies_window: public QMainWindow
   dooble_cookies_window(bool is_private, QWidget *parent);
   void filter(const QString &text);
   void populate(void);
+  void setCookieStore(QWebEngineCookieStore *cookieStore);
 
  protected:
   void closeEvent(QCloseEvent *event);
@@ -49,6 +53,7 @@ class dooble_cookies_window: public QMainWindow
  private:
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
+  QPointer<QWebEngineCookieStore> m_cookieStore;
   QTimer m_domain_filter_timer;
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
@@ -66,7 +71,7 @@ class dooble_cookies_window: public QMainWindow
   void slot_item_selection_changed(void);
 
  signals:
-  void delete_cookie(const QByteArray &bytes);
+  void delete_cookie(const QNetworkCookie &cookie);
 };
 
 #endif

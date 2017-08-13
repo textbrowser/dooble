@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QWebEngineCookieStore>
 
 #include "dooble.h"
 #include "dooble_cookies_window.h"
@@ -38,7 +39,7 @@
 dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QMainWindow(parent)
 {
-  m_domain_filter_timer.setInterval(1500);
+  m_domain_filter_timer.setInterval(750);
   m_domain_filter_timer.setSingleShot(true);
   m_is_private = is_private;
   m_ui.setupUi(this);
@@ -88,6 +89,11 @@ void dooble_cookies_window::closeEvent(QCloseEvent *event)
 void dooble_cookies_window::filter(const QString &text)
 {
   m_ui.domain_filter->setText(text);
+}
+
+void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookieStore)
+{
+  m_cookieStore = cookieStore;
 }
 
 void dooble_cookies_window::show(void)
@@ -226,14 +232,37 @@ void dooble_cookies_window::slot_delete_shown(void)
       foreach(QTreeWidgetItem *i, item->takeChildren())
 	if(i)
 	  {
-	    emit delete_cookie(i->data(1, Qt::UserRole).toByteArray());
+	    QList<QNetworkCookie> cookie
+	      (QNetworkCookie::
+	       parseCookies(i->data(1, Qt::UserRole).toByteArray()));
+
+	    if(!cookie.isEmpty())
+	      {
+		if(m_cookieStore)
+		  m_cookieStore->deleteCookie(cookie.at(0));
+
+		emit delete_cookie(cookie.at(0));
+	      }
+
 	    delete i;
 	  }
 
       item = m_ui.tree->takeTopLevelItem(i);
 
       if(item)
-	emit delete_cookie(item->data(1, Qt::UserRole).toByteArray());
+	{
+	  QList<QNetworkCookie> cookie
+	    (QNetworkCookie::
+	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
+
+	  if(!cookie.isEmpty())
+	    {
+	      if(m_cookieStore)
+		m_cookieStore->deleteCookie(cookie.at(0));
+
+	      emit delete_cookie(cookie.at(0));
+	    }
+	}
 
       delete item;
     }
