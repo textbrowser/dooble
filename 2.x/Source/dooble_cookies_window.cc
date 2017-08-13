@@ -52,6 +52,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_domain_filter_timer_timeout(void)));
+  connect(m_ui.delete_shown,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_shown(void)));
   connect(m_ui.domain_filter,
 	  SIGNAL(textChanged(const QString &)),
 	  &m_domain_filter_timer,
@@ -205,6 +209,38 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
     m_child_items[cookie.domain()] = hash;
 }
 
+void dooble_cookies_window::slot_delete_shown(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = m_ui.tree->topLevelItemCount() - 1; i >= 0; i--)
+    {
+      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+
+      if(!item || item->isHidden())
+	continue;
+
+      m_child_items.remove(item->text(0));
+      m_top_level_items.remove(item->text(0));
+
+      foreach(QTreeWidgetItem *i, item->takeChildren())
+	if(i)
+	  {
+	    emit delete_cookie(i->data(1, Qt::UserRole).toByteArray());
+	    delete i;
+	  }
+
+      item = m_ui.tree->takeTopLevelItem(i);
+
+      if(item)
+	emit delete_cookie(item->data(1, Qt::UserRole).toByteArray());
+
+      delete item;
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 {
   QString text(m_ui.domain_filter->text().trimmed());
@@ -222,6 +258,8 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
       else
 	item->setHidden(true);
     }
+
+  m_ui.tree->resizeColumnToContents(0);
 }
 
 void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)

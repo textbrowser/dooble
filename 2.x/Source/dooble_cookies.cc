@@ -177,12 +177,62 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_cookies::slot_delete_cookie(const QByteArray &bytes)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(m_is_private)
+    return;
+
+  QList<QNetworkCookie> cookie(QNetworkCookie::parseCookies(bytes));
+
+  if(cookie.isEmpty())
+    return;
+
+  QWebEngineProfile::defaultProfile()->cookieStore()->deleteCookie
+    (cookie.at(0));
+
+  QString database_name(QString("dooble_cookies_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_cookies.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
+
+	QByteArray bytes
+	  (dooble::s_cryptography->hmac(cookie.at(0).toRawForm()));
+
+	query.addBindValue(bytes.toBase64());
+	query.exec();
+	query.exec("DELETE FROM dooble_cookies_domains WHERE "
+		   "domain_digest NOT IN (SELECT domain_digest FROM "
+		   "dooble_cookies)");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_cookies::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_is_private)
     return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString database_name(QString("dooble_cookies_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
@@ -219,6 +269,11 @@ void dooble_cookies::slot_populate(void)
 		  delete_query.prepare
 		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
 		  delete_query.addBindValue(query.value(1));
+		  delete_query.exec();
+		  delete_query.exec
+		    ("DELETE FROM dooble_cookies_domains WHERE "
+		     "domain_digest NOT IN (SELECT domain_digest FROM "
+		     "dooble_cookies)");
 		  continue;
 		}
 
@@ -232,6 +287,11 @@ void dooble_cookies::slot_populate(void)
 		  delete_query.prepare
 		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
 		  delete_query.addBindValue(query.value(1));
+		  delete_query.exec();
+		  delete_query.exec
+		    ("DELETE FROM dooble_cookies_domains WHERE "
+		     "domain_digest NOT IN (SELECT domain_digest FROM "
+		     "dooble_cookies)");
 		  continue;
 		}
 
@@ -244,6 +304,11 @@ void dooble_cookies::slot_populate(void)
 		  delete_query.prepare
 		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
 		  delete_query.addBindValue(query.value(1));
+		  delete_query.exec();
+		  delete_query.exec
+		    ("DELETE FROM dooble_cookies_domains WHERE "
+		     "domain_digest NOT IN (SELECT domain_digest FROM "
+		     "dooble_cookies)");
 		  continue;
 		}
 
@@ -261,4 +326,5 @@ void dooble_cookies::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
