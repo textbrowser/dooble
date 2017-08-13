@@ -41,7 +41,6 @@ class dooble_web_engine_view: public QWebEngineView
 
  public:
   dooble_web_engine_view(bool is_private, QWidget *parent);
-  void load(const QUrl &url);
   void show_private_cookies(void);
 
  private:

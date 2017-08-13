@@ -106,11 +106,6 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
   return view;
 }
 
-void dooble_web_engine_view::load(const QUrl &url)
-{
-  m_page->load(url);
-}
-
 void dooble_web_engine_view::show_private_cookies(void)
 {
   if(!m_cookies_window)
