@@ -47,10 +47,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 #ifdef DOOBLE_PRIVATE_COOKIES_AVAILABLE
   if(m_is_private)
     m_page = new dooble_web_engine_page
-      (new QWebEngineProfile(this), true, this);
+      (new QWebEngineProfile(this), m_is_private, this);
   else
     m_page = new dooble_web_engine_page
-      (QWebEngineProfile::defaultProfile(), false, this);
+      (QWebEngineProfile::defaultProfile(), m_is_private, this);
 
   if(m_is_private)
     {
