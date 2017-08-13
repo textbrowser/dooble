@@ -44,6 +44,7 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
   m_cookies = 0;
   m_is_private = is_private;
 
+#ifdef DOOBLE_PRIVATE_COOKIES_AVAILABLE
   if(m_is_private)
     m_page = new dooble_web_engine_page
       (new QWebEngineProfile(this), true, this);
@@ -82,6 +83,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	      m_cookies,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
     }
+#else
+  m_page = new dooble_web_engine_page
+    (QWebEngineProfile::defaultProfile(), m_is_private, this);
+#endif
 }
 
 dooble_web_engine_view *dooble_web_engine_view::createWindow
