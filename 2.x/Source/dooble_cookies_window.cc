@@ -32,6 +32,7 @@
 #include <QWebEngineCookieStore>
 
 #include "dooble.h"
+#include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_settings.h"
