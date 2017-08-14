@@ -219,6 +219,9 @@ void dooble_cookies_window::slot_delete_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  if(m_cookieStore)
+    m_cookieStore->blockSignals(true);
+
   for(int i = m_ui.tree->topLevelItemCount() - 1; i >= 0; i--)
     {
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
@@ -266,6 +269,9 @@ void dooble_cookies_window::slot_delete_shown(void)
 
       delete item;
     }
+
+  if(m_cookieStore)
+    m_cookieStore->blockSignals(false);
 
   QApplication::restoreOverrideCursor();
 }
