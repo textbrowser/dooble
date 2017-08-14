@@ -68,6 +68,7 @@ class dooble_cookies_window: public QMainWindow
  private slots:
   void slot_cookie_added(const QNetworkCookie &cookie, bool is_favorite);
   void slot_cookie_removed(const QNetworkCookie &cookie);
+  void slot_delete_selected(void);
   void slot_delete_shown(void);
   void slot_domain_filter_timer_timeout(void);
   void slot_item_changed(QTreeWidgetItem *item, int column);

@@ -54,6 +54,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_domain_filter_timer_timeout(void)));
+  connect(m_ui.delete_selected,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_selected(void)));
   connect(m_ui.delete_shown,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -219,6 +223,10 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
     }
   else
     m_child_items[cookie.domain()] = hash;
+}
+
+void dooble_cookies_window::slot_delete_selected(void)
+{
 }
 
 void dooble_cookies_window::slot_delete_shown(void)
