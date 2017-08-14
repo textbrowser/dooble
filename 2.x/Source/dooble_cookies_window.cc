@@ -96,6 +96,11 @@ void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookieStore)
   m_cookieStore = cookieStore;
 }
 
+void dooble_cookies_window::setCookies(dooble_cookies *cookies)
+{
+  m_cookies = cookies;
+}
+
 void dooble_cookies_window::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -219,8 +224,11 @@ void dooble_cookies_window::slot_delete_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(m_cookieStore)
-    m_cookieStore->blockSignals(true);
+  if(m_cookieStore && m_cookies)
+    disconnect(m_cookieStore,
+	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	       m_cookies,
+	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
   for(int i = m_ui.tree->topLevelItemCount() - 1; i >= 0; i--)
     {
@@ -270,8 +278,11 @@ void dooble_cookies_window::slot_delete_shown(void)
       delete item;
     }
 
-  if(m_cookieStore)
-    m_cookieStore->blockSignals(false);
+  if(m_cookieStore && m_cookies)
+    connect(m_cookieStore,
+	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	    m_cookies,
+	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
   QApplication::restoreOverrideCursor();
 }

@@ -138,6 +138,7 @@ void dooble::initialize_static_members(void)
       s_cookies_window = new dooble_cookies_window(false, 0);
       s_cookies_window->setCookieStore
 	(QWebEngineProfile::defaultProfile()->cookieStore());
+      s_cookies_window->setCookies(s_cookies);
     }
 
   if(!s_cryptography)

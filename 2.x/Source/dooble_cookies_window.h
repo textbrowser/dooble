@@ -36,6 +36,7 @@
 #include "ui_dooble_cookies_window.h"
 
 class QWebEngineCookieStore;
+class dooble_cookies;
 
 class dooble_cookies_window: public QMainWindow
 {
@@ -46,6 +47,7 @@ class dooble_cookies_window: public QMainWindow
   void filter(const QString &text);
   void populate(void);
   void setCookieStore(QWebEngineCookieStore *cookieStore);
+  void setCookies(dooble_cookies *cookies);
 
  protected:
   void closeEvent(QCloseEvent *event);
@@ -54,6 +56,7 @@ class dooble_cookies_window: public QMainWindow
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
   QPointer<QWebEngineCookieStore> m_cookieStore;
+  QPointer<dooble_cookies> m_cookies;
   QTimer m_domain_filter_timer;
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
