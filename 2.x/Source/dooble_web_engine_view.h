@@ -49,6 +49,9 @@ class dooble_web_engine_view: public QWebEngineView
   dooble_cookies *m_cookies;
   dooble_web_engine_page *m_page;
 
+ private slots:
+  void slot_settings_applied(void);
+
  protected:
   dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
 

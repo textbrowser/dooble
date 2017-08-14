@@ -319,10 +319,6 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
 
 void dooble_settings::slot_apply(void)
 {
-  /*
-  ** Cache
-  */
-
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
@@ -340,6 +336,7 @@ void dooble_settings::slot_apply(void)
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   QApplication::restoreOverrideCursor();
+  emit applied();
 }
 
 void dooble_settings::slot_clear_cache(void)

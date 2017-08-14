@@ -86,6 +86,7 @@ class dooble_settings: public QMainWindow
 
  signals:
   void credentials_created(void);
+  void applied(void);
 };
 
 #endif

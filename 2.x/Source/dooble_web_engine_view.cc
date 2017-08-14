@@ -66,6 +66,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::LocalStorageEnabled, false);
+      connect(dooble::s_settings,
+	      SIGNAL(applied(void)),
+	      this,
+	      SLOT(slot_settings_applied(void)));
       connect(m_cookies,
 	      SIGNAL(cookie_added(const QNetworkCookie &, bool)),
 	      m_cookies_window,
@@ -105,6 +109,13 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     }
 
   return view;
+}
+
+void dooble_web_engine_view::slot_settings_applied(void)
+{
+  if(m_is_private)
+    m_page->profile()->setHttpCacheMaximumSize
+      (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
 }
 
 void dooble_web_engine_view::show_private_cookies(void)
