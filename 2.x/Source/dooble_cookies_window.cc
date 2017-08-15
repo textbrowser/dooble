@@ -43,7 +43,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_domain_filter_timer.setInterval(750);
   m_domain_filter_timer.setSingleShot(true);
   m_is_private = is_private;
-  m_purge_domains_timer.setInterval(15000);
+  m_purge_domains_timer.setInterval(30000);
   m_ui.setupUi(this);
   m_ui.action_Periodically_Purge_Temporary_Domains->setChecked
     (dooble_settings::setting("periodically_purge_temporary_domains").toBool());
@@ -104,6 +104,74 @@ void dooble_cookies_window::closeEvent(QCloseEvent *event)
       ("dooble_cookies_window_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
+}
+
+void dooble_cookies_window::delete_top_level_items
+(QList<QTreeWidgetItem *> list)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(m_cookieStore && m_cookies)
+    disconnect(m_cookieStore,
+	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	       m_cookies,
+	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
+
+  while(!list.isEmpty())
+    {
+      QTreeWidgetItem *item = list.takeFirst();
+
+      if(!item)
+	continue;
+
+      m_child_items.remove(item->text(0));
+      m_top_level_items.remove(item->text(0));
+
+      foreach(QTreeWidgetItem *i, item->takeChildren())
+	if(i)
+	  {
+	    QList<QNetworkCookie> cookie
+	      (QNetworkCookie::
+	       parseCookies(i->data(1, Qt::UserRole).toByteArray()));
+
+	    if(!cookie.isEmpty())
+	      {
+		if(m_cookieStore)
+		  m_cookieStore->deleteCookie(cookie.at(0));
+
+		emit delete_cookie(cookie.at(0));
+	      }
+
+	    delete i;
+	  }
+
+      item = m_ui.tree->takeTopLevelItem(m_ui.tree->indexOfTopLevelItem(item));
+
+      if(item)
+	{
+	  QList<QNetworkCookie> cookie
+	    (QNetworkCookie::
+	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
+
+	  if(!cookie.isEmpty())
+	    {
+	      if(m_cookieStore)
+		m_cookieStore->deleteCookie(cookie.at(0));
+
+	      emit delete_cookie(cookie.at(0));
+	    }
+	}
+
+      delete item;
+    }
+
+  if(m_cookieStore && m_cookies)
+    connect(m_cookieStore,
+	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	    m_cookies,
+	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_cookies_window::filter(const QString &text)
@@ -345,66 +413,17 @@ void dooble_cookies_window::slot_delete_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(m_cookieStore && m_cookies)
-    disconnect(m_cookieStore,
-	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	       m_cookies,
-	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
+  QList<QTreeWidgetItem *> list;
 
-  for(int i = m_ui.tree->topLevelItemCount() - 1; i >= 0; i--)
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
 
-      if(!item || item->isHidden())
-	continue;
-
-      m_child_items.remove(item->text(0));
-      m_top_level_items.remove(item->text(0));
-
-      foreach(QTreeWidgetItem *i, item->takeChildren())
-	if(i)
-	  {
-	    QList<QNetworkCookie> cookie
-	      (QNetworkCookie::
-	       parseCookies(i->data(1, Qt::UserRole).toByteArray()));
-
-	    if(!cookie.isEmpty())
-	      {
-		if(m_cookieStore)
-		  m_cookieStore->deleteCookie(cookie.at(0));
-
-		emit delete_cookie(cookie.at(0));
-	      }
-
-	    delete i;
-	  }
-
-      item = m_ui.tree->takeTopLevelItem(i);
-
-      if(item)
-	{
-	  QList<QNetworkCookie> cookie
-	    (QNetworkCookie::
-	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
-
-	  if(!cookie.isEmpty())
-	    {
-	      if(m_cookieStore)
-		m_cookieStore->deleteCookie(cookie.at(0));
-
-	      emit delete_cookie(cookie.at(0));
-	    }
-	}
-
-      delete item;
+      if(!(!item || item->isHidden()))
+	list.append(item);
     }
 
-  if(m_cookieStore && m_cookies)
-    connect(m_cookieStore,
-	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	    m_cookies,
-	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
-
+  delete_top_level_items(list);
   QApplication::restoreOverrideCursor();
 }
 
@@ -528,65 +547,16 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(m_cookieStore && m_cookies)
-    disconnect(m_cookieStore,
-	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	       m_cookies,
-	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
+  QList<QTreeWidgetItem *> list;
 
-  for(int i = m_ui.tree->topLevelItemCount() - 1; i >= 0; i--)
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
 
-      if(!item || item->checkState(0) == Qt::Checked)
-	continue;
-
-      m_child_items.remove(item->text(0));
-      m_top_level_items.remove(item->text(0));
-
-      foreach(QTreeWidgetItem *i, item->takeChildren())
-	if(i)
-	  {
-	    QList<QNetworkCookie> cookie
-	      (QNetworkCookie::
-	       parseCookies(i->data(1, Qt::UserRole).toByteArray()));
-
-	    if(!cookie.isEmpty())
-	      {
-		if(m_cookieStore)
-		  m_cookieStore->deleteCookie(cookie.at(0));
-
-		emit delete_cookie(cookie.at(0));
-	      }
-
-	    delete i;
-	  }
-
-      item = m_ui.tree->takeTopLevelItem(i);
-
-      if(item)
-	{
-	  QList<QNetworkCookie> cookie
-	    (QNetworkCookie::
-	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
-
-	  if(!cookie.isEmpty())
-	    {
-	      if(m_cookieStore)
-		m_cookieStore->deleteCookie(cookie.at(0));
-
-	      emit delete_cookie(cookie.at(0));
-	    }
-	}
-
-      delete item;
+      if(!(!item || item->checkState(0) == Qt::Checked))
+	list.append(item);
     }
 
-  if(m_cookieStore && m_cookies)
-    connect(m_cookieStore,
-	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	    m_cookies,
-	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
-
+  delete_top_level_items(list);
   QApplication::restoreOverrideCursor();
 }
