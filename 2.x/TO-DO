@@ -20,3 +20,6 @@ Remaining Items
 3.     Elided text in pull-down menus must consider invisible text.
 4.     Windows PRNG.
 5.     Allow SSL/TLS exceptions.
+6.     Bookmarks.
+7.     History.
+8.     Activate history pull-down on address text change.
