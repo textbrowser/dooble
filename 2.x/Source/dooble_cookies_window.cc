@@ -43,9 +43,14 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_domain_filter_timer.setInterval(750);
   m_domain_filter_timer.setSingleShot(true);
   m_is_private = is_private;
+  m_purge_domains_timer.setInterval(15000);
   m_ui.setupUi(this);
   m_ui.action_Periodically_Purge_Temporary_Domains->setChecked
     (dooble_settings::setting("periodically_purge_temporary_domains").toBool());
+
+  if(m_ui.action_Periodically_Purge_Temporary_Domains->isChecked())
+    m_purge_domains_timer.start();
+
   m_ui.domain->setText("");
   m_ui.expiration_date->setText("");
   m_ui.name->setText("");
@@ -509,6 +514,14 @@ void dooble_cookies_window::slot_periodically_purge_temporary_domains
 (bool state)
 {
   dooble_settings::set_setting("periodically_purge_temporary_domains", state);
+
+  if(state)
+    {
+      if(!m_purge_domains_timer.isActive())
+	m_purge_domains_timer.start();
+    }
+  else
+    m_purge_domains_timer.stop();
 }
 
 void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
