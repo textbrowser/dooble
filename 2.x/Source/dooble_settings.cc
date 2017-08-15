@@ -495,6 +495,7 @@ void dooble_settings::slot_reset_credentials(void)
   remove_setting("authentication_iteration_count");
   remove_setting("authentication_salt");
   remove_setting("authentication_salted_password");
+  emit dooble_credentials_authenticated(false);
 
   /*
   ** Generate temporary credentials.

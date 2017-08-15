@@ -486,7 +486,7 @@ void dooble_page::slot_authenticate(void)
 	  dooble::s_cryptography->prepare_keys
 	    (text.toUtf8(), salt, iteration_count);
 	  QApplication::restoreOverrideCursor();
-	  emit dooble_credentials_authenticated();
+	  emit dooble_credentials_authenticated(true);
 	}
       else
 	QMessageBox::critical
@@ -537,14 +537,32 @@ void dooble_page::slot_credentials_created(void)
 	  "Settings window's Privacy panel."));
 }
 
-void dooble_page::slot_dooble_credentials_authenticated(void)
+void dooble_page::slot_dooble_credentials_authenticated(bool state)
 {
-  if(m_authentication_action)
-    m_authentication_action->setEnabled(false);
+  if(state)
+    {
+      if(m_authentication_action)
+	m_authentication_action->setEnabled(false);
 
-  m_ui.authenticate->setEnabled(false);
-  m_ui.authenticate->setToolTip
-    (tr("Dooble credentials have been authenticated."));
+      m_ui.authenticate->setEnabled(false);
+      m_ui.authenticate->setToolTip
+	(tr("Dooble credentials have been authenticated."));
+    }
+  else
+    {
+      if(m_authentication_action)
+	m_authentication_action->setEnabled
+	  (dooble_settings::has_dooble_credentials());
+
+      m_ui.authenticate->setEnabled(true);
+
+      if(dooble_settings::has_dooble_credentials())
+	m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
+      else
+	m_ui.authenticate->setToolTip
+	  (tr("Please prepare Dooble's credentials via the "
+	      "Settings window's Privacy panel."));
+    }
 }
 
 void dooble_page::slot_escape(void)

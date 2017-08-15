@@ -87,8 +87,9 @@ class dooble_settings: public QMainWindow
   void slot_save_credentials(void);
 
  signals:
-  void credentials_created(void);
   void applied(void);
+  void credentials_created(void);
+  void dooble_credentials_authenticated(bool state);
 };
 
 #endif

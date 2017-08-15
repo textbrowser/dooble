@@ -80,7 +80,7 @@ class dooble_page: public QWidget
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
   void slot_credentials_created(void);
-  void slot_dooble_credentials_authenticated(void);
+  void slot_dooble_credentials_authenticated(bool state);
   void slot_escape(void);
   void slot_find_next(void);
   void slot_find_previous(void);
@@ -112,7 +112,7 @@ class dooble_page: public QWidget
   void close_tab(void);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
-  void dooble_credentials_authenticated(void);
+  void dooble_credentials_authenticated(bool state);
   void iconChanged(const QIcon &icon);
   void loadFinished(bool ok);
   void loadStarted(void);

@@ -202,9 +202,9 @@ void dooble::prepare_page_connections(dooble_page *page)
     return;
 
   connect(dooble::s_application,
-	  SIGNAL(dooble_credentials_authenticated(void)),
+	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  page,
-	  SLOT(slot_dooble_credentials_authenticated(void)),
+	  SLOT(slot_dooble_credentials_authenticated(bool)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -226,9 +226,9 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
-	  SIGNAL(dooble_credentials_authenticated(void)),
+	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  dooble::s_application,
-	  SIGNAL(dooble_credentials_authenticated(void)),
+	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,

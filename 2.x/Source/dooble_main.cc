@@ -264,11 +264,11 @@ int main(int argc, char *argv[])
 		   dooble::s_cookies,
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
   QObject::connect(dooble::s_application,
-		   SIGNAL(dooble_credentials_authenticated(void)),
+		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_blocked_domains,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_application,
-		   SIGNAL(dooble_credentials_authenticated(void)),
+		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_cookies,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_cookies,
@@ -283,6 +283,10 @@ int main(int argc, char *argv[])
 		   SIGNAL(delete_cookie(const QNetworkCookie &)),
 		   dooble::s_cookies,
 		   SLOT(slot_delete_cookie(const QNetworkCookie &)));
+  QObject::connect(dooble::s_settings,
+		   SIGNAL(dooble_credentials_authenticated(bool)),
+		   dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(bool)));
   d->show();
 
   int rc = dooble::s_application->exec();

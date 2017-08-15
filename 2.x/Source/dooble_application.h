@@ -38,7 +38,7 @@ class dooble_application: public QApplication
   dooble_application(int &argc, char **argv);
 
  signals:
-  void dooble_credentials_authenticated(void);
+  void dooble_credentials_authenticated(bool state);
 };
 
 #endif
