@@ -446,7 +446,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      dooble::s_cryptography->setAuthenticated(true);
 	      dooble::s_cryptography->setKeys
 		(list.at(0).mid(0, 64), list.at(0).mid(64, 32));
-	      emit credentials_created();
+	      emit dooble_credentials_created();
 	    }
 	}
       else

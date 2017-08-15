@@ -9,6 +9,7 @@ Completed Items
 5.     Display cookies in a tree-like structure.
 6.     Restrict domains.
 7.     Blocked Domains. Show examples. Restrict input.
+8.     Delete temporary parent cookie domains having zero children.
 
 Remaining Items
 
@@ -18,5 +19,4 @@ Remaining Items
 4.     Windows PRNG.
 5.     Proxy details within Privacy.
 6.     Allow SSL/TLS exceptions.
-7.     Delete temporary parent cookie domains having zero children.
-8.     Depict private cookie windows.
+7.     Depict private cookie windows.

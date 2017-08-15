@@ -88,8 +88,8 @@ class dooble_settings: public QMainWindow
 
  signals:
   void applied(void);
-  void credentials_created(void);
   void dooble_credentials_authenticated(bool state);
+  void dooble_credentials_created(void);
 };
 
 #endif

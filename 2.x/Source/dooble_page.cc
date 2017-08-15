@@ -72,9 +72,9 @@ dooble_page::dooble_page(bool is_private,
 
   m_ui.frame->layout()->addWidget(m_view);
   connect(dooble::s_settings,
-	  SIGNAL(credentials_created(void)),
+	  SIGNAL(dooble_credentials_created(void)),
 	  this,
-	  SLOT(slot_credentials_created(void)));
+	  SLOT(slot_dooble_credentials_created(void)));
   connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -203,7 +203,7 @@ dooble_page::dooble_page(bool is_private,
   prepare_shortcuts();
   prepare_standard_menus();
   prepare_tool_buttons_for_mac();
-  slot_credentials_created();
+  slot_dooble_credentials_created();
 }
 
 QIcon dooble_page::icon(void) const
@@ -519,24 +519,6 @@ void dooble_page::slot_authentication_required(const QUrl &url,
     m_view->stop();
 }
 
-void dooble_page::slot_credentials_created(void)
-{
-  if(dooble::s_cryptography->authenticated())
-    {
-      m_ui.authenticate->setEnabled(false);
-      m_ui.authenticate->setToolTip
-	(tr("Dooble credentials have been authenticated."));
-      return;
-    }
-
-  if(dooble_settings::has_dooble_credentials())
-    m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
-  else
-    m_ui.authenticate->setToolTip
-      (tr("Please prepare Dooble's credentials via the "
-	  "Settings window's Privacy panel."));
-}
-
 void dooble_page::slot_dooble_credentials_authenticated(bool state)
 {
   if(state)
@@ -563,6 +545,24 @@ void dooble_page::slot_dooble_credentials_authenticated(bool state)
 	  (tr("Please prepare Dooble's credentials via the "
 	      "Settings window's Privacy panel."));
     }
+}
+
+void dooble_page::slot_dooble_credentials_created(void)
+{
+  if(dooble::s_cryptography->authenticated())
+    {
+      m_ui.authenticate->setEnabled(false);
+      m_ui.authenticate->setToolTip
+	(tr("Dooble credentials have been authenticated."));
+      return;
+    }
+
+  if(dooble_settings::has_dooble_credentials())
+    m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
+  else
+    m_ui.authenticate->setToolTip
+      (tr("Please prepare Dooble's credentials via the "
+	  "Settings window's Privacy panel."));
 }
 
 void dooble_page::slot_escape(void)
