@@ -822,7 +822,52 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="web_page"/>
+        <widget class="QWidget" name="web_page">
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <item>
+           <widget class="QGroupBox" name="javascript">
+            <property name="title">
+             <string>JavaScript</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="QCheckBox" name="javascript_access_clipboard">
+               <property name="text">
+                <string>Access Clipboard</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="javascript_popups">
+               <property name="text">
+                <string>Popups</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>599</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="windows_page">
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
@@ -932,6 +977,9 @@
   <tabstop>proxy_port</tabstop>
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
+  <tabstop>javascript</tabstop>
+  <tabstop>javascript_access_clipboard</tabstop>
+  <tabstop>javascript_popups</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
  </tabstops>
