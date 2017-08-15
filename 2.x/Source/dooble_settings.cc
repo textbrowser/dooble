@@ -191,7 +191,7 @@ void dooble_settings::closeEvent(QCloseEvent *event)
   QMainWindow::closeEvent(event);
 }
 
-void dooble_settings::prepare_proxy(void)
+void dooble_settings::prepare_proxy(bool save)
 {
   QNetworkProxyFactory::setUseSystemConfiguration(false);
 
@@ -229,11 +229,14 @@ void dooble_settings::prepare_proxy(void)
       QNetworkProxy::setApplicationProxy(proxy);
     }
 
-  set_setting("proxy_host", m_ui.proxy_host->text().trimmed());
-  set_setting("proxy_password", m_ui.proxy_password->text());
-  set_setting("proxy_port", m_ui.proxy_port->value());
-  set_setting("proxy_type_index", m_ui.proxy_type->currentIndex());
-  set_setting("proxy_user", m_ui.proxy_user->text().trimmed());
+  if(save)
+    {
+      set_setting("proxy_host", m_ui.proxy_host->text().trimmed());
+      set_setting("proxy_password", m_ui.proxy_password->text());
+      set_setting("proxy_port", m_ui.proxy_port->value());
+      set_setting("proxy_type_index", m_ui.proxy_type->currentIndex());
+      set_setting("proxy_user", m_ui.proxy_user->text().trimmed());
+    }
 }
 
 void dooble_settings::remove_setting(const QString &key)
@@ -330,6 +333,15 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
 	    m_ui.pages->count() - 1));
+  m_ui.proxy_host->setText(s_settings.value("proxy_host").toString().trimmed());
+  m_ui.proxy_password->setText
+    (s_settings.value("proxy_password").toString().trimmed());
+  m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
+  m_ui.proxy_type->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("proxy_type_index", 1).toInt(),
+	    m_ui.proxy_type->count() - 1));
+  m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", false).toBool());
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
@@ -357,6 +369,7 @@ void dooble_settings::restore(void)
     else
       list.at(i)->setChecked(true);
 
+  prepare_proxy(false);
   QApplication::restoreOverrideCursor();
 }
 
@@ -418,7 +431,7 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
-  prepare_proxy();
+  prepare_proxy(true);
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
