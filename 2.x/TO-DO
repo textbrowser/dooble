@@ -11,6 +11,7 @@ Completed Items
 7.     Blocked Domains. Show examples. Restrict input.
 8.     Delete temporary parent cookie domains having zero children.
 9.     Depict private cookie windows.
+10.    Proxy details within Privacy.
 
 Remaining Items
 
@@ -18,5 +19,4 @@ Remaining Items
 2.     Creating new tabs and windows requires sophistication.
 3.     Elided text in pull-down menus must consider invisible text.
 4.     Windows PRNG.
-5.     Proxy details within Privacy.
-6.     Allow SSL/TLS exceptions.
+5.     Allow SSL/TLS exceptions.
