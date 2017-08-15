@@ -29,6 +29,7 @@
 #include <QDialogButtonBox>
 #include <QDir>
 #include <QMessageBox>
+#include <QNetworkProxy>
 #include <QPushButton>
 #include <QScopedPointer>
 #include <QSqlDatabase>
@@ -188,6 +189,51 @@ void dooble_settings::closeEvent(QCloseEvent *event)
   m_ui.password_1->clear();
   m_ui.password_2->clear();
   QMainWindow::closeEvent(event);
+}
+
+void dooble_settings::prepare_proxy(void)
+{
+  QNetworkProxyFactory::setUseSystemConfiguration(false);
+
+  if(m_ui.proxy_type->currentIndex() == 1 || // None
+     m_ui.proxy_type->currentIndex() == 3)   // System
+    {
+      if(m_ui.proxy_type->currentIndex() == 1)
+	{
+	  QNetworkProxy proxy(QNetworkProxy::NoProxy);
+
+	  QNetworkProxy::setApplicationProxy(proxy);
+	}
+      else
+	QNetworkProxyFactory::setUseSystemConfiguration(true);
+
+      m_ui.proxy_host->setText("");
+      m_ui.proxy_password->setText("");
+      m_ui.proxy_port->setValue(0);
+      m_ui.proxy_user->setText("");
+    }
+  else
+    {
+      QNetworkProxy proxy;
+
+      proxy.setHostName(m_ui.proxy_host->text().trimmed());
+      proxy.setPassword(m_ui.proxy_password->text().trimmed());
+      proxy.setPort(static_cast<quint16> (m_ui.proxy_port->value()));
+
+      if(m_ui.proxy_type->currentIndex() == 0)
+	proxy.setType(QNetworkProxy::HttpProxy);
+      else
+	proxy.setType(QNetworkProxy::Socks5Proxy);
+
+      proxy.setUser(m_ui.proxy_user->text().trimmed());
+      QNetworkProxy::setApplicationProxy(proxy);
+    }
+
+  set_setting("proxy_host", m_ui.proxy_host->text().trimmed());
+  set_setting("proxy_password", m_ui.proxy_password->text());
+  set_setting("proxy_port", m_ui.proxy_port->value());
+  set_setting("proxy_type_index", m_ui.proxy_type->currentIndex());
+  set_setting("proxy_user", m_ui.proxy_user->text().trimmed());
 }
 
 void dooble_settings::remove_setting(const QString &key)
@@ -372,6 +418,7 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
+  prepare_proxy();
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());

@@ -72,6 +72,7 @@ class dooble_settings: public QMainWindow
   static QAtomicInteger<quint64> s_db_id;
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
+  void prepare_proxy(void);
   void restore(void);
 
  public slots:
