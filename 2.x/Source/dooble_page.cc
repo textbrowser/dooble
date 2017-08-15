@@ -322,6 +322,8 @@ void dooble_page::prepare_shortcuts(void)
       new QShortcut
 	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
       new QShortcut
+	(QKeySequence(tr("Ctrl+K")), this, SLOT(slot_show_cookies(void)));
+      new QShortcut
 	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
       new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
       new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
@@ -333,6 +335,8 @@ void dooble_page::prepare_shortcuts(void)
   if(!m_shortcuts_prepared)
     {
       m_shortcuts_prepared = true;
+      new QShortcut
+	(QKeySequence(tr("Ctrl+K")), this, SLOT(slot_show_cookies(void)));
       new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
       new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
     }
