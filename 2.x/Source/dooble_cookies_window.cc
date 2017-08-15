@@ -227,6 +227,103 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 
 void dooble_cookies_window::slot_delete_selected(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(m_cookieStore && m_cookies)
+    disconnect(m_cookieStore,
+	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	       m_cookies,
+	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
+
+  QList<QTreeWidgetItem *> list(m_ui.tree->selectedItems());
+
+  while(!list.isEmpty())
+    {
+      QTreeWidgetItem *item = list.takeFirst();
+
+      if(!item)
+	continue;
+
+      if(m_ui.tree->indexOfTopLevelItem(item) != -1)
+	{
+	  m_child_items.remove(item->text(0));
+	  m_top_level_items.remove(item->text(0));
+
+	  foreach(QTreeWidgetItem *i, item->takeChildren())
+	    if(i)
+	      {
+		QList<QNetworkCookie> cookie
+		  (QNetworkCookie::
+		   parseCookies(i->data(1, Qt::UserRole).toByteArray()));
+
+		if(!cookie.isEmpty())
+		  {
+		    if(m_cookieStore)
+		      m_cookieStore->deleteCookie(cookie.at(0));
+
+		    emit delete_cookie(cookie.at(0));
+		  }
+
+		delete i;
+	      }
+
+	  item = m_ui.tree->takeTopLevelItem
+	    (m_ui.tree->indexOfTopLevelItem(item));
+
+	  if(item)
+	    {
+	      QList<QNetworkCookie> cookie
+		(QNetworkCookie::
+		 parseCookies(item->data(1, Qt::UserRole).toByteArray()));
+
+	      if(!cookie.isEmpty())
+		{
+		  if(m_cookieStore)
+		    m_cookieStore->deleteCookie(cookie.at(0));
+
+		  emit delete_cookie(cookie.at(0));
+		}
+	    }
+
+	  delete item;
+	}
+      else
+	{
+	  QList<QNetworkCookie> cookie
+	    (QNetworkCookie::
+	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
+
+	  if(!cookie.isEmpty())
+	    {
+	      QHash<QByteArray, QTreeWidgetItem *> hash
+		(m_child_items.value(cookie.at(0).domain()));
+
+	      hash.remove(cookie.at(0).name());
+
+	      if(hash.isEmpty())
+		m_child_items.remove(cookie.at(0).domain());
+	      else
+		m_child_items[cookie.at(0).domain()] = hash;
+
+	      if(m_cookieStore)
+		m_cookieStore->deleteCookie(cookie.at(0));
+
+	      emit delete_cookie(cookie.at(0));
+	    }
+
+	  if(item->parent())
+	    delete item->parent()->takeChild
+	      (item->parent()->indexOfChild(item));
+	}
+    }
+
+  if(m_cookieStore && m_cookies)
+    connect(m_cookieStore,
+	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	    m_cookies,
+	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_cookies_window::slot_delete_shown(void)
