@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QStatusBar>
 #include <QWebEngineCookieStore>
 
 #include "dooble.h"
@@ -57,6 +58,20 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_ui.path->setText("");
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
+
+  if(m_is_private)
+    {
+      QLabel *label = new QLabel();
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
+      label->setPixmap
+	(QIcon(QString(":/%1/16/private.png").arg(icon_set)).
+	 pixmap(QSize(16, 16)));
+      label->setToolTip(tr("Private cookies remain within the scope of this "
+			   "window's parent page."));
+      statusBar()->addPermanentWidget(label);
+    }
+
   connect(&m_domain_filter_timer,
 	  SIGNAL(timeout(void)),
 	  this,
