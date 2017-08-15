@@ -144,9 +144,6 @@ void dooble::initialize_static_members(void)
   if(!s_cryptography)
     s_cryptography = new dooble_cryptography();
 
-  if(!s_settings)
-    s_settings = new dooble_settings();
-
   if(!s_url_request_interceptor)
     {
       s_url_request_interceptor = new

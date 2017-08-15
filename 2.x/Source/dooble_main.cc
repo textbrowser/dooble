@@ -251,6 +251,7 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::LocalStorageEnabled, false);
   dooble_thread::msleep(750);
   splash.finish(0);
+  dooble::s_settings = new dooble_settings();
 
   dooble *d = new dooble();
 
