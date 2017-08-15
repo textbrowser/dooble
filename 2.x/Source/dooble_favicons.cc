@@ -98,6 +98,33 @@ QIcon dooble_favicons::icon(const QUrl &url)
   return icon;
 }
 
+void dooble_favicons::purge(void)
+{
+  QString database_name(QString("dooble_favicons_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_favicons.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_favicons");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_favicons::purge_temporary(void)
 {
   QString database_name(QString("dooble_favicons_%1").
@@ -114,6 +141,7 @@ void dooble_favicons::purge_temporary(void)
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM dooble_favicons WHERE temporary = 1");
 	query.exec("VACUUM");
       }

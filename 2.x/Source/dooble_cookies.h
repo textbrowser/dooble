@@ -38,6 +38,7 @@ class dooble_cookies: public QObject
 
  public:
   dooble_cookies(bool is_private, QObject *parent);
+  static void purge(void);
 
  private:
   bool m_is_private;

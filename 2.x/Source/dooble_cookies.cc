@@ -45,6 +45,35 @@ dooble_cookies::dooble_cookies(bool is_private, QObject *parent):QObject(parent)
   m_is_private = is_private;
 }
 
+void dooble_cookies::purge(void)
+{
+  QString database_name(QString("dooble_cookies_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_cookies.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA foreign_keys = ON");
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_cookies");
+	query.exec("DELETE FROM dooble_cookies_domains");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
   emit cookie_added(cookie, false);

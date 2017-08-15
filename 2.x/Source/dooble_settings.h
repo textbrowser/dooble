@@ -58,6 +58,7 @@ class dooble_settings: public QMainWindow
   static QVariant setting(const QString &key);
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);
+  static void remove_setting(const QString &key);
   void show_panel(dooble_settings::Panels panel);
 
  protected:
@@ -82,6 +83,7 @@ class dooble_settings: public QMainWindow
   void slot_clear_cache(void);
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);
+  void slot_reset_credentials(void);
   void slot_save_credentials(void);
 
  signals:

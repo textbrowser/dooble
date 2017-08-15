@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -626,7 +626,7 @@
                <item>
                 <widget class="QPushButton" name="reset_credentials">
                  <property name="toolTip">
-                  <string>Remove credentials. If confirmed, Dooble will store data as clear text.</string>
+                  <string>Remove permanent credentials.</string>
                  </property>
                  <property name="text">
                   <string>Reset</string>

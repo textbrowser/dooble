@@ -37,7 +37,10 @@
 #include <QtConcurrent>
 
 #include "dooble.h"
+#include "dooble_blocked_domains.h"
+#include "dooble_cookies.h"
 #include "dooble_cryptography.h"
+#include "dooble_favicons.h"
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
@@ -82,6 +85,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.reset_credentials,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reset_credentials(void)));
   connect(m_ui.save_credentials,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -181,6 +188,41 @@ void dooble_settings::closeEvent(QCloseEvent *event)
   m_ui.password_1->clear();
   m_ui.password_2->clear();
   QMainWindow::closeEvent(event);
+}
+
+void dooble_settings::remove_setting(const QString &key)
+{
+  if(key.trimmed().isEmpty())
+    return;
+
+  QWriteLocker lock(&s_settings_mutex);
+
+  s_settings.remove(key.trimmed());
+  lock.unlock();
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.prepare("DELETE FROM dooble_settings WHERE key = ?");
+	query.addBindValue(key.trimmed());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_settings::restore(void)
@@ -422,6 +464,56 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	   tr("Credentials could not be generated. "
 	      "This is a curious problem."));
     }
+}
+
+void dooble_settings::slot_reset_credentials(void)
+{
+  if(!dooble_settings::has_dooble_credentials())
+    return;
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Are you sure that you wish to reset your permanent "
+		"credentials? New session-only credentials "
+		"will be generated and database data will be removed."));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  /*
+  ** Remove settings.
+  */
+
+  m_ui.iterations->setValue(m_ui.iterations->minimum());
+  remove_setting("authentication_iteration_count");
+  remove_setting("authentication_salt");
+  remove_setting("authentication_salted_password");
+
+  /*
+  ** Generate temporary credentials.
+  */
+
+  QByteArray random_bytes(dooble_random::random_bytes(96));
+
+  dooble::s_cryptography->setAuthenticated(false);
+  dooble::s_cryptography->setKeys
+    (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+
+  /*
+  ** Purge existing database data.
+  */
+
+  dooble_blocked_domains::purge();
+  dooble_cookies::purge();
+  dooble_favicons::purge();
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::slot_save_credentials(void)
