@@ -526,4 +526,67 @@ void dooble_cookies_window::slot_periodically_purge_temporary_domains
 
 void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(m_cookieStore && m_cookies)
+    disconnect(m_cookieStore,
+	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	       m_cookies,
+	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
+
+  for(int i = m_ui.tree->topLevelItemCount() - 1; i >= 0; i--)
+    {
+      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+
+      if(!item || item->checkState(0) == Qt::Checked)
+	continue;
+
+      m_child_items.remove(item->text(0));
+      m_top_level_items.remove(item->text(0));
+
+      foreach(QTreeWidgetItem *i, item->takeChildren())
+	if(i)
+	  {
+	    QList<QNetworkCookie> cookie
+	      (QNetworkCookie::
+	       parseCookies(i->data(1, Qt::UserRole).toByteArray()));
+
+	    if(!cookie.isEmpty())
+	      {
+		if(m_cookieStore)
+		  m_cookieStore->deleteCookie(cookie.at(0));
+
+		emit delete_cookie(cookie.at(0));
+	      }
+
+	    delete i;
+	  }
+
+      item = m_ui.tree->takeTopLevelItem(i);
+
+      if(item)
+	{
+	  QList<QNetworkCookie> cookie
+	    (QNetworkCookie::
+	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
+
+	  if(!cookie.isEmpty())
+	    {
+	      if(m_cookieStore)
+		m_cookieStore->deleteCookie(cookie.at(0));
+
+	      emit delete_cookie(cookie.at(0));
+	    }
+	}
+
+      delete item;
+    }
+
+  if(m_cookieStore && m_cookies)
+    connect(m_cookieStore,
+	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	    m_cookies,
+	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
+
+  QApplication::restoreOverrideCursor();
 }
