@@ -58,6 +58,8 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
       m_cookies_window->setCookies(m_cookies);
       m_page->profile()->setHttpCacheMaximumSize
 	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
+      m_page->profile()->setHttpCacheType
+	(QWebEngineProfile::defaultProfile()->httpCacheType());
       m_page->profile()->setRequestInterceptor
 	(dooble::s_url_request_interceptor);
       m_page->profile()->settings()->setAttribute
@@ -114,8 +116,12 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 void dooble_web_engine_view::slot_settings_applied(void)
 {
   if(m_is_private)
-    m_page->profile()->setHttpCacheMaximumSize
-      (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
+    {
+      m_page->profile()->setHttpCacheMaximumSize
+	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
+      m_page->profile()->setHttpCacheType
+	(QWebEngineProfile::defaultProfile()->httpCacheType());
+    }
 }
 
 void dooble_web_engine_view::show_private_cookies(void)
