@@ -317,6 +317,8 @@ void dooble_settings::restore(void)
 
   QReadLocker lock(&s_settings_mutex);
 
+  m_ui.animated_scrolling->setChecked
+    (s_settings.value("animated_scrolling", false).toBool());
   m_ui.cache_size->setValue(s_settings.value("cache_size", 0).toInt());
   m_ui.cache_type->setCurrentIndex
     (qBound(0,
@@ -371,6 +373,9 @@ void dooble_settings::restore(void)
      m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     m_ui.animated_scrolling->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 
@@ -458,8 +463,12 @@ void dooble_settings::slot_apply(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     m_ui.animated_scrolling->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
   prepare_proxy(true);
+  set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
