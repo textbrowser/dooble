@@ -94,6 +94,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_cookies_window.cc \
                   Source\\dooble_cryptography.cc \
                   Source\\dooble_favicons.cc \
+                  Source\\dooble_history.cc \
 		  Source\\dooble_hmac.cc \
                   Source\\dooble_label_widget.cc \
                   Source\\dooble_main.cc \
