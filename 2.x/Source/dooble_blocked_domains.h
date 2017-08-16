@@ -43,6 +43,7 @@ class dooble_blocked_domains: public QMainWindow
 
  protected:
   void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 
  private:
   QHash<QString, char> m_blocked_domains;

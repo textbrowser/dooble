@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QInputDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QUrl>
@@ -62,6 +63,14 @@ void dooble_blocked_domains::closeEvent(QCloseEvent *event)
       ("blocked_domains_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
+}
+
+void dooble_blocked_domains::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    close();
+
+  QMainWindow::keyPressEvent(event);
 }
 
 void dooble_blocked_domains::populate(void)
