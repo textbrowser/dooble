@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -328,6 +328,13 @@
         <widget class="QWidget" name="display_page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <widget class="QCheckBox" name="animated_scrolling">
+            <property name="text">
+             <string>Animated Scrolling</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QLabel" name="label_3">
@@ -400,8 +407,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>635</width>
-               <height>610</height>
+               <width>651</width>
+               <height>631</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -968,6 +975,7 @@
   <tabstop>cache_size</tabstop>
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
+  <tabstop>animated_scrolling</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>scrollArea_2</tabstop>
   <tabstop>cookie_policy</tabstop>
