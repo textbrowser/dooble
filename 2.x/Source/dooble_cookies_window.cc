@@ -27,6 +27,7 @@
 
 #include <QDateTime>
 #include <QDir>
+#include <QKeyEvent>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QStatusBar>
@@ -192,6 +193,14 @@ void dooble_cookies_window::delete_top_level_items
 void dooble_cookies_window::filter(const QString &text)
 {
   m_ui.domain_filter->setText(text);
+}
+
+void dooble_cookies_window::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    close();
+
+  QMainWindow::keyPressEvent(event);
 }
 
 void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookieStore)

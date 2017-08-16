@@ -51,6 +51,7 @@ class dooble_cookies_window: public QMainWindow
 
  protected:
   void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 
  private:
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
