@@ -80,6 +80,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::LocalStorageEnabled, false);
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::XSSAuditingEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::XSSAuditingEnabled));
       connect(dooble::s_settings,
 	      SIGNAL(applied(void)),
 	      this,

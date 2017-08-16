@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -400,8 +400,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>631</height>
+               <width>635</width>
+               <height>610</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -854,6 +854,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="xss_auditing">
+            <property name="text">
+             <string>XSS Auditing</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_6">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -980,6 +987,7 @@
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_popups</tabstop>
+  <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
  </tabstops>

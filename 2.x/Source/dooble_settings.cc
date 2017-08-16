@@ -350,6 +350,8 @@ void dooble_settings::restore(void)
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", false).toBool());
+  m_ui.xss_auditing->setChecked
+    (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
@@ -369,6 +371,8 @@ void dooble_settings::restore(void)
      m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 
   static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
 				                           << m_ui.display
@@ -453,12 +457,15 @@ void dooble_settings::slot_apply(void)
      m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
   prepare_proxy(true);
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
+  set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   QApplication::restoreOverrideCursor();
   emit applied();
 }
