@@ -35,6 +35,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QWebEngineProfile>
+#include <QWebEngineSettings>
 #include <QtConcurrent>
 
 #include "dooble.h"
@@ -329,6 +330,11 @@ void dooble_settings::restore(void)
 	    m_ui.cookie_policy->count() - 1));
   m_ui.iterations->setValue
     (s_settings.value("authentication_iteration_count", 15000).toInt());
+  m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
+  m_ui.javascript_access_clipboard->setChecked
+    (s_settings.value("javascript_access_clipboard", false).toBool());
+  m_ui.javascript_popups->setChecked
+    (s_settings.value("javascript_popups", true).toBool());
   m_ui.pages->setCurrentIndex
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
@@ -344,6 +350,7 @@ void dooble_settings::restore(void)
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", false).toBool());
+  lock.unlock();
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
 
@@ -354,7 +361,14 @@ void dooble_settings::restore(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
-  lock.unlock();
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptCanAccessClipboard,
+     m_ui.javascript_access_clipboard->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptCanOpenWindows,
+     m_ui.javascript_popups->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
 
   static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
 				                           << m_ui.display
@@ -431,6 +445,14 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptCanAccessClipboard,
+     m_ui.javascript_access_clipboard->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptCanOpenWindows,
+     m_ui.javascript_popups->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   prepare_proxy(true);
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
