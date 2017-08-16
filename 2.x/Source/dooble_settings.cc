@@ -28,6 +28,7 @@
 #include <QCryptographicHash>
 #include <QDialogButtonBox>
 #include <QDir>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QNetworkProxy>
 #include <QPushButton>
@@ -190,6 +191,14 @@ void dooble_settings::closeEvent(QCloseEvent *event)
   m_ui.password_1->clear();
   m_ui.password_2->clear();
   QMainWindow::closeEvent(event);
+}
+
+void dooble_settings::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    close();
+
+  QMainWindow::keyPressEvent(event);
 }
 
 void dooble_settings::prepare_proxy(bool save)

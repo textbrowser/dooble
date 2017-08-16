@@ -63,6 +63,7 @@ class dooble_settings: public QMainWindow
 
  protected:
   void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 
  private:
   QFuture<QList<QByteArray> > m_pbkdf2_future;
