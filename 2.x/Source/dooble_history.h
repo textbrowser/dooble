@@ -28,10 +28,29 @@
 #ifndef dooble_history_h
 #define dooble_history_h
 
+#include <QAtomicInteger>
+#include <QVariant>
+#include <QWebEngineHistoryItem>
+
 class dooble_history
 {
+ public:
+  enum HistoryItem
+  {
+    FAVICON = 0,
+    LAST_VISITED,
+    TITLE,
+    URL,
+    URL_DIGEST,
+    VISIT_COUNT
+  };
+
+ static QList<QHash<int, QVariant> > history(void);
+ static void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
+
  private:
   dooble_history(void);
+  static QAtomicInteger<quint64> s_db_id;
 };
 
 #endif

@@ -39,6 +39,7 @@
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
+#include "dooble_history.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
 #include "dooble_ui_utilities.h"
@@ -699,7 +700,8 @@ void dooble_page::slot_link_hovered(const QString &url)
 
 void dooble_page::slot_load_finished(bool ok)
 {
-  Q_UNUSED(ok);
+  if(ok)
+    dooble_history::save_item(m_view->icon(), m_view->history()->currentItem());
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
