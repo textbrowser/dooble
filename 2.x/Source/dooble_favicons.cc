@@ -61,9 +61,9 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	query.prepare("SELECT favicon FROM dooble_favicons WHERE "
 		      "url_digest IN (?, ?) OR url_host_digest = ?");
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(url.toString()).toBase64());
+	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(url.toString() + "/").toBase64());
+	  (dooble::s_cryptography->hmac(url.toEncoded() + "/").toBase64());
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.host()));
 
@@ -212,7 +212,7 @@ void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
 	  ok = false;
 
 	query.addBindValue(dooble::s_cryptography->authenticated() ? 0 : 1);
-	bytes = dooble::s_cryptography->hmac(url.toString().trimmed());
+	bytes = dooble::s_cryptography->hmac(url.toEncoded());
 	ok &= !bytes.isEmpty();
 
 	if(ok)

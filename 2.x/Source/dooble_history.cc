@@ -73,10 +73,9 @@ void dooble_history::save_item(const QIcon &icon,
 		   "url TEXT NOT NULL, "
 		   "url_digest TEXT PRIMARY KEY NOT NULL)");
 	query.exec("PRAGMA synchronous = OFF");
-	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_history "
-	   "(favicon, last_visited, title, url, url_digest) "
-	   "VALUES (?, ?, ?, ?, ?)");
+	query.prepare("INSERT OR REPLACE INTO dooble_history "
+		      "(favicon, last_visited, title, url, url_digest) "
+		      "VALUES (?, ?, ?, ?, ?)");
 
 	QBuffer buffer;
 	QByteArray bytes;
