@@ -108,6 +108,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["icon_set"] = "Snipicons";
+  s_settings["javascript_block_popups"] = true;
 }
 
 QString dooble_settings::cookie_policy_string(int index)
@@ -344,6 +345,8 @@ void dooble_settings::restore(void)
   m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
   m_ui.javascript_access_clipboard->setChecked
     (s_settings.value("javascript_access_clipboard", false).toBool());
+  m_ui.javascript_block_popups->setChecked
+    (s_settings.value("javascript_block_popups", true).toBool());
   m_ui.javascript_popups->setChecked
     (s_settings.value("javascript_popups", true).toBool());
   m_ui.pages->setCurrentIndex
@@ -482,6 +485,8 @@ void dooble_settings::slot_apply(void)
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
+  set_setting
+    ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   QApplication::restoreOverrideCursor();
