@@ -116,6 +116,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
+  if(dooble_settings::setting("javascript_block_popups").toBool())
+    if(type == QWebEnginePage::WebDialog)
+      return 0;
+
   dooble_web_engine_view *view = new dooble_web_engine_view(m_is_private, 0);
 
   switch(type)
