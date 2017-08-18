@@ -107,7 +107,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   restore();
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
-  s_settings["icon_set"] = "Snipicons";
+  s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
 }
 

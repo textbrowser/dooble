@@ -2,28 +2,28 @@
     <qresource prefix="/">
 	<file>Logo/dooble.png</file>
 	<file>Mac/16/tab_close.png</file>
-	<file>Snipicons/16/bookmark.png</file>
-	<file>Snipicons/16/bookmarked.png</file>
-	<file>Snipicons/16/find.png</file>
-	<file>Snipicons/16/information.png</file>
-	<file>Snipicons/16/private.png</file>
-	<file>Snipicons/16/pulldown.png</file>
-	<file>Snipicons/16/settings.png</file>
-	<file>Snipicons/20/next.png</file>
-	<file>Snipicons/20/previous.png</file>
-	<file>Snipicons/20/stop.png</file>
-	<file>Snipicons/32/authenticate.png</file>
-	<file>Snipicons/32/backward.png</file>
-	<file>Snipicons/32/forward.png</file>
-	<file>Snipicons/32/menu.png</file>
-	<file>Snipicons/32/reload.png</file>
-	<file>Snipicons/32/stop.png</file>
-	<file>Snipicons/64/cache.png</file>
-	<file>Snipicons/64/display.png</file>
-	<file>Snipicons/64/history.png</file>
-	<file>Snipicons/64/privacy.png</file>
-	<file>Snipicons/64/webengine.png</file>
-	<file>Snipicons/64/windows.png</file>
+	<file>SnipIcons/16/bookmark.png</file>
+	<file>SnipIcons/16/bookmarked.png</file>
+	<file>SnipIcons/16/find.png</file>
+	<file>SnipIcons/16/information.png</file>
+	<file>SnipIcons/16/private.png</file>
+	<file>SnipIcons/16/pulldown.png</file>
+	<file>SnipIcons/16/settings.png</file>
+	<file>SnipIcons/20/next.png</file>
+	<file>SnipIcons/20/previous.png</file>
+	<file>SnipIcons/20/stop.png</file>
+	<file>SnipIcons/32/authenticate.png</file>
+	<file>SnipIcons/32/backward.png</file>
+	<file>SnipIcons/32/forward.png</file>
+	<file>SnipIcons/32/menu.png</file>
+	<file>SnipIcons/32/reload.png</file>
+	<file>SnipIcons/32/stop.png</file>
+	<file>SnipIcons/64/cache.png</file>
+	<file>SnipIcons/64/display.png</file>
+	<file>SnipIcons/64/history.png</file>
+	<file>SnipIcons/64/privacy.png</file>
+	<file>SnipIcons/64/webengine.png</file>
+	<file>SnipIcons/64/windows.png</file>
 	<file>spinning_wheel.gif</file>
 	<file>splash.png</file>
     </qresource>
