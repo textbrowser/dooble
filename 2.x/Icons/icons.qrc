@@ -1,5 +1,27 @@
 <RCC>
     <qresource prefix="/">
+	<file>BlueBits/16/bookmark.png</file>
+	<file>BlueBits/16/bookmarked.png</file>
+	<file>BlueBits/16/find.png</file>
+	<file>BlueBits/16/information.png</file>
+	<file>BlueBits/16/private.png</file>
+	<file>BlueBits/16/pulldown.png</file>
+	<file>BlueBits/16/settings.png</file>
+	<file>BlueBits/20/next.png</file>
+	<file>BlueBits/20/previous.png</file>
+	<file>BlueBits/20/stop.png</file>
+	<file>BlueBits/32/authenticate.png</file>
+	<file>BlueBits/32/backward.png</file>
+	<file>BlueBits/32/forward.png</file>
+	<file>BlueBits/32/menu.png</file>
+	<file>BlueBits/32/reload.png</file>
+	<file>BlueBits/32/stop.png</file>
+	<file>BlueBits/64/cache.png</file>
+	<file>BlueBits/64/display.png</file>
+	<file>BlueBits/64/history.png</file>
+	<file>BlueBits/64/privacy.png</file>
+	<file>BlueBits/64/webengine.png</file>
+	<file>BlueBits/64/windows.png</file>
 	<file>Logo/dooble.png</file>
 	<file>Mac/16/tab_close.png</file>
 	<file>SnipIcons/16/bookmark.png</file>

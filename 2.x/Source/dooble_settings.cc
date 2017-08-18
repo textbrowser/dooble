@@ -485,6 +485,7 @@ void dooble_settings::slot_apply(void)
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
+  set_setting("icon_set_index", m_ui.theme->currentIndex());
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());

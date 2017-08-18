@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,7 +57,7 @@
              <string>Cache</string>
             </property>
             <property name="icon">
-             <iconset resource="../Icons/icons.qrc">
+             <iconset>
               <normaloff>:/Snipicons/64/cache.png</normaloff>:/Snipicons/64/cache.png</iconset>
             </property>
             <property name="iconSize">
@@ -83,7 +83,7 @@
              <string>Display</string>
             </property>
             <property name="icon">
-             <iconset resource="../Icons/icons.qrc">
+             <iconset>
               <normaloff>:/Snipicons/64/display.png</normaloff>:/Snipicons/64/display.png</iconset>
             </property>
             <property name="iconSize">
@@ -106,7 +106,7 @@
              <string>History</string>
             </property>
             <property name="icon">
-             <iconset resource="../Icons/icons.qrc">
+             <iconset>
               <normaloff>:/Snipicons/64/history.png</normaloff>:/Snipicons/64/history.png</iconset>
             </property>
             <property name="iconSize">
@@ -129,7 +129,7 @@
              <string>Privacy</string>
             </property>
             <property name="icon">
-             <iconset resource="../Icons/icons.qrc">
+             <iconset>
               <normaloff>:/Snipicons/64/privacy.png</normaloff>:/Snipicons/64/privacy.png</iconset>
             </property>
             <property name="iconSize">
@@ -152,7 +152,7 @@
              <string>Web</string>
             </property>
             <property name="icon">
-             <iconset resource="../Icons/icons.qrc">
+             <iconset>
               <normaloff>:/Snipicons/64/webengine.png</normaloff>:/Snipicons/64/webengine.png</iconset>
             </property>
             <property name="iconSize">
@@ -175,7 +175,7 @@
              <string>Windows</string>
             </property>
             <property name="icon">
-             <iconset resource="../Icons/icons.qrc">
+             <iconset>
               <normaloff>:/Snipicons/64/windows.png</normaloff>:/Snipicons/64/windows.png</iconset>
             </property>
             <property name="iconSize">
@@ -348,6 +348,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="theme">
+              <property name="currentIndex">
+               <number>1</number>
+              </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
               </property>
@@ -356,7 +359,12 @@
               </property>
               <item>
                <property name="text">
-                <string>Snipicons</string>
+                <string>BlueBits</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>SnipIcons</string>
                </property>
               </item>
              </widget>
@@ -407,8 +415,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>635</width>
-               <height>610</height>
+               <width>384</width>
+               <height>588</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
