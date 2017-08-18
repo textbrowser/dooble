@@ -73,6 +73,10 @@ dooble_page::dooble_page(bool is_private,
 
   m_ui.frame->layout()->addWidget(m_view);
   connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
+  connect(dooble::s_settings,
 	  SIGNAL(dooble_credentials_created(void)),
 	  this,
 	  SLOT(slot_dooble_credentials_created(void)));
@@ -819,6 +823,11 @@ void dooble_page::slot_reload_or_stop(void)
     m_view->stop();
   else
     m_view->reload();
+}
+
+void dooble_page::slot_settings_applied(void)
+{
+  prepare_icons();
 }
 
 void dooble_page::slot_show_cookies(void)

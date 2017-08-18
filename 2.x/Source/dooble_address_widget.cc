@@ -29,6 +29,7 @@
 #include <QStyle>
 #include <QToolButton>
 
+#include "dooble.h"
 #include "dooble_address_widget.h"
 #include "dooble_settings.h"
 
@@ -74,6 +75,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
   m_pull_down->setToolTip(tr("Show History"));
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   connect(m_information,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -137,6 +142,11 @@ void dooble_address_widget::setText(const QString &text)
   QLineEdit::setText(text.trimmed());
   setCursorPosition(0);
   setToolTip(QLineEdit::text());
+}
+
+void dooble_address_widget::slot_settings_applied(void)
+{
+  prepare_icons();
 }
 
 void dooble_address_widget::slot_show_site_information_menu(void)

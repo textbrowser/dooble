@@ -56,10 +56,6 @@
             <property name="text">
              <string>Cache</string>
             </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/Snipicons/64/cache.png</normaloff>:/Snipicons/64/cache.png</iconset>
-            </property>
             <property name="iconSize">
              <size>
               <width>64</width>
@@ -82,10 +78,6 @@
             <property name="text">
              <string>Display</string>
             </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/Snipicons/64/display.png</normaloff>:/Snipicons/64/display.png</iconset>
-            </property>
             <property name="iconSize">
              <size>
               <width>64</width>
@@ -104,10 +96,6 @@
            <widget class="QToolButton" name="history">
             <property name="text">
              <string>History</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/Snipicons/64/history.png</normaloff>:/Snipicons/64/history.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -128,10 +116,6 @@
             <property name="text">
              <string>Privacy</string>
             </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/Snipicons/64/privacy.png</normaloff>:/Snipicons/64/privacy.png</iconset>
-            </property>
             <property name="iconSize">
              <size>
               <width>64</width>
@@ -151,10 +135,6 @@
             <property name="text">
              <string>Web</string>
             </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/Snipicons/64/webengine.png</normaloff>:/Snipicons/64/webengine.png</iconset>
-            </property>
             <property name="iconSize">
              <size>
               <width>64</width>
@@ -173,10 +153,6 @@
            <widget class="QToolButton" name="windows">
             <property name="text">
              <string>Windows</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/Snipicons/64/windows.png</normaloff>:/Snipicons/64/windows.png</iconset>
             </property>
             <property name="iconSize">
              <size>

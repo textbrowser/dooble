@@ -104,11 +104,12 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
-  restore();
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
+  restore();
+  prepare_icons();
 }
 
 QString dooble_settings::cookie_policy_string(int index)
@@ -200,6 +201,18 @@ void dooble_settings::keyPressEvent(QKeyEvent *event)
     close();
 
   QMainWindow::keyPressEvent(event);
+}
+
+void dooble_settings::prepare_icons(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  m_ui.cache->setIcon(QIcon(QString(":/%1/64/cache.png").arg(icon_set)));
+  m_ui.display->setIcon(QIcon(QString(":/%1/64/display.png").arg(icon_set)));
+  m_ui.history->setIcon(QIcon(QString(":/%1/64/history.png").arg(icon_set)));
+  m_ui.privacy->setIcon(QIcon(QString(":/%1/64/privacy.png").arg(icon_set)));
+  m_ui.web->setIcon(QIcon(QString(":/%1/64/webengine.png").arg(icon_set)));
+  m_ui.windows->setIcon(QIcon(QString(":/%1/64/windows.png").arg(icon_set)));
 }
 
 void dooble_settings::prepare_proxy(bool save)
@@ -325,7 +338,7 @@ void dooble_settings::restore(void)
 
   QSqlDatabase::removeDatabase(database_name);
 
-  QReadLocker lock(&s_settings_mutex);
+  QWriteLocker lock(&s_settings_mutex);
 
   m_ui.animated_scrolling->setChecked
     (s_settings.value("animated_scrolling", false).toBool());
@@ -364,6 +377,16 @@ void dooble_settings::restore(void)
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", false).toBool());
+  m_ui.theme->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("icon_set_index", 1).toInt(),
+	    m_ui.theme->count() - 1));
+
+  if(m_ui.theme->currentIndex() == 0)
+    s_settings["icon_set"] = "BlueBits";
+  else
+    s_settings["icon_set"] = "SnipIcons";
+
   m_ui.xss_auditing->setChecked
     (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
@@ -486,10 +509,21 @@ void dooble_settings::slot_apply(void)
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("icon_set_index", m_ui.theme->currentIndex());
+
+  {
+    QWriteLocker locker(&s_settings_mutex);
+
+    if(m_ui.theme->currentIndex() == 0)
+      s_settings["icon_set"] = "BlueBits";
+    else
+      s_settings["icon_set"] = "SnipIcons";
+  }
+
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
+  prepare_icons();
   QApplication::restoreOverrideCursor();
   emit applied();
 }
