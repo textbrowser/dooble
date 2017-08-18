@@ -50,6 +50,23 @@ QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
 void dooble_history::save_item(const QIcon &icon,
 			       const QWebEngineHistoryItem &item)
 {
+  if(item.isValid())
+    if(!m_history.contains(item.url()))
+      {
+	QHash<int, QVariant> hash;
+
+	hash[FAVICON] = icon;
+	hash[LAST_VISITED] = item.lastVisited();
+	hash[TITLE] = item.title();
+	hash[URL] = item.url();
+
+	if(dooble::s_cryptography)
+	  hash[URL_DIGEST] = dooble::s_cryptography->hmac
+	    (item.url().toEncoded());
+
+	m_history[item.url()] = hash;
+      }
+
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(!item.isValid())
