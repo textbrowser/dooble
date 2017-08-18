@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QtConcurrent>
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
@@ -41,11 +42,9 @@ dooble_history::dooble_history(void):QObject()
 {
 }
 
-QList<QHash<int, QVariant> > dooble_history::history(void) const
+QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
 {
-  QList<QHash<int, QVariant> > list;
-
-  return list;
+  return m_history;
 }
 
 void dooble_history::save_item(const QIcon &icon,
@@ -145,4 +144,71 @@ void dooble_history::save_item(const QIcon &icon,
 
 void dooble_history::slot_populate(void)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_history.clear();
+
+  QString database_name(QString("dooble_history_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT last_visited, title, url, url_digest "
+		      "FROM dooble_history"))
+	  while(query.next())
+	    {
+	      QByteArray data1
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
+
+	      if(data1.isEmpty())
+		continue;
+
+	      QByteArray data2
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+
+	      if(data2.isEmpty())
+		continue;
+
+	      QByteArray data3
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
+
+	      data3 = dooble::s_cryptography->mac_then_decrypt(data3);
+
+	      if(data3.isEmpty())
+		continue;
+
+	      QHash<int, QVariant> hash;
+
+	      hash[LAST_VISITED] = QDateTime::fromString
+		(data1.constData(), Qt::ISODate);
+	      hash[TITLE] = data2.constData();
+	      hash[URL] = QUrl::fromEncoded(data3);
+	      hash[URL_DIGEST] = QByteArray::fromBase64
+		(query.value(3).toByteArray());
+	      m_history[hash[URL].toUrl()] = hash;
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }

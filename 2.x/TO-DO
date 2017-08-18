@@ -22,4 +22,4 @@ Remaining Items
 4.     Windows PRNG.
 5.     Allow SSL/TLS exceptions.
 6.     Bookmarks.
-7.     History.
+7.     History. Will require a sub-process for removing expired data.

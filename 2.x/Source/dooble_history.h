@@ -48,10 +48,11 @@ class dooble_history: public QObject
   };
 
  dooble_history(void);
- QList<QHash<int, QVariant> > history(void) const;
+ QHash<QUrl, QHash<int, QVariant> > history(void) const;
  void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 
  private:
+ QHash<QUrl, QHash<int, QVariant> > m_history;
   static QAtomicInteger<quint64> s_db_id;
 
  private slots:
