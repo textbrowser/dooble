@@ -106,6 +106,48 @@ QMenu *dooble_address_widget::menu(void) const
   return m_menu;
 }
 
+int dooble_address_widget::levenshtein_distance(const QString &str1,
+						const QString &str2) const
+{
+  if(str1.isEmpty())
+    return str2.length();
+  else if(str2.isEmpty())
+    return str1.length();
+
+  QChar str1_c = 0;
+  QChar str2_c = 0;
+  QVector<QVector<int> > matrix(str1.length() + 1,
+				QVector<int> (str2.length() + 1));
+  int cost = 0;
+
+  for(int i = 0; i <= str1.length(); i++)
+    matrix[i][0] = i;
+
+  for(int i = 0; i <= str2.length(); i++)
+    matrix[0][i] = i;
+
+  for(int i = 1; i <= str1.length(); i++)
+    {
+      str1_c = str1.at(i - 1);
+
+      for(int j = 1; j <= str2.length(); j++)
+	{
+	  str2_c = str2.at(j - 1);
+
+	  if(str1_c == str2_c)
+	    cost = 0;
+	  else
+	    cost = 1;
+
+	  matrix[i][j] = qMin(qMin(matrix[i - 1][j] + 1,
+				   matrix[i][j - 1] + 1),
+			      matrix[i - 1][j - 1] + cost);
+	}
+    }
+
+  return matrix[str1.length()][str2.length()];
+}
+
 void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());

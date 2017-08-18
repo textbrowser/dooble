@@ -50,6 +50,7 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_bookmark;
   QToolButton *m_information;
   QToolButton *m_pull_down;
+  int levenshtein_distance(const QString &str1, const QString &str2) const;
   void prepare_icons(void);
 
  private slots:
