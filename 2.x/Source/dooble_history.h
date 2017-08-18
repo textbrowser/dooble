@@ -32,8 +32,10 @@
 #include <QVariant>
 #include <QWebEngineHistoryItem>
 
-class dooble_history
+class dooble_history: public QObject
 {
+  Q_OBJECT
+
  public:
   enum HistoryItem
   {
@@ -45,12 +47,15 @@ class dooble_history
     VISIT_COUNT
   };
 
- static QList<QHash<int, QVariant> > history(void);
- static void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
+ dooble_history(void);
+ QList<QHash<int, QVariant> > history(void) const;
+ void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 
  private:
-  dooble_history(void);
   static QAtomicInteger<quint64> s_db_id;
+
+ private slots:
+  void slot_populate(void);
 };
 
 #endif

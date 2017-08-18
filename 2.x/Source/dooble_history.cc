@@ -37,7 +37,11 @@
 
 QAtomicInteger<quint64> dooble_history::s_db_id;
 
-QList<QHash<int, QVariant> > dooble_history::history(void)
+dooble_history::dooble_history(void):QObject()
+{
+}
+
+QList<QHash<int, QVariant> > dooble_history::history(void) const
 {
   QList<QHash<int, QVariant> > list;
 
@@ -137,4 +141,8 @@ void dooble_history::save_item(const QIcon &icon,
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_history::slot_populate(void)
+{
 }

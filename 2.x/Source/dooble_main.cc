@@ -59,6 +59,7 @@ extern "C"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_favicons.h"
+#include "dooble_history.h"
 #include "dooble_settings.h"
 
 class dooble_thread: public QThread
@@ -270,6 +271,10 @@ int main(int argc, char *argv[])
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_cookies,
+		   SLOT(slot_populate(void)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(bool)),
+		   dooble::s_history,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),

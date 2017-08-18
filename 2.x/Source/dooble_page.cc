@@ -704,8 +704,11 @@ void dooble_page::slot_link_hovered(const QString &url)
 
 void dooble_page::slot_load_finished(bool ok)
 {
-  if(ok)
-    dooble_history::save_item(m_view->icon(), m_view->history()->currentItem());
+  Q_UNUSED(ok);
+
+  if(dooble::s_history)
+    dooble::s_history->save_item
+      (m_view->icon(), m_view->history()->currentItem());
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 

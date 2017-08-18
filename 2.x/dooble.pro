@@ -68,6 +68,7 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_cookies.h \
                   Source\\dooble_cookies_window.h \
                   Source\\dooble_favicons.h \
+                  Source\\dooble_history.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \
                   Source\\dooble_pbkdf2.h \

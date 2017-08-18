@@ -35,6 +35,7 @@
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
+#include "dooble_history.h"
 #include "dooble_page.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
@@ -45,6 +46,7 @@ dooble_blocked_domains *dooble::s_blocked_domains = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
+dooble_history *dooble::s_history = 0;
 dooble_settings *dooble::s_settings = 0;
 dooble_web_engine_url_request_interceptor *dooble::
 s_url_request_interceptor = 0;
@@ -143,6 +145,9 @@ void dooble::initialize_static_members(void)
 
   if(!s_cryptography)
     s_cryptography = new dooble_cryptography();
+
+  if(!s_history)
+    s_history = new dooble_history();
 
   if(!s_url_request_interceptor)
     {
