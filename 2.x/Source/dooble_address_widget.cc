@@ -87,6 +87,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
+  connect(this,
+	  SIGNAL(textEdited(const QString &)),
+	  this,
+	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
   setMinimumHeight(sizeHint().height());
   setStyleSheet
@@ -155,4 +159,9 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 
   menu.addAction(tr("Show Site &Cookies..."), this, SIGNAL(show_cookies(void)));
   menu.exec(QCursor::pos());
+}
+
+void dooble_address_widget::slot_text_edited(const QString &text)
+{
+  Q_UNUSED(text);
 }

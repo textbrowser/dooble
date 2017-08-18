@@ -55,6 +55,7 @@ class dooble_address_widget: public QLineEdit
  private slots:
   void slot_settings_applied(void);
   void slot_show_site_information_menu(void);
+  void slot_text_edited(const QString &text);
 
  signals:
   void pull_down_clicked(void);
