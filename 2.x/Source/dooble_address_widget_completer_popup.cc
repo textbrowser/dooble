@@ -30,4 +30,7 @@
 dooble_address_widget_completer_popup::dooble_address_widget_completer_popup
 (QWidget *parent):QTableView(parent)
 {
+  setAlternatingRowColors(false);
+  setMouseTracking(true);
+  setShowGrid(false);
 }
