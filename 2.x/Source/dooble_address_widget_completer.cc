@@ -26,8 +26,11 @@
 */
 
 #include "dooble_address_widget_completer.h"
+#include "dooble_address_widget_completer_popup.h"
 
 dooble_address_widget_completer::dooble_address_widget_completer
-(QObject *parent):QCompleter(parent)
+(QWidget *parent):QCompleter(parent)
 {
+  m_popup = new dooble_address_widget_completer_popup(parent);
+  setPopup(m_popup);
 }

@@ -30,12 +30,17 @@
 
 #include <QCompleter>
 
+class dooble_address_widget_completer_popup;
+
 class dooble_address_widget_completer: public QCompleter
 {
   Q_OBJECT
 
  public:
-  dooble_address_widget_completer(QObject *parent);
+  dooble_address_widget_completer(QWidget *parent);
+
+ private:
+  dooble_address_widget_completer_popup *m_popup;
 };
 
 #endif
