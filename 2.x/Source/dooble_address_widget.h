@@ -31,6 +31,7 @@
 #include <QLineEdit>
 
 class QToolButton;
+class dooble_address_widget_completer;
 
 class dooble_address_widget: public QLineEdit
 {
@@ -50,6 +51,7 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_bookmark;
   QToolButton *m_information;
   QToolButton *m_pull_down;
+  dooble_address_widget_completer *m_completer;
   int levenshtein_distance(const QString &str1, const QString &str2) const;
   void prepare_icons(void);
 

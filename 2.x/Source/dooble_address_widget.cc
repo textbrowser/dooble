@@ -31,6 +31,7 @@
 
 #include "dooble.h"
 #include "dooble_address_widget.h"
+#include "dooble_address_widget_completer.h"
 #include "dooble_settings.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
@@ -47,6 +48,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px; "
      "}");
   m_bookmark->setToolTip(tr("Bookmark"));
+  m_completer = new dooble_address_widget_completer(this);
   m_information = new QToolButton(this);
   m_information->setCursor(Qt::ArrowCursor);
   m_information->setIconSize(QSize(16, 16));
@@ -92,6 +94,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  this,
 	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
+  setCompleter(m_completer);
   setMinimumHeight(sizeHint().height());
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
