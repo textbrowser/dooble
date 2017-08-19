@@ -64,6 +64,7 @@ FORMS           = UI\\dooble.ui \
 HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget.h \
                   Source\\dooble_address_widget_completer.h \
+                  Source\\dooble_address_widget_completer_popup.h \
                   Source\\dooble_application.h \
                   Source\\dooble_blocked_domains.h \
                   Source\\dooble_cookies.h \
@@ -90,6 +91,7 @@ RESOURCES       += Icons\\icons.qrc
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget.cc \
                   Source\\dooble_address_widget_completer.cc \
+                  Source\\dooble_address_widget_completer_popup.cc \
                   Source\\dooble_aes256.cc \
                   Source\\dooble_application.cc \
                   Source\\dooble_blocked_domains.cc \
