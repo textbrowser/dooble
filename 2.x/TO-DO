@@ -23,3 +23,4 @@ Remaining Items
 5.     Allow SSL/TLS exceptions.
 6.     Bookmarks.
 7.     History. Will require a sub-process for removing expired data.
+8.     Link-hover events resize windows.
