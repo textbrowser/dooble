@@ -112,32 +112,23 @@ void dooble_address_widget_completer::complete(const QString &text)
   QList<QPair<QIcon, QString> > urls(dooble::s_history->urls());
   QList<QStandardItem *> list;
 
-  for(int i = 0; i < urls.size(); i++)
-    {
-      QStandardItem *item = new QStandardItem
-	(urls.at(i).first, urls.at(i).second);
-
-      list << item;
-    }
-
   if(text.trimmed().isEmpty())
     {
-      m_model->setRowCount(list.size());
+      m_model->setRowCount(urls.size());
 
       for(int i = 0; i < m_model->rowCount(); i++)
-	m_model->setItem(i, list.at(i));
+	m_model->setItem
+	  (i, new QStandardItem(urls.at(i).first, urls.at(i).second));
     }
   else
     {
       QMultiMap<int, QStandardItem *> map;
       QString c(text.toLower().trimmed());
 
-      for(int i = 0; i < list.size(); i++)
-	if(list.at(i)->text().toLower().contains(c))
-	  map.insert
-	    (levenshtein_distance(c, list.at(i)->text().toLower()), list.at(i));
-	else
-	  delete list.at(i);
+      for(int i = 0; i < urls.size(); i++)
+	if(urls.at(i).second.toLower().contains(c))
+	  map.insert(levenshtein_distance(c, urls.at(i).second.toLower()),
+		     new QStandardItem(urls.at(i).first, urls.at(i).second));
 
       list = map.values();
       m_model->setRowCount(list.size());
