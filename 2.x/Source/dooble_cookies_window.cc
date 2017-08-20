@@ -444,7 +444,7 @@ void dooble_cookies_window::slot_delete_shown(void)
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->isHidden()))
-	list.append(item);
+	list << item;
     }
 
   delete_top_level_items(list);
@@ -578,7 +578,7 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->checkState(0) == Qt::Checked))
-	list.append(item);
+	list << item;
     }
 
   delete_top_level_items(list);

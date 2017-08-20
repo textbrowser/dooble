@@ -113,7 +113,12 @@ void dooble_address_widget_completer::complete(const QString &text)
   QList<QStandardItem *> list;
 
   for(int i = 0; i < urls.size(); i++)
-    list.append(new QStandardItem(urls.at(i).first, urls.at(i).second));
+    {
+      QStandardItem *item = new QStandardItem
+	(urls.at(i).first, urls.at(i).second);
+
+      list << item;
+    }
 
   if(text.trimmed().isEmpty())
     {
