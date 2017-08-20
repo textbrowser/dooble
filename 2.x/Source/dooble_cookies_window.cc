@@ -47,10 +47,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_is_private = is_private;
   m_purge_domains_timer.setInterval(30000);
   m_ui.setupUi(this);
-  m_ui.action_Periodically_Purge_Temporary_Domains->setChecked
+  m_ui.periodically_purge->setChecked
     (dooble_settings::setting("periodically_purge_temporary_domains").toBool());
 
-  if(m_ui.action_Periodically_Purge_Temporary_Domains->isChecked())
+  if(m_ui.periodically_purge->isChecked())
     m_purge_domains_timer.start();
 
   m_ui.domain->setText("");
@@ -81,10 +81,6 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_purge_domains_timer_timeout(void)));
-  connect(m_ui.action_Periodically_Purge_Temporary_Domains,
-	  SIGNAL(toggled(bool)),
-	  this,
-	  SLOT(slot_periodically_purge_temporary_domains(bool)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -97,6 +93,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(textChanged(const QString &)),
 	  &m_domain_filter_timer,
 	  SLOT(start(void)));
+  connect(m_ui.periodically_purge,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_periodically_purge_temporary_domains(bool)));
   connect(m_ui.tree,
 	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	  this,

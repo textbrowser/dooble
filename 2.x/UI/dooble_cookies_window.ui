@@ -527,6 +527,16 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
+       <widget class="QCheckBox" name="periodically_purge">
+        <property name="toolTip">
+         <string>Sites which are not enabled (checked) will be removed periodically.</string>
+        </property>
+        <property name="text">
+         <string>&amp;Purge Periodically</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -557,31 +567,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>600</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu_Edit">
-    <property name="title">
-     <string>&amp;Edit</string>
-    </property>
-    <addaction name="action_Periodically_Purge_Temporary_Domains"/>
-   </widget>
-   <addaction name="menu_Edit"/>
-  </widget>
-  <action name="action_Periodically_Purge_Temporary_Domains">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>&amp;Periodically Purge Temporary Domains</string>
-   </property>
-  </action>
  </widget>
  <tabstops>
   <tabstop>domain_filter</tabstop>
@@ -594,6 +579,7 @@
   <tabstop>http_only</tabstop>
   <tabstop>secure</tabstop>
   <tabstop>session</tabstop>
+  <tabstop>periodically_purge</tabstop>
   <tabstop>delete_selected</tabstop>
   <tabstop>delete_shown</tabstop>
  </tabstops>
