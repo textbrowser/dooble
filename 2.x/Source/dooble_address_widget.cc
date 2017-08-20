@@ -102,7 +102,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 
 void dooble_address_widget::complete(const QList<QWebEngineHistoryItem> &list)
 {
-  Q_UNUSED(list);
+  m_completer->complete(list);
 }
 
 void dooble_address_widget::prepare_icons(void)

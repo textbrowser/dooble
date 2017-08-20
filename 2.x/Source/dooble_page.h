@@ -44,6 +44,11 @@ class dooble_page: public QWidget
   Q_OBJECT
 
  public:
+  enum ConstantsEnum
+  {
+    MAXIMUM_HISTORY_ITEMS = 20
+  };
+
   dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
   QIcon icon(void) const;
   QString title(void) const;
@@ -54,11 +59,6 @@ class dooble_page: public QWidget
 			  bool state);
 
  private:
-  enum ConstantsEnum
-  {
-    MAXIMUM_HISTORY_ITEMS = 20
-  };
-
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
   Ui_dooble_page m_ui;

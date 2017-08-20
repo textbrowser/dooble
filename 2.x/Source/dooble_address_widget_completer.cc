@@ -32,7 +32,9 @@
 #include "dooble.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_address_widget_completer_popup.h"
+#include "dooble_favicons.h"
 #include "dooble_history.h"
+#include "dooble_page.h"
 
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
@@ -110,6 +112,30 @@ int dooble_address_widget_completer::levenshtein_distance
   return matrix[str1.length()][str2.length()];
 }
 
+void dooble_address_widget_completer::complete
+(const QList<QWebEngineHistoryItem> &list)
+{
+  m_model->clear();
+  m_model->setRowCount(list.size());
+
+  for(int i = 0; i < m_model->rowCount(); i++)
+    m_model->setItem
+      (i, new QStandardItem(dooble_favicons::icon(list.at(i).url()),
+			    list.at(i).url().toString()));
+
+  if(m_model->rowCount())
+    {
+      m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      m_popup->setMaximumHeight
+	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
+	      m_model->rowCount()) * m_popup->rowHeight(0));
+      m_popup->setMinimumHeight
+	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
+	      m_model->rowCount()) * m_popup->rowHeight(0));
+      QCompleter::complete();
+    }
+}
+
 void dooble_address_widget_completer::complete(const QString &text)
 {
   m_model->clear();
@@ -144,17 +170,17 @@ void dooble_address_widget_completer::complete(const QString &text)
 
   if(m_model->rowCount() > 0)
     {
-      if(m_model->rowCount() > 10)
-	m_popup->setVerticalScrollBarPolicy
-	  (Qt::ScrollBarAlwaysOn);
+      if(m_model->rowCount() > dooble_page::MAXIMUM_HISTORY_ITEMS)
+	m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
       else
-	m_popup->setVerticalScrollBarPolicy
-	  (Qt::ScrollBarAlwaysOff);
+	m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
       m_popup->setMaximumHeight
-	(qMin(10, m_model->rowCount()) * m_popup->rowHeight(0));
+	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
+	      m_model->rowCount()) * m_popup->rowHeight(0));
       m_popup->setMinimumHeight
-	(qMin(10, m_model->rowCount()) * m_popup->rowHeight(0));
+	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
+	      m_model->rowCount()) * m_popup->rowHeight(0));
       QCompleter::complete();
     }
   else
