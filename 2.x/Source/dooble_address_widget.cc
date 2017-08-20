@@ -100,9 +100,9 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
 }
 
-QMenu *dooble_address_widget::menu(void) const
+void dooble_address_widget::complete(const QList<QWebEngineHistoryItem> &list)
 {
-  return m_menu;
+  Q_UNUSED(list);
 }
 
 void dooble_address_widget::prepare_icons(void)

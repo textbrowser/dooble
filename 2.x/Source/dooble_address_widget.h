@@ -29,6 +29,7 @@
 #define dooble_address_widget_h
 
 #include <QLineEdit>
+#include <QWebEngineHistoryItem>
 
 class QToolButton;
 class dooble_address_widget_completer;
@@ -39,7 +40,7 @@ class dooble_address_widget: public QLineEdit
 
  public:
   dooble_address_widget(QWidget *parent);
-  QMenu *menu(void) const;
+  void complete(const QList<QWebEngineHistoryItem> &list);
   void setText(const QString &text);
 
  protected:

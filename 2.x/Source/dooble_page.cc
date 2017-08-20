@@ -32,7 +32,6 @@
 #include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
-#include <QWidgetAction>
 
 #include "dooble.h"
 #include "dooble_cookies.h"
@@ -633,57 +632,8 @@ void dooble_page::slot_go_to_forward_item(void)
     go_to_forward_item(action->property("index").toInt());
 }
 
-void dooble_page::slot_go_to_item(void)
-{
-  m_ui.address->menu()->hide();
-
-  QLabel *label = qobject_cast<QLabel *> (sender());
-
-  if(!label)
-    return;
-
-  QList<QWebEngineHistoryItem> items(m_view->history()->items());
-  int index = label->property("index").toInt();
-
-  if(index >= 0 && index < items.size())
-    m_view->history()->goToItem(items.at(index));
-}
-
 void dooble_page::slot_icon_changed(const QIcon &icon)
 {
-  if(!m_ui.address->menu()->isVisible())
-    return;
-
-  dooble_web_engine_view *view = qobject_cast<dooble_web_engine_view *>
-    (sender());
-
-  if(!view)
-    return;
-
-  QList<QAction *> list(m_ui.address->menu()->actions());
-
-  for(int i = 0; i < list.size(); i++)
-    {
-      QWidgetAction *widget_action = qobject_cast<QWidgetAction *> (list.at(i));
-
-      if(!widget_action)
-	continue;
-      else if(view->url() != widget_action->property("url").toUrl())
-	continue;
-
-      QWidget *widget = widget_action->defaultWidget();
-
-      if(!widget)
-	break;
-
-      QLabel *pixmap_label = widget->findChild<QLabel *> ("pixmap_label");
-
-      if(pixmap_label)
-	pixmap_label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-
-      break;
-    }
-
   Q_UNUSED(icon);
 }
 
@@ -859,64 +809,13 @@ void dooble_page::slot_show_find(void)
 
 void dooble_page::slot_show_pull_down_menu(void)
 {
-  m_ui.address->menu()->clear();
-
-  QList<QWebEngineHistoryItem> items(m_view->history()->items());
+  QList<QWebEngineHistoryItem> items
+    (m_view->history()->items().mid(0, MAXIMUM_HISTORY_ITEMS));
 
   if(items.isEmpty())
     return;
 
-  m_ui.address->menu()->setMaximumWidth(width());
-  m_ui.address->menu()->setMinimumWidth(width());
-
-  QFontMetrics fm(m_ui.address->menu()->fontMetrics());
-
-  for(int i = 0; i < MAXIMUM_HISTORY_ITEMS && i < items.size(); i++)
-    {
-      QLabel *pixmap_label = 0;
-      QString title(items.at(i).title().trimmed());
-      QString url(items.at(i).url().toString().trimmed());
-      QWidgetAction *widget_action = new QWidgetAction(m_ui.address->menu());
-      dooble_label_widget *label = 0;
-
-      if(title.isEmpty())
-	title = items.at(i).url().toString().trimmed();
-
-      widget_action->setProperty("url", items.at(i).url());
-
-      QWidget *widget = new QWidget(m_ui.address->menu());
-      QIcon icon(dooble_favicons::icon(url));
-      QString text("<html>" +
-		   title +
-		   " - " +
-		   QString("<font color='blue'><u>%1</u></font>").arg(url) +
-		   "</html>");
-
-      label = new dooble_label_widget(fm.elidedText(text,
-						    Qt::ElideRight,
-						    width() - 10),
-				      m_ui.address->menu());
-      label->setMargin(5);
-      label->setMinimumHeight(fm.height() + 10);
-      label->setProperty("index", i);
-      pixmap_label = new QLabel(m_ui.address->menu());
-      pixmap_label->setMaximumSize(QSize(16, 16));
-      pixmap_label->setObjectName("pixmap_label");
-      pixmap_label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-      widget->setLayout(new QHBoxLayout(widget));
-      widget->layout()->addWidget(pixmap_label);
-      widget->layout()->addWidget(label);
-      widget->layout()->setContentsMargins(5, 0, 0, 0);
-      widget->layout()->setSpacing(5);
-      connect(label,
-	      SIGNAL(clicked(void)),
-	      this,
-	      SLOT(slot_go_to_item(void)));
-      widget_action->setDefaultWidget(widget);
-      m_ui.address->menu()->addAction(widget_action);
-    }
-
-  m_ui.address->menu()->popup(mapToGlobal(QPoint(0, m_ui.frame->pos().y())));
+  m_ui.address->complete(items);
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)

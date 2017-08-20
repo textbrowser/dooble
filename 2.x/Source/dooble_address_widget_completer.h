@@ -49,6 +49,7 @@ class dooble_address_widget_completer: public QCompleter
   int levenshtein_distance(const QString &str1, const QString &str2) const;
 
  private slots:
+  void slot_clicked(const QModelIndex &index);
   void slot_edit_timer_timeout(void);
 };
 

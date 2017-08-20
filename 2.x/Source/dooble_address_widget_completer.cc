@@ -26,6 +26,7 @@
 */
 
 #include <QHeaderView>
+#include <QKeyEvent>
 #include <QStandardItemModel>
 
 #include "dooble.h"
@@ -52,6 +53,10 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_edit_timer_timeout(void)));
+  connect(m_popup,
+	  SIGNAL(clicked(const QModelIndex &)),
+	  this,
+	  SLOT(slot_clicked(const QModelIndex &)));
   connect(qobject_cast<QLineEdit *> (parent),
 	  SIGNAL(textEdited(const QString &)),
 	  &m_edit_timer,
@@ -154,6 +159,13 @@ void dooble_address_widget_completer::complete(const QString &text)
     }
   else
     popup()->setVisible(false);
+}
+
+void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
+{
+  qobject_cast<QLineEdit *> (widget())->setText(index.data().toString());
+  QApplication::postEvent
+    (widget(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
 }
 
 void dooble_address_widget_completer::slot_edit_timer_timeout(void)

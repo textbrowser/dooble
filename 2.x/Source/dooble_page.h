@@ -89,7 +89,6 @@ class dooble_page: public QWidget
   void slot_go_forward(void);
   void slot_go_to_backward_item(void);
   void slot_go_to_forward_item(void);
-  void slot_go_to_item(void);
   void slot_icon_changed(const QIcon &icon);
   void slot_link_hovered(const QString &url);
   void slot_load_finished(bool ok);
