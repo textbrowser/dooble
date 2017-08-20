@@ -213,7 +213,7 @@ dooble_page::dooble_page(bool is_private,
 
 QIcon dooble_page::icon(void) const
 {
-  return m_view->icon();
+  return dooble_favicons::icon(m_view->url());
 }
 
 QString dooble_page::title(void) const
@@ -707,8 +707,7 @@ void dooble_page::slot_load_finished(bool ok)
   Q_UNUSED(ok);
 
   if(dooble::s_history)
-    dooble::s_history->save_item
-      (m_view->icon(), m_view->history()->currentItem());
+    dooble::s_history->save_item(icon(), m_view->history()->currentItem());
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 

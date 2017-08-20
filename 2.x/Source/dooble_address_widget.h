@@ -52,13 +52,11 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_information;
   QToolButton *m_pull_down;
   dooble_address_widget_completer *m_completer;
-  int levenshtein_distance(const QString &str1, const QString &str2) const;
   void prepare_icons(void);
 
  private slots:
   void slot_settings_applied(void);
   void slot_show_site_information_menu(void);
-  void slot_text_edited(const QString &text);
 
  signals:
   void pull_down_clicked(void);

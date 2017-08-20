@@ -25,12 +25,147 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QHeaderView>
+#include <QStandardItemModel>
+
+#include "dooble.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_address_widget_completer_popup.h"
+#include "dooble_history.h"
 
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
 {
+  m_edit_timer.setInterval(100);
+  m_edit_timer.setSingleShot(true);
+  m_model = new QStandardItemModel(this);
+  m_model->setSortRole(Qt::UserRole);
   m_popup = new dooble_address_widget_completer_popup(parent);
+  m_popup->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+  m_popup->horizontalHeader()->setVisible(false);
+  m_popup->setSelectionBehavior(QAbstractItemView::SelectRows);
+  m_popup->setSelectionMode(QAbstractItemView::SingleSelection);
+  m_popup->setShowGrid(false);
+  m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  m_popup->verticalHeader()->setVisible(false);
+  connect(&m_edit_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_edit_timer_timeout(void)));
+  connect(qobject_cast<QLineEdit *> (parent),
+	  SIGNAL(textEdited(const QString &)),
+	  &m_edit_timer,
+	  SLOT(start(void)));
+  setCaseSensitivity(Qt::CaseInsensitive);
+  setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+  setModel(m_model);
+  setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
+}
+
+int dooble_address_widget_completer::levenshtein_distance
+(const QString &str1, const QString &str2) const
+{
+  if(str1.isEmpty())
+    return str2.length();
+  else if(str2.isEmpty())
+    return str1.length();
+
+  QChar str1_c = 0;
+  QChar str2_c = 0;
+  QVector<QVector<int> > matrix(str1.length() + 1,
+				QVector<int> (str2.length() + 1));
+  int cost = 0;
+
+  for(int i = 0; i <= str1.length(); i++)
+    matrix[i][0] = i;
+
+  for(int i = 0; i <= str2.length(); i++)
+    matrix[0][i] = i;
+
+  for(int i = 1; i <= str1.length(); i++)
+    {
+      str1_c = str1.at(i - 1);
+
+      for(int j = 1; j <= str2.length(); j++)
+	{
+	  str2_c = str2.at(j - 1);
+
+	  if(str1_c == str2_c)
+	    cost = 0;
+	  else
+	    cost = 1;
+
+	  matrix[i][j] = qMin(qMin(matrix[i - 1][j] + 1,
+				   matrix[i][j - 1] + 1),
+			      matrix[i - 1][j - 1] + cost);
+	}
+    }
+
+  return matrix[str1.length()][str2.length()];
+}
+
+void dooble_address_widget_completer::complete(const QString &text)
+{
+  m_model->clear();
+
+  QList<QPair<QIcon, QString> > urls(dooble::s_history->urls());
+  QList<QStandardItem *> list;
+
+  for(int i = 0; i < urls.size(); i++)
+    list.append(new QStandardItem(urls.at(i).first, urls.at(i).second));
+
+  if(text.trimmed().isEmpty())
+    {
+      m_model->setRowCount(list.size());
+
+      for(int i = 0; i < m_model->rowCount(); i++)
+	m_model->setItem(i, list.at(i));
+    }
+  else
+    {
+      QMultiMap<int, QStandardItem *> map;
+      QString c(text.toLower().trimmed());
+
+      for(int i = 0; i < list.size(); i++)
+	if(list.at(i)->text().toLower().contains(c))
+	  map.insert
+	    (levenshtein_distance(c, list.at(i)->text().toLower()), list.at(i));
+	else
+	  delete list.at(i);
+
+      list = map.values();
+      m_model->setRowCount(list.size());
+
+      for(int i = 0; i < m_model->rowCount(); i++)
+	m_model->setItem(i, list.at(i));
+    }
+
+  if(m_model->rowCount() > 0)
+    {
+      if(m_model->rowCount() > 10)
+	m_popup->setVerticalScrollBarPolicy
+	  (Qt::ScrollBarAlwaysOn);
+      else
+	m_popup->setVerticalScrollBarPolicy
+	  (Qt::ScrollBarAlwaysOff);
+
+      m_popup->setMaximumHeight
+	(qMin(10, m_model->rowCount()) * m_popup->rowHeight(0));
+      m_popup->setMinimumHeight
+	(qMin(10, m_model->rowCount()) * m_popup->rowHeight(0));
+      QCompleter::complete();
+    }
+  else
+    popup()->setVisible(false);
+}
+
+void dooble_address_widget_completer::slot_edit_timer_timeout(void)
+{
+  QString text(qobject_cast<QLineEdit *> (widget())->text().trimmed());
+
+  if(text.isEmpty())
+    popup()->setVisible(false);
+  else
+    complete(text);
 }

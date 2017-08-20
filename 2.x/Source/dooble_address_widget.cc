@@ -89,10 +89,6 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
-  connect(this,
-	  SIGNAL(textEdited(const QString &)),
-	  this,
-	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
   setCompleter(m_completer);
   setMinimumHeight(sizeHint().height());
@@ -107,48 +103,6 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 QMenu *dooble_address_widget::menu(void) const
 {
   return m_menu;
-}
-
-int dooble_address_widget::levenshtein_distance(const QString &str1,
-						const QString &str2) const
-{
-  if(str1.isEmpty())
-    return str2.length();
-  else if(str2.isEmpty())
-    return str1.length();
-
-  QChar str1_c = 0;
-  QChar str2_c = 0;
-  QVector<QVector<int> > matrix(str1.length() + 1,
-				QVector<int> (str2.length() + 1));
-  int cost = 0;
-
-  for(int i = 0; i <= str1.length(); i++)
-    matrix[i][0] = i;
-
-  for(int i = 0; i <= str2.length(); i++)
-    matrix[0][i] = i;
-
-  for(int i = 1; i <= str1.length(); i++)
-    {
-      str1_c = str1.at(i - 1);
-
-      for(int j = 1; j <= str2.length(); j++)
-	{
-	  str2_c = str2.at(j - 1);
-
-	  if(str1_c == str2_c)
-	    cost = 0;
-	  else
-	    cost = 1;
-
-	  matrix[i][j] = qMin(qMin(matrix[i - 1][j] + 1,
-				   matrix[i][j - 1] + 1),
-			      matrix[i - 1][j - 1] + cost);
-	}
-    }
-
-  return matrix[str1.length()][str2.length()];
 }
 
 void dooble_address_widget::prepare_icons(void)
@@ -204,9 +158,4 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 
   menu.addAction(tr("Show Site &Cookies..."), this, SIGNAL(show_cookies(void)));
   menu.exec(QCursor::pos());
-}
-
-void dooble_address_widget::slot_text_edited(const QString &text)
-{
-  Q_UNUSED(text);
 }

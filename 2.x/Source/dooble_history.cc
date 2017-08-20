@@ -47,6 +47,81 @@ QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
   return m_history;
 }
 
+QList<QPair<QIcon, QString> > dooble_history::urls(void) const
+{
+  QHashIterator<QUrl, QHash<int, QVariant> > it(m_history);
+  QList<QPair<QIcon, QString> > list;
+
+  while(it.hasNext())
+    {
+      it.next();
+      list << QPair<QIcon, QString>
+	(it.value().value(FAVICON).value<QIcon> (), it.key().toString());
+    }
+
+  return list;
+}
+
+void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
+{
+  if(!icon.isNull())
+    if(m_history.contains(url))
+      {
+	QHash<int, QVariant> hash(m_history.value(url));
+
+	hash[FAVICON] = icon;
+	m_history[url] = hash;
+      }
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name(QString("dooble_history_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare
+	  ("UPDATE dooble_history SET favicon = ? WHERE url_digest = ?");
+
+	QBuffer buffer;
+	QByteArray bytes;
+
+	buffer.setBuffer(&bytes);
+
+	if(buffer.open(QIODevice::WriteOnly))
+	  {
+	    QDataStream out(&buffer);
+
+	    out << icon;
+
+	    if(out.status() != QDataStream::Ok)
+	      bytes.clear();
+	  }
+	else
+	  bytes.clear();
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_history::save_item(const QIcon &icon,
 			       const QWebEngineHistoryItem &item)
 {

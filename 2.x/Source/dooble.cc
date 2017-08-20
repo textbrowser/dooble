@@ -360,7 +360,8 @@ void dooble::slot_icon_changed(const QIcon &icon)
   if(!page)
     return;
 
-  dooble_favicons::save_icon(icon, page->url());
+  dooble::s_history->save_favicon(icon, page->url());
+  dooble_favicons::save_favicon(icon, page->url());
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }
 
@@ -373,7 +374,7 @@ void dooble::slot_load_finished(bool ok)
   if(!page)
     return;
 
-  dooble_favicons::save_icon(page->icon(), page->url());
+  dooble_favicons::save_favicon(page->icon(), page->url());
 }
 
 void dooble::slot_load_started(void)

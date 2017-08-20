@@ -152,7 +152,7 @@ void dooble_favicons::purge_temporary(void)
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_favicons::save_icon(const QIcon &icon, const QUrl &url)
+void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 {
   if(!dooble::s_cryptography)
     return;
