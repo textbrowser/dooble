@@ -36,6 +36,9 @@ class dooble_address_widget_completer_popup: public QTableView
 
  public:
   dooble_address_widget_completer_popup(QWidget *parent);
+
+ protected:
+  void mouseMoveEvent(QMouseEvent *event);
 };
 
 #endif
