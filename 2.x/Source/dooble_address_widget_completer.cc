@@ -110,7 +110,6 @@ void dooble_address_widget_completer::complete(const QString &text)
   m_model->clear();
 
   QList<QPair<QIcon, QString> > urls(dooble::s_history->urls());
-  QList<QStandardItem *> list;
 
   if(text.trimmed().isEmpty())
     {
@@ -122,6 +121,7 @@ void dooble_address_widget_completer::complete(const QString &text)
     }
   else
     {
+      QList<QStandardItem *> list;
       QMultiMap<int, QStandardItem *> map;
       QString c(text.toLower().trimmed());
 
@@ -161,7 +161,10 @@ void dooble_address_widget_completer::slot_edit_timer_timeout(void)
   QString text(qobject_cast<QLineEdit *> (widget())->text().trimmed());
 
   if(text.isEmpty())
-    popup()->setVisible(false);
+    {
+      m_model->clear();
+      popup()->setVisible(false);
+    }
   else
     complete(text);
 }
