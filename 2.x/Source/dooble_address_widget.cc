@@ -25,8 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QKeyEvent>
 #include <QMenu>
 #include <QStyle>
+#include <QTableView>
 #include <QToolButton>
 
 #include "dooble.h"
@@ -98,6 +100,36 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	 m_information->sizeHint().width() +
 	 frame_width + 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
+}
+
+bool dooble_address_widget::event(QEvent *event)
+{
+  if(event && event->type() == QEvent::KeyPress &&
+     static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
+    {
+      QTableView *table_view = qobject_cast<QTableView *>
+	(m_completer->popup());
+
+      if(table_view && table_view->isVisible())
+	{
+	  int row = 0;
+
+	  if(table_view->selectionModel()->
+	     isRowSelected(table_view->currentIndex().row(),
+			   table_view->rootIndex()))
+	    {
+	      row = table_view->currentIndex().row() + 1;
+
+	      if(row >= m_completer->model()->rowCount())
+		row = 0;
+	    }
+
+	  table_view->selectRow(row);
+	  return true;
+	}
+    }
+
+  return QLineEdit::event(event);
 }
 
 void dooble_address_widget::complete(const QList<QWebEngineHistoryItem> &list)

@@ -44,6 +44,7 @@ class dooble_address_widget: public QLineEdit
   void setText(const QString &text);
 
  protected:
+  bool event(QEvent *event);
   void resizeEvent(QResizeEvent *event);
 
  private:
