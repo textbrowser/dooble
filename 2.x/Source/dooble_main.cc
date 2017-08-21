@@ -167,7 +167,6 @@ int main(int argc, char *argv[])
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
-
   dooble::s_application = new dooble_application(argc, argv);
 
   /*
@@ -297,7 +296,6 @@ int main(int argc, char *argv[])
   int rc = dooble::s_application->exec();
 
   dooble_favicons::purge_temporary();
-  delete dooble::s_application;
-  dooble::s_application = 0;
+  dooble::s_application->deleteLater();
   return rc;
 }
