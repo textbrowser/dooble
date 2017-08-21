@@ -188,6 +188,6 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 {
   QMenu menu(this);
 
-  menu.addAction(tr("Show Site &Cookies..."), this, SIGNAL(show_cookies(void)));
+  menu.addAction(tr("Show Site Coo&kies..."), this, SIGNAL(show_cookies(void)));
   menu.exec(QCursor::pos());
 }
