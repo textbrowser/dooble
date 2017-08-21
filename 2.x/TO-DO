@@ -14,14 +14,14 @@ Completed Items
 10.    Proxy details within Privacy.
 11.    Close non-browser windows via the Esc key.
 12.    Activate history pull-down on address text change.
+13.    Link-hover events resize windows.
+14.    Elided text in pull-down menus must consider invisible text.
 
 Remaining Items
 
 1.     Download panel.
 2.     Creating new tabs and windows requires sophistication.
-3.     Elided text in pull-down menus must consider invisible text.
-4.     Windows PRNG.
-5.     Allow SSL/TLS exceptions.
-6.     Bookmarks.
-7.     History. Will require a sub-process for removing expired data.
-8.     Link-hover events resize windows.
+3.     Windows PRNG.
+4.     Allow SSL/TLS exceptions.
+5.     Bookmarks.
+6.     History. Will require a sub-process for removing expired data.
