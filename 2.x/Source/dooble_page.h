@@ -58,6 +58,9 @@ class dooble_page: public QWidget
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
 
+ protected:
+  void resizeEvent(QResizeEvent *event);
+
  private:
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;

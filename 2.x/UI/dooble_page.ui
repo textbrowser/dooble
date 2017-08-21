@@ -306,24 +306,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="link_hovered">
-       <property name="text">
-        <string/>
+      <widget class="QLineEdit" name="link_hovered">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {background: transparent;}</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <widget class="QLabel" name="is_private">
@@ -379,6 +372,8 @@
   <tabstop>find_next</tabstop>
   <tabstop>find_previous</tabstop>
   <tabstop>find_match_case</tabstop>
+  <tabstop>link_hovered</tabstop>
+  <tabstop>authenticate</tabstop>
  </tabstops>
  <resources/>
  <connections/>

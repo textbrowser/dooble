@@ -443,6 +443,26 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
 #endif
 }
 
+void dooble_page::resizeEvent(QResizeEvent *event)
+{
+  QWidget::resizeEvent(event);
+
+  QFontMetrics fm(m_ui.link_hovered->fontMetrics());
+  int difference = 40;
+
+  if(m_ui.is_private->isVisible())
+    difference += 25;
+
+  if(m_ui.progress->isVisible())
+    difference += m_ui.progress->width();
+
+  m_ui.link_hovered->setText
+    (fm.elidedText(m_ui.link_hovered->property("text").toString().trimmed(),
+		   Qt::ElideMiddle,
+		   qAbs(width() - difference)));
+  m_ui.link_hovered->setCursorPosition(0);
+}
+
 void dooble_page::slot_about_to_show_standard_menus(void)
 {
   if(m_action_close_tab)
@@ -640,16 +660,18 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 void dooble_page::slot_link_hovered(const QString &url)
 {
   QFontMetrics fm(m_ui.link_hovered->fontMetrics());
+  int difference = 40;
 
+  if(m_ui.is_private->isVisible())
+    difference += 25;
+
+  if(m_ui.progress->isVisible())
+    difference += m_ui.progress->width();
+
+  m_ui.link_hovered->setProperty("text", url);
   m_ui.link_hovered->setText
-    (fm.elidedText(url.trimmed(),
-		   Qt::ElideMiddle,
-
-		   /*
-		   ** Always consider the progress bar's width.
-		   */
-
-		   qAbs(width() - m_ui.progress->width() - 55)));
+    (fm.elidedText(url.trimmed(), Qt::ElideMiddle, qAbs(width() - difference)));
+  m_ui.link_hovered->setCursorPosition(0);
 }
 
 void dooble_page::slot_load_finished(bool ok)
