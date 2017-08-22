@@ -384,6 +384,8 @@ void dooble_settings::restore(void)
 
   if(m_ui.theme->currentIndex() == 0)
     s_settings["icon_set"] = "BlueBits";
+  else if(m_ui.theme->currentIndex() == 1)
+    s_settings["icon_set"] = "Google Material Design";
   else
     s_settings["icon_set"] = "SnipIcons";
 
@@ -515,6 +517,8 @@ void dooble_settings::slot_apply(void)
 
     if(m_ui.theme->currentIndex() == 0)
       s_settings["icon_set"] = "BlueBits";
+    else if(m_ui.theme->currentIndex() == 1)
+      s_settings["icon_set"] = "Google Material Design";
     else
       s_settings["icon_set"] = "SnipIcons";
   }

@@ -325,7 +325,7 @@
             <item>
              <widget class="QComboBox" name="theme">
               <property name="currentIndex">
-               <number>1</number>
+               <number>2</number>
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
@@ -336,6 +336,11 @@
               <item>
                <property name="text">
                 <string>BlueBits</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Google Material Design</string>
                </property>
               </item>
               <item>
