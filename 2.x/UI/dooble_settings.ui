@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -304,6 +304,19 @@
         <widget class="QWidget" name="display_page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <widget class="QCheckBox" name="access_new_tabs">
+            <property name="toolTip">
+             <string>Switch to new tabs.</string>
+            </property>
+            <property name="text">
+             <string>Access New Tabs</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="animated_scrolling">
             <property name="text">
              <string>Animated Scrolling</string>
@@ -396,8 +409,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>384</width>
-               <height>588</height>
+               <width>452</width>
+               <height>612</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -974,6 +987,7 @@
   <tabstop>cache_size</tabstop>
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
+  <tabstop>access_new_tabs</tabstop>
   <tabstop>animated_scrolling</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>scrollArea_2</tabstop>

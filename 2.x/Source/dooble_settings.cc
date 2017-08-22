@@ -340,6 +340,8 @@ void dooble_settings::restore(void)
 
   QWriteLocker lock(&s_settings_mutex);
 
+  m_ui.access_new_tabs->setChecked
+    (s_settings.value("access_new_tabs", true).toBool());
   m_ui.animated_scrolling->setChecked
     (s_settings.value("animated_scrolling", false).toBool());
   m_ui.cache_size->setValue(s_settings.value("cache_size", 0).toInt());
@@ -505,6 +507,7 @@ void dooble_settings::slot_apply(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
   prepare_proxy(true);
+  set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());

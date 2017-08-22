@@ -63,13 +63,6 @@
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QToolButton" name="backward">
        <property name="toolTip">
         <string>Backward</string>
