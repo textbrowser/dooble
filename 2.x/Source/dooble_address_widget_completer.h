@@ -30,8 +30,8 @@
 
 #include <QCompleter>
 #include <QTimer>
-#include <QWebEngineHistoryItem>
 
+class QStandardItem;
 class QStandardItemModel;
 class dooble_address_widget_completer_popup;
 
@@ -41,10 +41,14 @@ class dooble_address_widget_completer: public QCompleter
 
  public:
   dooble_address_widget_completer(QWidget *parent);
-  void complete(const QList<QWebEngineHistoryItem> &list);
+  ~dooble_address_widget_completer();
+  void add_item(const QIcon &icon, const QUrl &url);
   void complete(const QString &text);
+  void complete(void);
 
  private:
+  QHash<QUrl, char> m_urls;
+  QList<QStandardItem *> m_purged_items;
   QStandardItemModel *m_model;
   QTimer m_edit_timer;
   dooble_address_widget_completer_popup *m_popup;

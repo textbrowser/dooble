@@ -104,37 +104,46 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 
 bool dooble_address_widget::event(QEvent *event)
 {
-  if(event && event->type() == QEvent::KeyPress &&
-     static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
+  if(event && event->type() == QEvent::KeyPress)
     {
-      QTableView *table_view = qobject_cast<QTableView *>
-	(m_completer->popup());
-
-      if(table_view && table_view->isVisible())
+      if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Escape)
+	emit reset_url();
+      else if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
-	  int row = 0;
+	  QTableView *table_view = qobject_cast<QTableView *>
+	    (m_completer->popup());
 
-	  if(table_view->selectionModel()->
-	     isRowSelected(table_view->currentIndex().row(),
-			   table_view->rootIndex()))
+	  if(table_view && table_view->isVisible())
 	    {
-	      row = table_view->currentIndex().row() + 1;
+	      int row = 0;
 
-	      if(row >= m_completer->model()->rowCount())
-		row = 0;
+	      if(table_view->selectionModel()->
+		 isRowSelected(table_view->currentIndex().row(),
+			       table_view->rootIndex()))
+		{
+		  row = table_view->currentIndex().row() + 1;
+
+		  if(row >= m_completer->model()->rowCount())
+		    row = 0;
+		}
+
+	      table_view->selectRow(row);
+	      return true;
 	    }
-
-	  table_view->selectRow(row);
-	  return true;
 	}
     }
 
   return QLineEdit::event(event);
 }
 
-void dooble_address_widget::complete(const QList<QWebEngineHistoryItem> &list)
+void dooble_address_widget::add_item(const QIcon &icon, const QUrl &url)
 {
-  m_completer->complete(list);
+  m_completer->add_item(icon, url);
+}
+
+void dooble_address_widget::complete(void)
+{
+  m_completer->complete();
 }
 
 void dooble_address_widget::prepare_icons(void)

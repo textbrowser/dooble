@@ -35,7 +35,6 @@
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_page.h"
-#include "dooble_web_engine_view.h"
 
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
@@ -69,6 +68,12 @@ dooble_address_widget_completer::dooble_address_widget_completer
   setModel(m_model);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
+}
+
+dooble_address_widget_completer::~dooble_address_widget_completer()
+{
+  while(!m_purged_items.isEmpty())
+    delete m_purged_items.takeFirst();
 }
 
 int dooble_address_widget_completer::levenshtein_distance
@@ -113,69 +118,95 @@ int dooble_address_widget_completer::levenshtein_distance
   return matrix[str1.length()][str2.length()];
 }
 
-void dooble_address_widget_completer::complete
-(const QList<QWebEngineHistoryItem> &list)
+void dooble_address_widget_completer::add_item(const QIcon &icon,
+					       const QUrl &url)
 {
-  m_model->clear();
-  m_model->setRowCount(list.size());
+  if(url.isEmpty() || !url.isValid())
+    return;
 
-  for(int i = 0; i < m_model->rowCount(); i++)
-    m_model->setItem
-      (i, new QStandardItem(dooble_favicons::icon(list.at(i).url()),
-			    list.at(i).url().toString()));
+  /*
+  ** Prevent duplicates. We can't use the model's findItems()
+  ** as the model may contain a subset of the completer's
+  ** items because of filtering activity.
+  */
 
-  if(m_model->rowCount())
-    {
-      m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-      m_popup->setMaximumHeight
-	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0));
-      m_popup->setMinimumHeight
-	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0));
-      QCompleter::complete();
+  if(m_urls.contains(url))
+    return;
 
-      QPoint point;
-      dooble_page *page = qobject_cast<dooble_page *>
-	(widget()->parentWidget());
+  m_urls[url] = 0;
 
-      point.setX(page->view()->pos().x());
-      point.setY(page->view()->pos().y());
-      m_popup->move(page->view()->mapToGlobal(point));
-      m_popup->resize(widget()->parentWidget()->width(), m_popup->height());
-    }
+  QStandardItem *item = 0;
+
+  if(icon.isNull())
+    item = new QStandardItem(dooble_favicons::icon(url), url.toString());
+  else
+    item = new QStandardItem(icon, url.toString());
+
+  item->setToolTip(url.toString());
+  m_model->insertRow(0, item);
+}
+
+void dooble_address_widget_completer::complete(void)
+{
+  complete("");
 }
 
 void dooble_address_widget_completer::complete(const QString &text)
 {
-  m_model->clear();
+  m_model->blockSignals(true);
 
-  QList<QPair<QIcon, QString> > urls(dooble::s_history->urls());
+  while(!m_purged_items.isEmpty())
+    {
+      m_model->setRowCount(m_model->rowCount() + 1);
+      m_model->setItem(m_model->rowCount() - 1, m_purged_items.takeFirst());
+    }
+
+  QList<QStandardItem *> list;
 
   if(text.trimmed().isEmpty())
     {
-      m_model->setRowCount(urls.size());
-
       for(int i = 0; i < m_model->rowCount(); i++)
-	m_model->setItem
-	  (i, new QStandardItem(urls.at(i).first, urls.at(i).second));
+	if(m_model->item(i, 0))
+	  list.append(m_model->item(i, 0)->clone());
     }
   else
     {
-      QList<QStandardItem *> list;
       QMultiMap<int, QStandardItem *> map;
       QString c(text.toLower().trimmed());
 
-      for(int i = 0; i < urls.size(); i++)
-	if(urls.at(i).second.toLower().contains(c))
-	  map.insert(levenshtein_distance(c, urls.at(i).second.toLower()),
-		     new QStandardItem(urls.at(i).first, urls.at(i).second));
-
-      list = map.values();
-      m_model->setRowCount(list.size());
-
       for(int i = 0; i < m_model->rowCount(); i++)
-	m_model->setItem(i, list.at(i));
+	if(m_model->item(i, 0))
+	  {
+	    if(m_model->item(i, 0)->text().toLower().contains(c))
+	      map.insert
+		(levenshtein_distance(c, m_model->item(i, 0)->text().toLower()),
+		 m_model->item(i, 0)->clone());
+	    else
+	      m_purged_items.append(m_model->item(i, 0)->clone());
+	  }
+
+      list << map.values();
+    }
+
+  m_model->clear();
+
+  while(list.size() > 1)
+    {
+      m_model->setRowCount(m_model->rowCount() + 1);
+      m_model->setItem(m_model->rowCount() - 1, list.takeFirst());
+    }
+
+  /*
+  ** Unblock signals on the model and add the last list entry. This little
+  ** trick will allow for a smoother update of the table's contents.
+  */
+
+  m_model->blockSignals(false);
+
+  while(!list.isEmpty())
+    {
+      m_model->setRowCount(m_model->rowCount() + 1);
+      m_model->setItem(m_model->rowCount() - 1, list.takeFirst());
     }
 
   if(m_model->rowCount() > 0)
@@ -191,16 +222,17 @@ void dooble_address_widget_completer::complete(const QString &text)
       m_popup->setMinimumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
 	      m_model->rowCount()) * m_popup->rowHeight(0));
+
+      /*
+      ** The model should only be sorted when the pulldown
+      ** is activated. Otherwise, the Levenshtein algorithm
+      ** loses its potential.
+      */
+
+      if(m_purged_items.isEmpty())
+	m_model->sort(0, Qt::DescendingOrder);
+
       QCompleter::complete();
-
-      QPoint point;
-      dooble_page *page = qobject_cast<dooble_page *>
-	(widget()->parentWidget());
-
-      point.setX(page->view()->pos().x());
-      point.setY(page->view()->pos().y());
-      m_popup->move(page->view()->mapToGlobal(point));
-      m_popup->resize(widget()->parentWidget()->width(), m_popup->height());
     }
   else
     m_popup->setVisible(false);
@@ -218,10 +250,7 @@ void dooble_address_widget_completer::slot_edit_timer_timeout(void)
   QString text(qobject_cast<QLineEdit *> (widget())->text().trimmed());
 
   if(text.isEmpty())
-    {
-      m_model->clear();
-      m_popup->setVisible(false);
-    }
+    m_popup->setVisible(false);
   else
     complete(text);
 }

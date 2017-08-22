@@ -88,6 +88,10 @@ dooble_page::dooble_page(bool is_private,
 	  this,
 	  SLOT(slot_show_pull_down_menu(void)));
   connect(m_ui.address,
+	  SIGNAL(reset_url(void)),
+	  this,
+	  SLOT(slot_reset_url(void)));
+  connect(m_ui.address,
 	  SIGNAL(show_cookies(void)),
 	  this,
 	  SLOT(slot_show_cookies(void)));
@@ -799,6 +803,12 @@ void dooble_page::slot_reload_or_stop(void)
     m_view->reload();
 }
 
+void dooble_page::slot_reset_url(void)
+{
+  m_ui.address->setText(m_view->url().toString());
+  m_ui.address->selectAll();
+}
+
 void dooble_page::slot_settings_applied(void)
 {
   prepare_icons();
@@ -831,16 +841,11 @@ void dooble_page::slot_show_find(void)
 
 void dooble_page::slot_show_pull_down_menu(void)
 {
-  QList<QWebEngineHistoryItem> items
-    (m_view->history()->items().mid(0, MAXIMUM_HISTORY_ITEMS));
-
-  if(items.isEmpty())
-    return;
-
-  m_ui.address->complete(items);
+  m_ui.address->complete();
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)
 {
+  m_ui.address->add_item(m_view->icon(), url);
   m_ui.address->setText(url.toString());
 }

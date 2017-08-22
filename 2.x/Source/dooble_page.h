@@ -105,6 +105,7 @@ class dooble_page: public QWidget
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);
   void slot_reload_or_stop(void);
+  void slot_reset_url(void);
   void slot_settings_applied(void);
   void slot_show_cookies(void);
   void slot_show_find(void);
