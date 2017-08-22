@@ -61,6 +61,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
   setModel(m_model);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
+  setWrapAround(false);
 }
 
 dooble_address_widget_completer::~dooble_address_widget_completer()
