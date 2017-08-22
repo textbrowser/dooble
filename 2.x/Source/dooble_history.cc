@@ -303,4 +303,5 @@ void dooble_history::slot_populate(void)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+  emit populated();
 }

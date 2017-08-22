@@ -92,7 +92,6 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
-  populate();
   prepare_icons();
   setCompleter(m_completer);
   setMinimumHeight(sizeHint().height());
@@ -102,6 +101,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	 m_information->sizeHint().width() +
 	 frame_width + 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
+  slot_populate();
 }
 
 bool dooble_address_widget::event(QEvent *event)
@@ -162,14 +162,6 @@ void dooble_address_widget::complete(void)
   m_completer->complete();
 }
 
-void dooble_address_widget::populate(void)
-{
-  QList<QPair<QIcon, QString> > list(dooble::s_history->urls());
-
-  for(int i = 0; i < list.size(); i++)
-    m_completer->add_item(list.at(i).first, list.at(i).second);
-}
-
 void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
@@ -215,6 +207,14 @@ void dooble_address_widget::setText(const QString &text)
 void dooble_address_widget::set_item_icon(const QIcon &icon, const QUrl &url)
 {
   m_completer->set_item_icon(icon, url);
+}
+
+void dooble_address_widget::slot_populate(void)
+{
+  QList<QPair<QIcon, QString> > list(dooble::s_history->urls());
+
+  for(int i = 0; i < list.size(); i++)
+    m_completer->add_item(list.at(i).first, list.at(i).second);
 }
 
 void dooble_address_widget::slot_settings_applied(void)

@@ -34,6 +34,7 @@
 #include <QWebEngineHistoryItem>
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -71,6 +72,10 @@ dooble_page::dooble_page(bool is_private,
     m_view = new dooble_web_engine_view(m_is_private, this);
 
   m_ui.frame->layout()->addWidget(m_view);
+  connect(dooble::s_history,
+	  SIGNAL(populated(void)),
+	  m_ui.address,
+	  SLOT(slot_populate(void)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,

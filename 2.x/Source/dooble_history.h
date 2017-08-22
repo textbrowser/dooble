@@ -59,6 +59,9 @@ class dooble_history: public QObject
 
  private slots:
   void slot_populate(void);
+
+ signals:
+  void populated(void);
 };
 
 #endif

@@ -55,10 +55,10 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_information;
   QToolButton *m_pull_down;
   dooble_address_widget_completer *m_completer;
-  void populate(void);
   void prepare_icons(void);
 
  private slots:
+  void slot_populate(void);
   void slot_settings_applied(void);
   void slot_show_site_information_menu(void);
 
