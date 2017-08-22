@@ -203,7 +203,7 @@ void dooble_address_widget_completer::complete(const QString &text)
       m_popup->resize(widget()->parentWidget()->width(), m_popup->height());
     }
   else
-    popup()->setVisible(false);
+    m_popup->setVisible(false);
 }
 
 void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
@@ -220,7 +220,7 @@ void dooble_address_widget_completer::slot_edit_timer_timeout(void)
   if(text.isEmpty())
     {
       m_model->clear();
-      popup()->setVisible(false);
+      m_popup->setVisible(false);
     }
   else
     complete(text);
