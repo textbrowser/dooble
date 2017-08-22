@@ -117,6 +117,8 @@ bool dooble_address_widget::event(QEvent *event)
 
 	  if(table_view && table_view->isVisible())
 	    {
+	      event->accept();
+
 	      int row = 0;
 
 	      if(table_view->selectionModel()->
@@ -131,6 +133,18 @@ bool dooble_address_widget::event(QEvent *event)
 
 	      table_view->selectRow(row);
 	      return true;
+	    }
+	}
+      else
+	{
+	  QKeySequence key_sequence
+	    (static_cast<QKeyEvent *> (event)->modifiers() +
+	     Qt::Key(static_cast<QKeyEvent *> (event)->key()));
+
+	  if(key_sequence == QKeySequence(Qt::ControlModifier + Qt::Key_L))
+	    {
+	      selectAll();
+	      setFocus();
 	    }
 	}
     }
