@@ -33,7 +33,6 @@
 #include "dooble_address_widget_completer.h"
 #include "dooble_address_widget_completer_popup.h"
 #include "dooble_favicons.h"
-#include "dooble_history.h"
 #include "dooble_page.h"
 
 dooble_address_widget_completer::dooble_address_widget_completer

@@ -34,6 +34,7 @@
 #include "dooble.h"
 #include "dooble_address_widget.h"
 #include "dooble_address_widget_completer.h"
+#include "dooble_history.h"
 #include "dooble_settings.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
@@ -91,6 +92,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
+  populate();
   prepare_icons();
   setCompleter(m_completer);
   setMinimumHeight(sizeHint().height());
@@ -144,6 +146,14 @@ void dooble_address_widget::add_item(const QIcon &icon, const QUrl &url)
 void dooble_address_widget::complete(void)
 {
   m_completer->complete();
+}
+
+void dooble_address_widget::populate(void)
+{
+  QList<QPair<QIcon, QString> > list(dooble::s_history->urls());
+
+  for(int i = 0; i < list.size(); i++)
+    m_completer->add_item(list.at(i).first, list.at(i).second);
 }
 
 void dooble_address_widget::prepare_icons(void)
