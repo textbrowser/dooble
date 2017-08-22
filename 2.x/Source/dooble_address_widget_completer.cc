@@ -35,6 +35,7 @@
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_page.h"
+#include "dooble_web_engine_view.h"
 
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
@@ -133,6 +134,15 @@ void dooble_address_widget_completer::complete
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
 	      m_model->rowCount()) * m_popup->rowHeight(0));
       QCompleter::complete();
+
+      QPoint point;
+      dooble_page *page = qobject_cast<dooble_page *>
+	(widget()->parentWidget());
+
+      point.setX(page->view()->pos().x());
+      point.setY(page->view()->pos().y());
+      m_popup->move(page->view()->mapToGlobal(point));
+      m_popup->resize(widget()->parentWidget()->width(), m_popup->height());
     }
 }
 
@@ -182,6 +192,15 @@ void dooble_address_widget_completer::complete(const QString &text)
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
 	      m_model->rowCount()) * m_popup->rowHeight(0));
       QCompleter::complete();
+
+      QPoint point;
+      dooble_page *page = qobject_cast<dooble_page *>
+	(widget()->parentWidget());
+
+      point.setX(page->view()->pos().x());
+      point.setY(page->view()->pos().y());
+      m_popup->move(page->view()->mapToGlobal(point));
+      m_popup->resize(widget()->parentWidget()->width(), m_popup->height());
     }
   else
     popup()->setVisible(false);

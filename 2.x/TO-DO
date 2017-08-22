@@ -25,3 +25,4 @@ Remaining Items
 4.     Allow SSL/TLS exceptions.
 5.     Bookmarks.
 6.     History. Will require a sub-process for removing expired data.
+7.     Prevent duplicate history items in address widget menu.
