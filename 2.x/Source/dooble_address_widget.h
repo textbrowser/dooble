@@ -42,6 +42,7 @@ class dooble_address_widget: public QLineEdit
   void add_item(const QIcon &icon, const QUrl &url);
   void complete(void);
   void setText(const QString &text);
+  void set_item_icon(const QIcon &icon, const QUrl &url);
 
  protected:
   bool event(QEvent *event);

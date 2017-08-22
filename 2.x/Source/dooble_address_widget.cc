@@ -212,6 +212,11 @@ void dooble_address_widget::setText(const QString &text)
   setToolTip(QLineEdit::text());
 }
 
+void dooble_address_widget::set_item_icon(const QIcon &icon, const QUrl &url)
+{
+  m_completer->set_item_icon(icon, url);
+}
+
 void dooble_address_widget::slot_settings_applied(void)
 {
   prepare_icons();

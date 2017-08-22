@@ -658,7 +658,7 @@ void dooble_page::slot_go_to_forward_item(void)
 
 void dooble_page::slot_icon_changed(const QIcon &icon)
 {
-  Q_UNUSED(icon);
+  m_ui.address->set_item_icon(icon, m_view->url());
 }
 
 void dooble_page::slot_link_hovered(const QString &url)

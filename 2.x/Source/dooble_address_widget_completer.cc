@@ -131,8 +131,8 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
 
   if(m_urls.contains(url))
     return;
-
-  m_urls[url] = 0;
+  else
+    m_urls[url] = 0;
 
   QStandardItem *item = 0;
 
@@ -235,6 +235,16 @@ void dooble_address_widget_completer::complete(const QString &text)
     }
   else
     m_popup->setVisible(false);
+}
+
+void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
+						    const QUrl &url)
+{
+  QList<QStandardItem *> list(m_model->findItems(url.toString()));
+
+  if(!list.isEmpty())
+    if(list.at(0))
+      list.at(0)->setIcon(icon);
 }
 
 void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)

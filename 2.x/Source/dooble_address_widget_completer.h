@@ -45,6 +45,7 @@ class dooble_address_widget_completer: public QCompleter
   void add_item(const QIcon &icon, const QUrl &url);
   void complete(const QString &text);
   void complete(void);
+  void set_item_icon(const QIcon &icon, const QUrl &url);
 
  private:
   QHash<QUrl, char> m_urls;
