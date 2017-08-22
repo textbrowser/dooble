@@ -38,8 +38,6 @@
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
 {
-  m_edit_timer.setInterval(100);
-  m_edit_timer.setSingleShot(true);
   m_model = new QStandardItemModel(this);
   m_model->setSortRole(Qt::UserRole);
   m_popup = new dooble_address_widget_completer_popup(parent);
@@ -50,18 +48,14 @@ dooble_address_widget_completer::dooble_address_widget_completer
   m_popup->setShowGrid(false);
   m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   m_popup->verticalHeader()->setVisible(false);
-  connect(&m_edit_timer,
-	  SIGNAL(timeout(void)),
-	  this,
-	  SLOT(slot_edit_timer_timeout(void)));
   connect(m_popup,
 	  SIGNAL(clicked(const QModelIndex &)),
 	  this,
 	  SLOT(slot_clicked(const QModelIndex &)));
   connect(qobject_cast<QLineEdit *> (parent),
 	  SIGNAL(textEdited(const QString &)),
-	  &m_edit_timer,
-	  SLOT(start(void)));
+	  this,
+	  SLOT(slot_text_edited(const QString &)));
   setCaseSensitivity(Qt::CaseInsensitive);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
   setModel(m_model);
@@ -254,12 +248,10 @@ void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
     (widget(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
 }
 
-void dooble_address_widget_completer::slot_edit_timer_timeout(void)
+void dooble_address_widget_completer::slot_text_edited(const QString &text)
 {
-  QString text(qobject_cast<QLineEdit *> (widget())->text().trimmed());
-
-  if(text.isEmpty())
+  if(text.trimmed().isEmpty())
     m_popup->setVisible(false);
   else
-    complete(text);
+    complete(text.trimmed());
 }
