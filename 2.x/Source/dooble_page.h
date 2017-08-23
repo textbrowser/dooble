@@ -64,6 +64,8 @@ class dooble_page: public QWidget
  private:
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
+  QPointer<QAction> m_find_action;
+  QPointer<QAction> m_settings_action;
   Ui_dooble_page m_ui;
   bool m_is_private;
   bool m_shortcuts_prepared;

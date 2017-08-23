@@ -314,6 +314,13 @@ void dooble_page::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
+  if(m_find_action)
+    m_find_action->setIcon(QIcon(QString(":/%1/16/find.png").arg(icon_set)));
+
+  if(m_settings_action)
+    m_settings_action->setIcon
+      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)));
+
   m_ui.authenticate->setIcon
     (QIcon(QString(":/%1/32/authenticate.png").arg(icon_set)));
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
@@ -418,16 +425,18 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_ui.menus->menu()->addMenu(tr("&Edit"));
-  menu->addAction(QIcon(QString(":/%1/16/find.png").arg(icon_set)),
-		  tr("&Find"),
-		  this,
-		  SLOT(slot_show_find(void)),
-		  QKeySequence(tr("Ctrl+F")));
-  menu->addAction(QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
-		  tr("Settin&gs..."),
-		  this,
-		  SIGNAL(show_settings(void)),
-		  QKeySequence(tr("Ctrl+G")));
+  m_find_action = menu->addAction
+    (QIcon(QString(":/%1/16/find.png").arg(icon_set)),
+     tr("&Find"),
+     this,
+     SLOT(slot_show_find(void)),
+     QKeySequence(tr("Ctrl+F")));
+  m_settings_action = menu->addAction
+    (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+     tr("Settin&gs..."),
+     this,
+     SIGNAL(show_settings(void)),
+     QKeySequence(tr("Ctrl+G")));
 
   /*
   ** Tools Menu
