@@ -47,32 +47,38 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_is_private = is_private;
   m_purge_domains_timer.setInterval(30000);
   m_ui.setupUi(this);
+  m_ui.domain->setText("");
+  m_ui.expiration_date->setText("");
+  m_ui.name->setText("");
+  m_ui.path->setText("");
   m_ui.periodically_purge->setChecked
     (dooble_settings::setting("periodically_purge_temporary_domains").toBool());
 
   if(m_ui.periodically_purge->isChecked())
     m_purge_domains_timer.start();
 
-  m_ui.domain->setText("");
-  m_ui.expiration_date->setText("");
-  m_ui.name->setText("");
-  m_ui.path->setText("");
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
 
-  if(m_is_private)
-    {
-      QLabel *label = new QLabel();
-      QString icon_set(dooble_settings::setting("icon_set").toString());
+  QLabel *label = new QLabel();
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
-      label->setPixmap
-	(QIcon(QString(":/%1/16/private.png").arg(icon_set)).
-	 pixmap(QSize(16, 16)));
-      label->setToolTip(tr("Private cookies exist within the scope of this "
-			   "window's parent page."));
-      statusBar()->addPermanentWidget(label);
-    }
+  label->setPixmap
+    (QIcon(QString(":/%1/16/private.png").arg(icon_set)).
+     pixmap(QSize(16, 16)));
+  label->setToolTip(tr("Private cookies exist within "
+		       "the scope of this window's parent page."));
+  statusBar()->addPermanentWidget(label);
 
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    statusBar()->setVisible(m_is_private);
+  else
+    statusBar()->setVisible(false);
+
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   connect(&m_domain_filter_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -583,4 +589,12 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 
   delete_top_level_items(list);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_cookies_window::slot_settings_applied(void)
+{
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    statusBar()->setVisible(true);
+  else
+    statusBar()->setVisible(false);
 }

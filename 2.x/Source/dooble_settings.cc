@@ -355,6 +355,8 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("cookie_policy_index", 2).toInt(),
 	    m_ui.cookie_policy->count() - 1));
+  m_ui.denote_private_tabs->setChecked
+    (s_settings.value("denote_private_tabs", false).toBool());
   m_ui.iterations->setValue
     (s_settings.value("authentication_iteration_count", 15000).toInt());
   m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
@@ -513,6 +515,7 @@ void dooble_settings::slot_apply(void)
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
+  set_setting("denote_private_tabs", m_ui.denote_private_tabs->isChecked());
   set_setting("icon_set_index", m_ui.theme->currentIndex());
 
   {

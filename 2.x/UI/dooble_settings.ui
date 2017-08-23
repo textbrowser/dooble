@@ -324,6 +324,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="denote_private_tabs">
+            <property name="text">
+             <string>Denote Private Tabs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QLabel" name="label_3">
@@ -989,6 +996,7 @@
   <tabstop>cache_type</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>animated_scrolling</tabstop>
+  <tabstop>denote_private_tabs</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>scrollArea_2</tabstop>
   <tabstop>cookie_policy</tabstop>

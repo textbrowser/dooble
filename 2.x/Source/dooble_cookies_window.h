@@ -78,6 +78,7 @@ class dooble_cookies_window: public QMainWindow
   void slot_item_selection_changed(void);
   void slot_periodically_purge_temporary_domains(bool state);
   void slot_purge_domains_timer_timeout(void);
+  void slot_settings_applied(void);
 
  signals:
   void delete_cookie(const QNetworkCookie &cookie);

@@ -54,12 +54,18 @@ dooble_page::dooble_page(bool is_private,
   m_is_private = is_private;
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
+  m_ui.authenticate->setVisible(false);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
   m_ui.find_frame->setVisible(false);
   m_ui.forward->setEnabled(false);
   m_ui.forward->setMenu(new QMenu(this));
-  m_ui.is_private->setVisible(m_is_private);
+
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    m_ui.is_private->setVisible(m_is_private);
+  else
+    m_ui.is_private->setVisible(false);
+
   m_ui.menus->setMenu(new QMenu(this));
   m_ui.progress->setVisible(false);
 
@@ -457,7 +463,10 @@ void dooble_page::resizeEvent(QResizeEvent *event)
   QWidget::resizeEvent(event);
 
   QFontMetrics fm(m_ui.link_hovered->fontMetrics());
-  int difference = 40;
+  int difference = 15;
+
+  if(m_ui.authenticate->isVisible())
+    difference += 25;
 
   if(m_ui.is_private->isVisible())
     difference += 25;
@@ -669,7 +678,10 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 void dooble_page::slot_link_hovered(const QString &url)
 {
   QFontMetrics fm(m_ui.link_hovered->fontMetrics());
-  int difference = 40;
+  int difference = 15;
+
+  if(m_ui.authenticate->isVisible())
+    difference += 25;
 
   if(m_ui.is_private->isVisible())
     difference += 25;
@@ -816,6 +828,11 @@ void dooble_page::slot_reset_url(void)
 
 void dooble_page::slot_settings_applied(void)
 {
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    m_ui.is_private->setVisible(m_is_private);
+  else
+    m_ui.is_private->setVisible(false);
+
   prepare_icons();
 }
 
