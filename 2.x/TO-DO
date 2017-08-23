@@ -16,13 +16,13 @@ Completed Items
 12.    Activate history pull-down on address text change.
 13.    Link-hover events resize windows.
 14.    Elided text in pull-down menus must consider invisible text.
+15.    Creating new tabs and windows requires sophistication.
+16.    Prevent duplicate history items in address widget menu.
 
 Remaining Items
 
 1.     Download panel.
-2.     Creating new tabs and windows requires sophistication.
+2.     History. Will require a sub-process for removing expired data.
 3.     Windows PRNG.
 4.     Allow SSL/TLS exceptions.
 5.     Bookmarks.
-6.     History. Will require a sub-process for removing expired data.
-7.     Prevent duplicate history items in address widget menu.
