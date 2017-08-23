@@ -107,13 +107,15 @@ void dooble::closeEvent(QCloseEvent *event)
     dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
 
   QMainWindow::closeEvent(event);
-  deleteLater();
 
   QWidgetList list(QApplication::topLevelWidgets());
 
   for(int i = 0; i < list.size(); i++)
     if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
-      return;
+      {
+	deleteLater();
+	return;
+      }
 
   if(s_blocked_domains)
     s_blocked_domains->close();
