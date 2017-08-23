@@ -305,3 +305,7 @@ void dooble_history::slot_populate(void)
   QApplication::restoreOverrideCursor();
   emit populated();
 }
+
+void dooble_history::slot_purge_timer_timeout(void)
+{
+}
