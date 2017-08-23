@@ -40,6 +40,11 @@ QAtomicInteger<quint64> dooble_history::s_db_id;
 
 dooble_history::dooble_history(void):QObject()
 {
+  connect(&m_purge_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_purge_timer_timeout(void)));
+  m_purge_timer.start(15000);
 }
 
 QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
