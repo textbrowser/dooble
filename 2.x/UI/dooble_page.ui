@@ -50,8 +50,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>20</width>
-         <height>20</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="popupMode">
@@ -72,8 +72,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>20</width>
-         <height>20</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="popupMode">
@@ -94,8 +94,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>20</width>
-         <height>20</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="popupMode">
@@ -116,8 +116,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>20</width>
-         <height>20</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="autoRaise">
@@ -128,7 +128,7 @@
      <item>
       <widget class="dooble_address_widget" name="address">
        <property name="placeholderText">
-        <string>Address</string>
+        <string>Enter Address</string>
        </property>
       </widget>
      </item>
@@ -244,6 +244,9 @@
    </item>
    <item>
     <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
        <number>0</number>
