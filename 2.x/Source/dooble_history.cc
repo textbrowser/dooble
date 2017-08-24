@@ -67,6 +67,11 @@ QList<QPair<QIcon, QString> > dooble_history::urls(void) const
   return list;
 }
 
+void dooble_history::interrupt(void)
+{
+  m_interrupt.fetchAndStoreOrdered(1);
+}
+
 void dooble_history::purge(const QByteArray &authentication_key,
 			   const QByteArray &encryption_key)
 {
@@ -93,6 +98,8 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 	    while(query.next())
 	      {
+		if(m_interrupt.loadAcquire())
+		  break;
 	      }
 	  }
       }

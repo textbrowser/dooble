@@ -52,10 +52,12 @@ class dooble_history: public QObject
  dooble_history(void);
  QHash<QUrl, QHash<int, QVariant> > history(void) const;
  QList<QPair<QIcon, QString> > urls(void) const;
+ void interrupt(void);
  void save_favicon(const QIcon &icon, const QUrl &url);
  void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 
  private:
+  QAtomicInteger<short> m_interrupt;
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<int, QVariant> > m_history;
   QTimer m_purge_timer;
