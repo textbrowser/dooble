@@ -50,9 +50,9 @@ class dooble_history: public QObject
   };
 
  dooble_history(void);
+ ~dooble_history();
  QHash<QUrl, QHash<int, QVariant> > history(void) const;
  QList<QPair<QIcon, QString> > urls(void) const;
- void interrupt(void);
  void save_favicon(const QIcon &icon, const QUrl &url);
  void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 

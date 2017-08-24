@@ -123,6 +123,9 @@ void dooble::closeEvent(QCloseEvent *event)
   if(s_cookies_window)
     s_cookies_window->close();
 
+  if(s_history)
+    s_history->deleteLater();
+
   if(s_settings)
     s_settings->close();
 
