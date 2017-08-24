@@ -162,6 +162,24 @@ void dooble_address_widget::complete(void)
   m_completer->complete();
 }
 
+void dooble_address_widget::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    emit reset_url();
+  else if(event)
+    {
+      QKeySequence key_sequence(event->modifiers() + event->key());
+
+      if(key_sequence == QKeySequence(Qt::ControlModifier + Qt::Key_L))
+	{
+	  selectAll();
+	  setFocus();
+	}
+    }
+
+  QLineEdit::keyPressEvent(event);
+}
+
 void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());

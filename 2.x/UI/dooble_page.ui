@@ -41,28 +41,6 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QToolButton" name="menus">
-       <property name="toolTip">
-        <string>Menus</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="popupMode">
-        <enum>QToolButton::MenuButtonPopup</enum>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QToolButton" name="backward">
        <property name="toolTip">
         <string>Backward</string>
@@ -129,6 +107,28 @@
       <widget class="dooble_address_widget" name="address">
        <property name="placeholderText">
         <string>Enter Address</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="menus">
+       <property name="toolTip">
+        <string>Menus</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -365,11 +365,11 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>menus</tabstop>
   <tabstop>backward</tabstop>
   <tabstop>forward</tabstop>
   <tabstop>reload</tabstop>
   <tabstop>address</tabstop>
+  <tabstop>menus</tabstop>
   <tabstop>find_stop</tabstop>
   <tabstop>find</tabstop>
   <tabstop>find_next</tabstop>
