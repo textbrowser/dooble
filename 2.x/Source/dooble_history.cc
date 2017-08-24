@@ -97,11 +97,32 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	  {
 	    dooble_cryptography cryptography
 	      (authentication_key, encryption_key);
+	    int days = dooble_settings::setting
+	      ("browsing_history_days").toInt();
 
 	    while(query.next())
 	      {
 		if(m_interrupt.loadAcquire())
 		  break;
+
+		QByteArray bytes
+		  (QByteArray::fromBase64(query.value(0).toByteArray()));
+
+		bytes = cryptography.mac_then_decrypt(bytes);
+
+		QDateTime dateTime
+		  (QDateTime::fromString(bytes.constData(), Qt::ISODate));
+		QDateTime now(QDateTime::currentDateTime());
+
+		if(dateTime.daysTo(now) >= qAbs(days))
+		  {
+		    QSqlQuery delete_query(db);
+
+		    delete_query.prepare
+		      ("DELETE FROM dooble_history WHERE url_digest = ?");
+		    delete_query.addBindValue(query.value(1));
+		    delete_query.exec();
+		  }
 	      }
 	  }
       }
