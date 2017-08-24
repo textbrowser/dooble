@@ -29,6 +29,7 @@
 #define dooble_history_h
 
 #include <QAtomicInteger>
+#include <QFuture>
 #include <QTimer>
 #include <QVariant>
 #include <QWebEngineHistoryItem>
@@ -55,9 +56,12 @@ class dooble_history: public QObject
  void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 
  private:
+  QFuture<void> m_purge_future;
   QHash<QUrl, QHash<int, QVariant> > m_history;
   QTimer m_purge_timer;
   static QAtomicInteger<quint64> s_db_id;
+  void purge(const QByteArray &authentication_key,
+	     const QByteArray &encryption_key);
 
  private slots:
   void slot_populate(void);

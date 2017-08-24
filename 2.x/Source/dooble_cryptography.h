@@ -29,15 +29,19 @@
 #define dooble_cryptography_h
 
 #include <QByteArray>
+#include <QPair>
 
 class dooble_cryptography
 {
  public:
+  dooble_cryptography(const QByteArray &authentication_key,
+		      const QByteArray &encryption_key);
   dooble_cryptography(void);
   QByteArray encrypt_then_mac(const QByteArray &data) const;
   QByteArray hmac(const QByteArray &message) const;
   QByteArray hmac(const QString &message) const;
   QByteArray mac_then_decrypt(const QByteArray &data) const;
+  QPair<QByteArray, QByteArray> keys(void) const;
   bool authenticated(void) const;
   static bool memcmp(const QByteArray &a, const QByteArray &b);
   void authenticate(const QByteArray &salt,

@@ -34,6 +34,14 @@
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
 
+dooble_cryptography::dooble_cryptography
+(const QByteArray &authentication_key, const QByteArray &encryption_key)
+{
+  m_authenticated = false;
+  m_authentication_key = authentication_key;
+  m_encryption_key = encryption_key;
+}
+
 dooble_cryptography::dooble_cryptography(void)
 {
   m_authenticated = false;
@@ -80,6 +88,11 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
     }
 
   return data;
+}
+
+QPair<QByteArray, QByteArray> dooble_cryptography::keys(void) const
+{
+  return QPair<QByteArray, QByteArray> (m_authentication_key, m_encryption_key);
 }
 
 bool dooble_cryptography::authenticated(void) const

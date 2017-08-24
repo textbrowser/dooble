@@ -67,6 +67,42 @@ QList<QPair<QIcon, QString> > dooble_history::urls(void) const
   return list;
 }
 
+void dooble_history::purge(const QByteArray &authentication_key,
+			   const QByteArray &encryption_key)
+{
+  QString database_name(QString("dooble_history_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT last_visited, url_digest FROM dooble_history"))
+	  {
+	    dooble_cryptography cryptography
+	      (authentication_key, encryption_key);
+
+	    while(query.next())
+	      {
+	      }
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 {
   if(!icon.isNull())
@@ -79,6 +115,8 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
       }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(dooble_settings::setting("browsing_history_days").toInt() == 0)
     return;
 
   QString database_name(QString("dooble_history_%1").
@@ -148,6 +186,8 @@ void dooble_history::save_item(const QIcon &icon,
       }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(dooble_settings::setting("browsing_history_days").toInt() == 0)
     return;
   else if(!item.isValid())
     return;
@@ -313,4 +353,14 @@ void dooble_history::slot_populate(void)
 
 void dooble_history::slot_purge_timer_timeout(void)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(m_purge_future.isRunning())
+    return;
+
+  m_purge_future = QtConcurrent::run
+    (this,
+     &dooble_history::purge,
+     dooble::s_cryptography->keys().first,
+     dooble::s_cryptography->keys().second);
 }
