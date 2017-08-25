@@ -58,6 +58,7 @@ FORMS           = UI\\dooble.ui \
                   UI\\dooble_authentication_dialog.ui \
                   UI\\dooble_blocked_domains.ui \
 		  UI\\dooble_cookies_window.ui \
+		  UI\\dooble_history_window.ui \
                   UI\\dooble_page.ui \
                   UI\\dooble_settings.ui
 
