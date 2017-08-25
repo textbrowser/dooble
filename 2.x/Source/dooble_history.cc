@@ -169,6 +169,7 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 
 	hash[FAVICON] = icon;
 	m_history[url] = hash;
+	emit icon_updated(icon, url);
       }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -240,6 +241,7 @@ void dooble_history::save_item(const QIcon &icon,
 	    (item.url().toEncoded());
 
 	m_history[item.url()] = hash;
+	emit new_item(icon, item);
       }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())

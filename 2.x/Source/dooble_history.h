@@ -71,6 +71,8 @@ class dooble_history: public QObject
   void slot_purge_timer_timeout(void);
 
  signals:
+  void icon_updated(const QIcon &icon, const QUrl &url);
+  void new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
   void populated(void);
 };
 
