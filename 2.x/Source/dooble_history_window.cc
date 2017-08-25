@@ -50,6 +50,11 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  this,
 	  SLOT(slot_icon_updated(const QIcon &, const QUrl &)));
   connect(dooble::s_history,
+	  SIGNAL(item_updated(const QIcon &, const QWebEngineHistoryItem &)),
+	  this,
+	  SLOT(slot_item_updated(const QIcon &,
+				 const QWebEngineHistoryItem &)));
+  connect(dooble::s_history,
 	  SIGNAL(new_item(const QIcon &, const QWebEngineHistoryItem &)),
 	  this,
 	  SLOT(slot_new_item(const QIcon &, const QWebEngineHistoryItem &)));
@@ -117,6 +122,27 @@ void dooble_history_window::slot_icon_updated(const QIcon &icon,
     return;
 
   item->setIcon(icon);
+}
+
+void dooble_history_window::slot_item_updated(const QIcon &icon,
+					      const QWebEngineHistoryItem &item)
+{
+  Q_UNUSED(icon);
+
+  if(!item.isValid())
+    return;
+
+  QTableWidgetItem *item1 = m_items.value(item.url());
+
+  if(!item1)
+    return;
+
+  item1 = m_ui.table->item(item1->row(), 2);
+
+  if(!item1)
+    return;
+
+  item1->setText(item.lastVisited().toString());
 }
 
 void dooble_history_window::slot_new_item(const QIcon &icon,

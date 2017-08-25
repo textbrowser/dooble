@@ -54,6 +54,7 @@ class dooble_history_window: public QMainWindow
   void show(void);
   void showNormal(void);
   void slot_icon_updated(const QIcon &icon, const QUrl &url);
+  void slot_item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
   void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 };
 
