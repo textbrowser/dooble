@@ -128,6 +128,9 @@ void dooble::closeEvent(QCloseEvent *event)
   if(s_history)
     s_history->deleteLater();
 
+  if(s_history_window)
+    s_history_window->close();
+
   if(s_settings)
     s_settings->close();
 
