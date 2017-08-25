@@ -44,6 +44,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
+#include "dooble_history.h"
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
@@ -684,6 +685,7 @@ void dooble_settings::slot_reset_credentials(void)
   dooble_blocked_domains::purge();
   dooble_cookies::purge();
   dooble_favicons::purge();
+  dooble_history::purge();
   QApplication::restoreOverrideCursor();
 }
 
