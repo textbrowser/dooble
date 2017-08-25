@@ -37,15 +37,18 @@
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  m_ui.splitter->setStretchFactor(0, 0);
+  m_ui.splitter->setStretchFactor(1, 1);
+  m_ui.splitter->restoreState
+    (QByteArray::fromBase64(dooble_settings::
+			    setting("history_window_splitter_state").
+			    toByteArray()));
   m_ui.table->sortByColumn(0, Qt::AscendingOrder);
 }
 
 void dooble_history_window::closeEvent(QCloseEvent *event)
 {
-  if(dooble_settings::setting("save_geometry").toBool())
-    dooble_settings::set_setting
-      ("history_window_geometry", saveGeometry().toBase64());
-
+  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -66,6 +69,16 @@ void dooble_history_window::populate(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_history_window::save_settings(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("history_window_geometry", saveGeometry().toBase64());
+
+  dooble_settings::set_setting
+    ("history_window_splitter_state", m_ui.splitter->saveState().toBase64());
+}
+
 void dooble_history_window::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -74,7 +87,6 @@ void dooble_history_window::show(void)
 					   toByteArray()));
 
   QMainWindow::show();
-  populate();
 }
 
 void dooble_history_window::showNormal(void)
@@ -85,6 +97,4 @@ void dooble_history_window::showNormal(void)
 					   toByteArray()));
 
   QMainWindow::showNormal();
-  populate();
 }
-

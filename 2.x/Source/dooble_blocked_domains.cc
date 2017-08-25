@@ -58,10 +58,7 @@ bool dooble_blocked_domains::contains(const QString &domain) const
 
 void dooble_blocked_domains::closeEvent(QCloseEvent *event)
 {
-  if(dooble_settings::setting("save_geometry").toBool())
-    dooble_settings::set_setting
-      ("blocked_domains_geometry", saveGeometry().toBase64());
-
+  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -256,6 +253,13 @@ void dooble_blocked_domains::save_blocked_domain(const QString &domain,
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_blocked_domains::save_settings(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("blocked_domains_geometry", saveGeometry().toBase64());
 }
 
 void dooble_blocked_domains::show(void)

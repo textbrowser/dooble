@@ -40,6 +40,7 @@ class dooble_blocked_domains: public QMainWindow
   dooble_blocked_domains(void);
   bool contains(const QString &domain) const;
   static void purge(void);
+  void save_settings(void);
 
  protected:
   void closeEvent(QCloseEvent *event);

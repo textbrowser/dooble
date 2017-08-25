@@ -121,10 +121,7 @@ void dooble_cookies_window::closeEvent(QCloseEvent *event)
       return;
     }
 
-  if(dooble_settings::setting("save_geometry").toBool())
-    dooble_settings::set_setting
-      ("dooble_cookies_window_geometry", saveGeometry().toBase64());
-
+  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -207,6 +204,13 @@ void dooble_cookies_window::keyPressEvent(QKeyEvent *event)
     close();
 
   QMainWindow::keyPressEvent(event);
+}
+
+void dooble_cookies_window::save_settings(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("dooble_cookies_window_geometry", saveGeometry().toBase64());
 }
 
 void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookieStore)

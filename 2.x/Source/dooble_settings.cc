@@ -190,11 +190,9 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
-  if(setting("save_geometry").toBool())
-    set_setting("settings_geometry", saveGeometry().toBase64());
-
   m_ui.password_1->clear();
   m_ui.password_2->clear();
+  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -442,6 +440,12 @@ void dooble_settings::restore(void)
 
   prepare_proxy(false);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::save_settings(void)
+{
+  if(setting("save_geometry").toBool())
+    set_setting("settings_geometry", saveGeometry().toBase64());
 }
 
 void dooble_settings::show(void)

@@ -59,6 +59,7 @@ class dooble_settings: public QMainWindow
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static void remove_setting(const QString &key);
+  void save_settings(void);
   void show_panel(dooble_settings::Panels panel);
 
  protected:

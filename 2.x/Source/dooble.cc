@@ -108,8 +108,6 @@ void dooble::closeEvent(QCloseEvent *event)
   if(dooble_settings::setting("save_geometry").toBool())
     dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
 
-  QMainWindow::closeEvent(event);
-
   QWidgetList list(QApplication::topLevelWidgets());
 
   for(int i = 0; i < list.size(); i++)
@@ -120,20 +118,21 @@ void dooble::closeEvent(QCloseEvent *event)
       }
 
   if(s_blocked_domains)
-    s_blocked_domains->close();
+    s_blocked_domains->save_settings();
 
   if(s_cookies_window)
-    s_cookies_window->close();
+    s_cookies_window->save_settings();
 
   if(s_history)
     s_history->deleteLater();
 
   if(s_history_window)
-    s_history_window->close();
+    s_history_window->save_settings();
 
   if(s_settings)
-    s_settings->close();
+    s_settings->save_settings();
 
+  QMainWindow::closeEvent(event);
   QApplication::exit(0);
 }
 
@@ -455,7 +454,6 @@ void dooble::slot_quit_dooble(void)
   */
 
   close();
-  QApplication::exit(0);
 }
 
 void dooble::slot_show_blocked_domains(void)

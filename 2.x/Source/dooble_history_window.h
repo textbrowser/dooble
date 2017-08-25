@@ -38,6 +38,7 @@ class dooble_history_window: public QMainWindow
 
  public:
   dooble_history_window(void);
+  void save_settings(void);
 
  protected:
   void closeEvent(QCloseEvent *event);

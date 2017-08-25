@@ -46,6 +46,7 @@ class dooble_cookies_window: public QMainWindow
   dooble_cookies_window(bool is_private, QWidget *parent);
   void filter(const QString &text);
   void populate(void);
+  void save_settings(void);
   void setCookieStore(QWebEngineCookieStore *cookieStore);
   void setCookies(dooble_cookies *cookies);
 
