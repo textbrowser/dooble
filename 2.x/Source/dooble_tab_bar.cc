@@ -118,11 +118,12 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 {
   QAction *action = 0;
   QMenu menu(this);
+  int tab_at = tabAt(point);
 
   action = menu.addAction(tr("Close T&ab"),
 			  this,
 			  SLOT(slot_close_tab(void)));
-  action->setEnabled(count() > 1);
+  action->setEnabled(count() > 1 && tab_at > -1);
   action->setProperty("point", point);
   action = menu.addAction(tr("Close &Other Tabs"),
 			  this,
@@ -133,7 +134,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action = menu.addAction(tr("Open as New &Window..."),
 			  this,
 			  SLOT(slot_open_tab_as_new_window(void)));
-  action->setEnabled(count() > 1);
+  action->setEnabled(count() > 1 && tab_at > -1);
   action->setProperty("point", point);
   menu.addAction(tr("New &Tab"),
 		 this,
@@ -143,6 +144,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  this,
 			  SLOT(slot_web_plugins(void)));
   action->setCheckable(true);
+  action->setEnabled(tab_at > -1);
   action->setProperty("point", point);
 
   dooble_tab_widget *parent = qobject_cast<dooble_tab_widget *>
