@@ -445,6 +445,9 @@ void dooble_settings::restore(void)
 
 void dooble_settings::show(void)
 {
+  if(!isVisible())
+    restore();
+
   if(setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
@@ -454,6 +457,9 @@ void dooble_settings::show(void)
 
 void dooble_settings::showNormal(void)
 {
+  if(!isVisible())
+    restore();
+
   if(setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
