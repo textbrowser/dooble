@@ -111,7 +111,6 @@ class dooble_page: public QWidget
   void slot_settings_applied(void);
   void slot_show_cookies(void);
   void slot_show_find(void);
-  void slot_show_history(void);
   void slot_show_pull_down_menu(void);
   void slot_url_changed(const QUrl &url);
 
@@ -128,6 +127,7 @@ class dooble_page: public QWidget
   void new_window(void);
   void quit_dooble(void);
   void show_blocked_domains(void);
+  void show_history(void);
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
   void titleChanged(const QString &title);

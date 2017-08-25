@@ -319,6 +319,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_history(void)),
+	  this,
+	  SLOT(slot_show_history(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_settings(void)),
 	  this,
 	  SLOT(slot_show_settings(void)),
@@ -458,6 +464,17 @@ void dooble::slot_show_blocked_domains(void)
 
   s_blocked_domains->activateWindow();
   s_blocked_domains->raise();
+}
+
+void dooble::slot_show_history(void)
+{
+  s_history_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, s_history_window);
+
+  s_history_window->activateWindow();
+  s_history_window->raise();
 }
 
 void dooble::slot_show_settings(void)

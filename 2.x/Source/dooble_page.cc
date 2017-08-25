@@ -349,6 +349,8 @@ void dooble_page::prepare_shortcuts(void)
       new QShortcut
 	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
       new QShortcut
+	(QKeySequence(tr("Ctrl+H")), this, SIGNAL(show_history(void)));
+      new QShortcut
 	(QKeySequence(tr("Ctrl+K")), this, SLOT(slot_show_cookies(void)));
       new QShortcut
 	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
@@ -447,6 +449,10 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
 		  SIGNAL(show_blocked_domains(void)));
+  menu->addAction(tr("&History..."),
+		  this,
+		  SIGNAL(show_history(void)),
+		  QKeySequence(tr("Ctrl+H")));
 }
 
 void dooble_page::prepare_tool_buttons_for_mac(void)
@@ -869,17 +875,6 @@ void dooble_page::slot_show_find(void)
   m_ui.find->selectAll();
   m_ui.find->setFocus();
   m_ui.find_frame->setVisible(true);
-}
-
-void dooble_page::slot_show_history(void)
-{
-  dooble::s_history_window->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, dooble::s_history_window);
-
-  dooble::s_history_window->activateWindow();
-  dooble::s_history_window->raise();
 }
 
 void dooble_page::slot_show_pull_down_menu(void)
