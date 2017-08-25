@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -325,6 +325,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="denote_private_tabs">
+            <property name="toolTip">
+             <string>Special icons will be displayed on some widgets.</string>
+            </property>
             <property name="text">
              <string>Denote Private Tabs</string>
             </property>
@@ -466,8 +469,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>384</width>
-               <height>588</height>
+               <width>452</width>
+               <height>612</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
