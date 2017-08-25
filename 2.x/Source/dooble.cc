@@ -41,15 +41,15 @@
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 
+QPointer<dooble_history> dooble::s_history;
 dooble_application *dooble::s_application = 0;
 dooble_blocked_domains *dooble::s_blocked_domains = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
-dooble_history *dooble::s_history = 0;
 dooble_settings *dooble::s_settings = 0;
-dooble_web_engine_url_request_interceptor *dooble::
-s_url_request_interceptor = 0;
+dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
+  0;
 
 dooble::dooble(dooble_page *page):QMainWindow()
 {
@@ -377,7 +377,9 @@ void dooble::slot_icon_changed(const QIcon &icon)
   if(!page)
     return;
 
-  dooble::s_history->save_favicon(icon, page->url());
+  if(dooble::s_history)
+    dooble::s_history->save_favicon(icon, page->url());
+
   dooble_favicons::save_favicon(icon, page->url());
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }

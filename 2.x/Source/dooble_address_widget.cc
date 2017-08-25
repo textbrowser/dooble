@@ -229,6 +229,9 @@ void dooble_address_widget::set_item_icon(const QIcon &icon, const QUrl &url)
 
 void dooble_address_widget::slot_populate(void)
 {
+  if(!dooble::s_history)
+    return;
+
   QList<QPair<QIcon, QString> > list(dooble::s_history->urls());
 
   for(int i = 0; i < list.size(); i++)

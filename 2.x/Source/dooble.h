@@ -51,12 +51,12 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
+  static QPointer<dooble_history> s_history;
   static dooble_application *s_application;
   static dooble_blocked_domains *s_blocked_domains;
   static dooble_cookies *s_cookies;
   static dooble_cookies_window *s_cookies_window;
   static dooble_cryptography *s_cryptography;
-  static dooble_history *s_history;
   static dooble_settings *s_settings;
   static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
 
