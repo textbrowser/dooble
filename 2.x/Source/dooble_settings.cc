@@ -719,7 +719,8 @@ void dooble_settings::slot_save_credentials(void)
 
       mb.setIcon(QMessageBox::Question);
       mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-      mb.setText(tr("Are you sure that you wish to prepare new credentials?"));
+      mb.setText(tr("Are you sure that you wish to prepare new credentials? "
+		    "Existing database data will be removed."));
       mb.setWindowIcon(windowIcon());
       mb.setWindowModality(Qt::WindowModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -741,6 +742,12 @@ void dooble_settings::slot_save_credentials(void)
       return;
     }
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  dooble_blocked_domains::purge();
+  dooble_cookies::purge();
+  dooble_favicons::purge();
+  dooble_history::purge();
+  QApplication::restoreOverrideCursor();
   m_pbkdf2_dialog = new QProgressDialog(this);
   m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));
   m_pbkdf2_dialog->setLabelText(tr("Preparing credentials..."));
