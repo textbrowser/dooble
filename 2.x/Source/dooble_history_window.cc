@@ -38,6 +38,7 @@
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  m_ui.period->setCurrentRow(0);
   m_ui.splitter->setStretchFactor(0, 0);
   m_ui.splitter->setStretchFactor(1, 1);
   m_ui.splitter->restoreState
