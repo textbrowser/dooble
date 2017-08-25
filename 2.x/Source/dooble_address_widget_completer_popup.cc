@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QLineEdit>
 #include <QMouseEvent>
 
 #include "dooble_address_widget_completer_popup.h"
@@ -32,6 +33,7 @@
 dooble_address_widget_completer_popup::dooble_address_widget_completer_popup
 (QWidget *parent):QTableView(parent)
 {
+  m_line_edit = qobject_cast<QLineEdit *> (parent);
   setAlternatingRowColors(false);
   setMouseTracking(true);
   setShowGrid(false);
@@ -44,7 +46,17 @@ void dooble_address_widget_completer_popup::mouseMoveEvent(QMouseEvent *event)
       QModelIndex index(indexAt(event->pos()));
 
       if(index.isValid())
-	selectRow(index.row());
+	{
+	  QString text("");
+
+	  if(m_line_edit)
+	    text = m_line_edit->text();
+
+	  selectRow(index.row());
+
+	  if(m_line_edit)
+	    m_line_edit->setText(text);
+	}
     }
 
   QTableView::mouseMoveEvent(event);

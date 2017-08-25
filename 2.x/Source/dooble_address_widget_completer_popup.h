@@ -39,6 +39,9 @@ class dooble_address_widget_completer_popup: public QTableView
 
  protected:
   void mouseMoveEvent(QMouseEvent *event);
+
+ private:
+  QLineEdit *m_line_edit;
 };
 
 #endif
