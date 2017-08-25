@@ -106,7 +106,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
   s_settings["access_new_tabs"] = true;
-  s_settings["browsing_history_days"] = 0;
+  s_settings["browsing_history_days"] = 15;
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["icon_set"] = "SnipIcons";
@@ -349,7 +349,7 @@ void dooble_settings::restore(void)
     (s_settings.value("animated_scrolling", false).toBool());
   m_ui.browsing_history->setValue
     (qBound(m_ui.browsing_history->minimum(),
-	    s_settings.value("browsing_history_days", 0).toInt(),
+	    s_settings.value("browsing_history_days", 15).toInt(),
 	    m_ui.browsing_history->maximum()));
   m_ui.cache_size->setValue(s_settings.value("cache_size", 0).toInt());
   m_ui.cache_type->setCurrentIndex
