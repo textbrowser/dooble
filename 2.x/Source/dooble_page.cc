@@ -40,6 +40,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
+#include "dooble_history_window.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
 #include "dooble_ui_utilities.h"
@@ -868,6 +869,17 @@ void dooble_page::slot_show_find(void)
   m_ui.find->selectAll();
   m_ui.find->setFocus();
   m_ui.find_frame->setVisible(true);
+}
+
+void dooble_page::slot_show_history(void)
+{
+  dooble::s_history_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, dooble::s_history_window);
+
+  dooble::s_history_window->activateWindow();
+  dooble::s_history_window->raise();
 }
 
 void dooble_page::slot_show_pull_down_menu(void)
