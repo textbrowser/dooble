@@ -72,6 +72,7 @@ class dooble_history: public QObject
 
  signals:
   void icon_updated(const QIcon &icon, const QUrl &url);
+  void item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
   void new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
   void populated(void);
 };

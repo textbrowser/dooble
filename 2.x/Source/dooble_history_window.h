@@ -29,6 +29,7 @@
 #define dooble_history_window_h
 
 #include <QMainWindow>
+#include <QWebEngineHistoryItem>
 
 #include "ui_dooble_history_window.h"
 
@@ -45,12 +46,15 @@ class dooble_history_window: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QHash<QUrl, QTableWidgetItem *> m_items;
   Ui_dooble_history_window m_ui;
   void populate(void);
 
  public slots:
   void show(void);
   void showNormal(void);
+  void slot_icon_updated(const QIcon &icon, const QUrl &url);
+  void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 };
 
 #endif
