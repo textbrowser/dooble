@@ -142,7 +142,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
   if(!item1)
     return;
 
-  item1->setText(item.lastVisited().toString());
+  item1->setText(item.lastVisited().toString(Qt::ISODate));
 }
 
 void dooble_history_window::slot_new_item(const QIcon &icon,
