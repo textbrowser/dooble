@@ -179,11 +179,17 @@ void dooble_history_window::slot_delete_pages(void)
 	    if(!item)
 	      continue;
 
-	    if(dooble::s_history)
-	      dooble::s_history->remove_item(item->data(Qt::UserRole).toUrl());
+	    QUrl url(item->data(Qt::UserRole).toUrl());
 
+	    if(dooble::s_history)
+	      dooble::s_history->remove_item(url);
+
+	    query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	    query.exec();
 	    list.removeAt(i);
-	    m_items.remove(item->data(Qt::UserRole).toUrl());
+	    m_items.remove(url);
 	    m_ui.table->removeRow(item->row());
 	  }
       }
