@@ -475,8 +475,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>452</width>
-               <height>612</height>
+               <width>635</width>
+               <height>610</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -653,6 +653,9 @@
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
                      </property>
+                     <property name="clearButtonEnabled">
+                      <bool>true</bool>
+                     </property>
                     </widget>
                    </item>
                    <item row="0" column="0">
@@ -669,6 +672,9 @@
                     <widget class="QLineEdit" name="password_1">
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
+                     </property>
+                     <property name="clearButtonEnabled">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
@@ -820,7 +826,11 @@
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QLineEdit" name="proxy_user"/>
+                    <widget class="QLineEdit" name="proxy_user">
+                     <property name="clearButtonEnabled">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
                    </item>
                    <item row="1" column="2">
                     <widget class="QLabel" name="label_18">
@@ -837,7 +847,11 @@
                     </widget>
                    </item>
                    <item row="0" column="1">
-                    <widget class="QLineEdit" name="proxy_host"/>
+                    <widget class="QLineEdit" name="proxy_host">
+                     <property name="clearButtonEnabled">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
                    </item>
                    <item row="0" column="2">
                     <widget class="QLabel" name="label_16">
@@ -850,6 +864,9 @@
                     <widget class="QLineEdit" name="proxy_password">
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
+                     </property>
+                     <property name="clearButtonEnabled">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
