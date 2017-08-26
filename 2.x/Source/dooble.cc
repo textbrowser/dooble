@@ -175,6 +175,7 @@ void dooble::initialize_static_members(void)
 
 void dooble::keyPressEvent(QKeyEvent *event)
 {
+#ifndef Q_OS_MACOS
   if(event && event->modifiers() == Qt::AltModifier)
     {
       dooble_page *page = qobject_cast<dooble_page *>
@@ -196,7 +197,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
       else
 	menuBar()->setVisible(false);
     }
-
+#endif
   QMainWindow::keyPressEvent(event);
 }
 
