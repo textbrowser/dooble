@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -409,6 +409,9 @@
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
              <widget class="QSpinBox" name="browsing_history">
+              <property name="toolTip">
+               <string>Set to zero to disable browsing history.</string>
+              </property>
               <property name="suffix">
                <string> day(s)</string>
               </property>
@@ -472,8 +475,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>384</width>
-               <height>588</height>
+               <width>452</width>
+               <height>612</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
