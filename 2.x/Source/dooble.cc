@@ -241,6 +241,7 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page);
 
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
