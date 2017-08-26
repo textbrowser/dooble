@@ -61,6 +61,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(new_item(const QIcon &, const QWebEngineHistoryItem &)),
 	  this,
 	  SLOT(slot_new_item(const QIcon &, const QWebEngineHistoryItem &)));
+  connect(dooble::s_history,
+	  SIGNAL(populated(void)),
+	  this,
+	  SLOT(slot_populate(void)));
   connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
@@ -80,15 +84,6 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
     close();
 
   QMainWindow::keyPressEvent(event);
-}
-
-void dooble_history_window::populate(void)
-{
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
-
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history_window::save_settings(void)
@@ -261,6 +256,29 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item2);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 2, item3);
   m_ui.table->setSortingEnabled(true);
+}
+
+void dooble_history_window::slot_populate(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(!dooble::s_history)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_items.clear();
+  m_ui.table->clear();
+  m_ui.table->setSortingEnabled(false);
+
+  QHashIterator<QUrl, QHash<int, QVariant> > it(dooble::s_history->history());
+
+  while(it.hasNext())
+    {
+      it.next();
+    }
+
+  m_ui.table->setSortingEnabled(false);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history_window::slot_show_context_menu(const QPoint &point)

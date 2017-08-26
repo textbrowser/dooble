@@ -48,7 +48,6 @@ class dooble_history_window: public QMainWindow
  private:
   QHash<QUrl, QTableWidgetItem *> m_items;
   Ui_dooble_history_window m_ui;
-  void populate(void);
 
  public slots:
   void show(void);
@@ -57,6 +56,7 @@ class dooble_history_window: public QMainWindow
   void slot_icon_updated(const QIcon &icon, const QUrl &url);
   void slot_item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
   void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
+  void slot_populate(void);
   void slot_show_context_menu(const QPoint &point);
 };
 
