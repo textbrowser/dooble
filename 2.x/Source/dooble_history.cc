@@ -160,6 +160,11 @@ void dooble_history::purge(void)
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_history::remove_item(const QUrl &url)
+{
+  m_history.remove(url);
+}
+
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 {
   if(!icon.isNull())

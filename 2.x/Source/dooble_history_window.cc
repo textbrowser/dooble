@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QKeyEvent>
+#include <QMenu>
 #include <QSqlQuery>
 
 #include "dooble.h"
@@ -59,6 +60,11 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(new_item(const QIcon &, const QWebEngineHistoryItem &)),
 	  this,
 	  SLOT(slot_new_item(const QIcon &, const QWebEngineHistoryItem &)));
+  connect(this,
+	  SIGNAL(customContextMenuRequested(const QPoint &)),
+	  this,
+	  SLOT(slot_show_context_menu(const QPoint &)));
+  setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 void dooble_history_window::closeEvent(QCloseEvent *event)
@@ -114,6 +120,80 @@ void dooble_history_window::showNormal(void)
   QMainWindow::showNormal();
 }
 
+void dooble_history_window::slot_delete_pages(void)
+{
+  QList<QTableWidgetItem *> list(m_ui.table->selectedItems());
+
+  if(list.isEmpty())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    {
+      for(int i = list.size() - 1; i >= 0; i--)
+	{
+	  if(!list.at(i))
+	    continue;
+
+	  QTableWidgetItem *item = m_ui.table->item(list.at(i)->row(), 0);
+
+	  if(!item)
+	    continue;
+
+	  if(dooble::s_history)
+	    dooble::s_history->remove_item(item->data(Qt::UserRole).toUrl());
+
+	  list.removeAt(i);
+	  m_items.remove(item->data(Qt::UserRole).toUrl());
+	  m_ui.table->removeRow(item->row());
+	}
+
+      QApplication::restoreOverrideCursor();
+      return;
+    }
+
+  QString database_name("dooble_history_window");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+
+	for(int i = list.size() - 1; i >= 0; i--)
+	  {
+	    if(!list.at(i))
+	      continue;
+
+	    QTableWidgetItem *item = m_ui.table->item(list.at(i)->row(), 0);
+
+	    if(!item)
+	      continue;
+
+	    if(dooble::s_history)
+	      dooble::s_history->remove_item(item->data(Qt::UserRole).toUrl());
+
+	    list.removeAt(i);
+	    m_items.remove(item->data(Qt::UserRole).toUrl());
+	    m_ui.table->removeRow(item->row());
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_history_window::slot_icon_updated(const QIcon &icon,
 					      const QUrl &url)
 {
@@ -154,13 +234,13 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   QTableWidgetItem *item1 = new QTableWidgetItem(icon, item.title());
 
+  item1->setData(Qt::UserRole, item.url());
   item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   item1->setToolTip(item1->text());
   m_items[item.url()] = item1;
 
   QTableWidgetItem *item2 = new QTableWidgetItem(item.url().toString());
 
-  item2->setData(Qt::UserRole, item.url());
   item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   item2->setToolTip(item2->text());
 
@@ -174,4 +254,12 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item2);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 2, item3);
   m_ui.table->setSortingEnabled(true);
+}
+
+void dooble_history_window::slot_show_context_menu(const QPoint &point)
+{
+  QMenu menu(this);
+
+  menu.addAction(tr("Delete Page(s)"), this, SLOT(slot_delete_pages(void)));
+  menu.exec(mapToGlobal(point));
 }
