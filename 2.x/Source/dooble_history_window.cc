@@ -38,6 +38,7 @@
 
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
+  m_parent = 0;
   m_ui.setupUi(this);
   m_ui.period->setCurrentRow(0);
   m_ui.period->setStyleSheet("QListWidget {background-color: transparent;}");
@@ -100,8 +101,24 @@ void dooble_history_window::save_settings(void)
     ("history_window_splitter_state", m_ui.splitter->saveState().toBase64());
 }
 
-void dooble_history_window::show(void)
+void dooble_history_window::show(QWidget *parent)
 {
+  m_parent = parent;
+
+  if(m_parent)
+    {
+      connect(m_parent,
+	      SIGNAL(destroyed(void)),
+	      this,
+	      SLOT(slot_parent_destroyed(void)),
+	      Qt::UniqueConnection);
+      connect(this,
+	      SIGNAL(open_url(const QUrl &)),
+	      m_parent,
+	      SLOT(slot_open_url(const QUrl &)),
+	      Qt::UniqueConnection);
+    }
+
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(dooble_settings::
 					   setting("history_window_geometry").
@@ -110,8 +127,24 @@ void dooble_history_window::show(void)
   QMainWindow::show();
 }
 
-void dooble_history_window::showNormal(void)
+void dooble_history_window::showNormal(QWidget *parent)
 {
+  m_parent = parent;
+
+  if(m_parent)
+    {
+      connect(m_parent,
+	      SIGNAL(destroyed(void)),
+	      this,
+	      SLOT(slot_parent_destroyed(void)),
+	      Qt::UniqueConnection);
+      connect(this,
+	      SIGNAL(open_url(const QUrl &)),
+	      m_parent,
+	      SLOT(slot_open_url(const QUrl &)),
+	      Qt::UniqueConnection);
+    }
+
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(dooble_settings::
 					   setting("history_window_geometry").
@@ -216,6 +249,32 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
   if(!item)
     return;
 
+  if(!m_parent)
+    {
+      /*
+      ** Locate a Dooble window.
+      */
+
+      QWidgetList list(QApplication::topLevelWidgets());
+
+      for(int i = 0; i < list.size(); i++)
+	if(qobject_cast<dooble *> (list.at(i)))
+	  {
+	    m_parent = list.at(i);
+	    connect(m_parent,
+		    SIGNAL(destroyed(void)),
+		    this,
+		    SLOT(slot_parent_destroyed(void)),
+		    Qt::UniqueConnection);
+	    connect(this,
+		    SIGNAL(open_url(const QUrl &)),
+		    m_parent,
+		    SLOT(slot_open_url(const QUrl &)),
+		    Qt::UniqueConnection);
+	    break;
+	  }
+    }
+
   emit open_url(item->data(Qt::UserRole).toUrl());
 }
 
@@ -270,6 +329,11 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item2);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 2, item3);
   m_ui.table->setSortingEnabled(true);
+}
+
+void dooble_history_window::slot_parent_destroyed(void)
+{
+  m_parent = 0;
 }
 
 void dooble_history_window::slot_populate(void)
