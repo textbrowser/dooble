@@ -54,10 +54,14 @@ class dooble_history_window: public QMainWindow
   void showNormal(void);
   void slot_delete_pages(void);
   void slot_icon_updated(const QIcon &icon, const QUrl &url);
+  void slot_item_double_clicked(QTableWidgetItem *item);
   void slot_item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
   void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
   void slot_populate(void);
   void slot_show_context_menu(const QPoint &point);
+
+ signals:
+  void open_url(const QUrl &url);
 };
 
 #endif

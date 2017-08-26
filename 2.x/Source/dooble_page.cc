@@ -311,7 +311,7 @@ void dooble_page::go_to_forward_item(int index)
     m_view->history()->goToItem(items.at(index));
 }
 
-void dooble_page::load_page(const QUrl &url)
+void dooble_page::load(const QUrl &url)
 {
   m_view->load(url);
 }
@@ -732,7 +732,7 @@ void dooble_page::slot_load_finished(bool ok)
 
 void dooble_page::slot_load_page(void)
 {
-  load_page(QUrl::fromUserInput(m_ui.address->text().trimmed()));
+  load(QUrl::fromUserInput(m_ui.address->text().trimmed()));
 }
 
 void dooble_page::slot_load_progress(int progress)

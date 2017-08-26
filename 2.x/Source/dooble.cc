@@ -467,6 +467,14 @@ void dooble::slot_open_tab_as_new_window(int index)
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }
 
+void dooble::slot_open_url(const QUrl &url)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+
+  if(page)
+    page->load(url);
+}
+
 void dooble::slot_quit_dooble(void)
 {
   /*
@@ -489,6 +497,12 @@ void dooble::slot_show_blocked_domains(void)
 
 void dooble::slot_show_history(void)
 {
+  disconnect(s_history_window, SIGNAL(open_url(const QUrl &)));
+  connect(s_history_window,
+	  SIGNAL(open_url(const QUrl &)),
+	  this,
+	  SLOT(slot_open_url(const QUrl &)),
+	  Qt::UniqueConnection);
   s_history_window->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())

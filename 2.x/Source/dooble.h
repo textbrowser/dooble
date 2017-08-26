@@ -88,6 +88,7 @@ class dooble: public QMainWindow
   void slot_new_tab(void);
   void slot_new_window(void);
   void slot_open_tab_as_new_window(int index);
+  void slot_open_url(const QUrl &url);
   void slot_quit_dooble(void);
   void slot_show_blocked_domains(void);
   void slot_show_history(void);

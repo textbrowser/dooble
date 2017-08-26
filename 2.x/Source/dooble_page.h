@@ -58,6 +58,7 @@ class dooble_page: public QWidget
   dooble_web_engine_view *view(void) const;
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
+  void load(const QUrl &url);
 
  protected:
   void resizeEvent(QResizeEvent *event);
@@ -74,7 +75,6 @@ class dooble_page: public QWidget
   void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);
   void go_to_backward_item(int index);
   void go_to_forward_item(int index);
-  void load_page(const QUrl &url);
   void prepare_icons(void);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);

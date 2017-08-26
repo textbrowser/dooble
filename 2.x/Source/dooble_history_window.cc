@@ -65,6 +65,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(populated(void)),
 	  this,
 	  SLOT(slot_populate(void)));
+  connect(m_ui.table,
+	  SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_double_clicked(QTableWidgetItem *)));
   connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
@@ -207,6 +211,14 @@ void dooble_history_window::slot_icon_updated(const QIcon &icon,
   item->setIcon(icon);
 }
 
+void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
+{
+  if(!item)
+    return;
+
+  emit open_url(item->data(Qt::UserRole).toUrl());
+}
+
 void dooble_history_window::slot_item_updated(const QIcon &icon,
 					      const QWebEngineHistoryItem &item)
 {
@@ -243,12 +255,14 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   QTableWidgetItem *item2 = new QTableWidgetItem(item.url().toString());
 
+  item2->setData(Qt::UserRole, item.url());
   item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   item2->setToolTip(item2->text());
 
   QTableWidgetItem *item3 = new QTableWidgetItem
     (item.lastVisited().toString(Qt::ISODate));
 
+  item3->setData(Qt::UserRole, item.url());
   item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   m_ui.table->setSortingEnabled(false);
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
@@ -293,9 +307,11 @@ void dooble_history_window::slot_populate(void)
       item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item1->setToolTip(item1->text());
       item2 = new QTableWidgetItem(url.toString());
+      item2->setData(Qt::UserRole, url);
       item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item2->setToolTip(item2->text());
       item3 = new QTableWidgetItem(last_visited.toString(Qt::ISODate));
+      item3->setData(Qt::UserRole, url);
       item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_items[url] = item1;
       m_ui.table->setItem(i, 0, item1);
