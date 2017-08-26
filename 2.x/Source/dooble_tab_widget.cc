@@ -54,25 +54,32 @@ dooble_page *dooble_tab_widget::page(int index) const
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 {
 #ifdef Q_OS_MACOS
-  QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
-    (QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
-
-  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
-
-  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
-
-  if(!label)
+  if(QApplication::style()->objectName().toLower() == "fusion")
+    QTabWidget::setTabIcon(index, icon);
+  else
     {
-      label = new QLabel(this);
-      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-      m_tab_bar->setTabButton(index, side, 0);
-      m_tab_bar->setTabButton(index, side, label);
-    }
-  else if(!label->movie() || label->movie()->state() != QMovie::Running)
-    label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+      QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->
+	styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
 
-  label->setProperty("icon", icon);
+      side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide :
+	QTabBar::RightSide;
+
+      QLabel *label = qobject_cast<QLabel *>
+	(m_tab_bar->tabButton(index, side));
+
+      if(!label)
+	{
+	  label = new QLabel(this);
+	  label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+	  m_tab_bar->setTabButton(index, side, 0);
+	  m_tab_bar->setTabButton(index, side, label);
+	}
+      else if(!label->movie() || label->movie()->state() != QMovie::Running)
+	label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+
+      label->setProperty("icon", icon);
+    }
 #else
   QTabWidget::setTabIcon(index, icon);
 #endif
@@ -90,7 +97,10 @@ void dooble_tab_widget::slot_load_finished(void)
   int index = indexOf(page);
 
 #ifdef Q_OS_MACOS
-  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+  if(QApplication::style()->objectName().toLower() == "fusion")
+    side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+  else
+    side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 #else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
@@ -110,9 +120,12 @@ void dooble_tab_widget::slot_load_finished(void)
       label->setMovie(0);
 
 #ifdef Q_OS_MACOS
-      QIcon icon(label->property("icon").value<QIcon> ());
+      if(QApplication::style()->objectName().toLower() == "fusion")
+	{
+	  QIcon icon(label->property("icon").value<QIcon> ());
 
-      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+	}
 #endif
     }
 }
@@ -129,7 +142,10 @@ void dooble_tab_widget::slot_load_started(void)
   int index = indexOf(page);
 
 #ifdef Q_OS_MACOS
-  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+  if(QApplication::style()->objectName().toLower() == "fusion")
+    side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+  else
+    side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 #else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
