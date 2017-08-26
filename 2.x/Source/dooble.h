@@ -64,6 +64,7 @@ class dooble: public QMainWindow
 
  protected:
   void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 
  private:
   Ui_dooble m_ui;

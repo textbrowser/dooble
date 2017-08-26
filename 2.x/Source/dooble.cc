@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QKeyEvent>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -73,6 +74,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
+  menuBar()->setVisible(false);
   new_page(page);
 }
 
@@ -96,6 +98,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
+  menuBar()->setVisible(false);
   new_page(view);
 }
 
@@ -168,6 +171,33 @@ void dooble::initialize_static_members(void)
       QWebEngineProfile::defaultProfile()->setRequestInterceptor
 	(s_url_request_interceptor);
     }
+}
+
+void dooble::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->modifiers() == Qt::AltModifier)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(m_ui.tab->currentWidget());
+
+      if(page && page->menu())
+	{
+	  if(menuBar()->isVisible())
+	    menuBar()->setVisible(false);
+	  else
+	    {
+	      for(int i = 0; i < page->menu()->actions().size(); i++)
+		menuBar()->addAction(page->menu()->actions()[i]);
+
+	      menuBar()->setFocus();
+	      menuBar()->setVisible(true);
+	    }
+	}
+      else
+	menuBar()->setVisible(false);
+    }
+
+  QMainWindow::keyPressEvent(event);
 }
 
 void dooble::new_page(bool is_private)
