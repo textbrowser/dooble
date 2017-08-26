@@ -371,12 +371,32 @@ void dooble_history::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT last_visited, title, url, url_digest "
+	if(query.exec("SELECT favicon, last_visited, title, url, url_digest "
 		      "FROM dooble_history"))
 	  while(query.next())
 	    {
-	      QByteArray data1
+	      QBuffer buffer;
+	      QByteArray bytes
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
+	      QIcon icon;
+
+	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
+	      buffer.setBuffer(&bytes);
+
+	      if(buffer.open(QIODevice::ReadOnly))
+		{
+		  QDataStream in(&buffer);
+
+		  in >> icon;
+
+		  if(in.status() != QDataStream::Ok)
+		    icon = QIcon();
+
+		  buffer.close();
+		}
+
+	      QByteArray data1
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
 
 	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
 
@@ -384,7 +404,7 @@ void dooble_history::slot_populate(void)
 		continue;
 
 	      QByteArray data2
-		(QByteArray::fromBase64(query.value(1).toByteArray()));
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
 
 	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
 
@@ -392,7 +412,7 @@ void dooble_history::slot_populate(void)
 		continue;
 
 	      QByteArray data3
-		(QByteArray::fromBase64(query.value(2).toByteArray()));
+		(QByteArray::fromBase64(query.value(3).toByteArray()));
 
 	      data3 = dooble::s_cryptography->mac_then_decrypt(data3);
 
@@ -401,12 +421,13 @@ void dooble_history::slot_populate(void)
 
 	      QHash<int, QVariant> hash;
 
+	      hash[FAVICON] = icon;
 	      hash[LAST_VISITED] = QDateTime::fromString
 		(data1.constData(), Qt::ISODate);
 	      hash[TITLE] = data2.constData();
 	      hash[URL] = QUrl::fromEncoded(data3);
 	      hash[URL_DIGEST] = QByteArray::fromBase64
-		(query.value(3).toByteArray());
+		(query.value(4).toByteArray());
 	      m_history[hash[URL].toUrl()] = hash;
 	    }
       }

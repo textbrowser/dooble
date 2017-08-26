@@ -267,17 +267,44 @@ void dooble_history_window::slot_populate(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_items.clear();
-  m_ui.table->clear();
   m_ui.table->setSortingEnabled(false);
 
-  QHashIterator<QUrl, QHash<int, QVariant> > it(dooble::s_history->history());
+  QHash<QUrl, QHash<int, QVariant> > hash(dooble::s_history->history());
+  QHashIterator<QUrl, QHash<int, QVariant> > it(hash);
+  int i = 0;
+
+  m_ui.table->setRowCount(hash.size());
 
   while(it.hasNext())
     {
       it.next();
+
+      QDateTime last_visited
+	(it.value().value(dooble_history::LAST_VISITED).toDateTime());
+      QIcon icon(it.value().value(dooble_history::FAVICON).value<QIcon> ());
+      QString title(it.value().value(dooble_history::TITLE).toString());
+      QTableWidgetItem *item1 = 0;
+      QTableWidgetItem *item2 = 0;
+      QTableWidgetItem *item3 = 0;
+      QUrl url(it.value().value(dooble_history::URL).toUrl());
+
+      item1 = new QTableWidgetItem(icon, title);
+      item1->setData(Qt::UserRole, url);
+      item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      item1->setToolTip(item1->text());
+      item2 = new QTableWidgetItem(url.toString());
+      item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      item2->setToolTip(item2->text());
+      item3 = new QTableWidgetItem(last_visited.toString(Qt::ISODate));
+      item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_items[url] = item1;
+      m_ui.table->setItem(i, 0, item1);
+      m_ui.table->setItem(i, 1, item2);
+      m_ui.table->setItem(i, 2, item3);
+      i += 1;
     }
 
-  m_ui.table->setSortingEnabled(false);
+  m_ui.table->setSortingEnabled(true);
   QApplication::restoreOverrideCursor();
 }
 
