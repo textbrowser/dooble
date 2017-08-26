@@ -26,6 +26,7 @@
 */
 
 #include <QKeyEvent>
+#include <QMenu>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -74,7 +75,6 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
-  menuBar()->setVisible(false);
   new_page(page);
 }
 
@@ -98,7 +98,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
-  menuBar()->setVisible(false);
   new_page(view);
 }
 
@@ -175,7 +174,6 @@ void dooble::initialize_static_members(void)
 
 void dooble::keyPressEvent(QKeyEvent *event)
 {
-#ifndef Q_OS_MACOS
   if(event && event->modifiers() == Qt::AltModifier)
     {
       dooble_page *page = qobject_cast<dooble_page *>
@@ -183,21 +181,11 @@ void dooble::keyPressEvent(QKeyEvent *event)
 
       if(page && page->menu())
 	{
-	  if(menuBar()->isVisible())
-	    menuBar()->setVisible(false);
-	  else
-	    {
-	      for(int i = 0; i < page->menu()->actions().size(); i++)
-		menuBar()->addAction(page->menu()->actions()[i]);
-
-	      menuBar()->setFocus();
-	      menuBar()->setVisible(true);
-	    }
+	  page->menu()->showMenu();
+	  page->menu()->menu()->activateWindow();
 	}
-      else
-	menuBar()->setVisible(false);
     }
-#endif
+
   QMainWindow::keyPressEvent(event);
 }
 

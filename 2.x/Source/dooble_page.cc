@@ -231,14 +231,14 @@ QIcon dooble_page::icon(void) const
   return dooble_favicons::icon(m_view->url());
 }
 
-QMenu *dooble_page::menu(void) const
-{
-  return m_ui.menus->menu();
-}
-
 QString dooble_page::title(void) const
 {
   return m_view->title();
+}
+
+QToolButton *dooble_page::menu(void) const
+{
+  return m_ui.menus;
 }
 
 QUrl dooble_page::url(void) const

@@ -51,8 +51,8 @@ class dooble_page: public QWidget
 
   dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
   QIcon icon(void) const;
-  QMenu *menu(void) const;
   QString title(void) const;
+  QToolButton *menu(void) const;
   QUrl url(void) const;
   QWebEngineSettings *web_engine_settings(void) const;
   dooble_web_engine_view *view(void) const;
