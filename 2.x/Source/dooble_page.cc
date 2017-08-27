@@ -908,5 +908,5 @@ void dooble_page::slot_show_pull_down_menu(void)
 void dooble_page::slot_url_changed(const QUrl &url)
 {
   m_ui.address->add_item(m_view->icon(), url);
-  m_ui.address->setText(url.toString());
+  m_ui.address->setText(url.toString().trimmed());
 }
