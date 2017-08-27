@@ -60,7 +60,7 @@ void dooble_blocked_domains::block_domain(const QString &domain)
 {
   if(domain.trimmed().isEmpty())
     return;
-  else if(m_blocked_domains.contains(domain.trimmed()))
+  else if(m_blocked_domains.contains(domain.toLower().trimmed()))
     return;
 
   m_blocked_domains[domain.toLower().trimmed()] = 1;

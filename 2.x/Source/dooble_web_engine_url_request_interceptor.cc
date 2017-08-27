@@ -38,7 +38,7 @@ dooble_web_engine_url_request_interceptor(QObject *parent):
 void dooble_web_engine_url_request_interceptor::
 interceptRequest(QWebEngineUrlRequestInfo &info)
 {
-  QString host(info.requestUrl().host().toLower());
+  QString host(info.requestUrl().host().toLower().trimmed());
   int index = -1;
 
   while(!host.isEmpty())
