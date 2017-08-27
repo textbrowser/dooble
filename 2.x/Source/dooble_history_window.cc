@@ -347,6 +347,71 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 0, item1);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item2);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 2, item3);
+
+  /*
+  ** Hide or show the new row.
+  */
+
+  QDateTime period(QDateTime::currentDateTime());
+  QString text(m_ui.search->text().toLower().trimmed());
+  int i = m_ui.table->rowCount() - 1;
+
+  switch(m_ui.period->currentRow())
+    {
+    case 0: // All
+      {
+	if(text.isEmpty())
+	  m_ui.table->setRowHidden(i, false);
+	else if(item1->text().toLower().contains(text) ||
+		item2->text().toLower().contains(text))
+	  m_ui.table->setRowHidden(i, false);
+	else
+	  m_ui.table->setRowHidden(i, true);
+
+	break;
+      }
+    case 1: // Today
+    case 2: // Yesterday
+      {
+	QDateTime dateTime(item.lastVisited());
+
+	if(dateTime.date() == period.date())
+	  {
+	    if(text.isEmpty())
+	      m_ui.table->setRowHidden(i, false);
+	    else if(item1->text().toLower().contains(text) ||
+		    item2->text().toLower().contains(text))
+	      m_ui.table->setRowHidden(i, false);
+	    else
+	      m_ui.table->setRowHidden(i, true);
+	  }
+	else
+	  m_ui.table->setRowHidden(i, true);
+
+	break;
+      }
+    default:
+      {
+	QDateTime dateTime(item.lastVisited());
+
+	if(dateTime.date().month() == period.date().month() &&
+	   dateTime.date().year() == period.date().year())
+	  {
+	    if(text.isEmpty())
+	      m_ui.table->setRowHidden(i, false);
+	    else if(item1->text().toLower().contains(text) ||
+		    item2->text().toLower().contains(text))
+	      m_ui.table->setRowHidden(i, false);
+	    else
+	      m_ui.table->setRowHidden(i, true);
+	  }
+	else
+	  m_ui.table->setRowHidden(i, true);
+
+	break;
+      }
+    }
+
   m_ui.table->setSortingEnabled(true);
 }
 
@@ -417,19 +482,31 @@ void dooble_history_window::slot_search_timer_timeout(void)
   switch(m_ui.period->currentRow())
     {
     case 0: // All
-      break;
+      {
+	break;
+      }
     case 1: // Today
-      break;
+      {
+	break;
+      }
     case 2: // Yesterday
-      period = period.addDays(-1);
-      break;
+      {
+	period = period.addDays(-1);
+	break;
+      }
     case 3: // This Month
-      break;
+      {
+	break;
+      }
     case 4: // Previous Month
-      period = period.addMonths(-1);
-      break;
+      {
+	period = period.addMonths(-1);
+	break;
+      }
     default:
-      break;
+      {
+	break;
+      }
     }
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
