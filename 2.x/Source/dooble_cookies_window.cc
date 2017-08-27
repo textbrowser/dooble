@@ -28,6 +28,7 @@
 #include <QDateTime>
 #include <QDir>
 #include <QKeyEvent>
+#include <QShortcut>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QStatusBar>
@@ -113,6 +114,8 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
+  new QShortcut
+    (QKeySequence(tr("Ctrl+F")), m_ui.domain_filter, SLOT(setFocus(void)));
   restoreState
     (QByteArray::fromBase64(dooble_settings::
 			    setting("dooble_cookies_window_state").

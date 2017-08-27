@@ -28,6 +28,7 @@
 #include <QDir>
 #include <QKeyEvent>
 #include <QMenu>
+#include <QShortcut>
 #include <QSqlQuery>
 
 #include "dooble.h"
@@ -88,6 +89,8 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
+  new QShortcut
+    (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
