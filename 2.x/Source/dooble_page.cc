@@ -481,6 +481,14 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
     else
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
+#else
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    if(m_ui.backward == tool_button ||
+       m_ui.forward == tool_button ||
+       m_ui.menus == tool_button)
+      tool_button->setStyleSheet
+	("QToolButton {padding-right: 10px}"
+	 "QToolButton::menu-button {border: none;}");
 #endif
 }
 
