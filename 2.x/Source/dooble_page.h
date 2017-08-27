@@ -50,6 +50,7 @@ class dooble_page: public QWidget
   };
 
   dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
+  QAction *action_close_tab(void) const;
   QIcon icon(void) const;
   QString title(void) const;
   QToolButton *menu(void) const;

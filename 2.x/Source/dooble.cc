@@ -59,50 +59,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
   m_ui.setupUi(this);
-  connect(m_ui.menu_edit,
-	  SIGNAL(aboutToHide(void)),
-	  this,
-	  SLOT(slot_about_to_hide_main_menu(void)));
-  connect(m_ui.menu_edit,
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_main_menu(void)));
-  connect(m_ui.menu_file,
-	  SIGNAL(aboutToHide(void)),
-	  this,
-	  SLOT(slot_about_to_hide_main_menu(void)));
-  connect(m_ui.menu_file,
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_main_menu(void)));
-  connect(m_ui.menu_tools,
-	  SIGNAL(aboutToHide(void)),
-	  this,
-	  SLOT(slot_about_to_hide_main_menu(void)));
-  connect(m_ui.menu_tools,
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_main_menu(void)));
-  connect(m_ui.tab,
-	  SIGNAL(currentChanged(int)),
-	  this,
-	  SLOT(slot_tab_index_changed(int)));
-  connect(m_ui.tab,
-	  SIGNAL(new_tab(void)),
-	  this,
-	  SLOT(slot_new_tab(void)));
-  connect(m_ui.tab,
-	  SIGNAL(open_tab_as_new_window(int)),
-	  this,
-	  SLOT(slot_open_tab_as_new_window(int)));
-  connect(m_ui.tab,
-	  SIGNAL(tabCloseRequested(int)),
-	  this,
-	  SLOT(slot_tab_close_requested(int)));
-  connect(s_settings,
-	  SIGNAL(applied(void)),
-	  this,
-	  SLOT(slot_settings_applied(void)));
+  connect_signals();
   menuBar()->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
   new_page(page);
@@ -112,50 +69,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
   m_ui.setupUi(this);
-  connect(m_ui.menu_edit,
-	  SIGNAL(aboutToHide(void)),
-	  this,
-	  SLOT(slot_about_to_hide_main_menu(void)));
-  connect(m_ui.menu_edit,
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_main_menu(void)));
-  connect(m_ui.menu_file,
-	  SIGNAL(aboutToHide(void)),
-	  this,
-	  SLOT(slot_about_to_hide_main_menu(void)));
-  connect(m_ui.menu_file,
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_main_menu(void)));
-  connect(m_ui.menu_tools,
-	  SIGNAL(aboutToHide(void)),
-	  this,
-	  SLOT(slot_about_to_hide_main_menu(void)));
-  connect(m_ui.menu_tools,
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_main_menu(void)));
-  connect(m_ui.tab,
-	  SIGNAL(currentChanged(int)),
-	  this,
-	  SLOT(slot_tab_index_changed(int)));
-  connect(m_ui.tab,
-	  SIGNAL(new_tab(void)),
-	  this,
-	  SLOT(slot_new_tab(void)));
-  connect(m_ui.tab,
-	  SIGNAL(open_tab_as_new_window(int)),
-	  this,
-	  SLOT(slot_open_tab_as_new_window(int)));
-  connect(m_ui.tab,
-	  SIGNAL(tabCloseRequested(int)),
-	  this,
-	  SLOT(slot_tab_close_requested(int)));
-  connect(s_settings,
-	  SIGNAL(applied(void)),
-	  this,
-	  SLOT(slot_settings_applied(void)));
+  connect_signals();
   menuBar()->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
   new_page(view);
@@ -187,6 +101,65 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QMainWindow::closeEvent(event);
   QApplication::exit(0);
+}
+
+void dooble::connect_signals(void)
+{
+  connect(m_ui.menu_edit,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_edit,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_file,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_file,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_tools,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_tools,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(currentChanged(int)),
+	  this,
+	  SLOT(slot_tab_index_changed(int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(new_tab(void)),
+	  this,
+	  SLOT(slot_new_tab(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(open_tab_as_new_window(int)),
+	  this,
+	  SLOT(slot_open_tab_as_new_window(int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(tabCloseRequested(int)),
+	  this,
+	  SLOT(slot_tab_close_requested(int)),
+	  Qt::UniqueConnection);
+  connect(s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)),
+	  Qt::UniqueConnection);
 }
 
 void dooble::initialize_static_members(void)
@@ -457,8 +430,13 @@ void dooble::slot_about_to_show_main_menu(void)
 	      (page->menu()->menu()->actions()[1]->menu()->actions());
 	  else if(m_ui.menu_file == menu &&
 		  page->menu()->menu()->actions()[1]->menu())
-	    m_ui.menu_file->addActions
-	      (page->menu()->menu()->actions()[0]->menu()->actions());
+	    {
+	      m_ui.menu_file->addActions
+		(page->menu()->menu()->actions()[0]->menu()->actions());
+
+	      if(page->action_close_tab())
+		page->action_close_tab()->setEnabled(m_ui.tab->count() > 1);
+	    }
 	  else if(m_ui.menu_tools == menu &&
 		  page->menu()->menu()->actions()[2]->menu())
 	    m_ui.menu_tools->addActions

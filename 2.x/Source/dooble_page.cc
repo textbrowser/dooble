@@ -226,6 +226,11 @@ dooble_page::dooble_page(bool is_private,
   slot_dooble_credentials_created();
 }
 
+QAction *dooble_page::action_close_tab(void) const
+{
+  return m_action_close_tab;
+}
+
 QIcon dooble_page::icon(void) const
 {
   return dooble_favicons::icon(m_view->url());

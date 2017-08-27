@@ -68,6 +68,7 @@ class dooble: public QMainWindow
 
  private:
   Ui_dooble m_ui;
+  void connect_signals(void);
   void initialize_static_members(void);
   void new_page(bool is_private);
   void new_page(dooble_page *page);
