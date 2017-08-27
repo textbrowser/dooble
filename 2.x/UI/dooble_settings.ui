@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -334,6 +334,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="main_menu_bar_visible">
+            <property name="text">
+             <string>Main Menu Bar Visible</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QLabel" name="label_3">
@@ -475,8 +485,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>635</width>
-               <height>610</height>
+               <width>384</width>
+               <height>588</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1073,6 +1083,7 @@
   <tabstop>access_new_tabs</tabstop>
   <tabstop>animated_scrolling</tabstop>
   <tabstop>denote_private_tabs</tabstop>
+  <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>browsing_history</tabstop>
   <tabstop>scrollArea_2</tabstop>
