@@ -88,6 +88,7 @@ class dooble_settings: public QMainWindow
   void slot_clear_cache(void);
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);
+  void slot_reset(void);
   void slot_reset_credentials(void);
   void slot_save_credentials(void);
 

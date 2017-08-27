@@ -69,6 +69,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(close(void)));
+  connect(m_ui.buttonBox->button(QDialogButtonBox::Reset),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reset(void)));
   connect(m_ui.cache,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -649,6 +653,23 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	   tr("Credentials could not be generated. "
 	      "This is a curious problem."));
     }
+}
+
+void dooble_settings::slot_reset(void)
+{
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText
+    (tr("Are you sure that you wish to reset Dooble? "
+	"All known data will be removed and Dooble will be restarted."));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    return;
 }
 
 void dooble_settings::slot_reset_credentials(void)
