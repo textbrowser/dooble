@@ -53,7 +53,52 @@ dooble_blocked_domains::dooble_blocked_domains(void):QMainWindow()
 
 bool dooble_blocked_domains::contains(const QString &domain) const
 {
-  return m_blocked_domains.value(domain, 0);
+  return m_blocked_domains.value(domain.toLower().trimmed(), 0) == 1;
+}
+
+void dooble_blocked_domains::block_domain(const QString &domain)
+{
+  if(domain.trimmed().isEmpty())
+    return;
+  else if(m_blocked_domains.contains(domain.trimmed()))
+    return;
+
+  m_blocked_domains[domain.toLower().trimmed()] = 1;
+  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
+  m_ui.table->setSortingEnabled(false);
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
+
+  for(int i = 0; i < 2; i++)
+    {
+      QTableWidgetItem *item = new QTableWidgetItem();
+
+      if(i == 0)
+	{
+	  item->setFlags(Qt::ItemIsEnabled |
+			 Qt::ItemIsSelectable |
+			 Qt::ItemIsUserCheckable);
+	  item->setCheckState(Qt::Checked);
+	}
+      else
+	{
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  item->setText(domain.toLower().trimmed());
+	}
+
+      m_ui.table->setItem(m_ui.table->rowCount() - 1, i, item);
+    }
+
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortByColumn
+    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+  save_blocked_domain(domain.toLower().trimmed(), true);
 }
 
 void dooble_blocked_domains::closeEvent(QCloseEvent *event)
@@ -201,7 +246,9 @@ void dooble_blocked_domains::resizeEvent(QResizeEvent *event)
 void dooble_blocked_domains::save_blocked_domain(const QString &domain,
 						 bool state)
 {
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(domain.trimmed().isEmpty())
+    return;
+  else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -236,14 +283,15 @@ void dooble_blocked_domains::save_blocked_domain(const QString &domain,
 	else
 	  query.addBindValue(data.toBase64());
 
-	data = dooble::s_cryptography->encrypt_then_mac(domain.toUtf8());
+	data = dooble::s_cryptography->encrypt_then_mac
+	  (domain.toLower().trimmed().toUtf8());
 
 	if(data.isEmpty())
 	  ok = false;
 	else
 	  query.addBindValue(data.toBase64());
 
-	data = dooble::s_cryptography->hmac(domain);
+	data = dooble::s_cryptography->hmac(domain.toLower().trimmed());
 	ok &= !data.isEmpty();
 
 	if(ok)
@@ -307,45 +355,7 @@ void dooble_blocked_domains::slot_add(void)
   if(text.isEmpty())
     return;
 
-  if(!m_ui.table->findItems(text, Qt::MatchFixedString).isEmpty())
-    return;
-
-  m_blocked_domains[text] = 1;
-  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
-  m_ui.table->setSortingEnabled(false);
-  disconnect(m_ui.table,
-	     SIGNAL(itemChanged(QTableWidgetItem *)),
-	     this,
-	     SLOT(slot_item_changed(QTableWidgetItem *)));
-
-  for(int i = 0; i < 2; i++)
-    {
-      QTableWidgetItem *item = new QTableWidgetItem();
-
-      if(i == 0)
-	{
-	  item->setFlags(Qt::ItemIsEnabled |
-			 Qt::ItemIsSelectable |
-			 Qt::ItemIsUserCheckable);
-	  item->setCheckState(Qt::Checked);
-	}
-      else
-	{
-	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-	  item->setText(text);
-	}
-
-      m_ui.table->setItem(m_ui.table->rowCount() - 1, i, item);
-    }
-
-  connect(m_ui.table,
-	  SIGNAL(itemChanged(QTableWidgetItem *)),
-	  this,
-	  SLOT(slot_item_changed(QTableWidgetItem *)));
-  m_ui.table->setSortingEnabled(true);
-  m_ui.table->sortByColumn
-    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
-  save_blocked_domain(text, true);
+  block_domain(text);
 }
 
 void dooble_blocked_domains::slot_delete_rows(void)

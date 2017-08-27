@@ -25,11 +25,14 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QContextMenuEvent>
+#include <QWebEngineContextMenuData>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 
 #include "dooble.h"
+#include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_ui_utilities.h"
@@ -135,6 +138,52 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     }
 
   return view;
+}
+
+void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
+{
+  Q_UNUSED(event);
+
+  QMenu *menu = m_page->createStandardContextMenu();
+
+  if(!menu)
+    return;
+
+  QAction *action = 0;
+  QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
+
+  menu->addSeparator();
+  action = menu->addAction
+    (tr("Block Link's Domain(s)"), this, SLOT(slot_block_domain(void)));
+
+  if(context_menu_data.isValid() && context_menu_data.linkUrl().isValid())
+    action->setProperty("link_url", context_menu_data.linkUrl());
+  else
+    action->setEnabled(false);
+
+  menu->exec(mapToGlobal(event->pos()));
+}
+
+void dooble_web_engine_view::slot_block_domain(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QString host(action->property("link_url").toUrl().host().toLower().trimmed());
+  int index = -1;
+
+  while(!host.isEmpty())
+    {
+      dooble::s_blocked_domains->block_domain(host);
+
+      if((index = host.indexOf('.')) > 0)
+	host.remove(0, index + 1);
+
+      if(host.indexOf('.') < 0)
+	break;
+    }
 }
 
 void dooble_web_engine_view::slot_settings_applied(void)

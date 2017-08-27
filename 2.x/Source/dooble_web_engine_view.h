@@ -50,10 +50,12 @@ class dooble_web_engine_view: public QWebEngineView
   dooble_web_engine_page *m_page;
 
  private slots:
+  void slot_block_domain(void);
   void slot_settings_applied(void);
 
  protected:
   dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
+  void contextMenuEvent(QContextMenuEvent *event);
 
  signals:
   void create_tab(dooble_web_engine_view *view);

@@ -21,6 +21,7 @@ Completed Items
 17.    History search.
 18.    History. Will require a sub-process for removing expired data.
 19.    Main menu bar visibility.
+20.    WebEngine context menu should allow for blocking sites.
 
 Remaining Items
 
@@ -28,5 +29,4 @@ Remaining Items
 2.     Windows PRNG.
 3.     Allow SSL/TLS exceptions.
 4.     Bookmarks.
-5.     WebEngine context menu should allow for blocking sites.
-6.     Complete default WebEngine context menu.
+5.     Complete default WebEngine context menu.
