@@ -141,7 +141,7 @@ bool dooble_address_widget::event(QEvent *event)
 	    (static_cast<QKeyEvent *> (event)->modifiers() +
 	     Qt::Key(static_cast<QKeyEvent *> (event)->key()));
 
-	  if(key_sequence == QKeySequence(Qt::ControlModifier + Qt::Key_L))
+	  if(QKeySequence(Qt::ControlModifier + Qt::Key_L) == key_sequence)
 	    {
 	      selectAll();
 	      setFocus();
@@ -170,7 +170,7 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
     {
       QKeySequence key_sequence(event->modifiers() + event->key());
 
-      if(key_sequence == QKeySequence(Qt::ControlModifier + Qt::Key_L))
+      if(QKeySequence(Qt::ControlModifier + Qt::Key_L) == key_sequence)
 	{
 	  selectAll();
 	  setFocus();

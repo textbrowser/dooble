@@ -256,6 +256,11 @@ QWebEngineSettings *dooble_page::web_engine_settings(void) const
   return m_view->settings();
 }
 
+dooble_address_widget *dooble_page::address_widget(void) const
+{
+  return m_ui.address;
+}
+
 dooble_web_engine_view *dooble_page::view(void) const
 {
   return m_view;

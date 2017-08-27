@@ -37,6 +37,7 @@
 #include "ui_dooble_page.h"
 
 class QWebEngineSettings;
+class dooble_address_widget;
 class dooble_web_engine_view;
 
 class dooble_page: public QWidget
@@ -56,6 +57,7 @@ class dooble_page: public QWidget
   QToolButton *menu(void) const;
   QUrl url(void) const;
   QWebEngineSettings *web_engine_settings(void) const;
+  dooble_address_widget *address_widget(void) const;
   dooble_web_engine_view *view(void) const;
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
