@@ -40,17 +40,18 @@ class dooble_history_window: public QMainWindow
 
  public:
   dooble_history_window(void);
-  void save_settings(void);
 
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
 
  private:
   QHash<QUrl, QTableWidgetItem *> m_items;
   QTimer m_search_timer;
   QWidget *m_parent;
   Ui_dooble_history_window m_ui;
+  void save_settings(void);
 
  public slots:
   void show(QWidget *parent);

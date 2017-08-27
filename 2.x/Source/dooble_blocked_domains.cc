@@ -58,7 +58,6 @@ bool dooble_blocked_domains::contains(const QString &domain) const
 
 void dooble_blocked_domains::closeEvent(QCloseEvent *event)
 {
-  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -191,6 +190,12 @@ void dooble_blocked_domains::purge(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_blocked_domains::resizeEvent(QResizeEvent *event)
+{
+  QMainWindow::resizeEvent(event);
+  save_settings();
 }
 
 void dooble_blocked_domains::save_blocked_domain(const QString &domain,

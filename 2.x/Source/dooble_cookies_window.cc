@@ -115,13 +115,6 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 
 void dooble_cookies_window::closeEvent(QCloseEvent *event)
 {
-  if(m_is_private)
-    {
-      QMainWindow::closeEvent(event);
-      return;
-    }
-
-  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -206,8 +199,17 @@ void dooble_cookies_window::keyPressEvent(QKeyEvent *event)
   QMainWindow::keyPressEvent(event);
 }
 
+void dooble_cookies_window::resizeEvent(QResizeEvent *event)
+{
+  QMainWindow::resizeEvent(event);
+  save_settings();
+}
+
 void dooble_cookies_window::save_settings(void)
 {
+  if(m_is_private)
+    return;
+
   if(dooble_settings::setting("save_geometry").toBool())
     dooble_settings::set_setting
       ("dooble_cookies_window_geometry", saveGeometry().toBase64());

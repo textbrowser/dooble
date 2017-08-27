@@ -46,13 +46,13 @@ class dooble_cookies_window: public QMainWindow
   dooble_cookies_window(bool is_private, QWidget *parent);
   void filter(const QString &text);
   void populate(void);
-  void save_settings(void);
   void setCookieStore(QWebEngineCookieStore *cookieStore);
   void setCookies(dooble_cookies *cookies);
 
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
 
  private:
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
@@ -64,6 +64,7 @@ class dooble_cookies_window: public QMainWindow
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
   void delete_top_level_items(QList<QTreeWidgetItem *> list);
+  void save_settings(void);
 
  public slots:
   void show(void);

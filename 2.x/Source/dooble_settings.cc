@@ -192,7 +192,6 @@ void dooble_settings::closeEvent(QCloseEvent *event)
 {
   m_ui.password_1->clear();
   m_ui.password_2->clear();
-  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -297,6 +296,12 @@ void dooble_settings::remove_setting(const QString &key)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_settings::resizeEvent(QResizeEvent *event)
+{
+  QMainWindow::resizeEvent(event);
+  save_settings();
 }
 
 void dooble_settings::restore(void)

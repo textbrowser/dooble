@@ -93,7 +93,6 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 
 void dooble_history_window::closeEvent(QCloseEvent *event)
 {
-  save_settings();
   QMainWindow::closeEvent(event);
 }
 
@@ -103,6 +102,12 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
     close();
 
   QMainWindow::keyPressEvent(event);
+}
+
+void dooble_history_window::resizeEvent(QResizeEvent *event)
+{
+  QMainWindow::resizeEvent(event);
+  save_settings();
 }
 
 void dooble_history_window::save_settings(void)

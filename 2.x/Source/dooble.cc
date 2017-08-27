@@ -119,20 +119,8 @@ void dooble::closeEvent(QCloseEvent *event)
 	return;
       }
 
-  if(s_blocked_domains)
-    s_blocked_domains->save_settings();
-
-  if(s_cookies_window)
-    s_cookies_window->save_settings();
-
   if(s_history)
     s_history->deleteLater();
-
-  if(s_history_window)
-    s_history_window->save_settings();
-
-  if(s_settings)
-    s_settings->save_settings();
 
   QMainWindow::closeEvent(event);
   QApplication::exit(0);

@@ -59,12 +59,12 @@ class dooble_settings: public QMainWindow
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static void remove_setting(const QString &key);
-  void save_settings(void);
   void show_panel(dooble_settings::Panels panel);
 
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
 
  private:
   QFuture<QList<QByteArray> > m_pbkdf2_future;
@@ -77,6 +77,7 @@ class dooble_settings: public QMainWindow
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void restore(void);
+  void save_settings(void);
 
  public slots:
   void show(void);

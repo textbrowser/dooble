@@ -40,17 +40,18 @@ class dooble_blocked_domains: public QMainWindow
   dooble_blocked_domains(void);
   bool contains(const QString &domain) const;
   static void purge(void);
-  void save_settings(void);
 
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
 
  private:
   QHash<QString, char> m_blocked_domains;
   Ui_dooble_blocked_domains m_ui;
   void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
+  void save_settings(void);
 
  public slots:
   void show(void);
