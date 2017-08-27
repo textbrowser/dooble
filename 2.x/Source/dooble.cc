@@ -60,7 +60,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
   initialize_static_members();
   m_ui.setupUi(this);
   connect_signals();
-  menuBar()->setVisible
+  m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
   new_page(page);
 }
@@ -70,7 +70,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   initialize_static_members();
   m_ui.setupUi(this);
   connect_signals();
-  menuBar()->setVisible
+  m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
   new_page(view);
 }
@@ -559,7 +559,7 @@ void dooble::slot_quit_dooble(void)
 
 void dooble::slot_settings_applied(void)
 {
-  menuBar()->setVisible
+  m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
 }
 
