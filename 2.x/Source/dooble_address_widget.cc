@@ -192,11 +192,11 @@ void dooble_address_widget::prepare_icons(void)
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
 {
-  int d = 0;
-  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   QSize size1 = m_bookmark->sizeHint();
   QSize size2 = m_information->sizeHint();
   QSize size3 = m_pull_down->sizeHint();
+  int d = 0;
+  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   d = (rect().height() - size1.height()) / 2;
   m_bookmark->move(frame_width - rect().left() + size2.width() + 5,

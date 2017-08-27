@@ -106,7 +106,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLineEdit" name="search">
+       <widget class="dooble_search_widget" name="search">
         <property name="placeholderText">
          <string>Search History</string>
         </property>
@@ -120,6 +120,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>dooble_search_widget</class>
+   <extends>QLineEdit</extends>
+   <header>dooble_search_widget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>period</tabstop>
   <tabstop>table</tabstop>

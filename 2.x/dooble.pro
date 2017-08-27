@@ -76,6 +76,7 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \
                   Source\\dooble_pbkdf2.h \
+                  Source\\dooble_search_widget.h \
                   Source\\dooble_settings.h \
                   Source\\dooble_tab_bar.h \
                   Source\\dooble_tab_widget.h \
@@ -109,6 +110,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_page.cc \
                   Source\\dooble_pbkdf2.cc \
                   Source\\dooble_random.cc \
+                  Source\\dooble_search_widget.cc \
                   Source\\dooble_settings.cc \
                   Source\\dooble_tab_bar.cc \
                   Source\\dooble_tab_widget.cc \
