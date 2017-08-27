@@ -406,7 +406,7 @@ void dooble_settings::restore(void)
     (s_settings.value("save_geometry", false).toBool());
   m_ui.theme->setCurrentIndex
     (qBound(0,
-	    s_settings.value("icon_set_index", 1).toInt(),
+	    s_settings.value("icon_set_index", 2).toInt(),
 	    m_ui.theme->count() - 1));
 
   if(m_ui.theme->currentIndex() == 0)
@@ -675,6 +675,55 @@ void dooble_settings::slot_reset(void)
 
   if(mb.exec() != QMessageBox::Yes)
     return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QStringList list;
+
+  list << "dooble_blocked_domains.db"
+       << "dooble_cookies.db"
+       << "dooble_favicons.db"
+       << "dooble_history.db"
+       << "dooble_settings.db";
+
+  while(!list.isEmpty())
+    QFile::remove(dooble_settings::setting("home_path").toString() +
+		  QDir::separator() +
+		  list.takeFirst());
+
+  QApplication::restoreOverrideCursor();
+  QApplication::processEvents();
+  QApplication::exit(0);
+
+#ifdef Q_OS_WIN32
+  HINSTANCE rc = 0;
+  QString program(QCoreApplication::applicationDirPath() +
+		  QDir::separator() +
+		  QCoreApplication::applicationName());
+
+  rc = ::ShellExecuteA(0,
+		       "open",
+		       program.toUtf8().constData(),
+		       0,
+		       0,
+		       SW_SHOWNORMAL);
+
+  if(SE_ERR_ACCESSDENIED == static_cast<int> (rc))
+    /*
+    ** Elevated?
+    */
+
+    ::ShellExecuteA(0,
+		    "runas",
+		    program.toUtf8().constData(),
+		    0,
+		    0,
+		    SW_SHOWNORMAL);
+#else
+  QProcess::startDetached(QCoreApplication::applicationDirPath() +
+			  QDir::separator() +
+			  QCoreApplication::applicationName());
+#endif
 }
 
 void dooble_settings::slot_reset_credentials(void)
