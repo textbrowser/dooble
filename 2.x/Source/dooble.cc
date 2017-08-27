@@ -63,6 +63,8 @@ dooble::dooble(dooble_page *page):QMainWindow()
 #ifndef Q_OS_MACOS
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
+#else
+  setMenuBar(0);
 #endif
   new_page(page);
 }
@@ -75,6 +77,8 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 #ifndef Q_OS_MACOS
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
+#else
+  setMenuBar(0);
 #endif
   new_page(view);
 }
