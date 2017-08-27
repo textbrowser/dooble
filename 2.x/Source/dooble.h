@@ -78,6 +78,8 @@ class dooble: public QMainWindow
   void show(void);
 
  private slots:
+  void slot_about_to_hide_main_menu(void);
+  void slot_about_to_show_main_menu(void);
   void slot_close_tab(void);
   void slot_create_tab(dooble_web_engine_view *view);
   void slot_create_window(dooble_web_engine_view *view);

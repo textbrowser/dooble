@@ -59,6 +59,30 @@ dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
   m_ui.setupUi(this);
+  connect(m_ui.menu_edit,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)));
+  connect(m_ui.menu_edit,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)));
+  connect(m_ui.menu_file,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)));
+  connect(m_ui.menu_file,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)));
+  connect(m_ui.menu_tools,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)));
+  connect(m_ui.menu_tools,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)));
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
 	  this,
@@ -88,6 +112,30 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
   m_ui.setupUi(this);
+  connect(m_ui.menu_edit,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)));
+  connect(m_ui.menu_edit,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)));
+  connect(m_ui.menu_file,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)));
+  connect(m_ui.menu_file,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)));
+  connect(m_ui.menu_tools,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)));
+  connect(m_ui.menu_tools,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)));
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
 	  this,
@@ -377,6 +425,46 @@ void dooble::show(void)
 					   toByteArray()));
 
   QMainWindow::show();
+}
+
+void dooble::slot_about_to_hide_main_menu(void)
+{
+  QMenu *menu = qobject_cast<QMenu *> (sender());
+
+  if(menu)
+    menu->clear();
+}
+
+void dooble::slot_about_to_show_main_menu(void)
+{
+  QMenu *menu = qobject_cast<QMenu *> (sender());
+
+  if(menu)
+    {
+      menu->clear();
+
+      dooble_page *page = qobject_cast<dooble_page *>
+	(m_ui.tab->currentWidget());
+
+      if(page &&
+	 page->menu() &&
+	 page->menu()->menu() &&
+	 page->menu()->menu()->actions().size() >= 3)
+	{
+	  if(m_ui.menu_edit == menu &&
+	     page->menu()->menu()->actions()[1]->menu())
+	    m_ui.menu_edit->addActions
+	      (page->menu()->menu()->actions()[1]->menu()->actions());
+	  else if(m_ui.menu_file == menu &&
+		  page->menu()->menu()->actions()[1]->menu())
+	    m_ui.menu_file->addActions
+	      (page->menu()->menu()->actions()[0]->menu()->actions());
+	  else if(m_ui.menu_tools == menu &&
+		  page->menu()->menu()->actions()[2]->menu())
+	    m_ui.menu_tools->addActions
+	      (page->menu()->menu()->actions()[2]->menu()->actions());
+	}
+    }
 }
 
 void dooble::slot_close_tab(void)
