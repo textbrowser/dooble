@@ -75,6 +75,12 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
+  connect(s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
+  menuBar()->setVisible
+    (dooble_settings::setting("main_menu_bar_visible").toBool());
   new_page(page);
 }
 
@@ -98,6 +104,12 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)));
+  connect(s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
+  menuBar()->setVisible
+    (dooble_settings::setting("main_menu_bar_visible").toBool());
   new_page(view);
 }
 
@@ -474,6 +486,12 @@ void dooble::slot_quit_dooble(void)
 
   close();
   QApplication::exit(0);
+}
+
+void dooble::slot_settings_applied(void)
+{
+  menuBar()->setVisible
+    (dooble_settings::setting("main_menu_bar_visible").toBool());
 }
 
 void dooble::slot_show_blocked_domains(void)

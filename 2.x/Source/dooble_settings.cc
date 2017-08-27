@@ -111,6 +111,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["cookie_policy_index"] = 2;
   s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
+  s_settings["main_menu_bar_visible"] = true;
   restore();
   prepare_icons();
 }
@@ -377,6 +378,8 @@ void dooble_settings::restore(void)
     (s_settings.value("javascript_block_popups", true).toBool());
   m_ui.javascript_popups->setChecked
     (s_settings.value("javascript_popups", true).toBool());
+  m_ui.main_menu_bar_visible->setChecked
+    (s_settings.value("main_menu_bar_visible", true).toBool());
   m_ui.pages->setCurrentIndex
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
@@ -555,6 +558,7 @@ void dooble_settings::slot_apply(void)
 
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
+  set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   prepare_icons();
