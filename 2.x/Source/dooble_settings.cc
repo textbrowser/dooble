@@ -174,6 +174,7 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
 		   "key TEXT NOT NULL PRIMARY KEY, "
 		   "value TEXT NOT NULL)");
+	query.exec("PRAGMA synchronous = NORMAL");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
 	query.addBindValue(key.trimmed());
