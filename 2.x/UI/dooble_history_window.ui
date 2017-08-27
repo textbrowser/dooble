@@ -40,6 +40,16 @@
          <string>Yesterday</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>This Month</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Previous Month</string>
+        </property>
+       </item>
       </widget>
       <widget class="QTableWidget" name="table">
        <property name="alternatingRowColors">
