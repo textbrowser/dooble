@@ -404,16 +404,58 @@ void dooble_history_window::slot_populate(void)
 
 void dooble_history_window::slot_search_timer_timeout(void)
 {
+  QDateTime period(QDateTime::currentDateTime());
   QString text(m_ui.search->text().toLower().trimmed());
 
-  for(int i = 0; i < m_ui.table->rowCount(); i++)
+  switch(m_ui.period->currentRow())
     {
-      if(m_ui.period->currentRow() <= 0 || text.isEmpty())
-	m_ui.table->setRowHidden(i, false);
-      else
-	{
-	}
+    case 0: // All
+      break;
+    case 1: // Today
+      break;
+    case 2: // Yesterday
+      period = period.addDays(-1);
+      break;
+    case 3: // This Month
+      break;
+    case 4: // Previous Month
+      period = period.addMonths(-1);
+      break;
+    default:
+      break;
     }
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    if(m_ui.period->currentRow() <= 0 && text.isEmpty())
+      m_ui.table->setRowHidden(i, false);
+    else if(m_ui.period->currentRow() > 0)
+      {
+	QTableWidgetItem *item = m_ui.table->item(i, 2);
+
+	if(!item)
+	  continue;
+
+	QDateTime dateTime(QDateTime::fromString(item->text(), Qt::ISODate));
+
+	switch(m_ui.period->currentRow())
+	  {
+	  case 1: // Today
+	  case 2: // Yesterday
+	    if(dateTime.date() == period.date())
+	      m_ui.table->setRowHidden(i, false);
+	    else
+	      m_ui.table->setRowHidden(i, true);
+
+	    break;
+	  default:
+	    if(dateTime.date().month() == period.date().month() &&
+	       dateTime.date().year() == period.date().year())
+	      m_ui.table->setRowHidden(i, false);
+	    else
+	      m_ui.table->setRowHidden(i, true);
+	    break;
+	  }
+      }
 }
 
 void dooble_history_window::slot_show_context_menu(const QPoint &point)
