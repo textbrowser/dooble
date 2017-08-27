@@ -58,6 +58,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
     m_purge_domains_timer.start();
 
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
+  m_ui.tool_bar->addWidget(m_ui.periodically_purge);
   m_ui.value->setText("");
 
   QLabel *label = new QLabel();
@@ -111,6 +112,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
+  setContextMenuPolicy(Qt::NoContextMenu);
 }
 
 void dooble_cookies_window::closeEvent(QCloseEvent *event)
@@ -213,6 +215,9 @@ void dooble_cookies_window::save_settings(void)
   if(dooble_settings::setting("save_geometry").toBool())
     dooble_settings::set_setting
       ("dooble_cookies_window_geometry", saveGeometry().toBase64());
+
+  dooble_settings::set_setting
+    ("dooble_cookies_window_state", saveState().toBase64());
 }
 
 void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookieStore)
@@ -233,6 +238,10 @@ void dooble_cookies_window::show(void)
 			      setting("dooble_cookies_window_geometry").
 			      toByteArray()));
 
+  restoreState
+    (QByteArray::fromBase64(dooble_settings::
+			    setting("dooble_cookies_window_state").
+			    toByteArray()));
   QMainWindow::show();
 }
 
@@ -244,6 +253,10 @@ void dooble_cookies_window::showNormal(void)
 			      setting("dooble_cookies_window_geometry").
 			      toByteArray()));
 
+  restoreState
+    (QByteArray::fromBase64(dooble_settings::
+			    setting("dooble_cookies_window_state").
+			    toByteArray()));
   QMainWindow::showNormal();
 }
 
