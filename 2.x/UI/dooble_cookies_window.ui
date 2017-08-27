@@ -32,7 +32,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="domain_filter">
+       <widget class="dooble_search_widget" name="domain_filter">
         <property name="placeholderText">
          <string>Domain Filter</string>
         </property>
@@ -571,6 +571,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>dooble_search_widget</class>
+   <extends>QLineEdit</extends>
+   <header>dooble_search_widget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>domain_filter</tabstop>
   <tabstop>tree</tabstop>
