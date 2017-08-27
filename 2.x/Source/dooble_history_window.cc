@@ -39,6 +39,8 @@
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
   m_parent = 0;
+  m_search_timer.setInterval(750);
+  m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
   m_ui.period->setCurrentRow(0);
   m_ui.period->setStyleSheet("QListWidget {background-color: transparent;}");
@@ -49,6 +51,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 			    setting("history_window_splitter_state").
 			    toByteArray()));
   m_ui.table->sortByColumn(0, Qt::AscendingOrder);
+  connect(&m_search_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_search_timer_timeout(void)));
   connect(dooble::s_history,
 	  SIGNAL(icon_updated(const QIcon &, const QUrl &)),
 	  this,
@@ -66,6 +72,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(populated(void)),
 	  this,
 	  SLOT(slot_populate(void)));
+  connect(m_ui.search,
+	  SIGNAL(textEdited(const QString &)),
+	  &m_search_timer,
+	  SLOT(start(void)));
   connect(m_ui.table,
 	  SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
 	  this,
@@ -386,6 +396,10 @@ void dooble_history_window::slot_populate(void)
 
   m_ui.table->setSortingEnabled(true);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_history_window::slot_search_timer_timeout(void)
+{
 }
 
 void dooble_history_window::slot_show_context_menu(const QPoint &point)
