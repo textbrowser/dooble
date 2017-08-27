@@ -313,12 +313,15 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
   if(!item1)
     return;
 
-  item1 = m_ui.table->item(item1->row(), 2);
+  QTableWidgetItem *item2 = m_ui.table->item(item1->row(), 0);
 
-  if(!item1)
-    return;
+  if(item2)
+    item2->setText(item.title());
 
-  item1->setText(item.lastVisited().toString(Qt::ISODate));
+  QTableWidgetItem *item3 = m_ui.table->item(item1->row(), 2);
+
+  if(item3)
+    item3->setText(item.lastVisited().toString(Qt::ISODate));
 }
 
 void dooble_history_window::slot_new_item(const QIcon &icon,
