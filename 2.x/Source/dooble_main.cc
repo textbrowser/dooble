@@ -243,6 +243,18 @@ int main(int argc, char *argv[])
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
      "WebEnginePersistentStorage");
+
+  {
+    QFile file(dooble_settings::setting("home_path").toString() +
+	       QDir::separator() +
+	       "WebEnginePersistentStorage" +
+	       QDir::separator() +
+	       "Visited Links");
+
+    file.open(QIODevice::Truncate | QIODevice::WriteOnly);
+    file.setPermissions(QFileDevice::ReadOwner);
+  }
+
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
