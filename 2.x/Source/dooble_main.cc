@@ -245,6 +245,10 @@ int main(int argc, char *argv[])
      "WebEnginePersistentStorage");
 
   {
+    /*
+    ** Prevent WebEngine from writing to Visited Links.
+    */
+
     QFile file(dooble_settings::setting("home_path").toString() +
 	       QDir::separator() +
 	       "WebEnginePersistentStorage" +
