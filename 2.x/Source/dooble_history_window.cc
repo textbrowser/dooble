@@ -72,6 +72,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(populated(void)),
 	  this,
 	  SLOT(slot_populate(void)));
+  connect(m_ui.period,
+	  SIGNAL(currentRowChanged(int)),
+	  &m_search_timer,
+	  SLOT(start(void)));
   connect(m_ui.search,
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
@@ -400,6 +404,16 @@ void dooble_history_window::slot_populate(void)
 
 void dooble_history_window::slot_search_timer_timeout(void)
 {
+  QString text(m_ui.search->text().toLower().trimmed());
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    {
+      if(m_ui.period->currentRow() <= 0 || text.isEmpty())
+	m_ui.table->setRowHidden(i, false);
+      else
+	{
+	}
+    }
 }
 
 void dooble_history_window::slot_show_context_menu(const QPoint &point)
