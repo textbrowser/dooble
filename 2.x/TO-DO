@@ -20,6 +20,7 @@ Completed Items
 16.    Prevent duplicate history items in address widget menu.
 17.    History search.
 18.    History. Will require a sub-process for removing expired data.
+19.    Main menu bar visibility.
 
 Remaining Items
 
@@ -28,4 +29,3 @@ Remaining Items
 3.     Allow SSL/TLS exceptions.
 4.     Bookmarks.
 5.     WebEngine context menu should allow for blocking sites.
-6.     Main menu bar visibility.
