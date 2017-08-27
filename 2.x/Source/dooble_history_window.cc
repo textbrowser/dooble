@@ -409,6 +409,8 @@ void dooble_history_window::slot_populate(void)
 
 void dooble_history_window::slot_search_timer_timeout(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QDateTime period(QDateTime::currentDateTime());
   QString text(m_ui.search->text().toLower().trimmed());
 
@@ -433,34 +435,78 @@ void dooble_history_window::slot_search_timer_timeout(void)
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(m_ui.period->currentRow() <= 0 && text.isEmpty())
       m_ui.table->setRowHidden(i, false);
-    else if(m_ui.period->currentRow() > 0)
+    else
       {
-	QTableWidgetItem *item = m_ui.table->item(i, 2);
+	QTableWidgetItem *item1 = m_ui.table->item(i, 0);
+	QTableWidgetItem *item2 = m_ui.table->item(i, 1);
+	QTableWidgetItem *item3 = m_ui.table->item(i, 2);
 
-	if(!item)
-	  continue;
-
-	QDateTime dateTime(QDateTime::fromString(item->text(), Qt::ISODate));
+	if(!item1 || !item2 || !item3)
+	  {
+	    m_ui.table->setRowHidden(i, false);
+	    continue;
+	  }
 
 	switch(m_ui.period->currentRow())
 	  {
+	  case 0: // All
+	    {
+	      if(text.isEmpty())
+		m_ui.table->setRowHidden(i, false);
+	      else if(item1->text().toLower().contains(text) ||
+		      item2->text().toLower().contains(text))
+		m_ui.table->setRowHidden(i, false);
+	      else
+		m_ui.table->setRowHidden(i, true);
+
+	      break;
+	    }
 	  case 1: // Today
 	  case 2: // Yesterday
-	    if(dateTime.date() == period.date())
-	      m_ui.table->setRowHidden(i, false);
-	    else
-	      m_ui.table->setRowHidden(i, true);
+	    {
+	      QDateTime dateTime
+		(QDateTime::fromString(item3->text(), Qt::ISODate));
 
-	    break;
+	      if(dateTime.date() == period.date())
+		{
+		  if(text.isEmpty())
+		    m_ui.table->setRowHidden(i, false);
+		  else if(item1->text().toLower().contains(text) ||
+			  item2->text().toLower().contains(text))
+		    m_ui.table->setRowHidden(i, false);
+		  else
+		    m_ui.table->setRowHidden(i, true);
+		}
+	      else
+		m_ui.table->setRowHidden(i, true);
+
+	      break;
+	    }
 	  default:
-	    if(dateTime.date().month() == period.date().month() &&
-	       dateTime.date().year() == period.date().year())
-	      m_ui.table->setRowHidden(i, false);
-	    else
-	      m_ui.table->setRowHidden(i, true);
-	    break;
+	    {
+	      QDateTime dateTime
+		(QDateTime::fromString(item3->text(), Qt::ISODate));
+
+	      if(dateTime.date().month() == period.date().month() &&
+		 dateTime.date().year() == period.date().year())
+		{
+		  if(text.isEmpty())
+		    m_ui.table->setRowHidden(i, false);
+		  else if(item1->text().toLower().contains(text) ||
+			  item2->text().toLower().contains(text))
+		    m_ui.table->setRowHidden(i, false);
+		  else
+		    m_ui.table->setRowHidden(i, true);
+		}
+	      else
+		m_ui.table->setRowHidden(i, true);
+
+	      break;
+	    }
 	  }
       }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history_window::slot_show_context_menu(const QPoint &point)
