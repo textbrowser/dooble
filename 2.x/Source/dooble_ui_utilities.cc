@@ -29,6 +29,8 @@
 #include <QDesktopWidget>
 #include <QWidget>
 
+#include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_ui_utilities.h"
 
 void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
@@ -105,4 +107,16 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
     p.setY(desk.y());
 
   widget->move(p);
+}
+
+void dooble_ui_utilities::enable_mac_brushed_metal(QWidget *widget)
+{
+  if(!widget)
+    return;
+
+#ifdef Q_OS_MACOS
+  widget->setAttribute
+    (Qt::WA_MacBrushedMetal, dooble::s_application->
+                             style_name() == "macintosh");
+#endif
 }
