@@ -25,9 +25,19 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QStyle>
+
 #include "dooble_application.h"
 
 dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
+}
+
+QString dooble_application::style_name(void) const
+{
+  static QString style_name
+    (style() ? style()->objectName().toLower().trimmed() : "");
+
+  return style_name;
 }

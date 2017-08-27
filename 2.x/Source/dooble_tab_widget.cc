@@ -28,6 +28,8 @@
 #include <QLabel>
 #include <QMovie>
 
+#include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
@@ -54,7 +56,7 @@ dooble_page *dooble_tab_widget::page(int index) const
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 {
 #ifdef Q_OS_MACOS
-  if(QApplication::style()->objectName().toLower() == "fusion")
+  if(dooble::s_application->style_name() == "fusion")
     QTabWidget::setTabIcon(index, icon);
   else
     {
@@ -97,7 +99,7 @@ void dooble_tab_widget::slot_load_finished(void)
   int index = indexOf(page);
 
 #ifdef Q_OS_MACOS
-  if(QApplication::style()->objectName().toLower() == "fusion")
+  if(dooble::s_application->style_name() == "fusion")
     side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
   else
     side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
@@ -120,7 +122,7 @@ void dooble_tab_widget::slot_load_finished(void)
       label->setMovie(0);
 
 #ifdef Q_OS_MACOS
-      if(QApplication::style()->objectName().toLower() == "fusion")
+      if(dooble::s_application->style_name() == "fusion")
 	{
 	  QIcon icon(label->property("icon").value<QIcon> ());
 
@@ -142,7 +144,7 @@ void dooble_tab_widget::slot_load_started(void)
   int index = indexOf(page);
 
 #ifdef Q_OS_MACOS
-  if(QApplication::style()->objectName().toLower() == "fusion")
+  if(dooble::s_application->style_name() == "fusion")
     side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
   else
     side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
