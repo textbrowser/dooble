@@ -113,6 +113,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
+  restoreState
+    (QByteArray::fromBase64(dooble_settings::
+			    setting("dooble_cookies_window_state").
+			    toByteArray()));
   setContextMenuPolicy(Qt::NoContextMenu);
 }
 
