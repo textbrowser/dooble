@@ -117,6 +117,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 
 void dooble_cookies_window::closeEvent(QCloseEvent *event)
 {
+  if(!m_is_private)
+    dooble_settings::set_setting
+      ("dooble_cookies_window_state", saveState().toBase64());
+
   QMainWindow::closeEvent(event);
 }
 

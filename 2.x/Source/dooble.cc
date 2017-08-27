@@ -119,6 +119,9 @@ void dooble::closeEvent(QCloseEvent *event)
 	return;
       }
 
+  if(s_cookies_window)
+    s_cookies_window->close();
+
   if(s_history)
     s_history->deleteLater();
 
