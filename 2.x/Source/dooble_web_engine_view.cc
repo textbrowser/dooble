@@ -153,8 +153,16 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
     menu->addSeparator();
 
-  action = menu->addAction
-    (tr("Block Link's Domain(s)"), this, SLOT(slot_block_domain(void)));
+  if(dooble_settings::
+     setting("accepted_or_blocked_domains_mode").toString() == "accept")
+    action = menu->addAction(tr("Accept Link's Domain(s)"),
+			     this,
+			     SLOT(slot_accept_or_block_domain(void)));
+  else
+    action = menu->addAction(tr("Block Link's Domain(s)"),
+			     this,
+			     SLOT(slot_accept_or_block_domain(void)));
+
 
   if(context_menu_data.isValid() && context_menu_data.linkUrl().isValid())
     action->setProperty("link_url", context_menu_data.linkUrl());
@@ -165,7 +173,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   menu->deleteLater();
 }
 
-void dooble_web_engine_view::slot_block_domain(void)
+void dooble_web_engine_view::slot_accept_or_block_domain(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
 
@@ -177,7 +185,7 @@ void dooble_web_engine_view::slot_block_domain(void)
 
   while(!host.isEmpty())
     {
-      dooble::s_accepted_or_blocked_domains->block_domain(host);
+      dooble::s_accepted_or_blocked_domains->accept_or_block_domain(host);
 
       if((index = host.indexOf('.')) > 0)
 	host.remove(0, index + 1);

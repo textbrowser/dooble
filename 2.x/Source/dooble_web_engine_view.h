@@ -50,7 +50,7 @@ class dooble_web_engine_view: public QWebEngineView
   dooble_web_engine_page *m_page;
 
  private slots:
-  void slot_block_domain(void);
+  void slot_accept_or_block_domain(void);
   void slot_settings_applied(void);
 
  protected:

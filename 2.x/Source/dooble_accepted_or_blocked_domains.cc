@@ -71,7 +71,8 @@ bool dooble_accepted_or_blocked_domains::contains(const QString &domain) const
   return m_domains.value(domain.toLower().trimmed(), 0) == 1;
 }
 
-void dooble_accepted_or_blocked_domains::block_domain(const QString &domain)
+void dooble_accepted_or_blocked_domains::accept_or_block_domain
+(const QString &domain)
 {
   if(domain.trimmed().isEmpty())
     return;
@@ -374,7 +375,7 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
   if(text.isEmpty())
     return;
 
-  block_domain(text);
+  accept_or_block_domain(text);
 }
 
 void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
