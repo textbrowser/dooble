@@ -254,5 +254,5 @@ void dooble_address_widget_completer::slot_text_edited(const QString &text)
   if(text.trimmed().isEmpty())
     m_popup->setVisible(false);
   else
-    complete(text.trimmed());
+    complete(text);
 }

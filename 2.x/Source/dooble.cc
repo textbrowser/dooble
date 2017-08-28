@@ -250,7 +250,7 @@ void dooble::new_page(dooble_page *page)
   QString title(page->title().trimmed());
 
   if(title.isEmpty())
-    title = page->url().toString().trimmed();
+    title = page->url().toString();
 
   if(title.isEmpty())
     title = tr("Dooble");
@@ -656,7 +656,7 @@ void dooble::slot_title_changed(const QString &title)
   QString text(title.trimmed());
 
   if(text.isEmpty())
-    text = page->url().toString().trimmed();
+    text = page->url().toString();
 
   if(text.isEmpty())
     {

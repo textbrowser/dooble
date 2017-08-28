@@ -171,7 +171,7 @@ void dooble_web_engine_view::slot_block_domain(void)
   if(!action)
     return;
 
-  QString host(action->property("link_url").toUrl().host().toLower().trimmed());
+  QString host(action->property("link_url").toUrl().host());
   int index = -1;
 
   while(!host.isEmpty())

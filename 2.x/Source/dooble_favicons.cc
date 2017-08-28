@@ -222,7 +222,7 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 	if(ok)
 	  query.addBindValue(bytes.toBase64());
 
-	bytes = dooble::s_cryptography->hmac(url.host().trimmed());
+	bytes = dooble::s_cryptography->hmac(url.host());
 	ok &= !bytes.isEmpty();
 
 	if(ok)

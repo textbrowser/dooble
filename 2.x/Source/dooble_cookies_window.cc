@@ -282,7 +282,7 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
 
   if(!m_top_level_items.contains(cookie.domain()))
     {
-      QString text(m_ui.domain_filter->text().trimmed());
+      QString text(m_ui.domain_filter->text().toLower().trimmed());
       QTreeWidgetItem *item = new QTreeWidgetItem
 	(m_ui.tree, QStringList() << cookie.domain());
 
@@ -490,7 +490,7 @@ void dooble_cookies_window::slot_delete_shown(void)
 
 void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 {
-  QString text(m_ui.domain_filter->text().trimmed());
+  QString text(m_ui.domain_filter->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {

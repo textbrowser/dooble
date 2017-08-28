@@ -320,7 +320,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
       QString title(item.title().trimmed());
 
       if(title.isEmpty())
-	title = item.url().toString().trimmed();
+	title = item.url().toString();
 
       if(title.isEmpty())
 	title = tr("Dooble");
@@ -343,7 +343,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   QString title(item.title().trimmed());
 
   if(title.isEmpty())
-    title = item.url().toString().trimmed();
+    title = item.url().toString();
 
   if(title.isEmpty())
     title = tr("Dooble");
@@ -355,8 +355,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   item1->setToolTip(item1->text());
   m_items[item.url()] = item1;
 
-  QTableWidgetItem *item2 = new QTableWidgetItem
-    (item.url().toString().trimmed());
+  QTableWidgetItem *item2 = new QTableWidgetItem(item.url().toString());
 
   item2->setData(Qt::UserRole, item.url());
   item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -479,7 +478,7 @@ void dooble_history_window::slot_populate(void)
       item1->setData(Qt::UserRole, url);
       item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item1->setToolTip(item1->text());
-      item2 = new QTableWidgetItem(url.toString().trimmed());
+      item2 = new QTableWidgetItem(url.toString());
       item2->setData(Qt::UserRole, url);
       item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item2->setToolTip(item2->text());

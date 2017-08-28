@@ -252,7 +252,7 @@ void dooble_settings::prepare_proxy(bool save)
       QNetworkProxy proxy;
 
       proxy.setHostName(m_ui.proxy_host->text().trimmed());
-      proxy.setPassword(m_ui.proxy_password->text().trimmed());
+      proxy.setPassword(m_ui.proxy_password->text());
       proxy.setPort(static_cast<quint16> (m_ui.proxy_port->value()));
 
       if(m_ui.proxy_type->currentIndex() == 0)
@@ -394,8 +394,7 @@ void dooble_settings::restore(void)
 	    s_settings.value("settings_page_index", 0).toInt(),
 	    m_ui.pages->count() - 1));
   m_ui.proxy_host->setText(s_settings.value("proxy_host").toString().trimmed());
-  m_ui.proxy_password->setText
-    (s_settings.value("proxy_password").toString().trimmed());
+  m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
   m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
   m_ui.proxy_type->setCurrentIndex
     (qBound(0,

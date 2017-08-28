@@ -587,8 +587,8 @@ void dooble_page::slot_authentication_required(const QUrl &url,
   Ui_dooble_authentication_dialog ui;
 
   ui.setupUi(&dialog);
-  ui.label->setText(tr("The site %1 is requesting credentials.").
-		    arg(url.toString().trimmed()));
+  ui.label->setText
+    (tr("The site %1 is requesting credentials.").arg(url.toString()));
   dialog.resize(dialog.sizeHint());
 
   if(dialog.exec() == QDialog::Accepted)
@@ -793,7 +793,7 @@ void dooble_page::slot_prepare_backward_menu(void)
       QString title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
-	title = items.at(i).url().toString().trimmed();
+	title = items.at(i).url().toString();
 
       action = m_ui.backward->menu()->addAction
 	(title, this, SLOT(slot_go_to_backward_item(void)));
@@ -816,7 +816,7 @@ void dooble_page::slot_prepare_forward_menu(void)
       QString title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
-	title = items.at(i).url().toString().trimmed();
+	title = items.at(i).url().toString();
 
       action = m_ui.forward->menu()->addAction
 	(title, this, SLOT(slot_go_to_forward_item(void)));
@@ -908,5 +908,5 @@ void dooble_page::slot_show_pull_down_menu(void)
 void dooble_page::slot_url_changed(const QUrl &url)
 {
   m_ui.address->add_item(m_view->icon(), url);
-  m_ui.address->setText(url.toString().trimmed());
+  m_ui.address->setText(url.toString());
 }

@@ -56,7 +56,7 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
   Q_UNUSED(type);
   Q_UNUSED(isMainFrame);
 
-  QString host(url.host().toLower().trimmed());
+  QString host(url.host());
   int index = -1;
 
   while(!host.isEmpty())
