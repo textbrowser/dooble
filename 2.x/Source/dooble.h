@@ -33,8 +33,8 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
+class dooble_accepted_or_blocked_domains;
 class dooble_application;
-class dooble_blocked_domains;
 class dooble_cookies;
 class dooble_cookies_window;
 class dooble_cryptography;
@@ -53,8 +53,8 @@ class dooble: public QMainWindow
   dooble(dooble_web_engine_view *view);
   dooble(void);
   static QPointer<dooble_history> s_history;
+  static dooble_accepted_or_blocked_domains *s_accepted_or_blocked_domains;
   static dooble_application *s_application;
-  static dooble_blocked_domains *s_blocked_domains;
   static dooble_cookies *s_cookies;
   static dooble_cookies_window *s_cookies_window;
   static dooble_cryptography *s_cryptography;

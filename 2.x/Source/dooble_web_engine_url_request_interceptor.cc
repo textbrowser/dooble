@@ -26,7 +26,7 @@
 */
 
 #include "dooble.h"
-#include "dooble_blocked_domains.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 
 dooble_web_engine_url_request_interceptor::
@@ -42,7 +42,7 @@ interceptRequest(QWebEngineUrlRequestInfo &info)
   int index = -1;
 
   while(!host.isEmpty())
-    if(dooble::s_blocked_domains->contains(host))
+    if(dooble::s_accepted_or_blocked_domains->contains(host))
       {
 	info.block(true);
 	return;

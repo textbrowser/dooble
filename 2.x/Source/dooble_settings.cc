@@ -40,7 +40,7 @@
 #include <QtConcurrent>
 
 #include "dooble.h"
-#include "dooble_blocked_domains.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
@@ -679,7 +679,7 @@ void dooble_settings::slot_reset(void)
 
   QStringList list;
 
-  list << "dooble_blocked_domains.db"
+  list << "dooble_accepted_or_blocked_domains.db"
        << "dooble_cookies.db"
        << "dooble_favicons.db"
        << "dooble_history.db"
@@ -770,7 +770,7 @@ void dooble_settings::slot_reset_credentials(void)
   ** Purge existing database data.
   */
 
-  dooble_blocked_domains::purge();
+  dooble_accepted_or_blocked_domains::purge();
   dooble_cookies::purge();
   dooble_favicons::purge();
   dooble_history::purge();
@@ -831,7 +831,7 @@ void dooble_settings::slot_save_credentials(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  dooble_blocked_domains::purge();
+  dooble_accepted_or_blocked_domains::purge();
   dooble_cookies::purge();
   dooble_favicons::purge();
   dooble_history::purge();

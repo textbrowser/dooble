@@ -32,7 +32,7 @@
 #include <QWebEngineSettings>
 
 #include "dooble.h"
-#include "dooble_blocked_domains.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_ui_utilities.h"
@@ -177,7 +177,7 @@ void dooble_web_engine_view::slot_block_domain(void)
 
   while(!host.isEmpty())
     {
-      dooble::s_blocked_domains->block_domain(host);
+      dooble::s_accepted_or_blocked_domains->block_domain(host);
 
       if((index = host.indexOf('.')) > 0)
 	host.remove(0, index + 1);

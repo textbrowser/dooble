@@ -25,19 +25,19 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_blocked_domains_h
-#define dooble_blocked_domains_h
+#ifndef dooble_accepted_or_blocked_domains_h
+#define dooble_accepted_or_blocked_domains_h
 
 #include <QMainWindow>
 
-#include "ui_dooble_blocked_domains.h"
+#include "ui_dooble_accepted_or_blocked_domains.h"
 
-class dooble_blocked_domains: public QMainWindow
+class dooble_accepted_or_blocked_domains: public QMainWindow
 {
   Q_OBJECT
 
  public:
-  dooble_blocked_domains(void);
+  dooble_accepted_or_blocked_domains(void);
   bool contains(const QString &domain) const;
   static void purge(void);
   void block_domain(const QString &domain);
@@ -48,8 +48,8 @@ class dooble_blocked_domains: public QMainWindow
   void resizeEvent(QResizeEvent *event);
 
  private:
-  QHash<QString, char> m_blocked_domains;
-  Ui_dooble_blocked_domains m_ui;
+  QHash<QString, char> m_domains;
+  Ui_dooble_accepted_or_blocked_domains m_ui;
   void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
   void save_settings(void);

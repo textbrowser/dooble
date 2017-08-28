@@ -55,19 +55,19 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI\\dooble.ui \
+                  UI\\dooble_accepted_or_blocked_domains.ui \
                   UI\\dooble_authentication_dialog.ui \
-                  UI\\dooble_blocked_domains.ui \
 		  UI\\dooble_cookies_window.ui \
 		  UI\\dooble_history_window.ui \
                   UI\\dooble_page.ui \
                   UI\\dooble_settings.ui
 
 HEADERS		= Source\\dooble.h \
+                  Source\\dooble_accepted_or_blocked_domains.h \
                   Source\\dooble_address_widget.h \
                   Source\\dooble_address_widget_completer.h \
                   Source\\dooble_address_widget_completer_popup.h \
                   Source\\dooble_application.h \
-                  Source\\dooble_blocked_domains.h \
                   Source\\dooble_cookies.h \
                   Source\\dooble_cookies_window.h \
                   Source\\dooble_favicons.h \
@@ -92,12 +92,12 @@ OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 RESOURCES       += Icons\\icons.qrc
 
 SOURCES		= Source\\dooble.cc \
+                  Source\\dooble_accepted_or_blocked_domains.cc \
                   Source\\dooble_address_widget.cc \
                   Source\\dooble_address_widget_completer.cc \
                   Source\\dooble_address_widget_completer_popup.cc \
                   Source\\dooble_aes256.cc \
                   Source\\dooble_application.cc \
-                  Source\\dooble_blocked_domains.cc \
                   Source\\dooble_cookies.cc \
                   Source\\dooble_cookies_window.cc \
                   Source\\dooble_cryptography.cc \

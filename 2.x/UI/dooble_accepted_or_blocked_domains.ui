@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dooble_blocked_domains</class>
- <widget class="QMainWindow" name="dooble_blocked_domains">
+ <class>dooble_accepted_or_blocked_domains</class>
+ <widget class="QMainWindow" name="dooble_accepted_or_blocked_domains">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dooble: Blocked Domains</string>
+   <string>Dooble: Accepted / Blocked Domains</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Icons/icons.qrc">
@@ -63,7 +63,7 @@
       </attribute>
       <column>
        <property name="text">
-        <string>Blocked</string>
+        <string>Accepted / Blocked</string>
        </property>
       </column>
       <column>

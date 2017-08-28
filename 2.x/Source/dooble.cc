@@ -31,8 +31,8 @@
 #include <QWebEngineProfile>
 
 #include "dooble.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
-#include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -45,8 +45,8 @@
 #include "dooble_web_engine_view.h"
 
 QPointer<dooble_history> dooble::s_history;
+dooble_accepted_or_blocked_domains *dooble::s_accepted_or_blocked_domains = 0;
 dooble_application *dooble::s_application = 0;
-dooble_blocked_domains *dooble::s_blocked_domains = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
@@ -172,8 +172,8 @@ void dooble::connect_signals(void)
 
 void dooble::initialize_static_members(void)
 {
-  if(!s_blocked_domains)
-    s_blocked_domains = new dooble_blocked_domains();
+  if(!s_accepted_or_blocked_domains)
+    s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
 
   if(!s_cookies)
     s_cookies = new dooble_cookies(false, 0);
@@ -575,13 +575,14 @@ void dooble::slot_settings_applied(void)
 
 void dooble::slot_show_blocked_domains(void)
 {
-  s_blocked_domains->showNormal();
+  s_accepted_or_blocked_domains->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_blocked_domains);
+    dooble_ui_utilities::center_window_widget
+      (this, s_accepted_or_blocked_domains);
 
-  s_blocked_domains->activateWindow();
-  s_blocked_domains->raise();
+  s_accepted_or_blocked_domains->activateWindow();
+  s_accepted_or_blocked_domains->raise();
 }
 
 void dooble::slot_show_history(void)

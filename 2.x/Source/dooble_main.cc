@@ -54,8 +54,8 @@ extern "C"
 #include "CocoaInitializer.h"
 #endif
 #include "dooble.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
-#include "dooble_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_favicons.h"
@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)),
-		   dooble::s_blocked_domains,
+		   dooble::s_accepted_or_blocked_domains,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)),

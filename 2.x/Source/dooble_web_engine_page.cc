@@ -29,7 +29,7 @@
 #include <QWebEngineProfile>
 
 #include "dooble.h"
-#include "dooble_blocked_domains.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_web_engine_page.h"
 
 dooble_web_engine_page::dooble_web_engine_page
@@ -60,7 +60,7 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
   int index = -1;
 
   while(!host.isEmpty())
-    if(dooble::s_blocked_domains->contains(host))
+    if(dooble::s_accepted_or_blocked_domains->contains(host))
       return false;
     else if((index = host.indexOf('.')) > 0)
       host.remove(0, index + 1);
