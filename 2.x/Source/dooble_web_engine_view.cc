@@ -142,8 +142,6 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 
 void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 {
-  Q_UNUSED(event);
-
   QMenu *menu = m_page->createStandardContextMenu();
 
   if(!menu)
