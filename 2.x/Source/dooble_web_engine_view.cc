@@ -150,7 +150,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   QAction *action = 0;
   QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
 
-  if(!menu->actions().isEmpty())
+  if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
     menu->addSeparator();
 
   action = menu->addAction
