@@ -42,10 +42,18 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 {
   m_ui.setupUi(this);
   m_ui.table->sortByColumn(1, Qt::AscendingOrder);
+  connect(m_ui.accept_mode,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_radio_button_toggled(bool)));
   connect(m_ui.add,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_add(void)));
+  connect(m_ui.block_mode,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_radio_button_toggled(bool)));
   connect(m_ui.delete_rows,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -446,4 +454,22 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
 void dooble_accepted_or_blocked_domains::slot_populate(void)
 {
   populate();
+}
+
+void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)
+{
+  if(m_ui.accept_mode == sender() && state)
+    {
+      dooble_settings::set_setting
+	("accepted_or_blocked_domains_mode", "accept");
+      m_ui.table->setHorizontalHeaderLabels
+	(QStringList() << tr("Accepted") << tr("Domain"));
+    }
+  else if(m_ui.block_mode == sender())
+    {
+      dooble_settings::set_setting
+	("accepted_or_blocked_domains_mode", "block");
+      m_ui.table->setHorizontalHeaderLabels
+	(QStringList() << tr("Blocked") << tr("Domain"));
+    }
 }

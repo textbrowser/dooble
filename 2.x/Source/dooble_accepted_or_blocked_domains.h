@@ -63,6 +63,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void slot_delete_rows(void);
   void slot_item_changed(QTableWidgetItem *item);
   void slot_populate(void);
+  void slot_radio_button_toggled(bool state);
 };
 
 #endif
