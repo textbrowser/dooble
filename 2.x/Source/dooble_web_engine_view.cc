@@ -150,7 +150,9 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   QAction *action = 0;
   QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
 
-  menu->addSeparator();
+  if(!menu->actions().isEmpty())
+    menu->addSeparator();
+
   action = menu->addAction
     (tr("Block Link's Domain(s)"), this, SLOT(slot_block_domain(void)));
 
@@ -160,6 +162,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     action->setEnabled(false);
 
   menu->exec(mapToGlobal(event->pos()));
+  menu->deleteLater();
 }
 
 void dooble_web_engine_view::slot_block_domain(void)
