@@ -38,13 +38,28 @@ dooble_web_engine_url_request_interceptor(QObject *parent):
 void dooble_web_engine_url_request_interceptor::
 interceptRequest(QWebEngineUrlRequestInfo &info)
 {
-  QString host(info.requestUrl().host());
+  QString host("");
+  QString mode
+    (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
+  bool state = true;
   int index = -1;
+
+  if(mode == "accept")
+    {
+      host = info.firstPartyUrl().host();
+      info.block(true);
+      state = false;
+    }
+  else
+    {
+      host = info.requestUrl().host();
+      state = true;
+    }
 
   while(!host.isEmpty())
     if(dooble::s_accepted_or_blocked_domains->contains(host))
       {
-	info.block(true);
+	info.block(state);
 	return;
       }
     else if((index = host.indexOf('.')) > 0)

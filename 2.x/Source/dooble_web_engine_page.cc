@@ -57,15 +57,22 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
   Q_UNUSED(isMainFrame);
 
   QString host(url.host());
+  QString mode
+    (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
+  bool state = true;
   int index = -1;
+
+  if(mode == "accept")
+    state = true;
+  else
+    state = false;
 
   while(!host.isEmpty())
     if(dooble::s_accepted_or_blocked_domains->contains(host))
-      return false;
+      return state;
     else if((index = host.indexOf('.')) > 0)
       host.remove(0, index + 1);
     else
       break;
-
   return true;
 }
