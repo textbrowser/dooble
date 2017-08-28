@@ -43,7 +43,7 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   m_ui.setupUi(this);
   m_ui.table->sortByColumn(1, Qt::AscendingOrder);
   connect(m_ui.accept_mode,
-	  SIGNAL(toggled(bool)),
+	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slot_radio_button_toggled(bool)));
   connect(m_ui.add,
@@ -51,13 +51,19 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  this,
 	  SLOT(slot_add(void)));
   connect(m_ui.block_mode,
-	  SIGNAL(toggled(bool)),
+	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slot_radio_button_toggled(bool)));
   connect(m_ui.delete_rows,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_rows(void)));
+
+  if(dooble_settings::
+     setting("accepted_or_blocked_domains_mode").toString() == "accept")
+    m_ui.accept_mode->click();
+  else
+    m_ui.block_mode->click();
 }
 
 bool dooble_accepted_or_blocked_domains::contains(const QString &domain) const
