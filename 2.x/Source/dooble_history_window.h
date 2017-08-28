@@ -40,6 +40,8 @@ class dooble_history_window: public QMainWindow
 
  public:
   dooble_history_window(void);
+  void show(QWidget *parent);
+  void showNormal(QWidget *parent);
 
  protected:
   void closeEvent(QCloseEvent *event);
@@ -54,8 +56,7 @@ class dooble_history_window: public QMainWindow
   void save_settings(void);
 
  public slots:
-  void show(QWidget *parent);
-  void showNormal(QWidget *parent);
+  void slot_copy_location(void);
   void slot_delete_pages(void);
   void slot_icon_updated(const QIcon &icon, const QUrl &url);
   void slot_item_double_clicked(QTableWidgetItem *item);

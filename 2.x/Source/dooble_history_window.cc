@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QClipboard>
 #include <QDir>
 #include <QKeyEvent>
 #include <QMenu>
@@ -173,6 +174,24 @@ void dooble_history_window::showNormal(QWidget *parent)
 					   toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_history_window::slot_copy_location(void)
+{
+  QClipboard *clipboard = QApplication::clipboard();
+
+  if(!clipboard)
+    return;
+
+  QTableWidgetItem *item = m_ui.table->currentItem();
+
+  if(!item)
+    return;
+
+  item = m_ui.table->item(item->row(), 1);
+
+  if(item)
+    clipboard->setText(item->text());
 }
 
 void dooble_history_window::slot_delete_pages(void)
@@ -614,6 +633,8 @@ void dooble_history_window::slot_show_context_menu(const QPoint &point)
 {
   QMenu menu(this);
 
-  menu.addAction(tr("Delete Page(s)"), this, SLOT(slot_delete_pages(void)));
+  menu.addAction(tr("&Copy Location"), this, SLOT(slot_copy_location(void)));
+  menu.addSeparator();
+  menu.addAction(tr("&Delete Page(s)"), this, SLOT(slot_delete_pages(void)));
   menu.exec(mapToGlobal(point));
 }
