@@ -257,6 +257,12 @@ void dooble_cookies::slot_populate(void)
 
   QString database_name(QString("dooble_cookies_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
+  QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+
+  disconnect(QWebEngineProfile::defaultProfile()->cookieStore(),
+	     SIGNAL(cookieAdded(const QNetworkCookie &)),
+	     dooble::s_cookies,
+	     SLOT(slot_cookie_added(const QNetworkCookie &)));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -339,7 +345,6 @@ void dooble_cookies::slot_populate(void)
 		  continue;
 		}
 
-	      QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
 	      bool is_favorite = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
 		 query.value(0).toByteArray());
@@ -353,5 +358,9 @@ void dooble_cookies::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+	  SIGNAL(cookieAdded(const QNetworkCookie &)),
+	  dooble::s_cookies,
+	  SLOT(slot_cookie_added(const QNetworkCookie &)));
   QApplication::restoreOverrideCursor();
 }
