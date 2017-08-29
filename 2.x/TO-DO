@@ -31,3 +31,4 @@ Remaining Items
 4.     Bookmarks.
 5.     Complete default WebEngine context menu.
 6.     Optional credentials.
+7.     UTC time zone option (qputenv("TZ", ":UTC")).
