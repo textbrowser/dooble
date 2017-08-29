@@ -790,13 +790,14 @@ void dooble_page::slot_prepare_backward_menu(void)
   for(int i = items.size() - 1; i >= 0; i--)
     {
       QAction *action = 0;
+      QIcon icon(dooble_favicons::icon(items.at(i).url()));
       QString title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
 	title = items.at(i).url().toString();
 
       action = m_ui.backward->menu()->addAction
-	(title, this, SLOT(slot_go_to_backward_item(void)));
+	(icon, title, this, SLOT(slot_go_to_backward_item(void)));
       action->setProperty("index", i);
     }
 }
@@ -813,13 +814,14 @@ void dooble_page::slot_prepare_forward_menu(void)
   for(int i = 0; i < items.size(); i++)
     {
       QAction *action = 0;
+      QIcon icon(dooble_favicons::icon(items.at(i).url()));
       QString title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
 	title = items.at(i).url().toString();
 
       action = m_ui.forward->menu()->addAction
-	(title, this, SLOT(slot_go_to_forward_item(void)));
+	(icon, title, this, SLOT(slot_go_to_forward_item(void)));
       action->setProperty("index", i);
     }
 }
