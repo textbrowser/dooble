@@ -163,9 +163,15 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 			     this,
 			     SLOT(slot_accept_or_block_domain(void)));
 
-
-  if(context_menu_data.isValid() && context_menu_data.linkUrl().isValid())
-    action->setProperty("link_url", context_menu_data.linkUrl());
+  if(context_menu_data.isValid())
+    {
+      if(context_menu_data.linkUrl().isValid())
+	action->setProperty("link_url", context_menu_data.linkUrl());
+      else if(context_menu_data.mediaUrl().isValid())
+	action->setProperty("link_url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
   else
     action->setEnabled(false);
 
