@@ -568,6 +568,7 @@ void dooble_cookies_window::slot_item_selection_changed(void)
   if(cookie.isEmpty())
     {
       m_ui.domain->setText(item->text(0));
+      m_ui.domain->setCursorPosition(0);
       m_ui.expiration_date->setText("");
       m_ui.name->setText("");
       m_ui.path->setText("");
@@ -578,6 +579,7 @@ void dooble_cookies_window::slot_item_selection_changed(void)
   if(item->flags() & Qt::ItemIsUserCheckable)
     {
       m_ui.domain->setText(cookie.at(0).domain());
+      m_ui.domain->setCursorPosition(0);
       m_ui.expiration_date->setText("");
       m_ui.http_only->setChecked(false);
       m_ui.name->setText("");
@@ -589,13 +591,18 @@ void dooble_cookies_window::slot_item_selection_changed(void)
   else
     {
       m_ui.domain->setText(cookie.at(0).domain());
+      m_ui.domain->setCursorPosition(0);
       m_ui.expiration_date->setText(cookie.at(0).expirationDate().toString());
+      m_ui.expiration_date->setCursorPosition(0);
       m_ui.http_only->setChecked(cookie.at(0).isHttpOnly());
       m_ui.name->setText(cookie.at(0).name());
+      m_ui.name->setCursorPosition(0);
       m_ui.path->setText(cookie.at(0).path());
+      m_ui.path->setCursorPosition(0);
       m_ui.secure->setChecked(cookie.at(0).isSecure());
       m_ui.session->setChecked(cookie.at(0).isSessionCookie());
       m_ui.value->setText(cookie.at(0).value());
+      m_ui.value->setCursorPosition(0);
     }
 }
 
