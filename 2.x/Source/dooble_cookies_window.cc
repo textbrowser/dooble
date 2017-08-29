@@ -551,7 +551,16 @@ void dooble_cookies_window::slot_item_selection_changed(void)
   QTreeWidgetItem *item = m_ui.tree->currentItem();
 
   if(!item)
-    return;
+    {
+      m_ui.domain->setText("");
+      m_ui.expiration_date->setText("");
+      m_ui.name->setText("");
+      m_ui.path->setText("");
+      m_ui.value->setText("");
+      return;
+    }
+  else
+    item->setSelected(true);
 
   QList<QNetworkCookie> cookie
     (QNetworkCookie::parseCookies(item->data(1, Qt::UserRole).toByteArray()));
