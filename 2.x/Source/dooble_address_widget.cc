@@ -100,7 +100,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      arg(m_bookmark->sizeHint().width() +
 	 m_information->sizeHint().width() +
 	 frame_width + 10).
-     arg(m_pull_down->sizeHint().width() + frame_width + 5));
+     arg(m_pull_down->sizeHint().width() + frame_width + 10));
   slot_populate();
 }
 
