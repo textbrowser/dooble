@@ -22,6 +22,7 @@ Completed Items
 18.    History. Will require a sub-process for removing expired data.
 19.    Main menu bar visibility.
 20.    WebEngine context menu should allow for blocking sites.
+21.    UTC time zone option (qputenv("TZ", ":UTC")).
 
 Remaining Items
 
@@ -31,4 +32,3 @@ Remaining Items
 4.     Bookmarks.
 5.     Complete default WebEngine context menu.
 6.     Optional credentials.
-7.     UTC time zone option (qputenv("TZ", ":UTC")).

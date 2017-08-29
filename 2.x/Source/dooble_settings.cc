@@ -416,6 +416,12 @@ void dooble_settings::restore(void)
   else
     s_settings["icon_set"] = "SnipIcons";
 
+  m_ui.utc_time_zone->setChecked
+    (s_settings.value("utc_time_zone", false).toBool());
+
+  if(m_ui.utc_time_zone->isChecked())
+    qputenv("TZ", ":UTC");
+
   m_ui.xss_auditing->setChecked
     (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
@@ -543,6 +549,12 @@ void dooble_settings::slot_apply(void)
      m_ui.animated_scrolling->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
+
+  if(m_ui.utc_time_zone->isChecked())
+    qputenv("TZ", ":UTC");
+  else
+    qunsetenv("TZ");
+
   prepare_proxy(true);
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
@@ -569,6 +581,7 @@ void dooble_settings::slot_apply(void)
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
+  set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   prepare_icons();
   QApplication::restoreOverrideCursor();

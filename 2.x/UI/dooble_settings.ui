@@ -485,8 +485,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>384</width>
-               <height>588</height>
+               <width>651</width>
+               <height>631</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -906,6 +906,16 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="utc_time_zone">
+                <property name="toolTip">
+                 <string>Please restart Dooble if changed.</string>
+                </property>
+                <property name="text">
+                 <string>UTC Time Zone</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <spacer name="verticalSpacer_5">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -1101,6 +1111,7 @@
   <tabstop>proxy_port</tabstop>
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
+  <tabstop>utc_time_zone</tabstop>
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
