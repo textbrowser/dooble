@@ -36,6 +36,9 @@
       </item>
       <item>
        <widget class="QRadioButton" name="accept_mode">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only the specified domains may be visited.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Accept Mode</string>
         </property>
@@ -43,6 +46,9 @@
       </item>
       <item>
        <widget class="QRadioButton" name="block_mode">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Access to the specified domains will be restricted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Block Mode</string>
         </property>
