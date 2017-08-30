@@ -196,7 +196,6 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
       {
 	QSqlQuery query(db);
 
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("UPDATE dooble_history SET favicon = ? WHERE url_digest = ?");
 
@@ -280,7 +279,6 @@ void dooble_history::save_item(const QIcon &icon,
 		   "title TEXT NOT NULL, "
 		   "url TEXT NOT NULL, "
 		   "url_digest TEXT PRIMARY KEY NOT NULL)");
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("INSERT OR REPLACE INTO dooble_history "
 		      "(favicon, last_visited, title, url, url_digest) "
 		      "VALUES (?, ?, ?, ?, ?)");

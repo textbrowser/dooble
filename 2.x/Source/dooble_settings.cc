@@ -119,6 +119,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["browsing_history_days"] = 15;
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
+  s_settings["credentials_enabled"] = false;
   s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
   s_settings["main_menu_bar_visible"] = true;
@@ -147,7 +148,8 @@ bool dooble_settings::has_dooble_credentials(void)
 {
   return !setting("authentication_iteration_count").isNull() &&
     !setting("authentication_salt").isNull() &&
-    !setting("authentication_salted_password").isNull();
+    !setting("authentication_salted_password").isNull() &&
+    setting("credentials_enabled").toBool();
 }
 
 bool dooble_settings::set_setting(const QString &key, const QVariant &value)
@@ -377,6 +379,8 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("cookie_policy_index", 2).toInt(),
 	    m_ui.cookie_policy->count() - 1));
+  m_ui.credentials->setChecked
+    (s_settings.value("credentials_enabled", false).toBool());
   m_ui.denote_private_tabs->setChecked
     (s_settings.value("denote_private_tabs", false).toBool());
   m_ui.iterations->setValue
@@ -525,6 +529,69 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
 
 void dooble_settings::slot_apply(void)
 {
+  if(m_ui.credentials->isChecked() != setting("credentials_enabled").toBool())
+    {
+      show_panel(PRIVACY_PANEL);
+
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
+      if(m_ui.credentials->isChecked())
+	mb.setText
+	  (tr("You are about to enable temporary credentials. "
+	      "Existing database data will be removed. New data will be "
+	      "stored as ciphertext. Continue?"));
+      else
+	mb.setText
+	  (tr("You are about to disable credentials. Existing database data "
+	      "will be removed. New data will be stored as plaintext. "
+	      "Continue?"));
+
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	{
+	  m_ui.credentials->setChecked(true);
+	  return;
+	}
+
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+      /*
+      ** Remove settings.
+      */
+
+      m_ui.iterations->setValue(m_ui.iterations->minimum());
+      remove_setting("authentication_iteration_count");
+      remove_setting("authentication_salt");
+      remove_setting("authentication_salted_password");
+      emit dooble_credentials_authenticated(false);
+
+      /*
+      ** Generate temporary credentials.
+      */
+
+      QByteArray random_bytes(dooble_random::random_bytes(96));
+
+      dooble::s_cryptography->setAuthenticated(false);
+      dooble::s_cryptography->setKeys
+	(random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+
+      /*
+      ** Purge existing database data.
+      */
+
+      dooble_accepted_or_blocked_domains::purge();
+      dooble_cookies::purge();
+      dooble_favicons::purge();
+      dooble_history::purge();
+      QApplication::restoreOverrideCursor();
+    }
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
@@ -563,6 +630,7 @@ void dooble_settings::slot_apply(void)
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
+  set_setting("credentials_enabled", m_ui.credentials->isChecked());
   set_setting("denote_private_tabs", m_ui.denote_private_tabs->isChecked());
   set_setting("icon_set_index", m_ui.theme->currentIndex());
 

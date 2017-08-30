@@ -183,7 +183,6 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 		   "temporary INTEGER NOT NULL DEFAULT 1, "
 		   "url_digest TEXT PRIMARY KEY NOT NULL, "
 		   "url_host_digest TEXT NOT NULL)");
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_favicons "
 	   "(favicon, temporary, url_digest, url_host_digest) "

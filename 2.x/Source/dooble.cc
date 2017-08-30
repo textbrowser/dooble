@@ -45,6 +45,7 @@
 #include "dooble_web_engine_view.h"
 
 QPointer<dooble_history> dooble::s_history;
+bool dooble::s_containers_populated = false;
 dooble_accepted_or_blocked_domains *dooble::s_accepted_or_blocked_domains = 0;
 dooble_application *dooble::s_application = 0;
 dooble_cookies *dooble::s_cookies = 0;
@@ -67,6 +68,14 @@ dooble::dooble(dooble_page *page):QMainWindow()
   setMenuBar(0);
 #endif
   new_page(page);
+
+  if(!s_containers_populated)
+    if(s_cryptography->as_plaintext())
+      {
+	m_populate_containers_timer.setSingleShot(true);
+	m_populate_containers_timer.start(2500);
+	s_containers_populated = true;
+      }
 }
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
@@ -81,6 +90,14 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   setMenuBar(0);
 #endif
   new_page(view);
+
+  if(!s_containers_populated)
+    if(s_cryptography->as_plaintext())
+      {
+	m_populate_containers_timer.setSingleShot(true);
+	m_populate_containers_timer.start(2500);
+	s_containers_populated = true;
+      }
 }
 
 dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
@@ -113,6 +130,11 @@ void dooble::closeEvent(QCloseEvent *event)
 
 void dooble::connect_signals(void)
 {
+  connect(&m_populate_containers_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_populate_containers_timer_timeout(void)),
+	  Qt::UniqueConnection);
   connect(m_ui.menu_edit,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -168,6 +190,11 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_settings_applied(void)),
 	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  dooble::s_application,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  Qt::UniqueConnection);
 }
 
 void dooble::initialize_static_members(void)
@@ -187,7 +214,12 @@ void dooble::initialize_static_members(void)
     }
 
   if(!s_cryptography)
-    s_cryptography = new dooble_cryptography();
+    {
+      if(dooble_settings::setting("credentials_enabled").toBool())
+	s_cryptography = new dooble_cryptography();
+      else
+	s_cryptography = new dooble_cryptography(QByteArray(), QByteArray());
+    }
 
   if(!s_history)
     s_history = new dooble_history();
@@ -553,6 +585,11 @@ void dooble::slot_open_url(const QUrl &url)
 
   if(page)
     page->load(url);
+}
+
+void dooble::slot_populate_containers_timer_timeout(void)
+{
+  emit dooble_credentials_authenticated(true);
 }
 
 void dooble::slot_quit_dooble(void)

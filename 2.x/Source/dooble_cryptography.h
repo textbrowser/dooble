@@ -42,6 +42,7 @@ class dooble_cryptography
   QByteArray hmac(const QString &message) const;
   QByteArray mac_then_decrypt(const QByteArray &data) const;
   QPair<QByteArray, QByteArray> keys(void) const;
+  bool as_plaintext(void) const;
   bool authenticated(void) const;
   static bool memcmp(const QByteArray &a, const QByteArray &b);
   void authenticate(const QByteArray &salt,
@@ -57,6 +58,7 @@ class dooble_cryptography
  private:
   QByteArray m_authentication_key;
   QByteArray m_encryption_key;
+  bool m_as_plaintext;
   bool m_authenticated;
 };
 

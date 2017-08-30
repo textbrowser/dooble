@@ -29,6 +29,7 @@
 #define dooble_h
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include "dooble_settings.h"
 #include "ui_dooble.h"
@@ -67,7 +68,9 @@ class dooble: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
+  static bool s_containers_populated;
   void connect_signals(void);
   void initialize_static_members(void);
   void new_page(bool is_private);
@@ -92,6 +95,7 @@ class dooble: public QMainWindow
   void slot_new_window(void);
   void slot_open_tab_as_new_window(int index);
   void slot_open_url(const QUrl &url);
+  void slot_populate_containers_timer_timeout(void);
   void slot_quit_dooble(void);
   void slot_settings_applied(void);
   void slot_show_blocked_domains(void);
@@ -101,6 +105,9 @@ class dooble: public QMainWindow
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
   void slot_title_changed(const QString &title);
+
+ signals:
+  void dooble_credentials_authenticated(bool state);
 };
 
 #endif

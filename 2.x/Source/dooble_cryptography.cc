@@ -37,13 +37,23 @@
 dooble_cryptography::dooble_cryptography
 (const QByteArray &authentication_key, const QByteArray &encryption_key)
 {
+  m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = authentication_key;
   m_encryption_key = encryption_key;
+
+  if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
+    {
+      m_as_plaintext = true;
+      m_authenticated = true;
+      m_authentication_key.clear();
+      m_encryption_key.clear();
+    }
 }
 
 dooble_cryptography::dooble_cryptography(void)
 {
+  m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = dooble_random::random_bytes(64);
   m_encryption_key = dooble_random::random_bytes(32);
@@ -51,6 +61,9 @@ dooble_cryptography::dooble_cryptography(void)
 
 QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 {
+  if(m_as_plaintext)
+    return data;
+
   QByteArray bytes;
   dooble_aes256 aes256(m_encryption_key);
 
@@ -64,16 +77,25 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 
 QByteArray dooble_cryptography::hmac(const QByteArray &message) const
 {
-  return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
+  if(m_as_plaintext)
+    return message;
+  else
+    return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
 }
 
 QByteArray dooble_cryptography::hmac(const QString &message) const
 {
-  return dooble_hmac::sha3_512_hmac(m_authentication_key, message.toUtf8());
+  if(m_as_plaintext)
+    return message.toUtf8();
+  else
+    return dooble_hmac::sha3_512_hmac(m_authentication_key, message.toUtf8());
 }
 
 QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
 {
+  if(m_as_plaintext)
+    return data;
+
   QByteArray computed_mac;
   QByteArray mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
 
@@ -93,6 +115,11 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
 QPair<QByteArray, QByteArray> dooble_cryptography::keys(void) const
 {
   return QPair<QByteArray, QByteArray> (m_authentication_key, m_encryption_key);
+}
+
+bool dooble_cryptography::as_plaintext(void) const
+{
+  return m_as_plaintext;
 }
 
 bool dooble_cryptography::authenticated(void) const

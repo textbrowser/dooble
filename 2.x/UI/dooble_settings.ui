@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -485,8 +485,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>631</height>
+               <width>635</width>
+               <height>626</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -540,9 +540,15 @@
                </layout>
               </item>
               <item>
-               <widget class="QGroupBox" name="groupBox">
+               <widget class="QGroupBox" name="credentials">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If Credentials is not enabled, data will be stored as plaintext.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
                 <property name="title">
                  <string>Credentials</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_6">
                  <item>
@@ -908,7 +914,7 @@
               <item>
                <widget class="QCheckBox" name="utc_time_zone">
                 <property name="toolTip">
-                 <string>Please restart Dooble if changed.</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please restart Dooble if UTC Time Zone is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="text">
                  <string>UTC Time Zone</string>
