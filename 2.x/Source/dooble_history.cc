@@ -33,6 +33,7 @@
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
+#include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_settings.h"
 
@@ -167,15 +168,18 @@ void dooble_history::remove_item(const QUrl &url)
 
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 {
-  if(!icon.isNull())
-    if(m_history.contains(url))
-      {
-	QHash<int, QVariant> hash(m_history.value(url));
+  if(m_history.contains(url))
+    {
+      QHash<int, QVariant> hash(m_history.value(url));
 
+      if(icon.isNull())
+	hash[FAVICON] = dooble_favicons::icon(url);
+      else
 	hash[FAVICON] = icon;
-	m_history[url] = hash;
-	emit icon_updated(icon, url);
-      }
+
+      m_history[url] = hash;
+      emit icon_updated(hash[FAVICON].value<QIcon> (), url);
+    }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -208,7 +212,10 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 	  {
 	    QDataStream out(&buffer);
 
-	    out << icon;
+	    if(icon.isNull())
+	      out << dooble_favicons::icon(url);
+	    else
+	      out << icon;
 
 	    if(out.status() != QDataStream::Ok)
 	      bytes.clear();
@@ -216,6 +223,7 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 	else
 	  bytes.clear();
 
+	query.addBindValue(bytes.toBase64());
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 	query.exec();
@@ -236,7 +244,11 @@ void dooble_history::save_item(const QIcon &icon,
 	{
 	  QHash<int, QVariant> hash;
 
-	  hash[FAVICON] = icon;
+	  if(icon.isNull())
+	    hash[FAVICON] = dooble_favicons::icon(item.url());
+	  else
+	    hash[FAVICON] = icon;
+
 	  hash[LAST_VISITED] = item.lastVisited();
 	  hash[TITLE] = item.title();
 	  hash[URL] = item.url();
@@ -246,7 +258,7 @@ void dooble_history::save_item(const QIcon &icon,
 	      (item.url().toEncoded());
 
 	  m_history[item.url()] = hash;
-	  emit new_item(icon, item);
+	  emit new_item(hash[FAVICON].value<QIcon> (), item);
 	}
       else
 	emit item_updated(icon, item);
@@ -416,6 +428,9 @@ void dooble_history::slot_populate(void)
 
 	      if(data3.isEmpty())
 		continue;
+
+	      if(icon.isNull())
+		icon = dooble_favicons::icon(QUrl::fromEncoded(data3));
 
 	      QHash<int, QVariant> hash;
 

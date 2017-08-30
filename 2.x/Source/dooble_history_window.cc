@@ -33,6 +33,7 @@
 #include <QSqlQuery>
 
 #include "dooble.h"
+#include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_cryptography.h"
@@ -359,7 +360,10 @@ void dooble_history_window::slot_icon_updated(const QIcon &icon,
   if(!item)
     return;
 
-  item->setIcon(icon);
+  if(icon.isNull())
+    item->setIcon(dooble_favicons::icon(url));
+  else
+    item->setIcon(icon);
 }
 
 void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
@@ -399,8 +403,6 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
 void dooble_history_window::slot_item_updated(const QIcon &icon,
 					      const QWebEngineHistoryItem &item)
 {
-  Q_UNUSED(icon);
-
   if(!item.isValid())
     return;
 
@@ -408,6 +410,13 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 
   if(!item1)
     return;
+  else
+    {
+      if(icon.isNull())
+	item1->setIcon(dooble_favicons::icon(item.url()));
+      else
+	item1->setIcon(icon);
+    }
 
   QTableWidgetItem *item2 = m_ui.table->item(item1->row(), 0);
 
@@ -447,7 +456,12 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(title.isEmpty())
     title = tr("Dooble");
 
-  QTableWidgetItem *item1 = new QTableWidgetItem(icon, title);
+  QTableWidgetItem *item1 = 0;
+
+  if(icon.isNull())
+    item1 = new QTableWidgetItem(dooble_favicons::icon(item.url()), title);
+  else
+    item1 = new QTableWidgetItem(icon, title);
 
   item1->setData(Qt::UserRole, item.url());
   item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
