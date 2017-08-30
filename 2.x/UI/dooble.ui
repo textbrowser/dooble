@@ -67,27 +67,6 @@
    <addaction name="menu_edit"/>
    <addaction name="menu_tools"/>
   </widget>
-  <action name="action_New_Tab">
-   <property name="text">
-    <string>New &amp;Tab</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+T</string>
-   </property>
-  </action>
-  <action name="actionNew_Window">
-   <property name="text">
-    <string>New &amp;Window</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+N</string>
-   </property>
-  </action>
-  <action name="action_Quit">
-   <property name="text">
-    <string>&amp;Quit</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>
