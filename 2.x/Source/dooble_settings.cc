@@ -569,17 +569,25 @@ void dooble_settings::slot_apply(void)
       remove_setting("authentication_iteration_count");
       remove_setting("authentication_salt");
       remove_setting("authentication_salted_password");
-      emit dooble_credentials_authenticated(false);
 
-      /*
-      ** Generate temporary credentials.
-      */
+      if(m_ui.credentials->isChecked())
+	{
+	  /*
+	  ** Generate temporary credentials.
+	  */
 
-      QByteArray random_bytes(dooble_random::random_bytes(96));
+	  QByteArray random_bytes(dooble_random::random_bytes(96));
 
-      dooble::s_cryptography->setAuthenticated(false);
-      dooble::s_cryptography->setKeys
-	(random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+	  dooble::s_cryptography->setAuthenticated(false);
+	  dooble::s_cryptography->setKeys
+	    (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+	  emit dooble_credentials_authenticated(false);
+	}
+      else
+	{
+	  dooble::s_cryptography->setKeys(QByteArray(), QByteArray());
+	  emit dooble_credentials_authenticated(true);
+	}
 
       /*
       ** Purge existing database data.
@@ -728,10 +736,13 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	ok = false;
 
       if(ok)
-	QMessageBox::information
-	  (this,
-	   tr("Dooble: Information"),
-	   tr("Your credentials have been prepared."));
+	{
+	  set_setting("credentials_enabled", true);
+	  QMessageBox::information
+	    (this,
+	     tr("Dooble: Information"),
+	     tr("Your credentials have been prepared."));
+	}
       else
 	QMessageBox::critical
 	  (this,

@@ -55,7 +55,6 @@ dooble_page::dooble_page(bool is_private,
   m_is_private = is_private;
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
-  m_ui.authenticate->setVisible(false);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
   m_ui.find_frame->setVisible(false);
@@ -107,10 +106,6 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(show_cookies(void)),
 	  this,
 	  SLOT(slot_show_cookies(void)));
-  connect(m_ui.authenticate,
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(slot_authenticate(void)));
   connect(m_ui.backward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -337,8 +332,6 @@ void dooble_page::prepare_icons(void)
     m_settings_action->setIcon
       (QIcon(QString(":/%1/16/settings.png").arg(icon_set)));
 
-  m_ui.authenticate->setIcon
-    (QIcon(QString(":/%1/32/authenticate.png").arg(icon_set)));
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
   m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
@@ -504,9 +497,6 @@ void dooble_page::resizeEvent(QResizeEvent *event)
   QFontMetrics fm(m_ui.link_hovered->fontMetrics());
   int difference = 15;
 
-  if(m_ui.authenticate->isVisible())
-    difference += 25;
-
   if(m_ui.is_private->isVisible())
     difference += 25;
 
@@ -606,44 +596,17 @@ void dooble_page::slot_dooble_credentials_authenticated(bool state)
     {
       if(m_authentication_action)
 	m_authentication_action->setEnabled(false);
-
-      m_ui.authenticate->setEnabled(false);
-      m_ui.authenticate->setToolTip
-	(tr("Dooble credentials have been authenticated."));
     }
   else
     {
       if(m_authentication_action)
 	m_authentication_action->setEnabled
 	  (dooble_settings::has_dooble_credentials());
-
-      m_ui.authenticate->setEnabled(true);
-
-      if(dooble_settings::has_dooble_credentials())
-	m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
-      else
-	m_ui.authenticate->setToolTip
-	  (tr("Please prepare Dooble's credentials via the "
-	      "Settings window's Privacy panel."));
     }
 }
 
 void dooble_page::slot_dooble_credentials_created(void)
 {
-  if(dooble::s_cryptography->authenticated())
-    {
-      m_ui.authenticate->setEnabled(false);
-      m_ui.authenticate->setToolTip
-	(tr("Dooble credentials have been authenticated."));
-      return;
-    }
-
-  if(dooble_settings::has_dooble_credentials())
-    m_ui.authenticate->setToolTip(tr("Dooble Credentials Authentication"));
-  else
-    m_ui.authenticate->setToolTip
-      (tr("Please prepare Dooble's credentials via the "
-	  "Settings window's Privacy panel."));
 }
 
 void dooble_page::slot_escape(void)
@@ -718,9 +681,6 @@ void dooble_page::slot_link_hovered(const QString &url)
 {
   QFontMetrics fm(m_ui.link_hovered->fontMetrics());
   int difference = 15;
-
-  if(m_ui.authenticate->isVisible())
-    difference += 25;
 
   if(m_ui.is_private->isVisible())
     difference += 25;

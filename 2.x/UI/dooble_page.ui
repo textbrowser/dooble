@@ -340,22 +340,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QToolButton" name="authenticate">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
@@ -379,7 +363,6 @@
   <tabstop>find_previous</tabstop>
   <tabstop>find_match_case</tabstop>
   <tabstop>link_hovered</tabstop>
-  <tabstop>authenticate</tabstop>
  </tabstops>
  <resources/>
  <connections/>

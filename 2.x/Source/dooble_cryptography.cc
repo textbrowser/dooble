@@ -180,4 +180,12 @@ void dooble_cryptography::setKeys(const QByteArray &authentication_key,
 {
   m_authentication_key = authentication_key;
   m_encryption_key = encryption_key;
+
+  if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
+    {
+      m_as_plaintext = true;
+      m_authenticated = true;
+      m_authentication_key.clear();
+      m_encryption_key.clear();
+    }
 }
