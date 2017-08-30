@@ -416,6 +416,9 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
     case 1: // Today
     case 2: // Yesterday
       {
+	if(m_ui.period->currentRow() == 2)
+	  period = period.addDays(-1);
+
 	QDateTime dateTime(item.lastVisited());
 
 	if(dateTime.date() == period.date())
@@ -435,6 +438,9 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
       }
     default:
       {
+	if(m_ui.period->currentRow() == 4)
+	  period = period.addMonths(-1);
+
 	QDateTime dateTime(item.lastVisited());
 
 	if(dateTime.date().month() == period.date().month() &&
