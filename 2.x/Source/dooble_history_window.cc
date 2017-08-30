@@ -124,6 +124,83 @@ void dooble_history_window::save_settings(void)
     ("history_window_splitter_state", m_ui.splitter->saveState().toBase64());
 }
 
+void dooble_history_window::set_row_hidden(int i)
+{
+  QTableWidgetItem *item1 = m_ui.table->item(i, 0);
+  QTableWidgetItem *item2 = m_ui.table->item(i, 1);
+  QTableWidgetItem *item3 = m_ui.table->item(i, 2);
+
+  if(!item1 || !item2 || !item3)
+    return;
+
+  QDateTime period(QDateTime::currentDateTime());
+  QString text(m_ui.search->text().toLower().trimmed());
+
+  switch(m_ui.period->currentRow())
+    {
+    case 0: // All
+      {
+	if(text.isEmpty())
+	  m_ui.table->setRowHidden(i, false);
+	else if(item1->text().toLower().contains(text) ||
+		item2->text().toLower().contains(text))
+	  m_ui.table->setRowHidden(i, false);
+	else
+	  m_ui.table->setRowHidden(i, true);
+
+	break;
+      }
+    case 1: // Today
+    case 2: // Yesterday
+      {
+	if(m_ui.period->currentRow() == 2)
+	  period = period.addDays(-1);
+
+	QDateTime dateTime
+	  (QDateTime::fromString(item3->text(), Qt::ISODate));
+
+	if(dateTime.date() == period.date())
+	  {
+	    if(text.isEmpty())
+	      m_ui.table->setRowHidden(i, false);
+	    else if(item1->text().toLower().contains(text) ||
+		    item2->text().toLower().contains(text))
+	      m_ui.table->setRowHidden(i, false);
+	    else
+	      m_ui.table->setRowHidden(i, true);
+	  }
+	else
+	  m_ui.table->setRowHidden(i, true);
+
+	break;
+      }
+    default:
+      {
+	if(m_ui.period->currentRow() == 4)
+	  period = period.addMonths(-1);
+
+	QDateTime dateTime
+	  (QDateTime::fromString(item3->text(), Qt::ISODate));
+
+	if(dateTime.date().month() == period.date().month() &&
+	   dateTime.date().year() == period.date().year())
+	  {
+	    if(text.isEmpty())
+	      m_ui.table->setRowHidden(i, false);
+	    else if(item1->text().toLower().contains(text) ||
+		    item2->text().toLower().contains(text))
+	      m_ui.table->setRowHidden(i, false);
+	    else
+	      m_ui.table->setRowHidden(i, true);
+	  }
+	else
+	  m_ui.table->setRowHidden(i, true);
+
+	break;
+      }
+    }
+}
+
 void dooble_history_window::show(QWidget *parent)
 {
   m_parent = parent;
@@ -350,7 +427,10 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
   QTableWidgetItem *item3 = m_ui.table->item(item1->row(), 2);
 
   if(item3)
-    item3->setText(item.lastVisited().toString(Qt::ISODate));
+    {
+      item3->setText(item.lastVisited().toString(Qt::ISODate));
+      set_row_hidden(item3->row());
+    }
 }
 
 void dooble_history_window::slot_new_item(const QIcon &icon,
@@ -395,72 +475,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   ** Hide or show the new row.
   */
 
-  QDateTime period(QDateTime::currentDateTime());
-  QString text(m_ui.search->text().toLower().trimmed());
-  int i = m_ui.table->rowCount() - 1;
-
-  switch(m_ui.period->currentRow())
-    {
-    case 0: // All
-      {
-	if(text.isEmpty())
-	  m_ui.table->setRowHidden(i, false);
-	else if(item1->text().toLower().contains(text) ||
-		item2->text().toLower().contains(text))
-	  m_ui.table->setRowHidden(i, false);
-	else
-	  m_ui.table->setRowHidden(i, true);
-
-	break;
-      }
-    case 1: // Today
-    case 2: // Yesterday
-      {
-	if(m_ui.period->currentRow() == 2)
-	  period = period.addDays(-1);
-
-	QDateTime dateTime(item.lastVisited());
-
-	if(dateTime.date() == period.date())
-	  {
-	    if(text.isEmpty())
-	      m_ui.table->setRowHidden(i, false);
-	    else if(item1->text().toLower().contains(text) ||
-		    item2->text().toLower().contains(text))
-	      m_ui.table->setRowHidden(i, false);
-	    else
-	      m_ui.table->setRowHidden(i, true);
-	  }
-	else
-	  m_ui.table->setRowHidden(i, true);
-
-	break;
-      }
-    default:
-      {
-	if(m_ui.period->currentRow() == 4)
-	  period = period.addMonths(-1);
-
-	QDateTime dateTime(item.lastVisited());
-
-	if(dateTime.date().month() == period.date().month() &&
-	   dateTime.date().year() == period.date().year())
-	  {
-	    if(text.isEmpty())
-	      m_ui.table->setRowHidden(i, false);
-	    else if(item1->text().toLower().contains(text) ||
-		    item2->text().toLower().contains(text))
-	      m_ui.table->setRowHidden(i, false);
-	    else
-	      m_ui.table->setRowHidden(i, true);
-	  }
-	else
-	  m_ui.table->setRowHidden(i, true);
-
-	break;
-      }
-    }
-
+  set_row_hidden(m_ui.table->rowCount() - 1);
   m_ui.table->setSortingEnabled(true);
 }
 
