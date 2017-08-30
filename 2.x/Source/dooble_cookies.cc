@@ -85,7 +85,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 
   if(cookie.isSessionCookie())
     {
-      if(dooble_settings::cookie_policy_string(dooble::s_settings->
+      if(dooble_settings::cookie_policy_string(dooble_settings::
 					       setting("cookie_policy_index").
 					       toInt()) != "save_all")
 	return;
