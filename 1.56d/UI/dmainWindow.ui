@@ -18,16 +18,7 @@
     <property name="spacing">
      <number>5</number>
     </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>0</number>
     </property>
     <item>
@@ -112,16 +103,7 @@
            <property name="spacing">
             <number>0</number>
            </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
+           <property name="margin">
             <number>0</number>
            </property>
            <item>
@@ -141,16 +123,7 @@
            <property name="spacing">
             <number>0</number>
            </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
+           <property name="margin">
             <number>0</number>
            </property>
            <item>
@@ -254,16 +227,7 @@
           <property name="spacing">
            <number>5</number>
           </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
+          <property name="margin">
            <number>0</number>
           </property>
          </layout>
@@ -312,16 +276,7 @@
        <property name="spacing">
         <number>5</number>
        </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
+       <property name="margin">
         <number>0</number>
        </property>
        <item>
@@ -481,7 +436,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>27</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -983,11 +938,6 @@
     <string>JavaScript &amp;Pop-ups...</string>
    </property>
   </action>
-  <action name="actionRefreshPlugins">
-   <property name="text">
-    <string>&amp;Refresh List</string>
-   </property>
-  </action>
   <action name="action_HTTP_Redirect">
    <property name="text">
     <string>HTTP Re&amp;direct...</string>
@@ -1138,11 +1088,6 @@
   <action name="action_User_Agent_Strings">
    <property name="text">
     <string>&amp;User Agent Strings...</string>
-   </property>
-  </action>
-  <action name="action_Settings">
-   <property name="text">
-    <string>&amp;Settings</string>
    </property>
   </action>
  </widget>
