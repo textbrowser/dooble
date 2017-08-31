@@ -423,6 +423,8 @@ void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA synchronous = OFF");
+
 	for(int i = list.size() - 1; i >= 0; i--)
 	  {
 	    query.prepare
