@@ -149,6 +149,28 @@
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_import"/>
+   </widget>
+   <addaction name="menu_File"/>
+  </widget>
+  <action name="action_import">
+   <property name="text">
+    <string>&amp;Import...</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>accept_mode</tabstop>

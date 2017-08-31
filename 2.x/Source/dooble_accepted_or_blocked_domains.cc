@@ -26,6 +26,7 @@
 */
 
 #include <QDir>
+#include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
@@ -46,6 +47,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slot_radio_button_toggled(bool)));
+  connect(m_ui.action_import,
+	  SIGNAL(triggered(void)),
+	  this,
+	  SLOT(slot_import(void)));
   connect(m_ui.add,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -288,6 +293,7 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 	   "domain TEXT NOT NULL, "
 	   "domain_digest TEXT NOT NULL PRIMARY KEY, "
 	   "state TEXT NOT NULL)");
+	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_accepted_or_blocked_domains "
 	   "(domain, domain_digest, state) VALUES (?, ?, ?)");
@@ -436,6 +442,68 @@ void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_accepted_or_blocked_domains::slot_import(void)
+{
+  QFileDialog dialog(this);
+
+  dialog.setAcceptMode(QFileDialog::AcceptOpen);
+  dialog.setDirectory(QDir::homePath());
+  dialog.setFileMode(QFileDialog::ExistingFile);
+  dialog.setLabelText(QFileDialog::Accept, tr("Select"));
+  dialog.setNameFilter(tr("dooble_blocked_domains.txt"));
+  dialog.setWindowTitle(tr("Dooble: Import Blocked Domains"));
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      QFile file(dialog.selectedFiles().value(0));
+
+      if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+	  repaint();
+	  QApplication::processEvents();
+
+	  QProgressDialog progress(this);
+
+	  progress.setLabelText
+	    (tr("Preparing to process %1.").arg(file.fileName()));
+	  progress.setMaximum(0);
+	  progress.setMinimum(0);
+	  progress.setWindowModality(Qt::ApplicationModal);
+	  progress.setWindowTitle(tr("Dooble: Progress"));
+	  progress.show();
+	  progress.update();
+
+	  QByteArray data(2048, 0);
+	  qint64 line = 0;
+	  qint64 rc = 0;
+
+	  while((rc = file.readLine(data.data(),
+				    static_cast<qint64> (data.length()))) >= 0)
+	    {
+	      if(progress.wasCanceled())
+		break;
+
+	      QUrl url(QUrl::fromUserInput(data.mid(0, static_cast<int> (rc)).
+					   trimmed()));
+
+	      if(!url.isEmpty() && url.isValid())
+		save_blocked_domain(url.host(), true);
+
+	      line += 1;
+	      progress.setLabelText
+		(tr("Line %1 of file %2 processed.").
+		 arg(line).arg(file.fileName()));
+	      progress.setValue(0);
+	      progress.update();
+	      QApplication::processEvents();
+	    }
+
+	  file.close();
+	  populate();
+	}
+    }
 }
 
 void dooble_accepted_or_blocked_domains::slot_item_changed
