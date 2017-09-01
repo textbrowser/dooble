@@ -30,6 +30,7 @@
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QShortcut>
 #include <QSqlQuery>
 #include <QUrl>
 
@@ -41,8 +42,14 @@
 dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   QMainWindow()
 {
+  m_search_timer.setInterval(750);
+  m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
   m_ui.table->sortByColumn(1, Qt::AscendingOrder);
+  connect(&m_search_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_search_timer_timeout(void)));
   connect(m_ui.accept_mode,
 	  SIGNAL(clicked(bool)),
 	  this,
@@ -63,12 +70,19 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_rows(void)));
+  connect(m_ui.search,
+	  SIGNAL(textEdited(const QString &)),
+	  &m_search_timer,
+	  SLOT(start(void)));
 
   if(dooble_settings::
      setting("accepted_or_blocked_domains_mode").toString() == "accept")
     m_ui.accept_mode->click();
   else
     m_ui.block_mode->click();
+
+  new QShortcut
+    (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
 }
 
 bool dooble_accepted_or_blocked_domains::contains(const QString &domain) const
@@ -544,4 +558,28 @@ void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)
       m_ui.table->setHorizontalHeaderLabels
 	(QStringList() << tr("Blocked") << tr("Domain"));
     }
+}
+
+void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
+{
+  QString text(m_ui.search->text().toLower().trimmed());
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    if(text.isEmpty())
+      m_ui.table->setRowHidden(i, false);
+    else
+      {
+	QTableWidgetItem *item = m_ui.table->item(i, 1);
+
+	if(!item)
+	  {
+	    m_ui.table->setRowHidden(i, false);
+	    continue;
+	  }
+
+	if(item->text().contains(text))
+	  m_ui.table->setRowHidden(i, false);
+	else
+	  m_ui.table->setRowHidden(i, true);
+      }
 }

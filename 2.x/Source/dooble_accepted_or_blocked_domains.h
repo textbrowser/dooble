@@ -29,6 +29,7 @@
 #define dooble_accepted_or_blocked_domains_h
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include "ui_dooble_accepted_or_blocked_domains.h"
 
@@ -49,6 +50,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
 
  private:
   QHash<QString, char> m_domains;
+  QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
   void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
@@ -65,6 +67,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void slot_item_changed(QTableWidgetItem *item);
   void slot_populate(void);
   void slot_radio_button_toggled(bool state);
+  void slot_search_timer_timeout(void);
 };
 
 #endif

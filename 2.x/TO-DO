@@ -24,6 +24,7 @@ Completed Items
 20.    WebEngine context menu should allow for blocking sites.
 21.    UTC time zone option (qputenv("TZ", ":UTC")).
 22.    Optional credentials.
+23.    Accepted / Blocked Domains search.
 
 Remaining Items
 
@@ -32,6 +33,5 @@ Remaining Items
 3.     Allow SSL/TLS exceptions.
 4.     Bookmarks.
 5.     Complete default WebEngine context menu.
-6.     Home path.
-7.     Accepted / Blocked Domains search.
-8.     Simple cleaning of all databases.
+6.     Home path. Bookmarks.
+7.     Simple cleaning of all databases.
