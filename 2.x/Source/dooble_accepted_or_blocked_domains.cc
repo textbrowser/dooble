@@ -468,8 +468,6 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 
 	  QProgressDialog progress(this);
 
-	  progress.setLabelText
-	    (tr("Preparing to process %1.").arg(file.fileName()));
 	  progress.setMaximum(0);
 	  progress.setMinimum(0);
 	  progress.setWindowModality(Qt::ApplicationModal);
@@ -494,10 +492,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		save_blocked_domain(url.host(), true);
 
 	      line += 1;
-	      progress.setLabelText
-		(tr("Line %1 of file %2 processed.").
-		 arg(line).arg(file.fileName()));
-	      progress.setValue(0);
+	      progress.setLabelText(tr("Line %1 processed.").arg(line));
 	      progress.update();
 	      QApplication::processEvents();
 	    }
