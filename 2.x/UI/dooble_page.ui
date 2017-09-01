@@ -178,7 +178,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="find">
+       <widget class="dooble_search_widget" name="find">
         <property name="placeholderText">
          <string>Find</string>
         </property>
@@ -349,6 +349,11 @@
    <class>dooble_address_widget</class>
    <extends>QLineEdit</extends>
    <header>dooble_address_widget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>dooble_search_widget</class>
+   <extends>QLineEdit</extends>
+   <header>dooble_search_widget.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
