@@ -45,6 +45,7 @@ class dooble_web_engine_page: public QWebEnginePage
   bool acceptNavigationRequest(const QUrl &url,
 			       NavigationType type,
 			       bool isMainFrame);
+  bool certificateError(const QWebEngineCertificateError &certificateError);
 
  private:
   bool m_is_private;

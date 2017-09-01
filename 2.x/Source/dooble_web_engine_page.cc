@@ -76,3 +76,9 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
       break;
   return true;
 }
+
+bool dooble_web_engine_page::certificateError
+(const QWebEngineCertificateError &certificateError)
+{
+  return QWebEnginePage::certificateError(certificateError);
+}
