@@ -31,6 +31,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_web_engine_page.h"
+#include "ui_dooble_certificate_exceptions_dialog.h"
 
 dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
@@ -80,5 +81,48 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 bool dooble_web_engine_page::certificateError
 (const QWebEngineCertificateError &certificateError)
 {
-  return QWebEnginePage::certificateError(certificateError);
+  if(certificateError.isOverridable())
+    {
+      view()->setVisible(false);
+
+      QDialog dialog(view());
+
+      dialog.setModal(true);
+      dialog.setWindowFlag(Qt::FramelessWindowHint, true);
+      dialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+      dialog.setWindowModality(Qt::ApplicationModal);
+
+      Ui_dooble_certificate_exceptions_dialog ui;
+
+      ui.setupUi(&dialog);
+      ui.accept->setEnabled(false);
+      ui.label->setText
+	(tr("<html>A certificate error occurred while attempting "
+	    "to access %1. <b>%2</b> Please accept or decline the permanent "
+	    "exception.</html>").
+	 arg(certificateError.url().toString()).
+	 arg(certificateError.errorDescription()));
+      connect(ui.accept,
+	      SIGNAL(clicked(void)),
+	      &dialog,
+	      SLOT(accept(void)));
+      connect(ui.confirm_exception,
+	      SIGNAL(toggled(bool)),
+	      ui.accept,
+	      SLOT(setEnabled(bool)));
+      connect(ui.reject,
+	      SIGNAL(clicked(void)),
+	      &dialog,
+	      SLOT(reject(void)));
+
+      if(dialog.exec() == QDialog::Accepted)
+	if(ui.confirm_exception->isChecked())
+	  {
+	    view()->setVisible(true);
+	    return true;
+	  }
+    }
+
+  view()->setVisible(true);
+  return false;
 }
