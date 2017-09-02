@@ -57,6 +57,7 @@ class dooble_web_engine_page: public QWebEnginePage
 
  private slots:
   void slot_certificate_exception_accepted(void);
+  void slot_load_started(void);
 
  signals:
   void certificate_exception_accepted(const QUrl &url);

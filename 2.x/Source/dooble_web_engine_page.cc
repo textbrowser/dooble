@@ -42,6 +42,10 @@ dooble_web_engine_page::dooble_web_engine_page
   m_certificate_error_url = QUrl();
   m_certificate_error_widget = 0;
   m_is_private = is_private;
+  connect(this,
+	  SIGNAL(loadStarted(void)),
+	  this,
+	  SLOT(slot_load_started(void)));
 }
 
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
@@ -50,6 +54,10 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   m_certificate_error_url = QUrl();
   m_certificate_error_widget = 0;
   m_is_private = false;
+  connect(this,
+	  SIGNAL(loadStarted(void)),
+	  this,
+	  SLOT(slot_load_started(void)));
 }
 
 dooble_web_engine_page::~dooble_web_engine_page()
@@ -60,11 +68,6 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
 						     bool isMainFrame)
 {
-  m_certificate_error_url = QUrl();
-
-  if(m_certificate_error_widget)
-    view()->layout()->removeWidget(m_certificate_error_widget);
-
   Q_UNUSED(type);
   Q_UNUSED(isMainFrame);
 
@@ -86,6 +89,7 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
       host.remove(0, index + 1);
     else
       break;
+
   return true;
 }
 
@@ -147,4 +151,12 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
   dooble_certificate_exceptions_menu_widget::exception_accepted
     (m_certificate_error_url);
   emit certificate_exception_accepted(m_certificate_error_url);
+}
+
+void dooble_web_engine_page::slot_load_started(void)
+{
+  m_certificate_error_url = QUrl();
+
+  if(m_certificate_error_widget)
+    view()->layout()->removeWidget(m_certificate_error_widget);
 }
