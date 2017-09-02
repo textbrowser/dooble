@@ -863,6 +863,10 @@ void dooble_page::slot_show_certificate_exception(void)
   dooble_certificate_exceptions_menu_widget certificate_exceptions_menu_widget
     (&widget);
 
+  connect(&certificate_exceptions_menu_widget,
+	  SIGNAL(triggered(void)),
+	  &menu,
+	  SLOT(close(void)));
   certificate_exceptions_menu_widget.set_url(m_view->url());
   widget_action.setDefaultWidget(&certificate_exceptions_menu_widget);
   menu.addAction(&widget_action);

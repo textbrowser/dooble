@@ -28,7 +28,6 @@
 #include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QUrl>
 
 #include "dooble.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
@@ -41,6 +40,10 @@ dooble_certificate_exceptions_menu_widget::
 dooble_certificate_exceptions_menu_widget(QWidget *parent):QWidget(parent)
 {
   m_ui.setupUi(this);
+  connect(m_ui.remove,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove_exception(void)));
 }
 
 bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
@@ -110,7 +113,6 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 		   "exception_accepted TEXT NOT NULL, "
 		   "temporary INTEGER NOT NULL DEFAULT 1, "
 		   "url_digest TEXT NOT NULL PRIMARY KEY)");
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT INTO dooble_certificate_exceptions "
 	   "(exception_accepted, temporary, url_digest) VALUES (?, ?, ?)");
@@ -169,10 +171,45 @@ void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 
 void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 {
+  m_url = url;
+
   if(!url.isEmpty() && url.isValid())
     m_ui.label->setText
       (tr("A security exception was accepted for %1.").arg(url.toString()));
   else
     m_ui.label->setText
       (tr("A security exception was accepted for this site."));
+}
+
+void dooble_certificate_exceptions_menu_widget::slot_remove_exception(void)
+{
+  QString database_name(QString("dooble_certificate_exceptions_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_certificate_exceptions.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.prepare
+	  ("DELETE FROM dooble_certificate_exceptions WHERE url_digest "
+	   "IN (?, ?)");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(m_url.toEncoded()).toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(m_url.toEncoded() + "/").toBase64());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  emit triggered();
 }

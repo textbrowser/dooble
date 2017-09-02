@@ -29,6 +29,7 @@
 #define dooble_certificate_exceptions_menu_widget_h
 
 #include <QAtomicInteger>
+#include <QUrl>
 #include <QWidget>
 
 #include "ui_dooble_certificate_exceptions_menu_widget.h"
@@ -45,8 +46,15 @@ class dooble_certificate_exceptions_menu_widget: public QWidget
   void set_url(const QUrl &url);
 
  private:
+  QUrl m_url;
   Ui_dooble_certificate_exceptions_menu_widget m_ui;
   static QAtomicInteger<qint64> s_db_id;
+
+ private slots:
+  void slot_remove_exception(void);
+
+ signals:
+  void triggered(void);
 };
 
 #endif
