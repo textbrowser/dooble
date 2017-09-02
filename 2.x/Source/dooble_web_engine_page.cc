@@ -31,6 +31,7 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_web_engine_page.h"
 #include "ui_dooble_certificate_exceptions_widget.h"
 
@@ -93,6 +94,10 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
+      if(dooble_certificate_exceptions_menu_widget::
+	 has_exception(certificateError.url()))
+	return true;
+
       m_certificate_error_url = certificateError.url();
 
       if(!m_certificate_error_widget)
@@ -135,5 +140,7 @@ bool dooble_web_engine_page::certificateError
 
 void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 {
+  dooble_certificate_exceptions_menu_widget::exception_accepted
+    (m_certificate_error_url);
   emit certificate_exception_accepted(m_certificate_error_url);
 }

@@ -57,6 +57,7 @@ UI_DIR = temp/ui
 FORMS           = UI\\dooble.ui \
                   UI\\dooble_accepted_or_blocked_domains.ui \
                   UI\\dooble_authentication_dialog.ui \
+                  UI\\dooble_certificate_exceptions_menu_widget.ui \
                   UI\\dooble_certificate_exceptions_widget.ui \
 		  UI\\dooble_cookies_window.ui \
 		  UI\\dooble_history_window.ui \
@@ -69,6 +70,7 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_address_widget_completer.h \
                   Source\\dooble_address_widget_completer_popup.h \
                   Source\\dooble_application.h \
+                  Source\\dooble_certificate_exceptions_menu_widget.h \
                   Source\\dooble_cookies.h \
                   Source\\dooble_cookies_window.h \
                   Source\\dooble_favicons.h \
@@ -99,6 +101,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget_completer_popup.cc \
                   Source\\dooble_aes256.cc \
                   Source\\dooble_application.cc \
+                  Source\\dooble_certificate_exceptions_menu_widget.cc \
                   Source\\dooble_cookies.cc \
                   Source\\dooble_cookies_window.cc \
                   Source\\dooble_cryptography.cc \
