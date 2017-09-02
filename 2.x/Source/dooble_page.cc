@@ -172,6 +172,10 @@ dooble_page::dooble_page(bool is_private,
 	  SLOT(slot_icon_changed(const QIcon &)));
   connect(m_view,
 	  SIGNAL(loadFinished(bool)),
+	  m_ui.address,
+	  SLOT(slot_load_finished(void)));
+  connect(m_view,
+	  SIGNAL(loadFinished(bool)),
 	  this,
 	  SIGNAL(loadFinished(bool)));
   connect(m_view,
@@ -184,6 +188,10 @@ dooble_page::dooble_page(bool is_private,
 	  SLOT(slot_load_progress(int)));
   connect(m_view,
 	  SIGNAL(loadStarted(void)),
+	  m_ui.address,
+	  SLOT(slot_load_started(void)));
+  connect(m_view,
+	  SIGNAL(loadStarted(void)),
 	  this,
 	  SIGNAL(loadStarted(void)));
   connect(m_view,
@@ -194,6 +202,10 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SIGNAL(titleChanged(const QString &)));
+  connect(m_view,
+	  SIGNAL(urlChanged(const QUrl &)),
+	  m_ui.address,
+	  SLOT(slot_url_changed(const QUrl &)));
   connect(m_view,
 	  SIGNAL(urlChanged(const QUrl &)),
 	  this,

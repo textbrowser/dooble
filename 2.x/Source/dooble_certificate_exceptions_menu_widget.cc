@@ -62,9 +62,12 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 
 	query.setForwardOnly(true);
 	query.prepare("SELECT exception_accepted FROM "
-		      "dooble_certificate_exceptions WHERE url_digest = ?");
+		      "dooble_certificate_exceptions WHERE url_digest "
+		      "IN (?, ?)");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.toEncoded() + "/").toBase64());
 
 	if(query.exec())
 	  if(query.next())

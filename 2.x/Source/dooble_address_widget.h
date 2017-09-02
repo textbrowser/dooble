@@ -29,6 +29,7 @@
 #define dooble_address_widget_h
 
 #include <QLineEdit>
+#include <QUrl>
 
 class QToolButton;
 class dooble_address_widget_completer;
@@ -55,13 +56,17 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_bookmark;
   QToolButton *m_information;
   QToolButton *m_pull_down;
+  QUrl m_url;
   dooble_address_widget_completer *m_completer;
   void prepare_icons(void);
 
  private slots:
+  void slot_load_finished(void);
+  void slot_load_started(void);
   void slot_populate(void);
   void slot_settings_applied(void);
   void slot_show_site_information_menu(void);
+  void slot_url_changed(const QUrl &url);
 
  signals:
   void pull_down_clicked(void);

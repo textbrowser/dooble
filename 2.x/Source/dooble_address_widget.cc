@@ -34,6 +34,7 @@
 #include "dooble.h"
 #include "dooble_address_widget.h"
 #include "dooble_address_widget_completer.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_history.h"
 #include "dooble_settings.h"
 
@@ -43,6 +44,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 
   m_bookmark = new QToolButton(this);
   m_bookmark->setCursor(Qt::ArrowCursor);
+  m_bookmark->setEnabled(false);
   m_bookmark->setIconSize(QSize(16, 16));
   m_bookmark->setStyleSheet
     ("QToolButton {"
@@ -54,6 +56,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_completer = new dooble_address_widget_completer(this);
   m_information = new QToolButton(this);
   m_information->setCursor(Qt::ArrowCursor);
+  m_information->setEnabled(false);
   m_information->setIconSize(QSize(16, 16));
   m_information->setStyleSheet
     ("QToolButton {"
@@ -227,6 +230,17 @@ void dooble_address_widget::set_item_icon(const QIcon &icon, const QUrl &url)
   m_completer->set_item_icon(icon, url);
 }
 
+void dooble_address_widget::slot_load_finished(void)
+{
+}
+
+void dooble_address_widget::slot_load_started(void)
+{
+  m_information->setEnabled(false);
+  m_bookmark->setEnabled(false);
+  m_url = QUrl();
+}
+
 void dooble_address_widget::slot_populate(void)
 {
   if(!dooble::s_history)
@@ -245,8 +259,32 @@ void dooble_address_widget::slot_settings_applied(void)
 
 void dooble_address_widget::slot_show_site_information_menu(void)
 {
+  if(m_url.isEmpty() || !m_url.isValid())
+    return;
+
   QMenu menu(this);
+
+  if(dooble_certificate_exceptions_menu_widget::has_exception(m_url))
+    menu.addAction
+      (QIcon(":/certificate_warning.png"),
+       tr("Certificate exception accepted for this site..."));
 
   menu.addAction(tr("Show Site Coo&kies..."), this, SIGNAL(show_cookies(void)));
   menu.exec(QCursor::pos());
+}
+
+void dooble_address_widget::slot_url_changed(const QUrl &url)
+{
+  m_url = url;
+
+  if(m_url.isEmpty() || !m_url.isValid())
+    {
+      m_bookmark->setEnabled(false);
+      m_information->setEnabled(false);
+    }
+  else
+    {
+      m_bookmark->setEnabled(true);
+      m_information->setEnabled(true);
+    }
 }
