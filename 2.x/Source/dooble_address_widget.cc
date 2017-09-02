@@ -107,6 +107,11 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   slot_populate();
 }
 
+QPoint dooble_address_widget::information_position(void) const
+{
+  return m_information->pos();
+}
+
 bool dooble_address_widget::event(QEvent *event)
 {
   if(event && event->type() == QEvent::KeyPress)
@@ -267,7 +272,9 @@ void dooble_address_widget::slot_show_site_information_menu(void)
   if(dooble_certificate_exceptions_menu_widget::has_exception(m_url))
     menu.addAction
       (QIcon(":/certificate_warning.png"),
-       tr("Certificate exception accepted for this site..."));
+       tr("Certificate exception accepted for this site..."),
+       this,
+       SIGNAL(show_certificate_exception(void)));
 
   menu.addAction(tr("Show Site Coo&kies..."), this, SIGNAL(show_cookies(void)));
   menu.exec(QCursor::pos());

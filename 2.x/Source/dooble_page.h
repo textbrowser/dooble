@@ -113,6 +113,7 @@ class dooble_page: public QWidget
   void slot_reload_or_stop(void);
   void slot_reset_url(void);
   void slot_settings_applied(void);
+  void slot_show_certificate_exception(void);
   void slot_show_cookies(void);
   void slot_show_find(void);
   void slot_show_pull_down_menu(void);

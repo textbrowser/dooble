@@ -32,9 +32,11 @@
 #include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
+#include <QWidgetAction>
 
 #include "dooble.h"
 #include "dooble_application.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -102,6 +104,10 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(reset_url(void)),
 	  this,
 	  SLOT(slot_reset_url(void)));
+  connect(m_ui.address,
+	  SIGNAL(show_certificate_exception(void)),
+	  this,
+	  SLOT(slot_show_certificate_exception(void)));
   connect(m_ui.address,
 	  SIGNAL(show_cookies(void)),
 	  this,
@@ -847,6 +853,20 @@ void dooble_page::slot_settings_applied(void)
     m_ui.is_private->setVisible(false);
 
   prepare_icons();
+}
+
+void dooble_page::slot_show_certificate_exception(void)
+{
+  QMenu menu(this);
+  QWidget widget(&menu);
+  QWidgetAction widget_action(&menu);
+  dooble_certificate_exceptions_menu_widget certificate_exceptions_menu_widget
+    (&widget);
+
+  certificate_exceptions_menu_widget.set_url(m_view->url());
+  widget_action.setDefaultWidget(&certificate_exceptions_menu_widget);
+  menu.addAction(&widget_action);
+  menu.exec(m_ui.address->mapToGlobal(m_ui.address->information_position()));
 }
 
 void dooble_page::slot_show_cookies(void)

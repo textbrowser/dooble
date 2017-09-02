@@ -56,6 +56,7 @@ extern "C"
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_favicons.h"
@@ -225,6 +226,7 @@ int main(int argc, char *argv[])
      Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
   dooble::s_application->processEvents();
+  dooble_certificate_exceptions_menu_widget::purge_temporary();
   dooble_favicons::purge_temporary();
   splash.showMessage
     (QObject::tr("Preparing QWebEngine."), Qt::AlignHCenter | Qt::AlignBottom);
@@ -311,6 +313,7 @@ int main(int argc, char *argv[])
 
   int rc = dooble::s_application->exec();
 
+  dooble_certificate_exceptions_menu_widget::purge_temporary();
   dooble_favicons::purge_temporary();
   dooble::s_application->deleteLater();
   return rc;

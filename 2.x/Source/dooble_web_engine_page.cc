@@ -119,9 +119,13 @@ bool dooble_web_engine_page::certificateError
       m_ui.accept->setEnabled(false);
       m_ui.confirm_exception->setChecked(false);
       m_ui.label->setText
-	(tr("<html>A certificate error occurred while attempting "
-	    "to access %1. <b>%2</b> Please accept or decline the permanent "
-	    "exception. Permanent exceptions may be removed later.</html>").
+	(tr("<html>A certificate error occurred while accessing "
+	    "the secure site %1. <b>%2</b> "
+	    "Certificate errors may indicate that the server that "
+	    "you're attempting to connect to is not trustworthy.<br><br>"
+	    "Please accept or decline the permanent "
+	    "exception.<br><br>"
+	    "Permanent exceptions may be removed later.</html>").
 	 arg(certificateError.url().toString()).
 	 arg(certificateError.errorDescription()));
       view()->layout()->removeWidget(m_certificate_error_widget);
