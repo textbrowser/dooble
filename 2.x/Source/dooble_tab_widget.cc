@@ -129,6 +129,8 @@ void dooble_tab_widget::slot_load_finished(void)
 	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 	}
 #endif
+
+      m_tab_bar->repaint();
     }
 }
 
