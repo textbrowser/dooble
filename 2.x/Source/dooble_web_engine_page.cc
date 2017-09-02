@@ -83,10 +83,11 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      QDialog dialog(view());
+      QDialog dialog(view()->window());
       QWidget widget(&dialog);
       Ui_dooble_certificate_exceptions_widget ui;
 
+      dialog.setLayout(new QHBoxLayout(&dialog));
       dialog.setModal(true);
       dialog.setWindowModality(Qt::ApplicationModal);
       dialog.setWindowTitle(tr("Dooble"));
@@ -110,6 +111,8 @@ bool dooble_web_engine_page::certificateError
 	      SIGNAL(clicked(void)),
 	      &dialog,
 	      SLOT(reject(void)));
+      dialog.layout()->addWidget(&widget);
+      dialog.layout()->setContentsMargins(0, 0, 0, 0);
 
       if(dialog.exec() == QDialog::Accepted)
 	if(ui.confirm_exception->isChecked())
