@@ -57,7 +57,7 @@ UI_DIR = temp/ui
 FORMS           = UI\\dooble.ui \
                   UI\\dooble_accepted_or_blocked_domains.ui \
                   UI\\dooble_authentication_dialog.ui \
-                  UI\\dooble_certificate_exceptions_dialog.ui \
+                  UI\\dooble_certificate_exceptions_widget.ui \
 		  UI\\dooble_cookies_window.ui \
 		  UI\\dooble_history_window.ui \
                   UI\\dooble_page.ui \

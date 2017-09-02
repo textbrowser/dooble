@@ -31,7 +31,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_web_engine_page.h"
-#include "ui_dooble_certificate_exceptions_dialog.h"
+#include "ui_dooble_certificate_exceptions_widget.h"
 
 dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
@@ -83,18 +83,14 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      view()->setVisible(false);
-
       QDialog dialog(view());
+      QWidget widget(&dialog);
+      Ui_dooble_certificate_exceptions_widget ui;
 
       dialog.setModal(true);
-      dialog.setWindowFlag(Qt::FramelessWindowHint, true);
-      dialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
       dialog.setWindowModality(Qt::ApplicationModal);
-
-      Ui_dooble_certificate_exceptions_dialog ui;
-
-      ui.setupUi(&dialog);
+      dialog.setWindowTitle(tr("Dooble"));
+      ui.setupUi(&widget);
       ui.accept->setEnabled(false);
       ui.label->setText
 	(tr("<html>A certificate error occurred while attempting "
@@ -117,12 +113,8 @@ bool dooble_web_engine_page::certificateError
 
       if(dialog.exec() == QDialog::Accepted)
 	if(ui.confirm_exception->isChecked())
-	  {
-	    view()->setVisible(true);
-	    return true;
-	  }
+	  return true;
     }
 
-  view()->setVisible(true);
   return false;
 }
