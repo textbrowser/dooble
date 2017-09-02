@@ -143,7 +143,7 @@
  </widget>
  <resources>
   <include location="../Icons/icons.qrc"/>
-  <include location="../../Icons/icons.qrc"/>
+  <include location="../Icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
