@@ -14,7 +14,7 @@
    <item>
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
-      <string notr="true">QFrame {background-color: white; border: 1px solid orange; border-radius: 5px;}</string>
+      <string notr="true">QFrame {background-color: white; border: 1px solid darkorange; border-radius: 5px;}</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -37,7 +37,7 @@
            <string notr="true">QLabel {border: none;}</string>
           </property>
           <property name="pixmap">
-           <pixmap resource="../Icons/icons.qrc">:/Logo/dooble.png</pixmap>
+           <pixmap resource="../Icons/icons.qrc">:/certificate_warning.png</pixmap>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
