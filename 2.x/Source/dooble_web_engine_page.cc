@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QStackedLayout>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 
@@ -37,12 +38,14 @@ dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
   QWebEnginePage(web_engine_profile, parent)
 {
+  m_certificate_error_widget = 0;
   m_is_private = is_private;
 }
 
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(parent)
 {
+  m_certificate_error_widget = 0;
   m_is_private = false;
 }
 
@@ -54,6 +57,9 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
 						     bool isMainFrame)
 {
+  if(m_certificate_error_widget)
+    view()->layout()->removeWidget(m_certificate_error_widget);
+
   Q_UNUSED(type);
   Q_UNUSED(isMainFrame);
 
@@ -83,40 +89,34 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      QDialog dialog(view()->window());
-      QWidget widget(&dialog);
-      Ui_dooble_certificate_exceptions_widget ui;
+      if(!m_certificate_error_widget)
+	{
+	  m_certificate_error_widget = new QWidget(view());
+	  m_ui.setupUi(m_certificate_error_widget);
+	  connect(m_ui.confirm_exception,
+		  SIGNAL(toggled(bool)),
+		  m_ui.accept,
+		  SLOT(setEnabled(bool)));
+	}
 
-      dialog.setLayout(new QHBoxLayout(&dialog));
-      dialog.setModal(true);
-      dialog.setWindowModality(Qt::ApplicationModal);
-      dialog.setWindowTitle(tr("Dooble"));
-      ui.setupUi(&widget);
-      ui.accept->setEnabled(false);
-      ui.label->setText
+      m_certificate_error_widget->resize(view()->size());
+      m_certificate_error_widget->setVisible(true);
+      m_ui.accept->setEnabled(false);
+      m_ui.label->setText
 	(tr("<html>A certificate error occurred while attempting "
 	    "to access %1. <b>%2</b> Please accept or decline the permanent "
-	    "exception.</html>").
+	    "exception. Permanent exceptions may be removed later.</html>").
 	 arg(certificateError.url().toString()).
 	 arg(certificateError.errorDescription()));
-      connect(ui.accept,
-	      SIGNAL(clicked(void)),
-	      &dialog,
-	      SLOT(accept(void)));
-      connect(ui.confirm_exception,
-	      SIGNAL(toggled(bool)),
-	      ui.accept,
-	      SLOT(setEnabled(bool)));
-      connect(ui.reject,
-	      SIGNAL(clicked(void)),
-	      &dialog,
-	      SLOT(reject(void)));
-      dialog.layout()->addWidget(&widget);
-      dialog.layout()->setContentsMargins(0, 0, 0, 0);
-
-      if(dialog.exec() == QDialog::Accepted)
-	if(ui.confirm_exception->isChecked())
-	  return true;
+      view()->layout()->removeWidget(m_certificate_error_widget);
+      view()->layout()->addWidget(m_certificate_error_widget);
+      qobject_cast<QStackedLayout *> (view()->layout())->
+	setCurrentWidget(m_certificate_error_widget);
+    }
+  else if(m_certificate_error_widget)
+    {
+      m_certificate_error_widget->setVisible(false);
+      view()->layout()->removeWidget(m_certificate_error_widget);
     }
 
   return false;

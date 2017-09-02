@@ -120,17 +120,7 @@
         <item>
          <widget class="QPushButton" name="accept">
           <property name="text">
-           <string>&amp;Accept</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="reject">
-          <property name="text">
-           <string>&amp;Reject</string>
-          </property>
-          <property name="default">
-           <bool>true</bool>
+           <string>&amp;Accept Permanent Exception</string>
           </property>
          </widget>
         </item>

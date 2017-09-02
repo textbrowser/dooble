@@ -30,6 +30,8 @@
 
 #include <QWebEnginePage>
 
+#include "ui_dooble_certificate_exceptions_widget.h"
+
 class dooble_web_engine_page: public QWebEnginePage
 {
   Q_OBJECT
@@ -48,6 +50,8 @@ class dooble_web_engine_page: public QWebEnginePage
   bool certificateError(const QWebEngineCertificateError &certificateError);
 
  private:
+  QWidget *m_certificate_error_widget;
+  Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
 };
 
