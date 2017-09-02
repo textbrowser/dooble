@@ -53,6 +53,11 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
   else
     m_page = new dooble_web_engine_page(this);
 
+  connect(m_page,
+	  SIGNAL(certificate_exception_accepted(const QUrl &)),
+	  this,
+	  SLOT(slot_certificate_exception_accepted(const QUrl &)));
+
   if(m_is_private)
     {
       m_cookies = new dooble_cookies(m_is_private, this);
@@ -199,6 +204,13 @@ void dooble_web_engine_view::slot_accept_or_block_domain(void)
       if(host.indexOf('.') < 0)
 	break;
     }
+}
+
+void dooble_web_engine_view::slot_certificate_exception_accepted
+(const QUrl &url)
+{
+  if(!url.isEmpty() && url.isValid())
+    load(url);
 }
 
 void dooble_web_engine_view::slot_settings_applied(void)

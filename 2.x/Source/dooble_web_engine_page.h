@@ -50,9 +50,16 @@ class dooble_web_engine_page: public QWebEnginePage
   bool certificateError(const QWebEngineCertificateError &certificateError);
 
  private:
+  QUrl m_certificate_error_url;
   QWidget *m_certificate_error_widget;
   Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
+
+ private slots:
+  void slot_certificate_exception_accepted(void);
+
+ signals:
+  void certificate_exception_accepted(const QUrl &url);
 };
 
 #endif

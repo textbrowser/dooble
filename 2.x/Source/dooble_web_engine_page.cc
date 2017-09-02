@@ -38,6 +38,7 @@ dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
   QWebEnginePage(web_engine_profile, parent)
 {
+  m_certificate_error_url = QUrl();
   m_certificate_error_widget = 0;
   m_is_private = is_private;
 }
@@ -45,6 +46,7 @@ dooble_web_engine_page::dooble_web_engine_page
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(parent)
 {
+  m_certificate_error_url = QUrl();
   m_certificate_error_widget = 0;
   m_is_private = false;
 }
@@ -57,6 +59,8 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
 						     bool isMainFrame)
 {
+  m_certificate_error_url = QUrl();
+
   if(m_certificate_error_widget)
     view()->layout()->removeWidget(m_certificate_error_widget);
 
@@ -89,10 +93,16 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
+      m_certificate_error_url = certificateError.url();
+
       if(!m_certificate_error_widget)
 	{
 	  m_certificate_error_widget = new QWidget(view());
 	  m_ui.setupUi(m_certificate_error_widget);
+	  connect(m_ui.accept,
+		  SIGNAL(clicked(void)),
+		  this,
+		  SLOT(slot_certificate_exception_accepted(void)));
 	  connect(m_ui.confirm_exception,
 		  SIGNAL(toggled(bool)),
 		  m_ui.accept,
@@ -102,6 +112,7 @@ bool dooble_web_engine_page::certificateError
       m_certificate_error_widget->resize(view()->size());
       m_certificate_error_widget->setVisible(true);
       m_ui.accept->setEnabled(false);
+      m_ui.confirm_exception->setChecked(false);
       m_ui.label->setText
 	(tr("<html>A certificate error occurred while attempting "
 	    "to access %1. <b>%2</b> Please accept or decline the permanent "
@@ -120,4 +131,9 @@ bool dooble_web_engine_page::certificateError
     }
 
   return false;
+}
+
+void dooble_web_engine_page::slot_certificate_exception_accepted(void)
+{
+  emit certificate_exception_accepted(m_certificate_error_url);
 }

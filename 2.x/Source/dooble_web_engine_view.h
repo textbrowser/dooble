@@ -51,6 +51,7 @@ class dooble_web_engine_view: public QWebEngineView
 
  private slots:
   void slot_accept_or_block_domain(void);
+  void slot_certificate_exception_accepted(const QUrl &url);
   void slot_settings_applied(void);
 
  protected:
