@@ -26,13 +26,13 @@ Completed Items
 22.    Optional credentials.
 23.    Accepted / Blocked Domains search.
 24.    Allow certificate exceptions.
+25.    Store certificate exceptions.
 
 Remaining Items
 
 1.     Download panel.
 2.     Windows PRNG.
-3.     Store certificate exceptions.
+3.     Simple cleaning of all databases.
 4.     Bookmarks.
 5.     Complete default WebEngine context menu.
 6.     Home path. Bookmarks.
-7.     Simple cleaning of all databases.

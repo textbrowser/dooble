@@ -42,6 +42,7 @@ class dooble_certificate_exceptions_menu_widget: public QWidget
   dooble_certificate_exceptions_menu_widget(QWidget *parent);
   static bool has_exception(const QUrl &url);
   static void exception_accepted(const QUrl &url);
+  static void purge(void);
   static void purge_temporary(void);
   void set_url(const QUrl &url);
 

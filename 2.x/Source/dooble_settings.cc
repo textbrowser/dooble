@@ -41,6 +41,7 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
@@ -275,6 +276,15 @@ void dooble_settings::prepare_proxy(bool save)
       set_setting("proxy_type_index", m_ui.proxy_type->currentIndex());
       set_setting("proxy_user", m_ui.proxy_user->text().trimmed());
     }
+}
+
+void dooble_settings::purge_database_data(void)
+{
+  dooble_accepted_or_blocked_domains::purge();
+  dooble_certificate_exceptions_menu_widget::purge();
+  dooble_cookies::purge();
+  dooble_favicons::purge();
+  dooble_history::purge();
 }
 
 void dooble_settings::remove_setting(const QString &key)
@@ -593,10 +603,7 @@ void dooble_settings::slot_apply(void)
       ** Purge existing database data.
       */
 
-      dooble_accepted_or_blocked_domains::purge();
-      dooble_cookies::purge();
-      dooble_favicons::purge();
-      dooble_history::purge();
+      purge_database_data();
       QApplication::restoreOverrideCursor();
     }
 
@@ -863,10 +870,7 @@ void dooble_settings::slot_reset_credentials(void)
   ** Purge existing database data.
   */
 
-  dooble_accepted_or_blocked_domains::purge();
-  dooble_cookies::purge();
-  dooble_favicons::purge();
-  dooble_history::purge();
+  purge_database_data();
   QApplication::restoreOverrideCursor();
 }
 
@@ -924,10 +928,7 @@ void dooble_settings::slot_save_credentials(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  dooble_accepted_or_blocked_domains::purge();
-  dooble_cookies::purge();
-  dooble_favicons::purge();
-  dooble_history::purge();
+  purge_database_data();
   QApplication::restoreOverrideCursor();
   m_pbkdf2_dialog = new QProgressDialog(this);
   m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));

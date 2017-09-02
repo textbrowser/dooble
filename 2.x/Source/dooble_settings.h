@@ -76,6 +76,7 @@ class dooble_settings: public QMainWindow
   static QReadWriteLock s_settings_mutex;
   void prepare_icons(void);
   void prepare_proxy(bool save);
+  void purge_database_data(void);
   void restore(void);
   void save_settings(void);
 

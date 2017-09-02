@@ -141,6 +141,33 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_certificate_exceptions_menu_widget::purge(void)
+{
+  QString database_name(QString("dooble_certificate_exceptions_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_certificate_exceptions.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_certificate_exceptions");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 {
   QString database_name(QString("dooble_certificate_exceptions_%1").
