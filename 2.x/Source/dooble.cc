@@ -617,6 +617,10 @@ void dooble::slot_settings_applied(void)
 #endif
 }
 
+void dooble::slot_show_about(void)
+{
+}
+
 void dooble::slot_show_blocked_domains(void)
 {
   s_accepted_or_blocked_domains->showNormal();
