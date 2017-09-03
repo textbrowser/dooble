@@ -39,6 +39,9 @@ class dooble_about: public QMainWindow
  public:
   dooble_about(void);
 
+ protected:
+  void keyPressEvent(QKeyEvent *event);
+
  private:
   Ui_dooble_about m_ui;
 };

@@ -34,6 +34,7 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
+class dooble_about;
 class dooble_accepted_or_blocked_domains;
 class dooble_application;
 class dooble_cookies;
@@ -54,6 +55,7 @@ class dooble: public QMainWindow
   dooble(dooble_web_engine_view *view);
   dooble(void);
   static QPointer<dooble_history> s_history;
+  static dooble_about *s_about;
   static dooble_accepted_or_blocked_domains *s_accepted_or_blocked_domains;
   static dooble_application *s_application;
   static dooble_cookies *s_cookies;

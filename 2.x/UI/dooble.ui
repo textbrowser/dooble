@@ -63,9 +63,15 @@
      <string>&amp;Tools</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu_help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+   </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
    <addaction name="menu_tools"/>
+   <addaction name="menu_help"/>
   </widget>
  </widget>
  <customwidgets>

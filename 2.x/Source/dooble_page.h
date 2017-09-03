@@ -131,6 +131,7 @@ class dooble_page: public QWidget
   void new_tab(void);
   void new_window(void);
   void quit_dooble(void);
+  void show_about(void);
   void show_blocked_domains(void);
   void show_clear_items(void);
   void show_history(void);

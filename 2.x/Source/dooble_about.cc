@@ -25,9 +25,19 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QKeyEvent>
+
 #include "dooble_about.h"
 
 dooble_about::dooble_about(void):QMainWindow()
 {
   m_ui.setupUi(this);
+}
+
+void dooble_about::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    close();
+
+  QMainWindow::keyPressEvent(event);
 }

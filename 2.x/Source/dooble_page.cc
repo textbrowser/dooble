@@ -482,6 +482,15 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(show_history(void)),
 		  QKeySequence(tr("Ctrl+H")));
+
+  /*
+  ** Help Menu
+  */
+
+  menu = m_ui.menus->menu()->addMenu(tr("&Help"));
+  menu->addAction(tr("&About..."),
+		  this,
+		  SIGNAL(show_about(void)));
 }
 
 void dooble_page::prepare_tool_buttons_for_mac(void)

@@ -31,6 +31,7 @@
 #include <QWebEngineProfile>
 
 #include "dooble.h"
+#include "dooble_about.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
 #include "dooble_clear_items.h"
@@ -47,6 +48,7 @@
 
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
+dooble_about *dooble::s_about = 0;
 dooble_accepted_or_blocked_domains *dooble::s_accepted_or_blocked_domains = 0;
 dooble_application *dooble::s_application = 0;
 dooble_cookies *dooble::s_cookies = 0;
@@ -156,6 +158,16 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_about_to_show_main_menu(void)),
 	  Qt::UniqueConnection);
+  connect(m_ui.menu_help,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_help,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)),
+	  Qt::UniqueConnection);
   connect(m_ui.menu_tools,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -202,6 +214,9 @@ void dooble::initialize_static_members(void)
 {
   if(!s_accepted_or_blocked_domains)
     s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
+
+  if(!s_about)
+    s_about = new dooble_about();
 
   if(!s_cookies)
     s_cookies = new dooble_cookies(false, 0);
@@ -403,6 +418,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_about(void)),
+	  this,
+	  SLOT(slot_show_about(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_blocked_domains(void)),
 	  this,
 	  SLOT(slot_show_blocked_domains(void)),
@@ -472,7 +493,7 @@ void dooble::slot_about_to_show_main_menu(void)
       if(page &&
 	 page->menu() &&
 	 page->menu()->menu() &&
-	 page->menu()->menu()->actions().size() >= 3)
+	 page->menu()->menu()->actions().size() >= 4)
 	{
 	  if(m_ui.menu_edit == menu &&
 	     page->menu()->menu()->actions()[1]->menu())
@@ -487,6 +508,10 @@ void dooble::slot_about_to_show_main_menu(void)
 	      if(page->action_close_tab())
 		page->action_close_tab()->setEnabled(m_ui.tab->count() > 1);
 	    }
+	  else if(m_ui.menu_help == menu &&
+		  page->menu()->menu()->actions()[3]->menu())
+	    m_ui.menu_help->addActions
+	      (page->menu()->menu()->actions()[3]->menu()->actions());
 	  else if(m_ui.menu_tools == menu &&
 		  page->menu()->menu()->actions()[2]->menu())
 	    m_ui.menu_tools->addActions
@@ -619,6 +644,8 @@ void dooble::slot_settings_applied(void)
 
 void dooble::slot_show_about(void)
 {
+  s_about->show();
+  dooble_ui_utilities::center_window_widget(this, s_about);
 }
 
 void dooble::slot_show_blocked_domains(void)
