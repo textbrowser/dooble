@@ -102,6 +102,15 @@ bool dooble_web_engine_page::certificateError
 	 has_exception(certificateError.url()))
 	return true;
 
+      if(!view())
+	return false;
+
+      QStackedLayout *stacked_layout = qobject_cast<QStackedLayout *>
+	(view()->layout());
+
+      if(!stacked_layout)
+	return false;
+
       m_certificate_error_url = certificateError.url();
 
       if(!m_certificate_error_widget)
@@ -132,15 +141,16 @@ bool dooble_web_engine_page::certificateError
 	    "Permanent exceptions may be removed later.</html>").
 	 arg(certificateError.url().toString()).
 	 arg(certificateError.errorDescription()));
-      view()->layout()->removeWidget(m_certificate_error_widget);
-      view()->layout()->addWidget(m_certificate_error_widget);
-      qobject_cast<QStackedLayout *> (view()->layout())->
-	setCurrentWidget(m_certificate_error_widget);
+      stacked_layout->removeWidget(m_certificate_error_widget);
+      stacked_layout->addWidget(m_certificate_error_widget);
+      stacked_layout->setCurrentWidget(m_certificate_error_widget);
     }
   else if(m_certificate_error_widget)
     {
       m_certificate_error_widget->setVisible(false);
-      view()->layout()->removeWidget(m_certificate_error_widget);
+
+      if(view() && view()->layout())
+	view()->layout()->removeWidget(m_certificate_error_widget);
     }
 
   return false;
@@ -158,5 +168,6 @@ void dooble_web_engine_page::slot_load_started(void)
   m_certificate_error_url = QUrl();
 
   if(m_certificate_error_widget)
-    view()->layout()->removeWidget(m_certificate_error_widget);
+    if(view() && view()->layout())
+      view()->layout()->removeWidget(m_certificate_error_widget);
 }

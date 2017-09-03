@@ -147,13 +147,13 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setEnabled(tab_at > -1);
   action->setProperty("point", point);
 
-  dooble_tab_widget *parent = qobject_cast<dooble_tab_widget *>
+  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
     (parentWidget());
 
-  if(parent)
+  if(tab_widget)
     {
       dooble_page *page = qobject_cast<dooble_page *>
-	(parent->widget(tabAt(point)));
+	(tab_widget->widget(tabAt(point)));
 
       if(page)
 	{
@@ -176,13 +176,13 @@ void dooble_tab_bar::slot_web_plugins(void)
   if(!action)
     return;
 
-  dooble_tab_widget *parent = qobject_cast<dooble_tab_widget *>
+  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
     (parentWidget());
 
-  if(parent)
+  if(tab_widget)
     {
       dooble_page *page = qobject_cast<dooble_page *>
-	(parent->widget(tabAt(action->property("point").toPoint())));
+	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
 	page->enable_web_setting
