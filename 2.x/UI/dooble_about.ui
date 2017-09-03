@@ -57,7 +57,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="local_information">
         <property name="styleSheet">
          <string notr="true">QWidget {background-color: white;}</string>
         </property>
