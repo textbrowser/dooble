@@ -454,6 +454,9 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_ui.menus->menu()->addMenu(tr("&Edit"));
+  menu->addAction(tr("&Clear Items..."),
+		  this,
+		  SIGNAL(show_clear_items(void)));
   m_find_action = menu->addAction
     (QIcon(QString(":/%1/16/find.png").arg(icon_set)),
      tr("&Find"),

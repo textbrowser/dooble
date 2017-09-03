@@ -132,6 +132,7 @@ class dooble_page: public QWidget
   void new_window(void);
   void quit_dooble(void);
   void show_blocked_domains(void);
+  void show_clear_items(void);
   void show_history(void);
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);

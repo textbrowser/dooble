@@ -33,6 +33,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
+#include "dooble_clear_items.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -48,6 +49,7 @@ QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
 dooble_accepted_or_blocked_domains *dooble::s_accepted_or_blocked_domains = 0;
 dooble_application *dooble::s_application = 0;
+dooble_clear_items *dooble::s_clear_items = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
@@ -201,6 +203,9 @@ void dooble::initialize_static_members(void)
 {
   if(!s_accepted_or_blocked_domains)
     s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
+
+  if(!s_clear_items)
+    s_clear_items = new dooble_clear_items();
 
   if(!s_cookies)
     s_cookies = new dooble_cookies(false, 0);
@@ -405,6 +410,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(show_blocked_domains(void)),
 	  this,
 	  SLOT(slot_show_blocked_domains(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(show_clear_items(void)),
+	  this,
+	  SLOT(slot_show_clear_items(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -620,6 +631,11 @@ void dooble::slot_show_blocked_domains(void)
 
   s_accepted_or_blocked_domains->activateWindow();
   s_accepted_or_blocked_domains->raise();
+}
+
+void dooble::slot_show_clear_items(void)
+{
+  s_clear_items->exec();
 }
 
 void dooble::slot_show_history(void)
