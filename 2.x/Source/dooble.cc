@@ -740,8 +740,6 @@ void dooble::slot_title_changed(const QString &title)
 
   if(!page)
     return;
-  else if(page != m_ui.tab->currentWidget())
-    return;
 
   QString text(title.trimmed());
 
@@ -749,12 +747,12 @@ void dooble::slot_title_changed(const QString &title)
     text = page->url().toString();
 
   if(text.isEmpty())
-    {
-      text = tr("Dooble");
-      setWindowTitle(text);
-    }
+    text = tr("Dooble");
   else
-    setWindowTitle(tr("%1 - Dooble").arg(text));
+    text = tr("%1 - Dooble").arg(text);
+
+  if(page == m_ui.tab->currentWidget())
+    setWindowTitle(text);
 
   m_ui.tab->setTabText(m_ui.tab->indexOf(page), text);
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
