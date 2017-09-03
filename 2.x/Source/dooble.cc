@@ -254,17 +254,20 @@ void dooble::initialize_static_members(void)
 
 void dooble::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->modifiers() == Qt::AltModifier)
-    {
-      dooble_page *page = qobject_cast<dooble_page *>
-	(m_ui.tab->currentWidget());
+#ifndef Q_OS_MACOS
+  if(!menuBar()->isVisible())
+#endif
+    if(event && event->modifiers() == Qt::AltModifier)
+      {
+	dooble_page *page = qobject_cast<dooble_page *>
+	  (m_ui.tab->currentWidget());
 
-      if(page && page->menu())
-	{
-	  page->menu()->showMenu();
-	  page->menu()->menu()->activateWindow();
-	}
-    }
+	if(page && page->menu())
+	  {
+	    page->menu()->showMenu();
+	    page->menu()->menu()->activateWindow();
+	  }
+      }
 
   QMainWindow::keyPressEvent(event);
 }
