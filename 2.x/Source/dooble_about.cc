@@ -32,11 +32,23 @@
 dooble_about::dooble_about(void):QMainWindow()
 {
   m_ui.setupUi(this);
+
+  QString qversion("");
+  const char *tmp = qVersion();
+
+  if(tmp)
+    qversion = tmp;
+
+  qversion = qversion.trimmed();
+
+  if(qversion.isEmpty())
+    qversion = "unknown";
+
   m_ui.local_information->setText
     (tr("Architecture %1.<br>Qt version %2 (runtime %3).").
      arg(DOOBLE_ARCHITECTURE_STR).
      arg(QT_VERSION_STR).
-     arg(QT_VERSION_STR));
+     arg(qversion));
 }
 
 void dooble_about::keyPressEvent(QKeyEvent *event)
