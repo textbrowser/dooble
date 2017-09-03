@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -458,7 +458,7 @@
           <item>
            <widget class="QCheckBox" name="visited_links">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Visited Links</string>
@@ -495,8 +495,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>384</width>
-               <height>617</height>
+               <width>452</width>
+               <height>642</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">

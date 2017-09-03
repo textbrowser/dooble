@@ -28,6 +28,7 @@ Completed Items
 24.    Allow certificate exceptions.
 25.    Store certificate exceptions.
 26.    Simple cleaning of all databases.
+27.    Optional Visited Links.
 
 Remaining Items
 
@@ -35,4 +36,3 @@ Remaining Items
 2.     Windows PRNG.
 3.     Bookmarks. Default Home.
 4.     Complete default WebEngine context menu.
-5.     Optional Visited Links.

@@ -436,6 +436,25 @@ void dooble_settings::restore(void)
   if(m_ui.utc_time_zone->isChecked())
     qputenv("TZ", ":UTC");
 
+  m_ui.visited_links->setChecked
+    (s_settings.value("visited_links", false).toBool());
+
+  {
+    QFile file(s_settings.value("home_path").toString() +
+	       QDir::separator() +
+	       "WebEnginePersistentStorage" +
+	       QDir::separator() +
+	       "Visited Links");
+
+    if(m_ui.visited_links->isChecked())
+      file.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+    else
+      {
+	file.open(QIODevice::Truncate | QIODevice::WriteOnly);
+	file.setPermissions(QFileDevice::ReadOwner);
+      }
+  }
+
   m_ui.xss_auditing->setChecked
     (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
@@ -637,6 +656,22 @@ void dooble_settings::slot_apply(void)
   else
     qunsetenv("TZ");
 
+  {
+    QFile file(setting("home_path").toString() +
+	       QDir::separator() +
+	       "WebEnginePersistentStorage" +
+	       QDir::separator() +
+	       "Visited Links");
+
+    if(m_ui.visited_links->isChecked())
+      file.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+    else
+      {
+	file.open(QIODevice::Truncate | QIODevice::WriteOnly);
+	file.setPermissions(QFileDevice::ReadOwner);
+      }
+  }
+
   prepare_proxy(true);
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
@@ -665,6 +700,7 @@ void dooble_settings::slot_apply(void)
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
+  set_setting("visited_links", m_ui.visited_links->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   prepare_icons();
   QApplication::restoreOverrideCursor();
@@ -780,6 +816,7 @@ void dooble_settings::slot_reset(void)
   QStringList list;
 
   list << "dooble_accepted_or_blocked_domains.db"
+       << "dooble_certificate_exceptions.db"
        << "dooble_cookies.db"
        << "dooble_favicons.db"
        << "dooble_history.db"
