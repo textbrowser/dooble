@@ -55,6 +55,7 @@ RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
 FORMS           = UI\\dooble.ui \
+                  UI\\dooble_about.ui \
                   UI\\dooble_accepted_or_blocked_domains.ui \
                   UI\\dooble_authentication_dialog.ui \
                   UI\\dooble_certificate_exceptions_menu_widget.ui \
@@ -66,6 +67,7 @@ FORMS           = UI\\dooble.ui \
                   UI\\dooble_settings.ui
 
 HEADERS		= Source\\dooble.h \
+                  Source\\dooble_about.h \
                   Source\\dooble_accepted_or_blocked_domains.h \
                   Source\\dooble_address_widget.h \
                   Source\\dooble_address_widget_completer.h \
@@ -97,6 +99,7 @@ OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 RESOURCES       += Icons\\icons.qrc
 
 SOURCES		= Source\\dooble.cc \
+                  Source\\dooble_about.cc \
                   Source\\dooble_accepted_or_blocked_domains.cc \
                   Source\\dooble_address_widget.cc \
                   Source\\dooble_address_widget_completer.cc \
