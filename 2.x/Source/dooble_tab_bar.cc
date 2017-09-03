@@ -80,6 +80,7 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
        qMax(size.width(), rect().width() / qMax(1, count())),
        preferred_tab_width);
 
+  size.setHeight(size.height() + 5);
   size.setWidth(preferred_tab_width);
   return size;
 }
