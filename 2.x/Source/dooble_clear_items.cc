@@ -26,8 +26,31 @@
 */
 
 #include "dooble_clear_items.h"
+#include "dooble_settings.h"
 
 dooble_clear_items::dooble_clear_items(void):QDialog(0)
 {
   m_ui.setupUi(this);
+
+  foreach(QCheckBox *check_box, findChildren<QCheckBox *> ())
+    {
+      check_box->setChecked
+	(dooble_settings::setting(QString("dooble_clear_items_%1").
+				  arg(check_box->objectName())).toBool());
+      connect(check_box,
+	      SIGNAL(toggled(bool)),
+	      this,
+	      SLOT(slot_check_box_toggled(bool)));
+    }
+}
+
+void dooble_clear_items::slot_check_box_toggled(bool state)
+{
+  QCheckBox *check_box = qobject_cast<QCheckBox *> (sender());
+
+  if(!check_box)
+    return;
+
+  dooble_settings::set_setting
+    (QString("dooble_clear_items_%1").arg(check_box->objectName()), state);
 }

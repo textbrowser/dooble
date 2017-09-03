@@ -41,6 +41,9 @@ class dooble_clear_items: public QDialog
 
  private:
   Ui_dooble_clear_items m_ui;
+
+ private slots:
+  void slot_check_box_toggled(bool state);
 };
 
 #endif
