@@ -37,13 +37,17 @@ class dooble_clear_items: public QDialog
   Q_OBJECT
 
  public:
-  dooble_clear_items(void);
+  dooble_clear_items(QWidget *parent);
 
  private:
   Ui_dooble_clear_items m_ui;
 
  private slots:
   void slot_check_box_toggled(bool state);
+  void slot_clear_items(void);
+
+ signals:
+  void containers_cleared(void);
 };
 
 #endif

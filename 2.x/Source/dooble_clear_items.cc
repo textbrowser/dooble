@@ -25,12 +25,23 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QWebEngineProfile>
+
+#include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_clear_items.h"
+#include "dooble_cookies.h"
+#include "dooble_favicons.h"
+#include "dooble_history.h"
 #include "dooble_settings.h"
 
-dooble_clear_items::dooble_clear_items(void):QDialog(0)
+dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
+  connect(m_ui.buttonBox->button(QDialogButtonBox::Apply),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_clear_items(void)));
 
   foreach(QCheckBox *check_box, findChildren<QCheckBox *> ())
     {
@@ -53,4 +64,52 @@ void dooble_clear_items::slot_check_box_toggled(bool state)
 
   dooble_settings::set_setting
     (QString("dooble_clear_items_%1").arg(check_box->objectName()), state);
+}
+
+void dooble_clear_items::slot_clear_items(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  bool state = false;
+
+  if(m_ui.accepted_blocked_domains->isChecked())
+    {
+      dooble_accepted_or_blocked_domains::purge();
+      state = true;
+    }
+
+  if(m_ui.certificate_error_exceptions->isChecked())
+    {
+      dooble_certificate_exceptions_menu_widget::purge();
+      state = true;
+    }
+
+  if(m_ui.cookies->isChecked())
+    {
+      dooble_cookies::purge();
+      state = true;
+    }
+
+  if(m_ui.favicons->isChecked())
+    {
+      dooble_favicons::purge();
+      state = true;
+    }
+
+  if(m_ui.history->isChecked())
+    {
+      dooble_history::purge();
+      state = true;
+    }
+
+  if(m_ui.visited_links->isChecked())
+    {
+      QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+      state = true;
+    }
+
+  QApplication::restoreOverrideCursor();
+
+  if(state)
+    emit containers_cleared();
 }

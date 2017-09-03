@@ -46,7 +46,7 @@ class dooble_cookies_window: public QMainWindow
   dooble_cookies_window(bool is_private, QWidget *parent);
   void filter(const QString &text);
   void populate(void);
-  void setCookieStore(QWebEngineCookieStore *cookieStore);
+  void setCookieStore(QWebEngineCookieStore *cookie_store);
   void setCookies(dooble_cookies *cookies);
 
  protected:
@@ -57,7 +57,7 @@ class dooble_cookies_window: public QMainWindow
  private:
   QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
-  QPointer<QWebEngineCookieStore> m_cookieStore;
+  QPointer<QWebEngineCookieStore> m_cookie_store;
   QPointer<dooble_cookies> m_cookies;
   QTimer m_domain_filter_timer;
   QTimer m_purge_domains_timer;
@@ -71,6 +71,7 @@ class dooble_cookies_window: public QMainWindow
   void showNormal(void);
 
  private slots:
+  void slot_containers_cleared(void);
   void slot_cookie_added(const QNetworkCookie &cookie, bool is_favorite);
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_delete_selected(void);

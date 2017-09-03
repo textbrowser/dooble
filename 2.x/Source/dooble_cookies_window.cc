@@ -35,6 +35,7 @@
 #include <QWebEngineCookieStore>
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -78,6 +79,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   else
     statusBar()->setVisible(false);
 
+  connect(dooble::s_application,
+	  SIGNAL(containers_cleared(void)),
+	  this,
+	  SLOT(slot_containers_cleared(void)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -137,8 +142,8 @@ void dooble_cookies_window::delete_top_level_items
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(m_cookieStore && m_cookies)
-    disconnect(m_cookieStore,
+  if(m_cookie_store && m_cookies)
+    disconnect(m_cookie_store,
 	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
 	       m_cookies,
 	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
@@ -162,8 +167,8 @@ void dooble_cookies_window::delete_top_level_items
 
 	    if(!cookie.isEmpty())
 	      {
-		if(m_cookieStore)
-		  m_cookieStore->deleteCookie(cookie.at(0));
+		if(m_cookie_store)
+		  m_cookie_store->deleteCookie(cookie.at(0));
 
 		emit delete_cookie(cookie.at(0));
 	      }
@@ -181,8 +186,8 @@ void dooble_cookies_window::delete_top_level_items
 
 	  if(!cookie.isEmpty())
 	    {
-	      if(m_cookieStore)
-		m_cookieStore->deleteCookie(cookie.at(0));
+	      if(m_cookie_store)
+		m_cookie_store->deleteCookie(cookie.at(0));
 
 	      emit delete_cookie(cookie.at(0));
 	    }
@@ -191,8 +196,8 @@ void dooble_cookies_window::delete_top_level_items
       delete item;
     }
 
-  if(m_cookieStore && m_cookies)
-    connect(m_cookieStore,
+  if(m_cookie_store && m_cookies)
+    connect(m_cookie_store,
 	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
 	    m_cookies,
 	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
@@ -232,9 +237,9 @@ void dooble_cookies_window::save_settings(void)
     ("dooble_cookies_window_state", saveState().toBase64());
 }
 
-void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookieStore)
+void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookie_store)
 {
-  m_cookieStore = cookieStore;
+  m_cookie_store = cookie_store;
 }
 
 void dooble_cookies_window::setCookies(dooble_cookies *cookies)
@@ -270,6 +275,17 @@ void dooble_cookies_window::showNormal(void)
 			    setting("dooble_cookies_window_state").
 			    toByteArray()));
   QMainWindow::showNormal();
+}
+
+void dooble_cookies_window::slot_containers_cleared(void)
+{
+  m_child_items.clear();
+
+  if(m_cookie_store)
+    m_cookie_store->deleteAllCookies();
+
+  m_top_level_items.clear();
+  m_ui.tree->clear();
 }
 
 void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
@@ -373,8 +389,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(m_cookieStore && m_cookies)
-    disconnect(m_cookieStore,
+  if(m_cookie_store && m_cookies)
+    disconnect(m_cookie_store,
 	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
 	       m_cookies,
 	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
@@ -402,8 +418,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 
 		if(!cookie.isEmpty())
 		  {
-		    if(m_cookieStore)
-		      m_cookieStore->deleteCookie(cookie.at(0));
+		    if(m_cookie_store)
+		      m_cookie_store->deleteCookie(cookie.at(0));
 
 		    emit delete_cookie(cookie.at(0));
 		  }
@@ -422,8 +438,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 
 	      if(!cookie.isEmpty())
 		{
-		  if(m_cookieStore)
-		    m_cookieStore->deleteCookie(cookie.at(0));
+		  if(m_cookie_store)
+		    m_cookie_store->deleteCookie(cookie.at(0));
 
 		  emit delete_cookie(cookie.at(0));
 		}
@@ -449,8 +465,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 	      else
 		m_child_items[cookie.at(0).domain()] = hash;
 
-	      if(m_cookieStore)
-		m_cookieStore->deleteCookie(cookie.at(0));
+	      if(m_cookie_store)
+		m_cookie_store->deleteCookie(cookie.at(0));
 
 	      emit delete_cookie(cookie.at(0));
 	    }
@@ -461,8 +477,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 	}
     }
 
-  if(m_cookieStore && m_cookies)
-    connect(m_cookieStore,
+  if(m_cookie_store && m_cookies)
+    connect(m_cookie_store,
 	    SIGNAL(cookieRemoved(const QNetworkCookie &)),
 	    m_cookies,
 	    SLOT(slot_cookie_removed(const QNetworkCookie &)));

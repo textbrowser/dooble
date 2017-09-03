@@ -49,7 +49,6 @@ QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
 dooble_accepted_or_blocked_domains *dooble::s_accepted_or_blocked_domains = 0;
 dooble_application *dooble::s_application = 0;
-dooble_clear_items *dooble::s_clear_items = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
@@ -203,9 +202,6 @@ void dooble::initialize_static_members(void)
 {
   if(!s_accepted_or_blocked_domains)
     s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
-
-  if(!s_clear_items)
-    s_clear_items = new dooble_clear_items();
 
   if(!s_cookies)
     s_cookies = new dooble_cookies(false, 0);
@@ -635,7 +631,13 @@ void dooble::slot_show_blocked_domains(void)
 
 void dooble::slot_show_clear_items(void)
 {
-  s_clear_items->exec();
+  dooble_clear_items clear_items(this);
+
+  connect(&clear_items,
+	  SIGNAL(containers_cleared(void)),
+	  dooble::s_application,
+	  SIGNAL(containers_cleared(void)));
+  clear_items.exec();
 }
 
 void dooble::slot_show_history(void)

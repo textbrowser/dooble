@@ -33,6 +33,7 @@
 #include <QSqlQuery>
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
@@ -54,10 +55,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 			    setting("history_window_splitter_state").
 			    toByteArray()));
   m_ui.table->sortByColumn(0, Qt::AscendingOrder);
-  connect(&m_search_timer,
-	  SIGNAL(timeout(void)),
+  connect(dooble::s_application,
+	  SIGNAL(containers_cleared(void)),
 	  this,
-	  SLOT(slot_search_timer_timeout(void)));
+	  SLOT(slot_containers_cleared(void)));
   connect(dooble::s_history,
 	  SIGNAL(icon_updated(const QIcon &, const QUrl &)),
 	  this,
@@ -75,6 +76,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(populated(void)),
 	  this,
 	  SLOT(slot_populate(void)));
+  connect(&m_search_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_search_timer_timeout(void)));
   connect(m_ui.period,
 	  SIGNAL(currentRowChanged(int)),
 	  &m_search_timer,
@@ -252,6 +257,12 @@ void dooble_history_window::showNormal(QWidget *parent)
 					   toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_history_window::slot_containers_cleared(void)
+{
+  m_items.clear();
+  m_ui.table->clearContents();
 }
 
 void dooble_history_window::slot_copy_location(void)

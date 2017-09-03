@@ -36,6 +36,7 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_application.h"
 #include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
@@ -46,6 +47,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
   m_ui.table->sortByColumn(1, Qt::AscendingOrder);
+  connect(dooble::s_application,
+	  SIGNAL(containers_cleared(void)),
+	  this,
+	  SLOT(slot_containers_cleared(void)));
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -396,6 +401,12 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
     return;
 
   accept_or_block_domain(text);
+}
+
+void dooble_accepted_or_blocked_domains::slot_containers_cleared(void)
+{
+  m_domains.clear();
+  m_ui.table->clearContents();
 }
 
 void dooble_accepted_or_blocked_domains::slot_delete_rows(void)

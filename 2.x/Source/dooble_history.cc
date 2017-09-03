@@ -32,6 +32,7 @@
 #include <QtConcurrent>
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
@@ -41,6 +42,10 @@ QAtomicInteger<quint64> dooble_history::s_db_id;
 
 dooble_history::dooble_history(void):QObject()
 {
+  connect(dooble::s_application,
+	  SIGNAL(containers_cleared(void)),
+	  this,
+	  SLOT(slot_containers_cleared(void)));
   connect(&m_purge_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -355,6 +360,11 @@ void dooble_history::save_item(const QIcon &icon,
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_history::slot_containers_cleared(void)
+{
+  m_history.clear();
 }
 
 void dooble_history::slot_populate(void)

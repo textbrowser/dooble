@@ -68,6 +68,7 @@ class dooble_history: public QObject
 	     const QByteArray &encryption_key);
 
  private slots:
+  void slot_containers_cleared(void);
   void slot_populate(void);
   void slot_purge_timer_timeout(void);
 

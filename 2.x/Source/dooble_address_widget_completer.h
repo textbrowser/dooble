@@ -55,6 +55,7 @@ class dooble_address_widget_completer: public QCompleter
 
  private slots:
   void slot_clicked(const QModelIndex &index);
+  void slot_containers_cleared(void);
   void slot_text_edited(const QString &text);
 };
 

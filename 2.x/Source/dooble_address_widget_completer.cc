@@ -32,6 +32,7 @@
 #include "dooble.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_address_widget_completer_popup.h"
+#include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_page.h"
 
@@ -48,6 +49,10 @@ dooble_address_widget_completer::dooble_address_widget_completer
   m_popup->setShowGrid(false);
   m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   m_popup->verticalHeader()->setVisible(false);
+  connect(dooble::s_application,
+	  SIGNAL(containers_cleared(void)),
+	  this,
+	  SLOT(slot_containers_cleared(void)));
   connect(m_popup,
 	  SIGNAL(clicked(const QModelIndex &)),
 	  this,
@@ -247,6 +252,13 @@ void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
   qobject_cast<QLineEdit *> (widget())->setText(index.data().toString());
   QApplication::postEvent
     (widget(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+}
+
+void dooble_address_widget_completer::slot_containers_cleared(void)
+{
+  m_model->clear();
+  m_purged_items.clear();
+  m_urls.clear();
 }
 
 void dooble_address_widget_completer::slot_text_edited(const QString &text)

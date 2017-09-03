@@ -38,13 +38,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="favicons">
-        <property name="text">
-         <string>Favicons</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QCheckBox" name="certificate_error_exceptions">
         <property name="text">
          <string>Certificate Error Exceptions</string>
@@ -62,6 +55,13 @@
        <widget class="QCheckBox" name="download_history">
         <property name="text">
          <string>Download History</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="favicons">
+        <property name="text">
+         <string>Favicons</string>
         </property>
        </widget>
       </item>
@@ -109,10 +109,10 @@
  </widget>
  <tabstops>
   <tabstop>accepted_blocked_domains</tabstop>
-  <tabstop>favicons</tabstop>
   <tabstop>certificate_error_exceptions</tabstop>
   <tabstop>cookies</tabstop>
   <tabstop>download_history</tabstop>
+  <tabstop>favicons</tabstop>
   <tabstop>history</tabstop>
   <tabstop>visited_links</tabstop>
  </tabstops>

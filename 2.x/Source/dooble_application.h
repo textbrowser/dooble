@@ -39,6 +39,7 @@ class dooble_application: public QApplication
   QString style_name(void) const;
 
  signals:
+  void containers_cleared(void);
   void dooble_credentials_authenticated(bool state);
 };
 
