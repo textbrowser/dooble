@@ -269,7 +269,8 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 
   QMenu menu(this);
 
-  if(dooble_certificate_exceptions_menu_widget::has_exception(m_url))
+  if(dooble_certificate_exceptions_menu_widget::
+     has_exception(m_url.adjusted(QUrl::RemovePath)))
     menu.addAction
       (QIcon(":/certificate_warning.png"),
        tr("Certificate exception accepted for this site..."),

@@ -198,11 +198,11 @@ void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 
 void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 {
-  m_url = url;
+  m_url = url.adjusted(QUrl::RemovePath);
 
-  if(!url.isEmpty() && url.isValid())
+  if(!m_url.isEmpty() && m_url.isValid())
     m_ui.label->setText
-      (tr("A security exception was accepted for %1.").arg(url.toString()));
+      (tr("A security exception was accepted for %1.").arg(m_url.toString()));
   else
     m_ui.label->setText
       (tr("A security exception was accepted for this site."));

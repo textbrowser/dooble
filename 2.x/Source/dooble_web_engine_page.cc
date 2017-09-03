@@ -98,8 +98,9 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      if(dooble_certificate_exceptions_menu_widget::
-	 has_exception(certificateError.url()))
+      QUrl url(certificateError.url().adjusted(QUrl::RemovePath));
+
+      if(dooble_certificate_exceptions_menu_widget::has_exception(url))
 	return true;
 
       if(!view())
@@ -111,7 +112,7 @@ bool dooble_web_engine_page::certificateError
       if(!stacked_layout)
 	return false;
 
-      m_certificate_error_url = certificateError.url();
+      m_certificate_error_url = url;
 
       if(!m_certificate_error_widget)
 	{
@@ -139,7 +140,7 @@ bool dooble_web_engine_page::certificateError
 	    "Please accept or decline the permanent "
 	    "exception.<br><br>"
 	    "Permanent exceptions may be removed later.</html>").
-	 arg(certificateError.url().toString()).
+	 arg(url.toString()).
 	 arg(certificateError.errorDescription()));
       stacked_layout->removeWidget(m_certificate_error_widget);
       stacked_layout->addWidget(m_certificate_error_widget);
