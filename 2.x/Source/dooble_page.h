@@ -135,6 +135,7 @@ class dooble_page: public QWidget
   void show_blocked_domains(void);
   void show_clear_items(void);
   void show_history(void);
+  void show_popup_menu(void);
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
   void titleChanged(const QString &title);

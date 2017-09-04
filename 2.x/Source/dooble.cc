@@ -42,6 +42,7 @@
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_page.h"
+#include "dooble_popup_menu.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
@@ -55,6 +56,7 @@ dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
 dooble_history_window *dooble::s_history_window = 0;
+dooble_popup_menu *dooble::s_popup_menu = 0;
 dooble_settings *dooble::s_settings = 0;
 dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
   0;
@@ -242,6 +244,9 @@ void dooble::initialize_static_members(void)
 
   if(!s_history_window)
     s_history_window = new dooble_history_window();
+
+  if(!s_popup_menu)
+    s_popup_menu = new dooble_popup_menu();
 
   if(!s_url_request_interceptor)
     {
@@ -442,6 +447,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(show_history(void)),
 	  this,
 	  SLOT(slot_show_history(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(show_popup_menu(void)),
+	  this,
+	  SLOT(slot_show_popup_menu(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -683,6 +694,11 @@ void dooble::slot_show_history(void)
 
   s_history_window->activateWindow();
   s_history_window->raise();
+}
+
+void dooble::slot_show_popup_menu(void)
+{
+  s_popup_menu->show();
 }
 
 void dooble::slot_show_settings(void)

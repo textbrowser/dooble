@@ -86,10 +86,12 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_label_widget.h \
                   Source\\dooble_page.h \
                   Source\\dooble_pbkdf2.h \
+                  Source\\dooble_popup_menu.h \
                   Source\\dooble_search_widget.h \
                   Source\\dooble_settings.h \
                   Source\\dooble_tab_bar.h \
                   Source\\dooble_tab_widget.h \
+                  Source\\dooble_tool_button.h \
 		  Source\\dooble_web_engine_url_request_interceptor.h \
                   Source\\dooble_web_engine_page.h \
                   Source\\dooble_web_engine_view.h
@@ -123,12 +125,14 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_main.cc \
                   Source\\dooble_page.cc \
                   Source\\dooble_pbkdf2.cc \
+                  Source\\dooble_popup_menu.cc \
                   Source\\dooble_random.cc \
                   Source\\dooble_search_widget.cc \
                   Source\\dooble_settings.cc \
                   Source\\dooble_tab_bar.cc \
                   Source\\dooble_tab_widget.cc \
                   Source\\dooble_text_utilities.cc \
+                  Source\\dooble_tool_button.cc \
                   Source\\dooble_ui_utilities.cc \
 		  Source\\dooble_web_engine_url_request_interceptor.cc \
                   Source\\dooble_web_engine_page.cc \
