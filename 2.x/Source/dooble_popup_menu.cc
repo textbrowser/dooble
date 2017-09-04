@@ -85,11 +85,17 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
 
 dooble *dooble_popup_menu::find_dooble(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   foreach(QWidget *widget, QApplication::topLevelWidgets())
     if(qobject_cast<dooble *> (widget) &&
        qobject_cast<dooble *> (widget)->isVisible())
-      return qobject_cast<dooble *> (widget);
+      {
+	QApplication::restoreOverrideCursor();
+	return qobject_cast<dooble *> (widget);
+      }
 
+  QApplication::restoreOverrideCursor();
   return 0;
 }
 
@@ -129,6 +135,8 @@ void dooble_popup_menu::slot_authenticate(void)
   ** Locate the top-most dooble_page object.
   */
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   foreach(QWidget *widget, QApplication::topLevelWidgets())
     if(qobject_cast<dooble *> (widget) &&
        qobject_cast<dooble *> (widget)->isVisible())
@@ -140,6 +148,8 @@ void dooble_popup_menu::slot_authenticate(void)
 
 	break;
       }
+
+  QApplication::restoreOverrideCursor();
 
   if(m_dooble_page)
     {

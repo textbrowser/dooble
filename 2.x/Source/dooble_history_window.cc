@@ -388,6 +388,8 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
       ** Locate a Dooble window.
       */
 
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
       QWidgetList list(QApplication::topLevelWidgets());
 
       for(int i = 0; i < list.size(); i++)
@@ -406,6 +408,8 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
 		    Qt::UniqueConnection);
 	    break;
 	  }
+
+      QApplication::restoreOverrideCursor();
     }
 
   emit open_url(item->data(Qt::UserRole).toUrl());
