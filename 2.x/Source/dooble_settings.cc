@@ -458,6 +458,7 @@ void dooble_settings::restore(void)
   m_ui.xss_auditing->setChecked
     (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
+  m_ui.reset_credentials->setEnabled(has_dooble_credentials());
   QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
 
@@ -595,6 +596,7 @@ void dooble_settings::slot_apply(void)
       */
 
       m_ui.iterations->setValue(m_ui.iterations->minimum());
+      m_ui.reset_credentials->setEnabled(false);
       remove_setting("authentication_iteration_count");
       remove_setting("authentication_salt");
       remove_setting("authentication_salted_password");
@@ -772,6 +774,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      dooble::s_cryptography->setAuthenticated(true);
 	      dooble::s_cryptography->setKeys
 		(list.at(0).mid(0, 64), list.at(0).mid(64, 32));
+	      m_ui.reset_credentials->setEnabled(true);
 	      emit dooble_credentials_created();
 	    }
 	}
@@ -888,6 +891,7 @@ void dooble_settings::slot_reset_credentials(void)
   */
 
   m_ui.iterations->setValue(m_ui.iterations->minimum());
+  m_ui.reset_credentials->setEnabled(false);
   remove_setting("authentication_iteration_count");
   remove_setting("authentication_salt");
   remove_setting("authentication_salted_password");
