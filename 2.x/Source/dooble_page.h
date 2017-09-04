@@ -36,6 +36,7 @@
 #include "dooble_settings.h"
 #include "ui_dooble_page.h"
 
+class QPrinter;
 class QWebEngineSettings;
 class dooble_address_widget;
 class dooble_web_engine_view;
@@ -51,8 +52,10 @@ class dooble_page: public QWidget
   };
 
   dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
+  ~dooble_page();
   QAction *action_close_tab(void) const;
   QIcon icon(void) const;
+  QPrinter *printer(void) const;
   QString title(void) const;
   QToolButton *menu(void) const;
   QUrl url(void) const;
@@ -62,6 +65,7 @@ class dooble_page: public QWidget
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
   void load(const QUrl &url);
+  void print_page(void);
 
  protected:
   void resizeEvent(QResizeEvent *event);
@@ -71,6 +75,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_authentication_action;
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_settings_action;
+  QPrinter *m_printer;
   Ui_dooble_page m_ui;
   bool m_is_private;
   bool m_shortcuts_prepared;

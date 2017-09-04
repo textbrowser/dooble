@@ -27,6 +27,7 @@
 
 #include <QKeyEvent>
 #include <QMenu>
+#include <QPrintDialog>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -106,6 +107,10 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 }
 
 dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
+{
+}
+
+dooble::~dooble()
 {
 }
 
@@ -425,6 +430,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(print(void)),
+	  this,
+	  SLOT(slot_print(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(quit_dooble(void)),
 	  this,
 	  SLOT(slot_quit_dooble(void)),
@@ -639,6 +650,19 @@ void dooble::slot_open_url(const QUrl &url)
 void dooble::slot_populate_containers_timer_timeout(void)
 {
   emit dooble_credentials_authenticated(true);
+}
+
+void dooble::slot_print(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  QPrintDialog print_dialog(page->printer(), this);
+
+  if(print_dialog.exec() == QDialog::Accepted)
+    page->print_page();
 }
 
 void dooble::slot_quit_dooble(void)

@@ -55,6 +55,7 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
+  ~dooble();
   dooble_page *current_page(void) const;
   static QPointer<dooble_history> s_history;
   static dooble_about *s_about;
@@ -101,6 +102,7 @@ class dooble: public QMainWindow
   void slot_open_tab_as_new_window(int index);
   void slot_open_url(const QUrl &url);
   void slot_populate_containers_timer_timeout(void);
+  void slot_print(void);
   void slot_quit_dooble(void);
   void slot_settings_applied(void);
   void slot_show_about(void);

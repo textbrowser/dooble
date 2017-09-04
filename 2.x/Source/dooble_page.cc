@@ -29,6 +29,7 @@
 #include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
+#include <QPrinter>
 #include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
@@ -56,6 +57,7 @@ dooble_page::dooble_page(bool is_private,
 			 QWidget *parent):QWidget(parent)
 {
   m_is_private = is_private;
+  m_printer = new QPrinter();
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -240,6 +242,11 @@ dooble_page::dooble_page(bool is_private,
   slot_dooble_credentials_created();
 }
 
+dooble_page::~dooble_page()
+{
+  delete m_printer;
+}
+
 QAction *dooble_page::action_close_tab(void) const
 {
   return m_action_close_tab;
@@ -248,6 +255,11 @@ QAction *dooble_page::action_close_tab(void) const
 QIcon dooble_page::icon(void) const
 {
   return dooble_favicons::icon(m_view->url());
+}
+
+QPrinter *dooble_page::printer(void) const
+{
+  return m_printer;
 }
 
 QString dooble_page::title(void) const
@@ -524,6 +536,17 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
 	("QToolButton {padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
 #endif
+}
+
+void dooble_page::print_page(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_view->page()->print(m_printer,
+			[=] (bool result)
+			{
+			  QApplication::restoreOverrideCursor();
+			  Q_UNUSED(result)
+			});
 }
 
 void dooble_page::resizeEvent(QResizeEvent *event)
