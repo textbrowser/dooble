@@ -270,19 +270,6 @@ Window</string>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QToolButton" name="history">
        <property name="minimumSize">
         <size>
@@ -298,6 +285,37 @@ Window</string>
        </property>
        <property name="text">
         <string>History</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="print">
+       <property name="minimumSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Print</string>
        </property>
        <property name="iconSize">
         <size>
@@ -361,19 +379,6 @@ Window</string>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <spacer name="horizontalSpacer_7">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item>
       <widget class="QToolButton" name="authenticate">
        <property name="minimumSize">
@@ -474,6 +479,7 @@ Window</string>
   <tabstop>new_tab</tabstop>
   <tabstop>new_window</tabstop>
   <tabstop>history</tabstop>
+  <tabstop>print</tabstop>
   <tabstop>settings</tabstop>
   <tabstop>authenticate</tabstop>
   <tabstop>exit_dooble</tabstop>

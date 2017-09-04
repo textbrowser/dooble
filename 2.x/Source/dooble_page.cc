@@ -445,6 +445,11 @@ void dooble_page::prepare_standard_menus(void)
       (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 
   menu->addSeparator();
+  menu->addAction(tr("Print..."),
+		  this,
+		  SIGNAL(print(void)),
+		  QKeySequence(tr("Ctrl+P")));
+  menu->addSeparator();
   menu->addAction(tr("E&xit Dooble"),
 		  this,
 		  SIGNAL(quit_dooble(void)),

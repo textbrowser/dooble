@@ -113,6 +113,7 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.new_tab->setIcon(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)));
   m_ui.new_window->setIcon
     (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
+  m_ui.print->setIcon(QIcon(QString(":/%1/48/print.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
 }
 
