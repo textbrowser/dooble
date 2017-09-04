@@ -149,9 +149,13 @@ dooble_page::dooble_page(bool is_private,
 	  this,
 	  SLOT(slot_prepare_forward_menu(void)));
   connect(m_ui.menus,
-	  SIGNAL(double_clicked(void)),
+	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(show_popup_menu(void)));
+  connect(m_ui.menus,
+	  SIGNAL(clicked(void)),
+	  m_ui.menus,
+	  SLOT(showMenu(void)));
   connect(m_ui.menus->menu(),
 	  SIGNAL(aboutToShow(void)),
 	  this,

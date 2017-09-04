@@ -36,12 +36,6 @@ class dooble_tool_button: public QToolButton
 
  public:
   dooble_tool_button(QWidget *widget);
-
- protected:
-  void mouseDoubleClickEvent(QMouseEvent *event);
-
- signals:
-  void double_clicked(void);
 };
 
 #endif

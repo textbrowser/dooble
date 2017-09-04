@@ -83,6 +83,11 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
 }
 
+dooble *find_dooble(void)
+{
+  return 0;
+}
+
 void dooble_popup_menu::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());

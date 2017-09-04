@@ -30,9 +30,3 @@
 dooble_tool_button::dooble_tool_button(QWidget *parent):QToolButton(parent)
 {
 }
-
-void dooble_tool_button::mouseDoubleClickEvent(QMouseEvent *event)
-{
-  QToolButton::mouseDoubleClickEvent(event);
-  emit double_clicked();
-}

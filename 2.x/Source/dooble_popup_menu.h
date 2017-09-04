@@ -33,6 +33,7 @@
 
 #include "ui_dooble_popup_menu.h"
 
+class dooble;
 class dooble_page;
 
 class dooble_popup_menu:public QDialog
@@ -45,6 +46,7 @@ class dooble_popup_menu:public QDialog
  private:
   QPointer<dooble_page> m_dooble_page;
   Ui_dooble_popup_menu m_ui;
+  static dooble *find_dooble(void);
   void prepare_icons(void);
 
  private slots:
