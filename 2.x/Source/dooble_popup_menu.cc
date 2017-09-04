@@ -26,6 +26,8 @@
 */
 
 #include "dooble.h"
+#include "dooble_application.h"
+#include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_settings.h"
 
@@ -33,14 +35,18 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
 {
   m_ui.setupUi(this);
   m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
+  connect(dooble::s_application,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  this,
+	  SLOT(slot_dooble_credentials_authenticated(bool)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
-  connect(dooble::s_settings,
-	  SIGNAL(dooble_credentials_authenticated(bool)),
+  connect(m_ui.authenticate,
+	  SIGNAL(clicked(void)),
 	  this,
-	  SLOT(slot_dooble_credentials_authenticated(bool)));
+	  SLOT(slot_authenticate(void)));
 
 #ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
@@ -70,6 +76,41 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.new_window->setIcon
     (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
+}
+
+void dooble_popup_menu::slot_authenticate(void)
+{
+  if(m_dooble_page)
+    disconnect(this,
+	       SIGNAL(authenticate(void)),
+	       m_dooble_page,
+	       SLOT(slot_authenticate(void)));
+
+  /*
+  ** Locate the top-most dooble_page object.
+  */
+
+  foreach(QWidget *widget, QApplication::topLevelWidgets())
+    if(qobject_cast<dooble *> (widget) &&
+       qobject_cast<dooble *> (widget)->isVisible())
+      {
+	m_dooble_page = qobject_cast<dooble *> (widget)->current_page();
+
+	if(m_dooble_page)
+	  widget->raise();
+
+	break;
+      }
+
+  if(m_dooble_page)
+    {
+      connect(this,
+	      SIGNAL(authenticate(void)),
+	      m_dooble_page,
+	      SLOT(slot_authenticate(void)),
+	      Qt::UniqueConnection);
+      emit authenticate();
+    }
 }
 
 void dooble_popup_menu::slot_dooble_credentials_authenticated(bool state)

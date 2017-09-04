@@ -109,6 +109,11 @@ dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
 {
 }
 
+dooble_page *dooble::current_page(void) const
+{
+  return qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+}
+
 void dooble::closeEvent(QCloseEvent *event)
 {
   if(dooble_settings::setting("save_geometry").toBool())

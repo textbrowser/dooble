@@ -55,6 +55,7 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
+  dooble_page *current_page(void) const;
   static QPointer<dooble_history> s_history;
   static dooble_about *s_about;
   static dooble_accepted_or_blocked_domains *s_accepted_or_blocked_domains;
