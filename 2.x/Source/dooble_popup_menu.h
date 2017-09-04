@@ -44,6 +44,7 @@ class dooble_popup_menu:public QDialog
   void prepare_icons(void);
 
  private slots:
+  void slot_dooble_credentials_authenticated(bool state);
   void slot_settings_applied(void);
 };
 

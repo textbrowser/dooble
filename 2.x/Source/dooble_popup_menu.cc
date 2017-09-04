@@ -32,10 +32,15 @@
 dooble_popup_menu::dooble_popup_menu(void):QDialog()
 {
   m_ui.setupUi(this);
+  m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  connect(dooble::s_settings,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  this,
+	  SLOT(slot_dooble_credentials_authenticated(bool)));
 
 #ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
@@ -65,6 +70,14 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.new_window->setIcon
     (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
+}
+
+void dooble_popup_menu::slot_dooble_credentials_authenticated(bool state)
+{
+  if(state)
+    m_ui.authenticate->setEnabled(false);
+  else
+    m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
 }
 
 void dooble_popup_menu::slot_settings_applied(void)
