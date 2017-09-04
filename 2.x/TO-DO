@@ -33,7 +33,7 @@ Completed Items
 
 Remaining Items
 
-1.     Download panel.
+1.     Download panel. Remind user on exit.
 2.     Windows PRNG.
 3.     Bookmarks. Default Home.
 4.     Complete default WebEngine context menu.
