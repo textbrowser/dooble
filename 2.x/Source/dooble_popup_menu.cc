@@ -31,5 +31,4 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
 {
   m_ui.setupUi(this);
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
-  setWindowFlag(Qt::X11BypassWindowManagerHint, true);
 }
