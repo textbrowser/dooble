@@ -29,6 +29,7 @@
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
 #include "dooble_clear_items.h"
+#include "dooble_cookies_window.h"
 #include "dooble_history_window.h"
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
@@ -92,6 +93,8 @@ void dooble_popup_menu::prepare_icons(void)
     (QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
   m_ui.clear_items->setIcon
     (QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)));
+  m_ui.cookies->setIcon
+    (QIcon(QString(":/%1/48/cookies.png").arg(icon_set)));
   m_ui.exit_dooble->setIcon
     (QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)));
   m_ui.history->setIcon(QIcon(QString(":/%1/48/history.png").arg(icon_set)));
@@ -168,6 +171,12 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 	      dooble::s_application,
 	      SIGNAL(containers_cleared(void)));
       clear_items.exec();
+    }
+  else if(m_ui.cookies == sender())
+    {
+      dooble::s_cookies_window->showNormal();
+      dooble::s_cookies_window->activateWindow();
+      dooble::s_cookies_window->raise();
     }
   else if(m_ui.history == sender())
     {

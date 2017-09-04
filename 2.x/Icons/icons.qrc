@@ -19,6 +19,7 @@
 	<file>BlueBits/48/authenticate.png</file>
 	<file>BlueBits/48/blocked_domains.png</file>
 	<file>BlueBits/48/clear_items.png</file>
+	<file>BlueBits/48/cookies.png</file>
 	<file>BlueBits/48/exit_dooble.png</file>
 	<file>BlueBits/48/history.png</file>
 	<file>BlueBits/48/new_private_tab.png</file>
@@ -50,6 +51,7 @@
 	<file>Google Material Design/48/authenticate.png</file>
 	<file>Google Material Design/48/blocked_domains.png</file>
 	<file>Google Material Design/48/clear_items.png</file>
+	<file>Google Material Design/48/cookies.png</file>
 	<file>Google Material Design/48/exit_dooble.png</file>
 	<file>Google Material Design/48/history.png</file>
 	<file>Google Material Design/48/new_private_tab.png</file>
@@ -80,6 +82,16 @@
 	<file>SnipIcons/32/menu.png</file>
 	<file>SnipIcons/32/reload.png</file>
 	<file>SnipIcons/32/stop.png</file>
+	<file>SnipIcons/48/authenticate.png</file>
+	<file>SnipIcons/48/blocked_domains.png</file>
+	<file>SnipIcons/48/clear_items.png</file>
+	<file>SnipIcons/48/cookies.png</file>
+	<file>SnipIcons/48/exit_dooble.png</file>
+	<file>SnipIcons/48/history.png</file>
+	<file>SnipIcons/48/new_private_tab.png</file>
+	<file>SnipIcons/48/new_tab.png</file>
+	<file>SnipIcons/48/new_window.png</file>
+	<file>SnipIcons/48/settings.png</file>
 	<file>SnipIcons/64/cache.png</file>
 	<file>SnipIcons/64/display.png</file>
 	<file>SnipIcons/64/history.png</file>
