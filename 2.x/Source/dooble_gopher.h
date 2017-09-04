@@ -50,7 +50,7 @@ class dooble_gopher: public QWebEngineUrlSchemeHandler
   QUrl m_url;
   char m_item_type;
   static QByteArray s_eol;
-  QByteArray plain_to_html(const QByteArray &bytes) const;
+  static QByteArray plain_to_html(const QByteArray &bytes);
   void requestStarted(QWebEngineUrlRequestJob *request);
 
  private slots:

@@ -48,7 +48,7 @@ dooble_gopher::dooble_gopher(QObject *parent):QWebEngineUrlSchemeHandler(parent)
 	  SLOT(slot_ready_read(void)));
 }
 
-QByteArray dooble_gopher::plain_to_html(const QByteArray &bytes) const
+QByteArray dooble_gopher::plain_to_html(const QByteArray &bytes)
 {
   QByteArray b(bytes);
 
@@ -66,6 +66,7 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 
   m_content.clear();
   m_html.clear();
+  m_item_type = 0;
   m_request = request;
   m_tcp_socket.abort();
   m_url = m_request->requestUrl();
@@ -196,8 +197,8 @@ void dooble_gopher::slot_ready_read(void)
 		 arg(list.value(2).trimmed().constData()).
 		 arg(port).
 		 arg(c).
-		 arg(list.value(1).constData() + (list.value(1).mid(0, 1)
-						  == "/")).
+		 arg(list.value(1).constData() + (list.value(1).
+						  mid(0, 1) == "/")).
 		 arg(plain_to_html(list.value(0)).constData()).
 		 arg(c == '1' ? "..." : ""));
 	    }
