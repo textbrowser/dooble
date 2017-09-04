@@ -25,10 +25,49 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble.h"
 #include "dooble_popup_menu.h"
+#include "dooble_settings.h"
 
 dooble_popup_menu::dooble_popup_menu(void):QDialog()
 {
   m_ui.setupUi(this);
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
+
+#ifdef Q_OS_MACOS
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    tool_button->setStyleSheet("QToolButton {border: none;}");
+#endif
+
+  prepare_icons();
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
+}
+
+void dooble_popup_menu::prepare_icons(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  m_ui.authenticate->setIcon
+    (QIcon(QString(":/%1/48/authenticate.png").arg(icon_set)));
+  m_ui.blocked_domains->setIcon
+    (QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
+  m_ui.clear_items->setIcon
+    (QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)));
+  m_ui.exit_dooble->setIcon
+    (QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)));
+  m_ui.history->setIcon(QIcon(QString(":/%1/48/history.png").arg(icon_set)));
+  m_ui.new_private_tab->setIcon
+    (QIcon(QString(":/%1/48/new_private_tab.png").arg(icon_set)));
+  m_ui.new_tab->setIcon(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)));
+  m_ui.new_window->setIcon
+    (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
+  m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
+}
+
+void dooble_popup_menu::slot_settings_applied(void)
+{
+  prepare_icons();
 }

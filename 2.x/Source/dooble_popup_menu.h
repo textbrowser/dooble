@@ -41,6 +41,10 @@ class dooble_popup_menu:public QDialog
 
  private:
   Ui_dooble_popup_menu m_ui;
+  void prepare_icons(void);
+
+ private slots:
+  void slot_settings_applied(void);
 };
 
 #endif

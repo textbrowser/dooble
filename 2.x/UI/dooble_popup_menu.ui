@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>287</width>
-    <height>285</height>
+    <width>275</width>
+    <height>275</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,9 +47,6 @@
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>Authenticate</string>
        </property>
@@ -58,6 +55,9 @@
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -78,9 +78,6 @@
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>Blocked
 Domains</string>
@@ -90,6 +87,9 @@ Domains</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -110,9 +110,6 @@ Domains</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>Clear Items</string>
        </property>
@@ -121,6 +118,9 @@ Domains</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -171,9 +171,6 @@ Domains</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>New Private
 Tab</string>
@@ -183,6 +180,9 @@ Tab</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -203,9 +203,6 @@ Tab</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>New Tab</string>
        </property>
@@ -214,6 +211,9 @@ Tab</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -234,9 +234,6 @@ Tab</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>New
 Window</string>
@@ -246,6 +243,9 @@ Window</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -296,9 +296,6 @@ Window</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>History</string>
        </property>
@@ -307,6 +304,9 @@ Window</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -327,9 +327,6 @@ Window</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>Settings</string>
        </property>
@@ -338,6 +335,9 @@ Window</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -358,9 +358,6 @@ Window</string>
          <height>75</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {border: none;}</string>
-       </property>
        <property name="text">
         <string>Exit Dooble</string>
        </property>
@@ -369,6 +366,9 @@ Window</string>
          <width>32</width>
          <height>32</height>
         </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>

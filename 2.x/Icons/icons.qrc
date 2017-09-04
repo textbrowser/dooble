@@ -16,6 +16,15 @@
 	<file>BlueBits/32/menu.png</file>
 	<file>BlueBits/32/reload.png</file>
 	<file>BlueBits/32/stop.png</file>
+	<file>BlueBits/48/authenticate.png</file>
+	<file>BlueBits/48/blocked_domains.png</file>
+	<file>BlueBits/48/clear_items.png</file>
+	<file>BlueBits/48/exit_dooble.png</file>
+	<file>BlueBits/48/history.png</file>
+	<file>BlueBits/48/new_private_tab.png</file>
+	<file>BlueBits/48/new_tab.png</file>
+	<file>BlueBits/48/new_window.png</file>
+	<file>BlueBits/48/settings.png</file>
 	<file>BlueBits/64/cache.png</file>
 	<file>BlueBits/64/display.png</file>
 	<file>BlueBits/64/history.png</file>
