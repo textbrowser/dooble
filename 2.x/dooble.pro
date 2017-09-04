@@ -79,6 +79,7 @@ HEADERS		= Source\\dooble.h \
                   Source\\dooble_cookies.h \
                   Source\\dooble_cookies_window.h \
                   Source\\dooble_favicons.h \
+                  Source\\dooble_gopher.h \
                   Source\\dooble_history.h \
                   Source\\dooble_history_window.h \
                   Source\\dooble_label_widget.h \
@@ -113,6 +114,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_cookies_window.cc \
                   Source\\dooble_cryptography.cc \
                   Source\\dooble_favicons.cc \
+                  Source\\dooble_gopher.cc \
                   Source\\dooble_history.cc \
                   Source\\dooble_history_window.cc \
 		  Source\\dooble_hmac.cc \

@@ -35,6 +35,7 @@
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
+#include "dooble_gopher.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_url_request_interceptor.h"
@@ -57,6 +58,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	  SIGNAL(certificate_exception_accepted(const QUrl &)),
 	  this,
 	  SLOT(slot_certificate_exception_accepted(const QUrl &)));
+
+  if(!m_page->profile()->urlSchemeHandler("gopher"))
+    m_page->profile()->installUrlSchemeHandler
+      ("gopher", new dooble_gopher(this));
 
   if(m_is_private)
     {
