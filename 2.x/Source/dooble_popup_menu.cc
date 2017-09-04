@@ -26,7 +26,10 @@
 */
 
 #include "dooble.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
+#include "dooble_clear_items.h"
+#include "dooble_history_window.h"
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_settings.h"
@@ -48,10 +51,32 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
 	  this,
 	  SLOT(slot_authenticate(void)));
 
-#ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
-    tool_button->setStyleSheet("QToolButton {border: none;}");
+    {
+      connect(tool_button,
+	      SIGNAL(clicked(void)),
+	      this,
+	      SLOT(slot_tool_button_clicked(void)));
+
+      if(m_ui.exit_dooble == tool_button)
+#ifdef Q_OS_MACOS
+	tool_button->setStyleSheet
+	  ("QToolButton {border: none;}"
+	   "QToolButton::hover {background-color: darkred;}");
+#else
+        tool_button->setStyleSheet
+	  ("QToolButton::hover {background-color: darkred;}");
 #endif
+      else
+#ifdef Q_OS_MACOS
+	tool_button->setStyleSheet
+	  ("QToolButton {border: none;}"
+	   "QToolButton::hover {background-color: darkorange;}");
+#else
+        {
+	}
+#endif
+    }
 
   prepare_icons();
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
@@ -124,4 +149,44 @@ void dooble_popup_menu::slot_dooble_credentials_authenticated(bool state)
 void dooble_popup_menu::slot_settings_applied(void)
 {
   prepare_icons();
+}
+
+void dooble_popup_menu::slot_tool_button_clicked(void)
+{
+  if(m_ui.blocked_domains == sender())
+    {
+      dooble::s_accepted_or_blocked_domains->showNormal();
+      dooble::s_accepted_or_blocked_domains->activateWindow();
+      dooble::s_accepted_or_blocked_domains->raise();
+    }
+  else if(m_ui.clear_items == sender())
+    {
+      dooble_clear_items clear_items(0);
+
+      connect(&clear_items,
+	      SIGNAL(containers_cleared(void)),
+	      dooble::s_application,
+	      SIGNAL(containers_cleared(void)));
+      clear_items.exec();
+    }
+  else if(m_ui.history == sender())
+    {
+      dooble::s_history_window->showNormal(0);
+      dooble::s_history_window->activateWindow();
+      dooble::s_history_window->raise();
+    }
+  else if(m_ui.new_private_tab == sender())
+    {
+    }
+  else if(m_ui.new_tab == sender())
+    {
+    }
+  else if(m_ui.new_window == sender())
+    (new dooble())->show();
+  else if(m_ui.settings == sender())
+    {
+      dooble::s_settings->showNormal();
+      dooble::s_settings->activateWindow();
+      dooble::s_settings->raise();
+    }
 }

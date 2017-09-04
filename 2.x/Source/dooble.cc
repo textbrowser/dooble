@@ -608,9 +608,7 @@ void dooble::slot_new_tab(void)
 
 void dooble::slot_new_window(void)
 {
-  dooble *d = new dooble();
-
-  d->show();
+  (new dooble())->show();
 }
 
 void dooble::slot_open_tab_as_new_window(int index)

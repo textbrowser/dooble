@@ -51,6 +51,7 @@ class dooble_popup_menu:public QDialog
   void slot_authenticate(void);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_settings_applied(void);
+  void slot_tool_button_clicked(void);
 
  signals:
   void authenticate(void);
