@@ -65,6 +65,7 @@ FORMS           = UI\\dooble.ui \
 		  UI\\dooble_downloads.ui \
 		  UI\\dooble_history_window.ui \
                   UI\\dooble_page.ui \
+		  UI\\dooble_popup_menu.ui \
                   UI\\dooble_settings.ui
 
 HEADERS		= Source\\dooble.h \
