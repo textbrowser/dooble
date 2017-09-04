@@ -178,6 +178,10 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       dooble::s_cookies_window->activateWindow();
       dooble::s_cookies_window->raise();
     }
+  else if(m_ui.exit_dooble == sender())
+    {
+      QApplication::exit(0);
+    }
   else if(m_ui.history == sender())
     {
       dooble::s_history_window->showNormal(0);
