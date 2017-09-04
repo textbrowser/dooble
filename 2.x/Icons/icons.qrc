@@ -25,6 +25,7 @@
 	<file>BlueBits/48/new_private_tab.png</file>
 	<file>BlueBits/48/new_tab.png</file>
 	<file>BlueBits/48/new_window.png</file>
+	<file>BlueBits/48/print.png</file>
 	<file>BlueBits/48/settings.png</file>
 	<file>BlueBits/64/cache.png</file>
 	<file>BlueBits/64/display.png</file>
@@ -57,6 +58,7 @@
 	<file>Google Material Design/48/new_private_tab.png</file>
 	<file>Google Material Design/48/new_tab.png</file>
 	<file>Google Material Design/48/new_window.png</file>
+	<file>Google Material Design/48/print.png</file>
 	<file>Google Material Design/48/settings.png</file>
 	<file>Google Material Design/64/cache.png</file>
 	<file>Google Material Design/64/display.png</file>
@@ -91,6 +93,7 @@
 	<file>SnipIcons/48/new_private_tab.png</file>
 	<file>SnipIcons/48/new_tab.png</file>
 	<file>SnipIcons/48/new_window.png</file>
+	<file>SnipIcons/48/print.png</file>
 	<file>SnipIcons/48/settings.png</file>
 	<file>SnipIcons/64/cache.png</file>
 	<file>SnipIcons/64/display.png</file>
