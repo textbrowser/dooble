@@ -69,12 +69,6 @@ dooble_page::dooble_page(bool is_private,
     m_ui.is_private->setVisible(false);
 
   m_ui.menus->setMenu(new QMenu(this));
-
-  if(dooble_settings::setting("main_menu_bar_visible").toBool())
-    m_ui.menus->setToolTip(tr("Menus"));
-  else
-    m_ui.menus->setToolTip(tr("Menus. Press the Alt key to activate."));
-
   m_ui.progress->setVisible(false);
 
   if(view)
@@ -869,13 +863,6 @@ void dooble_page::slot_settings_applied(void)
     m_ui.is_private->setVisible(m_is_private);
   else
     m_ui.is_private->setVisible(false);
-
-#ifndef Q_OS_MACOS
-  if(dooble_settings::setting("main_menu_bar_visible").toBool())
-    m_ui.menus->setToolTip(tr("Menus"));
-  else
-    m_ui.menus->setToolTip(tr("Menus. Press the Alt key to activate."));
-#endif
 
   prepare_icons();
 }

@@ -113,7 +113,7 @@
      <item>
       <widget class="dooble_tool_button" name="menus">
        <property name="toolTip">
-        <string>Menus. Press the Alt key to activate.</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Menus. Double-click to display a fancy popup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string/>
