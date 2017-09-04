@@ -67,6 +67,7 @@ class dooble: public QMainWindow
   static dooble_popup_menu *s_popup_menu;
   static dooble_settings *s_settings;
   static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
+  void new_page(bool is_private);
 
  protected:
   void closeEvent(QCloseEvent *event);
@@ -78,7 +79,6 @@ class dooble: public QMainWindow
   static bool s_containers_populated;
   void connect_signals(void);
   void initialize_static_members(void);
-  void new_page(bool is_private);
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);

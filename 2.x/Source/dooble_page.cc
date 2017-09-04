@@ -45,6 +45,7 @@
 #include "dooble_history_window.h"
 #include "dooble_label_widget.h"
 #include "dooble_page.h"
+#include "dooble_popup_menu.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
@@ -151,11 +152,7 @@ dooble_page::dooble_page(bool is_private,
   connect(m_ui.menus,
 	  SIGNAL(clicked(void)),
 	  this,
-	  SIGNAL(show_popup_menu(void)));
-  connect(m_ui.menus,
-	  SIGNAL(clicked(void)),
-	  m_ui.menus,
-	  SLOT(showMenu(void)));
+	  SLOT(slot_show_menu(void)));
   connect(m_ui.menus->menu(),
 	  SIGNAL(aboutToShow(void)),
 	  this,
@@ -912,6 +909,14 @@ void dooble_page::slot_show_find(void)
   m_ui.find->selectAll();
   m_ui.find->setFocus();
   m_ui.find_frame->setVisible(true);
+}
+
+void dooble_page::slot_show_menu(void)
+{
+  if(dooble::s_popup_menu->isVisible())
+    m_ui.menus->showMenu();
+  else
+    emit show_popup_menu();
 }
 
 void dooble_page::slot_show_pull_down_menu(void)

@@ -116,6 +116,7 @@ class dooble_page: public QWidget
   void slot_show_certificate_exception(void);
   void slot_show_cookies(void);
   void slot_show_find(void);
+  void slot_show_menu(void);
   void slot_show_pull_down_menu(void);
   void slot_url_changed(const QUrl &url);
 

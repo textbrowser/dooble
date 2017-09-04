@@ -83,8 +83,13 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
 }
 
-dooble *find_dooble(void)
+dooble *dooble_popup_menu::find_dooble(void)
 {
+  foreach(QWidget *widget, QApplication::topLevelWidgets())
+    if(qobject_cast<dooble *> (widget) &&
+       qobject_cast<dooble *> (widget)->isVisible())
+      return qobject_cast<dooble *> (widget);
+
   return 0;
 }
 
@@ -195,9 +200,17 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     }
   else if(m_ui.new_private_tab == sender())
     {
+      dooble *d = find_dooble();
+
+      if(d)
+	d->new_page(true);
     }
   else if(m_ui.new_tab == sender())
     {
+      dooble *d = find_dooble();
+
+      if(d)
+	d->new_page(false);
     }
   else if(m_ui.new_window == sender())
     (new dooble())->show();
