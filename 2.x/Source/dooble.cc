@@ -28,6 +28,7 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QPrintDialog>
+#include <QPrintPreviewDialog>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -436,6 +437,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(print_preview(void)),
+	  this,
+	  SLOT(slot_print_preview(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(quit_dooble(void)),
 	  this,
 	  SLOT(slot_quit_dooble(void)),
@@ -663,6 +670,25 @@ void dooble::slot_print(void)
 
   if(print_dialog.exec() == QDialog::Accepted)
     page->print_page();
+}
+
+void dooble::slot_print_preview(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  QPrintPreviewDialog print_preview_dialog(page->printer(), this);
+
+  connect(&print_preview_dialog,
+	  SIGNAL(paintRequested(QPrinter *)),
+	  page,
+	  SLOT(slot_print_preview(QPrinter *)));
+
+  if(print_preview_dialog.exec() == QDialog::Accepted)
+    {
+    }
 }
 
 void dooble::slot_quit_dooble(void)

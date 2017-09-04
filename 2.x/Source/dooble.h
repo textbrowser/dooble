@@ -103,6 +103,7 @@ class dooble: public QMainWindow
   void slot_open_url(const QUrl &url);
   void slot_populate_containers_timer_timeout(void);
   void slot_print(void);
+  void slot_print_preview(void);
   void slot_quit_dooble(void);
   void slot_settings_applied(void);
   void slot_show_about(void);

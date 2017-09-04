@@ -112,6 +112,7 @@ class dooble_page: public QWidget
   void slot_open_url(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
+  void slot_print_preview(QPrinter *printer);
   void slot_proxy_authentication_required(const QUrl &url,
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);
@@ -137,6 +138,7 @@ class dooble_page: public QWidget
   void new_tab(void);
   void new_window(void);
   void print(void);
+  void print_preview(void);
   void quit_dooble(void);
   void show_about(void);
   void show_blocked_domains(void);
