@@ -34,6 +34,7 @@
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_settings.h"
+#include "dooble_ui_utilities.h"
 
 dooble_popup_menu::dooble_popup_menu(void):QDialog()
 {
@@ -180,12 +181,14 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   if(m_ui.blocked_domains == sender())
     {
       dooble::s_accepted_or_blocked_domains->showNormal();
+      dooble_ui_utilities::center_window_widget
+	(find_dooble(), dooble::s_accepted_or_blocked_domains);
       dooble::s_accepted_or_blocked_domains->activateWindow();
       dooble::s_accepted_or_blocked_domains->raise();
     }
   else if(m_ui.clear_items == sender())
     {
-      dooble_clear_items clear_items(0);
+      dooble_clear_items clear_items(find_dooble());
 
       connect(&clear_items,
 	      SIGNAL(containers_cleared(void)),
@@ -196,6 +199,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   else if(m_ui.cookies == sender())
     {
       dooble::s_cookies_window->showNormal();
+      dooble_ui_utilities::center_window_widget
+	(find_dooble(), dooble::s_cookies_window);
       dooble::s_cookies_window->activateWindow();
       dooble::s_cookies_window->raise();
     }
@@ -205,7 +210,10 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     }
   else if(m_ui.history == sender())
     {
-      dooble::s_history_window->showNormal(0);
+      dooble *d = find_dooble();
+
+      dooble::s_history_window->showNormal(d);
+      dooble_ui_utilities::center_window_widget(d, dooble::s_history_window);
       dooble::s_history_window->activateWindow();
       dooble::s_history_window->raise();
     }
@@ -228,6 +236,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   else if(m_ui.settings == sender())
     {
       dooble::s_settings->showNormal();
+      dooble_ui_utilities::center_window_widget
+	(find_dooble(), dooble::s_settings);
       dooble::s_settings->activateWindow();
       dooble::s_settings->raise();
     }
