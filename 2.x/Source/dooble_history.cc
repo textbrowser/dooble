@@ -310,7 +310,10 @@ void dooble_history::save_item(const QIcon &icon,
 	  {
 	    QDataStream out(&buffer);
 
-	    out << icon;
+	    if(icon.isNull())
+	      out << dooble_favicons::icon(QUrl());
+	    else
+	      out << icon;
 
 	    if(out.status() != QDataStream::Ok)
 	      bytes.clear();
@@ -334,7 +337,12 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  ok = false;
 
-	bytes = dooble::s_cryptography->encrypt_then_mac(item.title().toUtf8());
+	if(item.title().trimmed().isEmpty())
+	  bytes = dooble::s_cryptography->encrypt_then_mac
+	    (item.url().toEncoded());
+	else
+	  bytes = dooble::s_cryptography->encrypt_then_mac
+	    (item.title().trimmed().toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
