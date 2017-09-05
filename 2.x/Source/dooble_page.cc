@@ -456,7 +456,7 @@ void dooble_page::prepare_standard_menus(void)
 		  QKeySequence(tr("Ctrl+P")));
   menu->addAction(tr("Print Pre&view..."),
 		  this,
-		  SIGNAL(print_preview(void)));
+		  SIGNAL(print_preview(void)))->setEnabled(false);
   menu->addSeparator();
   menu->addAction(tr("E&xit Dooble"),
 		  this,
