@@ -29,6 +29,7 @@
 #include <QMenu>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
+#include <QPrinter>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -666,10 +667,17 @@ void dooble::slot_print(void)
   if(!page)
     return;
 
-  QPrintDialog print_dialog(page->printer(), this);
+  QPrintDialog *print_dialog = 0;
+  QPrinter *printer = new QPrinter();
 
-  if(print_dialog.exec() == QDialog::Accepted)
-    page->print_page();
+  print_dialog = new QPrintDialog(printer, this);
+
+  if(print_dialog->exec() == QDialog::Accepted)
+    page->print_page(printer);
+  else
+    delete printer;
+
+  print_dialog->deleteLater();
 }
 
 void dooble::slot_print_preview(void)
@@ -679,16 +687,16 @@ void dooble::slot_print_preview(void)
   if(!page)
     return;
 
-  QPrintPreviewDialog print_preview_dialog(page->printer(), this);
+  QPrintPreviewDialog *print_preview_dialog = 0;
+  QPrinter *printer = new QPrinter();
 
-  connect(&print_preview_dialog,
+  print_preview_dialog = new QPrintPreviewDialog(printer, this);
+  connect(print_preview_dialog,
 	  SIGNAL(paintRequested(QPrinter *)),
 	  page,
 	  SLOT(slot_print_preview(QPrinter *)));
-
-  if(print_preview_dialog.exec() == QDialog::Accepted)
-    {
-    }
+  print_preview_dialog->exec();
+  print_preview_dialog->deleteLater();
 }
 
 void dooble::slot_quit_dooble(void)

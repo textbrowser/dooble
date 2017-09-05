@@ -57,7 +57,6 @@ dooble_page::dooble_page(bool is_private,
 			 QWidget *parent):QWidget(parent)
 {
   m_is_private = is_private;
-  m_printer = new QPrinter();
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -244,7 +243,6 @@ dooble_page::dooble_page(bool is_private,
 
 dooble_page::~dooble_page()
 {
-  delete m_printer;
 }
 
 QAction *dooble_page::action_close_tab(void) const
@@ -255,11 +253,6 @@ QAction *dooble_page::action_close_tab(void) const
 QIcon dooble_page::icon(void) const
 {
   return dooble_favicons::icon(m_view->url());
-}
-
-QPrinter *dooble_page::printer(void) const
-{
-  return m_printer;
 }
 
 QString dooble_page::title(void) const
@@ -541,12 +534,16 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
 #endif
 }
 
-void dooble_page::print_page(void)
+void dooble_page::print_page(QPrinter *printer)
 {
+  if(!printer)
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_view->page()->print(m_printer,
+  m_view->page()->print(printer,
 			[=] (bool result)
 			{
+			  delete printer;
 			  QApplication::restoreOverrideCursor();
 			  Q_UNUSED(result)
 			});
@@ -850,7 +847,10 @@ void dooble_page::slot_prepare_forward_menu(void)
 
 void dooble_page::slot_print_preview(QPrinter *printer)
 {
-  Q_UNUSED(printer);
+  if(!printer)
+    return;
+
+  delete printer;
 }
 
 void dooble_page::slot_proxy_authentication_required
