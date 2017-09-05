@@ -697,8 +697,13 @@ void dooble_settings::slot_apply(void)
       s_settings["icon_set"] = "SnipIcons";
   }
 
+  set_setting("javascript", m_ui.javascript->isChecked());
+  set_setting("javascript_access_clipboard",
+	      m_ui.javascript_access_clipboard->isChecked());
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
+  set_setting
+    ("javascript_popups", m_ui.javascript_popups->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
