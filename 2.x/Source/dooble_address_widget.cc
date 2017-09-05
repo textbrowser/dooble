@@ -95,6 +95,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
+  connect(this,
+	  SIGNAL(textEdited(const QString &)),
+	  this,
+	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
   setCompleter(m_completer);
   setMinimumHeight(sizeHint().height());
@@ -227,12 +231,69 @@ void dooble_address_widget::setText(const QString &text)
 {
   QLineEdit::setText(text.trimmed());
   setCursorPosition(0);
+
+  QUrl url(QUrl::fromUserInput(text));
+
+  if(!url.isEmpty() && !url.isLocalFile() && url.isValid())
+    {
+      QList<QTextLayout::FormatRange> formats;
+      QString host(url.host());
+      QString path
+	(url.toString().mid(host.length() + url.toString().indexOf(host)));
+      QTextCharFormat format;
+      QTextLayout::FormatRange host_format_range;
+      QTextLayout::FormatRange path_format_range;
+      QTextLayout::FormatRange scheme_format_range;
+
+      format.setFontStyleStrategy(QFont::PreferAntialias);
+      format.setFontWeight(QFont::Normal);
+      host_format_range.format = format;
+      host_format_range.length = host.length();
+      host_format_range.start = url.toString().indexOf(host);
+      format.setForeground(Qt::gray);
+      path_format_range.format = format;
+      path_format_range.length = path.length();
+      path_format_range.start =
+	url.toString().indexOf(path, url.toString().indexOf(host));
+      format.setForeground(Qt::gray);
+      scheme_format_range.format = format;
+      scheme_format_range.length = url.toString().indexOf(host);
+      scheme_format_range.start = 0;
+      formats.append(host_format_range);
+      formats.append(path_format_range);
+      formats.append(scheme_format_range);
+      set_text_format(formats);
+    }
+
   setToolTip(QLineEdit::text());
 }
 
 void dooble_address_widget::set_item_icon(const QIcon &icon, const QUrl &url)
 {
   m_completer->set_item_icon(icon, url);
+}
+
+void dooble_address_widget::set_text_format
+(const QList<QTextLayout::FormatRange> &formats)
+{
+  QList<QInputMethodEvent::Attribute> attributes;
+
+  for(int i = 0; i < formats.size(); i++)
+    {
+      QInputMethodEvent::AttributeType attribute_type =
+	QInputMethodEvent::TextFormat;
+      QTextLayout::FormatRange format_range = formats.at(i);
+      QVariant value = format_range.format;
+      int start = format_range.start;
+      int length = format_range.length;
+
+      attributes.append
+	(QInputMethodEvent::Attribute(attribute_type, start, length, value));
+    }
+
+  QInputMethodEvent event(QInputMethodEvent(QString(), attributes));
+
+  QApplication::sendEvent(this, &event);
 }
 
 void dooble_address_widget::slot_load_finished(void)
@@ -279,6 +340,12 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 
   menu.addAction(tr("Show Site Coo&kies..."), this, SIGNAL(show_cookies(void)));
   menu.exec(QCursor::pos());
+}
+
+void dooble_address_widget::slot_text_edited(const QString &text)
+{
+  Q_UNUSED(text);
+  set_text_format(QList<QTextLayout::FormatRange> ());
 }
 
 void dooble_address_widget::slot_url_changed(const QUrl &url)

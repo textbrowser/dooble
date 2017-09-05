@@ -29,6 +29,7 @@
 #define dooble_address_widget_h
 
 #include <QLineEdit>
+#include <QTextLayout>
 #include <QUrl>
 
 class QToolButton;
@@ -60,6 +61,7 @@ class dooble_address_widget: public QLineEdit
   QUrl m_url;
   dooble_address_widget_completer *m_completer;
   void prepare_icons(void);
+  void set_text_format(const QList<QTextLayout::FormatRange> &formats);
 
  private slots:
   void slot_load_finished(void);
@@ -67,6 +69,7 @@ class dooble_address_widget: public QLineEdit
   void slot_populate(void);
   void slot_settings_applied(void);
   void slot_show_site_information_menu(void);
+  void slot_text_edited(const QString &text);
   void slot_url_changed(const QUrl &url);
 
  signals:
