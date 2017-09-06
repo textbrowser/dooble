@@ -233,6 +233,13 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     }
   else if(m_ui.new_window == sender())
     (new dooble())->show();
+  else if(m_ui.print == sender())
+    {
+      dooble *d = find_dooble();
+
+      if(d)
+	d->print_current_page();
+    }
   else if(m_ui.settings == sender())
     {
       dooble::s_settings->showNormal();

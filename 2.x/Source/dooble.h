@@ -69,6 +69,7 @@ class dooble: public QMainWindow
   static dooble_settings *s_settings;
   static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
   void new_page(bool is_private);
+  void print_current_page(void);
 
  protected:
   void closeEvent(QCloseEvent *event);
@@ -83,6 +84,7 @@ class dooble: public QMainWindow
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);
+  void print(dooble_page *page);
 
  public slots:
   void show(void);

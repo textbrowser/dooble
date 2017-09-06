@@ -499,6 +499,29 @@ void dooble::prepare_page_connections(dooble_page *page)
 					   Qt::UniqueConnection));
 }
 
+void dooble::print(dooble_page *page)
+{
+  if(!page)
+    return;
+
+  QPrintDialog *print_dialog = 0;
+  QPrinter *printer = new QPrinter();
+
+  print_dialog = new QPrintDialog(printer, this);
+
+  if(print_dialog->exec() == QDialog::Accepted)
+    page->print_page(printer);
+  else
+    delete printer;
+
+  print_dialog->deleteLater();
+}
+
+void dooble::print_current_page(void)
+{
+  print(current_page());
+}
+
 void dooble::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -662,22 +685,7 @@ void dooble::slot_populate_containers_timer_timeout(void)
 
 void dooble::slot_print(void)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
-
-  if(!page)
-    return;
-
-  QPrintDialog *print_dialog = 0;
-  QPrinter *printer = new QPrinter();
-
-  print_dialog = new QPrintDialog(printer, this);
-
-  if(print_dialog->exec() == QDialog::Accepted)
-    page->print_page(printer);
-  else
-    delete printer;
-
-  print_dialog->deleteLater();
+  print(qobject_cast<dooble_page *> (sender()));
 }
 
 void dooble::slot_print_preview(void)
