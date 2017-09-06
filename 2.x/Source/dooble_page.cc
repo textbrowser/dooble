@@ -515,10 +515,14 @@ void dooble_page::prepare_tool_buttons_for_mac(void)
       {
       }
     else if(m_ui.backward == tool_button ||
-	    m_ui.forward == tool_button ||
-	    m_ui.menus == tool_button)
+	    m_ui.forward == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
+	 "QToolButton::menu-button {border: none;}");
+    else if(m_ui.menus == tool_button)
+      tool_button->setStyleSheet
+	("QToolButton {border: none;}"
+	 "QToolButton::menu-arrow {image: url();}"
 	 "QToolButton::menu-button {border: none;}");
     else
       tool_button->setStyleSheet("QToolButton {border: none;}"
