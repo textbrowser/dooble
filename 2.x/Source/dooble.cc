@@ -300,7 +300,9 @@ void dooble::new_page(bool is_private)
     m_ui.tab->setCurrentWidget(page);
 
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-  page->address_widget()->setFocus();
+
+  if(m_ui.tab->currentWidget() == page)
+    page->address_widget()->setFocus();
 }
 
 void dooble::new_page(dooble_page *page)
@@ -330,7 +332,9 @@ void dooble::new_page(dooble_page *page)
 
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-  page->address_widget()->setFocus();
+
+  if(m_ui.tab->currentWidget() == page)
+    page->address_widget()->setFocus();
 }
 
 void dooble::new_page(dooble_web_engine_view *view)
@@ -345,7 +349,9 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-  page->address_widget()->setFocus();
+
+  if(m_ui.tab->currentWidget() == page)
+    page->address_widget()->setFocus();
 }
 
 void dooble::prepare_page_connections(dooble_page *page)
