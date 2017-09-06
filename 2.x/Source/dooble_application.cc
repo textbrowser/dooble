@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QFont>
 #include <QStyle>
 
 #include "dooble_application.h"
@@ -32,6 +33,11 @@
 dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
+  QFont font(this->font());
+
+  font.setStyleStrategy
+    (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
+  setFont(font);
 }
 
 QString dooble_application::style_name(void) const
