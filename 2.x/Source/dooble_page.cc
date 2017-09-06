@@ -237,7 +237,7 @@ dooble_page::dooble_page(bool is_private,
   prepare_icons();
   prepare_shortcuts();
   prepare_standard_menus();
-  prepare_tool_buttons_for_mac();
+  prepare_tool_buttons();
   slot_dooble_credentials_created();
 }
 
@@ -507,7 +507,7 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_about(void)));
 }
 
-void dooble_page::prepare_tool_buttons_for_mac(void)
+void dooble_page::prepare_tool_buttons(void)
 {
 #ifdef Q_OS_MACOS
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())

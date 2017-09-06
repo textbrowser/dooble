@@ -84,7 +84,7 @@ class dooble_page: public QWidget
   void prepare_icons(void);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
-  void prepare_tool_buttons_for_mac(void);
+  void prepare_tool_buttons(void);
 
  private slots:
   void slot_about_to_show_standard_menus(void);
