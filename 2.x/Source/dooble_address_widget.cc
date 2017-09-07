@@ -111,9 +111,9 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   slot_populate();
 }
 
-QPoint dooble_address_widget::information_position(void) const
+QRect dooble_address_widget::information_rectangle(void) const
 {
-  return m_information->pos();
+  return m_information->rect();
 }
 
 bool dooble_address_widget::event(QEvent *event)

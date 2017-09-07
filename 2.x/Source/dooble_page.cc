@@ -986,7 +986,8 @@ void dooble_page::slot_show_certificate_exception(void)
   certificate_exceptions_menu_widget->set_url(m_view->url());
   widget_action.setDefaultWidget(certificate_exceptions_menu_widget);
   menu.addAction(&widget_action);
-  menu.exec(m_ui.address->mapToGlobal(m_ui.address->information_position()));
+  menu.exec(m_ui.address->
+	    mapToGlobal(m_ui.address->information_rectangle().bottomLeft()));
 }
 
 void dooble_page::slot_show_cookies(void)

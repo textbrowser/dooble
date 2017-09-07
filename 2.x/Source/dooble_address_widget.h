@@ -41,7 +41,7 @@ class dooble_address_widget: public QLineEdit
 
  public:
   dooble_address_widget(QWidget *parent);
-  QPoint information_position(void) const;
+  QRect information_rectangle(void) const;
   void add_item(const QIcon &icon, const QUrl &url);
   void complete(void);
   void setText(const QString &text);
