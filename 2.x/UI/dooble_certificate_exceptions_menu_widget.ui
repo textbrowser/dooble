@@ -40,7 +40,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>The exception will be removed permanently after Dooble is terminated.</string>
+      <string>If the exception is removed, it will be removed permanently after Dooble is terminated.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
