@@ -49,6 +49,10 @@ class dooble_cookies_window: public QMainWindow
   void setCookieStore(QWebEngineCookieStore *cookie_store);
   void setCookies(dooble_cookies *cookies);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -65,10 +69,6 @@ class dooble_cookies_window: public QMainWindow
   bool m_is_private;
   void delete_top_level_items(QList<QTreeWidgetItem *> list);
   void save_settings(void);
-
- public slots:
-  void show(void);
-  void showNormal(void);
 
  private slots:
   void slot_containers_cleared(void);

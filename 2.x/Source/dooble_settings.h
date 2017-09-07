@@ -61,6 +61,10 @@ class dooble_settings: public QMainWindow
   static void remove_setting(const QString &key);
   void show_panel(dooble_settings::Panels panel);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -79,10 +83,6 @@ class dooble_settings: public QMainWindow
   void purge_database_data(void);
   void restore(void);
   void save_settings(void);
-
- public slots:
-  void show(void);
-  void showNormal(void);
 
  private slots:
   void slot_apply(void);

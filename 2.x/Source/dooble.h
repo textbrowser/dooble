@@ -71,6 +71,9 @@ class dooble: public QMainWindow
   void new_page(bool is_private);
   void print_current_page(void);
 
+ public slots:
+  void show(void);
+
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -85,9 +88,6 @@ class dooble: public QMainWindow
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);
   void print(dooble_page *page);
-
- public slots:
-  void show(void);
 
  private slots:
   void slot_about_to_hide_main_menu(void);

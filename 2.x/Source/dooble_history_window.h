@@ -43,19 +43,6 @@ class dooble_history_window: public QMainWindow
   void show(QWidget *parent);
   void showNormal(QWidget *parent);
 
- protected:
-  void closeEvent(QCloseEvent *event);
-  void keyPressEvent(QKeyEvent *event);
-  void resizeEvent(QResizeEvent *event);
-
- private:
-  QHash<QUrl, QTableWidgetItem *> m_items;
-  QTimer m_search_timer;
-  QWidget *m_parent;
-  Ui_dooble_history_window m_ui;
-  void save_settings(void);
-  void set_row_hidden(int i);
-
  public slots:
   void slot_containers_cleared(void);
   void slot_copy_location(void);
@@ -68,6 +55,19 @@ class dooble_history_window: public QMainWindow
   void slot_populate(void);
   void slot_search_timer_timeout(void);
   void slot_show_context_menu(const QPoint &point);
+
+ protected:
+  void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
+
+ private:
+  QHash<QUrl, QTableWidgetItem *> m_items;
+  QTimer m_search_timer;
+  QWidget *m_parent;
+  Ui_dooble_history_window m_ui;
+  void save_settings(void);
+  void set_row_hidden(int i);
 
  signals:
   void open_url(const QUrl &url);

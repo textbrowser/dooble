@@ -43,6 +43,10 @@ class dooble_web_engine_view: public QWebEngineView
   dooble_web_engine_view(bool is_private, QWidget *parent);
   void show_private_cookies(void);
 
+ protected:
+  dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
+  void contextMenuEvent(QContextMenuEvent *event);
+
  private:
   QPointer<dooble_cookies_window> m_cookies_window;
   bool m_is_private;
@@ -53,10 +57,6 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_accept_or_block_domain(void);
   void slot_certificate_exception_accepted(const QUrl &url);
   void slot_settings_applied(void);
-
- protected:
-  dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
-  void contextMenuEvent(QContextMenuEvent *event);
 
  signals:
   void create_tab(dooble_web_engine_view *view);
