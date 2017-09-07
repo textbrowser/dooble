@@ -287,10 +287,7 @@ void dooble::new_page(bool is_private)
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("Dooble"));
-
-  if(dooble_settings::setting("access_new_tabs").toBool())
-    m_ui.tab->setCurrentWidget(page);
-
+  m_ui.tab->setCurrentWidget(page);
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(m_ui.tab->currentWidget() == page)
@@ -642,7 +639,7 @@ void dooble::slot_new_private_tab(void)
 
 void dooble::slot_new_tab(void)
 {
-  new_page(static_cast<dooble_web_engine_view *> (0));
+  new_page(false);
 }
 
 void dooble::slot_new_window(void)
