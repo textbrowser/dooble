@@ -392,6 +392,8 @@ void dooble_page::prepare_shortcuts(void)
       new QShortcut
 	(QKeySequence(tr("Ctrl+A")), this, SLOT(slot_authenticate(void)));
       new QShortcut
+	(QKeySequence(tr("Ctrl+D")), this, SIGNAL(show_downloads(void)));
+      new QShortcut
 	(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_show_find(void)));
       new QShortcut
 	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
@@ -504,7 +506,8 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_blocked_domains(void)));
   menu->addAction(tr("&Downloads..."),
 		  this,
-		  SIGNAL(show_downloads(void)));
+		  SIGNAL(show_downloads(void)),
+		  QKeySequence(tr("Ctrl+D")));
   menu->addAction(tr("&History..."),
 		  this,
 		  SIGNAL(show_history(void)),
