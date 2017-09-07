@@ -29,6 +29,7 @@
 #define dooble_downloads_h
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include "ui_dooble_downloads.h"
 
@@ -50,9 +51,14 @@ class dooble_downloads: public QMainWindow
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QTimer m_download_path_inspection_timer;
   Ui_dooble_downloads m_ui;
   void populate(void);
   void save_settings(void);
+
+ private slots:
+  void slot_download_path_inspection_timer_timeout(void);
+  void slot_select_path(void);
 };
 
 #endif

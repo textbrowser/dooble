@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QFileDialog>
 #include <QKeyEvent>
 #include <QStandardPaths>
 
@@ -33,12 +34,24 @@
 
 dooble_downloads::dooble_downloads(void):QMainWindow()
 {
+  m_download_path_inspection_timer.start(2500);
   m_ui.setupUi(this);
+  m_ui.download_path->setText
+    (dooble_settings::setting("download_path").toString());
 
-  if(m_ui.download_path->text().trimmed().isEmpty())
+  if(m_ui.download_path->text().isEmpty())
     m_ui.download_path->setText
       (QStandardPaths::
        standardLocations(QStandardPaths::DesktopLocation).value(0));
+
+  connect(&m_download_path_inspection_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_download_path_inspection_timer_timeout(void)));
+  connect(m_ui.select,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_select_path(void)));
 }
 
 QString dooble_downloads::download_path(void) const
@@ -96,4 +109,34 @@ void dooble_downloads::showNormal(void)
 
   QMainWindow::showNormal();
   populate();
+}
+
+void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
+{
+  QColor color(240, 128, 128); // Light coral!
+  QFileInfo file_info(m_ui.download_path->text());
+  QPalette palette(m_ui.download_path->palette());
+
+  if(file_info.isWritable())
+    color = QColor(144, 238, 144); // Light green!
+
+  palette.setColor(m_ui.download_path->backgroundRole(), color);
+  m_ui.download_path->setPalette(palette);
+}
+
+void dooble_downloads::slot_select_path(void)
+{
+  QFileDialog dialog(this);
+
+  dialog.setDirectory(QDir::homePath());
+  dialog.setFileMode(QFileDialog::Directory);
+  dialog.setLabelText(QFileDialog::Accept, tr("Select"));
+  dialog.setWindowTitle(tr("Dooble: Select Download Path"));
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      dooble_settings::set_setting
+	("download_path", dialog.selectedFiles().value(0));
+      m_ui.download_path->setText(dialog.selectedFiles().value(0));
+    }
 }
