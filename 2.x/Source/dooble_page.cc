@@ -572,6 +572,7 @@ void dooble_page::show_menu(void)
   QWidgetAction widget_action(&menu);
   dooble_popup_menu *popup_menu = new dooble_popup_menu();
 
+  popup_menu->resize(popup_menu->sizeHint());
   size = popup_menu->size();
   widget_action.setDefaultWidget(popup_menu);
   menu.addAction(&widget_action);
@@ -920,15 +921,16 @@ void dooble_page::slot_show_certificate_exception(void)
   QMenu menu(this);
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
-  dooble_certificate_exceptions_menu_widget certificate_exceptions_menu_widget
-    (&widget);
+  dooble_certificate_exceptions_menu_widget
+    *certificate_exceptions_menu_widget =
+    new dooble_certificate_exceptions_menu_widget(&widget);
 
-  connect(&certificate_exceptions_menu_widget,
+  connect(certificate_exceptions_menu_widget,
 	  SIGNAL(triggered(void)),
 	  &menu,
 	  SLOT(close(void)));
-  certificate_exceptions_menu_widget.set_url(m_view->url());
-  widget_action.setDefaultWidget(&certificate_exceptions_menu_widget);
+  certificate_exceptions_menu_widget->set_url(m_view->url());
+  widget_action.setDefaultWidget(certificate_exceptions_menu_widget);
   menu.addAction(&widget_action);
   menu.exec(m_ui.address->mapToGlobal(m_ui.address->information_position()));
 }
