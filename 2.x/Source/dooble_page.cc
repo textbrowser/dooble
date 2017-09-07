@@ -275,6 +275,22 @@ QWebEngineSettings *dooble_page::web_engine_settings(void) const
   return m_view->settings();
 }
 
+dooble *dooble_page::find_parent_dooble(void) const
+{
+  QWidget *parent = parentWidget();
+
+  do
+    {
+      if(qobject_cast<dooble *> (parent))
+	return qobject_cast<dooble *> (parent);
+      else if(parent)
+	parent = parent->parentWidget();
+    }
+  while(parent);
+
+  return 0;
+}
+
 dooble_address_widget *dooble_page::address_widget(void) const
 {
   return m_ui.address;
@@ -393,6 +409,8 @@ void dooble_page::prepare_shortcuts(void)
       new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
       new QShortcut(QKeySequence(tr("Ctrl+W")), this, SIGNAL(close_tab(void)));
       new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
+      new QShortcut
+	(QKeySequence(tr("F11")), this, SIGNAL(show_full_screen(void)));
     }
 }
 
@@ -488,6 +506,16 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(show_history(void)),
 		  QKeySequence(tr("Ctrl+H")));
+
+  /*
+  ** View Menu
+  */
+
+  menu = m_menu->addMenu(tr("&View"));
+  m_full_screen_action = menu->addAction(tr("Full Screen"),
+					 this,
+					 SIGNAL(show_full_screen(void)),
+					 QKeySequence(tr("F11")));
 
   /*
   ** Help Menu
@@ -595,6 +623,19 @@ void dooble_page::slot_about_to_show_standard_menus(void)
     if(qobject_cast<QStackedWidget *> (parentWidget()))
       m_action_close_tab->setEnabled
 	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+
+  if(m_full_screen_action)
+    {
+      dooble *d = find_parent_dooble();
+
+      if(d)
+	{
+	  if(d->isFullScreen())
+	    m_full_screen_action->setText(tr("Show Normal"));
+	  else
+	    m_full_screen_action->setText(tr("Show Full Screen"));
+	}
+    }
 }
 
 void dooble_page::slot_authenticate(void)

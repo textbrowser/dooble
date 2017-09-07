@@ -109,6 +109,7 @@ class dooble: public QMainWindow
   void slot_show_about(void);
   void slot_show_blocked_domains(void);
   void slot_show_clear_items(void);
+  void slot_show_full_screen(void);
   void slot_show_history(void);
   void slot_show_settings(void);
   void slot_show_settings_panel(dooble_settings::Panels panel);

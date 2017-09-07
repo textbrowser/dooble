@@ -466,6 +466,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_full_screen(void)),
+	  this,
+	  SLOT(slot_show_full_screen(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_history(void)),
 	  this,
 	  SLOT(slot_show_history(void)),
@@ -743,6 +749,14 @@ void dooble::slot_show_clear_items(void)
 	  dooble::s_application,
 	  SIGNAL(containers_cleared(void)));
   clear_items.exec();
+}
+
+void dooble::slot_show_full_screen(void)
+{
+  if(!isFullScreen())
+    showFullScreen();
+  else
+    showNormal();
 }
 
 void dooble::slot_show_history(void)

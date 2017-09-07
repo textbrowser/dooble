@@ -38,6 +38,7 @@
 
 class QPrinter;
 class QWebEngineSettings;
+class dooble;
 class dooble_address_widget;
 class dooble_web_engine_view;
 
@@ -75,10 +76,12 @@ class dooble_page: public QWidget
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
   QPointer<QAction> m_find_action;
+  QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
   Ui_dooble_page m_ui;
   bool m_is_private;
   bool m_shortcuts_prepared;
+  dooble *find_parent_dooble(void) const;
   dooble_web_engine_view *m_view;
   void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);
   void go_to_backward_item(int index);
@@ -144,6 +147,7 @@ class dooble_page: public QWidget
   void show_about(void);
   void show_blocked_domains(void);
   void show_clear_items(void);
+  void show_full_screen(void);
   void show_history(void);
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
