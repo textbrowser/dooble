@@ -26,10 +26,12 @@
 */
 
 #include <QKeyEvent>
+#include <QFileDialog>
 #include <QMenu>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
+#include <QStandardPaths>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -623,6 +625,27 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 {
   if(!download)
     return;
+
+  QFileDialog dialog(this);
+  QFileInfo fileInfo(download->path());
+
+  dialog.setAcceptMode(QFileDialog::AcceptSave);
+  dialog.setConfirmOverwrite(true);
+  dialog.setDirectory
+    (QStandardPaths::standardLocations(QStandardPaths::
+				       DesktopLocation).value(0));
+  dialog.setFileMode(QFileDialog::AnyFile);
+  dialog.setLabelText(QFileDialog::Accept, tr("Save"));
+  dialog.setWindowTitle(tr("Dooble: Download File"));
+  dialog.selectFile(fileInfo.fileName());
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      download->setPath(dialog.selectedFiles().value(0));
+      download->accept();
+    }
+  else
+    download->cancel();
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)
