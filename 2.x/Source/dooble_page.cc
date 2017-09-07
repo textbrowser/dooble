@@ -512,7 +512,7 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&View"));
-  m_full_screen_action = menu->addAction(tr("Full Screen"),
+  m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SIGNAL(show_full_screen(void)),
 					 QKeySequence(tr("F11")));
@@ -631,9 +631,9 @@ void dooble_page::slot_about_to_show_standard_menus(void)
       if(d)
 	{
 	  if(d->isFullScreen())
-	    m_full_screen_action->setText(tr("Show Normal"));
+	    m_full_screen_action->setText(tr("Show &Normal Screen"));
 	  else
-	    m_full_screen_action->setText(tr("Show Full Screen"));
+	    m_full_screen_action->setText(tr("Show &Full Screen"));
 	}
     }
 }
