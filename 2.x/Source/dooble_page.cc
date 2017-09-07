@@ -157,7 +157,7 @@ dooble_page::dooble_page(bool is_private,
   connect(m_ui.menu,
 	  SIGNAL(clicked(void)),
 	  this,
-	  SLOT(slot_show_menu(void)));
+	  SLOT(slot_show_popup_menu(void)));
   connect(m_ui.reload,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -566,6 +566,14 @@ void dooble_page::resizeEvent(QResizeEvent *event)
 
 void dooble_page::show_menu(void)
 {
+  QPoint point(m_ui.menu->pos());
+
+  point.setY(m_ui.menu->size().height() + point.y());
+  m_menu->exec(mapToGlobal(point));
+}
+
+void dooble_page::show_popup_menu(void)
+{
   QMenu menu(this);
   QPoint point(m_ui.menu->pos());
   QSize size;
@@ -960,9 +968,9 @@ void dooble_page::slot_show_find(void)
   m_ui.find_frame->setVisible(true);
 }
 
-void dooble_page::slot_show_menu(void)
+void dooble_page::slot_show_popup_menu(void)
 {
-  show_menu();
+  show_popup_menu();
 }
 
 void dooble_page::slot_show_pull_down_menu(void)

@@ -87,6 +87,7 @@ class dooble_page: public QWidget
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
   void prepare_tool_buttons(void);
+  void show_popup_menu(void);
 
  private slots:
   void slot_about_to_show_standard_menus(void);
@@ -122,7 +123,7 @@ class dooble_page: public QWidget
   void slot_show_certificate_exception(void);
   void slot_show_cookies(void);
   void slot_show_find(void);
-  void slot_show_menu(void);
+  void slot_show_popup_menu(void);
   void slot_show_pull_down_menu(void);
   void slot_url_changed(const QUrl &url);
 
