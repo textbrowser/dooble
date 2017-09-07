@@ -58,6 +58,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	  SIGNAL(certificate_exception_accepted(const QUrl &)),
 	  this,
 	  SLOT(slot_certificate_exception_accepted(const QUrl &)));
+  connect(m_page->profile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)));
 
   if(!m_page->profile()->urlSchemeHandler("gopher"))
     m_page->profile()->installUrlSchemeHandler

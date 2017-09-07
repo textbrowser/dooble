@@ -170,6 +170,10 @@ dooble_page::dooble_page(bool is_private,
 	  this,
 	  SIGNAL(create_window(dooble_web_engine_view *)));
   connect(m_view,
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)));
+  connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
 	  SIGNAL(iconChanged(const QIcon &)));

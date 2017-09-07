@@ -61,6 +61,7 @@ class dooble_web_engine_view: public QWebEngineView
  signals:
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
+  void downloadRequested(QWebEngineDownloadItem *download);
 };
 
 #endif

@@ -136,6 +136,7 @@ class dooble_page: public QWidget
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
   void dooble_credentials_authenticated(bool state);
+  void downloadRequested(QWebEngineDownloadItem *download);
   void iconChanged(const QIcon &icon);
   void loadFinished(bool ok);
   void loadStarted(void);

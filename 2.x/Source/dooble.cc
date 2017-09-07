@@ -384,6 +384,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
 	  SLOT(slot_icon_changed(const QIcon &)),
@@ -611,6 +617,12 @@ void dooble::slot_create_window(dooble_web_engine_view *view)
   dooble *d = new dooble(view);
 
   d->show();
+}
+
+void dooble::slot_download_requested(QWebEngineDownloadItem *download)
+{
+  if(!download)
+    return;
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)

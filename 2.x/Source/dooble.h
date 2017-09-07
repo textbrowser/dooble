@@ -34,6 +34,7 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
+class QWebEngineDownloadItem;
 class dooble_about;
 class dooble_accepted_or_blocked_domains;
 class dooble_application;
@@ -95,6 +96,7 @@ class dooble: public QMainWindow
   void slot_close_tab(void);
   void slot_create_tab(dooble_web_engine_view *view);
   void slot_create_window(dooble_web_engine_view *view);
+  void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
   void slot_load_started(void);
