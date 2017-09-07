@@ -36,7 +36,7 @@
 #include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
 
-dooble_popup_menu::dooble_popup_menu(void):QDialog()
+dooble_popup_menu::dooble_popup_menu(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
   m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
@@ -84,19 +84,19 @@ dooble_popup_menu::dooble_popup_menu(void):QDialog()
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
 }
 
-dooble *dooble_popup_menu::find_dooble(void)
+dooble *dooble_popup_menu::find_parent_dooble(void) const
 {
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  QWidget *parent = parentWidget();
 
-  foreach(QWidget *widget, QApplication::topLevelWidgets())
-    if(qobject_cast<dooble *> (widget) &&
-       qobject_cast<dooble *> (widget)->isVisible())
-      {
-	QApplication::restoreOverrideCursor();
-	return qobject_cast<dooble *> (widget);
-      }
+  do
+    {
+      if(qobject_cast<dooble *> (parent))
+	return qobject_cast<dooble *> (parent);
+      else if(parent)
+	parent = parent->parentWidget();
+    }
+  while(parent);
 
-  QApplication::restoreOverrideCursor();
   return 0;
 }
 
@@ -182,13 +182,13 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     {
       dooble::s_accepted_or_blocked_domains->showNormal();
       dooble_ui_utilities::center_window_widget
-	(find_dooble(), dooble::s_accepted_or_blocked_domains);
+	(find_parent_dooble(), dooble::s_accepted_or_blocked_domains);
       dooble::s_accepted_or_blocked_domains->activateWindow();
       dooble::s_accepted_or_blocked_domains->raise();
     }
   else if(m_ui.clear_items == sender())
     {
-      dooble_clear_items clear_items(find_dooble());
+      dooble_clear_items clear_items(find_parent_dooble());
 
       connect(&clear_items,
 	      SIGNAL(containers_cleared(void)),
@@ -200,7 +200,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     {
       dooble::s_cookies_window->showNormal();
       dooble_ui_utilities::center_window_widget
-	(find_dooble(), dooble::s_cookies_window);
+	(find_parent_dooble(), dooble::s_cookies_window);
       dooble::s_cookies_window->activateWindow();
       dooble::s_cookies_window->raise();
     }
@@ -210,7 +210,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     }
   else if(m_ui.history == sender())
     {
-      dooble *d = find_dooble();
+      dooble *d = find_parent_dooble();
 
       dooble::s_history_window->showNormal(d);
       dooble_ui_utilities::center_window_widget(d, dooble::s_history_window);
@@ -219,14 +219,14 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     }
   else if(m_ui.new_private_tab == sender())
     {
-      dooble *d = find_dooble();
+      dooble *d = find_parent_dooble();
 
       if(d)
 	d->new_page(true);
     }
   else if(m_ui.new_tab == sender())
     {
-      dooble *d = find_dooble();
+      dooble *d = find_parent_dooble();
 
       if(d)
 	d->new_page(false);
@@ -235,7 +235,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     (new dooble())->show();
   else if(m_ui.print == sender())
     {
-      dooble *d = find_dooble();
+      dooble *d = find_parent_dooble();
 
       if(d)
 	d->print_current_page();
@@ -244,7 +244,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     {
       dooble::s_settings->showNormal();
       dooble_ui_utilities::center_window_widget
-	(find_dooble(), dooble::s_settings);
+	(find_parent_dooble(), dooble::s_settings);
       dooble::s_settings->activateWindow();
       dooble::s_settings->raise();
     }

@@ -41,12 +41,12 @@ class dooble_popup_menu:public QDialog
   Q_OBJECT
 
  public:
-  dooble_popup_menu(void);
+  dooble_popup_menu(QWidget *parent);
 
  private:
   QPointer<dooble_page> m_dooble_page;
   Ui_dooble_popup_menu m_ui;
-  static dooble *find_dooble(void);
+  dooble *find_parent_dooble(void) const;
   void prepare_icons(void);
 
  private slots:
