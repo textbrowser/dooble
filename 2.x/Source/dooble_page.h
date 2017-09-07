@@ -55,8 +55,8 @@ class dooble_page: public QWidget
   ~dooble_page();
   QAction *action_close_tab(void) const;
   QIcon icon(void) const;
+  QMenu *menu(void) const;
   QString title(void) const;
-  QToolButton *menu(void) const;
   QUrl url(void) const;
   QWebEngineSettings *web_engine_settings(void) const;
   dooble_address_widget *address_widget(void) const;
@@ -65,11 +65,13 @@ class dooble_page: public QWidget
 			  bool state);
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
+  void show_menu(void);
 
  protected:
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
   QPointer<QAction> m_find_action;
@@ -142,7 +144,6 @@ class dooble_page: public QWidget
   void show_blocked_domains(void);
   void show_clear_items(void);
   void show_history(void);
-  void show_popup_menu(void);
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
   void titleChanged(const QString &title);

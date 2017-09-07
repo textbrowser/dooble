@@ -111,7 +111,7 @@
       </widget>
      </item>
      <item>
-      <widget class="dooble_tool_button" name="menus">
+      <widget class="dooble_tool_button" name="menu">
        <property name="toolTip">
         <string>Menus</string>
        </property>
@@ -123,9 +123,6 @@
          <width>22</width>
          <height>22</height>
         </size>
-       </property>
-       <property name="popupMode">
-        <enum>QToolButton::MenuButtonPopup</enum>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
@@ -366,7 +363,7 @@
   <tabstop>forward</tabstop>
   <tabstop>reload</tabstop>
   <tabstop>address</tabstop>
-  <tabstop>menus</tabstop>
+  <tabstop>menu</tabstop>
   <tabstop>find_stop</tabstop>
   <tabstop>find</tabstop>
   <tabstop>find_next</tabstop>

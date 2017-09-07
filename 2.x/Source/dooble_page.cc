@@ -57,6 +57,7 @@ dooble_page::dooble_page(bool is_private,
 			 QWidget *parent):QWidget(parent)
 {
   m_is_private = is_private;
+  m_menu = new QMenu(this);
   m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -70,7 +71,6 @@ dooble_page::dooble_page(bool is_private,
   else
     m_ui.is_private->setVisible(false);
 
-  m_ui.menus->setMenu(new QMenu(this));
   m_ui.progress->setVisible(false);
 
   if(view)
@@ -94,6 +94,10 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(dooble_credentials_created(void)),
 	  this,
 	  SLOT(slot_dooble_credentials_created(void)));
+  connect(m_menu,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_standard_menus(void)));
   connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -150,14 +154,10 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_forward_menu(void)));
-  connect(m_ui.menus,
+  connect(m_ui.menu,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_show_menu(void)));
-  connect(m_ui.menus->menu(),
-	  SIGNAL(aboutToShow(void)),
-	  this,
-	  SLOT(slot_about_to_show_standard_menus(void)));
   connect(m_ui.reload,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -255,14 +255,14 @@ QIcon dooble_page::icon(void) const
   return dooble_favicons::icon(m_view->url());
 }
 
+QMenu *dooble_page::menu(void) const
+{
+  return m_menu;
+}
+
 QString dooble_page::title(void) const
 {
   return m_view->title();
-}
-
-QToolButton *dooble_page::menu(void) const
-{
-  return m_ui.menus;
 }
 
 QUrl dooble_page::url(void) const
@@ -364,13 +364,12 @@ void dooble_page::prepare_icons(void)
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.is_private->setPixmap
     (QIcon(QString(":/%1/16/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
-  m_ui.menus->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
+  m_ui.menu->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
 }
 
 void dooble_page::prepare_shortcuts(void)
 {
-#ifdef Q_OS_MACOS
   if(!m_shortcuts_prepared)
     {
       m_shortcuts_prepared = true;
@@ -387,26 +386,19 @@ void dooble_page::prepare_shortcuts(void)
       new QShortcut
 	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
       new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
+      new QShortcut(QKeySequence(tr("Ctrl+P")), this, SIGNAL(print(void)));
+      new QShortcut
+	(QKeySequence(tr("Ctrl+Q")), this, SIGNAL(quit_dooble(void)));
       new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
       new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
       new QShortcut(QKeySequence(tr("Ctrl+W")), this, SIGNAL(close_tab(void)));
       new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
     }
-#else
-  if(!m_shortcuts_prepared)
-    {
-      m_shortcuts_prepared = true;
-      new QShortcut
-	(QKeySequence(tr("Ctrl+K")), this, SLOT(slot_show_cookies(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
-      new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
-    }
-#endif
 }
 
 void dooble_page::prepare_standard_menus(void)
 {
-  m_ui.menus->menu()->clear();
+  m_menu->clear();
 
   QAction *action = 0;
   QMenu *menu = 0;
@@ -416,7 +408,7 @@ void dooble_page::prepare_standard_menus(void)
   ** File Menu
   */
 
-  menu = m_ui.menus->menu()->addMenu(tr("&File"));
+  menu = m_menu->addMenu(tr("&File"));
   m_authentication_action = menu->addAction(tr("&Authenticate..."),
 					    this,
 					    SLOT(slot_authenticate(void)),
@@ -467,7 +459,7 @@ void dooble_page::prepare_standard_menus(void)
   ** Edit Menu
   */
 
-  menu = m_ui.menus->menu()->addMenu(tr("&Edit"));
+  menu = m_menu->addMenu(tr("&Edit"));
   menu->addAction(tr("&Clear Items..."),
 		  this,
 		  SIGNAL(show_clear_items(void)));
@@ -488,7 +480,7 @@ void dooble_page::prepare_standard_menus(void)
   ** Tools Menu
   */
 
-  menu = m_ui.menus->menu()->addMenu(tr("&Tools"));
+  menu = m_menu->addMenu(tr("&Tools"));
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
 		  SIGNAL(show_blocked_domains(void)));
@@ -501,7 +493,7 @@ void dooble_page::prepare_standard_menus(void)
   ** Help Menu
   */
 
-  menu = m_ui.menus->menu()->addMenu(tr("&Help"));
+  menu = m_menu->addMenu(tr("&Help"));
   menu->addAction(tr("&About..."),
 		  this,
 		  SIGNAL(show_about(void)));
@@ -519,10 +511,10 @@ void dooble_page::prepare_tool_buttons(void)
       tool_button->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
-    else if(m_ui.menus == tool_button)
+    else if(m_ui.menu == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none;}"
-	 "QToolButton::menu-arrow {image: url();}"
+	 "QToolButton::menu-arrow {image: none;}"
 	 "QToolButton::menu-button {border: none;}");
     else
       tool_button->setStyleSheet("QToolButton {border: none;}"
@@ -530,8 +522,7 @@ void dooble_page::prepare_tool_buttons(void)
 #else
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
     if(m_ui.backward == tool_button ||
-       m_ui.forward == tool_button ||
-       m_ui.menus == tool_button)
+       m_ui.forward == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
@@ -571,6 +562,22 @@ void dooble_page::resizeEvent(QResizeEvent *event)
 		   Qt::ElideMiddle,
 		   qAbs(width() - difference)));
   m_ui.link_hovered->setCursorPosition(0);
+}
+
+void dooble_page::show_menu(void)
+{
+  QMenu menu(this);
+  QPoint point(m_ui.menu->pos());
+  QSize size;
+  QWidgetAction widget_action(&menu);
+  dooble_popup_menu *popup_menu = new dooble_popup_menu();
+
+  size = popup_menu->size();
+  widget_action.setDefaultWidget(popup_menu);
+  menu.addAction(&widget_action);
+  point.setX(m_ui.menu->size().width() + point.x() - size.width());
+  point.setY(m_ui.menu->size().height() + point.y());
+  menu.exec(mapToGlobal(point));
 }
 
 void dooble_page::slot_about_to_show_standard_menus(void)
@@ -953,10 +960,7 @@ void dooble_page::slot_show_find(void)
 
 void dooble_page::slot_show_menu(void)
 {
-  if(dooble::s_popup_menu->isVisible())
-    m_ui.menus->showMenu();
-  else
-    emit show_popup_menu();
+  show_menu();
 }
 
 void dooble_page::slot_show_pull_down_menu(void)

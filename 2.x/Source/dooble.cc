@@ -45,7 +45,6 @@
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_page.h"
-#include "dooble_popup_menu.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
@@ -59,7 +58,6 @@ dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
 dooble_history_window *dooble::s_history_window = 0;
-dooble_popup_menu *dooble::s_popup_menu = 0;
 dooble_settings *dooble::s_settings = 0;
 dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
   0;
@@ -257,9 +255,6 @@ void dooble::initialize_static_members(void)
   if(!s_history_window)
     s_history_window = new dooble_history_window();
 
-  if(!s_popup_menu)
-    s_popup_menu = new dooble_popup_menu();
-
   if(!s_url_request_interceptor)
     {
       s_url_request_interceptor = new
@@ -279,11 +274,8 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	dooble_page *page = qobject_cast<dooble_page *>
 	  (m_ui.tab->currentWidget());
 
-	if(page && page->menu())
-	  {
-	    page->menu()->showMenu();
-	    page->menu()->menu()->activateWindow();
-	  }
+	if(page)
+	  page->show_menu();
       }
 
   QMainWindow::keyPressEvent(event);
@@ -480,12 +472,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
-	  SIGNAL(show_popup_menu(void)),
-	  this,
-	  SLOT(slot_show_popup_menu(void)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
-  connect(page,
 	  SIGNAL(show_settings(void)),
 	  this,
 	  SLOT(slot_show_settings(void)),
@@ -559,30 +545,29 @@ void dooble::slot_about_to_show_main_menu(void)
 
       if(page &&
 	 page->menu() &&
-	 page->menu()->menu() &&
-	 page->menu()->menu()->actions().size() >= 4)
+	 page->menu()->actions().size() >= 4)
 	{
 	  if(m_ui.menu_edit == menu &&
-	     page->menu()->menu()->actions()[1]->menu())
+	     page->menu()->actions()[1]->menu())
 	    m_ui.menu_edit->addActions
-	      (page->menu()->menu()->actions()[1]->menu()->actions());
+	      (page->menu()->actions()[1]->menu()->actions());
 	  else if(m_ui.menu_file == menu &&
-		  page->menu()->menu()->actions()[1]->menu())
+		  page->menu()->actions()[1]->menu())
 	    {
 	      m_ui.menu_file->addActions
-		(page->menu()->menu()->actions()[0]->menu()->actions());
+		(page->menu()->actions()[0]->menu()->actions());
 
 	      if(page->action_close_tab())
 		page->action_close_tab()->setEnabled(m_ui.tab->count() > 1);
 	    }
 	  else if(m_ui.menu_help == menu &&
-		  page->menu()->menu()->actions()[3]->menu())
+		  page->menu()->actions()[3]->menu())
 	    m_ui.menu_help->addActions
-	      (page->menu()->menu()->actions()[3]->menu()->actions());
+	      (page->menu()->actions()[3]->menu()->actions());
 	  else if(m_ui.menu_tools == menu &&
-		  page->menu()->menu()->actions()[2]->menu())
+		  page->menu()->actions()[2]->menu())
 	    m_ui.menu_tools->addActions
-	      (page->menu()->menu()->actions()[2]->menu()->actions());
+	      (page->menu()->actions()[2]->menu()->actions());
 	}
     }
 }
@@ -769,11 +754,6 @@ void dooble::slot_show_history(void)
 
   s_history_window->activateWindow();
   s_history_window->raise();
-}
-
-void dooble::slot_show_popup_menu(void)
-{
-  s_popup_menu->show();
 }
 
 void dooble::slot_show_settings(void)

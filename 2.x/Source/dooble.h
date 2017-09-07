@@ -43,7 +43,6 @@ class dooble_cryptography;
 class dooble_history;
 class dooble_history_window;
 class dooble_page;
-class dooble_popup_menu;
 class dooble_web_engine_url_request_interceptor;
 class dooble_web_engine_view;
 
@@ -65,7 +64,6 @@ class dooble: public QMainWindow
   static dooble_cookies_window *s_cookies_window;
   static dooble_cryptography *s_cryptography;
   static dooble_history_window *s_history_window;
-  static dooble_popup_menu *s_popup_menu;
   static dooble_settings *s_settings;
   static dooble_web_engine_url_request_interceptor *s_url_request_interceptor;
   void new_page(bool is_private);
@@ -112,7 +110,6 @@ class dooble: public QMainWindow
   void slot_show_blocked_domains(void);
   void slot_show_clear_items(void);
   void slot_show_history(void);
-  void slot_show_popup_menu(void);
   void slot_show_settings(void);
   void slot_show_settings_panel(dooble_settings::Panels panel);
   void slot_tab_close_requested(int index);
