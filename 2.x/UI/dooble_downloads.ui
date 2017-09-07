@@ -41,7 +41,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QListWidget" name="list"/>
+     <widget class="QTableWidget" name="table"/>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -80,7 +80,7 @@
  <tabstops>
   <tabstop>download_path</tabstop>
   <tabstop>select</tabstop>
-  <tabstop>list</tabstop>
+  <tabstop>table</tabstop>
   <tabstop>search</tabstop>
  </tabstops>
  <resources>

@@ -62,7 +62,8 @@ FORMS           = UI\\dooble.ui \
                   UI\\dooble_certificate_exceptions_widget.ui \
                   UI\\dooble_clear_items.ui \
 		  UI\\dooble_cookies_window.ui \
-		  UI\\dooble_downloads.ui \
+                  UI\\dooble_downloads.ui \
+                  UI\\dooble_downloads_item.ui \
 		  UI\\dooble_history_window.ui \
                   UI\\dooble_page.ui \
 		  UI\\dooble_popup_menu.ui \
