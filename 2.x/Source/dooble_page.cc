@@ -502,6 +502,9 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
 		  SIGNAL(show_blocked_domains(void)));
+  menu->addAction(tr("&Downloads..."),
+		  this,
+		  SIGNAL(show_downloads(void)));
   menu->addAction(tr("&History..."),
 		  this,
 		  SIGNAL(show_history(void)),

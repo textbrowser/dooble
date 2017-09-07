@@ -39,8 +39,19 @@ class dooble_downloads: public QMainWindow
  public:
   dooble_downloads(void);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
+ protected:
+  void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
+
  private:
   Ui_dooble_downloads m_ui;
+  void populate(void);
+  void save_settings(void);
 };
 
 #endif

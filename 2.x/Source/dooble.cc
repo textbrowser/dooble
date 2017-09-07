@@ -41,6 +41,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
+#include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
@@ -57,6 +58,7 @@ dooble_application *dooble::s_application = 0;
 dooble_cookies *dooble::s_cookies = 0;
 dooble_cookies_window *dooble::s_cookies_window = 0;
 dooble_cryptography *dooble::s_cryptography = 0;
+dooble_downloads *dooble::s_downloads = 0;
 dooble_history_window *dooble::s_history_window = 0;
 dooble_settings *dooble::s_settings = 0;
 dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
@@ -248,6 +250,9 @@ void dooble::initialize_static_members(void)
       else
 	s_cryptography = new dooble_cryptography(QByteArray(), QByteArray());
     }
+
+  if(!s_downloads)
+    s_downloads = new dooble_downloads();
 
   if(!s_history)
     s_history = new dooble_history();
@@ -460,6 +465,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(show_clear_items(void)),
 	  this,
 	  SLOT(slot_show_clear_items(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(show_downloads(void)),
+	  this,
+	  SLOT(slot_show_downloads(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -746,6 +757,18 @@ void dooble::slot_show_clear_items(void)
 	  dooble::s_application,
 	  SIGNAL(containers_cleared(void)));
   clear_items.exec();
+}
+
+void dooble::slot_show_downloads(void)
+{
+  s_downloads->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget
+      (this, s_downloads);
+
+  s_downloads->activateWindow();
+  s_downloads->raise();
 }
 
 void dooble::slot_show_full_screen(void)

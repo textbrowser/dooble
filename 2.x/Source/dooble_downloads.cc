@@ -25,9 +25,64 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QKeyEvent>
+
 #include "dooble_downloads.h"
+#include "dooble_settings.h"
 
 dooble_downloads::dooble_downloads(void):QMainWindow()
 {
   m_ui.setupUi(this);
+}
+
+void dooble_downloads::closeEvent(QCloseEvent *event)
+{
+  QMainWindow::closeEvent(event);
+}
+
+void dooble_downloads::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    close();
+
+  QMainWindow::keyPressEvent(event);
+}
+
+void dooble_downloads::populate(void)
+{
+}
+
+void dooble_downloads::resizeEvent(QResizeEvent *event)
+{
+  QMainWindow::resizeEvent(event);
+  save_settings();
+}
+
+void dooble_downloads::save_settings(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("downloads_geometry", saveGeometry().toBase64());
+}
+
+void dooble_downloads::show(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::setting("downloads_geometry").
+			      toByteArray()));
+
+  QMainWindow::show();
+  populate();
+}
+
+void dooble_downloads::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::setting("downloads_geometry").
+			      toByteArray()));
+
+  QMainWindow::showNormal();
+  populate();
 }

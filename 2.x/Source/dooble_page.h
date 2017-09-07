@@ -147,6 +147,7 @@ class dooble_page: public QWidget
   void show_about(void);
   void show_blocked_domains(void);
   void show_clear_items(void);
+  void show_downloads(void);
   void show_full_screen(void);
   void show_history(void);
   void show_settings(void);

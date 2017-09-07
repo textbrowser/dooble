@@ -43,6 +43,10 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   static void purge(void);
   void accept_or_block_domain(const QString &domain);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -55,10 +59,6 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
   void save_settings(void);
-
- public slots:
-  void show(void);
-  void showNormal(void);
 
  private slots:
   void slot_add(void);
