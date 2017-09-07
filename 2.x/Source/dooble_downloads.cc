@@ -26,6 +26,7 @@
 */
 
 #include <QKeyEvent>
+#include <QStandardPaths>
 
 #include "dooble_downloads.h"
 #include "dooble_settings.h"
@@ -33,6 +34,16 @@
 dooble_downloads::dooble_downloads(void):QMainWindow()
 {
   m_ui.setupUi(this);
+
+  if(m_ui.download_path->text().trimmed().isEmpty())
+    m_ui.download_path->setText
+      (QStandardPaths::
+       standardLocations(QStandardPaths::DesktopLocation).value(0));
+}
+
+QString dooble_downloads::download_path(void) const
+{
+  return m_ui.download_path->text();
 }
 
 void dooble_downloads::closeEvent(QCloseEvent *event)

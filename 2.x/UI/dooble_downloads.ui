@@ -20,6 +20,27 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="download_path">
+        <property name="placeholderText">
+         <string>Download Path</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="select">
+        <property name="text">
+         <string>Select...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QListWidget" name="list"/>
     </item>
     <item>
@@ -56,6 +77,12 @@
    <header>dooble_search_widget.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>download_path</tabstop>
+  <tabstop>select</tabstop>
+  <tabstop>list</tabstop>
+  <tabstop>search</tabstop>
+ </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
  </resources>

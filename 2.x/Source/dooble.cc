@@ -31,7 +31,6 @@
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
-#include <QStandardPaths>
 #include <QUrl>
 #include <QWebEngineProfile>
 
@@ -631,9 +630,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   dialog.setAcceptMode(QFileDialog::AcceptSave);
   dialog.setConfirmOverwrite(true);
-  dialog.setDirectory
-    (QStandardPaths::standardLocations(QStandardPaths::
-				       DesktopLocation).value(0));
+  dialog.setDirectory(dooble::s_downloads->download_path());
   dialog.setFileMode(QFileDialog::AnyFile);
   dialog.setLabelText(QFileDialog::Accept, tr("Save"));
   dialog.setWindowTitle(tr("Dooble: Download File"));

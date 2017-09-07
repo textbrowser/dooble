@@ -38,6 +38,7 @@ class dooble_downloads: public QMainWindow
 
  public:
   dooble_downloads(void);
+  QString download_path(void) const;
 
  public slots:
   void show(void);
