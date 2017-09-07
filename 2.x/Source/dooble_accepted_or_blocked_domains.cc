@@ -86,7 +86,7 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   else
     m_ui.block_mode->click();
 
-  new QShortcut
+  new QShortcut // Without a parent.
     (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
 }
 
