@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -306,7 +306,7 @@
           <item>
            <widget class="QCheckBox" name="access_new_tabs">
             <property name="toolTip">
-             <string>Switch to new tabs.</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Access New Tabs</string>
@@ -495,8 +495,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>452</width>
-               <height>642</height>
+               <width>384</width>
+               <height>617</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
