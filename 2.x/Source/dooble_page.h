@@ -37,6 +37,7 @@
 #include "ui_dooble_page.h"
 
 class QPrinter;
+class QShortcut;
 class QWebEngineSettings;
 class dooble;
 class dooble_address_widget;
@@ -72,6 +73,7 @@ class dooble_page: public QWidget
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QList<QShortcut *> m_shortcuts;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
@@ -80,7 +82,6 @@ class dooble_page: public QWidget
   QPointer<QAction> m_settings_action;
   Ui_dooble_page m_ui;
   bool m_is_private;
-  bool m_shortcuts_prepared;
   dooble *find_parent_dooble(void) const;
   dooble_web_engine_view *m_view;
   void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);

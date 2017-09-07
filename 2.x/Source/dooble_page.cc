@@ -58,7 +58,6 @@ dooble_page::dooble_page(bool is_private,
 {
   m_is_private = is_private;
   m_menu = new QMenu(this);
-  m_shortcuts_prepared = false;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
@@ -243,6 +242,8 @@ dooble_page::dooble_page(bool is_private,
 
 dooble_page::~dooble_page()
 {
+  while(!m_shortcuts.isEmpty())
+    delete m_shortcuts.takeFirst();
 }
 
 QAction *dooble_page::action_close_tab(void) const
@@ -386,33 +387,60 @@ void dooble_page::prepare_icons(void)
 
 void dooble_page::prepare_shortcuts(void)
 {
-  if(!m_shortcuts_prepared)
+  if(m_shortcuts.isEmpty())
     {
-      m_shortcuts_prepared = true;
-      new QShortcut
-	(QKeySequence(tr("Ctrl+A")), this, SLOT(slot_authenticate(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+D")), this, SIGNAL(show_downloads(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_show_find(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+G")), this, SIGNAL(show_settings(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+H")), this, SIGNAL(show_history(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+K")), this, SLOT(slot_show_cookies(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+L")), this, SLOT(slot_open_url(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+N")), this, SIGNAL(new_window(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+P")), this, SIGNAL(print(void)));
-      new QShortcut
-	(QKeySequence(tr("Ctrl+Q")), this, SIGNAL(quit_dooble(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+R")), m_view, SLOT(reload(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+T")), this, SIGNAL(new_tab(void)));
-      new QShortcut(QKeySequence(tr("Ctrl+W")), this, SIGNAL(close_tab(void)));
-      new QShortcut(QKeySequence(tr("Esc")), this, SLOT(slot_escape(void)));
-      new QShortcut
-	(QKeySequence(tr("F11")), this, SIGNAL(show_full_screen(void)));
+      m_shortcuts.append
+	(new QShortcut (QKeySequence(tr("Ctrl+A")),
+			this,
+			SLOT(slot_authenticate(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+D")),
+		       this,
+		       SIGNAL(show_downloads(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+F")),
+		       this,
+		       SLOT(slot_show_find(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+G")),
+		       this,
+		       SIGNAL(show_settings(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+H")),
+		       this,
+		       SIGNAL(show_history(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+K")),
+		       this,
+		       SLOT(slot_show_cookies(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+L")),
+		       this,
+		       SLOT(slot_open_url(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+N")),
+				       this,
+				       SIGNAL(new_window(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+P")),
+				       this,
+				       SIGNAL(print(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+Q")),
+				       this,
+				       SIGNAL(quit_dooble(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+R")),
+				       m_view,
+				       SLOT(reload(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+T")),
+				       this,
+				       SIGNAL(new_tab(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+W")),
+				       this,
+				       SIGNAL(close_tab(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Esc")),
+				       this,
+				       SLOT(slot_escape(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("F11")),
+				       this,
+				       SIGNAL(show_full_screen(void))));
     }
 }
 
