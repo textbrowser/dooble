@@ -304,19 +304,6 @@
         <widget class="QWidget" name="display_page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QCheckBox" name="access_new_tabs">
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string>Access New Tabs</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="animated_scrolling">
             <property name="text">
              <string>Animated Scrolling</string>
@@ -337,6 +324,19 @@
            <widget class="QCheckBox" name="main_menu_bar_visible">
             <property name="text">
              <string>Main Menu Bar Visible</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="access_new_tabs">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Switch to New Tabs Created from Links</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -1106,10 +1106,10 @@
   <tabstop>cache_size</tabstop>
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
-  <tabstop>access_new_tabs</tabstop>
   <tabstop>animated_scrolling</tabstop>
   <tabstop>denote_private_tabs</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
+  <tabstop>access_new_tabs</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>browsing_history</tabstop>
   <tabstop>visited_links</tabstop>
