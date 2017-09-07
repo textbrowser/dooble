@@ -33,6 +33,8 @@
 
 #include "ui_dooble_downloads.h"
 
+class QWebEngineDownloadItem;
+
 class dooble_downloads: public QMainWindow
 {
   Q_OBJECT
@@ -40,6 +42,7 @@ class dooble_downloads: public QMainWindow
  public:
   dooble_downloads(void);
   QString download_path(void) const;
+  void record_download(QWebEngineDownloadItem *item);
 
  public slots:
   void show(void);

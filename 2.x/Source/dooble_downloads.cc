@@ -29,6 +29,7 @@
 #include <QKeyEvent>
 #include <QStandardPaths>
 
+#include "dooble_cryptography.h"
 #include "dooble_downloads.h"
 #include "dooble_settings.h"
 
@@ -74,6 +75,12 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
 
 void dooble_downloads::populate(void)
 {
+}
+
+void dooble_downloads::record_download(QWebEngineDownloadItem *item)
+{
+  if(!item)
+    return;
 }
 
 void dooble_downloads::resizeEvent(QResizeEvent *event)
