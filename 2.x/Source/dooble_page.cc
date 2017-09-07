@@ -826,6 +826,11 @@ void dooble_page::slot_load_finished(bool ok)
   m_ui.progress->setVisible(false);
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Reload"));
+
+  QString scheme(url().scheme());
+
+  if(scheme == "ftp" || scheme == "gopher")
+    emit iconChanged(icon());
 }
 
 void dooble_page::slot_load_page(void)
