@@ -127,15 +127,23 @@ void dooble_gopher::slot_ready_read(void)
     }
   else if(m_item_type == '4') /* BinHex Encoded Text File */
     {
+      if(m_request)
+	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
     }
   else if(m_item_type == '5') /* Binary Archive File */
     {
+      if(m_request)
+	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
     }
   else if(m_item_type == '6') /* UUEncoded Text File */
     {
+      if(m_request)
+	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
     }
   else if(m_item_type == '9') /* Binary File */
     {
+      if(m_request)
+	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
     }
   else if(m_item_type == 'I') /* Image File of Unspecified Format */
     {
