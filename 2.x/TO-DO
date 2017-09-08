@@ -43,6 +43,7 @@ Remaining Items
 5.     Zoom.
 6.     Language option.
 7.     Empty download file names.
+8.     Connect downloadRequested() to Downloads for the default profile.
 
 Unknown Items
 
