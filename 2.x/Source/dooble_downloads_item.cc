@@ -76,6 +76,10 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.progress->setVisible(false);
     }
 
+#ifdef Q_OS_MACOS
+  m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
+			     "QToolButton::menu-button {border: none;}");
+#endif
   prepare_icons();
 }
 

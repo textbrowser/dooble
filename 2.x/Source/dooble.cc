@@ -85,6 +85,11 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	m_populate_containers_timer.start(2500);
 	s_containers_populated = true;
       }
+
+  connect(QWebEngineProfile::defaultProfile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
 }
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
@@ -107,6 +112,11 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	m_populate_containers_timer.start(2500);
 	s_containers_populated = true;
       }
+
+  connect(QWebEngineProfile::defaultProfile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
 }
 
 dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
@@ -624,6 +634,10 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 {
   if(!download)
     return;
+  else if(download->property("dooble_tagged").toBool())
+    return;
+  else
+    download->setProperty("dooble_tagged", true);
 
   QFileDialog dialog(this);
   QFileInfo fileInfo(download->path());

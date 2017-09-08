@@ -33,6 +33,7 @@ Completed Items
 29.    Print support.
 30.    Print via popup menu.
 31.    Full-screen.
+32.    Connect downloadRequested() to Downloads for the default profile.
 
 Remaining Items
 
@@ -43,7 +44,6 @@ Remaining Items
 5.     Zoom.
 6.     Language option.
 7.     Empty download file names.
-8.     Connect downloadRequested() to Downloads for the default profile.
 
 Unknown Items
 
