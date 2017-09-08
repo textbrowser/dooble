@@ -124,6 +124,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
   s_settings["main_menu_bar_visible"] = true;
+  s_settings["status_bar_visible"] = true;
   restore();
   prepare_icons();
 }

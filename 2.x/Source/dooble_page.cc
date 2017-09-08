@@ -71,6 +71,8 @@ dooble_page::dooble_page(bool is_private,
     m_ui.is_private->setVisible(false);
 
   m_ui.progress->setVisible(false);
+  m_ui.status_bar->setVisible
+    (dooble_settings::setting("status_bar_visible").toBool());
 
   if(view)
     {
@@ -560,6 +562,12 @@ void dooble_page::prepare_standard_menus(void)
 					 this,
 					 SIGNAL(show_full_screen(void)),
 					 QKeySequence(tr("F11")));
+  menu->addSeparator();
+  action = menu->addAction(tr("&Status Bar"),
+			   this,
+			   SLOT(slot_show_status_bar(bool)));
+  action->setCheckable(true);
+  action->setChecked(dooble_settings::setting("status_bar_visible").toBool());
 
   /*
   ** Help Menu
@@ -1067,6 +1075,12 @@ void dooble_page::slot_show_popup_menu(void)
 void dooble_page::slot_show_pull_down_menu(void)
 {
   m_ui.address->complete();
+}
+
+void dooble_page::slot_show_status_bar(bool state)
+{
+  m_ui.status_bar->setVisible(state);
+  dooble_settings::set_setting("status_bar_visible", state);
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)

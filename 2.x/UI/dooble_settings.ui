@@ -336,7 +336,7 @@
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
-             <string>Switch to New Tabs Created from Links</string>
+             <string>Show New Tabs</string>
             </property>
             <property name="checked">
              <bool>true</bool>

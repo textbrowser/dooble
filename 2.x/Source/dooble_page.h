@@ -129,6 +129,7 @@ class dooble_page: public QWidget
   void slot_show_find(void);
   void slot_show_popup_menu(void);
   void slot_show_pull_down_menu(void);
+  void slot_show_status_bar(bool state);
   void slot_url_changed(const QUrl &url);
 
  signals:

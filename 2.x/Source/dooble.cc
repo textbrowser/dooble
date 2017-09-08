@@ -655,6 +655,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
     {
       download->setPath(dialog.selectedFiles().value(0));
       s_downloads->record_download(download);
+      s_downloads->showNormal();
       download->accept();
     }
   else
