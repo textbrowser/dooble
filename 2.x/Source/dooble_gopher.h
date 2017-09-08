@@ -42,21 +42,35 @@ class dooble_gopher: public QWebEngineUrlSchemeHandler
   dooble_gopher(QObject *parent);
 
  private:
-  QBuffer *m_buffer;
+  QPointer<QWebEngineUrlRequestJob> m_request;
+  void requestStarted(QWebEngineUrlRequestJob *request);
+
+ private slots:
+  void slot_finished(const QByteArray &bytes);
+};
+
+class dooble_gopher_implementation: public QTcpSocket
+{
+  Q_OBJECT
+
+ public:
+  dooble_gopher_implementation(const QUrl &url, QObject *parent);
+
+ private:
   QByteArray m_content;
   QByteArray m_html;
-  QPointer<QWebEngineUrlRequestJob> m_request;
-  QTcpSocket m_tcp_socket;
   QUrl m_url;
   char m_item_type;
   static QByteArray s_eol;
   static QByteArray plain_to_html(const QByteArray &bytes);
-  void requestStarted(QWebEngineUrlRequestJob *request);
 
  private slots:
   void slot_connected(void);
   void slot_disonnected(void);
   void slot_ready_read(void);
+
+ signals:
+  void finished(const QByteArray &bytes);
 };
 
 #endif

@@ -29,26 +29,77 @@
 
 #include "dooble_gopher.h"
 
-QByteArray dooble_gopher::s_eol = "\r\n";
+QByteArray dooble_gopher_implementation::s_eol = "\r\n";
 
 dooble_gopher::dooble_gopher(QObject *parent):QWebEngineUrlSchemeHandler(parent)
 {
-  m_buffer = new QBuffer(this);
-  connect(&m_tcp_socket,
+}
+
+void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
+{
+  if(!request)
+    return;
+  else if(m_request == request)
+    return;
+
+  m_request = request;
+
+  dooble_gopher_implementation *gopher_implementation = new
+    dooble_gopher_implementation(m_request->requestUrl(), this);
+
+  connect(gopher_implementation,
+	  SIGNAL(finished(const QByteArray &)),
+	  this,
+	  SLOT(slot_finished(const QByteArray &)));
+}
+
+void dooble_gopher::slot_finished(const QByteArray &bytes)
+{
+  if(m_request)
+    {
+      if(bytes.isEmpty())
+	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
+      else
+	{
+	  QBuffer *buffer = new QBuffer(this);
+
+	  buffer->setData(bytes);
+	  m_request->reply("text/html", buffer);
+	}
+    }
+
+  dooble_gopher_implementation *gopher_implementation = qobject_cast
+    <dooble_gopher_implementation *> (sender());
+
+  if(gopher_implementation)
+    gopher_implementation->deleteLater();
+}
+
+dooble_gopher_implementation::dooble_gopher_implementation
+(const QUrl &url, QObject *parent):QTcpSocket(parent)
+{
+  m_item_type = 0;
+  m_url = url;
+
+  if(m_url.port() == -1)
+    m_url.setPort(70);
+
+  connect(this,
 	  SIGNAL(connected(void)),
 	  this,
 	  SLOT(slot_connected(void)));
-  connect(&m_tcp_socket,
+  connect(this,
 	  SIGNAL(disconnected(void)),
 	  this,
 	  SLOT(slot_disonnected(void)));
-  connect(&m_tcp_socket,
+  connect(this,
 	  SIGNAL(readyRead(void)),
 	  this,
 	  SLOT(slot_ready_read(void)));
+  connectToHost(m_url.host(), m_url.port());
 }
 
-QByteArray dooble_gopher::plain_to_html(const QByteArray &bytes)
+QByteArray dooble_gopher_implementation::plain_to_html(const QByteArray &bytes)
 {
   QByteArray b(bytes);
 
@@ -59,27 +110,7 @@ QByteArray dooble_gopher::plain_to_html(const QByteArray &bytes)
   return b;
 }
 
-void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
-{
-  if(!request)
-    return;
-
-  m_content.clear();
-  m_html.clear();
-  m_item_type = 0;
-  m_request = request;
-  m_tcp_socket.blockSignals(true);
-  m_tcp_socket.abort(); // This socket is reused.
-  m_tcp_socket.blockSignals(false);
-  m_url = m_request->requestUrl();
-
-  if(m_url.port() == -1)
-    m_url.setPort(70);
-
-  m_tcp_socket.connectToHost(m_url.host(), m_url.port());
-}
-
-void dooble_gopher::slot_connected(void)
+void dooble_gopher_implementation::slot_connected(void)
 {
   QString output("");
   QString path(m_url.path());
@@ -103,21 +134,17 @@ void dooble_gopher::slot_connected(void)
       output.append(query);
     }
 
-  m_tcp_socket.write(output.toUtf8().append(s_eol));
+  write(output.toUtf8().append(s_eol));
 }
 
-void dooble_gopher::slot_disonnected(void)
+void dooble_gopher_implementation::slot_disonnected(void)
 {
-  if(!m_request)
-    return;
-
-  m_buffer->setData(m_html);
-  m_request->reply("text/html", m_buffer);
+  emit finished(m_html);
 }
 
-void dooble_gopher::slot_ready_read(void)
+void dooble_gopher_implementation::slot_ready_read(void)
 {
-  m_content.append(m_tcp_socket.readAll());
+  m_content.append(readAll());
 
   if(m_item_type == '0') /* Plaintext */
     {
@@ -128,25 +155,13 @@ void dooble_gopher::slot_ready_read(void)
       m_content.clear();
     }
   else if(m_item_type == '4') /* BinHex Encoded Text File */
-    {
-      if(m_request)
-	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
-    }
+    emit finished(QByteArray());
   else if(m_item_type == '5') /* Binary Archive File */
-    {
-      if(m_request)
-	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
-    }
+    emit finished(QByteArray());
   else if(m_item_type == '6') /* UUEncoded Text File */
-    {
-      if(m_request)
-	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
-    }
+    emit finished(QByteArray());
   else if(m_item_type == '9') /* Binary File */
-    {
-      if(m_request)
-	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
-    }
+    emit finished(QByteArray());
   else if(m_item_type == 'I') /* Image File of Unspecified Format */
     {
       m_html.append(m_content);
