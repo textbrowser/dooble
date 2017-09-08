@@ -64,9 +64,16 @@ class dooble_downloads: public QMainWindow
 
  private slots:
   void slot_clear_finished_downloads(void);
+  void slot_copy_download_location(void);
+  void slot_delete_row(void);
   void slot_download_destroyed(void);
   void slot_download_path_inspection_timer_timeout(void);
+  void slot_open_download_page(void);
   void slot_select_path(void);
+  void slot_show_context_menu(const QPoint &point);
+
+ signals:
+  void open_url(const QUrl &url);
 };
 
 #endif

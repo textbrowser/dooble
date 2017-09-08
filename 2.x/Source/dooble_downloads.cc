@@ -25,11 +25,14 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QClipboard>
 #include <QFileDialog>
 #include <QKeyEvent>
+#include <QShortcut>
 #include <QStandardPaths>
 #include <QWebEngineDownloadItem>
 
+#include "dooble.h"
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
 #include "dooble_downloads_item.h"
@@ -59,6 +62,13 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_select_path(void)));
+  connect(m_ui.table,
+	  SIGNAL(customContextMenuRequested(const QPoint &)),
+	  this,
+	  SLOT(slot_show_context_menu(const QPoint &)));
+  new QShortcut // Without a parent.
+    (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
+  m_ui.table->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 QString dooble_downloads::download_path(void) const
@@ -174,6 +184,36 @@ void dooble_downloads::slot_clear_finished_downloads(void)
   delete_selected();
 }
 
+void dooble_downloads::slot_copy_download_location(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QClipboard *clipboard = QApplication::clipboard();
+
+  if(clipboard)
+    clipboard->setText(action->property("url").toUrl().toString());
+}
+
+void dooble_downloads::slot_delete_row(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  dooble_downloads_item *downloads_item = qobject_cast<dooble_downloads_item *>
+    (m_ui.table->cellWidget(action->property("row").toInt(), 0));
+
+  if(downloads_item && downloads_item->is_finished())
+    {
+      downloads_item->deleteLater();
+      m_ui.table->removeRow(action->property("row").toInt());
+    }
+}
+
 void dooble_downloads::slot_download_destroyed(void)
 {
   m_downloads.remove(sender());
@@ -194,6 +234,44 @@ void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
   m_ui.download_path->setPalette(palette);
 }
 
+void dooble_downloads::slot_open_download_page(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QUrl url(action->property("url").toUrl().adjusted(QUrl::RemoveFilename));
+
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  /*
+  ** Locate a Dooble window.
+  */
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(this,
+	     SIGNAL(open_url(const QUrl &)));
+
+  QWidgetList list(QApplication::topLevelWidgets());
+
+  for(int i = 0; i < list.size(); i++)
+    if(qobject_cast<dooble *> (list.at(i)) &&
+       qobject_cast<dooble *> (list.at(i))->isVisible())
+      {
+	connect(this,
+		SIGNAL(open_url(const QUrl &)),
+		list.at(i),
+		SLOT(slot_open_url(const QUrl &)),
+		Qt::UniqueConnection);
+	break;
+      }
+
+  QApplication::restoreOverrideCursor();
+  emit open_url(url);
+}
+
 void dooble_downloads::slot_select_path(void)
 {
   QFileDialog dialog(this);
@@ -209,4 +287,40 @@ void dooble_downloads::slot_select_path(void)
 	("download_path", dialog.selectedFiles().value(0));
       m_ui.download_path->setText(dialog.selectedFiles().value(0));
     }
+}
+
+void dooble_downloads::slot_show_context_menu(const QPoint &point)
+{
+  int row = m_ui.table->rowAt(point.y());
+
+  if(row < 0)
+    return;
+
+  dooble_downloads_item *downloads_item = qobject_cast
+    <dooble_downloads_item *> (m_ui.table->cellWidget(row, 0));
+
+  if(!downloads_item)
+    return;
+
+  QAction *action = 0;
+  QMenu menu(this);
+  QUrl url(downloads_item->url());
+
+  action = menu.addAction
+    (tr("&Copy Download Location"),
+     this,
+     SLOT(slot_copy_download_location(void)));
+  action->setEnabled(!url.isEmpty() && url.isValid());
+  action->setProperty("url", url);
+  action = menu.addAction
+    (tr("&Open Download Page"),
+     this,
+     SLOT(slot_open_download_page(void)));
+  action->setEnabled(!url.isEmpty() && url.isValid());
+  action->setProperty("url", url);
+  menu.addSeparator();
+  action = menu.addAction(tr("&Delete"), this, SLOT(slot_delete_row(void)));
+  action->setEnabled(downloads_item->is_finished());
+  action->setProperty("row", row);
+  menu.exec(mapToGlobal(point));
 }

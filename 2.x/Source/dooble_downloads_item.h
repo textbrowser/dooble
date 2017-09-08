@@ -29,6 +29,7 @@
 #define dooble_downloads_item_h
 
 #include <QPointer>
+#include <QUrl>
 #include <QWidget>
 
 #include "ui_dooble_downloads_item.h"
@@ -42,10 +43,12 @@ class dooble_downloads_item: public QWidget
  public:
   dooble_downloads_item(QWebEngineDownloadItem *download, QWidget *parent);
   ~dooble_downloads_item();
+  QUrl url(void) const;
   bool is_finished(void) const;
 
  private:
   QPointer<QWebEngineDownloadItem> m_download;
+  QUrl m_url;
   Ui_dooble_downloads_item m_ui;
   void prepare_icons(void);
 

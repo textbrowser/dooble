@@ -725,6 +725,8 @@ void dooble::slot_open_tab_as_new_window(int index)
 
 void dooble::slot_open_url(const QUrl &url)
 {
+  new_page(false);
+
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
   if(page)

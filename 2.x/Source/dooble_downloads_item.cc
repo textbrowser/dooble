@@ -26,7 +26,6 @@
 */
 
 #include <QFileInfo>
-#include <QUrl>
 #include <QWebEngineDownloadItem>
 
 #include "dooble.h"
@@ -41,6 +40,7 @@ dooble_downloads_item::dooble_downloads_item
   m_ui.setupUi(this);
   m_ui.progress->setMaximum(0);
   m_ui.progress->setMinimum(0);
+  m_url = QUrl();
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -69,7 +69,8 @@ dooble_downloads_item::dooble_downloads_item
       QFileInfo file_info(m_download->path());
 
       m_ui.file_name->setText(file_info.fileName());
-      m_ui.progress->setMaximum(100);qDebug()<<m_download->totalBytes();
+      m_ui.progress->setMaximum(100);
+      m_url = m_download->url();
     }
   else
     {
@@ -90,6 +91,11 @@ dooble_downloads_item::~dooble_downloads_item()
 {
   if(m_download)
     m_download->cancel();
+}
+
+QUrl dooble_downloads_item::url(void) const
+{
+  return m_url;
 }
 
 bool dooble_downloads_item::is_finished(void) const
