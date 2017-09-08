@@ -111,6 +111,25 @@
       </widget>
      </item>
      <item>
+      <widget class="dooble_tool_button" name="downloads">
+       <property name="toolTip">
+        <string>Downloads</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="dooble_tool_button" name="menu">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Menus. Press the Alt key to view a traditional menu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -363,6 +382,7 @@
   <tabstop>forward</tabstop>
   <tabstop>reload</tabstop>
   <tabstop>address</tabstop>
+  <tabstop>downloads</tabstop>
   <tabstop>menu</tabstop>
   <tabstop>find_stop</tabstop>
   <tabstop>find</tabstop>

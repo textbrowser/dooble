@@ -125,6 +125,10 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_backward_menu(void)));
+  connect(m_ui.downloads,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SIGNAL(show_downloads(void)));
   connect(m_ui.find,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -378,6 +382,8 @@ void dooble_page::prepare_icons(void)
       (QIcon(QString(":/%1/16/settings.png").arg(icon_set)));
 
   m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
+  m_ui.downloads->setIcon
+    (QIcon(QString(":/%1/32/downloads.png").arg(icon_set)));
   m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
     (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
