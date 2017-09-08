@@ -68,6 +68,7 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SLOT(slot_show_context_menu(const QPoint &)));
   new QShortcut // Without a parent.
     (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
+  m_ui.download_path->setCursorPosition(0);
   m_ui.table->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -286,6 +287,7 @@ void dooble_downloads::slot_select_path(void)
       dooble_settings::set_setting
 	("download_path", dialog.selectedFiles().value(0));
       m_ui.download_path->setText(dialog.selectedFiles().value(0));
+      m_ui.download_path->setCursorPosition(0);
     }
 }
 
