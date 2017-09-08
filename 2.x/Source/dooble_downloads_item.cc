@@ -69,11 +69,13 @@ dooble_downloads_item::dooble_downloads_item
       QFileInfo file_info(m_download->path());
 
       m_ui.file_name->setText(file_info.fileName());
-      m_ui.progress->setMaximum(100);
+      m_ui.progress->setMaximum(100);qDebug()<<m_download->totalBytes();
     }
   else
     {
-      m_ui.cancel->setEnabled(false);
+      m_ui.cancel->setVisible(false);
+      m_ui.file_name->setVisible(false);
+      m_ui.information->setText(tr("The download object is zero. Error!"));
       m_ui.progress->setVisible(false);
     }
 
@@ -82,6 +84,12 @@ dooble_downloads_item::dooble_downloads_item
 			     "QToolButton::menu-button {border: none;}");
 #endif
   prepare_icons();
+}
+
+dooble_downloads_item::~dooble_downloads_item()
+{
+  if(m_download)
+    m_download->cancel();
 }
 
 void dooble_downloads_item::prepare_icons(void)
@@ -106,18 +114,23 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 	(tr("%1 of %2").
 	 arg(dooble_ui_utilities::pretty_size(bytes_received)).
 	 arg(dooble_ui_utilities::pretty_size(bytes_total)));
+      m_ui.progress->setMaximum(100);
       m_ui.progress->setValue
 	(static_cast<int> (100 * (static_cast<double> (bytes_received) /
 				  static_cast<double> (bytes_total))));
     }
   else
-    m_ui.information->setText
-      (tr("%1 of Unknown").
-       arg(dooble_ui_utilities::pretty_size(bytes_received)));
+    {
+      m_ui.information->setText
+	(tr("%1 of Unknown").
+	 arg(dooble_ui_utilities::pretty_size(bytes_received)));
+      m_ui.progress->setMaximum(0);
+    }
 }
 
 void dooble_downloads_item::slot_finished(void)
 {
+  m_ui.cancel->setVisible(false);
   m_ui.progress->setVisible(false);
 
   if(m_download)
@@ -139,11 +152,6 @@ void dooble_downloads_item::slot_finished(void)
     }
   else
     m_ui.information->setText(tr("Interrupted"));
-
-  QSize size(this->size());
-
-  size.setHeight(sizeHint().height());
-  resize(size);
 }
 
 void dooble_downloads_item::slot_settings_applied(void)

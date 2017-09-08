@@ -72,10 +72,32 @@ void dooble_downloads::closeEvent(QCloseEvent *event)
   QMainWindow::closeEvent(event);
 }
 
+void dooble_downloads::delete_selected(void)
+{
+  QModelIndexList list(m_ui.table->selectionModel()->selectedIndexes());
+
+  for(int i = list.size() - 1; i >= 0; i--)
+    {
+      dooble_downloads_item *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(list.at(i).row(), 0));
+
+      if(!downloads_item)
+	continue;
+
+      m_ui.table->removeRow(list.at(i).row());
+      downloads_item->deleteLater();
+    }
+}
+
 void dooble_downloads::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->key() == Qt::Key_Escape)
-    close();
+  if(event)
+    {
+      if(event->key() == Qt::Key_Delete)
+	delete_selected();
+      else if(event->key() == Qt::Key_Escape)
+	close();
+    }
 
   QMainWindow::keyPressEvent(event);
 }
@@ -98,11 +120,11 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	  this,
 	  SLOT(slot_download_destroyed(void)));
 
-  dooble_downloads_item *download_item = new dooble_downloads_item
+  dooble_downloads_item *downloads_item = new dooble_downloads_item
     (download, this);
 
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
-  m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, download_item);
+  m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
   m_ui.table->resizeRowsToContents();
 }
 

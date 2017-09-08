@@ -82,7 +82,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
     if(s_cryptography->as_plaintext())
       {
 	m_populate_containers_timer.setSingleShot(true);
-	m_populate_containers_timer.start(2500);
+	m_populate_containers_timer.start(500);
 	s_containers_populated = true;
       }
 
@@ -109,7 +109,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
     if(s_cryptography->as_plaintext())
       {
 	m_populate_containers_timer.setSingleShot(true);
-	m_populate_containers_timer.start(2500);
+	m_populate_containers_timer.start(500);
 	s_containers_populated = true;
       }
 

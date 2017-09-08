@@ -58,6 +58,7 @@ class dooble_downloads: public QMainWindow
   QHash<QObject *, char> m_downloads;
   QTimer m_download_path_inspection_timer;
   Ui_dooble_downloads m_ui;
+  void delete_selected(void);
   void populate(void);
   void save_settings(void);
 
