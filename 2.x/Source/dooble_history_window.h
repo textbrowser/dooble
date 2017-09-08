@@ -43,19 +43,6 @@ class dooble_history_window: public QMainWindow
   void show(QWidget *parent);
   void showNormal(QWidget *parent);
 
- public slots:
-  void slot_containers_cleared(void);
-  void slot_copy_location(void);
-  void slot_delete_pages(void);
-  void slot_icon_updated(const QIcon &icon, const QUrl &url);
-  void slot_item_double_clicked(QTableWidgetItem *item);
-  void slot_item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
-  void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
-  void slot_parent_destroyed(void);
-  void slot_populate(void);
-  void slot_search_timer_timeout(void);
-  void slot_show_context_menu(const QPoint &point);
-
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -68,6 +55,19 @@ class dooble_history_window: public QMainWindow
   Ui_dooble_history_window m_ui;
   void save_settings(void);
   void set_row_hidden(int i);
+
+ private slots:
+  void slot_containers_cleared(void);
+  void slot_copy_location(void);
+  void slot_delete_pages(void);
+  void slot_icon_updated(const QIcon &icon, const QUrl &url);
+  void slot_item_double_clicked(QTableWidgetItem *item);
+  void slot_item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
+  void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
+  void slot_parent_destroyed(void);
+  void slot_populate(void);
+  void slot_search_timer_timeout(void);
+  void slot_show_context_menu(const QPoint &point);
 
  signals:
   void open_url(const QUrl &url);
