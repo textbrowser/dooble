@@ -634,10 +634,11 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 {
   if(!download)
     return;
-  else if(download->property("dooble_tagged").toBool())
-    return;
-  else
-    download->setProperty("dooble_tagged", true);
+  else if(s_downloads->contains(download))
+    {
+      download->cancel();
+      return;
+    }
 
   QFileDialog dialog(this);
   QFileInfo fileInfo(download->path());

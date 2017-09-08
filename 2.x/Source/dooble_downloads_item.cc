@@ -52,6 +52,7 @@ dooble_downloads_item::dooble_downloads_item
 
   if(m_download)
     {
+      m_download->setParent(this);
       connect(m_download,
 	      SIGNAL(destroyed(void)),
 	      this,

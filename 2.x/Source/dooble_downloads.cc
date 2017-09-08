@@ -62,6 +62,11 @@ QString dooble_downloads::download_path(void) const
   return m_ui.download_path->text();
 }
 
+bool dooble_downloads::contains(QWebEngineDownloadItem *download) const
+{
+  return m_downloads.contains(download);
+}
+
 void dooble_downloads::closeEvent(QCloseEvent *event)
 {
   QMainWindow::closeEvent(event);
@@ -83,11 +88,19 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 {
   if(!download)
     return;
+  else if(m_downloads.contains(download))
+    return;
+  else
+    m_downloads[download] = 0;
+
+  connect(download,
+	  SIGNAL(destroyed(void)),
+	  this,
+	  SLOT(slot_download_destroyed(void)));
 
   dooble_downloads_item *download_item = new dooble_downloads_item
     (download, this);
 
-  m_download_items[download->id()] = download_item;
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, download_item);
   m_ui.table->resizeRowsToContents();
@@ -126,6 +139,11 @@ void dooble_downloads::showNormal(void)
 
   QMainWindow::showNormal();
   populate();
+}
+
+void dooble_downloads::slot_download_destroyed(void)
+{
+  m_downloads.remove(sender());
 }
 
 void dooble_downloads::slot_download_path_inspection_timer_timeout(void)

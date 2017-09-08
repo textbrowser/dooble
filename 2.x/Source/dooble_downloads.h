@@ -29,13 +29,11 @@
 #define dooble_downloads_h
 
 #include <QMainWindow>
-#include <QPointer>
 #include <QTimer>
 
 #include "ui_dooble_downloads.h"
 
 class QWebEngineDownloadItem;
-class dooble_downloads_item;
 
 class dooble_downloads: public QMainWindow
 {
@@ -44,6 +42,7 @@ class dooble_downloads: public QMainWindow
  public:
   dooble_downloads(void);
   QString download_path(void) const;
+  bool contains(QWebEngineDownloadItem *download) const;
   void record_download(QWebEngineDownloadItem *download);
 
  public slots:
@@ -56,13 +55,14 @@ class dooble_downloads: public QMainWindow
   void resizeEvent(QResizeEvent *event);
 
  private:
-  QHash<quint32, QPointer<dooble_downloads_item> > m_download_items;
+  QHash<QObject *, char> m_downloads;
   QTimer m_download_path_inspection_timer;
   Ui_dooble_downloads m_ui;
   void populate(void);
   void save_settings(void);
 
  private slots:
+  void slot_download_destroyed(void);
   void slot_download_path_inspection_timer_timeout(void);
   void slot_select_path(void);
 };
