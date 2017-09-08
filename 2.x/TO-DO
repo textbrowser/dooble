@@ -36,6 +36,7 @@ Completed Items
 32.    Connect downloadRequested() to Downloads for the default profile.
 33.    Empty download file names.
 34.    Complete default WebEngine context menu.
+35.    Gopher per-request sockets.
 
 Remaining Items
 
@@ -45,7 +46,7 @@ Remaining Items
 4.     Zoom.
 5.     Language option.
 6.     Separate download items.
-7.     Gopher per-request sockets.
+7.     Display download rates.
 
 Unknown Items
 
