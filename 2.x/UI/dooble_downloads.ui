@@ -56,7 +56,7 @@
        <enum>QAbstractItemView::ScrollPerPixel</enum>
       </property>
       <property name="showGrid">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="cornerButtonEnabled">
        <bool>true</bool>

@@ -37,6 +37,7 @@ Completed Items
 33.    Empty download file names.
 34.    Complete default WebEngine context menu.
 35.    Gopher per-request sockets.
+36.    Separate download items.
 
 Remaining Items
 
@@ -45,8 +46,7 @@ Remaining Items
 3.     Bookmarks. Default Home.
 4.     Zoom.
 5.     Language option.
-6.     Separate download items.
-7.     Display download rates.
+6.     Display download rates.
 
 Unknown Items
 
