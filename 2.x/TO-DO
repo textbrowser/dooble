@@ -35,15 +35,17 @@ Completed Items
 31.    Full-screen.
 32.    Connect downloadRequested() to Downloads for the default profile.
 33.    Empty download file names.
+34.    Complete default WebEngine context menu.
 
 Remaining Items
 
 1.     Download panel. Path. Remind user on exit.
 2.     Windows PRNG.
 3.     Bookmarks. Default Home.
-4.     Complete default WebEngine context menu.
-5.     Zoom.
-6.     Language option.
+4.     Zoom.
+5.     Language option.
+6.     Separate download items.
+7.     Gopher per-request sockets.
 
 Unknown Items
 

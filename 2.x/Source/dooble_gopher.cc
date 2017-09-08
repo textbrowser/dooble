@@ -69,7 +69,7 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
   m_item_type = 0;
   m_request = request;
   m_tcp_socket.blockSignals(true);
-  m_tcp_socket.abort();
+  m_tcp_socket.abort(); // This socket is reused.
   m_tcp_socket.blockSignals(false);
   m_url = m_request->requestUrl();
 
