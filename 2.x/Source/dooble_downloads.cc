@@ -131,7 +131,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
-  m_ui.table->resizeRowsToContents();
+  m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
 }
 
 void dooble_downloads::resizeEvent(QResizeEvent *event)
