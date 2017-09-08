@@ -25,8 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QWebEngineUrlRequestJob>
-
 #include "dooble_gopher.h"
 
 QByteArray dooble_gopher_implementation::s_eol = "\r\n";
@@ -48,9 +46,19 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
     dooble_gopher_implementation(m_request->requestUrl(), m_request);
 
   connect(gopher_implementation,
+	  SIGNAL(error(QWebEngineUrlRequestJob::Error)),
+	  this,
+	  SLOT(slot_error(QWebEngineUrlRequestJob::Error)));
+  connect(gopher_implementation,
 	  SIGNAL(finished(const QByteArray &)),
 	  this,
 	  SLOT(slot_finished(const QByteArray &)));
+}
+
+void dooble_gopher::slot_error(QWebEngineUrlRequestJob::Error error)
+{
+  if(m_request)
+    m_request->fail(error);
 }
 
 void dooble_gopher::slot_finished(const QByteArray &bytes)
@@ -153,13 +161,13 @@ void dooble_gopher_implementation::slot_ready_read(void)
       m_content.clear();
     }
   else if(m_item_type == '4') /* BinHex Encoded Text File */
-    emit finished(QByteArray());
+    emit error(QWebEngineUrlRequestJob::RequestFailed);
   else if(m_item_type == '5') /* Binary Archive File */
-    emit finished(QByteArray());
+    emit error(QWebEngineUrlRequestJob::RequestFailed);
   else if(m_item_type == '6') /* UUEncoded Text File */
-    emit finished(QByteArray());
+    emit error(QWebEngineUrlRequestJob::RequestFailed);
   else if(m_item_type == '9') /* Binary File */
-    emit finished(QByteArray());
+    emit error(QWebEngineUrlRequestJob::RequestFailed);
   else if(m_item_type == 'I') /* Image File of Unspecified Format */
     {
       m_html.append(m_content);
@@ -176,8 +184,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
       m_content.clear();
     }
   else if(m_item_type == 's') /* Audio File Format */
-    {
-    }
+    emit error(QWebEngineUrlRequestJob::RequestFailed);
   else
     {
       m_html.append

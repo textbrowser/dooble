@@ -32,6 +32,7 @@
 #include <QPointer>
 #include <QTcpSocket>
 #include <QUrl>
+#include <QWebEngineUrlRequestJob>
 #include <QWebEngineUrlSchemeHandler>
 
 class dooble_gopher: public QWebEngineUrlSchemeHandler
@@ -46,6 +47,7 @@ class dooble_gopher: public QWebEngineUrlSchemeHandler
   void requestStarted(QWebEngineUrlRequestJob *request);
 
  private slots:
+  void slot_error(QWebEngineUrlRequestJob::Error error);
   void slot_finished(const QByteArray &bytes);
 };
 
@@ -71,6 +73,7 @@ class dooble_gopher_implementation: public QTcpSocket
   void slot_ready_read(void);
 
  signals:
+  void error(QWebEngineUrlRequestJob::Error error);
   void finished(const QByteArray &bytes);
 };
 
