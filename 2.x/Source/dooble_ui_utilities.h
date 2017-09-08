@@ -33,6 +33,7 @@ class QWidget;
 class dooble_ui_utilities
 {
  public:
+  static QString pretty_size(qint64 size);
   static void center_window_widget(QWidget *parent, QWidget *widget);
   static void enable_mac_brushed_metal(QWidget *widget);
 

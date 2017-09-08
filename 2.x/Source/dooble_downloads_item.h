@@ -25,46 +25,33 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_downloads_h
-#define dooble_downloads_h
+#ifndef dooble_downloads_item_h
+#define dooble_downloads_item_h
 
-#include <QMainWindow>
 #include <QPointer>
-#include <QTimer>
+#include <QWidget>
 
-#include "ui_dooble_downloads.h"
+#include "ui_dooble_downloads_item.h"
 
 class QWebEngineDownloadItem;
-class dooble_downloads_item;
 
-class dooble_downloads: public QMainWindow
+class dooble_downloads_item: public QWidget
 {
   Q_OBJECT
 
  public:
-  dooble_downloads(void);
-  QString download_path(void) const;
-  void record_download(QWebEngineDownloadItem *download);
-
- public slots:
-  void show(void);
-  void showNormal(void);
-
- protected:
-  void closeEvent(QCloseEvent *event);
-  void keyPressEvent(QKeyEvent *event);
-  void resizeEvent(QResizeEvent *event);
+  dooble_downloads_item(QWebEngineDownloadItem *download, QWidget *parent);
 
  private:
-  QHash<quint32, QPointer<dooble_downloads_item> > m_download_items;
-  QTimer m_download_path_inspection_timer;
-  Ui_dooble_downloads m_ui;
-  void populate(void);
-  void save_settings(void);
+  QPointer<QWebEngineDownloadItem> m_download;
+  Ui_dooble_downloads_item m_ui;
+  void prepare_icons(void);
 
  private slots:
-  void slot_download_path_inspection_timer_timeout(void);
-  void slot_select_path(void);
+  void slot_cancel(void);
+  void slot_download_progress(qint64 bytes_received, qint64 bytes_total);
+  void slot_finished(void);
+  void slot_settings_applied(void);
 };
 
 #endif

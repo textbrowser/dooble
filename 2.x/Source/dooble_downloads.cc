@@ -28,9 +28,11 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QStandardPaths>
+#include <QWebEngineDownloadItem>
 
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
+#include "dooble_downloads_item.h"
 #include "dooble_settings.h"
 
 dooble_downloads::dooble_downloads(void):QMainWindow()
@@ -77,10 +79,21 @@ void dooble_downloads::populate(void)
 {
 }
 
-void dooble_downloads::record_download(QWebEngineDownloadItem *item)
+void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 {
-  if(!item)
+  if(!download)
     return;
+
+  if(m_download_items.contains(download->id()))
+    return;
+
+  dooble_downloads_item *download_item = new dooble_downloads_item
+    (download, this);
+
+  m_download_items[download->id()] = download_item;
+  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
+  m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, download_item);
+  m_ui.table->resizeRowsToContents();
 }
 
 void dooble_downloads::resizeEvent(QResizeEvent *event)
