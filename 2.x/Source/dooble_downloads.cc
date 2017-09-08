@@ -84,9 +84,6 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
   if(!download)
     return;
 
-  if(m_download_items.contains(download->id()))
-    return;
-
   dooble_downloads_item *download_item = new dooble_downloads_item
     (download, this);
 
