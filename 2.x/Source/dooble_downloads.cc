@@ -130,14 +130,16 @@ void dooble_downloads::showNormal(void)
 
 void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
 {
-  QColor color(240, 128, 128); // Light coral!
   QFileInfo file_info(m_ui.download_path->text());
   QPalette palette(m_ui.download_path->palette());
+  static QPalette s_palette(m_ui.download_path->palette());
 
   if(file_info.isWritable())
-    color = QColor(144, 238, 144); // Light green!
+    palette = s_palette;
+  else
+    palette.setColor
+      (m_ui.download_path->backgroundRole(), QColor(240, 128, 128));
 
-  palette.setColor(m_ui.download_path->backgroundRole(), color);
   m_ui.download_path->setPalette(palette);
 }
 
