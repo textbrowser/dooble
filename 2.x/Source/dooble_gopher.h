@@ -55,6 +55,7 @@ class dooble_gopher_implementation: public QTcpSocket
 
  public:
   dooble_gopher_implementation(const QUrl &url, QObject *parent);
+  ~dooble_gopher_implementation();
 
  private:
   QByteArray m_content;

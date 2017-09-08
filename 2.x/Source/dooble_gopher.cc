@@ -45,7 +45,7 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
   m_request = request;
 
   dooble_gopher_implementation *gopher_implementation = new
-    dooble_gopher_implementation(m_request->requestUrl(), this);
+    dooble_gopher_implementation(m_request->requestUrl(), m_request);
 
   connect(gopher_implementation,
 	  SIGNAL(finished(const QByteArray &)),
@@ -61,18 +61,12 @@ void dooble_gopher::slot_finished(const QByteArray &bytes)
 	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
       else
 	{
-	  QBuffer *buffer = new QBuffer(this);
+	  QBuffer *buffer = new QBuffer(m_request);
 
 	  buffer->setData(bytes);
 	  m_request->reply("text/html", buffer);
 	}
     }
-
-  dooble_gopher_implementation *gopher_implementation = qobject_cast
-    <dooble_gopher_implementation *> (sender());
-
-  if(gopher_implementation)
-    gopher_implementation->deleteLater();
 }
 
 dooble_gopher_implementation::dooble_gopher_implementation
@@ -97,6 +91,10 @@ dooble_gopher_implementation::dooble_gopher_implementation
 	  this,
 	  SLOT(slot_ready_read(void)));
   connectToHost(m_url.host(), m_url.port());
+}
+
+dooble_gopher_implementation::~dooble_gopher_implementation()
+{
 }
 
 QByteArray dooble_gopher_implementation::plain_to_html(const QByteArray &bytes)
