@@ -42,6 +42,7 @@ class dooble_downloads_item: public QWidget
  public:
   dooble_downloads_item(QWebEngineDownloadItem *download, QWidget *parent);
   ~dooble_downloads_item();
+  bool is_finished(void) const;
 
  private:
   QPointer<QWebEngineDownloadItem> m_download;

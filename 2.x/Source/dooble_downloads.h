@@ -63,6 +63,7 @@ class dooble_downloads: public QMainWindow
   void save_settings(void);
 
  private slots:
+  void slot_clear_finished_downloads(void);
   void slot_download_destroyed(void);
   void slot_download_path_inspection_timer_timeout(void);
   void slot_select_path(void);

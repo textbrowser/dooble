@@ -80,6 +80,13 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
+       <widget class="QPushButton" name="clear_finished_downloads">
+        <property name="text">
+         <string>Clear Finished Downloads</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -115,6 +122,7 @@
   <tabstop>download_path</tabstop>
   <tabstop>select</tabstop>
   <tabstop>table</tabstop>
+  <tabstop>clear_finished_downloads</tabstop>
   <tabstop>search</tabstop>
  </tabstops>
  <resources>

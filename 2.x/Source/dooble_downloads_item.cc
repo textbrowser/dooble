@@ -92,6 +92,14 @@ dooble_downloads_item::~dooble_downloads_item()
     m_download->cancel();
 }
 
+bool dooble_downloads_item::is_finished(void) const
+{
+  if(m_download)
+    return m_download->isFinished();
+  else
+    return true;
+}
+
 void dooble_downloads_item::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());

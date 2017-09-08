@@ -51,6 +51,10 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_download_path_inspection_timer_timeout(void)));
+  connect(m_ui.clear_finished_downloads,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_clear_finished_downloads(void)));
   connect(m_ui.select,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -82,6 +86,8 @@ void dooble_downloads::delete_selected(void)
 	<dooble_downloads_item *> (m_ui.table->cellWidget(list.at(i).row(), 0));
 
       if(!downloads_item)
+	continue;
+      else if(!downloads_item->is_finished())
 	continue;
 
       m_ui.table->removeRow(list.at(i).row());
@@ -161,6 +167,11 @@ void dooble_downloads::showNormal(void)
 
   QMainWindow::showNormal();
   populate();
+}
+
+void dooble_downloads::slot_clear_finished_downloads(void)
+{
+  delete_selected();
 }
 
 void dooble_downloads::slot_download_destroyed(void)
