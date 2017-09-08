@@ -34,6 +34,7 @@ Completed Items
 30.    Print via popup menu.
 31.    Full-screen.
 32.    Connect downloadRequested() to Downloads for the default profile.
+33.    Empty download file names.
 
 Remaining Items
 
@@ -43,10 +44,9 @@ Remaining Items
 4.     Complete default WebEngine context menu.
 5.     Zoom.
 6.     Language option.
-7.     Empty download file names.
 
 Unknown Items
 
 1.     Optional Document Mode.
 2.     Print preview.
-3.     Restart downloads.
+3.     Pause and restart downloads.
