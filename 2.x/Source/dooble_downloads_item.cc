@@ -40,8 +40,7 @@
 QAtomicInteger<quint64> dooble_downloads_item::s_db_id;
 
 dooble_downloads_item::dooble_downloads_item
-(QWebEngineDownloadItem *download, const qint64 oid, QWidget *parent):
-  QWidget(parent)
+(QWebEngineDownloadItem *download, qint64 oid, QWidget *parent):QWidget(parent)
 {
   m_download = download;
   m_last_bytes_received = 0;

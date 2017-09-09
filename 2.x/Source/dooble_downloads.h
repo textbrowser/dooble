@@ -63,6 +63,7 @@ class dooble_downloads: public QMainWindow
   Ui_dooble_downloads m_ui;
   void delete_selected(void);
   void populate(void);
+  void remove_entry(qint64 oid);
   void save_settings(void);
 
  private slots:

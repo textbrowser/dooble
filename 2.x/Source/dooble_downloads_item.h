@@ -44,7 +44,7 @@ class dooble_downloads_item: public QWidget
 
  public:
   dooble_downloads_item(QWebEngineDownloadItem *download,
-			const qint64 oid,
+			qint64 oid,
 			QWidget *parent);
   ~dooble_downloads_item();
   QUrl url(void) const;

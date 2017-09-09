@@ -117,6 +117,8 @@ void dooble_downloads::closeEvent(QCloseEvent *event)
 
 void dooble_downloads::delete_selected(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QModelIndexList list(m_ui.table->selectionModel()->selectedIndexes());
 
   for(int i = list.size() - 1; i >= 0; i--)
@@ -130,8 +132,11 @@ void dooble_downloads::delete_selected(void)
 	continue;
 
       m_ui.table->removeRow(list.at(i).row());
+      remove_entry(downloads_item->oid());
       downloads_item->deleteLater();
     }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_downloads::keyPressEvent(QKeyEvent *event)
@@ -199,6 +204,33 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
   m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
 }
 
+void dooble_downloads::remove_entry(qint64 oid)
+{
+  QString database_name("dooble_downloads");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_downloads.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare("DELETE FROM dooble_downloads WHERE OID = ?");
+	query.addBindValue(oid);
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_downloads::resizeEvent(QResizeEvent *event)
 {
   QMainWindow::resizeEvent(event);
@@ -236,7 +268,24 @@ void dooble_downloads::showNormal(void)
 
 void dooble_downloads::slot_clear_finished_downloads(void)
 {
-  delete_selected();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
+    {
+      dooble_downloads_item *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(!downloads_item)
+	continue;
+      else if(!downloads_item->is_finished())
+	continue;
+
+      m_ui.table->removeRow(i);
+      remove_entry(downloads_item->oid());
+      downloads_item->deleteLater();
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_downloads::slot_copy_download_location(void)
