@@ -280,11 +280,27 @@ void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
   QPalette palette(m_ui.download_path->palette());
   static QPalette s_palette(m_ui.download_path->palette());
 
-  if(file_info.isWritable())
-    palette = s_palette;
+  if(file_info.isReadable() && file_info.isWritable())
+    {
+      m_ui.download_path->setToolTip(m_ui.download_path->text());
+      palette = s_palette;
+    }
   else
-    palette.setColor
-      (m_ui.download_path->backgroundRole(), QColor(240, 128, 128));
+    {
+      if(!file_info.isReadable() && !file_info.isWritable())
+	m_ui.download_path->setToolTip
+	  (tr("The path %1 is neither readable nor writable.").
+	   arg(m_ui.download_path->text()));
+      else if(!file_info.isReadable())
+	m_ui.download_path->setToolTip
+	  (tr("The path %1 is not readable.").arg(m_ui.download_path->text()));
+      else
+	m_ui.download_path->setToolTip
+	  (tr("The path %1 is not writable.").arg(m_ui.download_path->text()));
+
+      palette.setColor
+	(m_ui.download_path->backgroundRole(), QColor(240, 128, 128));
+    }
 
   m_ui.download_path->setPalette(palette);
 }
