@@ -67,6 +67,7 @@ class dooble_downloads_item: public QWidget
   static QAtomicInteger<quint64> s_db_id;
   void prepare_icons(void);
   void record(void);
+  void record_information(void);
 
  private slots:
   void slot_cancel(void);

@@ -225,6 +225,49 @@ void dooble_downloads_item::record(void)
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_downloads_item::record_information(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name(QString("dooble_downloads_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_downloads.db");
+
+    if(db.open())
+      {
+	QByteArray bytes;
+	QString information(m_ui.information->text());
+	QSqlQuery query(db);
+	bool ok = true;
+
+	query.prepare("UPDATE dooble_downloads SET information = ? "
+		      "WHERE OID = ?");
+	bytes = dooble::s_cryptography->encrypt_then_mac(information.toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	query.addBindValue(m_oid);
+
+	if(ok)
+	  query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_downloads_item::slot_cancel(void)
 {
   if(m_download)
@@ -301,6 +344,8 @@ void dooble_downloads_item::slot_finished(void)
     }
   else
     m_ui.information->setText(tr("Interrupted"));
+
+  record_information();
 }
 
 void dooble_downloads_item::slot_settings_applied(void)
