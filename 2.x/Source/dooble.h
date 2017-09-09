@@ -83,6 +83,7 @@ class dooble: public QMainWindow
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
   static bool s_containers_populated;
+  bool can_exit(void);
   void connect_signals(void);
   void initialize_static_members(void);
   void new_page(dooble_page *page);

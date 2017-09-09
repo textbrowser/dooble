@@ -28,6 +28,7 @@
 #include <QKeyEvent>
 #include <QFileDialog>
 #include <QMenu>
+#include <QMessageBox>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
@@ -127,6 +128,29 @@ dooble::~dooble()
 {
 }
 
+bool dooble::can_exit(void)
+{
+  if(s_downloads->is_finished())
+    return true;
+  else
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Downloads are in progress. Are you sure that you wish to exit?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return false;
+
+      return true;
+    }
+}
+
 dooble_page *dooble::current_page(void) const
 {
   return qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
@@ -134,6 +158,13 @@ dooble_page *dooble::current_page(void) const
 
 void dooble::closeEvent(QCloseEvent *event)
 {
+  if(event)
+    if(!can_exit())
+      {
+	event->ignore();
+	return;
+      }
+
   if(dooble_settings::setting("save_geometry").toBool())
     dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
 
@@ -655,7 +686,13 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
     {
       download->setPath(dialog.selectedFiles().value(0));
       s_downloads->record_download(download);
-      s_downloads->showNormal();
+
+      if(!s_downloads->isVisible())
+	{
+	  s_downloads->activateWindow();
+	  s_downloads->showNormal();
+	}
+
       download->accept();
     }
   else
@@ -769,7 +806,9 @@ void dooble::slot_quit_dooble(void)
   ** May require some confirmation from the user.
   */
 
-  close();
+  if(!close())
+    return;
+
   QApplication::exit(0);
 }
 
