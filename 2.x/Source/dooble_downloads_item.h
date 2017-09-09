@@ -43,16 +43,20 @@ class dooble_downloads_item: public QWidget
   Q_OBJECT
 
  public:
-  dooble_downloads_item(QWebEngineDownloadItem *download, QWidget *parent);
+  dooble_downloads_item(QWebEngineDownloadItem *download,
+			const qint64 oid,
+			QWidget *parent);
   ~dooble_downloads_item();
   QUrl url(void) const;
   bool is_finished(void) const;
+  qint64 oid(void) const;
 
  private:
   QTime m_last_time;
   QPointer<QWebEngineDownloadItem> m_download;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
+  qint64 m_oid;
   qint64 m_last_bytes_received;
   qint64 m_rate;
   static QAtomicInteger<quint64> s_db_id;

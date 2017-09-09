@@ -40,11 +40,13 @@
 QAtomicInteger<quint64> dooble_downloads_item::s_db_id;
 
 dooble_downloads_item::dooble_downloads_item
-(QWebEngineDownloadItem *download, QWidget *parent):QWidget(parent)
+(QWebEngineDownloadItem *download, const qint64 oid, QWidget *parent):
+  QWidget(parent)
 {
   m_download = download;
   m_last_bytes_received = 0;
   m_last_time = QTime::currentTime();
+  m_oid = oid;
   m_rate = 0;
   m_ui.setupUi(this);
   m_ui.progress->setMaximum(0);
@@ -114,6 +116,11 @@ bool dooble_downloads_item::is_finished(void) const
     return m_download->isFinished();
   else
     return true;
+}
+
+qint64 dooble_downloads_item::oid(void) const
+{
+  return m_oid;
 }
 
 void dooble_downloads_item::prepare_icons(void)
@@ -188,7 +195,9 @@ void dooble_downloads_item::record(void)
 	  (dooble::s_cryptography->hmac(m_url.toEncoded()).toBase64());
 
 	if(ok)
-	  query.exec();
+	  if(query.exec())
+	    m_oid = query.lastInsertId().isValid() ?
+	      query.lastInsertId().toLongLong() : -1;
       }
 
     db.close();

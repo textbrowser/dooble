@@ -192,7 +192,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	  SLOT(slot_download_destroyed(void)));
 
   dooble_downloads_item *downloads_item = new dooble_downloads_item
-    (download, this);
+    (download, -1, this);
 
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
