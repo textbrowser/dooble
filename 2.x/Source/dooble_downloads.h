@@ -57,6 +57,7 @@ class dooble_downloads: public QMainWindow
  private:
   QHash<QObject *, char> m_downloads;
   QTimer m_download_path_inspection_timer;
+  QTimer m_search_timer;
   Ui_dooble_downloads m_ui;
   void delete_selected(void);
   void populate(void);
@@ -69,6 +70,7 @@ class dooble_downloads: public QMainWindow
   void slot_download_destroyed(void);
   void slot_download_path_inspection_timer_timeout(void);
   void slot_open_download_page(void);
+  void slot_search_timer_timeout(void);
   void slot_select_path(void);
   void slot_show_context_menu(const QPoint &point);
 

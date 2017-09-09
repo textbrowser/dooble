@@ -41,6 +41,8 @@
 dooble_downloads::dooble_downloads(void):QMainWindow()
 {
   m_download_path_inspection_timer.start(2500);
+  m_search_timer.setInterval(750);
+  m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
   m_ui.download_path->setText
     (dooble_settings::setting("download_path").toString());
@@ -54,10 +56,18 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_download_path_inspection_timer_timeout(void)));
+  connect(&m_search_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_search_timer_timeout(void)));
   connect(m_ui.clear_finished_downloads,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_clear_finished_downloads(void)));
+  connect(m_ui.search,
+	  SIGNAL(textEdited(const QString &)),
+	  &m_search_timer,
+	  SLOT(start(void)));
   connect(m_ui.select,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -272,6 +282,35 @@ void dooble_downloads::slot_open_download_page(void)
 
   QApplication::restoreOverrideCursor();
   emit open_url(url);
+}
+
+void dooble_downloads::slot_search_timer_timeout(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString text(m_ui.search->text().toLower().trimmed());
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    if(text.isEmpty())
+      m_ui.table->setRowHidden(i, false);
+    else
+      {
+	dooble_downloads_item *downloads_item = qobject_cast
+	  <dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+	if(!downloads_item)
+	  {
+	    m_ui.table->setRowHidden(i, false);
+	    continue;
+	  }
+
+	if(downloads_item->url().toString().toLower().contains(text))
+	  m_ui.table->setRowHidden(i, false);
+	else
+	  m_ui.table->setRowHidden(i, true);
+      }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_downloads::slot_select_path(void)
