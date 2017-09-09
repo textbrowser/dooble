@@ -149,8 +149,9 @@ void dooble_downloads_item::record(void)
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
 		   "file_name TEXT NOT NULL, "
 		   "information TEXT NOT NULL, "
+		   "insert_order INTEGER PRIMARY KEY AUTOINCREMENT, "
 		   "url TEXT NOT NULL, "
-		   "url_digest TEXT PRIMARY KEY NOT NULL)");
+		   "url_digest TEXT NOT NULL)");
 	query.prepare("INSERT OR REPLACE INTO dooble_downloads "
 		      "(file_name, information, url, url_digest) "
 		      "VALUES (?, ?, ?, ?)");
