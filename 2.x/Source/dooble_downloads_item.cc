@@ -203,7 +203,7 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 {
   int seconds = 0;
 
-  if((seconds = qAbs(m_last_time.secsTo(QTime::currentTime()))) > 1)
+  if((seconds = qAbs(m_last_time.secsTo(QTime::currentTime()))) >= 1)
     {
       if(bytes_received > m_last_bytes_received)
 	if(200.0 * qAbs(m_rate -
