@@ -49,6 +49,9 @@
     </item>
     <item>
      <widget class="QTableWidget" name="table">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
