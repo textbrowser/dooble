@@ -253,6 +253,14 @@ void dooble_web_engine_view::show_private_cookies(void)
     return;
 
   m_cookies_window->filter(url().host());
+
+  if(m_cookies_window->isVisible())
+    {
+      m_cookies_window->activateWindow();
+      m_cookies_window->raise();
+      return;
+    }
+
   m_cookies_window->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())

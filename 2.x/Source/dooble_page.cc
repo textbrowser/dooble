@@ -1049,6 +1049,14 @@ void dooble_page::slot_show_cookies(void)
   else
     {
       dooble::s_cookies_window->filter(m_view->url().host());
+
+      if(dooble::s_cookies_window->isVisible())
+	{
+	  dooble::s_cookies_window->activateWindow();
+	  dooble::s_cookies_window->raise();
+	  return;
+	}
+
       dooble::s_cookies_window->showNormal();
 
       if(dooble_settings::setting("center_child_windows").toBool())

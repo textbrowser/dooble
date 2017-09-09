@@ -181,8 +181,6 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   if(m_ui.blocked_domains == sender())
     {
       dooble::s_accepted_or_blocked_domains->showNormal();
-      dooble_ui_utilities::center_window_widget
-	(find_parent_dooble(), dooble::s_accepted_or_blocked_domains);
       dooble::s_accepted_or_blocked_domains->activateWindow();
       dooble::s_accepted_or_blocked_domains->raise();
     }
@@ -199,8 +197,6 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   else if(m_ui.cookies == sender())
     {
       dooble::s_cookies_window->showNormal();
-      dooble_ui_utilities::center_window_widget
-	(find_parent_dooble(), dooble::s_cookies_window);
       dooble::s_cookies_window->activateWindow();
       dooble::s_cookies_window->raise();
     }
@@ -213,7 +209,6 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       dooble *d = find_parent_dooble();
 
       dooble::s_history_window->showNormal(d);
-      dooble_ui_utilities::center_window_widget(d, dooble::s_history_window);
       dooble::s_history_window->activateWindow();
       dooble::s_history_window->raise();
     }
@@ -243,8 +238,6 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   else if(m_ui.settings == sender())
     {
       dooble::s_settings->showNormal();
-      dooble_ui_utilities::center_window_widget
-	(find_parent_dooble(), dooble::s_settings);
       dooble::s_settings->activateWindow();
       dooble::s_settings->raise();
     }
