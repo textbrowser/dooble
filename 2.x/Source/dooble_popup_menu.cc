@@ -34,7 +34,6 @@
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_settings.h"
-#include "dooble_ui_utilities.h"
 
 dooble_popup_menu::dooble_popup_menu(QWidget *parent):QDialog(parent)
 {
