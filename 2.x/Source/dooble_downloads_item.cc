@@ -37,6 +37,9 @@ dooble_downloads_item::dooble_downloads_item
 (QWebEngineDownloadItem *download, QWidget *parent):QWidget(parent)
 {
   m_download = download;
+  m_last_bytes_received = 0;
+  m_last_time = QTime::currentTime();
+  m_rate = 0;
   m_ui.setupUi(this);
   m_ui.progress->setMaximum(0);
   m_ui.progress->setMinimum(0);
@@ -122,12 +125,34 @@ void dooble_downloads_item::slot_cancel(void)
 void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 						   qint64 bytes_total)
 {
+  int seconds = 0;
+
+  if((seconds = qAbs(m_last_time.secsTo(QTime::currentTime()))) > 1)
+    {
+      if(bytes_received > m_last_bytes_received)
+	if(200.0 * qAbs(m_rate -
+			static_cast<double> (bytes_received -
+					     m_last_bytes_received) /
+			static_cast<double> (seconds))
+	   / qMax(static_cast<double> (1),
+		  static_cast<double> (m_rate) +
+		  static_cast<double> (bytes_received - m_last_bytes_received) /
+		  static_cast<double> (seconds)) >= 1.0)
+	  m_rate =
+	    static_cast<double> (bytes_received - m_last_bytes_received) /
+	    static_cast<double> (seconds);
+
+      m_last_bytes_received = bytes_received;
+      m_last_time = QTime::currentTime();
+    }
+
   if(bytes_total > 0)
     {
       m_ui.information->setText
-	(tr("%1 of %2").
+	(tr("%1 of %2 - %3 / second").
 	 arg(dooble_ui_utilities::pretty_size(bytes_received)).
-	 arg(dooble_ui_utilities::pretty_size(bytes_total)));
+	 arg(dooble_ui_utilities::pretty_size(bytes_total)).
+	 arg(dooble_ui_utilities::pretty_size(m_rate)));
       m_ui.progress->setMaximum(100);
       m_ui.progress->setValue
 	(static_cast<int> (100 * (static_cast<double> (bytes_received) /
@@ -136,8 +161,9 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
   else
     {
       m_ui.information->setText
-	(tr("%1 of Unknown").
-	 arg(dooble_ui_utilities::pretty_size(bytes_received)));
+	(tr("%1 of Unknown - %2 / second").
+	 arg(dooble_ui_utilities::pretty_size(bytes_received)).
+	 arg(dooble_ui_utilities::pretty_size(m_rate)));
       m_ui.progress->setMaximum(0);
     }
 }

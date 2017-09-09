@@ -28,6 +28,7 @@
 #ifndef dooble_downloads_item_h
 #define dooble_downloads_item_h
 
+#include <QTime>
 #include <QPointer>
 #include <QUrl>
 #include <QWidget>
@@ -47,9 +48,12 @@ class dooble_downloads_item: public QWidget
   bool is_finished(void) const;
 
  private:
+  QTime m_last_time;
   QPointer<QWebEngineDownloadItem> m_download;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
+  qint64 m_last_bytes_received;
+  qint64 m_rate;
   void prepare_icons(void);
 
  private slots:
