@@ -29,6 +29,8 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QShortcut>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QStandardPaths>
 #include <QWebEngineDownloadItem>
 
@@ -151,6 +153,28 @@ void dooble_downloads::populate(void)
 
 void dooble_downloads::purge(void)
 {
+  QString database_name("dooble_downloads");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_downloads.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_downloads");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_downloads::record_download(QWebEngineDownloadItem *download)
