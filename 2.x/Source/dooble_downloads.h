@@ -62,7 +62,6 @@ class dooble_downloads: public QMainWindow
   QTimer m_search_timer;
   Ui_dooble_downloads m_ui;
   void delete_selected(void);
-  void populate(void);
   void remove_entry(qint64 oid);
   void save_settings(void);
 
@@ -73,6 +72,7 @@ class dooble_downloads: public QMainWindow
   void slot_download_destroyed(void);
   void slot_download_path_inspection_timer_timeout(void);
   void slot_open_download_page(void);
+  void slot_populate(void);
   void slot_search_timer_timeout(void);
   void slot_select_path(void);
   void slot_show_context_menu(const QPoint &point);

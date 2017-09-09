@@ -47,10 +47,10 @@ dooble_downloads_item::dooble_downloads_item
   m_last_time = QTime::currentTime();
   m_oid = oid;
   m_rate = 0;
+  m_url = QUrl();
   m_ui.setupUi(this);
   m_ui.progress->setMaximum(0);
   m_ui.progress->setMinimum(0);
-  m_url = QUrl();
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -105,12 +105,12 @@ dooble_downloads_item::dooble_downloads_item(const QString &file_name,
 					     QWidget *parent):QWidget(parent)
 {
   m_oid = oid;
+  m_url = url;
   m_ui.setupUi(this);
   m_ui.cancel->setVisible(false);
   m_ui.file_name->setText(file_name);
   m_ui.information->setText(information);
   m_ui.progress->setVisible(false);
-  m_url = url;
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,

@@ -31,6 +31,7 @@
 #include <QShortcut>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QStandardPaths>
 #include <QWebEngineDownloadItem>
 
@@ -152,10 +153,6 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
   QMainWindow::keyPressEvent(event);
 }
 
-void dooble_downloads::populate(void)
-{
-}
-
 void dooble_downloads::purge(void)
 {
   QString database_name("dooble_downloads");
@@ -252,7 +249,6 @@ void dooble_downloads::show(void)
 			      toByteArray()));
 
   QMainWindow::show();
-  populate();
 }
 
 void dooble_downloads::showNormal(void)
@@ -263,7 +259,6 @@ void dooble_downloads::showNormal(void)
 			      toByteArray()));
 
   QMainWindow::showNormal();
-  populate();
 }
 
 void dooble_downloads::slot_clear_finished_downloads(void)
@@ -313,6 +308,7 @@ void dooble_downloads::slot_delete_row(void)
 
   if(downloads_item && downloads_item->is_finished())
     {
+      remove_entry(downloads_item->oid());
       downloads_item->deleteLater();
       m_ui.table->removeRow(action->property("row").toInt());
     }
@@ -390,6 +386,105 @@ void dooble_downloads::slot_open_download_page(void)
 
   QApplication::restoreOverrideCursor();
   emit open_url(url);
+}
+
+void dooble_downloads::slot_populate(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name("dooble_downloads");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_downloads.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+	int row = 0;
+	int total_rows = 0;
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT COUNT(*) FROM dooble_downloads"))
+	  if(query.next())
+	    m_ui.table->setRowCount(query.value(0).toInt());
+
+	if(query.exec("SELECT file_name, information, url, OID "
+		      "FROM dooble_downloads ORDER BY insert_order"))
+	  while(query.next() && total_rows < m_ui.table->rowCount())
+	    {
+	      QString file_name("");
+	      QString information("");
+	      QUrl url;
+	      qint64 oid = -1;
+
+	      for(int i = 0; i < query.record().count(); i++)
+		switch(i)
+		  {
+		  case 0:
+		  case 1:
+		  case 2:
+		    {
+		      QByteArray bytes
+			(QByteArray::fromBase64(query.value(i).toByteArray()));
+
+		      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
+
+		      if(i == 0)
+			file_name = QString::fromUtf8(bytes);
+		      else if(i == 1)
+			information = QString::fromUtf8(bytes);
+		      else
+			url = QUrl::fromEncoded(bytes);
+
+		      break;
+		    }
+		  default:
+		    {
+		      oid = query.value(i).toLongLong();
+		      break;
+		    }
+		  }
+
+	      if(file_name.isEmpty() ||
+		 information.isEmpty() ||
+		 url.isEmpty() ||
+		 !url.isValid())
+		{
+		  QSqlQuery delete_query(db);
+
+		  delete_query.prepare("DELETE FROM dooble_downloads "
+				       "WHERE OID = ?");
+		  delete_query.addBindValue
+		    (query.value(query.record().count() - 1));
+		  delete_query.exec();
+		  continue;
+		}
+
+	      dooble_downloads_item *downloads_item = new dooble_downloads_item
+		(file_name, information, url, oid, this);
+
+	      m_ui.table->setCellWidget(row, 0, downloads_item);
+	      m_ui.table->resizeRowToContents(row);
+	      row += 1;
+	      total_rows += 1;
+	    }
+
+	m_ui.table->setRowCount(total_rows);
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_downloads::slot_search_timer_timeout(void)
