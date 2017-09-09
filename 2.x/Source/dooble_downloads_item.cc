@@ -25,13 +25,19 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QFileInfo>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QWebEngineDownloadItem>
 
 #include "dooble.h"
+#include "dooble_cryptography.h"
 #include "dooble_downloads_item.h"
 #include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
+
+QAtomicInteger<quint64> dooble_downloads_item::s_db_id;
 
 dooble_downloads_item::dooble_downloads_item
 (QWebEngineDownloadItem *download, QWidget *parent):QWidget(parent)
@@ -74,6 +80,7 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.file_name->setText(file_info.fileName());
       m_ui.progress->setMaximum(100);
       m_url = m_download->url();
+      record();
     }
   else
     {
@@ -114,6 +121,74 @@ void dooble_downloads_item::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.cancel->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
+}
+
+void dooble_downloads_item::record(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name(QString("dooble_downloads_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_downloads.db");
+
+    if(db.open())
+      {
+	QByteArray bytes;
+	QString file_name(m_ui.file_name->text());
+	QString information(m_ui.information->text());
+	QSqlQuery query(db);
+	bool ok = true;
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
+		   "file_name TEXT NOT NULL, "
+		   "information TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT PRIMARY KEY NOT NULL)");
+	query.prepare("INSERT OR REPLACE INTO dooble_downloads "
+		      "(file_name, information, url, url_digest) "
+		      "VALUES (?, ?, ?, ?)");
+	bytes = dooble::s_cryptography->encrypt_then_mac(file_name.toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	if(information.isEmpty())
+	  information = file_name;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(information.toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(m_url.toEncoded());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(m_url.toEncoded()).toBase64());
+
+	if(ok)
+	  query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_downloads_item::slot_cancel(void)
