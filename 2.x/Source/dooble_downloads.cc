@@ -149,6 +149,10 @@ void dooble_downloads::populate(void)
 {
 }
 
+void dooble_downloads::purge(void)
+{
+}
+
 void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 {
   if(!download)

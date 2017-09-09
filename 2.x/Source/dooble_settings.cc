@@ -44,6 +44,7 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
+#include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_hmac.h"
@@ -284,6 +285,7 @@ void dooble_settings::purge_database_data(void)
   dooble_accepted_or_blocked_domains::purge();
   dooble_certificate_exceptions_menu_widget::purge();
   dooble_cookies::purge();
+  dooble_downloads::purge();
   dooble_favicons::purge();
   dooble_history::purge();
 }
@@ -827,6 +829,7 @@ void dooble_settings::slot_reset(void)
   list << "dooble_accepted_or_blocked_domains.db"
        << "dooble_certificate_exceptions.db"
        << "dooble_cookies.db"
+       << "dooble_downloads.db"
        << "dooble_favicons.db"
        << "dooble_history.db"
        << "dooble_settings.db";

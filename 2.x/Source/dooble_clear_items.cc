@@ -31,6 +31,7 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
+#include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_settings.h"
@@ -87,6 +88,12 @@ void dooble_clear_items::slot_clear_items(void)
   if(m_ui.cookies->isChecked())
     {
       dooble_cookies::purge();
+      state = true;
+    }
+
+  if(m_ui.download_history->isChecked())
+    {
+      dooble_downloads::purge();
       state = true;
     }
 
