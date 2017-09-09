@@ -139,7 +139,8 @@ bool dooble::can_exit(void)
       mb.setIcon(QMessageBox::Question);
       mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
       mb.setText
-	(tr("Downloads are in progress. Are you sure that you wish to exit?"));
+	(tr("Downloads are in progress. Are you sure that you wish to exit? "
+	    "If you exit, downloads will be aborted."));
       mb.setWindowIcon(windowIcon());
       mb.setWindowModality(Qt::WindowModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -165,6 +166,8 @@ void dooble::closeEvent(QCloseEvent *event)
 	return;
       }
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   if(dooble_settings::setting("save_geometry").toBool())
     dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
 
@@ -174,15 +177,20 @@ void dooble::closeEvent(QCloseEvent *event)
     if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
       {
 	deleteLater();
+	QApplication::restoreOverrideCursor();
 	return;
       }
 
   if(s_cookies_window)
     s_cookies_window->close();
 
+  if(s_downloads)
+    s_downloads->abort();
+
   if(s_history)
     s_history->deleteLater();
 
+  QApplication::restoreOverrideCursor();
   QMainWindow::closeEvent(event);
   QApplication::exit(0);
 }

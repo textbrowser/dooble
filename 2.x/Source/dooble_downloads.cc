@@ -111,6 +111,18 @@ bool dooble_downloads::is_finished(void) const
   return true;
 }
 
+void dooble_downloads::abort(void)
+{
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    {
+      dooble_downloads_item *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(downloads_item)
+	downloads_item->deleteLater();
+    }
+}
+
 void dooble_downloads::closeEvent(QCloseEvent *event)
 {
   QMainWindow::closeEvent(event);
@@ -199,6 +211,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
   m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
+  m_ui.table->scrollToBottom();
 }
 
 void dooble_downloads::remove_entry(qint64 oid)

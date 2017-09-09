@@ -45,6 +45,7 @@ class dooble_downloads: public QMainWindow
   bool contains(QWebEngineDownloadItem *download) const;
   bool is_finished(void) const;
   static void purge(void);
+  void abort(void);
   void record_download(QWebEngineDownloadItem *download);
 
  public slots:
