@@ -625,6 +625,10 @@ void dooble_page::show_popup_menu(void)
   dooble_popup_menu *popup_menu = new dooble_popup_menu(this);
 
   connect(popup_menu,
+	  SIGNAL(accepted(void)),
+	  &menu,
+	  SLOT(close(void)));
+  connect(popup_menu,
 	  SIGNAL(show_blocked_domains(void)),
 	  this,
 	  SIGNAL(show_blocked_domains(void)));

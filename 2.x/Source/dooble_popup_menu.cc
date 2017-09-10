@@ -178,7 +178,10 @@ void dooble_popup_menu::slot_settings_applied(void)
 void dooble_popup_menu::slot_tool_button_clicked(void)
 {
   if(m_ui.blocked_domains == sender())
-    emit show_blocked_domains();
+    {
+      emit show_blocked_domains();
+      accept();
+    }
   else if(m_ui.clear_items == sender())
     {
       dooble_clear_items clear_items(find_parent_dooble());
@@ -190,11 +193,17 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       clear_items.exec();
     }
   else if(m_ui.cookies == sender())
-    emit show_cookies();
+    {
+      emit show_cookies();
+      accept();
+    }
   else if(m_ui.exit_dooble == sender())
     emit quit_dooble();
   else if(m_ui.history == sender())
-    emit show_history();
+    {
+      emit show_history();
+      accept();
+    }
   else if(m_ui.new_private_tab == sender())
     {
       dooble *d = find_parent_dooble();
@@ -219,5 +228,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 	d->print_current_page();
     }
   else if(m_ui.settings == sender())
-    emit show_settings();
+    {
+      emit show_settings();
+      accept();
+    }
 }
