@@ -108,10 +108,15 @@ void dooble_history_window::closeEvent(QCloseEvent *event)
 
 void dooble_history_window::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->key() == Qt::Key_Escape)
-    close();
+  if(!parent())
+    {
+      if(event && event->key() == Qt::Key_Escape)
+	close();
 
-  QMainWindow::keyPressEvent(event);
+      QMainWindow::keyPressEvent(event);
+    }
+  else if(event)
+    event->ignore();
 }
 
 void dooble_history_window::resizeEvent(QResizeEvent *event)

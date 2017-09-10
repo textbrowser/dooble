@@ -338,9 +338,12 @@ void dooble::connect_signals(void)
 
 void dooble::decouple_support_windows(void)
 {
-  dooble *d = dooble_ui_utilities::find_parent_dooble(s_settings);
+  dooble *d = 0;
 
-  if(d == this)
+  if((d = dooble_ui_utilities::find_parent_dooble(s_history_window)))
+    s_history_window->setParent(0);
+
+  if((d = dooble_ui_utilities::find_parent_dooble(s_settings)))
     s_settings->setParent(0);
 }
 
@@ -1185,6 +1188,16 @@ void dooble::slot_show_full_screen(void)
 
 void dooble::slot_show_history(void)
 {
+  if(dooble_settings::setting("pin_history_window").toBool())
+    {
+      if(m_ui.tab->indexOf(s_history_window) == -1)
+	m_ui.tab->addTab(s_history_window, s_history_window->windowTitle());
+
+      m_ui.tab->setCurrentWidget(s_history_window);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      return;
+    }
+
   if(s_history_window->isVisible())
     {
       s_history_window->activateWindow();

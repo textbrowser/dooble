@@ -340,6 +340,16 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_13">
              <item>
+              <widget class="QCheckBox" name="pin_history">
+               <property name="text">
+                <string>History</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QCheckBox" name="pin_settings">
                <property name="text">
                 <string>Settings</string>
@@ -1131,6 +1141,7 @@
   <tabstop>animated_scrolling</tabstop>
   <tabstop>denote_private_tabs</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
+  <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>theme</tabstop>
