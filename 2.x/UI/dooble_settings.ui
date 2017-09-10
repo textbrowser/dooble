@@ -350,6 +350,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QCheckBox" name="pin_downloads">
+               <property name="text">
+                <string>Downloads</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QCheckBox" name="pin_history">
                <property name="text">
                 <string>History</string>
@@ -1152,6 +1162,7 @@
   <tabstop>denote_private_tabs</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>
+  <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
   <tabstop>access_new_tabs</tabstop>

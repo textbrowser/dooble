@@ -342,13 +342,16 @@ void dooble::decouple_support_windows(void)
   dooble *d = 0;
 
   if((d = dooble_ui_utilities::
-          find_parent_dooble(s_accepted_or_blocked_domains)))
+          find_parent_dooble(s_accepted_or_blocked_domains)) == this)
     s_accepted_or_blocked_domains->setParent(0);
 
-  if((d = dooble_ui_utilities::find_parent_dooble(s_history_window)))
+  if((d = dooble_ui_utilities::find_parent_dooble(s_downloads)) == this)
+    s_downloads->setParent(0);
+
+  if((d = dooble_ui_utilities::find_parent_dooble(s_history_window)) == this)
     s_history_window->setParent(0);
 
-  if((d = dooble_ui_utilities::find_parent_dooble(s_settings)))
+  if((d = dooble_ui_utilities::find_parent_dooble(s_settings)) == this)
     s_settings->setParent(0);
 }
 
@@ -1179,6 +1182,18 @@ void dooble::slot_show_clear_items(void)
 
 void dooble::slot_show_downloads(void)
 {
+  if(dooble_settings::setting("pin_downloads_window").toBool())
+    {
+      if(m_ui.tab->indexOf(s_downloads) == -1)
+	m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+
+      m_ui.tab->setCurrentWidget(s_downloads);
+      m_ui.tab->setTabToolTip
+	(m_ui.tab->count() - 1, s_downloads->windowTitle());
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      return;
+    }
+
   if(s_downloads->isVisible())
     {
       s_downloads->activateWindow();
