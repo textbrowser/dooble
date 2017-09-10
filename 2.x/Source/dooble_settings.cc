@@ -125,6 +125,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
   s_settings["main_menu_bar_visible"] = true;
+  s_settings["pin_accepted_or_blocked_window"] = true;
   s_settings["pin_history_window"] = true;
   s_settings["pin_settings_window"] = true;
   s_settings["status_bar_visible"] = true;
@@ -418,6 +419,8 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
 	    m_ui.pages->count() - 1));
+  m_ui.pin_accepted_or_blocked_domains->setChecked
+    (s_settings.value("pin_accepted_or_blocked_window", true).toBool());
   m_ui.pin_history->setChecked
     (s_settings.value("pin_history_window", true).toBool());
   m_ui.pin_settings->setChecked
@@ -719,6 +722,8 @@ void dooble_settings::slot_apply(void)
   set_setting
     ("javascript_popups", m_ui.javascript_popups->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
+  set_setting("pin_accepted_or_blocked_window",
+	      m_ui.pin_accepted_or_blocked_domains->isChecked());
   set_setting("pin_history_window", m_ui.pin_history->isChecked());
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());

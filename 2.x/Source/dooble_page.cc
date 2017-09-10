@@ -507,7 +507,7 @@ void dooble_page::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
-		  SIGNAL(show_blocked_domains(void)));
+		  SIGNAL(show_accepted_or_blocked_domains(void)));
   menu->addAction(tr("&Downloads..."),
 		  this,
 		  SIGNAL(show_downloads(void)),
@@ -629,9 +629,9 @@ void dooble_page::show_popup_menu(void)
 	  &menu,
 	  SLOT(close(void)));
   connect(popup_menu,
-	  SIGNAL(show_blocked_domains(void)),
+	  SIGNAL(show_accepted_or_blocked_domains(void)),
 	  this,
-	  SIGNAL(show_blocked_domains(void)));
+	  SIGNAL(show_accepted_or_blocked_domains(void)));
   connect(popup_menu,
 	  SIGNAL(show_cookies(void)),
 	  this,

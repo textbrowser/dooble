@@ -341,6 +341,10 @@ void dooble::decouple_support_windows(void)
 {
   dooble *d = 0;
 
+  if((d = dooble_ui_utilities::
+          find_parent_dooble(s_accepted_or_blocked_domains)))
+    s_accepted_or_blocked_domains->setParent(0);
+
   if((d = dooble_ui_utilities::find_parent_dooble(s_history_window)))
     s_history_window->setParent(0);
 
@@ -592,9 +596,9 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
-	  SIGNAL(show_blocked_domains(void)),
+	  SIGNAL(show_accepted_or_blocked_domains(void)),
 	  this,
-	  SLOT(slot_show_blocked_domains(void)),
+	  SLOT(slot_show_accepted_or_blocked_domains(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -751,7 +755,7 @@ void dooble::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
   menu->addAction(tr("&Blocked Domains..."),
 		  this,
-		  SLOT(slot_show_blocked_domains(void)));
+		  SLOT(slot_show_accepted_or_blocked_domains(void)));
   menu->addAction(tr("&Downloads..."),
 		  this,
 		  SLOT(slot_show_downloads(void)),
@@ -1130,8 +1134,21 @@ void dooble::slot_show_about(void)
   dooble_ui_utilities::center_window_widget(this, s_about);
 }
 
-void dooble::slot_show_blocked_domains(void)
+void dooble::slot_show_accepted_or_blocked_domains(void)
 {
+  if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
+    {
+      if(m_ui.tab->indexOf(s_accepted_or_blocked_domains) == -1)
+	m_ui.tab->addTab(s_accepted_or_blocked_domains,
+			 s_accepted_or_blocked_domains->windowTitle());
+
+      m_ui.tab->setCurrentWidget(s_accepted_or_blocked_domains);
+      m_ui.tab->setTabToolTip
+	(m_ui.tab->count() - 1, s_accepted_or_blocked_domains->windowTitle());
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      return;
+    }
+
   if(s_accepted_or_blocked_domains->isVisible())
     {
       s_accepted_or_blocked_domains->activateWindow();

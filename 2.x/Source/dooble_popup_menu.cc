@@ -179,7 +179,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 {
   if(m_ui.blocked_domains == sender())
     {
-      emit show_blocked_domains();
+      emit show_accepted_or_blocked_domains();
       accept();
     }
   else if(m_ui.clear_items == sender())
