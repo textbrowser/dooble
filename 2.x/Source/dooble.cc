@@ -84,6 +84,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
     {
       m_ui.tab->addTab(widget, widget->windowTitle());
       m_ui.tab->setCurrentWidget(widget);
+      m_ui.tab->setTabToolTip(0, widget->windowTitle());
     }
   else
     new_page(false);
@@ -1194,6 +1195,8 @@ void dooble::slot_show_history(void)
 	m_ui.tab->addTab(s_history_window, s_history_window->windowTitle());
 
       m_ui.tab->setCurrentWidget(s_history_window);
+      m_ui.tab->setTabToolTip
+	(m_ui.tab->count() - 1, s_history_window->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       return;
     }
@@ -1222,6 +1225,7 @@ void dooble::slot_show_settings(void)
 	m_ui.tab->addTab(s_settings, s_settings->windowTitle());
 
       m_ui.tab->setCurrentWidget(s_settings);
+      m_ui.tab->setTabToolTip(m_ui.tab->count() - 1, s_settings->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       return;
     }
