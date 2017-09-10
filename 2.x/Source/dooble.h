@@ -29,6 +29,8 @@
 #define dooble_h
 
 #include <QMainWindow>
+#include <QShortcut>
+#include <QPointer>
 #include <QTimer>
 
 #include "dooble_settings.h"
@@ -53,6 +55,7 @@ class dooble: public QMainWindow
   Q_OBJECT
 
  public:
+  dooble(QWidget *widget);
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   dooble(void);
@@ -80,23 +83,34 @@ class dooble: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QList<QShortcut *> m_shortcuts;
+  QMenu *m_menu;
+  QPointer<QAction> m_action_close_tab;
+  QPointer<QAction> m_authentication_action;
+  QPointer<QAction> m_full_screen_action;
+  QPointer<QAction> m_settings_action;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
   static bool s_containers_populated;
   bool can_exit(void);
   void connect_signals(void);
+  void decouple_support_windows(void);
   void initialize_static_members(void);
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void prepare_page_connections(dooble_page *page);
+  void prepare_shortcuts(void);
+  void prepare_standard_menus(void);
   void print(dooble_page *page);
 
  private slots:
   void slot_about_to_hide_main_menu(void);
   void slot_about_to_show_main_menu(void);
+  void slot_authenticate(void);
   void slot_close_tab(void);
   void slot_create_tab(dooble_web_engine_view *view);
   void slot_create_window(dooble_web_engine_view *view);
+  void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);

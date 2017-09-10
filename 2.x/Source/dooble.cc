@@ -25,8 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDialog>
 #include <QKeyEvent>
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPrintDialog>
@@ -66,9 +68,46 @@ dooble_settings *dooble::s_settings = 0;
 dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
   0;
 
+dooble::dooble(QWidget *widget):QMainWindow()
+{
+  m_menu = new QMenu(this);
+  m_ui.setupUi(this);
+  connect_signals();
+#ifndef Q_OS_MACOS
+  m_ui.menu_bar->setVisible
+    (dooble_settings::setting("main_menu_bar_visible").toBool());
+#else
+  setMenuBar(0);
+#endif
+
+  if(widget)
+    {
+      m_ui.tab->addTab(widget, widget->windowTitle());
+      m_ui.tab->setCurrentWidget(widget);
+    }
+  else
+    new_page(false);
+
+  if(!s_containers_populated)
+    if(s_cryptography->as_plaintext())
+      {
+	m_populate_containers_timer.setSingleShot(true);
+	m_populate_containers_timer.start(500);
+	s_containers_populated = true;
+      }
+
+  connect(QWebEngineProfile::defaultProfile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_shortcuts();
+  prepare_standard_menus();
+}
+
 dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
+  m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
 #ifndef Q_OS_MACOS
@@ -91,11 +130,14 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_shortcuts();
+  prepare_standard_menus();
 }
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
+  m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
 #ifndef Q_OS_MACOS
@@ -118,6 +160,8 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_shortcuts();
+  prepare_standard_menus();
 }
 
 dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
@@ -126,6 +170,8 @@ dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
 
 dooble::~dooble()
 {
+  while(!m_shortcuts.isEmpty())
+    delete m_shortcuts.takeFirst();
 }
 
 bool dooble::can_exit(void)
@@ -176,6 +222,7 @@ void dooble::closeEvent(QCloseEvent *event)
   for(int i = 0; i < list.size(); i++)
     if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
       {
+	decouple_support_windows();
 	deleteLater();
 	QApplication::restoreOverrideCursor();
 	return;
@@ -242,6 +289,16 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_about_to_show_main_menu(void)),
 	  Qt::UniqueConnection);
+  connect(m_ui.menu_view,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_view,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_main_menu(void)),
+	  Qt::UniqueConnection);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
 	  this,
@@ -272,6 +329,19 @@ void dooble::connect_signals(void)
 	  dooble::s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  this,
+	  SLOT(slot_dooble_credentials_authenticated(bool)),
+	  Qt::UniqueConnection);
+}
+
+void dooble::decouple_support_windows(void)
+{
+  dooble *d = dooble_ui_utilities::find_parent_dooble(s_settings);
+
+  if(d == this)
+    s_settings->setParent(0);
 }
 
 void dooble::initialize_static_members(void)
@@ -407,6 +477,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  page,
 	  SLOT(slot_dooble_credentials_authenticated(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(authenticate(void)),
+	  this,
+	  SLOT(slot_authenticate(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -561,6 +637,146 @@ void dooble::prepare_page_connections(dooble_page *page)
 					   Qt::UniqueConnection));
 }
 
+void dooble::prepare_shortcuts(void)
+{
+  if(m_shortcuts.isEmpty())
+    {
+      m_shortcuts.append
+	(new QShortcut (QKeySequence(tr("Ctrl+A")),
+			this,
+			SLOT(slot_authenticate(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+D")),
+		       this,
+		       SLOT(slot_show_downloads(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+G")),
+		       this,
+		       SLOT(slot_show_settings(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+H")),
+		       this,
+		       SLOT(slot_show_history(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+N")),
+				       this,
+				       SLOT(slot_new_window(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+P")),
+				       this,
+				       SLOT(slot_print(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+Q")),
+				       this,
+				       SLOT(slot_quit_dooble(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+T")),
+				       this,
+				       SLOT(slot_new_tab(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+W")),
+				       this,
+				       SLOT(slot_close_tab(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("F11")),
+				       this,
+				       SLOT(slot_show_full_screen(void))));
+    }
+}
+
+void dooble::prepare_standard_menus(void)
+{
+  m_menu->clear();
+
+  QAction *action = 0;
+  QMenu *menu = 0;
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  /*
+  ** File Menu
+  */
+
+  menu = m_menu->addMenu(tr("&File"));
+  m_authentication_action = menu->addAction(tr("&Authenticate..."),
+					    this,
+					    SLOT(slot_authenticate(void)),
+					    QKeySequence(tr("Ctrl+A")));
+  m_authentication_action->setEnabled
+    (dooble_settings::has_dooble_credentials());
+  menu->addSeparator();
+  menu->addAction(tr("New &Private Tab"),
+		  this,
+		  SLOT(slot_new_private_tab(void)));
+  menu->addAction(tr("New &Tab"),
+		  this,
+		  SLOT(slot_new_tab(void)),
+		  QKeySequence(tr("Ctrl+T")));
+  menu->addAction(tr("&New Window..."),
+		  this,
+		  SLOT(slot_new_window(void)),
+		  QKeySequence(tr("Ctrl+N")));
+  menu->addSeparator();
+  action = m_action_close_tab = menu->addAction(tr("&Close Tab"),
+						this,
+						SLOT(slot_close_tab(void)),
+						QKeySequence(tr("Ctrl+W")));
+
+  if(qobject_cast<QStackedWidget *> (parentWidget()))
+    action->setEnabled
+      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+
+  menu->addSeparator();
+  menu->addAction(tr("E&xit Dooble"),
+		  this,
+		  SLOT(slot_quit_dooble(void)),
+		  QKeySequence(tr("Ctrl+Q")));
+
+  /*
+  ** Edit Menu
+  */
+
+  menu = m_menu->addMenu(tr("&Edit"));
+  menu->addAction(tr("&Clear Items..."),
+		  this,
+		  SLOT(slot_show_clear_items(void)));
+  m_settings_action = menu->addAction
+    (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+     tr("Settin&gs..."),
+     this,
+     SLOT(slot_show_settings(void)),
+     QKeySequence(tr("Ctrl+G")));
+
+  /*
+  ** Tools Menu
+  */
+
+  menu = m_menu->addMenu(tr("&Tools"));
+  menu->addAction(tr("&Blocked Domains..."),
+		  this,
+		  SLOT(slot_show_blocked_domains(void)));
+  menu->addAction(tr("&Downloads..."),
+		  this,
+		  SLOT(slot_show_downloads(void)),
+		  QKeySequence(tr("Ctrl+D")));
+  menu->addAction(tr("&History..."),
+		  this,
+		  SLOT(slot_show_history(void)),
+		  QKeySequence(tr("Ctrl+H")));
+
+  /*
+  ** View Menu
+  */
+
+  menu = m_menu->addMenu(tr("&View"));
+  m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
+					 this,
+					 SLOT(slot_show_full_screen(void)),
+					 QKeySequence(tr("F11")));
+
+  /*
+  ** Help Menu
+  */
+
+  menu = m_menu->addMenu(tr("&Help"));
+  menu->addAction(tr("&About..."),
+		  this,
+		  SLOT(slot_show_about(void)));
+}
+
 void dooble::print(dooble_page *page)
 {
   if(!page)
@@ -610,35 +826,84 @@ void dooble::slot_about_to_show_main_menu(void)
     {
       menu->clear();
 
+      QMenu *m = 0;
       dooble_page *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
 
-      if(page &&
-	 page->menu() &&
-	 page->menu()->actions().size() >= 4)
-	{
-	  if(m_ui.menu_edit == menu &&
-	     page->menu()->actions()[1]->menu())
-	    m_ui.menu_edit->addActions
-	      (page->menu()->actions()[1]->menu()->actions());
-	  else if(m_ui.menu_file == menu &&
-		  page->menu()->actions()[1]->menu())
-	    {
-	      m_ui.menu_file->addActions
-		(page->menu()->actions()[0]->menu()->actions());
+      if(page && page->menu())
+	m = page->menu();
+      else
+	m = m_menu;
 
-	      if(page->action_close_tab())
+      if(m && m->actions().size() >= 5)
+	{
+	  if(m_ui.menu_edit == menu && m->actions()[1]->menu())
+	    m_ui.menu_edit->addActions(m->actions()[1]->menu()->actions());
+	  else if(m_ui.menu_file == menu && m->actions()[1]->menu())
+	    {
+	      m_ui.menu_file->addActions(m->actions()[0]->menu()->actions());
+
+	      if(page && page->action_close_tab())
 		page->action_close_tab()->setEnabled(m_ui.tab->count() > 1);
+	      else if(m_action_close_tab)
+		m_action_close_tab->setEnabled(m_ui.tab->count() > 1);
 	    }
-	  else if(m_ui.menu_help == menu &&
-		  page->menu()->actions()[3]->menu())
-	    m_ui.menu_help->addActions
-	      (page->menu()->actions()[3]->menu()->actions());
-	  else if(m_ui.menu_tools == menu &&
-		  page->menu()->actions()[2]->menu())
-	    m_ui.menu_tools->addActions
-	      (page->menu()->actions()[2]->menu()->actions());
+	  else if(m_ui.menu_help == menu && m->actions()[4]->menu())
+	    m_ui.menu_help->addActions(m->actions()[4]->menu()->actions());
+	  else if(m_ui.menu_tools == menu && m->actions()[2]->menu())
+	    m_ui.menu_tools->addActions(m->actions()[2]->menu()->actions());
+	  else if(m_ui.menu_view == menu && m->actions()[3]->menu())
+	    m_ui.menu_view->addActions(m->actions()[3]->menu()->actions());
 	}
+    }
+}
+
+void dooble::slot_authenticate(void)
+{
+  if(!dooble_settings::has_dooble_credentials())
+    slot_show_settings_panel(dooble_settings::PRIVACY_PANEL);
+  else
+    {
+      QInputDialog dialog(this);
+
+      dialog.setLabelText(tr("Dooble Password"));
+      dialog.setTextEchoMode(QLineEdit::Password);
+      dialog.setWindowIcon(windowIcon());
+      dialog.setWindowTitle(tr("Dooble: Password"));
+
+      if(dialog.exec() != QDialog::Accepted)
+	return;
+
+      QString text = dialog.textValue();
+
+      if(text.isEmpty())
+	return;
+
+      QByteArray salt
+	(QByteArray::fromHex(dooble_settings::setting("authentication_salt").
+			     toByteArray()));
+      QByteArray salted_password
+	(QByteArray::fromHex(dooble_settings::
+			     setting("authentication_salted_password").
+			     toByteArray()));
+      int iteration_count = dooble_settings::setting
+	("authentication_iteration_count").toInt();
+
+      dooble::s_cryptography->authenticate(salt, salted_password, text);
+
+      if(dooble::s_cryptography->authenticated())
+	{
+	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	  dooble::s_cryptography->prepare_keys
+	    (text.toUtf8(), salt, iteration_count);
+	  QApplication::restoreOverrideCursor();
+	  emit dooble_credentials_authenticated(true);
+	}
+      else
+	QMessageBox::critical
+	  (this,
+	   tr("Dooble: Error"),
+	   tr("Unable to authenticate the provided password."));
     }
 }
 
@@ -647,14 +912,17 @@ void dooble::slot_close_tab(void)
   if(m_ui.tab->count() < 2) // Safety.
     return;
 
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
-  if(!page)
-    return;
+  if(page)
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+      page->deleteLater();
+    }
+  else
+    m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
 
-  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-  page->deleteLater();
 }
 
 void dooble::slot_create_tab(dooble_web_engine_view *view)
@@ -667,6 +935,21 @@ void dooble::slot_create_window(dooble_web_engine_view *view)
   dooble *d = new dooble(view);
 
   d->show();
+}
+
+void dooble::slot_dooble_credentials_authenticated(bool state)
+{
+  if(state)
+    {
+      if(m_authentication_action)
+	m_authentication_action->setEnabled(false);
+    }
+  else
+    {
+      if(m_authentication_action)
+	m_authentication_action->setEnabled
+	  (dooble_settings::has_dooble_credentials());
+    }
 }
 
 void dooble::slot_download_requested(QWebEngineDownloadItem *download)
@@ -759,14 +1042,22 @@ void dooble::slot_open_tab_as_new_window(int index)
 
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
-  if(!page)
-    return;
+  if(page)
+    {
+      dooble *d = new dooble(page);
 
-  dooble *d = new dooble(page);
+      d->show();
+      m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+    }
+  else
+    {
+      dooble *d = new dooble(m_ui.tab->widget(index));
 
-  d->show();
-  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      d->show();
+      m_ui.tab->removeTab(index);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+    }
 }
 
 void dooble::slot_open_url(const QUrl &url)
@@ -786,12 +1077,12 @@ void dooble::slot_populate_containers_timer_timeout(void)
 
 void dooble::slot_print(void)
 {
-  print(qobject_cast<dooble_page *> (sender()));
+  print(qobject_cast<dooble_page *> (m_ui.tab->currentWidget()));
 }
 
 void dooble::slot_print_preview(void)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
   if(!page)
     return;
@@ -830,6 +1121,7 @@ void dooble::slot_settings_applied(void)
 
 void dooble::slot_show_about(void)
 {
+  s_about->resize(s_about->sizeHint());
   s_about->show();
   dooble_ui_utilities::center_window_widget(this, s_about);
 }
@@ -911,6 +1203,16 @@ void dooble::slot_show_history(void)
 
 void dooble::slot_show_settings(void)
 {
+  if(dooble_settings::setting("pin_settings_window").toBool())
+    {
+      if(m_ui.tab->indexOf(s_settings) == -1)
+	m_ui.tab->addTab(s_settings, s_settings->windowTitle());
+
+      m_ui.tab->setCurrentWidget(s_settings);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      return;
+    }
+
   if(s_settings->isVisible())
     {
       s_settings->activateWindow();
@@ -940,10 +1242,9 @@ void dooble::slot_tab_close_requested(int index)
 
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
-  if(!page)
-    return;
+  if(page)
+    page->deleteLater();
 
-  page->deleteLater();
   m_ui.tab->removeTab(index);
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 }

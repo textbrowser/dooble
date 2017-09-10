@@ -26,9 +26,7 @@
 */
 
 #include <QAuthenticator>
-#include <QInputDialog>
 #include <QMenu>
-#include <QMessageBox>
 #include <QPrinter>
 #include <QShortcut>
 #include <QStackedWidget>
@@ -402,25 +400,9 @@ void dooble_page::prepare_shortcuts(void)
   if(m_shortcuts.isEmpty())
     {
       m_shortcuts.append
-	(new QShortcut (QKeySequence(tr("Ctrl+A")),
-			this,
-			SLOT(slot_authenticate(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+D")),
-		       this,
-		       SIGNAL(show_downloads(void))));
-      m_shortcuts.append
 	(new QShortcut(QKeySequence(tr("Ctrl+F")),
 		       this,
 		       SLOT(slot_show_find(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+G")),
-		       this,
-		       SIGNAL(show_settings(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+H")),
-		       this,
-		       SIGNAL(show_history(void))));
       m_shortcuts.append
 	(new QShortcut(QKeySequence(tr("Ctrl+K")),
 		       this,
@@ -429,30 +411,12 @@ void dooble_page::prepare_shortcuts(void)
 	(new QShortcut(QKeySequence(tr("Ctrl+L")),
 		       this,
 		       SLOT(slot_open_url(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+N")),
-				       this,
-				       SIGNAL(new_window(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+P")),
-				       this,
-				       SIGNAL(print(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+Q")),
-				       this,
-				       SIGNAL(quit_dooble(void))));
       m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+R")),
 				       m_view,
 				       SLOT(reload(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+T")),
-				       this,
-				       SIGNAL(new_tab(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+W")),
-				       this,
-				       SIGNAL(close_tab(void))));
       m_shortcuts.append(new QShortcut(QKeySequence(tr("Esc")),
 				       this,
 				       SLOT(slot_escape(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("F11")),
-				       this,
-				       SIGNAL(show_full_screen(void))));
     }
 }
 
@@ -471,7 +435,7 @@ void dooble_page::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&File"));
   m_authentication_action = menu->addAction(tr("&Authenticate..."),
 					    this,
-					    SLOT(slot_authenticate(void)),
+					    SIGNAL(authenticate(void)),
 					    QKeySequence(tr("Ctrl+A")));
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
@@ -707,55 +671,6 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 	  else
 	    m_full_screen_action->setText(tr("Show &Full Screen"));
 	}
-    }
-}
-
-void dooble_page::slot_authenticate(void)
-{
-  if(!dooble_settings::has_dooble_credentials())
-    emit show_settings_panel(dooble_settings::PRIVACY_PANEL);
-  else
-    {
-      QInputDialog dialog(this);
-
-      dialog.setLabelText(tr("Dooble Password"));
-      dialog.setTextEchoMode(QLineEdit::Password);
-      dialog.setWindowIcon(windowIcon());
-      dialog.setWindowTitle(tr("Dooble: Password"));
-
-      if(dialog.exec() != QDialog::Accepted)
-	return;
-
-      QString text = dialog.textValue();
-
-      if(text.isEmpty())
-	return;
-
-      QByteArray salt
-	(QByteArray::fromHex(dooble_settings::setting("authentication_salt").
-			     toByteArray()));
-      QByteArray salted_password
-	(QByteArray::fromHex(dooble_settings::
-			     setting("authentication_salted_password").
-			     toByteArray()));
-      int iteration_count = dooble_settings::setting
-	("authentication_iteration_count").toInt();
-
-      dooble::s_cryptography->authenticate(salt, salted_password, text);
-
-      if(dooble::s_cryptography->authenticated())
-	{
-	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	  dooble::s_cryptography->prepare_keys
-	    (text.toUtf8(), salt, iteration_count);
-	  QApplication::restoreOverrideCursor();
-	  emit dooble_credentials_authenticated(true);
-	}
-      else
-	QMessageBox::critical
-	  (this,
-	   tr("Dooble: Error"),
-	   tr("Unable to authenticate the provided password."));
     }
 }
 

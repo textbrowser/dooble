@@ -54,6 +54,25 @@ QString dooble_ui_utilities::pretty_size(qint64 size)
     (QString::number(static_cast<double> (size) / 1073741824, 'f', 1));
 }
 
+dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
+{
+  if(!widget)
+    return 0;
+
+  QWidget *parent = widget->parentWidget();
+
+  do
+    {
+      if(qobject_cast<dooble *> (parent))
+	return qobject_cast<dooble *> (parent);
+      else if(parent)
+	parent = parent->parentWidget();
+    }
+  while(parent);
+
+  return 0;
+}
+
 void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 {
   /*

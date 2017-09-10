@@ -183,3 +183,9 @@ void dooble_tab_widget::slot_load_started(void)
 	movie->start();
     }
 }
+
+void dooble_tab_widget::tabRemoved(int index)
+{
+  QTabWidget::tabRemoved(index);
+  setTabsClosable(count() > 1);
+}

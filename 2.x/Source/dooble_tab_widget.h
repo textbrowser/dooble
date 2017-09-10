@@ -42,6 +42,9 @@ class dooble_tab_widget: public QTabWidget
   dooble_page *page(int index) const;
   void setTabIcon(int index, const QIcon &icon);
 
+ protected:
+  void tabRemoved(int index);
+
  private:
   dooble_tab_bar *m_tab_bar;
 

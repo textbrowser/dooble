@@ -331,6 +331,28 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Support windows will be transformed into tabs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="title">
+             <string>Pin</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <widget class="QCheckBox" name="pin_settings">
+               <property name="text">
+                <string>Settings</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="access_new_tabs">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1109,6 +1131,7 @@
   <tabstop>animated_scrolling</tabstop>
   <tabstop>denote_private_tabs</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
+  <tabstop>pin_settings</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>browsing_history</tabstop>

@@ -95,7 +95,6 @@ class dooble_page: public QWidget
 
  private slots:
   void slot_about_to_show_standard_menus(void);
-  void slot_authenticate(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
   void slot_dooble_credentials_authenticated(bool state);
@@ -133,6 +132,7 @@ class dooble_page: public QWidget
   void slot_url_changed(const QUrl &url);
 
  signals:
+  void authenticate(void);
   void close_tab(void);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);

@@ -125,6 +125,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["icon_set"] = "SnipIcons";
   s_settings["javascript_block_popups"] = true;
   s_settings["main_menu_bar_visible"] = true;
+  s_settings["pin_settings_window"] = true;
   s_settings["status_bar_visible"] = true;
   restore();
   prepare_icons();
@@ -214,10 +215,15 @@ void dooble_settings::closeEvent(QCloseEvent *event)
 
 void dooble_settings::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->key() == Qt::Key_Escape)
-    close();
+  if(!parent())
+    {
+      if(event && event->key() == Qt::Key_Escape)
+	close();
 
-  QMainWindow::keyPressEvent(event);
+      QMainWindow::keyPressEvent(event);
+    }
+  else if(event)
+    event->ignore();
 }
 
 void dooble_settings::prepare_icons(void)
@@ -411,6 +417,8 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
 	    m_ui.pages->count() - 1));
+  m_ui.pin_settings->setChecked
+    (s_settings.value("pin_settings_window", true).toBool());
   m_ui.proxy_host->setText(s_settings.value("proxy_host").toString().trimmed());
   m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
   m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
@@ -708,6 +716,7 @@ void dooble_settings::slot_apply(void)
   set_setting
     ("javascript_popups", m_ui.javascript_popups->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
+  set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());
