@@ -178,11 +178,7 @@ void dooble_popup_menu::slot_settings_applied(void)
 void dooble_popup_menu::slot_tool_button_clicked(void)
 {
   if(m_ui.blocked_domains == sender())
-    {
-      dooble::s_accepted_or_blocked_domains->showNormal();
-      dooble::s_accepted_or_blocked_domains->activateWindow();
-      dooble::s_accepted_or_blocked_domains->raise();
-    }
+    emit show_blocked_domains();
   else if(m_ui.clear_items == sender())
     {
       dooble_clear_items clear_items(find_parent_dooble());
@@ -194,23 +190,11 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       clear_items.exec();
     }
   else if(m_ui.cookies == sender())
-    {
-      dooble::s_cookies_window->showNormal();
-      dooble::s_cookies_window->activateWindow();
-      dooble::s_cookies_window->raise();
-    }
+    emit show_cookies();
   else if(m_ui.exit_dooble == sender())
-    {
-      QApplication::exit(0);
-    }
+    emit quit_dooble();
   else if(m_ui.history == sender())
-    {
-      dooble *d = find_parent_dooble();
-
-      dooble::s_history_window->showNormal(d);
-      dooble::s_history_window->activateWindow();
-      dooble::s_history_window->raise();
-    }
+    emit show_history();
   else if(m_ui.new_private_tab == sender())
     {
       dooble *d = find_parent_dooble();
@@ -235,9 +219,5 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 	d->print_current_page();
     }
   else if(m_ui.settings == sender())
-    {
-      dooble::s_settings->showNormal();
-      dooble::s_settings->activateWindow();
-      dooble::s_settings->raise();
-    }
+    emit show_settings();
 }

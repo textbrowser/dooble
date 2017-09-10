@@ -660,6 +660,26 @@ void dooble_page::show_popup_menu(void)
   QWidgetAction widget_action(&menu);
   dooble_popup_menu *popup_menu = new dooble_popup_menu(this);
 
+  connect(popup_menu,
+	  SIGNAL(show_blocked_domains(void)),
+	  this,
+	  SIGNAL(show_blocked_domains(void)));
+  connect(popup_menu,
+	  SIGNAL(show_cookies(void)),
+	  this,
+	  SLOT(slot_show_cookies(void)));
+  connect(popup_menu,
+	  SIGNAL(show_history(void)),
+	  this,
+	  SIGNAL(show_history(void)));
+  connect(popup_menu,
+	  SIGNAL(quit_dooble(void)),
+	  this,
+	  SIGNAL(quit_dooble(void)));
+  connect(popup_menu,
+	  SIGNAL(show_settings(void)),
+	  this,
+	  SIGNAL(show_settings(void)));
   popup_menu->resize(popup_menu->sizeHint());
   size = popup_menu->size();
   widget_action.setDefaultWidget(popup_menu);
