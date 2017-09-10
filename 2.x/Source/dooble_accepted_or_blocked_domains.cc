@@ -148,10 +148,15 @@ void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
 
 void dooble_accepted_or_blocked_domains::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->key() == Qt::Key_Escape)
-    close();
+  if(!parent())
+    {
+      if(event && event->key() == Qt::Key_Escape)
+	close();
 
-  QMainWindow::keyPressEvent(event);
+      QMainWindow::keyPressEvent(event);
+    }
+  else if(event)
+    event->ignore();
 }
 
 void dooble_accepted_or_blocked_domains::populate(void)
