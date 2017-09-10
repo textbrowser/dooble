@@ -333,7 +333,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Support windows will be transformed into tabs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Support windows will be transformed into tabs. Modified settings will not be immediately applied.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="title">
              <string>Pin</string>
