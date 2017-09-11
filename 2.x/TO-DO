@@ -40,6 +40,7 @@ Completed Items
 36.    Separate download items.
 37.    Display download rates.
 38.    Download panel. Path. Remind user on exit.
+39.    Pin support windows.
 
 Remaining Items
 
@@ -47,7 +48,6 @@ Remaining Items
 2.     Bookmarks. Default Home.
 3.     Zoom.
 4.     Language option.
-5.     Pin support windows. Decouple from parents.
 
 Unknown Items
 

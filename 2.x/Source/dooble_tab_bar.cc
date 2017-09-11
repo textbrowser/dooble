@@ -106,6 +106,14 @@ void dooble_tab_bar::slot_close_tab(void)
     emit tabCloseRequested(tabAt(action->property("point").toPoint()));
 }
 
+void dooble_tab_bar::slot_decouple_tab(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit decouple_tab(tabAt(action->property("point").toPoint()));
+}
+
 void dooble_tab_bar::slot_open_tab_as_new_window(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -146,13 +154,13 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setEnabled(false);
   action->setProperty("point", point);
 
+  dooble_page *page = 0;
   dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
     (parentWidget());
 
   if(tab_widget)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
-	(tab_widget->widget(tabAt(point)));
+      page = qobject_cast<dooble_page *> (tab_widget->widget(tabAt(point)));
 
       if(page)
 	{
@@ -168,6 +176,12 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	}
     }
 
+  menu.addSeparator();
+  action = menu.addAction(tr("&Decouple"),
+			  this,
+			  SLOT(slot_decouple_tab(void)));
+  action->setEnabled(!page && tab_at > -1);
+  action->setProperty("point", point);
   menu.exec(mapToGlobal(point));
 }
 

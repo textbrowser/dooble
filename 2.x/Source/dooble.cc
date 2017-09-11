@@ -306,6 +306,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_tab_index_changed(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(decouple_tab(int)),
+	  this,
+	  SLOT(slot_decouple_tab(int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)),
@@ -946,6 +951,21 @@ void dooble::slot_create_window(dooble_web_engine_view *view)
   dooble *d = new dooble(view);
 
   d->show();
+}
+
+void dooble::slot_decouple_tab(int index)
+{
+  QMainWindow *main_window = qobject_cast<QMainWindow *>
+    (m_ui.tab->widget(index));
+
+  if(main_window)
+    {
+      m_ui.tab->removeTab(index);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      main_window->setParent(0);
+      main_window->show();
+      dooble_ui_utilities::center_window_widget(this, main_window);
+    }
 }
 
 void dooble::slot_dooble_credentials_authenticated(bool state)
