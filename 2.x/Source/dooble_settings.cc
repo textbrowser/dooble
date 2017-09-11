@@ -442,6 +442,9 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("icon_set_index", 2).toInt(),
 	    m_ui.theme->count() - 1));
+  s_settings["accepted_or_blocked_domains_mode"] =
+    s_settings.value("accepted_or_blocked_domains_mode", "block").
+    toString().toLower();
 
   if(m_ui.theme->currentIndex() == 0)
     s_settings["icon_set"] = "BlueBits";
