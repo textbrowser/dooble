@@ -474,7 +474,8 @@ void dooble::new_page(dooble_page *page)
 
 void dooble::new_page(dooble_web_engine_view *view)
 {
-  dooble_page *page = new dooble_page(false, view, m_ui.tab);
+  dooble_page *page = new dooble_page
+    (view ? view->is_private() : false, view, m_ui.tab);
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("Dooble"));

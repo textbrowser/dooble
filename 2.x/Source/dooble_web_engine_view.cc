@@ -132,6 +132,11 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
   setPage(m_page);
 }
 
+bool dooble_web_engine_view::is_private(void) const
+{
+  return m_is_private;
+}
+
 dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
