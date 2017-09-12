@@ -284,6 +284,11 @@ QWebEngineSettings *dooble_page::web_engine_settings(void) const
   return m_view->settings();
 }
 
+bool dooble_page::is_private(void) const
+{
+  return m_is_private;
+}
+
 dooble *dooble_page::find_parent_dooble(void) const
 {
   QWidget *parent = parentWidget();

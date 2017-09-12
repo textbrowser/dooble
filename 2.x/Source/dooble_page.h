@@ -61,6 +61,7 @@ class dooble_page: public QWidget
   QString title(void) const;
   QUrl url(void) const;
   QWebEngineSettings *web_engine_settings(void) const;
+  bool is_private(void) const;
   dooble_address_widget *address_widget(void) const;
   dooble_web_engine_view *view(void) const;
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
