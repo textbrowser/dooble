@@ -119,7 +119,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
-  new QShortcut // Without a parent.
+  new QShortcut
     (QKeySequence(tr("Ctrl+F")), m_ui.domain_filter, SLOT(setFocus(void)));
   restoreState
     (QByteArray::fromBase64(dooble_settings::

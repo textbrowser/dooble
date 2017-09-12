@@ -1203,6 +1203,30 @@ void dooble::slot_settings_applied(void)
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
 #endif
+
+  if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
+      s_accepted_or_blocked_domains->setParent(0);
+    }
+
+  if(!dooble_settings::setting("pin_downloads_window").toBool())
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
+      s_downloads->setParent(0);
+    }
+
+  if(!dooble_settings::setting("pin_history_window").toBool())
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
+      s_history_window->setParent(0);
+    }
+
+  if(!dooble_settings::setting("pin_settings_window").toBool())
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
+      s_settings->setParent(0);
+    }
 }
 
 void dooble::slot_show_about(void)

@@ -79,7 +79,7 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
-  new QShortcut // Without a parent.
+  new QShortcut
     (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
   m_ui.download_path->setCursorPosition(0);
   m_ui.download_path->setToolTip(m_ui.download_path->text());
