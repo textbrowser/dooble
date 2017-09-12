@@ -438,6 +438,7 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("icon_set_index", 2).toInt(),
 	    m_ui.theme->count() - 1));
+  m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   s_settings["accepted_or_blocked_domains_mode"] =
     s_settings.value("accepted_or_blocked_domains_mode", "block").
     toString().toLower();
@@ -496,6 +497,8 @@ void dooble_settings::restore(void)
      m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      m_ui.animated_scrolling->isChecked());
@@ -667,6 +670,8 @@ void dooble_settings::slot_apply(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      m_ui.animated_scrolling->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
@@ -732,6 +737,7 @@ void dooble_settings::slot_apply(void)
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());
+  set_setting("web_plugins", m_ui.web_plugins->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   prepare_icons();
   QApplication::restoreOverrideCursor();

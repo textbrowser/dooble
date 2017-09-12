@@ -100,6 +100,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::LocalStorageEnabled, false);
       m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::PluginsEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::PluginsEnabled));
+      m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::ScrollAnimatorEnabled,
 	 QWebEngineSettings::defaultSettings()->
 	 testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
