@@ -30,27 +30,24 @@
 #include "dooble_application.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies_window.h"
+#include "dooble_cryptography.h"
 #include "dooble_history_window.h"
-#include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_settings.h"
 
 dooble_popup_menu::dooble_popup_menu(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
-  m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
-  connect(dooble::s_application,
-	  SIGNAL(dooble_credentials_authenticated(bool)),
-	  this,
-	  SLOT(slot_dooble_credentials_authenticated(bool)));
-  connect(dooble::s_settings,
-	  SIGNAL(applied(void)),
-	  this,
-	  SLOT(slot_settings_applied(void)));
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    m_ui.authenticate->setEnabled(false);
+  else
+    m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
+
   connect(m_ui.authenticate,
 	  SIGNAL(clicked(void)),
 	  this,
-	  SLOT(slot_authenticate(void)));
+	  SIGNAL(authenticate(void)));
 
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
     {
@@ -121,58 +118,6 @@ void dooble_popup_menu::prepare_icons(void)
     (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
   m_ui.print->setIcon(QIcon(QString(":/%1/48/print.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
-}
-
-void dooble_popup_menu::slot_authenticate(void)
-{
-  if(m_dooble_page)
-    disconnect(this,
-	       SIGNAL(authenticate(void)),
-	       m_dooble_page,
-	       SLOT(slot_authenticate(void)));
-
-  /*
-  ** Locate the top-most dooble_page object.
-  */
-
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  foreach(QWidget *widget, QApplication::topLevelWidgets())
-    if(qobject_cast<dooble *> (widget) &&
-       qobject_cast<dooble *> (widget)->isVisible())
-      {
-	m_dooble_page = qobject_cast<dooble *> (widget)->current_page();
-
-	if(m_dooble_page)
-	  widget->raise();
-
-	break;
-      }
-
-  QApplication::restoreOverrideCursor();
-
-  if(m_dooble_page)
-    {
-      connect(this,
-	      SIGNAL(authenticate(void)),
-	      m_dooble_page,
-	      SLOT(slot_authenticate(void)),
-	      Qt::UniqueConnection);
-      emit authenticate();
-    }
-}
-
-void dooble_popup_menu::slot_dooble_credentials_authenticated(bool state)
-{
-  if(state)
-    m_ui.authenticate->setEnabled(false);
-  else
-    m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
-}
-
-void dooble_popup_menu::slot_settings_applied(void)
-{
-  prepare_icons();
 }
 
 void dooble_popup_menu::slot_tool_button_clicked(void)

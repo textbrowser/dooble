@@ -28,6 +28,7 @@
 #ifndef dooble_h
 #define dooble_h
 
+#include <QFuture>
 #include <QMainWindow>
 #include <QShortcut>
 #include <QPointer>
@@ -83,6 +84,9 @@ class dooble: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QFuture<QList<QByteArray> > m_pbkdf2_future;
+  QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
+  QPointer<QProgressDialog> m_pbkdf2_dialog;
   QList<QShortcut *> m_shortcuts;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
@@ -121,6 +125,7 @@ class dooble: public QMainWindow
   void slot_new_window(void);
   void slot_open_tab_as_new_window(int index);
   void slot_open_url(const QUrl &url);
+  void slot_pbkdf2_future_finished(void);
   void slot_populate_containers_timer_timeout(void);
   void slot_print(void);
   void slot_print_preview(void);

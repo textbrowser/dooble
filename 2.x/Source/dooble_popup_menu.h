@@ -29,12 +29,10 @@
 #define dooble_popup_menu_h
 
 #include <QDialog>
-#include <QPointer>
 
 #include "ui_dooble_popup_menu.h"
 
 class dooble;
-class dooble_page;
 
 class dooble_popup_menu:public QDialog
 {
@@ -44,15 +42,11 @@ class dooble_popup_menu:public QDialog
   dooble_popup_menu(QWidget *parent);
 
  private:
-  QPointer<dooble_page> m_dooble_page;
   Ui_dooble_popup_menu m_ui;
   dooble *find_parent_dooble(void) const;
   void prepare_icons(void);
 
  private slots:
-  void slot_authenticate(void);
-  void slot_dooble_credentials_authenticated(bool state);
-  void slot_settings_applied(void);
   void slot_tool_button_clicked(void);
 
  signals:

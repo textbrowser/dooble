@@ -36,6 +36,7 @@
 #include <QPrinter>
 #include <QUrl>
 #include <QWebEngineProfile>
+#include <QtConcurrent>
 
 #include "dooble.h"
 #include "dooble_about.h"
@@ -49,7 +50,9 @@
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
+#include "dooble_hmac.h"
 #include "dooble_page.h"
+#include "dooble_pbkdf2.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
@@ -245,6 +248,10 @@ void dooble::closeEvent(QCloseEvent *event)
 
 void dooble::connect_signals(void)
 {
+  connect(&m_pbkdf2_future_watcher,
+	  SIGNAL(finished(void)),
+	  this,
+	  SLOT(slot_pbkdf2_future_finished(void)));
   connect(&m_populate_containers_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -344,19 +351,17 @@ void dooble::connect_signals(void)
 
 void dooble::decouple_support_windows(void)
 {
-  dooble *d = 0;
-
-  if((d = dooble_ui_utilities::
-          find_parent_dooble(s_accepted_or_blocked_domains)) == this)
+  if(dooble_ui_utilities::
+     find_parent_dooble(s_accepted_or_blocked_domains) == this)
     s_accepted_or_blocked_domains->setParent(0);
 
-  if((d = dooble_ui_utilities::find_parent_dooble(s_downloads)) == this)
+  if(dooble_ui_utilities::find_parent_dooble(s_downloads) == this)
     s_downloads->setParent(0);
 
-  if((d = dooble_ui_utilities::find_parent_dooble(s_history_window)) == this)
+  if(dooble_ui_utilities::find_parent_dooble(s_history_window) == this)
     s_history_window->setParent(0);
 
-  if((d = dooble_ui_utilities::find_parent_dooble(s_settings)) == this)
+  if(dooble_ui_utilities::find_parent_dooble(s_settings) == this)
     s_settings->setParent(0);
 }
 
@@ -876,6 +881,9 @@ void dooble::slot_about_to_show_main_menu(void)
 
 void dooble::slot_authenticate(void)
 {
+  if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
+    return;
+
   if(!dooble_settings::has_dooble_credentials())
     slot_show_settings_panel(dooble_settings::PRIVACY_PANEL);
   else
@@ -909,11 +917,31 @@ void dooble::slot_authenticate(void)
 
       if(dooble::s_cryptography->authenticated())
 	{
-	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	  dooble::s_cryptography->prepare_keys
-	    (text.toUtf8(), salt, iteration_count);
-	  QApplication::restoreOverrideCursor();
-	  emit dooble_credentials_authenticated(true);
+	  m_pbkdf2_dialog = new QProgressDialog(this);
+	  m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));
+	  m_pbkdf2_dialog->setLabelText(tr("Preparing credentials..."));
+	  m_pbkdf2_dialog->setMaximum(0);
+	  m_pbkdf2_dialog->setMinimum(0);
+	  m_pbkdf2_dialog->setWindowIcon(windowIcon());
+	  m_pbkdf2_dialog->setWindowModality(Qt::ApplicationModal);
+	  m_pbkdf2_dialog->setWindowTitle(tr("Dooble: Preparing Credentials"));
+
+	  QScopedPointer<dooble_pbkdf2> pbkdf2;
+
+	  pbkdf2.reset(new dooble_pbkdf2(text.toUtf8(),
+					 salt,
+					 iteration_count,
+					 1024));
+	  m_pbkdf2_future = QtConcurrent::run
+	    (pbkdf2.data(),
+	     &dooble_pbkdf2::pbkdf2,
+	     &dooble_hmac::sha3_512_hmac);
+	  m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
+	  connect(m_pbkdf2_dialog,
+		  SIGNAL(canceled(void)),
+		  pbkdf2.data(),
+		  SLOT(slot_interrupt(void)));
+	  m_pbkdf2_dialog->exec();
 	}
       else
 	QMessageBox::critical
@@ -1099,6 +1127,33 @@ void dooble::slot_open_url(const QUrl &url)
 
   if(page)
     page->load(url);
+}
+
+void dooble::slot_pbkdf2_future_finished(void)
+{
+  bool was_canceled = false;
+
+  if(m_pbkdf2_dialog)
+    {
+      if(m_pbkdf2_dialog->wasCanceled())
+	was_canceled = true;
+
+      m_pbkdf2_dialog->cancel();
+      m_pbkdf2_dialog->deleteLater();
+    }
+
+  if(!was_canceled)
+    {
+      QList<QByteArray> list(m_pbkdf2_future.result());
+
+      if(list.size() == 4)
+	{
+	  dooble::s_cryptography->setAuthenticated(true);
+	  dooble::s_cryptography->setKeys
+	    (list.at(0).mid(0, 64), list.at(0).mid(64, 32));
+	  emit dooble_credentials_authenticated(true);
+	}
+    }
 }
 
 void dooble::slot_populate_containers_timer_timeout(void)

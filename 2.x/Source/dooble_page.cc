@@ -629,6 +629,10 @@ void dooble_page::show_popup_menu(void)
 	  &menu,
 	  SLOT(close(void)));
   connect(popup_menu,
+	  SIGNAL(authenticate(void)),
+	  this,
+	  SIGNAL(authenticate(void)));
+  connect(popup_menu,
 	  SIGNAL(show_accepted_or_blocked_domains(void)),
 	  this,
 	  SIGNAL(show_accepted_or_blocked_domains(void)));
