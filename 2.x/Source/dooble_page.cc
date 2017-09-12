@@ -818,7 +818,7 @@ void dooble_page::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
 
-  if(dooble::s_history)
+  if(dooble::s_history && !m_is_private)
     dooble::s_history->save_item(icon(), m_view->history()->currentItem());
 
   QString icon_set(dooble_settings::setting("icon_set").toString());

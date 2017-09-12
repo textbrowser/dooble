@@ -1056,10 +1056,12 @@ void dooble::slot_icon_changed(const QIcon &icon)
   if(!page)
     return;
 
-  if(dooble::s_history)
+  if(dooble::s_history && !page->is_private())
     dooble::s_history->save_favicon(icon, page->url());
 
-  dooble_favicons::save_favicon(icon, page->url());
+  if(!page->is_private())
+    dooble_favicons::save_favicon(icon, page->url());
+
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }
 
@@ -1069,7 +1071,7 @@ void dooble::slot_load_finished(bool ok)
 
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
-  if(!page)
+  if(!page || page->is_private())
     return;
 
   dooble_favicons::save_favicon(page->icon(), page->url());
