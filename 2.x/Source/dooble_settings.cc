@@ -72,10 +72,6 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_apply(void)));
-  connect(m_ui.buttonBox->button(QDialogButtonBox::Close),
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(close(void)));
   connect(m_ui.buttonBox->button(QDialogButtonBox::Reset),
 	  SIGNAL(clicked(void)),
 	  this,

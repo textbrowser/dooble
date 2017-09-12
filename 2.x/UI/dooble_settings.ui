@@ -1140,7 +1140,7 @@
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="standardButtons">
-       <set>QDialogButtonBox::Apply|QDialogButtonBox::Close|QDialogButtonBox::Reset</set>
+       <set>QDialogButtonBox::Apply|QDialogButtonBox::Reset</set>
       </property>
      </widget>
     </item>
