@@ -1044,6 +1044,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="web_plugins">
+            <property name="text">
+             <string>Web Plugins</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="xss_auditing">
             <property name="text">
              <string>XSS Auditing</string>
@@ -1189,6 +1196,7 @@
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
   <tabstop>javascript_popups</tabstop>
+  <tabstop>web_plugins</tabstop>
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
