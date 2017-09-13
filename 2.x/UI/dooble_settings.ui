@@ -547,8 +547,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>635</width>
-               <height>626</height>
+               <width>452</width>
+               <height>642</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1053,7 +1053,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="user_agent"/>
+             <widget class="QLineEdit" name="user_agent">
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

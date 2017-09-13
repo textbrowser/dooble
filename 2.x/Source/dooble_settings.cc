@@ -126,6 +126,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["pin_history_window"] = true;
   s_settings["pin_settings_window"] = true;
   s_settings["status_bar_visible"] = true;
+  s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
+    httpUserAgent();
   restore();
   prepare_icons();
 }
@@ -425,19 +427,25 @@ void dooble_settings::restore(void)
   m_ui.pin_settings->setChecked
     (s_settings.value("pin_settings_window", true).toBool());
   m_ui.proxy_host->setText(s_settings.value("proxy_host").toString().trimmed());
+  m_ui.proxy_host->setCursorPosition(0);
   m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
+  m_ui.proxy_password->setCursorPosition(0);
   m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
   m_ui.proxy_type->setCurrentIndex
     (qBound(0,
 	    s_settings.value("proxy_type_index", 1).toInt(),
 	    m_ui.proxy_type->count() - 1));
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
+  m_ui.proxy_user->setCursorPosition(0);
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", false).toBool());
   m_ui.theme->setCurrentIndex
     (qBound(0,
 	    s_settings.value("icon_set_index", 2).toInt(),
 	    m_ui.theme->count() - 1));
+  m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
+  m_ui.user_agent->setToolTip(m_ui.user_agent->text());
+  m_ui.user_agent->setCursorPosition(0);
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   s_settings["accepted_or_blocked_domains_mode"] =
     s_settings.value("accepted_or_blocked_domains_mode", "block").
@@ -737,6 +745,7 @@ void dooble_settings::slot_apply(void)
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());
+  set_setting("user_agent", m_ui.user_agent->text().trimmed());
   set_setting("web_plugins", m_ui.web_plugins->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   prepare_icons();
