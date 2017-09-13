@@ -55,6 +55,7 @@
 QAtomicInteger<quint64> dooble_settings::s_db_id;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;
+QString dooble_settings::s_http_user_agent;
 
 dooble_settings::dooble_settings(void):QMainWindow()
 {
@@ -112,6 +113,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
   s_settings["browsing_history_days"] = 15;
@@ -671,8 +673,11 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
+  if(m_ui.user_agent->text().trimmed().isEmpty())
+    m_ui.user_agent->setText(s_http_user_agent);
+
   QWebEngineProfile::defaultProfile()->setHttpUserAgent
-    (m_ui.user_agent->text());
+    (m_ui.user_agent->text().trimmed());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
@@ -688,6 +693,10 @@ void dooble_settings::slot_apply(void)
      m_ui.animated_scrolling->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
+  m_ui.user_agent->setText
+    (QWebEngineProfile::defaultProfile()->httpUserAgent());
+  m_ui.user_agent->setToolTip(m_ui.user_agent->text());
+  m_ui.user_agent->setCursorPosition(0);
 
   if(m_ui.utc_time_zone->isChecked())
     qputenv("TZ", ":UTC");
