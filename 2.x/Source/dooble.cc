@@ -1036,7 +1036,17 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
       download->setPath(dialog.selectedFiles().value(0));
       s_downloads->record_download(download);
 
-      if(!s_downloads->isVisible())
+      if(dooble_settings::setting("pin_downloads_window").toBool())
+	{
+	  if(m_ui.tab->indexOf(s_downloads) == -1)
+	    m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+
+	  m_ui.tab->setCurrentWidget(s_downloads);
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+	}
+      else if(!s_downloads->isVisible())
 	{
 	  s_downloads->activateWindow();
 	  s_downloads->showNormal();
