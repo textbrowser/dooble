@@ -30,6 +30,7 @@
 
 #include <QTabWidget>
 
+class QToolButton;
 class dooble_page;
 class dooble_tab_bar;
 
@@ -46,11 +47,14 @@ class dooble_tab_widget: public QTabWidget
   void tabRemoved(int index);
 
  private:
+  QToolButton *m_add_tab_tool_button;
   dooble_tab_bar *m_tab_bar;
+  void prepare_icons(void);
 
  private slots:
   void slot_load_finished(void);
   void slot_load_started(void);
+  void slot_settings_applied(void);
 
  signals:
   void decouple_tab(int index);

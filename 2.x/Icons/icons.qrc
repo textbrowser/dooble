@@ -10,6 +10,7 @@
 	<file>BlueBits/20/next.png</file>
 	<file>BlueBits/20/previous.png</file>
 	<file>BlueBits/20/stop.png</file>
+	<file>BlueBits/32/add.png</file>
 	<file>BlueBits/32/authenticate.png</file>
 	<file>BlueBits/32/backward.png</file>
 	<file>BlueBits/32/downloads.png</file>
@@ -44,6 +45,7 @@
 	<file>Google Material Design/20/next.png</file>
 	<file>Google Material Design/20/previous.png</file>
 	<file>Google Material Design/20/stop.png</file>
+	<file>Google Material Design/32/add.png</file>
 	<file>Google Material Design/32/authenticate.png</file>
 	<file>Google Material Design/32/backward.png</file>
 	<file>Google Material Design/32/downloads.png</file>
@@ -80,6 +82,7 @@
 	<file>SnipIcons/20/next.png</file>
 	<file>SnipIcons/20/previous.png</file>
 	<file>SnipIcons/20/stop.png</file>
+	<file>SnipIcons/32/add.png</file>
 	<file>SnipIcons/32/authenticate.png</file>
 	<file>SnipIcons/32/backward.png</file>
 	<file>SnipIcons/32/downloads.png</file>

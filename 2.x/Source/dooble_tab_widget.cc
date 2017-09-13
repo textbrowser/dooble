@@ -31,12 +31,29 @@
 #include "dooble.h"
 #include "dooble_application.h"
 #include "dooble_page.h"
+#include "dooble_settings.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
+  m_add_tab_tool_button = new QToolButton(this);
+  m_add_tab_tool_button->setAutoRaise(true);
+  m_add_tab_tool_button->setIconSize(QSize(20, 20));
+  m_add_tab_tool_button->setStyleSheet
+    ("QToolButton {margin-bottom: 3px; margin-left: 5px; "
+     "margin-right: 5px; margin-top: 3px;}"
+     "QToolButton::menu-button {border: none;}");
+  m_add_tab_tool_button->setToolTip(tr("New Tab"));
   m_tab_bar = new dooble_tab_bar(this);
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
+  connect(m_add_tab_tool_button,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SIGNAL(new_tab(void)));
   connect(m_tab_bar,
 	  SIGNAL(decouple_tab(int)),
 	  this,
@@ -49,12 +66,22 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
 	  SIGNAL(open_tab_as_new_window(int)));
+  prepare_icons();
+  setCornerWidget(m_add_tab_tool_button);
   setTabBar(m_tab_bar);
 }
 
 dooble_page *dooble_tab_widget::page(int index) const
 {
   return qobject_cast<dooble_page *> (widget(index));
+}
+
+void dooble_tab_widget::prepare_icons(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  m_add_tab_tool_button->setIcon
+    (QIcon(QString(":/%1/32/add.png").arg(icon_set)));
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
@@ -186,6 +213,11 @@ void dooble_tab_widget::slot_load_started(void)
       if(movie->state() != QMovie::Running)
 	movie->start();
     }
+}
+
+void dooble_tab_widget::slot_settings_applied(void)
+{
+  prepare_icons();
 }
 
 void dooble_tab_widget::tabRemoved(int index)

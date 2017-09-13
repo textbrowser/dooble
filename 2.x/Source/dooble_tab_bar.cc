@@ -38,7 +38,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
     toolButton->setStyleSheet("QToolButton {background-color: lightgray; "
 			      "border: 1px solid #c4c4c3; "
 			      "margin-bottom: 1px;"
-			      "margin-top: 1px;"
+			      "margin-top: 2px;"
 			      "}"
 			      "QToolButton::menu-button {border: none;}");
 
