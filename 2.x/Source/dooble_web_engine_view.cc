@@ -79,6 +79,8 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
       m_page->profile()->setHttpCacheType
 	(QWebEngineProfile::defaultProfile()->httpCacheType());
+      m_page->profile()->setHttpUserAgent
+	(QWebEngineProfile::defaultProfile()->httpUserAgent());
       m_page->profile()->setRequestInterceptor
 	(dooble::s_url_request_interceptor);
       m_page->profile()->settings()->setAttribute

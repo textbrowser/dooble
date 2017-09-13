@@ -497,6 +497,8 @@ void dooble_settings::restore(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
+  QWebEngineProfile::defaultProfile()->setHttpUserAgent
+    (m_ui.user_agent->text());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
@@ -669,6 +671,8 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
+  QWebEngineProfile::defaultProfile()->setHttpUserAgent
+    (m_ui.user_agent->text());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
