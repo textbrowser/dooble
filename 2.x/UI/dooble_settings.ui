@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -547,8 +547,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>384</width>
-               <height>617</height>
+               <width>635</width>
+               <height>626</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1044,6 +1044,20 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <item>
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>User Agent</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="user_agent"/>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QCheckBox" name="web_plugins">
             <property name="text">
              <string>Web Plugins</string>
@@ -1196,6 +1210,7 @@
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
   <tabstop>javascript_popups</tabstop>
+  <tabstop>user_agent</tabstop>
   <tabstop>web_plugins</tabstop>
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
