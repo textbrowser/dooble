@@ -234,15 +234,9 @@ void dooble::closeEvent(QCloseEvent *event)
 	return;
       }
 
-  if(s_cookies_window)
-    s_cookies_window->close();
-
-  if(s_downloads)
-    s_downloads->abort();
-
-  if(s_history)
-    s_history->deleteLater();
-
+  s_cookies_window->close();
+  s_downloads->abort();
+  s_history->abort();
   QApplication::restoreOverrideCursor();
   QMainWindow::closeEvent(event);
   QApplication::exit(0);
@@ -355,20 +349,16 @@ void dooble::decouple_support_windows(void)
 {
   if(dooble_ui_utilities::
      find_parent_dooble(s_accepted_or_blocked_domains) == this)
-    if(s_accepted_or_blocked_domains)
-      s_accepted_or_blocked_domains->setParent(0);
+    s_accepted_or_blocked_domains->setParent(0);
 
   if(dooble_ui_utilities::find_parent_dooble(s_downloads) == this)
-    if(s_downloads)
-      s_downloads->setParent(0);
+    s_downloads->setParent(0);
 
   if(dooble_ui_utilities::find_parent_dooble(s_history_window) == this)
-    if(s_history_window)
-      s_history_window->setParent(0);
+    s_history_window->setParent(0);
 
   if(dooble_ui_utilities::find_parent_dooble(s_settings) == this)
-    if(s_settings)
-      s_settings->setParent(0);
+    s_settings->setParent(0);
 }
 
 void dooble::initialize_static_members(void)
@@ -1198,32 +1188,28 @@ void dooble::slot_settings_applied(void)
 #endif
 
   if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    if(s_accepted_or_blocked_domains)
-      {
-	m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
-	s_accepted_or_blocked_domains->setParent(0);
-      }
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
+      s_accepted_or_blocked_domains->setParent(0);
+    }
 
   if(!dooble_settings::setting("pin_downloads_window").toBool())
-    if(s_downloads)
-      {
-	m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
-	s_downloads->setParent(0);
-      }
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
+      s_downloads->setParent(0);
+    }
 
   if(!dooble_settings::setting("pin_history_window").toBool())
-    if(s_history_window)
-      {
-	m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
-	s_history_window->setParent(0);
-      }
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
+      s_history_window->setParent(0);
+    }
 
   if(!dooble_settings::setting("pin_settings_window").toBool())
-    if(s_settings)
-      {
-	m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
-	s_settings->setParent(0);
-      }
+    {
+      m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
+      s_settings->setParent(0);
+    }
 }
 
 void dooble::slot_show_about(void)

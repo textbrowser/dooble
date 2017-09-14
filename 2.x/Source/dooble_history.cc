@@ -55,9 +55,7 @@ dooble_history::dooble_history(void):QObject()
 
 dooble_history::~dooble_history()
 {
-  m_interrupt.fetchAndStoreOrdered(1);
-  m_purge_future.cancel();
-  m_purge_future.waitForFinished();
+  abort();
 }
 
 QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
@@ -78,6 +76,13 @@ QList<QPair<QIcon, QString> > dooble_history::urls(void) const
     }
 
   return list;
+}
+
+void dooble_history::abort(void)
+{
+  m_interrupt.store(1);
+  m_purge_future.cancel();
+  m_purge_future.waitForFinished();
 }
 
 void dooble_history::purge(const QByteArray &authentication_key,
