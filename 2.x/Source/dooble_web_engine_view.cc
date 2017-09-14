@@ -75,28 +75,10 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
       m_cookies_window = new dooble_cookies_window(m_is_private, this);
       m_cookies_window->setCookieStore(m_page->profile()->cookieStore());
       m_cookies_window->setCookies(m_cookies);
-      m_page->profile()->setHttpCacheMaximumSize
-	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
-      m_page->profile()->setHttpCacheType
-	(QWebEngineProfile::defaultProfile()->httpCacheType());
-      m_page->profile()->setHttpUserAgent
-	(QWebEngineProfile::defaultProfile()->httpUserAgent());
       m_page->profile()->setRequestInterceptor
 	(dooble::s_url_request_interceptor);
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::FullScreenSupportEnabled, true);
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptCanAccessClipboard,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptCanOpenWindows,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptEnabled));
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
       m_page->profile()->settings()->setAttribute
@@ -105,14 +87,6 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	(QWebEngineSettings::PluginsEnabled,
 	 QWebEngineSettings::defaultSettings()->
 	 testAttribute(QWebEngineSettings::PluginsEnabled));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::ScrollAnimatorEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::XSSAuditingEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::XSSAuditingEnabled));
       connect(dooble::s_settings,
 	      SIGNAL(applied(void)),
 	      this,
@@ -133,6 +107,7 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
 	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
 	      m_cookies,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+      copy_default_profile_settings();
     }
 
   setPage(m_page);
@@ -206,6 +181,43 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   menu->deleteLater();
 }
 
+void dooble_web_engine_view::copy_default_profile_settings(void)
+{
+  if(!m_is_private)
+    return;
+
+  /*
+  ** PluginsEnabled is not copied.
+  */
+
+  m_page->profile()->setHttpCacheMaximumSize
+    (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
+  m_page->profile()->setHttpCacheType
+    (QWebEngineProfile::defaultProfile()->httpCacheType());
+  m_page->profile()->setHttpUserAgent
+    (QWebEngineProfile::defaultProfile()->httpUserAgent());
+  m_page->profile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanAccessClipboard,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
+  m_page->profile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanOpenWindows,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
+  m_page->profile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::JavascriptEnabled));
+  m_page->profile()->settings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
+  m_page->profile()->settings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::XSSAuditingEnabled));
+}
+
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -237,35 +249,7 @@ void dooble_web_engine_view::slot_certificate_exception_accepted
 
 void dooble_web_engine_view::slot_settings_applied(void)
 {
-  if(m_is_private)
-    {
-      m_page->profile()->setHttpCacheMaximumSize
-	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
-      m_page->profile()->setHttpCacheType
-	(QWebEngineProfile::defaultProfile()->httpCacheType());
-      m_page->profile()->setHttpUserAgent
-	(QWebEngineProfile::defaultProfile()->httpUserAgent());
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptCanAccessClipboard,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptCanOpenWindows,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptEnabled));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::ScrollAnimatorEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::XSSAuditingEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::XSSAuditingEnabled));
-    }
+  copy_default_profile_settings();
 }
 
 void dooble_web_engine_view::show_private_cookies(void)

@@ -53,6 +53,7 @@ class dooble_web_engine_view: public QWebEngineView
   bool m_is_private;
   dooble_cookies *m_cookies;
   dooble_web_engine_page *m_page;
+  void copy_default_profile_settings(void);
 
  private slots:
   void slot_accept_or_block_domain(void);
