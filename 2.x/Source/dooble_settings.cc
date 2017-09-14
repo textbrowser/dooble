@@ -52,7 +52,7 @@
 #include "dooble_random.h"
 #include "dooble_settings.h"
 
-QAtomicInteger<quint64> dooble_settings::s_db_id;
+QAtomicInteger<quintptr> dooble_settings::s_db_id;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;

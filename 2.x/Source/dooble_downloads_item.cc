@@ -37,7 +37,7 @@
 #include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
 
-QAtomicInteger<quint64> dooble_downloads_item::s_db_id;
+QAtomicInteger<quintptr> dooble_downloads_item::s_db_id;
 
 dooble_downloads_item::dooble_downloads_item
 (QWebEngineDownloadItem *download, qint64 oid, QWidget *parent):QWidget(parent)

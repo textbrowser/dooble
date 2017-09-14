@@ -42,7 +42,7 @@ class dooble_favicons
 
  private:
   dooble_favicons(void);
-  static QAtomicInteger<quint64> s_db_id;
+  static QAtomicInteger<quintptr> s_db_id;
 };
 
 #endif

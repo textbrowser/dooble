@@ -38,7 +38,7 @@
 #include "dooble_history.h"
 #include "dooble_settings.h"
 
-QAtomicInteger<quint64> dooble_history::s_db_id;
+QAtomicInteger<quintptr> dooble_history::s_db_id;
 
 dooble_history::dooble_history(void):QObject()
 {

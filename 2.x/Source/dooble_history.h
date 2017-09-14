@@ -63,7 +63,7 @@ class dooble_history: public QObject
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<int, QVariant> > m_history;
   QTimer m_purge_timer;
-  static QAtomicInteger<quint64> s_db_id;
+  static QAtomicInteger<quintptr> s_db_id;
   void purge(const QByteArray &authentication_key,
 	     const QByteArray &encryption_key);
 

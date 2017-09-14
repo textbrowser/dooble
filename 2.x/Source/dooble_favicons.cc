@@ -35,7 +35,7 @@
 #include "dooble_favicons.h"
 #include "dooble_settings.h"
 
-QAtomicInteger<quint64> dooble_favicons::s_db_id;
+QAtomicInteger<quintptr> dooble_favicons::s_db_id;
 
 QIcon dooble_favicons::icon(const QUrl &url)
 {

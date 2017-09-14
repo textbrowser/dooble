@@ -75,7 +75,7 @@ class dooble_settings: public QMainWindow
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
-  static QAtomicInteger<quint64> s_db_id;
+  static QAtomicInteger<quintptr> s_db_id;
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
