@@ -68,6 +68,7 @@ class dooble_page: public QWidget
 			  bool state);
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
+  void reload(void);
   void show_menu(void);
 
  protected:

@@ -324,6 +324,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_open_tab_as_new_window(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(reload_tab(int)),
+	  this,
+	  SLOT(slot_reload_tab(int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)),
@@ -1178,6 +1183,14 @@ void dooble::slot_quit_dooble(void)
     return;
 
   QApplication::exit(0);
+}
+
+void dooble::slot_reload_tab(int index)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(page)
+    page->reload();
 }
 
 void dooble::slot_settings_applied(void)

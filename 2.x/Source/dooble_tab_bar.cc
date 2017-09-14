@@ -122,6 +122,14 @@ void dooble_tab_bar::slot_open_tab_as_new_window(void)
     emit open_tab_as_new_window(tabAt(action->property("point").toPoint()));
 }
 
+void dooble_tab_bar::slot_reload(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit reload_tab(tabAt(action->property("point").toPoint()));
+}
+
 void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 {
   QAction *action = 0;
@@ -147,6 +155,12 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addAction(tr("New &Tab"),
 		 this,
 		 SIGNAL(new_tab(void)));
+  menu.addSeparator();
+
+  QAction *reload_action = menu.addAction(tr("&Reload"),
+					  this,
+					  SLOT(slot_reload(void)));
+  reload_action->setProperty("point", point);
   menu.addSeparator();
   action = menu.addAction(tr("Web &Plugins"),
 			  this,
@@ -182,6 +196,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  SLOT(slot_decouple_tab(void)));
   action->setEnabled(!page && tab_at > -1);
   action->setProperty("point", point);
+  reload_action->setEnabled(page && tab_at > -1);
   menu.exec(mapToGlobal(point));
 }
 

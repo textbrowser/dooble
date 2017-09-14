@@ -75,6 +75,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
 	  SIGNAL(open_tab_as_new_window(int)));
+  connect(m_tab_bar,
+	  SIGNAL(reload_tab(int)),
+	  this,
+	  SIGNAL(reload_tab(int)));
   prepare_icons();
   setCornerWidget(m_add_tab_tool_button);
   setTabBar(m_tab_bar);

@@ -589,6 +589,11 @@ void dooble_page::print_page(QPrinter *printer)
 			});
 }
 
+void dooble_page::reload(void)
+{
+  m_view->reload();
+}
+
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
