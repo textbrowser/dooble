@@ -460,11 +460,12 @@ void dooble::new_page(dooble_page *page)
   if(title.isEmpty())
     title = tr("Dooble");
 
-  m_ui.tab->addTab(page, page->icon(), title);
+  m_ui.tab->addTab(page, title);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page);
 
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(m_ui.tab->currentWidget() == page)
@@ -477,11 +478,12 @@ void dooble::new_page(dooble_web_engine_view *view)
     (view ? view->is_private() : false, view, m_ui.tab);
 
   prepare_page_connections(page);
-  m_ui.tab->addTab(page, page->icon(), tr("Dooble"));
+  m_ui.tab->addTab(page, tr("Dooble"));
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page);
 
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(m_ui.tab->currentWidget() == page)
