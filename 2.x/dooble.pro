@@ -26,8 +26,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
                           -fPIE -fstack-protector-all -fwrapv \
                           -mtune=generic -std=c++11 -O3
 } win32 {
-QMAKE_CXXFLAGS_RELEASE += -Wall \
-			  -Werror -Wextra \
+QMAKE_CXXFLAGS_RELEASE += -Wall -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
