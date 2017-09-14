@@ -243,6 +243,8 @@ void dooble_web_engine_view::slot_settings_applied(void)
 	(QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
       m_page->profile()->setHttpCacheType
 	(QWebEngineProfile::defaultProfile()->httpCacheType());
+      m_page->profile()->setHttpUserAgent
+	(QWebEngineProfile::defaultProfile()->httpUserAgent());
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::JavascriptCanAccessClipboard,
 	 QWebEngineSettings::defaultSettings()->
@@ -255,6 +257,14 @@ void dooble_web_engine_view::slot_settings_applied(void)
 	(QWebEngineSettings::JavascriptEnabled,
 	 QWebEngineSettings::defaultSettings()->
 	 testAttribute(QWebEngineSettings::JavascriptEnabled));
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::ScrollAnimatorEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::XSSAuditingEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::XSSAuditingEnabled));
     }
 }
 

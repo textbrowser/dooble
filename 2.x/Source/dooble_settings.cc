@@ -386,6 +386,8 @@ void dooble_settings::restore(void)
     (s_settings.value("access_new_tabs", true).toBool());
   m_ui.animated_scrolling->setChecked
     (s_settings.value("animated_scrolling", false).toBool());
+  m_ui.auto_hide_tab_bar->setChecked
+    (s_settings.value("auto_hide_tab_bar", false).toBool());
   m_ui.browsing_history->setValue
     (qBound(m_ui.browsing_history->minimum(),
 	    s_settings.value("browsing_history_days", 15).toInt(),
@@ -722,6 +724,7 @@ void dooble_settings::slot_apply(void)
   prepare_proxy(true);
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
+  set_setting("auto_hide_tab_bar", m_ui.auto_hide_tab_bar->isChecked());
   set_setting("browsing_history_days", m_ui.browsing_history->value());
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());

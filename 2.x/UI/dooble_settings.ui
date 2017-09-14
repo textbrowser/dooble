@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>634</height>
+           <height>649</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -304,6 +304,16 @@
         <widget class="QWidget" name="display_page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <widget class="QCheckBox" name="auto_hide_tab_bar">
+            <property name="toolTip">
+             <string>Special icons will be displayed on some widgets.</string>
+            </property>
+            <property name="text">
+             <string>Auto-Hide Tab Bar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="denote_private_tabs">
             <property name="toolTip">
              <string>Special icons will be displayed on some widgets.</string>
@@ -540,8 +550,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>635</width>
-               <height>626</height>
+               <width>384</width>
+               <height>617</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1183,6 +1193,7 @@
   <tabstop>cache_size</tabstop>
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
+  <tabstop>auto_hide_tab_bar</tabstop>
   <tabstop>denote_private_tabs</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>

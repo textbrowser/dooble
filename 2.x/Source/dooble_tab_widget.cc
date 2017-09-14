@@ -53,6 +53,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #endif
   m_add_tab_tool_button->setToolTip(tr("New Tab"));
   m_tab_bar = new dooble_tab_bar(this);
+  m_tab_bar->setAutoHide
+    (dooble_settings::setting("auto_hide_tab_bar").toBool());
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -224,6 +226,8 @@ void dooble_tab_widget::slot_load_started(void)
 
 void dooble_tab_widget::slot_settings_applied(void)
 {
+  m_tab_bar->setAutoHide
+    (dooble_settings::setting("auto_hide_tab_bar").toBool());
   prepare_icons();
 }
 
