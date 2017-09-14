@@ -385,7 +385,7 @@
           <item>
            <widget class="QCheckBox" name="access_new_tabs">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, automatically switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Show New Tabs</string>
@@ -472,7 +472,7 @@
             <item>
              <widget class="QSpinBox" name="browsing_history">
               <property name="toolTip">
-               <string>Set to zero to disable browsing history.</string>
+               <string>Set to zero to disable the browsing history.</string>
               </property>
               <property name="suffix">
                <string> day(s)</string>
