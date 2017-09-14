@@ -891,36 +891,9 @@ void dooble_settings::slot_reset(void)
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();
   QApplication::exit(0);
-
-#ifdef Q_OS_WIN32
-  HINSTANCE rc = 0;
-  QString program(QCoreApplication::applicationDirPath() +
-		  QDir::separator() +
-		  QCoreApplication::applicationName());
-
-  rc = ::ShellExecuteA(0,
-		       "open",
-		       program.toUtf8().constData(),
-		       0,
-		       0,
-		       SW_SHOWNORMAL);
-
-  if(SE_ERR_ACCESSDENIED == static_cast<int> (rc))
-    /*
-    ** Elevated?
-    */
-
-    ::ShellExecuteA(0,
-		    "runas",
-		    program.toUtf8().constData(),
-		    0,
-		    0,
-		    SW_SHOWNORMAL);
-#else
   QProcess::startDetached(QCoreApplication::applicationDirPath() +
 			  QDir::separator() +
 			  QCoreApplication::applicationName());
-#endif
 }
 
 void dooble_settings::slot_reset_credentials(void)

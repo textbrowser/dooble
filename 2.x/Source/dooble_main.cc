@@ -73,8 +73,6 @@ class dooble_thread: public QThread
   }
 };
 
-static char *s_doobleAbortedFileName = 0;
-
 static void signal_handler(int signal_number)
 {
   /*
@@ -87,27 +85,6 @@ static void signal_handler(int signal_number)
     _Exit(signal_number);
 
   fatal_error = 1;
-
-  if(signal_number == SIGTERM)
-    {
-      /*
-      ** Remove restoration files.
-      */
-    }
-  else
-    {
-      /*
-      ** Create a special file.
-      */
-
-      if(s_doobleAbortedFileName)
-#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
-	close(open(s_doobleAbortedFileName, O_CREAT, S_IRUSR | S_IWUSR));
-#else
-        close(creat(s_doobleAbortedFileName, O_CREAT));
-#endif
-    }
-
   _Exit(signal_number);
 }
 
