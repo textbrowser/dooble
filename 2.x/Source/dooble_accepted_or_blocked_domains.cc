@@ -506,11 +506,11 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  progress.update();
 
 	  QByteArray data(2048, 0);
-	  qint64 line = 0;
-	  qint64 rc = 0;
+	  qintptr line = 0;
+	  qintptr rc = 0;
 
 	  while((rc = file.readLine(data.data(),
-				    static_cast<qint64> (data.length()))) >= 0)
+				    static_cast<qintptr> (data.length()))) >= 0)
 	    {
 	      if(progress.wasCanceled())
 		break;

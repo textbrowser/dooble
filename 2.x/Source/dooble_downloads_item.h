@@ -44,26 +44,26 @@ class dooble_downloads_item: public QWidget
 
  public:
   dooble_downloads_item(QWebEngineDownloadItem *download,
-			qint64 oid,
+			qintptr oid,
 			QWidget *parent);
   dooble_downloads_item(const QString &file_name,
 			const QString &information,
 			const QUrl &url,
-			qint64 oid,
+			qintptr oid,
 			QWidget *parent);
   ~dooble_downloads_item();
   QUrl url(void) const;
   bool is_finished(void) const;
-  qint64 oid(void) const;
+  qintptr oid(void) const;
 
  private:
   QTime m_last_time;
   QPointer<QWebEngineDownloadItem> m_download;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
-  qint64 m_oid;
-  qint64 m_last_bytes_received;
-  qint64 m_rate;
+  qintptr m_oid;
+  qintptr m_last_bytes_received;
+  qintptr m_rate;
   static QAtomicInteger<quintptr> s_db_id;
   void prepare_icons(void);
   void record(void);
@@ -71,7 +71,7 @@ class dooble_downloads_item: public QWidget
 
  private slots:
   void slot_cancel(void);
-  void slot_download_progress(qint64 bytes_received, qint64 bytes_total);
+  void slot_download_progress(qintptr bytes_received, qintptr bytes_total);
   void slot_finished(void);
   void slot_settings_applied(void);
 };

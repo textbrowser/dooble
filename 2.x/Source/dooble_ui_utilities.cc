@@ -33,7 +33,7 @@
 #include "dooble_application.h"
 #include "dooble_ui_utilities.h"
 
-QString dooble_ui_utilities::pretty_size(qint64 size)
+QString dooble_ui_utilities::pretty_size(qintptr size)
 {
   if(size < 0)
     return QObject::tr("0 Bytes");

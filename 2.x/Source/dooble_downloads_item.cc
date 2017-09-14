@@ -40,7 +40,7 @@
 QAtomicInteger<quintptr> dooble_downloads_item::s_db_id;
 
 dooble_downloads_item::dooble_downloads_item
-(QWebEngineDownloadItem *download, qint64 oid, QWidget *parent):QWidget(parent)
+(QWebEngineDownloadItem *download, qintptr oid, QWidget *parent):QWidget(parent)
 {
   m_download = download;
   m_last_bytes_received = 0;
@@ -68,9 +68,9 @@ dooble_downloads_item::dooble_downloads_item
 	      this,
 	      SLOT(slot_finished(void)));
       connect(m_download,
-	      SIGNAL(downloadProgress(qint64, qint64)),
+	      SIGNAL(downloadProgress(qintptr, qintptr)),
 	      this,
-	      SLOT(slot_download_progress(qint64, qint64)));
+	      SLOT(slot_download_progress(qintptr, qintptr)));
       connect(m_download,
 	      SIGNAL(finished(void)),
 	      this,
@@ -101,7 +101,7 @@ dooble_downloads_item::dooble_downloads_item
 dooble_downloads_item::dooble_downloads_item(const QString &file_name,
 					     const QString &information,
 					     const QUrl &url,
-					     qint64 oid,
+					     qintptr oid,
 					     QWidget *parent):QWidget(parent)
 {
   m_oid = oid;
@@ -137,7 +137,7 @@ bool dooble_downloads_item::is_finished(void) const
     return true;
 }
 
-qint64 dooble_downloads_item::oid(void) const
+qintptr dooble_downloads_item::oid(void) const
 {
   return m_oid;
 }
@@ -274,8 +274,8 @@ void dooble_downloads_item::slot_cancel(void)
     m_download->cancel();
 }
 
-void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
-						   qint64 bytes_total)
+void dooble_downloads_item::slot_download_progress(qintptr bytes_received,
+						   qintptr bytes_total)
 {
   int seconds = 0;
 

@@ -63,7 +63,7 @@ class dooble_downloads: public QMainWindow
   QTimer m_search_timer;
   Ui_dooble_downloads m_ui;
   void delete_selected(void);
-  void remove_entry(qint64 oid);
+  void remove_entry(qintptr oid);
   void save_settings(void);
 
  private slots:

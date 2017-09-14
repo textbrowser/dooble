@@ -222,7 +222,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
   m_ui.table->scrollToBottom();
 }
 
-void dooble_downloads::remove_entry(qint64 oid)
+void dooble_downloads::remove_entry(qintptr oid)
 {
   QString database_name("dooble_downloads");
 
@@ -444,7 +444,7 @@ void dooble_downloads::slot_populate(void)
 	      QString file_name("");
 	      QString information("");
 	      QUrl url;
-	      qint64 oid = -1;
+	      qintptr oid = -1;
 
 	      for(int i = 0; i < query.record().count(); i++)
 		switch(i)

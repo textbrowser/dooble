@@ -60,7 +60,7 @@ QByteArray dooble_random::random_bytes(int length)
 
       if(bytes.length() !=
 	 static_cast<int> (file.read(bytes.data(),
-				     static_cast<qint64> (bytes.length()))))
+				     static_cast<qintptr> (bytes.length()))))
 	bytes.clear();
     }
 #endif
