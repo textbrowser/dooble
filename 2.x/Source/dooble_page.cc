@@ -790,6 +790,12 @@ void dooble_page::slot_go_to_forward_item(void)
 
 void dooble_page::slot_icon_changed(const QIcon &icon)
 {
+  if(dooble::s_history && !m_is_private)
+    dooble::s_history->save_favicon(icon, m_view->url());
+
+  if(!m_is_private)
+    dooble_favicons::save_favicon(icon, m_view->url());
+
   m_ui.address->set_item_icon(icon, m_view->url());
 }
 
@@ -818,7 +824,7 @@ void dooble_page::slot_load_finished(bool ok)
     dooble::s_history->save_item(icon(), m_view->history()->currentItem());
 
   if(!m_is_private)
-    dooble_favicons::save_favicon(icon(), url());
+    dooble_favicons::save_favicon(icon(), m_view->url());
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 

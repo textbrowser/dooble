@@ -73,6 +73,7 @@ dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
 
 dooble::dooble(QWidget *widget):QMainWindow()
 {
+  initialize_static_members();
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
@@ -367,11 +368,11 @@ void dooble::decouple_support_windows(void)
 
 void dooble::initialize_static_members(void)
 {
-  if(!s_accepted_or_blocked_domains)
-    s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
-
   if(!s_about)
     s_about = new dooble_about();
+
+  if(!s_accepted_or_blocked_domains)
+    s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
 
   if(!s_cookies)
     s_cookies = new dooble_cookies(false, 0);
@@ -1058,16 +1059,8 @@ void dooble::slot_icon_changed(const QIcon &icon)
 {
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
-  if(!page)
-    return;
-
-  if(dooble::s_history && !page->is_private())
-    dooble::s_history->save_favicon(icon, page->url());
-
-  if(!page->is_private())
-    dooble_favicons::save_favicon(icon, page->url());
-
-  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
+  if(page)
+    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }
 
 void dooble::slot_load_started(void)
