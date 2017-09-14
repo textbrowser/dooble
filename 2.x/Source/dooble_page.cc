@@ -821,6 +821,9 @@ void dooble_page::slot_load_finished(bool ok)
   if(dooble::s_history && !m_is_private)
     dooble::s_history->save_item(icon(), m_view->history()->currentItem());
 
+  if(!m_is_private)
+    dooble_favicons::save_favicon(icon(), url());
+
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.progress->setVisible(false);

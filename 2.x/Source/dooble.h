@@ -118,7 +118,6 @@ class dooble: public QMainWindow
   void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_icon_changed(const QIcon &icon);
-  void slot_load_finished(bool ok);
   void slot_load_started(void);
   void slot_new_private_tab(void);
   void slot_new_tab(void);

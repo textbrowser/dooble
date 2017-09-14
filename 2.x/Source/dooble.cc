@@ -550,12 +550,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
-	  SIGNAL(loadFinished(bool)),
-	  this,
-	  SLOT(slot_load_finished(bool)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
-  connect(page,
 	  SIGNAL(loadStarted(void)),
 	  m_ui.tab,
 	  SLOT(slot_load_started(void)),
@@ -1074,18 +1068,6 @@ void dooble::slot_icon_changed(const QIcon &icon)
     dooble_favicons::save_favicon(icon, page->url());
 
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
-}
-
-void dooble::slot_load_finished(bool ok)
-{
-  Q_UNUSED(ok);
-
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
-
-  if(!page || page->is_private())
-    return;
-
-  dooble_favicons::save_favicon(page->icon(), page->url());
 }
 
 void dooble::slot_load_started(void)
