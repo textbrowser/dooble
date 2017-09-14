@@ -305,9 +305,6 @@
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QCheckBox" name="auto_hide_tab_bar">
-            <property name="toolTip">
-             <string>Special icons will be displayed on some widgets.</string>
-            </property>
             <property name="text">
              <string>Auto-Hide Tab Bar</string>
             </property>
