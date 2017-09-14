@@ -59,17 +59,18 @@
 
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
-dooble_about *dooble::s_about = 0;
-dooble_accepted_or_blocked_domains *dooble::s_accepted_or_blocked_domains = 0;
-dooble_application *dooble::s_application = 0;
-dooble_cookies *dooble::s_cookies = 0;
-dooble_cookies_window *dooble::s_cookies_window = 0;
-dooble_cryptography *dooble::s_cryptography = 0;
-dooble_downloads *dooble::s_downloads = 0;
-dooble_history_window *dooble::s_history_window = 0;
-dooble_settings *dooble::s_settings = 0;
-dooble_web_engine_url_request_interceptor *dooble::s_url_request_interceptor =
-  0;
+QPointer<dooble_about> dooble::s_about
+QPointer<dooble_accepted_or_blocked_domains>
+dooble::s_accepted_or_blocked_domains;
+QPointer<dooble_application> dooble::s_application;
+QPointer<dooble_cookies> dooble::s_cookies;
+QPointer<dooble_cookies_window> dooble::s_cookies_window;
+QPointer<dooble_cryptography> dooble::s_cryptography ;
+QPointer<dooble_downloads> dooble::s_downloads;
+QPointer<dooble_history_window> dooble::s_history_window;
+QPointer<dooble_settings> dooble::s_settings;
+QPointer<dooble_web_engine_url_request_interceptor>
+dooble::s_url_request_interceptor;
 
 dooble::dooble(QWidget *widget):QMainWindow()
 {
@@ -354,16 +355,20 @@ void dooble::decouple_support_windows(void)
 {
   if(dooble_ui_utilities::
      find_parent_dooble(s_accepted_or_blocked_domains) == this)
-    s_accepted_or_blocked_domains->setParent(0);
+    if(s_accepted_or_blocked_domains)
+      s_accepted_or_blocked_domains->setParent(0);
 
   if(dooble_ui_utilities::find_parent_dooble(s_downloads) == this)
-    s_downloads->setParent(0);
+    if(s_downloads)
+      s_downloads->setParent(0);
 
   if(dooble_ui_utilities::find_parent_dooble(s_history_window) == this)
-    s_history_window->setParent(0);
+    if(s_history_window)
+      s_history_window->setParent(0);
 
   if(dooble_ui_utilities::find_parent_dooble(s_settings) == this)
-    s_settings->setParent(0);
+    if(s_settings)
+      s_settings->setParent(0);
 }
 
 void dooble::initialize_static_members(void)
@@ -1193,32 +1198,39 @@ void dooble::slot_settings_applied(void)
 #endif
 
   if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    {
-      m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
-      s_accepted_or_blocked_domains->setParent(0);
-    }
+    if(s_accepted_or_blocked_domains)
+      {
+	m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
+	s_accepted_or_blocked_domains->setParent(0);
+      }
 
   if(!dooble_settings::setting("pin_downloads_window").toBool())
-    {
-      m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
-      s_downloads->setParent(0);
-    }
+    if(s_downloads)
+      {
+	m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
+	s_downloads->setParent(0);
+      }
 
   if(!dooble_settings::setting("pin_history_window").toBool())
-    {
-      m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
-      s_history_window->setParent(0);
-    }
+    if(s_history_window)
+      {
+	m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
+	s_history_window->setParent(0);
+      }
 
   if(!dooble_settings::setting("pin_settings_window").toBool())
-    {
-      m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
-      s_settings->setParent(0);
-    }
+    if(s_settings)
+      {
+	m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
+	s_settings->setParent(0);
+      }
 }
 
 void dooble::slot_show_about(void)
 {
+  if(!s_about)
+    return;
+
   s_about->resize(s_about->sizeHint());
   s_about->show();
   dooble_ui_utilities::center_window_widget(this, s_about);
