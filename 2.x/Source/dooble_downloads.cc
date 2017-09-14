@@ -160,7 +160,7 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
 	delete_selected();
       else if(event->key() == Qt::Key_Escape)
 	{
-	  if(!parent())
+	  if(parent())
 	    {
 	      event->ignore();
 	      return;
