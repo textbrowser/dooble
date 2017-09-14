@@ -50,7 +50,7 @@ class dooble_pbkdf2: public QObject
   static void test1(void);
 
  private:
-  QAtomicInteger<bool> m_interrupt;
+  QAtomicInteger<short> m_interrupt;
   QByteArray m_password;
   QByteArray m_salt;
   int m_iteration_count;
