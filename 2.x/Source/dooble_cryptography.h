@@ -29,10 +29,13 @@
 #define dooble_cryptography_h
 
 #include <QByteArray>
+#include <QObject>
 #include <QPair>
 
-class dooble_cryptography
+class dooble_cryptography: public QObject
 {
+  Q_OBJECT
+
  public:
   dooble_cryptography(const QByteArray &authentication_key,
 		      const QByteArray &encryption_key);

@@ -59,13 +59,13 @@
 
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
-QPointer<dooble_about> dooble::s_about
+QPointer<dooble_about> dooble::s_about;
 QPointer<dooble_accepted_or_blocked_domains>
 dooble::s_accepted_or_blocked_domains;
 QPointer<dooble_application> dooble::s_application;
 QPointer<dooble_cookies> dooble::s_cookies;
 QPointer<dooble_cookies_window> dooble::s_cookies_window;
-QPointer<dooble_cryptography> dooble::s_cryptography ;
+QPointer<dooble_cryptography> dooble::s_cryptography;
 QPointer<dooble_downloads> dooble::s_downloads;
 QPointer<dooble_history_window> dooble::s_history_window;
 QPointer<dooble_settings> dooble::s_settings;
