@@ -296,10 +296,6 @@ void dooble_address_widget::set_text_format
   QApplication::sendEvent(this, &event);
 }
 
-void dooble_address_widget::slot_load_finished(void)
-{
-}
-
 void dooble_address_widget::slot_load_started(void)
 {
   m_information->setEnabled(false);

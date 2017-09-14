@@ -187,10 +187,6 @@ dooble_page::dooble_page(bool is_private,
 	  SLOT(slot_icon_changed(const QIcon &)));
   connect(m_view,
 	  SIGNAL(loadFinished(bool)),
-	  m_ui.address,
-	  SLOT(slot_load_finished(void)));
-  connect(m_view,
-	  SIGNAL(loadFinished(bool)),
 	  this,
 	  SIGNAL(loadFinished(bool)));
   connect(m_view,
