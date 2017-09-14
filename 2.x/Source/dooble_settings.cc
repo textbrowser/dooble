@@ -871,6 +871,7 @@ void dooble_settings::slot_reset(void)
   if(mb.exec() != QMessageBox::Yes)
     return;
 
+  QApplication::processEvents();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QStringList list;
@@ -890,10 +891,10 @@ void dooble_settings::slot_reset(void)
 
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();
-  QApplication::exit(0);
   QProcess::startDetached(QCoreApplication::applicationDirPath() +
 			  QDir::separator() +
 			  QCoreApplication::applicationName());
+  QApplication::exit(0);
 }
 
 void dooble_settings::slot_reset_credentials(void)
