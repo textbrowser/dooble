@@ -304,13 +304,6 @@
         <widget class="QWidget" name="display_page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QCheckBox" name="animated_scrolling">
-            <property name="text">
-             <string>Animated Scrolling</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="denote_private_tabs">
             <property name="toolTip">
              <string>Special icons will be displayed on some widgets.</string>
@@ -547,8 +540,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>452</width>
-               <height>642</height>
+               <width>635</width>
+               <height>626</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1005,6 +998,13 @@
         <widget class="QWidget" name="web_page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
+           <widget class="QCheckBox" name="animated_scrolling">
+            <property name="text">
+             <string>Animated Scrolling</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QGroupBox" name="javascript">
             <property name="title">
              <string>JavaScript</string>
@@ -1183,7 +1183,6 @@
   <tabstop>cache_size</tabstop>
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
-  <tabstop>animated_scrolling</tabstop>
   <tabstop>denote_private_tabs</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>
@@ -1210,6 +1209,7 @@
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
   <tabstop>utc_time_zone</tabstop>
+  <tabstop>animated_scrolling</tabstop>
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
