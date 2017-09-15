@@ -55,6 +55,7 @@ class dooble_settings: public QMainWindow
 
   dooble_settings(void);
   static QString cookie_policy_string(int index);
+  static QString zoom_frame_location_string(int index);
   static QVariant setting(const QString &key);
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);

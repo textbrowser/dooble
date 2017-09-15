@@ -44,6 +44,11 @@ dooble_popup_menu::dooble_popup_menu(QWidget *parent):QDialog(parent)
   else
     m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
 
+  m_ui.zoom_frame->setVisible
+    (dooble_settings::
+     zoom_frame_location_string(dooble_settings::
+				setting("zoom_frame_location_index").
+				toInt()) == "popup_menu");
   connect(m_ui.authenticate,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -177,4 +182,18 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       emit show_settings();
       accept();
     }
+  else if(m_ui.zoom_in == sender())
+    emit zoom_in();
+  else if(m_ui.zoom_out == sender())
+    emit zoom_out();
+  else if(m_ui.zoom_reset == sender())
+    emit zoom_reset();
+}
+
+void dooble_popup_menu::slot_zoom_factor(qreal zoom_factor)
+{
+  m_ui.zoom_reset->setText
+    (tr("%1%").
+     arg(QString::
+	 number(static_cast<int> (100 * qBound(0.25, zoom_factor, 5.0)))));
 }

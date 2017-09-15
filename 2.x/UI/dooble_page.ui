@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>444</height>
+    <width>450</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -108,6 +108,78 @@
        <property name="placeholderText">
         <string>Enter Address</string>
        </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="zoom_frame">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QToolButton" name="zoom_in">
+          <property name="toolTip">
+           <string>Zoom In</string>
+          </property>
+          <property name="text">
+           <string>+</string>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="zoom_reset">
+          <property name="toolTip">
+           <string>Zoom Reset</string>
+          </property>
+          <property name="text">
+           <string>100%</string>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="zoom_out">
+          <property name="toolTip">
+           <string>Zoom Out</string>
+          </property>
+          <property name="text">
+           <string>-</string>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -403,6 +475,9 @@
   <tabstop>forward</tabstop>
   <tabstop>reload</tabstop>
   <tabstop>address</tabstop>
+  <tabstop>zoom_in</tabstop>
+  <tabstop>zoom_reset</tabstop>
+  <tabstop>zoom_out</tabstop>
   <tabstop>downloads</tabstop>
   <tabstop>menu</tabstop>
   <tabstop>find_stop</tabstop>

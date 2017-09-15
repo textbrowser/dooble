@@ -132,6 +132,10 @@ class dooble_page: public QWidget
   void slot_show_pull_down_menu(void);
   void slot_show_status_bar(bool state);
   void slot_url_changed(const QUrl &url);
+  void slot_zoom(void);
+  void slot_zoom_in(void);
+  void slot_zoom_out(void);
+  void slot_zoom_reset(void);
 
  signals:
   void authenticate(void);
@@ -158,6 +162,7 @@ class dooble_page: public QWidget
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
   void titleChanged(const QString &title);
+  void zoom_factor(qreal zoom_factor);
 };
 
 #endif

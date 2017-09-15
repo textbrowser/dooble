@@ -130,6 +130,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["status_bar_visible"] = true;
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
+  s_settings["zoom_frame_location_index"] = 0;
   restore();
   prepare_icons();
 }
@@ -142,6 +143,16 @@ QString dooble_settings::cookie_policy_string(int index)
     return "save_all";
   else
     return "save_persistent_only";
+}
+
+QString dooble_settings::zoom_frame_location_string(int index)
+{
+  if(index == 0)
+    return "main_window";
+  else if(index == 1)
+    return "popup_menu";
+  else
+    return "main_window";
 }
 
 QVariant dooble_settings::setting(const QString &key)
@@ -451,6 +462,10 @@ void dooble_settings::restore(void)
   m_ui.user_agent->setToolTip(m_ui.user_agent->text());
   m_ui.user_agent->setCursorPosition(0);
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
+  m_ui.zoom_frame_location->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("zoom_frame_location_index", 0).toInt(),
+	    m_ui.zoom_frame_location->count() - 1));
   s_settings["accepted_or_blocked_domains_mode"] =
     s_settings.value("accepted_or_blocked_domains_mode", "block").
     toString().toLower();
@@ -764,6 +779,8 @@ void dooble_settings::slot_apply(void)
   set_setting("user_agent", m_ui.user_agent->text().trimmed());
   set_setting("web_plugins", m_ui.web_plugins->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
+  set_setting
+    ("zoom_frame_location_index", m_ui.zoom_frame_location->currentIndex());
   prepare_icons();
   QApplication::restoreOverrideCursor();
   emit applied();
