@@ -112,12 +112,6 @@
      </item>
      <item>
       <widget class="QFrame" name="zoom_frame">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
        </property>
@@ -155,6 +149,12 @@
         </item>
         <item>
          <widget class="QToolButton" name="zoom_reset">
+          <property name="minimumSize">
+           <size>
+            <width>75</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="toolTip">
            <string>Zoom Reset</string>
           </property>
