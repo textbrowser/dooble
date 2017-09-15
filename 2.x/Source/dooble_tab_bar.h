@@ -56,6 +56,7 @@ class dooble_tab_bar: public QTabBar
   void new_tab(void);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);
+  void set_visible_corner_button(bool state);
 };
 
 #endif

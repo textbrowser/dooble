@@ -54,6 +54,7 @@ class dooble_tab_widget: public QTabWidget
  private slots:
   void slot_load_finished(void);
   void slot_load_started(void);
+  void slot_set_visible_corner_button(bool state);
   void slot_settings_applied(void);
 
  signals:
