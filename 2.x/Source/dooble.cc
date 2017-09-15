@@ -1398,7 +1398,15 @@ void dooble::slot_tab_index_changed(int index)
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(!page)
-    return;
+    {
+      QMainWindow *main_window = qobject_cast<QMainWindow *>
+	(m_ui.tab->widget(index));
+
+      if(main_window)
+	setWindowTitle(main_window->windowTitle());
+
+      return;
+    }
   else if(page != m_ui.tab->currentWidget())
     return;
 
