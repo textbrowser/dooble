@@ -39,6 +39,8 @@ class dooble_tab_bar: public QTabBar
 
  protected:
   QSize tabSizeHint(int index) const;
+  void hideEvent(QHideEvent *event);
+  void showEvent(QShowEvent *event);
 
  private slots:
   void slot_close_other_tabs(void);

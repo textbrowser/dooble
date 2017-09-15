@@ -43,7 +43,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 			      "QToolButton::menu-button {border: none;}");
 
   setContextMenuPolicy(Qt::CustomContextMenu);
-  setDocumentMode(true);
+  setDocumentMode(!dooble_settings::setting("auto_hide_tab_bar").toBool());
   setElideMode(Qt::ElideRight);
   setExpanding(true);
   setMovable(true);
@@ -82,6 +82,18 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 
   size.setWidth(preferred_tab_width);
   return size;
+}
+
+void dooble_tab_bar::hideEvent(QHideEvent *event)
+{
+  setDocumentMode(false); // Prevent minute distortions of the tab bar widget.
+  QTabBar::hideEvent(event);
+}
+
+void dooble_tab_bar::showEvent(QShowEvent *event)
+{
+  setDocumentMode(true);
+  QTabBar::showEvent(event);
 }
 
 void dooble_tab_bar::slot_close_other_tabs(void)
