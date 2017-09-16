@@ -35,7 +35,8 @@
 #include "dooble_random.h"
 
 dooble_cryptography::dooble_cryptography
-(const QByteArray &authentication_key, const QByteArray &encryption_key)
+(const QByteArray &authentication_key, const QByteArray &encryption_key):
+  QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
@@ -51,7 +52,7 @@ dooble_cryptography::dooble_cryptography
     }
 }
 
-dooble_cryptography::dooble_cryptography(void)
+dooble_cryptography::dooble_cryptography(void):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
