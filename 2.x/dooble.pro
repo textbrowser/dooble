@@ -113,6 +113,10 @@ OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 
 RESOURCES       += Icons\\icons.qrc
 
+win32 {
+RC_FILE         = Icons\\dooble.rc
+}
+
 SOURCES		= Source\\dooble.cc \
                   Source\\dooble_about.cc \
                   Source\\dooble_accepted_or_blocked_domains.cc \
