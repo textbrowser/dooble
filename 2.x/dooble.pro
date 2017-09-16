@@ -1,3 +1,7 @@
+lessThan(QT_VERSION, 5.9.1) {
+error("Qt version 5.9.1, or newer, is required.")
+}
+
 cache()
 
 unix {
