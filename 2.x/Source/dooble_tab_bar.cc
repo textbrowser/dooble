@@ -56,10 +56,10 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		"subcontrol-position: right;"
 		"width: 16px;}"
 		"QTabBar::tear {"
-		"image: none;}");
+		"border: none; image: none; width: 0px;}");
 #else
   setStyleSheet("QTabBar::tear {"
-		"image: none;}");
+		"border: none; image: none; width: 0px;}");
 #endif
   setUsesScrollButtons(true);
   connect(this,
