@@ -28,6 +28,8 @@
 #include <QMenu>
 #include <QWebEngineSettings>
 
+#include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
@@ -35,14 +37,24 @@
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
   foreach(QToolButton *toolButton, findChildren <QToolButton *> ())
-    toolButton->setStyleSheet
-    (QString("QToolButton {background-color: %1;"
-	     "border: none;"
-	     "margin-bottom: 3px;"
-	     "margin-top: 3px;"
-	     "}"
-	     "QToolButton::menu-button {border: none;}").
-     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+    if(dooble::s_application->style_name() == "macintosh")
+      toolButton->setStyleSheet
+	(QString("QToolButton {background-color: %1;"
+		 "border: none;"
+		 "margin-bottom: 0px;"
+		 "margin-top: 0px;"
+		 "}"
+		 "QToolButton::menu-button {border: none;}").
+	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+    else      
+      toolButton->setStyleSheet
+	(QString("QToolButton {background-color: %1;"
+		 "border: none;"
+		 "margin-bottom: 3px;"
+		 "margin-top: 3px;"
+		 "}"
+		 "QToolButton::menu-button {border: none;}").
+	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
 
   setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
