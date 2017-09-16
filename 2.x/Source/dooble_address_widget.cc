@@ -48,9 +48,9 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_bookmark->setIconSize(QSize(16, 16));
   m_bookmark->setStyleSheet
     ("QToolButton {"
-     "border: none; "
-     "padding-top: 0px; "
-     "padding-bottom: 0px; "
+     "border: none;"
+     "padding-top: 0px;"
+     "padding-bottom: 0px;"
      "}");
   m_bookmark->setToolTip(tr("Bookmark"));
   m_completer = new dooble_address_widget_completer(this);
@@ -60,9 +60,9 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_information->setIconSize(QSize(16, 16));
   m_information->setStyleSheet
     ("QToolButton {"
-     "border: none; "
-     "padding-top: 0px; "
-     "padding-bottom: 0px; "
+     "border: none;"
+     "padding-top: 0px;"
+     "padding-bottom: 0px;"
      "}");
   m_information->setToolTip(tr("Site Information"));
   m_line = new QFrame(this);
@@ -78,9 +78,9 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_pull_down->setIconSize(QSize(16, 16));
   m_pull_down->setStyleSheet
     ("QToolButton {"
-     "border: none; "
-     "padding-top: 0px; "
-     "padding-bottom: 0px; "
+     "border: none;"
+     "padding-top: 0px;"
+     "padding-bottom: 0px;"
      "}");
   m_pull_down->setToolTip(tr("Show History"));
   connect(dooble::s_settings,

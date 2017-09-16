@@ -41,7 +41,7 @@ dooble_search_widget::dooble_search_widget(QWidget *parent):QLineEdit(parent)
   m_find_tool_button->setCursor(Qt::ArrowCursor);
   m_find_tool_button->setIconSize(QSize(16, 16));
   m_find_tool_button->setStyleSheet("QToolButton {"
-				    "border: none; "
+				    "border: none;"
 				    "padding-bottom: 0px;}");
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
