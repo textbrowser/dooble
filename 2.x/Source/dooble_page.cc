@@ -272,6 +272,11 @@ QAction *dooble_page::action_close_tab(void) const
   return m_action_close_tab;
 }
 
+QAction *dooble_page::full_screen_action(void) const
+{
+  return m_full_screen_action;
+}
+
 QIcon dooble_page::icon(void) const
 {
   return dooble_favicons::icon(m_view->url());

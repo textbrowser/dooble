@@ -79,8 +79,9 @@ dooble::dooble(QWidget *widget):QMainWindow()
   m_ui.setupUi(this);
   connect_signals();
 #ifndef Q_OS_MACOS
-  m_ui.menu_bar->setVisible
-    (dooble_settings::setting("main_menu_bar_visible").toBool());
+  if(!isFullScreen())
+    m_ui.menu_bar->setVisible
+      (dooble_settings::setting("main_menu_bar_visible").toBool());
 #else
   setMenuBar(0);
 #endif
@@ -117,8 +118,9 @@ dooble::dooble(dooble_page *page):QMainWindow()
   m_ui.setupUi(this);
   connect_signals();
 #ifndef Q_OS_MACOS
-  m_ui.menu_bar->setVisible
-    (dooble_settings::setting("main_menu_bar_visible").toBool());
+  if(!isFullScreen())
+    m_ui.menu_bar->setVisible
+      (dooble_settings::setting("main_menu_bar_visible").toBool());
 #else
   setMenuBar(0);
 #endif
@@ -147,8 +149,9 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   m_ui.setupUi(this);
   connect_signals();
 #ifndef Q_OS_MACOS
-  m_ui.menu_bar->setVisible
-    (dooble_settings::setting("main_menu_bar_visible").toBool());
+  if(!isFullScreen())
+    m_ui.menu_bar->setVisible
+      (dooble_settings::setting("main_menu_bar_visible").toBool());
 #else
   setMenuBar(0);
 #endif
@@ -825,6 +828,9 @@ void dooble::show(void)
 					   toByteArray()));
 
   QMainWindow::show();
+
+  if(isFullScreen())
+    m_ui.menu_bar->setVisible(false);
 }
 
 void dooble::slot_about_to_hide_main_menu(void)
@@ -870,7 +876,26 @@ void dooble::slot_about_to_show_main_menu(void)
 	  else if(m_ui.menu_tools == menu && m->actions()[2]->menu())
 	    m_ui.menu_tools->addActions(m->actions()[2]->menu()->actions());
 	  else if(m_ui.menu_view == menu && m->actions()[3]->menu())
-	    m_ui.menu_view->addActions(m->actions()[3]->menu()->actions());
+	    {
+	      m_ui.menu_view->addActions(m->actions()[3]->menu()->actions());
+
+	      if(page && page->full_screen_action())
+		{
+		  if(isFullScreen())
+		    page->full_screen_action()->setText
+		      (tr("Show &Normal Screen"));
+		  else
+		    page->full_screen_action()->setText
+		      (tr("Show &Full Screen"));
+		}
+	      else if(m_full_screen_action)
+		{
+		  if(isFullScreen())
+		    m_full_screen_action->setText(tr("Show &Normal Screen"));
+		  else
+		    m_full_screen_action->setText(tr("Show &Full Screen"));
+		}
+	    }
 	}
     }
 }
@@ -1196,8 +1221,9 @@ void dooble::slot_reload_tab(int index)
 void dooble::slot_settings_applied(void)
 {
 #ifndef Q_OS_MACOS
-  m_ui.menu_bar->setVisible
-    (dooble_settings::setting("main_menu_bar_visible").toBool());
+  if(!isFullScreen())
+    m_ui.menu_bar->setVisible
+      (dooble_settings::setting("main_menu_bar_visible").toBool());
 #endif
 
   if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
@@ -1309,9 +1335,20 @@ void dooble::slot_show_downloads(void)
 void dooble::slot_show_full_screen(void)
 {
   if(!isFullScreen())
-    showFullScreen();
+    {
+      showFullScreen();
+#ifndef Q_OS_MACOS
+      m_ui.menu_bar->setVisible(false);
+#endif
+    }
   else
-    showNormal();
+    {
+      showNormal();
+#ifndef Q_OS_MACOS
+      m_ui.menu_bar->setVisible
+	(dooble_settings::setting("main_menu_bar_visible").toBool());
+#endif
+    }
 }
 
 void dooble::slot_show_history(void)

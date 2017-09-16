@@ -56,6 +56,7 @@ class dooble_page: public QWidget
   dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
   ~dooble_page();
   QAction *action_close_tab(void) const;
+  QAction *full_screen_action(void) const;
   QIcon icon(void) const;
   QMenu *menu(void) const;
   QString title(void) const;

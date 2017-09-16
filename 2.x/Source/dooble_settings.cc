@@ -130,7 +130,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["status_bar_visible"] = true;
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
-  s_settings["zoom_frame_location_index"] = 0;
+  s_settings["zoom_frame_location_index"] = 1;
   restore();
   prepare_icons();
 }
@@ -152,7 +152,7 @@ QString dooble_settings::zoom_frame_location_string(int index)
   else if(index == 1)
     return "popup_menu";
   else
-    return "main_window";
+    return "popup_menu";
 }
 
 QVariant dooble_settings::setting(const QString &key)
@@ -464,7 +464,7 @@ void dooble_settings::restore(void)
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   m_ui.zoom_frame_location->setCurrentIndex
     (qBound(0,
-	    s_settings.value("zoom_frame_location_index", 0).toInt(),
+	    s_settings.value("zoom_frame_location_index", 1).toInt(),
 	    m_ui.zoom_frame_location->count() - 1));
   s_settings["accepted_or_blocked_domains_mode"] =
     s_settings.value("accepted_or_blocked_domains_mode", "block").
