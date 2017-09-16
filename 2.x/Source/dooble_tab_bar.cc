@@ -35,12 +35,14 @@
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
   foreach(QToolButton *toolButton, findChildren <QToolButton *> ())
-    toolButton->setStyleSheet("QToolButton {background-color: lightgray;"
-			      "border: 1px solid #c4c4c3;"
-			      "margin-bottom: 1px;"
-			      "margin-top: 2px;"
-			      "}"
-			      "QToolButton::menu-button {border: none;}");
+    toolButton->setStyleSheet
+    (QString("QToolButton {background-color: %1;"
+	     "border: none;"
+	     "margin-bottom: 3px;"
+	     "margin-top: 3px;"
+	     "}"
+	     "QToolButton::menu-button {border: none;}").
+     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
 
   setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
