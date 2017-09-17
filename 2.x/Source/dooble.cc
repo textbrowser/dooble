@@ -435,8 +435,9 @@ void dooble::new_page(bool is_private)
   dooble_page *page = new dooble_page(is_private, 0, m_ui.tab);
 
   prepare_page_connections(page);
-  m_ui.tab->addTab(page, dooble_favicons::icon(QUrl()), tr("Dooble"));
+  m_ui.tab->addTab(page, tr("Dooble"));
   m_ui.tab->setCurrentWidget(page);
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(m_ui.tab->currentWidget() == page)
