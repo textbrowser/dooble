@@ -20,7 +20,6 @@ QT		+= concurrent gui network printsupport sql \
 TEMPLATE	= app
 
 QMAKE_CLEAN     += Dooble
-QMAKE_CXXFLAGS_RELEASE -= -O2
 
 macx {
 QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
@@ -28,7 +27,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -std=c++11 -O3
+                          -mtune=generic -std=c++11
 } else:win32 {
 QMAKE_CXXFLAGS_RELEASE +=
 } else {
@@ -37,7 +36,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -pie -std=c++11 -O3
+                          -mtune=generic -pie -std=c++11
 }
 
 QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
