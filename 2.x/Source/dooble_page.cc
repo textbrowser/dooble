@@ -623,8 +623,10 @@ void dooble_page::show_menu(void)
 {
   QPoint point(m_ui.menu->pos());
 
+  m_ui.menu->setChecked(true);
   point.setY(m_ui.menu->size().height() + point.y());
   m_menu->exec(mapToGlobal(point));
+  m_ui.menu->setChecked(false);
 }
 
 void dooble_page::show_popup_menu(void)
