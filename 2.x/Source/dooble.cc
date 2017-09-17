@@ -241,7 +241,6 @@ void dooble::closeEvent(QCloseEvent *event)
   s_downloads->abort();
   s_history->abort();
   QApplication::restoreOverrideCursor();
-  QMainWindow::closeEvent(event);
   QApplication::exit(0);
 }
 

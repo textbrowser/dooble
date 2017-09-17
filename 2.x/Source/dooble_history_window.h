@@ -68,6 +68,7 @@ class dooble_history_window: public QMainWindow
   void slot_populate(void);
   void slot_search_timer_timeout(void);
   void slot_show_context_menu(const QPoint &point);
+  void slot_splitter_moved(int pos, int index);
 
  signals:
   void open_url(const QUrl &url);

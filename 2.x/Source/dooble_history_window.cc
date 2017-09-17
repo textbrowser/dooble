@@ -88,6 +88,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
 	  SLOT(start(void)));
+  connect(m_ui.splitter,
+	  SIGNAL(splitterMoved(int, int)),
+	  this,
+	  SLOT(slot_splitter_moved(int, int)));
   connect(m_ui.table,
 	  SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
 	  this,
@@ -692,4 +696,11 @@ void dooble_history_window::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
   menu.addAction(tr("&Delete Page(s)"), this, SLOT(slot_delete_pages(void)));
   menu.exec(mapToGlobal(point));
+}
+
+void dooble_history_window::slot_splitter_moved(int pos, int index)
+{
+  Q_UNUSED(index);
+  Q_UNUSED(pos);
+  save_settings();
 }

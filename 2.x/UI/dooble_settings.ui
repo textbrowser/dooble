@@ -464,6 +464,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="zoom_frame_location">
+              <property name="currentText">
+               <string>Popup Menu</string>
+              </property>
               <property name="currentIndex">
                <number>0</number>
               </property>
@@ -473,11 +476,6 @@
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
-              <item>
-               <property name="text">
-                <string>Main Window</string>
-               </property>
-              </item>
               <item>
                <property name="text">
                 <string>Popup Menu</string>
@@ -600,8 +598,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>631</height>
+               <width>384</width>
+               <height>617</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">

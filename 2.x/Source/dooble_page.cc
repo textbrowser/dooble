@@ -81,11 +81,6 @@ dooble_page::dooble_page(bool is_private,
     m_view = new dooble_web_engine_view(m_is_private, this);
 
   m_ui.frame->layout()->addWidget(m_view);
-  m_ui.zoom_frame->setVisible
-    (dooble_settings::
-     zoom_frame_location_string(dooble_settings::
-				setting("zoom_frame_location_index").
-				toInt()) == "main_window");
   connect(dooble::s_history,
 	  SIGNAL(populated(void)),
 	  m_ui.address,
@@ -170,18 +165,6 @@ dooble_page::dooble_page(bool is_private,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reload_or_stop(void)));
-  connect(m_ui.zoom_in,
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(slot_zoom(void)));
-  connect(m_ui.zoom_out,
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(slot_zoom(void)));
-  connect(m_ui.zoom_reset,
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(slot_zoom(void)));
   connect(m_view,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
@@ -692,10 +675,6 @@ void dooble_page::show_popup_menu(void)
 	  SIGNAL(zoom_reset(void)),
 	  this,
 	  SLOT(slot_zoom_reset(void)));
-  connect(this,
-	  SIGNAL(zoom_factor(qreal)),
-	  popup_menu,
-	  SLOT(slot_zoom_factor(qreal)));
   popup_menu->resize(popup_menu->sizeHint());
   size = popup_menu->size();
   widget_action.setDefaultWidget(popup_menu);
@@ -1011,11 +990,6 @@ void dooble_page::slot_settings_applied(void)
   else
     m_ui.is_private->setVisible(false);
 
-  m_ui.zoom_frame->setVisible
-    (dooble_settings::
-     zoom_frame_location_string(dooble_settings::
-				setting("zoom_frame_location_index").
-				toInt()) == "main_window");
   prepare_icons();
 }
 
@@ -1094,41 +1068,21 @@ void dooble_page::slot_url_changed(const QUrl &url)
   m_ui.address->setText(url.toString());
 }
 
-void dooble_page::slot_zoom(void)
-{
-  QToolButton *tool_button = qobject_cast<QToolButton *> (sender());
-
-  if(m_ui.zoom_in == tool_button)
-    slot_zoom_in();
-  else if(m_ui.zoom_out == tool_button)
-    slot_zoom_out();
-  else if(m_ui.zoom_reset == tool_button)
-    slot_zoom_reset();
-}
-
 void dooble_page::slot_zoom_in(void)
 {
   qreal zoom_factor = qMin(m_view->zoomFactor() + 0.10, 5.0);
 
-  m_ui.zoom_reset->setText
-    (tr("%1%").arg(QString::number(static_cast<int> (100 * zoom_factor))));
   m_view->setZoomFactor(zoom_factor);
-  emit this->zoom_factor(m_view->zoomFactor());
 }
 
 void dooble_page::slot_zoom_out(void)
 {
   qreal zoom_factor = qMax(m_view->zoomFactor() - 0.10, 0.25);
 
-  m_ui.zoom_reset->setText
-    (tr("%1%").arg(QString::number(static_cast<int> (100 * zoom_factor))));
   m_view->setZoomFactor(zoom_factor);
-  emit this->zoom_factor(m_view->zoomFactor());
 }
 
 void dooble_page::slot_zoom_reset(void)
 {
-  m_ui.zoom_reset->setText(tr("100%"));
   m_view->setZoomFactor(1.0);
-  emit zoom_factor(m_view->zoomFactor());
 }

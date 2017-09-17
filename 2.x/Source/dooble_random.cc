@@ -86,8 +86,10 @@ QByteArray dooble_random::random_bytes(int length)
 	bytes = QByteArray(reinterpret_cast<char *> (data), length);
 
       delete []data;
-      CryptReleaseContext(h_crypt_prov, 0);
     }
+
+  if(h_crypt_prov)
+    CryptReleaseContext(h_crypt_prov, 0);
 #endif
 
   return bytes;
