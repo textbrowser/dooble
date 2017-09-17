@@ -133,10 +133,9 @@ void dtabbar::mouseDoubleClickEvent(QMouseEvent *event)
 
 QSize dtabbar::tabSizeHint(int index) const
 {
-  QSize size(QTabBar::tabSizeHint(index));
-
   if(m_tabPosition == QTabWidget::East || m_tabPosition == QTabWidget::West)
     {
+      QSize size(QTabBar::tabSizeHint(index));
       int preferredTabHeight = 175;
 
       if(parentWidget() &&
@@ -149,29 +148,33 @@ QSize dtabbar::tabSizeHint(int index) const
 	   175);
 
       size.setHeight(preferredTabHeight);
+      return size;
     }
   else
     {
-#ifdef Q_OS_MAC
-      int preferred = 225;
-#else
-      int preferred = 225;
-#endif
-      int preferredTabWidth = preferred;
+      QFontMetrics font_metrics(font());
+      QSize size(QTabBar::tabSizeHint(index));
+      int preferred_tab_width = 200;
+      static int preferred_tab_height = 10 + font_metrics.height();
 
-      if(parentWidget() &&
-	 count() * rect().width() < parentWidget()->size().width())
-	preferredTabWidth = preferred;
+      if(count() > 1)
+	{
+	  if(rect().width() / count() > qMin(preferred_tab_width,
+					     rect().width() / count()))
+	    preferred_tab_width = qMin(preferred_tab_width, rect().width());
+	  else
+	    preferred_tab_width = qMax
+	      (preferred_tab_width,
+	       rect().width() / count() + (index == 0 ?
+				       rect().width() % count() : 0));
+	}
       else
-	preferredTabWidth = qBound
-	  (125,
-	   qMax(size.width(), rect().width() / qMax(1, count())),
-	   preferred);
+	preferred_tab_width = qMin(preferred_tab_width, rect().width());
 
-      size.setWidth(preferredTabWidth);
+      size.setHeight(preferred_tab_height);
+      size.setWidth(preferred_tab_width);
+      return size;
     }
-
-  return size;
 }
 
 void dtabbar::setTabPosition(const QTabWidget::TabPosition position)

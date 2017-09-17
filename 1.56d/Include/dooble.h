@@ -49,7 +49,7 @@
 #include "ui_dmainWindow.h"
 #include "ui_dstatusBar.h"
 
-#define DOOBLE_VERSION_STR "1.56d"
+#define DOOBLE_VERSION_STR "1.56e"
 
 class QCloseEvent;
 class dbookmarkspopup;
