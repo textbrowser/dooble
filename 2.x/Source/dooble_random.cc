@@ -28,6 +28,8 @@
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN
+#pragma comment(lib, "crypt32.lib")
+#include <windows.h>
 #include <Wincrypt.h>
 #else
 #include <QFile>
