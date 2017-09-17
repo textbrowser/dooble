@@ -108,6 +108,7 @@ class dooble: public QMainWindow
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
   void print(dooble_page *page);
+  void select_under_mouse_table_contents(void);
 
  private slots:
   void slot_about_to_hide_main_menu(void);
@@ -120,7 +121,6 @@ class dooble: public QMainWindow
   void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_icon_changed(const QIcon &icon);
-  void slot_load_started(void);
   void slot_new_private_tab(void);
   void slot_new_tab(void);
   void slot_new_window(void);

@@ -563,12 +563,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
-	  SIGNAL(loadStarted(void)),
-	  this,
-	  SLOT(slot_load_started(void)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
-  connect(page,
 	  SIGNAL(new_private_tab(void)),
 	  this,
 	  SLOT(slot_new_private_tab(void)),
@@ -823,6 +817,15 @@ void dooble::print_current_page(void)
   print(current_page());
 }
 
+void dooble::select_under_mouse_table_contents(void)
+{
+  QTableWidget *table = qobject_cast<QTableWidget *>
+    (QApplication::focusObject());
+
+  if(table)
+    table->selectAll();
+}
+
 void dooble::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -906,7 +909,10 @@ void dooble::slot_about_to_show_main_menu(void)
 void dooble::slot_authenticate(void)
 {
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
-    return;
+    {
+      select_under_mouse_table_contents();
+      return;
+    }
   else if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
     return;
 
@@ -1091,10 +1097,6 @@ void dooble::slot_icon_changed(const QIcon &icon)
 
   if(page)
     m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
-}
-
-void dooble::slot_load_started(void)
-{
 }
 
 void dooble::slot_new_private_tab(void)
