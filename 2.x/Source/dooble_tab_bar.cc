@@ -84,9 +84,10 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
+  QFontMetrics font_metrics(font());
   QSize size(QTabBar::tabSizeHint(index));
   int preferred_tab_width = 225;
-  static int preferred_tab_height = QTabBar::tabSizeHint(0).height();
+  static int preferred_tab_height = 10 + font_metrics.height();
 
   if(!(parentWidget() &&
        count() * rect().width() < parentWidget()->size().width()))
