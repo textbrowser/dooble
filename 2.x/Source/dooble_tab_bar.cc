@@ -230,7 +230,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action = menu.addAction(tr("&Decouple"),
 			  this,
 			  SLOT(slot_decouple_tab(void)));
-  action->setEnabled(!page && tab_at > -1);
+  action->setEnabled(count() > 1 && !page && tab_at > -1);
   action->setProperty("point", point);
   reload_action->setEnabled(page && tab_at > -1);
   menu.exec(mapToGlobal(point));
