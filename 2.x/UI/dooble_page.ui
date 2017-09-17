@@ -112,15 +112,9 @@
      </item>
      <item>
       <widget class="QFrame" name="zoom_frame">
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="spacing">
-         <number>0</number>
+         <number>5</number>
         </property>
         <property name="leftMargin">
          <number>0</number>
@@ -134,6 +128,13 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QToolButton" name="zoom_in">
           <property name="toolTip">
@@ -176,6 +177,13 @@
           </property>
           <property name="autoRaise">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
          </widget>
         </item>

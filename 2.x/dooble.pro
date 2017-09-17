@@ -52,7 +52,7 @@ INCLUDEPATH	+= Source
 macx {
 LIBS		+= -framework Cocoa
 } else:win32 {
-LIBS            += -lcrypt32
+LIBS            += -ladvapi32 -lcrypt32
 }
 
 PRE_TARGETDEPS =
