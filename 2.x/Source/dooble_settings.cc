@@ -644,6 +644,12 @@ void dooble_settings::slot_apply(void)
 
       m_ui.iterations->setValue(m_ui.iterations->minimum());
       m_ui.reset_credentials->setEnabled(false);
+
+      /*
+      ** Purge existing database data.
+      */
+
+      purge_database_data();
       remove_setting("authentication_iteration_count");
       remove_setting("authentication_salt");
       remove_setting("authentication_salted_password");
@@ -667,11 +673,6 @@ void dooble_settings::slot_apply(void)
 	  emit dooble_credentials_authenticated(true);
 	}
 
-      /*
-      ** Purge existing database data.
-      */
-
-      purge_database_data();
       QApplication::restoreOverrideCursor();
     }
 
@@ -940,6 +941,12 @@ void dooble_settings::slot_reset_credentials(void)
 
   m_ui.iterations->setValue(m_ui.iterations->minimum());
   m_ui.reset_credentials->setEnabled(false);
+
+  /*
+  ** Purge existing database data.
+  */
+
+  purge_database_data();
   remove_setting("authentication_iteration_count");
   remove_setting("authentication_salt");
   remove_setting("authentication_salted_password");
@@ -954,12 +961,6 @@ void dooble_settings::slot_reset_credentials(void)
   dooble::s_cryptography->setAuthenticated(false);
   dooble::s_cryptography->setKeys
     (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
-
-  /*
-  ** Purge existing database data.
-  */
-
-  purge_database_data();
   QApplication::restoreOverrideCursor();
 }
 
