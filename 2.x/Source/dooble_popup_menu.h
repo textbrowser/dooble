@@ -48,7 +48,7 @@ class dooble_popup_menu:public QDialog
 
  private slots:
   void slot_tool_button_clicked(void);
-  void slot_zoom_factor(qreal zoom_factor);
+  void slot_zoomed(qreal zoom_factor);
 
  signals:
   void authenticate(void);

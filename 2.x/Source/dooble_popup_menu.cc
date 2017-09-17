@@ -160,6 +160,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 
       if(d)
 	d->new_page(true);
+
+      accept();
     }
   else if(m_ui.new_tab == sender())
     {
@@ -167,6 +169,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 
       if(d)
 	d->new_page(false);
+
+      accept();
     }
   else if(m_ui.new_window == sender())
     (new dooble())->show();
@@ -190,7 +194,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     emit zoom_reset();
 }
 
-void dooble_popup_menu::slot_zoom_factor(qreal zoom_factor)
+void dooble_popup_menu::slot_zoomed(qreal zoom_factor)
 {
   m_ui.zoom_reset->setText
     (tr("%1%").

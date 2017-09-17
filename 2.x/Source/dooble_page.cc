@@ -675,6 +675,10 @@ void dooble_page::show_popup_menu(void)
 	  SIGNAL(zoom_reset(void)),
 	  this,
 	  SLOT(slot_zoom_reset(void)));
+  connect(this,
+	  SIGNAL(zoomed(qreal)),
+	  popup_menu,
+	  SLOT(slot_zoomed(qreal)));
   popup_menu->resize(popup_menu->sizeHint());
   size = popup_menu->size();
   widget_action.setDefaultWidget(popup_menu);
@@ -682,6 +686,7 @@ void dooble_page::show_popup_menu(void)
   point.setX(m_ui.menu->size().width() + point.x() - size.width());
   point.setY(m_ui.menu->size().height() + point.y());
   menu.exec(mapToGlobal(point));
+  m_ui.menu->setChecked(false);
 }
 
 void dooble_page::slot_about_to_show_standard_menus(void)
@@ -1073,6 +1078,7 @@ void dooble_page::slot_zoom_in(void)
   qreal zoom_factor = qMin(m_view->zoomFactor() + 0.10, 5.0);
 
   m_view->setZoomFactor(zoom_factor);
+  emit zoomed(m_view->zoomFactor());
 }
 
 void dooble_page::slot_zoom_out(void)
@@ -1080,9 +1086,11 @@ void dooble_page::slot_zoom_out(void)
   qreal zoom_factor = qMax(m_view->zoomFactor() - 0.10, 0.25);
 
   m_view->setZoomFactor(zoom_factor);
+  emit zoomed(m_view->zoomFactor());
 }
 
 void dooble_page::slot_zoom_reset(void)
 {
   m_view->setZoomFactor(1.0);
+  emit zoomed(m_view->zoomFactor());
 }
