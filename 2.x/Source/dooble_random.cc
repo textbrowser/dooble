@@ -80,7 +80,7 @@ QByteArray dooble_random::random_bytes(int length)
       if(CryptGenRandom(h_crypt_prov, length, data))
 	bytes = QByteArray(data, length);
 
-      delete data[];
+      delete []data;
       CryptReleaseContext(h_crypt_prov, 0);
     }
 #endif
