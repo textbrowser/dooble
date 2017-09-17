@@ -278,4 +278,7 @@ void dooble_tab_widget::tabRemoved(int index)
 {
   QTabWidget::tabRemoved(index);
   setTabsClosable(count() > 1);
+
+  if(count() == 0)
+    emit empty_tab();
 }

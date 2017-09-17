@@ -316,6 +316,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_decouple_tab(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(empty_tab(void)),
+	  this,
+	  SLOT(slot_new_tab(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)),

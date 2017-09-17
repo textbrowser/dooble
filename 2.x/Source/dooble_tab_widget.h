@@ -59,6 +59,7 @@ class dooble_tab_widget: public QTabWidget
 
  signals:
   void decouple_tab(int index);
+  void empty_tab(void);
   void new_tab(void);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);
