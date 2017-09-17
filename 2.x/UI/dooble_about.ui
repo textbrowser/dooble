@@ -47,25 +47,12 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="information">
         <property name="styleSheet">
          <string notr="true">QWidget {background-color: white;}</string>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dooble Web Browser&lt;/p&gt;&lt;p&gt;Version 2018.01.01, Baba Yaga.&lt;/p&gt;&lt;p&gt;(c) 2008 - present.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="textInteractionFlags">
-         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="local_information">
-        <property name="styleSheet">
-         <string notr="true">QWidget {background-color: white;}</string>
-        </property>
-        <property name="text">
-         <string>Local Information</string>
         </property>
         <property name="textInteractionFlags">
          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
