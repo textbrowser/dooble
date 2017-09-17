@@ -86,15 +86,22 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QFontMetrics font_metrics(font());
   QSize size(QTabBar::tabSizeHint(index));
-  int preferred_tab_width = 225;
+  int preferred_tab_width = 200;
   static int preferred_tab_height = 10 + font_metrics.height();
 
-  if(!(parentWidget() &&
-       count() * rect().width() < parentWidget()->size().width()))
-    preferred_tab_width = qBound
-      (125,
-       qMax(size.width(), rect().width() / qMax(1, count())),
-       preferred_tab_width);
+  if(count() > 1)
+    {
+      if(rect().width() / count() > qMin(preferred_tab_width,
+					 rect().width() / count()))
+	preferred_tab_width = qMin(preferred_tab_width, rect().width());
+      else
+	preferred_tab_width = qMax
+	  (preferred_tab_width,
+	   rect().width() / count() + (index == 0 ?
+				       rect().width() % count() : 0));
+    }
+  else
+    preferred_tab_width = qMin(preferred_tab_width, rect().width());
 
   size.setHeight(preferred_tab_height);
   size.setWidth(preferred_tab_width);
