@@ -28,6 +28,7 @@
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN
+#include <Wincrypt.h>
 #else
 #include <QFile>
 #endif
@@ -62,6 +63,22 @@ QByteArray dooble_random::random_bytes(int length)
 	 static_cast<int> (file.read(bytes.data(),
 				     static_cast<qintptr> (bytes.length()))))
 	bytes.clear();
+    }
+#elif defined(Q_OS_WIN)
+  /*
+  ** msdn.microsoft.com/en-us/library/windows/desktop/aa379942(v=vs.85).aspx
+  */
+
+  HCRYPTPROV h_crypt_prov = 0;
+
+  if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, 0, 0))
+    {
+      BYTE *data = new BYTE[length];
+
+      if(CryptGenRandom(h_crypt_prov, length, data))
+	bytes = QByteArray(data, length);
+
+      CryptReleaseContext(h_crypt_prov, 0);
     }
 #endif
 
