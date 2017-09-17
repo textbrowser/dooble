@@ -78,7 +78,12 @@ QByteArray dooble_random::random_bytes(int length)
       BYTE *data = new BYTE[length];
 
       if(CryptGenRandom(h_crypt_prov, length, data))
-	bytes = QByteArray(data, length);
+	/*
+	** msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).
+	** aspx
+	*/
+
+	bytes = QByteArray(reinterpret_cast<char *> (data), length);
 
       delete []data;
       CryptReleaseContext(h_crypt_prov, 0);
