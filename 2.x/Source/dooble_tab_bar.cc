@@ -86,6 +86,7 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QSize size(QTabBar::tabSizeHint(index));
   int preferred_tab_width = 225;
+  static int preferred_tab_height = QTabBar::tabSizeHint(0).height();
 
   if(!(parentWidget() &&
        count() * rect().width() < parentWidget()->size().width()))
@@ -94,6 +95,7 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
        qMax(size.width(), rect().width() / qMax(1, count())),
        preferred_tab_width);
 
+  size.setHeight(preferred_tab_height);
   size.setWidth(preferred_tab_width);
   return size;
 }
