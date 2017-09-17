@@ -905,7 +905,9 @@ void dooble::slot_about_to_show_main_menu(void)
 
 void dooble::slot_authenticate(void)
 {
-  if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    return;
+  else if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
     return;
 
   if(!dooble_settings::has_dooble_credentials())
