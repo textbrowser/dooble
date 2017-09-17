@@ -519,7 +519,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 					   trimmed()));
 
 	      if(!url.isEmpty() && url.isValid())
-		save_blocked_domain(url.host(), true);
+		accept_or_block_domain(url.host());
 
 	      line += 1;
 	      progress.setLabelText(tr("Line %1 processed.").arg(line));
@@ -528,7 +528,6 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	    }
 
 	  file.close();
-	  populate();
 	}
     }
 }
