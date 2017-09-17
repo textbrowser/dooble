@@ -161,58 +161,60 @@ void dooble_accepted_or_blocked_domains::keyPressEvent(QKeyEvent *event)
 
 void dooble_accepted_or_blocked_domains::populate(void)
 {
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
-
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_domains.clear();
   m_ui.table->clearContents();
 
   QMap<QString, int> oids;
-  QString database_name("dooble_accepted_or_blocked_domains");
 
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name("dooble_accepted_or_blocked_domains");
 
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_accepted_or_blocked_domains.db");
-
-    if(db.open())
       {
-	QSqlQuery query(db);
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	query.setForwardOnly(true);
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_accepted_or_blocked_domains.db");
 
-	if(query.exec("SELECT domain, state, OID "
-		      "FROM dooble_accepted_or_blocked_domains"))
-	  while(query.next())
-	    {
-	      QByteArray data1
-		(QByteArray::fromBase64(query.value(0).toByteArray()));
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
 
-	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
+	    query.setForwardOnly(true);
 
-	      if(data1.isEmpty())
-		continue;
+	    if(query.exec("SELECT domain, state, OID "
+			  "FROM dooble_accepted_or_blocked_domains"))
+	      while(query.next())
+		{
+		  QByteArray data1
+		    (QByteArray::fromBase64(query.value(0).toByteArray()));
 
-	      QByteArray data2
-		(QByteArray::fromBase64(query.value(1).toByteArray()));
+		  data1 = dooble::s_cryptography->mac_then_decrypt(data1);
 
-	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+		  if(data1.isEmpty())
+		    continue;
 
-	      if(data2.isEmpty())
-		continue;
+		  QByteArray data2
+		    (QByteArray::fromBase64(query.value(1).toByteArray()));
 
-	      m_domains[data1.constData()] = QVariant(data2).toBool();
-	      oids[data1.constData()] = query.value(2).toInt();
-	    }
+		  data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+
+		  if(data2.isEmpty())
+		    continue;
+
+		  m_domains[data1.constData()] = QVariant
+		    (data2).toBool() ? 1 : 0;
+		  oids[data1.constData()] = query.value(2).toInt();
+		}
+	  }
+
+	db.close();
       }
 
-    db.close();
-  }
+      QSqlDatabase::removeDatabase(database_name);
+    }
 
-  QSqlDatabase::removeDatabase(database_name);
   m_ui.table->setRowCount(m_domains.size());
   m_ui.table->setSortingEnabled(false);
   disconnect(m_ui.table,
@@ -294,7 +296,10 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
   if(domain.trimmed().isEmpty())
     return;
   else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
+    {
+      m_domains[domain.toLower().trimmed()] = state ? 1 : 0;
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -372,7 +377,6 @@ void dooble_accepted_or_blocked_domains::show(void)
 			      toByteArray()));
 
   QMainWindow::show();
-  populate();
 }
 
 void dooble_accepted_or_blocked_domains::showNormal(void)
@@ -384,7 +388,6 @@ void dooble_accepted_or_blocked_domains::showNormal(void)
 			      toByteArray()));
 
   QMainWindow::showNormal();
-  populate();
 }
 
 void dooble_accepted_or_blocked_domains::slot_add(void)
@@ -440,39 +443,50 @@ void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name("dooble_accepted_or_blocked_domains");
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name("dooble_accepted_or_blocked_domains");
 
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_accepted_or_blocked_domains.db");
-
-    if(db.open())
       {
-	QSqlQuery query(db);
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	query.exec("PRAGMA synchronous = OFF");
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_accepted_or_blocked_domains.db");
 
-	for(int i = list.size() - 1; i >= 0; i--)
+	if(db.open())
 	  {
-	    query.prepare
-	      ("DELETE FROM dooble_accepted_or_blocked_domains WHERE OID = ?");
-	    query.addBindValue(list.at(i).data(Qt::UserRole));
+	    QSqlQuery query(db);
 
-	    if(query.exec())
+	    query.exec("PRAGMA synchronous = OFF");
+
+	    for(int i = list.size() - 1; i >= 0; i--)
 	      {
-		m_domains.remove(list.at(i).data().toString());
-		m_ui.table->removeRow(list.at(i).row());
+		query.prepare
+		  ("DELETE FROM dooble_accepted_or_blocked_domains "
+		   "WHERE OID = ?");
+		query.addBindValue(list.at(i).data(Qt::UserRole));
+
+		if(query.exec())
+		  {
+		    m_domains.remove(list.at(i).data().toString());
+		    m_ui.table->removeRow(list.at(i).row());
+		  }
 	      }
 	  }
+
+	db.close();
       }
 
-    db.close();
-  }
+      QSqlDatabase::removeDatabase(database_name);
+    }
+  else
+    for(int i = list.size() - 1; i >= 0; i--)
+      {
+	m_domains.remove(list.at(i).data().toString());
+	m_ui.table->removeRow(list.at(i).row());
+      }
 
-  QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
 }
 
@@ -493,6 +507,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 
       if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
+	  m_domains.clear();
 	  repaint();
 	  QApplication::processEvents();
 
@@ -519,7 +534,13 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 					   trimmed()));
 
 	      if(!url.isEmpty() && url.isValid())
-		accept_or_block_domain(url.host());
+		{
+		  if(!dooble::s_cryptography ||
+		     !dooble::s_cryptography->authenticated())
+		    m_domains[url.host()] = 1;
+		  else
+		    accept_or_block_domain(url.host());
+		}
 
 	      line += 1;
 	      progress.setLabelText(tr("Line %1 processed.").arg(line));
@@ -528,6 +549,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	    }
 
 	  file.close();
+	  populate();
 	}
     }
 }
@@ -548,12 +570,13 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
   if(!item)
     return;
 
-  m_domains[item->text()] = state;
+  m_domains[item->text()] = state ? 1 : 0;
   save_blocked_domain(item->text(), state);
 }
 
 void dooble_accepted_or_blocked_domains::slot_populate(void)
 {
+  m_domains.clear();
   populate();
 }
 
