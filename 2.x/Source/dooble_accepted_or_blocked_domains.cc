@@ -59,10 +59,6 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slot_radio_button_toggled(bool)));
-  connect(m_ui.action_import,
-	  SIGNAL(triggered(void)),
-	  this,
-	  SLOT(slot_import(void)));
   connect(m_ui.add,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -75,6 +71,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_rows(void)));
+  connect(m_ui.import,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_import(void)));
   connect(m_ui.search,
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
