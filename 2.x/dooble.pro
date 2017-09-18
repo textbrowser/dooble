@@ -161,3 +161,22 @@ UI_HEADERS_DIR  = Source
 
 PROJECTNAME	= Dooble
 TARGET		= Dooble
+
+macx {
+data.path          = /Applications/Dooble.d/Data
+data.files         = Data/*.txt
+dooble.path	   = /Applications/Dooble.d/Dooble.app
+dooble.files	   = Dooble.app/*
+macdeployqt.path   = Dooble.app
+macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt ./Dooble.app
+preinstall.path    = /Applications/Dooble.d
+preinstall.extra   = rm -rf /Applications/Dooble.d/Dooble.app/*
+postinstall.path   = /Applications/Dooble.d
+postinstall.extra  = cp -r Dooble.app /Applications/Dooble.d/.
+
+INSTALLS	= preinstall \
+                  data \
+		  macdeployqt \
+		  dooble \
+                  postinstall
+}
