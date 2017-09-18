@@ -27,7 +27,7 @@
 
 #include <QDir>
 #include <QSplashScreen>
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN32)
 #include <QStyleFactory>
 #endif
 #include <QThread>
@@ -142,7 +142,9 @@ int main(int argc, char *argv[])
   sigaction(SIGPIPE, &signal_action, (struct sigaction *) 0);
 #endif
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_MACOS
+  QApplication::setStyle(QStyleFactory::create("Fusion"));
+#elif defined(Q_OS_WIN32)
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
