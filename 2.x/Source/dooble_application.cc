@@ -37,6 +37,7 @@ dooble_application::dooble_application(int &argc, char **argv):
 
   font.setStyleStrategy
     (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
+  setAttribute(Qt::AA_DontUseNativeDialogs);
   setFont(font);
 }
 
