@@ -27,6 +27,7 @@
 
 #include <QDataStream>
 #include <QtCore/qmath.h>
+#include <QtDebug>
 
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
@@ -739,4 +740,73 @@ void dooble_threefish256::set_tweak(const QByteArray &tweak, bool *ok)
 
   if(*ok)
     *ok = true;
+}
+
+void dooble_threefish256::test1(void)
+{
+  dooble_threefish256 *s = new (std::nothrow) dooble_threefish256
+    (dooble_random::random_bytes(32));
+
+  if(!s)
+    return;
+
+  QByteArray c;
+  QByteArray d;
+  QByteArray p;
+
+  s->set_tweak("76543210fedcba98", 0);
+  p = "The pink duck visited the Soap Queen. A happy moment indeed.";
+  c = s->encrypt(p);
+  d = s->decrypt(c);
+  qDebug() << "test1 " << (d == p ? "passed" : "failed");
+  delete s;
+}
+
+void dooble_threefish256::test2(void)
+{
+  dooble_threefish256 *s = new (std::nothrow) dooble_threefish256
+    (dooble_random::random_bytes(32));
+
+  if(!s)
+    return;
+
+  QByteArray c;
+  QByteArray d;
+  QByteArray p;
+
+  s->set_tweak("76543210fedcba98", 0);
+  p = "If you wish to glimpse inside a human soul "
+    "and get to know a man, don't bother analyzing "
+    "his ways of being silent, of talking, of weeping, "
+    "of seeing how much he is moved by noble ideas; you "
+    "will get better results if you just watch him laugh. "
+    "If he laughs well, he's a good man.";
+  c = s->encrypt(p);
+  d = s->decrypt(c);
+  qDebug() << "test2 " << (d == p ? "passed" : "failed");
+  delete s;
+}
+
+void dooble_threefish256::test3(void)
+{
+  dooble_threefish256 *s = new (std::nothrow) dooble_threefish256
+    (dooble_random::random_bytes(32));
+
+  if(!s)
+    return;
+
+  QByteArray c;
+  QByteArray d;
+  QByteArray p;
+
+  s->set_tweak("76543210fedcba98", 0);
+  p = "The truth is always an abyss. One must - as in a swimming pool "
+    "- dare to dive from the quivering springboard of trivial "
+    "everyday experience and sink into the depths, in order to "
+    "later rise again - laughing and fighting for breath - to "
+    "the now doubly illuminated surface of things.";
+  c = s->encrypt(p);
+  d = s->decrypt(c);
+  qDebug() << "test3 " << (d == p ? "passed" : "failed");
+  delete s;
 }

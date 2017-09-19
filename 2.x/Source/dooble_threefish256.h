@@ -40,6 +40,9 @@ class dooble_threefish256: public dooble_block_cipher
   ~dooble_threefish256();
   QByteArray decrypt(const QByteArray &bytes);
   QByteArray encrypt(const QByteArray &bytes);
+  static void test1(void);
+  static void test2(void);
+  static void test3(void);
   void set_key(const QByteArray &key);
   void set_tweak(const QByteArray &tweak, bool *ok);
 
