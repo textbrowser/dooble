@@ -77,6 +77,7 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
       m_cookies_window->setCookies(m_cookies);
       m_page->profile()->setRequestInterceptor
 	(dooble::s_url_request_interceptor);
+      m_page->profile()->setSpellCheckEnabled(true);
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::FullScreenSupportEnabled, true);
       m_page->profile()->settings()->setAttribute

@@ -225,6 +225,7 @@ int main(int argc, char *argv[])
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
      "WebEnginePersistentStorage");
+  QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
