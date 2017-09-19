@@ -494,6 +494,7 @@ ads.kinxxx.com
 ads.kompass.com
 ads.krawall.de
 ads.lesbianpersonals.com
+ads.linkedin.com
 ads.linuxfoundation.org
 ads.linuxjournal.com
 ads.linuxsecurity.com
@@ -535,13 +536,11 @@ ads.okcimg.com
 ads.ole.com
 ads.olivebrandresponse.com
 ads.oneplace.com
-ads.ookla.com
 ads.optusnet.com.au
 ads.outpersonals.com
 ads.passion.com
 ads.pennet.com
 ads.penny-arcade.com
-ads.pheedo.com
 ads.phpclasses.org
 ads.pickmeup-ltd.com
 ads.planet.nl
@@ -667,6 +666,7 @@ ads5.virtual-nights.com
 ads6.gamecity.net
 ads7.gamecity.net
 ads8.com
+adsafeprotected.com
 adsatt.abc.starwave.com
 Adsatt.ABCNews.starwave.com
 adsatt.espn.go.com
@@ -930,6 +930,7 @@ azfront.com
 b-1st.com
 b.aol.com
 b.engadget.com
+b0b1o.bid
 ba.afl.rakuten.co.jp
 babs.tv2.dk
 backbeatmedia.com
@@ -999,7 +1000,6 @@ banners.friendfinder.com
 banners.getiton.com
 banners.iq.pl
 banners.isoftmarketing.com
-banners.lifeserv.com
 banners.linkbuddies.com
 banners.passion.com
 banners.resultonline.com
@@ -1048,6 +1048,7 @@ billboard.cz
 bitads.net
 bitmedianetwork.com
 bizad.nikkeibp.co.jp
+bizographics.com
 bizrate.com
 blast4traffic.com
 blingbucks.com
@@ -1094,6 +1095,7 @@ c1exchange.com
 calmfoot.com
 campaign.bharatmatrimony.com
 caniamedia.com
+carambo.la
 carbonads.com
 carbonads.net
 casalemedia.com
@@ -1143,7 +1145,6 @@ click.absoluteagency.com
 click.fool.com
 click.kmindex.ru
 click2freemoney.com
-click2paid.com
 clickability.com
 clickadz.com
 clickagents.com
@@ -1274,10 +1275,12 @@ debtbusterloans.com
 decisiveducks.com
 decknetwork.net
 delightdriving.com
+deloo.de
 demandbase.com
 demdex.net
 di1.shopping.com
 dialerporn.com
+dianomi.com
 didtheyreadit.com
 differentdesk.com
 direct-xxx-access.com
@@ -1375,6 +1378,7 @@ extractorandburner.com
 extreme-dm.com
 extremetracking.com
 eyeblaster.com
+eyeota.net
 eyereturn.com
 eyeviewads.com
 eyewonder.com
@@ -1384,7 +1388,6 @@ fast-adv.it
 fastclick.com
 fastclick.com.edgesuite.net
 fastclick.net
-fb-promotions.com
 fc.webmasterpro.de
 feedbackresearch.com
 feedjit.com
@@ -1407,6 +1410,7 @@ foo.cosmocode.de
 forex-affiliate.net
 fpctraffic.com
 fpctraffic2.com
+fqtag.com
 fragmentserv.iac-online.de
 free-banners.com
 freebanner.com
@@ -1531,7 +1535,6 @@ ifa.tube8live.com
 ilbanner.com
 ilead.itrack.it
 illustriousoatmeal.com
-ilovecheating.com
 imageads.canoe.ca
 imagecash.net
 images-pw.secureserver.net
@@ -1576,6 +1579,7 @@ ireklama.cz
 itfarm.com
 itop.cz
 its-that-easy.com
+itsptp.com
 ivykiosk.com
 jcount.com
 jewelcheese.com
@@ -1838,7 +1842,6 @@ pagerank4you.com
 pageranktop.com
 parse.ly.invalid
 parsely.com
-partage-facile.com
 partner-ads.com
 partner.pelikan.cz
 partner.topcities.com
@@ -1851,6 +1854,7 @@ paycounter.com
 paypopup.com
 payserve.com
 pbnet.ru
+pbterra.com
 pcash.imlive.com
 peacepowder.com
 peep-auktion.de
@@ -1872,7 +1876,6 @@ phpadsnew.new.natuurpark.nl
 phpmyvisites.net
 picadmedia.com
 pietexture.com
-pillscash.com
 pimproll.com
 pixel.adsafeprotected.com
 pixel.jumptap.com
@@ -1885,6 +1888,7 @@ plugrush.com
 pointroll.com
 pop-under.ru
 popads.net
+popflawlessads.com
 popub.com
 popunder.ru
 popup.msn.com
@@ -1898,7 +1902,6 @@ possibleboats.com
 postrelease.com
 potenza.cz
 pr-star.de
-pr-ten.de
 practicetoothpaste.com
 praddpro.de
 prchecker.info
@@ -1939,7 +1942,6 @@ pubdirecte.com
 publicidad.elmundo.es
 pubmatic.com
 pubs.lemonde.fr
-pulse360.com
 px.dynamicyield.com
 q.azcentral.com
 qctop.com
@@ -1998,6 +2000,7 @@ reklame.unwired-i.net
 reklamer.com.ua
 relevanz10.de
 relmaxtop.com
+remarketingpixel.com
 remotead.cnet.com
 republika.onet.pl
 retargeter.com
@@ -2052,7 +2055,6 @@ sedoparking.com
 sedotracker.com
 seeq.com.invalid
 sensismediasmart.com.au
-seo4india.com
 separatesilver.com
 serv0.com
 servedby-buysellads.com
@@ -2061,7 +2063,6 @@ servedbyopenx.com
 servethis.com
 services.hearstmags.com
 serving-sys.com
-sexaddpro.de
 sexadvertentiesite.nl
 sexcounter.com
 sexinyourcity.com
@@ -2080,7 +2081,6 @@ shinystat.it
 shiveringsail.com
 shockingswing.com
 shoppingads.com
-siccash.com
 sidebar.angelfire.com
 simplisticnose.com
 sinceresofa.com
@@ -2102,6 +2102,7 @@ sneakystamp.com
 snoobi.com
 socialspark.com
 softclick.com.br
+sonobi.com
 spacash.com
 sparkstudios.com
 specificmedia.co.uk
@@ -2273,6 +2274,7 @@ trackmysales.com
 tradeadexchange.com
 tradedoubler.com
 traffic-exchange.com
+traffic.focuusing.com
 trafficadept.com
 trafficbalancerouting.com
 trafficfactory.biz
