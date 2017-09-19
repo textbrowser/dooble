@@ -83,6 +83,21 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type):
     }
 }
 
+dooble_cryptography::~dooble_cryptography()
+{
+  {
+    QByteArray zeros(m_authentication_key.length(), 0);
+
+    m_authentication_key.replace(0, m_authentication_key.length(), zeros);
+  }
+
+  {
+    QByteArray zeros(m_encryption_key.length(), 0);
+
+    m_encryption_key.replace(0, m_encryption_key.length(), zeros);
+  }
+}
+
 QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 {
   if(m_as_plaintext)

@@ -43,6 +43,7 @@ class dooble_cryptography: public QObject
 		      const QByteArray &encryption_key,
 		      const QString &block_cipher_type);
   dooble_cryptography(const QString &block_cipher_type);
+  ~dooble_cryptography();
   QByteArray encrypt_then_mac(const QByteArray &data) const;
   QByteArray hmac(const QByteArray &message) const;
   QByteArray hmac(const QString &message) const;
