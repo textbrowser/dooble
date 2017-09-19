@@ -441,8 +441,7 @@ void dooble_page::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&File"));
   m_authentication_action = menu->addAction(tr("&Authenticate..."),
 					    this,
-					    SIGNAL(authenticate(void)),
-					    QKeySequence(tr("Ctrl+A")));
+					    SIGNAL(authenticate(void)));
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
   menu->addSeparator();

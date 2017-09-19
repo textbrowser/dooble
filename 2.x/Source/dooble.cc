@@ -659,10 +659,6 @@ void dooble::prepare_shortcuts(void)
   if(m_shortcuts.isEmpty())
     {
       m_shortcuts.append
-	(new QShortcut (QKeySequence(tr("Ctrl+A")),
-			this,
-			SLOT(slot_authenticate(void))));
-      m_shortcuts.append
 	(new QShortcut(QKeySequence(tr("Ctrl+D")),
 		       this,
 		       SLOT(slot_show_downloads(void))));
@@ -710,8 +706,7 @@ void dooble::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&File"));
   m_authentication_action = menu->addAction(tr("&Authenticate..."),
 					    this,
-					    SLOT(slot_authenticate(void)),
-					    QKeySequence(tr("Ctrl+A")));
+					    SLOT(slot_authenticate(void)));
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
   menu->addSeparator();
@@ -817,15 +812,6 @@ void dooble::print_current_page(void)
   print(current_page());
 }
 
-void dooble::select_under_mouse_table_contents(void)
-{
-  QTableWidget *table = qobject_cast<QTableWidget *>
-    (QApplication::focusObject());
-
-  if(table)
-    table->selectAll();
-}
-
 void dooble::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -909,10 +895,7 @@ void dooble::slot_about_to_show_main_menu(void)
 void dooble::slot_authenticate(void)
 {
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
-    {
-      select_under_mouse_table_contents();
-      return;
-    }
+    return;
   else if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
     return;
 

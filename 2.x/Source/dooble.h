@@ -108,7 +108,6 @@ class dooble: public QMainWindow
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
   void print(dooble_page *page);
-  void select_under_mouse_table_contents(void);
 
  private slots:
   void slot_about_to_hide_main_menu(void);
