@@ -34,9 +34,12 @@ class dooble_block_cipher
 {
  public:
   dooble_block_cipher(const QByteArray &key);
+  dooble_block_cipher(void);
   virtual ~dooble_block_cipher();
   virtual QByteArray decrypt(const QByteArray &data) = 0;
   virtual QByteArray encrypt(const QByteArray &data) = 0;
+  virtual void set_key(const QByteArray &key) = 0;
+  virtual void set_tweak(const QByteArray &tweak, bool *ok);
 
  protected:
   QByteArray m_key;

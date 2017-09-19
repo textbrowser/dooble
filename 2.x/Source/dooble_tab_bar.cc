@@ -46,7 +46,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		 "}"
 		 "QToolButton::menu-button {border: none;}").
 	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-    else      
+    else
       toolButton->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
 		 "border: none;"

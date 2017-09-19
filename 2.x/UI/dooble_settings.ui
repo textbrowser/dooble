@@ -670,7 +670,7 @@
                  <item>
                   <widget class="QLabel" name="label_4">
                    <property name="text">
-                    <string>If you would like Dooble to store your data in authentically-encrypted databases, please prepare your credentials.</string>
+                    <string>If you would like Dooble to store your data in authentically-encrypted databases, please prepare your credentials. Please note that the Block Cipher setting is retained for permanent credentials only.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>

@@ -31,9 +31,14 @@
 
 dooble_block_cipher::dooble_block_cipher(const QByteArray &key)
 {
-  m_block_length = key.length() / CHAR_BIT; // True implementation must correct.
+  m_block_length = key.length(); // True implementation must correct.
   m_key = key;
   m_key_length = key.length(); // True implementation must correct.
+}
+
+dooble_block_cipher::dooble_block_cipher(void)
+{
+  m_block_length = m_key_length = 0;
 }
 
 dooble_block_cipher::~dooble_block_cipher()
@@ -50,4 +55,10 @@ QByteArray dooble_block_cipher::xor_arrays(const QByteArray &a,
     bytes.append(a[i] ^ b[i]);
 
   return bytes;
+}
+
+void dooble_block_cipher::set_tweak(const QByteArray &tweak, bool *ok)
+{
+  Q_UNUSED(ok);
+  Q_UNUSED(tweak);
 }

@@ -524,6 +524,21 @@ void dooble_aes256::mix_columns(void)
     }
 }
 
+void dooble_aes256::set_key(const QByteArray &key)
+{
+  m_key = key;
+
+  if(m_key.length() < m_key_length)
+    m_key.append(m_key_length - m_key.length(), 0);
+  else
+    m_key.resize(m_key_length);
+
+  for(size_t i = 0; i < 4; i++)
+    m_state[i][0] = m_state[i][1] = m_state[i][2] = m_state[i][3] = 0;
+
+  key_expansion();
+}
+
 void dooble_aes256::shift_rows(void)
 {
   uint8_t temp[4];

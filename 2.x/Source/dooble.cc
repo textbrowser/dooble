@@ -348,7 +348,7 @@ void dooble::connect_signals(void)
 	  Qt::UniqueConnection);
   connect(this,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
-	  dooble::s_application,
+	  s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  Qt::UniqueConnection);
   connect(this,
@@ -400,9 +400,7 @@ void dooble::initialize_static_members(void)
 	  (dooble_settings::setting("block_cipher_type").toString());
       else
 	s_cryptography = new dooble_cryptography
-	  (QByteArray(),
-	   QByteArray(),
-	   dooble_settings::setting("block_cipher_type").toString());
+	  (QByteArray(), QByteArray(), "AES-256");
     }
 
   if(!s_downloads)
@@ -524,12 +522,6 @@ void dooble::prepare_page_connections(dooble_page *page)
   if(!page)
     return;
 
-  connect(dooble::s_application,
-	  SIGNAL(dooble_credentials_authenticated(bool)),
-	  page,
-	  SLOT(slot_dooble_credentials_authenticated(bool)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(authenticate(void)),
 	  this,
@@ -556,7 +548,7 @@ void dooble::prepare_page_connections(dooble_page *page)
 					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
-	  dooble::s_application,
+	  s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
@@ -672,6 +664,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(s_application,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  page,
+	  SLOT(slot_dooble_credentials_authenticated(bool)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
 }
@@ -920,9 +918,9 @@ void dooble::slot_about_to_show_main_menu(void)
 
 void dooble::slot_authenticate(void)
 {
-  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+  if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
     return;
-  else if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
+  else if(s_cryptography && s_cryptography->authenticated())
     return;
 
   if(!dooble_settings::has_dooble_credentials())
@@ -951,12 +949,14 @@ void dooble::slot_authenticate(void)
 	(QByteArray::fromHex(dooble_settings::
 			     setting("authentication_salted_password").
 			     toByteArray()));
+      int block_cipher_type_index = dooble_settings::setting
+	("block_cipher_type_index").toInt();
       int iteration_count = dooble_settings::setting
 	("authentication_iteration_count").toInt();
 
-      dooble::s_cryptography->authenticate(salt, salted_password, text);
+      s_cryptography->authenticate(salt, salted_password, text);
 
-      if(dooble::s_cryptography->authenticated())
+      if(s_cryptography->authenticated())
 	{
 	  m_pbkdf2_dialog = new QProgressDialog(this);
 	  m_pbkdf2_dialog->setCancelButtonText(tr("Interrupt"));
@@ -971,6 +971,7 @@ void dooble::slot_authenticate(void)
 
 	  pbkdf2.reset(new dooble_pbkdf2(text.toUtf8(),
 					 salt,
+					 block_cipher_type_index,
 					 iteration_count,
 					 1024));
 	  m_pbkdf2_future = QtConcurrent::run
@@ -1067,7 +1068,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   dialog.setAcceptMode(QFileDialog::AcceptSave);
   dialog.setConfirmOverwrite(true);
-  dialog.setDirectory(dooble::s_downloads->download_path());
+  dialog.setDirectory(s_downloads->download_path());
   dialog.setFileMode(QFileDialog::AnyFile);
   dialog.setLabelText(QFileDialog::Accept, tr("Save"));
   dialog.setWindowTitle(tr("Dooble: Download File"));
@@ -1175,10 +1176,17 @@ void dooble::slot_pbkdf2_future_finished(void)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
 
-      if(list.size() == 4)
+      if(list.size() == 5)
 	{
-	  dooble::s_cryptography->setAuthenticated(true);
-	  dooble::s_cryptography->setKeys
+	  s_cryptography->deleteLater();
+
+	  if(list.at(1).toInt() == 0)
+	    s_cryptography = new dooble_cryptography("AES-256");
+	  else
+	    s_cryptography = new dooble_cryptography("Threefish-256");
+
+	  s_cryptography->setAuthenticated(true);
+	  s_cryptography->setKeys
 	    (list.at(0).mid(0, 64), list.at(0).mid(64, 32));
 	  emit dooble_credentials_authenticated(true);
 	}
@@ -1335,7 +1343,7 @@ void dooble::slot_show_clear_items(void)
 
   connect(&clear_items,
 	  SIGNAL(containers_cleared(void)),
-	  dooble::s_application,
+	  s_application,
 	  SIGNAL(containers_cleared(void)));
   clear_items.exec();
 }

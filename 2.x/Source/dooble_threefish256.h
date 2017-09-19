@@ -25,42 +25,29 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_pbkdf2_h
-#define dooble_pbkdf2_h
+#ifndef dooble_threefish256_h
+#define dooble_threefish256_h
 
-#include <QAtomicInteger>
 #include <QByteArray>
-#include <QObject>
+#include <QReadWriteLock>
 
-typedef QByteArray dooble_hmac_function(const QByteArray &key,
-					const QByteArray &message);
+#include "dooble_block_cipher.h"
 
-class dooble_pbkdf2: public QObject
+class dooble_threefish256: public dooble_block_cipher
 {
-  Q_OBJECT
-
  public:
-  dooble_pbkdf2(const QByteArray &password,
-		const QByteArray &salt,
-		int block_cipher_type_index,
-		int iterations_count,
-		int output_size);
-  ~dooble_pbkdf2();
-  QByteArray salt(void) const;
-  QList<QByteArray> pbkdf2(dooble_hmac_function *hmac_function) const;
-  static void test1(void);
+  dooble_threefish256(const QByteArray &key);
+  ~dooble_threefish256();
+  QByteArray decrypt(const QByteArray &bytes);
+  QByteArray encrypt(const QByteArray &bytes);
+  void set_key(const QByteArray &key);
+  void set_tweak(const QByteArray &tweak, bool *ok);
 
  private:
-  QAtomicInteger<short> m_interrupt;
-  QByteArray m_password;
-  QByteArray m_salt;
-  int m_block_cipher_type_index;
-  int m_iteration_count;
-  int m_output_size;
-  QByteArray x_or(const QByteArray &a, const QByteArray &b) const;
-
- private slots:
-  void slot_interrupt(void);
+  QByteArray m_tweak;
+  mutable QReadWriteLock m_locker;
+  size_t m_tweak_length;
+  void set_initialization_vector(QByteArray &bytes, bool *ok) const;
 };
 
 #endif

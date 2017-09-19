@@ -653,6 +653,7 @@ void dooble_settings::slot_apply(void)
       ** Remove settings.
       */
 
+      m_ui.cipher->setCurrentIndex(0);
       m_ui.iterations->setValue(m_ui.iterations->minimum());
       m_ui.reset_credentials->setEnabled(false);
 
@@ -664,6 +665,18 @@ void dooble_settings::slot_apply(void)
       remove_setting("authentication_iteration_count");
       remove_setting("authentication_salt");
       remove_setting("authentication_salted_password");
+      remove_setting("block_cipher_type");
+      remove_setting("block_cipher_type_index");
+
+      {
+	QWriteLocker locker(&s_settings_mutex);
+
+	s_settings["block_cipher_type"] = "AES-256";
+	s_settings["block_cipher_type_index"] = 0;
+      }
+ 
+      dooble::s_cryptography->deleteLater();
+      dooble::s_cryptography = new dooble_cryptography("AES-256");
 
       if(m_ui.credentials->isChecked())
 	{
@@ -748,7 +761,6 @@ void dooble_settings::slot_apply(void)
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
   set_setting("auto_hide_tab_bar", m_ui.auto_hide_tab_bar->isChecked());
-  set_setting("block_cipher_type_index", m_ui.cipher->currentIndex());
   set_setting("browsing_history_days", m_ui.browsing_history->value());
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
@@ -760,11 +772,6 @@ void dooble_settings::slot_apply(void)
 
   {
     QWriteLocker locker(&s_settings_mutex);
-
-    if(m_ui.cipher->currentIndex() == 0)
-      s_settings["block_cipher_type"] = "AES-256";
-    else
-      s_settings["block_cipher_type"] = "Threefish-256";
 
     if(m_ui.theme->currentIndex() == 0)
       s_settings["icon_set"] = "BlueBits";
@@ -850,18 +857,38 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
       QList<QByteArray> list(m_pbkdf2_future.result());
       bool ok = true;
 
-      if(list.size() == 4)
+      if(list.size() == 5)
 	{
 	  ok &= set_setting
-	    ("authentication_iteration_count", list.at(1).toInt());
-	  ok &= set_setting("authentication_salt", list.at(3).toHex());
+	    ("authentication_iteration_count", list.at(2).toInt());
+	  ok &= set_setting("authentication_salt", list.at(4).toHex());
 	  ok &= set_setting
 	    ("authentication_salted_password",
-	     QCryptographicHash::hash(list.at(2) + list.at(3),
+	     QCryptographicHash::hash(list.at(3) + list.at(4),
 				      QCryptographicHash::Sha3_512).toHex());
+	  ok &= set_setting
+	    ("block_cipher_type_index", list.at(1).toInt());
+	  ok &= set_setting("credentials_enabled", true);
+
+	  {
+	    QWriteLocker locker(&s_settings_mutex);
+
+	    if(list.at(1).toInt() == 0)
+	      s_settings["block_cipher_type"] = "AES-256";
+	    else
+	      s_settings["block_cipher_type"] = "Threefish-256";
+	  }
 
 	  if(ok)
 	    {
+	      dooble::s_cryptography->deleteLater();
+
+	      if(list.at(1).toInt() == 0)
+		dooble::s_cryptography = new dooble_cryptography("AES-256");
+	      else
+		dooble::s_cryptography = new dooble_cryptography
+		  ("Threefish-256");
+
 	      dooble::s_cryptography->setAuthenticated(true);
 	      dooble::s_cryptography->setKeys
 		(list.at(0).mid(0, 64), list.at(0).mid(64, 32));
@@ -873,13 +900,10 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	ok = false;
 
       if(ok)
-	{
-	  set_setting("credentials_enabled", true);
-	  QMessageBox::information
-	    (this,
-	     tr("Dooble: Information"),
-	     tr("Your credentials have been prepared."));
-	}
+	QMessageBox::information
+	  (this,
+	   tr("Dooble: Information"),
+	   tr("Your credentials have been prepared."));
       else
 	QMessageBox::critical
 	  (this,
@@ -956,6 +980,7 @@ void dooble_settings::slot_reset_credentials(void)
   ** Remove settings.
   */
 
+  m_ui.cipher->setCurrentIndex(0);
   m_ui.iterations->setValue(m_ui.iterations->minimum());
   m_ui.reset_credentials->setEnabled(false);
 
@@ -967,6 +992,10 @@ void dooble_settings::slot_reset_credentials(void)
   remove_setting("authentication_iteration_count");
   remove_setting("authentication_salt");
   remove_setting("authentication_salted_password");
+  remove_setting("block_cipher_type");
+  remove_setting("block_cipher_type_index");
+  dooble::s_cryptography->deleteLater();
+  dooble::s_cryptography = new dooble_cryptography("AES-256");
   emit dooble_credentials_authenticated(false);
 
   /*
@@ -1050,6 +1079,7 @@ void dooble_settings::slot_save_credentials(void)
 
   pbkdf2.reset(new dooble_pbkdf2(password1.toUtf8(),
 				 salt,
+				 m_ui.cipher->currentIndex(),
 				 m_ui.iterations->value(),
 				 1024));
   m_pbkdf2_future = QtConcurrent::run
