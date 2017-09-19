@@ -1265,6 +1265,28 @@ void dooble::slot_settings_applied(void)
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
       s_settings->setParent(0);
     }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+
+      if(!page)
+	continue;
+
+      if(dooble_settings::setting("denote_private_tabs").toBool())
+	{
+	  if(page->is_private())
+	    m_ui.tab->setTabTextColor(i, s_private_tab_text_color);
+	  else
+	    m_ui.tab->setTabTextColor(i, QColor());
+	}
+      else
+	m_ui.tab->setTabTextColor(i, QColor());
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_show_about(void)
