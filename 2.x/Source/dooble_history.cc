@@ -107,7 +107,9 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	if(query.exec("SELECT last_visited, url_digest FROM dooble_history"))
 	  {
 	    dooble_cryptography cryptography
-	      (authentication_key, encryption_key);
+	      (authentication_key,
+	       encryption_key,
+	       dooble_settings::setting("block_cipher_type").toString());
 	    int days = dooble_settings::setting
 	      ("browsing_history_days").toInt();
 

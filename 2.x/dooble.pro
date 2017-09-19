@@ -126,6 +126,7 @@ SOURCES		= Source\\dooble.cc \
                   Source\\dooble_address_widget_completer_popup.cc \
                   Source\\dooble_aes256.cc \
                   Source\\dooble_application.cc \
+                  Source\\dooble_block_cipher.cc \
                   Source\\dooble_certificate_exceptions_menu_widget.cc \
                   Source\\dooble_clear_items.cc \
                   Source\\dooble_cookies.cc \

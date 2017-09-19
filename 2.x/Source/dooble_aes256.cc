@@ -124,13 +124,12 @@ static uint8_t s_sbox[256] =
   0xb0, 0x54, 0xbb, 0x16
 };
 
-dooble_aes256::dooble_aes256(const QByteArray &key)
+dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
 {
   m_Nb = 4;
   m_Nk = 8;
   m_Nr = 14;
   m_block_length = 16; // Or, 128 bits.
-  m_key = key;
   m_key_length = 32; // Or, 256 bits.
 
   if(m_key.length() < m_key_length)
@@ -374,17 +373,6 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
     }
 
   return b;
-}
-
-QByteArray dooble_aes256::xor_arrays(const QByteArray &a, const QByteArray &b)
-{
-  QByteArray bytes;
-  int length = qMin(a.length(), b.length());
-
-  for(int i = 0; i < length; i++)
-    bytes.append(a[i] ^ b[i]);
-
-  return bytes;
 }
 
 uint8_t dooble_aes256::xtime(uint8_t x)

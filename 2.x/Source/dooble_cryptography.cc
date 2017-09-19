@@ -35,12 +35,18 @@
 #include "dooble_random.h"
 
 dooble_cryptography::dooble_cryptography
-(const QByteArray &authentication_key, const QByteArray &encryption_key):
-  QObject()
+(const QByteArray &authentication_key,
+ const QByteArray &encryption_key,
+ const QString &block_cipher_type):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = authentication_key;
+  m_block_cipher = 0;
+
+  if(block_cipher_type.toLower().trimmed() == "aes-256")
+    m_block_cipher = new dooble_aes256(m_encryption_key);
+
   m_encryption_key = encryption_key;
 
   if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
@@ -52,23 +58,27 @@ dooble_cryptography::dooble_cryptography
     }
 }
 
-dooble_cryptography::dooble_cryptography(void):QObject()
+dooble_cryptography::dooble_cryptography(const QString &block_cipher_type):
+  QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = dooble_random::random_bytes(64);
+  m_block_cipher = 0;
   m_encryption_key = dooble_random::random_bytes(32);
+
+  if(block_cipher_type.toLower().trimmed() == "aes-256")
+    m_block_cipher = new dooble_aes256(m_encryption_key);
 }
 
 QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 {
   if(m_as_plaintext)
     return data;
+  else if(!m_block_cipher)
+    return QByteArray();
 
-  QByteArray bytes;
-  dooble_aes256 aes256(m_encryption_key);
-
-  bytes = aes256.encrypt(data);
+  QByteArray bytes(m_block_cipher->encrypt(data));
 
   if(!bytes.isEmpty())
     bytes.prepend(hmac(bytes));
@@ -96,6 +106,8 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
 {
   if(m_as_plaintext)
     return data;
+  else if(!m_block_cipher)
+    return QByteArray();
 
   QByteArray computed_mac;
   QByteArray mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
@@ -103,12 +115,8 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
   computed_mac = hmac(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 
   if(!computed_mac.isEmpty() && !mac.isEmpty() && memcmp(computed_mac, mac))
-    {
-      dooble_aes256 aes256(m_encryption_key);
-
-      return aes256.decrypt
-	(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
-    }
+    return m_block_cipher->decrypt
+      (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 
   return data;
 }

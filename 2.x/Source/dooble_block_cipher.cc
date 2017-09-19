@@ -25,48 +25,29 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_cryptography_h
-#define dooble_cryptography_h
+#include <climits>
 
-#include <QByteArray>
-#include <QObject>
-#include <QPair>
+#include "dooble_block_cipher.h"
 
-class dooble_block_cipher;
-
-class dooble_cryptography: public QObject
+dooble_block_cipher::dooble_block_cipher(const QByteArray &key)
 {
-  Q_OBJECT
+  m_block_length = key.length() / CHAR_BIT; // True implementation must correct.
+  m_key = key;
+  m_key_length = key.length(); // True implementation must correct.
+}
 
- public:
-  dooble_cryptography(const QByteArray &authentication_key,
-		      const QByteArray &encryption_key,
-		      const QString &block_cipher_type);
-  dooble_cryptography(const QString &block_cipher_type);
-  QByteArray encrypt_then_mac(const QByteArray &data) const;
-  QByteArray hmac(const QByteArray &message) const;
-  QByteArray hmac(const QString &message) const;
-  QByteArray mac_then_decrypt(const QByteArray &data) const;
-  QPair<QByteArray, QByteArray> keys(void) const;
-  bool as_plaintext(void) const;
-  bool authenticated(void) const;
-  static bool memcmp(const QByteArray &a, const QByteArray &b);
-  void authenticate(const QByteArray &salt,
-		    const QByteArray &salted_password,
-		    const QString &password);
-  void prepare_keys(const QByteArray &password,
-		    const QByteArray &salt,
-		    int iteration_count);
-  void setAuthenticated(const bool state);
-  void setKeys(const QByteArray &authentication_key,
-	       const QByteArray &encryption_key);
+dooble_block_cipher::~dooble_block_cipher()
+{
+}
 
- private:
-  QByteArray m_authentication_key;
-  QByteArray m_encryption_key;
-  bool m_as_plaintext;
-  bool m_authenticated;
-  dooble_block_cipher *m_block_cipher;
-};
+QByteArray dooble_block_cipher::xor_arrays(const QByteArray &a,
+					   const QByteArray &b)
+{
+  QByteArray bytes;
+  int length = qMin(a.length(), b.length());
 
-#endif
+  for(int i = 0; i < length; i++)
+    bytes.append(a[i] ^ b[i]);
+
+  return bytes;
+}

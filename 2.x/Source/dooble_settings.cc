@@ -116,6 +116,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
+  s_settings["block_cipher_type"] = "AES-256";
+  s_settings["block_cipher_type_index"] = 0;
   s_settings["browsing_history_days"] = 15;
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
@@ -406,6 +408,10 @@ void dooble_settings::restore(void)
 	    m_ui.cache_type->count() - 1));
   m_ui.center_child_windows->setChecked
     (s_settings.value("center_child_windows", true).toBool());
+  m_ui.cipher->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("block_cipher_type_index", 0).toInt(),
+	    m_ui.cipher->count() - 1));
   m_ui.cookie_policy->setCurrentIndex
     (qBound(0,
 	    s_settings.value("cookie_policy_index", 2).toInt(),
@@ -465,6 +471,11 @@ void dooble_settings::restore(void)
   s_settings["accepted_or_blocked_domains_mode"] =
     s_settings.value("accepted_or_blocked_domains_mode", "block").
     toString().toLower();
+
+  if(m_ui.cipher->currentIndex() == 0)
+    s_settings["block_cipher_type"] = "AES-256";
+  else
+    s_settings["block_cipher_type"] = "Threefish-256";
 
   if(m_ui.theme->currentIndex() == 0)
     s_settings["icon_set"] = "BlueBits";
@@ -737,6 +748,7 @@ void dooble_settings::slot_apply(void)
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
   set_setting("auto_hide_tab_bar", m_ui.auto_hide_tab_bar->isChecked());
+  set_setting("block_cipher_type_index", m_ui.cipher->currentIndex());
   set_setting("browsing_history_days", m_ui.browsing_history->value());
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
@@ -748,6 +760,11 @@ void dooble_settings::slot_apply(void)
 
   {
     QWriteLocker locker(&s_settings_mutex);
+
+    if(m_ui.cipher->currentIndex() == 0)
+      s_settings["block_cipher_type"] = "AES-256";
+    else
+      s_settings["block_cipher_type"] = "Threefish-256";
 
     if(m_ui.theme->currentIndex() == 0)
       s_settings["icon_set"] = "BlueBits";

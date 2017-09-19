@@ -25,48 +25,24 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_cryptography_h
-#define dooble_cryptography_h
+#ifndef dooble_block_cipher_h
+#define dooble_block_cipher_h
 
 #include <QByteArray>
-#include <QObject>
-#include <QPair>
 
-class dooble_block_cipher;
-
-class dooble_cryptography: public QObject
+class dooble_block_cipher
 {
-  Q_OBJECT
-
  public:
-  dooble_cryptography(const QByteArray &authentication_key,
-		      const QByteArray &encryption_key,
-		      const QString &block_cipher_type);
-  dooble_cryptography(const QString &block_cipher_type);
-  QByteArray encrypt_then_mac(const QByteArray &data) const;
-  QByteArray hmac(const QByteArray &message) const;
-  QByteArray hmac(const QString &message) const;
-  QByteArray mac_then_decrypt(const QByteArray &data) const;
-  QPair<QByteArray, QByteArray> keys(void) const;
-  bool as_plaintext(void) const;
-  bool authenticated(void) const;
-  static bool memcmp(const QByteArray &a, const QByteArray &b);
-  void authenticate(const QByteArray &salt,
-		    const QByteArray &salted_password,
-		    const QString &password);
-  void prepare_keys(const QByteArray &password,
-		    const QByteArray &salt,
-		    int iteration_count);
-  void setAuthenticated(const bool state);
-  void setKeys(const QByteArray &authentication_key,
-	       const QByteArray &encryption_key);
+  dooble_block_cipher(const QByteArray &key);
+  virtual ~dooble_block_cipher();
+  virtual QByteArray decrypt(const QByteArray &data) = 0;
+  virtual QByteArray encrypt(const QByteArray &data) = 0;
 
- private:
-  QByteArray m_authentication_key;
-  QByteArray m_encryption_key;
-  bool m_as_plaintext;
-  bool m_authenticated;
-  dooble_block_cipher *m_block_cipher;
+ protected:
+  QByteArray m_key;
+  int m_block_length;
+  int m_key_length;
+  static QByteArray xor_arrays(const QByteArray &a, const QByteArray &b);
 };
 
 #endif

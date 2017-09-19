@@ -395,9 +395,13 @@ void dooble::initialize_static_members(void)
   if(!s_cryptography)
     {
       if(dooble_settings::setting("credentials_enabled").toBool())
-	s_cryptography = new dooble_cryptography();
+	s_cryptography = new dooble_cryptography
+	  (dooble_settings::setting("block_cipher_type").toString());
       else
-	s_cryptography = new dooble_cryptography(QByteArray(), QByteArray());
+	s_cryptography = new dooble_cryptography
+	  (QByteArray(),
+	   QByteArray(),
+	   dooble_settings::setting("block_cipher_type").toString());
     }
 
   if(!s_downloads)
