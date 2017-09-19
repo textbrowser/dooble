@@ -1176,18 +1176,18 @@ void dooble::slot_pbkdf2_future_finished(void)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
 
-      if(list.size() == 5)
+      if(!list.isEmpty())
 	{
 	  s_cryptography->deleteLater();
 
-	  if(list.at(1).toInt() == 0)
+	  if(list.value(1).toInt() == 0)
 	    s_cryptography = new dooble_cryptography("AES-256");
 	  else
 	    s_cryptography = new dooble_cryptography("Threefish-256");
 
 	  s_cryptography->setAuthenticated(true);
 	  s_cryptography->setKeys
-	    (list.at(0).mid(0, 64), list.at(0).mid(64, 32));
+	    (list.value(0).mid(0, 64), list.value(0).mid(64, 32));
 	  emit dooble_credentials_authenticated(true);
 	}
     }

@@ -857,23 +857,23 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
       QList<QByteArray> list(m_pbkdf2_future.result());
       bool ok = true;
 
-      if(list.size() == 5)
+      if(!list.isEmpty())
 	{
 	  ok &= set_setting
-	    ("authentication_iteration_count", list.at(2).toInt());
-	  ok &= set_setting("authentication_salt", list.at(4).toHex());
+	    ("authentication_iteration_count", list.value(2).toInt());
+	  ok &= set_setting("authentication_salt", list.value(4).toHex());
 	  ok &= set_setting
 	    ("authentication_salted_password",
-	     QCryptographicHash::hash(list.at(3) + list.at(4),
+	     QCryptographicHash::hash(list.value(3) + list.value(4),
 				      QCryptographicHash::Sha3_512).toHex());
 	  ok &= set_setting
-	    ("block_cipher_type_index", list.at(1).toInt());
+	    ("block_cipher_type_index", list.value(1).toInt());
 	  ok &= set_setting("credentials_enabled", true);
 
 	  {
 	    QWriteLocker locker(&s_settings_mutex);
 
-	    if(list.at(1).toInt() == 0)
+	    if(list.value(1).toInt() == 0)
 	      s_settings["block_cipher_type"] = "AES-256";
 	    else
 	      s_settings["block_cipher_type"] = "Threefish-256";
@@ -883,7 +883,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	    {
 	      dooble::s_cryptography->deleteLater();
 
-	      if(list.at(1).toInt() == 0)
+	      if(list.value(1).toInt() == 0)
 		dooble::s_cryptography = new dooble_cryptography("AES-256");
 	      else
 		dooble::s_cryptography = new dooble_cryptography
@@ -891,7 +891,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 
 	      dooble::s_cryptography->setAuthenticated(true);
 	      dooble::s_cryptography->setKeys
-		(list.at(0).mid(0, 64), list.at(0).mid(64, 32));
+		(list.value(0).mid(0, 64), list.value(0).mid(64, 32));
 	      m_ui.reset_credentials->setEnabled(true);
 	      emit dooble_credentials_created();
 	    }

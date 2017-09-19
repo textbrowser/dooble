@@ -186,11 +186,11 @@ void dooble_cryptography::prepare_keys(const QByteArray &password,
 
   list = pbkdf2.pbkdf2(dooble_hmac::sha3_512_hmac);
 
-  if(list.size() == 5)
+  if(!list.isEmpty())
     {
-      m_authentication_key = list.at(0).mid(0, 64);
-      m_block_cipher->set_key(list.at(0).mid(64, 32));
-      m_encryption_key = list.at(0).mid(64, 32);
+      m_authentication_key = list.value(0).mid(0, 64);
+      m_block_cipher->set_key(list.value(0).mid(64, 32));
+      m_encryption_key = list.value(0).mid(64, 32);
     }
 }
 
