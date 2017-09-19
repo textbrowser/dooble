@@ -38,6 +38,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="bookmarks">
+        <property name="text">
+         <string>Bookmarks</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="certificate_error_exceptions">
         <property name="text">
          <string>Certificate Error Exceptions</string>
@@ -109,6 +116,7 @@
  </widget>
  <tabstops>
   <tabstop>accepted_blocked_domains</tabstop>
+  <tabstop>bookmarks</tabstop>
   <tabstop>certificate_error_exceptions</tabstop>
   <tabstop>cookies</tabstop>
   <tabstop>download_history</tabstop>
