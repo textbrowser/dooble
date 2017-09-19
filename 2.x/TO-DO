@@ -50,6 +50,7 @@ Completed Items
 46.    Windows PRNG.
 47.    Accepted / Blocked Domains File menu on Apple. Hide.
 48.    Restore default functionality of Control + A.
+49.    Cookies menu item within Tools.
 
 Remaining Items
 
@@ -58,8 +59,6 @@ Remaining Items
 3.     Super-fancy icon set.
 4.     Document Microsoft Studio compilation process.
 5.     Release notes.
-6.     Cookies menu item within Tools.
-7.     Enable spell checking.
 
 Unknown Items
 
@@ -68,3 +67,4 @@ Unknown Items
 3.     Pause and restart downloads.
 4.     Download gopher content.
 5.     Custom icon sets.
+6.     Enable spell checking. Dictionaries are required.

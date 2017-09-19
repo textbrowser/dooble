@@ -670,6 +670,10 @@ void dooble::prepare_shortcuts(void)
 	(new QShortcut(QKeySequence(tr("Ctrl+H")),
 		       this,
 		       SLOT(slot_show_history(void))));
+      m_shortcuts.append
+	(new QShortcut(QKeySequence(tr("Ctrl+K")),
+		       this,
+		       SLOT(slot_show_cookies(void))));
       m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+N")),
 				       this,
 				       SLOT(slot_new_window(void))));
@@ -1290,6 +1294,24 @@ void dooble::slot_show_clear_items(void)
 	  dooble::s_application,
 	  SIGNAL(containers_cleared(void)));
   clear_items.exec();
+}
+
+void dooble::slot_show_cookies(void)
+{
+  if(s_cookies_window->isVisible())
+    {
+      s_cookies_window->activateWindow();
+      s_cookies_window->raise();
+      return;
+    }
+
+  s_cookies_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, s_cookies_window);
+
+  s_cookies_window->activateWindow();
+  s_cookies_window->raise();
 }
 
 void dooble::slot_show_downloads(void)

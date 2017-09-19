@@ -135,6 +135,7 @@ class dooble: public QMainWindow
   void slot_show_about(void);
   void slot_show_accepted_or_blocked_domains(void);
   void slot_show_clear_items(void);
+  void slot_show_cookies(void);
   void slot_show_downloads(void);
   void slot_show_full_screen(void);
   void slot_show_history(void);
