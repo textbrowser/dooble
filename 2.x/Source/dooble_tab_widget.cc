@@ -140,6 +140,11 @@ void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 #endif
 }
 
+void dooble_tab_widget::setTabTextColor(int index, const QColor &color)
+{
+  m_tab_bar->setTabTextColor(index, color);
+}
+
 void dooble_tab_widget::slot_load_finished(void)
 {
   dooble_page *page = qobject_cast<dooble_page *> (sender());

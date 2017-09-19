@@ -57,6 +57,7 @@
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 
+QColor dooble::s_private_tab_text_color = QColor(148, 0, 211);
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
 QPointer<dooble_about> dooble::s_about;
@@ -446,6 +447,12 @@ void dooble::new_page(bool is_private)
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("Dooble"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    if(is_private)
+      m_ui.tab->setTabTextColor
+	(m_ui.tab->count() - 1, s_private_tab_text_color);
+
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
   m_ui.tab->setCurrentWidget(page); // Order is important.
 
@@ -475,6 +482,12 @@ void dooble::new_page(dooble_page *page)
 
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    if(page->is_private())
+      m_ui.tab->setTabTextColor
+	(m_ui.tab->count() - 1, s_private_tab_text_color);
+
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
@@ -496,6 +509,11 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.
+
+  if(dooble_settings::setting("denote_private_tabs").toBool())
+    if(page->is_private())
+      m_ui.tab->setTabTextColor
+	(m_ui.tab->count() - 1, s_private_tab_text_color);
 
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
