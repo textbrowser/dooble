@@ -423,18 +423,6 @@ void dooble::initialize_static_members(void)
 
 void dooble::keyPressEvent(QKeyEvent *event)
 {
-#ifndef Q_OS_MACOS
-  if(!menuBar()->isVisible())
-#endif
-    if(event && (event->modifiers() & Qt::AltModifier))
-      {
-	dooble_page *page = qobject_cast<dooble_page *>
-	  (m_ui.tab->currentWidget());
-
-	if(page)
-	  page->show_menu();
-      }
-
   QMainWindow::keyPressEvent(event);
 }
 
