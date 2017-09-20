@@ -52,6 +52,8 @@ Completed Items
 48.    Restore default functionality of Control + A.
 49.    Cookies menu item within Tools.
 50.    Threefish-256.
+51.    Enable spell checking. Dictionaries are required.
+       US-English.
 
 Remaining Items
 
@@ -67,5 +69,4 @@ Unknown Items
 3.     Pause and restart downloads.
 4.     Download gopher content.
 5.     Custom icon sets.
-6.     Enable spell checking. Dictionaries are required.
-7.     Language option.
+6.     Language option.

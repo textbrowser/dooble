@@ -3,6 +3,20 @@ error("Qt version 5.9.1, or newer, is required.")
 }
 
 cache()
+qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+DICTIONARIES_DIR = qtwebengine_dictionaries
+dict_base_paths = en/en_US
+
+for(base_path, dict_base_paths) {
+dict.files += $$PWD/Dictionaries/$${base_path}.dic
+}
+
+dictoolbuild.CONFIG = no_link target_predeps
+dictoolbuild.commands = $${CONVERT_TOOL} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
+dictoolbuild.depends = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.aff
+dictoolbuild.input = dict.files
+dictoolbuild.name = Build ${QMAKE_FILE_IN_BASE}
+dictoolbuild.output = $${DICTIONARIES_DIR}/${QMAKE_FILE_BASE}.bdic
 
 unix {
 purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
@@ -40,6 +54,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 }
 
 QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
+QMAKE_EXTRA_COMPILERS += dictoolbuild
 QMAKE_EXTRA_TARGETS = purge
 
 macx {
