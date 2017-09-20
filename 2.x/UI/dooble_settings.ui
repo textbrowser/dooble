@@ -316,7 +316,7 @@
           <item>
            <widget class="QCheckBox" name="denote_private_tabs">
             <property name="toolTip">
-             <string>Special icons will be displayed on some widgets.</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable special themes on some widgets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Denote Private Tabs</string>
