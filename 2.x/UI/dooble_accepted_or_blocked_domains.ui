@@ -157,6 +157,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="import">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Existing values will be updated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>&amp;Import...</string>
         </property>

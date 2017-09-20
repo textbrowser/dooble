@@ -508,7 +508,8 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
       if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 	  dialog.close();
-	  m_domains.clear();
+	  m_ui.search->clear();
+	  m_ui.table->clearContents();
 	  repaint();
 	  QApplication::processEvents();
 
