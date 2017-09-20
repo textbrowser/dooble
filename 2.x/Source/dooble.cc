@@ -426,7 +426,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
 #ifndef Q_OS_MACOS
   if(!menuBar()->isVisible())
 #endif
-    if(event && event->modifiers() == Qt::AltModifier)
+    if(event && (event->modifiers() & Qt::AltModifier))
       {
 	dooble_page *page = qobject_cast<dooble_page *>
 	  (m_ui.tab->currentWidget());
