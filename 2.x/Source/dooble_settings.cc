@@ -429,6 +429,8 @@ void dooble_settings::restore(void)
     (s_settings.value("javascript_block_popups", true).toBool());
   m_ui.javascript_popups->setChecked
     (s_settings.value("javascript_popups", true).toBool());
+  m_ui.local_storage->setChecked
+    (s_settings.value("local_storage", false).toBool());
   m_ui.main_menu_bar_visible->setChecked
     (s_settings.value("main_menu_bar_visible", true).toBool());
   m_ui.pages->setCurrentIndex
@@ -533,6 +535,8 @@ void dooble_settings::restore(void)
      m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
@@ -674,7 +678,7 @@ void dooble_settings::slot_apply(void)
 	s_settings["block_cipher_type"] = "AES-256";
 	s_settings["block_cipher_type_index"] = 0;
       }
- 
+
       dooble::s_cryptography->deleteLater();
       dooble::s_cryptography = new dooble_cryptography("AES-256");
 
@@ -724,6 +728,8 @@ void dooble_settings::slot_apply(void)
      m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
@@ -788,6 +794,7 @@ void dooble_settings::slot_apply(void)
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting
     ("javascript_popups", m_ui.javascript_popups->isChecked());
+  set_setting("local_storage", m_ui.local_storage->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("pin_accepted_or_blocked_window",
 	      m_ui.pin_accepted_or_blocked_domains->isChecked());

@@ -601,8 +601,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>633</height>
+               <width>651</width>
+               <height>631</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1116,6 +1116,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="local_storage">
+            <property name="toolTip">
+             <string>HTML5 local storage.</string>
+            </property>
+            <property name="text">
+             <string>Local Storage</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QLabel" name="label_20">
@@ -1291,6 +1301,7 @@
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
   <tabstop>javascript_popups</tabstop>
+  <tabstop>local_storage</tabstop>
   <tabstop>user_agent</tabstop>
   <tabstop>web_plugins</tabstop>
   <tabstop>xss_auditing</tabstop>
