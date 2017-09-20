@@ -211,10 +211,6 @@ void dooble_web_engine_view::copy_default_profile_settings(void)
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::JavascriptEnabled));
   m_page->profile()->settings()->setAttribute
-    (QWebEngineSettings::LocalStorageEnabled,
-     QWebEngineSettings::globalSettings()->
-     testAttribute(QWebEngineSettings::LocalStorageEnabled));
-  m_page->profile()->settings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
