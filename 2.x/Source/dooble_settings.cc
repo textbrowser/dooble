@@ -430,7 +430,7 @@ void dooble_settings::restore(void)
   m_ui.javascript_popups->setChecked
     (s_settings.value("javascript_popups", true).toBool());
   m_ui.local_storage->setChecked
-    (s_settings.value("local_storage", false).toBool());
+    (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked
     (s_settings.value("main_menu_bar_visible", true).toBool());
   m_ui.pages->setCurrentIndex

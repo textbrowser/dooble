@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -601,8 +601,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>631</height>
+               <width>635</width>
+               <height>642</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -668,6 +668,9 @@
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_6">
                  <item>
@@ -1122,6 +1125,9 @@
             </property>
             <property name="text">
              <string>Local Storage</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
