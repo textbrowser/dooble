@@ -53,6 +53,7 @@ class dooble_history_window: public QMainWindow
   QTimer m_search_timer;
   QWidget *m_parent;
   Ui_dooble_history_window m_ui;
+  void clear(void);
   void save_settings(void);
   void set_row_hidden(int i);
 

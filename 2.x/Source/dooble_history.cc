@@ -385,7 +385,10 @@ void dooble_history::slot_containers_cleared(void)
 void dooble_history::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
+    {
+      emit populated();
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_history.clear();

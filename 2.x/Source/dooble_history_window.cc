@@ -105,6 +105,12 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
+void dooble_history_window::clear(void)
+{
+  m_items.clear();
+  m_ui.table->clearContents();
+}
+
 void dooble_history_window::closeEvent(QCloseEvent *event)
 {
   QMainWindow::closeEvent(event);
@@ -525,9 +531,15 @@ void dooble_history_window::slot_parent_destroyed(void)
 void dooble_history_window::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
+    {
+      clear();
+      return;
+    }
   else if(!dooble::s_history)
-    return;
+    {
+      clear();
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_items.clear();
