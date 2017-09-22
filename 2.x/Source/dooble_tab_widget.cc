@@ -230,7 +230,8 @@ void dooble_tab_widget::slot_load_started(void)
 
   if(!movie)
     {
-      movie = new QMovie(":/spinning_wheel.gif", QByteArray(), label);
+      movie = new QMovie
+	(":/Miscellaneous/spinning_wheel.gif", QByteArray(), label);
       label->setMovie(movie);
       movie->setScaledSize(QSize(16, 16));
       movie->start();

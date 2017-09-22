@@ -40,7 +40,7 @@
            <string notr="true">QLabel {border: none;}</string>
           </property>
           <property name="pixmap">
-           <pixmap resource="../Icons/icons.qrc">:/certificate_warning.png</pixmap>
+           <pixmap resource="../Icons/icons.qrc">:/Miscellaneous/certificate_warning.png</pixmap>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

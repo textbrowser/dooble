@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
   ** Create a splash screen.
   */
 
-  QSplashScreen splash(QPixmap(":/splash.png"));
+  QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
 
   splash.show();
   splash.showMessage

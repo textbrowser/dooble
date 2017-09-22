@@ -72,6 +72,10 @@
 	<file>Google Material Design/64/windows.png</file>
 	<file>Logo/dooble.png</file>
 	<file>Mac/16/tab_close.png</file>
+	<file>Miscellaneous/blank_page.png</file>
+	<file>Miscellaneous/certificate_warning.png</file>
+	<file>Miscellaneous/spinning_wheel.gif</file>
+	<file>Miscellaneous/splash.png</file>
 	<file>SnipIcons/16/bookmark.png</file>
 	<file>SnipIcons/16/bookmarked.png</file>
 	<file>SnipIcons/16/find.png</file>
@@ -107,9 +111,5 @@
 	<file>SnipIcons/64/privacy.png</file>
 	<file>SnipIcons/64/webengine.png</file>
 	<file>SnipIcons/64/windows.png</file>
-	<file>blank_page.png</file>
-	<file>certificate_warning.png</file>
-	<file>spinning_wheel.gif</file>
-	<file>splash.png</file>
     </qresource>
 </RCC>

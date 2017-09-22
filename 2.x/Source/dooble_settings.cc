@@ -56,6 +56,7 @@ QAtomicInteger<quintptr> dooble_settings::s_db_id;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
+QStringList dooble_settings::s_spell_checker_dictionaries;
 
 dooble_settings::dooble_settings(void):QMainWindow()
 {
