@@ -76,6 +76,9 @@ OBJECTS_DIR = temp/obj
 RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
+DISTFILES += Dictionaries/en/en_US.dic \
+             Dictionaries/en/en_US.aff
+
 FORMS           = UI\\dooble.ui \
                   UI\\dooble_about.ui \
                   UI\\dooble_accepted_or_blocked_domains.ui \
@@ -187,13 +190,24 @@ dooble.files	   = Dooble.app/*
 macdeployqt.path   = Dooble.app
 macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt ./Dooble.app
 preinstall.path    = /Applications/Dooble.d
-preinstall.extra   = rm -rf /Applications/Dooble.d/Dooble.app/*
+preinstall.extra   = rm -rf /Applications/Dooble.d/Dooble.app
 postinstall.path   = /Applications/Dooble.d
-postinstall.extra  = cp -r Dooble.app /Applications/Dooble.d/.
+postinstall.extra  = cp -r ./Dooble.app /Applications/Dooble.d/.
 
 INSTALLS	= preinstall \
                   data \
 		  macdeployqt \
-		  dooble \
+                  dooble \
                   postinstall
+}
+
+macx:app_bundle {
+for (base_path, dict_base_paths) {
+base_path_splitted = $$split(base_path, /)
+base_name = $$last(base_path_splitted)
+binary_dict_files.files += $${DICTIONARIES_DIR}/$${base_name}.bdic
+}
+
+binary_dict_files.path = Contents/Resources/$$DICTIONARIES_DIR
+QMAKE_BUNDLE_DATA += binary_dict_files
 }
