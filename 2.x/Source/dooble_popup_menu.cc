@@ -35,7 +35,8 @@
 #include "dooble_popup_menu.h"
 #include "dooble_settings.h"
 
-dooble_popup_menu::dooble_popup_menu(QWidget *parent):QDialog(parent)
+dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
+  QDialog(parent)
 {
   m_ui.setupUi(this);
 
@@ -83,6 +84,7 @@ dooble_popup_menu::dooble_popup_menu(QWidget *parent):QDialog(parent)
 
   prepare_icons();
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
+  slot_zoomed(zoom_factor);
 }
 
 dooble *dooble_popup_menu::find_parent_dooble(void) const

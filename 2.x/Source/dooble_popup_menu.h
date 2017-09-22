@@ -39,7 +39,7 @@ class dooble_popup_menu:public QDialog
   Q_OBJECT
 
  public:
-  dooble_popup_menu(QWidget *parent);
+  dooble_popup_menu(qreal zoom_factor, QWidget *parent);
 
  private:
   Ui_dooble_popup_menu m_ui;

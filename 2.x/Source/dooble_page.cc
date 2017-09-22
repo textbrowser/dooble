@@ -634,7 +634,8 @@ void dooble_page::show_popup_menu(void)
   QPoint point(m_ui.menu->pos());
   QSize size;
   QWidgetAction widget_action(&menu);
-  dooble_popup_menu *popup_menu = new dooble_popup_menu(this);
+  dooble_popup_menu *popup_menu = new dooble_popup_menu
+    (m_view->zoomFactor(), this);
 
   connect(popup_menu,
 	  SIGNAL(accepted(void)),
