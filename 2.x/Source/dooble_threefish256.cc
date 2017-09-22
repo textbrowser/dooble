@@ -537,8 +537,6 @@ dooble_threefish256::~dooble_threefish256()
 
 QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
 {
-  QReadLocker locker(&m_locker);
-
   if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
     return QByteArray();
 
@@ -617,12 +615,8 @@ QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
 
 QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 {
-  QReadLocker locker(&m_locker);
-
   if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
     return QByteArray();
-
-  locker.unlock();
 
   QByteArray iv;
   bool ok = true;
@@ -631,8 +625,6 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 
   if(Q_UNLIKELY(iv.isEmpty()))
     return QByteArray();
-
-  locker.relock();
 
   /*
   ** Let's resize the container to the block size.
@@ -703,10 +695,7 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 void dooble_threefish256::set_initialization_vector
 (QByteArray &bytes, bool *ok) const
 {
-  QReadLocker locker(&m_locker);
   int iv_length = m_key_length;
-
-  locker.unlock();
 
   if(ok)
     *ok = false;
@@ -729,8 +718,6 @@ void dooble_threefish256::set_key(const QByteArray &key)
 
 void dooble_threefish256::set_tweak(const QByteArray &tweak, bool *ok)
 {
-  QWriteLocker locker(&m_locker);
-
   if(tweak.length() != 16)
     {
       if(ok)

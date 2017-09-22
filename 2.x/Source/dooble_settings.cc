@@ -674,8 +674,7 @@ void dooble_settings::slot_apply(void)
 	s_settings["block_cipher_type_index"] = 0;
       }
 
-      dooble::s_cryptography->deleteLater();
-      dooble::s_cryptography = new dooble_cryptography("AES-256");
+      dooble::s_cryptography->set_block_cipher_type("AES-256");
 
       if(m_ui.credentials->isChecked())
 	{
@@ -685,14 +684,14 @@ void dooble_settings::slot_apply(void)
 
 	  QByteArray random_bytes(dooble_random::random_bytes(96));
 
-	  dooble::s_cryptography->setAuthenticated(false);
-	  dooble::s_cryptography->setKeys
+	  dooble::s_cryptography->set_authenticated(false);
+	  dooble::s_cryptography->set_keys
 	    (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
 	  emit dooble_credentials_authenticated(false);
 	}
       else
 	{
-	  dooble::s_cryptography->setKeys(QByteArray(), QByteArray());
+	  dooble::s_cryptography->set_keys(QByteArray(), QByteArray());
 	  emit dooble_credentials_authenticated(true);
 	}
 
@@ -883,16 +882,14 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 
 	  if(ok)
 	    {
-	      dooble::s_cryptography->deleteLater();
+	      dooble::s_cryptography->set_authenticated(true);
 
 	      if(list.value(1).toInt() == 0)
-		dooble::s_cryptography = new dooble_cryptography("AES-256");
+		dooble::s_cryptography->set_block_cipher_type("AES-256");
 	      else
-		dooble::s_cryptography = new dooble_cryptography
-		  ("Threefish-256");
+		dooble::s_cryptography->set_block_cipher_type("Threefish-256");
 
-	      dooble::s_cryptography->setAuthenticated(true);
-	      dooble::s_cryptography->setKeys
+	      dooble::s_cryptography->set_keys
 		(list.value(0).mid(0, 64), list.value(0).mid(64, 32));
 	      m_ui.reset_credentials->setEnabled(true);
 	      emit dooble_credentials_created();
@@ -996,9 +993,6 @@ void dooble_settings::slot_reset_credentials(void)
   remove_setting("authentication_salted_password");
   remove_setting("block_cipher_type");
   remove_setting("block_cipher_type_index");
-  dooble::s_cryptography->deleteLater();
-  dooble::s_cryptography = new dooble_cryptography("AES-256");
-  emit dooble_credentials_authenticated(false);
 
   /*
   ** Generate temporary credentials.
@@ -1006,9 +1000,11 @@ void dooble_settings::slot_reset_credentials(void)
 
   QByteArray random_bytes(dooble_random::random_bytes(96));
 
-  dooble::s_cryptography->setAuthenticated(false);
-  dooble::s_cryptography->setKeys
+  dooble::s_cryptography->set_authenticated(false);
+  dooble::s_cryptography->set_block_cipher_type("AES-256");
+  dooble::s_cryptography->set_keys
     (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+  emit dooble_credentials_authenticated(false);
   QApplication::restoreOverrideCursor();
 }
 

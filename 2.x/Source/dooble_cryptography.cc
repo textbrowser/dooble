@@ -43,16 +43,7 @@ dooble_cryptography::dooble_cryptography
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = authentication_key;
-  m_block_cipher = 0;
-
-  if(block_cipher_type.toLower().trimmed() == "aes-256")
-    m_block_cipher = new dooble_aes256(encryption_key);
-  else
-    {
-      m_block_cipher = new dooble_threefish256(encryption_key);
-      m_block_cipher->set_tweak("76543210fedcba98", 0);
-    }
-
+  m_block_cipher_type = block_cipher_type.toLower().trimmed();
   m_encryption_key = encryption_key;
 
   if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
@@ -60,7 +51,6 @@ dooble_cryptography::dooble_cryptography
       m_as_plaintext = true;
       m_authenticated = true;
       m_authentication_key.clear();
-      m_block_cipher->set_key(QByteArray());
       m_encryption_key.clear();
     }
 }
@@ -71,16 +61,8 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type):
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = dooble_random::random_bytes(64);
-  m_block_cipher = 0;
+  m_block_cipher_type = block_cipher_type.toLower().trimmed();
   m_encryption_key = dooble_random::random_bytes(32);
-
-  if(block_cipher_type.toLower().trimmed() == "aes-256")
-    m_block_cipher = new dooble_aes256(m_encryption_key);
-  else
-    {
-      m_block_cipher = new dooble_threefish256(m_encryption_key);
-      m_block_cipher->set_tweak("76543210fedcba98", 0);
-    }
 }
 
 dooble_cryptography::~dooble_cryptography()
@@ -102,10 +84,22 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 {
   if(m_as_plaintext)
     return data;
-  else if(!m_block_cipher)
-    return QByteArray();
 
-  QByteArray bytes(m_block_cipher->encrypt(data));
+  QByteArray bytes;
+
+  if(m_block_cipher_type == "aes-256")
+    {
+      dooble_aes256 aes(m_encryption_key);
+
+      bytes = aes.encrypt(data);
+    }
+  else
+    {
+      dooble_threefish256 threefish(m_encryption_key);
+
+      threefish.set_tweak("76543210fedcba98", 0);
+      bytes = threefish.encrypt(data);
+    }
 
   if(!bytes.isEmpty())
     bytes.prepend(hmac(bytes));
@@ -133,8 +127,6 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
 {
   if(m_as_plaintext)
     return data;
-  else if(!m_block_cipher)
-    return QByteArray();
 
   QByteArray computed_mac;
   QByteArray mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
@@ -142,8 +134,23 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
   computed_mac = hmac(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 
   if(!computed_mac.isEmpty() && !mac.isEmpty() && memcmp(computed_mac, mac))
-    return m_block_cipher->decrypt
-      (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+    {
+      if(m_block_cipher_type == "aes-256")
+	{
+	  dooble_aes256 aes(m_encryption_key);
+
+	  return aes.decrypt
+	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+	}
+      else
+	{
+	  dooble_threefish256 threefish(m_encryption_key);
+
+	  threefish.set_tweak("76543210fedcba98", 0);
+	  return threefish.decrypt
+	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+	}
+    }
 
   return data;
 }
@@ -204,18 +211,23 @@ void dooble_cryptography::prepare_keys(const QByteArray &password,
   if(!list.isEmpty())
     {
       m_authentication_key = list.value(0).mid(0, 64);
-      m_block_cipher->set_key(list.value(0).mid(64, 32));
       m_encryption_key = list.value(0).mid(64, 32);
     }
 }
 
-void dooble_cryptography::setAuthenticated(bool state)
+void dooble_cryptography::set_authenticated(bool state)
 {
   m_authenticated = state;
 }
 
-void dooble_cryptography::setKeys(const QByteArray &authentication_key,
-				  const QByteArray &encryption_key)
+void dooble_cryptography::set_block_cipher_type
+(const QString &block_cipher_type_index)
+{
+  m_block_cipher_type = block_cipher_type_index.toLower().trimmed();
+}
+
+void dooble_cryptography::set_keys(const QByteArray &authentication_key,
+				   const QByteArray &encryption_key)
 {
   m_authentication_key = authentication_key;
   m_encryption_key = encryption_key;
@@ -225,9 +237,6 @@ void dooble_cryptography::setKeys(const QByteArray &authentication_key,
       m_as_plaintext = true;
       m_authenticated = true;
       m_authentication_key.clear();
-      m_block_cipher->set_key(QByteArray());
       m_encryption_key.clear();
     }
-  else
-    m_block_cipher->set_key(m_encryption_key);
 }

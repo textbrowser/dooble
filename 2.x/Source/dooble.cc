@@ -1156,15 +1156,14 @@ void dooble::slot_pbkdf2_future_finished(void)
 
       if(!list.isEmpty())
 	{
-	  s_cryptography->deleteLater();
+	  s_cryptography->set_authenticated(true);
 
 	  if(list.value(1).toInt() == 0)
-	    s_cryptography = new dooble_cryptography("AES-256");
+	    s_cryptography->set_block_cipher_type("AES-256");
 	  else
-	    s_cryptography = new dooble_cryptography("Threefish-256");
+	    s_cryptography->set_block_cipher_type("Threefish-256");
 
-	  s_cryptography->setAuthenticated(true);
-	  s_cryptography->setKeys
+	  s_cryptography->set_keys
 	    (list.value(0).mid(0, 64), list.value(0).mid(64, 32));
 	  emit dooble_credentials_authenticated(true);
 	}

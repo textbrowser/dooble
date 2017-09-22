@@ -29,7 +29,6 @@
 #define dooble_threefish256_h
 
 #include <QByteArray>
-#include <QReadWriteLock>
 
 #include "dooble_block_cipher.h"
 
@@ -48,7 +47,6 @@ class dooble_threefish256: public dooble_block_cipher
 
  private:
   QByteArray m_tweak;
-  mutable QReadWriteLock m_locker;
   size_t m_tweak_length;
   void set_initialization_vector(QByteArray &bytes, bool *ok) const;
 };

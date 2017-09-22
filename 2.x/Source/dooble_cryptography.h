@@ -32,8 +32,6 @@
 #include <QObject>
 #include <QPair>
 
-class dooble_block_cipher;
-
 class dooble_cryptography: public QObject
 {
   Q_OBJECT
@@ -59,16 +57,17 @@ class dooble_cryptography: public QObject
 		    const QByteArray &salt,
 		    int block_cipher_type_index,
 		    int iteration_count);
-  void setAuthenticated(const bool state);
-  void setKeys(const QByteArray &authentication_key,
-	       const QByteArray &encryption_key);
+  void set_authenticated(bool state);
+  void set_block_cipher_type(const QString &block_cipher_type);
+  void set_keys(const QByteArray &authentication_key,
+		const QByteArray &encryption_key);
 
  private:
   QByteArray m_authentication_key;
   QByteArray m_encryption_key;
+  QString m_block_cipher_type;
   bool m_as_plaintext;
   bool m_authenticated;
-  dooble_block_cipher *m_block_cipher;
 };
 
 #endif
