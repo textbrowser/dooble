@@ -79,13 +79,10 @@ dooble::dooble(QWidget *widget):QMainWindow()
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
-#ifndef Q_OS_MACOS
+
   if(!isFullScreen())
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
-#else
-  setMenuBar(0);
-#endif
 
   if(widget)
     {
@@ -118,13 +115,11 @@ dooble::dooble(dooble_page *page):QMainWindow()
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
-#ifndef Q_OS_MACOS
+
   if(!isFullScreen())
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
-#else
-  setMenuBar(0);
-#endif
+
   new_page(page);
 
   if(!s_containers_populated)
@@ -149,13 +144,11 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
-#ifndef Q_OS_MACOS
+
   if(!isFullScreen())
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
-#else
-  setMenuBar(0);
-#endif
+
   new_page(view);
 
   if(!s_containers_populated)
@@ -832,9 +825,6 @@ void dooble::show(void)
 					   toByteArray()));
 
   QMainWindow::show();
-
-  if(isFullScreen())
-    m_ui.menu_bar->setVisible(false);
 }
 
 void dooble::slot_about_to_hide_main_menu(void)
@@ -1232,11 +1222,8 @@ void dooble::slot_reload_tab(int index)
 
 void dooble::slot_settings_applied(void)
 {
-#ifndef Q_OS_MACOS
-  if(!isFullScreen())
-    m_ui.menu_bar->setVisible
-      (dooble_settings::setting("main_menu_bar_visible").toBool());
-#endif
+  m_ui.menu_bar->setVisible
+    (dooble_settings::setting("main_menu_bar_visible").toBool());
 
   if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
     {
@@ -1388,20 +1375,9 @@ void dooble::slot_show_downloads(void)
 void dooble::slot_show_full_screen(void)
 {
   if(!isFullScreen())
-    {
-      showFullScreen();
-#ifndef Q_OS_MACOS
-      m_ui.menu_bar->setVisible(false);
-#endif
-    }
+    showFullScreen();
   else
-    {
-      showNormal();
-#ifndef Q_OS_MACOS
-      m_ui.menu_bar->setVisible
-	(dooble_settings::setting("main_menu_bar_visible").toBool());
-#endif
-    }
+    showNormal();
 }
 
 void dooble::slot_show_history(void)

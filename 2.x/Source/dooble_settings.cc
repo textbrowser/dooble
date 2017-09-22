@@ -60,11 +60,6 @@ QString dooble_settings::s_http_user_agent;
 dooble_settings::dooble_settings(void):QMainWindow()
 {
   m_ui.setupUi(this);
-#ifdef Q_OS_MACOS
-  m_ui.main_menu_bar_visible->setEnabled(false);
-  m_ui.main_menu_bar_visible->setToolTip
-    (tr("Option is not yet available on Mac OS."));
-#endif
   connect(&m_pbkdf2_future_watcher,
 	  SIGNAL(finished(void)),
 	  this,
