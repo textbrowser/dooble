@@ -129,6 +129,9 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
   s_settings["zoom_frame_location_index"] = 0;
+  s_spell_checker_dictionaries.append("en_US");
+  QWebEngineProfile::defaultProfile()->setSpellCheckLanguages
+    (s_spell_checker_dictionaries);
   restore();
   prepare_icons();
 }

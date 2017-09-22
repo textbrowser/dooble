@@ -226,7 +226,6 @@ int main(int argc, char *argv[])
      QDir::separator() +
      "WebEnginePersistentStorage");
   QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
-  QWebEngineProfile::defaultProfile()->setSpellCheckLanguages({"en_US"});
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
