@@ -89,6 +89,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
       m_ui.tab->addTab(widget, widget->windowTitle());
       m_ui.tab->setCurrentWidget(widget);
       m_ui.tab->setTabToolTip(0, widget->windowTitle());
+      prepare_tab_shortcuts();
     }
   else
     new_page(false);
@@ -437,6 +438,8 @@ void dooble::new_page(bool is_private)
 
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
+
+  prepare_tab_shortcuts();
 }
 
 void dooble::new_page(dooble_page *page)
@@ -474,6 +477,8 @@ void dooble::new_page(dooble_page *page)
 
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
+
+  prepare_tab_shortcuts();
 }
 
 void dooble::new_page(dooble_web_engine_view *view)
@@ -496,6 +501,8 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
+
+  prepare_tab_shortcuts();
 }
 
 void dooble::prepare_page_connections(dooble_page *page)
@@ -794,6 +801,35 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(slot_show_about(void)));
 }
 
+void dooble::prepare_tab_shortcuts(void)
+{
+  while(!m_tab_widget_shortcuts.isEmpty())
+    delete m_tab_widget_shortcuts.takeFirst();
+
+  for(int i = 0; i < qMin(m_ui.tab->count(), 10); i++)
+    {
+      QWidget *widget = m_ui.tab->widget(i);
+
+      if(!widget)
+	continue;
+
+      QShortcut *shortcut = 0;
+
+      if(i == 9)
+	shortcut = new QShortcut
+	  (Qt::AltModifier + Qt::Key_0,
+	   this,
+	   SLOT(slot_tab_widget_shortcut_activated(void)));
+      else
+	shortcut = new QShortcut
+	  (Qt::AltModifier + Qt::Key(Qt::Key_1 + i),
+	   this,
+	   SLOT(slot_tab_widget_shortcut_activated(void)));
+
+      m_tab_widget_shortcuts.append(shortcut);
+    }
+}
+
 void dooble::print(dooble_page *page)
 {
   if(!page)
@@ -987,6 +1023,7 @@ void dooble::slot_close_tab(void)
     m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
 
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  prepare_tab_shortcuts();
 }
 
 void dooble::slot_create_tab(dooble_web_engine_view *view)
@@ -1013,6 +1050,7 @@ void dooble::slot_decouple_tab(int index)
       main_window->setParent(0);
       main_window->show();
       dooble_ui_utilities::center_window_widget(this, main_window);
+      prepare_tab_shortcuts();
     }
 }
 
@@ -1066,6 +1104,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
 	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
+	  prepare_tab_shortcuts();
 	}
       else if(!s_downloads->isVisible())
 	{
@@ -1125,6 +1164,8 @@ void dooble::slot_open_tab_as_new_window(int index)
       m_ui.tab->removeTab(index);
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
     }
+
+  prepare_tab_shortcuts();
 }
 
 void dooble::slot_open_url(const QUrl &url)
@@ -1219,6 +1260,11 @@ void dooble::slot_reload_tab(int index)
     page->reload();
 }
 
+void dooble::slot_remove_tab_widget_shortcut(void)
+{
+  prepare_tab_shortcuts();
+}
+
 void dooble::slot_settings_applied(void)
 {
   m_ui.menu_bar->setVisible
@@ -1227,24 +1273,28 @@ void dooble::slot_settings_applied(void)
   if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
+      prepare_tab_shortcuts();
       s_accepted_or_blocked_domains->setParent(0);
     }
 
   if(!dooble_settings::setting("pin_downloads_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
+      prepare_tab_shortcuts();
       s_downloads->setParent(0);
     }
 
   if(!dooble_settings::setting("pin_history_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
+      prepare_tab_shortcuts();
       s_history_window->setParent(0);
     }
 
   if(!dooble_settings::setting("pin_settings_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
+      prepare_tab_shortcuts();
       s_settings->setParent(0);
     }
 
@@ -1291,6 +1341,7 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget
 	(s_accepted_or_blocked_domains); // Order is important.
+      prepare_tab_shortcuts();
       return;
     }
 
@@ -1351,6 +1402,7 @@ void dooble::slot_show_downloads(void)
 	(m_ui.tab->count() - 1, s_downloads->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
+      prepare_tab_shortcuts();
       return;
     }
 
@@ -1390,6 +1442,7 @@ void dooble::slot_show_history(void)
 	(m_ui.tab->count() - 1, s_history_window->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_history_window); // Order is important.
+      prepare_tab_shortcuts();
       return;
     }
 
@@ -1419,6 +1472,7 @@ void dooble::slot_show_settings(void)
       m_ui.tab->setTabToolTip(m_ui.tab->count() - 1, s_settings->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_settings); // Order is important.
+      prepare_tab_shortcuts();
       return;
     }
 
@@ -1456,6 +1510,7 @@ void dooble::slot_tab_close_requested(int index)
 
   m_ui.tab->removeTab(index);
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  prepare_tab_shortcuts();
 }
 
 void dooble::slot_tab_index_changed(int index)
@@ -1481,6 +1536,40 @@ void dooble::slot_tab_index_changed(int index)
     setWindowTitle(tr("%1 - Dooble").arg(page->title().trimmed()));
 
   page->view()->setFocus();
+}
+
+void dooble::slot_tab_widget_shortcut_activated(void)
+{
+  QShortcut *shortcut = qobject_cast<QShortcut *> (sender());
+
+  if(!shortcut)
+    return;
+
+  QKeySequence key(shortcut->key());
+  int index = -1;
+
+  if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_1)))
+    index = 0;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_2)))
+    index = 1;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_3)))
+    index = 2;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_4)))
+    index = 3;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_5)))
+    index = 4;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_6)))
+    index = 5;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_7)))
+    index = 6;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_8)))
+    index = 7;
+  else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_9)))
+    index = 8;
+  else
+    index = m_ui.tab->count() - 1;
+
+  m_ui.tab->setCurrentIndex(index);
 }
 
 void dooble::slot_title_changed(const QString &title)

@@ -89,13 +89,14 @@ class dooble: public QMainWindow
  private:
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
-  QPointer<QProgressDialog> m_pbkdf2_dialog;
   QList<QShortcut *> m_shortcuts;
+  QList<QShortcut *> m_tab_widget_shortcuts;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
+  QPointer<QProgressDialog> m_pbkdf2_dialog;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
   static bool s_containers_populated;
@@ -108,6 +109,7 @@ class dooble: public QMainWindow
   void prepare_page_connections(dooble_page *page);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
+  void prepare_tab_shortcuts(void);
   void print(dooble_page *page);
 
  private slots:
@@ -132,6 +134,7 @@ class dooble: public QMainWindow
   void slot_print_preview(void);
   void slot_quit_dooble(void);
   void slot_reload_tab(int index);
+  void slot_remove_tab_widget_shortcut(void);
   void slot_settings_applied(void);
   void slot_show_about(void);
   void slot_show_accepted_or_blocked_domains(void);
@@ -144,6 +147,7 @@ class dooble: public QMainWindow
   void slot_show_settings_panel(dooble_settings::Panels panel);
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
+  void slot_tab_widget_shortcut_activated(void);
   void slot_title_changed(const QString &title);
 
  signals:
