@@ -82,6 +82,18 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::FullScreenSupportEnabled, true);
       m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::JavascriptCanAccessClipboard,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::JavascriptCanOpenWindows,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
+      m_page->profile()->settings()->setAttribute
+	(QWebEngineSettings::JavascriptEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::JavascriptEnabled));
+      m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
       m_page->profile()->settings()->setAttribute
 	(QWebEngineSettings::LocalStorageEnabled, false);
@@ -198,18 +210,6 @@ void dooble_web_engine_view::copy_default_profile_settings(void)
     (QWebEngineProfile::defaultProfile()->httpCacheType());
   m_page->profile()->setHttpUserAgent
     (QWebEngineProfile::defaultProfile()->httpUserAgent());
-  m_page->profile()->settings()->setAttribute
-    (QWebEngineSettings::JavascriptCanAccessClipboard,
-     QWebEngineSettings::defaultSettings()->
-     testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
-  m_page->profile()->settings()->setAttribute
-    (QWebEngineSettings::JavascriptCanOpenWindows,
-     QWebEngineSettings::defaultSettings()->
-     testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
-  m_page->profile()->settings()->setAttribute
-    (QWebEngineSettings::JavascriptEnabled,
-     QWebEngineSettings::defaultSettings()->
-     testAttribute(QWebEngineSettings::JavascriptEnabled));
   m_page->profile()->settings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      QWebEngineSettings::defaultSettings()->
