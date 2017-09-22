@@ -150,6 +150,27 @@ void dooble_tab_bar::slot_decouple_tab(void)
     emit decouple_tab(tabAt(action->property("point").toPoint()));
 }
 
+void dooble_tab_bar::slot_javascript(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
+    (parentWidget());
+
+  if(tab_widget)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(tab_widget->widget(tabAt(action->property("point").toPoint())));
+
+      if(page)
+	page->enable_web_setting
+	  (QWebEngineSettings::JavascriptEnabled, action->isChecked());
+    }
+}
+
 void dooble_tab_bar::slot_open_tab_as_new_window(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -198,11 +219,20 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 					  SLOT(slot_reload(void)));
   reload_action->setProperty("point", point);
   menu.addSeparator();
-  action = menu.addAction(tr("Web &Plugins"),
-			  this,
-			  SLOT(slot_web_plugins(void)));
-  action->setEnabled(false);
-  action->setProperty("point", point);
+
+  QAction *javascript_action = menu.addAction(tr("&JavaScript"),
+					      this,
+					      SLOT(slot_javascript(void)));
+
+  javascript_action->setEnabled(false);
+  javascript_action->setProperty("point", point);
+
+  QAction *web_plugins_action = menu.addAction(tr("Web &Plugins"),
+					       this,
+					       SLOT(slot_web_plugins(void)));
+
+  web_plugins_action->setEnabled(false);
+  web_plugins_action->setProperty("point", point);
 
   dooble_page *page = 0;
   dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
@@ -214,15 +244,22 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 
       if(page)
 	{
-	  action->setCheckable(true);
-	  action->setEnabled(tab_at > -1);
+	  javascript_action->setCheckable(true);
+	  javascript_action->setEnabled(tab_at > -1);
+	  web_plugins_action->setCheckable(true);
+	  web_plugins_action->setEnabled(tab_at > -1);
 
 	  QWebEngineSettings *web_engine_settings = page->web_engine_settings();
 
 	  if(web_engine_settings)
-	    action->setChecked
-	      (web_engine_settings->testAttribute(QWebEngineSettings::
-						  PluginsEnabled));
+	    {
+	      javascript_action->setChecked
+		(web_engine_settings->testAttribute(QWebEngineSettings::
+						    JavascriptEnabled));
+	      web_plugins_action->setChecked
+		(web_engine_settings->testAttribute(QWebEngineSettings::
+						    PluginsEnabled));
+	    }
 	}
     }
 

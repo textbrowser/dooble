@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef Q_OS_MACOS
-  QApplication::setStyle(QStyleFactory::create("Fusion"));
+  QApplication::setStyle(QStyleFactory::create("Macintosh"));
 #elif defined(Q_OS_WIN32)
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
