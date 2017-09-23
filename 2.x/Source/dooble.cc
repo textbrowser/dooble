@@ -31,10 +31,13 @@
 #include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
+#include <QNetworkCookie>
+#include <QPointer>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
 #include <QUrl>
+#include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QtConcurrent>
 
@@ -76,6 +79,7 @@ dooble::s_url_request_interceptor;
 dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
+  m_is_private = false;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
@@ -110,9 +114,98 @@ dooble::dooble(QWidget *widget):QMainWindow()
   prepare_standard_menus();
 }
 
+dooble::dooble(bool is_private):QMainWindow()
+{
+  initialize_static_members();
+  m_is_private = is_private;
+  m_menu = new QMenu(this);
+
+  if(m_is_private)
+    {
+      m_cookies = new dooble_cookies(m_is_private, this);
+      m_cookies_window = new dooble_cookies_window(m_is_private, this);
+      m_cookies_window->setCookies(m_cookies);
+      m_web_engine_profile = new QWebEngineProfile(this);
+      m_web_engine_profile->setRequestInterceptor
+	(dooble::s_url_request_interceptor);
+      m_web_engine_profile->setSpellCheckEnabled(true);
+      m_web_engine_profile->setSpellCheckLanguages
+	(dooble::s_settings->s_spell_checker_dictionaries);
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::FullScreenSupportEnabled, true);
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::JavascriptCanAccessClipboard,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::JavascriptCanOpenWindows,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::JavascriptEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::JavascriptEnabled));
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::LocalStorageEnabled, false);
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::PluginsEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::PluginsEnabled));
+      connect(dooble::s_settings,
+	      SIGNAL(applied(void)),
+	      this,
+	      SLOT(slot_settings_applied(void)));
+      connect(m_cookies,
+	      SIGNAL(cookie_added(const QNetworkCookie &, bool)),
+	      m_cookies_window,
+	      SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
+      connect(m_cookies,
+	      SIGNAL(cookie_removed(const QNetworkCookie &)),
+	      m_cookies_window,
+	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+      connect(m_web_engine_profile->cookieStore(),
+	      SIGNAL(cookieAdded(const QNetworkCookie &)),
+	      m_cookies,
+	      SLOT(slot_cookie_added(const QNetworkCookie &)));
+      connect(m_web_engine_profile->cookieStore(),
+	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
+	      m_cookies,
+	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+      copy_default_profile_settings();
+      m_cookies_window->setCookieStore(m_web_engine_profile->cookieStore());
+    }
+
+  m_ui.setupUi(this);
+  connect_signals();
+
+  if(!isFullScreen())
+    m_ui.menu_bar->setVisible
+      (dooble_settings::setting("main_menu_bar_visible").toBool());
+
+  new_page(is_private);
+
+  if(!s_containers_populated)
+    if(s_cryptography->as_plaintext())
+      {
+	m_populate_containers_timer.setSingleShot(true);
+	m_populate_containers_timer.start(500);
+	s_containers_populated = true;
+      }
+
+  connect(QWebEngineProfile::defaultProfile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_shortcuts();
+  prepare_standard_menus();
+}
+
 dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
+  m_is_private = page ? page->is_private() : false;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
@@ -142,6 +235,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
+  m_is_private = view ? view->is_private() : false;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   connect_signals();
@@ -166,10 +260,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
   prepare_standard_menus();
-}
-
-dooble::dooble(void):dooble(static_cast<dooble_web_engine_view *> (0))
-{
 }
 
 dooble::~dooble()
@@ -352,6 +442,31 @@ void dooble::connect_signals(void)
 	  Qt::UniqueConnection);
 }
 
+void dooble::copy_default_profile_settings(void)
+{
+  if(!m_is_private || !m_web_engine_profile)
+    return;
+
+  /*
+  ** PluginsEnabled is not copied.
+  */
+
+  m_web_engine_profile->setHttpCacheMaximumSize
+    (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
+  m_web_engine_profile->setHttpCacheType
+    (QWebEngineProfile::defaultProfile()->httpCacheType());
+  m_web_engine_profile->setHttpUserAgent
+    (QWebEngineProfile::defaultProfile()->httpUserAgent());
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::XSSAuditingEnabled));
+}
+
 void dooble::decouple_support_windows(void)
 {
   if(dooble_ui_utilities::
@@ -422,13 +537,13 @@ void dooble::keyPressEvent(QKeyEvent *event)
 
 void dooble::new_page(bool is_private)
 {
-  dooble_page *page = new dooble_page(is_private, 0, m_ui.tab);
+  dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("Dooble"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
 
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     if(is_private)
       m_ui.tab->setTabTextColor
 	(m_ui.tab->count() - 1, s_private_tab_text_color);
@@ -465,7 +580,7 @@ void dooble::new_page(dooble_page *page)
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
 
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     if(page->is_private())
       m_ui.tab->setTabTextColor
 	(m_ui.tab->count() - 1, s_private_tab_text_color);
@@ -484,7 +599,9 @@ void dooble::new_page(dooble_page *page)
 void dooble::new_page(dooble_web_engine_view *view)
 {
   dooble_page *page = new dooble_page
-    (view ? view->is_private() : false, view, m_ui.tab);
+    (view ? view->web_engine_profile() : m_web_engine_profile.data(),
+     view,
+     m_ui.tab);
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("Dooble"));
@@ -494,7 +611,7 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.
 
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     if(page->is_private())
       m_ui.tab->setTabTextColor
 	(m_ui.tab->count() - 1, s_private_tab_text_color);
@@ -565,9 +682,9 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
-	  SIGNAL(new_private_tab(void)),
+	  SIGNAL(new_private_window(void)),
 	  this,
-	  SLOT(slot_new_private_tab(void)),
+	  SLOT(slot_new_private_window(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -616,6 +733,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(show_clear_items(void)),
 	  this,
 	  SLOT(slot_show_clear_items(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(show_cookies(void)),
+	  this,
+	  SLOT(slot_show_cookies(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -722,9 +845,9 @@ void dooble::prepare_standard_menus(void)
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
   menu->addSeparator();
-  menu->addAction(tr("New &Private Tab"),
+  menu->addAction(tr("New &Private Window"),
 		  this,
-		  SLOT(slot_new_private_tab(void)));
+		  SLOT(slot_new_private_window(void)));
   menu->addAction(tr("New &Tab"),
 		  this,
 		  SLOT(slot_new_tab(void)),
@@ -1126,19 +1249,19 @@ void dooble::slot_icon_changed(const QIcon &icon)
     m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
 }
 
-void dooble::slot_new_private_tab(void)
+void dooble::slot_new_private_window(void)
 {
-  new_page(true);
+  (new dooble(true))->show();
 }
 
 void dooble::slot_new_tab(void)
 {
-  new_page(false);
+  new_page(m_is_private);
 }
 
 void dooble::slot_new_window(void)
 {
-  (new dooble())->show();
+  (new dooble(false))->show();
 }
 
 void dooble::slot_open_tab_as_new_window(int index)
@@ -1267,6 +1390,7 @@ void dooble::slot_remove_tab_widget_shortcut(void)
 
 void dooble::slot_settings_applied(void)
 {
+  copy_default_profile_settings();
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
 
@@ -1307,7 +1431,7 @@ void dooble::slot_settings_applied(void)
       if(!page)
 	continue;
 
-      if(dooble_settings::setting("denote_private_tabs").toBool())
+      if(dooble_settings::setting("denote_private_widgets").toBool())
 	{
 	  if(page->is_private())
 	    m_ui.tab->setTabTextColor(i, s_private_tab_text_color);
@@ -1375,6 +1499,31 @@ void dooble::slot_show_clear_items(void)
 
 void dooble::slot_show_cookies(void)
 {
+  if(m_cookies_window)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(m_ui.tab->currentWidget());
+
+      if(page)
+	m_cookies_window->filter(page->url().host());
+
+      if(m_cookies_window->isVisible())
+	{
+	  m_cookies_window->activateWindow();
+	  m_cookies_window->raise();
+	  return;
+	}
+
+      m_cookies_window->showNormal();
+
+      if(dooble_settings::setting("center_child_windows").toBool())
+	dooble_ui_utilities::center_window_widget(this, m_cookies_window);
+
+      m_cookies_window->activateWindow();
+      m_cookies_window->raise();
+      return;
+    }
+
   if(s_cookies_window->isVisible())
     {
       s_cookies_window->activateWindow();

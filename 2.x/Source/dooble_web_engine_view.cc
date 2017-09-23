@@ -27,30 +27,24 @@
 
 #include <QContextMenuEvent>
 #include <QWebEngineContextMenuData>
-#include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
-#include <QWebEngineSettings>
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
-#include "dooble_cookies.h"
-#include "dooble_cookies_window.h"
 #include "dooble_gopher.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 
-dooble_web_engine_view::dooble_web_engine_view(bool is_private,
-					       QWidget *parent):
-  QWebEngineView(parent)
+dooble_web_engine_view::dooble_web_engine_view
+(QWebEngineProfile *web_engine_profile, QWidget *parent): QWebEngineView(parent)
 {
-  m_cookies = 0;
-  m_is_private = is_private;
+  m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
+    web_engine_profile;
 
   if(m_is_private)
-    m_page = new dooble_web_engine_page
-      (new QWebEngineProfile(this), m_is_private, this);
+    m_page = new dooble_web_engine_page(web_engine_profile, m_is_private, this);
   else
     m_page = new dooble_web_engine_page(this);
 
@@ -69,63 +63,12 @@ dooble_web_engine_view::dooble_web_engine_view(bool is_private,
     m_page->profile()->installUrlSchemeHandler
       ("gopher", new dooble_gopher(this));
 
-  if(m_is_private)
-    {
-      m_cookies = new dooble_cookies(m_is_private, this);
-      m_cookies_window = new dooble_cookies_window(m_is_private, this);
-      m_cookies_window->setCookieStore(m_page->profile()->cookieStore());
-      m_cookies_window->setCookies(m_cookies);
-      m_page->profile()->setRequestInterceptor
-	(dooble::s_url_request_interceptor);
-      m_page->profile()->setSpellCheckEnabled(true);
-      m_page->profile()->setSpellCheckLanguages
-	(dooble::s_settings->s_spell_checker_dictionaries);
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::FullScreenSupportEnabled, true);
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptCanAccessClipboard,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptCanOpenWindows,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::JavascriptEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::JavascriptEnabled));
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::LocalStorageEnabled, false);
-      m_page->profile()->settings()->setAttribute
-	(QWebEngineSettings::PluginsEnabled,
-	 QWebEngineSettings::defaultSettings()->
-	 testAttribute(QWebEngineSettings::PluginsEnabled));
-      connect(dooble::s_settings,
-	      SIGNAL(applied(void)),
-	      this,
-	      SLOT(slot_settings_applied(void)));
-      connect(m_cookies,
-	      SIGNAL(cookie_added(const QNetworkCookie &, bool)),
-	      m_cookies_window,
-	      SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
-      connect(m_cookies,
-	      SIGNAL(cookie_removed(const QNetworkCookie &)),
-	      m_cookies_window,
-	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
-      connect(m_page->profile()->cookieStore(),
-	      SIGNAL(cookieAdded(const QNetworkCookie &)),
-	      m_cookies,
-	      SLOT(slot_cookie_added(const QNetworkCookie &)));
-      connect(m_page->profile()->cookieStore(),
-	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
-	      m_cookies,
-	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
-      copy_default_profile_settings();
-    }
-
   setPage(m_page);
+}
+
+QWebEngineProfile *dooble_web_engine_view::web_engine_profile(void) const
+{
+  return m_page->profile();
 }
 
 bool dooble_web_engine_view::is_private(void) const
@@ -140,7 +83,8 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     if(type == QWebEnginePage::WebDialog)
       return 0;
 
-  dooble_web_engine_view *view = new dooble_web_engine_view(m_is_private, 0);
+  dooble_web_engine_view *view = new dooble_web_engine_view
+    (m_page->profile(), 0);
 
   switch(type)
     {
@@ -196,31 +140,6 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   menu->deleteLater();
 }
 
-void dooble_web_engine_view::copy_default_profile_settings(void)
-{
-  if(!m_is_private)
-    return;
-
-  /*
-  ** PluginsEnabled is not copied.
-  */
-
-  m_page->profile()->setHttpCacheMaximumSize
-    (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
-  m_page->profile()->setHttpCacheType
-    (QWebEngineProfile::defaultProfile()->httpCacheType());
-  m_page->profile()->setHttpUserAgent
-    (QWebEngineProfile::defaultProfile()->httpUserAgent());
-  m_page->profile()->settings()->setAttribute
-    (QWebEngineSettings::ScrollAnimatorEnabled,
-     QWebEngineSettings::defaultSettings()->
-     testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
-  m_page->profile()->settings()->setAttribute
-    (QWebEngineSettings::XSSAuditingEnabled,
-     QWebEngineSettings::defaultSettings()->
-     testAttribute(QWebEngineSettings::XSSAuditingEnabled));
-}
-
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -252,28 +171,4 @@ void dooble_web_engine_view::slot_certificate_exception_accepted
 
 void dooble_web_engine_view::slot_settings_applied(void)
 {
-  copy_default_profile_settings();
-}
-
-void dooble_web_engine_view::show_private_cookies(void)
-{
-  if(!m_cookies_window)
-    return;
-
-  m_cookies_window->filter(url().host());
-
-  if(m_cookies_window->isVisible())
-    {
-      m_cookies_window->activateWindow();
-      m_cookies_window->raise();
-      return;
-    }
-
-  m_cookies_window->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, m_cookies_window);
-
-  m_cookies_window->activateWindow();
-  m_cookies_window->raise();
 }

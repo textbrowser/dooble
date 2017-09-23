@@ -107,37 +107,6 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="1">
-      <widget class="QToolButton" name="new_tab">
-       <property name="minimumSize">
-        <size>
-         <width>75</width>
-         <height>75</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>75</width>
-         <height>75</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>New Tab</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonTextUnderIcon</enum>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <widget class="QToolButton" name="clear_items">
        <property name="minimumSize">
@@ -295,38 +264,6 @@ Domains</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QToolButton" name="new_private_tab">
-       <property name="minimumSize">
-        <size>
-         <width>75</width>
-         <height>75</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>75</width>
-         <height>75</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>New Private
-Tab</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonTextUnderIcon</enum>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="1">
       <widget class="QToolButton" name="print">
        <property name="minimumSize">
@@ -451,6 +388,69 @@ Tab</string>
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QToolButton" name="new_private_window">
+       <property name="minimumSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>New Private
+Window</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QToolButton" name="new_tab">
+       <property name="minimumSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>New Tab</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
@@ -462,8 +462,8 @@ Tab</string>
   <tabstop>blocked_domains</tabstop>
   <tabstop>clear_items</tabstop>
   <tabstop>cookies</tabstop>
-  <tabstop>new_private_tab</tabstop>
   <tabstop>new_tab</tabstop>
+  <tabstop>new_private_window</tabstop>
   <tabstop>new_window</tabstop>
   <tabstop>history</tabstop>
   <tabstop>print</tabstop>

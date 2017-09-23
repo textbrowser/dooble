@@ -53,7 +53,9 @@ class dooble_page: public QWidget
     MAXIMUM_HISTORY_ITEMS = 20
   };
 
-  dooble_page(bool is_private, dooble_web_engine_view *view, QWidget *parent);
+  dooble_page(QWebEngineProfile *web_engine_profile,
+	      dooble_web_engine_view *view,
+	      QWidget *parent);
   ~dooble_page();
   QAction *action_close_tab(void) const;
   QAction *full_screen_action(void) const;
@@ -127,7 +129,6 @@ class dooble_page: public QWidget
   void slot_reset_url(void);
   void slot_settings_applied(void);
   void slot_show_certificate_exception(void);
-  void slot_show_cookies(void);
   void slot_show_find(void);
   void slot_show_popup_menu(void);
   void slot_show_pull_down_menu(void);
@@ -147,7 +148,7 @@ class dooble_page: public QWidget
   void iconChanged(const QIcon &icon);
   void loadFinished(bool ok);
   void loadStarted(void);
-  void new_private_tab(void);
+  void new_private_window(void);
   void new_tab(void);
   void new_window(void);
   void print(void);
@@ -156,6 +157,7 @@ class dooble_page: public QWidget
   void show_about(void);
   void show_accepted_or_blocked_domains(void);
   void show_clear_items(void);
+  void show_cookies(void);
   void show_downloads(void);
   void show_full_screen(void);
   void show_history(void);

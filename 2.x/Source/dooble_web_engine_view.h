@@ -28,11 +28,8 @@
 #ifndef dooble_web_engine_view_h
 #define dooble_web_engine_view_h
 
-#include <QPointer>
 #include <QWebEngineView>
 
-class dooble_cookies;
-class dooble_cookies_window;
 class dooble_web_engine_page;
 
 class dooble_web_engine_view: public QWebEngineView
@@ -40,20 +37,18 @@ class dooble_web_engine_view: public QWebEngineView
   Q_OBJECT
 
  public:
-  dooble_web_engine_view(bool is_private, QWidget *parent);
+  dooble_web_engine_view(QWebEngineProfile *web_engine_profile,
+			 QWidget *parent);
+  QWebEngineProfile *web_engine_profile(void) const;
   bool is_private(void) const;
-  void show_private_cookies(void);
 
  protected:
   dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
   void contextMenuEvent(QContextMenuEvent *event);
 
  private:
-  QPointer<dooble_cookies_window> m_cookies_window;
   bool m_is_private;
-  dooble_cookies *m_cookies;
   dooble_web_engine_page *m_page;
-  void copy_default_profile_settings(void);
 
  private slots:
   void slot_accept_or_block_domain(void);

@@ -74,7 +74,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 		       "window geometry nor window state will be retained."));
   statusBar()->addPermanentWidget(label);
 
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     statusBar()->setVisible(m_is_private);
   else
     statusBar()->setVisible(false);
@@ -656,7 +656,7 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 
 void dooble_cookies_window::slot_settings_applied(void)
 {
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     statusBar()->setVisible(true);
   else
     statusBar()->setVisible(false);

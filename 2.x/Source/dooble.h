@@ -38,6 +38,7 @@
 #include "ui_dooble.h"
 
 class QWebEngineDownloadItem;
+class QWebEngineProfile;
 class dooble_about;
 class dooble_accepted_or_blocked_domains;
 class dooble_application;
@@ -57,9 +58,9 @@ class dooble: public QMainWindow
 
  public:
   dooble(QWidget *widget);
+  dooble(bool is_private);
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
-  dooble(void);
   ~dooble();
   dooble_page *current_page(void) const;
   static QColor s_private_tab_text_color;
@@ -97,11 +98,16 @@ class dooble: public QMainWindow
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
+  QPointer<QWebEngineProfile> m_web_engine_profile;
+  QPointer<dooble_cookies> m_cookies;
+  QPointer<dooble_cookies_window> m_cookies_window;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
+  bool m_is_private;
   static bool s_containers_populated;
   bool can_exit(void);
   void connect_signals(void);
+  void copy_default_profile_settings(void);
   void decouple_support_windows(void);
   void initialize_static_members(void);
   void new_page(dooble_page *page);
@@ -123,7 +129,7 @@ class dooble: public QMainWindow
   void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_icon_changed(const QIcon &icon);
-  void slot_new_private_tab(void);
+  void slot_new_private_window(void);
   void slot_new_tab(void);
   void slot_new_window(void);
   void slot_open_tab_as_new_window(int index);

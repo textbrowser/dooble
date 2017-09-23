@@ -31,6 +31,7 @@
 #include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
+#include <QWebEngineProfile>
 #include <QWidgetAction>
 
 #include "dooble.h"
@@ -50,11 +51,12 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
 
-dooble_page::dooble_page(bool is_private,
+dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
 			 QWidget *parent):QWidget(parent)
 {
-  m_is_private = is_private;
+  m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
+    web_engine_profile;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -63,7 +65,7 @@ dooble_page::dooble_page(bool is_private,
   m_ui.forward->setEnabled(false);
   m_ui.forward->setMenu(new QMenu(this));
 
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     m_ui.is_private->setVisible(m_is_private);
   else
     m_ui.is_private->setVisible(false);
@@ -78,7 +80,7 @@ dooble_page::dooble_page(bool is_private,
       m_view->setParent(this);
     }
   else
-    m_view = new dooble_web_engine_view(m_is_private, this);
+    m_view = new dooble_web_engine_view(web_engine_profile, this);
 
   m_ui.frame->layout()->addWidget(m_view);
   connect(dooble::s_history,
@@ -116,7 +118,7 @@ dooble_page::dooble_page(bool is_private,
   connect(m_ui.address,
 	  SIGNAL(show_cookies(void)),
 	  this,
-	  SLOT(slot_show_cookies(void)));
+	  SIGNAL(show_cookies(void)));
   connect(m_ui.backward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -441,9 +443,9 @@ void dooble_page::prepare_standard_menus(void)
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
   menu->addSeparator();
-  menu->addAction(tr("New &Private Tab"),
+  menu->addAction(tr("New &Private Window"),
 		  this,
-		  SIGNAL(new_private_tab(void)));
+		  SIGNAL(new_private_window(void)));
   menu->addAction(tr("New &Tab"),
 		  this,
 		  SIGNAL(new_tab(void)),
@@ -511,7 +513,7 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_accepted_or_blocked_domains(void)));
   menu->addAction(tr("&Cookies..."),
 		  this,
-		  SLOT(slot_show_cookies(void)),
+		  SIGNAL(show_cookies(void)),
 		  QKeySequence(tr("Ctrl+K")));
   menu->addAction(tr("&Downloads..."),
 		  this,
@@ -652,7 +654,7 @@ void dooble_page::show_popup_menu(void)
   connect(popup_menu,
 	  SIGNAL(show_cookies(void)),
 	  this,
-	  SLOT(slot_show_cookies(void)));
+	  SIGNAL(show_cookies(void)));
   connect(popup_menu,
 	  SIGNAL(show_history(void)),
 	  this,
@@ -992,7 +994,7 @@ void dooble_page::slot_reset_url(void)
 
 void dooble_page::slot_settings_applied(void)
 {
-  if(dooble_settings::setting("denote_private_tabs").toBool())
+  if(dooble_settings::setting("denote_private_widgets").toBool())
     m_ui.is_private->setVisible(m_is_private);
   else
     m_ui.is_private->setVisible(false);
@@ -1018,32 +1020,6 @@ void dooble_page::slot_show_certificate_exception(void)
   menu.addAction(&widget_action);
   menu.exec(m_ui.address->
 	    mapToGlobal(m_ui.address->information_rectangle().bottomLeft()));
-}
-
-void dooble_page::slot_show_cookies(void)
-{
-  if(m_is_private)
-    m_view->show_private_cookies();
-  else
-    {
-      dooble::s_cookies_window->filter(m_view->url().host());
-
-      if(dooble::s_cookies_window->isVisible())
-	{
-	  dooble::s_cookies_window->activateWindow();
-	  dooble::s_cookies_window->raise();
-	  return;
-	}
-
-      dooble::s_cookies_window->showNormal();
-
-      if(dooble_settings::setting("center_child_windows").toBool())
-	dooble_ui_utilities::center_window_widget
-	  (this, dooble::s_cookies_window);
-
-      dooble::s_cookies_window->activateWindow();
-      dooble::s_cookies_window->raise();
-    }
 }
 
 void dooble_page::slot_show_find(void)

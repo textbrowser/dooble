@@ -27,7 +27,7 @@
 
 #include <QDir>
 #include <QSplashScreen>
-#if defined(Q_OS_MACOS) || defined(Q_OS_WIN32)
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
 #include <QStyleFactory>
 #endif
 #include <QThread>
@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_MACOS
   QApplication::setStyle(QStyleFactory::create("Macintosh"));
-#elif defined(Q_OS_WIN32)
+#elif defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
   CocoaInitializer cocoa_initializer;
 #endif
 
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
   QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
   QDir home_dir(QDir::current());
   QFileInfo file_info(home_dir.absolutePath());
@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
   splash.finish(0);
   dooble::s_settings = new dooble_settings();
 
-  dooble *d = new dooble();
+  dooble *d = new dooble(false);
 
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),

@@ -204,11 +204,14 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setEnabled(count() > 1 && tab_at > -1);
   action->setProperty("point", point);
   menu.addSeparator();
-  action = menu.addAction(tr("Open as New &Window..."),
-			  this,
-			  SLOT(slot_open_tab_as_new_window(void)));
-  action->setEnabled(count() > 1 && tab_at > -1);
-  action->setProperty("point", point);
+
+  QAction *open_as_new_window_action = menu.addAction
+    (tr("Open as New &Window..."),
+     this,
+     SLOT(slot_open_tab_as_new_window(void)));
+
+  open_as_new_window_action->setEnabled(false);
+  open_as_new_window_action->setProperty("point", point);
   menu.addAction(tr("New &Tab"),
 		 this,
 		 SIGNAL(new_tab(void)));
@@ -246,6 +249,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	{
 	  javascript_action->setCheckable(true);
 	  javascript_action->setEnabled(tab_at > -1);
+	  open_as_new_window_action->setEnabled
+	    (count() > 1 && !page->is_private() && tab_at > -1);
 	  web_plugins_action->setCheckable(true);
 	  web_plugins_action->setEnabled(tab_at > -1);
 

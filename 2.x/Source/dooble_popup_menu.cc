@@ -118,8 +118,8 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.exit_dooble->setIcon
     (QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)));
   m_ui.history->setIcon(QIcon(QString(":/%1/48/history.png").arg(icon_set)));
-  m_ui.new_private_tab->setIcon
-    (QIcon(QString(":/%1/48/new_private_tab.png").arg(icon_set)));
+  m_ui.new_private_window->setIcon
+    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)));
   m_ui.new_tab->setIcon(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)));
   m_ui.new_window->setIcon
     (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
@@ -156,15 +156,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       emit show_history();
       accept();
     }
-  else if(m_ui.new_private_tab == sender())
-    {
-      dooble *d = find_parent_dooble();
-
-      if(d)
-	d->new_page(true);
-
-      accept();
-    }
+  else if(m_ui.new_private_window == sender())
+    (new dooble(true))->show();
   else if(m_ui.new_tab == sender())
     {
       dooble *d = find_parent_dooble();
@@ -175,7 +168,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       accept();
     }
   else if(m_ui.new_window == sender())
-    (new dooble())->show();
+    (new dooble(false))->show();
   else if(m_ui.print == sender())
     {
       dooble *d = find_parent_dooble();
