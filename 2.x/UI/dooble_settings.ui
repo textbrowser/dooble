@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>634</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -386,6 +386,19 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="new_tab_corner_widget">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display the New-Tab corner widget. The corner widget will be hidden if the tab bar is invisible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>New-Tab Corner Widget</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="access_new_tabs">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, automatically switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -601,8 +614,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>633</height>
+               <width>503</width>
+               <height>658</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1281,6 +1294,7 @@
   <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
+  <tabstop>new_tab_corner_widget</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>zoom_frame_location</tabstop>

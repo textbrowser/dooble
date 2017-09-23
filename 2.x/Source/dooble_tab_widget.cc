@@ -53,7 +53,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #endif
   m_add_tab_tool_button->setToolTip(tr("New Tab"));
   m_add_tab_tool_button->setVisible
-    (!dooble_settings::setting("auto_hide_tab_bar").toBool());
+    (!dooble_settings::setting("auto_hide_tab_bar").toBool() &&
+     dooble_settings::setting("new_tab_corner_widget_visible").toBool());
   m_tab_bar = new dooble_tab_bar(this);
   m_tab_bar->setAutoHide
     (dooble_settings::setting("auto_hide_tab_bar").toBool());
@@ -88,7 +89,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   prepare_icons();
 
   if(!dooble_settings::setting("auto_hide_tab_bar").toBool())
-    setCornerWidget(m_add_tab_tool_button);
+    if(dooble_settings::setting("new_tab_corner_widget_visible").toBool())
+      setCornerWidget(m_add_tab_tool_button);
 
   setTabBar(m_tab_bar);
 }
@@ -245,12 +247,15 @@ void dooble_tab_widget::slot_load_started(void)
 
 void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
-  if(state)
+  if(dooble_settings::setting("new_tab_corner_widget_visible").toBool() &&
+     state)
     setCornerWidget(m_add_tab_tool_button);
   else
     setCornerWidget(0);
 
-  m_add_tab_tool_button->setVisible(state);
+  m_add_tab_tool_button->setVisible
+    (dooble_settings::setting("new_tab_corner_widget_visible").toBool() &&
+     state);
 }
 
 void dooble_tab_widget::slot_settings_applied(void)
@@ -259,7 +264,8 @@ void dooble_tab_widget::slot_settings_applied(void)
 
   if(dooble_settings::setting("auto_hide_tab_bar").toBool())
     {
-      if(count() > 1)
+      if(count() > 1 &&
+	 dooble_settings::setting("new_tab_corner_widget_visible").toBool())
 	{
 	  setCornerWidget(m_add_tab_tool_button);
 	  m_add_tab_tool_button->setVisible(true);
@@ -274,8 +280,17 @@ void dooble_tab_widget::slot_settings_applied(void)
     }
   else
     {
-      setCornerWidget(m_add_tab_tool_button);
-      m_add_tab_tool_button->setVisible(true);
+      if(dooble_settings::setting("new_tab_corner_widget_visible").toBool())
+	{
+	  setCornerWidget(m_add_tab_tool_button);
+	  m_add_tab_tool_button->setVisible(true);
+	}
+      else
+	{
+	  setCornerWidget(0);
+	  m_add_tab_tool_button->setVisible(false);
+	}
+
       m_tab_bar->setAutoHide(false);
     }
 }
