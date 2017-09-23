@@ -53,7 +53,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
                           -mtune=generic -pie -std=c++11
 }
 
-QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
+QMAKE_DISTCLEAN += -r qtwebengine_dictionaries temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_COMPILERS += dictoolbuild
 QMAKE_EXTRA_TARGETS = purge
 
