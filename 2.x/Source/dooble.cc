@@ -292,6 +292,11 @@ bool dooble::can_exit(void)
     }
 }
 
+bool dooble::is_private(void) const
+{
+  return m_is_private;
+}
+
 dooble_page *dooble::current_page(void) const
 {
   return qobject_cast<dooble_page *> (m_ui.tab->currentWidget());

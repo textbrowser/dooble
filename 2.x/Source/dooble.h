@@ -62,6 +62,7 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   ~dooble();
+  bool is_private(void) const;
   dooble_page *current_page(void) const;
   static QColor s_private_tab_text_color;
   static QPointer<dooble_history> s_history;

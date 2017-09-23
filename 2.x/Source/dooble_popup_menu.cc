@@ -163,7 +163,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       dooble *d = find_parent_dooble();
 
       if(d)
-	d->new_page(false);
+	d->new_page(d->is_private());
 
       accept();
     }
