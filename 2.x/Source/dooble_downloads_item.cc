@@ -67,10 +67,17 @@ dooble_downloads_item::dooble_downloads_item
 	      SIGNAL(destroyed(void)),
 	      this,
 	      SLOT(slot_finished(void)));
+#if QT_POINTER_SIZE == 4
       connect(m_download,
-	      SIGNAL(downloadProgress(qintptr, qintptr)),
+	      SIGNAL(downloadProgress(qint32, qint32)),
 	      this,
-	      SLOT(slot_download_progress(qintptr, qintptr)));
+	      SLOT(slot_download_progress(qint32, qint32)));
+#else
+      connect(m_download,
+	      SIGNAL(downloadProgress(qint64, qint64)),
+	      this,
+	      SLOT(slot_download_progress(qint64, qint64)));
+#endif
       connect(m_download,
 	      SIGNAL(finished(void)),
 	      this,
@@ -274,8 +281,13 @@ void dooble_downloads_item::slot_cancel(void)
     m_download->cancel();
 }
 
-void dooble_downloads_item::slot_download_progress(qintptr bytes_received,
-						   qintptr bytes_total)
+#if QT_POINTER_SIZE == 4
+void dooble_downloads_item::slot_download_progress(qint32 bytes_received,
+						   qint32 bytes_total)
+#else
+void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
+						   qint64 bytes_total)
+#endif
 {
   int seconds = 0;
 

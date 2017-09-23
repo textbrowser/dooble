@@ -412,7 +412,11 @@ void dooble_downloads::slot_open_download_page(void)
 void dooble_downloads::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
+    {
+      m_downloads.clear();
+      m_ui.table->clearContents();
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 

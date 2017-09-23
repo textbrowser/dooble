@@ -71,7 +71,11 @@ class dooble_downloads_item: public QWidget
 
  private slots:
   void slot_cancel(void);
-  void slot_download_progress(qintptr bytes_received, qintptr bytes_total);
+#if QT_POINTER_SIZE == 4
+  void slot_download_progress(qint32 bytes_received, qint32 bytes_total);
+#else
+  void slot_download_progress(qint64 bytes_received, qint64 bytes_total);
+#endif
   void slot_finished(void);
   void slot_settings_applied(void);
 };
