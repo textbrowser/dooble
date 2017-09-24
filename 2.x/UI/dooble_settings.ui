@@ -325,6 +325,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="main_menu_bar_visible">
+            <property name="toolTip">
+             <string>If hidden, show via Alt + Ctrl.</string>
+            </property>
             <property name="text">
              <string>Main Menu Bar Visible</string>
             </property>
