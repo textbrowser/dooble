@@ -32,6 +32,10 @@
 dooble_about::dooble_about(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  connect(m_ui.information,
+	  SIGNAL(linkActivated(const QString &)),
+	  this,
+	  SLOT(slot_link_activated(const QString &)));
 
   QString qversion("");
   const char *tmp = qVersion();
@@ -65,4 +69,9 @@ void dooble_about::keyPressEvent(QKeyEvent *event)
     close();
 
   QMainWindow::keyPressEvent(event);
+}
+
+void dooble_about::slot_link_activated(const QString &link)
+{
+  emit link_activated(QUrl(link));
 }
