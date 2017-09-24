@@ -50,7 +50,7 @@ dooble_about::dooble_about(void):QMainWindow()
 
   QString text
     (tr("Architecture %1.<br>Qt version %2 (runtime %3).<br><br>"
-	"Please consider reading the splendid "
+	"Please consider reading the spectacular "
 	"<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
 	"release notes</a>.").
      arg(DOOBLE_ARCHITECTURE_STR).
