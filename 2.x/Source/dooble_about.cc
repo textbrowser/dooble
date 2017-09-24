@@ -44,10 +44,14 @@ dooble_about::dooble_about(void):QMainWindow()
   if(qversion.isEmpty())
     qversion = "unknown";
 
-  QString text(tr("Architecture %1.<br>Qt version %2 (runtime %3).").
-	       arg(DOOBLE_ARCHITECTURE_STR).
-	       arg(QT_VERSION_STR).
-	       arg(qversion));
+  QString text
+    (tr("Architecture %1.<br>Qt version %2 (runtime %3).<br><br>"
+	"Please consider reading the splendid "
+	"<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
+	"release notes</a>.").
+     arg(DOOBLE_ARCHITECTURE_STR).
+     arg(QT_VERSION_STR).
+     arg(qversion));
 
   if(m_ui.information->text().isEmpty())
     m_ui.information->setText(text);
