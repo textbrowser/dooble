@@ -537,17 +537,19 @@ void dooble::initialize_static_members(void)
 
 void dooble::keyPressEvent(QKeyEvent *event)
 {
-  if(event && (event->modifiers() & Qt::AltModifier))
-    if(!dooble_settings::setting("main_menu_bar_visible").toBool())
-      {
-	if(m_ui.menu_bar->isVisible())
-	  m_ui.menu_bar->setVisible(false);
-	else
-	  {
-	    m_ui.menu_bar->setVisible(true);
-	    m_ui.menu_bar->setFocus();
-	  }
-      }
+  if(event)
+    if((event->modifiers() & Qt::AltModifier) &&
+       (event->modifiers() & Qt::ControlModifier))
+      if(!dooble_settings::setting("main_menu_bar_visible").toBool())
+	{
+	  if(m_ui.menu_bar->isVisible())
+	    m_ui.menu_bar->setVisible(false);
+	  else
+	    {
+	      m_ui.menu_bar->setVisible(true);
+	      m_ui.menu_bar->setFocus();
+	    }
+	}
 
   QMainWindow::keyPressEvent(event);
 }
