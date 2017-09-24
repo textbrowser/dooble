@@ -130,7 +130,8 @@ OBJECTIVE_HEADERS += Include/Cocoainitializer.h
 OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 }
 
-RESOURCES       += Icons\\icons.qrc
+RESOURCES       += Documentation\\documentation.qrc \
+                   Icons\\icons.qrc
 
 win32 {
 RC_FILE         = Icons\\dooble.rc
