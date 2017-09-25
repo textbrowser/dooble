@@ -1148,6 +1148,18 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>Spell Checkers</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <widget class="QListWidget" name="dictionaries"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QLabel" name="label_20">
@@ -1325,6 +1337,7 @@
   <tabstop>javascript_block_popups</tabstop>
   <tabstop>javascript_popups</tabstop>
   <tabstop>local_storage</tabstop>
+  <tabstop>dictionaries</tabstop>
   <tabstop>user_agent</tabstop>
   <tabstop>web_plugins</tabstop>
   <tabstop>xss_auditing</tabstop>
