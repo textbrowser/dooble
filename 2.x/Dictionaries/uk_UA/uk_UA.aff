@@ -3,6 +3,7 @@ TRY '-абвгґдеєжзиіїйклмнопрстуфхцчшщьюяАБВГ
 WORDCHARS -'`
 BREAK 1
 BREAK -
+# IGNORE ́
 REP 5
 REP сч щ
 REP уюч увальн
