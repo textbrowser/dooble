@@ -5,7 +5,40 @@ error("Qt version 5.9.1, or newer, is required.")
 cache()
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
 DICTIONARIES_DIR = qtwebengine_dictionaries
-dict_base_paths = en/en_US
+dict_base_paths = af_ZA\\af_ZA \
+                  an_ES\\an_ES \
+                  be_BY\\be_BY \
+                  bn_BD\\bn_BD \
+                  br_FR\\br_FR \
+                  bs_BA\\bs_BA \
+                  cs_CZ\\cs_CZ \
+                  da_DK\\da_DK \
+                  el_GR\\el_GR \
+                  en\\en_US \
+                  et_EE\\et_EE \
+                  gd_GB\\gd_GB \
+                  he_IL\\he_IL \
+                  hi_IN\\hi_IN \
+                  hr_HR\\hr_HR \
+                  hu_HU\\hu_HU \
+                  it_IT\\it_IT \
+                  kmr_Latn\\kmr_Latn \
+                  lo_LA\\lo_LA \
+                  lt_LT\\lt \
+                  lv_LV\\lv_LV \
+                  ne_NP\\ne_NP \
+                  nl_NL\\nl_NL \
+                  oc_FR\\oc_FR \
+                  pl_PL\\pl_PL \
+                  pt_BR\\pt_BR \
+                  pt_PT\\pt_PT \
+                  ru_RU\\ru_RU \
+                  si_LK\\si_LK \
+                  sk_SK\\sk_SK \
+                  sl_SI\\sl_SI \
+                  sw_TZ\\sw_TZ \
+                  te_IN\\te_IN \
+                  uk_UA\\uk_UA \
 
 for(base_path, dict_base_paths) {
 dict.files += $$PWD/Dictionaries/$${base_path}.dic
@@ -76,8 +109,74 @@ OBJECTS_DIR = temp/obj
 RCC_DIR = temp/rcc
 UI_DIR = temp/ui
 
-DISTFILES += Dictionaries/en/en_US.dic \
-             Dictionaries/en/en_US.aff
+DISTFILES += Dictionaries\\af_ZA\\af_ZA.aff \
+             Dictionaries\\af_ZA\\af_ZA.dic \
+             Dictionaries\\an_ES\\an_ES.aff \
+             Dictionaries\\an_ES\\an_ES.dic \
+             Dictionaries\\be_BY\\be_BY.aff \
+             Dictionaries\\be_BY\\be_BY.dic \
+             Dictionaries\\bn_BD\\bn_BD.aff \
+             Dictionaries\\bn_BD\\bn_BD.dic \
+             Dictionaries\\br_FR\\br_FR.aff \
+             Dictionaries\\br_FR\\br_FR.dic \
+             Dictionaries\\bs_BA\\bs_BA.aff \
+             Dictionaries\\bs_BA\\bs_BA.dic \
+             Dictionaries\\cs_CZ\\cs_CZ.aff \
+             Dictionaries\\cs_CZ\\cs_CZ.dic \
+             Dictionaries\\da_DK\\da_DK.aff \
+             Dictionaries\\da_DK\\da_DK.dic \
+             Dictionaries\\el_GR\\el_GR.aff \
+             Dictionaries\\el_GR\\el_GR.dic \
+             Dictionaries\\en\\en_US.aff \
+             Dictionaries\\en\\en_US.dic \
+             Dictionaries\\et_EE\\et_EE.aff \
+             Dictionaries\\et_EE\\et_EE.dic \
+             Dictionaries\\gd_GB\\gd_GB.aff \
+             Dictionaries\\gd_GB\\gd_GB.dic \
+             Dictionaries\\he_IL\\he_IL.aff \
+             Dictionaries\\he_IL\\he_IL.dic \
+             Dictionaries\\hi_IN\\hi_IN.aff \
+             Dictionaries\\hi_IN\\hi_IN.dic \
+             Dictionaries\\hr_HR\\hr_HR.aff \
+             Dictionaries\\hr_HR\\hr_HR.dic \
+             Dictionaries\\hu_HU\\hu_HU.aff \
+             Dictionaries\\hu_HU\\hu_HU.dic \
+             Dictionaries\\it_IT\\it_IT.aff \
+             Dictionaries\\it_IT\\it_IT.dic \
+             Dictionaries\\kmr_Latn\\kmr_Latn.aff \
+             Dictionaries\\kmr_Latn\\kmr_Latn.dic \
+             Dictionaries\\lo_LA\\lo_LA.aff \
+             Dictionaries\\lo_LA\\lo_LA.dic \
+             Dictionaries\\lt_LT\\lt.aff \
+             Dictionaries\\lt_LT\\lt.dic \
+             Dictionaries\\lv_LV\\lv_LV.aff \
+             Dictionaries\\lv_LV\\lv_LV.dic \
+             Dictionaries\\ne_NP\\ne_NP.aff \
+             Dictionaries\\ne_NP\\ne_NP.dic \
+             Dictionaries\\nl_NL\\nl_NL.aff \
+             Dictionaries\\nl_NL\\nl_NL.dic \
+             Dictionaries\\oc_FR\\oc_FR.aff \
+             Dictionaries\\oc_FR\\oc_FR.dic \
+             Dictionaries\\pl_PL\\pl_PL.aff \
+             Dictionaries\\pl_PL\\pl_PL.dic \
+             Dictionaries\\pt_BR\\pt_BR.aff \
+             Dictionaries\\pt_BR\\pt_BR.dic \
+             Dictionaries\\pt_PT\\pt_PT.aff \
+             Dictionaries\\pt_PT\\pt_PT.dic \
+             Dictionaries\\ru_RU\\ru_RU.aff \
+             Dictionaries\\ru_RU\\ru_RU.dic \
+             Dictionaries\\si_LK\\si_LK.aff \
+             Dictionaries\\si_LK\\si_LK.dic \
+             Dictionaries\\sk_SK\\sk_SK.aff \
+             Dictionaries\\sk_SK\\sk_SK.dic \
+             Dictionaries\\sl_SI\\sl_SI.aff \
+             Dictionaries\\sl_SI\\sl_SI.dic \
+             Dictionaries\\sw_TZ\\sw_TZ.aff \
+             Dictionaries\\sw_TZ\\sw_TZ.dic \
+             Dictionaries\\te_IN\\te_IN.aff \
+             Dictionaries\\te_IN\\te_IN.dic \
+             Dictionaries\\uk_UA\\uk_UA.aff \
+             Dictionaries\\uk_UA\\uk_UA.dic
 
 FORMS           = UI\\dooble.ui \
                   UI\\dooble_about.ui \
