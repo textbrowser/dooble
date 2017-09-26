@@ -130,9 +130,73 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
   s_settings["zoom_frame_location_index"] = 0;
-  s_spell_checker_dictionaries.append("en_US");
-  QWebEngineProfile::defaultProfile()->setSpellCheckLanguages
-    (s_spell_checker_dictionaries);
+  s_spell_checker_dictionaries << "af_ZA"
+			       << "an_ES"
+			       << "ar"
+			       << "be_BY"
+			       << "bn_BD"
+			       << "br_FR"
+			       << "bs_BA"
+			       << "ca"
+			       << "ca-valencia"
+			       << "cs_CZ"
+			       << "da_DK"
+			       << "de_AT_frami"
+			       << "de_CH_frami"
+			       << "de_DE_frami"
+			       << "el_GR"
+			       << "en_AU"
+			       << "en_CA"
+			       << "en_GB"
+			       << "en_US"
+			       << "en_ZA"
+			       << "es_ANY"
+			       << "et_EE"
+			       << "gd_GB"
+			       << "gl_ES"
+			       << "gug"
+			       << "he_IL"
+			       << "hi_IN"
+			       << "hr_HR"
+			       << "hu_HU"
+			       << "is"
+			       << "it_IT"
+			       << "kmr_Latn"
+			       << "lo_LA"
+			       << "lt"
+			       << "lv_LV"
+			       << "ne_NP"
+			       << "nl_NL"
+			       << "nb_NO"
+			       << "nn_NO"
+			       << "oc_FR"
+			       << "pl_PL"
+			       << "pt_BR"
+			       << "pt_PT"
+			       << "ro_RO"
+			       << "ru_RU"
+			       << "si_LK"
+			       << "sk_SK"
+			       << "sl_SI"
+			       << "sr"
+			       << "sr-Latn"
+			       << "sw_TZ"
+			       << "te_IN"
+			       << "uk_UA"
+			       << "vi_VN";
+
+  for(int i = 0; i < s_spell_checker_dictionaries.size(); i++)
+    {
+      QListWidgetItem *item = new QListWidgetItem
+	(s_spell_checker_dictionaries.at(i));
+
+      item->setFlags(Qt::ItemIsEnabled |
+		     Qt::ItemIsSelectable |
+		     Qt::ItemIsUserCheckable);
+      item->setCheckState(Qt::Unchecked);
+      m_ui.dictionaries->addItem(item);
+    }
+
   restore();
   prepare_icons();
 }
@@ -529,6 +593,27 @@ void dooble_settings::restore(void)
 
   QWebEngineProfile::defaultProfile()->setHttpUserAgent
     (m_ui.user_agent->text());
+
+  {
+    QStringList list
+      (setting("dictionaries").toString().split(";", QString::SkipEmptyParts));
+
+    std::sort(list.begin(), list.end());
+
+    for(int i = 0; i < m_ui.dictionaries->count(); i++)
+      {
+	QListWidgetItem *item = m_ui.dictionaries->item(i);
+
+	if(!item)
+	  continue;
+
+	if(list.contains(item->text()))
+	  item->setCheckState(Qt::Checked);
+      }
+
+    QWebEngineProfile::defaultProfile()->setSpellCheckLanguages(list);
+  }
+
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
@@ -547,18 +632,20 @@ void dooble_settings::restore(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 
-  static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
-				                           << m_ui.display
-				                           << m_ui.history
-				                           << m_ui.privacy
-				                           << m_ui.web
-				                           << m_ui.windows);
+  {
+    static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
+				                             << m_ui.display
+				                             << m_ui.history
+				                             << m_ui.privacy
+				                             << m_ui.web
+				                             << m_ui.windows);
 
-  for(int i = 0; i < list.size(); i++)
-    if(i != m_ui.pages->currentIndex())
-      list.at(i)->setChecked(false);
-    else
-      list.at(i)->setChecked(true);
+    for(int i = 0; i < list.size(); i++)
+      if(i != m_ui.pages->currentIndex())
+	list.at(i)->setChecked(false);
+      else
+	list.at(i)->setChecked(true);
+  }
 
   prepare_proxy(false);
   QApplication::restoreOverrideCursor();
@@ -721,6 +808,30 @@ void dooble_settings::slot_apply(void)
 
   QWebEngineProfile::defaultProfile()->setHttpUserAgent
     (m_ui.user_agent->text().trimmed());
+
+  {
+    QString text("");
+    QStringList list;
+
+    for(int i = 0; i < m_ui.dictionaries->count(); i++)
+      {
+	QListWidgetItem *item = m_ui.dictionaries->item(i);
+
+	if(!item)
+	  continue;
+
+	if(item->checkState() == Qt::Checked)
+	  {
+	    list << item->text();
+	    text.append(item->text());
+	    text.append(";");
+	  }
+      }
+
+    QWebEngineProfile::defaultProfile()->setSpellCheckLanguages(list);
+    set_setting("dictionaries", text);
+  }
+
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
