@@ -25,6 +25,9 @@
        <enum>Qt::Horizontal</enum>
       </property>
       <widget class="QListWidget" name="period">
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
        <item>
         <property name="text">
          <string>All</string>
