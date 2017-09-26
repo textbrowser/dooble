@@ -130,6 +130,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
   s_settings["zoom_frame_location_index"] = 0;
+#ifdef Q_OS_MACOS
+#else
   s_spell_checker_dictionaries << "af_ZA"
 			       << "an_ES"
 			       << "ar"
@@ -184,18 +186,26 @@ dooble_settings::dooble_settings(void):QMainWindow()
 			       << "te_IN"
 			       << "uk_UA"
 			       << "vi_VN";
+#endif
 
-  for(int i = 0; i < s_spell_checker_dictionaries.size(); i++)
+  if(s_spell_checker_dictionaries.isEmpty())
     {
-      QListWidgetItem *item = new QListWidgetItem
-	(s_spell_checker_dictionaries.at(i));
-
-      item->setFlags(Qt::ItemIsEnabled |
-		     Qt::ItemIsSelectable |
-		     Qt::ItemIsUserCheckable);
-      item->setCheckState(Qt::Unchecked);
-      m_ui.dictionaries->addItem(item);
+      m_ui.dictionaries_group_box->setEnabled(false);
+      m_ui.dictionaries_group_box->setToolTip
+	(tr("A valid list of dictionaries has not been prepared."));
     }
+  else
+    for(int i = 0; i < s_spell_checker_dictionaries.size(); i++)
+      {
+	QListWidgetItem *item = new QListWidgetItem
+	  (s_spell_checker_dictionaries.at(i));
+
+	item->setFlags(Qt::ItemIsEnabled |
+		       Qt::ItemIsSelectable |
+		       Qt::ItemIsUserCheckable);
+	item->setCheckState(Qt::Unchecked);
+	m_ui.dictionaries->addItem(item);
+      }
 
   restore();
   prepare_icons();
