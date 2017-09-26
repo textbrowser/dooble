@@ -162,7 +162,7 @@ void dooble_accepted_or_blocked_domains::keyPressEvent(QKeyEvent *event)
 void dooble_accepted_or_blocked_domains::populate(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_ui.table->clearContents();
+  m_ui.table->setRowCount(0);
 
   QMap<QString, int> oids;
 
@@ -414,7 +414,7 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
 void dooble_accepted_or_blocked_domains::slot_containers_cleared(void)
 {
   m_domains.clear();
-  m_ui.table->clearContents();
+  m_ui.table->setRowCount(0);
 }
 
 void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
@@ -509,7 +509,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	{
 	  dialog.close();
 	  m_ui.search->clear();
-	  m_ui.table->clearContents();
+	  m_ui.table->setRowCount(0);
 	  repaint();
 	  QApplication::processEvents();
 

@@ -414,7 +414,7 @@ void dooble_downloads::slot_populate(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     {
       m_downloads.clear();
-      m_ui.table->clearContents();
+      m_ui.table->setRowCount(0);
       return;
     }
 

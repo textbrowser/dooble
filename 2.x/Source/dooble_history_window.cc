@@ -108,7 +108,7 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 void dooble_history_window::clear(void)
 {
   m_items.clear();
-  m_ui.table->clearContents();
+  m_ui.table->setRowCount(0);
 }
 
 void dooble_history_window::closeEvent(QCloseEvent *event)
@@ -277,7 +277,7 @@ void dooble_history_window::showNormal(QWidget *parent)
 void dooble_history_window::slot_containers_cleared(void)
 {
   m_items.clear();
-  m_ui.table->clearContents();
+  m_ui.table->setRowCount(0);
 }
 
 void dooble_history_window::slot_copy_location(void)
