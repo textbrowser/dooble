@@ -61,6 +61,7 @@ class dooble_settings: public QMainWindow
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static void remove_setting(const QString &key);
+  void restore(void);
   void show_panel(dooble_settings::Panels panel);
 
  public slots:
@@ -84,7 +85,6 @@ class dooble_settings: public QMainWindow
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void purge_database_data(void);
-  void restore(void);
   void save_settings(void);
 
  private slots:

@@ -1640,7 +1640,10 @@ void dooble::slot_show_settings(void)
   if(dooble_settings::setting("pin_settings_window").toBool())
     {
       if(m_ui.tab->indexOf(s_settings) == -1)
-	m_ui.tab->addTab(s_settings, s_settings->windowTitle());
+	{
+	  m_ui.tab->addTab(s_settings, s_settings->windowTitle());
+	  s_settings->restore();
+	}
 
       m_ui.tab->setTabToolTip(m_ui.tab->count() - 1, s_settings->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
