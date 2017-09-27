@@ -188,7 +188,7 @@
       <item>
        <widget class="QStackedWidget" name="pages">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="cache_page">
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -617,8 +617,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>731</height>
+               <width>415</width>
+               <height>633</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1130,7 +1130,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="new_javascript_block_popup_exception"/>
+                   <widget class="QLineEdit" name="new_javascript_block_popup_exception">
+                    <property name="toolTip">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="allow_javascript_block_popup_exception">
@@ -1175,12 +1179,12 @@
                   </attribute>
                   <column>
                    <property name="text">
-                    <string>Site</string>
+                    <string>Status</string>
                    </property>
                   </column>
                   <column>
                    <property name="text">
-                    <string>Status</string>
+                    <string>Site</string>
                    </property>
                   </column>
                  </widget>

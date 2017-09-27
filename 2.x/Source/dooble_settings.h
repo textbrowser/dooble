@@ -35,6 +35,7 @@
 #include <QPointer>
 #include <QProgressDialog>
 #include <QReadWriteLock>
+#include <QUrl>
 
 #include "ui_dooble_settings.h"
 
@@ -60,6 +61,7 @@ class dooble_settings: public QMainWindow
   static QVariant setting(const QString &key);
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);
+  static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static void remove_setting(const QString &key);
   void restore(void);
   void show_panel(dooble_settings::Panels panel);
@@ -79,6 +81,7 @@ class dooble_settings: public QMainWindow
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
   static QAtomicInteger<quintptr> s_db_id;
+  static QHash<QUrl, char> s_javascript_block_popup_exceptions;
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
@@ -90,6 +93,7 @@ class dooble_settings: public QMainWindow
  private slots:
   void slot_apply(void);
   void slot_clear_cache(void);
+  void slot_new_javascript_block_popup_exception(void);
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);
   void slot_reset(void);

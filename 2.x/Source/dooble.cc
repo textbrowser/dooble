@@ -79,6 +79,7 @@ dooble::s_url_request_interceptor;
 dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
+  m_is_javascript_dialog = false;
   m_is_private = false;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
@@ -117,6 +118,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 dooble::dooble(bool is_private):QMainWindow()
 {
   initialize_static_members();
+  m_is_javascript_dialog = false;
   m_is_private = is_private;
   m_menu = new QMenu(this);
 
@@ -205,6 +207,7 @@ dooble::dooble(bool is_private):QMainWindow()
 dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
+  m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
@@ -235,6 +238,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
+  m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
   m_menu = new QMenu(this);
   m_ui.setupUi(this);
@@ -313,8 +317,10 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(dooble_settings::setting("save_geometry").toBool())
-    dooble_settings::set_setting("dooble_geometry", saveGeometry().toBase64());
+  if(!m_is_javascript_dialog)
+    if(dooble_settings::setting("save_geometry").toBool())
+      dooble_settings::set_setting
+	("dooble_geometry", saveGeometry().toBase64());
 
   QWidgetList list(QApplication::topLevelWidgets());
 
@@ -1178,9 +1184,11 @@ void dooble::slot_create_dialog(dooble_web_engine_view *view)
 {
   dooble *d = new dooble(view);
 
+  d->m_is_javascript_dialog = true;
   d->m_ui.tab->setTabBarAutoHide(true);
   d->resize(640, 480); // VGA
   d->showNormal();
+  dooble_ui_utilities::center_window_widget(this, d);
 }
 
 void dooble::slot_create_tab(dooble_web_engine_view *view)

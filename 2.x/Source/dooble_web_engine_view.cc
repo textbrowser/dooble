@@ -80,7 +80,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
   if(dooble_settings::setting("javascript_block_popups").toBool())
-    if(type == QWebEnginePage::WebDialog)
+    if(!dooble_settings::site_has_javascript_block_popup_exception(url()))
       return 0;
 
   dooble_web_engine_view *view = new dooble_web_engine_view

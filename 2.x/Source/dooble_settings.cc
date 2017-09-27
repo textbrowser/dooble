@@ -53,6 +53,7 @@
 #include "dooble_settings.h"
 
 QAtomicInteger<quintptr> dooble_settings::s_db_id;
+QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
@@ -65,6 +66,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(finished(void)),
 	  this,
 	  SLOT(slot_pbkdf2_future_finished(void)));
+  connect(m_ui.allow_javascript_block_popup_exception,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_new_javascript_block_popup_exception(void)));
   connect(m_ui.buttonBox->button(QDialogButtonBox::Apply),
 	  SIGNAL(clicked(void)),
 	  this,
@@ -89,6 +94,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.new_javascript_block_popup_exception,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_new_javascript_block_popup_exception(void)));
   connect(m_ui.privacy,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -290,6 +299,11 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 
   QSqlDatabase::removeDatabase(database_name);
   return ok;
+}
+
+bool dooble_settings::site_has_javascript_block_popup_exception(const QUrl &url)
+{
+  return s_javascript_block_popup_exceptions.value(url, 0) == 1;
 }
 
 void dooble_settings::closeEvent(QCloseEvent *event)
@@ -942,6 +956,94 @@ void dooble_settings::slot_apply(void)
 void dooble_settings::slot_clear_cache(void)
 {
   QWebEngineProfile::defaultProfile()->clearHttpCache();
+}
+
+void dooble_settings::slot_new_javascript_block_popup_exception(void)
+{
+  QUrl url(QUrl::fromUserInput(m_ui.new_javascript_block_popup_exception->
+			       text().trimmed()));
+
+  if(url.isEmpty() || !url.isValid())
+    return;
+  else if(s_javascript_block_popup_exceptions.contains(url))
+    return;
+
+  m_ui.javascript_block_popups_exceptions->setRowCount
+    (m_ui.javascript_block_popups_exceptions->rowCount() + 1);
+  m_ui.new_javascript_block_popup_exception->clear();
+  s_javascript_block_popup_exceptions[url] = 1;
+
+  QTableWidgetItem *item = new QTableWidgetItem();
+
+  item->setCheckState(Qt::Checked);
+  item->setFlags(Qt::ItemIsEnabled |
+		 Qt::ItemIsSelectable |
+		 Qt::ItemIsUserCheckable);
+  m_ui.javascript_block_popups_exceptions->setItem
+    (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 0, item);
+  item = new QTableWidgetItem(url.toString());
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.javascript_block_popups_exceptions->setItem
+    (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
+
+  if(!dooble::s_cryptography || dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec
+	  ("CREATE TABLE IF NOT EXISTS "
+	   "dooble_javascript_block_popup_exceptions ("
+	   "status TEXT NOT NULL, "
+	   "url TEXT NOT NULL, "
+	   "url_digest TEXT NOT NULL PRIMARY KEY)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_javascript_block_popup_exceptions "
+	   "(state, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray data
+	  (dooble::s_cryptography->encrypt_then_mac(QByteArray("true")));
+	bool ok = true;
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(url.toEncoded());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	if(ok)
+	  query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_settings::slot_page_button_clicked(void)

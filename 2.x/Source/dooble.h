@@ -104,6 +104,7 @@ class dooble: public QMainWindow
   QPointer<dooble_cookies_window> m_cookies_window;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
+  bool m_is_javascript_dialog;
   bool m_is_private;
   static bool s_containers_populated;
   bool can_exit(void);
