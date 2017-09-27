@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>700</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>649</height>
+           <height>749</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -617,8 +617,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>633</height>
+               <width>651</width>
+               <height>731</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1112,13 +1112,111 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="javascript_block_popups">
-               <property name="text">
+              <widget class="QGroupBox" name="javascript_block_popups">
+               <property name="title">
                 <string>Block Popups</string>
                </property>
-               <property name="checked">
+               <property name="checkable">
                 <bool>true</bool>
                </property>
+               <layout class="QVBoxLayout" name="verticalLayout_15">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_14">
+                  <item>
+                   <widget class="QLabel" name="label_22">
+                    <property name="text">
+                     <string>New Exception</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="new_javascript_block_popup_exception"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="allow_javascript_block_popup_exception">
+                    <property name="text">
+                     <string>Allow</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QTableWidget" name="javascript_block_popups_exceptions">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>150</height>
+                   </size>
+                  </property>
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="selectionBehavior">
+                   <enum>QAbstractItemView::SelectRows</enum>
+                  </property>
+                  <property name="horizontalScrollMode">
+                   <enum>QAbstractItemView::ScrollPerPixel</enum>
+                  </property>
+                  <property name="showGrid">
+                   <bool>false</bool>
+                  </property>
+                  <attribute name="horizontalHeaderDefaultSectionSize">
+                   <number>150</number>
+                  </attribute>
+                  <attribute name="horizontalHeaderMinimumSectionSize">
+                   <number>150</number>
+                  </attribute>
+                  <attribute name="horizontalHeaderStretchLastSection">
+                   <bool>true</bool>
+                  </attribute>
+                  <attribute name="verticalHeaderVisible">
+                   <bool>false</bool>
+                  </attribute>
+                  <column>
+                   <property name="text">
+                    <string>Site</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Status</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_13">
+                  <item>
+                   <spacer name="horizontalSpacer_14">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="remove_all_javascript_block_popup_exceptions">
+                    <property name="text">
+                     <string>Remove All</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="remove_selected_javascript_block_popup_exceptions">
+                    <property name="text">
+                     <string>Remove Selected</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
               </widget>
              </item>
              <item>
@@ -1158,7 +1256,7 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>250</height>
+                 <height>150</height>
                 </size>
                </property>
                <property name="tabKeyNavigation">
@@ -1354,6 +1452,11 @@
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
+  <tabstop>new_javascript_block_popup_exception</tabstop>
+  <tabstop>allow_javascript_block_popup_exception</tabstop>
+  <tabstop>javascript_block_popups_exceptions</tabstop>
+  <tabstop>remove_selected_javascript_block_popup_exceptions</tabstop>
+  <tabstop>remove_all_javascript_block_popup_exceptions</tabstop>
   <tabstop>javascript_popups</tabstop>
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>

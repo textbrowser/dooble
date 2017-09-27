@@ -124,6 +124,7 @@ class dooble: public QMainWindow
   void slot_about_to_show_main_menu(void);
   void slot_authenticate(void);
   void slot_close_tab(void);
+  void slot_create_dialog(dooble_web_engine_view *view);
   void slot_create_tab(dooble_web_engine_view *view);
   void slot_create_window(dooble_web_engine_view *view);
   void slot_decouple_tab(int index);

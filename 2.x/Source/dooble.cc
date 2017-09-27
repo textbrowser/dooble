@@ -659,6 +659,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(create_dialog(dooble_web_engine_view *)),
+	  this,
+	  SLOT(slot_create_dialog(dooble_web_engine_view *)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
 	  SLOT(slot_create_tab(dooble_web_engine_view *)),
@@ -1166,6 +1172,15 @@ void dooble::slot_close_tab(void)
 
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
   prepare_tab_shortcuts();
+}
+
+void dooble::slot_create_dialog(dooble_web_engine_view *view)
+{
+  dooble *d = new dooble(view);
+
+  d->m_ui.tab->setTabBarAutoHide(true);
+  d->resize(640, 480); // VGA
+  d->showNormal();
 }
 
 void dooble::slot_create_tab(dooble_web_engine_view *view)

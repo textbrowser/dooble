@@ -168,6 +168,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_reload_or_stop(void)));
   connect(m_view,
+	  SIGNAL(create_dialog(dooble_web_engine_view *)),
+	  this,
+	  SIGNAL(create_dialog(dooble_web_engine_view *)));
+  connect(m_view,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
 	  SIGNAL(create_tab(dooble_web_engine_view *)));

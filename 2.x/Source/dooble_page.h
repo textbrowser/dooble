@@ -141,6 +141,7 @@ class dooble_page: public QWidget
  signals:
   void authenticate(void);
   void close_tab(void);
+  void create_dialog(dooble_web_engine_view *view);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
   void dooble_credentials_authenticated(bool state);

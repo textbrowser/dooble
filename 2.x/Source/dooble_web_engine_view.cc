@@ -89,9 +89,12 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
   switch(type)
     {
     case QWebEnginePage::WebBrowserWindow:
-    case QWebEnginePage::WebDialog:
       {
 	emit create_window(view);
+      }
+    case QWebEnginePage::WebDialog:
+      {
+	emit create_dialog(view);
 	break;
       }
     default:
