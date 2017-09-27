@@ -102,6 +102,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.remove_all_javascript_block_popup_exceptions,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove_all_javascript_block_popup_exceptions(void)));
   connect(m_ui.reset_credentials,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -436,6 +440,7 @@ void dooble_settings::purge_database_data(void)
   dooble_downloads::purge();
   dooble_favicons::purge();
   dooble_history::purge();
+  slot_remove_all_javascript_block_popup_exceptions();
 }
 
 void dooble_settings::remove_setting(const QString &key)
@@ -1028,7 +1033,7 @@ void dooble_settings::slot_new_javascript_block_popup_exception(void)
   m_ui.javascript_block_popups_exceptions->setItem
     (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
 
-  if(!dooble::s_cryptography || dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
   QString database_name
@@ -1048,7 +1053,7 @@ void dooble_settings::slot_new_javascript_block_popup_exception(void)
 	query.exec
 	  ("CREATE TABLE IF NOT EXISTS "
 	   "dooble_javascript_block_popup_exceptions ("
-	   "status TEXT NOT NULL, "
+	   "state TEXT NOT NULL, "
 	   "url TEXT NOT NULL, "
 	   "url_digest TEXT NOT NULL PRIMARY KEY)");
 	query.prepare
@@ -1185,6 +1190,42 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	   tr("Credentials could not be generated. "
 	      "This is a curious problem."));
     }
+}
+
+void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
+{
+  m_ui.javascript_block_popups_exceptions->setRowCount(0);
+  s_javascript_block_popup_exceptions.clear();
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_javascript_block_popup_exceptions");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::slot_reset(void)
