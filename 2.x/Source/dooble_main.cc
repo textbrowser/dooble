@@ -262,6 +262,10 @@ int main(int argc, char *argv[])
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_history,
 		   SLOT(slot_populate(void)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(bool)),
+		   dooble::s_settings,
+		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),
 		   dooble::s_cookies_window,

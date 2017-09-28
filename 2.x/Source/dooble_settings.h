@@ -93,10 +93,14 @@ class dooble_settings: public QMainWindow
  private slots:
   void slot_apply(void);
   void slot_clear_cache(void);
+  void slot_javascript_block_popups_exceptions_item_changed
+    (QTableWidgetItem *item);
   void slot_new_javascript_block_popup_exception(void);
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);
+  void slot_populate(void);
   void slot_remove_all_javascript_block_popup_exceptions(void);
+  void slot_remove_selected_javascript_block_popup_exceptions(void);
   void slot_reset(void);
   void slot_reset_credentials(void);
   void slot_save_credentials(void);

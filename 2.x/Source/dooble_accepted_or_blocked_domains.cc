@@ -46,7 +46,7 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
-  m_ui.table->sortByColumn(1, Qt::AscendingOrder);
+  m_ui.table->sortItems(1, Qt::AscendingOrder);
   connect(dooble::s_application,
 	  SIGNAL(containers_cleared(void)),
 	  this,
@@ -136,7 +136,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
 	  this,
 	  SLOT(slot_item_changed(QTableWidgetItem *)));
   m_ui.table->setSortingEnabled(true);
-  m_ui.table->sortByColumn
+  m_ui.table->sortItems
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   save_blocked_domain(domain.toLower().trimmed(), true);
 }
@@ -215,12 +215,12 @@ void dooble_accepted_or_blocked_domains::populate(void)
       QSqlDatabase::removeDatabase(database_name);
     }
 
-  m_ui.table->setRowCount(m_domains.size());
-  m_ui.table->setSortingEnabled(false);
   disconnect(m_ui.table,
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
+  m_ui.table->setRowCount(m_domains.size());
+  m_ui.table->setSortingEnabled(false);
 
   QHashIterator<QString, char> it(m_domains);
   int i = 0;
@@ -253,7 +253,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 	  this,
 	  SLOT(slot_item_changed(QTableWidgetItem *)));
   m_ui.table->setSortingEnabled(true);
-  m_ui.table->sortByColumn
+  m_ui.table->sortItems
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   QApplication::restoreOverrideCursor();
 }

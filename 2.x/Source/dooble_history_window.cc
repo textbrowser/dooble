@@ -54,7 +54,7 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
     (QByteArray::fromBase64(dooble_settings::
 			    setting("history_window_splitter_state").
 			    toByteArray()));
-  m_ui.table->sortByColumn(0, Qt::AscendingOrder);
+  m_ui.table->sortItems(0, Qt::AscendingOrder);
   connect(dooble::s_application,
 	  SIGNAL(containers_cleared(void)),
 	  this,
