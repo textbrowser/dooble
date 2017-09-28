@@ -617,8 +617,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>633</height>
+               <width>651</width>
+               <height>731</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1089,247 +1089,256 @@
         <widget class="QWidget" name="web_page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
-           <widget class="QCheckBox" name="animated_scrolling">
-            <property name="text">
-             <string>Animated Scrolling</string>
+           <widget class="QScrollArea" name="scrollArea_3">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="javascript">
-            <property name="title">
-             <string>JavaScript</string>
-            </property>
-            <property name="checkable">
+            <property name="widgetResizable">
              <bool>true</bool>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_11">
-             <item>
-              <widget class="QCheckBox" name="javascript_access_clipboard">
-               <property name="text">
-                <string>Access Clipboard</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QGroupBox" name="javascript_block_popups">
-               <property name="title">
-                <string>Block Pop-ups</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_15">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_14">
-                  <item>
-                   <widget class="QLabel" name="label_22">
-                    <property name="text">
-                     <string>New Exception</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="new_javascript_block_popup_exception">
-                    <property name="toolTip">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="clearButtonEnabled">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="allow_javascript_block_popup_exception">
-                    <property name="text">
-                     <string>Allow</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <widget class="QTableWidget" name="javascript_block_popups_exceptions">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>150</height>
-                   </size>
-                  </property>
-                  <property name="alternatingRowColors">
-                   <bool>true</bool>
-                  </property>
-                  <property name="selectionBehavior">
-                   <enum>QAbstractItemView::SelectRows</enum>
-                  </property>
-                  <property name="horizontalScrollMode">
-                   <enum>QAbstractItemView::ScrollPerPixel</enum>
-                  </property>
-                  <property name="showGrid">
-                   <bool>false</bool>
-                  </property>
-                  <attribute name="horizontalHeaderDefaultSectionSize">
-                   <number>150</number>
-                  </attribute>
-                  <attribute name="horizontalHeaderMinimumSectionSize">
-                   <number>150</number>
-                  </attribute>
-                  <attribute name="horizontalHeaderStretchLastSection">
-                   <bool>true</bool>
-                  </attribute>
-                  <attribute name="verticalHeaderVisible">
-                   <bool>false</bool>
-                  </attribute>
-                  <column>
+            <widget class="QWidget" name="scrollAreaWidgetContents_2">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>651</width>
+               <height>731</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_16">
+              <item>
+               <widget class="QCheckBox" name="animated_scrolling">
+                <property name="text">
+                 <string>Animated Scrolling</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="javascript">
+                <property name="title">
+                 <string>JavaScript</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_11">
+                 <item>
+                  <widget class="QCheckBox" name="javascript_access_clipboard">
                    <property name="text">
-                    <string>Allow</string>
+                    <string>Access Clipboard</string>
                    </property>
-                  </column>
-                  <column>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QGroupBox" name="javascript_block_popups">
+                   <property name="title">
+                    <string>Block Pop-ups</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_15">
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_14">
+                      <item>
+                       <widget class="QLabel" name="label_22">
+                        <property name="text">
+                         <string>New Exception</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="new_javascript_block_popup_exception">
+                        <property name="toolTip">
+                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                        </property>
+                        <property name="clearButtonEnabled">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="allow_javascript_block_popup_exception">
+                        <property name="text">
+                         <string>Allow</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <widget class="QTableWidget" name="javascript_block_popups_exceptions">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
+                      </property>
+                      <property name="alternatingRowColors">
+                       <bool>true</bool>
+                      </property>
+                      <property name="selectionBehavior">
+                       <enum>QAbstractItemView::SelectRows</enum>
+                      </property>
+                      <property name="horizontalScrollMode">
+                       <enum>QAbstractItemView::ScrollPerPixel</enum>
+                      </property>
+                      <property name="showGrid">
+                       <bool>false</bool>
+                      </property>
+                      <attribute name="horizontalHeaderDefaultSectionSize">
+                       <number>150</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderMinimumSectionSize">
+                       <number>150</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderStretchLastSection">
+                       <bool>true</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderVisible">
+                       <bool>false</bool>
+                      </attribute>
+                      <column>
+                       <property name="text">
+                        <string>Allow</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Site</string>
+                       </property>
+                      </column>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_13">
+                      <item>
+                       <spacer name="horizontalSpacer_14">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="remove_all_javascript_block_popup_exceptions">
+                        <property name="text">
+                         <string>Remove All</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="remove_selected_javascript_block_popup_exceptions">
+                        <property name="text">
+                         <string>Remove Selected</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="javascript_popups">
                    <property name="text">
-                    <string>Site</string>
+                    <string>Pop-ups</string>
                    </property>
-                  </column>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="local_storage">
+                <property name="toolTip">
+                 <string>HTML5 local storage.</string>
+                </property>
+                <property name="text">
+                 <string>Local Storage</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="dictionaries_group_box">
+                <property name="title">
+                 <string>Spell Checkers</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_14">
+                 <item>
+                  <widget class="QListWidget" name="dictionaries">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>150</height>
+                    </size>
+                   </property>
+                   <property name="tabKeyNavigation">
+                    <bool>true</bool>
+                   </property>
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <property name="selectionMode">
+                    <enum>QAbstractItemView::NoSelection</enum>
+                   </property>
+                   <property name="horizontalScrollMode">
+                    <enum>QAbstractItemView::ScrollPerPixel</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QLabel" name="label_20">
+                  <property name="text">
+                   <string>&amp;User Agent</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>user_agent</cstring>
+                  </property>
                  </widget>
                 </item>
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_13">
-                  <item>
-                   <spacer name="horizontalSpacer_14">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="remove_all_javascript_block_popup_exceptions">
-                    <property name="text">
-                     <string>Remove All</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="remove_selected_javascript_block_popup_exceptions">
-                    <property name="text">
-                     <string>Remove Selected</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <widget class="QLineEdit" name="user_agent">
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="javascript_popups">
-               <property name="text">
-                <string>Pop-ups</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="web_plugins">
+                <property name="text">
+                 <string>Web Plugins</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="xss_auditing">
+                <property name="text">
+                 <string>XSS Auditing</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="local_storage">
-            <property name="toolTip">
-             <string>HTML5 local storage.</string>
-            </property>
-            <property name="text">
-             <string>Local Storage</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="dictionaries_group_box">
-            <property name="title">
-             <string>Spell Checkers</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_14">
-             <item>
-              <widget class="QListWidget" name="dictionaries">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>150</height>
-                </size>
-               </property>
-               <property name="tabKeyNavigation">
-                <bool>true</bool>
-               </property>
-               <property name="alternatingRowColors">
-                <bool>true</bool>
-               </property>
-               <property name="selectionMode">
-                <enum>QAbstractItemView::NoSelection</enum>
-               </property>
-               <property name="horizontalScrollMode">
-                <enum>QAbstractItemView::ScrollPerPixel</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_12">
-            <item>
-             <widget class="QLabel" name="label_20">
-              <property name="text">
-               <string>&amp;User Agent</string>
-              </property>
-              <property name="buddy">
-               <cstring>user_agent</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="user_agent">
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="web_plugins">
-            <property name="text">
-             <string>Web Plugins</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="xss_auditing">
-            <property name="text">
-             <string>XSS Auditing</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>599</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
@@ -1441,6 +1450,7 @@
   <tabstop>visited_links</tabstop>
   <tabstop>scrollArea_2</tabstop>
   <tabstop>cookie_policy</tabstop>
+  <tabstop>credentials</tabstop>
   <tabstop>cipher</tabstop>
   <tabstop>hash</tabstop>
   <tabstop>iterations</tabstop>
@@ -1455,6 +1465,7 @@
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
   <tabstop>utc_time_zone</tabstop>
+  <tabstop>scrollArea_3</tabstop>
   <tabstop>animated_scrolling</tabstop>
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
@@ -1462,8 +1473,8 @@
   <tabstop>new_javascript_block_popup_exception</tabstop>
   <tabstop>allow_javascript_block_popup_exception</tabstop>
   <tabstop>javascript_block_popups_exceptions</tabstop>
-  <tabstop>remove_selected_javascript_block_popup_exceptions</tabstop>
   <tabstop>remove_all_javascript_block_popup_exceptions</tabstop>
+  <tabstop>remove_selected_javascript_block_popup_exceptions</tabstop>
   <tabstop>javascript_popups</tabstop>
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
@@ -1472,7 +1483,6 @@
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
-  <tabstop>credentials</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
