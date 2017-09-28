@@ -1198,6 +1198,9 @@ void dooble_page::slot_show_popup(void)
     emit create_dialog(view);
 
   m_last_javascript_popups.remove(index);
+
+  if(m_last_javascript_popups.isEmpty())
+    m_ui.javascript_popup_message->setVisible(false);
 }
 
 void dooble_page::slot_show_popup_menu(void)
