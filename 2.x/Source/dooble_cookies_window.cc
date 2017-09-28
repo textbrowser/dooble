@@ -119,8 +119,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
-  new QShortcut
-    (QKeySequence(tr("Ctrl+F")), m_ui.domain_filter, SLOT(setFocus(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   restoreState
     (QByteArray::fromBase64(dooble_settings::
 			    setting("dooble_cookies_window_state").
@@ -523,6 +522,12 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
     }
 
   m_ui.tree->resizeColumnToContents(0);
+}
+
+void dooble_cookies_window::slot_find(void)
+{
+  m_ui.domain_filter->selectAll();
+  m_ui.domain_filter->setFocus();
 }
 
 void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
