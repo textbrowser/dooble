@@ -39,6 +39,7 @@ class dooble_web_engine_view: public QWebEngineView
  public:
   dooble_web_engine_view(QWebEngineProfile *web_engine_profile,
 			 QWidget *parent);
+  ~dooble_web_engine_view();
   QWebEngineProfile *web_engine_profile(void) const;
   bool is_private(void) const;
   void save(const QString &file_name);
@@ -48,12 +49,14 @@ class dooble_web_engine_view: public QWebEngineView
   void contextMenuEvent(QContextMenuEvent *event);
 
  private:
+  QList<dooble_web_engine_view *> m_dialog_requests;
   bool m_is_private;
   dooble_web_engine_page *m_page;
 
  private slots:
   void slot_accept_or_block_domain(void);
   void slot_certificate_exception_accepted(const QUrl &url);
+  void slot_create_dialog_requests(void);
   void slot_settings_applied(void);
 
  signals:

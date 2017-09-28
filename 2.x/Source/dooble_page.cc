@@ -79,6 +79,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
     {
       m_view = view;
       m_view->setParent(this);
+      slot_url_changed(m_view->url());
     }
   else
     m_view = new dooble_web_engine_view(web_engine_profile, this);
@@ -269,8 +270,14 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
 dooble_page::~dooble_page()
 {
-  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
-    m_last_javascript_popup->deleteLater();
+  while(!m_last_javascript_popups.isEmpty())
+    {
+      QPointer<dooble_web_engine_view> view
+	(m_last_javascript_popups.takeFirst());
+
+      if(view && view->parent() == this)
+	view->deleteLater();
+    }
 
   while(!m_shortcuts.isEmpty())
     delete m_shortcuts.takeFirst();
@@ -755,8 +762,14 @@ void dooble_page::slot_always_allow_javascript_popup(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
 
-  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
-    emit create_dialog(m_last_javascript_popup);
+  while(!m_last_javascript_popups.isEmpty())
+    {
+      QPointer<dooble_web_engine_view> view
+	(m_last_javascript_popups.takeFirst());
+
+      if(view && view->parent() == this)
+	emit create_dialog(view);
+    }
 
   emit javascript_allow_popup_exception(url());
 }
@@ -788,23 +801,28 @@ void dooble_page::slot_close_javascript_popup_exception_frame(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
 
-  if(m_last_javascript_popup)
-    m_last_javascript_popup->deleteLater();
+  while(!m_last_javascript_popups.isEmpty())
+    {
+      QPointer<dooble_web_engine_view> view
+	(m_last_javascript_popups.takeFirst());
+
+      if(view)
+	view->deleteLater();
+    }
 }
 
 void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
 {
-  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
-    m_last_javascript_popup->deleteLater();
-
-  m_last_javascript_popup = view;
-
-  if(m_last_javascript_popup)
-    m_last_javascript_popup->setParent(this);
+  if(view)
+    {
+      view->setParent(this);
+      m_last_javascript_popups.append(view);
+    }
+  else if(m_last_javascript_popups.isEmpty())
+    return;
 
   QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
-  QString text
-    (tr("A dialog from %1 has been blocked.").arg(url().toString()));
+  QString text(tr("A dialog from %1 has been blocked.").arg(url().toString()));
 
   m_ui.javascript_popup_exception_url->setText
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
@@ -912,6 +930,24 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
     (tr("Always"), this, SLOT(slot_always_allow_javascript_popup(void)));
   menu.addAction
     (tr("Now Only"), this, SLOT(slot_only_now_allow_javascript_popup(void)));
+
+  if(!m_last_javascript_popups.isEmpty())
+    {
+      menu.addSeparator();
+
+      for(int i = 0; i < m_last_javascript_popups.size(); i++)
+	{
+	  QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
+
+	  if(view)
+	    menu.addAction
+	      (tr("Show %1...").arg(view->url().toString()),
+	       this,
+	       SLOT(slot_show_popup(void)))->setProperty("index", i);
+	}
+    }
+
+  menu.setStyleSheet("QMenu {menu-scrollable: 1;}");
   menu.exec
     (m_ui.javascript_allow_popup_exception->
      mapToGlobal(m_ui.javascript_allow_popup_exception->rect().bottomLeft()));
@@ -946,9 +982,10 @@ void dooble_page::slot_load_finished(bool ok)
   if(!m_is_private)
     dooble_favicons::save_favicon(icon(), m_view->url());
 
+  m_ui.progress->setVisible(false);
+
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.progress->setVisible(false);
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Reload"));
   emit iconChanged(icon());
@@ -971,13 +1008,20 @@ void dooble_page::slot_load_started(void)
   emit iconChanged(QIcon());
   emit titleChanged("");
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  while(!m_last_javascript_popups.isEmpty())
+    {
+      QPointer<dooble_web_engine_view> view
+	(m_last_javascript_popups.takeFirst());
 
-  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
-    m_last_javascript_popup->deleteLater();
+      if(view && view->parent() == this)
+	view->deleteLater();
+    }
 
   m_ui.javascript_popup_message->setVisible(false);
   m_ui.progress->setVisible(true);
+
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/stop.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Stop Page Load"));
 }
@@ -986,8 +1030,14 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
 
-  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
-    emit create_dialog(m_last_javascript_popup);
+  while(!m_last_javascript_popups.isEmpty())
+    {
+      QPointer<dooble_web_engine_view> view
+	(m_last_javascript_popups.takeFirst());
+
+      if(view && view->parent() == this)
+	emit create_dialog(view);
+    }
 }
 
 void dooble_page::slot_open_url(void)
@@ -1128,6 +1178,26 @@ void dooble_page::slot_show_find(void)
   m_ui.find->selectAll();
   m_ui.find->setFocus();
   m_ui.find_frame->setVisible(true);
+}
+
+void dooble_page::slot_show_popup(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  int index = action->property("index").toInt();
+
+  if(index < 0 || index > m_last_javascript_popups.size())
+    return;
+
+  QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(index));
+
+  if(view)
+    emit create_dialog(view);
+
+  m_last_javascript_popups.remove(index);
 }
 
 void dooble_page::slot_show_popup_menu(void)

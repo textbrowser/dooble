@@ -66,6 +66,16 @@ dooble_web_engine_view::dooble_web_engine_view
   setPage(m_page);
 }
 
+dooble_web_engine_view::~dooble_web_engine_view()
+{
+  for(int i = m_dialog_requests.size() - 1; i >= 0; i--)
+    if(m_dialog_requests.at(i) && m_dialog_requests.at(i)->parent() == this)
+      {
+	m_dialog_requests.at(i)->deleteLater();
+	m_dialog_requests.removeAt(i);
+      }
+}
+
 QWebEngineProfile *dooble_web_engine_view::web_engine_profile(void) const
 {
   return m_page->profile();
@@ -88,7 +98,10 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
        dooble_settings::setting("javascript_block_popups").toBool())
       if(!dooble_settings::site_has_javascript_block_popup_exception(url()))
 	{
-	  emit create_dialog_request(view);
+	  m_dialog_requests.append(view);
+	  view->setParent(this);
+	  QTimer::singleShot
+	    (250, this, SLOT(slot_create_dialog_requests(void)));
 	  return view;
 	}
 
@@ -182,6 +195,12 @@ void dooble_web_engine_view::slot_certificate_exception_accepted
 {
   if(!url.isEmpty() && url.isValid())
     load(url);
+}
+
+void dooble_web_engine_view::slot_create_dialog_requests(void)
+{
+  while(!m_dialog_requests.isEmpty())
+    emit create_dialog_request(m_dialog_requests.takeFirst());
 }
 
 void dooble_web_engine_view::slot_settings_applied(void)

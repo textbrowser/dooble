@@ -86,7 +86,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
-  QPointer<dooble_web_engine_view> m_last_javascript_popup;
+  QVector<QPointer<dooble_web_engine_view> > m_last_javascript_popups;
   Ui_dooble_page m_ui;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
@@ -137,6 +137,7 @@ class dooble_page: public QWidget
   void slot_settings_applied(void);
   void slot_show_certificate_exception(void);
   void slot_show_find(void);
+  void slot_show_popup(void);
   void slot_show_popup_menu(void);
   void slot_show_pull_down_menu(void);
   void slot_show_status_bar(bool state);
