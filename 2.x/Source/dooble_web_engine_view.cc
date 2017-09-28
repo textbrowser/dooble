@@ -150,6 +150,11 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   menu->deleteLater();
 }
 
+void dooble_web_engine_view::save(const QString &file_name)
+{
+  m_page->save(file_name, QWebEngineDownloadItem::CompleteHtmlSaveFormat);
+}
+
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());

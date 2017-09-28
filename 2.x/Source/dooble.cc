@@ -749,6 +749,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(save(void)),
+	  this,
+	  SLOT(slot_save(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_about(void)),
 	  this,
 	  SLOT(slot_show_about(void)),
@@ -845,6 +851,9 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+Q")),
 				       this,
 				       SLOT(slot_quit_dooble(void))));
+      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+S")),
+				       this,
+				       SLOT(slot_save(void))));
       m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+T")),
 				       this,
 				       SLOT(slot_new_tab(void))));
@@ -1260,7 +1269,9 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   if(dialog.exec() == QDialog::Accepted)
     {
-      download->setPath(dialog.selectedFiles().value(0));
+      if(download->state() == QWebEngineDownloadItem::DownloadRequested)
+	download->setPath(dialog.selectedFiles().value(0));
+
       s_downloads->record_download(download);
 
       if(dooble_settings::setting("pin_downloads_window").toBool())
@@ -1431,6 +1442,21 @@ void dooble::slot_reload_tab(int index)
 void dooble::slot_remove_tab_widget_shortcut(void)
 {
   prepare_tab_shortcuts();
+}
+
+void dooble::slot_save(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+
+  if(!page)
+    return;
+
+  QString file_name(page->url().fileName());
+
+  if(file_name.isEmpty())
+    file_name = page->url().host();
+
+  page->save(s_downloads->download_path() + QDir::separator() + file_name);
 }
 
 void dooble::slot_settings_applied(void)

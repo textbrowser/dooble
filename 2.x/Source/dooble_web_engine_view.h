@@ -41,6 +41,7 @@ class dooble_web_engine_view: public QWebEngineView
 			 QWidget *parent);
   QWebEngineProfile *web_engine_profile(void) const;
   bool is_private(void) const;
+  void save(const QString &file_name);
 
  protected:
   dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);

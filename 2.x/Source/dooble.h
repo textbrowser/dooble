@@ -144,6 +144,7 @@ class dooble: public QMainWindow
   void slot_quit_dooble(void);
   void slot_reload_tab(int index);
   void slot_remove_tab_widget_shortcut(void);
+  void slot_save(void);
   void slot_settings_applied(void);
   void slot_show_about(void);
   void slot_show_accepted_or_blocked_domains(void);

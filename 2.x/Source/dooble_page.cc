@@ -495,6 +495,11 @@ void dooble_page::prepare_standard_menus(void)
       (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
 
   menu->addSeparator();
+  menu->addAction(tr("&Save..."),
+		  this,
+		  SIGNAL(save(void)),
+		  QKeySequence(tr("Ctrl+S")));
+  menu->addSeparator();
   menu->addAction(tr("&Print..."),
 		  this,
 		  SIGNAL(print(void)),
@@ -645,6 +650,11 @@ void dooble_page::resizeEvent(QResizeEvent *event)
 		Qt::ElideMiddle,
 		qAbs(width() - difference)));
   m_ui.link_hovered->setCursorPosition(0);
+}
+
+void dooble_page::save(const QString &file_name)
+{
+  m_view->save(file_name);
 }
 
 void dooble_page::show_menu(void)

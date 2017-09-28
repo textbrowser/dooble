@@ -72,6 +72,7 @@ class dooble_page: public QWidget
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
   void reload(void);
+  void save(const QString &file_name);
   void show_menu(void);
 
  protected:
@@ -162,6 +163,7 @@ class dooble_page: public QWidget
   void print(void);
   void print_preview(void);
   void quit_dooble(void);
+  void save(void);
   void show_about(void);
   void show_accepted_or_blocked_domains(void);
   void show_clear_items(void);
