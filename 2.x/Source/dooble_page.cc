@@ -70,6 +70,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   else
     m_ui.is_private->setVisible(false);
 
+  m_ui.javascript_popup_message->setVisible(false);
   m_ui.progress->setVisible(false);
   m_ui.status_bar->setVisible
     (dooble_settings::setting("status_bar_visible").toBool());
@@ -171,6 +172,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(create_dialog(dooble_web_engine_view *)),
 	  this,
 	  SIGNAL(create_dialog(dooble_web_engine_view *)));
+  connect(m_view,
+	  SIGNAL(create_dialog_request(void)),
+	  this,
+	  SLOT(slot_create_dialog_request(void)));
   connect(m_view,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
@@ -403,6 +408,8 @@ void dooble_page::prepare_icons(void)
   m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
   m_ui.is_private->setPixmap
     (QIcon(QString(":/%1/16/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
+  m_ui.close_javascript_popup_exception_frame->setIcon
+    (QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
   m_ui.menu->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
 }
@@ -739,6 +746,18 @@ void dooble_page::slot_authentication_required(const QUrl &url,
     }
   else
     m_view->stop();
+}
+
+void dooble_page::slot_create_dialog_request(void)
+{
+  m_ui.javascript_popup_message->setVisible(true);
+
+  QFontMetrics fm(m_ui.javascript_popup_exception_url->fontMetrics());
+  QString text(tr("The dialog from %1 has been blocked.").
+	       arg(url().toString()));
+
+  m_ui.javascript_popup_exception_url->setText
+    (fm.elidedText(text, Qt::ElideMiddle, width()));
 }
 
 void dooble_page::slot_dooble_credentials_authenticated(bool state)

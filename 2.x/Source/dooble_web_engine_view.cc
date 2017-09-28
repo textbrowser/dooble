@@ -83,7 +83,10 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     if(dooble_settings::setting("javascript").toBool() &&
        dooble_settings::setting("javascript_block_popups").toBool())
       if(!dooble_settings::site_has_javascript_block_popup_exception(url()))
-	return 0;
+	{
+	  emit create_dialog_request();
+	  return 0;
+	}
 
   dooble_web_engine_view *view = new dooble_web_engine_view
     (m_page->profile(), 0);

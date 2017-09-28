@@ -102,6 +102,7 @@ class dooble_page: public QWidget
   void slot_about_to_show_standard_menus(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
+  void slot_create_dialog_request(void);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_dooble_credentials_created(void);
   void slot_escape(void);
