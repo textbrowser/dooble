@@ -376,6 +376,37 @@ void dooble_settings::keyPressEvent(QKeyEvent *event)
     event->ignore();
 }
 
+void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
+{
+  if(s_javascript_block_popup_exceptions.contains(url))
+    return;
+  else if(url.isEmpty() || !url.isValid())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.javascript_block_popups_exceptions->setRowCount
+    (m_ui.javascript_block_popups_exceptions->rowCount() + 1);
+  m_ui.new_javascript_block_popup_exception->clear();
+
+  QTableWidgetItem *item = new QTableWidgetItem();
+
+  item->setCheckState(Qt::Checked);
+  item->setData(Qt::UserRole, url);
+  item->setFlags(Qt::ItemIsEnabled |
+		 Qt::ItemIsSelectable |
+		 Qt::ItemIsUserCheckable);
+  m_ui.javascript_block_popups_exceptions->setItem
+    (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 0, item);
+  item = new QTableWidgetItem(url.toString());
+  item->setData(Qt::UserRole, url);
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.javascript_block_popups_exceptions->setItem
+    (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
+  m_ui.javascript_block_popups_exceptions->sortItems(1);
+  QApplication::restoreOverrideCursor();
+  save_javascript_block_popup_exception(url, true);
+}
+
 void dooble_settings::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
@@ -1100,38 +1131,27 @@ void dooble_settings::slot_javascript_block_popups_exceptions_item_changed
   save_javascript_block_popup_exception(item->text(), state);
 }
 
+void dooble_settings::slot_new_javascript_block_popup_exception(const QUrl &url)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QTableWidgetItem *> list
+    (m_ui.javascript_block_popups_exceptions->
+     findItems(url.toString(), Qt::MatchExactly));
+
+  if(!list.isEmpty())
+    if(list.at(0))
+      m_ui.javascript_block_popups_exceptions->removeRow(list.at(0)->row());
+
+  s_javascript_block_popup_exceptions.remove(url);
+  QApplication::restoreOverrideCursor();
+  new_javascript_block_popup_exception(url);
+}
+
 void dooble_settings::slot_new_javascript_block_popup_exception(void)
 {
-  QUrl url
+  new_javascript_block_popup_exception
     (QUrl::fromUserInput(m_ui.new_javascript_block_popup_exception->text()));
-
-  if(s_javascript_block_popup_exceptions.contains(url))
-    return;
-  else if(url.isEmpty() || !url.isValid())
-    return;
-
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_ui.javascript_block_popups_exceptions->setRowCount
-    (m_ui.javascript_block_popups_exceptions->rowCount() + 1);
-  m_ui.new_javascript_block_popup_exception->clear();
-
-  QTableWidgetItem *item = new QTableWidgetItem();
-
-  item->setCheckState(Qt::Checked);
-  item->setData(Qt::UserRole, url);
-  item->setFlags(Qt::ItemIsEnabled |
-		 Qt::ItemIsSelectable |
-		 Qt::ItemIsUserCheckable);
-  m_ui.javascript_block_popups_exceptions->setItem
-    (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 0, item);
-  item = new QTableWidgetItem(url.toString());
-  item->setData(Qt::UserRole, url);
-  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  m_ui.javascript_block_popups_exceptions->setItem
-    (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
-  m_ui.javascript_block_popups_exceptions->sortItems(1);
-  QApplication::restoreOverrideCursor();
-  save_javascript_block_popup_exception(url, true);
 }
 
 void dooble_settings::slot_page_button_clicked(void)

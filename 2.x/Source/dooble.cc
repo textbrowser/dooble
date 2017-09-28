@@ -1182,6 +1182,9 @@ void dooble::slot_close_tab(void)
 
 void dooble::slot_create_dialog(dooble_web_engine_view *view)
 {
+  if(!view)
+    return;
+
   dooble *d = new dooble(view);
 
   d->m_is_javascript_dialog = true;

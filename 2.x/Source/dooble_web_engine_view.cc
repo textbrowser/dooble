@@ -79,17 +79,18 @@ bool dooble_web_engine_view::is_private(void) const
 dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
-  if(type == QWebEnginePage::WebDialog)
+  dooble_web_engine_view *view = new dooble_web_engine_view
+    (m_page->profile(), 0);
+
+  if(type == QWebEnginePage::WebBrowserWindow ||
+     type == QWebEnginePage::WebDialog)
     if(dooble_settings::setting("javascript").toBool() &&
        dooble_settings::setting("javascript_block_popups").toBool())
       if(!dooble_settings::site_has_javascript_block_popup_exception(url()))
 	{
-	  emit create_dialog_request();
-	  return 0;
+	  emit create_dialog_request(view);
+	  return view;
 	}
-
-  dooble_web_engine_view *view = new dooble_web_engine_view
-    (m_page->profile(), 0);
 
   switch(type)
     {

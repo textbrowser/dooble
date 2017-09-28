@@ -128,6 +128,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_backward_menu(void)));
+  connect(m_ui.close_javascript_popup_exception_frame,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_close_javascript_popup_exception_frame(void)));
   connect(m_ui.downloads,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -160,6 +164,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_forward_menu(void)));
+  connect(m_ui.javascript_allow_popup_exception,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_javascript_allow_popup_exception(void)));
   connect(m_ui.menu,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -173,9 +181,9 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SIGNAL(create_dialog(dooble_web_engine_view *)));
   connect(m_view,
-	  SIGNAL(create_dialog_request(void)),
+	  SIGNAL(create_dialog_request(dooble_web_engine_view *)),
 	  this,
-	  SLOT(slot_create_dialog_request(void)));
+	  SLOT(slot_create_dialog_request(dooble_web_engine_view *)));
   connect(m_view,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
@@ -248,6 +256,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SLOT(slot_proxy_authentication_required(const QUrl &,
 						  QAuthenticator *,
 						  const QString &)));
+  connect(this,
+	  SIGNAL(javascript_allow_popup_exception(const QUrl &)),
+	  dooble::s_settings,
+	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   prepare_icons();
   prepare_shortcuts();
   prepare_standard_menus();
@@ -257,6 +269,9 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
 dooble_page::~dooble_page()
 {
+  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
+    m_last_javascript_popup->deleteLater();
+
   while(!m_shortcuts.isEmpty())
     delete m_shortcuts.takeFirst();
 }
@@ -615,7 +630,7 @@ void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
 
-  QFontMetrics fm(m_ui.link_hovered->fontMetrics());
+  QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
 
   if(m_ui.is_private->isVisible())
@@ -625,9 +640,10 @@ void dooble_page::resizeEvent(QResizeEvent *event)
     difference += m_ui.progress->width();
 
   m_ui.link_hovered->setText
-    (fm.elidedText(m_ui.link_hovered->property("text").toString().trimmed(),
-		   Qt::ElideMiddle,
-		   qAbs(width() - difference)));
+    (font_metrics.
+     elidedText(m_ui.link_hovered->property("text").toString().trimmed(),
+		Qt::ElideMiddle,
+		qAbs(width() - difference)));
   m_ui.link_hovered->setCursorPosition(0);
 }
 
@@ -748,16 +764,31 @@ void dooble_page::slot_authentication_required(const QUrl &url,
     m_view->stop();
 }
 
-void dooble_page::slot_create_dialog_request(void)
+void dooble_page::slot_close_javascript_popup_exception_frame(void)
 {
-  m_ui.javascript_popup_message->setVisible(true);
+  if(m_last_javascript_popup)
+    m_last_javascript_popup->deleteLater();
 
-  QFontMetrics fm(m_ui.javascript_popup_exception_url->fontMetrics());
-  QString text(tr("The dialog from %1 has been blocked.").
-	       arg(url().toString()));
+  m_ui.javascript_popup_message->setVisible(false);
+}
+
+void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
+{
+  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
+    m_last_javascript_popup->deleteLater();
+
+  m_last_javascript_popup = view;
+
+  if(m_last_javascript_popup)
+    m_last_javascript_popup->setParent(this);
+
+  QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
+  QString text
+    (tr("A dialog from %1 has been blocked.").arg(url().toString()));
 
   m_ui.javascript_popup_exception_url->setText
-    (fm.elidedText(text, Qt::ElideMiddle, width()));
+    (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
+  m_ui.javascript_popup_message->setVisible(true);
 }
 
 void dooble_page::slot_dooble_credentials_authenticated(bool state)
@@ -853,9 +884,18 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
   m_ui.address->set_item_icon(icon, m_view->url());
 }
 
+void dooble_page::slot_javascript_allow_popup_exception(void)
+{
+  if(m_last_javascript_popup)
+    emit create_dialog(m_last_javascript_popup);
+
+  m_ui.javascript_popup_message->setVisible(false);
+  emit javascript_allow_popup_exception(url());
+}
+
 void dooble_page::slot_link_hovered(const QString &url)
 {
-  QFontMetrics fm(m_ui.link_hovered->fontMetrics());
+  QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
 
   if(m_ui.is_private->isVisible())
@@ -866,7 +906,8 @@ void dooble_page::slot_link_hovered(const QString &url)
 
   m_ui.link_hovered->setProperty("text", url);
   m_ui.link_hovered->setText
-    (fm.elidedText(url.trimmed(), Qt::ElideMiddle, qAbs(width() - difference)));
+    (font_metrics.
+     elidedText(url.trimmed(), Qt::ElideMiddle, qAbs(width() - difference)));
   m_ui.link_hovered->setCursorPosition(0);
 }
 
@@ -907,6 +948,10 @@ void dooble_page::slot_load_started(void)
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
+  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
+    m_last_javascript_popup->deleteLater();
+
+  m_ui.javascript_popup_message->setVisible(false);
   m_ui.progress->setVisible(true);
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/stop.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Stop Page Load"));

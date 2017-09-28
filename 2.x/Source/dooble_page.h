@@ -85,6 +85,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
+  QPointer<dooble_web_engine_view> m_last_javascript_popup;
   Ui_dooble_page m_ui;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
@@ -102,7 +103,8 @@ class dooble_page: public QWidget
   void slot_about_to_show_standard_menus(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
-  void slot_create_dialog_request(void);
+  void slot_close_javascript_popup_exception_frame(void);
+  void slot_create_dialog_request(dooble_web_engine_view *view);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_dooble_credentials_created(void);
   void slot_escape(void);
@@ -114,6 +116,7 @@ class dooble_page: public QWidget
   void slot_go_to_backward_item(void);
   void slot_go_to_forward_item(void);
   void slot_icon_changed(const QIcon &icon);
+  void slot_javascript_allow_popup_exception(void);
   void slot_link_hovered(const QString &url);
   void slot_load_finished(bool ok);
   void slot_load_page(void);
@@ -148,6 +151,7 @@ class dooble_page: public QWidget
   void dooble_credentials_authenticated(bool state);
   void downloadRequested(QWebEngineDownloadItem *download);
   void iconChanged(const QIcon &icon);
+  void javascript_allow_popup_exception(const QUrl &url);
   void loadFinished(bool ok);
   void loadStarted(void);
   void new_private_window(void);

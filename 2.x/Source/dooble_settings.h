@@ -85,6 +85,7 @@ class dooble_settings: public QMainWindow
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
+  void new_javascript_block_popup_exception(const QUrl &url);
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void purge_database_data(void);
@@ -96,6 +97,7 @@ class dooble_settings: public QMainWindow
   void slot_clear_cache(void);
   void slot_javascript_block_popups_exceptions_item_changed
     (QTableWidgetItem *item);
+  void slot_new_javascript_block_popup_exception(const QUrl &url);
   void slot_new_javascript_block_popup_exception(void);
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);

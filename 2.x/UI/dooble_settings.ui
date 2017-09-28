@@ -1114,7 +1114,7 @@
              <item>
               <widget class="QGroupBox" name="javascript_block_popups">
                <property name="title">
-                <string>Block Popups</string>
+                <string>Block Pop-ups</string>
                </property>
                <property name="checkable">
                 <bool>true</bool>
@@ -1229,7 +1229,7 @@
              <item>
               <widget class="QCheckBox" name="javascript_popups">
                <property name="text">
-                <string>Popups</string>
+                <string>Pop-ups</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
