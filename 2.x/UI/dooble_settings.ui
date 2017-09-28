@@ -429,7 +429,7 @@
             <item>
              <widget class="QComboBox" name="theme">
               <property name="currentIndex">
-               <number>2</number>
+               <number>1</number>
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
