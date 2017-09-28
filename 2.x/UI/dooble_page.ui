@@ -315,6 +315,9 @@
         <property name="text">
          <string>Allow</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>

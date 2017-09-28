@@ -101,6 +101,7 @@ class dooble_page: public QWidget
 
  private slots:
   void slot_about_to_show_standard_menus(void);
+  void slot_always_allow_javascript_popup(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
   void slot_close_javascript_popup_exception_frame(void);
@@ -122,6 +123,7 @@ class dooble_page: public QWidget
   void slot_load_page(void);
   void slot_load_progress(int progress);
   void slot_load_started(void);
+  void slot_only_now_allow_javascript_popup(void);
   void slot_open_url(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);

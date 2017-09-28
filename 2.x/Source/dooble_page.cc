@@ -741,6 +741,16 @@ void dooble_page::slot_about_to_show_standard_menus(void)
     }
 }
 
+void dooble_page::slot_always_allow_javascript_popup(void)
+{
+  m_ui.javascript_popup_message->setVisible(false);
+
+  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
+    emit create_dialog(m_last_javascript_popup);
+
+  emit javascript_allow_popup_exception(url());
+}
+
 void dooble_page::slot_authentication_required(const QUrl &url,
 					       QAuthenticator *authenticator)
 {
@@ -766,10 +776,10 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 
 void dooble_page::slot_close_javascript_popup_exception_frame(void)
 {
+  m_ui.javascript_popup_message->setVisible(false);
+
   if(m_last_javascript_popup)
     m_last_javascript_popup->deleteLater();
-
-  m_ui.javascript_popup_message->setVisible(false);
 }
 
 void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
@@ -886,11 +896,16 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 
 void dooble_page::slot_javascript_allow_popup_exception(void)
 {
-  if(m_last_javascript_popup)
-    emit create_dialog(m_last_javascript_popup);
+  QMenu menu(this);
 
-  m_ui.javascript_popup_message->setVisible(false);
-  emit javascript_allow_popup_exception(url());
+  menu.addAction
+    (tr("Always"), this, SLOT(slot_always_allow_javascript_popup(void)));
+  menu.addAction
+    (tr("Now Only"), this, SLOT(slot_only_now_allow_javascript_popup(void)));
+  menu.exec
+    (m_ui.javascript_allow_popup_exception->
+     mapToGlobal(m_ui.javascript_allow_popup_exception->rect().bottomLeft()));
+  m_ui.javascript_allow_popup_exception->setChecked(false);
 }
 
 void dooble_page::slot_link_hovered(const QString &url)
@@ -955,6 +970,14 @@ void dooble_page::slot_load_started(void)
   m_ui.progress->setVisible(true);
   m_ui.reload->setIcon(QIcon(QString(":/%1/32/stop.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Stop Page Load"));
+}
+
+void dooble_page::slot_only_now_allow_javascript_popup(void)
+{
+  m_ui.javascript_popup_message->setVisible(false);
+
+  if(m_last_javascript_popup && m_last_javascript_popup->parent() == this)
+    emit create_dialog(m_last_javascript_popup);
 }
 
 void dooble_page::slot_open_url(void)
