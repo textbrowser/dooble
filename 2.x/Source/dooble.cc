@@ -1574,6 +1574,19 @@ void dooble::slot_show_cookies(void)
       return;
     }
 
+  if(!qobject_cast<QShortcut *> (sender()))
+    {
+      /*
+      ** Display this site's cookies.
+      */
+
+      dooble_page *page = qobject_cast<dooble_page *>
+	(m_ui.tab->currentWidget());
+
+      if(page)
+	s_cookies_window->filter(page->url().host());
+    }
+
   if(s_cookies_window->isVisible())
     {
       s_cookies_window->activateWindow();
