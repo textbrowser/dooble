@@ -115,12 +115,14 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
     {
       QTableWidgetItem *item = new QTableWidgetItem();
 
+      item->setData(Qt::UserRole, domain);
+
       if(i == 0)
 	{
+	  item->setCheckState(Qt::Checked);
 	  item->setFlags(Qt::ItemIsEnabled |
 			 Qt::ItemIsSelectable |
 			 Qt::ItemIsUserCheckable);
-	  item->setCheckState(Qt::Checked);
 	}
       else
 	{
@@ -164,8 +166,6 @@ void dooble_accepted_or_blocked_domains::populate(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.table->setRowCount(0);
 
-  QMap<QString, int> oids;
-
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
       QString database_name("dooble_accepted_or_blocked_domains");
@@ -183,7 +183,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT domain, state, OID "
+	    if(query.exec("SELECT domain, state "
 			  "FROM dooble_accepted_or_blocked_domains"))
 	      while(query.next())
 		{
@@ -205,7 +205,6 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
 		  m_domains[data1.constData()] = QVariant
 		    (data2).toBool() ? 1 : 0;
-		  oids[data1.constData()] = query.value(2).toInt();
 		}
 	  }
 
@@ -236,13 +235,13 @@ void dooble_accepted_or_blocked_domains::populate(void)
       else
 	item->setCheckState(Qt::Unchecked);
 
-      item->setData(Qt::UserRole, oids.value(it.key()));
+      item->setData(Qt::UserRole, it.key());
       item->setFlags(Qt::ItemIsEnabled |
 		     Qt::ItemIsSelectable |
 		     Qt::ItemIsUserCheckable);
       m_ui.table->setItem(i, 0, item);
       item = new QTableWidgetItem(it.key());
-      item->setData(Qt::UserRole, oids.value(it.key()));
+      item->setData(Qt::UserRole, it.key());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.table->setItem(i, 1, item);
       i += 1;
@@ -464,8 +463,10 @@ void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
 	      {
 		query.prepare
 		  ("DELETE FROM dooble_accepted_or_blocked_domains "
-		   "WHERE OID = ?");
-		query.addBindValue(list.at(i).data(Qt::UserRole));
+		   "WHERE domain_digest = ?");
+		query.addBindValue
+		  (dooble::s_cryptography->
+		   hmac(list.at(i).data(Qt::UserRole).toString()).toBase64());
 
 		if(query.exec())
 		  {
