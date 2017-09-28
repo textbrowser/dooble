@@ -726,6 +726,78 @@ void dooble_settings::restore(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_settings::save_javascript_block_popup_exception
+(const QUrl &url, bool state)
+{
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  s_javascript_block_popup_exceptions[url] = state ? 1 : 0;
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec
+	  ("CREATE TABLE IF NOT EXISTS "
+	   "dooble_javascript_block_popup_exceptions ("
+	   "state TEXT NOT NULL, "
+	   "url TEXT NOT NULL, "
+	   "url_digest TEXT NOT NULL PRIMARY KEY)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_javascript_block_popup_exceptions "
+	   "(state, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray data
+	  (dooble::s_cryptography->
+	   encrypt_then_mac(state ? QByteArray("true") : QByteArray("false")));
+	bool ok = true;
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(url.toEncoded());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	if(ok)
+	  query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_settings::save_settings(void)
 {
   if(setting("save_geometry").toBool())
@@ -1025,101 +1097,41 @@ void dooble_settings::slot_javascript_block_popups_exceptions_item_changed
   if(!item)
     return;
 
-  s_javascript_block_popup_exceptions[item->text()] = state ? 1 : 0;
+  save_javascript_block_popup_exception(item->text(), state);
 }
 
 void dooble_settings::slot_new_javascript_block_popup_exception(void)
 {
-  QUrl url(QUrl::fromUserInput(m_ui.new_javascript_block_popup_exception->
-			       text().trimmed()));
+  QUrl url
+    (QUrl::fromUserInput(m_ui.new_javascript_block_popup_exception->text()));
 
-  if(url.isEmpty() || !url.isValid())
+  if(s_javascript_block_popup_exceptions.contains(url))
     return;
-  else if(s_javascript_block_popup_exceptions.contains(url))
+  else if(url.isEmpty() || !url.isValid())
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.javascript_block_popups_exceptions->setRowCount
     (m_ui.javascript_block_popups_exceptions->rowCount() + 1);
   m_ui.new_javascript_block_popup_exception->clear();
-  s_javascript_block_popup_exceptions[url] = 1;
 
   QTableWidgetItem *item = new QTableWidgetItem();
 
   item->setCheckState(Qt::Checked);
+  item->setData(Qt::UserRole, url);
   item->setFlags(Qt::ItemIsEnabled |
 		 Qt::ItemIsSelectable |
 		 Qt::ItemIsUserCheckable);
   m_ui.javascript_block_popups_exceptions->setItem
     (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 0, item);
   item = new QTableWidgetItem(url.toString());
+  item->setData(Qt::UserRole, url);
   item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   m_ui.javascript_block_popups_exceptions->setItem
     (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
   m_ui.javascript_block_popups_exceptions->sortItems(1);
-
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    {
-      QApplication::restoreOverrideCursor();
-      return;
-    }
-
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-
-	query.exec
-	  ("CREATE TABLE IF NOT EXISTS "
-	   "dooble_javascript_block_popup_exceptions ("
-	   "state TEXT NOT NULL, "
-	   "url TEXT NOT NULL, "
-	   "url_digest TEXT NOT NULL PRIMARY KEY)");
-	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_javascript_block_popup_exceptions "
-	   "(state, url, url_digest) VALUES (?, ?, ?)");
-
-	QByteArray data
-	  (dooble::s_cryptography->encrypt_then_mac(QByteArray("true")));
-	bool ok = true;
-
-	if(data.isEmpty())
-	  ok = false;
-	else
-	  query.addBindValue(data.toBase64());
-
-	data = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
-
-	if(data.isEmpty())
-	  ok = false;
-	else
-	  query.addBindValue(data.toBase64());
-
-	data = dooble::s_cryptography->hmac(url.toEncoded());
-
-	if(data.isEmpty())
-	  ok = false;
-	else
-	  query.addBindValue(data.toBase64());
-
-	if(ok)
-	  query.exec();
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+  save_javascript_block_popup_exception(url, true);
 }
 
 void dooble_settings::slot_page_button_clicked(void)
@@ -1230,7 +1242,6 @@ void dooble_settings::slot_populate(void)
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
   s_javascript_block_popup_exceptions.clear();
 
-  QMap<QUrl, int> oids;
   QString database_name
     (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
 
@@ -1247,7 +1258,7 @@ void dooble_settings::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT state, url, OID "
+	if(query.exec("SELECT state, url "
 		      "FROM dooble_javascript_block_popup_exceptions"))
 	  while(query.next())
 	    {
@@ -1272,7 +1283,6 @@ void dooble_settings::slot_populate(void)
 	      if(url.isEmpty() || !url.isValid())
 		continue;
 
-	      oids[url] = query.value(2).toInt();
 	      s_javascript_block_popup_exceptions[url] =
 		(data1 == "true") ? 1 : 0;
 	    }
@@ -1304,13 +1314,13 @@ void dooble_settings::slot_populate(void)
       else
 	item->setCheckState(Qt::Unchecked);
 
-      item->setData(Qt::UserRole, oids.value(it.key()));
+      item->setData(Qt::UserRole, it.key());
       item->setFlags(Qt::ItemIsEnabled |
 		     Qt::ItemIsSelectable |
 		     Qt::ItemIsUserCheckable);
       m_ui.javascript_block_popups_exceptions->setItem(i, 0, item);
       item = new QTableWidgetItem(it.key().toString());
-      item->setData(Qt::UserRole, oids.value(it.key()));
+      item->setData(Qt::UserRole, it.key());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.javascript_block_popups_exceptions->setItem(i, 1, item);
       i += 1;
@@ -1379,7 +1389,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 
 	db.setDatabaseName(setting("home_path").toString() +
 			   QDir::separator() +
-		       "dooble_settings.db");
+			   "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -1391,15 +1401,18 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 	      {
 		query.prepare
 		  ("DELETE FROM dooble_javascript_block_popup_exceptions "
-		   "WHERE OID = ?");
-		query.addBindValue(list.at(i).data(Qt::UserRole));
+		   "WHERE url_digest = ?");
+		query.addBindValue
+		  (dooble::s_cryptography->
+		   hmac(list.at(i).data(Qt::UserRole).toUrl().toEncoded()).
+		   toBase64());
 
 		if(query.exec())
 		  {
-		    m_ui.javascript_block_popups_exceptions->
-		      removeRow(list.at(i).row());
 		    s_javascript_block_popup_exceptions.remove
 		      (list.at(i).data().toString());
+		    m_ui.javascript_block_popups_exceptions->
+		      removeRow(list.at(i).row());
 		  }
 	      }
 	  }
@@ -1412,9 +1425,9 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
   else
     for(int i = list.size() - 1; i >= 0; i--)
       {
-	m_ui.javascript_block_popups_exceptions->removeRow(list.at(i).row());
 	s_javascript_block_popup_exceptions.remove
 	  (list.at(i).data().toString());
+	m_ui.javascript_block_popups_exceptions->removeRow(list.at(i).row());
       }
 
   QApplication::restoreOverrideCursor();
