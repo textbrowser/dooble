@@ -79,8 +79,7 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
-  new QShortcut
-    (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   m_ui.download_path->setCursorPosition(0);
   m_ui.download_path->setToolTip(m_ui.download_path->text());
   m_ui.table->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -369,6 +368,12 @@ void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
     }
 
   m_ui.download_path->setPalette(palette);
+}
+
+void dooble_downloads::slot_find(void)
+{
+  m_ui.search->selectAll();
+  m_ui.search->setFocus();
 }
 
 void dooble_downloads::slot_open_download_page(void)

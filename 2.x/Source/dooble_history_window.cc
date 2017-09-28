@@ -100,8 +100,7 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
-  new QShortcut
-    (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -376,6 +375,12 @@ void dooble_history_window::slot_delete_pages(void)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_history_window::slot_find(void)
+{
+  m_ui.search->selectAll();
+  m_ui.search->setFocus();
 }
 
 void dooble_history_window::slot_icon_updated(const QIcon &icon,

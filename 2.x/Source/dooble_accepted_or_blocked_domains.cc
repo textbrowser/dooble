@@ -86,8 +86,7 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   else
     m_ui.block_mode->click();
 
-  new QShortcut
-    (QKeySequence(tr("Ctrl+F")), m_ui.search, SLOT(setFocus(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
 }
 
 bool dooble_accepted_or_blocked_domains::contains(const QString &domain) const
@@ -489,6 +488,12 @@ void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
       }
 
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_accepted_or_blocked_domains::slot_find(void)
+{
+  m_ui.search->selectAll();
+  m_ui.search->setFocus();
 }
 
 void dooble_accepted_or_blocked_domains::slot_import(void)
