@@ -213,10 +213,8 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
     {
       m_bookmark->setEnabled(true);
       m_information->setEnabled(true);
-
-      if(url.scheme() == "https")
-	m_information->setIcon
-	  (QIcon(QString(":/%1/18/information_https.png").arg(icon_set)));
+      m_information->setIcon
+	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
     }
 }
 
@@ -225,14 +223,8 @@ void dooble_address_widget::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_bookmark->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
-
-  if(m_url.scheme() == "https")
-    m_information->setIcon
-      (QIcon(QString(":/%1/18/information_https.png").arg(icon_set)));
-  else
-    m_information->setIcon
-      (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
-
+  m_information->setIcon
+    (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
   m_pull_down->setIcon(QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
 }
 
@@ -284,22 +276,12 @@ void dooble_address_widget::setText(const QString &text)
       host_format_range.format = format;
       host_format_range.length = host.length();
       host_format_range.start = url.toString().indexOf(host);
-
-      if(url.scheme() == "https")
-	format.setForeground(QColor(0, 175, 0));
-      else
-	format.setForeground(Qt::gray);
-
+      format.setForeground(Qt::gray);
       path_format_range.format = format;
       path_format_range.length = path.length();
       path_format_range.start =
 	url.toString().indexOf(path, url.toString().indexOf(host));
-
-      if(url.scheme() == "https")
-	format.setForeground(QColor(0, 175, 0));
-      else
-	format.setForeground(Qt::gray);
-
+      format.setForeground(Qt::gray);
       scheme_format_range.format = format;
       scheme_format_range.length = url.toString().indexOf(host);
       scheme_format_range.start = 0;
