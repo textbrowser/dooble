@@ -36,9 +36,9 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
-  foreach(QToolButton *toolButton, findChildren <QToolButton *> ())
+  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
     if(dooble::s_application->style_name() == "macintosh")
-      toolButton->setStyleSheet
+      tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
 		 "border: none;"
 		 "margin-bottom: 0px;"
@@ -47,7 +47,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		 "QToolButton::menu-button {border: none;}").
 	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
     else
-      toolButton->setStyleSheet
+      tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
 		 "border: none;"
 		 "margin-bottom: 3px;"
@@ -132,15 +132,15 @@ void dooble_tab_bar::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
-  foreach(QToolButton *toolButton, findChildren <QToolButton *> ())
+  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
     {
-      toolButton->setArrowType(Qt::NoArrow);
+      tool_button->setArrowType(Qt::NoArrow);
 
       if(i++ == 0)
-	toolButton->setIcon
+	tool_button->setIcon
 	  (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
       else
-	toolButton->setIcon
+	tool_button->setIcon
 	  (QIcon(QString(":/%1/20/next.png").arg(icon_set)));
     }
 }
