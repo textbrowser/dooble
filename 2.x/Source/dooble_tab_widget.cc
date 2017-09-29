@@ -42,8 +42,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_add_tab_tool_button->setIconSize(QSize(20, 20));
 #ifdef Q_OS_MACOS
   m_add_tab_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 3px; margin-left: 5px;"
-     "margin-right: 0px; margin-top: 3px;}"
+    ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_add_tab_tool_button->setStyleSheet
@@ -59,8 +58,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_tabs_menu_button->setIconSize(QSize(20, 20));
 #ifdef Q_OS_MACOS
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 3px; margin-left: 0px;"
-     "margin-right: 5px; margin-top: 3px;}"
+    ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_tabs_menu_button->setStyleSheet
@@ -70,9 +68,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #endif
   m_corner_widget = new QFrame(this);
   m_corner_widget->setLayout(new QHBoxLayout(this));
-  m_corner_widget->layout()->setContentsMargins(0, 0, 0, 0);
+  m_corner_widget->layout()->setContentsMargins(5, 3, 5, 3);
   m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
   m_corner_widget->layout()->addWidget(m_tabs_menu_button);
+  m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->setVisible
     (!dooble_settings::setting("auto_hide_tab_bar").toBool());
   m_tab_bar = new dooble_tab_bar(this);
