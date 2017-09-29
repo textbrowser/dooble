@@ -985,7 +985,7 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 	    menu.addAction
 	      (font_metrics.elidedText(tr("Show %1").arg(view->url().
 							 toString()) + "...",
-				       Qt::ElideRight,
+				       Qt::ElideMiddle,
 				       dooble_ui_utilities::
 				       context_menu_width(&menu)),
 	       this,
