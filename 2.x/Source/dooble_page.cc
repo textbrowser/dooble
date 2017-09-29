@@ -420,20 +420,20 @@ void dooble_page::prepare_icons(void)
     m_settings_action->setIcon
       (QIcon(QString(":/%1/16/settings.png").arg(icon_set)));
 
-  m_ui.backward->setIcon(QIcon(QString(":/%1/32/backward.png").arg(icon_set)));
+  m_ui.backward->setIcon(QIcon(QString(":/%1/36/backward.png").arg(icon_set)));
   m_ui.downloads->setIcon
-    (QIcon(QString(":/%1/32/downloads.png").arg(icon_set)));
+    (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
   m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
     (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
   m_ui.find_stop->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
-  m_ui.forward->setIcon(QIcon(QString(":/%1/32/forward.png").arg(icon_set)));
+  m_ui.forward->setIcon(QIcon(QString(":/%1/36/forward.png").arg(icon_set)));
   m_ui.is_private->setPixmap
     (QIcon(QString(":/%1/16/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
   m_ui.close_javascript_popup_exception_frame->setIcon
     (QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
-  m_ui.menu->setIcon(QIcon(QString(":/%1/32/menu.png").arg(icon_set)));
-  m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
+  m_ui.menu->setIcon(QIcon(QString(":/%1/36/menu.png").arg(icon_set)));
+  m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
 }
 
 void dooble_page::prepare_shortcuts(void)
@@ -1032,7 +1032,7 @@ void dooble_page::slot_load_finished(bool ok)
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.reload->setIcon(QIcon(QString(":/%1/32/reload.png").arg(icon_set)));
+  m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Reload"));
   emit iconChanged(icon());
 }
@@ -1068,7 +1068,7 @@ void dooble_page::slot_load_started(void)
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.reload->setIcon(QIcon(QString(":/%1/32/stop.png").arg(icon_set)));
+  m_ui.reload->setIcon(QIcon(QString(":/%1/36/stop.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Stop Page Load"));
 }
 
