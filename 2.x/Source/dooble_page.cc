@@ -414,11 +414,11 @@ void dooble_page::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   if(m_find_action)
-    m_find_action->setIcon(QIcon(QString(":/%1/16/find.png").arg(icon_set)));
+    m_find_action->setIcon(QIcon(QString(":/%1/18/find.png").arg(icon_set)));
 
   if(m_settings_action)
     m_settings_action->setIcon
-      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)));
+      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)));
 
   m_ui.backward->setIcon(QIcon(QString(":/%1/36/backward.png").arg(icon_set)));
   m_ui.downloads->setIcon
@@ -429,7 +429,7 @@ void dooble_page::prepare_icons(void)
   m_ui.find_stop->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
   m_ui.forward->setIcon(QIcon(QString(":/%1/36/forward.png").arg(icon_set)));
   m_ui.is_private->setPixmap
-    (QIcon(QString(":/%1/16/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
+    (QIcon(QString(":/%1/18/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
   m_ui.close_javascript_popup_exception_frame->setIcon
     (QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
   m_ui.menu->setIcon(QIcon(QString(":/%1/36/menu.png").arg(icon_set)));
@@ -529,7 +529,7 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(show_clear_items(void)));
   m_find_action = menu->addAction
-    (QIcon(QString(":/%1/16/find.png").arg(icon_set)),
+    (QIcon(QString(":/%1/18/find.png").arg(icon_set)),
      tr("&Find"),
      this,
      SLOT(slot_show_find(void)),
@@ -537,14 +537,14 @@ void dooble_page::prepare_standard_menus(void)
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
        tr("Settin&gs"),
        this,
        SIGNAL(show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
   else
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
        tr("Settin&gs..."),
        this,
        SIGNAL(show_settings(void)),

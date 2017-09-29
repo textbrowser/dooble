@@ -134,7 +134,7 @@ void dooble_tab_widget::prepare_icons(void)
   m_add_tab_tool_button->setIcon
     (QIcon(QString(":/%1/36/add.png").arg(icon_set)));
   m_tabs_menu_button->setIcon
-    (QIcon(QString(":/%1/16/pulldown.png").arg(icon_set)));
+    (QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)

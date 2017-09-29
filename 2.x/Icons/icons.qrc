@@ -2,13 +2,13 @@
     <qresource prefix="/">
 	<file>Logo/dooble.png</file>
 	<file>Mac/16/tab_close.png</file>
-	<file>Material Design/16/bookmark.png</file>
-	<file>Material Design/16/bookmarked.png</file>
-	<file>Material Design/16/find.png</file>
-	<file>Material Design/16/information.png</file>
-	<file>Material Design/16/private.png</file>
-	<file>Material Design/16/pulldown.png</file>
-	<file>Material Design/16/settings.png</file>
+	<file>Material Design/18/bookmark.png</file>
+	<file>Material Design/18/bookmarked.png</file>
+	<file>Material Design/18/find.png</file>
+	<file>Material Design/18/information.png</file>
+	<file>Material Design/18/private.png</file>
+	<file>Material Design/18/pulldown.png</file>
+	<file>Material Design/18/settings.png</file>
 	<file>Material Design/20/next.png</file>
 	<file>Material Design/20/previous.png</file>
 	<file>Material Design/20/stop.png</file>

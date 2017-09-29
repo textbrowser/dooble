@@ -196,10 +196,10 @@ void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_bookmark->setIcon(QIcon(QString(":/%1/16/bookmark.png").arg(icon_set)));
+  m_bookmark->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
   m_information->setIcon
-    (QIcon(QString(":/%1/16/information.png").arg(icon_set)));
-  m_pull_down->setIcon(QIcon(QString(":/%1/16/pulldown.png").arg(icon_set)));
+    (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
+  m_pull_down->setIcon(QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
 }
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)

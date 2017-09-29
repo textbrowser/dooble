@@ -928,14 +928,14 @@ void dooble::prepare_standard_menus(void)
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
        tr("Settin&gs"),
        this,
        SLOT(slot_show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
   else
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
        tr("Settin&gs..."),
        this,
        SLOT(slot_show_settings(void)),
@@ -1259,6 +1259,7 @@ void dooble::slot_decouple_tab(int index)
       m_ui.tab->removeTab(index);
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       main_window->setParent(0);
+      main_window->resize(main_window->sizeHint());
       main_window->show();
       dooble_ui_utilities::center_window_widget(this, main_window);
       prepare_tab_shortcuts();
