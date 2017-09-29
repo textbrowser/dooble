@@ -534,33 +534,63 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SLOT(slot_show_find(void)),
      QKeySequence(tr("Ctrl+F")));
-  m_settings_action = menu->addAction
-    (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
-     tr("Settin&gs..."),
-     this,
-     SIGNAL(show_settings(void)),
-     QKeySequence(tr("Ctrl+G")));
+
+  if(dooble_settings::setting("pin_settings_window").toBool())
+    m_settings_action = menu->addAction
+      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+       tr("Settin&gs"),
+       this,
+       SIGNAL(show_settings(void)),
+       QKeySequence(tr("Ctrl+G")));
+  else
+    m_settings_action = menu->addAction
+      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+       tr("Settin&gs..."),
+       this,
+       SIGNAL(show_settings(void)),
+       QKeySequence(tr("Ctrl+G")));
 
   /*
   ** Tools Menu
   */
 
   menu = m_menu->addMenu(tr("&Tools"));
-  menu->addAction(tr("&Blocked Domains..."),
-		  this,
-		  SIGNAL(show_accepted_or_blocked_domains(void)));
+
+  if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
+    menu->addAction(tr("&Blocked Domains"),
+		    this,
+		    SIGNAL(show_accepted_or_blocked_domains(void)));
+  else
+    menu->addAction(tr("&Blocked Domains..."),
+		    this,
+		    SIGNAL(show_accepted_or_blocked_domains(void)));
+
   menu->addAction(tr("&Cookies..."),
 		  this,
 		  SIGNAL(show_cookies(void)),
 		  QKeySequence(tr("Ctrl+K")));
-  menu->addAction(tr("&Downloads..."),
-		  this,
-		  SIGNAL(show_downloads(void)),
-		  QKeySequence(tr("Ctrl+D")));
-  menu->addAction(tr("&History..."),
-		  this,
-		  SIGNAL(show_history(void)),
-		  QKeySequence(tr("Ctrl+H")));
+
+  if(dooble_settings::setting("pin_downloads_window").toBool())
+    menu->addAction(tr("&Downloads"),
+		    this,
+		    SIGNAL(show_downloads(void)),
+		    QKeySequence(tr("Ctrl+D")));
+  else
+    menu->addAction(tr("&Downloads..."),
+		    this,
+		    SIGNAL(show_downloads(void)),
+		    QKeySequence(tr("Ctrl+D")));
+
+  if(dooble_settings::setting("pin_history_window").toBool())
+    menu->addAction(tr("&History"),
+		    this,
+		    SIGNAL(show_history(void)),
+		    QKeySequence(tr("Ctrl+H")));
+  else
+    menu->addAction(tr("&History..."),
+		    this,
+		    SIGNAL(show_history(void)),
+		    QKeySequence(tr("Ctrl+H")));
 
   /*
   ** View Menu

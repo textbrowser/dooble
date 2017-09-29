@@ -920,29 +920,58 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("&Clear Items..."),
 		  this,
 		  SLOT(slot_show_clear_items(void)));
-  m_settings_action = menu->addAction
-    (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
-     tr("Settin&gs..."),
-     this,
-     SLOT(slot_show_settings(void)),
-     QKeySequence(tr("Ctrl+G")));
+
+  if(dooble_settings::setting("pin_settings_window").toBool())
+    m_settings_action = menu->addAction
+      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+       tr("Settin&gs"),
+       this,
+       SLOT(slot_show_settings(void)),
+       QKeySequence(tr("Ctrl+G")));
+  else
+    m_settings_action = menu->addAction
+      (QIcon(QString(":/%1/16/settings.png").arg(icon_set)),
+       tr("Settin&gs..."),
+       this,
+       SLOT(slot_show_settings(void)),
+       QKeySequence(tr("Ctrl+G")));
 
   /*
   ** Tools Menu
   */
 
   menu = m_menu->addMenu(tr("&Tools"));
-  menu->addAction(tr("&Blocked Domains..."),
-		  this,
-		  SLOT(slot_show_accepted_or_blocked_domains(void)));
-  menu->addAction(tr("&Downloads..."),
-		  this,
-		  SLOT(slot_show_downloads(void)),
-		  QKeySequence(tr("Ctrl+D")));
-  menu->addAction(tr("&History..."),
-		  this,
-		  SLOT(slot_show_history(void)),
-		  QKeySequence(tr("Ctrl+H")));
+
+  if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
+    menu->addAction(tr("&Blocked Domains"),
+		    this,
+		    SLOT(slot_show_accepted_or_blocked_domains(void)));
+  else
+    menu->addAction(tr("&Blocked Domains..."),
+		    this,
+		    SLOT(slot_show_accepted_or_blocked_domains(void)));
+
+  if(dooble_settings::setting("pin_downloads_window").toBool())
+    menu->addAction(tr("&Downloads"),
+		    this,
+		    SLOT(slot_show_downloads(void)),
+		    QKeySequence(tr("Ctrl+D")));
+  else
+    menu->addAction(tr("&Downloads..."),
+		    this,
+		    SLOT(slot_show_downloads(void)),
+		    QKeySequence(tr("Ctrl+D")));
+
+  if(dooble_settings::setting("pin_history_window").toBool())
+    menu->addAction(tr("&History"),
+		    this,
+		    SLOT(slot_show_history(void)),
+		    QKeySequence(tr("Ctrl+H")));
+  else
+    menu->addAction(tr("&History..."),
+		    this,
+		    SLOT(slot_show_history(void)),
+		    QKeySequence(tr("Ctrl+H")));
 
   /*
   ** View Menu
