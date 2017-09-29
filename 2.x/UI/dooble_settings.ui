@@ -516,7 +516,7 @@
             <item>
              <widget class="QSpinBox" name="browsing_history">
               <property name="toolTip">
-               <string>Set to zero to disable the browsing history.</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set to zero to disable the browsing history. If browsing history is disabled, the History window will contain session-only entries.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="suffix">
                <string> day(s)</string>
