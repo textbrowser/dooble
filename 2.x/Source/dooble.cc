@@ -1867,17 +1867,18 @@ void dooble::slot_tabs_menu_button_clicked(void)
     {
       QAction *action = 0;
       QString text(m_ui.tab->tabText(i));
+      dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 
-      if(m_ui.tab->tabIcon(i).isNull())
+      if(page)
 	action = menu.addAction
-	  (dooble_favicons::icon(QUrl()),
+	  (page->icon(),
 	   font_metrics.elidedText(text,
 				   Qt::ElideRight,
 				   dooble_ui_utilities::
 				   context_menu_width(&menu)));
       else
 	action = menu.addAction
-	  (m_ui.tab->tabIcon(i),
+	  (dooble_favicons::icon(QUrl()),
 	   font_metrics.elidedText(text,
 				   Qt::ElideRight,
 				   dooble_ui_utilities::
