@@ -41,13 +41,13 @@ dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
   m_ui.setupUi(this);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
-    {
-      m_ui.authenticate->setEnabled(false);
-      m_ui.authenticate->setToolTip
-	(tr("Permanent credentials have not been prepared."));
-    }
+    m_ui.authenticate->setEnabled(false);
   else
     m_ui.authenticate->setEnabled(dooble_settings::has_dooble_credentials());
+
+  if(!dooble_settings::has_dooble_credentials())
+    m_ui.authenticate->setToolTip
+      (tr("Permanent credentials have not been prepared."));
 
   m_ui.zoom_frame->setVisible
     (dooble_settings::
