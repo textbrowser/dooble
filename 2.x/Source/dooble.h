@@ -145,6 +145,7 @@ class dooble: public QMainWindow
   void slot_reload_tab(int index);
   void slot_remove_tab_widget_shortcut(void);
   void slot_save(void);
+  void slot_set_current_tab(void);
   void slot_settings_applied(void);
   void slot_show_about(void);
   void slot_show_accepted_or_blocked_domains(void);
@@ -158,6 +159,7 @@ class dooble: public QMainWindow
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
   void slot_tab_widget_shortcut_activated(void);
+  void slot_tabs_menu_button_clicked(void);
   void slot_title_changed(const QString &title);
 
  signals:

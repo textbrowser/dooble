@@ -298,3 +298,12 @@ void dooble_tab_bar::slot_web_plugins(void)
 	  (QWebEngineSettings::PluginsEnabled, action->isChecked());
     }
 }
+
+void dooble_tab_bar::tabLayoutChange(void)
+{
+  /*
+  ** The scrolling buttons can he hidden here.
+  */
+
+  QTabBar::tabLayoutChange();
+}

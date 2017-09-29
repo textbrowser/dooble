@@ -973,6 +973,8 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
   if(!m_last_javascript_popups.isEmpty())
     {
+      QFontMetrics font_metrics(menu.fontMetrics());
+
       menu.addSeparator();
 
       for(int i = 0; i < m_last_javascript_popups.size(); i++)
@@ -981,7 +983,11 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 	  if(view)
 	    menu.addAction
-	      (tr("Show %1...").arg(view->url().toString()),
+	      (font_metrics.elidedText(tr("Show %1").arg(view->url().
+							 toString()) + "...",
+				       Qt::ElideRight,
+				       dooble_ui_utilities::
+				       context_menu_width(&menu)),
 	       this,
 	       SLOT(slot_show_popup(void)))->setProperty("index", i);
 	}

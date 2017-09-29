@@ -30,6 +30,7 @@
 
 #include <QTabWidget>
 
+class QFrame;
 class QToolButton;
 class dooble_page;
 class dooble_tab_bar;
@@ -41,6 +42,7 @@ class dooble_tab_widget: public QTabWidget
  public:
   dooble_tab_widget(QWidget *parent);
   dooble_page *page(int index) const;
+  QToolButton *tabs_menu_button(void) const;
   void setTabIcon(int index, const QIcon &icon);
   void setTabTextColor(int index, const QColor &color);
 
@@ -48,7 +50,9 @@ class dooble_tab_widget: public QTabWidget
   void tabRemoved(int index);
 
  private:
+  QFrame *m_corner_widget;
   QToolButton *m_add_tab_tool_button;
+  QToolButton *m_tabs_menu_button;
   dooble_tab_bar *m_tab_bar;
   void prepare_icons(void);
 
@@ -64,6 +68,7 @@ class dooble_tab_widget: public QTabWidget
   void new_tab(void);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);
+  void tabs_menu_button_clicked(void);
 };
 
 #endif

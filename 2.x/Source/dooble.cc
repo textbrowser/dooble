@@ -436,6 +436,11 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_tab_close_requested(int)),
 	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(tabs_menu_button_clicked(void)),
+	  this,
+	  SLOT(slot_tabs_menu_button_clicked(void)),
+	  Qt::UniqueConnection);
   connect(s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -1488,6 +1493,14 @@ void dooble::slot_save(void)
   page->save(s_downloads->download_path() + QDir::separator() + file_name);
 }
 
+void dooble::slot_set_current_tab(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    m_ui.tab->setCurrentIndex(action->property("index").toInt());
+}
+
 void dooble::slot_settings_applied(void)
 {
   copy_default_profile_settings();
@@ -1840,6 +1853,47 @@ void dooble::slot_tab_widget_shortcut_activated(void)
     index = m_ui.tab->count() - 1;
 
   m_ui.tab->setCurrentIndex(index);
+}
+
+void dooble::slot_tabs_menu_button_clicked(void)
+{
+  QMenu menu(this);
+
+  menu.setStyleSheet("QMenu {menu-scrollable: 1;}");
+
+  QFontMetrics font_metrics(menu.fontMetrics());
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      QAction *action = 0;
+      QString text(m_ui.tab->tabText(i));
+
+      if(m_ui.tab->tabIcon(i).isNull())
+	action = menu.addAction
+	  (dooble_favicons::icon(QUrl()),
+	   font_metrics.elidedText(text,
+				   Qt::ElideRight,
+				   dooble_ui_utilities::
+				   context_menu_width(&menu)));
+      else
+	action = menu.addAction
+	  (m_ui.tab->tabIcon(i),
+	   font_metrics.elidedText(text,
+				   Qt::ElideRight,
+				   dooble_ui_utilities::
+				   context_menu_width(&menu)));
+
+      action->setProperty("index", i);
+      connect(action,
+	      SIGNAL(triggered(void)),
+	      this,
+	      SLOT(slot_set_current_tab(void)));
+    }
+
+  menu.exec
+    (m_ui.tab->tabs_menu_button()->
+     mapToGlobal(m_ui.tab->tabs_menu_button()->rect().bottomLeft()));
+  m_ui.tab->tabs_menu_button()->setChecked(false);
 }
 
 void dooble::slot_title_changed(const QString &title)

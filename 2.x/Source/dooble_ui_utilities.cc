@@ -73,6 +73,19 @@ dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
   return 0;
 }
 
+int dooble_ui_utilities::context_menu_width(QWidget *widget)
+{
+  if(!widget)
+    return 250;
+
+  QDesktopWidget *desktopWidget = QApplication::desktop();
+
+  if(!desktopWidget)
+    return 250;
+  else
+    return qMax(250, desktopWidget->screenGeometry(widget).width() / 4);
+}
+
 void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 {
   /*
