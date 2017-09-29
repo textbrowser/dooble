@@ -52,7 +52,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #endif
   m_add_tab_tool_button->setToolTip(tr("New Tab"));
   m_tabs_menu_button = new QToolButton(this);
-  m_tabs_menu_button->setArrowType(Qt::DownArrow);
+  m_tabs_menu_button->setArrowType(Qt::NoArrow);
   m_tabs_menu_button->setAutoRaise(true);
   m_tabs_menu_button->setCheckable(true);
   m_tabs_menu_button->setIconSize(QSize(20, 20));
@@ -133,6 +133,8 @@ void dooble_tab_widget::prepare_icons(void)
 
   m_add_tab_tool_button->setIcon
     (QIcon(QString(":/%1/32/add.png").arg(icon_set)));
+  m_tabs_menu_button->setIcon
+    (QIcon(QString(":/%1/16/pulldown.png").arg(icon_set)));
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
