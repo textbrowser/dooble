@@ -93,6 +93,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
     {
       m_ui.tab->addTab(widget, widget->windowTitle());
       m_ui.tab->setCurrentWidget(widget);
+      m_ui.tab->setTabIcon(0, widget->windowIcon());
       m_ui.tab->setTabToolTip(0, widget->windowTitle());
       prepare_tab_shortcuts();
     }
@@ -1316,6 +1317,8 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
 	  m_ui.tab->setTabToolTip
 	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
 	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
 	  prepare_tab_shortcuts();
@@ -1579,6 +1582,8 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 	m_ui.tab->addTab(s_accepted_or_blocked_domains,
 			 s_accepted_or_blocked_domains->windowTitle());
 
+      m_ui.tab->setTabIcon
+	(m_ui.tab->count() - 1, s_accepted_or_blocked_domains->windowIcon());
       m_ui.tab->setTabToolTip
 	(m_ui.tab->count() - 1, s_accepted_or_blocked_domains->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1679,6 +1684,8 @@ void dooble::slot_show_downloads(void)
       if(m_ui.tab->indexOf(s_downloads) == -1)
 	m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
 
+      m_ui.tab->setTabIcon
+	(m_ui.tab->count() - 1, s_downloads->windowIcon());
       m_ui.tab->setTabToolTip
 	(m_ui.tab->count() - 1, s_downloads->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1719,6 +1726,8 @@ void dooble::slot_show_history(void)
       if(m_ui.tab->indexOf(s_history_window) == -1)
 	m_ui.tab->addTab(s_history_window, s_history_window->windowTitle());
 
+      m_ui.tab->setTabIcon
+	(m_ui.tab->count() - 1, s_history_window->windowIcon());
       m_ui.tab->setTabToolTip
 	(m_ui.tab->count() - 1, s_history_window->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1753,6 +1762,8 @@ void dooble::slot_show_settings(void)
 	  s_settings->restore();
 	}
 
+      m_ui.tab->setTabIcon
+	(m_ui.tab->count() - 1, s_settings->windowIcon());
       m_ui.tab->setTabToolTip(m_ui.tab->count() - 1, s_settings->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_settings); // Order is important.
@@ -1879,7 +1890,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
 				   context_menu_width(&menu)));
       else
 	action = menu.addAction
-	  (dooble_favicons::icon(QUrl()),
+	  (m_ui.tab->widget(i)->windowIcon(),
 	   font_metrics.elidedText(text,
 				   Qt::ElideRight,
 				   dooble_ui_utilities::
