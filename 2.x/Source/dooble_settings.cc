@@ -383,6 +383,12 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect
+    (m_ui.javascript_block_popups_exceptions,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
+							       *)));
   m_ui.javascript_block_popups_exceptions->setRowCount
     (m_ui.javascript_block_popups_exceptions->rowCount() + 1);
   m_ui.new_javascript_block_popup_exception->clear();
@@ -402,6 +408,12 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
   m_ui.javascript_block_popups_exceptions->setItem
     (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
   m_ui.javascript_block_popups_exceptions->sortItems(1);
+  connect
+    (m_ui.javascript_block_popups_exceptions,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
+							       *)));
   QApplication::restoreOverrideCursor();
   save_javascript_block_popup_exception(url, true);
 }
@@ -1296,11 +1308,12 @@ void dooble_settings::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  disconnect(m_ui.javascript_block_popups_exceptions,
-	     SIGNAL(itemChanged(QTableWidgetItem *)),
-	     this,
-	     SLOT(slot_javascript_block_popups_exceptions_item_changed
-		  (QTableWidgetItem *)));
+  disconnect
+    (m_ui.javascript_block_popups_exceptions,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
+							       *)));
   m_ui.javascript_block_popups_exceptions->setRowCount
     (s_javascript_block_popup_exceptions.size());
 
@@ -1330,11 +1343,12 @@ void dooble_settings::slot_populate(void)
       i += 1;
     }
 
-  connect(m_ui.javascript_block_popups_exceptions,
-	  SIGNAL(itemChanged(QTableWidgetItem *)),
-	  this,
-	  SLOT(slot_javascript_block_popups_exceptions_item_changed
-	       (QTableWidgetItem *)));
+  connect
+    (m_ui.javascript_block_popups_exceptions,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
+							       *)));
   m_ui.javascript_block_popups_exceptions->sortItems(1);
   QApplication::restoreOverrideCursor();
 }
