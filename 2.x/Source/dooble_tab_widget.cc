@@ -39,7 +39,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
   m_add_tab_tool_button = new QToolButton(this);
   m_add_tab_tool_button->setAutoRaise(true);
-  m_add_tab_tool_button->setIconSize(QSize(20, 20));
+  m_add_tab_tool_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_add_tab_tool_button->setStyleSheet
     ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
@@ -55,7 +55,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_tabs_menu_button->setArrowType(Qt::NoArrow);
   m_tabs_menu_button->setAutoRaise(true);
   m_tabs_menu_button->setCheckable(true);
-  m_tabs_menu_button->setIconSize(QSize(20, 20));
+  m_tabs_menu_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_tabs_menu_button->setStyleSheet
     ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
