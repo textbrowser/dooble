@@ -121,7 +121,10 @@ bool dooble_address_widget::event(QEvent *event)
   if(event && event->type() == QEvent::KeyPress)
     {
       if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Escape)
-	emit reset_url();
+	{
+	  emit reset_url();
+	  prepare_containers_for_url(m_url);
+	}
       else if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
 	  QTableView *table_view = qobject_cast<QTableView *>
@@ -177,7 +180,10 @@ void dooble_address_widget::complete(void)
 void dooble_address_widget::keyPressEvent(QKeyEvent *event)
 {
   if(event && event->key() == Qt::Key_Escape)
-    emit reset_url();
+    {
+      emit reset_url();
+      prepare_containers_for_url(m_url);
+    }
   else if(event)
     {
       QKeySequence key_sequence(event->modifiers() + event->key());
@@ -192,13 +198,41 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
   QLineEdit::keyPressEvent(event);
 }
 
+void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  if(url.isEmpty() || !url.isValid())
+    {
+      m_bookmark->setEnabled(false);
+      m_information->setEnabled(false);
+      m_information->setIcon
+	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
+    }
+  else
+    {
+      m_bookmark->setEnabled(true);
+      m_information->setEnabled(true);
+
+      if(url.scheme() == "https")
+	m_information->setIcon
+	  (QIcon(QString(":/%1/18/information_https.png").arg(icon_set)));
+    }
+}
+
 void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_bookmark->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
-  m_information->setIcon
-    (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
+
+  if(m_url.scheme() == "https")
+    m_information->setIcon
+      (QIcon(QString(":/%1/18/information_https.png").arg(icon_set)));
+  else
+    m_information->setIcon
+      (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
+
   m_pull_down->setIcon(QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
 }
 
@@ -250,12 +284,22 @@ void dooble_address_widget::setText(const QString &text)
       host_format_range.format = format;
       host_format_range.length = host.length();
       host_format_range.start = url.toString().indexOf(host);
-      format.setForeground(Qt::gray);
+
+      if(url.scheme() == "https")
+	format.setForeground(QColor(0, 175, 0));
+      else
+	format.setForeground(Qt::gray);
+
       path_format_range.format = format;
       path_format_range.length = path.length();
       path_format_range.start =
 	url.toString().indexOf(path, url.toString().indexOf(host));
-      format.setForeground(Qt::gray);
+
+      if(url.scheme() == "https")
+	format.setForeground(QColor(0, 175, 0));
+      else
+	format.setForeground(Qt::gray);
+
       scheme_format_range.format = format;
       scheme_format_range.length = url.toString().indexOf(host);
       scheme_format_range.start = 0;
@@ -265,6 +309,7 @@ void dooble_address_widget::setText(const QString &text)
       set_text_format(formats);
     }
 
+  prepare_containers_for_url(url);
   setToolTip(QLineEdit::text());
 }
 
@@ -298,9 +343,8 @@ void dooble_address_widget::set_text_format
 
 void dooble_address_widget::slot_load_started(void)
 {
-  m_information->setEnabled(false);
-  m_bookmark->setEnabled(false);
   m_url = QUrl();
+  prepare_containers_for_url(m_url);
 }
 
 void dooble_address_widget::slot_populate(void)
@@ -341,21 +385,12 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 void dooble_address_widget::slot_text_edited(const QString &text)
 {
   Q_UNUSED(text);
+  prepare_containers_for_url(QUrl());
   set_text_format(QList<QTextLayout::FormatRange> ());
 }
 
 void dooble_address_widget::slot_url_changed(const QUrl &url)
 {
   m_url = url;
-
-  if(m_url.isEmpty() || !m_url.isValid())
-    {
-      m_bookmark->setEnabled(false);
-      m_information->setEnabled(false);
-    }
-  else
-    {
-      m_bookmark->setEnabled(true);
-      m_information->setEnabled(true);
-    }
+  prepare_containers_for_url(m_url);
 }

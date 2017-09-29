@@ -60,6 +60,7 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_pull_down;
   QUrl m_url;
   dooble_address_widget_completer *m_completer;
+  void prepare_containers_for_url(const QUrl &url);
   void prepare_icons(void);
   void set_text_format(const QList<QTextLayout::FormatRange> &formats);
 
