@@ -76,10 +76,15 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		"border: none; image: none; width: 0px;}");
 #endif
   setUsesScrollButtons(true);
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
+  prepare_icons();
 }
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
@@ -112,6 +117,24 @@ void dooble_tab_bar::hideEvent(QHideEvent *event)
 {
   QTabBar::hideEvent(event);
   emit set_visible_corner_button(false);
+}
+
+void dooble_tab_bar::prepare_icons(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+  int i = 0;
+
+  foreach(QToolButton *toolButton, findChildren <QToolButton *> ())
+    {
+      toolButton->setArrowType(Qt::NoArrow);
+
+      if(i++ == 0)
+	toolButton->setIcon
+	  (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
+      else
+	toolButton->setIcon
+	  (QIcon(QString(":/%1/20/next.png").arg(icon_set)));
+    }
 }
 
 void dooble_tab_bar::showEvent(QShowEvent *event)
@@ -185,6 +208,11 @@ void dooble_tab_bar::slot_reload(void)
 
   if(action)
     emit reload_tab(tabAt(action->property("point").toPoint()));
+}
+
+void dooble_tab_bar::slot_settings_applied(void)
+{
+  prepare_icons();
 }
 
 void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
@@ -306,4 +334,5 @@ void dooble_tab_bar::tabLayoutChange(void)
   */
 
   QTabBar::tabLayoutChange();
+  prepare_icons();
 }
