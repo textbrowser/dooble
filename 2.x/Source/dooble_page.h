@@ -141,6 +141,7 @@ class dooble_page: public QWidget
   void slot_show_popup_menu(void);
   void slot_show_pull_down_menu(void);
   void slot_show_status_bar(bool state);
+  void slot_show_web_settings_panel(void);
   void slot_url_changed(const QUrl &url);
   void slot_zoom_in(void);
   void slot_zoom_out(void);

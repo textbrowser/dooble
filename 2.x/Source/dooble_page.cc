@@ -930,6 +930,16 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
     (tr("Always"), this, SLOT(slot_always_allow_javascript_popup(void)));
   menu.addAction
     (tr("Now Only"), this, SLOT(slot_only_now_allow_javascript_popup(void)));
+  menu.addSeparator();
+
+  if(dooble_settings::setting("pin_settings_window").toBool())
+    menu.addAction(tr("Show pop-up preferences."),
+		   this,
+		   SLOT(slot_show_web_settings_panel(void)));
+  else
+    menu.addAction(tr("Show pop-up preferences..."),
+		   this,
+		   SLOT(slot_show_web_settings_panel(void)));
 
   if(!m_last_javascript_popups.isEmpty())
     {
@@ -1217,6 +1227,11 @@ void dooble_page::slot_show_status_bar(bool state)
 {
   m_ui.status_bar->setVisible(state);
   dooble_settings::set_setting("status_bar_visible", state);
+}
+
+void dooble_page::slot_show_web_settings_panel(void)
+{
+  emit show_settings_panel(dooble_settings::WEB_PANEL);
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)
