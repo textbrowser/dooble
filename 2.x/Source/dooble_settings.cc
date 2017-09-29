@@ -135,7 +135,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["credentials_enabled"] = false;
-  s_settings["icon_set"] = "SnipIcons";
+  s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
   s_settings["main_menu_bar_visible"] = true;
   s_settings["pin_accepted_or_blocked_window"] = true;
@@ -648,15 +648,7 @@ void dooble_settings::restore(void)
   else
     s_settings["block_cipher_type"] = "Threefish-256";
 
-  if(m_ui.theme->currentIndex() == 0)
-    s_settings["icon_set"] = "BlueBits";
-  else if(m_ui.theme->currentIndex() == 1)
-    s_settings["icon_set"] = "Material Design";
-  else if(m_ui.theme->currentIndex() == 2)
-    s_settings["icon_set"] = "SnipIcons";
-  else
-    s_settings["icon_set"] = "Material Design";
-
+  s_settings["icon_set"] = "Material Design";
   m_ui.utc_time_zone->setChecked
     (s_settings.value("utc_time_zone", false).toBool());
 
@@ -1069,14 +1061,7 @@ void dooble_settings::slot_apply(void)
   {
     QWriteLocker locker(&s_settings_mutex);
 
-    if(m_ui.theme->currentIndex() == 0)
-      s_settings["icon_set"] = "BlueBits";
-    else if(m_ui.theme->currentIndex() == 1)
-      s_settings["icon_set"] = "Material Design";
-    else if(m_ui.theme->currentIndex() == 2)
-      s_settings["icon_set"] = "SnipIcons";
-    else
-      s_settings["icon_set"] = "Material Design";
+    s_settings["icon_set"] = "Material Design";
   }
 
   set_setting("javascript", m_ui.javascript->isChecked());

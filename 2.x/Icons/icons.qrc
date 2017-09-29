@@ -1,40 +1,5 @@
 <RCC>
     <qresource prefix="/">
-	<file>BlueBits/16/bookmark.png</file>
-	<file>BlueBits/16/bookmarked.png</file>
-	<file>BlueBits/16/find.png</file>
-	<file>BlueBits/16/information.png</file>
-	<file>BlueBits/16/private.png</file>
-	<file>BlueBits/16/pulldown.png</file>
-	<file>BlueBits/16/settings.png</file>
-	<file>BlueBits/20/next.png</file>
-	<file>BlueBits/20/previous.png</file>
-	<file>BlueBits/20/stop.png</file>
-	<file>BlueBits/32/add.png</file>
-	<file>BlueBits/32/authenticate.png</file>
-	<file>BlueBits/32/backward.png</file>
-	<file>BlueBits/32/downloads.png</file>
-	<file>BlueBits/32/forward.png</file>
-	<file>BlueBits/32/menu.png</file>
-	<file>BlueBits/32/reload.png</file>
-	<file>BlueBits/32/stop.png</file>
-	<file>BlueBits/48/authenticate.png</file>
-	<file>BlueBits/48/blocked_domains.png</file>
-	<file>BlueBits/48/clear_items.png</file>
-	<file>BlueBits/48/cookies.png</file>
-	<file>BlueBits/48/exit_dooble.png</file>
-	<file>BlueBits/48/history.png</file>
-	<file>BlueBits/48/new_private_window.png</file>
-	<file>BlueBits/48/new_tab.png</file>
-	<file>BlueBits/48/new_window.png</file>
-	<file>BlueBits/48/print.png</file>
-	<file>BlueBits/48/settings.png</file>
-	<file>BlueBits/64/cache.png</file>
-	<file>BlueBits/64/display.png</file>
-	<file>BlueBits/64/history.png</file>
-	<file>BlueBits/64/privacy.png</file>
-	<file>BlueBits/64/webengine.png</file>
-	<file>BlueBits/64/windows.png</file>
 	<file>Logo/dooble.png</file>
 	<file>Mac/16/tab_close.png</file>
 	<file>Material Design/16/bookmark.png</file>
@@ -76,40 +41,5 @@
 	<file>Miscellaneous/certificate_warning.png</file>
 	<file>Miscellaneous/spinning_wheel.gif</file>
 	<file>Miscellaneous/splash.png</file>
-	<file>SnipIcons/16/bookmark.png</file>
-	<file>SnipIcons/16/bookmarked.png</file>
-	<file>SnipIcons/16/find.png</file>
-	<file>SnipIcons/16/information.png</file>
-	<file>SnipIcons/16/private.png</file>
-	<file>SnipIcons/16/pulldown.png</file>
-	<file>SnipIcons/16/settings.png</file>
-	<file>SnipIcons/20/next.png</file>
-	<file>SnipIcons/20/previous.png</file>
-	<file>SnipIcons/20/stop.png</file>
-	<file>SnipIcons/32/add.png</file>
-	<file>SnipIcons/32/authenticate.png</file>
-	<file>SnipIcons/32/backward.png</file>
-	<file>SnipIcons/32/downloads.png</file>
-	<file>SnipIcons/32/forward.png</file>
-	<file>SnipIcons/32/menu.png</file>
-	<file>SnipIcons/32/reload.png</file>
-	<file>SnipIcons/32/stop.png</file>
-	<file>SnipIcons/48/authenticate.png</file>
-	<file>SnipIcons/48/blocked_domains.png</file>
-	<file>SnipIcons/48/clear_items.png</file>
-	<file>SnipIcons/48/cookies.png</file>
-	<file>SnipIcons/48/exit_dooble.png</file>
-	<file>SnipIcons/48/history.png</file>
-	<file>SnipIcons/48/new_private_window.png</file>
-	<file>SnipIcons/48/new_tab.png</file>
-	<file>SnipIcons/48/new_window.png</file>
-	<file>SnipIcons/48/print.png</file>
-	<file>SnipIcons/48/settings.png</file>
-	<file>SnipIcons/64/cache.png</file>
-	<file>SnipIcons/64/display.png</file>
-	<file>SnipIcons/64/history.png</file>
-	<file>SnipIcons/64/privacy.png</file>
-	<file>SnipIcons/64/webengine.png</file>
-	<file>SnipIcons/64/windows.png</file>
     </qresource>
 </RCC>
