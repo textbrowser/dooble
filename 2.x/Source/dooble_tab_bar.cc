@@ -142,6 +142,8 @@ void dooble_tab_bar::prepare_icons(void)
       else
 	tool_button->setIcon
 	  (QIcon(QString(":/%1/20/next.png").arg(icon_set)));
+
+      tool_button->setIconSize(QSize(18, 18));
     }
 }
 
