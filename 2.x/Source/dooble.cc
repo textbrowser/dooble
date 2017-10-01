@@ -1143,6 +1143,10 @@ void dooble::slot_authenticate(void)
       Ui_dooble_authenticate ui;
 
       ui.setupUi(&dialog);
+
+      if(s_application->style_name() == "macintosh")
+	ui.password->setAttribute(Qt::WA_MacShowFocusRect, false);
+
       connect(ui.authenticate,
 	      SIGNAL(clicked(void)),
 	      &dialog,
