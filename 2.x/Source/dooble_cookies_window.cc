@@ -59,8 +59,9 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   if(m_ui.periodically_purge->isChecked())
     m_purge_domains_timer.start();
 
-  m_ui.tree->sortItems(0, Qt::AscendingOrder);
+  m_ui.toggle_shown->setProperty("state", true);
   m_ui.tool_bar->addWidget(m_ui.periodically_purge);
+  m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
 
   QLabel *label = new QLabel();
@@ -112,6 +113,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(toggled(bool)),
 	  this,
 	  SLOT(slot_periodically_purge_temporary_domains(bool)));
+  connect(m_ui.toggle_shown,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_toggle_shown(void)));
   connect(m_ui.tree,
 	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	  this,
@@ -551,6 +556,7 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("UPDATE dooble_cookies_domains SET favorite_digest = ? "
 		      "WHERE domain_digest = ?");
 	query.addBindValue
@@ -666,4 +672,25 @@ void dooble_cookies_window::slot_settings_applied(void)
     statusBar()->setVisible(m_is_private);
   else
     statusBar()->setVisible(false);
+}
+
+void dooble_cookies_window::slot_toggle_shown(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QTreeWidgetItem *> list;
+  bool state = m_ui.toggle_shown->property("state").toBool();
+
+  m_ui.toggle_shown->setProperty("state", !state);
+  m_ui.toggle_shown->setText(!state ? tr("&All ON") : tr("&All OFF"));
+
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
+    {
+      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+
+      if(!(!item || item->isHidden()))
+	item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
+    }
+
+  QApplication::restoreOverrideCursor();
 }

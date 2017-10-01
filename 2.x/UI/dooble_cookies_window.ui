@@ -556,6 +556,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="toggle_shown">
+        <property name="text">
+         <string>&amp;All ON</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="delete_selected">
         <property name="text">
          <string>&amp;Delete Selected</string>
@@ -566,13 +573,6 @@
        <widget class="QPushButton" name="delete_shown">
         <property name="text">
          <string>Delete &amp;Shown</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="toggle_shown">
-        <property name="text">
-         <string>&amp;Toggle Shown</string>
         </property>
        </widget>
       </item>
@@ -617,6 +617,7 @@
   <tabstop>secure</tabstop>
   <tabstop>session</tabstop>
   <tabstop>periodically_purge</tabstop>
+  <tabstop>toggle_shown</tabstop>
   <tabstop>delete_selected</tabstop>
   <tabstop>delete_shown</tabstop>
  </tabstops>
