@@ -1569,7 +1569,6 @@ void dooble::slot_show_about(void)
 	  this,
 	  SLOT(slot_open_url(const QUrl &)),
 	  Qt::UniqueConnection);
-  s_about->resize(s_about->sizeHint());
   s_about->show();
   dooble_ui_utilities::center_window_widget(this, s_about);
 }

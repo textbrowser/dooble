@@ -32,7 +32,7 @@
 dooble_about::dooble_about(void):QMainWindow()
 {
   m_ui.setupUi(this);
-  connect(m_ui.information,
+  connect(m_ui.release_notes,
 	  SIGNAL(linkActivated(const QString &)),
 	  this,
 	  SLOT(slot_link_activated(const QString &)));
@@ -49,18 +49,15 @@ dooble_about::dooble_about(void):QMainWindow()
     qversion = "unknown";
 
   QString text
-    (tr("Architecture %1.<br>Qt version %2 (runtime %3).<br><br>"
-	"Please consider reading the spectacular "
-	"<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
-	"release notes</a>.").
+    (tr("Architecture %1.<br>Qt version %2 (runtime %3).").
      arg(DOOBLE_ARCHITECTURE_STR).
      arg(QT_VERSION_STR).
      arg(qversion));
 
-  if(m_ui.information->text().isEmpty())
-    m_ui.information->setText(text);
-  else
-    m_ui.information->setText(m_ui.information->text().append(text));
+  m_ui.local_information->setText(text);
+  m_ui.release_notes->setText
+    (tr("<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
+	"Release Notes</a>"));
 }
 
 void dooble_about::keyPressEvent(QKeyEvent *event)
