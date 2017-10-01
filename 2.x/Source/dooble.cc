@@ -571,7 +571,7 @@ void dooble::new_page(bool is_private)
   dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
 
   prepare_page_connections(page);
-  m_ui.tab->addTab(page, tr("Dooble"));
+  m_ui.tab->addTab(page, tr("New Page"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
 
   if(dooble_settings::setting("denote_private_widgets").toBool())
@@ -606,7 +606,7 @@ void dooble::new_page(dooble_page *page)
     title = page->url().toString();
 
   if(title.isEmpty())
-    title = tr("Dooble");
+    title = tr("New Page");
 
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
@@ -635,7 +635,13 @@ void dooble::new_page(dooble_web_engine_view *view)
      m_ui.tab);
 
   prepare_page_connections(page);
-  m_ui.tab->addTab(page, tr("Dooble"));
+
+  QString title(page->title().trimmed());
+
+  if(title.isEmpty())
+    title = page->url().toString();
+
+  m_ui.tab->addTab(page, tr("New Page"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
