@@ -682,7 +682,8 @@ void dooble_cookies_window::slot_toggle_shown(void)
   bool state = m_ui.toggle_shown->property("state").toBool();
 
   m_ui.toggle_shown->setProperty("state", !state);
-  m_ui.toggle_shown->setText(!state ? tr("&All ON") : tr("&All OFF"));
+  m_ui.toggle_shown->setText
+    (!state ? tr("&All Shown Checked") : tr("&All Shown Unchecked"));
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
