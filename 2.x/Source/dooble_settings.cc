@@ -486,7 +486,38 @@ void dooble_settings::purge_database_data(void)
   dooble_downloads::purge();
   dooble_favicons::purge();
   dooble_history::purge();
+  purge_javascript_block_popup_exceptions();
   slot_remove_all_javascript_block_popup_exceptions();
+}
+
+void dooble_settings::purge_javascript_block_popup_exceptions(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_javascript_block_popup_exceptions");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::remove_setting(const QString &key)
@@ -1361,32 +1392,7 @@ void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-
-	query.exec("PRAGMA synchronous = OFF");
-	query.exec("DELETE FROM dooble_javascript_block_popup_exceptions");
-	query.exec("VACUUM");
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
-  QApplication::restoreOverrideCursor();
+  purge_javascript_block_popup_exceptions();
 }
 
 void dooble_settings::

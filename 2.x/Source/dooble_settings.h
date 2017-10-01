@@ -89,6 +89,7 @@ class dooble_settings: public QMainWindow
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void purge_database_data(void);
+  void purge_javascript_block_popup_exceptions(void);
   void save_javascript_block_popup_exception(const QUrl &url, bool state);
   void save_settings(void);
 
