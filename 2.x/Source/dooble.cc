@@ -28,7 +28,6 @@
 #include <QDialog>
 #include <QKeyEvent>
 #include <QFileDialog>
-#include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
 #include <QNetworkCookie>
@@ -59,6 +58,7 @@
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
+#include "ui_dooble_authenticate.h"
 
 QColor dooble::s_private_tab_text_color = QColor(148, 0, 211);
 QPointer<dooble_history> dooble::s_history;
@@ -1139,19 +1139,20 @@ void dooble::slot_authenticate(void)
     slot_show_settings_panel(dooble_settings::PRIVACY_PANEL);
   else
     {
-      QInputDialog dialog(this);
+      QDialog dialog(this);
+      Ui_dooble_authenticate ui;
 
-      dialog.setLabelText(tr("Dooble Password"));
-      dialog.setTextEchoMode(QLineEdit::Password);
-      dialog.setWindowIcon(windowIcon());
-      dialog.setWindowTitle(tr("Dooble: Password"));
+      ui.setupUi(&dialog);
+      connect(ui.authenticate,
+	      SIGNAL(clicked(void)),
+	      &dialog,
+	      SLOT(accept(void)));
+      connect(ui.password,
+	      SIGNAL(returnPressed(void)),
+	      &dialog,
+	      SLOT(accept(void)));
 
       if(dialog.exec() != QDialog::Accepted)
-	return;
-
-      QString text = dialog.textValue();
-
-      if(text.isEmpty())
 	return;
 
       QByteArray salt
@@ -1161,6 +1162,7 @@ void dooble::slot_authenticate(void)
 	(QByteArray::fromHex(dooble_settings::
 			     setting("authentication_salted_password").
 			     toByteArray()));
+      QString text(ui.password->text());
       int block_cipher_type_index = dooble_settings::setting
 	("block_cipher_type_index").toInt();
       int iteration_count = dooble_settings::setting
