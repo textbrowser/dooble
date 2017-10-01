@@ -663,7 +663,7 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 void dooble_cookies_window::slot_settings_applied(void)
 {
   if(dooble_settings::setting("denote_private_widgets").toBool())
-    statusBar()->setVisible(true);
+    statusBar()->setVisible(m_is_private);
   else
     statusBar()->setVisible(false);
 }
