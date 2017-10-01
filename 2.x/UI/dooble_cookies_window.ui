@@ -569,6 +569,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="toggle_shown">
+        <property name="text">
+         <string>&amp;Toggle Shown</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>

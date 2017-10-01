@@ -593,9 +593,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>415</width>
-               <height>633</height>
+               <y>-38</y>
+               <width>637</width>
+               <height>569</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1078,7 +1078,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>264</width>
+               <width>637</width>
                <height>729</height>
               </rect>
              </property>
@@ -1120,7 +1120,10 @@
                       <item>
                        <widget class="QLabel" name="label_22">
                         <property name="text">
-                         <string>New Exception</string>
+                         <string>New &amp;Exception</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>new_javascript_block_popup_exception</cstring>
                         </property>
                        </widget>
                       </item>

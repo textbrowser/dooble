@@ -41,7 +41,7 @@
       <item>
        <widget class="QPushButton" name="select">
         <property name="text">
-         <string>Select...</string>
+         <string>&amp;Select...</string>
         </property>
        </widget>
       </item>
@@ -85,7 +85,7 @@
       <item>
        <widget class="QPushButton" name="clear_finished_downloads">
         <property name="text">
-         <string>Clear Finished Downloads</string>
+         <string>&amp;Clear Finished Downloads</string>
         </property>
        </widget>
       </item>
