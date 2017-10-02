@@ -963,6 +963,11 @@ void dooble::prepare_standard_menus(void)
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
 
+  menu->addAction(tr("&Cookies..."),
+		  this,
+		  SLOT(slot_show_cookies(void)),
+		  QKeySequence(tr("Ctrl+K")));
+
   if(dooble_settings::setting("pin_downloads_window").toBool())
     menu->addAction(tr("&Downloads"),
 		    this,

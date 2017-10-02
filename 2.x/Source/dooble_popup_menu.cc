@@ -141,7 +141,7 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.print->setIcon(QIcon(QString(":/%1/48/print.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
 
-  int maximum = 90;
+  int maximum = 50;
 
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
     {
