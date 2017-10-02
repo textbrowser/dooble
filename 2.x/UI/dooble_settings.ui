@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>549</height>
+           <height>534</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -557,7 +557,7 @@
           <item>
            <widget class="QCheckBox" name="visited_links">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Links which are included in the Visited Links file will be colored when they are rendered by a page. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Visited Links</string>
@@ -593,9 +593,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-38</y>
-               <width>637</width>
-               <height>569</height>
+               <y>0</y>
+               <width>503</width>
+               <height>658</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1078,8 +1078,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
-               <height>729</height>
+               <width>353</width>
+               <height>737</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
