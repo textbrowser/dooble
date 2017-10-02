@@ -1330,12 +1330,14 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
       if(dooble_settings::setting("pin_downloads_window").toBool())
 	{
 	  if(m_ui.tab->indexOf(s_downloads) == -1)
-	    m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	    {
+	      m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	      m_ui.tab->setTabToolTip
+		(m_ui.tab->count() - 1, s_downloads->windowTitle());
+	      m_ui.tab->setTabIcon
+		(m_ui.tab->count() - 1, s_downloads->windowIcon());
+	    }
 
-	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
-	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
 	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
 	  prepare_tab_shortcuts();
@@ -1595,13 +1597,17 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
     {
       if(m_ui.tab->indexOf(s_accepted_or_blocked_domains) == -1)
-	m_ui.tab->addTab(s_accepted_or_blocked_domains,
-			 s_accepted_or_blocked_domains->windowTitle());
+	{
+	  m_ui.tab->addTab(s_accepted_or_blocked_domains,
+			   s_accepted_or_blocked_domains->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1,
+	     s_accepted_or_blocked_domains->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1,
+	     s_accepted_or_blocked_domains->windowTitle());
+	}
 
-      m_ui.tab->setTabIcon
-	(m_ui.tab->count() - 1, s_accepted_or_blocked_domains->windowIcon());
-      m_ui.tab->setTabToolTip
-	(m_ui.tab->count() - 1, s_accepted_or_blocked_domains->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget
 	(s_accepted_or_blocked_domains); // Order is important.
@@ -1698,12 +1704,14 @@ void dooble::slot_show_downloads(void)
   if(dooble_settings::setting("pin_downloads_window").toBool())
     {
       if(m_ui.tab->indexOf(s_downloads) == -1)
-	m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	{
+	  m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+	}
 
-      m_ui.tab->setTabIcon
-	(m_ui.tab->count() - 1, s_downloads->windowIcon());
-      m_ui.tab->setTabToolTip
-	(m_ui.tab->count() - 1, s_downloads->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
       prepare_tab_shortcuts();
@@ -1740,12 +1748,14 @@ void dooble::slot_show_history(void)
   if(dooble_settings::setting("pin_history_window").toBool())
     {
       if(m_ui.tab->indexOf(s_history_window) == -1)
-	m_ui.tab->addTab(s_history_window, s_history_window->windowTitle());
+	{
+	  m_ui.tab->addTab(s_history_window, s_history_window->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, s_history_window->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, s_history_window->windowTitle());
+	}
 
-      m_ui.tab->setTabIcon
-	(m_ui.tab->count() - 1, s_history_window->windowIcon());
-      m_ui.tab->setTabToolTip
-	(m_ui.tab->count() - 1, s_history_window->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_history_window); // Order is important.
       prepare_tab_shortcuts();
@@ -1775,12 +1785,13 @@ void dooble::slot_show_settings(void)
       if(m_ui.tab->indexOf(s_settings) == -1)
 	{
 	  m_ui.tab->addTab(s_settings, s_settings->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, s_settings->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, s_settings->windowTitle());
 	  s_settings->restore();
 	}
 
-      m_ui.tab->setTabIcon
-	(m_ui.tab->count() - 1, s_settings->windowIcon());
-      m_ui.tab->setTabToolTip(m_ui.tab->count() - 1, s_settings->windowTitle());
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       m_ui.tab->setCurrentWidget(s_settings); // Order is important.
       prepare_tab_shortcuts();
