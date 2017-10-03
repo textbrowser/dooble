@@ -58,6 +58,7 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_certificate_exception_accepted(const QUrl &url);
   void slot_create_dialog_requests(void);
   void slot_open_link_in_new_private_window(void);
+  void slot_open_link_in_new_tab(void);
   void slot_open_link_in_new_window(void);
   void slot_settings_applied(void);
 
@@ -68,6 +69,7 @@ class dooble_web_engine_view: public QWebEngineView
   void create_window(dooble_web_engine_view *view);
   void downloadRequested(QWebEngineDownloadItem *download);
   void open_link_in_new_private_window(const QUrl &url);
+  void open_link_in_new_tab(const QUrl &url);
   void open_link_in_new_window(const QUrl &url);
 };
 

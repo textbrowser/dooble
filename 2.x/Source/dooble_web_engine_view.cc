@@ -155,6 +155,23 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	action->setEnabled(false);
 
       action = menu->addAction
+	(tr("Open Link in a &Tab"),
+	 this,
+	 SLOT(slot_open_link_in_new_tab(void)));
+
+      if(context_menu_data.isValid())
+	{
+	  if(context_menu_data.linkUrl().isValid())
+	    action->setProperty("url", context_menu_data.linkUrl());
+	  else if(context_menu_data.mediaUrl().isValid())
+	    action->setProperty("url", context_menu_data.mediaUrl());
+	  else
+	    action->setEnabled(false);
+	}
+      else
+	action->setEnabled(false);
+
+      action = menu->addAction
 	(tr("Open Link in a New &Window"),
 	 this,
 	 SLOT(slot_open_link_in_new_window(void)));
@@ -264,6 +281,19 @@ void dooble_web_engine_view::slot_open_link_in_new_window(void)
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_new_window(url);
+}
+
+void dooble_web_engine_view::slot_open_link_in_new_tab(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QUrl url(action->property("url").toUrl());
+
+  if(!url.isEmpty() && url.isValid())
+    emit open_link_in_new_tab(url);
 }
 
 void dooble_web_engine_view::slot_settings_applied(void)

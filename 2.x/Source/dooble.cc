@@ -750,6 +750,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(open_link_in_new_tab(const QUrl &)),
+	  this,
+	  SLOT(slot_open_link_in_new_tab(const QUrl &)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(open_link_in_new_window(const QUrl &)),
 	  this,
 	  SLOT(slot_open_link_in_new_window(const QUrl &)),
@@ -1393,6 +1399,11 @@ void dooble::slot_new_window(void)
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
   (new dooble(url, true))->show();
+}
+
+void dooble::slot_open_link_in_new_tab(const QUrl &url)
+{
+  new_page(url, m_is_private);
 }
 
 void dooble::slot_open_link_in_new_window(const QUrl &url)
