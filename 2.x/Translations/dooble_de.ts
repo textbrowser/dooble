@@ -1636,5 +1636,13 @@ Window</source>
         <source>Block Link&apos;s Domain(s)</source>
         <translation>Blockiere Link&apos;s Domäne(n).</translation>
     </message>
+    <message>
+        <source>Open Link in a New &amp;Private Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Link in a New &amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
