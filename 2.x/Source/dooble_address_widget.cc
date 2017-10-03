@@ -42,17 +42,17 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
   int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
-  m_bookmark = new QToolButton(this);
-  m_bookmark->setCursor(Qt::ArrowCursor);
-  m_bookmark->setEnabled(false);
-  m_bookmark->setIconSize(QSize(16, 16));
-  m_bookmark->setStyleSheet
+  m_favorite = new QToolButton(this);
+  m_favorite->setCursor(Qt::ArrowCursor);
+  m_favorite->setEnabled(false);
+  m_favorite->setIconSize(QSize(16, 16));
+  m_favorite->setStyleSheet
     ("QToolButton {"
      "border: none;"
      "padding-top: 0px;"
      "padding-bottom: 0px;"
      "}");
-  m_bookmark->setToolTip(tr("Bookmark"));
+  m_favorite->setToolTip(tr("Favorite"));
   m_completer = new dooble_address_widget_completer(this);
   m_information = new QToolButton(this);
   m_information->setCursor(Qt::ArrowCursor);
@@ -104,7 +104,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   setMinimumHeight(sizeHint().height());
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
-     arg(m_bookmark->sizeHint().width() +
+     arg(m_favorite->sizeHint().width() +
 	 m_information->sizeHint().width() +
 	 frame_width + 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 10));
@@ -204,14 +204,14 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 
   if(url.isEmpty() || !url.isValid())
     {
-      m_bookmark->setEnabled(false);
+      m_favorite->setEnabled(false);
       m_information->setEnabled(false);
       m_information->setIcon
 	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
     }
   else
     {
-      m_bookmark->setEnabled(true);
+      m_favorite->setEnabled(true);
       m_information->setEnabled(true);
       m_information->setIcon
 	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
@@ -222,7 +222,7 @@ void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_bookmark->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+  m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
   m_information->setIcon
     (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
   m_pull_down->setIcon(QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
@@ -230,14 +230,14 @@ void dooble_address_widget::prepare_icons(void)
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
 {
-  QSize size1 = m_bookmark->sizeHint();
+  QSize size1 = m_favorite->sizeHint();
   QSize size2 = m_information->sizeHint();
   QSize size3 = m_pull_down->sizeHint();
   int d = 0;
   int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   d = (rect().height() - size1.height()) / 2;
-  m_bookmark->move(frame_width - rect().left() + size2.width() + 5,
+  m_favorite->move(frame_width - rect().left() + size2.width() + 5,
 		   rect().top() + d);
   d = (rect().height() - size2.height()) / 2;
   m_information->move(frame_width - rect().left() + 5, rect().top() + d);

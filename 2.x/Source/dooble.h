@@ -58,7 +58,7 @@ class dooble: public QMainWindow
 
  public:
   dooble(QWidget *widget);
-  dooble(bool is_private);
+  dooble(const QUrl &url, bool is_private);
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   ~dooble();
@@ -78,7 +78,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_web_engine_url_request_interceptor>
     s_url_request_interceptor;
-  void new_page(bool is_private);
+  void new_page(const QUrl &url, bool is_private);
   void print_current_page(void);
 
  public slots:
@@ -135,6 +135,8 @@ class dooble: public QMainWindow
   void slot_new_private_window(void);
   void slot_new_tab(void);
   void slot_new_window(void);
+  void slot_open_link_in_new_private_window(const QUrl &url);
+  void slot_open_link_in_new_window(const QUrl &url);
   void slot_open_tab_as_new_window(int index);
   void slot_open_url(const QUrl &url);
   void slot_pbkdf2_future_finished(void);

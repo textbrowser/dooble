@@ -230,6 +230,14 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_load_started(void)));
   connect(m_view,
+	  SIGNAL(open_link_in_new_private_window(const QUrl &)),
+	  this,
+	  SIGNAL(open_link_in_new_private_window(const QUrl &)));
+  connect(m_view,
+	  SIGNAL(open_link_in_new_window(const QUrl &)),
+	  this,
+	  SIGNAL(open_link_in_new_window(const QUrl &)));
+  connect(m_view,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SIGNAL(titleChanged(const QString &)));

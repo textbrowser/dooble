@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>QObject</name>
     <message>
@@ -226,6 +226,10 @@
         <source>%1 - Dooble</source>
         <translation>%1 - Dooble</translation>
     </message>
+    <message>
+        <source>&amp;Cookies...</source>
+        <translation type="unfinished">&amp;Cookies,,,</translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -354,7 +358,7 @@
     <name>dooble_address_widget</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished">Lesezeichen</translation>
+        <translation type="obsolete">Lesezeichen</translation>
     </message>
     <message>
         <source>Site Information</source>
@@ -371,6 +375,10 @@
     <message>
         <source>Show Site Coo&amp;kies...</source>
         <translation type="unfinished">Zeige Seiten-Coo&amp;kies...</translation>
+    </message>
+    <message>
+        <source>Favorite</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -442,7 +450,7 @@
     <name>dooble_certificate_exceptions_widget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <source>Certificate Error</source>
@@ -473,7 +481,7 @@
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished">Lesezeichen</translation>
+        <translation type="obsolete">Lesezeichen</translation>
     </message>
     <message>
         <source>Certificate Error Exceptions</source>
@@ -498,6 +506,10 @@
     <message>
         <source>Visited Links</source>
         <translation type="unfinished">Besuchte Links</translation>
+    </message>
+    <message>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -690,7 +702,7 @@
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -705,7 +717,7 @@
     </message>
     <message>
         <source>Dooble</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dooble</translation>
     </message>
     <message>
         <source>&amp;Copy Location</source>
@@ -984,7 +996,7 @@
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <source>Backward</source>
@@ -1059,7 +1071,7 @@
     </message>
     <message>
         <source>Dooble</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dooble</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -1091,7 +1103,7 @@
     </message>
     <message>
         <source>Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cookies</translation>
     </message>
     <message>
         <source>New
@@ -1346,7 +1358,7 @@ Window</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erlaube Schreib-Rechte für die Datei der lokal besuchten Links. Bitte starte Dooble neu, wenn besuchte Links verändert wurden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erlaube Schreib-Rechte für die Datei der lokal besuchten Links. Bitte starte Dooble neu, wenn besuchte Links verändert wurden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Visited Links</source>
@@ -1559,6 +1571,10 @@ Window</source>
     <message>
         <source>Save Geometry</source>
         <translation type="unfinished">Speichere Geometrie</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Links which are included in the Visited Links file will be colored when they are rendered by a page. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

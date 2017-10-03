@@ -55,7 +55,7 @@ class dooble_address_widget: public QLineEdit
  private:
   QFrame *m_line;
   QMenu *m_menu;
-  QToolButton *m_bookmark;
+  QToolButton *m_favorite;
   QToolButton *m_information;
   QToolButton *m_pull_down;
   QUrl m_url;

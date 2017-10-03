@@ -135,7 +135,44 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
 
   if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
-    menu->addSeparator();
+    {
+      menu->addSeparator();
+      action = menu->addAction
+	(tr("Open Link in a New &Private Window"),
+	 this,
+	 SLOT(slot_open_link_in_new_private_window(void)));
+
+      if(context_menu_data.isValid())
+	{
+	  if(context_menu_data.linkUrl().isValid())
+	    action->setProperty("url", context_menu_data.linkUrl());
+	  else if(context_menu_data.mediaUrl().isValid())
+	    action->setProperty("url", context_menu_data.mediaUrl());
+	  else
+	    action->setEnabled(false);
+	}
+      else
+	action->setEnabled(false);
+
+      action = menu->addAction
+	(tr("Open Link in a New &Window"),
+	 this,
+	 SLOT(slot_open_link_in_new_window(void)));
+
+      if(context_menu_data.isValid())
+	{
+	  if(context_menu_data.linkUrl().isValid())
+	    action->setProperty("url", context_menu_data.linkUrl());
+	  else if(context_menu_data.mediaUrl().isValid())
+	    action->setProperty("url", context_menu_data.mediaUrl());
+	  else
+	    action->setEnabled(false);
+	}
+      else
+	action->setEnabled(false);
+
+      menu->addSeparator();
+    }
 
   if(dooble_settings::
      setting("accepted_or_blocked_domains_mode").toString() == "accept")
@@ -150,9 +187,9 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   if(context_menu_data.isValid())
     {
       if(context_menu_data.linkUrl().isValid())
-	action->setProperty("link_url", context_menu_data.linkUrl());
+	action->setProperty("url", context_menu_data.linkUrl());
       else if(context_menu_data.mediaUrl().isValid())
-	action->setProperty("link_url", context_menu_data.mediaUrl());
+	action->setProperty("url", context_menu_data.mediaUrl());
       else
 	action->setEnabled(false);
     }
@@ -175,7 +212,7 @@ void dooble_web_engine_view::slot_accept_or_block_domain(void)
   if(!action)
     return;
 
-  QString host(action->property("link_url").toUrl().host());
+  QString host(action->property("url").toUrl().host());
   int index = -1;
 
   while(!host.isEmpty())
@@ -201,6 +238,32 @@ void dooble_web_engine_view::slot_create_dialog_requests(void)
 {
   while(!m_dialog_requests.isEmpty())
     emit create_dialog_request(m_dialog_requests.takeFirst());
+}
+
+void dooble_web_engine_view::slot_open_link_in_new_private_window(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QUrl url(action->property("url").toUrl());
+
+  if(!url.isEmpty() && url.isValid())
+    emit open_link_in_new_private_window(url);
+}
+
+void dooble_web_engine_view::slot_open_link_in_new_window(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QUrl url(action->property("url").toUrl());
+
+  if(!url.isEmpty() && url.isValid())
+    emit open_link_in_new_window(url);
 }
 
 void dooble_web_engine_view::slot_settings_applied(void)

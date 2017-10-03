@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
   splash.finish(0);
   dooble::s_settings = new dooble_settings();
 
-  dooble *d = new dooble(false);
+  dooble *d = new dooble(QUrl(), false);
 
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),

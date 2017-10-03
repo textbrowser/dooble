@@ -162,6 +162,8 @@ class dooble_page: public QWidget
   void new_private_window(void);
   void new_tab(void);
   void new_window(void);
+  void open_link_in_new_private_window(const QUrl &url);
+  void open_link_in_new_window(const QUrl &url);
   void print(void);
   void print_preview(void);
   void quit_dooble(void);

@@ -189,18 +189,18 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       accept();
     }
   else if(m_ui.new_private_window == sender())
-    (new dooble(true))->show();
+    (new dooble(QUrl(), true))->show();
   else if(m_ui.new_tab == sender())
     {
       dooble *d = find_parent_dooble();
 
       if(d)
-	d->new_page(d->is_private());
+	d->new_page(QUrl(), d->is_private());
 
       accept();
     }
   else if(m_ui.new_window == sender())
-    (new dooble(false))->show();
+    (new dooble(QUrl(), false))->show();
   else if(m_ui.print == sender())
     {
       dooble *d = find_parent_dooble();

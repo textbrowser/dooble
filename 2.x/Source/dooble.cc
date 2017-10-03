@@ -98,7 +98,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
       prepare_tab_shortcuts();
     }
   else
-    new_page(false);
+    new_page(QUrl(), false);
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
@@ -116,7 +116,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
   prepare_standard_menus();
 }
 
-dooble::dooble(bool is_private):QMainWindow()
+dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 {
   initialize_static_members();
   m_is_javascript_dialog = false;
@@ -187,7 +187,7 @@ dooble::dooble(bool is_private):QMainWindow()
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
 
-  new_page(is_private);
+  new_page(url, is_private);
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
@@ -566,7 +566,7 @@ void dooble::keyPressEvent(QKeyEvent *event)
   QMainWindow::keyPressEvent(event);
 }
 
-void dooble::new_page(bool is_private)
+void dooble::new_page(const QUrl &url, bool is_private)
 {
   dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
 
@@ -585,6 +585,7 @@ void dooble::new_page(bool is_private)
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
 
+  page->load(url);
   prepare_tab_shortcuts();
 }
 
@@ -740,6 +741,18 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(new_window(void)),
 	  this,
 	  SLOT(slot_new_window(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(open_link_in_new_private_window(const QUrl &)),
+	  this,
+	  SLOT(slot_open_link_in_new_private_window(const QUrl &)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(open_link_in_new_window(const QUrl &)),
+	  this,
+	  SLOT(slot_open_link_in_new_window(const QUrl &)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -1364,17 +1377,27 @@ void dooble::slot_icon_changed(const QIcon &icon)
 
 void dooble::slot_new_private_window(void)
 {
-  (new dooble(true))->show();
+  (new dooble(QUrl(), true))->show();
 }
 
 void dooble::slot_new_tab(void)
 {
-  new_page(m_is_private);
+  new_page(QUrl(), m_is_private);
 }
 
 void dooble::slot_new_window(void)
 {
-  (new dooble(false))->show();
+  (new dooble(QUrl(), false))->show();
+}
+
+void dooble::slot_open_link_in_new_private_window(const QUrl &url)
+{
+  (new dooble(url, true))->show();
+}
+
+void dooble::slot_open_link_in_new_window(const QUrl &url)
+{
+  (new dooble(url, false))->show();
 }
 
 void dooble::slot_open_tab_as_new_window(int index)
@@ -1406,12 +1429,7 @@ void dooble::slot_open_tab_as_new_window(int index)
 
 void dooble::slot_open_url(const QUrl &url)
 {
-  new_page(false);
-
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
-
-  if(page)
-    page->load(url);
+  new_page(url, false);
 }
 
 void dooble::slot_pbkdf2_future_finished(void)
