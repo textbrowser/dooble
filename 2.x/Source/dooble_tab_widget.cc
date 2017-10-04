@@ -329,5 +329,9 @@ void dooble_tab_widget::tabRemoved(int index)
   setTabsClosable(count() > 1);
 
   if(count() == 0)
+    /*
+    ** A support window has discovered a new parent.
+    */
+
     emit empty_tab();
 }

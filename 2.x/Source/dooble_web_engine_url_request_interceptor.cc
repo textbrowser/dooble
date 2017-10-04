@@ -38,6 +38,12 @@ dooble_web_engine_url_request_interceptor(QObject *parent):
 void dooble_web_engine_url_request_interceptor::
 interceptRequest(QWebEngineUrlRequestInfo &info)
 {
+  if(dooble::s_accepted_or_blocked_domains->exception(info.firstPartyUrl()))
+    {
+      info.block(false);
+      return;
+    }
+
   QString host("");
   QString mode
     (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());

@@ -68,6 +68,9 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
 						     bool isMainFrame)
 {
+  if(dooble::s_accepted_or_blocked_domains->exception(url))
+    return true;
+
   Q_UNUSED(type);
   Q_UNUSED(isMainFrame);
 

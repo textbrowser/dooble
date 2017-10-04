@@ -30,7 +30,6 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include <QUrl>
 
 #include "ui_dooble_accepted_or_blocked_domains.h"
 
@@ -41,6 +40,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
  public:
   dooble_accepted_or_blocked_domains(void);
   bool contains(const QString &domain) const;
+  bool exception(const QUrl &url) const;
   static void purge(void);
   void accept_or_block_domain(const QString &domain);
 
@@ -55,23 +55,24 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
 
  private:
   QHash<QString, char> m_domains;
-  QHash<QUrl, char> m_exceptions;
+  QHash<QString, char> m_exceptions;
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
-  void new_exception(const QUrl &url);
+  void new_exception(const QString &url);
   void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
-  void save_exception(const QUrl &url, bool state);
+  void save_exception(const QString &url, bool state);
   void save_settings(void);
 
  private slots:
   void slot_add(void);
   void slot_containers_cleared(void);
   void slot_delete_rows(void);
+  void slot_exceptions_item_changed(QTableWidgetItem *item);
   void slot_find(void);
   void slot_import(void);
   void slot_item_changed(QTableWidgetItem *item);
-  void slot_new_exception(const QUrl &url);
+  void slot_new_exception(const QString &url);
   void slot_new_exception(void);
   void slot_populate(void);
   void slot_radio_button_toggled(bool state);
