@@ -126,6 +126,8 @@ else {
 purge.commands =
 }
 
+doxygen.commands =
+
 exists(/usr/bin/doxygen) {
 doxygen.commands = doxygen dooble.doxygen
 }
