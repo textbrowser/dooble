@@ -126,6 +126,10 @@ else {
 purge.commands =
 }
 
+exists(/usr/bin/doxygen) {
+doxygen.commands = doxygen dooble.doxygen
+}
+
 CONFIG		+= qt release warn_on
 DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
@@ -155,7 +159,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 
 QMAKE_DISTCLEAN += -r qtwebengine_dictionaries temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_COMPILERS += dictoolbuild
-QMAKE_EXTRA_TARGETS = purge
+QMAKE_EXTRA_TARGETS = doxygen purge
 
 macx {
 ICON            = Icons/Logo/dooble.icns
