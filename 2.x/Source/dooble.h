@@ -64,6 +64,7 @@ class dooble: public QMainWindow
   ~dooble();
   bool is_private(void) const;
   dooble_page *current_page(void) const;
+  dooble_page *new_page(const QUrl &url, bool is_private);
   static QColor s_private_tab_text_color;
   static QPointer<dooble_history> s_history;
   static QPointer<dooble_about> s_about;
@@ -78,7 +79,6 @@ class dooble: public QMainWindow
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_web_engine_url_request_interceptor>
     s_url_request_interceptor;
-  void new_page(const QUrl &url, bool is_private);
   void print_current_page(void);
 
  public slots:

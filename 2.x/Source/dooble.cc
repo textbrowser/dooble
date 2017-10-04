@@ -307,6 +307,32 @@ dooble_page *dooble::current_page(void) const
   return qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 }
 
+dooble_page *dooble::new_page(const QUrl &url, bool is_private)
+{
+  dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
+
+  prepare_page_connections(page);
+  m_ui.tab->addTab(page, tr("New Page"));
+  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+
+  if(dooble_settings::setting("denote_private_widgets").toBool())
+    if(is_private)
+      m_ui.tab->setTabTextColor
+	(m_ui.tab->count() - 1, s_private_tab_text_color);
+
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+
+  if(dooble_settings::setting("access_new_tabs").toBool())
+    m_ui.tab->setCurrentWidget(page); // Order is important.
+
+  if(m_ui.tab->currentWidget() == page)
+    page->address_widget()->setFocus();
+
+  page->load(url);
+  prepare_tab_shortcuts();
+  return page;
+}
+
 void dooble::closeEvent(QCloseEvent *event)
 {
   if(event)
@@ -564,29 +590,6 @@ void dooble::keyPressEvent(QKeyEvent *event)
 	}
 
   QMainWindow::keyPressEvent(event);
-}
-
-void dooble::new_page(const QUrl &url, bool is_private)
-{
-  dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
-
-  prepare_page_connections(page);
-  m_ui.tab->addTab(page, tr("New Page"));
-  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
-
-  if(dooble_settings::setting("denote_private_widgets").toBool())
-    if(is_private)
-      m_ui.tab->setTabTextColor
-	(m_ui.tab->count() - 1, s_private_tab_text_color);
-
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-  m_ui.tab->setCurrentWidget(page); // Order is important.
-
-  if(m_ui.tab->currentWidget() == page)
-    page->address_widget()->setFocus();
-
-  page->load(url);
-  prepare_tab_shortcuts();
 }
 
 void dooble::new_page(dooble_page *page)
