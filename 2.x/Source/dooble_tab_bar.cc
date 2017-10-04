@@ -37,7 +37,15 @@
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
   foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
-    if(dooble::s_application->style_name() == "macintosh")
+    if(dooble::s_application->style_name() == "fusion")
+      tool_button->setStyleSheet
+	("QToolButton {background-color: #78909c;"
+	 "border: none;"
+	 "margin-bottom: 0px;"
+	 "margin-top: 1px;"
+	 "}"
+	 "QToolButton::menu-button {border: none;}");
+    else if(dooble::s_application->style_name() == "macintosh")
       tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
 		 "border: none;"
@@ -58,6 +66,10 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
   setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
+
+  if(dooble::s_application->style_name() == "fusion")
+    setDrawBase(false);
+
   setElideMode(Qt::ElideRight);
   setExpanding(true);
   setMovable(true);
@@ -72,8 +84,24 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		"QTabBar::tear {"
 		"border: none; image: none; width: 0px;}");
 #else
-  setStyleSheet("QTabBar::tear {"
-		"border: none; image: none; width: 0px;}");
+  if(dooble::s_application->style_name() == "fusion")
+    setStyleSheet
+      (QString("QTabBar::tab {"
+	       "background-color: #78909c;"
+	       "border-left: 1px solid %1;"
+	       "border-right: 1px solid %1;"
+	       "color: %2;"
+	       "margin-bottom: 0px;"
+	       "margin-top: 1px;}"
+	       "QTabBar::tab::selected {"
+	       "background-color: #7986cb;}"
+	       "QTabBar::tear {"
+	       "border: none; image: none; width: 0px;}").
+       arg(QWidget::palette().color(QWidget::backgroundRole()).name()).
+       arg(is_private() ? dooble::s_private_tab_text_color.name() : "white"));
+  else
+    setStyleSheet("QTabBar::tear {"
+		  "border: none; image: none; width: 0px;}");
 #endif
   setUsesScrollButtons(true);
   connect(dooble::s_settings,
@@ -119,6 +147,22 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
   size.setHeight(preferred_tab_height);
   size.setWidth(preferred_tab_width);
   return size;
+}
+
+bool dooble_tab_bar::is_private(void) const
+{
+  QWidget *parent = parentWidget();
+
+  do
+    {
+      if(qobject_cast<dooble *> (parent))
+	return qobject_cast<dooble *> (parent)->is_private();
+      else if(parent)
+	parent = parent->parentWidget();
+    }
+  while(parent);
+
+  return false;
 }
 
 void dooble_tab_bar::hideEvent(QHideEvent *event)

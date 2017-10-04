@@ -44,6 +44,7 @@ class dooble_tab_bar: public QTabBar
   void tabLayoutChange(void);
 
  private:
+  bool is_private(void) const;
   void prepare_icons(void);
 
  private slots:

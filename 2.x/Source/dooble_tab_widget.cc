@@ -74,6 +74,18 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->setVisible
     (!dooble_settings::setting("auto_hide_tab_bar").toBool());
+#ifndef Q_OS
+  if(dooble::s_application->style_name() == "fusion")
+    {
+      m_corner_widget->setStyleSheet
+	(QString("QFrame {background-color: #78909c;"
+		 "border-right: 0px solid %1;"
+		 "margin-bottom: 0px;}").
+	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+      setStyleSheet
+	("QTabBar {background-color: #78909c; margin-top: 1px;}");
+    }
+#endif
   m_tab_bar = new dooble_tab_bar(this);
   m_tab_bar->setAutoHide
     (dooble_settings::setting("auto_hide_tab_bar").toBool());
@@ -112,7 +124,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   prepare_icons();
 
   if(!dooble_settings::setting("auto_hide_tab_bar").toBool())
-    setCornerWidget(m_corner_widget);
+    setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
 
   setTabBar(m_tab_bar);
 }
@@ -277,9 +289,9 @@ void dooble_tab_widget::slot_load_started(void)
 void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
   if(state)
-    setCornerWidget(m_corner_widget);
+    setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
   else
-    setCornerWidget(0);
+    setCornerWidget(0, Qt::TopLeftCorner);
 
   m_corner_widget->setVisible(state);
 }
@@ -292,12 +304,12 @@ void dooble_tab_widget::slot_settings_applied(void)
     {
       if(count() > 1)
 	{
-	  setCornerWidget(m_corner_widget);
+	  setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
 	  m_corner_widget->setVisible(true);
 	}
       else
 	{
-	  setCornerWidget(0);
+	  setCornerWidget(0, Qt::TopLeftCorner);
 	  m_corner_widget->setVisible(false);
 	}
 
@@ -305,7 +317,7 @@ void dooble_tab_widget::slot_settings_applied(void)
     }
   else
     {
-      setCornerWidget(m_corner_widget);
+      setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
       m_corner_widget->setVisible(true);
       m_tab_bar->setAutoHide(false);
     }
