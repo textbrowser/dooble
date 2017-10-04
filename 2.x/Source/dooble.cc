@@ -322,7 +322,9 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
-  if(dooble_settings::setting("access_new_tabs").toBool())
+  if(dooble_settings::setting("access_new_tabs").toBool() ||
+     qobject_cast<QShortcut *> (sender()) ||
+     qobject_cast<dooble_tab_widget *> (sender()) || !sender())
     m_ui.tab->setCurrentWidget(page); // Order is important.
 
   if(m_ui.tab->currentWidget() == page)
