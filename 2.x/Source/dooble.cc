@@ -1043,7 +1043,7 @@ void dooble::prepare_tab_shortcuts(void)
 
       QShortcut *shortcut = 0;
 
-      if(i == 9)
+      if(i == 9 || i == m_ui.tab->count() - 1)
 	shortcut = new QShortcut
 	  (Qt::AltModifier + Qt::Key_0,
 	   this,
