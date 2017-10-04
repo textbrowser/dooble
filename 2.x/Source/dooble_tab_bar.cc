@@ -84,31 +84,6 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		"QTabBar::tear {"
 		"border: none; image: none; width: 0px;}");
 #endif
-
-  if(dooble::s_application->style_name() == "fusion")
-    setStyleSheet
-      (QString("QTabBar::tab {"
-	       "background-color: #78909c;"
-	       "border-left: 1px solid %1;"
-	       "border-right: 1px solid %1;"
-	       "color: %2;"
-	       "margin-bottom: 0px;"
-	       "margin-top: 1px;}"
-	       "QTabBar::tab::selected {"
-	       "background-color: #7986cb;}"
-	       "QTabBar::tear {"
-	       "border: none; image: none; width: 0px;}").
-       arg(QWidget::palette().color(QWidget::backgroundRole()).name()).
-       arg(is_private() ? dooble::s_private_tab_text_color.name() : "white"));
-  else
-#ifdef Q_OS_MACOS
-    {
-    }
-#else
-    setStyleSheet("QTabBar::tear {"
-		  "border: none; image: none; width: 0px;}");
-#endif
-
   setUsesScrollButtons(true);
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
@@ -118,7 +93,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
-  prepare_icons();
+  slot_settings_applied();
 }
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
@@ -272,6 +247,36 @@ void dooble_tab_bar::slot_reload(void)
 
 void dooble_tab_bar::slot_settings_applied(void)
 {
+  if(dooble::s_application->style_name() == "fusion")
+    {
+      static QColor s_background_color
+	(QWidget::palette().color(QWidget::backgroundRole()));
+
+      setStyleSheet
+	(QString("QTabBar::tab {"
+		 "background-color: #78909c;"
+		 "border-left: 1px solid %1;"
+		 "border-right: 1px solid %1;"
+		 "color: %2;"
+		 "margin-bottom: 0px;"
+		 "margin-top: 1px;}"
+		 "QTabBar::tab::selected {"
+		 "background-color: #7986cb;}"
+		 "QTabBar::tear {"
+		 "border: none; image: none; width: 0px;}").
+	 arg(s_background_color.name()).
+	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
+	     is_private() ? dooble::s_private_tab_text_color.name() : "white"));
+    }
+  else
+#ifdef Q_OS_MACOS
+    {
+    }
+#else
+    setStyleSheet("QTabBar::tear {"
+		  "border: none; image: none; width: 0px;}");
+#endif
+
   prepare_icons();
 }
 
