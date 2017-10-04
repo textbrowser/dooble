@@ -1043,18 +1043,31 @@ void dooble::prepare_tab_shortcuts(void)
 
       QShortcut *shortcut = 0;
 
-      if(i == 9 || i == m_ui.tab->count() - 1)
-	shortcut = new QShortcut
-	  (Qt::AltModifier + Qt::Key_0,
-	   this,
-	   SLOT(slot_tab_widget_shortcut_activated(void)));
+      if(i == 9)
+	{
+	  shortcut = new QShortcut
+	    (Qt::AltModifier + Qt::Key_0,
+	     this,
+	     SLOT(slot_tab_widget_shortcut_activated(void)));
+	  m_tab_widget_shortcuts.append(shortcut);
+	}
       else
-	shortcut = new QShortcut
-	  (Qt::AltModifier + Qt::Key(Qt::Key_1 + i),
-	   this,
-	   SLOT(slot_tab_widget_shortcut_activated(void)));
+	{
+	  shortcut = new QShortcut
+	    (Qt::AltModifier + Qt::Key(Qt::Key_1 + i),
+	     this,
+	     SLOT(slot_tab_widget_shortcut_activated(void)));
+	  m_tab_widget_shortcuts.append(shortcut);
 
-      m_tab_widget_shortcuts.append(shortcut);
+	  if(i == m_ui.tab->count() - 1)
+	    {
+	      shortcut = new QShortcut
+		(Qt::AltModifier + Qt::Key_0,
+		 this,
+		 SLOT(slot_tab_widget_shortcut_activated(void)));
+	      m_tab_widget_shortcuts.append(shortcut);
+	    }
+	}
     }
 }
 
