@@ -80,11 +80,15 @@ dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
 	tool_button->setStyleSheet
 	  (QString("QToolButton {border: none;}"
 		   "QToolButton::hover {background-color: %1;}").
-	   arg(dooble::s_private_tab_text_color.name()));
+	   arg(dooble_settings::setting("denote_private_widgets").toBool() ?
+	       dooble::s_private_tab_text_color.name() : "darkorange"));
 #else
-        tool_button->setStyleSheet
-	  (QString("QToolButton::hover {background-color: %1;}").
-	   arg(dooble::s_private_tab_text_color.name()));
+        {
+	  if(dooble_settings::setting("denote_private_widgets").toBool())
+	    tool_button->setStyleSheet
+	      (QString("QToolButton::hover {background-color: %1;}").
+	       arg(dooble::s_private_tab_text_color.name()));
+	}
 #endif
       else
 #ifdef Q_OS_MACOS
