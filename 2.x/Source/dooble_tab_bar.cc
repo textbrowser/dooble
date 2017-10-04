@@ -34,6 +34,8 @@
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
+QColor dooble_tab_bar::s_selected_tab_color = QColor("#7986cb");
+
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
   foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
@@ -261,12 +263,13 @@ void dooble_tab_bar::slot_settings_applied(void)
 		 "margin-bottom: 0px;"
 		 "margin-top: 1px;}"
 		 "QTabBar::tab::selected {"
-		 "background-color: #7986cb;}"
+		 "background-color: %3;}"
 		 "QTabBar::tear {"
 		 "border: none; image: none; width: 0px;}").
 	 arg(s_background_color.name()).
 	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
-	     is_private() ? dooble::s_private_tab_text_color.name() : "white"));
+	     is_private() ? dooble::s_private_tab_text_color.name() : "white").
+	 arg(s_selected_tab_color.name()));
     }
   else
 #ifdef Q_OS_MACOS
