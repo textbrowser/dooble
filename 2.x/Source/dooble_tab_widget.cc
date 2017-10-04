@@ -74,7 +74,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->setVisible
     (!dooble_settings::setting("auto_hide_tab_bar").toBool());
-#ifndef Q_OS
+
   if(dooble::s_application->style_name() == "fusion")
     {
       m_corner_widget->setStyleSheet
@@ -85,7 +85,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
       setStyleSheet
 	("QTabBar {background-color: #78909c; margin-top: 1px;}");
     }
-#endif
+
   m_tab_bar = new dooble_tab_bar(this);
   m_tab_bar->setAutoHide
     (dooble_settings::setting("auto_hide_tab_bar").toBool());
