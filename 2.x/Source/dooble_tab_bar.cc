@@ -83,7 +83,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		"width: 16px;}"
 		"QTabBar::tear {"
 		"border: none; image: none; width: 0px;}");
-#else
+#endif
+
   if(dooble::s_application->style_name() == "fusion")
     setStyleSheet
       (QString("QTabBar::tab {"
@@ -100,9 +101,14 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
        arg(QWidget::palette().color(QWidget::backgroundRole()).name()).
        arg(is_private() ? dooble::s_private_tab_text_color.name() : "white"));
   else
+#ifdef Q_OS_MACOS
+    {
+    }
+#else
     setStyleSheet("QTabBar::tear {"
 		  "border: none; image: none; width: 0px;}");
 #endif
+
   setUsesScrollButtons(true);
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
