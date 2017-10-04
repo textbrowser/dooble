@@ -63,6 +63,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_add(void)));
+  connect(m_ui.add_exception,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_new_exception(void)));
   connect(m_ui.block_mode,
 	  SIGNAL(clicked(bool)),
 	  this,
@@ -71,6 +75,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_rows(void)));
+  connect(m_ui.exception,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_new_exception(void)));
   connect(m_ui.import,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -158,6 +166,45 @@ void dooble_accepted_or_blocked_domains::keyPressEvent(QKeyEvent *event)
     }
   else if(event)
     event->ignore();
+}
+
+void dooble_accepted_or_blocked_domains::new_exception(const QUrl &url)
+{
+  if(m_exceptions.contains(url))
+    return;
+  else if(url.isEmpty() || !url.isValid())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(m_ui.exceptions,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_exceptions_item_changed(QTableWidgetItem *)));
+  m_ui.exceptions->setRowCount
+    (m_ui.exceptions->rowCount() + 1);
+  m_ui.exception->clear();
+
+  QTableWidgetItem *item = new QTableWidgetItem();
+
+  item->setCheckState(Qt::Checked);
+  item->setData(Qt::UserRole, url);
+  item->setFlags(Qt::ItemIsEnabled |
+		 Qt::ItemIsSelectable |
+		 Qt::ItemIsUserCheckable);
+  m_ui.exceptions->setItem
+    (m_ui.exceptions->rowCount() - 1, 0, item);
+  item = new QTableWidgetItem(url.toString());
+  item->setData(Qt::UserRole, url);
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.exceptions->setItem
+    (m_ui.exceptions->rowCount() - 1, 1, item);
+  m_ui.exceptions->sortItems(1);
+  connect(m_ui.exceptions,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_exceptions_item_changed(QTableWidgetItem *)));
+  QApplication::restoreOverrideCursor();
+  save_exception(url, true);
 }
 
 void dooble_accepted_or_blocked_domains::populate(void)
@@ -359,6 +406,13 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_accepted_or_blocked_domains::save_exception(const QUrl &url,
+							bool state)
+{
+  Q_UNUSED(state);
+  Q_UNUSED(url);
+}
+
 void dooble_accepted_or_blocked_domains::save_settings(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -412,6 +466,7 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
 void dooble_accepted_or_blocked_domains::slot_containers_cleared(void)
 {
   m_domains.clear();
+  m_exceptions.clear();
   m_ui.table->setRowCount(0);
 }
 
@@ -582,9 +637,20 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
   save_blocked_domain(item->text(), state);
 }
 
+void dooble_accepted_or_blocked_domains::slot_new_exception(const QUrl &url)
+{
+  new_exception(url);
+}
+
+void dooble_accepted_or_blocked_domains::slot_new_exception(void)
+{
+  new_exception(QUrl::fromUserInput(m_ui.exception->text()));
+}
+
 void dooble_accepted_or_blocked_domains::slot_populate(void)
 {
   m_domains.clear();
+  m_exceptions.clear();
   populate();
 }
 

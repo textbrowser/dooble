@@ -70,9 +70,11 @@ Completed Items
 Remaining Items
 
 1.     Favorites in History.
-2.     Accepted / Blocked Domains exceptions.
+2.     Accepted / Blocked Domains exceptions. New tool button right of
+       Downloads; exception of host or as-is link, A / B preferences.
 3.     Depict current tab on tabs pull-down menu.
        Also allow for closing of tabs.
+4.     Separating pages renders incorrect page icons.
 
 Unknown Items
 

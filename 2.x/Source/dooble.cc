@@ -630,6 +630,7 @@ void dooble::new_page(dooble_page *page)
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
 
+  page->address_widget()->selectAll();
   prepare_tab_shortcuts();
 }
 
