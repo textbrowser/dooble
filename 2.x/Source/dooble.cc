@@ -330,7 +330,9 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
 
-  page->load(url);
+  if(!url.isEmpty())
+    page->load(url);
+
   prepare_tab_shortcuts();
   return page;
 }
