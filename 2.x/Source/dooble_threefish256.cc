@@ -728,7 +728,7 @@ void dooble_threefish256::set_tweak(const QByteArray &tweak, bool *ok)
 
   m_tweak = tweak;
 
-  if(*ok)
+  if(ok)
     *ok = true;
 }
 
