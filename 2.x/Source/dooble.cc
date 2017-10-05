@@ -94,6 +94,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
       m_ui.tab->setCurrentWidget(widget);
       m_ui.tab->setTabIcon(0, widget->windowIcon());
       m_ui.tab->setTabToolTip(0, widget->windowTitle());
+      prepare_tab_icons();
       prepare_tab_shortcuts();
     }
   else
@@ -1034,6 +1035,33 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(slot_show_about(void)));
 }
 
+void dooble::prepare_tab_icons(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      QMainWindow *main_window = qobject_cast<QMainWindow *>
+	(m_ui.tab->widget(i));
+
+      if(!main_window)
+	continue;
+
+      if(main_window == s_accepted_or_blocked_domains)
+	m_ui.tab->setTabIcon
+	  (i, QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
+      else if(main_window == s_downloads)
+	m_ui.tab->setTabIcon
+	  (i, QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+      else if(main_window == s_history_window)
+	m_ui.tab->setTabIcon
+	  (i, QIcon(QString(":/%1/48/history.png").arg(icon_set)));
+      else if(main_window == s_settings)
+	m_ui.tab->setTabIcon
+	  (i, QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
+    }
+}
+
 void dooble::prepare_tab_shortcuts(void)
 {
   while(!m_tab_widget_shortcuts.isEmpty())
@@ -1373,6 +1401,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 		(m_ui.tab->count() - 1, s_downloads->windowTitle());
 	      m_ui.tab->setTabIcon
 		(m_ui.tab->count() - 1, s_downloads->windowIcon());
+	      prepare_tab_icons();
 	    }
 
 	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1625,6 +1654,7 @@ void dooble::slot_settings_applied(void)
 	m_ui.tab->setTabTextColor(i, QColor());
     }
 
+  prepare_tab_icons();
   QApplication::restoreOverrideCursor();
 }
 
@@ -1653,6 +1683,7 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 	  m_ui.tab->setTabToolTip
 	    (m_ui.tab->count() - 1,
 	     s_accepted_or_blocked_domains->windowTitle());
+	  prepare_tab_icons();
 	}
 
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1757,6 +1788,7 @@ void dooble::slot_show_downloads(void)
 	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
 	  m_ui.tab->setTabToolTip
 	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+	  prepare_tab_icons();
 	}
 
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1801,6 +1833,7 @@ void dooble::slot_show_history(void)
 	    (m_ui.tab->count() - 1, s_history_window->windowIcon());
 	  m_ui.tab->setTabToolTip
 	    (m_ui.tab->count() - 1, s_history_window->windowTitle());
+	  prepare_tab_icons();
 	}
 
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
@@ -1836,6 +1869,7 @@ void dooble::slot_show_settings(void)
 	    (m_ui.tab->count() - 1, s_settings->windowIcon());
 	  m_ui.tab->setTabToolTip
 	    (m_ui.tab->count() - 1, s_settings->windowTitle());
+	  prepare_tab_icons();
 	  s_settings->restore();
 	}
 
@@ -1964,7 +1998,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
 				   context_menu_width(&menu)));
       else
 	action = menu.addAction
-	  (m_ui.tab->widget(i)->windowIcon(),
+	  (m_ui.tab->tabIcon(i),
 	   font_metrics.elidedText(text,
 				   Qt::ElideRight,
 				   dooble_ui_utilities::

@@ -69,8 +69,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_corner_widget = new QFrame(this);
   m_corner_widget->setLayout(new QHBoxLayout(this));
   m_corner_widget->layout()->setContentsMargins(5, 3, 5, 3);
-  m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
   m_corner_widget->layout()->addWidget(m_tabs_menu_button);
+  m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
   m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->setVisible
     (!dooble_settings::setting("auto_hide_tab_bar").toBool());
@@ -127,6 +127,26 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
     setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
 
   setTabBar(m_tab_bar);
+}
+
+QIcon dooble_tab_widget::tabIcon(int index) const
+{
+  QIcon icon(QTabWidget::tabIcon(index));
+
+  if(icon.isNull())
+    {
+      QLabel *label = qobject_cast<QLabel *>
+	(m_tab_bar->tabButton(index, QTabBar::LeftSide));
+
+      if(!label)
+	label = qobject_cast<QLabel *>
+	  (m_tab_bar->tabButton(index, QTabBar::RightSide));
+
+      if(label)
+	icon = *label->pixmap();
+    }
+
+  return icon;
 }
 
 QToolButton *dooble_tab_widget::tabs_menu_button(void) const
