@@ -49,7 +49,6 @@
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
-#include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_hmac.h"
