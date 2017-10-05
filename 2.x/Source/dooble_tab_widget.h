@@ -55,6 +55,7 @@ class dooble_tab_widget: public QTabWidget
   QToolButton *m_tabs_menu_button;
   dooble_tab_bar *m_tab_bar;
   void prepare_icons(void);
+  void prepare_tab_label(int index, const QIcon &icon);
 
  private slots:
   void slot_load_finished(void);
