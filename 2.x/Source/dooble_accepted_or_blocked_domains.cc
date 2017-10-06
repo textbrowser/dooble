@@ -713,6 +713,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 
 	  QProgressDialog progress(this);
 
+	  progress.setCancelButtonText(tr("Interrupt"));
 	  progress.setMaximum(0);
 	  progress.setMinimum(0);
 	  progress.setWindowModality(Qt::ApplicationModal);
