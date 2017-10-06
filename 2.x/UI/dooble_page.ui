@@ -154,7 +154,7 @@
      <item>
       <widget class="dooble_tool_button" name="menu">
        <property name="toolTip">
-        <string>Menus</string>
+        <string>Menu</string>
        </property>
        <property name="text">
         <string/>
