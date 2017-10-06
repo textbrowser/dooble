@@ -111,6 +111,25 @@
       </widget>
      </item>
      <item>
+      <widget class="dooble_tool_button" name="accepted_or_blocked">
+       <property name="toolTip">
+        <string>Accepted / Blocked Exception</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="dooble_tool_button" name="downloads">
        <property name="toolTip">
         <string>Downloads</string>
@@ -484,6 +503,7 @@
   <tabstop>forward</tabstop>
   <tabstop>reload</tabstop>
   <tabstop>address</tabstop>
+  <tabstop>accepted_or_blocked</tabstop>
   <tabstop>downloads</tabstop>
   <tabstop>menu</tabstop>
   <tabstop>find_stop</tabstop>

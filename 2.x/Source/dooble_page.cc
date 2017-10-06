@@ -432,6 +432,8 @@ void dooble_page::prepare_icons(void)
     m_settings_action->setIcon
       (QIcon(QString(":/%1/18/settings.png").arg(icon_set)));
 
+  m_ui.accepted_or_blocked->setIcon
+    (QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
   m_ui.backward->setIcon(QIcon(QString(":/%1/36/backward.png").arg(icon_set)));
   m_ui.downloads->setIcon
     (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
