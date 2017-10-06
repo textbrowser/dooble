@@ -419,6 +419,69 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
     return;
 
   m_exceptions[url.trimmed()] = state ? 1 : 0;
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name("dooble_accepted_or_blocked_domains");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_accepted_or_blocked_domains.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec
+	  ("CREATE TABLE IF NOT EXISTS "
+	   "dooble_accepted_or_blocked_domains_exceptions ("
+	   "state TEXT NOT NULL, "
+	   "url TEXT NOT NULL, "
+	   "url_digest TEXT NOT NULL PRIMARY KEY)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO "
+	   "dooble_accepted_or_blocked_domains_exceptions "
+	   "(state, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray data
+	  (dooble::s_cryptography->
+	   encrypt_then_mac(state ? QByteArray("true") : QByteArray("false")));
+	bool ok = true;
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac(url.toUtf8());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(url.toUtf8());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	if(ok)
+	  query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_accepted_or_blocked_domains::save_settings(void)
