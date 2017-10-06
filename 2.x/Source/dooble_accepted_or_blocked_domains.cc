@@ -75,6 +75,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_rows(void)));
+  connect(m_ui.delete_selected_exceptions,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_selected_exceptions(void)));
   connect(m_ui.exception,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -611,6 +615,61 @@ void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
       {
 	m_domains.remove(list.at(i).data().toString());
 	m_ui.table->removeRow(list.at(i).row());
+      }
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QModelIndexList list(m_ui.exceptions->selectionModel()->selectedRows(1));
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name("dooble_accepted_or_blocked_domains");
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_accepted_or_blocked_domains.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("PRAGMA synchronous = OFF");
+
+	    for(int i = list.size() - 1; i >= 0; i--)
+	      {
+		query.prepare
+		  ("DELETE FROM dooble_accepted_or_blocked_domains_exceptions "
+		   "WHERE url_digest = ?");
+		query.addBindValue
+		  (dooble::s_cryptography->
+		   hmac(list.at(i).data().toString().toUtf8()).toBase64());
+
+		if(query.exec())
+		  {
+		    m_exceptions.remove(list.at(i).data().toString());
+		    m_ui.exceptions->removeRow(list.at(i).row());
+		  }
+	      }
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+  else
+    for(int i = list.size() - 1; i >= 0; i--)
+      {
+	m_exceptions.remove(list.at(i).data().toString());
+	m_ui.exceptions->removeRow(list.at(i).row());
       }
 
   QApplication::restoreOverrideCursor();
