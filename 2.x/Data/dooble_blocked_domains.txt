@@ -1,4 +1,3 @@
-101com.com
 101order.com
 123found.com
 180hits.de
@@ -126,7 +125,6 @@ ad.profiwin.de
 ad.prv.pl
 ad.rambler.ru
 ad.reunion.com
-ad.scanmedios.com
 ad.sensismediasmart.com.au
 ad.seznam.cz
 ad.simgames.net
@@ -206,7 +204,7 @@ adexcite.com
 adexpose.com
 adext.inkclub.com
 adf.ly
-adfactor.nl
+adfactor.nl.invalid
 adfarm.mediaplex.com
 adflight.com
 adforce.com
@@ -416,7 +414,6 @@ ads.eu.msn.com
 ads.exactdrive.com
 ads.expat-blog.biz
 ads.expedia.com
-ads.ezboard.com
 ads.factorymedia.com
 ads.fairfax.com.au
 ads.faxo.com
@@ -465,7 +462,6 @@ ads.heartlight.org
 ads.heias.com
 ads.hideyourarms.com
 ads.hollywood.com
-ads.horsehero.com
 ads.horyzon-media.com
 ads.iafrica.com
 ads.ibest.com.br
@@ -700,7 +696,6 @@ adserver.dotcommedia.de
 adserver.finditquick.com
 adserver.flossiemediagroup.com
 adserver.freecity.de
-adserver.freenet.de
 adserver.friendfinder.com
 adserver.hardsextube.com
 adserver.hardwareanalysis.com
@@ -836,8 +831,11 @@ adx.allstar.cz
 adx.atnext.com
 adxpansion.com
 adxpose.com
+adxprts.com
 adxvalue.com
 adyea.com
+adz2you.com
+adzbazar.com
 adzerk.net
 adzerk.s3.amazonaws.com
 adzones.com
@@ -1145,6 +1143,7 @@ click.absoluteagency.com
 click.fool.com
 click.kmindex.ru
 click2freemoney.com
+click2paid.com
 clickability.com
 clickadz.com
 clickagents.com
@@ -1179,6 +1178,7 @@ clickzxc.com
 clicmanager.fr
 clientmetrics-pa.googleapis.com
 clients.tbo.com
+clikerz.net
 cliksolution.com
 clixgalore.com
 clk.konflab.com
@@ -1283,6 +1283,7 @@ dialerporn.com
 dianomi.com
 didtheyreadit.com
 differentdesk.com
+digitalmerkat.com
 direct-xxx-access.com
 directaclick.com
 directivepub.com
@@ -1473,6 +1474,7 @@ harrenmedia.com
 harrenmedianetwork.com
 havamedia.net
 heias.com
+hellobar.com
 hentaicounter.com
 herbalaffiliateprogram.com
 hexusads.fluent.ltd.uk
@@ -1635,6 +1637,7 @@ linkstorms.com
 linkswaper.com
 linktarget.com
 liquidad.narrowcastmedia.com
+liveadexchanger.com
 liveintent.com
 liverail.com
 lizardslaugh.com
@@ -1697,7 +1700,6 @@ mediaz.angloinfo.com
 medleyads.com
 medyanetads.com
 megacash.de
-megago.com
 megastats.com
 megawerbung.de
 metaffiliation.com
@@ -1780,7 +1782,6 @@ newt1.adultworld.com
 newtopsites.com
 nexage.com
 ng3.ads.warnerbros.com
-ngs.impress.co.jp
 nitroclicks.com
 novem.pl
 nuggad.net
@@ -2002,6 +2003,7 @@ relevanz10.de
 relmaxtop.com
 remarketingpixel.com
 remotead.cnet.com
+remox.com
 republika.onet.pl
 retargeter.com
 revcontent.com
@@ -2117,6 +2119,8 @@ sponsorpro.de
 sponsors.thoughtsmedia.com
 spot.fitness.com
 spotxchange.com
+spykemediatrack.co
+spykemediatrack.com
 spylog.com
 spywarelabs.com
 spywarenuker.com
@@ -2140,7 +2144,6 @@ staticads.btopenworld.com
 statistik-gallup.net
 statm.the-adult-company.com
 stats.blogger.com
-stats.cts-bv.nl
 stats.directnic.com
 stats.hyperinzerce.cz
 stats.merriam-webster.com
@@ -2312,6 +2315,7 @@ twittad.com
 tyroo.com
 uarating.com
 ukbanners.com
+ultimateclixx.com
 ultramercial.com
 unknowntray.com
 untd.com
