@@ -43,6 +43,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   bool exception(const QUrl &url) const;
   static void purge(void);
   void accept_or_block_domain(const QString &domain);
+  void new_exception(const QString &url);
 
  public slots:
   void show(void);
@@ -58,7 +59,6 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   QHash<QString, char> m_exceptions;
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
-  void new_exception(const QString &url);
   void populate(void);
   void save_blocked_domain(const QString &domain, bool state);
   void save_exception(const QString &url, bool state);

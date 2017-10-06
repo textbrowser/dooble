@@ -35,6 +35,7 @@
 #include <QWidgetAction>
 
 #include "dooble.h"
+#include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
@@ -808,6 +809,17 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
 void dooble_page::slot_accepted_or_blocked_add_exception(void)
 {
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  if(action->property("host").isValid())
+    dooble::s_accepted_or_blocked_domains->new_exception
+      (action->property("host").toString());
+  else if(action->property("url").isValid())
+    dooble::s_accepted_or_blocked_domains->new_exception
+      (action->property("url").toUrl().toString());
 }
 
 void dooble_page::slot_accepted_or_blocked_clicked(void)
@@ -819,24 +831,27 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
       menu.addAction
 	(tr("Add only this page as an exception."),
 	 this,
-	 SLOT(slot_accepted_or_blocked_add_exception(void)));
+	 SLOT(slot_accepted_or_blocked_add_exception(void)))->setProperty
+	("url", m_view->url());
       menu.addAction
 	(tr("Add the host %1 as an exception.").arg(m_view->url().host()),
 	 this,
-	 SLOT(slot_accepted_or_blocked_add_exception(void)));
-      menu.addSeparator();
-
-      if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-	menu.addAction(tr("Show Accepted / Blocked preferences."),
-		       this,
-		       SIGNAL(show_accepted_or_blocked_domains(void)));
-      else
-	menu.addAction(tr("Show Accepted / Blocked preferences..."),
-		       this,
-		       SIGNAL(show_accepted_or_blocked_domains(void)));
+	 SLOT(slot_accepted_or_blocked_add_exception(void)))->setProperty
+	("host", m_view->url().host());
     }
   else
     menu.addAction(tr("The page's URL is empty or invalid."));
+
+  menu.addSeparator();
+
+  if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
+    menu.addAction(tr("Show Accepted / Blocked preferences."),
+		   this,
+		   SIGNAL(show_accepted_or_blocked_domains(void)));
+  else
+    menu.addAction(tr("Show Accepted / Blocked preferences..."),
+		   this,
+		   SIGNAL(show_accepted_or_blocked_domains(void)));
 
   menu.exec(m_ui.accepted_or_blocked->
 	    mapToGlobal(m_ui.accepted_or_blocked->rect().bottomLeft()));
