@@ -101,6 +101,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_standard_menus(void)));
+  connect(m_ui.accepted_or_blocked,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_accepted_or_blocked_clicked(void)));
   connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -800,6 +804,42 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 	    m_full_screen_action->setText(tr("Show &Full Screen"));
 	}
     }
+}
+
+void dooble_page::slot_accepted_or_blocked_add_exception(void)
+{
+}
+
+void dooble_page::slot_accepted_or_blocked_clicked(void)
+{
+  if(m_view->url().isEmpty() || !m_view->url().isValid())
+    return;
+
+  QMenu menu(this);
+
+  menu.addAction
+    (tr("Add only this page as an exception."),
+     this,
+     SLOT(slot_accepted_or_blocked_add_exception(void)));
+  menu.addAction
+    (tr("Add the host %1 as an exception.").arg(m_view->url().host()),
+     this,
+     SLOT(slot_accepted_or_blocked_add_exception(void)));
+  menu.addSeparator();
+
+  if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
+    menu.addAction(tr("Show Accepted / Blocked preferences."),
+		   this,
+		   SIGNAL(show_accepted_or_blocked_domains(void)));
+  else
+    menu.addAction(tr("Show Accepted / Blocked preferences..."),
+		   this,
+		   SIGNAL(show_accepted_or_blocked_domains(void)));
+
+  menu.setStyleSheet("QMenu {menu-scrollable: 1;}");
+  menu.exec(m_ui.accepted_or_blocked->
+	    mapToGlobal(m_ui.accepted_or_blocked->rect().bottomLeft()));
+  m_ui.accepted_or_blocked->setChecked(false);
 }
 
 void dooble_page::slot_always_allow_javascript_popup(void)

@@ -102,6 +102,8 @@ class dooble_page: public QWidget
 
  private slots:
   void slot_about_to_show_standard_menus(void);
+  void slot_accepted_or_blocked_add_exception(void);
+  void slot_accepted_or_blocked_clicked(void);
   void slot_always_allow_javascript_popup(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
