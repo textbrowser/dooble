@@ -126,6 +126,17 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  m_ui.cookie_policy->setItemData
+    (0, tr("Cookies are not saved to disk."), Qt::ToolTipRole);
+  m_ui.cookie_policy->setItemData
+    (1,
+     tr("Both persistent and session cookies are saved to and restored "
+	"from disk."),
+     Qt::ToolTipRole);
+  m_ui.cookie_policy->setItemData
+    (2,
+     tr("Cookies marked persistent are saved to and restored from disk."),
+     Qt::ToolTipRole);
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;

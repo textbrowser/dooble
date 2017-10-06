@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>534</height>
+           <height>549</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -220,7 +220,7 @@
             <item>
              <widget class="QPushButton" name="clear_cache">
               <property name="text">
-               <string>Clear</string>
+               <string>Clear Cache</string>
               </property>
              </widget>
             </item>
@@ -594,8 +594,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>503</width>
-               <height>658</height>
+               <width>415</width>
+               <height>633</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1078,8 +1078,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>353</width>
-               <height>737</height>
+               <width>270</width>
+               <height>729</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
