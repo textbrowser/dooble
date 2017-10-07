@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>534</height>
+           <height>549</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -593,9 +593,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-91</y>
-               <width>620</width>
-               <height>672</height>
+               <y>0</y>
+               <width>637</width>
+               <height>587</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1084,8 +1084,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>353</width>
-               <height>737</height>
+               <width>637</width>
+               <height>700</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1228,16 +1228,6 @@
                      </layout>
                     </item>
                    </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QCheckBox" name="javascript_popups">
-                   <property name="text">
-                    <string>Pop-ups</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
                   </widget>
                  </item>
                 </layout>
@@ -1460,7 +1450,6 @@
   <tabstop>javascript_block_popups_exceptions</tabstop>
   <tabstop>remove_all_javascript_block_popup_exceptions</tabstop>
   <tabstop>remove_selected_javascript_block_popup_exceptions</tabstop>
-  <tabstop>javascript_popups</tabstop>
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
   <tabstop>user_agent</tabstop>

@@ -656,8 +656,6 @@ void dooble_settings::restore(void)
     (s_settings.value("javascript_access_clipboard", false).toBool());
   m_ui.javascript_block_popups->setChecked
     (s_settings.value("javascript_block_popups", true).toBool());
-  m_ui.javascript_popups->setChecked
-    (s_settings.value("javascript_popups", true).toBool());
   m_ui.local_storage->setChecked
     (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked
@@ -774,9 +772,6 @@ void dooble_settings::restore(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
-  QWebEngineSettings::defaultSettings()->setAttribute
-    (QWebEngineSettings::JavascriptCanOpenWindows,
-     m_ui.javascript_popups->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   QWebEngineSettings::globalSettings()->setAttribute
@@ -1065,9 +1060,6 @@ void dooble_settings::slot_apply(void)
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
-    (QWebEngineSettings::JavascriptCanOpenWindows,
-     m_ui.javascript_popups->isChecked());
-  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
@@ -1129,8 +1121,6 @@ void dooble_settings::slot_apply(void)
 	      m_ui.javascript_access_clipboard->isChecked());
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
-  set_setting
-    ("javascript_popups", m_ui.javascript_popups->isChecked());
   set_setting("local_storage", m_ui.local_storage->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("pin_accepted_or_blocked_window",

@@ -228,6 +228,8 @@ int main(int argc, char *argv[])
   QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::JavascriptCanOpenWindows, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
   QWebEngineSettings::globalSettings()->setAttribute
