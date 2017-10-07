@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>549</height>
+           <height>534</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -306,7 +306,7 @@
           <item>
            <widget class="QCheckBox" name="auto_hide_tab_bar">
             <property name="toolTip">
-             <string>A tab bar will be hidden if its parent tab widget contains only one page.</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A tab bar will be hidden if its parent tab widget contains only a single tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Auto-Hide Tab Bar</string>
@@ -594,8 +594,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>633</height>
+               <width>635</width>
+               <height>642</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1078,8 +1078,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>270</width>
-               <height>729</height>
+               <width>635</width>
+               <height>737</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
