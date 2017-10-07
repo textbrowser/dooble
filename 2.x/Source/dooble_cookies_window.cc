@@ -323,20 +323,23 @@ void dooble_cookies_window::slot_cookie_added(const QNetworkCookie &cookie,
       m_ui.tree->addTopLevelItem(item);
     }
 
-  QHash<QByteArray, QTreeWidgetItem *> hash
-    (m_child_items.value(cookie.domain()));
-
-  if(!hash.contains(cookie.name()))
+  if(!cookie.name().isEmpty())
     {
-      QTreeWidgetItem *item = new QTreeWidgetItem
-	(m_top_level_items[cookie.domain()],
-	 QStringList() << "" << cookie.name());
+      QHash<QByteArray, QTreeWidgetItem *> hash
+	(m_child_items.value(cookie.domain()));
 
-      hash[cookie.name()] = item;
-      item->setData(1, Qt::UserRole, cookie.toRawForm());
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-      m_child_items[cookie.domain()] = hash;
-      m_top_level_items[cookie.domain()]->addChild(item);
+      if(!hash.contains(cookie.name()))
+	{
+	  QTreeWidgetItem *item = new QTreeWidgetItem
+	    (m_top_level_items[cookie.domain()],
+	     QStringList() << "" << cookie.name());
+
+	  hash[cookie.name()] = item;
+	  item->setData(1, Qt::UserRole, cookie.toRawForm());
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  m_child_items[cookie.domain()] = hash;
+	  m_top_level_items[cookie.domain()]->addChild(item);
+	}
     }
 
   m_ui.tree->sortItems
@@ -557,15 +560,30 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 	QSqlQuery query(db);
 
 	query.exec("PRAGMA synchronous = OFF");
-	query.prepare("UPDATE dooble_cookies_domains SET favorite_digest = ? "
-		      "WHERE domain_digest = ?");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_cookies_domains "
+	   "(domain, domain_digest, favorite_digest) VALUES (?, ?, ?)");
+
+	QByteArray bytes;
+	bool ok = true;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (item->text(0).toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(item->text(0)).toBase64());
 	query.addBindValue
 	  (dooble::s_cryptography->
 	   hmac(item->checkState(0) == Qt::Checked ?
 		QByteArray("true") : QByteArray("false")).toBase64());
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(item->text(0)).toBase64());
-	query.exec();
+
+	if(ok)
+	  query.exec();
       }
 
     db.close();
