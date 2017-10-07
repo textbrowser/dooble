@@ -102,6 +102,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.proxy_type,
+	  SIGNAL(currentIndexChanged(int)),
+	  this,
+	  SLOT(slot_proxy_type_changed(int)));
   connect(m_ui.remove_all_javascript_block_popup_exceptions,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -457,6 +461,7 @@ void dooble_settings::prepare_proxy(bool save)
       else
 	QNetworkProxyFactory::setUseSystemConfiguration(true);
 
+      m_ui.proxy_frame->setEnabled(false);
       m_ui.proxy_host->setText("");
       m_ui.proxy_password->setText("");
       m_ui.proxy_port->setValue(0);
@@ -477,6 +482,7 @@ void dooble_settings::prepare_proxy(bool save)
 
       proxy.setUser(m_ui.proxy_user->text().trimmed());
       QNetworkProxy::setApplicationProxy(proxy);
+      m_ui.proxy_frame->setEnabled(true);
     }
 
   if(save)
@@ -1393,6 +1399,20 @@ void dooble_settings::slot_populate(void)
 							       *)));
   m_ui.javascript_block_popups_exceptions->sortItems(1);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::slot_proxy_type_changed(int index)
+{
+  if(index == 1 || index == 3) // None, System
+    {
+      m_ui.proxy_frame->setEnabled(false);
+      m_ui.proxy_host->setText("");
+      m_ui.proxy_password->setText("");
+      m_ui.proxy_port->setValue(0);
+      m_ui.proxy_user->setText("");
+    }
+  else
+    m_ui.proxy_frame->setEnabled(true);
 }
 
 void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)

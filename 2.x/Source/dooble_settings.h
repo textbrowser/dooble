@@ -103,6 +103,7 @@ class dooble_settings: public QMainWindow
   void slot_page_button_clicked(void);
   void slot_pbkdf2_future_finished(void);
   void slot_populate(void);
+  void slot_proxy_type_changed(int index);
   void slot_remove_all_javascript_block_popup_exceptions(void);
   void slot_remove_selected_javascript_block_popup_exceptions(void);
   void slot_reset(void);
