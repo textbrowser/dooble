@@ -287,13 +287,13 @@ void dooble_cookies::slot_populate(void)
       {
 	QSqlQuery query(db);
 
+	query.setForwardOnly(true);
 	query.prepare("DELETE FROM dooble_cookies_domains WHERE "
 		      "domain_digest NOT IN (SELECT domain_digest FROM "
 		      "dooble_cookies) AND favorite_digest = ?");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 	query.exec();
-	query.setForwardOnly(true);
 
 	if(query.exec("SELECT "
 		      "(SELECT favorite_digest FROM dooble_cookies_domains a "
