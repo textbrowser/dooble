@@ -83,11 +83,19 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
   else if(m_is_private)
     return;
 
+  QDateTime now;
+
   if(cookie.isSessionCookie())
     {
       if(dooble_settings::cookie_policy_string(dooble_settings::
 					       setting("cookie_policy_index").
-					       toInt()) != "save_all")
+					       toInt()) == "save_all")
+	/*
+	** Allow a session cookie to be saved.
+	*/
+
+	goto save_label;
+      else
 	return;
     }
   else if(dooble_settings::
@@ -96,10 +104,12 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 			       toInt()) == "do_not_save")
     return;
 
-  QDateTime now(QDateTime::currentDateTime());
+  now = QDateTime::currentDateTime();
 
   if(cookie.expirationDate().toLocalTime() <= now)
     return;
+
+ save_label:
 
   QString database_name(QString("dooble_cookies_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
@@ -129,7 +139,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 		   ")");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
-	  ("INSERT INTO dooble_cookies_domains "
+	  ("INSERT OR REPLACE INTO dooble_cookies_domains "
 	   "(domain, domain_digest, favorite_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
@@ -323,12 +333,6 @@ void dooble_cookies::slot_populate(void)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("DELETE FROM dooble_cookies_domains WHERE "
-		      "domain_digest NOT IN (SELECT domain_digest FROM "
-		      "dooble_cookies) AND favorite_digest = ?");
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
-	query.exec();
 
 	if(query.exec("SELECT domain, favorite_digest FROM "
 		      "dooble_cookies_domains"))
@@ -412,24 +416,41 @@ void dooble_cookies::slot_populate(void)
 		}
 
 	      QDateTime now(QDateTime::currentDateTime());
+	      bool allow_expired = false;
 
-	      if(cookie.at(0).expirationDate().toLocalTime() <= now)
+	      if(cookie.at(0).isSessionCookie())
 		{
-		  QSqlQuery delete_query(db);
+		  if(dooble_settings::
+		     cookie_policy_string(dooble_settings::
+					  setting("cookie_policy_index").
+					  toInt()) == "save_all")
+		    /*
+		    ** Ignore the session cookie's expiration date.
+		    */
 
-		  delete_query.prepare
-		    ("DELETE FROM dooble_cookies WHERE raw_form = ?");
-		  delete_query.addBindValue(query.value(1));
-		  delete_query.exec();
-		  delete_query.prepare
-		    ("DELETE FROM dooble_cookies_domains WHERE "
-		     "domain_digest NOT IN (SELECT domain_digest FROM "
-		     "dooble_cookies) AND favorite_digest = ?");
-		  delete_query.addBindValue
-		    (dooble::s_cryptography->hmac(QByteArray("false")).
-		     toBase64());
-		  continue;
+		    allow_expired = true;
 		}
+	      else
+		allow_expired = false;
+
+	      if(!allow_expired)
+		if(cookie.at(0).expirationDate().toLocalTime() <= now)
+		  {
+		    QSqlQuery delete_query(db);
+
+		    delete_query.prepare
+		      ("DELETE FROM dooble_cookies WHERE raw_form = ?");
+		    delete_query.addBindValue(query.value(1));
+		    delete_query.exec();
+		    delete_query.prepare
+		      ("DELETE FROM dooble_cookies_domains WHERE "
+		       "domain_digest NOT IN (SELECT domain_digest FROM "
+		       "dooble_cookies) AND favorite_digest = ?");
+		    delete_query.addBindValue
+		      (dooble::s_cryptography->hmac(QByteArray("false")).
+		       toBase64());
+		    continue;
+		  }
 
 	      bool is_favorite = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
