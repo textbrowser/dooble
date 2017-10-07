@@ -717,6 +717,18 @@ void dooble_accepted_or_blocked_domains::slot_exceptions_item_changed
 {
   if(!item)
     return;
+
+  if(item->column() != 0)
+    return;
+
+  bool state = item->checkState() == Qt::Checked;
+
+  item = m_ui.exceptions->item(item->row(), 1);
+
+  if(!item)
+    return;
+
+  save_exception(item->text(), state);
 }
 
 void dooble_accepted_or_blocked_domains::slot_find(void)
