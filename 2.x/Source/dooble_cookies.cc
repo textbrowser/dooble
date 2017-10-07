@@ -295,6 +295,35 @@ void dooble_cookies::slot_populate(void)
 	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 	query.exec();
 
+	if(query.exec("SELECT domain, favorite_digest FROM "
+		      "dooble_cookies_domains"))
+	  while(query.next())
+	    {
+	      QByteArray bytes
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
+
+	      if(bytes.isEmpty())
+		{
+		  QSqlQuery delete_query(db);
+
+		  delete_query.prepare
+		    ("DELETE FROM dooble_cookies_domains WHERE domain = ?");
+		  delete_query.addBindValue(query.value(0));
+		  delete_query.exec();
+		  continue;
+		}
+
+	      QNetworkCookie cookie;
+	      bool is_favorite = dooble_cryptography::memcmp
+		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
+		 query.value(1).toByteArray());
+
+	      cookie.setDomain(bytes);
+	      emit cookie_added(cookie, is_favorite);
+	    }
+
 	if(query.exec("SELECT "
 		      "(SELECT favorite_digest FROM dooble_cookies_domains a "
 		      "WHERE a.domain_digest = b.domain_digest) "
