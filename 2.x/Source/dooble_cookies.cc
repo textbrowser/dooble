@@ -258,6 +258,41 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_cookies::slot_delete_domain(const QString &domain)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(m_is_private)
+    return;
+
+  QString database_name(QString("dooble_cookies_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_cookies.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare("DELETE FROM dooble_cookies_domains WHERE "
+		      "domain_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(domain.toUtf8()).toBase64());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_cookies::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())

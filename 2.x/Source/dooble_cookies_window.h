@@ -87,6 +87,7 @@ class dooble_cookies_window: public QMainWindow
 
  signals:
   void delete_cookie(const QNetworkCookie &cookie);
+  void delete_domain(const QString &domain);
 };
 
 #endif

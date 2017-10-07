@@ -196,6 +196,8 @@ void dooble_cookies_window::delete_top_level_items
 
 	      emit delete_cookie(cookie.at(0));
 	    }
+	  else
+	    emit delete_domain(item->text(0));
 	}
 
       delete item;
@@ -451,6 +453,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 
 		  emit delete_cookie(cookie.at(0));
 		}
+	      else
+		emit delete_domain(item->text(0));
 	    }
 
 	  delete item;
@@ -559,6 +563,10 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
       {
 	QSqlQuery query(db);
 
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
+		   "domain TEXT NOT NULL, "
+		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
+		   "favorite_digest TEXT NOT NULL)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies_domains "
