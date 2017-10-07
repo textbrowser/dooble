@@ -116,6 +116,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	QSqlQuery query(db);
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
+		   "domain TEXT NOT NULL, "
 		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
 		   "favorite_digest TEXT NOT NULL)");
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
@@ -129,10 +130,18 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT INTO dooble_cookies_domains "
-	   "(domain_digest, favorite_digest) VALUES (?, ?)");
+	   "(domain, domain_digest, favorite_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
 	bool ok = true;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (cookie.domain().toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
@@ -140,7 +149,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 
 	if(ok)
-	  query.exec();
+	  ok = query.exec();
 
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
