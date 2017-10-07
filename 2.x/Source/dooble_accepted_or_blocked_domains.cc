@@ -330,6 +330,7 @@ void dooble_accepted_or_blocked_domains::purge(void)
 
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM dooble_accepted_or_blocked_domains");
+	query.exec("DELETE FROM dooble_accepted_or_blocked_domains_exceptions");
 	query.exec("VACUUM");
       }
 
