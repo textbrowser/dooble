@@ -255,7 +255,13 @@ void dooble_tab_bar::slot_settings_applied(void)
 	(QWidget::palette().color(QWidget::backgroundRole()));
 
       setStyleSheet
-	(QString("QTabBar::tab {"
+	(QString("QTabBar::close-button {"
+		 "height: 16px;"
+		 "image: url(:/Mac/16/tab_close.png);"
+		 "subcontrol-origin: padding;"
+		 "subcontrol-position: right;"
+		 "width: 16px;}"
+		 "QTabBar::tab {"
 		 "background-color: #78909c;"
 		 "border-left: 1px solid %1;"
 		 "border-right: 1px solid %1;"
