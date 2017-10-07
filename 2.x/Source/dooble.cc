@@ -2006,6 +2006,12 @@ void dooble::slot_tabs_menu_button_clicked(void)
 				   dooble_ui_utilities::
 				   context_menu_width(&menu)));
 
+      if(i == m_ui.tab->currentIndex())
+	{
+	  action->setCheckable(true);
+	  action->setChecked(true);
+	}
+
       action->setProperty("index", i);
       connect(action,
 	      SIGNAL(triggered(void)),
