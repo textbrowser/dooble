@@ -71,6 +71,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(bool)),
 	  this,
 	  SLOT(slot_radio_button_toggled(bool)));
+  connect(m_ui.delete_all_exceptions,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_all_exceptions(void)));
   connect(m_ui.delete_rows,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -544,6 +548,38 @@ void dooble_accepted_or_blocked_domains::slot_containers_cleared(void)
   m_domains.clear();
   m_exceptions.clear();
   m_ui.table->setRowCount(0);
+}
+
+void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
+{
+  m_exceptions.clear();
+  m_ui.exceptions->setRowCount(0);
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name("dooble_accepted_or_blocked_domains");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_accepted_or_blocked_domains.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_accepted_or_blocked_domains_exceptions");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_accepted_or_blocked_domains::slot_delete_rows(void)

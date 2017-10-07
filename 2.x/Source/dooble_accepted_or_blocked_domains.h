@@ -67,6 +67,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
  private slots:
   void slot_add(void);
   void slot_containers_cleared(void);
+  void slot_delete_all_exceptions(void);
   void slot_delete_rows(void);
   void slot_delete_selected_exceptions(void);
   void slot_exceptions_item_changed(QTableWidgetItem *item);
