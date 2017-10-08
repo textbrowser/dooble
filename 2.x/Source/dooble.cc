@@ -982,11 +982,11 @@ void dooble::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu->addAction(tr("&Blocked Domains"),
+    menu->addAction(tr("Accepted / &Blocked Domains"),
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
   else
-    menu->addAction(tr("&Blocked Domains..."),
+    menu->addAction(tr("Accepted / &Blocked Domains..."),
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
 
