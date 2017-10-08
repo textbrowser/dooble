@@ -924,7 +924,7 @@ void dooble::prepare_standard_menus(void)
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
   menu->addSeparator();
-  menu->addAction(tr("New &Private Window"),
+  menu->addAction(tr("New &Private Window..."),
 		  this,
 		  SLOT(slot_new_private_window(void)));
   menu->addAction(tr("New &Tab"),
@@ -2005,12 +2005,6 @@ void dooble::slot_tabs_menu_button_clicked(void)
 				   Qt::ElideRight,
 				   dooble_ui_utilities::
 				   context_menu_width(&menu)));
-
-      if(i == m_ui.tab->currentIndex())
-	{
-	  action->setCheckable(true);
-	  action->setChecked(true);
-	}
 
       action->setProperty("index", i);
       connect(action,

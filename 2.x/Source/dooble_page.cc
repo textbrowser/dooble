@@ -495,7 +495,7 @@ void dooble_page::prepare_standard_menus(void)
   m_authentication_action->setEnabled
     (dooble_settings::has_dooble_credentials());
   menu->addSeparator();
-  menu->addAction(tr("New &Private Window"),
+  menu->addAction(tr("New &Private Window..."),
 		  this,
 		  SIGNAL(new_private_window(void)));
   menu->addAction(tr("New &Tab"),
