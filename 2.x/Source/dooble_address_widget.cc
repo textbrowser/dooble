@@ -65,13 +65,6 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px;"
      "}");
   m_information->setToolTip(tr("Site Information"));
-  m_line = new QFrame(this);
-  m_line->setFrameShadow(QFrame::Sunken);
-  m_line->setFrameShape(QFrame::VLine);
-  m_line->setLineWidth(1);
-  m_line->setMaximumHeight(sizeHint().height() - 10);
-  m_line->setMaximumWidth(5);
-  m_line->setMinimumWidth(5);
   m_menu = new QMenu(this);
   m_pull_down = new QToolButton(this);
   m_pull_down->setCursor(Qt::ArrowCursor);
@@ -241,8 +234,6 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
 		   rect().top() + d);
   d = (rect().height() - size2.height()) / 2;
   m_information->move(frame_width - rect().left() + 5, rect().top() + d);
-  m_line->move(frame_width - rect().left() + size1.width() + size2.width() + 5,
-	       rect().top() + 5);
   d = (rect().height() - size3.height()) / 2;
   m_pull_down->move
     (rect().right() - frame_width - size3.width() - 5, rect().top() + d);
@@ -276,12 +267,12 @@ void dooble_address_widget::setText(const QString &text)
       host_format_range.format = format;
       host_format_range.length = host.length();
       host_format_range.start = url.toString().indexOf(host);
-      format.setForeground(Qt::gray);
+      format.setForeground(QColor("#2962FF"));
       path_format_range.format = format;
       path_format_range.length = path.length();
       path_format_range.start =
 	url.toString().indexOf(path, url.toString().indexOf(host));
-      format.setForeground(Qt::gray);
+      format.setForeground(QColor("#2962FF"));
       scheme_format_range.format = format;
       scheme_format_range.length = url.toString().indexOf(host);
       scheme_format_range.start = 0;
