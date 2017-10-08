@@ -120,7 +120,7 @@
       <item>
        <widget class="dooble_tool_button" name="accepted_or_blocked">
         <property name="toolTip">
-         <string>Accepted / Blocked Exception</string>
+         <string>Accepted / Blocked Domains Exception</string>
         </property>
         <property name="text">
          <string/>
@@ -461,6 +461,18 @@
         </item>
         <item>
          <widget class="QLineEdit" name="link_hovered">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLineEdit {background: transparent;}</string>
           </property>

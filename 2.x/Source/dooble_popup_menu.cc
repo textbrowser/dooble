@@ -145,12 +145,16 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.print->setIcon(QIcon(QString(":/%1/48/print.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
 
-  int maximum = 50;
+  int preferred_height = 50;
+  int preferred_width = 50;
 
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
     {
       tool_button->setIconSize(QSize(48, 48));
-      maximum = qMax(maximum, tool_button->sizeHint().height());
+      preferred_height = qMax
+	(preferred_height, tool_button->sizeHint().height());
+      preferred_width = qMax
+	(preferred_width, tool_button->sizeHint().width());
     }
 
   foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
@@ -158,8 +162,8 @@ void dooble_popup_menu::prepare_icons(void)
        m_ui.zoom_out != tool_button &&
        m_ui.zoom_reset != tool_button)
       {
-	tool_button->setMaximumSize(QSize(maximum, maximum));
-	tool_button->setMinimumSize(QSize(maximum, maximum));
+	tool_button->setMaximumSize(QSize(preferred_width, preferred_height));
+	tool_button->setMinimumSize(QSize(preferred_width, preferred_height));
       }
 }
 

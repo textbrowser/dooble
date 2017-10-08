@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>275</width>
+    <width>299</width>
     <height>380</height>
    </rect>
   </property>
@@ -163,7 +163,7 @@ Window</string>
      <item row="0" column="0">
       <widget class="QToolButton" name="blocked_domains">
        <property name="text">
-        <string>Blocked
+        <string>Accepted / Blocked
 Domains</string>
        </property>
        <property name="toolButtonStyle">
