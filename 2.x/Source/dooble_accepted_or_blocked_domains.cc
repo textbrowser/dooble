@@ -317,6 +317,99 @@ void dooble_accepted_or_blocked_domains::populate(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_accepted_or_blocked_domains::populate_exceptions(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_exceptions.clear();
+  m_ui.exceptions->setRowCount(0);
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name("dooble_accepted_or_blocked_domains");
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_accepted_or_blocked_domains.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.setForwardOnly(true);
+
+	    if(query.exec("SELECT state, url "
+			  "FROM dooble_accepted_or_blocked_domains_exceptions"))
+	      while(query.next())
+		{
+		  QByteArray data1
+		    (QByteArray::fromBase64(query.value(0).toByteArray()));
+
+		  data1 = dooble::s_cryptography->mac_then_decrypt(data1);
+
+		  if(data1.isEmpty())
+		    continue;
+
+		  QByteArray data2
+		    (QByteArray::fromBase64(query.value(1).toByteArray()));
+
+		  data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+
+		  if(data2.isEmpty())
+		    continue;
+
+		  m_exceptions[data2] = (data1 == "true") ? 1 : 0;
+		}
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+
+  disconnect(m_ui.exceptions,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_exceptions_item_changed(QTableWidgetItem *)));
+  m_ui.exceptions->setRowCount(m_exceptions.size());
+
+  QHashIterator<QString, char> it(m_exceptions);
+  int i = 0;
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      QTableWidgetItem *item = new QTableWidgetItem();
+
+      if(it.value())
+	item->setCheckState(Qt::Checked);
+      else
+	item->setCheckState(Qt::Unchecked);
+
+      item->setData(Qt::UserRole, it.key());
+      item->setFlags(Qt::ItemIsEnabled |
+		     Qt::ItemIsSelectable |
+		     Qt::ItemIsUserCheckable);
+      m_ui.exceptions->setItem(i, 0, item);
+      item = new QTableWidgetItem(it.key());
+      item->setData(Qt::UserRole, it.key());
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.exceptions->setItem(i, 1, item);
+      i += 1;
+    }
+
+  connect(m_ui.exceptions,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_exceptions_item_changed(QTableWidgetItem *)));
+  m_ui.exceptions->sortItems(1);
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_accepted_or_blocked_domains::purge(void)
 {
   QString database_name("dooble_accepted_or_blocked_domains");
@@ -839,6 +932,7 @@ void dooble_accepted_or_blocked_domains::slot_populate(void)
   m_domains.clear();
   m_exceptions.clear();
   populate();
+  populate_exceptions();
 }
 
 void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)

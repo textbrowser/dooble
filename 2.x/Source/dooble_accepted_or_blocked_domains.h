@@ -60,6 +60,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
   void populate(void);
+  void populate_exceptions(void);
   void save_blocked_domain(const QString &domain, bool state);
   void save_exception(const QString &url, bool state);
   void save_settings(void);
