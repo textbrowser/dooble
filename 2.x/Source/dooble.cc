@@ -1396,19 +1396,27 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
       if(dooble_settings::setting("pin_downloads_window").toBool())
 	{
-	  if(m_ui.tab->indexOf(s_downloads) == -1)
+	  if(!s_downloads->isVisible())
 	    {
-	      m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
-	      m_ui.tab->setTabToolTip
-		(m_ui.tab->count() - 1, s_downloads->windowTitle());
-	      m_ui.tab->setTabIcon
-		(m_ui.tab->count() - 1, s_downloads->windowIcon());
-	      prepare_tab_icons();
-	    }
+	      if(m_ui.tab->indexOf(s_downloads) == -1)
+		{
+		  m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+		  m_ui.tab->setTabToolTip
+		    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+		  m_ui.tab->setTabIcon
+		    (m_ui.tab->count() - 1, s_downloads->windowIcon());
+		  prepare_tab_icons();
+		}
 
-	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
-	  prepare_tab_shortcuts();
+	      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+	      m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
+	      prepare_tab_shortcuts();
+	    }
+	  else
+	    {
+	      s_downloads->activateWindow();
+	      s_downloads->showNormal();
+	    }
 	}
       else if(!s_downloads->isVisible())
 	{

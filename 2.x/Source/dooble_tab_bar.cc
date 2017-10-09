@@ -34,6 +34,7 @@
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
+QColor dooble_tab_bar::s_hovered_tab_color = QColor("#c5cae9");
 QColor dooble_tab_bar::s_selected_tab_color = QColor("#7986cb");
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
@@ -268,13 +269,17 @@ void dooble_tab_bar::slot_settings_applied(void)
 		 "color: %2;"
 		 "margin-bottom: 0px;"
 		 "margin-top: 1px;}"
+		 "QTabBar::tab::hover:!selected {"
+		 "background-color: %3;"
+		 "color: black;}"
 		 "QTabBar::tab::selected {"
-		 "background-color: %3;}"
+		 "background-color: %4;}"
 		 "QTabBar::tear {"
 		 "border: none; image: none; width: 0px;}").
 	 arg(s_background_color.name()).
 	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
 	     is_private() ? dooble::s_private_tab_text_color.name() : "white").
+	 arg(s_hovered_tab_color.name()).
 	 arg(s_selected_tab_color.name()));
     }
   else

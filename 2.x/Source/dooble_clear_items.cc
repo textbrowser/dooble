@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QMessageBox>
 #include <QWebEngineProfile>
 
 #include "dooble.h"
@@ -40,10 +41,18 @@
 dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
+  connect(&m_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_timeout(void)));
   connect(m_ui.buttonBox->button(QDialogButtonBox::Apply),
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_clear_items(void)));
+  connect(m_ui.download_history,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_download_history_toggled(bool)));
 
   foreach(QCheckBox *check_box, findChildren<QCheckBox *> ())
     {
@@ -70,6 +79,24 @@ void dooble_clear_items::slot_check_box_toggled(bool state)
 
 void dooble_clear_items::slot_clear_items(void)
 {
+  if(m_ui.download_history->isChecked())
+    if(!dooble::s_downloads->is_finished())
+      {
+	QMessageBox mb(this);
+
+	mb.setIcon(QMessageBox::Question);
+	mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+	mb.setText
+	  (tr("Downloads are in progress. If you continue, downloads will "
+	      "be canceled. Are you sure that you wish to proceed?"));
+	mb.setWindowIcon(windowIcon());
+	mb.setWindowModality(Qt::WindowModal);
+	mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+	if(mb.exec() != QMessageBox::Yes)
+	  return;
+      }
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   bool state = false;
@@ -94,7 +121,7 @@ void dooble_clear_items::slot_clear_items(void)
 
   if(m_ui.download_history->isChecked())
     {
-      dooble_downloads::purge();
+      dooble::s_downloads->purge();
       state = true;
     }
 
@@ -120,4 +147,32 @@ void dooble_clear_items::slot_clear_items(void)
 
   if(state)
     emit containers_cleared();
+}
+
+void dooble_clear_items::slot_download_history_toggled(bool state)
+{
+  if(state)
+    m_timer.start();
+  else
+    {
+      m_timer.stop();
+      slot_timeout();
+    }
+}
+
+void dooble_clear_items::slot_timeout(void)
+{
+  if(dooble::s_downloads->is_finished())
+    {
+      m_ui.download_history->setIcon(QIcon());
+      m_ui.download_history->setIconSize(QSize(0, 0));
+      m_ui.download_history->setToolTip("");
+    }
+  else
+    {
+      m_ui.download_history->setIcon
+	(QIcon(":/Miscellaneous/certificate_warning.png"));
+      m_ui.download_history->setIconSize(QSize(16, 16));
+      m_ui.download_history->setToolTip(tr("Active downloads exist."));
+    }
 }

@@ -55,6 +55,7 @@ class dooble_downloads_item: public QWidget
   QUrl url(void) const;
   bool is_finished(void) const;
   qintptr oid(void) const;
+  void cancel(void);
 
  private:
   QTime m_last_time;

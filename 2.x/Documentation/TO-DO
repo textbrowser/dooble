@@ -72,12 +72,12 @@ Completed Items
 67.    Cookie domains without child cookies.
 68.    Accepted / Blocked Domains exceptions. New tool button right of
        Downloads; exception of host or as-is link, A / B preferences.
+69.    Abort downloads if download items are purged.
 
 Remaining Items
 
 1.     Favorites in History.
 2.     Remove m_history objects in the purge() method.
-3.     Abort downloads if download items are purged.
 
 Unknown Items
 

@@ -149,6 +149,12 @@ qintptr dooble_downloads_item::oid(void) const
   return m_oid;
 }
 
+void dooble_downloads_item::cancel(void)
+{
+  if(m_download)
+    m_download->cancel();
+}
+
 void dooble_downloads_item::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());

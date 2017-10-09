@@ -118,7 +118,7 @@ void dooble_downloads::abort(void)
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
-	downloads_item->deleteLater();
+	downloads_item->cancel();
     }
 }
 
@@ -174,6 +174,19 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
 
 void dooble_downloads::purge(void)
 {
+  abort();
+
+  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
+    {
+      dooble_downloads_item *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(downloads_item)
+	downloads_item->deleteLater();
+
+      m_ui.table->removeRow(0);
+    }
+
   QString database_name("dooble_downloads");
 
   {

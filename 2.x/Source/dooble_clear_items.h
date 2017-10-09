@@ -29,6 +29,7 @@
 #define dooble_clear_items_h
 
 #include <QDialog>
+#include <QTimer>
 
 #include "ui_dooble_clear_items.h"
 
@@ -40,11 +41,14 @@ class dooble_clear_items: public QDialog
   dooble_clear_items(QWidget *parent);
 
  private:
+  QTimer m_timer;
   Ui_dooble_clear_items m_ui;
 
  private slots:
   void slot_check_box_toggled(bool state);
   void slot_clear_items(void);
+  void slot_download_history_toggled(bool state);
+  void slot_timeout(void);
 
  signals:
   void containers_cleared(void);

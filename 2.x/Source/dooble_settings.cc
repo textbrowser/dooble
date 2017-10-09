@@ -498,10 +498,10 @@ void dooble_settings::prepare_proxy(bool save)
 void dooble_settings::purge_database_data(void)
 {
   dooble::s_accepted_or_blocked_domains->purge();
+  dooble::s_downloads->purge();
   dooble::s_history->purge();
   dooble_certificate_exceptions_menu_widget::purge();
   dooble_cookies::purge();
-  dooble_downloads::purge();
   dooble_favicons::purge();
   purge_javascript_block_popup_exceptions();
   slot_remove_all_javascript_block_popup_exceptions();
