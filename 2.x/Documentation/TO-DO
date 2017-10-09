@@ -76,6 +76,7 @@ Completed Items
 Remaining Items
 
 1.     Favorites in History.
+2.     Remove m_history objects in the purge() method.
 
 Unknown Items
 
