@@ -339,13 +339,6 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
-  if(event)
-    if(!can_exit())
-      {
-	event->ignore();
-	return;
-      }
-
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   if(!m_is_javascript_dialog)
@@ -364,6 +357,16 @@ void dooble::closeEvent(QCloseEvent *event)
 	return;
       }
 
+  QApplication::restoreOverrideCursor();
+
+  if(event)
+    if(!can_exit())
+      {
+	event->ignore();
+	return;
+      }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   s_cookies_window->close();
   s_downloads->abort();
   s_history->abort();
