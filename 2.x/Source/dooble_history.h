@@ -30,8 +30,8 @@
 
 #include <QAtomicInteger>
 #include <QFuture>
+#include <QReadWriteLock>
 #include <QTimer>
-#include <QVariant>
 #include <QWebEngineHistoryItem>
 
 class dooble_history: public QObject
@@ -65,6 +65,7 @@ class dooble_history: public QObject
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<int, QVariant> > m_history;
   QTimer m_purge_timer;
+  mutable QReadWriteLock m_history_mutex;
   static QAtomicInteger<quintptr> s_db_id;
   void purge(const QByteArray &authentication_key,
 	     const QByteArray &encryption_key);

@@ -50,7 +50,7 @@ dooble_history::dooble_history(void):QObject()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_purge_timer_timeout(void)));
-  m_purge_timer.start(15000);
+  m_purge_timer.start(1000);
 }
 
 dooble_history::~dooble_history()
@@ -60,20 +60,26 @@ dooble_history::~dooble_history()
 
 QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
 {
+  QReadLocker locker(&m_history_mutex);
+
   return m_history;
 }
 
 QList<QPair<QIcon, QString> > dooble_history::urls(void) const
 {
-  QHashIterator<QUrl, QHash<int, QVariant> > it(m_history);
   QList<QPair<QIcon, QString> > list;
+  QReadLocker locker(&m_history_mutex);
 
-  while(it.hasNext())
-    {
-      it.next();
-      list << QPair<QIcon, QString>
-	(it.value().value(FAVICON).value<QIcon> (), it.key().toString());
-    }
+  {
+    QHashIterator<QUrl, QHash<int, QVariant> > it(m_history);
+
+    while(it.hasNext())
+      {
+	it.next();
+	list << QPair<QIcon, QString>
+	  (it.value().value(FAVICON).value<QIcon> (), it.key().toString());
+      }
+  }
 
   return list;
 }
@@ -107,7 +113,7 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	   dooble_settings::setting("block_cipher_type").toString());
 
 	query.setForwardOnly(true);
-	query.exec("SELECT last_visited, url_digest "
+	query.exec("SELECT last_visited, url, url_digest "
 		   "FROM dooble_history WHERE favorite = ?");
 	query.addBindValue(cryptography.hmac(QByteArray("false")).toBase64());
 
@@ -136,8 +142,21 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 		    delete_query.prepare
 		      ("DELETE FROM dooble_history WHERE url_digest = ?");
-		    delete_query.addBindValue(query.value(1));
-		    delete_query.exec();
+		    delete_query.addBindValue(query.value(2));
+
+		    if(delete_query.exec())
+		      {
+			bytes = QByteArray::fromBase64
+			  (query.value(1).toByteArray());
+			bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
+
+			if(!bytes.isEmpty())
+			  {
+			    QWriteLocker locker(&m_history_mutex);
+
+			    m_history.remove(QUrl(bytes));
+			  }
+		      }
 		  }
 	      }
 	  }
@@ -151,7 +170,11 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 void dooble_history::purge(void)
 {
-  m_history.clear();
+  {
+    QWriteLocker locker(&m_history_mutex);
+
+    m_history.clear();
+  }
 
   QString database_name(QString("dooble_history_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
@@ -180,23 +203,29 @@ void dooble_history::purge(void)
 
 void dooble_history::remove_item(const QUrl &url)
 {
+  QWriteLocker locker(&m_history_mutex);
+
   m_history.remove(url);
 }
 
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 {
-  if(m_history.contains(url))
-    {
-      QHash<int, QVariant> hash(m_history.value(url));
+  {
+    QWriteLocker locker(&m_history_mutex);
 
-      if(icon.isNull())
-	hash[FAVICON] = dooble_favicons::icon(url);
-      else
-	hash[FAVICON] = icon;
+    if(m_history.contains(url))
+      {
+	QHash<int, QVariant> hash(m_history.value(url));
 
-      m_history[url] = hash;
-      emit icon_updated(hash[FAVICON].value<QIcon> (), url);
-    }
+	if(icon.isNull())
+	  hash[FAVICON] = dooble_favicons::icon(url);
+	else
+	  hash[FAVICON] = icon;
+
+	m_history[url] = hash;
+	emit icon_updated(hash[FAVICON].value<QIcon> (), url);
+      }
+  }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -257,6 +286,8 @@ void dooble_history::save_item(const QIcon &icon,
 {
   if(item.isValid())
     {
+      QWriteLocker locker(&m_history_mutex);
+
       if(!m_history.contains(item.url()))
 	{
 	  QHash<int, QVariant> hash;
@@ -359,10 +390,15 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  ok = false;
 
-	query.addBindValue
-	  (dooble::s_cryptography->
-	   hmac(QByteArray::number(m_history.value(item.url()).
-				   value(FAVORITE, 0).toInt())).toBase64());
+	{
+	  QReadLocker locker(&m_history_mutex);
+
+	  query.addBindValue
+	    (dooble::s_cryptography->
+	     hmac(m_history.value(item.url()).value(FAVORITE, false).toBool() ?
+		  QByteArray("true") : QByteArray("false")).toBase64());
+	}
+
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (item.lastVisited().toString(Qt::ISODate).toUtf8());
 
@@ -371,9 +407,13 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  ok = false;
 
-	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (QByteArray::number(m_history.value(item.url()).
-			      value(NUMBER_OF_VISITS, 0).toULongLong()));
+	{
+	  QReadLocker locker(&m_history_mutex);
+
+	  bytes = dooble::s_cryptography->encrypt_then_mac
+	    (QByteArray::number(m_history.value(item.url()).
+				value(NUMBER_OF_VISITS, 0).toULongLong()));
+	}
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -415,6 +455,8 @@ void dooble_history::save_item(const QIcon &icon,
 
 void dooble_history::slot_containers_cleared(void)
 {
+  QWriteLocker locker(&m_history_mutex);
+
   m_history.clear();
 }
 
@@ -427,7 +469,12 @@ void dooble_history::slot_populate(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_history.clear();
+
+  {
+    QWriteLocker locker(&m_history_mutex);
+
+    m_history.clear();
+  }
 
   QString database_name(QString("dooble_history_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
@@ -526,6 +573,9 @@ void dooble_history::slot_populate(void)
 	      hash[URL] = QUrl::fromEncoded(url);
 	      hash[URL_DIGEST] = QByteArray::fromBase64
 		(query.value(6).toByteArray());
+
+	      QWriteLocker locker(&m_history_mutex);
+
 	      m_history[hash[URL].toUrl()] = hash;
 	    }
       }
