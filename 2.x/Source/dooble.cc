@@ -1421,12 +1421,14 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 	  else
 	    {
 	      s_downloads->activateWindow();
+	      s_downloads->raise();
 	      s_downloads->showNormal();
 	    }
 	}
       else if(!s_downloads->isVisible())
 	{
 	  s_downloads->activateWindow();
+	  s_downloads->raise();
 	  s_downloads->showNormal();
 	}
 
