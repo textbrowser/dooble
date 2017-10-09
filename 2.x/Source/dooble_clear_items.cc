@@ -27,6 +27,7 @@
 
 #include <QWebEngineProfile>
 
+#include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_clear_items.h"
@@ -75,7 +76,7 @@ void dooble_clear_items::slot_clear_items(void)
 
   if(m_ui.accepted_blocked_domains->isChecked())
     {
-      dooble_accepted_or_blocked_domains::purge();
+      dooble::s_accepted_or_blocked_domains->purge();
       state = true;
     }
 
@@ -105,7 +106,7 @@ void dooble_clear_items::slot_clear_items(void)
 
   if(m_ui.history->isChecked())
     {
-      dooble_history::purge();
+      dooble::s_history->purge();
       state = true;
     }
 

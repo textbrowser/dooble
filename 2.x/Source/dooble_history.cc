@@ -101,15 +101,18 @@ void dooble_history::purge(const QByteArray &authentication_key,
     if(db.open())
       {
 	QSqlQuery query(db);
+	dooble_cryptography cryptography
+	  (authentication_key,
+	   encryption_key,
+	   dooble_settings::setting("block_cipher_type").toString());
 
 	query.setForwardOnly(true);
+	query.exec("SELECT last_visited, url_digest "
+		   "FROM dooble_history WHERE favorite = ?");
+	query.addBindValue(cryptography.hmac(QByteArray("false")).toBase64());
 
-	if(query.exec("SELECT last_visited, url_digest FROM dooble_history"))
+	if(query.exec())
 	  {
-	    dooble_cryptography cryptography
-	      (authentication_key,
-	       encryption_key,
-	       dooble_settings::setting("block_cipher_type").toString());
 	    int days = dooble_settings::setting
 	      ("browsing_history_days").toInt();
 
@@ -148,6 +151,8 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 void dooble_history::purge(void)
 {
+  m_history.clear();
+
   QString database_name(QString("dooble_history_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
 
@@ -261,7 +266,9 @@ void dooble_history::save_item(const QIcon &icon,
 	  else
 	    hash[FAVICON] = icon;
 
+	  hash[FAVORITE] = false;
 	  hash[LAST_VISITED] = item.lastVisited();
+	  hash[NUMBER_OF_VISITS] = 1ULL;
 	  hash[TITLE] = item.title();
 	  hash[URL] = item.url();
 
@@ -273,7 +280,14 @@ void dooble_history::save_item(const QIcon &icon,
 	  emit new_item(hash[FAVICON].value<QIcon> (), item);
 	}
       else
-	emit item_updated(icon, item);
+	{
+	  QHash<int, QVariant> hash(m_history.value(item.url()));
+
+	  hash[NUMBER_OF_VISITS] =
+	    hash.value(NUMBER_OF_VISITS, 1).toULongLong() + 1;
+	  m_history[item.url()] = hash;
+	  emit item_updated(icon, item);
+	}
     }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -299,13 +313,22 @@ void dooble_history::save_item(const QIcon &icon,
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
 		   "favicon BLOB DEFAULT NULL, "
+		   "favorite TEXT NOT NULL, "
 		   "last_visited TEXT NOT NULL, "
+		   "number_of_visits TEXT NOT NULL, "
 		   "title TEXT NOT NULL, "
 		   "url TEXT NOT NULL, "
 		   "url_digest TEXT PRIMARY KEY NOT NULL)");
-	query.prepare("INSERT OR REPLACE INTO dooble_history "
-		      "(favicon, last_visited, title, url, url_digest) "
-		      "VALUES (?, ?, ?, ?, ?)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_history "
+	   "(favicon, "
+	   "favorite, "
+	   "last_visited, "
+	   "number_of_visits, "
+	   "title, "
+	   "url, "
+	   "url_digest) "
+	   "VALUES (?, ?, ?, ?, ?, ?, ?)");
 
 	QBuffer buffer;
 	QByteArray bytes;
@@ -336,8 +359,21 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  ok = false;
 
+	query.addBindValue
+	  (dooble::s_cryptography->
+	   hmac(QByteArray::number(m_history.value(item.url()).
+				   value(FAVORITE, 0).toInt())).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (item.lastVisited().toString(Qt::ISODate).toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (QByteArray::number(m_history.value(item.url()).
+			      value(NUMBER_OF_VISITS, 0).toULongLong()));
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -409,7 +445,13 @@ void dooble_history::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT favicon, last_visited, title, url, url_digest "
+	if(query.exec("SELECT favicon, "   // 0
+		      "favorite, "         // 1
+		      "last_visited, "     // 2
+		      "number_of_visits, " // 3
+		      "title, "            // 4
+		      "url, "              // 5
+		      "url_digest "        // 6
 		      "FROM dooble_history"))
 	  while(query.next())
 	    {
@@ -433,42 +475,57 @@ void dooble_history::slot_populate(void)
 		  buffer.close();
 		}
 
-	      QByteArray data1
-		(QByteArray::fromBase64(query.value(1).toByteArray()));
-
-	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
-
-	      if(data1.isEmpty())
-		continue;
-
-	      QByteArray data2
+	      QByteArray last_visited
 		(QByteArray::fromBase64(query.value(2).toByteArray()));
 
-	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+	      last_visited = dooble::s_cryptography->mac_then_decrypt
+		(last_visited);
 
-	      if(data2.isEmpty())
+	      if(last_visited.isEmpty())
 		continue;
 
-	      QByteArray data3
+	      QByteArray number_of_visits
 		(QByteArray::fromBase64(query.value(3).toByteArray()));
 
-	      data3 = dooble::s_cryptography->mac_then_decrypt(data3);
+	      number_of_visits = dooble::s_cryptography->mac_then_decrypt
+		(number_of_visits);
 
-	      if(data3.isEmpty())
+	      if(number_of_visits.isEmpty())
+		continue;
+
+	      QByteArray title
+		(QByteArray::fromBase64(query.value(4).toByteArray()));
+
+	      title = dooble::s_cryptography->mac_then_decrypt(title);
+
+	      if(title.isEmpty())
+		continue;
+
+	      QByteArray url
+		(QByteArray::fromBase64(query.value(5).toByteArray()));
+
+	      url = dooble::s_cryptography->mac_then_decrypt(url);
+
+	      if(url.isEmpty())
 		continue;
 
 	      if(icon.isNull())
-		icon = dooble_favicons::icon(QUrl::fromEncoded(data3));
+		icon = dooble_favicons::icon(QUrl::fromEncoded(url));
 
 	      QHash<int, QVariant> hash;
 
 	      hash[FAVICON] = icon;
+	      hash[FAVORITE] = dooble_cryptography::memcmp
+		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
+		 query.value(1).toByteArray());
 	      hash[LAST_VISITED] = QDateTime::fromString
-		(data1.constData(), Qt::ISODate);
-	      hash[TITLE] = data2.constData();
-	      hash[URL] = QUrl::fromEncoded(data3);
+		(last_visited.constData(), Qt::ISODate);
+	      hash[NUMBER_OF_VISITS] = qMax
+		(1ULL, number_of_visits.toULongLong());
+	      hash[TITLE] = title.constData();
+	      hash[URL] = QUrl::fromEncoded(url);
 	      hash[URL_DIGEST] = QByteArray::fromBase64
-		(query.value(4).toByteArray());
+		(query.value(6).toByteArray());
 	      m_history[hash[URL].toUrl()] = hash;
 	    }
       }

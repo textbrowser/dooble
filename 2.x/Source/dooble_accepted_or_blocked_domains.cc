@@ -412,6 +412,9 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
 void dooble_accepted_or_blocked_domains::purge(void)
 {
+  m_domains.clear();
+  m_exceptions.clear();
+
   QString database_name("dooble_accepted_or_blocked_domains");
 
   {

@@ -41,9 +41,9 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   dooble_accepted_or_blocked_domains(void);
   bool contains(const QString &domain) const;
   bool exception(const QUrl &url) const;
-  static void purge(void);
   void accept_or_block_domain(const QString &domain);
   void new_exception(const QString &url);
+  void purge(void);
 
  public slots:
   void show(void);

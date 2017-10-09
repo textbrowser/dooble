@@ -42,19 +42,20 @@ class dooble_history: public QObject
   enum HistoryItem
   {
     FAVICON = 0,
+    FAVORITE,
     LAST_VISITED,
+    NUMBER_OF_VISITS,
     TITLE,
     URL,
-    URL_DIGEST,
-    VISIT_COUNT
+    URL_DIGEST
   };
 
  dooble_history(void);
  ~dooble_history();
  QHash<QUrl, QHash<int, QVariant> > history(void) const;
  QList<QPair<QIcon, QString> > urls(void) const;
- static void purge(void);
  void abort(void);
+ void purge(void);
  void remove_item(const QUrl &url);
  void save_favicon(const QIcon &icon, const QUrl &url);
  void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
