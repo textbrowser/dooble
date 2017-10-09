@@ -50,7 +50,7 @@ dooble_history::dooble_history(void):QObject()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_purge_timer_timeout(void)));
-  m_purge_timer.start(1000);
+  m_purge_timer.start(15000);
 }
 
 dooble_history::~dooble_history()
@@ -489,6 +489,7 @@ void dooble_history::slot_populate(void)
     if(db.open())
       {
 	QSqlQuery query(db);
+	int days = dooble_settings::setting("browsing_history_days").toInt();
 
 	query.setForwardOnly(true);
 
@@ -531,6 +532,25 @@ void dooble_history::slot_populate(void)
 	      if(last_visited.isEmpty())
 		continue;
 
+	      bool is_favorite = dooble_cryptography::memcmp
+		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
+		 query.value(1).toByteArray());
+
+	      if(!is_favorite)
+		{
+		  QDateTime dateTime
+		    (QDateTime::
+		     fromString(last_visited.constData(), Qt::ISODate));
+		  QDateTime now(QDateTime::currentDateTime());
+
+		  if(dateTime.daysTo(now) >= qAbs(days))
+		    /*
+		    ** Ignore expired entries, unless the entry is a favorite.
+		    */
+
+		    continue;
+		}
+
 	      QByteArray number_of_visits
 		(QByteArray::fromBase64(query.value(3).toByteArray()));
 
@@ -562,9 +582,7 @@ void dooble_history::slot_populate(void)
 	      QHash<int, QVariant> hash;
 
 	      hash[FAVICON] = icon;
-	      hash[FAVORITE] = dooble_cryptography::memcmp
-		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
-		 query.value(1).toByteArray());
+	      hash[FAVORITE] = is_favorite;
 	      hash[LAST_VISITED] = QDateTime::fromString
 		(last_visited.constData(), Qt::ISODate);
 	      hash[NUMBER_OF_VISITS] = qMax
