@@ -55,6 +55,21 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 			    setting("history_window_splitter_state").
 			    toByteArray()));
   m_ui.table->sortItems(0, Qt::AscendingOrder);
+  m_ui.table->horizontalHeader()->resizeSection
+    (0,
+     qMax(dooble_settings::setting("history_horizontal_header_section_size_0").
+	  toInt(),
+	  m_ui.table->horizontalHeader()->minimumSectionSize()));
+  m_ui.table->horizontalHeader()->resizeSection
+    (1,
+     qMax(dooble_settings::setting("history_horizontal_header_section_size_1").
+	  toInt(),
+	  m_ui.table->horizontalHeader()->minimumSectionSize()));
+  m_ui.table->horizontalHeader()->resizeSection
+    (2,
+     qMax(dooble_settings::setting("history_horizontal_header_section_size_2").
+	  toInt(),
+	  m_ui.table->horizontalHeader()->minimumSectionSize()));
   connect(dooble::s_application,
 	  SIGNAL(containers_cleared(void)),
 	  this,
@@ -96,6 +111,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_item_double_clicked(QTableWidgetItem *)));
+  connect(m_ui.table->horizontalHeader(),
+	  SIGNAL(sectionResized(int, int, int)),
+	  this,
+	  SLOT(slot_horizontal_header_section_resized(int, int, int)));
   connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
@@ -381,6 +400,17 @@ void dooble_history_window::slot_find(void)
 {
   m_ui.search->selectAll();
   m_ui.search->setFocus();
+}
+
+void dooble_history_window::slot_horizontal_header_section_resized
+(int logicalIndex, int oldSize, int newSize)
+{
+  Q_UNUSED(oldSize);
+
+  if(logicalIndex >= 0)
+    dooble_settings::set_setting
+      (QString("history_horizontal_header_section_size_%1").arg(logicalIndex),
+       newSize);
 }
 
 void dooble_history_window::slot_icon_updated(const QIcon &icon,

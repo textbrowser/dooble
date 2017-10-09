@@ -62,6 +62,8 @@ class dooble_history_window: public QMainWindow
   void slot_copy_location(void);
   void slot_delete_pages(void);
   void slot_find(void);
+  void slot_horizontal_header_section_resized
+    (int logicalIndex, int oldSize, int newSize);
   void slot_icon_updated(const QIcon &icon, const QUrl &url);
   void slot_item_double_clicked(QTableWidgetItem *item);
   void slot_item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
