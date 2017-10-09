@@ -347,7 +347,7 @@ void dooble_downloads_item::slot_finished(void)
     {
       if(m_download->state() == QWebEngineDownloadItem::DownloadCancelled)
 	m_ui.information->setText
-	  (tr("Cancelled - %1").arg(m_download->url().host()));
+	  (tr("Canceled - %1").arg(m_download->url().host()));
       else if(m_download->state() == QWebEngineDownloadItem::DownloadCompleted)
 	m_ui.information->setText
 	  (tr("Completed - %1 - %2").
