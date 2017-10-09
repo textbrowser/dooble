@@ -1375,7 +1375,10 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
     return;
   else if(s_downloads->contains(download))
     {
-      download->cancel();
+      /*
+      ** Do not cancel the download.
+      */
+
       return;
     }
 
