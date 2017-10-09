@@ -1381,6 +1381,8 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
       return;
     }
+  else if(download->state() == QWebEngineDownloadItem::DownloadCancelled)
+    return;
 
   QFileDialog dialog(this);
   QFileInfo fileInfo(download->path());
