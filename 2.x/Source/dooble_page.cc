@@ -41,6 +41,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
+#include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
@@ -86,6 +87,14 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
     m_view = new dooble_web_engine_view(web_engine_profile, this);
 
   m_ui.frame->layout()->addWidget(m_view);
+  connect(dooble::s_downloads,
+	  SIGNAL(finished(void)),
+	  this,
+	  SLOT(slot_downloads_finished(void)));
+  connect(dooble::s_downloads,
+	  SIGNAL(started(void)),
+	  this,
+	  SLOT(slot_downloads_started(void)));
   connect(dooble::s_history,
 	  SIGNAL(populated(void)),
 	  m_ui.address,
@@ -440,8 +449,14 @@ void dooble_page::prepare_icons(void)
   m_ui.accepted_or_blocked->setIcon
     (QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
   m_ui.backward->setIcon(QIcon(QString(":/%1/36/backward.png").arg(icon_set)));
-  m_ui.downloads->setIcon
-    (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+
+  if(dooble::s_downloads->is_finished())
+    m_ui.downloads->setIcon
+      (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+  else
+    m_ui.downloads->setIcon
+      (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
+
   m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
     (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
@@ -946,6 +961,30 @@ void dooble_page::slot_dooble_credentials_authenticated(bool state)
 
 void dooble_page::slot_dooble_credentials_created(void)
 {
+}
+
+void dooble_page::slot_downloads_finished(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  if(dooble::s_downloads->is_finished())
+    m_ui.downloads->setIcon
+      (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+  else
+    m_ui.downloads->setIcon
+      (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
+}
+
+void dooble_page::slot_downloads_started(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  if(dooble::s_downloads->is_finished())
+    m_ui.downloads->setIcon
+      (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+  else
+    m_ui.downloads->setIcon
+      (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
 }
 
 void dooble_page::slot_escape(void)

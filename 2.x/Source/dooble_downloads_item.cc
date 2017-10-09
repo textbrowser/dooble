@@ -364,6 +364,7 @@ void dooble_downloads_item::slot_finished(void)
     m_ui.information->setText(tr("Interrupted"));
 
   record_information();
+  emit finished();
 }
 
 void dooble_downloads_item::slot_settings_applied(void)

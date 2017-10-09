@@ -228,10 +228,15 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
   dooble_downloads_item *downloads_item = new dooble_downloads_item
     (download, -1, this);
 
+  connect(downloads_item,
+	  SIGNAL(finished(void)),
+	  this,
+	  SLOT(slot_download_finished(void)));
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
   m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
   m_ui.table->scrollToBottom();
+  emit started();
 }
 
 void dooble_downloads::remove_entry(qintptr oid)
@@ -389,6 +394,11 @@ void dooble_downloads::slot_find(void)
   m_ui.search->setFocus();
 }
 
+void dooble_downloads::slot_download_finished(void)
+{
+  emit finished();
+}
+
 void dooble_downloads::slot_open_download_page(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -514,6 +524,10 @@ void dooble_downloads::slot_populate(void)
 	      dooble_downloads_item *downloads_item = new dooble_downloads_item
 		(file_name, information, url, oid, this);
 
+	      connect(downloads_item,
+		      SIGNAL(finished(void)),
+		      this,
+		      SLOT(slot_download_finished(void)));
 	      m_ui.table->setCellWidget(row, 0, downloads_item);
 	      m_ui.table->resizeRowToContents(row);
 	      row += 1;

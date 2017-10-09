@@ -79,6 +79,9 @@ class dooble_downloads_item: public QWidget
 #endif
   void slot_finished(void);
   void slot_settings_applied(void);
+
+ signals:
+  void finished(void);
 };
 
 #endif

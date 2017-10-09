@@ -111,6 +111,8 @@ class dooble_page: public QWidget
   void slot_create_dialog_request(dooble_web_engine_view *view);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_dooble_credentials_created(void);
+  void slot_downloads_finished(void);
+  void slot_downloads_started(void);
   void slot_escape(void);
   void slot_find_next(void);
   void slot_find_previous(void);

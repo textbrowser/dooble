@@ -71,6 +71,7 @@ class dooble_downloads: public QMainWindow
   void slot_copy_download_location(void);
   void slot_delete_row(void);
   void slot_download_destroyed(void);
+  void slot_download_finished(void);
   void slot_download_path_inspection_timer_timeout(void);
   void slot_find(void);
   void slot_open_download_page(void);
@@ -80,7 +81,9 @@ class dooble_downloads: public QMainWindow
   void slot_show_context_menu(const QPoint &point);
 
  signals:
+  void finished(void);
   void open_url(const QUrl &url);
+  void started(void);
 };
 
 #endif
