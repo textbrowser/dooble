@@ -304,16 +304,6 @@
         <widget class="QWidget" name="display_page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QCheckBox" name="auto_hide_tab_bar">
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A tab bar will be hidden if its parent tab widget contains only a single tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string>Auto-Hide Tab Bar</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="denote_private_widgets">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable special themes on some widgets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1414,7 +1404,6 @@
   <tabstop>cache_size</tabstop>
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
-  <tabstop>auto_hide_tab_bar</tabstop>
   <tabstop>denote_private_widgets</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>
