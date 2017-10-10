@@ -73,11 +73,11 @@ Completed Items
        Downloads; exception of host or as-is link, A / B preferences.
 69.    Abort downloads if download items are purged.
 70.    Remove m_history objects in the purge() method.
+71.    Save Page pop-up menu item.
 
 Remaining Items
 
 1.     Favorites in History.
-2.     Save Page pop-up menu item.
 
 Unknown Items
 
