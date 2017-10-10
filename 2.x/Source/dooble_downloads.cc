@@ -412,9 +412,14 @@ void dooble_downloads::slot_download_requested(QWebEngineDownloadItem *download)
       return;
     }
 
-  QFileInfo file_info(download->path());
+  if(download->state() == QWebEngineDownloadItem::DownloadRequested)
+    {
+      QFileInfo file_info(download->path());
 
-  download->setPath(download_path() + QDir::separator() + file_info.fileName());
+      download->setPath
+	(download_path() + QDir::separator() + file_info.fileName());
+    }
+
   record_download(download);
   download->accept();
 }
