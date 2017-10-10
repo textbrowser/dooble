@@ -73,6 +73,7 @@ class dooble_downloads: public QMainWindow
   void slot_download_destroyed(void);
   void slot_download_finished(void);
   void slot_download_path_inspection_timer_timeout(void);
+  void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_find(void);
   void slot_open_download_page(void);
   void slot_populate(void);

@@ -594,8 +594,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
-               <height>587</height>
+               <width>415</width>
+               <height>651</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1084,7 +1084,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
+               <width>270</width>
                <height>700</height>
               </rect>
              </property>
@@ -1353,6 +1353,9 @@
              <widget class="QCheckBox" name="save_geometry">
               <property name="text">
                <string>Save Geometry</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

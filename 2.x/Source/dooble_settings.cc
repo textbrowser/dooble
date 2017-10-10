@@ -157,6 +157,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["pin_downloads_window"] = true;
   s_settings["pin_history_window"] = true;
   s_settings["pin_settings_window"] = true;
+  s_settings["save_geometry"] = true;
   s_settings["status_bar_visible"] = true;
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
@@ -684,7 +685,7 @@ void dooble_settings::restore(void)
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.proxy_user->setCursorPosition(0);
   m_ui.save_geometry->setChecked
-    (s_settings.value("save_geometry", false).toBool());
+    (s_settings.value("save_geometry", true).toBool());
   m_ui.theme->setCurrentIndex
     (qBound(0,
 	    s_settings.value("icon_set_index", 2).toInt(),

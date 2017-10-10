@@ -27,7 +27,6 @@
 
 #include <QDialog>
 #include <QKeyEvent>
-#include <QFileDialog>
 #include <QMenu>
 #include <QMessageBox>
 #include <QNetworkCookie>
@@ -74,6 +73,8 @@ QPointer<dooble_history_window> dooble::s_history_window;
 QPointer<dooble_settings> dooble::s_settings;
 QPointer<dooble_web_engine_url_request_interceptor>
 dooble::s_url_request_interceptor;
+
+static QSize s_vga_size = QSize(640, 480);
 
 dooble::dooble(QWidget *widget):QMainWindow()
 {
@@ -706,6 +707,11 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SLOT(slot_create_window(dooble_web_engine_view *)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
+
+  /*
+  ** Private windows.
+  */
+
   connect(page,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  s_application,
@@ -1320,7 +1326,7 @@ void dooble::slot_create_dialog(dooble_web_engine_view *view)
 
   d->m_is_javascript_dialog = true;
   d->m_ui.tab->setTabBarAutoHide(true);
-  d->resize(640, 480); // VGA
+  d->resize(s_vga_size);
   d->showNormal();
   dooble_ui_utilities::center_window_widget(this, d);
 }
@@ -1347,7 +1353,7 @@ void dooble::slot_decouple_tab(int index)
       m_ui.tab->removeTab(index);
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
       main_window->setParent(0);
-      main_window->resize(main_window->sizeHint());
+      main_window->resize(s_vga_size);
       main_window->show();
       dooble_ui_utilities::center_window_widget(this, main_window);
       prepare_tab_shortcuts();
@@ -1371,6 +1377,23 @@ void dooble::slot_dooble_credentials_authenticated(bool state)
 
 void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 {
+  /*
+  ** Method is for private windows only. Private windows have separate
+  ** WebEngine profiles.
+  */
+
+  if(!m_is_private)
+    {
+      if(download &&
+	 download->state() != QWebEngineDownloadItem::DownloadInProgress)
+	return;
+
+      if(m_ui.tab->indexOf(s_downloads) >= 0)
+	m_ui.tab->setCurrentWidget(s_downloads);
+
+      return;
+    }
+
   if(!download)
     return;
   else if(s_downloads->contains(download))
@@ -1381,63 +1404,45 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
       return;
     }
-  else if(download->state() == QWebEngineDownloadItem::DownloadCancelled)
-    return;
 
-  QFileDialog dialog(this);
-  QFileInfo fileInfo(download->path());
+  QFileInfo file_info(download->path());
 
-  dialog.setAcceptMode(QFileDialog::AcceptSave);
-  dialog.setConfirmOverwrite(true);
-  dialog.setDirectory(s_downloads->download_path());
-  dialog.setFileMode(QFileDialog::AnyFile);
-  dialog.setLabelText(QFileDialog::Accept, tr("Save"));
-  dialog.setWindowTitle(tr("Dooble: Download File"));
-  dialog.selectFile(fileInfo.fileName());
+  download->setPath
+    (s_downloads->download_path() + QDir::separator() + file_info.fileName());
+  s_downloads->record_download(download);
+  download->accept();
 
-  if(dialog.exec() == QDialog::Accepted)
+  if(dooble_settings::setting("pin_downloads_window").toBool())
     {
-      if(download->state() == QWebEngineDownloadItem::DownloadRequested)
-	download->setPath(dialog.selectedFiles().value(0));
-
-      s_downloads->record_download(download);
-
-      if(dooble_settings::setting("pin_downloads_window").toBool())
+      if(!s_downloads->isVisible())
 	{
-	  if(!s_downloads->isVisible())
+	  if(m_ui.tab->indexOf(s_downloads) == -1)
 	    {
-	      if(m_ui.tab->indexOf(s_downloads) == -1)
-		{
-		  m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
-		  m_ui.tab->setTabToolTip
-		    (m_ui.tab->count() - 1, s_downloads->windowTitle());
-		  m_ui.tab->setTabIcon
-		    (m_ui.tab->count() - 1, s_downloads->windowIcon());
-		  prepare_tab_icons();
-		}
+	      m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	      m_ui.tab->setTabToolTip
+		(m_ui.tab->count() - 1, s_downloads->windowTitle());
+	      m_ui.tab->setTabIcon
+		(m_ui.tab->count() - 1, s_downloads->windowIcon());
+	      prepare_tab_icons();
+	    }
 
-	      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
-	      m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
-	      prepare_tab_shortcuts();
-	    }
-	  else
-	    {
-	      s_downloads->activateWindow();
-	      s_downloads->raise();
-	      s_downloads->showNormal();
-	    }
+	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
+	  prepare_tab_shortcuts();
 	}
-      else if(!s_downloads->isVisible())
+      else
 	{
 	  s_downloads->activateWindow();
 	  s_downloads->raise();
 	  s_downloads->showNormal();
 	}
-
-      download->accept();
     }
-  else
-    download->cancel();
+  else if(!s_downloads->isVisible())
+    {
+      s_downloads->activateWindow();
+      s_downloads->raise();
+      s_downloads->showNormal();
+    }
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)
@@ -1827,8 +1832,7 @@ void dooble::slot_show_downloads(void)
   s_downloads->showNormal();
 
   if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget
-      (this, s_downloads);
+    dooble_ui_utilities::center_window_widget(this, s_downloads);
 
   s_downloads->activateWindow();
   s_downloads->raise();

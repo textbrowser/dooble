@@ -34,6 +34,7 @@
 #include <QSqlRecord>
 #include <QStandardPaths>
 #include <QWebEngineDownloadItem>
+#include <QWebEngineProfile>
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
@@ -55,6 +56,10 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
       (QStandardPaths::
        standardLocations(QStandardPaths::DesktopLocation).value(0));
 
+  connect(QWebEngineProfile::defaultProfile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   connect(&m_download_path_inspection_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -125,6 +130,7 @@ void dooble_downloads::abort(void)
 void dooble_downloads::closeEvent(QCloseEvent *event)
 {
   QMainWindow::closeEvent(event);
+  save_settings();
 }
 
 void dooble_downloads::delete_selected(void)
@@ -388,15 +394,32 @@ void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
   m_ui.download_path->setPalette(palette);
 }
 
+void dooble_downloads::slot_download_finished(void)
+{
+  emit finished();
+}
+
+void dooble_downloads::slot_download_requested(QWebEngineDownloadItem *download)
+{
+  if(!download)
+    return;
+  else if(contains(download))
+    {
+      download->cancel();
+      return;
+    }
+
+  QFileInfo file_info(download->path());
+
+  download->setPath(download_path() + QDir::separator() + file_info.fileName());
+  record_download(download);
+  download->accept();
+}
+
 void dooble_downloads::slot_find(void)
 {
   m_ui.search->selectAll();
   m_ui.search->setFocus();
-}
-
-void dooble_downloads::slot_download_finished(void)
-{
-  emit finished();
 }
 
 void dooble_downloads::slot_open_download_page(void)
