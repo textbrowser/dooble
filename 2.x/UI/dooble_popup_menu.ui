@@ -213,19 +213,6 @@ Domains</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QToolButton" name="exit_dooble">
-       <property name="text">
-        <string>Exit Dooble</string>
-       </property>
-       <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonTextUnderIcon</enum>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1">
       <widget class="QToolButton" name="new_private_window">
        <property name="text">
@@ -253,6 +240,32 @@ Window</string>
        </property>
       </widget>
      </item>
+     <item row="3" column="2">
+      <widget class="QToolButton" name="exit_dooble">
+       <property name="text">
+        <string>Exit Dooble</string>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QToolButton" name="save_page">
+       <property name="text">
+        <string>Save Page</string>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
@@ -271,6 +284,7 @@ Window</string>
   <tabstop>print</tabstop>
   <tabstop>settings</tabstop>
   <tabstop>authenticate</tabstop>
+  <tabstop>save_page</tabstop>
   <tabstop>exit_dooble</tabstop>
  </tabstops>
  <resources>

@@ -143,6 +143,7 @@ void dooble_popup_menu::prepare_icons(void)
   m_ui.new_window->setIcon
     (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
   m_ui.print->setIcon(QIcon(QString(":/%1/48/print.png").arg(icon_set)));
+  m_ui.save_page->setIcon(QIcon(QString(":/%1/48/save.png").arg(icon_set)));
   m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
 
   int preferred_height = 50;
@@ -215,6 +216,11 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 
       if(d)
 	d->print_current_page();
+    }
+  else if(m_ui.save_page == sender())
+    {
+      emit save();
+      accept();
     }
   else if(m_ui.settings == sender())
     {

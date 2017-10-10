@@ -53,6 +53,7 @@ class dooble_popup_menu:public QDialog
  signals:
   void authenticate(void);
   void quit_dooble(void);
+  void save(void);
   void show_accepted_or_blocked_domains(void);
   void show_cookies(void);
   void show_history(void);
