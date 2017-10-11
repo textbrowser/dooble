@@ -144,7 +144,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
-  s_settings["auto_hide_tab_bar"] = true;
+  s_settings["auto_hide_tab_bar"] = false;
   s_settings["block_cipher_type"] = "AES-256";
   s_settings["block_cipher_type_index"] = 0;
   s_settings["browsing_history_days"] = 15;

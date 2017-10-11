@@ -104,6 +104,8 @@ dooble::dooble(QWidget *widget):QMainWindow()
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
       {
+	repaint();
+	QApplication::processEvents();
 	m_populate_containers_timer.setSingleShot(true);
 	m_populate_containers_timer.start(500);
 	s_containers_populated = true;
@@ -197,6 +199,8 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
       {
+	repaint();
+	QApplication::processEvents();
 	m_populate_containers_timer.setSingleShot(true);
 	m_populate_containers_timer.start(500);
 	s_containers_populated = true;
@@ -228,6 +232,8 @@ dooble::dooble(dooble_page *page):QMainWindow()
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
       {
+	repaint();
+	QApplication::processEvents();
 	m_populate_containers_timer.setSingleShot(true);
 	m_populate_containers_timer.start(500);
 	s_containers_populated = true;
@@ -259,6 +265,8 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
       {
+	repaint();
+	QApplication::processEvents();
 	m_populate_containers_timer.setSingleShot(true);
 	m_populate_containers_timer.start(500);
 	s_containers_populated = true;
