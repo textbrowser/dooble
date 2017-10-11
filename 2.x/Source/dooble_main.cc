@@ -234,6 +234,8 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, true);
+  QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::ScreenCaptureEnabled, false);
   dooble_thread::msleep(750);
   splash.finish(0);
   dooble::s_settings = new dooble_settings();

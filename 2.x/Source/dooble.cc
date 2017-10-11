@@ -157,6 +157,10 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	(QWebEngineSettings::PluginsEnabled,
 	 QWebEngineSettings::defaultSettings()->
 	 testAttribute(QWebEngineSettings::PluginsEnabled));
+      m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::ScreenCaptureEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::ScreenCaptureEnabled));
       connect(dooble::s_settings,
 	      SIGNAL(applied(void)),
 	      this,
