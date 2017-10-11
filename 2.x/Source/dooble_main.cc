@@ -201,6 +201,7 @@ int main(int argc, char *argv[])
     ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
 #endif
 
+  dooble::s_application->install_translator();
   splash.showMessage
     (QObject::tr("Purging temporary favicons."),
      Qt::AlignHCenter | Qt::AlignBottom);

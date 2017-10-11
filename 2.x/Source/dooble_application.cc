@@ -27,12 +27,16 @@
 
 #include <QFont>
 #include <QStyle>
+#include <QTranslator>
 
 #include "dooble_application.h"
+#include "dooble_settings.h"
 
 dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
+  m_translator = 0;
+
   QFont font(this->font());
 
   font.setStyleStrategy
@@ -48,4 +52,17 @@ QString dooble_application::style_name(void) const
     (style() ? style()->objectName().toLower().trimmed() : "");
 
   return style_name;
+}
+
+void dooble_application::install_translator(void)
+{
+  if(m_translator)
+    return;
+
+  if(dooble_settings::setting("language_index").toInt() == 1)
+    {
+      m_translator = new QTranslator(this);
+      m_translator->load("dooble_" + QLocale::system().name(), "Translations");
+      installTranslator(m_translator);
+    }
 }

@@ -327,6 +327,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="language">
+              <property name="toolTip">
+               <string>Please restart Dooble if Language is changed.</string>
+              </property>
               <property name="currentIndex">
                <number>0</number>
               </property>
@@ -338,7 +341,12 @@
               </property>
               <item>
                <property name="text">
-                <string>Default</string>
+                <string>English</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>System</string>
                </property>
               </item>
              </widget>

@@ -153,6 +153,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["credentials_enabled"] = false;
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
+  s_settings["language_index"] = 0;
   s_settings["main_menu_bar_visible"] = true;
   s_settings["pin_accepted_or_blocked_window"] = true;
   s_settings["pin_downloads_window"] = true;
@@ -305,6 +306,39 @@ QString dooble_settings::zoom_frame_location_string(int index)
 QVariant dooble_settings::setting(const QString &key)
 {
   QReadLocker lock(&s_settings_mutex);
+
+  if(!s_settings.contains(key))
+    {
+      QString database_name
+	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+      QString value("");
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_settings.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.setForwardOnly(true);
+	    query.prepare("SELECT value FROM dooble_settings WHERE key = ?");
+	    query.addBindValue(key);
+
+	    if(query.exec())
+	      if(query.next())
+		value = query.value(0).toString().trimmed();
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+      return value;
+    }
 
   return s_settings.value(key);
 }
@@ -656,6 +690,10 @@ void dooble_settings::restore(void)
     (s_settings.value("javascript_access_clipboard", false).toBool());
   m_ui.javascript_block_popups->setChecked
     (s_settings.value("javascript_block_popups", true).toBool());
+  m_ui.language->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("language_index", 0).toInt(),
+	    m_ui.language->count()));
   m_ui.local_storage->setChecked
     (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked
@@ -1120,6 +1158,7 @@ void dooble_settings::slot_apply(void)
 	      m_ui.javascript_access_clipboard->isChecked());
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
+  set_setting("language_index", m_ui.language->currentIndex());
   set_setting("local_storage", m_ui.local_storage->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("pin_accepted_or_blocked_window",

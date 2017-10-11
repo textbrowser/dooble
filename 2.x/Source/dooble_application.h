@@ -30,6 +30,8 @@
 
 #include <QApplication>
 
+class QTranslator;
+
 class dooble_application: public QApplication
 {
   Q_OBJECT
@@ -37,6 +39,10 @@ class dooble_application: public QApplication
  public:
   dooble_application(int &argc, char **argv);
   QString style_name(void) const;
+  void install_translator(void);
+
+ private:
+  QTranslator *m_translator;
 
  signals:
   void containers_cleared(void);

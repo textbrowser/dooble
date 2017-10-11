@@ -75,11 +75,11 @@ Completed Items
 70.    Remove m_history objects in the purge() method.
 71.    Save Page pop-up menu item.
 72.    Reduce cookie_added() signals.
+73.    Languages.
 
 Remaining Items
 
 1.     Favorites in History.
-2.     Languages.
 
 Unknown Items
 
