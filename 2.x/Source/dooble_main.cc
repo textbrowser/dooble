@@ -271,9 +271,11 @@ int main(int argc, char *argv[])
 		   dooble::s_settings,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_cookies,
-		   SIGNAL(cookie_added(const QNetworkCookie &, bool)),
+		   SIGNAL(cookies_added(const QList<QNetworkCookie> &,
+					const QList<bool> &)),
 		   dooble::s_cookies_window,
-		   SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
+		   SLOT(slot_cookies_added(const QList<QNetworkCookie> &,
+					   const QList<bool> &)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookie_removed(const QNetworkCookie &)),
 		   dooble::s_cookies_window,

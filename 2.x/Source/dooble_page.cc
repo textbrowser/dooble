@@ -474,20 +474,18 @@ void dooble_page::prepare_shortcuts(void)
 {
   if(m_shortcuts.isEmpty())
     {
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+F")),
-		       this,
-		       SLOT(slot_show_find(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+L")),
-		       this,
-		       SLOT(slot_open_url(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+R")),
-				       m_view,
-				       SLOT(reload(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Esc")),
-				       this,
-				       SLOT(slot_escape(void))));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+F")),
+				   this,
+				   SLOT(slot_show_find(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+L")),
+				   this,
+				   SLOT(slot_open_url(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
+				   m_view,
+				   SLOT(reload(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Esc")),
+				   this,
+				   SLOT(slot_escape(void)));
     }
 }
 
@@ -935,7 +933,7 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
   if(view)
     {
       view->setParent(this);
-      m_last_javascript_popups.append(view);
+      m_last_javascript_popups << view;
     }
   else if(m_last_javascript_popups.isEmpty())
     return;

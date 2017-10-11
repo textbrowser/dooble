@@ -166,7 +166,7 @@ void dooble_address_widget_completer::complete(const QString &text)
     {
       for(int i = 0; i < m_model->rowCount(); i++)
 	if(m_model->item(i, 0))
-	  list.append(m_model->item(i, 0)->clone());
+	  list << m_model->item(i, 0)->clone();
     }
   else
     {
@@ -181,7 +181,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 		(levenshtein_distance(c, m_model->item(i, 0)->text().toLower()),
 		 m_model->item(i, 0)->clone());
 	    else
-	      m_purged_items.append(m_model->item(i, 0)->clone());
+	      m_purged_items << m_model->item(i, 0)->clone();
 	  }
 
       list << map.values();

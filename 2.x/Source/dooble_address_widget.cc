@@ -276,9 +276,9 @@ void dooble_address_widget::setText(const QString &text)
       scheme_format_range.format = format;
       scheme_format_range.length = url.toString().indexOf(host);
       scheme_format_range.start = 0;
-      formats.append(host_format_range);
-      formats.append(path_format_range);
-      formats.append(scheme_format_range);
+      formats << host_format_range;
+      formats << path_format_range;
+      formats << scheme_format_range;
       set_text_format(formats);
     }
 
@@ -298,15 +298,17 @@ void dooble_address_widget::set_text_format
 
   for(int i = 0; i < formats.size(); i++)
     {
-      QInputMethodEvent::AttributeType attribute_type =
-	QInputMethodEvent::TextFormat;
+      QInputMethodEvent::AttributeType
+	attribute_type = QInputMethodEvent::TextFormat;
       QTextLayout::FormatRange format_range = formats.at(i);
       QVariant value = format_range.format;
       int start = format_range.start;
       int length = format_range.length;
 
-      attributes.append
-	(QInputMethodEvent::Attribute(attribute_type, start, length, value));
+      attributes << QInputMethodEvent::Attribute(attribute_type,
+						 start,
+						 length,
+						 value);
     }
 
   QInputMethodEvent event(QInputMethodEvent(QString(), attributes));

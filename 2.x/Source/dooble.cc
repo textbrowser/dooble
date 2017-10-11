@@ -168,9 +168,11 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	      this,
 	      SLOT(slot_settings_applied(void)));
       connect(m_cookies,
-	      SIGNAL(cookie_added(const QNetworkCookie &, bool)),
+	      SIGNAL(cookies_added(const QList<QNetworkCookie> &,
+				   const QList<bool> &)),
 	      m_cookies_window,
-	      SLOT(slot_cookie_added(const QNetworkCookie &, bool)));
+	      SLOT(slot_cookies_added(const QList<QNetworkCookie> &,
+				      const QList<bool> &)));
       connect(m_cookies,
 	      SIGNAL(cookie_removed(const QNetworkCookie &)),
 	      m_cookies_window,
@@ -886,43 +888,39 @@ void dooble::prepare_shortcuts(void)
 {
   if(m_shortcuts.isEmpty())
     {
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+D")),
-		       this,
-		       SLOT(slot_show_downloads(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+G")),
-		       this,
-		       SLOT(slot_show_settings(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+H")),
-		       this,
-		       SLOT(slot_show_history(void))));
-      m_shortcuts.append
-	(new QShortcut(QKeySequence(tr("Ctrl+K")),
-		       this,
-		       SLOT(slot_show_cookies(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+N")),
-				       this,
-				       SLOT(slot_new_window(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+P")),
-				       this,
-				       SLOT(slot_print(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+Q")),
-				       this,
-				       SLOT(slot_quit_dooble(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+S")),
-				       this,
-				       SLOT(slot_save(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+T")),
-				       this,
-				       SLOT(slot_new_tab(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("Ctrl+W")),
-				       this,
-				       SLOT(slot_close_tab(void))));
-      m_shortcuts.append(new QShortcut(QKeySequence(tr("F11")),
-				       this,
-				       SLOT(slot_show_full_screen(void))));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+D")),
+				   this,
+				   SLOT(slot_show_downloads(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+G")),
+				   this,
+				   SLOT(slot_show_settings(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+H")),
+				   this,
+				   SLOT(slot_show_history(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+K")),
+				   this,
+				   SLOT(slot_show_cookies(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+N")),
+				   this,
+				   SLOT(slot_new_window(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+P")),
+				   this,
+				   SLOT(slot_print(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Q")),
+				   this,
+				   SLOT(slot_quit_dooble(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+S")),
+				   this,
+				   SLOT(slot_save(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+T")),
+				   this,
+				   SLOT(slot_new_tab(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+W")),
+				   this,
+				   SLOT(slot_close_tab(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("F11")),
+				   this,
+				   SLOT(slot_show_full_screen(void)));
     }
 }
 
@@ -1105,7 +1103,7 @@ void dooble::prepare_tab_shortcuts(void)
 	    (Qt::AltModifier + Qt::Key_0,
 	     this,
 	     SLOT(slot_tab_widget_shortcut_activated(void)));
-	  m_tab_widget_shortcuts.append(shortcut);
+	  m_tab_widget_shortcuts << shortcut;
 	}
       else
 	{
@@ -1113,7 +1111,7 @@ void dooble::prepare_tab_shortcuts(void)
 	    (Qt::AltModifier + Qt::Key(Qt::Key_1 + i),
 	     this,
 	     SLOT(slot_tab_widget_shortcut_activated(void)));
-	  m_tab_widget_shortcuts.append(shortcut);
+	  m_tab_widget_shortcuts << shortcut;
 
 	  if(i == m_ui.tab->count() - 1)
 	    {
@@ -1121,7 +1119,7 @@ void dooble::prepare_tab_shortcuts(void)
 		(Qt::AltModifier + Qt::Key_0,
 		 this,
 		 SLOT(slot_tab_widget_shortcut_activated(void)));
-	      m_tab_widget_shortcuts.append(shortcut);
+	      m_tab_widget_shortcuts << shortcut;
 	    }
 	}
     }

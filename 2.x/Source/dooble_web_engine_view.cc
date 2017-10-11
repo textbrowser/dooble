@@ -98,7 +98,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
        dooble_settings::setting("javascript_block_popups").toBool())
       if(!dooble_settings::site_has_javascript_block_popup_exception(url()))
 	{
-	  m_dialog_requests.append(view);
+	  m_dialog_requests << view;
 	  view->setParent(this);
 	  QTimer::singleShot
 	    (250, this, SLOT(slot_create_dialog_requests(void)));

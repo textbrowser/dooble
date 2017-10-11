@@ -76,7 +76,8 @@ void dooble_cookies::purge(void)
 
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
-  emit cookie_added(cookie, false);
+  emit cookies_added
+    (QList<QNetworkCookie> () << cookie, QList<bool> () << false);
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -330,6 +331,8 @@ void dooble_cookies::slot_populate(void)
 
     if(db.open())
       {
+	QList<QNetworkCookie> cookies;
+	QList<bool> is_favorites;
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
@@ -360,8 +363,15 @@ void dooble_cookies::slot_populate(void)
 		 query.value(1).toByteArray());
 
 	      cookie.setDomain(bytes);
-	      emit cookie_added(cookie, is_favorite);
+	      cookies << cookie;
+	      is_favorites << is_favorite;
 	    }
+
+	if(!cookies.isEmpty() && !is_favorites.isEmpty())
+	  emit cookies_added(cookies, is_favorites);
+
+	cookies.clear();
+	is_favorites.clear();
 
 	if(query.exec("SELECT "
 		      "(SELECT favorite_digest FROM dooble_cookies_domains a "
@@ -457,8 +467,12 @@ void dooble_cookies::slot_populate(void)
 		 query.value(0).toByteArray());
 
 	      profile->cookieStore()->setCookie(cookie.at(0));
-	      emit cookie_added(cookie.at(0), is_favorite);
+	      cookies << cookie.at(0);
+	      is_favorites << is_favorite;
 	    }
+
+	if(!cookies.isEmpty() && !is_favorites.isEmpty())
+	  emit cookies_added(cookies, is_favorites);
       }
 
     db.close();
