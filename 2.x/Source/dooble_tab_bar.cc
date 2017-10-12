@@ -114,7 +114,7 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 	preferred_tab_width += rect().width() % count();
     }
   else
-    preferred_tab_width = qMin(preferred_tab_width, rect().width());
+    preferred_tab_width = qMin(250, rect().width());
 
   size.setHeight(preferred_tab_height);
   size.setWidth(preferred_tab_width);
