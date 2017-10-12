@@ -317,7 +317,7 @@ void dooble_cookies::slot_populate(void)
 			arg(s_db_id.fetchAndAddOrdered(1)));
   QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
 
-  disconnect(QWebEngineProfile::defaultProfile()->cookieStore(),
+  disconnect(profile->cookieStore(),
 	     SIGNAL(cookieAdded(const QNetworkCookie &)),
 	     dooble::s_cookies,
 	     SLOT(slot_cookie_added(const QNetworkCookie &)));
@@ -479,7 +479,7 @@ void dooble_cookies::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+  connect(profile->cookieStore(),
 	  SIGNAL(cookieAdded(const QNetworkCookie &)),
 	  dooble::s_cookies,
 	  SLOT(slot_cookie_added(const QNetworkCookie &)));
