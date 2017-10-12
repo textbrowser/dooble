@@ -1,5 +1,7 @@
+101com.com
 101order.com
 123found.com
+123freeavatars.com
 180hits.de
 180searchassistant.com
 207.net
@@ -199,6 +201,7 @@ addme.com
 adecn.com
 ademails.com
 adengage.com
+adexchangegate.com
 adexchangeprediction.com
 adexcite.com
 adexpose.com
@@ -1190,6 +1193,7 @@ cnomy.com
 cnt.spbland.ru
 cnt1.pocitadlo.cz
 code-server.biz
+coinhive.com
 colonize.com
 comclick.com
 commandwalk.com
@@ -1276,6 +1280,7 @@ decisiveducks.com
 decknetwork.net
 delightdriving.com
 deloo.de
+deloton.com
 demandbase.com
 demdex.net
 di1.shopping.com
@@ -1283,6 +1288,7 @@ dialerporn.com
 dianomi.com
 didtheyreadit.com
 differentdesk.com
+digital-ads.s3.amazonaws.com
 digitalmerkat.com
 direct-xxx-access.com
 directaclick.com
@@ -1815,6 +1821,7 @@ online-metrix.net
 onlinecash.com
 onlinecashmethod.com
 onlinerewardcenter.com
+open.oneplus.net
 openad.tf1.fr
 openad.travelnow.com
 openads.friendfinder.com
@@ -2056,6 +2063,7 @@ secure.webconnect.net
 sedoparking.com
 sedotracker.com
 seeq.com.invalid
+segment.com
 sensismediasmart.com.au
 separatesilver.com
 serv0.com
@@ -2107,6 +2115,7 @@ softclick.com.br
 sonobi.com
 spacash.com
 sparkstudios.com
+specially4u.net
 specificmedia.co.uk
 specificpop.com
 spectacularsnail.com
@@ -2150,6 +2159,7 @@ stats.merriam-webster.com
 stats.mirrorfootball.co.uk
 stats.multiup.org
 stats.olark.com
+stats.pusher.com
 stats.self.com
 stats.townnews.com
 stats.unwired-i.net
@@ -2264,6 +2274,8 @@ tpnads.com
 tracedesire.com
 track.adform.net
 track.anchorfree.com
+track.flexlinks.com
+track.flexlinkspro.com
 track.gawker.com
 trackalyzer.com
 tracker.icerocket.com
