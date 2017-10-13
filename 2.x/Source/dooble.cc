@@ -58,7 +58,7 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
-QColor dooble::s_private_tab_text_color = QColor(148, 0, 211);
+QColor dooble::s_private_tab_text_color = QColor("#ffc107");
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
 QPointer<dooble_about> dooble::s_about;
