@@ -1673,6 +1673,7 @@ void dooble_settings::slot_save_credentials(void)
   m_pbkdf2_dialog->setLabelText(tr("Preparing credentials..."));
   m_pbkdf2_dialog->setMaximum(0);
   m_pbkdf2_dialog->setMinimum(0);
+  m_pbkdf2_dialog->setStyleSheet("QWidget {background-color: white;}");
   m_pbkdf2_dialog->setWindowIcon(windowIcon());
   m_pbkdf2_dialog->setWindowModality(Qt::ApplicationModal);
   m_pbkdf2_dialog->setWindowTitle(tr("Dooble: Preparing Credentials"));

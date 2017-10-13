@@ -861,6 +861,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  progress.setCancelButtonText(tr("Interrupt"));
 	  progress.setMaximum(0);
 	  progress.setMinimum(0);
+	  progress.setStyleSheet("QWidget {background-color: white;}");
 	  progress.setWindowModality(Qt::ApplicationModal);
 	  progress.setWindowTitle(tr("Dooble: Progress"));
 	  progress.show();
