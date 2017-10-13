@@ -84,6 +84,13 @@ QList<QPair<QIcon, QString> > dooble_history::urls(void) const
   return list;
 }
 
+bool dooble_history::is_favorite(const QUrl &url) const
+{
+  QReadLocker locker(&m_history_mutex);
+
+  return m_history.value(url).value(FAVORITE, false).toBool();
+}
+
 void dooble_history::abort(void)
 {
   m_interrupt.store(1);
@@ -273,6 +280,138 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_history::save_favorite(const QUrl &url, bool state)
+{
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  QHash<int, QVariant> hash;
+  QWriteLocker locker(&m_history_mutex);
+
+  if(m_history.contains(url))
+    {
+      hash = m_history.value(url);
+      hash[FAVORITE] = state;
+      m_history[url] = hash;
+    }
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name(QString("dooble_history_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
+		   "favicon BLOB DEFAULT NULL, "
+		   "favorite TEXT NOT NULL, "
+		   "last_visited TEXT NOT NULL, "
+		   "number_of_visits TEXT NOT NULL, "
+		   "title TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT PRIMARY KEY NOT NULL)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_history "
+	   "(favicon, "
+	   "favorite, "
+	   "last_visited, "
+	   "number_of_visits, "
+	   "title, "
+	   "url, "
+	   "url_digest) "
+	   "VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+	QBuffer buffer;
+	QByteArray bytes;
+	bool ok = true;
+
+	buffer.setBuffer(&bytes);
+
+	if(buffer.open(QIODevice::WriteOnly))
+	  {
+	    QDataStream out(&buffer);
+	    QIcon icon(hash.value(FAVICON).value<QIcon> ());
+
+	    if(icon.isNull())
+	      out << dooble_favicons::icon(QUrl());
+	    else
+	      out << icon;
+
+	    if(out.status() != QDataStream::Ok)
+	      bytes.clear();
+	  }
+	else
+	  bytes.clear();
+
+	buffer.close();
+	bytes = dooble::s_cryptography->encrypt_then_mac(bytes);
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	query.addBindValue
+	  (dooble::s_cryptography->
+	   hmac(state ? QByteArray("true") : QByteArray("false")).toBase64());
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (hash.
+	   value(LAST_VISITED).toDateTime().toString(Qt::ISODate).toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (QByteArray::number(hash.value(NUMBER_OF_VISITS, 0).toULongLong()));
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	if(hash.value(TITLE).toString().trimmed().isEmpty())
+	  bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+	else
+	  bytes = dooble::s_cryptography->encrypt_then_mac
+	    (hash.value(TITLE).toString().trimmed().toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+
+	if(ok)
+	  query.exec();
       }
 
     db.close();

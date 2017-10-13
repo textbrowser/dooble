@@ -54,10 +54,12 @@ class dooble_history: public QObject
  ~dooble_history();
  QHash<QUrl, QHash<int, QVariant> > history(void) const;
  QList<QPair<QIcon, QString> > urls(void) const;
+ bool is_favorite(const QUrl &url) const;
  void abort(void);
  void purge(void);
  void remove_item(const QUrl &url);
  void save_favicon(const QIcon &icon, const QUrl &url);
+ void save_favorite(const QUrl &url, bool state);
  void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
 
  private:

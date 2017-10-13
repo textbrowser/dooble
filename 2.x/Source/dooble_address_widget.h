@@ -64,6 +64,7 @@ class dooble_address_widget: public QLineEdit
   void set_text_format(const QList<QTextLayout::FormatRange> &formats);
 
  private slots:
+  void slot_favorite(void);
   void slot_load_started(void);
   void slot_populate(void);
   void slot_settings_applied(void);
