@@ -74,6 +74,15 @@ void dooble_cookies::purge(void)
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_cookies::slot_connect_cookie_added_signal(void)
+{
+  connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+	  SIGNAL(cookieAdded(const QNetworkCookie &)),
+	  dooble::s_cookies,
+	  SLOT(slot_cookie_added(const QNetworkCookie &)),
+	  Qt::UniqueConnection);
+}
+
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
   emit cookies_added
@@ -479,9 +488,11 @@ void dooble_cookies::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  connect(profile->cookieStore(),
-	  SIGNAL(cookieAdded(const QNetworkCookie &)),
-	  dooble::s_cookies,
-	  SLOT(slot_cookie_added(const QNetworkCookie &)));
   QApplication::restoreOverrideCursor();
+
+  /*
+  ** Re-connect the cookieAdded() signal.
+  */
+
+  QTimer::singleShot(1000, this, SLOT(slot_connect_cookie_added_signal(void)));
 }

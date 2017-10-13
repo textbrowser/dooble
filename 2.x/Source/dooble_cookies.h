@@ -45,6 +45,7 @@ class dooble_cookies: public QObject
   static QAtomicInteger<quintptr> s_db_id;
 
  private slots:
+  void slot_connect_cookie_added_signal(void);
   void slot_cookie_added(const QNetworkCookie &cookie);
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_delete_cookie(const QNetworkCookie &cookie);
