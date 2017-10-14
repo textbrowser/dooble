@@ -40,6 +40,19 @@
 #include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
+class dooble_history_window_favorite_item: public QTableWidgetItem
+{
+public:
+  dooble_history_window_favorite_item(void):QTableWidgetItem()
+  {
+  }
+
+  bool operator <(const QTableWidgetItem &other) const
+  {
+    return icon().isNull() < other.icon().isNull();
+  }
+};
+
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
   m_parent = 0;
@@ -408,13 +421,11 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
     {
       item->setCheckState(Qt::Checked);
       item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
-      item->setText(tr("Yes"));
     }
   else
     {
       item->setCheckState(Qt::Unchecked);
       item->setIcon(QIcon());
-      item->setText("");
     }
 }
 
@@ -464,15 +475,9 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   if(item->checkState() == Qt::Checked)
-    {
-      item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
-      item->setText(tr("Yes"));
-    }
+    item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
   else
-    {
-      item->setIcon(QIcon());
-      item->setText("");
-    }
+    item->setIcon(QIcon());
 
   connect(m_ui.table,
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
@@ -674,13 +679,13 @@ void dooble_history_window::slot_populate(void)
 	(it.value().value(dooble_history::LAST_VISITED).toDateTime());
       QIcon icon(it.value().value(dooble_history::FAVICON).value<QIcon> ());
       QString title(it.value().value(dooble_history::TITLE).toString());
-      QTableWidgetItem *item1 = 0;
       QTableWidgetItem *item2 = 0;
       QTableWidgetItem *item3 = 0;
       QTableWidgetItem *item4 = 0;
       QUrl url(it.value().value(dooble_history::URL).toUrl());
+      dooble_history_window_favorite_item *item1 = 0;
 
-      item1 = new QTableWidgetItem();
+      item1 = new dooble_history_window_favorite_item();
       item1->setData(Qt::UserRole, url);
       item1->setFlags(Qt::ItemIsEnabled |
 		      Qt::ItemIsSelectable |
@@ -691,7 +696,6 @@ void dooble_history_window::slot_populate(void)
 	  item1->setCheckState(Qt::Checked);
 	  item1->setIcon
 	    (QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
-	  item1->setText(tr("Yes"));
 	}
       else
 	item1->setCheckState(Qt::Unchecked);
