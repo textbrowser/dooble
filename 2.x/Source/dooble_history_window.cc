@@ -428,7 +428,14 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
   else if(item->column() != 0)
     return;
 
+  if(item->checkState() == Qt::Checked)
+    item->setText(tr("Yes"));
+  else
+    item->setText("");
+
   dooble::s_history->save_favorite
+    (item->data(Qt::UserRole).toUrl(), item->checkState() == Qt::Checked);
+  emit favorite_changed
     (item->data(Qt::UserRole).toUrl(), item->checkState() == Qt::Checked);
 }
 

@@ -65,6 +65,7 @@ class dooble_address_widget: public QLineEdit
 
  private slots:
   void slot_favorite(void);
+  void slot_favorite_changed(const QUrl &url, bool state);
   void slot_load_started(void);
   void slot_populate(void);
   void slot_settings_applied(void);

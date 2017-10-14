@@ -36,6 +36,7 @@
 #include "dooble_address_widget_completer.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_history.h"
+#include "dooble_history_window.h"
 #include "dooble_settings.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
@@ -76,6 +77,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px;"
      "}");
   m_pull_down->setToolTip(tr("Show History"));
+  connect(dooble::s_history_window,
+	  SIGNAL(favorite_changed(const QUrl &, bool)),
+	  this,
+	  SLOT(slot_favorite_changed(const QUrl &, bool)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -331,6 +336,24 @@ void dooble_address_widget::slot_favorite(void)
     m_favorite->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
   else
     m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+}
+
+void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
+{
+  if(m_url.isEmpty() || !m_url.isValid())
+    return;
+
+  if(m_url == url)
+    {
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
+      if(state)
+	m_favorite->setIcon
+	  (QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+      else
+	m_favorite->setIcon
+	  (QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+    }
 }
 
 void dooble_address_widget::slot_load_started(void)

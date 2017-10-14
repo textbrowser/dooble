@@ -76,6 +76,7 @@ class dooble_history_window: public QMainWindow
   void slot_splitter_moved(int pos, int index);
 
  signals:
+  void favorite_changed(const QUrl &url, bool state);
   void open_url(const QUrl &url);
 };
 
