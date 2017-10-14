@@ -390,6 +390,30 @@ void dooble_history_window::slot_delete_pages(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
+{
+  QTableWidgetItem *item = m_items.value(url, 0);
+
+  if(!item)
+    return;
+
+  item = m_ui.table->item(item->row(), 0);
+
+  if(!item)
+    return;
+
+  if(state)
+    {
+      item->setCheckState(Qt::Checked);
+      item->setText(tr("Yes"));
+    }
+  else
+    {
+      item->setCheckState(Qt::Unchecked);
+      item->setText("");
+    }
+}
+
 void dooble_history_window::slot_find(void)
 {
   m_ui.search->selectAll();

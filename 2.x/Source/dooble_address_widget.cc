@@ -98,6 +98,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  this,
 	  SIGNAL(pull_down_clicked(void)));
   connect(this,
+	  SIGNAL(favorite_changed(const QUrl &, bool)),
+	  dooble::s_history_window,
+	  SLOT(slot_favorite_changed(const QUrl &, bool)));
+  connect(this,
 	  SIGNAL(textEdited(const QString &)),
 	  this,
 	  SLOT(slot_text_edited(const QString &)));
@@ -333,9 +337,17 @@ void dooble_address_widget::slot_favorite(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble::s_history->is_favorite(m_url))
-    m_favorite->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+    {
+      m_favorite->setIcon
+	(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+      emit favorite_changed(m_url, true);
+    }
   else
-    m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+    {
+      m_favorite->setIcon
+	(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+      emit favorite_changed(m_url, false);
+    }
 }
 
 void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
