@@ -634,7 +634,10 @@ void dooble_history_window::slot_populate(void)
 		      Qt::ItemIsUserCheckable);
 
       if(it.value().value(dooble_history::FAVORITE).toBool())
-	item1->setCheckState(Qt::Checked);
+	{
+	  item1->setCheckState(Qt::Checked);
+	  item1->setText(tr("Yes"));
+	}
       else
 	item1->setCheckState(Qt::Unchecked);
 
