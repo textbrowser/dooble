@@ -347,6 +347,9 @@ void dooble_history_window::slot_delete_pages(void)
 	  if(dooble::s_history)
 	    dooble::s_history->remove_item(item->data(Qt::UserRole).toUrl());
 
+	  if(item->checkState() == Qt::Checked)
+	    emit favorite_changed(item->data(Qt::UserRole).toUrl(), false);
+
 	  list.removeAt(i);
 	  m_items.remove(item->data(Qt::UserRole).toUrl());
 	  m_ui.table->removeRow(item->row());
@@ -588,7 +591,8 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(title.isEmpty())
     title = tr("Dooble");
 
-  QTableWidgetItem *item1 = new QTableWidgetItem();
+  dooble_history_window_favorite_item *item1 =
+    new dooble_history_window_favorite_item();
 
   item1->setCheckState(Qt::Unchecked);
   item1->setData(Qt::UserRole, item.url());
