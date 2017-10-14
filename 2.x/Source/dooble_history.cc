@@ -698,7 +698,7 @@ void dooble_history::slot_populate(void)
 
 		  if(dateTime.daysTo(now) >= qAbs(days))
 		    /*
-		    ** Ignore expired entries, unless the entry is a favorite.
+		    ** Ignore an expired entry, unless the entry is a favorite.
 		    */
 
 		    continue;
