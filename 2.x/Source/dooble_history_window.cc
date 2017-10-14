@@ -49,7 +49,7 @@ public:
 
   bool operator <(const QTableWidgetItem &other) const
   {
-    return icon().isNull() < other.icon().isNull();
+    return !icon().isNull() < !other.icon().isNull();
   }
 };
 
@@ -383,6 +383,9 @@ void dooble_history_window::slot_delete_pages(void)
 
 	    if(!item)
 	      continue;
+
+	    if(item->checkState() == Qt::Checked)
+	      emit favorite_changed(item->data(Qt::UserRole).toUrl(), false);
 
 	    QUrl url(item->data(Qt::UserRole).toUrl());
 
