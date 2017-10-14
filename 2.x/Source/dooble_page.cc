@@ -116,6 +116,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_accepted_or_blocked_clicked(void)));
   connect(m_ui.address,
+	  SIGNAL(favorite_changed(const QUrl &, bool)),
+	  this,
+	  SLOT(slot_favorite_changed(const QUrl &, bool)));
+  connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_load_page(void)));
@@ -1000,6 +1004,19 @@ void dooble_page::slot_escape(void)
       m_ui.address->setText(m_view->url().toString());
       m_view->stop();
     }
+}
+
+void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
+{
+  Q_UNUSED(url);
+
+  if(m_is_private)
+    return;
+
+  if(state)
+    if(m_view->history()->currentItem().url() == url)
+      dooble::s_history->save_item
+	(m_view->icon(), m_view->history()->currentItem());
 }
 
 void dooble_page::slot_find_next(void)

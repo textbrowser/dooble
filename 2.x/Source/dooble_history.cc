@@ -302,6 +302,26 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
       hash[FAVORITE] = state;
       m_history[url] = hash;
     }
+  else
+    {
+      /*
+      ** The item may have been removed via the History window.
+      */
+
+      hash[FAVICON] = dooble_favicons::icon(url);
+      hash[FAVORITE] = state;
+      hash[LAST_VISITED] = QDateTime::currentDateTime();
+      hash[NUMBER_OF_VISITS] = 1ULL;
+      hash[TITLE] = url;
+      hash[URL] = url;
+
+      if(dooble::s_cryptography)
+	hash[URL_DIGEST] = dooble::s_cryptography->hmac(url.toEncoded());
+
+      m_history[url] = hash;
+    }
+
+  locker.unlock();
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -425,39 +445,33 @@ void dooble_history::save_item(const QIcon &icon,
 {
   if(item.isValid())
     {
+      QHash<int, QVariant> hash;
       QWriteLocker locker(&m_history_mutex);
+      bool contains = m_history.contains(item.url());
 
-      if(!m_history.contains(item.url()))
-	{
-	  QHash<int, QVariant> hash;
-
-	  if(icon.isNull())
-	    hash[FAVICON] = dooble_favicons::icon(item.url());
-	  else
-	    hash[FAVICON] = icon;
-
-	  hash[FAVORITE] = false;
-	  hash[LAST_VISITED] = item.lastVisited();
-	  hash[NUMBER_OF_VISITS] = 1ULL;
-	  hash[TITLE] = item.title();
-	  hash[URL] = item.url();
-
-	  if(dooble::s_cryptography)
-	    hash[URL_DIGEST] = dooble::s_cryptography->hmac
-	      (item.url().toEncoded());
-
-	  m_history[item.url()] = hash;
-	  emit new_item(hash[FAVICON].value<QIcon> (), item);
-	}
+      if(icon.isNull())
+	hash[FAVICON] = dooble_favicons::icon(item.url());
       else
-	{
-	  QHash<int, QVariant> hash(m_history.value(item.url()));
+	hash[FAVICON] = icon;
 
-	  hash[NUMBER_OF_VISITS] =
-	    hash.value(NUMBER_OF_VISITS, 1).toULongLong() + 1;
-	  m_history[item.url()] = hash;
-	  emit item_updated(icon, item);
-	}
+      hash[FAVORITE] = m_history.value(item.url()).value(FAVORITE, false);
+      hash[LAST_VISITED] = item.lastVisited();
+      hash[NUMBER_OF_VISITS] =
+	hash.value(NUMBER_OF_VISITS, 1).toULongLong() + 1;
+      hash[TITLE] = item.title();
+      hash[URL] = item.url();
+
+      if(dooble::s_cryptography)
+	hash[URL_DIGEST] = dooble::s_cryptography->hmac
+	  (item.url().toEncoded());
+
+      m_history[item.url()] = hash;
+      locker.unlock();
+
+      if(!contains)
+	emit new_item(hash[FAVICON].value<QIcon> (), item);
+      else
+	emit item_updated(icon, item);
     }
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())

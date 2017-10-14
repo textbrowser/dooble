@@ -384,13 +384,13 @@ void dooble_history_window::slot_delete_pages(void)
 	    if(!item)
 	      continue;
 
-	    if(item->checkState() == Qt::Checked)
-	      emit favorite_changed(item->data(Qt::UserRole).toUrl(), false);
-
 	    QUrl url(item->data(Qt::UserRole).toUrl());
 
 	    if(dooble::s_history)
 	      dooble::s_history->remove_item(url);
+
+	    if(item->checkState() == Qt::Checked)
+	      emit favorite_changed(url, false);
 
 	    query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
 	    query.addBindValue
@@ -421,10 +421,10 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
   if(!item)
     return;
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
-
   if(state)
     {
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
       item->setCheckState(Qt::Checked);
       item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
     }
@@ -478,10 +478,12 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
-
   if(item->checkState() == Qt::Checked)
-    item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+    {
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
+      item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+    }
   else
     item->setIcon(QIcon());
 
@@ -542,7 +544,10 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
   QTableWidgetItem *item1 = m_items.value(item.url());
 
   if(!item1)
-    return;
+    {
+      slot_new_item(icon, item);
+      return;
+    }
   else
     {
       if(icon.isNull())
@@ -581,6 +586,12 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(!item.isValid())
     return;
 
+  if(m_items.contains(item.url()))
+    {
+      slot_item_updated(icon, item);
+      return;
+    }
+
   disconnect(m_ui.table,
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
@@ -597,7 +608,14 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   dooble_history_window_favorite_item *item1 =
     new dooble_history_window_favorite_item();
 
-  item1->setCheckState(Qt::Unchecked);
+  if(dooble::s_history->is_favorite(item.url()))
+    {
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
+      item1->setCheckState(Qt::Checked);
+      item1->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+    }
+
   item1->setData(Qt::UserRole, item.url());
   item1->setFlags(Qt::ItemIsEnabled |
 		  Qt::ItemIsSelectable |
