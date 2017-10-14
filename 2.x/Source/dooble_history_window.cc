@@ -402,14 +402,18 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
   if(!item)
     return;
 
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
   if(state)
     {
       item->setCheckState(Qt::Checked);
+      item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
       item->setText(tr("Yes"));
     }
   else
     {
       item->setCheckState(Qt::Unchecked);
+      item->setIcon(QIcon());
       item->setText("");
     }
 }
@@ -452,11 +456,28 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
   else if(item->column() != 0)
     return;
 
-  if(item->checkState() == Qt::Checked)
-    item->setText(tr("Yes"));
-  else
-    item->setText("");
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  if(item->checkState() == Qt::Checked)
+    {
+      item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+      item->setText(tr("Yes"));
+    }
+  else
+    {
+      item->setIcon(QIcon());
+      item->setText("");
+    }
+
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
   dooble::s_history->save_favorite
     (item->data(Qt::UserRole).toUrl(), item->checkState() == Qt::Checked);
   emit favorite_changed
@@ -640,6 +661,7 @@ void dooble_history_window::slot_populate(void)
 
   QHash<QUrl, QHash<int, QVariant> > hash(dooble::s_history->history());
   QHashIterator<QUrl, QHash<int, QVariant> > it(hash);
+  QString icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
   m_ui.table->setRowCount(hash.size());
@@ -667,6 +689,8 @@ void dooble_history_window::slot_populate(void)
       if(it.value().value(dooble_history::FAVORITE).toBool())
 	{
 	  item1->setCheckState(Qt::Checked);
+	  item1->setIcon
+	    (QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
 	  item1->setText(tr("Yes"));
 	}
       else
