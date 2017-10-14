@@ -457,6 +457,8 @@ void dooble_page::prepare_icons(void)
     m_ui.downloads->setIcon
       (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
 
+  m_ui.favorites->setIcon
+    (QIcon(QString(":/%1/36/favorites.png").arg(icon_set)));
   m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
   m_ui.find_previous->setIcon
     (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));

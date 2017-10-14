@@ -159,6 +159,28 @@
        </widget>
       </item>
       <item>
+       <widget class="dooble_tool_button" name="favorites">
+        <property name="toolTip">
+         <string>Favorites</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="dooble_tool_button" name="menu">
         <property name="toolTip">
          <string>Menu</string>
@@ -531,6 +553,7 @@
   <tabstop>address</tabstop>
   <tabstop>accepted_or_blocked</tabstop>
   <tabstop>downloads</tabstop>
+  <tabstop>favorites</tabstop>
   <tabstop>menu</tabstop>
   <tabstop>find_stop</tabstop>
   <tabstop>find</tabstop>
