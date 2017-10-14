@@ -211,6 +211,7 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
   if(url.isEmpty() || !url.isValid())
     {
       m_favorite->setEnabled(false);
+      m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
       m_information->setEnabled(false);
       m_information->setIcon
 	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
@@ -218,6 +219,14 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
   else
     {
       m_favorite->setEnabled(true);
+
+      if(dooble::s_history->is_favorite(url))
+	m_favorite->setIcon
+	  (QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+      else
+	m_favorite->setIcon
+	  (QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+
       m_information->setEnabled(true);
       m_information->setIcon
 	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
