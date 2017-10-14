@@ -74,7 +74,7 @@
         <number>150</number>
        </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>150</number>
+        <number>125</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>true</bool>
@@ -85,6 +85,11 @@
        <attribute name="verticalHeaderVisible">
         <bool>false</bool>
        </attribute>
+       <column>
+        <property name="text">
+         <string>Favorite</string>
+        </property>
+       </column>
        <column>
         <property name="text">
          <string>Title</string>

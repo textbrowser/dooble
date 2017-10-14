@@ -54,22 +54,16 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
     (QByteArray::fromBase64(dooble_settings::
 			    setting("history_window_splitter_state").
 			    toByteArray()));
-  m_ui.table->sortItems(0, Qt::AscendingOrder);
-  m_ui.table->horizontalHeader()->resizeSection
-    (0,
-     qMax(dooble_settings::setting("history_horizontal_header_section_size_0").
-	  toInt(),
-	  m_ui.table->horizontalHeader()->minimumSectionSize()));
-  m_ui.table->horizontalHeader()->resizeSection
-    (1,
-     qMax(dooble_settings::setting("history_horizontal_header_section_size_1").
-	  toInt(),
-	  m_ui.table->horizontalHeader()->minimumSectionSize()));
-  m_ui.table->horizontalHeader()->resizeSection
-    (2,
-     qMax(dooble_settings::setting("history_horizontal_header_section_size_2").
-	  toInt(),
-	  m_ui.table->horizontalHeader()->minimumSectionSize()));
+  m_ui.table->sortItems(1, Qt::AscendingOrder);
+
+  for(int i = 0; i < m_ui.table->columnCount(); i++)
+    m_ui.table->horizontalHeader()->resizeSection
+      (i,
+       qMax(dooble_settings::
+	    setting(QString("history_horizontal_header_section_size_%1").
+		    arg(i)).toInt(),
+	    m_ui.table->horizontalHeader()->minimumSectionSize()));
+
   connect(dooble::s_application,
 	  SIGNAL(containers_cleared(void)),
 	  this,
@@ -165,9 +159,9 @@ void dooble_history_window::save_settings(void)
 
 void dooble_history_window::set_row_hidden(int i)
 {
-  QTableWidgetItem *item1 = m_ui.table->item(i, 0);
-  QTableWidgetItem *item2 = m_ui.table->item(i, 1);
-  QTableWidgetItem *item3 = m_ui.table->item(i, 2);
+  QTableWidgetItem *item1 = m_ui.table->item(i, 1);
+  QTableWidgetItem *item2 = m_ui.table->item(i, 2);
+  QTableWidgetItem *item3 = m_ui.table->item(i, 3);
 
   if(!item1 || !item2 || !item3)
     return;
@@ -310,7 +304,7 @@ void dooble_history_window::slot_copy_location(void)
   if(!item)
     return;
 
-  item = m_ui.table->item(item->row(), 1);
+  item = m_ui.table->item(item->row(), 2);
 
   if(item)
     clipboard->setText(item->text());
@@ -427,6 +421,17 @@ void dooble_history_window::slot_icon_updated(const QIcon &icon,
     item->setIcon(icon);
 }
 
+void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
+{
+  if(!item)
+    return;
+  else if(item->column() != 0)
+    return;
+
+  dooble::s_history->save_favorite
+    (item->data(Qt::UserRole).toUrl(), item->checkState() == Qt::Checked);
+}
+
 void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
 {
   if(!item)
@@ -483,7 +488,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 	item1->setIcon(icon);
     }
 
-  QTableWidgetItem *item2 = m_ui.table->item(item1->row(), 0);
+  QTableWidgetItem *item2 = m_ui.table->item(item1->row(), 1);
 
   if(item2)
     {
@@ -498,7 +503,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
       item2->setText(title);
     }
 
-  QTableWidgetItem *item3 = m_ui.table->item(item1->row(), 2);
+  QTableWidgetItem *item3 = m_ui.table->item(item1->row(), 3);
 
   if(item3)
     {
@@ -513,6 +518,11 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(!item.isValid())
     return;
 
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
+
   QString title(item.title().trimmed());
 
   if(title.isEmpty())
@@ -521,34 +531,43 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(title.isEmpty())
     title = tr("Dooble");
 
-  QTableWidgetItem *item1 = 0;
+  QTableWidgetItem *item1 = new QTableWidgetItem();
+
+  item1->setCheckState(Qt::Unchecked);
+  item1->setData(Qt::UserRole, item.url());
+  item1->setFlags(Qt::ItemIsEnabled |
+		  Qt::ItemIsSelectable |
+		  Qt::ItemIsUserCheckable);
+
+  QTableWidgetItem *item2 = 0;
 
   if(icon.isNull())
-    item1 = new QTableWidgetItem(dooble_favicons::icon(item.url()), title);
+    item2 = new QTableWidgetItem(dooble_favicons::icon(item.url()), title);
   else
-    item1 = new QTableWidgetItem(icon, title);
-
-  item1->setData(Qt::UserRole, item.url());
-  item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  item1->setToolTip(item1->text());
-  m_items[item.url()] = item1;
-
-  QTableWidgetItem *item2 = new QTableWidgetItem(item.url().toString());
+    item2 = new QTableWidgetItem(icon, title);
 
   item2->setData(Qt::UserRole, item.url());
   item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   item2->setToolTip(item2->text());
+  m_items[item.url()] = item2;
 
-  QTableWidgetItem *item3 = new QTableWidgetItem
-    (item.lastVisited().toString(Qt::ISODate));
+  QTableWidgetItem *item3 = new QTableWidgetItem(item.url().toString());
 
   item3->setData(Qt::UserRole, item.url());
   item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  item3->setToolTip(item3->text());
+
+  QTableWidgetItem *item4 = new QTableWidgetItem
+    (item.lastVisited().toString(Qt::ISODate));
+
+  item4->setData(Qt::UserRole, item.url());
+  item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   m_ui.table->setSortingEnabled(false);
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 0, item1);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item2);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 2, item3);
+  m_ui.table->setItem(m_ui.table->rowCount() - 1, 3, item4);
 
   /*
   ** Hide or show the new row.
@@ -556,6 +575,10 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   set_row_hidden(m_ui.table->rowCount() - 1);
   m_ui.table->setSortingEnabled(true);
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
 }
 
 void dooble_history_window::slot_parent_destroyed(void)
@@ -577,6 +600,10 @@ void dooble_history_window::slot_populate(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
   m_items.clear();
   m_ui.table->setSortingEnabled(false);
 
@@ -597,27 +624,44 @@ void dooble_history_window::slot_populate(void)
       QTableWidgetItem *item1 = 0;
       QTableWidgetItem *item2 = 0;
       QTableWidgetItem *item3 = 0;
+      QTableWidgetItem *item4 = 0;
       QUrl url(it.value().value(dooble_history::URL).toUrl());
 
-      item1 = new QTableWidgetItem(icon, title);
+      item1 = new QTableWidgetItem();
       item1->setData(Qt::UserRole, url);
-      item1->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-      item1->setToolTip(item1->text());
-      item2 = new QTableWidgetItem(url.toString());
+      item1->setFlags(Qt::ItemIsEnabled |
+		      Qt::ItemIsSelectable |
+		      Qt::ItemIsUserCheckable);
+
+      if(it.value().value(dooble_history::FAVORITE).toBool())
+	item1->setCheckState(Qt::Checked);
+      else
+	item1->setCheckState(Qt::Unchecked);
+
+      item2 = new QTableWidgetItem(icon, title);
       item2->setData(Qt::UserRole, url);
       item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item2->setToolTip(item2->text());
-      item3 = new QTableWidgetItem(last_visited.toString(Qt::ISODate));
+      item3 = new QTableWidgetItem(url.toString());
       item3->setData(Qt::UserRole, url);
       item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-      m_items[url] = item1;
+      item3->setToolTip(item3->text());
+      item4 = new QTableWidgetItem(last_visited.toString(Qt::ISODate));
+      item4->setData(Qt::UserRole, url);
+      item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_items[url] = item2;
       m_ui.table->setItem(i, 0, item1);
       m_ui.table->setItem(i, 1, item2);
       m_ui.table->setItem(i, 2, item3);
+      m_ui.table->setItem(i, 3, item4);
       i += 1;
     }
 
   m_ui.table->setSortingEnabled(true);
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
   QApplication::restoreOverrideCursor();
 }
 
@@ -663,9 +707,9 @@ void dooble_history_window::slot_search_timer_timeout(void)
       m_ui.table->setRowHidden(i, false);
     else
       {
-	QTableWidgetItem *item1 = m_ui.table->item(i, 0);
-	QTableWidgetItem *item2 = m_ui.table->item(i, 1);
-	QTableWidgetItem *item3 = m_ui.table->item(i, 2);
+	QTableWidgetItem *item1 = m_ui.table->item(i, 1);
+	QTableWidgetItem *item2 = m_ui.table->item(i, 2);
+	QTableWidgetItem *item3 = m_ui.table->item(i, 3);
 
 	if(!item1 || !item2 || !item3)
 	  {
