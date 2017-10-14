@@ -441,7 +441,8 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 }
 
 void dooble_history::save_item(const QIcon &icon,
-			       const QWebEngineHistoryItem &item)
+			       const QWebEngineHistoryItem &item,
+			       bool force)
 {
   if(item.isValid())
     {
@@ -476,7 +477,8 @@ void dooble_history::save_item(const QIcon &icon,
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
-  else if(dooble_settings::setting("browsing_history_days").toInt() == 0)
+  else if(dooble_settings::setting("browsing_history_days").toInt() == 0 &&
+	  !force)
     return;
   else if(!item.isValid())
     return;

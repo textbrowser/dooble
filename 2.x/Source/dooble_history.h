@@ -60,7 +60,9 @@ class dooble_history: public QObject
  void remove_item(const QUrl &url);
  void save_favicon(const QIcon &icon, const QUrl &url);
  void save_favorite(const QUrl &url, bool state);
- void save_item(const QIcon &icon, const QWebEngineHistoryItem &item);
+ void save_item(const QIcon &icon,
+		const QWebEngineHistoryItem &item,
+		bool force);
 
  private:
   QAtomicInteger<short> m_interrupt;

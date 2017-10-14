@@ -347,9 +347,7 @@ void dooble_history_window::slot_delete_pages(void)
       QUrl url(item->data(Qt::UserRole).toUrl());
 
       urls << url;
-
-      if(dooble::s_history)
-	dooble::s_history->remove_item(url);
+      dooble::s_history->remove_item(url);
 
       if(item->checkState() == Qt::Checked)
 	emit favorite_changed(url, false);
@@ -661,11 +659,6 @@ void dooble_history_window::slot_parent_destroyed(void)
 void dooble_history_window::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    {
-      clear();
-      return;
-    }
-  else if(!dooble::s_history)
     {
       clear();
       return;

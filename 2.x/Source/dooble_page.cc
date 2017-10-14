@@ -1013,7 +1013,7 @@ void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
   if(state)
     if(m_view->history()->currentItem().url() == url)
       dooble::s_history->save_item
-	(m_view->icon(), m_view->history()->currentItem());
+	(m_view->icon(), m_view->history()->currentItem(), true);
 }
 
 void dooble_page::slot_find_next(void)
@@ -1070,7 +1070,7 @@ void dooble_page::slot_go_to_forward_item(void)
 
 void dooble_page::slot_icon_changed(const QIcon &icon)
 {
-  if(dooble::s_history && !m_is_private)
+  if(dooble::s_history->is_favorite(m_view->url()) || !m_is_private)
     dooble::s_history->save_favicon(icon, m_view->url());
 
   if(!m_is_private)
@@ -1149,8 +1149,10 @@ void dooble_page::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
 
-  if(dooble::s_history && !m_is_private)
-    dooble::s_history->save_item(icon(), m_view->history()->currentItem());
+  if(dooble::s_history->is_favorite(m_view->history()->currentItem().url()) ||
+     !m_is_private)
+    dooble::s_history->save_item
+      (icon(), m_view->history()->currentItem(), true);
 
   if(!m_is_private)
     dooble_favicons::save_favicon(icon(), m_view->url());
