@@ -332,32 +332,39 @@ void dooble_history_window::slot_delete_pages(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  QList<QUrl> urls;
+
+  for(int i = list.size() - 1; i >= 0; i--)
     {
-      for(int i = list.size() - 1; i >= 0; i--)
-	{
-	  if(!list.at(i))
-	    continue;
+      if(!list.at(i))
+	continue;
 
-	  QTableWidgetItem *item = m_ui.table->item(list.at(i)->row(), 0);
+      QTableWidgetItem *item = m_ui.table->item(list.at(i)->row(), 0);
 
-	  if(!item)
-	    continue;
+      if(!item)
+	continue;
 
-	  if(dooble::s_history)
-	    dooble::s_history->remove_item(item->data(Qt::UserRole).toUrl());
+      QUrl url(item->data(Qt::UserRole).toUrl());
 
-	  if(item->checkState() == Qt::Checked)
-	    emit favorite_changed(item->data(Qt::UserRole).toUrl(), false);
+      urls << url;
 
-	  list.removeAt(i);
-	  m_items.remove(item->data(Qt::UserRole).toUrl());
-	  m_ui.table->removeRow(item->row());
-	}
+      if(dooble::s_history)
+	dooble::s_history->remove_item(url);
 
-      QApplication::restoreOverrideCursor();
-      return;
+      if(item->checkState() == Qt::Checked)
+	emit favorite_changed(url, false);
+
+      list.removeAt(i);
+      m_items.remove(url);
+      m_ui.table->removeRow(item->row());
     }
+
+  QApplication::restoreOverrideCursor();
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString database_name("dooble_history_window");
 
@@ -374,31 +381,12 @@ void dooble_history_window::slot_delete_pages(void)
 
 	query.exec("PRAGMA synchronous = OFF");
 
-	for(int i = list.size() - 1; i >= 0; i--)
+	for(int i = 0; i < urls.size(); i++)
 	  {
-	    if(!list.at(i))
-	      continue;
-
-	    QTableWidgetItem *item = m_ui.table->item(list.at(i)->row(), 0);
-
-	    if(!item)
-	      continue;
-
-	    QUrl url(item->data(Qt::UserRole).toUrl());
-
-	    if(dooble::s_history)
-	      dooble::s_history->remove_item(url);
-
-	    if(item->checkState() == Qt::Checked)
-	      emit favorite_changed(url, false);
-
 	    query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
 	    query.addBindValue
-	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	      (dooble::s_cryptography->hmac(urls.at(i).toEncoded()).toBase64());
 	    query.exec();
-	    list.removeAt(i);
-	    m_items.remove(url);
-	    m_ui.table->removeRow(item->row());
 	  }
       }
 
