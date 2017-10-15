@@ -334,7 +334,7 @@ void dooble_cookies_window::slot_cookies_added
 
       if(!cookie.name().isEmpty())
 	{
-	  QMultiHash<QByteArray, QTreeWidgetItem *> hash
+	  QHash<QByteArray, QTreeWidgetItem *> hash
 	    (m_child_items.value(cookie.domain()));
 
 	  if(!hash.contains(cookie.toRawForm()))
@@ -363,7 +363,7 @@ void dooble_cookies_window::slot_cookies_added
 
 void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 {
-  QMultiHash<QByteArray, QTreeWidgetItem *> hash
+  QHash<QByteArray, QTreeWidgetItem *> hash
     (m_child_items.value(cookie.domain()));
 
   if(hash.isEmpty())
@@ -475,7 +475,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 
 	  if(!cookie.isEmpty())
 	    {
-	      QMultiHash<QByteArray, QTreeWidgetItem *> hash
+	      QHash<QByteArray, QTreeWidgetItem *> hash
 		(m_child_items.value(cookie.at(0).domain()));
 
 	      hash.remove(cookie.at(0).toRawForm());

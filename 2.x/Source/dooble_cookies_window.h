@@ -59,7 +59,7 @@ class dooble_cookies_window: public QMainWindow
   void resizeEvent(QResizeEvent *event);
 
  private:
-  QHash<QString, QMultiHash<QByteArray, QTreeWidgetItem *> > m_child_items;
+  QHash<QString, QHash<QByteArray, QTreeWidgetItem *> > m_child_items;
   QHash<QString, QTreeWidgetItem *> m_top_level_items;
   QPointer<QWebEngineCookieStore> m_cookie_store;
   QPointer<dooble_cookies> m_cookies;

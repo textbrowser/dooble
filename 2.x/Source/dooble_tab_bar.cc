@@ -266,7 +266,7 @@ void dooble_tab_bar::slot_settings_applied(void)
 		 "border: none; image: none; width: 0px;}").
 	 arg(s_background_color.name()).
 	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
-	     is_private() ? dooble::s_private_tab_text_color.name() : "white").
+	     is_private() ? "white" : "white").
 	 arg(s_hovered_tab_color.name()).
 	 arg(s_selected_tab_color.name()));
     }

@@ -65,7 +65,7 @@ class dooble: public QMainWindow
   bool is_private(void) const;
   dooble_page *current_page(void) const;
   dooble_page *new_page(const QUrl &url, bool is_private);
-  static QColor s_private_tab_text_color;
+  static QColor s_private_color;
   static QPointer<dooble_history> s_history;
   static QPointer<dooble_about> s_about;
   static QPointer<dooble_accepted_or_blocked_domains>

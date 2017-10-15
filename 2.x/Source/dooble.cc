@@ -58,7 +58,7 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
-QColor dooble::s_private_tab_text_color = QColor("#ffc107");
+QColor dooble::s_private_color = QColor("#880e4f");
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
 QPointer<dooble_about> dooble::s_about;
@@ -324,17 +324,13 @@ dooble_page *dooble::current_page(void) const
 
 dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 {
+  Q_UNUSED(is_private);
+
   dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("New Tab"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
-
-  if(dooble_settings::setting("denote_private_widgets").toBool())
-    if(is_private)
-      m_ui.tab->setTabTextColor
-	(m_ui.tab->count() - 1, s_private_tab_text_color);
-
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(dooble_settings::setting("access_new_tabs").toBool() ||
@@ -636,12 +632,6 @@ void dooble::new_page(dooble_page *page)
 
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
-
-  if(dooble_settings::setting("denote_private_widgets").toBool())
-    if(page->is_private())
-      m_ui.tab->setTabTextColor
-	(m_ui.tab->count() - 1, s_private_tab_text_color);
-
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
@@ -674,11 +664,6 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.
-
-  if(dooble_settings::setting("denote_private_widgets").toBool())
-    if(page->is_private())
-      m_ui.tab->setTabTextColor
-	(m_ui.tab->count() - 1, s_private_tab_text_color);
 
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
@@ -1676,25 +1661,6 @@ void dooble::slot_settings_applied(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  for(int i = 0; i < m_ui.tab->count(); i++)
-    {
-      dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
-
-      if(!page)
-	continue;
-
-      if(dooble_settings::setting("denote_private_widgets").toBool())
-	{
-	  if(page->is_private())
-	    m_ui.tab->setTabTextColor(i, s_private_tab_text_color);
-	  else
-	    m_ui.tab->setTabTextColor(i, QColor());
-	}
-      else
-	m_ui.tab->setTabTextColor(i, QColor());
-    }
-
   prepare_tab_icons();
   QApplication::restoreOverrideCursor();
 }
