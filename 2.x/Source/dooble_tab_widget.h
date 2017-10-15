@@ -41,9 +41,10 @@ class dooble_tab_widget: public QTabWidget
 
  public:
   dooble_tab_widget(QWidget *parent);
-  dooble_page *page(int index) const;
   QIcon tabIcon(int index) const;
   QToolButton *tabs_menu_button(void) const;
+  bool is_private(void) const;
+  dooble_page *page(int index) const;
   void setTabIcon(int index, const QIcon &icon);
   void setTabTextColor(int index, const QColor &color);
 

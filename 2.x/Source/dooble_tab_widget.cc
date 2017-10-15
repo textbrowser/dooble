@@ -154,6 +154,22 @@ QToolButton *dooble_tab_widget::tabs_menu_button(void) const
   return m_tabs_menu_button;
 }
 
+bool dooble_tab_widget::is_private(void) const
+{
+  QWidget *parent = parentWidget();
+
+  do
+    {
+      if(qobject_cast<dooble *> (parent))
+	return qobject_cast<dooble *> (parent)->is_private();
+      else if(parent)
+	parent = parent->parentWidget();
+    }
+  while(parent);
+
+  return false;
+}
+
 dooble_page *dooble_tab_widget::page(int index) const
 {
   return qobject_cast<dooble_page *> (widget(index));
