@@ -459,6 +459,7 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
   else if(item->column() != 0)
     return;
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   disconnect(m_ui.table,
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
@@ -481,6 +482,7 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
     (item->data(Qt::UserRole).toUrl(), item->checkState() == Qt::Checked);
   emit favorite_changed
     (item->data(Qt::UserRole).toUrl(), item->checkState() == Qt::Checked);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
