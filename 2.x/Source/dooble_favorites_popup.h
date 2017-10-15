@@ -30,12 +30,17 @@
 
 #include <QDialog>
 
+#include "ui_dooble_favorites_popup.h"
+
 class dooble_favorites_popup: public QDialog
 {
   Q_OBJECT
 
  public:
-  dooble_favorites_popup(void);
+  dooble_favorites_popup(QWidget *parent);
+
+ private:
+  Ui_dooble_favorites_popup m_ui;
 };
 
 #endif

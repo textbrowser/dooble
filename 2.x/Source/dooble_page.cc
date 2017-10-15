@@ -43,6 +43,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
+#include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_label_widget.h"
@@ -155,6 +156,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(show_downloads(void)));
+  connect(m_ui.favorites,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_show_favorites_popup(void)));
   connect(m_ui.find,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -1334,8 +1339,8 @@ void dooble_page::slot_show_certificate_exception(void)
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
   dooble_certificate_exceptions_menu_widget
-    *certificate_exceptions_menu_widget =
-    new dooble_certificate_exceptions_menu_widget(&widget);
+    *certificate_exceptions_menu_widget = new
+    dooble_certificate_exceptions_menu_widget(&widget);
 
   connect(certificate_exceptions_menu_widget,
 	  SIGNAL(triggered(void)),
@@ -1346,6 +1351,19 @@ void dooble_page::slot_show_certificate_exception(void)
   menu.addAction(&widget_action);
   menu.exec(m_ui.address->
 	    mapToGlobal(m_ui.address->information_rectangle().bottomLeft()));
+}
+
+void dooble_page::slot_show_favorites_popup(void)
+{
+  QMenu menu(this);
+  QWidget widget(&menu);
+  QWidgetAction widget_action(&menu);
+  dooble_favorites_popup *favorites_popup = new dooble_favorites_popup(&widget);
+
+  widget_action.setDefaultWidget(favorites_popup);
+  menu.addAction(&widget_action);
+  menu.exec(m_ui.favorites->mapToGlobal(m_ui.favorites->rect().bottomLeft()));
+  m_ui.favorites->setChecked(false);
 }
 
 void dooble_page::slot_show_find(void)

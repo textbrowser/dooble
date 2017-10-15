@@ -389,7 +389,8 @@ void dooble::connect_signals(void)
   connect(&m_pbkdf2_future_watcher,
 	  SIGNAL(finished(void)),
 	  this,
-	  SLOT(slot_pbkdf2_future_finished(void)));
+	  SLOT(slot_pbkdf2_future_finished(void)),
+	  Qt::UniqueConnection);
   connect(&m_populate_containers_timer,
 	  SIGNAL(timeout(void)),
 	  this,

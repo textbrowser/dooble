@@ -27,6 +27,7 @@
 
 #include "dooble_favorites_popup.h"
 
-dooble_favorites_popup::dooble_favorites_popup(void):QDialog()
+dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 {
+  m_ui.setupUi(this);
 }
