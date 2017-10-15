@@ -411,6 +411,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_downloads.h \
                   Source/dooble_downloads_item.h \
                   Source/dooble_favicons.h \
+                  Source/dooble_favorites_popup.h \
                   Source/dooble_gopher.h \
                   Source/dooble_history.h \
                   Source/dooble_history_window.h \
@@ -456,6 +457,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_downloads.cc \
                   Source/dooble_downloads_item.cc \
                   Source/dooble_favicons.cc \
+                  Source/dooble_favorites_popup.cc \
                   Source/dooble_gopher.cc \
                   Source/dooble_history.cc \
                   Source/dooble_history_window.cc \
