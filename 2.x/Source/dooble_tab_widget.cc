@@ -272,10 +272,10 @@ void dooble_tab_widget::prepare_theme_colors(void)
   if(!s_theme_colors.isEmpty())
     return;
 
-  s_theme_colors["fusion-corner-widget-background-color"] = "#78909c";
+  s_theme_colors["fusion-corner-widget-background-color"] = "#90a4ae";
   s_theme_colors["fusion-hovered-tab-color"] = "#c5cae9";
   s_theme_colors["fusion-selected-tab-color"] = "#7986cb";
-  s_theme_colors["fusion-tabbar-background-color"] = "#78909c";
+  s_theme_colors["fusion-tabbar-background-color"] = "#90a4ae";
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)

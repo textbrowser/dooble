@@ -390,6 +390,7 @@ FORMS           = UI/dooble.ui \
 		  UI/dooble_cookies_window.ui \
                   UI/dooble_downloads.ui \
                   UI/dooble_downloads_item.ui \
+                  UI/dooble_favorites_popup.ui \
 		  UI/dooble_history_window.ui \
                   UI/dooble_page.ui \
 		  UI/dooble_popup_menu.ui \
