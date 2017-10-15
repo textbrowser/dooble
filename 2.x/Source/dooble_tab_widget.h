@@ -54,6 +54,7 @@ class dooble_tab_widget: public QTabWidget
  private:
   QFrame *m_corner_widget;
   QToolButton *m_add_tab_tool_button;
+  QToolButton *m_private_tool_button;
   QToolButton *m_tabs_menu_button;
   dooble_tab_bar *m_tab_bar;
   void prepare_icons(void);

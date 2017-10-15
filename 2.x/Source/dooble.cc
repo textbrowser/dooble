@@ -58,7 +58,6 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
-QColor dooble::s_private_color = QColor("#880e4f");
 QPointer<dooble_history> dooble::s_history;
 bool dooble::s_containers_populated = false;
 QPointer<dooble_about> dooble::s_about;
