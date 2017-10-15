@@ -1320,7 +1320,6 @@ void dooble::slot_create_dialog(dooble_web_engine_view *view)
   dooble *d = new dooble(view);
 
   d->m_is_javascript_dialog = true;
-  d->m_ui.tab->setTabBarAutoHide(true);
   d->resize(s_vga_size);
   d->showNormal();
   dooble_ui_utilities::center_window_widget(this, d);

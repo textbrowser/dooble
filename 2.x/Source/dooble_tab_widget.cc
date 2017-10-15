@@ -35,8 +35,11 @@
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
+QHash<QString, QColor> dooble_tab_widget::s_theme_colors;
+
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
+  prepare_theme_colors();
   m_add_tab_tool_button = new QToolButton(this);
   m_add_tab_tool_button->setAutoRaise(true);
   m_add_tab_tool_button->setIconSize(QSize(18, 18));
@@ -93,12 +96,15 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   if(dooble::s_application->style_name() == "fusion")
     {
       m_corner_widget->setStyleSheet
-	(QString("QFrame {background-color: #78909c;"
-		 "border-right: 0px solid %1;"
+	(QString("QFrame {background-color: %1;"
+		 "border-right: 0px solid %2;"
 		 "margin-bottom: 0px;}").
+	 arg(s_theme_colors.
+	     value("fusion-corner-widget-background-color").name()).
 	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
       setStyleSheet
-	("QTabBar {background-color: #78909c; margin-top: 1px;}");
+	(QString("QTabBar {background-color: %1; margin-top: 1px;}").
+	 arg(s_theme_colors.value("fusion-tabbar-background-color").name()));
     }
 
   m_tab_bar = new dooble_tab_bar(this);
@@ -259,6 +265,17 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
       label->setProperty("icon", icon);
 #endif
     }
+}
+
+void dooble_tab_widget::prepare_theme_colors(void)
+{
+  if(!s_theme_colors.isEmpty())
+    return;
+
+  s_theme_colors["fusion-corner-widget-background-color"] = "#78909c";
+  s_theme_colors["fusion-hovered-tab-color"] = "#c5cae9";
+  s_theme_colors["fusion-selected-tab-color"] = "#7986cb";
+  s_theme_colors["fusion-tabbar-background-color"] = "#78909c";
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)

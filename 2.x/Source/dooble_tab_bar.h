@@ -36,8 +36,6 @@ class dooble_tab_bar: public QTabBar
 
  public:
   dooble_tab_bar(QWidget *parent);
-  static QColor s_hovered_tab_color;
-  static QColor s_selected_tab_color;
 
  protected:
   QSize tabSizeHint(int index) const;

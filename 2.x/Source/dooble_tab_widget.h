@@ -40,6 +40,7 @@ class dooble_tab_widget: public QTabWidget
   Q_OBJECT
 
  public:
+  static QHash<QString, QColor> s_theme_colors;
   dooble_tab_widget(QWidget *parent);
   QIcon tabIcon(int index) const;
   QToolButton *tabs_menu_button(void) const;
@@ -57,6 +58,7 @@ class dooble_tab_widget: public QTabWidget
   QToolButton *m_private_tool_button;
   QToolButton *m_tabs_menu_button;
   dooble_tab_bar *m_tab_bar;
+  static void prepare_theme_colors(void);
   void prepare_icons(void);
   void prepare_tab_label(int index, const QIcon &icon);
 

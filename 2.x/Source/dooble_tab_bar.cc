@@ -34,20 +34,19 @@
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
-QColor dooble_tab_bar::s_hovered_tab_color = QColor("#c5cae9");
-QColor dooble_tab_bar::s_selected_tab_color = QColor("#7986cb");
-
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
   foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
     if(dooble::s_application->style_name() == "fusion")
       tool_button->setStyleSheet
-	("QToolButton {background-color: #78909c;"
-	 "border: none;"
-	 "margin-bottom: 0px;"
-	 "margin-top: 1px;"
-	 "}"
-	 "QToolButton::menu-button {border: none;}");
+	(QString("QToolButton {background-color: %1;"
+		 "border: none;"
+		 "margin-bottom: 0px;"
+		 "margin-top: 1px;"
+		 "}"
+		 "QToolButton::menu-button {border: none;}").
+	 arg(dooble_tab_widget::s_theme_colors.
+	     value("fusion-tabbar-background-color").name()));
     else if(dooble::s_application->style_name() == "macintosh")
       tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
@@ -251,24 +250,28 @@ void dooble_tab_bar::slot_settings_applied(void)
 		 "subcontrol-position: right;"
 		 "width: 16px;}"
 		 "QTabBar::tab {"
-		 "background-color: #78909c;"
-		 "border-left: 1px solid %1;"
-		 "border-right: 1px solid %1;"
-		 "color: %2;"
+		 "background-color: %1;"
+		 "border-left: 1px solid %2;"
+		 "border-right: 1px solid %2;"
+		 "color: %3;"
 		 "margin-bottom: 0px;"
 		 "margin-top: 1px;}"
 		 "QTabBar::tab::hover:!selected {"
-		 "background-color: %3;"
+		 "background-color: %4;"
 		 "color: black;}"
 		 "QTabBar::tab::selected {"
-		 "background-color: %4;}"
+		 "background-color: %5;}"
 		 "QTabBar::tear {"
 		 "border: none; image: none; width: 0px;}").
+	 arg(dooble_tab_widget::s_theme_colors.
+	     value("fusion-tabbar-background-color").name()).
 	 arg(s_background_color.name()).
 	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
 	     is_private() ? "white" : "white").
-	 arg(s_hovered_tab_color.name()).
-	 arg(s_selected_tab_color.name()));
+	 arg(dooble_tab_widget::s_theme_colors.
+	     value("fusion-hovered-tab-color").name()).
+	 arg(dooble_tab_widget::s_theme_colors.
+	     value("fusion-selected-tab-color").name()));
     }
   else
 #ifdef Q_OS_MACOS
