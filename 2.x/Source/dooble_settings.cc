@@ -141,6 +141,28 @@ dooble_settings::dooble_settings(void):QMainWindow()
     (2,
      tr("Cookies marked persistent are saved to and restored from disk."),
      Qt::ToolTipRole);
+
+  QString path(QDir::currentPath());
+
+  path.append(QDir::separator());
+  path.append("Translations");
+  path.append(QDir::separator());
+  path.append("dooble_" + QLocale::system().name() + ".qm");
+
+  QFileInfo file_info(path);
+
+  if(!file_info.isReadable())
+    {
+      m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
+				      0,
+				      Qt::UserRole - 1);
+      m_ui.language_directory->setText
+	(tr("The file %1 is not readable. Disabling the System option.").
+	 arg(file_info.absoluteFilePath()));
+    }
+  else
+    m_ui.language_directory->setVisible(false);
+
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
@@ -690,10 +712,15 @@ void dooble_settings::restore(void)
     (s_settings.value("javascript_access_clipboard", false).toBool());
   m_ui.javascript_block_popups->setChecked
     (s_settings.value("javascript_block_popups", true).toBool());
-  m_ui.language->setCurrentIndex
-    (qBound(0,
-	    s_settings.value("language_index", 0).toInt(),
-	    m_ui.language->count()));
+
+  if(m_ui.language_directory->isVisible())
+    m_ui.language->setCurrentIndex(0);
+  else
+    m_ui.language->setCurrentIndex
+      (qBound(0,
+	      s_settings.value("language_index", 0).toInt(),
+	      m_ui.language->count()));
+
   m_ui.local_storage->setChecked
     (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked

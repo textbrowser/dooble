@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>549</height>
+           <height>534</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -352,6 +352,16 @@
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="language_directory">
+              <property name="text">
+               <string>Language Directory</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="horizontalSpacer_15">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -637,8 +647,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>651</height>
+               <width>503</width>
+               <height>682</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1127,8 +1137,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>270</width>
-               <height>700</height>
+               <width>353</width>
+               <height>708</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
