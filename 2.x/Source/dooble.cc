@@ -1671,7 +1671,9 @@ void dooble::slot_show_about(void)
 	  this,
 	  SLOT(slot_open_url(const QUrl &)),
 	  Qt::UniqueConnection);
-  s_about->show();
+  s_about->activateWindow();
+  s_about->raise();
+  s_about->showNormal();
   dooble_ui_utilities::center_window_widget(this, s_about);
 }
 

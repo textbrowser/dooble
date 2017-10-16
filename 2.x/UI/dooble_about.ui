@@ -98,6 +98,7 @@
           </property>
           <property name="text">
            <string>Version 2018.01.01, Baba Yaga.
+Dooble is open source software.
 (c) 2008 - present.</string>
           </property>
           <property name="textInteractionFlags">
@@ -140,11 +141,31 @@
       <property name="styleSheet">
        <string notr="true">QFrame {background-color: lightgray;}</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="license">
+         <property name="text">
+          <string>License</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <widget class="QLabel" name="release_notes">
          <property name="text">
-          <string/>
+          <string>Release Notes</string>
          </property>
         </widget>
        </item>
