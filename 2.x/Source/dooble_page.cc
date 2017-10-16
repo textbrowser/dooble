@@ -1356,13 +1356,19 @@ void dooble_page::slot_show_certificate_exception(void)
 void dooble_page::slot_show_favorites_popup(void)
 {
   QMenu menu(this);
+  QPoint point(m_ui.favorites->pos());
+  QSize size;
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
   dooble_favorites_popup *favorites_popup = new dooble_favorites_popup(&widget);
 
+  favorites_popup->resize(favorites_popup->sizeHint());
+  size = favorites_popup->size();
+  point.setX(m_ui.favorites->size().width() + point.x() - size.width());
+  point.setY(m_ui.favorites->size().height() + point.y());
   widget_action.setDefaultWidget(favorites_popup);
   menu.addAction(&widget_action);
-  menu.exec(m_ui.favorites->mapToGlobal(m_ui.favorites->rect().bottomLeft()));
+  menu.exec(mapToGlobal(point));
   m_ui.favorites->setChecked(false);
 }
 
