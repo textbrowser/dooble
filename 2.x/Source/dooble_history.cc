@@ -815,42 +815,48 @@ void dooble_history::slot_populate(void)
 	      hash[URL_DIGEST] = QByteArray::fromBase64
 		(query.value(6).toByteArray());
 
-	      QList<QStandardItem *> list;
-
-	      for(int i = 0; i < m_favorites_model->columnCount(); i++)
+	      if(is_favorite)
 		{
-		  QStandardItem *item = new QStandardItem();
+		  QList<QStandardItem *> list;
 
-		  switch(i)
+		  for(int i = 0; i < m_favorites_model->columnCount(); i++)
 		    {
-		    case 0:
-		      {
-			item->setIcon(icon);
-			item->setText(title);
-			break;
-		      }
-		    case 1:
-		      {
-			item->setText(url);
-			break;
-		      }
-		    case 2:
-		      {
-			item->setText(last_visited);
-			break;
-		      }
-		    case 3:
-		      {
-			item->setText(number_of_visits.rightJustified(16, '0'));
-			break;
-		      }
+		      QStandardItem *item = new QStandardItem();
+
+		      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+		      switch(i)
+			{
+			case 0:
+			  {
+			    item->setIcon(icon);
+			    item->setText(title);
+			    break;
+			  }
+			case 1:
+			  {
+			    item->setText(url);
+			    break;
+			  }
+			case 2:
+			  {
+			    item->setText(last_visited);
+			    break;
+			  }
+			case 3:
+			  {
+			    item->setText
+			      (number_of_visits.rightJustified(16, '0'));
+			    break;
+			  }
+			}
+
+		      list << item;
 		    }
 
-		  list << item;
+		  if(!list.isEmpty())
+		    m_favorites_model->appendRow(list);
 		}
-
-	      if(!list.isEmpty())
-		m_favorites_model->appendRow(list);
 
 	      QWriteLocker locker(&m_history_mutex);
 
