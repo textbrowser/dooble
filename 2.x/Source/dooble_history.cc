@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QStandardItemModel>
 #include <QtConcurrent>
 
 #include "dooble.h"
@@ -50,6 +51,12 @@ dooble_history::dooble_history(void):QObject()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_purge_timer_timeout(void)));
+  m_favorites_model = new QStandardItemModel(this);
+  m_favorites_model->setHorizontalHeaderLabels
+    (QStringList() << tr("Title")
+                   << tr("Site")
+                   << tr("Last Visited")
+                   << tr("Number of Visits"));
   m_purge_timer.start(15000);
 }
 
@@ -82,6 +89,11 @@ QList<QPair<QIcon, QString> > dooble_history::urls(void) const
   }
 
   return list;
+}
+
+QStandardItemModel *dooble_history::favorites_model(void) const
+{
+  return m_favorites_model;
 }
 
 bool dooble_history::is_favorite(const QUrl &url) const

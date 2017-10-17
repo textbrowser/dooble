@@ -1362,6 +1362,10 @@ void dooble_page::slot_show_favorites_popup(void)
   QWidgetAction widget_action(&menu);
   dooble_favorites_popup *favorites_popup = new dooble_favorites_popup(&widget);
 
+  connect(favorites_popup,
+	  SIGNAL(accepted(void)),
+	  &menu,
+	  SLOT(close(void)));
   favorites_popup->resize(favorites_popup->sizeHint());
   size = favorites_popup->size();
   point.setX(m_ui.favorites->size().width() + point.x() - size.width());

@@ -39,6 +39,9 @@ class dooble_favorites_popup: public QDialog
  public:
   dooble_favorites_popup(QWidget *parent);
 
+ protected:
+  void keyPressEvent(QKeyEvent *event);
+
  private:
   Ui_dooble_favorites_popup m_ui;
 };

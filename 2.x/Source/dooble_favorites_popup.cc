@@ -25,9 +25,25 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QKeyEvent>
+#include <QStandardItemModel>
+
+#include "dooble.h"
 #include "dooble_favorites_popup.h"
+#include "dooble_history.h"
 
 dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
+  m_ui.view->setModel(dooble::s_history->favorites_model());
+  m_ui.view->setColumnHidden(2, true);
+  m_ui.view->setColumnHidden(3, true);
+}
+
+void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
+{
+  if(event && event->key() == Qt::Key_Escape)
+    accept();
+
+  QDialog::keyPressEvent(event);
 }

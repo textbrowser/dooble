@@ -34,6 +34,8 @@
 #include <QTimer>
 #include <QWebEngineHistoryItem>
 
+class QStandardItemModel;
+
 class dooble_history: public QObject
 {
   Q_OBJECT
@@ -54,6 +56,7 @@ class dooble_history: public QObject
  ~dooble_history();
  QHash<QUrl, QHash<int, QVariant> > history(void) const;
  QList<QPair<QIcon, QString> > urls(void) const;
+ QStandardItemModel *favorites_model(void) const;
  bool is_favorite(const QUrl &url) const;
  void abort(void);
  void purge(void);
@@ -68,6 +71,7 @@ class dooble_history: public QObject
   QAtomicInteger<short> m_interrupt;
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<int, QVariant> > m_history;
+  QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;
   static QAtomicInteger<quintptr> s_db_id;
