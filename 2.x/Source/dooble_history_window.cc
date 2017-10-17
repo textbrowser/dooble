@@ -303,6 +303,7 @@ void dooble_history_window::slot_containers_cleared(void)
 {
   m_items.clear();
   m_ui.table->setRowCount(0);
+  slot_populate();
 }
 
 void dooble_history_window::slot_copy_location(void)
@@ -674,8 +675,9 @@ void dooble_history_window::slot_populate(void)
   m_items.clear();
   m_ui.table->setSortingEnabled(false);
 
-  QHash<QUrl, QHash<int, QVariant> > hash(dooble::s_history->history());
-  QHashIterator<QUrl, QHash<int, QVariant> > it(hash);
+  QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > hash
+    (dooble::s_history->history());
+  QHashIterator<QUrl, QHash<dooble_history::HistoryItem, QVariant> > it(hash);
   QString icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 

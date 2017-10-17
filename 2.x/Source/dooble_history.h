@@ -54,12 +54,13 @@ class dooble_history: public QObject
 
  dooble_history(void);
  ~dooble_history();
- QHash<QUrl, QHash<int, QVariant> > history(void) const;
+ QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > history(void) const;
  QList<QPair<QIcon, QString> > urls(void) const;
  QStandardItemModel *favorites_model(void) const;
  bool is_favorite(const QUrl &url) const;
  void abort(void);
- void purge(void);
+ void purge_favorites(void);
+ void purge_history(void);
  void remove_item(const QUrl &url);
  void save_favicon(const QIcon &icon, const QUrl &url);
  void save_favorite(const QUrl &url, bool state);
@@ -70,7 +71,7 @@ class dooble_history: public QObject
  private:
   QAtomicInteger<short> m_interrupt;
   QFuture<void> m_purge_future;
-  QHash<QUrl, QHash<int, QVariant> > m_history;
+  QHash<QUrl, QHash<HistoryItem, QVariant> > m_history;
   QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;
@@ -79,7 +80,6 @@ class dooble_history: public QObject
 	     const QByteArray &encryption_key);
 
  private slots:
-  void slot_containers_cleared(void);
   void slot_populate(void);
   void slot_purge_timer_timeout(void);
 

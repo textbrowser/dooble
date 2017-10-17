@@ -86,6 +86,7 @@ Completed Items
 Remaining Items
 
 1.     Favorites pop-up widget.
+2.     Replace the containers_cleared() signal.
 
 Unknown Items
 

@@ -43,10 +43,6 @@ QAtomicInteger<quintptr> dooble_history::s_db_id;
 
 dooble_history::dooble_history(void):QObject()
 {
-  connect(dooble::s_application,
-	  SIGNAL(containers_cleared(void)),
-	  this,
-	  SLOT(slot_containers_cleared(void)));
   connect(&m_purge_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -65,7 +61,8 @@ dooble_history::~dooble_history()
   abort();
 }
 
-QHash<QUrl, QHash<int, QVariant> > dooble_history::history(void) const
+QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > dooble_history::
+history(void) const
 {
   QReadLocker locker(&m_history_mutex);
 
@@ -78,7 +75,7 @@ QList<QPair<QIcon, QString> > dooble_history::urls(void) const
   QReadLocker locker(&m_history_mutex);
 
   {
-    QHashIterator<QUrl, QHash<int, QVariant> > it(m_history);
+    QHashIterator<QUrl, QHash<HistoryItem, QVariant> > it(m_history);
 
     while(it.hasNext())
       {
@@ -187,39 +184,74 @@ void dooble_history::purge(const QByteArray &authentication_key,
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_history::purge(void)
+void dooble_history::purge_favorites(void)
 {
-  m_favorites_model->clear();
+  for(int i = m_favorites_model->rowCount() - 1; i >= 0; i--)
+    {
+      QStandardItem *item = m_favorites_model->item(i, 1);
 
+      if(!item)
+	{
+	  m_favorites_model->removeRow(i);
+	  continue;
+	}
+
+      QWriteLocker locker(&m_history_mutex);
+
+      m_history.remove(item->text());
+    }
+}
+
+void dooble_history::purge_history(void)
+{
   {
+    QHash<QUrl, QHash<HistoryItem, QVariant> > history;
     QWriteLocker locker(&m_history_mutex);
 
-    m_history.clear();
-  }
-
-  QString database_name(QString("dooble_history_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_history.db");
-
-    if(db.open())
+    for(int i = 0; i < m_favorites_model->rowCount(); i++)
       {
-	QSqlQuery query(db);
+	QStandardItem *item = m_favorites_model->item(i, 1);
 
-	query.exec("PRAGMA synchronous = OFF");
-	query.exec("DELETE FROM dooble_history");
-	query.exec("VACUUM");
+	if(!item)
+	  continue;
+
+	if(m_history.contains(item->text()))
+	  history[item->text()] = m_history.value(item->text());
       }
 
-    db.close();
+    m_history.clear();
+    m_history = history;
   }
 
-  QSqlDatabase::removeDatabase(database_name);
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name(QString("dooble_history_%1").
+			    arg(s_db_id.fetchAndAddOrdered(1)));
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_history.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("PRAGMA synchronous = OFF");
+	    query.prepare("DELETE FROM dooble_history WHERE favorite = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	    query.exec();
+	    query.exec("VACUUM");
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
 }
 
 void dooble_history::remove_item(const QUrl &url)
@@ -236,7 +268,7 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 
     if(m_history.contains(url))
       {
-	QHash<int, QVariant> hash(m_history.value(url));
+	QHash<HistoryItem, QVariant> hash(m_history.value(url));
 
 	if(icon.isNull())
 	  hash[FAVICON] = dooble_favicons::icon(url);
@@ -307,7 +339,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
   if(url.isEmpty() || !url.isValid())
     return;
 
-  QHash<int, QVariant> hash;
+  QHash<HistoryItem, QVariant> hash;
   QWriteLocker locker(&m_history_mutex);
 
   if(m_history.contains(url))
@@ -460,7 +492,7 @@ void dooble_history::save_item(const QIcon &icon,
 {
   if(item.isValid())
     {
-      QHash<int, QVariant> hash;
+      QHash<HistoryItem, QVariant> hash;
       QWriteLocker locker(&m_history_mutex);
       bool contains = m_history.contains(item.url());
 
@@ -622,15 +654,6 @@ void dooble_history::save_item(const QIcon &icon,
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_history::slot_containers_cleared(void)
-{
-  m_favorites_model->clear();
-
-  QWriteLocker locker(&m_history_mutex);
-
-  m_history.clear();
-}
-
 void dooble_history::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -640,7 +663,7 @@ void dooble_history::slot_populate(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_favorites_model->clear();
+  m_favorites_model->removeRows(0, m_favorites_model->rowCount());
 
   {
     QWriteLocker locker(&m_history_mutex);
@@ -751,7 +774,7 @@ void dooble_history::slot_populate(void)
 	      if(icon.isNull())
 		icon = dooble_favicons::icon(QUrl::fromEncoded(url));
 
-	      QHash<int, QVariant> hash;
+	      QHash<HistoryItem, QVariant> hash;
 
 	      hash[FAVICON] = icon;
 	      hash[FAVORITE] = is_favorite;
@@ -763,6 +786,42 @@ void dooble_history::slot_populate(void)
 	      hash[URL] = QUrl::fromEncoded(url);
 	      hash[URL_DIGEST] = QByteArray::fromBase64
 		(query.value(6).toByteArray());
+
+	      QList<QStandardItem *> list;
+
+	      for(int i = 0; i < m_favorites_model->columnCount(); i++)
+		{
+		  QStandardItem *item = new QStandardItem();
+
+		  switch(i)
+		    {
+		    case 0:
+		      {
+			item->setText(title);
+			break;
+		      }
+		    case 1:
+		      {
+			item->setText(url);
+			break;
+		      }
+		    case 2:
+		      {
+			item->setText(last_visited);
+			break;
+		      }
+		    case 3:
+		      {
+			item->setText(number_of_visits.rightJustified(16, '0'));
+			break;
+		      }
+		    }
+
+		  list << item;
+		}
+
+	      if(!list.isEmpty())
+		m_favorites_model->appendRow(list);
 
 	      QWriteLocker locker(&m_history_mutex);
 

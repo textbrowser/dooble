@@ -131,9 +131,15 @@ void dooble_clear_items::slot_clear_items(void)
       state = true;
     }
 
+  if(m_ui.favorites->isChecked())
+    {
+      dooble::s_history->purge_favorites();
+      state = true;
+    }
+
   if(m_ui.history->isChecked())
     {
-      dooble::s_history->purge();
+      dooble::s_history->purge_history();
       state = true;
     }
 
