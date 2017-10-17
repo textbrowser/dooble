@@ -189,6 +189,8 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 void dooble_history::purge(void)
 {
+  m_favorites_model->clear();
+
   {
     QWriteLocker locker(&m_history_mutex);
 
@@ -622,6 +624,8 @@ void dooble_history::save_item(const QIcon &icon,
 
 void dooble_history::slot_containers_cleared(void)
 {
+  m_favorites_model->clear();
+
   QWriteLocker locker(&m_history_mutex);
 
   m_history.clear();
@@ -636,6 +640,7 @@ void dooble_history::slot_populate(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_favorites_model->clear();
 
   {
     QWriteLocker locker(&m_history_mutex);
