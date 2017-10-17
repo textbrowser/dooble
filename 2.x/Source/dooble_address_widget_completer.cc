@@ -50,9 +50,9 @@ dooble_address_widget_completer::dooble_address_widget_completer
   m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   m_popup->verticalHeader()->setVisible(false);
   connect(dooble::s_application,
-	  SIGNAL(containers_cleared(void)),
+	  SIGNAL(history_cleared(void)),
 	  this,
-	  SLOT(slot_containers_cleared(void)));
+	  SLOT(slot_history_cleared(void)));
   connect(m_popup,
 	  SIGNAL(clicked(const QModelIndex &)),
 	  this,
@@ -254,7 +254,7 @@ void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
     (widget(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
 }
 
-void dooble_address_widget_completer::slot_containers_cleared(void)
+void dooble_address_widget_completer::slot_history_cleared(void)
 {
   m_model->clear();
   m_purged_items.clear();

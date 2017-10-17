@@ -165,9 +165,9 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       dooble_clear_items clear_items(find_parent_dooble());
 
       connect(&clear_items,
-	      SIGNAL(containers_cleared(void)),
+	      SIGNAL(history_cleared(void)),
 	      dooble::s_application,
-	      SIGNAL(containers_cleared(void)));
+	      SIGNAL(history_cleared(void)));
       clear_items.exec();
     }
   else if(m_ui.cookies == sender())

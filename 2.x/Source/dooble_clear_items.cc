@@ -99,60 +99,37 @@ void dooble_clear_items::slot_clear_items(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  bool state = false;
-
   if(m_ui.accepted_blocked_domains->isChecked())
-    {
-      dooble::s_accepted_or_blocked_domains->purge();
-      state = true;
-    }
+    dooble::s_accepted_or_blocked_domains->purge();
 
   if(m_ui.certificate_error_exceptions->isChecked())
-    {
-      dooble_certificate_exceptions_menu_widget::purge();
-      state = true;
-    }
+    dooble_certificate_exceptions_menu_widget::purge();
 
   if(m_ui.cookies->isChecked())
     {
       dooble_cookies::purge();
-      state = true;
+      emit cookies_cleared();
     }
 
   if(m_ui.download_history->isChecked())
-    {
-      dooble::s_downloads->purge();
-      state = true;
-    }
+    dooble::s_downloads->purge();
 
   if(m_ui.favicons->isChecked())
-    {
-      dooble_favicons::purge();
-      state = true;
-    }
+    dooble_favicons::purge();
 
   if(m_ui.favorites->isChecked())
-    {
-      dooble::s_history->purge_favorites();
-      state = true;
-    }
+    dooble::s_history->purge_favorites();
 
   if(m_ui.history->isChecked())
     {
       dooble::s_history->purge_history();
-      state = true;
+      emit history_cleared();
     }
 
   if(m_ui.visited_links->isChecked())
-    {
-      QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
-      state = true;
-    }
+    QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
 
   QApplication::restoreOverrideCursor();
-
-  if(state)
-    emit containers_cleared();
 }
 
 void dooble_clear_items::slot_download_history_toggled(bool state)

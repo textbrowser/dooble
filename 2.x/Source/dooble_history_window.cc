@@ -78,9 +78,9 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	    m_ui.table->horizontalHeader()->minimumSectionSize()));
 
   connect(dooble::s_application,
-	  SIGNAL(containers_cleared(void)),
+	  SIGNAL(history_cleared(void)),
 	  this,
-	  SLOT(slot_containers_cleared(void)));
+	  SLOT(slot_history_cleared(void)));
   connect(dooble::s_history,
 	  SIGNAL(icon_updated(const QIcon &, const QUrl &)),
 	  this,
@@ -299,13 +299,6 @@ void dooble_history_window::showNormal(QWidget *parent)
   QMainWindow::showNormal();
 }
 
-void dooble_history_window::slot_containers_cleared(void)
-{
-  m_items.clear();
-  m_ui.table->setRowCount(0);
-  slot_populate();
-}
-
 void dooble_history_window::slot_copy_location(void)
 {
   QClipboard *clipboard = QApplication::clipboard();
@@ -426,6 +419,12 @@ void dooble_history_window::slot_find(void)
 {
   m_ui.search->selectAll();
   m_ui.search->setFocus();
+}
+
+void dooble_history_window::slot_history_cleared(void)
+{
+  m_items.clear();
+  m_ui.table->setRowCount(0);
 }
 
 void dooble_history_window::slot_horizontal_header_section_resized

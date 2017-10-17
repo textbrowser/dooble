@@ -58,11 +58,11 @@ class dooble_history_window: public QMainWindow
   void set_row_hidden(int i);
 
  private slots:
-  void slot_containers_cleared(void);
   void slot_copy_location(void);
   void slot_delete_pages(void);
   void slot_favorite_changed(const QUrl &url, bool state);
   void slot_find(void);
+  void slot_history_cleared(void);
   void slot_horizontal_header_section_resized
     (int logicalIndex, int oldSize, int newSize);
   void slot_icon_updated(const QIcon &icon, const QUrl &url);

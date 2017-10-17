@@ -186,20 +186,48 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 void dooble_history::purge_favorites(void)
 {
-  for(int i = m_favorites_model->rowCount() - 1; i >= 0; i--)
+  for(int i = 0; i < m_favorites_model->rowCount(); i++)
     {
       QStandardItem *item = m_favorites_model->item(i, 1);
 
       if(!item)
-	{
-	  m_favorites_model->removeRow(i);
-	  continue;
-	}
+	continue;
 
       QWriteLocker locker(&m_history_mutex);
 
       m_history.remove(item->text());
     }
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name(QString("dooble_history_%1").
+			    arg(s_db_id.fetchAndAddOrdered(1)));
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_history.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("PRAGMA synchronous = OFF");
+	    query.prepare("DELETE FROM dooble_history WHERE favorite = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
+	    query.exec();
+	    query.exec("VACUUM");
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+
 }
 
 void dooble_history::purge_history(void)

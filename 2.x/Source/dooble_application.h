@@ -45,8 +45,9 @@ class dooble_application: public QApplication
   QTranslator *m_translator;
 
  signals:
-  void containers_cleared(void);
+  void cookies_cleared(void);
   void dooble_credentials_authenticated(bool state);
+  void history_cleared(void);
 };
 
 #endif

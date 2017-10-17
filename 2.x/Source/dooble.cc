@@ -1723,9 +1723,13 @@ void dooble::slot_show_clear_items(void)
   dooble_clear_items clear_items(this);
 
   connect(&clear_items,
-	  SIGNAL(containers_cleared(void)),
+	  SIGNAL(cookies_cleared(void)),
 	  s_application,
-	  SIGNAL(containers_cleared(void)));
+	  SIGNAL(cookies_cleared(void)));
+  connect(&clear_items,
+	  SIGNAL(history_cleared(void)),
+	  s_application,
+	  SIGNAL(history_cleared(void)));
   clear_items.exec();
 }
 

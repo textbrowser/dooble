@@ -51,7 +51,8 @@ class dooble_clear_items: public QDialog
   void slot_timeout(void);
 
  signals:
-  void containers_cleared(void);
+  void cookies_cleared(void);
+  void history_cleared(void);
 };
 
 #endif
