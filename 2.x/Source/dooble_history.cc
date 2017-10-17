@@ -825,6 +825,7 @@ void dooble_history::slot_populate(void)
 		    {
 		    case 0:
 		      {
+			item->setIcon(icon);
 			item->setText(title);
 			break;
 		      }
