@@ -38,6 +38,11 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
   m_ui.view->setModel(dooble::s_history->favorites_model());
   m_ui.view->setColumnHidden(2, true);
   m_ui.view->setColumnHidden(3, true);
+  slot_sort(m_ui.sort_order->currentIndex());
+  connect(m_ui.sort_order,
+	  SIGNAL(currentIndexChanged(int)),
+	  this,
+	  SLOT(slot_sort(int)));
 }
 
 void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
@@ -46,4 +51,14 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
     accept();
 
   QDialog::keyPressEvent(event);
+}
+
+void dooble_favorites_popup::slot_sort(int index)
+{
+  if(index == 0) // Last Visited
+    m_ui.view->sortByColumn(2, Qt::DescendingOrder);
+  else if(index == 1) // Most Popular
+    m_ui.view->sortByColumn(3, Qt::DescendingOrder);
+  else // Title
+    m_ui.view->sortByColumn(0, Qt::DescendingOrder);
 }

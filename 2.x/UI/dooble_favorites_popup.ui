@@ -40,7 +40,7 @@
        </item>
        <item>
         <property name="text">
-         <string>Sorted</string>
+         <string>Title</string>
         </property>
        </item>
       </widget>
