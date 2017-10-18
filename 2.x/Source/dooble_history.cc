@@ -397,6 +397,64 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 
   locker.unlock();
 
+  if(state)
+    {
+      QList<QStandardItem *> list
+	(m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+
+      if(list.isEmpty())
+	{
+	  for(int i = 0; i < m_favorites_model->columnCount(); i++)
+	    {
+	      QStandardItem *item = new QStandardItem();
+
+	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+	      switch(i)
+		{
+		case 0:
+		  {
+		    item->setIcon(hash.value(FAVICON).value<QIcon> ());
+		    item->setText(hash.value(TITLE).toString());
+		    break;
+		  }
+		case 1:
+		  {
+		    item->setText(url.toString());
+		    break;
+		  }
+		case 2:
+		  {
+		    item->setText
+		      (hash.value(LAST_VISITED).toDateTime().toString());
+		    break;
+		  }
+		case 3:
+		  {
+		    item->setText
+		      (QString::
+		       number(hash.value(NUMBER_OF_VISITS).toULongLong()).
+		       rightJustified(16, '0'));
+		    break;
+		  }
+		}
+
+	      list << item;
+	    }
+
+	  if(!list.isEmpty())
+	    m_favorites_model->appendRow(list);
+	}
+    }
+  else
+    {
+      QList<QStandardItem *> list
+	(m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+
+      if(!list.isEmpty() && list.at(0))
+	m_favorites_model->removeRow(list.at(0)->row());
+    }
+
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
