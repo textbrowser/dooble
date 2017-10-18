@@ -489,6 +489,11 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_tabs_menu_button_clicked(void)),
 	  Qt::UniqueConnection);
+  connect(s_favorites_window,
+	  SIGNAL(open_url(const QUrl &)),
+	  this,
+	  SLOT(slot_open_favorites_link(const QUrl &)),
+	  Qt::UniqueConnection);
   connect(s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -584,10 +589,6 @@ void dooble::initialize_static_members(void)
       s_favorites_window = new dooble_favorites_popup(0);
       s_favorites_window->setWindowModality(Qt::NonModal);
       s_favorites_window->setWindowTitle(tr("Dooble: Favorites"));
-      connect(s_favorites_window,
-	      SIGNAL(open_url(const QUrl &)),
-	      this,
-	      SLOT(slot_open_favorites_link(const QUrl &)));
     }
 
   if(!s_history)
@@ -1494,7 +1495,8 @@ void dooble::slot_new_window(void)
 
 void dooble::slot_open_favorites_link(const QUrl &url)
 {
-  if(s_favorites_popup_opened_from_dooble_window == this)
+  if(s_favorites_popup_opened_from_dooble_window == this ||
+     !s_favorites_popup_opened_from_dooble_window)
     {
       dooble_page *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
@@ -1866,6 +1868,8 @@ void dooble::slot_show_downloads(void)
 void dooble::slot_show_favorites(void)
 {
   s_favorites_popup_opened_from_dooble_window = this;
+  s_favorites_window->activateWindow();
+  s_favorites_window->raise();
   s_favorites_window->show();
 }
 
