@@ -48,6 +48,7 @@
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
+#include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_hmac.h"
@@ -68,6 +69,7 @@ QPointer<dooble_cookies> dooble::s_cookies;
 QPointer<dooble_cookies_window> dooble::s_cookies_window;
 QPointer<dooble_cryptography> dooble::s_cryptography;
 QPointer<dooble_downloads> dooble::s_downloads;
+QPointer<dooble_favorites_popup> dooble::s_favorites_window;
 QPointer<dooble_history_window> dooble::s_history_window;
 QPointer<dooble_settings> dooble::s_settings;
 QPointer<dooble_web_engine_url_request_interceptor>
@@ -576,6 +578,13 @@ void dooble::initialize_static_members(void)
   if(!s_downloads)
     s_downloads = new dooble_downloads();
 
+  if(!s_favorites_window)
+    {
+      s_favorites_window = new dooble_favorites_popup(0);
+      s_favorites_window->setWindowModality(Qt::NonModal);
+      s_favorites_window->setWindowTitle(tr("Dooble: Favorites"));
+    }
+
   if(!s_history)
     s_history = new dooble_history();
 
@@ -832,6 +841,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_favorites(void)),
+	  this,
+	  SLOT(slot_show_favorites(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_full_screen(void)),
 	  this,
 	  SLOT(slot_show_full_screen(void)),
@@ -1009,6 +1024,10 @@ void dooble::prepare_standard_menus(void)
 		    this,
 		    SLOT(slot_show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
+
+  menu->addAction(tr("&Favorites..."),
+		  this,
+		  SLOT(slot_show_favorites(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
     menu->addAction(tr("&History"),
@@ -1823,6 +1842,11 @@ void dooble::slot_show_downloads(void)
 
   s_downloads->activateWindow();
   s_downloads->raise();
+}
+
+void dooble::slot_show_favorites(void)
+{
+  s_favorites_window->show();
 }
 
 void dooble::slot_show_full_screen(void)

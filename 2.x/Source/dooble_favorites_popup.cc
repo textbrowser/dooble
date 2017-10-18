@@ -36,7 +36,12 @@
 dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
-  m_ui.view->setModel(dooble::s_history->favorites_model());
+
+  if(dooble::s_history && dooble::s_history->favorites_model())
+    m_ui.view->setModel(dooble::s_history->favorites_model());
+  else
+    QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
+
   m_ui.view->setColumnHidden(2, true);
   m_ui.view->setColumnHidden(3, true);
   m_ui.sort_order->setCurrentIndex
@@ -58,6 +63,19 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
   QDialog::keyPressEvent(event);
 }
 
+void dooble_favorites_popup::slot_set_favorites_model(void)
+{
+  if(m_ui.view->model())
+    return;
+  else if(dooble::s_history && dooble::s_history->favorites_model())
+    {
+      m_ui.view->setModel(dooble::s_history->favorites_model());
+      slot_sort(m_ui.sort_order->currentIndex());
+    }
+  else
+    QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
+}
+
 void dooble_favorites_popup::slot_sort(int index)
 {
   if(index == 0) // Last Visited
@@ -67,5 +85,6 @@ void dooble_favorites_popup::slot_sort(int index)
   else // Title
     m_ui.view->sortByColumn(0, Qt::DescendingOrder);
 
-  dooble_settings::set_setting("favorites_sort_index", index);
+  if(sender())
+    dooble_settings::set_setting("favorites_sort_index", index);
 }

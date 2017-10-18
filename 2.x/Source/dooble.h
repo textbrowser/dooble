@@ -46,6 +46,7 @@ class dooble_cookies;
 class dooble_cookies_window;
 class dooble_cryptography;
 class dooble_downloads;
+class dooble_favorites_popup;
 class dooble_history;
 class dooble_history_window;
 class dooble_page;
@@ -74,6 +75,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_cookies_window> s_cookies_window;
   static QPointer<dooble_cryptography> s_cryptography;
   static QPointer<dooble_downloads> s_downloads;
+  static QPointer<dooble_favorites_popup> s_favorites_window;
   static QPointer<dooble_history_window> s_history_window;
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_web_engine_url_request_interceptor>
@@ -155,6 +157,7 @@ class dooble: public QMainWindow
   void slot_show_clear_items(void);
   void slot_show_cookies(void);
   void slot_show_downloads(void);
+  void slot_show_favorites(void);
   void slot_show_full_screen(void);
   void slot_show_history(void);
   void slot_show_settings(void);

@@ -180,6 +180,7 @@ class dooble_page: public QWidget
   void show_clear_items(void);
   void show_cookies(void);
   void show_downloads(void);
+  void show_favorites(void);
   void show_full_screen(void);
   void show_history(void);
   void show_settings(void);

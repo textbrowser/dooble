@@ -46,6 +46,7 @@ class dooble_favorites_popup: public QDialog
   Ui_dooble_favorites_popup m_ui;
 
  private slots:
+  void slot_set_favorites_model(void);
   void slot_sort(int index);
 };
 
