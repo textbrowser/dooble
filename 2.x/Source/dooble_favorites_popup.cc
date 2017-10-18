@@ -38,12 +38,14 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
   m_ui.setupUi(this);
 
   if(dooble::s_history && dooble::s_history->favorites_model())
-    m_ui.view->setModel(dooble::s_history->favorites_model());
+    {
+      m_ui.view->setModel(dooble::s_history->favorites_model());
+      m_ui.view->setColumnHidden(2, true);
+      m_ui.view->setColumnHidden(3, true);
+    }
   else
     QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
 
-  m_ui.view->setColumnHidden(2, true);
-  m_ui.view->setColumnHidden(3, true);
   m_ui.sort_order->setCurrentIndex
     (qBound(0,
 	    dooble_settings::setting("favorites_sort_index").toInt(),
@@ -70,6 +72,8 @@ void dooble_favorites_popup::slot_set_favorites_model(void)
   else if(dooble::s_history && dooble::s_history->favorites_model())
     {
       m_ui.view->setModel(dooble::s_history->favorites_model());
+      m_ui.view->setColumnHidden(2, true);
+      m_ui.view->setColumnHidden(3, true);
       slot_sort(m_ui.sort_order->currentIndex());
     }
   else
