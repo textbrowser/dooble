@@ -141,9 +141,24 @@ dooble_settings::dooble_settings(void):QMainWindow()
     (2,
      tr("Cookies marked persistent are saved to and restored from disk."),
      Qt::ToolTipRole);
-  m_ui.ini_location->setText
-    (tr("The Dooble configuration file dooble_settings.db resides in %1.").
-     arg(setting("home_path").toString()));
+
+  QFileInfo file_info(setting("home_path").toString() +
+		      QDir::separator() +
+		      "dooble_settings.db");
+
+  if(file_info.isReadable())
+    {
+      m_ui.ini_location->setStyleSheet("QLabel {color: darkgreen;}");
+      m_ui.ini_location->setText
+	(tr("The Dooble configuration file dooble_settings.db resides in %1.").
+	 arg(setting("home_path").toString()));
+    }
+  else
+    {
+      m_ui.ini_location->setStyleSheet("QLabel {color: darkred;}");
+      m_ui.ini_location->setText
+	(tr("Cannot access dooble_settings.db. Your system is dysfunctional."));
+    }
 
   QString path(QDir::currentPath());
 
@@ -151,14 +166,14 @@ dooble_settings::dooble_settings(void):QMainWindow()
   path.append("Translations");
   path.append(QDir::separator());
   path.append("dooble_" + QLocale::system().name() + ".qm");
-
-  QFileInfo file_info(path);
+  file_info.setFile(path);
 
   if(!file_info.isReadable())
     {
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
 				      Qt::UserRole - 1);
+      m_ui.language_directory->setStyleSheet("QLabel {color: darkred;}");
       m_ui.language_directory->setText
 	(tr("The file %1 is not readable. Disabling the System option.").
 	 arg(file_info.absoluteFilePath()));
