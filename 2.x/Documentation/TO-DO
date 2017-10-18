@@ -82,11 +82,11 @@ Completed Items
 77.    Favorites and disabled history.
 78.    Private-window decorations.
 79.    Display expected location of Translations in Settings.
+80.    Replace the containers_cleared() signal.
 
 Remaining Items
 
 1.     Favorites pop-up widget.
-2.     Replace the containers_cleared() signal.
 
 Unknown Items
 
