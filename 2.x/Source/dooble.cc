@@ -59,8 +59,8 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
+QPointer<dooble> dooble::s_favorites_popup_opened_from_dooble_window;
 QPointer<dooble_history> dooble::s_history;
-bool dooble::s_containers_populated = false;
 QPointer<dooble_about> dooble::s_about;
 QPointer<dooble_accepted_or_blocked_domains>
 dooble::s_accepted_or_blocked_domains;
@@ -74,6 +74,7 @@ QPointer<dooble_history_window> dooble::s_history_window;
 QPointer<dooble_settings> dooble::s_settings;
 QPointer<dooble_web_engine_url_request_interceptor>
 dooble::s_url_request_interceptor;
+bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);
 
@@ -583,6 +584,10 @@ void dooble::initialize_static_members(void)
       s_favorites_window = new dooble_favorites_popup(0);
       s_favorites_window->setWindowModality(Qt::NonModal);
       s_favorites_window->setWindowTitle(tr("Dooble: Favorites"));
+      connect(s_favorites_window,
+	      SIGNAL(open_url(const QUrl &)),
+	      this,
+	      SLOT(slot_open_favorites_link(const QUrl &)));
     }
 
   if(!s_history)
@@ -1487,6 +1492,20 @@ void dooble::slot_new_window(void)
   (new dooble(QUrl(), false))->show();
 }
 
+void dooble::slot_open_favorites_link(const QUrl &url)
+{
+  if(s_favorites_popup_opened_from_dooble_window == this)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(m_ui.tab->currentWidget());
+
+      if(page)
+	page->load(url);
+      else
+	m_ui.tab->setCurrentWidget(new_page(url, m_is_private));
+    }
+}
+
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
   (new dooble(url, true))->show();
@@ -1846,6 +1865,7 @@ void dooble::slot_show_downloads(void)
 
 void dooble::slot_show_favorites(void)
 {
+  s_favorites_popup_opened_from_dooble_window = this;
   s_favorites_window->show();
 }
 

@@ -107,6 +107,7 @@ class dooble: public QMainWindow
   Ui_dooble m_ui;
   bool m_is_javascript_dialog;
   bool m_is_private;
+  static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static bool s_containers_populated;
   bool can_exit(void);
   void connect_signals(void);
@@ -137,6 +138,7 @@ class dooble: public QMainWindow
   void slot_new_private_window(void);
   void slot_new_tab(void);
   void slot_new_window(void);
+  void slot_open_favorites_link(const QUrl &url);
   void slot_open_link_in_new_private_window(const QUrl &url);
   void slot_open_link_in_new_tab(const QUrl &url);
   void slot_open_link_in_new_window(const QUrl &url);

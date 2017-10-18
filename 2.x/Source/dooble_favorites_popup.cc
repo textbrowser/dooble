@@ -55,6 +55,10 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 	  SIGNAL(currentIndexChanged(int)),
 	  this,
 	  SLOT(slot_sort(int)));
+  connect(m_ui.view,
+	  SIGNAL(doubleClicked(const QModelIndex &)),
+	  this,
+	  SLOT(slot_double_clicked(const QModelIndex &)));
 }
 
 void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
@@ -63,6 +67,11 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
     accept();
 
   QDialog::keyPressEvent(event);
+}
+
+void dooble_favorites_popup::slot_double_clicked(const QModelIndex &index)
+{
+  emit open_url(index.sibling(index.row(), 1).data().toString());
 }
 
 void dooble_favorites_popup::slot_set_favorites_model(void)

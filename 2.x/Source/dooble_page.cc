@@ -1224,6 +1224,11 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
     }
 }
 
+void dooble_page::slot_open_url(const QUrl &url)
+{
+  load(url);
+}
+
 void dooble_page::slot_open_url(void)
 {
   m_ui.address->selectAll();
@@ -1370,6 +1375,10 @@ void dooble_page::slot_show_favorites_popup(void)
 	  SIGNAL(accepted(void)),
 	  &menu,
 	  SLOT(close(void)));
+  connect(favorites_popup,
+	  SIGNAL(open_url(const QUrl &)),
+	  this,
+	  SLOT(slot_open_url(const QUrl &)));
   favorites_popup->resize(favorites_popup->sizeHint());
   size = favorites_popup->size();
   point.setX(m_ui.favorites->size().width() + point.x() - size.width());
