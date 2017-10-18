@@ -173,6 +173,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["credentials_enabled"] = false;
+  s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
