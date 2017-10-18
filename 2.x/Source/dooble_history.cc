@@ -284,6 +284,12 @@ void dooble_history::purge_history(void)
 
 void dooble_history::remove_item(const QUrl &url)
 {
+  QList<QStandardItem *> list
+    (m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+
+  if(!list.isEmpty() && list.at(0))
+    m_favorites_model->removeRow(list.at(0)->row());
+
   QWriteLocker locker(&m_history_mutex);
 
   m_history.remove(url);
