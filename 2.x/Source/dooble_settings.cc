@@ -141,6 +141,9 @@ dooble_settings::dooble_settings(void):QMainWindow()
     (2,
      tr("Cookies marked persistent are saved to and restored from disk."),
      Qt::ToolTipRole);
+  m_ui.ini_location->setText
+    (tr("The Dooble configuration file dooble_settings.db resides in %1.").
+     arg(setting("home_path").toString()));
 
   QString path(QDir::currentPath());
 

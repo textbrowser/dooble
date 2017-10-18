@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>534</height>
+           <height>526</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -647,8 +647,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>503</width>
-               <height>682</height>
+               <width>415</width>
+               <height>651</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1137,8 +1137,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>353</width>
-               <height>708</height>
+               <width>270</width>
+               <height>700</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1445,6 +1445,16 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="ini_location">
+      <property name="text">
+       <string>INI Location</string>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
