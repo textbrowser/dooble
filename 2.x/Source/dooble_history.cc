@@ -304,6 +304,8 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 	  hash[FAVICON] = icon;
 
 	m_history[url] = hash;
+	locker.unlock();
+	update_favorite(hash);
 	emit icon_updated(hash[FAVICON].value<QIcon> (), url);
       }
   }
@@ -398,54 +400,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
   locker.unlock();
 
   if(state)
-    {
-      QList<QStandardItem *> list
-	(m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
-
-      if(list.isEmpty())
-	{
-	  for(int i = 0; i < m_favorites_model->columnCount(); i++)
-	    {
-	      QStandardItem *item = new QStandardItem();
-
-	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-
-	      switch(i)
-		{
-		case 0:
-		  {
-		    item->setIcon(hash.value(FAVICON).value<QIcon> ());
-		    item->setText(hash.value(TITLE).toString());
-		    break;
-		  }
-		case 1:
-		  {
-		    item->setText(url.toString());
-		    break;
-		  }
-		case 2:
-		  {
-		    item->setText
-		      (hash.value(LAST_VISITED).toDateTime().toString());
-		    break;
-		  }
-		case 3:
-		  {
-		    item->setText
-		      (QString::
-		       number(hash.value(NUMBER_OF_VISITS).toULongLong()).
-		       rightJustified(16, '0'));
-		    break;
-		  }
-		}
-
-	      list << item;
-	    }
-
-	  if(!list.isEmpty())
-	    m_favorites_model->appendRow(list);
-	}
-    }
+    update_favorite(hash);
   else
     {
       QList<QStandardItem *> list
@@ -534,7 +489,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	  ok = false;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (QByteArray::number(hash.value(NUMBER_OF_VISITS, 0).toULongLong()));
+	  (QByteArray::number(hash.value(NUMBER_OF_VISITS, 1).toULongLong()));
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -590,7 +545,8 @@ void dooble_history::save_item(const QIcon &icon,
       hash[FAVORITE] = m_history.value(item.url()).value(FAVORITE, false);
       hash[LAST_VISITED] = item.lastVisited();
       hash[NUMBER_OF_VISITS] =
-	hash.value(NUMBER_OF_VISITS, 1).toULongLong() + 1;
+	m_history.value(item.url()).value(NUMBER_OF_VISITS, 1).
+	toULongLong() + 1;
       hash[TITLE] = item.title();
       hash[URL] = item.url();
 
@@ -600,6 +556,7 @@ void dooble_history::save_item(const QIcon &icon,
 
       m_history[item.url()] = hash;
       locker.unlock();
+      update_favorite(hash);
 
       if(!contains)
 	emit new_item(hash[FAVICON].value<QIcon> (), item);
@@ -699,7 +656,7 @@ void dooble_history::save_item(const QIcon &icon,
 
 	  bytes = dooble::s_cryptography->encrypt_then_mac
 	    (QByteArray::number(m_history.value(item.url()).
-				value(NUMBER_OF_VISITS, 0).toULongLong()));
+				value(NUMBER_OF_VISITS, 1).toULongLong()));
 	}
 
 	if(!bytes.isEmpty())
@@ -942,4 +899,106 @@ void dooble_history::slot_purge_timer_timeout(void)
      &dooble_history::purge,
      dooble::s_cryptography->keys().first,
      dooble::s_cryptography->keys().second);
+}
+
+void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
+{
+  if(!hash.value(FAVORITE, false).toBool())
+    return;
+
+  QUrl url(hash.value(URL).toUrl());
+
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  QList<QStandardItem *> list
+    (m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+
+  if(list.isEmpty())
+    {
+      for(int i = 0; i < m_favorites_model->columnCount(); i++)
+	{
+	  QStandardItem *item = new QStandardItem();
+
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+	  switch(i)
+	    {
+	    case 0:
+	      {
+		item->setIcon(hash.value(FAVICON).value<QIcon> ());
+		item->setText(hash.value(TITLE).toString());
+		break;
+	      }
+	    case 1:
+	      {
+		item->setText(url.toString());
+		break;
+	      }
+	    case 2:
+	      {
+		item->setText
+		  (hash.value(LAST_VISITED).toDateTime().toString(Qt::ISODate));
+		break;
+	      }
+	    case 3:
+	      {
+		item->setText
+		  (QString::number(hash.value(NUMBER_OF_VISITS).toULongLong()).
+		   rightJustified(16, '0'));
+		break;
+	      }
+	    }
+
+	  list << item;
+	}
+
+      if(!list.isEmpty())
+	m_favorites_model->appendRow(list);
+    }
+  else
+    {
+      QStandardItem *item = list.at(0);
+
+      if(!item)
+	return;
+
+      int row = item->row();
+
+      for(int i = 0; i < m_favorites_model->columnCount(); i++)
+	{
+	  item = m_favorites_model->item(row, i);
+
+	  if(!item)
+	    continue;
+
+	  switch(i)
+	    {
+	    case 0:
+	      {
+		item->setIcon(hash.value(FAVICON).value<QIcon> ());
+		item->setText(hash.value(TITLE).toString());
+		break;
+	      }
+	    case 1:
+	      {
+		item->setText(url.toString());
+		break;
+	      }
+	    case 2:
+	      {
+		item->setText
+		  (hash.value(LAST_VISITED).toDateTime().toString(Qt::ISODate));
+		break;
+	      }
+	    case 3:
+	      {
+		item->setText
+		  (QString::number(hash.value(NUMBER_OF_VISITS).toULongLong()).
+		   rightJustified(16, '0'));
+		break;
+	      }
+	    }
+	}
+    }
 }

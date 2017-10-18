@@ -78,6 +78,7 @@ class dooble_history: public QObject
   static QAtomicInteger<quintptr> s_db_id;
   void purge(const QByteArray &authentication_key,
 	     const QByteArray &encryption_key);
+  void update_favorite(const QHash<HistoryItem, QVariant> &hash);
 
  private slots:
   void slot_populate(void);
