@@ -898,6 +898,9 @@ void dooble::prepare_shortcuts(void)
 {
   if(m_shortcuts.isEmpty())
     {
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+B")),
+				   this,
+				   SLOT(slot_show_favorites(void)));      
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+D")),
 				   this,
 				   SLOT(slot_show_downloads(void)));
@@ -1037,7 +1040,8 @@ void dooble::prepare_standard_menus(void)
 
   menu->addAction(tr("&Favorites..."),
 		  this,
-		  SLOT(slot_show_favorites(void)));
+		  SLOT(slot_show_favorites(void)),
+		  QKeySequence(tr("Ctrl+B")));
 
   if(dooble_settings::setting("pin_history_window").toBool())
     menu->addAction(tr("&History"),

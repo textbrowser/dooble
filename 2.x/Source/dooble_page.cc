@@ -626,7 +626,8 @@ void dooble_page::prepare_standard_menus(void)
 
   menu->addAction(tr("&Favorites..."),
 		  this,
-		  SIGNAL(show_favorites(void)));
+		  SIGNAL(show_favorites(void)),
+		  QKeySequence(tr("Ctrl+B")));
 
   if(dooble_settings::setting("pin_history_window").toBool())
     menu->addAction(tr("&History"),
