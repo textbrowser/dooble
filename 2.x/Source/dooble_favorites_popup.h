@@ -47,10 +47,12 @@ class dooble_favorites_popup: public QDialog
 
  private slots:
   void slot_double_clicked(const QModelIndex &index);
+  void slot_favorites_sorted(void);
   void slot_set_favorites_model(void);
   void slot_sort(int index);
 
  signals:
+  void favorites_sorted(void);
   void open_url(const QUrl &url);
 };
 

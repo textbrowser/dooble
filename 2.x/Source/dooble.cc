@@ -589,6 +589,10 @@ void dooble::initialize_static_members(void)
       s_favorites_window = new dooble_favorites_popup(0);
       s_favorites_window->setWindowModality(Qt::NonModal);
       s_favorites_window->setWindowTitle(tr("Dooble: Favorites"));
+      connect(s_application,
+	      SIGNAL(favorites_sorted(void)),
+	      s_favorites_window,
+	      SLOT(slot_favorites_sorted(void)));
     }
 
   if(!s_history)

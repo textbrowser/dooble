@@ -1372,6 +1372,10 @@ void dooble_page::slot_show_favorites_popup(void)
   dooble_favorites_popup *favorites_popup = new dooble_favorites_popup(&widget);
 
   connect(favorites_popup,
+	  SIGNAL(favorites_sorted(void)),
+	  dooble::s_application,
+	  SIGNAL(favorites_sorted(void)));
+  connect(favorites_popup,
 	  SIGNAL(accepted(void)),
 	  &menu,
 	  SLOT(close(void)));

@@ -74,6 +74,14 @@ void dooble_favorites_popup::slot_double_clicked(const QModelIndex &index)
   emit open_url(index.sibling(index.row(), 1).data().toString());
 }
 
+void dooble_favorites_popup::slot_favorites_sorted(void)
+{
+  m_ui.sort_order->setCurrentIndex
+    (qBound(0,
+	    dooble_settings::setting("favorites_sort_index").toInt(),
+	    m_ui.sort_order->count() - 1));
+}
+
 void dooble_favorites_popup::slot_set_favorites_model(void)
 {
   if(m_ui.view->model())
@@ -99,5 +107,8 @@ void dooble_favorites_popup::slot_sort(int index)
     m_ui.view->sortByColumn(0, Qt::DescendingOrder);
 
   if(sender())
-    dooble_settings::set_setting("favorites_sort_index", index);
+    {
+      dooble_settings::set_setting("favorites_sort_index", index);
+      emit favorites_sorted();
+    }
 }
