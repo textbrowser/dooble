@@ -42,6 +42,16 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
       m_ui.view->setModel(dooble::s_history->favorites_model());
       m_ui.view->setColumnHidden(2, true);
       m_ui.view->setColumnHidden(3, true);
+      connect(dooble::s_history->favorites_model(),
+	      SIGNAL(dataChanged(const QModelIndex &,
+				 const QModelIndex &,
+				 const QVector<int> &)),
+	      this,
+	      SLOT(slot_sort(void)));
+      connect(dooble::s_history->favorites_model(),
+	      SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+	      this,
+	      SLOT(slot_sort(void)));
     }
   else
     QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
@@ -92,6 +102,18 @@ void dooble_favorites_popup::slot_set_favorites_model(void)
       m_ui.view->setColumnHidden(2, true);
       m_ui.view->setColumnHidden(3, true);
       slot_sort(m_ui.sort_order->currentIndex());
+      connect(dooble::s_history->favorites_model(),
+	      SIGNAL(dataChanged(const QModelIndex &,
+				 const QModelIndex &,
+				 const QVector<int> &)),
+	      this,
+	      SLOT(slot_sort(void)),
+	      Qt::UniqueConnection);
+      connect(dooble::s_history->favorites_model(),
+	      SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+	      this,
+	      SLOT(slot_sort(void)),
+	      Qt::UniqueConnection);
     }
   else
     QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
@@ -111,4 +133,9 @@ void dooble_favorites_popup::slot_sort(int index)
       dooble_settings::set_setting("favorites_sort_index", index);
       emit favorites_sorted();
     }
+}
+
+void dooble_favorites_popup::slot_sort(void)
+{
+  slot_sort(m_ui.sort_order->currentIndex());
 }

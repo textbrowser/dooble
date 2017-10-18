@@ -50,6 +50,7 @@ class dooble_favorites_popup: public QDialog
   void slot_favorites_sorted(void);
   void slot_set_favorites_model(void);
   void slot_sort(int index);
+  void slot_sort(void);
 
  signals:
   void favorites_sorted(void);
