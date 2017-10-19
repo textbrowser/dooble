@@ -58,6 +58,25 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QToolButton" name="delete_selected">
+       <property name="toolTip">
+        <string>Delete Selected Favorite</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -98,6 +117,7 @@
  </widget>
  <tabstops>
   <tabstop>sort_order</tabstop>
+  <tabstop>delete_selected</tabstop>
   <tabstop>view</tabstop>
  </tabstops>
  <resources>

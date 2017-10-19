@@ -61,6 +61,10 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 	    dooble_settings::setting("favorites_sort_index").toInt(),
 	    m_ui.sort_order->count() - 1));
   slot_sort(m_ui.sort_order->currentIndex());
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   connect(m_ui.sort_order,
 	  SIGNAL(currentIndexChanged(int)),
 	  this,
@@ -69,6 +73,12 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 	  SIGNAL(doubleClicked(const QModelIndex &)),
 	  this,
 	  SLOT(slot_double_clicked(const QModelIndex &)));
+#ifdef Q_OS_MACOS
+  m_ui.delete_selected->setStyleSheet
+    ("QToolButton {border: none;}"
+     "QToolButton::menu-button {border: none;}");
+#endif
+  prepare_icons();
 }
 
 void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
@@ -77,6 +87,14 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
     accept();
 
   QDialog::keyPressEvent(event);
+}
+
+void dooble_favorites_popup::prepare_icons(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  m_ui.delete_selected->setIcon
+    (QIcon(QString(":/%1/36/delete.png").arg(icon_set)));
 }
 
 void dooble_favorites_popup::slot_double_clicked(const QModelIndex &index)
@@ -117,6 +135,11 @@ void dooble_favorites_popup::slot_set_favorites_model(void)
     }
   else
     QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
+}
+
+void dooble_favorites_popup::slot_settings_applied(void)
+{
+  prepare_icons();
 }
 
 void dooble_favorites_popup::slot_sort(int index)
