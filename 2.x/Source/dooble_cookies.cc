@@ -151,9 +151,9 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 		   "favorite_digest TEXT NOT NULL)");
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
 		   "domain_digest TEXT NOT NULL, "
+		   "identifier_digest TEXT NOT NULL, "
 		   "raw_form BLOB NOT NULL, "
-		   "raw_form_digest TEXT NOT NULL, "
-		   "PRIMARY KEY (domain_digest, raw_form_digest), "
+		   "PRIMARY KEY (domain_digest, identifier_digest), "
 		   "FOREIGN KEY (domain_digest) REFERENCES "
 		   "dooble_cookies_domains (domain_digest) ON DELETE CASCADE "
 		   ")");
@@ -183,18 +183,17 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
-	   "(domain_digest, raw_form, raw_form_digest) VALUES (?, ?, ?)");
+	   "(domain_digest, identifier_digest, raw_form) VALUES (?, ?, ?)");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(identifier(cookie)).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac(cookie.toRawForm());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
 	  ok = false;
-
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(identifier(cookie)).toBase64());
 
 	if(ok)
 	  query.exec();
@@ -230,7 +229,7 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
 	QSqlQuery query(db);
 
 	query.exec("PRAGMA synchronous = OFF");
-	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
+	query.prepare("DELETE FROM dooble_cookies WHERE identifier_digest = ?");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(identifier(cookie)).toBase64());
 	query.exec();
@@ -264,7 +263,7 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
 	QSqlQuery query(db);
 
 	query.exec("PRAGMA synchronous = OFF");
-	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
+	query.prepare("DELETE FROM dooble_cookies WHERE identifier_digest = ?");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(identifier(cookie)).toBase64());
 	query.exec();
