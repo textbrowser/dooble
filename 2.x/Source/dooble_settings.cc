@@ -161,7 +161,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	 "color:#a94442;}");
       m_ui.ini_location->setText
-	(tr("<b>Warning!</b> Cannot access dooble_settings.db. "
+	(tr("<b>Danger!</b> Cannot access dooble_settings.db. "
 	    "Your system is dysfunctional."));
     }
 

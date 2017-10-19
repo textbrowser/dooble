@@ -82,6 +82,16 @@
      </widget>
     </item>
     <item>
+     <widget class="QLabel" name="label_8">
+      <property name="styleSheet">
+       <string notr="true">QLabel {background-color: #dff0d8; border: 1px solid #d6e9c6; color:#3c763d;}</string>
+      </property>
+      <property name="text">
+       <string>The tuple (&lt;b&gt;domain&lt;/b&gt;, &lt;b&gt;name&lt;/b&gt;, &lt;b&gt;path&lt;/b&gt;) serves as a cookie identifier.</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="verticalSpacing">
        <number>1</number>
