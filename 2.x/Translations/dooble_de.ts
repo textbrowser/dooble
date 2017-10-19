@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>QObject</name>
     <message>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>New Page</source>
-        <translation>Neue Seite</translation>
+        <translation type="vanished">Neue Seite</translation>
     </message>
     <message>
         <source>Ctrl+D</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>New &amp;Private Window</source>
-        <translation type="unfinished">Neues &amp;privates Fenster</translation>
+        <translation type="obsolete">Neues &amp;privates Fenster</translation>
     </message>
     <message>
         <source>New &amp;Tab</source>
@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>&amp;Blocked Domains</source>
-        <translation>&amp;Blockierte Domains</translation>
+        <translation type="vanished">&amp;Blockierte Domains</translation>
     </message>
     <message>
         <source>&amp;Blocked Domains...</source>
-        <translation>&amp;Blockierte Domains...</translation>
+        <translation type="vanished">&amp;Blockierte Domains...</translation>
     </message>
     <message>
         <source>&amp;Downloads</source>
@@ -212,11 +212,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="vanished">Speichern</translation>
     </message>
     <message>
         <source>Dooble: Download File</source>
-        <translation>Dooble: Datei herunterladen</translation>
+        <translation type="vanished">Dooble: Datei herunterladen</translation>
     </message>
     <message>
         <source>Dooble</source>
@@ -246,6 +246,18 @@
         <source>Accepted / &amp;Blocked Domains...</source>
         <translation>Akzeptierte / &amp;Blockierte Domänen...</translation>
     </message>
+    <message>
+        <source>Dooble: Favorites</source>
+        <translation>Dooble: Favoriten</translation>
+    </message>
+    <message>
+        <source>&amp;Favorites...</source>
+        <translation>&amp;Favoriten...</translation>
+    </message>
+    <message>
+        <source>Ctrl+B</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -268,8 +280,28 @@
     <message>
         <source>Version 2018.01.01, Baba Yaga.
 (c) 2008 - present.</source>
-        <translation>Version 2018.01.01, Baba Yaga.
+        <translation type="vanished">Version 2018.01.01, Baba Yaga.
 (c) 2008 - heute.</translation>
+    </message>
+    <message>
+        <source>Version 2018.01.01, Baba Yaga.
+Dooble is open source software.
+(c) 2008 - present.</source>
+        <translation>Version 2018.01.01, Baba Yaga.
+Dooble ist open source software.
+(c) 2008 - heute.</translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation>Lizenz</translation>
+    </message>
+    <message>
+        <source>Release Notes</source>
+        <translation>Veröffentlichungs-Hinweise</translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;https://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22BSD_License_2.0.22.2C_.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29&quot;&gt;BSD 3-Clause License&lt;/a&gt;</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -324,7 +356,7 @@
     </message>
     <message>
         <source>Blocked</source>
-        <translation type="unfinished">Blockiert</translation>
+        <translation>Blockiert</translation>
     </message>
     <message>
         <source>Dooble: Accepted / Blocked Domains</source>
@@ -333,7 +365,7 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only the specified domains may be visited.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only the specified domains can be visited.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translatorcomment>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nur die spezifizierten Domänen können besucht werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nur die spezifizierten Domänen können besucht werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Accept Mode</source>
@@ -382,7 +414,7 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL or a host. Input is partially validated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment> &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Input was partially validated: Please specify a complete URL or an IP-Address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translatorcomment>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte benenne eine komplette URL oder einen Host. Die EIngabe wird zum Teil validiert.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte benenne eine komplette URL oder einen Host. Die EIngabe wird zum Teil validiert.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Add</source>
@@ -482,7 +514,7 @@
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>Certificate Error Exception</source>
@@ -569,7 +601,7 @@
     <message>
         <source>Downloads are in progress. If you continue, downloads will be canceled. Are you sure that you wish to proceed?</source>
         <translatorcomment>Downloads are still in progress. If you continue, downloads will be canceled. Are you sure that you wish to proceed?</translatorcomment>
-        <translation type="unfinished">Downloads finden noch statt. Wenn Du vorangehst, werden die Downloads abgebrochen. Bist Du sicher, dass Du vorangehen willst?</translation>
+        <translation>Downloads finden noch statt. Wenn Du vorangehst, werden die Downloads abgebrochen. Bist Du sicher, dass Du vorangehen willst?</translation>
     </message>
     <message>
         <source>Dooble: Confirmation</source>
@@ -601,7 +633,7 @@
     <message>
         <source>Dooble: Cookies</source>
         <translatorcomment>Dooble: Cookies Washer</translatorcomment>
-        <translation type="unfinished">Dooble: Cookies Washer</translation>
+        <translation>Dooble: Cookies Washer</translation>
     </message>
     <message>
         <source>&amp;Domain Filter</source>
@@ -658,12 +690,12 @@
     <message>
         <source>Sites which are not enabled (checked) will be removed periodically.</source>
         <translatorcomment>Sites which are not enabled (checked) will be removed (Cookie Washer).</translatorcomment>
-        <translation type="unfinished">Seiten, die nicht gekennzeichnet (mit Häkchen geschecked) sind, werden regelmäßig gelöscht (Cookie Washer).</translation>
+        <translation>Seiten, die nicht gekennzeichnet (mit Häkchen geschecked) sind, werden regelmäßig gelöscht (Cookie Washer).</translation>
     </message>
     <message>
         <source>&amp;Purge Periodically</source>
         <translatorcomment>&amp;Purge Cookies Periodically</translatorcomment>
-        <translation type="unfinished">&amp;Lösche regelmäßig.</translation>
+        <translation>&amp;Lösche regelmäßig.</translation>
     </message>
     <message>
         <source>&amp;Delete Selected</source>
@@ -676,6 +708,10 @@
     <message>
         <source>Dooble: Cookies Window Tool Bar</source>
         <translation>Dooble: Cookies Fenster Werkzeug Leiste</translation>
+    </message>
+    <message>
+        <source>The tuple (&lt;b&gt;domain&lt;/b&gt;, &lt;b&gt;name&lt;/b&gt;, &lt;b&gt;path&lt;/b&gt;) serves as a cookie identifier.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -773,7 +809,7 @@
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -782,6 +818,48 @@
     <message>
         <source>Canceled - %1</source>
         <translation>Abgebrochen - %1</translation>
+    </message>
+</context>
+<context>
+    <name>dooble_favorites_popup</name>
+    <message>
+        <source>Dooble</source>
+        <translation>Dooble</translation>
+    </message>
+    <message>
+        <source>Last Visited</source>
+        <translation>Zuletzt besucht am</translation>
+    </message>
+    <message>
+        <source>Most Popular</source>
+        <translation>Besonders populär</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Delete Selected Favorite</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_history</name>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Site</source>
+        <translation>Seite</translation>
+    </message>
+    <message>
+        <source>Last Visited</source>
+        <translation>Zuletzt besucht am</translation>
+    </message>
+    <message>
+        <source>Number of Visits</source>
+        <translation>Anzahl der Besuche</translation>
     </message>
 </context>
 <context>
@@ -1075,7 +1153,7 @@
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>Backward</source>
@@ -1135,7 +1213,7 @@
     </message>
     <message>
         <source>This is a private tab.</source>
-        <translation type="unfinished">Dieses ist ein privater Tab.</translation>
+        <translation>Dieses ist ein privater Tab.</translation>
     </message>
     <message>
         <source>Accepted / Blocked Domains Exception</source>
@@ -1181,13 +1259,21 @@
         <source>Show Accepted / Blocked Domains preferences...</source>
         <translation>Zeige akzeptierte / geblockte Domänen Einstellungen...</translation>
     </message>
+    <message>
+        <source>&amp;Favorites...</source>
+        <translation>&amp;Favoriten...</translation>
+    </message>
+    <message>
+        <source>Ctrl+B</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_popup_menu</name>
     <message>
         <source>Permanent credentials have not been prepared.</source>
         <translatorcomment>A permanent password has not yet been prepared.</translatorcomment>
-        <translation type="unfinished">Ein permanentes Passwort wurde bislang nicht vorbereitet.</translation>
+        <translation>Ein permanentes Passwort wurde bislang nicht vorbereitet.</translation>
     </message>
     <message>
         <source>%1%</source>
@@ -1286,79 +1372,79 @@ Domänen</translation>
     <name>dooble_settings</name>
     <message>
         <source>A valid list of dictionaries has not been prepared.</source>
-        <translation type="unfinished">Eine gültige Liste an Wörterbüchern wurde nicht vorbereitet.</translation>
+        <translation>Eine gültige Liste an Wörterbüchern wurde nicht vorbereitet.</translation>
     </message>
     <message>
         <source>You are about to enable temporary credentials. Existing database data will be removed. New data will be stored as ciphertext. Continue?</source>
-        <translation type="unfinished">Du bist dabei, (temporäre) Passworte einzusetzen. Die existierende Datenbank wird entfernt. Neue Daten werden nunmehr als Ciphertext gespeichert. Fortfahren?</translation>
+        <translation>Du bist dabei, (temporäre) Passworte einzusetzen. Die existierende Datenbank wird entfernt. Neue Daten werden nunmehr als Ciphertext gespeichert. Fortfahren?</translation>
     </message>
     <message>
         <source>You are about to disable credentials. Existing database data will be removed. New data will be stored as plaintext. Continue?</source>
-        <translation type="unfinished">Du bist dabei, die Login-Passworte zu entfernen. Bestehende Einträge in der Datenbank werden entfernt. Neue Daten werden dann als Plaintext ohne Verschlüsselung gespeichert. Fortfahren?</translation>
+        <translation>Du bist dabei, die Login-Passworte zu entfernen. Bestehende Einträge in der Datenbank werden entfernt. Neue Daten werden dann als Plaintext ohne Verschlüsselung gespeichert. Fortfahren?</translation>
     </message>
     <message>
         <source>Dooble: Confirmation</source>
-        <translation type="unfinished">Dooble: Bestätigung</translation>
+        <translation>Dooble: Bestätigung</translation>
     </message>
     <message>
         <source>Dooble: Information</source>
-        <translation type="unfinished">Dooble: Information</translation>
+        <translation>Dooble: Information</translation>
     </message>
     <message>
         <source>Your credentials have been prepared.</source>
-        <translation type="unfinished">Die Anwendung Deiner Passworte wurde vorbereitet.</translation>
+        <translation>Die Anwendung Deiner Passworte wurde vorbereitet.</translation>
     </message>
     <message>
         <source>Dooble: Error</source>
-        <translation type="unfinished">Dooble: Fehler</translation>
+        <translation>Dooble: Fehler</translation>
     </message>
     <message>
         <source>Credentials could not be generated. This is a curious problem.</source>
-        <translation type="unfinished">Passworte konnte nicht generiert werden. Dieses ist ein ernstes Problem.</translation>
+        <translation>Passworte konnte nicht generiert werden. Dieses ist ein ernstes Problem.</translation>
     </message>
     <message>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted.</source>
-        <translation type="unfinished">Bist Du sicher, dass Du für Dooble einen Reset durchführen willst? Alle bekannten Daten werden entfernt und Dooble wird neu gestartet.</translation>
+        <translation>Bist Du sicher, dass Du für Dooble einen Reset durchführen willst? Alle bekannten Daten werden entfernt und Dooble wird neu gestartet.</translation>
     </message>
     <message>
         <source>Are you sure that you wish to reset your permanent credentials? New session-only credentials will be generated and database data will be removed.</source>
-        <translation type="unfinished">Bist Du sicher, dass Du einen Reset Deiner permanenten Passworte durchführen willst? Neue Passworte nur für die einzelne Sitzung werden dann generiert und die Daten der Datenbank werden jeweils entfernt.</translation>
+        <translation>Bist Du sicher, dass Du einen Reset Deiner permanenten Passworte durchführen willst? Neue Passworte nur für die einzelne Sitzung werden dann generiert und die Daten der Datenbank werden jeweils entfernt.</translation>
     </message>
     <message>
         <source>Dooble: User Error</source>
-        <translation type="unfinished">Dooble: Nutzer Fehler</translation>
+        <translation>Dooble: Nutzer Fehler</translation>
     </message>
     <message>
         <source>Empty password(s).</source>
-        <translation type="unfinished">Leere(s) Passwort(e).</translation>
+        <translation>Leere(s) Passwort(e).</translation>
     </message>
     <message>
         <source>Passwords are not equal.</source>
-        <translation type="unfinished">Die Passworte sind nicht gleich.</translation>
+        <translation>Die Passworte sind nicht gleich.</translation>
     </message>
     <message>
         <source>Are you sure that you wish to prepare new credentials? Existing database data will be removed.</source>
-        <translation type="unfinished">Bist Du sicher, dass neue Passworte erstellt werden sollen? Bestehende Daten der Datenbank werden entfernt.</translation>
+        <translation>Bist Du sicher, dass neue Passworte erstellt werden sollen? Bestehende Daten der Datenbank werden entfernt.</translation>
     </message>
     <message>
         <source>Salt-generation failure! This is a curious problem.</source>
-        <translation type="unfinished">Die Generation von &apos;kryptographischem Salz&apos; zeigt einen Fehler. Dieses ist ein ernstes Problem!</translation>
+        <translation>Die Generation von &apos;kryptographischem Salz&apos; zeigt einen Fehler. Dieses ist ein ernstes Problem!</translation>
     </message>
     <message>
         <source>Interrupt</source>
-        <translation type="unfinished">Unterbrechung</translation>
+        <translation>Unterbrechung</translation>
     </message>
     <message>
         <source>Preparing credentials...</source>
-        <translation type="unfinished">Bereite Passworte vor...</translation>
+        <translation>Bereite Passworte vor...</translation>
     </message>
     <message>
         <source>Dooble: Preparing Credentials</source>
-        <translation type="unfinished">Dooble: Vorbereitung von Passworten</translation>
+        <translation>Dooble: Vorbereitung von Passworten</translation>
     </message>
     <message>
         <source>Dooble: Settings</source>
-        <translation type="unfinished">Dooble: Einstellungen</translation>
+        <translation>Dooble: Einstellungen</translation>
     </message>
     <message>
         <source>Cache</source>
@@ -1366,7 +1452,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Display</source>
-        <translation type="unfinished">Anzeige</translation>
+        <translation>Anzeige</translation>
     </message>
     <message>
         <source>History</source>
@@ -1374,15 +1460,15 @@ Domänen</translation>
     </message>
     <message>
         <source>Privacy</source>
-        <translation type="unfinished">Privatheit</translation>
+        <translation>Privatheit</translation>
     </message>
     <message>
         <source>Web</source>
-        <translation type="unfinished">Web</translation>
+        <translation>Web</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished">Fenster</translation>
+        <translation>Fenster</translation>
     </message>
     <message>
         <source>Cache &amp;Size</source>
@@ -1390,11 +1476,11 @@ Domänen</translation>
     </message>
     <message>
         <source>A value of zero will allow QWebEngine to control the size of the cache automatically.</source>
-        <translation type="unfinished">Ein Wert von Null erlaubt QWebEngine die Größe des Cache automatisch zu kontrollieren.</translation>
+        <translation>Ein Wert von Null erlaubt QWebEngine die Größe des Cache automatisch zu kontrollieren.</translation>
     </message>
     <message>
         <source> MiB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1406,11 +1492,11 @@ Domänen</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished">Speicher</translation>
+        <translation>Speicher</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">nicht angewandt</translation>
+        <translation>nicht angewandt</translation>
     </message>
     <message>
         <source>A tab bar will be hidden if its parent tab widget contains only one page.</source>
@@ -1422,75 +1508,75 @@ Domänen</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable special themes on some widgets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ermögliche spezielle Themes auf einigen Widgets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ermögliche spezielle Themes auf einigen Widgets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Denote Private Widgets</source>
-        <translation type="unfinished">Kennzeichne private Widgets</translation>
+        <translation>Kennzeichne private Widgets</translation>
     </message>
     <message>
         <source>If hidden, show via Alt + Ctrl.</source>
-        <translation type="unfinished">Wenn verborgen, zeige via Alt + Ctrl.</translation>
+        <translation>Wenn verborgen, zeige via Alt + Ctrl.</translation>
     </message>
     <message>
         <source>Main Menu Bar Visible</source>
-        <translation type="unfinished">Leiste des Hauptmenüs sichtbar</translation>
+        <translation>Leiste des Hauptmenüs sichtbar</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Support windows will be transformed into tab pages. Modified settings will not be applied immediately.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unterstützungs-Fenster werden in Tab-Seiten umgewandelt. Veränderte Einstellungen werden sofort angewandt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unterstützungs-Fenster werden in Tab-Seiten umgewandelt. Veränderte Einstellungen werden sofort angewandt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Pin Windows</source>
-        <translation type="unfinished">Pinne Fenster fest</translation>
+        <translation>Pinne Fenster fest</translation>
     </message>
     <message>
         <source>Accepted / Blocked Domains</source>
-        <translation type="unfinished">Akzeptierte / Blockierte Domänen</translation>
+        <translation>Akzeptierte / Blockierte Domänen</translation>
     </message>
     <message>
         <source>Downloads</source>
-        <translation type="unfinished">Downloads</translation>
+        <translation>Downloads</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, automatically switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn ein neues Tab von einem Link erstellt wurde, wechsel automatisch zu diesem neuen Tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn ein neues Tab von einem Link erstellt wurde, wechsel automatisch zu diesem neuen Tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Show New Tabs</source>
-        <translation type="unfinished">Zeige neue Tabs</translation>
+        <translation>Zeige neue Tabs</translation>
     </message>
     <message>
         <source>&amp;Theme</source>
-        <translation type="unfinished">&amp;Design-Thema</translation>
+        <translation>&amp;Design-Thema</translation>
     </message>
     <message>
         <source>Material Design</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Zoom Frame Location</source>
-        <translation type="unfinished">&amp;Zoom in den Rahmen </translation>
+        <translation>&amp;Zoom in den Rahmen </translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation type="unfinished">Popup Menü</translation>
+        <translation>Popup Menü</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set to zero to disable the browsing history. If browsing history is disabled, the History window will contain session-only entries.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Setze eine Null, um die Surf-Historie auszuschalten. Wenn die Surf-Historie ausgeschaltet ist, enthält das Historien-Fenster nur Einträge der aktuellen Sitzung.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Setze eine Null, um die Surf-Historie auszuschalten. Wenn die Surf-Historie ausgeschaltet ist, enthält das Historien-Fenster nur Einträge der aktuellen Sitzung.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source> day(s)</source>
-        <translation type="unfinished"> Tage</translation>
+        <translation> Tage</translation>
     </message>
     <message>
         <source>Browsing &amp;History</source>
-        <translation type="unfinished">Surf-Historie</translation>
+        <translation>Surf-Historie</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1498,43 +1584,43 @@ Domänen</translation>
     </message>
     <message>
         <source>Visited Links</source>
-        <translation type="unfinished">Besuchte Links</translation>
+        <translation>Besuchte Links</translation>
     </message>
     <message>
         <source>&amp;Cookie Policy</source>
-        <translation type="unfinished">&amp;Cookie Regulatorien</translation>
+        <translation>&amp;Cookie Regulatorien</translation>
     </message>
     <message>
         <source>Do Not Save</source>
-        <translation type="unfinished">speichere nicht</translation>
+        <translation>speichere nicht</translation>
     </message>
     <message>
         <source>Save All</source>
-        <translation type="unfinished">speichere alle</translation>
+        <translation>speichere alle</translation>
     </message>
     <message>
         <source>Save Persistent Only</source>
-        <translation type="unfinished">speichere nur die persistenten</translation>
+        <translation>speichere nur die persistenten</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If Credentials is not enabled, data will be stored as plaintext.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn keine Passworte eingerichtet wurden, werden die Daten als Plaintext unverschlüsselt gespeichert.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn keine Passworte eingerichtet wurden, werden die Daten als Plaintext unverschlüsselt gespeichert.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Credentials</source>
-        <translation type="unfinished">Passworte</translation>
+        <translation>Passworte</translation>
     </message>
     <message>
         <source>If you would like Dooble to store your data in authentically-encrypted databases, please prepare your credentials. Please note that the Block Cipher setting is retained for permanent credentials only.</source>
-        <translation type="unfinished">Wenn Du möchtest, dass Dooble Deine Daten in authentifiziert-verschlüsselten Datenbanken speichert, dann erstelle bitte hier Dein Passwort. Bitte beachte, dass die Block-Cipher Einstellungen nur für ein permanentes Passwort genommen wird.</translation>
+        <translation>Wenn Du möchtest, dass Dooble Deine Daten in authentifiziert-verschlüsselten Datenbanken speichert, dann erstelle bitte hier Dein Passwort. Bitte beachte, dass die Block-Cipher Einstellungen nur für ein permanentes Passwort genommen wird.</translation>
     </message>
     <message>
         <source>Please note that the cryptographic algorithms which are included in Dooble have not been provided by third-parties. If this is a concern, please do not prepare permanent credentials.</source>
-        <translation type="unfinished">Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses ein Besorgnis ist, erstelle bitte keine permanenten Passworte.</translation>
+        <translation>Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses ein Besorgnis ist, erstelle bitte keine permanenten Passworte.</translation>
     </message>
     <message>
         <source>Key Derivation</source>
-        <translation type="unfinished">Schlüssel-Ableitung</translation>
+        <translation>Schlüssel-Ableitung</translation>
     </message>
     <message>
         <source>Block Cipher</source>
@@ -1546,11 +1632,11 @@ Domänen</translation>
     </message>
     <message>
         <source>SHA3-512</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PBKDF2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AES-256</source>
@@ -1558,63 +1644,63 @@ Domänen</translation>
     </message>
     <message>
         <source>Threefish-256</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Iterations</source>
-        <translation type="unfinished">Iterationen (Wiederholungen)</translation>
+        <translation>Iterationen (Wiederholungen)</translation>
     </message>
     <message>
         <source>&amp;Password</source>
-        <translation type="unfinished">&amp;Passwort</translation>
+        <translation>&amp;Passwort</translation>
     </message>
     <message>
         <source>Password &amp;Confirmation</source>
-        <translation type="unfinished">Passwort &amp;Bestätigung</translation>
+        <translation>Passwort &amp;Bestätigung</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Speichern</translation>
+        <translation>&amp;Speichern</translation>
     </message>
     <message>
         <source>Remove permanent credentials.</source>
-        <translation type="unfinished">Entferne permanente Passworte.</translation>
+        <translation>Entferne permanente Passworte.</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>If credentials are not authenticated or not prepared, data will not be available in future sessions.</source>
-        <translation type="unfinished">Wenn kein Passwort authentifiziert (eingegeben) oder erstellt wurde, werden Deine Daten in zukünftigen Sitzungen nicht verfügbar sein.</translation>
+        <translation>Wenn kein Passwort authentifiziert (eingegeben) oder erstellt wurde, werden Deine Daten in zukünftigen Sitzungen nicht verfügbar sein.</translation>
     </message>
     <message>
         <source>Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished">&amp;Typ</translation>
+        <translation>&amp;Typ</translation>
     </message>
     <message>
         <source>HTTP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Socks5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Host</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Port</source>
@@ -1622,119 +1708,147 @@ Domänen</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished">Nutzer</translation>
+        <translation>Nutzer</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please restart Dooble if UTC Time Zone is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte starte Dooble neu, wenn die UTC Zeit Zone verändert wurde.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte starte Dooble neu, wenn die UTC Zeit Zone verändert wurde.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>UTC Time Zone</source>
-        <translation type="unfinished">UTC Zeit Zone</translation>
+        <translation>UTC Zeit Zone</translation>
     </message>
     <message>
         <source>Animated Scrolling</source>
-        <translation type="unfinished">Animiertes scrollen</translation>
+        <translation>Animiertes scrollen</translation>
     </message>
     <message>
         <source>JavaScript</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Access Clipboard</source>
-        <translation type="unfinished">Zugang zum Zwischenspeicher</translation>
+        <translation>Zugang zum Zwischenspeicher</translation>
     </message>
     <message>
         <source>Block Pop-ups</source>
-        <translation type="unfinished">Blockiere Pop-ups</translation>
+        <translation>Blockiere Pop-ups</translation>
     </message>
     <message>
         <source>New &amp;Exception</source>
-        <translation type="unfinished">Neue Ausnahme</translation>
+        <translation>Neue Ausnahme</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte benenne eine vollständige URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte benenne eine vollständige URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation type="unfinished">Erlauben</translation>
+        <translation>Erlauben</translation>
     </message>
     <message>
         <source>Site</source>
-        <translation type="unfinished">Seite</translation>
+        <translation>Seite</translation>
     </message>
     <message>
         <source>Remove All</source>
-        <translation type="unfinished">Entferne alle</translation>
+        <translation>Entferne alle</translation>
     </message>
     <message>
         <source>Remove Selected</source>
-        <translation type="unfinished">Entferne ausgewählte</translation>
+        <translation>Entferne ausgewählte</translation>
     </message>
     <message>
         <source>HTML5 local storage.</source>
-        <translation type="unfinished">HTML5 lokale Speicherung</translation>
+        <translation>HTML5 lokale Speicherung</translation>
     </message>
     <message>
         <source>Local Storage</source>
-        <translation type="unfinished">Lokale Speicherung</translation>
+        <translation>Lokale Speicherung</translation>
     </message>
     <message>
         <source>Spell Checkers</source>
-        <translation type="unfinished">Rechtschreibprüfung</translation>
+        <translation>Rechtschreibprüfung</translation>
     </message>
     <message>
         <source>&amp;User Agent</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Web Plugins</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>XSS Auditing</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Center Child Windows</source>
-        <translation type="unfinished">Zentriere abgeleitete Fenster</translation>
+        <translation>Zentriere abgeleitete Fenster</translation>
     </message>
     <message>
         <source>Save Geometry</source>
-        <translation type="unfinished">Speichere Geometrie der Fenster</translation>
+        <translation>Speichere Geometrie der Fenster</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Links which are included in the Visited Links file will be colored when they are rendered by a page. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erlaube Schreib-Rechte zu der Datei für lokal besuchte Links. Links, die in der Datei für besuchte Links gespeichert sind, werden in einer anderen Farbe dargestellt, wenn sie durch eine Seite gerendert werden. Bitte starte Dooble neu, wenn die Datei der besuchten Links verändert wurde.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erlaube Schreib-Rechte zu der Datei für lokal besuchte Links. Links, die in der Datei für besuchte Links gespeichert sind, werden in einer anderen Farbe dargestellt, wenn sie durch eine Seite gerendert werden. Bitte starte Dooble neu, wenn die Datei der besuchten Links verändert wurde.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Clear Cache</source>
-        <translation type="unfinished">Cache löschen</translation>
+        <translation>Cache löschen</translation>
     </message>
     <message>
         <source>&amp;Language</source>
-        <translation type="unfinished">Sprache</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>Please restart Dooble if Language is changed.</source>
-        <translation type="unfinished">Bitte starte Dooble neu, wenn die Spracheinstellungen geändert wurden.</translation>
+        <translation>Bitte starte Dooble neu, wenn die Spracheinstellungen geändert wurden.</translation>
     </message>
     <message>
         <source>English</source>
-        <translation type="unfinished">Englisch</translation>
+        <translation>Englisch</translation>
     </message>
     <message>
         <source>Cookies are not saved to disk.</source>
-        <translation type="unfinished">Cookies werden nicht auf die Festplatte gespeichert.</translation>
+        <translation>Cookies werden nicht auf die Festplatte gespeichert.</translation>
     </message>
     <message>
         <source>Both persistent and session cookies are saved to and restored from disk.</source>
-        <translation type="unfinished">Beide, persistente und sitzungsbezogene Cookies werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
+        <translation type="vanished">Beide, persistente und sitzungsbezogene Cookies werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
     </message>
     <message>
         <source>Cookies marked persistent are saved to and restored from disk.</source>
-        <translation type="unfinished">Cookies, die als dauerhaft gelten (z.B. nicht von einem Drittanbieter sind), werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
+        <translation>Cookies, die als dauerhaft gelten (z.B. nicht von einem Drittanbieter sind), werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
+    </message>
+    <message>
+        <source>Language Directory</source>
+        <translation>Pfad für die Übersetzungen</translation>
+    </message>
+    <message>
+        <source>The file %1 is not readable. Disabling the System option.</source>
+        <translation type="vanished">Die Datei %1 kann nicht gelesen werden. Die System Option wird abgestellt.</translation>
+    </message>
+    <message>
+        <source>INI Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Persistent and session cookies are saved to and restored from disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Dooble configuration file dooble_settings.db resides in %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Danger!&lt;/b&gt; Cannot access dooble_settings.db. Your system is dysfunctional.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is not readable. The System option has been disabled.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1778,12 +1892,16 @@ Domänen</translation>
         <source>New Tab</source>
         <translation>Neuer Tab</translation>
     </message>
+    <message>
+        <source>This is a private window.</source>
+        <translation>Dieses ist ein privates Fenster.</translation>
+    </message>
 </context>
 <context>
     <name>dooble_web_engine_page</name>
     <message>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the permanent exception.&lt;br&gt;&lt;br&gt;Permanent exceptions may be removed later.&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;Ein Zertifkat-Fehler entstand beim Zugang zur sicheren Seite %1. &lt;b&gt;%2&lt;/b&gt; Zertifikats-Fehler mögen anzeigen, dass der Server, mit dem Du versuchst zu verbinden, nicht vertrauenswürdig ist.&lt;br&gt;&lt;br&gt;Bitte akzeptiere oder verneine eine permanente Ausnahme.&lt;br&gt;&lt;br&gt;Permanente Ausnahmen können auch später wieder entfernt werden.&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;Ein Zertifkat-Fehler entstand beim Zugang zur sicheren Seite %1. &lt;b&gt;%2&lt;/b&gt; Zertifikats-Fehler mögen anzeigen, dass der Server, mit dem Du versuchst zu verbinden, nicht vertrauenswürdig ist.&lt;br&gt;&lt;br&gt;Bitte akzeptiere oder verneine eine permanente Ausnahme.&lt;br&gt;&lt;br&gt;Permanente Ausnahmen können auch später wieder entfernt werden.&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
