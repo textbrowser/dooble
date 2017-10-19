@@ -84,12 +84,12 @@ Completed Items
 79.    Display expected location of Translations in Settings.
 80.    Replace the containers_cleared() signal.
 81.    Favorites pop-up widget.
+82.    Cookie identifiers.
 
 Remaining Items
 
 1.     Debian distribution. Signed.
 2.     Certificate exceptions panel.
-3.     Cookie identifiers.
 
 Unknown Items
 
