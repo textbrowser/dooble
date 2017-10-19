@@ -325,7 +325,8 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">QFrame {background-color: #feefb3;}</string>
+      <string notr="true">QFrame {background-color:#fcf8e3;}
+</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <property name="spacing">
@@ -352,7 +353,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLabel {color: #9f6000;}</string>
+         <string notr="true">QLabel {color: #8a6d3b;}</string>
         </property>
         <property name="text">
          <string>URL</string>

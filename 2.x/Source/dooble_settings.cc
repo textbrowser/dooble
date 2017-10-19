@@ -148,16 +148,21 @@ dooble_settings::dooble_settings(void):QMainWindow()
 
   if(file_info.isReadable())
     {
-      m_ui.ini_location->setStyleSheet("QLabel {color: darkgreen;}");
+      m_ui.ini_location->setStyleSheet
+	("QLabel {background-color: #dff0d8; border: 1px solid #d6e9c6; "
+	 "color:#3c763d;}");
       m_ui.ini_location->setText
 	(tr("The Dooble configuration file dooble_settings.db resides in %1.").
 	 arg(setting("home_path").toString()));
     }
   else
     {
-      m_ui.ini_location->setStyleSheet("QLabel {color: darkred;}");
+      m_ui.ini_location->setStyleSheet
+	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
+	 "color:#a94442;}");
       m_ui.ini_location->setText
-	(tr("Cannot access dooble_settings.db. Your system is dysfunctional."));
+	(tr("<b>Warning!</b> Cannot access dooble_settings.db. "
+	    "Your system is dysfunctional."));
     }
 
   QString path(QDir::currentPath());
@@ -173,9 +178,11 @@ dooble_settings::dooble_settings(void):QMainWindow()
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
 				      Qt::UserRole - 1);
-      m_ui.language_directory->setStyleSheet("QLabel {color: darkred;}");
+      m_ui.language_directory->setStyleSheet
+	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
+	 "color:#a94442;}");
       m_ui.language_directory->setText
-	(tr("The file %1 is not readable. "
+	(tr("<b>Warning!</b> The file %1 is not readable. "
 	    "The System option has been disabled.").
 	 arg(file_info.absoluteFilePath()));
     }
