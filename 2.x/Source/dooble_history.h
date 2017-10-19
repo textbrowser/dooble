@@ -61,6 +61,7 @@ class dooble_history: public QObject
  void abort(void);
  void purge_favorites(void);
  void purge_history(void);
+ void remove_favorite(const QUrl &url);
  void remove_item(const QUrl &url);
  void save_favicon(const QIcon &icon, const QUrl &url);
  void save_favorite(const QUrl &url, bool state);

@@ -282,6 +282,59 @@ void dooble_history::purge_history(void)
     }
 }
 
+void dooble_history::remove_favorite(const QUrl &url)
+{
+  QList<QStandardItem *> list
+    (m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+
+  if(!list.isEmpty() && list.at(0))
+    m_favorites_model->removeRow(list.at(0)->row());
+
+  QHash<HistoryItem, QVariant> hash;
+  QWriteLocker locker(&m_history_mutex);
+
+  hash = m_history.value(url);
+
+  if(!hash.isEmpty())
+    {
+      hash[FAVORITE] = false;
+      m_history[url] = hash;
+    }
+
+  m_history_mutex.unlock();
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name(QString("dooble_history_%1").
+			    arg(s_db_id.fetchAndAddOrdered(1)));
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_history.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.prepare
+	      ("UPDATE dooble_history SET favorite = ? WHERE url_digest = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	    query.exec();
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+}
+
 void dooble_history::remove_item(const QUrl &url)
 {
   QList<QStandardItem *> list
@@ -293,6 +346,36 @@ void dooble_history::remove_item(const QUrl &url)
   QWriteLocker locker(&m_history_mutex);
 
   m_history.remove(url);
+  m_history_mutex.unlock();
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name(QString("dooble_history_%1").
+			    arg(s_db_id.fetchAndAddOrdered(1)));
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_history.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("PRAGMA synchronous = OFF");
+	    query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	    query.exec();
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
 }
 
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)

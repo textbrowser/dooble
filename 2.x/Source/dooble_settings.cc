@@ -1545,6 +1545,8 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 		      removeRow(list.at(i).row());
 		  }
 	      }
+
+	    query.exec("VACUUM");
 	  }
 
 	db.close();

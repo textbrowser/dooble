@@ -343,22 +343,7 @@ void dooble_address_widget::slot_favorite(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   dooble::s_history->save_favorite
     (m_url, !dooble::s_history->is_favorite(m_url));
-
-  QString icon_set(dooble_settings::setting("icon_set").toString());
-
-  if(dooble::s_history->is_favorite(m_url))
-    {
-      m_favorite->setIcon
-	(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
-      emit favorite_changed(m_url, true);
-    }
-  else
-    {
-      m_favorite->setIcon
-	(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
-      emit favorite_changed(m_url, false);
-    }
-
+  emit favorite_changed(m_url, dooble::s_history->is_favorite(m_url));
   QApplication::restoreOverrideCursor();
 }
 

@@ -380,6 +380,8 @@ void dooble_history_window::slot_delete_pages(void)
 	      (dooble::s_cryptography->hmac(urls.at(i).toEncoded()).toBase64());
 	    query.exec();
 	  }
+
+	query.exec("VACUUM");
       }
 
     db.close();
