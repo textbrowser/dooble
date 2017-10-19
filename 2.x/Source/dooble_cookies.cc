@@ -159,7 +159,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 		   ")");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_cookies_domains "
+	  ("INSERT INTO dooble_cookies_domains "
 	   "(domain, domain_digest, favorite_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
@@ -179,7 +179,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 
 	if(ok)
-	  ok = query.exec();
+	  query.exec();
 
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
@@ -229,7 +229,6 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
       {
 	QSqlQuery query(db);
 
-	query.exec("PRAGMA foreign_keys = ON");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
 
@@ -308,6 +307,7 @@ void dooble_cookies::slot_delete_domain(const QString &domain)
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA foreign_keys = ON");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("DELETE FROM dooble_cookies_domains WHERE "
 		      "domain_digest = ?");
@@ -440,6 +440,7 @@ void dooble_cookies::slot_populate(void)
 		  delete_query.addBindValue
 		    (dooble::s_cryptography->hmac(QByteArray("false")).
 		     toBase64());
+		  delete_query.exec();
 		  continue;
 		}
 
@@ -477,6 +478,7 @@ void dooble_cookies::slot_populate(void)
 		    delete_query.addBindValue
 		      (dooble::s_cryptography->hmac(QByteArray("false")).
 		       toBase64());
+		    delete_query.exec();
 		    continue;
 		  }
 
