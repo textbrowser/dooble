@@ -130,7 +130,7 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 	query.setForwardOnly(true);
 	query.exec("SELECT last_visited, url, url_digest "
-		   "FROM dooble_history WHERE favorite = ?");
+		   "FROM dooble_history WHERE favorite_digest = ?");
 	query.addBindValue(cryptography.hmac(QByteArray("false")).toBase64());
 
 	if(query.exec())
@@ -215,7 +215,8 @@ void dooble_history::purge_favorites(void)
 	    QSqlQuery query(db);
 
 	    query.exec("PRAGMA synchronous = OFF");
-	    query.prepare("DELETE FROM dooble_history WHERE favorite = ?");
+	    query.prepare
+	      ("DELETE FROM dooble_history WHERE favorite_digest = ?");
 	    query.addBindValue
 	      (dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
 	    query.exec();
@@ -268,7 +269,8 @@ void dooble_history::purge_history(void)
 	    QSqlQuery query(db);
 
 	    query.exec("PRAGMA synchronous = OFF");
-	    query.prepare("DELETE FROM dooble_history WHERE favorite = ?");
+	    query.prepare
+	      ("DELETE FROM dooble_history WHERE favorite_digest = ?");
 	    query.addBindValue
 	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 	    query.exec();
@@ -320,7 +322,8 @@ void dooble_history::remove_favorite(const QUrl &url)
 	    QSqlQuery query(db);
 
 	    query.prepare
-	      ("UPDATE dooble_history SET favorite = ? WHERE url_digest = ?");
+	      ("UPDATE dooble_history SET favorite_digest = ? "
+	       "WHERE url_digest = ?");
 	    query.addBindValue
 	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 	    query.addBindValue
@@ -518,7 +521,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
 		   "favicon BLOB DEFAULT NULL, "
-		   "favorite TEXT NOT NULL, "
+		   "favorite_digest TEXT NOT NULL, "
 		   "last_visited TEXT NOT NULL, "
 		   "number_of_visits TEXT NOT NULL, "
 		   "title TEXT NOT NULL, "
@@ -527,7 +530,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_history "
 	   "(favicon, "
-	   "favorite, "
+	   "favorite_digest, "
 	   "last_visited, "
 	   "number_of_visits, "
 	   "title, "
@@ -677,7 +680,7 @@ void dooble_history::save_item(const QIcon &icon,
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
 		   "favicon BLOB DEFAULT NULL, "
-		   "favorite TEXT NOT NULL, "
+		   "favorite_digest TEXT NOT NULL, "
 		   "last_visited TEXT NOT NULL, "
 		   "number_of_visits TEXT NOT NULL, "
 		   "title TEXT NOT NULL, "
@@ -686,7 +689,7 @@ void dooble_history::save_item(const QIcon &icon,
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_history "
 	   "(favicon, "
-	   "favorite, "
+	   "favorite_digest, "
 	   "last_visited, "
 	   "number_of_visits, "
 	   "title, "
@@ -821,7 +824,7 @@ void dooble_history::slot_populate(void)
 	query.setForwardOnly(true);
 
 	if(query.exec("SELECT favicon, "   // 0
-		      "favorite, "         // 1
+		      "favorite_digest, "  // 1
 		      "last_visited, "     // 2
 		      "number_of_visits, " // 3
 		      "title, "            // 4
