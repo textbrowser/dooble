@@ -45,6 +45,16 @@ dooble_cookies::dooble_cookies(bool is_private, QObject *parent):QObject(parent)
   m_is_private = is_private;
 }
 
+QByteArray dooble_cookies::identifier(const QNetworkCookie &cookie)
+{
+  QByteArray bytes;
+
+  bytes.append(cookie.domain());
+  bytes.append(cookie.name());
+  bytes.append(cookie.path().toUtf8());
+  return bytes;
+}
+
 void dooble_cookies::purge(void)
 {
   QString database_name(QString("dooble_cookies_%1").
@@ -184,7 +194,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	  ok = false;
 
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(cookie.toRawForm()).toBase64());
+	  (dooble::s_cryptography->hmac(identifier(cookie)).toBase64());
 
 	if(ok)
 	  query.exec();
@@ -223,7 +233,7 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
 
-	QByteArray bytes(dooble::s_cryptography->hmac(cookie.toRawForm()));
+	QByteArray bytes(dooble::s_cryptography->hmac(identifier(cookie)));
 
 	query.addBindValue(bytes.toBase64());
 	query.exec();
@@ -259,8 +269,7 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
 
-	QByteArray bytes
-	  (dooble::s_cryptography->hmac(cookie.toRawForm()));
+	QByteArray bytes(dooble::s_cryptography->hmac(identifier(cookie)));
 
 	query.addBindValue(bytes.toBase64());
 	query.exec();

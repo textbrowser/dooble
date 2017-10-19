@@ -303,12 +303,12 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
       return;
     }
 
-  QTreeWidgetItem *item = hash.value(cookie.toRawForm(), 0);
+  QTreeWidgetItem *item = hash.value(dooble_cookies::identifier(cookie), 0);
 
   if(item && item->parent())
     delete item->parent()->takeChild(item->parent()->indexOfChild(item));
 
-  hash.remove(cookie.toRawForm());
+  hash.remove(dooble_cookies::identifier(cookie));
 
   if(hash.isEmpty())
     {
@@ -368,13 +368,13 @@ void dooble_cookies_window::slot_cookies_added
 	  QHash<QByteArray, QTreeWidgetItem *> hash
 	    (m_child_items.value(cookie.domain()));
 
-	  if(!hash.contains(cookie.toRawForm()))
+	  if(!hash.contains(dooble_cookies::identifier(cookie)))
 	    {
 	      QTreeWidgetItem *item = new QTreeWidgetItem
 		(m_top_level_items[cookie.domain()],
 		 QStringList() << "" << cookie.name());
 
-	      hash.insert(cookie.toRawForm(), item);
+	      hash[dooble_cookies::identifier(cookie)] = item;
 	      item->setData(1, Qt::UserRole, cookie.toRawForm());
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	      m_child_items[cookie.domain()] = hash;
@@ -478,7 +478,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 	      QHash<QByteArray, QTreeWidgetItem *> hash
 		(m_child_items.value(cookie.at(0).domain()));
 
-	      hash.remove(cookie.at(0).toRawForm());
+	      hash.remove(dooble_cookies::identifier(cookie.at(0)));
 
 	      if(hash.isEmpty())
 		m_child_items.remove(cookie.at(0).domain());

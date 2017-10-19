@@ -38,6 +38,7 @@ class dooble_cookies: public QObject
 
  public:
   dooble_cookies(bool is_private, QObject *parent);
+  static QByteArray identifier(const QNetworkCookie &cookie);
   static void purge(void);
 
  private:
