@@ -265,10 +265,8 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
 
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare("DELETE FROM dooble_cookies WHERE raw_form_digest = ?");
-
-	QByteArray bytes(dooble::s_cryptography->hmac(identifier(cookie)));
-
-	query.addBindValue(bytes.toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(identifier(cookie)).toBase64());
 	query.exec();
 	query.prepare("DELETE FROM dooble_cookies_domains WHERE "
 		      "domain_digest NOT IN (SELECT domain_digest FROM "
