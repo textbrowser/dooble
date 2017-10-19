@@ -175,7 +175,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
 				      Qt::UserRole - 1);
       m_ui.language_directory->setStyleSheet("QLabel {color: darkred;}");
       m_ui.language_directory->setText
-	(tr("The file %1 is not readable. Disabling the System option.").
+	(tr("The file %1 is not readable. "
+	    "The System option has been disabled.").
 	 arg(file_info.absoluteFilePath()));
     }
   else
