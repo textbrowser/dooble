@@ -287,7 +287,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 dooble::~dooble()
 {
   while(!m_shortcuts.isEmpty())
-    delete m_shortcuts.takeFirst();
+    m_shortcuts.takeFirst()->deleteLater();
 }
 
 bool dooble::can_exit(void)
