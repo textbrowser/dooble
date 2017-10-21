@@ -900,7 +900,7 @@ void dooble::prepare_shortcuts(void)
     {
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+B")),
 				   this,
-				   SLOT(slot_show_favorites(void)));      
+				   SLOT(slot_show_favorites(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+D")),
 				   this,
 				   SLOT(slot_show_downloads(void)));
