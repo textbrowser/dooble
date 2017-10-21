@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>QObject</name>
     <message>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>New Page</source>
-        <translation type="vanished">Neue Seite</translation>
+        <translation>Neue Seite</translation>
     </message>
     <message>
         <source>Ctrl+D</source>
@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>&amp;Blocked Domains</source>
-        <translation type="vanished">&amp;Blockierte Domains</translation>
+        <translation>&amp;Blockierte Domains</translation>
     </message>
     <message>
         <source>&amp;Blocked Domains...</source>
-        <translation type="vanished">&amp;Blockierte Domains...</translation>
+        <translation>&amp;Blockierte Domains...</translation>
     </message>
     <message>
         <source>&amp;Downloads</source>
@@ -212,11 +212,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation type="vanished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Dooble: Download File</source>
-        <translation type="vanished">Dooble: Datei herunterladen</translation>
+        <translation>Dooble: Datei herunterladen</translation>
     </message>
     <message>
         <source>Dooble</source>
@@ -228,7 +228,7 @@
     </message>
     <message>
         <source>&amp;Cookies...</source>
-        <translation>&amp;Cookies,,,</translation>
+        <translation type="unfinished">&amp;Cookies...</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -256,7 +256,7 @@
     </message>
     <message>
         <source>Ctrl+B</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -280,7 +280,7 @@
     <message>
         <source>Version 2018.01.01, Baba Yaga.
 (c) 2008 - present.</source>
-        <translation type="vanished">Version 2018.01.01, Baba Yaga.
+        <translation>Version 2018.01.01, Baba Yaga.
 (c) 2008 - heute.</translation>
     </message>
     <message>
@@ -711,7 +711,7 @@ Dooble ist open source software.
     </message>
     <message>
         <source>The tuple (&lt;b&gt;domain&lt;/b&gt;, &lt;b&gt;name&lt;/b&gt;, &lt;b&gt;path&lt;/b&gt;) serves as a cookie identifier.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Tuple (&lt;b&gt;Domäne&lt;/b&gt;, &lt;b&gt;Name&lt;/b&gt;, &lt;b&gt;Pfad&lt;/b&gt;) dient als ein Identifikationsmerkmal für Cookies.</translation>
     </message>
 </context>
 <context>
@@ -828,11 +828,11 @@ Dooble ist open source software.
     </message>
     <message>
         <source>Last Visited</source>
-        <translation>Zuletzt besucht am</translation>
+        <translation>Zuletzt besucht</translation>
     </message>
     <message>
         <source>Most Popular</source>
-        <translation>Besonders populär</translation>
+        <translation type="unfinished">Meistbesucht</translation>
     </message>
     <message>
         <source>Title</source>
@@ -840,7 +840,7 @@ Dooble ist open source software.
     </message>
     <message>
         <source>Delete Selected Favorite</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche ausgewählten Favoriten</translation>
     </message>
 </context>
 <context>
@@ -1165,7 +1165,7 @@ Dooble ist open source software.
     </message>
     <message>
         <source>Enter Address</source>
-        <translation>Gebe Adresse ein</translation>
+        <translation type="unfinished">Gebe eine Adresse ein</translation>
     </message>
     <message>
         <source>Downloads</source>
@@ -1265,7 +1265,7 @@ Dooble ist open source software.
     </message>
     <message>
         <source>Ctrl+B</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1592,7 +1592,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Do Not Save</source>
-        <translation>speichere nicht</translation>
+        <translation>speichere keine</translation>
     </message>
     <message>
         <source>Save All</source>
@@ -1616,7 +1616,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Please note that the cryptographic algorithms which are included in Dooble have not been provided by third-parties. If this is a concern, please do not prepare permanent credentials.</source>
-        <translation>Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses ein Besorgnis ist, erstelle bitte keine permanenten Passworte.</translation>
+        <translation>Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses für Dich ein Besorgnis ist, erstelle bitte keine permanenten Passworte.</translation>
     </message>
     <message>
         <source>Key Derivation</source>
@@ -1816,7 +1816,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Both persistent and session cookies are saved to and restored from disk.</source>
-        <translation type="vanished">Beide, persistente und sitzungsbezogene Cookies werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
+        <translation>Beide, persistente und sitzungsbezogene Cookies werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
     </message>
     <message>
         <source>Cookies marked persistent are saved to and restored from disk.</source>
@@ -1828,27 +1828,27 @@ Domänen</translation>
     </message>
     <message>
         <source>The file %1 is not readable. Disabling the System option.</source>
-        <translation type="vanished">Die Datei %1 kann nicht gelesen werden. Die System Option wird abgestellt.</translation>
+        <translation>Die Datei %1 kann nicht gelesen werden. Die System Option wird abgestellt.</translation>
     </message>
     <message>
         <source>INI Location</source>
-        <translation type="unfinished"></translation>
+        <translation>INI Location</translation>
     </message>
     <message>
         <source>Persistent and session cookies are saved to and restored from disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Persistente und sitzungs-bezogene Cookies werden auf der Festplatte gespeichert und von dieser wieder hergestellt.</translation>
     </message>
     <message>
         <source>The Dooble configuration file dooble_settings.db resides in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Dooble Konfigurations-Datei dooble_settings.db findet sich im Pfad %1.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Danger!&lt;/b&gt; Cannot access dooble_settings.db. Your system is dysfunctional.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Achtung!&lt;/b&gt; Habe keinen Zugriff aus dooble_settings.db. Dein System ist dysfunktional.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is not readable. The System option has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Warnung!&lt;/b&gt; Die Datei %1 ist nicht lesbar. Die &quot;System&quot;-Option wurde abgestellt.</translation>
     </message>
 </context>
 <context>
