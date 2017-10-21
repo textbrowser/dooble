@@ -1775,6 +1775,10 @@ void dooble::slot_show_clear_items(void)
 	  s_application,
 	  SIGNAL(cookies_cleared(void)));
   connect(&clear_items,
+	  SIGNAL(favorites_cleared(void)),
+	  s_application,
+	  SIGNAL(favorites_cleared(void)));
+  connect(&clear_items,
 	  SIGNAL(history_cleared(void)),
 	  s_application,
 	  SIGNAL(history_cleared(void)));

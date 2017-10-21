@@ -47,6 +47,7 @@ class dooble_application: public QApplication
  signals:
   void cookies_cleared(void);
   void dooble_credentials_authenticated(bool state);
+  void favorites_cleared(void);
   void favorites_sorted(void);
   void history_cleared(void);
 };

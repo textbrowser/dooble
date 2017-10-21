@@ -78,6 +78,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	    m_ui.table->horizontalHeader()->minimumSectionSize()));
 
   connect(dooble::s_application,
+	  SIGNAL(favorites_cleared(void)),
+	  this,
+	  SLOT(slot_favorites_cleared(void)));
+  connect(dooble::s_application,
 	  SIGNAL(history_cleared(void)),
 	  this,
 	  SLOT(slot_history_cleared(void)));
@@ -417,6 +421,30 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
     }
 }
 
+void dooble_history_window::slot_favorites_cleared(void)
+{
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    {
+      QTableWidgetItem *item = m_ui.table->item(i, 0);
+
+      if(!item)
+	continue;
+
+      item->setCheckState(Qt::Unchecked);
+      item->setIcon(QIcon());
+    }
+
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
+}
+
 void dooble_history_window::slot_find(void)
 {
   m_ui.search->selectAll();
@@ -682,6 +710,7 @@ void dooble_history_window::slot_populate(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
+  m_ui.table->setRowCount(0);
   m_ui.table->setRowCount(hash.size());
 
   while(it.hasNext())

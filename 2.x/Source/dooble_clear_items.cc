@@ -118,7 +118,10 @@ void dooble_clear_items::slot_clear_items(void)
     dooble_favicons::purge();
 
   if(m_ui.favorites->isChecked())
-    dooble::s_history->purge_favorites();
+    {
+      dooble::s_history->purge_favorites();
+      emit favorites_cleared();
+    }
 
   if(m_ui.history->isChecked())
     {

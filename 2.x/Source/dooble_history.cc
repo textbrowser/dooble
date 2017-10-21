@@ -193,10 +193,19 @@ void dooble_history::purge_favorites(void)
       if(!item)
 	continue;
 
+      QHash<HistoryItem, QVariant> hash;
       QWriteLocker locker(&m_history_mutex);
 
-      m_history.remove(item->text());
+      if(m_history.contains(item->text()))
+	{
+	  QHash<HistoryItem, QVariant> hash(m_history.value(item->text()));
+
+	  hash[FAVORITE] = false;
+	  m_history[item->text()] = hash;
+	}
     }
+
+  m_favorites_model->removeRows(0, m_favorites_model->rowCount());
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -216,11 +225,13 @@ void dooble_history::purge_favorites(void)
 
 	    query.exec("PRAGMA synchronous = OFF");
 	    query.prepare
-	      ("DELETE FROM dooble_history WHERE favorite_digest = ?");
+	      ("UPDATE dooble_history SET favorite_digest = ? WHERE "
+	       "favorite_digest = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
 	    query.addBindValue
 	      (dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
 	    query.exec();
-	    query.exec("VACUUM");
 	  }
 
 	db.close();
@@ -228,13 +239,12 @@ void dooble_history::purge_favorites(void)
 
       QSqlDatabase::removeDatabase(database_name);
     }
-
 }
 
 void dooble_history::purge_history(void)
 {
   {
-    QHash<QUrl, QHash<HistoryItem, QVariant> > history;
+    QHash<QUrl, QHash<HistoryItem, QVariant> > hash;
     QWriteLocker locker(&m_history_mutex);
 
     for(int i = 0; i < m_favorites_model->rowCount(); i++)
@@ -245,11 +255,11 @@ void dooble_history::purge_history(void)
 	  continue;
 
 	if(m_history.contains(item->text()))
-	  history[item->text()] = m_history.value(item->text());
+	  hash[item->text()] = m_history.value(item->text());
       }
 
     m_history.clear();
-    m_history = history;
+    m_history = hash;
   }
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())

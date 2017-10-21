@@ -34,6 +34,7 @@
 #include "dooble.h"
 #include "dooble_address_widget.h"
 #include "dooble_address_widget_completer.h"
+#include "dooble_application.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
@@ -77,6 +78,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px;"
      "}");
   m_pull_down->setToolTip(tr("Show History"));
+  connect(dooble::s_application,
+	  SIGNAL(favorites_cleared(void)),
+	  this,
+	  SLOT(slot_favorites_cleared(void)));
   connect(dooble::s_history_window,
 	  SIGNAL(favorite_changed(const QUrl &, bool)),
 	  this,
@@ -363,6 +368,13 @@ void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 	m_favorite->setIcon
 	  (QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
     }
+}
+
+void dooble_address_widget::slot_favorites_cleared(void)
+{
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
 }
 
 void dooble_address_widget::slot_load_started(void)
