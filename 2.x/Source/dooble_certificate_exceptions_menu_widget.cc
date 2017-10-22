@@ -93,7 +93,7 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 }
 
 void dooble_certificate_exceptions_menu_widget::exception_accepted
-(const QUrl &url)
+(const QString &error, const QUrl &url)
 {
   QString database_name(QString("dooble_certificate_exceptions_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
@@ -110,15 +110,22 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 	QSqlQuery query(db);
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_certificate_exceptions ("
+		   "error TEXT NOT NULL, "
 		   "exception_accepted TEXT NOT NULL, "
 		   "temporary INTEGER NOT NULL DEFAULT 1, "
 		   "url_digest TEXT NOT NULL PRIMARY KEY)");
 	query.prepare
 	  ("INSERT INTO dooble_certificate_exceptions "
-	   "(exception_accepted, temporary, url_digest) VALUES (?, ?, ?)");
+	   "(error, exception_accepted, temporary, url_digest) "
+	   "VALUES (?, ?, ?, ?)");
 
 	QByteArray bytes;
 	bool ok = true;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(error.toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
 
 	bytes = dooble::s_cryptography->encrypt_then_mac("true");
 

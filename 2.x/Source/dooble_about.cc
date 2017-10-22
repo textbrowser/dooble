@@ -27,6 +27,7 @@
 
 #include <QKeyEvent>
 
+#include "dooble.h"
 #include "dooble_about.h"
 
 dooble_about::dooble_about(void):QMainWindow()
@@ -68,6 +69,8 @@ dooble_about::dooble_about(void):QMainWindow()
   m_ui.release_notes->setText
     (tr("<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
 	"Release Notes</a>"));
+  m_ui.version->setText
+    (tr("Dooble version %1, Baba Yaga.").arg(DOOBLE_VERSION_STRING));
 }
 
 void dooble_about::keyPressEvent(QKeyEvent *event)

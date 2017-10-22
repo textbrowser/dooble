@@ -28,6 +28,7 @@
 #ifndef dooble_web_engine_page_h
 #define dooble_web_engine_page_h
 
+#include <QPointer>
 #include <QWebEnginePage>
 
 #include "ui_dooble_certificate_exceptions_widget.h"
@@ -50,8 +51,9 @@ class dooble_web_engine_page: public QWebEnginePage
   bool certificateError(const QWebEngineCertificateError &certificateError);
 
  private:
+  QPointer<QWidget> m_certificate_error_widget;
+  QString m_certificate_error;
   QUrl m_certificate_error_url;
-  QWidget *m_certificate_error_widget;
   Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
 

@@ -40,7 +40,6 @@ dooble_web_engine_page::dooble_web_engine_page
   QWebEnginePage(web_engine_profile, parent)
 {
   m_certificate_error_url = QUrl();
-  m_certificate_error_widget = 0;
   m_is_private = is_private;
   connect(this,
 	  SIGNAL(loadStarted(void)),
@@ -52,7 +51,6 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(parent)
 {
   m_certificate_error_url = QUrl();
-  m_certificate_error_widget = 0;
   m_is_private = false;
   connect(this,
 	  SIGNAL(loadStarted(void)),
@@ -115,6 +113,7 @@ bool dooble_web_engine_page::certificateError
       if(!stacked_layout)
 	return false;
 
+      m_certificate_error = certificateError.errorDescription();
       m_certificate_error_url = url;
 
       if(!m_certificate_error_widget)
@@ -155,6 +154,8 @@ bool dooble_web_engine_page::certificateError
 
       if(view() && view()->layout())
 	view()->layout()->removeWidget(m_certificate_error_widget);
+
+      m_certificate_error_widget->deleteLater();
     }
 
   return false;
@@ -163,15 +164,20 @@ bool dooble_web_engine_page::certificateError
 void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 {
   dooble_certificate_exceptions_menu_widget::exception_accepted
-    (m_certificate_error_url);
+    (m_certificate_error, m_certificate_error_url);
   emit certificate_exception_accepted(m_certificate_error_url);
 }
 
 void dooble_web_engine_page::slot_load_started(void)
 {
+  m_certificate_error = QString();
   m_certificate_error_url = QUrl();
 
   if(m_certificate_error_widget)
-    if(view() && view()->layout())
-      view()->layout()->removeWidget(m_certificate_error_widget);
+    {
+      if(view() && view()->layout())
+	view()->layout()->removeWidget(m_certificate_error_widget);
+
+      m_certificate_error_widget->deleteLater();
+    }
 }

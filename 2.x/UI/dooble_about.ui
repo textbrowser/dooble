@@ -92,13 +92,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="version">
+          <property name="text">
+           <string>Version</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="information">
           <property name="styleSheet">
            <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
           </property>
           <property name="text">
-           <string>Version 2018.01.01, Baba Yaga.
-Dooble is open source software.
+           <string>Dooble is open source software.
 (c) 2008 - present.</string>
           </property>
           <property name="textInteractionFlags">
