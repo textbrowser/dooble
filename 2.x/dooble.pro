@@ -496,6 +496,7 @@ TRANSLATIONS    = Translations/dooble_en.ts \
                   Translations/dooble_crh.ts \
                   Translations/dooble_cz.ts \
                   Translations/dooble_de.ts \
+		  Translations/dooble_de_DE.ts \
                   Translations/dooble_dk.ts \
                   Translations/dooble_ee.ts \
                   Translations/dooble_es.ts \
