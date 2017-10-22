@@ -833,6 +833,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_certificate_exceptions(void)),
+	  this,
+	  SLOT(slot_show_certificate_exceptions(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_clear_items(void)),
 	  this,
 	  SLOT(slot_show_clear_items(void)),
@@ -1022,6 +1028,9 @@ void dooble::prepare_standard_menus(void)
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
 
+  menu->addAction(tr("Certificate &Exceptions"),
+		  this,
+		  SLOT(slot_show_certificate_exceptions(void)));
   menu->addAction(tr("&Cookies..."),
 		  this,
 		  SLOT(slot_show_cookies(void)),
@@ -1764,6 +1773,10 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 
   s_accepted_or_blocked_domains->activateWindow();
   s_accepted_or_blocked_domains->raise();
+}
+
+void dooble::slot_show_certificate_exceptions(void)
+{
 }
 
 void dooble::slot_show_clear_items(void)

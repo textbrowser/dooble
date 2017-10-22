@@ -608,6 +608,9 @@ void dooble_page::prepare_standard_menus(void)
 		    this,
 		    SIGNAL(show_accepted_or_blocked_domains(void)));
 
+  menu->addAction(tr("Certificate &Exceptions..."),
+		  this,
+		  SIGNAL(show_certificate_exceptions(void)));
   menu->addAction(tr("&Cookies..."),
 		  this,
 		  SIGNAL(show_cookies(void)),
