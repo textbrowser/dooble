@@ -148,14 +148,52 @@ bool dooble_web_engine_page::certificateError
       stacked_layout->addWidget(m_certificate_error_widget);
       stacked_layout->setCurrentWidget(m_certificate_error_widget);
     }
-  else if(m_certificate_error_widget)
+  else
     {
-      m_certificate_error_widget->setVisible(false);
+      QUrl url(certificateError.url().adjusted(QUrl::RemovePath));
 
-      if(view() && view()->layout())
-	view()->layout()->removeWidget(m_certificate_error_widget);
+      if(!view())
+	return false;
 
-      m_certificate_error_widget->deleteLater();
+      QStackedLayout *stacked_layout = qobject_cast<QStackedLayout *>
+	(view()->layout());
+
+      if(!stacked_layout)
+	return false;
+
+      m_certificate_error = certificateError.errorDescription();
+      m_certificate_error_url = url;
+
+      if(!m_certificate_error_widget)
+	{
+	  m_certificate_error_widget = new QWidget(view());
+	  m_ui.setupUi(m_certificate_error_widget);
+	  connect(m_ui.accept,
+		  SIGNAL(clicked(void)),
+		  this,
+		  SLOT(slot_certificate_exception_accepted(void)));
+	  connect(m_ui.confirm_exception,
+		  SIGNAL(toggled(bool)),
+		  m_ui.accept,
+		  SLOT(setEnabled(bool)));
+	}
+
+      m_certificate_error_widget->resize(view()->size());
+      m_certificate_error_widget->setVisible(true);
+      m_ui.accept->setVisible(false);
+      m_ui.confirm_exception->setVisible(false);
+      m_ui.label->setText
+	(tr("<html>A certificate error occurred while accessing "
+	    "the secure site %1. <b>%2</b> "
+	    "Certificate errors may indicate that the server that "
+	    "you're attempting to connect to is not trustworthy.<br><br>"
+	    "An exception may not be set because of the severity of the "
+	    "error.</html>").
+	 arg(url.toString()).
+	 arg(certificateError.errorDescription()));
+      stacked_layout->removeWidget(m_certificate_error_widget);
+      stacked_layout->addWidget(m_certificate_error_widget);
+      stacked_layout->setCurrentWidget(m_certificate_error_widget);
     }
 
   return false;

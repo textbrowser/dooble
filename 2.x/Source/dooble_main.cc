@@ -228,6 +228,8 @@ int main(int argc, char *argv[])
      "WebEnginePersistentStorage");
   QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
   QWebEngineSettings::globalSettings()->setAttribute
+    (QWebEngineSettings::ErrorPageEnabled, false);
+  QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows, true);

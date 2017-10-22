@@ -140,6 +140,10 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
       m_web_engine_profile->setSpellCheckLanguages
 	(dooble::s_settings->s_spell_checker_dictionaries);
       m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::ErrorPageEnabled,
+	 QWebEngineSettings::globalSettings()->
+	 testAttribute(QWebEngineSettings::ErrorPageEnabled));
+      m_web_engine_profile->settings()->setAttribute
 	(QWebEngineSettings::FullScreenSupportEnabled, true);
       m_web_engine_profile->settings()->setAttribute
 	(QWebEngineSettings::JavascriptCanAccessClipboard,
