@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dooble_downloads</class>
- <widget class="QMainWindow" name="dooble_downloads">
+ <class>dooble_certificate_exceptions</class>
+ <widget class="QMainWindow" name="dooble_certificate_exceptions">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dooble: Downloads</string>
+   <string>Dooble: Certificate Exceptions</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Icons/icons.qrc">
@@ -19,34 +19,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Download Path</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="download_path">
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>Download Path</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="select">
-        <property name="text">
-         <string>&amp;Select...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
     <item>
      <widget class="QTableWidget" name="table">
       <property name="alternatingRowColors">
@@ -59,13 +31,13 @@
        <enum>QAbstractItemView::ScrollPerPixel</enum>
       </property>
       <property name="showGrid">
-       <bool>true</bool>
-      </property>
-      <property name="cornerButtonEnabled">
-       <bool>true</bool>
-      </property>
-      <attribute name="horizontalHeaderVisible">
        <bool>false</bool>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>150</number>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>150</number>
       </attribute>
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
@@ -75,7 +47,17 @@
       </attribute>
       <column>
        <property name="text">
-        <string>Empty</string>
+        <string>Allow</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Site</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Error</string>
        </property>
       </column>
      </widget>
@@ -83,9 +65,12 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="clear_finished_downloads">
-        <property name="text">
-         <string>&amp;Clear Finished Downloads</string>
+       <widget class="dooble_search_widget" name="search">
+        <property name="placeholderText">
+         <string>Search Exceptions</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -103,12 +88,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="dooble_search_widget" name="search">
-        <property name="placeholderText">
-         <string>Search Downloads</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
+       <widget class="QPushButton" name="delete_rows">
+        <property name="text">
+         <string>Delete</string>
         </property>
        </widget>
       </item>
@@ -125,11 +107,9 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>download_path</tabstop>
-  <tabstop>select</tabstop>
   <tabstop>table</tabstop>
-  <tabstop>clear_finished_downloads</tabstop>
   <tabstop>search</tabstop>
+  <tabstop>delete_rows</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
