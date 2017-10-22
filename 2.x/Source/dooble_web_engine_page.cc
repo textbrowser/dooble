@@ -188,7 +188,7 @@ bool dooble_web_engine_page::certificateError
 	    "Certificate errors may indicate that the server that "
 	    "you're attempting to connect to is not trustworthy.<br><br>"
 	    "An exception may not be set because of the severity of the "
-	    "error.</html>").
+	    "certificate error.</html>").
 	 arg(url.toString()).
 	 arg(certificateError.errorDescription()));
       stacked_layout->removeWidget(m_certificate_error_widget);
