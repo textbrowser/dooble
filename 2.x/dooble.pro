@@ -384,6 +384,7 @@ FORMS           = UI/dooble.ui \
                   UI/dooble_accepted_or_blocked_domains.ui \
                   UI/dooble_authenticate.ui \
                   UI/dooble_authentication_dialog.ui \
+                  UI/dooble_certificate_exceptions.ui \
                   UI/dooble_certificate_exceptions_menu_widget.ui \
                   UI/dooble_certificate_exceptions_widget.ui \
                   UI/dooble_clear_items.ui \

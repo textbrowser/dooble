@@ -17,9 +17,15 @@
    <iconset resource="../Icons/icons.qrc">
     <normaloff>:/Logo/dooble.png</normaloff>:/Logo/dooble.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {background: white;}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">QLabel {color: #448aff;}</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -32,6 +38,9 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
+       <property name="styleSheet">
+        <string notr="true">QLabel {color: #448aff;}</string>
+       </property>
        <property name="text">
         <string>&amp;User Name</string>
        </property>
@@ -42,6 +51,9 @@
      </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="username">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {border: none; border-bottom: 2px solid #448aff;}</string>
+       </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
@@ -49,6 +61,9 @@
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_3">
+       <property name="styleSheet">
+        <string notr="true">QLabel {color: #448aff;}</string>
+       </property>
        <property name="text">
         <string>&amp;Password</string>
        </property>
@@ -59,6 +74,9 @@
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="password">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {border: none; border-bottom: 2px solid #448aff;}</string>
+       </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
@@ -83,7 +101,10 @@
     </spacer>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="button_box">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {background-color: #448aff; border: none; border-radius: 2px; color: white;}</string>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -99,7 +120,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>dooble_authentication_dialog</receiver>
    <slot>accept()</slot>
@@ -115,7 +136,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>dooble_authentication_dialog</receiver>
    <slot>reject()</slot>

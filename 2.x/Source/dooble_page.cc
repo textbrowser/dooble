@@ -917,8 +917,13 @@ void dooble_page::slot_authentication_required(const QUrl &url,
   Ui_dooble_authentication_dialog ui;
 
   ui.setupUi(&dialog);
+
+  foreach(QWidget *widget, ui.button_box->findChildren<QWidget *> ())
+    widget->setMinimumSize(QSize(125, 30));
+
   ui.label->setText
-    (tr("The site %1 is requesting credentials.").arg(url.toString()));
+    (tr("The site <b>%1</b> is requesting credentials.").arg(url.toString()));
+  dialog.setWindowTitle(tr("Dooble: Authentication"));
   dialog.resize(dialog.sizeHint());
 
   if(dialog.exec() == QDialog::Accepted)
@@ -1305,9 +1310,13 @@ void dooble_page::slot_proxy_authentication_required
   Ui_dooble_authentication_dialog ui;
 
   ui.setupUi(&dialog);
-  dialog.setWindowTitle(tr("Dooble: Proxy Authentication"));
-  ui.label->setText(tr("The proxy %1 is requesting credentials.").
+
+  foreach(QWidget *widget, ui.button_box->findChildren<QWidget *> ())
+    widget->setMinimumSize(QSize(125, 30));
+
+  ui.label->setText(tr("The proxy <b>%1</b> is requesting credentials.").
 		    arg(proxy_host));
+  dialog.setWindowTitle(tr("Dooble: Proxy Authentication"));
   dialog.resize(dialog.sizeHint());
 
   if(dialog.exec() == QDialog::Accepted)
