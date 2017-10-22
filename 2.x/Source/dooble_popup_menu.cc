@@ -27,7 +27,6 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
-#include "dooble_application.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -164,18 +163,6 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     {
       dooble_clear_items clear_items(find_parent_dooble());
 
-      connect(&clear_items,
-	      SIGNAL(cookies_cleared(void)),
-	      dooble::s_application,
-	      SIGNAL(cookies_cleared(void)));
-      connect(&clear_items,
-	      SIGNAL(favorites_cleared(void)),
-	      dooble::s_application,
-	      SIGNAL(favorites_cleared(void)));
-      connect(&clear_items,
-	      SIGNAL(history_cleared(void)),
-	      dooble::s_application,
-	      SIGNAL(history_cleared(void)));
       clear_items.exec();
     }
   else if(m_ui.cookies == sender())

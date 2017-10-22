@@ -30,6 +30,7 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_application.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
@@ -53,6 +54,18 @@ dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 	  SIGNAL(toggled(bool)),
 	  this,
 	  SLOT(slot_download_history_toggled(bool)));
+  connect(this,
+	  SIGNAL(cookies_cleared(void)),
+	  dooble::s_application,
+	  SIGNAL(cookies_cleared(void)));
+  connect(this,
+	  SIGNAL(favorites_cleared(void)),
+	  dooble::s_application,
+	  SIGNAL(favorites_cleared(void)));
+  connect(this,
+	  SIGNAL(history_cleared(void)),
+	  dooble::s_application,
+	  SIGNAL(history_cleared(void)));
 
   foreach(QCheckBox *check_box, findChildren<QCheckBox *> ())
     {
