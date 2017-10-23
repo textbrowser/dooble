@@ -404,6 +404,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_address_widget_completer.h \
                   Source/dooble_address_widget_completer_popup.h \
                   Source/dooble_application.h \
+                  Source/dooble_certificate_exceptions.h \
                   Source/dooble_certificate_exceptions_menu_widget.h \
                   Source/dooble_clear_items.h \
                   Source/dooble_cookies.h \
@@ -450,6 +451,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_aes256.cc \
                   Source/dooble_application.cc \
                   Source/dooble_block_cipher.cc \
+                  Source/dooble_certificate_exceptions.cc \
                   Source/dooble_certificate_exceptions_menu_widget.cc \
                   Source/dooble_clear_items.cc \
                   Source/dooble_cookies.cc \
