@@ -191,7 +191,11 @@ void dooble_gopher_implementation::slot_ready_read(void)
       m_content.clear();
     }
   else if(m_item_type == 's') /* Audio File Format */
-    emit error(QWebEngineUrlRequestJob::RequestFailed);
+    {
+      m_content_type_supported = false;
+      m_html.append(m_content);
+      m_content.clear();
+    }
   else
     {
       m_html.append
