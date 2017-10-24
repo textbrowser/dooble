@@ -26,14 +26,69 @@
 */
 
 #include <QDir>
+#include <QKeyEvent>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
 #include "dooble_certificate_exceptions.h"
+#include "dooble_settings.h"
 
 QAtomicInteger<qintptr> dooble_certificate_exceptions::s_db_id;
 
 dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 {
   m_ui.setupUi(this);
+}
+
+void dooble_certificate_exceptions::closeEvent(QCloseEvent *event)
+{
+  QMainWindow::closeEvent(event);
+}
+
+void dooble_certificate_exceptions::keyPressEvent(QKeyEvent *event)
+{
+  if(!parent())
+    {
+      if(event && event->key() == Qt::Key_Escape)
+	close();
+
+      QMainWindow::keyPressEvent(event);
+    }
+  else if(event)
+    event->ignore();
+}
+
+void dooble_certificate_exceptions::resizeEvent(QResizeEvent *event)
+{
+  QMainWindow::resizeEvent(event);
+  save_settings();
+}
+
+void dooble_certificate_exceptions::save_settings(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("certificate_exceptions_geometry", saveGeometry().toBase64());
+}
+
+void dooble_certificate_exceptions::show(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::
+			      setting("certificate_exceptions_geometry").
+			      toByteArray()));
+
+  QMainWindow::show();
+}
+
+void dooble_certificate_exceptions::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::
+			      setting("certificate_exceptions_geometry").
+			      toByteArray()));
+
+  QMainWindow::showNormal();
 }

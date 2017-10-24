@@ -1786,9 +1786,21 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 
 void dooble::slot_show_certificate_exceptions(void)
 {
+  if(s_certificate_exceptions->isVisible())
+    {
+      s_certificate_exceptions->activateWindow();
+      s_certificate_exceptions->raise();
+      return;
+    }
+
+  s_certificate_exceptions->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget
+      (this, s_certificate_exceptions);
+
   s_certificate_exceptions->activateWindow();
   s_certificate_exceptions->raise();
-  s_certificate_exceptions->showNormal();
 }
 
 void dooble::slot_show_clear_items(void)

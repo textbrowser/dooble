@@ -40,9 +40,19 @@ class dooble_certificate_exceptions: public QMainWindow
  public:
   dooble_certificate_exceptions(void);
 
+ public slots:
+  void show(void);
+  void showNormal(void);
+
+ protected:
+  void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
+
  private:
   Ui_dooble_certificate_exceptions m_ui;
   static QAtomicInteger<qintptr> s_db_id;
+  void save_settings(void);
 };
 
 #endif
