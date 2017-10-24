@@ -50,9 +50,9 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 	  this,
 	  SLOT(slot_error(QWebEngineUrlRequestJob::Error)));
   connect(gopher_implementation,
-	  SIGNAL(finished(const QByteArray &)),
+	  SIGNAL(finished(const QByteArray &, bool)),
 	  this,
-	  SLOT(slot_finished(const QByteArray &)));
+	  SLOT(slot_finished(const QByteArray &, bool)));
 }
 
 void dooble_gopher::slot_error(QWebEngineUrlRequestJob::Error error)
@@ -61,7 +61,8 @@ void dooble_gopher::slot_error(QWebEngineUrlRequestJob::Error error)
     m_request->fail(error);
 }
 
-void dooble_gopher::slot_finished(const QByteArray &bytes)
+void dooble_gopher::slot_finished(const QByteArray &bytes,
+				  bool content_type_supported)
 {
   if(m_request)
     {
@@ -72,7 +73,11 @@ void dooble_gopher::slot_finished(const QByteArray &bytes)
 	  QBuffer *buffer = new QBuffer(m_request);
 
 	  buffer->setData(bytes);
-	  m_request->reply("text/html", buffer);
+
+	  if(content_type_supported)
+	    m_request->reply("text/html", buffer);
+	  else
+	    m_request->reply("application/octet-stream", buffer);
 	}
     }
 }
@@ -80,6 +85,7 @@ void dooble_gopher::slot_finished(const QByteArray &bytes)
 dooble_gopher_implementation::dooble_gopher_implementation
 (const QUrl &url, QObject *parent):QTcpSocket(parent)
 {
+  m_content_type_supported = true;
   m_item_type = 0;
   m_url = url;
 
@@ -145,7 +151,7 @@ void dooble_gopher_implementation::slot_connected(void)
 
 void dooble_gopher_implementation::slot_disonnected(void)
 {
-  emit finished(m_html);
+  emit finished(m_html, m_content_type_supported);
 }
 
 void dooble_gopher_implementation::slot_ready_read(void)
@@ -160,14 +166,15 @@ void dooble_gopher_implementation::slot_ready_read(void)
       m_html.append("</body></html>");
       m_content.clear();
     }
-  else if(m_item_type == '4') /* BinHex Encoded Text File */
-    emit error(QWebEngineUrlRequestJob::RequestFailed);
-  else if(m_item_type == '5') /* Binary Archive File */
-    emit error(QWebEngineUrlRequestJob::RequestFailed);
-  else if(m_item_type == '6') /* UUEncoded Text File */
-    emit error(QWebEngineUrlRequestJob::RequestFailed);
-  else if(m_item_type == '9') /* Binary File */
-    emit error(QWebEngineUrlRequestJob::RequestFailed);
+  else if(m_item_type == '4' || /* BinHex Encoded Text File */
+	  m_item_type == '5' || /* Binary Archive File */
+	  m_item_type == '6' || /* UUEncoded Text File */
+	  m_item_type == '9')   /* Binary File */
+    {
+      m_content_type_supported = false;
+      m_html.append(m_content);
+      m_content.clear();
+    }
   else if(m_item_type == 'I') /* Image File of Unspecified Format */
     {
       m_html.append(m_content);

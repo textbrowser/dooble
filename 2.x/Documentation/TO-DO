@@ -85,6 +85,8 @@ Completed Items
 80.    Replace the containers_cleared() signal.
 81.    Favorites pop-up widget.
 82.    Cookie identifiers.
+83.    Download gopher content.
+       (gopher://gopher.quux.org/1Software/Operating Systems/Unix/Linux)
 
 Remaining Items
 
@@ -97,9 +99,8 @@ Unknown Items
 1.     Optional Document Mode.
 2.     Print preview.
 3.     Pause and restart downloads.
-4.     Download gopher content.
-5.     Custom icon sets.
-6.     Language option.
-7.     Document the Microsoft Studio compilation process.
-8.     Super-fancy icon set.
-9.     Fusion themes.
+4.     Custom icon sets.
+5.     Language option.
+6.     Document the Microsoft Studio compilation process.
+7.     Super-fancy icon set.
+8.     Fusion themes.
