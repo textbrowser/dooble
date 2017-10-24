@@ -44,6 +44,7 @@ class QWebEngineProfile;
 class dooble_about;
 class dooble_accepted_or_blocked_domains;
 class dooble_application;
+class dooble_certificate_exceptions;
 class dooble_cookies;
 class dooble_cookies_window;
 class dooble_cryptography;
@@ -73,6 +74,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_accepted_or_blocked_domains>
     s_accepted_or_blocked_domains;
   static QPointer<dooble_application> s_application;
+  static QPointer<dooble_certificate_exceptions> s_certificate_exceptions;
   static QPointer<dooble_cookies> s_cookies;
   static QPointer<dooble_cookies_window> s_cookies_window;
   static QPointer<dooble_cryptography> s_cryptography;

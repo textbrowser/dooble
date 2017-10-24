@@ -43,6 +43,7 @@
 #include "dooble_about.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
+#include "dooble_certificate_exceptions.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
@@ -65,6 +66,7 @@ QPointer<dooble_about> dooble::s_about;
 QPointer<dooble_accepted_or_blocked_domains>
 dooble::s_accepted_or_blocked_domains;
 QPointer<dooble_application> dooble::s_application;
+QPointer<dooble_certificate_exceptions> dooble::s_certificate_exceptions;
 QPointer<dooble_cookies> dooble::s_cookies;
 QPointer<dooble_cookies_window> dooble::s_cookies_window;
 QPointer<dooble_cryptography> dooble::s_cryptography;
@@ -563,6 +565,9 @@ void dooble::initialize_static_members(void)
 
   if(!s_accepted_or_blocked_domains)
     s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
+
+  if(!s_certificate_exceptions)
+    s_certificate_exceptions = new dooble_certificate_exceptions();
 
   if(!s_cookies)
     s_cookies = new dooble_cookies(false, 0);
@@ -1781,6 +1786,9 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 
 void dooble::slot_show_certificate_exceptions(void)
 {
+  s_certificate_exceptions->activateWindow();
+  s_certificate_exceptions->raise();
+  s_certificate_exceptions->showNormal();
 }
 
 void dooble::slot_show_clear_items(void)

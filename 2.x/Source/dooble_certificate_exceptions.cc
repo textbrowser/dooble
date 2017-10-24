@@ -33,8 +33,7 @@
 
 QAtomicInteger<qintptr> dooble_certificate_exceptions::s_db_id;
 
-dooble_certificate_exceptions::
-dooble_certificate_exceptions(QWidget *parent):QMainWindow(parent)
+dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 {
   m_ui.setupUi(this);
 }

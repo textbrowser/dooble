@@ -38,7 +38,7 @@ class dooble_certificate_exceptions: public QMainWindow
   Q_OBJECT
 
  public:
-  dooble_certificate_exceptions(QWidget *parent);
+  dooble_certificate_exceptions(void);
 
  private:
   Ui_dooble_certificate_exceptions m_ui;
