@@ -25,16 +25,11 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDialog>
-#include <QKeyEvent>
-#include <QMenu>
 #include <QMessageBox>
-#include <QNetworkCookie>
 #include <QPointer>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
-#include <QUrl>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QtConcurrent>
