@@ -27,8 +27,6 @@
 
 #include <QKeyEvent>
 #include <QMenu>
-#include <QStyle>
-#include <QTableView>
 #include <QToolButton>
 
 #include "dooble.h"
@@ -38,7 +36,6 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
-#include "dooble_settings.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {

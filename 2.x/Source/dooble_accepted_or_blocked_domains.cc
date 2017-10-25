@@ -30,15 +30,11 @@
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QShortcut>
 #include <QSqlQuery>
-#include <QUrl>
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
-#include "dooble_application.h"
 #include "dooble_cryptography.h"
-#include "dooble_settings.h"
 
 dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   QMainWindow()
