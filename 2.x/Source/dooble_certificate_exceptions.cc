@@ -98,6 +98,35 @@ void dooble_certificate_exceptions::purge(void)
   m_ui.table->setRowCount(0);
 }
 
+void dooble_certificate_exceptions::remove_exception(const QUrl &url)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QTableWidgetItem *> list
+    (m_ui.table->
+     findItems(url.toString(), Qt::MatchEndsWith | Qt::MatchStartsWith));
+
+  QApplication::restoreOverrideCursor();
+
+  if(list.isEmpty())
+    return;
+
+  QList<int> rows;
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      QTableWidgetItem *item = list.at(i);
+
+      if(item)
+	rows << item->row();
+    }
+
+  std::sort(rows.begin(), rows.end());
+
+  for(int i = rows.size() - 1; i >= 0; i--)
+    m_ui.table->removeRow(rows.at(i));
+}
+
 void dooble_certificate_exceptions::resizeEvent(QResizeEvent *event)
 {
   QMainWindow::resizeEvent(event);

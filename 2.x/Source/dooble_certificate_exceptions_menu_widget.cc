@@ -252,7 +252,10 @@ void dooble_certificate_exceptions_menu_widget::slot_remove_exception(void)
 	  (dooble::s_cryptography->hmac(m_url.toEncoded()).toBase64());
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(m_url.toEncoded() + "/").toBase64());
-	query.exec();
+
+	if(query.exec())
+	  if(dooble::s_certificate_exceptions)
+	    dooble::s_certificate_exceptions->remove_exception(m_url);
       }
 
     db.close();
