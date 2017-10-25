@@ -28,8 +28,8 @@
 #ifndef dooble_certificate_exceptions_h
 #define dooble_certificate_exceptions_h
 
-#include <QAtomicInteger>
 #include <QMainWindow>
+#include <QTimer>
 
 #include "ui_dooble_certificate_exceptions.h"
 
@@ -54,11 +54,12 @@ class dooble_certificate_exceptions: public QMainWindow
 
  private:
   Ui_dooble_certificate_exceptions m_ui;
-  static QAtomicInteger<qintptr> s_db_id;
+  QTimer m_search_timer;
   void save_settings(void);
 
  private slots:
   void slot_populate(void);
+  void slot_search_timer_timeout(void);
 };
 
 #endif

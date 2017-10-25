@@ -35,11 +35,19 @@
 #include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
-QAtomicInteger<qintptr> dooble_certificate_exceptions::s_db_id;
-
 dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 {
+  m_search_timer.setInterval(750);
+  m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
+  connect(&m_search_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_search_timer_timeout(void)));
+  connect(m_ui.search,
+	  SIGNAL(textEdited(const QString &)),
+	  &m_search_timer,
+	  SLOT(start(void)));
 }
 
 void dooble_certificate_exceptions::closeEvent(QCloseEvent *event)
@@ -243,4 +251,8 @@ void dooble_certificate_exceptions::slot_populate(void)
   m_ui.table->sortItems
     (0, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_certificate_exceptions::slot_search_timer_timeout(void)
+{
 }
