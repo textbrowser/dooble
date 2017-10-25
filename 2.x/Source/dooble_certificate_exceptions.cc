@@ -30,7 +30,9 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
+#include "dooble.h"
 #include "dooble_certificate_exceptions.h"
+#include "dooble_cryptography.h"
 #include "dooble_settings.h"
 
 QAtomicInteger<qintptr> dooble_certificate_exceptions::s_db_id;
@@ -91,4 +93,87 @@ void dooble_certificate_exceptions::showNormal(void)
 			      toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_certificate_exceptions::slot_populate(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.table->setRowCount(0);
+
+  QList<QHash<QString, QVariant> > list;
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name("dooble_certificate_exceptions");
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_certificate_exceptions.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.setForwardOnly(true);
+
+	    if(query.exec("SELECT error, exception_accepted, url "
+			  "FROM dooble_certificate_exceptions WHERE "
+			  "temporary = 0"))
+	      while(query.next())
+		{
+		  QHash<QString, QVariant> hash;
+
+		  for(int i = 0; i < 3; i++)
+		    {
+		      QByteArray data
+			(QByteArray::fromBase64(query.value(i).toByteArray()));
+
+		      data = dooble::s_cryptography->mac_then_decrypt(data);
+
+		      if(data.isEmpty())
+			continue;
+
+		      if(i == 0)
+			hash["error"] = data;
+		      else if(i == 1)
+			hash["exception_accepted"] =
+			  data == "true" ? true : false; // Not used.
+		      else
+			hash["url"] = QUrl(data);
+		    }
+
+		  if(hash.size() == 3)
+		    list << hash;
+		}
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+
+  m_ui.table->setRowCount(list.size());
+  m_ui.table->setSortingEnabled(false);
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      QHash<QString, QVariant> hash(list.at(i));
+      QTableWidgetItem *item = 0;
+
+      item = new QTableWidgetItem(hash.value("url").toString());
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.table->setItem(i, 0, item);
+      item = new QTableWidgetItem(hash.value("error").toString().trimmed());
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.table->setItem(i, 1, item);
+    }
+
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortItems
+    (0, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+  QApplication::restoreOverrideCursor();
 }

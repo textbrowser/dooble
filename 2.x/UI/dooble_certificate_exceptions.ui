@@ -47,11 +47,6 @@
       </attribute>
       <column>
        <property name="text">
-        <string>Allow</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
         <string>Site</string>
        </property>
       </column>

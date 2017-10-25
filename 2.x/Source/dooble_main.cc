@@ -56,6 +56,7 @@ extern "C"
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
+#include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
@@ -256,6 +257,10 @@ int main(int argc, char *argv[])
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_accepted_or_blocked_domains,
+		   SLOT(slot_populate(void)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(bool)),
+		   dooble::s_certificate_exceptions,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)),

@@ -53,6 +53,9 @@ class dooble_certificate_exceptions: public QMainWindow
   Ui_dooble_certificate_exceptions m_ui;
   static QAtomicInteger<qintptr> s_db_id;
   void save_settings(void);
+
+ private slots:
+  void slot_populate(void);
 };
 
 #endif
