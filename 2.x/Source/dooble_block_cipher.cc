@@ -25,8 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <climits>
-
 #include "dooble_block_cipher.h"
 
 dooble_block_cipher::dooble_block_cipher(const QByteArray &key)

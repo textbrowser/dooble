@@ -25,8 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QFont>
-#include <QStyle>
 #include <QTranslator>
 
 #include "dooble_application.h"

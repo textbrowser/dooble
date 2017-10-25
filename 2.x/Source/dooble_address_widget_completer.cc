@@ -25,8 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QHeaderView>
-#include <QKeyEvent>
 #include <QStandardItemModel>
 
 #include "dooble.h"
