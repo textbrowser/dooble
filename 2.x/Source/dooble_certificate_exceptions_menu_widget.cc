@@ -113,11 +113,12 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 		   "error TEXT NOT NULL, "
 		   "exception_accepted TEXT NOT NULL, "
 		   "temporary INTEGER NOT NULL DEFAULT 1, "
+		   "url TEXT NOT NULL, "
 		   "url_digest TEXT NOT NULL PRIMARY KEY)");
 	query.prepare
 	  ("INSERT INTO dooble_certificate_exceptions "
-	   "(error, exception_accepted, temporary, url_digest) "
-	   "VALUES (?, ?, ?, ?)");
+	   "(error, exception_accepted, temporary, url, url_digest) "
+	   "VALUES (?, ?, ?, ?, ?)");
 
 	QByteArray bytes;
 	bool ok = true;
@@ -135,6 +136,13 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 	  ok = false;
 
 	query.addBindValue(dooble::s_cryptography->authenticated() ? 0 : 1);
+	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 
