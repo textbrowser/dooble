@@ -29,7 +29,6 @@
 #include <QDir>
 #include <QKeyEvent>
 #include <QMenu>
-#include <QShortcut>
 #include <QSqlQuery>
 
 #include "dooble.h"

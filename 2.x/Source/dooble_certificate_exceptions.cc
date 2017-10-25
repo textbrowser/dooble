@@ -48,6 +48,7 @@ dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
 	  SLOT(start(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
 }
 
 void dooble_certificate_exceptions::closeEvent(QCloseEvent *event)
@@ -170,6 +171,12 @@ void dooble_certificate_exceptions::showNormal(void)
   QMainWindow::showNormal();
 }
 
+void dooble_certificate_exceptions::slot_find(void)
+{
+  m_ui.search->selectAll();
+  m_ui.search->setFocus();
+}
+
 void dooble_certificate_exceptions::slot_populate(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -255,4 +262,30 @@ void dooble_certificate_exceptions::slot_populate(void)
 
 void dooble_certificate_exceptions::slot_search_timer_timeout(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString text(m_ui.search->text().toLower().trimmed());
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    if(text.isEmpty())
+      m_ui.table->setRowHidden(i, false);
+    else
+      {
+	QTableWidgetItem *item1 = m_ui.table->item(i, 0);
+	QTableWidgetItem *item2 = m_ui.table->item(i, 1);
+
+	if(!item1 || !item2)
+	  {
+	    m_ui.table->setRowHidden(i, false);
+	    continue;
+	  }
+
+	if(item1->text().toLower().contains(text) ||
+	   item2->text().toLower().contains(text))
+	  m_ui.table->setRowHidden(i, false);
+	else
+	  m_ui.table->setRowHidden(i, true);
+      }
+
+  QApplication::restoreOverrideCursor();
 }
