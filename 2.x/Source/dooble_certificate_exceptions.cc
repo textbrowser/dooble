@@ -47,6 +47,39 @@ void dooble_certificate_exceptions::closeEvent(QCloseEvent *event)
   QMainWindow::closeEvent(event);
 }
 
+void dooble_certificate_exceptions::exception_accepted(const QString &error,
+						       const QUrl &url)
+{
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QTableWidgetItem *> list
+    (m_ui.table->
+     findItems(url.toString(), Qt::MatchEndsWith | Qt::MatchStartsWith));
+
+  QApplication::restoreOverrideCursor();
+
+  if(!list.isEmpty())
+    return;
+
+  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
+  m_ui.table->setSortingEnabled(false);
+
+  QTableWidgetItem *item = 0;
+
+  item = new QTableWidgetItem(url.toString());
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.table->setItem(m_ui.table->rowCount() - 1, 0, item);
+  item = new QTableWidgetItem(error.trimmed());
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item);
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortItems
+    (0, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+}
+
 void dooble_certificate_exceptions::keyPressEvent(QKeyEvent *event)
 {
   if(!parent())
@@ -58,6 +91,11 @@ void dooble_certificate_exceptions::keyPressEvent(QKeyEvent *event)
     }
   else if(event)
     event->ignore();
+}
+
+void dooble_certificate_exceptions::purge(void)
+{
+  m_ui.table->setRowCount(0);
 }
 
 void dooble_certificate_exceptions::resizeEvent(QResizeEvent *event)

@@ -31,6 +31,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
+#include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
@@ -116,7 +117,10 @@ void dooble_clear_items::slot_clear_items(void)
     dooble::s_accepted_or_blocked_domains->purge();
 
   if(m_ui.certificate_error_exceptions->isChecked())
-    dooble_certificate_exceptions_menu_widget::purge();
+    {
+      dooble::s_certificate_exceptions->purge();
+      dooble_certificate_exceptions_menu_widget::purge();
+    }
 
   if(m_ui.cookies->isChecked())
     {

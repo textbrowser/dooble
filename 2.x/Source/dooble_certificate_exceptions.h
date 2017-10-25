@@ -39,6 +39,8 @@ class dooble_certificate_exceptions: public QMainWindow
 
  public:
   dooble_certificate_exceptions(void);
+  void exception_accepted(const QString &error, const QUrl &url);
+  void purge(void);
 
  public slots:
   void show(void);

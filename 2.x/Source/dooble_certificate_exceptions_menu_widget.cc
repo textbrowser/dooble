@@ -30,6 +30,7 @@
 #include <QSqlQuery>
 
 #include "dooble.h"
+#include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
 #include "dooble_settings.h"
@@ -147,7 +148,12 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 
 	if(ok)
-	  query.exec();
+	  if(query.exec())
+	    {
+	      if(dooble::s_certificate_exceptions)
+		dooble::s_certificate_exceptions->exception_accepted
+		  (error, url);
+	    }
       }
 
     db.close();
