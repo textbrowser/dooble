@@ -28,8 +28,6 @@
 #include <QDateTime>
 #include <QDir>
 #include <QKeyEvent>
-#include <QShortcut>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QStatusBar>
 #include <QWebEngineCookieStore>
@@ -39,7 +37,6 @@
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
-#include "dooble_settings.h"
 
 dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QMainWindow(parent)

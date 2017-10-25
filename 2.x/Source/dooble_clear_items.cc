@@ -38,7 +38,6 @@
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
-#include "dooble_settings.h"
 
 dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 {

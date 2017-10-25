@@ -26,14 +26,12 @@
 */
 
 #include <QDir>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 
 #include "dooble.h"
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
-#include "dooble_settings.h"
 
 QAtomicInteger<qintptr> dooble_certificate_exceptions_menu_widget::s_db_id;
 

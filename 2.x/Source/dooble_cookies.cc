@@ -27,8 +27,6 @@
 
 #include <QDateTime>
 #include <QDir>
-#include <QNetworkCookie>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
@@ -36,7 +34,6 @@
 #include "dooble.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
-#include "dooble_settings.h"
 
 QAtomicInteger<quintptr> dooble_cookies::s_db_id;
 
