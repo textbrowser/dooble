@@ -28,8 +28,6 @@
 #include <QClipboard>
 #include <QFileDialog>
 #include <QKeyEvent>
-#include <QShortcut>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QStandardPaths>
@@ -40,7 +38,6 @@
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
 #include "dooble_downloads_item.h"
-#include "dooble_settings.h"
 
 dooble_downloads::dooble_downloads(void):QMainWindow()
 {

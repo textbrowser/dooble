@@ -26,15 +26,12 @@
 */
 
 #include <QDir>
-#include <QFileInfo>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QWebEngineDownloadItem>
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
 #include "dooble_downloads_item.h"
-#include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
 
 QAtomicInteger<quintptr> dooble_downloads_item::s_db_id;

@@ -26,7 +26,6 @@
 */
 
 #include <QCryptographicHash>
-#include <QString>
 
 #include "dooble_aes256.h"
 #include "dooble_cryptography.h"
