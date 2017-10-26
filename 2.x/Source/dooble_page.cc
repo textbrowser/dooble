@@ -28,7 +28,6 @@
 #include <QAuthenticator>
 #include <QMenu>
 #include <QPrinter>
-#include <QShortcut>
 #include <QStackedWidget>
 #include <QWebEngineHistoryItem>
 #include <QWebEngineProfile>

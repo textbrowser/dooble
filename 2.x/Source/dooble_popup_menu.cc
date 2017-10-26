@@ -32,7 +32,6 @@
 #include "dooble_cryptography.h"
 #include "dooble_history_window.h"
 #include "dooble_popup_menu.h"
-#include "dooble_settings.h"
 
 dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
   QDialog(parent)

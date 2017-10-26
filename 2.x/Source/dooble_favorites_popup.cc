@@ -32,7 +32,6 @@
 #include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
-#include "dooble_settings.h"
 
 dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 {

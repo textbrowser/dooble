@@ -25,13 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QResizeEvent>
-#include <QStyle>
-#include <QToolButton>
-
 #include "dooble.h"
 #include "dooble_search_widget.h"
-#include "dooble_settings.h"
 
 dooble_search_widget::dooble_search_widget(QWidget *parent):QLineEdit(parent)
 {

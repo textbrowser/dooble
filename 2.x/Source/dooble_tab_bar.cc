@@ -25,7 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QMenu>
 #include <QWebEngineSettings>
 
 #include "dooble.h"

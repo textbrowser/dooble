@@ -27,13 +27,11 @@
 
 #include <QBuffer>
 #include <QDir>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
-#include "dooble_settings.h"
 
 QAtomicInteger<quintptr> dooble_favicons::s_db_id;
 

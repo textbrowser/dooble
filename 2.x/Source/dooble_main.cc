@@ -63,7 +63,6 @@ extern "C"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
-#include "dooble_settings.h"
 
 class dooble_thread: public QThread
 {

@@ -28,7 +28,6 @@
 #include <QClipboard>
 #include <QDir>
 #include <QKeyEvent>
-#include <QMenu>
 #include <QSqlQuery>
 
 #include "dooble.h"
@@ -37,7 +36,6 @@
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_cryptography.h"
-#include "dooble_settings.h"
 
 class dooble_history_window_favorite_item: public QTableWidgetItem
 {

@@ -25,11 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QList>
 #include <QtDebug>
 #include <QtEndian>
 #include <QtMath>
-#include <climits>
 
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"

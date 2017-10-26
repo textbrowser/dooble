@@ -25,19 +25,15 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QBuffer>
 #include <QDir>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QStandardItemModel>
 #include <QtConcurrent>
 
 #include "dooble.h"
-#include "dooble_application.h"
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
-#include "dooble_settings.h"
 
 QAtomicInteger<quintptr> dooble_history::s_db_id;
 
