@@ -25,15 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QCryptographicHash>
-#include <QDialogButtonBox>
 #include <QDir>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QNetworkProxy>
-#include <QPushButton>
-#include <QScopedPointer>
-#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
