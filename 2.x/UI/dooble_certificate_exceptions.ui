@@ -90,9 +90,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="delete_rows">
+       <widget class="QPushButton" name="delete_selected">
         <property name="text">
-         <string>Delete</string>
+         <string>&amp;Delete Selected</string>
         </property>
        </widget>
       </item>
@@ -111,7 +111,7 @@
  <tabstops>
   <tabstop>table</tabstop>
   <tabstop>search</tabstop>
-  <tabstop>delete_rows</tabstop>
+  <tabstop>delete_selected</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
