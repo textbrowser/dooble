@@ -385,7 +385,7 @@
           <item>
            <widget class="QCheckBox" name="main_menu_bar_visible">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If hidden, show via F10&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>If hidden, show via F10.</string>
             </property>
             <property name="text">
              <string>Main Menu Bar Visible</string>
