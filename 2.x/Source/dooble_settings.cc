@@ -138,36 +138,14 @@ dooble_settings::dooble_settings(void):QMainWindow()
      tr("Cookies marked persistent are saved to and restored from disk."),
      Qt::ToolTipRole);
 
-  QFileInfo file_info(setting("home_path").toString() +
-		      QDir::separator() +
-		      "dooble_settings.db");
-
-  if(file_info.isReadable())
-    {
-      m_ui.ini_location->setStyleSheet
-	("QLabel {background-color: #dff0d8; border: 1px solid #d6e9c6; "
-	 "color:#3c763d;}");
-      m_ui.ini_location->setText
-	(tr("The Dooble configuration file dooble_settings.db resides in %1.").
-	 arg(setting("home_path").toString()));
-    }
-  else
-    {
-      m_ui.ini_location->setStyleSheet
-	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
-	 "color:#a94442;}");
-      m_ui.ini_location->setText
-	(tr("<b>Danger!</b> Cannot access dooble_settings.db. "
-	    "Your system is dysfunctional."));
-    }
-
   QString path(QDir::currentPath());
 
   path.append(QDir::separator());
   path.append("Translations");
   path.append(QDir::separator());
   path.append("dooble_" + QLocale::system().name() + ".qm");
-  file_info.setFile(path);
+
+  QFileInfo file_info(path);
 
   if(!file_info.isReadable())
     {
