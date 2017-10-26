@@ -67,10 +67,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_all_exceptions(void)));
-  connect(m_ui.delete_rows,
+  connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
-	  SLOT(slot_delete_rows(void)));
+	  SLOT(slot_delete_selected(void)));
   connect(m_ui.delete_selected_exceptions,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -664,7 +664,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_accepted_or_blocked_domains::slot_delete_rows(void)
+void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 

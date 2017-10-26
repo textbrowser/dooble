@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QSqlQuery>
 
 #include "dooble.h"
@@ -43,6 +44,10 @@ dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_search_timer_timeout(void)));
+  connect(m_ui.delete_selected,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_selected(void)));
   connect(m_ui.search,
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
@@ -168,6 +173,73 @@ void dooble_certificate_exceptions::showNormal(void)
 			      toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_certificate_exceptions::slot_delete_selected(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QModelIndexList list(m_ui.table->selectionModel()->selectedRows(0));
+
+  QApplication::restoreOverrideCursor();
+
+  if(list.size() > 0)
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to delete the selected "
+		    "exceptions(s)?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name("dooble_certificate_exceptions");
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_certificate_exceptions.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+
+	for(int i = list.size() - 1; i >= 0; i--)
+	  {
+	    query.prepare
+	      ("DELETE FROM dooble_certificate_exceptions "
+	       "WHERE temporary = ? AND url_digest IN (?, ?)");
+	    query.addBindValue
+	      (dooble::s_cryptography->authenticated() ? 0 : 1);
+	    query.addBindValue
+	      (dooble::s_cryptography->
+	       hmac(list.at(i).data().toString()).toBase64());
+	    query.addBindValue
+	      (dooble::s_cryptography->
+	       hmac(list.at(i).data().toString() + "/").toBase64());
+
+	    if(query.exec())
+	      m_ui.table->removeRow(list.at(i).row());
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_certificate_exceptions::slot_find(void)

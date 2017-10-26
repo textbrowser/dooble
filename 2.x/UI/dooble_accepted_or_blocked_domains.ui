@@ -264,9 +264,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="delete_rows">
+       <widget class="QPushButton" name="delete_selected">
         <property name="text">
-         <string>&amp;Delete</string>
+         <string>&amp;Delete Selected</string>
         </property>
        </widget>
       </item>
@@ -303,7 +303,7 @@
   <tabstop>table</tabstop>
   <tabstop>search</tabstop>
   <tabstop>add</tabstop>
-  <tabstop>delete_rows</tabstop>
+  <tabstop>delete_selected</tabstop>
   <tabstop>import</tabstop>
  </tabstops>
  <resources>
