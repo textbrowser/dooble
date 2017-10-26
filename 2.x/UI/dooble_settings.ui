@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>741</height>
+           <height>723</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -385,7 +385,7 @@
           <item>
            <widget class="QCheckBox" name="main_menu_bar_visible">
             <property name="toolTip">
-             <string>If hidden, show via Alt + Ctrl.</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If hidden, show via F10&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Main Menu Bar Visible</string>
@@ -653,8 +653,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>651</height>
+               <width>503</width>
+               <height>682</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1143,8 +1143,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>270</width>
-               <height>700</height>
+               <width>353</width>
+               <height>708</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
