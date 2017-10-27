@@ -54,10 +54,8 @@ dooble_about::dooble_about(void):QMainWindow()
     qversion = "unknown";
 
   m_ui.license->setText
-    (tr("<a href=\"https://en.wikipedia.org/wiki/BSD_licenses#3-"
-	"clause_license_.28.22BSD_License_2.0.22.2C_.22"
-	"Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22"
-	"Modified_BSD_License.22.29\">BSD 3-Clause License</a>"));
+    (tr("<a href=\"qrc://Documentation/DOOBLE-LICENSE.html\">"
+	"Dooble 3-Clause BSD License</a>"));
 
   QString text
     (tr("Architecture %1.<br>Qt version %2 (runtime %3).").

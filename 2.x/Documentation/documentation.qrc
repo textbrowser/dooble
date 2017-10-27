@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+    	<file>DOOBLE-LICENSE.html</file>
         <file>RELEASE-NOTES.html</file>
     </qresource>
 </RCC>
