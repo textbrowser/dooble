@@ -146,9 +146,8 @@ void dooble_downloads::delete_selected(void)
       else if(!downloads_item->is_finished())
 	continue;
 
-      m_ui.table->removeRow(list.at(i).row());
       remove_entry(downloads_item->oid());
-      downloads_item->deleteLater();
+      m_ui.table->removeRow(list.at(i).row());
     }
 
   QApplication::restoreOverrideCursor();
@@ -178,17 +177,7 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
 void dooble_downloads::purge(void)
 {
   abort();
-
-  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
-    {
-      dooble_downloads_item *downloads_item = qobject_cast
-	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
-
-      if(downloads_item)
-	downloads_item->deleteLater();
-
-      m_ui.table->removeRow(0);
-    }
+  m_ui.table->setRowCount(0);
 
   QString database_name("dooble_downloads");
 
@@ -316,9 +305,8 @@ void dooble_downloads::slot_clear_finished_downloads(void)
       else if(!downloads_item->is_finished())
 	continue;
 
-      m_ui.table->removeRow(i);
       remove_entry(downloads_item->oid());
-      downloads_item->deleteLater();
+      m_ui.table->removeRow(i);
     }
 
   QApplication::restoreOverrideCursor();
@@ -350,7 +338,6 @@ void dooble_downloads::slot_delete_row(void)
   if(downloads_item && downloads_item->is_finished())
     {
       remove_entry(downloads_item->oid());
-      downloads_item->deleteLater();
       m_ui.table->removeRow(action->property("row").toInt());
     }
 }
