@@ -34,11 +34,19 @@
 #include "dooble_favicons.h"
 #include "dooble_page.h"
 
+QHash<QUrl, char> dooble_address_widget_completer::s_urls;
+QList<QStandardItem *> dooble_address_widget_completer::s_purged_items;
+QStandardItemModel *dooble_address_widget_completer::s_model = 0;
+
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
 {
-  m_model = new QStandardItemModel(this);
-  m_model->setSortRole(Qt::UserRole);
+  if(!s_model)
+    {
+      s_model = new QStandardItemModel();
+      s_model->setSortRole(Qt::UserRole);
+    }
+
   m_popup = new dooble_address_widget_completer_popup(parent);
   m_popup->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   m_popup->horizontalHeader()->setVisible(false);
@@ -61,7 +69,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SLOT(slot_text_edited(const QString &)));
   setCaseSensitivity(Qt::CaseInsensitive);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-  setModel(m_model);
+  setModel(s_model);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
   setWrapAround(false);
@@ -69,8 +77,6 @@ dooble_address_widget_completer::dooble_address_widget_completer
 
 dooble_address_widget_completer::~dooble_address_widget_completer()
 {
-  while(!m_purged_items.isEmpty())
-    delete m_purged_items.takeFirst();
 }
 
 int dooble_address_widget_completer::levenshtein_distance
@@ -127,10 +133,10 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
   ** items because of filtering activity.
   */
 
-  if(m_urls.contains(url))
+  if(s_urls.contains(url))
     return;
   else
-    m_urls[url] = 0;
+    s_urls[url] = 0;
 
   QStandardItem *item = 0;
 
@@ -140,7 +146,7 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
     item = new QStandardItem(icon, url.toString());
 
   item->setToolTip(url.toString());
-  m_model->insertRow(0, item);
+  s_model->insertRow(0, item);
 }
 
 void dooble_address_widget_completer::complete(void)
@@ -150,47 +156,47 @@ void dooble_address_widget_completer::complete(void)
 
 void dooble_address_widget_completer::complete(const QString &text)
 {
-  m_model->blockSignals(true);
+  s_model->blockSignals(true);
 
-  while(!m_purged_items.isEmpty())
+  while(!s_purged_items.isEmpty())
     {
-      m_model->setRowCount(m_model->rowCount() + 1);
-      m_model->setItem(m_model->rowCount() - 1, m_purged_items.takeFirst());
+      s_model->setRowCount(s_model->rowCount() + 1);
+      s_model->setItem(s_model->rowCount() - 1, s_purged_items.takeFirst());
     }
 
   QList<QStandardItem *> list;
 
   if(text.trimmed().isEmpty())
     {
-      for(int i = 0; i < m_model->rowCount(); i++)
-	if(m_model->item(i, 0))
-	  list << m_model->item(i, 0)->clone();
+      for(int i = 0; i < s_model->rowCount(); i++)
+	if(s_model->item(i, 0))
+	  list << s_model->item(i, 0)->clone();
     }
   else
     {
       QMultiMap<int, QStandardItem *> map;
       QString c(text.toLower().trimmed());
 
-      for(int i = 0; i < m_model->rowCount(); i++)
-	if(m_model->item(i, 0))
+      for(int i = 0; i < s_model->rowCount(); i++)
+	if(s_model->item(i, 0))
 	  {
-	    if(m_model->item(i, 0)->text().toLower().contains(c))
+	    if(s_model->item(i, 0)->text().toLower().contains(c))
 	      map.insert
-		(levenshtein_distance(c, m_model->item(i, 0)->text().toLower()),
-		 m_model->item(i, 0)->clone());
+		(levenshtein_distance(c, s_model->item(i, 0)->text().toLower()),
+		 s_model->item(i, 0)->clone());
 	    else
-	      m_purged_items << m_model->item(i, 0)->clone();
+	      s_purged_items << s_model->item(i, 0)->clone();
 	  }
 
       list << map.values();
     }
 
-  m_model->clear();
+  s_model->clear();
 
   while(list.size() > 1)
     {
-      m_model->setRowCount(m_model->rowCount() + 1);
-      m_model->setItem(m_model->rowCount() - 1, list.takeFirst());
+      s_model->setRowCount(s_model->rowCount() + 1);
+      s_model->setItem(s_model->rowCount() - 1, list.takeFirst());
     }
 
   /*
@@ -198,27 +204,27 @@ void dooble_address_widget_completer::complete(const QString &text)
   ** trick will allow for a smoother update of the table's contents.
   */
 
-  m_model->blockSignals(false);
+  s_model->blockSignals(false);
 
   while(!list.isEmpty())
     {
-      m_model->setRowCount(m_model->rowCount() + 1);
-      m_model->setItem(m_model->rowCount() - 1, list.takeFirst());
+      s_model->setRowCount(s_model->rowCount() + 1);
+      s_model->setItem(s_model->rowCount() - 1, list.takeFirst());
     }
 
-  if(m_model->rowCount() > 0)
+  if(s_model->rowCount() > 0)
     {
-      if(m_model->rowCount() > dooble_page::MAXIMUM_HISTORY_ITEMS)
+      if(s_model->rowCount() > dooble_page::MAXIMUM_HISTORY_ITEMS)
 	m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
       else
 	m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
       m_popup->setMaximumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0));
+	      s_model->rowCount()) * m_popup->rowHeight(0));
       m_popup->setMinimumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0));
+	      s_model->rowCount()) * m_popup->rowHeight(0));
 
       /*
       ** The model should only be sorted when the pulldown
@@ -226,8 +232,8 @@ void dooble_address_widget_completer::complete(const QString &text)
       ** loses its potential.
       */
 
-      if(m_purged_items.isEmpty())
-	m_model->sort(0, Qt::DescendingOrder);
+      if(s_purged_items.isEmpty())
+	s_model->sort(0, Qt::DescendingOrder);
 
       QCompleter::complete();
     }
@@ -238,7 +244,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
 						    const QUrl &url)
 {
-  QList<QStandardItem *> list(m_model->findItems(url.toString()));
+  QList<QStandardItem *> list(s_model->findItems(url.toString()));
 
   if(!list.isEmpty())
     if(list.at(0))
@@ -254,9 +260,9 @@ void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
 
 void dooble_address_widget_completer::slot_history_cleared(void)
 {
-  m_model->clear();
-  m_purged_items.clear();
-  m_urls.clear();
+  s_model->clear();
+  s_purged_items.clear();
+  s_urls.clear();
 }
 
 void dooble_address_widget_completer::slot_text_edited(const QString &text)
