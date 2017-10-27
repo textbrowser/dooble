@@ -758,7 +758,7 @@ void dooble_settings::restore(void)
 	    s_settings.value("icon_set_index", 2).toInt(),
 	    m_ui.theme->count() - 1));
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
-  m_ui.user_agent->setToolTip(m_ui.user_agent->text());
+  m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
   m_ui.user_agent->setCursorPosition(0);
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   m_ui.zoom_frame_location->setCurrentIndex
