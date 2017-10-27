@@ -287,8 +287,8 @@
         <source>Version 2018.01.01, Baba Yaga.
 Dooble is open source software.
 (c) 2008 - present.</source>
-        <translation>Version 2018.01.01, Baba Yaga.
-Dooble ist open source software.
+        <translation type="unfinished">Version 2018.01.01, Baba Yaga.
+Dooble ist open source Software.
 (c) 2008 - heute.</translation>
     </message>
     <message>
@@ -898,7 +898,7 @@ Dooble ist open source software.
     </message>
     <message>
         <source>This Month</source>
-        <translation>Diesen Monat</translation>
+        <translation>Dieser Monat</translation>
     </message>
     <message>
         <source>Previous Month</source>
@@ -1616,7 +1616,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Please note that the cryptographic algorithms which are included in Dooble have not been provided by third-parties. If this is a concern, please do not prepare permanent credentials.</source>
-        <translation>Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses für Dich ein Besorgnis ist, erstelle bitte keine permanenten Passworte.</translation>
+        <translation type="unfinished">Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses für Dich ein Besorgnis darstellt, erstelle bitte keine permanenten Passworte.</translation>
     </message>
     <message>
         <source>Key Derivation</source>
