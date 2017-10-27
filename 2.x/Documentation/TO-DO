@@ -89,19 +89,23 @@ Completed Items
        (gopher://gopher.quux.org/1Software/Operating Systems/Unix/Linux)
 84.    Display the menu via a shortcut (F10?).
 85.    Certificate exceptions panel.
+86.    Language option. English, System.
 
-Remaining Items
+2.0 Remaining Items
 
 1.     Debian distribution. Signed.
 2.     OS X bundle.
 
+2.1 Remaining Items
+
+1.     Auto-correct addresses.
+
 Unknown Items
 
 1.     Optional Document Mode.
-2.     Print preview.
-3.     Pause and restart downloads.
+2.     Print preview. Qt?
+3.     Pause and restart downloads. Requires Qt support.
 4.     Custom icon sets.
-5.     Language option.
-6.     Document the Microsoft Studio compilation process.
-7.     Super-fancy icon set.
-8.     Fusion themes.
+5.     Document the Microsoft Studio compilation process.
+6.     Super-fancy icon set.
+7.     Fusion themes.
