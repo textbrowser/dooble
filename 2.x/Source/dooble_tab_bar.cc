@@ -293,7 +293,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action = menu.addAction(tr("Close T&ab"),
 			  this,
 			  SLOT(slot_close_tab(void)));
-  action->setEnabled(count() > 1 && tab_at > -1);
+  action->setEnabled(count() > 0 && tab_at > -1);
   action->setProperty("point", point);
   action = menu.addAction(tr("Close &Other Tabs"),
 			  this,

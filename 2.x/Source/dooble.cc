@@ -334,7 +334,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("New Tab"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
 
   if(dooble_settings::setting("access_new_tabs").toBool() ||
      qobject_cast<QShortcut *> (sender()) ||
@@ -641,7 +641,7 @@ void dooble::new_page(dooble_page *page)
 
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.
@@ -669,7 +669,7 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   m_ui.tab->addTab(page, tr("New Tab"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.
@@ -974,7 +974,7 @@ void dooble::prepare_standard_menus(void)
 
   if(qobject_cast<QStackedWidget *> (parentWidget()))
     action->setEnabled
-      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
 
   menu->addSeparator();
   menu->addAction(tr("E&xit Dooble"),
@@ -1212,9 +1212,9 @@ void dooble::slot_about_to_show_main_menu(void)
 	      m_ui.menu_file->addActions(m->actions()[0]->menu()->actions());
 
 	      if(page && page->action_close_tab())
-		page->action_close_tab()->setEnabled(m_ui.tab->count() > 1);
+		page->action_close_tab()->setEnabled(m_ui.tab->count() > 0);
 	      else if(m_action_close_tab)
-		m_action_close_tab->setEnabled(m_ui.tab->count() > 1);
+		m_action_close_tab->setEnabled(m_ui.tab->count() > 0);
 	    }
 	  else if(m_ui.menu_help == menu && m->actions()[4]->menu())
 	    m_ui.menu_help->addActions(m->actions()[4]->menu()->actions());
@@ -1331,8 +1331,11 @@ void dooble::slot_authenticate(void)
 
 void dooble::slot_close_tab(void)
 {
-  if(m_ui.tab->count() < 2) // Safety.
-    return;
+  if(m_ui.tab->count() <= 1)
+    {
+      close();
+      return;
+    }
 
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
@@ -1344,7 +1347,7 @@ void dooble::slot_close_tab(void)
   else
     m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
 
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
   prepare_tab_shortcuts();
 }
 
@@ -1381,7 +1384,7 @@ void dooble::slot_decouple_tab(int index)
   if(main_window)
     {
       m_ui.tab->removeTab(index);
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
       main_window->setParent(0);
       main_window->resize(s_vga_size);
       main_window->show();
@@ -1461,7 +1464,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 	      prepare_tab_icons();
 	    }
 
-	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
 	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
 	  prepare_tab_shortcuts();
 	}
@@ -1535,7 +1538,7 @@ void dooble::slot_open_link_in_new_window(const QUrl &url)
 
 void dooble::slot_open_tab_as_new_window(int index)
 {
-  if(m_ui.tab->count() == 1)
+  if(index < 0 || m_ui.tab->count() <= 1)
     return;
 
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
@@ -1546,7 +1549,7 @@ void dooble::slot_open_tab_as_new_window(int index)
 
       d->show();
       m_ui.tab->removeTab(m_ui.tab->indexOf(page));
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
     }
   else
     {
@@ -1554,7 +1557,7 @@ void dooble::slot_open_tab_as_new_window(int index)
 
       d->show();
       m_ui.tab->removeTab(index);
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
     }
 
   prepare_tab_shortcuts();
@@ -1744,7 +1747,7 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 	  prepare_tab_icons();
 	}
 
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
       m_ui.tab->setCurrentWidget
 	(s_accepted_or_blocked_domains); // Order is important.
       prepare_tab_shortcuts();
@@ -1864,7 +1867,7 @@ void dooble::slot_show_downloads(void)
 	  prepare_tab_icons();
 	}
 
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
       m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
       prepare_tab_shortcuts();
       return;
@@ -1916,7 +1919,7 @@ void dooble::slot_show_history(void)
 	  prepare_tab_icons();
 	}
 
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
       m_ui.tab->setCurrentWidget(s_history_window); // Order is important.
       prepare_tab_shortcuts();
       return;
@@ -1967,7 +1970,7 @@ void dooble::slot_show_settings(void)
 	  s_settings->restore();
 	}
 
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
       m_ui.tab->setCurrentWidget(s_settings); // Order is important.
       prepare_tab_shortcuts();
       return;
@@ -1997,8 +2000,13 @@ void dooble::slot_show_settings_panel(dooble_settings::Panels panel)
 
 void dooble::slot_tab_close_requested(int index)
 {
-  if(index < 0 || m_ui.tab->count() < 2) // Safety.
+  if(index < 0) // Safety.
     return;
+  else if(m_ui.tab->count() <= 1)
+    {
+      close();
+      return;
+    }
 
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
@@ -2006,7 +2014,7 @@ void dooble::slot_tab_close_requested(int index)
     page->deleteLater();
 
   m_ui.tab->removeTab(index);
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 1);
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
   prepare_tab_shortcuts();
 }
 

@@ -539,7 +539,7 @@ void dooble_page::prepare_standard_menus(void)
 
   if(qobject_cast<QStackedWidget *> (parentWidget()))
     action->setEnabled
-      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
 
   menu->addSeparator();
   menu->addAction(tr("&Save..."),
@@ -824,7 +824,7 @@ void dooble_page::slot_about_to_show_standard_menus(void)
   if(m_action_close_tab)
     if(qobject_cast<QStackedWidget *> (parentWidget()))
       m_action_close_tab->setEnabled
-	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 1);
+	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
 
   if(m_full_screen_action)
     {
