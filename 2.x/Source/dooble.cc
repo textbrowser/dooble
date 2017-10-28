@@ -1594,8 +1594,15 @@ void dooble::slot_pbkdf2_future_finished(void)
 	  else
 	    s_cryptography->set_block_cipher_type("Threefish-256");
 
-	  s_cryptography->set_keys
-	    (list.value(0).mid(0, 64), list.value(0).mid(64, 32));
+	  QByteArray authentication_key
+	    (list.value(0).
+	     mid(0, dooble_cryptography::s_authentication_key_length));
+	  QByteArray encryption_key
+	    (list.value(0).
+	     mid(dooble_cryptography::s_authentication_key_length,
+		 dooble_cryptography::s_encryption_key_length));
+
+	  s_cryptography->set_keys(authentication_key, encryption_key);
 	  emit dooble_credentials_authenticated(true);
 	}
     }

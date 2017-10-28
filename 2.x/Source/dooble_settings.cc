@@ -1068,11 +1068,15 @@ void dooble_settings::slot_apply(void)
 	  ** Generate temporary credentials.
 	  */
 
-	  QByteArray random_bytes(dooble_random::random_bytes(96));
+	  QByteArray authentication_key
+	    (dooble_random::
+	     random_bytes(dooble_cryptography::s_authentication_key_length));
+	  QByteArray encryption_key
+	    (dooble_random::
+	     random_bytes(dooble_cryptography::s_encryption_key_length));
 
 	  dooble::s_cryptography->set_authenticated(false);
-	  dooble::s_cryptography->set_keys
-	    (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+	  dooble::s_cryptography->set_keys(authentication_key, encryption_key);
 	  emit dooble_credentials_authenticated(false);
 	}
       else
@@ -1332,8 +1336,16 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      else
 		dooble::s_cryptography->set_block_cipher_type("Threefish-256");
 
+	      QByteArray authentication_key
+		(list.value(0).
+		 mid(0, dooble_cryptography::s_authentication_key_length));
+	      QByteArray encryption_key
+		(list.value(0).
+		 mid(dooble_cryptography::s_authentication_key_length,
+		     dooble_cryptography::s_encryption_key_length));
+
 	      dooble::s_cryptography->set_keys
-		(list.value(0).mid(0, 64), list.value(0).mid(64, 32));
+		(authentication_key, encryption_key);
 	      m_ui.reset_credentials->setEnabled(true);
 	      emit dooble_credentials_created();
 	    }
@@ -1634,12 +1646,15 @@ void dooble_settings::slot_reset_credentials(void)
   ** Generate temporary credentials.
   */
 
-  QByteArray random_bytes(dooble_random::random_bytes(96));
+  QByteArray authentication_key
+    (dooble_random::
+     random_bytes(dooble_cryptography::s_authentication_key_length));
+  QByteArray encryption_key
+    (dooble_random::random_bytes(dooble_cryptography::s_encryption_key_length));
 
   dooble::s_cryptography->set_authenticated(false);
   dooble::s_cryptography->set_block_cipher_type("AES-256");
-  dooble::s_cryptography->set_keys
-    (random_bytes.mid(0, 64), random_bytes.mid(64, 32));
+  dooble::s_cryptography->set_keys(authentication_key, encryption_key);
   emit dooble_credentials_authenticated(false);
   QApplication::restoreOverrideCursor();
 }
