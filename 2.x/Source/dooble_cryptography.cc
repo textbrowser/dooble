@@ -196,24 +196,6 @@ void dooble_cryptography::authenticate(const QByteArray &salt,
   m_authenticated = memcmp(hash, salted_password);
 }
 
-void dooble_cryptography::prepare_keys(const QByteArray &password,
-				       const QByteArray &salt,
-				       int block_cipher_type_index,
-				       int iteration_count)
-{
-  QList<QByteArray> list;
-  dooble_pbkdf2 pbkdf2
-    (password, salt, block_cipher_type_index, iteration_count, 1024);
-
-  list = pbkdf2.pbkdf2(dooble_hmac::sha3_512_hmac);
-
-  if(!list.isEmpty())
-    {
-      m_authentication_key = list.value(0).mid(0, 64);
-      m_encryption_key = list.value(0).mid(64, 32);
-    }
-}
-
 void dooble_cryptography::set_authenticated(bool state)
 {
   m_authenticated = state;
@@ -238,4 +220,6 @@ void dooble_cryptography::set_keys(const QByteArray &authentication_key,
       m_authentication_key.clear();
       m_encryption_key.clear();
     }
+  else
+    m_as_plaintext = false;
 }

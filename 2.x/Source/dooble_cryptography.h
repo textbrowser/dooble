@@ -53,10 +53,6 @@ class dooble_cryptography: public QObject
   void authenticate(const QByteArray &salt,
 		    const QByteArray &salted_password,
 		    const QString &password);
-  void prepare_keys(const QByteArray &password,
-		    const QByteArray &salt,
-		    int block_cipher_type_index,
-		    int iteration_count);
   void set_authenticated(bool state);
   void set_block_cipher_type(const QString &block_cipher_type);
   void set_keys(const QByteArray &authentication_key,
