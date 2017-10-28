@@ -64,7 +64,7 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
     (QByteArray::fromBase64(dooble_settings::
 			    setting("history_window_splitter_state").
 			    toByteArray()));
-  m_ui.table->sortItems(1, Qt::AscendingOrder);
+  m_ui.table->sortItems(m_ui.table->columnCount() - 1, Qt::DescendingOrder);
 
   for(int i = 0; i < m_ui.table->columnCount(); i++)
     m_ui.table->horizontalHeader()->resizeSection
