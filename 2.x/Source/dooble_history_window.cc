@@ -320,7 +320,7 @@ void dooble_history_window::slot_copy_location(void)
 
 void dooble_history_window::slot_delete_pages(void)
 {
-  QList<QTableWidgetItem *> list(m_ui.table->selectedItems());
+  QModelIndexList list(m_ui.table->selectionModel()->selectedRows(0));
 
   if(list.isEmpty())
     return;
@@ -331,25 +331,16 @@ void dooble_history_window::slot_delete_pages(void)
 
   for(int i = list.size() - 1; i >= 0; i--)
     {
-      if(!list.at(i))
-	continue;
-
-      QTableWidgetItem *item = m_ui.table->item(list.at(i)->row(), 0);
-
-      if(!item)
-	continue;
-
-      QUrl url(item->data(Qt::UserRole).toUrl());
+      QUrl url(list.at(i).data(Qt::UserRole).toUrl());
 
       urls << url;
       dooble::s_history->remove_item(url);
 
-      if(item->checkState() == Qt::Checked)
+      if(list.at(i).data(Qt::CheckStateRole) == Qt::Checked)
 	emit favorite_changed(url, false);
 
-      list.removeAt(i);
       m_items.remove(url);
-      m_ui.table->removeRow(item->row());
+      m_ui.table->removeRow(list.at(i).row());
     }
 
   QApplication::restoreOverrideCursor();
