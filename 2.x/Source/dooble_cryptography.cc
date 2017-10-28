@@ -189,6 +189,12 @@ bool dooble_cryptography::memcmp(const QByteArray &a, const QByteArray &b)
   return rc == 0;
 }
 
+void dooble_cryptography::memzero(QByteArray &bytes)
+{
+  for(int i = 0; i < bytes.size(); i++)
+    bytes[i] = 0;
+}
+
 void dooble_cryptography::authenticate(const QByteArray &salt,
 				       const QByteArray &salted_password,
 				       const QString &password)
