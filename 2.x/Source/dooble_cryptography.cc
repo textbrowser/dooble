@@ -34,6 +34,9 @@
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
 
+int dooble_cryptography::s_authentication_key_length = 64;
+int dooble_cryptography::s_encryption_key_length = 32;
+
 dooble_cryptography::dooble_cryptography
 (const QByteArray &authentication_key,
  const QByteArray &encryption_key,
@@ -59,9 +62,10 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type):
 {
   m_as_plaintext = false;
   m_authenticated = false;
-  m_authentication_key = dooble_random::random_bytes(64);
+  m_authentication_key = dooble_random::random_bytes
+    (s_authentication_key_length);
   m_block_cipher_type = block_cipher_type.toLower().trimmed();
-  m_encryption_key = dooble_random::random_bytes(32);
+  m_encryption_key = dooble_random::random_bytes(s_encryption_key_length);
 }
 
 dooble_cryptography::~dooble_cryptography()

@@ -37,6 +37,8 @@ class dooble_cryptography: public QObject
   Q_OBJECT
 
  public:
+  static int s_authentication_key_length;
+  static int s_encryption_key_length;
   dooble_cryptography(const QByteArray &authentication_key,
 		      const QByteArray &encryption_key,
 		      const QString &block_cipher_type);
