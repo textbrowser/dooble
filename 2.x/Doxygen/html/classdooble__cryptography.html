@@ -84,6 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classdooble__cryptography-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">dooble_cryptography Class Reference</div>  </div>
@@ -132,9 +133,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>authenticated</b> (vo
 <tr class="memitem:a79f3228a3415c94fc2eb88401af5f139"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79f3228a3415c94fc2eb88401af5f139"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>authenticate</b> (const QByteArray &amp;salt, const QByteArray &amp;salted_password, const QString &amp;password)</td></tr>
 <tr class="separator:a79f3228a3415c94fc2eb88401af5f139"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2caff861796a4608af1e287c222bbb0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2caff861796a4608af1e287c222bbb0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>prepare_keys</b> (const QByteArray &amp;password, const QByteArray &amp;salt, int block_cipher_type_index, int iteration_count)</td></tr>
-<tr class="separator:ad2caff861796a4608af1e287c222bbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc70f1570b248cf9c2a6f15a0e404689"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc70f1570b248cf9c2a6f15a0e404689"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_authenticated</b> (bool state)</td></tr>
 <tr class="separator:adc70f1570b248cf9c2a6f15a0e404689"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +148,18 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae0fdcd7316367f5b8dd6e84f57d3ed32"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0fdcd7316367f5b8dd6e84f57d3ed32"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>memcmp</b> (const QByteArray &amp;a, const QByteArray &amp;b)</td></tr>
 <tr class="separator:ae0fdcd7316367f5b8dd6e84f57d3ed32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20beb2c8b3c97352024c606346320fd2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20beb2c8b3c97352024c606346320fd2"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>memzero</b> (QByteArray &amp;bytes)</td></tr>
+<tr class="separator:a20beb2c8b3c97352024c606346320fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a11288c4da41b6dc8f51ae28ab20b3340"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11288c4da41b6dc8f51ae28ab20b3340"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><b>s_authentication_key_length</b> = 64</td></tr>
+<tr class="separator:a11288c4da41b6dc8f51ae28ab20b3340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdac69f37c58f18761ad835826298e73"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acdac69f37c58f18761ad835826298e73"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><b>s_encryption_key_length</b> = 32</td></tr>
+<tr class="separator:acdac69f37c58f18761ad835826298e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Source/<a class="el" href="dooble__cryptography_8h_source.html">dooble_cryptography.h</a></li>

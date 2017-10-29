@@ -85,7 +85,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classdooble__history-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">dooble_history Class Reference</div>  </div>
@@ -106,12 +105,13 @@ Collaboration diagram for dooble_history:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:a3ed38b1812ee72e8f2c706447dc2fe46"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ed38b1812ee72e8f2c706447dc2fe46"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>HistoryItem</b> { <br />
 &#160;&#160;<b>FAVICON</b> = 0, 
+<b>FAVORITE</b>, 
 <b>LAST_VISITED</b>, 
-<b>TITLE</b>, 
-<b>URL</b>, 
+<b>NUMBER_OF_VISITS</b>, 
 <br />
-&#160;&#160;<b>URL_DIGEST</b>, 
-<b>VISIT_COUNT</b>
+&#160;&#160;<b>TITLE</b>, 
+<b>URL</b>, 
+<b>URL_DIGEST</b>
 <br />
  }</td></tr>
 <tr class="separator:a3ed38b1812ee72e8f2c706447dc2fe46"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,30 +133,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>populated</b> (void)<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af9748b71070fedd77a5a1cb8ae1332d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9748b71070fedd77a5a1cb8ae1332d5"></a>
-QHash&lt; QUrl, QHash&lt; int, QVariant &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>history</b> (void) const </td></tr>
-<tr class="separator:af9748b71070fedd77a5a1cb8ae1332d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94033a6a9e99fa19e0751fda727dcecb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94033a6a9e99fa19e0751fda727dcecb"></a>
+QHash&lt; QUrl, QHash&lt; dooble_history::HistoryItem, QVariant &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>history</b> (void) const </td></tr>
+<tr class="separator:a94033a6a9e99fa19e0751fda727dcecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade40511b1451fc1385e3d156673f5fd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade40511b1451fc1385e3d156673f5fd9"></a>
 QList&lt; QPair&lt; QIcon, QString &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>urls</b> (void) const </td></tr>
 <tr class="separator:ade40511b1451fc1385e3d156673f5fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae82bedcf05048efa3cb815fe51cf577e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae82bedcf05048efa3cb815fe51cf577e"></a>
+QStandardItemModel *&#160;</td><td class="memItemRight" valign="bottom"><b>favorites_model</b> (void) const </td></tr>
+<tr class="separator:ae82bedcf05048efa3cb815fe51cf577e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b2da81dca4959529d80a66628e93ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04b2da81dca4959529d80a66628e93ee"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_favorite</b> (const QUrl &amp;url) const </td></tr>
+<tr class="separator:a04b2da81dca4959529d80a66628e93ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcc34667359a091c7792fcc9fb252841"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcc34667359a091c7792fcc9fb252841"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>abort</b> (void)</td></tr>
 <tr class="separator:adcc34667359a091c7792fcc9fb252841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1c2f59d671cb5760d2681971a3ce7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c1c2f59d671cb5760d2681971a3ce7e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>purge_favorites</b> (void)</td></tr>
+<tr class="separator:a6c1c2f59d671cb5760d2681971a3ce7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada7e63cefdc8b1742a83a048c7fcceb6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada7e63cefdc8b1742a83a048c7fcceb6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>purge_history</b> (void)</td></tr>
+<tr class="separator:ada7e63cefdc8b1742a83a048c7fcceb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb42871f592ba42026f6c3608785b0ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb42871f592ba42026f6c3608785b0ee"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_favorite</b> (const QUrl &amp;url)</td></tr>
+<tr class="separator:aeb42871f592ba42026f6c3608785b0ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51cf6c2ddf7533c61a73b99e6d041b3c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51cf6c2ddf7533c61a73b99e6d041b3c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_item</b> (const QUrl &amp;url)</td></tr>
 <tr class="separator:a51cf6c2ddf7533c61a73b99e6d041b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a178fc2b1253c0d8171c24e4ae64a12c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a178fc2b1253c0d8171c24e4ae64a12c8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save_favicon</b> (const QIcon &amp;icon, const QUrl &amp;url)</td></tr>
 <tr class="separator:a178fc2b1253c0d8171c24e4ae64a12c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ad790af1246fccd9a082160c8408c4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ad790af1246fccd9a082160c8408c4b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save_item</b> (const QIcon &amp;icon, const QWebEngineHistoryItem &amp;item)</td></tr>
-<tr class="separator:a4ad790af1246fccd9a082160c8408c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afe8974547fd5c8cf4cd206bc4af8681f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe8974547fd5c8cf4cd206bc4af8681f"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>purge</b> (void)</td></tr>
-<tr class="separator:afe8974547fd5c8cf4cd206bc4af8681f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5afd5dc328560ae293565ac90daae10b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5afd5dc328560ae293565ac90daae10b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save_favorite</b> (const QUrl &amp;url, bool state)</td></tr>
+<tr class="separator:a5afd5dc328560ae293565ac90daae10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77e36b88660c192ecf19973aebb3225d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77e36b88660c192ecf19973aebb3225d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save_item</b> (const QIcon &amp;icon, const QWebEngineHistoryItem &amp;item, bool force)</td></tr>
+<tr class="separator:a77e36b88660c192ecf19973aebb3225d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Source/<a class="el" href="dooble__history_8h_source.html">dooble_history.h</a></li>
