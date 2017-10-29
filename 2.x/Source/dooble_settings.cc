@@ -1504,6 +1504,8 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
   QModelIndexList list(m_ui.javascript_block_popups_exceptions->
 		       selectionModel()->selectedRows(1));
 
+  std::sort(list.begin(), list.end());
+
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
       QString database_name

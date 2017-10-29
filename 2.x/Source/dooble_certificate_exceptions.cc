@@ -185,6 +185,8 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
     if(m_ui.table->isRowHidden(list.at(i).row()))
       list.removeAt(i);
 
+  std::sort(list.begin(), list.end());
+
   QApplication::restoreOverrideCursor();
 
   if(list.size() > 0)

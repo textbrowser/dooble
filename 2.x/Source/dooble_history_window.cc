@@ -326,6 +326,7 @@ void dooble_history_window::slot_delete_pages(void)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  std::sort(list.begin(), list.end());
 
   QList<QUrl> urls;
 
