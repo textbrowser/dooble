@@ -670,6 +670,10 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
   QModelIndexList list(m_ui.table->selectionModel()->selectedRows(1));
 
+  for(int i = list.size() - 1; i >= 0; i--)
+    if(m_ui.table->isRowHidden(list.at(i).row()))
+      list.removeAt(i);
+
   QApplication::restoreOverrideCursor();
 
   if(list.size() > 0)
@@ -744,6 +748,10 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QModelIndexList list(m_ui.exceptions->selectionModel()->selectedRows(1));
+
+  for(int i = list.size() - 1; i >= 0; i--)
+    if(m_ui.table->isRowHidden(list.at(i).row()))
+      list.removeAt(i);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {

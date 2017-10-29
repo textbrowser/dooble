@@ -181,6 +181,10 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
 
   QModelIndexList list(m_ui.table->selectionModel()->selectedRows(0));
 
+  for(int i = list.size() - 1; i >= 0; i--)
+    if(m_ui.table->isRowHidden(list.at(i).row()))
+      list.removeAt(i);
+
   QApplication::restoreOverrideCursor();
 
   if(list.size() > 0)

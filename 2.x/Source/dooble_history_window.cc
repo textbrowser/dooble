@@ -331,6 +331,9 @@ void dooble_history_window::slot_delete_pages(void)
 
   for(int i = list.size() - 1; i >= 0; i--)
     {
+      if(m_ui.table->isRowHidden(list.at(i).row()))
+	continue;
+
       QUrl url(list.at(i).data(Qt::UserRole).toUrl());
 
       urls << url;
