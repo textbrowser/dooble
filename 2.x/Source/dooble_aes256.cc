@@ -34,6 +34,7 @@
 #include <iostream>
 
 #include "dooble_aes256.h"
+#include "dooble_cryptography.h"
 #include "dooble_random.h"
 
 /*
@@ -145,9 +146,7 @@ dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
 
 dooble_aes256::~dooble_aes256()
 {
-  QByteArray zeros(m_key_length, 0);
-
-  m_key.replace(0, m_key.length(), zeros);
+  dooble_cryptography::memzero(m_key);
 }
 
 QByteArray dooble_aes256::decrypt(const QByteArray &data)

@@ -29,6 +29,7 @@
 #include <QtCore/qmath.h>
 #include <QtDebug>
 
+#include "dooble_cryptography.h"
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
 
@@ -530,9 +531,7 @@ dooble_threefish256::dooble_threefish256(const QByteArray &key):
 
 dooble_threefish256::~dooble_threefish256()
 {
-  QByteArray zeros(m_key_length, 0);
-
-  m_key.replace(0, m_key.length(), zeros);
+  dooble_cryptography::memzero(m_key);
 }
 
 QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
