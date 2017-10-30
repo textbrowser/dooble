@@ -572,8 +572,6 @@ data.path          = /Applications/Dooble.d/Data
 data.files         = Data/*.txt
 dooble.path	   = /Applications/Dooble.d/Dooble.app
 dooble.files	   = Dooble.app/*
-installtool.path  = .
-installtool.extra = install_name_tool -change @rpath/QtWebEngineCore.framework/Versions/5/QtWebEngineCore /Applications/Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/QtWebEngineCore /Applications/Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess
 macdeployqt.path   = Dooble.app
 macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt ./Dooble.app
 preinstall.path    = /Applications/Dooble.d
@@ -585,8 +583,7 @@ INSTALLS	= preinstall \
                   data \
                   macdeployqt \
                   dooble \
-                  postinstall \
-                  installtool
+                  postinstall
 }
 
 macx:app_bundle {
