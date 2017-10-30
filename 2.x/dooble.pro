@@ -573,7 +573,7 @@ data.files         = Data/*.txt
 dooble.path	   = /Applications/Dooble.d/Dooble.app
 dooble.files	   = Dooble.app/*
 macdeployqt.path   = Dooble.app
-macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt ./Dooble.app
+macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt ./Dooble.app -executable=./Dooble.app/Contents/MacOS/Dooble
 preinstall.path    = /Applications/Dooble.d
 preinstall.extra   = rm -rf /Applications/Dooble.d/Dooble.app
 postinstall.path   = /Applications/Dooble.d
