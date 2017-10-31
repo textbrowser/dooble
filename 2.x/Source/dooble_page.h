@@ -181,6 +181,7 @@ class dooble_page: public QWidget
   void show_certificate_exceptions(void);
   void show_clear_items(void);
   void show_cookies(void);
+  void show_documentation(void);
   void show_downloads(void);
   void show_favorites(void);
   void show_full_screen(void);

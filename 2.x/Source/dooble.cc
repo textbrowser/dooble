@@ -841,6 +841,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_documentation(void)),
+	  this,
+	  SLOT(slot_show_documentation(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_downloads(void)),
 	  this,
 	  SLOT(slot_show_downloads(void)),
@@ -1873,6 +1879,7 @@ void dooble::slot_show_cookies(void)
 
 void dooble::slot_show_documentation(void)
 {
+  new_page(QUrl("qrc://Documentation/Dooble.html"), m_is_private);
 }
 
 void dooble::slot_show_downloads(void)

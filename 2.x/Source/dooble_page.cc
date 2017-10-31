@@ -664,6 +664,10 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&About..."),
 		  this,
 		  SIGNAL(show_about(void)));
+  menu->addSeparator();
+  menu->addAction(tr("&Documentation..."),
+		  this,
+		  SIGNAL(show_documentation(void)));
 }
 
 void dooble_page::prepare_tool_buttons(void)
