@@ -1074,6 +1074,10 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("&About..."),
 		  this,
 		  SLOT(slot_show_about(void)));
+  menu->addSeparator();
+  menu->addAction(tr("&Documentation..."),
+		  this,
+		  SLOT(slot_show_documentation(void)));
 }
 
 void dooble::prepare_tab_icons(void)
@@ -1188,6 +1192,8 @@ void dooble::slot_about_to_hide_main_menu(void)
 
 void dooble::slot_about_to_show_main_menu(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QMenu *menu = qobject_cast<QMenu *> (sender());
 
   if(menu)
@@ -1201,7 +1207,10 @@ void dooble::slot_about_to_show_main_menu(void)
       if(page && page->menu())
 	m = page->menu();
       else
-	m = m_menu;
+	{
+	  prepare_standard_menus();
+	  m = m_menu;
+	}
 
       if(m && m->actions().size() >= 5)
 	{
@@ -1243,6 +1252,8 @@ void dooble::slot_about_to_show_main_menu(void)
 	    }
 	}
     }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_authenticate(void)
@@ -1858,6 +1869,10 @@ void dooble::slot_show_cookies(void)
 
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
+}
+
+void dooble::slot_show_documentation(void)
+{
 }
 
 void dooble::slot_show_downloads(void)

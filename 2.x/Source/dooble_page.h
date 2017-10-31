@@ -60,7 +60,7 @@ class dooble_page: public QWidget
   QAction *action_close_tab(void) const;
   QAction *full_screen_action(void) const;
   QIcon icon(void) const;
-  QMenu *menu(void) const;
+  QMenu *menu(void);
   QString title(void) const;
   QUrl url(void) const;
   QWebEngineSettings *web_engine_settings(void) const;

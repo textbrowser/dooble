@@ -295,7 +295,6 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   prepare_icons();
   prepare_shortcuts();
-  prepare_standard_menus();
   prepare_tool_buttons();
   slot_dooble_credentials_created();
 }
@@ -330,8 +329,9 @@ QIcon dooble_page::icon(void) const
   return dooble_favicons::icon(m_view->url());
 }
 
-QMenu *dooble_page::menu(void) const
+QMenu *dooble_page::menu(void)
 {
+  prepare_standard_menus();
   return m_menu;
 }
 

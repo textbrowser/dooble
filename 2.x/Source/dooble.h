@@ -163,6 +163,7 @@ class dooble: public QMainWindow
   void slot_show_certificate_exceptions(void);
   void slot_show_clear_items(void);
   void slot_show_cookies(void);
+  void slot_show_documentation(void);
   void slot_show_downloads(void);
   void slot_show_favorites(void);
   void slot_show_full_screen(void);
