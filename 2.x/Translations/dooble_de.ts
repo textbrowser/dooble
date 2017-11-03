@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>QObject</name>
     <message>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>New Page</source>
-        <translation>Neue Seite</translation>
+        <translation type="vanished">Neue Seite</translation>
     </message>
     <message>
         <source>Ctrl+D</source>
@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>&amp;Blocked Domains</source>
-        <translation>&amp;Blockierte Domains</translation>
+        <translation type="vanished">&amp;Blockierte Domains</translation>
     </message>
     <message>
         <source>&amp;Blocked Domains...</source>
-        <translation>&amp;Blockierte Domains...</translation>
+        <translation type="vanished">&amp;Blockierte Domains...</translation>
     </message>
     <message>
         <source>&amp;Downloads</source>
@@ -212,11 +212,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="vanished">Speichern</translation>
     </message>
     <message>
         <source>Dooble: Download File</source>
-        <translation>Dooble: Datei herunterladen</translation>
+        <translation type="vanished">Dooble: Datei herunterladen</translation>
     </message>
     <message>
         <source>Dooble</source>
@@ -258,6 +258,18 @@
         <source>Ctrl+B</source>
         <translation></translation>
     </message>
+    <message>
+        <source>F10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Certificate &amp;Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Documentation...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -280,14 +292,14 @@
     <message>
         <source>Version 2018.01.01, Baba Yaga.
 (c) 2008 - present.</source>
-        <translation>Version 2018.01.01, Baba Yaga.
+        <translation type="vanished">Version 2018.01.01, Baba Yaga.
 (c) 2008 - heute.</translation>
     </message>
     <message>
         <source>Version 2018.01.01, Baba Yaga.
 Dooble is open source software.
 (c) 2008 - present.</source>
-        <translation type="unfinished">Version 2018.01.01, Baba Yaga.
+        <translation type="obsolete">Version 2018.01.01, Baba Yaga.
 Dooble ist open source Software.
 (c) 2008 - heute.</translation>
     </message>
@@ -300,8 +312,21 @@ Dooble ist open source Software.
         <translation>Veröffentlichungs-Hinweise</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;https://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22BSD_License_2.0.22.2C_.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29&quot;&gt;BSD 3-Clause License&lt;/a&gt;</source>
-        <translation></translation>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble is open source software.
+(c) 2008 - present.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;qrc://Documentation/DOOBLE-LICENSE.html&quot;&gt;Dooble 3-Clause BSD License&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble version %1, Baba Yaga.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -393,7 +418,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>Löschen</translation>
+        <translation type="vanished">Löschen</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Existing values will be updated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -439,6 +464,10 @@ Dooble ist open source Software.
     <message>
         <source>Interrupt</source>
         <translation>Unterbreche</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Selected</source>
+        <translation type="unfinished">Lösche die Ausgewählten</translation>
     </message>
 </context>
 <context>
@@ -500,6 +529,45 @@ Dooble ist open source Software.
     <message>
         <source>&amp;Password</source>
         <translation>&amp;Passwort</translation>
+    </message>
+</context>
+<context>
+    <name>dooble_certificate_exceptions</name>
+    <message>
+        <source>Dooble: Certificate Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please restart Dooble after removing exceptions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site</source>
+        <translation type="unfinished">Seite</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete Selected</source>
+        <translation type="unfinished">Lösche die Ausgewählten</translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete the selected exceptions(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished">Dooble: Bestätigung</translation>
     </message>
 </context>
 <context>
@@ -1109,7 +1177,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>The site %1 is requesting credentials.</source>
-        <translation>Die Seite %1 fragt ein Passwort an.</translation>
+        <translation type="vanished">Die Seite %1 fragt ein Passwort an.</translation>
     </message>
     <message>
         <source>A dialog from %1 has been blocked.</source>
@@ -1149,7 +1217,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>The proxy %1 is requesting credentials.</source>
-        <translation>Der Proxy %1 erfordert ein Passwort.</translation>
+        <translation type="vanished">Der Proxy %1 erfordert ein Passwort.</translation>
     </message>
     <message>
         <source>Form</source>
@@ -1266,6 +1334,26 @@ Dooble ist open source Software.
     <message>
         <source>Ctrl+B</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Certificate &amp;Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Documentation...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The site &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The proxy &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1516,7 +1604,7 @@ Domänen</translation>
     </message>
     <message>
         <source>If hidden, show via Alt + Ctrl.</source>
-        <translation>Wenn verborgen, zeige via Alt + Ctrl.</translation>
+        <translation type="vanished">Wenn verborgen, zeige via Alt + Ctrl.</translation>
     </message>
     <message>
         <source>Main Menu Bar Visible</source>
@@ -1816,7 +1904,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Both persistent and session cookies are saved to and restored from disk.</source>
-        <translation>Beide, persistente und sitzungsbezogene Cookies werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
+        <translation type="vanished">Beide, persistente und sitzungsbezogene Cookies werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
     </message>
     <message>
         <source>Cookies marked persistent are saved to and restored from disk.</source>
@@ -1828,11 +1916,11 @@ Domänen</translation>
     </message>
     <message>
         <source>The file %1 is not readable. Disabling the System option.</source>
-        <translation>Die Datei %1 kann nicht gelesen werden. Die System Option wird abgestellt.</translation>
+        <translation type="vanished">Die Datei %1 kann nicht gelesen werden. Die System Option wird abgestellt.</translation>
     </message>
     <message>
         <source>INI Location</source>
-        <translation>INI Location</translation>
+        <translation type="vanished">INI Location</translation>
     </message>
     <message>
         <source>Persistent and session cookies are saved to and restored from disk.</source>
@@ -1840,15 +1928,19 @@ Domänen</translation>
     </message>
     <message>
         <source>The Dooble configuration file dooble_settings.db resides in %1.</source>
-        <translation>Die Dooble Konfigurations-Datei dooble_settings.db findet sich im Pfad %1.</translation>
+        <translation type="vanished">Die Dooble Konfigurations-Datei dooble_settings.db findet sich im Pfad %1.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Danger!&lt;/b&gt; Cannot access dooble_settings.db. Your system is dysfunctional.</source>
-        <translation>&lt;b&gt;Achtung!&lt;/b&gt; Habe keinen Zugriff aus dooble_settings.db. Dein System ist dysfunktional.</translation>
+        <translation type="vanished">&lt;b&gt;Achtung!&lt;/b&gt; Habe keinen Zugriff aus dooble_settings.db. Dein System ist dysfunktional.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is not readable. The System option has been disabled.</source>
         <translation>&lt;b&gt;Warnung!&lt;/b&gt; Die Datei %1 ist nicht lesbar. Die &quot;System&quot;-Option wurde abgestellt.</translation>
+    </message>
+    <message>
+        <source>If hidden, show via F10.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1902,6 +1994,10 @@ Domänen</translation>
     <message>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the permanent exception.&lt;br&gt;&lt;br&gt;Permanent exceptions may be removed later.&lt;/html&gt;</source>
         <translation>&lt;html&gt;Ein Zertifkat-Fehler entstand beim Zugang zur sicheren Seite %1. &lt;b&gt;%2&lt;/b&gt; Zertifikats-Fehler mögen anzeigen, dass der Server, mit dem Du versuchst zu verbinden, nicht vertrauenswürdig ist.&lt;br&gt;&lt;br&gt;Bitte akzeptiere oder verneine eine permanente Ausnahme.&lt;br&gt;&lt;br&gt;Permanente Ausnahmen können auch später wieder entfernt werden.&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;An exception may not be set because of the severity of the certificate error.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
