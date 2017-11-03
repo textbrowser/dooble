@@ -131,12 +131,6 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
-void dooble_history_window::clear(void)
-{
-  m_items.clear();
-  m_ui.table->setRowCount(0);
-}
-
 void dooble_history_window::closeEvent(QCloseEvent *event)
 {
   QMainWindow::closeEvent(event);
@@ -684,7 +678,8 @@ void dooble_history_window::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     {
-      clear();
+      m_items.clear();
+      m_ui.table->setRowCount(0);
       return;
     }
 
