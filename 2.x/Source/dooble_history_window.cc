@@ -439,8 +439,24 @@ void dooble_history_window::slot_find(void)
 
 void dooble_history_window::slot_history_cleared(void)
 {
-  m_items.clear();
-  m_ui.table->setRowCount(0);
+  for(int i = m_ui.table->rowCount(); i >= 0; i--)
+    {
+      QTableWidgetItem *item = m_ui.table->item(i, 0);
+
+      if(!item)
+	{
+	  m_ui.table->removeRow(i);
+	  continue;
+	}
+
+      if(item->checkState() == Qt::Checked)
+	continue;
+
+      QUrl url(item->data(Qt::UserRole).toUrl());
+
+      m_items.remove(url);
+      m_ui.table->removeRow(i);
+    }
 }
 
 void dooble_history_window::slot_horizontal_header_section_resized
