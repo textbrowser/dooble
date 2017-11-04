@@ -576,11 +576,14 @@ macdeployqt.path   = Dooble.app
 macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
 preinstall.path    = /Applications/Dooble.d
 preinstall.extra   = rm -rf /Applications/Dooble.d/Dooble.app
+translations.path  = /Applications/Dooble.d/Translations
+translations.files = Translations/*.qm
 
 INSTALLS	= copydata \
                   preinstall \
                   copydooble \
-                  macdeployqt
+                  macdeployqt \
+                  translations
 }
 
 macx:app_bundle {

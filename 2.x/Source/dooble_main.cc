@@ -144,6 +144,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_MACOS
   QApplication::setStyle(QStyleFactory::create("Macintosh"));
+  QDir::setCurrent("/Applications/Dooble.d");
 #elif defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
