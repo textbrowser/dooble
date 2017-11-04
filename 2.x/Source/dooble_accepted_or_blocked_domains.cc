@@ -875,6 +875,10 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	      if(progress.wasCanceled())
 		break;
 
+	      if(data.trimmed().endsWith(".invalid") ||
+		 data.trimmed().startsWith("#"))
+		continue;
+
 	      QUrl url(QUrl::fromUserInput(data.mid(0, static_cast<int> (rc)).
 					   trimmed()));
 

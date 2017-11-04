@@ -1,4 +1,6 @@
-101com.com
+
+<!-- saved from url=(0094)https://pgl.yoyo.org/adservers/serverlist.php?hostformat=nohtml&showintro=0&mimetype=plaintext -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">101com.com
 101order.com
 123found.com
 123freeavatars.com
@@ -27,7 +29,6 @@ a-ads.com
 a-counter.kiev.ua
 a.0day.kiev.ua
 a.aproductmsg.com
-a.collective-media.net
 a.consumer.net
 a.mktw.net
 a.sakh.com
@@ -145,6 +146,7 @@ ad.way.cz
 ad.weatherbug.com
 ad.wsod.com
 ad.wz.cz
+ad.xrea.com
 ad.yadro.ru
 ad.yourmedia.com
 ad.zanox.com
@@ -157,10 +159,12 @@ ad1.pamedia.com.au
 ad2.iinfo.cz
 ad2.linxcz.cz
 ad2.lupa.cz
+ad2.xrea.com
 ad2flash.com
 ad2games.com
 ad3.iinfo.cz
 ad3.pamedia.com.au
+ad3.xrea.com
 ad4game.com
 adaction.de
 adadvisor.net
@@ -212,12 +216,13 @@ adfarm.mediaplex.com
 adflight.com
 adforce.com
 adform.com
+adform.net
+adformdsp.net
 adgardener.com
 adgoto.com
 adgridwork.com
 adhese.be
 adhese.com
-adimage.asiaone.com.sg
 adimage.guardian.co.uk
 adimages.been.com
 adimages.carsoup.com
@@ -437,7 +442,6 @@ ads.foxnews.com
 ads.freecity.de
 ads.friendfinder.com
 ads.ft.com
-ads.futurenet.com
 ads.gamecity.net
 ads.gamershell.com
 ads.gamespyid.com
@@ -465,6 +469,7 @@ ads.heartlight.org
 ads.heias.com
 ads.hideyourarms.com
 ads.hollywood.com
+ads.horsehero.com
 ads.horyzon-media.com
 ads.iafrica.com
 ads.ibest.com.br
@@ -695,7 +700,6 @@ adserver.break-even.it
 adserver.cams.com
 adserver.com
 adserver.digitoday.com
-adserver.dotcommedia.de
 adserver.finditquick.com
 adserver.flossiemediagroup.com
 adserver.freecity.de
@@ -927,7 +931,6 @@ avsads.com
 avzadsrv.com
 awempire.com
 awin1.com
-azfront.com
 b-1st.com
 b.aol.com
 b.engadget.com
@@ -1115,7 +1118,6 @@ casinotraffic.com
 casinotreasure.com
 cbanners.virtuagirlhd.com
 cbmall.com
-cdn.freefacti.com
 cdn.freefarcy.com
 cecash.com
 centerpointmedia.com
@@ -1579,6 +1581,7 @@ intergi.com
 internetfuel.com
 interreklame.de
 interstat.hu
+ioam.de
 ip.ro
 ip193.cn
 iperceptions.com
@@ -1588,6 +1591,7 @@ itfarm.com
 itop.cz
 its-that-easy.com
 itsptp.com
+ivwbox.de
 ivykiosk.com
 jcount.com
 jewelcheese.com
@@ -1615,7 +1619,6 @@ launchbit.com
 layer-ad.de
 layer-ads.de
 lbn.ru
-lct.salesforce.com
 lead-analytics.nl
 leadboltads.net
 leadclick.com
@@ -1672,7 +1675,6 @@ marketing.hearstmagazines.nl
 marketing.nyi.net
 marketing.osijek031.com
 marketingsolutions.yahoo.com
-maroonspider.com
 mas.sector.sk
 mastermind.com
 matchcows.com
@@ -1680,7 +1682,6 @@ matchcraft.com
 mathtag.com
 max.i12.de
 maximumcash.com
-mbn.com.ua
 mbs.megaroticlive.com
 mbuyu.nl
 mdotm.com
@@ -1884,6 +1885,7 @@ phpadsnew.new.natuurpark.nl
 phpmyvisites.net
 picadmedia.com
 pietexture.com
+pillscash.com
 pimproll.com
 pixel.adsafeprotected.com
 pixel.jumptap.com
@@ -1963,13 +1965,11 @@ quicksandear.com
 quigo.com
 quinst.com
 quisma.com
-rad.msn.com
 radar.cedexis.com
 radarurl.com
 radiate.com
 rampidads.com
 rank-master.com
-rank-master.de
 rankchamp.de
 ranking-charts.de
 ranking-hits.de
@@ -2226,7 +2226,7 @@ tfag.de
 theadhost.com
 theads.me
 thebugs.ws
-thecounter.com
+thecounter.com.invalid
 therapistla.com
 therichkids.com
 thirdrespect.com
@@ -2332,7 +2332,6 @@ ultramercial.com
 unknowntray.com
 untd.com
 unusualtitle.com
-updated.com
 urlcash.net
 us.a1.yimg.com
 usapromotravel.com
@@ -2436,7 +2435,6 @@ xiti.com
 xplusone.com
 xponsor.com
 xq1.net
-xrea.com
 xtendmedia.com
 xtremetop100.com
 xxxcounter.com
@@ -2468,3 +2466,4 @@ zeusclicks.com
 zintext.com
 zmedia.com
 zv1.november-lax.com
+</pre></body></html>
