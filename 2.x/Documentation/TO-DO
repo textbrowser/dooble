@@ -94,6 +94,10 @@
 88.    OS X bundle.
 89.    Documentation.
 
+2.0 Remaining Items
+
+1.     Place the Translations directory into the OS X bundle.
+
 2.1 Remaining Items
 
 1.     Auto-correct addresses.
