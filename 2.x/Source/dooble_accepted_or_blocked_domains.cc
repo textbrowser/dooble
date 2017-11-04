@@ -839,8 +839,8 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
   dialog.setDirectory(QDir::homePath());
   dialog.setFileMode(QFileDialog::ExistingFile);
   dialog.setLabelText(QFileDialog::Accept, tr("Select"));
-  dialog.setNameFilter(tr("dooble_blocked_domains.txt"));
-  dialog.setWindowTitle(tr("Dooble: Import Blocked Domains"));
+  dialog.setNameFilter(tr("dooble_accepted_or_blocked_domains.txt"));
+  dialog.setWindowTitle(tr("Dooble: Import Accepted / Blocked Domains"));
 
   if(dialog.exec() == QDialog::Accepted)
     {
