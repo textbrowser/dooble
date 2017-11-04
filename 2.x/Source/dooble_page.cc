@@ -665,7 +665,7 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(show_about(void)));
   menu->addSeparator();
-  menu->addAction(tr("&Documentation..."),
+  menu->addAction(tr("&Documentation"),
 		  this,
 		  SIGNAL(show_documentation(void)));
 }

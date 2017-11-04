@@ -1081,7 +1081,7 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_show_about(void)));
   menu->addSeparator();
-  menu->addAction(tr("&Documentation..."),
+  menu->addAction(tr("&Documentation"),
 		  this,
 		  SLOT(slot_show_documentation(void)));
 }
