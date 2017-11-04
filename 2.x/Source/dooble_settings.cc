@@ -1570,7 +1570,8 @@ void dooble_settings::slot_reset(void)
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
   mb.setText
     (tr("Are you sure that you wish to reset Dooble? "
-	"All known data will be removed and Dooble will be restarted."));
+	"All known data will be removed and Dooble will be restarted. Please "
+	"remove the directory WebEnginePersistentStorage."));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::WindowModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
