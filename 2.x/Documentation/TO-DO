@@ -101,15 +101,15 @@
 2.     Maximum URL length set to 2048 characters.
 3.     Maximum title length set to 1024 characters.
 4.     Optional DNT.
+5.     WebGL option.
 
 2.1 Remaining Items
 
 1.     Auto-correct addresses.
 2.     Debian distribution. Signed.
 3.     Multiple certificate exceptions.
-4.     WebGL option.
-5.     Clearing of Visited Links beyond Clear Items.
-6.     New Web site.
+4.     Clearing of Visited Links beyond Clear Items.
+5.     New Web site.
 
 Unknown Items
 

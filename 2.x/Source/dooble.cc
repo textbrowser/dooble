@@ -532,6 +532,10 @@ void dooble::copy_default_profile_settings(void)
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
   m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::WebGLEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::WebGLEnabled));
+  m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled,
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::XSSAuditingEnabled));

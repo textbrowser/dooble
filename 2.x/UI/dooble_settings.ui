@@ -656,8 +656,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>451</width>
-               <height>746</height>
+               <width>415</width>
+               <height>680</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1156,8 +1156,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>270</width>
-               <height>700</height>
+               <width>451</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1378,6 +1378,16 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="webgl">
+                <property name="text">
+                 <string>WebGL</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="xss_auditing">
                 <property name="text">
                  <string>XSS Auditing</string>
@@ -1530,6 +1540,7 @@
   <tabstop>dictionaries</tabstop>
   <tabstop>user_agent</tabstop>
   <tabstop>web_plugins</tabstop>
+  <tabstop>webgl</tabstop>
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
