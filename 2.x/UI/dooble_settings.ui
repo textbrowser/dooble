@@ -656,8 +656,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>651</height>
+               <width>451</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -952,6 +952,16 @@
                   </widget>
                  </item>
                 </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="do_not_track">
+                <property name="text">
+                 <string>Do Not Track</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -1499,6 +1509,7 @@
   <tabstop>password_2</tabstop>
   <tabstop>save_credentials</tabstop>
   <tabstop>reset_credentials</tabstop>
+  <tabstop>do_not_track</tabstop>
   <tabstop>proxy_type</tabstop>
   <tabstop>proxy_host</tabstop>
   <tabstop>proxy_port</tabstop>

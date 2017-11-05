@@ -182,6 +182,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["cookie_policy_index"] = 2;
   s_settings["credentials_enabled"] = false;
   s_settings["denote_private_widgets"] = true;
+  s_settings["do_not_track"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
@@ -717,6 +718,8 @@ void dooble_settings::restore(void)
     (s_settings.value("credentials_enabled", false).toBool());
   m_ui.denote_private_widgets->setChecked
     (s_settings.value("denote_private_widgets", true).toBool());
+  m_ui.do_not_track->setChecked
+    (s_settings.value("do_not_track", true).toBool());
   m_ui.iterations->setValue
     (s_settings.value("authentication_iteration_count", 15000).toInt());
   m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
@@ -1186,6 +1189,7 @@ void dooble_settings::slot_apply(void)
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("credentials_enabled", m_ui.credentials->isChecked());
+  set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
     ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
   set_setting("icon_set_index", m_ui.theme->currentIndex());
