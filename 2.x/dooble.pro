@@ -49,8 +49,62 @@ dict_base_paths = af_ZA/af_ZA \
                   te_IN/te_IN \
                   uk_UA/uk_UA \
                   vi/vi_VN
-}
-else:unix {
+} else:unix {
+dict_base_paths = af_ZA/af_ZA \
+                  an_ES/an_ES \
+                  ar/ar \
+                  be_BY/be_BY \
+                  bn_BD/bn_BD \
+                  br_FR/br_FR \
+                  bs_BA/bs_BA \
+                  ca/ca \
+                  ca/ca-valencia \
+                  cs_CZ/cs_CZ \
+                  da_DK/da_DK \
+                  de/de_AT_frami \
+                  de/de_CH_frami \
+                  de/de_DE_frami \
+                  el_GR/el_GR \
+                  en/en_AU \
+                  en/en_CA \
+                  en/en_GB \
+                  en/en_US \
+                  en/en_ZA \
+                  es/es_ANY \
+                  et_EE/et_EE \
+                  gd_GB/gd_GB \
+                  gl/gl_ES \
+                  gug/gug \
+                  he_IL/he_IL \
+                  hi_IN/hi_IN \
+                  hr_HR/hr_HR \
+                  hu_HU/hu_HU \
+                  is/is \
+                  it_IT/it_IT \
+                  kmr_Latn/kmr_Latn \
+                  lo_LA/lo_LA \
+                  lt_LT/lt \
+                  lv_LV/lv_LV \
+                  ne_NP/ne_NP \
+                  nl_NL/nl_NL \
+                  no/nb_NO \
+                  no/nn_NO \
+                  oc_FR/oc_FR \
+                  pl_PL/pl_PL \
+                  pt_BR/pt_BR \
+                  pt_PT/pt_PT \
+                  ro/ro_RO \
+                  ru_RU/ru_RU \
+                  si_LK/si_LK \
+                  sk_SK/sk_SK \
+                  sl_SI/sl_SI \
+                  sr/sr \
+                  sr/sr-Latn \
+                  sw_TZ/sw_TZ \
+                  te_IN/te_IN \
+                  uk_UA/uk_UA \
+                  vi/vi_VN
+} else:win32 {
 dict_base_paths = af_ZA/af_ZA \
                   an_ES/an_ES \
                   ar/ar \
@@ -121,8 +175,7 @@ dictoolbuild.output = $${DICTIONARIES_DIR}/${QMAKE_FILE_BASE}.bdic
 unix {
 purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
                  Source/*~ *~
-}
-else {
+} else {
 purge.commands =
 }
 
@@ -267,8 +320,116 @@ DISTFILES += Dictionaries/af_ZA/af_ZA.aff \
              Dictionaries/uk_UA/uk_UA.dic \
              Dictionaries/vi/vi_VN.aff \
              Dictionaries/vi/vi_VN.dic
-}
-else:unix {
+} else:unix {
+DISTFILES += Dictionaries/af_ZA/af_ZA.aff \
+             Dictionaries/af_ZA/af_ZA.dic \
+             Dictionaries/an_ES/an_ES.aff \
+             Dictionaries/an_ES/an_ES.dic \
+             Dictionaries/ar/ar.aff \
+             Dictionaries/ar/ar.dic \
+             Dictionaries/be_BY/be_BY.aff \
+             Dictionaries/be_BY/be_BY.dic \
+             Dictionaries/bn_BD/bn_BD.aff \
+             Dictionaries/bn_BD/bn_BD.dic \
+             Dictionaries/br_FR/br_FR.aff \
+             Dictionaries/br_FR/br_FR.dic \
+             Dictionaries/bs_BA/bs_BA.aff \
+             Dictionaries/bs_BA/bs_BA.dic \
+             Dictionaries/ca/ca.aff \
+             Dictionaries/ca/ca.dic \
+             Dictionaries/ca/ca-valencia.aff \
+             Dictionaries/ca/ca-valencia.dic \
+             Dictionaries/cs_CZ/cs_CZ.aff \
+             Dictionaries/cs_CZ/cs_CZ.dic \
+             Dictionaries/da_DK/da_DK.aff \
+             Dictionaries/da_DK/da_DK.dic \
+             Dictionaries/de/de_AT_frami.aff \
+             Dictionaries/de/de_AT_frami.dic \
+             Dictionaries/de/de_CH_frami.aff \
+             Dictionaries/de/de_CH_frami.dic \
+             Dictionaries/de/de_DE_frami.aff \
+             Dictionaries/de/de_DE_frami.dic \
+             Dictionaries/el_GR/el_GR.aff \
+             Dictionaries/el_GR/el_GR.dic \
+             Dictionaries/en/en_AU.aff \
+             Dictionaries/en/en_AU.dic \
+             Dictionaries/en/en_CA.aff \
+             Dictionaries/en/en_CA.dic \
+             Dictionaries/en/en_GB.aff \
+             Dictionaries/en/en_GB.dic \
+             Dictionaries/en/en_US.aff \
+             Dictionaries/en/en_US.dic \
+             Dictionaries/en/en_ZA.aff \
+             Dictionaries/en/en_ZA.dic \
+             Dictionaries/es/es_ANY.aff \
+             Dictionaries/es/es_ANY.dic \
+             Dictionaries/et_EE/et_EE.aff \
+             Dictionaries/et_EE/et_EE.dic \
+             Dictionaries/gd_GB/gd_GB.aff \
+             Dictionaries/gd_GB/gd_GB.dic \
+             Dictionaries/gl/gl_ES.aff \
+             Dictionaries/gl/gl_ES.dic \
+             Dictionaries/gug/gug.aff \
+             Dictionaries/gug/gug.dic \
+             Dictionaries/he_IL/he_IL.aff \
+             Dictionaries/he_IL/he_IL.dic \
+             Dictionaries/hi_IN/hi_IN.aff \
+             Dictionaries/hi_IN/hi_IN.dic \
+             Dictionaries/hr_HR/hr_HR.aff \
+             Dictionaries/hr_HR/hr_HR.dic \
+             Dictionaries/hu_HU/hu_HU.aff \
+             Dictionaries/hu_HU/hu_HU.dic \
+             Dictionaries/is/is.aff \
+             Dictionaries/is/is.dic \
+             Dictionaries/it_IT/it_IT.aff \
+             Dictionaries/it_IT/it_IT.dic \
+             Dictionaries/kmr_Latn/kmr_Latn.aff \
+             Dictionaries/kmr_Latn/kmr_Latn.dic \
+             Dictionaries/lo_LA/lo_LA.aff \
+             Dictionaries/lo_LA/lo_LA.dic \
+             Dictionaries/lt_LT/lt.aff \
+             Dictionaries/lt_LT/lt.dic \
+             Dictionaries/lv_LV/lv_LV.aff \
+             Dictionaries/lv_LV/lv_LV.dic \
+             Dictionaries/ne_NP/ne_NP.aff \
+             Dictionaries/ne_NP/ne_NP.dic \
+             Dictionaries/nl_NL/nl_NL.aff \
+             Dictionaries/nl_NL/nl_NL.dic \
+             Dictionaries/no/nb_NO.aff \
+             Dictionaries/no/nb_NO.dic \
+             Dictionaries/no/nn_NO.aff \
+             Dictionaries/no/nn_NO.dic \
+             Dictionaries/oc_FR/oc_FR.aff \
+             Dictionaries/oc_FR/oc_FR.dic \
+             Dictionaries/pl_PL/pl_PL.aff \
+             Dictionaries/pl_PL/pl_PL.dic \
+             Dictionaries/pt_BR/pt_BR.aff \
+             Dictionaries/pt_BR/pt_BR.dic \
+             Dictionaries/pt_PT/pt_PT.aff \
+             Dictionaries/pt_PT/pt_PT.dic \
+             Dictionaries/ro/ro_RO.aff \
+             Dictionaries/ro/ro_RO.dic \
+             Dictionaries/ru_RU/ru_RU.aff \
+             Dictionaries/ru_RU/ru_RU.dic \
+             Dictionaries/si_LK/si_LK.aff \
+             Dictionaries/si_LK/si_LK.dic \
+             Dictionaries/sk_SK/sk_SK.aff \
+             Dictionaries/sk_SK/sk_SK.dic \
+             Dictionaries/sl_SI/sl_SI.aff \
+             Dictionaries/sl_SI/sl_SI.dic \
+             Dictionaries/sr/sr.aff \
+             Dictionaries/sr/sr.dic \
+             Dictionaries/sr/sr-Latn.aff \
+             Dictionaries/sr/sr-Latn.dic \
+             Dictionaries/sw_TZ/sw_TZ.aff \
+             Dictionaries/sw_TZ/sw_TZ.dic \
+             Dictionaries/te_IN/te_IN.aff \
+             Dictionaries/te_IN/te_IN.dic \
+             Dictionaries/uk_UA/uk_UA.aff \
+             Dictionaries/uk_UA/uk_UA.dic \
+             Dictionaries/vi/vi_VN.aff \
+             Dictionaries/vi/vi_VN.dic
+} else:win32 {
 DISTFILES += Dictionaries/af_ZA/af_ZA.aff \
              Dictionaries/af_ZA/af_ZA.dic \
              Dictionaries/an_ES/an_ES.aff \
