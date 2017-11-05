@@ -2150,6 +2150,9 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
 void dooble::slot_title_changed(const QString &title)
 {
+  if(title.length() > MAXIMUM_TITLE_LENGTH)
+    return;
+
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)

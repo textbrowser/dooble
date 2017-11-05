@@ -1460,6 +1460,9 @@ void dooble_page::slot_show_web_settings_panel(void)
 
 void dooble_page::slot_url_changed(const QUrl &url)
 {
+  if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
+    return;
+
   m_ui.address->add_item(m_view->icon(), url);
   m_ui.address->setText(url.toString());
 }

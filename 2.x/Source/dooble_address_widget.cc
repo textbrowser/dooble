@@ -421,6 +421,9 @@ void dooble_address_widget::slot_text_edited(const QString &text)
 
 void dooble_address_widget::slot_url_changed(const QUrl &url)
 {
+  if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
+    return;
+
   m_url = url;
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
