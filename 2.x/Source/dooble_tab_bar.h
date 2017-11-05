@@ -57,6 +57,7 @@ class dooble_tab_bar: public QTabBar
   void slot_settings_applied(void);
   void slot_show_context_menu(const QPoint &point);
   void slot_web_plugins(void);
+  void slot_webgl(void);
 
  signals:
   void decouple_tab(int index);

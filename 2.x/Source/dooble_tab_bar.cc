@@ -334,6 +334,14 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   web_plugins_action->setEnabled(false);
   web_plugins_action->setProperty("point", point);
 
+  QAction *webgl_action = menu.addAction(tr("Web&GL"),
+					 this,
+					 SLOT(slot_webgl(void)));
+
+  webgl_action->setEnabled(false);
+  webgl_action->setProperty("point", point);
+
+
   dooble_page *page = 0;
   dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
     (parentWidget());
@@ -350,6 +358,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	    (count() > 1 && !page->is_private() && tab_at > -1);
 	  web_plugins_action->setCheckable(true);
 	  web_plugins_action->setEnabled(tab_at > -1);
+	  webgl_action->setCheckable(true);
+	  webgl_action->setEnabled(tab_at > -1);
 
 	  QWebEngineSettings *web_engine_settings = page->web_engine_settings();
 
@@ -361,6 +371,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	      web_plugins_action->setChecked
 		(web_engine_settings->testAttribute(QWebEngineSettings::
 						    PluginsEnabled));
+	      webgl_action->setChecked
+		(web_engine_settings->testAttribute(QWebEngineSettings::
+						    WebGLEnabled));
 	    }
 	}
     }
@@ -393,6 +406,27 @@ void dooble_tab_bar::slot_web_plugins(void)
       if(page)
 	page->enable_web_setting
 	  (QWebEngineSettings::PluginsEnabled, action->isChecked());
+    }
+}
+
+void dooble_tab_bar::slot_webgl(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
+    (parentWidget());
+
+  if(tab_widget)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(tab_widget->widget(tabAt(action->property("point").toPoint())));
+
+      if(page)
+	page->enable_web_setting
+	  (QWebEngineSettings::WebGLEnabled, action->isChecked());
     }
 }
 
