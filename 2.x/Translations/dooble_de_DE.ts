@@ -267,7 +267,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Documentation...</source>
+        <source>&amp;Documentation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -325,7 +325,7 @@ Dooble ist open source Software.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dooble version %1, Baba Yaga.</source>
+        <source>Dooble version %1, November Blue.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -356,12 +356,8 @@ Dooble ist open source Software.
         <translation>Auswählen</translation>
     </message>
     <message>
-        <source>dooble_blocked_domains.txt</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Dooble: Import Blocked Domains</source>
-        <translation>Dooble: Importiere geblockte Domänen</translation>
+        <translation type="vanished">Dooble: Importiere geblockte Domänen</translation>
     </message>
     <message>
         <source>Dooble: Progress</source>
@@ -468,6 +464,14 @@ Dooble ist open source Software.
     <message>
         <source>&amp;Delete Selected</source>
         <translation type="unfinished">Lösche die Ausgewählten</translation>
+    </message>
+    <message>
+        <source>dooble_accepted_or_blocked_domains.txt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Import Accepted / Blocked Domains</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1340,10 +1344,6 @@ Dooble ist open source Software.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Documentation...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The site &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1353,6 +1353,10 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>The proxy &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Documentation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1492,7 +1496,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted.</source>
-        <translation>Bist Du sicher, dass Du für Dooble einen Reset durchführen willst? Alle bekannten Daten werden entfernt und Dooble wird neu gestartet.</translation>
+        <translation type="vanished">Bist Du sicher, dass Du für Dooble einen Reset durchführen willst? Alle bekannten Daten werden entfernt und Dooble wird neu gestartet.</translation>
     </message>
     <message>
         <source>Are you sure that you wish to reset your permanent credentials? New session-only credentials will be generated and database data will be removed.</source>
@@ -1940,6 +1944,10 @@ Domänen</translation>
     </message>
     <message>
         <source>If hidden, show via F10.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted. Please remove the directory WebEnginePersistentStorage after the reset completes.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
