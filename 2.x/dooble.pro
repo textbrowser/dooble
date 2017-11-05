@@ -173,8 +173,7 @@ dictoolbuild.name = Build ${QMAKE_FILE_IN_BASE}
 dictoolbuild.output = $${DICTIONARIES_DIR}/${QMAKE_FILE_BASE}.bdic
 
 unix {
-purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
-                 Source/*~ *~
+purge.commands = rm -f Documentation/*~ Source/*~ *~
 } else {
 purge.commands =
 }
@@ -592,7 +591,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_web_engine_view.h
 
 macx {
-OBJECTIVE_HEADERS += Include/Cocoainitializer.h
+OBJECTIVE_HEADERS += Source/Cocoainitializer.h
 OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 }
 
