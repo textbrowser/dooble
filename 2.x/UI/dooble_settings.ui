@@ -311,6 +311,9 @@
             <property name="text">
              <string>Denote Private Widgets</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>

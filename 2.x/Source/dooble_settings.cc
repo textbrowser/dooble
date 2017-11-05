@@ -173,6 +173,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["credentials_enabled"] = false;
+  s_settings["denote_private_widgets"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
@@ -707,7 +708,7 @@ void dooble_settings::restore(void)
   m_ui.credentials->setChecked
     (s_settings.value("credentials_enabled", false).toBool());
   m_ui.denote_private_widgets->setChecked
-    (s_settings.value("denote_private_widgets", false).toBool());
+    (s_settings.value("denote_private_widgets", true).toBool());
   m_ui.iterations->setValue
     (s_settings.value("authentication_iteration_count", 15000).toInt());
   m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
