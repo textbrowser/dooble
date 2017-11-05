@@ -36,6 +36,7 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
@@ -163,6 +164,13 @@ dooble_settings::dooble_settings(void):QMainWindow()
   else
     m_ui.language_directory->setVisible(false);
 
+#ifdef Q_OS_MACOS
+  m_ui.theme->setEnabled(false);
+  m_ui.theme->setToolTip
+    (tr("<html>Dooble prefers the Macintosh style on OS X. You may launch "
+	"Dooble via \"open /Applications/Dooble.d/Dooble.app --args "
+	"-style Fusion\" to test the Fusion style."));
+#endif
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
