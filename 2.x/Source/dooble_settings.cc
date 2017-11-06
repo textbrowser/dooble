@@ -1093,6 +1093,8 @@ void dooble_settings::slot_apply(void)
 
 	  dooble::s_cryptography->set_authenticated(false);
 	  dooble::s_cryptography->set_keys(authentication_key, encryption_key);
+	  dooble_cryptography::memzero(authentication_key);
+	  dooble_cryptography::memzero(encryption_key);
 	  emit dooble_credentials_authenticated(false);
 	}
       else
@@ -1679,6 +1681,8 @@ void dooble_settings::slot_reset_credentials(void)
   dooble::s_cryptography->set_authenticated(false);
   dooble::s_cryptography->set_block_cipher_type("AES-256");
   dooble::s_cryptography->set_keys(authentication_key, encryption_key);
+  dooble_cryptography::memzero(authentication_key);
+  dooble_cryptography::memzero(encryption_key);
   emit dooble_credentials_authenticated(false);
   QApplication::restoreOverrideCursor();
 }
