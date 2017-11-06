@@ -68,7 +68,7 @@ dooble_about::dooble_about(void):QMainWindow()
     (tr("<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
 	"Release Notes</a>"));
   m_ui.version->setText
-    (tr("Dooble version %1, November Blue.").arg(DOOBLE_VERSION_STRING));
+    (tr("Dooble version %1, December Fire.").arg(DOOBLE_VERSION_STRING));
 }
 
 void dooble_about::keyPressEvent(QKeyEvent *event)

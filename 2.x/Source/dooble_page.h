@@ -107,6 +107,7 @@ class dooble_page: public QWidget
   void slot_always_allow_javascript_popup(void);
   void slot_authentication_required(const QUrl &url,
 				    QAuthenticator *authenticator);
+  void slot_clear_visited_links(void);
   void slot_close_javascript_popup_exception_frame(void);
   void slot_create_dialog_request(dooble_web_engine_view *view);
   void slot_dooble_credentials_authenticated(bool state);

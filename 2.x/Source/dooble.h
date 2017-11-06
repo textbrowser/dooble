@@ -37,7 +37,7 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
-#define DOOBLE_VERSION_STRING "2017.11.05"
+#define DOOBLE_VERSION_STRING "2017.12.25"
 
 class QWebEngineDownloadItem;
 class QWebEngineProfile;
@@ -137,6 +137,7 @@ class dooble: public QMainWindow
   void slot_about_to_hide_main_menu(void);
   void slot_about_to_show_main_menu(void);
   void slot_authenticate(void);
+  void slot_clear_visited_links(void);
   void slot_close_tab(void);
   void slot_create_dialog(dooble_web_engine_view *view);
   void slot_create_tab(dooble_web_engine_view *view);

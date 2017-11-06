@@ -568,6 +568,9 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Clear Items..."),
 		  this,
 		  SIGNAL(show_clear_items(void)));
+  menu->addAction(tr("Clear &Visited Links"),
+		  this,
+		  SLOT(slot_clear_visited_links(void)));
   m_find_action = menu->addAction
     (QIcon(QString(":/%1/18/find.png").arg(icon_set)),
      tr("&Find"),
@@ -937,6 +940,11 @@ void dooble_page::slot_authentication_required(const QUrl &url,
     }
   else
     m_view->stop();
+}
+
+void dooble_page::slot_clear_visited_links(void)
+{
+  QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
 }
 
 void dooble_page::slot_close_javascript_popup_exception_frame(void)

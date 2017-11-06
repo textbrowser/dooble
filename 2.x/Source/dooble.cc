@@ -1000,6 +1000,9 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("&Clear Items..."),
 		  this,
 		  SLOT(slot_show_clear_items(void)));
+  menu->addAction(tr("Clear Visited Links"),
+		  this,
+		  SLOT(slot_clear_visited_links(void)));
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
@@ -1348,6 +1351,11 @@ void dooble::slot_authenticate(void)
 	   tr("Dooble: Error"),
 	   tr("Unable to authenticate the provided password."));
     }
+}
+
+void dooble::slot_clear_visited_links(void)
+{
+  QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
 }
 
 void dooble::slot_close_tab(void)

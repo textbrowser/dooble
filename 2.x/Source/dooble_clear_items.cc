@@ -115,7 +115,7 @@ void dooble_clear_items::slot_clear_items(void)
   if(m_ui.accepted_blocked_domains->isChecked())
     dooble::s_accepted_or_blocked_domains->purge();
 
-  if(m_ui.certificate_error_exceptions->isChecked())
+  if(m_ui.certificate_exceptions->isChecked())
     {
       dooble::s_certificate_exceptions->purge();
       dooble_certificate_exceptions_menu_widget::purge();
