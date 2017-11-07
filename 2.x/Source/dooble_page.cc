@@ -939,7 +939,7 @@ void dooble_page::slot_authentication_required(const QUrl &url,
       authenticator->setUser(ui.username->text());
     }
   else
-    m_view->stop();
+    *authenticator = QAuthenticator();
 }
 
 void dooble_page::slot_clear_visited_links(void)
@@ -1337,7 +1337,7 @@ void dooble_page::slot_proxy_authentication_required
       authenticator->setUser(ui.username->text());
     }
   else
-    m_view->stop();
+    *authenticator = QAuthenticator();
 }
 
 void dooble_page::slot_reload_or_stop(void)
