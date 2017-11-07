@@ -918,7 +918,12 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 					       QAuthenticator *authenticator)
 {
   if(!authenticator || authenticator->isNull() || !url.isValid())
-    return;
+    {
+      if(authenticator)
+	*authenticator = QAuthenticator();
+
+      return;
+    }
 
   QDialog dialog(this);
   Ui_dooble_authentication_dialog ui;
@@ -1316,7 +1321,12 @@ void dooble_page::slot_proxy_authentication_required
      authenticator->isNull() ||
      proxy_host.isEmpty() ||
      !url.isValid())
-    return;
+    {
+      if(authenticator)
+	*authenticator = QAuthenticator();
+
+      return;
+    }
 
   QDialog dialog(this);
   Ui_dooble_authentication_dialog ui;
