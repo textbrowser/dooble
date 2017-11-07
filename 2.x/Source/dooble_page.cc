@@ -542,7 +542,7 @@ void dooble_page::prepare_standard_menus(void)
       (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
 
   menu->addSeparator();
-  menu->addAction(tr("&Save..."),
+  menu->addAction(tr("&Save"),
 		  this,
 		  SIGNAL(save(void)),
 		  QKeySequence(tr("Ctrl+S")));
