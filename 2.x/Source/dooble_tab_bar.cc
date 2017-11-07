@@ -379,7 +379,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
     }
 
   menu.addSeparator();
-  action = menu.addAction(tr("&Decouple"),
+  action = menu.addAction(tr("&Decouple..."),
 			  this,
 			  SLOT(slot_decouple_tab(void)));
   action->setEnabled(count() > 1 && !page && tab_at > -1);

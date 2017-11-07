@@ -1034,7 +1034,7 @@ void dooble::prepare_standard_menus(void)
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
 
-  menu->addAction(tr("Certificate &Exceptions"),
+  menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SLOT(slot_show_certificate_exceptions(void)));
   menu->addAction(tr("&Cookies..."),
