@@ -53,6 +53,7 @@ class dooble_cryptography: public QObject
   bool authenticated(void) const;
   static bool memcmp(const QByteArray &a, const QByteArray &b);
   static void memzero(QByteArray &bytes);
+  static void memzero(QString &text);
   void authenticate(const QByteArray &salt,
 		    const QByteArray &salted_password,
 		    const QString &password);

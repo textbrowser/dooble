@@ -1314,6 +1314,7 @@ void dooble::slot_authenticate(void)
 	("authentication_iteration_count").toInt();
 
       s_cryptography->authenticate(salt, salted_password, text);
+      ui.password->clear();
 
       if(s_cryptography->authenticated())
 	{
@@ -1334,6 +1335,7 @@ void dooble::slot_authenticate(void)
 					 block_cipher_type_index,
 					 iteration_count,
 					 1024));
+	  dooble_cryptography::memzero(text);
 	  m_pbkdf2_future = QtConcurrent::run
 	    (pbkdf2.data(),
 	     &dooble_pbkdf2::pbkdf2,
@@ -1614,6 +1616,14 @@ void dooble::slot_pbkdf2_future_finished(void)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
 
+      /*
+      ** list[0] - Keys
+      ** list[1] - Block Cipher Type
+      ** list[2] - Iteration Count
+      ** list[3] - Password
+      ** list[4] - Salt
+      */
+
       if(!list.isEmpty())
 	{
 	  s_cryptography->set_authenticated(true);
@@ -1632,6 +1642,8 @@ void dooble::slot_pbkdf2_future_finished(void)
 		 dooble_cryptography::s_encryption_key_length));
 
 	  s_cryptography->set_keys(authentication_key, encryption_key);
+	  dooble_cryptography::memzero(authentication_key);
+	  dooble_cryptography::memzero(encryption_key);
 	  emit dooble_credentials_authenticated(true);
 	}
     }

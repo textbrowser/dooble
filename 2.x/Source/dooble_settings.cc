@@ -1340,6 +1340,14 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	    ("block_cipher_type_index", list.value(1).toInt());
 	  ok &= set_setting("credentials_enabled", true);
 
+	  /*
+	  ** list[0] - Keys
+	  ** list[1] - Block Cipher Type
+	  ** list[2] - Iteration Count
+	  ** list[3] - Password
+	  ** list[4] - Salt
+	  */
+
 	  {
 	    QWriteLocker locker(&s_settings_mutex);
 
@@ -1368,6 +1376,8 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 
 	      dooble::s_cryptography->set_keys
 		(authentication_key, encryption_key);
+	      dooble_cryptography::memzero(authentication_key);
+	      dooble_cryptography::memzero(encryption_key);
 	      m_ui.reset_credentials->setEnabled(true);
 	      emit dooble_credentials_created();
 	    }

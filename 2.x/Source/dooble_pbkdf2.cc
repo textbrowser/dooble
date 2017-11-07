@@ -29,6 +29,7 @@
 #include <QtEndian>
 #include <QtMath>
 
+#include "dooble_cryptography.h"
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"
 
@@ -49,14 +50,7 @@ dooble_pbkdf2::dooble_pbkdf2
 
 dooble_pbkdf2::~dooble_pbkdf2()
 {
-  if(!m_password.isEmpty())
-    {
-      QByteArray zeros(m_password.length(), 0);
-
-      m_password.replace(0, m_password.length(), zeros);
-    }
-
-  m_password.clear();
+  dooble_cryptography::memzero(m_password);
 }
 
 QByteArray dooble_pbkdf2::salt(void) const
