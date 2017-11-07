@@ -109,7 +109,6 @@
 1.     Auto-correct addresses.
 2.     Debian distribution. Signed.
 3.     New Web site.
-4.     Certificate information.
 
 Unknown Items
 
@@ -122,3 +121,4 @@ Unknown Items
 7.     Fusion themes.
 8.     JavaScript window.print() is not supported.
 9.     Multiple certificate exceptions.
+10.    Certificate information. Requires a WebEngine interface.
