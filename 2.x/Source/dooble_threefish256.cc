@@ -489,13 +489,14 @@ static void threefish_encrypt_implementation(char *E,
 
   delete []k;
 
-  for(size_t i = 0; i < Nr / 4 + 1; i++)
-    {
-      if(Q_LIKELY(s[i]))
-	memset(s[i], 0, sizeof(*s[i]) * static_cast<size_t> (Nw));
+  if(Q_LIKELY(s))
+    for(size_t i = 0; i < Nr / 4 + 1; i++)
+      {
+	if(Q_LIKELY(s[i]))
+	  memset(s[i], 0, sizeof(*s[i]) * static_cast<size_t> (Nw));
 
-      delete []s[i];
-    }
+	delete []s[i];
+      }
 
   delete []s;
   delete []v;
