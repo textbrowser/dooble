@@ -36,6 +36,7 @@ sudo chown -Rh root:root /usr/local/dooble
 
 Preparing dooble_2.x.deb:
 
+cd
 mkdir -p dooble_2.x/usr/local
 cp -r /usr/local/dooble dooble_2.x/usr/local/.
 dpkg-deb --build dooble_2.x
