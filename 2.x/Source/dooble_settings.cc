@@ -161,6 +161,19 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	    "The System option has been disabled.").
 	 arg(file_info.absoluteFilePath()));
     }
+  else if(file_info.size() <= 1024)
+    {
+      m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
+				      0,
+				      Qt::UserRole - 1);
+      m_ui.language_directory->setStyleSheet
+	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
+	 "color:#a94442;}");
+      m_ui.language_directory->setText
+	(tr("<b>Warning!</b> The file %1 is perhaps incomplete. "
+	    "The System option has been disabled.").
+	 arg(file_info.absoluteFilePath()));
+    }
   else
     m_ui.language_directory->setVisible(false);
 
