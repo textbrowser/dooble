@@ -1,6 +1,9 @@
+Preparing /usr/local/dooble:
+
 sudo mkdir -p /usr/local/dooble/Lib
+sudo mkdir -p /usr/local/dooble/Translations
 sudo cp -p ~/Qt/5.9.2/gcc_64/lib/libQt5Core.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.9.2/gcc_64/lib/libQt5DBus.so.5 /usr/local/dooble/.
+sudo cp -p ~/Qt/5.9.2/gcc_64/lib/libQt5DBus.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.2/gcc_64/lib/libQt5Gui.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.2/gcc_64/lib/libQt5Network.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.2/gcc_64/lib/libQt5Positioning.so.5 /usr/local/dooble/Lib/.
@@ -22,12 +25,17 @@ sudo cp -pr ~/Qt/5.9.2/gcc_64/plugins /usr/local/dooble/.
 sudo cp -pr ~/Qt/5.9.2/gcc_64/resources /usr/local/dooble/.
 sudo cp -pr ~/Qt/5.9.2/gcc_64/translations /usr/local/dooble/.
 sudo chmod -x,g+w /usr/local/dooble/Lib/*
+cd ~/dooble.d/2.x
+qmake -o Makefile dooble.pro && make -j 4
+sudo cp -p ./Dooble /usr/local/dooble/.
+sudo cp -p ./Qt/qt.conf /usr/local/dooble/.
+sudo cp -p ./Translations/*.qm /usr/local/dooble/Translations/.
+sudo cp -p ./dooble.sh /usr/local/dooble/.
+sudo cp -pr ./qtwebengine_dictionaries /usr/local/dooble/.
 sudo chown -Rh root:root /usr/local/dooble
 
-1. mkdir dooble_2.1 (example)
-2. cd dooble.d/2.x
-3. qmake -o Makefile dooble.pro && make -j 4
-4. cd
-5. mkdir -p dooble_2.1/usr/local
-6. cp -r /usr/local/dooble dooble_2.1/usr/local/. (example)
-7. dpkg-deb --build dooble_2.1 (example)
+Preparing dooble_2.x.deb:
+
+mkdir -p dooble_2.x/usr/local
+cp -r /usr/local/dooble dooble_2.x/usr/local/.
+dpkg-deb --build dooble_2.x
