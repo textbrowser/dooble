@@ -1,0 +1,7 @@
+1. mkdir dooble_2.1 (example)
+2. cd dooble.d/2.x
+3. qmake -o Makefile dooble.pro && make -j 4
+4. cd
+5. mkdir -p dooble_2.1/usr/local
+6. cp -r /usr/local/dooble dooble_2.1/usr/local/. (example)
+7. dpkg-deb --build dooble_2.1 (example)
