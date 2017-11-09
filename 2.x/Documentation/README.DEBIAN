@@ -38,5 +38,6 @@ Preparing dooble_2.x.deb:
 
 cd
 mkdir -p dooble_2.x/usr/local
+cp -r ./dooble.d/2.x/DEBIAN dooble_2.x/.
 cp -r /usr/local/dooble dooble_2.x/usr/local/.
 dpkg-deb --build dooble_2.x
