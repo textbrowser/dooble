@@ -1,0 +1,7 @@
+Package: Dooble
+Version: 2.1
+Section: base
+Priority: optional
+Architecture: amd64
+Maintainer: textbrowser@gmail.com
+Description: Dooble Web Browser
