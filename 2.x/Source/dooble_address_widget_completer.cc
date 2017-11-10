@@ -248,7 +248,12 @@ void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
 
   if(!list.isEmpty())
     if(list.at(0))
-      list.at(0)->setIcon(icon);
+      {
+	if(icon.isNull())
+	  list.at(0)->setIcon(dooble_favicons::icon(QUrl()));
+	else
+	  list.at(0)->setIcon(icon);
+      }
 }
 
 void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
