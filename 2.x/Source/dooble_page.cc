@@ -1040,8 +1040,6 @@ void dooble_page::slot_escape(void)
 
 void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
 {
-  Q_UNUSED(url);
-
   if(state)
     if(m_view->history()->currentItem().url() == url)
       dooble::s_history->save_item
@@ -1275,7 +1273,7 @@ void dooble_page::slot_prepare_backward_menu(void)
 	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
-	title = items.at(i).url().toString();
+	title = items.at(i).url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
 
       action = m_ui.backward->menu()->addAction
 	(icon, title, this, SLOT(slot_go_to_backward_item(void)));
@@ -1300,7 +1298,7 @@ void dooble_page::slot_prepare_forward_menu(void)
 	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
-	title = items.at(i).url().toString();
+	title = items.at(i).url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
 
       action = m_ui.forward->menu()->addAction
 	(icon, title, this, SLOT(slot_go_to_forward_item(void)));

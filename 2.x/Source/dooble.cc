@@ -638,7 +638,7 @@ void dooble::new_page(dooble_page *page)
   QString title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
-    title = page->url().toString();
+    title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
 
   if(title.isEmpty())
     title = tr("New Tab");
@@ -669,7 +669,7 @@ void dooble::new_page(dooble_web_engine_view *view)
   QString title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
-    title = page->url().toString();
+    title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
 
   m_ui.tab->addTab(page, tr("New Tab"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
@@ -2183,7 +2183,7 @@ void dooble::slot_title_changed(const QString &title)
   QString text(title.trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
 
   if(text.isEmpty())
-    text = page->url().toString();
+    text = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
 
   if(text.isEmpty())
     text = tr("Dooble");

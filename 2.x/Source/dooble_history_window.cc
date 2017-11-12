@@ -586,7 +586,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 	(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
-	title = item.url().toString();
+	title = item.url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
 
       if(title.isEmpty())
 	title = tr("Dooble");
@@ -623,7 +623,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   QString title(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
-    title = item.url().toString();
+    title = item.url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
 
   if(title.isEmpty())
     title = tr("Dooble");
