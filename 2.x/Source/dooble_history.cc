@@ -645,7 +645,7 @@ void dooble_history::save_item(const QIcon &icon,
       hash[NUMBER_OF_VISITS] =
 	m_history.value(item.url()).value(NUMBER_OF_VISITS, 1).
 	toULongLong() + 1;
-      hash[TITLE] = item.title();
+      hash[TITLE] = item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH);
       hash[URL] = item.url();
 
       if(dooble::s_cryptography)
@@ -767,7 +767,8 @@ void dooble_history::save_item(const QIcon &icon,
 	    (item.url().toEncoded());
 	else
 	  bytes = dooble::s_cryptography->encrypt_then_mac
-	    (item.title().trimmed().toUtf8());
+	    (item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH).
+	     toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());

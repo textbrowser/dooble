@@ -1271,7 +1271,8 @@ void dooble_page::slot_prepare_backward_menu(void)
     {
       QAction *action = 0;
       QIcon icon(dooble_favicons::icon(items.at(i).url()));
-      QString title(items.at(i).title().trimmed());
+      QString title
+	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
 	title = items.at(i).url().toString();
@@ -1295,7 +1296,8 @@ void dooble_page::slot_prepare_forward_menu(void)
     {
       QAction *action = 0;
       QIcon icon(dooble_favicons::icon(items.at(i).url()));
-      QString title(items.at(i).title().trimmed());
+      QString title
+	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
 	title = items.at(i).url().toString();

@@ -635,7 +635,7 @@ void dooble::new_page(dooble_page *page)
   ** The page's icon and title may not be meaningful.
   */
 
-  QString title(page->title().trimmed());
+  QString title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
     title = page->url().toString();
@@ -666,7 +666,7 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   prepare_page_connections(page);
 
-  QString title(page->title().trimmed());
+  QString title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
     title = page->url().toString();
@@ -2091,7 +2091,8 @@ void dooble::slot_tab_index_changed(int index)
   if(page->title().trimmed().isEmpty())
     setWindowTitle(tr("Dooble"));
   else
-    setWindowTitle(tr("%1 - Dooble").arg(page->title().trimmed()));
+    setWindowTitle(tr("%1 - Dooble").
+		   arg(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH)));
 
   page->view()->setFocus();
 }
@@ -2174,15 +2175,12 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
 void dooble::slot_title_changed(const QString &title)
 {
-  if(title.length() > MAXIMUM_TITLE_LENGTH)
-    return;
-
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
     return;
 
-  QString text(title.trimmed());
+  QString text(title.trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
 
   if(text.isEmpty())
     text = page->url().toString();
