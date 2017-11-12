@@ -31,6 +31,7 @@
 #include <QSqlQuery>
 
 #include "dooble.h"
+#include "dooble_address_widget_completer.h"
 #include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
@@ -333,6 +334,7 @@ void dooble_history_window::slot_delete_pages(void)
 
       urls << url;
       dooble::s_history->remove_item(url);
+      dooble_address_widget_completer::remove_item(url);
 
       if(list.at(i).data(Qt::CheckStateRole) == Qt::Checked)
 	emit favorite_changed(url, false);

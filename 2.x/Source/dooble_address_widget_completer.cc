@@ -241,6 +241,17 @@ void dooble_address_widget_completer::complete(const QString &text)
     m_popup->setVisible(false);
 }
 
+void dooble_address_widget_completer::remove_item(const QUrl &url)
+{
+  QList<QStandardItem *> list(s_model->findItems(url.toString()));
+
+  if(!list.isEmpty())
+    if(list.at(0))
+      s_model->removeRow(list.at(0)->row());
+
+  s_urls.remove(url);
+}
+
 void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
 						    const QUrl &url)
 {
