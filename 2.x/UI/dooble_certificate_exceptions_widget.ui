@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {background-color: white;}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QFrame" name="frame">
@@ -66,17 +69,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label">
-            <property name="styleSheet">
-             <string notr="true">QLabel {border: none;}</string>
-            </property>
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="label"/>
           </item>
           <item>
            <widget class="QCheckBox" name="confirm_exception">
