@@ -70,12 +70,6 @@
           </item>
           <item>
            <widget class="QTextBrowser" name="label">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>100</height>
-             </size>
-            </property>
             <property name="styleSheet">
              <string notr="true">QWidget {border: none;}</string>
             </property>
