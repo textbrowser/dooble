@@ -395,6 +395,24 @@ void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 
 void dooble_tab_widget::slot_settings_applied(void)
 {
+  if(dooble::s_application->style_name() == "fusion")
+    {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
+
+      m_corner_widget->setStyleSheet
+	(QString("QFrame {background-color: %1;"
+		 "border-right: 0px solid %2;"
+		 "margin-bottom: 0px;}").
+	 arg(s_theme_colors.
+	     value(QString("%1-corner-widget-background-color").
+		   arg(theme_color)).name()).
+	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+      setStyleSheet
+	(QString("QTabBar {background-color: %1; margin-top: 1px;}").
+	 arg(s_theme_colors.value(QString("%1-tabbar-background-color").
+				  arg(theme_color)).name()));
+    }
+
   m_private_tool_button->setVisible
     (dooble_settings::setting("denote_private_widgets").toBool() &&
      is_private());

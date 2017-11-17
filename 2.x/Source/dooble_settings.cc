@@ -1181,6 +1181,16 @@ void dooble_settings::slot_apply(void)
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
+
+  {
+    QWriteLocker locker(&s_settings_mutex);
+
+    if(m_ui.theme_color->currentIndex() == 0)
+      s_settings["theme_color"] = "blue-grey";
+    else
+      s_settings["theme_color"] = "indigo";
+  }
+
   m_ui.user_agent->setText
     (QWebEngineProfile::defaultProfile()->httpUserAgent());
   m_ui.user_agent->setToolTip(m_ui.user_agent->text());

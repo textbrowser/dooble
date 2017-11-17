@@ -35,20 +35,22 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
-  QString theme_color(dooble_settings::setting("theme_color").toString());
-
   foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
     if(dooble::s_application->style_name() == "fusion")
-      tool_button->setStyleSheet
-	(QString("QToolButton {background-color: %1;"
-		 "border: none;"
-		 "margin-bottom: 0px;"
-		 "margin-top: 1px;"
-		 "}"
-		 "QToolButton::menu-button {border: none;}").
-	 arg(dooble_tab_widget::s_theme_colors.
-	     value(QString("%1-tabbar-background-color").
-		   arg(theme_color)).name()));
+      {
+	QString theme_color(dooble_settings::setting("theme_color").toString());
+
+	tool_button->setStyleSheet
+	  (QString("QToolButton {background-color: %1;"
+		   "border: none;"
+		   "margin-bottom: 0px;"
+		   "margin-top: 1px;"
+		   "}"
+		   "QToolButton::menu-button {border: none;}").
+	   arg(dooble_tab_widget::s_theme_colors.
+	       value(QString("%1-tabbar-background-color").
+		     arg(theme_color)).name()));
+      }
     else if(dooble::s_application->style_name() == "macintosh")
       tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
@@ -244,6 +246,18 @@ void dooble_tab_bar::slot_settings_applied(void)
       QString theme_color(dooble_settings::setting("theme_color").toString());
       static QColor s_background_color
 	(QWidget::palette().color(QWidget::backgroundRole()));
+
+      foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	tool_button->setStyleSheet
+	(QString("QToolButton {background-color: %1;"
+		 "border: none;"
+		 "margin-bottom: 0px;"
+		 "margin-top: 1px;"
+		 "}"
+		 "QToolButton::menu-button {border: none;}").
+	 arg(dooble_tab_widget::s_theme_colors.
+	     value(QString("%1-tabbar-background-color").
+		   arg(theme_color)).name()));
 
       setStyleSheet
 	(QString("QTabBar::close-button {"
