@@ -488,7 +488,12 @@
               </property>
               <item>
                <property name="text">
-                <string>Material Design</string>
+                <string>Material Design - Blue Grey</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Material Design - Indigo</string>
                </property>
               </item>
              </widget>
@@ -1156,8 +1161,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>451</width>
-               <height>746</height>
+               <width>270</width>
+               <height>729</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
