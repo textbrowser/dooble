@@ -94,16 +94,20 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 
   if(dooble::s_application->style_name() == "fusion")
     {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
+
       m_corner_widget->setStyleSheet
 	(QString("QFrame {background-color: %1;"
 		 "border-right: 0px solid %2;"
 		 "margin-bottom: 0px;}").
 	 arg(s_theme_colors.
-	     value("fusion-corner-widget-background-color").name()).
+	     value(QString("%1-corner-widget-background-color").
+		   arg(theme_color)).name()).
 	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
       setStyleSheet
 	(QString("QTabBar {background-color: %1; margin-top: 1px;}").
-	 arg(s_theme_colors.value("fusion-tabbar-background-color").name()));
+	 arg(s_theme_colors.value(QString("%1-tabbar-background-color").
+				  arg(theme_color)).name()));
     }
 
   m_tab_bar = new dooble_tab_bar(this);
@@ -271,10 +275,10 @@ void dooble_tab_widget::prepare_theme_colors(void)
   if(!s_theme_colors.isEmpty())
     return;
 
-  s_theme_colors["fusion-corner-widget-background-color"] = "#90a4ae";
-  s_theme_colors["fusion-hovered-tab-color"] = "#c5cae9";
-  s_theme_colors["fusion-selected-tab-color"] = "#7986cb";
-  s_theme_colors["fusion-tabbar-background-color"] = "#90a4ae";
+  s_theme_colors["blue-grey-corner-widget-background-color"] = "#90a4ae";
+  s_theme_colors["blue-grey-hovered-tab-color"] = "#c5cae9";
+  s_theme_colors["blue-grey-selected-tab-color"] = "#7986cb";
+  s_theme_colors["blue-grey-tabbar-background-color"] = "#90a4ae";
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)

@@ -177,13 +177,6 @@ dooble_settings::dooble_settings(void):QMainWindow()
   else
     m_ui.language_directory->setVisible(false);
 
-#ifdef Q_OS_MACOS
-  m_ui.theme->setEnabled(false);
-  m_ui.theme->setToolTip
-    (tr("<html>Dooble prefers the Macintosh style on OS X. You may launch "
-	"Dooble via \"open /Applications/Dooble.d/Dooble.app --args "
-	"-style Fusion\" to test the Fusion style."));
-#endif
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
@@ -207,6 +200,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["pin_settings_window"] = true;
   s_settings["save_geometry"] = true;
   s_settings["status_bar_visible"] = true;
+  s_settings["theme_color"] = "blue-grey";
   s_settings["theme_color_index"] = 0;
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
@@ -735,6 +729,10 @@ void dooble_settings::restore(void)
     (s_settings.value("denote_private_widgets", true).toBool());
   m_ui.do_not_track->setChecked
     (s_settings.value("do_not_track", true).toBool());
+  m_ui.icon_set->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("icon_set_index", 0).toInt(),
+	    m_ui.icon_set->count() - 1));
   m_ui.iterations->setValue
     (s_settings.value("authentication_iteration_count", 15000).toInt());
   m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
@@ -780,10 +778,6 @@ void dooble_settings::restore(void)
   m_ui.proxy_user->setCursorPosition(0);
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", true).toBool());
-  m_ui.theme->setCurrentIndex
-    (qBound(0,
-	    s_settings.value("icon_set_index", 0).toInt(),
-	    m_ui.theme->count() - 1));
   m_ui.theme_color->setCurrentIndex
     (qBound(0,
 	    s_settings.value("theme_color_index", 0).toInt(),
@@ -807,6 +801,12 @@ void dooble_settings::restore(void)
     s_settings["block_cipher_type"] = "Threefish-256";
 
   s_settings["icon_set"] = "Material Design";
+
+  if(m_ui.theme_color->currentIndex() == 0)
+    s_settings["theme_color"] = "blue-grey";
+  else
+    s_settings["theme_color"] = "indigo";
+
   s_settings["theme_color_index"] = m_ui.theme_color->currentIndex();
   m_ui.utc_time_zone->setChecked
     (s_settings.value("utc_time_zone", false).toBool());
@@ -1219,7 +1219,7 @@ void dooble_settings::slot_apply(void)
   set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
     ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
-  set_setting("icon_set_index", m_ui.theme->currentIndex());
+  set_setting("icon_set_index", m_ui.icon_set->currentIndex());
 
   {
     QWriteLocker locker(&s_settings_mutex);

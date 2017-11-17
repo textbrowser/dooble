@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>764</height>
+           <height>749</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -317,6 +317,51 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_16">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>&amp;Icon Set</string>
+              </property>
+              <property name="buddy">
+               <cstring>icon_set</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="icon_set">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <item>
+               <property name="text">
+                <string>Material Design</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_16">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_15">
             <item>
              <widget class="QLabel" name="label_23">
@@ -466,31 +511,13 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="label_24">
               <property name="text">
-               <string>&amp;Theme</string>
+               <string>&amp;Theme Color</string>
               </property>
               <property name="buddy">
-               <cstring>theme</cstring>
+               <cstring>theme_color</cstring>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="theme">
-              <property name="currentIndex">
-               <number>0</number>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QComboBox::AdjustToContents</enum>
-              </property>
-              <item>
-               <property name="text">
-                <string>Material Design</string>
-               </property>
-              </item>
              </widget>
             </item>
             <item>
@@ -673,8 +700,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>680</height>
+               <width>503</width>
+               <height>711</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1173,7 +1200,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>270</width>
+               <width>420</width>
                <height>729</height>
               </rect>
              </property>
@@ -1514,6 +1541,7 @@
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
   <tabstop>denote_private_widgets</tabstop>
+  <tabstop>icon_set</tabstop>
   <tabstop>language</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>
@@ -1521,7 +1549,6 @@
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
   <tabstop>access_new_tabs</tabstop>
-  <tabstop>theme</tabstop>
   <tabstop>theme_color</tabstop>
   <tabstop>zoom_frame_location</tabstop>
   <tabstop>browsing_history</tabstop>

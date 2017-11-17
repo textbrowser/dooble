@@ -35,6 +35,8 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
+  QString theme_color(dooble_settings::setting("theme_color").toString());
+
   foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
     if(dooble::s_application->style_name() == "fusion")
       tool_button->setStyleSheet
@@ -45,7 +47,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 		 "}"
 		 "QToolButton::menu-button {border: none;}").
 	 arg(dooble_tab_widget::s_theme_colors.
-	     value("fusion-tabbar-background-color").name()));
+	     value(QString("%1-tabbar-background-color").
+		   arg(theme_color)).name()));
     else if(dooble::s_application->style_name() == "macintosh")
       tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
@@ -238,6 +241,7 @@ void dooble_tab_bar::slot_settings_applied(void)
 {
   if(dooble::s_application->style_name() == "fusion")
     {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
       static QColor s_background_color
 	(QWidget::palette().color(QWidget::backgroundRole()));
 
@@ -263,14 +267,17 @@ void dooble_tab_bar::slot_settings_applied(void)
 		 "QTabBar::tear {"
 		 "border: none; image: none; width: 0px;}").
 	 arg(dooble_tab_widget::s_theme_colors.
-	     value("fusion-tabbar-background-color").name()).
+	     value(QString("%1-tabbar-background-color").
+		   arg(theme_color)).name()).
 	 arg(s_background_color.name()).
 	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
 	     is_private() ? "white" : "white").
 	 arg(dooble_tab_widget::s_theme_colors.
-	     value("fusion-hovered-tab-color").name()).
+	     value(QString("%1-hovered-tab-color").
+		   arg(theme_color)).name()).
 	 arg(dooble_tab_widget::s_theme_colors.
-	     value("fusion-selected-tab-color").name()));
+	     value(QString("%1-selected-tab-color").
+		   arg(theme_color)).name()));
     }
   else
 #ifdef Q_OS_MACOS
