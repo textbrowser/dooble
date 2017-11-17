@@ -488,12 +488,24 @@
               </property>
               <item>
                <property name="text">
-                <string>Material Design - Blue Grey</string>
+                <string>Material Design</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="theme_color">
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <item>
+               <property name="text">
+                <string>Blue Grey</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Material Design - Indigo</string>
+                <string>Indigo</string>
                </property>
               </item>
              </widget>
@@ -1510,6 +1522,7 @@
   <tabstop>pin_settings</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>theme</tabstop>
+  <tabstop>theme_color</tabstop>
   <tabstop>zoom_frame_location</tabstop>
   <tabstop>browsing_history</tabstop>
   <tabstop>visited_links</tabstop>

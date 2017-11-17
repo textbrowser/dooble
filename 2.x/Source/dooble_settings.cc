@@ -781,7 +781,7 @@ void dooble_settings::restore(void)
     (s_settings.value("save_geometry", true).toBool());
   m_ui.theme->setCurrentIndex
     (qBound(0,
-	    s_settings.value("icon_set_index", 2).toInt(),
+	    s_settings.value("icon_set_index", 0).toInt(),
 	    m_ui.theme->count() - 1));
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
