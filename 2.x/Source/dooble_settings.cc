@@ -207,6 +207,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["pin_settings_window"] = true;
   s_settings["save_geometry"] = true;
   s_settings["status_bar_visible"] = true;
+  s_settings["theme_color_index"] = 0;
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
   s_settings["webgl"] = true;
@@ -783,6 +784,10 @@ void dooble_settings::restore(void)
     (qBound(0,
 	    s_settings.value("icon_set_index", 0).toInt(),
 	    m_ui.theme->count() - 1));
+  m_ui.theme_color->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("theme_color_index", 0).toInt(),
+	    m_ui.theme_color->count() - 1));
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
   m_ui.user_agent->setCursorPosition(0);
@@ -802,6 +807,7 @@ void dooble_settings::restore(void)
     s_settings["block_cipher_type"] = "Threefish-256";
 
   s_settings["icon_set"] = "Material Design";
+  s_settings["theme_color_index"] = m_ui.theme_color->currentIndex();
   m_ui.utc_time_zone->setChecked
     (s_settings.value("utc_time_zone", false).toBool());
 
@@ -1235,6 +1241,7 @@ void dooble_settings::slot_apply(void)
   set_setting("pin_history_window", m_ui.pin_history->isChecked());
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
+  set_setting("theme_color_index", m_ui.theme_color->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());
   set_setting("user_agent", m_ui.user_agent->text().trimmed());
