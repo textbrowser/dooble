@@ -177,6 +177,15 @@ dooble_settings::dooble_settings(void):QMainWindow()
   else
     m_ui.language_directory->setVisible(false);
 
+  if(dooble::s_application->style_name() == "macintosh")
+    {
+      m_ui.theme_color->setEnabled(false);
+      m_ui.theme_color->setToolTip
+	(tr("<html>Dooble prefers the Macintosh style on OS X. You may launch "
+	"Dooble via \"open /Applications/Dooble.d/Dooble.app --args "
+	"-style Fusion\" to test the Fusion style."));
+    }
+
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
@@ -778,10 +787,15 @@ void dooble_settings::restore(void)
   m_ui.proxy_user->setCursorPosition(0);
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", true).toBool());
-  m_ui.theme_color->setCurrentIndex
-    (qBound(0,
-	    s_settings.value("theme_color_index", 0).toInt(),
-	    m_ui.theme_color->count() - 1));
+
+  if(dooble::s_application->style_name() == "macintosh")
+    m_ui.theme_color->setCurrentIndex(0);
+  else
+    m_ui.theme_color->setCurrentIndex
+      (qBound(0,
+	s_settings.value("theme_color_index", 0).toInt(),
+	m_ui.theme_color->count() - 1));
+
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
   m_ui.user_agent->setCursorPosition(0);

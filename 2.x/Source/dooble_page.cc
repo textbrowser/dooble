@@ -326,7 +326,10 @@ QAction *dooble_page::full_screen_action(void) const
 
 QIcon dooble_page::icon(void) const
 {
-  return dooble_favicons::icon(m_view->url());
+  if(m_view->icon().isNull())
+    return dooble_favicons::icon(m_view->url());
+  else
+    return m_view->icon();
 }
 
 QMenu *dooble_page::menu(void)
