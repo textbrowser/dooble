@@ -1,4 +1,0 @@
-Currently, themes are composed of icons. Dooble expects the
-selected theme's icon files to exist in the Icons directory.
-This directory is relative to the application's current
-directory.
