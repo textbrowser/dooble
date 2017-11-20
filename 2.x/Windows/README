@@ -1,1 +1,5 @@
-Contains various support files for Windows 7 and newer.
+This directory contains various support files for Windows 7 and newer.
+
+The file vcredist_msvc2015_x86.exe may also be downloaded from
+https://www.microsoft.com/en-us/download/details.aspx?id=53587. The bundled
+file was retrieved from a local installation of Microsoft Visual Studio.
