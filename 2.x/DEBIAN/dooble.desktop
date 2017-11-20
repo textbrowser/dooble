@@ -1,12 +1,12 @@
 # https://specifications.freedesktop.org/desktop-entry-spec/latest/apa.html
 
 [Desktop Entry]
-Name=Dooble Web Browser
-GenericName=Dooble Web Browser
+Categories=Web
 Comment=Dooble Web Browser
 Exec=dooble
+GenericName=Dooble Web Browser
 Icon=dooble
+Name=Dooble Web Browser
 StartupNotify=true
 Terminal=false
 Type=Application
-Categories=Web
