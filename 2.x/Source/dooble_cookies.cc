@@ -360,7 +360,7 @@ void dooble_cookies::slot_populate(void)
 		{
 		  QSqlQuery delete_query(db);
 
-		  query.exec("PRAGMA foreign_keys = ON");
+		  delete_query.exec("PRAGMA foreign_keys = ON");
 		  delete_query.prepare
 		    ("DELETE FROM dooble_cookies_domains WHERE domain = ?");
 		  delete_query.addBindValue(query.value(0));

@@ -728,6 +728,8 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 		    m_ui.table->removeRow(list.at(i).row());
 		  }
 	      }
+
+	    query.exec("VACUUM");
 	  }
 
 	db.close();
@@ -789,6 +791,8 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 		    m_ui.exceptions->removeRow(list.at(i).row());
 		  }
 	      }
+
+	    query.exec("VACUUM");
 	  }
 
 	db.close();

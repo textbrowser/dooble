@@ -147,11 +147,8 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 
 	if(ok)
 	  if(query.exec())
-	    {
-	      if(dooble::s_certificate_exceptions)
-		dooble::s_certificate_exceptions->exception_accepted
-		  (error, url);
-	    }
+	    if(dooble::s_certificate_exceptions)
+	      dooble::s_certificate_exceptions->exception_accepted(error, url);
       }
 
     db.close();

@@ -239,6 +239,8 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
 	    if(query.exec())
 	      m_ui.table->removeRow(list.at(i).row());
 	  }
+
+	query.exec("VACUUM");
       }
 
     db.close();
