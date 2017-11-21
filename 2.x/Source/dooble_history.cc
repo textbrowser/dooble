@@ -427,6 +427,7 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
       {
 	QSqlQuery query(db);
 
+	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("UPDATE dooble_history SET favicon = ? WHERE url_digest = ?");
 
