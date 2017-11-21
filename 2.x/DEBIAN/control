@@ -7,3 +7,4 @@ Section: web
 Version: 2.2
 Description: Dooble Web Browser
  Welcome to the Dooble Web Browser!
+ A dooble.desktop file will also be installed in /usr/share/applications/.
