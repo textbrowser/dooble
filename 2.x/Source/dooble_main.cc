@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
 
   dooble::s_application->install_translator();
   splash.showMessage
-    (QObject::tr("Purging temporary favicons."),
+    (QObject::tr("Purging temporary database entries."),
      Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
   dooble::s_application->processEvents();
@@ -240,8 +240,10 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::LocalStorageEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
-  dooble_thread::msleep(750);
-  splash.finish(0);
+  splash.showMessage(QObject::tr("Preparing Dooble objects."),
+		     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  dooble::s_application->processEvents();
   dooble::s_settings = new dooble_settings();
 
   dooble *d = new dooble(QUrl(), false);
@@ -300,6 +302,8 @@ int main(int argc, char *argv[])
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)));
+  dooble_thread::msleep(750);
+  splash.finish(0);
   d->show();
 
   int rc = dooble::s_application->exec();
