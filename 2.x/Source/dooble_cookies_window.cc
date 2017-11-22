@@ -69,7 +69,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
      pixmap(QSize(16, 16)));
   label->setToolTip
     (tr("<html>Private cookies exist within "
-	"the scope of this window's parent page. Neither "
+	"the scope of this window's parent Dooble window. Neither "
 	"window geometry nor window state will be retained.</html>"));
   statusBar()->addPermanentWidget(label);
 

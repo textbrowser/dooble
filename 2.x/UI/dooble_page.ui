@@ -516,7 +516,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>This is a private tab.</string>
+           <string>This is a private tab in a private window.</string>
           </property>
           <property name="text">
            <string/>
