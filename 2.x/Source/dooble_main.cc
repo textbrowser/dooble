@@ -30,7 +30,6 @@
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
 #include <QStyleFactory>
 #endif
-#include <QThread>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
@@ -63,15 +62,6 @@ extern "C"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
-
-class dooble_thread: public QThread
-{
- public:
-  static void msleep(unsigned long secs)
-  {
-    QThread::msleep(secs);
-  }
-};
 
 static void signal_handler(int signal_number)
 {
@@ -302,7 +292,6 @@ int main(int argc, char *argv[])
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)));
-  dooble_thread::msleep(750);
   splash.finish(0);
   d->show();
 
