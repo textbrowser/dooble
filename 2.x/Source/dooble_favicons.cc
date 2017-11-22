@@ -39,6 +39,8 @@ QIcon dooble_favicons::icon(const QUrl &url)
 {
   if(!dooble::s_cryptography)
     return QIcon(":/Miscellaneous/blank_page.png");
+  else if(url.isEmpty() || !url.isValid())
+    return QIcon(":/Miscellaneous/blank_page.png");
 
   QIcon icon;
   QString database_name(QString("dooble_favicons_%1").
