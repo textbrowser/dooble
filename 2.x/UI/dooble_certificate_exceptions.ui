@@ -22,7 +22,10 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>Please restart Dooble after removing exceptions.</string>
+       <string>Please restart Dooble after removing exceptions. Certificate exceptions which have been accepted in private windows are not depicted.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

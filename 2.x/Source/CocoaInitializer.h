@@ -13,7 +13,7 @@ class CocoaInitializer
 
 	private:
 		class Private;
-		Private* d;
+		Private *d;
 };
 
 #endif

@@ -134,16 +134,29 @@ bool dooble_web_engine_page::certificateError
       m_certificate_error_widget->setVisible(true);
       m_ui.accept->setEnabled(false);
       m_ui.confirm_exception->setChecked(false);
-      m_ui.label->setText
-	(tr("<html>A certificate error occurred while accessing "
-	    "the secure site %1. <b>%2</b> "
-	    "Certificate errors may indicate that the server that "
-	    "you're attempting to connect to is not trustworthy.<br><br>"
-	    "Please accept or decline the permanent "
-	    "exception.<br><br>"
-	    "Permanent exceptions may be removed later.</html>").
-	 arg(url.toString()).
-	 arg(certificateError.errorDescription()));
+
+      if(m_is_private)
+	m_ui.label->setText
+	  (tr("<html>A certificate error occurred while accessing "
+	      "the secure site %1. <b>%2</b> "
+	      "Certificate errors may indicate that the server that "
+	      "you're attempting to connect to is not trustworthy.<br><br>"
+	      "Please accept or decline the temporary "
+	      "exception.</html>").
+	   arg(url.toString()).
+	   arg(certificateError.errorDescription()));
+      else
+	m_ui.label->setText
+	  (tr("<html>A certificate error occurred while accessing "
+	      "the secure site %1. <b>%2</b> "
+	      "Certificate errors may indicate that the server that "
+	      "you're attempting to connect to is not trustworthy.<br><br>"
+	      "Please accept or decline the permanent "
+	      "exception.<br><br>"
+	      "Permanent exceptions may be removed later.</html>").
+	   arg(url.toString()).
+	   arg(certificateError.errorDescription()));
+
       stacked_layout->removeWidget(m_certificate_error_widget);
       stacked_layout->addWidget(m_certificate_error_widget);
       stacked_layout->setCurrentWidget(m_certificate_error_widget);
@@ -201,8 +214,19 @@ bool dooble_web_engine_page::certificateError
 
 void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 {
-  dooble_certificate_exceptions_menu_widget::exception_accepted
-    (m_certificate_error, m_certificate_error_url);
+  if(m_is_private)
+    {
+      profile()->setProperty
+	(m_certificate_error_url.toString().toStdString().data(),
+	 m_certificate_error);
+      profile()->setProperty
+	((m_certificate_error_url.toString() + "/").toStdString().data(),
+	 m_certificate_error);
+    }
+  else
+    dooble_certificate_exceptions_menu_widget::exception_accepted
+      (m_certificate_error, m_certificate_error_url);
+
   emit certificate_exception_accepted(m_certificate_error_url);
 }
 

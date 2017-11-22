@@ -1,5 +1,5 @@
-lessThan(QT_VERSION, 5.9.2) {
-error("Qt version 5.9.2, or newer, is required.")
+lessThan(QT_VERSION, 5.9.3) {
+error("Qt version 5.9.3, or newer, is required.")
 }
 
 cache()
