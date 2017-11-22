@@ -101,6 +101,14 @@ bool dooble_web_engine_page::certificateError
     {
       QUrl url(certificateError.url().adjusted(QUrl::RemovePath));
 
+      if(m_is_private)
+	if(profile()->property(("certificate_exception_" + url.toString()).
+			       toStdString().data()).isValid() ||
+	   profile()->property(("certificate_exception_" +
+				url.toString() +
+				"/").toStdString().data()).isValid())
+	  return true;
+
       if(dooble_certificate_exceptions_menu_widget::has_exception(url))
 	return true;
 
@@ -217,11 +225,11 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
   if(m_is_private)
     {
       profile()->setProperty
-	(m_certificate_error_url.toString().toStdString().data(),
-	 m_certificate_error);
+	(("certificate_exception_" + m_certificate_error_url.toString()).
+	 toStdString().data(), m_certificate_error);
       profile()->setProperty
-	((m_certificate_error_url.toString() + "/").toStdString().data(),
-	 m_certificate_error);
+	(("certificate_exception_" + m_certificate_error_url.toString() + "/").
+	 toStdString().data(), m_certificate_error);
     }
   else
     dooble_certificate_exceptions_menu_widget::exception_accepted
