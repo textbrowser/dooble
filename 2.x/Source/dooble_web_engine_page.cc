@@ -235,7 +235,7 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
     dooble_certificate_exceptions_menu_widget::exception_accepted
       (m_certificate_error, m_certificate_error_url);
 
-  emit certificate_exception_accepted(m_certificate_error_url);
+  emit certificate_exception_accepted(url());
 }
 
 void dooble_web_engine_page::slot_load_started(void)
