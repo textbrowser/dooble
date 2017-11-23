@@ -25,41 +25,21 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_favorites_popup_h
-#define dooble_favorites_popup_h
+#ifndef dooble_favorites_table_view_h
+#define dooble_favorites_table_view_h
 
-#include <QDialog>
+#include <QTableView>
 
-#include "ui_dooble_favorites_popup.h"
-
-class dooble_favorites_popup: public QDialog
+class dooble_favorites_table_view: public QTableView
 {
   Q_OBJECT
 
  public:
-  dooble_favorites_popup(QWidget *parent);
+  dooble_favorites_table_view(QWidget *parent);
   void prepare_viewport_icons(void);
 
  protected:
-  void keyPressEvent(QKeyEvent *event);
-
- private:
-  Ui_dooble_favorites_popup m_ui;
-  void prepare_icons(void);
-
- private slots:
-  void slot_delete_selected(void);
-  void slot_double_clicked(const QModelIndex &index);
-  void slot_favorites_sorted(void);
-  void slot_set_favorites_model(void);
-  void slot_settings_applied(void);
-  void slot_sort(int index);
-  void slot_sort(void);
-
- signals:
-  void favorite_changed(const QUrl &url, bool state);
-  void favorites_sorted(void);
-  void open_url(const QUrl &url);
+  void scrollContentsBy(int dx, int dy);
 };
 
 #endif

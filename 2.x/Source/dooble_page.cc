@@ -1418,6 +1418,7 @@ void dooble_page::slot_show_favorites_popup(void)
 	  SIGNAL(open_url(const QUrl &)),
 	  this,
 	  SLOT(slot_open_url(const QUrl &)));
+  favorites_popup->prepare_viewport_icons();
   favorites_popup->resize(favorites_popup->sizeHint());
   size = favorites_popup->size();
   point.setX(m_ui.favorites->size().width() + point.x() - size.width());

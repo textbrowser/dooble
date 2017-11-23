@@ -1946,6 +1946,7 @@ void dooble::slot_show_favorites(void)
 {
   s_favorites_popup_opened_from_dooble_window = this;
   s_favorites_window->activateWindow();
+  s_favorites_window->prepare_viewport_icons();
   s_favorites_window->raise();
   s_favorites_window->show();
 }

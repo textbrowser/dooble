@@ -25,41 +25,61 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_favorites_popup_h
-#define dooble_favorites_popup_h
+#include <QStandardItemModel>
 
-#include <QDialog>
+#include "dooble_application.h"
+#include "dooble_favicons.h"
+#include "dooble_favorites_table_view.h"
 
-#include "ui_dooble_favorites_popup.h"
-
-class dooble_favorites_popup: public QDialog
+dooble_favorites_table_view::dooble_favorites_table_view(QWidget *parent):
+  QTableView(parent)
 {
-  Q_OBJECT
+}
 
- public:
-  dooble_favorites_popup(QWidget *parent);
-  void prepare_viewport_icons(void);
+void dooble_favorites_table_view::prepare_viewport_icons(void)
+{
+  QStandardItemModel *model = qobject_cast<QStandardItemModel *>
+    (this->model());
 
- protected:
-  void keyPressEvent(QKeyEvent *event);
+  if(!model)
+    return;
 
- private:
-  Ui_dooble_favorites_popup m_ui;
-  void prepare_icons(void);
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
- private slots:
-  void slot_delete_selected(void);
-  void slot_double_clicked(const QModelIndex &index);
-  void slot_favorites_sorted(void);
-  void slot_set_favorites_model(void);
-  void slot_settings_applied(void);
-  void slot_sort(int index);
-  void slot_sort(void);
+  int a = rowAt(viewport()->rect().topLeft().y());
+  int b = rowAt(viewport()->rect().bottomLeft().y());
 
- signals:
-  void favorite_changed(const QUrl &url, bool state);
-  void favorites_sorted(void);
-  void open_url(const QUrl &url);
-};
+  if(b == -1)
+    /*
+    ** Approximate the number of rows.
+    */
 
-#endif
+    b = a + viewport()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
+  else if(b == 0)
+    b = a + parentWidget()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
+
+  for(int i = a; i <= b; i++)
+    {
+      QStandardItem *item = model->item(i, 0); // Title
+
+      if(!item)
+	continue;
+      else if(isRowHidden(i))
+	{
+	  b += 1;
+	  continue;
+	}
+      else if(!item->icon().isNull())
+	continue;
+      else
+	item->setIcon(dooble_favicons::icon(QUrl(item->data().toByteArray())));
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_favorites_table_view::scrollContentsBy(int dx, int dy)
+{
+  QTableView::scrollContentsBy(dx, dy);
+  prepare_viewport_icons();
+}

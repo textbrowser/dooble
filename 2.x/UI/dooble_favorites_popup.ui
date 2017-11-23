@@ -80,7 +80,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableView" name="view">
+    <widget class="dooble_favorites_table_view" name="view">
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
@@ -115,6 +115,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>dooble_favorites_table_view</class>
+   <extends>QTableView</extends>
+   <header>dooble_favorites_table_view.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>sort_order</tabstop>
   <tabstop>delete_selected</tabstop>

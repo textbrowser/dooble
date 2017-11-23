@@ -112,6 +112,11 @@ void dooble_favorites_popup::prepare_icons(void)
     (QIcon(QString(":/%1/36/delete.png").arg(icon_set)));
 }
 
+void dooble_favorites_popup::prepare_viewport_icons(void)
+{
+  m_ui.view->prepare_viewport_icons();
+}
+
 void dooble_favorites_popup::slot_delete_selected(void)
 {
   if(!dooble::s_history)
@@ -198,6 +203,7 @@ void dooble_favorites_popup::slot_sort(int index)
   else // Title
     m_ui.view->sortByColumn(0, Qt::DescendingOrder);
 
+  m_ui.view->prepare_viewport_icons();
   dooble_settings::set_setting("favorites_sort_index", index);
   emit favorites_sorted();
 }
@@ -212,4 +218,6 @@ void dooble_favorites_popup::slot_sort(void)
     m_ui.view->sortByColumn(3, Qt::DescendingOrder);
   else // Title
     m_ui.view->sortByColumn(0, Qt::DescendingOrder);
+
+  m_ui.view->prepare_viewport_icons();
 }

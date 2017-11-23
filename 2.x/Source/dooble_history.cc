@@ -921,6 +921,7 @@ void dooble_history::slot_populate(void)
 			{
 			case 0:
 			  {
+			    item->setData(url);
 			    item->setText(title);
 			    item->setToolTip(item->text());
 			    break;
@@ -1004,6 +1005,7 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	    {
 	    case 0:
 	      {
+		item->setData(url);
 		item->setIcon(hash.value(FAVICON).value<QIcon> ());
 		item->setText(hash.value(TITLE).toString());
 		item->setToolTip(item->text());
@@ -1056,6 +1058,7 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	    {
 	    case 0:
 	      {
+		item->setData(url);
 		item->setIcon(hash.value(FAVICON).value<QIcon> ());
 		item->setText(hash.value(TITLE).toString());
 		item->setToolTip(item->text());
