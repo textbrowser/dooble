@@ -214,14 +214,20 @@ void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 
 void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 {
-  m_url = url.adjusted(QUrl::RemovePath);
+  m_url = QUrl("https://" + url.host());
 
-  if(!m_url.isEmpty() && m_url.isValid())
-    m_ui.label->setText
-      (tr("A security exception was accepted for %1.").arg(m_url.toString()));
+  if(m_url.scheme() == "https")
+    {
+      if(!m_url.isEmpty() && m_url.isValid())
+	m_ui.label->setText
+	  (tr("A security exception was accepted for %1.").
+	   arg(m_url.toString()));
+      else
+	m_ui.label->setText
+	  (tr("A security exception was accepted for this site."));
+    }
   else
-    m_ui.label->setText
-      (tr("A security exception was accepted for this site."));
+    m_ui.label->setText(tr("Invalid URL scheme."));
 }
 
 void dooble_certificate_exceptions_menu_widget::slot_remove_exception(void)

@@ -99,7 +99,7 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      QUrl url(certificateError.url().adjusted(QUrl::RemovePath));
+      QUrl url("https://" + certificateError.url().host());
 
       if(m_is_private)
 	if(profile()->property(("certificate_exception_" + url.toString()).
@@ -171,8 +171,6 @@ bool dooble_web_engine_page::certificateError
     }
   else
     {
-      QUrl url(certificateError.url().adjusted(QUrl::RemovePath));
-
       if(!view())
 	return false;
 
@@ -181,6 +179,8 @@ bool dooble_web_engine_page::certificateError
 
       if(!stacked_layout)
 	return false;
+
+      QUrl url("https://" + certificateError.url().host());
 
       m_certificate_error = certificateError.errorDescription();
       m_certificate_error_url = url;
