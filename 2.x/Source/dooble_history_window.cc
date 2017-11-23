@@ -150,6 +150,11 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
     event->ignore();
 }
 
+void dooble_history_window::prepare_viewport_icons(void)
+{
+  m_ui.table->prepare_viewport_icons();
+}
+
 void dooble_history_window::resizeEvent(QResizeEvent *event)
 {
   QMainWindow::resizeEvent(event);
@@ -266,7 +271,12 @@ void dooble_history_window::show(QWidget *parent)
 					   setting("history_window_geometry").
 					   toByteArray()));
 
+  bool was_visible = isVisible();
+
   QMainWindow::show();
+
+  if(!was_visible)
+    m_ui.table->prepare_viewport_icons();
 }
 
 void dooble_history_window::showNormal(QWidget *parent)
@@ -292,7 +302,12 @@ void dooble_history_window::showNormal(QWidget *parent)
 					   setting("history_window_geometry").
 					   toByteArray()));
 
+  bool was_visible = isVisible();
+
   QMainWindow::showNormal();
+
+  if(!was_visible)
+    m_ui.table->prepare_viewport_icons();
 }
 
 void dooble_history_window::slot_copy_location(void)
@@ -725,7 +740,6 @@ void dooble_history_window::slot_populate(void)
 
       QDateTime last_visited
 	(it.value().value(dooble_history::LAST_VISITED).toDateTime());
-      QIcon icon(it.value().value(dooble_history::FAVICON).value<QIcon> ());
       QString title(it.value().value(dooble_history::TITLE).toString());
       QTableWidgetItem *item2 = 0;
       QTableWidgetItem *item3 = 0;
@@ -748,7 +762,7 @@ void dooble_history_window::slot_populate(void)
       else
 	item1->setCheckState(Qt::Unchecked);
 
-      item2 = new QTableWidgetItem(icon, title);
+      item2 = new QTableWidgetItem(title);
       item2->setData(Qt::UserRole, url);
       item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item2->setToolTip(item2->text());

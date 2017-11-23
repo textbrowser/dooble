@@ -1,0 +1,65 @@
+/*
+** Copyright (c) 2008 - present, Alexis Megas.
+** All rights reserved.
+**
+** Redistribution and use in source and binary forms, with or without
+** modification, are permitted provided that the following conditions
+** are met:
+** 1. Redistributions of source code must retain the above copyright
+**    notice, this list of conditions and the following disclaimer.
+** 2. Redistributions in binary form must reproduce the above copyright
+**    notice, this list of conditions and the following disclaimer in the
+**    documentation and/or other materials provided with the distribution.
+** 3. The name of the author may not be used to endorse or promote products
+**    derived from Dooble without specific prior written permission.
+**
+** DOOBLE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+** IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+** OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+** IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+** INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+#include "dooble_application.h"
+#include "dooble_favicons.h"
+#include "dooble_history_table_widget.h"
+
+dooble_history_table_widget::dooble_history_table_widget(QWidget *parent):
+  QTableWidget(parent)
+{
+}
+
+void dooble_history_table_widget::prepare_viewport_icons(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QTableWidgetItem *item1 = itemAt(viewport()->rect().topLeft());
+  QTableWidgetItem *item2 = itemAt(viewport()->rect().bottomRight());
+
+  if(item1 && item2)
+    for(int i = item1->row(); i <= item2->row(); i++)
+      {
+	QTableWidgetItem *item = this->item(i, 1); // Title
+
+	if(!item)
+	  continue;
+	else if(!item->icon().isNull())
+	  continue;
+	else
+	  item->setIcon
+	    (dooble_favicons::icon(item->data(Qt::UserRole).toUrl()));
+      }
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_history_table_widget::scrollContentsBy(int dx, int dy)
+{
+  QTableWidget::scrollContentsBy(dx, dy);
+  prepare_viewport_icons();
+}

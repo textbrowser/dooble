@@ -1975,6 +1975,7 @@ void dooble::slot_show_history(void)
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
       m_ui.tab->setCurrentWidget(s_history_window); // Order is important.
       prepare_tab_shortcuts();
+      s_history_window->prepare_viewport_icons();
       return;
     }
 

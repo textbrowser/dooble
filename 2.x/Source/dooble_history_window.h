@@ -40,6 +40,7 @@ class dooble_history_window: public QMainWindow
 
  public:
   dooble_history_window(void);
+  void prepare_viewport_icons(void);
   void show(QWidget *parent);
   void showNormal(QWidget *parent);
 

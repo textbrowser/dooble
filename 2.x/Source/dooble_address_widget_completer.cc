@@ -138,12 +138,7 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
   else
     s_urls[url] = 0;
 
-  QStandardItem *item = 0;
-
-  if(icon.isNull())
-    item = new QStandardItem(dooble_favicons::icon(url), url.toString());
-  else
-    item = new QStandardItem(icon, url.toString());
+  QStandardItem *item = new QStandardItem(icon, url.toString());
 
   item->setToolTip(url.toString());
   s_model->insertRow(0, item);

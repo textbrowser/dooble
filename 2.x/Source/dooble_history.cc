@@ -832,38 +832,18 @@ void dooble_history::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT favicon, "   // 0
-		      "favorite_digest, "  // 1
-		      "last_visited, "     // 2
-		      "number_of_visits, " // 3
-		      "title, "            // 4
-		      "url, "              // 5
-		      "url_digest "        // 6
+	if(query.exec("SELECT "
+		      "favorite_digest, "  // 0
+		      "last_visited, "     // 1
+		      "number_of_visits, " // 2
+		      "title, "            // 3
+		      "url, "              // 4
+		      "url_digest "        // 5
 		      "FROM dooble_history"))
 	  while(query.next())
 	    {
-	      QBuffer buffer;
-	      QByteArray bytes
-		(QByteArray::fromBase64(query.value(0).toByteArray()));
-	      QIcon icon;
-
-	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
-	      buffer.setBuffer(&bytes);
-
-	      if(buffer.open(QIODevice::ReadOnly))
-		{
-		  QDataStream in(&buffer);
-
-		  in >> icon;
-
-		  if(in.status() != QDataStream::Ok)
-		    icon = QIcon();
-
-		  buffer.close();
-		}
-
 	      QByteArray last_visited
-		(QByteArray::fromBase64(query.value(2).toByteArray()));
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
 
 	      last_visited = dooble::s_cryptography->mac_then_decrypt
 		(last_visited);
@@ -873,7 +853,7 @@ void dooble_history::slot_populate(void)
 
 	      bool is_favorite = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
-		 query.value(1).toByteArray());
+		 query.value(0).toByteArray());
 
 	      if(!is_favorite)
 		{
@@ -891,7 +871,7 @@ void dooble_history::slot_populate(void)
 		}
 
 	      QByteArray number_of_visits
-		(QByteArray::fromBase64(query.value(3).toByteArray()));
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
 
 	      number_of_visits = dooble::s_cryptography->mac_then_decrypt
 		(number_of_visits);
@@ -900,7 +880,7 @@ void dooble_history::slot_populate(void)
 		continue;
 
 	      QByteArray title
-		(QByteArray::fromBase64(query.value(4).toByteArray()));
+		(QByteArray::fromBase64(query.value(3).toByteArray()));
 
 	      title = dooble::s_cryptography->mac_then_decrypt(title);
 
@@ -908,19 +888,15 @@ void dooble_history::slot_populate(void)
 		continue;
 
 	      QByteArray url
-		(QByteArray::fromBase64(query.value(5).toByteArray()));
+		(QByteArray::fromBase64(query.value(4).toByteArray()));
 
 	      url = dooble::s_cryptography->mac_then_decrypt(url);
 
 	      if(url.isEmpty())
 		continue;
 
-	      if(icon.isNull())
-		icon = dooble_favicons::icon(QUrl::fromEncoded(url));
-
 	      QHash<HistoryItem, QVariant> hash;
 
-	      hash[FAVICON] = icon;
 	      hash[FAVORITE] = is_favorite;
 	      hash[LAST_VISITED] = QDateTime::fromString
 		(last_visited.constData(), Qt::ISODate);
@@ -929,7 +905,7 @@ void dooble_history::slot_populate(void)
 	      hash[TITLE] = title.constData();
 	      hash[URL] = QUrl::fromEncoded(url);
 	      hash[URL_DIGEST] = QByteArray::fromBase64
-		(query.value(6).toByteArray());
+		(query.value(5).toByteArray());
 
 	      if(is_favorite)
 		{
@@ -945,7 +921,6 @@ void dooble_history::slot_populate(void)
 			{
 			case 0:
 			  {
-			    item->setIcon(icon);
 			    item->setText(title);
 			    item->setToolTip(item->text());
 			    break;

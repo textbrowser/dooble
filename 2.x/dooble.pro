@@ -576,6 +576,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_favorites_popup.h \
                   Source/dooble_gopher.h \
                   Source/dooble_history.h \
+                  Source/dooble_history_table_widget.h \
                   Source/dooble_history_window.h \
                   Source/dooble_label_widget.h \
                   Source/dooble_page.h \
@@ -623,6 +624,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_favorites_popup.cc \
                   Source/dooble_gopher.cc \
                   Source/dooble_history.cc \
+                  Source/dooble_history_table_widget.cc \
                   Source/dooble_history_window.cc \
 		  Source/dooble_hmac.cc \
                   Source/dooble_label_widget.cc \
