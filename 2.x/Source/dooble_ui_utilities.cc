@@ -54,6 +54,11 @@ QString dooble_ui_utilities::pretty_size(qintptr size)
     (QString::number(static_cast<double> (size) / 1073741824, 'f', 1));
 }
 
+QUrl dooble_ui_utilities::simplified_url(const QUrl &url)
+{
+  return QUrl(url.scheme() + "://" + url.host());
+}
+
 dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
 {
   if(!widget)

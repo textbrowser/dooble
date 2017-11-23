@@ -32,6 +32,7 @@
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
+#include "dooble_ui_utilities.h"
 
 QAtomicInteger<qintptr> dooble_certificate_exceptions_menu_widget::s_db_id;
 
@@ -214,7 +215,7 @@ void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 
 void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 {
-  m_url = QUrl("https://" + url.host());
+  m_url = QUrl(dooble_ui_utilities::simplified_url(url));
 
   if(m_url.scheme() == "https")
     {
@@ -227,7 +228,7 @@ void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 	  (tr("A security exception was accepted for this site."));
     }
   else
-    m_ui.label->setText(tr("Invalid URL scheme."));
+    m_ui.label->setText(tr("Expecting an HTTPS scheme."));
 }
 
 void dooble_certificate_exceptions_menu_widget::slot_remove_exception(void)

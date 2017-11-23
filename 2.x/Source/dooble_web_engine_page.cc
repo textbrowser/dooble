@@ -32,6 +32,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
+#include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
 #include "ui_dooble_certificate_exceptions_widget.h"
 
@@ -99,7 +100,7 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      QUrl url("https://" + certificateError.url().host());
+      QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
       if(m_is_private)
 	if(profile()->property(("certificate_exception_" + url.toString()).
@@ -180,7 +181,7 @@ bool dooble_web_engine_page::certificateError
       if(!stacked_layout)
 	return false;
 
-      QUrl url("https://" + certificateError.url().host());
+      QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
       m_certificate_error = certificateError.errorDescription();
       m_certificate_error_url = url;

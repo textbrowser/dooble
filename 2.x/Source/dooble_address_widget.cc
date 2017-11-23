@@ -36,6 +36,7 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
+#include "dooble_ui_utilities.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
@@ -399,7 +400,7 @@ void dooble_address_widget::slot_show_site_information_menu(void)
     return;
 
   QMenu menu(this);
-  QUrl url("https://" + m_url.host());
+  QUrl url(dooble_ui_utilities::simplified_url(m_url));
 
   if(dooble_certificate_exceptions_menu_widget::has_exception(url))
     menu.addAction
