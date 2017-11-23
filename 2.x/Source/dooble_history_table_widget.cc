@@ -38,22 +38,27 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QTableWidgetItem *item1 = itemAt(viewport()->rect().topLeft());
-  QTableWidgetItem *item2 = itemAt(viewport()->rect().bottomRight());
+  int a = rowAt(viewport()->rect().topLeft().y());
+  int b = rowAt(viewport()->rect().bottomRight().y());
 
-  if(item1 && item2)
-    for(int i = item1->row(); i <= item2->row(); i++)
-      {
-	QTableWidgetItem *item = this->item(i, 1); // Title
+  if(b == -1)
+    /*
+    ** Approximate the number of rows.
+    */
 
-	if(!item)
-	  continue;
-	else if(!item->icon().isNull())
-	  continue;
-	else
-	  item->setIcon
-	    (dooble_favicons::icon(item->data(Qt::UserRole).toUrl()));
-      }
+    b = a + viewport()->rect().bottomRight().y() / qMax(1, rowHeight(a));
+
+  for(int i = a; i <= b; i++)
+    {
+      QTableWidgetItem *item = this->item(i, 1); // Title
+
+      if(!item)
+	continue;
+      else if(!item->icon().isNull())
+	continue;
+      else
+	item->setIcon(dooble_favicons::icon(item->data(Qt::UserRole).toUrl()));
+    }
 
   QApplication::restoreOverrideCursor();
 }
