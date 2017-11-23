@@ -150,6 +150,9 @@ void dooble_cookies_window::delete_top_level_items
 	       m_cookies,
 	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
+  QList<QNetworkCookie> cookies;
+  QStringList domains;
+
   while(!list.isEmpty())
     {
       QTreeWidgetItem *item = list.takeFirst();
@@ -172,7 +175,7 @@ void dooble_cookies_window::delete_top_level_items
 		if(m_cookie_store)
 		  m_cookie_store->deleteCookie(cookie.at(0));
 
-		emit delete_cookie(cookie.at(0));
+		cookies << cookie.at(0);
 	      }
 
 	    delete i;
@@ -191,14 +194,16 @@ void dooble_cookies_window::delete_top_level_items
 	      if(m_cookie_store)
 		m_cookie_store->deleteCookie(cookie.at(0));
 
-	      emit delete_cookie(cookie.at(0));
+	      cookies << cookie.at(0);
 	    }
 	  else
-	    emit delete_domain(item->text(0));
+	    domains << item->text(0);
 	}
 
       delete item;
     }
+
+  emit delete_items(cookies, domains);
 
   if(m_cookie_store && m_cookies)
     connect(m_cookie_store,
@@ -410,7 +415,9 @@ void dooble_cookies_window::slot_delete_selected(void)
 	       m_cookies,
 	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
+  QList<QNetworkCookie> cookies;
   QList<QTreeWidgetItem *> list(m_ui.tree->selectedItems());
+  QStringList domains;
 
   while(!list.isEmpty())
     {
@@ -436,7 +443,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 		    if(m_cookie_store)
 		      m_cookie_store->deleteCookie(cookie.at(0));
 
-		    emit delete_cookie(cookie.at(0));
+		    cookies << cookie.at(0);
 		  }
 
 		delete i;
@@ -456,10 +463,10 @@ void dooble_cookies_window::slot_delete_selected(void)
 		  if(m_cookie_store)
 		    m_cookie_store->deleteCookie(cookie.at(0));
 
-		  emit delete_cookie(cookie.at(0));
+		  cookies << cookie.at(0);
 		}
 	      else
-		emit delete_domain(item->text(0));
+		domains << item->text(0);
 	    }
 
 	  delete item;
@@ -485,7 +492,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 	      if(m_cookie_store)
 		m_cookie_store->deleteCookie(cookie.at(0));
 
-	      emit delete_cookie(cookie.at(0));
+	      cookies << cookie.at(0);
 	    }
 
 	  if(item->parent())
@@ -493,6 +500,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 	      (item->parent()->indexOfChild(item));
 	}
     }
+
+  emit delete_items(cookies, domains);
 
   if(m_cookie_store && m_cookies)
     connect(m_cookie_store,

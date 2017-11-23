@@ -314,6 +314,64 @@ void dooble_cookies::slot_delete_domain(const QString &domain)
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
+				       const QStringList &domains)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+  else if(m_is_private)
+    return;
+
+  QString database_name(QString("dooble_cookies_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_cookies.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+
+	for(int i = 0; i < cookies.size(); i++)
+	  {
+	    query.prepare
+	      ("DELETE FROM dooble_cookies WHERE identifier_digest = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->
+	       hmac(identifier(cookies.at(i))).toBase64());
+	    query.exec();
+	  }
+
+	query.prepare("DELETE FROM dooble_cookies_domains WHERE "
+		      "domain_digest NOT IN (SELECT domain_digest FROM "
+		      "dooble_cookies) AND favorite_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	query.exec();
+	query.exec("PRAGMA foreign_keys = ON");
+
+	for(int i = 0; i < domains.size(); i++)
+	  {
+	    query.prepare("DELETE FROM dooble_cookies_domains WHERE "
+			  "domain_digest = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(domains.at(i).toUtf8()).toBase64());
+	    query.exec();
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_cookies::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())

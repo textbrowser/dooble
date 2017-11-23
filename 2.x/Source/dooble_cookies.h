@@ -51,6 +51,8 @@ class dooble_cookies: public QObject
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_delete_cookie(const QNetworkCookie &cookie);
   void slot_delete_domain(const QString &domain);
+  void slot_delete_items(const QList<QNetworkCookie> &cookies,
+			 const QStringList &domains);
   void slot_populate(void);
 
  signals:

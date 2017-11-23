@@ -288,6 +288,12 @@ int main(int argc, char *argv[])
 		   SIGNAL(delete_domain(const QString &)),
 		   dooble::s_cookies,
 		   SLOT(slot_delete_domain(const QString &)));
+  QObject::connect(dooble::s_cookies_window,
+		   SIGNAL(delete_items(const QList<QNetworkCookie> &,
+				       const QStringList &)),
+		   dooble::s_cookies,
+		   SLOT(slot_delete_items(const QList<QNetworkCookie> &,
+					  const QStringList &)));
   QObject::connect(dooble::s_settings,
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_application,
