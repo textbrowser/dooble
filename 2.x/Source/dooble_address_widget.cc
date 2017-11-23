@@ -383,10 +383,14 @@ void dooble_address_widget::slot_load_started(void)
 
 void dooble_address_widget::slot_populate(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QList<QPair<QIcon, QString> > list(dooble::s_history->urls());
 
   for(int i = 0; i < list.size(); i++)
     m_completer->add_item(list.at(i).first, list.at(i).second);
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_address_widget::slot_settings_applied(void)
