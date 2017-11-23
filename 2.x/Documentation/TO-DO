@@ -106,15 +106,15 @@
 7.     Determine if the system translation file is adequate.
 8.     Debian distribution.
 
-2.2 Completed Items
+2.1.1 Completed Items
 
 1.     New Web site.
+2.     Do not store certificate exceptions for private windows.
 
 2.2 Remaining Items
 
 1.     Auto-correct addresses.
 2.     Richer Debian package.
-3.     Do not store certificate exceptions for private windows.
 
 Unknown Items
 
