@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QHeaderView>
+
 #include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_history_table_widget.h"
@@ -32,6 +34,10 @@
 dooble_history_table_widget::dooble_history_table_widget(QWidget *parent):
   QTableWidget(parent)
 {
+  connect(horizontalHeader(),
+	  SIGNAL(sectionClicked(int)),
+	  this,
+	  SLOT(slot_section_clicked(int)));
 }
 
 void dooble_history_table_widget::prepare_viewport_icons(void)
@@ -39,14 +45,14 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   int a = rowAt(viewport()->rect().topLeft().y());
-  int b = rowAt(viewport()->rect().bottomRight().y());
+  int b = rowAt(viewport()->rect().bottomLeft().y());
 
   if(b == -1)
     /*
     ** Approximate the number of rows.
     */
 
-    b = a + viewport()->rect().bottomRight().y() / qMax(1, rowHeight(a));
+    b = a + viewport()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
 
   for(int i = a; i <= b; i++)
     {
@@ -54,6 +60,11 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
 
       if(!item)
 	continue;
+      else if(isRowHidden(i))
+	{
+	  b += 1;
+	  continue;
+	}
       else if(!item->icon().isNull())
 	continue;
       else
@@ -66,5 +77,11 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
 void dooble_history_table_widget::scrollContentsBy(int dx, int dy)
 {
   QTableWidget::scrollContentsBy(dx, dy);
+  prepare_viewport_icons();
+}
+
+void dooble_history_table_widget::slot_section_clicked(int index)
+{
+  Q_UNUSED(index);
   prepare_viewport_icons();
 }

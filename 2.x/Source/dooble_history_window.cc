@@ -901,6 +901,7 @@ void dooble_history_window::slot_search_timer_timeout(void)
       }
 
   QApplication::restoreOverrideCursor();
+  m_ui.table->prepare_viewport_icons();
 }
 
 void dooble_history_window::slot_show_context_menu(const QPoint &point)

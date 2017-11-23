@@ -40,6 +40,9 @@ class dooble_history_table_widget: public QTableWidget
 
  protected:
   void scrollContentsBy(int dx, int dy);
+
+ private slots:
+  void slot_section_clicked(int index);
 };
 
 #endif
