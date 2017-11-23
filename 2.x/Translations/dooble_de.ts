@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Purging temporary favicons.</source>
-        <translation>Lösche temporäre Favicons.</translation>
+        <translation type="vanished">Lösche temporäre Favicons.</translation>
     </message>
     <message>
         <source>Preparing QWebEngine.</source>
@@ -38,6 +38,14 @@
     <message>
         <source>%1 GiB</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Purging temporary database entries.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing Dooble objects.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -556,7 +564,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Please restart Dooble after removing exceptions.</source>
-        <translation>Bitte starte Dooble neu nachdem Ausnahmen entfernt wurden.</translation>
+        <translation type="vanished">Bitte starte Dooble neu nachdem Ausnahmen entfernt wurden.</translation>
     </message>
     <message>
         <source>Site</source>
@@ -585,6 +593,10 @@ Dooble ist open source Software.
     <message>
         <source>Dooble: Confirmation</source>
         <translation>Dooble: Bestätigung</translation>
+    </message>
+    <message>
+        <source>Please restart Dooble after removing exceptions. Certificate exceptions which have been accepted in private windows are not depicted.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -701,7 +713,7 @@ Dooble ist open source Software.
     <name>dooble_cookies_window</name>
     <message>
         <source>&lt;html&gt;Private cookies exist within the scope of this window&apos;s parent page. Neither window geometry nor window state will be retained.&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Private Cookies existieren innerhalb der Bandbreite von der Eltern-Seite dieses Fensters. Weder Fenster-Geometire noch der Status des Fensters werden beibehalten.&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;Private Cookies existieren innerhalb der Bandbreite von der Eltern-Seite dieses Fensters. Weder Fenster-Geometire noch der Status des Fensters werden beibehalten.&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
@@ -797,6 +809,10 @@ Dooble ist open source Software.
     <message>
         <source>The tuple (&lt;b&gt;domain&lt;/b&gt;, &lt;b&gt;name&lt;/b&gt;, &lt;b&gt;path&lt;/b&gt;) serves as a cookie identifier.</source>
         <translation>Das Tuple (&lt;b&gt;Domäne&lt;/b&gt;, &lt;b&gt;Name&lt;/b&gt;, &lt;b&gt;Pfad&lt;/b&gt;) dient als ein Identifikationsmerkmal für Cookies.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;Private cookies exist within the scope of this window&apos;s parent Dooble window. Neither window geometry nor window state will be retained.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1298,7 +1314,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>This is a private tab.</source>
-        <translation>Dieses ist ein privater Tab.</translation>
+        <translation type="vanished">Dieses ist ein privater Tab.</translation>
     </message>
     <message>
         <source>Accepted / Blocked Domains Exception</source>
@@ -1378,6 +1394,10 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Clear &amp;Visited Links</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a private tab in a private window.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2067,6 +2087,10 @@ Domänen</translation>
     <message>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;An exception may not be set because of the severity of the certificate error.&lt;/html&gt;</source>
         <translation>&lt;html&gt;Ein Zertifikats-Fehler ist aufgetreten beim Zugang zur sicheren Seite %1. &lt;b&gt;%2&lt;/b&gt; Der Zertifikats-Fehler könnte darauf hinweisen, dass der Server, zu dem Du zu verbinden versuchst, nicht vertrauenswürdig ist.&lt;br&gt;&lt;br&gt;Eine Ausnahme sollte nicht gesetzt werden aufgrund der Ernsthaftigkeit des Zertifikats-Fehlers.&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the temporary exception.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

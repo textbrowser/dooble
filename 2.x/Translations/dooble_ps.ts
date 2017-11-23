@@ -4,17 +4,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Source/dooble_main.cc" line="162"/>
+        <location filename="../Source/dooble_main.cc" line="152"/>
         <source>Initializing Dooble.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_main.cc" line="207"/>
-        <source>Purging temporary favicons.</source>
+        <location filename="../Source/dooble_main.cc" line="197"/>
+        <source>Purging temporary database entries.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_main.cc" line="214"/>
+        <location filename="../Source/dooble_main.cc" line="233"/>
+        <source>Preparing Dooble objects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_main.cc" line="204"/>
         <source>Preparing QWebEngine.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -467,8 +472,8 @@
     </message>
     <message>
         <location filename="../UI/dooble_accepted_or_blocked_domains.ui" line="229"/>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="951"/>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="958"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="955"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="962"/>
         <source>Domain</source>
         <translation type="unfinished"></translation>
     </message>
@@ -523,42 +528,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="841"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="845"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="842"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="846"/>
         <source>dooble_accepted_or_blocked_domains.txt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="843"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="847"/>
         <source>Dooble: Import Accepted / Blocked Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="859"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="863"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="864"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="868"/>
         <source>Dooble: Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="895"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="899"/>
         <source>Line %1 processed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="951"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="955"/>
         <source>Accepted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="958"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="962"/>
         <source>Blocked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -641,26 +646,26 @@
     </message>
     <message>
         <location filename="../UI/dooble_certificate_exceptions.ui" line="25"/>
-        <source>Please restart Dooble after removing exceptions.</source>
+        <source>Please restart Dooble after removing exceptions. Certificate exceptions which have been accepted in private windows are not depicted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dooble_certificate_exceptions.ui" line="57"/>
+        <location filename="../UI/dooble_certificate_exceptions.ui" line="60"/>
         <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dooble_certificate_exceptions.ui" line="62"/>
+        <location filename="../UI/dooble_certificate_exceptions.ui" line="65"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dooble_certificate_exceptions.ui" line="72"/>
+        <location filename="../UI/dooble_certificate_exceptions.ui" line="75"/>
         <source>Search Exceptions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UI/dooble_certificate_exceptions.ui" line="95"/>
+        <location filename="../UI/dooble_certificate_exceptions.ui" line="98"/>
         <source>&amp;Delete Selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -708,12 +713,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="224"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="221"/>
         <source>A security exception was accepted for %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="227"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="224"/>
         <source>A security exception was accepted for this site.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -919,7 +924,7 @@
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="71"/>
-        <source>&lt;html&gt;Private cookies exist within the scope of this window&apos;s parent page. Neither window geometry nor window state will be retained.&lt;/html&gt;</source>
+        <source>&lt;html&gt;Private cookies exist within the scope of this window&apos;s parent Dooble window. Neither window geometry nor window state will be retained.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1285,7 +1290,7 @@
     </message>
     <message>
         <location filename="../UI/dooble_page.ui" line="519"/>
-        <source>This is a private tab.</source>
+        <source>This is a private tab in a private window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2403,12 +2408,17 @@ Domains</source>
 <context>
     <name>dooble_web_engine_page</name>
     <message>
-        <location filename="../Source/dooble_web_engine_page.cc" line="138"/>
+        <location filename="../Source/dooble_web_engine_page.cc" line="148"/>
+        <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the temporary exception.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_page.cc" line="158"/>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the permanent exception.&lt;br&gt;&lt;br&gt;Permanent exceptions may be removed later.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_page.cc" line="186"/>
+        <location filename="../Source/dooble_web_engine_page.cc" line="207"/>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;An exception may not be set because of the severity of the certificate error.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
