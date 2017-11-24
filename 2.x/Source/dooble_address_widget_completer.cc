@@ -151,6 +151,7 @@ void dooble_address_widget_completer::complete(void)
 
 void dooble_address_widget_completer::complete(const QString &text)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   s_model->blockSignals(true);
 
   while(!s_purged_items.isEmpty())
@@ -234,6 +235,8 @@ void dooble_address_widget_completer::complete(const QString &text)
     }
   else
     m_popup->setVisible(false);
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_address_widget_completer::remove_item(const QUrl &url)
