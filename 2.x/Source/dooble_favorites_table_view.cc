@@ -56,6 +56,10 @@ void dooble_favorites_table_view::prepare_viewport_icons(void)
 
     b = a + viewport()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
   else if(b == 0)
+    /*
+    ** Approximate the number of rows.
+    */
+
     b = a + parentWidget()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
 
   for(int i = a; i <= b; i++)
