@@ -41,10 +41,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)
 {
   if(!s_model)
-    {
-      s_model = new QStandardItemModel();
-      s_model->setSortRole(Qt::UserRole);
-    }
+    s_model = new QStandardItemModel();
 
   m_model = new QStandardItemModel(this);
   m_popup = new dooble_address_widget_completer_popup(parent);
@@ -208,7 +205,6 @@ void dooble_address_widget_completer::complete(const QString &text)
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
 	      m_model->rowCount()) * m_popup->rowHeight(0));
       m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-      m_model->sort(0, Qt::DescendingOrder);
       QCompleter::complete();
     }
   else
