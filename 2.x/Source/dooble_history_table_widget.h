@@ -39,6 +39,7 @@ class dooble_history_table_widget: public QTableWidget
   void prepare_viewport_icons(void);
 
  protected:
+  void resizeEvent(QResizeEvent *event);
   void scrollContentsBy(int dx, int dy);
 
  private slots:

@@ -82,6 +82,12 @@ void dooble_favorites_table_view::prepare_viewport_icons(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_favorites_table_view::resizeEvent(QResizeEvent *event)
+{
+  QTableView::resizeEvent(event);
+  prepare_viewport_icons();
+}
+
 void dooble_favorites_table_view::scrollContentsBy(int dx, int dy)
 {
   QTableView::scrollContentsBy(dx, dy);

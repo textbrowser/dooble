@@ -39,6 +39,7 @@ class dooble_favorites_table_view: public QTableView
   void prepare_viewport_icons(void);
 
  protected:
+  void resizeEvent(QResizeEvent *event);
   void scrollContentsBy(int dx, int dy);
 };
 

@@ -74,6 +74,12 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_history_table_widget::resizeEvent(QResizeEvent *event)
+{
+  QTableWidget::resizeEvent(event);
+  prepare_viewport_icons();
+}
+
 void dooble_history_table_widget::scrollContentsBy(int dx, int dy)
 {
   QTableWidget::scrollContentsBy(dx, dy);
