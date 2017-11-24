@@ -35,7 +35,6 @@
 #include "dooble_page.h"
 
 QHash<QUrl, char> dooble_address_widget_completer::s_urls;
-QList<QStandardItem *> dooble_address_widget_completer::s_purged_items;
 QStandardItemModel *dooble_address_widget_completer::s_model = 0;
 
 dooble_address_widget_completer::dooble_address_widget_completer
@@ -47,6 +46,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
       s_model->setSortRole(Qt::UserRole);
     }
 
+  m_model = new QStandardItemModel(this);
   m_popup = new dooble_address_widget_completer_popup(parent);
   m_popup->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   m_popup->horizontalHeader()->setVisible(false);
@@ -69,7 +69,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SLOT(slot_text_edited(const QString &)));
   setCaseSensitivity(Qt::CaseInsensitive);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-  setModel(s_model);
+  setModel(m_model);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
   setWrapAround(false);
@@ -128,9 +128,7 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
     return;
 
   /*
-  ** Prevent duplicates. We can't use the model's findItems()
-  ** as the model may contain a subset of the completer's
-  ** items because of filtering activity.
+  ** Prevent duplicates.
   */
 
   if(s_urls.contains(url))
@@ -152,21 +150,23 @@ void dooble_address_widget_completer::complete(void)
 void dooble_address_widget_completer::complete(const QString &text)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  s_model->blockSignals(true);
-
-  while(!s_purged_items.isEmpty())
-    {
-      s_model->setRowCount(s_model->rowCount() + 1);
-      s_model->setItem(s_model->rowCount() - 1, s_purged_items.takeFirst());
-    }
 
   QList<QStandardItem *> list;
 
   if(text.trimmed().isEmpty())
     {
-      for(int i = 0; i < s_model->rowCount(); i++)
+      int j = qMin(s_model->rowCount(),
+		   static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS));
+
+      for(int i = 0; i < j; i++)
 	if(s_model->item(i, 0))
-	  list << s_model->item(i, 0)->clone();
+	  {
+	    if(s_model->item(i, 0)->icon().isNull())
+	      s_model->item(i, 0)->setIcon
+		(dooble_favicons::icon(s_model->item(i, 0)->text()));
+
+	    list << s_model->item(i, 0);
+	  }
     }
   else
     {
@@ -175,62 +175,40 @@ void dooble_address_widget_completer::complete(const QString &text)
 
       for(int i = 0; i < s_model->rowCount(); i++)
 	if(s_model->item(i, 0))
-	  {
-	    if(s_model->item(i, 0)->text().toLower().contains(c))
-	      map.insert
-		(levenshtein_distance(c, s_model->item(i, 0)->text().toLower()),
-		 s_model->item(i, 0)->clone());
-	    else
-	      s_purged_items << s_model->item(i, 0)->clone();
-	  }
+	  if(s_model->item(i, 0)->text().toLower().contains(c))
+	    map.insert
+	      (levenshtein_distance(c, s_model->item(i, 0)->text().toLower()),
+	       s_model->item(i, 0));
 
-      list << map.values();
+      list << map.values().mid(0, dooble_page::MAXIMUM_HISTORY_ITEMS);
     }
 
-  s_model->clear();
-
-  while(list.size() > 1)
-    {
-      s_model->setRowCount(s_model->rowCount() + 1);
-      s_model->setItem(s_model->rowCount() - 1, list.takeFirst());
-    }
-
-  /*
-  ** Unblock signals on the model and add the last list entry. This little
-  ** trick will allow for a smoother update of the table's contents.
-  */
-
-  s_model->blockSignals(false);
+  m_model->clear();
 
   while(!list.isEmpty())
     {
-      s_model->setRowCount(s_model->rowCount() + 1);
-      s_model->setItem(s_model->rowCount() - 1, list.takeFirst());
+      QStandardItem *item = list.takeFirst();
+
+      if(item)
+	{
+	  if(item->icon().isNull())
+	    item->setIcon(dooble_favicons::icon(item->text()));
+
+	  m_model->setRowCount(m_model->rowCount() + 1);
+	  m_model->setItem(m_model->rowCount() - 1, item->clone());
+	}
     }
 
-  if(s_model->rowCount() > 0)
+  if(m_model->rowCount() > 0)
     {
-      if(s_model->rowCount() > dooble_page::MAXIMUM_HISTORY_ITEMS)
-	m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-      else
-	m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
       m_popup->setMaximumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      s_model->rowCount()) * m_popup->rowHeight(0));
+	      m_model->rowCount()) * m_popup->rowHeight(0));
       m_popup->setMinimumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      s_model->rowCount()) * m_popup->rowHeight(0));
-
-      /*
-      ** The model should only be sorted when the pulldown
-      ** is activated. Otherwise, the Levenshtein algorithm
-      ** loses its potential.
-      */
-
-      if(s_purged_items.isEmpty())
-	s_model->sort(0, Qt::DescendingOrder);
-
+	      m_model->rowCount()) * m_popup->rowHeight(0));
+      m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      m_model->sort(0, Qt::DescendingOrder);
       QCompleter::complete();
     }
   else
@@ -274,8 +252,8 @@ void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
 
 void dooble_address_widget_completer::slot_history_cleared(void)
 {
+  m_model->clear();
   s_model->clear();
-  s_purged_items.clear();
   s_urls.clear();
 }
 

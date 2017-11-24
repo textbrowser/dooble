@@ -30,7 +30,6 @@
 
 #include <QCompleter>
 
-class QStandardItem;
 class QStandardItemModel;
 class dooble_address_widget_completer_popup;
 
@@ -48,9 +47,9 @@ class dooble_address_widget_completer: public QCompleter
   void set_item_icon(const QIcon &icon, const QUrl &url);
 
  private:
+  QStandardItemModel *m_model;
   dooble_address_widget_completer_popup *m_popup;
   static QHash<QUrl, char> s_urls;
-  static QList<QStandardItem *> s_purged_items;
   static QStandardItemModel *s_model;
   int levenshtein_distance(const QString &str1, const QString &str2) const;
 
