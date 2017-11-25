@@ -188,7 +188,7 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 	   "dooble_favicons (url_digest)");
 	query.exec
 	  ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_host ON "
-	   "dooble_favicons (url_host)");
+	   "dooble_favicons (url_host_digest)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_favicons "
