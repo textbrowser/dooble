@@ -65,7 +65,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded() + "/").toBase64());
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(url.host()));
+	  (dooble::s_cryptography->hmac(url.host()).toBase64());
 
 	if(query.exec() && query.next())
 	  if(!query.isNull(0))
@@ -183,6 +183,12 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 		   "temporary INTEGER NOT NULL DEFAULT 1, "
 		   "url_digest TEXT PRIMARY KEY NOT NULL, "
 		   "url_host_digest TEXT NOT NULL)");
+	query.exec
+	  ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_digest ON "
+	   "dooble_favicons (url_digest)");
+	query.exec
+	  ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_host ON "
+	   "dooble_favicons (url_host)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_favicons "
