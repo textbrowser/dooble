@@ -183,7 +183,7 @@ void dooble_address_widget_completer::complete(const QString &text)
   m_model->blockSignals(true);
   m_model->clear();
 
-  while(!list.isEmpty())
+  while(list.size() > 1)
     {
       QStandardItem *item = list.takeFirst();
 
@@ -198,6 +198,20 @@ void dooble_address_widget_completer::complete(const QString &text)
     }
 
   m_model->blockSignals(false);
+
+  while(!list.isEmpty())
+    {
+      QStandardItem *item = list.takeFirst();
+
+      if(item)
+	{
+	  if(item->icon().isNull())
+	    item->setIcon(dooble_favicons::icon(item->text()));
+
+	  m_model->setRowCount(m_model->rowCount() + 1);
+	  m_model->setItem(m_model->rowCount() - 1, item->clone());
+	}
+    }
 
   if(m_model->rowCount() > 0)
     {
