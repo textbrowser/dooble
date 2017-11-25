@@ -29,6 +29,7 @@
 #define dooble_favorites_popup_h
 
 #include <QDialog>
+#include <QTimer>
 
 #include "ui_dooble_favorites_popup.h"
 
@@ -44,6 +45,7 @@ class dooble_favorites_popup: public QDialog
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QTimer m_search_timer;
   Ui_dooble_favorites_popup m_ui;
   void prepare_icons(void);
 
@@ -51,6 +53,8 @@ class dooble_favorites_popup: public QDialog
   void slot_delete_selected(void);
   void slot_double_clicked(const QModelIndex &index);
   void slot_favorites_sorted(void);
+  void slot_find(void);
+  void slot_search_timer_timeout(void);
   void slot_set_favorites_model(void);
   void slot_settings_applied(void);
   void slot_sort(int index);

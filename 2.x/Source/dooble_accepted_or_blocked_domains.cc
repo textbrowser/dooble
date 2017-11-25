@@ -965,6 +965,8 @@ void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)
 
 void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QString text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
@@ -985,4 +987,6 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
 	else
 	  m_ui.table->setRowHidden(i, true);
       }
+
+  QApplication::restoreOverrideCursor();
 }

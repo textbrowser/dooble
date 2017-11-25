@@ -113,6 +113,33 @@
      </attribute>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="dooble_search_widget" name="search">
+       <property name="placeholderText">
+        <string>Search Favorites</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -120,6 +147,11 @@
    <class>dooble_favorites_table_view</class>
    <extends>QTableView</extends>
    <header>dooble_favorites_table_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>dooble_search_widget</class>
+   <extends>QLineEdit</extends>
+   <header>dooble_search_widget.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

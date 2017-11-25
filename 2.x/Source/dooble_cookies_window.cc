@@ -78,14 +78,6 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   else
     statusBar()->setVisible(false);
 
-  connect(dooble::s_application,
-	  SIGNAL(cookies_cleared(void)),
-	  this,
-	  SLOT(slot_cookies_cleared(void)));
-  connect(dooble::s_settings,
-	  SIGNAL(applied(void)),
-	  this,
-	  SLOT(slot_settings_applied(void)));
   connect(&m_domain_filter_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -94,6 +86,14 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_purge_domains_timer_timeout(void)));
+  connect(dooble::s_application,
+	  SIGNAL(cookies_cleared(void)),
+	  this,
+	  SLOT(slot_cookies_cleared(void)));
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -532,6 +532,8 @@ void dooble_cookies_window::slot_delete_shown(void)
 
 void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QString text(m_ui.domain_filter->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
@@ -549,6 +551,7 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
     }
 
   m_ui.tree->resizeColumnToContents(0);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_cookies_window::slot_find(void)

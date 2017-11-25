@@ -180,6 +180,7 @@ void dooble_address_widget_completer::complete(const QString &text)
       list << map.values().mid(0, dooble_page::MAXIMUM_HISTORY_ITEMS);
     }
 
+  m_model->blockSignals(true);
   m_model->clear();
 
   while(!list.isEmpty())
@@ -195,6 +196,8 @@ void dooble_address_widget_completer::complete(const QString &text)
 	  m_model->setItem(m_model->rowCount() - 1, item->clone());
 	}
     }
+
+  m_model->blockSignals(false);
 
   if(m_model->rowCount() > 0)
     {
