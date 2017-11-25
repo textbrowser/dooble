@@ -43,6 +43,10 @@ dooble_history::dooble_history(void):QObject()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_purge_timer_timeout(void)));
+  connect(this,
+	  SIGNAL(populated_favorites(const QListVectorByteArray &)),
+	  this,
+	  SLOT(slot_populated_favorites(const QListVectorByteArray &)));
   m_favorites_model = new QStandardItemModel(this);
   m_favorites_model->setHorizontalHeaderLabels
     (QStringList() << tr("Title")
@@ -99,8 +103,139 @@ bool dooble_history::is_favorite(const QUrl &url) const
 void dooble_history::abort(void)
 {
   m_interrupt.store(1);
+  m_populate_future.cancel();
+  m_populate_future.waitForFinished();
   m_purge_future.cancel();
   m_purge_future.waitForFinished();
+}
+
+void dooble_history::populate(const QByteArray &authentication_key,
+			      const QByteArray &encryption_key)
+{
+  QListVectorByteArray favorites;
+  QString database_name(QString("dooble_history_%1").
+			arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+	dooble_cryptography cryptography
+	  (authentication_key,
+	   encryption_key,
+	   dooble_settings::setting("block_cipher_type").toString());
+	int days = dooble_settings::setting("browsing_history_days").toInt();
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT "
+		      "favorite_digest, "  // 0
+		      "last_visited, "     // 1
+		      "number_of_visits, " // 2
+		      "title, "            // 3
+		      "url, "              // 4
+		      "url_digest "        // 5
+		      "FROM dooble_history"))
+	  while(query.next())
+	    {
+	      if(m_populate_future.isCanceled())
+		break;
+
+	      QByteArray last_visited
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      last_visited = cryptography.mac_then_decrypt
+		(last_visited);
+
+	      if(last_visited.isEmpty())
+		continue;
+
+	      bool is_favorite = dooble_cryptography::memcmp
+		(cryptography.hmac(QByteArray("true")).toBase64(),
+		 query.value(0).toByteArray());
+
+	      if(!is_favorite)
+		{
+		  QDateTime dateTime
+		    (QDateTime::
+		     fromString(last_visited.constData(), Qt::ISODate));
+		  QDateTime now(QDateTime::currentDateTime());
+
+		  if(dateTime.daysTo(now) >= qAbs(days))
+		    /*
+		    ** Ignore an expired entry, unless the entry is a favorite.
+		    */
+
+		    continue;
+		}
+
+	      QByteArray number_of_visits
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
+
+	      number_of_visits = cryptography.mac_then_decrypt
+		(number_of_visits);
+
+	      if(number_of_visits.isEmpty())
+		continue;
+
+	      QByteArray title
+		(QByteArray::fromBase64(query.value(3).toByteArray()));
+
+	      title = cryptography.mac_then_decrypt(title);
+
+	      if(title.isEmpty())
+		continue;
+
+	      QByteArray url
+		(QByteArray::fromBase64(query.value(4).toByteArray()));
+
+	      url = cryptography.mac_then_decrypt(url);
+
+	      if(url.isEmpty())
+		continue;
+
+	      QHash<HistoryItem, QVariant> hash;
+
+	      hash[FAVORITE] = is_favorite;
+	      hash[LAST_VISITED] = QDateTime::fromString
+		(last_visited.constData(), Qt::ISODate);
+	      hash[NUMBER_OF_VISITS] = qMax
+		(1ULL, number_of_visits.toULongLong());
+	      hash[TITLE] = title.constData();
+	      hash[URL] = QUrl::fromEncoded(url);
+	      hash[URL_DIGEST] = QByteArray::fromBase64
+		(query.value(5).toByteArray());
+
+	      if(is_favorite)
+		{
+		  QVector<QByteArray> vector;
+
+		  vector << title << url << last_visited << number_of_visits;
+		  favorites << vector;
+		}
+
+	      QWriteLocker locker(&m_history_mutex);
+
+	      m_history[hash[URL].toUrl()] = hash;
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+
+  if(!m_populate_future.isCanceled())
+    {
+      emit populated();
+      emit populated_favorites(favorites);
+    }
 }
 
 void dooble_history::purge(const QByteArray &authentication_key,
@@ -189,7 +324,6 @@ void dooble_history::purge_favorites(void)
       if(!item)
 	continue;
 
-      QHash<HistoryItem, QVariant> hash;
       QWriteLocker locker(&m_history_mutex);
 
       if(m_history.contains(item->text()))
@@ -239,6 +373,9 @@ void dooble_history::purge_favorites(void)
 
 void dooble_history::purge_history(void)
 {
+  m_populate_future.cancel();
+  m_populate_future.waitForFinished();
+
   {
     QHash<QUrl, QHash<HistoryItem, QVariant> > hash;
     QWriteLocker locker(&m_history_mutex);
@@ -805,6 +942,8 @@ void dooble_history::slot_populate(void)
       emit populated();
       return;
     }
+  else if(m_populate_future.isRunning())
+    return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_favorites_model->removeRows(0, m_favorites_model->rowCount());
@@ -815,155 +954,69 @@ void dooble_history::slot_populate(void)
     m_history.clear();
   }
 
-  QString database_name(QString("dooble_history_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_history.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-	int days = dooble_settings::setting("browsing_history_days").toInt();
-
-	query.setForwardOnly(true);
-
-	if(query.exec("SELECT "
-		      "favorite_digest, "  // 0
-		      "last_visited, "     // 1
-		      "number_of_visits, " // 2
-		      "title, "            // 3
-		      "url, "              // 4
-		      "url_digest "        // 5
-		      "FROM dooble_history"))
-	  while(query.next())
-	    {
-	      QByteArray last_visited
-		(QByteArray::fromBase64(query.value(1).toByteArray()));
-
-	      last_visited = dooble::s_cryptography->mac_then_decrypt
-		(last_visited);
-
-	      if(last_visited.isEmpty())
-		continue;
-
-	      bool is_favorite = dooble_cryptography::memcmp
-		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
-		 query.value(0).toByteArray());
-
-	      if(!is_favorite)
-		{
-		  QDateTime dateTime
-		    (QDateTime::
-		     fromString(last_visited.constData(), Qt::ISODate));
-		  QDateTime now(QDateTime::currentDateTime());
-
-		  if(dateTime.daysTo(now) >= qAbs(days))
-		    /*
-		    ** Ignore an expired entry, unless the entry is a favorite.
-		    */
-
-		    continue;
-		}
-
-	      QByteArray number_of_visits
-		(QByteArray::fromBase64(query.value(2).toByteArray()));
-
-	      number_of_visits = dooble::s_cryptography->mac_then_decrypt
-		(number_of_visits);
-
-	      if(number_of_visits.isEmpty())
-		continue;
-
-	      QByteArray title
-		(QByteArray::fromBase64(query.value(3).toByteArray()));
-
-	      title = dooble::s_cryptography->mac_then_decrypt(title);
-
-	      if(title.isEmpty())
-		continue;
-
-	      QByteArray url
-		(QByteArray::fromBase64(query.value(4).toByteArray()));
-
-	      url = dooble::s_cryptography->mac_then_decrypt(url);
-
-	      if(url.isEmpty())
-		continue;
-
-	      QHash<HistoryItem, QVariant> hash;
-
-	      hash[FAVORITE] = is_favorite;
-	      hash[LAST_VISITED] = QDateTime::fromString
-		(last_visited.constData(), Qt::ISODate);
-	      hash[NUMBER_OF_VISITS] = qMax
-		(1ULL, number_of_visits.toULongLong());
-	      hash[TITLE] = title.constData();
-	      hash[URL] = QUrl::fromEncoded(url);
-	      hash[URL_DIGEST] = QByteArray::fromBase64
-		(query.value(5).toByteArray());
-
-	      if(is_favorite)
-		{
-		  QList<QStandardItem *> list;
-
-		  for(int i = 0; i < m_favorites_model->columnCount(); i++)
-		    {
-		      QStandardItem *item = new QStandardItem();
-
-		      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-
-		      switch(i)
-			{
-			case 0:
-			  {
-			    item->setData(url);
-			    item->setText(title);
-			    item->setToolTip(item->text());
-			    break;
-			  }
-			case 1:
-			  {
-			    item->setText(url);
-			    item->setToolTip(item->text());
-			    break;
-			  }
-			case 2:
-			  {
-			    item->setText(last_visited);
-			    break;
-			  }
-			case 3:
-			  {
-			    item->setText
-			      (number_of_visits.rightJustified(16, '0'));
-			    break;
-			  }
-			}
-
-		      list << item;
-		    }
-
-		  if(!list.isEmpty())
-		    m_favorites_model->appendRow(list);
-		}
-
-	      QWriteLocker locker(&m_history_mutex);
-
-	      m_history[hash[URL].toUrl()] = hash;
-	    }
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
-  emit populated();
+  m_populate_future = QtConcurrent::run
+    (this,
+     &dooble_history::populate,
+     dooble::s_cryptography->keys().first,
+     dooble::s_cryptography->keys().second);
+}
+
+void dooble_history::slot_populated_favorites
+(const QListVectorByteArray &favorites)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < favorites.size(); i++)
+    {
+      QByteArray last_visited(favorites.at(i).value(2));
+      QByteArray number_of_visits(favorites.at(i).value(3));
+      QByteArray title(favorites.at(i).value(0));
+      QByteArray url(favorites.at(i).value(1));
+      QList<QStandardItem *> list;
+
+      for(int j = 0; j < m_favorites_model->columnCount(); j++)
+	{
+	  QStandardItem *item = new QStandardItem();
+
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+	  switch(j)
+	    {
+	    case 0:
+	      {
+		item->setData(url);
+		item->setText(title);
+		item->setToolTip(item->text());
+		break;
+	      }
+	    case 1:
+	      {
+		item->setText(url);
+		item->setToolTip(item->text());
+		break;
+	      }
+	    case 2:
+	      {
+		item->setText(last_visited);
+		break;
+	      }
+	    case 3:
+	      {
+		item->setText
+		  (number_of_visits.rightJustified(16, '0'));
+		break;
+	      }
+	    }
+
+	  list << item;
+	}
+
+      if(!list.isEmpty())
+	m_favorites_model->appendRow(list);
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history::slot_purge_timer_timeout(void)

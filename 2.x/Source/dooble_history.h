@@ -35,6 +35,7 @@
 #include <QWebEngineHistoryItem>
 
 class QStandardItemModel;
+typedef QList<QVector<QByteArray> > QListVectorByteArray;
 
 class dooble_history: public QObject
 {
@@ -71,18 +72,22 @@ class dooble_history: public QObject
 
  private:
   QAtomicInteger<short> m_interrupt;
+  QFuture<void> m_populate_future;
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<HistoryItem, QVariant> > m_history;
   QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;
   static QAtomicInteger<quintptr> s_db_id;
+  void populate(const QByteArray &authentication_key,
+		const QByteArray &encryption_key);
   void purge(const QByteArray &authentication_key,
 	     const QByteArray &encryption_key);
   void update_favorite(const QHash<HistoryItem, QVariant> &hash);
 
  private slots:
   void slot_populate(void);
+  void slot_populated_favorites(const QListVectorByteArray &favorites);
   void slot_purge_timer_timeout(void);
 
  signals:
@@ -90,6 +95,7 @@ class dooble_history: public QObject
   void item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
   void new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
   void populated(void);
+  void populated_favorites(const QListVectorByteArray &favorites);
 };
 
 #endif
