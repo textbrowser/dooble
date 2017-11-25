@@ -42,7 +42,6 @@ class dooble_address_widget_completer: public QCompleter
   ~dooble_address_widget_completer();
   static void remove_item(const QUrl &url);
   void add_item(const QIcon &icon, const QUrl &url);
-  void complete(const QString &text);
   void complete(void);
   void set_item_icon(const QIcon &icon, const QUrl &url);
 
@@ -52,6 +51,7 @@ class dooble_address_widget_completer: public QCompleter
   static QHash<QUrl, char> s_urls;
   static QStandardItemModel *s_model;
   int levenshtein_distance(const QString &str1, const QString &str2) const;
+  void complete(const QString &text);
 
  private slots:
   void slot_clicked(const QModelIndex &index);
