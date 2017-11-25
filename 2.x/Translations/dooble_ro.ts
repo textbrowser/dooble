@@ -59,8 +59,8 @@
     <name>dooble</name>
     <message>
         <location filename="../UI/dooble.ui" line="14"/>
-        <location filename="../Source/dooble.cc" line="2092"/>
-        <location filename="../Source/dooble.cc" line="2189"/>
+        <location filename="../Source/dooble.cc" line="2094"/>
+        <location filename="../Source/dooble.cc" line="2191"/>
         <source>Dooble</source>
         <translation type="unfinished"></translation>
     </message>
@@ -338,8 +338,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2094"/>
-        <location filename="../Source/dooble.cc" line="2191"/>
+        <location filename="../Source/dooble.cc" line="2096"/>
+        <location filename="../Source/dooble.cc" line="2193"/>
         <source>%1 - Dooble</source>
         <translation type="unfinished"></translation>
     </message>
@@ -571,27 +571,27 @@
 <context>
     <name>dooble_address_widget</name>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="54"/>
+        <location filename="../Source/dooble_address_widget.cc" line="55"/>
         <source>Favorite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="66"/>
+        <location filename="../Source/dooble_address_widget.cc" line="67"/>
         <source>Site Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="77"/>
+        <location filename="../Source/dooble_address_widget.cc" line="78"/>
         <source>Show History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="407"/>
+        <location filename="../Source/dooble_address_widget.cc" line="412"/>
         <source>Certificate exception accepted for this site...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="411"/>
+        <location filename="../Source/dooble_address_widget.cc" line="416"/>
         <source>Show Site Coo&amp;kies...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -713,13 +713,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="221"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="224"/>
         <source>A security exception was accepted for %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="224"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="228"/>
         <source>A security exception was accepted for this site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="231"/>
+        <source>Expecting an HTTPS scheme.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -903,7 +908,7 @@
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="571"/>
-        <location filename="../Source/dooble_cookies_window.cc" line="717"/>
+        <location filename="../Source/dooble_cookies_window.cc" line="729"/>
         <source>&amp;All Shown Checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -933,7 +938,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_cookies_window.cc" line="717"/>
+        <location filename="../Source/dooble_cookies_window.cc" line="729"/>
         <source>&amp;All Shown Unchecked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1092,26 +1097,36 @@
         <source>Delete Selected Favorite</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../UI/dooble_favorites_popup.ui" line="121"/>
+        <source>Search Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_favorites_popup.cc" line="106"/>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_history</name>
     <message>
-        <location filename="../Source/dooble_history.cc" line="48"/>
+        <location filename="../Source/dooble_history.cc" line="52"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history.cc" line="49"/>
+        <location filename="../Source/dooble_history.cc" line="53"/>
         <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history.cc" line="50"/>
+        <location filename="../Source/dooble_history.cc" line="54"/>
         <source>Last Visited</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history.cc" line="51"/>
+        <location filename="../Source/dooble_history.cc" line="55"/>
         <source>Number of Visits</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1179,18 +1194,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="592"/>
-        <location filename="../Source/dooble_history_window.cc" line="629"/>
+        <location filename="../Source/dooble_history_window.cc" line="607"/>
+        <location filename="../Source/dooble_history_window.cc" line="644"/>
         <source>Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="896"/>
+        <location filename="../Source/dooble_history_window.cc" line="911"/>
         <source>&amp;Copy Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="898"/>
+        <location filename="../Source/dooble_history_window.cc" line="913"/>
         <source>&amp;Delete Page(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2408,17 +2423,17 @@ Domains</source>
 <context>
     <name>dooble_web_engine_page</name>
     <message>
-        <location filename="../Source/dooble_web_engine_page.cc" line="148"/>
+        <location filename="../Source/dooble_web_engine_page.cc" line="149"/>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the temporary exception.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_page.cc" line="158"/>
+        <location filename="../Source/dooble_web_engine_page.cc" line="159"/>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;Please accept or decline the permanent exception.&lt;br&gt;&lt;br&gt;Permanent exceptions may be removed later.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_page.cc" line="207"/>
+        <location filename="../Source/dooble_web_engine_page.cc" line="208"/>
         <source>&lt;html&gt;A certificate error occurred while accessing the secure site %1. &lt;b&gt;%2&lt;/b&gt; Certificate errors may indicate that the server that you&apos;re attempting to connect to is not trustworthy.&lt;br&gt;&lt;br&gt;An exception may not be set because of the severity of the certificate error.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>

@@ -629,6 +629,10 @@ Dooble ist open source Software.
         <source>Remove Permanent Exception</source>
         <translation>Entferne die dauerhafte Ausnahme</translation>
     </message>
+    <message>
+        <source>Expecting an HTTPS scheme.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_certificate_exceptions_widget</name>
@@ -942,6 +946,14 @@ Dooble ist open source Software.
     <message>
         <source>Delete Selected Favorite</source>
         <translation>Lösche ausgewählten Favoriten</translation>
+    </message>
+    <message>
+        <source>Search Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
