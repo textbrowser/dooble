@@ -50,20 +50,26 @@ dooble_address_widget_completer::dooble_address_widget_completer
   m_popup->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_popup->setSelectionMode(QAbstractItemView::SingleSelection);
   m_popup->setShowGrid(false);
-  m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_popup->verticalHeader()->setVisible(false);
+  m_text_edited_timer.setSingleShot(true);
+  m_text_edited_timer.setInterval(150);
+  connect(&m_text_edited_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_text_edited_timeout(void)));
   connect(dooble::s_application,
 	  SIGNAL(history_cleared(void)),
 	  this,
 	  SLOT(slot_history_cleared(void)));
+  connect(qobject_cast<QLineEdit *> (parent),
+	  SIGNAL(textEdited(const QString &)),
+	  &m_text_edited_timer,
+	  SLOT(start(void)));
   connect(m_popup,
 	  SIGNAL(clicked(const QModelIndex &)),
 	  this,
 	  SLOT(slot_clicked(const QModelIndex &)));
-  connect(qobject_cast<QLineEdit *> (parent),
-	  SIGNAL(textEdited(const QString &)),
-	  this,
-	  SLOT(slot_text_edited(const QString &)));
   setCaseSensitivity(Qt::CaseInsensitive);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
   setModel(m_model);
@@ -180,24 +186,7 @@ void dooble_address_widget_completer::complete(const QString &text)
       list << map.values().mid(0, dooble_page::MAXIMUM_HISTORY_ITEMS);
     }
 
-  m_model->blockSignals(true);
   m_model->clear();
-
-  while(list.size() > 1)
-    {
-      QStandardItem *item = list.takeFirst();
-
-      if(item)
-	{
-	  if(item->icon().isNull())
-	    item->setIcon(dooble_favicons::icon(item->text()));
-
-	  m_model->setRowCount(m_model->rowCount() + 1);
-	  m_model->setItem(m_model->rowCount() - 1, item->clone());
-	}
-    }
-
-  m_model->blockSignals(false);
 
   while(!list.isEmpty())
     {
@@ -221,7 +210,6 @@ void dooble_address_widget_completer::complete(const QString &text)
       m_popup->setMinimumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
 	      m_model->rowCount()) * m_popup->rowHeight(0));
-      m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       QCompleter::complete();
     }
   else
@@ -270,8 +258,13 @@ void dooble_address_widget_completer::slot_history_cleared(void)
   s_urls.clear();
 }
 
-void dooble_address_widget_completer::slot_text_edited(const QString &text)
+void dooble_address_widget_completer::slot_text_edited_timeout(void)
 {
+  if(!parent())
+    return;
+
+  QString text(qobject_cast<QLineEdit *> (parent())->text());
+
   if(text.trimmed().isEmpty())
     m_popup->setVisible(false);
   else

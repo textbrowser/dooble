@@ -29,6 +29,7 @@
 #define dooble_address_widget_completer_h
 
 #include <QCompleter>
+#include <QTimer>
 
 class QStandardItemModel;
 class dooble_address_widget_completer_popup;
@@ -47,6 +48,7 @@ class dooble_address_widget_completer: public QCompleter
 
  private:
   QStandardItemModel *m_model;
+  QTimer m_text_edited_timer;
   dooble_address_widget_completer_popup *m_popup;
   static QHash<QUrl, char> s_urls;
   static QStandardItemModel *s_model;
@@ -56,7 +58,7 @@ class dooble_address_widget_completer: public QCompleter
  private slots:
   void slot_clicked(const QModelIndex &index);
   void slot_history_cleared(void);
-  void slot_text_edited(const QString &text);
+  void slot_text_edited_timeout(void);
 };
 
 #endif
