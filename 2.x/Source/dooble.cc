@@ -892,6 +892,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SLOT(slot_title_changed(const QString &)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(windowCloseRequested(void)),
+	  this,
+	  SLOT(slot_window_close_requested(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  page,
@@ -2197,4 +2203,23 @@ void dooble::slot_title_changed(const QString &title)
 
   m_ui.tab->setTabText(m_ui.tab->indexOf(page), text);
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
+}
+
+void dooble::slot_window_close_requested(void)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(!page)
+    return;
+
+  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+
+  if(m_ui.tab->count() <= 1)
+    close();
+  else
+    {
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
+      page->deleteLater();
+      prepare_tab_shortcuts();
+    }
 }

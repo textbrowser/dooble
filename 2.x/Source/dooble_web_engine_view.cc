@@ -52,6 +52,10 @@ dooble_web_engine_view::dooble_web_engine_view
 	  SIGNAL(certificate_exception_accepted(const QUrl &)),
 	  this,
 	  SLOT(slot_certificate_exception_accepted(const QUrl &)));
+  connect(m_page,
+	  SIGNAL(windowCloseRequested(void)),
+	  this,
+	  SIGNAL(windowCloseRequested(void)));
 
   if(QWebEngineProfile::defaultProfile() != m_page->profile())
     connect(m_page->profile(),

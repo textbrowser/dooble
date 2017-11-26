@@ -71,6 +71,7 @@ class dooble_web_engine_view: public QWebEngineView
   void open_link_in_new_private_window(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);
   void open_link_in_new_window(const QUrl &url);
+  void windowCloseRequested(void);
 };
 
 #endif

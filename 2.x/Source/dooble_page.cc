@@ -273,6 +273,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(urlChanged(const QUrl &)),
 	  this,
 	  SLOT(slot_url_changed(const QUrl &)));
+  connect(m_view,
+	  SIGNAL(windowCloseRequested(void)),
+	  this,
+	  SIGNAL(windowCloseRequested(void)));
   connect(m_view->page(),
 	  SIGNAL(authenticationRequired(const QUrl &, QAuthenticator *)),
 	  this,

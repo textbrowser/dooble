@@ -37,8 +37,8 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
-#define DOOBLE_DATE_VERSION_STRING "2017.11.25"
-#define DOOBLE_VERSION_STRING "2.1.1"
+#define DOOBLE_DATE_VERSION_STRING "2017.12.12"
+#define DOOBLE_VERSION_STRING "2.1.2"
 
 class QWebEngineDownloadItem;
 class QWebEngineProfile;
@@ -184,6 +184,7 @@ class dooble: public QMainWindow
   void slot_tab_widget_shortcut_activated(void);
   void slot_tabs_menu_button_clicked(void);
   void slot_title_changed(const QString &title);
+  void slot_window_close_requested(void);
 
  signals:
   void dooble_credentials_authenticated(bool state);
