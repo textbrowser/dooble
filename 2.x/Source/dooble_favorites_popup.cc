@@ -188,9 +188,9 @@ void dooble_favorites_popup::slot_search_timer_timeout(void)
 
 	if(!item1 || !item2 || !item3)
 	  m_ui.view->setRowHidden(i, false);
-	else if(item1->text().contains(text) ||
-		item2->text().contains(text) ||
-		item3->text().contains(text))
+	else if(item1->text().toLower().contains(text) ||
+		item2->text().toLower().contains(text) ||
+		item3->text().toLower().contains(text))
 	  m_ui.view->setRowHidden(i, false);
 	else
 	  m_ui.view->setRowHidden(i, true);
