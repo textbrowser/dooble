@@ -105,6 +105,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  dooble::s_history_window,
 	  SLOT(slot_favorite_changed(const QUrl &, bool)));
   connect(this,
+	  SIGNAL(favorite_changed(const QUrl &, bool)),
+	  this,
+	  SLOT(slot_favorite_changed(const QUrl &, bool)));
+  connect(this,
 	  SIGNAL(textEdited(const QString &)),
 	  this,
 	  SLOT(slot_text_edited(const QString &)));
