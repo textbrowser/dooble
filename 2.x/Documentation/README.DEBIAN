@@ -12,6 +12,7 @@ sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5Qml.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5Quick.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5QuickWidgets.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5Sql.so.5 /usr/local/dooble/Lib/.
+sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5Svg.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5WebChannel.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5WebEngineCore.so.5 /usr/local/dooble/Lib/.
 sudo cp -p ~/Qt/5.9.3/gcc_64/lib/libQt5WebEngineWidgets.so.5 /usr/local/dooble/Lib/.

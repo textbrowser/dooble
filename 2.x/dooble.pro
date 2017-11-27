@@ -216,6 +216,12 @@ QMAKE_EXTRA_COMPILERS += dictoolbuild
 QMAKE_EXTRA_TARGETS = doxygen purge
 
 macx {
+} else:win32 {
+} else {
+QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib
+}
+
+macx {
 ICON            = Icons/Logo/dooble.icns
 }
 
