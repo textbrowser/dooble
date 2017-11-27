@@ -988,14 +988,14 @@ void dooble_history::slot_populated_favorites
 	    {
 	    case 0:
 	      {
-		item->setData(url);
+		item->setData(QUrl::fromEncoded(url));
 		item->setText(title);
 		item->setToolTip(item->text());
 		break;
 	      }
 	    case 1:
 	      {
-		item->setText(url);
+		item->setText(QUrl::fromEncoded(url).toString());
 		item->setToolTip(item->text());
 		break;
 	      }

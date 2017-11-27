@@ -76,7 +76,7 @@ void dooble_favorites_table_view::prepare_viewport_icons(void)
       else if(!item->icon().isNull())
 	continue;
       else
-	item->setIcon(dooble_favicons::icon(QUrl(item->data().toByteArray())));
+	item->setIcon(dooble_favicons::icon(item->data().toUrl()));
     }
 
   QApplication::restoreOverrideCursor();
