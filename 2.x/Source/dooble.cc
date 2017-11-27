@@ -344,7 +344,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
 
-  if(!url.isEmpty())
+  if(!url.isEmpty() && url.isValid())
     page->load(url);
 
   prepare_tab_shortcuts();
@@ -671,7 +671,10 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(title.isEmpty())
     title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
 
-  m_ui.tab->addTab(page, tr("New Tab"));
+  if(title.isEmpty())
+    title = tr("New Tab");
+
+  m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
 
