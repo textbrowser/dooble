@@ -611,6 +611,10 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
   if(m_history.contains(url))
     {
       hash = m_history.value(url);
+
+      if(hash.value(FAVICON).isNull())
+	hash[FAVICON] = dooble_favicons::icon(url);
+
       hash[FAVORITE] = state;
       m_history[url] = hash;
     }
@@ -787,8 +791,7 @@ void dooble_history::save_item(const QIcon &icon,
       hash[URL] = item.url();
 
       if(dooble::s_cryptography)
-	hash[URL_DIGEST] = dooble::s_cryptography->hmac
-	  (item.url().toEncoded());
+	hash[URL_DIGEST] = dooble::s_cryptography->hmac(item.url().toEncoded());
 
       m_history[item.url()] = hash;
       locker.unlock();
