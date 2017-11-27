@@ -918,7 +918,12 @@ void dooble_page::slot_always_allow_javascript_popup(void)
 	emit create_dialog(view);
     }
 
-  emit javascript_allow_popup_exception(url());
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action && action->property("url").isValid())
+    emit javascript_allow_popup_exception(action->property("url").toUrl());
+  else
+    emit javascript_allow_popup_exception(url());
 }
 
 void dooble_page::slot_authentication_required(const QUrl &url,
@@ -1119,9 +1124,15 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 void dooble_page::slot_javascript_allow_popup_exception(void)
 {
   QMenu menu(this);
+  QUrl url(QUrl::fromUserInput(this->url().host()));
 
+  url.setScheme(this->url().scheme());
   menu.addAction
     (tr("Always"), this, SLOT(slot_always_allow_javascript_popup(void)));
+  menu.addAction
+    (tr("Always from %1.").arg(url.toString()),
+     this,
+     SLOT(slot_always_allow_javascript_popup(void)))->setProperty("url", url);
   menu.addAction
     (tr("Now Only"), this, SLOT(slot_only_now_allow_javascript_popup(void)));
   menu.addSeparator();
