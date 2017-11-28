@@ -133,6 +133,7 @@ class dooble: public QMainWindow
   void prepare_tab_icons(void);
   void prepare_tab_shortcuts(void);
   void print(dooble_page *page);
+  void remove_page_connections(dooble_page *page);
 
  private slots:
   void slot_about_to_hide_main_menu(void);

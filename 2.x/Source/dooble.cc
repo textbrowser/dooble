@@ -722,11 +722,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SLOT(slot_create_window(dooble_web_engine_view *)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
-
-  /*
-  ** Private windows.
-  */
-
   connect(page,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  s_application,
@@ -1194,6 +1189,145 @@ void dooble::print_current_page(void)
   print(current_page());
 }
 
+void dooble::remove_page_connections(dooble_page *page)
+{
+  if(!page)
+    return;
+
+  disconnect(page,
+	     SIGNAL(authenticate(void)),
+	     this,
+	     SLOT(slot_authenticate(void)));
+  disconnect(page,
+	     SIGNAL(close_tab(void)),
+	     this,
+	     SLOT(slot_close_tab(void)));
+  disconnect(page,
+	     SIGNAL(create_dialog(dooble_web_engine_view *)),
+	     this,
+	     SLOT(slot_create_dialog(dooble_web_engine_view *)));
+  disconnect(page,
+	     SIGNAL(create_tab(dooble_web_engine_view *)),
+	     this,
+	     SLOT(slot_create_tab(dooble_web_engine_view *)));
+  disconnect(page,
+	     SIGNAL(create_window(dooble_web_engine_view *)),
+	     this,
+	     SLOT(slot_create_window(dooble_web_engine_view *)));
+  disconnect(page,
+	     SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	     this,
+	     SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  disconnect(page,
+	     SIGNAL(iconChanged(const QIcon &)),
+	     this,
+	     SLOT(slot_icon_changed(const QIcon &)));
+  disconnect(page,
+	     SIGNAL(loadFinished(bool)),
+	     m_ui.tab,
+	     SLOT(slot_load_finished(void)));
+  disconnect(page,
+	     SIGNAL(loadStarted(void)),
+	     m_ui.tab,
+	     SLOT(slot_load_started(void)));
+  disconnect(page,
+	     SIGNAL(new_private_window(void)),
+	     this,
+	     SLOT(slot_new_private_window(void)));
+  disconnect(page,
+	     SIGNAL(new_tab(void)),
+	     this,
+	     SLOT(slot_new_tab(void)));
+  disconnect(page,
+	     SIGNAL(new_window(void)),
+	     this,
+	     SLOT(slot_new_window(void)));
+  disconnect(page,
+	     SIGNAL(open_link_in_new_private_window(const QUrl &)),
+	     this,
+	     SLOT(slot_open_link_in_new_private_window(const QUrl &)));
+  disconnect(page,
+	     SIGNAL(open_link_in_new_tab(const QUrl &)),
+	     this,
+	     SLOT(slot_open_link_in_new_tab(const QUrl &)));
+  disconnect(page,
+	     SIGNAL(open_link_in_new_window(const QUrl &)),
+	     this,
+	     SLOT(slot_open_link_in_new_window(const QUrl &)));
+  disconnect(page,
+	     SIGNAL(print(void)),
+	     this,
+	     SLOT(slot_print(void)));
+  disconnect(page,
+	     SIGNAL(print_preview(void)),
+	     this,
+	     SLOT(slot_print_preview(void)));
+  disconnect(page,
+	     SIGNAL(quit_dooble(void)),
+	     this,
+	     SLOT(slot_quit_dooble(void)));
+  disconnect(page,
+	     SIGNAL(save(void)),
+	     this,
+	     SLOT(slot_save(void)));
+  disconnect(page,
+	     SIGNAL(show_about(void)),
+	     this,
+	     SLOT(slot_show_about(void)));
+  disconnect(page,
+	     SIGNAL(show_accepted_or_blocked_domains(void)),
+	     this,
+	     SLOT(slot_show_accepted_or_blocked_domains(void)));
+  disconnect(page,
+	     SIGNAL(show_certificate_exceptions(void)),
+	     this,
+	     SLOT(slot_show_certificate_exceptions(void)));
+  disconnect(page,
+	     SIGNAL(show_clear_items(void)),
+	     this,
+	     SLOT(slot_show_clear_items(void)));
+  disconnect(page,
+	     SIGNAL(show_cookies(void)),
+	     this,
+	     SLOT(slot_show_cookies(void)));
+  disconnect(page,
+	     SIGNAL(show_documentation(void)),
+	     this,
+	     SLOT(slot_show_documentation(void)));
+  disconnect(page,
+	     SIGNAL(show_downloads(void)),
+	     this,
+	     SLOT(slot_show_downloads(void)));
+  disconnect(page,
+	     SIGNAL(show_favorites(void)),
+	     this,
+	     SLOT(slot_show_favorites(void)));
+  disconnect(page,
+	     SIGNAL(show_full_screen(void)),
+	     this,
+	     SLOT(slot_show_full_screen(void)));
+  disconnect(page,
+	     SIGNAL(show_history(void)),
+	     this,
+	     SLOT(slot_show_history(void)));
+  disconnect(page,
+	     SIGNAL(show_settings(void)),
+	     this,
+	     SLOT(slot_show_settings(void)));
+  disconnect(page,
+	     SIGNAL(show_settings_panel(dooble_settings::Panels)),
+	     this,
+	     SLOT(slot_show_settings_panel(dooble_settings::Panels)));
+  disconnect(page,
+	     SIGNAL(titleChanged(const QString &)),
+	     this,
+	     SLOT(slot_title_changed(const QString &)));
+  disconnect(page,
+	     SIGNAL(windowCloseRequested(void)),
+	     this,
+	     SLOT(slot_window_close_requested(void)));
+}
+
 void dooble::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
@@ -1585,11 +1719,12 @@ void dooble::slot_open_tab_as_new_window(int index)
 
   if(page)
     {
+      remove_page_connections(page);
+
       dooble *d = new dooble(page);
 
       d->show();
       m_ui.tab->removeTab(m_ui.tab->indexOf(page));
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
     }
   else
     {
@@ -1597,9 +1732,9 @@ void dooble::slot_open_tab_as_new_window(int index)
 
       d->show();
       m_ui.tab->removeTab(index);
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
     }
 
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
   prepare_tab_shortcuts();
 }
 
