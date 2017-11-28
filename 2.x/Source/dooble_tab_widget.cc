@@ -279,6 +279,10 @@ void dooble_tab_widget::prepare_theme_colors(void)
   s_theme_colors["blue-grey-hovered-tab-color"] = "#c5cae9";
   s_theme_colors["blue-grey-selected-tab-color"] = "#7986cb";
   s_theme_colors["blue-grey-tabbar-background-color"] = "#90a4ae";
+  s_theme_colors["dark-corner-widget-background-color"] = "#424242";
+  s_theme_colors["dark-hovered-tab-color"] = "#616161";
+  s_theme_colors["dark-selected-tab-color"] = "#757575";
+  s_theme_colors["dark-tabbar-background-color"] = "#424242";
   s_theme_colors["indigo-corner-widget-background-color"] = "#5c6bc0";
   s_theme_colors["indigo-hovered-tab-color"] = "#b388ff";
   s_theme_colors["indigo-selected-tab-color"] = "#536dfe";

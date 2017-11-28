@@ -793,8 +793,8 @@ void dooble_settings::restore(void)
   else
     m_ui.theme_color->setCurrentIndex
       (qBound(0,
-	s_settings.value("theme_color_index", 0).toInt(),
-	m_ui.theme_color->count() - 1));
+	      s_settings.value("theme_color_index", 0).toInt(),
+	      m_ui.theme_color->count() - 1));
 
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
@@ -816,10 +816,26 @@ void dooble_settings::restore(void)
 
   s_settings["icon_set"] = "Material Design";
 
-  if(m_ui.theme_color->currentIndex() == 0)
-    s_settings["theme_color"] = "blue-grey";
-  else
-    s_settings["theme_color"] = "indigo";
+  switch(m_ui.theme_color->currentIndex())
+    {
+    case 0:
+      {
+	s_settings["theme_color"] = "blue-grey";
+	break;
+      }
+    case 1:
+      {
+	s_settings["theme_color"] = "dark";
+	break;
+      }
+    case 2:
+      {
+	s_settings["theme_color"] = "indigo";
+	break;
+      }
+    default:
+      s_settings["theme_color"] = "blue-grey";
+    }
 
   s_settings["theme_color_index"] = m_ui.theme_color->currentIndex();
   m_ui.utc_time_zone->setChecked
@@ -1199,10 +1215,26 @@ void dooble_settings::slot_apply(void)
   {
     QWriteLocker locker(&s_settings_mutex);
 
-    if(m_ui.theme_color->currentIndex() == 0)
-      s_settings["theme_color"] = "blue-grey";
-    else
-      s_settings["theme_color"] = "indigo";
+    switch(m_ui.theme_color->currentIndex())
+      {
+      case 0:
+	{
+	  s_settings["theme_color"] = "blue-grey";
+	  break;
+	}
+      case 1:
+	{
+	  s_settings["theme_color"] = "dark";
+	  break;
+	}
+      case 2:
+	{
+	  s_settings["theme_color"] = "indigo";
+	  break;
+	}
+      default:
+	s_settings["theme_color"] = "blue-grey";
+      }
   }
 
   m_ui.user_agent->setText

@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>749</height>
+           <height>764</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -532,6 +532,11 @@
               </item>
               <item>
                <property name="text">
+                <string>Dark</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
                 <string>Indigo</string>
                </property>
               </item>
@@ -700,8 +705,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>503</width>
-               <height>711</height>
+               <width>415</width>
+               <height>680</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1200,7 +1205,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>420</width>
+               <width>270</width>
                <height>729</height>
               </rect>
              </property>
