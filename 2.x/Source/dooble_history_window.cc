@@ -606,7 +606,13 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
       if(title.isEmpty())
 	title = tr("Dooble");
 
-      item2->setText(title);
+      if(item2->text().isEmpty())
+	item2->setText(title);
+      else
+	{
+	  if(!dooble::s_history->is_favorite(item.url()))
+	    item2->setText(title);
+	}
     }
 
   QTableWidgetItem *item3 = m_ui.table->item(item1->row(), 3);

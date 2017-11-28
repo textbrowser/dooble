@@ -771,9 +771,10 @@ void dooble_history::save_item(const QIcon &icon,
 			       const QWebEngineHistoryItem &item,
 			       bool force)
 {
+  QHash<HistoryItem, QVariant> hash;
+
   if(item.isValid())
     {
-      QHash<HistoryItem, QVariant> hash;
       QWriteLocker locker(&m_history_mutex);
       bool contains = m_history.contains(item.url());
 
@@ -787,7 +788,14 @@ void dooble_history::save_item(const QIcon &icon,
       hash[NUMBER_OF_VISITS] =
 	m_history.value(item.url()).value(NUMBER_OF_VISITS, 1).
 	toULongLong() + 1;
-      hash[TITLE] = item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH);
+
+      if(hash.value(FAVORITE).toBool())
+	hash[TITLE] = m_history.value(item.url()).value
+	  (TITLE, item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+      else
+	hash[TITLE] = item.title().trimmed().mid
+	  (0, dooble::MAXIMUM_TITLE_LENGTH);
+
       hash[URL] = item.url();
 
       if(dooble::s_cryptography)
@@ -904,13 +912,13 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  ok = false;
 
-	if(item.title().trimmed().isEmpty())
+	QString title(hash.value(TITLE).toString());
+
+	if(title.isEmpty())
 	  bytes = dooble::s_cryptography->encrypt_then_mac
 	    (item.url().toEncoded());
 	else
-	  bytes = dooble::s_cryptography->encrypt_then_mac
-	    (item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH).
-	     toUtf8());
+	  bytes = dooble::s_cryptography->encrypt_then_mac(title.toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
