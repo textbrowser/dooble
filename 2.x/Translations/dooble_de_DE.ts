@@ -1412,6 +1412,10 @@ Dooble ist open source Software.
         <source>This is a private tab in a private window.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Always from %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_popup_menu</name>
