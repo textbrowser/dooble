@@ -177,13 +177,19 @@ dooble_settings::dooble_settings(void):QMainWindow()
   else
     m_ui.language_directory->setVisible(false);
 
-  if(dooble::s_application->style_name() == "macintosh")
+  if(dooble::s_application->style_name() == "macintosh" ||
+     dooble::s_application->style_name() == "windows")
     {
       m_ui.theme_color->setEnabled(false);
-      m_ui.theme_color->setToolTip
-	(tr("<html>Dooble prefers the Macintosh style on OS X. You may launch "
-	"Dooble via \"open /Applications/Dooble.d/Dooble.app --args "
-	"-style Fusion\" to test the Fusion style."));
+
+      if(dooble::s_application->style_name() == "macintosh")
+	m_ui.theme_color->setToolTip
+	  (tr("<html>Dooble prefers the Macintosh style on OS X. "
+	      "You may launch "
+	      "Dooble via \"open /Applications/Dooble.d/Dooble.app --args "
+	      "-style Fusion\" to test the Fusion style."));
+      else
+	m_ui.theme_color->setToolTip(tr("Disabled on the Windows theme."));
     }
 
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
@@ -788,8 +794,9 @@ void dooble_settings::restore(void)
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", true).toBool());
 
-  if(dooble::s_application->style_name() == "macintosh")
-    m_ui.theme_color->setCurrentIndex(0);
+  if(dooble::s_application->style_name() == "macintosh" ||
+     dooble::s_application->style_name() == "windows")
+    m_ui.theme_color->setCurrentIndex(2); // Default
   else
     m_ui.theme_color->setCurrentIndex
       (qBound(0,
@@ -829,6 +836,11 @@ void dooble_settings::restore(void)
 	break;
       }
     case 2:
+      {
+	s_settings["theme_color"] = "default";
+	break;
+      }
+    case 3:
       {
 	s_settings["theme_color"] = "indigo";
 	break;
@@ -1228,6 +1240,11 @@ void dooble_settings::slot_apply(void)
 	  break;
 	}
       case 2:
+	{
+	  s_settings["theme_color"] = "default";
+	  break;
+	}
+      case 3:
 	{
 	  s_settings["theme_color"] = "indigo";
 	  break;

@@ -130,6 +130,7 @@ class dooble: public QMainWindow
   void prepare_page_connections(dooble_page *page);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
+  void prepare_style_sheets(void);
   void prepare_tab_icons(void);
   void prepare_tab_shortcuts(void);
   void print(dooble_page *page);

@@ -116,6 +116,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
   prepare_standard_menus();
+  prepare_style_sheets();
 }
 
 dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
@@ -217,6 +218,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
   prepare_standard_menus();
+  prepare_style_sheets();
 }
 
 dooble::dooble(dooble_page *page):QMainWindow()
@@ -250,6 +252,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
   prepare_standard_menus();
+  prepare_style_sheets();
 }
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
@@ -283,6 +286,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
   prepare_standard_menus();
+  prepare_style_sheets();
 }
 
 dooble::~dooble()
@@ -1097,6 +1101,26 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(slot_show_documentation(void)));
 }
 
+void dooble::prepare_style_sheets(void)
+{
+  if(dooble::s_application->style_name() == "fusion")
+    {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
+
+      if(theme_color == "default")
+	m_ui.menu_bar->setStyleSheet("");
+      else
+	m_ui.menu_bar->setStyleSheet
+	  (QString("QMenuBar {background-color: %1; color: %2;}").
+	   arg(dooble_application::s_theme_colors.
+	       value(QString("%1-tabbar-background-color").
+		     arg(theme_color)).name()).
+	   arg(dooble_application::s_theme_colors.
+	       value(QString("%1-menubar-text-color").
+		     arg(theme_color)).name()));
+    }
+}
+
 void dooble::prepare_tab_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
@@ -1875,6 +1899,7 @@ void dooble::slot_settings_applied(void)
   copy_default_profile_settings();
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
+  prepare_style_sheets();
 
   if(!dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
     {

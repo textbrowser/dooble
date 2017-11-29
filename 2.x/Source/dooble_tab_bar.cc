@@ -35,46 +35,19 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
-  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
-    if(dooble::s_application->style_name() == "fusion")
-      {
-	QString theme_color(dooble_settings::setting("theme_color").toString());
-
-	tool_button->setStyleSheet
-	  (QString("QToolButton {background-color: %1;"
-		   "border: none;"
-		   "margin-bottom: 0px;"
-		   "margin-top: 1px;"
-		   "}"
-		   "QToolButton::menu-button {border: none;}").
-	   arg(dooble_tab_widget::s_theme_colors.
-	       value(QString("%1-tabbar-background-color").
-		     arg(theme_color)).name()));
-      }
-    else if(dooble::s_application->style_name() == "macintosh")
-      tool_button->setStyleSheet
-	(QString("QToolButton {background-color: %1;"
-		 "border: none;"
-		 "margin-bottom: 0px;"
-		 "margin-top: 0px;"
-		 "}"
-		 "QToolButton::menu-button {border: none;}").
-	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-    else
-      tool_button->setStyleSheet
-	(QString("QToolButton {background-color: %1;"
-		 "border: none;"
-		 "margin-bottom: 3px;"
-		 "margin-top: 3px;"
-		 "}"
-		 "QToolButton::menu-button {border: none;}").
-	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-
+  prepare_style_sheets();
   setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
 
   if(dooble::s_application->style_name() == "fusion")
-    setDrawBase(false);
+    {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
+
+      if(theme_color == "default")
+	setDrawBase(true);
+      else
+	setDrawBase(false);
+    }
 
   setElideMode(Qt::ElideRight);
   setExpanding(true);
@@ -166,6 +139,110 @@ void dooble_tab_bar::prepare_icons(void)
     }
 }
 
+void dooble_tab_bar::prepare_style_sheets(void)
+{
+  if(dooble::s_application->style_name() == "fusion")
+    {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
+      static QColor s_background_color
+	(QWidget::palette().color(QWidget::backgroundRole()));
+
+      if(theme_color == "default")
+	{
+	  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	    tool_button->setStyleSheet
+	    (QString("QToolButton {background-color: %1;"
+		     "border: none;"
+		     "margin-bottom: 3px;"
+		     "margin-top: 3px;"
+		     "}"
+		     "QToolButton::menu-button {border: none;}").
+	     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+
+	  setStyleSheet("QTabBar::tear {"
+			"border: none; image: none; width: 0px;}");
+	}
+      else
+	{
+	  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	    tool_button->setStyleSheet
+	    (QString("QToolButton {background-color: %1;"
+		     "border: none;"
+		     "margin-bottom: 0px;"
+		     "margin-top: 1px;"
+		     "}"
+		     "QToolButton::menu-button {border: none;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-tabbar-background-color").
+		       arg(theme_color)).name()));
+
+	  setStyleSheet
+	    (QString("QTabBar::close-button {"
+		     "height: 16px;"
+		     "image: url(:/Mac/16/tab_close.png);"
+		     "subcontrol-origin: padding;"
+		     "subcontrol-position: right;"
+		     "width: 16px;}"
+		     "QTabBar::tab {"
+		     "background-color: %1;"
+		     "border-left: 1px solid %2;"
+		     "border-right: 1px solid %2;"
+		     "color: %3;"
+		     "margin-bottom: 0px;"
+		     "margin-top: 1px;}"
+		     "QTabBar::tab::hover:!selected {"
+		     "background-color: %4;"
+		     "color: %5;}"
+		     "QTabBar::tab::selected {"
+		     "background-color: %6;}"
+		     "QTabBar::tear {"
+		     "border: none; image: none; width: 0px;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-tabbar-background-color").
+		       arg(theme_color)).name()).
+	     arg(s_background_color.name()).
+	     arg(dooble_settings::setting("denote_private_widgets").toBool() &&
+		 is_private() ? "white" : "white").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-hovered-tab-color").
+		       arg(theme_color)).name()).
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-not-selected-tab-text-color").
+		       arg(theme_color)).name()).
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-selected-tab-color").
+		       arg(theme_color)).name()));
+	}
+    }
+  else if(dooble::s_application->style_name() == "macintosh")
+    {
+      foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	tool_button->setStyleSheet
+	(QString("QToolButton {background-color: %1;"
+		 "border: none;"
+		 "margin-bottom: 0px;"
+		 "margin-top: 0px;"
+		 "}"
+		 "QToolButton::menu-button {border: none;}").
+	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+    }
+  else
+    {
+      foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	tool_button->setStyleSheet
+	(QString("QToolButton {background-color: %1;"
+		 "border: none;"
+		 "margin-bottom: 3px;"
+		 "margin-top: 3px;"
+		 "}"
+		 "QToolButton::menu-button {border: none;}").
+	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+
+      setStyleSheet("QTabBar::tear {"
+		    "border: none; image: none; width: 0px;}");
+    }
+}
+
 void dooble_tab_bar::showEvent(QShowEvent *event)
 {
   QTabBar::showEvent(event);
@@ -241,68 +318,8 @@ void dooble_tab_bar::slot_reload(void)
 
 void dooble_tab_bar::slot_settings_applied(void)
 {
-  if(dooble::s_application->style_name() == "fusion")
-    {
-      QString theme_color(dooble_settings::setting("theme_color").toString());
-      static QColor s_background_color
-	(QWidget::palette().color(QWidget::backgroundRole()));
-
-      foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
-	tool_button->setStyleSheet
-	(QString("QToolButton {background-color: %1;"
-		 "border: none;"
-		 "margin-bottom: 0px;"
-		 "margin-top: 1px;"
-		 "}"
-		 "QToolButton::menu-button {border: none;}").
-	 arg(dooble_tab_widget::s_theme_colors.
-	     value(QString("%1-tabbar-background-color").
-		   arg(theme_color)).name()));
-
-      setStyleSheet
-	(QString("QTabBar::close-button {"
-		 "height: 16px;"
-		 "image: url(:/Mac/16/tab_close.png);"
-		 "subcontrol-origin: padding;"
-		 "subcontrol-position: right;"
-		 "width: 16px;}"
-		 "QTabBar::tab {"
-		 "background-color: %1;"
-		 "border-left: 1px solid %2;"
-		 "border-right: 1px solid %2;"
-		 "color: %3;"
-		 "margin-bottom: 0px;"
-		 "margin-top: 1px;}"
-		 "QTabBar::tab::hover:!selected {"
-		 "background-color: %4;"
-		 "color: black;}"
-		 "QTabBar::tab::selected {"
-		 "background-color: %5;}"
-		 "QTabBar::tear {"
-		 "border: none; image: none; width: 0px;}").
-	 arg(dooble_tab_widget::s_theme_colors.
-	     value(QString("%1-tabbar-background-color").
-		   arg(theme_color)).name()).
-	 arg(s_background_color.name()).
-	 arg(dooble_settings::setting("denote_private_widgets").toBool() &&
-	     is_private() ? "white" : "white").
-	 arg(dooble_tab_widget::s_theme_colors.
-	     value(QString("%1-hovered-tab-color").
-		   arg(theme_color)).name()).
-	 arg(dooble_tab_widget::s_theme_colors.
-	     value(QString("%1-selected-tab-color").
-		   arg(theme_color)).name()));
-    }
-  else
-#ifdef Q_OS_MACOS
-    {
-    }
-#else
-    setStyleSheet("QTabBar::tear {"
-		  "border: none; image: none; width: 0px;}");
-#endif
-
   prepare_icons();
+  prepare_style_sheets();
 }
 
 void dooble_tab_bar::slot_show_context_menu(const QPoint &point)

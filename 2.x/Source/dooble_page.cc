@@ -299,6 +299,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   prepare_icons();
   prepare_shortcuts();
+  prepare_style_sheets();
   prepare_tool_buttons();
   slot_dooble_credentials_created();
 }
@@ -678,6 +679,49 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Documentation"),
 		  this,
 		  SIGNAL(show_documentation(void)));
+}
+
+void dooble_page::prepare_style_sheets(void)
+{
+  if(dooble::s_application->style_name() == "fusion")
+    {
+      QString theme_color(dooble_settings::setting("theme_color").toString());
+      static QString link_hovered_style_sheet(m_ui.link_hovered->styleSheet());
+
+      if(theme_color == "default")
+	{
+	  m_ui.find_frame->setStyleSheet("");
+	  m_ui.link_hovered->setStyleSheet(link_hovered_style_sheet);
+	  m_ui.status_bar->setStyleSheet("");
+	  m_ui.top_frame->setStyleSheet("");
+	}
+      else
+	{
+	  m_ui.find_frame->setStyleSheet
+	    (QString("QFrame {background-color: %1;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-selected-tab-color").arg(theme_color)).
+		 name()));
+	  m_ui.link_hovered->setStyleSheet
+	    (QString("QLineEdit {background-color: %1; color: %2;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-selected-tab-color").arg(theme_color)).
+		 name()).
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-status-bar-text-color").
+		       arg(theme_color)).name()));
+	  m_ui.status_bar->setStyleSheet
+	    (QString("QFrame {background-color: %1;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-selected-tab-color").arg(theme_color)).
+		 name()));
+	  m_ui.top_frame->setStyleSheet
+	    (QString("QFrame {background-color: %1;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-selected-tab-color").arg(theme_color)).
+		 name()));
+	}
+    }
 }
 
 void dooble_page::prepare_tool_buttons(void)
@@ -1390,6 +1434,7 @@ void dooble_page::slot_settings_applied(void)
     m_ui.is_private->setVisible(false);
 
   prepare_icons();
+  prepare_style_sheets();
 }
 
 void dooble_page::slot_show_certificate_exception(void)

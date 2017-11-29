@@ -34,11 +34,8 @@
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 
-QHash<QString, QColor> dooble_tab_widget::s_theme_colors;
-
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
-  prepare_theme_colors();
   m_add_tab_tool_button = new QToolButton(this);
   m_add_tab_tool_button->setAutoRaise(true);
   m_add_tab_tool_button->setIconSize(QSize(18, 18));
@@ -96,18 +93,27 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
     {
       QString theme_color(dooble_settings::setting("theme_color").toString());
 
-      m_corner_widget->setStyleSheet
-	(QString("QFrame {background-color: %1;"
-		 "border-right: 0px solid %2;"
-		 "margin-bottom: 0px;}").
-	 arg(s_theme_colors.
-	     value(QString("%1-corner-widget-background-color").
-		   arg(theme_color)).name()).
-	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-      setStyleSheet
-	(QString("QTabBar {background-color: %1; margin-top: 1px;}").
-	 arg(s_theme_colors.value(QString("%1-tabbar-background-color").
-				  arg(theme_color)).name()));
+      if(theme_color == "default")
+	{
+	  m_corner_widget->setStyleSheet("");
+	  setStyleSheet("");
+	}
+      else
+	{
+	  m_corner_widget->setStyleSheet
+	    (QString("QFrame {background-color: %1;"
+		     "border-right: 0px solid %2;"
+		     "margin-bottom: 0px;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-corner-widget-background-color").
+		       arg(theme_color)).name()).
+	     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+	  setStyleSheet
+	    (QString("QTabBar {background-color: %1; margin-top: 1px;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-tabbar-background-color").
+		       arg(theme_color)).name()));
+	}
     }
 
   m_tab_bar = new dooble_tab_bar(this);
@@ -270,25 +276,6 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
     }
 }
 
-void dooble_tab_widget::prepare_theme_colors(void)
-{
-  if(!s_theme_colors.isEmpty())
-    return;
-
-  s_theme_colors["blue-grey-corner-widget-background-color"] = "#90a4ae";
-  s_theme_colors["blue-grey-hovered-tab-color"] = "#c5cae9";
-  s_theme_colors["blue-grey-selected-tab-color"] = "#7986cb";
-  s_theme_colors["blue-grey-tabbar-background-color"] = "#90a4ae";
-  s_theme_colors["dark-corner-widget-background-color"] = "#424242";
-  s_theme_colors["dark-hovered-tab-color"] = "#616161";
-  s_theme_colors["dark-selected-tab-color"] = "#757575";
-  s_theme_colors["dark-tabbar-background-color"] = "#424242";
-  s_theme_colors["indigo-corner-widget-background-color"] = "#5c6bc0";
-  s_theme_colors["indigo-hovered-tab-color"] = "#b388ff";
-  s_theme_colors["indigo-selected-tab-color"] = "#536dfe";
-  s_theme_colors["indigo-tabbar-background-color"] = "#5c6bc0";
-}
-
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 {
   prepare_tab_label(index, icon);
@@ -403,18 +390,27 @@ void dooble_tab_widget::slot_settings_applied(void)
     {
       QString theme_color(dooble_settings::setting("theme_color").toString());
 
-      m_corner_widget->setStyleSheet
-	(QString("QFrame {background-color: %1;"
-		 "border-right: 0px solid %2;"
-		 "margin-bottom: 0px;}").
-	 arg(s_theme_colors.
-	     value(QString("%1-corner-widget-background-color").
-		   arg(theme_color)).name()).
-	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-      setStyleSheet
-	(QString("QTabBar {background-color: %1; margin-top: 1px;}").
-	 arg(s_theme_colors.value(QString("%1-tabbar-background-color").
-				  arg(theme_color)).name()));
+      if(theme_color == "default")
+	{
+	  m_corner_widget->setStyleSheet("");
+	  setStyleSheet("");
+	}
+      else
+	{
+	  m_corner_widget->setStyleSheet
+	    (QString("QFrame {background-color: %1;"
+		     "border-right: 0px solid %2;"
+		     "margin-bottom: 0px;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-corner-widget-background-color").
+		       arg(theme_color)).name()).
+	     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+	  setStyleSheet
+	    (QString("QTabBar {background-color: %1; margin-top: 1px;}").
+	     arg(dooble_application::s_theme_colors.
+		 value(QString("%1-tabbar-background-color").
+		       arg(theme_color)).name()));
+	}
     }
 
   m_private_tool_button->setVisible

@@ -97,6 +97,7 @@ class dooble_page: public QWidget
   void prepare_icons(void);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
+  void prepare_style_sheets(void);
   void prepare_tool_buttons(void);
   void show_popup_menu(void);
 

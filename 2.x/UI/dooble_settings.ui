@@ -537,6 +537,11 @@
               </item>
               <item>
                <property name="text">
+                <string>Default</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
                 <string>Indigo</string>
                </property>
               </item>

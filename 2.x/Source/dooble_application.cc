@@ -30,6 +30,8 @@
 #include "dooble_application.h"
 #include "dooble_settings.h"
 
+QHash<QString, QColor> dooble_application::s_theme_colors;
+
 dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
@@ -39,6 +41,7 @@ dooble_application::dooble_application(int &argc, char **argv):
 
   font.setStyleStrategy
     (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
+  prepare_theme_colors();
   setAttribute(Qt::AA_DontUseNativeDialogs);
   setAttribute(Qt::AA_DontUseNativeMenuBar);
   setFont(font);
@@ -63,4 +66,32 @@ void dooble_application::install_translator(void)
       m_translator->load("dooble_" + QLocale::system().name(), "Translations");
       installTranslator(m_translator);
     }
+}
+
+void dooble_application::prepare_theme_colors(void)
+{
+  if(!s_theme_colors.isEmpty())
+    return;
+
+  s_theme_colors["blue-grey-corner-widget-background-color"] = "#90a4ae";
+  s_theme_colors["blue-grey-hovered-tab-color"] = "#c5cae9";
+  s_theme_colors["blue-grey-menubar-text-color"] = "white";
+  s_theme_colors["blue-grey-not-selected-tab-text-color"] = "black";
+  s_theme_colors["blue-grey-selected-tab-color"] = "#7986cb";
+  s_theme_colors["blue-grey-status-bar-text-color"] = "white";
+  s_theme_colors["blue-grey-tabbar-background-color"] = "#90a4ae";
+  s_theme_colors["dark-corner-widget-background-color"] = "#424242";
+  s_theme_colors["dark-hovered-tab-color"] = "#616161";
+  s_theme_colors["dark-menubar-text-color"] = "white";
+  s_theme_colors["dark-not-selected-tab-text-color"] = "white";
+  s_theme_colors["dark-selected-tab-color"] = "#757575";
+  s_theme_colors["dark-status-bar-text-color"] = "white";
+  s_theme_colors["dark-tabbar-background-color"] = "#424242";
+  s_theme_colors["indigo-corner-widget-background-color"] = "#5c6bc0";
+  s_theme_colors["indigo-hovered-tab-color"] = "#b388ff";
+  s_theme_colors["indigo-menubar-text-color"] = "white";
+  s_theme_colors["indigo-not-selected-tab-text-color"] = "white";
+  s_theme_colors["indigo-selected-tab-color"] = "#536dfe";
+  s_theme_colors["indigo-status-bar-text-color"] = "white";
+  s_theme_colors["indigo-tabbar-background-color"] = "#5c6bc0";
 }
