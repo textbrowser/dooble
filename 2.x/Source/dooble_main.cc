@@ -131,7 +131,8 @@ int main(int argc, char *argv[])
   signal_action.sa_flags = 0;
   sigaction(SIGPIPE, &signal_action, (struct sigaction *) 0);
 #endif
-  qRegisterMetaType<QListVectorByteArray>("QListVectorByteArray");
+  qRegisterMetaType<QListPairIconString> ("QListPairIconString");
+  qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
 #ifdef Q_OS_MACOS
   QApplication::setStyle(QStyleFactory::create("Macintosh"));
   QDir::setCurrent("/Applications/Dooble.d");

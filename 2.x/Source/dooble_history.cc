@@ -113,6 +113,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 			      const QByteArray &encryption_key)
 {
   QListVectorByteArray favorites;
+  QMultiMap<QDateTime, QPair<QIcon, QString> > map;
   QString database_name(QString("dooble_history_%1").
 			arg(s_db_id.fetchAndAddOrdered(1)));
 
@@ -220,6 +221,9 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		  favorites << vector;
 		}
 
+	      map.insert(hash[LAST_VISITED].toDateTime(),
+			 QPair<QIcon, QString> (QIcon(), url));
+
 	      QWriteLocker locker(&m_history_mutex);
 
 	      m_history[hash[URL].toUrl()] = hash;
@@ -234,6 +238,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
   if(!m_populate_future.isCanceled())
     {
       emit populated();
+      emit populated(map.values());
       emit populated_favorites(favorites);
     }
 }

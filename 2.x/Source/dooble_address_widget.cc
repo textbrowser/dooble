@@ -80,6 +80,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(favorites_cleared(void)),
 	  this,
 	  SLOT(slot_favorites_cleared(void)));
+  connect(dooble::s_history,
+	  SIGNAL(populated(const QListPairIconString &)),
+	  this,
+	  SLOT(slot_populate(const QListPairIconString &)));
   connect(dooble::s_history_window,
 	  SIGNAL(favorite_changed(const QUrl &, bool)),
 	  this,
@@ -121,7 +125,6 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	 m_information->sizeHint().width() +
 	 frame_width + 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 10));
-  slot_populate();
 }
 
 QRect dooble_address_widget::information_rectangle(void) const
@@ -385,11 +388,10 @@ void dooble_address_widget::slot_load_started(void)
   prepare_containers_for_url(m_url);
 }
 
-void dooble_address_widget::slot_populate(void)
+void dooble_address_widget::slot_populate
+(const QListPairIconString &list)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  QList<QPair<QIcon, QString> > list(dooble::s_history->urls());
 
   for(int i = 0; i < list.size(); i++)
     m_completer->add_item(list.at(i).first, list.at(i).second);

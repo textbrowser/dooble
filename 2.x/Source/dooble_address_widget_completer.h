@@ -41,8 +41,8 @@ class dooble_address_widget_completer: public QCompleter
  public:
   dooble_address_widget_completer(QWidget *parent);
   ~dooble_address_widget_completer();
+  static void add_item(const QIcon &icon, const QUrl &url);
   static void remove_item(const QUrl &url);
-  void add_item(const QIcon &icon, const QUrl &url);
   void complete(void);
   void set_item_icon(const QIcon &icon, const QUrl &url);
 

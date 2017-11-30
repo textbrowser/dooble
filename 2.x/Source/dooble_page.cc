@@ -93,10 +93,6 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(started(void)),
 	  this,
 	  SLOT(slot_downloads_started(void)));
-  connect(dooble::s_history,
-	  SIGNAL(populated(void)),
-	  m_ui.address,
-	  SLOT(slot_populate(void)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,

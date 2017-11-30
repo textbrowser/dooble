@@ -35,6 +35,7 @@
 #include <QWebEngineHistoryItem>
 
 class QStandardItemModel;
+typedef QList<QPair<QIcon, QString> > QListPairIconString;
 typedef QList<QVector<QByteArray> > QListVectorByteArray;
 
 class dooble_history: public QObject
@@ -94,6 +95,7 @@ class dooble_history: public QObject
   void icon_updated(const QIcon &icon, const QUrl &url);
   void item_updated(const QIcon &icon, const QWebEngineHistoryItem &item);
   void new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
+  void populated(const QListPairIconString &list);
   void populated(void);
   void populated_favorites(const QListVectorByteArray &favorites);
 };
