@@ -25,7 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QStandardItemModel>
+#include <QStandardItem>
 
 #include "dooble.h"
 #include "dooble_address_widget_completer.h"
@@ -34,7 +34,7 @@
 #include "dooble_favicons.h"
 #include "dooble_page.h"
 
-QHash<QUrl, char> dooble_address_widget_completer::s_urls;
+QHash<QUrl, QStandardItem *> dooble_address_widget_completer::s_urls;
 QStandardItemModel *dooble_address_widget_completer::s_model = 0;
 
 dooble_address_widget_completer::dooble_address_widget_completer
@@ -135,14 +135,18 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
   */
 
   if(s_urls.contains(url))
-    return;
-  else
-    s_urls[url] = 0;
+    if(s_urls.value(url))
+      {
+	s_model->takeRow(s_urls.value(url)->row());
+	s_model->insertRow(0, s_urls.value(url));
+	return;
+      }
 
   QStandardItem *item = new QStandardItem(icon, url.toString());
 
   item->setToolTip(url.toString());
   s_model->insertRow(0, item);
+  s_urls[url] = item;
 }
 
 void dooble_address_widget_completer::complete(void)

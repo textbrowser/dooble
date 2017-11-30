@@ -31,6 +31,7 @@
 #include <QCompleter>
 #include <QTimer>
 
+class QStandardItem;
 class QStandardItemModel;
 class dooble_address_widget_completer_popup;
 
@@ -50,7 +51,7 @@ class dooble_address_widget_completer: public QCompleter
   QStandardItemModel *m_model;
   QTimer m_text_edited_timer;
   dooble_address_widget_completer_popup *m_popup;
-  static QHash<QUrl, char> s_urls;
+  static QHash<QUrl, QStandardItem *> s_urls;
   static QStandardItemModel *s_model;
   int levenshtein_distance(const QString &str1, const QString &str2) const;
   void complete(const QString &text);
