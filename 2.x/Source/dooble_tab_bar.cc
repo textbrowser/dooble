@@ -157,7 +157,7 @@ void dooble_tab_bar::prepare_style_sheets(void)
 		     "margin-top: 3px;"
 		     "}"
 		     "QToolButton::menu-button {border: none;}").
-	     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+	     arg(s_background_color.name()));
 
 	  setStyleSheet("QTabBar::tear {"
 			"border: none; image: none; width: 0px;}");
