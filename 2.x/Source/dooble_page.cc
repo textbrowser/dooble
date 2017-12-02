@@ -1269,16 +1269,14 @@ void dooble_page::slot_load_page(void)
 
 void dooble_page::slot_load_progress(int progress)
 {
-  static QPalette s_address_palette(m_ui.address->palette());
-
+  m_ui.backward->setEnabled(m_view->history()->canGoBack());
+  m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
 
+  static QPalette s_address_palette(m_ui.address->palette());
+
   if(m_ui.status_bar->isVisible())
-    {
-      m_ui.address->setPalette(s_address_palette);
-      m_ui.backward->setEnabled(m_view->history()->canGoBack());
-      m_ui.forward->setEnabled(m_view->history()->canGoForward());
-    }
+    m_ui.address->setPalette(s_address_palette);
   else if(progress < 100)
     {
       QLinearGradient linear_gradient
