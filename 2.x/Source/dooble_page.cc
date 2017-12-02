@@ -1269,9 +1269,34 @@ void dooble_page::slot_load_page(void)
 
 void dooble_page::slot_load_progress(int progress)
 {
-  m_ui.backward->setEnabled(m_view->history()->canGoBack());
-  m_ui.forward->setEnabled(m_view->history()->canGoForward());
+  static QPalette s_address_palette(m_ui.address->palette());
+
   m_ui.progress->setValue(progress);
+
+  if(m_ui.status_bar->isVisible())
+    {
+      m_ui.address->setPalette(s_address_palette);
+      m_ui.backward->setEnabled(m_view->history()->canGoBack());
+      m_ui.forward->setEnabled(m_view->history()->canGoForward());
+    }
+  else if(progress < 100)
+    {
+      QLinearGradient linear_gradient
+	(0,
+	 m_ui.address->height(),
+	 m_ui.address->width(),
+	 m_ui.address->height());
+
+      linear_gradient.setColorAt(progress / 100.0, QColor("lightgreen"));
+      linear_gradient.setColorAt(progress / 100.0 + 0.1, QColor("white"));
+
+      QPalette palette(m_ui.address->palette());
+
+      palette.setBrush(QPalette::Base, QBrush(linear_gradient));
+      m_ui.address->setPalette(palette);
+    }
+  else
+    m_ui.address->setPalette(s_address_palette);
 }
 
 void dooble_page::slot_load_started(void)
@@ -1418,7 +1443,7 @@ void dooble_page::slot_proxy_authentication_required
 
 void dooble_page::slot_reload_or_stop(void)
 {
-  if(m_ui.progress->isVisible())
+  if(m_ui.reload->toolTip() == tr("Stop Page Load"))
     m_view->stop();
   else
     m_view->reload();
