@@ -27,6 +27,7 @@
 
 #include <QAuthenticator>
 #include <QPrinter>
+#include <QToolTip>
 #include <QWebEngineHistoryItem>
 #include <QWebEngineProfile>
 #include <QWidgetAction>
@@ -1217,20 +1218,27 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 void dooble_page::slot_link_hovered(const QString &url)
 {
-  QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
-  int difference = 15;
+  if(m_ui.status_bar->isVisible())
+    {
+      QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
+      int difference = 15;
 
-  if(m_ui.is_private->isVisible())
-    difference += 25;
+      if(m_ui.is_private->isVisible())
+	difference += 25;
 
-  if(m_ui.progress->isVisible())
-    difference += m_ui.progress->width();
+      if(m_ui.progress->isVisible())
+	difference += m_ui.progress->width();
 
-  m_ui.link_hovered->setProperty("text", url);
-  m_ui.link_hovered->setText
-    (font_metrics.
-     elidedText(url.trimmed(), Qt::ElideMiddle, qAbs(width() - difference)));
-  m_ui.link_hovered->setCursorPosition(0);
+      m_ui.link_hovered->setProperty("text", url);
+      m_ui.link_hovered->setText
+	(font_metrics.
+	 elidedText(url.trimmed(),
+		    Qt::ElideMiddle,
+		    qAbs(width() - difference)));
+      m_ui.link_hovered->setCursorPosition(0);
+    }
+  else if(!url.isEmpty())
+    QToolTip::showText(QCursor::pos(), "<html>" + url + "</html>", this);
 }
 
 void dooble_page::slot_load_finished(bool ok)
