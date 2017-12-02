@@ -159,6 +159,7 @@ void dooble_tab_bar::prepare_style_sheets(void)
 		     "QToolButton::menu-button {border: none;}").
 	     arg(s_background_color.name()));
 
+	  setDrawBase(true);
 	  setStyleSheet("QTabBar::tear {"
 			"border: none; image: none; width: 0px;}");
 	}
@@ -176,6 +177,7 @@ void dooble_tab_bar::prepare_style_sheets(void)
 		 value(QString("%1-tabbar-background-color").
 		       arg(theme_color)).name()));
 
+	  setDrawBase(false);
 	  setStyleSheet
 	    (QString("QTabBar::close-button {"
 		     "height: 16px;"
