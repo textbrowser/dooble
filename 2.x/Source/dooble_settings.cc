@@ -340,7 +340,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	m_ui.dictionaries->addItem(item);
       }
 
-  restore();
+  restore(true);
   prepare_icons();
 }
 
@@ -673,45 +673,48 @@ void dooble_settings::resizeEvent(QResizeEvent *event)
   save_settings();
 }
 
-void dooble_settings::restore(void)
+void dooble_settings::restore(bool read_database)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  if(read_database)
+    {
+      QString database_name
+	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
 
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
-
-    if(db.open())
       {
-	QSqlQuery query(db);
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	query.setForwardOnly(true);
+	db.setDatabaseName(setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_settings.db");
 
-	if(query.exec("SELECT key, value FROM dooble_settings"))
-	  while(query.next())
-	    {
-	      QString key(query.value(0).toString().trimmed());
-	      QString value(query.value(1).toString().trimmed());
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
 
-	      if(key.isEmpty() || value.isEmpty())
-		continue;
+	    query.setForwardOnly(true);
 
-	      QWriteLocker lock(&s_settings_mutex);
+	    if(query.exec("SELECT key, value FROM dooble_settings"))
+	      while(query.next())
+		{
+		  QString key(query.value(0).toString().trimmed());
+		  QString value(query.value(1).toString().trimmed());
 
-	      s_settings[key] = value;
-	    }
+		  if(key.isEmpty() || value.isEmpty())
+		    continue;
+
+		  QWriteLocker lock(&s_settings_mutex);
+
+		  s_settings[key] = value;
+		}
+	  }
+
+	db.close();
       }
 
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
+      QSqlDatabase::removeDatabase(database_name);
+    }
 
   QWriteLocker lock(&s_settings_mutex);
 
@@ -1029,7 +1032,7 @@ void dooble_settings::save_settings(void)
 void dooble_settings::show(void)
 {
   if(!isVisible())
-    restore();
+    restore(false);
 
   if(setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
@@ -1041,7 +1044,7 @@ void dooble_settings::show(void)
 void dooble_settings::showNormal(void)
 {
   if(!isVisible())
-    restore();
+    restore(false);
 
   if(setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").

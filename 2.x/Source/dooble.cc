@@ -2191,7 +2191,7 @@ void dooble::slot_show_settings(void)
 	  m_ui.tab->setTabToolTip
 	    (m_ui.tab->count() - 1, s_settings->windowTitle());
 	  prepare_tab_icons();
-	  s_settings->restore();
+	  s_settings->restore(false);
 	}
 
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);

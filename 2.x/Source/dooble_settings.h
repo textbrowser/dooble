@@ -63,7 +63,7 @@ class dooble_settings: public QMainWindow
   static bool set_setting(const QString &key, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static void remove_setting(const QString &key);
-  void restore(void);
+  void restore(bool read_database);
   void show_panel(dooble_settings::Panels panel);
 
  public slots:
