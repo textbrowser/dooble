@@ -1286,7 +1286,9 @@ void dooble_page::slot_load_progress(int progress)
 	 m_ui.address->height());
 
       linear_gradient.setColorAt(progress / 100.0, QColor("lightgreen"));
-      linear_gradient.setColorAt(progress / 100.0 + 0.1, QColor("white"));
+      linear_gradient.setColorAt
+	(qBound(progress / 100.0, progress / 100.0 + 0.15, 1.0),
+	 QColor("white"));
 
       QPalette palette(m_ui.address->palette());
 
