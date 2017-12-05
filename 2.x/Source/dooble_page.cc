@@ -1275,7 +1275,7 @@ void dooble_page::slot_load_progress(int progress)
 
   static QPalette s_address_palette(m_ui.address->palette());
 
-  if(m_ui.status_bar->isVisible())
+  if(dooble_settings::setting("status_bar_visible").toBool())
     m_ui.address->setPalette(s_address_palette);
   else if(progress < 100)
     {
