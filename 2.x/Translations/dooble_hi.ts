@@ -1635,17 +1635,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1297"/>
+        <location filename="../Source/dooble_page.cc" line="1322"/>
+        <location filename="../Source/dooble_page.cc" line="1446"/>
         <source>Stop Page Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1405"/>
+        <location filename="../Source/dooble_page.cc" line="1430"/>
         <source>The proxy &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1407"/>
+        <location filename="../Source/dooble_page.cc" line="1432"/>
         <source>Dooble: Proxy Authentication</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2289,92 +2290,92 @@ Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1093"/>
+        <location filename="../Source/dooble_settings.cc" line="1096"/>
         <source>You are about to enable temporary credentials. Existing database data will be removed. New data will be stored as ciphertext. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1098"/>
+        <location filename="../Source/dooble_settings.cc" line="1101"/>
         <source>You are about to disable credentials. Existing database data will be removed. New data will be stored as plaintext. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1104"/>
-        <location filename="../Source/dooble_settings.cc" line="1703"/>
-        <location filename="../Source/dooble_settings.cc" line="1748"/>
-        <location filename="../Source/dooble_settings.cc" line="1827"/>
+        <location filename="../Source/dooble_settings.cc" line="1107"/>
+        <location filename="../Source/dooble_settings.cc" line="1706"/>
+        <location filename="../Source/dooble_settings.cc" line="1751"/>
+        <location filename="../Source/dooble_settings.cc" line="1830"/>
         <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1484"/>
+        <location filename="../Source/dooble_settings.cc" line="1487"/>
         <source>Dooble: Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1485"/>
+        <location filename="../Source/dooble_settings.cc" line="1488"/>
         <source>Your credentials have been prepared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1489"/>
-        <location filename="../Source/dooble_settings.cc" line="1841"/>
+        <location filename="../Source/dooble_settings.cc" line="1492"/>
+        <location filename="../Source/dooble_settings.cc" line="1844"/>
         <source>Dooble: Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1490"/>
+        <location filename="../Source/dooble_settings.cc" line="1493"/>
         <source>Credentials could not be generated. This is a curious problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1697"/>
+        <location filename="../Source/dooble_settings.cc" line="1700"/>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted. Please remove the directory WebEnginePersistentStorage after the reset completes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1743"/>
+        <location filename="../Source/dooble_settings.cc" line="1746"/>
         <source>Are you sure that you wish to reset your permanent credentials? New session-only credentials will be generated and database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1805"/>
-        <location filename="../Source/dooble_settings.cc" line="1813"/>
+        <location filename="../Source/dooble_settings.cc" line="1808"/>
+        <location filename="../Source/dooble_settings.cc" line="1816"/>
         <source>Dooble: User Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1805"/>
+        <location filename="../Source/dooble_settings.cc" line="1808"/>
         <source>Empty password(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1813"/>
+        <location filename="../Source/dooble_settings.cc" line="1816"/>
         <source>Passwords are not equal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1823"/>
+        <location filename="../Source/dooble_settings.cc" line="1826"/>
         <source>Are you sure that you wish to prepare new credentials? Existing database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1842"/>
+        <location filename="../Source/dooble_settings.cc" line="1845"/>
         <source>Salt-generation failure! This is a curious problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1850"/>
+        <location filename="../Source/dooble_settings.cc" line="1853"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1851"/>
+        <location filename="../Source/dooble_settings.cc" line="1854"/>
         <source>Preparing credentials...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1857"/>
+        <location filename="../Source/dooble_settings.cc" line="1860"/>
         <source>Dooble: Preparing Credentials</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2382,47 +2383,47 @@ Domains</source>
 <context>
     <name>dooble_tab_bar</name>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="331"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="333"/>
         <source>Close T&amp;ab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="336"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="338"/>
         <source>Close &amp;Other Tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="344"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="346"/>
         <source>Open as New &amp;Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="350"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="352"/>
         <source>New &amp;Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="355"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="357"/>
         <source>&amp;Reload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="361"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="363"/>
         <source>&amp;JavaScript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="368"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="370"/>
         <source>Web &amp;Plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="375"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="377"/>
         <source>Web&amp;GL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_tab_bar.cc" line="420"/>
+        <location filename="../Source/dooble_tab_bar.cc" line="422"/>
         <source>&amp;Decouple...</source>
         <translation type="unfinished"></translation>
     </message>
