@@ -680,6 +680,7 @@ void dooble_page::prepare_standard_menus(void)
 
 void dooble_page::prepare_style_sheets(void)
 {
+#ifdef DOOBLE_SIMPLE_THEMES
   if(dooble::s_application->style_name() == "fusion")
     {
       QString theme_color(dooble_settings::setting("theme_color").toString());
@@ -719,6 +720,7 @@ void dooble_page::prepare_style_sheets(void)
 		 name()));
 	}
     }
+#endif
 }
 
 void dooble_page::prepare_tool_buttons(void)
