@@ -71,6 +71,7 @@ class dooble_address_widget: public QLineEdit
   void slot_favorites_cleared(void);
   void slot_load_started(void);
   void slot_populate(const QListPairIconString &list);
+  void slot_return_pressed(void);
   void slot_settings_applied(void);
   void slot_show_site_information_menu(void);
   void slot_text_edited(const QString &text);
