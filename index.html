@@ -44,6 +44,26 @@
 	<img src="images/dooble_9.png"></img>
       </section>
       <section>
+	<p>
+	  <h3><b>Dooble 2.1.2 (2017.12.12)</b></h3>
+	  Welcome to the <b>2.1.2 (2017.12.12)</b> release of Dooble. Corrections and new features are detailed below.
+	  <ul>
+	    <li>Avoid updating titles of Favorites.</li>
+	    <li>Corrected UTF-8 Favorites URL data. Icons were not properly initialized. URL processing lacked decoding logic.</li>
+	    <li>Corrected parents of separated pages. Problem causes abnormal termination.</li>
+	    <li>Corrected tab titles of pop-up windows.</li>
+	    <li>Date-order address-widget model. Also eliminated repetitive use of expensive method.</li>
+	    <li>Documentation corrections.</li>
+	    <li>New Dark theme.</li>
+	    <li>New Default theme.</li>
+	    <li>New option for allowing pop-ups from domain-based URLs.</li>
+	    <li>Observe QWebEnginePage::windowCloseRequested().</li>
+	    <li>Properly stack visited links in the address-widget model. Recent items must be placed onto the stack.</li>
+	    <li>Set QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib in dooble.pro for non-Mac and non-Windows.</li>
+	    <li>Set Section in DEBIAN/control to net.</li>
+	    <li>The Debian package was missing the Qt5Svg library. As a result, some icons in file dialogs were not drawn.</li>
+	  </ul>
+        </p>
         <p>
 	  <h3><b>Dooble 2.1.1 (2017.11.25)</b></h3>
 	  Welcome to the <b>2.1.1 (2017.11.25)</b> release of Dooble. Corrections and new features are detailed below.
