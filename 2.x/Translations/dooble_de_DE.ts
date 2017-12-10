@@ -2051,6 +2051,10 @@ Domänen</translation>
         <source>Disabled on the Windows theme.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Hovered Links Tool Tips</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_tab_bar</name>
