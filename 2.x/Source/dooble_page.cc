@@ -1220,6 +1220,10 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 void dooble_page::slot_link_hovered(const QString &url)
 {
+  if(dooble_settings::setting("show_hovered_links_tool_tips").toBool())
+    if(!url.isEmpty())
+      QToolTip::showText(QCursor::pos(), "<html>" + url + "</html>", this);
+
   if(m_ui.status_bar->isVisible())
     {
       QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
@@ -1239,8 +1243,6 @@ void dooble_page::slot_link_hovered(const QString &url)
 		    qAbs(width() - difference)));
       m_ui.link_hovered->setCursorPosition(0);
     }
-  else if(!url.isEmpty())
-    QToolTip::showText(QCursor::pos(), "<html>" + url + "</html>", this);
 }
 
 void dooble_page::slot_load_finished(bool ok)

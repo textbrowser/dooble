@@ -796,6 +796,8 @@ void dooble_settings::restore(bool read_database)
   m_ui.proxy_user->setCursorPosition(0);
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", true).toBool());
+  m_ui.show_hovered_links_tool_tips->setChecked
+    (s_settings.value("show_hovered_links_tool_tips", false).toBool());
 
   if(dooble::s_application->style_name() == "macintosh" ||
      dooble::s_application->style_name() == "windows")
@@ -1317,6 +1319,8 @@ void dooble_settings::slot_apply(void)
   set_setting("pin_history_window", m_ui.pin_history->isChecked());
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
+  set_setting("show_hovered_links_tool_tips",
+	      m_ui.show_hovered_links_tool_tips->isChecked());
   set_setting("theme_color_index", m_ui.theme_color->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());

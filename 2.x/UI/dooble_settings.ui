@@ -496,6 +496,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="show_hovered_links_tool_tips">
+            <property name="text">
+             <string>Show Hovered Links Tool Tips</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="access_new_tabs">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a tab is created from a link, automatically switch to the new tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -505,13 +512,6 @@
             </property>
             <property name="checked">
              <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="show_hovered_links_tool_tips">
-            <property name="text">
-             <string>Show Tool Tips over Hovered Links</string>
             </property>
            </widget>
           </item>
@@ -1565,8 +1565,8 @@
   <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
-  <tabstop>access_new_tabs</tabstop>
   <tabstop>show_hovered_links_tool_tips</tabstop>
+  <tabstop>access_new_tabs</tabstop>
   <tabstop>theme_color</tabstop>
   <tabstop>zoom_frame_location</tabstop>
   <tabstop>browsing_history</tabstop>
