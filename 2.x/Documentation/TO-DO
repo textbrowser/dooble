@@ -124,6 +124,7 @@
 1.     Auto-correct addresses.
 2.     Richer Debian package.
 3.     Signed Debian release.
+4.     Replace lessThan() with versionAtLeast() in dooble.pro for Qt 5.10.x.
 
 Unknown Items
 
