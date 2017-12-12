@@ -443,6 +443,7 @@ void dooble_page::go_to_forward_item(int index)
 
 void dooble_page::load(const QUrl &url)
 {
+  m_view->stop();
   m_view->load(url);
 }
 
