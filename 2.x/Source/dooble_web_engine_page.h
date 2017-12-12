@@ -45,6 +45,9 @@ class dooble_web_engine_page: public QWebEnginePage
   ~dooble_web_engine_page();
 
  protected:
+  QStringList chooseFiles(FileSelectionMode mode,
+			  const QStringList &oldFiles,
+			  const QStringList &acceptedMimeTypes);
   bool acceptNavigationRequest(const QUrl &url,
 			       NavigationType type,
 			       bool isMainFrame);

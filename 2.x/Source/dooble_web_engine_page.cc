@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QFileDialog>
 #include <QStackedLayout>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
@@ -61,6 +62,33 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 
 dooble_web_engine_page::~dooble_web_engine_page()
 {
+}
+
+QStringList dooble_web_engine_page::chooseFiles
+(FileSelectionMode mode,
+ const QStringList &oldFiles,
+ const QStringList &acceptedMimeTypes)
+{
+  switch(mode)
+    {
+    case QWebEnginePage::FileSelectOpen:
+      {
+	return QStringList() << QFileDialog::getOpenFileName(view(),
+							     tr("Select File"),
+							     QDir::homePath(),
+							     oldFiles.first());
+	break;
+      }
+    case QWebEnginePage::FileSelectOpenMultiple:
+      {
+	return QFileDialog::getOpenFileNames(view(),
+					     tr("Select Files"),
+					     QDir::homePath());
+	break;
+      }
+    }
+
+  return QWebEnginePage::chooseFiles(mode, oldFiles, acceptedMimeTypes);
 }
 
 bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
