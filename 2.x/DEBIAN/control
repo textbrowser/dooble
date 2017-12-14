@@ -1,10 +1,10 @@
 Architecture: amd64
-Installed-Size: 330308
+Installed-Size: 334860
 Maintainer: textbrowser@gmail.com
 Package: Dooble
 Priority: optional
 Section: net
-Version: 2.1.2
+Version: 2.2
 Description: Dooble Web Browser
  Welcome to the Dooble Web Browser!
  A dooble.desktop file will also be installed in /usr/share/applications/.
