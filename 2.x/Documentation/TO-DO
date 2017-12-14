@@ -134,6 +134,7 @@
        error("Qt version 5.9.3, or newer, is required.")
        }
        }
+5.     Qt 5.10.
 
 Unknown Items
 
