@@ -142,7 +142,7 @@
       <item>
        <widget class="dooble_tool_button" name="downloads">
         <property name="toolTip">
-         <string>Downloads</string>
+         <string>Downloads (Ctrl + D)</string>
         </property>
         <property name="text">
          <string/>
@@ -161,7 +161,7 @@
       <item>
        <widget class="dooble_tool_button" name="favorites">
         <property name="toolTip">
-         <string>Favorites</string>
+         <string>Favorites (Ctrl + B)</string>
         </property>
         <property name="text">
          <string/>
