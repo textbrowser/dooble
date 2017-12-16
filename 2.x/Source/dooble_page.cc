@@ -1264,6 +1264,10 @@ void dooble_page::slot_load_finished(bool ok)
 
   m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Reload"));
+
+  if(m_ui.address->hasFocus())
+    m_view->setFocus();
+
   emit iconChanged(icon());
 }
 
@@ -1458,6 +1462,7 @@ void dooble_page::slot_reset_url(void)
 {
   m_ui.address->setText(m_view->url().toString());
   m_ui.address->selectAll();
+  m_ui.address->setFocus();
 }
 
 void dooble_page::slot_settings_applied(void)
