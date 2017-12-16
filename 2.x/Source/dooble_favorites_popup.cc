@@ -26,6 +26,7 @@
 */
 
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QStandardItemModel>
 
 #include "dooble.h"
@@ -138,6 +139,18 @@ void dooble_favorites_popup::slot_delete_selected(void)
   if(list.isEmpty())
     return;
   else if(m_ui.view->isRowHidden(list.at(0).row()))
+    return;
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Are you sure that you wish to deleted the selected entry?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
     return;
 
   QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
