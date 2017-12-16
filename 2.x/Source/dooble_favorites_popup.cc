@@ -37,6 +37,10 @@
 dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
+
+  if(parent)
+    m_ui.delete_selected->setVisible(false);
+
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
 
