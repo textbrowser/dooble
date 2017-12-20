@@ -140,6 +140,7 @@
 3.     Signed Debian release.
 4.     Highlight rows instead of selecting them.
        (dooble_address_widget_completer_popup::mouseMoveEvent())
+5.     Include date stamps in cookie containers.
 
 Unknown Items
 
