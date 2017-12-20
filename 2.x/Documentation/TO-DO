@@ -138,6 +138,8 @@
 1.     Auto-correct addresses.
 2.     Richer Debian package.
 3.     Signed Debian release.
+4.     Highlight rows instead of selecting them.
+       (dooble_address_widget_completer_popup::mouseMoveEvent())
 
 Unknown Items
 
