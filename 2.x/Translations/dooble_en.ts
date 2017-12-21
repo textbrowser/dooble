@@ -394,7 +394,7 @@
     </message>
     <message>
         <location filename="../Source/dooble_about.cc" line="71"/>
-        <source>Dooble version %1 (%2), December Fire.</source>
+        <source>Dooble version %1 (%2), A New Beginning.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1103,8 +1103,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_favorites_popup.cc" line="106"/>
+        <location filename="../Source/dooble_favorites_popup.cc" line="111"/>
         <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_favorites_popup.cc" line="152"/>
+        <source>Are you sure that you wish to deleted the selected entry?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_favorites_popup.cc" line="155"/>
+        <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1245,12 +1255,12 @@
     </message>
     <message>
         <location filename="../UI/dooble_page.ui" line="145"/>
-        <source>Downloads</source>
+        <source>Downloads (Ctrl + D)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble_page.ui" line="164"/>
-        <source>Favorites</source>
+        <source>Favorites (Ctrl + B)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1635,18 +1645,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1327"/>
-        <location filename="../Source/dooble_page.cc" line="1451"/>
+        <location filename="../Source/dooble_page.cc" line="1331"/>
+        <location filename="../Source/dooble_page.cc" line="1455"/>
         <source>Stop Page Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1435"/>
+        <location filename="../Source/dooble_page.cc" line="1439"/>
         <source>The proxy &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1437"/>
+        <location filename="../Source/dooble_page.cc" line="1441"/>
         <source>Dooble: Proxy Authentication</source>
         <translation type="unfinished"></translation>
     </message>

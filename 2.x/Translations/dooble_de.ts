@@ -342,7 +342,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), December Fire.</source>
+        <source>Dooble version %1 (%2), A New Beginning.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -955,6 +955,14 @@ Dooble ist open source Software.
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Are you sure that you wish to deleted the selected entry?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished">Dooble: Bestätigung</translation>
+    </message>
 </context>
 <context>
     <name>dooble_history</name>
@@ -1282,7 +1290,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Downloads</source>
-        <translation>Downloads</translation>
+        <translation type="vanished">Downloads</translation>
     </message>
     <message>
         <source>Menus</source>
@@ -1334,7 +1342,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Favorites</source>
-        <translation>Favoriten</translation>
+        <translation type="vanished">Favoriten</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -1414,6 +1422,14 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Always from %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloads (Ctrl + D)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites (Ctrl + B)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
