@@ -30,20 +30,12 @@
 
 #include <QTableView>
 
-class dooble_address_widget;
-
 class dooble_address_widget_completer_popup: public QTableView
 {
   Q_OBJECT
 
  public:
   dooble_address_widget_completer_popup(QWidget *parent);
-
- protected:
-  void mouseMoveEvent(QMouseEvent *event);
-
- private:
-  dooble_address_widget *m_line_edit;
 };
 
 #endif

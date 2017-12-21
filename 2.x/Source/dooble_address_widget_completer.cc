@@ -25,7 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QPainter>
 #include <QStandardItem>
+#include <QStyledItemDelegate>
 
 #include "dooble.h"
 #include "dooble_address_widget_completer.h"
@@ -33,6 +35,35 @@
 #include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_page.h"
+
+class dooble_address_widget_completer_popup_item_delegate:
+  public QStyledItemDelegate
+{
+public:
+  dooble_address_widget_completer_popup_item_delegate(QObject *parent):
+    QStyledItemDelegate(parent)
+  {
+  }
+
+protected:
+  void paint(QPainter *painter,
+	     const QStyleOptionViewItem &option,
+	     const QModelIndex &index) const
+  {
+    if(option.state & QStyle::State_MouseOver)
+      {
+	QBrush backgroundBrush(QColor("#cfd8dc"));
+	QPalette palette(option.palette);
+	QRect rect(option.rect);
+
+	painter->save();
+	painter->fillRect(rect, backgroundBrush);
+	painter->restore();
+      }
+
+    QStyledItemDelegate::paint(painter, option, index);
+  }
+};
 
 QHash<QUrl, QStandardItem *> dooble_address_widget_completer::s_urls;
 QStandardItemModel *dooble_address_widget_completer::s_model = 0;
@@ -47,6 +78,8 @@ dooble_address_widget_completer::dooble_address_widget_completer
   m_popup = new dooble_address_widget_completer_popup(parent);
   m_popup->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   m_popup->horizontalHeader()->setVisible(false);
+  m_popup->setItemDelegateForColumn
+    (0, new dooble_address_widget_completer_popup_item_delegate(this));
   m_popup->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_popup->setSelectionMode(QAbstractItemView::SingleSelection);
   m_popup->setShowGrid(false);

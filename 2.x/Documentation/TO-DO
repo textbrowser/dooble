@@ -132,15 +132,14 @@
        }
        }
 2.     Qt 5.10.
+3.     Highlighted address-widget rows.
 
 2.2 Remaining Items
 
 1.     Auto-correct addresses.
 2.     Richer Debian package.
 3.     Signed Debian release.
-4.     Highlight rows instead of selecting them.
-       (dooble_address_widget_completer_popup::mouseMoveEvent())
-5.     Include date stamps in cookie containers.
+4.     Include date stamps in cookie containers.
 
 Unknown Items
 
