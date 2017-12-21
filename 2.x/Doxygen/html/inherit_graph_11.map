@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classdooble__favicons.html" title="dooble_favicons" alt="" coords="5,5,121,32"/>
+<area shape="rect" id="node2" href="$classdooble__cookies.html" title="dooble_cookies" alt="" coords="139,5,251,32"/>
+<area shape="rect" id="node3" href="$classdooble__cryptography.html" title="dooble_cryptography" alt="" coords="124,56,267,83"/>
+<area shape="rect" id="node4" href="$classdooble__history.html" title="dooble_history" alt="" coords="142,107,249,133"/>
+<area shape="rect" id="node5" href="$classdooble__pbkdf2.html" title="dooble_pbkdf2" alt="" coords="142,157,249,184"/>
 </map>

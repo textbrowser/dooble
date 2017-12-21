@@ -6,6 +6,7 @@ var searchData=
   ['dooble_5faddress_5fwidget',['dooble_address_widget',['../classdooble__address__widget.html',1,'']]],
   ['dooble_5faddress_5fwidget_5fcompleter',['dooble_address_widget_completer',['../classdooble__address__widget__completer.html',1,'']]],
   ['dooble_5faddress_5fwidget_5fcompleter_5fpopup',['dooble_address_widget_completer_popup',['../classdooble__address__widget__completer__popup.html',1,'']]],
+  ['dooble_5faddress_5fwidget_5fcompleter_5fpopup_5fitem_5fdelegate',['dooble_address_widget_completer_popup_item_delegate',['../classdooble__address__widget__completer__popup__item__delegate.html',1,'']]],
   ['dooble_5faes256',['dooble_aes256',['../classdooble__aes256.html',1,'']]],
   ['dooble_5fapplication',['dooble_application',['../classdooble__application.html',1,'']]],
   ['dooble_5fblock_5fcipher',['dooble_block_cipher',['../classdooble__block__cipher.html',1,'']]],
