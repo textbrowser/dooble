@@ -1,12 +1,3 @@
-linux {
-!versionAtLeast(QT_VERSION, 5.10) {
-error("Qt version 5.10.0, or newer, is required.")
-}
-} else {
-lessThan(QT_VERSION, 5.9.3) {
-error("Qt version 5.9.3, or newer, is required.")
-}
-}
 
 cache()
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
