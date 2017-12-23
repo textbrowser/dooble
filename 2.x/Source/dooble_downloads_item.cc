@@ -100,6 +100,9 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.progress->setVisible(false);
     }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+  m_ui.pause_resume->setVisible(false);
+#endif
 #ifdef Q_OS_MACOS
   m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
 			     "QToolButton::menu-button {border: none;}");
