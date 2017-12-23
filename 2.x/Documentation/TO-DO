@@ -133,6 +133,7 @@
        }
 2.     Qt 5.10.
 3.     Highlighted address-widget rows.
+4.     Pause and resume downloads. Requires Qt support.
 
 2.2 Remaining Items
 
@@ -145,11 +146,10 @@ Unknown Items
 
 1.     Optional Document Mode.
 2.     Print preview. Qt?
-3.     Pause and restart downloads. Requires Qt support.
-4.     Custom icon sets.
-5.     Document the Microsoft Studio compilation process.
-6.     Super-fancy icon set.
-7.     Fusion themes.
-8.     JavaScript window.print() is not supported.
-9.     Multiple certificate exceptions.
-10.    Certificate information. Requires a WebEngine interface.
+3.     Custom icon sets.
+4.     Document the Microsoft Studio compilation process.
+5.     Super-fancy icon set.
+6.     Fusion themes.
+7.     JavaScript window.print() is not supported.
+8.     Multiple certificate exceptions.
+9.     Certificate information. Requires a WebEngine interface.

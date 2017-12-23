@@ -56,6 +56,10 @@ dooble_downloads_item::dooble_downloads_item
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_cancel(void)));
+  connect(m_ui.pause_resume,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_pause_or_resume(void)));
 
   if(m_download)
     {
@@ -92,12 +96,15 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.cancel->setVisible(false);
       m_ui.file_name->setVisible(false);
       m_ui.information->setText(tr("The download object is zero. Error!"));
+      m_ui.pause_resume->setVisible(false);
       m_ui.progress->setVisible(false);
     }
 
 #ifdef Q_OS_MACOS
   m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
 			     "QToolButton::menu-button {border: none;}");
+  m_ui.pause_resume->setStyleSheet("QToolButton {border: none;}"
+				   "QToolButton::menu-button {border: none;}");
 #endif
   prepare_icons();
 }
@@ -114,6 +121,7 @@ dooble_downloads_item::dooble_downloads_item(const QString &file_name,
   m_ui.cancel->setVisible(false);
   m_ui.file_name->setText(file_name);
   m_ui.information->setText(information);
+  m_ui.pause_resume->setVisible(false);
   m_ui.progress->setVisible(false);
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
@@ -157,6 +165,8 @@ void dooble_downloads_item::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.cancel->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
+  m_ui.pause_resume->setIcon
+    (QIcon(QString(":/%1/20/resume.png").arg(icon_set)));
 }
 
 void dooble_downloads_item::record(void)
@@ -338,6 +348,7 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 void dooble_downloads_item::slot_finished(void)
 {
   m_ui.cancel->setVisible(false);
+  m_ui.pause_resume->setVisible(false);
   m_ui.progress->setVisible(false);
 
   if(m_download)
@@ -362,6 +373,34 @@ void dooble_downloads_item::slot_finished(void)
 
   record_information();
   emit finished();
+}
+
+void dooble_downloads_item::slot_pause_or_resume(void)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+  if(m_download)
+    {
+      if(m_download->isPaused())
+	m_download->resume();
+      else
+	m_download->pause();
+
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
+      if(m_download->isPaused())
+	{
+	  m_ui.pause_resume->setIcon
+	    (QIcon(QString(":/%1/20/pause.png").arg(icon_set)));
+	  m_ui.pause_resume->setToolTip(tr("Resume"));
+	}
+      else
+	{
+	  m_ui.pause_resume->setIcon
+	    (QIcon(QString(":/%1/20/resume.png").arg(icon_set)));
+	  m_ui.pause_resume->setToolTip(tr("Pause"));
+	}
+    }
+#endif
 }
 
 void dooble_downloads_item::slot_settings_applied(void)

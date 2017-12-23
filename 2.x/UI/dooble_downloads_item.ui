@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>71</height>
+    <height>79</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,6 +64,22 @@
     </layout>
    </item>
    <item>
+    <widget class="QToolButton" name="pause_resume">
+     <property name="toolTip">
+      <string>Pause</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QToolButton" name="cancel">
      <property name="toolTip">
       <string>Cancel</string>
@@ -81,6 +97,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pause_resume</tabstop>
+  <tabstop>cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
