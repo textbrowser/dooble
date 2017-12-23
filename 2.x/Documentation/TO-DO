@@ -118,6 +118,7 @@
 2.1.2 Completed Items
 
 1.     Sort history items on population.
+2.     Fusion themes.
 
 2.1.3 Completed Items
 
@@ -149,7 +150,6 @@ Unknown Items
 3.     Custom icon sets.
 4.     Document the Microsoft Studio compilation process.
 5.     Super-fancy icon set.
-6.     Fusion themes.
-7.     JavaScript window.print() is not supported.
-8.     Multiple certificate exceptions.
-9.     Certificate information. Requires a WebEngine interface.
+6.     JavaScript window.print() is not supported.
+7.     Multiple certificate exceptions.
+8.     Certificate information. Requires a WebEngine interface.
