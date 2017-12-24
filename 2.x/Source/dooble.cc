@@ -377,12 +377,13 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QApplication::restoreOverrideCursor();
 
-  if(event)
-    if(!can_exit())
-      {
+  if(!can_exit())
+    {
+      if(event)
 	event->ignore();
-	return;
-      }
+
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   s_cookies_window->close();
