@@ -924,6 +924,18 @@ Dooble ist open source Software.
         <source>Canceled - %1</source>
         <translation>Abgebrochen - %1</translation>
     </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_favorites_popup</name>
