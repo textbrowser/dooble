@@ -38,7 +38,7 @@
 #include "dooble_web_engine_view.h"
 
 dooble_web_engine_view::dooble_web_engine_view
-(QWebEngineProfile *web_engine_profile, QWidget *parent): QWebEngineView(parent)
+(QWebEngineProfile *web_engine_profile, QWidget *parent):QWebEngineView(parent)
 {
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
