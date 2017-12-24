@@ -231,7 +231,12 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 
 void dooble_web_engine_view::download(const QString &file_name, const QUrl &url)
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
   m_page->download(url, file_name);
+#else
+  Q_UNUSED(file_name);
+  Q_UNUSED(url);
+#endif
 }
 
 void dooble_web_engine_view::save(const QString &file_name)
