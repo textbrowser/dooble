@@ -1292,6 +1292,7 @@ void dooble_page::slot_load_progress(int progress)
   m_ui.backward->setEnabled(m_view->history()->canGoBack());
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
+  m_ui.progress->setVisible(progress > 0 && progress < 100);
 
   static QPalette s_address_palette(m_ui.address->palette());
 
@@ -1334,7 +1335,6 @@ void dooble_page::slot_load_started(void)
     }
 
   m_ui.javascript_popup_message->setVisible(false);
-  m_ui.progress->setVisible(true);
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
