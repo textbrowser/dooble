@@ -38,6 +38,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
 #include "dooble_downloads_item.h"
+#include "dooble_page.h"
 
 dooble_downloads::dooble_downloads(void):QMainWindow()
 {
@@ -142,7 +143,10 @@ void dooble_downloads::delete_selected(void)
 	<dooble_downloads_item *> (m_ui.table->cellWidget(list.at(i).row(), 0));
 
       if(!downloads_item)
-	continue;
+	{
+	  m_ui.table->removeRow(list.at(i).row());
+	  continue;
+	}
       else if(!downloads_item->is_finished())
 	continue;
 
@@ -217,17 +221,53 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	  this,
 	  SLOT(slot_download_destroyed(void)));
 
+  dooble_downloads_item *item = 0;
+  int index = -1;
+
+  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
+    {
+      dooble_downloads_item *downloads_item =
+	qobject_cast<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(!downloads_item)
+	{
+	  m_ui.table->removeRow(i);
+	  continue;
+	}
+
+      if(download->path() == downloads_item->download_path())
+	{
+	  index = i;
+	  item = downloads_item;
+	  break;
+	}
+    }
+
   dooble_downloads_item *downloads_item = new dooble_downloads_item
-    (download, -1, this);
+    (download, index, this);
 
   connect(downloads_item,
 	  SIGNAL(finished(void)),
 	  this,
 	  SLOT(slot_download_finished(void)));
-  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
-  m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
-  m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
-  m_ui.table->scrollToBottom();
+  connect(downloads_item,
+	  SIGNAL(reload(const QString &, const QUrl &)),
+	  this,
+	  SLOT(slot_reload(const QString &, const QUrl &)));
+
+  if(index == -1)
+    {
+      m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
+      m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
+      m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
+      m_ui.table->scrollToBottom();
+    }
+  else
+    {
+      m_ui.table->setCellWidget(index, 0, downloads_item);
+      item->deleteLater();
+    }
+
   emit started();
 }
 
@@ -301,7 +341,10 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(!downloads_item)
-	continue;
+	{
+	  m_ui.table->removeRow(i);
+	  continue;
+	}
       else if(!downloads_item->is_finished())
 	continue;
 
@@ -484,10 +527,11 @@ void dooble_downloads::slot_populate(void)
 	  if(query.next())
 	    m_ui.table->setRowCount(query.value(0).toInt());
 
-	if(query.exec("SELECT file_name, information, url, OID "
+	if(query.exec("SELECT download_path, file_name, information, url, OID "
 		      "FROM dooble_downloads ORDER BY insert_order"))
 	  while(query.next() && total_rows < m_ui.table->rowCount())
 	    {
+	      QString download_path("");
 	      QString file_name("");
 	      QString information("");
 	      QUrl url;
@@ -499,6 +543,7 @@ void dooble_downloads::slot_populate(void)
 		  case 0:
 		  case 1:
 		  case 2:
+		  case 3:
 		    {
 		      QByteArray bytes
 			(QByteArray::fromBase64(query.value(i).toByteArray()));
@@ -506,8 +551,10 @@ void dooble_downloads::slot_populate(void)
 		      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
 
 		      if(i == 0)
-			file_name = QString::fromUtf8(bytes);
+			download_path = QString::fromUtf8(bytes);
 		      else if(i == 1)
+			file_name = QString::fromUtf8(bytes);
+		      else if(i == 2)
 			information = QString::fromUtf8(bytes);
 		      else
 			url = QUrl::fromEncoded(bytes);
@@ -521,7 +568,8 @@ void dooble_downloads::slot_populate(void)
 		    }
 		  }
 
-	      if(file_name.isEmpty() ||
+	      if(download_path.isEmpty() ||
+		 file_name.isEmpty() ||
 		 information.isEmpty() ||
 		 url.isEmpty() ||
 		 !url.isValid())
@@ -537,12 +585,16 @@ void dooble_downloads::slot_populate(void)
 		}
 
 	      dooble_downloads_item *downloads_item = new dooble_downloads_item
-		(file_name, information, url, oid, this);
+		(download_path, file_name, information, url, oid, this);
 
 	      connect(downloads_item,
 		      SIGNAL(finished(void)),
 		      this,
 		      SLOT(slot_download_finished(void)));
+	      connect(downloads_item,
+		      SIGNAL(reload(const QString &, const QUrl &)),
+		      this,
+		      SLOT(slot_reload(const QString &, const QUrl &)));
 	      m_ui.table->setCellWidget(row, 0, downloads_item);
 	      m_ui.table->resizeRowToContents(row);
 	      row += 1;
@@ -557,6 +609,35 @@ void dooble_downloads::slot_populate(void)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
+{
+  foreach(dooble_downloads_item *item, findChildren<dooble_downloads_item *> ())
+    if(item)
+      if(item->url() == url)
+	{
+	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+	  QWidgetList list(QApplication::topLevelWidgets());
+
+	  for(int i = 0; i < list.size(); i++)
+	    if(qobject_cast<dooble *> (list.at(i)))
+	      {
+		dooble *d = qobject_cast<dooble *> (list.at(i));
+
+		foreach(dooble_page *page, d->findChildren<dooble_page *> ())
+		  if(page)
+		    {
+		      page->download(file_name, url);
+		      goto done_label;
+		    }
+	      }
+
+	done_label:
+	  QApplication::restoreOverrideCursor();
+	  break;
+	}
 }
 
 void dooble_downloads::slot_search_timer_timeout(void)

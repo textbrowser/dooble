@@ -42,6 +42,7 @@ class dooble_web_engine_view: public QWebEngineView
   ~dooble_web_engine_view();
   QWebEngineProfile *web_engine_profile(void) const;
   bool is_private(void) const;
+  void download(const QString &file_name, const QUrl &url);
   void save(const QString &file_name);
 
  protected:

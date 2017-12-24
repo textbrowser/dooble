@@ -86,10 +86,18 @@ dooble_downloads_item::dooble_downloads_item
 
       QFileInfo file_info(m_download->path());
 
+      m_download_path = m_download->path();
+      m_file_name = file_info.fileName();
       m_ui.file_name->setText(file_info.fileName());
       m_ui.progress->setMaximum(100);
       m_url = m_download->url();
-      record();
+
+      if(m_oid == -1)
+	/*
+	** New record.
+	*/
+
+	record();
     }
   else
     {
@@ -112,16 +120,32 @@ dooble_downloads_item::dooble_downloads_item
   prepare_icons();
 }
 
-dooble_downloads_item::dooble_downloads_item(const QString &file_name,
+dooble_downloads_item::dooble_downloads_item(const QString &download_path,
+					     const QString &file_name,
 					     const QString &information,
 					     const QUrl &url,
 					     qintptr oid,
 					     QWidget *parent):QWidget(parent)
 {
+  m_download_path = download_path;
+  m_file_name = file_name;
   m_oid = oid;
   m_url = url;
   m_ui.setupUi(this);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+  connect(m_ui.cancel,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reload(void)));
+
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  m_ui.cancel->setIcon(QIcon(QString(":/%1/20/reload.png").arg(icon_set)));
+  m_ui.cancel->setToolTip(tr("Restart"));
+  m_ui.cancel->setVisible(true);
+#else
   m_ui.cancel->setVisible(false);
+#endif
   m_ui.file_name->setText(file_name);
   m_ui.information->setText(information);
   m_ui.pause_resume->setVisible(false);
@@ -130,13 +154,17 @@ dooble_downloads_item::dooble_downloads_item(const QString &file_name,
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
-  prepare_icons();
 }
 
 dooble_downloads_item::~dooble_downloads_item()
 {
   if(m_download)
     m_download->cancel();
+}
+
+QString dooble_downloads_item::download_path(void) const
+{
+  return m_download_path;
 }
 
 QUrl dooble_downloads_item::url(void) const
@@ -189,13 +217,34 @@ void dooble_downloads_item::record(void)
 
     if(db.open())
       {
+	QSqlQuery query(db);
+
+	/*
+	** Recreate dooble_downloads if necessary.
+	*/
+
+	if(query.exec("PRAGMA TABLE_INFO(dooble_downloads)"))
+	  {
+	    bool exists = false;
+
+	    while(query.next())
+	      if(query.value(1).toString().toLower() == "download_path")
+		{
+		  exists = true;
+		  break;
+		}
+
+	    if(!exists)
+	      query.exec("DROP TABLE dooble_downloads");
+	  }
+
 	QByteArray bytes;
 	QString file_name(m_ui.file_name->text());
 	QString information(m_ui.information->text());
-	QSqlQuery query(db);
 	bool ok = true;
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
+		   "download_path TEXT NOT NULL, "
 		   "file_name TEXT NOT NULL, "
 		   "information TEXT NOT NULL, "
 
@@ -206,9 +255,18 @@ void dooble_downloads_item::record(void)
 		   "insert_order INTEGER PRIMARY KEY AUTOINCREMENT, "
 		   "url TEXT NOT NULL, "
 		   "url_digest TEXT NOT NULL)");
-	query.prepare("INSERT OR REPLACE INTO dooble_downloads "
-		      "(file_name, information, url, url_digest) "
-		      "VALUES (?, ?, ?, ?)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_downloads "
+	   "(download_path, file_name, information, url, url_digest) "
+	   "VALUES (?, ?, ?, ?, ?)");
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (m_download_path.toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  ok = false;
+
 	bytes = dooble::s_cryptography->encrypt_then_mac(file_name.toUtf8());
 
 	if(!bytes.isEmpty())
@@ -370,6 +428,20 @@ void dooble_downloads_item::slot_finished(void)
 	  (tr("Interrupted - %1 - %2").
 	   arg(m_download->url().host()).
 	   arg(dooble_ui_utilities::pretty_size(m_download->receivedBytes())));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+      connect(m_ui.cancel,
+	      SIGNAL(clicked(void)),
+	      this,
+	      SLOT(slot_reload(void)),
+	      Qt::UniqueConnection);
+
+      QString icon_set(dooble_settings::setting("icon_set").toString());
+
+      m_ui.cancel->setIcon(QIcon(QString(":/%1/20/reload.png").arg(icon_set)));
+      m_ui.cancel->setToolTip(tr("Restart"));
+      m_ui.cancel->setVisible(true);
+#endif
     }
   else
     m_ui.information->setText(tr("Interrupted"));
@@ -404,6 +476,11 @@ void dooble_downloads_item::slot_pause_or_resume(void)
 	}
     }
 #endif
+}
+
+void dooble_downloads_item::slot_reload(void)
+{
+  emit reload(m_file_name, m_url);
 }
 
 void dooble_downloads_item::slot_settings_applied(void)

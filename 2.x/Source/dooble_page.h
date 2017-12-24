@@ -67,6 +67,7 @@ class dooble_page: public QWidget
   bool is_private(void) const;
   dooble_address_widget *address_widget(void) const;
   dooble_web_engine_view *view(void) const;
+  void download(const QString &file_name, const QUrl &url);
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
   void load(const QUrl &url);

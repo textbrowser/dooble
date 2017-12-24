@@ -77,6 +77,7 @@ class dooble_downloads: public QMainWindow
   void slot_find(void);
   void slot_open_download_page(void);
   void slot_populate(void);
+  void slot_reload(const QString &file_name, const QUrl &url);
   void slot_search_timer_timeout(void);
   void slot_select_path(void);
   void slot_show_context_menu(const QPoint &point);

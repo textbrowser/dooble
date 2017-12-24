@@ -46,12 +46,14 @@ class dooble_downloads_item: public QWidget
   dooble_downloads_item(QWebEngineDownloadItem *download,
 			qintptr oid,
 			QWidget *parent);
-  dooble_downloads_item(const QString &file_name,
+  dooble_downloads_item(const QString &download_path,
+			const QString &file_name,
 			const QString &information,
 			const QUrl &url,
 			qintptr oid,
 			QWidget *parent);
   ~dooble_downloads_item();
+  QString download_path(void) const;
   QUrl url(void) const;
   bool is_finished(void) const;
   qintptr oid(void) const;
@@ -60,6 +62,8 @@ class dooble_downloads_item: public QWidget
  private:
   QTime m_last_time;
   QPointer<QWebEngineDownloadItem> m_download;
+  QString m_download_path;
+  QString m_file_name;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
   qintptr m_oid;
@@ -79,10 +83,12 @@ class dooble_downloads_item: public QWidget
 #endif
   void slot_finished(void);
   void slot_pause_or_resume(void);
+  void slot_reload(void);
   void slot_settings_applied(void);
 
  signals:
   void finished(void);
+  void reload(const QString &file_name, const QUrl &url);
 };
 
 #endif

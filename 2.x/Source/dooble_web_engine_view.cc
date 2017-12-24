@@ -229,6 +229,11 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   menu->deleteLater();
 }
 
+void dooble_web_engine_view::download(const QString &file_name, const QUrl &url)
+{
+  m_page->download(url, file_name);
+}
+
 void dooble_web_engine_view::save(const QString &file_name)
 {
   m_page->save(file_name, QWebEngineDownloadItem::CompleteHtmlSaveFormat);

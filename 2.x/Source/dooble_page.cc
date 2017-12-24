@@ -386,6 +386,11 @@ dooble_web_engine_view *dooble_page::view(void) const
   return m_view;
 }
 
+void dooble_page::download(const QString &file_name, const QUrl &url)
+{
+  m_view->download(file_name, url);
+}
+
 void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
 				     bool state)
 {
