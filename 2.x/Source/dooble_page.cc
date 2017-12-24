@@ -738,9 +738,15 @@ void dooble_page::prepare_tool_buttons(void)
       }
     else if(m_ui.backward == tool_button ||
 	    m_ui.forward == tool_button)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
       tool_button->setStyleSheet
 	("QToolButton {border: none; padding-right: 10px}"
 	 "QToolButton::menu-button {border: none;}");
+#else
+      tool_button->setStyleSheet
+	("QToolButton {border: none; padding-right: 15px}"
+	 "QToolButton::menu-button {border: none; width: 15px;}");
+#endif
     else if(m_ui.menu == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none;}"

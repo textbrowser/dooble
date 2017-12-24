@@ -134,7 +134,9 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
 #ifdef Q_OS_MACOS
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   QApplication::setStyle(QStyleFactory::create("Macintosh"));
+#endif
   QDir::setCurrent("/Applications/Dooble.d");
 #elif defined(Q_OS_WIN)
   QApplication::addLibraryPath("plugins");
