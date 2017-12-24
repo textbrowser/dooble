@@ -1650,35 +1650,36 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
     {
-      if(!s_downloads->isVisible())
+      if(m_ui.tab->indexOf(s_downloads) == -1)
 	{
-	  if(m_ui.tab->indexOf(s_downloads) == -1)
-	    {
-	      m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
-	      m_ui.tab->setTabToolTip
-		(m_ui.tab->count() - 1, s_downloads->windowTitle());
-	      m_ui.tab->setTabIcon
-		(m_ui.tab->count() - 1, s_downloads->windowIcon());
-	      prepare_tab_icons();
-	    }
+	  m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+	  prepare_tab_icons();
+	}
 
-	  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
-	  m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
-	  prepare_tab_shortcuts();
-	}
-      else
-	{
-	  s_downloads->activateWindow();
-	  s_downloads->raise();
-	  s_downloads->showNormal();
-	}
+      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
+      m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
+      prepare_tab_shortcuts();
+      return;
     }
-  else if(!s_downloads->isVisible())
+
+  if(s_downloads->isVisible())
     {
       s_downloads->activateWindow();
       s_downloads->raise();
-      s_downloads->showNormal();
+      return;
     }
+
+  s_downloads->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, s_downloads);
+
+  s_downloads->activateWindow();
+  s_downloads->raise();
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)
