@@ -36,7 +36,7 @@ sudo cp -p ./dooble.sh /usr/local/dooble/.
 sudo cp -pr ./qtwebengine_dictionaries /usr/local/dooble/.
 sudo chown -Rh root:root /usr/local/dooble
 
-Preparing dooble_2.x.deb:
+Preparing Dooble-x.deb:
 
 cd
 mkdir -p dooble-2.x/usr/local
@@ -44,4 +44,4 @@ mkdir -p dooble-2.x/usr/share/applications
 cp -p ./dooble.d/2.x/dooble.desktop dooble-2.x/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-2.x/.
 cp -r /usr/local/dooble dooble-2.x/usr/local/.
-dpkg-deb --build dooble-2.x Dooble-2.1.2.deb
+dpkg-deb --build dooble-2.x Dooble-2.1.3.deb
