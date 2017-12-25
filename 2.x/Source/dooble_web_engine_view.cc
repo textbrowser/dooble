@@ -56,6 +56,10 @@ dooble_web_engine_view::dooble_web_engine_view
 	  SIGNAL(windowCloseRequested(void)),
 	  this,
 	  SIGNAL(windowCloseRequested(void)));
+  connect(this,
+	  SIGNAL(loadProgress(int)),
+	  this,
+	  SLOT(slot_load_progress(int)));
 
   if(QWebEngineProfile::defaultProfile() != m_page->profile())
     connect(m_page->profile(),
@@ -277,6 +281,12 @@ void dooble_web_engine_view::slot_create_dialog_requests(void)
 {
   while(!m_dialog_requests.isEmpty())
     emit create_dialog_request(m_dialog_requests.takeFirst());
+}
+
+void dooble_web_engine_view::slot_load_progress(int progress)
+{
+  if(progress == 100)
+    emit loadFinished(true);
 }
 
 void dooble_web_engine_view::slot_open_link_in_new_private_window(void)
