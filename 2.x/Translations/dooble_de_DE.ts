@@ -286,6 +286,10 @@
         <source>Certificate &amp;Exceptions...</source>
         <translation type="unfinished">Zertifikats-Ausnahmen...</translation>
     </message>
+    <message>
+        <source>The private window that is about to be closed has active downloads. If it&apos;s closed, the downloads will be aborted. Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -2181,7 +2185,11 @@ Domänen</translation>
     </message>
     <message>
         <source>Open Link in a &amp;Tab</source>
-        <translation>Öffne Link in einem &amp;Tab</translation>
+        <translation type="vanished">Öffne Link in einem &amp;Tab</translation>
+    </message>
+    <message>
+        <source>Open Link in a New &amp;Tab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
