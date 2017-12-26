@@ -143,6 +143,8 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.cancel->setIcon(QIcon(QString(":/%1/20/reload.png").arg(icon_set)));
+  m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
+			     "QToolButton::menu-button {border: none;}");
   m_ui.cancel->setToolTip(tr("Restart"));
   m_ui.cancel->setVisible(true);
 #else
