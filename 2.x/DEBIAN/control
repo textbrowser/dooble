@@ -3,7 +3,7 @@ Installed-Size: 334880
 Maintainer: textbrowser@gmail.com
 Package: Dooble
 Priority: optional
-Section: net
+Section: Internet
 Version: 2.1.3
 Description: Dooble Web Browser
  Welcome to the Dooble Web Browser!
