@@ -98,6 +98,23 @@ bool dooble_downloads::contains(QWebEngineDownloadItem *download) const
   return m_downloads.contains(download);
 }
 
+bool dooble_downloads::has_downloads_for_profile
+(QWebEngineProfile *profile) const
+{
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    {
+      dooble_downloads_item *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(downloads_item)
+	if(!downloads_item->is_finished())
+	  if(downloads_item->profile() == profile)
+	    return true;
+    }
+
+  return false;
+}
+
 bool dooble_downloads::is_finished(void) const
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)

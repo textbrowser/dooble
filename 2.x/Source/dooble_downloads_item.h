@@ -37,6 +37,7 @@
 #include "ui_dooble_downloads_item.h"
 
 class QWebEngineDownloadItem;
+class QWebEngineProfile;
 
 class dooble_downloads_item: public QWidget
 {
@@ -53,6 +54,7 @@ class dooble_downloads_item: public QWidget
 			qintptr oid,
 			QWidget *parent);
   ~dooble_downloads_item();
+  QPointer<QWebEngineProfile> profile(void) const;
   QString download_path(void) const;
   QUrl url(void) const;
   bool is_finished(void) const;
@@ -62,6 +64,7 @@ class dooble_downloads_item: public QWidget
  private:
   QTime m_last_time;
   QPointer<QWebEngineDownloadItem> m_download;
+  QPointer<QWebEngineProfile> m_profile;
   QString m_download_path;
   QString m_file_name;
   QUrl m_url;

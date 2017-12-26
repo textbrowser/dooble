@@ -301,13 +301,29 @@ bool dooble::can_exit(void)
     return true;
   else
     {
+      bool private_downloads = false;
+
+      if(m_web_engine_profile)
+	{
+	  if(s_downloads->has_downloads_for_profile(m_web_engine_profile))
+	    private_downloads = true;
+	}
+
       QMessageBox mb(this);
 
       mb.setIcon(QMessageBox::Question);
       mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-      mb.setText
-	(tr("Downloads are in progress. Are you sure that you wish to exit? "
-	    "If you exit, downloads will be aborted."));
+
+      if(private_downloads)
+	mb.setText
+	  (tr("The private window that is about to be closed has "
+	      "active downloads. If it's closed, the downloads will be "
+	      "aborted. Continue?"));
+      else
+	mb.setText
+	  (tr("Downloads are in progress. Are you sure that you "
+	      "wish to exit? If you exit, downloads will be aborted."));
+
       mb.setWindowIcon(windowIcon());
       mb.setWindowModality(Qt::WindowModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -357,6 +373,15 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
+  if(m_web_engine_profile)
+    if(!can_exit())
+      {
+	if(event)
+	  event->ignore();
+
+	return;
+      }
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   if(!m_is_javascript_dialog)
@@ -377,13 +402,14 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QApplication::restoreOverrideCursor();
 
-  if(!can_exit())
-    {
-      if(event)
-	event->ignore();
+  if(!m_web_engine_profile)
+    if(!can_exit())
+      {
+	if(event)
+	  event->ignore();
 
-      return;
-    }
+	return;
+      }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   s_cookies_window->close();

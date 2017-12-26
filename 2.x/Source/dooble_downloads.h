@@ -34,6 +34,7 @@
 #include "ui_dooble_downloads.h"
 
 class QWebEngineDownloadItem;
+class QWebEngineProfile;
 
 class dooble_downloads: public QMainWindow
 {
@@ -43,6 +44,7 @@ class dooble_downloads: public QMainWindow
   dooble_downloads(void);
   QString download_path(void) const;
   bool contains(QWebEngineDownloadItem *download) const;
+  bool has_downloads_for_profile(QWebEngineProfile *profile) const;
   bool is_finished(void) const;
   void abort(void);
   void purge(void);

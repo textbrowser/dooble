@@ -28,6 +28,7 @@
 #include <QDir>
 #include <QSqlQuery>
 #include <QWebEngineDownloadItem>
+#include <QWebEngineProfile>
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
@@ -63,6 +64,7 @@ dooble_downloads_item::dooble_downloads_item
 
   if(m_download)
     {
+      m_profile = qobject_cast<QWebEngineProfile *> (m_download->parent());
       m_download->setParent(this);
       connect(m_download,
 	      SIGNAL(destroyed(void)),
@@ -160,6 +162,11 @@ dooble_downloads_item::~dooble_downloads_item()
 {
   if(m_download)
     m_download->cancel();
+}
+
+QPointer<QWebEngineProfile> dooble_downloads_item::profile(void) const
+{
+  return m_profile;
 }
 
 QString dooble_downloads_item::download_path(void) const
