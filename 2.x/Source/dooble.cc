@@ -522,9 +522,14 @@ void dooble::connect_signals(void)
 	  SLOT(slot_tabs_menu_button_clicked(void)),
 	  Qt::UniqueConnection);
   connect(s_favorites_window,
-	  SIGNAL(open_url(const QUrl &)),
+	  SIGNAL(open_link(const QUrl &)),
 	  this,
 	  SLOT(slot_open_favorites_link(const QUrl &)),
+	  Qt::UniqueConnection);
+  connect(s_favorites_window,
+	  SIGNAL(open_link_in_new_tab(const QUrl &)),
+	  this,
+	  SLOT(slot_open_favorites_link_in_new_tab(const QUrl &)),
 	  Qt::UniqueConnection);
   connect(s_settings,
 	  SIGNAL(applied(void)),
@@ -1747,6 +1752,13 @@ void dooble::slot_open_favorites_link(const QUrl &url)
     }
 }
 
+void dooble::slot_open_favorites_link_in_new_tab(const QUrl &url)
+{
+  if(s_favorites_popup_opened_from_dooble_window == this ||
+     !s_favorites_popup_opened_from_dooble_window)
+    m_ui.tab->setCurrentWidget(new_page(url, m_is_private));
+}
+
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
   (new dooble(url, true))->show();
@@ -1790,7 +1802,7 @@ void dooble::slot_open_tab_as_new_window(int index)
   prepare_tab_shortcuts();
 }
 
-void dooble::slot_open_url(const QUrl &url)
+void dooble::slot_open_link(const QUrl &url)
 {
   new_page(url, false);
 }
@@ -1967,7 +1979,7 @@ void dooble::slot_show_about(void)
   connect(s_about,
 	  SIGNAL(link_activated(const QUrl &)),
 	  this,
-	  SLOT(slot_open_url(const QUrl &)),
+	  SLOT(slot_open_link(const QUrl &)),
 	  Qt::UniqueConnection);
   s_about->activateWindow();
   s_about->raise();

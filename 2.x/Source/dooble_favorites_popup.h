@@ -63,7 +63,8 @@ class dooble_favorites_popup: public QDialog
  signals:
   void favorite_changed(const QUrl &url, bool state);
   void favorites_sorted(void);
-  void open_url(const QUrl &url);
+  void open_link(const QUrl &url);
+  void open_link_in_new_tab(const QUrl &url);
 };
 
 #endif

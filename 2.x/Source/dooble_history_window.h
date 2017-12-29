@@ -79,7 +79,7 @@ class dooble_history_window: public QMainWindow
 
  signals:
   void favorite_changed(const QUrl &url, bool state);
-  void open_url(const QUrl &url);
+  void open_link(const QUrl &url);
 };
 
 #endif

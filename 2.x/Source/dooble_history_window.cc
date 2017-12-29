@@ -260,9 +260,9 @@ void dooble_history_window::show(QWidget *parent)
 	      SLOT(slot_parent_destroyed(void)),
 	      Qt::UniqueConnection);
       connect(this,
-	      SIGNAL(open_url(const QUrl &)),
+	      SIGNAL(open_link(const QUrl &)),
 	      m_parent,
-	      SLOT(slot_open_url(const QUrl &)),
+	      SLOT(slot_open_link(const QUrl &)),
 	      Qt::UniqueConnection);
     }
 
@@ -291,9 +291,9 @@ void dooble_history_window::showNormal(QWidget *parent)
 	      SLOT(slot_parent_destroyed(void)),
 	      Qt::UniqueConnection);
       connect(this,
-	      SIGNAL(open_url(const QUrl &)),
+	      SIGNAL(open_link(const QUrl &)),
 	      m_parent,
-	      SLOT(slot_open_url(const QUrl &)),
+	      SLOT(slot_open_link(const QUrl &)),
 	      Qt::UniqueConnection);
     }
 
@@ -559,9 +559,9 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
 		    SLOT(slot_parent_destroyed(void)),
 		    Qt::UniqueConnection);
 	    connect(this,
-		    SIGNAL(open_url(const QUrl &)),
+		    SIGNAL(open_link(const QUrl &)),
 		    m_parent,
-		    SLOT(slot_open_url(const QUrl &)),
+		    SLOT(slot_open_link(const QUrl &)),
 		    Qt::UniqueConnection);
 	    break;
 	  }
@@ -569,7 +569,7 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
       QApplication::restoreOverrideCursor();
     }
 
-  emit open_url(item->data(Qt::UserRole).toUrl());
+  emit open_link(item->data(Qt::UserRole).toUrl());
 }
 
 void dooble_history_window::slot_item_updated(const QIcon &icon,

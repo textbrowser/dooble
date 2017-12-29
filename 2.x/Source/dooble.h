@@ -153,11 +153,12 @@ class dooble: public QMainWindow
   void slot_new_tab(void);
   void slot_new_window(void);
   void slot_open_favorites_link(const QUrl &url);
+  void slot_open_favorites_link_in_new_tab(const QUrl &url);
+  void slot_open_link(const QUrl &url);
   void slot_open_link_in_new_private_window(const QUrl &url);
   void slot_open_link_in_new_tab(const QUrl &url);
   void slot_open_link_in_new_window(const QUrl &url);
   void slot_open_tab_as_new_window(int index);
-  void slot_open_url(const QUrl &url);
   void slot_pbkdf2_future_finished(void);
   void slot_populate_containers_timer_timeout(void);
   void slot_print(void);

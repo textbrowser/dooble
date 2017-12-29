@@ -133,8 +133,8 @@ class dooble_page: public QWidget
   void slot_load_progress(int progress);
   void slot_load_started(void);
   void slot_only_now_allow_javascript_popup(void);
-  void slot_open_url(const QUrl &url);
-  void slot_open_url(void);
+  void slot_open_link(const QUrl &url);
+  void slot_open_link(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
   void slot_print_preview(QPrinter *printer);

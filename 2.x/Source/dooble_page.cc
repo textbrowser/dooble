@@ -498,7 +498,7 @@ void dooble_page::prepare_shortcuts(void)
 				   SLOT(slot_show_find(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+L")),
 				   this,
-				   SLOT(slot_open_url(void)));
+				   SLOT(slot_open_link(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
 				   m_view,
 				   SLOT(reload(void)));
@@ -540,7 +540,7 @@ void dooble_page::prepare_standard_menus(void)
 		  QKeySequence(tr("Ctrl+N")));
   menu->addAction(tr("&Open URL"),
 		  this,
-		  SLOT(slot_open_url(void)),
+		  SLOT(slot_open_link(void)),
 		  QKeySequence(tr("Ctrl+L")));
   menu->addSeparator();
   action = m_action_close_tab = menu->addAction(tr("&Close Tab"),
@@ -1356,12 +1356,12 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
     }
 }
 
-void dooble_page::slot_open_url(const QUrl &url)
+void dooble_page::slot_open_link(const QUrl &url)
 {
   load(url);
 }
 
-void dooble_page::slot_open_url(void)
+void dooble_page::slot_open_link(void)
 {
   m_ui.address->selectAll();
   m_ui.address->setFocus();
@@ -1525,9 +1525,13 @@ void dooble_page::slot_show_favorites_popup(void)
 	  &menu,
 	  SLOT(close(void)));
   connect(favorites_popup,
-	  SIGNAL(open_url(const QUrl &)),
+	  SIGNAL(open_link(const QUrl &)),
 	  this,
-	  SLOT(slot_open_url(const QUrl &)));
+	  SLOT(slot_open_link(const QUrl &)));
+  connect(favorites_popup,
+	  SIGNAL(open_link_in_new_tab(const QUrl &)),
+	  this,
+	  SIGNAL(open_link_in_new_tab(const QUrl &)));
   favorites_popup->prepare_viewport_icons();
   favorites_popup->resize(favorites_popup->sizeHint());
   size = favorites_popup->size();

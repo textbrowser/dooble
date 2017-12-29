@@ -492,7 +492,7 @@ void dooble_downloads::slot_open_download_page(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   disconnect(this,
-	     SIGNAL(open_url(const QUrl &)));
+	     SIGNAL(open_link(const QUrl &)));
 
   QWidgetList list(QApplication::topLevelWidgets());
 
@@ -501,15 +501,15 @@ void dooble_downloads::slot_open_download_page(void)
        qobject_cast<dooble *> (list.at(i))->isVisible())
       {
 	connect(this,
-		SIGNAL(open_url(const QUrl &)),
+		SIGNAL(open_link(const QUrl &)),
 		list.at(i),
-		SLOT(slot_open_url(const QUrl &)),
+		SLOT(slot_open_link(const QUrl &)),
 		Qt::UniqueConnection);
 	break;
       }
 
   QApplication::restoreOverrideCursor();
-  emit open_url(url);
+  emit open_link(url);
 }
 
 void dooble_downloads::slot_populate(void)

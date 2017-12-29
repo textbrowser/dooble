@@ -86,7 +86,7 @@ class dooble_downloads: public QMainWindow
 
  signals:
   void finished(void);
-  void open_url(const QUrl &url);
+  void open_link(const QUrl &url);
   void started(void);
 };
 
