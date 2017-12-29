@@ -99,17 +99,23 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 
 bool dooble_tab_bar::is_private(void) const
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QWidget *parent = parentWidget();
 
   do
     {
       if(qobject_cast<dooble *> (parent))
-	return qobject_cast<dooble *> (parent)->is_private();
+	{
+	  QApplication::restoreOverrideCursor();
+	  return qobject_cast<dooble *> (parent)->is_private();
+	}
       else if(parent)
 	parent = parent->parentWidget();
     }
   while(parent);
 
+  QApplication::restoreOverrideCursor();
   return false;
 }
 

@@ -64,17 +64,23 @@ dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
   if(!widget)
     return 0;
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QWidget *parent = widget->parentWidget();
 
   do
     {
       if(qobject_cast<dooble *> (parent))
-	return qobject_cast<dooble *> (parent);
+	{
+	  QApplication::restoreOverrideCursor();
+	  return qobject_cast<dooble *> (parent);
+	}
       else if(parent)
 	parent = parent->parentWidget();
     }
   while(parent);
 
+  QApplication::restoreOverrideCursor();
   return 0;
 }
 

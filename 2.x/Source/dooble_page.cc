@@ -362,17 +362,23 @@ bool dooble_page::is_private(void) const
 
 dooble *dooble_page::find_parent_dooble(void) const
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QWidget *parent = parentWidget();
 
   do
     {
       if(qobject_cast<dooble *> (parent))
-	return qobject_cast<dooble *> (parent);
+	{
+	  QApplication::restoreOverrideCursor();
+	  return qobject_cast<dooble *> (parent);
+	}
       else if(parent)
 	parent = parent->parentWidget();
     }
   while(parent);
 
+  QApplication::restoreOverrideCursor();
   return 0;
 }
 
