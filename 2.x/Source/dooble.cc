@@ -979,6 +979,16 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("F11")),
 				   this,
 				   SLOT(slot_show_full_screen(void)));
+
+#ifdef Q_OS_MAC
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+      for(int i = 0; i < m_shortcuts.size(); i++)
+	connect(m_shortcuts.at(i),
+		SIGNAL(activated(void)),
+		this,
+		SLOT(slot_shortcut_activated(void)));
+#endif
+#endif
     }
 }
 
@@ -1712,6 +1722,20 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
   s_downloads->raise();
 }
 
+void dooble::slot_enable_shortcut(void)
+{
+  QTimer *timer = qobject_cast<QTimer *> (sender());
+
+  if(!timer)
+    return;
+
+  if(m_disabled_shortcuts.value(timer))
+    m_disabled_shortcuts.value(timer)->setEnabled(true);
+
+  m_disabled_shortcuts.remove(timer);
+  timer->deleteLater();
+}
+
 void dooble::slot_icon_changed(const QIcon &icon)
 {
   dooble_page *page = qobject_cast<dooble_page *> (sender());
@@ -1970,6 +1994,25 @@ void dooble::slot_settings_applied(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   prepare_tab_icons();
   QApplication::restoreOverrideCursor();
+}
+
+void dooble::slot_shortcut_activated(void)
+{
+  QShortcut *shortcut = qobject_cast<QShortcut *> (sender());
+
+  if(!shortcut)
+    return;
+
+  shortcut->setEnabled(false);
+
+  QTimer *timer = new QTimer(this);
+
+  connect(timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_enable_shortcut(void)));
+  timer->start(100);
+  m_disabled_shortcuts[timer] = shortcut;
 }
 
 void dooble::slot_show_about(void)
