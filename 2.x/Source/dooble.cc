@@ -115,7 +115,6 @@ dooble::dooble(QWidget *widget):QMainWindow()
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
-  prepare_standard_menus();
   prepare_style_sheets();
 }
 
@@ -217,7 +216,6 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
-  prepare_standard_menus();
   prepare_style_sheets();
 }
 
@@ -251,7 +249,6 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
-  prepare_standard_menus();
   prepare_style_sheets();
 }
 
@@ -285,7 +282,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_shortcuts();
-  prepare_standard_menus();
   prepare_style_sheets();
 }
 
@@ -1463,6 +1459,8 @@ void dooble::slot_about_to_show_main_menu(void)
 		}
 	    }
 	}
+      else if(m)
+	m->clear();
     }
 
   QApplication::restoreOverrideCursor();
