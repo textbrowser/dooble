@@ -30,6 +30,7 @@
 #include <QStyledItemDelegate>
 
 #include "dooble.h"
+#include "dooble_address_widget.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_address_widget_completer_popup.h"
 #include "dooble_application.h"
@@ -95,7 +96,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SIGNAL(history_cleared(void)),
 	  this,
 	  SLOT(slot_history_cleared(void)));
-  connect(qobject_cast<QLineEdit *> (parent),
+  connect(qobject_cast<dooble_address_widget *> (parent),
 	  SIGNAL(textEdited(const QString &)),
 	  &m_text_edited_timer,
 	  SLOT(start(void)));
@@ -283,7 +284,8 @@ void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
 
 void dooble_address_widget_completer::slot_clicked(const QModelIndex &index)
 {
-  qobject_cast<QLineEdit *> (widget())->setText(index.data().toString());
+  qobject_cast<dooble_address_widget *> (widget())->
+    setText(index.data().toString());
   QApplication::postEvent
     (widget(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
 }
@@ -300,7 +302,7 @@ void dooble_address_widget_completer::slot_text_edited_timeout(void)
   if(!parent())
     return;
 
-  QString text(qobject_cast<QLineEdit *> (parent())->text());
+  QString text(qobject_cast<dooble_address_widget *> (parent())->text());
 
   if(text.trimmed().isEmpty())
     m_popup->setVisible(false);
