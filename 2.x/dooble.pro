@@ -585,7 +585,6 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_history.h \
                   Source/dooble_history_table_widget.h \
                   Source/dooble_history_window.h \
-                  Source/dooble_label_widget.h \
                   Source/dooble_page.h \
                   Source/dooble_pbkdf2.h \
                   Source/dooble_popup_menu.h \
@@ -635,7 +634,6 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_history_table_widget.cc \
                   Source/dooble_history_window.cc \
 		  Source/dooble_hmac.cc \
-                  Source/dooble_label_widget.cc \
                   Source/dooble_main.cc \
                   Source/dooble_page.cc \
                   Source/dooble_pbkdf2.cc \

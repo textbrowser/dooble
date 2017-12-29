@@ -248,7 +248,6 @@ void dooble_address_widget_completer::complete(const QString &text)
       m_popup->setMinimumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
 	      m_model->rowCount()) * m_popup->rowHeight(0));
-      QCompleter::complete();
     }
   else
     m_popup->setVisible(false);

@@ -44,7 +44,6 @@
 #include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
-#include "dooble_label_widget.h"
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_ui_utilities.h"
