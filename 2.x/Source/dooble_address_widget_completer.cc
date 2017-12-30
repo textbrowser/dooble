@@ -277,7 +277,7 @@ void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
     if(list.at(0))
       {
 	if(icon.isNull())
-	  list.at(0)->setIcon(dooble_favicons::icon(QUrl()));
+	  list.at(0)->setIcon(dooble_favicons::icon(url));
 	else
 	  list.at(0)->setIcon(icon);
       }
