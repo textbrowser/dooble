@@ -28,7 +28,6 @@ var searchData=
   ['dooble_5fhistory_5fwindow',['dooble_history_window',['../classdooble__history__window.html',1,'']]],
   ['dooble_5fhistory_5fwindow_5ffavorite_5fitem',['dooble_history_window_favorite_item',['../classdooble__history__window__favorite__item.html',1,'']]],
   ['dooble_5fhmac',['dooble_hmac',['../classdooble__hmac.html',1,'']]],
-  ['dooble_5flabel_5fwidget',['dooble_label_widget',['../classdooble__label__widget.html',1,'']]],
   ['dooble_5fpage',['dooble_page',['../classdooble__page.html',1,'']]],
   ['dooble_5fpbkdf2',['dooble_pbkdf2',['../classdooble__pbkdf2.html',1,'']]],
   ['dooble_5fpopup_5fmenu',['dooble_popup_menu',['../classdooble__popup__menu.html',1,'']]],
