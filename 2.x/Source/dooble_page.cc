@@ -1172,13 +1172,15 @@ void dooble_page::slot_go_to_forward_item(void)
 
 void dooble_page::slot_icon_changed(const QIcon &icon)
 {
+  Q_UNUSED(icon);
+
   if(dooble::s_history->is_favorite(m_view->url()) || !m_is_private)
-    dooble::s_history->save_favicon(icon, m_view->url());
+    dooble::s_history->save_favicon(m_view->icon(), m_view->url());
 
   if(!m_is_private)
-    dooble_favicons::save_favicon(icon, m_view->url());
+    dooble_favicons::save_favicon(m_view->icon(), m_view->url());
 
-  m_ui.address->set_item_icon(icon, m_view->url());
+  m_ui.address->set_item_icon(m_view->icon(), m_view->url());
 }
 
 void dooble_page::slot_javascript_allow_popup_exception(void)

@@ -46,6 +46,7 @@ class dooble_web_engine_view: public QWebEngineView
   void save(const QString &file_name);
 
  protected:
+  QSize sizeHint(void) const;
   dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
   void contextMenuEvent(QContextMenuEvent *event);
 

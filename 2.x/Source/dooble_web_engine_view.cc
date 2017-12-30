@@ -26,6 +26,7 @@
 */
 
 #include <QContextMenuEvent>
+#include <QDesktopWidget>
 #include <QWebEngineContextMenuData>
 #include <QWebEngineProfile>
 
@@ -87,6 +88,11 @@ dooble_web_engine_view::~dooble_web_engine_view()
 QWebEngineProfile *dooble_web_engine_view::web_engine_profile(void) const
 {
   return m_page->profile();
+}
+
+QSize dooble_web_engine_view::sizeHint(void) const
+{
+  return QApplication::desktop()->screenGeometry(this).size();
 }
 
 bool dooble_web_engine_view::is_private(void) const
