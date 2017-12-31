@@ -84,6 +84,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   else
     m_view = new dooble_web_engine_view(web_engine_profile, this);
 
+  m_ui.address->set_view(m_view);
   m_ui.frame->layout()->addWidget(m_view);
   connect(dooble::s_downloads,
 	  SIGNAL(finished(void)),
@@ -221,6 +222,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
 	  SLOT(slot_icon_changed(const QIcon &)));
+  connect(m_view,
+	  SIGNAL(loadFinished(bool)),
+	  m_ui.address,
+	  SLOT(slot_load_finished(bool)));
   connect(m_view,
 	  SIGNAL(loadFinished(bool)),
 	  this,

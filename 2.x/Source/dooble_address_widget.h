@@ -36,6 +36,7 @@
 
 class QToolButton;
 class dooble_address_widget_completer;
+class dooble_web_engine_view;
 
 class dooble_address_widget: public QLineEdit
 {
@@ -48,6 +49,7 @@ class dooble_address_widget: public QLineEdit
   void complete(void);
   void setText(const QString &text);
   void set_item_icon(const QIcon &icon, const QUrl &url);
+  void set_view(dooble_web_engine_view *view);
 
  protected:
   bool event(QEvent *event);
@@ -59,8 +61,8 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_favorite;
   QToolButton *m_information;
   QToolButton *m_pull_down;
-  QUrl m_url;
   dooble_address_widget_completer *m_completer;
+  dooble_web_engine_view *m_view;
   void prepare_containers_for_url(const QUrl &url);
   void prepare_icons(void);
   void set_text_format(const QList<QTextLayout::FormatRange> &formats);
@@ -69,6 +71,7 @@ class dooble_address_widget: public QLineEdit
   void slot_favorite(void);
   void slot_favorite_changed(const QUrl &url, bool state);
   void slot_favorites_cleared(void);
+  void slot_load_finished(bool ok);
   void slot_load_started(void);
   void slot_populate(const QListPairIconString &list);
   void slot_return_pressed(void);

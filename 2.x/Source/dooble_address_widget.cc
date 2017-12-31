@@ -37,6 +37,7 @@
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_ui_utilities.h"
+#include "dooble_web_engine_view.h"
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
@@ -143,7 +144,7 @@ bool dooble_address_widget::event(QEvent *event)
       if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Escape)
 	{
 	  emit reset_url();
-	  prepare_containers_for_url(m_url);
+	  prepare_containers_for_url(m_view->url());
 	}
       else if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
@@ -202,7 +203,7 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
   if(event && event->key() == Qt::Key_Escape)
     {
       emit reset_url();
-      prepare_containers_for_url(m_url);
+      prepare_containers_for_url(m_view->url());
     }
   else if(event)
     {
@@ -352,21 +353,27 @@ void dooble_address_widget::set_text_format
   QApplication::sendEvent(this, &event);
 }
 
+void dooble_address_widget::set_view(dooble_web_engine_view *view)
+{
+  m_view = view;
+}
+
 void dooble_address_widget::slot_favorite(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   dooble::s_history->save_favorite
-    (m_url, !dooble::s_history->is_favorite(m_url));
-  emit favorite_changed(m_url, dooble::s_history->is_favorite(m_url));
+    (m_view->url(), !dooble::s_history->is_favorite(m_view->url()));
+  emit favorite_changed
+    (m_view->url(), dooble::s_history->is_favorite(m_view->url()));
   QApplication::restoreOverrideCursor();
 }
 
 void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 {
-  if(m_url.isEmpty() || !m_url.isValid())
+  if(m_view->url().isEmpty() || !m_view->url().isValid())
     return;
 
-  if(m_url == url)
+  if(m_view->url() == url)
     {
       QString icon_set(dooble_settings::setting("icon_set").toString());
 
@@ -386,10 +393,15 @@ void dooble_address_widget::slot_favorites_cleared(void)
   m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
 }
 
+void dooble_address_widget::slot_load_finished(bool ok)
+{
+  Q_UNUSED(ok);
+  prepare_containers_for_url(m_view->url());
+}
+
 void dooble_address_widget::slot_load_started(void)
 {
-  m_url = QUrl();
-  prepare_containers_for_url(m_url);
+  prepare_containers_for_url(m_view->url());
 }
 
 void dooble_address_widget::slot_populate
@@ -416,11 +428,11 @@ void dooble_address_widget::slot_settings_applied(void)
 
 void dooble_address_widget::slot_show_site_information_menu(void)
 {
-  if(m_url.isEmpty() || !m_url.isValid())
+  if(m_view->url().isEmpty() || !m_view->url().isValid())
     return;
 
   QMenu menu(this);
-  QUrl url(dooble_ui_utilities::simplified_url(m_url));
+  QUrl url(dooble_ui_utilities::simplified_url(m_view->url()));
 
   if(dooble_certificate_exceptions_menu_widget::has_exception(url))
     menu.addAction
@@ -445,14 +457,12 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
   if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
     return;
 
-  m_url = url;
-
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  if(dooble::s_history->is_favorite(m_url))
+  if(dooble::s_history->is_favorite(m_view->url()))
     m_favorite->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
   else
     m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
 
-  prepare_containers_for_url(m_url);
+  prepare_containers_for_url(m_view->url());
 }
