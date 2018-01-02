@@ -738,6 +738,8 @@ TARGET		= Dooble
 macx {
 copydata.path      = /Applications/Dooble.d/Data
 copydata.files     = Data/*.txt
+copydocumentation.path = /Applications/Dooble.d/Documentation
+copydocumentation.extra = cp ./Documentation/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
 copydooble.path    = /Applications/Dooble.d
 copydooble.extra   = cp -r ./Dooble.app /Applications/Dooble.d/.
 macdeployqt.path   = Dooble.app
@@ -748,6 +750,7 @@ translations.path  = /Applications/Dooble.d/Translations
 translations.files = Translations/*.qm
 
 INSTALLS	= copydata \
+                  copydocumentation \
                   preinstall \
                   copydooble \
                   macdeployqt \
