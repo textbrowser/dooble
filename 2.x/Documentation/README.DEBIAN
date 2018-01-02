@@ -1,5 +1,6 @@
 Preparing /usr/local/dooble:
 
+sudo mkdir -p /usr/local/dooble/Documentation
 sudo mkdir -p /usr/local/dooble/Lib
 sudo mkdir -p /usr/local/dooble/Translations
 sudo cp -p ~/Qt/5.10.0/gcc_64/lib/libQt5Core.so.5 /usr/local/dooble/Lib/.
@@ -28,6 +29,8 @@ sudo cp -pr ~/Qt/5.10.0/gcc_64/translations /usr/local/dooble/.
 sudo chmod -x,g+w /usr/local/dooble/Lib/*
 cd ~/dooble.d/2.x
 qmake -o Makefile dooble.pro && make -j 4
+sudo cp -p ./Documentation/*.pdf /usr/local/dooble/Documentation/.
+sudo cp -p ./Documentation/TO-DO /usr/local/dooble/Documentation/.
 sudo cp -p ./Dooble /usr/local/dooble/.
 sudo cp -p ./Icons/Logo/dooble.png /usr/local/dooble/.
 sudo cp -p ./Qt/qt.conf /usr/local/dooble/.
@@ -44,4 +47,4 @@ mkdir -p dooble-2.x/usr/share/applications
 cp -p ./dooble.d/2.x/dooble.desktop dooble-2.x/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-2.x/.
 cp -r /usr/local/dooble dooble-2.x/usr/local/.
-dpkg-deb --build dooble-2.x Dooble-2.1.3.deb
+dpkg-deb --build dooble-2.x Dooble-2.1.4.deb
