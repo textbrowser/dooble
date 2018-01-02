@@ -1611,7 +1611,11 @@ void dooble_page::slot_url_changed(const QUrl &url)
   if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
     return;
 
-  m_ui.address->add_item(m_view->icon(), m_view->url());
+  /*
+  ** Cannot assume that the view's icon has been loaded yet.
+  */
+
+  m_ui.address->add_item(QIcon(), m_view->url());
   m_ui.address->setText(m_view->url().toString());
 }
 
