@@ -940,7 +940,7 @@ void dooble_history_window::slot_show_context_menu(const QPoint &point)
   menu.addAction(tr("&Delete Page(s) (Non-Favorites)"),
 		 this,
 		 SLOT(slot_delete_pages(void)));
-  menu.addAction(tr("&Delete Page(s)..."),
+  menu.addAction(tr("&Delete Page(s)"),
 		 this,
 		 SLOT(slot_delete_pages(void)))->setProperty("prompt", true);
   menu.exec(mapToGlobal(point));
