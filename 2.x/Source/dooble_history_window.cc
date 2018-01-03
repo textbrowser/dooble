@@ -28,6 +28,7 @@
 #include <QClipboard>
 #include <QDir>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QSqlQuery>
 
 #include "dooble.h"
@@ -335,6 +336,26 @@ void dooble_history_window::slot_delete_pages(void)
   if(list.isEmpty())
     return;
 
+  QAction *action = qobject_cast<QAction *> (sender());
+  bool favorites_included = false;
+
+  if(action && action->property("prompt").toBool())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Favorites may be deleted. Continue?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+
+      favorites_included = true;
+    }
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   std::sort(list.begin(), list.end());
 
@@ -342,6 +363,10 @@ void dooble_history_window::slot_delete_pages(void)
 
   for(int i = list.size() - 1; i >= 0; i--)
     {
+      if(!favorites_included)
+	if(list.at(i).data(Qt::CheckStateRole) == Qt::Checked)
+	  continue;
+
       if(m_ui.table->isRowHidden(list.at(i).row()))
 	continue;
 
@@ -350,10 +375,6 @@ void dooble_history_window::slot_delete_pages(void)
       urls << url;
       dooble::s_history->remove_item(url);
       dooble_address_widget_completer::remove_item(url);
-
-      if(list.at(i).data(Qt::CheckStateRole) == Qt::Checked)
-	emit favorite_changed(url, false);
-
       m_items.remove(url);
       m_ui.table->removeRow(list.at(i).row());
     }
@@ -916,7 +937,12 @@ void dooble_history_window::slot_show_context_menu(const QPoint &point)
 
   menu.addAction(tr("&Copy Location"), this, SLOT(slot_copy_location(void)));
   menu.addSeparator();
-  menu.addAction(tr("&Delete Page(s)"), this, SLOT(slot_delete_pages(void)));
+  menu.addAction(tr("&Delete Page(s) (Non-Favorites)"),
+		 this,
+		 SLOT(slot_delete_pages(void)));
+  menu.addAction(tr("&Delete Page(s)..."),
+		 this,
+		 SLOT(slot_delete_pages(void)))->setProperty("prompt", true);
   menu.exec(mapToGlobal(point));
 }
 
