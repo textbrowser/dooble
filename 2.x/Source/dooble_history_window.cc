@@ -380,6 +380,7 @@ void dooble_history_window::slot_delete_pages(void)
     }
 
   QApplication::restoreOverrideCursor();
+  prepare_viewport_icons();
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
