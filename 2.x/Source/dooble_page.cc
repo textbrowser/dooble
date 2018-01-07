@@ -86,6 +86,17 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
   m_ui.address->set_view(m_view);
   m_ui.frame->layout()->addWidget(m_view);
+
+  if(parent)
+    m_view->resize(parent->size());
+  else
+    {
+      dooble *d = find_parent_dooble();
+
+      if(d)
+	m_view->resize(d->size());
+    }
+
   connect(dooble::s_downloads,
 	  SIGNAL(finished(void)),
 	  this,
