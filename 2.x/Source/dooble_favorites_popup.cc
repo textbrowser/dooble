@@ -157,6 +157,8 @@ void dooble_favorites_popup::slot_delete_selected(void)
   if(mb.exec() != QMessageBox::Yes)
     return;
 
+  prepare_viewport_icons();
+
   QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
 
   dooble::s_history->remove_favorite(url);
