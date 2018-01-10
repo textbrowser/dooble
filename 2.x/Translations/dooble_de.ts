@@ -1061,6 +1061,18 @@ Dooble ist open source Software.
         <source>Favorite</source>
         <translation>Favorit</translation>
     </message>
+    <message>
+        <source>Favorites may be deleted. Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished">Dooble: Bestätigung</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Page(s) (Non-Favorites)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_page</name>
