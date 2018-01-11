@@ -552,6 +552,11 @@
                 <string>Indigo</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>Orange</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item>

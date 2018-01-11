@@ -850,6 +850,11 @@ void dooble_settings::restore(bool read_database)
 	s_settings["theme_color"] = "indigo";
 	break;
       }
+    case 4:
+      {
+	s_settings["theme_color"] = "orange";
+	break;
+      }
     default:
       s_settings["theme_color"] = "blue-grey";
     }
@@ -1252,6 +1257,11 @@ void dooble_settings::slot_apply(void)
       case 3:
 	{
 	  s_settings["theme_color"] = "indigo";
+	  break;
+	}
+      case 4:
+	{
+	  s_settings["theme_color"] = "orange";
 	  break;
 	}
       default:

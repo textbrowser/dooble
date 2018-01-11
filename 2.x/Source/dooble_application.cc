@@ -94,4 +94,11 @@ void dooble_application::prepare_theme_colors(void)
   s_theme_colors["indigo-selected-tab-color"] = "#536dfe";
   s_theme_colors["indigo-status-bar-text-color"] = "white";
   s_theme_colors["indigo-tabbar-background-color"] = "#5c6bc0";
+  s_theme_colors["orange-corner-widget-background-color"] = "#e65100";
+  s_theme_colors["orange-hovered-tab-color"] = "white";
+  s_theme_colors["orange-menubar-text-color"] = "white";
+  s_theme_colors["orange-not-selected-tab-text-color"] = "#e65100";
+  s_theme_colors["orange-selected-tab-color"] = "#616161";
+  s_theme_colors["orange-status-bar-text-color"] = "white";
+  s_theme_colors["orange-tabbar-background-color"] = "#e65100";
 }
