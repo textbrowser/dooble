@@ -136,12 +136,14 @@
 3.     Highlighted address-widget rows.
 4.     Pause and resume downloads. Requires Qt support.
 
+2.1.5 Completed Items
+
+1.     Signed Debian release.
+
 2.2 Remaining Items
 
 1.     Auto-correct addresses.
-2.     Richer Debian package.
-3.     Signed Debian release.
-4.     Include date stamps in cookie containers.
+2.     Include date stamps in cookie containers.
 
 Unknown Items
 

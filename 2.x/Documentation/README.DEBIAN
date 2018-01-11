@@ -48,3 +48,4 @@ cp -p ./dooble.d/2.x/dooble.desktop dooble-2.x/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-2.x/.
 cp -r /usr/local/dooble dooble-2.x/usr/local/.
 fakeroot dpkg-deb --build dooble-2.x Dooble-2.1.5.deb
+debsigs --sign=origin -k F29D7B80 Dooble-2.1.5.deb
