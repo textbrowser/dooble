@@ -674,6 +674,8 @@ void dooble::new_page(dooble_page *page)
 
   if(title.isEmpty())
     title = tr("New Tab");
+  else
+    title.replace("&", "&&");
 
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
@@ -705,6 +707,8 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   if(title.isEmpty())
     title = tr("New Tab");
+  else
+    title.replace("&", "&&");
 
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
@@ -2445,7 +2449,7 @@ void dooble::slot_title_changed(const QString &title)
   if(page == m_ui.tab->currentWidget())
     setWindowTitle(text);
 
-  m_ui.tab->setTabText(m_ui.tab->indexOf(page), text);
+  m_ui.tab->setTabText(m_ui.tab->indexOf(page), text.replace("&", "&&"));
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
 }
 
