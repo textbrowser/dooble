@@ -2099,6 +2099,10 @@ Domänen</translation>
         <source>Show Hovered Links Tool Tips</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Orange</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_tab_bar</name>
