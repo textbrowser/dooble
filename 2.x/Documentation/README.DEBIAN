@@ -1,3 +1,4 @@
+
 Preparing /usr/local/dooble:
 
 sudo mkdir -p /usr/local/dooble/Documentation
@@ -31,6 +32,8 @@ cd ~/dooble.d/2.x
 qmake -o Makefile dooble.pro && make -j 4
 sudo cp -p ./Documentation/*.pdf /usr/local/dooble/Documentation/.
 sudo cp -p ./Documentation/TO-DO /usr/local/dooble/Documentation/.
+sudo cp -p ./Documentation/dooble.asc /usr/local/dooble/Documentation/.
+sudo cp -p ./Documentation/dooble.pol /usr/local/dooble/Documentation/.
 sudo cp -p ./Dooble /usr/local/dooble/.
 sudo cp -p ./Icons/Logo/dooble.png /usr/local/dooble/.
 sudo cp -p ./Qt/qt.conf /usr/local/dooble/.
