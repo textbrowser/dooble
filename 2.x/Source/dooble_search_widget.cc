@@ -43,7 +43,7 @@ dooble_search_widget::dooble_search_widget(QWidget *parent):QLineEdit(parent)
 	  this,
 	  SLOT(slot_settings_applied(void)));
   prepare_icons();
-  setMinimumHeight(sizeHint().height());
+  setMinimumHeight(sizeHint().height() + sizeHint().height() % 2);
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(frame_width + m_find_tool_button->sizeHint().width() + 5).
@@ -68,7 +68,7 @@ void dooble_search_widget::resizeEvent(QResizeEvent *event)
   int d = 0;
   int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
-  d = (rect().height() - size1.height()) / 2;
+  d = (rect().height() - (size1.height() - size1.height() % 2)) / 2;
   m_find_tool_button->move(frame_width - rect().left() + 5, rect().top() + d);
   QLineEdit::resizeEvent(event);
 }

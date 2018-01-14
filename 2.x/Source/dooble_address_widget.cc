@@ -123,12 +123,13 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
   setCompleter(m_completer);
-  setMinimumHeight(sizeHint().height());
+  setMinimumHeight(sizeHint().height() + sizeHint().height() % 2);
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(m_favorite->sizeHint().width() +
 	 m_information->sizeHint().width() +
-	 frame_width + 10).
+	 frame_width +
+	 10).
      arg(m_pull_down->sizeHint().width() + frame_width + 10));
 }
 
@@ -266,12 +267,12 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
   int d = 0;
   int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
-  d = (rect().height() - size1.height()) / 2;
+  d = (rect().height() - (size1.height() - size1.height() % 2)) / 2;
   m_favorite->move(frame_width - rect().left() + size2.width() + 5,
 		   rect().top() + d);
-  d = (rect().height() - size2.height()) / 2;
+  d = (rect().height() - (size2.height() - size2.height() % 2)) / 2;
   m_information->move(frame_width - rect().left() + 5, rect().top() + d);
-  d = (rect().height() - size3.height()) / 2;
+  d = (rect().height() - (size3.height() - size3.height() % 2)) / 2;
   m_pull_down->move
     (rect().right() - frame_width - size3.width() - 5, rect().top() + d);
 
