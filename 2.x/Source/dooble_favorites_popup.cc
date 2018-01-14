@@ -133,6 +133,31 @@ void dooble_favorites_popup::prepare_viewport_icons(void)
   m_ui.view->prepare_viewport_icons();
 }
 
+void dooble_favorites_popup::resizeEvent(QResizeEvent *event)
+{
+  QDialog::resizeEvent(event);
+
+  if(!parent())
+    save_settings();
+}
+
+void dooble_favorites_popup::save_settings(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    dooble_settings::set_setting
+      ("favorites_window_geometry", saveGeometry().toBase64());
+}
+
+void dooble_favorites_popup::show(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool() && !parent())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("favorites_window_geometry").
+					   toByteArray()));
+
+  QDialog::show();
+}
+
 void dooble_favorites_popup::slot_delete_selected(void)
 {
   if(!dooble::s_history)

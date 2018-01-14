@@ -41,13 +41,18 @@ class dooble_favorites_popup: public QDialog
   dooble_favorites_popup(QWidget *parent);
   void prepare_viewport_icons(void);
 
+ public slots:
+  void show(void);
+
  protected:
   void keyPressEvent(QKeyEvent *event);
+  void resizeEvent(QResizeEvent *event);
 
  private:
   QTimer m_search_timer;
   Ui_dooble_favorites_popup m_ui;
   void prepare_icons(void);
+  void save_settings(void);
 
  private slots:
   void slot_delete_selected(void);
