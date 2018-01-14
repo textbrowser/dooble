@@ -591,12 +591,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="440"/>
+        <location filename="../Source/dooble_address_widget.cc" line="441"/>
         <source>Certificate exception accepted for this site...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="444"/>
+        <location filename="../Source/dooble_address_widget.cc" line="445"/>
         <source>Show Site Coo&amp;kies...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1130,12 +1130,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_favorites_popup.cc" line="152"/>
+        <location filename="../Source/dooble_favorites_popup.cc" line="177"/>
         <source>Are you sure that you wish to deleted the selected entry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_favorites_popup.cc" line="155"/>
+        <location filename="../Source/dooble_favorites_popup.cc" line="180"/>
         <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
