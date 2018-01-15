@@ -1682,18 +1682,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1365"/>
-        <location filename="../Source/dooble_page.cc" line="1489"/>
+        <location filename="../Source/dooble_page.cc" line="1361"/>
+        <location filename="../Source/dooble_page.cc" line="1485"/>
         <source>Stop Page Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1473"/>
+        <location filename="../Source/dooble_page.cc" line="1469"/>
         <source>The proxy &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1475"/>
+        <location filename="../Source/dooble_page.cc" line="1471"/>
         <source>Dooble: Proxy Authentication</source>
         <translation type="unfinished"></translation>
     </message>
