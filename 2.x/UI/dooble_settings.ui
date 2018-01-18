@@ -722,8 +722,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>680</height>
+               <width>451</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1222,8 +1222,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>270</width>
-               <height>729</height>
+               <width>451</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1297,6 +1297,9 @@
                         <width>0</width>
                         <height>150</height>
                        </size>
+                      </property>
+                      <property name="tabKeyNavigation">
+                       <bool>false</bool>
                       </property>
                       <property name="alternatingRowColors">
                        <bool>true</bool>
@@ -1399,7 +1402,7 @@
                     </size>
                    </property>
                    <property name="tabKeyNavigation">
-                    <bool>true</bool>
+                    <bool>false</bool>
                    </property>
                    <property name="alternatingRowColors">
                     <bool>true</bool>

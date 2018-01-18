@@ -81,6 +81,9 @@
    </item>
    <item>
     <widget class="dooble_favorites_table_view" name="view">
+     <property name="tabKeyNavigation">
+      <bool>false</bool>
+     </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>

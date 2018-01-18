@@ -52,6 +52,9 @@
        </item>
       </widget>
       <widget class="dooble_history_table_widget" name="table">
+       <property name="tabKeyNavigation">
+        <bool>false</bool>
+       </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
        </property>

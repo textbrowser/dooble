@@ -49,6 +49,9 @@
     </item>
     <item>
      <widget class="QTableWidget" name="table">
+      <property name="tabKeyNavigation">
+       <bool>false</bool>
+      </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
