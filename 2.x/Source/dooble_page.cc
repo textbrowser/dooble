@@ -1298,6 +1298,7 @@ void dooble_page::slot_load_finished(bool ok)
 
   m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Reload"));
+  m_view->setFocus();
   emit iconChanged(icon());
 }
 
