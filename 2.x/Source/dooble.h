@@ -151,6 +151,7 @@ class dooble: public QMainWindow
   void slot_download_requested(QWebEngineDownloadItem *download);
   void slot_enable_shortcut(void);
   void slot_icon_changed(const QIcon &icon);
+  void slot_load_finished(bool ok);
   void slot_new_private_window(void);
   void slot_new_tab(void);
   void slot_new_window(void);

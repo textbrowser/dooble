@@ -783,6 +783,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SLOT(slot_load_finished(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(loadStarted(void)),
 	  m_ui.tab,
 	  SLOT(slot_load_started(void)),
@@ -1293,6 +1299,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     m_ui.tab,
 	     SLOT(slot_load_finished(void)));
   disconnect(page,
+	     SIGNAL(loadFinished(bool)),
+	     this,
+	     SLOT(slot_load_finished(bool)));
+  disconnect(page,
 	     SIGNAL(loadStarted(void)),
 	     m_ui.tab,
 	     SLOT(slot_load_started(void)));
@@ -1746,6 +1756,17 @@ void dooble::slot_icon_changed(const QIcon &icon)
 
   if(page)
     m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
+}
+
+void dooble::slot_load_finished(bool ok)
+{
+  Q_UNUSED(ok);
+
+  dooble_page *page = qobject_cast<dooble_page *> (sender());
+
+  if(m_ui.tab->currentWidget() == page)
+    if(page)
+      page->view()->setFocus();
 }
 
 void dooble::slot_new_private_window(void)

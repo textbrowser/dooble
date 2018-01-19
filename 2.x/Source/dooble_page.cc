@@ -1298,7 +1298,6 @@ void dooble_page::slot_load_finished(bool ok)
 
   m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Reload"));
-  m_view->setFocus();
   emit iconChanged(icon());
 }
 
@@ -1620,7 +1619,7 @@ void dooble_page::slot_url_changed(const QUrl &url)
     return;
 
   /*
-  ** Cannot assume that the view's icon has been loaded yet.
+  ** Cannot assume that the view's icon has been loaded.
   */
 
   m_ui.address->add_item(QIcon(), m_view->url());
