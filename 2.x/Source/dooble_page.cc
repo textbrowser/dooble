@@ -938,11 +938,17 @@ void dooble_page::slot_accepted_or_blocked_add_exception(void)
     return;
 
   if(action->property("host").isValid())
-    dooble::s_accepted_or_blocked_domains->new_exception
-      (action->property("host").toString());
+    {
+      dooble::s_accepted_or_blocked_domains->new_exception
+	(action->property("host").toString());
+      m_view->reload();
+    }
   else if(action->property("url").isValid())
-    dooble::s_accepted_or_blocked_domains->new_exception
-      (action->property("url").toUrl().toString());
+    {
+      dooble::s_accepted_or_blocked_domains->new_exception
+	(action->property("url").toUrl().toString());
+      m_view->reload();
+    }
 }
 
 void dooble_page::slot_accepted_or_blocked_clicked(void)
