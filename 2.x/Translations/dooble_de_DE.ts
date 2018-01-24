@@ -346,7 +346,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), A New Beginning.</source>
+        <source>Dooble version %1 (%2), Blue Beast.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
