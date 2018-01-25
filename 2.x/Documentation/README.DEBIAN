@@ -39,6 +39,7 @@ sudo cp -p ./Icons/Logo/dooble.png /usr/local/dooble/.
 sudo cp -p ./Qt/qt.conf /usr/local/dooble/.
 sudo cp -p ./Translations/*.qm /usr/local/dooble/Translations/.
 sudo cp -p ./dooble.sh /usr/local/dooble/.
+sudo cp -pr ./Data /usr/local/dooble/.
 sudo cp -pr ./qtwebengine_dictionaries /usr/local/dooble/.
 sudo chown -Rh root:staff /usr/local/dooble
 
