@@ -53,6 +53,7 @@ class dooble_address_widget: public QLineEdit
 
  protected:
   bool event(QEvent *event);
+  void dropEvent(QDropEvent *event);
   void keyPressEvent(QKeyEvent *event);
   void resizeEvent(QResizeEvent *event);
 
@@ -82,6 +83,7 @@ class dooble_address_widget: public QLineEdit
 
  signals:
   void favorite_changed(const QUrl &url, bool state);
+  void load_page(const QUrl &url);
   void populated(void);
   void pull_down_clicked(void);
   void reset_url(void);

@@ -126,6 +126,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_favorite_changed(const QUrl &, bool)));
   connect(m_ui.address,
+	  SIGNAL(load_page(const QUrl &)),
+	  this,
+	  SLOT(slot_load_page(void)));
+  connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_load_page(void)));

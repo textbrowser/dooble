@@ -27,6 +27,7 @@
 
 #include <QKeyEvent>
 #include <QMenu>
+#include <QMimeData>
 #include <QToolButton>
 
 #include "dooble.h"
@@ -201,6 +202,20 @@ void dooble_address_widget::add_item(const QIcon &icon, const QUrl &url)
 void dooble_address_widget::complete(void)
 {
   m_completer->complete();
+}
+
+void dooble_address_widget::dropEvent(QDropEvent *event)
+{
+  if(event && event->mimeData())
+    {
+      QUrl url(event->mimeData()->text());
+
+      if(!url.isEmpty() && url.isValid())
+	{
+	  setText(event->mimeData()->text());
+	  emit load_page(url);
+	}
+    }
 }
 
 void dooble_address_widget::keyPressEvent(QKeyEvent *event)

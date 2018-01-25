@@ -47,6 +47,10 @@
         <source>Preparing Dooble objects.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Populating containers.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble</name>

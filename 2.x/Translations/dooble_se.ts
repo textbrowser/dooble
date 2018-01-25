@@ -4,22 +4,27 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Source/dooble_main.cc" line="155"/>
+        <location filename="../Source/dooble_main.cc" line="156"/>
         <source>Initializing Dooble.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_main.cc" line="200"/>
+        <location filename="../Source/dooble_main.cc" line="201"/>
         <source>Purging temporary database entries.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_main.cc" line="236"/>
+        <location filename="../Source/dooble_main.cc" line="237"/>
         <source>Preparing Dooble objects.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_main.cc" line="207"/>
+        <location filename="../Source/dooble_main.cc" line="313"/>
+        <source>Populating containers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_main.cc" line="208"/>
         <source>Preparing QWebEngine.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59,292 +64,292 @@
     <name>dooble</name>
     <message>
         <location filename="../UI/dooble.ui" line="14"/>
-        <location filename="../Source/dooble.cc" line="2369"/>
-        <location filename="../Source/dooble.cc" line="2466"/>
+        <location filename="../Source/dooble.cc" line="2413"/>
+        <location filename="../Source/dooble.cc" line="2510"/>
         <source>Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble.ui" line="53"/>
-        <location filename="../Source/dooble.cc" line="1017"/>
+        <location filename="../Source/dooble.cc" line="1056"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble.ui" line="58"/>
-        <location filename="../Source/dooble.cc" line="1055"/>
+        <location filename="../Source/dooble.cc" line="1094"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble.ui" line="63"/>
-        <location filename="../Source/dooble.cc" line="1082"/>
+        <location filename="../Source/dooble.cc" line="1121"/>
         <source>&amp;Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble.ui" line="68"/>
-        <location filename="../Source/dooble.cc" line="1142"/>
+        <location filename="../Source/dooble.cc" line="1181"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble.ui" line="73"/>
-        <location filename="../Source/dooble.cc" line="1132"/>
+        <location filename="../Source/dooble.cc" line="1171"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="320"/>
+        <location filename="../Source/dooble.cc" line="321"/>
         <source>Downloads are in progress. Are you sure that you wish to exit? If you exit, downloads will be aborted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="325"/>
+        <location filename="../Source/dooble.cc" line="326"/>
         <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="956"/>
-        <location filename="../Source/dooble.cc" line="1105"/>
-        <location filename="../Source/dooble.cc" line="1110"/>
+        <location filename="../Source/dooble.cc" line="995"/>
+        <location filename="../Source/dooble.cc" line="1144"/>
+        <location filename="../Source/dooble.cc" line="1149"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="959"/>
-        <location filename="../Source/dooble.cc" line="1069"/>
-        <location filename="../Source/dooble.cc" line="1076"/>
+        <location filename="../Source/dooble.cc" line="998"/>
+        <location filename="../Source/dooble.cc" line="1108"/>
+        <location filename="../Source/dooble.cc" line="1115"/>
         <source>Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="962"/>
-        <location filename="../Source/dooble.cc" line="1121"/>
-        <location filename="../Source/dooble.cc" line="1126"/>
+        <location filename="../Source/dooble.cc" line="1001"/>
+        <location filename="../Source/dooble.cc" line="1160"/>
+        <location filename="../Source/dooble.cc" line="1165"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="965"/>
-        <location filename="../Source/dooble.cc" line="1099"/>
+        <location filename="../Source/dooble.cc" line="1004"/>
+        <location filename="../Source/dooble.cc" line="1138"/>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="968"/>
-        <location filename="../Source/dooble.cc" line="1034"/>
+        <location filename="../Source/dooble.cc" line="1007"/>
+        <location filename="../Source/dooble.cc" line="1073"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="971"/>
+        <location filename="../Source/dooble.cc" line="1010"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="974"/>
-        <location filename="../Source/dooble.cc" line="1049"/>
+        <location filename="../Source/dooble.cc" line="1013"/>
+        <location filename="../Source/dooble.cc" line="1088"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="977"/>
+        <location filename="../Source/dooble.cc" line="1016"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="980"/>
-        <location filename="../Source/dooble.cc" line="1030"/>
+        <location filename="../Source/dooble.cc" line="1019"/>
+        <location filename="../Source/dooble.cc" line="1069"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="983"/>
-        <location filename="../Source/dooble.cc" line="1039"/>
+        <location filename="../Source/dooble.cc" line="1022"/>
+        <location filename="../Source/dooble.cc" line="1078"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="986"/>
+        <location filename="../Source/dooble.cc" line="1025"/>
         <source>F10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="989"/>
-        <location filename="../Source/dooble.cc" line="1136"/>
+        <location filename="../Source/dooble.cc" line="1028"/>
+        <location filename="../Source/dooble.cc" line="1175"/>
         <source>F11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1018"/>
+        <location filename="../Source/dooble.cc" line="1057"/>
         <source>&amp;Authenticate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1027"/>
+        <location filename="../Source/dooble.cc" line="1066"/>
         <source>New &amp;Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1031"/>
+        <location filename="../Source/dooble.cc" line="1070"/>
         <source>&amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1036"/>
+        <location filename="../Source/dooble.cc" line="1075"/>
         <source>&amp;Close Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1046"/>
+        <location filename="../Source/dooble.cc" line="1085"/>
         <source>E&amp;xit Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1056"/>
+        <location filename="../Source/dooble.cc" line="1095"/>
         <source>&amp;Clear Items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1059"/>
+        <location filename="../Source/dooble.cc" line="1098"/>
         <source>Clear Visited Links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1066"/>
+        <location filename="../Source/dooble.cc" line="1105"/>
         <source>Settin&amp;gs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1073"/>
+        <location filename="../Source/dooble.cc" line="1112"/>
         <source>Settin&amp;gs...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1093"/>
+        <location filename="../Source/dooble.cc" line="1132"/>
         <source>Certificate &amp;Exceptions...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1147"/>
+        <location filename="../Source/dooble.cc" line="1186"/>
         <source>&amp;Documentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="351"/>
-        <location filename="../Source/dooble.cc" line="676"/>
-        <location filename="../Source/dooble.cc" line="709"/>
+        <location filename="../Source/dooble.cc" line="360"/>
+        <location filename="../Source/dooble.cc" line="715"/>
+        <location filename="../Source/dooble.cc" line="748"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="315"/>
+        <location filename="../Source/dooble.cc" line="316"/>
         <source>The private window that is about to be closed has active downloads. If it&apos;s closed, the downloads will be aborted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="631"/>
+        <location filename="../Source/dooble.cc" line="664"/>
         <source>Dooble: Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="953"/>
-        <location filename="../Source/dooble.cc" line="1115"/>
+        <location filename="../Source/dooble.cc" line="992"/>
+        <location filename="../Source/dooble.cc" line="1154"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1024"/>
+        <location filename="../Source/dooble.cc" line="1063"/>
         <source>New &amp;Private Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1085"/>
+        <location filename="../Source/dooble.cc" line="1124"/>
         <source>Accepted / &amp;Blocked Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1089"/>
+        <location filename="../Source/dooble.cc" line="1128"/>
         <source>Accepted / &amp;Blocked Domains...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1096"/>
+        <location filename="../Source/dooble.cc" line="1135"/>
         <source>&amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1102"/>
+        <location filename="../Source/dooble.cc" line="1141"/>
         <source>&amp;Downloads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1107"/>
+        <location filename="../Source/dooble.cc" line="1146"/>
         <source>&amp;Downloads...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1112"/>
+        <location filename="../Source/dooble.cc" line="1151"/>
         <source>&amp;Favorites...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1118"/>
+        <location filename="../Source/dooble.cc" line="1157"/>
         <source>&amp;History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1123"/>
+        <location filename="../Source/dooble.cc" line="1162"/>
         <source>&amp;History...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1133"/>
-        <location filename="../Source/dooble.cc" line="1475"/>
-        <location filename="../Source/dooble.cc" line="1482"/>
+        <location filename="../Source/dooble.cc" line="1172"/>
+        <location filename="../Source/dooble.cc" line="1514"/>
+        <location filename="../Source/dooble.cc" line="1521"/>
         <source>Show &amp;Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1143"/>
+        <location filename="../Source/dooble.cc" line="1182"/>
         <source>&amp;About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1472"/>
-        <location filename="../Source/dooble.cc" line="1480"/>
+        <location filename="../Source/dooble.cc" line="1511"/>
+        <location filename="../Source/dooble.cc" line="1519"/>
         <source>Show &amp;Normal Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1543"/>
+        <location filename="../Source/dooble.cc" line="1582"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1544"/>
+        <location filename="../Source/dooble.cc" line="1583"/>
         <source>Preparing credentials...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1550"/>
+        <location filename="../Source/dooble.cc" line="1589"/>
         <source>Dooble: Preparing Credentials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1574"/>
+        <location filename="../Source/dooble.cc" line="1613"/>
         <source>Dooble: Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1575"/>
+        <location filename="../Source/dooble.cc" line="1614"/>
         <source>Unable to authenticate the provided password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2371"/>
-        <location filename="../Source/dooble.cc" line="2468"/>
+        <location filename="../Source/dooble.cc" line="2415"/>
+        <location filename="../Source/dooble.cc" line="2512"/>
         <source>%1 - Dooble</source>
         <translation type="unfinished"></translation>
     </message>
@@ -477,8 +482,8 @@
     </message>
     <message>
         <location filename="../UI/dooble_accepted_or_blocked_domains.ui" line="235"/>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="955"/>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="962"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="956"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="963"/>
         <source>Domain</source>
         <translation type="unfinished"></translation>
     </message>
@@ -563,12 +568,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="955"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="956"/>
         <source>Accepted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="962"/>
+        <location filename="../Source/dooble_accepted_or_blocked_domains.cc" line="963"/>
         <source>Blocked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -576,27 +581,27 @@
 <context>
     <name>dooble_address_widget</name>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="56"/>
+        <location filename="../Source/dooble_address_widget.cc" line="57"/>
         <source>Favorite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="68"/>
+        <location filename="../Source/dooble_address_widget.cc" line="69"/>
         <source>Site Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="79"/>
+        <location filename="../Source/dooble_address_widget.cc" line="80"/>
         <source>Show History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="441"/>
+        <location filename="../Source/dooble_address_widget.cc" line="461"/>
         <source>Certificate exception accepted for this site...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_address_widget.cc" line="445"/>
+        <location filename="../Source/dooble_address_widget.cc" line="465"/>
         <source>Show Site Coo&amp;kies...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1002,27 +1007,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads.cc" line="695"/>
+        <location filename="../Source/dooble_downloads.cc" line="697"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads.cc" line="696"/>
+        <location filename="../Source/dooble_downloads.cc" line="698"/>
         <source>Dooble: Select Download Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads.cc" line="726"/>
+        <location filename="../Source/dooble_downloads.cc" line="728"/>
         <source>&amp;Copy Download Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads.cc" line="732"/>
+        <location filename="../Source/dooble_downloads.cc" line="734"/>
         <source>&amp;Open Download Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads.cc" line="738"/>
+        <location filename="../Source/dooble_downloads.cc" line="740"/>
         <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1276,7 +1281,7 @@
     </message>
     <message>
         <location filename="../UI/dooble_page.ui" line="97"/>
-        <location filename="../Source/dooble_page.cc" line="1306"/>
+        <location filename="../Source/dooble_page.cc" line="1310"/>
         <source>Reload</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1356,344 +1361,344 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="517"/>
-        <location filename="../Source/dooble_page.cc" line="611"/>
+        <location filename="../Source/dooble_page.cc" line="521"/>
+        <location filename="../Source/dooble_page.cc" line="615"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="520"/>
-        <location filename="../Source/dooble_page.cc" line="565"/>
+        <location filename="../Source/dooble_page.cc" line="524"/>
+        <location filename="../Source/dooble_page.cc" line="569"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="523"/>
+        <location filename="../Source/dooble_page.cc" line="527"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="526"/>
+        <location filename="../Source/dooble_page.cc" line="530"/>
         <source>Esc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="544"/>
+        <location filename="../Source/dooble_page.cc" line="548"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="545"/>
+        <location filename="../Source/dooble_page.cc" line="549"/>
         <source>&amp;Authenticate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="554"/>
+        <location filename="../Source/dooble_page.cc" line="558"/>
         <source>New &amp;Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="557"/>
+        <location filename="../Source/dooble_page.cc" line="561"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="558"/>
+        <location filename="../Source/dooble_page.cc" line="562"/>
         <source>&amp;New Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="561"/>
+        <location filename="../Source/dooble_page.cc" line="565"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="562"/>
+        <location filename="../Source/dooble_page.cc" line="566"/>
         <source>&amp;Open URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="567"/>
+        <location filename="../Source/dooble_page.cc" line="571"/>
         <source>&amp;Close Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="570"/>
+        <location filename="../Source/dooble_page.cc" line="574"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="580"/>
+        <location filename="../Source/dooble_page.cc" line="584"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="582"/>
+        <location filename="../Source/dooble_page.cc" line="586"/>
         <source>&amp;Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="585"/>
+        <location filename="../Source/dooble_page.cc" line="589"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="586"/>
+        <location filename="../Source/dooble_page.cc" line="590"/>
         <source>Print Pre&amp;view...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="590"/>
+        <location filename="../Source/dooble_page.cc" line="594"/>
         <source>E&amp;xit Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="593"/>
+        <location filename="../Source/dooble_page.cc" line="597"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="599"/>
+        <location filename="../Source/dooble_page.cc" line="603"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="600"/>
+        <location filename="../Source/dooble_page.cc" line="604"/>
         <source>&amp;Clear Items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="608"/>
+        <location filename="../Source/dooble_page.cc" line="612"/>
         <source>&amp;Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="616"/>
+        <location filename="../Source/dooble_page.cc" line="620"/>
         <source>Settin&amp;gs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="619"/>
-        <location filename="../Source/dooble_page.cc" line="626"/>
+        <location filename="../Source/dooble_page.cc" line="623"/>
+        <location filename="../Source/dooble_page.cc" line="630"/>
         <source>Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="623"/>
+        <location filename="../Source/dooble_page.cc" line="627"/>
         <source>Settin&amp;gs...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="632"/>
+        <location filename="../Source/dooble_page.cc" line="636"/>
         <source>&amp;Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="703"/>
+        <location filename="../Source/dooble_page.cc" line="707"/>
         <source>&amp;Documentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1031"/>
+        <location filename="../Source/dooble_page.cc" line="1035"/>
         <source>The site &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1032"/>
+        <location filename="../Source/dooble_page.cc" line="1036"/>
         <source>Dooble: Authentication</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="551"/>
+        <location filename="../Source/dooble_page.cc" line="555"/>
         <source>New &amp;Private Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="577"/>
+        <location filename="../Source/dooble_page.cc" line="581"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="603"/>
+        <location filename="../Source/dooble_page.cc" line="607"/>
         <source>Clear &amp;Visited Links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="635"/>
+        <location filename="../Source/dooble_page.cc" line="639"/>
         <source>Accepted / &amp;Blocked Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="639"/>
+        <location filename="../Source/dooble_page.cc" line="643"/>
         <source>Accepted / &amp;Blocked Domains...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="643"/>
+        <location filename="../Source/dooble_page.cc" line="647"/>
         <source>Certificate &amp;Exceptions...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="646"/>
+        <location filename="../Source/dooble_page.cc" line="650"/>
         <source>&amp;Cookies...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="649"/>
+        <location filename="../Source/dooble_page.cc" line="653"/>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="652"/>
+        <location filename="../Source/dooble_page.cc" line="656"/>
         <source>&amp;Downloads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="655"/>
-        <location filename="../Source/dooble_page.cc" line="660"/>
+        <location filename="../Source/dooble_page.cc" line="659"/>
+        <location filename="../Source/dooble_page.cc" line="664"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="657"/>
+        <location filename="../Source/dooble_page.cc" line="661"/>
         <source>&amp;Downloads...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="662"/>
+        <location filename="../Source/dooble_page.cc" line="666"/>
         <source>&amp;Favorites...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="665"/>
+        <location filename="../Source/dooble_page.cc" line="669"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="668"/>
+        <location filename="../Source/dooble_page.cc" line="672"/>
         <source>&amp;History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="671"/>
-        <location filename="../Source/dooble_page.cc" line="676"/>
+        <location filename="../Source/dooble_page.cc" line="675"/>
+        <location filename="../Source/dooble_page.cc" line="680"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="673"/>
+        <location filename="../Source/dooble_page.cc" line="677"/>
         <source>&amp;History...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="682"/>
+        <location filename="../Source/dooble_page.cc" line="686"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="683"/>
-        <location filename="../Source/dooble_page.cc" line="928"/>
+        <location filename="../Source/dooble_page.cc" line="687"/>
+        <location filename="../Source/dooble_page.cc" line="932"/>
         <source>Show &amp;Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="686"/>
+        <location filename="../Source/dooble_page.cc" line="690"/>
         <source>F11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="688"/>
+        <location filename="../Source/dooble_page.cc" line="692"/>
         <source>&amp;Status Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="698"/>
+        <location filename="../Source/dooble_page.cc" line="702"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="699"/>
+        <location filename="../Source/dooble_page.cc" line="703"/>
         <source>&amp;About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="926"/>
+        <location filename="../Source/dooble_page.cc" line="930"/>
         <source>Show &amp;Normal Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="961"/>
+        <location filename="../Source/dooble_page.cc" line="965"/>
         <source>Add only this page as an exception.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="966"/>
+        <location filename="../Source/dooble_page.cc" line="970"/>
         <source>Add the host %1 as an exception.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="972"/>
+        <location filename="../Source/dooble_page.cc" line="976"/>
         <source>The page&apos;s URL is empty or invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="977"/>
+        <location filename="../Source/dooble_page.cc" line="981"/>
         <source>Show Accepted / Blocked Domains preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="981"/>
+        <location filename="../Source/dooble_page.cc" line="985"/>
         <source>Show Accepted / Blocked Domains preferences...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1074"/>
+        <location filename="../Source/dooble_page.cc" line="1078"/>
         <source>A dialog from %1 has been blocked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1215"/>
+        <location filename="../Source/dooble_page.cc" line="1219"/>
         <source>Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1217"/>
+        <location filename="../Source/dooble_page.cc" line="1221"/>
         <source>Always from %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1221"/>
+        <location filename="../Source/dooble_page.cc" line="1225"/>
         <source>Now Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1225"/>
+        <location filename="../Source/dooble_page.cc" line="1229"/>
         <source>Show pop-up preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1229"/>
+        <location filename="../Source/dooble_page.cc" line="1233"/>
         <source>Show pop-up preferences...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1245"/>
+        <location filename="../Source/dooble_page.cc" line="1249"/>
         <source>Show %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1367"/>
-        <location filename="../Source/dooble_page.cc" line="1491"/>
+        <location filename="../Source/dooble_page.cc" line="1371"/>
+        <location filename="../Source/dooble_page.cc" line="1495"/>
         <source>Stop Page Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1475"/>
+        <location filename="../Source/dooble_page.cc" line="1479"/>
         <source>The proxy &lt;b&gt;%1&lt;/b&gt; is requesting credentials.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_page.cc" line="1477"/>
+        <location filename="../Source/dooble_page.cc" line="1481"/>
         <source>Dooble: Proxy Authentication</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2358,9 +2363,9 @@ Domains</source>
     </message>
     <message>
         <location filename="../Source/dooble_settings.cc" line="1114"/>
-        <location filename="../Source/dooble_settings.cc" line="1720"/>
-        <location filename="../Source/dooble_settings.cc" line="1765"/>
-        <location filename="../Source/dooble_settings.cc" line="1844"/>
+        <location filename="../Source/dooble_settings.cc" line="1724"/>
+        <location filename="../Source/dooble_settings.cc" line="1769"/>
+        <location filename="../Source/dooble_settings.cc" line="1848"/>
         <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2376,7 +2381,7 @@ Domains</source>
     </message>
     <message>
         <location filename="../Source/dooble_settings.cc" line="1506"/>
-        <location filename="../Source/dooble_settings.cc" line="1858"/>
+        <location filename="../Source/dooble_settings.cc" line="1862"/>
         <source>Dooble: Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2386,53 +2391,53 @@ Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1714"/>
+        <location filename="../Source/dooble_settings.cc" line="1718"/>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted. Please remove the directory WebEnginePersistentStorage after the reset completes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1760"/>
+        <location filename="../Source/dooble_settings.cc" line="1764"/>
         <source>Are you sure that you wish to reset your permanent credentials? New session-only credentials will be generated and database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1822"/>
-        <location filename="../Source/dooble_settings.cc" line="1830"/>
+        <location filename="../Source/dooble_settings.cc" line="1826"/>
+        <location filename="../Source/dooble_settings.cc" line="1834"/>
         <source>Dooble: User Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1822"/>
+        <location filename="../Source/dooble_settings.cc" line="1826"/>
         <source>Empty password(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1830"/>
+        <location filename="../Source/dooble_settings.cc" line="1834"/>
         <source>Passwords are not equal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1840"/>
+        <location filename="../Source/dooble_settings.cc" line="1844"/>
         <source>Are you sure that you wish to prepare new credentials? Existing database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1859"/>
+        <location filename="../Source/dooble_settings.cc" line="1863"/>
         <source>Salt-generation failure! This is a curious problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1867"/>
+        <location filename="../Source/dooble_settings.cc" line="1871"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1868"/>
+        <location filename="../Source/dooble_settings.cc" line="1872"/>
         <source>Preparing credentials...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1874"/>
+        <location filename="../Source/dooble_settings.cc" line="1878"/>
         <source>Dooble: Preparing Credentials</source>
         <translation type="unfinished"></translation>
     </message>
