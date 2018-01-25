@@ -518,6 +518,7 @@ void dooble_downloads::slot_populate(void)
     {
       m_downloads.clear();
       m_ui.table->setRowCount(0);
+      emit populated();
       return;
     }
 
@@ -626,6 +627,7 @@ void dooble_downloads::slot_populate(void)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+  emit populated();
 }
 
 void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)

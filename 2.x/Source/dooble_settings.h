@@ -114,6 +114,7 @@ class dooble_settings: public QMainWindow
   void applied(void);
   void dooble_credentials_authenticated(bool state);
   void dooble_credentials_created(void);
+  void populated(void);
 };
 
 #endif

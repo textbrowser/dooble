@@ -114,6 +114,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  this,
 	  SLOT(slot_favorite_changed(const QUrl &, bool)));
   connect(this,
+	  SIGNAL(populated(void)),
+	  dooble::s_application,
+	  SIGNAL(address_widget_populated(void)));
+  connect(this,
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_return_pressed(void)));
@@ -414,6 +418,7 @@ void dooble_address_widget::slot_populate
     m_completer->add_item(list.at(i).first, list.at(i).second);
 
   QApplication::restoreOverrideCursor();
+  emit populated();
 }
 
 void dooble_address_widget::slot_return_pressed(void)

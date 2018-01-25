@@ -88,6 +88,7 @@ void dooble_cookies::slot_connect_cookie_added_signal(void)
 	  dooble::s_cookies,
 	  SLOT(slot_cookie_added(const QNetworkCookie &)),
 	  Qt::UniqueConnection);
+  emit populated();
 }
 
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
@@ -375,9 +376,15 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
 void dooble_cookies::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
+    {
+      emit populated();
+      return;
+    }
   else if(m_is_private)
-    return;
+    {
+      emit populated();
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 

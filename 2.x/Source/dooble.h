@@ -73,6 +73,7 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   ~dooble();
+  bool initialized(void) const;
   bool is_private(void) const;
   dooble_page *current_page(void) const;
   dooble_page *new_page(const QUrl &url, bool is_private);
@@ -164,6 +165,7 @@ class dooble: public QMainWindow
   void slot_open_tab_as_new_window(int index);
   void slot_pbkdf2_future_finished(void);
   void slot_populate_containers_timer_timeout(void);
+  void slot_populated(void);
   void slot_print(void);
   void slot_print_preview(void);
   void slot_quit_dooble(void);

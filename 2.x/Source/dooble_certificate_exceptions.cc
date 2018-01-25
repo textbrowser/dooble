@@ -337,6 +337,7 @@ void dooble_certificate_exceptions::slot_populate(void)
   m_ui.table->sortItems
     (0, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   QApplication::restoreOverrideCursor();
+  emit populated();
 }
 
 void dooble_certificate_exceptions::slot_search_timer_timeout(void)

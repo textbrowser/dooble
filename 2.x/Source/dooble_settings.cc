@@ -1512,7 +1512,10 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 void dooble_settings::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
+    {
+      emit populated();
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
@@ -1611,6 +1614,7 @@ void dooble_settings::slot_populate(void)
 							       *)));
   m_ui.javascript_block_popups_exceptions->sortItems(1);
   QApplication::restoreOverrideCursor();
+  emit populated();
 }
 
 void dooble_settings::slot_proxy_type_changed(int index)

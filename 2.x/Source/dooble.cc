@@ -74,6 +74,7 @@ dooble::s_url_request_interceptor;
 bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);
+static int s_populated = 0;
 
 dooble::dooble(QWidget *widget):QMainWindow()
 {
@@ -329,6 +330,14 @@ bool dooble::can_exit(void)
 
       return true;
     }
+}
+
+bool dooble::initialized(void) const
+{
+  if(dooble_settings::has_dooble_credentials())
+    return true;
+  else
+    return s_populated >= 7;
 }
 
 bool dooble::is_private(void) const
@@ -595,13 +604,31 @@ void dooble::initialize_static_members(void)
     s_about = new dooble_about();
 
   if(!s_accepted_or_blocked_domains)
-    s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
+    {
+      s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
+      connect(s_accepted_or_blocked_domains,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
+    }
 
   if(!s_certificate_exceptions)
-    s_certificate_exceptions = new dooble_certificate_exceptions();
+    {
+      s_certificate_exceptions = new dooble_certificate_exceptions();
+      connect(s_certificate_exceptions,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
+    }
 
   if(!s_cookies)
-    s_cookies = new dooble_cookies(false, 0);
+    {
+      s_cookies = new dooble_cookies(false, 0);
+      connect(s_cookies,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
+    }
 
   if(!s_cookies_window)
     {
@@ -622,7 +649,13 @@ void dooble::initialize_static_members(void)
     }
 
   if(!s_downloads)
-    s_downloads = new dooble_downloads();
+    {
+      s_downloads = new dooble_downloads();
+      connect(s_downloads,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
+    }
 
   if(!s_favorites_window)
     {
@@ -636,7 +669,13 @@ void dooble::initialize_static_members(void)
     }
 
   if(!s_history)
-    s_history = new dooble_history();
+    {
+      s_history = new dooble_history();
+      connect(s_history,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
+    }
 
   if(!s_history_window)
     s_history_window = new dooble_history_window();
@@ -1907,6 +1946,11 @@ void dooble::slot_pbkdf2_future_finished(void)
 void dooble::slot_populate_containers_timer_timeout(void)
 {
   emit dooble_credentials_authenticated(true);
+}
+
+void dooble::slot_populated(void)
+{
+  s_populated += 1;
 }
 
 void dooble::slot_print(void)

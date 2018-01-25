@@ -59,6 +59,7 @@ class dooble_cookies: public QObject
   void cookie_removed(const QNetworkCookie &cookie);
   void cookies_added(const QList<QNetworkCookie> &cookie,
 		     const QList<bool> &is_favorite);
+  void populated(void);
 };
 
 #endif

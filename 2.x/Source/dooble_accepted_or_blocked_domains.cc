@@ -943,6 +943,7 @@ void dooble_accepted_or_blocked_domains::slot_populate(void)
   m_exceptions.clear();
   populate();
   populate_exceptions();
+  emit populated();
 }
 
 void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)

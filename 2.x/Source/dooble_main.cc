@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
 
   QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
 
+  splash.setEnabled(false);
   splash.show();
   splash.showMessage
     (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
@@ -273,6 +274,10 @@ int main(int argc, char *argv[])
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_settings,
 		   SLOT(slot_populate(void)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(address_widget_populated(void)),
+		   d,
+		   SLOT(slot_populated(void)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookies_added(const QList<QNetworkCookie> &,
 					const QList<bool> &)),
@@ -301,6 +306,17 @@ int main(int argc, char *argv[])
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)));
+  QObject::connect(dooble::s_settings,
+		   SIGNAL(populated(void)),
+		   d,
+		   SLOT(slot_populated(void)));
+  splash.showMessage(QObject::tr("Populating containers."),
+		     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+
+  while(!d->initialized())
+    splash.repaint();
+
   splash.finish(0);
   d->show();
 
