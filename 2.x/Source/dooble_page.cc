@@ -1294,13 +1294,15 @@ void dooble_page::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
 
+  /*
+  ** Do not save the favicon. The current page's favicon and the page's
+  ** url may be unrelated.
+  */
+
   if(dooble::s_history->is_favorite(m_view->history()->currentItem().url()) ||
      !m_is_private)
     dooble::s_history->save_item
-      (icon(), m_view->history()->currentItem(), true);
-
-  if(!m_is_private)
-    dooble_favicons::save_favicon(icon(), m_view->url());
+      (QIcon(), m_view->history()->currentItem(), true);
 
   m_ui.progress->setVisible(false);
 
