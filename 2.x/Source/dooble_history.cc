@@ -455,7 +455,7 @@ void dooble_history::remove_favorite(const QUrl &url)
       m_history[url] = hash;
     }
 
-  m_history_mutex.unlock();
+  locker.unlock();
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -501,7 +501,7 @@ void dooble_history::remove_item(const QUrl &url)
   QWriteLocker locker(&m_history_mutex);
 
   m_history.remove(url);
-  m_history_mutex.unlock();
+  locker.unlock();
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
