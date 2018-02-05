@@ -73,25 +73,6 @@ history(void) const
   return m_history;
 }
 
-QList<QPair<QIcon, QString> > dooble_history::urls(void) const
-{
-  QList<QPair<QIcon, QString> > list;
-  QReadLocker locker(&m_history_mutex);
-
-  {
-    QHashIterator<QUrl, QHash<HistoryItem, QVariant> > it(m_history);
-
-    while(it.hasNext())
-      {
-	it.next();
-	list << QPair<QIcon, QString>
-	  (it.value().value(FAVICON).value<QIcon> (), it.key().toString());
-      }
-  }
-
-  return list;
-}
-
 QStandardItemModel *dooble_history::favorites_model(void) const
 {
   return m_favorites_model;

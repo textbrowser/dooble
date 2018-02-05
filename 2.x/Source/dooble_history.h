@@ -58,7 +58,6 @@ class dooble_history: public QObject
  dooble_history(void);
  ~dooble_history();
  QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > history(void) const;
- QList<QPair<QIcon, QString> > urls(void) const;
  QStandardItemModel *favorites_model(void) const;
  bool is_favorite(const QUrl &url) const;
  void abort(void);
