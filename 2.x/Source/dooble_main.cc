@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
 #endif
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
+  qRegisterMetaType<QListUrl> ("QListUrl");
 #ifdef Q_OS_MACOS
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   QApplication::setStyle(QStyleFactory::create("Macintosh"));

@@ -36,6 +36,7 @@
 
 class QStandardItemModel;
 typedef QList<QPair<QIcon, QString> > QListPairIconString;
+typedef QList<QUrl> QListUrl;
 typedef QList<QVector<QByteArray> > QListVectorByteArray;
 
 class dooble_history: public QObject
@@ -89,6 +90,7 @@ class dooble_history: public QObject
  private slots:
   void slot_populate(void);
   void slot_populated_favorites(const QListVectorByteArray &favorites);
+  void slot_remove_items(const QListUrl &urls);
   void slot_purge_timer_timeout(void);
 
  signals:
@@ -98,6 +100,7 @@ class dooble_history: public QObject
   void populated(const QListPairIconString &list);
   void populated(void);
   void populated_favorites(const QListVectorByteArray &favorites);
+  void remove_items(const QListUrl &urls);
 };
 
 #endif

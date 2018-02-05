@@ -47,6 +47,10 @@ dooble_history::dooble_history(void):QObject()
 	  SIGNAL(populated_favorites(const QListVectorByteArray &)),
 	  this,
 	  SLOT(slot_populated_favorites(const QListVectorByteArray &)));
+  connect(this,
+	  SIGNAL(remove_items(const QListUrl &)),
+	  this,
+	  SLOT(slot_remove_items(const QListUrl &)));
   m_favorites_model = new QStandardItemModel(this);
   m_favorites_model->setHorizontalHeaderLabels
     (QStringList() << tr("Title")
@@ -271,6 +275,7 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 	if(query.exec())
 	  {
+	    QListUrl urls;
 	    int days = dooble_settings::setting
 	      ("browsing_history_days").toInt();
 
@@ -303,14 +308,13 @@ void dooble_history::purge(const QByteArray &authentication_key,
 			bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
 
 			if(!bytes.isEmpty())
-			  {
-			    QWriteLocker locker(&m_history_mutex);
-
-			    m_history.remove(QUrl(bytes));
-			  }
+			  urls << QUrl(bytes);
 		      }
 		  }
 	      }
+
+	    if(!urls.isEmpty())
+	      emit remove_items(urls);
 	  }
       }
 
@@ -1047,6 +1051,23 @@ void dooble_history::slot_purge_timer_timeout(void)
      &dooble_history::purge,
      dooble::s_cryptography->keys().first,
      dooble::s_cryptography->keys().second);
+}
+
+void dooble_history::slot_remove_items(const QListUrl &urls)
+{
+  if(urls.isEmpty())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  {
+    QWriteLocker locker(&m_history_mutex);
+
+    for(int i = 0; i < urls.size(); i++)
+      m_history.remove(urls.at(i));
+  }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
