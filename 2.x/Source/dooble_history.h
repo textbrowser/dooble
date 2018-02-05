@@ -55,21 +55,22 @@ class dooble_history: public QObject
     URL_DIGEST
   };
 
- dooble_history(void);
- ~dooble_history();
- QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > history(void) const;
- QStandardItemModel *favorites_model(void) const;
- bool is_favorite(const QUrl &url) const;
- void abort(void);
- void purge_favorites(void);
- void purge_history(void);
- void remove_favorite(const QUrl &url);
- void remove_item(const QUrl &url);
- void save_favicon(const QIcon &icon, const QUrl &url);
- void save_favorite(const QUrl &url, bool state);
- void save_item(const QIcon &icon,
-		const QWebEngineHistoryItem &item,
-		bool force);
+  dooble_history(void);
+  ~dooble_history();
+  QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> >
+    history(void) const;
+  QStandardItemModel *favorites_model(void) const;
+  bool is_favorite(const QUrl &url) const;
+  void abort(void);
+  void purge_favorites(void);
+  void purge_history(void);
+  void remove_favorite(const QUrl &url);
+  void remove_item(const QUrl &url);
+  void save_favicon(const QIcon &icon, const QUrl &url);
+  void save_favorite(const QUrl &url, bool state);
+  void save_item(const QIcon &icon,
+		 const QWebEngineHistoryItem &item,
+		 bool force);
 
  private:
   QAtomicInteger<short> m_interrupt;
