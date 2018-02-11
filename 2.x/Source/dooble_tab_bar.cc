@@ -308,6 +308,15 @@ void dooble_tab_bar::slot_javascript(void)
     }
 }
 
+void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit open_tab_as_new_private_window
+      (tabAt(action->property("point").toPoint()));
+}
+
 void dooble_tab_bar::slot_open_tab_as_new_window(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -348,6 +357,14 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setProperty("point", point);
   menu.addSeparator();
 
+  QAction *open_as_new_private_window_action = menu.addAction
+    (tr("Open as New P&rivate Window..."),
+     this,
+     SLOT(slot_open_tab_as_new_private_window(void)));
+
+  open_as_new_private_window_action->setEnabled(false);
+  open_as_new_private_window_action->setProperty("point", point);
+
   QAction *open_as_new_window_action = menu.addAction
     (tr("Open as New &Window..."),
      this,
@@ -387,7 +404,6 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   webgl_action->setEnabled(false);
   webgl_action->setProperty("point", point);
 
-
   dooble_page *page = 0;
   dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
     (parentWidget());
@@ -400,6 +416,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	{
 	  javascript_action->setCheckable(true);
 	  javascript_action->setEnabled(tab_at > -1);
+	  open_as_new_private_window_action->setEnabled
+	    (count() > 1 && tab_at > -1);
 	  open_as_new_window_action->setEnabled
 	    (count() > 1 && !page->is_private() && tab_at > -1);
 	  web_plugins_action->setCheckable(true);

@@ -507,6 +507,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_new_tab(void)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(open_tab_as_new_private_window(int)),
+	  this,
+	  SLOT(slot_open_tab_as_new_private_window(int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
 	  SLOT(slot_open_tab_as_new_window(int)),
@@ -759,6 +764,42 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
 
+  prepare_tab_shortcuts();
+}
+
+void dooble::open_tab_as_new_window(bool is_private, int index)
+{
+  if(index < 0 || m_ui.tab->count() <= 1)
+    return;
+
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(page)
+    {
+      dooble *d = 0;
+
+      remove_page_connections(page);
+
+      if(is_private)
+	d = new dooble(page->url(), true);
+      else
+	d = new dooble(page);
+
+      d->show();
+      m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+
+      if(is_private)
+	page->deleteLater();
+    }
+  else
+    {
+      dooble *d = new dooble(m_ui.tab->widget(index));
+
+      d->show();
+      m_ui.tab->removeTab(index);
+    }
+
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
   prepare_tab_shortcuts();
 }
 
@@ -1860,32 +1901,14 @@ void dooble::slot_open_link_in_new_window(const QUrl &url)
   (new dooble(url, false))->show();
 }
 
+void dooble::slot_open_tab_as_new_private_window(int index)
+{
+  open_tab_as_new_window(true, index);
+}
+
 void dooble::slot_open_tab_as_new_window(int index)
 {
-  if(index < 0 || m_ui.tab->count() <= 1)
-    return;
-
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
-
-  if(page)
-    {
-      remove_page_connections(page);
-
-      dooble *d = new dooble(page);
-
-      d->show();
-      m_ui.tab->removeTab(m_ui.tab->indexOf(page));
-    }
-  else
-    {
-      dooble *d = new dooble(m_ui.tab->widget(index));
-
-      d->show();
-      m_ui.tab->removeTab(index);
-    }
-
-  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
-  prepare_tab_shortcuts();
+  open_tab_as_new_window(false, index);
 }
 
 void dooble::slot_open_link(const QUrl &url)
