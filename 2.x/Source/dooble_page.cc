@@ -1497,7 +1497,10 @@ void dooble_page::slot_reload_or_stop(void)
   if(m_ui.reload->toolTip() == tr("Stop Page Load"))
     m_view->stop();
   else
-    m_view->reload();
+    {
+      m_ui.address->setText(m_view->url().toString());
+      m_view->reload();
+    }
 }
 
 void dooble_page::slot_reset_url(void)
