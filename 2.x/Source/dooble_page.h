@@ -141,6 +141,7 @@ class dooble_page: public QWidget
   void slot_proxy_authentication_required(const QUrl &url,
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);
+  void slot_reload(void);
   void slot_reload_or_stop(void);
   void slot_reset_url(void);
   void slot_settings_applied(void);

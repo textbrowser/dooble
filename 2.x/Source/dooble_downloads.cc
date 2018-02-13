@@ -549,13 +549,14 @@ void dooble_downloads::slot_populate(void)
 		      "FROM dooble_downloads ORDER BY insert_order"))
 	  while(query.next() && total_rows < m_ui.table->rowCount())
 	    {
+	      QSqlRecord record(query.record());
 	      QString download_path("");
 	      QString file_name("");
 	      QString information("");
 	      QUrl url;
 	      qintptr oid = -1;
 
-	      for(int i = 0; i < query.record().count(); i++)
+	      for(int i = 0; i < record.count(); i++)
 		switch(i)
 		  {
 		  case 0:
@@ -596,8 +597,7 @@ void dooble_downloads::slot_populate(void)
 
 		  delete_query.prepare("DELETE FROM dooble_downloads "
 				       "WHERE OID = ?");
-		  delete_query.addBindValue
-		    (query.value(query.record().count() - 1));
+		  delete_query.addBindValue(query.value(record.count() - 1));
 		  delete_query.exec();
 		  continue;
 		}

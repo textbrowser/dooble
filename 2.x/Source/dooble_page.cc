@@ -525,8 +525,8 @@ void dooble_page::prepare_shortcuts(void)
 				   this,
 				   SLOT(slot_open_link(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
-				   m_view,
-				   SLOT(reload(void)));
+				   this,
+				   SLOT(slot_reload(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Esc")),
 				   this,
 				   SLOT(slot_escape(void)));
@@ -807,6 +807,7 @@ void dooble_page::print_page(QPrinter *printer)
 
 void dooble_page::reload(void)
 {
+  m_ui.address->setText(m_view->url().toString());
   m_view->reload();
 }
 
@@ -1492,15 +1493,17 @@ void dooble_page::slot_proxy_authentication_required
     *authenticator = QAuthenticator();
 }
 
+void dooble_page::slot_reload(void)
+{
+  reload();
+}
+
 void dooble_page::slot_reload_or_stop(void)
 {
   if(m_ui.reload->toolTip() == tr("Stop Page Load"))
     m_view->stop();
   else
-    {
-      m_ui.address->setText(m_view->url().toString());
-      m_view->reload();
-    }
+    reload();
 }
 
 void dooble_page::slot_reset_url(void)
