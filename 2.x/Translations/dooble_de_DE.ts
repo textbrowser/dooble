@@ -350,7 +350,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), Blue Beast.</source>
+        <source>Dooble version %1 (%2), Doctor Dorothy.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2148,6 +2148,10 @@ Domänen</translation>
     </message>
     <message>
         <source>&amp;Decouple...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open as New P&amp;rivate Window...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
