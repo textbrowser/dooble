@@ -302,7 +302,7 @@ void dooble_favorites_popup::slot_sort(int index)
   else if(index == 1) // Most Popular
     m_ui.view->sortByColumn(3, Qt::DescendingOrder);
   else // Title
-    m_ui.view->sortByColumn(0, Qt::DescendingOrder);
+    m_ui.view->sortByColumn(0, Qt::AscendingOrder);
 
   m_ui.view->prepare_viewport_icons();
   dooble_settings::set_setting("favorites_sort_index", index);
@@ -318,7 +318,7 @@ void dooble_favorites_popup::slot_sort(void)
   else if(index == 1) // Most Popular
     m_ui.view->sortByColumn(3, Qt::DescendingOrder);
   else // Title
-    m_ui.view->sortByColumn(0, Qt::DescendingOrder);
+    m_ui.view->sortByColumn(0, Qt::AscendingOrder);
 
   m_ui.view->prepare_viewport_icons();
 }
