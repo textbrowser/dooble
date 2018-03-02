@@ -115,6 +115,10 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reset_credentials(void)));
+  connect(m_ui.reset_user_agent,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reset_user_agent(void)));
   connect(m_ui.save_credentials,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -1809,6 +1813,11 @@ void dooble_settings::slot_reset_credentials(void)
   dooble_cryptography::memzero(encryption_key);
   emit dooble_credentials_authenticated(false);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::slot_reset_user_agent(void)
+{
+  m_ui.user_agent->setText(s_http_user_agent);
 }
 
 void dooble_settings::slot_save_credentials(void)

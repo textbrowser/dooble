@@ -1437,6 +1437,16 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QPushButton" name="reset_user_agent">
+                  <property name="toolTip">
+                   <string>Set the User Agent to the default system value.</string>
+                  </property>
+                  <property name="text">
+                   <string>Reset</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </item>
               <item>
@@ -1610,6 +1620,7 @@
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
   <tabstop>user_agent</tabstop>
+  <tabstop>reset_user_agent</tabstop>
   <tabstop>web_plugins</tabstop>
   <tabstop>webgl</tabstop>
   <tabstop>xss_auditing</tabstop>

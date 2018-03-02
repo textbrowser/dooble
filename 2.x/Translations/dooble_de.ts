@@ -2107,6 +2107,10 @@ Domänen</translation>
         <source>Orange</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Set the User Agent to the default system value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_tab_bar</name>

@@ -108,6 +108,7 @@ class dooble_settings: public QMainWindow
   void slot_remove_selected_javascript_block_popup_exceptions(void);
   void slot_reset(void);
   void slot_reset_credentials(void);
+  void slot_reset_user_agent(void);
   void slot_save_credentials(void);
 
  signals:
