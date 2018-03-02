@@ -902,7 +902,7 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  ok = false;
 
-	QString title(hash.value(TITLE).toString());
+	QString title(hash.value(TITLE).toString().trimmed());
 
 	if(title.isEmpty())
 	  bytes = dooble::s_cryptography->encrypt_then_mac
@@ -1078,7 +1078,12 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	      {
 		item->setData(url);
 		item->setIcon(hash.value(FAVICON).value<QIcon> ());
-		item->setText(hash.value(TITLE).toString());
+
+		if(hash.value(TITLE).toString().trimmed().isEmpty())
+		  item->setText(hash.value(URL).toString());
+		else
+		  item->setText(hash.value(TITLE).toString());
+
 		item->setToolTip(item->text());
 		break;
 	      }
@@ -1131,7 +1136,12 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	      {
 		item->setData(url);
 		item->setIcon(hash.value(FAVICON).value<QIcon> ());
-		item->setText(hash.value(TITLE).toString());
+
+		if(hash.value(TITLE).toString().trimmed().isEmpty())
+		  item->setText(hash.value(URL).toString());
+		else
+		  item->setText(hash.value(TITLE).toString());
+
 		item->setToolTip(item->text());
 		break;
 	      }
