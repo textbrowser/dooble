@@ -64,7 +64,7 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
 
   for(int i = 0; i < c.length(); i++)
     if(m_interrupt.load())
-      break;
+      return QByteArray();
     else
       c[i] = a.at(i) ^ b.at(i);
 
@@ -114,6 +114,9 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 	  U = x_or(U, Ub);
 	  Ua = Ub;
 	}
+
+      if(m_interrupt.load())
+	break;
 
       T.append(U);
     }
