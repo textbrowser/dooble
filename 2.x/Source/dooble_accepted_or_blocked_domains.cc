@@ -234,6 +234,11 @@ void dooble_accepted_or_blocked_domains::populate(void)
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
+	    query.exec
+	      ("CREATE TABLE IF NOT EXISTS dooble_accepted_or_blocked_domains ("
+	       "domain TEXT NOT NULL, "
+	       "domain_digest TEXT NOT NULL PRIMARY KEY, "
+	       "state TEXT NOT NULL)");
 
 	    if(query.exec("SELECT domain, state "
 			  "FROM dooble_accepted_or_blocked_domains"))
@@ -331,6 +336,11 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
+	    query.exec
+	      ("CREATE TABLE IF NOT EXISTS dooble_accepted_or_blocked_domains ("
+	       "domain TEXT NOT NULL, "
+	       "domain_digest TEXT NOT NULL PRIMARY KEY, "
+	       "state TEXT NOT NULL)");
 
 	    if(query.exec("SELECT state, url "
 			  "FROM dooble_accepted_or_blocked_domains_exceptions"))

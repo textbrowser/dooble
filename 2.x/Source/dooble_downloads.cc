@@ -540,6 +540,18 @@ void dooble_downloads::slot_populate(void)
 	int total_rows = 0;
 
 	query.setForwardOnly(true);
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
+		   "download_path TEXT NOT NULL, "
+		   "file_name TEXT NOT NULL, "
+		   "information TEXT NOT NULL, "
+
+		   /*
+		   ** For ordering.
+		   */
+
+		   "insert_order INTEGER PRIMARY KEY AUTOINCREMENT, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT NOT NULL)");
 
 	if(query.exec("SELECT COUNT(*) FROM dooble_downloads"))
 	  if(query.next())

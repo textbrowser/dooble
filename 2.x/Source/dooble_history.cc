@@ -119,6 +119,14 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	int days = dooble_settings::setting("browsing_history_days").toInt();
 
 	query.setForwardOnly(true);
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
+		   "favicon BLOB DEFAULT NULL, "
+		   "favorite_digest TEXT NOT NULL, "
+		   "last_visited TEXT NOT NULL, "
+		   "number_of_visits TEXT NOT NULL, "
+		   "title TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT PRIMARY KEY NOT NULL)");
 
 	if(query.exec("SELECT "
 		      "favorite_digest, "  // 0
@@ -250,6 +258,14 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	   dooble_settings::setting("block_cipher_type").toString());
 
 	query.setForwardOnly(true);
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
+		   "favicon BLOB DEFAULT NULL, "
+		   "favorite_digest TEXT NOT NULL, "
+		   "last_visited TEXT NOT NULL, "
+		   "number_of_visits TEXT NOT NULL, "
+		   "title TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT PRIMARY KEY NOT NULL)");
 	query.exec("SELECT last_visited, url, url_digest "
 		   "FROM dooble_history WHERE favorite_digest = ?");
 	query.addBindValue(cryptography.hmac(QByteArray("false")).toBase64());

@@ -411,6 +411,18 @@ void dooble_cookies::slot_populate(void)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
+		   "domain TEXT NOT NULL, "
+		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
+		   "favorite_digest TEXT NOT NULL)");
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
+		   "domain_digest TEXT NOT NULL, "
+		   "identifier_digest TEXT NOT NULL, "
+		   "raw_form BLOB NOT NULL, "
+		   "PRIMARY KEY (domain_digest, identifier_digest), "
+		   "FOREIGN KEY (domain_digest) REFERENCES "
+		   "dooble_cookies_domains (domain_digest) ON DELETE CASCADE "
+		   ")");
 
 	if(query.exec("SELECT domain, favorite_digest FROM "
 		      "dooble_cookies_domains"))
