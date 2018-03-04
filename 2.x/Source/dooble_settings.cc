@@ -383,12 +383,11 @@ QVariant dooble_settings::setting(const QString &key)
 
 	if(db.open())
 	  {
+	    create_tables(db);
+
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
-	    query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
-		       "key TEXT NOT NULL PRIMARY KEY, "
-		       "value TEXT NOT NULL)");
 	    query.prepare("SELECT value FROM dooble_settings WHERE key = ?");
 	    query.addBindValue(key);
 
@@ -445,11 +444,10 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
-		   "key TEXT NOT NULL PRIMARY KEY, "
-		   "value TEXT NOT NULL)");
 	query.exec("PRAGMA synchronous = NORMAL");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
@@ -475,6 +473,23 @@ void dooble_settings::closeEvent(QCloseEvent *event)
   m_ui.password_1->clear();
   m_ui.password_2->clear();
   QMainWindow::closeEvent(event);
+}
+
+void dooble_settings::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlQuery query(db);
+
+  query.exec
+    ("CREATE TABLE IF NOT EXISTS "
+     "dooble_javascript_block_popup_exceptions ("
+     "state TEXT NOT NULL, "
+     "url TEXT NOT NULL, "
+     "url_digest TEXT NOT NULL PRIMARY KEY)");
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
+	     "key TEXT NOT NULL PRIMARY KEY, "
+	     "value TEXT NOT NULL)");
 }
 
 void dooble_settings::keyPressEvent(QKeyEvent *event)
@@ -698,12 +713,11 @@ void dooble_settings::restore(bool read_database)
 
 	if(db.open())
 	  {
+	    create_tables(db);
+
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
-	    query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
-		       "key TEXT NOT NULL PRIMARY KEY, "
-		       "value TEXT NOT NULL)");
 
 	    if(query.exec("SELECT key, value FROM dooble_settings"))
 	      while(query.next())
@@ -993,14 +1007,10 @@ void dooble_settings::save_javascript_block_popup_exception
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec
-	  ("CREATE TABLE IF NOT EXISTS "
-	   "dooble_javascript_block_popup_exceptions ("
-	   "state TEXT NOT NULL, "
-	   "url TEXT NOT NULL, "
-	   "url_digest TEXT NOT NULL PRIMARY KEY)");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_javascript_block_popup_exceptions "
 	   "(state, url, url_digest) VALUES (?, ?, ?)");
@@ -1543,15 +1553,11 @@ void dooble_settings::slot_populate(void)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.exec
-	  ("CREATE TABLE IF NOT EXISTS "
-	   "dooble_javascript_block_popup_exceptions ("
-	   "state TEXT NOT NULL, "
-	   "url TEXT NOT NULL, "
-	   "url_digest TEXT NOT NULL PRIMARY KEY)");
 
 	if(query.exec("SELECT state, url "
 		      "FROM dooble_javascript_block_popup_exceptions"))

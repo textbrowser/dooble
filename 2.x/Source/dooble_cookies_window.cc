@@ -578,12 +578,10 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 
     if(db.open())
       {
+	dooble_cookies::create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
-		   "domain TEXT NOT NULL, "
-		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
-		   "favorite_digest TEXT NOT NULL)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies_domains "

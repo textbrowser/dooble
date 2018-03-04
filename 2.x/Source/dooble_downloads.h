@@ -29,6 +29,7 @@
 #define dooble_downloads_h
 
 #include <QMainWindow>
+#include <QSqlDatabase>
 #include <QTimer>
 
 #include "ui_dooble_downloads.h"
@@ -46,6 +47,7 @@ class dooble_downloads: public QMainWindow
   bool contains(QWebEngineDownloadItem *download) const;
   bool has_downloads_for_profile(QWebEngineProfile *profile) const;
   bool is_finished(void) const;
+  static void create_tables(QSqlDatabase &db);
   void abort(void);
   void purge(void);
   void record_download(QWebEngineDownloadItem *download);

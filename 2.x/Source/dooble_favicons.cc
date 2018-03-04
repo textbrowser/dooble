@@ -55,14 +55,11 @@ QIcon dooble_favicons::icon(const QUrl &url)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_favicons ("
-		   "favicon BLOB DEFAULT NULL, "
-		   "temporary INTEGER NOT NULL DEFAULT 1, "
-		   "url_digest TEXT PRIMARY KEY NOT NULL, "
-		   "url_host_digest TEXT NOT NULL)");
 	query.prepare("SELECT favicon FROM dooble_favicons WHERE "
 		      "url_digest IN (?, ?) OR url_host_digest = ?");
 	query.addBindValue
@@ -110,6 +107,25 @@ QIcon dooble_favicons::icon(const QUrl &url)
     icon = QIcon(":/Miscellaneous/blank_page.png");
 
   return icon;
+}
+
+void dooble_favicons::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlQuery query(db);
+
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_favicons ("
+	     "favicon BLOB DEFAULT NULL, "
+	     "temporary INTEGER NOT NULL DEFAULT 1, "
+	     "url_digest TEXT PRIMARY KEY NOT NULL, "
+	     "url_host_digest TEXT NOT NULL)");
+  query.exec
+    ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_digest ON "
+     "dooble_favicons (url_digest)");
+  query.exec
+    ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_host ON "
+     "dooble_favicons (url_host_digest)");
 }
 
 void dooble_favicons::purge(void)
@@ -186,19 +202,10 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_favicons ("
-		   "favicon BLOB DEFAULT NULL, "
-		   "temporary INTEGER NOT NULL DEFAULT 1, "
-		   "url_digest TEXT PRIMARY KEY NOT NULL, "
-		   "url_host_digest TEXT NOT NULL)");
-	query.exec
-	  ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_digest ON "
-	   "dooble_favicons (url_digest)");
-	query.exec
-	  ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_host ON "
-	   "dooble_favicons (url_host_digest)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_favicons "

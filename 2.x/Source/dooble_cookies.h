@@ -31,6 +31,7 @@
 #include <QAtomicInteger>
 #include <QObject>
 #include <QNetworkCookie>
+#include <QSqlDatabase>
 
 class dooble_cookies: public QObject
 {
@@ -39,6 +40,7 @@ class dooble_cookies: public QObject
  public:
   dooble_cookies(bool is_private, QObject *parent);
   static QByteArray identifier(const QNetworkCookie &cookie);
+  static void create_tables(QSqlDatabase &db);
   static void purge(void);
 
  private:

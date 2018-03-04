@@ -29,6 +29,7 @@
 #define dooble_accepted_or_blocked_domains_h
 
 #include <QMainWindow>
+#include <QSqlDatabase>
 #include <QTimer>
 
 #include "ui_dooble_accepted_or_blocked_domains.h"
@@ -59,6 +60,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   QHash<QString, char> m_exceptions;
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
+  void create_tables(QSqlDatabase &db);
   void populate(void);
   void populate_exceptions(void);
   void save_blocked_domain(const QString &domain, bool state);

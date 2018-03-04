@@ -148,6 +148,26 @@ void dooble_downloads::closeEvent(QCloseEvent *event)
   save_settings();
 }
 
+void dooble_downloads::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlDatabase query(db);
+
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
+	     "download_path TEXT NOT NULL, "
+	     "file_name TEXT NOT NULL, "
+	     "information TEXT NOT NULL, "
+
+	     /*
+	     ** For ordering.
+	     */
+
+	     "insert_order INTEGER PRIMARY KEY AUTOINCREMENT, "
+	     "url TEXT NOT NULL, "
+	     "url_digest TEXT NOT NULL)");
+}
+
 void dooble_downloads::delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -535,23 +555,13 @@ void dooble_downloads::slot_populate(void)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 	int row = 0;
 	int total_rows = 0;
 
 	query.setForwardOnly(true);
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
-		   "download_path TEXT NOT NULL, "
-		   "file_name TEXT NOT NULL, "
-		   "information TEXT NOT NULL, "
-
-		   /*
-		   ** For ordering.
-		   */
-
-		   "insert_order INTEGER PRIMARY KEY AUTOINCREMENT, "
-		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL)");
 
 	if(query.exec("SELECT COUNT(*) FROM dooble_downloads"))
 	  if(query.next())

@@ -161,6 +161,25 @@ void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
   QMainWindow::closeEvent(event);
 }
 
+void dooble_accepted_or_blocked_domains::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlQuery query(db);
+
+  query.exec
+    ("CREATE TABLE IF NOT EXISTS dooble_accepted_or_blocked_domains ("
+     "domain TEXT NOT NULL, "
+     "domain_digest TEXT NOT NULL PRIMARY KEY, "
+     "state TEXT NOT NULL)");
+  query.exec
+    ("CREATE TABLE IF NOT EXISTS "
+     "dooble_accepted_or_blocked_domains_exceptions ("
+     "state TEXT NOT NULL, "
+     "url TEXT NOT NULL, "
+     "url_digest TEXT NOT NULL PRIMARY KEY)");
+}
+
 void dooble_accepted_or_blocked_domains::keyPressEvent(QKeyEvent *event)
 {
   if(!parent())
@@ -231,14 +250,11 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
 	if(db.open())
 	  {
+	    create_tables(db);
+
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
-	    query.exec
-	      ("CREATE TABLE IF NOT EXISTS dooble_accepted_or_blocked_domains ("
-	       "domain TEXT NOT NULL, "
-	       "domain_digest TEXT NOT NULL PRIMARY KEY, "
-	       "state TEXT NOT NULL)");
 
 	    if(query.exec("SELECT domain, state "
 			  "FROM dooble_accepted_or_blocked_domains"))
@@ -333,14 +349,11 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
 	if(db.open())
 	  {
+	    create_tables(db);
+
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
-	    query.exec
-	      ("CREATE TABLE IF NOT EXISTS dooble_accepted_or_blocked_domains ("
-	       "domain TEXT NOT NULL, "
-	       "domain_digest TEXT NOT NULL PRIMARY KEY, "
-	       "state TEXT NOT NULL)");
 
 	    if(query.exec("SELECT state, url "
 			  "FROM dooble_accepted_or_blocked_domains_exceptions"))
@@ -473,14 +486,11 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 	bool ok = true;
 
-	query.exec
-	  ("CREATE TABLE IF NOT EXISTS dooble_accepted_or_blocked_domains ("
-	   "domain TEXT NOT NULL, "
-	   "domain_digest TEXT NOT NULL PRIMARY KEY, "
-	   "state TEXT NOT NULL)");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_accepted_or_blocked_domains "
@@ -544,14 +554,10 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec
-	  ("CREATE TABLE IF NOT EXISTS "
-	   "dooble_accepted_or_blocked_domains_exceptions ("
-	   "state TEXT NOT NULL, "
-	   "url TEXT NOT NULL, "
-	   "url_digest TEXT NOT NULL PRIMARY KEY)");
 	query.prepare
 	  ("INSERT OR REPLACE INTO "
 	   "dooble_accepted_or_blocked_domains_exceptions "

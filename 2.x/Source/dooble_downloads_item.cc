@@ -32,6 +32,7 @@
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
+#include "dooble_downloads.h"
 #include "dooble_downloads_item.h"
 #include "dooble_ui_utilities.h"
 
@@ -228,6 +229,8 @@ void dooble_downloads_item::record(void)
 
     if(db.open())
       {
+	dooble_downloads::create_tables(db);
+
 	QSqlQuery query(db);
 
 	/*
@@ -254,18 +257,6 @@ void dooble_downloads_item::record(void)
 	QString information(m_ui.information->text());
 	bool ok = true;
 
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
-		   "download_path TEXT NOT NULL, "
-		   "file_name TEXT NOT NULL, "
-		   "information TEXT NOT NULL, "
-
-		   /*
-		   ** For ordering.
-		   */
-
-		   "insert_order INTEGER PRIMARY KEY AUTOINCREMENT, "
-		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL)");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_downloads "
 	   "(download_path, file_name, information, url, url_digest) "

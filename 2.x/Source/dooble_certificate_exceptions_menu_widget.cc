@@ -61,6 +61,8 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
@@ -92,6 +94,20 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
   return state;
 }
 
+void dooble_certificate_exceptions_menu_widget::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlQuery query(db);
+
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_certificate_exceptions ("
+	     "error TEXT NOT NULL, "
+	     "exception_accepted TEXT NOT NULL, "
+	     "temporary INTEGER NOT NULL DEFAULT 1, "
+	     "url TEXT NOT NULL, "
+	     "url_digest TEXT NOT NULL PRIMARY KEY)");
+}
+
 void dooble_certificate_exceptions_menu_widget::exception_accepted
 (const QString &error, const QUrl &url)
 {
@@ -107,14 +123,10 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_certificate_exceptions ("
-		   "error TEXT NOT NULL, "
-		   "exception_accepted TEXT NOT NULL, "
-		   "temporary INTEGER NOT NULL DEFAULT 1, "
-		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL PRIMARY KEY)");
 	query.prepare
 	  ("INSERT INTO dooble_certificate_exceptions "
 	   "(error, exception_accepted, temporary, url, url_digest) "

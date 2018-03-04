@@ -35,6 +35,7 @@
 #include <QPointer>
 #include <QProgressDialog>
 #include <QReadWriteLock>
+#include <QSqlDatabase>
 #include <QUrl>
 
 #include "ui_dooble_settings.h"
@@ -85,6 +86,7 @@ class dooble_settings: public QMainWindow
   static QMap<QString, QVariant> s_settings;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
+  static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
   void prepare_icons(void);
   void prepare_proxy(bool save);

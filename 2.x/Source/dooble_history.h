@@ -31,6 +31,7 @@
 #include <QAtomicInteger>
 #include <QFuture>
 #include <QReadWriteLock>
+#include <QSqlDatabase>
 #include <QTimer>
 #include <QWebEngineHistoryItem>
 
@@ -81,6 +82,7 @@ class dooble_history: public QObject
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;
   static QAtomicInteger<quintptr> s_db_id;
+  void create_tables(QSqlDatabase &db);
   void populate(const QByteArray &authentication_key,
 		const QByteArray &encryption_key);
   void purge(const QByteArray &authentication_key,

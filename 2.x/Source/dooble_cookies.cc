@@ -52,6 +52,26 @@ QByteArray dooble_cookies::identifier(const QNetworkCookie &cookie)
   return bytes;
 }
 
+void dooble_cookies::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlQuery query(db);
+
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
+	     "domain TEXT NOT NULL, "
+	     "domain_digest TEXT NOT NULL PRIMARY KEY, "
+	     "favorite_digest TEXT NOT NULL)");
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
+	     "domain_digest TEXT NOT NULL, "
+	     "identifier_digest TEXT NOT NULL, "
+	     "raw_form BLOB NOT NULL, "
+	     "PRIMARY KEY (domain_digest, identifier_digest), "
+	     "FOREIGN KEY (domain_digest) REFERENCES "
+	     "dooble_cookies_domains (domain_digest) ON DELETE CASCADE "
+	     ")");
+}
+
 void dooble_cookies::purge(void)
 {
   QString database_name(QString("dooble_cookies_%1").
@@ -141,20 +161,10 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QSqlQuery query(db);
 
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
-		   "domain TEXT NOT NULL, "
-		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
-		   "favorite_digest TEXT NOT NULL)");
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
-		   "domain_digest TEXT NOT NULL, "
-		   "identifier_digest TEXT NOT NULL, "
-		   "raw_form BLOB NOT NULL, "
-		   "PRIMARY KEY (domain_digest, identifier_digest), "
-		   "FOREIGN KEY (domain_digest) REFERENCES "
-		   "dooble_cookies_domains (domain_digest) ON DELETE CASCADE "
-		   ")");
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT INTO dooble_cookies_domains "
@@ -406,23 +416,13 @@ void dooble_cookies::slot_populate(void)
 
     if(db.open())
       {
+	create_tables(db);
+
 	QList<QNetworkCookie> cookies;
 	QList<bool> is_favorites;
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies_domains ("
-		   "domain TEXT NOT NULL, "
-		   "domain_digest TEXT NOT NULL PRIMARY KEY, "
-		   "favorite_digest TEXT NOT NULL)");
-	query.exec("CREATE TABLE IF NOT EXISTS dooble_cookies ("
-		   "domain_digest TEXT NOT NULL, "
-		   "identifier_digest TEXT NOT NULL, "
-		   "raw_form BLOB NOT NULL, "
-		   "PRIMARY KEY (domain_digest, identifier_digest), "
-		   "FOREIGN KEY (domain_digest) REFERENCES "
-		   "dooble_cookies_domains (domain_digest) ON DELETE CASCADE "
-		   ")");
 
 	if(query.exec("SELECT domain, favorite_digest FROM "
 		      "dooble_cookies_domains"))
