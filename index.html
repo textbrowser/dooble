@@ -47,8 +47,11 @@
 	  <h3><b>Dooble 2.1.7 (2018.03.03)</b></h3>
 	  Welcome to the <b>2.1.7 (2018.03.03)</b> release of Dooble. Corrections and new features are detailed below.
 	  <ul>
-	    <li>Allow resetting of the User Agent widget.</li>
+  	    <li>Allow resetting of the User Agent widget.</li>
 	    <li>Ascending-order title sort of Favorites.</li>
+	    <li>Create database tables before attempting to access them.</li>
+	    <li>Do not attempt to read zero data into an icon stream.</li>
+	    <li>Do not store favicons in dooble_history.db.</li>
 	    <li>Fewer object locks.</li>
 	    <li>Gopher titles may be empty. Corrected Favorites.</li>
 	    <li>New documentation.</li>
