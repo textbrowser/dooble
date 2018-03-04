@@ -58,6 +58,11 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_favicons ("
+		   "favicon BLOB DEFAULT NULL, "
+		   "temporary INTEGER NOT NULL DEFAULT 1, "
+		   "url_digest TEXT PRIMARY KEY NOT NULL, "
+		   "url_host_digest TEXT NOT NULL)");
 	query.prepare("SELECT favicon FROM dooble_favicons WHERE "
 		      "url_digest IN (?, ?) OR url_host_digest = ?");
 	query.addBindValue
@@ -70,23 +75,28 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	if(query.exec() && query.next())
 	  if(!query.isNull(0))
 	    {
-	      QBuffer buffer;
 	      QByteArray bytes
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
-	      buffer.setBuffer(&bytes);
 
-	      if(buffer.open(QIODevice::ReadOnly))
+	      if(!bytes.isEmpty())
 		{
-		  QDataStream in(&buffer);
+		  QBuffer buffer;
 
-		  in >> icon;
+		  buffer.setBuffer(&bytes);
 
-		  if(in.status() != QDataStream::Ok)
-		    icon = QIcon();
+		  if(buffer.open(QIODevice::ReadOnly))
+		    {
+		      QDataStream in(&buffer);
 
-		  buffer.close();
+		      in >> icon;
+
+		      if(in.status() != QDataStream::Ok)
+			icon = QIcon();
+
+		      buffer.close();
+		    }
 		}
 	    }
       }
