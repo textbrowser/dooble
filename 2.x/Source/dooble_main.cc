@@ -143,29 +143,6 @@ int main(int argc, char *argv[])
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
-  dooble::s_application = new dooble_application(argc, argv);
-
-  /*
-  ** Create a splash screen.
-  */
-
-  QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
-
-  splash.setEnabled(false);
-  splash.show();
-  splash.showMessage
-    (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
-  dooble::s_application->processEvents();
-
-#ifdef Q_OS_MACOS
-  /*
-  ** Eliminate pool errors on OS X.
-  */
-
-  CocoaInitializer cocoa_initializer;
-#endif
-
 #if defined(Q_OS_WIN)
   QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
   QDir home_dir(QDir::current());
@@ -195,6 +172,29 @@ int main(int argc, char *argv[])
   home_dir.mkdir(".dooble_v2");
   dooble_settings::set_setting
     ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+#endif
+
+  dooble::s_application = new dooble_application(argc, argv);
+
+  /*
+  ** Create a splash screen.
+  */
+
+  QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
+
+  splash.setEnabled(false);
+  splash.show();
+  splash.showMessage
+    (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  dooble::s_application->processEvents();
+
+#ifdef Q_OS_MACOS
+  /*
+  ** Eliminate pool errors on OS X.
+  */
+
+  CocoaInitializer cocoa_initializer;
 #endif
 
   dooble::s_application->install_translator();
