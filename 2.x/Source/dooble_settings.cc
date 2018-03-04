@@ -386,6 +386,9 @@ QVariant dooble_settings::setting(const QString &key)
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
+	    query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
+		       "key TEXT NOT NULL PRIMARY KEY, "
+		       "value TEXT NOT NULL)");
 	    query.prepare("SELECT value FROM dooble_settings WHERE key = ?");
 	    query.addBindValue(key);
 
@@ -698,6 +701,9 @@ void dooble_settings::restore(bool read_database)
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
+	    query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
+		       "key TEXT NOT NULL PRIMARY KEY, "
+		       "value TEXT NOT NULL)");
 
 	    if(query.exec("SELECT key, value FROM dooble_settings"))
 	      while(query.next())
@@ -1540,6 +1546,12 @@ void dooble_settings::slot_populate(void)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
+	query.exec
+	  ("CREATE TABLE IF NOT EXISTS "
+	   "dooble_javascript_block_popup_exceptions ("
+	   "state TEXT NOT NULL, "
+	   "url TEXT NOT NULL, "
+	   "url_digest TEXT NOT NULL PRIMARY KEY)");
 
 	if(query.exec("SELECT state, url "
 		      "FROM dooble_javascript_block_popup_exceptions"))
