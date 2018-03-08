@@ -1455,20 +1455,45 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
   if(!was_canceled)
     {
       QList<QByteArray> list(m_pbkdf2_future.result());
+      QString error("");
       bool ok = true;
 
       if(!list.isEmpty())
 	{
-	  ok &= set_setting
-	    ("authentication_iteration_count", list.value(2).toInt());
-	  ok &= set_setting("authentication_salt", list.value(4).toHex());
-	  ok &= set_setting
-	    ("authentication_salted_password",
-	     QCryptographicHash::hash(list.value(3) + list.value(4),
-				      QCryptographicHash::Sha3_512).toHex());
-	  ok &= set_setting
-	    ("block_cipher_type_index", list.value(1).toInt());
-	  ok &= set_setting("credentials_enabled", true);
+	  if(!set_setting("authentication_iteration_count",
+			  list.value(2).toInt()))
+	    {
+	      error = "set_setting('authentication_iteration_count') failure";
+	      ok = false;
+	    }
+
+	  if(!set_setting("authentication_salt", list.value(4).toHex()))
+	    {
+	      error = "set_setting('authentication_salt') failure";
+	      ok = false;
+	    }
+
+	  if(!set_setting("authentication_salted_password",
+			  QCryptographicHash::hash(list.value(3) +
+						   list.value(4),
+						   QCryptographicHash::
+						   Sha3_512).toHex()))
+	    {
+	      error = "set_setting('authentication_salted_password') failure";
+	      ok = false;
+	    }
+
+	  if(!set_setting("block_cipher_type_index", list.value(1).toInt()))
+	    {
+	      error = "set_setting('block_cipher_type_index') failure";
+	      ok = false;
+	    }
+
+	  if(!set_setting("credentials_enabled", true))
+	    {
+	      error = "set_setting('credentials_enabled') failure";
+	      ok = false;
+	    }
 
 	  /*
 	  ** list[0] - Keys
@@ -1478,14 +1503,23 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	  ** list[4] - Salt
 	  */
 
-	  {
-	    QWriteLocker locker(&s_settings_mutex);
+	  if(ok)
+	    {
+	      QWriteLocker locker(&s_settings_mutex);
 
-	    if(list.value(1).toInt() == 0)
-	      s_settings["block_cipher_type"] = "AES-256";
-	    else
-	      s_settings["block_cipher_type"] = "Threefish-256";
-	  }
+	      if(list.value(1).toInt() == 0)
+		s_settings["block_cipher_type"] = "AES-256";
+	      else
+		s_settings["block_cipher_type"] = "Threefish-256";
+	    }
+	  else
+	    {
+	      remove_setting("authentication_iteration_count");
+	      remove_setting("authentication_salt");
+	      remove_setting("authentication_salted_password");
+	      remove_setting("block_cipher_type_index");
+	      remove_setting("credentials_enabled");
+	    }
 
 	  if(ok)
 	    {
@@ -1513,7 +1547,10 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	    }
 	}
       else
-	ok = false;
+	{
+	  error = "m_pbkdf2_future.result() is empty";
+	  ok = false;
+	}
 
       if(ok)
 	QMessageBox::information
@@ -1525,7 +1562,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	  (this,
 	   tr("Dooble: Error"),
 	   tr("Credentials could not be generated. "
-	      "This is a curious problem."));
+	      "This is a curious problem (%1).").arg(error));
     }
 }
 
