@@ -35,7 +35,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
 
-QAtomicInteger<quintptr> dooble_cookies::s_db_id;
+QAtomicInteger<quintptr> dooble_cookies::s_db_id = 0;
 
 dooble_cookies::dooble_cookies(bool is_private, QObject *parent):QObject(parent)
 {

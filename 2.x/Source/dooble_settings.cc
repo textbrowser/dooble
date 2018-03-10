@@ -49,7 +49,7 @@
 #include "dooble_random.h"
 #include "dooble_settings.h"
 
-QAtomicInteger<quintptr> dooble_settings::s_db_id;
+QAtomicInteger<quintptr> dooble_settings::s_db_id = 0;
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QReadWriteLock dooble_settings::s_settings_mutex;

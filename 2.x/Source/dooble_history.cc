@@ -35,7 +35,7 @@
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 
-QAtomicInteger<quintptr> dooble_history::s_db_id;
+QAtomicInteger<quintptr> dooble_history::s_db_id = 0;
 
 dooble_history::dooble_history(void):QObject()
 {

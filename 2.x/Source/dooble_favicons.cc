@@ -33,7 +33,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 
-QAtomicInteger<quintptr> dooble_favicons::s_db_id;
+QAtomicInteger<quintptr> dooble_favicons::s_db_id = 0;
 
 QIcon dooble_favicons::icon(const QUrl &url)
 {

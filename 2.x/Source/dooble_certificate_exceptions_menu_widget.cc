@@ -34,7 +34,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_ui_utilities.h"
 
-QAtomicInteger<qintptr> dooble_certificate_exceptions_menu_widget::s_db_id;
+QAtomicInteger<qintptr> dooble_certificate_exceptions_menu_widget::s_db_id = 0;
 
 dooble_certificate_exceptions_menu_widget::
 dooble_certificate_exceptions_menu_widget(QWidget *parent):QWidget(parent)
