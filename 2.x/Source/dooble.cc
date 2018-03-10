@@ -74,6 +74,7 @@ dooble::s_url_request_interceptor;
 bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);
+static bool s_warned_of_missing_sqlite_driver = false;
 static int s_populated = 0;
 
 dooble::dooble(QWidget *widget):QMainWindow()
@@ -1492,6 +1493,13 @@ void dooble::show(void)
 					   toByteArray()));
 
   QMainWindow::show();
+
+  if(!s_warned_of_missing_sqlite_driver)
+    {
+      s_warned_of_missing_sqlite_driver = true;
+      QTimer::singleShot
+	(2500, this, SLOT(slot_warn_of_missing_sqlite_driver(void)));
+    }
 }
 
 void dooble::slot_about_to_hide_main_menu(void)
@@ -2539,6 +2547,30 @@ void dooble::slot_title_changed(const QString &title)
 
   m_ui.tab->setTabText(m_ui.tab->indexOf(page), text.replace("&", "&&"));
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
+}
+
+void dooble::slot_warn_of_missing_sqlite_driver(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QStringList list(QSqlDatabase::drivers());
+  bool found = false;
+
+  for(int i = 0; i < list.size(); i++)
+    if(list.at(i).toLower().contains("sqlite"))
+      {
+	found = true;
+	break;
+      }
+
+  QApplication::restoreOverrideCursor();
+
+  if(!found)
+    QMessageBox::critical
+      (this,
+       tr("Dooble: Error"),
+       tr("Unable to discover the SQLite plugin. This is a serious "
+	  "problem!"));
 }
 
 void dooble::slot_window_close_requested(void)
