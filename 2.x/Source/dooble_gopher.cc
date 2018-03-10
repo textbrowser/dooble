@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QImageReader>
+
 #include "dooble_gopher.h"
 
 QByteArray dooble_gopher_implementation::s_eol = "\r\n";
@@ -50,9 +52,9 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 	  this,
 	  SLOT(slot_error(QWebEngineUrlRequestJob::Error)));
   connect(gopher_implementation,
-	  SIGNAL(finished(const QByteArray &, bool)),
+	  SIGNAL(finished(const QByteArray &, bool, bool)),
 	  this,
-	  SLOT(slot_finished(const QByteArray &, bool)));
+	  SLOT(slot_finished(const QByteArray &, bool, bool)));
 }
 
 void dooble_gopher::slot_error(QWebEngineUrlRequestJob::Error error)
@@ -62,7 +64,8 @@ void dooble_gopher::slot_error(QWebEngineUrlRequestJob::Error error)
 }
 
 void dooble_gopher::slot_finished(const QByteArray &bytes,
-				  bool content_type_supported)
+				  bool content_type_supported,
+				  bool is_image)
 {
   if(m_request)
     {
@@ -75,7 +78,18 @@ void dooble_gopher::slot_finished(const QByteArray &bytes,
 	  buffer->setData(bytes);
 
 	  if(content_type_supported)
-	    m_request->reply("text/html", buffer);
+	    {
+	      if(is_image)
+		{
+		  QImageReader image_reader(buffer);
+
+		  m_request->reply
+		    (QByteArray("image/").
+		     append(image_reader.format().toLower()), buffer);
+		}
+	      else
+		m_request->reply("text/html", buffer);
+	    }
 	  else
 	    m_request->reply("application/octet-stream", buffer);
 	}
@@ -86,6 +100,7 @@ dooble_gopher_implementation::dooble_gopher_implementation
 (const QUrl &url, QObject *parent):QTcpSocket(parent)
 {
   m_content_type_supported = true;
+  m_is_image = false;
   m_item_type = 0;
   m_url = url;
 
@@ -151,7 +166,7 @@ void dooble_gopher_implementation::slot_connected(void)
 
 void dooble_gopher_implementation::slot_disonnected(void)
 {
-  emit finished(m_html, m_content_type_supported);
+  emit finished(m_html, m_content_type_supported, m_is_image);
 }
 
 void dooble_gopher_implementation::slot_ready_read(void)
@@ -178,11 +193,13 @@ void dooble_gopher_implementation::slot_ready_read(void)
   else if(m_item_type == 'I') /* Image File of Unspecified Format */
     {
       m_html.append(m_content);
+      m_is_image = true;
       m_content.clear();
     }
   else if(m_item_type == 'g') /* GIF Image */
     {
       m_html.append(m_content);
+      m_is_image = true;
       m_content.clear();
     }
   else if(m_item_type == 'h') /* HTML File */

@@ -48,7 +48,9 @@ class dooble_gopher: public QWebEngineUrlSchemeHandler
 
  private slots:
   void slot_error(QWebEngineUrlRequestJob::Error error);
-  void slot_finished(const QByteArray &bytes, bool content_type_supported);
+  void slot_finished(const QByteArray &bytes,
+		     bool content_type_supported,
+		     bool is_image);
 };
 
 class dooble_gopher_implementation: public QTcpSocket
@@ -64,6 +66,7 @@ class dooble_gopher_implementation: public QTcpSocket
   QByteArray m_html;
   QUrl m_url;
   bool m_content_type_supported;
+  bool m_is_image;
   char m_item_type;
   static QByteArray s_eol;
   static QByteArray plain_to_html(const QByteArray &bytes);
@@ -75,7 +78,9 @@ class dooble_gopher_implementation: public QTcpSocket
 
  signals:
   void error(QWebEngineUrlRequestJob::Error error);
-  void finished(const QByteArray &bytes, bool content_type_supported);
+  void finished(const QByteArray &bytes,
+		bool content_type_supported,
+		bool is_image);
 };
 
 #endif
