@@ -1467,29 +1467,30 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      ok = false;
 	    }
 
-	  if(!set_setting("authentication_salt", list.value(4).toHex()))
+	  if(ok && !set_setting("authentication_salt", list.value(4).toHex()))
 	    {
 	      error = "set_setting('authentication_salt') failure";
 	      ok = false;
 	    }
 
-	  if(!set_setting("authentication_salted_password",
-			  QCryptographicHash::hash(list.value(3) +
-						   list.value(4),
-						   QCryptographicHash::
-						   Sha3_512).toHex()))
+	  if(ok && !set_setting("authentication_salted_password",
+				QCryptographicHash::hash(list.value(3) +
+							 list.value(4),
+							 QCryptographicHash::
+							 Sha3_512).toHex()))
 	    {
 	      error = "set_setting('authentication_salted_password') failure";
 	      ok = false;
 	    }
 
-	  if(!set_setting("block_cipher_type_index", list.value(1).toInt()))
+	  if(ok &&
+	     !set_setting("block_cipher_type_index", list.value(1).toInt()))
 	    {
 	      error = "set_setting('block_cipher_type_index') failure";
 	      ok = false;
 	    }
 
-	  if(!set_setting("credentials_enabled", true))
+	  if(ok && !set_setting("credentials_enabled", true))
 	    {
 	      error = "set_setting('credentials_enabled') failure";
 	      ok = false;
