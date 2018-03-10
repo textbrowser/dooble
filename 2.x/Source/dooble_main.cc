@@ -134,6 +134,9 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListUrl> ("QListUrl");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
+
+  dooble::s_application = new dooble_application(argc, argv);
+
 #ifdef Q_OS_MACOS
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   QApplication::setStyle(QStyleFactory::create("Macintosh"));
@@ -173,8 +176,6 @@ int main(int argc, char *argv[])
   dooble_settings::set_setting
     ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
 #endif
-
-  dooble::s_application = new dooble_application(argc, argv);
 
   /*
   ** Create a splash screen.
