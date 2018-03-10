@@ -294,6 +294,10 @@
         <source>The private window that is about to be closed has active downloads. If it&apos;s closed, the downloads will be aborted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to discover the SQLite plugin. This is a serious problem!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -350,7 +354,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), Doctor Dorothy.</source>
+        <source>Dooble version %1 (%2), Purple Puppy.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1597,7 +1601,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Credentials could not be generated. This is a curious problem.</source>
-        <translation>Passworte konnte nicht generiert werden. Dieses ist ein ernstes Problem.</translation>
+        <translation type="vanished">Passworte konnte nicht generiert werden. Dieses ist ein ernstes Problem.</translation>
     </message>
     <message>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted.</source>
@@ -2109,6 +2113,10 @@ Domänen</translation>
     </message>
     <message>
         <source>Set the User Agent to the default system value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Credentials could not be generated. This is a curious problem (%1).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
