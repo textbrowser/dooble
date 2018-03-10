@@ -41,6 +41,7 @@ dooble_pbkdf2::dooble_pbkdf2
  int output_size):QObject()
 {
   m_block_cipher_type_index = qBound(0, block_cipher_type_index, 1);
+  m_interrupt.store(0);
   m_iteration_count = qAbs(iterations_count);
   m_output_size = dooble_hmac::preferred_output_size_in_bits() *
     qCeil(qAbs(output_size) / dooble_hmac::preferred_output_size_in_bits());
