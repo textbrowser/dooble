@@ -16,7 +16,6 @@ var searchData=
   ['dooble_5fcookies',['dooble_cookies',['../classdooble__cookies.html',1,'']]],
   ['dooble_5fcookies_5fwindow',['dooble_cookies_window',['../classdooble__cookies__window.html',1,'']]],
   ['dooble_5fcryptography',['dooble_cryptography',['../classdooble__cryptography.html',1,'']]],
-  ['dooble_5fdatabase_5futilities',['dooble_database_utilities',['../classdooble__database__utilities.html',1,'']]],
   ['dooble_5fdownloads',['dooble_downloads',['../classdooble__downloads.html',1,'']]],
   ['dooble_5fdownloads_5fitem',['dooble_downloads_item',['../classdooble__downloads__item.html',1,'']]],
   ['dooble_5ffavicons',['dooble_favicons',['../classdooble__favicons.html',1,'']]],
