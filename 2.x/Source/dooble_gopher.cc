@@ -25,8 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QImageReader>
-
 #include "dooble_gopher.h"
 
 QByteArray dooble_gopher_implementation::s_eol = "\r\n";
@@ -81,11 +79,34 @@ void dooble_gopher::slot_finished(const QByteArray &bytes,
 	    {
 	      if(is_image)
 		{
-		  QImageReader image_reader(buffer);
-
-		  m_request->reply
-		    (QByteArray("image/").
-		     append(image_reader.format().toLower()), buffer);
+		  if(bytes.size() >= 2 &&
+		     std::tolower(bytes[0]) == 'b' &&
+		     std::tolower(bytes[1]) == 'm')
+		    m_request->reply("image/bmp", buffer);
+		  else if(bytes.size() >= 3 &&
+			  std::tolower(bytes[0]) == 'g' &&
+			  std::tolower(bytes[1]) == 'i' &&
+			  std::tolower(bytes[2]) == 'f')
+		    m_request->reply("image/gif", buffer);
+		  else if(bytes.size() >= 10 &&
+			  std::tolower(bytes[6]) == 'j' &&
+			  std::tolower(bytes[7]) == 'f' &&
+			  std::tolower(bytes[8]) == 'i' &&
+			  std::tolower(bytes[9]) == 'f')
+		    m_request->reply("image/jpeg", buffer);
+		  else if(bytes.size() >= 4 &&
+			  std::tolower(bytes[1]) == 'p' &&
+			  std::tolower(bytes[2]) == 'n' &&
+			  std::tolower(bytes[3]) == 'g')
+		    m_request->reply("image/png", buffer);
+		  else if(bytes.size() >= 4 &&
+			  std::tolower(bytes[0]) == 'r' &&
+			  std::tolower(bytes[1]) == 'i' &&
+			  std::tolower(bytes[2]) == 'f' &&
+			  std::tolower(bytes[3]) == 'f')
+		    m_request->reply("image/webp", buffer);
+		  else
+		    m_request->reply("application/octet-stream", buffer);
 		}
 	      else
 		m_request->reply("text/html", buffer);
