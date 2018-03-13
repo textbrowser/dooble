@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <cctype>
+
 #include "dooble_gopher.h"
 
 QByteArray dooble_gopher_implementation::s_eol = "\r\n";
