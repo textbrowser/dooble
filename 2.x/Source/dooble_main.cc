@@ -326,6 +326,5 @@ int main(int argc, char *argv[])
 
   dooble_certificate_exceptions_menu_widget::purge_temporary();
   dooble_favicons::purge_temporary();
-  dooble::s_application->deleteLater();
   return rc;
 }
