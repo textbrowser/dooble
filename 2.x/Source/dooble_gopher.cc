@@ -169,7 +169,7 @@ void dooble_gopher_implementation::slot_connected(void)
   QString path(m_url.path());
   QString query(m_url.query());
 
-  if(path.isEmpty())
+  if(path.length() <= 1)
     {
       m_item_type = '1';
       output.append("/");
@@ -251,7 +251,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	  m_content.remove(0, bytes.length());
 	  bytes = bytes.trimmed();
 
-	  char c = bytes.at(0);
+	  char c = bytes.length() > 0 ? bytes.at(0) : 0;
 
 	  if(c == '+' ||
 	     c == '0' || c == '1' || c == '3' || c == '4' || c == '5' ||
