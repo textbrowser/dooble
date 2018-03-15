@@ -169,7 +169,7 @@ void dgopher::slotConnected(void)
   QString query(url().query());
 #endif
 
-  if(path.isEmpty())
+  if(path.length() <= 1)
     {
       m_itemType = '1';
       output.append("/");
@@ -194,8 +194,14 @@ void dgopher::slotConnectedForDownload(void)
 {
   QString path(url().path());
 
-  m_itemType = path.at(1).toLatin1();
-  path.remove(1, 1);
+  if(path.length() <= 1)
+    m_itemType = '1';
+  else
+    {
+      m_itemType = path.at(1).toLatin1();
+      path.remove(1, 1);
+    }
+
   m_socket->write(path.toUtf8().append(s_eol));
 }
 
@@ -208,8 +214,12 @@ void dgopher::slotConnectedForText(void)
 
   QString path(url().path());
 
-  m_itemType = path.at(1).toLatin1();
-  path.remove(1, 1);
+  if(path.length() >= 2)
+    {
+      m_itemType = path.at(1).toLatin1();
+      path.remove(1, 1);
+    }
+
   m_socket->write(path.toUtf8().append(s_eol));
 }
 
@@ -277,7 +287,7 @@ void dgopher::slotReadyRead(void)
 	  m_content.remove(0, bytes.length());
 	  bytes = bytes.trimmed();
 
-	  char c = bytes.at(0);
+	  char c = bytes.length() > 0 ? bytes.at(0) : '0';
 
 	  if(c == '+' ||
 	     c == '0' || c == '1' || c == '3' || c == '4' || c == '5' ||
