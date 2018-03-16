@@ -144,11 +144,6 @@
 
 1.     Common methods for creating database tables.
 
-2.1.8 Remaining Items
-
-1.     Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove
-       synchronous OFF.
-
 2.1.9 Remaining Items
 
 1.     Gopher source viewing.
@@ -168,3 +163,5 @@ Unknown Items
 6.     JavaScript window.print() is not supported.
 7.     Multiple certificate exceptions.
 8.     Certificate information. Requires a WebEngine interface.
+9.     Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove
+       synchronous OFF.

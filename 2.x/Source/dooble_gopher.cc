@@ -73,6 +73,10 @@ void dooble_gopher::slot_finished(const QByteArray &bytes,
 	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
       else
 	{
+	  /*
+	  ** The buffer object should be deleted when m_request is.
+	  */
+
 	  QBuffer *buffer = new QBuffer(m_request);
 
 	  if(content_type_supported && !is_image)
