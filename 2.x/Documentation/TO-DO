@@ -149,6 +149,10 @@
 1.     Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove
        synchronous OFF.
 
+2.1.9 Remaining Items
+
+1.     Gopher source viewing.
+
 2.2 Remaining Items
 
 1.     Auto-correct addresses.
