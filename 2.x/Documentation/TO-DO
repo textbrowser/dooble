@@ -165,3 +165,4 @@ Unknown Items
 8.     Certificate information. Requires a WebEngine interface.
 9.     Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove
        synchronous OFF.
+10.    Cookies are not always deleted properly.
