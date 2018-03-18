@@ -80,7 +80,9 @@ void dooble_gopher::slot_finished(const QByteArray &bytes,
 	  QBuffer *buffer = new QBuffer(m_request);
 
 	  if(content_type_supported && !is_image)
-	    buffer->setData(QByteArray(bytes).replace("\r\n", "<br>"));
+	    buffer->setData
+	      (QByteArray(bytes).
+	       replace(dooble_gopher_implementation::s_eol, "<br>"));
 	  else
 	    buffer->setData(bytes);
 

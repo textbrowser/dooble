@@ -60,6 +60,7 @@ class dooble_gopher_implementation: public QTcpSocket
  public:
   dooble_gopher_implementation(const QUrl &url, QObject *parent);
   ~dooble_gopher_implementation();
+  static QByteArray s_eol;
 
  private:
   QByteArray m_content;
@@ -68,7 +69,6 @@ class dooble_gopher_implementation: public QTcpSocket
   bool m_content_type_supported;
   bool m_is_image;
   char m_item_type;
-  static QByteArray s_eol;
   static QByteArray plain_to_html(const QByteArray &bytes);
 
  private slots:
