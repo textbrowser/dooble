@@ -134,6 +134,17 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListUrl> ("QListUrl");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+  QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#else
+  QCoreApplication::setAttribute
+    (Qt::AA_EnableHighDpiScaling,
+     QVariant(qgetenv("AA_ENABLEHIGHDPISCALING")).toBool());
+  QCoreApplication::setAttribute
+    (Qt::AA_UseHighDpiPixmaps,
+     QVariant(qgetenv("AA_USEHIGHDPIPIXMAPS")).toBool());
+#endif
 
   dooble::s_application = new dooble_application(argc, argv);
 
