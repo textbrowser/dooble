@@ -370,6 +370,10 @@ QVariant dooble_settings::setting(const QString &key)
 
   if(!s_settings.contains(key))
     {
+      QString home_path(s_settings.value("home_path").toString());
+
+      lock.unlock();
+
       QString database_name
 	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
       QString value("");
@@ -377,9 +381,8 @@ QVariant dooble_settings::setting(const QString &key)
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	db.setDatabaseName(setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_settings.db");
+	db.setDatabaseName
+	  (home_path + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {

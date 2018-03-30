@@ -332,10 +332,5 @@ int main(int argc, char *argv[])
 
   splash.finish(0);
   d->show();
-
-  int rc = dooble::s_application->exec();
-
-  dooble_certificate_exceptions_menu_widget::purge_temporary();
-  dooble_favicons::purge_temporary();
-  return rc;
+  return dooble::s_application->exec();
 }
