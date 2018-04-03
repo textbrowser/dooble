@@ -61,6 +61,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
+  m_ui.feature_permission_popup_message->setVisible(false);
   m_ui.find_frame->setVisible(false);
   m_ui.forward->setEnabled(false);
   m_ui.forward->setMenu(new QMenu(this));
@@ -165,6 +166,14 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(show_downloads(void)));
+  connect(m_ui.feature_permission_allow,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_feature_permission_allow(void)));
+  connect(m_ui.feature_permission_deny,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_feature_permission_deny(void)));
   connect(m_ui.favorites,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -229,6 +238,19 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)));
+  connect
+    (m_view,
+     SIGNAL(featurePermissionRequestCanceled(const QUrl &,
+					     QWebEnginePage::Feature)),
+     this,
+     SLOT(slot_feature_permission_request_canceled(const QUrl &,
+						   QWebEnginePage::Feature)));
+  connect(m_view,
+	  SIGNAL(featurePermissionRequested(const QUrl &,
+					    QWebEnginePage::Feature)),
+	  this,
+	  SLOT(slot_feature_permission_requested(const QUrl &,
+						 QWebEnginePage::Feature)));
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
@@ -1076,7 +1098,8 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     return;
 
   QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
-  QString text(tr("A dialog from %1 has been blocked.").arg(url().toString()));
+  QString text(tr("A dialog from <b>%1</b> has been blocked.").
+	       arg(url().toString()));
 
   m_ui.javascript_popup_exception_url->setText
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
@@ -1143,6 +1166,174 @@ void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
     if(m_view->history()->currentItem().url() == url)
       dooble::s_history->save_item
 	(m_view->icon(), m_view->history()->currentItem(), true);
+}
+
+void dooble_page::slot_feature_permission_allow(void)
+{
+  int feature = m_ui.feature_permission_url->property("feature").toInt();
+
+  m_ui.feature_permission_popup_message->setVisible(false);
+
+  if(feature != -1)
+    m_view->set_feature_permission
+      (m_ui.feature_permission_url->property("security_origin").toUrl(),
+       QWebEnginePage::Feature(feature),
+       QWebEnginePage::PermissionGrantedByUser);
+
+  m_ui.feature_permission_url->setProperty("feature", -1);
+  m_ui.feature_permission_url->setProperty("security_origin", QUrl());
+}
+
+void dooble_page::slot_feature_permission_deny(void)
+{
+  int feature = m_ui.feature_permission_url->property("feature").toInt();
+
+  m_ui.feature_permission_popup_message->setVisible(false);
+
+  if(feature != -1)
+    m_view->set_feature_permission
+      (m_ui.feature_permission_url->property("security_origin").toUrl(),
+       QWebEnginePage::Feature(feature),
+       QWebEnginePage::PermissionDeniedByUser);
+
+  m_ui.feature_permission_url->setProperty("feature", -1);
+  m_ui.feature_permission_url->setProperty("security_origin", QUrl());
+}
+
+void dooble_page::slot_feature_permission_request_canceled
+(const QUrl &security_origin, QWebEnginePage::Feature feature)
+{
+  if(feature == m_ui.feature_permission_url->property("feature").toInt() &&
+     m_ui.feature_permission_url->property("security_origin").toUrl() ==
+     security_origin)
+    m_ui.feature_permission_popup_message->setVisible(false);
+}
+
+void dooble_page::slot_feature_permission_requested
+(const QUrl &security_origin, QWebEnginePage::Feature feature)
+{
+  if(!dooble::s_settings->setting("features_permissions").toBool())
+    {
+      m_view->set_feature_permission
+	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
+      return;
+    }
+  else if(security_origin.isEmpty() || !security_origin.isValid())
+    {
+      m_view->set_feature_permission
+	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
+      return;
+    }
+  else if(m_ui.feature_permission_popup_message->isVisible())
+    {
+      /*
+      ** Deny the feature.
+      */
+
+      m_view->set_feature_permission
+	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
+      return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  int policy = dooble_settings::site_feature_permission
+    (security_origin, feature);
+
+  QApplication::restoreOverrideCursor();
+
+  switch(policy)
+    {
+    case 0:
+      {
+	m_ui.feature_permission_popup_message->setVisible(false);
+	m_view->set_feature_permission
+	  (security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
+	return;
+      }
+    case 1:
+      {
+	m_ui.feature_permission_popup_message->setVisible(false);
+	m_view->set_feature_permission
+	  (security_origin, feature, QWebEnginePage::PermissionGrantedByUser);
+	return;
+      }
+    }
+
+  m_ui.feature_permission_url->setProperty("feature", feature);
+  m_ui.feature_permission_url->setProperty("security_origin", security_origin);
+
+  switch(feature)
+    {
+    case QWebEnginePage::DesktopAudioVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting "
+	      "Desktop Audio Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::DesktopVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Desktop Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::Geolocation:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Geo Location access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::MediaAudioCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Media Audio Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::MediaAudioVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting "
+	      "Media Audio Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::MediaVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Media Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::MouseLock:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Mouse Lock access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePage::Notifications:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Notifications access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    default:
+      {
+	m_ui.feature_permission_url->setProperty("feature", -1);
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting access to an unknown feature.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    }
+
+  m_ui.feature_permission_popup_message->setVisible(true);
 }
 
 void dooble_page::slot_find_next(void)
@@ -1366,6 +1557,7 @@ void dooble_page::slot_load_started(void)
 	view->deleteLater();
     }
 
+  m_ui.feature_permission_popup_message->setVisible(false);
   m_ui.javascript_popup_message->setVisible(false);
 
   QString icon_set(dooble_settings::setting("icon_set").toString());

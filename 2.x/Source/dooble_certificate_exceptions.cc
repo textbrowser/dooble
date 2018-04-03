@@ -33,6 +33,7 @@
 #include "dooble.h"
 #include "dooble_certificate_exceptions.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_settings.h"
 
 dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
@@ -280,7 +281,7 @@ void dooble_certificate_exceptions::slot_populate(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT error, exception_accepted, url "
+	    if(query.exec("SELECT error, exception_accepted, url, OID "
 			  "FROM dooble_certificate_exceptions WHERE "
 			  "temporary = 0"))
 	      while(query.next())
@@ -295,7 +296,13 @@ void dooble_certificate_exceptions::slot_populate(void)
 		      data = dooble::s_cryptography->mac_then_decrypt(data);
 
 		      if(data.isEmpty())
-			continue;
+			{
+			  dooble_database_utilities::remove_entry
+			    (db,
+			     "dooble_certificate_exceptions",
+			     query.value(3).toLongLong());
+			  continue;
+			}
 
 		      if(i == 0)
 			hash["error"] = data;

@@ -32,6 +32,7 @@
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 
@@ -145,6 +146,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		      "title, "            // 3
 		      "url, "              // 4
 		      "url_digest "        // 5
+		      "OID "               // 6
 		      "FROM dooble_history"))
 	  while(query.next())
 	    {
@@ -158,7 +160,13 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		(last_visited);
 
 	      if(last_visited.isEmpty())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_history",
+		     query.value(6).toLongLong());
+		  continue;
+		}
 
 	      bool is_favorite = dooble_cryptography::memcmp
 		(cryptography.hmac(QByteArray("true")).toBase64(),
@@ -186,7 +194,13 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		(number_of_visits);
 
 	      if(number_of_visits.isEmpty())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_history",
+		     query.value(6).toLongLong());
+		  continue;
+		}
 
 	      QByteArray title
 		(QByteArray::fromBase64(query.value(3).toByteArray()));
@@ -194,7 +208,13 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	      title = cryptography.mac_then_decrypt(title);
 
 	      if(title.isEmpty())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_history",
+		     query.value(6).toLongLong());
+		  continue;
+		}
 
 	      QByteArray url
 		(QByteArray::fromBase64(query.value(4).toByteArray()));
@@ -202,7 +222,13 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	      url = cryptography.mac_then_decrypt(url);
 
 	      if(url.isEmpty())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_history",
+		     query.value(6).toLongLong());
+		  continue;
+		}
 
 	      QHash<HistoryItem, QVariant> hash;
 

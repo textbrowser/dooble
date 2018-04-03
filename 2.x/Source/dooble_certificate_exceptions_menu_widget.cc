@@ -32,6 +32,7 @@
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_ui_utilities.h"
 
 QAtomicInteger<qintptr> dooble_certificate_exceptions_menu_widget::s_db_id = 0;
@@ -66,7 +67,7 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT exception_accepted FROM "
+	query.prepare("SELECT exception_accepted, OID FROM "
 		      "dooble_certificate_exceptions WHERE url_digest "
 		      "IN (?, ?)");
 	query.addBindValue
@@ -84,6 +85,13 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 
 	      if(!bytes.isEmpty())
 		state = bytes == "true";
+	      else
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_certificate_exceptions",
+		     query.value(1).toLongLong());
+		}
 	    }
       }
 

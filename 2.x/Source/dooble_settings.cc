@@ -41,6 +41,7 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
@@ -48,10 +49,12 @@
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
 #include "dooble_settings.h"
+#include "dooble_text_utilities.h"
 
 QAtomicInteger<quintptr> dooble_settings::s_db_id = 0;
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
 QMap<QString, QVariant> dooble_settings::s_settings;
+QMultiMap<QUrl, QPair<int, bool> > dooble_settings::s_site_features_permissions;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
 QStringList dooble_settings::s_spell_checker_dictionaries;
@@ -103,10 +106,18 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	  SIGNAL(currentIndexChanged(int)),
 	  this,
 	  SLOT(slot_proxy_type_changed(int)));
+  connect(m_ui.remove_all_features_permissions,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove_all_features_permissions(void)));
   connect(m_ui.remove_all_javascript_block_popup_exceptions,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_remove_all_javascript_block_popup_exceptions(void)));
+  connect(m_ui.remove_selected_features_permissions,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove_selected_features_permissions(void)));
   connect(m_ui.remove_selected_javascript_block_popup_exceptions,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -156,7 +167,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
     {
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
-				      Qt::UserRole - 1);
+				      Qt::ItemDataRole(Qt::UserRole - 1));
       m_ui.language_directory->setStyleSheet
 	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	 "color:#a94442;}");
@@ -169,7 +180,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
     {
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
-				      Qt::UserRole - 1);
+				      Qt::ItemDataRole(Qt::UserRole - 1));
       m_ui.language_directory->setStyleSheet
 	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	 "color:#a94442;}");
@@ -209,6 +220,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["denote_private_widgets"] = true;
   s_settings["do_not_track"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
+  s_settings["features_permissions"] = true;
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
@@ -471,6 +483,22 @@ bool dooble_settings::site_has_javascript_block_popup_exception(const QUrl &url)
   return s_javascript_block_popup_exceptions.value(url, 0) == 1;
 }
 
+int dooble_settings::site_feature_permission(const QUrl &url,
+					     QWebEnginePage::Feature feature)
+{
+  if(!s_site_features_permissions.contains(url))
+    return -1;
+
+  QList<QPair<int, bool> > values(s_site_features_permissions.values(url));
+
+  for(int i = 0; i < values.size(); i++)
+    if(feature == QWebEnginePage::Feature(values.at(i).first) &&
+       values.at(i).first != -1)
+      return values.at(i).second ? 1 : 0;
+
+  return -1;
+}
+
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
   m_ui.password_1->clear();
@@ -484,6 +512,15 @@ void dooble_settings::create_tables(QSqlDatabase &db)
 
   QSqlQuery query(db);
 
+  query.exec
+    ("CREATE TABLE IF NOT EXISTS "
+     "dooble_features_permissions ("
+     "feature TEXT NOT NULL, "
+     "feature_digest TEXT NOT NULL, "
+     "permission TEXT NOT NULL, "
+     "url TEXT NOT NULL, "
+     "url_digest TEXT NOT NULL, "
+     "PRIMARY KEY (feature_digest, url_digest))");
   query.exec
     ("CREATE TABLE IF NOT EXISTS "
      "dooble_javascript_block_popup_exceptions ("
@@ -623,8 +660,41 @@ void dooble_settings::purge_database_data(void)
   dooble_certificate_exceptions_menu_widget::purge();
   dooble_cookies::purge();
   dooble_favicons::purge();
+  purge_features_permissions();
   purge_javascript_block_popup_exceptions();
+  s_javascript_block_popup_exceptions.clear();
+  s_site_features_permissions.clear();
   slot_remove_all_javascript_block_popup_exceptions();
+}
+
+void dooble_settings::purge_features_permissions(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_features_permissions");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::purge_javascript_block_popup_exceptions(void)
@@ -722,14 +792,20 @@ void dooble_settings::restore(bool read_database)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT key, value FROM dooble_settings"))
+	    if(query.exec("SELECT key, value, OID FROM dooble_settings"))
 	      while(query.next())
 		{
 		  QString key(query.value(0).toString().trimmed());
 		  QString value(query.value(1).toString().trimmed());
 
 		  if(key.isEmpty() || value.isEmpty())
-		    continue;
+		    {
+		      dooble_database_utilities::remove_entry
+			(db,
+			 "dooble_settings",
+			 query.value(2).toLongLong());
+		      continue;
+		    }
 
 		  QWriteLocker lock(&s_settings_mutex);
 
@@ -774,6 +850,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("denote_private_widgets", true).toBool());
   m_ui.do_not_track->setChecked
     (s_settings.value("do_not_track", true).toBool());
+  m_ui.features_permissions_groupbox->setChecked
+    (s_settings.value("features_permissions", true).toBool());
   m_ui.icon_set->setCurrentIndex
     (qBound(0,
 	    s_settings.value("icon_set_index", 0).toInt(),
@@ -883,7 +961,9 @@ void dooble_settings::restore(bool read_database)
 	break;
       }
     default:
-      s_settings["theme_color"] = "blue-grey";
+      {
+	s_settings["theme_color"] = "blue-grey";
+      }
     }
 
   s_settings["theme_color_index"] = m_ui.theme_color->currentIndex();
@@ -1059,6 +1139,155 @@ void dooble_settings::save_settings(void)
     set_setting("settings_geometry", saveGeometry().toBase64());
 }
 
+void dooble_settings::set_site_feature_permission
+(const QUrl &url, QWebEnginePage::Feature feature, bool state)
+{
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(setting("features_permissions").toBool() &&
+     site_feature_permission(url, feature) == -1)
+    {
+      disconnect
+	(m_ui.features_permissions,
+	 SIGNAL(itemChanged(QTableWidgetItem *)),
+	 this,
+	 SLOT(slot_features_permissions_item_changed(QTableWidgetItem *)));
+      m_ui.features_permissions->setRowCount
+	(m_ui.features_permissions->rowCount() + 1);
+
+      QTableWidgetItem *item = new QTableWidgetItem();
+
+      if(state)
+	item->setCheckState(Qt::Checked);
+      else
+	item->setCheckState(Qt::Unchecked);
+
+      item->setData(Qt::UserRole, url);
+      item->setData(Qt::ItemDataRole(Qt::UserRole + 1), feature);
+      item->setFlags(Qt::ItemIsEnabled |
+		     Qt::ItemIsSelectable |
+		     Qt::ItemIsUserCheckable);
+      m_ui.features_permissions->setItem
+	(m_ui.features_permissions->rowCount() - 1, 0, item);
+      item = new QTableWidgetItem
+	(dooble_text_utilities::
+	 web_engine_page_feature_to_pretty_string(feature));
+      item->setData(Qt::UserRole, url);
+      item->setData(Qt::ItemDataRole(Qt::UserRole + 1), feature);
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.features_permissions->setItem
+	(m_ui.features_permissions->rowCount() - 1, 1, item);
+      item = new QTableWidgetItem(url.toString());
+      item->setData(Qt::UserRole, url);
+      item->setData(Qt::ItemDataRole(Qt::UserRole + 1), feature);
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.features_permissions->setItem
+	(m_ui.features_permissions->rowCount() - 1, 2, item);
+      connect(m_ui.features_permissions,
+	      SIGNAL(itemChanged(QTableWidgetItem *)),
+	      this,
+	      SLOT(slot_features_permissions_item_changed(QTableWidgetItem *)));
+    }
+  else
+    {
+      QList<QPair<int, bool> > values(s_site_features_permissions.values(url));
+
+      for(int i = 0; i < values.size(); i++)
+	if(feature == QWebEnginePage::Feature(values.at(i).first) &&
+	   values.at(i).first != -1)
+	  {
+	    s_site_features_permissions.remove
+	      (url, QPair<int, bool> (values.at(i).first, false));
+	    s_site_features_permissions.remove
+	      (url, QPair<int, bool> (values.at(i).first, true));
+	    break;
+	  }
+    }
+
+  s_site_features_permissions.insert(url, QPair<int, bool> (feature, state));
+  QApplication::restoreOverrideCursor();
+
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     !setting("features_permissions").toBool())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name
+    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_features_permissions "
+	   "(feature, feature_digest, permission, url, url_digest) "
+	   "VALUES (?, ?, ?, ?, ?)");
+
+	QByteArray data
+	  (dooble::s_cryptography->
+	   encrypt_then_mac(QByteArray::number(feature)));
+	bool ok = true;
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(QByteArray::number(feature));
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac
+	  (state ? QByteArray("true") : QByteArray("false"));
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(url.toEncoded());
+
+	if(data.isEmpty())
+	  ok = false;
+	else
+	  query.addBindValue(data.toBase64());
+
+	if(ok)
+	  query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_settings::show(void)
 {
   if(!isVisible())
@@ -1088,25 +1317,39 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
   switch(panel)
     {
     case DISPLAY_PANEL:
-      m_ui.display->click();
-      break;
+      {
+	m_ui.display->click();
+	break;
+      }
     case CACHE_PANEL:
-      m_ui.cache->click();
-      break;
+      {
+	m_ui.cache->click();
+	break;
+      }
     case HISTORY_PANEL:
-      m_ui.history->click();
-      break;
+      {
+	m_ui.history->click();
+	break;
+      }
     case PRIVACY_PANEL:
-      m_ui.privacy->click();
-      break;
+      {
+	m_ui.privacy->click();
+	break;
+      }
     case WEB_PANEL:
-      m_ui.web->click();
-      break;
+      {
+	m_ui.web->click();
+	break;
+      }
     case WINDOWS_PANEL:
-      m_ui.windows->click();
-      break;
+      {
+	m_ui.windows->click();
+	break;
+      }
     default:
-      m_ui.display->click();
+      {
+	m_ui.display->click();
+      }
     }
 }
 
@@ -1288,7 +1531,9 @@ void dooble_settings::slot_apply(void)
 	  break;
 	}
       default:
-	s_settings["theme_color"] = "blue-grey";
+	{
+	  s_settings["theme_color"] = "blue-grey";
+	}
       }
   }
 
@@ -1330,6 +1575,8 @@ void dooble_settings::slot_apply(void)
   set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
     ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
+  set_setting
+    ("features_permissions", m_ui.features_permissions_groupbox->isChecked());
   set_setting("icon_set_index", m_ui.icon_set->currentIndex());
 
   {
@@ -1371,6 +1618,22 @@ void dooble_settings::slot_apply(void)
 void dooble_settings::slot_clear_cache(void)
 {
   QWebEngineProfile::defaultProfile()->clearHttpCache();
+}
+
+void dooble_settings::slot_features_permissions_item_changed
+(QTableWidgetItem *item)
+{
+  if(!item)
+    return;
+
+  if(item->column() != 0)
+    return;
+
+  set_site_feature_permission
+    (item->data(Qt::UserRole).toUrl(),
+     QWebEnginePage::Feature(item->data(Qt::ItemDataRole(Qt::UserRole + 1)).
+			     toInt()),
+     item->checkState() == Qt::Checked);
 }
 
 void dooble_settings::slot_javascript_block_popups_exceptions_item_changed
@@ -1579,11 +1842,14 @@ void dooble_settings::slot_populate(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.features_permissions->setRowCount(0);
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
   s_javascript_block_popup_exceptions.clear();
+  s_site_features_permissions.clear();
 
   QString database_name
     (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  int count_1 = 0;
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -1600,7 +1866,70 @@ void dooble_settings::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT state, url "
+	if(query.exec("SELECT feature, permission, url, OID "
+		      "FROM dooble_features_permissions"))
+	  while(query.next())
+	    {
+	      QByteArray data1
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
+
+	      if(data1.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_features_permissions",
+		     query.value(3).toLongLong());
+		  continue;
+		}
+
+	      QByteArray data2
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+
+	      if(data2.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_features_permissions",
+		     query.value(3).toLongLong());
+		  continue;
+		}
+
+	      QByteArray data3
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
+
+	      data3 = dooble::s_cryptography->mac_then_decrypt(data3);
+
+	      if(data3.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_features_permissions",
+		     query.value(3).toLongLong());
+		  continue;
+		}
+
+	      QUrl url(data3);
+
+	      if(url.isEmpty() || !url.isValid())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_features_permissions",
+		     query.value(3).toLongLong());
+		  continue;
+		}
+
+	      count_1 += 1;
+	      s_site_features_permissions.insert
+		(url,
+		 QPair<int, bool> (data1.toInt(), data2 == "true" ? 1 : 0));
+	    }
+
+	if(query.exec("SELECT state, url, OID "
 		      "FROM dooble_javascript_block_popup_exceptions"))
 	  while(query.next())
 	    {
@@ -1610,7 +1939,13 @@ void dooble_settings::slot_populate(void)
 	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
 
 	      if(data1.isEmpty())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_javascript_block_popup_exceptions",
+		     query.value(2).toLongLong());
+		  continue;
+		}
 
 	      QByteArray data2
 		(QByteArray::fromBase64(query.value(1).toByteArray()));
@@ -1618,12 +1953,24 @@ void dooble_settings::slot_populate(void)
 	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
 
 	      if(data2.isEmpty())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_javascript_block_popup_exceptions",
+		     query.value(2).toLongLong());
+		  continue;
+		}
 
 	      QUrl url(data2);
 
 	      if(url.isEmpty() || !url.isValid())
-		continue;
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_javascript_block_popup_exceptions",
+		     query.value(2).toLongLong());
+		  continue;
+		}
 
 	      s_javascript_block_popup_exceptions[url] =
 		(data1 == "true") ? 1 : 0;
@@ -1634,47 +1981,97 @@ void dooble_settings::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  disconnect(m_ui.features_permissions,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_features_permissions_item_changed(QTableWidgetItem *)));
   disconnect
     (m_ui.javascript_block_popups_exceptions,
      SIGNAL(itemChanged(QTableWidgetItem *)),
      this,
      SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
 							       *)));
+  m_ui.features_permissions->setRowCount(count_1);
   m_ui.javascript_block_popups_exceptions->setRowCount
     (s_javascript_block_popup_exceptions.size());
 
-  QHashIterator<QUrl, char> it(s_javascript_block_popup_exceptions);
-  int i = 0;
+  {
+    QMapIterator<QUrl, QPair<int, bool> > it(s_site_features_permissions);
+    int i = 0;
 
-  while(it.hasNext())
-    {
-      it.next();
+    while(it.hasNext())
+      {
+	it.next();
 
-      QTableWidgetItem *item = new QTableWidgetItem();
+	QTableWidgetItem *item = new QTableWidgetItem();
 
-      if(it.value())
-	item->setCheckState(Qt::Checked);
-      else
-	item->setCheckState(Qt::Unchecked);
+	if(it.value().second)
+	  item->setCheckState(Qt::Checked);
+	else
+	  item->setCheckState(Qt::Unchecked);
 
-      item->setData(Qt::UserRole, it.key());
-      item->setFlags(Qt::ItemIsEnabled |
-		     Qt::ItemIsSelectable |
-		     Qt::ItemIsUserCheckable);
-      m_ui.javascript_block_popups_exceptions->setItem(i, 0, item);
-      item = new QTableWidgetItem(it.key().toString());
-      item->setData(Qt::UserRole, it.key());
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-      m_ui.javascript_block_popups_exceptions->setItem(i, 1, item);
-      i += 1;
-    }
+	item->setData(Qt::UserRole, it.key());
+	item->setData(Qt::ItemDataRole(Qt::UserRole + 1), it.value().first);
+	item->setFlags(Qt::ItemIsEnabled |
+		       Qt::ItemIsSelectable |
+		       Qt::ItemIsUserCheckable);
+	m_ui.features_permissions->setItem(i, 0, item);
+	item = new QTableWidgetItem
+	  (dooble_text_utilities::
+	   web_engine_page_feature_to_pretty_string(QWebEnginePage::
+						    Feature(it.value().first)));
+	item->setData(Qt::UserRole, it.key());
+	item->setData(Qt::ItemDataRole(Qt::UserRole + 1), it.value().first);
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	m_ui.features_permissions->setItem(i, 1, item);
+	item = new QTableWidgetItem(it.key().toString());
+	item->setData(Qt::UserRole, it.key());
+	item->setData(Qt::ItemDataRole(Qt::UserRole + 1), it.value().first);
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	m_ui.features_permissions->setItem(i, 2, item);
+	i += 1;
+      }
+  }
 
+  {
+    QHashIterator<QUrl, char> it(s_javascript_block_popup_exceptions);
+    int i = 0;
+
+    while(it.hasNext())
+      {
+	it.next();
+
+	QTableWidgetItem *item = new QTableWidgetItem();
+
+	if(it.value())
+	  item->setCheckState(Qt::Checked);
+	else
+	  item->setCheckState(Qt::Unchecked);
+
+	item->setData(Qt::UserRole, it.key());
+	item->setFlags(Qt::ItemIsEnabled |
+		       Qt::ItemIsSelectable |
+		       Qt::ItemIsUserCheckable);
+	m_ui.javascript_block_popups_exceptions->setItem(i, 0, item);
+	item = new QTableWidgetItem(it.key().toString());
+	item->setData(Qt::UserRole, it.key());
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	m_ui.javascript_block_popups_exceptions->setItem(i, 1, item);
+	i += 1;
+      }
+  }
+
+  connect(m_ui.features_permissions,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_features_permissions_item_changed(QTableWidgetItem *)));
   connect
     (m_ui.javascript_block_popups_exceptions,
      SIGNAL(itemChanged(QTableWidgetItem *)),
      this,
      SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
 							       *)));
+  m_ui.features_permissions->sortItems(2);
   m_ui.javascript_block_popups_exceptions->sortItems(1);
   QApplication::restoreOverrideCursor();
   emit populated();
@@ -1694,6 +2091,17 @@ void dooble_settings::slot_proxy_type_changed(int index)
     m_ui.proxy_frame->setEnabled(true);
 }
 
+void dooble_settings::slot_remove_all_features_permissions(void)
+{
+  m_ui.features_permissions->setRowCount(0);
+  s_site_features_permissions.clear();
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  purge_features_permissions();
+}
+
 void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
 {
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
@@ -1703,6 +2111,96 @@ void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
     return;
 
   purge_javascript_block_popup_exceptions();
+}
+
+void dooble_settings::slot_remove_selected_features_permissions(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QModelIndexList list
+    (m_ui.features_permissions->selectionModel()->selectedRows(2));
+
+  std::sort(list.begin(), list.end());
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name
+	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_settings.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("PRAGMA synchronous = OFF");
+
+	    for(int i = list.size() - 1; i >= 0; i--)
+	      {
+		query.prepare
+		  ("DELETE FROM dooble_features_permissions "
+		   "WHERE feature_digest = ? AND url_digest = ?");
+		query.addBindValue
+		  (dooble::s_cryptography->
+		   hmac(QByteArray::number(list.at(i).
+					   data(Qt::
+						ItemDataRole(Qt::UserRole + 1)).
+					   toInt())).toBase64());
+		query.addBindValue
+		  (dooble::s_cryptography->
+		   hmac(list.at(i).data(Qt::UserRole).toUrl().toEncoded()).
+		   toBase64());
+
+		if(query.exec())
+		  {
+		    s_site_features_permissions.remove
+		      (list.at(i).data().toUrl(),
+		       QPair<int, bool> (list.at(i).
+					 data(Qt::
+					      ItemDataRole(Qt::UserRole + 1)).
+					 toInt(),
+					 false));
+		    s_site_features_permissions.remove
+		      (list.at(i).data().toUrl(),
+		       QPair<int, bool> (list.at(i).
+					 data(Qt::
+					      ItemDataRole(Qt::UserRole + 1)).
+					 toInt(),
+					 true));
+		    m_ui.features_permissions->removeRow(list.at(i).row());
+		  }
+	      }
+
+	    query.exec("VACUUM");
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+  else
+    for(int i = list.size() - 1; i >= 0; i--)
+      {
+	s_site_features_permissions.remove
+	  (list.at(i).data().toUrl(),
+	   QPair<int, bool> (list.at(i).
+			     data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt(),
+			     false));
+	s_site_features_permissions.remove
+	  (list.at(i).data().toUrl(),
+	   QPair<int, bool> (list.at(i).
+			     data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt(),
+			     true));
+	m_ui.features_permissions->removeRow(list.at(i).row());
+      }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::
@@ -1746,7 +2244,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 		if(query.exec())
 		  {
 		    s_javascript_block_popup_exceptions.remove
-		      (list.at(i).data().toString());
+		      (list.at(i).data().toUrl());
 		    m_ui.javascript_block_popups_exceptions->
 		      removeRow(list.at(i).row());
 		  }
@@ -1763,8 +2261,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
   else
     for(int i = list.size() - 1; i >= 0; i--)
       {
-	s_javascript_block_popup_exceptions.remove
-	  (list.at(i).data().toString());
+	s_javascript_block_popup_exceptions.remove(list.at(i).data().toUrl());
 	m_ui.javascript_block_popups_exceptions->removeRow(list.at(i).row());
       }
 

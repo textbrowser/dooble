@@ -44,6 +44,9 @@ class dooble_web_engine_view: public QWebEngineView
   bool is_private(void) const;
   void download(const QString &file_name, const QUrl &url);
   void save(const QString &file_name);
+  void set_feature_permission(const QUrl &security_origin,
+			      QWebEnginePage::Feature feature,
+			      QWebEnginePage::PermissionPolicy policy);
 
  protected:
   QSize sizeHint(void) const;
@@ -71,6 +74,10 @@ class dooble_web_engine_view: public QWebEngineView
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
   void downloadRequested(QWebEngineDownloadItem *download);
+  void featurePermissionRequestCanceled(const QUrl &security_origin,
+					QWebEnginePage::Feature feature);
+  void featurePermissionRequested(const QUrl &security_origin,
+				  QWebEnginePage::Feature feature);
   void open_link_in_new_private_window(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);
   void open_link_in_new_window(const QUrl &url);

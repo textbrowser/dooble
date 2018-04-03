@@ -25,21 +25,20 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_text_utilities_h
-#define dooble_text_utilities_h
+#ifndef dooble_database_utilities_h
+#define dooble_database_utilities_h
 
-#include <QString>
-#include <QWebEnginePage>
+#include <QSqlDatabase>
 
-class dooble_text_utilities
+class dooble_database_utilities
 {
  public:
-  static QString web_engine_page_feature_to_pretty_string
-    (QWebEnginePage::Feature feature);
-  static int visual_length_of_string(const QString &text);
+  static void remove_entry(const QSqlDatabase &db,
+			   const QString &table,
+			   qint64 oid);
 
  private:
-  dooble_text_utilities(void);
+  dooble_database_utilities(void);
 };
 
 #endif

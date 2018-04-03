@@ -29,6 +29,50 @@
 
 #include "dooble_text_utilities.h"
 
+QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
+(QWebEnginePage::Feature feature)
+{
+  switch(feature)
+    {
+    case QWebEnginePage::DesktopAudioVideoCapture:
+      {
+	return QObject::tr("Desktop Audio Video Capture");
+      }
+    case QWebEnginePage::DesktopVideoCapture:
+      {
+	return QObject::tr("Desktop Video Capture");
+      }
+    case QWebEnginePage::Geolocation:
+      {
+	return QObject::tr("Geo Location");
+      }
+    case QWebEnginePage::MediaAudioCapture:
+      {
+	return QObject::tr("Media Audio Capture");
+      }
+    case QWebEnginePage::MediaAudioVideoCapture:
+      {
+	return QObject::tr("Media Audio Video Capture");
+      }
+    case QWebEnginePage::MediaVideoCapture:
+      {
+	return QObject::tr("Media Video Capture");
+      }
+    case QWebEnginePage::MouseLock:
+      {
+	return QObject::tr("Mouse Lock");
+      }
+    case QWebEnginePage::Notifications:
+      {
+	return QObject::tr("Notifications");
+      }
+    default:
+      {
+	return QObject::tr("Unknown Feature");
+      }
+    }
+}
+
 int dooble_text_utilities::visual_length_of_string(const QString &text)
 {
   QXmlStreamReader xml_stream_reader(text);

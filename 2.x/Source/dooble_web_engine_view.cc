@@ -54,6 +54,18 @@ dooble_web_engine_view::dooble_web_engine_view
 	  this,
 	  SLOT(slot_certificate_exception_accepted(const QUrl &)));
   connect(m_page,
+	  SIGNAL(featurePermissionRequestCanceled(const QUrl &,
+						  QWebEnginePage::Feature)),
+	  this,
+	  SIGNAL(featurePermissionRequestCanceled(const QUrl &,
+						  QWebEnginePage::Feature)));
+  connect(m_page,
+	  SIGNAL(featurePermissionRequested(const QUrl &,
+					    QWebEnginePage::Feature)),
+	  this,
+	  SIGNAL(featurePermissionRequested(const QUrl &,
+					    QWebEnginePage::Feature)));
+  connect(m_page,
 	  SIGNAL(windowCloseRequested(void)),
 	  this,
 	  SIGNAL(windowCloseRequested(void)));
@@ -140,7 +152,9 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 	break;
       }
     default:
-      emit create_tab(view);
+      {
+	emit create_tab(view);
+      }
     }
 
   return view;
@@ -282,6 +296,18 @@ void dooble_web_engine_view::slot_accept_or_block_domain(void)
       if(host.indexOf('.') < 0)
 	break;
     }
+}
+
+void dooble_web_engine_view::set_feature_permission
+(const QUrl &security_origin,
+ QWebEnginePage::Feature feature,
+ QWebEnginePage::PermissionPolicy policy)
+{
+  dooble::s_settings->set_site_feature_permission
+    (security_origin,
+     feature,
+     policy == QWebEnginePage::PermissionGrantedByUser);
+  m_page->setFeaturePermission(security_origin, feature, policy);
 }
 
 void dooble_web_engine_view::slot_certificate_exception_accepted

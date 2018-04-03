@@ -31,6 +31,7 @@
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_favicons.h"
 
 QAtomicInteger<quintptr> dooble_favicons::s_db_id = 0;
@@ -60,7 +61,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT favicon FROM dooble_favicons WHERE "
+	query.prepare("SELECT favicon, OID FROM dooble_favicons WHERE "
 		      "url_digest IN (?, ?) OR url_host_digest = ?");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
@@ -95,6 +96,11 @@ QIcon dooble_favicons::icon(const QUrl &url)
 		      buffer.close();
 		    }
 		}
+	      else
+		dooble_database_utilities::remove_entry
+		  (db,
+		   "dooble_favicons",
+		   query.value(1).toLongLong());
 	    }
       }
 

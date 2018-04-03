@@ -35,6 +35,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 
 dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   QMainWindow()
@@ -256,7 +257,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT domain, state "
+	    if(query.exec("SELECT domain, state, OID "
 			  "FROM dooble_accepted_or_blocked_domains"))
 	      while(query.next())
 		{
@@ -266,7 +267,13 @@ void dooble_accepted_or_blocked_domains::populate(void)
 		  data1 = dooble::s_cryptography->mac_then_decrypt(data1);
 
 		  if(data1.isEmpty())
-		    continue;
+		    {
+		      dooble_database_utilities::remove_entry
+			(db,
+			 "dooble_accepted_or_blocked_domains",
+			 query.value(2).toLongLong());
+		      continue;
+		    }
 
 		  QByteArray data2
 		    (QByteArray::fromBase64(query.value(1).toByteArray()));
@@ -274,7 +281,13 @@ void dooble_accepted_or_blocked_domains::populate(void)
 		  data2 = dooble::s_cryptography->mac_then_decrypt(data2);
 
 		  if(data2.isEmpty())
-		    continue;
+		    {
+		      dooble_database_utilities::remove_entry
+			(db,
+			 "dooble_accepted_or_blocked_domains",
+			 query.value(2).toLongLong());
+		      continue;
+		    }
 
 		  m_domains[data1.constData()] = QVariant
 		    (data2).toBool() ? 1 : 0;
@@ -355,7 +368,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT state, url "
+	    if(query.exec("SELECT state, url, OID "
 			  "FROM dooble_accepted_or_blocked_domains_exceptions"))
 	      while(query.next())
 		{
@@ -365,7 +378,13 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 		  data1 = dooble::s_cryptography->mac_then_decrypt(data1);
 
 		  if(data1.isEmpty())
-		    continue;
+		    {
+		      dooble_database_utilities::remove_entry
+			(db,
+			 "dooble_accepted_or_blocked_domains_exceptions",
+			 query.value(2).toLongLong());
+		      continue;
+		    }
 
 		  QByteArray data2
 		    (QByteArray::fromBase64(query.value(1).toByteArray()));
@@ -373,7 +392,13 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 		  data2 = dooble::s_cryptography->mac_then_decrypt(data2);
 
 		  if(data2.isEmpty())
-		    continue;
+		    {
+		      dooble_database_utilities::remove_entry
+			(db,
+			 "dooble_accepted_or_blocked_domains_exceptions",
+			 query.value(2).toLongLong());
+		      continue;
+		    }
 
 		  m_exceptions[data2] = (data1 == "true") ? 1 : 0;
 		}

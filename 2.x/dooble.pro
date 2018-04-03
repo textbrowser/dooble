@@ -624,6 +624,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_cookies.cc \
                   Source/dooble_cookies_window.cc \
                   Source/dooble_cryptography.cc \
+                  Source/dooble_database_utilities.cc \
                   Source/dooble_downloads.cc \
                   Source/dooble_downloads_item.cc \
                   Source/dooble_favicons.cc \

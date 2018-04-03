@@ -37,6 +37,7 @@
 #include <QReadWriteLock>
 #include <QSqlDatabase>
 #include <QUrl>
+#include <QWebEnginePage>
 
 #include "ui_dooble_settings.h"
 
@@ -63,8 +64,13 @@ class dooble_settings: public QMainWindow
   static bool has_dooble_credentials(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
+  static int site_feature_permission(const QUrl &url,
+				     QWebEnginePage::Feature feature);
   static void remove_setting(const QString &key);
   void restore(bool read_database);
+  void set_site_feature_permission(const QUrl &url,
+				   QWebEnginePage::Feature feature,
+				   bool state);
   void show_panel(dooble_settings::Panels panel);
 
  public slots:
@@ -84,6 +90,7 @@ class dooble_settings: public QMainWindow
   static QAtomicInteger<quintptr> s_db_id;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
   static QMap<QString, QVariant> s_settings;
+  static QMultiMap<QUrl, QPair<int, bool> > s_site_features_permissions;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
   static void create_tables(QSqlDatabase &db);
@@ -91,6 +98,7 @@ class dooble_settings: public QMainWindow
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void purge_database_data(void);
+  void purge_features_permissions(void);
   void purge_javascript_block_popup_exceptions(void);
   void save_javascript_block_popup_exception(const QUrl &url, bool state);
   void save_settings(void);
@@ -98,6 +106,7 @@ class dooble_settings: public QMainWindow
  private slots:
   void slot_apply(void);
   void slot_clear_cache(void);
+  void slot_features_permissions_item_changed(QTableWidgetItem *item);
   void slot_javascript_block_popups_exceptions_item_changed
     (QTableWidgetItem *item);
   void slot_new_javascript_block_popup_exception(const QUrl &url);
@@ -106,7 +115,9 @@ class dooble_settings: public QMainWindow
   void slot_pbkdf2_future_finished(void);
   void slot_populate(void);
   void slot_proxy_type_changed(int index);
+  void slot_remove_all_features_permissions(void);
   void slot_remove_all_javascript_block_popup_exceptions(void);
+  void slot_remove_selected_features_permissions(void);
   void slot_remove_selected_javascript_block_popup_exceptions(void);
   void slot_reset(void);
   void slot_reset_credentials(void);
