@@ -1186,6 +1186,7 @@ void dooble_settings::set_site_feature_permission
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 2, item);
+      m_ui.features_permissions->sortItems(2);
       connect(m_ui.features_permissions,
 	      SIGNAL(itemChanged(QTableWidgetItem *)),
 	      this,
@@ -2061,6 +2062,8 @@ void dooble_settings::slot_populate(void)
       }
   }
 
+  m_ui.features_permissions->sortItems(2);
+  m_ui.javascript_block_popups_exceptions->sortItems(1);
   connect(m_ui.features_permissions,
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
@@ -2071,8 +2074,6 @@ void dooble_settings::slot_populate(void)
      this,
      SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
 							       *)));
-  m_ui.features_permissions->sortItems(2);
-  m_ui.javascript_block_popups_exceptions->sortItems(1);
   QApplication::restoreOverrideCursor();
   emit populated();
 }
