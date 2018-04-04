@@ -571,8 +571,13 @@ void dooble_page::prepare_standard_menus(void)
   m_authentication_action = menu->addAction(tr("&Authenticate..."),
 					    this,
 					    SIGNAL(authenticate(void)));
-  m_authentication_action->setEnabled
-    (dooble_settings::has_dooble_credentials());
+
+  if(dooble_settings::has_dooble_credentials())
+    m_authentication_action->setEnabled
+      (dooble::s_cryptography && !dooble::s_cryptography->authenticated());
+  else
+    m_authentication_action->setEnabled(false);
+
   menu->addSeparator();
   menu->addAction(tr("New &Private Window..."),
 		  this,

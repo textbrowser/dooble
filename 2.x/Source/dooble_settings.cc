@@ -380,7 +380,7 @@ QVariant dooble_settings::setting(const QString &key)
 {
   QReadLocker lock(&s_settings_mutex);
 
-  if(!s_settings.contains(key))
+  if(!s_settings.contains(key.toLower().trimmed()))
     {
       QString home_path(s_settings.value("home_path").toString());
 
@@ -404,7 +404,7 @@ QVariant dooble_settings::setting(const QString &key)
 
 	    query.setForwardOnly(true);
 	    query.prepare("SELECT value FROM dooble_settings WHERE key = ?");
-	    query.addBindValue(key);
+	    query.addBindValue(key.toLower().trimmed());
 
 	    if(query.exec())
 	      if(query.next())
@@ -418,14 +418,22 @@ QVariant dooble_settings::setting(const QString &key)
       return value;
     }
 
-  return s_settings.value(key);
+  return s_settings.value(key.toLower().trimmed());
 }
 
 bool dooble_settings::has_dooble_credentials(void)
 {
-  return !setting("authentication_iteration_count").isNull() &&
-    !setting("authentication_salt").isNull() &&
-    !setting("authentication_salted_password").isNull() &&
+  return setting("authentication_iteration_count").toInt() > 0 &&
+    setting("authentication_salt").toString().length() > 0 &&
+    setting("authentication_salted_password").toString().length() > 0 &&
+    setting("credentials_enabled").toBool();
+}
+
+bool dooble_settings::has_dooble_credentials_temporary(void)
+{
+  return (setting("authentication_iteration_count").toInt() == 0 ||
+	  setting("authentication_salt").toString().isEmpty() ||
+	  setting("authentication_salted_password").toString().isEmpty()) &&
     setting("credentials_enabled").toBool();
 }
 
@@ -437,13 +445,13 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
     {
       QWriteLocker lock(&s_settings_mutex);
 
-      s_settings.remove(key);
+      s_settings.remove(key.toLower().trimmed());
       return false;
     }
 
   QWriteLocker lock(&s_settings_mutex);
 
-  s_settings[key.trimmed()] = value;
+  s_settings[key.toLower().trimmed()] = value;
   lock.unlock();
 
   QString database_name
@@ -466,8 +474,8 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 	query.exec("PRAGMA synchronous = NORMAL");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
-	query.addBindValue(key.trimmed());
-	query.addBindValue(value.toString());
+	query.addBindValue(key.toLower().trimmed());
+	query.addBindValue(value.toString().trimmed());
 	ok = query.exec();
       }
 
@@ -670,6 +678,7 @@ void dooble_settings::purge_database_data(void)
 void dooble_settings::purge_features_permissions(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.features_permissions->setRowCount(0);
 
   QString database_name
     (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
@@ -700,6 +709,7 @@ void dooble_settings::purge_features_permissions(void)
 void dooble_settings::purge_javascript_block_popup_exceptions(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.javascript_block_popups_exceptions->setRowCount(0);
 
   QString database_name
     (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
@@ -734,7 +744,7 @@ void dooble_settings::remove_setting(const QString &key)
 
   QWriteLocker lock(&s_settings_mutex);
 
-  s_settings.remove(key.trimmed());
+  s_settings.remove(key.toLower().trimmed());
   lock.unlock();
 
   QString database_name
@@ -752,7 +762,7 @@ void dooble_settings::remove_setting(const QString &key)
 	QSqlQuery query(db);
 
 	query.prepare("DELETE FROM dooble_settings WHERE key = ?");
-	query.addBindValue(key.trimmed());
+	query.addBindValue(key.toLower().trimmed());
 	query.exec();
       }
 
@@ -795,7 +805,7 @@ void dooble_settings::restore(bool read_database)
 	    if(query.exec("SELECT key, value, OID FROM dooble_settings"))
 	      while(query.next())
 		{
-		  QString key(query.value(0).toString().trimmed());
+		  QString key(query.value(0).toString().toLower().trimmed());
 		  QString value(query.value(1).toString().trimmed());
 
 		  if(key.isEmpty() || value.isEmpty())

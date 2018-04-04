@@ -335,7 +335,8 @@ bool dooble::can_exit(void)
 
 bool dooble::initialized(void) const
 {
-  if(dooble_settings::has_dooble_credentials())
+  if(dooble_settings::has_dooble_credentials() ||
+     dooble_settings::has_dooble_credentials_temporary())
     return true;
   else
     return s_populated >= 7;
@@ -1099,8 +1100,13 @@ void dooble::prepare_standard_menus(void)
   m_authentication_action = menu->addAction(tr("&Authenticate..."),
 					    this,
 					    SLOT(slot_authenticate(void)));
-  m_authentication_action->setEnabled
-    (dooble_settings::has_dooble_credentials());
+
+  if(dooble_settings::has_dooble_credentials())
+    m_authentication_action->setEnabled
+      (s_cryptography && !s_cryptography->authenticated());
+  else
+    m_authentication_action->setEnabled(false);
+
   menu->addSeparator();
   menu->addAction(tr("New &Private Window..."),
 		  this,

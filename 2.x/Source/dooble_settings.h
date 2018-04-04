@@ -62,6 +62,7 @@ class dooble_settings: public QMainWindow
   static QStringList s_spell_checker_dictionaries;
   static QVariant setting(const QString &key);
   static bool has_dooble_credentials(void);
+  static bool has_dooble_credentials_temporary(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static int site_feature_permission(const QUrl &url,
