@@ -483,8 +483,8 @@ bool dooble_settings::site_has_javascript_block_popup_exception(const QUrl &url)
   return s_javascript_block_popup_exceptions.value(url, 0) == 1;
 }
 
-int dooble_settings::site_feature_permission(const QUrl &url,
-					     QWebEnginePage::Feature feature)
+int dooble_settings::site_feature_permission
+(const QUrl &url, QWebEnginePage::Feature feature)
 {
   if(!s_site_features_permissions.contains(url))
     return -1;
