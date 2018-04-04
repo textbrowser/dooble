@@ -51,6 +51,42 @@
         <source>Populating containers.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Desktop Audio Video Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Desktop Video Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Geo Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Audio Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Audio Video Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Video Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mouse Lock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Feature</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble</name>
@@ -354,7 +390,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), Purple Puppy.</source>
+        <source>Dooble version %1 (%2), Blue Spark.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1270,7 +1306,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>A dialog from %1 has been blocked.</source>
-        <translation>Ein Dialog von %1 wurde geblockt.</translation>
+        <translation type="vanished">Ein Dialog von %1 wurde geblockt.</translation>
     </message>
     <message>
         <source>Always</source>
@@ -1466,6 +1502,50 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Favorites (Ctrl + B)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A dialog from &lt;b&gt;%1&lt;/b&gt; has been blocked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Desktop Audio Video Capture access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Desktop Video Capture access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Geo Location access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Media Audio Capture access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Media Audio Video Capture access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Media Video Capture access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Mouse Lock access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting Notifications access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting access to an unknown feature.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2117,6 +2197,14 @@ Domänen</translation>
     </message>
     <message>
         <source>Credentials could not be generated. This is a curious problem (%1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feature</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
