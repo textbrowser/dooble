@@ -2477,92 +2477,92 @@ Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1370"/>
+        <location filename="../Source/dooble_settings.cc" line="1369"/>
         <source>You are about to enable temporary credentials. Existing database data will be removed. New data will be stored as ciphertext. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1375"/>
+        <location filename="../Source/dooble_settings.cc" line="1374"/>
         <source>You are about to disable credentials. Existing database data will be removed. New data will be stored as plaintext. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1381"/>
-        <location filename="../Source/dooble_settings.cc" line="2285"/>
-        <location filename="../Source/dooble_settings.cc" line="2330"/>
-        <location filename="../Source/dooble_settings.cc" line="2414"/>
+        <location filename="../Source/dooble_settings.cc" line="1380"/>
+        <location filename="../Source/dooble_settings.cc" line="2284"/>
+        <location filename="../Source/dooble_settings.cc" line="2329"/>
+        <location filename="../Source/dooble_settings.cc" line="2413"/>
         <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1826"/>
+        <location filename="../Source/dooble_settings.cc" line="1825"/>
         <source>Dooble: Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1827"/>
+        <location filename="../Source/dooble_settings.cc" line="1826"/>
         <source>Your credentials have been prepared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1831"/>
-        <location filename="../Source/dooble_settings.cc" line="2428"/>
+        <location filename="../Source/dooble_settings.cc" line="1830"/>
+        <location filename="../Source/dooble_settings.cc" line="2427"/>
         <source>Dooble: Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1832"/>
+        <location filename="../Source/dooble_settings.cc" line="1831"/>
         <source>Credentials could not be generated. This is a curious problem (%1).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2279"/>
+        <location filename="../Source/dooble_settings.cc" line="2278"/>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted. Please remove the directory WebEnginePersistentStorage after the reset completes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2325"/>
+        <location filename="../Source/dooble_settings.cc" line="2324"/>
         <source>Are you sure that you wish to reset your permanent credentials? New session-only credentials will be generated and database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2392"/>
-        <location filename="../Source/dooble_settings.cc" line="2400"/>
+        <location filename="../Source/dooble_settings.cc" line="2391"/>
+        <location filename="../Source/dooble_settings.cc" line="2399"/>
         <source>Dooble: User Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2392"/>
+        <location filename="../Source/dooble_settings.cc" line="2391"/>
         <source>Empty password(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2400"/>
+        <location filename="../Source/dooble_settings.cc" line="2399"/>
         <source>Passwords are not equal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2410"/>
+        <location filename="../Source/dooble_settings.cc" line="2409"/>
         <source>Are you sure that you wish to prepare new credentials? Existing database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2429"/>
+        <location filename="../Source/dooble_settings.cc" line="2428"/>
         <source>Salt-generation failure! This is a curious problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2437"/>
+        <location filename="../Source/dooble_settings.cc" line="2436"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2438"/>
+        <location filename="../Source/dooble_settings.cc" line="2437"/>
         <source>Preparing credentials...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2444"/>
+        <location filename="../Source/dooble_settings.cc" line="2443"/>
         <source>Dooble: Preparing Credentials</source>
         <translation type="unfinished"></translation>
     </message>

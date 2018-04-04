@@ -1144,11 +1144,12 @@ void dooble_settings::set_site_feature_permission
 {
   if(url.isEmpty() || !url.isValid())
     return;
+  else if(!setting("features_permissions").toBool())
+    return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(setting("features_permissions").toBool() &&
-     site_feature_permission(url, feature) == -1)
+  if(site_feature_permission(url, feature) == -1)
     {
       disconnect
 	(m_ui.features_permissions,
@@ -1211,9 +1212,7 @@ void dooble_settings::set_site_feature_permission
   s_site_features_permissions.insert(url, QPair<int, bool> (feature, state));
   QApplication::restoreOverrideCursor();
 
-  if(!dooble::s_cryptography ||
-     !dooble::s_cryptography->authenticated() ||
-     !setting("features_permissions").toBool())
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
