@@ -32,8 +32,8 @@
 
 #include "ui_dooble_about.h"
 
-#ifndef _SPOTON_ARCHITECTURE_H_
-#define _SPOTON_ARCHITECTURE_H_
+#ifndef dooble_architecture_h
+#define dooble_architecture_h
 #if defined(__alpha_ev4__)
 #define DOOBLE_ARCHITECTURE_STR "__alpha_ev4__"
 #elif defined(__alpha_ev5__)
@@ -54,12 +54,12 @@
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6J__"
 #elif defined(__ARM_ARCH_6K__)
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6K__"
-#elif defined(__ARM_ARCH_6Z__)
-#define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6Z__"
-#elif defined(__ARM_ARCH_6ZK__)
-#define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6ZK__"
 #elif defined(__ARM_ARCH_6T2__)
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6T2__"
+#elif defined(__ARM_ARCH_6ZK__)
+#define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6ZK__"
+#elif defined(__ARM_ARCH_6Z__)
+#define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6Z__"
 #elif defined(__ARM_ARCH_6__)
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6__"
 #elif defined(__ARM_ARCH_7A__)
