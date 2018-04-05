@@ -64,10 +64,10 @@
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_6__"
 #elif defined(__ARM_ARCH_7A__)
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_7A__"
-#elif defined(__ARM_ARCH_7R__)
-#define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_7R__"
 #elif defined(__ARM_ARCH_7M__)
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_7M__"
+#elif defined(__ARM_ARCH_7R__)
+#define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_7R__"
 #elif defined(__ARM_ARCH_7S__)
 #define DOOBLE_ARCHITECTURE_STR "__ARM_ARCH_7S__"
 #elif defined(__ARM_ARCH_7__)
