@@ -326,6 +326,7 @@ int main(int argc, char *argv[])
   splash.showMessage(QObject::tr("Populating containers."),
 		     Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
+  dooble::s_application->processEvents();
 
   while(!d->initialized())
     splash.repaint();

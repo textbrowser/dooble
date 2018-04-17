@@ -337,9 +337,9 @@ void dooble_tab_widget::slot_load_finished(void)
 	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 	}
 
-      m_tab_bar->repaint();
+      label->repaint();
+      label->update();
       m_tab_bar->update();
-      QApplication::processEvents();
     }
 }
 
