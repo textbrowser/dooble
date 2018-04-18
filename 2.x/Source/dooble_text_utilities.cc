@@ -34,14 +34,18 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
 {
   switch(feature)
     {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     case QWebEnginePage::DesktopAudioVideoCapture:
       {
 	return QObject::tr("Desktop Audio Video Capture");
       }
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     case QWebEnginePage::DesktopVideoCapture:
       {
 	return QObject::tr("Desktop Video Capture");
       }
+#endif
     case QWebEnginePage::Geolocation:
       {
 	return QObject::tr("Geo Location");
