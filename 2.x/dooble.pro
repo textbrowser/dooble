@@ -1,5 +1,7 @@
-!versionAtLeast(QT_VERSION, 5.10) {
-error("Qt version 5.10.0, or newer, is required.")
+greaterThan(QT_MAJOR_VERSION, 5.9) {
+  !versionAtLeast(QT_VERSION, 5.10) {
+  error("Qt version 5.10.0, or newer, is required.")
+  }
 }
 
 cache()
