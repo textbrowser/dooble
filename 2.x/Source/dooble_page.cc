@@ -1270,6 +1270,7 @@ void dooble_page::slot_feature_permission_requested
 
   switch(feature)
     {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     case QWebEnginePage::DesktopAudioVideoCapture:
       {
 	m_ui.feature_permission_url->setText
@@ -1278,6 +1279,8 @@ void dooble_page::slot_feature_permission_requested
 	   arg(security_origin.toString()));
 	break;
       }
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     case QWebEnginePage::DesktopVideoCapture:
       {
 	m_ui.feature_permission_url->setText
@@ -1285,6 +1288,7 @@ void dooble_page::slot_feature_permission_requested
 	   arg(security_origin.toString()));
 	break;
       }
+#endif
     case QWebEnginePage::Geolocation:
       {
 	m_ui.feature_permission_url->setText
