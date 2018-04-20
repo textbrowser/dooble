@@ -722,8 +722,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>415</width>
-               <height>680</height>
+               <width>451</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1221,9 +1221,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-245</y>
                <width>437</width>
-               <height>962</height>
+               <height>991</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1231,6 +1231,16 @@
                <widget class="QCheckBox" name="animated_scrolling">
                 <property name="text">
                  <string>Animated Scrolling</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="automatic_loading_of_images">
+                <property name="text">
+                 <string>Automatic Loading of Images</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -1704,6 +1714,8 @@
   <tabstop>utc_time_zone</tabstop>
   <tabstop>scrollArea_3</tabstop>
   <tabstop>animated_scrolling</tabstop>
+  <tabstop>automatic_loading_of_images</tabstop>
+  <tabstop>features_permissions_groupbox</tabstop>
   <tabstop>features_permissions</tabstop>
   <tabstop>remove_all_features_permissions</tabstop>
   <tabstop>remove_selected_features_permissions</tabstop>
