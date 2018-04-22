@@ -102,7 +102,6 @@ void dooble_history::create_tables(QSqlDatabase &db)
   QSqlQuery query(db);
 
   query.exec("CREATE TABLE IF NOT EXISTS dooble_history ("
-	     "favicon BLOB DEFAULT NULL, "
 	     "favorite_digest TEXT NOT NULL, "
 	     "last_visited TEXT NOT NULL, "
 	     "number_of_visits TEXT NOT NULL, "
