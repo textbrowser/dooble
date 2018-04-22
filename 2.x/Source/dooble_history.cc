@@ -662,7 +662,6 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	   "VALUES (?, ?, ?, ?, ?, ?)");
 
 	QByteArray bytes;
-	bool ok = true;
 
 	query.addBindValue
 	  (dooble::s_cryptography->
@@ -674,7 +673,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (QByteArray::number(hash.value(NUMBER_OF_VISITS, 1).toULongLong()));
@@ -682,7 +681,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	if(hash.value(TITLE).toString().trimmed().isEmpty())
 	  bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
@@ -693,22 +692,21 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
-
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 
@@ -852,10 +850,10 @@ void dooble_history::save_item(const QIcon &icon,
 	query.exec();
       }
 
+  done_label:
     db.close();
   }
 
- done_label:
   QSqlDatabase::removeDatabase(database_name);
 }
 

@@ -588,7 +588,6 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 	   "(domain, domain_digest, favorite_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
-	bool ok = true;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (item->text(0).toUtf8());
@@ -596,7 +595,7 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(item->text(0)).toBase64());
@@ -604,11 +603,10 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 	  (dooble::s_cryptography->
 	   hmac(item->checkState(0) == Qt::Checked ?
 		QByteArray("true") : QByteArray("false")).toBase64());
-
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 

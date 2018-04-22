@@ -220,7 +220,6 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 
 	QBuffer buffer;
 	QByteArray bytes;
-	bool ok = true;
 
 	buffer.setBuffer(&bytes);
 
@@ -242,25 +241,25 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue(dooble::s_cryptography->authenticated() ? 0 : 1);
 	bytes = dooble::s_cryptography->hmac(url.toEncoded());
-	ok &= !bytes.isEmpty();
 
-	if(ok)
-	  query.addBindValue(bytes.toBase64());
+	if(bytes.isEmpty())
+	  goto done_label;
 
+	query.addBindValue(bytes.toBase64());
 	bytes = dooble::s_cryptography->hmac(url.host());
-	ok &= !bytes.isEmpty();
 
-	if(ok)
-	  query.addBindValue(bytes.toBase64());
+	if(bytes.isEmpty())
+	  goto done_label;
 
-	if(ok)
-	  query.exec();
+	query.addBindValue(bytes.toBase64());
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 

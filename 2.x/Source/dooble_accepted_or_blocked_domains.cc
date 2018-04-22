@@ -514,7 +514,6 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 	create_tables(db);
 
 	QSqlQuery query(db);
-	bool ok = true;
 
 	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
@@ -526,28 +525,28 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 	   encrypt_then_mac(domain.toLower().trimmed().toUtf8()));
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->hmac(domain.toLower().trimmed());
-	ok &= !data.isEmpty();
 
-	if(ok)
-	  query.addBindValue(data.toBase64());
+	if(data.isEmpty())
+	  goto done_label;
 
+	query.addBindValue(data.toBase64());
 	data = dooble::s_cryptography->encrypt_then_mac
 	  (state ? "true" : "false");
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 
@@ -591,31 +590,30 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
 	QByteArray data
 	  (dooble::s_cryptography->
 	   encrypt_then_mac(state ? QByteArray("true") : QByteArray("false")));
-	bool ok = true;
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->encrypt_then_mac(url.toUtf8());
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->hmac(url.toUtf8());
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 

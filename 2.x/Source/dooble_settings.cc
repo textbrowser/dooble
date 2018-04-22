@@ -1117,31 +1117,30 @@ void dooble_settings::save_javascript_block_popup_exception
 	QByteArray data
 	  (dooble::s_cryptography->
 	   encrypt_then_mac(state ? QByteArray("true") : QByteArray("false")));
-	bool ok = true;
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->hmac(url.toEncoded());
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 
@@ -1257,17 +1256,16 @@ void dooble_settings::set_site_feature_permission
 	QByteArray data
 	  (dooble::s_cryptography->
 	   encrypt_then_mac(QByteArray::number(feature)));
-	bool ok = true;
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->hmac(QByteArray::number(feature));
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
@@ -1275,28 +1273,28 @@ void dooble_settings::set_site_feature_permission
 	  (state ? QByteArray("true") : QByteArray("false"));
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->hmac(url.toEncoded());
 
 	if(data.isEmpty())
-	  ok = false;
+	  goto done_label;
 	else
 	  query.addBindValue(data.toBase64());
 
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 

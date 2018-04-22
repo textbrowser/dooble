@@ -171,23 +171,19 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	   "(domain, domain_digest, favorite_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
-	bool ok = true;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (cookie.domain().toUtf8());
 
 	if(!bytes.isEmpty())
-	  query.addBindValue(bytes.toBase64());
-	else
-	  ok = false;
-
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
-
-	if(ok)
-	  query.exec();
+	  {
+	    query.addBindValue(bytes.toBase64());
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	    query.exec();
+	  }
 
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_cookies "
@@ -201,12 +197,12 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 

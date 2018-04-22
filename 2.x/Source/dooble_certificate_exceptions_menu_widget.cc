@@ -141,7 +141,6 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 	   "VALUES (?, ?, ?, ?, ?)");
 
 	QByteArray bytes;
-	bool ok = true;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac(error.toUtf8());
 
@@ -153,7 +152,7 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue(dooble::s_cryptography->authenticated() ? 0 : 1);
 	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
@@ -161,17 +160,17 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 
-	if(ok)
-	  if(query.exec())
-	    if(dooble::s_certificate_exceptions)
-	      dooble::s_certificate_exceptions->exception_accepted(error, url);
+	if(query.exec())
+	  if(dooble::s_certificate_exceptions)
+	    dooble::s_certificate_exceptions->exception_accepted(error, url);
       }
 
+  done_label:
     db.close();
   }
 

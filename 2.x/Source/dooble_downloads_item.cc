@@ -255,7 +255,6 @@ void dooble_downloads_item::record(void)
 	QByteArray bytes;
 	QString file_name(m_ui.file_name->text());
 	QString information(m_ui.information->text());
-	bool ok = true;
 
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_downloads "
@@ -267,14 +266,14 @@ void dooble_downloads_item::record(void)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac(file_name.toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	if(information.isEmpty())
 	  information = file_name;
@@ -284,24 +283,24 @@ void dooble_downloads_item::record(void)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac(m_url.toEncoded());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(m_url.toEncoded()).toBase64());
 
-	if(ok)
-	  if(query.exec())
-	    m_oid = query.lastInsertId().isValid() ?
-	      query.lastInsertId().toLongLong() : -1;
+	if(query.exec())
+	  m_oid = query.lastInsertId().isValid() ?
+	    query.lastInsertId().toLongLong() : -1;
       }
 
+  done_label:
     db.close();
   }
 
@@ -328,7 +327,6 @@ void dooble_downloads_item::record_information(void)
 	QByteArray bytes;
 	QString information(m_ui.information->text());
 	QSqlQuery query(db);
-	bool ok = true;
 
 	query.prepare("UPDATE dooble_downloads SET information = ? "
 		      "WHERE OID = ?");
@@ -337,14 +335,13 @@ void dooble_downloads_item::record_information(void)
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue(m_oid);
-
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
+  done_label:
     db.close();
   }
 
