@@ -2207,6 +2207,10 @@ Domänen</translation>
         <source>Feature</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic Loading of Images</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_tab_bar</name>
