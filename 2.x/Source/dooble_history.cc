@@ -795,7 +795,6 @@ void dooble_history::save_item(const QIcon &icon,
 	   "VALUES (?, ?, ?, ?, ?, ?)");
 
 	QByteArray bytes;
-	bool ok = true;
 
 	{
 	  QReadLocker locker(&m_history_mutex);
@@ -812,7 +811,7 @@ void dooble_history::save_item(const QIcon &icon,
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	{
 	  QReadLocker locker(&m_history_mutex);
@@ -825,7 +824,7 @@ void dooble_history::save_item(const QIcon &icon,
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	QString title(hash.value(TITLE).toString().trimmed());
 
@@ -838,7 +837,7 @@ void dooble_history::save_item(const QIcon &icon,
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (item.url().toEncoded());
@@ -846,18 +845,17 @@ void dooble_history::save_item(const QIcon &icon,
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
-	  ok = false;
+	  goto done_label;
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(item.url().toEncoded()).toBase64());
-
-	if(ok)
-	  query.exec();
+	query.exec();
       }
 
     db.close();
   }
 
+ done_label:
   QSqlDatabase::removeDatabase(database_name);
 }
 
