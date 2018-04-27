@@ -1292,23 +1292,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="629"/>
-        <location filename="../Source/dooble_history_window.cc" line="672"/>
+        <location filename="../Source/dooble_history_window.cc" line="592"/>
+        <location filename="../Source/dooble_history_window.cc" line="635"/>
         <source>Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="939"/>
+        <location filename="../Source/dooble_history_window.cc" line="902"/>
         <source>&amp;Copy Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="941"/>
+        <location filename="../Source/dooble_history_window.cc" line="904"/>
         <source>&amp;Delete Page(s) (Non-Favorites)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history_window.cc" line="944"/>
+        <location filename="../Source/dooble_history_window.cc" line="907"/>
         <source>&amp;Delete Page(s)</source>
         <translation type="unfinished"></translation>
     </message>

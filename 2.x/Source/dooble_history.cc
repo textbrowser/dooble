@@ -88,6 +88,9 @@ bool dooble_history::is_favorite(const QUrl &url) const
 
 void dooble_history::abort(void)
 {
+  while(!m_futures.isEmpty())
+    m_futures.takeFirst().waitForFinished();
+
   m_interrupt.store(1);
   m_populate_future.cancel();
   m_populate_future.waitForFinished();
@@ -373,37 +376,42 @@ void dooble_history::purge_favorites(void)
   m_favorites_model->removeRows(0, m_favorites_model->rowCount());
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
-    {
-      QString database_name(QString("dooble_history_%1").
-			    arg(s_db_id.fetchAndAddOrdered(1)));
+    m_futures << QtConcurrent::run
+      (this,
+       &dooble_history::purge_favorites_concurrent,
+       dooble::s_cryptography->hmac(QByteArray("false")).toBase64(),
+       dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
+}
 
+void dooble_history::purge_favorites_concurrent(const QByteArray &f,
+						const QByteArray &t)
+{
+  QString database_name
+    (QString("dooble_history_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	QSqlQuery query(db);
 
-	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_history.db");
-
-	if(db.open())
-	  {
-	    QSqlQuery query(db);
-
-	    query.exec("PRAGMA synchronous = OFF");
-	    query.prepare
-	      ("UPDATE dooble_history SET favorite_digest = ? WHERE "
-	       "favorite_digest = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
-	    query.exec();
-	  }
-
-	db.close();
+	query.prepare
+	  ("UPDATE dooble_history SET favorite_digest = ? WHERE "
+	   "favorite_digest = ?");
+	query.addBindValue(f);
+	query.addBindValue(t);
+	query.exec();
       }
 
-      QSqlDatabase::removeDatabase(database_name);
-    }
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_history::purge_history(void)
@@ -431,35 +439,37 @@ void dooble_history::purge_history(void)
   }
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
-    {
-      QString database_name(QString("dooble_history_%1").
-			    arg(s_db_id.fetchAndAddOrdered(1)));
+    m_futures << QtConcurrent::run
+      (this,
+       &dooble_history::purge_history_concurrent,
+       dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+}
 
+void dooble_history::purge_history_concurrent(const QByteArray &f)
+{
+  QString database_name
+    (QString("dooble_history_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	QSqlQuery query(db);
 
-	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_history.db");
-
-	if(db.open())
-	  {
-	    QSqlQuery query(db);
-
-	    query.exec("PRAGMA synchronous = OFF");
-	    query.prepare
-	      ("DELETE FROM dooble_history WHERE favorite_digest = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
-	    query.exec();
-	    query.exec("VACUUM");
-	  }
-
-	db.close();
+	query.prepare("DELETE FROM dooble_history WHERE favorite_digest = ?");
+	query.addBindValue(f);
+	query.exec();
       }
 
-      QSqlDatabase::removeDatabase(database_name);
-    }
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_history::remove_favorite(const QUrl &url)
@@ -516,47 +526,68 @@ void dooble_history::remove_favorite(const QUrl &url)
     }
 }
 
-void dooble_history::remove_item(const QUrl &url)
+void dooble_history::remove_items_list(const QList<QUrl> &urls)
 {
-  QList<QStandardItem *> list
-    (m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+  if(urls.isEmpty())
+    return;
 
-  if(!list.isEmpty() && list.at(0))
-    m_favorites_model->removeRow(list.at(0)->row());
+  QList<QByteArray> url_digests;
 
-  QWriteLocker locker(&m_history_mutex);
+  for(int i = 0; i < urls.size(); i++)
+    {
+      QList<QStandardItem *> list
+	(m_favorites_model->
+	 findItems(urls.at(i).toString(), Qt::MatchExactly, 1));
 
-  m_history.remove(url);
-  locker.unlock();
+      if(!list.isEmpty() && list.at(0))
+	m_favorites_model->removeRow(list.at(0)->row());
+
+      QWriteLocker locker(&m_history_mutex);
+
+      m_history.remove(urls.at(i));
+      locker.unlock();
+      url_digests << dooble::s_cryptography->hmac
+	(urls.at(i).toEncoded()).toBase64();
+    }
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
-    {
-      QString database_name(QString("dooble_history_%1").
-			    arg(s_db_id.fetchAndAddOrdered(1)));
+    m_futures << QtConcurrent::run
+      (this, &dooble_history::remove_items_list_concurrent, url_digests);
+}
 
+void dooble_history::remove_items_list_concurrent
+(const QList<QByteArray> &url_digests)
+{
+  if(url_digests.isEmpty())
+    return;
+
+  QString database_name
+    (QString("dooble_history_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	QSqlQuery query(db);
+	QVariantList list;
 
-	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_history.db");
+	for(int i = 0; i < url_digests.size(); i++)
+	  list << url_digests.at(i);
 
-	if(db.open())
-	  {
-	    QSqlQuery query(db);
-
-	    query.exec("PRAGMA synchronous = OFF");
-	    query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
-	    query.exec();
-	  }
-
-	db.close();
+	query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
+	query.addBindValue(list);
+	query.execBatch();
       }
 
-      QSqlDatabase::removeDatabase(database_name);
-    }
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
@@ -755,17 +786,31 @@ void dooble_history::save_item(const QIcon &icon,
       else
 	emit item_updated(icon, item);
     }
+  else
+    return;
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(dooble_settings::setting("browsing_history_days").toInt() == 0 &&
 	  !force)
     return;
-  else if(!item.isValid())
-    return;
 
-  QString database_name(QString("dooble_history_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  m_futures << QtConcurrent::run
+    (this,
+     &dooble_history::save_item_concurrent,
+     dooble::s_cryptography->keys().first,
+     dooble::s_cryptography->keys().second,
+     hash[TITLE].toString(),
+     item);
+}
+
+void dooble_history::save_item_concurrent(const QByteArray &authentication_key,
+					  const QByteArray &encryption_key,
+					  const QString &title,
+					  const QWebEngineHistoryItem &item)
+{
+  QString database_name
+    (QString("dooble_history_%1").arg(s_db_id.fetchAndAddOrdered(1)));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -779,8 +824,11 @@ void dooble_history::save_item(const QIcon &icon,
 	create_tables(db);
 
 	QSqlQuery query(db);
+	dooble_cryptography cryptography
+	  (authentication_key,
+	   encryption_key,
+	   dooble_settings::setting("block_cipher_type").toString());
 
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_history "
 	   "(favorite_digest, "
@@ -797,12 +845,12 @@ void dooble_history::save_item(const QIcon &icon,
 	  QReadLocker locker(&m_history_mutex);
 
 	  query.addBindValue
-	    (dooble::s_cryptography->
+	    (cryptography.
 	     hmac(m_history.value(item.url()).value(FAVORITE, false).toBool() ?
 		  QByteArray("true") : QByteArray("false")).toBase64());
 	}
 
-	bytes = dooble::s_cryptography->encrypt_then_mac
+	bytes = cryptography.encrypt_then_mac
 	  (item.lastVisited().toString(Qt::ISODate).toUtf8());
 
 	if(!bytes.isEmpty())
@@ -813,7 +861,7 @@ void dooble_history::save_item(const QIcon &icon,
 	{
 	  QReadLocker locker(&m_history_mutex);
 
-	  bytes = dooble::s_cryptography->encrypt_then_mac
+	  bytes = cryptography.encrypt_then_mac
 	    (QByteArray::number(m_history.value(item.url()).
 				value(NUMBER_OF_VISITS, 1).toULongLong()));
 	}
@@ -823,21 +871,17 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  goto done_label;
 
-	QString title(hash.value(TITLE).toString().trimmed());
-
-	if(title.isEmpty())
-	  bytes = dooble::s_cryptography->encrypt_then_mac
-	    (item.url().toEncoded());
+	if(title.trimmed().isEmpty())
+	  bytes = cryptography.encrypt_then_mac(item.url().toEncoded());
 	else
-	  bytes = dooble::s_cryptography->encrypt_then_mac(title.toUtf8());
+	  bytes = cryptography.encrypt_then_mac(title.trimmed().toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
 	  goto done_label;
 
-	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (item.url().toEncoded());
+	bytes = cryptography.encrypt_then_mac(item.url().toEncoded());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -845,7 +889,7 @@ void dooble_history::save_item(const QIcon &icon,
 	  goto done_label;
 
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(item.url().toEncoded()).toBase64());
+	  (cryptography.hmac(item.url().toEncoded()).toBase64());
 	query.exec();
       }
 
@@ -942,6 +986,10 @@ void dooble_history::slot_populated_favorites
 
 void dooble_history::slot_purge_timer_timeout(void)
 {
+  for(int i = m_futures.size() - 1; i >= 0; i--)
+    if(m_futures.at(i).isFinished())
+      m_futures.removeAt(i);
+
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
   else if(m_purge_future.isRunning())

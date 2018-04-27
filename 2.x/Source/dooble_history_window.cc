@@ -373,51 +373,14 @@ void dooble_history_window::slot_delete_pages(void)
       QUrl url(list.at(i).data(Qt::UserRole).toUrl());
 
       urls << url;
-      dooble::s_history->remove_item(url);
       dooble_address_widget_completer::remove_item(url);
       m_items.remove(url);
       m_ui.table->removeRow(list.at(i).row());
     }
 
+  dooble::s_history->remove_items_list(urls);
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
-
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
-
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  QString database_name("dooble_history_window");
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_history.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-
-	query.exec("PRAGMA synchronous = OFF");
-
-	for(int i = 0; i < urls.size(); i++)
-	  {
-	    query.prepare("DELETE FROM dooble_history WHERE url_digest = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(urls.at(i).toEncoded()).toBase64());
-	    query.exec();
-	  }
-
-	query.exec("VACUUM");
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
-  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
