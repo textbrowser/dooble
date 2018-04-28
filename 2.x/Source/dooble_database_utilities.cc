@@ -30,6 +30,17 @@
 
 #include "dooble_database_utilities.h"
 
+QReadWriteLock dooble_database_utilities::s_db_id_mutex;
+quint64 dooble_database_utilities::s_db_id = 0;
+
+QString dooble_database_utilities::database_name(void)
+{
+  QWriteLocker locker(&s_db_id_mutex);
+
+  s_db_id += 1;
+  return QString("dooble_database_name_%1").arg(s_db_id);
+}
+
 void dooble_database_utilities::remove_entry(const QSqlDatabase &db,
 					     const QString &table,
 					     qint64 oid)

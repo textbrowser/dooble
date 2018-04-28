@@ -28,7 +28,6 @@
 #ifndef dooble_downloads_item_h
 #define dooble_downloads_item_h
 
-#include <QAtomicInteger>
 #include <QTime>
 #include <QPointer>
 #include <QUrl>
@@ -72,7 +71,6 @@ class dooble_downloads_item: public QWidget
   qintptr m_oid;
   qintptr m_last_bytes_received;
   qintptr m_rate;
-  static QAtomicInteger<quint64> s_db_id;
   void prepare_icons(void);
   void record(void);
   void record_information(void);

@@ -28,7 +28,6 @@
 #ifndef dooble_settings_h
 #define dooble_settings_h
 
-#include <QAtomicInteger>
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QMainWindow>
@@ -88,7 +87,6 @@ class dooble_settings: public QMainWindow
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
-  static QAtomicInteger<quint64> s_db_id;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
   static QMap<QString, QVariant> s_settings;
   static QMultiMap<QUrl, QPair<int, bool> > s_site_features_permissions;

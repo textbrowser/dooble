@@ -28,7 +28,6 @@
 #ifndef dooble_cookies_h
 #define dooble_cookies_h
 
-#include <QAtomicInteger>
 #include <QObject>
 #include <QNetworkCookie>
 #include <QSqlDatabase>
@@ -45,7 +44,6 @@ class dooble_cookies: public QObject
 
  private:
   bool m_is_private;
-  static QAtomicInteger<quint64> s_db_id;
 
  private slots:
   void slot_connect_cookie_added_signal(void);

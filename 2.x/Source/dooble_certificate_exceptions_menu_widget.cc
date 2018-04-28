@@ -35,8 +35,6 @@
 #include "dooble_database_utilities.h"
 #include "dooble_ui_utilities.h"
 
-QAtomicInteger<quint64> dooble_certificate_exceptions_menu_widget::s_db_id = 0;
-
 dooble_certificate_exceptions_menu_widget::
 dooble_certificate_exceptions_menu_widget(QWidget *parent):QWidget(parent)
 {
@@ -49,8 +47,7 @@ dooble_certificate_exceptions_menu_widget(QWidget *parent):QWidget(parent)
 
 bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 {
-  QString database_name
-    (QString("dooble_certificate_exceptions_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
   bool state = false;
 
   {
@@ -119,8 +116,7 @@ void dooble_certificate_exceptions_menu_widget::create_tables(QSqlDatabase &db)
 void dooble_certificate_exceptions_menu_widget::exception_accepted
 (const QString &error, const QUrl &url)
 {
-  QString database_name
-    (QString("dooble_certificate_exceptions_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -179,8 +175,7 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 
 void dooble_certificate_exceptions_menu_widget::purge(void)
 {
-  QString database_name
-    (QString("dooble_certificate_exceptions_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -206,8 +201,7 @@ void dooble_certificate_exceptions_menu_widget::purge(void)
 
 void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 {
-  QString database_name
-    (QString("dooble_certificate_exceptions_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -252,8 +246,7 @@ void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 
 void dooble_certificate_exceptions_menu_widget::slot_remove_exception(void)
 {
-  QString database_name
-    (QString("dooble_certificate_exceptions_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);

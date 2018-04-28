@@ -28,7 +28,6 @@
 #ifndef dooble_certificate_exceptions_menu_widget_h
 #define dooble_certificate_exceptions_menu_widget_h
 
-#include <QAtomicInteger>
 #include <QSqlDatabase>
 #include <QUrl>
 #include <QWidget>
@@ -50,7 +49,6 @@ class dooble_certificate_exceptions_menu_widget: public QWidget
  private:
   QUrl m_url;
   Ui_dooble_certificate_exceptions_menu_widget m_ui;
-  static QAtomicInteger<quint64> s_db_id;
   static void create_tables(QSqlDatabase &db);
 
  private slots:

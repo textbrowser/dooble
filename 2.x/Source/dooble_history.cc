@@ -36,8 +36,6 @@
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 
-QAtomicInteger<quint64> dooble_history::s_db_id = 0;
-
 dooble_history::dooble_history(void):QObject()
 {
   connect(&m_purge_timer,
@@ -118,7 +116,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 {
   QListVectorByteArray favorites;
   QMultiMap<QDateTime, QPair<QIcon, QString> > map;
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -276,7 +274,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 void dooble_history::purge(const QByteArray &authentication_key,
 			   const QByteArray &encryption_key)
 {
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -384,7 +382,7 @@ void dooble_history::purge_favorites(void)
 void dooble_history::purge_favorites_concurrent(const QByteArray &f,
 						const QByteArray &t)
 {
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -444,7 +442,7 @@ void dooble_history::purge_history(void)
 
 void dooble_history::purge_history_concurrent(const QByteArray &f)
 {
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -491,7 +489,7 @@ void dooble_history::remove_favorite(const QUrl &url)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+      QString database_name(dooble_database_utilities::database_name());
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -556,7 +554,7 @@ void dooble_history::remove_items_list_concurrent
   if(url_digests.isEmpty())
     return;
 
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -658,7 +656,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -801,7 +799,7 @@ void dooble_history::save_item_concurrent(const QByteArray &authentication_key,
 					  const QString &title,
 					  const QWebEngineHistoryItem &item)
 {
-  QString database_name(QString("dooble_history_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);

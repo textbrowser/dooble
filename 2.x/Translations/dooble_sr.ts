@@ -774,17 +774,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="243"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="237"/>
         <source>A security exception was accepted for %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="247"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="241"/>
         <source>A security exception was accepted for this site.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="250"/>
+        <location filename="../Source/dooble_certificate_exceptions_menu_widget.cc" line="244"/>
         <source>Expecting an HTTPS scheme.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1092,7 +1092,7 @@
     </message>
     <message>
         <location filename="../UI/dooble_downloads_item.ui" line="69"/>
-        <location filename="../Source/dooble_downloads_item.cc" line="474"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="471"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1102,48 +1102,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="109"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="108"/>
         <source>The download object is zero. Error!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="151"/>
-        <location filename="../Source/dooble_downloads_item.cc" line="441"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="150"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="438"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="389"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="386"/>
         <source>%1 of %2 - %3 / second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="401"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="398"/>
         <source>%1 of Unknown - %2 / second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="418"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="415"/>
         <source>Canceled - %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="421"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="418"/>
         <source>Completed - %1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="427"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="424"/>
         <source>Interrupted - %1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="446"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="443"/>
         <source>Interrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_downloads_item.cc" line="468"/>
+        <location filename="../Source/dooble_downloads_item.cc" line="465"/>
         <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1199,22 +1199,22 @@
 <context>
     <name>dooble_history</name>
     <message>
-        <location filename="../Source/dooble_history.cc" line="57"/>
+        <location filename="../Source/dooble_history.cc" line="55"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history.cc" line="58"/>
+        <location filename="../Source/dooble_history.cc" line="56"/>
         <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history.cc" line="59"/>
+        <location filename="../Source/dooble_history.cc" line="57"/>
         <source>Last Visited</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_history.cc" line="60"/>
+        <location filename="../Source/dooble_history.cc" line="58"/>
         <source>Number of Visits</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2442,132 +2442,132 @@ Domains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="146"/>
+        <location filename="../Source/dooble_settings.cc" line="145"/>
         <source>Cookies are not saved to disk.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="149"/>
+        <location filename="../Source/dooble_settings.cc" line="148"/>
         <source>Persistent and session cookies are saved to and restored from disk.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="154"/>
+        <location filename="../Source/dooble_settings.cc" line="153"/>
         <source>Cookies marked persistent are saved to and restored from disk.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="175"/>
+        <location filename="../Source/dooble_settings.cc" line="174"/>
         <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is not readable. The System option has been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="188"/>
+        <location filename="../Source/dooble_settings.cc" line="187"/>
         <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is perhaps incomplete. The System option has been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="202"/>
+        <location filename="../Source/dooble_settings.cc" line="201"/>
         <source>&lt;html&gt;Dooble prefers the Macintosh style on OS X. You may launch Dooble via &quot;open /Applications/Dooble.d/Dooble.app --args -style Fusion&quot; to test the Fusion style.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="207"/>
+        <location filename="../Source/dooble_settings.cc" line="206"/>
         <source>Disabled on the Windows theme.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="345"/>
+        <location filename="../Source/dooble_settings.cc" line="344"/>
         <source>A valid list of dictionaries has not been prepared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1383"/>
+        <location filename="../Source/dooble_settings.cc" line="1374"/>
         <source>You are about to enable temporary credentials. Existing database data will be removed. New data will be stored as ciphertext. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1388"/>
+        <location filename="../Source/dooble_settings.cc" line="1379"/>
         <source>You are about to disable credentials. Existing database data will be removed. New data will be stored as plaintext. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1394"/>
-        <location filename="../Source/dooble_settings.cc" line="2303"/>
-        <location filename="../Source/dooble_settings.cc" line="2348"/>
-        <location filename="../Source/dooble_settings.cc" line="2432"/>
+        <location filename="../Source/dooble_settings.cc" line="1385"/>
+        <location filename="../Source/dooble_settings.cc" line="2291"/>
+        <location filename="../Source/dooble_settings.cc" line="2336"/>
+        <location filename="../Source/dooble_settings.cc" line="2420"/>
         <source>Dooble: Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1844"/>
+        <location filename="../Source/dooble_settings.cc" line="1835"/>
         <source>Dooble: Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1845"/>
+        <location filename="../Source/dooble_settings.cc" line="1836"/>
         <source>Your credentials have been prepared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1849"/>
-        <location filename="../Source/dooble_settings.cc" line="2446"/>
+        <location filename="../Source/dooble_settings.cc" line="1840"/>
+        <location filename="../Source/dooble_settings.cc" line="2434"/>
         <source>Dooble: Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="1850"/>
+        <location filename="../Source/dooble_settings.cc" line="1841"/>
         <source>Credentials could not be generated. This is a curious problem (%1).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2297"/>
+        <location filename="../Source/dooble_settings.cc" line="2285"/>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted. Please remove the directory WebEnginePersistentStorage after the reset completes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2343"/>
+        <location filename="../Source/dooble_settings.cc" line="2331"/>
         <source>Are you sure that you wish to reset your permanent credentials? New session-only credentials will be generated and database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2410"/>
-        <location filename="../Source/dooble_settings.cc" line="2418"/>
+        <location filename="../Source/dooble_settings.cc" line="2398"/>
+        <location filename="../Source/dooble_settings.cc" line="2406"/>
         <source>Dooble: User Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2410"/>
+        <location filename="../Source/dooble_settings.cc" line="2398"/>
         <source>Empty password(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2418"/>
+        <location filename="../Source/dooble_settings.cc" line="2406"/>
         <source>Passwords are not equal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2428"/>
+        <location filename="../Source/dooble_settings.cc" line="2416"/>
         <source>Are you sure that you wish to prepare new credentials? Existing database data will be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2447"/>
+        <location filename="../Source/dooble_settings.cc" line="2435"/>
         <source>Salt-generation failure! This is a curious problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2455"/>
+        <location filename="../Source/dooble_settings.cc" line="2443"/>
         <source>Interrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2456"/>
+        <location filename="../Source/dooble_settings.cc" line="2444"/>
         <source>Preparing credentials...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_settings.cc" line="2462"/>
+        <location filename="../Source/dooble_settings.cc" line="2450"/>
         <source>Dooble: Preparing Credentials</source>
         <translation type="unfinished"></translation>
     </message>

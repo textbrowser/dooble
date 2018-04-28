@@ -32,11 +32,10 @@
 
 #include "dooble.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_downloads.h"
 #include "dooble_downloads_item.h"
 #include "dooble_ui_utilities.h"
-
-QAtomicInteger<quint64> dooble_downloads_item::s_db_id = 0;
 
 dooble_downloads_item::dooble_downloads_item
 (QWebEngineDownloadItem *download, qintptr oid, QWidget *parent):QWidget(parent)
@@ -217,7 +216,7 @@ void dooble_downloads_item::record(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(QString("dooble_downloads_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -311,7 +310,7 @@ void dooble_downloads_item::record_information(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(QString("dooble_downloads_%1").arg(s_db_id++));
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);

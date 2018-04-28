@@ -28,7 +28,6 @@
 #ifndef dooble_favicons_h
 #define dooble_favicons_h
 
-#include <QAtomicInteger>
 #include <QIcon>
 #include <QSqlDatabase>
 #include <QUrl>
@@ -43,7 +42,6 @@ class dooble_favicons
 
  private:
   dooble_favicons(void);
-  static QAtomicInteger<quint64> s_db_id;
   static void create_tables(QSqlDatabase &db);
 };
 

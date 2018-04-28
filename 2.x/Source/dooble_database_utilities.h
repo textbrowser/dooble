@@ -28,16 +28,20 @@
 #ifndef dooble_database_utilities_h
 #define dooble_database_utilities_h
 
+#include <QReadWriteLock>
 #include <QSqlDatabase>
 
 class dooble_database_utilities
 {
  public:
+  static QString database_name(void);
   static void remove_entry(const QSqlDatabase &db,
 			   const QString &table,
 			   qint64 oid);
 
  private:
+  static QReadWriteLock s_db_id_mutex;
+  static quint64 s_db_id;
   dooble_database_utilities(void);
 };
 
