@@ -34,7 +34,7 @@
 #include "dooble_database_utilities.h"
 #include "dooble_favicons.h"
 
-QAtomicInteger<quintptr> dooble_favicons::s_db_id = 0;
+QAtomicInteger<quint64> dooble_favicons::s_db_id = 0;
 
 QIcon dooble_favicons::icon(const QUrl &url)
 {
@@ -44,8 +44,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
     return QIcon(":/Miscellaneous/blank_page.png");
 
   QIcon icon;
-  QString database_name(QString("dooble_favicons_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_favicons_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -136,8 +135,7 @@ void dooble_favicons::create_tables(QSqlDatabase &db)
 
 void dooble_favicons::purge(void)
 {
-  QString database_name(QString("dooble_favicons_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_favicons_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -163,8 +161,7 @@ void dooble_favicons::purge(void)
 
 void dooble_favicons::purge_temporary(void)
 {
-  QString database_name(QString("dooble_favicons_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_favicons_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -196,8 +193,7 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
   if(icon.isNull())
     return;
 
-  QString database_name(QString("dooble_favicons_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_favicons_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);

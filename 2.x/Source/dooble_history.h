@@ -82,7 +82,7 @@ class dooble_history: public QObject
   QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;
-  static QAtomicInteger<quintptr> s_db_id;
+  static QAtomicInteger<quint64> s_db_id;
   void create_tables(QSqlDatabase &db);
   void populate(const QByteArray &authentication_key,
 		const QByteArray &encryption_key);

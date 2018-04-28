@@ -51,7 +51,7 @@
 #include "dooble_settings.h"
 #include "dooble_text_utilities.h"
 
-QAtomicInteger<quintptr> dooble_settings::s_db_id = 0;
+QAtomicInteger<quint64> dooble_settings::s_db_id = 0;
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QMultiMap<QUrl, QPair<int, bool> > dooble_settings::s_site_features_permissions;
@@ -387,8 +387,7 @@ QVariant dooble_settings::setting(const QString &key)
 
       lock.unlock();
 
-      QString database_name
-	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+      QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
       QString value("");
 
       {
@@ -455,8 +454,7 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
   s_settings[key.toLower().trimmed()] = value;
   lock.unlock();
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
   bool ok = false;
 
   {
@@ -681,8 +679,7 @@ void dooble_settings::purge_features_permissions(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.features_permissions->setRowCount(0);
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -712,8 +709,7 @@ void dooble_settings::purge_javascript_block_popup_exceptions(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -748,8 +744,7 @@ void dooble_settings::remove_setting(const QString &key)
   s_settings.remove(key.toLower().trimmed());
   lock.unlock();
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -785,8 +780,7 @@ void dooble_settings::restore(bool read_database)
 
   if(read_database)
     {
-      QString database_name
-	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+      QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -1094,8 +1088,7 @@ void dooble_settings::save_javascript_block_popup_exception
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -1232,8 +1225,7 @@ void dooble_settings::set_site_feature_permission
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -1866,8 +1858,7 @@ void dooble_settings::slot_populate(void)
   s_javascript_block_popup_exceptions.clear();
   s_site_features_permissions.clear();
 
-  QString database_name
-    (QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
   int count_1 = 0;
 
   {
@@ -2143,8 +2134,7 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name
-	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+      QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -2234,8 +2224,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name
-	(QString("dooble_settings_%1").arg(s_db_id.fetchAndAddOrdered(1)));
+      QString database_name(QString("dooble_settings_%1").arg(s_db_id++));
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);

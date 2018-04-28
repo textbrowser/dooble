@@ -43,7 +43,7 @@ class dooble_favicons
 
  private:
   dooble_favicons(void);
-  static QAtomicInteger<quintptr> s_db_id;
+  static QAtomicInteger<quint64> s_db_id;
   static void create_tables(QSqlDatabase &db);
 };
 

@@ -72,7 +72,7 @@ class dooble_downloads_item: public QWidget
   qintptr m_oid;
   qintptr m_last_bytes_received;
   qintptr m_rate;
-  static QAtomicInteger<quintptr> s_db_id;
+  static QAtomicInteger<quint64> s_db_id;
   void prepare_icons(void);
   void record(void);
   void record_information(void);

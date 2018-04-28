@@ -35,7 +35,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cryptography.h"
 
-QAtomicInteger<quintptr> dooble_cookies::s_db_id = 0;
+QAtomicInteger<quint64> dooble_cookies::s_db_id = 0;
 
 dooble_cookies::dooble_cookies(bool is_private, QObject *parent):QObject(parent)
 {
@@ -74,8 +74,7 @@ void dooble_cookies::create_tables(QSqlDatabase &db)
 
 void dooble_cookies::purge(void)
 {
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -149,8 +148,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 
  save_label:
 
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -218,8 +216,7 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
   else if(m_is_private)
     return;
 
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -252,8 +249,7 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
   else if(m_is_private)
     return;
 
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -292,8 +288,7 @@ void dooble_cookies::slot_delete_domain(const QString &domain)
   else if(m_is_private)
     return;
 
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -329,8 +324,7 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
   else if(m_is_private)
     return;
 
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -394,8 +388,7 @@ void dooble_cookies::slot_populate(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name(QString("dooble_cookies_%1").
-			arg(s_db_id.fetchAndAddOrdered(1)));
+  QString database_name(QString("dooble_cookies_%1").arg(s_db_id++));
   QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
 
   disconnect(profile->cookieStore(),

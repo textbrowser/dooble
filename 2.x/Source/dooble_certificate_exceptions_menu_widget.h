@@ -50,7 +50,7 @@ class dooble_certificate_exceptions_menu_widget: public QWidget
  private:
   QUrl m_url;
   Ui_dooble_certificate_exceptions_menu_widget m_ui;
-  static QAtomicInteger<qintptr> s_db_id;
+  static QAtomicInteger<quint64> s_db_id;
   static void create_tables(QSqlDatabase &db);
 
  private slots:
