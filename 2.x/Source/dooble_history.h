@@ -78,7 +78,6 @@ class dooble_history: public QObject
   QFuture<void> m_populate_future;
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<HistoryItem, QVariant> > m_history;
-  QList<QFuture<void> > m_futures;
   QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;
@@ -87,13 +86,6 @@ class dooble_history: public QObject
 		const QByteArray &encryption_key);
   void purge(const QByteArray &authentication_key,
 	     const QByteArray &encryption_key);
-  void purge_favorites_concurrent(const QByteArray &f, const QByteArray &t);
-  void purge_history_concurrent(const QByteArray &f);
-  void remove_items_list_concurrent(const QList<QByteArray> &url_digest);
-  void save_item_concurrent(const QByteArray &authentication_key,
-			    const QByteArray &encryption_key,
-			    const QString &title,
-			    const QWebEngineHistoryItem &item);
   void update_favorite(const QHash<HistoryItem, QVariant> &hash);
 
  private slots:
