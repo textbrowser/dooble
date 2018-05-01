@@ -1,3 +1,4 @@
+This is a guide for preparing /usr/local/dooble in order to generate a Debian package. Please do not use README.DEBIAN for other operating systems.
 
 Preparing /usr/local/dooble:
 
