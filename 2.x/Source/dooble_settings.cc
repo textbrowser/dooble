@@ -153,50 +153,63 @@ dooble_settings::dooble_settings(void):QMainWindow()
      tr("Cookies marked persistent are saved to and restored from disk."),
      Qt::ToolTipRole);
 
-  QString path(QDir::currentPath());
-
-  path.append(QDir::separator());
-  path.append("Translations");
-  path.append(QDir::separator());
-  path.append("dooble_" + QLocale::system().name() + ".qm");
-
-  QFileInfo file_info(path);
-
-  if(!file_info.exists() || !file_info.isReadable())
+  if(QLocale::system().name().startsWith("en_"))
     {
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
 				      Qt::ItemDataRole(Qt::UserRole - 1));
-      m_ui.language_directory->setStyleSheet
-	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
-	 "color:#a94442;}");
-
-      if(!file_info.exists())
-	m_ui.language_directory->setText
-	  (tr("<b>Warning!</b> The file %1 does not exist. "
-	      "The System option has been disabled. English will be assumed.").
-	   arg(file_info.absoluteFilePath()));
-      else
-	m_ui.language_directory->setText
-	  (tr("<b>Warning!</b> The file %1 is not readable. "
-	      "The System option has been disabled. English will be assumed.").
-	   arg(file_info.absoluteFilePath()));
-    }
-  else if(file_info.size() <= 1024)
-    {
-      m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
-				      0,
-				      Qt::ItemDataRole(Qt::UserRole - 1));
-      m_ui.language_directory->setStyleSheet
-	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
-	 "color:#a94442;}");
-      m_ui.language_directory->setText
-	(tr("<b>Warning!</b> The file %1 is perhaps incomplete. "
-	    "The System option has been disabled. English will be assumed.").
-	 arg(file_info.absoluteFilePath()));
+      m_ui.language_directory->setVisible(false);
     }
   else
-    m_ui.language_directory->setVisible(false);
+    {
+      QString path(QDir::currentPath());
+
+      path.append(QDir::separator());
+      path.append("Translations");
+      path.append(QDir::separator());
+      path.append("dooble_" + QLocale::system().name() + ".qm");
+
+      QFileInfo file_info(path);
+
+      if(!file_info.exists() || !file_info.isReadable())
+	{
+	  m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
+					  0,
+					  Qt::ItemDataRole(Qt::UserRole - 1));
+	  m_ui.language_directory->setStyleSheet
+	    ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
+	     "color:#a94442;}");
+
+	  if(!file_info.exists())
+	    m_ui.language_directory->setText
+	      (tr("<b>Warning!</b> The file %1 does not exist. "
+		  "The System option has been disabled. English "
+		  "will be assumed.").
+	       arg(file_info.absoluteFilePath()));
+	  else
+	    m_ui.language_directory->setText
+	      (tr("<b>Warning!</b> The file %1 is not readable. "
+		  "The System option has been disabled. English "
+		  "will be assumed.").
+	       arg(file_info.absoluteFilePath()));
+	}
+      else if(file_info.size() <= 1024)
+	{
+	  m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
+					  0,
+					  Qt::ItemDataRole(Qt::UserRole - 1));
+	  m_ui.language_directory->setStyleSheet
+	    ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
+	     "color:#a94442;}");
+	  m_ui.language_directory->setText
+	    (tr("<b>Warning!</b> The file %1 is perhaps incomplete. "
+		"The System option has been disabled. English "
+		"will be assumed.").
+	     arg(file_info.absoluteFilePath()));
+	}
+      else
+	m_ui.language_directory->setVisible(false);
+    }
 
   if(dooble::s_application->style_name() == "macintosh" ||
      dooble::s_application->style_name() == "windows")
