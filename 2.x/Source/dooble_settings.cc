@@ -162,7 +162,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 
   QFileInfo file_info(path);
 
-  if(!file_info.isReadable())
+  if(!file_info.exists() || !file_info.isReadable())
     {
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
@@ -170,10 +170,17 @@ dooble_settings::dooble_settings(void):QMainWindow()
       m_ui.language_directory->setStyleSheet
 	("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	 "color:#a94442;}");
-      m_ui.language_directory->setText
-	(tr("<b>Warning!</b> The file %1 is not readable. "
-	    "The System option has been disabled.").
-	 arg(file_info.absoluteFilePath()));
+
+      if(!file_info.exists())
+	m_ui.language_directory->setText
+	  (tr("<b>Warning!</b> The file %1 does not exist. "
+	      "The System option has been disabled. English will be assumed.").
+	   arg(file_info.absoluteFilePath()));
+      else
+	m_ui.language_directory->setText
+	  (tr("<b>Warning!</b> The file %1 is not readable. "
+	      "The System option has been disabled. English will be assumed.").
+	   arg(file_info.absoluteFilePath()));
     }
   else if(file_info.size() <= 1024)
     {
@@ -185,7 +192,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	 "color:#a94442;}");
       m_ui.language_directory->setText
 	(tr("<b>Warning!</b> The file %1 is perhaps incomplete. "
-	    "The System option has been disabled.").
+	    "The System option has been disabled. English will be assumed.").
 	 arg(file_info.absoluteFilePath()));
     }
   else
