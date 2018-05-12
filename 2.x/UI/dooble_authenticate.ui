@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Dooble: Authenticate</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../Icons/icons.qrc">
+    <normaloff>:/Logo/dooble.png</normaloff>:/Logo/dooble.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QDialog {background: white;}</string>
   </property>
@@ -83,6 +87,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

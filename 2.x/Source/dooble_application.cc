@@ -45,6 +45,7 @@ dooble_application::dooble_application(int &argc, char **argv):
   setAttribute(Qt::AA_DontUseNativeDialogs);
   setAttribute(Qt::AA_DontUseNativeMenuBar);
   setFont(font);
+  setWindowIcon(QIcon(":/Logo/dooble.png"));
 }
 
 QString dooble_application::style_name(void) const
