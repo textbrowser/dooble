@@ -237,6 +237,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 
 	  m_model->setRowCount(m_model->rowCount() + 1);
 	  m_model->setItem(m_model->rowCount() - 1, item->clone());
+	  m_popup->setRowHeight(m_model->rowCount() - 1, 24);
 	}
     }
 
@@ -244,10 +245,10 @@ void dooble_address_widget_completer::complete(const QString &text)
     {
       m_popup->setMaximumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0));
+	      m_model->rowCount()) * m_popup->rowHeight(0) + 5);
       m_popup->setMinimumHeight
 	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0));
+	      m_model->rowCount()) * m_popup->rowHeight(0) + 5);
       QCompleter::complete();
       m_popup->setCurrentIndex(QModelIndex());
     }
