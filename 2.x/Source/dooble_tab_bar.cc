@@ -287,6 +287,14 @@ void dooble_tab_bar::slot_decouple_tab(void)
     emit decouple_tab(tabAt(action->property("point").toPoint()));
 }
 
+void dooble_tab_bar::slot_hide_location_frame(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit hide_location_frame(action->isChecked());
+}
+
 void dooble_tab_bar::slot_javascript(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -448,6 +456,16 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  SLOT(slot_decouple_tab(void)));
   action->setEnabled(count() > 1 && !page && tab_at > -1);
   action->setProperty("point", point);
+  menu.addSeparator();
+  action = menu.addAction(tr("&Hide Location Frame"),
+			  this,
+			  SLOT(slot_hide_location_frame(void)));
+  action->setCheckable(true);
+
+  if(page)
+    action->setChecked(page->is_location_frame_hidden());
+
+  action->setEnabled(page && tab_at > -1);
   reload_action->setEnabled(page && tab_at > -1);
   menu.exec(mapToGlobal(point));
 }

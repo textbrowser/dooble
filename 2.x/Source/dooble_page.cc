@@ -396,6 +396,11 @@ QWebEngineSettings *dooble_page::web_engine_settings(void) const
   return m_view->settings();
 }
 
+bool dooble_page::is_location_frame_hidden(void) const
+{
+  return !m_ui.top_frame->isVisible();
+}
+
 bool dooble_page::is_private(void) const
 {
   return m_is_private;
@@ -1395,6 +1400,11 @@ void dooble_page::slot_go_to_forward_item(void)
 
   if(action)
     go_to_forward_item(action->property("index").toInt());
+}
+
+void dooble_page::slot_hide_location_frame(bool state)
+{
+  m_ui.top_frame->setVisible(!state);
 }
 
 void dooble_page::slot_icon_changed(const QIcon &icon)

@@ -64,6 +64,7 @@ class dooble_page: public QWidget
   QString title(void) const;
   QUrl url(void) const;
   QWebEngineSettings *web_engine_settings(void) const;
+  bool is_location_frame_hidden(void) const;
   bool is_private(void) const;
   dooble_address_widget *address_widget(void) const;
   dooble_web_engine_view *view(void) const;
@@ -131,6 +132,7 @@ class dooble_page: public QWidget
   void slot_go_forward(void);
   void slot_go_to_backward_item(void);
   void slot_go_to_forward_item(void);
+  void slot_hide_location_frame(bool state);
   void slot_icon_changed(const QIcon &icon);
   void slot_javascript_allow_popup_exception(void);
   void slot_link_hovered(const QString &url);

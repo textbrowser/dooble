@@ -52,6 +52,7 @@ class dooble_tab_bar: public QTabBar
   void slot_close_other_tabs(void);
   void slot_close_tab(void);
   void slot_decouple_tab(void);
+  void slot_hide_location_frame(void);
   void slot_javascript(void);
   void slot_open_tab_as_new_private_window(void);
   void slot_open_tab_as_new_window(void);
@@ -63,6 +64,7 @@ class dooble_tab_bar: public QTabBar
 
  signals:
   void decouple_tab(int index);
+  void hide_location_frame(bool state);
   void new_tab(void);
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);

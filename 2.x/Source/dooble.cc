@@ -810,6 +810,12 @@ void dooble::prepare_page_connections(dooble_page *page)
   if(!page)
     return;
 
+  connect(m_ui.tab->tabBar(),
+	  SIGNAL(hide_location_frame(bool)),
+	  page,
+	  SLOT(slot_hide_location_frame(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(authenticate(void)),
 	  this,
