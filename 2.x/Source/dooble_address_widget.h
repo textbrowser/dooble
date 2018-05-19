@@ -47,6 +47,7 @@ class dooble_address_widget: public QLineEdit
   QRect information_rectangle(void) const;
   void add_item(const QIcon &icon, const QUrl &url);
   void complete(void);
+  void setFocus(void);
   void setText(const QString &text);
   void set_item_icon(const QIcon &icon, const QUrl &url);
   void set_view(dooble_web_engine_view *view);

@@ -301,6 +301,12 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
   QLineEdit::resizeEvent(event);
 }
 
+void dooble_address_widget::setFocus(void)
+{
+  if(isVisible())
+    QLineEdit::setFocus();
+}
+
 void dooble_address_widget::setText(const QString &text)
 {
   QLineEdit::setText(text.trimmed());
