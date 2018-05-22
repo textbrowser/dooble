@@ -512,7 +512,7 @@ static void words_to_bytes(char *B,
 
   for(size_t i = 0; i < words_size; i++)
     {
-      B[i * 8 + 0] = static_cast<char> (words[i]);
+      B[i * 8 + 0] = static_cast<char> (words[i] & 0xff);
       B[i * 8 + 1] = static_cast<char> ((words[i] >> 8) & 0xff);
       B[i * 8 + 2] = static_cast<char> ((words[i] >> 16) & 0xff);
       B[i * 8 + 3] = static_cast<char> ((words[i] >> 24) & 0xff);
