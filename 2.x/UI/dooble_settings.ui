@@ -1221,7 +1221,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-245</y>
+               <y>-274</y>
                <width>437</width>
                <height>1020</height>
               </rect>
@@ -1574,7 +1574,7 @@
               <item>
                <widget class="QCheckBox" name="webrtc_public_interfaces_only">
                 <property name="toolTip">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled WebRTC may also use local network IP addresses, but remote hosts can also see your local network IP address. Disabled by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled, WebRTC may also use local network IP addresses but remote hosts can also see your local network IP address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="text">
                  <string>&amp;WebRTC Public Interfaces Only</string>

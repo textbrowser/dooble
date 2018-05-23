@@ -2208,10 +2208,6 @@ Domänen</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled WebRTC may also use local network IP addresses, but remote hosts can also see your local network IP address. Disabled by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;WebRTC Public Interfaces Only</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2229,6 +2225,10 @@ Domänen</translation>
     </message>
     <message>
         <source>Qt 5.11.0 and newer are required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled, WebRTC may also use local network IP addresses but remote hosts can also see your local network IP address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
