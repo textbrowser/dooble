@@ -1223,7 +1223,7 @@
                <x>0</x>
                <y>-245</y>
                <width>437</width>
-               <height>991</height>
+               <height>1020</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1572,6 +1572,19 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="webrtc_public_interfaces_only">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled WebRTC may also use local network IP addresses, but remote hosts can also see your local network IP address. Disabled by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>&amp;WebRTC Public Interfaces Only</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="xss_auditing">
                 <property name="text">
                  <string>XSS Auditing</string>
@@ -1733,6 +1746,7 @@
   <tabstop>reset_user_agent</tabstop>
   <tabstop>web_plugins</tabstop>
   <tabstop>webgl</tabstop>
+  <tabstop>webrtc_public_interfaces_only</tabstop>
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>

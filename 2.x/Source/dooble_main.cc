@@ -247,6 +247,10 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::LocalStorageEnabled, true);
   QWebEngineSettings::globalSettings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
+#endif
   splash.showMessage(QObject::tr("Preparing Dooble objects."),
 		     Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();

@@ -583,6 +583,12 @@ void dooble::copy_default_profile_settings(void)
     (QWebEngineSettings::WebGLEnabled,
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::WebGLEnabled));
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::WebRTCPublicInterfacesOnly));
+#endif
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled,
      QWebEngineSettings::defaultSettings()->

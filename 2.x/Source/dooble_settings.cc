@@ -226,6 +226,11 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	m_ui.theme_color->setToolTip(tr("Disabled on the Windows theme."));
     }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
+  m_ui.webrtc_public_interfaces_only->setEnabled(false);
+  m_ui.webrtc_public_interfaces_only->setToolTip
+    (tr("Qt 5.11.0 and newer are required."));
+#endif
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
@@ -256,6 +261,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
   s_settings["webgl"] = true;
+  s_settings["webrtc_public_interfaces_only"] = true;
   s_settings["zoom_frame_location_index"] = 0;
 #ifdef Q_OS_MACOS
   s_spell_checker_dictionaries << "af_ZA"
@@ -1018,6 +1024,8 @@ void dooble_settings::restore(bool read_database)
       }
   }
 
+  m_ui.webrtc_public_interfaces_only->setChecked
+    (s_settings.value("webrtc_public_interfaces_only", true).toBool());
   m_ui.xss_auditing->setChecked
     (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
@@ -1072,6 +1080,11 @@ void dooble_settings::restore(bool read_database)
      m_ui.animated_scrolling->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly,
+     m_ui.webrtc_public_interfaces_only->isChecked());
+#endif
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 
@@ -1525,6 +1538,11 @@ void dooble_settings::slot_apply(void)
      m_ui.animated_scrolling->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+  QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly,
+     m_ui.webrtc_public_interfaces_only->isChecked());
+#endif
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 
@@ -1637,6 +1655,8 @@ void dooble_settings::slot_apply(void)
   set_setting("user_agent", m_ui.user_agent->text().trimmed());
   set_setting("web_plugins", m_ui.web_plugins->isChecked());
   set_setting("webgl", m_ui.webgl->isChecked());
+  set_setting("webrtc_public_interfaces_only",
+	      m_ui.webrtc_public_interfaces_only->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
   set_setting
     ("zoom_frame_location_index", m_ui.zoom_frame_location->currentIndex());
