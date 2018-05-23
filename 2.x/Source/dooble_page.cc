@@ -1361,8 +1361,8 @@ void dooble_page::slot_find_previous(void)
 
   if(m_ui.find_match_case->isChecked())
     find_text
-      (QWebEnginePage::FindFlag(QWebEnginePage::FindBackward |
-				QWebEnginePage::FindCaseSensitively),
+      (QWebEnginePage::FindFlags(QWebEnginePage::FindBackward |
+				 QWebEnginePage::FindCaseSensitively),
        text);
   else
     find_text(QWebEnginePage::FindBackward, text);
