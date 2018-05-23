@@ -2129,7 +2129,7 @@ Domänen</translation>
     </message>
     <message>
         <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is not readable. The System option has been disabled.</source>
-        <translation>&lt;b&gt;Warnung!&lt;/b&gt; Die Datei %1 ist nicht lesbar. Die &quot;System&quot;-Option wurde abgestellt.</translation>
+        <translation type="vanished">&lt;b&gt;Warnung!&lt;/b&gt; Die Datei %1 ist nicht lesbar. Die &quot;System&quot;-Option wurde abgestellt.</translation>
     </message>
     <message>
         <source>If hidden, show via F10.</source>
@@ -2161,10 +2161,6 @@ Domänen</translation>
     </message>
     <message>
         <source>WebGL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is perhaps incomplete. The System option has been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2209,6 +2205,30 @@ Domänen</translation>
     </message>
     <message>
         <source>Automatic Loading of Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled WebRTC may also use local network IP addresses, but remote hosts can also see your local network IP address. Disabled by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;WebRTC Public Interfaces Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 does not exist. The System option has been disabled. English will be assumed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is not readable. The System option has been disabled. English will be assumed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 is perhaps incomplete. The System option has been disabled. English will be assumed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt 5.11.0 and newer are required.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2256,6 +2276,10 @@ Domänen</translation>
     </message>
     <message>
         <source>Open as New P&amp;rivate Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide Location Frame</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
