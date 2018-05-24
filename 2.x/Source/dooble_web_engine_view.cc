@@ -168,14 +168,59 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     menu = new QMenu(this);
 
   QAction *action = 0;
-  QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
 
-  if(url().scheme() == "gopher")
+  /*
+  ** Change some text.
+  */
+
+  if((action = m_page->action(QWebEnginePage::CopyImageToClipboard)))
+    action->setText(tr("Copy Image"));
+
+  if((action = m_page->action(QWebEnginePage::CopyImageUrlToClipboard)))
+    action->setText(tr("Copy Image Address"));
+
+  if((action = m_page->action(QWebEnginePage::CopyLinkToClipboard)))
+    action->setText(tr("Copy Link Address"));
+
+  if((action = m_page->action(QWebEnginePage::CopyMediaUrlToClipboard)))
+    action->setText(tr("Copy Media Link"));
+
+  if((action = m_page->action(QWebEnginePage::PasteAndMatchStyle)))
+    action->setText(tr("Paste and Match Style"));
+
+  if((action = m_page->action(QWebEnginePage::DownloadImageToDisk)))
+    action->setText(tr("Save Image"));
+
+  if((action = m_page->action(QWebEnginePage::DownloadLinkToDisk)))
+    action->setText(tr("Save Link"));
+
+  if((action = m_page->action(QWebEnginePage::SavePage)))
+    action->setText(tr("Save Page"));
+
+  if((action = m_page->action(QWebEnginePage::SelectAll)))
+    action->setText(tr("Select All"));
+
+  /*
+  ** Hide some actions.
+  */
+
+  QList<QWebEnginePage::WebAction> list;
+
+  list << QWebEnginePage::OpenLinkInNewTab
+       << QWebEnginePage::OpenLinkInNewWindow;
+
+  for(int i = 0; i < list.size(); i++)
+    if((action = m_page->action(list.at(i))))
+      action->setVisible(false);
+
+  action = m_page->action(QWebEnginePage::ViewSource);
+
+  if(action)
     {
-      action = m_page->action(QWebEnginePage::ViewSource);
-
-      if(action)
+      if(url().scheme() == "gopher")
 	action->setEnabled(false);
+
+      action->setText(tr("View Page Source"));
     }
 
   if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
@@ -185,6 +230,8 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     (tr("Open Link in a New &Private Window"),
      this,
      SLOT(slot_open_link_in_new_private_window(void)));
+
+  QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
 
   if(context_menu_data.isValid())
     {
