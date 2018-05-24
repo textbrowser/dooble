@@ -455,7 +455,7 @@
     </message>
     <message>
         <location filename="../Source/dooble_about.cc" line="71"/>
-        <source>Dooble version %1 (%2), Blue Spark.</source>
+        <source>Dooble version %1 (%2), Lunar Lunatic.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2694,27 +2694,77 @@ Domains</source>
 <context>
     <name>dooble_web_engine_view</name>
     <message>
-        <location filename="../Source/dooble_web_engine_view.cc" line="185"/>
+        <location filename="../Source/dooble_web_engine_view.cc" line="177"/>
+        <source>Copy Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="180"/>
+        <source>Copy Image Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="183"/>
+        <source>Copy Link Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="186"/>
+        <source>Copy Media Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="189"/>
+        <source>Paste and Match Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="192"/>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="195"/>
+        <source>Save Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="198"/>
+        <source>Save Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="201"/>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="223"/>
+        <source>View Page Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/dooble_web_engine_view.cc" line="230"/>
         <source>Open Link in a New &amp;Private Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_view.cc" line="202"/>
+        <location filename="../Source/dooble_web_engine_view.cc" line="249"/>
         <source>Open Link in a New &amp;Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_view.cc" line="219"/>
+        <location filename="../Source/dooble_web_engine_view.cc" line="266"/>
         <source>Open Link in a New &amp;Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_view.cc" line="240"/>
+        <location filename="../Source/dooble_web_engine_view.cc" line="286"/>
         <source>Accept Link&apos;s Domain(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble_web_engine_view.cc" line="244"/>
+        <location filename="../Source/dooble_web_engine_view.cc" line="290"/>
         <source>Block Link&apos;s Domain(s)</source>
         <translation type="unfinished"></translation>
     </message>

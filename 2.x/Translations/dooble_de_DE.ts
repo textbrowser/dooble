@@ -390,7 +390,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), Blue Spark.</source>
+        <source>Dooble version %1 (%2), Lunar Lunatic.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2341,6 +2341,46 @@ Domänen</translation>
     </message>
     <message>
         <source>Open Link in a New &amp;Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Image Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Link Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Media Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste and Match Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Page</source>
+        <translation type="unfinished">Speichere Seite</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Page Source</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
