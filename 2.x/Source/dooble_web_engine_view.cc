@@ -165,7 +165,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   QMenu *menu = m_page->createStandardContextMenu();
 
   if(!menu)
-    return;
+    menu = new QMenu(this);
 
   QAction *action = 0;
   QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
@@ -179,61 +179,60 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
 
   if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
+    menu->addSeparator();
+
+  action = menu->addAction
+    (tr("Open Link in a New &Private Window"),
+     this,
+     SLOT(slot_open_link_in_new_private_window(void)));
+
+  if(context_menu_data.isValid())
     {
-      menu->addSeparator();
-      action = menu->addAction
-	(tr("Open Link in a New &Private Window"),
-	 this,
-	 SLOT(slot_open_link_in_new_private_window(void)));
-
-      if(context_menu_data.isValid())
-	{
-	  if(context_menu_data.linkUrl().isValid())
-	    action->setProperty("url", context_menu_data.linkUrl());
-	  else if(context_menu_data.mediaUrl().isValid())
-	    action->setProperty("url", context_menu_data.mediaUrl());
-	  else
-	    action->setEnabled(false);
-	}
+      if(context_menu_data.linkUrl().isValid())
+	action->setProperty("url", context_menu_data.linkUrl());
+      else if(context_menu_data.mediaUrl().isValid())
+	action->setProperty("url", context_menu_data.mediaUrl());
       else
 	action->setEnabled(false);
-
-      action = menu->addAction
-	(tr("Open Link in a New &Tab"),
-	 this,
-	 SLOT(slot_open_link_in_new_tab(void)));
-
-      if(context_menu_data.isValid())
-	{
-	  if(context_menu_data.linkUrl().isValid())
-	    action->setProperty("url", context_menu_data.linkUrl());
-	  else if(context_menu_data.mediaUrl().isValid())
-	    action->setProperty("url", context_menu_data.mediaUrl());
-	  else
-	    action->setEnabled(false);
-	}
-      else
-	action->setEnabled(false);
-
-      action = menu->addAction
-	(tr("Open Link in a New &Window"),
-	 this,
-	 SLOT(slot_open_link_in_new_window(void)));
-
-      if(context_menu_data.isValid())
-	{
-	  if(context_menu_data.linkUrl().isValid())
-	    action->setProperty("url", context_menu_data.linkUrl());
-	  else if(context_menu_data.mediaUrl().isValid())
-	    action->setProperty("url", context_menu_data.mediaUrl());
-	  else
-	    action->setEnabled(false);
-	}
-      else
-	action->setEnabled(false);
-
-      menu->addSeparator();
     }
+  else
+    action->setEnabled(false);
+
+  action = menu->addAction
+    (tr("Open Link in a New &Tab"),
+     this,
+     SLOT(slot_open_link_in_new_tab(void)));
+
+  if(context_menu_data.isValid())
+    {
+      if(context_menu_data.linkUrl().isValid())
+	action->setProperty("url", context_menu_data.linkUrl());
+      else if(context_menu_data.mediaUrl().isValid())
+	action->setProperty("url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
+
+  action = menu->addAction
+    (tr("Open Link in a New &Window"),
+     this,
+     SLOT(slot_open_link_in_new_window(void)));
+
+  if(context_menu_data.isValid())
+    {
+      if(context_menu_data.linkUrl().isValid())
+	action->setProperty("url", context_menu_data.linkUrl());
+      else if(context_menu_data.mediaUrl().isValid())
+	action->setProperty("url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
+
+  menu->addSeparator();
 
   if(dooble_settings::
      setting("accepted_or_blocked_domains_mode").toString() == "accept")
