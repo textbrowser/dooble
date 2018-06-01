@@ -186,7 +186,9 @@ bool dooble_address_widget::event(QEvent *event)
 	  if(QKeySequence(Qt::ControlModifier + Qt::Key_L) == key_sequence)
 	    {
 	      selectAll();
-	      setFocus();
+
+	      if(isVisible())
+		setFocus();
 	    }
 	}
     }
@@ -232,7 +234,9 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
       if(QKeySequence(Qt::ControlModifier + Qt::Key_L) == key_sequence)
 	{
 	  selectAll();
-	  setFocus();
+
+	  if(isVisible())
+	    setFocus();
 	}
     }
 
@@ -299,12 +303,6 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
     setCursorPosition(0);
 
   QLineEdit::resizeEvent(event);
-}
-
-void dooble_address_widget::setFocus(void)
-{
-  if(isVisible())
-    QLineEdit::setFocus();
 }
 
 void dooble_address_widget::setText(const QString &text)

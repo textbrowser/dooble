@@ -1607,7 +1607,9 @@ void dooble_page::slot_open_link(const QUrl &url)
 void dooble_page::slot_open_link(void)
 {
   m_ui.address->selectAll();
-  m_ui.address->setFocus();
+
+  if(m_ui.address->isVisible())
+    m_ui.address->setFocus();
 }
 
 void dooble_page::slot_prepare_backward_menu(void)
@@ -1721,7 +1723,9 @@ void dooble_page::slot_reset_url(void)
 {
   m_ui.address->setText(m_view->url().toString());
   m_ui.address->selectAll();
-  m_ui.address->setFocus();
+
+  if(m_ui.address->isVisible())
+    m_ui.address->setFocus();
 }
 
 void dooble_page::slot_settings_applied(void)
