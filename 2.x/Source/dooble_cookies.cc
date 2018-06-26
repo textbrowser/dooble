@@ -389,6 +389,7 @@ void dooble_cookies::slot_populate(void)
 
   QString database_name(dooble_database_utilities::database_name());
   QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+  int count = 0;
 
   disconnect(profile->cookieStore(),
 	     SIGNAL(cookieAdded(const QNetworkCookie &)),
@@ -546,6 +547,7 @@ void dooble_cookies::slot_populate(void)
 
 	      profile->cookieStore()->setCookie(cookie.at(0));
 	      cookies << cookie.at(0);
+	      count += 1;
 	      is_favorites << is_favorite;
 	    }
 
@@ -563,5 +565,6 @@ void dooble_cookies::slot_populate(void)
   ** Re-connect the cookieAdded() signal.
   */
 
-  QTimer::singleShot(1000, this, SLOT(slot_connect_cookie_added_signal(void)));
+  QTimer::singleShot(count, this, SLOT(slot_connect_cookie_added_signal(void)));
+  emit populated();
 }
