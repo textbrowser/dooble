@@ -102,6 +102,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_shown(void)));
+  connect(m_ui.delete_unchecked,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_purge_domains_timer_timeout(void)));
   connect(m_ui.domain_filter,
 	  SIGNAL(textChanged(const QString &)),
 	  &m_domain_filter_timer,

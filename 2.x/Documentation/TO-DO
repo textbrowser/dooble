@@ -150,11 +150,8 @@
 
 2.1.9.3 Completed Items
 
-1.     New page context menus (dooble_web_engine_view::contextMenuEvent()).
-
-2.1.9.3 Remaining Items
-
 1.     Allow removal of unchecked cookies.
+2.     New page context menus (dooble_web_engine_view::contextMenuEvent()).
 
 2.2 Remaining Items
 

@@ -583,6 +583,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="delete_unchecked">
+        <property name="text">
+         <string>Delete &amp;Unchecked</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
