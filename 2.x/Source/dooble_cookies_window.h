@@ -77,6 +77,7 @@ class dooble_cookies_window: public QMainWindow
   void slot_cookies_cleared(void);
   void slot_delete_selected(void);
   void slot_delete_shown(void);
+  void slot_delete_unchecked(void);
   void slot_domain_filter_timer_timeout(void);
   void slot_find(void);
   void slot_item_changed(QTreeWidgetItem *item, int column);

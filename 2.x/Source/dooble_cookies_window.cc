@@ -105,7 +105,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   connect(m_ui.delete_unchecked,
 	  SIGNAL(clicked(void)),
 	  this,
-	  SLOT(slot_purge_domains_timer_timeout(void)));
+	  SLOT(slot_delete_unchecked(void)));
   connect(m_ui.domain_filter,
 	  SIGNAL(textChanged(const QString &)),
 	  &m_domain_filter_timer,
@@ -527,6 +527,24 @@ void dooble_cookies_window::slot_delete_shown(void)
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->isHidden()))
+	list << item;
+    }
+
+  delete_top_level_items(list);
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_cookies_window::slot_delete_unchecked(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QTreeWidgetItem *> list;
+
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
+    {
+      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+
+      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden()) 
 	list << item;
     }
 
