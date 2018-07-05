@@ -30,7 +30,7 @@
     <div class="wrapper">
       <header>
         <h1>Dooble Web Browser</h1>
-	Dooble 2.1.9.2 (2018.04.30) is the latest software release.
+	Dooble 2.1.9.3 (2018.07.04) is the latest software release.
         <ul>
 	  <li><a href="https://github.com/textbrowser/dooble/releases">Download <strong>Binaries</strong></a></li>
 	  <li><a href="https://github.com/textbrowser/dooble/releases">Download <strong>Source</strong></a></li>
@@ -48,9 +48,12 @@
 	  Welcome to the <b>2.1.9.3 (2018.07.04)</b> release of Dooble. Corrections and new features are detailed below.
 	  <ul>
 	    <li>Allow hiding of the location frame per tab page via tab context menu.</li>
+	    <li>Allow removal of unchecked cookie domains.</li>
 	    <li>Corrected words_to_bytes() in the Threefish implementation. Missing bitwise-and operation at the initial element.</li>
 	    <li>Disable Language option in Settings if the system's default language is English. Thank you anchev.</li>
 	    <li>New WebRTC option. Please see the Web panel of the Settings window. Qt 5.11 only.</li>
+            <li>Qt 5.11.1.</li>
+	    <li>Reconnect QWebEngineCookieStore::cookieAdded() after count milliseconds upon initialization, where count is the number of processed cookies.</li>
 	  </ul>
         </p>
 	<p>
