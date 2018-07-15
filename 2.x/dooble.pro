@@ -187,7 +187,7 @@ doxygen.commands = doxygen dooble.doxygen
 }
 
 CONFIG		+= qt release warn_on
-DEFINES         += FREEBSD_WEBENGINE=0x050900 QT_DEPRECATED_WARNINGS
+DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent gui network printsupport sql \
 	           webenginewidgets widgets xml
