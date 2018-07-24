@@ -89,13 +89,18 @@ static void bytes_to_words(uint64_t *W,
   if(Q_UNLIKELY(!W || !bytes || bytes_size == 0))
     return;
 
+  char b[8];
+
   for(size_t i = 0; i < bytes_size / 8; i++)
     {
-      char b[8];
-
-      for(size_t j = 0; j < 8; j++)
-	b[j] = bytes[i * 8 + j];
-
+      b[0] = bytes[i * 8 + 0];
+      b[1] = bytes[i * 8 + 1];
+      b[2] = bytes[i * 8 + 2];
+      b[3] = bytes[i * 8 + 3];
+      b[4] = bytes[i * 8 + 4];
+      b[5] = bytes[i * 8 + 5];
+      b[6] = bytes[i * 8 + 6];
+      b[7] = bytes[i * 8 + 7];
       W[i] = static_cast<uint64_t> (b[0] & 0xff) |
 	(static_cast<uint64_t> (b[1] & 0xff) << 8) |
 	(static_cast<uint64_t> (b[2] & 0xff) << 16) |
