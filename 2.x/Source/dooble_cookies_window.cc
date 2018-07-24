@@ -544,7 +544,7 @@ void dooble_cookies_window::slot_delete_unchecked(void)
     {
       QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
 
-      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden()) 
+      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
 	list << item;
     }
 

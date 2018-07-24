@@ -153,10 +153,13 @@
 1.     Allow removal of unchecked cookies.
 2.     New page context menus (dooble_web_engine_view::contextMenuEvent()).
 
+2.1.9.4 Completed Items
+
+1.     Replace fixed loops in AES.
+
 2.1.9.4 Remaining Items
 
 1.     Fancy completer.
-2.     Replace fixed loops in AES.
 
 2.2 Remaining Items
 

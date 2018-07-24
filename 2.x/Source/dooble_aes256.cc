@@ -138,9 +138,10 @@ dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
   else
     m_key.resize(m_key_length);
 
-  for(size_t i = 0; i < 4; i++)
-    m_state[i][0] = m_state[i][1] = m_state[i][2] = m_state[i][3] = 0;
-
+  m_state[0][0] = m_state[0][1] = m_state[0][2] = m_state[0][3] = 0;
+  m_state[1][0] = m_state[1][1] = m_state[1][2] = m_state[1][3] = 0;
+  m_state[2][0] = m_state[2][1] = m_state[2][2] = m_state[2][3] = 0;
+  m_state[3][0] = m_state[3][1] = m_state[3][2] = m_state[3][3] = 0;
   key_expansion();
 }
 
@@ -229,14 +230,22 @@ QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
   else
     b.resize(16);
 
-  for(size_t i = 0; i < 4; i++)
-    {
-      m_state[i][0] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 0)]);
-      m_state[i][1] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 1)]);
-      m_state[i][2] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 2)]);
-      m_state[i][3] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 3)]);
-    }
-
+  m_state[0][0] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 0)]);
+  m_state[0][1] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 1)]);
+  m_state[0][2] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 2)]);
+  m_state[0][3] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 3)]);
+  m_state[1][0] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 0)]);
+  m_state[1][1] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 1)]);
+  m_state[1][2] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 2)]);
+  m_state[1][3] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 3)]);
+  m_state[2][0] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 0)]);
+  m_state[2][1] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 1)]);
+  m_state[2][2] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 2)]);
+  m_state[2][3] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 3)]);
+  m_state[3][0] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 0)]);
+  m_state[3][1] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 1)]);
+  m_state[3][2] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 2)]);
+  m_state[3][3] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 3)]);
   add_round_key(m_Nr);
 
   for(size_t i = m_Nr - 1; i > 0; i--)
@@ -250,15 +259,22 @@ QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
   inv_shift_rows();
   inv_sub_bytes();
   add_round_key(0);
-
-  for(size_t i = 0; i < 4; i++)
-    {
-      b[static_cast<int> (i + 4 * 0)] = static_cast<char> (m_state[i][0]);
-      b[static_cast<int> (i + 4 * 1)] = static_cast<char> (m_state[i][1]);
-      b[static_cast<int> (i + 4 * 2)] = static_cast<char> (m_state[i][2]);
-      b[static_cast<int> (i + 4 * 3)] = static_cast<char> (m_state[i][3]);
-    }
-
+  b[static_cast<int> (0 + 4 * 0)] = static_cast<char> (m_state[0][0]);
+  b[static_cast<int> (0 + 4 * 1)] = static_cast<char> (m_state[0][1]);
+  b[static_cast<int> (0 + 4 * 2)] = static_cast<char> (m_state[0][2]);
+  b[static_cast<int> (0 + 4 * 3)] = static_cast<char> (m_state[0][3]);
+  b[static_cast<int> (1 + 4 * 0)] = static_cast<char> (m_state[1][0]);
+  b[static_cast<int> (1 + 4 * 1)] = static_cast<char> (m_state[1][1]);
+  b[static_cast<int> (1 + 4 * 2)] = static_cast<char> (m_state[1][2]);
+  b[static_cast<int> (1 + 4 * 3)] = static_cast<char> (m_state[1][3]);
+  b[static_cast<int> (2 + 4 * 0)] = static_cast<char> (m_state[2][0]);
+  b[static_cast<int> (2 + 4 * 1)] = static_cast<char> (m_state[2][1]);
+  b[static_cast<int> (2 + 4 * 2)] = static_cast<char> (m_state[2][2]);
+  b[static_cast<int> (2 + 4 * 3)] = static_cast<char> (m_state[2][3]);
+  b[static_cast<int> (3 + 4 * 0)] = static_cast<char> (m_state[3][0]);
+  b[static_cast<int> (3 + 4 * 1)] = static_cast<char> (m_state[3][1]);
+  b[static_cast<int> (3 + 4 * 2)] = static_cast<char> (m_state[3][2]);
+  b[static_cast<int> (3 + 4 * 3)] = static_cast<char> (m_state[3][3]);
   return b;
 }
 
@@ -341,14 +357,22 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   else
     b.resize(16);
 
-  for(size_t i = 0; i < 4; i++)
-    {
-      m_state[i][0] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 0)]);
-      m_state[i][1] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 1)]);
-      m_state[i][2] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 2)]);
-      m_state[i][3] = static_cast<uint8_t> (b[static_cast<int> (i + 4 * 3)]);
-    }
-
+  m_state[0][0] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 0)]);
+  m_state[0][1] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 1)]);
+  m_state[0][2] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 2)]);
+  m_state[0][3] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 3)]);
+  m_state[1][0] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 0)]);
+  m_state[1][1] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 1)]);
+  m_state[1][2] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 2)]);
+  m_state[1][3] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 3)]);
+  m_state[2][0] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 0)]);
+  m_state[2][1] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 1)]);
+  m_state[2][2] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 2)]);
+  m_state[2][3] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 3)]);
+  m_state[3][0] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 0)]);
+  m_state[3][1] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 1)]);
+  m_state[3][2] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 2)]);
+  m_state[3][3] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 3)]);
   add_round_key(0);
 
   for(size_t i = 1; i < m_Nr; i++)
@@ -362,15 +386,22 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   sub_bytes();
   shift_rows();
   add_round_key(m_Nr);
-
-  for(size_t i = 0; i < 4; i++)
-    {
-      b[static_cast<int> (i + 4 * 0)] = static_cast<char> (m_state[i][0]);
-      b[static_cast<int> (i + 4 * 1)] = static_cast<char> (m_state[i][1]);
-      b[static_cast<int> (i + 4 * 2)] = static_cast<char> (m_state[i][2]);
-      b[static_cast<int> (i + 4 * 3)] = static_cast<char> (m_state[i][3]);
-    }
-
+  b[static_cast<int> (0 + 4 * 0)] = static_cast<char> (m_state[0][0]);
+  b[static_cast<int> (0 + 4 * 1)] = static_cast<char> (m_state[0][1]);
+  b[static_cast<int> (0 + 4 * 2)] = static_cast<char> (m_state[0][2]);
+  b[static_cast<int> (0 + 4 * 3)] = static_cast<char> (m_state[0][3]);
+  b[static_cast<int> (1 + 4 * 0)] = static_cast<char> (m_state[1][0]);
+  b[static_cast<int> (1 + 4 * 1)] = static_cast<char> (m_state[1][1]);
+  b[static_cast<int> (1 + 4 * 2)] = static_cast<char> (m_state[1][2]);
+  b[static_cast<int> (1 + 4 * 3)] = static_cast<char> (m_state[1][3]);
+  b[static_cast<int> (2 + 4 * 0)] = static_cast<char> (m_state[2][0]);
+  b[static_cast<int> (2 + 4 * 1)] = static_cast<char> (m_state[2][1]);
+  b[static_cast<int> (2 + 4 * 2)] = static_cast<char> (m_state[2][2]);
+  b[static_cast<int> (2 + 4 * 3)] = static_cast<char> (m_state[2][3]);
+  b[static_cast<int> (3 + 4 * 0)] = static_cast<char> (m_state[3][0]);
+  b[static_cast<int> (3 + 4 * 1)] = static_cast<char> (m_state[3][1]);
+  b[static_cast<int> (3 + 4 * 2)] = static_cast<char> (m_state[3][2]);
+  b[static_cast<int> (3 + 4 * 3)] = static_cast<char> (m_state[3][3]);
   return b;
 }
 
@@ -390,62 +421,126 @@ uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y)
 
 void dooble_aes256::add_round_key(size_t c)
 {
-  for(size_t i = 0; i < 4; i++)
-    {
-      m_state[i][0] ^= m_round_key[c * m_Nb + 0][i];
-      m_state[i][1] ^= m_round_key[c * m_Nb + 1][i];
-      m_state[i][2] ^= m_round_key[c * m_Nb + 2][i];
-      m_state[i][3] ^= m_round_key[c * m_Nb + 3][i];
-    }
+  m_state[0][0] ^= m_round_key[c * m_Nb + 0][0];
+  m_state[0][1] ^= m_round_key[c * m_Nb + 1][0];
+  m_state[0][2] ^= m_round_key[c * m_Nb + 2][0];
+  m_state[0][3] ^= m_round_key[c * m_Nb + 3][0];
+  m_state[1][0] ^= m_round_key[c * m_Nb + 0][1];
+  m_state[1][1] ^= m_round_key[c * m_Nb + 1][1];
+  m_state[1][2] ^= m_round_key[c * m_Nb + 2][1];
+  m_state[1][3] ^= m_round_key[c * m_Nb + 3][1];
+  m_state[2][0] ^= m_round_key[c * m_Nb + 0][2];
+  m_state[2][1] ^= m_round_key[c * m_Nb + 1][2];
+  m_state[2][2] ^= m_round_key[c * m_Nb + 2][2];
+  m_state[2][3] ^= m_round_key[c * m_Nb + 3][2];
+  m_state[3][0] ^= m_round_key[c * m_Nb + 0][3];
+  m_state[3][1] ^= m_round_key[c * m_Nb + 1][3];
+  m_state[3][2] ^= m_round_key[c * m_Nb + 2][3];
+  m_state[3][3] ^= m_round_key[c * m_Nb + 3][3];
 }
 
 void dooble_aes256::inv_mix_columns(void)
 {
   uint8_t a[4];
 
-  for(size_t i = 0; i < 4; i++)
-    {
-      a[0] = m_state[0][i];
-      a[1] = m_state[1][i];
-      a[2] = m_state[2][i];
-      a[3] = m_state[3][i];
-      m_state[0][i] = xtime_special(0x0e, a[0]) ^ xtime_special(0x0b, a[1]) ^
-	xtime_special(0x0d, a[2]) ^ xtime_special(0x09, a[3]);
-      m_state[1][i] = xtime_special(0x09, a[0]) ^ xtime_special(0x0e, a[1]) ^
-	xtime_special(0x0b, a[2]) ^ xtime_special(0x0d, a[3]);
-      m_state[2][i] = xtime_special(0x0d, a[0]) ^ xtime_special(0x09, a[1]) ^
-	xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
-      m_state[3][i] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
-	xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
-    }
+  a[0] = m_state[0][0];
+  a[1] = m_state[1][0];
+  a[2] = m_state[2][0];
+  a[3] = m_state[3][0];
+  m_state[0][0] = xtime_special(0x0e, a[0]) ^ xtime_special(0x0b, a[1]) ^
+    xtime_special(0x0d, a[2]) ^ xtime_special(0x09, a[3]);
+  m_state[1][0] = xtime_special(0x09, a[0]) ^ xtime_special(0x0e, a[1]) ^
+    xtime_special(0x0b, a[2]) ^ xtime_special(0x0d, a[3]);
+  m_state[2][0] = xtime_special(0x0d, a[0]) ^ xtime_special(0x09, a[1]) ^
+    xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
+  m_state[3][0] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
+    xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
+  a[0] = m_state[0][1];
+  a[1] = m_state[1][1];
+  a[2] = m_state[2][1];
+  a[3] = m_state[3][1];
+  m_state[0][1] = xtime_special(0x0e, a[0]) ^ xtime_special(0x0b, a[1]) ^
+    xtime_special(0x0d, a[2]) ^ xtime_special(0x09, a[3]);
+  m_state[1][1] = xtime_special(0x09, a[0]) ^ xtime_special(0x0e, a[1]) ^
+    xtime_special(0x0b, a[2]) ^ xtime_special(0x0d, a[3]);
+  m_state[2][1] = xtime_special(0x0d, a[0]) ^ xtime_special(0x09, a[1]) ^
+    xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
+  m_state[3][1] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
+    xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
+  a[0] = m_state[0][2];
+  a[1] = m_state[1][2];
+  a[2] = m_state[2][2];
+  a[3] = m_state[3][2];
+  m_state[0][2] = xtime_special(0x0e, a[0]) ^ xtime_special(0x0b, a[1]) ^
+    xtime_special(0x0d, a[2]) ^ xtime_special(0x09, a[3]);
+  m_state[1][2] = xtime_special(0x09, a[0]) ^ xtime_special(0x0e, a[1]) ^
+    xtime_special(0x0b, a[2]) ^ xtime_special(0x0d, a[3]);
+  m_state[2][2] = xtime_special(0x0d, a[0]) ^ xtime_special(0x09, a[1]) ^
+    xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
+  m_state[3][2] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
+    xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
+  a[0] = m_state[0][3];
+  a[1] = m_state[1][3];
+  a[2] = m_state[2][3];
+  a[3] = m_state[3][3];
+  m_state[0][3] = xtime_special(0x0e, a[0]) ^ xtime_special(0x0b, a[1]) ^
+    xtime_special(0x0d, a[2]) ^ xtime_special(0x09, a[3]);
+  m_state[1][3] = xtime_special(0x09, a[0]) ^ xtime_special(0x0e, a[1]) ^
+    xtime_special(0x0b, a[2]) ^ xtime_special(0x0d, a[3]);
+  m_state[2][3] = xtime_special(0x0d, a[0]) ^ xtime_special(0x09, a[1]) ^
+    xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
+  m_state[3][3] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
+    xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
 }
 
 void dooble_aes256::inv_shift_rows(void)
 {
   uint8_t temp[4];
 
-  for(size_t i = 1; i < 4; i++)
-    {
-      temp[0] = m_state[i][0];
-      temp[1] = m_state[i][1];
-      temp[2] = m_state[i][2];
-      temp[3] = m_state[i][3];
-      m_state[i][(i + 0) % m_Nb] = temp[0];
-      m_state[i][(i + 1) % m_Nb] = temp[1];
-      m_state[i][(i + 2) % m_Nb] = temp[2];
-      m_state[i][(i + 3) % m_Nb] = temp[3];
-    }
+  temp[0] = m_state[1][0];
+  temp[1] = m_state[1][1];
+  temp[2] = m_state[1][2];
+  temp[3] = m_state[1][3];
+  m_state[1][(1 + 0) % m_Nb] = temp[0];
+  m_state[1][(1 + 1) % m_Nb] = temp[1];
+  m_state[1][(1 + 2) % m_Nb] = temp[2];
+  m_state[1][(1 + 3) % m_Nb] = temp[3];
+  temp[0] = m_state[2][0];
+  temp[1] = m_state[2][1];
+  temp[2] = m_state[2][2];
+  temp[3] = m_state[2][3];
+  m_state[2][(2 + 0) % m_Nb] = temp[0];
+  m_state[2][(2 + 1) % m_Nb] = temp[1];
+  m_state[2][(2 + 2) % m_Nb] = temp[2];
+  m_state[2][(2 + 3) % m_Nb] = temp[3];
+  temp[0] = m_state[3][0];
+  temp[1] = m_state[3][1];
+  temp[2] = m_state[3][2];
+  temp[3] = m_state[3][3];
+  m_state[3][(3 + 0) % m_Nb] = temp[0];
+  m_state[3][(3 + 1) % m_Nb] = temp[1];
+  m_state[3][(3 + 2) % m_Nb] = temp[2];
+  m_state[3][(3 + 3) % m_Nb] = temp[3];
 }
 
 void dooble_aes256::inv_sub_bytes(void)
 {
-  for(size_t i = 0; i < 4; i++)
-    {
-      m_state[i][0] = s_inv_sbox[static_cast<size_t> (m_state[i][0])];
-      m_state[i][1] = s_inv_sbox[static_cast<size_t> (m_state[i][1])];
-      m_state[i][2] = s_inv_sbox[static_cast<size_t> (m_state[i][2])];
-      m_state[i][3] = s_inv_sbox[static_cast<size_t> (m_state[i][3])];
-    }
+  m_state[0][0] = s_inv_sbox[static_cast<size_t> (m_state[0][0])];
+  m_state[0][1] = s_inv_sbox[static_cast<size_t> (m_state[0][1])];
+  m_state[0][2] = s_inv_sbox[static_cast<size_t> (m_state[0][2])];
+  m_state[0][3] = s_inv_sbox[static_cast<size_t> (m_state[0][3])];
+  m_state[1][0] = s_inv_sbox[static_cast<size_t> (m_state[1][0])];
+  m_state[1][1] = s_inv_sbox[static_cast<size_t> (m_state[1][1])];
+  m_state[1][2] = s_inv_sbox[static_cast<size_t> (m_state[1][2])];
+  m_state[1][3] = s_inv_sbox[static_cast<size_t> (m_state[1][3])];
+  m_state[2][0] = s_inv_sbox[static_cast<size_t> (m_state[2][0])];
+  m_state[2][1] = s_inv_sbox[static_cast<size_t> (m_state[2][1])];
+  m_state[2][2] = s_inv_sbox[static_cast<size_t> (m_state[2][2])];
+  m_state[2][3] = s_inv_sbox[static_cast<size_t> (m_state[2][3])];
+  m_state[3][0] = s_inv_sbox[static_cast<size_t> (m_state[3][0])];
+  m_state[3][1] = s_inv_sbox[static_cast<size_t> (m_state[3][1])];
+  m_state[3][2] = s_inv_sbox[static_cast<size_t> (m_state[3][2])];
+  m_state[3][3] = s_inv_sbox[static_cast<size_t> (m_state[3][3])];
 }
 
 void dooble_aes256::key_expansion(void)
@@ -469,8 +564,10 @@ void dooble_aes256::key_expansion(void)
 
   while(i < m_Nb * (m_Nr + 1))
     {
-      for(size_t j = 0; j < 4; j++)
-	temp[j] = m_round_key[i - 1][j];
+      temp[0] = m_round_key[i - 1][0];
+      temp[1] = m_round_key[i - 1][1];
+      temp[2] = m_round_key[i - 1][2];
+      temp[3] = m_round_key[i - 1][3];
 
       if(i % m_Nk == 0)
 	{
@@ -506,21 +603,54 @@ void dooble_aes256::mix_columns(void)
   uint8_t a[4];
   uint8_t b[4];
 
-  for(size_t i = 0; i < 4; i++)
-    {
-      a[0] = m_state[0][i];
-      a[1] = m_state[1][i];
-      a[2] = m_state[2][i];
-      a[3] = m_state[3][i];
-      b[0] = xtime(m_state[0][i]);
-      b[1] = xtime(m_state[1][i]);
-      b[2] = xtime(m_state[2][i]);
-      b[3] = xtime(m_state[3][i]);
-      m_state[0][i] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
-      m_state[1][i] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
-      m_state[2][i] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
-      m_state[3][i] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
-    }
+  a[0] = m_state[0][0];
+  a[1] = m_state[1][0];
+  a[2] = m_state[2][0];
+  a[3] = m_state[3][0];
+  b[0] = xtime(m_state[0][0]);
+  b[1] = xtime(m_state[1][0]);
+  b[2] = xtime(m_state[2][0]);
+  b[3] = xtime(m_state[3][0]);
+  m_state[0][0] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
+  m_state[1][0] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
+  m_state[2][0] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
+  m_state[3][0] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
+  a[0] = m_state[0][1];
+  a[1] = m_state[1][1];
+  a[2] = m_state[2][1];
+  a[3] = m_state[3][1];
+  b[0] = xtime(m_state[0][1]);
+  b[1] = xtime(m_state[1][1]);
+  b[2] = xtime(m_state[2][1]);
+  b[3] = xtime(m_state[3][1]);
+  m_state[0][1] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
+  m_state[1][1] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
+  m_state[2][1] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
+  m_state[3][1] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
+  a[0] = m_state[0][2];
+  a[1] = m_state[1][2];
+  a[2] = m_state[2][2];
+  a[3] = m_state[3][2];
+  b[0] = xtime(m_state[0][2]);
+  b[1] = xtime(m_state[1][2]);
+  b[2] = xtime(m_state[2][2]);
+  b[3] = xtime(m_state[3][2]);
+  m_state[0][2] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
+  m_state[1][2] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
+  m_state[2][2] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
+  m_state[3][2] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
+  a[0] = m_state[0][3];
+  a[1] = m_state[1][3];
+  a[2] = m_state[2][3];
+  a[3] = m_state[3][3];
+  b[0] = xtime(m_state[0][3]);
+  b[1] = xtime(m_state[1][3]);
+  b[2] = xtime(m_state[2][3]);
+  b[3] = xtime(m_state[3][3]);
+  m_state[0][3] = b[0] ^ a[1] ^ b[1] ^ a[2] ^ a[3];
+  m_state[1][3] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
+  m_state[2][3] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
+  m_state[3][3] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
 }
 
 void dooble_aes256::set_key(const QByteArray &key)
@@ -532,9 +662,10 @@ void dooble_aes256::set_key(const QByteArray &key)
   else
     m_key.resize(m_key_length);
 
-  for(size_t i = 0; i < 4; i++)
-    m_state[i][0] = m_state[i][1] = m_state[i][2] = m_state[i][3] = 0;
-
+  m_state[0][0] = m_state[0][1] = m_state[0][2] = m_state[0][3] = 0;
+  m_state[1][0] = m_state[1][1] = m_state[1][2] = m_state[1][3] = 0;
+  m_state[2][0] = m_state[2][1] = m_state[2][2] = m_state[2][3] = 0;
+  m_state[3][0] = m_state[3][1] = m_state[3][2] = m_state[3][3] = 0;
   key_expansion();
 }
 
@@ -542,45 +673,68 @@ void dooble_aes256::shift_rows(void)
 {
   uint8_t temp[4];
 
-  for(size_t i = 1; i < 4; i++)
-    {
-      temp[0] = m_state[i][(i + 0) % m_Nb];
-      temp[1] = m_state[i][(i + 1) % m_Nb];
-      temp[2] = m_state[i][(i + 2) % m_Nb];
-      temp[3] = m_state[i][(i + 3) % m_Nb];
-      m_state[i][0] = temp[0];
-      m_state[i][1] = temp[1];
-      m_state[i][2] = temp[2];
-      m_state[i][3] = temp[3];
-    }
+  temp[0] = m_state[1][(1 + 0) % m_Nb];
+  temp[1] = m_state[1][(1 + 1) % m_Nb];
+  temp[2] = m_state[1][(1 + 2) % m_Nb];
+  temp[3] = m_state[1][(1 + 3) % m_Nb];
+  m_state[1][0] = temp[0];
+  m_state[1][1] = temp[1];
+  m_state[1][2] = temp[2];
+  m_state[1][3] = temp[3];
+  temp[0] = m_state[2][(2 + 0) % m_Nb];
+  temp[1] = m_state[2][(2 + 1) % m_Nb];
+  temp[2] = m_state[2][(2 + 2) % m_Nb];
+  temp[3] = m_state[2][(2 + 3) % m_Nb];
+  m_state[2][0] = temp[0];
+  m_state[2][1] = temp[1];
+  m_state[2][2] = temp[2];
+  m_state[2][3] = temp[3];
+  temp[0] = m_state[3][(3 + 0) % m_Nb];
+  temp[1] = m_state[3][(3 + 1) % m_Nb];
+  temp[2] = m_state[3][(3 + 2) % m_Nb];
+  temp[3] = m_state[3][(3 + 3) % m_Nb];
+  m_state[3][0] = temp[0];
+  m_state[3][1] = temp[1];
+  m_state[3][2] = temp[2];
+  m_state[3][3] = temp[3];
 }
 
 void dooble_aes256::sub_bytes()
 {
-  for(size_t i = 0; i < 4; i++)
-    {
-      m_state[i][0] = s_sbox[static_cast<size_t> (m_state[i][0])];
-      m_state[i][1] = s_sbox[static_cast<size_t> (m_state[i][1])];
-      m_state[i][2] = s_sbox[static_cast<size_t> (m_state[i][2])];
-      m_state[i][3] = s_sbox[static_cast<size_t> (m_state[i][3])];
-    }
+  m_state[0][0] = s_sbox[static_cast<size_t> (m_state[0][0])];
+  m_state[0][1] = s_sbox[static_cast<size_t> (m_state[0][1])];
+  m_state[0][2] = s_sbox[static_cast<size_t> (m_state[0][2])];
+  m_state[0][3] = s_sbox[static_cast<size_t> (m_state[0][3])];
+  m_state[1][0] = s_sbox[static_cast<size_t> (m_state[1][0])];
+  m_state[1][1] = s_sbox[static_cast<size_t> (m_state[1][1])];
+  m_state[1][2] = s_sbox[static_cast<size_t> (m_state[1][2])];
+  m_state[1][3] = s_sbox[static_cast<size_t> (m_state[1][3])];
+  m_state[2][0] = s_sbox[static_cast<size_t> (m_state[2][0])];
+  m_state[2][1] = s_sbox[static_cast<size_t> (m_state[2][1])];
+  m_state[2][2] = s_sbox[static_cast<size_t> (m_state[2][2])];
+  m_state[2][3] = s_sbox[static_cast<size_t> (m_state[2][3])];
+  m_state[3][0] = s_sbox[static_cast<size_t> (m_state[3][0])];
+  m_state[3][1] = s_sbox[static_cast<size_t> (m_state[3][1])];
+  m_state[3][2] = s_sbox[static_cast<size_t> (m_state[3][2])];
+  m_state[3][3] = s_sbox[static_cast<size_t> (m_state[3][3])];
 }
 
 void dooble_aes256::test1(void)
 {
-  QByteArray bytes;
+  QByteArray text;
   dooble_aes256 aes256(dooble_random::random_bytes(32));
 
-  bytes = aes256.encrypt
-    ("for(size_t i = 0; i < 4; i++) "
-     "{"
-     "m_state[i][0] = s_sbox[static_cast<size_t> (m_state[i][0])];"
-     "m_state[i][1] = s_sbox[static_cast<size_t> (m_state[i][1])];"
-     "m_state[i][2] = s_sbox[static_cast<size_t> (m_state[i][2])];"
-     "m_state[i][3] = s_sbox[static_cast<size_t> (m_state[i][3])];"
-     "}");
-  bytes = aes256.decrypt(bytes);
-  std::cout << bytes.toStdString() << std::endl;
+  text = "for(size_t i = 0; i < 4; i++) "
+    "{"
+    "m_state[i][0] = s_sbox[static_cast<size_t> (m_state[i][0])];"
+    "m_state[i][1] = s_sbox[static_cast<size_t> (m_state[i][1])];"
+    "m_state[i][2] = s_sbox[static_cast<size_t> (m_state[i][2])];"
+    "m_state[i][3] = s_sbox[static_cast<size_t> (m_state[i][3])];"
+    "}";
+  std::cout << ((text == aes256.decrypt(aes256.encrypt(text))) ?
+		"dooble_aes256::test1() passed!" :
+		"dooble_aes256::test1() failed!")
+	    << std::endl;
 }
 
 void dooble_aes256::test1_decrypt_block(void)
