@@ -144,10 +144,9 @@ bool dooble_web_engine_page::certificateError
       if(!view())
 	return false;
 
-      QStackedLayout *stacked_layout = qobject_cast<QStackedLayout *>
-	(view()->layout());
+      QLayout *layout = qobject_cast<QLayout *> (view()->layout());
 
-      if(!stacked_layout)
+      if(!layout)
 	return false;
 
       m_certificate_error = certificateError.errorDescription();
@@ -194,19 +193,17 @@ bool dooble_web_engine_page::certificateError
 	   arg(url.toString()).
 	   arg(certificateError.errorDescription()));
 
-      stacked_layout->removeWidget(m_certificate_error_widget);
-      stacked_layout->addWidget(m_certificate_error_widget);
-      stacked_layout->setCurrentWidget(m_certificate_error_widget);
+      layout->removeWidget(m_certificate_error_widget);
+      layout->addWidget(m_certificate_error_widget);
     }
   else
     {
       if(!view())
 	return false;
 
-      QStackedLayout *stacked_layout = qobject_cast<QStackedLayout *>
-	(view()->layout());
+      QLayout *layout = qobject_cast<QLayout *> (view()->layout());
 
-      if(!stacked_layout)
+      if(!layout)
 	return false;
 
       QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
@@ -241,9 +238,8 @@ bool dooble_web_engine_page::certificateError
 	    "certificate error.</html>").
 	 arg(url.toString()).
 	 arg(certificateError.errorDescription()));
-      stacked_layout->removeWidget(m_certificate_error_widget);
-      stacked_layout->addWidget(m_certificate_error_widget);
-      stacked_layout->setCurrentWidget(m_certificate_error_widget);
+      layout->removeWidget(m_certificate_error_widget);
+      layout->addWidget(m_certificate_error_widget);
     }
 
   return false;
