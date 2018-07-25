@@ -230,22 +230,22 @@ QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
   else
     b.resize(16);
 
-  m_state[0][0] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 0)]);
-  m_state[0][1] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 1)]);
-  m_state[0][2] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 2)]);
-  m_state[0][3] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 3)]);
-  m_state[1][0] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 0)]);
-  m_state[1][1] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 1)]);
-  m_state[1][2] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 2)]);
-  m_state[1][3] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 3)]);
-  m_state[2][0] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 0)]);
-  m_state[2][1] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 1)]);
-  m_state[2][2] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 2)]);
-  m_state[2][3] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 3)]);
-  m_state[3][0] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 0)]);
-  m_state[3][1] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 1)]);
-  m_state[3][2] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 2)]);
-  m_state[3][3] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 3)]);
+  m_state[0][0] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 0)));
+  m_state[0][1] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 1)));
+  m_state[0][2] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 2)));
+  m_state[0][3] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 3)));
+  m_state[1][0] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 0)));
+  m_state[1][1] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 1)));
+  m_state[1][2] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 2)));
+  m_state[1][3] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 3)));
+  m_state[2][0] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 0)));
+  m_state[2][1] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 1)));
+  m_state[2][2] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 2)));
+  m_state[2][3] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 3)));
+  m_state[3][0] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 0)));
+  m_state[3][1] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 1)));
+  m_state[3][2] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 2)));
+  m_state[3][3] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 3)));
   add_round_key(m_Nr);
 
   for(size_t i = m_Nr - 1; i > 0; i--)
@@ -357,22 +357,22 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   else
     b.resize(16);
 
-  m_state[0][0] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 0)]);
-  m_state[0][1] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 1)]);
-  m_state[0][2] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 2)]);
-  m_state[0][3] = static_cast<uint8_t> (b[static_cast<int> (0 + 4 * 3)]);
-  m_state[1][0] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 0)]);
-  m_state[1][1] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 1)]);
-  m_state[1][2] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 2)]);
-  m_state[1][3] = static_cast<uint8_t> (b[static_cast<int> (1 + 4 * 3)]);
-  m_state[2][0] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 0)]);
-  m_state[2][1] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 1)]);
-  m_state[2][2] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 2)]);
-  m_state[2][3] = static_cast<uint8_t> (b[static_cast<int> (2 + 4 * 3)]);
-  m_state[3][0] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 0)]);
-  m_state[3][1] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 1)]);
-  m_state[3][2] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 2)]);
-  m_state[3][3] = static_cast<uint8_t> (b[static_cast<int> (3 + 4 * 3)]);
+  m_state[0][0] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 0)));
+  m_state[0][1] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 1)));
+  m_state[0][2] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 2)));
+  m_state[0][3] = static_cast<uint8_t> (b.at(static_cast<int> (0 + 4 * 3)));
+  m_state[1][0] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 0)));
+  m_state[1][1] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 1)));
+  m_state[1][2] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 2)));
+  m_state[1][3] = static_cast<uint8_t> (b.at(static_cast<int> (1 + 4 * 3)));
+  m_state[2][0] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 0)));
+  m_state[2][1] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 1)));
+  m_state[2][2] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 2)));
+  m_state[2][3] = static_cast<uint8_t> (b.at(static_cast<int> (2 + 4 * 3)));
+  m_state[3][0] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 0)));
+  m_state[3][1] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 1)));
+  m_state[3][2] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 2)));
+  m_state[3][3] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 3)));
   add_round_key(0);
 
   for(size_t i = 1; i < m_Nr; i++)
