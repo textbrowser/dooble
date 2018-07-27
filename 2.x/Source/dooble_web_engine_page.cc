@@ -148,6 +148,12 @@ bool dooble_web_engine_page::certificateError
 
       if(!layout)
 	return false;
+      else
+	for(int i = layout->count() - 1; i >= 0; i--)
+	  {
+	    m_layout_items << layout->itemAt(i);
+	    layout->removeItem(layout->itemAt(i));
+	  }
 
       m_certificate_error = certificateError.errorDescription();
       m_certificate_error_url = url;
@@ -205,6 +211,16 @@ bool dooble_web_engine_page::certificateError
 
       if(!layout)
 	return false;
+      else
+	for(int i = layout->count() - 1; i >= 0; i--)
+	  {
+	    m_layout_items << layout->itemAt(i);
+	    layout->removeItem(layout->itemAt(i));
+	  }
+
+	for(int i = 0; i < layout->count(); i++)
+	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
+	    layout->itemAt(i)->widget()->setVisible(false);
 
       QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
@@ -268,11 +284,20 @@ void dooble_web_engine_page::slot_load_started(void)
   m_certificate_error = QString();
   m_certificate_error_url = QUrl();
 
+  QLayout *layout = 0;
+
+  if(view())
+    layout = qobject_cast<QLayout *> (view()->layout());
+
   if(m_certificate_error_widget)
     {
-      if(view() && view()->layout())
-	view()->layout()->removeWidget(m_certificate_error_widget);
+      if(layout)
+	layout->removeWidget(m_certificate_error_widget);
 
       m_certificate_error_widget->deleteLater();
     }
+
+  if(layout)
+    while(!m_layout_items.isEmpty())
+      layout->addItem(m_layout_items.takeLast());
 }

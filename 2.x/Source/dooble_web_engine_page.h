@@ -54,6 +54,7 @@ class dooble_web_engine_page: public QWebEnginePage
   bool certificateError(const QWebEngineCertificateError &certificateError);
 
  private:
+  QList<QLayoutItem *> m_layout_items;
   QPointer<QWidget> m_certificate_error_widget;
   QString m_certificate_error;
   QUrl m_certificate_error_url;
