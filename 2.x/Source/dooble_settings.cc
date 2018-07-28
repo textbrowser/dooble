@@ -433,7 +433,13 @@ QVariant dooble_settings::setting(const QString &key)
 
 	    if(query.exec())
 	      if(query.next())
-		value = query.value(0).toString().trimmed();
+		{
+		  value = query.value(0).toString().trimmed();
+
+		  QWriteLocker lock(&s_settings_mutex);
+
+		  s_settings[key.toLower().trimmed()] = value;
+		}
 	  }
 
 	db.close();
