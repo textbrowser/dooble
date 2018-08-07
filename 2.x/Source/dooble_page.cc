@@ -1476,9 +1476,16 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 void dooble_page::slot_link_hovered(const QString &url)
 {
+  if(url.trimmed().isEmpty())
+    {
+      m_ui.link_hovered->setProperty("text", "");
+      m_ui.link_hovered->clear();
+      return;
+    }
+
   if(dooble_settings::setting("show_hovered_links_tool_tips").toBool())
-    if(!url.isEmpty())
-      QToolTip::showText(QCursor::pos(), "<html>" + url + "</html>", this);
+    QToolTip::showText
+      (QCursor::pos(), "<html>" + url.trimmed() + "</html>", this);
 
   if(m_ui.status_bar->isVisible())
     {
@@ -1491,7 +1498,7 @@ void dooble_page::slot_link_hovered(const QString &url)
       if(m_ui.progress->isVisible())
 	difference += m_ui.progress->width();
 
-      m_ui.link_hovered->setProperty("text", url);
+      m_ui.link_hovered->setProperty("text", url.trimmed());
       m_ui.link_hovered->setText
 	(font_metrics.
 	 elidedText(url.trimmed(),
