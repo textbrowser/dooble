@@ -218,10 +218,6 @@ bool dooble_web_engine_page::certificateError
 	    layout->removeItem(layout->itemAt(i));
 	  }
 
-	for(int i = 0; i < layout->count(); i++)
-	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
-	    layout->itemAt(i)->widget()->setVisible(false);
-
       QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
       m_certificate_error = certificateError.errorDescription();
