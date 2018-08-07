@@ -157,14 +157,12 @@
 
 1.     Replace fixed loops in AES.
 
-2.1.9.4 Remaining Items
-
-1.     Fancy completer.
-
 2.2 Remaining Items
 
 1.     Auto-correct addresses.
 2.     Include date stamps in cookie containers.
+3.     linkHovered() is emitted without user interaction.
+4.     Fancy completer.
 
 Unknown Items
 
