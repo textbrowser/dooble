@@ -2009,21 +2009,6 @@ void dooble::slot_print(void)
 
 void dooble::slot_print_preview(void)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
-
-  if(!page)
-    return;
-
-  QPrintPreviewDialog *print_preview_dialog = 0;
-  QPrinter *printer = new QPrinter();
-
-  print_preview_dialog = new QPrintPreviewDialog(printer, this);
-  connect(print_preview_dialog,
-	  SIGNAL(paintRequested(QPrinter *)),
-	  page,
-	  SLOT(slot_print_preview(QPrinter *)));
-  print_preview_dialog->exec();
-  print_preview_dialog->deleteLater();
 }
 
 void dooble::slot_quit_dooble(void)

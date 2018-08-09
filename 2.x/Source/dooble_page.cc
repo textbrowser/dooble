@@ -1674,8 +1674,6 @@ void dooble_page::slot_print_preview(QPrinter *printer)
 {
   if(!printer)
     return;
-
-  delete printer;
 }
 
 void dooble_page::slot_proxy_authentication_required
