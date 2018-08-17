@@ -26,7 +26,6 @@
 */
 
 #include <QFileDialog>
-#include <QStackedLayout>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 
@@ -276,21 +275,21 @@ void dooble_web_engine_page::slot_load_started(void)
   m_certificate_error = QString();
   m_certificate_error_url = QUrl();
 
-  QLayout *layout = 0;
-
-  if(view())
-    layout = qobject_cast<QLayout *> (view()->layout());
-
   if(m_certificate_error_widget)
     {
+      QLayout *layout = 0;
+
+      if(view())
+	layout = qobject_cast<QLayout *> (view()->layout());
+
       if(layout)
 	layout->removeWidget(m_certificate_error_widget);
 
       m_certificate_error_widget->deleteLater();
-    }
 
-  if(layout)
-    for(int i = 0; i < layout->count(); i++)
-      if(layout->itemAt(i) && layout->itemAt(i)->widget())
-	layout->itemAt(i)->widget()->setVisible(true);
+      if(layout)
+	for(int i = 0; i < layout->count(); i++)
+	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
+	    layout->itemAt(i)->widget()->setVisible(true);
+    }
 }
