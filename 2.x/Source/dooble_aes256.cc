@@ -569,7 +569,7 @@ void dooble_aes256::key_expansion(void)
       temp[2] = m_round_key[i - 1][2];
       temp[3] = m_round_key[i - 1][3];
 
-      if(i % m_Nk == 0)
+      if(m_Nk > 0 && i % m_Nk == 0)
 	{
 	  uint8_t t = temp[0];
 
@@ -582,7 +582,7 @@ void dooble_aes256::key_expansion(void)
 	  temp[2] = s_sbox[static_cast<size_t> (temp[2])] ^ s_rcon[i / m_Nk][2];
 	  temp[3] = s_sbox[static_cast<size_t> (temp[3])] ^ s_rcon[i / m_Nk][3];
 	}
-      else if(i % m_Nk == 4)
+      else if(m_Nk > 0 && i % m_Nk == 4)
 	{
 	  temp[0] = s_sbox[static_cast<size_t> (temp[0])];
 	  temp[1] = s_sbox[static_cast<size_t> (temp[1])];
