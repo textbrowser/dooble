@@ -178,3 +178,5 @@ Unknown Items
        synchronous OFF.
 10.    Cookies are not always deleted properly.
 11.    Socket states.
+12.    The random-bytes implementation uses a deprecated
+       interface on Windows.
