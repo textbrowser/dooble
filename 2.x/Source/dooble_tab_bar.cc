@@ -263,11 +263,15 @@ void dooble_tab_bar::slot_close_other_tabs(void)
 
   if(action)
     {
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
       int index = tabAt(action->property("point").toPoint());
 
       for(int i = count() - 1; i >= 0; i--)
 	if(i != index)
 	  emit tabCloseRequested(i);
+
+      QApplication::restoreOverrideCursor();
     }
 }
 
