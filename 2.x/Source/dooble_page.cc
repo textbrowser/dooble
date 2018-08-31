@@ -545,6 +545,15 @@ void dooble_page::prepare_shortcuts(void)
 {
   if(m_shortcuts.isEmpty())
     {
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl++")),
+				   this,
+				   SLOT(slot_zoom_in(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+-")),
+				   this,
+				   SLOT(slot_zoom_out(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+0")),
+				   this,
+				   SLOT(slot_zoom_reset(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+F")),
 				   this,
 				   SLOT(slot_show_find(void)));

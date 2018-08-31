@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>299</width>
+    <width>315</width>
     <height>380</height>
    </rect>
   </property>
@@ -54,7 +54,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Zoom In</string>
+         <string>Zoom In (Control + Shift + +)</string>
         </property>
         <property name="text">
          <string>+</string>
@@ -73,7 +73,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Zoom Reset</string>
+         <string>Zoom Reset (Control + 0)</string>
         </property>
         <property name="text">
          <string>100%</string>
@@ -92,7 +92,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Zoom Out</string>
+         <string>Zoom Out (Control + -)</string>
         </property>
         <property name="text">
          <string>-</string>
