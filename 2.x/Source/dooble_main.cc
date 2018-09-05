@@ -135,8 +135,8 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListUrl> ("QListUrl");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
-  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-  QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, false);
+  QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, false);
 #else
   QCoreApplication::setAttribute
     (Qt::AA_EnableHighDpiScaling,
