@@ -81,7 +81,7 @@ void dooble_certificate_exceptions::exception_accepted(const QString &error,
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
 
-  QTableWidgetItem *item = 0;
+  QTableWidgetItem *item = nullptr;
 
   item = new QTableWidgetItem(url.toString());
   item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -330,7 +330,7 @@ void dooble_certificate_exceptions::slot_populate(void)
   for(int i = 0; i < list.size(); i++)
     {
       QHash<QString, QVariant> hash(list.at(i));
-      QTableWidgetItem *item = 0;
+      QTableWidgetItem *item = nullptr;
 
       item = new QTableWidgetItem(hash.value("url").toString());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);

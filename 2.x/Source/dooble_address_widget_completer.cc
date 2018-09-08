@@ -67,7 +67,7 @@ protected:
 };
 
 QHash<QUrl, QStandardItem *> dooble_address_widget_completer::s_urls;
-QStandardItemModel *dooble_address_widget_completer::s_model = 0;
+QStandardItemModel *dooble_address_widget_completer::s_model = nullptr;
 
 dooble_address_widget_completer::dooble_address_widget_completer
 (QWidget *parent):QCompleter(parent)

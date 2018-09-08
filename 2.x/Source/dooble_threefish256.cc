@@ -33,8 +33,8 @@
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
 
-static const uint8_t *Pi = 0;
-static const uint8_t *RPi = 0;
+static const uint8_t *Pi = nullptr;
+static const uint8_t *RPi = nullptr;
 static const uint8_t Pi_4[4] = {0, 3, 2, 1};
 static const uint8_t RPi_4[4] = {0, 3, 2, 1};
 static const uint8_t R_4[8][2] = {{14, 16},
@@ -750,7 +750,7 @@ void dooble_threefish256::test1(void)
   QByteArray d;
   QByteArray p;
 
-  s->set_tweak("76543210fedcba98", 0);
+  s->set_tweak("76543210fedcba98", nullptr);
   p = "The pink duck visited the Soap Queen. A happy moment indeed.";
   c = s->encrypt(p);
   d = s->decrypt(c);
@@ -770,7 +770,7 @@ void dooble_threefish256::test2(void)
   QByteArray d;
   QByteArray p;
 
-  s->set_tweak("76543210fedcba98", 0);
+  s->set_tweak("76543210fedcba98", nullptr);
   p = "If you wish to glimpse inside a human soul "
     "and get to know a man, don't bother analyzing "
     "his ways of being silent, of talking, of weeping, "
@@ -795,7 +795,7 @@ void dooble_threefish256::test3(void)
   QByteArray d;
   QByteArray p;
 
-  s->set_tweak("76543210fedcba98", 0);
+  s->set_tweak("76543210fedcba98", nullptr);
   p = "The truth is always an abyss. One must - as in a swimming pool "
     "- dare to dive from the quivering springboard of trivial "
     "everyday experience and sink into the depths, in order to "

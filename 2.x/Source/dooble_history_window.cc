@@ -54,7 +54,7 @@ public:
 
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
-  m_parent = 0;
+  m_parent = nullptr;
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -385,7 +385,7 @@ void dooble_history_window::slot_delete_pages(void)
 
 void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
 {
-  QTableWidgetItem *item = m_items.value(url, 0);
+  QTableWidgetItem *item = m_items.value(url, nullptr);
 
   if(!item)
     return;
@@ -652,7 +652,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   else
     item1->setCheckState(Qt::Unchecked);
 
-  QTableWidgetItem *item2 = 0;
+  QTableWidgetItem *item2 = nullptr;
 
   if(icon.isNull())
     item2 = new QTableWidgetItem(dooble_favicons::icon(item.url()), title);
@@ -696,7 +696,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
 void dooble_history_window::slot_parent_destroyed(void)
 {
-  m_parent = 0;
+  m_parent = nullptr;
 }
 
 void dooble_history_window::slot_populate(void)
@@ -732,11 +732,11 @@ void dooble_history_window::slot_populate(void)
       QDateTime last_visited
 	(it.value().value(dooble_history::LAST_VISITED).toDateTime());
       QString title(it.value().value(dooble_history::TITLE).toString());
-      QTableWidgetItem *item2 = 0;
-      QTableWidgetItem *item3 = 0;
-      QTableWidgetItem *item4 = 0;
+      QTableWidgetItem *item2 = nullptr;
+      QTableWidgetItem *item3 = nullptr;
+      QTableWidgetItem *item4 = nullptr;
       QUrl url(it.value().value(dooble_history::URL).toUrl());
-      dooble_history_window_favorite_item *item1 = 0;
+      dooble_history_window_favorite_item *item1 = nullptr;
 
       item1 = new dooble_history_window_favorite_item();
       item1->setData(Qt::UserRole, url);

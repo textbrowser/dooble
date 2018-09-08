@@ -353,7 +353,7 @@ void dooble_tab_bar::slot_settings_applied(void)
 
 void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 {
-  QAction *action = 0;
+  QAction *action = nullptr;
   QMenu menu(this);
   int tab_at = tabAt(point);
 
@@ -416,7 +416,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   webgl_action->setEnabled(false);
   webgl_action->setProperty("point", point);
 
-  dooble_page *page = 0;
+  dooble_page *page = nullptr;
   dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
     (parentWidget());
 

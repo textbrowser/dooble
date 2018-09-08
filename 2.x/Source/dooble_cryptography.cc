@@ -91,7 +91,7 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
     {
       dooble_threefish256 threefish(m_encryption_key);
 
-      threefish.set_tweak("76543210fedcba98", 0);
+      threefish.set_tweak("76543210fedcba98", nullptr);
       bytes = threefish.encrypt(data);
     }
 
@@ -140,7 +140,7 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
 	{
 	  dooble_threefish256 threefish(m_encryption_key);
 
-	  threefish.set_tweak("76543210fedcba98", 0);
+	  threefish.set_tweak("76543210fedcba98", nullptr);
 	  return threefish.decrypt
 	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 	}

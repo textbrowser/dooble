@@ -356,7 +356,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 {
   Q_UNUSED(is_private);
 
-  dooble_page *page = new dooble_page(m_web_engine_profile, 0, m_ui.tab);
+  dooble_page *page = new dooble_page(m_web_engine_profile, nullptr, m_ui.tab);
 
   prepare_page_connections(page);
   m_ui.tab->addTab(page, tr("New Tab"));
@@ -599,16 +599,16 @@ void dooble::decouple_support_windows(void)
 {
   if(dooble_ui_utilities::
      find_parent_dooble(s_accepted_or_blocked_domains) == this)
-    s_accepted_or_blocked_domains->setParent(0);
+    s_accepted_or_blocked_domains->setParent(nullptr);
 
   if(dooble_ui_utilities::find_parent_dooble(s_downloads) == this)
-    s_downloads->setParent(0);
+    s_downloads->setParent(nullptr);
 
   if(dooble_ui_utilities::find_parent_dooble(s_history_window) == this)
-    s_history_window->setParent(0);
+    s_history_window->setParent(nullptr);
 
   if(dooble_ui_utilities::find_parent_dooble(s_settings) == this)
-    s_settings->setParent(0);
+    s_settings->setParent(nullptr);
 }
 
 void dooble::initialize_static_members(void)
@@ -636,7 +636,7 @@ void dooble::initialize_static_members(void)
 
   if(!s_cookies)
     {
-      s_cookies = new dooble_cookies(false, 0);
+      s_cookies = new dooble_cookies(false, nullptr);
       connect(s_cookies,
 	      SIGNAL(populated(void)),
 	      this,
@@ -645,7 +645,7 @@ void dooble::initialize_static_members(void)
 
   if(!s_cookies_window)
     {
-      s_cookies_window = new dooble_cookies_window(false, 0);
+      s_cookies_window = new dooble_cookies_window(false, nullptr);
       s_cookies_window->setCookieStore
 	(QWebEngineProfile::defaultProfile()->cookieStore());
       s_cookies_window->setCookies(s_cookies);
@@ -672,7 +672,7 @@ void dooble::initialize_static_members(void)
 
   if(!s_favorites_window)
     {
-      s_favorites_window = new dooble_favorites_popup(0);
+      s_favorites_window = new dooble_favorites_popup(nullptr);
       s_favorites_window->setWindowModality(Qt::NonModal);
       s_favorites_window->setWindowTitle(tr("Dooble: Favorites"));
       connect(s_application,
@@ -696,7 +696,7 @@ void dooble::initialize_static_members(void)
   if(!s_url_request_interceptor)
     {
       s_url_request_interceptor = new
-	dooble_web_engine_url_request_interceptor(0);
+	dooble_web_engine_url_request_interceptor(nullptr);
       QWebEngineProfile::defaultProfile()->setRequestInterceptor
 	(s_url_request_interceptor);
     }
@@ -784,7 +784,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
 
   if(page)
     {
-      dooble *d = 0;
+      dooble *d = nullptr;
 
       remove_page_connections(page);
 
@@ -1100,8 +1100,8 @@ void dooble::prepare_standard_menus(void)
 {
   m_menu->clear();
 
-  QAction *action = 0;
-  QMenu *menu = 0;
+  QAction *action = nullptr;
+  QMenu *menu = nullptr;
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   /*
@@ -1307,7 +1307,7 @@ void dooble::prepare_tab_shortcuts(void)
       if(!widget)
 	continue;
 
-      QShortcut *shortcut = 0;
+      QShortcut *shortcut = nullptr;
 
       if(i == 9)
 	{
@@ -1342,7 +1342,7 @@ void dooble::print(dooble_page *page)
   if(!page)
     return;
 
-  QPrintDialog *print_dialog = 0;
+  QPrintDialog *print_dialog = nullptr;
   QPrinter *printer = new QPrinter();
 
   print_dialog = new QPrintDialog(printer, this);
@@ -1538,7 +1538,7 @@ void dooble::slot_about_to_show_main_menu(void)
     {
       menu->clear();
 
-      QMenu *m = 0;
+      QMenu *m = nullptr;
       dooble_page *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
 
@@ -1743,7 +1743,7 @@ void dooble::slot_decouple_tab(int index)
     {
       m_ui.tab->removeTab(index);
       m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
-      main_window->setParent(0);
+      main_window->setParent(nullptr);
       main_window->resize(s_vga_size);
       main_window->show();
       dooble_ui_utilities::center_window_widget(this, main_window);
@@ -2070,28 +2070,28 @@ void dooble::slot_settings_applied(void)
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_accepted_or_blocked_domains));
       prepare_tab_shortcuts();
-      s_accepted_or_blocked_domains->setParent(0);
+      s_accepted_or_blocked_domains->setParent(nullptr);
     }
 
   if(!dooble_settings::setting("pin_downloads_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_downloads));
       prepare_tab_shortcuts();
-      s_downloads->setParent(0);
+      s_downloads->setParent(nullptr);
     }
 
   if(!dooble_settings::setting("pin_history_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_history_window));
       prepare_tab_shortcuts();
-      s_history_window->setParent(0);
+      s_history_window->setParent(nullptr);
     }
 
   if(!dooble_settings::setting("pin_settings_window").toBool())
     {
       m_ui.tab->removeTab(m_ui.tab->indexOf(s_settings));
       prepare_tab_shortcuts();
-      s_settings->setParent(0);
+      s_settings->setParent(nullptr);
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2496,7 +2496,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
   for(int i = 0; i < m_ui.tab->count(); i++)
     {
-      QAction *action = 0;
+      QAction *action = nullptr;
       QString text(m_ui.tab->tabText(i));
       dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 

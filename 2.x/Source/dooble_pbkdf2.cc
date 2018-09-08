@@ -74,7 +74,7 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
 
 QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 {
-  if(function == 0 ||
+  if(function == nullptr ||
      m_block_cipher_type_index < 0 || m_block_cipher_type_index > 1 ||
      m_iteration_count == 0 ||
      m_output_size == 0 ||

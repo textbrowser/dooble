@@ -108,7 +108,7 @@ dooble *dooble_popup_menu::find_parent_dooble(void) const
   while(parent);
 
   QApplication::restoreOverrideCursor();
-  return 0;
+  return nullptr;
 }
 
 void dooble_popup_menu::prepare_icons(void)

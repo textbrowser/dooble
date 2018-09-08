@@ -258,7 +258,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	  this,
 	  SLOT(slot_download_destroyed(void)));
 
-  dooble_downloads_item *item = 0;
+  dooble_downloads_item *item = nullptr;
   int index = -1;
 
   for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
@@ -604,7 +604,11 @@ void dooble_downloads::slot_populate(void)
 		    }
 		  default:
 		    {
-		      oid = query.value(i).toLongLong();
+		      if(sizeof(qintptr) == 4)
+			oid = query.value(i).toInt();
+		      else
+			oid = query.value(i).toLongLong();
+
 		      break;
 		    }
 		  }
@@ -742,7 +746,7 @@ void dooble_downloads::slot_show_context_menu(const QPoint &point)
   if(!downloads_item)
     return;
 
-  QAction *action = 0;
+  QAction *action = nullptr;
   QMenu menu(this);
   QUrl url(downloads_item->url());
 

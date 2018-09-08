@@ -425,7 +425,7 @@ dooble *dooble_page::find_parent_dooble(void) const
   while(parent);
 
   QApplication::restoreOverrideCursor();
-  return 0;
+  return nullptr;
 }
 
 dooble_address_widget *dooble_page::address_widget(void) const
@@ -573,8 +573,8 @@ void dooble_page::prepare_standard_menus(void)
 {
   m_menu->clear();
 
-  QAction *action = 0;
-  QMenu *menu = 0;
+  QAction *action = nullptr;
+  QMenu *menu = nullptr;
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   /*
@@ -1640,7 +1640,7 @@ void dooble_page::slot_prepare_backward_menu(void)
 
   for(int i = items.size() - 1; i >= 0; i--)
     {
-      QAction *action = 0;
+      QAction *action = nullptr;
       QIcon icon(dooble_favicons::icon(items.at(i).url()));
       QString title
 	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
@@ -1665,7 +1665,7 @@ void dooble_page::slot_prepare_forward_menu(void)
 
   for(int i = 0; i < items.size(); i++)
     {
-      QAction *action = 0;
+      QAction *action = nullptr;
       QIcon icon(dooble_favicons::icon(items.at(i).url()));
       QString title
 	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));

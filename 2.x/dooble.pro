@@ -213,9 +213,9 @@ QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 QMAKE_CXXFLAGS_RELEASE +=
 } else {
 QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
-			  -Werror -Wextra \
+                          -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
-			  -Wstack-protector -Wstrict-overflow=5 \
+                          -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
                           -mtune=generic -pie -std=c++11
 }

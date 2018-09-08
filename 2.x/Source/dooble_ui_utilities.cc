@@ -63,7 +63,7 @@ QUrl dooble_ui_utilities::simplified_url(const QUrl &url)
 dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
 {
   if(!widget)
-    return 0;
+    return nullptr;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -82,7 +82,7 @@ dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
   while(parent);
 
   QApplication::restoreOverrideCursor();
-  return 0;
+  return nullptr;
 }
 
 int dooble_ui_utilities::context_menu_width(QWidget *widget)

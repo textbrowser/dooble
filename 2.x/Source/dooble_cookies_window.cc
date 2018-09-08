@@ -309,7 +309,8 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
       return;
     }
 
-  QTreeWidgetItem *item = hash.value(dooble_cookies::identifier(cookie), 0);
+  QTreeWidgetItem *item = hash.value
+    (dooble_cookies::identifier(cookie), nullptr);
 
   if(item && item->parent())
     delete item->parent()->takeChild(item->parent()->indexOfChild(item));

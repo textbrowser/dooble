@@ -277,7 +277,7 @@ void dooble_web_engine_page::slot_load_started(void)
 
   if(m_certificate_error_widget)
     {
-      QLayout *layout = 0;
+      QLayout *layout = nullptr;
 
       if(view())
 	layout = qobject_cast<QLayout *> (view()->layout());

@@ -35,7 +35,7 @@ QHash<QString, QColor> dooble_application::s_theme_colors;
 dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
-  m_translator = 0;
+  m_translator = nullptr;
 
   QFont font(this->font());
 

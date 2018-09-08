@@ -116,7 +116,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
   dooble_web_engine_view *view = new dooble_web_engine_view
-    (m_page->profile(), 0);
+    (m_page->profile(), nullptr);
 
   if(type == QWebEnginePage::WebBrowserWindow ||
      type == QWebEnginePage::WebDialog)
@@ -167,7 +167,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   if(!menu)
     menu = new QMenu(this);
 
-  QAction *action = 0;
+  QAction *action = nullptr;
 
   /*
   ** Change some text.

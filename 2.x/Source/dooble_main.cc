@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
       signal_action.sa_handler = signal_handler;
       sigemptyset(&signal_action.sa_mask);
       signal_action.sa_flags = 0;
-      sigaction(list.takeFirst(), &signal_action, (struct sigaction *) 0);
+      sigaction(list.takeFirst(), &signal_action, (struct sigaction *) nullptr);
 #else
       signal(list.takeFirst(), signal_handler);
 #endif
@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
   signal_action.sa_handler = SIG_IGN;
   sigemptyset(&signal_action.sa_mask);
   signal_action.sa_flags = 0;
-  sigaction(SIGPIPE, &signal_action, (struct sigaction *) 0);
+  sigaction(SIGPIPE, &signal_action, (struct sigaction *) nullptr);
 #endif
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListUrl> ("QListUrl");
@@ -335,7 +335,7 @@ int main(int argc, char *argv[])
   while(!d->initialized())
     splash.repaint();
 
-  splash.finish(0);
+  splash.finish(nullptr);
   d->show();
   return dooble::s_application->exec();
 }
