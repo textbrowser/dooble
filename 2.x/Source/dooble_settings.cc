@@ -1001,6 +1001,7 @@ void dooble_settings::restore(bool read_database)
     default:
       {
 	s_settings["theme_color"] = "blue-grey";
+	break;
       }
     }
 
@@ -1393,6 +1394,7 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
     default:
       {
 	m_ui.display->click();
+	break;
       }
     }
 }
@@ -1585,6 +1587,7 @@ void dooble_settings::slot_apply(void)
       default:
 	{
 	  s_settings["theme_color"] = "blue-grey";
+	  break;
 	}
       }
   }

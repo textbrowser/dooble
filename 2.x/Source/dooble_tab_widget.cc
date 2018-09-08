@@ -235,8 +235,9 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
   if(dooble::s_application->style_name() == "fusion" ||
      dooble::s_application->style_name() == "windows")
     {
-      QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->
-	styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar);
+      QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+	(style()->
+	 styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar));
 
       side = (side == QTabBar::LeftSide) ?
 	QTabBar::RightSide : QTabBar::LeftSide;
@@ -261,8 +262,9 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
   else
     {
 #ifdef Q_OS_MACOS
-      QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->
-	styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar);
+      QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+	(style()->
+	 styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar));
 
       side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide :
 	QTabBar::RightSide;
@@ -303,8 +305,10 @@ void dooble_tab_widget::slot_load_finished(void)
   if(!page)
     return;
 
-  QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
-    (QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar);
+  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+    (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
+			nullptr,
+			m_tab_bar));
   int index = indexOf(page);
 
 #ifdef Q_OS_MACOS
@@ -345,8 +349,10 @@ void dooble_tab_widget::slot_load_finished(void)
 
 void dooble_tab_widget::slot_load_started(void)
 {
-  QTabBar::ButtonPosition side = (QTabBar::ButtonPosition) style()->styleHint
-    (QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar);
+  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+    (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
+			nullptr,
+			m_tab_bar));
   int index = indexOf(qobject_cast<QWidget *> (sender()));
 
 #ifdef Q_OS_MACOS
