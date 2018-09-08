@@ -740,7 +740,6 @@ void dooble_cookies_window::slot_toggle_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QTreeWidgetItem *> list;
   bool state = m_ui.toggle_shown->property("state").toBool();
 
   m_ui.toggle_shown->setProperty("state", !state);
