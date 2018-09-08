@@ -76,14 +76,12 @@ QStringList dooble_web_engine_page::chooseFiles
 							     tr("Select File"),
 							     QDir::homePath(),
 							     oldFiles.first());
-	break;
       }
     case QWebEnginePage::FileSelectOpenMultiple:
       {
 	return QFileDialog::getOpenFileNames(view(),
 					     tr("Select Files"),
 					     QDir::homePath());
-	break;
       }
     }
 
