@@ -54,7 +54,6 @@ protected:
     if(option.state & QStyle::State_MouseOver)
       {
 	QBrush backgroundBrush(QColor("#cfd8dc"));
-	QPalette palette(option.palette);
 	QRect rect(option.rect);
 
 	painter->save();
