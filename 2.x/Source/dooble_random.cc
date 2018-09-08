@@ -73,11 +73,11 @@ QByteArray dooble_random::random_bytes(int length)
 
   HCRYPTPROV h_crypt_prov = 0;
 
-  if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, PROV_RSA_FULL, 0))
+  if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, PROV_RSA_FULL, nullptr))
     {
-      BYTE *data = new BYTE[length];
+      BYTE *data = new BYTE[static_cast<size_t> (length)];
 
-      if(CryptGenRandom(h_crypt_prov, length, data))
+      if(CryptGenRandom(h_crypt_prov, static_cast<size_t> (length), data))
 	/*
 	** msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).
 	** aspx
