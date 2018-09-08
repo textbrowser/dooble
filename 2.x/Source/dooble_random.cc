@@ -73,7 +73,7 @@ QByteArray dooble_random::random_bytes(int length)
 
   HCRYPTPROV h_crypt_prov = 0;
 
-  if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, PROV_RSA_FULL, nullptr))
+  if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, PROV_RSA_FULL, NULL))
     {
       BYTE *data = new BYTE[static_cast<size_t> (length)];
 
