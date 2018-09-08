@@ -1984,7 +1984,8 @@ void dooble_settings::slot_populate(void)
 	      count_1 += 1;
 	      s_site_features_permissions.insert
 		(url,
-		 QPair<int, bool> (data1.toInt(), data2 == "true" ? 1 : 0));
+		 QPair<int, bool> (data1.toInt(),
+				   data2 == "true" ? true : false));
 	    }
 
 	if(query.exec("SELECT state, url, OID "
