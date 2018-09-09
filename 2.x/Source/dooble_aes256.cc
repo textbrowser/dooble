@@ -142,6 +142,7 @@ dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
   m_state[1][0] = m_state[1][1] = m_state[1][2] = m_state[1][3] = 0;
   m_state[2][0] = m_state[2][1] = m_state[2][2] = m_state[2][3] = 0;
   m_state[3][0] = m_state[3][1] = m_state[3][2] = m_state[3][3] = 0;
+  memset(m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
   key_expansion();
 }
 
