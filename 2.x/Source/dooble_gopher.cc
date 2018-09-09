@@ -151,7 +151,7 @@ dooble_gopher_implementation::dooble_gopher_implementation
 	  SIGNAL(readyRead(void)),
 	  this,
 	  SLOT(slot_ready_read(void)));
-  connectToHost(m_url.host(), m_url.port());
+  connectToHost(m_url.host(), static_cast<quint16> (m_url.port()));
 }
 
 dooble_gopher_implementation::~dooble_gopher_implementation()

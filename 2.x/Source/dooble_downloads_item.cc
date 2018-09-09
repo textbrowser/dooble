@@ -364,7 +364,7 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
   if((seconds = qAbs(m_last_time.secsTo(QTime::currentTime()))) >= 1)
     {
       if(bytes_received > m_last_bytes_received)
-	if(200.0 * qAbs(m_rate -
+	if(200.0 * qAbs(static_cast<double> (m_rate) -
 			static_cast<double> (bytes_received -
 					     m_last_bytes_received) /
 			static_cast<double> (seconds))
@@ -372,9 +372,9 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 		  static_cast<double> (m_rate) +
 		  static_cast<double> (bytes_received - m_last_bytes_received) /
 		  static_cast<double> (seconds)) >= 1.0)
-	  m_rate =
-	    static_cast<double> (bytes_received - m_last_bytes_received) /
-	    static_cast<double> (seconds);
+	  m_rate = static_cast<qintptr>
+	    (static_cast<double> (bytes_received - m_last_bytes_received) /
+	     static_cast<double> (seconds));
 
       m_last_bytes_received = bytes_received;
       m_last_time = QTime::currentTime();

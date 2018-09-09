@@ -154,6 +154,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     default:
       {
 	emit create_tab(view);
+	break;
       }
     }
 
