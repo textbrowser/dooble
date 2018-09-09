@@ -227,7 +227,7 @@ QByteArray dooble_aes256::decrypt_block(const QByteArray &block)
   QByteArray b(block);
 
   if(b.length() < 16)
-    b.append(16 - b.length(), 16 - b.length());
+    b.append(16 - b.length(), static_cast<char> (16 - b.length()));
   else
     b.resize(16);
 
@@ -354,7 +354,7 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   QByteArray b(block);
 
   if(b.length() < 16)
-    b.append(16 - b.length(), 16 - b.length());
+    b.append(16 - b.length(), static_cast<char> (16 - b.length()));
   else
     b.resize(16);
 
@@ -408,7 +408,7 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
 
 uint8_t dooble_aes256::xtime(uint8_t x)
 {
-  return (x << 1) ^ (((x >> 7) & 1) * 0x1b);
+  return static_cast<uint8_t> ((x << 1) ^ (((x >> 7) & 1) * 0x1b));
 }
 
 uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y)
@@ -780,7 +780,8 @@ void dooble_aes256::test1_key_expansion(void)
 	std::cout << "i = " << i << " ";
 
 	for(size_t j = 0; j < 4; j++)
-	  std::cout << QByteArray(1, aes256.m_round_key[i][j]).toHex().
+	  std::cout << QByteArray
+	    (1, static_cast<char> (aes256.m_round_key[i][j])).toHex().
 	    toStdString();
 
 	std::cout << std::endl;
