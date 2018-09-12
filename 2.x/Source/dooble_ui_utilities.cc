@@ -34,7 +34,7 @@
 #include "dooble_application.h"
 #include "dooble_ui_utilities.h"
 
-QString dooble_ui_utilities::pretty_size(qintptr size)
+QString dooble_ui_utilities::pretty_size(qint64 size)
 {
   if(size < 0)
     return QObject::tr("0 Bytes");
@@ -52,7 +52,7 @@ QString dooble_ui_utilities::pretty_size(qintptr size)
     return QString(QObject::tr("%1 MiB")).arg
       (QString::number(static_cast<double> (size) / 1048576.0, 'f', 1));
   return QString(QObject::tr("%1 GiB")).arg
-    (QString::number(static_cast<double> (size) / 1073741824, 'f', 1));
+    (QString::number(static_cast<double> (size) / 1073741824.0, 'f', 1));
 }
 
 QUrl dooble_ui_utilities::simplified_url(const QUrl &url)

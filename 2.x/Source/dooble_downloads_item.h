@@ -68,20 +68,16 @@ class dooble_downloads_item: public QWidget
   QString m_file_name;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
+  qint64 m_last_bytes_received;
+  qint64 m_rate;
   qintptr m_oid;
-  qintptr m_last_bytes_received;
-  qintptr m_rate;
   void prepare_icons(void);
   void record(void);
   void record_information(void);
 
  private slots:
   void slot_cancel(void);
-#if QT_POINTER_SIZE == 4
-  void slot_download_progress(qint32 bytes_received, qint32 bytes_total);
-#else
   void slot_download_progress(qint64 bytes_received, qint64 bytes_total);
-#endif
   void slot_finished(void);
   void slot_pause_or_resume(void);
   void slot_reload(void);
