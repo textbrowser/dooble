@@ -40,13 +40,19 @@ int dooble_cryptography::s_encryption_key_length = 32;
 dooble_cryptography::dooble_cryptography
 (const QByteArray &authentication_key,
  const QByteArray &encryption_key,
- const QString &block_cipher_type):QObject()
+ const QString &block_cipher_type,
+ const QString &hash_type):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = authentication_key;
   m_block_cipher_type = block_cipher_type.toLower().trimmed();
   m_encryption_key = encryption_key;
+
+  if(hash_type.toLower().trimmed() == "keccak-512")
+    m_hash_type = KECCAK_512;
+  else
+    m_hash_type = SHA3_512;
 
   if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
     {
@@ -57,7 +63,8 @@ dooble_cryptography::dooble_cryptography
     }
 }
 
-dooble_cryptography::dooble_cryptography(const QString &block_cipher_type):
+dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
+					 const QString &hash_type):
   QObject()
 {
   m_as_plaintext = false;
@@ -66,6 +73,11 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type):
     (s_authentication_key_length);
   m_block_cipher_type = block_cipher_type.toLower().trimmed();
   m_encryption_key = dooble_random::random_bytes(s_encryption_key_length);
+
+  if(hash_type.toLower().trimmed() == "keccak-512")
+    m_hash_type = KECCAK_512;
+  else
+    m_hash_type = SHA3_512;
 }
 
 dooble_cryptography::~dooble_cryptography()
@@ -106,7 +118,15 @@ QByteArray dooble_cryptography::hmac(const QByteArray &message) const
   if(m_as_plaintext)
     return message;
   else
-    return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
+    {
+      switch(m_hash_type)
+	{
+	case KECCAK_512:
+	  return dooble_hmac::keccak_512_hmac(m_authentication_key, message);
+	default:
+	  return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
+	}
+    }
 }
 
 QByteArray dooble_cryptography::hmac(const QString &message) const
@@ -114,7 +134,17 @@ QByteArray dooble_cryptography::hmac(const QString &message) const
   if(m_as_plaintext)
     return message.toUtf8();
   else
-    return dooble_hmac::sha3_512_hmac(m_authentication_key, message.toUtf8());
+    {
+      switch(m_hash_type)
+	{
+	case KECCAK_512:
+	  return dooble_hmac::keccak_512_hmac
+	    (m_authentication_key, message.toUtf8());
+	default:
+	  return dooble_hmac::sha3_512_hmac
+	    (m_authentication_key, message.toUtf8());
+	}
+    }
 }
 
 QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
@@ -184,9 +214,23 @@ void dooble_cryptography::authenticate(const QByteArray &salt,
 				       const QByteArray &salted_password,
 				       const QString &password)
 {
-  QByteArray hash
-    (QCryptographicHash::hash(password.toUtf8() + salt,
-			      QCryptographicHash::Sha3_512));
+  QByteArray hash;
+
+  switch(m_hash_type)
+    {
+    case KECCAK_512:
+      {
+	hash = QCryptographicHash::hash
+	  (password.toUtf8() + salt, QCryptographicHash::Keccak_512);
+	break;
+      }
+    default:
+      {
+	hash = QCryptographicHash::hash
+	  (password.toUtf8() + salt, QCryptographicHash::Sha3_512);
+	break;
+      }
+    }
 
   m_authenticated = memcmp(hash, salted_password);
 }
@@ -212,6 +256,14 @@ void dooble_cryptography::set_block_cipher_type
 (const QString &block_cipher_type_index)
 {
   m_block_cipher_type = block_cipher_type_index.toLower().trimmed();
+}
+
+void dooble_cryptography::set_hash_type(const QString &hash_type)
+{
+  if(hash_type.toLower().trimmed() == "keccak-512")
+    m_hash_type = KECCAK_512;
+  else
+    m_hash_type = SHA3_512;
 }
 
 void dooble_cryptography::set_keys(const QByteArray &authentication_key,

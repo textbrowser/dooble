@@ -37,12 +37,20 @@ class dooble_cryptography: public QObject
   Q_OBJECT
 
  public:
+  enum HashTypes
+  {
+    KECCAK_512,
+    SHA3_512
+  };
+
   static int s_authentication_key_length;
   static int s_encryption_key_length;
   dooble_cryptography(const QByteArray &authentication_key,
 		      const QByteArray &encryption_key,
-		      const QString &block_cipher_type);
-  dooble_cryptography(const QString &block_cipher_type);
+		      const QString &block_cipher_type,
+		      const QString &hash_type);
+  dooble_cryptography(const QString &block_cipher_type,
+		      const QString &hash_type);
   ~dooble_cryptography();
   QByteArray encrypt_then_mac(const QByteArray &data) const;
   QByteArray hmac(const QByteArray &message) const;
@@ -59,10 +67,12 @@ class dooble_cryptography: public QObject
 		    const QString &password);
   void set_authenticated(bool state);
   void set_block_cipher_type(const QString &block_cipher_type);
+  void set_hash_type(const QString &hash_type);
   void set_keys(const QByteArray &authentication_key,
 		const QByteArray &encryption_key);
 
  private:
+  HashTypes m_hash_type;
   QByteArray m_authentication_key;
   QByteArray m_encryption_key;
   QString m_block_cipher_type;

@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>764</height>
+           <height>762</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -723,7 +723,7 @@
                <x>0</x>
                <y>0</y>
                <width>451</width>
-               <height>746</height>
+               <height>744</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -849,9 +849,17 @@
                    </item>
                    <item row="0" column="4">
                     <widget class="QComboBox" name="hash">
+                     <property name="currentIndex">
+                      <number>1</number>
+                     </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>Keccak-512</string>
+                      </property>
+                     </item>
                      <item>
                       <property name="text">
                        <string>SHA3-512</string>
@@ -1221,9 +1229,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-274</y>
+               <y>0</y>
                <width>437</width>
-               <height>1020</height>
+               <height>988</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">

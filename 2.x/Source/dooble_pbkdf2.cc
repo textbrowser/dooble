@@ -37,10 +37,12 @@ dooble_pbkdf2::dooble_pbkdf2
 (const QByteArray &password,
  const QByteArray &salt,
  int block_cipher_type_index,
+ int hash_type_index,
  int iterations_count,
  int output_size):QObject()
 {
   m_block_cipher_type_index = qBound(0, block_cipher_type_index, 1);
+  m_hash_type_index = qBound(0, hash_type_index, 1);
   m_interrupt.store(0);
   m_iteration_count = qAbs(iterations_count);
   m_output_size = dooble_hmac::preferred_output_size_in_bits() *
@@ -75,7 +77,6 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
 QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 {
   if(function == nullptr ||
-     m_block_cipher_type_index < 0 || m_block_cipher_type_index > 1 ||
      m_iteration_count == 0 ||
      m_output_size == 0 ||
      m_password.isEmpty() ||
@@ -138,6 +139,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
   else
     return QList<QByteArray> () << bytes
 				<< QByteArray::number(m_block_cipher_type_index)
+				<< QByteArray::number(m_hash_type_index)
 				<< QByteArray::number(m_iteration_count)
 				<< m_password
 				<< m_salt;
@@ -156,6 +158,7 @@ void dooble_pbkdf2::test1(void)
 
   dooble_pbkdf2 pbkdf2("passwordPASSWORDpassword",
 		       "saltSALTsaltSALTsaltSALTsaltSALTsalt",
+		       0,
 		       0,
 		       4096,
 		       512);

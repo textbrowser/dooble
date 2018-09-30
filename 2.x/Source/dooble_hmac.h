@@ -33,6 +33,8 @@
 class dooble_hmac
 {
  public:
+  static QByteArray keccak_512_hmac(const QByteArray &key,
+				    const QByteArray &message);
   static QByteArray sha2_512_hmac(const QByteArray &key,
 				  const QByteArray &message);
   static QByteArray sha3_512_hmac(const QByteArray &key,

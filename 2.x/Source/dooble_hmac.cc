@@ -30,6 +30,13 @@
 
 #include "dooble_hmac.h"
 
+QByteArray dooble_hmac::keccak_512_hmac(const QByteArray &key,
+					const QByteArray &message)
+{
+  return QCryptographicHash::hash
+    (key + message, QCryptographicHash::Keccak_512);
+}
+
 QByteArray dooble_hmac::sha2_512_hmac(const QByteArray &key,
 				      const QByteArray &message)
 {

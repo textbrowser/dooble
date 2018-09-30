@@ -655,10 +655,11 @@ void dooble::initialize_static_members(void)
     {
       if(dooble_settings::setting("credentials_enabled").toBool())
 	s_cryptography = new dooble_cryptography
-	  (dooble_settings::setting("block_cipher_type").toString());
+	  (dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("hash_type").toString());
       else
 	s_cryptography = new dooble_cryptography
-	  (QByteArray(), QByteArray(), "AES-256");
+	  (QByteArray(), QByteArray(), "AES-256", "SHA3-512");
     }
 
   if(!s_downloads)
@@ -1637,6 +1638,7 @@ void dooble::slot_authenticate(void)
       QString text(ui.password->text());
       int block_cipher_type_index = dooble_settings::setting
 	("block_cipher_type_index").toInt();
+      int hash_type_index = dooble_settings::setting("hash_type_index").toInt();
       int iteration_count = dooble_settings::setting
 	("authentication_iteration_count").toInt();
 
@@ -1660,13 +1662,31 @@ void dooble::slot_authenticate(void)
 	  pbkdf2.reset(new dooble_pbkdf2(text.toUtf8(),
 					 salt,
 					 block_cipher_type_index,
+					 hash_type_index,
 					 iteration_count,
 					 1024));
 	  dooble_cryptography::memzero(text);
-	  m_pbkdf2_future = QtConcurrent::run
-	    (pbkdf2.data(),
-	     &dooble_pbkdf2::pbkdf2,
-	     &dooble_hmac::sha3_512_hmac);
+
+	  switch(hash_type_index)
+	    {
+	    case 0: // Keccak-512
+	      {
+		m_pbkdf2_future = QtConcurrent::run
+		  (pbkdf2.data(),
+		   &dooble_pbkdf2::pbkdf2,
+		   &dooble_hmac::keccak_512_hmac);
+		break;
+	      }
+	    default: // SHA3-512
+	      {
+		m_pbkdf2_future = QtConcurrent::run
+		  (pbkdf2.data(),
+		   &dooble_pbkdf2::pbkdf2,
+		   &dooble_hmac::sha3_512_hmac);
+		break;
+	      }
+	    }
+
 	  m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
 	  connect(m_pbkdf2_dialog,
 		  SIGNAL(canceled(void)),
@@ -1962,25 +1982,31 @@ void dooble::slot_pbkdf2_future_finished(void)
       /*
       ** list[0] - Keys
       ** list[1] - Block Cipher Type
-      ** list[2] - Iteration Count
-      ** list[3] - Password
-      ** list[4] - Salt
+      ** list[2] - Hash Type
+      ** list[3] - Iteration Count
+      ** list[4] - Password
+      ** list[5] - Salt
       */
 
-      if(!list.isEmpty())
+      if(list.size() == 6)
 	{
 	  s_cryptography->set_authenticated(true);
 
-	  if(list.value(1).toInt() == 0)
+	  if(list.at(1).toInt() == 0)
 	    s_cryptography->set_block_cipher_type("AES-256");
 	  else
 	    s_cryptography->set_block_cipher_type("Threefish-256");
 
+	  if(list.at(2).toInt() == 0)
+	    s_cryptography->set_hash_type("Keccak-512");
+	  else
+	    s_cryptography->set_hash_type("SHA3-512");
+
 	  QByteArray authentication_key
-	    (list.value(0).
+	    (list.at(0).
 	     mid(0, dooble_cryptography::s_authentication_key_length));
 	  QByteArray encryption_key
-	    (list.value(0).
+	    (list.at(0).
 	     mid(dooble_cryptography::s_authentication_key_length,
 		 dooble_cryptography::s_encryption_key_length));
 

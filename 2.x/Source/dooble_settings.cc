@@ -246,6 +246,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["do_not_track"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["features_permissions"] = true;
+  s_settings["hash_type"] = "SHA3-512";
+  s_settings["hash_type_index"] = 1;
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
@@ -890,6 +892,10 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("do_not_track", true).toBool());
   m_ui.features_permissions_groupbox->setChecked
     (s_settings.value("features_permissions", true).toBool());
+  m_ui.hash->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("hash_type_index", 1).toInt(), // SHA3-512
+	    m_ui.hash->count() - 1));
   m_ui.icon_set->setCurrentIndex
     (qBound(0,
 	    s_settings.value("icon_set_index", 0).toInt(),
@@ -968,6 +974,11 @@ void dooble_settings::restore(bool read_database)
     s_settings["block_cipher_type"] = "AES-256";
   else
     s_settings["block_cipher_type"] = "Threefish-256";
+
+  if(m_ui.hash->currentIndex() == 0)
+    s_settings["hash_type"] = "Keccak-512";
+  else
+    s_settings["hash_type"] = "SHA3-512";
 
   s_settings["icon_set"] = "Material Design";
 
@@ -1438,6 +1449,7 @@ void dooble_settings::slot_apply(void)
       */
 
       m_ui.cipher->setCurrentIndex(0);
+      m_ui.hash->setCurrentIndex(1); // SHA3-512
       m_ui.iterations->setValue(m_ui.iterations->minimum());
       m_ui.reset_credentials->setEnabled(false);
 
@@ -1451,15 +1463,20 @@ void dooble_settings::slot_apply(void)
       remove_setting("authentication_salted_password");
       remove_setting("block_cipher_type");
       remove_setting("block_cipher_type_index");
+      remove_setting("hash_type");
+      remove_setting("hash_type_index");
 
       {
 	QWriteLocker locker(&s_settings_mutex);
 
 	s_settings["block_cipher_type"] = "AES-256";
 	s_settings["block_cipher_type_index"] = 0;
+	s_settings["hash_type"] = "SHA3-512";
+	s_settings["hash_type_index"] = 1;
       }
 
       dooble::s_cryptography->set_block_cipher_type("AES-256");
+      dooble::s_cryptography->set_hash_type("SHA3-512");
 
       if(m_ui.credentials->isChecked())
 	{
@@ -1783,33 +1800,46 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
       QString error("");
       bool ok = true;
 
-      if(!list.isEmpty())
+      if(list.size() == 6)
 	{
+	  /*
+	  ** list[0] - Keys
+	  ** list[1] - Block Cipher Type Index
+	  ** list[2] - Hash Type Index
+	  ** list[3] - Iteration Count
+	  ** list[4] - Password
+	  ** list[5] - Salt
+	  */
+
 	  if(!set_setting("authentication_iteration_count",
-			  list.value(2).toInt()))
+			  list.at(3).toInt()))
 	    {
 	      error = "set_setting('authentication_iteration_count') failure";
 	      ok = false;
 	    }
 
-	  if(ok && !set_setting("authentication_salt", list.value(4).toHex()))
+	  if(ok && !set_setting("authentication_salt", list.at(5).toHex()))
 	    {
 	      error = "set_setting('authentication_salt') failure";
 	      ok = false;
 	    }
 
+	  QCryptographicHash::Algorithm algorithm =
+	    QCryptographicHash::Sha3_512;
+
+	  if(list.at(2).toInt() == 0)
+	    algorithm = QCryptographicHash::Keccak_512;
+
 	  if(ok && !set_setting("authentication_salted_password",
-				QCryptographicHash::hash(list.value(3) +
-							 list.value(4),
-							 QCryptographicHash::
-							 Sha3_512).toHex()))
+				QCryptographicHash::hash(list.at(4) +
+							 list.at(5),
+							 algorithm).toHex()))
 	    {
 	      error = "set_setting('authentication_salted_password') failure";
 	      ok = false;
 	    }
 
-	  if(ok &&
-	     !set_setting("block_cipher_type_index", list.value(1).toInt()))
+	  if(ok && !set_setting("block_cipher_type_index", list.at(1).toInt()))
 	    {
 	      error = "set_setting('block_cipher_type_index') failure";
 	      ok = false;
@@ -1821,40 +1851,60 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      ok = false;
 	    }
 
-	  /*
-	  ** list[0] - Keys
-	  ** list[1] - Block Cipher Type
-	  ** list[2] - Iteration Count
-	  ** list[3] - Password
-	  ** list[4] - Salt
-	  */
+	  if(ok && !set_setting("hash_type_index", list.at(2).toInt()))
+	    {
+	      error = "set_setting('hash_type_index') failure";
+	      ok = false;
+	    }
 
 	  if(ok)
 	    {
 	      QWriteLocker locker(&s_settings_mutex);
 
-	      if(list.value(1).toInt() == 0)
+	      if(list.at(1).toInt() == 0)
 		s_settings["block_cipher_type"] = "AES-256";
 	      else
 		s_settings["block_cipher_type"] = "Threefish-256";
+
+	      if(list.at(2).toInt() == 0)
+		s_settings["hash_type"] = "Keccak-512";
+	      else
+		s_settings["hash_type"] = "SHA3-512";
 	    }
 	  else
 	    {
 	      remove_setting("authentication_iteration_count");
 	      remove_setting("authentication_salt");
 	      remove_setting("authentication_salted_password");
+	      remove_setting("block_cipher_type");
 	      remove_setting("block_cipher_type_index");
 	      remove_setting("credentials_enabled");
+	      remove_setting("hash_type");
+	      remove_setting("hash_type_index");
+
+	      {
+		QWriteLocker locker(&s_settings_mutex);
+
+		s_settings["block_cipher_type"] = "AES-256";
+		s_settings["block_cipher_type_index"] = 0;
+		s_settings["hash_type"] = "SHA3-512";
+		s_settings["hash_type_index"] = 1;
+	      }
 	    }
 
 	  if(ok)
 	    {
 	      dooble::s_cryptography->set_authenticated(true);
 
-	      if(list.value(1).toInt() == 0)
+	      if(list.at(1).toInt() == 0)
 		dooble::s_cryptography->set_block_cipher_type("AES-256");
 	      else
 		dooble::s_cryptography->set_block_cipher_type("Threefish-256");
+
+	      if(list.at(2).toInt() == 0)
+		dooble::s_cryptography->set_hash_type("Keccak-512");
+	      else
+		dooble::s_cryptography->set_hash_type("SHA3-512");
 
 	      QByteArray authentication_key
 		(list.value(0).
@@ -2395,6 +2445,7 @@ void dooble_settings::slot_reset_credentials(void)
   */
 
   m_ui.cipher->setCurrentIndex(0);
+  m_ui.hash->setCurrentIndex(1); // SHA3-512
   m_ui.iterations->setValue(m_ui.iterations->minimum());
   m_ui.reset_credentials->setEnabled(false);
 
@@ -2408,6 +2459,17 @@ void dooble_settings::slot_reset_credentials(void)
   remove_setting("authentication_salted_password");
   remove_setting("block_cipher_type");
   remove_setting("block_cipher_type_index");
+  remove_setting("hash_type");
+  remove_setting("hash_type_index");
+
+  {
+    QWriteLocker locker(&s_settings_mutex);
+
+    s_settings["block_cipher_type"] = "AES-256";
+    s_settings["block_cipher_type_index"] = 0;
+    s_settings["hash_type"] = "SHA3-512";
+    s_settings["hash_type_index"] = 1;
+  }
 
   /*
   ** Generate temporary credentials.
@@ -2421,6 +2483,7 @@ void dooble_settings::slot_reset_credentials(void)
 
   dooble::s_cryptography->set_authenticated(false);
   dooble::s_cryptography->set_block_cipher_type("AES-256");
+  dooble::s_cryptography->set_hash_type("SHA3-512");
   dooble::s_cryptography->set_keys(authentication_key, encryption_key);
   dooble_cryptography::memzero(authentication_key);
   dooble_cryptography::memzero(encryption_key);
@@ -2504,10 +2567,17 @@ void dooble_settings::slot_save_credentials(void)
   pbkdf2.reset(new dooble_pbkdf2(password1.toUtf8(),
 				 salt,
 				 m_ui.cipher->currentIndex(),
+				 m_ui.hash->currentIndex(),
 				 m_ui.iterations->value(),
 				 1024));
-  m_pbkdf2_future = QtConcurrent::run
-    (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::sha3_512_hmac);
+
+  if(m_ui.hash->currentIndex() == 0)
+    m_pbkdf2_future = QtConcurrent::run
+      (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::keccak_512_hmac);
+  else
+    m_pbkdf2_future = QtConcurrent::run
+      (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::sha3_512_hmac);
+
   m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
   connect(m_pbkdf2_dialog,
 	  SIGNAL(canceled(void)),

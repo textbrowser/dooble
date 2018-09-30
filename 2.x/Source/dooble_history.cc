@@ -130,7 +130,8 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
-	   dooble_settings::setting("block_cipher_type").toString());
+	   dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("hash_type").toString());
 	int days = dooble_settings::setting("browsing_history_days").toInt();
 
 	query.setForwardOnly(true);
@@ -288,7 +289,8 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
-	   dooble_settings::setting("block_cipher_type").toString());
+	   dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("hash_type").toString());
 
 	query.setForwardOnly(true);
 	query.exec("SELECT last_visited, url, url_digest "
