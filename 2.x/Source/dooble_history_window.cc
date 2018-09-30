@@ -777,6 +777,7 @@ void dooble_history_window::slot_populate(void)
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_item_changed(QTableWidgetItem *)));
+  prepare_viewport_icons();
   QApplication::restoreOverrideCursor();
 }
 
