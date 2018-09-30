@@ -181,3 +181,4 @@ Unknown Items
 12.    The random-bytes implementation uses a deprecated
        interface on Windows.
 13.    Element-selection option.
+14.    KMAC vs. HMAC.
