@@ -156,6 +156,7 @@
 2.1.9.4 Completed Items
 
 1.     Replace fixed loops in AES.
+2.     Document the Microsoft Studio compilation process.
 
 2.2 Remaining Items
 
@@ -169,7 +170,7 @@ Unknown Items
 1.     Optional Document Mode.
 2.     Print preview. Qt?
 3.     Custom icon sets.
-4.     Document the Microsoft Studio compilation process.
+4.     KMAC vs. HMAC.
 5.     Super-fancy icon set.
 6.     JavaScript window.print() is not supported.
 7.     Multiple certificate exceptions.
@@ -181,4 +182,3 @@ Unknown Items
 12.    The random-bytes implementation uses a deprecated
        interface on Windows.
 13.    Element-selection option.
-14.    KMAC vs. HMAC.
