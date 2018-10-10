@@ -2604,19 +2604,19 @@ void dooble::slot_warn_of_missing_sqlite_driver(void)
 
 void dooble::slot_window_close_requested(void)
 {
+  if(m_ui.tab->count() <= 1)
+    {
+      close();
+      return;
+    }
+
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
     return;
 
   m_ui.tab->removeTab(m_ui.tab->indexOf(page));
-
-  if(m_ui.tab->count() <= 1)
-    close();
-  else
-    {
-      m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
-      page->deleteLater();
-      prepare_tab_shortcuts();
-    }
+  m_ui.tab->setTabsClosable(m_ui.tab->count() > 0);
+  page->deleteLater();
+  prepare_tab_shortcuts();
 }
