@@ -167,8 +167,6 @@ bool dooble_web_engine_page::certificateError
 		  SLOT(setEnabled(bool)));
 	}
 
-      m_certificate_error_widget->resize(view()->size());
-      m_certificate_error_widget->setVisible(true);
       m_ui.accept->setEnabled(false);
       m_ui.confirm_exception->setChecked(false);
 
@@ -196,6 +194,8 @@ bool dooble_web_engine_page::certificateError
 
       layout->removeWidget(m_certificate_error_widget);
       layout->addWidget(m_certificate_error_widget);
+      m_certificate_error_widget->resize(view()->size());
+      m_certificate_error_widget->setVisible(true);
     }
   else
     {
@@ -230,8 +230,6 @@ bool dooble_web_engine_page::certificateError
 		  SLOT(setEnabled(bool)));
 	}
 
-      m_certificate_error_widget->resize(view()->size());
-      m_certificate_error_widget->setVisible(true);
       m_ui.accept->setVisible(false);
       m_ui.confirm_exception->setVisible(false);
       m_ui.label->setText
@@ -245,6 +243,8 @@ bool dooble_web_engine_page::certificateError
 	 arg(certificateError.errorDescription()));
       layout->removeWidget(m_certificate_error_widget);
       layout->addWidget(m_certificate_error_widget);
+      m_certificate_error_widget->resize(view()->size());
+      m_certificate_error_widget->setVisible(true);
     }
 
   return false;
