@@ -1099,9 +1099,11 @@ void dooble_settings::restore(bool read_database)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly,
      m_ui.webrtc_public_interfaces_only->isChecked());
+#endif
 #endif
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
@@ -1564,9 +1566,11 @@ void dooble_settings::slot_apply(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly,
      m_ui.webrtc_public_interfaces_only->isChecked());
+#endif
 #endif
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
