@@ -437,6 +437,7 @@ void dooble_downloads_item::slot_finished(void)
 void dooble_downloads_item::slot_pause_or_resume(void)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   if(m_download)
     {
       if(m_download->isPaused())
@@ -459,6 +460,7 @@ void dooble_downloads_item::slot_pause_or_resume(void)
 	  m_ui.pause_resume->setToolTip(tr("Pause"));
 	}
     }
+#endif
 #endif
 }
 
