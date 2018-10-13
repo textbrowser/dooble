@@ -187,7 +187,7 @@ doxygen.commands = doxygen dooble.doxygen
 }
 
 CONFIG		+= qt release warn_on
-DEFINES         += DOOBLE_FREEBSD_WEBENGINE_MISMATCH QT_DEPRECATED_WARNINGS
+DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent gui network printsupport sql \
 	           webenginewidgets widgets xml
@@ -196,6 +196,7 @@ TEMPLATE	= app
 QMAKE_CLEAN     += Dooble
 
 freebsd-* {
+DEFINES += DOOBLE_FREEBSD_WEBENGINE_MISMATCH
 QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
 			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
