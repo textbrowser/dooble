@@ -187,7 +187,7 @@ doxygen.commands = doxygen dooble.doxygen
 }
 
 CONFIG		+= qt release warn_on
-DEFINES         += QT_DEPRECATED_WARNINGS
+DEFINES         += DOOBLE_FREEBSD_WEBENGINE_MISMATCH QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent gui network printsupport sql \
 	           webenginewidgets widgets xml

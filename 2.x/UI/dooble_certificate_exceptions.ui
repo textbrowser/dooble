@@ -71,6 +71,79 @@
      </widget>
     </item>
     <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Add</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="url">
+         <property name="placeholderText">
+          <string>URL</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QComboBox" name="error">
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToContents</enum>
+           </property>
+           <item>
+            <property name="text">
+             <string>Server's certificate does not match the URL. </string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Server's certificate has expired.</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Server's certificate is not trusted.</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>The server's certificate was not disclosed via Certificate Transparency.</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="add">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="reset">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Reset</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="dooble_search_widget" name="search">
@@ -116,6 +189,10 @@
  </customwidgets>
  <tabstops>
   <tabstop>table</tabstop>
+  <tabstop>url</tabstop>
+  <tabstop>error</tabstop>
+  <tabstop>add</tabstop>
+  <tabstop>reset</tabstop>
   <tabstop>search</tabstop>
   <tabstop>delete_selected</tabstop>
  </tabstops>

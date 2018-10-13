@@ -32,6 +32,7 @@
 
 #include "dooble.h"
 #include "dooble_certificate_exceptions.h"
+#include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
 #include "dooble_settings.h"
@@ -45,10 +46,18 @@ dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_search_timer_timeout(void)));
+  connect(m_ui.add,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_add(void)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_delete_selected(void)));
+  connect(m_ui.reset,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reset(void)));
   connect(m_ui.search,
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
@@ -174,6 +183,12 @@ void dooble_certificate_exceptions::showNormal(void)
 			      toByteArray()));
 
   QMainWindow::showNormal();
+}
+
+void dooble_certificate_exceptions::slot_add(void)
+{
+  dooble_certificate_exceptions_menu_widget::exception_accepted
+    (m_ui.error->currentText(), QUrl::fromUserInput(m_ui.url->text()));
 }
 
 void dooble_certificate_exceptions::slot_delete_selected(void)
@@ -345,6 +360,13 @@ void dooble_certificate_exceptions::slot_populate(void)
     (0, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   QApplication::restoreOverrideCursor();
   emit populated();
+}
+
+void dooble_certificate_exceptions::slot_reset(void)
+{
+  m_ui.error->setCurrentIndex(0);
+  m_ui.url->clear();
+  m_ui.url->setFocus();
 }
 
 void dooble_certificate_exceptions::slot_search_timer_timeout(void)

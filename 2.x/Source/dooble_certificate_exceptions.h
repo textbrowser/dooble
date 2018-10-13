@@ -58,9 +58,11 @@ class dooble_certificate_exceptions: public QMainWindow
   void save_settings(void);
 
  private slots:
+  void slot_add(void);
   void slot_delete_selected(void);
   void slot_find(void);
   void slot_populate(void);
+  void slot_reset(void);
   void slot_search_timer_timeout(void);
 
  signals:
