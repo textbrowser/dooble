@@ -311,7 +311,9 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 void dooble_web_engine_view::download(const QString &file_name, const QUrl &url)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   m_page->download(url, file_name);
+#endif
 #else
   Q_UNUSED(file_name);
   Q_UNUSED(url);
