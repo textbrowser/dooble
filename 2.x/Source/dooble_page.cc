@@ -1285,6 +1285,7 @@ void dooble_page::slot_feature_permission_requested
   switch(feature)
     {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
     case QWebEnginePage::DesktopAudioVideoCapture:
       {
 	m_ui.feature_permission_url->setText
@@ -1294,7 +1295,9 @@ void dooble_page::slot_feature_permission_requested
 	break;
       }
 #endif
+#endif
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
     case QWebEnginePage::DesktopVideoCapture:
       {
 	m_ui.feature_permission_url->setText
@@ -1302,6 +1305,7 @@ void dooble_page::slot_feature_permission_requested
 	   arg(security_origin.toString()));
 	break;
       }
+#endif
 #endif
     case QWebEnginePage::Geolocation:
       {
