@@ -26,6 +26,7 @@
 */
 
 #include <QDir>
+#include <QElapsedTimer>
 #include <QSplashScreen>
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
 #include <QStyleFactory>
@@ -195,13 +196,18 @@ int main(int argc, char *argv[])
   ** Create a splash screen.
   */
 
+  QElapsedTimer t;
   QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
 
   splash.setEnabled(false);
   splash.show();
   splash.showMessage
     (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
+  t.start();
+
+  while(t.elapsed() < 1000)
+    splash.repaint();
+
   dooble::s_application->processEvents();
 
 #ifdef Q_OS_MACOS
