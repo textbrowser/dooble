@@ -5,13 +5,15 @@
 	<key>CFBundleExecutable</key>
 	<string>Dooble</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Created by Qt/QMake</string>
+	<string>Created by Qt/QMake.</string>
 	<key>CFBundleIconFile</key>
 	<string>dooble.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.Dooble</string>
+	<string>Dooble</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.9.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSMinimumSystemVersion</key>
