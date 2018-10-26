@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>dooble.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>Dooble</string>
+	<string>net.sourceforge.dooble</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
