@@ -747,24 +747,27 @@ PROJECTNAME	= Dooble
 TARGET		= Dooble
 
 macx {
-copydata.path      = /Applications/Dooble.d/Data
-copydata.files     = Data/*.txt
-copydocumentation.path = /Applications/Dooble.d/Documentation
-copydocumentation.extra = cp ./Documentation/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
-copydooble.path    = /Applications/Dooble.d
-copydooble.extra   = cp -r ./Dooble.app /Applications/Dooble.d/.
-macdeployqt.path   = Dooble.app
-macdeployqt.extra  = $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
-preinstall.path    = /Applications/Dooble.d
-preinstall.extra   = rm -rf /Applications/Dooble.d/Dooble.app
-translations.path  = /Applications/Dooble.d/Translations
-translations.files = Translations/*.qm
+copydata.path		= /Applications/Dooble.d/Data
+copydata.files		= Data/*.txt
+copydocumentation.path	= /Applications/Dooble.d/Documentation
+copydocumentation.extra	= cp ./Documentation/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
+copydooble.path		= /Applications/Dooble.d
+copydooble.extra	= cp -r ./Dooble.app /Applications/Dooble.d/.
+copyinfoplist.path	= /Applications/Dooble.d
+copyinfoplist.extra	= cp Data/Info.plist /Applications/Dooble.d/Dooble.app/Contents/.
+macdeployqt.path	= Dooble.app
+macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
+preinstall.path		= /Applications/Dooble.d
+preinstall.extra	= rm -rf /Applications/Dooble.d/Dooble.app
+translations.path	= /Applications/Dooble.d/Translations
+translations.files	= Translations/*.qm
 
 INSTALLS	= copydata \
                   copydocumentation \
                   preinstall \
                   copydooble \
                   macdeployqt \
+		  copyinfoplist \
                   translations
 }
 
