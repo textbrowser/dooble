@@ -234,6 +234,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
+  s_settings["allow_closing_of_single_tab"] = true;
   s_settings["auto_hide_tab_bar"] = false;
   s_settings["auto_load_images"] = true;
   s_settings["block_cipher_type"] = "AES-256";
@@ -861,6 +862,8 @@ void dooble_settings::restore(bool read_database)
 
   m_ui.access_new_tabs->setChecked
     (s_settings.value("access_new_tabs", true).toBool());
+  m_ui.allow_closing_of_single_tab->setChecked
+    (s_settings.value("allow_closing_of_single_tab", true).toBool());
   m_ui.animated_scrolling->setChecked
     (s_settings.value("animated_scrolling", false).toBool());
   m_ui.automatic_loading_of_images->setChecked
@@ -1641,6 +1644,8 @@ void dooble_settings::slot_apply(void)
 
   prepare_proxy(true);
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
+  set_setting("allow_closing_of_single_tab",
+	      m_ui.allow_closing_of_single_tab->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
   set_setting
     ("auto_load_images", m_ui.automatic_loading_of_images->isChecked());

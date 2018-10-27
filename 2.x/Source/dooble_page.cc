@@ -615,8 +615,14 @@ void dooble_page::prepare_standard_menus(void)
 						QKeySequence(tr("Ctrl+W")));
 
   if(qobject_cast<QStackedWidget *> (parentWidget()))
-    action->setEnabled
-      (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
+    {
+      if(qobject_cast<QStackedWidget *> (parentWidget())->count() == 1)
+	action->setEnabled
+	  (dooble::s_settings->setting("allow_closing_of_single_tab").toBool());
+      else
+	action->setEnabled
+	  (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
+    }
 
   menu->addSeparator();
   menu->addAction(tr("&Save"),
@@ -959,8 +965,15 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 {
   if(m_action_close_tab)
     if(qobject_cast<QStackedWidget *> (parentWidget()))
-      m_action_close_tab->setEnabled
-	(qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
+      {
+	if(qobject_cast<QStackedWidget *> (parentWidget())->count() == 1)
+	  m_action_close_tab->setEnabled
+	    (dooble::s_settings->setting("allow_closing_of_single_tab").
+	     toBool());
+	else
+	  m_action_close_tab->setEnabled
+	    (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
+      }
 
   if(m_full_screen_action)
     {

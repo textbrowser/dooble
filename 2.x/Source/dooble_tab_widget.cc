@@ -461,7 +461,12 @@ void dooble_tab_widget::slot_settings_applied(void)
 void dooble_tab_widget::tabRemoved(int index)
 {
   QTabWidget::tabRemoved(index);
-  setTabsClosable(count() > 0);
+
+  if(count() == 1)
+    setTabsClosable
+      (dooble::s_settings->setting("allow_closing_of_single_tab").toBool());
+  else
+    setTabsClosable(count() > 0);
 
   if(count() == 0)
     /*
