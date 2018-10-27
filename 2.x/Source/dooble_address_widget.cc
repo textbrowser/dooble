@@ -328,12 +328,12 @@ void dooble_address_widget::setText(const QString &text)
       host_format_range.format = format;
       host_format_range.length = host.length();
       host_format_range.start = url.toString().indexOf(host);
-      format.setForeground(QColor("#2962FF"));
+      format.setForeground(QColor("#2962ff"));
       path_format_range.format = format;
       path_format_range.length = path.length();
       path_format_range.start =
 	url.toString().indexOf(path, url.toString().indexOf(host));
-      format.setForeground(QColor("#2962FF"));
+      format.setForeground(QColor("#2962ff"));
       scheme_format_range.format = format;
       scheme_format_range.length = url.toString().indexOf(host);
       scheme_format_range.start = 0;
