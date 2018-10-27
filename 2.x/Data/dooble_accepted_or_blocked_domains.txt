@@ -1,6 +1,4 @@
-101com.com
 101order.com
-123found.com
 123freeavatars.com
 180hits.de
 180searchassistant.com
@@ -119,7 +117,6 @@ ad.nachtagenten.de
 ad.nozonedata.com
 ad.nttnavi.co.jp
 ad.nwt.cz
-ad.onad.eu
 ad.pandora.tv
 ad.period-calendar.com
 ad.preferances.com
@@ -352,7 +349,6 @@ ads.asiafriendfinder.com
 ads.ask.com
 ads.aspalliance.com
 ads.avazu.net
-ads.batpmturner.com
 ads.belointeractive.com
 ads.berlinonline.de
 ads.betanews.com
@@ -413,7 +409,6 @@ ads.domain.com
 ads.domeus.com
 ads.eagletribune.com
 ads.easy-forex.com
-ads.eatinparis.com
 ads.economist.com
 ads.edbindex.dk
 ads.egrana.com.br
@@ -425,7 +420,6 @@ ads.epltalk.com
 ads.eu.msn.com
 ads.exactdrive.com
 ads.expat-blog.biz
-ads.expedia.com
 ads.factorymedia.com
 ads.fairfax.com.au
 ads.fasttrack-ignite.com
@@ -698,7 +692,6 @@ adscholar.com
 adscience.nl
 adscpm.com
 adsdaq.com
-adsdk.com
 adsend.de
 adsensecustomsearchads.com
 adserv.gamezone.de
@@ -769,7 +762,6 @@ adsmogo.com
 adsnative.com
 adsoftware.com
 adsoldier.com
-adsonar.com
 adspeed.net
 adspirit.de
 adsponse.de
@@ -907,13 +899,11 @@ all4spy.com
 alladvantage.com
 allosponsor.com
 alphonso.tv
-amazingcounters.com
 amazon-adsystem.com
 ambitiousagreement.com
 americash.com
 amplitude.com
 amung.us
-an.tacoda.net
 anahtars.com
 analytics.adpost.org
 analytics.google.com
@@ -931,7 +921,6 @@ aps.hearstnp.com
 apture.com
 apusx.com
 arc1.msn.com
-arcadebanners.com
 ard.xxxblackbook.com
 are-ter.com
 as.webmd.com
@@ -959,7 +948,6 @@ avsads.com
 awempire.com
 awin1.com
 b-1st.com
-b.aol.com
 b59812ee54afcabd.com
 ba.afl.rakuten.co.jp
 babs.tv2.dk
@@ -1014,6 +1002,7 @@ bannerpower.com
 banners.adultfriendfinder.com
 banners.amigos.com
 banners.asiafriendfinder.com
+banners.babylon-x.com
 banners.bol.com.br
 banners.cams.com
 banners.clubseventeen.com
@@ -1118,13 +1107,11 @@ buysellads.com
 buzzonclick.com
 bwp.download.com
 c.bigmir.net
-c.evidon.com
 c1.nowlinux.com
 c1exchange.com
 calmfoot.com
 campaign.bharatmatrimony.com
 caniamedia.com
-capacitly.com
 carambo.la
 carbonads.com
 carbonads.net
@@ -1135,7 +1122,6 @@ cash4popup.de
 cashcrate.com
 cashengines.com
 cashfiesta.com
-cashlayer.com
 cashpartner.com
 casinogames.com
 casinopays.com
@@ -1166,13 +1152,13 @@ cherrythread.com
 chiefcurrent.com
 chitika.net
 christingel.com
-cinstein.com
 cityads.telus.net
 cj.com
 cjbmanagement.com
 cjlog.com
 claria.com
 class-act-clicks.com
+click.absoluteagency.com
 click.fool.com
 click.kmindex.ru
 click2freemoney.com
@@ -1192,7 +1178,6 @@ clickhereforcellphones.com
 clickhouse.com
 clickhype.com
 clicklink.jp
-clickmedia.ro
 clickonometrics.pl
 clicks.equantum.com
 clicks.mods.de
@@ -1251,7 +1236,6 @@ copperchickens.com
 copycarpenter.com
 copyrightaccesscontrols.com
 coremetrics.com
-cottawa.info
 count.rbc.ru
 count.rin.ru
 count.west263.com
@@ -1471,7 +1455,6 @@ forex-affiliate.net
 fpctraffic.com
 fpctraffic2.com
 fqtag.com
-fragmentserv.iac-online.de
 free-banners.com
 freebanner.com
 freelogs.com
@@ -1649,13 +1632,11 @@ ireklama.cz
 itfarm.com
 itop.cz
 its-that-easy.com
-itsptp.com
 ivwbox.de
 ivykiosk.com
 jcount.com
 jinkads.de
 joetec.net
-joneself.com
 js.users.51.la
 jsecoin.com
 juicyads.com
@@ -1691,7 +1672,6 @@ lfstmedia.com
 liftdna.com
 ligatus.com
 ligatus.de
-lightningcast.net
 lightspeedcash.com
 lijit.com
 limpingline.com
@@ -1766,7 +1746,6 @@ media6degrees.com
 mediaarea.eu
 mediabridge.cc
 mediacharger.com
-mediadvertising.ro
 mediageneral.com
 mediaiqdigital.com
 mediamath.com
@@ -1800,7 +1779,6 @@ mg2connext.com
 mgid.com
 microstatic.pl
 microticker.com
-midnightclicking.com
 misstrends.com
 mixedreading.com
 mixpanel.com
@@ -1861,7 +1839,6 @@ nedstatpro.net
 nend.net
 neocounter.neoworx-blog-tools.net
 neoffic.com
-nephritish.com
 net-filter.com
 netaffiliation.com
 netagent.cz
@@ -1908,7 +1885,6 @@ oascentral.fortunecity.com
 oascentral.register.com
 oclasrv.com
 oewa.at
-oewabox.at
 offerforge.com
 offermatica.com
 olivebrandresponse.com
@@ -2039,6 +2015,7 @@ primaryads.com
 primetime.net
 privatecash.com
 prmtracking.com
+pro-advertising.com
 proext.com
 profero.com
 profitrumour.com
@@ -2049,6 +2026,7 @@ promobenef.com
 promos.bwin.it
 promos.fling.com
 promote.pair.com
+promotion-campaigns.com
 pronetadvertising.com
 propellerads.com
 props.id
@@ -2060,7 +2038,6 @@ provexia.com
 provideplant.com
 prsitecheck.com
 ps7894.com
-psstt.com
 pub.chez.com
 pub.club-internet.fr
 pub.hardware.fr
@@ -2082,7 +2059,6 @@ quantummetric.com
 quarterserver.de
 questaffiliates.net
 quicksandear.com
-quigo.com
 quinst.com
 quisma.com
 radar.cedexis.com
@@ -2267,11 +2243,9 @@ sponsorpro.de
 sponsors.thoughtsmedia.com
 spot.fitness.com
 spotxchange.com
-spykemediatrack.co
 spykemediatrack.com
 spylog.com
 spywarelabs.com
-spywarenuker.com
 spywords.com
 squeamishscarecrow.com
 srwww1.com
@@ -2333,11 +2307,8 @@ switchadhub.com
 switchads.com
 swordfishdc.com
 t.insigit.com
-t.pusk.ru
 taboola.com
-tacoda.net
 tagular.com
-tailsweep.co.uk
 tailsweep.com
 tailsweep.se
 takru.com
@@ -2392,7 +2363,6 @@ top100.mafia.ru
 top123.ro
 top20free.com
 top90.ro
-topacity.info
 topbarh.box.sk
 topbucks.com
 topforall.com
@@ -2494,7 +2464,6 @@ usapromotravel.com
 useriq.com
 userreplay.com
 userreplay.net
-utarget.co.uk
 utils.mediageneral.net
 v1.cnzz.com
 validclick.com
