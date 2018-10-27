@@ -363,8 +363,8 @@ void dooble_address_widget::set_text_format
 	attribute_type = QInputMethodEvent::TextFormat;
       QTextLayout::FormatRange format_range = formats.at(i);
       QVariant value = format_range.format;
-      int start = format_range.start;
       int length = format_range.length;
+      int start = format_range.start;
 
       attributes << QInputMethodEvent::Attribute(attribute_type,
 						 start,
