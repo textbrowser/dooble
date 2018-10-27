@@ -396,6 +396,16 @@ QWebEngineSettings *dooble_page::web_engine_settings(void) const
   return m_view->settings();
 }
 
+bool dooble_page::can_go_back(void) const
+{
+  return m_view->history()->canGoBack();
+}
+
+bool dooble_page::can_go_forward(void) const
+{
+  return m_view->history()->canGoForward();
+}
+
 bool dooble_page::is_location_frame_hidden(void) const
 {
   return !m_ui.top_frame->isVisible();

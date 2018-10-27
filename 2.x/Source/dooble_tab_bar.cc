@@ -402,6 +402,15 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   reload_action->setProperty("point", point);
   menu.addSeparator();
 
+  QAction *back_action = menu.addAction(tr("&Back"));
+
+  back_action->setProperty("point", point);
+
+  QAction *forward_action = menu.addAction(tr("&Forward"));
+
+  forward_action->setProperty("point", point);
+  menu.addSeparator();
+
   QAction *javascript_action = menu.addAction(tr("&JavaScript"),
 					      this,
 					      SLOT(slot_javascript(void)));
@@ -433,6 +442,14 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 
       if(page)
 	{
+	  connect(back_action,
+		  SIGNAL(triggered(void)),
+		  page,
+		  SLOT(slot_go_backward(void)));
+	  connect(forward_action,
+		  SIGNAL(triggered(void)),
+		  page,
+		  SLOT(slot_go_forward(void)));
 	  javascript_action->setCheckable(true);
 	  javascript_action->setEnabled(tab_at > -1);
 	  open_as_new_private_window_action->setEnabled
@@ -477,6 +494,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
     action->setChecked(page->is_location_frame_hidden());
 
   action->setEnabled(page && tab_at > -1);
+  back_action->setEnabled(page && page->can_go_back() && tab_at > -1);
+  forward_action->setEnabled(page && page->can_go_forward() && tab_at > -1);
   reload_action->setEnabled(page && tab_at > -1);
   menu.exec(mapToGlobal(point));
 }
