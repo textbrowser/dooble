@@ -1899,6 +1899,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
   s_downloads->raise();
 }
 
+#ifdef Q_OS_MAC
 void dooble::slot_enable_shortcut(void)
 {
   QTimer *timer = qobject_cast<QTimer *> (sender());
@@ -1913,6 +1914,7 @@ void dooble::slot_enable_shortcut(void)
   prepare_control_w_shortcut();
   timer->deleteLater();
 }
+#endif
 
 void dooble::slot_icon_changed(const QIcon &icon)
 {
@@ -2165,6 +2167,7 @@ void dooble::slot_settings_applied(void)
   QApplication::restoreOverrideCursor();
 }
 
+#ifdef Q_OS_MAC
 void dooble::slot_shortcut_activated(void)
 {
   QShortcut *shortcut = qobject_cast<QShortcut *> (sender());
@@ -2184,6 +2187,7 @@ void dooble::slot_shortcut_activated(void)
   timer->start(100);
   m_disabled_shortcuts[timer] = shortcut;
 }
+#endif
 
 void dooble::slot_show_about(void)
 {

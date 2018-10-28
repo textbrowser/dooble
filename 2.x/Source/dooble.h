@@ -104,7 +104,9 @@ class dooble: public QMainWindow
  private:
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
+#ifdef Q_OS_MAC
   QHash<QTimer *, QShortcut *> m_disabled_shortcuts;
+#endif
   QList<QShortcut *> m_shortcuts;
   QList<QShortcut *> m_tab_widget_shortcuts;
   QMenu *m_menu;
@@ -153,7 +155,9 @@ class dooble: public QMainWindow
   void slot_decouple_tab(int index);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
+#ifdef Q_OS_MAC
   void slot_enable_shortcut(void);
+#endif
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
   void slot_new_private_window(void);
@@ -178,7 +182,9 @@ class dooble: public QMainWindow
   void slot_save(void);
   void slot_set_current_tab(void);
   void slot_settings_applied(void);
+#ifdef Q_OS_MAC
   void slot_shortcut_activated(void);
+#endif
   void slot_show_about(void);
   void slot_show_accepted_or_blocked_domains(void);
   void slot_show_certificate_exceptions(void);
