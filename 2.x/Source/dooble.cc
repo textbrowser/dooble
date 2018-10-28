@@ -830,7 +830,8 @@ void dooble::prepare_control_w_shortcut(void)
 {
   for(int i = 0; i < m_shortcuts.size(); i++)
     if(m_shortcuts.at(i))
-      if(QKeySequence(Qt::CTRL + Qt::Key_W) == m_shortcuts.at(i)->key())
+      if(QKeySequence(Qt::ControlModifier + Qt::Key_W) ==
+	 m_shortcuts.at(i)->key())
 	{
 	  m_shortcuts.at(i)->setEnabled(tabs_closable());
 	  break;
