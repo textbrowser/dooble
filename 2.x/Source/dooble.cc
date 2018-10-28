@@ -1910,6 +1910,7 @@ void dooble::slot_enable_shortcut(void)
     m_disabled_shortcuts.value(timer)->setEnabled(true);
 
   m_disabled_shortcuts.remove(timer);
+  prepare_control_w_shortcut();
   timer->deleteLater();
 }
 
@@ -2179,6 +2180,7 @@ void dooble::slot_shortcut_activated(void)
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_enable_shortcut(void)));
+  timer->setSingleShot(true);
   timer->start(100);
   m_disabled_shortcuts[timer] = shortcut;
 }
