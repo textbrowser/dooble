@@ -1523,7 +1523,12 @@ void dooble_settings::slot_apply(void)
       (QWebEngineProfile::NoCache);
 
   if(m_ui.user_agent->text().trimmed().isEmpty())
-    m_ui.user_agent->setText(s_http_user_agent);
+    {
+      m_ui.user_agent->setText(s_http_user_agent);
+      m_ui.user_agent->setToolTip
+	("<html>" + m_ui.user_agent->text() + "</html>");
+      m_ui.user_agent->setCursorPosition(0);
+    }
 
   QWebEngineProfile::defaultProfile()->setHttpUserAgent
     (m_ui.user_agent->text().trimmed());
@@ -1618,7 +1623,8 @@ void dooble_settings::slot_apply(void)
 
   m_ui.user_agent->setText
     (QWebEngineProfile::defaultProfile()->httpUserAgent());
-  m_ui.user_agent->setToolTip(m_ui.user_agent->text());
+  m_ui.user_agent->setToolTip
+    ("<html>" + m_ui.user_agent->text() + "</html>");
   m_ui.user_agent->setCursorPosition(0);
 
   if(m_ui.utc_time_zone->isChecked())
@@ -2503,6 +2509,8 @@ void dooble_settings::slot_reset_credentials(void)
 void dooble_settings::slot_reset_user_agent(void)
 {
   m_ui.user_agent->setText(s_http_user_agent);
+  m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
+  m_ui.user_agent->setCursorPosition(0);
 }
 
 void dooble_settings::slot_save_credentials(void)
