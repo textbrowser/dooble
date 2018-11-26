@@ -45,10 +45,15 @@ dooble_downloads_item::dooble_downloads_item
   m_last_time = QTime::currentTime();
   m_oid = oid;
   m_rate = 0;
+  m_stalled_timer.setInterval(15000);
   m_url = QUrl();
   m_ui.setupUi(this);
   m_ui.progress->setMaximum(0);
   m_ui.progress->setMinimum(0);
+  connect(&m_stalled_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_stalled(void)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -83,6 +88,7 @@ dooble_downloads_item::dooble_downloads_item
 
       m_download_path = m_download->path();
       m_file_name = file_info.fileName();
+      m_stalled_timer.start();
       m_ui.file_name->setText(file_info.fileName());
       m_ui.progress->setMaximum(100);
       m_url = m_download->url();
@@ -125,6 +131,7 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
   m_download_path = download_path;
   m_file_name = file_name;
   m_oid = oid;
+  m_stalled_timer.setInterval(15000);
   m_url = url;
   m_ui.setupUi(this);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
@@ -149,6 +156,10 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
   m_ui.information->setText(information);
   m_ui.pause_resume->setVisible(false);
   m_ui.progress->setVisible(false);
+  connect(&m_stalled_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_stalled(void)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -193,6 +204,8 @@ void dooble_downloads_item::cancel(void)
 {
   if(m_download)
     m_download->cancel();
+
+  m_stalled_timer.stop();
 }
 
 void dooble_downloads_item::prepare_icons(void)
@@ -342,11 +355,15 @@ void dooble_downloads_item::slot_cancel(void)
 {
   if(m_download)
     m_download->cancel();
+
+  m_stalled_timer.stop();
 }
 
 void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 						   qint64 bytes_total)
 {
+  m_stalled_timer.start();
+
   int seconds = 0;
 
   if((seconds = qAbs(m_last_time.secsTo(QTime::currentTime()))) >= 1)
@@ -368,13 +385,30 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
       m_last_time = QTime::currentTime();
     }
 
+  bool paused = false;
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+  if(m_download)
+    if(m_download->isPaused())
+      paused = true;
+#endif
+#endif
+
   if(bytes_total > 0)
     {
-      m_ui.information->setText
-	(tr("%1 of %2 - %3 / second").
-	 arg(dooble_ui_utilities::pretty_size(bytes_received)).
-	 arg(dooble_ui_utilities::pretty_size(bytes_total)).
-	 arg(dooble_ui_utilities::pretty_size(m_rate)));
+      if(paused)
+	m_ui.information->setText
+	  (tr("%1 of %2 - Paused").
+	   arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)).
+	   arg(dooble_ui_utilities::pretty_size(bytes_total)));
+      else
+	m_ui.information->setText
+	  (tr("%1 of %2 - %3 / second").
+	   arg(dooble_ui_utilities::pretty_size(bytes_received)).
+	   arg(dooble_ui_utilities::pretty_size(bytes_total)).
+	   arg(dooble_ui_utilities::pretty_size(m_rate)));
+
       m_ui.progress->setMaximum(100);
       m_ui.progress->setValue
 	(static_cast<int> (100 * (static_cast<double> (bytes_received) /
@@ -382,16 +416,23 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
     }
   else
     {
-      m_ui.information->setText
-	(tr("%1 of Unknown - %2 / second").
-	 arg(dooble_ui_utilities::pretty_size(bytes_received)).
-	 arg(dooble_ui_utilities::pretty_size(m_rate)));
+      if(paused)
+	m_ui.information->setText
+	  (tr("%1 of Unknown - Stalled").
+	   arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)));
+      else
+	m_ui.information->setText
+	  (tr("%1 of Unknown - %2 / second").
+	   arg(dooble_ui_utilities::pretty_size(bytes_received)).
+	   arg(dooble_ui_utilities::pretty_size(m_rate)));
+
       m_ui.progress->setMaximum(0);
     }
 }
 
 void dooble_downloads_item::slot_finished(void)
 {
+  m_stalled_timer.stop();
   m_ui.cancel->setVisible(false);
   m_ui.pause_resume->setVisible(false);
   m_ui.progress->setVisible(false);
@@ -441,7 +482,10 @@ void dooble_downloads_item::slot_pause_or_resume(void)
   if(m_download)
     {
       if(m_download->isPaused())
-	m_download->resume();
+	{
+	  m_download->resume();
+	  m_stalled_timer.start();
+	}
       else
 	m_download->pause();
 
@@ -452,6 +496,16 @@ void dooble_downloads_item::slot_pause_or_resume(void)
 	  m_ui.pause_resume->setIcon
 	    (QIcon(QString(":/%1/20/pause.png").arg(icon_set)));
 	  m_ui.pause_resume->setToolTip(tr("Resume"));
+
+	  if(m_download->totalBytes() > 0)
+	    m_ui.information->setText
+	      (tr("%1 of %2 - Paused").
+	       arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)).
+	       arg(dooble_ui_utilities::pretty_size(m_download->totalBytes())));
+	  else
+	    m_ui.information->setText
+	      (tr("%1 of Unknown - Paused").
+	       arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)));
 	}
       else
 	{
@@ -472,4 +526,25 @@ void dooble_downloads_item::slot_reload(void)
 void dooble_downloads_item::slot_settings_applied(void)
 {
   prepare_icons();
+}
+
+void dooble_downloads_item::slot_stalled(void)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+  if(m_download)
+      if(m_download->isPaused())
+	return;
+#endif
+#endif
+
+  if(m_download && m_download->totalBytes() > 0)
+    m_ui.information->setText
+      (tr("%1 of %2 - Stalled").
+       arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)).
+       arg(dooble_ui_utilities::pretty_size(m_download->totalBytes())));
+  else
+    m_ui.information->setText
+      (tr("%1 of Unknown - Stalled").
+       arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)));
 }

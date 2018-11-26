@@ -29,6 +29,7 @@
 #define dooble_downloads_item_h
 
 #include <QTime>
+#include <QTimer>
 #include <QPointer>
 #include <QUrl>
 #include <QWidget>
@@ -61,11 +62,12 @@ class dooble_downloads_item: public QWidget
   void cancel(void);
 
  private:
-  QTime m_last_time;
   QPointer<QWebEngineDownloadItem> m_download;
   QPointer<QWebEngineProfile> m_profile;
   QString m_download_path;
   QString m_file_name;
+  QTime m_last_time;
+  QTimer m_stalled_timer;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
   qint64 m_last_bytes_received;
@@ -82,6 +84,7 @@ class dooble_downloads_item: public QWidget
   void slot_pause_or_resume(void);
   void slot_reload(void);
   void slot_settings_applied(void);
+  void slot_stalled(void);
 
  signals:
   void finished(void);
