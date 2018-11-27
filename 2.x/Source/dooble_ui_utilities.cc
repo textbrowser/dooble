@@ -55,6 +55,11 @@ QString dooble_ui_utilities::pretty_size(qint64 size)
     (QString::number(static_cast<double> (size) / 1073741824.0, 'f', 1));
 }
 
+QString dooble_ui_utilities::pretty_tool_tip(const QString &text)
+{
+  return "<html>" + text + "</html>";
+}
+
 QUrl dooble_ui_utilities::simplified_url(const QUrl &url)
 {
   return QUrl(url.scheme() + "://" + url.host());

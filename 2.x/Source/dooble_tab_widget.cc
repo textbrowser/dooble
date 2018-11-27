@@ -33,6 +33,7 @@
 #include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
+#include "dooble_ui_utilities.h"
 
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
@@ -296,6 +297,11 @@ void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
 void dooble_tab_widget::setTabTextColor(int index, const QColor &color)
 {
   m_tab_bar->setTabTextColor(index, color);
+}
+
+void dooble_tab_widget::setTabToolTip(int index, const QString &text)
+{
+  QTabWidget::setTabToolTip(index, dooble_ui_utilities::pretty_tool_tip(text));
 }
 
 void dooble_tab_widget::slot_load_finished(void)

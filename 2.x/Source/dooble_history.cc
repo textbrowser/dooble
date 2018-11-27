@@ -35,6 +35,7 @@
 #include "dooble_database_utilities.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
+#include "dooble_ui_utilities.h"
 
 dooble_history::dooble_history(void):QObject()
 {
@@ -916,7 +917,8 @@ void dooble_history::slot_populated_favorites
 	      {
 		item->setData(QUrl::fromEncoded(url));
 		item->setText(title);
-		item->setToolTip(item->text());
+		item->setToolTip
+		  (dooble_ui_utilities::pretty_tool_tip(item->text()));
 		break;
 	      }
 	    case 1:
@@ -1012,7 +1014,8 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 		else
 		  item->setText(hash.value(TITLE).toString());
 
-		item->setToolTip(item->text());
+		item->setToolTip
+		  (dooble_ui_utilities::pretty_tool_tip(item->text()));
 		break;
 	      }
 	    case 1:
@@ -1070,7 +1073,8 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 		else
 		  item->setText(hash.value(TITLE).toString());
 
-		item->setToolTip(item->text());
+		item->setToolTip
+		  (dooble_ui_utilities::pretty_tool_tip(item->text()));
 		break;
 	      }
 	    case 1:

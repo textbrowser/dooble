@@ -370,6 +370,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   m_ui.tab->addTab(page, tr("New Tab"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
+  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), tr("New Tab"));
 
   if(dooble_settings::setting("access_new_tabs").toBool() ||
      qobject_cast<QShortcut *> (sender()) ||
@@ -744,6 +745,7 @@ void dooble::new_page(dooble_page *page)
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
+  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.
@@ -778,6 +780,7 @@ void dooble::new_page(dooble_web_engine_view *view)
   m_ui.tab->addTab(page, title);
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
+  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page); // Order is important.

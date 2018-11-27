@@ -34,10 +34,11 @@
 #include "dooble.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_application.h"
+#include "dooble_cryptography.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
-#include "dooble_cryptography.h"
+#include "dooble_ui_utilities.h"
 
 class dooble_history_window_favorite_item: public QTableWidgetItem
 {
@@ -598,6 +599,8 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 	  if(!dooble::s_history->is_favorite(item.url()))
 	    item2->setText(title);
 	}
+
+      item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
     }
 
   QTableWidgetItem *item3 = m_ui.table->item(item1->row(), 3);
@@ -661,7 +664,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   item2->setData(Qt::UserRole, item.url());
   item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  item2->setToolTip(item2->text());
+  item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
   m_items[item.url()] = item2;
 
   QTableWidgetItem *item3 = new QTableWidgetItem(item.url().toString());
@@ -738,6 +741,12 @@ void dooble_history_window::slot_populate(void)
       QUrl url(it.value().value(dooble_history::URL).toUrl());
       dooble_history_window_favorite_item *item1 = nullptr;
 
+      if(title.isEmpty())
+	title = url.toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
+
+      if(title.isEmpty())
+	title = tr("Dooble");
+
       item1 = new dooble_history_window_favorite_item();
       item1->setData(Qt::UserRole, url);
       item1->setFlags(Qt::ItemIsEnabled |
@@ -756,7 +765,7 @@ void dooble_history_window::slot_populate(void)
       item2 = new QTableWidgetItem(title);
       item2->setData(Qt::UserRole, url);
       item2->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-      item2->setToolTip(item2->text());
+      item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
       item3 = new QTableWidgetItem(url.toString());
       item3->setData(Qt::UserRole, url);
       item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);

@@ -47,6 +47,7 @@ class dooble_tab_widget: public QTabWidget
   dooble_page *page(int index) const;
   void setTabIcon(int index, const QIcon &icon);
   void setTabTextColor(int index, const QColor &color);
+  void setTabToolTip(int index, const QString &text);
 
  protected:
   void tabRemoved(int index);
