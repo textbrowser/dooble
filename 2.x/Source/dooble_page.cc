@@ -1609,7 +1609,6 @@ void dooble_page::slot_load_progress(int progress)
 void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
-  emit titleChanged("");
 
   while(!m_last_javascript_popups.isEmpty())
     {
