@@ -236,7 +236,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 
 	  m_model->setRowCount(m_model->rowCount() + 1);
 	  m_model->setItem(m_model->rowCount() - 1, item->clone());
-	  m_popup->setRowHeight(m_model->rowCount() - 1, 24);
+	  m_popup->setRowHeight(m_model->rowCount() - 1, 32);
 	}
     }
 
