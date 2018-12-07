@@ -26,6 +26,7 @@
 */
 
 #include <QFileDialog>
+#include <QWebEngineCertificateError>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 
