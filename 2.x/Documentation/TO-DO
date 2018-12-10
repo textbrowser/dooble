@@ -164,6 +164,7 @@
 2.     Include date stamps in cookie containers.
 3.     linkHovered() is emitted without user interaction.
 4.     Fancy completer.
+5.     Qt's digest class.
 
 Unknown Items
 
