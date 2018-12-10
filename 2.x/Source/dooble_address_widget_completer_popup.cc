@@ -35,4 +35,5 @@ dooble_address_widget_completer_popup::dooble_address_widget_completer_popup
   setIconSize(QSize(16, 16));
   setMouseTracking(true);
   setShowGrid(false);
+  setWordWrap(false);
 }
