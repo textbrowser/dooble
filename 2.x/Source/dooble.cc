@@ -302,10 +302,8 @@ bool dooble::can_exit(void)
       bool private_downloads = false;
 
       if(m_web_engine_profile)
-	{
-	  if(s_downloads->has_downloads_for_profile(m_web_engine_profile))
-	    private_downloads = true;
-	}
+	if(s_downloads->has_downloads_for_profile(m_web_engine_profile))
+	  private_downloads = true;
 
       QMessageBox mb(this);
 

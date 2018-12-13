@@ -2217,6 +2217,22 @@ void dooble_settings::slot_proxy_type_changed(int index)
 
 void dooble_settings::slot_remove_all_features_permissions(void)
 {
+  if(m_ui.features_permissions->rowCount() == 0)
+    return;
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Are you sure that you wish to remove all of the "
+		"feature permissions?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    return;
+
   m_ui.features_permissions->setRowCount(0);
   s_site_features_permissions.clear();
 
@@ -2228,6 +2244,22 @@ void dooble_settings::slot_remove_all_features_permissions(void)
 
 void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
 {
+  if(m_ui.javascript_block_popups_exceptions->rowCount() > 0 && sender())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to remove all of the "
+		    "JavaScript pop-up exceptions?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
   s_javascript_block_popup_exceptions.clear();
 
@@ -2244,6 +2276,25 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
   QModelIndexList list
     (m_ui.features_permissions->selectionModel()->selectedRows(2));
 
+  QApplication::restoreOverrideCursor();
+
+  if(!list.isEmpty())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to remove the selected "
+		    "feature permission(s)?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   std::sort(list.begin(), list.end());
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -2334,6 +2385,25 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
   QModelIndexList list(m_ui.javascript_block_popups_exceptions->
 		       selectionModel()->selectedRows(1));
 
+  QApplication::restoreOverrideCursor();
+
+  if(!list.isEmpty())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to remove the selected "
+		    "JavaScript pop-up exception(s)?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   std::sort(list.begin(), list.end());
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
