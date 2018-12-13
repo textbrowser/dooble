@@ -126,6 +126,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
   m_is_javascript_dialog = false;
   m_is_private = is_private;
   m_menu = new QMenu(this);
+  m_ui.setupUi(this);
 
   if(m_is_private)
     {
@@ -194,7 +195,6 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
       m_cookies_window->setCookieStore(m_web_engine_profile->cookieStore());
     }
 
-  m_ui.setupUi(this);
   connect_signals();
 
   if(!isFullScreen())
