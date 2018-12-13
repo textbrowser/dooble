@@ -34,6 +34,7 @@
 dooble_favorites_table_view::dooble_favorites_table_view(QWidget *parent):
   QTableView(parent)
 {
+  setWordWrap(false);
 }
 
 void dooble_favorites_table_view::prepare_viewport_icons(void)

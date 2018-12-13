@@ -42,6 +42,7 @@ dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
+  m_ui.table->setWordWrap(false);
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
 	  this,

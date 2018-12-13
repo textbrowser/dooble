@@ -673,6 +673,22 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
 
 void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
 {
+  if(m_ui.exceptions->rowCount() > 0)
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Are you sure that you wish to delete all of the exceptions?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
   m_exceptions.clear();
   m_ui.exceptions->setRowCount(0);
 
@@ -792,10 +808,25 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 
   QModelIndexList list(m_ui.exceptions->selectionModel()->selectedRows(1));
 
-  for(int i = list.size() - 1; i >= 0; i--)
-    if(m_ui.table->isRowHidden(list.at(i).row()))
-      list.removeAt(i);
+  QApplication::restoreOverrideCursor();
 
+  if(list.size() > 0)
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Are you sure that you wish to delete the selected exception(s)?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   std::sort(list.begin(), list.end());
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
