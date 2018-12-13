@@ -339,24 +339,27 @@ void dooble_history_window::slot_delete_pages(void)
     return;
 
   QAction *action = qobject_cast<QAction *> (sender());
+  QMessageBox mb(this);
   bool favorites_included = false;
 
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
   if(action && action->property("prompt").toBool())
-    {
-      QMessageBox mb(this);
+    mb.setText(tr("Favorites may be deleted. Continue?"));
+  else
+    mb.setText
+      (tr("Are you sure that you wish to remove the selected item(s)?"));
 
-      mb.setIcon(QMessageBox::Question);
-      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-      mb.setText(tr("Favorites may be deleted. Continue?"));
-      mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
-      mb.setWindowTitle(tr("Dooble: Confirmation"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
 
-      if(mb.exec() != QMessageBox::Yes)
-	return;
+  if(mb.exec() != QMessageBox::Yes)
+    return;
 
-      favorites_included = true;
-    }
+  if(action && action->property("prompt").toBool())
+    favorites_included = true;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   std::sort(list.begin(), list.end());
