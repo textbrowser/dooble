@@ -244,17 +244,17 @@ int main(int argc, char *argv[])
      QDir::separator() +
      "WebEnginePersistentStorage");
   QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled, true);
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows, true);
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, true);
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH

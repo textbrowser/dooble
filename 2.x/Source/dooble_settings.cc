@@ -1092,7 +1092,7 @@ void dooble_settings::restore(bool read_database)
      m_ui.javascript_access_clipboard->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
@@ -1564,7 +1564,7 @@ void dooble_settings::slot_apply(void)
      m_ui.javascript_access_clipboard->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
-  QWebEngineSettings::globalSettings()->setAttribute
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
