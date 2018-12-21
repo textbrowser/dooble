@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>314</width>
+    <width>320</width>
     <height>380</height>
    </rect>
   </property>
@@ -147,14 +147,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>dooble_favorites_table_view</class>
-   <extends>QTableView</extends>
-   <header>dooble_favorites_table_view.h</header>
-  </customwidget>
-  <customwidget>
    <class>dooble_search_widget</class>
    <extends>QLineEdit</extends>
    <header>dooble_search_widget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>dooble_favorites_table_view</class>
+   <extends>QTableView</extends>
+   <header>dooble_favorites_table_view.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

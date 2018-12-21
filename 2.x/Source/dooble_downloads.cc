@@ -297,6 +297,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
       m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
       m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
       m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
+      m_ui.table->setRowHeight(m_ui.table->rowCount(), 100);
       m_ui.table->scrollToBottom();
     }
   else
@@ -641,6 +642,7 @@ void dooble_downloads::slot_populate(void)
 		      SLOT(slot_reload(const QString &, const QUrl &)));
 	      m_ui.table->setCellWidget(row, 0, downloads_item);
 	      m_ui.table->resizeRowToContents(row);
+	      m_ui.table->setRowHeight(row, 100);
 	      row += 1;
 	      total_rows += 1;
 	    }
