@@ -1,128 +1,101 @@
-2.0 Completed Items
+Completed Items
 
-1.     Apples and shortcuts.
-2.     Tab close buttons on the Mac should be on the right.
-3.     Hovered link label causes a resize of the main window if a lengthy
-       link is under the mouse cursor. Always consider the progress bar's
-       width.
-4.     Update pull-down menu icons in real-time.
-5.     Display cookies in a tree-like structure.
-6.     Restrict domains.
-7.     Blocked Domains. Show examples. Restrict input.
-8.     Delete temporary parent cookie domains having zero children.
-9.     Depict private cookie windows.
-10.    Proxy details within Privacy.
-11.    Close non-browser windows via the Esc key.
-12.    Activate history pull-down on address text change.
-13.    Link-hover events resize windows.
-14.    Elided text in pull-down menus must consider invisible text.
-15.    Creating new tabs and windows requires sophistication.
-16.    Prevent duplicate history items in address widget menu.
-17.    History search.
-18.    History. Will require a sub-process for removing expired data.
-19.    Main menu bar visibility.
-20.    WebEngine context menu should allow for blocking sites.
-21.    UTC time zone option (qputenv("TZ", ":UTC")).
-22.    Optional credentials.
-23.    Accepted / Blocked Domains search.
-24.    Allow certificate exceptions.
-25.    Store certificate exceptions.
-26.    Simple cleaning of all databases.
-27.    Optional Visited Links.
-28.    Gopher support.
-29.    Print support.
-30.    Print via popup menu.
-31.    Full-screen.
-32.    Connect downloadRequested() to Downloads for the default profile.
-33.    Empty download file names.
-34.    Complete default WebEngine context menu.
-35.    Gopher per-request sockets.
-36.    Separate download items.
-37.    Display download rates.
-38.    Download panel. Path. Remind user on exit.
-39.    Pin support windows.
-40.    Interruptible authentication.
-41.    Global Web plugin option.
-42.    User agent.
-43.    Animated Scrolling belongs in the Web section.
-44.    Auto-hide tab bar.
-45.    Zoom.
-46.    Windows PRNG.
-47.    Accepted / Blocked Domains File menu on Apple. Hide.
-48.    Restore default functionality of Control + A.
-49.    Cookies menu item within Tools.
-50.    Threefish-256.
-51.    Enable spell checking. Dictionaries are required.
-52.    Local Storage option.
-53.    Smart tab selections via keyboards.
-54.    Dictionary option in the Settings window's Web panel.
-55.    Release notes.
-56.    More elegant popups.
-57.    Report pages which attempt to open JS dialogs.
-58.    Filter current site's cookies.
-59.    Allow temporary acceptance of blocked dialogs.
-60.    Save menu item.
-61.    Icons for pinned support windows.
-62.    Cookies Window - Toggle Shown.
-63.    Fusion alterations.
-64.    Support windows as pages and non-Dooble icons.
-65.    Separating pages renders incorrect page icons.
-66.    Depict current tab on tabs pull-down menu.
-67.    Cookie domains without child cookies.
-68.    Accepted / Blocked Domains exceptions. New tool button right of
-       Downloads; exception of host or as-is link, A / B preferences.
-69.    Abort downloads if download items are purged.
-70.    Remove m_history objects in the purge() method.
-71.    Save Page pop-up menu item.
-72.    Reduce cookie_added() signals.
-73.    Languages.
-74.    Favorites in History.
-75.    Favorites in private windows. Strange.
-76.    Connect favorite_changed() across pages.
-77.    Favorites and disabled history.
-78.    Private-window decorations.
-79.    Display expected location of Translations in Settings.
-80.    Replace the containers_cleared() signal.
-81.    Favorites pop-up widget.
-82.    Cookie identifiers.
-83.    Download gopher content.
-       (gopher://gopher.quux.org/1Software/Operating Systems/Unix/Linux)
-84.    Display the menu via a shortcut (F10?).
-85.    Certificate exceptions panel.
-86.    Language option. English, System.
-87.    Global address widget history model.
-88.    OS X bundle.
-89.    Documentation.
-90.    Place the Translations directory into the OS X bundle.
-
-2.1 Completed Items
-
-1.     Disable the Theme setting on OS X.
-2.     Maximum URL length set to 2048 characters.
-3.     Maximum title length set to 1024 characters.
-4.     Optional DNT.
-5.     WebGL option.
-6.     Clearing of Visited Links beyond Clear Items. New Edit menu item.
-7.     Determine if the system translation file is adequate.
-8.     Debian distribution.
-
-2.1.1 Completed Items
-
-1.     New Web site.
-2.     Do not store certificate exceptions for private windows.
-3.     Update History icons on filter and sort.
-4.     Favorites icons.
-5.     Rapid loading of address widget model icons.
-6.     Favorites search.
-
-2.1.2 Completed Items
-
-1.     Sort history items on population.
-2.     Fusion themes.
-
-2.1.3 Completed Items
-
-1.     Replace lessThan() with versionAtLeast() in dooble.pro for Qt 5.10.x.
+- Abort downloads if download items are purged.
+- Accepted / Blocked Domains File menu on Apple. Hide.
+- Accepted / Blocked Domains exceptions. New tool button right of Downloads;
+  exception of host or as-is link, A / B preferences.
+- Accepted / Blocked Domains search.
+- Activate history pull-down on address text change.
+- Allow certificate exceptions.
+- Allow removal of unchecked cookies.
+- Allow temporary acceptance of blocked dialogs.
+- Animated Scrolling belongs in the Web section.
+- Apples and shortcuts.
+- Auto-hide tab bar.
+- Blocked Domains. Show examples. Restrict input.
+- Certificate exceptions panel.
+- Clearing of Visited Links beyond Clear Items. New Edit menu item.
+- Close non-browser windows via the Esc key.
+- Common methods for creating database tables.
+- Complete default WebEngine context menu.
+- Connect downloadRequested() to Downloads for the default profile.
+- Connect favorite_changed() across pages.
+- Cookie domains without child cookies.
+- Cookie identifiers.
+- Cookies Window - Toggle Shown.
+- Cookies menu item within Tools.
+- Creating new tabs and windows requires sophistication.
+- Debian distribution.
+- Delete temporary parent cookie domains having zero children.
+- Depict current tab on tabs pull-down menu.
+- Depict private cookie windows.
+- Determine if the system translation file is adequate.
+- Dictionary option in the Settings window's Web panel.
+- Disable the Theme setting on OS X.
+- Display cookies in a tree-like structure.
+- Display download rates.
+- Display expected location of Translations in Settings.
+- Display the menu via a shortcut (F10?).
+- Do not store certificate exceptions for private windows.
+- Document the Microsoft Studio compilation process.
+- Documentation.
+- Download gopher content.
+  (gopher://gopher.quux.org/1Software/Operating Systems/Unix/Linux)
+- Download panel. Path. Remind user on exit.
+- Elided text in pull-down menus must consider invisible text.
+- Empty download file names.
+- Enable spell checking. Dictionaries are required.
+- Favorites and disabled history.
+- Favorites icons.
+- Favorites in History.
+- Favorites in private windows. Strange.
+- Favorites pop-up widget.
+- Favorites search.
+- Filter current site's cookies.
+- Full-screen.
+- Fusion alterations.
+- Fusion themes.
+- Global Web plugin option.
+- Global address widget history model.
+- Gopher per-request sockets.
+- Gopher source viewing is disabled.
+- Gopher support.
+- Highlighted address-widget rows.
+- History search.
+- History. Will require a sub-process for removing expired data.
+- Hovered link label causes a resize of the main window if a lengthy
+  link is under the mouse cursor. Always consider the progress bar's width.
+- Icons for pinned support windows.
+- Interruptible authentication.
+- Language option. English, System.
+- Languages.
+- Link-hover events resize windows.
+- Local Storage option.
+- Main menu bar visibility.
+- Maximum URL length set to 2048 characters.
+- Maximum title length set to 1024 characters.
+- More elegant popups.
+- New Web site.
+- New page context menus (dooble_web_engine_view::contextMenuEvent()).
+- OS X bundle.
+- Optional DNT.
+- Optional Visited Links.
+- Optional credentials.
+- Pause and resume downloads. Requires Qt support.
+- Pin support windows.
+- Place the Translations directory into the OS X bundle.
+- Prevent duplicate history items in address widget menu.
+- Print support.
+- Print via popup menu.
+- Private-window decorations.
+- Proxy details within Privacy.
+- Qt 5.10.
+- Rapid loading of address widget model icons.
+- Reduce cookie_added() signals.
+- Release notes.
+- Remove m_history objects in the purge() method.
+- Replace fixed loops in AES.
+- Replace lessThan() with versionAtLeast() in dooble.pro for Qt 5.10.x.
        linux {
        !versionAtLeast(QT_VERSION, 5.10) {
        error("Qt version 5.10.0, or newer, is required.")
@@ -132,55 +105,55 @@
        error("Qt version 5.9.3, or newer, is required.")
        }
        }
-2.     Qt 5.10.
-3.     Highlighted address-widget rows.
-4.     Pause and resume downloads. Requires Qt support.
+- Replace the containers_cleared() signal.
+- Report pages which attempt to open JS dialogs.
+- Restore default functionality of Control + A.
+- Restrict domains.
+- Save Page pop-up menu item.
+- Save menu item.
+- Separate download items.
+- Separating pages renders incorrect page icons.
+- Signed Debian release.
+- Simple cleaning of all databases.
+- Smart tab selections via keyboards.
+- Sort history items on population.
+- Store certificate exceptions.
+- Support windows as pages and non-Dooble icons.
+- Tab close buttons on the Mac should be on the right.
+- Threefish-256.
+- UTC time zone option (qputenv("TZ", ":UTC")).
+- Update History icons on filter and sort.
+- Update pull-down menu icons in real-time.
+- User agent.
+- WebEngine context menu should allow for blocking sites.
+- WebGL option.
+- Windows PRNG.
+- Zoom.
 
-2.1.5 Completed Items
+Remaining Items
 
-1.     Signed Debian release.
-
-2.1.8 Completed Items
-
-1.     Common methods for creating database tables.
-
-2.1.9 Completed Items
-
-1.     Gopher source viewing is disabled.
-
-2.1.9.3 Completed Items
-
-1.     Allow removal of unchecked cookies.
-2.     New page context menus (dooble_web_engine_view::contextMenuEvent()).
-
-2.1.9.4 Completed Items
-
-1.     Replace fixed loops in AES.
-2.     Document the Microsoft Studio compilation process.
-
-2.2 Remaining Items
-
-1.     Auto-correct addresses.
-2.     Include date stamps in cookie containers.
-3.     linkHovered() is emitted without user interaction.
-4.     Fancy completer.
-5.     Qt's digest class.
+- Auto-correct addresses.
+- Fancy completer.
+- Favorite-like search engines.
+- Include date stamps in cookie containers.
+- Qt's digest class.
+- Send selected page text to search engine.
+- linkHovered() is emitted without user interaction.
 
 Unknown Items
 
-1.     Optional Document Mode.
-2.     Print preview. Qt?
-3.     Custom icon sets.
-4.     KMAC vs. HMAC.
-5.     Super-fancy icon set.
-6.     JavaScript window.print() is not supported.
-7.     Multiple certificate exceptions.
-8.     Certificate information. Requires a WebEngine interface.
-9.     Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove
-       synchronous OFF.
-10.    Cookies are not always deleted properly.
-11.    Socket states.
-12.    The random-bytes implementation uses a deprecated
-       interface on Windows.
-13.    Element-selection option.
-14.    DTLS and Echo-DNS.
+- Certificate information. Requires a WebEngine interface.
+- Cookies are not always deleted properly.
+- Custom icon sets.
+- DTLS and Echo-DNS.
+- Element-selection option.
+- JavaScript window.print() is not supported.
+- KMAC vs. HMAC.
+- Multiple certificate exceptions.
+- Optional Document Mode.
+- Print preview. Qt?
+- Socket states.
+- Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control().
+  Remove synchronous OFF.
+- Super-fancy icon set.
+- The random-bytes implementation uses a deprecated interface on Windows.
