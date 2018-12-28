@@ -143,6 +143,7 @@ Remaining Items
 
 Unknown Items
 
+- Bookmarks.
 - Certificate information. Requires a WebEngine interface.
 - Cookies are not always deleted properly.
 - Custom icon sets.
