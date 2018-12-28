@@ -67,6 +67,7 @@ Completed Items
   link is under the mouse cursor. Always consider the progress bar's width.
 - Icons for pinned support windows.
 - Interruptible authentication.
+- JavaScript window.print() is not supported.
 - Language option. English, System.
 - Languages.
 - Link-hover events resize windows.
@@ -147,7 +148,6 @@ Unknown Items
 - Custom icon sets.
 - DTLS and Echo-DNS.
 - Element-selection option.
-- JavaScript window.print() is not supported.
 - KMAC vs. HMAC.
 - Multiple certificate exceptions.
 - Optional Document Mode.

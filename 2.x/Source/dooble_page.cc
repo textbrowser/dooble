@@ -299,6 +299,12 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(open_link_in_new_window(const QUrl &)),
 	  this,
 	  SIGNAL(open_link_in_new_window(const QUrl &)));
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+  connect(m_view,
+	  SIGNAL(printRequested(void)),
+	  this,
+	  SIGNAL(print(void)));
+#endif
   connect(m_view,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
