@@ -28,6 +28,7 @@
 #include <QClipboard>
 #include <QFileDialog>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QStandardPaths>
@@ -173,6 +174,26 @@ void dooble_downloads::delete_selected(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QModelIndexList list(m_ui.table->selectionModel()->selectedIndexes());
+
+  if(!list.isEmpty())
+    {
+      QApplication::restoreOverrideCursor();
+
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Are you sure that you wish to delete the selected item(s)?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    }
 
   for(int i = list.size() - 1; i >= 0; i--)
     {
@@ -373,6 +394,26 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  if(m_ui.table->rowCount() > 0)
+    {
+      QApplication::restoreOverrideCursor();
+
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Are you sure that you wish to delete the selected item(s)?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    }
+
   for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
     {
       dooble_downloads_item *downloads_item = qobject_cast
@@ -418,6 +459,19 @@ void dooble_downloads::slot_delete_row(void)
 
   if(downloads_item && downloads_item->is_finished())
     {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText
+	(tr("Are you sure that you wish to delete the selected entry?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	return;
+
       remove_entry(downloads_item->oid());
       m_ui.table->removeRow(action->property("row").toInt());
     }
