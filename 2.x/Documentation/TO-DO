@@ -11,6 +11,7 @@ Completed Items
 - Allow temporary acceptance of blocked dialogs.
 - Animated Scrolling belongs in the Web section.
 - Apples and shortcuts.
+- Application lock.
 - Auto-hide tab bar.
 - Blocked Domains. Show examples. Restrict input.
 - Certificate exceptions panel.
@@ -133,7 +134,6 @@ Completed Items
 
 Remaining Items
 
-- Application lock.
 - Auto-correct addresses.
 - Fancy completer.
 - Favorite-like search engines.
