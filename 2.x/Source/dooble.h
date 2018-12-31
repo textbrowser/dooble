@@ -77,7 +77,6 @@ class dooble: public QMainWindow
   bool is_private(void) const;
   dooble_page *current_page(void) const;
   dooble_page *new_page(const QUrl &url, bool is_private);
-  static QPointer<dooble_history> s_history;
   static QPointer<dooble_about> s_about;
   static QPointer<dooble_accepted_or_blocked_domains>
     s_accepted_or_blocked_domains;
@@ -88,6 +87,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_cryptography> s_cryptography;
   static QPointer<dooble_downloads> s_downloads;
   static QPointer<dooble_favorites_popup> s_favorites_window;
+  static QPointer<dooble_history> s_history;
   static QPointer<dooble_history_window> s_history_window;
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_web_engine_url_request_interceptor>

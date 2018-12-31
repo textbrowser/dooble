@@ -378,9 +378,9 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   if(m_ui.tab->currentWidget() == page)
     page->address_widget()->setFocus();
 
-  if(!url.isEmpty() && url.isValid())
-    page->load(url);
-
+  page->hide_location_frame(dooble::s_application->application_locked());
+  page->load(url);
+  page->view()->setVisible(!dooble::s_application->application_locked());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
   return page;
@@ -741,10 +741,8 @@ void dooble::new_page(dooble_page *page)
 
   if(title.isEmpty())
     title = tr("New Tab");
-  else
-    title.replace("&", "&&");
 
-  m_ui.tab->addTab(page, title);
+  m_ui.tab->addTab(page, title.replace("&", "&&"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
@@ -776,10 +774,8 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   if(title.isEmpty())
     title = tr("New Tab");
-  else
-    title.replace("&", "&&");
 
-  m_ui.tab->addTab(page, title);
+  m_ui.tab->addTab(page, title.replace("&", "&&"));
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
@@ -1640,17 +1636,51 @@ void dooble::slot_application_locked(bool state)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(int i = 0; i < m_ui.tab->count(); i++)
+  if(m_cookies_window)
+    m_cookies_window->close();
+
+  s_about->close();
+  s_accepted_or_blocked_domains->close();
+  s_certificate_exceptions->close();
+  s_cookies_window->close();
+  s_downloads->close();
+  s_favorites_window->close();
+  s_history_window->close();
+  s_settings->close();
+
+  for(int i = m_ui.tab->count() - 1; i >= 0; i--)
     {
       dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 
       if(page)
 	{
+	  if(state)
+	    {
+	      m_ui.tab->setTabIcon(i, QIcon());
+	      m_ui.tab->setTabText(i, tr("Application Locked"));
+	      m_ui.tab->setTabToolTip(i, tr("Application Locked"));
+	    }
+	  else
+	    {
+	      QString title
+		(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
+
+	      if(title.isEmpty())
+		title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
+
+	      if(title.isEmpty())
+		title = tr("about:blank");
+
+	      m_ui.tab->setTabIcon(i, page->icon());
+	      m_ui.tab->setTabText(i, title.replace("&", "&&"));
+	      m_ui.tab->setTabToolTip(i, title);
+	    }
+
 	  page->hide_location_frame(state);
 	  page->view()->setVisible(!state);
 	}
-
-      m_ui.tab->widget(i)->setEnabled(!state);
+      else
+	m_ui.tab->removeTab(i);
     }
 
   if(state)
