@@ -514,6 +514,11 @@ void dooble_page::go_to_forward_item(int index)
     m_view->history()->goToItem(items.at(index));
 }
 
+void dooble_page::hide_location_frame(bool state)
+{
+  m_ui.top_frame->setVisible(!state);
+}
+
 void dooble_page::load(const QUrl &url)
 {
   m_view->stop();

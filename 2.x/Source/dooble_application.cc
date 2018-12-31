@@ -35,6 +35,7 @@ QHash<QString, QColor> dooble_application::s_theme_colors;
 dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
+  m_application_locked = false;
   m_translator = nullptr;
 
   QFont font(this->font());
@@ -54,6 +55,11 @@ QString dooble_application::style_name(void) const
     (style() ? style()->objectName().toLower().trimmed() : "");
 
   return style_name;
+}
+
+bool dooble_application::application_locked(void) const
+{
+  return m_application_locked;
 }
 
 void dooble_application::install_translator(void)
@@ -102,4 +108,10 @@ void dooble_application::prepare_theme_colors(void)
   s_theme_colors["orange-selected-tab-color"] = "#616161";
   s_theme_colors["orange-status-bar-text-color"] = "white";
   s_theme_colors["orange-tabbar-background-color"] = "#e65100";
+}
+
+void dooble_application::slot_lock_application(void)
+{
+  m_application_locked = !m_application_locked;
+  emit application_locked(m_application_locked);
 }

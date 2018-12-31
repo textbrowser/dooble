@@ -73,6 +73,7 @@ class dooble_page: public QWidget
   void download(const QString &file_name, const QUrl &url);
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
+  void hide_location_frame(bool state);
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
   void reload(void);

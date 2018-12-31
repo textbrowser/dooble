@@ -494,9 +494,24 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
     action->setChecked(page->is_location_frame_hidden());
 
   action->setEnabled(page && tab_at > -1);
+  menu.addSeparator();
+
+  QAction *lock_action = menu.addAction(tr("Lock Application"),
+					dooble::s_application,
+					SLOT(slot_lock_application(void)));
+
+  lock_action->setCheckable(true);
+  lock_action->setChecked(dooble::s_application->application_locked());
+  lock_action->setEnabled(dooble_settings::has_dooble_credentials());
   back_action->setEnabled(page && page->can_go_back() && tab_at > -1);
   forward_action->setEnabled(page && page->can_go_forward() && tab_at > -1);
   reload_action->setEnabled(page && tab_at > -1);
+
+  foreach(QAction *action, menu.actions())
+    if(action != lock_action)
+      if(dooble::s_application->application_locked())
+	action->setEnabled(false);
+
   menu.exec(mapToGlobal(point));
 }
 

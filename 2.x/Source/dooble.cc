@@ -446,6 +446,10 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_populate_containers_timer_timeout(void)),
 	  Qt::UniqueConnection);
+  connect(dooble::s_application,
+	  SIGNAL(application_locked(bool)),
+	  this,
+	  SLOT(slot_application_locked(bool)));
   connect(m_ui.menu_edit,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -1632,6 +1636,39 @@ void dooble::slot_about_to_show_main_menu(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble::slot_application_locked(bool state)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+
+      if(page)
+	{
+	  page->hide_location_frame(state);
+	  page->view()->setVisible(!state);
+	}
+
+      m_ui.tab->widget(i)->setEnabled(!state);
+    }
+
+  if(state)
+    {
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false);
+      m_ui.tab->setTabsClosable(false);
+      setWindowTitle(tr("Dooble: Application Locked"));
+    }
+  else
+    {
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true);
+      m_ui.tab->setTabsClosable(tabs_closable());
+      slot_tab_index_changed(m_ui.tab->currentIndex());
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble::slot_authenticate(void)
 {
   if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
@@ -2505,6 +2542,12 @@ void dooble::slot_tab_close_requested(int index)
 
 void dooble::slot_tab_index_changed(int index)
 {
+  if(dooble::s_application->application_locked())
+    {
+      setWindowTitle(tr("Dooble: Application Locked"));
+      return;
+    }
+
   dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(!page)

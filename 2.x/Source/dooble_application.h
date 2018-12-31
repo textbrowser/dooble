@@ -40,14 +40,20 @@ class dooble_application: public QApplication
   static QHash<QString, QColor> s_theme_colors;
   dooble_application(int &argc, char **argv);
   QString style_name(void) const;
+  bool application_locked(void) const;
   void install_translator(void);
   static void prepare_theme_colors(void);
 
  private:
   QTranslator *m_translator;
+  bool m_application_locked;
+
+ private slots:
+  void slot_lock_application(void);
 
  signals:
   void address_widget_populated(void);
+  void application_locked(bool state);
   void cookies_cleared(void);
   void dooble_credentials_authenticated(bool state);
   void favorites_cleared(void);
