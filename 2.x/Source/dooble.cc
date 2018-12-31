@@ -291,7 +291,10 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 dooble::~dooble()
 {
   while(!m_shortcuts.isEmpty())
-    m_shortcuts.takeFirst()->deleteLater();
+    if(m_shortcuts.first())
+      m_shortcuts.takeFirst()->deleteLater();
+    else
+      m_shortcuts.removeFirst();
 }
 
 bool dooble::can_exit(void)
@@ -1645,6 +1648,16 @@ void dooble::slot_about_to_show_main_menu(void)
 void dooble::slot_application_locked(bool state)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < m_shortcuts.size(); i++)
+    if(m_shortcuts.at(i))
+      {
+	if(QKeySequence(Qt::ControlModifier + Qt::Key_W) ==
+	   m_shortcuts.at(i)->key())
+	  m_shortcuts.at(i)->setEnabled(!state && tabs_closable());
+	else
+	  m_shortcuts.at(i)->setEnabled(!state);
+      }
 
   if(m_cookies_window)
     m_cookies_window->close();
