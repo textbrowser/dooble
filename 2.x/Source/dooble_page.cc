@@ -1932,3 +1932,8 @@ void dooble_page::slot_zoom_reset(void)
   m_view->setZoomFactor(1.0);
   emit zoomed(m_view->zoomFactor());
 }
+
+void dooble_page::stop(void)
+{
+  m_view->stop();
+}

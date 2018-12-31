@@ -44,6 +44,7 @@
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_downloads.h"
+#include "dooble_favicons.h"
 #include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
@@ -365,10 +366,19 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   dooble_page *page = new dooble_page(m_web_engine_profile, nullptr, m_ui.tab);
 
   prepare_page_connections(page);
-  m_ui.tab->addTab(page, tr("New Tab"));
+
+  if(dooble::s_application->application_locked())
+    m_ui.tab->addTab(page, tr("Application Locked"));
+  else
+    m_ui.tab->addTab(page, tr("New Tab"));
+
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
-  m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), tr("New Tab"));
+
+  if(dooble::s_application->application_locked())
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), tr("Application Locked"));
+  else
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), tr("New Tab"));
 
   if(dooble_settings::setting("access_new_tabs").toBool() ||
      qobject_cast<QShortcut *> (sender()) ||
@@ -1650,15 +1660,16 @@ void dooble::slot_application_locked(bool state)
 
   for(int i = m_ui.tab->count() - 1; i >= 0; i--)
     {
-      dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+      dooble_page *page = nullptr;
 
-      if(page)
+      if((page = qobject_cast<dooble_page *> (m_ui.tab->widget(i))))
 	{
 	  if(state)
 	    {
-	      m_ui.tab->setTabIcon(i, QIcon());
+	      m_ui.tab->setTabIcon(i, dooble_favicons::icon(QUrl()));
 	      m_ui.tab->setTabText(i, tr("Application Locked"));
 	      m_ui.tab->setTabToolTip(i, tr("Application Locked"));
+	      page->stop();
 	    }
 	  else
 	    {
@@ -1986,6 +1997,9 @@ void dooble::slot_enable_shortcut(void)
 
 void dooble::slot_icon_changed(const QIcon &icon)
 {
+  if(dooble::s_application->application_locked())
+    return;
+
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(page)
@@ -2680,6 +2694,9 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
 void dooble::slot_title_changed(const QString &title)
 {
+  if(dooble::s_application->application_locked())
+    return;
+
   dooble_page *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)

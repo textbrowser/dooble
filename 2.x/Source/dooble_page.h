@@ -79,6 +79,7 @@ class dooble_page: public QWidget
   void reload(void);
   void save(const QString &file_name);
   void show_menu(void);
+  void stop(void);
 
  protected:
   void resizeEvent(QResizeEvent *event);
