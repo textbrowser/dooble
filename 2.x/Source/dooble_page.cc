@@ -373,6 +373,11 @@ QAction *dooble_page::full_screen_action(void) const
   return m_full_screen_action;
 }
 
+QFrame *dooble_page::frame(void) const
+{
+  return m_ui.frame;
+}
+
 QIcon dooble_page::icon(void) const
 {
   if(m_view->icon().isNull())
@@ -517,6 +522,11 @@ void dooble_page::go_to_forward_item(int index)
 void dooble_page::hide_location_frame(bool state)
 {
   m_ui.top_frame->setVisible(!state);
+}
+
+void dooble_page::hide_status_bar(bool state)
+{
+  m_ui.status_bar->setVisible(state);
 }
 
 void dooble_page::load(const QUrl &url)

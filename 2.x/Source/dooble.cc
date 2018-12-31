@@ -1682,7 +1682,9 @@ void dooble::slot_application_locked(bool state)
 	      m_ui.tab->setTabIcon(i, dooble_favicons::icon(QUrl()));
 	      m_ui.tab->setTabText(i, tr("Application Locked"));
 	      m_ui.tab->setTabToolTip(i, tr("Application Locked"));
+	      page->frame()->setFrameShape(QFrame::NoFrame);
 	      page->hide_location_frame(true);
+	      page->hide_status_bar(true);
 	      page->stop();
 	    }
 	  else
@@ -1699,7 +1701,10 @@ void dooble::slot_application_locked(bool state)
 	      m_ui.tab->setTabIcon(i, page->icon());
 	      m_ui.tab->setTabText(i, title.replace("&", "&&"));
 	      m_ui.tab->setTabToolTip(i, title);
+	      page->frame()->setFrameShape(QFrame::StyledPanel);
 	      page->hide_location_frame(page->is_location_frame_hidden());
+	      page->hide_status_bar
+		(dooble_settings::setting("status_bar_visible").toBool());
 	    }
 
 	  page->view()->setVisible(!state);

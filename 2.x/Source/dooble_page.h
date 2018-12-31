@@ -59,6 +59,7 @@ class dooble_page: public QWidget
   ~dooble_page();
   QAction *action_close_tab(void) const;
   QAction *full_screen_action(void) const;
+  QFrame *frame(void) const;
   QIcon icon(void) const;
   QMenu *menu(void);
   QString title(void) const;
@@ -74,6 +75,7 @@ class dooble_page: public QWidget
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
   void hide_location_frame(bool state);
+  void hide_status_bar(bool state);
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
   void reload(void);
