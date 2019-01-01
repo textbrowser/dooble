@@ -1710,7 +1710,7 @@ void dooble::slot_application_locked(bool state)
   if(state)
     {
       m_ui.menu_bar->setVisible(false);
-      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false);
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setVisible(false);
       m_ui.tab->setTabsClosable(false);
       setStyleSheet
 	("QMainWindow {border: 7px solid #ef5350;}");
@@ -1720,7 +1720,7 @@ void dooble::slot_application_locked(bool state)
     {
       m_ui.menu_bar->setVisible
 	(dooble_settings::setting("main_menu_bar_visible").toBool());
-      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true);
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setVisible(true);
       m_ui.tab->setTabsClosable(tabs_closable());
       setStyleSheet("");
       slot_tab_index_changed(m_ui.tab->currentIndex());
