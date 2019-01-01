@@ -31,6 +31,7 @@
 #include <QApplication>
 
 class QTranslator;
+class dooble;
 
 class dooble_application: public QApplication
 {
@@ -50,11 +51,11 @@ class dooble_application: public QApplication
   bool m_application_locked;
 
  private slots:
-  void slot_application_locked(bool state);
+  void slot_application_locked(bool state, dooble *d);
 
  signals:
   void address_widget_populated(void);
-  void application_locked(bool state);
+  void application_locked(bool state, dooble *d);
   void cookies_cleared(void);
   void dooble_credentials_authenticated(bool state);
   void favorites_cleared(void);

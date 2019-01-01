@@ -146,7 +146,7 @@ class dooble: public QMainWindow
  private slots:
   void slot_about_to_hide_main_menu(void);
   void slot_about_to_show_main_menu(void);
-  void slot_application_locked(bool state);
+  void slot_application_locked(bool state, dooble *d);
   void slot_authenticate(void);
   void slot_clear_visited_links(void);
   void slot_close_tab(void);
@@ -208,6 +208,7 @@ class dooble: public QMainWindow
   void slot_window_close_requested(void);
 
  signals:
+  void application_locked(bool state, dooble *d);
   void dooble_credentials_authenticated(bool state);
 };
 

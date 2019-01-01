@@ -30,6 +30,8 @@
 
 #include <QTabBar>
 
+class dooble;
+
 class dooble_tab_bar: public QTabBar
 {
   Q_OBJECT
@@ -64,7 +66,7 @@ class dooble_tab_bar: public QTabBar
   void slot_webgl(void);
 
  signals:
-  void application_locked(bool state);
+  void application_locked(bool state, dooble *d);
   void decouple_tab(int index);
   void new_tab(void);
   void open_tab_as_new_private_window(int index);

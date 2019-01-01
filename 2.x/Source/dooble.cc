@@ -460,9 +460,9 @@ void dooble::connect_signals(void)
 	  SLOT(slot_populate_containers_timer_timeout(void)),
 	  Qt::UniqueConnection);
   connect(dooble::s_application,
-	  SIGNAL(application_locked(bool)),
+	  SIGNAL(application_locked(bool, dooble *)),
 	  this,
-	  SLOT(slot_application_locked(bool)));
+	  SLOT(slot_application_locked(bool, dooble *)));
   connect(m_ui.menu_edit,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -572,6 +572,11 @@ void dooble::connect_signals(void)
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)),
+	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(application_locked(bool, dooble *)),
+	  s_application,
+	  SIGNAL(application_locked(bool, dooble *)),
 	  Qt::UniqueConnection);
   connect(this,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
@@ -1639,12 +1644,18 @@ void dooble::slot_about_to_show_main_menu(void)
   QApplication::restoreOverrideCursor();
 }
 
-void dooble::slot_application_locked(bool state)
+void dooble::slot_application_locked(bool state, dooble *d)
 {
   bool locked = state;
 
   if(!locked)
     {
+      if(!dooble::s_application->application_locked())
+	goto unlock_label;
+
+      if(d != this)
+	return;
+
       QDialog dialog(this);
       Ui_dooble_authenticate ui;
 
@@ -1686,14 +1697,16 @@ void dooble::slot_application_locked(bool state)
 
       if(!cryptography.authenticated())
 	{
-	  slot_application_locked(locked);
+	  slot_application_locked(locked, this);
 	  return;
 	}
 
       dooble::s_application->set_application_locked(false);
       locked = false;
+      emit application_locked(false, this);
     }
 
+ unlock_label:
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(int i = 0; i < m_shortcuts.size(); i++)

@@ -32,6 +32,7 @@
 #include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
+#include "dooble_ui_utilities.h"
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
@@ -69,9 +70,9 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 	  this,
 	  SLOT(slot_settings_applied(void)));
   connect(this,
-	  SIGNAL(application_locked(bool)),
+	  SIGNAL(application_locked(bool, dooble *)),
 	  dooble::s_application,
-	  SLOT(slot_application_locked(bool)));
+	  SLOT(slot_application_locked(bool, dooble *)));
   connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
@@ -266,7 +267,8 @@ void dooble_tab_bar::slot_application_locked(void)
   QAction *action = qobject_cast<QAction *> (sender());
 
   if(action)
-    emit application_locked(action->isChecked());
+    emit application_locked
+      (action->isChecked(), dooble_ui_utilities::find_parent_dooble(this));
 }
 
 void dooble_tab_bar::slot_close_other_tabs(void)

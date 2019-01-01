@@ -27,6 +27,7 @@
 
 #include <QTranslator>
 
+#include "dooble.h"
 #include "dooble_application.h"
 #include "dooble_settings.h"
 
@@ -115,8 +116,8 @@ void dooble_application::set_application_locked(bool state)
   m_application_locked = state;
 }
 
-void dooble_application::slot_application_locked(bool state)
+void dooble_application::slot_application_locked(bool state, dooble *d)
 {
   m_application_locked = true;
-  emit application_locked(state);
+  emit application_locked(state, d);
 }
