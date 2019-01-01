@@ -55,6 +55,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
 			 QWidget *parent):QWidget(parent)
 {
+  m_is_location_frame_hidden = false;
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
   m_menu = new QMenu(this);
@@ -419,7 +420,7 @@ bool dooble_page::can_go_forward(void) const
 
 bool dooble_page::is_location_frame_hidden(void) const
 {
-  return !m_ui.top_frame->isVisible();
+  return m_is_location_frame_hidden;
 }
 
 bool dooble_page::is_private(void) const
@@ -521,12 +522,13 @@ void dooble_page::go_to_forward_item(int index)
 
 void dooble_page::hide_location_frame(bool state)
 {
+  m_is_location_frame_hidden = state;
   m_ui.top_frame->setVisible(!state);
 }
 
 void dooble_page::hide_status_bar(bool state)
 {
-  m_ui.status_bar->setVisible(state);
+  m_ui.status_bar->setVisible(!state);
 }
 
 void dooble_page::load(const QUrl &url)
@@ -1457,11 +1459,6 @@ void dooble_page::slot_go_to_forward_item(void)
 
   if(action)
     go_to_forward_item(action->property("index").toInt());
-}
-
-void dooble_page::slot_hide_location_frame(bool state)
-{
-  m_ui.top_frame->setVisible(!state);
 }
 
 void dooble_page::slot_icon_changed(const QIcon &icon)

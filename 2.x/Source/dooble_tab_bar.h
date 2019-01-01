@@ -64,7 +64,6 @@ class dooble_tab_bar: public QTabBar
 
  signals:
   void decouple_tab(int index);
-  void hide_location_frame(bool state);
   void new_tab(void);
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);

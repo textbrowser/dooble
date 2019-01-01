@@ -857,12 +857,6 @@ void dooble::prepare_page_connections(dooble_page *page)
   if(!page)
     return;
 
-  connect(m_ui.tab->tabBar(),
-	  SIGNAL(hide_location_frame(bool)),
-	  page,
-	  SLOT(slot_hide_location_frame(bool)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(authenticate(void)),
 	  this,
@@ -1704,7 +1698,7 @@ void dooble::slot_application_locked(bool state)
 	      page->frame()->setFrameShape(QFrame::StyledPanel);
 	      page->hide_location_frame(page->is_location_frame_hidden());
 	      page->hide_status_bar
-		(dooble_settings::setting("status_bar_visible").toBool());
+		(!dooble_settings::setting("status_bar_visible").toBool());
 	    }
 
 	  page->view()->setVisible(!state);

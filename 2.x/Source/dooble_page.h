@@ -96,6 +96,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_settings_action;
   QVector<QPointer<dooble_web_engine_view> > m_last_javascript_popups;
   Ui_dooble_page m_ui;
+  bool m_is_location_frame_hidden;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
   dooble_web_engine_view *m_view;
@@ -138,7 +139,6 @@ class dooble_page: public QWidget
   void slot_go_forward(void);
   void slot_go_to_backward_item(void);
   void slot_go_to_forward_item(void);
-  void slot_hide_location_frame(bool state);
   void slot_icon_changed(const QIcon &icon);
   void slot_javascript_allow_popup_exception(void);
   void slot_link_hovered(const QString &url);

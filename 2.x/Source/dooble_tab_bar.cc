@@ -295,8 +295,20 @@ void dooble_tab_bar::slot_hide_location_frame(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
 
-  if(action)
-    emit hide_location_frame(action->isChecked());
+  if(!action)
+    return;
+
+  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
+    (parentWidget());
+
+  if(tab_widget)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(tab_widget->widget(tabAt(action->property("point").toPoint())));
+
+      if(page)
+	page->hide_location_frame(action->isChecked());
+    }
 }
 
 void dooble_tab_bar::slot_javascript(void)
@@ -489,6 +501,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  this,
 			  SLOT(slot_hide_location_frame(void)));
   action->setCheckable(true);
+  action->setEnabled(page && tab_at > -1);
+  action->setProperty("point", point);
 
   if(page)
     action->setChecked(page->is_location_frame_hidden());
