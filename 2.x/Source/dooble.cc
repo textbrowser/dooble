@@ -1696,7 +1696,7 @@ void dooble::slot_application_locked(bool state)
 	      m_ui.tab->setTabText(i, title.replace("&", "&&"));
 	      m_ui.tab->setTabToolTip(i, title);
 	      page->frame()->setFrameShape(QFrame::StyledPanel);
-	      page->hide_location_frame(page->is_location_frame_hidden());
+	      page->hide_location_frame(page->is_location_frame_user_hidden());
 	      page->hide_status_bar
 		(!dooble_settings::setting("status_bar_visible").toBool());
 	    }

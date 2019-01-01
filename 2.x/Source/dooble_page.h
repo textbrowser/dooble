@@ -68,6 +68,7 @@ class dooble_page: public QWidget
   bool can_go_back(void) const;
   bool can_go_forward(void) const;
   bool is_location_frame_hidden(void) const;
+  bool is_location_frame_user_hidden(void) const;
   bool is_private(void) const;
   dooble_address_widget *address_widget(void) const;
   dooble_web_engine_view *view(void) const;
@@ -82,6 +83,7 @@ class dooble_page: public QWidget
   void save(const QString &file_name);
   void show_menu(void);
   void stop(void);
+  void user_hide_location_frame(bool state);
 
  protected:
   void resizeEvent(QResizeEvent *event);
@@ -96,7 +98,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_settings_action;
   QVector<QPointer<dooble_web_engine_view> > m_last_javascript_popups;
   Ui_dooble_page m_ui;
-  bool m_is_location_frame_hidden;
+  bool m_is_location_frame_user_hidden;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
   dooble_web_engine_view *m_view;

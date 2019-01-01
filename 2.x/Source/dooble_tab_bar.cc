@@ -307,7 +307,7 @@ void dooble_tab_bar::slot_hide_location_frame(void)
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
-	page->hide_location_frame(action->isChecked());
+	page->user_hide_location_frame(action->isChecked());
     }
 }
 
@@ -505,7 +505,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setProperty("point", point);
 
   if(page)
-    action->setChecked(page->is_location_frame_hidden());
+    action->setChecked(page->is_location_frame_user_hidden());
 
   action->setEnabled(page && tab_at > -1);
   menu.addSeparator();
