@@ -49,6 +49,7 @@ class dooble_tab_bar: public QTabBar
   void prepare_style_sheets(void);
 
  private slots:
+  void slot_application_locked(void);
   void slot_close_other_tabs(void);
   void slot_close_tab(void);
   void slot_decouple_tab(void);
@@ -63,6 +64,7 @@ class dooble_tab_bar: public QTabBar
   void slot_webgl(void);
 
  signals:
+  void application_locked(bool state);
   void decouple_tab(int index);
   void new_tab(void);
   void open_tab_as_new_private_window(int index);

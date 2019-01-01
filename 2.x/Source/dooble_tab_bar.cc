@@ -69,6 +69,10 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 	  this,
 	  SLOT(slot_settings_applied(void)));
   connect(this,
+	  SIGNAL(application_locked(bool)),
+	  dooble::s_application,
+	  SLOT(slot_application_locked(bool)));
+  connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
@@ -255,6 +259,14 @@ void dooble_tab_bar::showEvent(QShowEvent *event)
 {
   QTabBar::showEvent(event);
   emit set_visible_corner_button(true);
+}
+
+void dooble_tab_bar::slot_application_locked(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit application_locked(action->isChecked());
 }
 
 void dooble_tab_bar::slot_close_other_tabs(void)
@@ -511,8 +523,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
 
   QAction *lock_action = menu.addAction(tr("Lock Application"),
-					dooble::s_application,
-					SLOT(slot_lock_application(void)));
+					this,
+					SLOT(slot_application_locked(void)));
 
   lock_action->setCheckable(true);
   lock_action->setChecked(dooble::s_application->application_locked());

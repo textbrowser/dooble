@@ -733,7 +733,7 @@
                <x>0</x>
                <y>0</y>
                <width>481</width>
-               <height>686</height>
+               <height>732</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -817,7 +817,7 @@
                  <item>
                   <widget class="QLabel" name="label_5">
                    <property name="text">
-                    <string>Please note that the cryptographic algorithms which are included in Dooble have not been provided by third-parties. If this is a concern, please do not prepare permanent credentials.</string>
+                    <string>Please note that the cryptographic algorithms which are included in Dooble were implemented by the author(s) of Dooble. If this is a concern, please do not prepare permanent credentials.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>

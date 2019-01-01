@@ -1641,6 +1641,59 @@ void dooble::slot_about_to_show_main_menu(void)
 
 void dooble::slot_application_locked(bool state)
 {
+  bool locked = state;
+
+  if(!locked)
+    {
+      QDialog dialog(this);
+      Ui_dooble_authenticate ui;
+
+      ui.setupUi(&dialog);
+
+      if(s_application->style_name() == "macintosh")
+	ui.password->setAttribute(Qt::WA_MacShowFocusRect, false);
+
+      connect(ui.authenticate,
+	      SIGNAL(clicked(void)),
+	      &dialog,
+	      SLOT(accept(void)));
+      connect(ui.password,
+	      SIGNAL(returnPressed(void)),
+	      &dialog,
+	      SLOT(accept(void)));
+      dialog.setWindowTitle(tr("Dooble: Unlock Dooble"));
+
+      if(dialog.exec() != QDialog::Accepted)
+	return;
+
+      repaint();
+      QApplication::processEvents();
+
+      QByteArray salt
+	(QByteArray::fromHex(dooble_settings::setting("authentication_salt").
+			     toByteArray()));
+      QByteArray salted_password
+	(QByteArray::fromHex(dooble_settings::
+			     setting("authentication_salted_password").
+			     toByteArray()));
+      QString text(ui.password->text());
+      dooble_cryptography cryptography
+	(dooble_settings::setting("block_cipher_type").toString(),
+	 dooble_settings::setting("hash_type").toString());
+
+      cryptography.authenticate(salt, salted_password, text);
+      ui.password->clear();
+
+      if(!cryptography.authenticated())
+	{
+	  slot_application_locked(locked);
+	  return;
+	}
+
+      dooble::s_application->set_application_locked(false);
+      locked = false;
+    }
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(int i = 0; i < m_shortcuts.size(); i++)
@@ -1648,9 +1701,9 @@ void dooble::slot_application_locked(bool state)
       {
 	if(QKeySequence(Qt::ControlModifier + Qt::Key_W) ==
 	   m_shortcuts.at(i)->key())
-	  m_shortcuts.at(i)->setEnabled(!state && tabs_closable());
+	  m_shortcuts.at(i)->setEnabled(!locked && tabs_closable());
 	else
-	  m_shortcuts.at(i)->setEnabled(!state);
+	  m_shortcuts.at(i)->setEnabled(!locked);
       }
 
   if(m_cookies_window)
@@ -1671,7 +1724,7 @@ void dooble::slot_application_locked(bool state)
 
       if((page = qobject_cast<dooble_page *> (m_ui.tab->widget(i))))
 	{
-	  if(state)
+	  if(locked)
 	    {
 	      m_ui.tab->setTabIcon(i, dooble_favicons::icon(QUrl()));
 	      m_ui.tab->setTabText(i, tr("Application Locked"));
@@ -1701,26 +1754,25 @@ void dooble::slot_application_locked(bool state)
 		(!dooble_settings::setting("status_bar_visible").toBool());
 	    }
 
-	  page->view()->setVisible(!state);
+	  page->view()->setVisible(!locked);
 	}
       else
 	m_ui.tab->removeTab(i);
     }
 
-  if(state)
+  if(locked)
     {
       m_ui.menu_bar->setVisible(false);
-      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setVisible(false);
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false);
       m_ui.tab->setTabsClosable(false);
-      setStyleSheet
-	("QMainWindow {border: 7px solid #ef5350;}");
+      setStyleSheet("QMainWindow {border: 7px solid #ef5350;}");
       setWindowTitle(tr("Dooble: Application Locked"));
     }
   else
     {
       m_ui.menu_bar->setVisible
 	(dooble_settings::setting("main_menu_bar_visible").toBool());
-      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setVisible(true);
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true);
       m_ui.tab->setTabsClosable(tabs_closable());
       setStyleSheet("");
       slot_tab_index_changed(m_ui.tab->currentIndex());

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dooble</string>
+   <string>Dooble: Favorites</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Icons/icons.qrc">

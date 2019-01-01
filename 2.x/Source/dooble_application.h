@@ -42,6 +42,7 @@ class dooble_application: public QApplication
   QString style_name(void) const;
   bool application_locked(void) const;
   void install_translator(void);
+  void set_application_locked(bool state);
   static void prepare_theme_colors(void);
 
  private:
@@ -49,7 +50,7 @@ class dooble_application: public QApplication
   bool m_application_locked;
 
  private slots:
-  void slot_lock_application(void);
+  void slot_application_locked(bool state);
 
  signals:
   void address_widget_populated(void);

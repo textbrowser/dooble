@@ -110,8 +110,13 @@ void dooble_application::prepare_theme_colors(void)
   s_theme_colors["orange-tabbar-background-color"] = "#e65100";
 }
 
-void dooble_application::slot_lock_application(void)
+void dooble_application::set_application_locked(bool state)
 {
-  m_application_locked = !m_application_locked;
-  emit application_locked(m_application_locked);
+  m_application_locked = state;
+}
+
+void dooble_application::slot_application_locked(bool state)
+{
+  m_application_locked = true;
+  emit application_locked(state);
 }
