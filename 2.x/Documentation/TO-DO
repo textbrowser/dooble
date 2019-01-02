@@ -140,6 +140,7 @@ Remaining Items
 - Include date stamps in cookie containers.
 - Qt's digest class.
 - Send selected page text to search engine.
+- WebEngine fonts.
 - linkHovered() is emitted without user interaction.
 
 Unknown Items
