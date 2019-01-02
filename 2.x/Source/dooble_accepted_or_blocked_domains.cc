@@ -36,6 +36,7 @@
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
+#include "dooble_ui_utilities.h"
 
 dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   QMainWindow()
@@ -936,6 +937,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  progress.setStyleSheet("QWidget {background-color: white;}");
 	  progress.setWindowModality(Qt::ApplicationModal);
 	  progress.setWindowTitle(tr("Dooble: Progress"));
+	  dooble_ui_utilities::center_window_widget(this, &progress);
 	  progress.show();
 	  progress.update();
 
