@@ -732,7 +732,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>481</width>
+               <width>472</width>
                <height>732</height>
               </rect>
              </property>
@@ -817,7 +817,7 @@
                  <item>
                   <widget class="QLabel" name="label_5">
                    <property name="text">
-                    <string>Please note that the cryptographic algorithms which are included in Dooble were implemented by the author(s) of Dooble. If this is a concern, please do not prepare permanent credentials.</string>
+                    <string>Please note that some of the cryptographic algorithms which are included in Dooble were implemented by the author(s) of Dooble. If this is a concern, please do not prepare permanent credentials.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>
@@ -1240,7 +1240,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>327</width>
+               <width>437</width>
                <height>1020</height>
               </rect>
              </property>
