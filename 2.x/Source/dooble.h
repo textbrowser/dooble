@@ -37,8 +37,7 @@
 #include "dooble_settings.h"
 #include "ui_dooble.h"
 
-#define DOOBLE_DATE_VERSION_STRING "2019.01.10"
-#define DOOBLE_VERSION_STRING "2.1.9.5"
+#define DOOBLE_VERSION_STRING "2019.01.10"
 
 class QWebEngineDownloadItem;
 class QWebEngineProfile;
