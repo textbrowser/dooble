@@ -1,0 +1,7 @@
+Preparation:
+
+> gpg --full-generate-key
+> gpg --export -a > Documentation/dooble.asc
+
+Modify Documentation/dooble.pol and substitute id with respective
+key fingerprint.

@@ -2,13 +2,13 @@
 <!DOCTYPE Policy SYSTEM "http://www.debian.org/debsig/1.0/policy.dtd">
 <Policy xmlns="http://www.debian.org/debsig/1.0/">
 
-  <Origin Name="Text Browser" id="E324939BF29D7B80" Description="Dooble"/>
+  <Origin Name="Text Browser" id="9B2A4E7B411E26C5A76C1EE866E6A4C70DA51DCD" Description="Dooble"/>
 
   <Selection>
-    <Required Type="origin" File="debsig.gpg" id="E324939BF29D7B80"/>
+    <Required Type="origin" File="debsig.gpg" id="9B2A4E7B411E26C5A76C1EE866E6A4C70DA51DCD"/>
   </Selection>
 
    <Verification MinOptional="0">
-    <Required Type="origin" File="debsig.gpg" id="E324939BF29D7B80"/>
+    <Required Type="origin" File="debsig.gpg" id="9B2A4E7B411E26C5A76C1EE866E6A4C70DA51DCD"/>
    </Verification>
 </Policy>
