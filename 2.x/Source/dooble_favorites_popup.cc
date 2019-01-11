@@ -158,6 +158,16 @@ void dooble_favorites_popup::show(void)
   QDialog::show();
 }
 
+void dooble_favorites_popup::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool() && !parent())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("favorites_window_geometry").
+					   toByteArray()));
+
+  QDialog::showNormal();
+}
+
 void dooble_favorites_popup::slot_delete_selected(void)
 {
   if(!dooble::s_history)

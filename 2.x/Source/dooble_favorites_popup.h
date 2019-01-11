@@ -43,6 +43,7 @@ class dooble_favorites_popup: public QDialog
 
  public slots:
   void show(void);
+  void showNormal(void);
 
  protected:
   void keyPressEvent(QKeyEvent *event);

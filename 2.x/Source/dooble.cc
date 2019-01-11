@@ -2537,10 +2537,22 @@ void dooble::slot_show_downloads(void)
 void dooble::slot_show_favorites(void)
 {
   s_favorites_popup_opened_from_dooble_window = this;
-  s_favorites_window->activateWindow();
   s_favorites_window->prepare_viewport_icons();
+
+  if(s_favorites_window->isVisible())
+    {
+      s_favorites_window->activateWindow();
+      s_favorites_window->raise();
+      return;
+    }
+
+  s_favorites_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, s_favorites_window);
+
+  s_favorites_window->activateWindow();
   s_favorites_window->raise();
-  s_favorites_window->show();
 }
 
 void dooble::slot_show_full_screen(void)
