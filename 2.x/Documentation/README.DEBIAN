@@ -53,4 +53,4 @@ cp -p ./dooble.d/2.x/dooble.desktop dooble-debian.d/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-debian.d/.
 cp -r /usr/local/dooble dooble-debian.d/usr/local/.
 fakeroot dpkg-deb --build dooble-debian.d Dooble-2019.01.15_amd64.deb
-debsigs --sign=origin -k 9B2A4E7B411E26C5A76C1EE866E6A4C70DA51DCD Dooble-2019.01.15_amd64.deb
+debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2019.01.15_amd64.deb
