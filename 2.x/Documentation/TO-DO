@@ -151,12 +151,12 @@ Unknown Items
 - Custom icon sets.
 - DTLS and Echo-DNS.
 - Element-selection option.
-- KMAC vs. HMAC.
+- HMAC or KMAC.
 - Multiple certificate exceptions.
 - Optional Document Mode.
 - Print preview. Qt?
 - Socket states.
-- Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control().
-  Remove synchronous OFF.
+- Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
+  OFF.
 - Super-fancy icon set.
 - The random-bytes implementation uses a deprecated interface on Windows.
