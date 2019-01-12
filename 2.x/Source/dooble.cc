@@ -2701,7 +2701,11 @@ void dooble::slot_tab_index_changed(int index)
       return;
     }
   else if(page != m_ui.tab->currentWidget())
-    return;
+    {
+      page->hide_status_bar
+	(!dooble_settings::setting("status_bar_visible").toBool());
+      return;
+    }
 
   if(page->title().trimmed().isEmpty())
     setWindowTitle(tr("Dooble"));
@@ -2709,6 +2713,8 @@ void dooble::slot_tab_index_changed(int index)
     setWindowTitle(tr("%1 - Dooble").
 		   arg(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH)));
 
+  page->hide_status_bar
+    (!dooble_settings::setting("status_bar_visible").toBool());
   page->view()->setFocus();
 }
 
