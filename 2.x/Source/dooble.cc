@@ -399,10 +399,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
     page->load(url);
   else
     page->load
-      (QUrl::
-       fromEncoded(QByteArray::
-		   fromBase64(dooble_settings::setting("home_url").
-			      toByteArray())));
+      (QUrl::fromEncoded(dooble_settings::setting("home_url").toByteArray()));
 
   page->view()->setVisible(!dooble::s_application->application_locked());
   prepare_control_w_shortcut();
