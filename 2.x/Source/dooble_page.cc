@@ -1570,8 +1570,8 @@ void dooble_page::slot_load_finished(bool ok)
   ** url may be unrelated.
   */
 
-  if(dooble::s_history->is_favorite(m_view->history()->currentItem().url()) ||
-     !m_is_private)
+  if(dooble::s_history->
+     is_favorite(m_view->history()->currentItem().url()) || !m_is_private)
     dooble::s_history->save_item
       (QIcon(), m_view->history()->currentItem(), true);
 

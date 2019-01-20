@@ -247,6 +247,8 @@ int main(int argc, char *argv[])
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::FocusOnNavigationEnabled, true);
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows, true);

@@ -249,6 +249,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["features_permissions"] = true;
   s_settings["hash_type"] = "SHA3-512";
   s_settings["hash_type_index"] = 1;
+  s_settings["home_url"] =
+    QUrl::fromUserInput("about: blank").toEncoded().toBase64();
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
@@ -899,6 +901,16 @@ void dooble_settings::restore(bool read_database)
     (qBound(0,
 	    s_settings.value("hash_type_index", 1).toInt(), // SHA3-512
 	    m_ui.hash->count() - 1));
+
+  QUrl url(QUrl::
+	   fromEncoded(QByteArray::
+		       fromBase64(s_settings.value("home_url").toByteArray())));
+
+  if(!url.isEmpty() && url.isValid())
+    m_ui.home_url->setText(url.toString());
+  else
+    m_ui.home_url->setText("about: blank");
+
   m_ui.icon_set->setCurrentIndex
     (qBound(0,
 	    s_settings.value("icon_set_index", 0).toInt(),
@@ -983,6 +995,8 @@ void dooble_settings::restore(bool read_database)
   else
     s_settings["hash_type"] = "SHA3-512";
 
+  s_settings["home_url"] = QUrl::fromUserInput(m_ui.home_url->text()).
+    toEncoded().toBase64();
   s_settings["icon_set"] = "Material Design";
 
   switch(m_ui.theme_color->currentIndex())
@@ -1522,6 +1536,9 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
+  if(m_ui.home_url->text().trimmed().isEmpty())
+    m_ui.home_url->setText("about: blank");
+
   if(m_ui.user_agent->text().trimmed().isEmpty())
     {
       m_ui.user_agent->setText(s_http_user_agent);
@@ -1666,6 +1683,18 @@ void dooble_settings::slot_apply(void)
     ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
   set_setting
     ("features_permissions", m_ui.features_permissions_groupbox->isChecked());
+
+  QUrl url(QUrl::fromUserInput(m_ui.home_url->text().trimmed()));
+
+  m_ui.home_url->setText(url.toString());
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    set_setting
+      ("home_url",
+       dooble::s_cryptography->encrypt_then_mac(url.toEncoded()).toBase64());
+  else
+    set_setting("home_url", url.toEncoded().toBase64());
+
   set_setting("icon_set_index", m_ui.icon_set->currentIndex());
 
   {
@@ -1967,6 +1996,19 @@ void dooble_settings::slot_populate(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.features_permissions->setRowCount(0);
+
+  QUrl url(QUrl::
+	   fromEncoded(dooble::
+		       s_cryptography->
+		       mac_then_decrypt(QByteArray::
+					fromBase64(setting("home_url").
+						   toByteArray()))));
+
+  if(!url.isEmpty() && url.isValid())
+    m_ui.home_url->setText(url.toString());
+  else
+    m_ui.home_url->setText("about: blank");
+
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
   s_javascript_block_popup_exceptions.clear();
   s_site_features_permissions.clear();

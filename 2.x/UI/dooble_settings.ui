@@ -327,6 +327,27 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_17">
+            <item>
+             <widget class="QLabel" name="label_25">
+              <property name="text">
+               <string>&amp;Home</string>
+              </property>
+              <property name="buddy">
+               <cstring>home_url</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="home_url">
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_16">
             <item>
              <widget class="QLabel" name="label_3">
@@ -1239,7 +1260,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-274</y>
                <width>437</width>
                <height>1020</height>
               </rect>
@@ -1713,6 +1734,7 @@
   <tabstop>cache_type</tabstop>
   <tabstop>allow_closing_of_single_tab</tabstop>
   <tabstop>denote_private_widgets</tabstop>
+  <tabstop>home_url</tabstop>
   <tabstop>icon_set</tabstop>
   <tabstop>language</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>

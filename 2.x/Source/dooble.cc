@@ -145,6 +145,10 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	 QWebEngineSettings::defaultSettings()->
 	 testAttribute(QWebEngineSettings::ErrorPageEnabled));
       m_web_engine_profile->settings()->setAttribute
+	(QWebEngineSettings::FocusOnNavigationEnabled,
+	 QWebEngineSettings::defaultSettings()->
+	 testAttribute(QWebEngineSettings::FocusOnNavigationEnabled));
+      m_web_engine_profile->settings()->setAttribute
 	(QWebEngineSettings::FullScreenSupportEnabled, true);
       m_web_engine_profile->settings()->setAttribute
 	(QWebEngineSettings::JavascriptCanAccessClipboard,
@@ -385,14 +389,21 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
   if(dooble_settings::setting("access_new_tabs").toBool() ||
      qobject_cast<QShortcut *> (sender()) ||
-     qobject_cast<dooble_tab_widget *> (sender()) || !sender())
-    m_ui.tab->setCurrentWidget(page); // Order is important.
-
-  if(m_ui.tab->currentWidget() == page)
-    page->address_widget()->setFocus();
+     qobject_cast<dooble_tab_widget *> (sender()) ||
+     !sender())
+    m_ui.tab->setCurrentWidget(page);
 
   page->hide_location_frame(dooble::s_application->application_locked());
-  page->load(url);
+
+  if(!url.isEmpty() && url.isValid())
+    page->load(url);
+  else
+    page->load
+      (QUrl::
+       fromEncoded(QByteArray::
+		   fromBase64(dooble_settings::setting("home_url").
+			      toByteArray())));
+
   page->view()->setVisible(!dooble::s_application->application_locked());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
@@ -766,12 +777,10 @@ void dooble::new_page(dooble_page *page)
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
-    m_ui.tab->setCurrentWidget(page); // Order is important.
-
-  if(m_ui.tab->currentWidget() == page)
-    page->address_widget()->setFocus();
+    m_ui.tab->setCurrentWidget(page);
 
   page->address_widget()->selectAll();
+  page->address_widget()->setFocus();
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
 }
@@ -799,11 +808,10 @@ void dooble::new_page(dooble_web_engine_view *view)
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
 
   if(dooble_settings::setting("access_new_tabs").toBool())
-    m_ui.tab->setCurrentWidget(page); // Order is important.
+    m_ui.tab->setCurrentWidget(page);
 
-  if(m_ui.tab->currentWidget() == page)
-    page->address_widget()->setFocus();
-
+  page->address_widget()->selectAll();
+  page->address_widget()->setFocus();
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
 }
@@ -2093,12 +2101,6 @@ void dooble::slot_icon_changed(const QIcon &icon)
 void dooble::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
-
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
-
-  if(m_ui.tab->currentWidget() == page)
-    if(page)
-      page->view()->setFocus();
 }
 
 void dooble::slot_new_private_window(void)
@@ -2715,7 +2717,12 @@ void dooble::slot_tab_index_changed(int index)
 
   page->hide_status_bar
     (!dooble_settings::setting("status_bar_visible").toBool());
-  page->view()->setFocus();
+
+  if(!page->view()->hasFocus())
+    {
+      page->address_widget()->selectAll();
+      page->address_widget()->setFocus();
+    }
 }
 
 void dooble::slot_tab_widget_shortcut_activated(void)
