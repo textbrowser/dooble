@@ -561,9 +561,10 @@ void dooble_aes256::key_expansion(void)
       i += 1;
     }
 
+  size_t size = m_Nb * (m_Nr + 1);
   uint8_t temp[4];
 
-  while(i < m_Nb * (m_Nr + 1))
+  while(i < size)
     {
       temp[0] = m_round_key[i - 1][0];
       temp[1] = m_round_key[i - 1][1];
