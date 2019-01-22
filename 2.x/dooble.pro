@@ -197,28 +197,32 @@ QMAKE_CLEAN     += Dooble
 
 freebsd-* {
 DEFINES += DOOBLE_FREEBSD_WEBENGINE_MISMATCH
-QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
+QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
 			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
                           -mtune=generic -std=c++11
+QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:macx {
-QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
+QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
 			  -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
                           -mtune=generic -std=c++11
+QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
-QMAKE_CXXFLAGS_RELEASE +=
+QMAKE_CXXFLAGS_RELEASE += -O3
+QMAKE_CXXFLAGS_RELEASE -= -O2
 } else {
-QMAKE_CXXFLAGS_RELEASE += -Wall -Wcast-align -Wcast-qual \
+QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
                           -Werror -Wextra \
 			  -Woverloaded-virtual -Wpointer-arith \
                           -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
                           -mtune=generic -pie -std=c++11
+QMAKE_CXXFLAGS_RELEASE -= -O2
 }
 
 QMAKE_DISTCLEAN += -r qtwebengine_dictionaries temp .qmake.cache .qmake.stash
