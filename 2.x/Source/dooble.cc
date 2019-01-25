@@ -776,8 +776,12 @@ void dooble::new_page(dooble_page *page)
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page);
 
-  page->address_widget()->selectAll();
-  page->address_widget()->setFocus();
+  if(m_ui.tab->currentWidget() == page)
+    {
+      page->address_widget()->selectAll();
+      page->address_widget()->setFocus();
+    }
+
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
 }
@@ -807,8 +811,12 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(dooble_settings::setting("access_new_tabs").toBool())
     m_ui.tab->setCurrentWidget(page);
 
-  page->address_widget()->selectAll();
-  page->address_widget()->setFocus();
+  if(m_ui.tab->currentWidget() == page)
+    {
+      page->address_widget()->selectAll();
+      page->address_widget()->setFocus();
+    }
+
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
 }
@@ -2715,7 +2723,9 @@ void dooble::slot_tab_index_changed(int index)
   page->hide_status_bar
     (!dooble_settings::setting("status_bar_visible").toBool());
 
-  if(!page->view()->hasFocus())
+  if(!page->address_widget()->hasFocus())
+    page->view()->setFocus();
+  else if(!page->view()->hasFocus())
     {
       page->address_widget()->selectAll();
       page->address_widget()->setFocus();
