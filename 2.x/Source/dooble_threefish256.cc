@@ -711,8 +711,16 @@ void dooble_threefish256::set_initialization_vector
 
   bytes = dooble_random::random_bytes(iv_length);
 
-  if(ok)
-    *ok = true;
+  if(Q_UNLIKELY(bytes.isEmpty()))
+    {
+      if(ok)
+	*ok = false;
+    }
+  else
+    {
+      if(ok)
+	*ok = true;
+    }
 }
 
 void dooble_threefish256::set_key(const QByteArray &key)
