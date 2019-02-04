@@ -213,8 +213,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
                           -mtune=generic -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
-QMAKE_CXXFLAGS_RELEASE += -O3
-QMAKE_CXXFLAGS_RELEASE -= -O2
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
                           -Werror -Wextra \
