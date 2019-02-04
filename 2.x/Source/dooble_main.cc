@@ -99,16 +99,16 @@ int main(int argc, char *argv[])
 
   list << SIGABRT
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
-	    << SIGBUS
+       << SIGBUS
 #endif
-	    << SIGFPE
-	    << SIGILL
-	    << SIGINT
+       << SIGFPE
+       << SIGILL
+       << SIGINT
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
-	    << SIGQUIT
+       << SIGQUIT
 #endif
-	    << SIGSEGV
-	    << SIGTERM;
+       << SIGSEGV
+       << SIGTERM;
 
   while(!list.isEmpty())
     {
@@ -270,7 +270,9 @@ int main(int argc, char *argv[])
   dooble::s_application->processEvents();
   dooble::s_settings = new dooble_settings();
 
-  dooble *d = new dooble(QUrl(), false);
+  QStringList arguments(QCoreApplication::arguments());
+
+  dooble *d = new dooble(QUrl(), arguments.contains("--private"));
 
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),
