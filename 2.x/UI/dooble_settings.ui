@@ -757,7 +757,7 @@
                <x>0</x>
                <y>0</y>
                <width>472</width>
-               <height>674</height>
+               <height>732</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1073,6 +1073,16 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="private_mode">
+                <property name="toolTip">
+                 <string>Launch Dooble in a private window.</string>
+                </property>
+                <property name="text">
+                 <string>Private Mode</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QGroupBox" name="groupBox_2">
                 <property name="title">
                  <string>Proxy</string>
@@ -1264,7 +1274,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>293</width>
+               <width>437</width>
                <height>1020</height>
               </rect>
              </property>
@@ -1763,6 +1773,7 @@
   <tabstop>save_credentials</tabstop>
   <tabstop>reset_credentials</tabstop>
   <tabstop>do_not_track</tabstop>
+  <tabstop>private_mode</tabstop>
   <tabstop>proxy_type</tabstop>
   <tabstop>proxy_host</tabstop>
   <tabstop>proxy_port</tabstop>

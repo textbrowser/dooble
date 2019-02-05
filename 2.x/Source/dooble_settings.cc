@@ -944,6 +944,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("pin_history_window", true).toBool());
   m_ui.pin_settings->setChecked
     (s_settings.value("pin_settings_window", true).toBool());
+  m_ui.private_mode->setChecked
+    (s_settings.value("private_mode", false).toBool());
   m_ui.proxy_host->setText(s_settings.value("proxy_host").toString().trimmed());
   m_ui.proxy_host->setCursorPosition(0);
   m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
@@ -1706,6 +1708,7 @@ void dooble_settings::slot_apply(void)
   set_setting("pin_downloads_window", m_ui.pin_downloads->isChecked());
   set_setting("pin_history_window", m_ui.pin_history->isChecked());
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
+  set_setting("private_mode", m_ui.private_mode->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("show_hovered_links_tool_tips",
 	      m_ui.show_hovered_links_tool_tips->isChecked());
