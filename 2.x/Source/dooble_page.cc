@@ -1096,7 +1096,7 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   if(action && action->property("url").isValid())
     emit javascript_allow_popup_exception(action->property("url").toUrl());
   else
-    emit javascript_allow_popup_exception(url());
+    emit javascript_allow_popup_exception(m_view->url());
 }
 
 void dooble_page::slot_authentication_required(const QUrl &url,
@@ -1163,7 +1163,7 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
 
   QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
   QString text(tr("A dialog from <b>%1</b> has been blocked.").
-	       arg(url().toString()));
+	       arg(m_view->url().toString()));
 
   m_ui.javascript_popup_exception_url->setText
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
@@ -1476,9 +1476,9 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 void dooble_page::slot_javascript_allow_popup_exception(void)
 {
   QMenu menu(this);
-  QUrl url(QUrl::fromUserInput(this->url().host()));
+  QUrl url(QUrl::fromUserInput(m_view->url().host()));
 
-  url.setScheme(this->url().scheme());
+  url.setScheme(m_view->url().scheme());
   menu.addAction
     (tr("Always"), this, SLOT(slot_always_allow_javascript_popup(void)));
   menu.addAction
