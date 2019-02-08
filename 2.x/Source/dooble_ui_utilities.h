@@ -36,6 +36,7 @@ class dooble_ui_utilities
   static QString pretty_size(qint64 size);
   static QString pretty_tool_tip(const QString &text);
   static QUrl simplified_url(const QUrl &url);
+  static bool allowed_scheme(const QUrl &url);
   static dooble *find_parent_dooble(QWidget *widget);
   static int context_menu_width(QWidget *widget);
   static void center_window_widget(QWidget *parent, QWidget *widget);

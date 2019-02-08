@@ -1575,6 +1575,14 @@ void dooble_page::slot_load_finished(bool ok)
     dooble::s_history->save_item
       (QIcon(), m_view->history()->currentItem(), true);
 
+  if(!dooble_ui_utilities::allowed_scheme(m_view->url()) ||
+     m_view->url().isEmpty() ||
+     !m_view->url().isValid())
+    {
+      m_ui.address->selectAll();
+      m_ui.address->setFocus();
+    }
+
   m_ui.progress->setVisible(false);
 
   QString icon_set(dooble_settings::setting("icon_set").toString());

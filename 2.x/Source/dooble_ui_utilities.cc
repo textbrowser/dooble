@@ -65,6 +65,16 @@ QUrl dooble_ui_utilities::simplified_url(const QUrl &url)
   return QUrl(url.scheme() + "://" + url.host());
 }
 
+bool dooble_ui_utilities::allowed_scheme(const QUrl &url)
+{
+  QString scheme(url.scheme());
+
+  return scheme == "ftp" ||
+    scheme == "gopher" ||
+    scheme == "http" ||
+    scheme == "https";
+}
+
 dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
 {
   if(!widget)
