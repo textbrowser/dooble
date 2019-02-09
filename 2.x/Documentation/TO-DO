@@ -160,3 +160,4 @@ Unknown Items
   OFF.
 - Super-fancy icon set.
 - The random-bytes implementation uses a deprecated interface on Windows.
+- mlock().
