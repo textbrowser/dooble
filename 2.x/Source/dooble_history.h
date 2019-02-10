@@ -63,6 +63,7 @@ class dooble_history: public QObject
   QStandardItemModel *favorites_model(void) const;
   bool is_favorite(const QUrl &url) const;
   void abort(void);
+  void purge_all(void);
   void purge_favorites(void);
   void purge_history(void);
   void remove_favorite(const QUrl &url);

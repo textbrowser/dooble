@@ -26,6 +26,14 @@
 */
 
 #include <QCryptographicHash>
+#include <QtGlobal>
+
+#ifndef Q_OS_WIN
+extern "C"
+{
+#include <sys/mman.h>
+}
+#endif
 
 #include "dooble_aes256.h"
 #include "dooble_cryptography.h"
@@ -61,6 +69,15 @@ dooble_cryptography::dooble_cryptography
       m_authentication_key.clear();
       m_encryption_key.clear();
     }
+#ifndef Q_OS_WIN
+  else
+    {
+      mlock(m_authentication_key.constData(),
+	    static_cast<size_t> (m_authentication_key.length()));
+      mlock(m_encryption_key.constData(),
+	    static_cast<size_t> (m_encryption_key.length()));
+    }
+#endif
 }
 
 dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
@@ -78,12 +95,25 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
     m_hash_type = KECCAK_512;
   else
     m_hash_type = SHA3_512;
+
+#ifndef Q_OS_WIN
+  mlock(m_authentication_key.constData(),
+	static_cast<size_t> (m_authentication_key.length()));
+  mlock(m_encryption_key.constData(),
+	static_cast<size_t> (m_encryption_key.length()));
+#endif
 }
 
 dooble_cryptography::~dooble_cryptography()
 {
   memzero(m_authentication_key);
   memzero(m_encryption_key);
+#ifndef Q_OS_WIN
+  munlock(m_authentication_key.constData(),
+	  static_cast<size_t> (m_authentication_key.length()));
+  munlock(m_encryption_key.constData(),
+	  static_cast<size_t> (m_encryption_key.length()));
+#endif
 }
 
 QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
@@ -269,6 +299,12 @@ void dooble_cryptography::set_hash_type(const QString &hash_type)
 void dooble_cryptography::set_keys(const QByteArray &authentication_key,
 				   const QByteArray &encryption_key)
 {
+#ifndef Q_OS_WIN
+  munlock(m_authentication_key.constData(),
+	  static_cast<size_t> (m_authentication_key.length()));
+  munlock(m_encryption_key.constData(),
+	  static_cast<size_t> (m_encryption_key.length()));
+#endif
   m_authentication_key = authentication_key;
   m_encryption_key = encryption_key;
 
@@ -280,5 +316,13 @@ void dooble_cryptography::set_keys(const QByteArray &authentication_key,
       m_encryption_key.clear();
     }
   else
-    m_as_plaintext = false;
+    {
+      m_as_plaintext = false;
+#ifndef Q_OS_WIN
+      mlock(m_authentication_key.constData(),
+	    static_cast<size_t> (m_authentication_key.length()));
+      mlock(m_encryption_key.constData(),
+	    static_cast<size_t> (m_encryption_key.length()));
+#endif
+    }
 }

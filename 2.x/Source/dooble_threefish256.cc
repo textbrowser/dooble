@@ -29,6 +29,13 @@
 #include <QtCore/qmath.h>
 #include <QtDebug>
 
+#ifndef Q_OS_WIN
+extern "C"
+{
+#include <sys/mman.h>
+}
+#endif
+
 #include "dooble_cryptography.h"
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
@@ -241,6 +248,9 @@ static void threefish_decrypt_implementation(char *D,
       goto done_label;
     }
 
+#ifndef Q_OS_WIN
+  mlock(k, sizeof(*k) * static_cast<size_t> (Nw + 1));
+#endif
   bytes_to_words(k, K, C_size);
   bytes_to_words(t, T, 16);
   bytes_to_words(v, C, C_size);
@@ -317,7 +327,12 @@ static void threefish_decrypt_implementation(char *D,
  done_label:
 
   if(Q_LIKELY(k))
-    memset(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
+    {
+      memset(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
+#ifndef Q_OS_WIN
+      munlock(k, sizeof(*k) * static_cast<size_t> (Nw + 1));
+#endif
+    }
 
   memset(t, 0, sizeof(t));
 
@@ -413,6 +428,9 @@ static void threefish_encrypt_implementation(char *E,
       goto done_label;
     }
 
+#ifndef Q_OS_WIN
+  mlock(k, sizeof(*k) * static_cast<size_t> (Nw + 1));
+#endif
   bytes_to_words(k, K, P_size);
   bytes_to_words(t, T, 16);
   bytes_to_words(v, P, P_size);
@@ -486,7 +504,12 @@ static void threefish_encrypt_implementation(char *E,
  done_label:
 
   if(Q_LIKELY(k))
-    memset(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
+    {
+      memset(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
+#ifndef Q_OS_WIN
+      munlock(k, sizeof(*k) * static_cast<size_t> (Nw + 1));
+#endif
+    }
 
   memset(t, 0, sizeof(t));
 
@@ -539,6 +562,9 @@ dooble_threefish256::dooble_threefish256(const QByteArray &key):
 dooble_threefish256::~dooble_threefish256()
 {
   dooble_cryptography::memzero(m_key);
+#ifndef Q_OS_WIN
+  munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
+#endif
 }
 
 QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
@@ -725,9 +751,15 @@ void dooble_threefish256::set_initialization_vector
 
 void dooble_threefish256::set_key(const QByteArray &key)
 {
+#ifndef Q_OS_WIN
+  munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
+#endif
   m_block_length = key.length();
   m_key = key;
   m_key_length = key.length();
+#ifndef Q_OS_WIN
+  mlock(m_key.constData(), static_cast<size_t> (m_key.length()));
+#endif
 }
 
 void dooble_threefish256::set_tweak(const QByteArray &tweak, bool *ok)

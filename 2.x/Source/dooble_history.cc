@@ -349,6 +349,38 @@ void dooble_history::purge(const QByteArray &authentication_key,
   QSqlDatabase::removeDatabase(database_name);
 }
 
+void dooble_history::purge_all(void)
+{
+  m_favorites_model->removeRows(0, m_favorites_model->rowCount());
+
+  QWriteLocker locker(&m_history_mutex);
+
+  m_history.clear();
+  m_history_mutex.unlock();
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_history");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_history::purge_favorites(void)
 {
   for(int i = 0; i < m_favorites_model->rowCount(); i++)
