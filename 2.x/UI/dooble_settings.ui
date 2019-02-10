@@ -53,6 +53,12 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QToolButton" name="cache">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Cache</string>
             </property>
@@ -75,6 +81,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="display">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Display</string>
             </property>
@@ -94,6 +106,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="history">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>History</string>
             </property>
@@ -113,6 +131,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="privacy">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Privacy</string>
             </property>
@@ -132,6 +156,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="web">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Web</string>
             </property>
@@ -151,6 +181,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="windows">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Windows</string>
             </property>
@@ -757,7 +793,7 @@
                <x>0</x>
                <y>0</y>
                <width>472</width>
-               <height>732</height>
+               <height>703</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1274,7 +1310,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>437</width>
+               <width>293</width>
                <height>1020</height>
               </rect>
              </property>

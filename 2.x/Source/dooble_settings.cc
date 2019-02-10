@@ -640,6 +640,25 @@ void dooble_settings::prepare_icons(void)
   m_ui.privacy->setIcon(QIcon(QString(":/%1/64/privacy.png").arg(icon_set)));
   m_ui.web->setIcon(QIcon(QString(":/%1/64/webengine.png").arg(icon_set)));
   m_ui.windows->setIcon(QIcon(QString(":/%1/64/windows.png").arg(icon_set)));
+
+  QSize size(0, 0);
+  static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache
+				                           << m_ui.display
+				                           << m_ui.history
+				                           << m_ui.privacy
+				                           << m_ui.web
+				                           << m_ui.windows);
+
+  for(int i = 0; i < list.size(); i++)
+    if(list.at(i)->height() >= size.height() ||
+       list.at(i)->width() >= size.width())
+      size = list.at(i)->size();
+
+  size.setHeight(size.height() + 10);
+  size.setWidth(size.width() + 10);
+
+  for(int i = 0; i < list.size(); i++)
+    list.at(i)->resize(size);
 }
 
 void dooble_settings::prepare_proxy(bool save)
