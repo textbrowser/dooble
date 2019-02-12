@@ -249,7 +249,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["features_permissions"] = true;
   s_settings["hash_type"] = "SHA3-512";
   s_settings["hash_type_index"] = 1;
-  s_settings["home_url"] = QUrl::fromUserInput("about: blank").toEncoded();
+  s_settings["home_url"] = QUrl::fromUserInput(dooble::ABOUT_BLANK).toEncoded();
   s_settings["icon_set"] = "Material Design";
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
@@ -924,7 +924,7 @@ void dooble_settings::restore(bool read_database)
   if(!url.isEmpty() && url.isValid())
     m_ui.home_url->setText(url.toString());
   else
-    m_ui.home_url->setText("about: blank");
+    m_ui.home_url->setText(dooble::ABOUT_BLANK);
 
   m_ui.icon_set->setCurrentIndex
     (qBound(0,
@@ -1554,7 +1554,7 @@ void dooble_settings::slot_apply(void)
       (QWebEngineProfile::NoCache);
 
   if(m_ui.home_url->text().trimmed().isEmpty())
-    m_ui.home_url->setText("about: blank");
+    m_ui.home_url->setText(dooble::ABOUT_BLANK);
 
   if(m_ui.user_agent->text().trimmed().isEmpty())
     {

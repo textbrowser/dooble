@@ -72,6 +72,7 @@ QPointer<dooble_history_window> dooble::s_history_window;
 QPointer<dooble_settings> dooble::s_settings;
 QPointer<dooble_web_engine_url_request_interceptor>
 dooble::s_url_request_interceptor;
+QString dooble::ABOUT_BLANK = "about:blank";
 bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);

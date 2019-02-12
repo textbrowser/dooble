@@ -91,6 +91,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_web_engine_url_request_interceptor>
     s_url_request_interceptor;
+  static QString ABOUT_BLANK;
   void print_current_page(void);
 
  public slots:
