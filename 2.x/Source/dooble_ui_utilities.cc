@@ -72,7 +72,8 @@ bool dooble_ui_utilities::allowed_scheme(const QUrl &url)
   return scheme == "ftp" ||
     scheme == "gopher" ||
     scheme == "http" ||
-    scheme == "https";
+    scheme == "https" ||
+    scheme == "qrc";
 }
 
 dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
