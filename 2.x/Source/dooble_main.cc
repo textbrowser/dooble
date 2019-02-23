@@ -34,6 +34,9 @@
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+#include <QWebEngineUrlScheme>
+#endif
 
 extern "C"
 {
@@ -263,6 +266,14 @@ int main(int argc, char *argv[])
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
 #endif
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+  QWebEngineUrlScheme scheme("gopher");
+
+  scheme.setDefaultPort(70);
+  scheme.setFlags(QWebEngineUrlScheme::SecureScheme);
+  scheme.setSyntax(QWebEngineUrlScheme::Syntax::HostAndPort);
+  QWebEngineUrlScheme::registerScheme(scheme);
 #endif
   splash.showMessage(QObject::tr("Preparing Dooble objects."),
 		     Qt::AlignHCenter | Qt::AlignBottom);
