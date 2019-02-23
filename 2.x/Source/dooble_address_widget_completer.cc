@@ -96,6 +96,10 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  this,
 	  SLOT(slot_history_cleared(void)));
   connect(qobject_cast<dooble_address_widget *> (parent),
+	  SIGNAL(returnPressed(void)),
+	  &m_text_edited_timer,
+	  SLOT(stop(void)));
+  connect(qobject_cast<dooble_address_widget *> (parent),
 	  SIGNAL(textEdited(const QString &)),
 	  &m_text_edited_timer,
 	  SLOT(start(void)));

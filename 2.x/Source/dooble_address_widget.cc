@@ -442,8 +442,8 @@ void dooble_address_widget::slot_populate
 
 void dooble_address_widget::slot_return_pressed(void)
 {
-  setText(text());
   m_completer->popup()->setVisible(false);
+  setText(text());
 }
 
 void dooble_address_widget::slot_settings_applied(void)
