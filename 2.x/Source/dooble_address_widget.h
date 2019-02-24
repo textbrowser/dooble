@@ -45,6 +45,8 @@ class dooble_address_widget: public QLineEdit
  public:
   dooble_address_widget(QWidget *parent);
   QRect information_rectangle(void) const;
+  QSize sizeHint(void) const;
+  bool event(QEvent *event);
   void add_item(const QIcon &icon, const QUrl &url);
   void complete(void);
   void setText(const QString &text);
@@ -52,8 +54,6 @@ class dooble_address_widget: public QLineEdit
   void set_view(dooble_web_engine_view *view);
 
  protected:
-  QSize sizeHint(void) const;
-  bool event(QEvent *event);
   void dropEvent(QDropEvent *event);
   void keyPressEvent(QKeyEvent *event);
   void resizeEvent(QResizeEvent *event);
