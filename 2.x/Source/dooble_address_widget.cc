@@ -143,6 +143,14 @@ QRect dooble_address_widget::information_rectangle(void) const
   return m_information->rect();
 }
 
+QSize dooble_address_widget::sizeHint(void) const
+{
+  QSize size(QLineEdit::sizeHint());
+
+  size.setHeight(size.height() + 5);
+  return size;
+}
+
 bool dooble_address_widget::event(QEvent *event)
 {
   if(event && event->type() == QEvent::KeyPress)

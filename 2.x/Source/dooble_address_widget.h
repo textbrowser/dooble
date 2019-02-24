@@ -52,6 +52,7 @@ class dooble_address_widget: public QLineEdit
   void set_view(dooble_web_engine_view *view);
 
  protected:
+  QSize sizeHint(void) const;
   bool event(QEvent *event);
   void dropEvent(QDropEvent *event);
   void keyPressEvent(QKeyEvent *event);
