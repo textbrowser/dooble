@@ -1,0 +1,5 @@
+Please add the following to ~/.config/kdeglobals on KDE systems.
+The setting will disable automatic mnemonics.
+
+[Development]
+AutoCheckAccelerators=false
