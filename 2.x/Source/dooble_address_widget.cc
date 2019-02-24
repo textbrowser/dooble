@@ -47,7 +47,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_favorite = new QToolButton(this);
   m_favorite->setCursor(Qt::ArrowCursor);
   m_favorite->setEnabled(false);
-  m_favorite->setIconSize(QSize(16, 16));
+  m_favorite->setIconSize(QSize(18, 18));
   m_favorite->setStyleSheet
     ("QToolButton {"
      "border: none;"
@@ -59,7 +59,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_information = new QToolButton(this);
   m_information->setCursor(Qt::ArrowCursor);
   m_information->setEnabled(false);
-  m_information->setIconSize(QSize(16, 16));
+  m_information->setIconSize(QSize(18, 18));
   m_information->setStyleSheet
     ("QToolButton {"
      "border: none;"
@@ -70,7 +70,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   m_menu = new QMenu(this);
   m_pull_down = new QToolButton(this);
   m_pull_down->setCursor(Qt::ArrowCursor);
-  m_pull_down->setIconSize(QSize(16, 16));
+  m_pull_down->setIconSize(QSize(18, 18));
   m_pull_down->setStyleSheet
     ("QToolButton {"
      "border: none;"
