@@ -202,7 +202,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -std=c++11
+                          -mtune=generic -pedantic -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:macx {
 QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
@@ -210,7 +210,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
 			  -Woverloaded-virtual -Wpointer-arith \
 			  -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -std=c++11
+                          -mtune=generic -pedantic -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
 } else {
@@ -219,7 +219,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
 			  -Woverloaded-virtual -Wpointer-arith \
                           -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -pie -std=c++11
+                          -mtune=generic -pedantic -pie -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 }
 

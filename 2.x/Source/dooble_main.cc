@@ -67,6 +67,8 @@ extern "C"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 
+#include <iostream>
+
 static void signal_handler(int signal_number)
 {
   /*
@@ -116,10 +118,16 @@ int main(int argc, char *argv[])
   while(!list.isEmpty())
     {
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
+      memset(&signal_action, 0, sizeof(struct sigaction));
       signal_action.sa_handler = signal_handler;
       sigemptyset(&signal_action.sa_mask);
       signal_action.sa_flags = 0;
-      sigaction(list.takeFirst(), &signal_action, (struct sigaction *) nullptr);
+      if(sigaction(list.first(),
+		   &signal_action,
+		   (struct sigaction *) nullptr))
+	std::cerr << "sigaction() failure on " << list.first() << std::endl;
+
+      list.removeFirst();
 #else
       signal(list.takeFirst(), signal_handler);
 #endif
@@ -130,6 +138,7 @@ int main(int argc, char *argv[])
   ** Ignore SIGPIPE.
   */
 
+  memset(&signal_action, 0, sizeof(struct sigaction));
   signal_action.sa_handler = SIG_IGN;
   sigemptyset(&signal_action.sa_mask);
   signal_action.sa_flags = 0;
