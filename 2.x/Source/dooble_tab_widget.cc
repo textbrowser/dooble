@@ -81,6 +81,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-button {border: none;}");
 #endif
   m_corner_widget = new QFrame(this);
+  delete m_corner_widget->layout();
   m_corner_widget->setLayout(new QHBoxLayout(this));
   m_corner_widget->layout()->setContentsMargins(5, 3, 5, 3);
   m_corner_widget->layout()->addWidget(m_private_tool_button);
