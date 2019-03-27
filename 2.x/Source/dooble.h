@@ -127,7 +127,6 @@ class dooble: public QMainWindow
   bool can_exit(void);
   bool tabs_closable(void) const;
   void connect_signals(void);
-  void copy_default_profile_settings(void);
   void decouple_support_windows(void);
   void initialize_static_members(void);
   void new_page(dooble_page *page);
@@ -135,6 +134,7 @@ class dooble: public QMainWindow
   void open_tab_as_new_window(bool is_private, int index);
   void prepare_control_w_shortcut(void);
   void prepare_page_connections(dooble_page *page);
+  void prepare_private_web_engine_profile_settings(void);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
   void prepare_style_sheets(void);
