@@ -2138,6 +2138,11 @@ void dooble::slot_open_favorites_link_in_new_tab(const QUrl &url)
     m_ui.tab->setCurrentWidget(new_page(url, m_is_private));
 }
 
+void dooble::slot_open_link(const QUrl &url)
+{
+  new_page(url, false);
+}
+
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
   (new dooble(url, true))->show();
@@ -2161,11 +2166,6 @@ void dooble::slot_open_tab_as_new_private_window(int index)
 void dooble::slot_open_tab_as_new_window(int index)
 {
   open_tab_as_new_window(false, index);
-}
-
-void dooble::slot_open_link(const QUrl &url)
-{
-  new_page(url, false);
 }
 
 void dooble::slot_pbkdf2_future_finished(void)

@@ -234,11 +234,28 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     menu->addSeparator();
 
   action = menu->addAction
+    (tr("Open Link"),
+     this,
+     SLOT(slot_open_link_in_current_page(void)));
+
+  QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
+
+  if(context_menu_data.isValid())
+    {
+      if(context_menu_data.linkUrl().isValid())
+	action->setProperty("url", context_menu_data.linkUrl());
+      else if(context_menu_data.mediaUrl().isValid())
+	action->setProperty("url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
+
+  action = menu->addAction
     (tr("Open Link in a New &Private Window"),
      this,
      SLOT(slot_open_link_in_new_private_window(void)));
-
-  QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
 
   if(context_menu_data.isValid())
     {
@@ -385,6 +402,19 @@ void dooble_web_engine_view::slot_load_progress(int progress)
 {
   if(progress == 100)
     emit loadFinished(true);
+}
+
+void dooble_web_engine_view::slot_open_link_in_current_page(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QUrl url(action->property("url").toUrl());
+
+  if(!url.isEmpty() && url.isValid())
+    emit open_link_in_current_page(url);
 }
 
 void dooble_web_engine_view::slot_open_link_in_new_private_window(void)

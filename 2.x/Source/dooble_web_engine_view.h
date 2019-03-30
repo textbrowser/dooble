@@ -63,6 +63,7 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_certificate_exception_accepted(const QUrl &url);
   void slot_create_dialog_requests(void);
   void slot_load_progress(int progress);
+  void slot_open_link_in_current_page(void);
   void slot_open_link_in_new_private_window(void);
   void slot_open_link_in_new_tab(void);
   void slot_open_link_in_new_window(void);
@@ -78,6 +79,7 @@ class dooble_web_engine_view: public QWebEngineView
 					QWebEnginePage::Feature feature);
   void featurePermissionRequested(const QUrl &security_origin,
 				  QWebEnginePage::Feature feature);
+  void open_link_in_current_page(const QUrl &url);
   void open_link_in_new_private_window(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);
   void open_link_in_new_window(const QUrl &url);
