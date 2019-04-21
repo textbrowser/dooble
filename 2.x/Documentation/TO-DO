@@ -156,6 +156,7 @@ Unknown Items
 - Multiple certificate exceptions.
 - Optional Document Mode.
 - Print preview. Qt?
+- Refresh page every 15, 30, 45, or 60 seconds.
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
