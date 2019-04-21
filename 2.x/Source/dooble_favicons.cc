@@ -38,8 +38,8 @@ QIcon dooble_favicons::icon(const QUrl &url)
 {
   if(!dooble::s_cryptography)
     return QIcon(":/Miscellaneous/blank_page.png");
-  else if(url.isEmpty() || !url.isValid())
-    return QIcon(":/Miscellaneous/blank_page.png");
+  else if(url == QUrl("about:blank") || url.isEmpty() || !url.isValid())
+    return QIcon(":/Logo/dooble.png");
 
   QIcon icon;
   QString database_name(dooble_database_utilities::database_name());
