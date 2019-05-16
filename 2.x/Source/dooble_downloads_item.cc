@@ -533,8 +533,8 @@ void dooble_downloads_item::slot_stalled(void)
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   if(m_download)
-      if(m_download->isPaused())
-	return;
+    if(m_download->isPaused())
+      return;
 #endif
 #endif
 
