@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>650</width>
     <height>815</height>
    </rect>
   </property>
@@ -289,6 +289,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="cache_type">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
               </property>
@@ -400,6 +406,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="icon_set">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="currentIndex">
                <number>0</number>
               </property>
@@ -445,6 +457,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="language">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string>Please restart Dooble if Language is changed.</string>
               </property>
@@ -599,6 +617,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="theme_color">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
@@ -658,6 +682,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="zoom_frame_location">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="currentText">
                <string>Popup Menu</string>
               </property>
@@ -792,8 +822,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>472</width>
-               <height>703</height>
+               <width>501</width>
+               <height>746</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -811,6 +841,12 @@
                 </item>
                 <item>
                  <widget class="QComboBox" name="cookie_policy">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="currentIndex">
                    <number>2</number>
                   </property>
@@ -919,6 +955,12 @@
                    </item>
                    <item row="0" column="4">
                     <widget class="QComboBox" name="hash">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="currentIndex">
                       <number>1</number>
                      </property>
@@ -939,6 +981,12 @@
                    </item>
                    <item row="1" column="4">
                     <widget class="QComboBox" name="key_derivation">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
                      </property>
@@ -951,6 +999,12 @@
                    </item>
                    <item row="0" column="1" colspan="2">
                     <widget class="QComboBox" name="cipher">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
                      </property>
@@ -1138,6 +1192,12 @@
                    </item>
                    <item>
                     <widget class="QComboBox" name="proxy_type">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="currentIndex">
                       <number>1</number>
                      </property>
@@ -1309,8 +1369,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>293</width>
+               <y>-274</y>
+               <width>487</width>
                <height>1020</height>
               </rect>
              </property>
@@ -1364,10 +1424,10 @@
                    <property name="showGrid">
                     <bool>false</bool>
                    </property>
-                   <attribute name="horizontalHeaderDefaultSectionSize">
+                   <attribute name="horizontalHeaderMinimumSectionSize">
                     <number>150</number>
                    </attribute>
-                   <attribute name="horizontalHeaderMinimumSectionSize">
+                   <attribute name="horizontalHeaderDefaultSectionSize">
                     <number>150</number>
                    </attribute>
                    <attribute name="horizontalHeaderStretchLastSection">
@@ -1506,10 +1566,10 @@
                       <property name="showGrid">
                        <bool>false</bool>
                       </property>
-                      <attribute name="horizontalHeaderDefaultSectionSize">
+                      <attribute name="horizontalHeaderMinimumSectionSize">
                        <number>150</number>
                       </attribute>
-                      <attribute name="horizontalHeaderMinimumSectionSize">
+                      <attribute name="horizontalHeaderDefaultSectionSize">
                        <number>150</number>
                       </attribute>
                       <attribute name="horizontalHeaderStretchLastSection">
