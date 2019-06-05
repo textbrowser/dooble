@@ -289,17 +289,14 @@
             </item>
             <item>
              <widget class="QComboBox" name="cache_type">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <property name="minimumContentsLength">
+               <number>20</number>
               </property>
               <item>
                <property name="text">
@@ -406,12 +403,6 @@
             </item>
             <item>
              <widget class="QComboBox" name="icon_set">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="currentIndex">
                <number>0</number>
               </property>
@@ -420,6 +411,9 @@
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <property name="minimumContentsLength">
+               <number>20</number>
               </property>
               <item>
                <property name="text">
@@ -457,12 +451,6 @@
             </item>
             <item>
              <widget class="QComboBox" name="language">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="toolTip">
                <string>Please restart Dooble if Language is changed.</string>
               </property>
@@ -474,6 +462,9 @@
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <property name="minimumContentsLength">
+               <number>20</number>
               </property>
               <item>
                <property name="text">
@@ -617,14 +608,11 @@
             </item>
             <item>
              <widget class="QComboBox" name="theme_color">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <property name="minimumContentsLength">
+               <number>20</number>
               </property>
               <item>
                <property name="text">
@@ -682,12 +670,6 @@
             </item>
             <item>
              <widget class="QComboBox" name="zoom_frame_location">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="currentText">
                <string>Popup Menu</string>
               </property>
@@ -699,6 +681,9 @@
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
+              </property>
+              <property name="minimumContentsLength">
+               <number>20</number>
               </property>
               <item>
                <property name="text">
@@ -841,17 +826,14 @@
                 </item>
                 <item>
                  <widget class="QComboBox" name="cookie_policy">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
                   <property name="currentIndex">
                    <number>2</number>
                   </property>
                   <property name="sizeAdjustPolicy">
                    <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <property name="minimumContentsLength">
+                   <number>20</number>
                   </property>
                   <item>
                    <property name="text">
@@ -955,17 +937,14 @@
                    </item>
                    <item row="0" column="4">
                     <widget class="QComboBox" name="hash">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="currentIndex">
                       <number>1</number>
                      </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                     <property name="minimumContentsLength">
+                      <number>20</number>
                      </property>
                      <item>
                       <property name="text">
@@ -981,14 +960,11 @@
                    </item>
                    <item row="1" column="4">
                     <widget class="QComboBox" name="key_derivation">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                     <property name="minimumContentsLength">
+                      <number>20</number>
                      </property>
                      <item>
                       <property name="text">
@@ -999,14 +975,11 @@
                    </item>
                    <item row="0" column="1" colspan="2">
                     <widget class="QComboBox" name="cipher">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                     <property name="minimumContentsLength">
+                      <number>20</number>
                      </property>
                      <item>
                       <property name="text">
@@ -1192,17 +1165,14 @@
                    </item>
                    <item>
                     <widget class="QComboBox" name="proxy_type">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="currentIndex">
                       <number>1</number>
                      </property>
                      <property name="sizeAdjustPolicy">
                       <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                     <property name="minimumContentsLength">
+                      <number>20</number>
                      </property>
                      <item>
                       <property name="text">
@@ -1369,7 +1339,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-274</y>
+               <y>0</y>
                <width>487</width>
                <height>1020</height>
               </rect>
