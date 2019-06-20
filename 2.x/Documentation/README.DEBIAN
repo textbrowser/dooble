@@ -46,6 +46,7 @@ sudo cp -pr ./Data/*.txt /usr/local/dooble/Data/.
 sudo cp -pr ./Data/README /usr/local/dooble/Data/.
 sudo cp -pr ./qtwebengine_dictionaries /usr/local/dooble/.
 sudo chown -Rh root:staff /usr/local/dooble
+sudo find /usr/local/dooble/plugins -name '*.so' -exec chmod -x {} \;
 
 Preparing Dooble-x_amd64.deb:
 
