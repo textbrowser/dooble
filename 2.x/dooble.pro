@@ -51,6 +51,8 @@ dict_base_paths = af_ZA/af_ZA \
                   te_IN/te_IN \
                   uk_UA/uk_UA \
                   vi/vi_VN
+
+dmg.commands = hdiutil create ~/Dooble.dmg -volname Dooble -srcfolder /Applications/Dooble.d
 } else:unix {
 dict_base_paths = af_ZA/af_ZA \
                   an_ES/an_ES \
@@ -225,7 +227,7 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 
 QMAKE_DISTCLEAN += -r qtwebengine_dictionaries temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_COMPILERS += dictoolbuild
-QMAKE_EXTRA_TARGETS = doxygen purge
+QMAKE_EXTRA_TARGETS = dmg doxygen purge
 
 macx {
 } else:win32 {
