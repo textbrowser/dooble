@@ -69,7 +69,8 @@ bool dooble_ui_utilities::allowed_scheme(const QUrl &url)
 {
   QString scheme(url.scheme());
 
-  return scheme == "ftp" ||
+  return scheme == "file" ||
+    scheme == "ftp" ||
     scheme == "gopher" ||
     scheme == "http" ||
     scheme == "https" ||

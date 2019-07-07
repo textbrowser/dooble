@@ -229,7 +229,8 @@ int main(int argc, char *argv[])
 
   CocoaInitializer cocoa_initializer;
 #endif
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)) && \
+    (QT_VERSION < QT_VERSION_CHECK(5, 12, 4))
   QWebEngineUrlScheme scheme("gopher");
 
   scheme.setDefaultPort(70);

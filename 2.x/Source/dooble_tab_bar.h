@@ -60,6 +60,7 @@ class dooble_tab_bar: public QTabBar
   void slot_open_tab_as_new_private_window(void);
   void slot_open_tab_as_new_window(void);
   void slot_reload(void);
+  void slot_reload_periodically(void);
   void slot_settings_applied(void);
   void slot_show_context_menu(const QPoint &point);
   void slot_web_plugins(void);
@@ -72,6 +73,7 @@ class dooble_tab_bar: public QTabBar
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);
+  void reload_tab_periodically(int index, int seconds);
   void set_visible_corner_button(bool state);
 };
 

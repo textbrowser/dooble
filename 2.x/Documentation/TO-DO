@@ -94,6 +94,7 @@ Completed Items
 - Qt 5.10.
 - Rapid loading of address widget model icons.
 - Reduce cookie_added() signals.
+- Refresh page every 15, 30, 45, or 60 seconds.
 - Release notes.
 - Remove m_history objects in the purge() method.
 - Replace fixed loops in AES.
@@ -157,7 +158,6 @@ Unknown Items
 - Multiple certificate exceptions.
 - Optional Document Mode.
 - Print preview. Qt?
-- Refresh page every 15, 30, 45, or 60 seconds.
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.

@@ -29,6 +29,7 @@
 #define dooble_page_h
 
 #include <QPointer>
+#include <QTimer>
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
 #include <QWidget>
@@ -72,6 +73,7 @@ class dooble_page: public QWidget
   bool is_private(void) const;
   dooble_address_widget *address_widget(void) const;
   dooble_web_engine_view *view(void) const;
+  int reload_periodically_seconds(void) const;
   void download(const QString &file_name, const QUrl &url);
   void enable_web_setting(QWebEngineSettings::WebAttribute setting,
 			  bool state);
@@ -80,6 +82,7 @@ class dooble_page: public QWidget
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
   void reload(void);
+  void reload_periodically(int seconds);
   void save(const QString &file_name);
   void show_menu(void);
   void stop(void);
@@ -96,12 +99,14 @@ class dooble_page: public QWidget
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
+  QTimer m_reload_timer;
   QVector<QPointer<dooble_web_engine_view> > m_last_javascript_popups;
   Ui_dooble_page m_ui;
   bool m_is_location_frame_user_hidden;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
   dooble_web_engine_view *m_view;
+  int m_reload_periodically_seconds;
   void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);
   void go_to_backward_item(int index);
   void go_to_forward_item(int index);
@@ -159,6 +164,7 @@ class dooble_page: public QWidget
 					  const QString &proxy_host);
   void slot_reload(void);
   void slot_reload_or_stop(void);
+  void slot_reload_periodically(void);
   void slot_reset_url(void);
   void slot_settings_applied(void);
   void slot_show_certificate_exception(void);

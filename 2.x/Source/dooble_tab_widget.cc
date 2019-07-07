@@ -150,6 +150,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SIGNAL(reload_tab(int)));
   connect(m_tab_bar,
+	  SIGNAL(reload_tab_periodically(int, int)),
+	  this,
+	  SIGNAL(reload_tab_periodically(int, int)));
+  connect(m_tab_bar,
 	  SIGNAL(set_visible_corner_button(bool)),
 	  this,
 	  SLOT(slot_set_visible_corner_button(bool)));

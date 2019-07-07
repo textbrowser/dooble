@@ -371,6 +371,16 @@ void dooble_tab_bar::slot_reload(void)
     emit reload_tab(tabAt(action->property("point").toPoint()));
 }
 
+void dooble_tab_bar::slot_reload_periodically(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit reload_tab_periodically
+      (tabAt(action->property("point").toPoint()),
+       action->property("seconds").toInt());
+}
+
 void dooble_tab_bar::slot_settings_applied(void)
 {
   prepare_icons();
@@ -426,6 +436,47 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 					  this,
 					  SLOT(slot_reload(void)));
   reload_action->setProperty("point", point);
+
+  QActionGroup *action_group = new QActionGroup(&menu);
+  QMenu *sub_menu = menu.addMenu(tr("&Reload Periodically"));
+
+  action = sub_menu->addAction(tr("&15 Seconds"),
+			       this,
+			       SLOT(slot_reload_periodically(void)));
+  action->setCheckable(true);
+  action->setProperty("point", point);
+  action->setProperty("seconds", 15);
+  action_group->addAction(action);
+  action = sub_menu->addAction(tr("&30 Seconds"),
+			       this,
+			       SLOT(slot_reload_periodically(void)));
+  action->setCheckable(true);
+  action->setProperty("point", point);
+  action->setProperty("seconds", 30);
+  action_group->addAction(action);
+  action = sub_menu->addAction(tr("&45 Seconds"),
+			       this,
+			       SLOT(slot_reload_periodically(void)));
+  action->setCheckable(true);
+  action->setProperty("point", point);
+  action->setProperty("seconds", 45);
+  action_group->addAction(action);
+  action = sub_menu->addAction(tr("&60 Seconds"),
+			       this,
+			       SLOT(slot_reload_periodically(void)));
+  action->setCheckable(true);
+  action->setProperty("point", point);
+  action->setProperty("seconds", 60);
+  action_group->addAction(action);
+  sub_menu->addSeparator();
+  action = sub_menu->addAction(tr("&None"),
+			       this,
+			       SLOT(slot_reload_periodically(void)));
+  action->setCheckable(true);
+  action->setChecked(true);
+  action->setProperty("point", point);
+  action->setProperty("seconds", 0);
+  action_group->addAction(action);
   menu.addSeparator();
 
   QAction *back_action = menu.addAction(tr("&Back"));
@@ -482,6 +533,36 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	    (count() > 1 && tab_at > -1);
 	  open_as_new_window_action->setEnabled
 	    (count() > 1 && !page->is_private() && tab_at > -1);
+
+	  switch(page->reload_periodically_seconds())
+	    {
+	    case 15:
+	      {
+		sub_menu->actions().at(0)->setChecked(true);
+		break;
+	      }
+	    case 30:
+	      {
+		sub_menu->actions().at(1)->setChecked(true);
+		break;
+	      }
+	    case 45:
+	      {
+		sub_menu->actions().at(2)->setChecked(true);
+		break;
+	      }
+	    case 60:
+	      {
+		sub_menu->actions().at(3)->setChecked(true);
+		break;
+	      }
+	    default:
+	      {
+		sub_menu->actions().at(4)->setChecked(true);
+		break;
+	      }
+	    }
+
 	  web_plugins_action->setCheckable(true);
 	  web_plugins_action->setEnabled(tab_at > -1);
 	  webgl_action->setCheckable(true);
@@ -534,6 +615,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   back_action->setEnabled(page && page->can_go_back() && tab_at > -1);
   forward_action->setEnabled(page && page->can_go_forward() && tab_at > -1);
   reload_action->setEnabled(page && tab_at > -1);
+  sub_menu->setEnabled(page && tab_at > -1);
 
   foreach(QAction *action, menu.actions())
     if(action != lock_action)

@@ -59,6 +59,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
   m_menu = new QMenu(this);
+  m_reload_periodically_seconds = 0;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
@@ -99,6 +100,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	m_view->resize(d->size());
     }
 
+  connect(&m_reload_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_reload_periodically(void)));
   connect(dooble::s_downloads,
 	  SIGNAL(finished(void)),
 	  this,
@@ -462,6 +467,11 @@ dooble_address_widget *dooble_page::address_widget(void) const
 dooble_web_engine_view *dooble_page::view(void) const
 {
   return m_view;
+}
+
+int dooble_page::reload_periodically_seconds(void) const
+{
+  return m_reload_periodically_seconds;
 }
 
 void dooble_page::download(const QString &file_name, const QUrl &url)
@@ -892,6 +902,20 @@ void dooble_page::reload(void)
 {
   m_ui.address->setText(m_view->url().toString());
   m_view->reload();
+}
+
+void dooble_page::reload_periodically(int seconds)
+{
+  if(seconds <= 0)
+    {
+      m_reload_periodically_seconds = 0;
+      m_reload_timer.stop();
+    }
+  else
+    {
+      m_reload_periodically_seconds = seconds;
+      m_reload_timer.start(1000 * m_reload_periodically_seconds);
+    }
 }
 
 void dooble_page::resizeEvent(QResizeEvent *event)
@@ -1787,6 +1811,17 @@ void dooble_page::slot_reload_or_stop(void)
     m_view->stop();
   else
     reload();
+}
+
+void dooble_page::slot_reload_periodically(void)
+{
+  if(!m_ui.progress->isVisible() &&
+     !m_view->url().isEmpty() &&
+     m_view->url().isValid())
+    {
+      stop();
+      reload();
+    }
 }
 
 void dooble_page::slot_reset_url(void)

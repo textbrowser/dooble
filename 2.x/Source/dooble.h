@@ -179,6 +179,7 @@ class dooble: public QMainWindow
   void slot_print_preview(void);
   void slot_quit_dooble(void);
   void slot_reload_tab(int index);
+  void slot_reload_tab_periodically(int index, int seconds);
   void slot_remove_tab_widget_shortcut(void);
   void slot_save(void);
   void slot_set_current_tab(void);

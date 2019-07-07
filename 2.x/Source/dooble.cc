@@ -515,6 +515,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_reload_tab(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(reload_tab_periodically(int, int)),
+	  this,
+	  SLOT(slot_reload_tab_periodically(int, int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)),
@@ -2261,6 +2266,14 @@ void dooble::slot_reload_tab(int index)
 
   if(page)
     page->reload();
+}
+
+void dooble::slot_reload_tab_periodically(int index, int seconds)
+{
+  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(page)
+    page->reload_periodically(seconds);
 }
 
 void dooble::slot_remove_tab_widget_shortcut(void)

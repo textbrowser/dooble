@@ -74,6 +74,7 @@ class dooble_tab_widget: public QTabWidget
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);
+  void reload_tab_periodically(int index, int seconds);
   void tabs_menu_button_clicked(void);
 };
 
