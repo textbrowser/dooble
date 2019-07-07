@@ -438,7 +438,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   reload_action->setProperty("point", point);
 
   QActionGroup *action_group = new QActionGroup(&menu);
-  QMenu *sub_menu = menu.addMenu(tr("&Reload Periodically"));
+  QMenu *sub_menu = menu.addMenu(tr("Reload Periodically"));
 
   action = sub_menu->addAction(tr("&15 Seconds"),
 			       this,
