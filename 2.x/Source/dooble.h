@@ -36,9 +36,11 @@
 
 #include "dooble_settings.h"
 #include "ui_dooble.h"
+#include "ui_dooble_floating_digital_clock.h"
 
 #define DOOBLE_VERSION_STRING "2019.07.07"
 
+class QDialog;
 class QWebEngineDownloadItem;
 class QWebEngineProfile;
 class dooble_about;
@@ -102,6 +104,7 @@ class dooble: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QDialog *m_floating_digital_clock_dialog;
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
 #ifdef Q_OS_MAC
@@ -120,6 +123,7 @@ class dooble: public QMainWindow
   QPointer<dooble_cookies_window> m_cookies_window;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
+  Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
   bool m_is_javascript_dialog;
   bool m_is_private;
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;

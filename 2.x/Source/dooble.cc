@@ -82,6 +82,7 @@ static int s_populated = 0;
 dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
+  m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = false;
   m_menu = new QMenu(this);
@@ -125,6 +126,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 {
   initialize_static_members();
+  m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = is_private;
   m_menu = new QMenu(this);
@@ -187,6 +189,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
+  m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
   m_menu = new QMenu(this);
@@ -220,6 +223,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
+  m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
   m_menu = new QMenu(this);
@@ -2583,6 +2587,14 @@ void dooble::slot_show_favorites(void)
 
 void dooble::slot_show_floating_digital_clock(void)
 {
+  if(!m_floating_digital_clock_dialog)
+    {
+      m_floating_digital_clock_dialog = new QDialog(this);
+      m_floating_digital_clock_dialog->setModal(false);
+      m_floating_digital_clock_ui.setupUi(m_floating_digital_clock_dialog);
+    }
+
+  m_floating_digital_clock_dialog->show();
 }
 
 void dooble::slot_show_full_screen(void)
