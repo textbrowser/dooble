@@ -206,10 +206,10 @@ void dooble_history_window::set_row_hidden(int i)
 	if(m_ui.period->currentRow() == 2)
 	  period = period.addDays(-1);
 
-	QDateTime dateTime
+	QDateTime date_time
 	  (QDateTime::fromString(item3->text(), Qt::ISODate));
 
-	if(dateTime.date() == period.date())
+	if(date_time.date() == period.date())
 	  {
 	    if(text.isEmpty())
 	      m_ui.table->setRowHidden(i, false);
@@ -229,11 +229,11 @@ void dooble_history_window::set_row_hidden(int i)
 	if(m_ui.period->currentRow() == 4)
 	  period = period.addMonths(-1);
 
-	QDateTime dateTime
+	QDateTime date_time
 	  (QDateTime::fromString(item3->text(), Qt::ISODate));
 
-	if(dateTime.date().month() == period.date().month() &&
-	   dateTime.date().year() == period.date().year())
+	if(date_time.date().month() == period.date().month() &&
+	   date_time.date().year() == period.date().year())
 	  {
 	    if(text.isEmpty())
 	      m_ui.table->setRowHidden(i, false);
@@ -863,10 +863,10 @@ void dooble_history_window::slot_search_timer_timeout(void)
 	  case 1: // Today
 	  case 2: // Yesterday
 	    {
-	      QDateTime dateTime
+	      QDateTime date_time
 		(QDateTime::fromString(item3->text(), Qt::ISODate));
 
-	      if(dateTime.date() == period.date())
+	      if(date_time.date() == period.date())
 		{
 		  if(text.isEmpty())
 		    m_ui.table->setRowHidden(i, false);
@@ -883,11 +883,11 @@ void dooble_history_window::slot_search_timer_timeout(void)
 	    }
 	  default:
 	    {
-	      QDateTime dateTime
+	      QDateTime date_time
 		(QDateTime::fromString(item3->text(), Qt::ISODate));
 
-	      if(dateTime.date().month() == period.date().month() &&
-		 dateTime.date().year() == period.date().year())
+	      if(date_time.date().month() == period.date().month() &&
+		 date_time.date().year() == period.date().year())
 		{
 		  if(text.isEmpty())
 		    m_ui.table->setRowHidden(i, false);

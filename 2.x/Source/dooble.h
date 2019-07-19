@@ -121,6 +121,7 @@ class dooble: public QMainWindow
   QPointer<QWebEngineProfile> m_web_engine_profile;
   QPointer<dooble_cookies> m_cookies;
   QPointer<dooble_cookies_window> m_cookies_window;
+  QTimer m_floating_digital_clock_timer;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
   Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
@@ -163,6 +164,7 @@ class dooble: public QMainWindow
 #ifdef Q_OS_MAC
   void slot_enable_shortcut(void);
 #endif
+  void slot_floating_digital_dialog_timeout(void);
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
   void slot_new_private_window(void);

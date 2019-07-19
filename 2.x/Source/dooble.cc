@@ -83,6 +83,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
   m_floating_digital_clock_dialog = nullptr;
+  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = false;
   m_menu = new QMenu(this);
@@ -127,6 +128,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 {
   initialize_static_members();
   m_floating_digital_clock_dialog = nullptr;
+  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = is_private;
   m_menu = new QMenu(this);
@@ -190,6 +192,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
   m_floating_digital_clock_dialog = nullptr;
+  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
   m_menu = new QMenu(this);
@@ -224,6 +227,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
   m_floating_digital_clock_dialog = nullptr;
+  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
   m_menu = new QMenu(this);
@@ -419,6 +423,11 @@ void dooble::closeEvent(QCloseEvent *event)
 
 void dooble::connect_signals(void)
 {
+  connect(&m_floating_digital_clock_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_floating_digital_dialog_timeout(void)),
+	  Qt::UniqueConnection);
   connect(&m_pbkdf2_future_watcher,
 	  SIGNAL(finished(void)),
 	  this,
@@ -2107,6 +2116,28 @@ void dooble::slot_enable_shortcut(void)
 }
 #endif
 
+void dooble::slot_floating_digital_dialog_timeout(void)
+{
+  if(!m_floating_digital_clock_dialog)
+    return;
+
+  QDateTime now(QDateTime::currentDateTime());
+
+  m_floating_digital_clock_ui.date->setText
+    (QString("%1.%2%3.%4").
+     arg(now.date().year()).
+     arg(now.date().month() < 10 ? "0" : "").
+     arg(now.date().month()).
+     arg(now.date().day()));
+
+  QFont font(this->font());
+
+  font.setPointSize(25);
+  m_floating_digital_clock_ui.clock->setFont(font);
+  m_floating_digital_clock_ui.clock->setText
+    (now.time().toString("hh:mm:ss A"));
+}
+
 void dooble::slot_icon_changed(const QIcon &icon)
 {
   if(dooble::s_application->application_locked())
@@ -2594,6 +2625,9 @@ void dooble::slot_show_floating_digital_clock(void)
       m_floating_digital_clock_ui.setupUi(m_floating_digital_clock_dialog);
     }
 
+  slot_floating_digital_dialog_timeout();
+  m_floating_digital_clock_dialog->resize
+    (m_floating_digital_clock_dialog->sizeHint());
   m_floating_digital_clock_dialog->show();
 }
 

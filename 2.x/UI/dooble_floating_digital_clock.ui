@@ -18,7 +18,7 @@
     <normaloff>:/Logo/dooble.png</normaloff>:/Logo/dooble.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog {background: white;}</string>
+   <string notr="true">QDialog {background: #1759a9;}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -28,6 +28,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {color: white;}</string>
      </property>
      <property name="text">
       <string>Date</string>
@@ -39,6 +42,9 @@
    </item>
    <item>
     <widget class="QLabel" name="clock">
+     <property name="styleSheet">
+      <string notr="true">QLabel {color: white;}</string>
+     </property>
      <property name="text">
       <string>Clock</string>
      </property>

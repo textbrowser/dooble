@@ -172,12 +172,12 @@ void dooble_history::populate(const QByteArray &authentication_key,
 
 	      if(!is_favorite)
 		{
-		  QDateTime dateTime
+		  QDateTime date_time
 		    (QDateTime::
 		     fromString(last_visited.constData(), Qt::ISODate));
 		  QDateTime now(QDateTime::currentDateTime());
 
-		  if(dateTime.daysTo(now) >= qAbs(days))
+		  if(date_time.daysTo(now) >= qAbs(days))
 		    /*
 		    ** Ignore an expired entry, unless the entry is a favorite.
 		    */
@@ -314,11 +314,11 @@ void dooble_history::purge(const QByteArray &authentication_key,
 
 		bytes = cryptography.mac_then_decrypt(bytes);
 
-		QDateTime dateTime
+		QDateTime date_time
 		  (QDateTime::fromString(bytes.constData(), Qt::ISODate));
 		QDateTime now(QDateTime::currentDateTime());
 
-		if(dateTime.daysTo(now) >= qAbs(days))
+		if(date_time.daysTo(now) >= qAbs(days))
 		  {
 		    QSqlQuery delete_query(db);
 
