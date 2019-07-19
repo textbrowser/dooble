@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dooble_floating_digital_clock</class>
+ <widget class="QDialog" name="dooble_floating_digital_clock">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dooble: Floating Digital Clock</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../Icons/icons.qrc">
+    <normaloff>:/Logo/dooble.png</normaloff>:/Logo/dooble.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {background: white;}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="date">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Date</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="clock">
+     <property name="text">
+      <string>Clock</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../Icons/icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
