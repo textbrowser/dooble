@@ -210,6 +210,7 @@ class dooble_page: public QWidget
   void show_documentation(void);
   void show_downloads(void);
   void show_favorites(void);
+  void show_floating_digital_clock(void);
   void show_full_screen(void);
   void show_history(void);
   void show_settings(void);

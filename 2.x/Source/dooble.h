@@ -195,6 +195,7 @@ class dooble: public QMainWindow
   void slot_show_documentation(void);
   void slot_show_downloads(void);
   void slot_show_favorites(void);
+  void slot_show_floating_digital_clock(void);
   void slot_show_full_screen(void);
   void slot_show_history(void);
   void slot_show_main_menu(void);

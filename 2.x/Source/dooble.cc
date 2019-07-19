@@ -976,6 +976,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_floating_digital_clock(void)),
+	  this,
+	  SLOT(slot_show_floating_digital_clock(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_full_screen(void)),
 	  this,
 	  SLOT(slot_show_full_screen(void)),
@@ -1271,6 +1277,9 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
+  menu->addAction(tr("Floating Digital Clock"),
+		  this,
+		  SLOT(slot_show_floating_digital_clock(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
     menu->addAction(tr("&History"),
@@ -1536,6 +1545,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_favorites(void)),
 	     this,
 	     SLOT(slot_show_favorites(void)));
+  disconnect(page,
+	     SIGNAL(show_floating_digital_clock(void)),
+	     this,
+	     SLOT(slot_show_floating_digital_clock(void)));
   disconnect(page,
 	     SIGNAL(show_full_screen(void)),
 	     this,
@@ -2566,6 +2579,10 @@ void dooble::slot_show_favorites(void)
 
   s_favorites_window->activateWindow();
   s_favorites_window->raise();
+}
+
+void dooble::slot_show_floating_digital_clock(void)
+{
 }
 
 void dooble::slot_show_full_screen(void)
