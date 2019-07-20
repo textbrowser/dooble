@@ -2130,12 +2130,15 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.date().month()).
      arg(now.date().day()));
 
+  QByteArray utc(qgetenv("TZ").toLower());
   QFont font(this->font());
 
   font.setPointSize(25);
   m_floating_digital_clock_ui.clock->setFont(font);
   m_floating_digital_clock_ui.clock->setText
-    (now.time().toString("hh:mm:ss A"));
+    (QString("%1%2").
+     arg(now.time().toString("hh:mm:ss A")).
+     arg(utc == ":utc" ? " UTC" : ""));
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)
