@@ -2118,8 +2118,12 @@ void dooble::slot_enable_shortcut(void)
 
 void dooble::slot_floating_digital_dialog_timeout(void)
 {
-  if(!m_floating_digital_clock_dialog)
-    return;
+  if(!m_floating_digital_clock_dialog ||
+     !m_floating_digital_clock_dialog->isVisible())
+    {
+      m_floating_digital_clock_timer.stop();
+      return;
+    }
 
   QDateTime now(QDateTime::currentDateTime());
 
@@ -2631,12 +2635,16 @@ void dooble::slot_show_floating_digital_clock(void)
       m_floating_digital_clock_ui.setupUi(m_floating_digital_clock_dialog);
     }
 
-  slot_floating_digital_dialog_timeout();
   m_floating_digital_clock_dialog->repaint();
   m_floating_digital_clock_dialog->resize
     (m_floating_digital_clock_dialog->sizeHint());
   m_floating_digital_clock_dialog->show();
   m_floating_digital_clock_dialog->update();
+
+  if(!m_floating_digital_clock_timer.isActive())
+    m_floating_digital_clock_timer.start();
+
+  slot_floating_digital_dialog_timeout();
 }
 
 void dooble::slot_show_full_screen(void)
