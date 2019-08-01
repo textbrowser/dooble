@@ -2124,21 +2124,24 @@ void dooble::slot_floating_digital_dialog_timeout(void)
   QDateTime now(QDateTime::currentDateTime());
 
   m_floating_digital_clock_ui.date->setText
-    (QString("%1.%2%3.%4").
+    (QString("%1.%2%3.%4%5").
      arg(now.date().year()).
      arg(now.date().month() < 10 ? "0" : "").
      arg(now.date().month()).
+     arg(now.date().day() < 10 ? "0" : "").
      arg(now.date().day()));
 
   QByteArray utc(qgetenv("TZ").toLower());
   QFont font(this->font());
 
   font.setPointSize(25);
+  m_floating_digital_clock_ui.clock->repaint();
   m_floating_digital_clock_ui.clock->setFont(font);
   m_floating_digital_clock_ui.clock->setText
     (QString("%1%2").
      arg(now.time().toString("hh:mm:ss A")).
      arg(utc == ":utc" ? " UTC" : ""));
+  m_floating_digital_clock_ui.clock->update();
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)
@@ -2629,9 +2632,11 @@ void dooble::slot_show_floating_digital_clock(void)
     }
 
   slot_floating_digital_dialog_timeout();
+  m_floating_digital_clock_dialog->repaint();
   m_floating_digital_clock_dialog->resize
     (m_floating_digital_clock_dialog->sizeHint());
   m_floating_digital_clock_dialog->show();
+  m_floating_digital_clock_dialog->update();
 }
 
 void dooble::slot_show_full_screen(void)
