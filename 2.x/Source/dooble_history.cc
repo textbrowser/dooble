@@ -339,7 +339,10 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	      }
 
 	    if(!urls.isEmpty())
-	      emit remove_items(urls);
+	      {
+		emit remove_items(urls);
+		query.exec("VACUUM");
+	      }
 	  }
       }
 
@@ -373,6 +376,7 @@ void dooble_history::purge_all(void)
 
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM dooble_history");
+	query.exec("VACUUM");
       }
 
     db.close();
@@ -483,6 +487,7 @@ void dooble_history::purge_history(void)
 	      ("DELETE FROM dooble_history WHERE favorite_digest = ?");
 	    query.addBindValue(f);
 	    query.exec();
+	    query.exec("VACUUM");
 	  }
 
 	db.close();
@@ -593,6 +598,8 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 		query.addBindValue(url_digests.at(i));
 		query.exec();
 	      }
+
+	    query.exec("VACUUM");
 	  }
 
 	db.close();
