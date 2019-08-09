@@ -121,8 +121,8 @@ void dooble_favicons::create_tables(QSqlDatabase &db)
   query.exec("CREATE TABLE IF NOT EXISTS dooble_favicons ("
 	     "favicon BLOB DEFAULT NULL, "
 	     "temporary INTEGER NOT NULL DEFAULT 1, "
-	     "url_digest TEXT PRIMARY KEY NOT NULL, "
-	     "url_host_digest TEXT NOT NULL)");
+	     "url_digest TEXT NOT NULL, "
+	     "url_host_digest TEXT PRIMARY KEY NOT NULL)");
   query.exec
     ("CREATE INDEX IF NOT EXISTS dooble_favicons_index_url_digest ON "
      "dooble_favicons (url_digest)");
