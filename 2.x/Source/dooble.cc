@@ -2632,6 +2632,9 @@ void dooble::slot_show_floating_digital_clock(void)
     {
       m_floating_digital_clock_dialog = new QDialog(this);
       m_floating_digital_clock_dialog->setModal(false);
+      m_floating_digital_clock_dialog->setWindowFlags
+	(Qt::WindowStaysOnTopHint |
+	 m_floating_digital_clock_dialog->windowFlags());
       m_floating_digital_clock_ui.setupUi(m_floating_digital_clock_dialog);
     }
 
