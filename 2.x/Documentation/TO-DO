@@ -158,6 +158,7 @@ Unknown Items
 - Multiple certificate exceptions.
 - Optional Document Mode.
 - Print preview. Qt?
+- Should favorite links be refreshed whenever favicons are downloaded?
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
