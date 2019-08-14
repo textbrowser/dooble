@@ -51,6 +51,7 @@ class dooble_history_window: public QMainWindow
 
  private:
   QHash<QUrl, QTableWidgetItem *> m_items;
+  QTimer m_save_settings_timer;
   QTimer m_search_timer;
   QWidget *m_parent;
   Ui_dooble_history_window m_ui;
@@ -73,6 +74,7 @@ class dooble_history_window: public QMainWindow
   void slot_new_item(const QIcon &icon, const QWebEngineHistoryItem &item);
   void slot_parent_destroyed(void);
   void slot_populate(void);
+  void slot_save_settings_timeout(void);
   void slot_search_timer_timeout(void);
   void slot_show_context_menu(const QPoint &point);
   void slot_splitter_moved(int pos, int index);

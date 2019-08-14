@@ -55,10 +55,6 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
       (QStandardPaths::
        standardLocations(QStandardPaths::DesktopLocation).value(0));
 
-  connect(QWebEngineProfile::defaultProfile(),
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   connect(&m_download_path_inspection_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -67,6 +63,10 @@ dooble_downloads::dooble_downloads(void):QMainWindow()
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_search_timer_timeout(void)));
+  connect(QWebEngineProfile::defaultProfile(),
+	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	  this,
+	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   connect(m_ui.clear_finished_downloads,
 	  SIGNAL(clicked(void)),
 	  this,

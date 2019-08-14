@@ -56,6 +56,8 @@ public:
 dooble_history_window::dooble_history_window(void):QMainWindow()
 {
   m_parent = nullptr;
+  m_save_settings_timer.setInterval(1500);
+  m_save_settings_timer.setSingleShot(true);
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -78,6 +80,14 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 		    arg(i)).toInt(),
 	    m_ui.table->horizontalHeader()->minimumSectionSize()));
 
+  connect(&m_save_settings_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_save_settings_timeout(void)));
+  connect(&m_search_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_search_timer_timeout(void)));
   connect(dooble::s_application,
 	  SIGNAL(favorites_cleared(void)),
 	  this,
@@ -103,10 +113,6 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  SIGNAL(populated(void)),
 	  this,
 	  SLOT(slot_populate(void)));
-  connect(&m_search_timer,
-	  SIGNAL(timeout(void)),
-	  this,
-	  SLOT(slot_search_timer_timeout(void)));
   connect(m_ui.period,
 	  SIGNAL(currentRowChanged(int)),
 	  &m_search_timer,
@@ -794,6 +800,11 @@ void dooble_history_window::slot_populate(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_history_window::slot_save_settings_timeout(void)
+{
+  save_settings();
+}
+
 void dooble_history_window::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -928,5 +939,5 @@ void dooble_history_window::slot_splitter_moved(int pos, int index)
 {
   Q_UNUSED(index);
   Q_UNUSED(pos);
-  save_settings();
+  m_save_settings_timer.start();
 }
