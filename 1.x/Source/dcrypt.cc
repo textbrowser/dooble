@@ -836,7 +836,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
   size_t ivLength = 0;
   gcry_error_t err = 0;
 
-  if((ivLength = gcry_cipher_get_algo_blklen(m_cipherAlgorithm)) <= 0)
+  if((ivLength = gcry_cipher_get_algo_blklen(m_cipherAlgorithm)) == 0)
     {
       err = GPG_ERR_INV_LENGTH;
       dmisc::logError
