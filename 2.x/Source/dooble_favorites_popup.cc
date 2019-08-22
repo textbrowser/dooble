@@ -184,7 +184,7 @@ void dooble_favorites_popup::slot_delete_selected(void)
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-  mb.setText(tr("Are you sure that you wish to deleted the selected entry?"));
+  mb.setText(tr("Are you sure that you wish to delete the selected entry?"));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::WindowModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
