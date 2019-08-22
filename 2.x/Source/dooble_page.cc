@@ -740,7 +740,7 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SIGNAL(show_certificate_exceptions(void)));
-  menu->addAction(tr("&Cookies..."),
+  menu->addAction(tr("Coo&kies..."),
 		  this,
 		  SIGNAL(show_cookies(void)),
 		  QKeySequence(tr("Ctrl+K")));
@@ -760,7 +760,7 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
-  menu->addAction(tr("Floating Digital Clock"),
+  menu->addAction(tr("Floating Digital &Clock"),
 		  this,
 		  SIGNAL(show_floating_digital_clock(void)));
 
@@ -774,6 +774,10 @@ void dooble_page::prepare_standard_menus(void)
 		    this,
 		    SIGNAL(show_history(void)),
 		    QKeySequence(tr("Ctrl+H")));
+
+  menu->addAction(tr("&Search Engines"),
+		  this,
+		  SIGNAL(show_search_engines(void)));
 
   /*
   ** View Menu

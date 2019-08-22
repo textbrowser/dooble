@@ -1007,6 +1007,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_search_engines(void)),
+	  this,
+	  SLOT(slot_show_search_engines(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_settings(void)),
 	  this,
 	  SLOT(slot_show_settings(void)),
@@ -1270,7 +1276,7 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SLOT(slot_show_certificate_exceptions(void)));
-  menu->addAction(tr("&Cookies..."),
+  menu->addAction(tr("Coo&kies..."),
 		  this,
 		  SLOT(slot_show_cookies(void)),
 		  QKeySequence(tr("Ctrl+K")));
@@ -1290,7 +1296,7 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
-  menu->addAction(tr("Floating Digital Clock"),
+  menu->addAction(tr("Floating Digital &Clock"),
 		  this,
 		  SLOT(slot_show_floating_digital_clock(void)));
 
@@ -1304,6 +1310,10 @@ void dooble::prepare_standard_menus(void)
 		    this,
 		    SLOT(slot_show_history(void)),
 		    QKeySequence(tr("Ctrl+H")));
+
+  menu->addAction(tr("&Search Engines"),
+		  this,
+		  SLOT(slot_show_search_engines(void)));
 
   /*
   ** View Menu
@@ -1570,6 +1580,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_history(void)),
 	     this,
 	     SLOT(slot_show_history(void)));
+  disconnect(page,
+	     SIGNAL(show_search_engines(void)),
+	     this,
+	     SLOT(slot_show_search_engines(void)));
   disconnect(page,
 	     SIGNAL(show_settings(void)),
 	     this,
@@ -2708,6 +2722,10 @@ void dooble::slot_show_main_menu(void)
 	  m_ui.menu_bar->setFocus();
 	}
     }
+}
+
+void dooble::slot_show_search_engines(void)
+{
 }
 
 void dooble::slot_show_settings(void)
