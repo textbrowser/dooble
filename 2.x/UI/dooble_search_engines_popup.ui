@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dooble_favorites_popup</class>
- <widget class="QDialog" name="dooble_favorites_popup">
+ <class>dooble_search_engines_popup</class>
+ <widget class="QDialog" name="dooble_search_engines_popup">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dooble: Favorites</string>
+   <string>Dooble: Search Engines</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Icons/icons.qrc">
@@ -20,34 +20,6 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QComboBox" name="sort_order">
-       <property name="currentIndex">
-        <number>1</number>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QComboBox::AdjustToContents</enum>
-       </property>
-       <property name="minimumContentsLength">
-        <number>20</number>
-       </property>
-       <item>
-        <property name="text">
-         <string>Last Visited</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Most Popular</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Title</string>
-        </property>
-       </item>
-      </widget>
-     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -64,7 +36,7 @@
      <item>
       <widget class="QToolButton" name="delete_selected">
        <property name="toolTip">
-        <string>Delete Selected Favorite</string>
+        <string>Delete Selected Search Engine</string>
        </property>
        <property name="text">
         <string/>
@@ -124,7 +96,7 @@
      <item>
       <widget class="dooble_search_widget" name="search">
        <property name="placeholderText">
-        <string>Search Favorites</string>
+        <string>Search Search Engines</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
@@ -161,7 +133,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>sort_order</tabstop>
   <tabstop>delete_selected</tabstop>
   <tabstop>view</tabstop>
  </tabstops>
