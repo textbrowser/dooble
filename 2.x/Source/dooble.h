@@ -55,6 +55,7 @@ class dooble_favorites_popup;
 class dooble_history;
 class dooble_history_window;
 class dooble_page;
+class dooble_search_engines_popup;
 class dooble_web_engine_url_request_interceptor;
 class dooble_web_engine_view;
 
@@ -90,6 +91,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_favorites_popup> s_favorites_window;
   static QPointer<dooble_history> s_history;
   static QPointer<dooble_history_window> s_history_window;
+  static QPointer<dooble_search_engines_popup> s_search_engines_window;
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_web_engine_url_request_interceptor>
     s_url_request_interceptor;
@@ -128,6 +130,7 @@ class dooble: public QMainWindow
   bool m_is_javascript_dialog;
   bool m_is_private;
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
+  static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
   bool can_exit(void);
   bool tabs_closable(void) const;

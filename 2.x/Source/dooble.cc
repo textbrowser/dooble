@@ -51,27 +51,32 @@
 #include "dooble_hmac.h"
 #include "dooble_page.h"
 #include "dooble_pbkdf2.h"
+#include "dooble_search_engines_popup.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
-QPointer<dooble> dooble::s_favorites_popup_opened_from_dooble_window;
-QPointer<dooble_history> dooble::s_history;
-QPointer<dooble_about> dooble::s_about;
+QPointer<dooble> dooble::s_favorites_popup_opened_from_dooble_window = nullptr;
+QPointer<dooble> dooble::s_search_engines_popup_opened_from_dooble_window =
+  nullptr;
+QPointer<dooble_history> dooble::s_history = nullptr;
+QPointer<dooble_about> dooble::s_about = nullptr;
 QPointer<dooble_accepted_or_blocked_domains>
-dooble::s_accepted_or_blocked_domains;
-QPointer<dooble_application> dooble::s_application;
-QPointer<dooble_certificate_exceptions> dooble::s_certificate_exceptions;
-QPointer<dooble_cookies> dooble::s_cookies;
-QPointer<dooble_cookies_window> dooble::s_cookies_window;
-QPointer<dooble_cryptography> dooble::s_cryptography;
-QPointer<dooble_downloads> dooble::s_downloads;
-QPointer<dooble_favorites_popup> dooble::s_favorites_window;
-QPointer<dooble_history_window> dooble::s_history_window;
-QPointer<dooble_settings> dooble::s_settings;
+dooble::s_accepted_or_blocked_domains = nullptr;
+QPointer<dooble_application> dooble::s_application = nullptr;
+QPointer<dooble_certificate_exceptions> dooble::s_certificate_exceptions =
+  nullptr;
+QPointer<dooble_cookies> dooble::s_cookies = nullptr;
+QPointer<dooble_cookies_window> dooble::s_cookies_window = nullptr;
+QPointer<dooble_cryptography> dooble::s_cryptography = nullptr;
+QPointer<dooble_downloads> dooble::s_downloads = nullptr;
+QPointer<dooble_favorites_popup> dooble::s_favorites_window = nullptr;
+QPointer<dooble_history_window> dooble::s_history_window = nullptr;
+QPointer<dooble_search_engines_popup> dooble::s_search_engines_window = nullptr;
+QPointer<dooble_settings> dooble::s_settings = nullptr;
 QPointer<dooble_web_engine_url_request_interceptor>
-dooble::s_url_request_interceptor;
+dooble::s_url_request_interceptor = nullptr;
 QString dooble::ABOUT_BLANK = "about:blank";
 bool dooble::s_containers_populated = false;
 
@@ -552,6 +557,16 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_open_favorites_link_in_new_tab(const QUrl &)),
 	  Qt::UniqueConnection);
+  connect(s_search_engines_window,
+	  SIGNAL(open_link(const QUrl &)),
+	  this,
+	  SLOT(slot_open_favorites_link(const QUrl &)),
+	  Qt::UniqueConnection);
+  connect(s_search_engines_window,
+	  SIGNAL(open_link_in_new_tab(const QUrl &)),
+	  this,
+	  SLOT(slot_open_favorites_link_in_new_tab(const QUrl &)),
+	  Qt::UniqueConnection);
   connect(s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -672,6 +687,13 @@ void dooble::initialize_static_members(void)
 
   if(!s_history_window)
     s_history_window = new dooble_history_window();
+
+  if(!s_search_engines_window)
+    {
+      s_search_engines_window = new dooble_search_engines_popup(nullptr);
+      s_search_engines_window->setWindowModality(Qt::NonModal);
+      s_search_engines_window->setWindowTitle(tr("Dooble: Search Engines"));
+    }
 
   if(!s_url_request_interceptor)
     {
@@ -1780,6 +1802,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
   s_downloads->close();
   s_favorites_window->close();
   s_history_window->close();
+  s_search_engines_window->close();
   s_settings->close();
 
   for(int i = m_ui.tab->count() - 1; i >= 0; i--)
@@ -2196,7 +2219,9 @@ void dooble::slot_new_window(void)
 void dooble::slot_open_favorites_link(const QUrl &url)
 {
   if(s_favorites_popup_opened_from_dooble_window == this ||
-     !s_favorites_popup_opened_from_dooble_window)
+     !s_favorites_popup_opened_from_dooble_window ||
+     s_search_engines_popup_opened_from_dooble_window == this ||
+     !s_search_engines_popup_opened_from_dooble_window)
     {
       dooble_page *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
@@ -2211,7 +2236,9 @@ void dooble::slot_open_favorites_link(const QUrl &url)
 void dooble::slot_open_favorites_link_in_new_tab(const QUrl &url)
 {
   if(s_favorites_popup_opened_from_dooble_window == this ||
-     !s_favorites_popup_opened_from_dooble_window)
+     !s_favorites_popup_opened_from_dooble_window ||
+     s_search_engines_popup_opened_from_dooble_window == this ||
+     !s_search_engines_popup_opened_from_dooble_window)
     m_ui.tab->setCurrentWidget(new_page(url, m_is_private));
 }
 
@@ -2726,6 +2753,23 @@ void dooble::slot_show_main_menu(void)
 
 void dooble::slot_show_search_engines(void)
 {
+  s_search_engines_popup_opened_from_dooble_window = this;
+  s_search_engines_window->prepare_viewport_icons();
+
+  if(s_search_engines_window->isVisible())
+    {
+      s_search_engines_window->activateWindow();
+      s_search_engines_window->raise();
+      return;
+    }
+
+  s_search_engines_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, s_search_engines_window);
+
+  s_search_engines_window->activateWindow();
+  s_search_engines_window->raise();
 }
 
 void dooble::slot_show_settings(void)
