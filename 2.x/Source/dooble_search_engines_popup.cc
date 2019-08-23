@@ -35,13 +35,10 @@
 dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   QDialog(parent)
 {
-  m_ui.setupUi(this);
-
-  if(parent)
-    m_ui.delete_selected->setVisible(false);
-
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
+  m_ui.setupUi(this);
+  m_ui.view->setModel(new QStandardItemModel(this));
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
 	  this,
