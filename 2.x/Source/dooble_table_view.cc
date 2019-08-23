@@ -25,22 +25,71 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef dooble_favorites_table_view_h
-#define dooble_favorites_table_view_h
+#include <QStandardItemModel>
 
-#include <QTableView>
+#include "dooble_application.h"
+#include "dooble_favicons.h"
+#include "dooble_table_view.h"
 
-class dooble_favorites_table_view: public QTableView
+dooble_table_view::dooble_table_view(QWidget *parent):QTableView(parent)
 {
-  Q_OBJECT
+  setWordWrap(false);
+}
 
- public:
-  dooble_favorites_table_view(QWidget *parent);
-  void prepare_viewport_icons(void);
+void dooble_table_view::prepare_viewport_icons(void)
+{
+  QStandardItemModel *model = qobject_cast<QStandardItemModel *>
+    (this->model());
 
- protected:
-  void resizeEvent(QResizeEvent *event);
-  void scrollContentsBy(int dx, int dy);
-};
+  if(!model)
+    return;
 
-#endif
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  int a = rowAt(viewport()->rect().topLeft().y());
+  int b = rowAt(viewport()->rect().bottomLeft().y());
+
+  if(b == -1)
+    /*
+    ** Approximate the number of rows.
+    */
+
+    b = a + viewport()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
+  else if(b == 0)
+    /*
+    ** Approximate the number of rows.
+    */
+
+    b = a + parentWidget()->rect().bottomLeft().y() / qMax(1, rowHeight(a));
+
+  for(int i = a; i <= b; i++)
+    {
+      QStandardItem *item = model->item(i, 0); // Title
+
+      if(!item)
+	continue;
+      else if(isRowHidden(i))
+	{
+	  b += 1;
+	  continue;
+	}
+      else if(!item->icon().isNull())
+	continue;
+      else
+	item->setIcon(dooble_favicons::icon(item->data().toUrl()));
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_table_view::resizeEvent(QResizeEvent *event)
+{
+  QTableView::resizeEvent(event);
+  prepare_viewport_icons();
+}
+
+void dooble_table_view::scrollContentsBy(int dx, int dy)
+{
+  QTableView::scrollContentsBy(dx, dy);
+  prepare_viewport_icons();
+}

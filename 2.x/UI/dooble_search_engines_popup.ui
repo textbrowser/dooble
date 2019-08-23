@@ -55,7 +55,7 @@
     </layout>
    </item>
    <item>
-    <widget class="dooble_favorites_table_view" name="view">
+    <widget class="dooble_table_view" name="view">
      <property name="tabKeyNavigation">
       <bool>false</bool>
      </property>
@@ -127,9 +127,9 @@
    <header>dooble_search_widget.h</header>
   </customwidget>
   <customwidget>
-   <class>dooble_favorites_table_view</class>
+   <class>dooble_table_view</class>
    <extends>QTableView</extends>
-   <header>dooble_favorites_table_view.h</header>
+   <header>dooble_table_view.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

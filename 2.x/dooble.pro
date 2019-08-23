@@ -596,7 +596,6 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_downloads_item.h \
                   Source/dooble_favicons.h \
                   Source/dooble_favorites_popup.h \
-                  Source/dooble_favorites_table_view.h \
                   Source/dooble_gopher.h \
                   Source/dooble_history.h \
                   Source/dooble_history_table_widget.h \
@@ -609,6 +608,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_settings.h \
                   Source/dooble_tab_bar.h \
                   Source/dooble_tab_widget.h \
+                  Source/dooble_table_view.h \
                   Source/dooble_tool_button.h \
 		  Source/dooble_web_engine_url_request_interceptor.h \
                   Source/dooble_web_engine_page.h \
@@ -646,12 +646,11 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_downloads_item.cc \
                   Source/dooble_favicons.cc \
                   Source/dooble_favorites_popup.cc \
-                  Source/dooble_favorites_table_view.cc \
-                  Source/dooble_gopher.cc \
+		  Source/dooble_gopher.cc \
                   Source/dooble_history.cc \
                   Source/dooble_history_table_widget.cc \
                   Source/dooble_history_window.cc \
-		  Source/dooble_hmac.cc \
+                  Source/dooble_hmac.cc \
                   Source/dooble_main.cc \
                   Source/dooble_page.cc \
                   Source/dooble_pbkdf2.cc \
@@ -662,6 +661,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_settings.cc \
                   Source/dooble_tab_bar.cc \
                   Source/dooble_tab_widget.cc \
+                  Source/dooble_table_view.cc \
                   Source/dooble_text_utilities.cc \
                   Source/dooble_threefish256.cc \
                   Source/dooble_tool_button.cc \
