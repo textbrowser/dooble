@@ -29,6 +29,7 @@
 #define dooble_search_engines_popup_h
 
 #include <QDialog>
+#include <QSqlDatabase>
 #include <QTimer>
 
 #include "ui_dooble_search_engines_popup.h"
@@ -52,6 +53,7 @@ class dooble_search_engines_popup: public QDialog
  private:
   QTimer m_search_timer;
   Ui_dooble_search_engines_popup m_ui;
+  void create_tables(QSqlDatabase &db);
   void prepare_icons(void);
   void save_settings(void);
 

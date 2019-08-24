@@ -27,6 +27,7 @@
 
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QSqlQuery>
 #include <QStandardItemModel>
 
 #include "dooble.h"
@@ -67,6 +68,18 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   prepare_icons();
   setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
+}
+
+void dooble_search_engines_popup::create_tables(QSqlDatabase &db)
+{
+  db.open();
+
+  QSqlQuery query(db);
+
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_search_engines ("
+	     "title TEXT NOT NULL, "
+	     "url TEXT NOT NULL, "
+	     "url_digest TEXT PRIMARY KEY NOT NULL)");
 }
 
 void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)
