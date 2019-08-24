@@ -66,6 +66,7 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
 #endif
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   prepare_icons();
+  setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
 }
 
 void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)

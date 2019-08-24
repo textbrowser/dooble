@@ -110,6 +110,7 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 #endif
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   prepare_icons();
+  setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
 }
 
 void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
