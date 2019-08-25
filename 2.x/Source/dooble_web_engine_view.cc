@@ -234,7 +234,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     menu->addSeparator();
 
   action = menu->addAction
-    (tr("Open Link"),
+    (tr("Open &Link"),
      this,
      SLOT(slot_open_link_in_current_page(void)));
 
@@ -253,7 +253,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     action->setEnabled(false);
 
   action = menu->addAction
-    (tr("Open Link in a New &Private Window"),
+    (tr("Open Link in a New P&rivate Window"),
      this,
      SLOT(slot_open_link_in_new_private_window(void)));
 

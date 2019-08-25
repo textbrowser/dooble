@@ -393,7 +393,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   QMenu menu(this);
   int tab_at = tabAt(point);
 
-  action = menu.addAction(tr("Close T&ab"),
+  action = menu.addAction(tr("&Close Tab"),
 			  this,
 			  SLOT(slot_close_tab(void)));
 
@@ -421,7 +421,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   open_as_new_private_window_action->setProperty("point", point);
 
   QAction *open_as_new_window_action = menu.addAction
-    (tr("Open as New &Window..."),
+    (tr("Open as &New Window..."),
      this,
      SLOT(slot_open_tab_as_new_window(void)));
 

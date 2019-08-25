@@ -639,7 +639,7 @@ void dooble_page::prepare_standard_menus(void)
     m_authentication_action->setEnabled(false);
 
   menu->addSeparator();
-  menu->addAction(tr("New &Private Window..."),
+  menu->addAction(tr("New P&rivate Window..."),
 		  this,
 		  SIGNAL(new_private_window(void)));
   menu->addAction(tr("New &Tab"),
@@ -650,7 +650,7 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(new_window(void)),
 		  QKeySequence(tr("Ctrl+N")));
-  menu->addAction(tr("&Open URL"),
+  menu->addAction(tr("Open UR&L"),
 		  this,
 		  SLOT(slot_open_link(void)),
 		  QKeySequence(tr("Ctrl+L")));

@@ -1220,7 +1220,7 @@ void dooble::prepare_standard_menus(void)
     m_authentication_action->setEnabled(false);
 
   menu->addSeparator();
-  menu->addAction(tr("New &Private Window..."),
+  menu->addAction(tr("New P&rivate Window..."),
 		  this,
 		  SLOT(slot_new_private_window(void)));
   menu->addAction(tr("New &Tab"),
