@@ -287,7 +287,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     action->setEnabled(false);
 
   action = menu->addAction
-    (tr("Open Link in a New &Window"),
+    (tr("Open Link in a &New Window"),
      this,
      SLOT(slot_open_link_in_new_window(void)));
 
