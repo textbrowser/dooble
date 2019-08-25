@@ -124,6 +124,12 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
   dooble_web_engine_view *view = new dooble_web_engine_view
     (m_page->profile(), nullptr);
 
+  if(!m_page->last_clicked_link().isEmpty() &&
+     m_page->last_clicked_link().isValid())
+    view->setUrl(m_page->last_clicked_link());
+
+  m_page->reset_last_clicked_link();
+
   if(type == QWebEnginePage::WebBrowserWindow ||
      type == QWebEnginePage::WebDialog)
     if(dooble_settings::setting("javascript").toBool() &&

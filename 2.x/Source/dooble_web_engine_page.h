@@ -43,6 +43,8 @@ class dooble_web_engine_page: public QWebEnginePage
 			 QWidget *parent);
   dooble_web_engine_page(QWidget *parent);
   ~dooble_web_engine_page();
+  QUrl last_clicked_link(void) const;
+  void reset_last_clicked_link(void);
 
  protected:
   QStringList chooseFiles(FileSelectionMode mode,
@@ -57,6 +59,7 @@ class dooble_web_engine_page: public QWebEnginePage
   QPointer<QWidget> m_certificate_error_widget;
   QString m_certificate_error;
   QUrl m_certificate_error_url;
+  QUrl m_last_clicked_link;
   Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
 
