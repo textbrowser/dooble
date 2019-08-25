@@ -1395,16 +1395,16 @@ void dooble::prepare_tab_icons(void)
 
       if(main_window == s_accepted_or_blocked_domains)
 	m_ui.tab->setTabIcon
-	  (i, QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
+	  (i, QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)));
       else if(main_window == s_downloads)
 	m_ui.tab->setTabIcon
 	  (i, QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
       else if(main_window == s_history_window)
 	m_ui.tab->setTabIcon
-	  (i, QIcon(QString(":/%1/48/history.png").arg(icon_set)));
+	  (i, QIcon(QString(":/%1/36/history.png").arg(icon_set)));
       else if(main_window == s_settings)
 	m_ui.tab->setTabIcon
-	  (i, QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
+	  (i, QIcon(QString(":/%1/36/settings.png").arg(icon_set)));
     }
 }
 
