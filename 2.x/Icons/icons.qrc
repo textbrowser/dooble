@@ -2,6 +2,7 @@
     <qresource prefix="/">
 	<file>Logo/dooble.png</file>
 	<file>Mac/16/tab_close.png</file>
+	<file>Material Design/18/add.png</file>
 	<file>Material Design/18/bookmark.png</file>
 	<file>Material Design/18/bookmarked.png</file>
 	<file>Material Design/18/find.png</file>
