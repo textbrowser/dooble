@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>400</height>
+    <width>600</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,36 +19,31 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_14">
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLabel" name="label_22">
+       <property name="text">
+        <string>New &amp;Search Engine</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+       <property name="buddy">
+        <cstring>exception</cstring>
        </property>
-      </spacer>
+      </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="delete_selected">
+      <widget class="QLineEdit" name="exception">
        <property name="toolTip">
-        <string>Delete Selected Search Engine</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL or a host. Input is partially validated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="autoRaise">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="add_exception">
+       <property name="text">
+        <string>Add</string>
        </property>
       </widget>
      </item>
@@ -116,6 +111,25 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QToolButton" name="delete_selected">
+       <property name="toolTip">
+        <string>Delete Selected Search Engine</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
@@ -133,8 +147,11 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>delete_selected</tabstop>
+  <tabstop>exception</tabstop>
+  <tabstop>add_exception</tabstop>
   <tabstop>view</tabstop>
+  <tabstop>search</tabstop>
+  <tabstop>delete_selected</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
