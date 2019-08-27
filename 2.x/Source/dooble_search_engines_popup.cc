@@ -48,6 +48,10 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  connect(m_ui.add,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_add_search_engine(void)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -138,6 +142,10 @@ void dooble_search_engines_popup::showNormal(void)
 			      toByteArray()));
 
   QDialog::showNormal();
+}
+
+void dooble_search_engines_popup::slot_add_search_engine(void)
+{
 }
 
 void dooble_search_engines_popup::slot_delete_selected(void)
