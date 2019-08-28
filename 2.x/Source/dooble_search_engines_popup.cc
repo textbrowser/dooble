@@ -41,6 +41,8 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   QDialog(parent)
 {
   m_model = new QStandardItemModel(this);
+  m_model->setHorizontalHeaderLabels
+    (QStringList() << tr("Title") << tr("Search Engine"));
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -292,6 +294,75 @@ void dooble_search_engines_popup::slot_populate(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_model->removeRows(0, m_model->rowCount());
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_search_engines.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT title, url, OID FROM dooble_search_engines"))
+	  while(query.next())
+	    {
+	      QByteArray title
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      title = dooble::s_cryptography->mac_then_decrypt(title);
+
+	      if(title.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_history",
+		     query.value(2).toLongLong());
+		  continue;
+		}
+
+	      QByteArray url
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      url = dooble::s_cryptography->mac_then_decrypt(url);
+
+	      if(url.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_search_engines",
+		     query.value(2).toLongLong());
+		  continue;
+		}
+
+	      QList<QStandardItem *> list;
+	      QStandardItem *item = new QStandardItem();
+
+	      item->setData(title);
+	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	      item->setText(title);
+	      item->setToolTip(item->text());
+	      list << item;
+	      item = new QStandardItem();
+	      item->setData(QUrl::fromEncoded(url));
+	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	      item->setText(url);
+	      item->setToolTip(item->text());
+	      list << item;
+	      m_model->appendRow(list);
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
 }
 
