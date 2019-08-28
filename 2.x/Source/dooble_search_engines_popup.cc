@@ -236,6 +236,35 @@ void dooble_search_engines_popup::slot_delete_selected(void)
     return;
 
   prepare_viewport_icons();
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      QString database_name(dooble_database_utilities::database_name());
+      QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_search_engines.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.prepare
+	      ("DELETE FROM dooble_search_engines WHERE url_digest = ?");
+	    query.addBindValue(url.toEncoded());
+	    query.exec();
+	    query.exec("VACUUM");
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
 }
 
 void dooble_search_engines_popup::slot_double_clicked(const QModelIndex &index)
@@ -271,13 +300,11 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
       {
 	QStandardItem *item1 = model->item(i, 0);
 	QStandardItem *item2 = model->item(i, 1);
-	QStandardItem *item3 = model->item(i, 2);
 
-	if(!item1 || !item2 || !item3)
+	if(!item1 || !item2)
 	  m_ui.view->setRowHidden(i, false);
 	else if(item1->text().toLower().contains(text) ||
-		item2->text().toLower().contains(text) ||
-		item3->text().toLower().contains(text))
+		item2->text().toLower().contains(text))
 	  m_ui.view->setRowHidden(i, false);
 	else
 	  m_ui.view->setRowHidden(i, true);
