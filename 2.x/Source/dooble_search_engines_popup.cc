@@ -25,13 +25,17 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QStandardItemModel>
 
 #include "dooble.h"
+#include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_search_engines_popup.h"
+#include "dooble_settings.h"
 
 dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   QDialog(parent)
@@ -146,6 +150,68 @@ void dooble_search_engines_popup::showNormal(void)
 
 void dooble_search_engines_popup::slot_add_search_engine(void)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QUrl url(QUrl::fromUserInput(m_ui.search_engine->text()));
+
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_search_engines.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_search_engines "
+	   "(title, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray bytes;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (m_ui.title->text().trimmed().toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(bytes.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(bytes.toBase64());
+
+	bytes = dooble::s_cryptography->hmac(url.toEncoded());
+
+	if(bytes.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(bytes.toBase64());
+
+	query.exec();
+      }
+
+  done_label:
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_search_engines_popup::slot_delete_selected(void)

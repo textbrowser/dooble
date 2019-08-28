@@ -21,9 +21,26 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_14">
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>&amp;Title</string>
+       </property>
+       <property name="buddy">
+        <cstring>title</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="title">
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="label_22">
        <property name="text">
-        <string>New &amp;Search Engine</string>
+        <string>&amp;URL</string>
        </property>
        <property name="buddy">
         <cstring>search_engine</cstring>
@@ -144,6 +161,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>title</tabstop>
   <tabstop>search_engine</tabstop>
   <tabstop>add</tabstop>
   <tabstop>view</tabstop>
