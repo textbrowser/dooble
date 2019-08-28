@@ -183,9 +183,9 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 	   "(title, url, url_digest) VALUES (?, ?, ?)");
 
 	QByteArray bytes;
+	QByteArray title(m_ui.title->text().trimmed().toUtf8());
 
-	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (m_ui.title->text().trimmed().toUtf8());
+	bytes = dooble::s_cryptography->encrypt_then_mac(title);
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -206,7 +206,27 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 	else
 	  query.addBindValue(bytes.toBase64());
 
-	query.exec();
+	if(query.exec())
+	  {
+	    QList<QStandardItem *> list;
+	    QStandardItem *item = new QStandardItem();
+
+	    item->setData(title);
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setText(title);
+	    item->setToolTip(item->text());
+	    list << item;
+	    item = new QStandardItem();
+	    item->setData(url);
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setText(url.toEncoded());
+	    item->setToolTip(item->text());
+	    list << item;
+	    m_model->appendRow(list);
+	    m_model->sort(0);
+	    m_ui.search_engine->clear();
+	    m_ui.title->clear();
+	  }
       }
 
   done_label:
@@ -258,8 +278,12 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
 	    query.prepare
 	      ("DELETE FROM dooble_search_engines WHERE url_digest = ?");
-	    query.addBindValue(url.toEncoded());
-	    query.exec();
+	    query.addBindValue
+	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+
+	    if(query.exec())
+	      m_model->removeRow(list.at(0).row());
+
 	    query.exec("VACUUM");
 	  }
 
@@ -363,6 +387,7 @@ void dooble_search_engines_popup::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  m_model->sort(0);
   QApplication::restoreOverrideCursor();
 }
 
