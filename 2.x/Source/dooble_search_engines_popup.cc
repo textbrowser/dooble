@@ -40,10 +40,11 @@
 dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   QDialog(parent)
 {
+  m_model = new QStandardItemModel(this);
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
-  m_ui.view->setModel(new QStandardItemModel(this));
+  m_ui.view->setModel(m_model);
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -279,6 +280,19 @@ void dooble_search_engines_popup::slot_find(void)
 {
   m_ui.search->selectAll();
   m_ui.search->setFocus();
+}
+
+void dooble_search_engines_popup::slot_populate(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    {
+      emit populated();
+      return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_model->removeRows(0, m_model->rowCount());
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_search_engines_popup::slot_search_timer_timeout(void)

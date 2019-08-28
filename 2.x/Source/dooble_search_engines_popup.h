@@ -34,6 +34,8 @@
 
 #include "ui_dooble_search_engines_popup.h"
 
+class QStandardItemModel;
+
 class dooble_search_engines_popup: public QDialog
 {
   Q_OBJECT
@@ -51,6 +53,7 @@ class dooble_search_engines_popup: public QDialog
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QStandardItemModel *m_model;
   QTimer m_search_timer;
   Ui_dooble_search_engines_popup m_ui;
   void create_tables(QSqlDatabase &db);
@@ -62,12 +65,14 @@ class dooble_search_engines_popup: public QDialog
   void slot_delete_selected(void);
   void slot_double_clicked(const QModelIndex &index);
   void slot_find(void);
+  void slot_populate(void);
   void slot_search_timer_timeout(void);
   void slot_settings_applied(void);
 
  signals:
   void open_link(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);
+  void populated(void);
 };
 
 #endif

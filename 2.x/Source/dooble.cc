@@ -316,7 +316,7 @@ bool dooble::initialized(void) const
      dooble_settings::has_dooble_credentials_temporary())
     return true;
   else
-    return s_populated >= 7;
+    return s_populated >= 8;
 }
 
 bool dooble::is_private(void) const
@@ -693,6 +693,10 @@ void dooble::initialize_static_members(void)
       s_search_engines_window = new dooble_search_engines_popup(nullptr);
       s_search_engines_window->setWindowModality(Qt::NonModal);
       s_search_engines_window->setWindowTitle(tr("Dooble: Search Engines"));
+      connect(s_search_engines_window,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
     }
 
   if(!s_url_request_interceptor)
