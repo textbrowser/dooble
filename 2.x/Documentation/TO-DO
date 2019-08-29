@@ -46,6 +46,7 @@ Completed Items
 - Elided text in pull-down menus must consider invisible text.
 - Empty download file names.
 - Enable spell checking. Dictionaries are required.
+- Favorite-like search engines.
 - Favorites and disabled history.
 - Favorites icons.
 - Favorites in History.
@@ -86,6 +87,7 @@ Completed Items
 - Pause and resume downloads. Requires Qt support.
 - Pin support windows.
 - Place the Translations directory into the OS X bundle.
+- Populate search engine favicons on data changes.
 - Prevent duplicate history items in address widget menu.
 - Print support.
 - Print via popup menu.
@@ -138,9 +140,7 @@ Remaining Items
 
 - Auto-correct addresses.
 - Fancy completer.
-- Favorite-like search engines.
 - Include date stamps in cookie containers.
-- Populate search engine favicons on data changes.
 - Qt's digest class.
 - Send selected page text to search engine.
 - WebEngine fonts.
