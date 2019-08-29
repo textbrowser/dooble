@@ -193,11 +193,10 @@ void dooble_favorites_popup::slot_delete_selected(void)
   if(mb.exec() != QMessageBox::Yes)
     return;
 
-  prepare_viewport_icons();
-
   QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
 
   dooble::s_history->remove_favorite(url);
+  prepare_viewport_icons();
   emit favorite_changed(url, false);
 }
 
@@ -255,7 +254,7 @@ void dooble_favorites_popup::slot_search_timer_timeout(void)
       }
 
   QApplication::restoreOverrideCursor();
-  m_ui.view->prepare_viewport_icons();
+  prepare_viewport_icons();
 }
 
 void dooble_favorites_popup::slot_set_favorites_model(void)
@@ -315,7 +314,7 @@ void dooble_favorites_popup::slot_sort(int index)
   else // Title
     m_ui.view->sortByColumn(0, Qt::AscendingOrder);
 
-  m_ui.view->prepare_viewport_icons();
+  prepare_viewport_icons();
   dooble_settings::set_setting("favorites_sort_index", index);
   emit favorites_sorted();
 }
@@ -331,5 +330,5 @@ void dooble_favorites_popup::slot_sort(void)
   else // Title
     m_ui.view->sortByColumn(0, Qt::AscendingOrder);
 
-  m_ui.view->prepare_viewport_icons();
+  prepare_viewport_icons();
 }

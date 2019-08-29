@@ -234,6 +234,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  prepare_viewport_icons();
   QApplication::restoreOverrideCursor();
 }
 
@@ -257,8 +258,6 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
   if(mb.exec() != QMessageBox::Yes)
     return;
-
-  prepare_viewport_icons();
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -292,6 +291,8 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
       QSqlDatabase::removeDatabase(database_name);
     }
+
+  prepare_viewport_icons();
 }
 
 void dooble_search_engines_popup::slot_double_clicked(const QModelIndex &index)
@@ -421,7 +422,7 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
       }
 
   QApplication::restoreOverrideCursor();
-  m_ui.view->prepare_viewport_icons();
+  prepare_viewport_icons();
 }
 
 void dooble_search_engines_popup::slot_settings_applied(void)
