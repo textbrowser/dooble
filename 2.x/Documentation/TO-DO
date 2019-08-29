@@ -14,6 +14,7 @@ Completed Items
 - Application lock.
 - Auto-hide tab bar.
 - Blocked Domains. Show examples. Restrict input.
+- Bookmarks; favorites.
 - Certificate exceptions panel.
 - Clearing of Visited Links beyond Clear Items. New Edit menu item.
 - Close non-browser windows via the Esc key.
@@ -118,6 +119,7 @@ Completed Items
 - Save menu item.
 - Separate download items.
 - Separating pages renders incorrect page icons.
+- Should favorite links be refreshed whenever favicons are downloaded?
 - Signed Debian release.
 - Simple cleaning of all databases.
 - Smart tab selections via keyboards.
@@ -148,7 +150,6 @@ Remaining Items
 
 Unknown Items
 
-- Bookmarks.
 - Certificate information. Requires a WebEngine interface.
 - Cookies are not always deleted properly.
 - Custom icon sets.
@@ -159,7 +160,6 @@ Unknown Items
 - Multiple certificate exceptions.
 - Optional Document Mode.
 - Print preview. Qt?
-- Should favorite links be refreshed whenever favicons are downloaded?
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
