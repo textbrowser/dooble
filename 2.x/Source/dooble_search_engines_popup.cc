@@ -129,6 +129,12 @@ void dooble_search_engines_popup::save_settings(void)
       ("search_engines_window_geometry", saveGeometry().toBase64());
 }
 
+void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_search_engines_popup::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool() && !parent())

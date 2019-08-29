@@ -594,7 +594,6 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_cryptography.h \
                   Source/dooble_downloads.h \
                   Source/dooble_downloads_item.h \
-                  Source/dooble_favicons.h \
                   Source/dooble_favorites_popup.h \
                   Source/dooble_gopher.h \
                   Source/dooble_history.h \

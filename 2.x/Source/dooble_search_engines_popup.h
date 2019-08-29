@@ -43,6 +43,7 @@ class dooble_search_engines_popup: public QDialog
  public:
   dooble_search_engines_popup(QWidget *parent);
   void prepare_viewport_icons(void);
+  void set_icon(const QIcon &icon, const QUrl &url);
 
  public slots:
   void show(void);
