@@ -42,6 +42,7 @@ class dooble_search_engines_popup: public QDialog
 
  public:
   dooble_search_engines_popup(QWidget *parent);
+  QList<QAction *> actions(void) const;
   void prepare_viewport_icons(void);
   void set_icon(const QIcon &icon, const QUrl &url);
 
@@ -54,6 +55,7 @@ class dooble_search_engines_popup: public QDialog
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QMap<QString, QAction *> m_actions;
   QStandardItemModel *m_model;
   QTimer m_search_timer;
   Ui_dooble_search_engines_popup m_ui;

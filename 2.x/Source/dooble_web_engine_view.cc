@@ -33,6 +33,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_gopher.h"
+#include "dooble_search_engines_popup.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_url_request_interceptor.h"
@@ -332,6 +333,23 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+
+  if(dooble::s_search_engines_window)
+    {
+      QList<QAction *> actions(dooble::s_search_engines_window->actions());
+
+      if(!actions.isEmpty())
+	{
+	  menu->addSeparator();
+
+	  for(int i = 0; i < actions.size(); i++)
+	    if(actions.at(i))
+	      menu->addAction(actions.at(i)->icon(),
+			      actions.at(i)->text(),
+			      this,
+			      SLOT(slotSearch(void)));
+	}
+    }
 
   menu->exec(mapToGlobal(event->pos()));
   menu->deleteLater();

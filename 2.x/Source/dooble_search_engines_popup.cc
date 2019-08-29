@@ -82,6 +82,11 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
 }
 
+QList<QAction *> dooble_search_engines_popup::actions(void) const
+{
+  return m_actions.values();
+}
+
 void dooble_search_engines_popup::create_tables(QSqlDatabase &db)
 {
   db.open();
@@ -230,8 +235,15 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 
 	if(query.exec())
 	  {
+	    QAction *action = m_actions.value(title);
 	    QList<QStandardItem *> list;
 	    QStandardItem *item = new QStandardItem();
+
+	    if(!action)
+	      {
+		action = new QAction(title, this);
+		m_actions[title] = action;
+	      }
 
 	    item->setData(url);
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -303,7 +315,17 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 
 	    if(query.exec())
-	      m_model->removeRow(list.at(0).row());
+	      {
+		QString title(list.at(0).data().toString());
+
+		if(m_actions.value(title))
+		  {
+		    m_actions.value(title)->deleteLater();
+		    m_actions.remove(title);
+		  }
+
+		m_model->removeRow(list.at(0).row());
+	      }
 
 	    query.exec("VACUUM");
 	  }
@@ -340,6 +362,19 @@ void dooble_search_engines_popup::slot_populate(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QMutableMapIterator<QString, QAction *> it(m_actions);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.value())
+	it.value()->deleteLater();
+
+      it.remove();
+    }
+
   m_model->removeRows(0, m_model->rowCount());
 
   QString database_name(dooble_database_utilities::database_name());
@@ -388,8 +423,15 @@ void dooble_search_engines_popup::slot_populate(void)
 		  continue;
 		}
 
+	      QAction *action = m_actions.value(title);
 	      QList<QStandardItem *> list;
 	      QStandardItem *item = new QStandardItem();
+
+	      if(!action)
+		{
+		  action = new QAction(title, this);
+		  m_actions[title] = action;
+		}
 
 	      item->setData(QUrl::fromEncoded(url));
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
