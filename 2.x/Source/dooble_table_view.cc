@@ -25,9 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QApplication>
 #include <QStandardItemModel>
 
-#include "dooble_application.h"
 #include "dooble_favicons.h"
 #include "dooble_table_view.h"
 
