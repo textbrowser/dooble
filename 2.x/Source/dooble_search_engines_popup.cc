@@ -36,6 +36,7 @@
 #include "dooble_database_utilities.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_settings.h"
+#include "dooble_ui_utilities.h"
 
 dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   QDialog(parent)
@@ -132,6 +133,21 @@ void dooble_search_engines_popup::save_settings(void)
 void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QStandardItem *> list
+    (m_model->findItems(dooble_ui_utilities::simplified_url(url).toEncoded(),
+			Qt::MatchFixedString | Qt::MatchStartsWith,
+			1));
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      QStandardItem *item = list.at(i) ?
+	m_model->item(list.at(i)->row(), 0) : nullptr;
+
+      if(item)
+	item->setIcon(icon);
+    }
+
   QApplication::restoreOverrideCursor();
 }
 
@@ -217,7 +233,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 	    QList<QStandardItem *> list;
 	    QStandardItem *item = new QStandardItem();
 
-	    item->setData(title);
+	    item->setData(url);
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	    item->setText(title);
 	    item->setToolTip(item->text());
@@ -375,7 +391,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	      QList<QStandardItem *> list;
 	      QStandardItem *item = new QStandardItem();
 
-	      item->setData(title);
+	      item->setData(QUrl::fromEncoded(url));
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	      item->setText(title);
 	      item->setToolTip(item->text());

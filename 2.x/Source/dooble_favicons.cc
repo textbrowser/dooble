@@ -33,6 +33,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
 #include "dooble_favicons.h"
+#include "dooble_search_engines_popup.h"
 
 QIcon dooble_favicons::icon(const QUrl &url)
 {
@@ -185,10 +186,10 @@ void dooble_favicons::purge_temporary(void)
 
 void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
 {
-  if(!dooble::s_cryptography)
-    return;
+  if(dooble::s_search_engines_window)
+    dooble::s_search_engines_window->set_icon(icon, url);
 
-  if(icon.isNull())
+  if(!dooble::s_cryptography || icon.isNull())
     return;
 
   QString database_name(dooble_database_utilities::database_name());

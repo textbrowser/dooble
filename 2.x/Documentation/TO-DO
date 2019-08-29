@@ -140,6 +140,7 @@ Remaining Items
 - Fancy completer.
 - Favorite-like search engines.
 - Include date stamps in cookie containers.
+- Populate search engine favicons on data changes.
 - Qt's digest class.
 - Send selected page text to search engine.
 - WebEngine fonts.
