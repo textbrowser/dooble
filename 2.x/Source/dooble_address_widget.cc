@@ -78,6 +78,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px;"
      "}");
   m_pull_down->setToolTip(tr("Show History"));
+  m_view = 0;
   connect(dooble::s_application,
 	  SIGNAL(favorites_cleared(void)),
 	  this,
@@ -86,6 +87,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(populated(const QListPairIconString &)),
 	  this,
 	  SLOT(slot_populate(const QListPairIconString &)));
+  connect(dooble::s_history,
+	  SIGNAL(populated_favorites(const QListVectorByteArray &)),
+	  this,
+	  SLOT(slot_favorites_populated(void)));
   connect(dooble::s_history_window,
 	  SIGNAL(favorite_changed(const QUrl &, bool)),
 	  this,
@@ -158,7 +163,9 @@ bool dooble_address_widget::event(QEvent *event)
       if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Escape)
 	{
 	  emit reset_url();
-	  prepare_containers_for_url(m_view->url());
+
+	  if(m_view)
+	    prepare_containers_for_url(m_view->url());
 	}
       else if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
@@ -233,7 +240,9 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
   if(event && event->key() == Qt::Key_Escape)
     {
       emit reset_url();
-      prepare_containers_for_url(m_view->url());
+
+      if(m_view)
+	prepare_containers_for_url(m_view->url());
     }
   else if(event)
     {
@@ -392,6 +401,9 @@ void dooble_address_widget::set_view(dooble_web_engine_view *view)
 
 void dooble_address_widget::slot_favorite(void)
 {
+  if(!m_view)
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   dooble::s_history->save_favorite
     (m_view->url(), !dooble::s_history->is_favorite(m_view->url()));
@@ -402,6 +414,9 @@ void dooble_address_widget::slot_favorite(void)
 
 void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 {
+  if(!m_view)
+    return;
+
   if(m_view->url().isEmpty() || !m_view->url().isValid())
     return;
 
@@ -425,15 +440,24 @@ void dooble_address_widget::slot_favorites_cleared(void)
   m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
 }
 
+void dooble_address_widget::slot_favorites_populated(void)
+{
+  if(m_view)
+    prepare_containers_for_url(m_view->url());
+}
+
 void dooble_address_widget::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
-  prepare_containers_for_url(m_view->url());
+
+  if(m_view)
+    prepare_containers_for_url(m_view->url());
 }
 
 void dooble_address_widget::slot_load_started(void)
 {
-  prepare_containers_for_url(m_view->url());
+  if(m_view)
+    prepare_containers_for_url(m_view->url());
 }
 
 void dooble_address_widget::slot_populate
@@ -461,6 +485,9 @@ void dooble_address_widget::slot_settings_applied(void)
 
 void dooble_address_widget::slot_show_site_information_menu(void)
 {
+  if(!m_view)
+    return;
+
   if(m_view->url().isEmpty() || !m_view->url().isValid())
     return;
 
@@ -489,6 +516,9 @@ void dooble_address_widget::slot_text_edited(const QString &text)
 
 void dooble_address_widget::slot_url_changed(const QUrl &url)
 {
+  if(!m_view)
+    return;
+
   if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
     return;
 
