@@ -503,7 +503,7 @@ void dooble_web_engine_view::slot_search(void)
 				      toString())));
 
       url.setQuery(str);
-      emit open_link_in_current_page(url);
+      emit open_link_in_new_tab(url);
     }
 }
 
