@@ -567,6 +567,10 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_open_favorites_link_in_new_tab(const QUrl &)),
 	  Qt::UniqueConnection);
+  connect(s_history,
+	  SIGNAL(populated_favorites(const QListVectorByteArray &)),
+	  this,
+	  SLOT(slot_history_favorites_populated(void)));
   connect(s_search_engines_window,
 	  SIGNAL(open_link(const QUrl &)),
 	  this,
@@ -620,8 +624,14 @@ void dooble::delayed_load(const QUrl &url, dooble_page *page)
   if(initialized() || !page || url.isEmpty() || !url.isValid())
     return;
 
-  m_delayed_pages.append
-    (QPair<QPointer<dooble_page>, QUrl> (page, url));
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QPair<QPointer<dooble_page>, QUrl> pair(page, url);
+
+  if(!m_delayed_pages.contains(pair))
+    m_delayed_pages.append(pair);
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::initialize_static_members(void)
@@ -2077,17 +2087,6 @@ void dooble::slot_decouple_tab(int index)
     }
 }
 
-void dooble::slot_delayed_load_timeout(void)
-{
-  while(!m_delayed_pages.isEmpty())
-    {
-      QPair<QPointer<dooble_page>, QUrl> pair(m_delayed_pages.takeFirst());
-
-      if(pair.first)
-	pair.first->load(pair.second);
-    }
-}
-
 void dooble::slot_dooble_credentials_authenticated(bool state)
 {
   if(state)
@@ -2227,6 +2226,17 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.time().toString("hh:mm:ss A")).
      arg(utc == ":utc" ? " UTC" : ""));
   m_floating_digital_clock_ui.clock->update();
+}
+
+void dooble::slot_history_favorites_populated(void)
+{
+  while(!m_delayed_pages.isEmpty())
+    {
+      QPair<QPointer<dooble_page>, QUrl> pair(m_delayed_pages.takeFirst());
+
+      if(pair.first)
+	pair.first->load(pair.second);
+    }
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)
@@ -2380,9 +2390,6 @@ void dooble::slot_populate_containers_timer_timeout(void)
 void dooble::slot_populated(void)
 {
   s_populated += 1;
-
-  if(initialized())
-    QTimer::singleShot(25, this, SLOT(slot_delayed_load_timeout(void)));
 }
 
 void dooble::slot_print(void)

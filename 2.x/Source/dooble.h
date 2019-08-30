@@ -164,13 +164,13 @@ class dooble: public QMainWindow
   void slot_create_tab(dooble_web_engine_view *view);
   void slot_create_window(dooble_web_engine_view *view);
   void slot_decouple_tab(int index);
-  void slot_delayed_load_timeout(void);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
 #ifdef Q_OS_MAC
   void slot_enable_shortcut(void);
 #endif
   void slot_floating_digital_dialog_timeout(void);
+  void slot_history_favorites_populated(void);
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
   void slot_new_private_window(void);
