@@ -444,6 +444,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	      action->setProperty("url", QUrl::fromEncoded(url));
 	      item->setData(QUrl::fromEncoded(url));
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	      item->setIcon(action->icon());
 	      item->setText(title);
 	      item->setToolTip(item->text());
 	      list << item;
