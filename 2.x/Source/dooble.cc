@@ -82,6 +82,7 @@ bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);
 static bool s_warned_of_missing_sqlite_driver = false;
+static int EXPECTED_POPULATED_CONTAINERS = 8;
 static int s_populated = 0;
 
 dooble::dooble(QWidget *widget):QMainWindow()
@@ -316,7 +317,7 @@ bool dooble::initialized(void) const
      dooble_settings::has_dooble_credentials_temporary())
     return true;
   else
-    return s_populated >= 8;
+    return s_populated >= EXPECTED_POPULATED_CONTAINERS;
 }
 
 bool dooble::is_private(void) const
