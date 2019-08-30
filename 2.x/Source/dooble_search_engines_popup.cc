@@ -34,6 +34,7 @@
 #include "dooble.h"
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
+#include "dooble_favicons.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
@@ -235,16 +236,12 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 
 	if(query.exec())
 	  {
-	    QAction *action = m_actions.value(title);
+	    QAction *action = nullptr;
 	    QList<QStandardItem *> list;
 	    QStandardItem *item = new QStandardItem();
 
-	    if(!action)
-	      {
-		action = new QAction(title, this);
-		m_actions[title] = action;
-	      }
-
+	    action = new QAction(dooble_favicons::icon(url), title, this);
+	    action->setProperty("url", url);
 	    item->setData(url);
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	    item->setText(title);
@@ -256,6 +253,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 	    item->setText(url.toEncoded());
 	    item->setToolTip(item->text());
 	    list << item;
+	    m_actions.insert(title, action);
 	    m_model->appendRow(list);
 	    m_model->sort(0);
 	    m_ui.search_engine->clear();
@@ -295,6 +293,8 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
       QString database_name(dooble_database_utilities::database_name());
       QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
 
@@ -316,12 +316,21 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
 	    if(query.exec())
 	      {
-		QString title(list.at(0).data().toString());
+		QMutableMapIterator<QString, QAction *> it(m_actions);
+		  (m_actions.find(list.at(0).data().toString()));
 
-		if(m_actions.value(title))
+		while(it.hasNext())
 		  {
-		    m_actions.value(title)->deleteLater();
-		    m_actions.remove(title);
+		    it.next();
+
+		    if(it.key() == list.at(0).data().toString())
+		      if(it.value() &&
+			 it.value()->property("url").toUrl() == url)
+			{
+			  it.value()->deleteLater();
+			  it.remove();
+			  break;
+			}
 		  }
 
 		m_model->removeRow(list.at(0).row());
@@ -334,6 +343,7 @@ void dooble_search_engines_popup::slot_delete_selected(void)
       }
 
       QSqlDatabase::removeDatabase(database_name);
+      QApplication::restoreOverrideCursor();
     }
 
   prepare_viewport_icons();
@@ -423,16 +433,15 @@ void dooble_search_engines_popup::slot_populate(void)
 		  continue;
 		}
 
-	      QAction *action = m_actions.value(title);
+	      QAction *action = nullptr;
 	      QList<QStandardItem *> list;
 	      QStandardItem *item = new QStandardItem();
 
-	      if(!action)
-		{
-		  action = new QAction(title, this);
-		  m_actions[title] = action;
-		}
-
+	      action = new QAction
+		(dooble_favicons::icon(QUrl::fromEncoded(url)),
+		 title,
+		 this);
+	      action->setProperty("url", QUrl::fromEncoded(url));
 	      item->setData(QUrl::fromEncoded(url));
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	      item->setText(title);
@@ -444,6 +453,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	      item->setText(url);
 	      item->setToolTip(item->text());
 	      list << item;
+	      m_actions.insert(title, action);
 	      m_model->appendRow(list);
 	    }
       }

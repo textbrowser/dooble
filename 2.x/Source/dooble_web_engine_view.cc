@@ -27,6 +27,7 @@
 
 #include <QContextMenuEvent>
 #include <QDesktopWidget>
+#include <QUrlQuery>
 #include <QWebEngineContextMenuData>
 #include <QWebEngineProfile>
 
@@ -334,7 +335,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   else
     action->setEnabled(false);
 
-  if(dooble::s_search_engines_window)
+  if(dooble::s_search_engines_window && !selectedText().isEmpty())
     {
       QList<QAction *> actions(dooble::s_search_engines_window->actions());
 
@@ -342,12 +343,18 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	{
 	  menu->addSeparator();
 
+	  QMenu *sub_menu = menu->addMenu("Search Selected Text");
+
 	  for(int i = 0; i < actions.size(); i++)
-	    if(actions.at(i))
-	      menu->addAction(actions.at(i)->icon(),
-			      actions.at(i)->text(),
-			      this,
-			      SLOT(slotSearch(void)));
+	    {
+	      QAction *action = sub_menu->addAction(actions.at(i)->icon(),
+						    actions.at(i)->text(),
+						    this,
+						    SLOT(slot_search(void)));
+
+	      action->setProperty("selected_text", selectedText());
+	      action->setProperty("url", actions.at(i)->property("url"));
+	    }
 	}
     }
 
@@ -478,6 +485,27 @@ void dooble_web_engine_view::slot_open_link_in_new_tab(void)
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_new_tab(url);
+}
+
+void dooble_web_engine_view::slot_search(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  QUrl url(action->property("url").toUrl());
+
+  if(!url.isEmpty() && url.isValid())
+    {
+      QString str
+	(url.query().
+	 append(QString("\"%1\"").arg(action->property("selected_text").
+				      toString())));
+
+      url.setQuery(str);
+      emit open_link_in_current_page(url);
+    }
 }
 
 void dooble_web_engine_view::slot_settings_applied(void)

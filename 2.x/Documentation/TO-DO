@@ -117,6 +117,7 @@ Completed Items
 - Restrict domains.
 - Save Page pop-up menu item.
 - Save menu item.
+- Send selected text to search engine.
 - Separate download items.
 - Separating pages renders incorrect page icons.
 - Should favorite links be refreshed whenever favicons are downloaded?
@@ -144,7 +145,6 @@ Remaining Items
 - Fancy completer.
 - Include date stamps in cookie containers.
 - Qt's digest class.
-- Send selected page text to search engine.
 - WebEngine fonts.
 - linkHovered() is emitted without user interaction.
 

@@ -67,6 +67,7 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_open_link_in_new_private_window(void);
   void slot_open_link_in_new_tab(void);
   void slot_open_link_in_new_window(void);
+  void slot_search(void);
   void slot_settings_applied(void);
 
  signals:

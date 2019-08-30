@@ -55,7 +55,7 @@ class dooble_search_engines_popup: public QDialog
   void resizeEvent(QResizeEvent *event);
 
  private:
-  QMap<QString, QAction *> m_actions;
+  QMultiMap<QString, QAction *> m_actions;
   QStandardItemModel *m_model;
   QTimer m_search_timer;
   Ui_dooble_search_engines_popup m_ui;
