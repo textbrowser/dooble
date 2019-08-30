@@ -292,7 +292,6 @@ int main(int argc, char *argv[])
   dooble::s_settings = new dooble_settings();
 
   QStringList arguments(QCoreApplication::arguments());
-
   dooble *d = new dooble
     (QUrl(), arguments.contains("--private") ||
              dooble::s_settings->setting("private_mode").toBool());
