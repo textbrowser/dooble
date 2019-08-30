@@ -112,6 +112,7 @@ class dooble: public QMainWindow
 #ifdef Q_OS_MAC
   QHash<QTimer *, QShortcut *> m_disabled_shortcuts;
 #endif
+  QList<QPair<QPointer<dooble_page>, QUrl> > m_delayed_pages;
   QList<QShortcut *> m_shortcuts;
   QList<QShortcut *> m_tab_widget_shortcuts;
   QMenu *m_menu;
@@ -136,6 +137,7 @@ class dooble: public QMainWindow
   bool tabs_closable(void) const;
   void connect_signals(void);
   void decouple_support_windows(void);
+  void delayed_load(const QUrl &url, dooble_page *page);
   void initialize_static_members(void);
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
@@ -162,6 +164,7 @@ class dooble: public QMainWindow
   void slot_create_tab(dooble_web_engine_view *view);
   void slot_create_window(dooble_web_engine_view *view);
   void slot_decouple_tab(int index);
+  void slot_delayed_load_timeout(void);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_download_requested(QWebEngineDownloadItem *download);
 #ifdef Q_OS_MAC

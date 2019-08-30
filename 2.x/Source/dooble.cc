@@ -370,8 +370,17 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   if(!url.isEmpty() && url.isValid())
     page->load(url);
   else
-    page->load
-      (QUrl::fromEncoded(dooble_settings::setting("home_url").toByteArray()));
+    {
+      if(initialized())
+	page->load
+	  (QUrl::fromEncoded(dooble_settings::setting("home_url").
+			     toByteArray()));
+      else
+	delayed_load
+	  (QUrl::fromEncoded(dooble_settings::setting("home_url").
+			     toByteArray()),
+	   page);
+    }
 
   page->view()->setVisible(!dooble::s_application->application_locked());
   prepare_control_w_shortcut();
@@ -604,6 +613,15 @@ void dooble::decouple_support_windows(void)
 
   if(dooble_ui_utilities::find_parent_dooble(s_settings) == this)
     s_settings->setParent(nullptr);
+}
+
+void dooble::delayed_load(const QUrl &url, dooble_page *page)
+{
+  if(!page || url.isEmpty() || !url.isValid())
+    return;
+
+  m_delayed_pages.append
+    (QPair<QPointer<dooble_page>, QUrl> (page, url));
 }
 
 void dooble::initialize_static_members(void)
@@ -2049,6 +2067,17 @@ void dooble::slot_decouple_tab(int index)
     }
 }
 
+void dooble::slot_delayed_load_timeout(void)
+{
+  while(!m_delayed_pages.isEmpty())
+    {
+      QPair<QPointer<dooble_page>, QUrl> pair(m_delayed_pages.takeFirst());
+
+      if(pair.first)
+	pair.first->load(pair.second);
+    }
+}
+
 void dooble::slot_dooble_credentials_authenticated(bool state)
 {
   if(state)
@@ -2341,6 +2370,9 @@ void dooble::slot_populate_containers_timer_timeout(void)
 void dooble::slot_populated(void)
 {
   s_populated += 1;
+
+  if(initialized())
+    QTimer::singleShot(25, this, SLOT(slot_delayed_load_timeout(void)));
 }
 
 void dooble::slot_print(void)
