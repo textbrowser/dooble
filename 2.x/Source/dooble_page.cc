@@ -153,9 +153,9 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_show_certificate_exception(void)));
   connect(m_ui.address,
-	  SIGNAL(show_cookies(void)),
+	  SIGNAL(show_site_cookies(void)),
 	  this,
-	  SIGNAL(show_cookies(void)));
+	  SIGNAL(show_site_cookies(void)));
   connect(m_ui.backward,
 	  SIGNAL(clicked(void)),
 	  this,

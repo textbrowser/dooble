@@ -89,7 +89,7 @@ class dooble_address_widget: public QLineEdit
   void pull_down_clicked(void);
   void reset_url(void);
   void show_certificate_exception(void);
-  void show_cookies(void);
+  void show_site_cookies(void);
 };
 
 #endif

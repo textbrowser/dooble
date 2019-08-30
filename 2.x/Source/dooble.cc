@@ -1070,6 +1070,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_site_cookies(void)),
+	  this,
+	  SLOT(slot_show_site_cookies(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)),
@@ -1637,6 +1643,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_settings_panel(dooble_settings::Panels)),
 	     this,
 	     SLOT(slot_show_settings_panel(dooble_settings::Panels)));
+  disconnect(page,
+	     SIGNAL(show_site_cookies(void)),
+	     this,
+	     SLOT(slot_show_site_cookies(void)));
   disconnect(page,
 	     SIGNAL(titleChanged(const QString &)),
 	     this,
@@ -2589,11 +2599,7 @@ void dooble::slot_show_cookies(void)
 {
   if(m_cookies_window)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
-	(m_ui.tab->currentWidget());
-
-      if(page)
-	m_cookies_window->filter(page->url().host());
+      m_cookies_window->filter("");
 
       if(m_cookies_window->isVisible())
 	{
@@ -2612,18 +2618,7 @@ void dooble::slot_show_cookies(void)
       return;
     }
 
-  if(!qobject_cast<QShortcut *> (sender()))
-    {
-      /*
-      ** Display this site's cookies.
-      */
-
-      dooble_page *page = qobject_cast<dooble_page *>
-	(m_ui.tab->currentWidget());
-
-      if(page)
-	s_cookies_window->filter(page->url().host());
-    }
+  s_cookies_window->filter("");
 
   if(s_cookies_window->isVisible())
     {
@@ -2851,6 +2846,59 @@ void dooble::slot_show_settings_panel(dooble_settings::Panels panel)
 {
   slot_show_settings();
   s_settings->show_panel(panel);
+}
+
+void dooble::slot_show_site_cookies(void)
+{
+  if(m_cookies_window)
+    {
+      dooble_page *page = qobject_cast<dooble_page *>
+	(m_ui.tab->currentWidget());
+
+      if(page)
+	m_cookies_window->filter(page->url().host());
+
+      if(m_cookies_window->isVisible())
+	{
+	  m_cookies_window->activateWindow();
+	  m_cookies_window->raise();
+	  return;
+	}
+
+      m_cookies_window->showNormal();
+
+      if(dooble_settings::setting("center_child_windows").toBool())
+	dooble_ui_utilities::center_window_widget(this, m_cookies_window);
+
+      m_cookies_window->activateWindow();
+      m_cookies_window->raise();
+      return;
+    }
+
+  /*
+  ** Display this site's cookies.
+  */
+
+  dooble_page *page = qobject_cast<dooble_page *>
+    (m_ui.tab->currentWidget());
+
+  if(page)
+    s_cookies_window->filter(page->url().host());
+
+  if(s_cookies_window->isVisible())
+    {
+      s_cookies_window->activateWindow();
+      s_cookies_window->raise();
+      return;
+    }
+
+  s_cookies_window->showNormal();
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(this, s_cookies_window);
+
+  s_cookies_window->activateWindow();
+  s_cookies_window->raise();
 }
 
 void dooble::slot_tab_close_requested(int index)

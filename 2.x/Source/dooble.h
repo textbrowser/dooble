@@ -214,6 +214,7 @@ class dooble: public QMainWindow
   void slot_show_search_engines(void);
   void slot_show_settings(void);
   void slot_show_settings_panel(dooble_settings::Panels panel);
+  void slot_show_site_cookies(void);
   void slot_tab_close_requested(int index);
   void slot_tab_index_changed(int index);
   void slot_tab_widget_shortcut_activated(void);
