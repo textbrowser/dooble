@@ -27,7 +27,6 @@
 
 #include <QContextMenuEvent>
 #include <QDesktopWidget>
-#include <QUrlQuery>
 #include <QWebEngineContextMenuData>
 #include <QWebEngineProfile>
 
