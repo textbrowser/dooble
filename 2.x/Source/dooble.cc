@@ -617,7 +617,7 @@ void dooble::decouple_support_windows(void)
 
 void dooble::delayed_load(const QUrl &url, dooble_page *page)
 {
-  if(!page || url.isEmpty() || !url.isValid())
+  if(initialized() || !page || url.isEmpty() || !url.isValid())
     return;
 
   m_delayed_pages.append
