@@ -40,16 +40,12 @@
 
 extern "C"
 {
-#include <fcntl.h>
 #include <signal.h>
-#if defined(Q_OS_MACOS)
-#include <sys/resource.h>
-#endif
 #if defined(Q_OS_FREEBSD)
 #include <sys/stat.h>
 #endif
-#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
-#include <unistd.h>
+#if defined(Q_OS_MACOS)
+#include <sys/resource.h>
 #endif
 }
 
