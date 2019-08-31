@@ -34,9 +34,7 @@
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_gopher.h"
 #include "dooble_search_engines_popup.h"
-#include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
-#include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 
 dooble_web_engine_view::dooble_web_engine_view
