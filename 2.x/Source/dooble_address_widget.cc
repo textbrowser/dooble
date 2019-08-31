@@ -25,17 +25,13 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QKeyEvent>
-#include <QMenu>
 #include <QMimeData>
-#include <QToolButton>
 
 #include "dooble.h"
 #include "dooble_address_widget.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
-#include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_view.h"
