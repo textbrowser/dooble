@@ -120,7 +120,7 @@ int dooble_hmac::preferred_output_size_in_bytes(void)
 }
 
 /*
-** http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/HMAC_SHA3-512.pdf
+** https://csrc.nist.gov/groups/ST/toolkit/documents/Examples/HMAC_SHA3-512.pdf
 */
 
 void dooble_hmac::sha3_512_hmac_test1(void)
