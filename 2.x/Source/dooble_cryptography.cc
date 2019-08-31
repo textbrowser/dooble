@@ -26,7 +26,6 @@
 */
 
 #include <QCryptographicHash>
-#include <QtGlobal>
 
 #ifndef Q_OS_WIN
 extern "C"
@@ -38,7 +37,6 @@ extern "C"
 #include "dooble_aes256.h"
 #include "dooble_cryptography.h"
 #include "dooble_hmac.h"
-#include "dooble_pbkdf2.h"
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
 
