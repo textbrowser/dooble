@@ -26,7 +26,7 @@
 */
 
 /*
-** Implementation of http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf.
+** Implementation of https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf.
 */
 
 #include <QDataStream>
@@ -36,7 +36,7 @@
 #ifndef Q_OS_WIN
 extern "C"
 {
-#include <sys/mman.h>
+  #include <sys/mman.h>
 }
 #endif
 
