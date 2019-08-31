@@ -25,7 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "dooble_address_widget.h"
 #include "dooble_address_widget_completer_popup.h"
 
 dooble_address_widget_completer_popup::dooble_address_widget_completer_popup
