@@ -30,7 +30,6 @@
 #include <QStyledItemDelegate>
 
 #include "dooble.h"
-#include "dooble_address_widget.h"
 #include "dooble_address_widget_completer.h"
 #include "dooble_address_widget_completer_popup.h"
 #include "dooble_application.h"
