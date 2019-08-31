@@ -35,7 +35,6 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
-#include "dooble_settings.h"
 
 dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 {
