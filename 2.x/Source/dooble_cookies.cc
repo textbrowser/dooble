@@ -25,7 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QDateTime>
 #include <QDir>
 #include <QSqlQuery>
 #include <QWebEngineCookieStore>
