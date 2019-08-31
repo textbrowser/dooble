@@ -29,7 +29,6 @@
 
 #include "dooble.h"
 #include "dooble_application.h"
-#include "dooble_settings.h"
 
 QHash<QString, QColor> dooble_application::s_theme_colors;
 
