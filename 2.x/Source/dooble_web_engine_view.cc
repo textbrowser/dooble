@@ -228,12 +228,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   action = m_page->action(QWebEnginePage::ViewSource);
 
   if(action)
-    {
-      if(url().scheme() == "gopher")
-	action->setEnabled(false);
-
-      action->setText(tr("View Page Source"));
-    }
+    action->setText(tr("View Page Source"));
 
   if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
     menu->addSeparator();

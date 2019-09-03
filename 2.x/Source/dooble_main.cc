@@ -158,6 +158,14 @@ int main(int argc, char *argv[])
     (Qt::AA_UseHighDpiPixmaps,
      QVariant(qgetenv("AA_USEHIGHDPIPIXMAPS")).toBool());
 #endif
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+  QWebEngineUrlScheme scheme("gopher");
+
+  scheme.setDefaultPort(70);
+  scheme.setFlags(QWebEngineUrlScheme::ViewSourceAllowed);
+  scheme.setSyntax(QWebEngineUrlScheme::Syntax::HostAndPort);
+  QWebEngineUrlScheme::registerScheme(scheme);
+#endif
 
   dooble::s_application = new dooble_application(argc, argv);
 
@@ -225,15 +233,6 @@ int main(int argc, char *argv[])
   */
 
   CocoaInitializer cocoa_initializer;
-#endif
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)) && \
-    (QT_VERSION < QT_VERSION_CHECK(5, 12, 4))
-  QWebEngineUrlScheme scheme("gopher");
-
-  scheme.setDefaultPort(70);
-  scheme.setFlags(QWebEngineUrlScheme::SecureScheme);
-  scheme.setSyntax(QWebEngineUrlScheme::Syntax::HostAndPort);
-  QWebEngineUrlScheme::registerScheme(scheme);
 #endif
   dooble::s_application->install_translator();
   splash.showMessage

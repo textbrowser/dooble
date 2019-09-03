@@ -346,7 +346,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
   prepare_page_connections(page);
 
-  if(dooble::s_application->application_locked())
+  if(s_application->application_locked())
     m_ui.tab->addTab(page, tr("Application Locked"));
   else
     m_ui.tab->addTab(page, tr("New Tab"));
@@ -354,7 +354,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
 
-  if(dooble::s_application->application_locked())
+  if(s_application->application_locked())
     m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), tr("Application Locked"));
   else
     m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), tr("New Tab"));
@@ -365,7 +365,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
      !sender())
     m_ui.tab->setCurrentWidget(page);
 
-  page->hide_location_frame(dooble::s_application->application_locked());
+  page->hide_location_frame(s_application->application_locked());
 
   if(!url.isEmpty() && url.isValid())
     page->load(url);
@@ -382,7 +382,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 	   page);
     }
 
-  page->view()->setVisible(!dooble::s_application->application_locked());
+  page->view()->setVisible(!s_application->application_locked());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
   return page;
@@ -453,10 +453,6 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_populate_containers_timer_timeout(void)),
 	  Qt::UniqueConnection);
-  connect(dooble::s_application,
-	  SIGNAL(application_locked(bool, dooble *)),
-	  this,
-	  SLOT(slot_application_locked(bool, dooble *)));
   connect(m_ui.menu_edit,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -557,6 +553,10 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_tabs_menu_button_clicked(void)),
 	  Qt::UniqueConnection);
+  connect(s_application,
+	  SIGNAL(application_locked(bool, dooble *)),
+	  this,
+	  SLOT(slot_application_locked(bool, dooble *)));
   connect(s_favorites_window,
 	  SIGNAL(open_link(const QUrl &)),
 	  this,
@@ -732,8 +732,13 @@ void dooble::initialize_static_members(void)
     {
       s_url_request_interceptor = new
 	dooble_web_engine_url_request_interceptor(nullptr);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
+      QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor
+	(s_url_request_interceptor);
+#else
       QWebEngineProfile::defaultProfile()->setRequestInterceptor
 	(s_url_request_interceptor);
+#endif
     }
 }
 
@@ -1116,8 +1121,11 @@ void dooble::prepare_private_web_engine_profile_settings(void)
     (QWebEngineProfile::defaultProfile()->httpCacheType());
   m_web_engine_profile->setHttpUserAgent
     (QWebEngineProfile::defaultProfile()->httpUserAgent());
-  m_web_engine_profile->setRequestInterceptor
-    (dooble::s_url_request_interceptor);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
+  m_web_engine_profile->setUrlRequestInterceptor(s_url_request_interceptor);
+#else
+  m_web_engine_profile->setRequestInterceptor(s_url_request_interceptor);
+#endif
   m_web_engine_profile->setSpellCheckEnabled(true);
   m_web_engine_profile->setSpellCheckLanguages
     (QWebEngineProfile::defaultProfile()->spellCheckLanguages());
@@ -1406,7 +1414,7 @@ void dooble::prepare_standard_menus(void)
 
 void dooble::prepare_style_sheets(void)
 {
-  if(dooble::s_application->style_name() == "fusion")
+  if(s_application->style_name() == "fusion")
     {
       QString theme_color(dooble_settings::setting("theme_color").toString());
 
@@ -1770,7 +1778,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 
   if(!locked)
     {
-      if(!dooble::s_application->application_locked())
+      if(!s_application->application_locked())
 	goto unlock_label;
 
       if(d != this)
@@ -1821,7 +1829,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	  return;
 	}
 
-      dooble::s_application->set_application_locked(false);
+      s_application->set_application_locked(false);
       locked = false;
       emit application_locked(false, this);
     }
@@ -2935,7 +2943,7 @@ void dooble::slot_tab_close_requested(int index)
 
 void dooble::slot_tab_index_changed(int index)
 {
-  if(dooble::s_application->application_locked())
+  if(s_application->application_locked())
     {
       setWindowTitle(tr("Dooble: Application Locked"));
       return;
@@ -3056,7 +3064,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
 void dooble::slot_title_changed(const QString &title)
 {
-  if(dooble::s_application->application_locked())
+  if(s_application->application_locked())
     return;
 
   dooble_page *page = qobject_cast<dooble_page *> (sender());
