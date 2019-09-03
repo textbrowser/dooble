@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>764</height>
+           <height>759</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -807,8 +807,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>501</width>
-               <height>746</height>
+               <width>676</width>
+               <height>798</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1341,7 +1341,7 @@
                <x>0</x>
                <y>0</y>
                <width>487</width>
-               <height>1020</height>
+               <height>1134</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1359,6 +1359,13 @@
                 </property>
                 <property name="checked">
                  <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="dns_prefetch">
+                <property name="text">
+                 <string>DNS Pre-fetch</string>
                 </property>
                </widget>
               </item>
@@ -1849,6 +1856,7 @@
   <tabstop>scrollArea_3</tabstop>
   <tabstop>animated_scrolling</tabstop>
   <tabstop>automatic_loading_of_images</tabstop>
+  <tabstop>dns_prefetch</tabstop>
   <tabstop>features_permissions_groupbox</tabstop>
   <tabstop>features_permissions</tabstop>
   <tabstop>remove_all_features_permissions</tabstop>

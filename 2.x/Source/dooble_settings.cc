@@ -910,6 +910,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("credentials_enabled", false).toBool());
   m_ui.denote_private_widgets->setChecked
     (s_settings.value("denote_private_widgets", true).toBool());
+  m_ui.dns_prefetch->setChecked
+    (s_settings.value("dns_prefetch", false).toBool());
   m_ui.do_not_track->setChecked
     (s_settings.value("do_not_track", true).toBool());
   m_ui.features_permissions_groupbox->setChecked
@@ -1594,6 +1596,9 @@ void dooble_settings::slot_apply(void)
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::DnsPrefetchEnabled,
+     m_ui.dns_prefetch->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
@@ -1695,6 +1700,7 @@ void dooble_settings::slot_apply(void)
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("credentials_enabled", m_ui.credentials->isChecked());
+  set_setting("dns_prefetch", m_ui.dns_prefetch->isChecked());
   set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
     ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
