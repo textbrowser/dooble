@@ -1122,6 +1122,10 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   m_web_engine_profile->setSpellCheckLanguages
     (QWebEngineProfile::defaultProfile()->spellCheckLanguages());
   m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::DnsPrefetchEnabled,
+     QWebEngineSettings::defaultSettings()->
+     testAttribute(QWebEngineSettings::DnsPrefetchEnabled));
+  m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled,
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::ErrorPageEnabled));
