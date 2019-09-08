@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>815</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,11 +70,11 @@
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
-       <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>150</number>
-       </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
         <number>125</number>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>150</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>true</bool>
