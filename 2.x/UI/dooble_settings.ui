@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>650</height>
+    <width>900</width>
+    <height>850</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,8 +46,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>105</width>
-           <height>594</height>
+           <width>127</width>
+           <height>754</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -608,6 +608,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="theme_color">
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
@@ -807,8 +810,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>676</width>
-               <height>798</height>
+               <width>978</width>
+               <height>1093</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1340,8 +1343,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>437</width>
-               <height>1134</height>
+               <width>434</width>
+               <height>1382</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">

@@ -260,8 +260,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["pin_settings_window"] = true;
   s_settings["save_geometry"] = true;
   s_settings["status_bar_visible"] = true;
-  s_settings["theme_color"] = "blue-grey";
-  s_settings["theme_color_index"] = 0;
+  s_settings["theme_color"] = "default";
+  s_settings["theme_color_index"] = 2; // Default
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
     httpUserAgent();
   s_settings["webgl"] = true;
@@ -988,7 +988,7 @@ void dooble_settings::restore(bool read_database)
   else
     m_ui.theme_color->setCurrentIndex
       (qBound(0,
-	      s_settings.value("theme_color_index", 0).toInt(),
+	      s_settings.value("theme_color_index", 2).toInt(),
 	      m_ui.theme_color->count() - 1));
 
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
@@ -1047,7 +1047,7 @@ void dooble_settings::restore(bool read_database)
       }
     default:
       {
-	s_settings["theme_color"] = "blue-grey";
+	s_settings["theme_color"] = "default";
 	break;
       }
     }
@@ -1654,7 +1654,7 @@ void dooble_settings::slot_apply(void)
 	}
       default:
 	{
-	  s_settings["theme_color"] = "blue-grey";
+	  s_settings["theme_color"] = "default";
 	  break;
 	}
       }
