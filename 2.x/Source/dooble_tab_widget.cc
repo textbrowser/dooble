@@ -83,7 +83,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_corner_widget = new QFrame(this);
   delete m_corner_widget->layout();
   m_corner_widget->setLayout(new QHBoxLayout(this));
-  m_corner_widget->layout()->setContentsMargins(5, 3, 5, 3);
+  m_corner_widget->layout()->setContentsMargins(5, 4, 5, 4);
   m_corner_widget->layout()->addWidget(m_private_tool_button);
   m_corner_widget->layout()->addWidget(m_tabs_menu_button);
   m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
