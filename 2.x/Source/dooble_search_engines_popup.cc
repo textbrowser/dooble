@@ -154,6 +154,27 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 	item->setIcon(icon);
     }
 
+  QMapIterator<QString, QAction *> it(m_actions);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.value())
+	{
+	  QString str1
+	    (dooble_ui_utilities::
+	     simplified_url(it.value()->property("url").toUrl()).toEncoded());
+	  QString str2(dooble_ui_utilities::simplified_url(url).toEncoded());
+
+	  if(str1.startsWith(str2))
+	    {
+	      it.value()->setIcon(icon);
+	      break;
+	    }
+	}
+    }
+
   QApplication::restoreOverrideCursor();
 }
 
@@ -317,7 +338,6 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 	    if(query.exec())
 	      {
 		QMutableMapIterator<QString, QAction *> it(m_actions);
-		  (m_actions.find(list.at(0).data().toString()));
 
 		while(it.hasNext())
 		  {
