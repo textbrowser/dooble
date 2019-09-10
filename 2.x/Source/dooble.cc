@@ -2538,7 +2538,7 @@ void dooble::slot_show_about(void)
   connect(s_about,
 	  SIGNAL(link_activated(const QUrl &)),
 	  this,
-	  SLOT(slot_open_link(const QUrl &)),
+	  SLOT(slot_show_release_notes(const QUrl &)),
 	  Qt::UniqueConnection);
   s_about->activateWindow();
   s_about->raise();
@@ -2657,7 +2657,8 @@ void dooble::slot_show_cookies(void)
 
 void dooble::slot_show_documentation(void)
 {
-  new_page(QUrl("qrc://Documentation/Dooble.html"), m_is_private);
+  m_ui.tab->setCurrentWidget
+    (new_page(QUrl("qrc://Documentation/Dooble.html"), m_is_private));
 }
 
 void dooble::slot_show_downloads(void)
@@ -2800,6 +2801,11 @@ void dooble::slot_show_main_menu(void)
 	  m_ui.menu_bar->setFocus();
 	}
     }
+}
+
+void dooble::slot_show_release_notes(const QUrl &url)
+{
+  m_ui.tab->setCurrentWidget(new_page(url, false));
 }
 
 void dooble::slot_show_search_engines(void)

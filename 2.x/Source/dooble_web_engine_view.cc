@@ -327,15 +327,16 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   else
     action->setEnabled(false);
 
-  if(dooble::s_search_engines_window && !selectedText().isEmpty())
+  if(dooble::s_search_engines_window)
     {
+      menu->addSeparator();
+
       QList<QAction *> actions(dooble::s_search_engines_window->actions());
+      QMenu *sub_menu = menu->addMenu("Search Selected Text");
 
-      if(!actions.isEmpty())
+      if(!actions.isEmpty() && !selectedText().isEmpty())
 	{
-	  menu->addSeparator();
-
-	  QMenu *sub_menu = menu->addMenu("Search Selected Text");
+	  sub_menu->setStyleSheet("QMenu {menu-scrollable: 1;}");
 
 	  for(int i = 0; i < actions.size(); i++)
 	    {
@@ -348,6 +349,8 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	      action->setProperty("url", actions.at(i)->property("url"));
 	    }
 	}
+      else
+	sub_menu->setEnabled(false);
     }
 
   menu->exec(mapToGlobal(event->pos()));

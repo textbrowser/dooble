@@ -211,6 +211,7 @@ class dooble: public QMainWindow
   void slot_show_full_screen(void);
   void slot_show_history(void);
   void slot_show_main_menu(void);
+  void slot_show_release_notes(const QUrl &url);
   void slot_show_search_engines(void);
   void slot_show_settings(void);
   void slot_show_settings_panel(dooble_settings::Panels panel);
