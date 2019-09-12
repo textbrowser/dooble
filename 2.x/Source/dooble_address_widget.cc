@@ -329,30 +329,23 @@ void dooble_address_widget::setText(const QString &text)
     {
       QList<QTextLayout::FormatRange> formats;
       QString host(url.host());
-      QString path
-	(url.toString().mid(host.length() + url.toString().indexOf(host)));
       QTextCharFormat format;
+      QTextLayout::FormatRange all_format_range;
       QTextLayout::FormatRange host_format_range;
-      QTextLayout::FormatRange path_format_range;
-      QTextLayout::FormatRange scheme_format_range;
 
       format.setFontStyleStrategy(QFont::PreferAntialias);
       format.setFontWeight(QFont::Normal);
+      format.setForeground(QColor("#2962ff"));
+      all_format_range.format = format;
+      all_format_range.length = url.toString().length();
+      all_format_range.start = 0;
+      format.setForeground(palette().color(QPalette::WindowText));
       host_format_range.format = format;
       host_format_range.length = host.length();
-      host_format_range.start = url.toString().indexOf(host);
-      format.setForeground(QColor("#2962ff"));
-      path_format_range.format = format;
-      path_format_range.length = path.length();
-      path_format_range.start =
-	url.toString().indexOf(path, url.toString().indexOf(host));
-      format.setForeground(QColor("#2962ff"));
-      scheme_format_range.format = format;
-      scheme_format_range.length = url.toString().indexOf(host);
-      scheme_format_range.start = 0;
+      host_format_range.start = url.toString().indexOf
+	(host, url.scheme().length());
+      formats << all_format_range;
       formats << host_format_range;
-      formats << path_format_range;
-      formats << scheme_format_range;
       set_text_format(formats);
     }
 
