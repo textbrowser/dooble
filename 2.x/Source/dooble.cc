@@ -2040,10 +2040,13 @@ void dooble::slot_authenticate(void)
 	  QApplication::processEvents();
 	}
       else
-	QMessageBox::critical
-	  (this,
-	   tr("Dooble: Error"),
-	   tr("Unable to authenticate the provided password."));
+	{
+	  QMessageBox::critical
+	    (this,
+	     tr("Dooble: Error"),
+	     tr("Unable to authenticate the provided password."));
+	  QApplication::processEvents();
+	}
     }
 }
 
@@ -3132,11 +3135,14 @@ void dooble::slot_warn_of_missing_sqlite_driver(void)
   QApplication::restoreOverrideCursor();
 
   if(!found)
-    QMessageBox::critical
-      (this,
-       tr("Dooble: Error"),
-       tr("Unable to discover the SQLite plugin. This is a serious "
-	  "problem!"));
+    {
+      QMessageBox::critical
+	(this,
+	 tr("Dooble: Error"),
+	 tr("Unable to discover the SQLite plugin. This is a serious "
+	    "problem!"));
+      QApplication::processEvents();
+    }
 }
 
 void dooble::slot_window_close_requested(void)

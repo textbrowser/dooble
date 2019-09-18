@@ -2002,6 +2002,8 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	   tr("Dooble: Error"),
 	   tr("Credentials could not be generated. "
 	      "This is a curious problem (%1).").arg(error));
+
+      QApplication::processEvents();
     }
 }
 
@@ -2670,6 +2672,7 @@ void dooble_settings::slot_save_credentials(void)
       m_ui.password_1->setFocus();
       QMessageBox::critical
 	(this, tr("Dooble: User Error"), tr("Empty password(s)."));
+      QApplication::processEvents();
       return;
     }
   else if(password1 != password2)
@@ -2678,6 +2681,7 @@ void dooble_settings::slot_save_credentials(void)
       m_ui.password_1->setFocus();
       QMessageBox::critical
 	(this, tr("Dooble: User Error"), tr("Passwords are not equal."));
+      QApplication::processEvents();
       return;
     }
 
@@ -2712,6 +2716,7 @@ void dooble_settings::slot_save_credentials(void)
 	(this,
 	 tr("Dooble: Error"),
 	 tr("Salt-generation failure! This is a curious problem."));
+      QApplication::processEvents();
       return;
     }
 
