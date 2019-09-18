@@ -1476,10 +1476,12 @@ void dooble_settings::slot_apply(void)
 
       if(mb.exec() != QMessageBox::Yes)
 	{
+	  QApplication::processEvents();
 	  m_ui.credentials->setChecked(true);
 	  return;
 	}
 
+      QApplication::processEvents();
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
       /*
@@ -2277,8 +2279,12 @@ void dooble_settings::slot_remove_all_features_permissions(void)
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
 
+  QApplication::processEvents();
   m_ui.features_permissions->setRowCount(0);
   s_site_features_permissions.clear();
 
@@ -2303,7 +2309,12 @@ void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
@@ -2337,7 +2348,12 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2446,7 +2462,12 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2522,7 +2543,10 @@ void dooble_settings::slot_reset(void)
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
 
   QApplication::processEvents();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2567,8 +2591,12 @@ void dooble_settings::slot_reset_credentials(void)
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
 
+  QApplication::processEvents();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   /*
@@ -2666,7 +2694,12 @@ void dooble_settings::slot_save_credentials(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   QByteArray salt(dooble_random::random_bytes(64));
@@ -2717,4 +2750,5 @@ void dooble_settings::slot_save_credentials(void)
 	  pbkdf2.data(),
 	  SLOT(slot_interrupt(void)));
   m_pbkdf2_dialog->exec();
+  QApplication::processEvents();
 }

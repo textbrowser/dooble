@@ -107,7 +107,12 @@ void dooble_clear_items::slot_clear_items(void)
 	mb.setWindowTitle(tr("Dooble: Confirmation"));
 
 	if(mb.exec() != QMessageBox::Yes)
-	  return;
+	  {
+	    QApplication::processEvents();
+	    return;
+	  }
+
+	QApplication::processEvents();
       }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));

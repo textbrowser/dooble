@@ -190,8 +190,12 @@ void dooble_downloads::delete_selected(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
 
+      QApplication::processEvents();
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     }
 
@@ -409,8 +413,12 @@ void dooble_downloads::slot_clear_finished_downloads(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
 
+      QApplication::processEvents();
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     }
 
@@ -470,8 +478,12 @@ void dooble_downloads::slot_delete_row(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
 
+      QApplication::processEvents();
       remove_entry(downloads_item->oid());
       m_ui.table->removeRow(action->property("row").toInt());
     }
@@ -781,12 +793,15 @@ void dooble_downloads::slot_select_path(void)
 
   if(dialog.exec() == QDialog::Accepted)
     {
+      QApplication::processEvents();
       dooble_settings::set_setting
 	("download_path", dialog.selectedFiles().value(0));
       m_ui.download_path->setText(dialog.selectedFiles().value(0));
       m_ui.download_path->setToolTip(m_ui.download_path->text());
       m_ui.download_path->setCursorPosition(0);
     }
+
+  QApplication::processEvents();
 }
 
 void dooble_downloads::slot_show_context_menu(const QPoint &point)

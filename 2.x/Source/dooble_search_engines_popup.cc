@@ -310,7 +310,12 @@ void dooble_search_engines_popup::slot_delete_selected(void)
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::processEvents();
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {

@@ -362,7 +362,12 @@ void dooble_history_window::slot_delete_pages(void)
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::processEvents();
 
   if(action && action->property("prompt").toBool())
     favorites_included = true;

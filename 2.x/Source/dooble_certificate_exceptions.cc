@@ -218,7 +218,12 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));

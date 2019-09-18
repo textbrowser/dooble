@@ -1160,11 +1160,15 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 
   if(dialog.exec() == QDialog::Accepted)
     {
+      QApplication::processEvents();
       authenticator->setPassword(ui.password->text());
       authenticator->setUser(ui.username->text());
     }
   else
-    *authenticator = QAuthenticator();
+    {
+      QApplication::processEvents();
+      *authenticator = QAuthenticator();
+    }
 }
 
 void dooble_page::slot_clear_visited_links(void)
@@ -1800,11 +1804,15 @@ void dooble_page::slot_proxy_authentication_required
 
   if(dialog.exec() == QDialog::Accepted)
     {
+      QApplication::processEvents();
       authenticator->setPassword(ui.password->text());
       authenticator->setUser(ui.username->text());
     }
   else
-    *authenticator = QAuthenticator();
+    {
+      QApplication::processEvents();
+      *authenticator = QAuthenticator();
+    }
 }
 
 void dooble_page::slot_reload(void)

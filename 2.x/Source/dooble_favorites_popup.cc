@@ -191,7 +191,12 @@ void dooble_favorites_popup::slot_delete_selected(void)
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::processEvents();
 
   QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
 

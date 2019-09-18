@@ -169,6 +169,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       dooble_clear_items clear_items(find_parent_dooble());
 
       clear_items.exec();
+      QApplication::processEvents();
     }
   else if(m_ui.cookies == sender())
     {

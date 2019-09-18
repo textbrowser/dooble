@@ -660,7 +660,12 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
   dialog.setWindowTitle(tr("Dooble: New Domain"));
 
   if(dialog.exec() != QDialog::Accepted)
-    return;
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::processEvents();
 
   QString text = QUrl::fromUserInput
     (dialog.textValue().toLower().trimmed()).host();
@@ -686,7 +691,12 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   m_exceptions.clear();
@@ -746,7 +756,12 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -823,7 +838,12 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -917,6 +937,8 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 
   if(dialog.exec() == QDialog::Accepted)
     {
+      QApplication::processEvents();
+
       QFile file(dialog.selectedFiles().value(0));
 
       if(file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -975,6 +997,8 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  populate();
 	}
     }
+
+  QApplication::processEvents();
 }
 
 void dooble_accepted_or_blocked_domains::slot_item_changed

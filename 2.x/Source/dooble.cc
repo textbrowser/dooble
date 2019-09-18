@@ -305,8 +305,12 @@ bool dooble::can_exit(void)
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
-	return false;
+	{
+	  QApplication::processEvents();
+	  return false;
+	}
 
+      QApplication::processEvents();
       return true;
     }
 }
@@ -1512,9 +1516,15 @@ void dooble::print(dooble_page *page)
   print_dialog = new QPrintDialog(printer, this);
 
   if(print_dialog->exec() == QDialog::Accepted)
-    page->print_page(printer);
+    {
+      QApplication::processEvents();
+      page->print_page(printer);
+    }
   else
-    delete printer;
+    {
+      QApplication::processEvents();
+      delete printer;
+    }
 
   print_dialog->deleteLater();
 }
@@ -1803,7 +1813,10 @@ void dooble::slot_application_locked(bool state, dooble *d)
       dialog.setWindowTitle(tr("Dooble: Unlock Dooble"));
 
       if(dialog.exec() != QDialog::Accepted)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
 
       repaint();
       QApplication::processEvents();
@@ -1952,7 +1965,12 @@ void dooble::slot_authenticate(void)
 	      SLOT(accept(void)));
 
       if(dialog.exec() != QDialog::Accepted)
-	return;
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
 
       QByteArray salt
 	(QByteArray::fromHex(dooble_settings::setting("authentication_salt").
@@ -2019,6 +2037,7 @@ void dooble::slot_authenticate(void)
 		  pbkdf2.data(),
 		  SLOT(slot_interrupt(void)));
 	  m_pbkdf2_dialog->exec();
+	  QApplication::processEvents();
 	}
       else
 	QMessageBox::critical
@@ -2612,6 +2631,7 @@ void dooble::slot_show_clear_items(void)
   dooble_clear_items clear_items(this);
 
   clear_items.exec();
+  QApplication::processEvents();
 }
 
 void dooble::slot_show_cookies(void)
