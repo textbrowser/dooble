@@ -355,8 +355,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>751</width>
-               <height>776</height>
+               <width>637</width>
+               <height>603</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -832,8 +832,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>737</width>
-               <height>778</height>
+               <width>676</width>
+               <height>866</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -907,6 +907,16 @@
                  <bool>false</bool>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="label_26">
+                   <property name="text">
+                    <string>Containers: Accepted / Blocked Domains, Certificate Exceptions, Cookies, Downloads, Favicons, History, Search Engines. All other containers, including the contents of WebEnginePersistentStorage, are not encrypted.</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QLabel" name="label_4">
                    <property name="text">
@@ -1364,8 +1374,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-358</y>
-               <width>737</width>
+               <y>0</y>
+               <width>318</width>
                <height>1134</height>
               </rect>
              </property>

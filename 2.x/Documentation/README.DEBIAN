@@ -56,5 +56,5 @@ mkdir -p dooble-debian.d/usr/share/applications
 cp -p ./dooble.d/2.x/dooble.desktop dooble-debian.d/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-debian.d/.
 cp -r /usr/local/dooble dooble-debian.d/usr/local/.
-fakeroot dpkg-deb --build dooble-debian.d Dooble-2019.10.10_amd64.deb
-debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2019.10.10_amd64.deb
+fakeroot dpkg-deb --build dooble-debian.d Dooble-2019.11.11_amd64.deb
+debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2019.11.11_amd64.deb

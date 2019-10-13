@@ -3,7 +3,7 @@ Maintainer: textbrowser@gmail.com
 Package: Dooble
 Priority: optional
 Section: Internet
-Version: 2019.10.10
+Version: 2019.11.11
 Description: Dooble Web Browser
  Welcome to the Dooble Web Browser!
  A dooble.desktop file will also be installed in /usr/share/applications/.
