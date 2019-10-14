@@ -556,7 +556,6 @@ dooble_threefish256::dooble_threefish256(const QByteArray &key):
 {
   m_block_length = key.length();
   m_key_length = key.length();
-  m_tweak_length = 16;
 }
 
 dooble_threefish256::~dooble_threefish256()
