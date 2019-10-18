@@ -60,13 +60,11 @@ QIcon dooble_favicons::icon(const QUrl &url)
 
 	query.setForwardOnly(true);
 	query.prepare("SELECT favicon, OID FROM dooble_favicons WHERE "
-		      "url_digest IN (?, ?) OR url_host_digest = ?");
+		      "url_digest IN (?, ?)");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded() + "/").toBase64());
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(url.host()).toBase64());
 
 	if(query.exec() && query.next())
 	  if(!query.isNull(0))
