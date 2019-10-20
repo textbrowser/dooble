@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
+    <width>570</width>
     <height>400</height>
    </rect>
   </property>
@@ -79,13 +79,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="confirm_exception">
-            <property name="text">
-             <string>Confirm Exception</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -116,6 +109,13 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="confirm_exception">
+          <property name="text">
+           <string>Confirm Exception</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="accept">
