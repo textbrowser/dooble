@@ -217,7 +217,7 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
-                          -Werror -Wextra \
+                          -Werror -Wextra -Wno-deprecated-copy \
 			  -Woverloaded-virtual -Wpointer-arith \
                           -Wstack-protector -Wstrict-overflow=5 \
                           -fPIE -fstack-protector-all -fwrapv \
