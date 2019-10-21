@@ -1119,6 +1119,51 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   if(!m_is_private || !m_web_engine_profile)
     return;
 
+  /*
+  ** Fonts
+  */
+
+  QList<QWebEngineSettings::FontFamily> families;
+  QStringList fonts;
+
+  families << QWebEngineSettings::CursiveFont
+	   << QWebEngineSettings::FantasyFont
+	   << QWebEngineSettings::FixedFont
+	   << QWebEngineSettings::PictographFont
+	   << QWebEngineSettings::SansSerifFont
+	   << QWebEngineSettings::SerifFont
+	   << QWebEngineSettings::StandardFont;
+  fonts << QWebEngineSettings::defaultSettings()->fontFamily(families.at(0))
+	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(1))
+	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(2))
+	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(3))
+	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(4))
+	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(5))
+	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(6));
+
+  for(int i = 0; i < families.size(); i++)
+    m_web_engine_profile->settings()->setFontFamily
+      (families.at(i), fonts.at(i));
+
+  QList<QWebEngineSettings::FontSize> types;
+  QList<int> sizes;
+
+  sizes << QWebEngineSettings::defaultSettings()->fontSize
+           (QWebEngineSettings::DefaultFixedFontSize)
+	<< QWebEngineSettings::defaultSettings()->fontSize
+           (QWebEngineSettings::DefaultFontSize)
+	<< QWebEngineSettings::defaultSettings()->fontSize
+           (QWebEngineSettings::MinimumFontSize)
+	<< QWebEngineSettings::defaultSettings()->fontSize
+           (QWebEngineSettings::MinimumLogicalFontSize);
+  types << QWebEngineSettings::DefaultFixedFontSize
+	<< QWebEngineSettings::DefaultFontSize
+	<< QWebEngineSettings::MinimumFontSize
+	<< QWebEngineSettings::MinimumLogicalFontSize;
+
+  for(int i = 0; i < sizes.size(); i++)
+    m_web_engine_profile->settings()->setFontSize(types.at(i), sizes.at(i));
+
   m_web_engine_profile->setHttpCacheMaximumSize
     (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
   m_web_engine_profile->setHttpCacheType
