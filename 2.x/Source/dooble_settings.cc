@@ -1261,6 +1261,31 @@ void dooble_settings::restore(bool read_database)
 
 void dooble_settings::save_fonts(void)
 {
+  QMap<QWebEngineSettings::FontFamily, QPair<QString, QString> > fonts;
+
+  fonts[QWebEngineSettings::CursiveFont] = QPair<QString, QString>
+    ("web_font_cursive", m_ui.web_font_cursive->currentFont().family());
+  fonts[QWebEngineSettings::FantasyFont] = QPair<QString, QString>
+    ("web_font_fantasy", m_ui.web_font_fantasy->currentFont().family());
+  fonts[QWebEngineSettings::FixedFont] = QPair<QString, QString>
+    ("web_font_fixed", m_ui.web_font_fixed->currentFont().family());
+  fonts[QWebEngineSettings::PictographFont] = QPair<QString, QString>
+    ("web_font_pictograph", m_ui.web_font_pictograph->currentFont().family());
+  fonts[QWebEngineSettings::SansSerifFont] = QPair<QString, QString>
+    ("web_font_sans_serif", m_ui.web_font_sans_serif->currentFont().family());
+  fonts[QWebEngineSettings::SerifFont] = QPair<QString, QString>
+    ("web_font_serif", m_ui.web_font_serif->currentFont().family());
+  fonts[QWebEngineSettings::StandardFont] = QPair<QString, QString>
+    ("web_font_standard", m_ui.web_font_standard->currentFont().family());
+
+  QMapIterator<QWebEngineSettings::FontFamily, QPair<QString, QString> >
+    it(fonts);
+
+  while(it.hasNext())
+    {
+      it.next();
+      set_setting(it.value().first, it.value().second);
+    }
 }
 
 void dooble_settings::save_javascript_block_popup_exception
