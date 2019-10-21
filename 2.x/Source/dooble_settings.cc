@@ -638,23 +638,24 @@ void dooble_settings::prepare_fonts(void)
 
   {
     QFont font;
+    QList<QWebEngineSettings::FontFamily> families;
     QStringList fonts;
     QStringList list;
 
-    fonts << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::CursiveFont)
-	  << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::FantasyFont)
-	  << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::FixedFont)
-	  << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::PictographFont)
-	  << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::SansSerifFont)
-	  << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::SerifFont)
-	  << QWebEngineSettings::defaultSettings()->fontFamily
-             (QWebEngineSettings::StandardFont);
+    families << QWebEngineSettings::CursiveFont
+	     << QWebEngineSettings::FantasyFont
+	     << QWebEngineSettings::FixedFont
+	     << QWebEngineSettings::PictographFont
+	     << QWebEngineSettings::SansSerifFont
+	     << QWebEngineSettings::SerifFont
+	     << QWebEngineSettings::StandardFont;
+    fonts << QWebEngineSettings::defaultSettings()->fontFamily(families.at(0))
+	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(1))
+	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(2))
+	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(3))
+	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(4))
+	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(5))
+	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(6));
 
     {
       QReadLocker lock(&s_settings_mutex);
@@ -668,8 +669,13 @@ void dooble_settings::prepare_fonts(void)
 	   << s_settings.value("web_font_standard").toString();
 
       for(int i = 0; i < list.size(); i++)
-	if(list.at(i).isEmpty())
-	  list.replace(i, fonts.at(i));
+	{
+	  if(list.at(i).isEmpty())
+	    list.replace(i, fonts.at(i));
+
+	  QWebEngineSettings::defaultSettings()->setFontFamily
+	    (families.at(i), list.at(i));
+	}
     }
 
     font.fromString(list.at(0));
@@ -693,6 +699,7 @@ void dooble_settings::prepare_fonts(void)
   */
 
   {
+    QList<QWebEngineSettings::FontSize> types;
     QList<int> list;
     QList<int> sizes;
 
@@ -704,22 +711,31 @@ void dooble_settings::prepare_fonts(void)
              (QWebEngineSettings::MinimumFontSize)
 	  << QWebEngineSettings::defaultSettings()->fontSize
              (QWebEngineSettings::MinimumLogicalFontSize);
+    types << QWebEngineSettings::DefaultFixedFontSize
+	  << QWebEngineSettings::DefaultFontSize
+	  << QWebEngineSettings::MinimumFontSize
+	  << QWebEngineSettings::MinimumLogicalFontSize;
 
     {
       QReadLocker lock(&s_settings_mutex); 
 
       list << s_settings.value("web_font_size_default_fixed").toInt()
+           << s_settings.value("web_font_size_default").toInt()
 	   << s_settings.value("web_font_size_minimum").toInt()
-	   << s_settings.value("web_font_size_minimum_logical").toInt()
-           << s_settings.value("web_font_size_default").toInt();
+	   << s_settings.value("web_font_size_minimum_logical").toInt();
 
       for(int i = 0; i < list.size(); i++)
-	if(list.at(i) <= 0)
-	  list.replace(i, sizes.at(i));
+	{
+	  if(list.at(i) <= 0)
+	    list.replace(i, sizes.at(i));
+
+	  QWebEngineSettings::defaultSettings()->setFontSize
+	    (types.at(i), list.at(i));
+	}
     }
 
-    m_ui.web_font_size_default->setValue(list.at(0));
-    m_ui.web_font_size_default_fixed->setValue(list.at(1));
+    m_ui.web_font_size_default_fixed->setValue(list.at(0));
+    m_ui.web_font_size_default->setValue(list.at(1));
     m_ui.web_font_size_minimum->setValue(list.at(2));
     m_ui.web_font_size_minimum_logical->setValue(list.at(3));
   }
@@ -1261,31 +1277,68 @@ void dooble_settings::restore(bool read_database)
 
 void dooble_settings::save_fonts(void)
 {
-  QMap<QWebEngineSettings::FontFamily, QPair<QString, QString> > fonts;
+  /*
+  ** Fonts
+  */
 
-  fonts[QWebEngineSettings::CursiveFont] = QPair<QString, QString>
-    ("web_font_cursive", m_ui.web_font_cursive->currentFont().family());
-  fonts[QWebEngineSettings::FantasyFont] = QPair<QString, QString>
-    ("web_font_fantasy", m_ui.web_font_fantasy->currentFont().family());
-  fonts[QWebEngineSettings::FixedFont] = QPair<QString, QString>
-    ("web_font_fixed", m_ui.web_font_fixed->currentFont().family());
-  fonts[QWebEngineSettings::PictographFont] = QPair<QString, QString>
-    ("web_font_pictograph", m_ui.web_font_pictograph->currentFont().family());
-  fonts[QWebEngineSettings::SansSerifFont] = QPair<QString, QString>
-    ("web_font_sans_serif", m_ui.web_font_sans_serif->currentFont().family());
-  fonts[QWebEngineSettings::SerifFont] = QPair<QString, QString>
-    ("web_font_serif", m_ui.web_font_serif->currentFont().family());
-  fonts[QWebEngineSettings::StandardFont] = QPair<QString, QString>
-    ("web_font_standard", m_ui.web_font_standard->currentFont().family());
+  {
+    QMap<QWebEngineSettings::FontFamily, QPair<QString, QString> > fonts;
 
-  QMapIterator<QWebEngineSettings::FontFamily, QPair<QString, QString> >
-    it(fonts);
+    fonts[QWebEngineSettings::CursiveFont] = QPair<QString, QString>
+      ("web_font_cursive", m_ui.web_font_cursive->currentFont().family());
+    fonts[QWebEngineSettings::FantasyFont] = QPair<QString, QString>
+      ("web_font_fantasy", m_ui.web_font_fantasy->currentFont().family());
+    fonts[QWebEngineSettings::FixedFont] = QPair<QString, QString>
+      ("web_font_fixed", m_ui.web_font_fixed->currentFont().family());
+    fonts[QWebEngineSettings::PictographFont] = QPair<QString, QString>
+      ("web_font_pictograph", m_ui.web_font_pictograph->currentFont().family());
+    fonts[QWebEngineSettings::SansSerifFont] = QPair<QString, QString>
+      ("web_font_sans_serif", m_ui.web_font_sans_serif->currentFont().family());
+    fonts[QWebEngineSettings::SerifFont] = QPair<QString, QString>
+      ("web_font_serif", m_ui.web_font_serif->currentFont().family());
+    fonts[QWebEngineSettings::StandardFont] = QPair<QString, QString>
+      ("web_font_standard", m_ui.web_font_standard->currentFont().family());
 
-  while(it.hasNext())
-    {
-      it.next();
-      set_setting(it.value().first, it.value().second);
-    }
+    QMapIterator<QWebEngineSettings::FontFamily, QPair<QString, QString> >
+      it(fonts);
+
+    while(it.hasNext())
+      {
+	it.next();
+	QWebEngineSettings::defaultSettings()->setFontFamily
+	  (it.key(), it.value().second);
+	set_setting(it.value().first, it.value().second);
+      }
+  }
+
+  /*
+  ** Sizes
+  */
+
+  {
+    QMap<QWebEngineSettings::FontSize, QPair<QString, int> > sizes;
+
+    sizes[QWebEngineSettings::DefaultFixedFontSize] = QPair<QString, int>
+      ("web_font_size_default_fixed",
+       m_ui.web_font_size_default_fixed->value());
+    sizes[QWebEngineSettings::DefaultFontSize] = QPair<QString, int>
+      ("web_font_size_default", m_ui.web_font_size_default->value());
+    sizes[QWebEngineSettings::MinimumFontSize] = QPair<QString, int>
+      ("web_font_size_minimum", m_ui.web_font_size_minimum->value());
+    sizes[QWebEngineSettings::MinimumLogicalFontSize] = QPair<QString, int>
+      ("web_font_size_minimum_logical",
+       m_ui.web_font_size_minimum_logical->value());
+
+    QMapIterator<QWebEngineSettings::FontSize, QPair<QString, int> > it(sizes);
+
+    while(it.hasNext())
+      {
+	it.next();
+	QWebEngineSettings::defaultSettings()->setFontSize
+	  (it.key(), it.value().second);
+	set_setting(it.value().first, it.value().second);
+      }
+  }
 }
 
 void dooble_settings::save_javascript_block_popup_exception
