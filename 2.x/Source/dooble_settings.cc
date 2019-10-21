@@ -649,13 +649,10 @@ void dooble_settings::prepare_fonts(void)
 	     << QWebEngineSettings::SansSerifFont
 	     << QWebEngineSettings::SerifFont
 	     << QWebEngineSettings::StandardFont;
-    fonts << QWebEngineSettings::defaultSettings()->fontFamily(families.at(0))
-	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(1))
-	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(2))
-	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(3))
-	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(4))
-	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(5))
-	  << QWebEngineSettings::defaultSettings()->fontFamily(families.at(6));
+
+    for(int i = 0; i < families.size(); i++)
+      fonts << QWebEngineSettings::defaultSettings()->fontFamily
+	(families.at(i));
 
     {
       QReadLocker lock(&s_settings_mutex);
@@ -2740,6 +2737,7 @@ void dooble_settings::slot_reset(void)
        << "dooble_downloads.db"
        << "dooble_favicons.db"
        << "dooble_history.db"
+       << "dooble_search_engines.db"
        << "dooble_settings.db";
 
   while(!list.isEmpty())
