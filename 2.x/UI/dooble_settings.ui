@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>544</height>
+           <height>549</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -355,8 +355,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
-               <height>603</height>
+               <width>651</width>
+               <height>531</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -832,8 +832,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>676</width>
-               <height>866</height>
+               <width>667</width>
+               <height>741</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1375,8 +1375,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>318</width>
-               <height>1134</height>
+               <width>637</width>
+               <height>1442</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1491,6 +1491,187 @@
                     <widget class="QPushButton" name="remove_selected_features_permissions">
                      <property name="text">
                       <string>Remove Selected</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBox_3">
+                <property name="title">
+                 <string>Fonts</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_20">
+                 <item>
+                  <layout class="QGridLayout" name="gridLayout_4">
+                   <item row="4" column="1">
+                    <widget class="QFontComboBox" name="web_font_sans_serif"/>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_27">
+                     <property name="text">
+                      <string>Cursive</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="1">
+                    <widget class="QFontComboBox" name="web_font_standard"/>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QFontComboBox" name="web_font_fantasy"/>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_29">
+                     <property name="text">
+                      <string>Fixed</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0">
+                    <widget class="QLabel" name="label_33">
+                     <property name="text">
+                      <string>Standard</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="label_28">
+                     <property name="text">
+                      <string>Fantasy</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <widget class="QLabel" name="label_31">
+                     <property name="text">
+                      <string>Sans Serif</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QFontComboBox" name="web_font_cursive"/>
+                   </item>
+                   <item row="5" column="1">
+                    <widget class="QFontComboBox" name="web_font_serif"/>
+                   </item>
+                   <item row="5" column="0">
+                    <widget class="QLabel" name="label_32">
+                     <property name="text">
+                      <string>Serif</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QFontComboBox" name="web_font_fixed"/>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="label_30">
+                     <property name="text">
+                      <string>Pictograph</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QFontComboBox" name="web_font_pictograph"/>
+                   </item>
+                   <item row="0" column="2">
+                    <spacer name="horizontalSpacer_18">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QGridLayout" name="gridLayout_5">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_34">
+                     <property name="text">
+                      <string>Default</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_36">
+                     <property name="text">
+                      <string>Minimum</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="label_35">
+                     <property name="text">
+                      <string>Default Fixed</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QSpinBox" name="web_font_size_default">
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="label_37">
+                     <property name="text">
+                      <string>Minimum Logical</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <spacer name="horizontalSpacer_19">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QSpinBox" name="web_font_size_default_fixed">
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QSpinBox" name="web_font_size_minimum">
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QSpinBox" name="web_font_size_minimum_logical">
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>10</number>
                      </property>
                     </widget>
                    </item>
@@ -1897,6 +2078,17 @@
   <tabstop>features_permissions</tabstop>
   <tabstop>remove_all_features_permissions</tabstop>
   <tabstop>remove_selected_features_permissions</tabstop>
+  <tabstop>web_font_cursive</tabstop>
+  <tabstop>web_font_fantasy</tabstop>
+  <tabstop>web_font_fixed</tabstop>
+  <tabstop>web_font_pictograph</tabstop>
+  <tabstop>web_font_sans_serif</tabstop>
+  <tabstop>web_font_serif</tabstop>
+  <tabstop>web_font_standard</tabstop>
+  <tabstop>web_font_size_default</tabstop>
+  <tabstop>web_font_size_default_fixed</tabstop>
+  <tabstop>web_font_size_minimum</tabstop>
+  <tabstop>web_font_size_minimum_logical</tabstop>
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>

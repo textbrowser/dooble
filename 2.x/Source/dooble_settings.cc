@@ -630,6 +630,64 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
   save_javascript_block_popup_exception(url, true);
 }
 
+void dooble_settings::prepare_fonts(void)
+{
+  QFont font;
+  QString str("");
+
+  /*
+  ** Fonts
+  */
+
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::CursiveFont);
+  font.fromString(str);
+  m_ui.web_font_cursive->setCurrentFont(font);
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::FantasyFont);
+  font.fromString(str);
+  m_ui.web_font_fantasy->setCurrentFont(font);
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::FixedFont);
+  font.fromString(str);
+  m_ui.web_font_fixed->setCurrentFont(font);
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::PictographFont);
+  font.fromString(str);
+  m_ui.web_font_pictograph->setCurrentFont(font);
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::SansSerifFont);
+  font.fromString(str);
+  m_ui.web_font_sans_serif->setCurrentFont(font);
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::SerifFont);
+  font.fromString(str);
+  m_ui.web_font_serif->setCurrentFont(font);
+  str = QWebEngineSettings::defaultSettings()->fontFamily
+    (QWebEngineSettings::StandardFont);
+  font.fromString(str);
+  m_ui.web_font_standard->setCurrentFont(font);
+
+  /*
+  ** Font Sizes
+  */
+
+  int size = 10;
+
+  size = QWebEngineSettings::defaultSettings()->fontSize
+    (QWebEngineSettings::DefaultFontSize);
+  m_ui.web_font_size_default->setValue(size);
+  size = QWebEngineSettings::defaultSettings()->fontSize
+    (QWebEngineSettings::MinimumFontSize);
+  m_ui.web_font_size_minimum->setValue(size);
+  size = QWebEngineSettings::defaultSettings()->fontSize
+    (QWebEngineSettings::MinimumLogicalFontSize);
+  m_ui.web_font_size_minimum_logical->setValue(size);
+  size = QWebEngineSettings::defaultSettings()->fontSize
+    (QWebEngineSettings::DefaultFixedFontSize);
+  m_ui.web_font_size_default_fixed->setValue(size);
+}
+
 void dooble_settings::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
@@ -1159,6 +1217,7 @@ void dooble_settings::restore(bool read_database)
 	list.at(i)->setChecked(true);
   }
 
+  prepare_fonts();
   prepare_proxy(false);
   QApplication::restoreOverrideCursor();
 }

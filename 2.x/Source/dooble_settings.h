@@ -94,6 +94,7 @@ class dooble_settings: public QMainWindow
   static QString s_http_user_agent;
   static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
+  void prepare_fonts(void);
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void purge_database_data(void);
