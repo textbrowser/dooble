@@ -1656,14 +1656,14 @@ void dooble_page::slot_load_progress(int progress)
 	 m_ui.address->width(),
 	 m_ui.address->height());
 
-      linear_gradient.setColorAt(progress / 100.0, QColor("lightgreen"));
+      linear_gradient.setColorAt(progress / 100.0, QColor(144, 238, 144));
       linear_gradient.setColorAt
 	(qBound(progress / 100.0, progress / 100.0 + 0.15, 1.0),
-	 QColor("white"));
+	 QColor(Qt::white));
 
       QPalette palette(m_ui.address->palette());
 
-      palette.setBrush(QPalette::Base, QBrush(linear_gradient));
+      palette.setBrush(m_ui.address->backgroundRole(), QBrush(linear_gradient));
       m_ui.address->setPalette(palette);
     }
   else
