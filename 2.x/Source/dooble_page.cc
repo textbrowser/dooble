@@ -1643,7 +1643,7 @@ void dooble_page::slot_load_progress(int progress)
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
   m_ui.progress->setVisible(progress > 0 && progress < 100);
-
+#ifndef Q_OS_MACOS
   static QPalette s_address_palette(m_ui.address->palette());
 
   if(dooble_settings::setting("status_bar_visible").toBool())
@@ -1668,6 +1668,7 @@ void dooble_page::slot_load_progress(int progress)
     }
   else
     m_ui.address->setPalette(s_address_palette);
+#endif
 }
 
 void dooble_page::slot_load_started(void)
