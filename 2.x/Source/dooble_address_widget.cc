@@ -159,6 +159,7 @@ bool dooble_address_widget::event(QEvent *event)
       if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Escape)
 	{
 	  emit reset_url();
+	  m_completer->popup()->hide();
 
 	  if(m_view)
 	    prepare_containers_for_url(m_view->url());
@@ -236,6 +237,7 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
   if(event && event->key() == Qt::Key_Escape)
     {
       emit reset_url();
+      m_completer->popup()->hide();
 
       if(m_view)
 	prepare_containers_for_url(m_view->url());
