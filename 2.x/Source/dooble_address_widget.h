@@ -49,6 +49,8 @@ class dooble_address_widget: public QLineEdit
   bool event(QEvent *event);
   void add_item(const QIcon &icon, const QUrl &url);
   void complete(void);
+  void hide_popup(void);
+  void prepare_containers_for_url(const QUrl &url);
   void setText(const QString &text);
   void set_item_icon(const QIcon &icon, const QUrl &url);
   void set_view(dooble_web_engine_view *view);
@@ -65,7 +67,6 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_pull_down;
   dooble_address_widget_completer *m_completer;
   dooble_web_engine_view *m_view;
-  void prepare_containers_for_url(const QUrl &url);
   void prepare_icons(void);
   void set_text_format(const QList<QTextLayout::FormatRange> &formats);
 
@@ -88,7 +89,6 @@ class dooble_address_widget: public QLineEdit
   void load_page(const QUrl &url);
   void populated(void);
   void pull_down_clicked(void);
-  void reset_url(void);
   void show_certificate_exception(void);
   void show_site_cookies(void);
 };

@@ -156,15 +156,7 @@ bool dooble_address_widget::event(QEvent *event)
 {
   if(event && event->type() == QEvent::KeyPress)
     {
-      if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Escape)
-	{
-	  emit reset_url();
-	  m_completer->popup()->hide();
-
-	  if(m_view)
-	    prepare_containers_for_url(m_view->url());
-	}
-      else if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
+      if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
 	  QTableView *table_view = qobject_cast<QTableView *>
 	    (m_completer->popup());
@@ -232,17 +224,14 @@ void dooble_address_widget::dropEvent(QDropEvent *event)
     }
 }
 
+void dooble_address_widget::hide_popup(void)
+{
+  m_completer->popup()->hide();
+}
+
 void dooble_address_widget::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->key() == Qt::Key_Escape)
-    {
-      emit reset_url();
-      m_completer->popup()->hide();
-
-      if(m_view)
-	prepare_containers_for_url(m_view->url());
-    }
-  else if(event)
+  if(event)
     {
       QKeySequence key_sequence(event->modifiers() + event->key());
 

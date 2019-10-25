@@ -145,10 +145,6 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_show_pull_down_menu(void)));
   connect(m_ui.address,
-	  SIGNAL(reset_url(void)),
-	  this,
-	  SLOT(slot_reset_url(void)));
-  connect(m_ui.address,
 	  SIGNAL(show_certificate_exception(void)),
 	  this,
 	  SLOT(slot_show_certificate_exception(void)));
@@ -925,6 +921,15 @@ void dooble_page::reload_periodically(int seconds)
     }
 }
 
+void dooble_page::reset_url(void)
+{
+  m_ui.address->setText(m_view->url().toString());
+  m_ui.address->selectAll();
+
+  if(m_ui.address->isVisible())
+    m_ui.address->setFocus();
+}
+
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
@@ -1258,8 +1263,10 @@ void dooble_page::slot_escape(void)
     m_ui.find_frame->setVisible(false);
   else
     {
-      m_ui.address->setText(m_view->url().toString());
+      m_ui.address->hide_popup();
+      m_ui.address->prepare_containers_for_url(m_view->url());
       m_view->stop();
+      reset_url();
     }
 }
 
@@ -1838,15 +1845,6 @@ void dooble_page::slot_reload_periodically(void)
       stop();
       reload();
     }
-}
-
-void dooble_page::slot_reset_url(void)
-{
-  m_ui.address->setText(m_view->url().toString());
-  m_ui.address->selectAll();
-
-  if(m_ui.address->isVisible())
-    m_ui.address->setFocus();
 }
 
 void dooble_page::slot_settings_applied(void)

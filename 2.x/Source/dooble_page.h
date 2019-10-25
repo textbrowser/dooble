@@ -115,6 +115,7 @@ class dooble_page: public QWidget
   void prepare_standard_menus(void);
   void prepare_style_sheets(void);
   void prepare_tool_buttons(void);
+  void reset_url(void);
   void show_popup_menu(void);
 
  private slots:
@@ -165,7 +166,6 @@ class dooble_page: public QWidget
   void slot_reload(void);
   void slot_reload_or_stop(void);
   void slot_reload_periodically(void);
-  void slot_reset_url(void);
   void slot_settings_applied(void);
   void slot_show_certificate_exception(void);
   void slot_show_favorites_popup(void);
