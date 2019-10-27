@@ -169,14 +169,9 @@ bool dooble_web_engine_page::certificateError
 		  SIGNAL(clicked(void)),
 		  this,
 		  SLOT(slot_certificate_exception_accepted(void)));
-	  connect(m_ui.confirm_exception,
-		  SIGNAL(toggled(bool)),
-		  m_ui.accept,
-		  SLOT(setEnabled(bool)));
 	}
 
       m_ui.accept->setEnabled(false);
-      m_ui.confirm_exception->setChecked(false);
 
       if(m_is_private)
 	m_ui.label->setText
@@ -232,14 +227,9 @@ bool dooble_web_engine_page::certificateError
 		  SIGNAL(clicked(void)),
 		  this,
 		  SLOT(slot_certificate_exception_accepted(void)));
-	  connect(m_ui.confirm_exception,
-		  SIGNAL(toggled(bool)),
-		  m_ui.accept,
-		  SLOT(setEnabled(bool)));
 	}
 
       m_ui.accept->setVisible(false);
-      m_ui.confirm_exception->setVisible(false);
       m_ui.label->setText
 	(tr("<html>A certificate error occurred while accessing "
 	    "the secure site %1. <b>%2</b> "

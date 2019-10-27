@@ -111,13 +111,6 @@
          </spacer>
         </item>
         <item>
-         <widget class="QCheckBox" name="confirm_exception">
-          <property name="text">
-           <string>Confirm Exception</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="accept">
           <property name="text">
            <string>&amp;Accept Permanent Exception</string>
