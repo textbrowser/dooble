@@ -171,8 +171,6 @@ bool dooble_web_engine_page::certificateError
 		  SLOT(slot_certificate_exception_accepted(void)));
 	}
 
-      m_ui.accept->setEnabled(false);
-
       if(m_is_private)
 	m_ui.label->setText
 	  (tr("<html>A certificate error occurred while accessing "
