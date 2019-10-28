@@ -193,8 +193,6 @@ bool dooble_web_engine_page::certificateError
 	   arg(url.toString()).
 	   arg(certificateError.errorDescription()));
 
-      layout->removeWidget(m_certificate_error_widget);
-      layout->addWidget(m_certificate_error_widget);
       m_certificate_error_widget->resize(view()->size());
       m_certificate_error_widget->setVisible(true);
     }
@@ -237,8 +235,6 @@ bool dooble_web_engine_page::certificateError
 	    "certificate error.</html>").
 	 arg(url.toString()).
 	 arg(certificateError.errorDescription()));
-      layout->removeWidget(m_certificate_error_widget);
-      layout->addWidget(m_certificate_error_widget);
       m_certificate_error_widget->resize(view()->size());
       m_certificate_error_widget->setVisible(true);
     }
