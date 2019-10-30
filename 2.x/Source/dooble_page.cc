@@ -347,6 +347,11 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(javascript_allow_popup_exception(const QUrl &)),
 	  dooble::s_settings,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
+  m_progress_label = new QLabel(m_ui.frame);
+  m_progress_label->setMargin(5);
+  m_progress_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  m_progress_label->setStyleSheet("QLabel {background-color: #e0e0e0;}");
+  m_progress_label->setVisible(false);
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -933,6 +938,7 @@ void dooble_page::reset_url(void)
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
+  m_progress_label->move(0, m_ui.frame->height() - m_progress_label->height());
 
   QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
@@ -1646,10 +1652,11 @@ void dooble_page::slot_load_page(void)
 
 void dooble_page::slot_load_progress(int progress)
 {
+  m_progress_label->setVisible(progress < 1);
   m_ui.backward->setEnabled(m_view->history()->canGoBack());
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
-  m_ui.progress->setVisible(progress >= 0 && progress < 100);
+  m_ui.progress->setVisible(progress > 0 && progress < 100);
 #ifndef Q_OS_MACOS
   static QPalette s_address_palette(m_ui.address->palette());
 
@@ -1691,6 +1698,9 @@ void dooble_page::slot_load_started(void)
 	view->deleteLater();
     }
 
+  m_progress_label->setText(tr("Waiting for %1...").arg(url().host()));
+  m_progress_label->setVisible(true);
+  m_progress_label->adjustSize();
   m_ui.feature_permission_popup_message->setVisible(false);
   m_ui.javascript_popup_message->setVisible(false);
 
@@ -1958,6 +1968,15 @@ void dooble_page::slot_show_status_bar(bool state)
 {
   m_ui.status_bar->setVisible(state);
   dooble_settings::set_setting("status_bar_visible", state);
+
+  if(state)
+    m_progress_label->move
+      (0, m_ui.frame->height() - m_progress_label->height());
+  else
+    m_progress_label->move(0,
+			   m_ui.frame->height() -
+			   m_progress_label->height() +
+			   m_ui.status_bar->height());
 }
 
 void dooble_page::slot_show_web_settings_panel(void)

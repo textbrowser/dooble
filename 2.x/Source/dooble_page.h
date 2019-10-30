@@ -92,6 +92,7 @@ class dooble_page: public QWidget
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QLabel *m_progress_label;
   QList<QShortcut *> m_shortcuts;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
