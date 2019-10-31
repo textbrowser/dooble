@@ -938,7 +938,8 @@ void dooble_page::reset_url(void)
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
-  m_progress_label->move(0, m_ui.frame->height() - m_progress_label->height());
+  m_progress_label->move
+    (1, m_ui.frame->height() - m_progress_label->height() - 1);
 
   QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
@@ -1971,12 +1972,13 @@ void dooble_page::slot_show_status_bar(bool state)
 
   if(state)
     m_progress_label->move
-      (0, m_ui.frame->height() - m_progress_label->height());
+      (1, m_ui.frame->height() - m_progress_label->height() - 1);
   else
-    m_progress_label->move(0,
+    m_progress_label->move(1,
 			   m_ui.frame->height() -
 			   m_progress_label->height() +
-			   m_ui.status_bar->height());
+			   m_ui.status_bar->height() -
+			   1);
 }
 
 void dooble_page::slot_show_web_settings_panel(void)
