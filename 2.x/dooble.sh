@@ -14,7 +14,7 @@ then
     exit 1
 elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
 then
-    cd /usr/local/dooble && exec ./Dooble -style fusion "$@"
+    cd /usr/local/dooble && exec ./Dooble "$@"
     exit $?
 else
     exit 1
