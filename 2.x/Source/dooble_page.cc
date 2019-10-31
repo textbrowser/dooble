@@ -348,7 +348,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  dooble::s_settings,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   m_progress_label = new QLabel(m_ui.frame);
-  m_progress_label->setMargin(5);
+  m_progress_label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+  m_progress_label->setIndent(5);
   m_progress_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   m_progress_label->setStyleSheet("QLabel {background-color: #e0e0e0;}");
   m_progress_label->setVisible(false);
