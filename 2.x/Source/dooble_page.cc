@@ -1700,9 +1700,12 @@ void dooble_page::slot_load_started(void)
 	view->deleteLater();
     }
 
+  m_progress_label->move
+    (1, m_ui.frame->height() - m_progress_label->height() - 1);
   m_progress_label->setText(tr("Waiting for %1...").arg(url().host()));
   m_progress_label->setVisible(true);
-  m_progress_label->adjustSize();
+  m_progress_label->resize(QSize(m_progress_label->sizeHint().width() + 5,
+				 m_progress_label->sizeHint().height()));
   m_ui.feature_permission_popup_message->setVisible(false);
   m_ui.javascript_popup_message->setVisible(false);
 
