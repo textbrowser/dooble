@@ -94,8 +94,9 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
       preferred_tab_width = qMax(minimum_tab_width, rect().width() / count());
       preferred_tab_width = qMin(maximum_tab_width, preferred_tab_width);
 
-      if(index == 0)
-	preferred_tab_width += rect().width() % count();
+      if(count() - 1 == index)
+	if(minimum_tab_width < preferred_tab_width)
+	  preferred_tab_width += rect().width() % count();
     }
   else
     preferred_tab_width = qMin(preferred_tab_width, rect().width());
