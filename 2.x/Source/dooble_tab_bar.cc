@@ -82,28 +82,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
-  QFontMetrics font_metrics(font());
-  QSize size(QTabBar::tabSizeHint(index));
-  int preferred_tab_width = 225;
-  static int maximum_tab_width = preferred_tab_width;
-  static int minimum_tab_width = 125;
-  static int preferred_tab_height = 15 + font_metrics.height();
-
-  if(count() > 1)
-    {
-      preferred_tab_width = qMax(minimum_tab_width, rect().width() / count());
-      preferred_tab_width = qMin(maximum_tab_width, preferred_tab_width);
-
-      if(count() - 1 == index)
-	if(minimum_tab_width < preferred_tab_width)
-	  preferred_tab_width += rect().width() % count();
-    }
-  else
-    preferred_tab_width = qMin(preferred_tab_width, rect().width());
-
-  size.setHeight(preferred_tab_height);
-  size.setWidth(preferred_tab_width);
-  return size;
+  return QSize(qMin(width() / 2, QTabBar::tabSizeHint(index).width()),
+	       QTabBar::tabSizeHint(index).height());
 }
 
 bool dooble_tab_bar::is_private(void) const
