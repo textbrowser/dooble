@@ -82,8 +82,12 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
-  return QSize(qMin(width() / 2, QTabBar::tabSizeHint(index).width()),
-	       QTabBar::tabSizeHint(index).height());
+  QSize size(QTabBar::tabSizeHint(index));
+
+  for(int i = 0; i < count(); i++)
+    size.setWidth(qMin(QTabBar::tabSizeHint(i).width(), size.width()));
+
+  return size;
 }
 
 bool dooble_tab_bar::is_private(void) const
