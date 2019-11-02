@@ -84,8 +84,11 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QSize size(QTabBar::tabSizeHint(index));
 
-  for(int i = 0; i < count(); i++)
-    size.setWidth(qMin(QTabBar::tabSizeHint(i).width(), size.width()));
+  if(count() == 1)
+    size.setWidth(225);
+  else
+    for(int i = 0; i < count(); i++)
+      size.setWidth(qMin(QTabBar::tabSizeHint(i).width(), size.width()));
 
   return size;
 }
