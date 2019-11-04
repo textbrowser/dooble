@@ -26,6 +26,7 @@
 */
 
 #include <QWebEngineSettings>
+#include <QtMath>
 
 #include "dooble.h"
 #include "dooble_application.h"
@@ -83,13 +84,21 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QSize size(QTabBar::tabSizeHint(index));
+  int f = qFloor(rect().width() / qMax(1, count()));
+  static int maximum_tab_width = 225;
+  static int minimum_tab_width = 125;
 
-  if(count() == 1)
-    size.setWidth(225);
-  else
-    for(int i = 0; i < count(); i++)
-      size.setWidth(qMin(QTabBar::tabSizeHint(i).width(), size.width()));
+  size.setWidth(qMin(f, maximum_tab_width));
 
+  if(count() - 1 == index)
+    {
+      int d = rect().width() - count() * size.width();
+
+      if(d > 0)
+	size.setWidth(qMin(d + size.width(), maximum_tab_width));
+    }
+
+  size.setWidth(qMax(minimum_tab_width, size.width()));
   return size;
 }
 
