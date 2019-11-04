@@ -87,7 +87,9 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
   int f = qFloor(rect().width() / qMax(1, count()));
   static int maximum_tab_width = 225;
   static int minimum_tab_width = 125;
+  static int tab_height = size.height();
 
+  size.setHeight(tab_height);
   size.setWidth(qMin(f, maximum_tab_width));
 
   if(count() - 1 == index)
