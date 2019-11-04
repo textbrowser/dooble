@@ -42,7 +42,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   dooble_accepted_or_blocked_domains(void);
   bool contains(const QString &domain) const;
   bool exception(const QUrl &url) const;
-  void accept_or_block_domain(const QString &domain);
+  void accept_or_block_domain(const QString &domain, const bool replace = true);
   void new_exception(const QString &url);
   void purge(void);
 
@@ -63,7 +63,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void create_tables(QSqlDatabase &db);
   void populate(void);
   void populate_exceptions(void);
-  void save_blocked_domain(const QString &domain, bool state);
+  void save_blocked_domain(const QString &domain, bool replace, bool state);
   void save_exception(const QString &url, bool state);
   void save_settings(void);
 

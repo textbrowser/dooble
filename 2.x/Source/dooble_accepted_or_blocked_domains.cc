@@ -110,7 +110,7 @@ bool dooble_accepted_or_blocked_domains::exception(const QUrl &url) const
 }
 
 void dooble_accepted_or_blocked_domains::accept_or_block_domain
-(const QString &domain)
+(const QString &domain, const bool replace)
 {
   if(domain.trimmed().isEmpty())
     return;
@@ -154,7 +154,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
   m_ui.table->setSortingEnabled(true);
   m_ui.table->sortItems
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
-  save_blocked_domain(domain.toLower().trimmed(), true);
+  save_blocked_domain(domain.toLower().trimmed(), replace, true);
 }
 
 void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
@@ -488,7 +488,7 @@ void dooble_accepted_or_blocked_domains::resizeEvent(QResizeEvent *event)
 }
 
 void dooble_accepted_or_blocked_domains::save_blocked_domain
-(const QString &domain, bool state)
+(const QString &domain, bool replace, bool state)
 {
   if(domain.trimmed().isEmpty())
     return;
@@ -516,9 +516,15 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 	QSqlQuery query(db);
 
 	query.exec("PRAGMA synchronous = OFF");
-	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_accepted_or_blocked_domains "
-	   "(domain, domain_digest, state) VALUES (?, ?, ?)");
+
+	if(replace)
+	  query.prepare
+	    ("INSERT OR REPLACE INTO dooble_accepted_or_blocked_domains "
+	     "(domain, domain_digest, state) VALUES (?, ?, ?)");
+	else
+	  query.prepare
+	    ("INSERT INTO dooble_accepted_or_blocked_domains "
+	     "(domain, domain_digest, state) VALUES (?, ?, ?)");
 
 	QByteArray data
 	  (dooble::s_cryptography->
@@ -984,7 +990,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		     !dooble::s_cryptography->authenticated())
 		    m_domains[url.host()] = 1;
 		  else
-		    accept_or_block_domain(url.host());
+		    accept_or_block_domain(url.host(), false);
 		}
 
 	      line += 1;
@@ -1018,7 +1024,7 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
     return;
 
   m_domains[item->text()] = state ? 1 : 0;
-  save_blocked_domain(item->text(), state);
+  save_blocked_domain(item->text(), true, state);
 }
 
 void dooble_accepted_or_blocked_domains::slot_new_exception(const QString &url)
