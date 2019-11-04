@@ -40,6 +40,12 @@
 dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   QMainWindow()
 {
+  m_add_database = QSqlDatabase::addDatabase
+    ("QSQLITE", "dooble_accepted_or_blocked_domains_add");
+  m_add_database.setDatabaseName
+    (dooble_settings::setting("home_path").toString() +
+     QDir::separator() +
+     "dooble_accepted_or_blocked_domains.db");
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -96,6 +102,13 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
     m_ui.block_mode->click();
 
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
+}
+
+dooble_accepted_or_blocked_domains::~dooble_accepted_or_blocked_domains()
+{
+  m_add_database.close();
+  m_add_database = QSqlDatabase();
+  QSqlDatabase::removeDatabase("dooble_accepted_or_blocked_domains_add");
 }
 
 bool dooble_accepted_or_blocked_domains::contains(const QString &domain) const
@@ -500,57 +513,45 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name("dooble_accepted_or_blocked_domains");
+  QString database_name("dooble_accepted_or_blocked_domains_add");
 
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+  if(!m_add_database.isOpen())
+    m_add_database.open();
 
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_accepted_or_blocked_domains.db");
+  create_tables(m_add_database);
 
-    if(db.open())
-      {
-	create_tables(db);
+  QSqlQuery query(m_add_database);
 
-	QSqlQuery query(db);
+  query.exec("PRAGMA synchronous = OFF");
+  query.prepare
+    ("INSERT OR REPLACE INTO dooble_accepted_or_blocked_domains "
+     "(domain, domain_digest, state) VALUES (?, ?, ?)");
 
-	query.exec("PRAGMA synchronous = OFF");
-	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_accepted_or_blocked_domains "
-	   "(domain, domain_digest, state) VALUES (?, ?, ?)");
+  QByteArray data
+    (dooble::s_cryptography->
+     encrypt_then_mac(domain.toLower().trimmed().toUtf8()));
 
-	QByteArray data
-	  (dooble::s_cryptography->
-	   encrypt_then_mac(domain.toLower().trimmed().toUtf8()));
+  if(data.isEmpty())
+    goto done_label;
+  else
+    query.addBindValue(data.toBase64());
 
-	if(data.isEmpty())
-	  goto done_label;
-	else
-	  query.addBindValue(data.toBase64());
+  data = dooble::s_cryptography->hmac(domain.toLower().trimmed());
 
-	data = dooble::s_cryptography->hmac(domain.toLower().trimmed());
+  if(data.isEmpty())
+    goto done_label;
 
-	if(data.isEmpty())
-	  goto done_label;
+  query.addBindValue(data.toBase64());
+  data = dooble::s_cryptography->encrypt_then_mac(state ? "true" : "false");
 
-	query.addBindValue(data.toBase64());
-	data = dooble::s_cryptography->encrypt_then_mac
-	  (state ? "true" : "false");
+  if(data.isEmpty())
+    goto done_label;
+  else
+    query.addBindValue(data.toBase64());
 
-	if(data.isEmpty())
-	  goto done_label;
-	else
-	  query.addBindValue(data.toBase64());
+  query.exec();
 
-	query.exec();
-      }
-
-  done_label:
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
+ done_label:
   QApplication::restoreOverrideCursor();
 }
 

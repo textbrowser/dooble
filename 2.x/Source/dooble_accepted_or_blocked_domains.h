@@ -40,6 +40,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
 
  public:
   dooble_accepted_or_blocked_domains(void);
+  ~dooble_accepted_or_blocked_domains();
   bool contains(const QString &domain) const;
   bool exception(const QUrl &url) const;
   void accept_or_block_domain(const QString &domain);
@@ -58,6 +59,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
  private:
   QHash<QString, char> m_domains;
   QHash<QString, char> m_exceptions;
+  QSqlDatabase m_add_database;
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
   void create_tables(QSqlDatabase &db);
