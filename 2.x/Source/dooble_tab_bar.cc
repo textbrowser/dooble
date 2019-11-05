@@ -166,8 +166,8 @@ void dooble_tab_bar::prepare_style_sheets(void)
 	    tool_button->setStyleSheet
 	    (QString("QToolButton {background-color: %1;"
 		     "border: none;"
-		     "margin-bottom: 0px;"
-		     "margin-top: 0px;"
+		     "margin-bottom: 3px;"
+		     "margin-top: 3px;"
 		     "}"
 		     "QToolButton::menu-button {border: none;}").
 	     arg(s_background_color.name()));
