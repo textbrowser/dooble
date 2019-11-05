@@ -3096,6 +3096,8 @@ void dooble::slot_tab_widget_shortcut_activated(void)
 
 void dooble::slot_tabs_menu_button_clicked(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QMenu menu(this);
 
   menu.setStyleSheet("QMenu {menu-scrollable: 1;}");
@@ -3130,6 +3132,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
 	      SLOT(slot_set_current_tab(void)));
     }
 
+  QApplication::restoreOverrideCursor();
   menu.exec
     (m_ui.tab->tabs_menu_button()->
      mapToGlobal(m_ui.tab->tabs_menu_button()->rect().bottomLeft()));
