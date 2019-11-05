@@ -3130,6 +3130,14 @@ void dooble::slot_tabs_menu_button_clicked(void)
 	      SIGNAL(triggered(void)),
 	      this,
 	      SLOT(slot_set_current_tab(void)));
+
+      if(i == m_ui.tab->currentIndex())
+	{
+	  QFont font(action->font());
+
+	  font.setBold(true);
+	  action->setFont(font);
+	}
     }
 
   QApplication::restoreOverrideCursor();
