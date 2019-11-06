@@ -42,11 +42,11 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_add_tab_tool_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_add_tab_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_add_tab_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 3px; margin-top: 3px;}"
+    ("QToolButton {margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_add_tab_tool_button->setToolTip(tr("New Tab"));
@@ -55,11 +55,11 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_private_tool_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_private_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_private_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_private_tool_button->setToolTip(tr("This is a private window."));
@@ -73,17 +73,16 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_tabs_menu_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 3px; margin-top: 3px;}"
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {margin-bottom: 3px; margin-top: 3px;}"
+    ("QToolButton {margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_corner_widget = new QFrame(this);
   delete m_corner_widget->layout();
   m_corner_widget->setLayout(new QHBoxLayout(this));
-  m_corner_widget->layout()->setContentsMargins(5, 4, 5, 4);
   m_corner_widget->layout()->addWidget(m_private_tool_button);
   m_corner_widget->layout()->addWidget(m_tabs_menu_button);
   m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
