@@ -85,7 +85,11 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_corner_widget->layout()->addWidget(m_private_tool_button);
   m_corner_widget->layout()->addWidget(m_tabs_menu_button);
   m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
-  m_corner_widget->layout()->setContentsMargins(0, 0, 0, 0);
+#ifdef Q_OS_MACOS
+  m_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
+#else
+  m_corner_widget->layout()->setContentsMargins(5, 0, 0, 5);
+#endif
   m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->setVisible
     (!dooble_settings::setting("auto_hide_tab_bar").toBool());
