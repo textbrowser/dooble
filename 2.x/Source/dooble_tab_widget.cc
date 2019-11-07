@@ -88,7 +88,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #ifdef Q_OS_MACOS
   m_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
 #else
-  m_corner_widget->layout()->setContentsMargins(5, 0, 0, 5);
+  m_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
 #endif
   m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->setVisible
