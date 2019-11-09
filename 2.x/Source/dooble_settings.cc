@@ -211,8 +211,11 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	m_ui.language_directory->setVisible(false);
     }
 
-  if(dooble::s_application->style_name() == "macintosh" ||
-     dooble::s_application->style_name() == "windows")
+  if(dooble::s_application->style_name() == "fusion")
+    {
+    }
+  else if(dooble::s_application->style_name() == "macintosh" ||
+	  dooble::s_application->style_name() == "windows")
     {
       m_ui.theme_color->setEnabled(false);
 
@@ -224,6 +227,11 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	      "-style Fusion\" to test the Fusion style."));
       else
 	m_ui.theme_color->setToolTip(tr("Disabled on the Windows theme."));
+    }
+  else
+    {
+      m_ui.theme_color->setEnabled(false);
+      m_ui.theme_color->setToolTip(tr("Disabled for non-Fusion themes."));
     }
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
@@ -1090,14 +1098,16 @@ void dooble_settings::restore(bool read_database)
   m_ui.show_hovered_links_tool_tips->setChecked
     (s_settings.value("show_hovered_links_tool_tips", false).toBool());
 
-  if(dooble::s_application->style_name() == "macintosh" ||
-     dooble::s_application->style_name() == "windows")
-    m_ui.theme_color->setCurrentIndex(2); // Default
-  else
+  if(dooble::s_application->style_name() == "fusion")
     m_ui.theme_color->setCurrentIndex
       (qBound(0,
 	      s_settings.value("theme_color_index", 2).toInt(),
 	      m_ui.theme_color->count() - 1));
+  else if(dooble::s_application->style_name() == "macintosh" ||
+	  dooble::s_application->style_name() == "windows")
+    m_ui.theme_color->setCurrentIndex(2); // Default
+  else
+    m_ui.theme_color->setCurrentIndex(2); // Default
 
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
