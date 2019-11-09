@@ -28,7 +28,9 @@
 #include <QDir>
 #include <QElapsedTimer>
 #include <QSplashScreen>
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
 #include <QStyleFactory>
+#endif
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
@@ -174,8 +176,6 @@ int main(int argc, char *argv[])
   QDir::setCurrent("/Applications/Dooble.d");
 #elif defined(Q_OS_WIN)
   QApplication::addLibraryPath("plugins");
-  QApplication::setStyle(QStyleFactory::create("Fusion"));
-#else
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 #endif
 #if defined(Q_OS_WIN)
