@@ -51,7 +51,7 @@ class dooble_page: public QWidget
  public:
   enum ConstantsEnum
   {
-    MAXIMUM_HISTORY_ITEMS = 20
+    MAXIMUM_HISTORY_ITEMS = 10
   };
 
   dooble_page(QWebEngineProfile *web_engine_profile,
