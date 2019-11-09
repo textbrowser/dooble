@@ -242,60 +242,49 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
   if(index < 0 || index >= count())
     return;
 
-  if(dooble::s_application->style_name() == "fusion" ||
-     dooble::s_application->style_name() == "windows")
-    {
-      QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
-	(style()->
-	 styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar));
-
-      side = (side == QTabBar::LeftSide) ?
-	QTabBar::RightSide : QTabBar::LeftSide;
-
-      QLabel *label = qobject_cast<QLabel *>
-	(m_tab_bar->tabButton(index, side));
-
-      if(!label)
-	{
-	  label = new QLabel(this);
-	  label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-	  label->setFixedSize(QSize(16, 16));
-	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-	  m_tab_bar->setTabButton(index, side, nullptr);
-	  m_tab_bar->setTabButton(index, side, label);
-	}
-      else if(!label->movie() || label->movie()->state() != QMovie::Running)
-	label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-
-      label->setProperty("icon", icon);
-    }
-  else
-    {
 #ifdef Q_OS_MACOS
-      QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
-	(style()->
-	 styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar));
+  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+    (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar));
 
-      side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide :
-	QTabBar::RightSide;
+  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 
-      QLabel *label = qobject_cast<QLabel *>
-	(m_tab_bar->tabButton(index, side));
+  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
-      if(!label)
-	{
-	  label = new QLabel(this);
-	  label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-	  m_tab_bar->setTabButton(index, side, 0);
-	  m_tab_bar->setTabButton(index, side, label);
-	}
-      else if(!label->movie() || label->movie()->state() != QMovie::Running)
-	label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-
-      label->setProperty("icon", icon);
-#endif
+  if(!label)
+    {
+      label = new QLabel(this);
+      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+      m_tab_bar->setTabButton(index, side, 0);
+      m_tab_bar->setTabButton(index, side, label);
     }
+  else if(!label->movie() || label->movie()->state() != QMovie::Running)
+    label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+
+  label->setProperty("icon", icon);
+#else
+  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+    (style()->
+     styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar));
+
+  side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
+
+  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+
+  if(!label)
+    {
+      label = new QLabel(this);
+      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setFixedSize(QSize(16, 16));
+      label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+      m_tab_bar->setTabButton(index, side, nullptr);
+      m_tab_bar->setTabButton(index, side, label);
+    }
+  else if(!label->movie() || label->movie()->state() != QMovie::Running)
+    label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
+
+  label->setProperty("icon", icon);
+#endif
 }
 
 void dooble_tab_widget::setTabIcon(int index, const QIcon &icon)
