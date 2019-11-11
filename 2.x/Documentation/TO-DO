@@ -134,6 +134,7 @@ Completed Items
 - Update pull-down menu icons in real-time.
 - User agent.
 - WebEngine context menu should allow for blocking sites.
+- WebEngine fonts.
 - WebGL option.
 - Windows PRNG.
 - Zoom.
@@ -145,7 +146,6 @@ Remaining Items
 - Fancy completer.
 - Include date stamps in cookie containers.
 - Qt's digest class.
-- WebEngine fonts.
 - linkHovered() is emitted without user interaction.
 
 Unknown Items
