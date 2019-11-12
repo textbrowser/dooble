@@ -372,6 +372,12 @@ void dooble_web_engine_view::download(const QString &file_name, const QUrl &url)
 #endif
 }
 
+void dooble_web_engine_view::resizeEvent(QResizeEvent *event)
+{
+  QWebEngineView::resizeEvent(event);
+  m_page->resize_certificate_error_widget();
+}
+
 void dooble_web_engine_view::save(const QString &file_name)
 {
   m_page->save(file_name, QWebEngineDownloadItem::CompleteHtmlSaveFormat);

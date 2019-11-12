@@ -45,6 +45,7 @@ class dooble_web_engine_page: public QWebEnginePage
   ~dooble_web_engine_page();
   QUrl last_clicked_link(void) const;
   void reset_last_clicked_link(void);
+  void resize_certificate_error_widget(void);
 
  protected:
   QStringList chooseFiles(FileSelectionMode mode,

@@ -247,6 +247,12 @@ void dooble_web_engine_page::reset_last_clicked_link(void)
   m_last_clicked_link = QUrl();
 }
 
+void dooble_web_engine_page::resize_certificate_error_widget(void)
+{
+  if(m_certificate_error_widget && view())
+    m_certificate_error_widget->resize(view()->size());
+}
+
 void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 {
   if(m_is_private)
