@@ -35,6 +35,7 @@
 #include <QTimer>
 #include <QWebEngineHistoryItem>
 
+class QAction;
 class QStandardItemModel;
 typedef QList<QPair<QIcon, QString> > QListPairIconString;
 typedef QList<QUrl> QListUrl;
@@ -60,6 +61,7 @@ class dooble_history: public QObject
   ~dooble_history();
   QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> >
     history(void) const;
+  QList<QAction *> last_n_actions(int n) const;
   QStandardItemModel *favorites_model(void) const;
   bool is_favorite(const QUrl &url) const;
   void abort(void);
@@ -79,6 +81,7 @@ class dooble_history: public QObject
   QFuture<void> m_populate_future;
   QFuture<void> m_purge_future;
   QHash<QUrl, QHash<HistoryItem, QVariant> > m_history;
+  QMultiMap<QDateTime, QUrl> m_history_date_time;
   QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
   mutable QReadWriteLock m_history_mutex;

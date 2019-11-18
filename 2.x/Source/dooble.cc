@@ -487,6 +487,11 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_about_to_show_main_menu(void)),
 	  Qt::UniqueConnection);
+  connect(m_ui.menu_history,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_history_menu(void)),
+	  Qt::UniqueConnection);
   connect(m_ui.menu_tools,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -1759,6 +1764,32 @@ void dooble::slot_about_to_hide_main_menu(void)
     menu->clear();
 }
 
+void dooble::slot_about_to_show_history_menu(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.menu_history->clear();
+
+  QFontMetrics font_metrics(m_ui.menu_history->font());
+  QList<QAction *> list
+    (s_history->last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      connect(list.at(i),
+	      SIGNAL(triggered(void)),
+	      this,
+	      SLOT(slot_history_action_triggered(void)));
+      list.at(i)->setText
+	(font_metrics.elidedText(list.at(i)->text(),
+				 Qt::ElideRight,
+				 dooble_ui_utilities::
+				 context_menu_width(m_ui.menu_history)));
+      m_ui.menu_history->addAction(list.at(i));
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble::slot_about_to_show_main_menu(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2305,6 +2336,21 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.time().toString("hh:mm:ss A")).
      arg(utc == ":utc" ? " UTC" : ""));
   m_floating_digital_clock_ui.clock->update();
+}
+
+void dooble::slot_history_action_triggered(void)
+{
+  QAction *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  dooble_page *page = current_page();
+
+  if(page)
+    page->load(action->data().toUrl());
+  else
+    new_page(action->data().toUrl(), false);
 }
 
 void dooble::slot_history_favorites_populated(void)

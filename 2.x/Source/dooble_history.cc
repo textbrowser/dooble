@@ -73,6 +73,44 @@ history(void) const
   return m_history;
 }
 
+QList<QAction *> dooble_history::last_n_actions(int n) const
+{
+  QHash<QUrl, char> hash;
+  QList<QAction *> list;
+  QReadLocker locker(&m_history_mutex);
+  QMapIterator<QDateTime, QUrl> it(m_history_date_time);
+
+  it.toBack();
+
+  while(it.hasPrevious())
+    {
+      it.previous();
+
+      if(hash.contains(it.value()))
+	continue;
+
+      QString title(m_history.value(it.value()).value(TITLE).toString());
+
+      title = title.trimmed();
+      title.replace("&", "");
+
+      if(title.isEmpty())
+	continue;
+
+      QAction *action = new QAction(title);
+
+      action->setData(m_history.value(it.value()).value(URL).toUrl());
+      action->setIcon(dooble_favicons::icon(it.value()));
+      hash[it.value()] = 0;
+      list << action;
+
+      if(list.size() >= n)
+	break;
+    }
+
+  return list;
+}
+
 QStandardItemModel *dooble_history::favorites_model(void) const
 {
   return m_favorites_model;
@@ -248,12 +286,15 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		  favorites << vector;
 		}
 
-	      map.insert(hash[LAST_VISITED].toDateTime(),
+	      map.insert(hash.value(LAST_VISITED).toDateTime(),
 			 QPair<QIcon, QString> (QIcon(), url));
 
 	      QWriteLocker locker(&m_history_mutex);
 
-	      m_history[hash[URL].toUrl()] = hash;
+	      m_history[hash.value(URL).toUrl()] = hash;
+	      m_history_date_time.insert
+		(hash.value(LAST_VISITED).toDateTime(),
+		 hash.value(URL).toUrl());
 	    }
       }
 
@@ -359,6 +400,7 @@ void dooble_history::purge_all(void)
   QWriteLocker locker(&m_history_mutex);
 
   m_history.clear();
+  m_history_date_time.clear();
   m_history_mutex.unlock();
 
   QString database_name(dooble_database_utilities::database_name());
@@ -463,6 +505,7 @@ void dooble_history::purge_history(void)
 
     m_history.clear();
     m_history = hash;
+    m_history_date_time.clear();
   }
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -568,6 +611,9 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 
       QWriteLocker locker(&m_history_mutex);
 
+      m_history_date_time.remove
+	(m_history.value(urls.at(i)).value(LAST_VISITED).toDateTime(),
+	 urls.at(i));
       m_history.remove(urls.at(i));
       locker.unlock();
       url_digests << dooble::s_cryptography->hmac
@@ -626,7 +672,7 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 	m_history[url] = hash;
 	locker.unlock();
 	update_favorite(hash);
-	emit icon_updated(hash[FAVICON].value<QIcon> (), url);
+	emit icon_updated(hash.value(FAVICON).value<QIcon> (), url);
       }
   }
 }
@@ -796,11 +842,15 @@ void dooble_history::save_item(const QIcon &icon,
 	hash[URL_DIGEST] = dooble::s_cryptography->hmac(item.url().toEncoded());
 
       m_history[item.url()] = hash;
+
+      if(!m_history_date_time.contains(item.lastVisited(), item.url()))
+	m_history_date_time.insert(item.lastVisited(), item.url());
+
       locker.unlock();
       update_favorite(hash);
 
       if(!contains)
-	emit new_item(hash[FAVICON].value<QIcon> (), item);
+	emit new_item(hash.value(FAVICON).value<QIcon> (), item);
       else
 	emit item_updated(icon, item);
     }
@@ -921,6 +971,7 @@ void dooble_history::slot_populate(void)
     QWriteLocker locker(&m_history_mutex);
 
     m_history.clear();
+    m_history_date_time.clear();
   }
 
   QApplication::restoreOverrideCursor();
@@ -1014,7 +1065,12 @@ void dooble_history::slot_remove_items(const QListUrl &urls)
     QWriteLocker locker(&m_history_mutex);
 
     for(int i = 0; i < urls.size(); i++)
-      m_history.remove(urls.at(i));
+      {
+	m_history_date_time.remove
+	  (m_history.value(urls.at(i)).value(LAST_VISITED).toDateTime(),
+	   urls.at(i));
+	m_history.remove(urls.at(i));
+      }
   }
 
   QApplication::restoreOverrideCursor();

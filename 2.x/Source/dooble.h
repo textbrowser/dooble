@@ -38,7 +38,7 @@
 #include "ui_dooble.h"
 #include "ui_dooble_floating_digital_clock.h"
 
-#define DOOBLE_VERSION_STRING "2019.11.15"
+#define DOOBLE_VERSION_STRING "2019.12.12"
 
 class QDialog;
 class QWebEngineDownloadItem;
@@ -155,6 +155,7 @@ class dooble: public QMainWindow
 
  private slots:
   void slot_about_to_hide_main_menu(void);
+  void slot_about_to_show_history_menu();
   void slot_about_to_show_main_menu(void);
   void slot_application_locked(bool state, dooble *d);
   void slot_authenticate(void);
@@ -170,6 +171,7 @@ class dooble: public QMainWindow
   void slot_enable_shortcut(void);
 #endif
   void slot_floating_digital_dialog_timeout(void);
+  void slot_history_action_triggered(void);
   void slot_history_favorites_populated(void);
   void slot_icon_changed(const QIcon &icon);
   void slot_load_finished(bool ok);
