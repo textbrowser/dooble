@@ -488,6 +488,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_about_to_show_main_menu(void)),
 	  Qt::UniqueConnection);
   connect(m_ui.menu_history,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_about_to_hide_main_menu(void)),
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
+  connect(m_ui.menu_history,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_history_menu(void)),
@@ -1777,10 +1782,16 @@ void dooble::slot_about_to_show_history_menu(void)
   QFontMetrics font_metrics(m_ui.menu_history->font());
   QList<QAction *> list
     (s_history->last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
+  QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.menu_history->addAction
     (tr("&Clear History"), this, SLOT(slot_clear_history(void)))->setEnabled
     (!list.isEmpty());
+  m_ui.menu_history->addAction
+    (QIcon(QString(":/%1/18/history.png").arg(icon_set)),
+     tr("&History"),
+     this,
+     SLOT(slot_show_history(void)))->setShortcut(QKeySequence(tr("Ctrl+H")));
 
   if(!list.isEmpty())
     m_ui.menu_history->addSeparator();
