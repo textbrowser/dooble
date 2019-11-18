@@ -159,6 +159,7 @@ class dooble: public QMainWindow
   void slot_about_to_show_main_menu(void);
   void slot_application_locked(bool state, dooble *d);
   void slot_authenticate(void);
+  void slot_clear_history(void);
   void slot_clear_visited_links(void);
   void slot_close_tab(void);
   void slot_create_dialog(dooble_web_engine_view *view);
@@ -229,6 +230,7 @@ class dooble: public QMainWindow
  signals:
   void application_locked(bool state, dooble *d);
   void dooble_credentials_authenticated(bool state);
+  void history_cleared(void);
 };
 
 #endif

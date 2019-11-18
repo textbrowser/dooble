@@ -610,6 +610,11 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_dooble_credentials_authenticated(bool)),
 	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(history_cleared(void)),
+	  s_history_window,
+	  SLOT(slot_history_cleared(void)),
+	  Qt::UniqueConnection);
 }
 
 void dooble::decouple_support_windows(void)
@@ -1773,6 +1778,13 @@ void dooble::slot_about_to_show_history_menu(void)
   QList<QAction *> list
     (s_history->last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
 
+  m_ui.menu_history->addAction
+    (tr("&Clear History"), this, SLOT(slot_clear_history(void)))->setEnabled
+    (!list.isEmpty());
+
+  if(!list.isEmpty())
+    m_ui.menu_history->addSeparator();
+
   for(int i = 0; i < list.size(); i++)
     {
       connect(list.at(i),
@@ -2124,6 +2136,12 @@ void dooble::slot_authenticate(void)
 	  QApplication::processEvents();
 	}
     }
+}
+
+void dooble::slot_clear_history(void)
+{
+  s_history->purge_history();
+  emit history_cleared();
 }
 
 void dooble::slot_clear_visited_links(void)
