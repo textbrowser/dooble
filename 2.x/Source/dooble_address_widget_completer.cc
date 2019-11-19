@@ -81,8 +81,6 @@ dooble_address_widget_completer::dooble_address_widget_completer
     (0, new dooble_address_widget_completer_popup_item_delegate(this));
   m_popup->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_popup->setSelectionMode(QAbstractItemView::SingleSelection);
-  m_popup->setShowGrid(false);
-  m_popup->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_popup->verticalHeader()->setVisible(false);
   m_text_edited_timer.setSingleShot(true);
   m_text_edited_timer.setInterval(150);
@@ -199,7 +197,7 @@ void dooble_address_widget_completer::complete(const QString &text)
   if(text.trimmed().isEmpty())
     {
       int j = qMin(s_model->rowCount(),
-		   static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS));
+		   static_cast<int> (2 * dooble_page::MAXIMUM_HISTORY_ITEMS));
 
       for(int i = 0; i < j; i++)
 	if(s_model->item(i, 0))
@@ -223,7 +221,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 	      (levenshtein_distance(c, s_model->item(i, 0)->text().toLower()),
 	       s_model->item(i, 0));
 
-      list << map.values().mid(0, dooble_page::MAXIMUM_HISTORY_ITEMS);
+      list << map.values().mid(0, 2 * dooble_page::MAXIMUM_HISTORY_ITEMS);
     }
 
   m_model->clear();
@@ -239,18 +237,20 @@ void dooble_address_widget_completer::complete(const QString &text)
 
 	  m_model->setRowCount(m_model->rowCount() + 1);
 	  m_model->setItem(m_model->rowCount() - 1, item->clone());
-	  m_popup->setRowHeight(m_model->rowCount() - 1, 32);
+	  m_popup->setRowHeight(m_model->rowCount() - 1, 36);
 	}
     }
 
   if(m_model->rowCount() > 0)
     {
-      m_popup->setMaximumHeight
-	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0) + 5);
-      m_popup->setMinimumHeight
-	(qMin(static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS),
-	      m_model->rowCount()) * m_popup->rowHeight(0) + 5);
+      int height = 2 * m_popup->frameWidth() +
+	m_popup->horizontalHeader()->height() +
+	m_popup->rowHeight(0) * qMin(m_model->rowCount(),
+				     static_cast<int> (dooble_page::
+						       MAXIMUM_HISTORY_ITEMS));
+
+      m_popup->setMaximumHeight(height);
+      m_popup->setMinimumHeight(height);
       setMaxVisibleItems(m_model->rowCount());
       QCompleter::complete();
       m_popup->setCurrentIndex(QModelIndex());
