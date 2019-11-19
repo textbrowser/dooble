@@ -630,9 +630,11 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&File"));
-  m_authentication_action = menu->addAction(tr("&Authenticate..."),
-					    this,
-					    SIGNAL(authenticate(void)));
+  m_authentication_action = menu->addAction
+    (QIcon(QString(":/%1/36/authenticate.png").arg(icon_set)),
+     tr("&Authenticate..."),
+     this,
+     SIGNAL(authenticate(void)));
 
   if(dooble_settings::has_dooble_credentials())
     m_authentication_action->setEnabled
@@ -641,14 +643,18 @@ void dooble_page::prepare_standard_menus(void)
     m_authentication_action->setEnabled(false);
 
   menu->addSeparator();
-  menu->addAction(tr("New P&rivate Window..."),
-		  this,
-		  SIGNAL(new_private_window(void)));
-  menu->addAction(tr("New &Tab"),
+  menu->addAction
+    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)),
+     tr("New P&rivate Window..."),
+     this,
+     SIGNAL(new_private_window(void)));
+  menu->addAction(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)),
+		  tr("New &Tab"),
 		  this,
 		  SIGNAL(new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction(tr("&New Window..."),
+  menu->addAction(QIcon(QString(":/%1/48/new_window.png").arg(icon_set)),
+		  tr("&New Window..."),
 		  this,
 		  SIGNAL(new_window(void)),
 		  QKeySequence(tr("Ctrl+N")));
@@ -673,12 +679,14 @@ void dooble_page::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  menu->addAction(tr("&Save"),
+  menu->addAction(QIcon(QString(":/%1/48/save.png").arg(icon_set)),
+		  tr("&Save"),
 		  this,
 		  SIGNAL(save(void)),
 		  QKeySequence(tr("Ctrl+S")));
   menu->addSeparator();
-  menu->addAction(tr("&Print..."),
+  menu->addAction(QIcon(QString(":/%1/48/print.png").arg(icon_set)),
+		  tr("&Print..."),
 		  this,
 		  SIGNAL(print(void)),
 		  QKeySequence(tr("Ctrl+P")));
@@ -686,7 +694,8 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(print_preview(void)))->setEnabled(false);
   menu->addSeparator();
-  menu->addAction(tr("E&xit Dooble"),
+  menu->addAction(QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)),
+		  tr("E&xit Dooble"),
 		  this,
 		  SIGNAL(quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
@@ -696,7 +705,8 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&Edit"));
-  menu->addAction(tr("&Clear Items..."),
+  menu->addAction(QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)),
+		  tr("&Clear Items..."),
 		  this,
 		  SIGNAL(show_clear_items(void)));
   menu->addAction(tr("Clear &Visited Links"),
@@ -731,34 +741,40 @@ void dooble_page::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu->addAction(tr("Accepted / &Blocked Domains"),
+    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
+		    tr("Accepted / &Blocked Domains"),
 		    this,
 		    SIGNAL(show_accepted_or_blocked_domains(void)));
   else
-    menu->addAction(tr("Accepted / &Blocked Domains..."),
+    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
+		    tr("Accepted / &Blocked Domains..."),
 		    this,
 		    SIGNAL(show_accepted_or_blocked_domains(void)));
 
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SIGNAL(show_certificate_exceptions(void)));
-  menu->addAction(tr("Coo&kies..."),
+  menu->addAction(QIcon(QString(":/%1/48/cookies.png").arg(icon_set)),
+		  tr("Coo&kies..."),
 		  this,
 		  SIGNAL(show_cookies(void)),
 		  QKeySequence(tr("Ctrl+K")));
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
-    menu->addAction(tr("&Downloads"),
+    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
+		    tr("&Downloads"),
 		    this,
 		    SIGNAL(show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
   else
-    menu->addAction(tr("&Downloads..."),
+    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
+		    tr("&Downloads..."),
 		    this,
 		    SIGNAL(show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
 
-  menu->addAction(tr("&Favorites..."),
+  menu->addAction(QIcon(QString(":/%1/36/favorites.png").arg(icon_set)),
+		  tr("&Favorites..."),
 		  this,
 		  SIGNAL(show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
@@ -767,12 +783,14 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_floating_digital_clock(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
-    menu->addAction(tr("&History"),
+    menu->addAction(QIcon(QString(":/%1/36/history.png").arg(icon_set)),
+		    tr("&History"),
 		    this,
 		    SIGNAL(show_history(void)),
 		    QKeySequence(tr("Ctrl+H")));
   else
-    menu->addAction(tr("&History..."),
+    menu->addAction(QIcon(QString(":/%1/36/history.png").arg(icon_set)),
+		    tr("&History..."),
 		    this,
 		    SIGNAL(show_history(void)),
 		    QKeySequence(tr("Ctrl+H")));
@@ -802,7 +820,8 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&Help"));
-  menu->addAction(tr("&About..."),
+  menu->addAction(QIcon(":/Logo/dooble.png"),
+		  tr("&About..."),
 		  this,
 		  SIGNAL(show_about(void)));
   menu->addSeparator();
@@ -1112,12 +1131,16 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
 
   menu.addSeparator();
 
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu.addAction(tr("Show Accepted / Blocked Domains preferences."),
+    menu.addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
+		   tr("Show Accepted / Blocked Domains preferences."),
 		   this,
 		   SIGNAL(show_accepted_or_blocked_domains(void)));
   else
-    menu.addAction(tr("Show Accepted / Blocked Domains preferences..."),
+    menu.addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
+		   tr("Show Accepted / Blocked Domains preferences..."),
 		   this,
 		   SIGNAL(show_accepted_or_blocked_domains(void)));
 

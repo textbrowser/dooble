@@ -126,6 +126,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -190,6 +191,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -225,6 +227,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -260,6 +263,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	  this,
 	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+  prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -461,7 +465,7 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToHide(void)),
 	  this,
 	  SLOT(slot_about_to_hide_main_menu(void)),
-	  Qt::UniqueConnection);
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
   connect(m_ui.menu_edit,
 	  SIGNAL(aboutToShow(void)),
 	  this,
@@ -471,7 +475,7 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToHide(void)),
 	  this,
 	  SLOT(slot_about_to_hide_main_menu(void)),
-	  Qt::UniqueConnection);
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
   connect(m_ui.menu_file,
 	  SIGNAL(aboutToShow(void)),
 	  this,
@@ -481,7 +485,7 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToHide(void)),
 	  this,
 	  SLOT(slot_about_to_hide_main_menu(void)),
-	  Qt::UniqueConnection);
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
   connect(m_ui.menu_help,
 	  SIGNAL(aboutToShow(void)),
 	  this,
@@ -501,7 +505,7 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToHide(void)),
 	  this,
 	  SLOT(slot_about_to_hide_main_menu(void)),
-	  Qt::UniqueConnection);
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
   connect(m_ui.menu_tools,
 	  SIGNAL(aboutToShow(void)),
 	  this,
@@ -511,7 +515,7 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToHide(void)),
 	  this,
 	  SLOT(slot_about_to_hide_main_menu(void)),
-	  Qt::UniqueConnection);
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
   connect(m_ui.menu_view,
 	  SIGNAL(aboutToShow(void)),
 	  this,
@@ -886,6 +890,10 @@ void dooble::prepare_control_w_shortcut(void)
 	  m_shortcuts.at(i)->setEnabled(tabs_closable());
 	  break;
 	}
+}
+
+void dooble::prepare_icons(void)
+{
 }
 
 void dooble::prepare_page_connections(dooble_page *page)
@@ -2615,6 +2623,7 @@ void dooble::slot_settings_applied(void)
 {
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
+  prepare_icons();
   prepare_private_web_engine_profile_settings();
   prepare_style_sheets();
 

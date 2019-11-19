@@ -143,6 +143,7 @@ class dooble: public QMainWindow
   void new_page(dooble_web_engine_view *view);
   void open_tab_as_new_window(bool is_private, int index);
   void prepare_control_w_shortcut(void);
+  void prepare_icons(void);
   void prepare_page_connections(dooble_page *page);
   void prepare_private_web_engine_profile_settings(void);
   void prepare_shortcuts(void);
