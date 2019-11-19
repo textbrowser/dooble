@@ -398,6 +398,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 {
   QAction *action = nullptr;
   QMenu menu(this);
+  QString icon_set(dooble_settings::setting("icon_set").toString());
   int tab_at = tabAt(point);
 
   action = menu.addAction(tr("&Close Tab"),
@@ -420,7 +421,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
 
   QAction *open_as_new_private_window_action = menu.addAction
-    (tr("Open as New P&rivate Window..."),
+    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)),
+     tr("Open as New P&rivate Window..."),
      this,
      SLOT(slot_open_tab_as_new_private_window(void)));
 
@@ -428,20 +430,24 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   open_as_new_private_window_action->setProperty("point", point);
 
   QAction *open_as_new_window_action = menu.addAction
-    (tr("Open as &New Window..."),
+    (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)),
+     tr("Open as &New Window..."),
      this,
      SLOT(slot_open_tab_as_new_window(void)));
 
   open_as_new_window_action->setEnabled(false);
   open_as_new_window_action->setProperty("point", point);
-  menu.addAction(tr("New &Tab"),
+  menu.addAction(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)),
+		 tr("New &Tab"),
 		 this,
 		 SIGNAL(new_tab(void)));
   menu.addSeparator();
 
-  QAction *reload_action = menu.addAction(tr("&Reload"),
-					  this,
-					  SLOT(slot_reload(void)));
+  QAction *reload_action = menu.addAction
+    (QIcon(QString(":/%1/20/reload.png").arg(icon_set)),
+     tr("&Reload"),
+     this,
+     SLOT(slot_reload(void)));
   reload_action->setProperty("point", point);
 
   QActionGroup *action_group = new QActionGroup(&menu);
@@ -486,11 +492,15 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action_group->addAction(action);
   menu.addSeparator();
 
-  QAction *back_action = menu.addAction(tr("&Back"));
+  QAction *back_action = menu.addAction
+    (QIcon(QString(":/%1/36/backward.png").arg(icon_set)),
+     tr("&Back"));
 
   back_action->setProperty("point", point);
 
-  QAction *forward_action = menu.addAction(tr("&Forward"));
+  QAction *forward_action = menu.addAction
+    (QIcon(QString(":/%1/36/forward.png").arg(icon_set)),
+     tr("&Forward"));
 
   forward_action->setProperty("point", point);
   menu.addSeparator();
