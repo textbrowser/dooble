@@ -1788,7 +1788,7 @@ void dooble::slot_about_to_show_history_menu(void)
     (tr("&Clear History"), this, SLOT(slot_clear_history(void)))->setEnabled
     (!list.isEmpty());
   m_ui.menu_history->addAction
-    (QIcon(QString(":/%1/18/history.png").arg(icon_set)),
+    (QIcon(QString(":/%1/36/history.png").arg(icon_set)),
      tr("&History"),
      this,
      SLOT(slot_show_history(void)))->setShortcut(QKeySequence(tr("Ctrl+H")));
