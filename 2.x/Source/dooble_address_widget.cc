@@ -472,6 +472,7 @@ void dooble_address_widget::slot_show_site_information_menu(void)
     return;
 
   QMenu menu(this);
+  QString icon_set(dooble_settings::setting("icon_set").toString());
   QUrl url(dooble_ui_utilities::simplified_url(m_view->url()));
 
   if(dooble_certificate_exceptions_menu_widget::has_exception(url))
@@ -481,7 +482,8 @@ void dooble_address_widget::slot_show_site_information_menu(void)
        this,
        SIGNAL(show_certificate_exception(void)));
 
-  menu.addAction(tr("Show Site Coo&kies..."),
+  menu.addAction(QIcon(QString(":/%1/48/cookies.png").arg(icon_set)),
+		 tr("Show Site Coo&kies..."),
 		 this,
 		 SIGNAL(show_site_cookies(void)));
   menu.exec(QCursor::pos());
