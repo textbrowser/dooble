@@ -182,6 +182,21 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   QAction *action = nullptr;
 
   /*
+  ** Change some icons.
+  */
+
+  QString icon_set(dooble_settings::setting("icon_set").toString());
+
+  if((action = m_page->action(QWebEnginePage::Back)))
+    action->setIcon(QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
+
+  if((action = m_page->action(QWebEnginePage::Forward)))
+    action->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
+
+  if((action = m_page->action(QWebEnginePage::Reload)))
+    action->setIcon(QIcon(QString(":/%1/20/reload.png").arg(icon_set)));
+
+  /*
   ** Change some text.
   */
 
