@@ -722,7 +722,7 @@ void dooble_settings::prepare_fonts(void)
 	  << QWebEngineSettings::MinimumLogicalFontSize;
 
     {
-      QReadLocker lock(&s_settings_mutex); 
+      QReadLocker lock(&s_settings_mutex);
 
       list << s_settings.value("web_font_size_default_fixed").toInt()
            << s_settings.value("web_font_size_default").toInt()
