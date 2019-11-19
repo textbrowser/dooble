@@ -1332,9 +1332,11 @@ void dooble::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&File"));
-  m_authentication_action = menu->addAction(tr("&Authenticate..."),
-					    this,
-					    SLOT(slot_authenticate(void)));
+  m_authentication_action = menu->addAction
+    (QIcon(QString(":/%1/36/authenticate.png").arg(icon_set)),
+     tr("&Authenticate..."),
+     this,
+     SLOT(slot_authenticate(void)));
 
   if(dooble_settings::has_dooble_credentials())
     m_authentication_action->setEnabled
@@ -1343,14 +1345,18 @@ void dooble::prepare_standard_menus(void)
     m_authentication_action->setEnabled(false);
 
   menu->addSeparator();
-  menu->addAction(tr("New P&rivate Window..."),
-		  this,
-		  SLOT(slot_new_private_window(void)));
-  menu->addAction(tr("New &Tab"),
+  menu->addAction
+    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)),
+     tr("New P&rivate Window..."),
+     this,
+     SLOT(slot_new_private_window(void)));
+  menu->addAction(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)),
+		  tr("New &Tab"),
 		  this,
 		  SLOT(slot_new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction(tr("&New Window..."),
+  menu->addAction(QIcon(QString(":/%1/48/new_window.png").arg(icon_set)),
+		  tr("&New Window..."),
 		  this,
 		  SLOT(slot_new_window(void)),
 		  QKeySequence(tr("Ctrl+N")));
@@ -1371,7 +1377,8 @@ void dooble::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  menu->addAction(tr("E&xit Dooble"),
+  menu->addAction(QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)),
+		  tr("E&xit Dooble"),
 		  this,
 		  SLOT(slot_quit_dooble(void)),
 		  QKeySequence(tr("Ctrl+Q")));
@@ -1381,7 +1388,8 @@ void dooble::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&Edit"));
-  menu->addAction(tr("&Clear Items..."),
+  menu->addAction(QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)),
+		  tr("&Clear Items..."),
 		  this,
 		  SLOT(slot_show_clear_items(void)));
   menu->addAction(tr("Clear Visited Links"),
@@ -1410,34 +1418,40 @@ void dooble::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu->addAction(tr("Accepted / &Blocked Domains"),
+    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
+		    tr("Accepted / &Blocked Domains"),
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
   else
-    menu->addAction(tr("Accepted / &Blocked Domains..."),
+    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
+		    tr("Accepted / &Blocked Domains..."),
 		    this,
 		    SLOT(slot_show_accepted_or_blocked_domains(void)));
 
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SLOT(slot_show_certificate_exceptions(void)));
-  menu->addAction(tr("Coo&kies..."),
+  menu->addAction(QIcon(QString(":/%1/48/cookies.png").arg(icon_set)),
+		  tr("Coo&kies..."),
 		  this,
 		  SLOT(slot_show_cookies(void)),
 		  QKeySequence(tr("Ctrl+K")));
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
-    menu->addAction(tr("&Downloads"),
+    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
+		    tr("&Downloads"),
 		    this,
 		    SLOT(slot_show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
   else
-    menu->addAction(tr("&Downloads..."),
+    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
+		    tr("&Downloads..."),
 		    this,
 		    SLOT(slot_show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
 
-  menu->addAction(tr("&Favorites..."),
+  menu->addAction(QIcon(QString(":/%1/36/favorites.png").arg(icon_set)),
+		  tr("&Favorites..."),
 		  this,
 		  SLOT(slot_show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
@@ -1446,12 +1460,14 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(slot_show_floating_digital_clock(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
-    menu->addAction(tr("&History"),
+    menu->addAction(QIcon(QString(":/%1/36/history.png").arg(icon_set)),
+		    tr("&History"),
 		    this,
 		    SLOT(slot_show_history(void)),
 		    QKeySequence(tr("Ctrl+H")));
   else
-    menu->addAction(tr("&History..."),
+    menu->addAction(QIcon(QString(":/%1/36/history.png").arg(icon_set)),
+		    tr("&History..."),
 		    this,
 		    SLOT(slot_show_history(void)),
 		    QKeySequence(tr("Ctrl+H")));
@@ -1475,7 +1491,8 @@ void dooble::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&Help"));
-  menu->addAction(tr("&About..."),
+  menu->addAction(QIcon(":/Logo/dooble.png"),
+		  tr("&About..."),
 		  this,
 		  SLOT(slot_show_about(void)));
   menu->addSeparator();
