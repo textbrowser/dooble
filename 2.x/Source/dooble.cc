@@ -2044,7 +2044,6 @@ void dooble::slot_application_locked(bool state, dooble *d)
       m_ui.menu_bar->setVisible(false);
       m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false);
       m_ui.tab->setTabsClosable(false);
-      setStyleSheet("QMainWindow {border: 7px solid #ef5350;}");
       setWindowTitle(tr("Dooble: Application Locked"));
     }
   else
@@ -2053,7 +2052,6 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	(dooble_settings::setting("main_menu_bar_visible").toBool());
       m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true);
       m_ui.tab->setTabsClosable(tabs_closable());
-      setStyleSheet("");
       slot_tab_index_changed(m_ui.tab->currentIndex());
     }
 

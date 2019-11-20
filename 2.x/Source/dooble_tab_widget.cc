@@ -38,7 +38,7 @@
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
   m_add_tab_tool_button = new QToolButton(this);
-  m_add_tab_tool_button->setAutoRaise(false);
+  m_add_tab_tool_button->setAutoRaise(true);
   m_add_tab_tool_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_add_tab_tool_button->setStyleSheet
@@ -46,12 +46,12 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_add_tab_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
+    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_add_tab_tool_button->setToolTip(tr("New Tab"));
   m_private_tool_button = new QToolButton(this);
-  m_private_tool_button->setAutoRaise(true);
+  m_private_tool_button->setAutoRaise(false);
   m_private_tool_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_private_tool_button->setStyleSheet
@@ -59,7 +59,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_private_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
+    ("QToolButton {border: none; margin-bottom: 1px; margin-top: 1px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_private_tool_button->setToolTip(tr("This is a private window."));
@@ -68,31 +68,40 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      is_private());
   m_tabs_menu_button = new QToolButton(this);
   m_tabs_menu_button->setArrowType(Qt::NoArrow);
-  m_tabs_menu_button->setAutoRaise(false);
+  m_tabs_menu_button->setAutoRaise(true);
   m_tabs_menu_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
+    ("QToolButton {border:none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
+    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
-  m_corner_widget = new QFrame(this);
-  delete m_corner_widget->layout();
-  m_corner_widget->setLayout(new QHBoxLayout(this));
-  m_corner_widget->layout()->addWidget(m_private_tool_button);
-  m_corner_widget->layout()->addWidget(m_tabs_menu_button);
-  m_corner_widget->layout()->addWidget(m_add_tab_tool_button);
+  m_left_corner_widget = new QFrame(this);
+  m_right_corner_widget = new QFrame(this);
+  delete m_left_corner_widget->layout();
+  delete m_right_corner_widget->layout();
+  m_left_corner_widget->setLayout(new QHBoxLayout(this));
+  m_left_corner_widget->layout()->addWidget(m_private_tool_button);
+  m_left_corner_widget->layout()->addWidget(m_tabs_menu_button);
+  m_left_corner_widget->layout()->addWidget(m_add_tab_tool_button);
 #ifdef Q_OS_MACOS
-  m_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
+  m_left_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
 #else
-  m_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
+  m_left_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
 #endif
-  m_corner_widget->layout()->setSpacing(0);
-  m_corner_widget->setVisible
-    (!dooble_settings::setting("auto_hide_tab_bar").toBool());
+  m_left_corner_widget->layout()->setSpacing(0);
+  m_left_corner_widget->setVisible(true);
+  m_right_corner_widget->setLayout(new QHBoxLayout(this));
+#ifdef Q_OS_MACOS
+  m_right_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
+#else
+  m_right_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
+#endif
+  m_right_corner_widget->layout()->setSpacing(0);
+  m_right_corner_widget->setVisible(true);
 
   if(dooble::s_application->style_name() == "fusion")
     {
@@ -100,12 +109,14 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 
       if(theme_color == "default")
 	{
-	  m_corner_widget->setStyleSheet("QWidget {height: auto;}");
+	  m_left_corner_widget->setStyleSheet("QWidget {height: auto;}");
+	  m_right_corner_widget->setStyleSheet
+	    (m_left_corner_widget->styleSheet());
 	  setStyleSheet("");
 	}
       else
 	{
-	  m_corner_widget->setStyleSheet
+	  m_left_corner_widget->setStyleSheet
 	    (QString("QWidget {background-color: %1;"
 		     "border-right: 0px solid %2;"
 		     "height: auto;"
@@ -114,6 +125,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 		 value(QString("%1-corner-widget-background-color").
 		       arg(theme_color)).name()).
 	     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+	  m_right_corner_widget->setStyleSheet
+	    (m_left_corner_widget->styleSheet());
 	  setStyleSheet
 	    (QString("QTabBar {background-color: %1; margin-top: 1px;}").
 	     arg(dooble_application::s_theme_colors.
@@ -123,8 +136,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
     }
 
   m_tab_bar = new dooble_tab_bar(this);
-  m_tab_bar->setAutoHide
-    (dooble_settings::setting("auto_hide_tab_bar").toBool());
+  m_tab_bar->set_corner_widget(m_right_corner_widget);
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
 	  this,
@@ -161,15 +173,16 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  SIGNAL(set_visible_corner_button(bool)),
 	  this,
 	  SLOT(slot_set_visible_corner_button(bool)));
+  connect(m_tab_bar,
+	  SIGNAL(show_corner_widget(bool)),
+	  this,
+	  SLOT(slot_show_right_corner_widget(bool)));
   connect(m_tabs_menu_button,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(tabs_menu_button_clicked(void)));
   prepare_icons();
-
-  if(!dooble_settings::setting("auto_hide_tab_bar").toBool())
-    setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
-
+  setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
   setTabBar(m_tab_bar);
 }
 
@@ -397,11 +410,11 @@ void dooble_tab_widget::slot_load_started(void)
 void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
   if(state)
-    setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
+    setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
   else
     setCornerWidget(nullptr, Qt::TopLeftCorner);
 
-  m_corner_widget->setVisible(state);
+  m_left_corner_widget->setVisible(state);
 }
 
 void dooble_tab_widget::slot_settings_applied(void)
@@ -412,12 +425,14 @@ void dooble_tab_widget::slot_settings_applied(void)
 
       if(theme_color == "default")
 	{
-	  m_corner_widget->setStyleSheet("QWidget {height: auto;}");
+	  m_left_corner_widget->setStyleSheet("QWidget {height: auto;}");
+	  m_right_corner_widget->setStyleSheet
+	    (m_left_corner_widget->styleSheet());
 	  setStyleSheet("");
 	}
       else
 	{
-	  m_corner_widget->setStyleSheet
+	  m_left_corner_widget->setStyleSheet
 	    (QString("QWidget {background-color: %1;"
 		     "border-right: 0px solid %2;"
 		     "height: auto;"
@@ -426,6 +441,8 @@ void dooble_tab_widget::slot_settings_applied(void)
 		 value(QString("%1-corner-widget-background-color").
 		       arg(theme_color)).name()).
 	     arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
+	  m_right_corner_widget->setStyleSheet
+	    (m_left_corner_widget->styleSheet());
 	  setStyleSheet
 	    (QString("QTabBar {background-color: %1; margin-top: 1px;}").
 	     arg(dooble_application::s_theme_colors.
@@ -434,32 +451,21 @@ void dooble_tab_widget::slot_settings_applied(void)
 	}
     }
 
+  m_left_corner_widget->setVisible(true);
   m_private_tool_button->setVisible
     (dooble_settings::setting("denote_private_widgets").toBool() &&
      is_private());
   prepare_icons();
+}
 
-  if(dooble_settings::setting("auto_hide_tab_bar").toBool())
-    {
-      if(count() > 1)
-	{
-	  setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
-	  m_corner_widget->setVisible(true);
-	}
-      else
-	{
-	  setCornerWidget(nullptr, Qt::TopLeftCorner);
-	  m_corner_widget->setVisible(false);
-	}
-
-      m_tab_bar->setAutoHide(true);
-    }
+void dooble_tab_widget::slot_show_right_corner_widget(bool state)
+{
+  if(state)
+    setCornerWidget(m_right_corner_widget, Qt::TopRightCorner);
   else
-    {
-      setCornerWidget(m_corner_widget, Qt::TopLeftCorner);
-      m_corner_widget->setVisible(true);
-      m_tab_bar->setAutoHide(false);
-    }
+    setCornerWidget(nullptr, Qt::TopRightCorner);
+
+  m_right_corner_widget->setVisible(state);
 }
 
 void dooble_tab_widget::tabRemoved(int index)

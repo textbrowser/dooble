@@ -30,6 +30,7 @@
 
 #include <QTabBar>
 
+class QToolButton;
 class dooble;
 
 class dooble_tab_bar: public QTabBar
@@ -38,6 +39,7 @@ class dooble_tab_bar: public QTabBar
 
  public:
   dooble_tab_bar(QWidget *parent);
+  void set_corner_widget(QWidget *widget);
 
  protected:
   QSize tabSizeHint(int index) const;
@@ -46,6 +48,9 @@ class dooble_tab_bar: public QTabBar
   void tabLayoutChange(void);
 
  private:
+  QToolButton *m_next_tool_button;
+  QToolButton *m_previous_tool_button;
+  QWidget *m_corner_widget;
   bool is_private(void) const;
   void prepare_icons(void);
   void prepare_style_sheets(void);
@@ -57,8 +62,10 @@ class dooble_tab_bar: public QTabBar
   void slot_decouple_tab(void);
   void slot_hide_location_frame(void);
   void slot_javascript(void);
+  void slot_next_tab(void);
   void slot_open_tab_as_new_private_window(void);
   void slot_open_tab_as_new_window(void);
+  void slot_previous_tab(void);
   void slot_reload(void);
   void slot_reload_periodically(void);
   void slot_settings_applied(void);
@@ -75,6 +82,7 @@ class dooble_tab_bar: public QTabBar
   void reload_tab(int index);
   void reload_tab_periodically(int index, int seconds);
   void set_visible_corner_button(bool state);
+  void show_corner_widget(bool state);
 };
 
 #endif

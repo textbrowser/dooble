@@ -28,6 +28,8 @@
 #include <QWebEngineSettings>
 #include <QtMath>
 
+#include <algorithm>
+
 #include "dooble.h"
 #include "dooble_application.h"
 #include "dooble_page.h"
@@ -37,6 +39,48 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
+  m_corner_widget = 0;
+  m_next_tool_button = new QToolButton(nullptr);
+  m_next_tool_button->setAutoRaise(true);
+  m_next_tool_button->setIconSize(QSize(18, 18));
+#ifdef Q_OS_MACOS
+  m_next_tool_button->setStyleSheet
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
+     "QToolButton::menu-button {border: none;}");
+#else
+  m_next_tool_button->setStyleSheet
+    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+     "QToolButton::menu-button {border: none;}");
+#endif
+  m_previous_tool_button = new QToolButton(nullptr);
+  m_previous_tool_button->setAutoRaise(true);
+  m_previous_tool_button->setIconSize(QSize(18, 18));
+#ifdef Q_OS_MACOS
+  m_previous_tool_button->setStyleSheet
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
+     "QToolButton::menu-button {border: none;}");
+#else
+  m_previous_tool_button->setStyleSheet
+    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+     "QToolButton::menu-button {border: none;}");
+#endif
+
+  int i = 0;
+
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    if(i++ == 0)
+      connect(m_previous_tool_button,
+	      SIGNAL(clicked(void)),
+	      tool_button,
+	      SIGNAL(clicked(void)),
+	      Qt::QueuedConnection);
+    else
+      connect(m_next_tool_button,
+	      SIGNAL(clicked(void)),
+	      tool_button,
+	      SIGNAL(clicked(void)),
+	      Qt::QueuedConnection);
+
   prepare_style_sheets();
   setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
@@ -70,10 +114,25 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  connect(m_next_tool_button,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_next_tab(void)),
+	  Qt::QueuedConnection);
+  connect(m_previous_tool_button,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_previous_tab(void)),
+	  Qt::QueuedConnection);
   connect(this,
 	  SIGNAL(application_locked(bool, dooble *)),
 	  dooble::s_application,
 	  SLOT(slot_application_locked(bool, dooble *)));
+  connect(this,
+	  SIGNAL(currentChanged(int)),
+	  this,
+	  SLOT(slot_next_tab(void)),
+	  Qt::QueuedConnection);
   connect(this,
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
@@ -85,8 +144,8 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QSize size(QTabBar::tabSizeHint(index));
   int f = qFloor(rect().width() / qMax(1, count()));
-  static int maximum_tab_width = 245;
-  static int minimum_tab_width = 145;
+  static int maximum_tab_width = 225;
+  static int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
   QFontMetrics font_metrics(font());
   static int tab_height = 15 + font_metrics.height();
@@ -139,19 +198,28 @@ void dooble_tab_bar::hideEvent(QHideEvent *event)
 
 void dooble_tab_bar::prepare_icons(void)
 {
+  QList<QToolButton *> list;
   QString icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
-  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+  if(dooble::s_application->style_name() == "macintosh")
+    {
+      list = findChildren<QToolButton *> ();
+      std::reverse(list.begin(), list.end());
+    }
+  else
+    list << m_next_tool_button << m_previous_tool_button;
+
+  foreach(QToolButton *tool_button, list)
     {
       tool_button->setArrowType(Qt::NoArrow);
 
       if(i++ == 0)
 	tool_button->setIcon
-	  (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
+	  (QIcon(QString(":/%1/20/next.png").arg(icon_set)));
       else
 	tool_button->setIcon
-	  (QIcon(QString(":/%1/20/next.png").arg(icon_set)));
+	  (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
 
       tool_button->setIconSize(QSize(18, 18));
     }
@@ -159,6 +227,10 @@ void dooble_tab_bar::prepare_icons(void)
 
 void dooble_tab_bar::prepare_style_sheets(void)
 {
+  QList<QToolButton *> list;
+
+  list << m_next_tool_button << m_previous_tool_button;
+
   if(dooble::s_application->style_name() == "fusion")
     {
       QString theme_color(dooble_settings::setting("theme_color").toString());
@@ -167,27 +239,22 @@ void dooble_tab_bar::prepare_style_sheets(void)
 
       if(theme_color == "default")
 	{
-	  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	  foreach(QToolButton *tool_button, list)
 	    tool_button->setStyleSheet
-	    (QString("QToolButton {background-color: %1;"
-		     "border: none;"
-		     "margin-bottom: 3px;"
-		     "margin-top: 3px;"
-		     "}"
-		     "QToolButton::menu-button {border: none;}").
-	     arg(s_background_color.name()));
+	    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+	     "QToolButton::menu-button {border: none;}");
 
 	  setDrawBase(true);
-	  setStyleSheet("QTabBar::tear {"
-			"border: none; image: none; width: 0px;}");
+	  setStyleSheet
+	    ("QTabBar::scroller {height: 0px; margin-left: 0.09em; width: 0px;}"
+	     "QTabBar::tear {border: none; image: none; width: 0px;}");
 	}
       else
 	{
-	  foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+	  foreach(QToolButton *tool_button, list)
 	    tool_button->setStyleSheet
 	    (QString("QToolButton {background-color: %1;"
-		     "border: none;"
-		     "margin-bottom: 0px;"
+		     "margin-bottom: 1px;"
 		     "margin-top: 1px;"
 		     "}"
 		     "QToolButton::menu-button {border: none;}").
@@ -203,6 +270,8 @@ void dooble_tab_bar::prepare_style_sheets(void)
 		     "subcontrol-origin: padding;"
 		     "subcontrol-position: right;"
 		     "width: 16px;}"
+		     "QTabBar::scroller {height: 0px; "
+		     "margin-left: 0.09em; width: 0px;}"
 		     "QTabBar::tab {"
 		     "background-color: %1;"
 		     "border-left: 1px solid %2;"
@@ -235,32 +304,42 @@ void dooble_tab_bar::prepare_style_sheets(void)
 	}
     }
   else if(dooble::s_application->style_name() == "macintosh")
-    {
-      foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
-	tool_button->setStyleSheet
-	(QString("QToolButton {background-color: %1;"
-		 "border: none;"
-		 "margin-bottom: 0px;"
-		 "margin-top: 0px;"
-		 "}"
-		 "QToolButton::menu-button {border: none;}").
-	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-    }
+    foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+      tool_button->setStyleSheet
+      (QString("QToolButton {background-color: %1;"
+	       "border: none;"
+	       "margin-bottom: 1px;"
+	       "margin-top: 1px;"
+	       "}"
+	       "QToolButton::menu-button {border: none;}").
+       arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
   else
     {
-      foreach(QToolButton *tool_button, findChildren <QToolButton *> ())
+      foreach(QToolButton *tool_button, list)
 	tool_button->setStyleSheet
 	(QString("QToolButton {background-color: %1;"
-		 "border: none;"
-		 "margin-bottom: 3px;"
-		 "margin-top: 3px;"
+		 "margin-bottom: 1px;"
+		 "margin-top: 1px;"
 		 "}"
 		 "QToolButton::menu-button {border: none;}").
 	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
 
-      setStyleSheet("QTabBar::tear {"
-		    "border: none; image: none; width: 0px;}");
+      setStyleSheet
+	("QTabBar::scroller {height: 0px; margin-left: 0.09em; width: 0px;}"
+	 "QTabBar::tear {border: none; image: none; width: 0px;}");
     }
+}
+
+void dooble_tab_bar::set_corner_widget(QWidget *widget)
+{
+  if(m_corner_widget)
+    return;
+  else
+    m_corner_widget = widget;
+
+  m_corner_widget->layout()->addWidget(m_previous_tool_button);
+  m_corner_widget->layout()->addWidget(m_next_tool_button);
+  prepare_icons();
 }
 
 void dooble_tab_bar::showEvent(QShowEvent *event)
@@ -353,6 +432,17 @@ void dooble_tab_bar::slot_javascript(void)
     }
 }
 
+void dooble_tab_bar::slot_next_tab(void)
+{
+  int i = 0;
+
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    if(i++ == 0)
+      m_previous_tool_button->setEnabled(tool_button->isEnabled());
+    else
+      m_next_tool_button->setEnabled(tool_button->isEnabled());
+}
+
 void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
 {
   QAction *action = qobject_cast<QAction *> (sender());
@@ -368,6 +458,17 @@ void dooble_tab_bar::slot_open_tab_as_new_window(void)
 
   if(action)
     emit open_tab_as_new_window(tabAt(action->property("point").toPoint()));
+}
+
+void dooble_tab_bar::slot_previous_tab(void)
+{
+  int i = 0;
+
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    if(i++ == 0)
+      m_previous_tool_button->setEnabled(tool_button->isEnabled());
+    else
+      m_next_tool_button->setEnabled(tool_button->isEnabled());
 }
 
 void dooble_tab_bar::slot_reload(void)
@@ -691,5 +792,21 @@ void dooble_tab_bar::tabLayoutChange(void)
   */
 
   QTabBar::tabLayoutChange();
-  prepare_icons();
+
+  if(dooble::s_application->style_name() == "macintosh")
+    {
+      prepare_icons();
+      return;
+    }
+
+  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+    {
+      if(isVisible())
+	emit show_corner_widget(tool_button->isVisible());
+
+      tool_button->setArrowType(Qt::NoArrow);
+      tool_button->setIcon(QIcon());
+      tool_button->setStyleSheet
+	("QToolButton {background-color: transparent;}");
+    }
 }

@@ -53,7 +53,8 @@ class dooble_tab_widget: public QTabWidget
   void tabRemoved(int index);
 
  private:
-  QFrame *m_corner_widget;
+  QFrame *m_left_corner_widget;
+  QFrame *m_right_corner_widget;
   QToolButton *m_add_tab_tool_button;
   QToolButton *m_private_tool_button;
   QToolButton *m_tabs_menu_button;
@@ -66,6 +67,7 @@ class dooble_tab_widget: public QTabWidget
   void slot_load_started(void);
   void slot_set_visible_corner_button(bool state);
   void slot_settings_applied(void);
+  void slot_show_right_corner_widget(bool state);
 
  signals:
   void decouple_tab(int index);
