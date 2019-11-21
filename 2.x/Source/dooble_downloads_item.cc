@@ -142,7 +142,9 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.cancel->setIcon(QIcon(QString(":/%1/20/reload.png").arg(icon_set)));
+  m_ui.cancel->setIcon
+    (QIcon::fromTheme("view-refresh",
+		      QIcon(QString(":/%1/20/reload.png").arg(icon_set))));
 #ifdef Q_OS_MACOS
   m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
 			     "QToolButton::menu-button {border: none;}");
@@ -212,9 +214,12 @@ void dooble_downloads_item::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.cancel->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
+  m_ui.cancel->setIcon
+    (QIcon::fromTheme("media-playback-stop",
+		      QIcon(QString(":/%1/20/stop.png").arg(icon_set))));
   m_ui.pause_resume->setIcon
-    (QIcon(QString(":/%1/20/resume.png").arg(icon_set)));
+    (QIcon::fromTheme("media-playback-start",
+		      QIcon(QString(":/%1/20/resume.png").arg(icon_set))));
 }
 
 void dooble_downloads_item::record(void)
@@ -463,7 +468,9 @@ void dooble_downloads_item::slot_finished(void)
 
       QString icon_set(dooble_settings::setting("icon_set").toString());
 
-      m_ui.cancel->setIcon(QIcon(QString(":/%1/20/reload.png").arg(icon_set)));
+      m_ui.cancel->setIcon
+	(QIcon::fromTheme("view-refresh",
+			  QIcon(QString(":/%1/20/reload.png").arg(icon_set))));
       m_ui.cancel->setToolTip(tr("Restart"));
       m_ui.cancel->setVisible(true);
 #endif
@@ -494,7 +501,9 @@ void dooble_downloads_item::slot_pause_or_resume(void)
       if(m_download->isPaused())
 	{
 	  m_ui.pause_resume->setIcon
-	    (QIcon(QString(":/%1/20/pause.png").arg(icon_set)));
+	    (QIcon::fromTheme("media-playback-pause",
+			      QIcon(QString(":/%1/20/pause.png").
+				    arg(icon_set))));
 	  m_ui.pause_resume->setToolTip(tr("Resume"));
 
 	  if(m_download->totalBytes() > 0)
@@ -510,7 +519,9 @@ void dooble_downloads_item::slot_pause_or_resume(void)
       else
 	{
 	  m_ui.pause_resume->setIcon
-	    (QIcon(QString(":/%1/20/resume.png").arg(icon_set)));
+	    (QIcon::fromTheme("media-playback-start",
+			      QIcon(QString(":/%1/20/resume.png").
+				    arg(icon_set))));
 	  m_ui.pause_resume->setToolTip(tr("Pause"));
 	}
     }
