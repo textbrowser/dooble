@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
   QDir::setCurrent("/Applications/Dooble.d");
 #elif defined(Q_OS_WIN)
   QApplication::addLibraryPath("plugins");
-  QApplication::setStyle(QStyleFactory::create("Fusion"));
+  QApplication::setStyle(QStyleFactory::create("Windows"));
 #endif
 #if defined(Q_OS_WIN)
   QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
