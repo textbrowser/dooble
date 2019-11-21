@@ -255,12 +255,12 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
     {
       m_favorite->setEnabled(false);
       m_favorite->setIcon
-	(QIcon::fromTheme("user-bookmarks",
+	(QIcon::fromTheme("emblem-default",
 			  QIcon(QString(":/%1/18/bookmark.png").
 				arg(icon_set))));
       m_information->setEnabled(false);
       m_information->setIcon
-	(QIcon::fromTheme("dialog-information",
+	(QIcon::fromTheme("help-about",
 			  QIcon(QString(":/%1/18/information.png").
 				arg(icon_set))));
     }
@@ -275,13 +275,13 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 				  arg(icon_set))));
       else
 	m_favorite->setIcon
-	  (QIcon::fromTheme("user-bookmarks",
+	  (QIcon::fromTheme("emblem-default",
 			    QIcon(QString(":/%1/18/bookmark.png").
 				  arg(icon_set))));
 
       m_information->setEnabled(true);
       m_information->setIcon
-	(QIcon::fromTheme("dialog-information",
+	(QIcon::fromTheme("help-about",
 			  QIcon(QString(":/%1/18/information.png").
 				arg(icon_set))));
     }
@@ -292,10 +292,10 @@ void dooble_address_widget::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_favorite->setIcon
-    (QIcon::fromTheme("user-bookmarks",
+    (QIcon::fromTheme("emblem-default",
 		      QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
   m_information->setIcon
-    (QIcon::fromTheme("dialog-information",
+    (QIcon::fromTheme("help-about",
 		      QIcon(QString(":/%1/18/information.png").arg(icon_set))));
   m_pull_down->setIcon
      (QIcon::fromTheme("go-down",
@@ -427,7 +427,7 @@ void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 				  arg(icon_set))));
       else
 	m_favorite->setIcon
-	  (QIcon::fromTheme("user-bookmarks",
+	  (QIcon::fromTheme("emblem-default",
 			    QIcon(QString(":/%1/18/bookmark.png").
 				  arg(icon_set))));
     }
@@ -438,7 +438,7 @@ void dooble_address_widget::slot_favorites_cleared(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_favorite->setIcon
-    (QIcon::fromTheme("user-bookmarks",
+    (QIcon::fromTheme("emblem-default",
 		      QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
 }
 
@@ -535,7 +535,7 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
 			      arg(icon_set))));
   else
     m_favorite->setIcon
-      (QIcon::fromTheme("user-bookmarks",
+      (QIcon::fromTheme("emblem-default",
 			QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
 
   prepare_containers_for_url(m_view->url());
