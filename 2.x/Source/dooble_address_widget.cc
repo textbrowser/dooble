@@ -254,10 +254,15 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
   if(url.isEmpty() || !url.isValid())
     {
       m_favorite->setEnabled(false);
-      m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+      m_favorite->setIcon
+	(QIcon::fromTheme("user-bookmarks",
+			  QIcon(QString(":/%1/18/bookmark.png").
+				arg(icon_set))));
       m_information->setEnabled(false);
       m_information->setIcon
-	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
+	(QIcon::fromTheme("dialog-information",
+			  QIcon(QString(":/%1/18/information.png").
+				arg(icon_set))));
     }
   else
     {
@@ -265,14 +270,20 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 
       if(dooble::s_history->is_favorite(url))
 	m_favorite->setIcon
-	  (QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+	  (QIcon::fromTheme("emblem-favorite",
+			    QIcon(QString(":/%1/18/bookmarked.png").
+				  arg(icon_set))));
       else
 	m_favorite->setIcon
-	  (QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+	  (QIcon::fromTheme("user-bookmarks",
+			    QIcon(QString(":/%1/18/bookmark.png").
+				  arg(icon_set))));
 
       m_information->setEnabled(true);
       m_information->setIcon
-	(QIcon(QString(":/%1/18/information.png").arg(icon_set)));
+	(QIcon::fromTheme("dialog-information",
+			  QIcon(QString(":/%1/18/information.png").
+				arg(icon_set))));
     }
 }
 
@@ -280,10 +291,15 @@ void dooble_address_widget::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+  m_favorite->setIcon
+    (QIcon::fromTheme("user-bookmarks",
+		      QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
   m_information->setIcon
-    (QIcon(QString(":/%1/18/information.png").arg(icon_set)));
-  m_pull_down->setIcon(QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
+    (QIcon::fromTheme("dialog-information",
+		      QIcon(QString(":/%1/18/information.png").arg(icon_set))));
+  m_pull_down->setIcon
+     (QIcon::fromTheme("go-down",
+		       QIcon(QString(":/%1/18/pulldown.png").arg(icon_set))));
 }
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
@@ -406,10 +422,14 @@ void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 
       if(state)
 	m_favorite->setIcon
-	  (QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+	  (QIcon::fromTheme("emblem-favorite",
+			    QIcon(QString(":/%1/18/bookmarked.png").
+				  arg(icon_set))));
       else
 	m_favorite->setIcon
-	  (QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+	  (QIcon::fromTheme("user-bookmarks",
+			    QIcon(QString(":/%1/18/bookmark.png").
+				  arg(icon_set))));
     }
 }
 
@@ -417,7 +437,9 @@ void dooble_address_widget::slot_favorites_cleared(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+  m_favorite->setIcon
+    (QIcon::fromTheme("user-bookmarks",
+		      QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
 }
 
 void dooble_address_widget::slot_favorites_populated(void)
@@ -507,9 +529,14 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble::s_history->is_favorite(m_view->url()))
-    m_favorite->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
+    m_favorite->setIcon
+      (QIcon::fromTheme("emblem-favorite",
+			QIcon(QString(":/%1/18/bookmarked.png").
+			      arg(icon_set))));
   else
-    m_favorite->setIcon(QIcon(QString(":/%1/18/bookmark.png").arg(icon_set)));
+    m_favorite->setIcon
+      (QIcon::fromTheme("user-bookmarks",
+			QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
 
   prepare_containers_for_url(m_view->url());
 }
