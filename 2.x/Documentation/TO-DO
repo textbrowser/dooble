@@ -27,6 +27,7 @@ Completed Items
 - Cookies Window - Toggle Shown.
 - Cookies menu item within Tools.
 - Creating new tabs and windows requires sophistication.
+- Custom icon sets. Icons from themes.
 - Debian distribution.
 - Delete temporary parent cookie domains having zero children.
 - Depict current tab on tabs pull-down menu.
@@ -152,7 +153,6 @@ Unknown Items
 
 - Certificate information. Requires a WebEngine interface.
 - Cookies are not always deleted properly.
-- Custom icon sets.
 - DTLS and Echo-DNS.
 - Element-selection option.
 - Gopher text search.
