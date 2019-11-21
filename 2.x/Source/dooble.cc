@@ -1407,7 +1407,7 @@ void dooble::prepare_standard_menus(void)
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
-      (QIcon::fromTheme("emblem-system",
+      (QIcon::fromTheme("preferences-system",
 			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
        tr("Settin&gs"),
        this,
@@ -1415,7 +1415,7 @@ void dooble::prepare_standard_menus(void)
        QKeySequence(tr("Ctrl+G")));
   else
     m_settings_action = menu->addAction
-      (QIcon::fromTheme("emblem-system",
+      (QIcon::fromTheme("preferences-system",
 			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
        tr("Settin&gs..."),
        this,
@@ -1429,15 +1429,21 @@ void dooble::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
-		    tr("Accepted / &Blocked Domains"),
-		    this,
-		    SLOT(slot_show_accepted_or_blocked_domains(void)));
+    menu->addAction
+      (QIcon::fromTheme("process-stop",
+			QIcon(QString(":/%1/36/blocked_domains.png").
+			      arg(icon_set))),
+       tr("Accepted / &Blocked Domains"),
+       this,
+       SLOT(slot_show_accepted_or_blocked_domains(void)));
   else
-    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
-		    tr("Accepted / &Blocked Domains..."),
-		    this,
-		    SLOT(slot_show_accepted_or_blocked_domains(void)));
+    menu->addAction
+      (QIcon::fromTheme("process-stop",
+			QIcon(QString(":/%1/36/blocked_domains.png").
+			      arg(icon_set))),
+       tr("Accepted / &Blocked Domains..."),
+       this,
+       SLOT(slot_show_accepted_or_blocked_domains(void)));
 
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
@@ -1552,7 +1558,9 @@ void dooble::prepare_tab_icons(void)
 
       if(main_window == s_accepted_or_blocked_domains)
 	m_ui.tab->setTabIcon
-	  (i, QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)));
+	  (i, QIcon::fromTheme("process-blocked",
+			       QIcon(QString(":/%1/36/blocked_domains.png").
+				     arg(icon_set))));
       else if(main_window == s_downloads)
 	m_ui.tab->setTabIcon
 	  (i, QIcon::fromTheme("emblem-downloads",
@@ -1563,7 +1571,7 @@ void dooble::prepare_tab_icons(void)
 	  (i, QIcon(QString(":/%1/36/history.png").arg(icon_set)));
       else if(main_window == s_settings)
 	m_ui.tab->setTabIcon
-	  (i, QIcon::fromTheme("emblem-system",
+	  (i, QIcon::fromTheme("preferences-system",
 			       QIcon(QString(":/%1/36/settings.png").
 				     arg(icon_set))));
     }

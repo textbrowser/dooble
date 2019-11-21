@@ -113,7 +113,8 @@ void dooble_search_engines_popup::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.delete_selected->setIcon
-    (QIcon(QString(":/%1/36/delete.png").arg(icon_set)));
+    (QIcon::fromTheme("edit-delete",
+		      QIcon(QString(":/%1/36/delete.png").arg(icon_set))));
 }
 
 void dooble_search_engines_popup::prepare_viewport_icons(void)

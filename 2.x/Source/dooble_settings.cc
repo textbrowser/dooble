@@ -750,12 +750,22 @@ void dooble_settings::prepare_icons(void)
 {
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.cache->setIcon(QIcon(QString(":/%1/64/cache.png").arg(icon_set)));
-  m_ui.display->setIcon(QIcon(QString(":/%1/64/display.png").arg(icon_set)));
+  m_ui.cache->setIcon
+    (QIcon::fromTheme("drive-harddisk",
+		      QIcon(QString(":/%1/64/cache.png").arg(icon_set))));
+  m_ui.display->setIcon
+    (QIcon::fromTheme("video-display",
+		      QIcon(QString(":/%1/64/display.png").arg(icon_set))));
   m_ui.history->setIcon(QIcon(QString(":/%1/64/history.png").arg(icon_set)));
-  m_ui.privacy->setIcon(QIcon(QString(":/%1/64/privacy.png").arg(icon_set)));
-  m_ui.web->setIcon(QIcon(QString(":/%1/64/webengine.png").arg(icon_set)));
-  m_ui.windows->setIcon(QIcon(QString(":/%1/64/windows.png").arg(icon_set)));
+  m_ui.privacy->setIcon
+    (QIcon::fromTheme("dialog-password",
+		      QIcon(QString(":/%1/64/privacy.png").arg(icon_set))));
+  m_ui.web->setIcon
+    (QIcon::fromTheme("applications-internet",
+		      QIcon(QString(":/%1/64/webengine.png").arg(icon_set))));
+  m_ui.windows->setIcon
+    (QIcon::fromTheme("preferences-desktop",
+		      QIcon(QString(":/%1/64/windows.png").arg(icon_set))));
 
   QSize size(0, 0);
   static QList<QToolButton *> list(QList<QToolButton *> () << m_ui.cache

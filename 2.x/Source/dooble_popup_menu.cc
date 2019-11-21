@@ -116,24 +116,39 @@ void dooble_popup_menu::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.authenticate->setIcon
-    (QIcon(QString(":/%1/48/authenticate.png").arg(icon_set)));
+    (QIcon::fromTheme("dialog-password",
+		      QIcon(QString(":/%1/48/authenticate.png").
+			    arg(icon_set))));
   m_ui.blocked_domains->setIcon
-    (QIcon(QString(":/%1/48/blocked_domains.png").arg(icon_set)));
+    (QIcon::fromTheme("process-stop",
+		      QIcon(QString(":/%1/48/blocked_domains.png").
+			    arg(icon_set))));
   m_ui.clear_items->setIcon
-    (QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)));
+    (QIcon::fromTheme("user-trash",
+		      QIcon(QString(":/%1/48/clear_items.png").arg(icon_set))));
   m_ui.cookies->setIcon
     (QIcon(QString(":/%1/48/cookies.png").arg(icon_set)));
   m_ui.exit_dooble->setIcon
-    (QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)));
+    (QIcon::fromTheme("application-exit",
+		      QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set))));
   m_ui.history->setIcon(QIcon(QString(":/%1/48/history.png").arg(icon_set)));
   m_ui.new_private_window->setIcon
     (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)));
-  m_ui.new_tab->setIcon(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)));
+  m_ui.new_tab->setIcon
+    (QIcon::fromTheme("folder-new",
+		      QIcon(QString(":/%1/48/new_tab.png").arg(icon_set))));
   m_ui.new_window->setIcon
-    (QIcon(QString(":/%1/48/new_window.png").arg(icon_set)));
-  m_ui.print->setIcon(QIcon(QString(":/%1/48/print.png").arg(icon_set)));
-  m_ui.save_page->setIcon(QIcon(QString(":/%1/48/save.png").arg(icon_set)));
-  m_ui.settings->setIcon(QIcon(QString(":/%1/48/settings.png").arg(icon_set)));
+    (QIcon::fromTheme("window-new",
+		      QIcon(QString(":/%1/48/new_window.png").arg(icon_set))));
+  m_ui.print->setIcon
+    (QIcon::fromTheme("document-print",
+		      QIcon(QString(":/%1/48/print.png").arg(icon_set))));
+  m_ui.save_page->setIcon
+    (QIcon::fromTheme("document-save",
+		      QIcon(QString(":/%1/48/save.png").arg(icon_set))));
+  m_ui.settings->setIcon
+    (QIcon::fromTheme("preferences-system",
+		      QIcon(QString(":/%1/48/settings.png").arg(icon_set))));
 
   int preferred_height = 50;
   int preferred_width = 50;
