@@ -1333,7 +1333,8 @@ void dooble::prepare_standard_menus(void)
 
   menu = m_menu->addMenu(tr("&File"));
   m_authentication_action = menu->addAction
-    (QIcon(QString(":/%1/36/authenticate.png").arg(icon_set)),
+    (QIcon::fromTheme("dialog-password",
+		      QIcon(QString(":/%1/36/authenticate.png").arg(icon_set))),
      tr("&Authenticate..."),
      this,
      SLOT(slot_authenticate(void)));
@@ -1350,12 +1351,16 @@ void dooble::prepare_standard_menus(void)
      tr("New P&rivate Window..."),
      this,
      SLOT(slot_new_private_window(void)));
-  menu->addAction(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)),
+  menu->addAction(QIcon::fromTheme("folder-new",
+				   QIcon(QString(":/%1/48/new_tab.png").
+					 arg(icon_set))),
 		  tr("New &Tab"),
 		  this,
 		  SLOT(slot_new_tab(void)),
 		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction(QIcon(QString(":/%1/48/new_window.png").arg(icon_set)),
+  menu->addAction(QIcon::fromTheme("window-new",
+				   QIcon(QString(":/%1/48/new_window.png").
+					 arg(icon_set))),
 		  tr("&New Window..."),
 		  this,
 		  SLOT(slot_new_window(void)),
@@ -1377,7 +1382,9 @@ void dooble::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  menu->addAction(QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)),
+  menu->addAction(QIcon::fromTheme("application-exit",
+				   QIcon(QString(":/%1/48/exit_dooble.png").
+					 arg(icon_set))),
 		  tr("E&xit Dooble"),
 		  this,
 		  SLOT(slot_quit_dooble(void)),
@@ -1388,7 +1395,9 @@ void dooble::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&Edit"));
-  menu->addAction(QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)),
+  menu->addAction(QIcon::fromTheme("edit-clear",
+				   QIcon(QString(":/%1/48/clear_items.png").
+					 arg(icon_set))),
 		  tr("&Clear Items..."),
 		  this,
 		  SLOT(slot_show_clear_items(void)));
@@ -1398,14 +1407,16 @@ void dooble::prepare_standard_menus(void)
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
+      (QIcon::fromTheme("emblem-system",
+			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
        tr("Settin&gs"),
        this,
        SLOT(slot_show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
   else
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
+      (QIcon::fromTheme("emblem-system",
+			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
        tr("Settin&gs..."),
        this,
        SLOT(slot_show_settings(void)),
@@ -1438,19 +1449,25 @@ void dooble::prepare_standard_menus(void)
 		  QKeySequence(tr("Ctrl+K")));
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
-    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
+    menu->addAction(QIcon::fromTheme("emblem-downloads",
+				     QIcon(QString(":/%1/36/downloads.png").
+					   arg(icon_set))),
 		    tr("&Downloads"),
 		    this,
 		    SLOT(slot_show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
   else
-    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
+    menu->addAction(QIcon::fromTheme("emblem-downloads",
+				     QIcon(QString(":/%1/36/downloads.png").
+					   arg(icon_set))),
 		    tr("&Downloads..."),
 		    this,
 		    SLOT(slot_show_downloads(void)),
 		    QKeySequence(tr("Ctrl+D")));
 
-  menu->addAction(QIcon(QString(":/%1/36/favorites.png").arg(icon_set)),
+  menu->addAction(QIcon::fromTheme("emblem-favorite",
+				   QIcon(QString(":/%1/36/favorites.png").
+					 arg(icon_set))),
 		  tr("&Favorites..."),
 		  this,
 		  SLOT(slot_show_favorites(void)),
@@ -1538,13 +1555,17 @@ void dooble::prepare_tab_icons(void)
 	  (i, QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)));
       else if(main_window == s_downloads)
 	m_ui.tab->setTabIcon
-	  (i, QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+	  (i, QIcon::fromTheme("emblem-downloads",
+			       QIcon(QString(":/%1/36/downloads.png").
+				     arg(icon_set))));
       else if(main_window == s_history_window)
 	m_ui.tab->setTabIcon
 	  (i, QIcon(QString(":/%1/36/history.png").arg(icon_set)));
       else if(main_window == s_settings)
 	m_ui.tab->setTabIcon
-	  (i, QIcon(QString(":/%1/36/settings.png").arg(icon_set)));
+	  (i, QIcon::fromTheme("emblem-system",
+			       QIcon(QString(":/%1/36/settings.png").
+				     arg(icon_set))));
     }
 }
 
