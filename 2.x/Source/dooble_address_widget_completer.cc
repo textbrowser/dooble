@@ -50,16 +50,6 @@ protected:
 	     const QStyleOptionViewItem &option,
 	     const QModelIndex &index) const
   {
-    if(option.state & QStyle::State_MouseOver)
-      {
-	QBrush backgroundBrush(QColor("#cfd8dc"));
-	QRect rect(option.rect);
-
-	painter->save();
-	painter->fillRect(rect, backgroundBrush);
-	painter->restore();
-      }
-
     QStyledItemDelegate::paint(painter, option, index);
   }
 };
