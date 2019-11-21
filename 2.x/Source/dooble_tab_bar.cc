@@ -227,15 +227,14 @@ void dooble_tab_bar::prepare_icons(void)
 
 void dooble_tab_bar::prepare_style_sheets(void)
 {
-  QList<QToolButton *> list;
-
-  list << m_next_tool_button << m_previous_tool_button;
-
   if(dooble::s_application->style_name() == "fusion")
     {
+      QList<QToolButton *> list;
       QString theme_color(dooble_settings::setting("theme_color").toString());
       static QColor s_background_color
 	(QWidget::palette().color(QWidget::backgroundRole()));
+
+      list << m_next_tool_button << m_previous_tool_button;
 
       if(theme_color == "default")
 	{
@@ -314,20 +313,9 @@ void dooble_tab_bar::prepare_style_sheets(void)
 	       "QToolButton::menu-button {border: none;}").
        arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
   else
-    {
-      foreach(QToolButton *tool_button, list)
-	tool_button->setStyleSheet
-	(QString("QToolButton {background-color: %1;"
-		 "margin-bottom: 1px;"
-		 "margin-top: 1px;"
-		 "}"
-		 "QToolButton::menu-button {border: none;}").
-	 arg(QWidget::palette().color(QWidget::backgroundRole()).name()));
-
-      setStyleSheet
-	("QTabBar::scroller {height: 0px; margin-left: 0.09em; width: 0px;}"
-	 "QTabBar::tear {border: none; image: none; width: 0px;}");
-    }
+    setStyleSheet
+      ("QTabBar::scroller {height: 0px; margin-left: 0.09em; width: 0px;}"
+       "QTabBar::tear {border: none; image: none; width: 0px;}");
 }
 
 void dooble_tab_bar::set_corner_widget(QWidget *widget)
