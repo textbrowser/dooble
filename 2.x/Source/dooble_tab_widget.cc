@@ -243,11 +243,13 @@ void dooble_tab_widget::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   m_add_tab_tool_button->setIcon
-    (QIcon(QString(":/%1/18/add.png").arg(icon_set)));
+    (QIcon::fromTheme("list-add",
+		      QIcon(QString(":/%1/18/add.png").arg(icon_set))));
   m_private_tool_button->setIcon
     (QIcon(QString(":/%1/18/private.png").arg(icon_set)));
   m_tabs_menu_button->setIcon
-    (QIcon(QString(":/%1/18/pulldown.png").arg(icon_set)));
+    (QIcon::fromTheme("go-down",
+		      QIcon(QString(":/%1/18/pulldown.png").arg(icon_set))));
 }
 
 void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
