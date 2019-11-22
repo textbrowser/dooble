@@ -576,11 +576,11 @@ void dooble_page::prepare_icons(void)
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))));
   else
     m_ui.downloads->setIcon
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads_active.png").
 			      arg(icon_set))));
 
@@ -598,11 +598,14 @@ void dooble_page::prepare_icons(void)
     (QIcon::fromTheme("go-next",
 		      QIcon(QString(":/%1/36/forward.png").arg(icon_set))));
   m_ui.is_private->setPixmap
-    (QIcon(QString(":/%1/18/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
+    (QIcon::fromTheme("view-private",
+		      QIcon(QString(":/%1/18/private.png").
+			    arg(icon_set))).pixmap(QSize(16, 16)));
   m_ui.close_javascript_popup_exception_frame->setIcon
     (QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
   m_ui.menu->setIcon
-    (QIcon(QString(":/%1/36/menu.png").arg(icon_set)));
+    (QIcon::fromTheme("application-menu",
+		      QIcon(QString(":/%1/36/menu.png").arg(icon_set))));
   m_ui.reload->setIcon
     (QIcon::fromTheme("view-refresh",
 		      QIcon(QString(":/%1/36/reload.png").arg(icon_set))));
@@ -664,7 +667,9 @@ void dooble_page::prepare_standard_menus(void)
 
   menu->addSeparator();
   menu->addAction
-    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)),
+    (QIcon::fromTheme("view-private",
+		      QIcon(QString(":/%1/48/new_private_window.png").
+			    arg(icon_set))),
      tr("New P&rivate Window..."),
      this,
      SIGNAL(new_private_window(void)));
@@ -795,15 +800,17 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SIGNAL(show_certificate_exceptions(void)));
-  menu->addAction(QIcon(QString(":/%1/48/cookies.png").arg(icon_set)),
-		  tr("Coo&kies..."),
-		  this,
-		  SIGNAL(show_cookies(void)),
-		  QKeySequence(tr("Ctrl+K")));
+  menu->addAction
+    (QIcon::fromTheme("preferences-web-browser-cookies",
+		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
+     tr("Coo&kies..."),
+     this,
+     SIGNAL(show_cookies(void)),
+     QKeySequence(tr("Ctrl+K")));
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
     menu->addAction
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))),
        tr("&Downloads"),
        this,
@@ -811,7 +818,7 @@ void dooble_page::prepare_standard_menus(void)
        QKeySequence(tr("Ctrl+D")));
   else
     menu->addAction
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))),
        tr("&Downloads..."),
        this,
@@ -830,17 +837,21 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_floating_digital_clock(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
-    menu->addAction(QIcon(QString(":/%1/36/history.png").arg(icon_set)),
-		    tr("&History"),
-		    this,
-		    SIGNAL(show_history(void)),
-		    QKeySequence(tr("Ctrl+H")));
+    menu->addAction
+      (QIcon::fromTheme("deep-history",
+			QIcon(QString(":/%1/36/history.png").arg(icon_set))),
+       tr("&History"),
+       this,
+       SIGNAL(show_history(void)),
+       QKeySequence(tr("Ctrl+H")));
   else
-    menu->addAction(QIcon(QString(":/%1/36/history.png").arg(icon_set)),
-		    tr("&History..."),
-		    this,
-		    SIGNAL(show_history(void)),
-		    QKeySequence(tr("Ctrl+H")));
+    menu->addAction
+      (QIcon::fromTheme("deep-history",
+			QIcon(QString(":/%1/36/history.png").arg(icon_set))),
+       tr("&History..."),
+       this,
+       SIGNAL(show_history(void)),
+       QKeySequence(tr("Ctrl+H")));
 
   menu->addAction(tr("&Search Engines"),
 		  this,
@@ -1323,11 +1334,11 @@ void dooble_page::slot_downloads_finished(void)
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))));
   else
     m_ui.downloads->setIcon
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads_active.png").
 			      arg(icon_set))));
 }
@@ -1338,11 +1349,11 @@ void dooble_page::slot_downloads_started(void)
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))));
   else
     m_ui.downloads->setIcon
-      (QIcon::fromTheme("emblem-downloads",
+      (QIcon::fromTheme("folder-download",
 			QIcon(QString(":/%1/36/downloads_active.png").
 			      arg(icon_set))));
 }

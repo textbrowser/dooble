@@ -513,7 +513,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
 
   QAction *open_as_new_private_window_action = menu.addAction
-    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)),
+    (QIcon::fromTheme("view-private",
+		      QIcon(QString(":/%1/48/new_private_window.png").
+			    arg(icon_set))),
      tr("Open as New P&rivate Window..."),
      this,
      SLOT(slot_open_tab_as_new_private_window(void)));

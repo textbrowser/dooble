@@ -127,13 +127,18 @@ void dooble_popup_menu::prepare_icons(void)
     (QIcon::fromTheme("user-trash",
 		      QIcon(QString(":/%1/48/clear_items.png").arg(icon_set))));
   m_ui.cookies->setIcon
-    (QIcon(QString(":/%1/48/cookies.png").arg(icon_set)));
+    (QIcon::fromTheme("preferences-web-browser-cookies",
+		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))));
   m_ui.exit_dooble->setIcon
     (QIcon::fromTheme("application-exit",
 		      QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set))));
-  m_ui.history->setIcon(QIcon(QString(":/%1/48/history.png").arg(icon_set)));
+  m_ui.history->setIcon
+    (QIcon::fromTheme("deep-history",
+		      QIcon(QString(":/%1/48/history.png").arg(icon_set))));
   m_ui.new_private_window->setIcon
-    (QIcon(QString(":/%1/48/new_private_window.png").arg(icon_set)));
+    (QIcon::fromTheme("view-private",
+		      QIcon(QString(":/%1/48/new_private_window.png").
+			    arg(icon_set))));
   m_ui.new_tab->setIcon
     (QIcon::fromTheme("folder-new",
 		      QIcon(QString(":/%1/48/new_tab.png").arg(icon_set))));

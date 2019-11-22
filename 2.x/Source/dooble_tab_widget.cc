@@ -246,7 +246,8 @@ void dooble_tab_widget::prepare_icons(void)
     (QIcon::fromTheme("list-add",
 		      QIcon(QString(":/%1/18/add.png").arg(icon_set))));
   m_private_tool_button->setIcon
-    (QIcon(QString(":/%1/18/private.png").arg(icon_set)));
+    (QIcon::fromTheme("view-private",
+		      QIcon(QString(":/%1/18/private.png").arg(icon_set))));
   m_tabs_menu_button->setIcon
     (QIcon::fromTheme("go-down",
 		      QIcon(QString(":/%1/18/pulldown.png").arg(icon_set))));

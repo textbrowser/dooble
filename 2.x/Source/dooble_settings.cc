@@ -756,7 +756,9 @@ void dooble_settings::prepare_icons(void)
   m_ui.display->setIcon
     (QIcon::fromTheme("video-display",
 		      QIcon(QString(":/%1/64/display.png").arg(icon_set))));
-  m_ui.history->setIcon(QIcon(QString(":/%1/64/history.png").arg(icon_set)));
+  m_ui.history->setIcon
+    (QIcon::fromTheme("deep-history",
+		      QIcon(QString(":/%1/64/history.png").arg(icon_set))));
   m_ui.privacy->setIcon
     (QIcon::fromTheme("dialog-password",
 		      QIcon(QString(":/%1/64/privacy.png").arg(icon_set))));

@@ -64,7 +64,8 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   label->setPixmap
-    (QIcon(QString(":/%1/18/private.png").arg(icon_set)).
+    (QIcon::fromTheme("view-private",
+		      QIcon(QString(":/%1/18/private.png").arg(icon_set))).
      pixmap(QSize(16, 16)));
   label->setToolTip
     (tr("<html>Private cookies exist within "
