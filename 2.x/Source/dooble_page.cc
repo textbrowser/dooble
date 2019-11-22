@@ -557,36 +557,55 @@ void dooble_page::prepare_icons(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   if(m_find_action)
-    m_find_action->setIcon(QIcon(QString(":/%1/18/find.png").arg(icon_set)));
+    m_find_action->setIcon
+      (QIcon::fromTheme("edit-find",
+			QIcon(QString(":/%1/18/find.png").arg(icon_set))));
 
   if(m_settings_action)
     m_settings_action->setIcon
-      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)));
+      (QIcon::fromTheme("preferences-system",
+			QIcon(QString(":/%1/18/settings.png").arg(icon_set))));
 
   m_ui.accepted_or_blocked->setIcon
-    (QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)));
-  m_ui.backward->setIcon(QIcon(QString(":/%1/36/backward.png").arg(icon_set)));
+    (QIcon::fromTheme("process-stop",
+		      QIcon(QString(":/%1/36/blocked_domains.png").
+			    arg(icon_set))));
+  m_ui.backward->setIcon
+    (QIcon::fromTheme("go-previous",
+		      QIcon(QString(":/%1/36/backward.png").arg(icon_set))));
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
-      (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))));
   else
     m_ui.downloads->setIcon
-      (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads_active.png").
+			      arg(icon_set))));
 
   m_ui.favorites->setIcon
-    (QIcon(QString(":/%1/36/favorites.png").arg(icon_set)));
-  m_ui.find_next->setIcon(QIcon(QString(":/%1/20/next.png").arg(icon_set)));
+    (QIcon::fromTheme("emblem-favorite",
+		      QIcon(QString(":/%1/36/favorites.png").arg(icon_set))));
+  m_ui.find_next->setIcon
+    (QIcon::fromTheme("go-next",
+		      QIcon(QString(":/%1/20/next.png").arg(icon_set))));
   m_ui.find_previous->setIcon
-    (QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
+    (QIcon::fromTheme("go-previous",
+		      QIcon(QString(":/%1/20/previous.png").arg(icon_set))));
   m_ui.find_stop->setIcon(QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
-  m_ui.forward->setIcon(QIcon(QString(":/%1/36/forward.png").arg(icon_set)));
+  m_ui.forward->setIcon
+    (QIcon::fromTheme("go-next",
+		      QIcon(QString(":/%1/36/forward.png").arg(icon_set))));
   m_ui.is_private->setPixmap
     (QIcon(QString(":/%1/18/private.png").arg(icon_set)).pixmap(QSize(16, 16)));
   m_ui.close_javascript_popup_exception_frame->setIcon
     (QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
-  m_ui.menu->setIcon(QIcon(QString(":/%1/36/menu.png").arg(icon_set)));
-  m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
+  m_ui.menu->setIcon
+    (QIcon(QString(":/%1/36/menu.png").arg(icon_set)));
+  m_ui.reload->setIcon
+    (QIcon::fromTheme("view-refresh",
+		      QIcon(QString(":/%1/36/reload.png").arg(icon_set))));
 }
 
 void dooble_page::prepare_shortcuts(void)
@@ -631,7 +650,8 @@ void dooble_page::prepare_standard_menus(void)
 
   menu = m_menu->addMenu(tr("&File"));
   m_authentication_action = menu->addAction
-    (QIcon(QString(":/%1/36/authenticate.png").arg(icon_set)),
+    (QIcon::fromTheme("dialog-password",
+		      QIcon(QString(":/%1/36/authenticate.png").arg(icon_set))),
      tr("&Authenticate..."),
      this,
      SIGNAL(authenticate(void)));
@@ -648,16 +668,20 @@ void dooble_page::prepare_standard_menus(void)
      tr("New P&rivate Window..."),
      this,
      SIGNAL(new_private_window(void)));
-  menu->addAction(QIcon(QString(":/%1/48/new_tab.png").arg(icon_set)),
-		  tr("New &Tab"),
-		  this,
-		  SIGNAL(new_tab(void)),
-		  QKeySequence(tr("Ctrl+T")));
-  menu->addAction(QIcon(QString(":/%1/48/new_window.png").arg(icon_set)),
-		  tr("&New Window..."),
-		  this,
-		  SIGNAL(new_window(void)),
-		  QKeySequence(tr("Ctrl+N")));
+  menu->addAction
+    (QIcon::fromTheme("folder-new",
+		      QIcon(QString(":/%1/48/new_tab.png").arg(icon_set))),
+     tr("New &Tab"),
+     this,
+     SIGNAL(new_tab(void)),
+     QKeySequence(tr("Ctrl+T")));
+  menu->addAction
+    (QIcon::fromTheme("window-new",
+		      QIcon(QString(":/%1/48/new_window.png").arg(icon_set))),
+     tr("&New Window..."),
+     this,
+     SIGNAL(new_window(void)),
+     QKeySequence(tr("Ctrl+N")));
   menu->addAction(tr("Open UR&L"),
 		  this,
 		  SLOT(slot_open_link(void)),
@@ -679,41 +703,50 @@ void dooble_page::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  menu->addAction(QIcon(QString(":/%1/48/save.png").arg(icon_set)),
-		  tr("&Save"),
-		  this,
-		  SIGNAL(save(void)),
-		  QKeySequence(tr("Ctrl+S")));
+  menu->addAction
+    (QIcon::fromTheme("document-save",
+		      QIcon(QString(":/%1/48/save.png").arg(icon_set))),
+     tr("&Save"),
+     this,
+     SIGNAL(save(void)),
+     QKeySequence(tr("Ctrl+S")));
   menu->addSeparator();
-  menu->addAction(QIcon(QString(":/%1/48/print.png").arg(icon_set)),
-		  tr("&Print..."),
-		  this,
-		  SIGNAL(print(void)),
-		  QKeySequence(tr("Ctrl+P")));
+  menu->addAction
+    (QIcon::fromTheme("document-print",
+		      QIcon(QString(":/%1/48/print.png").arg(icon_set))),
+     tr("&Print..."),
+     this,
+     SIGNAL(print(void)),
+     QKeySequence(tr("Ctrl+P")));
   menu->addAction(tr("Print Pre&view..."),
 		  this,
 		  SIGNAL(print_preview(void)))->setEnabled(false);
   menu->addSeparator();
-  menu->addAction(QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set)),
-		  tr("E&xit Dooble"),
-		  this,
-		  SIGNAL(quit_dooble(void)),
-		  QKeySequence(tr("Ctrl+Q")));
+  menu->addAction
+    (QIcon::fromTheme("application-exit",
+		      QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set))),
+     tr("E&xit Dooble"),
+     this,
+     SIGNAL(quit_dooble(void)),
+     QKeySequence(tr("Ctrl+Q")));
 
   /*
   ** Edit Menu
   */
 
   menu = m_menu->addMenu(tr("&Edit"));
-  menu->addAction(QIcon(QString(":/%1/48/clear_items.png").arg(icon_set)),
-		  tr("&Clear Items..."),
-		  this,
-		  SIGNAL(show_clear_items(void)));
+  menu->addAction
+    (QIcon::fromTheme("edit-clear",
+		      QIcon(QString(":/%1/48/clear_items.png").arg(icon_set))),
+     tr("&Clear Items..."),
+     this,
+     SIGNAL(show_clear_items(void)));
   menu->addAction(tr("Clear &Visited Links"),
 		  this,
 		  SLOT(slot_clear_visited_links(void)));
   m_find_action = menu->addAction
-    (QIcon(QString(":/%1/18/find.png").arg(icon_set)),
+    (QIcon::fromTheme("edit-find",
+		      QIcon(QString(":/%1/18/find.png").arg(icon_set))),
      tr("&Find"),
      this,
      SLOT(slot_show_find(void)),
@@ -721,14 +754,16 @@ void dooble_page::prepare_standard_menus(void)
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
+      (QIcon::fromTheme("preferences-system",
+			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
        tr("Settin&gs"),
        this,
        SIGNAL(show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
   else
     m_settings_action = menu->addAction
-      (QIcon(QString(":/%1/18/settings.png").arg(icon_set)),
+      (QIcon::fromTheme("preferences-system",
+			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
        tr("Settin&gs..."),
        this,
        SIGNAL(show_settings(void)),
@@ -741,15 +776,21 @@ void dooble_page::prepare_standard_menus(void)
   menu = m_menu->addMenu(tr("&Tools"));
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
-		    tr("Accepted / &Blocked Domains"),
-		    this,
-		    SIGNAL(show_accepted_or_blocked_domains(void)));
+    menu->addAction
+      (QIcon::fromTheme("process-stop",
+			QIcon(QString(":/%1/36/blocked_domains.png").
+			      arg(icon_set))),
+       tr("Accepted / &Blocked Domains"),
+       this,
+       SIGNAL(show_accepted_or_blocked_domains(void)));
   else
-    menu->addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
-		    tr("Accepted / &Blocked Domains..."),
-		    this,
-		    SIGNAL(show_accepted_or_blocked_domains(void)));
+    menu->addAction
+      (QIcon::fromTheme("process-stop",
+			QIcon(QString(":/%1/36/blocked_domains.png").
+			      arg(icon_set))),
+       tr("Accepted / &Blocked Domains..."),
+       this,
+       SIGNAL(show_accepted_or_blocked_domains(void)));
 
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
@@ -761,23 +802,29 @@ void dooble_page::prepare_standard_menus(void)
 		  QKeySequence(tr("Ctrl+K")));
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
-    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
-		    tr("&Downloads"),
-		    this,
-		    SIGNAL(show_downloads(void)),
-		    QKeySequence(tr("Ctrl+D")));
+    menu->addAction
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))),
+       tr("&Downloads"),
+       this,
+       SIGNAL(show_downloads(void)),
+       QKeySequence(tr("Ctrl+D")));
   else
-    menu->addAction(QIcon(QString(":/%1/36/downloads.png").arg(icon_set)),
-		    tr("&Downloads..."),
-		    this,
-		    SIGNAL(show_downloads(void)),
-		    QKeySequence(tr("Ctrl+D")));
+    menu->addAction
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))),
+       tr("&Downloads..."),
+       this,
+       SIGNAL(show_downloads(void)),
+       QKeySequence(tr("Ctrl+D")));
 
-  menu->addAction(QIcon(QString(":/%1/36/favorites.png").arg(icon_set)),
-		  tr("&Favorites..."),
-		  this,
-		  SIGNAL(show_favorites(void)),
-		  QKeySequence(tr("Ctrl+B")));
+  menu->addAction
+    (QIcon::fromTheme("emblem-favorite",
+		      QIcon(QString(":/%1/36/favorites.png").arg(icon_set))),
+     tr("&Favorites..."),
+     this,
+     SIGNAL(show_favorites(void)),
+     QKeySequence(tr("Ctrl+B")));
   menu->addAction(tr("Floating Digital &Clock"),
 		  this,
 		  SIGNAL(show_floating_digital_clock(void)));
@@ -1134,15 +1181,21 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
-    menu.addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
-		   tr("Show Accepted / Blocked Domains preferences."),
-		   this,
-		   SIGNAL(show_accepted_or_blocked_domains(void)));
+    menu.addAction
+      (QIcon::fromTheme("process-stop",
+			QIcon(QString(":/%1/36/blocked_domains.png").
+			      arg(icon_set))),
+       tr("Show Accepted / Blocked Domains preferences."),
+       this,
+       SIGNAL(show_accepted_or_blocked_domains(void)));
   else
-    menu.addAction(QIcon(QString(":/%1/36/blocked_domains.png").arg(icon_set)),
-		   tr("Show Accepted / Blocked Domains preferences..."),
-		   this,
-		   SIGNAL(show_accepted_or_blocked_domains(void)));
+    menu.addAction
+      (QIcon::fromTheme("process-stop",
+			QIcon(QString(":/%1/36/blocked_domains.png").
+			      arg(icon_set))),
+       tr("Show Accepted / Blocked Domains preferences..."),
+       this,
+       SIGNAL(show_accepted_or_blocked_domains(void)));
 
   menu.exec(m_ui.accepted_or_blocked->
 	    mapToGlobal(m_ui.accepted_or_blocked->rect().bottomLeft()));
@@ -1270,10 +1323,13 @@ void dooble_page::slot_downloads_finished(void)
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
-      (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))));
   else
     m_ui.downloads->setIcon
-      (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads_active.png").
+			      arg(icon_set))));
 }
 
 void dooble_page::slot_downloads_started(void)
@@ -1282,10 +1338,13 @@ void dooble_page::slot_downloads_started(void)
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
-      (QIcon(QString(":/%1/36/downloads.png").arg(icon_set)));
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))));
   else
     m_ui.downloads->setIcon
-      (QIcon(QString(":/%1/36/downloads_active.png").arg(icon_set)));
+      (QIcon::fromTheme("emblem-downloads",
+			QIcon(QString(":/%1/36/downloads_active.png").
+			      arg(icon_set))));
 }
 
 void dooble_page::slot_escape(void)
@@ -1664,7 +1723,9 @@ void dooble_page::slot_load_finished(bool ok)
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.reload->setIcon(QIcon(QString(":/%1/36/reload.png").arg(icon_set)));
+  m_ui.reload->setIcon
+    (QIcon::fromTheme("view-refresh",
+		      QIcon(QString(":/%1/36/reload.png").arg(icon_set))));
   m_ui.reload->setToolTip(tr("Reload"));
   emit iconChanged(icon());
   emit titleChanged(title());
@@ -1739,7 +1800,8 @@ void dooble_page::slot_load_started(void)
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
-  m_ui.reload->setIcon(QIcon(QString(":/%1/36/stop.png").arg(icon_set)));
+  m_ui.reload->setIcon
+    (QIcon(QString(":/%1/36/stop.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Stop Page Load"));
 }
 

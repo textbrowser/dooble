@@ -32,7 +32,7 @@
      </item>
      <item>
       <widget class="QLineEdit" name="title">
-       <property name="clearButtonEnabled">
+       <property name="clearButtonEnabled" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -49,7 +49,7 @@
      </item>
      <item>
       <widget class="QLineEdit" name="search_engine">
-       <property name="clearButtonEnabled">
+       <property name="clearButtonEnabled" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -107,7 +107,7 @@
        <property name="placeholderText">
         <string>Search Search Engines</string>
        </property>
-       <property name="clearButtonEnabled">
+       <property name="clearButtonEnabled" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -132,12 +132,6 @@
        </property>
        <property name="text">
         <string/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
        </property>
        <property name="autoRaise">
         <bool>true</bool>
