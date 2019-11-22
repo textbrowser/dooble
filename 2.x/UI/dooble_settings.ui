@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>549</height>
+           <height>542</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -355,8 +355,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>531</height>
+               <width>631</width>
+               <height>597</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -400,7 +400,7 @@
                   <property name="toolTip">
                    <string>The Home URL is not stored in an encrypted container.</string>
                   </property>
-                  <property name="clearButtonEnabled">
+                  <property name="clearButtonEnabled" stdset="0">
                    <bool>true</bool>
                   </property>
                  </widget>
@@ -412,7 +412,7 @@
                 <item>
                  <widget class="QLabel" name="label_3">
                   <property name="text">
-                   <string>&amp;Icon Set</string>
+                   <string>&amp;Icon Set Fallback</string>
                   </property>
                   <property name="buddy">
                    <cstring>icon_set</cstring>
@@ -691,7 +691,7 @@
                 </item>
                 <item>
                  <widget class="QComboBox" name="zoom_frame_location">
-                  <property name="currentText">
+                  <property name="currentText" stdset="0">
                    <string>Popup Menu</string>
                   </property>
                   <property name="currentIndex">
@@ -832,8 +832,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>667</width>
-               <height>741</height>
+               <width>643</width>
+               <height>856</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1057,7 +1057,7 @@
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
                      </property>
-                     <property name="clearButtonEnabled">
+                     <property name="clearButtonEnabled" stdset="0">
                       <bool>true</bool>
                      </property>
                     </widget>
@@ -1077,7 +1077,7 @@
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
                      </property>
-                     <property name="clearButtonEnabled">
+                     <property name="clearButtonEnabled" stdset="0">
                       <bool>true</bool>
                      </property>
                     </widget>
@@ -1260,7 +1260,7 @@
                       </item>
                       <item row="1" column="1">
                        <widget class="QLineEdit" name="proxy_user">
-                        <property name="clearButtonEnabled">
+                        <property name="clearButtonEnabled" stdset="0">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1281,7 +1281,7 @@
                       </item>
                       <item row="0" column="1">
                        <widget class="QLineEdit" name="proxy_host">
-                        <property name="clearButtonEnabled">
+                        <property name="clearButtonEnabled" stdset="0">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1298,7 +1298,7 @@
                         <property name="echoMode">
                          <enum>QLineEdit::Password</enum>
                         </property>
-                        <property name="clearButtonEnabled">
+                        <property name="clearButtonEnabled" stdset="0">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1375,8 +1375,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
-               <height>1442</height>
+               <width>631</width>
+               <height>1563</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1436,10 +1436,10 @@
                    <property name="showGrid">
                     <bool>false</bool>
                    </property>
-                   <attribute name="horizontalHeaderMinimumSectionSize">
+                   <attribute name="horizontalHeaderDefaultSectionSize">
                     <number>150</number>
                    </attribute>
-                   <attribute name="horizontalHeaderDefaultSectionSize">
+                   <attribute name="horizontalHeaderMinimumSectionSize">
                     <number>150</number>
                    </attribute>
                    <attribute name="horizontalHeaderStretchLastSection">
@@ -1722,7 +1722,7 @@
                         <property name="toolTip">
                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                         </property>
-                        <property name="clearButtonEnabled">
+                        <property name="clearButtonEnabled" stdset="0">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1759,10 +1759,10 @@
                       <property name="showGrid">
                        <bool>false</bool>
                       </property>
-                      <attribute name="horizontalHeaderMinimumSectionSize">
+                      <attribute name="horizontalHeaderDefaultSectionSize">
                        <number>150</number>
                       </attribute>
-                      <attribute name="horizontalHeaderDefaultSectionSize">
+                      <attribute name="horizontalHeaderMinimumSectionSize">
                        <number>150</number>
                       </attribute>
                       <attribute name="horizontalHeaderStretchLastSection">
@@ -1878,7 +1878,7 @@
                 </item>
                 <item>
                  <widget class="QLineEdit" name="user_agent">
-                  <property name="clearButtonEnabled">
+                  <property name="clearButtonEnabled" stdset="0">
                    <bool>true</bool>
                   </property>
                  </widget>
