@@ -59,6 +59,12 @@
      <property name="toolTip">
       <string>Pause</string>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
      <property name="autoRaise">
       <bool>true</bool>
      </property>
@@ -68,6 +74,12 @@
     <widget class="QToolButton" name="cancel">
      <property name="toolTip">
       <string>Cancel</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
      </property>
      <property name="autoRaise">
       <bool>true</bool>
