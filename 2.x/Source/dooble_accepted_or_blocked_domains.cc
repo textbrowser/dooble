@@ -30,6 +30,7 @@
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
+#include <QtConcurrent>
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
@@ -98,6 +99,12 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
 }
 
+dooble_accepted_or_blocked_domains::~dooble_accepted_or_blocked_domains()
+{
+  m_future.cancel();
+  m_future.waitForFinished();
+}
+
 bool dooble_accepted_or_blocked_domains::contains(const QString &domain) const
 {
   return m_domains.value(domain.toLower().trimmed(), 0) == 1;
@@ -107,6 +114,12 @@ bool dooble_accepted_or_blocked_domains::exception(const QUrl &url) const
 {
   return m_exceptions.value(url.host(), 0) == 1 ||
     m_exceptions.value(url.toString(), 0) == 1;
+}
+
+void dooble_accepted_or_blocked_domains::abort(void)
+{
+  m_future.cancel();
+  m_future.waitForFinished();
 }
 
 void dooble_accepted_or_blocked_domains::accept_or_block_domain
@@ -240,7 +253,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name("dooble_accepted_or_blocked_domains");
+      QString database_name(dooble_database_utilities::database_name());
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -351,7 +364,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name("dooble_accepted_or_blocked_domains");
+      QString database_name(dooble_database_utilities::database_name());
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -454,9 +467,11 @@ void dooble_accepted_or_blocked_domains::purge(void)
 {
   m_domains.clear();
   m_exceptions.clear();
+  m_future.cancel();
+  m_future.waitForFinished();
   m_ui.table->setRowCount(0);
 
-  QString database_name("dooble_accepted_or_blocked_domains");
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -487,6 +502,73 @@ void dooble_accepted_or_blocked_domains::resizeEvent(QResizeEvent *event)
   save_settings();
 }
 
+void dooble_accepted_or_blocked_domains::save
+(const QByteArray &authentication_key,
+ const QByteArray &encryption_key,
+ const QHash<QString, char> &hash)
+{
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_accepted_or_blocked_domains.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QHashIterator<QString, char> it(hash);
+	QSqlQuery query(db);
+	dooble_cryptography cryptography
+	  (authentication_key,
+	   encryption_key,
+	   dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("hash_type").toString());
+
+	query.exec("PRAGMA synchronous = OFF");
+
+	while(it.hasNext() && !m_future.isCanceled())
+	  {
+	    it.next();
+	    query.prepare
+	      ("INSERT INTO dooble_accepted_or_blocked_domains "
+	       "(domain, domain_digest, state) VALUES (?, ?, ?)");
+
+	    QByteArray data
+	      (cryptography.
+	       encrypt_then_mac(it.key().toLower().trimmed().toUtf8()));
+
+	    if(data.isEmpty())
+	      continue;
+	    else
+	      query.addBindValue(data.toBase64());
+
+	    data = cryptography.hmac(it.key().toLower().trimmed());
+
+	    if(data.isEmpty())
+	      continue;
+
+	    query.addBindValue(data.toBase64());
+	    data = cryptography.encrypt_then_mac("true");
+
+	    if(data.isEmpty())
+	      continue;
+	    else
+	      query.addBindValue(data.toBase64());
+
+	    query.exec();
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_accepted_or_blocked_domains::save_blocked_domain
 (const QString &domain, bool replace, bool state)
 {
@@ -500,7 +582,7 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name("dooble_accepted_or_blocked_domains");
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -573,7 +655,7 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name("dooble_accepted_or_blocked_domains");
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -711,7 +793,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name("dooble_accepted_or_blocked_domains");
+  QString database_name(dooble_database_utilities::database_name());
 
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -774,7 +856,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name("dooble_accepted_or_blocked_domains");
+      QString database_name(dooble_database_utilities::database_name());
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -857,7 +939,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name("dooble_accepted_or_blocked_domains");
+      QString database_name(dooble_database_utilities::database_name());
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -954,29 +1036,14 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  m_ui.table->setRowCount(0);
 	  repaint();
 	  QApplication::processEvents();
-
-	  QProgressDialog progress(this);
-
-	  progress.setCancelButtonText(tr("Interrupt"));
-	  progress.setMaximum(0);
-	  progress.setMinimum(0);
-	  progress.setStyleSheet("QWidget {background-color: white;}");
-	  progress.setWindowModality(Qt::ApplicationModal);
-	  progress.setWindowTitle(tr("Dooble: Progress"));
-	  dooble_ui_utilities::center_window_widget(this, &progress);
-	  progress.show();
-	  progress.update();
+	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	  QByteArray data(2048, 0);
-	  qint64 line = 0;
 	  qint64 rc = 0;
 
 	  while((rc = file.readLine(data.data(),
 				    static_cast<qint64> (data.length()))) >= 0)
 	    {
-	      if(progress.wasCanceled())
-		break;
-
 	      if(data.trimmed().endsWith(".invalid") ||
 		 data.trimmed().startsWith("#"))
 		continue;
@@ -985,22 +1052,31 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 					   trimmed()));
 
 	      if(!url.isEmpty() && url.isValid())
-		{
-		  if(!dooble::s_cryptography ||
-		     !dooble::s_cryptography->authenticated())
-		    m_domains[url.host()] = 1;
-		  else
-		    accept_or_block_domain(url.host(), false);
-		}
-
-	      line += 1;
-	      progress.setLabelText(tr("Line %1 processed.").arg(line));
-	      progress.update();
-	      QApplication::processEvents();
+		m_domains[url.host()] = 1;
 	    }
 
 	  file.close();
+	  QApplication::restoreOverrideCursor();
 	  populate();
+
+	  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+	    {
+	      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+	      if(m_future.isRunning())
+		{
+		  m_future.cancel();
+		  m_future.waitForFinished();
+		}
+
+	      m_future = QtConcurrent::run
+		(this,
+		 &dooble_accepted_or_blocked_domains::save,
+		 dooble::s_cryptography->keys().first,
+		 dooble::s_cryptography->keys().second,
+		 m_domains);
+	      QApplication::restoreOverrideCursor();
+	    }
 	}
     }
 

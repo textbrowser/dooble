@@ -28,6 +28,7 @@
 #ifndef dooble_accepted_or_blocked_domains_h
 #define dooble_accepted_or_blocked_domains_h
 
+#include <QFuture>
 #include <QMainWindow>
 #include <QSqlDatabase>
 #include <QTimer>
@@ -40,8 +41,10 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
 
  public:
   dooble_accepted_or_blocked_domains(void);
+  ~dooble_accepted_or_blocked_domains();
   bool contains(const QString &domain) const;
   bool exception(const QUrl &url) const;
+  void abort(void);
   void accept_or_block_domain(const QString &domain, const bool replace = true);
   void new_exception(const QString &url);
   void purge(void);
@@ -56,6 +59,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QFuture<void> m_future;
   QHash<QString, char> m_domains;
   QHash<QString, char> m_exceptions;
   QTimer m_search_timer;
@@ -63,6 +67,9 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void create_tables(QSqlDatabase &db);
   void populate(void);
   void populate_exceptions(void);
+  void save(const QByteArray &authentication_key,
+	    const QByteArray &encryption_key,
+	    const QHash<QString, char> &hash);
   void save_blocked_domain(const QString &domain, bool replace, bool state);
   void save_exception(const QString &url, bool state);
   void save_settings(void);
