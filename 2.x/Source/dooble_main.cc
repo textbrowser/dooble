@@ -141,6 +141,10 @@ int main(int argc, char *argv[])
   signal_action.sa_flags = 0;
   sigaction(SIGPIPE, &signal_action, (struct sigaction *) nullptr);
 #endif
+  qRegisterMetaType<QAbstractItemModel::LayoutChangeHint>
+    ("QAbstractItemModel::LayoutChangeHint");
+  qRegisterMetaType<QList<QPersistentModelIndex> >
+    ("QListQPersistentModelIndex");
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListUrl> ("QListUrl");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
