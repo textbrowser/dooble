@@ -1128,6 +1128,8 @@ void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)
     {
       dooble_settings::set_setting
 	("accepted_or_blocked_domains_mode", "accept");
+      m_ui.exceptions->setHorizontalHeaderLabels
+	(QStringList() << tr("Reject") << tr("Site"));
       m_ui.table->setHorizontalHeaderLabels
 	(QStringList() << tr("Accepted") << tr("Domain"));
     }
@@ -1135,6 +1137,8 @@ void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)
     {
       dooble_settings::set_setting
 	("accepted_or_blocked_domains_mode", "block");
+      m_ui.exceptions->setHorizontalHeaderLabels
+	(QStringList() << tr("Allow") << tr("Site"));
       m_ui.table->setHorizontalHeaderLabels
 	(QStringList() << tr("Blocked") << tr("Domain"));
     }

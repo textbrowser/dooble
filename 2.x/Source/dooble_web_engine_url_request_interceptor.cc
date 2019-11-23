@@ -41,15 +41,20 @@ interceptRequest(QWebEngineUrlRequestInfo &info)
   if(dooble_settings::setting("do_not_track").toBool())
     info.setHttpHeader("DNT", "1");
 
+  QString mode
+    (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
+
   if(dooble::s_accepted_or_blocked_domains->exception(info.firstPartyUrl()))
     {
-      info.block(false);
+      if(mode == "accept")
+	info.block(true);
+      else
+	info.block(false);
+
       return;
     }
 
   QString host("");
-  QString mode
-    (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
   bool state = true;
   int index = -1;
 

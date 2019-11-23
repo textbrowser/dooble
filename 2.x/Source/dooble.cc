@@ -167,6 +167,16 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	      m_cookies,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
       m_cookies_window->setCookieStore(m_web_engine_profile->cookieStore());
+
+      m_web_engine_profile->cookieStore()->setCookieFilter
+	([](const QWebEngineCookieStore::FilterRequest &request)
+	 {
+	   if(request.thirdParty)
+	     return false;
+	   else
+	     return true;
+	 }
+        );
     }
 
   connect_signals();
@@ -670,6 +680,16 @@ void dooble::initialize_static_members(void)
 	      SIGNAL(populated(void)),
 	      this,
 	      SLOT(slot_populated(void)));
+
+      QWebEngineProfile::defaultProfile()->cookieStore()->setCookieFilter
+	([](const QWebEngineCookieStore::FilterRequest &request)
+	 {
+	   if(request.thirdParty)
+	     return false;
+	   else
+	     return true;
+	 }
+        );
     }
 
   if(!s_certificate_exceptions)
