@@ -108,6 +108,9 @@
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>150</number>
      </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>200</number>
+     </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
      </attribute>
@@ -126,7 +129,7 @@
        <property name="placeholderText">
         <string>Search Favorites</string>
        </property>
-       <property name="clearButtonEnabled" stdset="0">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
       </widget>

@@ -32,7 +32,7 @@
      </item>
      <item>
       <widget class="QLineEdit" name="title">
-       <property name="clearButtonEnabled" stdset="0">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
       </widget>
@@ -49,7 +49,7 @@
      </item>
      <item>
       <widget class="QLineEdit" name="search_engine">
-       <property name="clearButtonEnabled" stdset="0">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
       </widget>
@@ -89,6 +89,9 @@
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>150</number>
      </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>200</number>
+     </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
      </attribute>
@@ -107,7 +110,7 @@
        <property name="placeholderText">
         <string>Search Search Engines</string>
        </property>
-       <property name="clearButtonEnabled" stdset="0">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
       </widget>

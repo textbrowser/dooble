@@ -66,6 +66,9 @@
       <property name="animated">
        <bool>true</bool>
       </property>
+      <attribute name="headerDefaultSectionSize">
+       <number>200</number>
+      </attribute>
       <column>
        <property name="text">
         <string>Site</string>
