@@ -1182,6 +1182,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 	}
     }
 
+  m_ui.session_rejections->setRowCount(0);
   QApplication::restoreOverrideCursor();
   populate();
 }
