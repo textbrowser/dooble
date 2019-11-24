@@ -311,6 +311,12 @@
          <property name="sortingEnabled">
           <bool>true</bool>
          </property>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>200</number>
+         </attribute>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
@@ -319,7 +325,12 @@
          </attribute>
          <column>
           <property name="text">
-           <string>URL</string>
+           <string>First-Party URL</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Origin URL</string>
           </property>
          </column>
         </widget>
@@ -340,12 +351,22 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="save">
+          <widget class="QPushButton" name="save_all">
            <property name="toolTip">
-            <string>Save domains permanently.</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save all URLs from the Origin URL column.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string>Save</string>
+            <string>Save All</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="save_malcontent">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save Origin URLs if their First-Party URL counterparts are malformed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Save Malcontent</string>
            </property>
           </widget>
          </item>

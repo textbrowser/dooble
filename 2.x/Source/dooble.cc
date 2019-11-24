@@ -686,7 +686,8 @@ void dooble::initialize_static_members(void)
 	 {
 	   if(request.thirdParty)
 	     {
-	       s_accepted_or_blocked_domains->add_session_url(request.origin);
+	       s_accepted_or_blocked_domains->add_session_url
+		 (request.firstPartyUrl, request.origin);
 	       return false;
 	     }
 	   else
