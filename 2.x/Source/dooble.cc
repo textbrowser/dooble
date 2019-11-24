@@ -685,7 +685,10 @@ void dooble::initialize_static_members(void)
 	([](const QWebEngineCookieStore::FilterRequest &request)
 	 {
 	   if(request.thirdParty)
-	     return false;
+	     {
+	       s_accepted_or_blocked_domains->add_session_url(request.origin);
+	       return false;
+	     }
 	   else
 	     return true;
 	 }

@@ -85,6 +85,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_import(void)));
+  connect(m_ui.save,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_save(void)));
   connect(m_ui.search,
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
@@ -168,6 +172,24 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
   m_ui.table->sortItems
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   save_blocked_domain(domain.toLower().trimmed(), replace, true);
+}
+
+void dooble_accepted_or_blocked_domains::add_session_url(const QUrl &url)
+{
+  if(url.isEmpty() || !url.isValid())
+    return;
+
+  m_ui.session_rejections->setSortingEnabled(false);
+  m_ui.session_rejections->setRowCount(m_ui.session_rejections->rowCount() + 1);
+
+  QTableWidgetItem *item = new QTableWidgetItem(url.toString());
+
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.session_rejections->setItem
+    (m_ui.session_rejections->rowCount() - 1, 0, item);
+  m_ui.session_rejections->setSortingEnabled(true);
+  m_ui.session_rejections->sortItems
+    (0, m_ui.session_rejections->horizontalHeader()->sortIndicatorOrder());
 }
 
 void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
@@ -1142,6 +1164,26 @@ void dooble_accepted_or_blocked_domains::slot_radio_button_toggled(bool state)
       m_ui.table->setHorizontalHeaderLabels
 	(QStringList() << tr("Blocked") << tr("Domain"));
     }
+}
+
+void dooble_accepted_or_blocked_domains::slot_save(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < m_ui.session_rejections->rowCount(); i++)
+    {
+      QTableWidgetItem *item = m_ui.session_rejections->item(i, 0);
+
+      if(item)
+	{
+	  QUrl url(QUrl::fromUserInput(item->text()));
+
+	  save_blocked_domain(url.host(), false, true);
+	}
+    }
+
+  QApplication::restoreOverrideCursor();
+  populate();
 }
 
 void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)

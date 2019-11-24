@@ -46,6 +46,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   bool exception(const QUrl &url) const;
   void abort(void);
   void accept_or_block_domain(const QString &domain, const bool replace = true);
+  void add_session_url(const QUrl &url);
   void new_exception(const QString &url);
   void purge(void);
 
@@ -87,6 +88,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void slot_new_exception(void);
   void slot_populate(void);
   void slot_radio_button_toggled(bool state);
+  void slot_save(void);
   void slot_search_timer_timeout(void);
 
  signals:
