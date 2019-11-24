@@ -41,6 +41,8 @@ interceptRequest(QWebEngineUrlRequestInfo &info)
   if(dooble_settings::setting("do_not_track").toBool())
     info.setHttpHeader("DNT", "1");
 
+  info.setHttpHeader("REFERER", "");
+
   QString mode
     (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
 
