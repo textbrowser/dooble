@@ -89,6 +89,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void slot_populate(void);
   void slot_radio_button_toggled(bool state);
   void slot_save(void);
+  void slot_save_selected(void);
   void slot_search_timer_timeout(void);
 
  signals:

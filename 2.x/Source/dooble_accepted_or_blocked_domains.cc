@@ -93,6 +93,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_save(void)));
+  connect(m_ui.save_selected,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_save_selected(void)));
   connect(m_ui.search,
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
@@ -1207,6 +1211,30 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
   if(m_ui.save_all == sender())
     m_ui.session_rejections->setRowCount(0);
+
+  QApplication::restoreOverrideCursor();
+  populate();
+}
+
+void dooble_accepted_or_blocked_domains::slot_save_selected(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QModelIndexList list
+    (m_ui.session_rejections->selectionModel()->selectedRows(1));
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      QTableWidgetItem *item =
+	m_ui.session_rejections->item(i, 1); // Origin URL
+
+      if(item)
+	{
+	  QUrl url(QUrl::fromUserInput(item->text()));
+
+	  save_blocked_domain(url.host(), false, true);
+	}
+    }
 
   QApplication::restoreOverrideCursor();
   populate();
