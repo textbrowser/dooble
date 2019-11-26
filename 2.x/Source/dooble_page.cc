@@ -544,6 +544,7 @@ void dooble_page::hide_location_frame(bool state)
 void dooble_page::hide_status_bar(bool state)
 {
   m_ui.status_bar->setVisible(!state);
+  prepare_progress_label_position();
 }
 
 void dooble_page::load(const QUrl &url)
@@ -609,6 +610,15 @@ void dooble_page::prepare_icons(void)
   m_ui.reload->setIcon
     (QIcon::fromTheme("view-refresh",
 		      QIcon(QString(":/%1/36/reload.png").arg(icon_set))));
+}
+
+void dooble_page::prepare_progress_label_position(void)
+{
+  QApplication::processEvents();
+
+  int y = m_ui.frame->height() - m_progress_label->height() - 1;
+
+  m_progress_label->move(1, y);
 }
 
 void dooble_page::prepare_shortcuts(void)
@@ -1016,8 +1026,7 @@ void dooble_page::reset_url(void)
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
-  m_progress_label->move
-    (1, m_ui.frame->height() - m_progress_label->height() - 1);
+  prepare_progress_label_position();
 
   QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
@@ -1216,6 +1225,7 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
 void dooble_page::slot_always_allow_javascript_popup(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
+  prepare_progress_label_position();
 
   while(!m_last_javascript_popups.isEmpty())
     {
@@ -1279,6 +1289,7 @@ void dooble_page::slot_clear_visited_links(void)
 void dooble_page::slot_close_javascript_popup_exception_frame(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
+  prepare_progress_label_position();
 
   while(!m_last_javascript_popups.isEmpty())
     {
@@ -1307,6 +1318,7 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
   m_ui.javascript_popup_exception_url->setText
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
   m_ui.javascript_popup_message->setVisible(true);
+  prepare_progress_label_position();
 }
 
 void dooble_page::slot_dooble_credentials_authenticated(bool state)
@@ -1384,6 +1396,7 @@ void dooble_page::slot_feature_permission_allow(void)
   int feature = m_ui.feature_permission_url->property("feature").toInt();
 
   m_ui.feature_permission_popup_message->setVisible(false);
+  prepare_progress_label_position();
 
   if(feature != -1)
     m_view->set_feature_permission
@@ -1400,6 +1413,7 @@ void dooble_page::slot_feature_permission_deny(void)
   int feature = m_ui.feature_permission_url->property("feature").toInt();
 
   m_ui.feature_permission_popup_message->setVisible(false);
+  prepare_progress_label_position();
 
   if(feature != -1)
     m_view->set_feature_permission
@@ -1417,7 +1431,10 @@ void dooble_page::slot_feature_permission_request_canceled
   if(feature == m_ui.feature_permission_url->property("feature").toInt() &&
      m_ui.feature_permission_url->property("security_origin").toUrl() ==
      security_origin)
-    m_ui.feature_permission_popup_message->setVisible(false);
+    {
+      m_ui.feature_permission_popup_message->setVisible(false);
+      prepare_progress_label_position();
+    }
 }
 
 void dooble_page::slot_feature_permission_requested
@@ -1460,6 +1477,7 @@ void dooble_page::slot_feature_permission_requested
 	m_ui.feature_permission_popup_message->setVisible(false);
 	m_view->set_feature_permission
 	  (security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
+	prepare_progress_label_position();
 	return;
       }
     case 1:
@@ -1467,6 +1485,7 @@ void dooble_page::slot_feature_permission_requested
 	m_ui.feature_permission_popup_message->setVisible(false);
 	m_view->set_feature_permission
 	  (security_origin, feature, QWebEnginePage::PermissionGrantedByUser);
+	prepare_progress_label_position();
 	return;
       }
     }
@@ -1553,6 +1572,7 @@ void dooble_page::slot_feature_permission_requested
     }
 
   m_ui.feature_permission_popup_message->setVisible(true);
+  prepare_progress_label_position();
 }
 
 void dooble_page::slot_find_next(void)
@@ -1804,10 +1824,9 @@ void dooble_page::slot_load_started(void)
 
   m_progress_label->resize(QSize(m_progress_label->sizeHint().width() + 5,
 				 m_progress_label->sizeHint().height()));
-  m_progress_label->move
-    (1, m_ui.frame->height() - m_progress_label->height() - 1);
   m_ui.feature_permission_popup_message->setVisible(false);
   m_ui.javascript_popup_message->setVisible(false);
+  prepare_progress_label_position();
 
   QString icon_set(dooble_settings::setting("icon_set").toString());
 
@@ -1819,6 +1838,7 @@ void dooble_page::slot_load_started(void)
 void dooble_page::slot_only_now_allow_javascript_popup(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
+  prepare_progress_label_position();
 
   while(!m_last_javascript_popups.isEmpty())
     {
@@ -2057,7 +2077,10 @@ void dooble_page::slot_show_popup(void)
   m_last_javascript_popups.remove(index);
 
   if(m_last_javascript_popups.isEmpty())
-    m_ui.javascript_popup_message->setVisible(false);
+    {
+      m_ui.javascript_popup_message->setVisible(false);
+      prepare_progress_label_position();
+    }
 }
 
 void dooble_page::slot_show_popup_menu(void)
@@ -2074,16 +2097,7 @@ void dooble_page::slot_show_status_bar(bool state)
 {
   m_ui.status_bar->setVisible(state);
   dooble_settings::set_setting("status_bar_visible", state);
-
-  if(state)
-    m_progress_label->move
-      (1, m_ui.frame->height() - m_progress_label->height() - 1);
-  else
-    m_progress_label->move(1,
-			   m_ui.frame->height() -
-			   m_progress_label->height() +
-			   m_ui.status_bar->height() -
-			   1);
+  prepare_progress_label_position();
 }
 
 void dooble_page::slot_show_web_settings_panel(void)
