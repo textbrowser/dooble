@@ -287,8 +287,11 @@
     </item>
     <item>
      <widget class="QGroupBox" name="groupBox_2">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rejected third-party cookie URLs are described below. The URLs exist for this session of Dooble only.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="title">
-       <string>Session Rejections</string>
+       <string>Third-Party Session Rejections</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
