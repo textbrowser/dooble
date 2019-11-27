@@ -1180,7 +1180,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(int i = m_ui.session_rejections->rowCount() - 1; i >= 0; i--)
+  for(int i = 0; i < m_ui.session_rejections->rowCount(); i++)
     {
       QTableWidgetItem *item =
 	m_ui.session_rejections->item(i, 1); // Origin URL
@@ -1200,17 +1200,11 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 		  QUrl first_party_url(QUrl::fromUserInput(item->text()));
 
 		  if(!dooble_ui_utilities::allowed_scheme(first_party_url))
-		    {
-		      m_ui.session_rejections->removeRow(i);
-		      save_blocked_domain(url.host(), false, true);
-		    }
+		    save_blocked_domain(url.host(), false, true);
 		}
 	    }
 	}
     }
-
-  if(m_ui.save_all == sender())
-    m_ui.session_rejections->setRowCount(0);
 
   QApplication::restoreOverrideCursor();
   populate();
