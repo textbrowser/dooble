@@ -33,6 +33,7 @@
 #include <QShortcut>
 #include <QPointer>
 #include <QTimer>
+#include <QWebEngineCookieStore>
 
 #include "dooble_settings.h"
 #include "ui_dooble.h"
@@ -133,6 +134,8 @@ class dooble: public QMainWindow
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
+  static bool cookie_filter
+  (const QWebEngineCookieStore::FilterRequest &filter_request);
   bool can_exit(void);
   bool tabs_closable(void) const;
   void connect_signals(void);
@@ -229,6 +232,7 @@ class dooble: public QMainWindow
   void slot_window_close_requested(void);
 
  signals:
+  void add_session_url(void);
   void application_locked(bool state, dooble *d);
   void dooble_credentials_authenticated(bool state);
   void history_cleared(void);

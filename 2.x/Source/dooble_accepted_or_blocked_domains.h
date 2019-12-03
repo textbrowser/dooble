@@ -46,7 +46,6 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   bool exception(const QUrl &url) const;
   void abort(void);
   void accept_or_block_domain(const QString &domain, const bool replace = true);
-  void add_session_url(const QUrl &first_party_url, const QUrl &origin_url);
   void new_exception(const QString &url);
   void purge(void);
 
@@ -77,6 +76,8 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
 
  private slots:
   void slot_add(void);
+  void slot_add_session_url(const QUrl &first_party_url,
+			    const QUrl &origin_url);
   void slot_delete_all_exceptions(void);
   void slot_delete_selected(void);
   void slot_delete_selected_exceptions(void);
@@ -93,6 +94,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void slot_search_timer_timeout(void);
 
  signals:
+  void add_session_url(const QUrl &first_party_url, const QUrl &origin_url);
   void populated(void);
 };
 

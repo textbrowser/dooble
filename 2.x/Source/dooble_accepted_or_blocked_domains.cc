@@ -101,6 +101,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
 	  SLOT(start(void)));
+  connect(this,
+	  SIGNAL(add_session_url(const QUrl &, const QUrl &)),
+	  this,
+	  SLOT(slot_add_session_url(const QUrl &, const QUrl &)));
 
   if(dooble_settings::
      setting("accepted_or_blocked_domains_mode").toString() == "accept")
@@ -180,26 +184,6 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
   m_ui.table->sortItems
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   save_blocked_domain(domain.toLower().trimmed(), replace, true);
-}
-
-void dooble_accepted_or_blocked_domains::add_session_url
-(const QUrl &first_party_url, const QUrl &origin_url)
-{
-  m_ui.session_rejections->setSortingEnabled(false);
-  m_ui.session_rejections->setRowCount(m_ui.session_rejections->rowCount() + 1);
-
-  QTableWidgetItem *item = new QTableWidgetItem(first_party_url.toString());
-
-  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  m_ui.session_rejections->setItem
-    (m_ui.session_rejections->rowCount() - 1, 0, item);
-  item = new QTableWidgetItem(origin_url.toString());
-  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  m_ui.session_rejections->setItem
-    (m_ui.session_rejections->rowCount() - 1, 1, item);
-  m_ui.session_rejections->setSortingEnabled(true);
-  m_ui.session_rejections->sortItems
-    (0, m_ui.session_rejections->horizontalHeader()->sortIndicatorOrder());
 }
 
 void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
@@ -794,6 +778,26 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
     return;
 
   accept_or_block_domain(text);
+}
+
+void dooble_accepted_or_blocked_domains::slot_add_session_url
+(const QUrl &first_party_url, const QUrl &origin_url)
+{
+  m_ui.session_rejections->setSortingEnabled(false);
+  m_ui.session_rejections->setRowCount(m_ui.session_rejections->rowCount() + 1);
+
+  QTableWidgetItem *item = new QTableWidgetItem(first_party_url.toString());
+
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.session_rejections->setItem
+    (m_ui.session_rejections->rowCount() - 1, 0, item);
+  item = new QTableWidgetItem(origin_url.toString());
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.session_rejections->setItem
+    (m_ui.session_rejections->rowCount() - 1, 1, item);
+  m_ui.session_rejections->setSortingEnabled(true);
+  m_ui.session_rejections->sortItems
+    (0, m_ui.session_rejections->horizontalHeader()->sortIndicatorOrder());
 }
 
 void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)

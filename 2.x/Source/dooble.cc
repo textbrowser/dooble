@@ -30,7 +30,6 @@
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
-#include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QtConcurrent>
 
@@ -169,9 +168,9 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
       m_cookies_window->setCookieStore(m_web_engine_profile->cookieStore());
 
       m_web_engine_profile->cookieStore()->setCookieFilter
-	([](const QWebEngineCookieStore::FilterRequest &request)
+	([](const QWebEngineCookieStore::FilterRequest &filter_request)
 	 {
-	   if(request.thirdParty)
+	   if(filter_request.thirdParty)
 	     return false;
 	   else
 	     return true;
@@ -327,6 +326,19 @@ bool dooble::can_exit(void)
       QApplication::processEvents();
       return true;
     }
+}
+
+bool dooble::cookie_filter
+(const QWebEngineCookieStore::FilterRequest &filter_request)
+{
+  if(filter_request.thirdParty)
+    {
+      emit s_accepted_or_blocked_domains->add_session_url
+	(filter_request.firstPartyUrl, filter_request.origin);
+      return false;
+    }
+
+  return true;
 }
 
 bool dooble::initialized(void) const
@@ -680,20 +692,8 @@ void dooble::initialize_static_members(void)
 	      SIGNAL(populated(void)),
 	      this,
 	      SLOT(slot_populated(void)));
-
       QWebEngineProfile::defaultProfile()->cookieStore()->setCookieFilter
-	([](const QWebEngineCookieStore::FilterRequest &request)
-	 {
-	   if(request.thirdParty)
-	     {
-	       s_accepted_or_blocked_domains->add_session_url
-		 (request.firstPartyUrl, request.origin);
-	       return false;
-	     }
-	   else
-	     return true;
-	 }
-        );
+	(&dooble::cookie_filter);
     }
 
   if(!s_certificate_exceptions)
