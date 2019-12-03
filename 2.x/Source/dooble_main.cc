@@ -377,6 +377,6 @@ int main(int argc, char *argv[])
     splash.repaint();
 
   splash.finish(nullptr);
-  d->show();
+  QTimer::singleShot(1500, d, SLOT(show(void)));
   return dooble::s_application->exec();
 }
