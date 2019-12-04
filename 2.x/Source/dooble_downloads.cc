@@ -720,6 +720,7 @@ void dooble_downloads::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  m_ui.table->resizeRowsToContents();
   QApplication::restoreOverrideCursor();
   emit populated();
 }
