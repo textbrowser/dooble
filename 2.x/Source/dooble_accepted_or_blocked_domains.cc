@@ -105,6 +105,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(add_session_url(const QUrl &, const QUrl &)),
 	  this,
 	  SLOT(slot_add_session_url(const QUrl &, const QUrl &)));
+  connect(this,
+	  SIGNAL(imported(void)),
+	  this,
+	  SLOT(slot_imported(void)));
 
   if(dooble_settings::
      setting("accepted_or_blocked_domains_mode").toString() == "accept")
@@ -583,6 +587,9 @@ void dooble_accepted_or_blocked_domains::save
   }
 
   QSqlDatabase::removeDatabase(database_name);
+
+  if(!m_future.isCanceled())
+    emit imported();
 }
 
 void dooble_accepted_or_blocked_domains::save_blocked_domain
@@ -1093,7 +1100,6 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 
 	  file.close();
 	  QApplication::restoreOverrideCursor();
-	  populate();
 
 	  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
 	    {
@@ -1117,6 +1123,11 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
     }
 
   QApplication::processEvents();
+}
+
+void dooble_accepted_or_blocked_domains::slot_imported(void)
+{
+  populate();
 }
 
 void dooble_accepted_or_blocked_domains::slot_item_changed
