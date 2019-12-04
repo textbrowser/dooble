@@ -233,7 +233,7 @@
             <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>Cache &amp;Size</string>
+               <string>Cache Size</string>
               </property>
               <property name="buddy">
                <cstring>cache_size</cstring>
@@ -354,7 +354,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-44</y>
+               <y>0</y>
                <width>643</width>
                <height>576</height>
               </rect>
@@ -831,7 +831,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-323</y>
+               <y>0</y>
                <width>643</width>
                <height>855</height>
               </rect>
@@ -1374,7 +1374,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1052</y>
+               <y>0</y>
                <width>643</width>
                <height>1584</height>
               </rect>
