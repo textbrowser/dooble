@@ -656,14 +656,14 @@
       <item>
        <widget class="QPushButton" name="delete_selected">
         <property name="text">
-         <string>&amp;Delete Selected</string>
+         <string>Delete &amp;Selected</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="delete_shown">
         <property name="text">
-         <string>Delete &amp;Shown</string>
+         <string>Delete S&amp;hown</string>
         </property>
        </widget>
       </item>

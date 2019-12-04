@@ -366,7 +366,7 @@
          <item>
           <widget class="QPushButton" name="save_malcontent">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save Origin URLs if their First-Party URL counterparts are malformed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save Origin URLs if their First-Party URL counterparts are malformed. A malformed URL is one which does not have a scheme, for example.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Save Malcontent</string>

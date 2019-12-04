@@ -22,7 +22,16 @@
     <property name="spacing">
      <number>5</number>
     </property>
-    <property name="margin">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <item>
@@ -36,7 +45,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>32</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -66,7 +75,7 @@
    </widget>
    <widget class="QMenu" name="menu_history">
     <property name="title">
-     <string>&amp;History</string>
+     <string>Hi&amp;story</string>
     </property>
    </widget>
    <addaction name="menu_file"/>

@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>542</height>
+           <height>544</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -280,7 +280,7 @@
             <item>
              <widget class="QLabel" name="label">
               <property name="text">
-               <string>Cache &amp;Type</string>
+               <string>Cache Type</string>
               </property>
               <property name="buddy">
                <cstring>cache_type</cstring>
@@ -354,9 +354,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>631</width>
-               <height>597</height>
+               <y>-44</y>
+               <width>643</width>
+               <height>576</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -400,7 +400,7 @@
                   <property name="toolTip">
                    <string>The Home URL is not stored in an encrypted container.</string>
                   </property>
-                  <property name="clearButtonEnabled" stdset="0">
+                  <property name="clearButtonEnabled">
                    <bool>true</bool>
                   </property>
                  </widget>
@@ -412,7 +412,7 @@
                 <item>
                  <widget class="QLabel" name="label_3">
                   <property name="text">
-                   <string>&amp;Icon Set Fallback</string>
+                   <string>Icon Set Fallback</string>
                   </property>
                   <property name="buddy">
                    <cstring>icon_set</cstring>
@@ -460,7 +460,7 @@
                 <item>
                  <widget class="QLabel" name="label_23">
                   <property name="text">
-                   <string>&amp;Language</string>
+                   <string>Language</string>
                   </property>
                   <property name="buddy">
                    <cstring>language</cstring>
@@ -617,7 +617,7 @@
                 <item>
                  <widget class="QLabel" name="label_24">
                   <property name="text">
-                   <string>&amp;Theme Color</string>
+                   <string>Theme Color</string>
                   </property>
                   <property name="buddy">
                    <cstring>theme_color</cstring>
@@ -682,7 +682,7 @@
                 <item>
                  <widget class="QLabel" name="label_21">
                   <property name="text">
-                   <string>&amp;Zoom Frame Location</string>
+                   <string>Zoom Frame Location</string>
                   </property>
                   <property name="buddy">
                    <cstring>zoom_frame_location</cstring>
@@ -691,7 +691,7 @@
                 </item>
                 <item>
                  <widget class="QComboBox" name="zoom_frame_location">
-                  <property name="currentText" stdset="0">
+                  <property name="currentText">
                    <string>Popup Menu</string>
                   </property>
                   <property name="currentIndex">
@@ -831,9 +831,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-323</y>
                <width>643</width>
-               <height>856</height>
+               <height>855</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -842,7 +842,7 @@
                 <item>
                  <widget class="QLabel" name="label_13">
                   <property name="text">
-                   <string>&amp;Cookie Policy</string>
+                   <string>Cookie Policy</string>
                   </property>
                   <property name="buddy">
                    <cstring>cookie_policy</cstring>
@@ -1057,7 +1057,7 @@
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
                      </property>
-                     <property name="clearButtonEnabled" stdset="0">
+                     <property name="clearButtonEnabled">
                       <bool>true</bool>
                      </property>
                     </widget>
@@ -1077,7 +1077,7 @@
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
                      </property>
-                     <property name="clearButtonEnabled" stdset="0">
+                     <property name="clearButtonEnabled">
                       <bool>true</bool>
                      </property>
                     </widget>
@@ -1191,7 +1191,7 @@
                    <item>
                     <widget class="QLabel" name="label_14">
                      <property name="text">
-                      <string>&amp;Type</string>
+                      <string>Type</string>
                      </property>
                      <property name="buddy">
                       <cstring>proxy_type</cstring>
@@ -1260,7 +1260,7 @@
                       </item>
                       <item row="1" column="1">
                        <widget class="QLineEdit" name="proxy_user">
-                        <property name="clearButtonEnabled" stdset="0">
+                        <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1281,7 +1281,7 @@
                       </item>
                       <item row="0" column="1">
                        <widget class="QLineEdit" name="proxy_host">
-                        <property name="clearButtonEnabled" stdset="0">
+                        <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1298,7 +1298,7 @@
                         <property name="echoMode">
                          <enum>QLineEdit::Password</enum>
                         </property>
-                        <property name="clearButtonEnabled" stdset="0">
+                        <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1374,9 +1374,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>631</width>
-               <height>1563</height>
+               <y>-1052</y>
+               <width>643</width>
+               <height>1584</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1436,10 +1436,10 @@
                    <property name="showGrid">
                     <bool>false</bool>
                    </property>
-                   <attribute name="horizontalHeaderDefaultSectionSize">
+                   <attribute name="horizontalHeaderMinimumSectionSize">
                     <number>150</number>
                    </attribute>
-                   <attribute name="horizontalHeaderMinimumSectionSize">
+                   <attribute name="horizontalHeaderDefaultSectionSize">
                     <number>150</number>
                    </attribute>
                    <attribute name="horizontalHeaderStretchLastSection">
@@ -1722,7 +1722,7 @@
                         <property name="toolTip">
                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                         </property>
-                        <property name="clearButtonEnabled" stdset="0">
+                        <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
                        </widget>
@@ -1759,10 +1759,10 @@
                       <property name="showGrid">
                        <bool>false</bool>
                       </property>
-                      <attribute name="horizontalHeaderDefaultSectionSize">
+                      <attribute name="horizontalHeaderMinimumSectionSize">
                        <number>150</number>
                       </attribute>
-                      <attribute name="horizontalHeaderMinimumSectionSize">
+                      <attribute name="horizontalHeaderDefaultSectionSize">
                        <number>150</number>
                       </attribute>
                       <attribute name="horizontalHeaderStretchLastSection">
@@ -1878,7 +1878,7 @@
                 </item>
                 <item>
                  <widget class="QLineEdit" name="user_agent">
-                  <property name="clearButtonEnabled" stdset="0">
+                  <property name="clearButtonEnabled">
                    <bool>true</bool>
                   </property>
                  </widget>
@@ -1918,7 +1918,7 @@
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled, WebRTC may also use local network IP addresses but remote hosts can also see your local network IP address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="text">
-                 <string>&amp;WebRTC Public Interfaces Only</string>
+                 <string>WebRTC Public Interfaces Only</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>

@@ -33,56 +33,56 @@
       <item>
        <widget class="QCheckBox" name="accepted_blocked_domains">
         <property name="text">
-         <string>Accepted / Blocked Domains</string>
+         <string>Accepted / &amp;Blocked Domains</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="certificate_exceptions">
         <property name="text">
-         <string>Certificate Exceptions</string>
+         <string>&amp;Certificate Exceptions</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="cookies">
         <property name="text">
-         <string>Cookies</string>
+         <string>Coo&amp;kies</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="download_history">
         <property name="text">
-         <string>Download History</string>
+         <string>&amp;Download History</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="favicons">
         <property name="text">
-         <string>Favicons</string>
+         <string>&amp;Favicons</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="favorites">
         <property name="text">
-         <string>Favorites</string>
+         <string>Fav&amp;orites</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="history">
         <property name="text">
-         <string>History</string>
+         <string>&amp;History</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="visited_links">
         <property name="text">
-         <string>Visited Links</string>
+         <string>&amp;Visited Links</string>
         </property>
        </widget>
       </item>

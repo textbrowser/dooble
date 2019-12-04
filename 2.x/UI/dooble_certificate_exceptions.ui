@@ -77,14 +77,28 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLineEdit" name="url">
-         <property name="placeholderText">
-          <string>URL</string>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>&amp;URL</string>
+           </property>
+           <property name="buddy">
+            <cstring>url</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="url">
+           <property name="placeholderText">
+            <string>URL</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -124,7 +138,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Add</string>
+            <string>&amp;Add</string>
            </property>
           </widget>
          </item>
@@ -137,7 +151,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Reset</string>
+            <string>&amp;Reset</string>
            </property>
           </widget>
          </item>
