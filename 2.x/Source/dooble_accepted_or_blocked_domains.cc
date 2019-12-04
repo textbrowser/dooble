@@ -44,6 +44,9 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
+  m_ui.maximum_session_rejections->setValue
+    (dooble_settings::setting("dooble_accepted_or_blocked_domains_"
+			      "maximum_session_rejections", 5000).toInt());
   m_ui.table->sortItems(1, Qt::AscendingOrder);
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
@@ -85,6 +88,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_import(void)));
+  connect(m_ui.maximum_session_rejections,
+	  SIGNAL(valueChanged(int)),
+	  this,
+	  SLOT(slot_maximum_entries_changed(int)));
   connect(m_ui.save_all,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -790,8 +797,17 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
 void dooble_accepted_or_blocked_domains::slot_add_session_url
 (const QUrl &first_party_url, const QUrl &origin_url)
 {
+  if(m_session_origin_hosts.contains(origin_url.host()))
+    return;
+  else if(m_ui.maximum_session_rejections->value() <=
+	  m_ui.session_rejections->rowCount())
+    return;
+  else
+    m_session_origin_hosts[origin_url.host()] = 0;
+
   m_ui.session_rejections->setSortingEnabled(false);
-  m_ui.session_rejections->setRowCount(m_ui.session_rejections->rowCount() + 1);
+  m_ui.session_rejections->setRowCount
+    (m_ui.session_rejections->rowCount() + 1);
 
   QTableWidgetItem *item = new QTableWidgetItem(first_party_url.toString());
 
@@ -1148,6 +1164,13 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
 
   m_domains[item->text()] = state ? 1 : 0;
   save_blocked_domain(item->text(), true, state);
+}
+
+void dooble_accepted_or_blocked_domains::
+slot_maximum_entries_changed(int value)
+{
+  dooble_settings::set_setting
+    ("dooble_accepted_or_blocked_domains_maximum_session_rejections", value);
 }
 
 void dooble_accepted_or_blocked_domains::slot_new_exception(const QString &url)

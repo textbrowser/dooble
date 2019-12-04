@@ -414,7 +414,8 @@ QString dooble_settings::zoom_frame_location_string(int index)
   return "popup_menu";
 }
 
-QVariant dooble_settings::setting(const QString &key)
+QVariant dooble_settings::setting(const QString &key,
+				  const QVariant &default_value)
 {
   QReadLocker lock(&s_settings_mutex);
 
@@ -425,7 +426,7 @@ QVariant dooble_settings::setting(const QString &key)
       lock.unlock();
 
       QString database_name(dooble_database_utilities::database_name());
-      QString value("");
+      QVariant value("");
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -444,14 +445,18 @@ QVariant dooble_settings::setting(const QString &key)
 	    query.addBindValue(key.toLower().trimmed());
 
 	    if(query.exec())
-	      if(query.next())
-		{
-		  value = query.value(0).toString().trimmed();
+	      {
+		if(query.next())
+		  {
+		    value = query.value(0).toString().trimmed();
 
-		  QWriteLocker lock(&s_settings_mutex);
+		    QWriteLocker lock(&s_settings_mutex);
 
-		  s_settings[key.toLower().trimmed()] = value;
-		}
+		    s_settings[key.toLower().trimmed()] = value;
+		  }
+		else
+		  value = default_value;
+	      }
 	  }
 
 	db.close();
@@ -461,7 +466,7 @@ QVariant dooble_settings::setting(const QString &key)
       return value;
     }
 
-  return s_settings.value(key.toLower().trimmed());
+  return s_settings.value(key.toLower().trimmed(), default_value);
 }
 
 bool dooble_settings::has_dooble_credentials(void)

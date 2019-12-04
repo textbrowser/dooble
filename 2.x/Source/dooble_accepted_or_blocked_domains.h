@@ -62,6 +62,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   QFuture<void> m_future;
   QHash<QString, char> m_domains;
   QHash<QString, char> m_exceptions;
+  QHash<QString, char> m_session_origin_hosts;
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
   void create_tables(QSqlDatabase &db);
@@ -86,6 +87,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void slot_import(void);
   void slot_imported(void);
   void slot_item_changed(QTableWidgetItem *item);
+  void slot_maximum_entries_changed(int value);
   void slot_new_exception(const QString &url);
   void slot_new_exception(void);
   void slot_populate(void);
