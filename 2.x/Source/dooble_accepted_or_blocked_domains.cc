@@ -158,7 +158,6 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
     return;
 
   m_domains[domain.toLower().trimmed()] = 1;
-  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount() + 1));
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
   disconnect(m_ui.table,
@@ -196,6 +195,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
   m_ui.table->sortItems
     (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
   save_blocked_domain(domain.toLower().trimmed(), replace, true);
+  slot_search_timer_timeout();
 }
 
 void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
@@ -278,6 +278,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.entries_2->setText(tr("0 Row(s)"));
+  m_ui.search->clear();
   m_ui.table->setRowCount(0);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -972,8 +973,8 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 	m_ui.table->removeRow(list.at(i).row());
       }
 
-  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)

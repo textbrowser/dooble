@@ -46,10 +46,12 @@ class dooble_favorites_popup: public QDialog
   void showNormal(void);
 
  protected:
+  void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QTimer m_entries_timer;
   QTimer m_search_timer;
   Ui_dooble_favorites_popup m_ui;
   void prepare_icons(void);
@@ -58,6 +60,7 @@ class dooble_favorites_popup: public QDialog
  private slots:
   void slot_delete_selected(void);
   void slot_double_clicked(const QModelIndex &index);
+  void slot_entries_timer_timeout(void);
   void slot_favorites_sorted(void);
   void slot_find(void);
   void slot_search_timer_timeout(void);

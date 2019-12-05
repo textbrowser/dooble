@@ -41,6 +41,7 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
   if(parent)
     m_ui.delete_selected->setVisible(false);
 
+  m_entries_timer.start(150);
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
 
@@ -68,8 +69,7 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
       connect(this,
 	      SIGNAL(favorite_changed(const QUrl &, bool)),
 	      dooble::s_history_window,
-	      SLOT(slot_favorite_changed(const QUrl &, bool)),
-	      Qt::UniqueConnection);
+	      SLOT(slot_favorite_changed(const QUrl &, bool)));
     }
   else
     QTimer::singleShot(1500, this, SLOT(slot_set_favorites_model(void)));
@@ -79,6 +79,10 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 	    dooble_settings::setting("favorites_sort_index").toInt(),
 	    m_ui.sort_order->count() - 1));
   slot_sort(m_ui.sort_order->currentIndex());
+  connect(&m_entries_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_entries_timer_timeout(void)));
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -113,10 +117,19 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
   setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
 }
 
+void dooble_favorites_popup::closeEvent(QCloseEvent *event)
+{
+  QDialog::closeEvent(event);
+  m_entries_timer.stop();
+}
+
 void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
 {
   if(event && event->key() == Qt::Key_Escape)
-    accept();
+    {
+      accept();
+      m_entries_timer.stop();
+    }
 
   QDialog::keyPressEvent(event);
 }
@@ -158,6 +171,9 @@ void dooble_favorites_popup::show(void)
 					   toByteArray()));
 
   QDialog::show();
+
+  if(!m_entries_timer.isActive())
+    m_entries_timer.start();
 }
 
 void dooble_favorites_popup::showNormal(void)
@@ -168,6 +184,9 @@ void dooble_favorites_popup::showNormal(void)
 					   toByteArray()));
 
   QDialog::showNormal();
+
+  if(!m_entries_timer.isActive())
+    m_entries_timer.start();
 }
 
 void dooble_favorites_popup::slot_delete_selected(void)
@@ -214,6 +233,12 @@ void dooble_favorites_popup::slot_double_clicked(const QModelIndex &index)
     emit open_link(index.sibling(index.row(), 1).data().toString());
 }
 
+void dooble_favorites_popup::slot_entries_timer_timeout(void)
+{
+  if(m_ui.view->model())
+    m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.view->model()->rowCount()));
+}
+
 void dooble_favorites_popup::slot_favorites_sorted(void)
 {
   m_ui.sort_order->setCurrentIndex
@@ -239,10 +264,16 @@ void dooble_favorites_popup::slot_search_timer_timeout(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString text(m_ui.search->text().toLower().trimmed());
+  int count = model->rowCount();
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())
-      m_ui.view->setRowHidden(i, false);
+      {
+	if(!m_entries_timer.isActive())
+	  m_entries_timer.start();
+
+	m_ui.view->setRowHidden(i, false);
+      }
     else
       {
 	QStandardItem *item1 = model->item(i, 0);
@@ -256,9 +287,14 @@ void dooble_favorites_popup::slot_search_timer_timeout(void)
 		item3->text().toLower().contains(text))
 	  m_ui.view->setRowHidden(i, false);
 	else
-	  m_ui.view->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_entries_timer.stop();
+	    m_ui.view->setRowHidden(i, true);
+	  }
       }
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
 }
