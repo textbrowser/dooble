@@ -288,9 +288,9 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
   prepare_viewport_icons();
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_search_engines_popup::slot_delete_selected(void)
@@ -370,11 +370,11 @@ void dooble_search_engines_popup::slot_delete_selected(void)
       }
 
       QSqlDatabase::removeDatabase(database_name);
-      m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
       QApplication::restoreOverrideCursor();
     }
 
   prepare_viewport_icons();
+  slot_search_timer_timeout();
 }
 
 void dooble_search_engines_popup::slot_double_clicked(const QModelIndex &index)
@@ -396,10 +396,12 @@ void dooble_search_engines_popup::slot_populate(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     {
       emit populated();
+      m_ui.search->clear();
       return;
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.search->clear();
 
   QMutableMapIterator<QString, QAction *> it(m_actions);
 
@@ -414,7 +416,6 @@ void dooble_search_engines_popup::slot_populate(void)
     }
 
   m_model->removeRows(0, m_model->rowCount());
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
 
   QString database_name(dooble_database_utilities::database_name());
 
@@ -493,8 +494,8 @@ void dooble_search_engines_popup::slot_populate(void)
 
   QSqlDatabase::removeDatabase(database_name);
   m_model->sort(0);
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_search_engines_popup::slot_search_timer_timeout(void)
