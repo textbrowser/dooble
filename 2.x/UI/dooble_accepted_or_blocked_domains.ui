@@ -144,6 +144,9 @@
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
          <column>
           <property name="text">
            <string>Allow</string>
@@ -158,6 +161,13 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="QLabel" name="entries_1">
+           <property name="text">
+            <string>0 Row(s)</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <spacer name="horizontalSpacer_14">
            <property name="orientation">
@@ -225,6 +235,9 @@
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
       </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>Accepted / Blocked</string>
@@ -246,6 +259,13 @@
         </property>
         <property name="clearButtonEnabled">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="entries_2">
+        <property name="text">
+         <string>0 Row(s)</string>
         </property>
        </widget>
       </item>
@@ -366,6 +386,9 @@
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
          <column>
           <property name="text">
            <string>First-Party URL</string>
@@ -380,6 +403,13 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="entries_3">
+           <property name="text">
+            <string>0 Row(s)</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <spacer name="horizontalSpacer_4">
            <property name="orientation">

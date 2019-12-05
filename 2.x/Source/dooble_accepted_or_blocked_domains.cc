@@ -158,6 +158,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
     return;
 
   m_domains[domain.toLower().trimmed()] = 1;
+  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount() + 1));
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
   disconnect(m_ui.table,
@@ -246,8 +247,8 @@ void dooble_accepted_or_blocked_domains::new_exception(const QString &url)
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
 	     SLOT(slot_exceptions_item_changed(QTableWidgetItem *)));
-  m_ui.exceptions->setRowCount
-    (m_ui.exceptions->rowCount() + 1);
+  m_ui.entries_1->setText(tr("%1 Row(s)").arg(m_ui.exceptions->rowCount() + 1));
+  m_ui.exceptions->setRowCount(m_ui.exceptions->rowCount() + 1);
   m_ui.exception->clear();
 
   QTableWidgetItem *item = new QTableWidgetItem();
@@ -276,6 +277,7 @@ void dooble_accepted_or_blocked_domains::new_exception(const QString &url)
 void dooble_accepted_or_blocked_domains::populate(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.entries_2->setText(tr("0 Row(s)"));
   m_ui.table->setRowCount(0);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -344,6 +346,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
+  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_domains.size()));
   m_ui.table->setRowCount(m_domains.size());
   m_ui.table->setSortingEnabled(false);
 
@@ -387,6 +390,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_exceptions.clear();
+  m_ui.entries_1->setText(tr("0 Row(s)"));
   m_ui.exceptions->setRowCount(0);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -454,6 +458,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
 	     SLOT(slot_exceptions_item_changed(QTableWidgetItem *)));
+  m_ui.entries_1->setText(tr("%1 Row(s)").arg(m_exceptions.size()));
   m_ui.exceptions->setRowCount(m_exceptions.size());
 
   QHashIterator<QString, char> it(m_exceptions);
@@ -496,6 +501,9 @@ void dooble_accepted_or_blocked_domains::purge(void)
   m_exceptions.clear();
   m_future.cancel();
   m_future.waitForFinished();
+  m_ui.entries_1->setText(tr("0 Row(s)"));
+  m_ui.entries_2->setText(tr("0 Row(s)"));
+  m_ui.exceptions->setRowCount(0);
   m_ui.table->setRowCount(0);
 
   QString database_name(dooble_database_utilities::database_name());
@@ -805,6 +813,8 @@ void dooble_accepted_or_blocked_domains::slot_add_session_url
   else
     m_session_origin_hosts[origin_url.host()] = 0;
 
+  m_ui.entries_3->setText
+    (tr("%1 Row(s)").arg(m_ui.session_rejections->rowCount() + 1));
   m_ui.session_rejections->setSortingEnabled(false);
   m_ui.session_rejections->setRowCount
     (m_ui.session_rejections->rowCount() + 1);
@@ -847,6 +857,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
     }
 
   m_exceptions.clear();
+  m_ui.entries_1->setText(tr("0 Row(s)"));
   m_ui.exceptions->setRowCount(0);
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -961,6 +972,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 	m_ui.table->removeRow(list.at(i).row());
       }
 
+  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
   QApplication::restoreOverrideCursor();
 }
 
@@ -1044,6 +1056,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 	m_ui.exceptions->removeRow(list.at(i).row());
       }
 
+  m_ui.entries_1->setText(tr("%1 Row(s)").arg(m_ui.exceptions->rowCount()));
   QApplication::restoreOverrideCursor();
 }
 
@@ -1092,6 +1105,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	{
 	  dialog.close();
 	  m_ui.search->clear();
+	  m_ui.entries_2->setText(tr("0 Row(s)"));
 	  m_ui.table->setRowCount(0);
 	  repaint();
 	  QApplication::processEvents();
@@ -1277,6 +1291,7 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString text(m_ui.search->text().toLower().trimmed());
+  int count = m_ui.table->rowCount();
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
@@ -1294,8 +1309,12 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
 	if(item->text().contains(text))
 	  m_ui.table->setRowHidden(i, false);
 	else
-	  m_ui.table->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.table->setRowHidden(i, true);
+	  }
       }
 
+  m_ui.entries_2->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
 }
