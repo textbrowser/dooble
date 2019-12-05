@@ -288,6 +288,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
   prepare_viewport_icons();
   QApplication::restoreOverrideCursor();
 }
@@ -369,6 +370,7 @@ void dooble_search_engines_popup::slot_delete_selected(void)
       }
 
       QSqlDatabase::removeDatabase(database_name);
+      m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
       QApplication::restoreOverrideCursor();
     }
 
@@ -412,6 +414,7 @@ void dooble_search_engines_popup::slot_populate(void)
     }
 
   m_model->removeRows(0, m_model->rowCount());
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
 
   QString database_name(dooble_database_utilities::database_name());
 
@@ -490,6 +493,7 @@ void dooble_search_engines_popup::slot_populate(void)
 
   QSqlDatabase::removeDatabase(database_name);
   m_model->sort(0);
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_model->rowCount()));
   QApplication::restoreOverrideCursor();
 }
 
@@ -504,6 +508,7 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString text(m_ui.search->text().toLower().trimmed());
+  int count = model->rowCount();
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())
@@ -519,9 +524,13 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
 		item2->text().toLower().contains(text))
 	  m_ui.view->setRowHidden(i, false);
 	else
-	  m_ui.view->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.view->setRowHidden(i, true);
+	  }
       }
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
 }
