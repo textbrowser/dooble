@@ -191,7 +191,6 @@ void dooble_history_window::set_row_hidden(int i)
 
   QDateTime period(QDateTime::currentDateTime());
   QString text(m_ui.search->text().toLower().trimmed());
-  int count = m_ui.table->rowCount();
 
   switch(m_ui.period->currentRow())
     {
@@ -203,10 +202,7 @@ void dooble_history_window::set_row_hidden(int i)
 		item2->text().toLower().contains(text))
 	  m_ui.table->setRowHidden(i, false);
 	else
-	  {
-	    count -= 1;
-	    m_ui.table->setRowHidden(i, true);
-	  }
+	  m_ui.table->setRowHidden(i, true);
 
 	break;
       }
@@ -227,16 +223,10 @@ void dooble_history_window::set_row_hidden(int i)
 		    item2->text().toLower().contains(text))
 	      m_ui.table->setRowHidden(i, false);
 	    else
-	      {
-		count -= 1;
-		m_ui.table->setRowHidden(i, true);
-	      }
+	      m_ui.table->setRowHidden(i, true);
 	  }
 	else
-	  {
-	    count -= 1;
-	    m_ui.table->setRowHidden(i, true);
-	  }
+	  m_ui.table->setRowHidden(i, true);
 
 	break;
       }
@@ -257,22 +247,14 @@ void dooble_history_window::set_row_hidden(int i)
 		    item2->text().toLower().contains(text))
 	      m_ui.table->setRowHidden(i, false);
 	    else
-	      {
-		count -= 1;
-		m_ui.table->setRowHidden(i, true);
-	      }
+	      m_ui.table->setRowHidden(i, true);
 	  }
 	else
-	  {
-	    count -= 1;
-	    m_ui.table->setRowHidden(i, true);
-	  }
+	  m_ui.table->setRowHidden(i, true);
 
 	break;
       }
     }
-
-  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
 }
 
 void dooble_history_window::show(QWidget *parent)
@@ -413,9 +395,9 @@ void dooble_history_window::slot_delete_pages(void)
     }
 
   dooble::s_history->remove_items_list(urls);
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
+  slot_search_timer_timeout();
 }
 
 void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
@@ -495,7 +477,7 @@ void dooble_history_window::slot_history_cleared(void)
       m_ui.table->removeRow(i);
     }
 
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
+  slot_search_timer_timeout();
 }
 
 void dooble_history_window::slot_horizontal_header_section_resized
@@ -714,7 +696,6 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   item4->setData(Qt::UserRole, item.url());
   item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount() + 1));
   m_ui.table->setSortingEnabled(false);
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 0, item1);
@@ -732,6 +713,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_item_changed(QTableWidgetItem *)));
+  slot_search_timer_timeout();
 }
 
 void dooble_history_window::slot_parent_destroyed(void)
@@ -745,6 +727,7 @@ void dooble_history_window::slot_populate(void)
     {
       m_items.clear();
       m_ui.entries->setText(tr("0 Row(s)"));
+      m_ui.search->clear();
       m_ui.table->setRowCount(0);
       return;
     }
@@ -755,6 +738,7 @@ void dooble_history_window::slot_populate(void)
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
   m_items.clear();
+  m_ui.search->clear();
   m_ui.table->setSortingEnabled(false);
 
   QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > hash

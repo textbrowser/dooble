@@ -120,6 +120,7 @@ void dooble_certificate_exceptions::keyPressEvent(QKeyEvent *event)
 void dooble_certificate_exceptions::purge(void)
 {
   m_ui.entries->setText(tr("0 Row(s)"));
+  m_ui.search->clear();
   m_ui.table->setRowCount(0);
 }
 

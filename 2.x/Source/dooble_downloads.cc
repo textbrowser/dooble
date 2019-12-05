@@ -175,6 +175,10 @@ void dooble_downloads::delete_selected(void)
 
   QModelIndexList list(m_ui.table->selectionModel()->selectedIndexes());
 
+  for(int i = list.size() - 1; i >= 0; i--)
+    if(m_ui.table->isRowHidden(list.at(i).row()))
+      list.removeAt(i);
+
   if(!list.isEmpty())
     {
       QApplication::restoreOverrideCursor();
@@ -217,6 +221,7 @@ void dooble_downloads::delete_selected(void)
     }
 
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::keyPressEvent(QKeyEvent *event)
@@ -243,6 +248,7 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
 void dooble_downloads::purge(void)
 {
   abort();
+  m_ui.search->clear();
   m_ui.table->setRowCount(0);
 
   QString database_name("dooble_downloads");
@@ -267,6 +273,7 @@ void dooble_downloads::purge(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::record_download(QWebEngineDownloadItem *download)
@@ -332,6 +339,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
     }
 
   emit started();
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::remove_entry(qintptr oid)
@@ -407,7 +415,8 @@ void dooble_downloads::slot_clear_finished_downloads(void)
       mb.setIcon(QMessageBox::Question);
       mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
       mb.setText
-	(tr("Are you sure that you wish to delete the selected item(s)?"));
+	(tr("Are you sure that you wish to delete all of the "
+	    "finished downloads? Hidden entries will also be removed."));
       mb.setWindowIcon(windowIcon());
       mb.setWindowModality(Qt::WindowModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -440,6 +449,7 @@ void dooble_downloads::slot_clear_finished_downloads(void)
     }
 
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::slot_copy_download_location(void)
@@ -487,6 +497,8 @@ void dooble_downloads::slot_delete_row(void)
       remove_entry(downloads_item->oid());
       m_ui.table->removeRow(action->property("row").toInt());
     }
+
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::slot_download_destroyed(void)
@@ -604,12 +616,15 @@ void dooble_downloads::slot_populate(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     {
       m_downloads.clear();
+      m_ui.search->clear();
       m_ui.table->setRowCount(0);
       emit populated();
+      slot_search_timer_timeout();
       return;
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.search->clear();
 
   QString database_name("dooble_downloads");
 
@@ -723,6 +738,7 @@ void dooble_downloads::slot_populate(void)
   m_ui.table->resizeRowsToContents();
   QApplication::restoreOverrideCursor();
   emit populated();
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
@@ -759,6 +775,7 @@ void dooble_downloads::slot_search_timer_timeout(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString text(m_ui.search->text().toLower().trimmed());
+  int count = m_ui.table->rowCount();
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
@@ -777,9 +794,13 @@ void dooble_downloads::slot_search_timer_timeout(void)
 	if(downloads_item->url().toString().toLower().contains(text))
 	  m_ui.table->setRowHidden(i, false);
 	else
-	  m_ui.table->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.table->setRowHidden(i, true);
+	  }
       }
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
 }
 

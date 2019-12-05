@@ -505,6 +505,7 @@ void dooble_accepted_or_blocked_domains::purge(void)
   m_ui.entries_1->setText(tr("0 Row(s)"));
   m_ui.entries_2->setText(tr("0 Row(s)"));
   m_ui.exceptions->setRowCount(0);
+  m_ui.search->clear();
   m_ui.table->setRowCount(0);
 
   QString database_name(dooble_database_utilities::database_name());
