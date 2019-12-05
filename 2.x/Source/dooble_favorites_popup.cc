@@ -373,4 +373,5 @@ void dooble_favorites_popup::slot_sort(void)
     m_ui.view->sortByColumn(0, Qt::AscendingOrder);
 
   prepare_viewport_icons();
+  slot_search_timer_timeout();
 }
