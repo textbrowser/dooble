@@ -1448,6 +1448,9 @@
                    <attribute name="horizontalHeaderStretchLastSection">
                     <bool>true</bool>
                    </attribute>
+                   <attribute name="verticalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
                    <column>
                     <property name="text">
                      <string>Allow</string>
@@ -1467,6 +1470,13 @@
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_18">
+                   <item>
+                    <widget class="QLabel" name="features_permissions_entries">
+                     <property name="text">
+                      <string>0 Row(s)</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item>
                     <spacer name="horizontalSpacer_17">
                      <property name="orientation">
@@ -1771,6 +1781,9 @@
                       <attribute name="horizontalHeaderStretchLastSection">
                        <bool>true</bool>
                       </attribute>
+                      <attribute name="verticalHeaderVisible">
+                       <bool>false</bool>
+                      </attribute>
                       <column>
                        <property name="text">
                         <string>Allow</string>
@@ -1785,6 +1798,13 @@
                     </item>
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_13">
+                      <item>
+                       <widget class="QLabel" name="javascript_block_popups_exceptions_entries">
+                        <property name="text">
+                         <string>0 Row(s)</string>
+                        </property>
+                       </widget>
+                      </item>
                       <item>
                        <spacer name="horizontalSpacer_14">
                         <property name="orientation">

@@ -639,6 +639,7 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
      this,
      SLOT(slot_javascript_block_popups_exceptions_item_changed(QTableWidgetItem
 							       *)));
+  prepare_table_statistics();
   QApplication::restoreOverrideCursor();
   save_javascript_block_popup_exception(url, true);
 }
@@ -844,6 +845,14 @@ void dooble_settings::prepare_proxy(bool save)
     }
 }
 
+void dooble_settings::prepare_table_statistics(void)
+{
+  m_ui.features_permissions_entries->setText
+    (tr("%1 Row(s)").arg(m_ui.features_permissions->rowCount()));
+  m_ui.javascript_block_popups_exceptions_entries->setText
+    (tr("%1 Row(s)").arg(m_ui.javascript_block_popups_exceptions->rowCount()));
+}
+
 void dooble_settings::purge_database_data(void)
 {
   dooble::s_accepted_or_blocked_domains->purge();
@@ -887,6 +896,7 @@ void dooble_settings::purge_features_permissions(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  prepare_table_statistics();
   QApplication::restoreOverrideCursor();
 }
 
@@ -917,6 +927,7 @@ void dooble_settings::purge_javascript_block_popup_exceptions(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  prepare_table_statistics();
   QApplication::restoreOverrideCursor();
 }
 
@@ -1490,6 +1501,7 @@ void dooble_settings::set_site_feature_permission
 	      SIGNAL(itemChanged(QTableWidgetItem *)),
 	      this,
 	      SLOT(slot_features_permissions_item_changed(QTableWidgetItem *)));
+      prepare_table_statistics();
     }
   else
     {
@@ -2009,6 +2021,7 @@ void dooble_settings::slot_new_javascript_block_popup_exception(const QUrl &url)
     if(list.at(0))
       m_ui.javascript_block_popups_exceptions->removeRow(list.at(0)->row());
 
+  prepare_table_statistics();
   s_javascript_block_popup_exceptions.remove(url);
   QApplication::restoreOverrideCursor();
   new_javascript_block_popup_exception(url);
@@ -2221,6 +2234,7 @@ void dooble_settings::slot_populate(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.features_permissions->setRowCount(0);
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
+  prepare_table_statistics();
   s_javascript_block_popup_exceptions.clear();
   s_site_features_permissions.clear();
 
@@ -2371,6 +2385,7 @@ void dooble_settings::slot_populate(void)
   m_ui.features_permissions->setRowCount(count_1);
   m_ui.javascript_block_popups_exceptions->setRowCount
     (s_javascript_block_popup_exceptions.size());
+  prepare_table_statistics();
 
   {
     QMapIterator<QUrl, QPair<int, bool> > it(s_site_features_permissions);
@@ -2491,6 +2506,7 @@ void dooble_settings::slot_remove_all_features_permissions(void)
 
   QApplication::processEvents();
   m_ui.features_permissions->setRowCount(0);
+  prepare_table_statistics();
   s_site_features_permissions.clear();
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -2523,6 +2539,7 @@ void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
     }
 
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
+  prepare_table_statistics();
   s_javascript_block_popup_exceptions.clear();
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -2641,6 +2658,7 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
 	m_ui.features_permissions->removeRow(list.at(i).row());
       }
 
+  prepare_table_statistics();
   QApplication::restoreOverrideCursor();
 }
 
@@ -2729,6 +2747,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 	m_ui.javascript_block_popups_exceptions->removeRow(list.at(i).row());
       }
 
+  prepare_table_statistics();
   QApplication::restoreOverrideCursor();
 }
 

@@ -98,6 +98,7 @@ class dooble_settings: public QMainWindow
   void prepare_fonts(void);
   void prepare_icons(void);
   void prepare_proxy(bool save);
+  void prepare_table_statistics(void);
   void purge_database_data(void);
   void purge_features_permissions(void);
   void purge_javascript_block_popup_exceptions(void);

@@ -89,9 +89,19 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="clear_finished_downloads">
+       <widget class="dooble_search_widget" name="search">
+        <property name="placeholderText">
+         <string>Search Downloads</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="entries">
         <property name="text">
-         <string>&amp;Clear Finished Downloads</string>
+         <string>0 Row(s)</string>
         </property>
        </widget>
       </item>
@@ -109,19 +119,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="dooble_search_widget" name="search">
-        <property name="placeholderText">
-         <string>Search Downloads</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="entries">
+       <widget class="QPushButton" name="clear_finished_downloads">
         <property name="text">
-         <string>0 Row(s)</string>
+         <string>&amp;Clear Finished Downloads</string>
         </property>
        </widget>
       </item>
@@ -141,8 +141,8 @@
   <tabstop>download_path</tabstop>
   <tabstop>select</tabstop>
   <tabstop>table</tabstop>
-  <tabstop>clear_finished_downloads</tabstop>
   <tabstop>search</tabstop>
+  <tabstop>clear_finished_downloads</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>

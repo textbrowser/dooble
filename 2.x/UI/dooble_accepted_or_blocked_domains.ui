@@ -328,6 +328,9 @@
          </item>
          <item>
           <widget class="QSpinBox" name="maximum_session_rejections">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Existing entries will not be affected if this value is changed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
