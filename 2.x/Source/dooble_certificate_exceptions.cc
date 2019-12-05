@@ -87,7 +87,6 @@ void dooble_certificate_exceptions::exception_accepted(const QString &error,
   if(!list.isEmpty())
     return;
 
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount() + 1));
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
 
@@ -102,6 +101,7 @@ void dooble_certificate_exceptions::exception_accepted(const QString &error,
   m_ui.table->setSortingEnabled(true);
   m_ui.table->sortItems
     (0, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+  slot_search_timer_timeout();
 }
 
 void dooble_certificate_exceptions::keyPressEvent(QKeyEvent *event)
@@ -151,7 +151,7 @@ void dooble_certificate_exceptions::remove_exception(const QUrl &url)
   for(int i = rows.size() - 1; i >= 0; i--)
     m_ui.table->removeRow(rows.at(i));
 
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
+  slot_search_timer_timeout();
 }
 
 void dooble_certificate_exceptions::resizeEvent(QResizeEvent *event)
@@ -272,8 +272,8 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_certificate_exceptions::slot_find(void)
@@ -285,6 +285,7 @@ void dooble_certificate_exceptions::slot_find(void)
 void dooble_certificate_exceptions::slot_populate(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.search->clear();
   m_ui.entries->setText(tr("0 Row(s)"));
   m_ui.table->setRowCount(0);
 
