@@ -191,6 +191,7 @@ void dooble_history_window::set_row_hidden(int i)
 
   QDateTime period(QDateTime::currentDateTime());
   QString text(m_ui.search->text().toLower().trimmed());
+  int count = m_ui.table->rowCount();
 
   switch(m_ui.period->currentRow())
     {
@@ -202,7 +203,10 @@ void dooble_history_window::set_row_hidden(int i)
 		item2->text().toLower().contains(text))
 	  m_ui.table->setRowHidden(i, false);
 	else
-	  m_ui.table->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.table->setRowHidden(i, true);
+	  }
 
 	break;
       }
@@ -223,10 +227,16 @@ void dooble_history_window::set_row_hidden(int i)
 		    item2->text().toLower().contains(text))
 	      m_ui.table->setRowHidden(i, false);
 	    else
-	      m_ui.table->setRowHidden(i, true);
+	      {
+		count -= 1;
+		m_ui.table->setRowHidden(i, true);
+	      }
 	  }
 	else
-	  m_ui.table->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.table->setRowHidden(i, true);
+	  }
 
 	break;
       }
@@ -247,14 +257,22 @@ void dooble_history_window::set_row_hidden(int i)
 		    item2->text().toLower().contains(text))
 	      m_ui.table->setRowHidden(i, false);
 	    else
-	      m_ui.table->setRowHidden(i, true);
+	      {
+		count -= 1;
+		m_ui.table->setRowHidden(i, true);
+	      }
 	  }
 	else
-	  m_ui.table->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.table->setRowHidden(i, true);
+	  }
 
 	break;
       }
     }
+
+  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
 }
 
 void dooble_history_window::show(QWidget *parent)
@@ -395,6 +413,7 @@ void dooble_history_window::slot_delete_pages(void)
     }
 
   dooble::s_history->remove_items_list(urls);
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
 }
@@ -475,6 +494,8 @@ void dooble_history_window::slot_history_cleared(void)
       m_items.remove(url);
       m_ui.table->removeRow(i);
     }
+
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
 }
 
 void dooble_history_window::slot_horizontal_header_section_resized
@@ -693,6 +714,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   item4->setData(Qt::UserRole, item.url());
   item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount() + 1));
   m_ui.table->setSortingEnabled(false);
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setItem(m_ui.table->rowCount() - 1, 0, item1);
@@ -722,6 +744,7 @@ void dooble_history_window::slot_populate(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     {
       m_items.clear();
+      m_ui.entries->setText(tr("0 Row(s)"));
       m_ui.table->setRowCount(0);
       return;
     }
@@ -740,6 +763,7 @@ void dooble_history_window::slot_populate(void)
   QString icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(hash.size()));
   m_ui.table->setRowCount(0);
   m_ui.table->setRowCount(hash.size());
 
@@ -847,6 +871,8 @@ void dooble_history_window::slot_search_timer_timeout(void)
       }
     }
 
+  int count = m_ui.table->rowCount();
+
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(m_ui.period->currentRow() <= 0 && text.isEmpty())
       m_ui.table->setRowHidden(i, false);
@@ -872,7 +898,10 @@ void dooble_history_window::slot_search_timer_timeout(void)
 		      item2->text().toLower().contains(text))
 		m_ui.table->setRowHidden(i, false);
 	      else
-		m_ui.table->setRowHidden(i, true);
+		{
+		  count -= 1;
+		  m_ui.table->setRowHidden(i, true);
+		}
 
 	      break;
 	    }
@@ -890,10 +919,16 @@ void dooble_history_window::slot_search_timer_timeout(void)
 			  item2->text().toLower().contains(text))
 		    m_ui.table->setRowHidden(i, false);
 		  else
-		    m_ui.table->setRowHidden(i, true);
+		    {
+		      count -= 1;
+		      m_ui.table->setRowHidden(i, true);
+		    }
 		}
 	      else
-		m_ui.table->setRowHidden(i, true);
+		{
+		  count -= 1;
+		  m_ui.table->setRowHidden(i, true);
+		}
 
 	      break;
 	    }
@@ -911,16 +946,23 @@ void dooble_history_window::slot_search_timer_timeout(void)
 			  item2->text().toLower().contains(text))
 		    m_ui.table->setRowHidden(i, false);
 		  else
-		    m_ui.table->setRowHidden(i, true);
+		    {
+		      count -= 1;
+		      m_ui.table->setRowHidden(i, true);
+		    }
 		}
 	      else
-		m_ui.table->setRowHidden(i, true);
+		{
+		  count -= 1;
+		  m_ui.table->setRowHidden(i, true);
+		}
 
 	      break;
 	    }
 	  }
       }
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
   m_ui.table->prepare_viewport_icons();
 }
