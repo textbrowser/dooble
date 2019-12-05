@@ -58,6 +58,9 @@
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
       </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>Site</string>
@@ -169,6 +172,13 @@
         </property>
         <property name="clearButtonEnabled">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="entries">
+        <property name="text">
+         <string>0 Row(s)</string>
         </property>
        </widget>
       </item>

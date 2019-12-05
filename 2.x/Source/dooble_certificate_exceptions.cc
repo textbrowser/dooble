@@ -87,6 +87,7 @@ void dooble_certificate_exceptions::exception_accepted(const QString &error,
   if(!list.isEmpty())
     return;
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount() + 1));
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setSortingEnabled(false);
 
@@ -118,6 +119,7 @@ void dooble_certificate_exceptions::keyPressEvent(QKeyEvent *event)
 
 void dooble_certificate_exceptions::purge(void)
 {
+  m_ui.entries->setText(tr("0 Row(s)"));
   m_ui.table->setRowCount(0);
 }
 
@@ -148,6 +150,8 @@ void dooble_certificate_exceptions::remove_exception(const QUrl &url)
 
   for(int i = rows.size() - 1; i >= 0; i--)
     m_ui.table->removeRow(rows.at(i));
+
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
 }
 
 void dooble_certificate_exceptions::resizeEvent(QResizeEvent *event)
@@ -268,6 +272,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  m_ui.entries->setText(tr("%1 Row(s)").arg(m_ui.table->rowCount()));
   QApplication::restoreOverrideCursor();
 }
 
@@ -280,6 +285,7 @@ void dooble_certificate_exceptions::slot_find(void)
 void dooble_certificate_exceptions::slot_populate(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.entries->setText(tr("0 Row(s)"));
   m_ui.table->setRowCount(0);
 
   QList<QHash<QString, QVariant> > list;
@@ -344,6 +350,7 @@ void dooble_certificate_exceptions::slot_populate(void)
       QSqlDatabase::removeDatabase(database_name);
     }
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(list.size()));
   m_ui.table->setRowCount(list.size());
   m_ui.table->setSortingEnabled(false);
 
@@ -379,6 +386,7 @@ void dooble_certificate_exceptions::slot_search_timer_timeout(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString text(m_ui.search->text().toLower().trimmed());
+  int count = m_ui.table->rowCount();
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
@@ -398,8 +406,12 @@ void dooble_certificate_exceptions::slot_search_timer_timeout(void)
 	   item2->text().toLower().contains(text))
 	  m_ui.table->setRowHidden(i, false);
 	else
-	  m_ui.table->setRowHidden(i, true);
+	  {
+	    count -= 1;
+	    m_ui.table->setRowHidden(i, true);
+	  }
       }
 
+  m_ui.entries->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
 }
