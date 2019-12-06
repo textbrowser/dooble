@@ -862,6 +862,7 @@ void dooble_settings::purge_database_data(void)
   dooble_certificate_exceptions_menu_widget::purge();
   dooble_cookies::purge();
   dooble_favicons::purge();
+  m_ui.new_javascript_block_popup_exception->clear();
   purge_features_permissions();
   purge_javascript_block_popup_exceptions();
   s_javascript_block_popup_exceptions.clear();

@@ -458,6 +458,8 @@ void dooble_history_window::slot_find(void)
 
 void dooble_history_window::slot_history_cleared(void)
 {
+  m_ui.search->clear();
+
   for(int i = m_ui.table->rowCount(); i >= 0; i--)
     {
       QTableWidgetItem *item = m_ui.table->item(i, 0);

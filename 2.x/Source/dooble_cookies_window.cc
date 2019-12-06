@@ -407,6 +407,7 @@ void dooble_cookies_window::slot_cookies_cleared(void)
     m_cookie_store->deleteAllCookies();
 
   m_top_level_items.clear();
+  m_ui.domain_filter->clear();
   m_ui.tree->clear();
 }
 

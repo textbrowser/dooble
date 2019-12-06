@@ -502,10 +502,14 @@ void dooble_accepted_or_blocked_domains::purge(void)
   m_exceptions.clear();
   m_future.cancel();
   m_future.waitForFinished();
+  m_session_origin_hosts.clear();
   m_ui.entries_1->setText(tr("0 Row(s)"));
   m_ui.entries_2->setText(tr("0 Row(s)"));
+  m_ui.entries_3->setText(tr("0 Row(s)"));
+  m_ui.exception->clear();
   m_ui.exceptions->setRowCount(0);
   m_ui.search->clear();
+  m_ui.session_rejections->setRowCount(0);
   m_ui.table->setRowCount(0);
 
   QString database_name(dooble_database_utilities::database_name());
