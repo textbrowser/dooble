@@ -158,7 +158,9 @@ Unknown Items
 - Element-selection option.
 - Gopher text search.
 - HMAC or KMAC.
+- Inject custom style sheets into Web pages.
 - Multiple certificate exceptions.
+- Notify operator of completion of Accepted / Blocked Domains import.
 - Optional Document Mode.
 - Print preview. Qt?
 - Socket states.
