@@ -14,7 +14,7 @@ then
     exit 1
 elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
 then
-    cd /usr/local/dooble && exec ./Dooble "$@"
+    cd /usr/local/dooble && exec ./Dooble --disable-reading-from-canvas "$@"
     exit $?
 else
     exit 1
