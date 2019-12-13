@@ -30,6 +30,8 @@
 
 #include <QFuture>
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QPointer>
 #include <QSqlDatabase>
 #include <QTimer>
 
@@ -63,6 +65,7 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   QHash<QString, char> m_domains;
   QHash<QString, char> m_exceptions;
   QHash<QString, char> m_session_origin_hosts;
+  QPointer<QMessageBox> m_import_dialog;
   QTimer m_search_timer;
   Ui_dooble_accepted_or_blocked_domains m_ui;
   void create_tables(QSqlDatabase &db);

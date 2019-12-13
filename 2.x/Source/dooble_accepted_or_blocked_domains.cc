@@ -28,7 +28,6 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
-#include <QMessageBox>
 #include <QSqlQuery>
 #include <QtConcurrent>
 
@@ -1154,6 +1153,21 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		 dooble::s_cryptography->keys().second,
 		 m_domains);
 	      QApplication::restoreOverrideCursor();
+
+	      if(m_import_dialog)
+		m_import_dialog->deleteLater();
+
+	      m_import_dialog = new QMessageBox
+		(QMessageBox::Information,
+		 tr("Dooble: Accepted / Blocked Domains Import"),
+		 tr("Importing the domain names. Please be patient. "
+		    "This dialog will be dismissed once the import process "
+		    "completes. If you close this dialog, the process will "
+		    "continue."),
+		 QMessageBox::Ok,
+		 this);
+	      m_import_dialog->setModal(true);
+	      m_import_dialog->show();
 	    }
 	}
     }
@@ -1163,6 +1177,9 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 
 void dooble_accepted_or_blocked_domains::slot_imported(void)
 {
+  if(m_import_dialog)
+    m_import_dialog->deleteLater();
+
   populate();
 }
 

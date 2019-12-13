@@ -82,6 +82,7 @@ Completed Items
 - More elegant popups.
 - New Web site.
 - New page context menus (dooble_web_engine_view::contextMenuEvent()).
+- Notify operator of completion of Accepted / Blocked Domains import.
 - OS X bundle.
 - Optional DNT.
 - Optional Visited Links.
@@ -138,29 +139,28 @@ Completed Items
 - WebEngine fonts.
 - WebGL option.
 - Windows PRNG.
+- Wobbly progress label.
 - Zoom.
 - mlock().
 
 Remaining Items
 
 - Auto-correct addresses.
+- DTLS and Echo-DNS.
+- Element-selection option.
 - Fancy completer.
+- Gopher text search.
 - Include date stamps in cookie containers.
+- Inject custom style sheets into Web pages.
 - Qt's digest class.
-- Wobbly progress label.
 - linkHovered() is emitted without user interaction.
 
 Unknown Items
 
 - Certificate information. Requires a WebEngine interface.
 - Cookies are not always deleted properly.
-- DTLS and Echo-DNS.
-- Element-selection option.
-- Gopher text search.
 - HMAC or KMAC.
-- Inject custom style sheets into Web pages.
 - Multiple certificate exceptions.
-- Notify operator of completion of Accepted / Blocked Domains import.
 - Optional Document Mode.
 - Print preview. Qt?
 - Socket states.
