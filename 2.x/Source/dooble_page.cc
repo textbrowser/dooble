@@ -1295,7 +1295,7 @@ void dooble_page::slot_close_javascript_popup_exception_frame(void)
     {
       QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
-      if(view)
+      if(view && view->parent() == this)
 	view->deleteLater();
     }
 
@@ -1677,14 +1677,19 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 	  QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
 	  if(view)
-	    menu.addAction
-	      (font_metrics.elidedText(tr("Show %1").arg(view->url().
-							 toString()) + "...",
-				       Qt::ElideMiddle,
-				       dooble_ui_utilities::
-				       context_menu_width(&menu)),
-	       this,
-	       SLOT(slot_show_popup(void)))->setProperty("index", i);
+	    {
+	      QAction *action = menu.addAction
+		(font_metrics.elidedText(tr("Show %1").arg(view->url().
+							   toString()) + "...",
+					 Qt::ElideMiddle,
+					 dooble_ui_utilities::
+					 context_menu_width(&menu)),
+		 this,
+		 SLOT(slot_show_popup(void)));
+
+	      action->setProperty("index", i);
+	      action->setToolTip(view->url().toString());
+	    }
 	}
     }
 
