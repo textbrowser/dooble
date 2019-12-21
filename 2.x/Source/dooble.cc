@@ -833,6 +833,9 @@ void dooble::new_page(dooble_page *page)
 
 void dooble::new_page(dooble_web_engine_view *view)
 {
+  if(view)
+    view->setVisible(true);
+
   dooble_page *page = new dooble_page
     (view ? view->web_engine_profile() : m_web_engine_profile.data(),
      view,

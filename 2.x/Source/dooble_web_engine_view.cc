@@ -123,6 +123,8 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
   dooble_web_engine_view *view = new dooble_web_engine_view
     (m_page->profile(), nullptr);
 
+  view->setVisible(false);
+
   if(!m_page->last_clicked_link().isEmpty() &&
      m_page->last_clicked_link().isValid())
     view->setUrl(m_page->last_clicked_link());
