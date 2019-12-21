@@ -149,7 +149,7 @@ void dooble_accepted_or_blocked_domains::abort(void)
 }
 
 void dooble_accepted_or_blocked_domains::accept_or_block_domain
-(const QString &domain, const bool replace)
+(const QString &domain, bool replace)
 {
   if(domain.trimmed().isEmpty())
     return;

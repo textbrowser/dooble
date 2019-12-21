@@ -543,7 +543,7 @@ void dooble_page::hide_location_frame(bool state)
 void dooble_page::hide_status_bar(bool state)
 {
   m_ui.status_bar->setVisible(!state);
-  prepare_progress_label_position();
+  prepare_progress_label_position(false);
 }
 
 void dooble_page::load(const QUrl &url)
@@ -611,9 +611,10 @@ void dooble_page::prepare_icons(void)
 		      QIcon(QString(":/%1/36/reload.png").arg(icon_set))));
 }
 
-void dooble_page::prepare_progress_label_position(void)
+void dooble_page::prepare_progress_label_position(bool process_events)
 {
-  QApplication::processEvents();
+  if(process_events)
+    QApplication::processEvents();
 
   int y = m_ui.frame->height() - m_progress_label->height() - 1;
 

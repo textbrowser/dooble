@@ -112,7 +112,7 @@ class dooble_page: public QWidget
   void go_to_backward_item(int index);
   void go_to_forward_item(int index);
   void prepare_icons(void);
-  void prepare_progress_label_position(void);
+  void prepare_progress_label_position(bool process_events = true);
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
   void prepare_style_sheets(void);
