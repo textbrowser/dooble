@@ -216,9 +216,9 @@ void dooble_address_widget_completer::complete(const QString &text)
 
   m_model->clear();
 
-  while(!list.isEmpty())
+  for(int i = 0; i < list.size(); i++)
     {
-      QStandardItem *item = list.takeFirst();
+      QStandardItem *item = list.at(i);
 
       if(item)
 	{

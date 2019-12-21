@@ -441,8 +441,10 @@ void dooble_web_engine_view::slot_certificate_exception_accepted
 
 void dooble_web_engine_view::slot_create_dialog_requests(void)
 {
-  while(!m_dialog_requests.isEmpty())
-    emit create_dialog_request(m_dialog_requests.takeFirst());
+  for(int i = 0; i < m_dialog_requests.size(); i++)
+    emit create_dialog_request(m_dialog_requests.at(i));
+
+  m_dialog_requests.clear();
 }
 
 void dooble_web_engine_view::slot_load_progress(int progress)

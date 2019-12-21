@@ -73,16 +73,13 @@ QStringList dooble_web_engine_page::chooseFiles
     {
     case QWebEnginePage::FileSelectOpen:
       {
-	return QStringList() << QFileDialog::getOpenFileName(view(),
-							     tr("Select File"),
-							     QDir::homePath(),
-							     oldFiles.first());
+	return QStringList() << QFileDialog::getOpenFileName
+	  (view(), tr("Select File"), QDir::homePath(), oldFiles.value(0));
       }
     case QWebEnginePage::FileSelectOpenMultiple:
       {
-	return QFileDialog::getOpenFileNames(view(),
-					     tr("Select Files"),
-					     QDir::homePath());
+	return QFileDialog::getOpenFileNames
+	  (view(), tr("Select Files"), QDir::homePath());
       }
     }
 

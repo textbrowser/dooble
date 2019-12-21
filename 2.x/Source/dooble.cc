@@ -279,11 +279,9 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 
 dooble::~dooble()
 {
-  while(!m_shortcuts.isEmpty())
-    if(m_shortcuts.first())
-      m_shortcuts.takeFirst()->deleteLater();
-    else
-      m_shortcuts.removeFirst();
+  for(int i = 0; i < m_shortcuts.size(); i++)
+    if(m_shortcuts.at(i))
+      m_shortcuts.at(i)->deleteLater();
 }
 
 bool dooble::can_exit(void)
@@ -1614,8 +1612,10 @@ void dooble::prepare_tab_icons(void)
 
 void dooble::prepare_tab_shortcuts(void)
 {
-  while(!m_tab_widget_shortcuts.isEmpty())
-    delete m_tab_widget_shortcuts.takeFirst();
+  for(int i = 0; i < m_tab_widget_shortcuts.size(); i++)
+    delete m_tab_widget_shortcuts.at(i);
+
+  m_tab_widget_shortcuts.clear();
 
   for(int i = 0; i < qMin(m_ui.tab->count(), 10); i++)
     {
@@ -2472,13 +2472,15 @@ void dooble::slot_history_action_triggered(void)
 
 void dooble::slot_history_favorites_populated(void)
 {
-  while(!m_delayed_pages.isEmpty())
+  for(int i = 0; i < m_delayed_pages.size(); i++)
     {
-      QPair<QPointer<dooble_page>, QUrl> pair(m_delayed_pages.takeFirst());
+      QPair<QPointer<dooble_page>, QUrl> pair(m_delayed_pages.at(i));
 
       if(pair.first)
 	pair.first->load(pair.second);
     }
+
+  m_delayed_pages.clear();
 }
 
 void dooble::slot_icon_changed(const QIcon &icon)

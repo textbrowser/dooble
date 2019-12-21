@@ -2786,10 +2786,10 @@ void dooble_settings::slot_reset(void)
        << "dooble_search_engines.db"
        << "dooble_settings.db";
 
-  while(!list.isEmpty())
+  for(int i = 0; i < list.size(); i++)
     QFile::remove(dooble_settings::setting("home_path").toString() +
 		  QDir::separator() +
-		  list.takeFirst());
+		  list.at(i));
 
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();

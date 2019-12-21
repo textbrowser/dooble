@@ -362,17 +362,16 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
 dooble_page::~dooble_page()
 {
-  while(!m_last_javascript_popups.isEmpty())
+  for(int i = 0; i <m_last_javascript_popups.size(); i++)
     {
-      QPointer<dooble_web_engine_view> view
-	(m_last_javascript_popups.takeFirst());
+      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
       if(view && view->parent() == this)
 	view->deleteLater();
     }
 
-  while(!m_shortcuts.isEmpty())
-    delete m_shortcuts.takeFirst();
+  for(int i = 0; i < m_shortcuts.size(); i++)
+    delete m_shortcuts.at(i);
 }
 
 QAction *dooble_page::action_close_tab(void) const
@@ -1227,14 +1226,15 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  while(!m_last_javascript_popups.isEmpty())
+  for(int i = 0; i < m_last_javascript_popups.size(); i++)
     {
-      QPointer<dooble_web_engine_view> view
-	(m_last_javascript_popups.takeFirst());
+      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
       if(view && view->parent() == this)
 	emit create_dialog(view);
     }
+
+  m_last_javascript_popups.clear();
 
   QAction *action = qobject_cast<QAction *> (sender());
 
@@ -1291,14 +1291,15 @@ void dooble_page::slot_close_javascript_popup_exception_frame(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  while(!m_last_javascript_popups.isEmpty())
+  for(int i = 0; i < m_last_javascript_popups.size(); i++)
     {
-      QPointer<dooble_web_engine_view> view
-	(m_last_javascript_popups.takeFirst());
+      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
       if(view)
 	view->deleteLater();
     }
+
+  m_last_javascript_popups.clear();
 }
 
 void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
@@ -1806,15 +1807,15 @@ void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
 
-  while(!m_last_javascript_popups.isEmpty())
+  for(int i = 0; i < m_last_javascript_popups.size(); i++)
     {
-      QPointer<dooble_web_engine_view> view
-	(m_last_javascript_popups.takeFirst());
+      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
       if(view && view->parent() == this)
 	view->deleteLater();
     }
 
+  m_last_javascript_popups.clear();
   m_progress_label->setVisible(true);
 
   if(url().host().isEmpty())
@@ -1840,14 +1841,15 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  while(!m_last_javascript_popups.isEmpty())
+  for(int i = 0; i < m_last_javascript_popups.size(); i++)
     {
-      QPointer<dooble_web_engine_view> view
-	(m_last_javascript_popups.takeFirst());
+      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
 
       if(view && view->parent() == this)
 	emit create_dialog(view);
     }
+
+  m_last_javascript_popups.clear();
 }
 
 void dooble_page::slot_open_link(const QUrl &url)

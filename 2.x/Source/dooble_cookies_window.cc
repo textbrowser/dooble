@@ -157,9 +157,9 @@ void dooble_cookies_window::delete_top_level_items
   QList<QNetworkCookie> cookies;
   QStringList domains;
 
-  while(!list.isEmpty())
+  for(int i = 0; i <list.size(); i++)
     {
-      QTreeWidgetItem *item = list.takeFirst();
+      QTreeWidgetItem *item = list.at(i);
 
       if(!item)
 	continue;
@@ -425,9 +425,9 @@ void dooble_cookies_window::slot_delete_selected(void)
   QList<QTreeWidgetItem *> list(m_ui.tree->selectedItems());
   QStringList domains;
 
-  while(!list.isEmpty())
+  for(int i = 0; i < list.size(); i++)
     {
-      QTreeWidgetItem *item = list.takeFirst();
+      QTreeWidgetItem *item = list.at(i);
 
       if(!item)
 	continue;
