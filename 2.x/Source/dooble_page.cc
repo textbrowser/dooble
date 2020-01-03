@@ -50,6 +50,7 @@
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
+#include "ui_dooble_style_sheet.h"
 
 dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
@@ -132,6 +133,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(favorite_changed(const QUrl &, bool)),
 	  this,
 	  SLOT(slot_favorite_changed(const QUrl &, bool)));
+  connect(m_ui.address,
+	  SIGNAL(inject_custom_css(void)),
+	  this,
+	  SLOT(slot_inject_custom_css(void)));
   connect(m_ui.address,
 	  SIGNAL(load_page(const QUrl &)),
 	  this,
@@ -1640,6 +1645,18 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
     dooble_favicons::save_favicon(m_view->icon(), m_view->url());
 
   m_ui.address->set_item_icon(m_view->icon(), m_view->url());
+}
+
+void dooble_page::slot_inject_custom_css(void)
+{
+  QDialog dialog(this);
+  Ui_dooble_style_sheet ui;
+
+  ui.setupUi(&dialog);
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+    }
 }
 
 void dooble_page::slot_javascript_allow_popup_exception(void)

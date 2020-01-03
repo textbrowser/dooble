@@ -505,6 +505,10 @@ void dooble_address_widget::slot_show_site_information_menu(void)
        SIGNAL(show_certificate_exception(void)));
 
   menu.addAction
+    (tr("Inject Custom Style Sheet..."),
+     this,
+     SIGNAL(inject_custom_css(void)));
+  menu.addAction
     (QIcon::fromTheme("preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
      tr("Show Site Coo&kies..."),

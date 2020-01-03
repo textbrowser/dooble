@@ -86,6 +86,7 @@ class dooble_address_widget: public QLineEdit
 
  signals:
   void favorite_changed(const QUrl &url, bool state);
+  void inject_custom_css(void);
   void load_page(const QUrl &url);
   void populated(void);
   void pull_down_clicked(void);
