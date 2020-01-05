@@ -48,11 +48,11 @@
 #include "dooble_history_window.h"
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
+#include "dooble_style_sheet.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authentication_dialog.h"
-#include "ui_dooble_style_sheet.h"
 
 dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
@@ -1651,10 +1651,7 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 
 void dooble_page::slot_inject_custom_css(void)
 {
-  QDialog dialog(this);
-  Ui_dooble_style_sheet ui;
-
-  ui.setupUi(&dialog);
+  dooble_style_sheet dialog(this);
 
   if(dialog.exec() == QDialog::Accepted)
     {
@@ -1668,7 +1665,7 @@ void dooble_page::slot_inject_custom_css(void)
 			     "document.head.appendChild(css);"
 			     "})()").
 	 arg(name).
-	 arg(ui.style_sheet->toPlainText().trimmed()));
+	 arg(dialog.text().trimmed()));
       QWebEngineScript web_engine_script;
 
       web_engine_script.setInjectionPoint(QWebEngineScript::DocumentReady);

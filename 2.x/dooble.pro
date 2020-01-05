@@ -600,6 +600,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_search_engines_popup.h \
                   Source/dooble_search_widget.h \
                   Source/dooble_settings.h \
+                  Source/dooble_style_sheet.h \
                   Source/dooble_tab_bar.h \
                   Source/dooble_tab_widget.h \
                   Source/dooble_table_view.h \
@@ -653,6 +654,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_search_engines_popup.cc \
                   Source/dooble_search_widget.cc \
                   Source/dooble_settings.cc \
+                  Source/dooble_style_sheet.cc \
                   Source/dooble_tab_bar.cc \
                   Source/dooble_tab_widget.cc \
                   Source/dooble_table_view.cc \
