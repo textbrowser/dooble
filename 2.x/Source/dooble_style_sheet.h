@@ -32,19 +32,25 @@
 
 #include "ui_dooble_style_sheet.h"
 
+class QWebEnginePage;
+
 class dooble_style_sheet: public QDialog
 {
   Q_OBJECT
 
  public:
-  dooble_style_sheet(QWidget *parent);
-  QString text(void) const;
+  dooble_style_sheet(QWebEnginePage *web_engine_page, QWidget *parent);
 
  protected:
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QWebEnginePage *m_web_engine_page;
   Ui_dooble_style_sheet m_ui;
+
+ private slots:
+  void slot_add(void);
+  void slot_remove(void);
 };
 
 #endif

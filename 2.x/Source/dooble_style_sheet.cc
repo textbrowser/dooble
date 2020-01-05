@@ -26,18 +26,26 @@
 */
 
 #include <QKeyEvent>
+#include <QWebEnginePage>
+#include <QWebEngineScript>
+#include <QWebEngineScriptCollection>
 
 #include "dooble.h"
 #include "dooble_style_sheet.h"
 
-dooble_style_sheet::dooble_style_sheet(QWidget *parent):QDialog(parent)
+dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
+				       QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
-}
-
-QString dooble_style_sheet::text(void) const
-{
-  return m_ui.style_sheet->toPlainText();
+  m_web_engine_page = web_engine_page;
+  connect(m_ui.add,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_add(void)));
+  connect(m_ui.remove,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove(void)));
 }
 
 void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
@@ -46,4 +54,40 @@ void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
     close();
 
   QDialog::keyPressEvent(event);
+}
+
+void dooble_style_sheet::slot_add(void)
+{
+  if(!m_web_engine_page)
+    return;
+
+  QString name(m_ui.name->text().trimmed());
+
+  if(name.isEmpty())
+    return;
+
+  QString style_sheet
+    (QString::fromLatin1("(function() {"
+			 "css = document.createElement('style');"
+			 "css.id = '%1';"
+			 "css.type = 'text/css';"
+			 "css.innerText = '%2';"
+			 "document.head.appendChild(css);"
+			 "})()").
+     arg(name).
+     arg(m_ui.style_sheet->toPlainText().trimmed()));
+  QWebEngineScript web_engine_script;
+
+  web_engine_script.setInjectionPoint(QWebEngineScript::DocumentReady);
+  web_engine_script.setName(name);
+  web_engine_script.setRunsOnSubFrames(true);
+  web_engine_script.setSourceCode(style_sheet);
+  web_engine_script.setWorldId(QWebEngineScript::ApplicationWorld);
+  m_web_engine_page->runJavaScript
+    (style_sheet, QWebEngineScript::ApplicationWorld);
+  m_web_engine_page->scripts().insert(web_engine_script);
+}
+
+void dooble_style_sheet::slot_remove(void)
+{
 }

@@ -30,8 +30,6 @@
 #include <QToolTip>
 #include <QWebEngineHistoryItem>
 #include <QWebEngineProfile>
-#include <QWebEngineScript>
-#include <QWebEngineScriptCollection>
 #include <QWidgetAction>
 
 #include "dooble.h"
@@ -1651,32 +1649,9 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 
 void dooble_page::slot_inject_custom_css(void)
 {
-  dooble_style_sheet dialog(this);
+  dooble_style_sheet dialog(m_view->page(), this);
 
-  if(dialog.exec() == QDialog::Accepted)
-    {
-      QString name("");
-      QString style_sheet
-	(QString::fromLatin1("(function() {"
-			     "css = document.createElement('style');"
-			     "css.id = '%1';"
-			     "css.type = 'text/css';"
-			     "css.innerText = '%2';"
-			     "document.head.appendChild(css);"
-			     "})()").
-	 arg(name).
-	 arg(dialog.text().trimmed()));
-      QWebEngineScript web_engine_script;
-
-      web_engine_script.setInjectionPoint(QWebEngineScript::DocumentReady);
-      web_engine_script.setName(name);
-      web_engine_script.setRunsOnSubFrames(true);
-      web_engine_script.setSourceCode(style_sheet);
-      web_engine_script.setWorldId(QWebEngineScript::ApplicationWorld);
-      m_view->page()->runJavaScript
-	(style_sheet, QWebEngineScript::ApplicationWorld);
-      m_view->page()->scripts().insert(web_engine_script);
-    }
+  dialog.exec();
 }
 
 void dooble_page::slot_javascript_allow_popup_exception(void)
