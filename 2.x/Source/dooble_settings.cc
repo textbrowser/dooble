@@ -2784,7 +2784,8 @@ void dooble_settings::slot_reset(void)
        << "dooble_favicons.db"
        << "dooble_history.db"
        << "dooble_search_engines.db"
-       << "dooble_settings.db";
+       << "dooble_settings.db"
+       << "dooble_style_sheets.db";
 
   for(int i = 0; i < list.size(); i++)
     QFile::remove(dooble_settings::setting("home_path").toString() +

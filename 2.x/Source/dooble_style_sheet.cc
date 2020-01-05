@@ -25,12 +25,15 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QKeyEvent>
+#include <QSqlQuery>
 #include <QWebEnginePage>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
 
 #include "dooble.h"
+#include "dooble_database_utilities.h"
 #include "dooble_style_sheet.h"
 
 dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
@@ -86,6 +89,31 @@ void dooble_style_sheet::slot_add(void)
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().insert(web_engine_script);
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_style_sheets.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_style_sheets "
+	   "(name, style_sheet, url_digest) VALUES (?, ?, ?)");
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_style_sheet::slot_remove(void)
