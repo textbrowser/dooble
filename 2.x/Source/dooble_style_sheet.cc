@@ -103,10 +103,10 @@ void dooble_style_sheet::slot_add(void)
       {
 	QSqlQuery query(db);
 
-	query.exec("PRAGMA synchronous = OFF");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_style_sheets "
-	   "(name, style_sheet, url_digest) VALUES (?, ?, ?)");
+	   "(name, style_sheet, url_digest) "
+	   "VALUES (?, ?, ?)");
 	query.exec();
       }
 
