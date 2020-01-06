@@ -33,6 +33,7 @@
 #include <QWebEngineScriptCollection>
 
 #include "dooble.h"
+#include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
 #include "dooble_style_sheet.h"
 
@@ -66,7 +67,7 @@ void dooble_style_sheet::slot_add(void)
 
   QString name(m_ui.name->text().trimmed());
 
-  if(name.isEmpty())
+  if(m_ui.style_sheet->toPlainText().trimmed().isEmpty() || name.isEmpty())
     return;
 
   QString style_sheet
@@ -90,6 +91,9 @@ void dooble_style_sheet::slot_add(void)
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().insert(web_engine_script);
 
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
   QString database_name(dooble_database_utilities::database_name());
 
   {
@@ -103,13 +107,40 @@ void dooble_style_sheet::slot_add(void)
       {
 	QSqlQuery query(db);
 
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_style_sheets ("
+		   "name TEXT NOT NULL, "
+		   "style_sheet TEXT NOT NULL, "
+		   "url_digest TEXT NOT NULL, "
+		   "PRIMARY KEY(name, url_digest))");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_style_sheets "
 	   "(name, style_sheet, url_digest) "
 	   "VALUES (?, ?, ?)");
+
+	QByteArray bytes;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(name.toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (style_sheet.toLatin1());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(m_web_engine_page->url().toEncoded()).
+	   toBase64());
 	query.exec();
       }
 
+  done_label:
     db.close();
   }
 
