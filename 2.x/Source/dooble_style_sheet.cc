@@ -168,6 +168,7 @@ void dooble_style_sheet::slot_remove(void)
 			 "element.outerHTML = '';"
 			 "delete element;})()").arg(name));
 
+  delete m_ui.names->takeItem(m_ui.names->row(list.at(0)));
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().remove
