@@ -50,6 +50,10 @@ dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_add(void)));
+  connect(m_ui.names,
+	  SIGNAL(itemSelectionChanged(void)),
+	  this,
+	  SLOT(slot_item_selection_changed(void)));
   connect(m_ui.remove,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -71,6 +75,9 @@ void dooble_style_sheet::slot_add(void)
 
   QString name(m_ui.name->text().trimmed());
 
+  if(!m_ui.names->findItems(name, Qt::MatchExactly).isEmpty())
+    return;
+
   if(m_ui.style_sheet->toPlainText().trimmed().isEmpty() || name.isEmpty())
     return;
 
@@ -91,6 +98,8 @@ void dooble_style_sheet::slot_add(void)
   web_engine_script.setRunsOnSubFrames(true);
   web_engine_script.setSourceCode(style_sheet);
   web_engine_script.setWorldId(QWebEngineScript::ApplicationWorld);
+  m_ui.names->addItem(name);
+  m_ui.names->sortItems();
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().insert(web_engine_script);
@@ -149,6 +158,10 @@ void dooble_style_sheet::slot_add(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_style_sheet::slot_item_selection_changed(void)
+{
 }
 
 void dooble_style_sheet::slot_remove(void)

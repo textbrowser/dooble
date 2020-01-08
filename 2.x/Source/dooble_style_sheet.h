@@ -50,6 +50,7 @@ class dooble_style_sheet: public QDialog
 
  private slots:
   void slot_add(void);
+  void slot_item_selection_changed(void);
   void slot_remove(void);
 };
 
