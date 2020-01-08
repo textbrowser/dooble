@@ -37,6 +37,10 @@
 #include "dooble_database_utilities.h"
 #include "dooble_style_sheet.h"
 
+/*
+** body { -webkit-transform: rotate(180deg); }
+*/
+
 dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
 				       QWidget *parent):QDialog(parent)
 {
@@ -149,4 +153,23 @@ void dooble_style_sheet::slot_add(void)
 
 void dooble_style_sheet::slot_remove(void)
 {
+  if(!m_web_engine_page)
+    return;
+
+  QList<QListWidgetItem *> list(m_ui.names->selectedItems());
+
+  if(list.isEmpty() || !list.at(0))
+    return;
+
+  QString name(list.at(0)->text());
+  QString style_sheet
+    (QString::fromLatin1("(function() {"
+			 "var element = document.getElementById('%1');"
+			 "element.outerHTML = '';"
+			 "delete element;})()").arg(name));
+
+  m_web_engine_page->runJavaScript
+    (style_sheet, QWebEngineScript::ApplicationWorld);
+  m_web_engine_page->scripts().remove
+    (m_web_engine_page->scripts().findScript(name));
 }
