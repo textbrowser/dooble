@@ -39,6 +39,7 @@ class dooble_style_sheet: public QDialog
   Q_OBJECT
 
  public:
+  dooble_style_sheet(QWidget *parent);
   dooble_style_sheet(QWebEnginePage *web_engine_page, QWidget *parent);
   static void purge(void);
 
@@ -53,7 +54,11 @@ class dooble_style_sheet: public QDialog
  private slots:
   void slot_add(void);
   void slot_item_selection_changed(void);
+  void slot_populate(void);
   void slot_remove(void);
+
+ signals:
+  void populated(void);
 };
 
 #endif

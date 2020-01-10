@@ -212,6 +212,14 @@ void dooble_style_sheet::slot_item_selection_changed(void)
 						m_web_engine_page->url())));
 }
 
+void dooble_style_sheet::slot_populate(void)
+{
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  emit populated();
+}
+
 void dooble_style_sheet::slot_remove(void)
 {
   if(!m_web_engine_page)
@@ -235,7 +243,7 @@ void dooble_style_sheet::slot_remove(void)
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
   s_style_sheets.remove
-    (QPair<QString, QUrl> (list.at(0)->text(), m_web_engine_page->url()));
+    (QPair<QString, QUrl> (name, m_web_engine_page->url()));
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
