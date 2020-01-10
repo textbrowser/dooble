@@ -41,6 +41,8 @@
 ** body { -webkit-transform: rotate(180deg); }
 */
 
+QMap<QPair<QString, QUrl>, QString> dooble_style_sheet::s_style_sheets;
+
 dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
 				       QWidget *parent):QDialog(parent)
 {
@@ -70,6 +72,8 @@ void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
 
 void dooble_style_sheet::purge(void)
 {
+  s_style_sheets.clear();
+
   QString database_name(dooble_database_utilities::database_name());
 
   {
@@ -129,6 +133,8 @@ void dooble_style_sheet::slot_add(void)
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().insert(web_engine_script);
+  s_style_sheets[QPair<QString, QUrl> (name, m_web_engine_page->url())] =
+    m_ui.style_sheet->toPlainText().trimmed();
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -201,11 +207,9 @@ void dooble_style_sheet::slot_item_selection_changed(void)
     }
 
   m_ui.name->setText(list.at(0)->text());
-
-  QWebEngineScript script
-    (m_web_engine_page->scripts().findScript(list.at(0)->text()));
-
-  m_ui.style_sheet->setPlainText(script.sourceCode());
+  m_ui.style_sheet->setPlainText
+    (s_style_sheets.value(QPair<QString, QUrl> (m_ui.name->text(),
+						m_web_engine_page->url())));
 }
 
 void dooble_style_sheet::slot_remove(void)
@@ -230,6 +234,8 @@ void dooble_style_sheet::slot_remove(void)
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
+  s_style_sheets.remove
+    (QPair<QString, QUrl> (list.at(0)->text(), m_web_engine_page->url()));
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;

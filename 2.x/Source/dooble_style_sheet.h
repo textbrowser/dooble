@@ -48,6 +48,7 @@ class dooble_style_sheet: public QDialog
  private:
   QWebEnginePage *m_web_engine_page;
   Ui_dooble_style_sheet m_ui;
+  static QMap<QPair<QString, QUrl>, QString> s_style_sheets;
 
  private slots:
   void slot_add(void);
