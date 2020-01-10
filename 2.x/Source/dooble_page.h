@@ -81,6 +81,8 @@ class dooble_page: public QWidget
   void hide_status_bar(bool state);
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
+  void print_page(QPrinter *printer,
+		  const QWebEngineCallback<bool> &result_callback);
   void reload(void);
   void reload_periodically(int seconds);
   void save(const QString &file_name);
@@ -162,7 +164,6 @@ class dooble_page: public QWidget
   void slot_open_link(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
-  void slot_print_preview(QPrinter *printer);
   void slot_proxy_authentication_required(const QUrl &url,
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);

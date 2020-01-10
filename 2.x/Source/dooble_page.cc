@@ -748,7 +748,7 @@ void dooble_page::prepare_standard_menus(void)
      QKeySequence(tr("Ctrl+P")));
   menu->addAction(tr("Print Pre&view..."),
 		  this,
-		  SIGNAL(print_preview(void)))->setEnabled(false);
+		  SIGNAL(print_preview(void)));
   menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme("application-exit",
@@ -1005,6 +1005,12 @@ void dooble_page::print_page(QPrinter *printer)
 			  QApplication::restoreOverrideCursor();
 			  Q_UNUSED(result)
 			});
+}
+
+void dooble_page::print_page
+(QPrinter *printer, const QWebEngineCallback<bool> &result_callback)
+{
+  m_view->page()->print(printer, result_callback);
 }
 
 void dooble_page::reload(void)
@@ -1939,12 +1945,6 @@ void dooble_page::slot_prepare_forward_menu(void)
 	(icon, title, this, SLOT(slot_go_to_forward_item(void)));
       action->setProperty("index", i);
     }
-}
-
-void dooble_page::slot_print_preview(QPrinter *printer)
-{
-  if(!printer)
-    return;
 }
 
 void dooble_page::slot_proxy_authentication_required

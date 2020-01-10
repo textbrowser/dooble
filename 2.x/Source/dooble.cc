@@ -92,6 +92,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
   m_is_javascript_dialog = false;
   m_is_private = false;
   m_menu = new QMenu(this);
+  m_print_preview = false;
   m_ui.setupUi(this);
   connect_signals();
 
@@ -138,6 +139,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
   m_is_javascript_dialog = false;
   m_is_private = is_private;
   m_menu = new QMenu(this);
+  m_print_preview = false;
   m_ui.setupUi(this);
 
   if(m_is_private)
@@ -213,6 +215,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
   m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
   m_menu = new QMenu(this);
+  m_print_preview = false;
   m_ui.setupUi(this);
   connect_signals();
 
@@ -249,6 +252,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
   m_menu = new QMenu(this);
+  m_print_preview = false;
   m_ui.setupUi(this);
   connect_signals();
 
@@ -1670,7 +1674,7 @@ void dooble::print(dooble_page *page)
   if(print_dialog->exec() == QDialog::Accepted)
     {
       QApplication::processEvents();
-      page->print_page(printer);
+      page->print_page(printer); // Deletes the printer object.
     }
   else
     {
@@ -1684,6 +1688,40 @@ void dooble::print(dooble_page *page)
 void dooble::print_current_page(void)
 {
   print(current_page());
+}
+
+void dooble::print_preview(QPrinter *printer)
+{
+  dooble_page *page = current_page();
+
+  if(!page || !printer)
+    return;
+
+  QEventLoop event_loop;
+  bool result;
+  auto print_preview = [&] (bool success)
+		       {
+			 result = success;
+			 event_loop.quit();
+		       };
+
+  page->print_page(printer, std::move(print_preview));
+  event_loop.exec();
+
+  if(!result)
+    {
+      QPainter painter;
+
+      if(painter.begin(printer))
+	{
+	  QFont font = painter.font();
+
+	  font.setPixelSize(25);
+	  painter.setFont(font);
+	  painter.drawText(QPointF(25, 25), tr("A failure occurred."));
+	  painter.end();
+        }
+    }
 }
 
 void dooble::remove_page_connections(dooble_page *page)
@@ -2646,6 +2684,29 @@ void dooble::slot_print(void)
 
 void dooble::slot_print_preview(void)
 {
+  if(m_print_preview)
+    return;
+
+  dooble_page *page = current_page();
+
+  if(!page)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_print_preview = true;
+
+  QPrinter printer;
+  QScopedPointer<QPrintPreviewDialog> print_preview_dialog
+    (new QPrintPreviewDialog(&printer, page->view()));
+
+  connect(print_preview_dialog.data(),
+	  &QPrintPreviewDialog::paintRequested,
+	  this,
+	  &dooble::print_preview);
+  QApplication::restoreOverrideCursor();
+  print_preview_dialog->exec();
+  QApplication::processEvents();
+  m_print_preview = false;
 }
 
 void dooble::slot_quit_dooble(void)

@@ -131,6 +131,7 @@ class dooble: public QMainWindow
   Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
   bool m_is_javascript_dialog;
   bool m_is_private;
+  bool m_print_preview;
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
@@ -155,6 +156,7 @@ class dooble: public QMainWindow
   void prepare_tab_icons(void);
   void prepare_tab_shortcuts(void);
   void print(dooble_page *page);
+  void print_preview(QPrinter *printer);
   void remove_page_connections(dooble_page *page);
 
  private slots:
