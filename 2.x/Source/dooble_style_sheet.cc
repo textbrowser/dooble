@@ -71,6 +71,41 @@ void dooble_style_sheet::inject(QWebEnginePage *web_engine_page)
 {
   if(!web_engine_page)
     return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QMapIterator<QPair<QString, QUrl>, QString> it(s_style_sheets);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.key().second == web_engine_page->url())
+	{
+	  QString style_sheet
+	    (QString::fromLatin1("(function() {"
+				 "css = document.createElement('style');"
+				 "css.id = '%1';"
+				 "css.type = 'text/css';"
+				 "css.innerText = '%2';"
+				 "document.head.appendChild(css);"
+				 "})()").
+	     arg(it.key().first).
+	     arg(it.value()));
+	  QWebEngineScript web_engine_script;
+
+	  web_engine_script.setInjectionPoint(QWebEngineScript::DocumentReady);
+	  web_engine_script.setName(it.key().first);
+	  web_engine_script.setRunsOnSubFrames(true);
+	  web_engine_script.setSourceCode(style_sheet);
+	  web_engine_script.setWorldId(QWebEngineScript::ApplicationWorld);
+	  web_engine_page->runJavaScript
+	    (style_sheet, QWebEngineScript::ApplicationWorld);
+	  web_engine_page->scripts().insert(web_engine_script);
+	}
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_style_sheet::keyPressEvent(QKeyEvent *event)

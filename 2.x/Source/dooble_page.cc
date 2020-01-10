@@ -2142,6 +2142,7 @@ void dooble_page::slot_url_changed(const QUrl &url)
   ** Cannot assume that the view's icon has been loaded.
   */
 
+  dooble_style_sheet::inject(m_view->page());
   m_ui.address->add_item(QIcon(), m_view->url());
   m_ui.address->setText(m_view->url().toString());
 }
