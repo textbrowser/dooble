@@ -51,6 +51,7 @@
 #include "dooble_page.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_search_engines_popup.h"
+#include "dooble_style_sheet.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
@@ -74,6 +75,7 @@ QPointer<dooble_favorites_popup> dooble::s_favorites_window = nullptr;
 QPointer<dooble_history_window> dooble::s_history_window = nullptr;
 QPointer<dooble_search_engines_popup> dooble::s_search_engines_window = nullptr;
 QPointer<dooble_settings> dooble::s_settings = nullptr;
+QPointer<dooble_style_sheet> dooble::s_style_sheet = nullptr;
 QPointer<dooble_web_engine_url_request_interceptor>
 dooble::s_url_request_interceptor = nullptr;
 QString dooble::ABOUT_BLANK = "about:blank";
@@ -81,7 +83,7 @@ bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);
 static bool s_warned_of_missing_sqlite_driver = false;
-static int EXPECTED_POPULATED_CONTAINERS = 8;
+static int EXPECTED_POPULATED_CONTAINERS = 9;
 static int s_populated = 0;
 
 dooble::dooble(QWidget *widget):QMainWindow()
@@ -773,6 +775,15 @@ void dooble::initialize_static_members(void)
       s_search_engines_window->setWindowModality(Qt::NonModal);
       s_search_engines_window->setWindowTitle(tr("Dooble: Search Engines"));
       connect(s_search_engines_window,
+	      SIGNAL(populated(void)),
+	      this,
+	      SLOT(slot_populated(void)));
+    }
+
+  if(!s_style_sheet)
+    {
+      s_style_sheet = new dooble_style_sheet();
+      connect(s_style_sheet,
 	      SIGNAL(populated(void)),
 	      this,
 	      SLOT(slot_populated(void)));

@@ -39,7 +39,7 @@ class dooble_style_sheet: public QDialog
   Q_OBJECT
 
  public:
-  dooble_style_sheet(QWidget *parent);
+  dooble_style_sheet(void);
   dooble_style_sheet(QWebEnginePage *web_engine_page, QWidget *parent);
   static void purge(void);
 

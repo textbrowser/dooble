@@ -63,6 +63,7 @@ extern "C"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_search_engines_popup.h"
+#include "dooble_style_sheet.h"
 
 #include <iostream>
 
@@ -328,6 +329,10 @@ int main(int argc, char *argv[])
   QObject::connect(dooble::s_application,
 		   SIGNAL(dooble_credentials_authenticated(bool)),
 		   dooble::s_settings,
+		   SLOT(slot_populate(void)));
+  QObject::connect(dooble::s_application,
+		   SIGNAL(dooble_credentials_authenticated(bool)),
+		   dooble::s_style_sheet,
 		   SLOT(slot_populate(void)));
   QObject::connect(dooble::s_application,
 		   SIGNAL(address_widget_populated(void)),

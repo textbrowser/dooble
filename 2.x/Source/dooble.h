@@ -57,6 +57,7 @@ class dooble_history;
 class dooble_history_window;
 class dooble_page;
 class dooble_search_engines_popup;
+class dooble_style_sheet;
 class dooble_web_engine_url_request_interceptor;
 class dooble_web_engine_view;
 
@@ -94,6 +95,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_history_window> s_history_window;
   static QPointer<dooble_search_engines_popup> s_search_engines_window;
   static QPointer<dooble_settings> s_settings;
+  static QPointer<dooble_style_sheet> s_style_sheet;
   static QPointer<dooble_web_engine_url_request_interceptor>
     s_url_request_interceptor;
   static QString ABOUT_BLANK;

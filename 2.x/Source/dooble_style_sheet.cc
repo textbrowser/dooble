@@ -62,6 +62,10 @@ dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
 	  SLOT(slot_remove(void)));
 }
 
+dooble_style_sheet::dooble_style_sheet(void)
+{
+}
+
 void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
 {
   if(event && event->key() == Qt::Key_Escape)
