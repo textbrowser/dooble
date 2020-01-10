@@ -495,6 +495,7 @@ void dooble_address_widget::slot_show_site_information_menu(void)
 
   QMenu menu(this);
   QString icon_set(dooble_settings::setting("icon_set").toString());
+  QString scheme(m_view->url().scheme());
   QUrl url(dooble_ui_utilities::simplified_url(m_view->url()));
 
   if(dooble_certificate_exceptions_menu_widget::has_exception(url))
@@ -507,7 +508,7 @@ void dooble_address_widget::slot_show_site_information_menu(void)
   menu.addAction
     (tr("Inject Custom Style Sheet..."),
      this,
-     SIGNAL(inject_custom_css(void)));
+     SIGNAL(inject_custom_css(void)))->setEnabled(scheme.startsWith("http"));
   menu.addAction
     (QIcon::fromTheme("preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
