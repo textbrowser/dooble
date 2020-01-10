@@ -122,13 +122,14 @@ void dooble_style_sheet::slot_add(void)
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_style_sheets ("
 		   "name TEXT NOT NULL, "
+		   "name_digest TEXT NOT NULL, "
 		   "style_sheet TEXT NOT NULL, "
 		   "url_digest TEXT NOT NULL, "
-		   "PRIMARY KEY(name, url_digest))");
+		   "PRIMARY KEY(name_digest, url_digest))");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_style_sheets "
-	   "(name, style_sheet, url_digest) "
-	   "VALUES (?, ?, ?)");
+	   "(name_digest, style_sheet, url_digest) "
+	   "VALUES (?, ?, ?, ?)");
 
 	QByteArray bytes;
 
@@ -139,6 +140,8 @@ void dooble_style_sheet::slot_add(void)
 	else
 	  goto done_label;
 
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(name.toUtf8()).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (style_sheet.toLatin1());
 
@@ -186,4 +189,35 @@ void dooble_style_sheet::slot_remove(void)
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_style_sheets.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.prepare("DELETE FROM dooble_style_sheets WHERE "
+		      "name_digest = ? AND url_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(name.toUtf8()).toBase64());
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(m_web_engine_page->url().toEncoded()).
+	   toBase64());
+	query.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
