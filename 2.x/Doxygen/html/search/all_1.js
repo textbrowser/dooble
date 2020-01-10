@@ -35,6 +35,7 @@ var searchData=
   ['dooble_5fsearch_5fengines_5fpopup',['dooble_search_engines_popup',['../classdooble__search__engines__popup.html',1,'']]],
   ['dooble_5fsearch_5fwidget',['dooble_search_widget',['../classdooble__search__widget.html',1,'']]],
   ['dooble_5fsettings',['dooble_settings',['../classdooble__settings.html',1,'']]],
+  ['dooble_5fstyle_5fsheet',['dooble_style_sheet',['../classdooble__style__sheet.html',1,'']]],
   ['dooble_5ftab_5fbar',['dooble_tab_bar',['../classdooble__tab__bar.html',1,'']]],
   ['dooble_5ftab_5fwidget',['dooble_tab_widget',['../classdooble__tab__widget.html',1,'']]],
   ['dooble_5ftable_5fview',['dooble_table_view',['../classdooble__table__view.html',1,'']]],
