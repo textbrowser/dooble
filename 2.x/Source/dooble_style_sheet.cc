@@ -60,10 +60,17 @@ dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_remove(void)));
+  populate();
 }
 
 dooble_style_sheet::dooble_style_sheet(void)
 {
+}
+
+void dooble_style_sheet::inject(QWebEnginePage *web_engine_page)
+{
+  if(!web_engine_page)
+    return;
 }
 
 void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
@@ -72,6 +79,28 @@ void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
     close();
 
   QDialog::keyPressEvent(event);
+}
+
+void dooble_style_sheet::populate(void)
+{
+  if(!m_web_engine_page)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.names->clear();
+
+  QMapIterator<QPair<QString, QUrl>, QString> it(s_style_sheets);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.key().second == m_web_engine_page->url())
+	m_ui.names->addItem(it.key().first);
+    }
+
+  m_ui.names->sortItems();
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_style_sheet::purge(void)
@@ -134,6 +163,7 @@ void dooble_style_sheet::slot_add(void)
   web_engine_script.setWorldId(QWebEngineScript::ApplicationWorld);
   m_ui.names->addItem(name);
   m_ui.names->sortItems();
+  m_ui.style_sheet->setPlainText(m_ui.style_sheet->toPlainText().trimmed());
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
   m_web_engine_page->scripts().insert(web_engine_script);
@@ -160,12 +190,13 @@ void dooble_style_sheet::slot_add(void)
 		   "name TEXT NOT NULL, "
 		   "name_digest TEXT NOT NULL, "
 		   "style_sheet TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
 		   "url_digest TEXT NOT NULL, "
 		   "PRIMARY KEY(name_digest, url_digest))");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_style_sheets "
-	   "(name_digest, style_sheet, url_digest) "
-	   "VALUES (?, ?, ?, ?)");
+	   "(name, name_digest, style_sheet, url, url_digest) "
+	   "VALUES (?, ?, ?, ?, ?)");
 
 	QByteArray bytes;
 
@@ -179,7 +210,15 @@ void dooble_style_sheet::slot_add(void)
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(name.toUtf8()).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (style_sheet.toLatin1());
+	  (m_ui.style_sheet->toPlainText().trimmed().toLatin1());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (m_web_engine_page->url().toEncoded());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -221,6 +260,54 @@ void dooble_style_sheet::slot_populate(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_style_sheets.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT name, style_sheet, url, OID FROM "
+		      "dooble_style_sheets"))
+	  while(query.next())
+	    {
+	      QByteArray name
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+	      QByteArray style_sheet
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+	      QByteArray url
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
+
+	      name = dooble::s_cryptography->mac_then_decrypt(name);
+	      style_sheet = dooble::s_cryptography->mac_then_decrypt
+		(style_sheet);
+	      url = dooble::s_cryptography->mac_then_decrypt(url);
+
+	      if(name.isEmpty() || style_sheet.isEmpty() || url.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db, "dooble_style_sheets", query.value(3).toLongLong());
+		  continue;
+		}
+
+	      s_style_sheets
+		[QPair<QString, QUrl> (name, QUrl::fromEncoded(url))] =
+		style_sheet;
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
   emit populated();
 }
 

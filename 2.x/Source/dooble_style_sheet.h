@@ -41,6 +41,7 @@ class dooble_style_sheet: public QDialog
  public:
   dooble_style_sheet(void);
   dooble_style_sheet(QWebEnginePage *web_engine_page, QWidget *parent);
+  static void inject(QWebEnginePage *web_engine_page);
   static void purge(void);
 
  protected:
@@ -50,6 +51,7 @@ class dooble_style_sheet: public QDialog
   QWebEnginePage *m_web_engine_page;
   Ui_dooble_style_sheet m_ui;
   static QMap<QPair<QString, QUrl>, QString> s_style_sheets;
+  void populate(void);
 
  private slots:
   void slot_add(void);
