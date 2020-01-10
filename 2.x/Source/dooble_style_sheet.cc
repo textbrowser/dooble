@@ -68,6 +68,32 @@ void dooble_style_sheet::keyPressEvent(QKeyEvent *event)
   QDialog::keyPressEvent(event);
 }
 
+void dooble_style_sheet::purge(void)
+{
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_style_sheets.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_style_sheets");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_style_sheet::slot_add(void)
 {
   if(!m_web_engine_page)
@@ -165,6 +191,21 @@ void dooble_style_sheet::slot_add(void)
 
 void dooble_style_sheet::slot_item_selection_changed(void)
 {
+  QList<QListWidgetItem *> list(m_ui.names->selectedItems());
+
+  if(list.isEmpty() || !list.at(0) || !m_web_engine_page)
+    {
+      m_ui.name->clear();
+      m_ui.style_sheet->clear();
+      return;
+    }
+
+  m_ui.name->setText(list.at(0)->text());
+
+  QWebEngineScript script
+    (m_web_engine_page->scripts().findScript(list.at(0)->text()));
+
+  m_ui.style_sheet->setPlainText(script.sourceCode());
 }
 
 void dooble_style_sheet::slot_remove(void)

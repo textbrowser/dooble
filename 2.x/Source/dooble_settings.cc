@@ -49,6 +49,7 @@
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
 #include "dooble_settings.h"
+#include "dooble_style_sheet.h"
 #include "dooble_text_utilities.h"
 
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
@@ -861,6 +862,7 @@ void dooble_settings::purge_database_data(void)
   dooble_certificate_exceptions_menu_widget::purge();
   dooble_cookies::purge();
   dooble_favicons::purge();
+  dooble_style_sheet::purge();
   m_ui.new_javascript_block_popup_exception->clear();
   purge_features_permissions();
   purge_javascript_block_popup_exceptions();

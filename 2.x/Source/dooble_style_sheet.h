@@ -40,6 +40,7 @@ class dooble_style_sheet: public QDialog
 
  public:
   dooble_style_sheet(QWebEnginePage *web_engine_page, QWidget *parent);
+  static void purge(void);
 
  protected:
   void keyPressEvent(QKeyEvent *event);
