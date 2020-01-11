@@ -551,6 +551,11 @@ void dooble_page::hide_status_bar(bool state)
   prepare_progress_label_position(false);
 }
 
+void dooble_page::inject_custom_css(void)
+{
+  slot_inject_custom_css();
+}
+
 void dooble_page::load(const QUrl &url)
 {
   m_view->stop();
@@ -876,6 +881,10 @@ void dooble_page::prepare_standard_menus(void)
        SIGNAL(show_history(void)),
        QKeySequence(tr("Ctrl+H")));
 
+  menu->addAction(tr("Inject Custom Style Sheet..."),
+		  this,
+		  SLOT(slot_inject_custom_css(void)))->setEnabled
+    (url().scheme().startsWith("http"));
   menu->addAction(tr("&Search Engines"),
 		  this,
 		  SIGNAL(show_search_engines(void)));

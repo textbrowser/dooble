@@ -1367,6 +1367,7 @@ void dooble::prepare_standard_menus(void)
   QAction *action = nullptr;
   QMenu *menu = nullptr;
   QString icon_set(dooble_settings::setting("icon_set").toString());
+  dooble_page *page = current_page();
 
   /*
   ** File Menu
@@ -1544,6 +1545,10 @@ void dooble::prepare_standard_menus(void)
        SLOT(slot_show_history(void)),
        QKeySequence(tr("Ctrl+H")));
 
+  menu->addAction(tr("Inject Custom Style Sheet..."),
+		  this,
+		  SLOT(slot_inject_custom_css(void)))->setEnabled
+    (page && page->url().scheme().startsWith("http"));
   menu->addAction(tr("&Search Engines"),
 		  this,
 		  SLOT(slot_show_search_engines(void)));
@@ -2544,6 +2549,16 @@ void dooble::slot_icon_changed(const QIcon &icon)
 
   if(page)
     m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
+}
+
+void dooble::slot_inject_custom_css(void)
+{
+  dooble_page *page = current_page();
+
+  if(!page)
+    return;
+
+  page->inject_custom_css();
 }
 
 void dooble::slot_load_finished(bool ok)
