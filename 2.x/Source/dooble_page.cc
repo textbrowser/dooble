@@ -1845,6 +1845,7 @@ void dooble_page::slot_load_progress(int progress)
 
 void dooble_page::slot_load_started(void)
 {
+  dooble_style_sheet::inject(m_view->page());
   emit iconChanged(QIcon());
 
   for(int i = 0; i < m_last_javascript_popups.size(); i++)

@@ -103,6 +103,19 @@ void dooble_style_sheet::inject(QWebEnginePage *web_engine_page)
 	    (style_sheet, QWebEngineScript::ApplicationWorld);
 	  web_engine_page->scripts().insert(web_engine_script);
 	}
+      else
+	{
+	  QString style_sheet
+	    (QString::fromLatin1("(function() {"
+				 "var element = document.getElementById('%1');"
+				 "if(element) element.outerHTML = '';"
+				 "delete element;})()").arg(it.key().first));
+
+	  web_engine_page->runJavaScript
+	    (style_sheet, QWebEngineScript::ApplicationWorld);
+	  web_engine_page->scripts().remove
+	    (web_engine_page->scripts().findScript(it.key().first));
+	}
     }
 
   QApplication::restoreOverrideCursor();
@@ -365,7 +378,7 @@ void dooble_style_sheet::slot_remove(void)
   QString style_sheet
     (QString::fromLatin1("(function() {"
 			 "var element = document.getElementById('%1');"
-			 "element.outerHTML = '';"
+			 "if(element) element.outerHTML = '';"
 			 "delete element;})()").arg(name));
 
   delete m_ui.names->takeItem(m_ui.names->row(list.at(0)));
