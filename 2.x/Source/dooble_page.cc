@@ -883,8 +883,7 @@ void dooble_page::prepare_standard_menus(void)
 
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
-		  SLOT(slot_inject_custom_css(void)))->setEnabled
-    (url().scheme().startsWith("http"));
+		  SLOT(slot_inject_custom_css(void)));
   menu->addAction(tr("&Search Engines"),
 		  this,
 		  SIGNAL(show_search_engines(void)));

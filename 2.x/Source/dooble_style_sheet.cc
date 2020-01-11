@@ -135,6 +135,7 @@ void dooble_style_sheet::populate(void)
     }
 
   m_ui.names->sortItems();
+  m_ui.names->setCurrentRow(0);
   QApplication::restoreOverrideCursor();
 }
 
@@ -173,9 +174,6 @@ void dooble_style_sheet::slot_add(void)
 
   QString name(m_ui.name->text().trimmed());
 
-  if(!m_ui.names->findItems(name, Qt::MatchExactly).isEmpty())
-    return;
-
   if(m_ui.style_sheet->toPlainText().trimmed().isEmpty() || name.isEmpty())
     return;
 
@@ -196,11 +194,18 @@ void dooble_style_sheet::slot_add(void)
   web_engine_script.setRunsOnSubFrames(true);
   web_engine_script.setSourceCode(style_sheet);
   web_engine_script.setWorldId(QWebEngineScript::ApplicationWorld);
-  m_ui.names->addItem(name);
-  m_ui.names->sortItems();
+
+  if(m_ui.names->findItems(name, Qt::MatchExactly).isEmpty())
+    {
+      m_ui.names->addItem(name);
+      m_ui.names->sortItems();
+    }
+
   m_ui.style_sheet->setPlainText(m_ui.style_sheet->toPlainText().trimmed());
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
+  m_web_engine_page->scripts().remove
+    (m_web_engine_page->scripts().findScript(name));
   m_web_engine_page->scripts().insert(web_engine_script);
   s_style_sheets[QPair<QString, QUrl> (name, m_web_engine_page->url())] =
     m_ui.style_sheet->toPlainText().trimmed();
