@@ -44,6 +44,7 @@ class dooble_web_engine_page: public QWebEnginePage
   dooble_web_engine_page(QWidget *parent);
   ~dooble_web_engine_page();
   QUrl last_clicked_link(void) const;
+  QUrl simplified_url(void) const;
   void reset_last_clicked_link(void);
   void resize_certificate_error_widget(void);
 

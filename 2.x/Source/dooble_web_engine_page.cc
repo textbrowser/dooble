@@ -91,6 +91,11 @@ QUrl dooble_web_engine_page::last_clicked_link(void) const
   return m_last_clicked_link;
 }
 
+QUrl dooble_web_engine_page::simplified_url(void) const
+{
+  return dooble_ui_utilities::simplified_url(url());
+}
+
 bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
 						     bool isMainFrame)

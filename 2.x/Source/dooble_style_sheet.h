@@ -32,7 +32,7 @@
 
 #include "ui_dooble_style_sheet.h"
 
-class QWebEnginePage;
+class dooble_web_engine_page;
 
 class dooble_style_sheet: public QDialog
 {
@@ -40,15 +40,15 @@ class dooble_style_sheet: public QDialog
 
  public:
   dooble_style_sheet(void);
-  dooble_style_sheet(QWebEnginePage *web_engine_page, QWidget *parent);
-  static void inject(QWebEnginePage *web_engine_page);
+  dooble_style_sheet(dooble_web_engine_page *web_engine_page, QWidget *parent);
+  static void inject(dooble_web_engine_page *web_engine_page);
   static void purge(void);
 
  protected:
   void keyPressEvent(QKeyEvent *event);
 
  private:
-  QWebEnginePage *m_web_engine_page;
+  dooble_web_engine_page *m_web_engine_page;
   Ui_dooble_style_sheet m_ui;
   static QMap<QPair<QString, QUrl>, QString> s_style_sheets;
   void populate(void);

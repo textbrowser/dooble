@@ -60,9 +60,13 @@ QString dooble_ui_utilities::pretty_tool_tip(const QString &text)
   return "<html>" + text + "</html>";
 }
 
-QUrl dooble_ui_utilities::simplified_url(const QUrl &url)
+QUrl dooble_ui_utilities::simplified_url(const QUrl &u)
 {
-  return QUrl(url.scheme() + "://" + url.host());
+  QUrl url;
+
+  url.setHost(u.host());
+  url.setScheme(u.scheme());
+  return url;
 }
 
 bool dooble_ui_utilities::allowed_scheme(const QUrl &url)

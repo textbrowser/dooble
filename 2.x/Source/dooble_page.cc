@@ -1667,7 +1667,8 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 
 void dooble_page::slot_inject_custom_css(void)
 {
-  dooble_style_sheet dialog(m_view->page(), this);
+  dooble_style_sheet dialog
+    (qobject_cast<dooble_web_engine_page *> (m_view->page()), this);
 
   dialog.exec();
 }
@@ -1768,6 +1769,8 @@ void dooble_page::slot_link_hovered(const QString &url)
 void dooble_page::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
+  dooble_style_sheet::inject
+    (qobject_cast<dooble_web_engine_page *> (m_view->page()));
 
   /*
   ** Do not save the favicon. The current page's favicon and the page's
@@ -1841,7 +1844,6 @@ void dooble_page::slot_load_progress(int progress)
 
 void dooble_page::slot_load_started(void)
 {
-  dooble_style_sheet::inject(m_view->page());
   emit iconChanged(QIcon());
 
   for(int i = 0; i < m_last_javascript_popups.size(); i++)
@@ -2147,7 +2149,6 @@ void dooble_page::slot_url_changed(const QUrl &url)
   ** Cannot assume that the view's icon has been loaded.
   */
 
-  dooble_style_sheet::inject(m_view->page());
   m_ui.address->add_item(QIcon(), m_view->url());
   m_ui.address->setText(m_view->url().toString());
 }

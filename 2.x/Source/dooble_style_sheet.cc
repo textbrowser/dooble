@@ -28,7 +28,6 @@
 #include <QDir>
 #include <QKeyEvent>
 #include <QSqlQuery>
-#include <QWebEnginePage>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
 
@@ -36,6 +35,7 @@
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
 #include "dooble_style_sheet.h"
+#include "dooble_web_engine_page.h"
 
 /*
 ** body { -webkit-transform: rotate(180deg); }
@@ -43,7 +43,7 @@
 
 QMap<QPair<QString, QUrl>, QString> dooble_style_sheet::s_style_sheets;
 
-dooble_style_sheet::dooble_style_sheet(QWebEnginePage *web_engine_page,
+dooble_style_sheet::dooble_style_sheet(dooble_web_engine_page *web_engine_page,
 				       QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
@@ -67,7 +67,7 @@ dooble_style_sheet::dooble_style_sheet(void)
 {
 }
 
-void dooble_style_sheet::inject(QWebEnginePage *web_engine_page)
+void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
 {
   if(!web_engine_page)
     return;
@@ -80,7 +80,7 @@ void dooble_style_sheet::inject(QWebEnginePage *web_engine_page)
     {
       it.next();
 
-      if(it.key().second == web_engine_page->url())
+      if(it.key().second == web_engine_page->simplified_url())
 	{
 	  QString style_sheet
 	    (QString::fromLatin1("(function() {"
@@ -143,7 +143,7 @@ void dooble_style_sheet::populate(void)
     {
       it.next();
 
-      if(it.key().second == m_web_engine_page->url())
+      if(it.key().second == m_web_engine_page->simplified_url())
 	m_ui.names->addItem(it.key().first);
     }
 
@@ -220,7 +220,8 @@ void dooble_style_sheet::slot_add(void)
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
   m_web_engine_page->scripts().insert(web_engine_script);
-  s_style_sheets[QPair<QString, QUrl> (name, m_web_engine_page->url())] =
+  s_style_sheets
+    [QPair<QString, QUrl> (name, m_web_engine_page->simplified_url())] =
     m_ui.style_sheet->toPlainText().trimmed();
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -271,7 +272,7 @@ void dooble_style_sheet::slot_add(void)
 	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (m_web_engine_page->url().toEncoded());
+	  (m_web_engine_page->simplified_url().toEncoded());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -279,8 +280,8 @@ void dooble_style_sheet::slot_add(void)
 	  goto done_label;
 
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(m_web_engine_page->url().toEncoded()).
-	   toBase64());
+	  (dooble::s_cryptography->
+	   hmac(m_web_engine_page->simplified_url().toEncoded()).toBase64());
 	query.exec();
       }
 
@@ -304,8 +305,9 @@ void dooble_style_sheet::slot_item_selection_changed(void)
 
   m_ui.name->setText(list.at(0)->text());
   m_ui.style_sheet->setPlainText
-    (s_style_sheets.value(QPair<QString, QUrl> (m_ui.name->text(),
-						m_web_engine_page->url())));
+    (s_style_sheets.
+     value(QPair<QString, QUrl> (m_ui.name->text(),
+				 m_web_engine_page->simplified_url())));
 }
 
 void dooble_style_sheet::slot_populate(void)
@@ -387,7 +389,7 @@ void dooble_style_sheet::slot_remove(void)
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
   s_style_sheets.remove
-    (QPair<QString, QUrl> (name, m_web_engine_page->url()));
+    (QPair<QString, QUrl> (name, m_web_engine_page->simplified_url()));
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -410,8 +412,8 @@ void dooble_style_sheet::slot_remove(void)
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(name.toUtf8()).toBase64());
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(m_web_engine_page->url().toEncoded()).
-	   toBase64());
+	  (dooble::s_cryptography->
+	   hmac(m_web_engine_page->simplified_url().toEncoded()).toBase64());
 	query.exec();
       }
 
