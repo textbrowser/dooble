@@ -70,6 +70,7 @@ Completed Items
 - Hovered link label causes a resize of the main window if a lengthy
   link is under the mouse cursor. Always consider the progress bar's width.
 - Icons for pinned support windows.
+- Inject custom style sheets.
 - Interruptible authentication.
 - JavaScript window.print() is not supported.
 - Language option. English, System.
@@ -153,7 +154,6 @@ Remaining Items
 - Fancy completer.
 - Gopher text search.
 - Include date stamps in cookie containers.
-- Inject custom style sheets into Web pages.
 - Qt's digest class.
 - Shortcuts browser.
 - linkHovered() is emitted without user interaction.
