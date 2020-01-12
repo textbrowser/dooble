@@ -988,7 +988,7 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
 	  SLOT(slot_icon_changed(const QIcon &)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+	  static_cast<Qt::ConnectionType> (Qt::QueuedConnection |
 					   Qt::UniqueConnection));
   connect(page,
 	  SIGNAL(loadFinished(bool)),
