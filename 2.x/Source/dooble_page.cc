@@ -261,7 +261,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
-	  SIGNAL(iconChanged(const QIcon &)));
+	  SIGNAL(iconChanged(const QIcon &)),
+	  Qt::QueuedConnection);
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
