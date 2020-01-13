@@ -918,6 +918,9 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Documentation"),
 		  this,
 		  SIGNAL(show_documentation(void)));
+  menu->addAction(tr("&Release Notes"),
+		  this,
+		  SIGNAL(show_release_notes(void)));
 }
 
 void dooble_page::prepare_style_sheets(void)

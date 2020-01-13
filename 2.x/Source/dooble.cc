@@ -1135,6 +1135,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_release_notes(void)),
+	  this,
+	  SLOT(slot_show_release_notes(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_search_engines(void)),
 	  this,
 	  SLOT(slot_show_search_engines(void)),
@@ -1576,6 +1582,9 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("&Documentation"),
 		  this,
 		  SLOT(slot_show_documentation(void)));
+  menu->addAction(tr("&Release Notes"),
+		  this,
+		  SLOT(slot_show_release_notes(void)));
 }
 
 void dooble::prepare_style_sheets(void)
@@ -1869,6 +1878,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_history(void)),
 	     this,
 	     SLOT(slot_show_history(void)));
+  disconnect(page,
+	     SIGNAL(show_release_notes(void)),
+	     this,
+	     SLOT(slot_show_release_notes(void)));
   disconnect(page,
 	     SIGNAL(show_search_engines(void)),
 	     this,
@@ -3130,6 +3143,12 @@ void dooble::slot_show_main_menu(void)
 void dooble::slot_show_release_notes(const QUrl &url)
 {
   m_ui.tab->setCurrentWidget(new_page(url, false));
+}
+
+void dooble::slot_show_release_notes(void)
+{
+  m_ui.tab->setCurrentWidget
+    (new_page(QUrl("qrc://Documentation/RELEASE-NOTES.html"), m_is_private));
 }
 
 void dooble::slot_show_search_engines(void)

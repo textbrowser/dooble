@@ -218,6 +218,7 @@ class dooble_page: public QWidget
   void show_floating_digital_clock(void);
   void show_full_screen(void);
   void show_history(void);
+  void show_release_notes(void);
   void show_search_engines(void);
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
