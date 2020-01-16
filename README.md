@@ -1,1 +1,1 @@
-A colorful Web browser.
+Dooble is the weather bug browser.
