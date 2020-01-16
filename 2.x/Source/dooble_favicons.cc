@@ -173,7 +173,6 @@ void dooble_favicons::purge_temporary(void)
 
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM dooble_favicons WHERE temporary = 1");
-	query.exec("VACUUM");
       }
 
     db.close();

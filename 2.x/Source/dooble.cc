@@ -30,6 +30,7 @@
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
+#include <QSqlQuery>
 #include <QWebEngineProfile>
 #include <QtConcurrent>
 
@@ -42,6 +43,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_favorites_popup.h"
@@ -1175,6 +1177,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(vacuum_databases(void)),
+	  this,
+	  SLOT(slot_vacuum_databases(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(windowCloseRequested(void)),
 	  this,
 	  SLOT(slot_window_close_requested(void)),
@@ -1475,6 +1483,10 @@ void dooble::prepare_standard_menus(void)
        this,
        SLOT(slot_show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
+
+  menu->addAction(tr("Vacuum Databases"),
+		  this,
+		  SLOT(slot_vacuum_databases(void)));
 
   /*
   ** Tools Menu
@@ -1906,6 +1918,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(titleChanged(const QString &)),
 	     this,
 	     SLOT(slot_title_changed(const QString &)));
+  disconnect(page,
+	     SIGNAL(vacuum_databases(void)),
+	     this,
+	     SLOT(slot_vacuum_databases(void)));
   disconnect(page,
 	     SIGNAL(windowCloseRequested(void)),
 	     this,
@@ -3451,6 +3467,49 @@ void dooble::slot_title_changed(const QString &title)
 
   m_ui.tab->setTabText(m_ui.tab->indexOf(page), text.replace("&", "&&"));
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
+}
+
+void dooble::slot_vacuum_databases(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QStringList list;
+
+  list << "dooble_accepted_or_blocked_domains.db"
+       << "dooble_certificate_exceptions.db"
+       << "dooble_cookies.db"
+       << "dooble_downloads.db"
+       << "dooble_favicons.db"
+       << "dooble_history.db"
+       << "dooble_search_engines.db"
+       << "dooble_settings.db"
+       << "dooble_style_sheets.db";
+
+  for(int i = 0; i < list.size(); i++)
+    {
+      QString database_name(dooble_database_utilities::database_name());
+
+      {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+			   QDir::separator() +
+			   list.at(i));
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("VACUUM");
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_warn_of_missing_sqlite_driver(void)

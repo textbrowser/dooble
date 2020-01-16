@@ -803,6 +803,10 @@ void dooble_page::prepare_standard_menus(void)
        SIGNAL(show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
 
+  menu->addAction(tr("Vacuum Databases"),
+		  this,
+		  SIGNAL(vacuum_databases(void)));
+
   /*
   ** Tools Menu
   */

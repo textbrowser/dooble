@@ -217,7 +217,6 @@ void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec
 	  ("DELETE FROM dooble_certificate_exceptions WHERE temporary = 1");
-	query.exec("VACUUM");
       }
 
     db.close();

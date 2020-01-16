@@ -234,6 +234,7 @@ class dooble: public QMainWindow
   void slot_tab_widget_shortcut_activated(void);
   void slot_tabs_menu_button_clicked(void);
   void slot_title_changed(const QString &title);
+  void slot_vacuum_databases(void);
   void slot_warn_of_missing_sqlite_driver(void);
   void slot_window_close_requested(void);
 
