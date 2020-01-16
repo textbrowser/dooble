@@ -262,7 +262,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
 	  SIGNAL(iconChanged(const QIcon &)),
-	  Qt::QueuedConnection);
+	  Qt::QueuedConnection); // Prevent favicon flicker.
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
