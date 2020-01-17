@@ -232,8 +232,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   connect(m_view,
 	  SIGNAL(create_dialog_request(dooble_web_engine_view *)),
 	  this,
-	  SLOT(slot_create_dialog_request(dooble_web_engine_view *)),
-	  Qt::QueuedConnection);
+	  SLOT(slot_create_dialog_request(dooble_web_engine_view *)));
   connect(m_view,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
@@ -1258,12 +1257,14 @@ void dooble_page::slot_always_allow_javascript_popup(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(const auto &view : m_last_javascript_popups)
     if(view && view->parent() == this)
       emit create_dialog(view);
 
   m_last_javascript_popups.clear();
+  QApplication::restoreOverrideCursor();
 
   QAction *action = qobject_cast<QAction *> (sender());
 
@@ -1319,12 +1320,14 @@ void dooble_page::slot_close_javascript_popup_exception_frame(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(const auto &view : m_last_javascript_popups)
     if(view && view->parent() == this)
       view->deleteLater();
 
   m_last_javascript_popups.clear();
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
@@ -1336,10 +1339,13 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
 	  m_last_javascript_popups << view;
 	  view->setParent(this);
 	}
-      else if(this != view->parent())
-	view->setParent(this);
+      else
+	{
+	  view->setParent(this);
+	  return;
+	}
     }
-  else if(m_last_javascript_popups.isEmpty())
+  else
     return;
 
   QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
@@ -1851,12 +1857,14 @@ void dooble_page::slot_load_progress(int progress)
 void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(const auto &view : m_last_javascript_popups)
     if(view && view->parent() == this)
       view->deleteLater();
 
   m_last_javascript_popups.clear();
+  QApplication::restoreOverrideCursor();
   m_progress_label->setVisible(true);
 
   if(url().host().isEmpty())
@@ -1881,12 +1889,14 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
 {
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(const auto &view : m_last_javascript_popups)
     if(view && view->parent() == this)
       emit create_dialog(view);
 
   m_last_javascript_popups.clear();
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_page::slot_open_link(const QUrl &url)
