@@ -257,7 +257,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	  m_content.remove(0, bytes.length());
 	  bytes = bytes.trimmed();
 
-	  char c = bytes.length() > 0 ? bytes.at(0) : 0;
+	  char c = bytes.length() > 0 ? bytes.at(0) : '0';
 
 	  if(c == '+' ||
 	     c == '0' || c == '1' || c == '3' || c == '4' || c == '5' ||

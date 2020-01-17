@@ -67,7 +67,7 @@ class dooble_cookies_window: public QMainWindow
   QTimer m_purge_domains_timer;
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
-  void delete_top_level_items(QList<QTreeWidgetItem *> list);
+  void delete_top_level_items(const QList<QTreeWidgetItem *> &list);
   void save_settings(void);
 
  private slots:

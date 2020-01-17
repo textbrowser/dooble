@@ -287,9 +287,9 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 
 dooble::~dooble()
 {
-  for(int i = 0; i < m_shortcuts.size(); i++)
-    if(m_shortcuts.at(i))
-      m_shortcuts.at(i)->deleteLater();
+  for(auto shortcut : m_shortcuts)
+    if(shortcut)
+      shortcut->deleteLater();
 }
 
 bool dooble::can_exit(void)
@@ -2560,13 +2560,9 @@ void dooble::slot_history_action_triggered(void)
 
 void dooble::slot_history_favorites_populated(void)
 {
-  for(int i = 0; i < m_delayed_pages.size(); i++)
-    {
-      QPair<QPointer<dooble_page>, QUrl> pair(m_delayed_pages.at(i));
-
-      if(pair.first)
-	pair.first->load(pair.second);
-    }
+  for(auto pair : m_delayed_pages)
+    if(pair.first)
+      pair.first->load(pair.second);
 
   m_delayed_pages.clear();
 }

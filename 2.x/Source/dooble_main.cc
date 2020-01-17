@@ -40,7 +40,6 @@
 
 extern "C"
 {
-#include <signal.h>
 #if defined(Q_OS_FREEBSD)
 #include <sys/stat.h>
 #endif
@@ -65,6 +64,7 @@ extern "C"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 
+#include <csignal>
 #include <iostream>
 
 static void signal_handler(int signal_number)

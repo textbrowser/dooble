@@ -185,7 +185,8 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
 
   computed_mac = hmac(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 
-  if(!computed_mac.isEmpty() && !mac.isEmpty() && memcmp(computed_mac, mac))
+  if(!computed_mac.isEmpty() && !mac.isEmpty() &&
+     dooble_cryptography::memcmp(computed_mac, mac))
     {
       if(m_block_cipher_type == "aes-256")
 	{
@@ -260,7 +261,7 @@ void dooble_cryptography::authenticate(const QByteArray &salt,
       }
     }
 
-  m_authenticated = memcmp(hash, salted_password);
+  m_authenticated = dooble_cryptography::memcmp(hash, salted_password);
 }
 
 void dooble_cryptography::memzero(QByteArray &bytes)
