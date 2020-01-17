@@ -368,16 +368,14 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
 dooble_page::~dooble_page()
 {
-  for(int i = 0; i <m_last_javascript_popups.size(); i++)
+  for(auto view : m_last_javascript_popups)
     {
-      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
-
       if(view && view->parent() == this)
 	view->deleteLater();
     }
 
-  for(int i = 0; i < m_shortcuts.size(); i++)
-    delete m_shortcuts.at(i);
+  for(auto shortcut : m_shortcuts)
+    delete shortcut;
 }
 
 QAction *dooble_page::action_close_tab(void) const
@@ -1262,10 +1260,8 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  for(int i = 0; i < m_last_javascript_popups.size(); i++)
+  for(auto view : m_last_javascript_popups)
     {
-      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
-
       if(view && view->parent() == this)
 	emit create_dialog(view);
     }
@@ -1327,10 +1323,8 @@ void dooble_page::slot_close_javascript_popup_exception_frame(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  for(int i = 0; i < m_last_javascript_popups.size(); i++)
+  for(auto view : m_last_javascript_popups)
     {
-      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
-
       if(view && view->parent() == this)
 	view->deleteLater();
     }
@@ -1858,10 +1852,8 @@ void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
 
-  for(int i = 0; i < m_last_javascript_popups.size(); i++)
+  for(auto view : m_last_javascript_popups)
     {
-      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
-
       if(view && view->parent() == this)
 	view->deleteLater();
     }
@@ -1892,10 +1884,8 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  for(int i = 0; i < m_last_javascript_popups.size(); i++)
+  for(auto view : m_last_javascript_popups)
     {
-      QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
-
       if(view && view->parent() == this)
 	emit create_dialog(view);
     }
@@ -1923,7 +1913,7 @@ void dooble_page::slot_prepare_backward_menu(void)
   QList<QWebEngineHistoryItem> items
     (m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
 
-  m_ui.backward->setEnabled(items.size() > 0);
+  m_ui.backward->setEnabled(!items.empty());
 
   for(int i = items.size() - 1; i >= 0; i--)
     {
@@ -1948,7 +1938,7 @@ void dooble_page::slot_prepare_forward_menu(void)
   QList<QWebEngineHistoryItem> items
     (m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
 
-  m_ui.forward->setEnabled(items.size() > 0);
+  m_ui.forward->setEnabled(!items.empty());
 
   for(int i = 0; i < items.size(); i++)
     {

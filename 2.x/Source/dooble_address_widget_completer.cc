@@ -216,20 +216,16 @@ void dooble_address_widget_completer::complete(const QString &text)
 
   m_model->clear();
 
-  for(int i = 0; i < list.size(); i++)
-    {
-      QStandardItem *item = list.at(i);
+  for(auto item : list)
+    if(item)
+      {
+	if(item->icon().isNull())
+	  item->setIcon(dooble_favicons::icon(item->text()));
 
-      if(item)
-	{
-	  if(item->icon().isNull())
-	    item->setIcon(dooble_favicons::icon(item->text()));
-
-	  m_model->setRowCount(m_model->rowCount() + 1);
-	  m_model->setItem(m_model->rowCount() - 1, item->clone());
-	  m_popup->setRowHeight(m_model->rowCount() - 1, 36);
-	}
-    }
+	m_model->setRowCount(m_model->rowCount() + 1);
+	m_model->setItem(m_model->rowCount() - 1, item->clone());
+	m_popup->setRowHeight(m_model->rowCount() - 1, 36);
+      }
 
   if(m_model->rowCount() > 0)
     {

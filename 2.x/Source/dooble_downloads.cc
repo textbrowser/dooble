@@ -595,13 +595,13 @@ void dooble_downloads::slot_open_download_page(void)
 
   QWidgetList list(QApplication::topLevelWidgets());
 
-  for(int i = 0; i < list.size(); i++)
-    if(qobject_cast<dooble *> (list.at(i)) &&
-       qobject_cast<dooble *> (list.at(i))->isVisible())
+  for(auto i : list)
+    if(qobject_cast<dooble *> (i) &&
+       qobject_cast<dooble *> (i)->isVisible())
       {
 	connect(this,
 		SIGNAL(open_link(const QUrl &)),
-		list.at(i),
+		i,
 		SLOT(slot_open_link(const QUrl &)),
 		Qt::UniqueConnection);
 	break;
@@ -751,10 +751,10 @@ void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 
 	  QWidgetList list(QApplication::topLevelWidgets());
 
-	  for(int i = 0; i < list.size(); i++)
-	    if(qobject_cast<dooble *> (list.at(i)))
+	  for(auto i : list)
+	    if(qobject_cast<dooble *> (i))
 	      {
-		dooble *d = qobject_cast<dooble *> (list.at(i));
+		dooble *d = qobject_cast<dooble *> (i);
 
 		foreach(dooble_page *page, d->findChildren<dooble_page *> ())
 		  if(page)

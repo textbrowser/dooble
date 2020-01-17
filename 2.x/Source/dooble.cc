@@ -444,8 +444,8 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QWidgetList list(QApplication::topLevelWidgets());
 
-  for(int i = 0; i < list.size(); i++)
-    if(list.at(i) != this && qobject_cast<dooble *> (list.at(i)))
+  for(auto i : list)
+    if(i != this && qobject_cast<dooble *> (i))
       {
 	decouple_support_windows();
 	deleteLater();
@@ -925,12 +925,11 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
 
 void dooble::prepare_control_w_shortcut(void)
 {
-  for(int i = 0; i < m_shortcuts.size(); i++)
-    if(m_shortcuts.at(i))
-      if(QKeySequence(Qt::ControlModifier + Qt::Key_W) ==
-	 m_shortcuts.at(i)->key())
+  for(auto shortcut : m_shortcuts)
+    if(shortcut)
+      if(QKeySequence(Qt::ControlModifier + Qt::Key_W) == shortcut->key())
 	{
-	  m_shortcuts.at(i)->setEnabled(tabs_closable());
+	  shortcut->setEnabled(tabs_closable());
 	  break;
 	}
 }
@@ -1660,8 +1659,8 @@ void dooble::prepare_tab_icons(void)
 
 void dooble::prepare_tab_shortcuts(void)
 {
-  for(int i = 0; i < m_tab_widget_shortcuts.size(); i++)
-    delete m_tab_widget_shortcuts.at(i);
+  for(auto tab_widget_shortcut : m_tab_widget_shortcuts)
+    delete tab_widget_shortcut;
 
   m_tab_widget_shortcuts.clear();
 
@@ -1976,18 +1975,18 @@ void dooble::slot_about_to_show_history_menu(void)
   if(!list.isEmpty())
     m_ui.menu_history->addSeparator();
 
-  for(int i = 0; i < list.size(); i++)
+  for(auto i : list)
     {
-      connect(list.at(i),
+      connect(i,
 	      SIGNAL(triggered(void)),
 	      this,
 	      SLOT(slot_history_action_triggered(void)));
-      list.at(i)->setText
-	(font_metrics.elidedText(list.at(i)->text(),
+      i->setText
+	(font_metrics.elidedText(i->text(),
 				 Qt::ElideRight,
 				 dooble_ui_utilities::
 				 context_menu_width(m_ui.menu_history)));
-      m_ui.menu_history->addAction(list.at(i));
+      m_ui.menu_history->addAction(i);
     }
 
   QApplication::restoreOverrideCursor();
@@ -2129,14 +2128,13 @@ void dooble::slot_application_locked(bool state, dooble *d)
  unlock_label:
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(int i = 0; i < m_shortcuts.size(); i++)
-    if(m_shortcuts.at(i))
+  for(auto shortcut : m_shortcuts)
+    if(shortcut)
       {
-	if(QKeySequence(Qt::ControlModifier + Qt::Key_W) ==
-	   m_shortcuts.at(i)->key())
-	  m_shortcuts.at(i)->setEnabled(!locked && tabs_closable());
+	if(QKeySequence(Qt::ControlModifier + Qt::Key_W) == shortcut->key())
+	  shortcut->setEnabled(!locked && tabs_closable());
 	else
-	  m_shortcuts.at(i)->setEnabled(!locked);
+	  shortcut->setEnabled(!locked);
       }
 
   if(m_cookies_window)

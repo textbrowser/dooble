@@ -600,11 +600,11 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 
   QList<QByteArray> url_digests;
 
-  for(int i = 0; i < urls.size(); i++)
+  for(const auto &url : urls)
     {
       QList<QStandardItem *> list
 	(m_favorites_model->
-	 findItems(urls.at(i).toString(), Qt::MatchExactly, 1));
+	 findItems(url.toString(), Qt::MatchExactly, 1));
 
       if(!list.isEmpty() && list.at(0))
 	m_favorites_model->removeRow(list.at(0)->row());
@@ -612,12 +612,12 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
       QWriteLocker locker(&m_history_mutex);
 
       m_history_date_time.remove
-	(m_history.value(urls.at(i)).value(LAST_VISITED).toDateTime(),
-	 urls.at(i));
-      m_history.remove(urls.at(i));
+	(m_history.value(url).value(LAST_VISITED).toDateTime(),
+	 url);
+      m_history.remove(url);
       locker.unlock();
       url_digests << dooble::s_cryptography->hmac
-	(urls.at(i).toEncoded()).toBase64();
+	(url.toEncoded()).toBase64();
     }
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -637,11 +637,11 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 
 	    query.exec("PRAGMA synchronous = OFF");
 
-	    for(int i = 0; i < url_digests.size(); i++)
+	    for(const auto &url_digest : url_digests)
 	      {
 		query.prepare
 		  ("DELETE FROM dooble_history WHERE url_digest = ?");
-		query.addBindValue(url_digests.at(i));
+		query.addBindValue(url_digest);
 		query.exec();
 	      }
 
@@ -987,12 +987,12 @@ void dooble_history::slot_populated_favorites
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(int i = 0; i < favorites.size(); i++)
+  for(const auto &favorite : favorites)
     {
-      QByteArray last_visited(favorites.at(i).value(2));
-      QByteArray number_of_visits(favorites.at(i).value(3));
-      QByteArray title(favorites.at(i).value(0));
-      QByteArray url(favorites.at(i).value(1));
+      QByteArray last_visited(favorite.value(2));
+      QByteArray number_of_visits(favorite.value(3));
+      QByteArray title(favorite.value(0));
+      QByteArray url(favorite.value(1));
       QList<QStandardItem *> list;
 
       for(int j = 0; j < m_favorites_model->columnCount(); j++)
@@ -1064,12 +1064,12 @@ void dooble_history::slot_remove_items(const QListUrl &urls)
   {
     QWriteLocker locker(&m_history_mutex);
 
-    for(int i = 0; i < urls.size(); i++)
+    for(const auto &url : urls)
       {
 	m_history_date_time.remove
-	  (m_history.value(urls.at(i)).value(LAST_VISITED).toDateTime(),
-	   urls.at(i));
-	m_history.remove(urls.at(i));
+	  (m_history.value(url).value(LAST_VISITED).toDateTime(),
+	   url);
+	m_history.remove(url);
       }
   }
 

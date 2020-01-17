@@ -35,7 +35,7 @@ class dooble_tool_button: public QToolButton
   Q_OBJECT
 
  public:
-  dooble_tool_button(QWidget *widget);
+  dooble_tool_button(QWidget *parent);
 };
 
 #endif

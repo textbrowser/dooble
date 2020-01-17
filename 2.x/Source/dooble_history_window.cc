@@ -555,10 +555,10 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
 
       QWidgetList list(QApplication::topLevelWidgets());
 
-      for(int i = 0; i < list.size(); i++)
-	if(qobject_cast<dooble *> (list.at(i)))
+      for(auto i : list)
+	if(qobject_cast<dooble *> (i))
 	  {
-	    m_parent = list.at(i);
+	    m_parent = i;
 	    connect(m_parent,
 		    SIGNAL(destroyed(void)),
 		    this,

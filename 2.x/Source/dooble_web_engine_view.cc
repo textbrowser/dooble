@@ -238,8 +238,8 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   list << QWebEnginePage::OpenLinkInNewTab
        << QWebEnginePage::OpenLinkInNewWindow;
 
-  for(int i = 0; i < list.size(); i++)
-    if((action = m_page->action(list.at(i))))
+  for(auto i : list)
+    if((action = m_page->action(i)))
       action->setVisible(false);
 
   action = m_page->action(QWebEnginePage::ViewSource);
@@ -355,15 +355,15 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	{
 	  sub_menu->setStyleSheet("QMenu {menu-scrollable: 1;}");
 
-	  for(int i = 0; i < actions.size(); i++)
+	  for(auto i : actions)
 	    {
-	      QAction *action = sub_menu->addAction(actions.at(i)->icon(),
-						    actions.at(i)->text(),
+	      QAction *action = sub_menu->addAction(i->icon(),
+						    i->text(),
 						    this,
 						    SLOT(slot_search(void)));
 
 	      action->setProperty("selected_text", selectedText());
-	      action->setProperty("url", actions.at(i)->property("url"));
+	      action->setProperty("url", i->property("url"));
 	    }
 	}
       else
@@ -443,8 +443,8 @@ void dooble_web_engine_view::slot_certificate_exception_accepted
 
 void dooble_web_engine_view::slot_create_dialog_requests(void)
 {
-  for(int i = 0; i < m_dialog_requests.size(); i++)
-    emit create_dialog_request(m_dialog_requests.at(i));
+  for(auto dialog_request : m_dialog_requests)
+    emit create_dialog_request(dialog_request);
 
   m_dialog_requests.clear();
 }

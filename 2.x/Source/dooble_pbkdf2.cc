@@ -128,11 +128,11 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 
   QByteArray bytes;
 
-  for(int i = 0; i < T.size(); i++)
+  for(const auto &i : T)
     if(m_interrupt.load())
       break;
     else
-      bytes.append(T.at(i));
+      bytes.append(i);
 
   if(m_interrupt.load())
     return QList<QByteArray> ();

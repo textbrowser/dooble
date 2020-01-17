@@ -146,10 +146,9 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 			Qt::MatchFixedString | Qt::MatchStartsWith,
 			1));
 
-  for(int i = 0; i < list.size(); i++)
+  for(auto i : list)
     {
-      QStandardItem *item = list.at(i) ?
-	m_model->item(list.at(i)->row(), 0) : nullptr;
+      QStandardItem *item = i ? m_model->item(i->row(), 0) : nullptr;
 
       if(item)
 	item->setIcon(icon);

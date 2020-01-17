@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
        << SIGSEGV
        << SIGTERM;
 
-  for(int i = 0; i < list.size(); i++)
+  for(int i : list)
     {
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
       memset(&signal_action, 0, sizeof(struct sigaction));
@@ -121,8 +121,8 @@ int main(int argc, char *argv[])
       sigemptyset(&signal_action.sa_mask);
       signal_action.sa_flags = 0;
 
-      if(sigaction(list.at(i), &signal_action, (struct sigaction *) nullptr))
-	std::cerr << "sigaction() failure on " << list.at(i) << std::endl;
+      if(sigaction(i, &signal_action, (struct sigaction *) nullptr))
+	std::cerr << "sigaction() failure on " << i << std::endl;
 #else
       signal(list.at(i), signal_handler);
 #endif

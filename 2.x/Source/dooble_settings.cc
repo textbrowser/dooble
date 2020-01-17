@@ -546,10 +546,9 @@ int dooble_settings::site_feature_permission
 
   QList<QPair<int, bool> > values(s_site_features_permissions.values(url));
 
-  for(int i = 0; i < values.size(); i++)
-    if(feature == QWebEnginePage::Feature(values.at(i).first) &&
-       values.at(i).first != -1)
-      return values.at(i).second ? 1 : 0;
+  for(auto value : values)
+    if(feature == QWebEnginePage::Feature(value.first) && value.first != -1)
+      return value.second ? 1 : 0;
 
   return -1;
 }
@@ -664,9 +663,8 @@ void dooble_settings::prepare_fonts(void)
 	     << QWebEngineSettings::SerifFont
 	     << QWebEngineSettings::StandardFont;
 
-    for(int i = 0; i < families.size(); i++)
-      fonts << QWebEngineSettings::defaultSettings()->fontFamily
-	(families.at(i));
+    for(auto family : families)
+      fonts << QWebEngineSettings::defaultSettings()->fontFamily(family);
 
     {
       QReadLocker lock(&s_settings_mutex);
@@ -783,16 +781,15 @@ void dooble_settings::prepare_icons(void)
 				                           << m_ui.web
 				                           << m_ui.windows);
 
-  for(int i = 0; i < list.size(); i++)
-    if(list.at(i)->height() >= size.height() ||
-       list.at(i)->width() >= size.width())
-      size = list.at(i)->size();
+  for(auto i : list)
+    if(i->height() >= size.height() || i->width() >= size.width())
+      size = i->size();
 
   size.setHeight(size.height() + 10);
   size.setWidth(size.width() + 10);
 
-  for(int i = 0; i < list.size(); i++)
-    list.at(i)->resize(size);
+  for(auto i : list)
+    i->resize(size);
 }
 
 void dooble_settings::prepare_proxy(bool save)
@@ -1509,14 +1506,14 @@ void dooble_settings::set_site_feature_permission
     {
       QList<QPair<int, bool> > values(s_site_features_permissions.values(url));
 
-      for(int i = 0; i < values.size(); i++)
-	if(feature == QWebEnginePage::Feature(values.at(i).first) &&
-	   values.at(i).first != -1)
+      for(auto value : values)
+	if(feature == QWebEnginePage::Feature(value.first) &&
+	   value.first != -1)
 	  {
 	    s_site_features_permissions.remove
-	      (url, QPair<int, bool> (values.at(i).first, false));
+	      (url, QPair<int, bool> (value.first, false));
 	    s_site_features_permissions.remove
-	      (url, QPair<int, bool> (values.at(i).first, true));
+	      (url, QPair<int, bool> (value.first, true));
 	    break;
 	  }
     }

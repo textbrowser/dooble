@@ -337,13 +337,13 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
 
 	query.exec("PRAGMA synchronous = OFF");
 
-	for(int i = 0; i < cookies.size(); i++)
+	for(const auto &cookie : cookies)
 	  {
 	    query.prepare
 	      ("DELETE FROM dooble_cookies WHERE identifier_digest = ?");
 	    query.addBindValue
 	      (dooble::s_cryptography->
-	       hmac(identifier(cookies.at(i))).toBase64());
+	       hmac(identifier(cookie)).toBase64());
 	    query.exec();
 	  }
 

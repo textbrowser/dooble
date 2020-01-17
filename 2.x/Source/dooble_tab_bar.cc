@@ -39,7 +39,7 @@
 
 dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 {
-  m_corner_widget = 0;
+  m_corner_widget = nullptr;
   m_next_tool_button = new QToolButton(nullptr);
   m_next_tool_button->setAutoRaise(true);
   m_next_tool_button->setIconSize(QSize(18, 18));

@@ -74,7 +74,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px;"
      "}");
   m_pull_down->setToolTip(tr("Show History"));
-  m_view = 0;
+  m_view = nullptr;
   connect(dooble::s_application,
 	  SIGNAL(favorites_cleared(void)),
 	  this,
@@ -156,7 +156,7 @@ bool dooble_address_widget::event(QEvent *event)
 {
   if(event && event->type() == QEvent::KeyPress)
     {
-      if(static_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
+      if(dynamic_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
 	  QTableView *table_view = qobject_cast<QTableView *>
 	    (m_completer->popup());
@@ -184,8 +184,8 @@ bool dooble_address_widget::event(QEvent *event)
       else
 	{
 	  QKeySequence key_sequence
-	    (static_cast<QKeyEvent *> (event)->modifiers() +
-	     Qt::Key(static_cast<QKeyEvent *> (event)->key()));
+	    (dynamic_cast<QKeyEvent *> (event)->modifiers() +
+	     Qt::Key(dynamic_cast<QKeyEvent *> (event)->key()));
 
 	  if(QKeySequence(Qt::ControlModifier + Qt::Key_L) == key_sequence)
 	    {
@@ -370,11 +370,10 @@ void dooble_address_widget::set_text_format
 {
   QList<QInputMethodEvent::Attribute> attributes;
 
-  for(int i = 0; i < formats.size(); i++)
+  for(auto format_range : formats)
     {
       QInputMethodEvent::AttributeType
 	attribute_type = QInputMethodEvent::TextFormat;
-      QTextLayout::FormatRange format_range = formats.at(i);
       QVariant value = format_range.format;
       int length = format_range.length;
       int start = format_range.start;
@@ -467,8 +466,8 @@ void dooble_address_widget::slot_populate
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(int i = 0; i < list.size(); i++)
-    m_completer->add_item(list.at(i).first, list.at(i).second);
+  for(const auto &i : list)
+    m_completer->add_item(i.first, i.second);
 
   QApplication::restoreOverrideCursor();
   emit populated();

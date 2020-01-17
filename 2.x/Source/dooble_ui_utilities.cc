@@ -130,7 +130,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   QPoint p(0, 0);
   QWidget *w = parent;
-  int extraw = 0, extrah = 0, scrn = 0;
+  int extrah = 0; int extraw = 0; int scrn = 0;
 
   if(w)
     w = w->window();

@@ -906,7 +906,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
   QApplication::restoreOverrideCursor();
 
-  if(list.size() > 0)
+  if(!list.empty())
     {
       QMessageBox mb(this);
 
@@ -989,7 +989,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 
   QApplication::restoreOverrideCursor();
 
-  if(list.size() > 0)
+  if(!list.empty())
     {
       QMessageBox mb(this);
 

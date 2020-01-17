@@ -141,13 +141,9 @@ void dooble_certificate_exceptions::remove_exception(const QUrl &url)
 
   QList<int> rows;
 
-  for(int i = 0; i < list.size(); i++)
-    {
-      QTableWidgetItem *item = list.at(i);
-
-      if(item)
-	rows << item->row();
-    }
+  for(auto item : list)
+    if(item)
+      rows << item->row();
 
   std::sort(rows.begin(), rows.end());
 
@@ -212,7 +208,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
 
   QApplication::restoreOverrideCursor();
 
-  if(list.size() > 0)
+  if(!list.empty())
     {
       QMessageBox mb(this);
 
@@ -360,8 +356,8 @@ void dooble_certificate_exceptions::slot_populate(void)
 
   for(int i = 0; i < list.size(); i++)
     {
-      QHash<QString, QVariant> hash(list.at(i));
       QTableWidgetItem *item = nullptr;
+      const QHash<QString, QVariant> &hash(list.at(i));
 
       item = new QTableWidgetItem(hash.value("url").toString());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);

@@ -157,10 +157,8 @@ void dooble_cookies_window::delete_top_level_items
   QList<QNetworkCookie> cookies;
   QStringList domains;
 
-  for(int i = 0; i <list.size(); i++)
+  for(auto item : list)
     {
-      QTreeWidgetItem *item = list.at(i);
-
       if(!item)
 	continue;
 
@@ -344,8 +342,8 @@ void dooble_cookies_window::slot_cookies_added
 
   for(int i = 0; i < cookies.size(); i++)
     {
-      QNetworkCookie cookie(cookies.at(i));
       bool is_favorite = is_favorites.value(i);
+      const QNetworkCookie &cookie(cookies.at(i));
 
       if(!m_top_level_items.contains(cookie.domain()))
 	{
