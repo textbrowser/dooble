@@ -28,6 +28,7 @@
 #ifndef dooble_web_engine_view_h
 #define dooble_web_engine_view_h
 
+#include <QTimer>
 #include <QWebEngineView>
 
 class dooble_web_engine_page;
@@ -56,6 +57,7 @@ class dooble_web_engine_view: public QWebEngineView
 
  private:
   QList<dooble_web_engine_view *> m_dialog_requests;
+  QTimer m_dialog_requests_timer;
   bool m_is_private;
   dooble_web_engine_page *m_page;
 

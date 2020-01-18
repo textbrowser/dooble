@@ -40,6 +40,8 @@
 dooble_web_engine_view::dooble_web_engine_view
 (QWebEngineProfile *web_engine_profile, QWidget *parent):QWebEngineView(parent)
 {
+  m_dialog_requests_timer.setInterval(100);
+  m_dialog_requests_timer.setSingleShot(true);
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
 
@@ -48,6 +50,10 @@ dooble_web_engine_view::dooble_web_engine_view
   else
     m_page = new dooble_web_engine_page(this);
 
+  connect(&m_dialog_requests_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_create_dialog_requests(void)));
   connect(m_page,
 	  SIGNAL(certificate_exception_accepted(const QUrl &)),
 	  this,
@@ -145,9 +151,8 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 	     dooble_settings::site_has_javascript_block_popup_exception(url)))
 	  {
 	    m_dialog_requests << view;
+	    m_dialog_requests_timer.start();
 	    view->setParent(this);
-	    QTimer::singleShot
-	      (250, this, SLOT(slot_create_dialog_requests(void)));
 	    return view;
 	  }
       }
