@@ -1336,8 +1336,16 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     {
       if(!m_last_javascript_popups.contains(view))
 	{
-	  m_last_javascript_popups << view;
-	  view->setParent(this);
+	  if(MAXIMUM_JAVASCRIPT_POPUPS <= m_last_javascript_popups.size())
+	    {
+	      view->deleteLater();
+	      return;
+	    }
+	  else
+	    {
+	      m_last_javascript_popups << view;
+	      view->setParent(this);
+	    }
 	}
       else
 	{
@@ -1349,8 +1357,14 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     return;
 
   QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
-  QString text(tr("A dialog from <b>%1</b> has been blocked.").
-	       arg(m_view->url().toString()));
+  QString text("");
+
+  if(m_last_javascript_popups.size() == 1)
+    text = tr("A dialog from <b>%1</b> has been blocked.").
+      arg(m_view->url().toString());
+  else
+    text = tr("Dooble blocked %1 dialogs from <b>%2</b>.").
+      arg(m_last_javascript_popups.size()).arg(m_view->url().toString());
 
   m_ui.javascript_popup_exception_url->setText
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
