@@ -232,7 +232,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   connect(m_view,
 	  SIGNAL(create_dialog_request(dooble_web_engine_view *)),
 	  this,
-	  SLOT(slot_create_dialog_request(dooble_web_engine_view *)));
+	  SLOT(slot_create_dialog_request(dooble_web_engine_view *)),
+	  Qt::QueuedConnection);
   connect(m_view,
 	  SIGNAL(create_tab(dooble_web_engine_view *)),
 	  this,
