@@ -3484,7 +3484,6 @@ void dooble::slot_vacuum_databases(void)
   m_ui.menu_bar->repaint();
   m_ui.menu_edit->repaint();
   QApplication::processEvents();
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QStringList list;
 
@@ -3498,8 +3497,29 @@ void dooble::slot_vacuum_databases(void)
        << "dooble_settings.db"
        << "dooble_style_sheets.db";
 
-  for(int i = 0; i < list.size(); i++)
+  QProgressDialog dialog(this);
+
+  dialog.setAutoClose(true);
+  dialog.setCancelButtonText(tr("Interrupt"));
+  dialog.setLabelText(tr("Vacuuming databases..."));
+  dialog.setMaximum(list.size());
+  dialog.setMinimum(0);
+  dialog.setWindowIcon(windowIcon());
+  dialog.setWindowModality(Qt::WindowModal);
+  dialog.setWindowTitle(tr("Dooble: Vacuuming Databases"));
+  dialog.show();
+
+  for(const auto &i : list)
     {
+      if(dialog.wasCanceled())
+	break;
+      else
+	dialog.setValue(list.indexOf(i) + 1);
+
+      dialog.repaint();
+      QApplication::processEvents();
+      QThread::msleep(250);
+
       QString database_name(dooble_database_utilities::database_name());
 
       {
@@ -3507,7 +3527,7 @@ void dooble::slot_vacuum_databases(void)
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
-			   list.at(i));
+			   i);
 
 	if(db.open())
 	  {
@@ -3522,7 +3542,7 @@ void dooble::slot_vacuum_databases(void)
       QSqlDatabase::removeDatabase(database_name);
     }
 
-  QApplication::restoreOverrideCursor();
+  QApplication::processEvents();
 }
 
 void dooble::slot_warn_of_missing_sqlite_driver(void)

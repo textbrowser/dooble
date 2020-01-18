@@ -370,13 +370,13 @@ void dooble_address_widget::set_text_format
 {
   QList<QInputMethodEvent::Attribute> attributes;
 
-  for(auto format_range : formats)
+  for(auto format : formats)
     {
       QInputMethodEvent::AttributeType
 	attribute_type = QInputMethodEvent::TextFormat;
-      QVariant value = format_range.format;
-      int length = format_range.length;
-      int start = format_range.start;
+      QVariant value = format.format;
+      int length = format.length;
+      int start = format.start;
 
       attributes << QInputMethodEvent::Attribute(attribute_type,
 						 start,
