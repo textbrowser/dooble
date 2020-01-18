@@ -2096,7 +2096,6 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	  return;
 	}
 
-      repaint();
       QApplication::processEvents();
 
       QByteArray salt
@@ -3465,6 +3464,26 @@ void dooble::slot_title_changed(const QString &title)
 
 void dooble::slot_vacuum_databases(void)
 {
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText
+    (tr("Vacuuming databases may require a significant amount of "
+	"time. Continue?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  m_ui.menu_bar->repaint();
+  m_ui.menu_edit->repaint();
+  QApplication::processEvents();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QStringList list;
