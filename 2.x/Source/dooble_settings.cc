@@ -248,6 +248,8 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["block_cipher_type"] = "AES-256";
   s_settings["block_cipher_type_index"] = 0;
   s_settings["browsing_history_days"] = 15;
+  s_settings["cache_size"] = 0;
+  s_settings["cache_type_index"] = 0;
   s_settings["center_child_windows"] = true;
   s_settings["cookie_policy_index"] = 2;
   s_settings["credentials_enabled"] = false;
@@ -259,6 +261,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["hash_type_index"] = 1;
   s_settings["home_url"] = QUrl::fromUserInput(dooble::ABOUT_BLANK).toEncoded();
   s_settings["icon_set"] = "Material Design";
+  s_settings["javascript"] = true;
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
   s_settings["main_menu_bar_visible"] = true;
