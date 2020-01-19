@@ -264,6 +264,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["javascript"] = true;
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
+  s_settings["local_storage"] = true;
   s_settings["main_menu_bar_visible"] = true;
   s_settings["pin_accepted_or_blocked_window"] = true;
   s_settings["pin_downloads_window"] = true;
