@@ -853,7 +853,7 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(view)
     view->setVisible(true);
 
-  dooble_page *page = new dooble_page
+  auto *page = new dooble_page
     (view ? view->web_engine_profile() : m_web_engine_profile.data(),
      view,
      m_ui.tab);
@@ -891,7 +891,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
   if(index < 0 || m_ui.tab->count() <= 1)
     return;
 
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(page)
     {
@@ -912,7 +912,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
     }
   else
     {
-      dooble *d = new dooble(m_ui.tab->widget(index));
+      auto *d = new dooble(m_ui.tab->widget(index));
 
       d->show();
       m_ui.tab->removeTab(index);
@@ -1628,7 +1628,7 @@ void dooble::prepare_tab_icons(void)
 
   for(int i = 0; i < m_ui.tab->count(); i++)
     {
-      QMainWindow *main_window = qobject_cast<QMainWindow *>
+      auto *main_window = qobject_cast<QMainWindow *>
 	(m_ui.tab->widget(i));
 
       if(!main_window)
@@ -1707,7 +1707,7 @@ void dooble::print(dooble_page *page)
     return;
 
   QPrintDialog *print_dialog = nullptr;
-  QPrinter *printer = new QPrinter();
+  auto *printer = new QPrinter();
 
   print_dialog = new QPrintDialog(printer, this);
 
@@ -1946,7 +1946,7 @@ void dooble::show(void)
 
 void dooble::slot_about_to_hide_main_menu(void)
 {
-  QMenu *menu = qobject_cast<QMenu *> (sender());
+  auto *menu = qobject_cast<QMenu *> (sender());
 
   if(menu)
     menu->clear();
@@ -1996,14 +1996,14 @@ void dooble::slot_about_to_show_main_menu(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QMenu *menu = qobject_cast<QMenu *> (sender());
+  auto *menu = qobject_cast<QMenu *> (sender());
 
   if(menu)
     {
       menu->clear();
 
       QMenu *m = nullptr;
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
 
       if(page && page->menu())
@@ -2343,7 +2343,7 @@ void dooble::slot_close_tab(void)
       return;
     }
 
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
   if(page)
     {
@@ -2363,7 +2363,7 @@ void dooble::slot_create_dialog(dooble_web_engine_view *view)
   if(!view)
     return;
 
-  dooble *d = new dooble(view);
+  auto *d = new dooble(view);
 
   d->m_is_javascript_dialog = true;
   d->resize(s_vga_size);
@@ -2378,14 +2378,14 @@ void dooble::slot_create_tab(dooble_web_engine_view *view)
 
 void dooble::slot_create_window(dooble_web_engine_view *view)
 {
-  dooble *d = new dooble(view);
+  auto *d = new dooble(view);
 
   d->show();
 }
 
 void dooble::slot_decouple_tab(int index)
 {
-  QMainWindow *main_window = qobject_cast<QMainWindow *>
+  auto *main_window = qobject_cast<QMainWindow *>
     (m_ui.tab->widget(index));
 
   if(main_window)
@@ -2544,7 +2544,7 @@ void dooble::slot_floating_digital_dialog_timeout(void)
 
 void dooble::slot_history_action_triggered(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -2559,7 +2559,7 @@ void dooble::slot_history_action_triggered(void)
 
 void dooble::slot_history_favorites_populated(void)
 {
-  for(auto pair : m_delayed_pages)
+  for(const auto &pair : m_delayed_pages)
     if(pair.first)
       pair.first->load(pair.second);
 
@@ -2571,7 +2571,7 @@ void dooble::slot_icon_changed(const QIcon &icon)
   if(dooble::s_application->application_locked())
     return;
 
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
+  auto *page = qobject_cast<dooble_page *> (sender());
 
   if(page)
     m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
@@ -2614,7 +2614,7 @@ void dooble::slot_open_favorites_link(const QUrl &url)
      s_search_engines_popup_opened_from_dooble_window == this ||
      !s_search_engines_popup_opened_from_dooble_window)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
 
       if(page)
@@ -2775,7 +2775,7 @@ void dooble::slot_quit_dooble(void)
 
 void dooble::slot_reload_tab(int index)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(page)
     page->reload();
@@ -2783,7 +2783,7 @@ void dooble::slot_reload_tab(int index)
 
 void dooble::slot_reload_tab_periodically(int index, int seconds)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(page)
     page->reload_periodically(seconds);
@@ -2796,7 +2796,7 @@ void dooble::slot_remove_tab_widget_shortcut(void)
 
 void dooble::slot_save(void)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
   if(!page)
     return;
@@ -2811,7 +2811,7 @@ void dooble::slot_save(void)
 
 void dooble::slot_set_current_tab(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     m_ui.tab->setCurrentIndex(action->property("index").toInt());
@@ -3233,7 +3233,7 @@ void dooble::slot_show_site_cookies(void)
 {
   if(m_cookies_window)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(m_ui.tab->currentWidget());
 
       if(page)
@@ -3260,7 +3260,7 @@ void dooble::slot_show_site_cookies(void)
   ** Display this site's cookies.
   */
 
-  dooble_page *page = qobject_cast<dooble_page *>
+  auto *page = qobject_cast<dooble_page *>
     (m_ui.tab->currentWidget());
 
   if(page)
@@ -3292,7 +3292,7 @@ void dooble::slot_tab_close_requested(int index)
       return;
     }
 
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(page)
     page->deleteLater();
@@ -3311,11 +3311,11 @@ void dooble::slot_tab_index_changed(int index)
       return;
     }
 
-  dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(!page)
     {
-      QMainWindow *main_window = qobject_cast<QMainWindow *>
+      auto *main_window = qobject_cast<QMainWindow *>
 	(m_ui.tab->widget(index));
 
       if(main_window)
@@ -3350,7 +3350,7 @@ void dooble::slot_tab_index_changed(int index)
 
 void dooble::slot_tab_widget_shortcut_activated(void)
 {
-  QShortcut *shortcut = qobject_cast<QShortcut *> (sender());
+  auto *shortcut = qobject_cast<QShortcut *> (sender());
 
   if(!shortcut)
     return;
@@ -3396,7 +3396,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
     {
       QAction *action = nullptr;
       QString text(m_ui.tab->tabText(i));
-      dooble_page *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+      auto *page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 
       if(page)
 	action = menu.addAction
@@ -3440,7 +3440,7 @@ void dooble::slot_title_changed(const QString &title)
   if(s_application->application_locked())
     return;
 
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
+  auto *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
     return;
@@ -3580,7 +3580,7 @@ void dooble::slot_window_close_requested(void)
       return;
     }
 
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
+  auto *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
     return;

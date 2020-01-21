@@ -166,7 +166,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
 
   for(int i = 0; i < 2; i++)
     {
-      QTableWidgetItem *item = new QTableWidgetItem();
+      auto *item = new QTableWidgetItem();
 
       item->setData(Qt::UserRole, domain);
 
@@ -250,7 +250,7 @@ void dooble_accepted_or_blocked_domains::new_exception(const QString &url)
   m_ui.exceptions->setRowCount(m_ui.exceptions->rowCount() + 1);
   m_ui.exception->clear();
 
-  QTableWidgetItem *item = new QTableWidgetItem();
+  auto *item = new QTableWidgetItem();
 
   item->setCheckState(Qt::Checked);
   item->setData(Qt::UserRole, url);
@@ -357,7 +357,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
     {
       it.next();
 
-      QTableWidgetItem *item = new QTableWidgetItem();
+      auto *item = new QTableWidgetItem();
 
       if(it.value())
 	item->setCheckState(Qt::Checked);
@@ -468,7 +468,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
     {
       it.next();
 
-      QTableWidgetItem *item = new QTableWidgetItem();
+      auto *item = new QTableWidgetItem();
 
       if(it.value())
 	item->setCheckState(Qt::Checked);

@@ -158,7 +158,7 @@ bool dooble_address_widget::event(QEvent *event)
     {
       if(dynamic_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
-	  QTableView *table_view = qobject_cast<QTableView *>
+	  auto *table_view = qobject_cast<QTableView *>
 	    (m_completer->popup());
 
 	  if(table_view && table_view->isVisible())
