@@ -192,7 +192,7 @@ QIcon dooble_tab_widget::tabIcon(int index) const
 
   if(icon.isNull())
     {
-      QLabel *label = qobject_cast<QLabel *>
+      auto *label = qobject_cast<QLabel *>
 	(m_tab_bar->tabButton(index, QTabBar::LeftSide));
 
       if(!label)
@@ -279,13 +279,13 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
 
   label->setProperty("icon", icon);
 #else
-  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+  auto side = static_cast<QTabBar::ButtonPosition>
     (style()->
      styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar));
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
-  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(!label)
     {
@@ -320,12 +320,12 @@ void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 
 void dooble_tab_widget::slot_load_finished(void)
 {
-  dooble_page *page = qobject_cast<dooble_page *> (sender());
+  auto *page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
     return;
 
-  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+  auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
 			m_tab_bar));
@@ -340,7 +340,7 @@ void dooble_tab_widget::slot_load_finished(void)
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
 
-  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(label)
     {
@@ -368,7 +368,7 @@ void dooble_tab_widget::slot_load_finished(void)
 
 void dooble_tab_widget::slot_load_started(void)
 {
-  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+  auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
 			m_tab_bar));
@@ -383,7 +383,7 @@ void dooble_tab_widget::slot_load_started(void)
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
 
-  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(!label)
     {

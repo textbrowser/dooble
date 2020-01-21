@@ -126,8 +126,7 @@ bool dooble_web_engine_view::is_private(void) const
 dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
-  dooble_web_engine_view *view = new dooble_web_engine_view
-    (m_page->profile(), nullptr);
+  auto *view = new dooble_web_engine_view(m_page->profile(), nullptr);
 
   view->setVisible(false);
 
@@ -407,7 +406,7 @@ void dooble_web_engine_view::save(const QString &file_name)
 
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -462,7 +461,7 @@ void dooble_web_engine_view::slot_load_progress(int progress)
 
 void dooble_web_engine_view::slot_open_link_in_current_page(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -475,7 +474,7 @@ void dooble_web_engine_view::slot_open_link_in_current_page(void)
 
 void dooble_web_engine_view::slot_open_link_in_new_private_window(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -488,7 +487,7 @@ void dooble_web_engine_view::slot_open_link_in_new_private_window(void)
 
 void dooble_web_engine_view::slot_open_link_in_new_window(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -501,7 +500,7 @@ void dooble_web_engine_view::slot_open_link_in_new_window(void)
 
 void dooble_web_engine_view::slot_open_link_in_new_tab(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -514,7 +513,7 @@ void dooble_web_engine_view::slot_open_link_in_new_tab(void)
 
 void dooble_web_engine_view::slot_search(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;

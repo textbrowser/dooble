@@ -259,7 +259,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 	  {
 	    QAction *action = nullptr;
 	    QList<QStandardItem *> list;
-	    QStandardItem *item = new QStandardItem();
+	    auto *item = new QStandardItem();
 
 	    action = new QAction(dooble_favicons::icon(url), title, this);
 	    action->setProperty("url", url);
@@ -464,7 +464,7 @@ void dooble_search_engines_popup::slot_populate(void)
 
 	      QAction *action = nullptr;
 	      QList<QStandardItem *> list;
-	      QStandardItem *item = new QStandardItem();
+	      auto *item = new QStandardItem();
 
 	      action = new QAction
 		(dooble_favicons::icon(QUrl::fromEncoded(url)),
@@ -499,8 +499,7 @@ void dooble_search_engines_popup::slot_populate(void)
 
 void dooble_search_engines_popup::slot_search_timer_timeout(void)
 {
-  QStandardItemModel *model = qobject_cast<QStandardItemModel *>
-    (m_ui.view->model());
+  auto *model = qobject_cast<QStandardItemModel *> (m_ui.view->model());
 
   if(!model)
     return;

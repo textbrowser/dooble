@@ -388,8 +388,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   else
     for(int i = 0; i < s_spell_checker_dictionaries.size(); i++)
       {
-	QListWidgetItem *item = new QListWidgetItem
-	  (s_spell_checker_dictionaries.at(i));
+	auto *item = new QListWidgetItem(s_spell_checker_dictionaries.at(i));
 
 	item->setFlags(Qt::ItemIsEnabled |
 		       Qt::ItemIsSelectable |
@@ -621,7 +620,7 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
     (m_ui.javascript_block_popups_exceptions->rowCount() + 1);
   m_ui.new_javascript_block_popup_exception->clear();
 
-  QTableWidgetItem *item = new QTableWidgetItem();
+  auto *item = new QTableWidgetItem();
 
   item->setCheckState(Qt::Checked);
   item->setData(Qt::UserRole, url);
@@ -2038,7 +2037,7 @@ void dooble_settings::slot_new_javascript_block_popup_exception(void)
 
 void dooble_settings::slot_page_button_clicked(void)
 {
-  QToolButton *tool_button = qobject_cast<QToolButton *> (sender());
+  auto *tool_button = qobject_cast<QToolButton *> (sender());
 
   if(!tool_button)
     return;
@@ -2398,7 +2397,7 @@ void dooble_settings::slot_populate(void)
       {
 	it.next();
 
-	QTableWidgetItem *item = new QTableWidgetItem();
+	auto *item = new QTableWidgetItem();
 
 	if(it.value().second)
 	  item->setCheckState(Qt::Checked);
@@ -2436,7 +2435,7 @@ void dooble_settings::slot_populate(void)
       {
 	it.next();
 
-	QTableWidgetItem *item = new QTableWidgetItem();
+	auto *item = new QTableWidgetItem();
 
 	if(it.value())
 	  item->setCheckState(Qt::Checked);

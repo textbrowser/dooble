@@ -216,13 +216,13 @@ static void threefish_decrypt_implementation(char *D,
   ** The inverse of section 3.3.
   */
 
+  auto **s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
+  auto *k = new (std::nothrow) uint64_t[Nw + 1];
+  auto *v = new (std::nothrow) uint64_t[Nw];
   bool error = false;
   uint64_t C240 = 0x1bd11bdaa9fc1a22;
-  uint64_t *k = new (std::nothrow) uint64_t[Nw + 1];
   uint64_t kNw = C240; // Section 3.3.2.
-  uint64_t **s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
   uint64_t t[3];
-  uint64_t *v = new (std::nothrow) uint64_t[Nw];
 
   if(Q_UNLIKELY(!k || !s || !v))
     {
@@ -283,7 +283,7 @@ static void threefish_decrypt_implementation(char *D,
 
   for(size_t d = Nr - 1;; d--)
     {
-      uint64_t *f = new (std::nothrow) uint64_t[Nw];
+      auto *f = new (std::nothrow) uint64_t[Nw];
 
       if(Q_UNLIKELY(!f))
 	{
@@ -396,13 +396,13 @@ static void threefish_encrypt_implementation(char *E,
   ** Section 3.3.
   */
 
+  auto **s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
+  auto *k = new (std::nothrow) uint64_t[Nw + 1];
+  auto *v = new (std::nothrow) uint64_t[Nw];
   bool error = false;
   uint64_t C240 = 0x1bd11bdaa9fc1a22;
-  uint64_t *k = new (std::nothrow) uint64_t[Nw + 1];
   uint64_t kNw = C240; // Section 3.3.2.
-  uint64_t **s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
   uint64_t t[3];
-  uint64_t *v = new (std::nothrow) uint64_t[Nw];
 
   if(Q_UNLIKELY(!k || !s || !v))
     {
@@ -464,7 +464,7 @@ static void threefish_encrypt_implementation(char *E,
 	for(size_t i = 0; i < Nw; i++)
 	  v[i] += s[d / 4][i];
 
-      uint64_t *f = new (std::nothrow) uint64_t[Nw];
+      auto *f = new (std::nothrow) uint64_t[Nw];
 
       if(Q_UNLIKELY(!f))
 	{

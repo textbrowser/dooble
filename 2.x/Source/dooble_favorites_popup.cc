@@ -255,8 +255,7 @@ void dooble_favorites_popup::slot_find(void)
 
 void dooble_favorites_popup::slot_search_timer_timeout(void)
 {
-  QStandardItemModel *model = qobject_cast<QStandardItemModel *>
-    (m_ui.view->model());
+  auto *model = qobject_cast<QStandardItemModel *> (m_ui.view->model());
 
   if(!model)
     return;

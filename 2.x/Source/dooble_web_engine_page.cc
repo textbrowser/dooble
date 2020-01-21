@@ -151,7 +151,7 @@ bool dooble_web_engine_page::certificateError
       if(!view())
 	return false;
 
-      QLayout *layout = qobject_cast<QLayout *> (view()->layout());
+      auto *layout = qobject_cast<QLayout *> (view()->layout());
 
       if(!layout)
 	return false;
@@ -203,7 +203,7 @@ bool dooble_web_engine_page::certificateError
       if(!view())
 	return false;
 
-      QLayout *layout = qobject_cast<QLayout *> (view()->layout());
+      auto *layout = qobject_cast<QLayout *> (view()->layout());
 
       if(!layout)
 	return false;

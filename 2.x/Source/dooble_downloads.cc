@@ -104,7 +104,7 @@ bool dooble_downloads::has_downloads_for_profile
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      dooble_downloads_item *downloads_item = qobject_cast
+      auto *downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
@@ -120,7 +120,7 @@ bool dooble_downloads::is_finished(void) const
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      dooble_downloads_item *downloads_item = qobject_cast
+      auto *downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
@@ -135,7 +135,7 @@ void dooble_downloads::abort(void)
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      dooble_downloads_item *downloads_item = qobject_cast
+      auto *downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
@@ -205,7 +205,7 @@ void dooble_downloads::delete_selected(void)
 
   for(int i = list.size() - 1; i >= 0; i--)
     {
-      dooble_downloads_item *downloads_item = qobject_cast
+      auto *downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(list.at(i).row(), 0));
 
       if(!downloads_item)
@@ -295,7 +295,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 
   for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
     {
-      dooble_downloads_item *downloads_item =
+      auto *downloads_item =
 	qobject_cast<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(!downloads_item)
@@ -312,8 +312,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	}
     }
 
-  dooble_downloads_item *downloads_item = new dooble_downloads_item
-    (download, index, this);
+  auto *downloads_item = new dooble_downloads_item(download, index, this);
 
   connect(downloads_item,
 	  SIGNAL(finished(void)),
@@ -433,7 +432,7 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 
   for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
     {
-      dooble_downloads_item *downloads_item = qobject_cast
+      auto *downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(!downloads_item)
@@ -454,7 +453,7 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 
 void dooble_downloads::slot_copy_download_location(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -467,12 +466,12 @@ void dooble_downloads::slot_copy_download_location(void)
 
 void dooble_downloads::slot_delete_row(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  dooble_downloads_item *downloads_item = qobject_cast<dooble_downloads_item *>
+  auto *downloads_item = qobject_cast<dooble_downloads_item *>
     (m_ui.table->cellWidget(action->property("row").toInt(), 0));
 
   if(downloads_item && downloads_item->is_finished())
@@ -575,7 +574,7 @@ void dooble_downloads::slot_find(void)
 
 void dooble_downloads::slot_open_download_page(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -710,7 +709,7 @@ void dooble_downloads::slot_populate(void)
 		  continue;
 		}
 
-	      dooble_downloads_item *downloads_item = new dooble_downloads_item
+	      auto *downloads_item = new dooble_downloads_item
 		(download_path, file_name, information, url, oid, this);
 
 	      connect(downloads_item,
@@ -754,7 +753,7 @@ void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 	  for(auto i : list)
 	    if(qobject_cast<dooble *> (i))
 	      {
-		dooble *d = qobject_cast<dooble *> (i);
+		auto *d = qobject_cast<dooble *> (i);
 
 		foreach(dooble_page *page, d->findChildren<dooble_page *> ())
 		  if(page)
@@ -782,7 +781,7 @@ void dooble_downloads::slot_search_timer_timeout(void)
       m_ui.table->setRowHidden(i, false);
     else
       {
-	dooble_downloads_item *downloads_item = qobject_cast
+	auto *downloads_item = qobject_cast
 	  <dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
 	if(!downloads_item)
@@ -833,7 +832,7 @@ void dooble_downloads::slot_show_context_menu(const QPoint &point)
   if(row < 0)
     return;
 
-  dooble_downloads_item *downloads_item = qobject_cast
+  auto *downloads_item = qobject_cast
     <dooble_downloads_item *> (m_ui.table->cellWidget(row, 0));
 
   if(!downloads_item)

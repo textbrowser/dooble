@@ -65,6 +65,7 @@ dooble_style_sheet::dooble_style_sheet(dooble_web_engine_page *web_engine_page,
 
 dooble_style_sheet::dooble_style_sheet(void)
 {
+  m_web_engine_page = nullptr;
 }
 
 void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)

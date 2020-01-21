@@ -143,7 +143,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   QSize size(QTabBar::tabSizeHint(index));
-  int f = qFloor(rect().width() / qMax(1, count()));
+  int f = qFloor(static_cast<double> (rect().width()) /
+		 static_cast<double> (qMax(1, count())));
   static int maximum_tab_width = 225;
   static int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
@@ -341,7 +342,7 @@ void dooble_tab_bar::showEvent(QShowEvent *event)
 
 void dooble_tab_bar::slot_application_locked(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit application_locked
@@ -350,7 +351,7 @@ void dooble_tab_bar::slot_application_locked(void)
 
 void dooble_tab_bar::slot_close_other_tabs(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     {
@@ -368,7 +369,7 @@ void dooble_tab_bar::slot_close_other_tabs(void)
 
 void dooble_tab_bar::slot_close_tab(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit tabCloseRequested(tabAt(action->property("point").toPoint()));
@@ -376,7 +377,7 @@ void dooble_tab_bar::slot_close_tab(void)
 
 void dooble_tab_bar::slot_decouple_tab(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit decouple_tab(tabAt(action->property("point").toPoint()));
@@ -384,17 +385,16 @@ void dooble_tab_bar::slot_decouple_tab(void)
 
 void dooble_tab_bar::slot_hide_location_frame(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
-    (parentWidget());
+  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -404,17 +404,16 @@ void dooble_tab_bar::slot_hide_location_frame(void)
 
 void dooble_tab_bar::slot_javascript(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
-    (parentWidget());
+  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -436,7 +435,7 @@ void dooble_tab_bar::slot_next_tab(void)
 
 void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit open_tab_as_new_private_window
@@ -445,7 +444,7 @@ void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
 
 void dooble_tab_bar::slot_open_tab_as_new_window(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit open_tab_as_new_window(tabAt(action->property("point").toPoint()));
@@ -464,7 +463,7 @@ void dooble_tab_bar::slot_previous_tab(void)
 
 void dooble_tab_bar::slot_reload(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit reload_tab(tabAt(action->property("point").toPoint()));
@@ -472,7 +471,7 @@ void dooble_tab_bar::slot_reload(void)
 
 void dooble_tab_bar::slot_reload_periodically(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit reload_tab_periodically
@@ -548,8 +547,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
      SLOT(slot_reload(void)));
   reload_action->setProperty("point", point);
 
-  QActionGroup *action_group = new QActionGroup(&menu);
   QMenu *sub_menu = menu.addMenu(tr("Reload Periodically"));
+  auto *action_group = new QActionGroup(&menu);
 
   action = sub_menu->addAction(tr("&15 Seconds"),
 			       this,
@@ -626,9 +625,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   webgl_action->setEnabled(false);
   webgl_action->setProperty("point", point);
 
+  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
   dooble_page *page = nullptr;
-  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
-    (parentWidget());
 
   if(tab_widget)
     {
@@ -744,17 +742,16 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 
 void dooble_tab_bar::slot_web_plugins(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
-    (parentWidget());
+  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -765,17 +762,16 @@ void dooble_tab_bar::slot_web_plugins(void)
 
 void dooble_tab_bar::slot_webgl(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  dooble_tab_widget *tab_widget = qobject_cast<dooble_tab_widget *>
-    (parentWidget());
+  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      dooble_page *page = qobject_cast<dooble_page *>
+      auto *page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)

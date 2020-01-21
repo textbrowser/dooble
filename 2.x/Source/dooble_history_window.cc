@@ -344,8 +344,8 @@ void dooble_history_window::slot_delete_pages(void)
   if(list.isEmpty())
     return;
 
-  QAction *action = qobject_cast<QAction *> (sender());
   QMessageBox mb(this);
+  auto *action = qobject_cast<QAction *> (sender());
   bool favorites_included = false;
 
   mb.setIcon(QMessageBox::Question);
@@ -657,8 +657,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(title.isEmpty())
     title = tr("Dooble");
 
-  dooble_history_window_favorite_item *item1 =
-    new dooble_history_window_favorite_item();
+  auto *item1 = new dooble_history_window_favorite_item();
 
   item1->setData(Qt::UserRole, item.url());
   item1->setFlags(Qt::ItemIsEnabled |

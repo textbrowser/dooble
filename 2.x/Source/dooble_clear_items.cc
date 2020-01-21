@@ -81,7 +81,7 @@ dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 
 void dooble_clear_items::slot_check_box_toggled(bool state)
 {
-  QCheckBox *check_box = qobject_cast<QCheckBox *> (sender());
+  auto *check_box = qobject_cast<QCheckBox *> (sender());
 
   if(!check_box)
     return;

@@ -97,7 +97,7 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
       if(title.isEmpty())
 	continue;
 
-      QAction *action = new QAction(title);
+      auto *action = new QAction(title);
 
       action->setData(m_history.value(it.value()).value(URL).toUrl());
       action->setIcon(dooble_favicons::icon(it.value()));
@@ -997,7 +997,7 @@ void dooble_history::slot_populated_favorites
 
       for(int j = 0; j < m_favorites_model->columnCount(); j++)
 	{
-	  QStandardItem *item = new QStandardItem();
+	  auto *item = new QStandardItem();
 
 	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -1093,7 +1093,7 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
     {
       for(int i = 0; i < m_favorites_model->columnCount(); i++)
 	{
-	  QStandardItem *item = new QStandardItem();
+	  auto *item = new QStandardItem();
 
 	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 

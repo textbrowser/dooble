@@ -38,8 +38,7 @@ dooble_table_view::dooble_table_view(QWidget *parent):QTableView(parent)
 
 void dooble_table_view::prepare_viewport_icons(void)
 {
-  QStandardItemModel *model = qobject_cast<QStandardItemModel *>
-    (this->model());
+  auto *model = qobject_cast<QStandardItemModel *> (this->model());
 
   if(!model)
     return;

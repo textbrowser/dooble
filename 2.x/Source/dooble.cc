@@ -1628,8 +1628,7 @@ void dooble::prepare_tab_icons(void)
 
   for(int i = 0; i < m_ui.tab->count(); i++)
     {
-      auto *main_window = qobject_cast<QMainWindow *>
-	(m_ui.tab->widget(i));
+      auto *main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(i));
 
       if(!main_window)
 	continue;
@@ -1706,10 +1705,10 @@ void dooble::print(dooble_page *page)
   if(!page)
     return;
 
-  QPrintDialog *print_dialog = nullptr;
+  QScopedPointer<QPrintDialog> print_dialog;
   auto *printer = new QPrinter();
 
-  print_dialog = new QPrintDialog(printer, this);
+  print_dialog.reset(new QPrintDialog(printer, this));
 
   if(print_dialog->exec() == QDialog::Accepted)
     {
@@ -1721,8 +1720,6 @@ void dooble::print(dooble_page *page)
       QApplication::processEvents();
       delete printer;
     }
-
-  print_dialog->deleteLater();
 }
 
 void dooble::print_current_page(void)
@@ -2003,8 +2000,7 @@ void dooble::slot_about_to_show_main_menu(void)
       menu->clear();
 
       QMenu *m = nullptr;
-      auto *page = qobject_cast<dooble_page *>
-	(m_ui.tab->currentWidget());
+      auto *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
       if(page && page->menu())
 	m = page->menu();
@@ -2385,8 +2381,7 @@ void dooble::slot_create_window(dooble_web_engine_view *view)
 
 void dooble::slot_decouple_tab(int index)
 {
-  auto *main_window = qobject_cast<QMainWindow *>
-    (m_ui.tab->widget(index));
+  auto *main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(index));
 
   if(main_window)
     {
@@ -2614,8 +2609,7 @@ void dooble::slot_open_favorites_link(const QUrl &url)
      s_search_engines_popup_opened_from_dooble_window == this ||
      !s_search_engines_popup_opened_from_dooble_window)
     {
-      auto *page = qobject_cast<dooble_page *>
-	(m_ui.tab->currentWidget());
+      auto *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
       if(page)
 	page->load(url);
@@ -3233,8 +3227,7 @@ void dooble::slot_show_site_cookies(void)
 {
   if(m_cookies_window)
     {
-      auto *page = qobject_cast<dooble_page *>
-	(m_ui.tab->currentWidget());
+      auto *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
       if(page)
 	m_cookies_window->filter(page->url().host());
@@ -3260,8 +3253,7 @@ void dooble::slot_show_site_cookies(void)
   ** Display this site's cookies.
   */
 
-  auto *page = qobject_cast<dooble_page *>
-    (m_ui.tab->currentWidget());
+  auto *page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
   if(page)
     s_cookies_window->filter(page->url().host());
@@ -3315,8 +3307,7 @@ void dooble::slot_tab_index_changed(int index)
 
   if(!page)
     {
-      auto *main_window = qobject_cast<QMainWindow *>
-	(m_ui.tab->widget(index));
+      auto *main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(index));
 
       if(main_window)
 	setWindowTitle(main_window->windowTitle());

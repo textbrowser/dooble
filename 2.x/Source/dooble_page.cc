@@ -1098,8 +1098,7 @@ void dooble_page::show_popup_menu(void)
   QPoint point(m_ui.menu->pos());
   QSize size;
   QWidgetAction widget_action(&menu);
-  dooble_popup_menu *popup_menu = new dooble_popup_menu
-    (m_view->zoomFactor(), this);
+  auto *popup_menu = new dooble_popup_menu(m_view->zoomFactor(), this);
 
   connect(popup_menu,
 	  SIGNAL(accepted(void)),
@@ -1189,7 +1188,7 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
 void dooble_page::slot_accepted_or_blocked_add_exception(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -1267,7 +1266,7 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   m_last_javascript_popups.clear();
   QApplication::restoreOverrideCursor();
 
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action && action->property("url").isValid())
     emit javascript_allow_popup_exception(action->property("url").toUrl());
@@ -1665,7 +1664,7 @@ void dooble_page::slot_go_forward(void)
 
 void dooble_page::slot_go_to_backward_item(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     go_to_backward_item(action->property("index").toInt());
@@ -1673,7 +1672,7 @@ void dooble_page::slot_go_to_backward_item(void)
 
 void dooble_page::slot_go_to_forward_item(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(action)
     go_to_forward_item(action->property("index").toInt());
@@ -2057,8 +2056,7 @@ void dooble_page::slot_show_certificate_exception(void)
   QMenu menu(this);
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
-  dooble_certificate_exceptions_menu_widget
-    *certificate_exceptions_menu_widget = new
+  auto *certificate_exceptions_menu_widget = new
     dooble_certificate_exceptions_menu_widget(&widget);
 
   connect(certificate_exceptions_menu_widget,
@@ -2079,7 +2077,7 @@ void dooble_page::slot_show_favorites_popup(void)
   QSize size;
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
-  dooble_favorites_popup *favorites_popup = new dooble_favorites_popup(&widget);
+  auto *favorites_popup = new dooble_favorites_popup(&widget);
 
   connect(favorites_popup,
 	  SIGNAL(favorites_sorted(void)),
@@ -2117,7 +2115,7 @@ void dooble_page::slot_show_find(void)
 
 void dooble_page::slot_show_popup(void)
 {
-  QAction *action = qobject_cast<QAction *> (sender());
+  auto *action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;

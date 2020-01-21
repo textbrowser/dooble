@@ -46,7 +46,8 @@ dooble_pbkdf2::dooble_pbkdf2
   m_interrupt.store(0);
   m_iteration_count = qAbs(iterations_count);
   m_output_size = dooble_hmac::preferred_output_size_in_bits() *
-    qCeil(qAbs(output_size) / dooble_hmac::preferred_output_size_in_bits());
+    qCeil(static_cast<double> (qAbs(output_size)) /
+	  static_cast<double> (dooble_hmac::preferred_output_size_in_bits()));
   m_password = password;
   m_salt = salt;
 }
