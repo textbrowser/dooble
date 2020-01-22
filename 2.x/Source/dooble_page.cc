@@ -1930,6 +1930,7 @@ void dooble_page::slot_prepare_backward_menu(void)
 {
   m_ui.backward->menu()->clear();
 
+  QFontMetrics font_metrics(m_ui.backward->menu()->font());
   QList<QWebEngineHistoryItem> items
     (m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
 
@@ -1939,14 +1940,19 @@ void dooble_page::slot_prepare_backward_menu(void)
     {
       QAction *action = nullptr;
       QIcon icon(dooble_favicons::icon(items.at(i).url()));
-      QString title
-	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+      QString title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
-	title = items.at(i).url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
+	title = items.at(i).url().toString();
 
       action = m_ui.backward->menu()->addAction
-	(icon, title, this, SLOT(slot_go_to_backward_item(void)));
+	(icon,
+	 font_metrics.elidedText(title + "...",
+				 Qt::ElideMiddle,
+				 dooble_ui_utilities::
+				 context_menu_width(m_ui.backward->menu())),
+	 this,
+	 SLOT(slot_go_to_backward_item(void)));
       action->setProperty("index", i);
     }
 }
@@ -1955,6 +1961,7 @@ void dooble_page::slot_prepare_forward_menu(void)
 {
   m_ui.forward->menu()->clear();
 
+  QFontMetrics font_metrics(m_ui.forward->menu()->font());
   QList<QWebEngineHistoryItem> items
     (m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
 
@@ -1964,14 +1971,19 @@ void dooble_page::slot_prepare_forward_menu(void)
     {
       QAction *action = nullptr;
       QIcon icon(dooble_favicons::icon(items.at(i).url()));
-      QString title
-	(items.at(i).title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+      QString title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
-	title = items.at(i).url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
+	title = items.at(i).url().toString();
 
       action = m_ui.forward->menu()->addAction
-	(icon, title, this, SLOT(slot_go_to_forward_item(void)));
+	(icon,
+	 font_metrics.elidedText(title + "...",
+				 Qt::ElideMiddle,
+				 dooble_ui_utilities::
+				 context_menu_width(m_ui.forward->menu())),
+	 this,
+	 SLOT(slot_go_to_forward_item(void)));
       action->setProperty("index", i);
     }
 }
