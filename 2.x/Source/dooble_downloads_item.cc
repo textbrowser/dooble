@@ -130,7 +130,9 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 {
   m_download_path = download_path;
   m_file_name = file_name;
+  m_last_bytes_received = 0;
   m_oid = oid;
+  m_rate = 0;
   m_stalled_timer.setInterval(15000);
   m_url = url;
   m_ui.setupUi(this);

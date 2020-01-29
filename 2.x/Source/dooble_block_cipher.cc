@@ -50,7 +50,7 @@ QByteArray dooble_block_cipher::xor_arrays(const QByteArray &a,
   int length = qMin(a.length(), b.length());
 
   for(int i = 0; i < length; i++)
-    bytes.append(a[i] ^ b[i]);
+    bytes.append(static_cast<char> (a[i] ^ b[i]));
 
   return bytes;
 }
