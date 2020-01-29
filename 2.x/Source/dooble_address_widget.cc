@@ -369,11 +369,11 @@ void dooble_address_widget::set_text_format
 {
   QList<QInputMethodEvent::Attribute> attributes;
 
-  for(auto format : formats)
+  for(const auto &format : formats)
     {
-      QInputMethodEvent::AttributeType
-	attribute_type = QInputMethodEvent::TextFormat;
-      QVariant value = format.format;
+      QInputMethodEvent::AttributeType attribute_type =
+	QInputMethodEvent::TextFormat;
+      const QVariant &value(format.format);
       int length = format.length;
       int start = format.start;
 

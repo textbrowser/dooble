@@ -378,7 +378,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 {
   Q_UNUSED(is_private);
 
-  dooble_page *page = new dooble_page(m_web_engine_profile, nullptr, m_ui.tab);
+  auto page = new dooble_page(m_web_engine_profile, nullptr, m_ui.tab);
 
   prepare_page_connections(page);
 
