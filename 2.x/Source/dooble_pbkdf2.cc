@@ -70,7 +70,7 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
     if(m_interrupt.load())
       return QByteArray();
     else
-      c[i] = a.at(i) ^ b.at(i);
+      c[i] = static_cast<char> (a.at(i) ^ b.at(i));
 
   return c;
 }

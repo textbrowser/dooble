@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 
   QList<int> list;
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
-  struct sigaction signal_action;
+  struct sigaction signal_action = {};
 #endif
 
   list << SIGABRT

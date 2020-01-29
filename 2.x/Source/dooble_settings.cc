@@ -1470,7 +1470,7 @@ void dooble_settings::set_site_feature_permission
       m_ui.features_permissions->setRowCount
 	(m_ui.features_permissions->rowCount() + 1);
 
-      QTableWidgetItem *item = new QTableWidgetItem();
+      auto *item = new QTableWidgetItem();
 
       if(state)
 	item->setCheckState(Qt::Checked);
