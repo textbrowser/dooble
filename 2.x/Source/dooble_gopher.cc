@@ -332,13 +332,22 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	      ** Create an input search field.
 	      */
 
+	      int port = list.value(3).toInt();
+
+	      if(port <= 0)
+		port = 70;
+
 	      m_html.append
-		("<form action=\".\" method=\"post\" name=\"input\">"
-		 "<input name=\"search\" placeholder=\"Search\" "
-		 "type=\"text\" value=\"\">"
-		 "<button type=\"submit\">&#128269;</button>"
-		 "</input>"
-		 "</form><br>");
+		(QString("<form action=\"gopher://%1:%2/%3%4/?\" "
+			 "method=\"post\">"
+			 "<input placeholder=\"Search\" type=\"search\">"
+			 "<button type=\"submit\">&#128269;</button>"
+			 "</form><br>").
+		 arg(list.value(2).trimmed().constData()).
+		 arg(port).
+		 arg(c).
+		 arg(list.value(1).constData() + (list.value(1).
+						  mid(0, 1) == "/")));
 	    }
 	  else
  	    {
