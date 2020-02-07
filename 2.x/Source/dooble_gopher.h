@@ -77,6 +77,7 @@ class dooble_gopher_implementation: public QTcpSocket
   bool m_content_type_supported;
   bool m_is_image;
   char m_item_type;
+  int m_seven_count;
   static QByteArray plain_to_html(const QByteArray &bytes);
 
  private slots:

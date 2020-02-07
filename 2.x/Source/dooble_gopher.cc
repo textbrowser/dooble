@@ -32,15 +32,14 @@
 
 QByteArray dooble_gopher_implementation::s_eol = "\r\n";
 
-dooble_gopher::dooble_gopher(QObject *parent):QWebEngineUrlSchemeHandler(parent)
+dooble_gopher::dooble_gopher(QObject *parent):
+  QWebEngineUrlSchemeHandler(parent)
 {
 }
 
 void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 {
-  if(!request)
-    return;
-  else if(m_request == request)
+  if(m_request == request || !request)
     return;
 
   m_request = request;
@@ -141,6 +140,7 @@ dooble_gopher_implementation::dooble_gopher_implementation
   m_web_engine_view = web_engine_view;
   m_is_image = false;
   m_item_type = 0;
+  m_seven_count = 0;
   m_url = url;
 
   if(m_url.port() == -1)
@@ -346,7 +346,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 		  m_html.append("<br>");
  		}
  	    }
-	  else if(c == '7')
+	  else if(c == '7' && m_seven_count == 0)
 	    {
 	      /*
 	      ** Create an input search field.
@@ -371,6 +371,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 		 arg(list.value(1).constData() + (list.value(1).
 						  mid(0, 1) == "/")).
 		 arg(m_search));
+	      m_seven_count += 1;
 	    }
 	  else
  	    {
