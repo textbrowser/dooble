@@ -260,9 +260,17 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	  char c = bytes.length() > 0 ? bytes.at(0) : '0';
 
 	  if(c == '+' ||
-	     c == '0' || c == '1' || c == '3' || c == '4' || c == '5' ||
+	     c == '0' ||
+	     c == '1' ||
+	     c == '3' ||
+	     c == '4' ||
+	     c == '5' ||
 	     c == '6' ||
-	     c == '9' || c == 'I' || c == 'g' || c == 'h' || c == 'i' ||
+	     c == '9' ||
+	     c == 'I' ||
+	     c == 'g' ||
+	     c == 'h' ||
+	     c == 'i' ||
 	     c == 's')
 	    /*
 	    ** Some things, we understand.
@@ -273,8 +281,16 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	  QList<QByteArray> list(bytes.split('\t'));
 
 	  if(c == '+' ||
-	     c == '0' || c == '1' || c == '4' || c == '5' || c == '6' ||
-	     c == '9' || c == 'I' || c == 'g' || c == 'h' || c == 's')
+	     c == '0' ||
+	     c == '1' ||
+	     c == '4' ||
+	     c == '5' ||
+	     c == '6' ||
+	     c == '9' ||
+	     c == 'I' ||
+	     c == 'g' ||
+	     c == 'h' ||
+	     c == 's')
 	    {
 	      int port = list.value(3).toInt();
 
@@ -309,6 +325,20 @@ void dooble_gopher_implementation::slot_ready_read(void)
 		  m_html.append("<br>");
  		}
  	    }
+	  else if(c == '7')
+	    {
+	      /*
+	      ** Create an input search field.
+	      */
+
+	      m_html.append
+		("<form action=\".\" method=\"post\" name=\"input\">"
+		 "<input name=\"search\" placeholder=\"Search\" "
+		 "type=\"text\" value=\"\">"
+		 "<button type=\"submit\">&#128269;</button>"
+		 "</input>"
+		 "</form><br>");
+	    }
 	  else
  	    {
 	      m_html.append(plain_to_html(bytes));
