@@ -203,7 +203,8 @@ void dooble_gopher_implementation::slot_disonnected(void)
 
 void dooble_gopher_implementation::slot_ready_read(void)
 {
-  m_content.append(readAll());
+  while(bytesAvailable() > 0)
+    m_content.append(readAll());
 
   if(m_item_type == '0') /* Plaintext */
     {
