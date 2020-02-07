@@ -205,20 +205,15 @@ void dooble_gopher_implementation::slot_connected(void)
       output.append(query);
     }
 
-  if(m_web_engine_view)
-    {
-      m_output = output;
-      m_web_engine_view->page()->runJavaScript
-	("if(document.getElementById(\"input_value\") != null)"
-	 "document.getElementById(\"input_value\").value",
-	 [this] (const QVariant &result)
-	 {
-	   m_search = result.toString();
-	 });
-      m_write_timer.start(500);
-    }
-  else
-    write(output.toUtf8().append(s_eol));
+  m_output = output;
+  m_web_engine_view->page()->runJavaScript
+    ("if(document.getElementById(\"input_value\") != null)"
+     "document.getElementById(\"input_value\").value",
+     [this] (const QVariant &result)
+     {
+       m_search = result.toString();
+     });
+  m_write_timer.start(500);
 }
 
 void dooble_gopher_implementation::slot_disonnected(void)
@@ -367,14 +362,15 @@ void dooble_gopher_implementation::slot_ready_read(void)
 			 "method=\"post\">"
 			 "<input id=\"input_value\" "
 			 "placeholder=\"Search\" type=\"search\" "
-			 "value=\"\"></input>"
+			 "value=\"%5\"></input>"
 			 "<button type=\"submit\">&#128269;</button>"
 			 "</form><br>").
 		 arg(list.value(2).trimmed().constData()).
 		 arg(port).
 		 arg(c).
 		 arg(list.value(1).constData() + (list.value(1).
-						  mid(0, 1) == "/")));
+						  mid(0, 1) == "/")).
+		 arg(m_search));
 	    }
 	  else
  	    {
@@ -393,7 +389,4 @@ void dooble_gopher_implementation::slot_write_timeout(void)
     write(m_output.toUtf8().append(s_eol));
   else
     write(m_output.toUtf8().append("?").append(m_search).append(s_eol));
-
-  m_output.clear();
-  m_search.clear();
 }
