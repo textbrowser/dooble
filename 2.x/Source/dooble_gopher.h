@@ -35,6 +35,8 @@
 #include <QWebEngineUrlRequestJob>
 #include <QWebEngineUrlSchemeHandler>
 
+#include "dooble_web_engine_view.h"
+
 class dooble_gopher: public QWebEngineUrlSchemeHandler
 {
   Q_OBJECT
@@ -58,13 +60,19 @@ class dooble_gopher_implementation: public QTcpSocket
   Q_OBJECT
 
  public:
-  dooble_gopher_implementation(const QUrl &url, QObject *parent);
+  dooble_gopher_implementation(const QUrl &url,
+			       dooble_web_engine_view *web_engine_view,
+			       QObject *parent);
   ~dooble_gopher_implementation();
   static QByteArray s_eol;
 
  private:
   QByteArray m_content;
   QByteArray m_html;
+  QPointer<dooble_web_engine_view> m_web_engine_view;
+  QString m_output;
+  QString m_search;
+  QTimer m_write_timer;
   QUrl m_url;
   bool m_content_type_supported;
   bool m_is_image;
@@ -75,6 +83,7 @@ class dooble_gopher_implementation: public QTcpSocket
   void slot_connected(void);
   void slot_disonnected(void);
   void slot_ready_read(void);
+  void slot_write_timeout(void);
 
  signals:
   void error(QWebEngineUrlRequestJob::Error error);

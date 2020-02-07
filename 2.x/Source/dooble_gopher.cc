@@ -28,6 +28,7 @@
 #include <cctype>
 
 #include "dooble_gopher.h"
+#include "dooble_web_engine_view.h"
 
 QByteArray dooble_gopher_implementation::s_eol = "\r\n";
 
@@ -45,7 +46,10 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
   m_request = request;
 
   dooble_gopher_implementation *gopher_implementation = new
-    dooble_gopher_implementation(m_request->requestUrl(), m_request);
+    dooble_gopher_implementation
+    (m_request->requestUrl(),
+     qobject_cast<dooble_web_engine_view *> (parent()),
+     m_request);
 
   connect(gopher_implementation,
 	  SIGNAL(error(QWebEngineUrlRequestJob::Error)),
@@ -129,9 +133,12 @@ void dooble_gopher::slot_finished(const QByteArray &bytes,
 }
 
 dooble_gopher_implementation::dooble_gopher_implementation
-(const QUrl &url, QObject *parent):QTcpSocket(parent)
+(const QUrl &url,
+ dooble_web_engine_view *web_engine_view,
+ QObject *parent):QTcpSocket(parent)
 {
   m_content_type_supported = true;
+  m_web_engine_view = web_engine_view;
   m_is_image = false;
   m_item_type = 0;
   m_url = url;
@@ -139,6 +146,11 @@ dooble_gopher_implementation::dooble_gopher_implementation
   if(m_url.port() == -1)
     m_url.setPort(70);
 
+  m_write_timer.setSingleShot(true);
+  connect(&m_write_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_write_timeout(void)));
   connect(this,
 	  SIGNAL(connected(void)),
 	  this,
@@ -193,7 +205,20 @@ void dooble_gopher_implementation::slot_connected(void)
       output.append(query);
     }
 
-  write(output.toUtf8().append(s_eol));
+  if(m_web_engine_view)
+    {
+      m_output = output;
+      m_web_engine_view->page()->runJavaScript
+	("if(document.getElementById(\"input_value\") != null)"
+	 "document.getElementById(\"input_value\").value",
+	 [this] (const QVariant &result)
+	 {
+	   m_search = result.toString();
+	 });
+      m_write_timer.start(500);
+    }
+  else
+    write(output.toUtf8().append(s_eol));
 }
 
 void dooble_gopher_implementation::slot_disonnected(void)
@@ -338,9 +363,11 @@ void dooble_gopher_implementation::slot_ready_read(void)
 		port = 70;
 
 	      m_html.append
-		(QString("<form action=\"gopher://%1:%2/%3%4/?\" "
+		(QString("<form action=\"gopher://%1:%2/%3%4\" "
 			 "method=\"post\">"
-			 "<input placeholder=\"Search\" type=\"search\">"
+			 "<input id=\"input_value\" "
+			 "placeholder=\"Search\" type=\"search\" "
+			 "value=\"\"></input>"
 			 "<button type=\"submit\">&#128269;</button>"
 			 "</form><br>").
 		 arg(list.value(2).trimmed().constData()).
@@ -358,4 +385,15 @@ void dooble_gopher_implementation::slot_ready_read(void)
 
       m_html.append("</body></html>");
     }
+}
+
+void dooble_gopher_implementation::slot_write_timeout(void)
+{
+  if(m_search.isEmpty())
+    write(m_output.toUtf8().append(s_eol));
+  else
+    write(m_output.toUtf8().append("?").append(m_search).append(s_eol));
+
+  m_output.clear();
+  m_search.clear();
 }
