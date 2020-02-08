@@ -1058,7 +1058,7 @@ void dooble_page::reset_url(void)
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
-  prepare_progress_label_position();
+  prepare_progress_label_position(false);
 
   QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
