@@ -44,6 +44,7 @@ Completed Items
 - Documentation.
 - Download gopher content.
   (gopher://gopher.quux.org/1Software/Operating Systems/Unix/Linux)
+- Gopher text search.
 - Download panel. Path. Remind user on exit.
 - Elided text in pull-down menus must consider invisible text.
 - Empty download file names.
@@ -152,10 +153,10 @@ Remaining Items
 - DTLS and Echo-DNS.
 - Element-selection option.
 - Fancy completer.
-- Gopher text search.
 - Include date stamps in cookie containers.
 - Qt's digest class.
 - Shortcuts browser.
+- Translation browser.
 - linkHovered() is emitted without user interaction.
 
 Unknown Items
