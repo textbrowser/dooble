@@ -10,8 +10,8 @@ export QT_X11_NO_MITSHM=1
 
 if [ -r ./Dooble ] && [ -x ./Dooble ]
 then
-    exec ./Dooble -style fusion "$@"
-    exit 1
+    exec ./Dooble --disable-reading-from-canvas "$@"
+    exit $?
 elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
 then
     cd /usr/local/dooble && exec ./Dooble --disable-reading-from-canvas "$@"
