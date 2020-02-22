@@ -43,7 +43,11 @@ dooble_pbkdf2::dooble_pbkdf2
 {
   m_block_cipher_type_index = qBound(0, block_cipher_type_index, 1);
   m_hash_type_index = qBound(0, hash_type_index, 1);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   m_interrupt.store(0);
+#else
+  m_interrupt.storeRelaxed(0);
+#endif
   m_iteration_count = qAbs(iterations_count);
   m_output_size = dooble_hmac::preferred_output_size_in_bits() *
     qCeil(static_cast<double> (qAbs(output_size)) /
@@ -67,7 +71,11 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
   QByteArray c(qMin(a.length(), b.length()), 0);
 
   for(int i = 0; i < c.length(); i++)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     if(m_interrupt.load())
+#else
+    if(m_interrupt.loadRelaxed())
+#endif
       return QByteArray();
     else
       c[i] = static_cast<char> (a.at(i) ^ b.at(i));
@@ -97,7 +105,11 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 
   for(int i = 1; i <= iterations; i++)
     {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
       if(m_interrupt.load())
+#else
+      if(m_interrupt.loadRelaxed())
+#endif
 	break;
 
       QByteArray INT_32_BE_i(static_cast<int> (sizeof(int)), 0);
@@ -109,7 +121,11 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 
       for(int j = 2; j <= m_iteration_count; j++)
 	{
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
 	  if(m_interrupt.load())
+#else
+	  if(m_interrupt.loadRelaxed())
+#endif
 	    break;
 
 	  QByteArray Ub(function(m_password, Ua));
@@ -118,24 +134,40 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 	  Ua = Ub;
 	}
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
       if(m_interrupt.load())
+#else
+      if(m_interrupt.loadRelaxed())
+#endif
 	break;
 
       T.append(U);
     }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   if(m_interrupt.load())
+#else
+  if(m_interrupt.loadRelaxed())
+#endif
     return QList<QByteArray> ();
 
   QByteArray bytes;
 
   for(const auto &i : T)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     if(m_interrupt.load())
+#else
+    if(m_interrupt.loadRelaxed())
+#endif
       break;
     else
       bytes.append(i);
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   if(m_interrupt.load())
+#else
+  if(m_interrupt.loadRelaxed())
+#endif
     return QList<QByteArray> ();
   else
     return QList<QByteArray> () << bytes
@@ -148,7 +180,11 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
 
 void dooble_pbkdf2::slot_interrupt(void)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   m_interrupt.store(1);
+#else
+  m_interrupt.storeRelaxed(1);
+#endif
 }
 
 void dooble_pbkdf2::test1(void)

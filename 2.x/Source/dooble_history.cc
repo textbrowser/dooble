@@ -125,7 +125,11 @@ bool dooble_history::is_favorite(const QUrl &url) const
 
 void dooble_history::abort(void)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   m_interrupt.store(1);
+#else
+  m_interrupt.storeRelaxed(1);
+#endif
   m_populate_future.cancel();
   m_populate_future.waitForFinished();
   m_purge_future.cancel();
