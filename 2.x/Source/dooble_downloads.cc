@@ -304,7 +304,15 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	  continue;
 	}
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+      QFileInfo file_info(downloads_item->download_path());
+
+      if(download->downloadDirectory() ==
+	 file_info.absoluteDir().absolutePath() &&
+	 download->downloadFileName() == file_info.fileName())
+#else
       if(download->path() == downloads_item->download_path())
+#endif
 	{
 	  index = i;
 	  item = downloads_item;
@@ -556,10 +564,14 @@ void dooble_downloads::slot_download_requested(QWebEngineDownloadItem *download)
 
   if(download->state() == QWebEngineDownloadItem::DownloadRequested)
     {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+      download->setDownloadDirectory(download_path());
+#else
       QFileInfo file_info(download->path());
 
       download->setPath
 	(download_path() + QDir::separator() + file_info.fileName());
+#endif
     }
 
   record_download(download);

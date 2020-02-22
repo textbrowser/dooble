@@ -84,9 +84,21 @@ dooble_downloads_item::dooble_downloads_item
 	      this,
 	      SLOT(slot_finished(void)));
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+      QFileInfo file_info(m_download->downloadDirectory() +
+			  QDir::separator() +
+			  m_download->downloadFileName());
+#else
       QFileInfo file_info(m_download->path());
+#endif
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+      m_download_path = m_download->downloadDirectory() +
+	QDir::separator() +
+	m_download->downloadFileName();
+#else
       m_download_path = m_download->path();
+#endif
       m_file_name = file_info.fileName();
       m_stalled_timer.start();
       m_ui.file_name->setText(file_info.fileName());
