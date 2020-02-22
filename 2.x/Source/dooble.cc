@@ -2443,11 +2443,15 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   if(download->state() == QWebEngineDownloadItem::DownloadRequested)
     {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+      download->setDownloadDirectory(s_downloads->download_path());
+#else
       QFileInfo file_info(download->path());
 
       download->setPath(s_downloads->download_path() +
 			QDir::separator() +
 			file_info.fileName());
+#endif
     }
 
   s_downloads->record_download(download);
