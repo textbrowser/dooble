@@ -549,7 +549,7 @@ int dooble_settings::site_feature_permission
 
   QList<QPair<int, bool> > values(s_site_features_permissions.values(url));
 
-  for(auto value : values)
+  for(const auto &value : values)
     if(feature == QWebEnginePage::Feature(value.first) && value.first != -1)
       return value.second ? 1 : 0;
 
@@ -1509,7 +1509,7 @@ void dooble_settings::set_site_feature_permission
     {
       QList<QPair<int, bool> > values(s_site_features_permissions.values(url));
 
-      for(auto value : values)
+      for(const auto &value : values)
 	if(feature == QWebEnginePage::Feature(value.first) &&
 	   value.first != -1)
 	  {
