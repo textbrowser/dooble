@@ -378,7 +378,7 @@ void dooble_history::purge(const QByteArray &authentication_key,
 			bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
 
 			if(!bytes.isEmpty())
-			  urls << QUrl(bytes);
+			  urls << QUrl::fromUserInput(bytes);
 		      }
 		  }
 	      }

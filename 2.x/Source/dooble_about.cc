@@ -80,7 +80,7 @@ void dooble_about::keyPressEvent(QKeyEvent *event)
   QMainWindow::keyPressEvent(event);
 }
 
-void dooble_about::slot_link_activated(const QString &link)
+void dooble_about::slot_link_activated(const QString &url)
 {
-  emit link_activated(QUrl(link));
+  emit link_activated(QUrl::fromUserInput(url));
 }

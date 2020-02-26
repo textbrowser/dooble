@@ -38,16 +38,21 @@
 dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 {
   m_add_tab_tool_button = new QToolButton(this);
+  m_add_tab_tool_button->setArrowType(Qt::NoArrow);
   m_add_tab_tool_button->setAutoRaise(true);
   m_add_tab_tool_button->setIconSize(QSize(18, 18));
+  m_add_tab_tool_button->setMenu(new QMenu(this));
+  m_add_tab_tool_button->setPopupMode(QToolButton::DelayedPopup);
 #ifdef Q_OS_MACOS
   m_add_tab_tool_button->setStyleSheet
     ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
-     "QToolButton::menu-button {border: none;}");
+     "QToolButton::menu-button {border: none;}"
+     "QToolButton::menu-indicator {image: none;}");
 #else
   m_add_tab_tool_button->setStyleSheet
     ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
-     "QToolButton::menu-button {border: none;}");
+     "QToolButton::menu-button {border: none;}"
+     "QToolButton::menu-indicator {image: none;}");
 #endif
   m_add_tab_tool_button->setToolTip(tr("New Tab"));
   m_private_tool_button = new QToolButton(this);
@@ -145,6 +150,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SIGNAL(new_tab(void)));
+  connect(m_add_tab_tool_button->menu(),
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_history_menu(void)));
   connect(m_tab_bar,
 	  SIGNAL(decouple_tab(int)),
 	  this,
@@ -316,6 +325,47 @@ void dooble_tab_widget::setTabTextColor(int index, const QColor &color)
 void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 {
   QTabWidget::setTabToolTip(index, dooble_ui_utilities::pretty_tool_tip(text));
+}
+
+void dooble_tab_widget::slot_about_to_show_history_menu(void)
+{
+  if(dooble::s_history->last_n_actions(1).isEmpty())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_add_tab_tool_button->menu()->clear();
+
+  QFontMetrics font_metrics(m_add_tab_tool_button->menu()->font());
+  QList<QAction *> list
+    (dooble::s_history->
+     last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
+
+  for(auto i : list)
+    {
+      connect(i,
+	      SIGNAL(triggered(void)),
+	      this,
+	      SLOT(slot_history_action_triggered(void)));
+      i->setText
+	(font_metrics.elidedText(i->text(),
+				 Qt::ElideRight,
+				 dooble_ui_utilities::
+				 context_menu_width(m_add_tab_tool_button->
+						    menu())));
+      m_add_tab_tool_button->menu()->addAction(i);
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_tab_widget::slot_history_action_triggered(void)
+{
+  auto *action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  emit new_tab(action->data().toUrl());
 }
 
 void dooble_tab_widget::slot_load_finished(void)

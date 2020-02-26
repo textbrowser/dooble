@@ -63,6 +63,8 @@ class dooble_tab_widget: public QTabWidget
   void prepare_tab_label(int index, const QIcon &icon);
 
  private slots:
+  void slot_about_to_show_history_menu(void);
+  void slot_history_action_triggered(void);
   void slot_load_finished(void);
   void slot_load_started(void);
   void slot_set_visible_corner_button(bool state);
@@ -72,6 +74,7 @@ class dooble_tab_widget: public QTabWidget
  signals:
   void decouple_tab(int index);
   void empty_tab(void);
+  void new_tab(const QUrl &url);
   void new_tab(void);
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);

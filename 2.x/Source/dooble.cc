@@ -566,6 +566,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_new_tab(void)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(new_tab(const QUrl &)),
+	  this,
+	  SLOT(slot_new_tab(const QUrl &)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)),
@@ -2596,6 +2601,11 @@ void dooble::slot_new_private_window(void)
   (new dooble(QUrl(), true))->show();
 }
 
+void dooble::slot_new_tab(const QUrl &url)
+{
+  new_page(url, m_is_private);
+}
+
 void dooble::slot_new_tab(void)
 {
   new_page(QUrl(), m_is_private);
@@ -3006,7 +3016,8 @@ void dooble::slot_show_cookies(void)
 void dooble::slot_show_documentation(void)
 {
   m_ui.tab->setCurrentWidget
-    (new_page(QUrl("qrc://Documentation/Dooble.html"), m_is_private));
+    (new_page(QUrl::fromUserInput("qrc://Documentation/Dooble.html"),
+	      m_is_private));
 }
 
 void dooble::slot_show_downloads(void)
@@ -3159,7 +3170,8 @@ void dooble::slot_show_release_notes(const QUrl &url)
 void dooble::slot_show_release_notes(void)
 {
   m_ui.tab->setCurrentWidget
-    (new_page(QUrl("qrc://Documentation/RELEASE-NOTES.html"), m_is_private));
+    (new_page(QUrl::fromUserInput("qrc://Documentation/RELEASE-NOTES.html"),
+	      m_is_private));
 }
 
 void dooble::slot_show_search_engines(void)

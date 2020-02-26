@@ -143,7 +143,7 @@ class dooble_about: public QMainWindow
   Ui_dooble_about m_ui;
 
  private slots:
-  void slot_link_activated(const QString &link);
+  void slot_link_activated(const QString &url);
 
  signals:
   void link_activated(const QUrl &url);

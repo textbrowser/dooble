@@ -336,7 +336,7 @@ void dooble_certificate_exceptions::slot_populate(void)
 			hash["exception_accepted"] =
 			  data == "true" ? true : false; // Not used.
 		      else
-			hash["url"] = QUrl(data);
+			hash["url"] = QUrl::fromUserInput(data);
 		    }
 
 		  if(hash.size() == 3)
