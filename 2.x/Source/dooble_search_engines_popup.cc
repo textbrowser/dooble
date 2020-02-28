@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QKeyEvent>
+#include <QListWidgetItem>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QStandardItemModel>
@@ -71,6 +72,10 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_add_search_engine(void)));
+  connect(m_ui.add_checked,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_add_predefined(void)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -96,6 +101,90 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
 QList<QAction *> dooble_search_engines_popup::actions(void) const
 {
   return m_actions.values();
+}
+
+void dooble_search_engines_popup::add_search_engine
+(const QByteArray &title, const QUrl &url)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_search_engines.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_search_engines "
+	   "(title, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray bytes;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(title);
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
+
+	if(bytes.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(bytes.toBase64());
+
+	bytes = dooble::s_cryptography->hmac(url.toEncoded());
+
+	if(bytes.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(bytes.toBase64());
+
+	if(query.exec())
+	  {
+	    QAction *action = nullptr;
+	    QList<QStandardItem *> list;
+	    auto *item = new QStandardItem();
+
+	    action = new QAction(dooble_favicons::icon(url), title, this);
+	    action->setProperty("url", url);
+	    item->setData(url);
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setText(title);
+	    item->setToolTip(item->text());
+	    list << item;
+	    item = new QStandardItem();
+	    item->setData(url);
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setText(url.toEncoded());
+	    item->setToolTip(item->text());
+	    list << item;
+	    m_actions.insert(title, action);
+	    m_model->appendRow(list);
+	    m_model->sort(0);
+	    m_ui.search_engine->clear();
+	    m_ui.title->clear();
+	  }
+      }
+
+  done_label:
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  prepare_viewport_icons();
+  QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_search_engines_popup::create_tables(QSqlDatabase &db)
@@ -212,6 +301,18 @@ void dooble_search_engines_popup::showNormal(void)
 
 void dooble_search_engines_popup::slot_add_predefined(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < m_ui.predefined->count(); i++)
+    {
+      QListWidgetItem *item = m_ui.predefined->item(i);
+
+      if(item && item->checkState() == Qt::Checked)
+	add_search_engine
+	  (item->text().toUtf8(), m_predefined_urls.value(item->text()));
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_search_engines_popup::slot_add_search_engine(void)
@@ -224,86 +325,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   if(url.isEmpty() || !url.isValid())
     return;
 
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  QString database_name(dooble_database_utilities::database_name());
-
-  {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_search_engines.db");
-
-    if(db.open())
-      {
-	create_tables(db);
-
-	QSqlQuery query(db);
-
-	query.prepare
-	  ("INSERT OR REPLACE INTO dooble_search_engines "
-	   "(title, url, url_digest) VALUES (?, ?, ?)");
-
-	QByteArray bytes;
-	QByteArray title(m_ui.title->text().trimmed().toUtf8());
-
-	bytes = dooble::s_cryptography->encrypt_then_mac(title);
-
-	if(!bytes.isEmpty())
-	  query.addBindValue(bytes.toBase64());
-	else
-	  goto done_label;
-
-	bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
-
-	if(bytes.isEmpty())
-	  goto done_label;
-	else
-	  query.addBindValue(bytes.toBase64());
-
-	bytes = dooble::s_cryptography->hmac(url.toEncoded());
-
-	if(bytes.isEmpty())
-	  goto done_label;
-	else
-	  query.addBindValue(bytes.toBase64());
-
-	if(query.exec())
-	  {
-	    QAction *action = nullptr;
-	    QList<QStandardItem *> list;
-	    auto *item = new QStandardItem();
-
-	    action = new QAction(dooble_favicons::icon(url), title, this);
-	    action->setProperty("url", url);
-	    item->setData(url);
-	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-	    item->setText(title);
-	    item->setToolTip(item->text());
-	    list << item;
-	    item = new QStandardItem();
-	    item->setData(url);
-	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-	    item->setText(url.toEncoded());
-	    item->setToolTip(item->text());
-	    list << item;
-	    m_actions.insert(title, action);
-	    m_model->appendRow(list);
-	    m_model->sort(0);
-	    m_ui.search_engine->clear();
-	    m_ui.title->clear();
-	  }
-      }
-
-  done_label:
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
-  prepare_viewport_icons();
-  QApplication::restoreOverrideCursor();
-  slot_search_timer_timeout();
+  add_search_engine(m_ui.title->text().trimmed().toUtf8(), url);
 }
 
 void dooble_search_engines_popup::slot_delete_selected(void)

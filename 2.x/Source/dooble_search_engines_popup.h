@@ -61,6 +61,7 @@ class dooble_search_engines_popup: public QDialog
   QStandardItemModel *m_model;
   QTimer m_search_timer;
   Ui_dooble_search_engines_popup m_ui;
+  void add_search_engine(const QByteArray &title, const QUrl &url);
   void create_tables(QSqlDatabase &db);
   void prepare_icons(void);
   void save_settings(void);
