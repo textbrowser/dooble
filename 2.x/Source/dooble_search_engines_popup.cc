@@ -348,18 +348,16 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 
 void dooble_search_engines_popup::slot_delete_selected(void)
 {
-  QModelIndexList list(m_ui.view->selectionModel()->selectedIndexes());
+  QModelIndexList list(m_ui.view->selectionModel()->selectedRows(1));
 
   if(list.isEmpty())
-    return;
-  else if(m_ui.view->isRowHidden(list.at(0).row()))
     return;
 
   QMessageBox mb(this);
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-  mb.setText(tr("Are you sure that you wish to delete the selected entry?"));
+  mb.setText(tr("Are you sure that you wish to delete the selected entries?"));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::WindowModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -377,7 +375,6 @@ void dooble_search_engines_popup::slot_delete_selected(void)
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
       QString database_name(dooble_database_utilities::database_name());
-      QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -388,33 +385,40 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
 	if(db.open())
 	  {
+	    std::sort(list.begin(), list.end());
+
 	    QSqlQuery query(db);
 
-	    query.prepare
-	      ("DELETE FROM dooble_search_engines WHERE url_digest = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	    for(int i = list.size() - 1; i >= 0; i--)
+	      if(!m_ui.view->isRowHidden(list.at(i).row()))
+		{
+	          QUrl url(list.at(i).data().toString());
 
-	    if(query.exec())
-	      {
-		QMutableMapIterator<QString, QAction *> it(m_actions);
+		  query.prepare
+		    ("DELETE FROM dooble_search_engines WHERE url_digest = ?");
+		  query.addBindValue
+		    (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
 
-		while(it.hasNext())
-		  {
-		    it.next();
+		  if(query.exec())
+		    {
+		      QMutableMapIterator<QString, QAction *> it(m_actions);
 
-		    if(it.key() == list.at(0).data().toString())
-		      if(it.value() &&
-			 it.value()->property("url").toUrl() == url)
+		      while(it.hasNext())
 			{
-			  it.value()->deleteLater();
-			  it.remove();
-			  break;
-			}
-		  }
+			  it.next();
 
-		m_model->removeRow(list.at(0).row());
-	      }
+			  if(it.value() &&
+			     it.value()->property("url").toUrl() == url)
+			    {
+			      it.value()->deleteLater();
+			      it.remove();
+			      break;
+			    }
+			}
+
+		      m_model->removeRow(list.at(i).row());
+		    }
+		}
 
 	    query.exec("VACUUM");
 	  }
