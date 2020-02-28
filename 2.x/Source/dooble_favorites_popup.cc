@@ -194,18 +194,16 @@ void dooble_favorites_popup::slot_delete_selected(void)
   if(!dooble::s_history)
     return;
 
-  QModelIndexList list(m_ui.view->selectionModel()->selectedIndexes());
+  QModelIndexList list(m_ui.view->selectionModel()->selectedRows(1));
 
   if(list.isEmpty())
-    return;
-  else if(m_ui.view->isRowHidden(list.at(0).row()))
     return;
 
   QMessageBox mb(this);
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-  mb.setText(tr("Are you sure that you wish to delete the selected entry?"));
+  mb.setText(tr("Are you sure that you wish to delete the selected entries?"));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::WindowModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -217,12 +215,20 @@ void dooble_favorites_popup::slot_delete_selected(void)
     }
 
   QApplication::processEvents();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  std::sort(list.begin(), list.end());
 
-  QUrl url(list.at(0).sibling(list.at(0).row(), 1).data().toString());
+  for(int i = list.size() - 1; i >= 0; i--)
+    if(!m_ui.view->isRowHidden(list.at(i).row()))
+      {
+	QUrl url(list.at(i).data().toString());
 
-  dooble::s_history->remove_favorite(url);
+	dooble::s_history->remove_favorite(url);
+	emit favorite_changed(url, false);
+      }
+
   prepare_viewport_icons();
-  emit favorite_changed(url, false);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_favorites_popup::slot_double_clicked(const QModelIndex &index)
