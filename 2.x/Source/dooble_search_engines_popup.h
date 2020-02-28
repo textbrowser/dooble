@@ -31,6 +31,7 @@
 #include <QDialog>
 #include <QSqlDatabase>
 #include <QTimer>
+#include <QUrl>
 
 #include "ui_dooble_search_engines_popup.h"
 
@@ -55,6 +56,7 @@ class dooble_search_engines_popup: public QDialog
   void resizeEvent(QResizeEvent *event);
 
  private:
+  QMap<QString, QUrl> m_predefined_urls;
   QMultiMap<QString, QAction *> m_actions;
   QStandardItemModel *m_model;
   QTimer m_search_timer;
@@ -64,6 +66,7 @@ class dooble_search_engines_popup: public QDialog
   void save_settings(void);
 
  private slots:
+  void slot_add_predefined(void);
   void slot_add_search_engine(void);
   void slot_delete_selected(void);
   void slot_double_clicked(const QModelIndex &index);

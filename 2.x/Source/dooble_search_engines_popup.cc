@@ -45,6 +45,16 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   m_model = new QStandardItemModel(this);
   m_model->setHorizontalHeaderLabels
     (QStringList() << tr("Title") << tr("Search Engine"));
+  m_predefined_urls["DuckDuckGo"] = QUrl::fromUserInput
+    ("https://duckduckgo.com/?q=");
+  m_predefined_urls["Ecosia"] =
+    QUrl::fromUserInput("https://www.ecosia.org/search?q=");
+  m_predefined_urls["Google"] =
+    QUrl::fromUserInput("https://www.google.com/search?q=");
+  m_predefined_urls["MetaGer"] =
+    QUrl::fromUserInput("https://www.metager.org/meta/meta.ger3?eingabe=");
+  m_predefined_urls["Swisscows"] =
+    QUrl::fromUserInput("https://swisscows.com/web?query=");
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -198,6 +208,10 @@ void dooble_search_engines_popup::showNormal(void)
 			      toByteArray()));
 
   QDialog::showNormal();
+}
+
+void dooble_search_engines_popup::slot_add_predefined(void)
+{
 }
 
 void dooble_search_engines_popup::slot_add_search_engine(void)
