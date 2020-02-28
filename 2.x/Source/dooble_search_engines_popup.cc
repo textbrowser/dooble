@@ -53,7 +53,7 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   m_predefined_urls["Google"] =
     QUrl::fromUserInput("https://www.google.com/search?q=");
   m_predefined_urls["MetaGer"] =
-    QUrl::fromUserInput("https://www.metager.org/meta/meta.ger3?eingabe=");
+    QUrl::fromUserInput("https://metager.org/meta/meta.ger3?eingabe=");
   m_predefined_urls["Swisscows"] =
     QUrl::fromUserInput("https://swisscows.com/web?query=");
   m_search_timer.setInterval(750);
@@ -152,7 +152,25 @@ void dooble_search_engines_popup::add_search_engine
 
 	if(query.exec())
 	  {
-	    QAction *action = nullptr;
+	    QAction *action = m_actions.value(title);
+
+	    if(action)
+	      {
+		QList<QStandardItem *> list
+		  (m_model->findItems(url.toEncoded(),
+				      Qt::MatchFixedString,
+				      1));
+
+		if(!list.isEmpty())
+		  {
+		    list.at(0)->setData(url);
+		    list.at(0)->setText(url.toEncoded());
+		  }
+
+		action->setProperty("url", url);
+		goto done_label;
+	      }
+
 	    QList<QStandardItem *> list;
 	    auto *item = new QStandardItem();
 
