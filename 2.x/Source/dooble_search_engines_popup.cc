@@ -268,7 +268,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
       QStandardItem *item = i ? m_model->item(i->row(), 0) : nullptr;
 
       if(item)
-	item->setIcon(icon);
+	item->setIcon(dooble_favicons::icon(icon));
     }
 
   QMapIterator<QString, QAction *> it(m_actions);
@@ -286,7 +286,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 
 	  if(str1.startsWith(str2))
 	    {
-	      it.value()->setIcon(icon);
+	      it.value()->setIcon(dooble_favicons::icon(icon));
 	      break;
 	    }
 	}
@@ -531,7 +531,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	      action->setProperty("url", QUrl::fromEncoded(url));
 	      item->setData(QUrl::fromEncoded(url));
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-	      item->setIcon(action->icon());
+	      item->setIcon(dooble_favicons::icon(action->icon()));
 	      item->setText(title);
 	      item->setToolTip(item->text());
 	      list << item;

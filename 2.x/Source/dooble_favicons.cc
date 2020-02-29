@@ -35,6 +35,14 @@
 #include "dooble_favicons.h"
 #include "dooble_search_engines_popup.h"
 
+QIcon dooble_favicons::icon(const QIcon &icon)
+{
+  if(icon.isNull())
+    return QIcon(":/Miscellaneous/blank_page.png");
+
+  return icon;
+}
+
 QIcon dooble_favicons::icon(const QUrl &url)
 {
   if(!dooble::s_cryptography)

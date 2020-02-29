@@ -35,6 +35,7 @@
 class dooble_favicons
 {
  public:
+  static QIcon icon(const QIcon &icon);
   static QIcon icon(const QUrl &url);
   static void purge(void);
   static void purge_temporary(void);
