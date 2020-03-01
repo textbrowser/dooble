@@ -155,6 +155,7 @@ Remaining Items
 - Fancy completer.
 - Include date stamps in cookie containers.
 - Qt's digest class.
+- Search engine icons should be based on host names.
 - Shortcuts browser.
 - Translation browser.
 - linkHovered() is emitted without user interaction.
