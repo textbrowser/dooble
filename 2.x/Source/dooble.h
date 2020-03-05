@@ -39,7 +39,7 @@
 #include "ui_dooble.h"
 #include "ui_dooble_floating_digital_clock.h"
 
-#define DOOBLE_VERSION_STRING "2020.03.03"
+#define DOOBLE_VERSION_STRING "2020.04.04"
 
 class QDialog;
 class QWebEngineDownloadItem;

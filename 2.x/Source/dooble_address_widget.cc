@@ -481,6 +481,9 @@ void dooble_address_widget::slot_return_pressed(void)
 void dooble_address_widget::slot_settings_applied(void)
 {
   prepare_icons();
+
+  if(m_view)
+    prepare_containers_for_url(m_view->url());
 }
 
 void dooble_address_widget::slot_show_site_information_menu(void)
