@@ -545,7 +545,7 @@ void dsslcipherswindow::slotToggleChoices(bool state)
 	    item->setCheckState(Qt::Unchecked);
 	  else
 	    item->setCheckState(Qt::Checked);
-	}	
+	}
     }
 
   QApplication::restoreOverrideCursor();

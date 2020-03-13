@@ -3067,7 +3067,7 @@ void dsettings::slotDeleteSuffix(void)
 
 	query.prepare("DELETE FROM applications WHERE file_suffix = ?");
 	query.bindValue(0, suffix);
-	
+
 	if(query.exec())
 	  {
 	    QWriteLocker locker(&dooble::s_applicationsActionsLock);
