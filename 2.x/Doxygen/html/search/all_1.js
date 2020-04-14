@@ -3,6 +3,7 @@ var searchData=
   ['dooble',['dooble',['../classdooble.html',1,'']]],
   ['dooble_5fabout',['dooble_about',['../classdooble__about.html',1,'']]],
   ['dooble_5faccepted_5for_5fblocked_5fdomains',['dooble_accepted_or_blocked_domains',['../classdooble__accepted__or__blocked__domains.html',1,'']]],
+  ['dooble_5faccepted_5for_5fblocked_5fdomains_5fitem',['dooble_accepted_or_blocked_domains_item',['../classdooble__accepted__or__blocked__domains__item.html',1,'']]],
   ['dooble_5faddress_5fwidget',['dooble_address_widget',['../classdooble__address__widget.html',1,'']]],
   ['dooble_5faddress_5fwidget_5fcompleter',['dooble_address_widget_completer',['../classdooble__address__widget__completer.html',1,'']]],
   ['dooble_5faddress_5fwidget_5fcompleter_5fpopup',['dooble_address_widget_completer_popup',['../classdooble__address__widget__completer__popup.html',1,'']]],

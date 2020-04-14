@@ -43,9 +43,11 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
+  m_ui.exceptions->sortItems(1, Qt::AscendingOrder);
   m_ui.maximum_session_rejections->setValue
     (dooble_settings::setting("dooble_accepted_or_blocked_domains_"
 			      "maximum_session_rejections", 5000).toInt());
+  m_ui.session_rejections->sortItems(1, Qt::AscendingOrder);
   m_ui.table->sortItems(1, Qt::AscendingOrder);
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
@@ -166,7 +168,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
 
   for(int i = 0; i < 2; i++)
     {
-      auto *item = new QTableWidgetItem();
+      auto *item = new dooble_accepted_or_blocked_domains_item();
 
       item->setData(Qt::UserRole, domain);
 
@@ -250,7 +252,7 @@ void dooble_accepted_or_blocked_domains::new_exception(const QString &url)
   m_ui.exceptions->setRowCount(m_ui.exceptions->rowCount() + 1);
   m_ui.exception->clear();
 
-  auto *item = new QTableWidgetItem();
+  auto *item = new dooble_accepted_or_blocked_domains_item();
 
   item->setCheckState(Qt::Checked);
   item->setData(Qt::UserRole, url);
@@ -259,7 +261,7 @@ void dooble_accepted_or_blocked_domains::new_exception(const QString &url)
 		 Qt::ItemIsUserCheckable);
   m_ui.exceptions->setItem
     (m_ui.exceptions->rowCount() - 1, 0, item);
-  item = new QTableWidgetItem(url);
+  item = new dooble_accepted_or_blocked_domains_item(url);
   item->setData(Qt::UserRole, url);
   item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   m_ui.exceptions->setItem
@@ -357,7 +359,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
     {
       it.next();
 
-      auto *item = new QTableWidgetItem();
+      auto *item = new dooble_accepted_or_blocked_domains_item();
 
       if(it.value())
 	item->setCheckState(Qt::Checked);
@@ -369,7 +371,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 		     Qt::ItemIsSelectable |
 		     Qt::ItemIsUserCheckable);
       m_ui.table->setItem(i, 0, item);
-      item = new QTableWidgetItem(it.key());
+      item = new dooble_accepted_or_blocked_domains_item(it.key());
       item->setData(Qt::UserRole, it.key());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.table->setItem(i, 1, item);
@@ -468,7 +470,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
     {
       it.next();
 
-      auto *item = new QTableWidgetItem();
+      auto *item = new dooble_accepted_or_blocked_domains_item();
 
       if(it.value())
 	item->setCheckState(Qt::Checked);
@@ -480,7 +482,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 		     Qt::ItemIsSelectable |
 		     Qt::ItemIsUserCheckable);
       m_ui.exceptions->setItem(i, 0, item);
-      item = new QTableWidgetItem(it.key());
+      item = new dooble_accepted_or_blocked_domains_item(it.key());
       item->setData(Qt::UserRole, it.key());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.exceptions->setItem(i, 1, item);

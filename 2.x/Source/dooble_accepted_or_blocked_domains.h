@@ -33,6 +33,7 @@
 #include <QMessageBox>
 #include <QPointer>
 #include <QSqlDatabase>
+#include <QTableWidgetItem>
 #include <QTimer>
 
 #include "ui_dooble_accepted_or_blocked_domains.h"
@@ -103,6 +104,27 @@ class dooble_accepted_or_blocked_domains: public QMainWindow
   void add_session_url(const QUrl &first_party_url, const QUrl &origin_url);
   void imported(void);
   void populated(void);
+};
+
+class dooble_accepted_or_blocked_domains_item: public QTableWidgetItem
+{
+ public:
+  dooble_accepted_or_blocked_domains_item(const QString &text):
+    QTableWidgetItem(text)
+  {
+  }
+
+  dooble_accepted_or_blocked_domains_item(void):QTableWidgetItem()
+  {
+  }
+
+  bool operator < (const QTableWidgetItem &other) const
+  {
+    if(Qt::ItemIsUserCheckable & flags())
+      return checkState() < other.checkState();
+    else
+      return other.text() > text();
+  }
 };
 
 #endif
