@@ -150,13 +150,48 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
 {
   if(!parent())
     {
-      if(event && event->key() == Qt::Key_Escape)
-	close();
+      if(event)
+	switch(event->key())
+	  {
+	  case Qt::Key_Enter:
+	  case Qt::Key_Return:
+	    {
+	      slot_item_double_clicked
+		(m_ui.table->item(m_ui.table->currentRow(), 0));
+	      break;
+	    }
+	  case Qt::Key_Escape:
+	    {
+	      close();
+	      break;
+	    }
+	  default:
+	    {
+	      break;
+	    }
+	  }
 
       QMainWindow::keyPressEvent(event);
     }
   else if(event)
-    event->ignore();
+    {
+      switch(event->key())
+	{
+	case Qt::Key_Enter:
+	case Qt::Key_Return:
+	  {
+	    slot_item_double_clicked
+	      (m_ui.table->item(m_ui.table->currentRow(), 0));
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
+      event->ignore();
+    }
 }
 
 void dooble_history_window::prepare_viewport_icons(void)
