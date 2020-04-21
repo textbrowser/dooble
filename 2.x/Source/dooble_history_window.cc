@@ -126,6 +126,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  this,
 	  SLOT(slot_splitter_moved(int, int)));
   connect(m_ui.table,
+	  SIGNAL(delete_pressed(void)),
+	  this,
+	  SLOT(slot_delete_pages(void)));
+  connect(m_ui.table,
 	  SIGNAL(enter_pressed(void)),
 	  this,
 	  SLOT(slot_enter_pressed(void)));

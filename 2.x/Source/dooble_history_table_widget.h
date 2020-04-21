@@ -47,6 +47,7 @@ class dooble_history_table_widget: public QTableWidget
   void slot_section_clicked(int index);
 
  signals:
+  void delete_pressed(void);
   void enter_pressed(void);
 };
 
