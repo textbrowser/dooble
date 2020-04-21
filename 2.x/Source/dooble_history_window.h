@@ -61,6 +61,7 @@ class dooble_history_window: public QMainWindow
  private slots:
   void slot_copy_location(void);
   void slot_delete_pages(void);
+  void slot_enter_pressed(void);
   void slot_favorite_changed(const QUrl &url, bool state);
   void slot_favorites_cleared(void);
   void slot_find(void);

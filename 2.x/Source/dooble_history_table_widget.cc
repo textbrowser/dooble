@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QKeyEvent>
 #include <QHeaderView>
 
 #include "dooble_application.h"
@@ -38,6 +39,26 @@ dooble_history_table_widget::dooble_history_table_widget(QWidget *parent):
 	  SIGNAL(sectionClicked(int)),
 	  this,
 	  SLOT(slot_section_clicked(int)));
+}
+
+void dooble_history_table_widget::keyPressEvent(QKeyEvent *event)
+{
+  if(event)
+    switch(event->key())
+      {
+      case Qt::Key_Enter:
+      case Qt::Key_Return:
+	{
+	  emit enter_pressed();
+	  break;
+	}
+      default:
+	{
+	  break;
+	}
+      }
+
+  QTableWidget::keyPressEvent(event);
 }
 
 void dooble_history_table_widget::prepare_viewport_icons(void)

@@ -126,6 +126,10 @@ dooble_history_window::dooble_history_window(void):QMainWindow()
 	  this,
 	  SLOT(slot_splitter_moved(int, int)));
   connect(m_ui.table,
+	  SIGNAL(enter_pressed(void)),
+	  this,
+	  SLOT(slot_enter_pressed(void)));
+  connect(m_ui.table,
 	  SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_item_double_clicked(QTableWidgetItem *)));
@@ -153,13 +157,6 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
       if(event)
 	switch(event->key())
 	  {
-	  case Qt::Key_Enter:
-	  case Qt::Key_Return:
-	    {
-	      slot_item_double_clicked
-		(m_ui.table->item(m_ui.table->currentRow(), 0));
-	      break;
-	    }
 	  case Qt::Key_Escape:
 	    {
 	      close();
@@ -174,24 +171,7 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
       QMainWindow::keyPressEvent(event);
     }
   else if(event)
-    {
-      switch(event->key())
-	{
-	case Qt::Key_Enter:
-	case Qt::Key_Return:
-	  {
-	    slot_item_double_clicked
-	      (m_ui.table->item(m_ui.table->currentRow(), 0));
-	    break;
-	  }
-	default:
-	  {
-	    break;
-	  }
-	}
-
-      event->ignore();
-    }
+    event->ignore();
 }
 
 void dooble_history_window::prepare_viewport_icons(void)
@@ -433,6 +413,12 @@ void dooble_history_window::slot_delete_pages(void)
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
   slot_search_timer_timeout();
+}
+
+void dooble_history_window::slot_enter_pressed(void)
+{
+  slot_item_double_clicked(m_ui.table->item(m_ui.table->currentRow(), 0));
+  m_ui.table->setFocus();
 }
 
 void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
