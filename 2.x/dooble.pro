@@ -748,7 +748,10 @@ UI_HEADERS_DIR  = Source
 
 PROJECTNAME	= Dooble
 TARGET		= Dooble
+
+!win32 {
 VERSION         = DOOBLE_VERSION
+}
 
 macx {
 copydata.path		= /Applications/Dooble.d/Data
