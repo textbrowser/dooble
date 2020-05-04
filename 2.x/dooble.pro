@@ -1,7 +1,5 @@
-greaterThan(QT_MAJOR_VERSION, 5.9) {
-  !versionAtLeast(QT_VERSION, 5.10) {
-  error("Qt version 5.10.0, or newer, is required.")
-  }
+!versionAtLeast(QT_VERSION, 5.12) {
+  error("Qt version 5.12.0, or newer, is required.")
 }
 
 cache()
@@ -605,6 +603,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_tab_widget.h \
                   Source/dooble_table_view.h \
                   Source/dooble_tool_button.h \
+                  Source/dooble_version.h \
 		  Source/dooble_web_engine_url_request_interceptor.h \
                   Source/dooble_web_engine_page.h \
                   Source/dooble_web_engine_view.h
@@ -749,6 +748,7 @@ UI_HEADERS_DIR  = Source
 
 PROJECTNAME	= Dooble
 TARGET		= Dooble
+VERSION         = DOOBLE_VERSION
 
 macx {
 copydata.path		= /Applications/Dooble.d/Data

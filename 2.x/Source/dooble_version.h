@@ -25,61 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QKeyEvent>
-
-#include "dooble_about.h"
-#include "dooble_version.h"
-
-dooble_about::dooble_about(void):QMainWindow()
-{
-  m_ui.setupUi(this);
-  connect(m_ui.license,
-	  SIGNAL(linkActivated(const QString &)),
-	  this,
-	  SLOT(slot_link_activated(const QString &)));
-  connect(m_ui.release_notes,
-	  SIGNAL(linkActivated(const QString &)),
-	  this,
-	  SLOT(slot_link_activated(const QString &)));
-
-  QString qversion("");
-  const char *tmp = qVersion();
-
-  if(tmp)
-    qversion = tmp;
-
-  qversion = qversion.trimmed();
-
-  if(qversion.isEmpty())
-    qversion = "unknown";
-
-  m_ui.license->setText
-    (tr("<a href=\"qrc://Documentation/DOOBLE-LICENSE.html\">"
-	"Dooble 3-Clause BSD License</a>"));
-
-  QString text
-    (tr("Architecture %1.<br>Qt version %2 (runtime %3).").
-     arg(DOOBLE_ARCHITECTURE_STR).
-     arg(QT_VERSION_STR).
-     arg(qversion));
-
-  m_ui.local_information->setText(text);
-  m_ui.release_notes->setText
-    (tr("<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
-	"Release Notes</a>"));
-  m_ui.version->setText
-    (tr("Dooble version %1, May Mayhem.").arg(DOOBLE_VERSION_STRING));
-}
-
-void dooble_about::keyPressEvent(QKeyEvent *event)
-{
-  if(event && event->key() == Qt::Key_Escape)
-    close();
-
-  QMainWindow::keyPressEvent(event);
-}
-
-void dooble_about::slot_link_activated(const QString &url)
-{
-  emit link_activated(QUrl::fromUserInput(url));
-}
+#ifndef DOOBLE_VERSION
+#define DOOBLE_VERSION 2020.05.05
+#endif
+#ifndef DOOBLE_VERSION_STRING
+#define DOOBLE_VERSION_STRING "2020.05.05"
+#endif
