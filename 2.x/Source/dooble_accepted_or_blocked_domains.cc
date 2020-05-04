@@ -549,6 +549,12 @@ void dooble_accepted_or_blocked_domains::save
  const QByteArray &encryption_key,
  const QHash<QString, char> &hash)
 {
+  if(hash.isEmpty())
+    {
+      emit imported();
+      return;
+    }
+
   QString database_name(dooble_database_utilities::database_name());
 
   {
@@ -609,9 +615,7 @@ void dooble_accepted_or_blocked_domains::save
   }
 
   QSqlDatabase::removeDatabase(database_name);
-
-  if(!m_future.isCanceled())
-    emit imported();
+  emit imported();
 }
 
 void dooble_accepted_or_blocked_domains::save_blocked_domain
