@@ -3,9 +3,9 @@
 [Desktop Entry]
 Categories=Web
 Comment=Dooble Web Browser
-Exec=/usr/local/dooble/dooble.sh
+Exec=/opt/dooble/dooble.sh
 GenericName=Dooble Web Browser
-Icon=/usr/local/dooble/dooble.png
+Icon=/opt/dooble/dooble.png
 Name=Dooble Web Browser
 StartupNotify=true
 Terminal=false
