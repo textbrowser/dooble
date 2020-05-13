@@ -1,60 +1,60 @@
-This is a guide for preparing /usr/local/dooble in order to generate a Debian package. Please do not use README.DEBIAN for other operating systems.
+This is a guide for preparing /opt/dooble in order to generate a Debian package. Please do not use README.DEBIAN for other operating systems.
 
-Preparing /usr/local/dooble:
+Preparing /opt/dooble:
 
-sudo mkdir -p /usr/local/dooble/Data
-sudo mkdir -p /usr/local/dooble/Documentation
-sudo mkdir -p /usr/local/dooble/Lib
-sudo mkdir -p /usr/local/dooble/Translations
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Core.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5DBus.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Gui.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Network.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Positioning.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5PrintSupport.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Qml.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Quick.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5QuickWidgets.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Sql.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Svg.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5WebChannel.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5WebEngineCore.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5WebEngineWidgets.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Widgets.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5XcbQpa.so.5 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libicudata.so.56 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libicui18n.so.56 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libicuuc.so.56 /usr/local/dooble/Lib/.
-sudo cp -p ~/Qt/5.12.8/gcc_64/libexec/QtWebEngineProcess /usr/local/dooble/.
-sudo cp -pr ~/Qt/5.12.8/gcc_64/plugins /usr/local/dooble/.
-sudo cp -pr ~/Qt/5.12.8/gcc_64/resources /usr/local/dooble/.
-sudo cp -pr ~/Qt/5.12.8/gcc_64/translations /usr/local/dooble/.
-sudo chmod -x,g+w /usr/local/dooble/Lib/*
+sudo mkdir -p /opt/dooble/Data
+sudo mkdir -p /opt/dooble/Documentation
+sudo mkdir -p /opt/dooble/Lib
+sudo mkdir -p /opt/dooble/Translations
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Core.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5DBus.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Gui.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Network.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Positioning.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5PrintSupport.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Qml.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Quick.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5QuickWidgets.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Sql.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Svg.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5WebChannel.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5WebEngineCore.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5WebEngineWidgets.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5Widgets.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libQt5XcbQpa.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libicudata.so.56 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libicui18n.so.56 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/lib/libicuuc.so.56 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.12.8/gcc_64/libexec/QtWebEngineProcess /opt/dooble/.
+sudo cp -pr ~/Qt/5.12.8/gcc_64/plugins /opt/dooble/.
+sudo cp -pr ~/Qt/5.12.8/gcc_64/resources /opt/dooble/.
+sudo cp -pr ~/Qt/5.12.8/gcc_64/translations /opt/dooble/.
+sudo chmod -x,g+w /opt/dooble/Lib/*
 cd ~/dooble.d/2.x
 qmake -o Makefile dooble.pro && make -j 4
-sudo cp -p ./Documentation/*.pdf /usr/local/dooble/Documentation/.
-sudo cp -p ./Documentation/KDE /usr/local/dooble/Documentation/.
-sudo cp -p ./Documentation/TO-DO /usr/local/dooble/Documentation/.
-sudo cp -p ./Documentation/dooble.asc /usr/local/dooble/Documentation/.
-sudo cp -p ./Documentation/dooble.pol /usr/local/dooble/Documentation/.
-sudo cp -p ./Dooble /usr/local/dooble/.
-sudo cp -p ./Icons/Logo/dooble.png /usr/local/dooble/.
-sudo cp -p ./Qt/qt.conf /usr/local/dooble/.
-sudo cp -p ./Translations/*.qm /usr/local/dooble/Translations/.
-sudo cp -p ./dooble.sh /usr/local/dooble/.
-sudo cp -pr ./Data/*.txt /usr/local/dooble/Data/.
-sudo cp -pr ./Data/README /usr/local/dooble/Data/.
-sudo cp -pr ./qtwebengine_dictionaries /usr/local/dooble/.
-sudo chown -Rh root:staff /usr/local/dooble
-sudo find /usr/local/dooble/plugins -name '*.so' -exec chmod -x {} \;
+sudo cp -p ./Documentation/*.pdf /opt/dooble/Documentation/.
+sudo cp -p ./Documentation/KDE /opt/dooble/Documentation/.
+sudo cp -p ./Documentation/TO-DO /opt/dooble/Documentation/.
+sudo cp -p ./Documentation/dooble.asc /opt/dooble/Documentation/.
+sudo cp -p ./Documentation/dooble.pol /opt/dooble/Documentation/.
+sudo cp -p ./Dooble /opt/dooble/.
+sudo cp -p ./Icons/Logo/dooble.png /opt/dooble/.
+sudo cp -p ./Qt/qt.conf /opt/dooble/.
+sudo cp -p ./Translations/*.qm /opt/dooble/Translations/.
+sudo cp -p ./dooble.sh /opt/dooble/.
+sudo cp -pr ./Data/*.txt /opt/dooble/Data/.
+sudo cp -pr ./Data/README /opt/dooble/Data/.
+sudo cp -pr ./qtwebengine_dictionaries /opt/dooble/.
+sudo chown -Rh root:staff /opt/dooble
+sudo find /opt/dooble/plugins -name '*.so' -exec chmod -x {} \;
 
 Preparing Dooble-x_amd64.deb:
 
 cd
-mkdir -p dooble-debian.d/usr/local
+mkdir -p dooble-debian.d/opt
 mkdir -p dooble-debian.d/usr/share/applications
 cp -p ./dooble.d/2.x/dooble.desktop dooble-debian.d/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-debian.d/.
-cp -r /usr/local/dooble dooble-debian.d/usr/local/.
+cp -r /opt/dooble dooble-debian.d/opt/.
 fakeroot dpkg-deb --build dooble-debian.d Dooble-2020.05.05_amd64.deb
 debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2020.05.05_amd64.deb
