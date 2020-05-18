@@ -150,6 +150,7 @@ Remaining Items
 
 - Argon2, per request.
 - Auto-correct addresses.
+- Create /usr/bin symbolic link.
 - DTLS and Echo-DNS.
 - Element-selection option.
 - Fancy completer.
