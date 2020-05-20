@@ -26,6 +26,7 @@ Completed Items
 - Cookie identifiers.
 - Cookies Window - Toggle Shown.
 - Cookies menu item within Tools.
+- Create /usr/bin dooble file during Debian installation.
 - Creating new tabs and windows requires sophistication.
 - Custom icon sets. Icons from themes.
 - Debian distribution.
@@ -150,7 +151,6 @@ Remaining Items
 
 - Argon2, per request.
 - Auto-correct addresses.
-- Create /usr/bin symbolic link.
 - DTLS and Echo-DNS.
 - Element-selection option.
 - Fancy completer.

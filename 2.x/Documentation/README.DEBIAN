@@ -41,7 +41,6 @@ sudo cp -p ./Dooble /opt/dooble/.
 sudo cp -p ./Icons/Logo/dooble.png /opt/dooble/.
 sudo cp -p ./Qt/qt.conf /opt/dooble/.
 sudo cp -p ./Translations/*.qm /opt/dooble/Translations/.
-sudo cp -p ./dooble.sh /opt/dooble/.
 sudo cp -pr ./Data/*.txt /opt/dooble/Data/.
 sudo cp -pr ./Data/README /opt/dooble/Data/.
 sudo cp -pr ./qtwebengine_dictionaries /opt/dooble/.
@@ -52,9 +51,11 @@ Preparing Dooble-x_amd64.deb:
 
 cd
 mkdir -p dooble-debian.d/opt
+mkdir -p dooble-debian.d/usr/bin
 mkdir -p dooble-debian.d/usr/share/applications
 cp -p ./dooble.d/2.x/dooble.desktop dooble-debian.d/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-debian.d/.
 cp -r /opt/dooble dooble-debian.d/opt/.
+cp ./dooble.d/2.x/dooble.sh dooble-debian.d/usr/bin/dooble
 fakeroot dpkg-deb --build dooble-debian.d Dooble-2020.05.05_amd64.deb
 debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2020.05.05_amd64.deb
