@@ -101,6 +101,8 @@ Completed Items
 - Private-window decorations.
 - Proxy details within Privacy.
 - Qt 5.10.
+- Qt's digest class. If DOOBLE_HMAC is not defined, HMACs are computed
+  via QMessageAuthenticationCode. Keccak is computed as H(Key || Message).
 - Rapid loading of address widget model icons.
 - Reduce cookie_added() signals.
 - Refresh page every 15, 30, 45, or 60 seconds.
@@ -155,7 +157,6 @@ Remaining Items
 - Element-selection option.
 - Fancy completer.
 - Include date stamps in cookie containers.
-- Qt's digest class.
 - Search engine icons should be based on host names.
 - Shortcuts browser.
 - Translation browser.

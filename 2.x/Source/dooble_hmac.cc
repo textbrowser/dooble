@@ -26,6 +26,9 @@
 */
 
 #include <QCryptographicHash>
+#ifndef DOOBLE_HMAC
+#include <QMessageAuthenticationCode>
+#endif
 #include <QtDebug>
 
 #include "dooble_hmac.h"
@@ -40,6 +43,7 @@ QByteArray dooble_hmac::keccak_512_hmac(const QByteArray &key,
 QByteArray dooble_hmac::sha2_512_hmac(const QByteArray &key,
 				      const QByteArray &message)
 {
+#ifdef DOOBLE_HMAC
   /*
   ** Block length is 1024 bits.
   ** Please read https://en.wikipedia.org/wiki/SHA-2.
@@ -71,11 +75,20 @@ QByteArray dooble_hmac::sha2_512_hmac(const QByteArray &key,
     (left.append(QCryptographicHash::hash(right.append(message),
 					  QCryptographicHash::Sha512)),
      QCryptographicHash::Sha512);
+#else
+  QMessageAuthenticationCode message_authentication_code
+    (QCryptographicHash::Sha512);
+
+  message_authentication_code.setKey(key);
+  message_authentication_code.addData(message);
+  return message_authentication_code.result();
+#endif
 }
 
 QByteArray dooble_hmac::sha3_512_hmac(const QByteArray &key,
 				      const QByteArray &message)
 {
+#ifdef DOOBLE_HMAC
   /*
   ** Block length is 576 bits.
   ** Please read https://en.wikipedia.org/wiki/SHA-3.
@@ -107,6 +120,14 @@ QByteArray dooble_hmac::sha3_512_hmac(const QByteArray &key,
     (left.append(QCryptographicHash::hash(right.append(message),
 					  QCryptographicHash::Sha3_512)),
      QCryptographicHash::Sha3_512);
+#else
+  QMessageAuthenticationCode message_authentication_code
+    (QCryptographicHash::Sha3_512);
+
+  message_authentication_code.setKey(key);
+  message_authentication_code.addData(message);
+  return message_authentication_code.result();
+#endif
 }
 
 int dooble_hmac::preferred_output_size_in_bits(void)
