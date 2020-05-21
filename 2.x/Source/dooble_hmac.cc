@@ -36,6 +36,14 @@
 QByteArray dooble_hmac::keccak_512_hmac(const QByteArray &key,
 					const QByteArray &message)
 {
+  /*
+  ** Please read https://keccak.team/keccak_strengths.html.
+  ** Unlike SHA-1 and SHA-2, Keccak does not have the length-extension
+  ** weakness, hence does not need the HMAC nested construction. Instead,
+  ** MAC computation can be performed by simply prepending the message
+  ** with the key.
+  */
+
   return QCryptographicHash::hash
     (key + message, QCryptographicHash::Keccak_512);
 }
