@@ -209,7 +209,11 @@ QIcon dooble_tab_widget::tabIcon(int index) const
 	  (m_tab_bar->tabButton(index, QTabBar::RightSide));
 
       if(label)
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+	icon = label->pixmap(Qt::ReturnByValue);
+#else
 	icon = *label->pixmap();
+#endif
     }
 
   return icon;

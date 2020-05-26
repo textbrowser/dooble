@@ -1246,8 +1246,13 @@ void dooble_settings::restore(bool read_database)
     (m_ui.user_agent->text());
 
   {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+    QStringList list
+      (setting("dictionaries").toString().split(";", Qt::SkipEmptyParts));
+#else
     QStringList list
       (setting("dictionaries").toString().split(";", QString::SkipEmptyParts));
+#endif
 
     std::sort(list.begin(), list.end());
 
@@ -2796,9 +2801,16 @@ void dooble_settings::slot_reset(void)
 
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  QProcess::startDetached(QCoreApplication::applicationDirPath() +
+			  QDir::separator() +
+			  QCoreApplication::applicationName(),
+			  QStringList());
+#else
   QProcess::startDetached(QCoreApplication::applicationDirPath() +
 			  QDir::separator() +
 			  QCoreApplication::applicationName());
+#endif
   QApplication::exit(0);
 }
 
