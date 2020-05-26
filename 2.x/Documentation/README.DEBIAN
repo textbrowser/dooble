@@ -13,6 +13,7 @@ sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5Network.so.5 /opt/dooble/Lib/.
 sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5Positioning.so.5 /opt/dooble/Lib/.
 sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5PrintSupport.so.5 /opt/dooble/Lib/.
 sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5Qml.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5QmlModels.so.5 /opt/dooble/Lib/.
 sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5Quick.so.5 /opt/dooble/Lib/.
 sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5QuickWidgets.so.5 /opt/dooble/Lib/.
 sudo cp -p ~/Qt/5.15.0/gcc_64/lib/libQt5Sql.so.5 /opt/dooble/Lib/.
