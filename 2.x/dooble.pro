@@ -171,7 +171,7 @@ dictoolbuild.CONFIG = no_link target_predeps
 dictoolbuild.commands = $${CONVERT_TOOL} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
 dictoolbuild.depends = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.aff
 dictoolbuild.input = dict.files
-dictoolbuild.name = Build ${QMAKE_FILE_IN_BASE}
+dictoolbuild.name = ${QMAKE_FILE_IN_BASE} Build
 dictoolbuild.output = $${DICTIONARIES_DIR}/${QMAKE_FILE_BASE}.bdic
 
 unix {
@@ -189,41 +189,82 @@ doxygen.commands = doxygen dooble.doxygen
 CONFIG		+= qt release warn_on
 DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
-QT		+= concurrent gui network printsupport sql \
-	           webenginewidgets widgets xml
+QT		+= concurrent \
+                   gui \
+                   network \
+                   printsupport \
+                   sql \
+                   webenginewidgets \
+                   widgets \
+                   xml
 TEMPLATE	= app
 
 QMAKE_CLEAN     += Dooble
 
 freebsd-* {
 DEFINES += DOOBLE_FREEBSD_WEBENGINE_MISMATCH
-QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
-			  -Werror -Wextra \
-			  -Woverloaded-virtual -Wpointer-arith \
-			  -Wstack-protector -Wstrict-overflow=5 \
-                          -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -pedantic -std=c++11
+QMAKE_CXXFLAGS_RELEASE += -O3 \
+                          -Wall \
+                          -Wcast-align \
+                          -Wcast-qual \
+                          -Werror \
+                          -Wextra \
+                          -Woverloaded-virtual \
+                          -Wpointer-arith \
+                          -Wstack-protector \
+                          -Wstrict-overflow=5 \
+                          -fPIE \
+                          -fstack-protector-all \
+                          -fwrapv \
+                          -mtune=generic \
+                          -pedantic \
+                          -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:macx {
-QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
-			  -Werror -Wextra \
-			  -Woverloaded-virtual -Wpointer-arith \
-			  -Wstack-protector -Wstrict-overflow=5 \
-                          -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -pedantic -std=c++11
+QMAKE_CXXFLAGS_RELEASE += -O3 \
+                          -Wall \
+                          -Wcast-align \
+                          -Wcast-qual \
+                          -Werror \
+                          -Wextra \
+                          -Woverloaded-virtual \
+                          -Wpointer-arith \
+                          -Wstack-protector \
+                          -Wstrict-overflow=5 \
+                          -fPIE \
+                          -fstack-protector-all \
+                          -fwrapv \
+                          -mtune=generic \
+                          -pedantic \
+                          -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
 } else {
-QMAKE_CXXFLAGS_RELEASE += -O3 -Wall -Wcast-align -Wcast-qual \
-                          -Werror -Wextra -Wno-deprecated-copy \
-			  -Woverloaded-virtual -Wpointer-arith \
-                          -Wstack-protector -Wstrict-overflow=5 \
-                          -fPIE -fstack-protector-all -fwrapv \
-                          -mtune=generic -pedantic -pie -std=c++11
+QMAKE_CXXFLAGS_RELEASE += -O3 \
+                          -Wall \
+                          -Wcast-align \
+                          -Wcast-qual \
+                          -Werror \
+                          -Wextra \
+                          -Wno-deprecated-copy \
+                          -Woverloaded-virtual \
+                          -Wpointer-arith \
+                          -Wstack-protector \
+                          -Wstrict-overflow=5 \
+                          -fPIE \
+                          -fstack-protector-all \
+                          -fwrapv \
+                          -mtune=generic \
+                          -pedantic \
+                          -pie \
+                          -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 }
 
-QMAKE_DISTCLEAN += -r qtwebengine_dictionaries temp .qmake.cache .qmake.stash
+QMAKE_DISTCLEAN += -r qtwebengine_dictionaries \
+                   .qmake.cache \
+                   .qmake.stash \
+                   temp
 QMAKE_EXTRA_COMPILERS += dictoolbuild
 QMAKE_EXTRA_TARGETS = dmg doxygen purge
 
@@ -754,20 +795,20 @@ VERSION         = DOOBLE_VERSION
 }
 
 macx {
-copydata.path		= /Applications/Dooble.d/Data
 copydata.files		= Data/*.txt
-copydocumentation.path	= /Applications/Dooble.d/Documentation
+copydata.path		= /Applications/Dooble.d/Data
 copydocumentation.extra	= cp ./Documentation/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
-copydooble.path		= /Applications/Dooble.d
+copydocumentation.path	= /Applications/Dooble.d/Documentation
 copydooble.extra	= cp -r ./Dooble.app /Applications/Dooble.d/.
-copyinfoplist.path	= /Applications/Dooble.d
+copydooble.path		= /Applications/Dooble.d
 copyinfoplist.extra	= cp Data/Info.plist /Applications/Dooble.d/Dooble.app/Contents/.
-macdeployqt.path	= Dooble.app
+copyinfoplist.path	= /Applications/Dooble.d
 macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
-preinstall.path		= /Applications/Dooble.d
+macdeployqt.path	= Dooble.app
 preinstall.extra	= rm -rf /Applications/Dooble.d/Dooble.app
-translations.path	= /Applications/Dooble.d/Translations
+preinstall.path		= /Applications/Dooble.d
 translations.files	= Translations/*.qm
+translations.path	= /Applications/Dooble.d/Translations
 
 INSTALLS	= copydata \
                   copydocumentation \
