@@ -417,19 +417,20 @@ QString dooble_settings::zoom_frame_location_string(int index)
   return "popup_menu";
 }
 
-QVariant dooble_settings::setting(const QString &key,
+QVariant dooble_settings::setting(const QString &k,
 				  const QVariant &default_value)
 {
   QReadLocker lock(&s_settings_mutex);
+  QString key(k.toLower().trimmed());
 
-  if(!s_settings.contains(key.toLower().trimmed()))
+  if(!s_settings.contains(key))
     {
       QString home_path(s_settings.value("home_path").toString());
 
       lock.unlock();
 
       QString database_name(dooble_database_utilities::database_name());
-      QVariant value("");
+      QVariant value(default_value);
 
       {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -445,20 +446,15 @@ QVariant dooble_settings::setting(const QString &key,
 
 	    query.setForwardOnly(true);
 	    query.prepare("SELECT value FROM dooble_settings WHERE key = ?");
-	    query.addBindValue(key.toLower().trimmed());
+	    query.addBindValue(key);
 
-	    if(query.exec())
+	    if(query.exec() && query.next())
 	      {
-		if(query.next())
-		  {
-		    value = query.value(0).toString().trimmed();
+		value = query.value(0).toString().trimmed();
 
-		    QWriteLocker lock(&s_settings_mutex);
+		QWriteLocker lock(&s_settings_mutex);
 
-		    s_settings[key.toLower().trimmed()] = value;
-		  }
-		else
-		  value = default_value;
+		s_settings[key] = value;
 	      }
 	  }
 
@@ -469,7 +465,7 @@ QVariant dooble_settings::setting(const QString &key,
       return value;
     }
 
-  return s_settings.value(key.toLower().trimmed(), default_value);
+  return s_settings.value(key, default_value);
 }
 
 bool dooble_settings::has_dooble_credentials(void)

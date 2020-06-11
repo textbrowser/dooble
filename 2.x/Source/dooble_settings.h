@@ -59,8 +59,8 @@ class dooble_settings: public QMainWindow
   static QString cookie_policy_string(int index);
   static QString zoom_frame_location_string(int index);
   static QStringList s_spell_checker_dictionaries;
-  static QVariant setting(const QString &key,
-			  const QVariant &default_value = QVariant());
+  static QVariant setting(const QString &k,
+			  const QVariant &default_value = QVariant(""));
   static bool has_dooble_credentials(void);
   static bool has_dooble_credentials_temporary(void);
   static bool set_setting(const QString &key, const QVariant &value);
