@@ -540,14 +540,18 @@ void dooble_cookies::slot_populate(void)
 		    continue;
 		  }
 
+	      QNetworkCookie c(cookie.at(0));
 	      bool is_favorite = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
 		 query.value(0).toByteArray());
 
-	      profile->cookieStore()->setCookie(cookie.at(0));
-	      cookies << cookie.at(0);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+	      c.setName(c.name().replace('-', '_'));
+#endif
+	      cookies << c;
 	      count += 1;
 	      is_favorites << is_favorite;
+	      profile->cookieStore()->setCookie(c);
 	    }
 
 	if(!cookies.isEmpty() && !is_favorites.isEmpty())
