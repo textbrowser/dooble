@@ -3,7 +3,7 @@
 [Desktop Entry]
 Categories=Web
 Comment=Dooble Web Browser
-Exec=/opt/dooble/dooble.sh
+Exec=/usr/bin/dooble.sh
 GenericName=Dooble Web Browser
 Icon=/opt/dooble/dooble.png
 Name=Dooble Web Browser
