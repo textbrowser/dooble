@@ -207,6 +207,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
                           -Wcast-qual \
+                          -Wdouble-promotion \
                           -Werror \
                           -Wextra \
                           -Woverloaded-virtual \
@@ -225,6 +226,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
                           -Wcast-qual \
+                          -Wdouble-promotion \
                           -Werror \
                           -Wextra \
                           -Woverloaded-virtual \
@@ -244,6 +246,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
                           -Wcast-qual \
+                          -Wdouble-promotion \
                           -Werror \
                           -Wextra \
                           -Wno-deprecated-copy \
