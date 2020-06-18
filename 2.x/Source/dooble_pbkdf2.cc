@@ -83,7 +83,9 @@ QByteArray dooble_pbkdf2::x_or(const QByteArray &a, const QByteArray &b) const
   return c;
 }
 
-QList<QByteArray> dooble_pbkdf2::pbkdf2(dooble_hmac_function *function) const
+QList<QByteArray> dooble_pbkdf2::pbkdf2
+(QByteArray (*function) (const QByteArray &key,
+			 const QByteArray &message)) const
 {
   if(function == nullptr ||
      m_iteration_count == 0 ||

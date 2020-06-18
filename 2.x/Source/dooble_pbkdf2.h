@@ -32,9 +32,6 @@
 #include <QByteArray>
 #include <QObject>
 
-typedef QByteArray dooble_hmac_function(const QByteArray &key,
-					const QByteArray &message);
-
 class dooble_pbkdf2: public QObject
 {
   Q_OBJECT
@@ -48,7 +45,9 @@ class dooble_pbkdf2: public QObject
 		int output_size);
   ~dooble_pbkdf2();
   QByteArray salt(void) const;
-  QList<QByteArray> pbkdf2(dooble_hmac_function *hmac_function) const;
+  QList<QByteArray> pbkdf2
+    (QByteArray (*function) (const QByteArray &key,
+			     const QByteArray &message)) const;
   static void test1(void);
 
  private:
