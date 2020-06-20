@@ -210,6 +210,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
+                          -Wl,-z,relro \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
@@ -229,6 +230,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
+                          -Wl,-z,relro \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
@@ -249,6 +251,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
+                          -Wl,-z,relro \
                           -Wno-deprecated-copy \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
