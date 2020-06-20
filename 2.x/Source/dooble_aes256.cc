@@ -432,11 +432,12 @@ uint8_t dooble_aes256::xtime(uint8_t x)
 
 uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y)
 {
-  return ((x & 1) * y) ^
-    (((x >> 1) & 1) * xtime(y)) ^
-    (((x >> 2) & 1) * xtime(xtime(y))) ^
-    (((x >> 3) & 1) * xtime(xtime(xtime(y)))) ^
-    (((x >> 4) & 1) * xtime(xtime(xtime(xtime(y)))));
+  return static_cast<uint8_t>
+    (((x & 1) * y) ^
+     (((x >> 1) & 1) * xtime(y)) ^
+     (((x >> 2) & 1) * xtime(xtime(y))) ^
+     (((x >> 3) & 1) * xtime(xtime(xtime(y)))) ^
+     (((x >> 4) & 1) * xtime(xtime(xtime(xtime(y))))));
 }
 
 void dooble_aes256::add_round_key(size_t c)
