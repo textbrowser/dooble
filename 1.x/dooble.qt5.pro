@@ -9,8 +9,14 @@ purge.commands = rm -f Documentation/*~ Include/*~ Installers/*~ \
 
 CONFIG		+= qt release warn_on
 LANGUAGE	= C++
-QT		+= concurrent network printsupport sql \
-	           webkit webkitwidgets widgets xml
+QT		+= concurrent \
+                   network \
+                   printsupport \
+                   sql \
+                   webkit \
+                   webkitwidgets \
+                   widgets \
+                   xml
 TEMPLATE	= app
 
 # The function gcry_kdf_derive() is available in version
@@ -28,12 +34,23 @@ DEFINES         += DOOBLE_LINKED_WITH_LIBSPOTON \
 
 QMAKE_CLEAN     += Dooble libSpotOn/*.o libSpotOn/*.so libSpotOn/test
 QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_CXXFLAGS_RELEASE += -fPIE -fstack-protector-all -fwrapv \
-			  -mtune=generic -pie -Os \
-			  -Wall -Wcast-align -Wcast-qual \
-			  -Werror -Wextra \
-			  -Woverloaded-virtual -Wpointer-arith \
-			  -Wstack-protector -Wstrict-overflow=5
+QMAKE_CXXFLAGS_RELEASE += -Os \
+                          -Wall \
+                          -Wcast-align \
+                          -Wcast-qual \
+                          -Wextra \
+                          -Wformat=2 \
+                          -Woverloaded-virtual \
+                          -Wpointer-arith \
+                          -Wstack-protector \
+                          -Wstrict-overflow=5 \
+                          -fPIE \
+                          -fstack-protector-all \
+                          -fwrapv \
+                          -mtune=generic \
+                          -pedantic \
+                          -pie \
+                          -std=c++11
 QMAKE_DISTCLEAN += -r temp .qmake.cache .qmake.stash
 QMAKE_EXTRA_TARGETS = libspoton purge
 QMAKE_LFLAGS_RELEASE += -Wl,-rpath,/usr/local/dooble/Lib

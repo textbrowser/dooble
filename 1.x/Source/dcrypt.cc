@@ -221,7 +221,7 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 
       if((err = gcry_cipher_decrypt(m_cipherHandle,
 				    decodedArray.data(),
-				    decodedArray.length(),
+				    static_cast<size_t> (decodedArray.length()),
 				    0,
 				    0)) == 0)
 	{
@@ -229,7 +229,8 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 
 	  if(decodedArray.length() > static_cast<int> (sizeof(int)))
 	    originalLength = decodedArray.mid
-	      (decodedArray.length() - sizeof(int), sizeof(int));
+	      (decodedArray.length() - static_cast<int> (sizeof(int)),
+	       static_cast<int> (sizeof(int)));
 
 	  if(!originalLength.isEmpty())
 	    {
@@ -269,7 +270,8 @@ QByteArray dcrypt::decodedString(const QByteArray &byteArray,
 
 	  QByteArray buffer(64, '0');
 
-	  gpg_strerror_r(err, buffer.data(), buffer.length());
+	  gpg_strerror_r
+	    (err, buffer.data(), static_cast<size_t> (buffer.length()));
 	  dmisc::logError(QString("dcrypt::decodedString(): "
 				  "gcry_cipher_decrypt() failure (%1).").
 			  arg(buffer.constData()));
@@ -328,16 +330,20 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
       QByteArray encodedArray(byteArray);
 
       if(encodedArray.isEmpty())
-	encodedArray = encodedArray.leftJustified(blockLength, 0);
+	encodedArray = encodedArray.leftJustified
+	  (static_cast<int> (blockLength), 0);
       else
 	/*
 	** Multiple of the block size. CBC-CTS and CTR not require this.
 	*/
 
 	encodedArray = encodedArray.leftJustified
-	  (blockLength * (qCeil(static_cast<qreal> (encodedArray.length()) /
-				static_cast<qreal> (blockLength)) + 1),
-	   0);
+	  (static_cast<int>
+	   (blockLength *
+	    static_cast<size_t>
+	    ((qCeil(static_cast<qreal> (encodedArray.length()) /
+		    static_cast<qreal> (blockLength)) + 1),
+	     0)));
 
       QByteArray originalLength;
       QDataStream out(&originalLength, QIODevice::WriteOnly);
@@ -356,13 +362,15 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 	}
 
       encodedArray.replace
-	(encodedArray.length() - sizeof(int), sizeof(int), originalLength);
+	(encodedArray.length() - static_cast<int> (sizeof(int)),
+	 static_cast<int> (sizeof(int)),
+	 originalLength);
 
       gcry_error_t err = 0;
 
       if((err = gcry_cipher_encrypt(m_cipherHandle,
 				    encodedArray.data(),
-				    encodedArray.length(),
+				    static_cast<size_t> (encodedArray.length()),
 				    0,
 				    0)) == 0)
 	{
@@ -378,7 +386,8 @@ QByteArray dcrypt::encodedString(const QByteArray &byteArray,
 
 	  QByteArray buffer(64, '0');
 
-	  gpg_strerror_r(err, buffer.data(), buffer.length());
+	  gpg_strerror_r
+	    (err, buffer.data(), static_cast<size_t> (buffer.length()));
 	  dmisc::logError(QString("dcrypt::encodedString(): "
 				  "gcry_cipher_encrypt() failure (%1).").
 			  arg(buffer.constData()));
@@ -507,7 +516,7 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
       l_passphrase.resize(256);
       gcry_fast_random_poll();
       gcry_randomize(l_passphrase.data(),
-		     l_passphrase.length(),
+		     static_cast<size_t> (l_passphrase.length()),
 		     GCRY_STRONG_RANDOM);
     }
   else
@@ -515,7 +524,7 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
       l_passphrase.resize(passphrase.toUtf8().length());
       memcpy(l_passphrase.data(),
 	     passphrase.toUtf8().constData(),
-	     passphrase.toUtf8().length());
+	     static_cast<size_t> (passphrase.toUtf8().length()));
     }
 
   gcry_error_t err = 0;
@@ -565,30 +574,31 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
       QByteArray temporary1;
       QByteArray temporary2;
 
-      temporary1.resize(m_encryptionKeyLength + m_hashKeyLength);
+      temporary1.resize
+	(static_cast<int> (m_encryptionKeyLength + m_hashKeyLength));
       temporary2.resize(temporary1.length());
       gcry_fast_random_poll();
       err = gcry_kdf_derive(l_passphrase.constData(),
-			    l_passphrase.length(),
+			    static_cast<size_t> (l_passphrase.length()),
 			    GCRY_KDF_PBKDF2,
 			    m_hashAlgorithm,
 			    m_salt.constData(),
-			    m_salt.length(),
+			    static_cast<size_t> (m_salt.length()),
 			    m_iterationCount,
-			    temporary1.length(),
+			    static_cast<size_t> (temporary1.length()),
 			    temporary1.data());
 
       if(err == 0)
 	{
 	  gcry_fast_random_poll();
 	  err = gcry_kdf_derive(temporary1.constData(),
-				temporary1.length(),
+				static_cast<size_t> (temporary1.length()),
 				GCRY_KDF_PBKDF2,
 				m_hashAlgorithm,
 				m_salt.constData(),
-				m_salt.length(),
+				static_cast<size_t> (m_salt.length()),
 				m_iterationCount,
-				temporary2.length(),
+				static_cast<size_t> (temporary2.length()),
 				temporary2.data());
 	}
 
@@ -600,11 +610,13 @@ bool dcrypt::setCipherPassphrase(const QString &passphrase)
 	    {
 	      memcpy
 		(m_encryptionKey,
-		 temporary2.mid(0, m_encryptionKeyLength).constData(),
+		 temporary2.mid(0, static_cast<int> (m_encryptionKeyLength)).
+		 constData(),
 		 m_encryptionKeyLength);
 	      memcpy
 		(m_hashKey,
-		 temporary2.mid(m_encryptionKeyLength).constData(),
+		 temporary2.mid(static_cast<int> (m_encryptionKeyLength)).
+		 constData(),
 		 m_hashKeyLength);
 	    }
 	  else
@@ -859,7 +871,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 	      else
 		gcry_randomize(iv, ivLength, GCRY_STRONG_RANDOM);
 
-	      byteArray.append(iv, ivLength);
+	      byteArray.append(iv, static_cast<int> (ivLength));
 	    }
 	  else
 	    {
@@ -867,7 +879,7 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 		(iv,
 		 byteArray.constData(),
 		 qMin(ivLength, static_cast<size_t> (byteArray.length())));
-	      byteArray.remove(0, ivLength);
+	      byteArray.remove(0, static_cast<int> (ivLength));
 	    }
 
 	  gcry_cipher_reset(m_cipherHandle);
@@ -880,7 +892,8 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 		{
 		  QByteArray buffer(64, '0');
 
-		  gpg_strerror_r(err, buffer.data(), buffer.length());
+		  gpg_strerror_r
+		    (err, buffer.data(), static_cast<size_t> (buffer.length()));
 		  dmisc::logError
 		    (QString("dcrypt::setInitializationVector(): "
 			     "gcry_cipher_setiv() failure (%1).").
@@ -895,7 +908,8 @@ bool dcrypt::setInitializationVector(QByteArray &byteArray)
 		{
 		  QByteArray buffer(64, '0');
 
-		  gpg_strerror_r(err, buffer.data(), buffer.length());
+		  gpg_strerror_r
+		    (err, buffer.data(), static_cast<size_t> (buffer.length()));
 		  dmisc::logError
 		    (QString("dcrypt::setInitializationVector(): "
 			     "gcry_cipher_setctr() failure (%1).").
@@ -940,7 +954,8 @@ size_t dcrypt::encryptionKeyLength(void) const
 
 void dcrypt::setIterationCount(const int iterationCount)
 {
-  m_iterationCount = qBound(1000, iterationCount, 999999999);
+  m_iterationCount = static_cast<unsigned int>
+    (qBound(1000, iterationCount, 999999999));
 }
 
 void dcrypt::setSalt(const QByteArray &salt)
@@ -965,7 +980,7 @@ void dcrypt::setSalt(const QByteArray &salt)
 
       gcry_fast_random_poll();
       gcry_randomize(l_salt.data(),
-		     l_salt.length(),
+		     static_cast<size_t> (l_salt.length()),
 		     GCRY_STRONG_RANDOM);
       m_salt = l_salt;
     }
@@ -983,10 +998,11 @@ QByteArray dcrypt::weakRandomBytes(const size_t size)
   if(size <= 0)
     return QByteArray();
 
-  QByteArray bytes(size, 0);
+  QByteArray bytes(static_cast<int> (size), 0);
 
   gcry_fast_random_poll();
-  gcry_randomize(bytes.data(), bytes.length(), GCRY_WEAK_RANDOM);
+  gcry_randomize
+    (bytes.data(), static_cast<size_t> (bytes.length()), GCRY_WEAK_RANDOM);
   return bytes;
 }
 
@@ -1044,7 +1060,7 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
 	  gcry_md_write
 	    (hd,
 	     byteArray.constData(),
-	     byteArray.length());
+	     static_cast<size_t> (byteArray.length()));
 
 	  unsigned char *buffer = gcry_md_read(hd, m_hashAlgorithm);
 
@@ -1058,10 +1074,10 @@ QByteArray dcrypt::keyedHash(const QByteArray &byteArray, bool *ok) const
 		    *ok = true;
 
 		  hashedArray.clear();
-		  hashedArray.resize(length);
+		  hashedArray.resize(static_cast<int> (length));
 		  memcpy(hashedArray.data(),
 			 buffer,
-			 hashedArray.length());
+			 static_cast<size_t> (hashedArray.length()));
 		}
 	      else
 		{
@@ -1145,12 +1161,12 @@ QByteArray dcrypt::daa(const QByteArray &byteArray, bool *ok)
     }
 
   QByteArray computedHash;
-  QByteArray hash(byteArray.mid(0, length));
+  QByteArray hash(byteArray.mid(0, static_cast<int> (length)));
 
   {
     bool ok = true;
 
-    computedHash = keyedHash(byteArray.mid(length), &ok);
+    computedHash = keyedHash(byteArray.mid(static_cast<int> (length)), &ok);
 
     if(!ok)
       computedHash.clear();
@@ -1158,7 +1174,7 @@ QByteArray dcrypt::daa(const QByteArray &byteArray, bool *ok)
 
   if(!computedHash.isEmpty() &&
      !hash.isEmpty() && dmisc::compareByteArrays(computedHash, hash))
-    return decodedString(byteArray.mid(length), ok);
+    return decodedString(byteArray.mid(static_cast<int> (length)), ok);
   else
     {
       if(ok)

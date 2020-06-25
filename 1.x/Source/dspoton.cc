@@ -114,14 +114,18 @@ void dspoton::share(const QUrl &url,
       if((err = libspoton_save_url(url.
 				   toEncoded(QUrl::StripTrailingSlash).
 				   constData(),
-				   url.toEncoded(QUrl::StripTrailingSlash).
-				   length(),
+				   static_cast<size_t>
+				   (url.toEncoded(QUrl::StripTrailingSlash).
+				    length()),
 				   title.toUtf8().constData(),
-				   title.toUtf8().length(),
+				   static_cast<size_t>
+				   (title.toUtf8().length()),
 				   description.toUtf8().constData(),
-				   description.toUtf8().length(),
+				   static_cast<size_t>
+				   (description.toUtf8().length()),
 				   content.toUtf8().constData(),
-				   content.toUtf8().length(),
+				   static_cast<size_t>
+				   (content.toUtf8().length()),
 				   &libspotonHandle)) != LIBSPOTON_ERROR_NONE)
 	dmisc::logError(QString("dspoton::share(): "
 				"libspoton_save_url() failure (%1).").

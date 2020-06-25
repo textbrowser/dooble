@@ -1675,7 +1675,9 @@ void dsettings::slotClicked(QAbstractButton *button)
 	      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	      salt.resize(ui.saltLengthSpinBox->value());
 	      gcry_fast_random_poll();
-	      gcry_randomize(salt.data(), salt.length(), GCRY_STRONG_RANDOM);
+	      gcry_randomize(salt.data(),
+			     static_cast<size_t> (salt.length()),
+			     GCRY_STRONG_RANDOM);
 	      dmisc::setCipherPassphrase
 		(pass1,
 		 true,

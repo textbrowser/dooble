@@ -112,7 +112,8 @@ void dftp::get(const QUrl &url, const QString &command)
 	  this, SIGNAL(readyRead(void)));
   m_commandSocket->setProxy
     (dmisc::proxyByFunctionAndUrl(DoobleDownloadType::Ftp, m_url));
-  m_commandSocket->connectToHost(m_url.host(), m_url.port(21));
+  m_commandSocket->connectToHost
+    (m_url.host(), static_cast<quint16> (m_url.port(21)));
 }
 
 void dftp::abort(void)
@@ -151,7 +152,8 @@ void dftp::fetchList(const QUrl &url)
 
   m_commandType = ListCommand;
   m_commandSocket->setProxy(dmisc::proxyByUrl(m_url));
-  m_commandSocket->connectToHost(m_url.host(), m_url.port(21));
+  m_commandSocket->connectToHost
+    (m_url.host(), static_cast<quint16> (m_url.port(21)));
 }
 
 void dftp::slotSocketError(QAbstractSocket::SocketError error)
@@ -270,8 +272,8 @@ void dftp::slotCommandReadyRead(void)
 
 	      host = list.value(1) + "." + list.value(2) + "." +
 		list.value(3) + "." + list.value(4);
-	      port =
-		(list.value(5).toUShort() << 8) + list.value(6).toUShort();
+	      port = static_cast<quint16> ((list.value(5).toUShort() << 8) +
+					   list.value(6).toUShort());
 	      url.setHost(host);
 	      url.setScheme("ftp");
 	      m_downloadSocket->abort();
@@ -280,9 +282,11 @@ void dftp::slotCommandReadyRead(void)
 		m_downloadSocket->setProxy(dmisc::proxyByUrl(url));
 	      else
 		m_downloadSocket->setProxy
-		  (dmisc::proxyByFunctionAndUrl(DoobleDownloadType::Ftp, url));
+		  (dmisc::proxyByFunctionAndUrl(DoobleDownloadType::Ftp,
+						url));
 
-	      m_downloadSocket->connectToHost(host, port, QIODevice::ReadOnly);
+	      m_downloadSocket->connectToHost
+		(host, port, QIODevice::ReadOnly);
 	    }
 	}
       else if(bytes.startsWith("230 "))

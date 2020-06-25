@@ -279,8 +279,9 @@ QNetworkProxy dmisc::proxyByUrl(const QUrl &url)
 					"ftpBrowsingProxyHost",
 					"").toString().trimmed());
 	    proxy.setPort
-	      (dooble::s_settings.value("settingsWindow/ftpBrowsingProxyPort",
-					1080).toInt());
+	      (static_cast<quint16>
+	       (dooble::s_settings.value("settingsWindow/ftpBrowsingProxyPort",
+					 1080).toInt()));
 	    proxy.setUser
 	      (dooble::s_settings.value("settingsWindow/"
 					"ftpBrowsingProxyUser",
@@ -310,8 +311,9 @@ QNetworkProxy dmisc::proxyByUrl(const QUrl &url)
 	      (dooble::s_settings.value("settingsWindow/httpBrowsingProxyHost",
 					"").toString().trimmed());
 	    proxy.setPort
-	      (dooble::s_settings.value("settingsWindow/httpBrowsingProxyPort",
-					1080).toInt());
+	      (static_cast<quint16>
+	       (dooble::s_settings.value("settingsWindow/httpBrowsingProxyPort",
+					 1080).toInt()));
 	    proxy.setUser
 	      (dooble::s_settings.value("settingsWindow/httpBrowsingProxyUser",
 					"").toString());
@@ -346,8 +348,9 @@ QNetworkProxy dmisc::proxyByUrl(const QUrl &url)
 			("settingsWindow/i2pBrowsingProxyHost",
 			 "127.0.0.1").toString().trimmed());
       proxy.setPort
-	(dooble::s_settings.value("settingsWindow/i2pBrowsingProxyPort",
-				  4444).toInt());
+	(static_cast<quint16>
+	 (dooble::s_settings.value("settingsWindow/i2pBrowsingProxyPort",
+				   4444).toInt()));
     }
 
   return proxy;
@@ -389,8 +392,9 @@ QNetworkProxy dmisc::proxyByFunctionAndUrl
 						       "").toString().
 			      trimmed());
 	    proxy.setPort
-	      (dooble::s_settings.value("settingsWindow/ftpDownloadProxyPort",
-					1080).toInt());
+	      (static_cast<quint16>
+	       (dooble::s_settings.value("settingsWindow/ftpDownloadProxyPort",
+					 1080).toInt()));
 	    proxy.setUser(dooble::s_settings.value("settingsWindow/"
 						   "ftpDownloadProxyUser",
 						   "").toString());
@@ -432,8 +436,9 @@ QNetworkProxy dmisc::proxyByFunctionAndUrl
 			      ("settingsWindow/httpDownloadProxyHost",
 			       "").toString().trimmed());
 	    proxy.setPort
-	      (dooble::s_settings.value("settingsWindow/httpDownloadProxyPort",
-					1080).toInt());
+	      (static_cast<quint16>
+	       (dooble::s_settings.value("settingsWindow/httpDownloadProxyPort",
+					 1080).toInt()));
 	    proxy.setUser(dooble::s_settings.value
 			  ("settingsWindow/httpDownloadProxyUser",
 			   "").toString());
@@ -474,8 +479,9 @@ QNetworkProxy dmisc::proxyByFunctionAndUrl
 			("settingsWindow/i2pDownloadProxyHost",
 			 "127.0.0.1").toString().trimmed());
       proxy.setPort
-	(dooble::s_settings.value("settingsWindow/i2pDownloadProxyPort",
-				  4444).toInt());
+	(static_cast<quint16>
+	 (dooble::s_settings.value("settingsWindow/i2pDownloadProxyPort",
+				   4444).toInt()));
     }
 
   return proxy;
@@ -778,13 +784,13 @@ QByteArray dmisc::passphraseHash(const QString &passphrase,
 
       if(length > 0)
 	{
-	  QByteArray byteArray(length, 0);
+	  QByteArray byteArray(static_cast<int> (length), 0);
 
 	  gcry_md_hash_buffer
 	    (algorithm,
 	     byteArray.data(),
 	     saltedPassphrase.constData(),
-	     saltedPassphrase.length());
+	     static_cast<size_t> (saltedPassphrase.length()));
 	  hash = byteArray;
 	}
       else
@@ -1126,10 +1132,10 @@ QRect dmisc::balancedGeometry(const QRect &geometry, QWidget *widget)
 #endif
 
       if(rect.width() > available.width())
-	rect.setWidth(0.85 * available.width());
+	rect.setWidth(static_cast<int> (0.85 * available.width()));
 
       if(rect.height() > available.height())
-	rect.setHeight(0.85 * available.height());
+	rect.setHeight(static_cast<int> (0.85 * available.height()));
     }
 
   return rect;
@@ -1586,7 +1592,7 @@ bool dmisc::compareByteArrays(const QByteArray &a, const QByteArray &b)
   QByteArray bytes1;
   QByteArray bytes2;
   int length = qMax(a.length(), b.length());
-  unsigned long rc = 0;
+  int rc = 0;
 
   bytes1 = a.leftJustified(length, 0);
   bytes2 = b.leftJustified(length, 0);
@@ -1597,10 +1603,17 @@ bool dmisc::compareByteArrays(const QByteArray &a, const QByteArray &b)
 
   for(int i = 0; i < length; i++)
     {
+#if QT_VERSION >= 0x050000
       std::bitset<CHAR_BIT * sizeof(unsigned long)>
-	ba1(static_cast<unsigned long> (bytes1.at(i)));
+	ba1(static_cast<unsigned long long int> (bytes1.at(i)));
       std::bitset<CHAR_BIT * sizeof(unsigned long)>
-	ba2(static_cast<unsigned long> (bytes2.at(i)));
+	ba2(static_cast<unsigned long long int> (bytes2.at(i)));
+#else
+      std::bitset<CHAR_BIT * sizeof(unsigned long)>
+        ba1(static_cast<unsigned long int> (bytes1.at(i)));
+      std::bitset<CHAR_BIT * sizeof(unsigned long)>
+        ba2(static_cast<unsigned long int> (bytes2.at(i)));
+#endif
 
       for(size_t j = 0; j < ba1.size(); j++)
 	rc |= ba1[j] ^ ba2[j];
@@ -1966,7 +1979,7 @@ void dmisc::initializeBlockedHosts(void)
 
       while((rc = file.readLine(line.data(), line.length())) > 0)
 	{
-	  QString str(line.mid(0, rc).constData());
+	  QString str(line.mid(0, static_cast<int> (rc)).constData());
 
 	  str = str.trimmed();
 

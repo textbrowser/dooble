@@ -528,12 +528,12 @@ void dview::load(const QUrl &url)
 
   if(scheme.startsWith("dooble-ssl-"))
     {
-      scheme = scheme.mid(qstrlen("dooble-ssl-"));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl-")));
       m_url.setScheme(scheme);
     }
   else if(scheme.startsWith("dooble-"))
     {
-      scheme = scheme.mid(qstrlen("dooble-"));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-")));
       m_url.setScheme(scheme);
     }
 
@@ -670,12 +670,12 @@ void dview::slotUrlChanged(const QUrl &url)
 
   if(scheme.startsWith("dooble-ssl-"))
     {
-      scheme = scheme.mid(qstrlen("dooble-ssl-"));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-ssl-")));
       m_url.setScheme(scheme);
     }
   else if(scheme.startsWith("dooble-"))
     {
-      scheme = scheme.mid(qstrlen("dooble-"));
+      scheme = scheme.mid(static_cast<int> (qstrlen("dooble-")));
       m_url.setScheme(scheme);
     }
   else if(scheme == "gopher" || scheme == "http" || scheme == "https")
@@ -1029,7 +1029,8 @@ void dview::slotHandleUnsupportedContent(QNetworkReply *reply)
 	  if(fileName.contains("filename="))
 	    {
 	      fileName = fileName.mid
-		(fileName.indexOf("filename=") + qstrlen("filename="));
+		(fileName.indexOf("filename=") +
+		 static_cast<int> (qstrlen("filename=")));
 
 	      if(fileName.contains(";"))
 		fileName = fileName.remove(0, fileName.indexOf(';'));

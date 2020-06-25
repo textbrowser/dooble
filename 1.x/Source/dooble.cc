@@ -3904,10 +3904,10 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 
 	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
-	      (scheme.mid(qstrlen("dooble-ssl-")));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
 	  else if(scheme.startsWith("dooble-"))
 	    url.setScheme
-	      (scheme.mid(qstrlen("dooble-")));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-"))));
 
 	  title = dmisc::elidedTitleText(title);
 
@@ -3941,10 +3941,10 @@ void dooble::prepareNavigationButtonMenus(dview *p, QMenu *menu)
 
 	  if(scheme.startsWith("dooble-ssl-"))
 	    url.setScheme
-	      (scheme.mid(qstrlen("dooble-ssl-")));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-ssl-"))));
 	  else if(scheme.startsWith("dooble-"))
 	    url.setScheme
-	      (scheme.mid(qstrlen("dooble-")));
+	      (scheme.mid(static_cast<int> (qstrlen("dooble-"))));
 
 	  if(title.isEmpty())
 	    title = url.toString(QUrl::StripTrailingSlash);
@@ -7455,8 +7455,10 @@ void dooble::s_makeCrashFile(void)
       str.append(QDir::separator());
       str.append(".crashed");
       s_crashFileName = new char[str.length() + 1];
-      memset(s_crashFileName, 0, str.length() + 1);
-      strncpy(s_crashFileName, str.toStdString().c_str(), str.length());
+      memset(s_crashFileName, 0, static_cast<size_t> (str.length() + 1));
+      strncpy(s_crashFileName,
+	      str.toStdString().c_str(),
+	      static_cast<size_t> (str.length()));
     }
 }
 
@@ -8213,7 +8215,7 @@ void dooble::slotShowBlockedHosts(void)
 
       while((rc = file.readLine(line.data(), line.length())) > 0)
 	{
-	  QString str(line.mid(0, rc).constData());
+	  QString str(line.mid(0, static_cast<int> (rc)).constData());
 
 	  str = str.trimmed();
 	  s_blockedHostsUi.textEdit->append(str);

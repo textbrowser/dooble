@@ -43,7 +43,7 @@ class ddownloadprompt: public QDialog
       MultipleChoice
     };
 
-  Q_ENUMS(DialogType);
+  Q_ENUMS(DialogType)
 
  public:
   static const int SINGLE_CHOICE = 1;
