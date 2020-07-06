@@ -58,5 +58,5 @@ cp -p ./dooble.d/2.x/dooble.desktop dooble-debian.d/usr/share/applications/.
 cp -pr ./dooble.d/2.x/DEBIAN dooble-debian.d/.
 cp -r /opt/dooble dooble-debian.d/opt/.
 cp ./dooble.d/2.x/dooble.sh dooble-debian.d/usr/bin/dooble
-fakeroot dpkg-deb --build dooble-debian.d Dooble-2020.05.05_amd64.deb
-debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2020.05.05_amd64.deb
+fakeroot dpkg-deb --build dooble-debian.d Dooble-2020.07.07_amd64.deb
+debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2020.07.07_amd64.deb
