@@ -180,7 +180,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 
 void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 {
-  QMenu *menu = m_page->createStandardContextMenu();
+  auto *menu = m_page->createStandardContextMenu();
 
   if(!menu)
     menu = new QMenu(this);
@@ -353,7 +353,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
       menu->addSeparator();
 
       QList<QAction *> actions(dooble::s_search_engines_window->actions());
-      QMenu *sub_menu = menu->addMenu("Search Selected Text");
+      auto *sub_menu = menu->addMenu("Search Selected Text");
 
       if(!actions.isEmpty() && !selectedText().isEmpty())
 	{
@@ -361,10 +361,10 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 
 	  for(auto i : actions)
 	    {
-	      QAction *action = sub_menu->addAction(i->icon(),
-						    i->text(),
-						    this,
-						    SLOT(slot_search(void)));
+	      auto *action = sub_menu->addAction(i->icon(),
+						 i->text(),
+						 this,
+						 SLOT(slot_search(void)));
 
 	      action->setProperty("selected_text", selectedText());
 	      action->setProperty("url", i->property("url"));

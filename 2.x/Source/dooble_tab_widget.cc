@@ -228,7 +228,7 @@ bool dooble_tab_widget::is_private(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QWidget *parent = parentWidget();
+  auto *parent = parentWidget();
 
   do
     {
@@ -277,7 +277,7 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
 
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 
-  QLabel *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(!label)
     {
@@ -398,7 +398,7 @@ void dooble_tab_widget::slot_load_finished(void)
 
   if(label)
     {
-      QMovie *movie = label->movie();
+      auto *movie = label->movie();
 
       if(movie)
 	{
@@ -447,7 +447,7 @@ void dooble_tab_widget::slot_load_started(void)
       m_tab_bar->setTabButton(index, side, label);
     }
 
-  QMovie *movie = label->movie();
+  auto *movie = label->movie();
 
   if(!movie)
     {

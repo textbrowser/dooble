@@ -1254,7 +1254,7 @@ void dooble_settings::restore(bool read_database)
 
     for(int i = 0; i < m_ui.dictionaries->count(); i++)
       {
-	QListWidgetItem *item = m_ui.dictionaries->item(i);
+	auto *item = m_ui.dictionaries->item(i);
 
 	if(!item)
 	  continue;
@@ -1794,7 +1794,7 @@ void dooble_settings::slot_apply(void)
 
     for(int i = 0; i < m_ui.dictionaries->count(); i++)
       {
-	QListWidgetItem *item = m_ui.dictionaries->item(i);
+	auto *item = m_ui.dictionaries->item(i);
 
 	if(!item)
 	  continue;

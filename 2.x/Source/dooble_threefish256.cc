@@ -779,7 +779,7 @@ void dooble_threefish256::set_tweak(const QByteArray &tweak, bool *ok)
 
 void dooble_threefish256::test1(void)
 {
-  dooble_threefish256 *s = new (std::nothrow) dooble_threefish256
+  auto *s = new (std::nothrow) dooble_threefish256
     (dooble_random::random_bytes(32));
 
   if(!s)
@@ -799,7 +799,7 @@ void dooble_threefish256::test1(void)
 
 void dooble_threefish256::test2(void)
 {
-  dooble_threefish256 *s = new (std::nothrow) dooble_threefish256
+  auto *s = new (std::nothrow) dooble_threefish256
     (dooble_random::random_bytes(32));
 
   if(!s)
@@ -824,7 +824,7 @@ void dooble_threefish256::test2(void)
 
 void dooble_threefish256::test3(void)
 {
-  dooble_threefish256 *s = new (std::nothrow) dooble_threefish256
+  auto *s = new (std::nothrow) dooble_threefish256
     (dooble_random::random_bytes(32));
 
   if(!s)

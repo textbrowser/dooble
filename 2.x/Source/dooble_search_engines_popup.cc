@@ -152,7 +152,7 @@ void dooble_search_engines_popup::add_search_engine
 
 	if(query.exec())
 	  {
-	    QAction *action = m_actions.value(title);
+	    auto *action = m_actions.value(title);
 
 	    if(action)
 	      {
@@ -265,7 +265,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 
   for(auto i : list)
     {
-      QStandardItem *item = i ? m_model->item(i->row(), 0) : nullptr;
+      auto *item = i ? m_model->item(i->row(), 0) : nullptr;
 
       if(item)
 	item->setIcon(dooble_favicons::icon(icon));
@@ -323,7 +323,7 @@ void dooble_search_engines_popup::slot_add_predefined(void)
 
   for(int i = 0; i < m_ui.predefined->count(); i++)
     {
-      QListWidgetItem *item = m_ui.predefined->item(i);
+      auto *item = m_ui.predefined->item(i);
 
       if(item && item->checkState() == Qt::Checked)
 	add_search_engine
@@ -572,8 +572,8 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
       m_ui.view->setRowHidden(i, false);
     else
       {
-	QStandardItem *item1 = model->item(i, 0);
-	QStandardItem *item2 = model->item(i, 1);
+	auto *item1 = model->item(i, 0);
+	auto *item2 = model->item(i, 1);
 
 	if(!item1 || !item2)
 	  m_ui.view->setRowHidden(i, false);
