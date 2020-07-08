@@ -1263,8 +1263,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
   for(int i = 0; i < m_ui.session_rejections->rowCount(); i++)
     {
-      QTableWidgetItem *item =
-	m_ui.session_rejections->item(i, 1); // Origin URL
+      auto *item = m_ui.session_rejections->item(i, 1); // Origin URL
 
       if(item)
 	{
@@ -1300,8 +1299,7 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 
   for(int i = 0; i < list.size(); i++)
     {
-      QTableWidgetItem *item =
-	m_ui.session_rejections->item(i, 1); // Origin URL
+      auto *item = m_ui.session_rejections->item(i, 1); // Origin URL
 
       if(item)
 	{
@@ -1327,7 +1325,7 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
       m_ui.table->setRowHidden(i, false);
     else
       {
-	QTableWidgetItem *item = m_ui.table->item(i, 1);
+	auto *item = m_ui.table->item(i, 1);
 
 	if(!item)
 	  {

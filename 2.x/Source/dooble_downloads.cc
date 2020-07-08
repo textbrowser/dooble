@@ -466,7 +466,7 @@ void dooble_downloads::slot_copy_download_location(void)
   if(!action)
     return;
 
-  QClipboard *clipboard = QApplication::clipboard();
+  auto *clipboard = QApplication::clipboard();
 
   if(clipboard)
     clipboard->setText(action->property("url").toUrl().toString());
@@ -754,7 +754,7 @@ void dooble_downloads::slot_populate(void)
 
 void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 {
-  foreach(dooble_downloads_item *item, findChildren<dooble_downloads_item *> ())
+  foreach(auto *item, findChildren<dooble_downloads_item *> ())
     if(item)
       if(item->url() == url)
 	{
@@ -767,7 +767,7 @@ void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 	      {
 		auto *d = qobject_cast<dooble *> (i);
 
-		foreach(dooble_page *page, d->findChildren<dooble_page *> ())
+		foreach(auto *page, d->findChildren<dooble_page *> ())
 		  if(page)
 		    {
 		      page->download(file_name, url);

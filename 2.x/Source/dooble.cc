@@ -1389,7 +1389,7 @@ void dooble::prepare_standard_menus(void)
   QAction *action = nullptr;
   QMenu *menu = nullptr;
   QString icon_set(dooble_settings::setting("icon_set").toString());
-  dooble_page *page = current_page();
+  auto *page = current_page();
 
   /*
   ** File Menu
@@ -1670,7 +1670,7 @@ void dooble::prepare_tab_shortcuts(void)
 
   for(int i = 0; i < qMin(m_ui.tab->count(), 10); i++)
     {
-      QWidget *widget = m_ui.tab->widget(i);
+      auto *widget = m_ui.tab->widget(i);
 
       if(!widget)
 	continue;
@@ -1734,7 +1734,7 @@ void dooble::print_current_page(void)
 
 void dooble::print_preview(QPrinter *printer)
 {
-  dooble_page *page = current_page();
+  auto *page = current_page();
 
   if(!page || !printer)
     return;
@@ -2500,7 +2500,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 #ifdef Q_OS_MAC
 void dooble::slot_enable_shortcut(void)
 {
-  QTimer *timer = qobject_cast<QTimer *> (sender());
+  auto *timer = qobject_cast<QTimer *> (sender());
 
   if(!timer)
     return;
@@ -2553,7 +2553,7 @@ void dooble::slot_history_action_triggered(void)
   if(!action)
     return;
 
-  dooble_page *page = current_page();
+  auto *page = current_page();
 
   if(page)
     page->load(action->data().toUrl());
@@ -2583,7 +2583,7 @@ void dooble::slot_icon_changed(const QIcon &icon)
 
 void dooble::slot_inject_custom_css(void)
 {
-  dooble_page *page = current_page();
+  auto *page = current_page();
 
   if(!page)
     return;
@@ -2747,7 +2747,7 @@ void dooble::slot_print_preview(void)
   if(m_print_preview)
     return;
 
-  dooble_page *page = current_page();
+  auto *page = current_page();
 
   if(!page)
     return;
@@ -2871,14 +2871,14 @@ void dooble::slot_settings_applied(void)
 #ifdef Q_OS_MAC
 void dooble::slot_shortcut_activated(void)
 {
-  QShortcut *shortcut = qobject_cast<QShortcut *> (sender());
+  auto *shortcut = qobject_cast<QShortcut *> (sender());
 
   if(!shortcut)
     return;
 
   shortcut->setEnabled(false);
 
-  QTimer *timer = new QTimer(this);
+  auto *timer = new QTimer(this);
 
   connect(timer,
 	  SIGNAL(timeout(void)),

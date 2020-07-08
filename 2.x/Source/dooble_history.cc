@@ -435,7 +435,7 @@ void dooble_history::purge_favorites(void)
 {
   for(int i = 0; i < m_favorites_model->rowCount(); i++)
     {
-      QStandardItem *item = m_favorites_model->item(i, 1);
+      auto *item = m_favorites_model->item(i, 1);
 
       if(!item)
 	continue;
@@ -498,7 +498,7 @@ void dooble_history::purge_history(void)
 
     for(int i = 0; i < m_favorites_model->rowCount(); i++)
       {
-	QStandardItem *item = m_favorites_model->item(i, 1);
+	auto *item = m_favorites_model->item(i, 1);
 
 	if(!item)
 	  continue;
@@ -1146,7 +1146,7 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
     }
   else
     {
-      QStandardItem *item = list.at(0);
+      auto *item = list.at(0);
 
       if(!item)
 	return;

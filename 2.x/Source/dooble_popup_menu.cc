@@ -57,7 +57,7 @@ dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
 	  this,
 	  SIGNAL(authenticate(void)));
 
-  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+  foreach(auto *tool_button, findChildren<QToolButton *> ())
     {
       connect(tool_button,
 	      SIGNAL(clicked(void)),
@@ -93,7 +93,7 @@ dooble *dooble_popup_menu::find_parent_dooble(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QWidget *parent = parentWidget();
+  auto *parent = parentWidget();
 
   do
     {
@@ -158,7 +158,7 @@ void dooble_popup_menu::prepare_icons(void)
   int preferred_height = 50;
   int preferred_width = 50;
 
-  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+  foreach(auto *tool_button, findChildren<QToolButton *> ())
     {
       tool_button->setIconSize(QSize(48, 48));
       preferred_height = qMax
@@ -167,7 +167,7 @@ void dooble_popup_menu::prepare_icons(void)
 	(preferred_width, tool_button->sizeHint().width());
     }
 
-  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+  foreach(auto *tool_button, findChildren<QToolButton *> ())
     if(m_ui.zoom_in != tool_button &&
        m_ui.zoom_out != tool_button &&
        m_ui.zoom_reset != tool_button)
@@ -207,7 +207,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     (new dooble(QUrl(), true))->show();
   else if(m_ui.new_tab == sender())
     {
-      dooble *d = find_parent_dooble();
+      auto *d = find_parent_dooble();
 
       if(d)
 	d->new_page(QUrl(), d->is_private());
@@ -218,7 +218,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
     (new dooble(QUrl(), false))->show();
   else if(m_ui.print == sender())
     {
-      dooble *d = find_parent_dooble();
+      auto *d = find_parent_dooble();
 
       if(d)
 	d->print_current_page();

@@ -166,7 +166,7 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
 	return;
       }
 
-  QStandardItem *item = new QStandardItem(icon, url.toString());
+  auto *item = new QStandardItem(icon, url.toString());
 
   item->setToolTip(url.toString());
   s_model->insertRow(0, item);

@@ -60,8 +60,8 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
 
-  QLabel *label = new QLabel();
   QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto *label = new QLabel();
 
   label->setPixmap
     (QIcon::fromTheme("view-private",
@@ -165,7 +165,7 @@ void dooble_cookies_window::delete_top_level_items
       m_child_items.remove(item->text(0));
       m_top_level_items.remove(item->text(0));
 
-      foreach(QTreeWidgetItem *i, item->takeChildren())
+      foreach(auto *i, item->takeChildren())
 	if(i)
 	  {
 	    QList<QNetworkCookie> cookie
@@ -295,7 +295,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 
   if(hash.isEmpty())
     {
-      QTreeWidgetItem *item = m_top_level_items.value(cookie.domain());
+      auto *item = m_top_level_items.value(cookie.domain());
 
       if(item && item->checkState(0) != Qt::Checked)
 	{
@@ -307,8 +307,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
       return;
     }
 
-  QTreeWidgetItem *item = hash.value
-    (dooble_cookies::identifier(cookie), nullptr);
+  auto *item = hash.value(dooble_cookies::identifier(cookie), nullptr);
 
   if(item && item->parent())
     delete item->parent()->takeChild(item->parent()->indexOfChild(item));
@@ -348,7 +347,7 @@ void dooble_cookies_window::slot_cookies_added
       if(!m_top_level_items.contains(cookie.domain()))
 	{
 	  QString text(m_ui.domain_filter->text().toLower().trimmed());
-	  QTreeWidgetItem *item = new QTreeWidgetItem
+	  auto *item = new QTreeWidgetItem
 	    (m_ui.tree, QStringList() << cookie.domain());
 
 	  if(is_favorite)
@@ -375,7 +374,7 @@ void dooble_cookies_window::slot_cookies_added
 
 	  if(!hash.contains(dooble_cookies::identifier(cookie)))
 	    {
-	      QTreeWidgetItem *item = new QTreeWidgetItem
+	      auto *item = new QTreeWidgetItem
 		(m_top_level_items[cookie.domain()],
 		 QStringList() << "" << cookie.name());
 
@@ -433,7 +432,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 	  m_child_items.remove(item->text(0));
 	  m_top_level_items.remove(item->text(0));
 
-	  foreach(QTreeWidgetItem *i, item->takeChildren())
+	  foreach(auto *i, item->takeChildren())
 	    if(i)
 	      {
 		QList<QNetworkCookie> cookie
@@ -522,7 +521,7 @@ void dooble_cookies_window::slot_delete_shown(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+      auto *item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->isHidden()))
 	list << item;
@@ -540,7 +539,7 @@ void dooble_cookies_window::slot_delete_unchecked(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+      auto *item = m_ui.tree->topLevelItem(i);
 
       if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
 	list << item;
@@ -558,7 +557,7 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+      auto *item = m_ui.tree->topLevelItem(i);
 
       if(!item)
 	continue;
@@ -635,7 +634,7 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 
 void dooble_cookies_window::slot_item_selection_changed(void)
 {
-  QTreeWidgetItem *item = m_ui.tree->currentItem();
+  auto *item = m_ui.tree->currentItem();
 
   if(!item)
     {
@@ -715,7 +714,7 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+      auto *item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->checkState(0) == Qt::Checked))
 	list << item;
@@ -745,7 +744,7 @@ void dooble_cookies_window::slot_toggle_shown(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      QTreeWidgetItem *item = m_ui.tree->topLevelItem(i);
+      auto *item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->isHidden()))
 	item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);

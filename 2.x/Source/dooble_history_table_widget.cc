@@ -82,7 +82,7 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
 
   for(int i = a; i <= b; i++)
     {
-      QTableWidgetItem *item = this->item(i, 1); // Title
+      auto *item = this->item(i, 1); // Title
 
       if(!item)
 	continue;

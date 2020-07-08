@@ -387,7 +387,7 @@ void dooble_cookies::slot_populate(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QString database_name(dooble_database_utilities::database_name());
-  QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
+  auto *profile = QWebEngineProfile::defaultProfile();
   int count = 0;
 
   disconnect(profile->cookieStore(),

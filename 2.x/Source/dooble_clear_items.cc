@@ -67,7 +67,7 @@ dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 	  dooble::s_application,
 	  SIGNAL(history_cleared(void)));
 
-  foreach(QCheckBox *check_box, findChildren<QCheckBox *> ())
+  foreach(auto *check_box, findChildren<QCheckBox *> ())
     {
       check_box->setChecked
 	(dooble_settings::setting(QString("dooble_clear_items_%1").

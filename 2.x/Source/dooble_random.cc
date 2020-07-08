@@ -75,7 +75,7 @@ QByteArray dooble_random::random_bytes(int length)
 
   if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, PROV_RSA_FULL, NULL))
     {
-      BYTE *data = new BYTE[static_cast<size_t> (length)];
+      auto *data = new BYTE[static_cast<size_t> (length)];
 
       if(CryptGenRandom(h_crypt_prov, static_cast<size_t> (length), data))
 	/*

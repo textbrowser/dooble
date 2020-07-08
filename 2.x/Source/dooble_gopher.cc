@@ -44,8 +44,7 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 
   m_request = request;
 
-  dooble_gopher_implementation *gopher_implementation = new
-    dooble_gopher_implementation
+  auto *gopher_implementation = new dooble_gopher_implementation
     (m_request->requestUrl(),
      qobject_cast<dooble_web_engine_view *> (parent()),
      m_request);

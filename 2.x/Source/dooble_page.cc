@@ -95,7 +95,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
     m_view->resize(parent->size());
   else
     {
-      dooble *d = find_parent_dooble();
+      auto *d = find_parent_dooble();
 
       if(d)
 	m_view->resize(d->size());
@@ -445,7 +445,7 @@ dooble *dooble_page::find_parent_dooble(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QWidget *parent = parentWidget();
+  auto *parent = parentWidget();
 
   do
     {
@@ -486,7 +486,7 @@ void dooble_page::download(const QString &file_name, const QUrl &url)
 void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
 				     bool state)
 {
-  QWebEngineSettings *settings = m_view->settings();
+  auto *settings = m_view->settings();
 
   if(settings)
     settings->setAttribute(setting, state);
@@ -972,7 +972,7 @@ void dooble_page::prepare_style_sheets(void)
 void dooble_page::prepare_tool_buttons(void)
 {
 #ifdef Q_OS_MACOS
-  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+  foreach(auto *tool_button, findChildren<QToolButton *> ())
     if(m_ui.find_match_case == tool_button)
       {
       }
@@ -996,7 +996,7 @@ void dooble_page::prepare_tool_buttons(void)
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
 #else
-  foreach(QToolButton *tool_button, findChildren<QToolButton *> ())
+  foreach(auto *tool_button, findChildren<QToolButton *> ())
     if(m_ui.backward == tool_button ||
        m_ui.forward == tool_button)
       tool_button->setStyleSheet
@@ -1174,7 +1174,7 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
   if(m_full_screen_action)
     {
-      dooble *d = find_parent_dooble();
+      auto *d = find_parent_dooble();
 
       if(d)
 	{
@@ -1290,7 +1290,7 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 
   ui.setupUi(&dialog);
 
-  foreach(QWidget *widget, ui.button_box->findChildren<QWidget *> ())
+  foreach(auto *widget, ui.button_box->findChildren<QWidget *> ())
     widget->setMinimumSize(QSize(125, 30));
 
   ui.label->setText
@@ -1736,7 +1736,7 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 	  if(view)
 	    {
-	      QAction *action = menu.addAction
+	      auto *action = menu.addAction
 		(font_metrics.elidedText(tr("Show %1").arg(view->url().
 							   toString()) + "...",
 					 Qt::ElideMiddle,
@@ -2007,7 +2007,7 @@ void dooble_page::slot_proxy_authentication_required
 
   ui.setupUi(&dialog);
 
-  foreach(QWidget *widget, ui.button_box->findChildren<QWidget *> ())
+  foreach(auto *widget, ui.button_box->findChildren<QWidget *> ())
     widget->setMinimumSize(QSize(125, 30));
 
   ui.label->setText(tr("The proxy <b>%1</b> is requesting credentials.").
