@@ -215,6 +215,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+                          -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
@@ -234,6 +235,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+                          -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
@@ -256,6 +258,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+                          -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
