@@ -210,11 +210,15 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
+                          -Wformat=2 \
+                          -Wformat-overflow=2 \
+                          -Wformat-truncation=2 \
                           -Wl,-z,relro \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+                          -Wundef \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
@@ -231,10 +235,14 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
+                          -Wformat=2 \
+                          -Wformat-overflow=2 \
+                          -Wformat-truncation=2 \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+                          -Wundef \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
@@ -252,12 +260,16 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
+                          -Wformat-overflow=2 \
+                          -Wformat-truncation=2 \
+                          -Wformat=2 \
                           -Wl,-z,relro \
                           -Wno-deprecated-copy \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+                          -Wundef \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
