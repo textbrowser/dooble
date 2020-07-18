@@ -45,6 +45,7 @@ class dooble_downloads_item: public QWidget
 
  public:
   dooble_downloads_item(QWebEngineDownloadItem *download,
+			const bool is_private,
 			qintptr oid,
 			QWidget *parent);
   dooble_downloads_item(const QString &download_path,
@@ -70,6 +71,7 @@ class dooble_downloads_item: public QWidget
   QTimer m_stalled_timer;
   QUrl m_url;
   Ui_dooble_downloads_item m_ui;
+  bool m_is_private;
   qint64 m_last_bytes_received;
   qint64 m_rate;
   qintptr m_oid;

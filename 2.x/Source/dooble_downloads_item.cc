@@ -38,9 +38,13 @@
 #include "dooble_ui_utilities.h"
 
 dooble_downloads_item::dooble_downloads_item
-(QWebEngineDownloadItem *download, qintptr oid, QWidget *parent):QWidget(parent)
+(QWebEngineDownloadItem *download,
+ const bool is_private,
+ qintptr oid,
+ QWidget *parent):QWidget(parent)
 {
   m_download = download;
+  m_is_private = is_private;
   m_last_bytes_received = 0;
   m_last_time = QTime::currentTime();
   m_oid = oid;
@@ -142,6 +146,7 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 {
   m_download_path = download_path;
   m_file_name = file_name;
+  m_is_private = false;
   m_last_bytes_received = 0;
   m_oid = oid;
   m_rate = 0;
@@ -238,7 +243,9 @@ void dooble_downloads_item::prepare_icons(void)
 
 void dooble_downloads_item::record(void)
 {
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     m_is_private)
     return;
 
   QString database_name(dooble_database_utilities::database_name());
@@ -332,7 +339,9 @@ void dooble_downloads_item::record(void)
 
 void dooble_downloads_item::record_information(void)
 {
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     m_is_private)
     return;
 
   QString database_name(dooble_database_utilities::database_name());
@@ -350,8 +359,8 @@ void dooble_downloads_item::record_information(void)
 	QString information(m_ui.information->text());
 	QSqlQuery query(db);
 
-	query.prepare("UPDATE dooble_downloads SET information = ? "
-		      "WHERE OID = ?");
+	query.prepare
+	  ("UPDATE dooble_downloads SET information = ? WHERE OID = ?");
 	bytes = dooble::s_cryptography->encrypt_then_mac(information.toUtf8());
 
 	if(!bytes.isEmpty())

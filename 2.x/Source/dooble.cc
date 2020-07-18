@@ -151,6 +151,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
       m_cookies = new dooble_cookies(m_is_private, this);
       m_cookies_window = new dooble_cookies_window(m_is_private, this);
       m_cookies_window->setCookies(m_cookies);
+      m_downloads = new dooble_downloads(m_is_private, this);
       m_web_engine_profile = new QWebEngineProfile(this);
       prepare_private_web_engine_profile_settings();
       connect(m_cookies,
@@ -746,7 +747,7 @@ void dooble::initialize_static_members(void)
 
   if(!s_downloads)
     {
-      s_downloads = new dooble_downloads();
+      s_downloads = new dooble_downloads(false, nullptr);
       connect(s_downloads,
 	      SIGNAL(populated(void)),
 	      this,

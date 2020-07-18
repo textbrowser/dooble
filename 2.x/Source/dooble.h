@@ -125,6 +125,7 @@ class dooble: public QMainWindow
   QPointer<QWebEngineProfile> m_web_engine_profile;
   QPointer<dooble_cookies> m_cookies;
   QPointer<dooble_cookies_window> m_cookies_window;
+  QPointer<dooble_downloads> m_downloads;
   QTimer m_floating_digital_clock_timer;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;

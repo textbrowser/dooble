@@ -42,7 +42,7 @@ class dooble_downloads: public QMainWindow
   Q_OBJECT
 
  public:
-  dooble_downloads(void);
+  dooble_downloads(const bool is_private, QWidget *parent);
   QString download_path(void) const;
   bool contains(QWebEngineDownloadItem *download) const;
   bool has_downloads_for_profile(QWebEngineProfile *profile) const;
@@ -66,6 +66,7 @@ class dooble_downloads: public QMainWindow
   QTimer m_download_path_inspection_timer;
   QTimer m_search_timer;
   Ui_dooble_downloads m_ui;
+  bool m_is_private;
   void delete_selected(void);
   void remove_entry(qintptr oid);
   void save_settings(void);

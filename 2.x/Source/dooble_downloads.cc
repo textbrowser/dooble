@@ -41,9 +41,11 @@
 #include "dooble_downloads_item.h"
 #include "dooble_page.h"
 
-dooble_downloads::dooble_downloads(void):QMainWindow()
+dooble_downloads::dooble_downloads(const bool is_private, QWidget *parent):
+  QMainWindow(parent)
 {
   m_download_path_inspection_timer.start(2500);
+  m_is_private = is_private;
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -320,7 +322,8 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	}
     }
 
-  auto *downloads_item = new dooble_downloads_item(download, index, this);
+  auto *downloads_item = new dooble_downloads_item
+    (download, m_is_private, index, this);
 
   connect(downloads_item,
 	  SIGNAL(finished(void)),
