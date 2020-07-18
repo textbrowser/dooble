@@ -1642,15 +1642,15 @@ void dooble::prepare_tab_icons(void)
       if(!main_window)
 	continue;
 
+      if(m_downloads == main_window || main_window == s_downloads)
+	m_ui.tab->setTabIcon
+	  (i, QIcon::fromTheme("folder-download",
+			       QIcon(QString(":/%1/36/downloads.png").
+				     arg(icon_set))));
       if(main_window == s_accepted_or_blocked_domains)
 	m_ui.tab->setTabIcon
 	  (i, QIcon::fromTheme("process-blocked",
 			       QIcon(QString(":/%1/36/blocked_domains.png").
-				     arg(icon_set))));
-      else if(main_window == s_downloads)
-	m_ui.tab->setTabIcon
-	  (i, QIcon::fromTheme("folder-download",
-			       QIcon(QString(":/%1/36/downloads.png").
 				     arg(icon_set))));
       else if(main_window == s_history_window)
 	m_ui.tab->setTabIcon
@@ -2144,6 +2144,9 @@ void dooble::slot_application_locked(bool state, dooble *d)
   if(m_cookies_window)
     m_cookies_window->close();
 
+  if(m_downloads)
+    m_downloads->close();
+
   s_about->close();
   s_accepted_or_blocked_domains->close();
   s_certificate_exceptions->close();
@@ -2448,7 +2451,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
   ** WebEngine profiles.
   */
 
-  if(!m_is_private)
+  if(!m_downloads)
     {
       if(download &&
 	 download->state() != QWebEngineDownloadItem::DownloadInProgress)
@@ -2462,7 +2465,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   if(!download)
     return;
-  else if(s_downloads->contains(download))
+  else if(m_downloads->contains(download))
     {
       /*
       ** Do not cancel the download.
