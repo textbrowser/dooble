@@ -462,6 +462,10 @@ void dooble::closeEvent(QCloseEvent *event)
       }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(m_downloads)
+    m_downloads->abort();
+
   s_accepted_or_blocked_domains->abort();
   s_cookies_window->close();
   s_downloads->abort();
