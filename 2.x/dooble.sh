@@ -2,7 +2,6 @@
 
 export AA_ENABLEHIGHDPISCALING=1
 export AA_USEHIGHDPIPIXMAPS=1
-export LD_LIBRARY_PATH=/opt/dooble/Lib
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 # Disable https://en.wikipedia.org/wiki/MIT-SHM.
@@ -15,6 +14,7 @@ then
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
 then
+    export LD_LIBRARY_PATH=/opt/dooble/Lib
     cd /opt/dooble && exec ./Dooble --disable-reading-from-canvas "$@"
     exit $?
 else
