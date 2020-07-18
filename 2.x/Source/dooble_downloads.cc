@@ -120,6 +120,11 @@ bool dooble_downloads::is_finished(void) const
   return true;
 }
 
+bool dooble_downloads::is_private(void) const
+{
+  return m_is_private;
+}
+
 void dooble_downloads::abort(void)
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
@@ -325,7 +330,6 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
     {
       m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
       m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
-      m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
       m_ui.table->setRowHeight(m_ui.table->rowCount(), 100);
       m_ui.table->scrollToBottom();
     }
@@ -723,7 +727,6 @@ void dooble_downloads::slot_populate(void)
 		      this,
 		      SLOT(slot_reload(const QString &, const QUrl &)));
 	      m_ui.table->setCellWidget(row, 0, downloads_item);
-	      m_ui.table->resizeRowToContents(row);
 	      m_ui.table->setRowHeight(row, 100);
 	      row += 1;
 	      total_rows += 1;
@@ -736,7 +739,6 @@ void dooble_downloads::slot_populate(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  m_ui.table->resizeRowsToContents();
   QApplication::restoreOverrideCursor();
   emit populated();
   slot_search_timer_timeout();

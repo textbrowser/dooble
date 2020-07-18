@@ -32,6 +32,7 @@
 
 #include "dooble.h"
 #include "dooble_application.h"
+#include "dooble_downloads.h"
 #include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
@@ -626,10 +627,13 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   webgl_action->setProperty("point", point);
 
   auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  dooble_downloads *downloads = nullptr;
   dooble_page *page = nullptr;
 
   if(tab_widget)
     {
+      downloads = qobject_cast<dooble_downloads *>
+	(tab_widget->widget(tabAt(point)));
       page = qobject_cast<dooble_page *> (tab_widget->widget(tabAt(point)));
 
       if(page)
@@ -704,7 +708,12 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action = menu.addAction(tr("&Decouple..."),
 			  this,
 			  SLOT(slot_decouple_tab(void)));
-  action->setEnabled(count() > 1 && !page && tab_at > -1);
+
+  if(downloads)
+    action->setEnabled(count() > 1 && !downloads->is_private() && tab_at > -1);
+  else
+    action->setEnabled(count() > 1 && !page && tab_at > -1);
+
   action->setProperty("point", point);
   menu.addSeparator();
   action = menu.addAction(tr("&Hide Location Frame"),

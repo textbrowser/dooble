@@ -249,7 +249,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fwrapv \
                           -mtune=generic \
                           -pedantic \
-                          -std=c++11
+                          -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
 } else {
@@ -277,7 +277,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -mtune=generic \
                           -pedantic \
                           -pie \
-                          -std=c++11
+                          -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
 }
 

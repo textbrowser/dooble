@@ -297,44 +297,38 @@ dooble::~dooble()
 
 bool dooble::can_exit(void)
 {
-  if(s_downloads->is_finished())
+  if(m_downloads && m_downloads->is_finished())
     return true;
+  else if(s_downloads->is_finished())
+    return true;
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
+  if(m_downloads && !m_downloads->is_finished())
+    mb.setText
+      (tr("The private window that is about to be closed has "
+	  "active downloads. If it's closed, the downloads will be "
+	  "aborted. Continue?"));
   else
+    mb.setText
+      (tr("Downloads are in progress. Are you sure that you "
+	  "wish to exit? If you exit, downloads will be aborted."));
+
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
     {
-      bool private_downloads = false;
-
-      if(m_downloads)
-	if(!m_downloads->is_finished())
-	  private_downloads = true;
-
-      QMessageBox mb(this);
-
-      mb.setIcon(QMessageBox::Question);
-      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-
-      if(private_downloads)
-	mb.setText
-	  (tr("The private window that is about to be closed has "
-	      "active downloads. If it's closed, the downloads will be "
-	      "aborted. Continue?"));
-      else
-	mb.setText
-	  (tr("Downloads are in progress. Are you sure that you "
-	      "wish to exit? If you exit, downloads will be aborted."));
-
-      mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
-      mb.setWindowTitle(tr("Dooble: Confirmation"));
-
-      if(mb.exec() != QMessageBox::Yes)
-	{
-	  QApplication::processEvents();
-	  return false;
-	}
-
       QApplication::processEvents();
-      return true;
+      return false;
     }
+
+  QApplication::processEvents();
+  return true;
 }
 
 bool dooble::cookie_filter
@@ -429,7 +423,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
-  if(m_web_engine_profile)
+  if(m_downloads)
     if(!can_exit())
       {
 	if(event)
@@ -458,7 +452,7 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QApplication::restoreOverrideCursor();
 
-  if(!m_web_engine_profile)
+  if(!m_downloads)
     if(!can_exit())
       {
 	if(event)
@@ -3053,6 +3047,25 @@ void dooble::slot_show_documentation(void)
 
 void dooble::slot_show_downloads(void)
 {
+  if(m_downloads)
+    {
+      if(m_ui.tab->indexOf(m_downloads) == -1)
+	{
+	  m_ui.tab->addTab(m_downloads, m_downloads->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, m_downloads->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, m_downloads->windowTitle());
+	  prepare_tab_icons();
+	}
+
+      m_ui.tab->setTabsClosable(tabs_closable());
+      m_ui.tab->setCurrentWidget(m_downloads); // Order is important.
+      prepare_control_w_shortcut();
+      prepare_tab_shortcuts();
+      return;
+    }
+
   if(dooble_settings::setting("pin_downloads_window").toBool())
     {
       if(m_ui.tab->indexOf(s_downloads) == -1)
