@@ -955,6 +955,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(clear_downloads(void)),
+	  this,
+	  SLOT(slot_clear_downloads(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(close_tab(void)),
 	  this,
 	  SLOT(slot_close_tab(void)),
@@ -2323,6 +2329,27 @@ void dooble::slot_authenticate(void)
 	  QApplication::processEvents();
 	}
     }
+}
+
+void dooble::slot_clear_downloads(void)
+{
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText
+    (tr("Are you sure that you wish to delete all of the finished downloads?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::processEvents();
 }
 
 void dooble::slot_clear_history(void)
