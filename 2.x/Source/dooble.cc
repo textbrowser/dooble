@@ -1651,7 +1651,7 @@ void dooble::prepare_tab_icons(void)
 	  (i, QIcon::fromTheme("folder-download",
 			       QIcon(QString(":/%1/36/downloads.png").
 				     arg(icon_set))));
-      if(main_window == s_accepted_or_blocked_domains)
+      else if(main_window == s_accepted_or_blocked_domains)
 	m_ui.tab->setTabIcon
 	  (i, QIcon::fromTheme("process-blocked",
 			       QIcon(QString(":/%1/36/blocked_domains.png").
