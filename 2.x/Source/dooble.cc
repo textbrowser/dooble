@@ -2338,6 +2338,11 @@ void dooble::slot_authenticate(void)
 
 void dooble::slot_clear_downloads(void)
 {
+  if(m_downloads && m_downloads->size() == 0)
+    return;
+  else if(s_downloads->size() == 0)
+    return;
+
   QMessageBox mb(this);
 
   mb.setIcon(QMessageBox::Question);
@@ -2353,6 +2358,11 @@ void dooble::slot_clear_downloads(void)
       QApplication::processEvents();
       return;
     }
+
+  if(m_downloads)
+    m_downloads->clear();
+  else
+    s_downloads->clear();
 
   QApplication::processEvents();
 }
@@ -2450,13 +2460,12 @@ void dooble::slot_dooble_credentials_authenticated(bool state)
 
 void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 {
-  /*
-  ** Method is for private windows only. Private windows have separate
-  ** WebEngine profiles.
-  */
-
   if(!m_downloads)
     {
+      /*
+      ** Not a private window.
+      */
+
       if(download &&
 	 download->state() != QWebEngineDownloadItem::DownloadInProgress)
 	return;
@@ -2469,7 +2478,7 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 
   if(!download)
     return;
-  else if(m_downloads->contains(download))
+  else if(m_downloads->contains(download) || s_downloads->contains(download))
     {
       /*
       ** Do not cancel the download.
@@ -2491,8 +2500,31 @@ void dooble::slot_download_requested(QWebEngineDownloadItem *download)
 #endif
     }
 
-  s_downloads->record_download(download);
+  if(m_downloads)
+    m_downloads->record_download(download);
+  else
+    s_downloads->record_download(download);
+
   download->accept();
+
+  if(m_downloads)
+    {
+      if(m_ui.tab->indexOf(m_downloads) == -1)
+	{
+	  m_ui.tab->addTab(m_downloads, m_downloads->windowTitle());
+	  m_ui.tab->setTabIcon
+	    (m_ui.tab->count() - 1, m_downloads->windowIcon());
+	  m_ui.tab->setTabToolTip
+	    (m_ui.tab->count() - 1, m_downloads->windowTitle());
+	  prepare_tab_icons();
+	}
+
+      m_ui.tab->setTabsClosable(tabs_closable());
+      m_ui.tab->setCurrentWidget(m_downloads); // Order is important.
+      prepare_control_w_shortcut();
+      prepare_tab_shortcuts();
+      return;
+    }
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
     {

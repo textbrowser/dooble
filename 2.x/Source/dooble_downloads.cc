@@ -126,6 +126,22 @@ bool dooble_downloads::is_private(void) const
   return m_is_private;
 }
 
+int dooble_downloads::size(void) const
+{
+  int size = 0;
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    {
+      auto *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(downloads_item)
+	size += 1;
+    }
+
+  return size;
+}
+
 void dooble_downloads::abort(void)
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
@@ -136,6 +152,31 @@ void dooble_downloads::abort(void)
       if(downloads_item)
 	downloads_item->cancel();
     }
+}
+
+void dooble_downloads::clear(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
+    {
+      auto *downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(!downloads_item)
+	{
+	  m_ui.table->removeRow(i);
+	  continue;
+	}
+      else if(!downloads_item->is_finished())
+	continue;
+
+      remove_entry(downloads_item->oid());
+      m_ui.table->removeRow(i);
+    }
+
+  QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_downloads::closeEvent(QCloseEvent *event)
@@ -407,12 +448,8 @@ void dooble_downloads::showNormal(void)
 
 void dooble_downloads::slot_clear_finished_downloads(void)
 {
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
   if(m_ui.table->rowCount() > 0)
     {
-      QApplication::restoreOverrideCursor();
-
       QMessageBox mb(this);
 
       mb.setIcon(QMessageBox::Question);
@@ -431,28 +468,9 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 	}
 
       QApplication::processEvents();
-      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     }
 
-  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
-    {
-      auto *downloads_item = qobject_cast
-	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
-
-      if(!downloads_item)
-	{
-	  m_ui.table->removeRow(i);
-	  continue;
-	}
-      else if(!downloads_item->is_finished())
-	continue;
-
-      remove_entry(downloads_item->oid());
-      m_ui.table->removeRow(i);
-    }
-
-  QApplication::restoreOverrideCursor();
-  slot_search_timer_timeout();
+  clear();
 }
 
 void dooble_downloads::slot_copy_download_location(void)
