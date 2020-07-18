@@ -126,10 +126,6 @@ dooble::dooble(QWidget *widget):QMainWindow()
 	s_containers_populated = true;
       }
 
-  connect(QWebEngineProfile::defaultProfile(),
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -152,9 +148,7 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
       m_cookies_window = new dooble_cookies_window(m_is_private, this);
       m_cookies_window->setCookies(m_cookies);
       m_downloads = new dooble_downloads
-	(m_web_engine_profile = new QWebEngineProfile(this),
-	 m_is_private,
-	 this);
+	(m_web_engine_profile = new QWebEngineProfile(this), this);
       prepare_private_web_engine_profile_settings();
       connect(m_cookies,
 	      SIGNAL(cookies_added(const QList<QNetworkCookie> &,
@@ -205,10 +199,6 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
 	s_containers_populated = true;
       }
 
-  connect(QWebEngineProfile::defaultProfile(),
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -242,10 +232,6 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	s_containers_populated = true;
       }
 
-  connect(QWebEngineProfile::defaultProfile(),
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -279,10 +265,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	s_containers_populated = true;
       }
 
-  connect(QWebEngineProfile::defaultProfile(),
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -748,7 +730,7 @@ void dooble::initialize_static_members(void)
   if(!s_downloads)
     {
       s_downloads = new dooble_downloads
-	(QWebEngineProfile::defaultProfile(), false, nullptr);
+	(QWebEngineProfile::defaultProfile(), nullptr);
       connect(s_downloads,
 	      SIGNAL(populated(void)),
 	      this,
@@ -990,12 +972,6 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
-	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
-					   Qt::UniqueConnection));
-  connect(page,
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -1800,10 +1776,6 @@ void dooble::remove_page_connections(dooble_page *page)
 	     this,
 	     SLOT(slot_create_window(dooble_web_engine_view *)));
   disconnect(page,
-	     SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	     this,
-	     SLOT(slot_download_requested(QWebEngineDownloadItem *)));
-  disconnect(page,
 	     SIGNAL(iconChanged(const QIcon &)),
 	     this,
 	     SLOT(slot_icon_changed(const QIcon &)));
@@ -2338,8 +2310,11 @@ void dooble::slot_authenticate(void)
 
 void dooble::slot_clear_downloads(void)
 {
-  if(m_downloads && m_downloads->size() == 0)
-    return;
+  if(m_downloads)
+    {
+      if(m_downloads->size() == 0)
+	return;
+    }
   else if(s_downloads->size() == 0)
     return;
 
@@ -2456,109 +2431,6 @@ void dooble::slot_dooble_credentials_authenticated(bool state)
 	m_authentication_action->setEnabled
 	  (dooble_settings::has_dooble_credentials());
     }
-}
-
-void dooble::slot_download_requested(QWebEngineDownloadItem *download)
-{
-  if(!m_downloads)
-    {
-      /*
-      ** Not a private window.
-      */
-
-      if(download &&
-	 download->state() != QWebEngineDownloadItem::DownloadInProgress)
-	return;
-
-      if(m_ui.tab->indexOf(s_downloads) >= 0)
-	m_ui.tab->setCurrentWidget(s_downloads);
-
-      return;
-    }
-
-  if(!download)
-    return;
-  else if(m_downloads->contains(download) || s_downloads->contains(download))
-    {
-      /*
-      ** Do not cancel the download.
-      */
-
-      return;
-    }
-
-  if(download->state() == QWebEngineDownloadItem::DownloadRequested)
-    {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-      download->setDownloadDirectory(s_downloads->download_path());
-#else
-      QFileInfo file_info(download->path());
-
-      download->setPath(s_downloads->download_path() +
-			QDir::separator() +
-			file_info.fileName());
-#endif
-    }
-
-  if(m_downloads)
-    m_downloads->record_download(download);
-  else
-    s_downloads->record_download(download);
-
-  download->accept();
-
-  if(m_downloads)
-    {
-      if(m_ui.tab->indexOf(m_downloads) == -1)
-	{
-	  m_ui.tab->addTab(m_downloads, m_downloads->windowTitle());
-	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, m_downloads->windowIcon());
-	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, m_downloads->windowTitle());
-	  prepare_tab_icons();
-	}
-
-      m_ui.tab->setTabsClosable(tabs_closable());
-      m_ui.tab->setCurrentWidget(m_downloads); // Order is important.
-      prepare_control_w_shortcut();
-      prepare_tab_shortcuts();
-      return;
-    }
-
-  if(dooble_settings::setting("pin_downloads_window").toBool())
-    {
-      if(m_ui.tab->indexOf(s_downloads) == -1)
-	{
-	  m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
-	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
-	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
-	  prepare_tab_icons();
-	}
-
-      m_ui.tab->setTabsClosable(tabs_closable());
-      m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
-      prepare_control_w_shortcut();
-      prepare_tab_shortcuts();
-      return;
-    }
-
-  if(s_downloads->isVisible())
-    {
-      s_downloads->activateWindow();
-      s_downloads->raise();
-      return;
-    }
-
-  s_downloads->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_downloads);
-
-  s_downloads->activateWindow();
-  s_downloads->raise();
 }
 
 #ifdef Q_OS_MAC

@@ -66,6 +66,7 @@ class dooble_page: public QWidget
   QMenu *menu(void);
   QString title(void) const;
   QUrl url(void) const;
+  QWebEngineProfile *web_engine_profile(void) const;
   QWebEngineSettings *web_engine_settings(void) const;
   bool can_go_back(void) const;
   bool can_go_forward(void) const;
@@ -194,7 +195,6 @@ class dooble_page: public QWidget
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
   void dooble_credentials_authenticated(bool state);
-  void downloadRequested(QWebEngineDownloadItem *download);
   void iconChanged(const QIcon &icon);
   void javascript_allow_popup_exception(const QUrl &url);
   void loadFinished(bool ok);

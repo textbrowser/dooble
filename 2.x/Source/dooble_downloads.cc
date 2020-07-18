@@ -42,11 +42,9 @@
 #include "dooble_page.h"
 
 dooble_downloads::dooble_downloads
-(QWebEngineProfile *web_engine_profile, const bool is_private, QWidget *parent):
-  QMainWindow(parent)
+(QWebEngineProfile *web_engine_profile, QWidget *parent):QMainWindow(parent)
 {
   m_download_path_inspection_timer.start(2500);
-  m_is_private = is_private;
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -58,6 +56,8 @@ dooble_downloads::dooble_downloads
       (QStandardPaths::
        standardLocations(QStandardPaths::DesktopLocation).value(0));
 
+  m_web_engine_profile = web_engine_profile;
+
   connect(&m_download_path_inspection_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -66,13 +66,6 @@ dooble_downloads::dooble_downloads
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_search_timer_timeout(void)));
-
-  if(web_engine_profile)
-    connect(web_engine_profile,
-	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	    this,
-	    SLOT(slot_download_requested(QWebEngineDownloadItem *)));
-
   connect(m_ui.clear_finished_downloads,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -89,10 +82,18 @@ dooble_downloads::dooble_downloads
 	  SIGNAL(customContextMenuRequested(const QPoint &)),
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
+
+  if(m_web_engine_profile)
+    connect(m_web_engine_profile,
+	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	    this,
+	    SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   m_ui.download_path->setCursorPosition(0);
   m_ui.download_path->setToolTip(m_ui.download_path->text());
-  m_ui.select->setVisible(!m_is_private);
+  m_ui.select->setVisible
+    (QWebEngineProfile::defaultProfile() == m_web_engine_profile);
   m_ui.table->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -123,7 +124,7 @@ bool dooble_downloads::is_finished(void) const
 
 bool dooble_downloads::is_private(void) const
 {
-  return m_is_private;
+  return QWebEngineProfile::defaultProfile() != m_web_engine_profile;
 }
 
 int dooble_downloads::size(void) const
@@ -357,7 +358,10 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
     }
 
   auto *downloads_item = new dooble_downloads_item
-    (download, m_is_private, index, this);
+    (download,
+     QWebEngineProfile::defaultProfile() != m_web_engine_profile,
+     index,
+     this);
 
   connect(downloads_item,
 	  SIGNAL(finished(void)),
@@ -568,13 +572,11 @@ void dooble_downloads::slot_download_requested(QWebEngineDownloadItem *download)
   if(!download)
     return;
   else if(contains(download))
-    {
-      /*
-      ** Do not cancel the download.
-      */
+    /*
+    ** Do not cancel the download.
+    */
 
-      return;
-    }
+    return;
 
   if(download->state() == QWebEngineDownloadItem::DownloadRequested)
     {
@@ -783,10 +785,11 @@ void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 
 		foreach(auto *page, d->findChildren<dooble_page *> ())
 		  if(page)
-		    {
-		      page->download(file_name, url);
-		      goto done_label;
-		    }
+		    if(m_web_engine_profile == page->web_engine_profile())
+		      {
+			page->download(file_name, url);
+			goto done_label;
+		      }
 	      }
 
 	done_label:

@@ -175,7 +175,6 @@ class dooble: public QMainWindow
   void slot_create_window(dooble_web_engine_view *view);
   void slot_decouple_tab(int index);
   void slot_dooble_credentials_authenticated(bool state);
-  void slot_download_requested(QWebEngineDownloadItem *download);
 #ifdef Q_OS_MAC
   void slot_enable_shortcut(void);
 #endif

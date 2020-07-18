@@ -259,10 +259,6 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(create_window(dooble_web_engine_view *)),
 	  this,
 	  SIGNAL(create_window(dooble_web_engine_view *)));
-  connect(m_view,
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)));
   connect
     (m_view,
      SIGNAL(featurePermissionRequestCanceled(const QUrl &,
@@ -431,6 +427,11 @@ QString dooble_page::title(void) const
 QUrl dooble_page::url(void) const
 {
   return m_view->url();
+}
+
+QWebEngineProfile *dooble_page::web_engine_profile(void) const
+{
+  return m_view->page()->profile();
 }
 
 QWebEngineSettings *dooble_page::web_engine_settings(void) const

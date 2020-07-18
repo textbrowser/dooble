@@ -29,6 +29,7 @@
 #define dooble_downloads_h
 
 #include <QMainWindow>
+#include <QPointer>
 #include <QSqlDatabase>
 #include <QTimer>
 
@@ -42,9 +43,7 @@ class dooble_downloads: public QMainWindow
   Q_OBJECT
 
  public:
-  dooble_downloads(QWebEngineProfile *web_engine_profile,
-		   const bool is_private,
-		   QWidget *parent);
+  dooble_downloads(QWebEngineProfile *web_engine_profile, QWidget *parent);
   QString download_path(void) const;
   bool contains(QWebEngineDownloadItem *download) const;
   bool is_finished(void) const;
@@ -67,10 +66,10 @@ class dooble_downloads: public QMainWindow
 
  private:
   QHash<QObject *, char> m_downloads;
+  QPointer<QWebEngineProfile> m_web_engine_profile;
   QTimer m_download_path_inspection_timer;
   QTimer m_search_timer;
   Ui_dooble_downloads m_ui;
-  bool m_is_private;
   void delete_selected(void);
   void remove_entry(qintptr oid);
   void save_settings(void);
