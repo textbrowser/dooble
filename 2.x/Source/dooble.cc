@@ -151,8 +151,10 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
       m_cookies = new dooble_cookies(m_is_private, this);
       m_cookies_window = new dooble_cookies_window(m_is_private, this);
       m_cookies_window->setCookies(m_cookies);
-      m_downloads = new dooble_downloads(m_is_private, this);
-      m_web_engine_profile = new QWebEngineProfile(this);
+      m_downloads = new dooble_downloads
+	(m_web_engine_profile = new QWebEngineProfile(this),
+	 m_is_private,
+	 this);
       prepare_private_web_engine_profile_settings();
       connect(m_cookies,
 	      SIGNAL(cookies_added(const QList<QNetworkCookie> &,
@@ -301,8 +303,8 @@ bool dooble::can_exit(void)
     {
       bool private_downloads = false;
 
-      if(m_web_engine_profile)
-	if(s_downloads->has_downloads_for_profile(m_web_engine_profile))
+      if(m_downloads)
+	if(!m_downloads->is_finished())
 	  private_downloads = true;
 
       QMessageBox mb(this);
@@ -747,7 +749,8 @@ void dooble::initialize_static_members(void)
 
   if(!s_downloads)
     {
-      s_downloads = new dooble_downloads(false, nullptr);
+      s_downloads = new dooble_downloads
+	(QWebEngineProfile::defaultProfile(), false, nullptr);
       connect(s_downloads,
 	      SIGNAL(populated(void)),
 	      this,

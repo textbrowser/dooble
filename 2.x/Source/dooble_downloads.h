@@ -42,10 +42,11 @@ class dooble_downloads: public QMainWindow
   Q_OBJECT
 
  public:
-  dooble_downloads(const bool is_private, QWidget *parent);
+  dooble_downloads(QWebEngineProfile *web_engine_profile,
+		   const bool is_private,
+		   QWidget *parent);
   QString download_path(void) const;
   bool contains(QWebEngineDownloadItem *download) const;
-  bool has_downloads_for_profile(QWebEngineProfile *profile) const;
   bool is_finished(void) const;
   static void create_tables(QSqlDatabase &db);
   void abort(void);

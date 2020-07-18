@@ -41,7 +41,8 @@
 #include "dooble_downloads_item.h"
 #include "dooble_page.h"
 
-dooble_downloads::dooble_downloads(const bool is_private, QWidget *parent):
+dooble_downloads::dooble_downloads
+(QWebEngineProfile *web_engine_profile, const bool is_private, QWidget *parent):
   QMainWindow(parent)
 {
   m_download_path_inspection_timer.start(2500);
@@ -65,10 +66,13 @@ dooble_downloads::dooble_downloads(const bool is_private, QWidget *parent):
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_search_timer_timeout(void)));
-  connect(QWebEngineProfile::defaultProfile(),
-	  SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
-	  this,
-	  SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+
+  if(web_engine_profile)
+    connect(web_engine_profile,
+	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
+	    this,
+	    SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+
   connect(m_ui.clear_finished_downloads,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -99,23 +103,6 @@ QString dooble_downloads::download_path(void) const
 bool dooble_downloads::contains(QWebEngineDownloadItem *download) const
 {
   return m_downloads.contains(download);
-}
-
-bool dooble_downloads::has_downloads_for_profile
-(QWebEngineProfile *profile) const
-{
-  for(int i = 0; i < m_ui.table->rowCount(); i++)
-    {
-      auto *downloads_item = qobject_cast
-	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
-
-      if(downloads_item)
-	if(!downloads_item->is_finished())
-	  if(downloads_item->profile() == profile)
-	    return true;
-    }
-
-  return false;
 }
 
 bool dooble_downloads::is_finished(void) const
