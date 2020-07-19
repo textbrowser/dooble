@@ -279,9 +279,40 @@ dooble::~dooble()
 
 bool dooble::can_exit(void)
 {
-  if(m_downloads && m_downloads->is_finished())
-    return true;
-  else if(s_downloads->is_finished())
+  if(m_downloads && !m_downloads->is_finished())
+    {
+      /*
+      ** Prompt.
+      */
+    }
+  else if(!s_downloads->is_finished())
+    {
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+      /*
+      ** Discover some other non-private Dooble window.
+      */
+
+      QWidgetList list(QApplication::topLevelWidgets());
+      bool found = false;
+
+      for(auto i : list)
+	{
+	  auto *d = qobject_cast<dooble *> (i);
+
+	  if(d && d != this && !d->m_downloads)
+	    {
+	      found = true;
+	      break;
+	    }
+	}
+
+      QApplication::restoreOverrideCursor();
+
+      if(found)
+	return true;
+    }
+  else
     return true;
 
   QMessageBox mb(this);
@@ -289,7 +320,7 @@ bool dooble::can_exit(void)
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
 
-  if(m_downloads && !m_downloads->is_finished())
+  if(m_downloads)
     mb.setText
       (tr("The private window that is about to be closed has "
 	  "active downloads. If it's closed, the downloads will be "
@@ -405,14 +436,13 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
-  if(m_downloads)
-    if(!can_exit())
-      {
-	if(event)
-	  event->ignore();
+  if(!can_exit())
+    {
+      if(event)
+	event->ignore();
 
-	return;
-      }
+      return;
+    }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -434,16 +464,13 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QApplication::restoreOverrideCursor();
 
-  if(!m_downloads)
-    if(!can_exit())
-      {
-	if(event)
-	  event->ignore();
+  if(!can_exit())
+    {
+      if(event)
+	event->ignore();
 
-	return;
-      }
-
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+      return;
+    }
 
   if(m_downloads)
     m_downloads->abort();
