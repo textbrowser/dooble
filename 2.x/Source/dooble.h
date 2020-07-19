@@ -107,6 +107,12 @@ class dooble: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  enum CanExit
+  {
+    CAN_EXIT_CLOSE = 0,
+    CAN_EXIT_QUIT
+  };
+
   QDialog *m_floating_digital_clock_dialog;
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
@@ -138,7 +144,7 @@ class dooble: public QMainWindow
   static bool s_containers_populated;
   static bool cookie_filter
   (const QWebEngineCookieStore::FilterRequest &filter_request);
-  bool can_exit(void);
+  bool can_exit(const CanExit can_exit);
   bool tabs_closable(void) const;
   void connect_signals(void);
   void decouple_support_windows(void);

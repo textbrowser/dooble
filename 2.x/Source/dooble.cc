@@ -277,43 +277,55 @@ dooble::~dooble()
       shortcut->deleteLater();
 }
 
-bool dooble::can_exit(void)
+bool dooble::can_exit(const CanExit can_exit)
 {
-  if(m_downloads && !m_downloads->is_finished())
+  switch(can_exit)
     {
-      /*
-      ** Prompt.
-      */
+    case CAN_EXIT_CLOSE:
+      {
+	if(m_downloads && !m_downloads->is_finished())
+	  {
+	    /*
+	    ** Prompt.
+	    */
+	  }
+	else if(!s_downloads->is_finished())
+	  {
+	    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+	    /*
+	    ** Discover some other non-private Dooble window.
+	    */
+
+	    QWidgetList list(QApplication::topLevelWidgets());
+	    bool found = false;
+
+	    for(auto i : list)
+	      {
+		auto *d = qobject_cast<dooble *> (i);
+
+		if(d && d != this && !d->m_downloads)
+		  {
+		    found = true;
+		    break;
+		  }
+	      }
+
+	    QApplication::restoreOverrideCursor();
+
+	    if(found)
+	      return true;
+	  }
+	else
+	  return true;
+
+	break;
+      }
+    default:
+      {
+	break;
+      }
     }
-  else if(!s_downloads->is_finished())
-    {
-      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-      /*
-      ** Discover some other non-private Dooble window.
-      */
-
-      QWidgetList list(QApplication::topLevelWidgets());
-      bool found = false;
-
-      for(auto i : list)
-	{
-	  auto *d = qobject_cast<dooble *> (i);
-
-	  if(d && d != this && !d->m_downloads)
-	    {
-	      found = true;
-	      break;
-	    }
-	}
-
-      QApplication::restoreOverrideCursor();
-
-      if(found)
-	return true;
-    }
-  else
-    return true;
 
   QMessageBox mb(this);
 
@@ -436,7 +448,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
-  if(!can_exit())
+  if(!can_exit(CAN_EXIT_CLOSE))
     {
       if(event)
 	event->ignore();
@@ -463,24 +475,6 @@ void dooble::closeEvent(QCloseEvent *event)
       }
 
   QApplication::restoreOverrideCursor();
-
-  if(!can_exit())
-    {
-      if(event)
-	event->ignore();
-
-      return;
-    }
-
-  if(m_downloads)
-    m_downloads->abort();
-
-  s_accepted_or_blocked_domains->abort();
-  s_cookies_window->close();
-  s_downloads->abort();
-  s_history->abort();
-  QApplication::restoreOverrideCursor();
-  QApplication::exit(0);
 }
 
 void dooble::connect_signals(void)
@@ -2734,13 +2728,21 @@ void dooble::slot_print_preview(void)
 
 void dooble::slot_quit_dooble(void)
 {
-  /*
-  ** May require some confirmation from the user.
-  */
-
-  if(!close())
+  if(!can_exit(CAN_EXIT_QUIT))
     return;
 
+  if(!m_is_javascript_dialog)
+    if(dooble_settings::setting("save_geometry").toBool())
+      dooble_settings::set_setting
+	("dooble_geometry", saveGeometry().toBase64());
+
+  if(m_downloads)
+    m_downloads->abort();
+
+  s_accepted_or_blocked_domains->abort();
+  s_cookies_window->close();
+  s_downloads->abort();
+  s_history->abort();
   QApplication::exit(0);
 }
 
