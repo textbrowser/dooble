@@ -275,6 +275,9 @@ dooble::~dooble()
   for(auto shortcut : m_shortcuts)
     if(shortcut)
       shortcut->deleteLater();
+
+  if(m_downloads)
+    m_downloads->abort();
 }
 
 bool dooble::can_exit(const CanExit can_exit)
@@ -341,9 +344,7 @@ bool dooble::can_exit(const CanExit can_exit)
 
 	QApplication::restoreOverrideCursor();
 
-	if(found)
-	  break;
-	else if(!s_downloads->is_finished())
+	if(found || !s_downloads->is_finished())
 	  break;
 	else
 	  return true;
