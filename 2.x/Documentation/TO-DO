@@ -98,6 +98,7 @@ Completed Items
 - Print preview.
 - Print support.
 - Print via popup menu.
+- Private Downloads containers.
 - Private-window decorations.
 - Proxy details within Privacy.
 - Qt 5.10.
@@ -171,7 +172,6 @@ Unknown Items
 - HMAC or KMAC.
 - Multiple certificate exceptions.
 - Optional Document Mode.
-- Private Downloads containers.
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
