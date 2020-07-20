@@ -109,8 +109,8 @@ class dooble: public QMainWindow
  private:
   enum CanExit
   {
-    CAN_EXIT_CLOSE = 0,
-    CAN_EXIT_QUIT
+    CAN_EXIT_CLOSE_EVENT = 0,
+    CAN_EXIT_SLOT_QUIT_DOOBLE
   };
 
   QDialog *m_floating_digital_clock_dialog;

@@ -281,7 +281,7 @@ bool dooble::can_exit(const CanExit can_exit)
 {
   switch(can_exit)
     {
-    case CAN_EXIT_CLOSE:
+    case CAN_EXIT_CLOSE_EVENT:
       {
 	if(m_downloads && !m_downloads->is_finished())
 	  {
@@ -465,7 +465,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
-  if(!can_exit(CAN_EXIT_CLOSE))
+  if(!can_exit(CAN_EXIT_CLOSE_EVENT))
     {
       if(event)
 	event->ignore();
@@ -2745,7 +2745,7 @@ void dooble::slot_print_preview(void)
 
 void dooble::slot_quit_dooble(void)
 {
-  if(!can_exit(CAN_EXIT_QUIT))
+  if(!can_exit(CAN_EXIT_SLOT_QUIT_DOOBLE))
     return;
 
   if(!m_is_javascript_dialog)
