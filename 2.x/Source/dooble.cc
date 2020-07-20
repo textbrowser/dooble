@@ -323,6 +323,31 @@ bool dooble::can_exit(const CanExit can_exit)
       }
     default:
       {
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+	QWidgetList list(QApplication::topLevelWidgets());
+	bool found = false;
+
+	for(auto i : list)
+	  {
+	    auto *d = qobject_cast<dooble *> (i);
+
+	    if(d && d->m_downloads && !d->m_downloads->is_finished())
+	      {
+		found = true;
+		break;
+	      }
+	  }
+
+	QApplication::restoreOverrideCursor();
+
+	if(found)
+	  break;
+	else if(!s_downloads->is_finished())
+	  break;
+	else
+	  return true;
+
 	break;
       }
     }
@@ -331,17 +356,9 @@ bool dooble::can_exit(const CanExit can_exit)
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-
-  if(m_downloads)
-    mb.setText
-      (tr("The private window that is about to be closed has "
-	  "active downloads. If it's closed, the downloads will be "
-	  "aborted. Continue?"));
-  else
-    mb.setText
-      (tr("Downloads are in progress. Are you sure that you "
-	  "wish to exit? If you exit, downloads will be aborted."));
-
+  mb.setText
+    (tr("Downloads are in progress. Are you sure that you wish to exit? "
+	"If you exit, downloads will be aborted."));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::WindowModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
