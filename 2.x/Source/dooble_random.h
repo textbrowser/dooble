@@ -29,14 +29,17 @@
 #define dooble_random_h
 
 #include <QByteArray>
+#include <QRandomGenerator>
 
 class dooble_random
 {
  public:
   static QByteArray random_bytes(int length);
+  static void initialize(void);
 
  private:
   dooble_random(void);
+  static QRandomGenerator s_random_generator;
 };
 
 #endif

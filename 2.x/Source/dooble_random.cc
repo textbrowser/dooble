@@ -25,72 +25,25 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QtGlobal>
-
-#ifdef Q_OS_WIN
-#pragma comment(lib, "crypt32.lib")
-#include <windows.h>
-#include <Wincrypt.h>
-#else
-#include <QFile>
-#endif
+#include <QVector>
 
 #include "dooble_random.h"
 
+QRandomGenerator dooble_random::s_random_generator;
+
 QByteArray dooble_random::random_bytes(int length)
 {
-  /*
-  ** Returns an empty byte array if an error occurs.
-  */
-
   if(length <= 0)
     return QByteArray();
 
-  QByteArray bytes;
+  QVector<quint32> vector(length, 0);
 
-#if defined(Q_OS_BSD4) || \
-  defined(Q_OS_BSDI) ||	  \
-  defined(Q_OS_LINUX) ||  \
-  defined(Q_OS_MACOS)
-#ifndef Q_OS_LINUX
-  QFile file("/dev/random");
-#else
-  QFile file("/dev/urandom");
-#endif
-  if(file.open(QIODevice::ReadOnly))
-    {
-      bytes.resize(length);
+  s_random_generator.fillRange
+    (vector.data(), static_cast<qsizetype> (vector.size()));
+  return QByteArray(reinterpret_cast<char *> (vector.data()), vector.size());
+}
 
-      if(bytes.length() !=
-	 static_cast<int> (file.read(bytes.data(),
-				     static_cast<qintptr> (bytes.length()))))
-	bytes.clear();
-    }
-#elif defined(Q_OS_WIN)
-  /*
-  ** msdn.microsoft.com/en-us/library/windows/desktop/aa379942(v=vs.85).aspx
-  */
-
-  HCRYPTPROV h_crypt_prov = 0;
-
-  if(CryptAcquireContext(&h_crypt_prov, NULL, NULL, PROV_RSA_FULL, NULL))
-    {
-      auto *data = new BYTE[static_cast<size_t> (length)];
-
-      if(CryptGenRandom(h_crypt_prov, static_cast<size_t> (length), data))
-	/*
-	** msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).
-	** aspx
-	*/
-
-	bytes = QByteArray(reinterpret_cast<char *> (data), length);
-
-      delete []data;
-    }
-
-  if(h_crypt_prov)
-    CryptReleaseContext(h_crypt_prov, 0);
-#endif
-
-  return bytes;
+void dooble_random::initialize(void)
+{
+  s_random_generator = QRandomGenerator::securelySeeded();
 }

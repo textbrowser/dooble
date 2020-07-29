@@ -137,6 +137,8 @@ Completed Items
 - Store certificate exceptions.
 - Support windows as pages and non-Dooble icons.
 - Tab close buttons on the Mac should be on the right.
+- The random-bytes implementation uses a deprecated interface on Windows.
+  Replaced with QRandomGenerator.
 - Threefish-256.
 - UTC time zone option (qputenv("TZ", ":UTC")).
 - Update History icons on filter and sort.
@@ -176,4 +178,3 @@ Unknown Items
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
 - Super-fancy icon set.
-- The random-bytes implementation uses a deprecated interface on Windows.

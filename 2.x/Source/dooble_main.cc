@@ -61,6 +61,7 @@ extern "C"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
+#include "dooble_random.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 
@@ -228,6 +229,7 @@ int main(int argc, char *argv[])
   while(t.elapsed() < 1000)
     splash.repaint();
 
+  dooble_random::initialize();
   dooble::s_application->processEvents();
 
 #ifdef Q_OS_MACOS
