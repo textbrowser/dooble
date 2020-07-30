@@ -273,7 +273,9 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
 
 #ifdef Q_OS_MACOS
   QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
-    (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, m_tab_bar));
+    (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
+			nullptr,
+			m_tab_bar));
 
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 
@@ -284,7 +286,7 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
       label = new QLabel(this);
       label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
       label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
-      m_tab_bar->setTabButton(index, side, 0);
+      m_tab_bar->setTabButton(index, side, nullptr);
       m_tab_bar->setTabButton(index, side, label);
     }
   else if(!label->movie() || label->movie()->state() != QMovie::Running)
