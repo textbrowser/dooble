@@ -153,6 +153,9 @@
           <height>24</height>
          </size>
         </property>
+        <property name="popupMode">
+         <enum>QToolButton::MenuButtonPopup</enum>
+        </property>
         <property name="autoRaise">
          <bool>true</bool>
         </property>

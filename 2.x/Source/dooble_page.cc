@@ -64,20 +64,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
   m_ui.backward->setMenu(new QMenu(this));
-  m_ui.downloads->setArrowType(Qt::NoArrow);
   m_ui.downloads->setMenu(new QMenu(this));
-  m_ui.downloads->setPopupMode(QToolButton::DelayedPopup);
-#ifdef Q_OS_MACOS
-  m_ui.downloads->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
-     "QToolButton::menu-button {border: none;}"
-     "QToolButton::menu-indicator {image: none;}");
-#else
-  m_ui.downloads->setStyleSheet
-    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
-     "QToolButton::menu-button {border: none;}"
-     "QToolButton::menu-indicator {image: none;}");
-#endif
   m_ui.downloads->menu()->addAction(tr("Clear Downloads"),
 				    this,
 				    SIGNAL(clear_downloads(void)));
@@ -995,6 +982,7 @@ void dooble_page::prepare_tool_buttons(void)
       {
       }
     else if(m_ui.backward == tool_button ||
+	    m_ui.downloads == tool_button ||
 	    m_ui.forward == tool_button)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
       tool_button->setStyleSheet
