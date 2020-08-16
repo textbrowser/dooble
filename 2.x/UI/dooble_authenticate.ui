@@ -44,6 +44,9 @@
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
      </property>
+     <property name="placeholderText">
+      <string>Dooble Password</string>
+     </property>
      <property name="clearButtonEnabled">
       <bool>true</bool>
      </property>

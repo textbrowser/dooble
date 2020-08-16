@@ -95,6 +95,9 @@
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL or a host. Input is partially validated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
+           <property name="placeholderText">
+            <string>Domain Exception</string>
+           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>

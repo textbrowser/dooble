@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>544</height>
+           <height>546</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -355,8 +355,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>643</width>
-               <height>576</height>
+               <width>642</width>
+               <height>546</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -399,6 +399,9 @@
                  <widget class="QLineEdit" name="home_url">
                   <property name="toolTip">
                    <string>The Home URL is not stored in an encrypted container.</string>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Home Page URL</string>
                   </property>
                   <property name="clearButtonEnabled">
                    <bool>true</bool>
@@ -831,9 +834,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-323</y>
-               <width>643</width>
-               <height>855</height>
+               <y>0</y>
+               <width>642</width>
+               <height>796</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1057,6 +1060,9 @@
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
                      </property>
+                     <property name="placeholderText">
+                      <string>Password Confirmation</string>
+                     </property>
                      <property name="clearButtonEnabled">
                       <bool>true</bool>
                      </property>
@@ -1076,6 +1082,9 @@
                     <widget class="QLineEdit" name="password_1">
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
+                     </property>
+                     <property name="placeholderText">
+                      <string>Password</string>
                      </property>
                      <property name="clearButtonEnabled">
                       <bool>true</bool>
@@ -1260,6 +1269,9 @@
                       </item>
                       <item row="1" column="1">
                        <widget class="QLineEdit" name="proxy_user">
+                        <property name="placeholderText">
+                         <string>User</string>
+                        </property>
                         <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
@@ -1281,6 +1293,9 @@
                       </item>
                       <item row="0" column="1">
                        <widget class="QLineEdit" name="proxy_host">
+                        <property name="placeholderText">
+                         <string>Host</string>
+                        </property>
                         <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
@@ -1297,6 +1312,9 @@
                        <widget class="QLineEdit" name="proxy_password">
                         <property name="echoMode">
                          <enum>QLineEdit::Password</enum>
+                        </property>
+                        <property name="placeholderText">
+                         <string>Password</string>
                         </property>
                         <property name="clearButtonEnabled">
                          <bool>true</bool>
@@ -1374,9 +1392,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1052</y>
-               <width>643</width>
-               <height>1584</height>
+               <y>-998</y>
+               <width>642</width>
+               <height>1532</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1732,6 +1750,9 @@
                         <property name="toolTip">
                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                         </property>
+                        <property name="placeholderText">
+                         <string>Popup Exception</string>
+                        </property>
                         <property name="clearButtonEnabled">
                          <bool>true</bool>
                         </property>
@@ -1901,6 +1922,9 @@
                 </item>
                 <item>
                  <widget class="QLineEdit" name="user_agent">
+                  <property name="placeholderText">
+                   <string>User Agent</string>
+                  </property>
                   <property name="clearButtonEnabled">
                    <bool>true</bool>
                   </property>

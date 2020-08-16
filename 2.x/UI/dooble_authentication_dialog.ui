@@ -42,7 +42,7 @@
         <string notr="true">QLabel {color: #448aff;}</string>
        </property>
        <property name="text">
-        <string>&amp;User Name</string>
+        <string>&amp;User</string>
        </property>
        <property name="buddy">
         <cstring>username</cstring>
@@ -53,6 +53,9 @@
       <widget class="QLineEdit" name="username">
        <property name="styleSheet">
         <string notr="true">QLineEdit {border: none; border-bottom: 2px solid #448aff;}</string>
+       </property>
+       <property name="placeholderText">
+        <string>User</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
@@ -79,6 +82,9 @@
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Password</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
