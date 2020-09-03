@@ -14,6 +14,6 @@ Dooble is the weather bug browser.
 <li>FreeBSD, Linux, Mac, Windows.</li>
 <li>Gopher support.</li>
 <li>Multiple private instances, including downloads.</li>
-<li>Original implementation of AES-256, Threefish-256.</li>
+<li>Original implementations of AES-256, Threefish-256.</li>
 <li>Qt-only dependency.</li>
 </ul>
