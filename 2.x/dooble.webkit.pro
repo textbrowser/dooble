@@ -3,7 +3,8 @@ doxygen.commands =
 purge.commands = rm -f Documentation/*~ Source/*~ *~
 
 CONFIG		+= qt release warn_on
-DEFINES         += QT_DEPRECATED_WARNINGS
+DEFINES         += DOOBLE_WEBKIT_ENABLED \
+		   QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent \
                    gui \
