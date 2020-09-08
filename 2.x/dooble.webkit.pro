@@ -38,7 +38,8 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fwrapv \
                           -mtune=generic \
                           -pedantic \
-                          -pie
+                          -pie \
+			  -std=c++11
 QMAKE_CXXFLAGS_RELEASE -= -O2
 
 QMAKE_DISTCLEAN += .qmake.cache \
