@@ -16,4 +16,5 @@ Dooble is the weather bug browser.
 <li>Multiple private instances, including downloads.</li>
 <li>Original implementations of AES-256, Threefish-256.</li>
 <li>Qt-only dependency.</li>
+<li>Windows portable.</li>
 </ul>
