@@ -195,6 +195,7 @@ QT		+= concurrent \
                    network \
                    printsupport \
                    sql \
+		   webengine \
                    webenginewidgets \
                    widgets \
                    xml
@@ -638,6 +639,8 @@ copydooble.extra	= cp -r ./Dooble.app /Applications/Dooble.d/.
 copydooble.path		= /Applications/Dooble.d
 copyinfoplist.extra	= cp Data/Info.plist /Applications/Dooble.d/Dooble.app/Contents/.
 copyinfoplist.path	= /Applications/Dooble.d
+copywebengine.extra	= cp -r $$[QT_INSTALL_LIBS]/QtWebEngineCore.framework /Applications/Dooble.d/Dooble.app/Contents/Frameworks/.
+copywebengine.path	= /Applications/Dooble.d
 macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
 macdeployqt.path	= Dooble.app
 preinstall.extra	= rm -rf /Applications/Dooble.d/Dooble.app
@@ -651,6 +654,7 @@ INSTALLS	= copydata \
                   copydooble \
                   macdeployqt \
 		  copyinfoplist \
+		  copywebengine \
                   translations
 }
 
