@@ -44,7 +44,7 @@ QByteArray dooble_cookies::identifier(const QNetworkCookie &cookie)
 {
   QByteArray bytes;
 
-  bytes.append(cookie.domain());
+  bytes.append(cookie.domain().toUtf8());
   bytes.append(cookie.name());
   bytes.append(cookie.path().toUtf8());
   return bytes;

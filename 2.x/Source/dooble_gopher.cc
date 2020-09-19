@@ -326,7 +326,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 		 arg(list.value(1).constData() + (list.value(1).
 						  mid(0, 1) == "/")).
 		 arg(plain_to_html(list.value(0)).constData()).
-		 arg(c == '1' ? "..." : ""));
+		 arg(c == '1' ? "..." : "").toUtf8());
 	    }
 	  else if(c == '3' || c == 'i')
  	    {
@@ -369,7 +369,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 		 arg(c).
 		 arg(list.value(1).constData() + (list.value(1).
 						  mid(0, 1) == "/")).
-		 arg(m_search));
+		 arg(m_search).toUtf8());
 	      m_seven_count += 1;
 	    }
 	  else
@@ -388,5 +388,6 @@ void dooble_gopher_implementation::slot_write_timeout(void)
   if(m_search.isEmpty())
     write(m_output.toUtf8().append(s_eol));
   else
-    write(m_output.toUtf8().append("?").append(m_search).append(s_eol));
+    write
+      (m_output.toUtf8().append("?").append(m_search.toUtf8()).append(s_eol));
 }
