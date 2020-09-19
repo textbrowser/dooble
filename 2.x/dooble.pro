@@ -643,7 +643,9 @@ copywebengine.extra	= cp -r $$[QT_INSTALL_LIBS]/QtWebEngineCore.framework /Appli
 copywebengine.path	= /Applications/Dooble.d
 macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
 macdeployqt.path	= Dooble.app
-preinstall.extra	= rm -rf /Applications/Dooble.d/Dooble.app
+purgeheaders.extra	= rm -fr /Applications/Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Headers && rm -fr /Applications/Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Headers 
+purgeheaders.path	= /Applications/Dooble.d
+preinstall.extra	= rm -fr /Applications/Dooble.d/Dooble.app
 preinstall.path		= /Applications/Dooble.d
 translations.files	= Translations/*.qm
 translations.path	= /Applications/Dooble.d/Translations
@@ -655,6 +657,7 @@ INSTALLS	= copydata \
                   macdeployqt \
 		  copyinfoplist \
 		  copywebengine \
+		  purgeheaders \
                   translations
 }
 
