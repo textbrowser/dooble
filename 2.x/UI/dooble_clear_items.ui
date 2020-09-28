@@ -80,6 +80,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="search_engines">
+        <property name="text">
+         <string>&amp;Search Engines</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="visited_links">
         <property name="text">
          <string>&amp;Visited Links</string>
@@ -122,6 +129,7 @@
   <tabstop>favicons</tabstop>
   <tabstop>favorites</tabstop>
   <tabstop>history</tabstop>
+  <tabstop>search_engines</tabstop>
   <tabstop>visited_links</tabstop>
  </tabstops>
  <resources>
