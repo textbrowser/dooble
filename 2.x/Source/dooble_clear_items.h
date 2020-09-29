@@ -54,6 +54,7 @@ class dooble_clear_items: public QDialog
   void cookies_cleared(void);
   void favorites_cleared(void);
   void history_cleared(void);
+  void search_engines_cleared(void);
 };
 
 #endif

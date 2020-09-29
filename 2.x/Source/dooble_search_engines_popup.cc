@@ -239,6 +239,10 @@ void dooble_search_engines_popup::prepare_viewport_icons(void)
   m_ui.view->prepare_viewport_icons();
 }
 
+void dooble_search_engines_popup::purge(void)
+{
+}
+
 void dooble_search_engines_popup::resizeEvent(QResizeEvent *event)
 {
   QDialog::resizeEvent(event);

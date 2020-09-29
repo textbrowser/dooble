@@ -45,6 +45,7 @@ class dooble_search_engines_popup: public QDialog
   dooble_search_engines_popup(QWidget *parent);
   QList<QAction *> actions(void) const;
   void prepare_viewport_icons(void);
+  void purge(void);
   void set_icon(const QIcon &icon, const QUrl &url);
 
  public slots:
