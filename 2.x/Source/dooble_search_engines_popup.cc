@@ -241,6 +241,29 @@ void dooble_search_engines_popup::prepare_viewport_icons(void)
 
 void dooble_search_engines_popup::purge(void)
 {
+  m_model->removeRows(0, m_model->rowCount());
+
+  QString database_name(dooble_database_utilities::database_name());
+
+  {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_search_engines.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("DELETE FROM dooble_search_engines");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_search_engines_popup::resizeEvent(QResizeEvent *event)
@@ -335,6 +358,7 @@ void dooble_search_engines_popup::slot_add_predefined(void)
     }
 
   QApplication::restoreOverrideCursor();
+  slot_search_timer_timeout();
 }
 
 void dooble_search_engines_popup::slot_add_search_engine(void)
