@@ -358,7 +358,7 @@ void dooble_search_engines_popup::slot_add_predefined(void)
     }
 
   QApplication::restoreOverrideCursor();
-  slot_search_timer_timeout();
+  slot_populate();
 }
 
 void dooble_search_engines_popup::slot_add_search_engine(void)
