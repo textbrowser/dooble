@@ -165,6 +165,7 @@ Remaining Items
 - Include date stamps in cookie containers.
 - Search engine icons should be based on host names.
 - Shortcuts browser.
+- Sign Debian release: new public keys.
 - Translation browser.
 - linkHovered() is emitted without user interaction.
 
