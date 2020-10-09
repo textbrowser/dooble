@@ -633,7 +633,7 @@ VERSION         = DOOBLE_VERSION
 macx {
 copydata.files		= Data/*.txt
 copydata.path		= /Applications/Dooble.d/Data
-copydocumentation.extra	= cp ./Documentation/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
+copydocumentation.extra	= cp ./Documentation/Documents/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
 copydocumentation.path	= /Applications/Dooble.d/Documentation
 copydooble.extra	= cp -r ./Dooble.app /Applications/Dooble.d/.
 copydooble.path		= /Applications/Dooble.d
