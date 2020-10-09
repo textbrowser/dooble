@@ -34,7 +34,7 @@ sudo cp -pr ~/Qt/5.15.1/gcc_64/translations /opt/dooble/.
 sudo chmod -x,g+w /opt/dooble/Lib/*
 cd ~/dooble.d/2.x
 qmake -o Makefile dooble.pro && make -j 4
-sudo cp -p ./Documentation/*.pdf /opt/dooble/Documentation/.
+sudo cp -p ./Documentation/Documents/*.pdf /opt/dooble/Documentation/.
 sudo cp -p ./Documentation/KDE /opt/dooble/Documentation/.
 sudo cp -p ./Documentation/TO-DO /opt/dooble/Documentation/.
 sudo cp -p ./Documentation/dooble.asc /opt/dooble/Documentation/.
