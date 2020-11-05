@@ -35,7 +35,7 @@
 #include <QtConcurrent>
 
 #include "dooble.h"
-#include "double_version.h"
+#include "dooble_version.h"
 #include "dooble_about.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
