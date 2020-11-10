@@ -1299,14 +1299,9 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 
   for(int i = 0; i < list.size(); i++)
     {
-      auto *item = m_ui.session_rejections->item(i, 1); // Origin URL
+      QUrl url(QUrl::fromUserInput(list.at(i).data().toString()));
 
-      if(item)
-	{
-	  QUrl url(QUrl::fromUserInput(item->text()));
-
-	  save_blocked_domain(url.host(), false, true);
-	}
+      save_blocked_domain(url.host(), false, true);
     }
 
   QApplication::restoreOverrideCursor();
