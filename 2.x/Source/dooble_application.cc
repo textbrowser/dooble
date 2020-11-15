@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QTranslator>
 
 #include "dooble.h"
@@ -67,10 +68,12 @@ void dooble_application::install_translator(void)
   if(m_translator)
     return;
 
-  if(dooble_settings::setting("language_index").toInt() == 1)
+  if(dooble_settings::setting("language_index").toInt() == 1) // System
     {
       m_translator = new QTranslator(this);
-      m_translator->load("dooble_" + QLocale::system().name(), "Translations");
+      m_translator->load
+	("dooble_" + QLocale::system().name(),
+	 QDir::currentPath() + QDir::separator() + "Translations");
       installTranslator(m_translator);
     }
 }
