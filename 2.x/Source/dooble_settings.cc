@@ -153,7 +153,9 @@ dooble_settings::dooble_settings(void):QMainWindow()
      tr("Persistent cookies are restored from and saved to disk."),
      Qt::ToolTipRole);
 
-  if(QLocale::system().name().startsWith("en_"))
+  QLocale::Language language = QLocale::system().language();
+
+  if(language == QLocale::C || language == QLocale::English)
     {
       m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
 				      0,
