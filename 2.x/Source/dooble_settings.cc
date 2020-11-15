@@ -146,7 +146,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
     (0, tr("Cookies are not saved to disk."), Qt::ToolTipRole);
   m_ui.cookie_policy->setItemData
     (1,
-     tr("Persistent and session cookies are restored from and save to disk."),
+     tr("Persistent and session cookies are restored from and saved to disk."),
      Qt::ToolTipRole);
   m_ui.cookie_policy->setItemData
     (2,
