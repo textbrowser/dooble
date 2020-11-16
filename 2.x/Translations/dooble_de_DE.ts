@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>&amp;Cookies...</source>
-        <translation>&amp;Cookies...</translation>
+        <translation type="vanished">&amp;Cookies...</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>New &amp;Private Window...</source>
-        <translation>Neues privates Fenster...</translation>
+        <translation type="vanished">Neues privates Fenster...</translation>
     </message>
     <message>
         <source>Accepted / &amp;Blocked Domains</source>
@@ -327,11 +327,83 @@
         <translation type="unfinished">Zertifikats-Ausnahmen...</translation>
     </message>
     <message>
-        <source>The private window that is about to be closed has active downloads. If it&apos;s closed, the downloads will be aborted. Continue?</source>
+        <source>Unable to discover the SQLite plugin. This is a serious problem!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to discover the SQLite plugin. This is a serious problem!</source>
+        <source>Hi&amp;story</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Locked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New P&amp;rivate Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vacuum Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coo&amp;kies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Floating Digital &amp;Clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inject Custom Style Sheet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Release Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A failure occurred.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Unlock Dooble</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>about:blank</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Application Locked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete all of the finished downloads?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vacuuming databases may require a significant amount of time. Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vacuuming databases...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Vacuuming Databases</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -390,7 +462,7 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1 (%2), Lunar Lunatic.</source>
+        <source>Dooble version %1, Quaternions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -426,11 +498,11 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Dooble: Progress</source>
-        <translation>Dooble: Fortschritt</translation>
+        <translation type="vanished">Dooble: Fortschritt</translation>
     </message>
     <message>
         <source>Line %1 processed.</source>
-        <translation>Linie %1 prozessiert.</translation>
+        <translation type="vanished">Linie %1 prozessiert.</translation>
     </message>
     <message>
         <source>Accepted</source>
@@ -483,7 +555,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Existing values will be updated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die bestehenden Werte werden aktualisiert.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die bestehenden Werte werden aktualisiert.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&amp;Import...</source>
@@ -524,15 +596,11 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Interrupt</source>
-        <translation>Unterbreche</translation>
+        <translation type="vanished">Unterbreche</translation>
     </message>
     <message>
         <source>&amp;Delete Selected</source>
         <translation>Lösche die Ausgewählten</translation>
-    </message>
-    <message>
-        <source>dooble_accepted_or_blocked_domains.txt</source>
-        <translation></translation>
     </message>
     <message>
         <source>Dooble: Import Accepted / Blocked Domains</source>
@@ -540,6 +608,86 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Add...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Domain Exception</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rejected third-party cookie URLs are described in this region. The URLs exist for this session of Dooble only.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third-Party Session Rejections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Maximum Entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Existing entries will not be affected if this value is changed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First-Party URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Origin URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save all Origin URLs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation type="unfinished">speichere alle</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save Origin URLs if their First-Party URL counterparts are malformed. A malformed URL is one which does not have a scheme, for example.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Malcontent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save selected Origin URLs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete all of the exceptions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete the selected exception(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Accepted / Blocked Domains Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Importing the domain names. Please be patient. This dialog will be dismissed once the import process completes. If you close this dialog, the process will continue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reject</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -569,6 +717,10 @@ Dooble ist open source Software.
         <source>Favorite</source>
         <translation>Favorit</translation>
     </message>
+    <message>
+        <source>Inject Custom Style Sheet...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_authenticate</name>
@@ -584,6 +736,10 @@ Dooble ist open source Software.
         <source>AUTHENTICATE</source>
         <translation>AUTHENTIFIZIERE</translation>
     </message>
+    <message>
+        <source>Dooble Password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_authentication_dialog</name>
@@ -597,11 +753,23 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;User Name</source>
-        <translation>N&amp;utzer-Name</translation>
+        <translation type="vanished">N&amp;utzer-Name</translation>
     </message>
     <message>
         <source>&amp;Password</source>
         <translation>&amp;Passwort</translation>
+    </message>
+    <message>
+        <source>&amp;User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Nutzer</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished">Passwort</translation>
     </message>
 </context>
 <context>
@@ -646,6 +814,50 @@ Dooble ist open source Software.
         <source>Please restart Dooble after removing exceptions. Certificate exceptions which have been accepted in private windows are not depicted.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>&amp;URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server&apos;s certificate does not match the URL. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server&apos;s certificate has expired.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server&apos;s certificate is not trusted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The server&apos;s certificate was not disclosed via Certificate Transparency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>&amp;Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_certificate_exceptions_menu_widget</name>
@@ -675,10 +887,14 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Remove Permanent Exception</source>
-        <translation>Entferne die dauerhafte Ausnahme</translation>
+        <translation type="vanished">Entferne die dauerhafte Ausnahme</translation>
     </message>
     <message>
         <source>Expecting an HTTPS scheme.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove Permanent Exception</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -694,7 +910,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Confirm Exception</source>
-        <translation>Bestätige Ausnahme</translation>
+        <translation type="vanished">Bestätige Ausnahme</translation>
     </message>
     <message>
         <source>&amp;Accept Permanent Exception</source>
@@ -709,7 +925,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Accepted / Blocked Domains</source>
-        <translation>Akzeptierte / Geblockte Domänen</translation>
+        <translation type="vanished">Akzeptierte / Geblockte Domänen</translation>
     </message>
     <message>
         <source>Bookmarks</source>
@@ -721,27 +937,27 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Cookies</source>
-        <translation>Cookies</translation>
+        <translation type="vanished">Cookies</translation>
     </message>
     <message>
         <source>Download History</source>
-        <translation>Download-Historie</translation>
+        <translation type="vanished">Download-Historie</translation>
     </message>
     <message>
         <source>Favicons</source>
-        <translation>Favicons</translation>
+        <translation type="vanished">Favicons</translation>
     </message>
     <message>
         <source>History</source>
-        <translation>Historie</translation>
+        <translation type="vanished">Historie</translation>
     </message>
     <message>
         <source>Visited Links</source>
-        <translation>Besuchte Links</translation>
+        <translation type="vanished">Besuchte Links</translation>
     </message>
     <message>
         <source>Favorites</source>
-        <translation>Favoriten</translation>
+        <translation type="vanished">Favoriten</translation>
     </message>
     <message>
         <source>Downloads are in progress. If you continue, downloads will be canceled. Are you sure that you wish to proceed?</source>
@@ -757,7 +973,39 @@ Dooble ist open source Software.
         <translation>Es existieren aktive Downloads.</translation>
     </message>
     <message>
-        <source>Certificate Exceptions</source>
+        <source>Accepted / &amp;Blocked Domains</source>
+        <translation type="unfinished">Akzeptierte / &amp;Blockierte Domänen</translation>
+    </message>
+    <message>
+        <source>&amp;Certificate Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coo&amp;kies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Download History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Favicons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fav&amp;orites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;History</source>
+        <translation type="unfinished">&amp;Historie</translation>
+    </message>
+    <message>
+        <source>&amp;Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Visited Links</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -848,11 +1096,11 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation>Lösche die Ausgewählten</translation>
+        <translation type="vanished">Lösche die Ausgewählten</translation>
     </message>
     <message>
         <source>Delete &amp;Shown</source>
-        <translation>Lösche die Gezeigten</translation>
+        <translation type="vanished">Lösche die Gezeigten</translation>
     </message>
     <message>
         <source>Dooble: Cookies Window Tool Bar</source>
@@ -864,6 +1112,18 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&lt;html&gt;Private cookies exist within the scope of this window&apos;s parent Dooble window. Neither window geometry nor window state will be retained.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete &amp;Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete S&amp;hown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete &amp;Unchecked</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -929,6 +1189,30 @@ Dooble ist open source Software.
         <source>Search Downloads</source>
         <translation>Suche Downloads</translation>
     </message>
+    <message>
+        <source>0 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete the selected item(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished">Dooble: Bestätigung</translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete all of the finished downloads? Hidden entries will also be removed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete the selected entry?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_downloads_item</name>
@@ -984,12 +1268,28 @@ Dooble ist open source Software.
         <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 of %2 - Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of Unknown - Stalled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of Unknown - Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of %2 - Stalled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_favorites_popup</name>
     <message>
         <source>Dooble</source>
-        <translation>Dooble</translation>
+        <translation type="vanished">Dooble</translation>
     </message>
     <message>
         <source>Last Visited</source>
@@ -1016,12 +1316,39 @@ Dooble ist open source Software.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Are you sure that you wish to deleted the selected entry?</source>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished">Dooble: Bestätigung</translation>
+    </message>
+    <message>
+        <source>Dooble: Favorites</source>
+        <translation type="unfinished">Dooble: Favoriten</translation>
+    </message>
+    <message>
+        <source>0 Row(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dooble: Confirmation</source>
-        <translation type="unfinished">Dooble: Bestätigung</translation>
+        <source>Are you sure that you wish to delete the selected entries?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_floating_digital_clock</name>
+    <message>
+        <source>Dooble: Floating Digital Clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clock</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1117,6 +1444,18 @@ Dooble ist open source Software.
         <source>&amp;Delete Page(s) (Non-Favorites)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>0 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to remove the selected item(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_page</name>
@@ -1166,7 +1505,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Open URL</source>
-        <translation>&amp;Öffne URL</translation>
+        <translation type="vanished">&amp;Öffne URL</translation>
     </message>
     <message>
         <source>&amp;Close Tab</source>
@@ -1242,7 +1581,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Cookies...</source>
-        <translation>&amp;Cookies...</translation>
+        <translation type="vanished">&amp;Cookies...</translation>
     </message>
     <message>
         <source>Ctrl+K</source>
@@ -1422,7 +1761,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>New &amp;Private Window...</source>
-        <translation>Neues &amp;privates Fenster</translation>
+        <translation type="vanished">Neues &amp;privates Fenster</translation>
     </message>
     <message>
         <source>Accepted / &amp;Blocked Domains</source>
@@ -1505,10 +1844,6 @@ Dooble ist open source Software.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deny</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A dialog from &lt;b&gt;%1&lt;/b&gt; has been blocked.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1548,6 +1883,70 @@ Dooble ist open source Software.
         <source>The URL &lt;b&gt;%1&lt;/b&gt; is requesting access to an unknown feature.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl++</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New P&amp;rivate Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open UR&amp;L</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vacuum Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coo&amp;kies...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Floating Digital &amp;Clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inject Custom Style Sheet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Release Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble blocked %1 dialogs from &lt;b&gt;%2&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for page...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_popup_menu</name>
@@ -1562,11 +1961,11 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Dooble</source>
-        <translation>Dooble</translation>
+        <translation type="vanished">Dooble</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Zoom herein</translation>
+        <translation type="vanished">Zoom herein</translation>
     </message>
     <message>
         <source>+</source>
@@ -1574,7 +1973,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Zoom Reset</source>
-        <translation>Zoom zurücksetzen</translation>
+        <translation type="vanished">Zoom zurücksetzen</translation>
     </message>
     <message>
         <source>100%</source>
@@ -1582,7 +1981,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Zoom heraus</translation>
+        <translation type="vanished">Zoom heraus</translation>
     </message>
     <message>
         <source>-</source>
@@ -1647,6 +2046,109 @@ Domänen</translation>
     <message>
         <source>Save Page</source>
         <translation>Speichere Seite</translation>
+    </message>
+    <message>
+        <source>Dooble: Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom In (Control + Shift + +)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Reset (Control + 0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Out (Control + -)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_search_engines_popup</name>
+    <message>
+        <source>Dooble: Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DuckDuckGo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ecosia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Google</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MetaGer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swisscows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add &amp;Checked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>Search Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Search Engine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Titel</translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to delete the selected entries?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Confirmation</source>
+        <translation type="unfinished">Dooble: Bestätigung</translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1753,7 +2255,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Cache &amp;Size</source>
-        <translation>Cache Größe</translation>
+        <translation type="vanished">Cache Größe</translation>
     </message>
     <message>
         <source>A value of zero will allow QWebEngine to control the size of the cache automatically.</source>
@@ -1769,7 +2271,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Cache &amp;Type</source>
-        <translation>Cache &amp;Typ</translation>
+        <translation type="vanished">Cache &amp;Typ</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -1841,7 +2343,7 @@ Domänen</translation>
     </message>
     <message>
         <source>&amp;Zoom Frame Location</source>
-        <translation>&amp;Zoom in den Rahmen </translation>
+        <translation type="vanished">&amp;Zoom in den Rahmen </translation>
     </message>
     <message>
         <source>Popup Menu</source>
@@ -1869,7 +2371,7 @@ Domänen</translation>
     </message>
     <message>
         <source>&amp;Cookie Policy</source>
-        <translation>&amp;Cookie Regulatorien</translation>
+        <translation type="vanished">&amp;Cookie Regulatorien</translation>
     </message>
     <message>
         <source>Do Not Save</source>
@@ -1897,7 +2399,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Please note that the cryptographic algorithms which are included in Dooble have not been provided by third-parties. If this is a concern, please do not prepare permanent credentials.</source>
-        <translation>Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses für Dich ein Besorgnis darstellt, erstelle bitte keine permanenten Passworte.</translation>
+        <translation type="vanished">Bitte beachte, dass die kryptographischen Algorithmen, die in Dooble enthalten sind, aus Sicherheitsgründen nicht von dritten Parteien geliefert wurden. Wenn dieses für Dich ein Besorgnis darstellt, erstelle bitte keine permanenten Passworte.</translation>
     </message>
     <message>
         <source>Key Derivation</source>
@@ -1961,7 +2463,7 @@ Domänen</translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation>&amp;Typ</translation>
+        <translation type="vanished">&amp;Typ</translation>
     </message>
     <message>
         <source>HTTP</source>
@@ -2081,7 +2583,7 @@ Domänen</translation>
     </message>
     <message>
         <source>&amp;Language</source>
-        <translation>Sprache</translation>
+        <translation type="vanished">Sprache</translation>
     </message>
     <message>
         <source>Please restart Dooble if Language is changed.</source>
@@ -2101,7 +2603,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Cookies marked persistent are saved to and restored from disk.</source>
-        <translation>Cookies, die als dauerhaft gelten (z.B. nicht von einem Drittanbieter sind), werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
+        <translation type="vanished">Cookies, die als dauerhaft gelten (z.B. nicht von einem Drittanbieter sind), werden auf die Festplatte gespeichert und von dort auch wieder aufgerufen.</translation>
     </message>
     <message>
         <source>Language Directory</source>
@@ -2117,7 +2619,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Persistent and session cookies are saved to and restored from disk.</source>
-        <translation>Persistente und sitzungs-bezogene Cookies werden auf der Festplatte gespeichert und von dieser wieder hergestellt.</translation>
+        <translation type="vanished">Persistente und sitzungs-bezogene Cookies werden auf der Festplatte gespeichert und von dieser wieder hergestellt.</translation>
     </message>
     <message>
         <source>The Dooble configuration file dooble_settings.db resides in %1.</source>
@@ -2138,14 +2640,6 @@ Domänen</translation>
     <message>
         <source>Are you sure that you wish to reset Dooble? All known data will be removed and Dooble will be restarted. Please remove the directory WebEnginePersistentStorage after the reset completes.</source>
         <translation>Bist Du sicher, dass Du Dooble resetten möchtest? Alle bekannten Daten werden entfernt und Dooble wird neu gestartet. Bitte entferne das Verzeichnis WebEnginePersistentStorage nachdem der Reset abgeschlossen ist. </translation>
-    </message>
-    <message>
-        <source>&amp;Icon Set</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Theme Color</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blue Grey</source>
@@ -2208,10 +2702,6 @@ Domänen</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;WebRTC Public Interfaces Only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;b&gt;Warning!&lt;/b&gt; The file %1 does not exist. The System option has been disabled. English will be assumed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2231,12 +2721,207 @@ Domänen</translation>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled, WebRTC may also use local network IP addresses but remote hosts can also see your local network IP address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cache Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cache Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow Closing of Single Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Home URL is not stored in an encrypted container.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Page URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon Set Fallback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Frame Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cookie Policy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Containers: Accepted / Blocked Domains, Certificate Exceptions, Cookies, Downloads, Favicons, History, Search Engines. All other containers, including the contents of WebEnginePersistentStorage, are not encrypted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please note that some of the cryptographic algorithms which are included in Dooble were implemented by the author(s) of Dooble. If this is a concern, please do not prepare permanent credentials.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keccak-512</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch Dooble in a private window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Private Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DNS Pre-fetch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cursive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fantasy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sans Serif</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serif</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pictograph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Logical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Popup Exception</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WebRTC Public Interfaces Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Persistent and session cookies are restored from and saved to disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Persistent cookies are restored from and saved to disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled for non-Fusion themes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to remove all of the feature permissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to remove all of the JavaScript pop-up exceptions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to remove the selected feature permission(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you wish to remove the selected JavaScript pop-up exception(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_style_sheet</name>
+    <message>
+        <source>Dooble: Web Page Style Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble does not validate style sheets. Please be careful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style Sheet Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_tab_bar</name>
     <message>
         <source>Close T&amp;ab</source>
-        <translation>Schließe T&amp;ab</translation>
+        <translation type="vanished">Schließe T&amp;ab</translation>
     </message>
     <message>
         <source>Close &amp;Other Tabs</source>
@@ -2244,7 +2929,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Open as New &amp;Window...</source>
-        <translation>Öffne als neues Fenster...</translation>
+        <translation type="vanished">Öffne als neues Fenster...</translation>
     </message>
     <message>
         <source>New &amp;Tab</source>
@@ -2280,6 +2965,50 @@ Domänen</translation>
     </message>
     <message>
         <source>&amp;Hide Location Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close Tab</source>
+        <translation type="unfinished">&amp;Schließe Tab</translation>
+    </message>
+    <message>
+        <source>Open as &amp;New Window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload Periodically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;15 Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;30 Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;45 Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;60 Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock Application</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2329,11 +3058,11 @@ Domänen</translation>
     </message>
     <message>
         <source>Open Link in a New &amp;Private Window</source>
-        <translation>Öffne Link in einem neuen privaten Fenster</translation>
+        <translation type="vanished">Öffne Link in einem neuen privaten Fenster</translation>
     </message>
     <message>
         <source>Open Link in a New &amp;Window</source>
-        <translation>Öffne Link in einem neuen Fenster</translation>
+        <translation type="vanished">Öffne Link in einem neuen Fenster</translation>
     </message>
     <message>
         <source>Open Link in a &amp;Tab</source>
@@ -2381,6 +3110,18 @@ Domänen</translation>
     </message>
     <message>
         <source>View Page Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open &amp;Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Link in a New P&amp;rivate Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Link in a &amp;New Window</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
