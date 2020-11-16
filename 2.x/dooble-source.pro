@@ -103,17 +103,19 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_web_engine_page.cc \
                   Source/dooble_web_engine_view.cc
 
-TRANSLATIONS    = Translations/dooble_en.ts \
+TRANSLATIONS    = Translations/dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_YE.ts \
+                  Translations/dooble_French_BE_BJ_BF_BI_FR_KM_CD_CI_DJ_DM_PF_TF_GA_GN_HT_LB_LU_ML_MR_YT_MC_NC_NE_NG_SN_TG_TN.ts \
+                  Translations/dooble_Portuguese_AO_BR_CV_GW_MO_MZ_ST_TL.ts \
                   Translations/dooble_ae.ts \
-                  Translations/dooble_al_sq.ts \
                   Translations/dooble_af.ts \
                   Translations/dooble_al.ts \
+                  Translations/dooble_al_sq.ts \
                   Translations/dooble_am.ts \
                   Translations/dooble_as.ts \
                   Translations/dooble_az.ts \
 		  Translations/dooble_ast.ts \
-                  Translations/dooble_be.ts \
                   Translations/dooble_bd_bn.ts \
+                  Translations/dooble_be.ts \
                   Translations/dooble_bg.ts \
                   Translations/dooble_ca.ts \
                   Translations/dooble_crh.ts \
@@ -122,8 +124,9 @@ TRANSLATIONS    = Translations/dooble_en.ts \
 		  Translations/dooble_de_DE.ts \
                   Translations/dooble_dk.ts \
                   Translations/dooble_ee.ts \
-                  Translations/dooble_es.ts \
+                  Translations/dooble_en.ts \
                   Translations/dooble_eo.ts \
+                  Translations/dooble_es.ts \
                   Translations/dooble_et.ts \
                   Translations/dooble_eu.ts \
                   Translations/dooble_fi.ts \
@@ -135,31 +138,32 @@ TRANSLATIONS    = Translations/dooble_en.ts \
                   Translations/dooble_hi.ts \
                   Translations/dooble_hr.ts \
                   Translations/dooble_hu.ts \
-                  Translations/dooble_it.ts \
-                  Translations/dooble_il.ts \
                   Translations/dooble_ie.ts \
+                  Translations/dooble_il.ts \
+                  Translations/dooble_it.ts \
                   Translations/dooble_id.ts \
                   Translations/dooble_jp.ts \
                   Translations/dooble_kk.ts \
                   Translations/dooble_kn.ts \
                   Translations/dooble_ko.ts \
-		  Translations/dooble_ky.ts \
                   Translations/dooble_ku.ts \
-                  Translations/dooble_lt.ts \
+                  Translations/dooble_ky.ts \
                   Translations/dooble_lk.ts \
+                  Translations/dooble_lt.ts \
                   Translations/dooble_lv.ts \
                   Translations/dooble_ml.ts \
                   Translations/dooble_mk.ts \
                   Translations/dooble_mn.ts \
                   Translations/dooble_ms.ts \
-                  Translations/dooble_my-bn.ts \
                   Translations/dooble_mr.ts \
                   Translations/dooble_mt.ts \
+                  Translations/dooble_my-bn.ts \
                   Translations/dooble_nl.ts \
                   Translations/dooble_no.ts \
                   Translations/dooble_np.ts \
-                  Translations/dooble_pl.ts \
                   Translations/dooble_pa.ts \
+                  Translations/dooble_pl.ts \
+                  Translations/dooble_pl_PL.ts \
                   Translations/dooble_pt.ts \
                   Translations/dooble_pt-BR.ts \
                   Translations/dooble_ps.ts \
@@ -169,15 +173,12 @@ TRANSLATIONS    = Translations/dooble_en.ts \
                   Translations/dooble_se.ts \
                   Translations/dooble_sk.ts \
                   Translations/dooble_sl.ts \
-                  Translations/dooble_sr.ts \
                   Translations/dooble_sq.ts \
+                  Translations/dooble_sr.ts \
                   Translations/dooble_sw.ts \
                   Translations/dooble_th.ts \
                   Translations/dooble_tr.ts \
                   Translations/dooble_vn.ts \
                   Translations/dooble_zh-CN-simple.ts \
                   Translations/dooble_zh-TW.ts \
-                  Translations/dooble_zh-CN-traditional.ts \
-                  Translations/dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_YE.ts \
-                  Translations/dooble_French_BE_BJ_BF_BI_FR_KM_CD_CI_DJ_DM_PF_TF_GA_GN_HT_LB_LU_ML_MR_YT_MC_NC_NE_NG_SN_TG_TN.ts \
-                  Translations/dooble_Portuguese_AO_BR_CV_GW_MO_MZ_ST_TL.ts
+                  Translations/dooble_zh-CN-traditional.ts
