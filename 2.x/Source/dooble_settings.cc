@@ -35,6 +35,7 @@
 #include <QtConcurrent>
 
 #include "dooble.h"
+#include "dooble_version.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
@@ -251,7 +252,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   m_ui.webrtc_public_interfaces_only->setToolTip
     (tr("Qt 5.11.0 and newer are required."));
 #endif
-  s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
+  s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent() + " Dooble/" DOOBLE_VERSION_STRING;
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
   s_settings["allow_closing_of_single_tab"] = true;
