@@ -1,2 +1,4 @@
 The Translations directory must reside in the directory which houses the Dooble
 executable.
+
+The environment variable DOOBLE_TRANSLATIONS_PATH may also be used.
