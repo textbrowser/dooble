@@ -35,7 +35,6 @@
 #include <QtConcurrent>
 
 #include "dooble.h"
-#include "dooble_version.h"
 #include "dooble_about.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
@@ -56,6 +55,7 @@
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 #include "dooble_ui_utilities.h"
+#include "dooble_version.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
@@ -1279,7 +1279,8 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   m_web_engine_profile->setHttpCacheType
     (QWebEngineProfile::defaultProfile()->httpCacheType());
   m_web_engine_profile->setHttpUserAgent
-    (QWebEngineProfile::defaultProfile()->httpUserAgent() + " Dooble/" DOOBLE_VERSION_STRING);
+    (QWebEngineProfile::defaultProfile()->httpUserAgent() +
+     " Dooble/" DOOBLE_VERSION_STRING);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
   m_web_engine_profile->setUrlRequestInterceptor(s_url_request_interceptor);
 #else
