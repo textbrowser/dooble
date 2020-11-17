@@ -164,11 +164,21 @@ dooble_settings::dooble_settings(void):QMainWindow()
     }
   else
     {
-      QString path(QDir::currentPath());
+      QByteArray variable(qgetenv("DOOBLE_TRANSLATIONS_PATH"));
+      QString path("");
 
-      path.append(QDir::separator());
-      path.append("Translations");
-      path.append(QDir::separator());
+      if(!variable.isEmpty())
+	path = QString::fromLocal8Bit(variable.constData());
+      else
+	{
+	  path = QDir::currentPath();
+	  path.append(QDir::separator());
+	  path.append("Translations");
+	}
+
+      if(!path.endsWith(QDir::separator()))
+	path.append(QDir::separator());
+
       path.append("dooble_" + QLocale::system().name() + ".qm");
 
       QFileInfo file_info(path);
