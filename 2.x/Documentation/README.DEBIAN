@@ -7,35 +7,35 @@ sudo mkdir -p /opt/dooble/Data
 sudo mkdir -p /opt/dooble/Documentation
 sudo mkdir -p /opt/dooble/Lib
 sudo mkdir -p /opt/dooble/Translations
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Core.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5DBus.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Gui.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Network.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Positioning.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5PrintSupport.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Qml.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5QmlModels.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Quick.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5QuickWidgets.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Sql.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Svg.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5WebChannel.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5WebEngineCore.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5WebEngineWidgets.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5Widgets.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libQt5XcbQpa.so.5 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libicudata.so.56 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libicui18n.so.56 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/lib/libicuuc.so.56 /opt/dooble/Lib/.
-sudo cp -p ~/Qt/5.15.1/gcc_64/libexec/QtWebEngineProcess /opt/dooble/.
-sudo cp -pr ~/Qt/5.15.1/gcc_64/plugins /opt/dooble/.
-sudo cp -pr ~/Qt/5.15.1/gcc_64/resources /opt/dooble/.
-sudo cp -pr ~/Qt/5.15.1/gcc_64/translations /opt/dooble/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Core.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5DBus.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Gui.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Network.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Positioning.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5PrintSupport.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Qml.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5QmlModels.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Quick.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5QuickWidgets.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Sql.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Svg.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5WebChannel.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5WebEngineCore.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5WebEngineWidgets.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Widgets.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5XcbQpa.so.5 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libicudata.so.56 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libicui18n.so.56 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/lib/libicuuc.so.56 /opt/dooble/Lib/.
+sudo cp -p ~/Qt/5.15.2/gcc_64/libexec/QtWebEngineProcess /opt/dooble/.
+sudo cp -pr ~/Qt/5.15.2/gcc_64/plugins /opt/dooble/.
+sudo cp -pr ~/Qt/5.15.2/gcc_64/resources /opt/dooble/.
+sudo cp -pr ~/Qt/5.15.2/gcc_64/translations /opt/dooble/.
 sudo chmod -x,g+w /opt/dooble/Lib/*
 cd ~/dooble.d/2.x
-~/Qt/5.15.1/gcc_64/bin/lupdate dooble.pro
-~/Qt/5.15.1/gcc_64/bin/lrelease dooble.pro
-~/Qt/5.15.1/gcc_64/bin/qmake -o Makefile dooble.pro && make -j 4
+~/Qt/5.15.2/gcc_64/bin/lupdate dooble.pro
+~/Qt/5.15.2/gcc_64/bin/lrelease dooble.pro
+~/Qt/5.15.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j 4
 sudo cp -p ./Documentation/Documents/*.pdf /opt/dooble/Documentation/.
 sudo cp -p ./Documentation/KDE /opt/dooble/Documentation/.
 sudo cp -p ./Documentation/TO-DO /opt/dooble/Documentation/.
