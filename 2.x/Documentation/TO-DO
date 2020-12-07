@@ -160,6 +160,7 @@ Remaining Items
 - Auto-correct addresses.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
+- Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
 - Include date stamps in cookie containers.
