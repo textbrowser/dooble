@@ -1124,6 +1124,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("private_mode", false).toBool());
   m_ui.proxy_host->setText(s_settings.value("proxy_host").toString().trimmed());
   m_ui.proxy_host->setCursorPosition(0);
+  m_ui.proxy_ignore_list->setPlainText
+    (s_settings.value("proxy_ignore_list", "").toString().trimmed());
   m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
   m_ui.proxy_password->setCursorPosition(0);
   m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
@@ -1967,6 +1969,8 @@ void dooble_settings::slot_apply(void)
   set_setting("pin_history_window", m_ui.pin_history->isChecked());
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("private_mode", m_ui.private_mode->isChecked());
+  set_setting
+    ("proxy_ignore_list", m_ui.proxy_ignore_list->toPlainText().trimmed());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("show_hovered_links_tool_tips",
 	      m_ui.show_hovered_links_tool_tips->isChecked());
