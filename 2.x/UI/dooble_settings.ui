@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>546</height>
+           <height>549</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -355,8 +355,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>546</height>
+               <width>651</width>
+               <height>531</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -835,8 +835,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>796</height>
+               <width>674</width>
+               <height>999</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1346,6 +1346,27 @@
                    </layout>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="label_38">
+                   <property name="text">
+                    <string>Ignore Sites</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_39">
+                   <property name="text">
+                    <string>192.168.178.0/24, nasa.gov</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="ignore_proxy_list">
+                   <property name="placeholderText">
+                    <string>Ignore List</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </widget>
               </item>
@@ -1392,9 +1413,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-998</y>
-               <width>642</width>
-               <height>1532</height>
+               <y>0</y>
+               <width>637</width>
+               <height>1442</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2116,6 +2137,7 @@
   <tabstop>proxy_port</tabstop>
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
+  <tabstop>ignore_proxy_list</tabstop>
   <tabstop>utc_time_zone</tabstop>
   <tabstop>scrollArea_3</tabstop>
   <tabstop>animated_scrolling</tabstop>
