@@ -834,9 +834,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-238</y>
                <width>674</width>
-               <height>999</height>
+               <height>755</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1344,27 +1344,6 @@
                      </layout>
                     </item>
                    </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_38">
-                   <property name="text">
-                    <string>Ignore Sites</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_39">
-                   <property name="text">
-                    <string>192.168.178.0/24, nasa.gov</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPlainTextEdit" name="proxy_ignore_list">
-                   <property name="placeholderText">
-                    <string>Ignore List</string>
-                   </property>
                   </widget>
                  </item>
                 </layout>
@@ -2137,7 +2116,6 @@
   <tabstop>proxy_port</tabstop>
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
-  <tabstop>ignore_proxy_list</tabstop>
   <tabstop>utc_time_zone</tabstop>
   <tabstop>scrollArea_3</tabstop>
   <tabstop>animated_scrolling</tabstop>
