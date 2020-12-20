@@ -204,7 +204,8 @@ TEMPLATE	= app
 QMAKE_CLEAN     += Dooble
 
 freebsd-* {
-DEFINES += DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+# Enable only if FreeBSD's Qt and WebEngine versions differ.
+DEFINES -= DOOBLE_FREEBSD_WEBENGINE_MISMATCH
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
