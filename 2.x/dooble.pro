@@ -213,9 +213,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Werror \
                           -Wextra \
                           -Wformat=2 \
-                          -Wformat-overflow=2 \
-                          -Wformat-truncation=2 \
-                          -Wl,-z,relro \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
@@ -227,7 +224,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fwrapv \
                           -mtune=generic \
                           -pedantic \
-                          -std=c++11
+                          -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:macx {
 QMAKE_CXXFLAGS_RELEASE += -O3 \
