@@ -228,13 +228,13 @@ bool dooble_cryptography::memcmp(const QByteArray &a, const QByteArray &b)
   QByteArray c1;
   QByteArray c2;
   int length = qMax(a.length(), b.length());
-  int rc = 0;
+  quint64 rc = 0;
 
   c1 = a.leftJustified(length, 0);
   c2 = b.leftJustified(length, 0);
 
   for(int i = 0; i < length; i++)
-    rc |= c1[i] ^ c2[i];
+    rc |= static_cast<quint64> (c1[i]) ^ static_cast<quint64> (c2[i]);
 
   return rc == 0;
 }

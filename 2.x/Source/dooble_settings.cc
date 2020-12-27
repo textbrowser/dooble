@@ -400,9 +400,9 @@ dooble_settings::dooble_settings(void):QMainWindow()
 	(tr("A valid list of dictionaries has not been prepared."));
     }
   else
-    for(int i = 0; i < s_spell_checker_dictionaries.size(); i++)
+    for(const auto &i : s_spell_checker_dictionaries)
       {
-	auto *item = new QListWidgetItem(s_spell_checker_dictionaries.at(i));
+	auto *item = new QListWidgetItem(i);
 
 	item->setFlags(Qt::ItemIsEnabled |
 		       Qt::ItemIsSelectable |
@@ -676,7 +676,7 @@ void dooble_settings::prepare_fonts(void)
 	     << QWebEngineSettings::SerifFont
 	     << QWebEngineSettings::StandardFont;
 
-    for(auto family : families)
+    for(const auto family : families)
       fonts << QWebEngineSettings::defaultSettings()->fontFamily(family);
 
     {
@@ -2804,10 +2804,10 @@ void dooble_settings::slot_reset(void)
        << "dooble_settings.db"
        << "dooble_style_sheets.db";
 
-  for(int i = 0; i < list.size(); i++)
+  for(const auto &i : list)
     QFile::remove(dooble_settings::setting("home_path").toString() +
 		  QDir::separator() +
-		  list.at(i));
+		  i);
 
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();

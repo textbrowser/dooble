@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
        << SIGSEGV
        << SIGTERM;
 
-  for(int i : list)
+  for(const auto i : list)
     {
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
       memset(&signal_action, 0, sizeof(struct sigaction));
