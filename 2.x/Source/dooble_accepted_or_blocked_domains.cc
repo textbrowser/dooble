@@ -1297,9 +1297,9 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
   QModelIndexList list
     (m_ui.session_rejections->selectionModel()->selectedRows(1));
 
-  for(int i = 0; i < list.size(); i++)
+  for(const auto &i : list)
     {
-      QUrl url(QUrl::fromUserInput(list.at(i).data().toString()));
+      QUrl url(QUrl::fromUserInput(i.data().toString()));
 
       save_blocked_domain(url.host(), false, true);
     }
