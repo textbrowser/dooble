@@ -242,7 +242,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   list << QWebEnginePage::OpenLinkInNewTab
        << QWebEnginePage::OpenLinkInNewWindow;
 
-  for(auto i : list)
+  for(const auto i : list)
     if((action = m_page->action(i)))
       action->setVisible(false);
 
