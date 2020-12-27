@@ -355,12 +355,12 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
 	query.exec();
 	query.exec("PRAGMA foreign_keys = ON");
 
-	for(int i = 0; i < domains.size(); i++)
+	for(const auto &domain : domains)
 	  {
 	    query.prepare("DELETE FROM dooble_cookies_domains WHERE "
 			  "domain_digest = ?");
 	    query.addBindValue
-	      (dooble::s_cryptography->hmac(domains.at(i).toUtf8()).toBase64());
+	      (dooble::s_cryptography->hmac(domain.toUtf8()).toBase64());
 	    query.exec();
 	  }
       }
