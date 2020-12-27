@@ -1395,8 +1395,8 @@ void dooble::prepare_shortcuts(void)
 
 #ifdef Q_OS_MAC
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-      for(int i = 0; i < m_shortcuts.size(); i++)
-	connect(m_shortcuts.at(i),
+      for(auto shortcut : m_shortcuts)
+	connect(shortcut,
 		SIGNAL(activated(void)),
 		this,
 		SLOT(slot_shortcut_activated(void)));
@@ -3563,8 +3563,8 @@ void dooble::slot_warn_of_missing_sqlite_driver(void)
   QStringList list(QSqlDatabase::drivers());
   bool found = false;
 
-  for(int i = 0; i < list.size(); i++)
-    if(list.at(i).toLower().contains("sqlite"))
+  for(const auto &i : list)
+    if(i.toLower().contains("sqlite"))
       {
 	found = true;
 	break;
