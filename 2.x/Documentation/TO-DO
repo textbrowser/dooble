@@ -158,6 +158,7 @@ Remaining Items
 - Allow custom JavaScript per URL.
 - Argon2, per request.
 - Auto-correct addresses.
+- Ctrl + W shortcuts.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
