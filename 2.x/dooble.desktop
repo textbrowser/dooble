@@ -1,7 +1,7 @@
 # https://specifications.freedesktop.org/desktop-entry-spec/latest/apa.html
 
 [Desktop Entry]
-Categories=Web
+Categories=Network;WebBrowser;
 Comment=Dooble Web Browser
 Exec=/usr/bin/dooble
 GenericName=Dooble Web Browser
