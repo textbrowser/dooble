@@ -262,6 +262,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wformat-truncation=2 \
                           -Wformat=2 \
                           -Wl,-z,relro \
+                          -Wlogical-op \
                           -Wno-deprecated-copy \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
