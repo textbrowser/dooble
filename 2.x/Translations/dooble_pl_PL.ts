@@ -1374,12 +1374,12 @@
     </message>
     <message>
         <location line="264" filename="../UI/dooble_page.ui"/>
-        <source>Next Occurence</source>
+        <source>Next Occurrence</source>
         <translation>Następne</translation>
     </message>
     <message>
         <location line="280" filename="../UI/dooble_page.ui"/>
-        <source>Previous Occurence</source>
+        <source>Previous Occurrence</source>
         <translation>Poprzednie</translation>
     </message>
     <message>

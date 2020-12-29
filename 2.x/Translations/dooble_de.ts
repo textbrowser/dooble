@@ -1716,11 +1716,11 @@ Dooble ist open source Software.
         <translation>Finden</translation>
     </message>
     <message>
-        <source>Next Occurence</source>
+        <source>Next Occurrence</source>
         <translation>Nächste Fundestelle</translation>
     </message>
     <message>
-        <source>Previous Occurence</source>
+        <source>Previous Occurrence</source>
         <translation>Vorherige Fundstelle</translation>
     </message>
     <message>

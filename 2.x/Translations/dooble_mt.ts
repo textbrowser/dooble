@@ -1741,12 +1741,12 @@
     </message>
     <message>
         <location filename="../UI/dooble_page.ui" line="267"/>
-        <source>Next Occurence</source>
+        <source>Next Occurrence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UI/dooble_page.ui" line="283"/>
-        <source>Previous Occurence</source>
+        <source>Previous Occurrence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
