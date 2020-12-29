@@ -264,7 +264,7 @@
       <item>
        <widget class="QToolButton" name="find_next">
         <property name="toolTip">
-         <string>Next Occurence</string>
+         <string>Next Occurrence</string>
         </property>
         <property name="iconSize">
          <size>
@@ -280,7 +280,7 @@
       <item>
        <widget class="QToolButton" name="find_previous">
         <property name="toolTip">
-         <string>Previous Occurence</string>
+         <string>Previous Occurrence</string>
         </property>
         <property name="iconSize">
          <size>
