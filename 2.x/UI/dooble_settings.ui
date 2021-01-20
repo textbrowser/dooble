@@ -834,7 +834,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-238</y>
+               <y>0</y>
                <width>674</width>
                <height>755</height>
               </rect>
@@ -1394,7 +1394,7 @@
                <x>0</x>
                <y>0</y>
                <width>637</width>
-               <height>1442</height>
+               <height>1471</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1419,6 +1419,16 @@
                <widget class="QCheckBox" name="dns_prefetch">
                 <property name="text">
                  <string>DNS Pre-fetch</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="favicons">
+                <property name="text">
+                 <string>Favicons</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -2121,6 +2131,7 @@
   <tabstop>animated_scrolling</tabstop>
   <tabstop>automatic_loading_of_images</tabstop>
   <tabstop>dns_prefetch</tabstop>
+  <tabstop>favicons</tabstop>
   <tabstop>features_permissions_groupbox</tabstop>
   <tabstop>features_permissions</tabstop>
   <tabstop>remove_all_features_permissions</tabstop>
