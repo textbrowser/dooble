@@ -269,6 +269,7 @@ dooble_settings::dooble_settings(void):QMainWindow()
   s_settings["credentials_enabled"] = false;
   s_settings["denote_private_widgets"] = true;
   s_settings["do_not_track"] = true;
+  s_settings["favicons"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["features_permissions"] = true;
   s_settings["hash_type"] = "SHA3-512";
@@ -1070,6 +1071,7 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("dns_prefetch", false).toBool());
   m_ui.do_not_track->setChecked
     (s_settings.value("do_not_track", true).toBool());
+  m_ui.favicons->setChecked(s_settings.value("favicons", true).toBool());
   m_ui.features_permissions_groupbox->setChecked
     (s_settings.value("features_permissions", true).toBool());
   m_ui.hash->setCurrentIndex
@@ -1938,6 +1940,7 @@ void dooble_settings::slot_apply(void)
   set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
     ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
+  set_setting("favicons", m_ui.favicons->isChecked());
   set_setting
     ("features_permissions", m_ui.features_permissions_groupbox->isChecked());
 
