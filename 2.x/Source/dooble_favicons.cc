@@ -196,7 +196,9 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
   if(dooble::s_search_engines_window)
     dooble::s_search_engines_window->set_icon(icon, url);
 
-  if(!dooble::s_cryptography || icon.isNull())
+  if(!dooble::s_cryptography ||
+     !dooble::s_settings->setting("favicons", true).toBool() ||
+     icon.isNull())
     return;
 
   QString database_name(dooble_database_utilities::database_name());
