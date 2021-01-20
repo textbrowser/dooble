@@ -152,6 +152,7 @@ Completed Items
 - Windows PRNG.
 - Wobbly progress label.
 - Zoom.
+- linkHovered() is emitted without user interaction.
 - mlock().
 
 Remaining Items
@@ -170,7 +171,6 @@ Remaining Items
 - Shortcuts browser.
 - Sign Debian release: new public keys.
 - Translation browser.
-- linkHovered() is emitted without user interaction.
 
 Unknown Items
 
