@@ -168,7 +168,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
 
   for(int i = 0; i < 2; i++)
     {
-      auto *item = new dooble_accepted_or_blocked_domains_item();
+      auto item = new dooble_accepted_or_blocked_domains_item();
 
       item->setData(Qt::UserRole, domain);
 
@@ -252,7 +252,7 @@ void dooble_accepted_or_blocked_domains::new_exception(const QString &url)
   m_ui.exceptions->setRowCount(m_ui.exceptions->rowCount() + 1);
   m_ui.exception->clear();
 
-  auto *item = new dooble_accepted_or_blocked_domains_item();
+  auto item = new dooble_accepted_or_blocked_domains_item();
 
   item->setCheckState(Qt::Checked);
   item->setData(Qt::UserRole, url);
@@ -284,10 +284,10 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -359,7 +359,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
     {
       it.next();
 
-      auto *item = new dooble_accepted_or_blocked_domains_item();
+      auto item = new dooble_accepted_or_blocked_domains_item();
 
       if(it.value())
 	item->setCheckState(Qt::Checked);
@@ -397,10 +397,10 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -418,7 +418,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 			  "FROM dooble_accepted_or_blocked_domains_exceptions"))
 	      while(query.next())
 		{
-		  QByteArray data1
+		  auto data1
 		    (QByteArray::fromBase64(query.value(0).toByteArray()));
 
 		  data1 = dooble::s_cryptography->mac_then_decrypt(data1);
@@ -432,7 +432,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 		      continue;
 		    }
 
-		  QByteArray data2
+		  auto data2
 		    (QByteArray::fromBase64(query.value(1).toByteArray()));
 
 		  data2 = dooble::s_cryptography->mac_then_decrypt(data2);
@@ -470,7 +470,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
     {
       it.next();
 
-      auto *item = new dooble_accepted_or_blocked_domains_item();
+      auto item = new dooble_accepted_or_blocked_domains_item();
 
       if(it.value())
 	item->setCheckState(Qt::Checked);
@@ -513,10 +513,10 @@ void dooble_accepted_or_blocked_domains::purge(void)
   m_ui.session_rejections->setRowCount(0);
   m_ui.table->setRowCount(0);
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -555,10 +555,10 @@ void dooble_accepted_or_blocked_domains::save
       return;
     }
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -585,7 +585,7 @@ void dooble_accepted_or_blocked_domains::save
 	      ("INSERT INTO dooble_accepted_or_blocked_domains "
 	       "(domain, domain_digest, state) VALUES (?, ?, ?)");
 
-	    QByteArray data
+	    auto data
 	      (cryptography.
 	       encrypt_then_mac(it.key().toLower().trimmed().toUtf8()));
 
@@ -631,10 +631,10 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -657,7 +657,7 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 	    ("INSERT INTO dooble_accepted_or_blocked_domains "
 	     "(domain, domain_digest, state) VALUES (?, ?, ?)");
 
-	QByteArray data
+	auto data
 	  (dooble::s_cryptography->
 	   encrypt_then_mac(domain.toLower().trimmed().toUtf8()));
 
@@ -704,10 +704,10 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -724,7 +724,7 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
 	   "dooble_accepted_or_blocked_domains_exceptions "
 	   "(state, url, url_digest) VALUES (?, ?, ?)");
 
-	QByteArray data
+	auto data
 	  (dooble::s_cryptography->
 	   encrypt_then_mac(state ? QByteArray("true") : QByteArray("false")));
 
@@ -804,8 +804,7 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
 
   QApplication::processEvents();
 
-  QString text = QUrl::fromUserInput
-    (dialog.textValue().toLower().trimmed()).host();
+  auto text(QUrl::fromUserInput(dialog.textValue().toLower().trimmed()).host());
 
   if(text.isEmpty())
     return;
@@ -830,7 +829,7 @@ void dooble_accepted_or_blocked_domains::slot_add_session_url
   m_ui.session_rejections->setRowCount
     (m_ui.session_rejections->rowCount() + 1);
 
-  QTableWidgetItem *item = new QTableWidgetItem(first_party_url.toString());
+  auto item = new QTableWidgetItem(first_party_url.toString());
 
   item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   m_ui.session_rejections->setItem
@@ -874,10 +873,10 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -902,7 +901,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QModelIndexList list(m_ui.table->selectionModel()->selectedRows(1));
+  auto list(m_ui.table->selectionModel()->selectedRows(1));
 
   for(int i = list.size() - 1; i >= 0; i--)
     if(m_ui.table->isRowHidden(list.at(i).row()))
@@ -937,10 +936,10 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -991,7 +990,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QModelIndexList list(m_ui.exceptions->selectionModel()->selectedRows(1));
+  auto list(m_ui.exceptions->selectionModel()->selectedRows(1));
 
   QApplication::restoreOverrideCursor();
 
@@ -1021,10 +1020,10 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -1080,7 +1079,7 @@ void dooble_accepted_or_blocked_domains::slot_exceptions_item_changed
   if(item->column() != 0)
     return;
 
-  bool state = item->checkState() == Qt::Checked;
+  auto state = item->checkState() == Qt::Checked;
 
   item = m_ui.exceptions->item(item->row(), 1);
 
@@ -1132,7 +1131,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		 data.trimmed().startsWith("#"))
 		continue;
 
-	      QUrl url(QUrl::fromUserInput(data.mid(0, static_cast<int> (rc)).
+	      auto url(QUrl::fromUserInput(data.mid(0, static_cast<int> (rc)).
 					   trimmed()));
 
 	      if(!url.isEmpty() && url.isValid())
@@ -1198,7 +1197,7 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
   if(item->column() != 0)
     return;
 
-  bool state = item->checkState() == Qt::Checked;
+  auto state = item->checkState() == Qt::Checked;
 
   item = m_ui.table->item(item->row(), 1);
 
@@ -1263,11 +1262,11 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
   for(int i = 0; i < m_ui.session_rejections->rowCount(); i++)
     {
-      auto *item = m_ui.session_rejections->item(i, 1); // Origin URL
+      auto item = m_ui.session_rejections->item(i, 1); // Origin URL
 
       if(item)
 	{
-	  QUrl url(QUrl::fromUserInput(item->text()));
+	  auto url(QUrl::fromUserInput(item->text()));
 
 	  if(m_ui.save_all == sender())
 	    save_blocked_domain(url.host(), false, true);
@@ -1277,7 +1276,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
 	      if(item)
 		{
-		  QUrl first_party_url(QUrl::fromUserInput(item->text()));
+		  auto first_party_url(QUrl::fromUserInput(item->text()));
 
 		  if(!dooble_ui_utilities::allowed_scheme(first_party_url))
 		    save_blocked_domain(url.host(), false, true);
@@ -1294,8 +1293,7 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QModelIndexList list
-    (m_ui.session_rejections->selectionModel()->selectedRows(1));
+  auto list(m_ui.session_rejections->selectionModel()->selectedRows(1));
 
   for(const auto &i : list)
     {
@@ -1312,15 +1310,15 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString text(m_ui.search->text().toLower().trimmed());
-  int count = m_ui.table->rowCount();
+  auto count = m_ui.table->rowCount();
+  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
       m_ui.table->setRowHidden(i, false);
     else
       {
-	auto *item = m_ui.table->item(i, 1);
+	auto item = m_ui.table->item(i, 1);
 
 	if(!item)
 	  {

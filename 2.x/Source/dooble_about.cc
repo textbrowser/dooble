@@ -43,7 +43,7 @@ dooble_about::dooble_about(void):QMainWindow()
 	  SLOT(slot_link_activated(const QString &)));
 
   QString qversion("");
-  const char *tmp = qVersion();
+  const auto tmp = qVersion();
 
   if(tmp)
     qversion = tmp;
