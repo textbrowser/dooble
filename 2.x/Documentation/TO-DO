@@ -90,6 +90,7 @@ Completed Items
 - Optional DNT.
 - Optional Visited Links.
 - Optional credentials.
+- Optional favicons.
 - Pause and resume downloads. Requires Qt support.
 - Pin support windows.
 - Place the Translations directory into the OS X bundle.
@@ -165,7 +166,6 @@ Remaining Items
 - Element-selection option.
 - Fancy completer.
 - Include date stamps in cookie containers.
-- Optional favicons.
 - Search engine icons should be based on host names.
 - Shortcuts browser.
 - Sign Debian release: new public keys.
