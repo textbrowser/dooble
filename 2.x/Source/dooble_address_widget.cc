@@ -38,7 +38,7 @@
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
-  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   m_favorite = new QToolButton(this);
   m_favorite->setCursor(Qt::ArrowCursor);
@@ -146,7 +146,7 @@ QRect dooble_address_widget::information_rectangle(void) const
 
 QSize dooble_address_widget::sizeHint(void) const
 {
-  QSize size(QLineEdit::sizeHint());
+  auto size(QLineEdit::sizeHint());
 
   size.setHeight(size.height() + 5);
   return size;
@@ -158,7 +158,7 @@ bool dooble_address_widget::event(QEvent *event)
     {
       if(dynamic_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
 	{
-	  auto *table_view = qobject_cast<QTableView *> (m_completer->popup());
+	  auto table_view = qobject_cast<QTableView *> (m_completer->popup());
 
 	  if(table_view && table_view->isVisible())
 	    {
@@ -248,7 +248,7 @@ void dooble_address_widget::keyPressEvent(QKeyEvent *event)
 
 void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if(url.isEmpty() || !url.isValid())
     {
@@ -288,7 +288,7 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 
 void dooble_address_widget::prepare_icons(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_favorite->setIcon
     (QIcon::fromTheme("emblem-default",
@@ -303,11 +303,11 @@ void dooble_address_widget::prepare_icons(void)
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
 {
-  QSize size1 = m_favorite->sizeHint();
-  QSize size2 = m_information->sizeHint();
-  QSize size3 = m_pull_down->sizeHint();
+  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  auto size1(m_favorite->sizeHint());
+  auto size2(m_information->sizeHint());
+  auto size3(m_pull_down->sizeHint());
   int d = 0;
-  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   d = (rect().height() - (size1.height() - size1.height() % 2)) / 2;
   m_favorite->move(frame_width - rect().left() + size2.width() + 5,
@@ -329,15 +329,15 @@ void dooble_address_widget::setText(const QString &text)
   QLineEdit::setText(text.trimmed());
   setCursorPosition(0);
 
-  QUrl url(QUrl::fromUserInput(text));
+  auto url(QUrl::fromUserInput(text));
 
   if(!url.isEmpty() && !url.isLocalFile() && url.isValid())
     {
       QList<QTextLayout::FormatRange> formats;
-      QString host(url.host());
       QTextCharFormat format;
       QTextLayout::FormatRange all_format_range;
       QTextLayout::FormatRange host_format_range;
+      auto host(url.host());
 
       format.setFontStyleStrategy(QFont::PreferAntialias);
       format.setFontWeight(QFont::Normal);
@@ -371,11 +371,10 @@ void dooble_address_widget::set_text_format
 
   for(const auto &format : formats)
     {
-      QInputMethodEvent::AttributeType attribute_type =
-	QInputMethodEvent::TextFormat;
+      auto attribute_type = QInputMethodEvent::TextFormat;
+      auto length = format.length;
+      auto start = format.start;
       const QVariant &value(format.format);
-      int length = format.length;
-      int start = format.start;
 
       attributes << QInputMethodEvent::Attribute(attribute_type,
 						 start,
@@ -416,7 +415,7 @@ void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 
   if(m_view->url() == url)
     {
-      QString icon_set(dooble_settings::setting("icon_set").toString());
+      auto icon_set(dooble_settings::setting("icon_set").toString());
 
       if(state)
 	m_favorite->setIcon
@@ -433,7 +432,7 @@ void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
 
 void dooble_address_widget::slot_favorites_cleared(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_favorite->setIcon
     (QIcon::fromTheme("emblem-default",
@@ -495,8 +494,8 @@ void dooble_address_widget::slot_show_site_information_menu(void)
     return;
 
   QMenu menu(this);
-  QString icon_set(dooble_settings::setting("icon_set").toString());
-  QUrl url(dooble_ui_utilities::simplified_url(m_view->url()));
+  auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto url(dooble_ui_utilities::simplified_url(m_view->url()));
 
   if(dooble_certificate_exceptions_menu_widget::has_exception(url))
     menu.addAction
@@ -533,7 +532,7 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
   if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
     return;
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble::s_history->is_favorite(m_view->url()))
     m_favorite->setIcon

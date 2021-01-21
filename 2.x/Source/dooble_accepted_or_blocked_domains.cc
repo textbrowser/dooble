@@ -305,7 +305,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 			  "FROM dooble_accepted_or_blocked_domains"))
 	      while(query.next())
 		{
-		  QByteArray data1
+		  auto data1
 		    (QByteArray::fromBase64(query.value(0).toByteArray()));
 
 		  data1 = dooble::s_cryptography->mac_then_decrypt(data1);
@@ -319,7 +319,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 		      continue;
 		    }
 
-		  QByteArray data2
+		  auto data2
 		    (QByteArray::fromBase64(query.value(1).toByteArray()));
 
 		  data2 = dooble::s_cryptography->mac_then_decrypt(data2);
@@ -1297,7 +1297,7 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 
   for(const auto &i : list)
     {
-      QUrl url(QUrl::fromUserInput(i.data().toString()));
+      auto url(QUrl::fromUserInput(i.data().toString()));
 
       save_blocked_domain(url.host(), false, true);
     }

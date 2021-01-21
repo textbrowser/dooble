@@ -39,7 +39,7 @@ dooble_application::dooble_application(int &argc, char **argv):
   m_application_locked = false;
   m_translator = nullptr;
 
-  QFont font(this->font());
+  auto font(this->font());
 
   font.setStyleStrategy
     (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
@@ -52,7 +52,7 @@ dooble_application::dooble_application(int &argc, char **argv):
 
 QString dooble_application::style_name(void) const
 {
-  static QString style_name
+  static auto style_name
     (style() ? style()->objectName().toLower().trimmed() : "");
 
   return style_name;
@@ -70,8 +70,8 @@ void dooble_application::install_translator(void)
 
   if(dooble_settings::setting("language_index").toInt() == 1) // System
     {
-      QByteArray variable(qgetenv("DOOBLE_TRANSLATIONS_PATH"));
       QString path("");
+      auto variable(qgetenv("DOOBLE_TRANSLATIONS_PATH"));
 
       if(!variable.isEmpty())
 	path = QString::fromLocal8Bit(variable.constData());

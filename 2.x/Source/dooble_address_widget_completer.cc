@@ -166,7 +166,7 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
 	return;
       }
 
-  auto *item = new QStandardItem(icon, url.toString());
+  auto item = new QStandardItem(icon, url.toString());
 
   item->setToolTip(url.toString());
   s_model->insertRow(0, item);
@@ -202,7 +202,7 @@ void dooble_address_widget_completer::complete(const QString &text)
   else
     {
       QMultiMap<int, QStandardItem *> map;
-      QString c(text.toLower().trimmed());
+      auto c(text.toLower().trimmed());
 
       for(int i = 0; i < s_model->rowCount(); i++)
 	if(s_model->item(i, 0))
@@ -229,7 +229,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 
   if(m_model->rowCount() > 0)
     {
-      int height = 2 * m_popup->frameWidth() +
+      auto height = 2 * m_popup->frameWidth() +
 	m_popup->horizontalHeader()->height() +
 	m_popup->rowHeight(0) * qMin(m_model->rowCount(),
 				     static_cast<int> (dooble_page::
@@ -249,7 +249,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 
 void dooble_address_widget_completer::remove_item(const QUrl &url)
 {
-  QList<QStandardItem *> list(s_model->findItems(url.toString()));
+  auto list(s_model->findItems(url.toString()));
 
   if(!list.isEmpty())
     if(list.at(0))
@@ -261,7 +261,7 @@ void dooble_address_widget_completer::remove_item(const QUrl &url)
 void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
 						    const QUrl &url)
 {
-  QList<QStandardItem *> list(s_model->findItems(url.toString()));
+  auto list(s_model->findItems(url.toString()));
 
   if(!list.isEmpty())
     if(list.at(0))
@@ -293,7 +293,7 @@ void dooble_address_widget_completer::slot_text_edited_timeout(void)
   if(!parent())
     return;
 
-  QString text(qobject_cast<dooble_address_widget *> (parent())->text());
+  auto text(qobject_cast<dooble_address_widget *> (parent())->text());
 
   if(text.trimmed().isEmpty())
     m_popup->setVisible(false);
