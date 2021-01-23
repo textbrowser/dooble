@@ -136,7 +136,7 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
 
 void dooble_favorites_popup::prepare_icons(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.delete_selected->setIcon
     (QIcon::fromTheme("edit-delete",
@@ -194,7 +194,7 @@ void dooble_favorites_popup::slot_delete_selected(void)
   if(!dooble::s_history)
     return;
 
-  QModelIndexList list(m_ui.view->selectionModel()->selectedRows(1));
+  auto list(m_ui.view->selectionModel()->selectedRows(1));
 
   if(list.isEmpty())
     return;

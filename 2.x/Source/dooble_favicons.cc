@@ -53,10 +53,10 @@ QIcon dooble_favicons::icon(const QUrl &url)
     return QIcon(":/Logo/dooble.png");
 
   QIcon icon;
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -79,7 +79,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
 	if(query.exec() && query.next())
 	  if(!query.isNull(0))
 	    {
-	      QByteArray bytes
+	      auto bytes
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
@@ -142,10 +142,10 @@ void dooble_favicons::create_tables(QSqlDatabase &db)
 
 void dooble_favicons::purge(void)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -168,10 +168,10 @@ void dooble_favicons::purge(void)
 
 void dooble_favicons::purge_temporary(void)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -201,10 +201,10 @@ void dooble_favicons::save_favicon(const QIcon &icon, const QUrl &url)
      icon.isNull())
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
