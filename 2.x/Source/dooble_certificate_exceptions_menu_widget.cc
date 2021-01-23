@@ -47,11 +47,11 @@ dooble_certificate_exceptions_menu_widget(QWidget *parent):QWidget(parent)
 
 bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 {
-  QString database_name(dooble_database_utilities::database_name());
-  bool state = false;
+  auto database_name(dooble_database_utilities::database_name());
+  auto state = false;
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -75,7 +75,7 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 	if(query.exec())
 	  if(query.next())
 	    {
-	      QByteArray bytes
+	      auto bytes
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
@@ -116,10 +116,10 @@ void dooble_certificate_exceptions_menu_widget::create_tables(QSqlDatabase &db)
 void dooble_certificate_exceptions_menu_widget::exception_accepted
 (const QString &error, const QUrl &url)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -175,10 +175,10 @@ void dooble_certificate_exceptions_menu_widget::exception_accepted
 
 void dooble_certificate_exceptions_menu_widget::purge(void)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -201,10 +201,10 @@ void dooble_certificate_exceptions_menu_widget::purge(void)
 
 void dooble_certificate_exceptions_menu_widget::purge_temporary(void)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -245,10 +245,10 @@ void dooble_certificate_exceptions_menu_widget::set_url(const QUrl &url)
 
 void dooble_certificate_exceptions_menu_widget::slot_remove_exception(void)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +

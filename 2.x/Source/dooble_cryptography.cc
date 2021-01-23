@@ -181,7 +181,7 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
     return data;
 
   QByteArray computed_mac;
-  QByteArray mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
+  auto mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
 
   computed_mac = hmac(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 
@@ -227,7 +227,7 @@ bool dooble_cryptography::memcmp(const QByteArray &a, const QByteArray &b)
 {
   QByteArray c1;
   QByteArray c2;
-  int length = qMax(a.length(), b.length());
+  auto length = qMax(a.length(), b.length());
   quint64 rc = 0;
 
   c1 = a.leftJustified(length, 0);

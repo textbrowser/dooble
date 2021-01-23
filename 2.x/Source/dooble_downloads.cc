@@ -111,7 +111,7 @@ bool dooble_downloads::is_finished(void) const
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      auto *downloads_item = qobject_cast
+      auto downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
@@ -133,7 +133,7 @@ int dooble_downloads::size(void) const
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      auto *downloads_item = qobject_cast
+      auto downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
@@ -147,7 +147,7 @@ void dooble_downloads::abort(void)
 {
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      auto *downloads_item = qobject_cast
+      auto downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(downloads_item)
@@ -161,7 +161,7 @@ void dooble_downloads::clear(void)
 
   for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
     {
-      auto *downloads_item = qobject_cast
+      auto downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(!downloads_item)
@@ -210,7 +210,7 @@ void dooble_downloads::delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QModelIndexList list(m_ui.table->selectionModel()->selectedIndexes());
+  auto list(m_ui.table->selectionModel()->selectedIndexes());
 
   for(int i = list.size() - 1; i >= 0; i--)
     if(m_ui.table->isRowHidden(list.at(i).row()))
@@ -242,7 +242,7 @@ void dooble_downloads::delete_selected(void)
 
   for(int i = list.size() - 1; i >= 0; i--)
     {
-      auto *downloads_item = qobject_cast
+      auto downloads_item = qobject_cast
 	<dooble_downloads_item *> (m_ui.table->cellWidget(list.at(i).row(), 0));
 
       if(!downloads_item)
@@ -291,7 +291,7 @@ void dooble_downloads::purge(void)
   QString database_name("dooble_downloads");
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -332,7 +332,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 
   for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
     {
-      auto *downloads_item =
+      auto downloads_item =
 	qobject_cast<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
       if(!downloads_item)
@@ -357,7 +357,7 @@ void dooble_downloads::record_download(QWebEngineDownloadItem *download)
 	}
     }
 
-  auto *downloads_item = new dooble_downloads_item
+  auto downloads_item = new dooble_downloads_item
     (download,
      QWebEngineProfile::defaultProfile() != m_web_engine_profile,
      index,
@@ -395,7 +395,7 @@ void dooble_downloads::remove_entry(qintptr oid)
   QString database_name("dooble_downloads");
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -479,12 +479,12 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 
 void dooble_downloads::slot_copy_download_location(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  auto *clipboard = QApplication::clipboard();
+  auto clipboard = QApplication::clipboard();
 
   if(clipboard)
     clipboard->setText(action->property("url").toUrl().toString());
@@ -492,12 +492,12 @@ void dooble_downloads::slot_copy_download_location(void)
 
 void dooble_downloads::slot_delete_row(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  auto *downloads_item = qobject_cast<dooble_downloads_item *>
+  auto downloads_item = qobject_cast<dooble_downloads_item *>
     (m_ui.table->cellWidget(action->property("row").toInt(), 0));
 
   if(downloads_item && downloads_item->is_finished())
@@ -534,8 +534,8 @@ void dooble_downloads::slot_download_destroyed(void)
 void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
 {
   QFileInfo file_info(m_ui.download_path->text());
-  QPalette palette(m_ui.download_path->palette());
-  static QPalette s_palette(m_ui.download_path->palette());
+  auto palette(m_ui.download_path->palette());
+  static auto s_palette(m_ui.download_path->palette());
 
   if(file_info.isReadable() && file_info.isWritable())
     {
@@ -602,12 +602,12 @@ void dooble_downloads::slot_find(void)
 
 void dooble_downloads::slot_open_download_page(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QUrl url(action->property("url").toUrl().adjusted(QUrl::RemoveFilename));
+  auto url(action->property("url").toUrl().adjusted(QUrl::RemoveFilename));
 
   if(url.isEmpty() || !url.isValid())
     return;
@@ -620,7 +620,7 @@ void dooble_downloads::slot_open_download_page(void)
   disconnect(this,
 	     SIGNAL(open_link(const QUrl &)));
 
-  QWidgetList list(QApplication::topLevelWidgets());
+  auto list(QApplication::topLevelWidgets());
 
   for(auto i : list)
     if(qobject_cast<dooble *> (i) &&
@@ -656,7 +656,7 @@ void dooble_downloads::slot_populate(void)
   QString database_name("dooble_downloads");
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -680,11 +680,11 @@ void dooble_downloads::slot_populate(void)
 		      "FROM dooble_downloads ORDER BY insert_order"))
 	  while(query.next() && total_rows < m_ui.table->rowCount())
 	    {
-	      QSqlRecord record(query.record());
 	      QString download_path("");
 	      QString file_name("");
 	      QString information("");
 	      QUrl url;
+	      auto record(query.record());
 	      qintptr oid = -1;
 
 	      for(int i = 0; i < record.count(); i++)
@@ -695,7 +695,7 @@ void dooble_downloads::slot_populate(void)
 		  case 2:
 		  case 3:
 		    {
-		      QByteArray bytes
+		      auto bytes
 			(QByteArray::fromBase64(query.value(i).toByteArray()));
 
 		      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
@@ -737,7 +737,7 @@ void dooble_downloads::slot_populate(void)
 		  continue;
 		}
 
-	      auto *downloads_item = new dooble_downloads_item
+	      auto downloads_item = new dooble_downloads_item
 		(download_path, file_name, information, url, oid, this);
 
 	      connect(downloads_item,
@@ -770,20 +770,20 @@ void dooble_downloads::slot_populate(void)
 
 void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 {
-  foreach(auto *item, findChildren<dooble_downloads_item *> ())
+  foreach(auto item, findChildren<dooble_downloads_item *> ())
     if(item)
       if(item->url() == url)
 	{
 	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	  QWidgetList list(QApplication::topLevelWidgets());
+	  auto list(QApplication::topLevelWidgets());
 
 	  for(auto i : list)
 	    if(qobject_cast<dooble *> (i))
 	      {
-		auto *d = qobject_cast<dooble *> (i);
+		auto d = qobject_cast<dooble *> (i);
 
-		foreach(auto *page, d->findChildren<dooble_page *> ())
+		foreach(auto page, d->findChildren<dooble_page *> ())
 		  if(page)
 		    if(m_web_engine_profile == page->web_engine_profile())
 		      {
@@ -803,15 +803,15 @@ void dooble_downloads::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString text(m_ui.search->text().toLower().trimmed());
-  int count = m_ui.table->rowCount();
+  auto count = m_ui.table->rowCount();
+  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
       m_ui.table->setRowHidden(i, false);
     else
       {
-	auto *downloads_item = qobject_cast
+	auto downloads_item = qobject_cast
 	  <dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
 
 	if(!downloads_item)
@@ -857,12 +857,12 @@ void dooble_downloads::slot_select_path(void)
 
 void dooble_downloads::slot_show_context_menu(const QPoint &point)
 {
-  int row = m_ui.table->rowAt(point.y());
+  auto row = m_ui.table->rowAt(point.y());
 
   if(row < 0)
     return;
 
-  auto *downloads_item = qobject_cast
+  auto downloads_item = qobject_cast
     <dooble_downloads_item *> (m_ui.table->cellWidget(row, 0));
 
   if(!downloads_item)
@@ -870,7 +870,7 @@ void dooble_downloads::slot_show_context_menu(const QPoint &point)
 
   QAction *action = nullptr;
   QMenu menu(this);
-  QUrl url(downloads_item->url());
+  auto url(downloads_item->url());
 
   action = menu.addAction
     (tr("&Copy Download Location"),

@@ -78,9 +78,8 @@ void dooble_certificate_exceptions::exception_accepted(const QString &error,
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QTableWidgetItem *> list
-    (m_ui.table->
-     findItems(url.toString(), Qt::MatchEndsWith | Qt::MatchStartsWith));
+  auto list(m_ui.table->findItems(url.toString(),
+				  Qt::MatchEndsWith | Qt::MatchStartsWith));
 
   QApplication::restoreOverrideCursor();
 
@@ -130,9 +129,8 @@ void dooble_certificate_exceptions::remove_exception(const QUrl &url)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QTableWidgetItem *> list
-    (m_ui.table->
-     findItems(url.toString(), Qt::MatchEndsWith | Qt::MatchStartsWith));
+  auto list(m_ui.table->findItems(url.toString(),
+				  Qt::MatchEndsWith | Qt::MatchStartsWith));
 
   QApplication::restoreOverrideCursor();
 
@@ -198,7 +196,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QModelIndexList list(m_ui.table->selectionModel()->selectedRows(0));
+  auto list(m_ui.table->selectionModel()->selectedRows(0));
 
   for(int i = list.size() - 1; i >= 0; i--)
     if(m_ui.table->isRowHidden(list.at(i).row()))
@@ -234,7 +232,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
   QString database_name("dooble_certificate_exceptions");
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -295,7 +293,7 @@ void dooble_certificate_exceptions::slot_populate(void)
       QString database_name("dooble_certificate_exceptions");
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -316,7 +314,7 @@ void dooble_certificate_exceptions::slot_populate(void)
 
 		  for(int i = 0; i < 3; i++)
 		    {
-		      QByteArray data
+		      auto data
 			(QByteArray::fromBase64(query.value(i).toByteArray()));
 
 		      data = dooble::s_cryptography->mac_then_decrypt(data);
@@ -357,7 +355,7 @@ void dooble_certificate_exceptions::slot_populate(void)
   for(int i = 0; i < list.size(); i++)
     {
       QTableWidgetItem *item = nullptr;
-      const QHash<QString, QVariant> &hash(list.at(i));
+      const auto &hash(list.at(i));
 
       item = new QTableWidgetItem(hash.value("url").toString());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -385,8 +383,8 @@ void dooble_certificate_exceptions::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString text(m_ui.search->text().toLower().trimmed());
-  int count = m_ui.table->rowCount();
+  auto count = m_ui.table->rowCount();
+  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())

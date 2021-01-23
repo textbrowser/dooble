@@ -60,8 +60,8 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
-  auto *label = new QLabel();
+  auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto label = new QLabel();
 
   label->setPixmap
     (QIcon::fromTheme("view-private",
@@ -165,7 +165,7 @@ void dooble_cookies_window::delete_top_level_items
       m_child_items.remove(item->text(0));
       m_top_level_items.remove(item->text(0));
 
-      foreach(auto *i, item->takeChildren())
+      foreach(auto i, item->takeChildren())
 	if(i)
 	  {
 	    QList<QNetworkCookie> cookie
@@ -187,7 +187,7 @@ void dooble_cookies_window::delete_top_level_items
 
       if(item)
 	{
-	  QList<QNetworkCookie> cookie
+	  auto cookie
 	    (QNetworkCookie::
 	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
@@ -290,12 +290,11 @@ void dooble_cookies_window::showNormal(void)
 
 void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 {
-  QHash<QByteArray, QTreeWidgetItem *> hash
-    (m_child_items.value(cookie.domain()));
+  auto hash(m_child_items.value(cookie.domain()));
 
   if(hash.isEmpty())
     {
-      auto *item = m_top_level_items.value(cookie.domain());
+      auto item = m_top_level_items.value(cookie.domain());
 
       if(item && item->checkState(0) != Qt::Checked)
 	{
@@ -307,7 +306,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
       return;
     }
 
-  auto *item = hash.value(dooble_cookies::identifier(cookie), nullptr);
+  auto item = hash.value(dooble_cookies::identifier(cookie), nullptr);
 
   if(item && item->parent())
     delete item->parent()->takeChild(item->parent()->indexOfChild(item));
@@ -341,14 +340,14 @@ void dooble_cookies_window::slot_cookies_added
 
   for(int i = 0; i < cookies.size(); i++)
     {
-      bool is_favorite = is_favorites.value(i);
-      const QNetworkCookie &cookie(cookies.at(i));
+      auto is_favorite = is_favorites.value(i);
+      const auto &cookie(cookies.at(i));
 
       if(!m_top_level_items.contains(cookie.domain()))
 	{
-	  QString text(m_ui.domain_filter->text().toLower().trimmed());
-	  auto *item = new QTreeWidgetItem
+	  auto item = new QTreeWidgetItem
 	    (m_ui.tree, QStringList() << cookie.domain());
+	  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
 	  if(is_favorite)
 	    item->setCheckState(0, Qt::Checked);
@@ -369,12 +368,11 @@ void dooble_cookies_window::slot_cookies_added
 
       if(!cookie.name().isEmpty())
 	{
-	  QHash<QByteArray, QTreeWidgetItem *> hash
-	    (m_child_items.value(cookie.domain()));
+	  auto hash(m_child_items.value(cookie.domain()));
 
 	  if(!hash.contains(dooble_cookies::identifier(cookie)))
 	    {
-	      auto *item = new QTreeWidgetItem
+	      auto item = new QTreeWidgetItem
 		(m_top_level_items[cookie.domain()],
 		 QStringList() << "" << cookie.name());
 
@@ -419,8 +417,8 @@ void dooble_cookies_window::slot_delete_selected(void)
 	       SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
   QList<QNetworkCookie> cookies;
-  QList<QTreeWidgetItem *> list(m_ui.tree->selectedItems());
   QStringList domains;
+  auto list(m_ui.tree->selectedItems());
 
   for(auto item : list)
     {
@@ -432,10 +430,10 @@ void dooble_cookies_window::slot_delete_selected(void)
 	  m_child_items.remove(item->text(0));
 	  m_top_level_items.remove(item->text(0));
 
-	  foreach(auto *i, item->takeChildren())
+	  foreach(auto i, item->takeChildren())
 	    if(i)
 	      {
-		QList<QNetworkCookie> cookie
+		auto cookie
 		  (QNetworkCookie::
 		   parseCookies(i->data(1, Qt::UserRole).toByteArray()));
 
@@ -455,7 +453,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 
 	  if(item)
 	    {
-	      QList<QNetworkCookie> cookie
+	      auto cookie
 		(QNetworkCookie::
 		 parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
@@ -474,14 +472,13 @@ void dooble_cookies_window::slot_delete_selected(void)
 	}
       else
 	{
-	  QList<QNetworkCookie> cookie
+	  auto cookie
 	    (QNetworkCookie::
 	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
 	  if(!cookie.isEmpty())
 	    {
-	      QHash<QByteArray, QTreeWidgetItem *> hash
-		(m_child_items.value(cookie.at(0).domain()));
+	      auto hash(m_child_items.value(cookie.at(0).domain()));
 
 	      hash.remove(dooble_cookies::identifier(cookie.at(0)));
 
@@ -521,7 +518,7 @@ void dooble_cookies_window::slot_delete_shown(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      auto *item = m_ui.tree->topLevelItem(i);
+      auto item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->isHidden()))
 	list << item;
@@ -539,7 +536,7 @@ void dooble_cookies_window::slot_delete_unchecked(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      auto *item = m_ui.tree->topLevelItem(i);
+      auto item = m_ui.tree->topLevelItem(i);
 
       if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
 	list << item;
@@ -553,11 +550,11 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString text(m_ui.domain_filter->text().toLower().trimmed());
+  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      auto *item = m_ui.tree->topLevelItem(i);
+      auto item = m_ui.tree->topLevelItem(i);
 
       if(!item)
 	continue;
@@ -586,10 +583,10 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
   else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name("dooble_cookies_window");
+  auto database_name("dooble_cookies_window");
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -634,7 +631,7 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 
 void dooble_cookies_window::slot_item_selection_changed(void)
 {
-  auto *item = m_ui.tree->currentItem();
+  auto item = m_ui.tree->currentItem();
 
   if(!item)
     {
@@ -648,7 +645,7 @@ void dooble_cookies_window::slot_item_selection_changed(void)
   else
     item->setSelected(true);
 
-  QList<QNetworkCookie> cookie
+  auto cookie
     (QNetworkCookie::parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
   if(cookie.isEmpty())
@@ -714,7 +711,7 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      auto *item = m_ui.tree->topLevelItem(i);
+      auto item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->checkState(0) == Qt::Checked))
 	list << item;
@@ -736,7 +733,7 @@ void dooble_cookies_window::slot_toggle_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  bool state = m_ui.toggle_shown->property("state").toBool();
+  auto state = m_ui.toggle_shown->property("state").toBool();
 
   m_ui.toggle_shown->setProperty("state", !state);
   m_ui.toggle_shown->setText
@@ -744,7 +741,7 @@ void dooble_cookies_window::slot_toggle_shown(void)
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
-      auto *item = m_ui.tree->topLevelItem(i);
+      auto item = m_ui.tree->topLevelItem(i);
 
       if(!(!item || item->isHidden()))
 	item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
