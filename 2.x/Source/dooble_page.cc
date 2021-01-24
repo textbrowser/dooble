@@ -450,7 +450,7 @@ dooble *dooble_page::find_parent_dooble(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto *parent = parentWidget();
+  auto parent = parentWidget();
 
   do
     {
@@ -491,7 +491,7 @@ void dooble_page::download(const QString &file_name, const QUrl &url)
 void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
 				     bool state)
 {
-  auto *settings = m_view->settings();
+  auto settings = m_view->settings();
 
   if(settings)
     settings->setAttribute(setting, state);
@@ -512,7 +512,7 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 	   if(!text.isEmpty())
 	     {
 	       QColor color(240, 128, 128); // Light Coral
-	       QPalette palette(m_ui.find->palette());
+	       auto palette(m_ui.find->palette());
 
 	       palette.setColor(m_ui.find->backgroundRole(), color);
 	       m_ui.find->setPalette(palette);
@@ -527,8 +527,7 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 
 void dooble_page::go_to_backward_item(int index)
 {
-  QList<QWebEngineHistoryItem> items
-    (m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
+  auto items(m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -536,8 +535,7 @@ void dooble_page::go_to_backward_item(int index)
 
 void dooble_page::go_to_forward_item(int index)
 {
-  QList<QWebEngineHistoryItem> items
-    (m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
+  auto items(m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -567,7 +565,7 @@ void dooble_page::load(const QUrl &url)
 
 void dooble_page::prepare_icons(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if(m_find_action)
     m_find_action->setIcon
@@ -629,7 +627,7 @@ void dooble_page::prepare_progress_label_position(bool process_events)
   if(process_events)
     QApplication::processEvents();
 
-  int y = m_ui.frame->height() - m_progress_label->height() - 1;
+  auto y = m_ui.frame->height() - m_progress_label->height() - 1;
 
   m_progress_label->move(1, y);
 }
@@ -676,7 +674,7 @@ void dooble_page::prepare_standard_menus(void)
 
   QAction *action = nullptr;
   QMenu *menu = nullptr;
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   /*
   ** File Menu
@@ -934,8 +932,8 @@ void dooble_page::prepare_style_sheets(void)
 #ifdef DOOBLE_SIMPLE_THEMES
   if(dooble::s_application->style_name() == "fusion")
     {
-      QString theme_color(dooble_settings::setting("theme_color").toString());
-      static QString link_hovered_style_sheet(m_ui.link_hovered->styleSheet());
+      auto theme_color(dooble_settings::setting("theme_color").toString());
+      static auto link_hovered_style_sheet(m_ui.link_hovered->styleSheet());
 
       if(theme_color == "default")
 	{
@@ -977,7 +975,7 @@ void dooble_page::prepare_style_sheets(void)
 void dooble_page::prepare_tool_buttons(void)
 {
 #ifdef Q_OS_MACOS
-  foreach(auto *tool_button, findChildren<QToolButton *> ())
+  foreach(auto tool_button, findChildren<QToolButton *> ())
     if(m_ui.find_match_case == tool_button)
       {
       }
@@ -1066,7 +1064,7 @@ void dooble_page::resizeEvent(QResizeEvent *event)
   QWidget::resizeEvent(event);
   prepare_progress_label_position(false);
 
-  QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
+  auto font_metrics(m_ui.link_hovered->fontMetrics());
   int difference = 15;
 
   if(m_ui.is_private->isVisible())
@@ -1090,7 +1088,7 @@ void dooble_page::save(const QString &file_name)
 
 void dooble_page::show_menu(void)
 {
-  QPoint point(m_ui.menu->pos());
+  auto point(m_ui.menu->pos());
 
   m_ui.menu->setChecked(true);
   point.setY(m_ui.menu->size().height() + point.y());
@@ -1101,10 +1099,10 @@ void dooble_page::show_menu(void)
 void dooble_page::show_popup_menu(void)
 {
   QMenu menu(this);
-  QPoint point(m_ui.menu->pos());
   QSize size;
   QWidgetAction widget_action(&menu);
-  auto *popup_menu = new dooble_popup_menu(m_view->zoomFactor(), this);
+  auto point(m_ui.menu->pos());
+  auto popup_menu = new dooble_popup_menu(m_view->zoomFactor(), this);
 
   connect(popup_menu,
 	  SIGNAL(accepted(void)),
@@ -1180,7 +1178,7 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
   if(m_full_screen_action)
     {
-      auto *d = find_parent_dooble();
+      auto d = find_parent_dooble();
 
       if(d)
 	{
@@ -1194,7 +1192,7 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
 void dooble_page::slot_accepted_or_blocked_add_exception(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -1235,7 +1233,7 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
 
   menu.addSeparator();
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble_settings::setting("pin_accepted_or_blocked_window").toBool())
     menu.addAction
@@ -1272,7 +1270,7 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   m_last_javascript_popups.clear();
   QApplication::restoreOverrideCursor();
 
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action && action->property("url").isValid())
     emit javascript_allow_popup_exception(action->property("url").toUrl());
@@ -1296,7 +1294,7 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 
   ui.setupUi(&dialog);
 
-  foreach(auto *widget, ui.button_box->findChildren<QWidget *> ())
+  foreach(auto widget, ui.button_box->findChildren<QWidget *> ())
     widget->setMinimumSize(QSize(125, 30));
 
   ui.label->setText
@@ -1362,8 +1360,8 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
   else
     return;
 
-  QFontMetrics font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
   QString text("");
+  auto font_metrics(m_ui.javascript_popup_exception_url->fontMetrics());
 
   if(m_last_javascript_popups.size() == 1)
     text = tr("A dialog from <b>%1</b> has been blocked.").
@@ -1399,7 +1397,7 @@ void dooble_page::slot_dooble_credentials_created(void)
 
 void dooble_page::slot_downloads_finished(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
@@ -1414,7 +1412,7 @@ void dooble_page::slot_downloads_finished(void)
 
 void dooble_page::slot_downloads_started(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if(dooble::s_downloads->is_finished())
     m_ui.downloads->setIcon
@@ -1450,7 +1448,7 @@ void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
 
 void dooble_page::slot_feature_permission_allow(void)
 {
-  int feature = m_ui.feature_permission_url->property("feature").toInt();
+  auto feature = m_ui.feature_permission_url->property("feature").toInt();
 
   m_ui.feature_permission_popup_message->setVisible(false);
   prepare_progress_label_position();
@@ -1467,7 +1465,7 @@ void dooble_page::slot_feature_permission_allow(void)
 
 void dooble_page::slot_feature_permission_deny(void)
 {
-  int feature = m_ui.feature_permission_url->property("feature").toInt();
+  auto feature = m_ui.feature_permission_url->property("feature").toInt();
 
   m_ui.feature_permission_popup_message->setVisible(false);
   prepare_progress_label_position();
@@ -1522,7 +1520,7 @@ void dooble_page::slot_feature_permission_requested
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  int policy = dooble_settings::site_feature_permission
+  auto policy = dooble_settings::site_feature_permission
     (security_origin, feature);
 
   QApplication::restoreOverrideCursor();
@@ -1639,7 +1637,7 @@ void dooble_page::slot_find_next(void)
 
 void dooble_page::slot_find_previous(void)
 {
-  QString text(m_ui.find->text());
+  auto text(m_ui.find->text());
 
   if(m_ui.find_match_case->isChecked())
     find_text
@@ -1670,7 +1668,7 @@ void dooble_page::slot_go_forward(void)
 
 void dooble_page::slot_go_to_backward_item(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     go_to_backward_item(action->property("index").toInt());
@@ -1678,7 +1676,7 @@ void dooble_page::slot_go_to_backward_item(void)
 
 void dooble_page::slot_go_to_forward_item(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     go_to_forward_item(action->property("index").toInt());
@@ -1708,7 +1706,7 @@ void dooble_page::slot_inject_custom_css(void)
 void dooble_page::slot_javascript_allow_popup_exception(void)
 {
   QMenu menu(this);
-  QUrl url(QUrl::fromUserInput(m_view->url().host()));
+  auto url(QUrl::fromUserInput(m_view->url().host()));
 
   url.setScheme(m_view->url().scheme());
   menu.addAction
@@ -1732,17 +1730,17 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
   if(!m_last_javascript_popups.isEmpty())
     {
-      QFontMetrics font_metrics(menu.fontMetrics());
+      auto font_metrics(menu.fontMetrics());
 
       menu.addSeparator();
 
       for(int i = 0; i < m_last_javascript_popups.size(); i++)
 	{
-	  QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(i));
+	  auto view(m_last_javascript_popups.at(i));
 
 	  if(view)
 	    {
-	      auto *action = menu.addAction
+	      auto action = menu.addAction
 		(font_metrics.elidedText(tr("Show %1").arg(view->url().
 							   toString()) + "...",
 					 Qt::ElideMiddle,
@@ -1779,7 +1777,7 @@ void dooble_page::slot_link_hovered(const QString &url)
 
   if(m_ui.status_bar->isVisible())
     {
-      QFontMetrics font_metrics(m_ui.link_hovered->fontMetrics());
+      auto font_metrics(m_ui.link_hovered->fontMetrics());
       int difference = 15;
 
       if(m_ui.is_private->isVisible())
@@ -1824,7 +1822,7 @@ void dooble_page::slot_load_finished(bool ok)
 
   m_ui.progress->setVisible(false);
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.reload->setIcon
     (QIcon::fromTheme("view-refresh",
@@ -1847,7 +1845,7 @@ void dooble_page::slot_load_progress(int progress)
   m_ui.progress->setValue(progress);
   m_ui.progress->setVisible(progress > 0 && progress < 100);
 #ifndef Q_OS_MACOS
-  static QPalette s_address_palette(m_ui.address->palette());
+  static auto s_address_palette(m_ui.address->palette());
 
   if(dooble_settings::setting("status_bar_visible").toBool())
     m_ui.address->setPalette(s_address_palette);
@@ -1864,7 +1862,7 @@ void dooble_page::slot_load_progress(int progress)
 	(qBound(progress / 100.0, progress / 100.0 + 0.15, 1.0),
 	 QColor(Qt::white));
 
-      QPalette palette(m_ui.address->palette());
+      auto palette(m_ui.address->palette());
 
       palette.setBrush(m_ui.address->backgroundRole(), QBrush(linear_gradient));
       m_ui.address->setPalette(palette);
@@ -1898,7 +1896,7 @@ void dooble_page::slot_load_started(void)
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.reload->setIcon
     (QIcon(QString(":/%1/36/stop.png").arg(icon_set)));
@@ -1937,16 +1935,15 @@ void dooble_page::slot_prepare_backward_menu(void)
   m_ui.backward->menu()->clear();
 
   QFontMetrics font_metrics(m_ui.backward->menu()->font());
-  QList<QWebEngineHistoryItem> items
-    (m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
+  auto items(m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
 
   m_ui.backward->setEnabled(!items.empty());
 
   for(int i = items.size() - 1; i >= 0; i--)
     {
       QAction *action = nullptr;
-      QIcon icon(dooble_favicons::icon(items.at(i).url()));
-      QString title(items.at(i).title().trimmed());
+      auto icon(dooble_favicons::icon(items.at(i).url()));
+      auto title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
 	title = items.at(i).url().toString();
@@ -1968,16 +1965,15 @@ void dooble_page::slot_prepare_forward_menu(void)
   m_ui.forward->menu()->clear();
 
   QFontMetrics font_metrics(m_ui.forward->menu()->font());
-  QList<QWebEngineHistoryItem> items
-    (m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
+  auto items(m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
 
   m_ui.forward->setEnabled(!items.empty());
 
   for(int i = 0; i < items.size(); i++)
     {
       QAction *action = nullptr;
-      QIcon icon(dooble_favicons::icon(items.at(i).url()));
-      QString title(items.at(i).title().trimmed());
+      auto icon(dooble_favicons::icon(items.at(i).url()));
+      auto title(items.at(i).title().trimmed());
 
       if(title.isEmpty())
 	title = items.at(i).url().toString();
@@ -2013,7 +2009,7 @@ void dooble_page::slot_proxy_authentication_required
 
   ui.setupUi(&dialog);
 
-  foreach(auto *widget, ui.button_box->findChildren<QWidget *> ())
+  foreach(auto widget, ui.button_box->findChildren<QWidget *> ())
     widget->setMinimumSize(QSize(125, 30));
 
   ui.label->setText(tr("The proxy <b>%1</b> is requesting credentials.").
@@ -2074,7 +2070,7 @@ void dooble_page::slot_show_certificate_exception(void)
   QMenu menu(this);
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
-  auto *certificate_exceptions_menu_widget = new
+  auto certificate_exceptions_menu_widget = new
     dooble_certificate_exceptions_menu_widget(&widget);
 
   connect(certificate_exceptions_menu_widget,
@@ -2091,11 +2087,11 @@ void dooble_page::slot_show_certificate_exception(void)
 void dooble_page::slot_show_favorites_popup(void)
 {
   QMenu menu(this);
-  QPoint point(m_ui.favorites->pos());
   QSize size;
   QWidget widget(&menu);
   QWidgetAction widget_action(&menu);
-  auto *favorites_popup = new dooble_favorites_popup(&widget);
+  auto favorites_popup = new dooble_favorites_popup(&widget);
+  auto point(m_ui.favorites->pos());
 
   connect(favorites_popup,
 	  SIGNAL(favorites_sorted(void)),
@@ -2133,17 +2129,17 @@ void dooble_page::slot_show_find(void)
 
 void dooble_page::slot_show_popup(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  int index = action->property("index").toInt();
+  auto index = action->property("index").toInt();
 
   if(index < 0 || index > m_last_javascript_popups.size())
     return;
 
-  QPointer<dooble_web_engine_view> view(m_last_javascript_popups.at(index));
+  auto view(m_last_javascript_popups.at(index));
 
   if(view)
     emit create_dialog(view);
@@ -2194,7 +2190,7 @@ void dooble_page::slot_url_changed(const QUrl &url)
 
 void dooble_page::slot_zoom_in(void)
 {
-  qreal zoom_factor = qMin(m_view->zoomFactor() + 0.10, 5.0);
+  auto zoom_factor = qMin(m_view->zoomFactor() + 0.10, 5.0);
 
   m_view->setZoomFactor(zoom_factor);
   emit zoomed(m_view->zoomFactor());
@@ -2202,7 +2198,7 @@ void dooble_page::slot_zoom_in(void)
 
 void dooble_page::slot_zoom_out(void)
 {
-  qreal zoom_factor = qMax(m_view->zoomFactor() - 0.10, 0.25);
+  auto zoom_factor = qMax(m_view->zoomFactor() - 0.10, 0.25);
 
   m_view->setZoomFactor(zoom_factor);
   emit zoomed(m_view->zoomFactor());

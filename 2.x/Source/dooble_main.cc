@@ -183,10 +183,12 @@ int main(int argc, char *argv[])
   QApplication::setStyle(QStyleFactory::create("Windows"));
 #endif
 #if defined(Q_OS_WIN)
-  QByteArray tmp(qgetenv("USERNAME").mid(0, 32));
-  QDir home_dir(QDir::current());
-  QFileInfo file_info(home_dir.absolutePath());
-  QString username(tmp);
+  QFileInfo file_info;
+  auto home_dir(QDir::current());
+  auto tmp(qgetenv("USERNAME").mid(0, 32));
+  auto username(tmp);
+
+  file_info = QFileInfo(home_dir.absolutePath());
 
   if(!(file_info.isReadable() && file_info.isWritable()))
     home_dir = QDir::home();
@@ -206,7 +208,7 @@ int main(int argc, char *argv[])
 				 username + QDir::separator() +
 				 ".dooble_v2");
 #else
-  QDir home_dir(QDir::home());
+  auto home_dir(QDir::home());
 
   home_dir.mkdir(".dooble_v2");
   dooble_settings::set_setting
@@ -291,8 +293,8 @@ int main(int argc, char *argv[])
   dooble::s_application->processEvents();
   dooble::s_settings = new dooble_settings();
 
-  QStringList arguments(QCoreApplication::arguments());
-  auto *d = new dooble
+  auto arguments(QCoreApplication::arguments());
+  auto d = new dooble
     (QUrl(), arguments.contains("--private") ||
              dooble::s_settings->setting("private_mode").toBool());
 

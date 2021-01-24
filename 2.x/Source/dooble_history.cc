@@ -89,7 +89,7 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
       if(hash.contains(it.value()))
 	continue;
 
-      QString title(m_history.value(it.value()).value(TITLE).toString());
+      auto title(m_history.value(it.value()).value(TITLE).toString());
 
       title = title.trimmed();
       title.replace("&", "");
@@ -97,7 +97,7 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
       if(title.isEmpty())
 	continue;
 
-      auto *action = new QAction(title);
+      auto action = new QAction(title);
 
       action->setData(m_history.value(it.value()).value(URL).toUrl());
       action->setIcon(dooble_favicons::icon(it.value()));
@@ -156,10 +156,10 @@ void dooble_history::populate(const QByteArray &authentication_key,
 {
   QListVectorByteArray favorites;
   QMultiMap<QDateTime, QPair<QIcon, QString> > map;
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -170,12 +170,12 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	create_tables(db);
 
 	QSqlQuery query(db);
+	auto days = dooble_settings::setting("browsing_history_days").toInt();
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
 	   dooble_settings::setting("block_cipher_type").toString(),
 	   dooble_settings::setting("hash_type").toString());
-	int days = dooble_settings::setting("browsing_history_days").toInt();
 
 	query.setForwardOnly(true);
 
@@ -193,7 +193,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	      if(m_populate_future.isCanceled())
 		break;
 
-	      QByteArray last_visited
+	      auto last_visited
 		(QByteArray::fromBase64(query.value(1).toByteArray()));
 
 	      last_visited = cryptography.mac_then_decrypt
@@ -208,16 +208,16 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		  continue;
 		}
 
-	      bool is_favorite = dooble_cryptography::memcmp
+	      auto is_favorite = dooble_cryptography::memcmp
 		(cryptography.hmac(QByteArray("true")).toBase64(),
 		 query.value(0).toByteArray());
 
 	      if(!is_favorite)
 		{
-		  QDateTime date_time
+		  auto date_time
 		    (QDateTime::
 		     fromString(last_visited.constData(), Qt::ISODate));
-		  QDateTime now(QDateTime::currentDateTime());
+		  auto now(QDateTime::currentDateTime());
 
 		  if(date_time.daysTo(now) >= qAbs(days))
 		    /*
@@ -227,7 +227,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		    continue;
 		}
 
-	      QByteArray number_of_visits
+	      auto number_of_visits
 		(QByteArray::fromBase64(query.value(2).toByteArray()));
 
 	      number_of_visits = cryptography.mac_then_decrypt
@@ -242,7 +242,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		  continue;
 		}
 
-	      QByteArray title
+	      auto title
 		(QByteArray::fromBase64(query.value(3).toByteArray()));
 
 	      title = cryptography.mac_then_decrypt(title);
@@ -256,7 +256,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		  continue;
 		}
 
-	      QByteArray url
+	      auto url
 		(QByteArray::fromBase64(query.value(4).toByteArray()));
 
 	      url = cryptography.mac_then_decrypt(url);
@@ -318,10 +318,10 @@ void dooble_history::populate(const QByteArray &authentication_key,
 void dooble_history::purge(const QByteArray &authentication_key,
 			   const QByteArray &encryption_key)
 {
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -346,7 +346,7 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	if(query.exec())
 	  {
 	    QListUrl urls;
-	    int days = dooble_settings::setting
+	    auto days = dooble_settings::setting
 	      ("browsing_history_days").toInt();
 
 	    while(query.next())
@@ -354,14 +354,14 @@ void dooble_history::purge(const QByteArray &authentication_key,
 		if(m_interrupt.loadAcquire())
 		  break;
 
-		QByteArray bytes
+		auto bytes
 		  (QByteArray::fromBase64(query.value(0).toByteArray()));
 
 		bytes = cryptography.mac_then_decrypt(bytes);
 
-		QDateTime date_time
+		auto date_time
 		  (QDateTime::fromString(bytes.constData(), Qt::ISODate));
-		QDateTime now(QDateTime::currentDateTime());
+		auto now(QDateTime::currentDateTime());
 
 		if(date_time.daysTo(now) >= qAbs(days))
 		  {
@@ -407,10 +407,10 @@ void dooble_history::purge_all(void)
   m_history_date_time.clear();
   m_history_mutex.unlock();
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -435,7 +435,7 @@ void dooble_history::purge_favorites(void)
 {
   for(int i = 0; i < m_favorites_model->rowCount(); i++)
     {
-      auto *item = m_favorites_model->item(i, 1);
+      auto item = m_favorites_model->item(i, 1);
 
       if(!item)
 	continue;
@@ -455,13 +455,13 @@ void dooble_history::purge_favorites(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QByteArray f
+      auto database_name(dooble_database_utilities::database_name());
+      auto f
 	(dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
-      QByteArray t(dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
-      QString database_name(dooble_database_utilities::database_name());
+      auto t(dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -498,7 +498,7 @@ void dooble_history::purge_history(void)
 
     for(int i = 0; i < m_favorites_model->rowCount(); i++)
       {
-	auto *item = m_favorites_model->item(i, 1);
+	auto item = m_favorites_model->item(i, 1);
 
 	if(!item)
 	  continue;
@@ -514,12 +514,12 @@ void dooble_history::purge_history(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QByteArray f
+      auto database_name(dooble_database_utilities::database_name());
+      auto f
 	(dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
-      QString database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -546,8 +546,7 @@ void dooble_history::purge_history(void)
 
 void dooble_history::remove_favorite(const QUrl &url)
 {
-  QList<QStandardItem *> list
-    (m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+  auto list(m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
 
   if(!list.isEmpty() && list.at(0))
     m_favorites_model->removeRow(list.at(0)->row());
@@ -567,10 +566,10 @@ void dooble_history::remove_favorite(const QUrl &url)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -606,7 +605,7 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 
   for(const auto &url : urls)
     {
-      QList<QStandardItem *> list
+      auto list
 	(m_favorites_model->
 	 findItems(url.toString(), Qt::MatchExactly, 1));
 
@@ -626,10 +625,10 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -666,7 +665,7 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 
     if(m_history.contains(url))
       {
-	QHash<HistoryItem, QVariant> hash(m_history.value(url));
+	auto hash(m_history.value(url));
 
 	if(icon.isNull())
 	  hash[FAVICON] = dooble_favicons::icon(url);
@@ -724,7 +723,7 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
     update_favorite(hash);
   else
     {
-      QList<QStandardItem *> list
+      auto list
 	(m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
 
       if(!list.isEmpty() && list.at(0))
@@ -734,10 +733,10 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -820,7 +819,7 @@ void dooble_history::save_item(const QIcon &icon,
   if(item.isValid())
     {
       QWriteLocker locker(&m_history_mutex);
-      bool contains = m_history.contains(item.url());
+      auto contains = m_history.contains(item.url());
 
       if(icon.isNull())
 	hash[FAVICON] = dooble_favicons::icon(item.url());
@@ -867,10 +866,10 @@ void dooble_history::save_item(const QIcon &icon,
 	  !force)
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -925,7 +924,7 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  goto done_label;
 
-	QString title(hash.value(TITLE).toString().trimmed());
+	auto title(hash.value(TITLE).toString().trimmed());
 
 	if(title.isEmpty())
 	  bytes = dooble::s_cryptography->encrypt_then_mac
@@ -993,15 +992,15 @@ void dooble_history::slot_populated_favorites
 
   for(const auto &favorite : favorites)
     {
-      QByteArray last_visited(favorite.value(2));
-      QByteArray number_of_visits(favorite.value(3));
-      QByteArray title(favorite.value(0));
-      QByteArray url(favorite.value(1));
       QList<QStandardItem *> list;
+      auto last_visited(favorite.value(2));
+      auto number_of_visits(favorite.value(3));
+      auto title(favorite.value(0));
+      auto url(favorite.value(1));
 
       for(int j = 0; j < m_favorites_model->columnCount(); j++)
 	{
-	  auto *item = new QStandardItem();
+	  auto item = new QStandardItem();
 
 	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -1085,19 +1084,18 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
   if(!hash.value(FAVORITE, false).toBool())
     return;
 
-  QUrl url(hash.value(URL).toUrl());
+  auto url(hash.value(URL).toUrl());
 
   if(url.isEmpty() || !url.isValid())
     return;
 
-  QList<QStandardItem *> list
-    (m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
+  auto list(m_favorites_model->findItems(url.toString(), Qt::MatchExactly, 1));
 
   if(list.isEmpty())
     {
       for(int i = 0; i < m_favorites_model->columnCount(); i++)
 	{
-	  auto *item = new QStandardItem();
+	  auto item = new QStandardItem();
 
 	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -1146,12 +1144,12 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
     }
   else
     {
-      auto *item = list.at(0);
+      auto item = list.at(0);
 
       if(!item)
 	return;
 
-      int row = item->row();
+      auto row = item->row();
 
       for(int i = 0; i < m_favorites_model->columnCount(); i++)
 	{
