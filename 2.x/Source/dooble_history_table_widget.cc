@@ -70,8 +70,8 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  int a = rowAt(viewport()->rect().topLeft().y());
-  int b = rowAt(viewport()->rect().bottomLeft().y());
+  auto a = rowAt(viewport()->rect().topLeft().y());
+  auto b = rowAt(viewport()->rect().bottomLeft().y());
 
   if(b == -1)
     /*
@@ -82,7 +82,7 @@ void dooble_history_table_widget::prepare_viewport_icons(void)
 
   for(int i = a; i <= b; i++)
     {
-      auto *item = this->item(i, 1); // Title
+      auto item = this->item(i, 1); // Title
 
       if(!item)
 	continue;

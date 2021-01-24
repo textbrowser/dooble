@@ -44,7 +44,7 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 
   m_request = request;
 
-  auto *gopher_implementation = new dooble_gopher_implementation
+  auto gopher_implementation = new dooble_gopher_implementation
     (m_request->requestUrl(),
      qobject_cast<dooble_web_engine_view *> (parent()),
      m_request);
@@ -79,7 +79,7 @@ void dooble_gopher::slot_finished(const QByteArray &bytes,
 	  ** The buffer object should be deleted when m_request is.
 	  */
 
-	  auto *buffer = new QBuffer(m_request);
+	  auto buffer = new QBuffer(m_request);
 
 	  if(content_type_supported && !is_image)
 	    buffer->setData
@@ -171,7 +171,7 @@ dooble_gopher_implementation::~dooble_gopher_implementation()
 
 QByteArray dooble_gopher_implementation::plain_to_html(const QByteArray &bytes)
 {
-  QByteArray b(bytes);
+  auto b(bytes);
 
   b.replace("&", "&amp;");
   b.replace("<", "&lt;");
@@ -183,8 +183,8 @@ QByteArray dooble_gopher_implementation::plain_to_html(const QByteArray &bytes)
 void dooble_gopher_implementation::slot_connected(void)
 {
   QString output("");
-  QString path(m_url.path());
-  QString query(m_url.query());
+  auto path(m_url.path());
+  auto query(m_url.query());
 
   if(path.length() <= 1)
     {
@@ -272,12 +272,12 @@ void dooble_gopher_implementation::slot_ready_read(void)
 
       while(m_content.contains(s_eol))
 	{
-	  QByteArray bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
+	  auto bytes(m_content.mid(0, m_content.indexOf(s_eol) + 1));
 
 	  m_content.remove(0, bytes.length());
 	  bytes = bytes.trimmed();
 
-	  char c = bytes.length() > 0 ? bytes.at(0) : '0';
+	  auto c = bytes.length() > 0 ? bytes.at(0) : '0';
 
 	  if(c == '+' ||
 	     c == '0' ||
@@ -298,7 +298,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 
 	    bytes.remove(0, 1);
 
-	  QList<QByteArray> list(bytes.split('\t'));
+	  auto list(bytes.split('\t'));
 
 	  if(c == '+' ||
 	     c == '0' ||
@@ -312,7 +312,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	     c == 'h' ||
 	     c == 's')
 	    {
-	      int port = list.value(3).toInt();
+	      auto port = list.value(3).toInt();
 
 	      if(port <= 0)
 		port = 70;
@@ -330,7 +330,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	    }
 	  else if(c == '3' || c == 'i')
  	    {
-	      QByteArray information(list.value(0));
+	      auto information(list.value(0));
 
 	      if(c == 'i')
  		{
@@ -351,7 +351,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	      ** Create an input search field.
 	      */
 
-	      int port = list.value(3).toInt();
+	      auto port = list.value(3).toInt();
 
 	      if(port <= 0)
 		port = 70;

@@ -261,15 +261,15 @@ void dooble_favorites_popup::slot_find(void)
 
 void dooble_favorites_popup::slot_search_timer_timeout(void)
 {
-  auto *model = qobject_cast<QStandardItemModel *> (m_ui.view->model());
+  auto model = qobject_cast<QStandardItemModel *> (m_ui.view->model());
 
   if(!model)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString text(m_ui.search->text().toLower().trimmed());
-  int count = model->rowCount();
+  auto count = model->rowCount();
+  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())
@@ -368,7 +368,7 @@ void dooble_favorites_popup::slot_sort(int index)
 
 void dooble_favorites_popup::slot_sort(void)
 {
-  int index = m_ui.sort_order->currentIndex();
+  auto index = m_ui.sort_order->currentIndex();
 
   if(index == 0) // Last Visited
     m_ui.view->sortByColumn(2, Qt::DescendingOrder);
