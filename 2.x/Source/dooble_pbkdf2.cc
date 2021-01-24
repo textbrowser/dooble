@@ -99,7 +99,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2
   */
 
   QList<QByteArray> T;
-  int iterations = m_output_size /
+  auto iterations = m_output_size /
     dooble_hmac::preferred_output_size_in_bits(); /*
 						  ** Only 512-bit PRFs are
 						  ** expected.
@@ -130,7 +130,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2
 #endif
 	    break;
 
-	  QByteArray Ub(function(m_password, Ua));
+	  auto Ub(function(m_password, Ua));
 
 	  U = x_or(U, Ub);
 	  Ua = Ub;

@@ -108,10 +108,10 @@ void dooble_search_engines_popup::add_search_engine
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -152,11 +152,11 @@ void dooble_search_engines_popup::add_search_engine
 
 	if(query.exec())
 	  {
-	    auto *action = m_actions.value(title);
+	    auto action = m_actions.value(title);
 
 	    if(action)
 	      {
-		QList<QStandardItem *> list
+		auto list
 		  (m_model->findItems(url.toEncoded(),
 				      Qt::MatchFixedString,
 				      1));
@@ -172,7 +172,7 @@ void dooble_search_engines_popup::add_search_engine
 	      }
 
 	    QList<QStandardItem *> list;
-	    auto *item = new QStandardItem();
+	    auto item = new QStandardItem();
 
 	    action = new QAction(dooble_favicons::icon(url), title, this);
 	    action->setProperty("url", url);
@@ -227,7 +227,7 @@ void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)
 
 void dooble_search_engines_popup::prepare_icons(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_ui.delete_selected->setIcon
     (QIcon::fromTheme("edit-delete",
@@ -243,10 +243,10 @@ void dooble_search_engines_popup::purge(void)
 {
   m_model->removeRows(0, m_model->rowCount());
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -285,7 +285,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QStandardItem *> list
+  auto list
     (m_model->findItems(dooble_ui_utilities::simplified_url(url).toEncoded(),
 			Qt::MatchFixedString | Qt::MatchStartsWith,
 			1));
@@ -306,10 +306,10 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 
       if(it.value())
 	{
-	  QString str1
+	  auto str1
 	    (dooble_ui_utilities::
 	     simplified_url(it.value()->property("url").toUrl()).toEncoded());
-	  QString str2(dooble_ui_utilities::simplified_url(url).toEncoded());
+	  auto str2(dooble_ui_utilities::simplified_url(url).toEncoded());
 
 	  if(str1.startsWith(str2))
 	    {
@@ -366,7 +366,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QUrl url(QUrl::fromUserInput(m_ui.search_engine->text()));
+  auto url(QUrl::fromUserInput(m_ui.search_engine->text()));
 
   if(url.isEmpty() || !url.isValid())
     return;
@@ -376,7 +376,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
 
 void dooble_search_engines_popup::slot_delete_selected(void)
 {
-  QModelIndexList list(m_ui.view->selectionModel()->selectedRows(1));
+  auto list(m_ui.view->selectionModel()->selectedRows(1));
 
   if(list.isEmpty())
     return;
@@ -402,10 +402,10 @@ void dooble_search_engines_popup::slot_delete_selected(void)
     {
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-      QString database_name(dooble_database_utilities::database_name());
+      auto database_name(dooble_database_utilities::database_name());
 
       {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 			   QDir::separator() +
@@ -502,10 +502,10 @@ void dooble_search_engines_popup::slot_populate(void)
 
   m_model->removeRows(0, m_model->rowCount());
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -520,7 +520,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	if(query.exec("SELECT title, url, OID FROM dooble_search_engines"))
 	  while(query.next())
 	    {
-	      QByteArray title
+	      auto title
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	      title = dooble::s_cryptography->mac_then_decrypt(title);
@@ -534,8 +534,7 @@ void dooble_search_engines_popup::slot_populate(void)
 		  continue;
 		}
 
-	      QByteArray url
-		(QByteArray::fromBase64(query.value(1).toByteArray()));
+	      auto url(QByteArray::fromBase64(query.value(1).toByteArray()));
 
 	      url = dooble::s_cryptography->mac_then_decrypt(url);
 
@@ -550,7 +549,7 @@ void dooble_search_engines_popup::slot_populate(void)
 
 	      QAction *action = nullptr;
 	      QList<QStandardItem *> list;
-	      auto *item = new QStandardItem();
+	      auto item = new QStandardItem();
 
 	      action = new QAction
 		(dooble_favicons::icon(QUrl::fromEncoded(url)),
@@ -592,16 +591,16 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString text(m_ui.search->text().toLower().trimmed());
-  int count = model->rowCount();
+  auto count = model->rowCount();
+  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())
       m_ui.view->setRowHidden(i, false);
     else
       {
-	auto *item1 = model->item(i, 0);
-	auto *item2 = model->item(i, 1);
+	auto item1 = model->item(i, 0);
+	auto item2 = model->item(i, 1);
 
 	if(!item1 || !item2)
 	  m_ui.view->setRowHidden(i, false);
