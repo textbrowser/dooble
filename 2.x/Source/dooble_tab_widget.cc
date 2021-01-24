@@ -110,7 +110,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 
   if(dooble::s_application->style_name() == "fusion")
     {
-      QString theme_color(dooble_settings::setting("theme_color").toString());
+      auto theme_color(dooble_settings::setting("theme_color").toString());
 
       if(theme_color == "default")
 	{
@@ -197,11 +197,11 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 
 QIcon dooble_tab_widget::tabIcon(int index) const
 {
-  QIcon icon(QTabWidget::tabIcon(index));
+  auto icon(QTabWidget::tabIcon(index));
 
   if(icon.isNull())
     {
-      auto *label = qobject_cast<QLabel *>
+      auto label = qobject_cast<QLabel *>
 	(m_tab_bar->tabButton(index, QTabBar::LeftSide));
 
       if(!label)
@@ -228,7 +228,7 @@ bool dooble_tab_widget::is_private(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto *parent = parentWidget();
+  auto parent = parentWidget();
 
   do
     {
@@ -253,7 +253,7 @@ dooble_page *dooble_tab_widget::page(int index) const
 
 void dooble_tab_widget::prepare_icons(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_add_tab_tool_button->setIcon
     (QIcon::fromTheme("list-add",
@@ -272,14 +272,14 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
     return;
 
 #ifdef Q_OS_MACOS
-  QTabBar::ButtonPosition side = static_cast<QTabBar::ButtonPosition>
+  auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
 			m_tab_bar));
 
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 
-  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(!label)
     {
@@ -300,7 +300,7 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
 
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 
-  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(!label)
     {
@@ -342,9 +342,8 @@ void dooble_tab_widget::slot_about_to_show_history_menu(void)
   m_add_tab_tool_button->menu()->clear();
 
   QFontMetrics font_metrics(m_add_tab_tool_button->menu()->font());
-  QList<QAction *> list
-    (dooble::s_history->
-     last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
+  auto list(dooble::s_history->
+	    last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
 
   for(auto i : list)
     {
@@ -366,7 +365,7 @@ void dooble_tab_widget::slot_about_to_show_history_menu(void)
 
 void dooble_tab_widget::slot_history_action_triggered(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
@@ -376,16 +375,16 @@ void dooble_tab_widget::slot_history_action_triggered(void)
 
 void dooble_tab_widget::slot_load_finished(void)
 {
-  auto *page = qobject_cast<dooble_page *> (sender());
+  auto page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
     return;
 
+  auto index = indexOf(page);
   auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
 			m_tab_bar));
-  int index = indexOf(page);
 
 #ifdef Q_OS_MACOS
   if(dooble::s_application->style_name() == "fusion")
@@ -396,11 +395,11 @@ void dooble_tab_widget::slot_load_finished(void)
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
 
-  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(label)
     {
-      auto *movie = label->movie();
+      auto movie = label->movie();
 
       if(movie)
 	{
@@ -412,7 +411,7 @@ void dooble_tab_widget::slot_load_finished(void)
 
       if(dooble::s_application->style_name() == "fusion")
 	{
-	  QIcon icon(label->property("icon").value<QIcon> ());
+	  auto icon(label->property("icon").value<QIcon> ());
 
 	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 	}
@@ -424,11 +423,11 @@ void dooble_tab_widget::slot_load_finished(void)
 
 void dooble_tab_widget::slot_load_started(void)
 {
+  auto index = indexOf(qobject_cast<QWidget *> (sender()));
   auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
 			m_tab_bar));
-  int index = indexOf(qobject_cast<QWidget *> (sender()));
 
 #ifdef Q_OS_MACOS
   if(dooble::s_application->style_name() == "fusion")
@@ -439,7 +438,7 @@ void dooble_tab_widget::slot_load_started(void)
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
 
-  auto *label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
+  auto label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
   if(!label)
     {
@@ -449,7 +448,7 @@ void dooble_tab_widget::slot_load_started(void)
       m_tab_bar->setTabButton(index, side, label);
     }
 
-  auto *movie = label->movie();
+  auto movie = label->movie();
 
   if(!movie)
     {
@@ -480,7 +479,7 @@ void dooble_tab_widget::slot_settings_applied(void)
 {
   if(dooble::s_application->style_name() == "fusion")
     {
-      QString theme_color(dooble_settings::setting("theme_color").toString());
+      auto theme_color(dooble_settings::setting("theme_color").toString());
 
       if(theme_color == "default")
 	{

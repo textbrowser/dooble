@@ -99,7 +99,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
     m_view->resize(parent->size());
   else
     {
-      auto *d = find_parent_dooble();
+      auto d = find_parent_dooble();
 
       if(d)
 	m_view->resize(d->size());
@@ -1000,7 +1000,7 @@ void dooble_page::prepare_tool_buttons(void)
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
 #else
-  foreach(auto *tool_button, findChildren<QToolButton *> ())
+  foreach(auto tool_button, findChildren<QToolButton *> ())
     if(m_ui.backward == tool_button ||
        m_ui.forward == tool_button)
       tool_button->setStyleSheet

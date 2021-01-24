@@ -391,8 +391,8 @@ void dooble_certificate_exceptions::slot_search_timer_timeout(void)
       m_ui.table->setRowHidden(i, false);
     else
       {
-	auto *item1 = m_ui.table->item(i, 0);
-	auto *item2 = m_ui.table->item(i, 1);
+	auto item1 = m_ui.table->item(i, 0);
+	auto item2 = m_ui.table->item(i, 1);
 
 	if(!item1 || !item2)
 	  {

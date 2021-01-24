@@ -281,9 +281,9 @@ void dooble_favorites_popup::slot_search_timer_timeout(void)
       }
     else
       {
-	auto *item1 = model->item(i, 0);
-	auto *item2 = model->item(i, 1);
-	auto *item3 = model->item(i, 2);
+	auto item1 = model->item(i, 0);
+	auto item2 = model->item(i, 1);
+	auto item3 = model->item(i, 2);
 
 	if(!item1 || !item2 || !item3)
 	  m_ui.view->setRowHidden(i, false);

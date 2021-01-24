@@ -201,9 +201,9 @@ void dooble_history_window::save_settings(void)
 
 void dooble_history_window::set_row_hidden(int i)
 {
-  auto *item1 = m_ui.table->item(i, 1);
-  auto *item2 = m_ui.table->item(i, 2);
-  auto *item3 = m_ui.table->item(i, 3);
+  auto item1 = m_ui.table->item(i, 1);
+  auto item2 = m_ui.table->item(i, 2);
+  auto item3 = m_ui.table->item(i, 3);
 
   if(!item1 || !item2 || !item3)
     return;
@@ -340,12 +340,12 @@ void dooble_history_window::showNormal(QWidget *parent)
 
 void dooble_history_window::slot_copy_location(void)
 {
-  auto *clipboard = QApplication::clipboard();
+  auto clipboard = QApplication::clipboard();
 
   if(!clipboard)
     return;
 
-  auto *item = m_ui.table->currentItem();
+  auto item = m_ui.table->currentItem();
 
   if(!item)
     return;
@@ -364,7 +364,7 @@ void dooble_history_window::slot_delete_pages(void)
     return;
 
   QMessageBox mb(this);
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
   bool favorites_included = false;
 
   mb.setIcon(QMessageBox::Question);
@@ -427,7 +427,7 @@ void dooble_history_window::slot_enter_pressed(void)
 
 void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
 {
-  auto *item = m_items.value(url, nullptr);
+  auto item = m_items.value(url, nullptr);
 
   if(!item)
     return;
@@ -460,7 +460,7 @@ void dooble_history_window::slot_favorites_cleared(void)
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      auto *item = m_ui.table->item(i, 0);
+      auto item = m_ui.table->item(i, 0);
 
       if(!item)
 	continue;
@@ -487,7 +487,7 @@ void dooble_history_window::slot_history_cleared(void)
 
   for(int i = m_ui.table->rowCount(); i >= 0; i--)
     {
-      auto *item = m_ui.table->item(i, 0);
+      auto item = m_ui.table->item(i, 0);
 
       if(!item)
 	{
@@ -521,7 +521,7 @@ void dooble_history_window::slot_horizontal_header_section_resized
 void dooble_history_window::slot_icon_updated(const QIcon &icon,
 					      const QUrl &url)
 {
-  auto *item = m_items.value(url);
+  auto item = m_items.value(url);
 
   if(!item)
     return;
@@ -609,7 +609,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
   if(!item.isValid())
     return;
 
-  auto *item1 = m_items.value(item.url());
+  auto item1 = m_items.value(item.url());
 
   if(!item1)
     {
@@ -624,12 +624,11 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 	item1->setIcon(icon);
     }
 
-  auto *item2 = m_ui.table->item(item1->row(), 1);
+  auto item2 = m_ui.table->item(item1->row(), 1);
 
   if(item2)
     {
-      QString title
-	(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+      auto title(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
 	title = item.url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
@@ -648,7 +647,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
       item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
     }
 
-  auto *item3 = m_ui.table->item(item1->row(), 3);
+  auto item3 = m_ui.table->item(item1->row(), 3);
 
   if(item3)
     {
@@ -674,7 +673,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
-  QString title(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+  auto title(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
     title = item.url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
@@ -682,7 +681,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   if(title.isEmpty())
     title = tr("Dooble");
 
-  auto *item1 = new dooble_history_window_favorite_item();
+  auto item1 = new dooble_history_window_favorite_item();
 
   item1->setData(Qt::UserRole, item.url());
   item1->setFlags(Qt::ItemIsEnabled |
@@ -691,7 +690,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   if(dooble::s_history->is_favorite(item.url()))
     {
-      QString icon_set(dooble_settings::setting("icon_set").toString());
+      auto icon_set(dooble_settings::setting("icon_set").toString());
 
       item1->setCheckState(Qt::Checked);
       item1->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
@@ -711,13 +710,13 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
   m_items[item.url()] = item2;
 
-  auto *item3 = new QTableWidgetItem(item.url().toString());
+  auto item3 = new QTableWidgetItem(item.url().toString());
 
   item3->setData(Qt::UserRole, item.url());
   item3->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   item3->setToolTip(item3->text());
 
-  auto *item4 = new QTableWidgetItem(item.lastVisited().toString(Qt::ISODate));
+  auto item4 = new QTableWidgetItem(item.lastVisited().toString(Qt::ISODate));
 
   item4->setData(Qt::UserRole, item.url());
   item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -880,16 +879,16 @@ void dooble_history_window::slot_search_timer_timeout(void)
       }
     }
 
-  int count = m_ui.table->rowCount();
+  auto count = m_ui.table->rowCount();
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(m_ui.period->currentRow() <= 0 && text.isEmpty())
       m_ui.table->setRowHidden(i, false);
     else
       {
-	auto *item1 = m_ui.table->item(i, 1);
-	auto *item2 = m_ui.table->item(i, 2);
-	auto *item3 = m_ui.table->item(i, 3);
+	auto item1 = m_ui.table->item(i, 1);
+	auto item2 = m_ui.table->item(i, 2);
+	auto item3 = m_ui.table->item(i, 3);
 
 	if(!item1 || !item2 || !item3)
 	  {

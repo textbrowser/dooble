@@ -71,7 +71,7 @@ QUrl dooble_ui_utilities::simplified_url(const QUrl &u)
 
 bool dooble_ui_utilities::allowed_scheme(const QUrl &url)
 {
-  QString scheme(url.scheme());
+  auto scheme(url.scheme());
 
   return scheme == "file" ||
     scheme == "ftp" ||
@@ -88,7 +88,7 @@ dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QWidget *parent = widget->parentWidget();
+  auto parent = widget->parentWidget();
 
   do
     {
@@ -111,7 +111,7 @@ int dooble_ui_utilities::context_menu_width(QWidget *widget)
   if(!widget)
     return 250;
 
-  QDesktopWidget *desktopWidget = QApplication::desktop();
+  auto desktopWidget = QApplication::desktop();
 
   if(!desktopWidget)
     return 250;
@@ -129,7 +129,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
     return;
 
   QPoint p(0, 0);
-  QWidget *w = parent;
+  auto w = parent;
   int extrah = 0; int extraw = 0; int scrn = 0;
 
   if(w)
@@ -153,16 +153,16 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
     QGuiApplication::screens().value(scrn)->geometry() : QRect();
 #endif
 
-  QWidgetList list(QApplication::topLevelWidgets());
+  auto list(QApplication::topLevelWidgets());
 
   for(int i = 0; (extraw == 0 || extrah == 0) && i < list.size(); i++)
     {
-      QWidget *current = list.at(i);
+      auto current = list.at(i);
 
       if(current->isVisible())
 	{
-	  int framew = current->geometry().x() - current->x();
-	  int frameh = current->geometry().y() - current->y();
+	  auto framew = current->geometry().x() - current->x();
+	  auto frameh = current->geometry().y() - current->y();
 
 	  extraw = qMax(extraw, framew);
 	  extrah = qMax(extrah, frameh);
@@ -177,7 +177,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   if(w)
     {
-      QPoint pp(w->mapToGlobal(QPoint(0, 0)));
+      auto pp(w->mapToGlobal(QPoint(0, 0)));
 
       p = QPoint(pp.x() + w->width() / 2, pp.y() + w->height() / 2);
     }

@@ -292,7 +292,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 
   for(auto i : list)
     {
-      auto *item = i ? m_model->item(i->row(), 0) : nullptr;
+      auto item = i ? m_model->item(i->row(), 0) : nullptr;
 
       if(item)
 	item->setIcon(dooble_favicons::icon(icon));
@@ -350,7 +350,7 @@ void dooble_search_engines_popup::slot_add_predefined(void)
 
   for(int i = 0; i < m_ui.predefined->count(); i++)
     {
-      auto *item = m_ui.predefined->item(i);
+      auto item = m_ui.predefined->item(i);
 
       if(item && item->checkState() == Qt::Checked)
 	add_search_engine
@@ -584,7 +584,7 @@ void dooble_search_engines_popup::slot_populate(void)
 
 void dooble_search_engines_popup::slot_search_timer_timeout(void)
 {
-  auto *model = qobject_cast<QStandardItemModel *> (m_ui.view->model());
+  auto model = qobject_cast<QStandardItemModel *> (m_ui.view->model());
 
   if(!model)
     return;

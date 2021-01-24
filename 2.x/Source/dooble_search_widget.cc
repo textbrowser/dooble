@@ -30,7 +30,7 @@
 
 dooble_search_widget::dooble_search_widget(QWidget *parent):QLineEdit(parent)
 {
-  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   m_find_tool_button = new QToolButton(this);
   m_find_tool_button->setCursor(Qt::ArrowCursor);
@@ -57,7 +57,7 @@ void dooble_search_widget::keyPressEvent(QKeyEvent *event)
 
 void dooble_search_widget::prepare_icons(void)
 {
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   m_find_tool_button->setIcon
     (QIcon::fromTheme("edit-find",
@@ -66,9 +66,9 @@ void dooble_search_widget::prepare_icons(void)
 
 void dooble_search_widget::resizeEvent(QResizeEvent *event)
 {
-  QSize size1 = m_find_tool_button->sizeHint();
+  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  auto size1 = m_find_tool_button->sizeHint();
   int d = 0;
-  int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   d = (rect().height() - (size1.height() - size1.height() % 2)) / 2;
   m_find_tool_button->move(frame_width - rect().left() + 5, rect().top() + d);

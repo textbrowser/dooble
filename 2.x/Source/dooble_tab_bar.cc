@@ -68,7 +68,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
   int i = 0;
 
-  foreach(auto *tool_button, findChildren<QToolButton *> ())
+  foreach(auto tool_button, findChildren<QToolButton *> ())
     if(i++ == 0)
       connect(m_previous_tool_button,
 	      SIGNAL(clicked(void)),
@@ -88,7 +88,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
   if(dooble::s_application->style_name() == "fusion")
     {
-      QString theme_color(dooble_settings::setting("theme_color").toString());
+      auto theme_color(dooble_settings::setting("theme_color").toString());
 
       if(theme_color == "default")
 	setDrawBase(true);
@@ -143,16 +143,16 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
-  QSize size(QTabBar::tabSizeHint(index));
-  int f = qFloor(static_cast<double> (rect().width()) /
-		 static_cast<double> (qMax(1, count())));
+  auto f = qFloor(static_cast<double> (rect().width()) /
+		  static_cast<double> (qMax(1, count())));
+  auto size(QTabBar::tabSizeHint(index));
   static int maximum_tab_width = 225;
   static int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
   QFontMetrics font_metrics(font());
-  static int tab_height = 15 + font_metrics.height();
+  static auto tab_height = 15 + font_metrics.height();
 #else
-  static int tab_height = size.height();
+  static auto tab_height = size.height();
 #endif
 
   size.setHeight(tab_height);
@@ -174,7 +174,7 @@ bool dooble_tab_bar::is_private(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto *parent = parentWidget();
+  auto parent = parentWidget();
 
   do
     {
@@ -201,7 +201,7 @@ void dooble_tab_bar::hideEvent(QHideEvent *event)
 void dooble_tab_bar::prepare_icons(void)
 {
   QList<QToolButton *> list;
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
   if(dooble::s_application->style_name() == "macintosh")
@@ -212,7 +212,7 @@ void dooble_tab_bar::prepare_icons(void)
   else
     list << m_next_tool_button << m_previous_tool_button;
 
-  foreach(auto *tool_button, list)
+  foreach(auto tool_button, list)
     {
       tool_button->setArrowType(Qt::NoArrow);
 
@@ -235,15 +235,15 @@ void dooble_tab_bar::prepare_style_sheets(void)
   if(dooble::s_application->style_name() == "fusion")
     {
       QList<QToolButton *> list;
-      QString theme_color(dooble_settings::setting("theme_color").toString());
-      static QColor s_background_color
+      auto theme_color(dooble_settings::setting("theme_color").toString());
+      static auto s_background_color
 	(QWidget::palette().color(QWidget::backgroundRole()));
 
       list << m_next_tool_button << m_previous_tool_button;
 
       if(theme_color == "default")
 	{
-	  foreach(auto *tool_button, list)
+	  foreach(auto tool_button, list)
 	    tool_button->setStyleSheet
 	    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
 	     "QToolButton::menu-button {border: none;}");
@@ -255,7 +255,7 @@ void dooble_tab_bar::prepare_style_sheets(void)
 	}
       else
 	{
-	  foreach(auto *tool_button, list)
+	  foreach(auto tool_button, list)
 	    tool_button->setStyleSheet
 	    (QString("QToolButton {background-color: %1;"
 		     "margin-bottom: 1px;"
@@ -308,7 +308,7 @@ void dooble_tab_bar::prepare_style_sheets(void)
 	}
     }
   else if(dooble::s_application->style_name() == "macintosh")
-    foreach(auto *tool_button, findChildren <QToolButton *> ())
+    foreach(auto tool_button, findChildren <QToolButton *> ())
       tool_button->setStyleSheet
       (QString("QToolButton {background-color: %1;"
 	       "border: none;"
@@ -343,7 +343,7 @@ void dooble_tab_bar::showEvent(QShowEvent *event)
 
 void dooble_tab_bar::slot_application_locked(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit application_locked
@@ -352,13 +352,13 @@ void dooble_tab_bar::slot_application_locked(void)
 
 void dooble_tab_bar::slot_close_other_tabs(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     {
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-      int index = tabAt(action->property("point").toPoint());
+      auto index = tabAt(action->property("point").toPoint());
 
       for(int i = count() - 1; i >= 0; i--)
 	if(i != index)
@@ -370,7 +370,7 @@ void dooble_tab_bar::slot_close_other_tabs(void)
 
 void dooble_tab_bar::slot_close_tab(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit tabCloseRequested(tabAt(action->property("point").toPoint()));
@@ -378,7 +378,7 @@ void dooble_tab_bar::slot_close_tab(void)
 
 void dooble_tab_bar::slot_decouple_tab(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit decouple_tab(tabAt(action->property("point").toPoint()));
@@ -386,16 +386,16 @@ void dooble_tab_bar::slot_decouple_tab(void)
 
 void dooble_tab_bar::slot_hide_location_frame(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      auto *page = qobject_cast<dooble_page *>
+      auto page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -405,16 +405,16 @@ void dooble_tab_bar::slot_hide_location_frame(void)
 
 void dooble_tab_bar::slot_javascript(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      auto *page = qobject_cast<dooble_page *>
+      auto page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -427,7 +427,7 @@ void dooble_tab_bar::slot_next_tab(void)
 {
   int i = 0;
 
-  foreach(auto *tool_button, findChildren<QToolButton *> ())
+  foreach(auto tool_button, findChildren<QToolButton *> ())
     if(i++ == 0)
       m_previous_tool_button->setEnabled(tool_button->isEnabled());
     else
@@ -436,7 +436,7 @@ void dooble_tab_bar::slot_next_tab(void)
 
 void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit open_tab_as_new_private_window
@@ -445,7 +445,7 @@ void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
 
 void dooble_tab_bar::slot_open_tab_as_new_window(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit open_tab_as_new_window(tabAt(action->property("point").toPoint()));
@@ -455,7 +455,7 @@ void dooble_tab_bar::slot_previous_tab(void)
 {
   int i = 0;
 
-  foreach(auto *tool_button, findChildren<QToolButton *> ())
+  foreach(auto tool_button, findChildren<QToolButton *> ())
     if(i++ == 0)
       m_previous_tool_button->setEnabled(tool_button->isEnabled());
     else
@@ -464,7 +464,7 @@ void dooble_tab_bar::slot_previous_tab(void)
 
 void dooble_tab_bar::slot_reload(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit reload_tab(tabAt(action->property("point").toPoint()));
@@ -472,7 +472,7 @@ void dooble_tab_bar::slot_reload(void)
 
 void dooble_tab_bar::slot_reload_periodically(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(action)
     emit reload_tab_periodically
@@ -490,8 +490,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 {
   QAction *action = nullptr;
   QMenu menu(this);
-  QString icon_set(dooble_settings::setting("icon_set").toString());
-  int tab_at = tabAt(point);
+  auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto tab_at = tabAt(point);
 
   action = menu.addAction(tr("&Close Tab"),
 			  this,
@@ -512,7 +512,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setProperty("point", point);
   menu.addSeparator();
 
-  auto *open_as_new_private_window_action = menu.addAction
+  auto open_as_new_private_window_action = menu.addAction
     (QIcon::fromTheme("view-private",
 		      QIcon(QString(":/%1/48/new_private_window.png").
 			    arg(icon_set))),
@@ -523,7 +523,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   open_as_new_private_window_action->setEnabled(false);
   open_as_new_private_window_action->setProperty("point", point);
 
-  auto *open_as_new_window_action = menu.addAction
+  auto open_as_new_window_action = menu.addAction
     (QIcon::fromTheme("window-new",
 		      QIcon(QString(":/%1/48/new_window.png").arg(icon_set))),
      tr("Open as &New Window..."),
@@ -540,7 +540,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
      SIGNAL(new_tab(void)));
   menu.addSeparator();
 
-  auto *reload_action = menu.addAction
+  auto reload_action = menu.addAction
     (QIcon::fromTheme("view-refresh",
 		      QIcon(QString(":/%1/20/reload.png").arg(icon_set))),
      tr("&Reload"),
@@ -548,8 +548,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
      SLOT(slot_reload(void)));
   reload_action->setProperty("point", point);
 
-  auto *action_group = new QActionGroup(&menu);
-  auto *sub_menu = menu.addMenu(tr("Reload Periodically"));
+  auto action_group = new QActionGroup(&menu);
+  auto sub_menu = menu.addMenu(tr("Reload Periodically"));
 
   action = sub_menu->addAction(tr("&15 Seconds"),
 			       this,
@@ -590,14 +590,14 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action_group->addAction(action);
   menu.addSeparator();
 
-  auto *back_action = menu.addAction
+  auto back_action = menu.addAction
     (QIcon::fromTheme("go-previous",
 		      QIcon(QString(":/%1/36/backward.png").arg(icon_set))),
      tr("&Back"));
 
   back_action->setProperty("point", point);
 
-  auto *forward_action = menu.addAction
+  auto forward_action = menu.addAction
     (QIcon::fromTheme("go-next",
 		      QIcon(QString(":/%1/36/forward.png").arg(icon_set))),
      tr("&Forward"));
@@ -605,28 +605,28 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   forward_action->setProperty("point", point);
   menu.addSeparator();
 
-  auto *javascript_action = menu.addAction(tr("&JavaScript"),
-					   this,
-					   SLOT(slot_javascript(void)));
+  auto javascript_action = menu.addAction(tr("&JavaScript"),
+					  this,
+					  SLOT(slot_javascript(void)));
 
   javascript_action->setEnabled(false);
   javascript_action->setProperty("point", point);
 
-  auto *web_plugins_action = menu.addAction(tr("Web &Plugins"),
-					    this,
-					    SLOT(slot_web_plugins(void)));
+  auto web_plugins_action = menu.addAction(tr("Web &Plugins"),
+					   this,
+					   SLOT(slot_web_plugins(void)));
 
   web_plugins_action->setEnabled(false);
   web_plugins_action->setProperty("point", point);
 
-  auto *webgl_action = menu.addAction(tr("Web&GL"),
-				      this,
-				      SLOT(slot_webgl(void)));
+  auto webgl_action = menu.addAction(tr("Web&GL"),
+				     this,
+				     SLOT(slot_webgl(void)));
 
   webgl_action->setEnabled(false);
   webgl_action->setProperty("point", point);
 
-  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
   dooble_downloads *downloads = nullptr;
   dooble_page *page = nullptr;
 
@@ -687,7 +687,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	  webgl_action->setCheckable(true);
 	  webgl_action->setEnabled(tab_at > -1);
 
-	  auto *web_engine_settings = page->web_engine_settings();
+	  auto web_engine_settings = page->web_engine_settings();
 
 	  if(web_engine_settings)
 	    {
@@ -729,9 +729,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setEnabled(page && tab_at > -1);
   menu.addSeparator();
 
-  auto *lock_action = menu.addAction(tr("Lock Application"),
-				     this,
-				     SLOT(slot_application_locked(void)));
+  auto lock_action = menu.addAction(tr("Lock Application"),
+				    this,
+				    SLOT(slot_application_locked(void)));
 
   lock_action->setCheckable(true);
   lock_action->setChecked(dooble::s_application->application_locked());
@@ -741,7 +741,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   reload_action->setEnabled(page && tab_at > -1);
   sub_menu->setEnabled(page && tab_at > -1);
 
-  foreach(auto *action, menu.actions())
+  foreach(auto action, menu.actions())
     if(action != lock_action)
       if(dooble::s_application->application_locked())
 	action->setEnabled(false);
@@ -751,16 +751,16 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 
 void dooble_tab_bar::slot_web_plugins(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      auto *page = qobject_cast<dooble_page *>
+      auto page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -771,16 +771,16 @@ void dooble_tab_bar::slot_web_plugins(void)
 
 void dooble_tab_bar::slot_webgl(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  auto *tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
 
   if(tab_widget)
     {
-      auto *page = qobject_cast<dooble_page *>
+      auto page = qobject_cast<dooble_page *>
 	(tab_widget->widget(tabAt(action->property("point").toPoint())));
 
       if(page)
@@ -803,7 +803,7 @@ void dooble_tab_bar::tabLayoutChange(void)
       return;
     }
 
-  foreach(auto *tool_button, findChildren<QToolButton *> ())
+  foreach(auto tool_button, findChildren<QToolButton *> ())
     {
       if(isVisible())
 	emit show_corner_widget(tool_button->isVisible());

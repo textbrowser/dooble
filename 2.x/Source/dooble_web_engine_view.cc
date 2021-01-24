@@ -126,7 +126,7 @@ bool dooble_web_engine_view::is_private(void) const
 dooble_web_engine_view *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
-  auto *view = new dooble_web_engine_view(m_page->profile(), nullptr);
+  auto view = new dooble_web_engine_view(m_page->profile(), nullptr);
 
   view->setVisible(false);
 
@@ -141,7 +141,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     if(dooble_settings::setting("javascript").toBool() &&
        dooble_settings::setting("javascript_block_popups").toBool())
       {
-	QUrl url(QUrl::fromUserInput(this->url().host()));
+	auto url(QUrl::fromUserInput(this->url().host()));
 
 	url.setScheme(this->url().scheme());
 
@@ -180,7 +180,7 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 
 void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 {
-  auto *menu = m_page->createStandardContextMenu();
+  auto menu = m_page->createStandardContextMenu();
 
   if(!menu)
     menu = new QMenu(this);
@@ -191,7 +191,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   ** Change some icons.
   */
 
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(dooble_settings::setting("icon_set").toString());
 
   if((action = m_page->action(QWebEnginePage::Back)))
     action->setIcon(QIcon(QString(":/%1/20/previous.png").arg(icon_set)));
@@ -259,7 +259,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
      this,
      SLOT(slot_open_link_in_current_page(void)));
 
-  QWebEngineContextMenuData context_menu_data = m_page->contextMenuData();
+  auto context_menu_data = m_page->contextMenuData();
 
   if(context_menu_data.isValid())
     {
@@ -352,8 +352,8 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     {
       menu->addSeparator();
 
-      QList<QAction *> actions(dooble::s_search_engines_window->actions());
-      auto *sub_menu = menu->addMenu("Search Selected Text");
+      auto actions(dooble::s_search_engines_window->actions());
+      auto sub_menu = menu->addMenu("Search Selected Text");
 
       if(!actions.isEmpty() && !selectedText().isEmpty())
 	{
@@ -361,10 +361,10 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 
 	  for(auto i : actions)
 	    {
-	      auto *action = sub_menu->addAction(i->icon(),
-						 i->text(),
-						 this,
-						 SLOT(slot_search(void)));
+	      auto action = sub_menu->addAction(i->icon(),
+						i->text(),
+						this,
+						SLOT(slot_search(void)));
 
 	      action->setProperty("selected_text", selectedText());
 	      action->setProperty("url", i->property("url"));
@@ -406,12 +406,12 @@ void dooble_web_engine_view::save(const QString &file_name)
 
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QString host(action->property("url").toUrl().host());
+  auto host(action->property("url").toUrl().host());
   int index = -1;
 
   while(!host.isEmpty())
@@ -461,12 +461,12 @@ void dooble_web_engine_view::slot_load_progress(int progress)
 
 void dooble_web_engine_view::slot_open_link_in_current_page(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QUrl url(action->property("url").toUrl());
+  auto url(action->property("url").toUrl());
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_current_page(url);
@@ -474,12 +474,12 @@ void dooble_web_engine_view::slot_open_link_in_current_page(void)
 
 void dooble_web_engine_view::slot_open_link_in_new_private_window(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QUrl url(action->property("url").toUrl());
+  auto url(action->property("url").toUrl());
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_new_private_window(url);
@@ -487,12 +487,12 @@ void dooble_web_engine_view::slot_open_link_in_new_private_window(void)
 
 void dooble_web_engine_view::slot_open_link_in_new_window(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QUrl url(action->property("url").toUrl());
+  auto url(action->property("url").toUrl());
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_new_window(url);
@@ -500,12 +500,12 @@ void dooble_web_engine_view::slot_open_link_in_new_window(void)
 
 void dooble_web_engine_view::slot_open_link_in_new_tab(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QUrl url(action->property("url").toUrl());
+  auto url(action->property("url").toUrl());
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_new_tab(url);
@@ -513,16 +513,16 @@ void dooble_web_engine_view::slot_open_link_in_new_tab(void)
 
 void dooble_web_engine_view::slot_search(void)
 {
-  auto *action = qobject_cast<QAction *> (sender());
+  auto action = qobject_cast<QAction *> (sender());
 
   if(!action)
     return;
 
-  QUrl url(action->property("url").toUrl());
+  auto url(action->property("url").toUrl());
 
   if(!url.isEmpty() && url.isValid())
     {
-      QString str
+      auto str
 	(url.query().
 	 append(QString("\"%1\"").arg(action->property("selected_text").
 				      toString())));

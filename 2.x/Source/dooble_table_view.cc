@@ -38,15 +38,15 @@ dooble_table_view::dooble_table_view(QWidget *parent):QTableView(parent)
 
 void dooble_table_view::prepare_viewport_icons(void)
 {
-  auto *model = qobject_cast<QStandardItemModel *> (this->model());
+  auto model = qobject_cast<QStandardItemModel *> (this->model());
 
   if(!model)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  int a = rowAt(viewport()->rect().topLeft().y());
-  int b = rowAt(viewport()->rect().bottomLeft().y());
+  auto a = rowAt(viewport()->rect().topLeft().y());
+  auto b = rowAt(viewport()->rect().bottomLeft().y());
 
   if(b == -1)
     /*
@@ -63,7 +63,7 @@ void dooble_table_view::prepare_viewport_icons(void)
 
   for(int i = a; i <= b; i++)
     {
-      auto *item = model->item(i, 0); // Title
+      auto item = model->item(i, 0); // Title
 
       if(!item)
 	continue;

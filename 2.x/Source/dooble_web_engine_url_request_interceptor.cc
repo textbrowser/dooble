@@ -43,7 +43,7 @@ interceptRequest(QWebEngineUrlRequestInfo &info)
 
   info.setHttpHeader("REFERER", "");
 
-  QString mode
+  auto mode
     (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
 
   if(dooble::s_accepted_or_blocked_domains->exception(info.firstPartyUrl()))
@@ -57,7 +57,7 @@ interceptRequest(QWebEngineUrlRequestInfo &info)
     }
 
   QString host("");
-  bool state = true;
+  auto state = true;
   int index = -1;
 
   if(mode == "accept")

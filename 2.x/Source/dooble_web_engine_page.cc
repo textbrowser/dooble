@@ -108,10 +108,10 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
   Q_UNUSED(type);
   Q_UNUSED(isMainFrame);
 
-  QString host(url.host());
-  QString mode
+  auto host(url.host());
+  auto mode
     (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
-  bool state = true;
+  auto state = true;
   int index = -1;
 
   if(mode == "accept")
@@ -135,7 +135,7 @@ bool dooble_web_engine_page::certificateError
 {
   if(certificateError.isOverridable())
     {
-      QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
+      auto url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
       if(m_is_private)
 	if(profile()->property(("certificate_exception_" + url.toString()).
@@ -151,7 +151,7 @@ bool dooble_web_engine_page::certificateError
       if(!view())
 	return false;
 
-      auto *layout = qobject_cast<QLayout *> (view()->layout());
+      auto layout = qobject_cast<QLayout *> (view()->layout());
 
       if(!layout)
 	return false;
@@ -203,7 +203,7 @@ bool dooble_web_engine_page::certificateError
       if(!view())
 	return false;
 
-      auto *layout = qobject_cast<QLayout *> (view()->layout());
+      auto layout = qobject_cast<QLayout *> (view()->layout());
 
       if(!layout)
 	return false;
@@ -212,7 +212,7 @@ bool dooble_web_engine_page::certificateError
 	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
 	    layout->itemAt(i)->widget()->setVisible(false);
 
-      QUrl url(dooble_ui_utilities::simplified_url(certificateError.url()));
+      auto url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
       m_certificate_error = certificateError.errorDescription();
       m_certificate_error_url = url;

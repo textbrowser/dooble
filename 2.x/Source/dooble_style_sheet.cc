@@ -83,7 +83,7 @@ void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
 
       if(it.key().second == web_engine_page->simplified_url())
 	{
-	  QString style_sheet
+	  auto style_sheet
 	    (QString::fromLatin1("(function() {"
 				 "css = document.createElement('style');"
 				 "css.id = '%1';"
@@ -106,7 +106,7 @@ void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
 	}
       else
 	{
-	  QString style_sheet
+	  auto style_sheet
 	    (QString::fromLatin1("(function() {"
 				 "var element = document.getElementById('%1');"
 				 "if(element) element.outerHTML = '';"
@@ -157,10 +157,10 @@ void dooble_style_sheet::purge(void)
 {
   s_style_sheets.clear();
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -186,12 +186,12 @@ void dooble_style_sheet::slot_add(void)
   if(!m_web_engine_page)
     return;
 
-  QString name(m_ui.name->text().trimmed());
+  auto name(m_ui.name->text().trimmed());
 
   if(m_ui.style_sheet->toPlainText().trimmed().isEmpty() || name.isEmpty())
     return;
 
-  QString style_sheet
+  auto style_sheet
     (QString::fromLatin1("(function() {"
 			 "css = document.createElement('style');"
 			 "css.id = '%1';"
@@ -228,10 +228,10 @@ void dooble_style_sheet::slot_add(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -295,7 +295,7 @@ void dooble_style_sheet::slot_add(void)
 
 void dooble_style_sheet::slot_item_selection_changed(void)
 {
-  QList<QListWidgetItem *> list(m_ui.names->selectedItems());
+  auto list(m_ui.names->selectedItems());
 
   if(list.isEmpty() || !list.at(0) || !m_web_engine_page)
     {
@@ -316,10 +316,10 @@ void dooble_style_sheet::slot_populate(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +
@@ -335,11 +335,11 @@ void dooble_style_sheet::slot_populate(void)
 		      "dooble_style_sheets"))
 	  while(query.next())
 	    {
-	      QByteArray name
+	      auto name
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
-	      QByteArray style_sheet
+	      auto style_sheet
 		(QByteArray::fromBase64(query.value(1).toByteArray()));
-	      QByteArray url
+	      auto url
 		(QByteArray::fromBase64(query.value(2).toByteArray()));
 
 	      name = dooble::s_cryptography->mac_then_decrypt(name);
@@ -372,13 +372,13 @@ void dooble_style_sheet::slot_remove(void)
   if(!m_web_engine_page)
     return;
 
-  QList<QListWidgetItem *> list(m_ui.names->selectedItems());
+  auto list(m_ui.names->selectedItems());
 
   if(list.isEmpty() || !list.at(0))
     return;
 
-  QString name(list.at(0)->text());
-  QString style_sheet
+  auto name(list.at(0)->text());
+  auto style_sheet
     (QString::fromLatin1("(function() {"
 			 "var element = document.getElementById('%1');"
 			 "if(element) element.outerHTML = '';"
@@ -395,10 +395,10 @@ void dooble_style_sheet::slot_remove(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  QString database_name(dooble_database_utilities::database_name());
+  auto database_name(dooble_database_utilities::database_name());
 
   {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
     db.setDatabaseName(dooble_settings::setting("home_path").toString() +
 		       QDir::separator() +

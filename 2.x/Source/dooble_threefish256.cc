@@ -216,10 +216,10 @@ static void threefish_decrypt_implementation(char *D,
   ** The inverse of section 3.3.
   */
 
-  auto **s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
-  auto *k = new (std::nothrow) uint64_t[Nw + 1];
-  auto *v = new (std::nothrow) uint64_t[Nw];
-  bool error = false;
+  auto error = false;
+  auto k = new (std::nothrow) uint64_t[Nw + 1];
+  auto s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
+  auto v = new (std::nothrow) uint64_t[Nw];
   uint64_t C240 = 0x1bd11bdaa9fc1a22;
   uint64_t kNw = C240; // Section 3.3.2.
   uint64_t t[3];
@@ -283,7 +283,7 @@ static void threefish_decrypt_implementation(char *D,
 
   for(size_t d = Nr - 1;; d--)
     {
-      auto *f = new (std::nothrow) uint64_t[Nw];
+      auto f = new (std::nothrow) uint64_t[Nw];
 
       if(Q_UNLIKELY(!f))
 	{
@@ -396,10 +396,10 @@ static void threefish_encrypt_implementation(char *E,
   ** Section 3.3.
   */
 
-  auto **s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
-  auto *k = new (std::nothrow) uint64_t[Nw + 1];
-  auto *v = new (std::nothrow) uint64_t[Nw];
-  bool error = false;
+  auto error = false;
+  auto k = new (std::nothrow) uint64_t[Nw + 1];
+  auto s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
+  auto v = new (std::nothrow) uint64_t[Nw];
   uint64_t C240 = 0x1bd11bdaa9fc1a22;
   uint64_t kNw = C240; // Section 3.3.2.
   uint64_t t[3];
@@ -464,7 +464,7 @@ static void threefish_encrypt_implementation(char *E,
 	for(size_t i = 0; i < Nw; i++)
 	  v[i] += s[d / 4][i];
 
-      auto *f = new (std::nothrow) uint64_t[Nw];
+      auto f = new (std::nothrow) uint64_t[Nw];
 
       if(Q_UNLIKELY(!f))
 	{
@@ -571,21 +571,21 @@ QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
   if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
     return QByteArray();
 
-  QByteArray iv(bytes.mid(0, m_key_length));
+  auto iv(bytes.mid(0, m_key_length));
 
   if(Q_UNLIKELY(iv.length() != m_key_length))
     return QByteArray();
 
   QByteArray block(m_block_length, 0);
   QByteArray c;
-  QByteArray ciphertext(bytes.mid(iv.length()));
   QByteArray decrypted;
-  int iterations = ciphertext.length() / m_block_length;
+  auto ciphertext(bytes.mid(iv.length()));
+  auto iterations = ciphertext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
     {
-      bool ok = true;
-      int position = i * m_block_length;
+      auto ok = true;
+      auto position = i * m_block_length;
 
       threefish_decrypt
 	(block.data(),
@@ -650,7 +650,7 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
     return QByteArray();
 
   QByteArray iv;
-  bool ok = true;
+  auto ok = true;
 
   set_initialization_vector(iv, &ok);
 
@@ -663,7 +663,7 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 
   QByteArray block(iv.length(), 0);
   QByteArray encrypted;
-  QByteArray plaintext(bytes);
+  auto plaintext(bytes);
 
   if(plaintext.isEmpty())
     plaintext = plaintext.leftJustified(m_block_length, 0);
@@ -685,13 +685,13 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
     (plaintext.length() - static_cast<int> (sizeof(int)),
      static_cast<int> (sizeof(int)), original_length);
 
-  int iterations = plaintext.length() / m_block_length;
+  auto iterations = plaintext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
     {
       QByteArray p;
-      bool ok = true;
-      int position = i * m_block_length;
+      auto ok = true;
+      auto position = i * m_block_length;
 
       p = plaintext.mid(position, m_block_length);
 
@@ -726,7 +726,7 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 void dooble_threefish256::set_initialization_vector
 (QByteArray &bytes, bool *ok) const
 {
-  int iv_length = m_key_length;
+  auto iv_length = m_key_length;
 
   if(ok)
     *ok = false;
@@ -779,7 +779,7 @@ void dooble_threefish256::set_tweak(const QByteArray &tweak, bool *ok)
 
 void dooble_threefish256::test1(void)
 {
-  auto *s = new (std::nothrow) dooble_threefish256
+  auto s = new (std::nothrow) dooble_threefish256
     (dooble_random::random_bytes(32));
 
   if(!s)
@@ -799,7 +799,7 @@ void dooble_threefish256::test1(void)
 
 void dooble_threefish256::test2(void)
 {
-  auto *s = new (std::nothrow) dooble_threefish256
+  auto s = new (std::nothrow) dooble_threefish256
     (dooble_random::random_bytes(32));
 
   if(!s)
@@ -824,7 +824,7 @@ void dooble_threefish256::test2(void)
 
 void dooble_threefish256::test3(void)
 {
-  auto *s = new (std::nothrow) dooble_threefish256
+  auto s = new (std::nothrow) dooble_threefish256
     (dooble_random::random_bytes(32));
 
   if(!s)
