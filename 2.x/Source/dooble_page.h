@@ -152,6 +152,7 @@ class dooble_page: public QWidget
   void slot_find_text_edited(const QString &text);
   void slot_go_backward(void);
   void slot_go_forward(void);
+  void slot_go_home(void);
   void slot_go_to_backward_item(void);
   void slot_go_to_forward_item(void);
   void slot_icon_changed(const QIcon &icon);

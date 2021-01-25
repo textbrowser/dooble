@@ -217,6 +217,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_prepare_forward_menu(void)));
+  connect(m_ui.home,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_go_home(void)));
   connect(m_ui.javascript_allow_popup_exception,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -614,6 +618,9 @@ void dooble_page::prepare_icons(void)
 			    arg(icon_set))).pixmap(QSize(16, 16)));
   m_ui.close_javascript_popup_exception_frame->setIcon
     (QIcon(QString(":/%1/20/stop.png").arg(icon_set)));
+  m_ui.home->setIcon
+    (QIcon::fromTheme("go-home",
+		      QIcon(QString(":/%1/36/home.png").arg(icon_set))));
   m_ui.menu->setIcon
     (QIcon::fromTheme("application-menu",
 		      QIcon(QString(":/%1/36/menu.png").arg(icon_set))));
@@ -1664,6 +1671,10 @@ void dooble_page::slot_go_backward(void)
 void dooble_page::slot_go_forward(void)
 {
   m_view->history()->forward();
+}
+
+void dooble_page::slot_go_home(void)
+{
 }
 
 void dooble_page::slot_go_to_backward_item(void)
