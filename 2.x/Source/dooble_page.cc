@@ -1675,6 +1675,7 @@ void dooble_page::slot_go_forward(void)
 
 void dooble_page::slot_go_home(void)
 {
+  load(QUrl::fromEncoded(dooble_settings::setting("home_url").toByteArray()));
 }
 
 void dooble_page::slot_go_to_backward_item(void)
