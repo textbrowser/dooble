@@ -1,3 +1,7 @@
+DOOBLE_COOKIES_REPLACE_HYPHEN_WITH_UNDERSCORE
+
+Replace hyphens with underscores in cookie names.
+
 DOOBLE_FREEBSD_WEBENGINE_MISMATCH
 
 Enable if FreeBSD's Qt and WebEngine versions differ.

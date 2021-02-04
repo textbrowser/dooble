@@ -544,8 +544,10 @@ void dooble_cookies::slot_populate(void)
 		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
 		 query.value(0).toByteArray());
 
+#ifdef DOOBLE_COOKIES_REPLACE_HYPHEN_WITH_UNDERSCORE
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 	      c.setName(c.name().replace('-', '_'));
+#endif
 #endif
 	      cookies << c;
 	      count += 1;
