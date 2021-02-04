@@ -1,0 +1,12 @@
+DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+
+Enable if FreeBSD's Qt and WebEngine versions differ.
+
+DOOBLE_HMAC
+
+Use Dooble's HMAC implementation. Otherwise, QMessageAuthenticationCode
+is applied.
+
+DOOBLE_SIMPLE_THEMES
+
+Enable simple themes.
