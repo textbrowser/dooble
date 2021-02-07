@@ -35,9 +35,7 @@
 dooble_about::dooble_about(void):QMainWindow()
 {
   m_ui.setupUi(this);
-  m_ui.digest->setText
-    (tr("Computing the digest of %1.").
-     arg(QApplication::applicationFilePath()));
+  m_ui.digest->clear();
   connect(m_ui.license,
 	  SIGNAL(linkActivated(const QString &)),
 	  this,
