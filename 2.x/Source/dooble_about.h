@@ -137,6 +137,7 @@ class dooble_about: public QMainWindow
  public:
   dooble_about(void);
   ~dooble_about();
+  void compute_self_digest(void);
 
  protected:
   void keyPressEvent(QKeyEvent *event);
@@ -144,7 +145,6 @@ class dooble_about: public QMainWindow
  private:
   QFuture<void> m_future;
   Ui_dooble_about m_ui;
-  void compute_self_digest(void);
   void compute_self_digest_task(const QString &file_path);
 
  private slots:

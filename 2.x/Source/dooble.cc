@@ -465,6 +465,10 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   return page;
 }
 
+void dooble::clean(void)
+{
+}
+
 void dooble::closeEvent(QCloseEvent *event)
 {
   if(!can_exit(CAN_EXIT_CLOSE_EVENT))
@@ -2883,6 +2887,7 @@ void dooble::slot_show_about(void)
 	  SLOT(slot_show_release_notes(const QUrl &)),
 	  Qt::UniqueConnection);
   s_about->activateWindow();
+  s_about->compute_self_digest();
   s_about->raise();
   s_about->showNormal();
   dooble_ui_utilities::center_window_widget(this, s_about);
