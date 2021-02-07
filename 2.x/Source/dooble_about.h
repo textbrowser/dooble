@@ -28,6 +28,7 @@
 #ifndef dooble_about_h
 #define dooble_about_h
 
+#include <QFuture>
 #include <QMainWindow>
 
 #include "ui_dooble_about.h"
@@ -135,17 +136,23 @@ class dooble_about: public QMainWindow
 
  public:
   dooble_about(void);
+  ~dooble_about();
 
  protected:
   void keyPressEvent(QKeyEvent *event);
 
  private:
+  QFuture<void> m_future;
   Ui_dooble_about m_ui;
+  void compute_self_digest(void);
+  void compute_self_digest_task(const QString &file_path);
 
  private slots:
+  void slot_file_digest_computed(const QByteArray &digest);
   void slot_link_activated(const QString &url);
 
  signals:
+  void file_digest_computed(const QByteArray &digest);
   void link_activated(const QUrl &url);
 };
 

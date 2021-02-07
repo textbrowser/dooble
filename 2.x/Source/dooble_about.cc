@@ -25,7 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QCryptographicHash>
 #include <QKeyEvent>
+#include <QtConcurrent>
 
 #include "dooble_about.h"
 #include "dooble_version.h"
@@ -33,6 +35,9 @@
 dooble_about::dooble_about(void):QMainWindow()
 {
   m_ui.setupUi(this);
+  m_ui.digest->setText
+    (tr("Computing the digest of %1.").
+     arg(QApplication::applicationFilePath()));
   connect(m_ui.license,
 	  SIGNAL(linkActivated(const QString &)),
 	  this,
@@ -41,6 +46,10 @@ dooble_about::dooble_about(void):QMainWindow()
 	  SIGNAL(linkActivated(const QString &)),
 	  this,
 	  SLOT(slot_link_activated(const QString &)));
+  connect(this,
+	  SIGNAL(file_digest_computed(const QByteArray &)),
+	  this,
+	  SLOT(slot_file_digest_computed(const QByteArray &)));
 
   QString qversion("");
   const auto tmp = qVersion();
@@ -69,6 +78,44 @@ dooble_about::dooble_about(void):QMainWindow()
 	"Release Notes</a>"));
   m_ui.version->setText
     (tr("Dooble version %1, Quaternions.").arg(DOOBLE_VERSION_STRING));
+  compute_self_digest();
+}
+
+dooble_about::~dooble_about()
+{
+  m_future.cancel();
+  m_future.waitForFinished();
+}
+
+void dooble_about::compute_self_digest(void)
+{
+  m_future.cancel();
+  m_future.waitForFinished();
+  m_future = QtConcurrent::run
+    (this,
+     &dooble_about::compute_self_digest_task,
+     QApplication::applicationFilePath());
+}
+
+void dooble_about::compute_self_digest_task(const QString &file_path)
+{
+  QByteArray buffer(4096, 0);
+  QCryptographicHash hash(QCryptographicHash::Sha3_512);
+  QFile file(file_path);
+
+  if(file.open(QIODevice::ReadOnly))
+    {
+      qint64 rc = 0;
+
+      while((rc = file.read(buffer.data(), buffer.length())) > 0)
+	if(m_future.isCanceled())
+	  break;
+	else
+	  hash.addData(buffer, static_cast<int> (rc));
+    }
+
+  file.close();
+  emit file_digest_computed(hash.result());
 }
 
 void dooble_about::keyPressEvent(QKeyEvent *event)
@@ -77,6 +124,13 @@ void dooble_about::keyPressEvent(QKeyEvent *event)
     close();
 
   QMainWindow::keyPressEvent(event);
+}
+
+void dooble_about::slot_file_digest_computed(const QByteArray &digest)
+{
+  m_ui.digest->setText
+    (tr("The SHA3-512 digest of %1 is %2.").
+     arg(QApplication::applicationFilePath()).arg(digest.toHex().constData()));
 }
 
 void dooble_about::slot_link_activated(const QString &url)
