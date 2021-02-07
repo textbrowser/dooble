@@ -467,6 +467,12 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
 void dooble::clean(void)
 {
+  /*
+  ** Only to be called on exit.
+  */
+
+  if(s_about)
+    delete s_about;
 }
 
 void dooble::closeEvent(QCloseEvent *event)

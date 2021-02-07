@@ -113,7 +113,9 @@ void dooble_about::compute_self_digest_task(const QString &file_path)
     }
 
   file.close();
-  emit file_digest_computed(hash.result());
+
+  if(!m_future.isCanceled())
+    emit file_digest_computed(hash.result());
 }
 
 void dooble_about::keyPressEvent(QKeyEvent *event)
