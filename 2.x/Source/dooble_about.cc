@@ -130,7 +130,9 @@ void dooble_about::slot_file_digest_computed(const QByteArray &digest)
 {
   m_ui.digest->setText
     (tr("The SHA3-512 digest of %1 is %2.").
-     arg(QApplication::applicationFilePath()).arg(digest.toHex().constData()));
+     arg(QApplication::applicationFilePath()).
+     arg(digest.toHex().insert(64, '\n').constData()));
+  resize(sizeHint());
 }
 
 void dooble_about::slot_link_activated(const QString &url)
