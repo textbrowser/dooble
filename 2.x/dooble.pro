@@ -648,6 +648,8 @@ preinstall.extra	= rm -fr /Applications/Dooble.d/Dooble.app
 preinstall.path		= /Applications/Dooble.d
 translations.files	= Translations/*.qm
 translations.path	= /Applications/Dooble.d/Translations
+zzz.extra		= chown -Rh root:wheel /Applications/Dooble.d
+zzz.path		= /Applications/Dooble.d
 
 INSTALLS	= copydata \
                   copydocumentation \
@@ -657,7 +659,8 @@ INSTALLS	= copydata \
 		  copyinfoplist \
 		  copywebengine \
 		  purgeheaders \
-                  translations
+                  translations \
+		  zzz
 }
 
 macx:app_bundle {
