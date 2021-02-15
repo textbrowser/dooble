@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>549</height>
+           <height>548</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -355,8 +355,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>651</width>
-               <height>531</height>
+               <width>637</width>
+               <height>543</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -415,7 +415,7 @@
                 <item>
                  <widget class="QLabel" name="label_3">
                   <property name="text">
-                   <string>Icon Set Fallback</string>
+                   <string>Icon Set</string>
                   </property>
                   <property name="buddy">
                    <cstring>icon_set</cstring>
@@ -439,6 +439,11 @@
                   <item>
                    <property name="text">
                     <string>Material Design</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>System</string>
                    </property>
                   </item>
                  </widget>
@@ -835,8 +840,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>674</width>
-               <height>755</height>
+               <width>615</width>
+               <height>780</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1393,8 +1398,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
-               <height>1471</height>
+               <width>350</width>
+               <height>1501</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
