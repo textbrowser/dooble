@@ -202,6 +202,7 @@ void dooble_tab_bar::prepare_icons(void)
 {
   QList<QToolButton *> list;
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
   int i = 0;
 
   if(dooble::s_application->style_name() == "macintosh")
@@ -218,11 +219,11 @@ void dooble_tab_bar::prepare_icons(void)
 
       if(i++ == 0)
 	tool_button->setIcon
-	  (QIcon::fromTheme("go-next",
+	  (QIcon::fromTheme(use_material_icons + "go-next",
 			    QIcon(QString(":/%1/20/next.png").arg(icon_set))));
       else
 	tool_button->setIcon
-	  (QIcon::fromTheme("go-previous",
+	  (QIcon::fromTheme(use_material_icons + "go-previous",
 			    QIcon(QString(":/%1/20/previous.png").
 				  arg(icon_set))));
 
@@ -492,6 +493,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   QMenu menu(this);
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto tab_at = tabAt(point);
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   action = menu.addAction(tr("&Close Tab"),
 			  this,
@@ -513,7 +515,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
 
   auto open_as_new_private_window_action = menu.addAction
-    (QIcon::fromTheme("view-private",
+    (QIcon::fromTheme(use_material_icons + "view-private",
 		      QIcon(QString(":/%1/48/new_private_window.png").
 			    arg(icon_set))),
      tr("Open as New P&rivate Window..."),
@@ -524,7 +526,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   open_as_new_private_window_action->setProperty("point", point);
 
   auto open_as_new_window_action = menu.addAction
-    (QIcon::fromTheme("window-new",
+    (QIcon::fromTheme(use_material_icons + "window-new",
 		      QIcon(QString(":/%1/48/new_window.png").arg(icon_set))),
      tr("Open as &New Window..."),
      this,
@@ -533,7 +535,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   open_as_new_window_action->setEnabled(false);
   open_as_new_window_action->setProperty("point", point);
   menu.addAction
-    (QIcon::fromTheme("folder-new",
+    (QIcon::fromTheme(use_material_icons + "folder-new",
 		      QIcon(QString(":/%1/48/new_tab.png").arg(icon_set))),
      tr("New &Tab"),
      this,
@@ -541,7 +543,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
 
   auto reload_action = menu.addAction
-    (QIcon::fromTheme("view-refresh",
+    (QIcon::fromTheme(use_material_icons + "view-refresh",
 		      QIcon(QString(":/%1/20/reload.png").arg(icon_set))),
      tr("&Reload"),
      this,
@@ -591,14 +593,14 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   menu.addSeparator();
 
   auto back_action = menu.addAction
-    (QIcon::fromTheme("go-previous",
+    (QIcon::fromTheme(use_material_icons + "go-previous",
 		      QIcon(QString(":/%1/36/backward.png").arg(icon_set))),
      tr("&Back"));
 
   back_action->setProperty("point", point);
 
   auto forward_action = menu.addAction
-    (QIcon::fromTheme("go-next",
+    (QIcon::fromTheme(use_material_icons + "go-next",
 		      QIcon(QString(":/%1/36/forward.png").arg(icon_set))),
      tr("&Forward"));
 
