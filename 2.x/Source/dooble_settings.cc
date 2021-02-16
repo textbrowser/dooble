@@ -426,6 +426,11 @@ QString dooble_settings::cookie_policy_string(int index)
     return "save_persistent_only";
 }
 
+QString dooble_settings::use_material_icons(void)
+{
+  return setting("icon_set_index") == "0" ? "true" : "";
+}
+
 QString dooble_settings::zoom_frame_location_string(int index)
 {
   Q_UNUSED(index);
@@ -766,25 +771,26 @@ void dooble_settings::prepare_fonts(void)
 
 void dooble_settings::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto icon_set(setting("icon_set").toString());
+  auto use_material_icons(this->use_material_icons());
 
   m_ui.cache->setIcon
-    (QIcon::fromTheme("drive-harddisk",
+    (QIcon::fromTheme(use_material_icons + "drive-harddisk",
 		      QIcon(QString(":/%1/64/cache.png").arg(icon_set))));
   m_ui.display->setIcon
-    (QIcon::fromTheme("video-display",
+    (QIcon::fromTheme(use_material_icons + "video-display",
 		      QIcon(QString(":/%1/64/display.png").arg(icon_set))));
   m_ui.history->setIcon
-    (QIcon::fromTheme("deep-history",
+    (QIcon::fromTheme(use_material_icons + "deep-history",
 		      QIcon(QString(":/%1/64/history.png").arg(icon_set))));
   m_ui.privacy->setIcon
-    (QIcon::fromTheme("dialog-password",
+    (QIcon::fromTheme(use_material_icons + "dialog-password",
 		      QIcon(QString(":/%1/64/privacy.png").arg(icon_set))));
   m_ui.web->setIcon
-    (QIcon::fromTheme("applications-internet",
+    (QIcon::fromTheme(use_material_icons + "applications-internet",
 		      QIcon(QString(":/%1/64/webengine.png").arg(icon_set))));
   m_ui.windows->setIcon
-    (QIcon::fromTheme("preferences-desktop",
+    (QIcon::fromTheme(use_material_icons + "preferences-desktop",
 		      QIcon(QString(":/%1/64/windows.png").arg(icon_set))));
 
   QSize size(0, 0);
@@ -2805,7 +2811,7 @@ void dooble_settings::slot_reset(void)
        << "dooble_style_sheets.db";
 
   for(const auto &i : list)
-    QFile::remove(dooble_settings::setting("home_path").toString() +
+    QFile::remove(setting("home_path").toString() +
 		  QDir::separator() +
 		  i);
 
@@ -2826,7 +2832,7 @@ void dooble_settings::slot_reset(void)
 
 void dooble_settings::slot_reset_credentials(void)
 {
-  if(!dooble_settings::has_dooble_credentials())
+  if(!has_dooble_credentials())
     return;
 
   QMessageBox mb(this);

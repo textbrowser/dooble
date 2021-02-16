@@ -57,6 +57,7 @@ class dooble_settings: public QMainWindow
 
   dooble_settings(void);
   static QString cookie_policy_string(int index);
+  static QString use_material_icons(void);
   static QString zoom_frame_location_string(int index);
   static QStringList s_spell_checker_dictionaries;
   static QVariant setting(const QString &k,
