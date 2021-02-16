@@ -228,9 +228,10 @@ void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)
 void dooble_search_engines_popup::prepare_icons(void)
 {
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.delete_selected->setIcon
-    (QIcon::fromTheme("edit-delete",
+    (QIcon::fromTheme(use_material_icons + "edit-delete",
 		      QIcon(QString(":/%1/36/delete.png").arg(icon_set))));
 }
 

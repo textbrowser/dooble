@@ -58,9 +58,10 @@ void dooble_search_widget::keyPressEvent(QKeyEvent *event)
 void dooble_search_widget::prepare_icons(void)
 {
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   m_find_tool_button->setIcon
-    (QIcon::fromTheme("edit-find",
+    (QIcon::fromTheme(use_material_icons + "edit-find",
 		      QIcon(QString(":/%1/18/find.png").arg(icon_set))));
 }
 

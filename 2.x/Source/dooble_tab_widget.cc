@@ -254,15 +254,16 @@ dooble_page *dooble_tab_widget::page(int index) const
 void dooble_tab_widget::prepare_icons(void)
 {
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   m_add_tab_tool_button->setIcon
-    (QIcon::fromTheme("list-add",
+    (QIcon::fromTheme(use_material_icons + "list-add",
 		      QIcon(QString(":/%1/18/add.png").arg(icon_set))));
   m_private_tool_button->setIcon
-    (QIcon::fromTheme("view-private",
+    (QIcon::fromTheme(use_material_icons + "view-private",
 		      QIcon(QString(":/%1/18/private.png").arg(icon_set))));
   m_tabs_menu_button->setIcon
-    (QIcon::fromTheme("go-down",
+    (QIcon::fromTheme(use_material_icons + "go-down",
 		      QIcon(QString(":/%1/18/pulldown.png").arg(icon_set))));
 }
 
