@@ -223,86 +223,87 @@ $(function() {
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keywordtype">void</span> slot_find_text_edited(<span class="keyword">const</span> QString &amp;text);</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordtype">void</span> slot_go_backward(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="keywordtype">void</span> slot_go_forward(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordtype">void</span> slot_go_to_backward_item(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">void</span> slot_go_to_forward_item(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">void</span> slot_icon_changed(<span class="keyword">const</span> QIcon &amp;icon);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordtype">void</span> slot_inject_custom_css(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keywordtype">void</span> slot_javascript_allow_popup_exception(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordtype">void</span> slot_link_hovered(<span class="keyword">const</span> QString &amp;url);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordtype">void</span> slot_load_finished(<span class="keywordtype">bool</span> ok);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keywordtype">void</span> slot_load_page(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordtype">void</span> slot_load_progress(<span class="keywordtype">int</span> progress);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordtype">void</span> slot_load_started(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordtype">void</span> slot_only_now_allow_javascript_popup(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">void</span> slot_open_link(<span class="keyword">const</span> QUrl &amp;url);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keywordtype">void</span> slot_open_link(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordtype">void</span> slot_prepare_backward_menu(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordtype">void</span> slot_prepare_forward_menu(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordtype">void</span> slot_proxy_authentication_required(<span class="keyword">const</span> QUrl &amp;url,</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                      QAuthenticator *authenticator,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                      <span class="keyword">const</span> QString &amp;proxy_host);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">void</span> slot_reload(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">void</span> slot_reload_or_stop(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">void</span> slot_reload_periodically(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordtype">void</span> slot_settings_applied(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keywordtype">void</span> slot_show_certificate_exception(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="keywordtype">void</span> slot_show_favorites_popup(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordtype">void</span> slot_show_find(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="keywordtype">void</span> slot_show_popup(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keywordtype">void</span> slot_show_popup_menu(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="keywordtype">void</span> slot_show_pull_down_menu(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordtype">void</span> slot_show_status_bar(<span class="keywordtype">bool</span> state);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordtype">void</span> slot_show_web_settings_panel(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordtype">void</span> slot_url_changed(<span class="keyword">const</span> QUrl &amp;url);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordtype">void</span> slot_zoom_in(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <span class="keywordtype">void</span> slot_zoom_out(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordtype">void</span> slot_zoom_reset(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; signals:</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  <span class="keywordtype">void</span> authenticate(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordtype">void</span> clear_downloads(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordtype">void</span> close_tab(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordtype">void</span> create_dialog(<a class="code" href="classdooble__web__engine__view.html">dooble_web_engine_view</a> *view);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="keywordtype">void</span> create_tab(<a class="code" href="classdooble__web__engine__view.html">dooble_web_engine_view</a> *view);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">void</span> create_window(<a class="code" href="classdooble__web__engine__view.html">dooble_web_engine_view</a> *view);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordtype">void</span> dooble_credentials_authenticated(<span class="keywordtype">bool</span> state);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordtype">void</span> iconChanged(<span class="keyword">const</span> QIcon &amp;icon);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keywordtype">void</span> javascript_allow_popup_exception(<span class="keyword">const</span> QUrl &amp;url);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordtype">void</span> loadFinished(<span class="keywordtype">bool</span> ok);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="keywordtype">void</span> loadStarted(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="keywordtype">void</span> new_private_window(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordtype">void</span> new_tab(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keywordtype">void</span> new_window(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="keywordtype">void</span> open_link_in_new_private_window(<span class="keyword">const</span> QUrl &amp;url);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keywordtype">void</span> open_link_in_new_tab(<span class="keyword">const</span> QUrl &amp;url);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keywordtype">void</span> open_link_in_new_window(<span class="keyword">const</span> QUrl &amp;url);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="keywordtype">void</span> print(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="keywordtype">void</span> print_preview(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="keywordtype">void</span> quit_dooble(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">void</span> save(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordtype">void</span> show_about(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordtype">void</span> show_accepted_or_blocked_domains(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordtype">void</span> show_certificate_exceptions(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordtype">void</span> show_clear_items(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="keywordtype">void</span> show_cookies(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="keywordtype">void</span> show_documentation(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordtype">void</span> show_downloads(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="keywordtype">void</span> show_favorites(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="keywordtype">void</span> show_floating_digital_clock(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keywordtype">void</span> show_full_screen(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordtype">void</span> show_history(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="keywordtype">void</span> show_release_notes(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordtype">void</span> show_search_engines(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordtype">void</span> show_settings(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordtype">void</span> show_settings_panel(dooble_settings::Panels panel);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">void</span> show_site_cookies(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="keywordtype">void</span> titleChanged(<span class="keyword">const</span> QString &amp;title);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordtype">void</span> vacuum_databases(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keywordtype">void</span> windowCloseRequested(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordtype">void</span> zoomed(qreal zoom_factor);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;};</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordtype">void</span> slot_go_home(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">void</span> slot_go_to_backward_item(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">void</span> slot_go_to_forward_item(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordtype">void</span> slot_icon_changed(<span class="keyword">const</span> QIcon &amp;icon);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keywordtype">void</span> slot_inject_custom_css(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordtype">void</span> slot_javascript_allow_popup_exception(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordtype">void</span> slot_link_hovered(<span class="keyword">const</span> QString &amp;url);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keywordtype">void</span> slot_load_finished(<span class="keywordtype">bool</span> ok);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordtype">void</span> slot_load_page(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordtype">void</span> slot_load_progress(<span class="keywordtype">int</span> progress);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordtype">void</span> slot_load_started(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">void</span> slot_only_now_allow_javascript_popup(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keywordtype">void</span> slot_open_link(<span class="keyword">const</span> QUrl &amp;url);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordtype">void</span> slot_open_link(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordtype">void</span> slot_prepare_backward_menu(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordtype">void</span> slot_prepare_forward_menu(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordtype">void</span> slot_proxy_authentication_required(<span class="keyword">const</span> QUrl &amp;url,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                      QAuthenticator *authenticator,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                      <span class="keyword">const</span> QString &amp;proxy_host);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">void</span> slot_reload(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">void</span> slot_reload_or_stop(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordtype">void</span> slot_reload_periodically(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keywordtype">void</span> slot_settings_applied(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="keywordtype">void</span> slot_show_certificate_exception(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordtype">void</span> slot_show_favorites_popup(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="keywordtype">void</span> slot_show_find(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keywordtype">void</span> slot_show_popup(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="keywordtype">void</span> slot_show_popup_menu(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordtype">void</span> slot_show_pull_down_menu(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordtype">void</span> slot_show_status_bar(<span class="keywordtype">bool</span> state);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordtype">void</span> slot_show_web_settings_panel(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordtype">void</span> slot_url_changed(<span class="keyword">const</span> QUrl &amp;url);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <span class="keywordtype">void</span> slot_zoom_in(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordtype">void</span> slot_zoom_out(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordtype">void</span> slot_zoom_reset(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; signals:</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordtype">void</span> authenticate(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordtype">void</span> clear_downloads(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordtype">void</span> close_tab(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="keywordtype">void</span> create_dialog(<a class="code" href="classdooble__web__engine__view.html">dooble_web_engine_view</a> *view);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">void</span> create_tab(<a class="code" href="classdooble__web__engine__view.html">dooble_web_engine_view</a> *view);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordtype">void</span> create_window(<a class="code" href="classdooble__web__engine__view.html">dooble_web_engine_view</a> *view);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordtype">void</span> dooble_credentials_authenticated(<span class="keywordtype">bool</span> state);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keywordtype">void</span> iconChanged(<span class="keyword">const</span> QIcon &amp;icon);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordtype">void</span> javascript_allow_popup_exception(<span class="keyword">const</span> QUrl &amp;url);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="keywordtype">void</span> loadFinished(<span class="keywordtype">bool</span> ok);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="keywordtype">void</span> loadStarted(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordtype">void</span> new_private_window(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keywordtype">void</span> new_tab(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="keywordtype">void</span> new_window(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keywordtype">void</span> open_link_in_new_private_window(<span class="keyword">const</span> QUrl &amp;url);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keywordtype">void</span> open_link_in_new_tab(<span class="keyword">const</span> QUrl &amp;url);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="keywordtype">void</span> open_link_in_new_window(<span class="keyword">const</span> QUrl &amp;url);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="keywordtype">void</span> print(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="keywordtype">void</span> print_preview(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">void</span> quit_dooble(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordtype">void</span> save(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordtype">void</span> show_about(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordtype">void</span> show_accepted_or_blocked_domains(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordtype">void</span> show_certificate_exceptions(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="keywordtype">void</span> show_clear_items(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="keywordtype">void</span> show_cookies(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordtype">void</span> show_documentation(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="keywordtype">void</span> show_downloads(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="keywordtype">void</span> show_favorites(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keywordtype">void</span> show_floating_digital_clock(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordtype">void</span> show_full_screen(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="keywordtype">void</span> show_history(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordtype">void</span> show_release_notes(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordtype">void</span> show_search_engines(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordtype">void</span> show_settings(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">void</span> show_settings_panel(dooble_settings::Panels panel);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="keywordtype">void</span> show_site_cookies(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordtype">void</span> titleChanged(<span class="keyword">const</span> QString &amp;title);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keywordtype">void</span> vacuum_databases(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordtype">void</span> windowCloseRequested(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="keywordtype">void</span> zoomed(qreal zoom_factor);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;};</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassdooble_html"><div class="ttname"><a href="classdooble.html">dooble</a></div><div class="ttdef"><b>Definition:</b> dooble.h:62</div></div>
 <div class="ttc" id="aclassdooble__address__widget_html"><div class="ttname"><a href="classdooble__address__widget.html">dooble_address_widget</a></div><div class="ttdef"><b>Definition:</b> dooble_address_widget.h:41</div></div>
