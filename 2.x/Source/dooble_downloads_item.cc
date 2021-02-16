@@ -160,9 +160,10 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 	  SLOT(slot_reload(void)));
 
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.cancel->setIcon
-    (QIcon::fromTheme("view-refresh",
+    (QIcon::fromTheme(use_material_icons + "view-refresh",
 		      QIcon(QString(":/%1/20/reload.png").arg(icon_set))));
 #ifdef Q_OS_MACOS
   m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
@@ -232,12 +233,13 @@ void dooble_downloads_item::cancel(void)
 void dooble_downloads_item::prepare_icons(void)
 {
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.cancel->setIcon
-    (QIcon::fromTheme("media-playback-stop",
+    (QIcon::fromTheme(use_material_icons + "media-playback-stop",
 		      QIcon(QString(":/%1/20/stop.png").arg(icon_set))));
   m_ui.pause_resume->setIcon
-    (QIcon::fromTheme("media-playback-start",
+    (QIcon::fromTheme(use_material_icons + "media-playback-start",
 		      QIcon(QString(":/%1/20/resume.png").arg(icon_set))));
 }
 
@@ -490,9 +492,10 @@ void dooble_downloads_item::slot_finished(void)
 	      Qt::UniqueConnection);
 
       auto icon_set(dooble_settings::setting("icon_set").toString());
+      auto use_material_icons(dooble_settings::use_material_icons());
 
       m_ui.cancel->setIcon
-	(QIcon::fromTheme("view-refresh",
+	(QIcon::fromTheme(use_material_icons + "view-refresh",
 			  QIcon(QString(":/%1/20/reload.png").arg(icon_set))));
       m_ui.cancel->setToolTip(tr("Restart"));
       m_ui.cancel->setVisible(true);
@@ -520,11 +523,12 @@ void dooble_downloads_item::slot_pause_or_resume(void)
 	m_download->pause();
 
       auto icon_set(dooble_settings::setting("icon_set").toString());
+      auto use_material_icons(dooble_settings::use_material_icons());
 
       if(m_download->isPaused())
 	{
 	  m_ui.pause_resume->setIcon
-	    (QIcon::fromTheme("media-playback-pause",
+	    (QIcon::fromTheme(use_material_icons + "media-playback-pause",
 			      QIcon(QString(":/%1/20/pause.png").
 				    arg(icon_set))));
 	  m_ui.pause_resume->setToolTip(tr("Resume"));
@@ -542,7 +546,7 @@ void dooble_downloads_item::slot_pause_or_resume(void)
       else
 	{
 	  m_ui.pause_resume->setIcon
-	    (QIcon::fromTheme("media-playback-start",
+	    (QIcon::fromTheme(use_material_icons + "media-playback-start",
 			      QIcon(QString(":/%1/20/resume.png").
 				    arg(icon_set))));
 	  m_ui.pause_resume->setToolTip(tr("Pause"));

@@ -62,9 +62,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto label = new QLabel();
+  auto use_material_icons(dooble_settings::use_material_icons());
 
   label->setPixmap
-    (QIcon::fromTheme("view-private",
+    (QIcon::fromTheme(use_material_icons + "view-private",
 		      QIcon(QString(":/%1/18/private.png").arg(icon_set))).
      pixmap(QSize(16, 16)));
   label->setToolTip
