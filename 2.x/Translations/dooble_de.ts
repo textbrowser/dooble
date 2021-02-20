@@ -465,6 +465,10 @@ Dooble ist open source Software.
         <source>Dooble version %1, Quaternions.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The SHA3-512 digest of %1 is %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_accepted_or_blocked_domains</name>
@@ -1947,6 +1951,10 @@ Dooble ist open source Software.
         <source>Waiting for %1...</source>
         <translation>Warten für %1...</translation>
     </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_popup_menu</name>
@@ -2746,10 +2754,6 @@ Domänen</translation>
         <translation>Startseiten URL</translation>
     </message>
     <message>
-        <source>Icon Set Fallback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
@@ -2888,6 +2892,14 @@ Domänen</translation>
     <message>
         <source>Are you sure that you wish to remove the selected JavaScript pop-up exception(s)?</source>
         <translation>Sind Sie sicher, dass Sie die ausgewählten JavaScript-Popup-Ausnahmen entfernen möchten?</translation>
+    </message>
+    <message>
+        <source>Icon Set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favicons</source>
+        <translation type="unfinished">Favicons</translation>
     </message>
 </context>
 <context>
