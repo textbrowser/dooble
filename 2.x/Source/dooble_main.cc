@@ -184,9 +184,8 @@ int main(int argc, char *argv[])
 #endif
 #if defined(Q_OS_WIN)
   QFileInfo file_info;
+  QString username(qgetenv("USERNAME").mid(0, 32).constData());
   auto home_dir(QDir::current());
-  auto tmp(qgetenv("USERNAME").mid(0, 32));
-  auto username(tmp);
 
   file_info = QFileInfo(home_dir.absolutePath());
 
