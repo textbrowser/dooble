@@ -101,6 +101,7 @@ Completed Items
 - Print via popup menu.
 - Private Downloads containers.
 - Private-window decorations.
+- Provide immediate digest of current application in About.
 - Proxy details within Privacy.
 - Qt 5.10.
 - Qt's digest class. If DOOBLE_HMAC is not defined, HMACs are computed
@@ -137,6 +138,7 @@ Completed Items
 - Smart tab selections via keyboards.
 - Sort history items on population.
 - Store certificate exceptions.
+- Super-fancy icon set.
 - Support windows as pages and non-Dooble icons.
 - Tab close buttons on the Mac should be on the right.
 - The random-bytes implementation uses a deprecated interface on Windows.
@@ -167,7 +169,6 @@ Remaining Items
 - Element-selection option.
 - Fancy completer.
 - Include date stamps in cookie containers.
-- Provide immediate digest of current application in About.
 - Search engine icons should be based on host names.
 - Shortcuts browser.
 - Sign Debian release: new public keys.
@@ -183,4 +184,3 @@ Unknown Items
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
-- Super-fancy icon set.
