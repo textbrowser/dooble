@@ -113,6 +113,7 @@ dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
      "QToolButton::menu-button {border: none;}");
 #endif
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   prepare_icons();
   setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
 }

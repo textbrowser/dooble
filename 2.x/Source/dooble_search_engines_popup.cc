@@ -94,6 +94,7 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
      "QToolButton::menu-button {border: none;}");
 #endif
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   prepare_icons();
   setWindowFlags(Qt::WindowStaysOnTopHint | windowFlags());
 }

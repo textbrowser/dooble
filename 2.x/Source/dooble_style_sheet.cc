@@ -61,6 +61,7 @@ dooble_style_sheet::dooble_style_sheet(dooble_web_engine_page *web_engine_page,
 	  this,
 	  SLOT(slot_remove(void)));
   populate();
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 }
 
 dooble_style_sheet::dooble_style_sheet(void)
