@@ -63,6 +63,7 @@ dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 	  &m_search_timer,
 	  SLOT(start(void)));
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 }
 
 void dooble_certificate_exceptions::closeEvent(QCloseEvent *event)
