@@ -36,9 +36,10 @@
 #include <QTableWidgetItem>
 #include <QTimer>
 
+#include "dooble_main_window.h"
 #include "ui_dooble_accepted_or_blocked_domains.h"
 
-class dooble_accepted_or_blocked_domains: public QMainWindow
+class dooble_accepted_or_blocked_domains: public dooble_main_window
 {
   Q_OBJECT
 

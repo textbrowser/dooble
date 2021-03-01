@@ -39,6 +39,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_history.h \
                   Source/dooble_history_table_widget.h \
                   Source/dooble_history_window.h \
+                  Source/dooble_main_window.h \
                   Source/dooble_page.h \
                   Source/dooble_pbkdf2.h \
                   Source/dooble_popup_menu.h \

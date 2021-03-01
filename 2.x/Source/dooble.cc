@@ -2457,12 +2457,14 @@ void dooble::slot_create_window(dooble_web_engine_view *view)
 
 void dooble::slot_decouple_tab(int index)
 {
-  auto main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(index));
+  auto main_window = qobject_cast<dooble_main_window *>
+    (m_ui.tab->widget(index));
 
   if(main_window)
     {
       m_ui.tab->removeTab(index);
       m_ui.tab->setTabsClosable(tabs_closable());
+      main_window->enable_control_w_shortcut(true);
       main_window->setParent(nullptr);
       main_window->resize(s_vga_size);
       main_window->show();
@@ -2924,8 +2926,11 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
 	(s_accepted_or_blocked_domains); // Order is important.
       prepare_control_w_shortcut();
       prepare_tab_shortcuts();
+      s_accepted_or_blocked_domains->enable_control_w_shortcut(false);
       return;
     }
+
+  s_accepted_or_blocked_domains->enable_control_w_shortcut(true);
 
   if(s_accepted_or_blocked_domains->isVisible())
     {

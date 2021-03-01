@@ -38,7 +38,7 @@
 #include "dooble_ui_utilities.h"
 
 dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
-  QMainWindow()
+  dooble_main_window()
 {
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
