@@ -28,17 +28,17 @@
 #ifndef dooble_downloads_h
 #define dooble_downloads_h
 
-#include <QMainWindow>
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTimer>
 
+#include "dooble_main_window.h"
 #include "ui_dooble_downloads.h"
 
 class QWebEngineDownloadItem;
 class QWebEngineProfile;
 
-class dooble_downloads: public QMainWindow
+class dooble_downloads: public dooble_main_window
 {
   Q_OBJECT
 

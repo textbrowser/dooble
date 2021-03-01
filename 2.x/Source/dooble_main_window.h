@@ -36,11 +36,15 @@ class dooble_main_window: public QMainWindow
   Q_OBJECT
 
  public:
-  dooble_main_window(void):QMainWindow()
+  dooble_main_window(QWidget *parent):QMainWindow(parent)
   {
     m_control_w = new QShortcut
       (QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
     m_control_w->setEnabled(false);
+  }
+
+  dooble_main_window(void):dooble_main_window(nullptr)
+  {
   }
 
   virtual ~dooble_main_window()

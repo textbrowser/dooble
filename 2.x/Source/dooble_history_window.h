@@ -28,13 +28,13 @@
 #ifndef dooble_history_window_h
 #define dooble_history_window_h
 
-#include <QMainWindow>
 #include <QTimer>
 #include <QWebEngineHistoryItem>
 
+#include "dooble_main_window.h"
 #include "ui_dooble_history_window.h"
 
-class dooble_history_window: public QMainWindow
+class dooble_history_window: public dooble_main_window
 {
   Q_OBJECT
 

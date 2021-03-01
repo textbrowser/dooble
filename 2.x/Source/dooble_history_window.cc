@@ -53,7 +53,7 @@ public:
   }
 };
 
-dooble_history_window::dooble_history_window(void):QMainWindow()
+dooble_history_window::dooble_history_window(void):dooble_main_window()
 {
   m_parent = nullptr;
   m_save_settings_timer.setInterval(1500);

@@ -3061,8 +3061,11 @@ void dooble::slot_show_downloads(void)
       m_ui.tab->setCurrentWidget(s_downloads); // Order is important.
       prepare_control_w_shortcut();
       prepare_tab_shortcuts();
+      s_downloads->enable_control_w_shortcut(false);
       return;
     }
+
+  s_downloads->enable_control_w_shortcut(true);
 
   if(s_downloads->isVisible())
     {
@@ -3151,9 +3154,12 @@ void dooble::slot_show_history(void)
       m_ui.tab->setCurrentWidget(s_history_window); // Order is important.
       prepare_control_w_shortcut();
       prepare_tab_shortcuts();
+      s_history_window->enable_control_w_shortcut(false);
       s_history_window->prepare_viewport_icons();
       return;
     }
+
+  s_history_window->enable_control_w_shortcut(true);
 
   if(s_history_window->isVisible())
     {

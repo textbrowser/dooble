@@ -29,7 +29,6 @@
 #define dooble_accepted_or_blocked_domains_h
 
 #include <QFuture>
-#include <QMainWindow>
 #include <QMessageBox>
 #include <QPointer>
 #include <QSqlDatabase>

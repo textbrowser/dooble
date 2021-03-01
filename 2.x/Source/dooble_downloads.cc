@@ -42,7 +42,8 @@
 #include "dooble_page.h"
 
 dooble_downloads::dooble_downloads
-(QWebEngineProfile *web_engine_profile, QWidget *parent):QMainWindow(parent)
+(QWebEngineProfile *web_engine_profile, QWidget *parent):
+  dooble_main_window(parent)
 {
   m_download_path_inspection_timer.start(2500);
   m_search_timer.setInterval(750);
