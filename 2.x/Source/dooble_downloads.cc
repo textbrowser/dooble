@@ -183,7 +183,7 @@ void dooble_downloads::clear(void)
 
 void dooble_downloads::closeEvent(QCloseEvent *event)
 {
-  QMainWindow::closeEvent(event);
+  dooble_main_window::closeEvent(event);
   save_settings();
 }
 
@@ -280,7 +280,7 @@ void dooble_downloads::keyPressEvent(QKeyEvent *event)
 	}
     }
 
-  QMainWindow::keyPressEvent(event);
+  dooble_main_window::keyPressEvent(event);
 }
 
 void dooble_downloads::purge(void)
@@ -420,7 +420,7 @@ void dooble_downloads::remove_entry(qintptr oid)
 
 void dooble_downloads::resizeEvent(QResizeEvent *event)
 {
-  QMainWindow::resizeEvent(event);
+  dooble_main_window::resizeEvent(event);
   save_settings();
 }
 
@@ -438,7 +438,7 @@ void dooble_downloads::show(void)
       (QByteArray::fromBase64(dooble_settings::setting("downloads_geometry").
 			      toByteArray()));
 
-  QMainWindow::show();
+  dooble_main_window::show();
 }
 
 void dooble_downloads::showNormal(void)
@@ -448,7 +448,7 @@ void dooble_downloads::showNormal(void)
       (QByteArray::fromBase64(dooble_settings::setting("downloads_geometry").
 			      toByteArray()));
 
-  QMainWindow::showNormal();
+  dooble_main_window::showNormal();
 }
 
 void dooble_downloads::slot_clear_finished_downloads(void)

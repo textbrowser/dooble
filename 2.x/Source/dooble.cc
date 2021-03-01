@@ -3243,8 +3243,11 @@ void dooble::slot_show_settings(void)
       m_ui.tab->setCurrentWidget(s_settings); // Order is important.
       prepare_control_w_shortcut();
       prepare_tab_shortcuts();
+      s_settings->enable_control_w_shortcut(false);
       return;
     }
+
+  s_settings->enable_control_w_shortcut(true);
 
   if(s_settings->isVisible())
     {

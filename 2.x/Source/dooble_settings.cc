@@ -60,7 +60,7 @@ QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
 QStringList dooble_settings::s_spell_checker_dictionaries;
 
-dooble_settings::dooble_settings(void):QMainWindow()
+dooble_settings::dooble_settings(void):dooble_main_window()
 {
   m_ui.setupUi(this);
   connect(&m_pbkdf2_future_watcher,
@@ -576,7 +576,7 @@ void dooble_settings::closeEvent(QCloseEvent *event)
 {
   m_ui.password_1->clear();
   m_ui.password_2->clear();
-  QMainWindow::closeEvent(event);
+  dooble_main_window::closeEvent(event);
 }
 
 void dooble_settings::create_tables(QSqlDatabase &db)
@@ -612,7 +612,7 @@ void dooble_settings::keyPressEvent(QKeyEvent *event)
       if(event && event->key() == Qt::Key_Escape)
 	close();
 
-      QMainWindow::keyPressEvent(event);
+      dooble_main_window::keyPressEvent(event);
     }
   else if(event)
     event->ignore();
@@ -986,7 +986,7 @@ void dooble_settings::remove_setting(const QString &key)
 
 void dooble_settings::resizeEvent(QResizeEvent *event)
 {
-  QMainWindow::resizeEvent(event);
+  dooble_main_window::resizeEvent(event);
   save_settings();
 }
 
@@ -1630,7 +1630,7 @@ void dooble_settings::show(void)
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
 
-  QMainWindow::show();
+  dooble_main_window::show();
 }
 
 void dooble_settings::showNormal(void)
@@ -1642,7 +1642,7 @@ void dooble_settings::showNormal(void)
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
 
-  QMainWindow::showNormal();
+  dooble_main_window::showNormal();
 }
 
 void dooble_settings::show_panel(dooble_settings::Panels panel)

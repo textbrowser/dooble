@@ -151,7 +151,7 @@ dooble_history_window::dooble_history_window(void):dooble_main_window()
 
 void dooble_history_window::closeEvent(QCloseEvent *event)
 {
-  QMainWindow::closeEvent(event);
+  dooble_main_window::closeEvent(event);
 }
 
 void dooble_history_window::keyPressEvent(QKeyEvent *event)
@@ -172,7 +172,7 @@ void dooble_history_window::keyPressEvent(QKeyEvent *event)
 	    }
 	  }
 
-      QMainWindow::keyPressEvent(event);
+      dooble_main_window::keyPressEvent(event);
     }
   else if(event)
     event->ignore();
@@ -185,7 +185,7 @@ void dooble_history_window::prepare_viewport_icons(void)
 
 void dooble_history_window::resizeEvent(QResizeEvent *event)
 {
-  QMainWindow::resizeEvent(event);
+  dooble_main_window::resizeEvent(event);
   save_settings();
 }
 
@@ -301,7 +301,7 @@ void dooble_history_window::show(QWidget *parent)
 
   bool was_visible = isVisible();
 
-  QMainWindow::show();
+  dooble_main_window::show();
 
   if(!was_visible)
     m_ui.table->prepare_viewport_icons();
@@ -332,7 +332,7 @@ void dooble_history_window::showNormal(QWidget *parent)
 
   bool was_visible = isVisible();
 
-  QMainWindow::showNormal();
+  dooble_main_window::showNormal();
 
   if(!was_visible)
     m_ui.table->prepare_viewport_icons();

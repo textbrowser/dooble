@@ -10,15 +10,17 @@ digraph "Graphical Class Hierarchy"
   Node36 -> Node38 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node38 [label="dooble_about",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__about.html",tooltip=" "];
   Node36 -> Node39 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node39 [label="dooble_accepted_or\l_blocked_domains",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__accepted__or__blocked__domains.html",tooltip=" "];
+  Node39 [label="dooble_certificate\l_exceptions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__certificate__exceptions.html",tooltip=" "];
   Node36 -> Node40 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node40 [label="dooble_certificate\l_exceptions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__certificate__exceptions.html",tooltip=" "];
+  Node40 [label="dooble_cookies_window",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__cookies__window.html",tooltip=" "];
   Node36 -> Node41 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node41 [label="dooble_cookies_window",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__cookies__window.html",tooltip=" "];
-  Node36 -> Node42 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node42 [label="dooble_downloads",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__downloads.html",tooltip=" "];
-  Node36 -> Node43 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node43 [label="dooble_history_window",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__history__window.html",tooltip=" "];
-  Node36 -> Node44 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node44 [label="dooble_settings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__settings.html",tooltip=" "];
+  Node41 [label="dooble_main_window",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__main__window.html",tooltip=" "];
+  Node41 -> Node42 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node42 [label="dooble_accepted_or\l_blocked_domains",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__accepted__or__blocked__domains.html",tooltip=" "];
+  Node41 -> Node43 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node43 [label="dooble_downloads",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__downloads.html",tooltip=" "];
+  Node41 -> Node44 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node44 [label="dooble_history_window",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__history__window.html",tooltip=" "];
+  Node41 -> Node45 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node45 [label="dooble_settings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__settings.html",tooltip=" "];
 }

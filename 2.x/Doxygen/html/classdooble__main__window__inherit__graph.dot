@@ -1,0 +1,18 @@
+digraph "dooble_main_window"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="dooble_main_window",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="QMainWindow",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="dooble_accepted_or\l_blocked_domains",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__accepted__or__blocked__domains.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="dooble_downloads",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__downloads.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="dooble_history_window",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__history__window.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="dooble_settings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__settings.html",tooltip=" "];
+}

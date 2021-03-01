@@ -30,7 +30,6 @@
 
 #include <QFuture>
 #include <QFutureWatcher>
-#include <QMainWindow>
 #include <QPointer>
 #include <QProgressDialog>
 #include <QReadWriteLock>
@@ -38,9 +37,10 @@
 #include <QUrl>
 #include <QWebEnginePage>
 
+#include "dooble_main_window.h"
 #include "ui_dooble_settings.h"
 
-class dooble_settings: public QMainWindow
+class dooble_settings: public dooble_main_window
 {
   Q_OBJECT
 

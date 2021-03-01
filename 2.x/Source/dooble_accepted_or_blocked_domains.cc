@@ -201,7 +201,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
 
 void dooble_accepted_or_blocked_domains::closeEvent(QCloseEvent *event)
 {
-  QMainWindow::closeEvent(event);
+  dooble_main_window::closeEvent(event);
 }
 
 void dooble_accepted_or_blocked_domains::create_tables(QSqlDatabase &db)
@@ -230,7 +230,7 @@ void dooble_accepted_or_blocked_domains::keyPressEvent(QKeyEvent *event)
       if(event && event->key() == Qt::Key_Escape)
 	close();
 
-      QMainWindow::keyPressEvent(event);
+      dooble_main_window::keyPressEvent(event);
     }
   else if(event)
     event->ignore();
@@ -540,7 +540,7 @@ void dooble_accepted_or_blocked_domains::purge(void)
 
 void dooble_accepted_or_blocked_domains::resizeEvent(QResizeEvent *event)
 {
-  QMainWindow::resizeEvent(event);
+  dooble_main_window::resizeEvent(event);
   save_settings();
 }
 
@@ -773,7 +773,7 @@ void dooble_accepted_or_blocked_domains::show(void)
 			      setting("accepted_or_blocked_domains_geometry").
 			      toByteArray()));
 
-  QMainWindow::show();
+  dooble_main_window::show();
 }
 
 void dooble_accepted_or_blocked_domains::showNormal(void)
@@ -784,7 +784,7 @@ void dooble_accepted_or_blocked_domains::showNormal(void)
 			      setting("accepted_or_blocked_domains_geometry").
 			      toByteArray()));
 
-  QMainWindow::showNormal();
+  dooble_main_window::showNormal();
 }
 
 void dooble_accepted_or_blocked_domains::slot_add(void)
