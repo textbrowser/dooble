@@ -27,6 +27,7 @@
 
 #include <QCryptographicHash>
 #include <QKeyEvent>
+#include <QShortcut>
 #include <QtConcurrent>
 
 #include "dooble_about.h"
@@ -48,6 +49,7 @@ dooble_about::dooble_about(void):QMainWindow()
 	  SIGNAL(file_digest_computed(const QByteArray &)),
 	  this,
 	  SLOT(slot_file_digest_computed(const QByteArray &)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 
   QString qversion("");
   const auto tmp = qVersion();

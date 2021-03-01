@@ -128,6 +128,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   restoreState
     (QByteArray::fromBase64(dooble_settings::
 			    setting("dooble_cookies_window_state").

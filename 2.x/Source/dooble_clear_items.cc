@@ -67,6 +67,7 @@ dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 	  SIGNAL(history_cleared(void)),
 	  dooble::s_application,
 	  SIGNAL(history_cleared(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 
   foreach(auto check_box, findChildren<QCheckBox *> ())
     {
