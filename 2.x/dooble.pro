@@ -187,6 +187,15 @@ exists(/usr/bin/doxygen) {
 doxygen.commands = doxygen dooble.doxygen
 }
 
+FILES = /usr/include/linux/mman.h \
+        /usr/include/sys/mman.h
+
+for(file, FILES):exists($$file):{DEFINES += DOOBLE_MMAN_PRESENT}
+
+macx {
+DEFINES         += DOOBLE_MMAN_PRESENT
+}
+
 CONFIG		+= qt release warn_on
 DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++

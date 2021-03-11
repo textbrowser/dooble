@@ -11,6 +11,10 @@ DOOBLE_HMAC
 Use Dooble's HMAC implementation. Otherwise, QMessageAuthenticationCode
 is applied.
 
+DOOBLE_MMAN_PRESENT
+
+Lock memory into RAM via mman.
+
 DOOBLE_SIMPLE_THEMES
 
 Enable simple themes.

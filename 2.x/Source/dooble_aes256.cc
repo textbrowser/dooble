@@ -33,10 +33,10 @@
 #include <QtMath>
 #include <iostream>
 
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
 extern "C"
 {
-  #include <sys/mman.h>
+#include <sys/mman.h>
 }
 #endif
 
@@ -145,7 +145,7 @@ dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
   else
     m_key.resize(m_key_length);
 
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   mlock(m_key.constData(), static_cast<size_t> (m_key.length()));
   mlock(m_round_key, 4 * 60 * sizeof(m_round_key[0][0]));
   mlock(m_state, 4 * 4 * sizeof(m_state[0][0]));
@@ -163,7 +163,7 @@ dooble_aes256::~dooble_aes256()
   dooble_cryptography::memzero(m_key);
   memset(m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
   memset(m_state, 0, 4 * 4 * sizeof(m_state[0][0]));
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
   munlock(m_round_key, 4 * 60 * sizeof(m_round_key[0][0]));
   munlock(m_state, 4 * 4 * sizeof(m_state[0][0]));
@@ -682,7 +682,7 @@ void dooble_aes256::mix_columns(void)
 
 void dooble_aes256::set_key(const QByteArray &key)
 {
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
   munlock(m_round_key, 4 * 60 * sizeof(m_round_key[0][0]));
   munlock(m_state, 4 * 4 * sizeof(m_state[0][0]));
@@ -694,7 +694,7 @@ void dooble_aes256::set_key(const QByteArray &key)
   else
     m_key.resize(m_key_length);
 
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   mlock(m_key.constData(), static_cast<size_t> (m_key.length()));
   mlock(m_round_key, 4 * 60 * sizeof(m_round_key[0][0]));
   mlock(m_state, 4 * 4 * sizeof(m_state[0][0]));
