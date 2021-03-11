@@ -168,6 +168,7 @@ Remaining Items
 - Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
+- Graphing! Provide TCP channels and custom data parsers.
 - Include date stamps in cookie containers.
 - Search engine icons should be based on host names.
 - Shortcuts browser.
