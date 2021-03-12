@@ -393,6 +393,16 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 			       << "uk_UA"
 			       << "vi_VN";
 #endif
+#ifndef DOOBLE_MMAN_PRESENT1
+  m_ui.mman_message->setStyleSheet
+    ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1; "
+     "color:#a94442;}");
+  m_ui.mman_message->setText
+    (tr("Memory locking is not available on this system."));
+#else
+  m_ui.mman_message->setText
+    (tr("Memory locking is provided by mlock() and munlock()."));
+#endif
 
   if(s_spell_checker_dictionaries.isEmpty())
     {

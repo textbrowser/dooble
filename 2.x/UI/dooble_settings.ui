@@ -840,8 +840,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>615</width>
-               <height>780</height>
+               <width>637</width>
+               <height>804</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -915,6 +915,19 @@
                  <bool>false</bool>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="mman_message">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>MMAN Message</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QLabel" name="label_26">
                    <property name="text">
