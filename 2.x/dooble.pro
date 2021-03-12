@@ -200,7 +200,8 @@ CONFIG		+= qt release warn_on
 DEFINES         += QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent \
-                   gui \
+gui \
+charts \
                    network \
                    printsupport \
                    sql \
@@ -208,6 +209,13 @@ QT		+= concurrent \
                    webenginewidgets \
                    widgets \
                    xml
+
+qtHaveModule(charts) {
+DEFINES         += DOOBLE_QTCHARTS_PRESENT
+QT              += charts
+message("The QtCharts module has been discovered.")
+}
+
 TEMPLATE	= app
 
 QMAKE_CLEAN     += Dooble
