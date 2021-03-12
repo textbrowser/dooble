@@ -393,7 +393,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 			       << "uk_UA"
 			       << "vi_VN";
 #endif
-#ifndef DOOBLE_MMAN_PRESENT1
+#ifndef DOOBLE_MMAN_PRESENT
   m_ui.mman_message->setStyleSheet
     ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1; "
      "color:#a94442;}");
