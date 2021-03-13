@@ -81,7 +81,7 @@ class dooble_charts_property_editor_model: public QStandardItemModel
   QStandardItem *find_specific_item(const QString &text) const;
 
  protected:
-  QList<QStandardItem *> find_all_child_items(const QString &parentText) const;
+  QList<QStandardItem *> find_all_child_items(const QString &text) const;
   QModelIndex indexFromProperty
     (const dooble_charts::Properties property, const int column) const;
   QStandardItem *item_from_property

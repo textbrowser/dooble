@@ -146,9 +146,9 @@ dooble_charts_property_editor_model::~dooble_charts_property_editor_model()
 }
 
 QList<QStandardItem *> dooble_charts_property_editor_model::
-find_all_child_items(const QString &parentText) const
+find_all_child_items(const QString &text) const
 {
-  auto list(findItems(parentText));
+  auto list(findItems(text));
 
   if(list.isEmpty())
     return list;
