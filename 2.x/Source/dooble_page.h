@@ -213,6 +213,7 @@ class dooble_page: public QWidget
   void show_about(void);
   void show_accepted_or_blocked_domains(void);
   void show_certificate_exceptions(void);
+  void show_chart_xyseries(void);
   void show_clear_items(void);
   void show_cookies(void);
   void show_documentation(void);

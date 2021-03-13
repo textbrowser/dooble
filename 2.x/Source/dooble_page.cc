@@ -842,6 +842,16 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SIGNAL(show_certificate_exceptions(void)));
+
+  QMenu *sub_menu = new QMenu(tr("Charts"));
+
+  menu->addMenu(sub_menu);
+  action = sub_menu->addAction(tr("XY Series"),
+			       this,
+			       SIGNAL(show_chart_xyseries(void)));
+#ifndef DOOBLE_QTCHARTS_PRESENT
+  action->setEnabled(false);
+#endif
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),

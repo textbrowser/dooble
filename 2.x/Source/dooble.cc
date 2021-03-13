@@ -1132,6 +1132,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_chart_xyseries(void)),
+	  this,
+	  SLOT(slot_show_chart_xyseries(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_clear_items(void)),
 	  this,
 	  SLOT(slot_show_clear_items(void)),
@@ -1555,6 +1561,16 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SLOT(slot_show_certificate_exceptions(void)));
+
+  QMenu *sub_menu = new QMenu(tr("Charts"));
+
+  menu->addMenu(sub_menu);
+  action = sub_menu->addAction(tr("XY Series"),
+			       this,
+			       SLOT(slot_show_chart_xyseries(void)));
+#ifndef DOOBLE_QTCHARTS_PRESENT
+  action->setEnabled(false);
+#endif
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
@@ -2966,6 +2982,10 @@ void dooble::slot_show_certificate_exceptions(void)
 
   s_certificate_exceptions->activateWindow();
   s_certificate_exceptions->raise();
+}
+
+void dooble::slot_show_chart_xyseries(void)
+{
 }
 
 void dooble::slot_show_clear_items(void)
