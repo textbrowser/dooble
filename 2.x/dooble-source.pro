@@ -29,6 +29,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_application.h \
                   Source/dooble_certificate_exceptions.h \
                   Source/dooble_certificate_exceptions_menu_widget.h \
+                  Source/dooble_charts.h \
                   Source/dooble_clear_items.h \
                   Source/dooble_cookies.h \
                   Source/dooble_cookies_window.h \
@@ -71,6 +72,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_block_cipher.cc \
                   Source/dooble_certificate_exceptions.cc \
                   Source/dooble_certificate_exceptions_menu_widget.cc \
+                  Source/dooble_charts.cc \
                   Source/dooble_clear_items.cc \
                   Source/dooble_cookies.cc \
                   Source/dooble_cookies_window.cc \
