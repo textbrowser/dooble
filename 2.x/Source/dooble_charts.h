@@ -35,11 +35,29 @@ using namespace QtCharts;
 
 #include "ui_dooble_charts.h"
 
+class dooble_charts_property_editor;
+
 class dooble_charts: public QWidget
 {
   Q_OBJECT
 
  public:
+  enum Properties
+  {
+   /*
+   ** Generic Properties
+   */
+
+   TYPE = 0
+  };
+
+  enum PropertiesIndices
+  {
+   /*
+   ** Generic Properties
+   */
+  };
+
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
 
@@ -49,6 +67,7 @@ class dooble_charts: public QWidget
   QChartView *m_chart_view;
 #endif
   Ui_dooble_charts m_ui;
+  dooble_charts_property_editor *m_property_editor;
 };
 
 #endif

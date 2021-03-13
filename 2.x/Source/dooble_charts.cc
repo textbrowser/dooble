@@ -38,6 +38,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_chart = new QChart();
   m_chart_view = new QChartView(m_chart);
 #endif
+  m_property_editor = nullptr;
   m_ui.setupUi(this);
 }
 
