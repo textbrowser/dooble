@@ -29,13 +29,8 @@
 #define dooble_charts_h
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-#include <QtCharts/QChartGlobal>
-
-QT_CHARTS_BEGIN_NAMESPACE
-class QChart;
-class QChartView;
-QT_CHARTS_END_NAMESPACE
-QT_CHARTS_USE_NAMESPACE
+#include <QtCharts>
+using namespace QtCharts;
 #endif
 
 #include "ui_dooble_charts.h"
