@@ -39,6 +39,7 @@
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
+#include "dooble_charts_xyseries.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
@@ -2431,15 +2432,25 @@ void dooble::slot_close_tab(void)
       return;
     }
 
-  auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
 
-  if(page)
+  if(chart)
     {
-      m_ui.tab->removeTab(m_ui.tab->indexOf(page));
-      page->deleteLater();
+      m_ui.tab->removeTab(m_ui.tab->indexOf(chart));
+      chart->deleteLater();
     }
   else
-    m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
+    {
+      auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+
+      if(page)
+	{
+	  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+	  page->deleteLater();
+	}
+      else
+	m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
+    }
 
   m_ui.tab->setTabsClosable(tabs_closable());
   prepare_control_w_shortcut();
@@ -2986,6 +2997,30 @@ void dooble::slot_show_certificate_exceptions(void)
 
 void dooble::slot_show_chart_xyseries(void)
 {
+  auto chart = new dooble_charts_xyseries(this);
+
+  if(s_application->application_locked())
+    m_ui.tab->addTab(chart, tr("Application Locked"));
+  else
+    m_ui.tab->addTab(chart, tr("XY Series Chart"));
+
+  m_ui.tab->setTabIcon
+    (m_ui.tab->indexOf(chart), dooble_favicons::icon(QUrl())); // Mac too!
+  m_ui.tab->setTabsClosable(tabs_closable());
+
+  if(s_application->application_locked())
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(chart), tr("Application Locked"));
+  else
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(chart), tr("XY Series Chart"));
+
+  if(dooble_settings::setting("access_new_tabs").toBool() ||
+     qobject_cast<QShortcut *> (sender()) ||
+     qobject_cast<dooble_tab_widget *> (sender()) ||
+     !sender())
+    m_ui.tab->setCurrentWidget(chart);
+
+  prepare_control_w_shortcut();
+  prepare_tab_shortcuts();
 }
 
 void dooble::slot_show_clear_items(void)

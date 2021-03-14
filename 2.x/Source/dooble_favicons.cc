@@ -50,7 +50,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
   else if(url == QUrl::fromUserInput("about:blank") ||
 	  url.isEmpty() ||
 	  !url.isValid())
-    return QIcon(":/Logo/dooble.png");
+    return QIcon(":/Miscellaneous/blank_page.png");
 
   QIcon icon;
   auto database_name(dooble_database_utilities::database_name());
