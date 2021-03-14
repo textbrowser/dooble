@@ -25,11 +25,14 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble_charts_property_editor_xyseries.h"
 #include "dooble_charts_xyseries.h"
 
 dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
   dooble_charts(parent)
 {
+  m_property_editor = new dooble_charts_property_editor_xyseries
+    (m_ui.properties);
 }
 
 dooble_charts_xyseries::~dooble_charts_xyseries()

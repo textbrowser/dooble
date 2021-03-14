@@ -230,7 +230,7 @@ void dooble_charts_property_editor::prepare_generic(void)
     (item_delegate,
      SIGNAL(emit_signal(const dooble_charts::Properties)),
      this,
-     SLOT(slot_delete_signal(const dooble_charts::Properties)));
+     SLOT(slot_delegate_signal(const dooble_charts::Properties)));
   m_tree->setItemDelegate(item_delegate);
   m_tree->setModel(m_model);
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
