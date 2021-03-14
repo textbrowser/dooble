@@ -15,6 +15,10 @@ DOOBLE_MMAN_PRESENT
 
 Lock memory into RAM via mman.
 
+DOOBLE_QTCHARTS_PRESENT
+
+Enabled if QtCharts is available.
+
 DOOBLE_SIMPLE_THEMES
 
 Enable simple themes.

@@ -67,7 +67,7 @@ dooble_cryptography::dooble_cryptography
       m_authentication_key.clear();
       m_encryption_key.clear();
     }
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   else
     {
       mlock(m_authentication_key.constData(),
@@ -94,7 +94,7 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
   else
     m_hash_type = SHA3_512;
 
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   mlock(m_authentication_key.constData(),
 	static_cast<size_t> (m_authentication_key.length()));
   mlock(m_encryption_key.constData(),
@@ -106,7 +106,7 @@ dooble_cryptography::~dooble_cryptography()
 {
   memzero(m_authentication_key);
   memzero(m_encryption_key);
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   munlock(m_authentication_key.constData(),
 	  static_cast<size_t> (m_authentication_key.length()));
   munlock(m_encryption_key.constData(),
@@ -298,7 +298,7 @@ void dooble_cryptography::set_hash_type(const QString &hash_type)
 void dooble_cryptography::set_keys(const QByteArray &authentication_key,
 				   const QByteArray &encryption_key)
 {
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
   munlock(m_authentication_key.constData(),
 	  static_cast<size_t> (m_authentication_key.length()));
   munlock(m_encryption_key.constData(),
@@ -317,7 +317,7 @@ void dooble_cryptography::set_keys(const QByteArray &authentication_key,
   else
     {
       m_as_plaintext = false;
-#ifndef Q_OS_WIN
+#ifdef DOOBLE_MMAN_PRESENT
       mlock(m_authentication_key.constData(),
 	    static_cast<size_t> (m_authentication_key.length()));
       mlock(m_encryption_key.constData(),
