@@ -62,8 +62,7 @@ class dooble_charts: public QWidget
    THEME,
    TITLE,
    TITLE_COLOR,
-   TITLE_FONT,
-   ZZZ
+   TITLE_FONT
   };
 
   enum PropertiesIndices

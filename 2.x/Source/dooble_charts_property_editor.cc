@@ -55,6 +55,26 @@ createEditor(QWidget *parent,
 	     const QStyleOptionViewItem &option,
 	     const QModelIndex &index) const
 {
+  dooble_charts::Properties property =
+    dooble_charts::
+    Properties(index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
+
+  switch(property)
+    {
+    case dooble_charts::ANIMATION_DURATION:
+      {
+	auto spin_box = new QSpinBox(parent);
+
+	spin_box->setValue(index.data().toInt());
+	return spin_box;
+	break;
+      }
+    default:
+      {
+	break;
+      }
+    }
+
   return QStyledItemDelegate::createEditor(parent, option, index);
 }
 
@@ -114,23 +134,23 @@ dooble_charts_property_editor_model(QObject *parent):
 {
   setHorizontalHeaderLabels(QStringList() << "Property" << "Value");
 
-  QList<QStandardItem *> list;
-  QStandardItem *item = nullptr;
   auto generic = new QStandardItem("Generic");
 
   generic->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; i < dooble_charts::Properties::ZZZ; i++)
+  for(int i = 0; dooble_charts::PropertiesStrings[i]; i++)
     {
-      item = new QStandardItem(dooble_charts::PropertiesStrings[i]);
+      QList<QStandardItem *> list;
+      auto item = new QStandardItem(dooble_charts::PropertiesStrings[i]);
+
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
-      item = new QStandardItem();
+      item = new QStandardItem(QString::number(i));
       item->setData(dooble_charts::Properties(i));
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      item->setFlags
+	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       generic->appendRow(list);
-      list.clear();
     }
 
   appendRow(generic);
@@ -233,8 +253,6 @@ void dooble_charts_property_editor::prepare_generic(void)
   m_tree->setItemDelegate(item_delegate);
   m_tree->setModel(m_model);
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
-  m_tree->setFirstColumnSpanned
-    (0, m_model->indexFromItem(m_model->item(0, 0)), true);
   m_tree->expandAll();
   m_tree->resizeColumnToContents(0);
   m_tree->resizeColumnToContents(1);

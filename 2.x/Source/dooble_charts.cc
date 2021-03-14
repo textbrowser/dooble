@@ -48,7 +48,8 @@ const char *dooble_charts::PropertiesStrings[] =
    "Theme",
    "Title",
    "Title Color",
-   "Title Font"
+   "Title Font",
+   nullptr
   };
 
 dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
