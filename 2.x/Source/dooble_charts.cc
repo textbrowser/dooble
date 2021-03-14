@@ -32,6 +32,25 @@
 #include <QtCharts/QChartView>
 #endif
 
+const char *dooble_charts::PropertiesStrings[] =
+  {
+   "Animation Duration",
+   "Animation Options",
+   "Background Color",
+   "Background Roundness",
+   "Background Visible",
+   "Chart Type",
+   "Drop Shadow Enabled",
+   "Locale",
+   "Localize Numbers",
+   "Margins",
+   "Plot Area Background Visible",
+   "Theme",
+   "Title",
+   "Title Color",
+   "Title Font"
+  };
+
 dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 {
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -40,6 +59,8 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 #endif
   m_property_editor = nullptr;
   m_ui.setupUi(this);
+  m_ui.splitter->setStretchFactor(0, 1);
+  m_ui.splitter->setStretchFactor(1, 0);
 }
 
 dooble_charts::~dooble_charts()

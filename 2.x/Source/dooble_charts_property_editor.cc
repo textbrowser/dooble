@@ -119,21 +119,20 @@ dooble_charts_property_editor_model(QObject *parent):
   auto generic = new QStandardItem("Generic");
 
   generic->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  generic->appendRow(list);
 
-  /*
-  ** Type
-  */
+  for(int i = 0; i < dooble_charts::Properties::ZZZ; i++)
+    {
+      item = new QStandardItem(dooble_charts::PropertiesStrings[i]);
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      item = new QStandardItem();
+      item->setData(dooble_charts::Properties(i));
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      generic->appendRow(list);
+      list.clear();
+    }
 
-  item = new QStandardItem("Type");
-  item->setFlags(Qt::ItemIsSelectable);
-  list << item;
-  item = new QStandardItem();
-  item->setData(dooble_charts::TYPE);
-  item->setFlags(Qt::ItemIsSelectable);
-  list << item;
-  generic->appendRow(list);
-  list.clear();
   appendRow(generic);
   connect(this,
 	  SIGNAL(itemChanged(QStandardItem *)),

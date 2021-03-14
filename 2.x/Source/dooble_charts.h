@@ -48,7 +48,22 @@ class dooble_charts: public QWidget
    ** Generic Properties
    */
 
-   TYPE = 0
+   ANIMATION_DURATION = 0,
+   ANIMATION_OPTIONS,
+   BACKGROUND_COLOR,
+   BACKGROUND_ROUNDNESS,
+   BACKGROUND_VISIBLE,
+   CHART_TYPE,
+   DROP_SHADOW_ENABLED,
+   LOCALE,
+   LOCALIZE_NUMBERS,
+   MARGINS,
+   PLOT_AREA_BACKGROUND_VISIBLE,
+   THEME,
+   TITLE,
+   TITLE_COLOR,
+   TITLE_FONT,
+   ZZZ
   };
 
   enum PropertiesIndices
@@ -58,6 +73,7 @@ class dooble_charts: public QWidget
    */
   };
 
+  static const char *PropertiesStrings[];
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
 
