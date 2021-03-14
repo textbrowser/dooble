@@ -31,7 +31,6 @@
 #include <QPointer>
 #include <QStandardItemModel>
 #include <QStyledItemDelegate>
-#include <QTreeView>
 
 #include "dooble_charts.h"
 
