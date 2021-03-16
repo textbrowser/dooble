@@ -239,6 +239,18 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   if(!chart || !m_model || !m_tree)
     return;
 
+  QHashIterator<dooble_charts::Properties, QVariant> it(chart->properties());
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      QStandardItem *item = m_model->item_from_property(it.key(), 1);
+
+      if(!item)
+	continue;
+    }
+
   auto item_delegate = m_tree->itemDelegate();
 
   if(item_delegate)

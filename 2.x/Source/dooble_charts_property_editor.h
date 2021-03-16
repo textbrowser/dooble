@@ -77,14 +77,12 @@ class dooble_charts_property_editor_model: public QStandardItemModel
  public:
   dooble_charts_property_editor_model(QObject *parent);
   virtual ~dooble_charts_property_editor_model();
-  QStandardItem *find_specific_item(const QString &text) const;
+  QStandardItem *item_from_property
+    (const dooble_charts::Properties property, const int column) const;
 
  protected:
   QList<QStandardItem *> find_all_child_items(const QString &text) const;
-  QModelIndex indexFromProperty
-    (const dooble_charts::Properties property, const int column) const;
-  QStandardItem *item_from_property
-    (const dooble_charts::Properties property, const int column) const;
+  QStandardItem *find_specific_item(const QString &text) const;
 
  private slots:
   void slot_item_changed(QStandardItem *item);
