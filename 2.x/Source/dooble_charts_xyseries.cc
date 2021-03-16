@@ -32,7 +32,7 @@ dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
   dooble_charts(parent)
 {
   m_property_editor = new dooble_charts_property_editor_xyseries
-    (m_ui.properties);
+    (m_ui.properties, this);
 }
 
 dooble_charts_xyseries::~dooble_charts_xyseries()

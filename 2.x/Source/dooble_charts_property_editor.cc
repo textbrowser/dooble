@@ -145,7 +145,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
-      item = new QStandardItem(QString::number(i));
+      item = new QStandardItem();
       item->setData(dooble_charts::Properties(i));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -234,9 +234,9 @@ dooble_charts_property_editor::~dooble_charts_property_editor()
 {
 }
 
-void dooble_charts_property_editor::prepare_generic(void)
+void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 {
-  if(!m_model || !m_tree)
+  if(!chart || !m_model || !m_tree)
     return;
 
   auto item_delegate = m_tree->itemDelegate();

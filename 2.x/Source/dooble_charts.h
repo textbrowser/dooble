@@ -75,6 +75,7 @@ class dooble_charts: public QWidget
   static const char *PropertiesStrings[];
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
+  QHash<dooble_charts::Properties, QVariant> properties(void) const;
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT

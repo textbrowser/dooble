@@ -104,7 +104,7 @@ class dooble_charts_property_editor: public QWidget
  protected:
   QPointer<QTreeView> m_tree;
   dooble_charts_property_editor_model *m_model;
-  void prepare_generic(void);
+  void prepare_generic(dooble_charts *chart);
 };
 
 #endif

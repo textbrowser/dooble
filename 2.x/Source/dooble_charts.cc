@@ -27,9 +27,13 @@
 
 #include "dooble_charts.h"
 
+#include <QMetaType>
 #ifdef DOOBLE_QTCHARTS_PRESENT
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
+
+Q_DECLARE_METATYPE(QChart::AnimationOptions)
+
 #endif
 
 const char *dooble_charts::PropertiesStrings[] =
@@ -69,4 +73,18 @@ dooble_charts::~dooble_charts()
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_chart->deleteLater();
 #endif
+}
+
+QHash<dooble_charts::Properties, QVariant> dooble_charts::
+properties(void) const
+{
+  QHash<dooble_charts::Properties, QVariant> properties;
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  properties[dooble_charts::Properties::ANIMATION_DURATION] = m_chart->
+    animationDuration();
+  properties[dooble_charts::Properties::ANIMATION_OPTIONS] =
+    QVariant::fromValue(m_chart->animationOptions());
+#endif
+  return properties;
 }
