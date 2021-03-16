@@ -94,7 +94,7 @@ properties(void) const
   properties[dooble_charts::Properties::CHART_TYPE] = m_chart->chartType();
   properties[dooble_charts::Properties::DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
-  properties[dooble_charts::Properties::LOCALE] = m_chart->locale();
+  properties[dooble_charts::Properties::LOCALE] = m_chart->locale().name();
   properties[dooble_charts::Properties::LOCALIZE_NUMBERS] = m_chart->
     localizeNumbers();
   properties[dooble_charts::Properties::MARGINS] = QString("%1, %2, %3, %4").

@@ -25,8 +25,6 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QPlainTextEdit>
-
 #include "dooble_charts_property_editor.h"
 
 static void find_recursive_items(QStandardItem *item,
@@ -55,9 +53,8 @@ createEditor(QWidget *parent,
 	     const QStyleOptionViewItem &option,
 	     const QModelIndex &index) const
 {
-  dooble_charts::Properties property =
-    dooble_charts::
-    Properties(index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
+  dooble_charts::Properties property = dooble_charts::Properties
+    (index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
   switch(property)
     {
@@ -67,7 +64,6 @@ createEditor(QWidget *parent,
 
 	spin_box->setValue(index.data().toInt());
 	return spin_box;
-	break;
       }
     default:
       {
@@ -205,14 +201,24 @@ find_specific_item(const QString &text) const
 QStandardItem *dooble_charts_property_editor_model::item_from_property
 (const dooble_charts::Properties property, const int column) const
 {
-  Q_UNUSED(column);
-  Q_UNUSED(property);
   auto list(findItems("Generic"));
 
-  if(list.isEmpty())
+  if(list.isEmpty() || !list.at(0))
     return nullptr;
-  else if(!list.at(0))
-    return nullptr;
+
+  for(int i = 0; i < list.at(0)->rowCount(); i++)
+    {
+      auto item = list.at(0)->child(i, column);
+
+      if(!item)
+	continue;
+
+      dooble_charts::Properties p = dooble_charts::Properties
+	(item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
+
+      if(p == property)
+	return item;
+    }
 
   return nullptr;
 }
@@ -247,8 +253,8 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 
       QStandardItem *item = m_model->item_from_property(it.key(), 1);
 
-      if(!item)
-	continue;
+      if(item)
+	item->setText(it.value().toString());
     }
 
   auto item_delegate = m_tree->itemDelegate();
