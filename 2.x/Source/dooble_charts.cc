@@ -45,6 +45,7 @@ const char *dooble_charts::PropertiesStrings[] =
    "Background Visible",
    "Chart Type",
    "Drop Shadow Enabled",
+   "Legend Visible",
    "Locale",
    "Localize Numbers",
    "Margins",
@@ -53,7 +54,9 @@ const char *dooble_charts::PropertiesStrings[] =
    "Title",
    "Title Color",
    "Title Font",
+   "X-Axis Range",
    "X-Axis Title",
+   "Y-Axis Range",
    "Y-Axis Title",
    nullptr
   };
@@ -73,6 +76,9 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_ui.setupUi(this);
   m_ui.splitter->setStretchFactor(0, 1);
   m_ui.splitter->setStretchFactor(1, 0);
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  m_ui.charts_frame->layout()->addWidget(m_chart_view);
+#endif
 }
 
 dooble_charts::~dooble_charts()
@@ -101,6 +107,8 @@ properties(void) const
   properties[dooble_charts::Properties::CHART_TYPE] = m_chart->chartType();
   properties[dooble_charts::Properties::DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
+  properties[dooble_charts::Properties::LEGEND_VISIBLE] = m_chart->
+    legend()->isVisible();
   properties[dooble_charts::Properties::LOCALE] = m_chart->locale().name();
   properties[dooble_charts::Properties::LOCALIZE_NUMBERS] = m_chart->
     localizeNumbers();

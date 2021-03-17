@@ -55,6 +55,7 @@ class dooble_charts: public QWidget
    BACKGROUND_VISIBLE,
    CHART_TYPE,
    DROP_SHADOW_ENABLED,
+   LEGEND_VISIBLE,
    LOCALE,
    LOCALIZE_NUMBERS,
    MARGINS,
@@ -63,7 +64,9 @@ class dooble_charts: public QWidget
    TITLE,
    TITLE_COLOR,
    TITLE_FONT,
+   X_AXIS_RANGE,
    X_AXIS_TITLE,
+   Y_AXIS_RANGE,
    Y_AXIS_TITLE
   };
 
