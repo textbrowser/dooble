@@ -62,7 +62,9 @@ class dooble_charts: public QWidget
    THEME,
    TITLE,
    TITLE_COLOR,
-   TITLE_FONT
+   TITLE_FONT,
+   X_AXIS_TITLE,
+   Y_AXIS_TITLE
   };
 
   enum PropertiesIndices
@@ -81,6 +83,9 @@ class dooble_charts: public QWidget
 #ifdef DOOBLE_QTCHARTS_PRESENT
   QChart *m_chart;
   QChartView *m_chart_view;
+  QLineSeries *m_series;
+  QValueAxis *m_x_axis;
+  QValueAxis *m_y_axis;
 #endif
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;

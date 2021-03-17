@@ -53,6 +53,8 @@ const char *dooble_charts::PropertiesStrings[] =
    "Title",
    "Title Color",
    "Title Font",
+   "X-Axis Title",
+   "Y-Axis Title",
    nullptr
   };
 
@@ -60,7 +62,12 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 {
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_chart = new QChart();
+  m_chart->addAxis(m_x_axis = new QValueAxis(this), Qt::AlignBottom);
+  m_chart->addAxis(m_y_axis = new QValueAxis(this), Qt::AlignLeft);
+  m_chart->addSeries(m_series = new QLineSeries(this));
   m_chart_view = new QChartView(m_chart);
+  m_series->attachAxis(m_x_axis);
+  m_series->attachAxis(m_y_axis);
 #endif
   m_property_editor = nullptr;
   m_ui.setupUi(this);
