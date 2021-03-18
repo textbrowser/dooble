@@ -27,6 +27,8 @@
 
 #include "dooble_charts_property_editor.h"
 
+#include <limits>
+
 static void find_recursive_items(QStandardItem *item,
 				 QList<QStandardItem *> &list)
 {
@@ -62,6 +64,7 @@ createEditor(QWidget *parent,
       {
 	auto spin_box = new QSpinBox(parent);
 
+	spin_box->setRange(0, std::numeric_limits<int>::max());
 	spin_box->setValue(index.data().toInt());
 	return spin_box;
       }

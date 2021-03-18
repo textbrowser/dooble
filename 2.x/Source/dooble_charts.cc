@@ -31,9 +31,7 @@
 #ifdef DOOBLE_QTCHARTS_PRESENT
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
-
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
-
 #endif
 
 const char *dooble_charts::PropertiesStrings[] =
