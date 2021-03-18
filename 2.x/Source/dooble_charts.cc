@@ -122,6 +122,10 @@ properties(void) const
   properties[dooble_charts::Properties::TITLE_COLOR] =
     m_chart->titleBrush().color();
   properties[dooble_charts::Properties::TITLE_FONT] = m_chart->titleFont();
+  properties[dooble_charts::Properties::X_AXIS_RANGE] = QString("[%1, %2]").
+    arg(m_x_axis->min()).arg(m_x_axis->max());
+  properties[dooble_charts::Properties::Y_AXIS_RANGE] = QString("[%1, %2]").
+    arg(m_y_axis->min()).arg(m_y_axis->max());
 #endif
   return properties;
 }

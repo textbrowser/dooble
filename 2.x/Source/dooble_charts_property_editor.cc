@@ -148,6 +148,24 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setData(dooble_charts::Properties(i));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      switch(dooble_charts::Properties(i))
+	{
+	case dooble_charts::BACKGROUND_VISIBLE:
+	case dooble_charts::DROP_SHADOW_ENABLED:
+	case dooble_charts::LEGEND_VISIBLE:
+	case dooble_charts::LOCALIZE_NUMBERS:
+	case dooble_charts::PLOT_AREA_BACKGROUND_VISIBLE:
+	  {
+	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
       list << item;
       generic->appendRow(list);
     }
@@ -257,7 +275,23 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       QStandardItem *item = m_model->item_from_property(it.key(), 1);
 
       if(item)
-	item->setText(it.value().toString());
+	switch(it.key())
+	  {
+	  case dooble_charts::BACKGROUND_VISIBLE:
+	  case dooble_charts::DROP_SHADOW_ENABLED:
+	  case dooble_charts::LEGEND_VISIBLE:
+	  case dooble_charts::LOCALIZE_NUMBERS:
+	  case dooble_charts::PLOT_AREA_BACKGROUND_VISIBLE:
+	    {
+	      item->setCheckState
+		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);
+	      break;
+	    }
+	  default:
+	    {
+	      item->setText(it.value().toString());
+	    }
+	  }
     }
 
   auto item_delegate = m_tree->itemDelegate();
