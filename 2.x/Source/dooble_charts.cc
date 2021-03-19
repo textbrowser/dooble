@@ -34,7 +34,7 @@
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
-const QString dooble_charts::PropertiesStrings[] =
+const QString dooble_charts::GenericPropertiesStrings[] =
   {
    tr("Animation Duration"),
    tr("Animation Options"),

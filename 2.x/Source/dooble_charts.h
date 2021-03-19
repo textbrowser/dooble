@@ -68,7 +68,19 @@ class dooble_charts: public QWidget
    X_AXIS_RANGE,
    X_AXIS_TITLE,
    Y_AXIS_RANGE,
-   Y_AXIS_TITLE
+   Y_AXIS_TITLE,
+
+   /*
+   ** XY Series
+   */
+
+   XY_SERIES_COLOR,
+   XY_SERIES_POINTS_VISIBLE,
+   XY_SERIES_POINT_LABELS_CLIPPING,
+   XY_SERIES_POINT_LABELS_COLOR,
+   XY_SERIES_POINT_LABELS_FONT,
+   XY_SERIES_POINT_LABELS_FORMAT,
+   XY_SERIES_POINT_LABELS_VISIBLE
   };
 
   enum PropertiesIndices
@@ -78,7 +90,7 @@ class dooble_charts: public QWidget
    */
   };
 
-  static const QString PropertiesStrings[];
+  static const QString GenericPropertiesStrings[];
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
