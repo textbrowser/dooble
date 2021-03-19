@@ -34,7 +34,7 @@
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
-const QString dooble_charts::GenericPropertiesStrings[] =
+const QString dooble_charts::s_generic_properties_strings[] =
   {
    tr("Animation Duration"),
    tr("Animation Options"),
@@ -103,7 +103,8 @@ properties(void) const
     backgroundRoundness();
   properties[dooble_charts::Properties::BACKGROUND_VISIBLE] = m_chart->
     isBackgroundVisible();
-  properties[dooble_charts::Properties::CHART_TYPE] = m_chart->chartType();
+  properties[dooble_charts::Properties::CHART_TYPE] = dooble_charts::
+    chart_type_to_string(m_chart->chartType());
   properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
   properties[dooble_charts::Properties::DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
@@ -131,3 +132,24 @@ properties(void) const
 #endif
   return properties;
 }
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+QString dooble_charts::chart_type_to_string(const QChart::ChartType chart_type)
+{
+  switch(chart_type)
+    {
+    case QChart::ChartTypeCartesian:
+      {
+	return tr("Cartesian");
+      }
+    case QChart::ChartTypePolar:
+      {
+	return tr("Polar");
+      }
+    default:
+      {
+	return tr("Undefined");
+      }
+    }
+}
+#endif

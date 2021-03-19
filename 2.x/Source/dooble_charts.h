@@ -90,10 +90,11 @@ class dooble_charts: public QWidget
    */
   };
 
-  static const QString GenericPropertiesStrings[];
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
+  static QString chart_type_to_string(const QChart::ChartType chart_type);
+  static const QString s_generic_properties_strings[];
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT
