@@ -54,6 +54,7 @@ class dooble_charts: public QWidget
    BACKGROUND_ROUNDNESS,
    BACKGROUND_VISIBLE,
    CHART_TYPE,
+   DATA_SOURCE_TYPE,
    DROP_SHADOW_ENABLED,
    LEGEND_VISIBLE,
    LOCALE,
@@ -77,7 +78,7 @@ class dooble_charts: public QWidget
    */
   };
 
-  static const char *PropertiesStrings[];
+  static const QString PropertiesStrings[];
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;

@@ -34,29 +34,30 @@
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
-const char *dooble_charts::PropertiesStrings[] =
+const QString dooble_charts::PropertiesStrings[] =
   {
-   "Animation Duration",
-   "Animation Options",
-   "Background Color",
-   "Background Roundness",
-   "Background Visible",
-   "Chart Type",
-   "Drop Shadow Enabled",
-   "Legend Visible",
-   "Locale",
-   "Localize Numbers",
-   "Margins",
-   "Plot Area Background Visible",
-   "Theme",
-   "Title",
-   "Title Color",
-   "Title Font",
-   "X-Axis Range",
-   "X-Axis Title",
-   "Y-Axis Range",
-   "Y-Axis Title",
-   nullptr
+   tr("Animation Duration"),
+   tr("Animation Options"),
+   tr("Background Color"),
+   tr("Background Roundness"),
+   tr("Background Visible"),
+   tr("Chart Type"),
+   tr("Data Source Type"),
+   tr("Drop Shadow Enabled"),
+   tr("Legend Visible"),
+   tr("Locale"),
+   tr("Localize Numbers"),
+   tr("Margins"),
+   tr("Plot Area Background Visible"),
+   tr("Theme"),
+   tr("Title"),
+   tr("Title Color"),
+   tr("Title Font"),
+   tr("X-Axis Range"),
+   tr("X-Axis Title"),
+   tr("Y-Axis Range"),
+   tr("Y-Axis Title"),
+   QString(""),
   };
 
 dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
@@ -103,6 +104,7 @@ properties(void) const
   properties[dooble_charts::Properties::BACKGROUND_VISIBLE] = m_chart->
     isBackgroundVisible();
   properties[dooble_charts::Properties::CHART_TYPE] = m_chart->chartType();
+  properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
   properties[dooble_charts::Properties::DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
   properties[dooble_charts::Properties::LEGEND_VISIBLE] = m_chart->

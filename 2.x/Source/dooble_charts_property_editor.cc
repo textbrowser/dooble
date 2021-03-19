@@ -68,6 +68,21 @@ createEditor(QWidget *parent,
 	spin_box->setValue(index.data().toInt());
 	return spin_box;
       }
+    case dooble_charts::DATA_SOURCE_TYPE:
+      {
+	auto combo_box = new QComboBox(parent);
+	int i = -1;
+
+	combo_box->addItem(tr("File"));
+	combo_box->addItem(tr("IP Address"));
+	i = combo_box->findText(index.data().toString());
+
+	if(i == -1)
+	  i = 0;
+
+	combo_box->setCurrentIndex(i);
+	return combo_box;
+      }
     default:
       {
 	break;
@@ -137,7 +152,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   generic->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; dooble_charts::PropertiesStrings[i]; i++)
+  for(int i = 0; !dooble_charts::PropertiesStrings[i].isEmpty(); i++)
     {
       QList<QStandardItem *> list;
       auto item = new QStandardItem(dooble_charts::PropertiesStrings[i]);
@@ -290,6 +305,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  default:
 	    {
 	      item->setText(it.value().toString());
+	      break;
 	    }
 	  }
     }
