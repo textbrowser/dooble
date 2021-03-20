@@ -60,7 +60,7 @@ createEditor(QWidget *parent,
 
   switch(property)
     {
-    case dooble_charts::ANIMATION_DURATION:
+    case dooble_charts::CHART_ANIMATION_DURATION:
       {
 	auto spin_box = new QSpinBox(parent);
 
@@ -146,32 +146,33 @@ dooble_charts_property_editor_model::
 dooble_charts_property_editor_model(QObject *parent):
   QStandardItemModel(parent)
 {
-  setHorizontalHeaderLabels(QStringList() << "Property" << "Value");
+  setHorizontalHeaderLabels(QStringList() << tr("Property") << tr("Value"));
 
-  auto generic = new QStandardItem("Generic");
+  auto chart = new QStandardItem(tr("Chart"));
 
-  generic->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  chart->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; !dooble_charts::s_generic_properties_strings[i].isEmpty(); i++)
+  for(int i = 0; !dooble_charts::s_chart_properties_strings[i].isEmpty(); i++)
     {
       QList<QStandardItem *> list;
       auto item = new QStandardItem
-	(dooble_charts::s_generic_properties_strings[i]);
+	(dooble_charts::s_chart_properties_strings[i]);
+      auto offset = i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(i));
+      item->setData(dooble_charts::Properties(offset));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-      switch(dooble_charts::Properties(i))
+      switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::BACKGROUND_VISIBLE:
-	case dooble_charts::DROP_SHADOW_ENABLED:
-	case dooble_charts::LEGEND_VISIBLE:
-	case dooble_charts::LOCALIZE_NUMBERS:
-	case dooble_charts::PLOT_AREA_BACKGROUND_VISIBLE:
+	case dooble_charts::CHART_BACKGROUND_VISIBLE:
+	case dooble_charts::CHART_DROP_SHADOW_ENABLED:
+	case dooble_charts::CHART_LEGEND_VISIBLE:
+	case dooble_charts::CHART_LOCALIZE_NUMBERS:
+	case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
 	    break;
@@ -183,10 +184,32 @@ dooble_charts_property_editor_model(QObject *parent):
 	}
 
       list << item;
-      generic->appendRow(list);
+      chart->appendRow(list);
     }
 
-  appendRow(generic);
+  auto data = new QStandardItem(tr("Data"));
+
+  data->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+  for(int i = 0; !dooble_charts::s_data_properties_strings[i].isEmpty(); i++)
+    {
+      QList<QStandardItem *> list;
+      auto item = new QStandardItem
+	(dooble_charts::s_data_properties_strings[i]);
+      auto offset = chart->rowCount() + i;
+
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      item = new QStandardItem();
+      item->setData(dooble_charts::Properties(offset));
+      item->setFlags
+	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      data->appendRow(list);
+    }
+
+  appendRow(chart);
+  appendRow(data);
   connect(this,
 	  SIGNAL(itemChanged(QStandardItem *)),
 	  this,
@@ -238,24 +261,23 @@ find_specific_item(const QString &text) const
 QStandardItem *dooble_charts_property_editor_model::item_from_property
 (const dooble_charts::Properties property, const int column) const
 {
-  auto list(findItems("Generic"));
+  auto list(findItems(tr("Chart")) + findItems(tr("Data")));
 
-  if(list.isEmpty() || !list.at(0))
-    return nullptr;
+  for(int i = 0; i < list.size(); i++)
+    if(list.at(i))
+      for(int j = 0; j < list.at(i)->rowCount(); j++)
+	{
+	  auto item = list.at(i)->child(j, column);
 
-  for(int i = 0; i < list.at(0)->rowCount(); i++)
-    {
-      auto item = list.at(0)->child(i, column);
+	  if(!item)
+	    continue;
 
-      if(!item)
-	continue;
+	  dooble_charts::Properties p = dooble_charts::Properties
+	    (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
-      dooble_charts::Properties p = dooble_charts::Properties
-	(item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
-
-      if(p == property)
-	return item;
-    }
+	  if(p == property)
+	    return item;
+	}
 
   return nullptr;
 }
@@ -293,11 +315,11 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       if(item)
 	switch(it.key())
 	  {
-	  case dooble_charts::BACKGROUND_VISIBLE:
-	  case dooble_charts::DROP_SHADOW_ENABLED:
-	  case dooble_charts::LEGEND_VISIBLE:
-	  case dooble_charts::LOCALIZE_NUMBERS:
-	  case dooble_charts::PLOT_AREA_BACKGROUND_VISIBLE:
+	  case dooble_charts::CHART_BACKGROUND_VISIBLE:
+	  case dooble_charts::CHART_DROP_SHADOW_ENABLED:
+	  case dooble_charts::CHART_LEGEND_VISIBLE:
+	  case dooble_charts::CHART_LOCALIZE_NUMBERS:
+	  case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
 	    {
 	      item->setCheckState
 		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);
@@ -325,6 +347,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   m_tree->setItemDelegate(item_delegate);
   m_tree->setModel(m_model);
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
+  m_tree->setFirstColumnSpanned(1, m_tree->rootIndex(), true);
   m_tree->expandAll();
   m_tree->resizeColumnToContents(0);
   m_tree->resizeColumnToContents(1);

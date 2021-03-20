@@ -45,30 +45,35 @@ class dooble_charts: public QWidget
   enum Properties
   {
    /*
-   ** Generic Properties
+   ** Chart Properties
    */
 
-   ANIMATION_DURATION = 0,
-   ANIMATION_OPTIONS,
-   BACKGROUND_COLOR,
-   BACKGROUND_ROUNDNESS,
-   BACKGROUND_VISIBLE,
-   CHART_TYPE,
+   CHART_ANIMATION_DURATION = 0,
+   CHART_ANIMATION_OPTIONS,
+   CHART_BACKGROUND_COLOR,
+   CHART_BACKGROUND_ROUNDNESS,
+   CHART_BACKGROUND_VISIBLE,
+   CHART_CHART_TYPE,
+   CHART_DROP_SHADOW_ENABLED,
+   CHART_LEGEND_VISIBLE,
+   CHART_LOCALE,
+   CHART_LOCALIZE_NUMBERS,
+   CHART_MARGINS,
+   CHART_PLOT_AREA_BACKGROUND_VISIBLE,
+   CHART_THEME,
+   CHART_TITLE,
+   CHART_TITLE_COLOR,
+   CHART_TITLE_FONT,
+   CHART_X_AXIS_RANGE,
+   CHART_X_AXIS_TITLE,
+   CHART_Y_AXIS_RANGE,
+   CHART_Y_AXIS_TITLE,
+
+   /*
+   ** Data Properties
+   */
+
    DATA_SOURCE_TYPE,
-   DROP_SHADOW_ENABLED,
-   LEGEND_VISIBLE,
-   LOCALE,
-   LOCALIZE_NUMBERS,
-   MARGINS,
-   PLOT_AREA_BACKGROUND_VISIBLE,
-   THEME,
-   TITLE,
-   TITLE_COLOR,
-   TITLE_FONT,
-   X_AXIS_RANGE,
-   X_AXIS_TITLE,
-   Y_AXIS_RANGE,
-   Y_AXIS_TITLE,
 
    /*
    ** XY Series
@@ -83,18 +88,12 @@ class dooble_charts: public QWidget
    XY_SERIES_POINT_LABELS_VISIBLE
   };
 
-  enum PropertiesIndices
-  {
-   /*
-   ** Generic Properties
-   */
-  };
-
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
   static QString chart_type_to_string(const QChart::ChartType chart_type);
-  static const QString s_generic_properties_strings[];
+  static const QString s_chart_properties_strings[];
+  static const QString s_data_properties_strings[];
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT

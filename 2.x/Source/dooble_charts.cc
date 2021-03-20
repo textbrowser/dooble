@@ -34,7 +34,13 @@
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
-const QString dooble_charts::s_generic_properties_strings[] =
+const QString dooble_charts::s_data_properties_strings[] =
+  {
+   tr("Source Type"),
+   QString("")
+  };
+
+const QString dooble_charts::s_chart_properties_strings[] =
   {
    tr("Animation Duration"),
    tr("Animation Options"),
@@ -42,7 +48,6 @@ const QString dooble_charts::s_generic_properties_strings[] =
    tr("Background Roundness"),
    tr("Background Visible"),
    tr("Chart Type"),
-   tr("Data Source Type"),
    tr("Drop Shadow Enabled"),
    tr("Legend Visible"),
    tr("Locale"),
@@ -93,42 +98,45 @@ properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  properties[dooble_charts::Properties::ANIMATION_DURATION] = m_chart->
+  properties[dooble_charts::Properties::CHART_ANIMATION_DURATION] = m_chart->
     animationDuration();
-  properties[dooble_charts::Properties::ANIMATION_OPTIONS] =
+  properties[dooble_charts::Properties::CHART_ANIMATION_OPTIONS] =
     QVariant::fromValue(m_chart->animationOptions());
-  properties[dooble_charts::Properties::BACKGROUND_COLOR] = m_chart->
+  properties[dooble_charts::Properties::CHART_BACKGROUND_COLOR] = m_chart->
     backgroundBrush().color();
-  properties[dooble_charts::Properties::BACKGROUND_ROUNDNESS] = m_chart->
+  properties[dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS] = m_chart->
     backgroundRoundness();
-  properties[dooble_charts::Properties::BACKGROUND_VISIBLE] = m_chart->
+  properties[dooble_charts::Properties::CHART_BACKGROUND_VISIBLE] = m_chart->
     isBackgroundVisible();
-  properties[dooble_charts::Properties::CHART_TYPE] = dooble_charts::
+  properties[dooble_charts::Properties::CHART_CHART_TYPE] = dooble_charts::
     chart_type_to_string(m_chart->chartType());
-  properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
-  properties[dooble_charts::Properties::DROP_SHADOW_ENABLED] = m_chart->
+  properties[dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
-  properties[dooble_charts::Properties::LEGEND_VISIBLE] = m_chart->
+  properties[dooble_charts::Properties::CHART_LEGEND_VISIBLE] = m_chart->
     legend()->isVisible();
-  properties[dooble_charts::Properties::LOCALE] = m_chart->locale().name();
-  properties[dooble_charts::Properties::LOCALIZE_NUMBERS] = m_chart->
+  properties[dooble_charts::Properties::CHART_LOCALE] =
+    m_chart->locale().name();
+  properties[dooble_charts::Properties::CHART_LOCALIZE_NUMBERS] = m_chart->
     localizeNumbers();
-  properties[dooble_charts::Properties::MARGINS] = QString("%1, %2, %3, %4").
+  properties[dooble_charts::Properties::CHART_MARGINS] =
+    QString("%1, %2, %3, %4").
     arg(m_chart->margins().bottom()).
     arg(m_chart->margins().left()).
     arg(m_chart->margins().right()).
     arg(m_chart->margins().top());
-  properties[dooble_charts::Properties::PLOT_AREA_BACKGROUND_VISIBLE] =
+  properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
     m_chart->isPlotAreaBackgroundVisible();
-  properties[dooble_charts::Properties::THEME] = m_chart->theme();
-  properties[dooble_charts::Properties::TITLE] = m_chart->title();
-  properties[dooble_charts::Properties::TITLE_COLOR] =
+  properties[dooble_charts::Properties::CHART_THEME] = m_chart->theme();
+  properties[dooble_charts::Properties::CHART_TITLE] = m_chart->title();
+  properties[dooble_charts::Properties::CHART_TITLE_COLOR] =
     m_chart->titleBrush().color();
-  properties[dooble_charts::Properties::TITLE_FONT] = m_chart->titleFont();
-  properties[dooble_charts::Properties::X_AXIS_RANGE] = QString("[%1, %2]").
-    arg(m_x_axis->min()).arg(m_x_axis->max());
-  properties[dooble_charts::Properties::Y_AXIS_RANGE] = QString("[%1, %2]").
-    arg(m_y_axis->min()).arg(m_y_axis->max());
+  properties[dooble_charts::Properties::CHART_TITLE_FONT] =
+    m_chart->titleFont();
+  properties[dooble_charts::Properties::CHART_X_AXIS_RANGE] =
+    QString("[%1, %2]").arg(m_x_axis->min()).arg(m_x_axis->max());
+  properties[dooble_charts::Properties::CHART_Y_AXIS_RANGE] =
+    QString("[%1, %2]").arg(m_y_axis->min()).arg(m_y_axis->max());
+  properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
 #endif
   return properties;
 }
