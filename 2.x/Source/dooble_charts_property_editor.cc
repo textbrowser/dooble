@@ -45,7 +45,22 @@ static void find_recursive_items(QStandardItem *item,
 QSize dooble_charts_property_editor_model_delegate::
 sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+  auto property = dooble_charts::Properties
+    (index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
   auto size(QStyledItemDelegate::sizeHint(option, index));
+
+  switch(property)
+    {
+    case dooble_charts::DATA_EXTRACTION_SCRIPT:
+      {
+	size.setHeight(250);
+	break;
+      }
+    default:
+      {
+	break;
+      }
+    }
 
   return size;
 }
@@ -55,33 +70,44 @@ createEditor(QWidget *parent,
 	     const QStyleOptionViewItem &option,
 	     const QModelIndex &index) const
 {
-  dooble_charts::Properties property = dooble_charts::Properties
+  auto property = dooble_charts::Properties
     (index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
   switch(property)
     {
     case dooble_charts::CHART_ANIMATION_DURATION:
       {
-	auto spin_box = new QSpinBox(parent);
+	auto editor = new QSpinBox(parent);
 
-	spin_box->setRange(0, std::numeric_limits<int>::max());
-	spin_box->setValue(index.data().toInt());
-	return spin_box;
+	editor->setRange(0, std::numeric_limits<int>::max());
+	editor->setValue(index.data().toInt());
+	return editor;
+      }
+    case dooble_charts::DATA_EXTRACTION_SCRIPT:
+      {
+	auto editor = new QPlainTextEdit(parent);
+
+	editor->setPlainText(index.data().toString().trimmed());
+	return editor;
       }
     case dooble_charts::DATA_SOURCE_TYPE:
       {
-	auto combo_box = new QComboBox(parent);
+	auto editor = new QComboBox(parent);
 	int i = -1;
 
-	combo_box->addItem(tr("File"));
-	combo_box->addItem(tr("IP Address"));
-	i = combo_box->findText(index.data().toString());
+	connect(editor,
+		SIGNAL(currentIndexChanged(int)),
+		this,
+		SLOT(slot_current_index_changed(int)));
+	editor->addItem(tr("File"));
+	editor->addItem(tr("IP Address"));
+	i = editor->findText(index.data().toString());
 
 	if(i == -1)
 	  i = 0;
 
-	combo_box->setCurrentIndex(i);
-	return combo_box;
+	editor->setCurrentIndex(i);
+	return editor;
       }
     default:
       {
@@ -310,7 +336,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
     {
       it.next();
 
-      QStandardItem *item = m_model->item_from_property(it.key(), 1);
+      auto item = m_model->item_from_property(it.key(), 1);
 
       if(item)
 	switch(it.key())
