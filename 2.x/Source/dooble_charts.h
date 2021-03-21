@@ -73,6 +73,8 @@ class dooble_charts: public QWidget
    ** Data Properties
    */
 
+   DATA_EXTRACTION_SCRIPT,
+   DATA_SOURCE_ADDRESS,
    DATA_SOURCE_TYPE,
 
    /*
@@ -91,7 +93,10 @@ class dooble_charts: public QWidget
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  static QString chart_theme_to_string(const QChart::ChartTheme chart_theme);
   static QString chart_type_to_string(const QChart::ChartType chart_type);
+#endif
   static const QString s_chart_properties_strings[];
   static const QString s_data_properties_strings[];
 

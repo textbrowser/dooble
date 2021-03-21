@@ -36,6 +36,8 @@ Q_DECLARE_METATYPE(QChart::AnimationOptions)
 
 const QString dooble_charts::s_data_properties_strings[] =
   {
+   tr("Extraction Script"),
+   tr("Source Address"),
    tr("Source Type"),
    QString("")
   };
@@ -126,7 +128,8 @@ properties(void) const
     arg(m_chart->margins().top());
   properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
     m_chart->isPlotAreaBackgroundVisible();
-  properties[dooble_charts::Properties::CHART_THEME] = m_chart->theme();
+  properties[dooble_charts::Properties::CHART_THEME] =
+    chart_theme_to_string(m_chart->theme());
   properties[dooble_charts::Properties::CHART_TITLE] = m_chart->title();
   properties[dooble_charts::Properties::CHART_TITLE_COLOR] =
     m_chart->titleBrush().color();
@@ -140,6 +143,48 @@ properties(void) const
 #endif
   return properties;
 }
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+QString dooble_charts::chart_theme_to_string
+(const QChart::ChartTheme chart_theme)
+{
+  switch(chart_theme)
+    {
+    case QChart::ChartThemeBlueCerulean:
+      {
+	return tr("Blue Cerulean");
+      }
+    case QChart::ChartThemeBlueIcy:
+      {
+	return tr("Blue Icy");
+      }
+    case QChart::ChartThemeBlueNcs:
+      {
+	return tr("Blue NCS");
+      }
+    case QChart::ChartThemeBrownSand:
+      {
+	return tr("Brown Sand");
+      }
+    case QChart::ChartThemeDark:
+      {
+	return tr("Dark");
+      }
+    case QChart::ChartThemeHighContrast:
+      {
+	return tr("High Contrast");
+      }
+    case QChart::ChartThemeLight:
+      {
+	return tr("Light");
+      }
+    default:
+      {
+	return tr("Qt");
+      }
+    }
+}
+#endif
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
 QString dooble_charts::chart_type_to_string(const QChart::ChartType chart_type)
