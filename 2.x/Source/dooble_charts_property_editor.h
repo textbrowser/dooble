@@ -95,13 +95,14 @@ class dooble_charts_property_editor: public QWidget
  public:
   dooble_charts_property_editor(QTreeView *tree);
   virtual ~dooble_charts_property_editor();
+  QPointer<dooble_charts_property_editor_model> model(void) const;
 
  private slots:
   virtual void slot_delegate_signal(const dooble_charts::Properties property);
 
  protected:
   QPointer<QTreeView> m_tree;
-  dooble_charts_property_editor_model *m_model;
+  QPointer<dooble_charts_property_editor_model> m_model;
   void prepare_generic(dooble_charts *chart);
 };
 

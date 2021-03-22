@@ -206,3 +206,27 @@ QString dooble_charts::chart_type_to_string(const QChart::ChartType chart_type)
     }
 }
 #endif
+
+void dooble_charts::slot_item_changed(QStandardItem *item)
+{
+  if(!item)
+    return;
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  auto property = dooble_charts::Properties
+    (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
+
+  switch(property)
+    {
+    case dooble_charts::CHART_BACKGROUND_VISIBLE:
+      {
+	m_chart->setBackgroundVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    default:
+      {
+	break;
+      }
+    }
+#endif
+}

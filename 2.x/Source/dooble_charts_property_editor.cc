@@ -25,6 +25,10 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QComboBox>
+#include <QPlainTextEdit>
+#include <QSpinBox>
+
 #include "dooble_charts_property_editor.h"
 
 #include <limits>
@@ -298,7 +302,7 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 	  if(!item)
 	    continue;
 
-	  dooble_charts::Properties p = dooble_charts::Properties
+	  auto p = dooble_charts::Properties
 	    (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
 	  if(p == property)
@@ -317,12 +321,17 @@ void dooble_charts_property_editor_model::slot_item_changed(QStandardItem *item)
 dooble_charts_property_editor::
 dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 {
-  m_model = nullptr;
   m_tree = tree;
 }
 
 dooble_charts_property_editor::~dooble_charts_property_editor()
 {
+}
+
+QPointer<dooble_charts_property_editor_model> dooble_charts_property_editor::
+model(void) const
+{
+  return m_model;
 }
 
 void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)

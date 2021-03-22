@@ -213,6 +213,8 @@ qtHaveModule(charts) {
 DEFINES         += DOOBLE_QTCHARTS_PRESENT
 QT              += charts
 message("The QtCharts module has been discovered.")
+} else {
+warning("The QtCharts module is not present.")
 }
 
 TEMPLATE	= app

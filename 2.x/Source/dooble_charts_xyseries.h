@@ -37,6 +37,9 @@ class dooble_charts_xyseries: public dooble_charts
  public:
   dooble_charts_xyseries(QWidget *parent);
   ~dooble_charts_xyseries();
+
+ private slots:
+  void slot_item_changed(QStandardItem *item);
 };
 
 #endif

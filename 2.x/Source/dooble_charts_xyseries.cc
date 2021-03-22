@@ -33,8 +33,20 @@ dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
 {
   m_property_editor = new dooble_charts_property_editor_xyseries
     (m_ui.properties, this);
+  connect(m_property_editor->model(),
+	  SIGNAL(itemChanged(QStandardItem *)),
+	  this,
+	  SLOT(slot_item_changed(QStandardItem *)));
 }
 
 dooble_charts_xyseries::~dooble_charts_xyseries()
 {
+}
+
+void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
+{
+  if(!item)
+    return;
+
+  dooble_charts::slot_item_changed(item);
 }

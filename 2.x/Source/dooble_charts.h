@@ -110,6 +110,9 @@ class dooble_charts: public QWidget
 #endif
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;
+
+ protected slots:
+  virtual void slot_item_changed(QStandardItem *item);
 };
 
 #endif
