@@ -231,6 +231,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setBackgroundBrush(brush);
 	break;
       }
+    case dooble_charts::CHART_BACKGROUND_ROUNDNESS:
+      {
+	m_chart->setBackgroundRoundness(QVariant(item->text()).toReal());
+	break;
+      }
     case dooble_charts::CHART_BACKGROUND_VISIBLE:
       {
 	m_chart->setBackgroundVisible(item->checkState() == Qt::Checked);
