@@ -87,6 +87,14 @@ createEditor(QWidget *parent,
 	editor->setValue(index.data().toInt());
 	return editor;
       }
+    case dooble_charts::CHART_BACKGROUND_ROUNDNESS:
+      {
+	auto editor = new QDoubleSpinBox(parent);
+
+	editor->setRange(0.0, std::numeric_limits<qreal>::max());
+	editor->setValue(index.data().toReal());
+	return editor;
+      }
     case dooble_charts::DATA_EXTRACTION_SCRIPT:
       {
 	auto editor = new QPlainTextEdit(parent);
@@ -240,10 +248,6 @@ dooble_charts_property_editor_model(QObject *parent):
 
   appendRow(chart);
   appendRow(data);
-  connect(this,
-	  SIGNAL(itemChanged(QStandardItem *)),
-	  this,
-	  SLOT(slot_item_changed(QStandardItem *)));
 }
 
 dooble_charts_property_editor_model::~dooble_charts_property_editor_model()
@@ -310,12 +314,6 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 	}
 
   return nullptr;
-}
-
-void dooble_charts_property_editor_model::slot_item_changed(QStandardItem *item)
-{
-  if(!item)
-    return;
 }
 
 dooble_charts_property_editor::

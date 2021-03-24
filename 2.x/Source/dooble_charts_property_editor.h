@@ -83,9 +83,6 @@ class dooble_charts_property_editor_model: public QStandardItemModel
  protected:
   QList<QStandardItem *> find_all_child_items(const QString &text) const;
   QStandardItem *find_specific_item(const QString &text) const;
-
- private slots:
-  void slot_item_changed(QStandardItem *item);
 };
 
 class dooble_charts_property_editor: public QWidget
