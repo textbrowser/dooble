@@ -215,6 +215,12 @@ dooble_charts_property_editor_model(QObject *parent):
 	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
 	    break;
 	  }
+	case dooble_charts::CHART_CHART_TYPE:
+	  {
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setToolTip("Read-Only");
+	    break;
+	  }
 	default:
 	  {
 	    break;

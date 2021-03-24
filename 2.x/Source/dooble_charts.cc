@@ -94,6 +94,30 @@ dooble_charts::~dooble_charts()
 #endif
 }
 
+#ifdef DOOBLE_QTCHARTS_PRESENT
+QChart::ChartTheme dooble_charts::string_to_chart_theme(const QString &t)
+{
+  QString text(t.toLower().trimmed());
+
+  if(text == tr("blue cerulean"))
+    return QChart::ChartThemeBlueCerulean;
+  else if(text == tr("blue icy"))
+    return QChart::ChartThemeBlueIcy;
+  else if(text == tr("blue ncs"))
+    return QChart::ChartThemeBlueNcs;
+  else if(text == tr("brown sand"))
+    return QChart::ChartThemeBrownSand;
+  else if(text == tr("dark"))
+    return QChart::ChartThemeDark;
+  else if(text == tr("high contrast"))
+    return QChart::ChartThemeHighContrast;
+  else if(text == tr("light"))
+    return QChart::ChartThemeLight;
+  else
+    return QChart::ChartThemeQt;
+}
+#endif
+
 QHash<dooble_charts::Properties, QVariant> dooble_charts::
 properties(void) const
 {
@@ -110,7 +134,7 @@ properties(void) const
     backgroundRoundness();
   properties[dooble_charts::Properties::CHART_BACKGROUND_VISIBLE] = m_chart->
     isBackgroundVisible();
-  properties[dooble_charts::Properties::CHART_CHART_TYPE] = dooble_charts::
+  properties[dooble_charts::Properties::CHART_CHART_TYPE] =
     chart_type_to_string(m_chart->chartType());
   properties[dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
@@ -241,6 +265,10 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setBackgroundVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::CHART_CHART_TYPE:
+      {
+	break;
+      }
     case dooble_charts::CHART_DROP_SHADOW_ENABLED:
       {
 	m_chart->setDropShadowEnabled(item->checkState() == Qt::Checked);
@@ -260,6 +288,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	m_chart->setPlotAreaBackgroundVisible
 	  (item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::CHART_THEME:
+      {
+	m_chart->setTheme(string_to_chart_theme(item->text()));
 	break;
       }
     default:
