@@ -223,6 +223,27 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setBackgroundVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::CHART_DROP_SHADOW_ENABLED:
+      {
+	m_chart->setDropShadowEnabled(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::CHART_LEGEND_VISIBLE:
+      {
+	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::CHART_LOCALIZE_NUMBERS:
+      {
+	m_chart->setLocalizeNumbers(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+      {
+	m_chart->setPlotAreaBackgroundVisible
+	  (item->checkState() == Qt::Checked);
+	break;
+      }
     default:
       {
 	break;
