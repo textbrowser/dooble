@@ -218,6 +218,19 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
   switch(property)
     {
+    case dooble_charts::CHART_ANIMATION_DURATION:
+      {
+	m_chart->setAnimationDuration(item->text().toInt());
+	break;
+      }
+    case dooble_charts::CHART_BACKGROUND_COLOR:
+      {
+	QBrush brush(m_chart->backgroundBrush());
+
+	brush.setColor(QColor(item->text()));
+	m_chart->setBackgroundBrush(brush);
+	break;
+      }
     case dooble_charts::CHART_BACKGROUND_VISIBLE:
       {
 	m_chart->setBackgroundVisible(item->checkState() == Qt::Checked);

@@ -55,7 +55,7 @@ class dooble_charts_property_editor_model_delegate: public QStyledItemDelegate
 			const QModelIndex &index) const;
   void setEditorData(QWidget *editor, const QModelIndex &index) const;
   void setModelData(QWidget *editor,
-		    QAbstractItemModel *m,
+		    QAbstractItemModel *model,
 		    const QModelIndex &index) const;
   void updateEditorGeometry(QWidget *editor,
 			    const QStyleOptionViewItem &option,

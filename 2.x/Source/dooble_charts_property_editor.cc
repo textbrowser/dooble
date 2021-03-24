@@ -137,9 +137,9 @@ setEditorData(QWidget *editor, const QModelIndex &index) const
 }
 
 void dooble_charts_property_editor_model_delegate::setModelData
-(QWidget *editor, QAbstractItemModel *m, const QModelIndex &index) const
+(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-  QStyledItemDelegate::setModelData(editor, m, index);
+  QStyledItemDelegate::setModelData(editor, model, index);
 }
 
 void dooble_charts_property_editor_model_delegate::
