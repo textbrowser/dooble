@@ -208,7 +208,6 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	case dooble_charts::CHART_BACKGROUND_VISIBLE:
 	case dooble_charts::CHART_DROP_SHADOW_ENABLED:
-	case dooble_charts::CHART_LEGEND_VISIBLE:
 	case dooble_charts::CHART_LOCALIZE_NUMBERS:
 	case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
 	  {
@@ -356,9 +355,9 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  {
 	  case dooble_charts::CHART_BACKGROUND_VISIBLE:
 	  case dooble_charts::CHART_DROP_SHADOW_ENABLED:
-	  case dooble_charts::CHART_LEGEND_VISIBLE:
 	  case dooble_charts::CHART_LOCALIZE_NUMBERS:
 	  case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+	  case dooble_charts::LEGEND_VISIBLE:
 	    {
 	      item->setCheckState
 		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);

@@ -34,14 +34,6 @@
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
-const QString dooble_charts::s_data_properties_strings[] =
-  {
-   tr("Extraction Script"),
-   tr("Source Address"),
-   tr("Source Type"),
-   QString("")
-  };
-
 const QString dooble_charts::s_chart_properties_strings[] =
   {
    tr("Animation Duration"),
@@ -51,7 +43,6 @@ const QString dooble_charts::s_chart_properties_strings[] =
    tr("Background Visible"),
    tr("Chart Type"),
    tr("Drop Shadow Enabled"),
-   tr("Legend Visible"),
    tr("Locale"),
    tr("Localize Numbers"),
    tr("Margins"),
@@ -60,11 +51,15 @@ const QString dooble_charts::s_chart_properties_strings[] =
    tr("Title"),
    tr("Title Color"),
    tr("Title Font"),
-   tr("X-Axis Range"),
-   tr("X-Axis Title"),
-   tr("Y-Axis Range"),
-   tr("Y-Axis Title"),
    QString(""),
+  };
+
+const QString dooble_charts::s_data_properties_strings[] =
+  {
+   tr("Extraction Script"),
+   tr("Source Address"),
+   tr("Source Type"),
+   QString("")
   };
 
 dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
@@ -138,8 +133,6 @@ properties(void) const
     chart_type_to_string(m_chart->chartType());
   properties[dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED] = m_chart->
     isDropShadowEnabled();
-  properties[dooble_charts::Properties::CHART_LEGEND_VISIBLE] = m_chart->
-    legend()->isVisible();
   properties[dooble_charts::Properties::CHART_LOCALE] =
     m_chart->locale().name();
   properties[dooble_charts::Properties::CHART_LOCALIZE_NUMBERS] = m_chart->
@@ -159,10 +152,6 @@ properties(void) const
     m_chart->titleBrush().color();
   properties[dooble_charts::Properties::CHART_TITLE_FONT] =
     m_chart->titleFont();
-  properties[dooble_charts::Properties::CHART_X_AXIS_RANGE] =
-    QString("[%1, %2]").arg(m_x_axis->min()).arg(m_x_axis->max());
-  properties[dooble_charts::Properties::CHART_Y_AXIS_RANGE] =
-    QString("[%1, %2]").arg(m_y_axis->min()).arg(m_y_axis->max());
   properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
 #endif
   return properties;
@@ -274,11 +263,6 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setDropShadowEnabled(item->checkState() == Qt::Checked);
 	break;
       }
-    case dooble_charts::CHART_LEGEND_VISIBLE:
-      {
-	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
-	break;
-      }
     case dooble_charts::CHART_LOCALE:
       {
 	m_chart->setLocale(QLocale(item->text()));
@@ -320,6 +304,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	if(font.fromString(item->text()))
 	  m_chart->setTitleFont(font);
 
+	break;
+      }
+    case dooble_charts::LEGEND_VISIBLE:
+      {
+	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
 	break;
       }
     default:
