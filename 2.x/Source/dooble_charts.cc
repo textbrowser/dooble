@@ -279,6 +279,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::CHART_LOCALE:
+      {
+	m_chart->setLocale(QLocale(item->text()));
+	break;
+      }
     case dooble_charts::CHART_LOCALIZE_NUMBERS:
       {
 	m_chart->setLocalizeNumbers(item->checkState() == Qt::Checked);
@@ -293,6 +298,28 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
     case dooble_charts::CHART_THEME:
       {
 	m_chart->setTheme(string_to_chart_theme(item->text()));
+	break;
+      }
+    case dooble_charts::CHART_TITLE:
+      {
+	m_chart->setTitle(item->text().trimmed());
+	break;
+      }
+    case dooble_charts::CHART_TITLE_COLOR:
+      {
+	QBrush brush(m_chart->titleBrush());
+
+	brush.setColor(QColor(item->text()));
+	m_chart->setTitleBrush(brush);
+	break;
+      }
+    case dooble_charts::CHART_TITLE_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  m_chart->setTitleFont(font);
+
 	break;
       }
     default:
