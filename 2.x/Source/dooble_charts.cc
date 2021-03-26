@@ -62,6 +62,21 @@ const QString dooble_charts::s_data_properties_strings[] =
    QString("")
   };
 
+const QString dooble_charts::s_legend_properties_strings[] =
+  {
+   tr("Alignment"),
+   tr("Background Visible"),
+   tr("Border Color"),
+   tr("Color"),
+   tr("Font"),
+   tr("Label Color"),
+   tr("Marker Shape"),
+   tr("Reverse Markers"),
+   tr("Show Tool Tips"),
+   tr("Visible"),
+   QString("")
+  };
+
 dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 {
 #ifdef DOOBLE_QTCHARTS_PRESENT

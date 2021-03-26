@@ -45,10 +45,35 @@ class dooble_charts: public QWidget
   enum Properties
   {
    /*
+   ** Axis Properties
+   */
+
+   AXIS_ALIGNMENT = 0,
+   AXIS_COLOR,
+   AXIS_GRID_LINE_COLOR,
+   AXIS_GRID_VISIBLE,
+   AXIS_LABELS_ANGLE,
+   AXIS_LABELS_COLOR,
+   AXIS_LABELS_FONT,
+   AXIS_LABELS_VISIBLE,
+   AXIS_LINE_VISIBLE,
+   AXIS_MINOR_GRID_LINE_COLOR,
+   AXIS_MINOR_GRID_VISIBLE,
+   AXIS_ORIENTATION,
+   AXIS_REVERSE,
+   AXIS_SHADES_BORDER_COLOR,
+   AXIS_SHADES_COLOR,
+   AXIS_SHADES_VISIBLE,
+   AXIS_TITLE_COLOR,
+   AXIS_TITLE_TEXT,
+   AXIS_TITLE_VISIBLE,
+   AXIS_VISIBLE,
+
+   /*
    ** Chart Properties
    */
 
-   CHART_ANIMATION_DURATION = 0,
+   CHART_ANIMATION_DURATION,
    CHART_ANIMATION_OPTIONS,
    CHART_BACKGROUND_COLOR,
    CHART_BACKGROUND_ROUNDNESS,
@@ -65,31 +90,6 @@ class dooble_charts: public QWidget
    CHART_TITLE_FONT,
 
    /*
-   ** Chart Axis Properties
-   */
-
-   CHART_AXIS_ALIGNMENT,
-   CHART_AXIS_COLOR,
-   CHART_AXIS_GRID_LINE_COLOR,
-   CHART_AXIS_GRID_VISIBLE,
-   CHART_AXIS_LABELS_ANGLE,
-   CHART_AXIS_LABELS_COLOR,
-   CHART_AXIS_LABELS_FONT,
-   CHART_AXIS_LABELS_VISIBLE,
-   CHART_AXIS_LINE_VISIBLE,
-   CHART_AXIS_MINOR_GRID_LINE_COLOR,
-   CHART_AXIS_MINOR_GRID_VISIBLE,
-   CHART_AXIS_ORIENTATION,
-   CHART_AXIS_REVERSE,
-   CHART_AXIS_SHADES_BORDER_COLOR,
-   CHART_AXIS_SHADES_COLOR,
-   CHART_AXIS_SHADES_VISIBLE,
-   CHART_AXIS_TITLE_COLOR,
-   CHART_AXIS_TITLE_TEXT,
-   CHART_AXIS_TITLE_VISIBLE,
-   CHART_AXIS_VISIBLE,
-
-   /*
    ** Data Properties
    */
 
@@ -101,10 +101,19 @@ class dooble_charts: public QWidget
    ** Legend Properties
    */
 
+   LEGEND_ALIGNMENT,
+   LEGEND_BACKGROUND_VISIBLE,
+   LEGEND_BORDER_COLOR,
+   LEGEND_COLOR,
+   LEGEND_FONT,
+   LEGEND_LABEL_COLOR,
+   LEGEND_MARKER_SHAPE,
+   LEGEND_REVERSE_MARKERS,
+   LEGEND_SHOW_TOOL_TIPS,
    LEGEND_VISIBLE,
 
    /*
-   ** XY Series
+   ** XY Series Properties
    */
 
    XY_SERIES_COLOR,
@@ -124,8 +133,10 @@ class dooble_charts: public QWidget
   static QString chart_theme_to_string(const QChart::ChartTheme chart_theme);
   static QString chart_type_to_string(const QChart::ChartType chart_type);
 #endif
+  static const QString s_axis_properties_strings[];
   static const QString s_chart_properties_strings[];
   static const QString s_data_properties_strings[];
+  static const QString s_legend_properties_strings[];
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT

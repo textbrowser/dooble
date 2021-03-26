@@ -150,18 +150,10 @@ slot_current_index_changed(int index)
 
 void dooble_charts_property_editor_model_delegate::slot_emit_signal(void)
 {
-  auto widget = qobject_cast<QWidget *> (sender());
-
-  if(!widget)
-    return;
 }
 
 void dooble_charts_property_editor_model_delegate::slot_text_changed(void)
 {
-  auto textEdit = qobject_cast<QPlainTextEdit *> (sender());
-
-  if(!textEdit)
-    return;
 }
 
 void dooble_charts_property_editor_model_delegate::updateEditorGeometry
@@ -251,8 +243,47 @@ dooble_charts_property_editor_model(QObject *parent):
       data->appendRow(list);
     }
 
+  auto legend = new QStandardItem(tr("Legend"));
+
+  legend->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+  for(int i = 0; !dooble_charts::s_legend_properties_strings[i].isEmpty(); i++)
+    {
+      QList<QStandardItem *> list;
+      auto item = new QStandardItem
+	(dooble_charts::s_legend_properties_strings[i]);
+      auto offset = chart->rowCount() + data->rowCount() + i;
+
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      item = new QStandardItem();
+      item->setData(dooble_charts::Properties(offset));
+      item->setFlags
+	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      switch(dooble_charts::Properties(offset))
+	{
+	case dooble_charts::LEGEND_BACKGROUND_VISIBLE:
+	case dooble_charts::LEGEND_REVERSE_MARKERS:
+	case dooble_charts::LEGEND_SHOW_TOOL_TIPS:
+	case dooble_charts::LEGEND_VISIBLE:
+	  {
+	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
+      list << item;
+      legend->appendRow(list);
+    }
+
   appendRow(chart);
   appendRow(data);
+  appendRow(legend);
 }
 
 dooble_charts_property_editor_model::~dooble_charts_property_editor_model()
@@ -300,7 +331,9 @@ find_specific_item(const QString &text) const
 QStandardItem *dooble_charts_property_editor_model::item_from_property
 (const dooble_charts::Properties property, const int column) const
 {
-  auto list(findItems(tr("Chart")) + findItems(tr("Data")));
+  auto list(findItems(tr("Chart")) +
+	    findItems(tr("Data")) +
+	    findItems(tr("Legend")));
 
   for(int i = 0; i < list.size(); i++)
     if(list.at(i))
@@ -386,6 +419,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   m_tree->setModel(m_model);
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(1, m_tree->rootIndex(), true);
+  m_tree->setFirstColumnSpanned(2, m_tree->rootIndex(), true);
   m_tree->expandAll();
   m_tree->resizeColumnToContents(0);
   m_tree->resizeColumnToContents(1);
