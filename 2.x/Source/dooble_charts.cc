@@ -34,6 +34,11 @@
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
+const QString dooble_charts::s_axis_properties_strings[] =
+  {
+   QString("")
+  };
+
 const QString dooble_charts::s_chart_properties_strings[] =
   {
    tr("Animation Duration"),
