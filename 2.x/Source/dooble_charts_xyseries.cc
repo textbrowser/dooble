@@ -31,8 +31,17 @@
 dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
   dooble_charts(parent)
 {
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  m_chart->addAxis(m_x_axis = new QValueAxis(this), Qt::AlignBottom);
+  m_chart->addAxis(m_y_axis = new QValueAxis(this), Qt::AlignLeft);
+  m_chart->addSeries(m_series = new QLineSeries(this));
+#endif
   m_property_editor = new dooble_charts_property_editor_xyseries
     (m_ui.properties, this);
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  m_series->attachAxis(m_x_axis);
+  m_series->attachAxis(m_y_axis);
+#endif
   connect(m_property_editor->model(),
 	  SIGNAL(itemChanged(QStandardItem *)),
 	  this,

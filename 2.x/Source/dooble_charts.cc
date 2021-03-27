@@ -36,6 +36,26 @@ Q_DECLARE_METATYPE(QChart::AnimationOptions)
 
 const QString dooble_charts::s_axis_properties_strings[] =
   {
+   tr("Alignment"),
+   tr("Color"),
+   tr("Grid Line Color"),
+   tr("Grid Visible"),
+   tr("Labels Angle"),
+   tr("Labels Color"),
+   tr("Labels Font"),
+   tr("Labels Visible"),
+   tr("Line Visible"),
+   tr("Minor Grid Line Color"),
+   tr("Minor Grid Visible"),
+   tr("Orientation"),
+   tr("Reverse"),
+   tr("Shades Border Color"),
+   tr("Shades Color"),
+   tr("Shades Visible"),
+   tr("Title Color"),
+   tr("Title Text"),
+   tr("Title Visible"),
+   tr("Visible"),
    QString("")
   };
 
@@ -63,6 +83,8 @@ const QString dooble_charts::s_data_properties_strings[] =
   {
    tr("Extraction Script"),
    tr("Source Address"),
+   tr("Source Read Buffer Size"),
+   tr("Source Read Rate"),
    tr("Source Type"),
    QString("")
   };
@@ -86,12 +108,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 {
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_chart = new QChart();
-  m_chart->addAxis(m_x_axis = new QValueAxis(this), Qt::AlignBottom);
-  m_chart->addAxis(m_y_axis = new QValueAxis(this), Qt::AlignLeft);
-  m_chart->addSeries(m_series = new QLineSeries(this));
   m_chart_view = new QChartView(m_chart);
-  m_series->attachAxis(m_x_axis);
-  m_series->attachAxis(m_y_axis);
 #endif
   m_property_editor = nullptr;
   m_ui.setupUi(this);

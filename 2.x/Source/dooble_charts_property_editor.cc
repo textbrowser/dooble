@@ -250,10 +250,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::LEGEND_BACKGROUND_VISIBLE:
-	case dooble_charts::LEGEND_REVERSE_MARKERS:
-	case dooble_charts::LEGEND_SHOW_TOOL_TIPS:
-	case dooble_charts::LEGEND_VISIBLE:
+	case dooble_charts::CHART_AXIS_GRID_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
 	    break;
