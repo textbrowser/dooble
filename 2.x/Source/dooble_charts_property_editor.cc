@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QColorDialog>
 #include <QComboBox>
 #include <QPlainTextEdit>
 #include <QSpinBox>
@@ -87,6 +88,21 @@ createEditor(QWidget *parent,
 	editor->setValue(index.data().toInt());
 	return editor;
       }
+    case dooble_charts::CHART_BACKGROUND_COLOR:
+      {
+	auto editor = new QPushButton(parent);
+
+	connect(editor,
+		SIGNAL(clicked(void)),
+		this,
+		SLOT(slot_show_color_dialog(void)));
+	editor->setProperty("property", property);
+	editor->setStyleSheet
+	  (QString("QPushButton {background-color: %1;}").
+	   arg(index.data().toString()));
+	editor->setText(index.data().toString());
+	return editor;
+      }
     case dooble_charts::CHART_BACKGROUND_ROUNDNESS:
       {
 	auto editor = new QDoubleSpinBox(parent);
@@ -107,10 +123,6 @@ createEditor(QWidget *parent,
 	auto editor = new QComboBox(parent);
 	int i = -1;
 
-	connect(editor,
-		SIGNAL(currentIndexChanged(int)),
-		this,
-		SLOT(slot_current_index_changed(int)));
 	editor->addItem(tr("File"));
 	editor->addItem(tr("IP Address"));
 	i = editor->findText(index.data().toString());
@@ -139,17 +151,19 @@ setEditorData(QWidget *editor, const QModelIndex &index) const
 void dooble_charts_property_editor_model_delegate::setModelData
 (QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
+  if(qobject_cast<QPushButton *> (editor))
+    return;
+
   QStyledItemDelegate::setModelData(editor, model, index);
 }
 
-void dooble_charts_property_editor_model_delegate::
-slot_current_index_changed(int index)
+void dooble_charts_property_editor_model_delegate::slot_show_color_dialog(void)
 {
-  Q_UNUSED(index);
-}
+  auto editor = qobject_cast<QPushButton *> (sender());
 
-void dooble_charts_property_editor_model_delegate::slot_emit_signal(void)
-{
+  if(editor)
+    emit show_color_dialog
+      (dooble_charts::Properties(editor->property("property").toInt()));
 }
 
 void dooble_charts_property_editor_model_delegate::slot_text_changed(void)
@@ -387,6 +401,8 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 (const dooble_charts::Properties property, const int column) const
 {
   auto list(findItems(tr("Chart")) +
+	    findItems(tr("Chart X-Axis")) +
+	    findItems(tr("Chart Y-Axis")) +
 	    findItems(tr("Data")) +
 	    findItems(tr("Legend")));
 
@@ -413,6 +429,22 @@ dooble_charts_property_editor::
 dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 {
   m_tree = tree;
+
+  if(m_tree)
+    {
+      auto item_delegate = m_tree->itemDelegate();
+
+      if(item_delegate)
+	item_delegate->deleteLater();
+
+      item_delegate = new dooble_charts_property_editor_model_delegate(this);
+      connect
+	(item_delegate,
+	 SIGNAL(show_color_dialog(const dooble_charts::Properties)),
+	 this,
+	 SLOT(slot_show_color_dialog(const dooble_charts::Properties)));
+      m_tree->setItemDelegate(item_delegate);
+    }
 }
 
 dooble_charts_property_editor::~dooble_charts_property_editor()
@@ -441,6 +473,12 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       if(item)
 	switch(it.key())
 	  {
+	  case dooble_charts::CHART_BACKGROUND_COLOR:
+	    {
+	      item->setBackground(QColor(it.value().toString()));
+	      item->setText(it.value().toString());
+	      break;
+	    }
 	  case dooble_charts::CHART_BACKGROUND_VISIBLE:
 	  case dooble_charts::CHART_DROP_SHADOW_ENABLED:
 	  case dooble_charts::CHART_LOCALIZE_NUMBERS:
@@ -459,29 +497,32 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  }
     }
 
-  auto item_delegate = m_tree->itemDelegate();
-
-  if(item_delegate)
-    item_delegate->deleteLater();
-
-  item_delegate = new dooble_charts_property_editor_model_delegate(this);
-  connect
-    (item_delegate,
-     SIGNAL(emit_signal(const dooble_charts::Properties)),
-     this,
-     SLOT(slot_delegate_signal(const dooble_charts::Properties)));
-  m_tree->setItemDelegate(item_delegate);
   m_tree->setModel(m_model);
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(1, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(2, m_tree->rootIndex(), true);
+  m_tree->setFirstColumnSpanned(3, m_tree->rootIndex(), true);
   m_tree->expandAll();
   m_tree->resizeColumnToContents(0);
   m_tree->resizeColumnToContents(1);
 }
 
-void dooble_charts_property_editor::slot_delegate_signal
+void dooble_charts_property_editor::slot_show_color_dialog
 (const dooble_charts::Properties property)
 {
-  Q_UNUSED(property);
+  if(!m_model)
+    return;
+
+  QColorDialog dialog(this);
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      auto item = m_model->item_from_property(property, 1);
+
+      if(!item)
+	return;
+
+      item->setBackground(dialog.selectedColor());
+      item->setText(dialog.selectedColor().name());
+    }
 }

@@ -62,12 +62,11 @@ class dooble_charts_property_editor_model_delegate: public QStyledItemDelegate
 			    const QModelIndex &index) const;
 
  private slots:
-  void slot_current_index_changed(int index);
-  void slot_emit_signal(void);
+  void slot_show_color_dialog(void);
   void slot_text_changed(void);
 
  signals:
-  void emit_signal(const dooble_charts::Properties property);
+  void show_color_dialog(const dooble_charts::Properties property);
 };
 
 class dooble_charts_property_editor_model: public QStandardItemModel
@@ -95,7 +94,7 @@ class dooble_charts_property_editor: public QWidget
   QPointer<dooble_charts_property_editor_model> model(void) const;
 
  private slots:
-  virtual void slot_delegate_signal(const dooble_charts::Properties property);
+  void slot_show_color_dialog(const dooble_charts::Properties property);
 
  protected:
   QPointer<QTreeView> m_tree;
