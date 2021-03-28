@@ -1659,32 +1659,32 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
 {
   switch(panel)
     {
-    case DISPLAY_PANEL:
+    case dooble_settings::Panels::DISPLAY_PANEL:
       {
 	m_ui.display->click();
 	break;
       }
-    case CACHE_PANEL:
+    case dooble_settings::Panels::CACHE_PANEL:
       {
 	m_ui.cache->click();
 	break;
       }
-    case HISTORY_PANEL:
+    case dooble_settings::Panels::HISTORY_PANEL:
       {
 	m_ui.history->click();
 	break;
       }
-    case PRIVACY_PANEL:
+    case dooble_settings::Panels::PRIVACY_PANEL:
       {
 	m_ui.privacy->click();
 	break;
       }
-    case WEB_PANEL:
+    case dooble_settings::Panels::WEB_PANEL:
       {
 	m_ui.web->click();
 	break;
       }
-    case WINDOWS_PANEL:
+    case dooble_settings::Panels::WINDOWS_PANEL:
       {
 	m_ui.windows->click();
 	break;
@@ -1701,7 +1701,7 @@ void dooble_settings::slot_apply(void)
 {
   if(m_ui.credentials->isChecked() != setting("credentials_enabled").toBool())
     {
-      show_panel(PRIVACY_PANEL);
+      show_panel(dooble_settings::Panels::PRIVACY_PANEL);
 
       QMessageBox mb(this);
 

@@ -532,7 +532,8 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 void dooble_page::go_to_backward_item(int index)
 {
   auto items
-    (m_view->history()->backItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+    (m_view->history()->
+     backItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -541,7 +542,8 @@ void dooble_page::go_to_backward_item(int index)
 void dooble_page::go_to_forward_item(int index)
 {
   auto items
-    (m_view->history()->forwardItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+    (m_view->history()->
+     forwardItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -1362,7 +1364,7 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     {
       if(!m_last_javascript_popups.contains(view))
 	{
-	  if(ConstantsEnum::MAXIMUM_JAVASCRIPT_POPUPS <=
+	  if(dooble_page::ConstantsEnum::MAXIMUM_JAVASCRIPT_POPUPS <=
 	     m_last_javascript_popups.size())
 	    {
 	      view->deleteLater();
@@ -1967,7 +1969,8 @@ void dooble_page::slot_prepare_backward_menu(void)
 
   QFontMetrics font_metrics(m_ui.backward->menu()->font());
   auto items
-    (m_view->history()->backItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+    (m_view->history()->
+     backItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   m_ui.backward->setEnabled(!items.empty());
 
@@ -1998,7 +2001,8 @@ void dooble_page::slot_prepare_forward_menu(void)
 
   QFontMetrics font_metrics(m_ui.forward->menu()->font());
   auto items
-    (m_view->history()->forwardItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+    (m_view->history()->
+     forwardItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   m_ui.forward->setEnabled(!items.empty());
 

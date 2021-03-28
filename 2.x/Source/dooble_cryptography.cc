@@ -56,9 +56,9 @@ dooble_cryptography::dooble_cryptography
   m_encryption_key = encryption_key;
 
   if(hash_type.toLower().trimmed() == "keccak-512")
-    m_hash_type = HashTypes::KECCAK_512;
+    m_hash_type = dooble_cryptography::HashTypes::KECCAK_512;
   else
-    m_hash_type = HashTypes::SHA3_512;
+    m_hash_type = dooble_cryptography::HashTypes::SHA3_512;
 
   if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
     {
@@ -90,9 +90,9 @@ dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
   m_encryption_key = dooble_random::random_bytes(s_encryption_key_length);
 
   if(hash_type.toLower().trimmed() == "keccak-512")
-    m_hash_type = HashTypes::KECCAK_512;
+    m_hash_type = dooble_cryptography::HashTypes::KECCAK_512;
   else
-    m_hash_type = HashTypes::SHA3_512;
+    m_hash_type = dooble_cryptography::HashTypes::SHA3_512;
 
 #ifdef DOOBLE_MMAN_PRESENT
   mlock(m_authentication_key.constData(),
@@ -149,7 +149,7 @@ QByteArray dooble_cryptography::hmac(const QByteArray &message) const
     {
       switch(m_hash_type)
 	{
-	case HashTypes::KECCAK_512:
+	case dooble_cryptography::HashTypes::KECCAK_512:
 	  return dooble_hmac::keccak_512_hmac(m_authentication_key, message);
 	default:
 	  return dooble_hmac::sha3_512_hmac(m_authentication_key, message);
@@ -165,7 +165,7 @@ QByteArray dooble_cryptography::hmac(const QString &message) const
     {
       switch(m_hash_type)
 	{
-	case HashTypes::KECCAK_512:
+	case dooble_cryptography::HashTypes::KECCAK_512:
 	  return dooble_hmac::keccak_512_hmac
 	    (m_authentication_key, message.toUtf8());
 	default:
@@ -247,7 +247,7 @@ void dooble_cryptography::authenticate(const QByteArray &salt,
 
   switch(m_hash_type)
     {
-    case HashTypes::KECCAK_512:
+    case dooble_cryptography::HashTypes::KECCAK_512:
       {
 	hash = QCryptographicHash::hash
 	  (password.toUtf8() + salt, QCryptographicHash::Keccak_512);
@@ -290,9 +290,9 @@ void dooble_cryptography::set_block_cipher_type
 void dooble_cryptography::set_hash_type(const QString &hash_type)
 {
   if(hash_type.toLower().trimmed() == "keccak-512")
-    m_hash_type = HashTypes::KECCAK_512;
+    m_hash_type = dooble_cryptography::HashTypes::KECCAK_512;
   else
-    m_hash_type = HashTypes::SHA3_512;
+    m_hash_type = dooble_cryptography::HashTypes::SHA3_512;
 }
 
 void dooble_cryptography::set_keys(const QByteArray &authentication_key,

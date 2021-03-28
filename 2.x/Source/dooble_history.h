@@ -80,7 +80,7 @@ class dooble_history: public QObject
   QAtomicInteger<short> m_interrupt;
   QFuture<void> m_populate_future;
   QFuture<void> m_purge_future;
-  QHash<QUrl, QHash<HistoryItem, QVariant> > m_history;
+  QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > m_history;
   QMultiMap<QDateTime, QUrl> m_history_date_time;
   QStandardItemModel *m_favorites_model;
   QTimer m_purge_timer;
@@ -90,7 +90,8 @@ class dooble_history: public QObject
 		const QByteArray &encryption_key);
   void purge(const QByteArray &authentication_key,
 	     const QByteArray &encryption_key);
-  void update_favorite(const QHash<HistoryItem, QVariant> &hash);
+  void update_favorite
+    (const QHash<dooble_history::HistoryItem, QVariant> &hash);
 
  private slots:
   void slot_populate(void);

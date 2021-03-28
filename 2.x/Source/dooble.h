@@ -145,7 +145,7 @@ class dooble: public QMainWindow
   static bool s_containers_populated;
   static bool cookie_filter
   (const QWebEngineCookieStore::FilterRequest &filter_request);
-  bool can_exit(const CanExit can_exit);
+  bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;
   void connect_signals(void);
   void decouple_support_windows(void);

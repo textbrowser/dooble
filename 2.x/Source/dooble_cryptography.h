@@ -72,12 +72,12 @@ class dooble_cryptography: public QObject
 		const QByteArray &encryption_key);
 
  private:
-  HashTypes m_hash_type;
   QByteArray m_authentication_key;
   QByteArray m_encryption_key;
   QString m_block_cipher_type;
   bool m_as_plaintext;
   bool m_authenticated;
+  dooble_cryptography::HashTypes m_hash_type;
 };
 
 #endif
