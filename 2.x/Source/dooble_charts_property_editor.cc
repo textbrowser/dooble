@@ -56,7 +56,7 @@ sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 
   switch(property)
     {
-    case dooble_charts::DATA_EXTRACTION_SCRIPT:
+    case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
       {
 	size.setHeight(250);
 	break;
@@ -80,7 +80,7 @@ createEditor(QWidget *parent,
 
   switch(property)
     {
-    case dooble_charts::CHART_ANIMATION_DURATION:
+    case dooble_charts::Properties::CHART_ANIMATION_DURATION:
       {
 	auto editor = new QSpinBox(parent);
 
@@ -88,7 +88,11 @@ createEditor(QWidget *parent,
 	editor->setValue(index.data().toInt());
 	return editor;
       }
-    case dooble_charts::CHART_BACKGROUND_COLOR:
+    case dooble_charts::Properties::CHART_ANIMATION_OPTIONS:
+      {
+	break;
+      }
+    case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
 	auto editor = new QPushButton(parent);
 
@@ -103,7 +107,7 @@ createEditor(QWidget *parent,
 	editor->setText(index.data().toString());
 	return editor;
       }
-    case dooble_charts::CHART_BACKGROUND_ROUNDNESS:
+    case dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS:
       {
 	auto editor = new QDoubleSpinBox(parent);
 
@@ -111,14 +115,28 @@ createEditor(QWidget *parent,
 	editor->setValue(index.data().toReal());
 	return editor;
       }
-    case dooble_charts::DATA_EXTRACTION_SCRIPT:
+    case dooble_charts::Properties::CHART_LOCALE:
+      {
+	auto editor = new QComboBox(parent);
+	int i = -1;
+
+	editor->addItem(tr("en_US"));
+	i = editor->findText(index.data().toString());
+
+	if(i == -1)
+	  i = 0;
+
+	editor->setCurrentIndex(i);
+	return editor;
+      }
+    case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
       {
 	auto editor = new QPlainTextEdit(parent);
 
 	editor->setPlainText(index.data().toString().trimmed());
 	return editor;
       }
-    case dooble_charts::DATA_SOURCE_TYPE:
+    case dooble_charts::Properties::DATA_SOURCE_TYPE:
       {
 	auto editor = new QComboBox(parent);
 	int i = -1;
@@ -196,12 +214,24 @@ dooble_charts_property_editor_model(QObject *parent):
   ** Chart
   */
 
+  QStandardItem *chart_margins = nullptr;
   auto chart = new QStandardItem(tr("Chart"));
 
   chart->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
   for(int i = 0; !dooble_charts::s_chart_properties_strings[i].isEmpty(); i++)
     {
+      if(dooble_charts::Properties(i) ==
+	 dooble_charts::Properties::CHART_MARGINS)
+	{
+	  chart_margins = new QStandardItem
+	    (dooble_charts::s_chart_properties_strings[i]);
+	  chart_margins->setData(dooble_charts::Properties(i));
+	  chart_margins->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  chart->appendRow(chart_margins);
+	  continue;
+	}
+
       QList<QStandardItem *> list;
       auto item = new QStandardItem
 	(dooble_charts::s_chart_properties_strings[i]);
@@ -216,15 +246,28 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::CHART_BACKGROUND_VISIBLE:
-	case dooble_charts::CHART_DROP_SHADOW_ENABLED:
-	case dooble_charts::CHART_LOCALIZE_NUMBERS:
-	case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+	case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
+	case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
+	case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
+	case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
 	    break;
 	  }
-	case dooble_charts::CHART_CHART_TYPE:
+	case dooble_charts::Properties::CHART_MARGINS:
+	  {
+	    break;
+	  }
+	case dooble_charts::Properties::CHART_MARGINS_BOTTOM:
+	case dooble_charts::Properties::CHART_MARGINS_LEFT:
+	case dooble_charts::Properties::CHART_MARGINS_RIGHT:
+	case dooble_charts::Properties::CHART_MARGINS_TOP:
+	  {
+	    list << item;
+	    chart_margins->appendRow(list);
+	    continue;
+	  }
+	case dooble_charts::Properties::CHART_CHART_TYPE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	    item->setToolTip("Read-Only");
@@ -264,7 +307,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::CHART_AXIS_GRID_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_GRID_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
 	    break;
@@ -331,10 +374,10 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::LEGEND_BACKGROUND_VISIBLE:
-	case dooble_charts::LEGEND_REVERSE_MARKERS:
-	case dooble_charts::LEGEND_SHOW_TOOL_TIPS:
-	case dooble_charts::LEGEND_VISIBLE:
+	case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
+	case dooble_charts::Properties::LEGEND_REVERSE_MARKERS:
+	case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
+	case dooble_charts::Properties::LEGEND_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
 	    break;
@@ -473,17 +516,17 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       if(item)
 	switch(it.key())
 	  {
-	  case dooble_charts::CHART_BACKGROUND_COLOR:
+	  case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
 	    {
 	      item->setBackground(QColor(it.value().toString()));
 	      item->setText(it.value().toString());
 	      break;
 	    }
-	  case dooble_charts::CHART_BACKGROUND_VISIBLE:
-	  case dooble_charts::CHART_DROP_SHADOW_ENABLED:
-	  case dooble_charts::CHART_LOCALIZE_NUMBERS:
-	  case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
-	  case dooble_charts::LEGEND_VISIBLE:
+	  case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
+	  case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
+	  case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
+	  case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+	  case dooble_charts::Properties::LEGEND_VISIBLE:
 	    {
 	      item->setCheckState
 		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);
@@ -498,6 +541,14 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
     }
 
   m_tree->setModel(m_model);
+
+  QStandardItem *item = m_model->item_from_property
+    (dooble_charts::Properties::CHART_MARGINS, 0);
+
+  if(item && item->parent())
+    m_tree->setFirstColumnSpanned
+      (dooble_charts::Properties::CHART_MARGINS, item->parent()->index(), true);
+
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(1, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(2, m_tree->rootIndex(), true);

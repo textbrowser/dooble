@@ -71,6 +71,10 @@ const QString dooble_charts::s_chart_properties_strings[] =
    tr("Locale"),
    tr("Localize Numbers"),
    tr("Margins"),
+   tr("Bottom"),
+   tr("Left"),
+   tr("Right"),
+   tr("Top"),
    tr("Plot Area Background Visible"),
    tr("Theme"),
    tr("Title"),
@@ -174,12 +178,6 @@ properties(void) const
     m_chart->locale().name();
   properties[dooble_charts::Properties::CHART_LOCALIZE_NUMBERS] = m_chart->
     localizeNumbers();
-  properties[dooble_charts::Properties::CHART_MARGINS] =
-    QString("%1, %2, %3, %4").
-    arg(m_chart->margins().bottom()).
-    arg(m_chart->margins().left()).
-    arg(m_chart->margins().right()).
-    arg(m_chart->margins().top());
   properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
     m_chart->isPlotAreaBackgroundVisible();
   properties[dooble_charts::Properties::CHART_THEME] =
@@ -268,12 +266,12 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
   switch(property)
     {
-    case dooble_charts::CHART_ANIMATION_DURATION:
+    case dooble_charts::Properties::CHART_ANIMATION_DURATION:
       {
 	m_chart->setAnimationDuration(item->text().toInt());
 	break;
       }
-    case dooble_charts::CHART_BACKGROUND_COLOR:
+    case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
 	QBrush brush(m_chart->backgroundBrush());
 
@@ -281,52 +279,52 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setBackgroundBrush(brush);
 	break;
       }
-    case dooble_charts::CHART_BACKGROUND_ROUNDNESS:
+    case dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS:
       {
 	m_chart->setBackgroundRoundness(QVariant(item->text()).toReal());
 	break;
       }
-    case dooble_charts::CHART_BACKGROUND_VISIBLE:
+    case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
       {
 	m_chart->setBackgroundVisible(item->checkState() == Qt::Checked);
 	break;
       }
-    case dooble_charts::CHART_CHART_TYPE:
+    case dooble_charts::Properties::CHART_CHART_TYPE:
       {
 	break;
       }
-    case dooble_charts::CHART_DROP_SHADOW_ENABLED:
+    case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
       {
 	m_chart->setDropShadowEnabled(item->checkState() == Qt::Checked);
 	break;
       }
-    case dooble_charts::CHART_LOCALE:
+    case dooble_charts::Properties::CHART_LOCALE:
       {
 	m_chart->setLocale(QLocale(item->text()));
 	break;
       }
-    case dooble_charts::CHART_LOCALIZE_NUMBERS:
+    case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
       {
 	m_chart->setLocalizeNumbers(item->checkState() == Qt::Checked);
 	break;
       }
-    case dooble_charts::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+    case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
       {
 	m_chart->setPlotAreaBackgroundVisible
 	  (item->checkState() == Qt::Checked);
 	break;
       }
-    case dooble_charts::CHART_THEME:
+    case dooble_charts::Properties::CHART_THEME:
       {
 	m_chart->setTheme(string_to_chart_theme(item->text()));
 	break;
       }
-    case dooble_charts::CHART_TITLE:
+    case dooble_charts::Properties::CHART_TITLE:
       {
 	m_chart->setTitle(item->text().trimmed());
 	break;
       }
-    case dooble_charts::CHART_TITLE_COLOR:
+    case dooble_charts::Properties::CHART_TITLE_COLOR:
       {
 	QBrush brush(m_chart->titleBrush());
 
@@ -334,7 +332,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setTitleBrush(brush);
 	break;
       }
-    case dooble_charts::CHART_TITLE_FONT:
+    case dooble_charts::Properties::CHART_TITLE_FONT:
       {
 	QFont font;
 
@@ -343,7 +341,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	break;
       }
-    case dooble_charts::LEGEND_VISIBLE:
+    case dooble_charts::Properties::LEGEND_VISIBLE:
       {
 	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
 	break;
