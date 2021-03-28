@@ -251,7 +251,9 @@ dooble_charts_property_editor_model(QObject *parent):
 	case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
 	case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
 	  {
-	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
+	    item->setFlags(Qt::ItemIsEnabled |
+			   Qt::ItemIsSelectable |
+			   Qt::ItemIsUserCheckable);
 	    break;
 	  }
 	case dooble_charts::Properties::CHART_MARGINS:
@@ -309,7 +311,9 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	case dooble_charts::Properties::CHART_AXIS_GRID_VISIBLE:
 	  {
-	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
+	    item->setFlags(Qt::ItemIsEnabled |
+			   Qt::ItemIsSelectable |
+			   Qt::ItemIsUserCheckable);
 	    break;
 	  }
 	default:
@@ -379,7 +383,9 @@ dooble_charts_property_editor_model(QObject *parent):
 	case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
 	case dooble_charts::Properties::LEGEND_VISIBLE:
 	  {
-	    item->setFlags(Qt::ItemIsUserCheckable | item->flags());
+	    item->setFlags(Qt::ItemIsEnabled |
+			   Qt::ItemIsSelectable |
+			   Qt::ItemIsUserCheckable);
 	    break;
 	  }
 	default:

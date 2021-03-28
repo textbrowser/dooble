@@ -178,6 +178,14 @@ properties(void) const
     m_chart->locale().name();
   properties[dooble_charts::Properties::CHART_LOCALIZE_NUMBERS] = m_chart->
     localizeNumbers();
+  properties[dooble_charts::Properties::CHART_MARGINS_BOTTOM] = m_chart->
+    margins().bottom();
+  properties[dooble_charts::Properties::CHART_MARGINS_LEFT] = m_chart->
+    margins().left();
+  properties[dooble_charts::Properties::CHART_MARGINS_RIGHT] = m_chart->
+    margins().right();
+  properties[dooble_charts::Properties::CHART_MARGINS_TOP] = m_chart->
+    margins().top();
   properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
     m_chart->isPlotAreaBackgroundVisible();
   properties[dooble_charts::Properties::CHART_THEME] =
