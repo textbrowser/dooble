@@ -286,7 +286,7 @@ bool dooble::can_exit(const CanExit can_exit)
 {
   switch(can_exit)
     {
-    case CAN_EXIT_CLOSE_EVENT:
+    case CanExit::CAN_EXIT_CLOSE_EVENT:
       {
 	if(m_downloads && !m_downloads->is_finished())
 	  {
@@ -478,7 +478,7 @@ void dooble::clean(void)
 
 void dooble::closeEvent(QCloseEvent *event)
 {
-  if(!can_exit(CAN_EXIT_CLOSE_EVENT))
+  if(!can_exit(CanExit::CAN_EXIT_CLOSE_EVENT))
     {
       if(event)
 	event->ignore();
@@ -863,10 +863,10 @@ void dooble::new_page(dooble_page *page)
   ** The page's icon and title may not be meaningful.
   */
 
-  auto title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
+  auto title(page->title().trimmed().mid(0, Limits::MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
-    title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
+    title = page->url().toString().mid(0, Limits::MAXIMUM_URL_LENGTH);
 
   if(title.isEmpty())
     title = tr("New Tab");
@@ -901,10 +901,10 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   prepare_page_connections(page);
 
-  auto title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
+  auto title(page->title().trimmed().mid(0, Limits::MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
-    title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
+    title = page->url().toString().mid(0, Limits::MAXIMUM_URL_LENGTH);
 
   if(title.isEmpty())
     title = tr("New Tab");
@@ -2222,10 +2222,12 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	    }
 	  else
 	    {
-	      auto title(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
+	      auto title
+		(page->title().trimmed().mid(0, Limits::MAXIMUM_TITLE_LENGTH));
 
 	      if(title.isEmpty())
-		title = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
+		title = page->url().toString().mid
+		  (0, Limits::MAXIMUM_URL_LENGTH);
 
 	      if(title.isEmpty())
 		title = tr("about:blank");
@@ -2790,7 +2792,7 @@ void dooble::slot_print_preview(void)
 
 void dooble::slot_quit_dooble(void)
 {
-  if(!can_exit(CAN_EXIT_SLOT_QUIT_DOOBLE))
+  if(!can_exit(CanExit::CAN_EXIT_SLOT_QUIT_DOOBLE))
     return;
 
   if(!m_is_javascript_dialog)
@@ -3427,8 +3429,9 @@ void dooble::slot_tab_index_changed(int index)
   if(page->title().trimmed().isEmpty())
     setWindowTitle(tr("Dooble"));
   else
-    setWindowTitle(tr("%1 - Dooble").
-		   arg(page->title().trimmed().mid(0, MAXIMUM_TITLE_LENGTH)));
+    setWindowTitle
+      (tr("%1 - Dooble").
+       arg(page->title().trimmed().mid(0, Limits::MAXIMUM_TITLE_LENGTH)));
 
   page->hide_status_bar
     (!dooble_settings::setting("status_bar_visible").toBool());
@@ -3539,10 +3542,10 @@ void dooble::slot_title_changed(const QString &title)
   if(!page)
     return;
 
-  auto text(title.trimmed().mid(0, MAXIMUM_TITLE_LENGTH));
+  auto text(title.trimmed().mid(0, Limits::MAXIMUM_TITLE_LENGTH));
 
   if(text.isEmpty())
-    text = page->url().toString().mid(0, MAXIMUM_URL_LENGTH);
+    text = page->url().toString().mid(0, Limits::MAXIMUM_URL_LENGTH);
 
   if(text.isEmpty())
     text = tr("Dooble");

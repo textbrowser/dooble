@@ -628,10 +628,12 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 
   if(item2)
     {
-      auto title(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+      auto title
+	(item.title().trimmed().mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
 
       if(title.isEmpty())
-	title = item.url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
+	title = item.url().toString().mid
+	  (0, dooble::Limits::MAXIMUM_URL_LENGTH);
 
       if(title.isEmpty())
 	title = tr("Dooble");
@@ -673,10 +675,11 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
-  auto title(item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+  auto title
+    (item.title().trimmed().mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
 
   if(title.isEmpty())
-    title = item.url().toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
+    title = item.url().toString().mid(0, dooble::Limits::MAXIMUM_URL_LENGTH);
 
   if(title.isEmpty())
     title = tr("Dooble");
@@ -780,16 +783,18 @@ void dooble_history_window::slot_populate(void)
       it.next();
 
       QDateTime last_visited
-	(it.value().value(dooble_history::LAST_VISITED).toDateTime());
-      QString title(it.value().value(dooble_history::TITLE).toString());
+	(it.value().value(dooble_history::HistoryItem::LAST_VISITED).
+	 toDateTime());
+      QString title
+	(it.value().value(dooble_history::HistoryItem::TITLE).toString());
       QTableWidgetItem *item2 = nullptr;
       QTableWidgetItem *item3 = nullptr;
       QTableWidgetItem *item4 = nullptr;
-      QUrl url(it.value().value(dooble_history::URL).toUrl());
+      QUrl url(it.value().value(dooble_history::HistoryItem::URL).toUrl());
       dooble_history_window_favorite_item *item1 = nullptr;
 
       if(title.isEmpty())
-	title = url.toString().mid(0, dooble::MAXIMUM_URL_LENGTH);
+	title = url.toString().mid(0, dooble::Limits::MAXIMUM_URL_LENGTH);
 
       if(title.isEmpty())
 	title = tr("Dooble");
@@ -800,7 +805,7 @@ void dooble_history_window::slot_populate(void)
 		      Qt::ItemIsSelectable |
 		      Qt::ItemIsUserCheckable);
 
-      if(it.value().value(dooble_history::FAVORITE).toBool())
+      if(it.value().value(dooble_history::HistoryItem::FAVORITE).toBool())
 	{
 	  item1->setCheckState(Qt::Checked);
 	  item1->setIcon

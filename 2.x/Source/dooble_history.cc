@@ -89,7 +89,8 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
       if(hash.contains(it.value()))
 	continue;
 
-      auto title(m_history.value(it.value()).value(TITLE).toString());
+      auto title
+	(m_history.value(it.value()).value(HistoryItem::TITLE).toString());
 
       title = title.trimmed();
       title.replace("&", "");
@@ -99,7 +100,8 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
 
       auto action = new QAction(title);
 
-      action->setData(m_history.value(it.value()).value(URL).toUrl());
+      action->setData
+	(m_history.value(it.value()).value(HistoryItem::URL).toUrl());
       action->setIcon(dooble_favicons::icon(it.value()));
       hash[it.value()] = 0;
       list << action;
@@ -120,7 +122,7 @@ bool dooble_history::is_favorite(const QUrl &url) const
 {
   QReadLocker locker(&m_history_mutex);
 
-  return m_history.value(url).value(FAVORITE, false).toBool();
+  return m_history.value(url).value(HistoryItem::FAVORITE, false).toBool();
 }
 
 void dooble_history::abort(void)
@@ -272,14 +274,14 @@ void dooble_history::populate(const QByteArray &authentication_key,
 
 	      QHash<HistoryItem, QVariant> hash;
 
-	      hash[FAVORITE] = is_favorite;
-	      hash[LAST_VISITED] = QDateTime::fromString
+	      hash[HistoryItem::FAVORITE] = is_favorite;
+	      hash[HistoryItem::LAST_VISITED] = QDateTime::fromString
 		(last_visited.constData(), Qt::ISODate);
-	      hash[NUMBER_OF_VISITS] = qMax
+	      hash[HistoryItem::NUMBER_OF_VISITS] = qMax
 		(1ULL, number_of_visits.toULongLong());
-	      hash[TITLE] = title.constData();
-	      hash[URL] = QUrl::fromEncoded(url);
-	      hash[URL_DIGEST] = QByteArray::fromBase64
+	      hash[HistoryItem::TITLE] = title.constData();
+	      hash[HistoryItem::URL] = QUrl::fromEncoded(url);
+	      hash[HistoryItem::URL_DIGEST] = QByteArray::fromBase64
 		(query.value(5).toByteArray());
 
 	      if(is_favorite)
@@ -290,15 +292,15 @@ void dooble_history::populate(const QByteArray &authentication_key,
 		  favorites << vector;
 		}
 
-	      map.insert(hash.value(LAST_VISITED).toDateTime(),
+	      map.insert(hash.value(HistoryItem::LAST_VISITED).toDateTime(),
 			 QPair<QIcon, QString> (QIcon(), url));
 
 	      QWriteLocker locker(&m_history_mutex);
 
-	      m_history[hash.value(URL).toUrl()] = hash;
+	      m_history[hash.value(HistoryItem::URL).toUrl()] = hash;
 	      m_history_date_time.insert
-		(hash.value(LAST_VISITED).toDateTime(),
-		 hash.value(URL).toUrl());
+		(hash.value(HistoryItem::LAST_VISITED).toDateTime(),
+		 hash.value(HistoryItem::URL).toUrl());
 	    }
       }
 
@@ -446,7 +448,7 @@ void dooble_history::purge_favorites(void)
 	{
 	  QHash<HistoryItem, QVariant> hash(m_history.value(item->text()));
 
-	  hash[FAVORITE] = false;
+	  hash[HistoryItem::FAVORITE] = false;
 	  m_history[item->text()] = hash;
 	}
     }
@@ -558,7 +560,7 @@ void dooble_history::remove_favorite(const QUrl &url)
 
   if(!hash.isEmpty())
     {
-      hash[FAVORITE] = false;
+      hash[HistoryItem::FAVORITE] = false;
       m_history[url] = hash;
     }
 
@@ -615,7 +617,7 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
       QWriteLocker locker(&m_history_mutex);
 
       m_history_date_time.remove
-	(m_history.value(url).value(LAST_VISITED).toDateTime(),
+	(m_history.value(url).value(HistoryItem::LAST_VISITED).toDateTime(),
 	 url);
       m_history.remove(url);
       locker.unlock();
@@ -668,14 +670,15 @@ void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 	auto hash(m_history.value(url));
 
 	if(icon.isNull())
-	  hash[FAVICON] = dooble_favicons::icon(url);
+	  hash[HistoryItem::FAVICON] = dooble_favicons::icon(url);
 	else
-	  hash[FAVICON] = icon;
+	  hash[HistoryItem::FAVICON] = icon;
 
 	m_history[url] = hash;
 	locker.unlock();
 	update_favorite(hash);
-	emit icon_updated(hash.value(FAVICON).value<QIcon> (), url);
+	emit icon_updated
+	  (hash.value(HistoryItem::FAVICON).value<QIcon> (), url);
       }
   }
 }
@@ -692,10 +695,10 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
     {
       hash = m_history.value(url);
 
-      if(hash.value(FAVICON).isNull())
-	hash[FAVICON] = dooble_favicons::icon(url);
+      if(hash.value(HistoryItem::FAVICON).isNull())
+	hash[HistoryItem::FAVICON] = dooble_favicons::icon(url);
 
-      hash[FAVORITE] = state;
+      hash[HistoryItem::FAVORITE] = state;
       m_history[url] = hash;
     }
   else
@@ -704,15 +707,16 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
       ** The item may have been removed via the History window.
       */
 
-      hash[FAVICON] = dooble_favicons::icon(url);
-      hash[FAVORITE] = state;
-      hash[LAST_VISITED] = QDateTime::currentDateTime();
-      hash[NUMBER_OF_VISITS] = 1ULL;
-      hash[TITLE] = url;
-      hash[URL] = url;
+      hash[HistoryItem::FAVICON] = dooble_favicons::icon(url);
+      hash[HistoryItem::FAVORITE] = state;
+      hash[HistoryItem::LAST_VISITED] = QDateTime::currentDateTime();
+      hash[HistoryItem::NUMBER_OF_VISITS] = 1ULL;
+      hash[HistoryItem::TITLE] = url;
+      hash[HistoryItem::URL] = url;
 
       if(dooble::s_cryptography)
-	hash[URL_DIGEST] = dooble::s_cryptography->hmac(url.toEncoded());
+	hash[HistoryItem::URL_DIGEST] =
+	  dooble::s_cryptography->hmac(url.toEncoded());
 
       m_history[url] = hash;
     }
@@ -765,7 +769,8 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	   hmac(state ? QByteArray("true") : QByteArray("false")).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (hash.
-	   value(LAST_VISITED).toDateTime().toString(Qt::ISODate).toUtf8());
+	   value(HistoryItem::LAST_VISITED).
+	   toDateTime().toString(Qt::ISODate).toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -773,18 +778,19 @@ void dooble_history::save_favorite(const QUrl &url, bool state)
 	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (QByteArray::number(hash.value(NUMBER_OF_VISITS, 1).toULongLong()));
+	  (QByteArray::number(hash.value(HistoryItem::NUMBER_OF_VISITS, 1).
+			      toULongLong()));
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
 	else
 	  goto done_label;
 
-	if(hash.value(TITLE).toString().trimmed().isEmpty())
+	if(hash.value(HistoryItem::TITLE).toString().trimmed().isEmpty())
 	  bytes = dooble::s_cryptography->encrypt_then_mac(url.toEncoded());
 	else
 	  bytes = dooble::s_cryptography->encrypt_then_mac
-	    (hash.value(TITLE).toString().trimmed().toUtf8());
+	    (hash.value(HistoryItem::TITLE).toString().trimmed().toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -822,27 +828,30 @@ void dooble_history::save_item(const QIcon &icon,
       auto contains = m_history.contains(item.url());
 
       if(icon.isNull())
-	hash[FAVICON] = dooble_favicons::icon(item.url());
+	hash[HistoryItem::FAVICON] = dooble_favicons::icon(item.url());
       else
-	hash[FAVICON] = icon;
+	hash[HistoryItem::FAVICON] = icon;
 
-      hash[FAVORITE] = m_history.value(item.url()).value(FAVORITE, false);
-      hash[LAST_VISITED] = item.lastVisited();
-      hash[NUMBER_OF_VISITS] =
-	m_history.value(item.url()).value(NUMBER_OF_VISITS, 1).
+      hash[HistoryItem::FAVORITE] =
+	m_history.value(item.url()).value(HistoryItem::FAVORITE, false);
+      hash[HistoryItem::LAST_VISITED] = item.lastVisited();
+      hash[HistoryItem::NUMBER_OF_VISITS] =
+	m_history.value(item.url()).value(HistoryItem::NUMBER_OF_VISITS, 1).
 	toULongLong() + 1;
 
       if(hash.value(FAVORITE).toBool())
-	hash[TITLE] = m_history.value(item.url()).value
-	  (TITLE, item.title().trimmed().mid(0, dooble::MAXIMUM_TITLE_LENGTH));
+	hash[HistoryItem::TITLE] = m_history.value(item.url()).value
+	  (HistoryItem::TITLE,
+	   item.title().trimmed().mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
       else
-	hash[TITLE] = item.title().trimmed().mid
-	  (0, dooble::MAXIMUM_TITLE_LENGTH);
+	hash[HistoryItem::TITLE] = item.title().trimmed().mid
+	  (0, dooble::Limits::MAXIMUM_TITLE_LENGTH);
 
-      hash[URL] = item.url();
+      hash[HistoryItem::URL] = item.url();
 
       if(dooble::s_cryptography)
-	hash[URL_DIGEST] = dooble::s_cryptography->hmac(item.url().toEncoded());
+	hash[HistoryItem::URL_DIGEST] =
+	  dooble::s_cryptography->hmac(item.url().toEncoded());
 
       m_history[item.url()] = hash;
 
@@ -853,7 +862,7 @@ void dooble_history::save_item(const QIcon &icon,
       update_favorite(hash);
 
       if(!contains)
-	emit new_item(hash.value(FAVICON).value<QIcon> (), item);
+	emit new_item(hash.value(HistoryItem::FAVICON).value<QIcon> (), item);
       else
 	emit item_updated(icon, item);
     }
@@ -899,7 +908,8 @@ void dooble_history::save_item(const QIcon &icon,
 
 	  query.addBindValue
 	    (dooble::s_cryptography->
-	     hmac(m_history.value(item.url()).value(FAVORITE, false).toBool() ?
+	     hmac(m_history.value(item.url()).value(HistoryItem::FAVORITE,
+						    false).toBool() ?
 		  QByteArray("true") : QByteArray("false")).toBase64());
 	}
 
@@ -916,7 +926,8 @@ void dooble_history::save_item(const QIcon &icon,
 
 	  bytes = dooble::s_cryptography->encrypt_then_mac
 	    (QByteArray::number(m_history.value(item.url()).
-				value(NUMBER_OF_VISITS, 1).toULongLong()));
+				value(HistoryItem::NUMBER_OF_VISITS, 1).
+				toULongLong()));
 	}
 
 	if(!bytes.isEmpty())
@@ -924,7 +935,7 @@ void dooble_history::save_item(const QIcon &icon,
 	else
 	  goto done_label;
 
-	auto title(hash.value(TITLE).toString().trimmed());
+	auto title(hash.value(HistoryItem::TITLE).toString().trimmed());
 
 	if(title.isEmpty())
 	  bytes = dooble::s_cryptography->encrypt_then_mac
@@ -1070,7 +1081,7 @@ void dooble_history::slot_remove_items(const QListUrl &urls)
     for(const auto &url : urls)
       {
 	m_history_date_time.remove
-	  (m_history.value(url).value(LAST_VISITED).toDateTime(),
+	  (m_history.value(url).value(HistoryItem::LAST_VISITED).toDateTime(),
 	   url);
 	m_history.remove(url);
       }
@@ -1081,10 +1092,10 @@ void dooble_history::slot_remove_items(const QListUrl &urls)
 
 void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 {
-  if(!hash.value(FAVORITE, false).toBool())
+  if(!hash.value(HistoryItem::FAVORITE, false).toBool())
     return;
 
-  auto url(hash.value(URL).toUrl());
+  auto url(hash.value(HistoryItem::URL).toUrl());
 
   if(url.isEmpty() || !url.isValid())
     return;
@@ -1104,12 +1115,13 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	    case 0:
 	      {
 		item->setData(url);
-		item->setIcon(hash.value(FAVICON).value<QIcon> ());
+		item->setIcon(hash.value(HistoryItem::FAVICON).value<QIcon> ());
 
-		if(hash.value(TITLE).toString().trimmed().isEmpty())
-		  item->setText(hash.value(URL).toString());
+		if(hash.value(HistoryItem::TITLE).
+		   toString().trimmed().isEmpty())
+		  item->setText(hash.value(HistoryItem::URL).toString());
 		else
-		  item->setText(hash.value(TITLE).toString());
+		  item->setText(hash.value(HistoryItem::TITLE).toString());
 
 		item->setToolTip
 		  (dooble_ui_utilities::pretty_tool_tip(item->text()));
@@ -1124,14 +1136,15 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	    case 2:
 	      {
 		item->setText
-		  (hash.value(LAST_VISITED).toDateTime().toString(Qt::ISODate));
+		  (hash.value(HistoryItem::LAST_VISITED).
+		   toDateTime().toString(Qt::ISODate));
 		break;
 	      }
 	    case 3:
 	      {
 		item->setText
-		  (QString::number(hash.value(NUMBER_OF_VISITS).toULongLong()).
-		   rightJustified(16, '0'));
+		  (QString::number(hash.value(HistoryItem::NUMBER_OF_VISITS).
+				   toULongLong()).rightJustified(16, '0'));
 		break;
 	      }
 	    }
@@ -1163,12 +1176,13 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	    case 0:
 	      {
 		item->setData(url);
-		item->setIcon(hash.value(FAVICON).value<QIcon> ());
+		item->setIcon(hash.value(HistoryItem::FAVICON).value<QIcon> ());
 
-		if(hash.value(TITLE).toString().trimmed().isEmpty())
-		  item->setText(hash.value(URL).toString());
+		if(hash.value(HistoryItem::TITLE).
+		   toString().trimmed().isEmpty())
+		  item->setText(hash.value(HistoryItem::URL).toString());
 		else
-		  item->setText(hash.value(TITLE).toString());
+		  item->setText(hash.value(HistoryItem::TITLE).toString());
 
 		item->setToolTip
 		  (dooble_ui_utilities::pretty_tool_tip(item->text()));
@@ -1183,14 +1197,15 @@ void dooble_history::update_favorite(const QHash<HistoryItem, QVariant> &hash)
 	    case 2:
 	      {
 		item->setText
-		  (hash.value(LAST_VISITED).toDateTime().toString(Qt::ISODate));
+		  (hash.value(HistoryItem::LAST_VISITED).
+		   toDateTime().toString(Qt::ISODate));
 		break;
 	      }
 	    case 3:
 	      {
 		item->setText
-		  (QString::number(hash.value(NUMBER_OF_VISITS).toULongLong()).
-		   rightJustified(16, '0'));
+		  (QString::number(hash.value(HistoryItem::NUMBER_OF_VISITS).
+				   toULongLong()).rightJustified(16, '0'));
 		break;
 	      }
 	    }

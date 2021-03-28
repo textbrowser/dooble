@@ -531,7 +531,8 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 
 void dooble_page::go_to_backward_item(int index)
 {
-  auto items(m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
+  auto items
+    (m_view->history()->backItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -539,7 +540,8 @@ void dooble_page::go_to_backward_item(int index)
 
 void dooble_page::go_to_forward_item(int index)
 {
-  auto items(m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
+  auto items
+    (m_view->history()->forwardItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -1360,7 +1362,8 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     {
       if(!m_last_javascript_popups.contains(view))
 	{
-	  if(MAXIMUM_JAVASCRIPT_POPUPS <= m_last_javascript_popups.size())
+	  if(ConstantsEnum::MAXIMUM_JAVASCRIPT_POPUPS <=
+	     m_last_javascript_popups.size())
 	    {
 	      view->deleteLater();
 	      return;
@@ -1963,7 +1966,8 @@ void dooble_page::slot_prepare_backward_menu(void)
   m_ui.backward->menu()->clear();
 
   QFontMetrics font_metrics(m_ui.backward->menu()->font());
-  auto items(m_view->history()->backItems(MAXIMUM_HISTORY_ITEMS));
+  auto items
+    (m_view->history()->backItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   m_ui.backward->setEnabled(!items.empty());
 
@@ -1993,7 +1997,8 @@ void dooble_page::slot_prepare_forward_menu(void)
   m_ui.forward->menu()->clear();
 
   QFontMetrics font_metrics(m_ui.forward->menu()->font());
-  auto items(m_view->history()->forwardItems(MAXIMUM_HISTORY_ITEMS));
+  auto items
+    (m_view->history()->forwardItems(ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
 
   m_ui.forward->setEnabled(!items.empty());
 
@@ -2205,7 +2210,7 @@ void dooble_page::slot_show_web_settings_panel(void)
 
 void dooble_page::slot_url_changed(const QUrl &url)
 {
-  if(url.toString().length() > dooble::MAXIMUM_URL_LENGTH)
+  if(url.toString().length() > dooble::Limits::MAXIMUM_URL_LENGTH)
     return;
 
   /*
