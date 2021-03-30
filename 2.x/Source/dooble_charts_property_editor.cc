@@ -286,7 +286,7 @@ dooble_charts_property_editor_model(QObject *parent):
     }
 
   /*
-  ** Chart Axis
+  ** Chart X-Axis
   */
 
   auto chart_axis_x = new QStandardItem(tr("Chart X-Axis"));
@@ -298,7 +298,7 @@ dooble_charts_property_editor_model(QObject *parent):
       QList<QStandardItem *> list;
       auto item = new QStandardItem
 	(dooble_charts::s_axis_properties_strings[i]);
-      auto offset = chart->rowCount() + i;
+      auto offset = 4 + chart->rowCount() + i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -327,6 +327,47 @@ dooble_charts_property_editor_model(QObject *parent):
     }
 
   /*
+  ** Chart Y-Axis
+  */
+
+  auto chart_axis_y = new QStandardItem(tr("Chart Y-Axis"));
+
+  chart_axis_y->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+  for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); i++)
+    {
+      QList<QStandardItem *> list;
+      auto item = new QStandardItem
+	(dooble_charts::s_axis_properties_strings[i]);
+      auto offset = 4 + chart->rowCount() + i;
+
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      item = new QStandardItem();
+      item->setData(dooble_charts::Properties(offset));
+      item->setFlags
+	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      switch(dooble_charts::Properties(offset))
+	{
+	case dooble_charts::Properties::CHART_AXIS_GRID_VISIBLE:
+	  {
+	    item->setFlags(Qt::ItemIsEnabled |
+			   Qt::ItemIsSelectable |
+			   Qt::ItemIsUserCheckable);
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
+      list << item;
+      chart_axis_y->appendRow(list);
+    }
+
+  /*
   ** Data
   */
 
@@ -339,7 +380,10 @@ dooble_charts_property_editor_model(QObject *parent):
       QList<QStandardItem *> list;
       auto item = new QStandardItem
 	(dooble_charts::s_data_properties_strings[i]);
-      auto offset = chart->rowCount() + chart_axis_x->rowCount() + i;
+      auto offset = 4 +
+	chart->rowCount() +
+	chart_axis_x->rowCount() +
+	i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -364,7 +408,8 @@ dooble_charts_property_editor_model(QObject *parent):
       QList<QStandardItem *> list;
       auto item = new QStandardItem
 	(dooble_charts::s_legend_properties_strings[i]);
-      auto offset = chart->rowCount() +
+      auto offset = 4 +
+	chart->rowCount() +
 	chart_axis_x->rowCount() +
 	data->rowCount() +
 	i;
@@ -400,6 +445,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   appendRow(chart);
   appendRow(chart_axis_x);
+  appendRow(chart_axis_y);
   appendRow(data);
   appendRow(legend);
 }
