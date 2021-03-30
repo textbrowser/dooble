@@ -90,7 +90,20 @@ createEditor(QWidget *parent,
       }
     case dooble_charts::Properties::CHART_ANIMATION_OPTIONS:
       {
-	break;
+	auto editor = new QComboBox(parent);
+	int i = -1;
+
+	editor->addItem(tr("All Animations"));
+	editor->addItem(tr("Grid Axis Animations"));
+	editor->addItem(tr("None"));
+	editor->addItem(tr("Series Animations"));
+	i = editor->findText(index.data().toString());
+
+	if(i == -1)
+	  i = 0;
+
+	editor->setCurrentIndex(i);
+	return editor;
       }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
