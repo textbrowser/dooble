@@ -81,6 +81,10 @@ createEditor(QWidget *parent,
   switch(property)
     {
     case dooble_charts::Properties::CHART_ANIMATION_DURATION:
+    case dooble_charts::Properties::CHART_MARGINS_BOTTOM:
+    case dooble_charts::Properties::CHART_MARGINS_LEFT:
+    case dooble_charts::Properties::CHART_MARGINS_RIGHT:
+    case dooble_charts::Properties::CHART_MARGINS_TOP:
       {
 	auto editor = new QSpinBox(parent);
 
