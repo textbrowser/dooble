@@ -611,8 +611,23 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
     (dooble_charts::Properties::CHART_MARGINS, 0);
 
   if(item && item->parent())
-    m_tree->setFirstColumnSpanned
-      (dooble_charts::Properties::CHART_MARGINS, item->parent()->index(), true);
+    {
+      m_tree->setFirstColumnSpanned
+	(dooble_charts::Properties::CHART_MARGINS,
+	 item->parent()->index(),
+	 true);
+
+      for(int i = 0; i < 4; i++)
+	if(item->child(i, 1))
+	  {
+	    auto property = dooble_charts::Properties
+	      (item->child(i, 1)->data(Qt::ItemDataRole(Qt::UserRole + 1)).
+	       toInt());
+
+	    item->child(i, 1)->setText
+	      (chart->properties().value(property).toString());
+	  }
+    }
 
   m_tree->setFirstColumnSpanned(0, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(1, m_tree->rootIndex(), true);
