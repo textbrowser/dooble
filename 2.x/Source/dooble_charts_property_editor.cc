@@ -97,10 +97,10 @@ createEditor(QWidget *parent,
 	auto editor = new QComboBox(parent);
 	int i = -1;
 
-	editor->addItem(tr("All Animations"));
-	editor->addItem(tr("Grid Axis Animations"));
+	editor->addItem(tr("All"));
+	editor->addItem(tr("Grid Axis"));
 	editor->addItem(tr("None"));
-	editor->addItem(tr("Series Animations"));
+	editor->addItem(tr("Series"));
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)

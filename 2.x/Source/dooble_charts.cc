@@ -131,6 +131,21 @@ dooble_charts::~dooble_charts()
 }
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
+QChart::AnimationOption dooble_charts::string_to_chart_animation_option
+(const QString &t)
+{
+  QString text(t.toLower().trimmed());
+
+  if(text == tr("All"))
+    return QChart::AllAnimations;
+  else if(text == tr("Grid Axis"))
+    return QChart::GridAxisAnimations;
+  else if(text == tr("Series"))
+    return QChart::SeriesAnimations;
+  else
+    return QChart::NoAnimation;
+}
+
 QChart::ChartTheme dooble_charts::string_to_chart_theme(const QString &t)
 {
   QString text(t.toLower().trimmed());
