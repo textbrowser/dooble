@@ -316,6 +316,38 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_chart->setLocalizeNumbers(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::CHART_MARGINS_BOTTOM:
+      {
+	auto margins(m_chart->margins());
+
+	margins.setBottom(item->text().toInt());
+	m_chart->setMargins(margins);
+	break;
+      }
+    case dooble_charts::Properties::CHART_MARGINS_LEFT:
+      {
+	auto margins(m_chart->margins());
+
+	margins.setLeft(item->text().toInt());
+	m_chart->setMargins(margins);
+	break;
+      }
+    case dooble_charts::Properties::CHART_MARGINS_RIGHT:
+      {
+	auto margins(m_chart->margins());
+
+	margins.setRight(item->text().toInt());
+	m_chart->setMargins(margins);
+	break;
+      }
+    case dooble_charts::Properties::CHART_MARGINS_TOP:
+      {
+	auto margins(m_chart->margins());
+
+	margins.setTop(item->text().toInt());
+	m_chart->setMargins(margins);
+	break;
+      }
     case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
       {
 	m_chart->setPlotAreaBackgroundVisible
