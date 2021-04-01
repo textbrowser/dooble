@@ -596,6 +596,25 @@ model(void) const
   return m_model;
 }
 
+QVariant dooble_charts_property_editor::property
+(const dooble_charts::Properties property)
+{
+  if(!m_model)
+    return QVariant();
+
+  auto item = m_model->item_from_property(property, 1);
+
+  if(item)
+    {
+      if(item->flags() & Qt::ItemIsUserCheckable)
+	return item->checkState() == Qt::Checked;
+      else
+	return item->text();
+    }
+
+  return QVariant();
+}
+
 void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 {
   if(!chart || !m_model || !m_tree)

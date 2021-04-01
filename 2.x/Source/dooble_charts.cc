@@ -26,6 +26,7 @@
 */
 
 #include "dooble_charts.h"
+#include "dooble_charts_property_editor.h"
 
 #include <QMetaType>
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -403,6 +404,13 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
     case dooble_charts::Properties::CHART_THEME:
       {
 	m_chart->setTheme(string_to_chart_theme(item->text()));
+
+	if(m_property_editor)
+	  m_chart->setDropShadowEnabled
+	    (m_property_editor->
+	     property(dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED).
+	     toBool());
+
 	break;
       }
     case dooble_charts::Properties::CHART_TITLE:
