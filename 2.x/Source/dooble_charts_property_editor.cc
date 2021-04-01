@@ -104,7 +104,7 @@ createEditor(QWidget *parent,
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
-	  i = 0;
+	  i = 2; // None
 
 	editor->setCurrentIndex(i);
 	return editor;
@@ -142,6 +142,27 @@ createEditor(QWidget *parent,
 
 	if(i == -1)
 	  i = 0;
+
+	editor->setCurrentIndex(i);
+	return editor;
+      }
+    case dooble_charts::Properties::CHART_THEME:
+      {
+	auto editor = new QComboBox(parent);
+	int i = -1;
+
+	editor->addItem(tr("Blue Cerulean"));
+	editor->addItem(tr("Blue Icy"));
+	editor->addItem(tr("Blue NCS"));
+	editor->addItem(tr("Brown Sand"));
+	editor->addItem(tr("Dark"));
+	editor->addItem(tr("High Contrast"));
+	editor->addItem(tr("Light"));
+	editor->addItem(tr("Qt"));
+	i = editor->findText(index.data().toString());
+
+	if(i == -1)
+	  i = editor->count() - 1; // Qt
 
 	editor->setCurrentIndex(i);
 	return editor;
@@ -286,10 +307,16 @@ dooble_charts_property_editor_model(QObject *parent):
 	    chart_margins->appendRow(list);
 	    continue;
 	  }
+	case dooble_charts::Properties::CHART_NAME:
+	  {
+	    item->setToolTip(tr("The chart will be saved via the provided "
+				"name. Please specify a unique value."));
+	    break;
+	  }
 	case dooble_charts::Properties::CHART_CHART_TYPE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-	    item->setToolTip("Read-Only");
+	    item->setToolTip(tr("Read-Only"));
 	    break;
 	  }
 	default:

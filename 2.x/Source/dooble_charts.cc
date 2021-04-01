@@ -75,6 +75,7 @@ const QString dooble_charts::s_chart_properties_strings[] =
    tr("Left"),
    tr("Right"),
    tr("Top"),
+   tr("Name"),
    tr("Plot Area Background Visible"),
    tr("Theme"),
    tr("Title"),
