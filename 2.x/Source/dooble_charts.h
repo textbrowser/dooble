@@ -138,6 +138,8 @@ class dooble_charts: public QWidget
   static QChart::AnimationOption string_to_chart_animation_option
     (const QString &t);
   static QChart::ChartTheme string_to_chart_theme(const QString &t);
+  static QString chart_animation_option_to_string
+    (const QChart::AnimationOptions chart_animation_options);
   static QString chart_theme_to_string(const QChart::ChartTheme chart_theme);
   static QString chart_type_to_string(const QChart::ChartType chart_type);
 #endif

@@ -178,7 +178,7 @@ properties(void) const
   properties[dooble_charts::Properties::CHART_ANIMATION_DURATION] = m_chart->
     animationDuration();
   properties[dooble_charts::Properties::CHART_ANIMATION_OPTIONS] =
-    QVariant::fromValue(m_chart->animationOptions());
+    chart_animation_option_to_string(m_chart->animationOptions());
   properties[dooble_charts::Properties::CHART_BACKGROUND_COLOR] = m_chart->
     backgroundBrush().color();
   properties[dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS] = m_chart->
@@ -216,6 +216,30 @@ properties(void) const
 }
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
+QString dooble_charts::chart_animation_option_to_string
+(const QChart::AnimationOptions chart_animation_options)
+{
+  switch(chart_animation_options)
+    {
+    case QChart::AllAnimations:
+      {
+	return tr("All");
+      }
+    case QChart::GridAxisAnimations:
+      {
+	return tr("Grid");
+      }
+    case QChart::SeriesAnimations:
+      {
+	return tr("Series");
+      }
+    default:
+      {
+	return tr("None");
+      }
+    }
+}
+
 QString dooble_charts::chart_theme_to_string
 (const QChart::ChartTheme chart_theme)
 {
