@@ -135,7 +135,7 @@ class dooble_charts: public QWidget
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  static QChart::AnimationOption string_to_chart_animation_option
+  static QChart::AnimationOptions string_to_chart_animation_options
     (const QString &t);
   static QChart::ChartTheme string_to_chart_theme(const QString &t);
   static QString chart_animation_option_to_string

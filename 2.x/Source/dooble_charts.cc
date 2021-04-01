@@ -131,7 +131,7 @@ dooble_charts::~dooble_charts()
 }
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-QChart::AnimationOption dooble_charts::string_to_chart_animation_option
+QChart::AnimationOptions dooble_charts::string_to_chart_animation_options
 (const QString &t)
 {
   QString text(t.toLower().trimmed());
@@ -316,6 +316,12 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
     case dooble_charts::Properties::CHART_ANIMATION_DURATION:
       {
 	m_chart->setAnimationDuration(item->text().toInt());
+	break;
+      }
+    case dooble_charts::Properties::CHART_ANIMATION_OPTIONS:
+      {
+	m_chart->setAnimationOptions
+	  (string_to_chart_animation_options(item->text()));
 	break;
       }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
