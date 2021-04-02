@@ -32,6 +32,7 @@
 
 #include "dooble.h"
 #include "dooble_application.h"
+#include "dooble_charts.h"
 #include "dooble_downloads.h"
 #include "dooble_page.h"
 #include "dooble_tab_bar.h"
@@ -629,11 +630,13 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   webgl_action->setProperty("point", point);
 
   auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  dooble_charts *chart = nullptr;
   dooble_downloads *downloads = nullptr;
   dooble_page *page = nullptr;
 
   if(tab_widget)
     {
+      chart = qobject_cast<dooble_charts *> (tab_widget->widget(tabAt(point)));
       downloads = qobject_cast<dooble_downloads *>
 	(tab_widget->widget(tabAt(point)));
       page = qobject_cast<dooble_page *> (tab_widget->widget(tabAt(point)));
@@ -711,7 +714,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  this,
 			  SLOT(slot_decouple_tab(void)));
 
-  if(downloads)
+  if(chart)
+    action->setEnabled(false);
+  else if(downloads)
     action->setEnabled(count() > 1 && !downloads->is_private() && tab_at > -1);
   else
     action->setEnabled(count() > 1 && !page && tab_at > -1);
