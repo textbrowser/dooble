@@ -110,6 +110,7 @@ createEditor(QWidget *parent,
 	return editor;
       }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
+    case dooble_charts::Properties::CHART_TITLE_COLOR:
       {
 	auto editor = new QPushButton(parent);
 
@@ -309,8 +310,11 @@ dooble_charts_property_editor_model(QObject *parent):
 	  }
 	case dooble_charts::Properties::CHART_NAME:
 	  {
-	    item->setToolTip(tr("The chart will be saved via the provided "
-				"name. Please specify a unique value."));
+	    item->setToolTip
+	      ("<html>" +
+	       tr("The chart will be saved via the provided "
+		  "name. Please specify a unique value.") +
+	       "</html>");
 	    break;
 	  }
 	case dooble_charts::Properties::CHART_CHART_TYPE:
@@ -632,6 +636,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	switch(it.key())
 	  {
 	  case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
+	  case dooble_charts::Properties::CHART_TITLE_COLOR:
 	    {
 	      item->setBackground(QColor(it.value().toString()));
 	      item->setText(it.value().toString());
