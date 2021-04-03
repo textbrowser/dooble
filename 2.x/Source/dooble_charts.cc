@@ -54,6 +54,7 @@ const QString dooble_charts::s_axis_properties_strings[] =
    tr("Shades Color"),
    tr("Shades Visible"),
    tr("Title Color"),
+   tr("Title Font"),
    tr("Title Text"),
    tr("Title Visible"),
    tr("Visible"),
