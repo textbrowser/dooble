@@ -1,4 +1,4 @@
-Dooble is the weather bug browser.
+Dooble is the scientific browser.
 
 <ul>
 <li>A Web browser!</li>
