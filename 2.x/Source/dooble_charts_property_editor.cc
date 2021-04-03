@@ -27,6 +27,7 @@
 
 #include <QColorDialog>
 #include <QComboBox>
+#include <QFontDialog>
 #include <QPlainTextEdit>
 #include <QSpinBox>
 
@@ -168,6 +169,21 @@ createEditor(QWidget *parent,
 	editor->setCurrentIndex(i);
 	return editor;
       }
+    case dooble_charts::Properties::CHART_TITLE_FONT:
+      {
+	auto editor = new QPushButton(parent);
+
+	connect(editor,
+		SIGNAL(clicked(void)),
+		this,
+		SLOT(slot_show_font_dialog(void)));
+	editor->setProperty("property", property);
+	editor->setStyleSheet
+	  (QString("QPushButton {background-color: %1;}").
+	   arg(index.data().toString()));
+	editor->setText(index.data().toString());
+	return editor;
+      }
     case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
       {
 	auto editor = new QPlainTextEdit(parent);
@@ -220,6 +236,15 @@ void dooble_charts_property_editor_model_delegate::slot_show_color_dialog(void)
 
   if(editor)
     emit show_color_dialog
+      (dooble_charts::Properties(editor->property("property").toInt()));
+}
+
+void dooble_charts_property_editor_model_delegate::slot_show_font_dialog(void)
+{
+  auto editor = qobject_cast<QPushButton *> (sender());
+
+  if(editor)
+    emit show_font_dialog
       (dooble_charts::Properties(editor->property("property").toInt()));
 }
 
@@ -586,6 +611,11 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	 SIGNAL(show_color_dialog(const dooble_charts::Properties)),
 	 this,
 	 SLOT(slot_show_color_dialog(const dooble_charts::Properties)));
+      connect
+	(item_delegate,
+	 SIGNAL(show_font_dialog(const dooble_charts::Properties)),
+	 this,
+	 SLOT(slot_show_font_dialog(const dooble_charts::Properties)));
       m_tree->setItemDelegate(item_delegate);
     }
 }
@@ -699,16 +729,39 @@ void dooble_charts_property_editor::slot_show_color_dialog
   if(!m_model)
     return;
 
+  auto item = m_model->item_from_property(property, 1);
+
+  if(!item)
+    return;
+
   QColorDialog dialog(this);
+
+  dialog.setCurrentColor(QColor(item->text()));
 
   if(dialog.exec() == QDialog::Accepted)
     {
-      auto item = m_model->item_from_property(property, 1);
-
-      if(!item)
-	return;
-
       item->setBackground(dialog.selectedColor());
       item->setText(dialog.selectedColor().name());
     }
+}
+
+void dooble_charts_property_editor::slot_show_font_dialog
+(const dooble_charts::Properties property)
+{
+  if(!m_model)
+    return;
+
+  auto item = m_model->item_from_property(property, 1);
+
+  if(!item)
+    return;
+
+  QFont font;
+  QFontDialog dialog(this);
+
+  font.fromString(item->text());
+  dialog.setCurrentFont(font);
+
+  if(dialog.exec() == QDialog::Accepted)
+    item->setText(dialog.selectedFont().toString());
 }
