@@ -137,7 +137,7 @@ dooble_charts::~dooble_charts()
 QChart::AnimationOptions dooble_charts::string_to_chart_animation_options
 (const QString &t)
 {
-  QString text(t.toLower().trimmed());
+  QString text(t.trimmed());
 
   if(text == tr("All"))
     return QChart::AllAnimations;
@@ -151,21 +151,21 @@ QChart::AnimationOptions dooble_charts::string_to_chart_animation_options
 
 QChart::ChartTheme dooble_charts::string_to_chart_theme(const QString &t)
 {
-  QString text(t.toLower().trimmed());
+  QString text(t.trimmed());
 
-  if(text == tr("blue cerulean"))
+  if(text == tr("Blue Cerulean"))
     return QChart::ChartThemeBlueCerulean;
-  else if(text == tr("blue icy"))
+  else if(text == tr("Blue Icy"))
     return QChart::ChartThemeBlueIcy;
-  else if(text == tr("blue ncs"))
+  else if(text == tr("Blue NCS"))
     return QChart::ChartThemeBlueNcs;
-  else if(text == tr("brown sand"))
+  else if(text == tr("Brown Sand"))
     return QChart::ChartThemeBrownSand;
-  else if(text == tr("dark"))
+  else if(text == tr("Dark"))
     return QChart::ChartThemeDark;
-  else if(text == tr("high contrast"))
+  else if(text == tr("High Contrast"))
     return QChart::ChartThemeHighContrast;
-  else if(text == tr("light"))
+  else if(text == tr("Light"))
     return QChart::ChartThemeLight;
   else
     return QChart::ChartThemeQt;
