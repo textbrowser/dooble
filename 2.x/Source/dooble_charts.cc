@@ -218,6 +218,26 @@ properties(void) const
   return properties;
 }
 
+QHash<dooble_charts::Properties, QVariant> dooble_charts::
+x_axis_properties(void) const
+{
+  QHash<dooble_charts::Properties, QVariant> properties;
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+#endif
+  return properties;
+}
+
+QHash<dooble_charts::Properties, QVariant> dooble_charts::
+y_axis_properties(void) const
+{
+  QHash<dooble_charts::Properties, QVariant> properties;
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+#endif
+  return properties;
+}
+
 #ifdef DOOBLE_QTCHARTS_PRESENT
 QString dooble_charts::chart_animation_option_to_string
 (const QChart::AnimationOptions chart_animation_options)
