@@ -110,6 +110,13 @@ createEditor(QWidget *parent,
 	editor->setCurrentIndex(i);
 	return editor;
       }
+    case dooble_charts::Properties::CHART_AXIS_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_LABELS_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_SHADES_BORDER_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_SHADES_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_TITLE_COLOR:
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
     case dooble_charts::Properties::CHART_TITLE_COLOR:
       {
@@ -119,6 +126,23 @@ createEditor(QWidget *parent,
 		SIGNAL(clicked(void)),
 		this,
 		SLOT(slot_show_color_dialog(void)));
+	editor->setProperty("property", property);
+	editor->setStyleSheet
+	  (QString("QPushButton {background-color: %1;}").
+	   arg(index.data().toString()));
+	editor->setText(index.data().toString());
+	return editor;
+      }
+    case dooble_charts::Properties::CHART_AXIS_LABELS_FONT:
+    case dooble_charts::Properties::CHART_AXIS_TITLE_FONT:
+    case dooble_charts::Properties::CHART_TITLE_FONT:
+      {
+	auto editor = new QPushButton(parent);
+
+	connect(editor,
+		SIGNAL(clicked(void)),
+		this,
+		SLOT(slot_show_font_dialog(void)));
 	editor->setProperty("property", property);
 	editor->setStyleSheet
 	  (QString("QPushButton {background-color: %1;}").
@@ -167,21 +191,6 @@ createEditor(QWidget *parent,
 	  i = editor->count() - 1; // Qt
 
 	editor->setCurrentIndex(i);
-	return editor;
-      }
-    case dooble_charts::Properties::CHART_TITLE_FONT:
-      {
-	auto editor = new QPushButton(parent);
-
-	connect(editor,
-		SIGNAL(clicked(void)),
-		this,
-		SLOT(slot_show_font_dialog(void)));
-	editor->setProperty("property", property);
-	editor->setStyleSheet
-	  (QString("QPushButton {background-color: %1;}").
-	   arg(index.data().toString()));
-	editor->setText(index.data().toString());
 	return editor;
       }
     case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
@@ -665,6 +674,13 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       if(item)
 	switch(it.key())
 	  {
+	  case dooble_charts::Properties::CHART_AXIS_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_GRID_LINE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_LABELS_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_SHADES_BORDER_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_SHADES_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_TITLE_COLOR:
 	  case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
 	  case dooble_charts::Properties::CHART_TITLE_COLOR:
 	    {
