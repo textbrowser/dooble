@@ -170,6 +170,21 @@ QChart::ChartTheme dooble_charts::string_to_chart_theme(const QString &t)
   else
     return QChart::ChartThemeQt;
 }
+
+QHash<dooble_charts::Properties, QVariant> dooble_charts::axis_properties
+(QAbstractAxis *axis) const
+{
+  QHash<dooble_charts::Properties, QVariant> properties;
+
+  if(!axis)
+    return properties;
+
+  properties[CHART_AXIS_ALIGNMENT_HORIZONTAL] =
+    Qt::AlignHorizontal_Mask & m_x_axis->alignment();
+  properties[CHART_AXIS_ALIGNMENT_VERTICAL] =
+    Qt::AlignVertical_Mask & m_x_axis->alignment();
+  return properties;
+}
 #endif
 
 QHash<dooble_charts::Properties, QVariant> dooble_charts::
@@ -224,13 +239,7 @@ x_axis_properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  if(!m_x_axis)
-    return properties;
-
-  properties[CHART_AXIS_ALIGNMENT_HORIZONTAL] =
-    Qt::AlignHorizontal_Mask & m_x_axis->alignment();
-  properties[CHART_AXIS_ALIGNMENT_VERTICAL] =
-    Qt::AlignVertical_Mask & m_x_axis->alignment();
+  return axis_properties(m_x_axis);
 #endif
   return properties;
 }
@@ -241,8 +250,7 @@ y_axis_properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  if(!m_y_axis)
-    return properties;
+  return axis_properties(m_y_axis);
 #endif
   return properties;
 }

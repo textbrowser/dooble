@@ -136,6 +136,10 @@ class dooble_charts: public QWidget
 
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  QHash<dooble_charts::Properties, QVariant> axis_properties
+    (QAbstractAxis *axis) const;
+#endif
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
   QHash<dooble_charts::Properties, QVariant> x_axis_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> y_axis_properties(void) const;
