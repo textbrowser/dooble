@@ -224,6 +224,13 @@ x_axis_properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
+  if(!m_x_axis)
+    return properties;
+
+  properties[CHART_AXIS_ALIGNMENT_HORIZONTAL] =
+    Qt::AlignHorizontal_Mask & m_x_axis->alignment();
+  properties[CHART_AXIS_ALIGNMENT_VERTICAL] =
+    Qt::AlignVertical_Mask & m_x_axis->alignment();
 #endif
   return properties;
 }
@@ -234,6 +241,8 @@ y_axis_properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
+  if(!m_y_axis)
+    return properties;
 #endif
   return properties;
 }

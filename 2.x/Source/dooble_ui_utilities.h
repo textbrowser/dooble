@@ -33,6 +33,7 @@ class QWidget;
 class dooble_ui_utilities
 {
  public:
+  static QString alignment_to_string(const Qt::Alignment alignment);
   static QString pretty_size(qint64 size);
   static QString pretty_tool_tip(const QString &text);
   static QUrl simplified_url(const QUrl &u);

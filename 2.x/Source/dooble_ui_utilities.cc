@@ -34,6 +34,45 @@
 #include "dooble_application.h"
 #include "dooble_ui_utilities.h"
 
+QString dooble_ui_utilities::alignment_to_string(const Qt::Alignment alignment)
+{
+  switch(alignment)
+    {
+    case Qt::AlignBottom:
+      {
+	return QObject::tr("Bottom");
+      }
+    case Qt::AlignHCenter:
+      {
+	return QObject::tr("Horizontal Center");
+      }
+    case Qt::AlignJustify:
+      {
+	return QObject::tr("Justify");
+      }
+    case Qt::AlignLeft:
+      {
+	return QObject::tr("Left");
+      }
+    case Qt::AlignRight:
+      {
+	return QObject::tr("Right");
+      }
+    case Qt::AlignTop:
+      {
+	return QObject::tr("Top");
+      }
+    case Qt::AlignVCenter:
+      {
+	return QObject::tr("Vertical Center");
+      }
+    default:
+      {
+	return "";
+      }
+    }
+}
+
 QString dooble_ui_utilities::pretty_size(qint64 size)
 {
   if(size < 0)
@@ -209,7 +248,7 @@ void dooble_ui_utilities::enable_mac_brushed_metal(QWidget *widget)
 
 #ifdef Q_OS_MACOS
   widget->setAttribute
-    (Qt::WA_MacBrushedMetal, dooble::s_application->
-                             style_name() == "macintosh");
+    (Qt::WA_MacBrushedMetal,
+     dooble::s_application->style_name() == "macintosh");
 #endif
 }
