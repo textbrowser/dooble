@@ -179,10 +179,22 @@ QHash<dooble_charts::Properties, QVariant> dooble_charts::axis_properties
   if(!axis)
     return properties;
 
-  properties[CHART_AXIS_ALIGNMENT_HORIZONTAL] =
+  properties[dooble_charts::Properties::CHART_AXIS_ALIGNMENT_HORIZONTAL] =
     Qt::AlignHorizontal_Mask & m_x_axis->alignment();
-  properties[CHART_AXIS_ALIGNMENT_VERTICAL] =
+  properties[dooble_charts::Properties::CHART_AXIS_ALIGNMENT_VERTICAL] =
     Qt::AlignVertical_Mask & m_x_axis->alignment();
+  properties[dooble_charts::Properties::CHART_AXIS_COLOR] = axis->
+    linePenColor();
+  properties[dooble_charts::Properties::CHART_AXIS_GRID_LINE_COLOR] = axis->
+    gridLineColor();
+  properties[dooble_charts::Properties::CHART_AXIS_GRID_VISIBLE] = axis->
+    isGridLineVisible();
+  properties[dooble_charts::Properties::CHART_AXIS_LABELS_ANGLE] = axis->
+    labelsAngle();
+  properties[dooble_charts::Properties::CHART_AXIS_LABELS_COLOR] = axis->
+    labelsColor();
+  properties[dooble_charts::Properties::CHART_AXIS_LABELS_FONT] = axis->
+    labelsFont();
   return properties;
 }
 #endif
