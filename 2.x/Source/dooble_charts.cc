@@ -195,6 +195,30 @@ QHash<dooble_charts::Properties, QVariant> dooble_charts::axis_properties
     labelsColor();
   properties[dooble_charts::Properties::CHART_AXIS_LABELS_FONT] = axis->
     labelsFont();
+  properties[dooble_charts::Properties::CHART_AXIS_LABELS_VISIBLE] = axis->
+    labelsVisible();
+  properties[dooble_charts::Properties::CHART_AXIS_LINE_VISIBLE] = axis->
+    isLineVisible();
+  properties[dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_COLOR] =
+    axis->minorGridLineColor();
+  properties[dooble_charts::Properties::CHART_AXIS_ORIENTATION] = axis->
+    orientation();
+  properties[dooble_charts::Properties::CHART_AXIS_REVERSE] = axis->
+    isReverse();
+  properties[dooble_charts::Properties::CHART_AXIS_SHADES_BORDER_COLOR] =
+    axis->shadesBorderColor();
+  properties[dooble_charts::Properties::CHART_AXIS_SHADES_VISIBLE] = axis->
+    shadesVisible();
+  properties[dooble_charts::Properties::CHART_AXIS_TITLE_COLOR] = axis->
+    titleBrush().color();
+  properties[dooble_charts::Properties::CHART_AXIS_TITLE_FONT] = axis->
+    titleFont();
+  properties[dooble_charts::Properties::CHART_AXIS_TITLE_TEXT] = axis->
+    titleText();
+  properties[dooble_charts::Properties::CHART_AXIS_TITLE_VISIBLE] = axis->
+    isTitleVisible();
+  properties[dooble_charts::Properties::CHART_AXIS_VISIBLE] = axis->
+    isVisible();
   return properties;
 }
 #endif
