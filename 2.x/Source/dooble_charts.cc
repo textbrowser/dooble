@@ -37,7 +37,8 @@ Q_DECLARE_METATYPE(QChart::AnimationOptions)
 
 const QString dooble_charts::s_axis_properties_strings[] =
   {
-   tr("Alignment"),
+   tr("Alignment Horizontal"),
+   tr("Alignment Vertical"),
    tr("Color"),
    tr("Grid Line Color"),
    tr("Grid Visible"),
@@ -47,7 +48,7 @@ const QString dooble_charts::s_axis_properties_strings[] =
    tr("Labels Visible"),
    tr("Line Visible"),
    tr("Minor Grid Line Color"),
-   tr("Minor Grid Visible"),
+   tr("Minor Grid Line Visible"),
    tr("Orientation"),
    tr("Reverse"),
    tr("Shades Border Color"),
@@ -201,12 +202,16 @@ QHash<dooble_charts::Properties, QVariant> dooble_charts::axis_properties
     isLineVisible();
   properties[dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_COLOR] =
     axis->minorGridLineColor();
+  properties[dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_VISIBLE] =
+    axis->isMinorGridLineVisible();
   properties[dooble_charts::Properties::CHART_AXIS_ORIENTATION] = axis->
     orientation();
   properties[dooble_charts::Properties::CHART_AXIS_REVERSE] = axis->
     isReverse();
   properties[dooble_charts::Properties::CHART_AXIS_SHADES_BORDER_COLOR] =
     axis->shadesBorderColor();
+  properties[dooble_charts::Properties::CHART_AXIS_SHADES_COLOR] = axis->
+    shadesColor();
   properties[dooble_charts::Properties::CHART_AXIS_SHADES_VISIBLE] = axis->
     shadesVisible();
   properties[dooble_charts::Properties::CHART_AXIS_TITLE_COLOR] = axis->

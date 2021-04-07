@@ -663,7 +663,9 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   if(!chart || !m_model || !m_tree)
     return;
 
-  QHashIterator<dooble_charts::Properties, QVariant> it(chart->properties());
+  QHashIterator<dooble_charts::Properties, QVariant> it
+    (chart->properties().
+     unite(chart->x_axis_properties()));
 
   while(it.hasNext())
     {
