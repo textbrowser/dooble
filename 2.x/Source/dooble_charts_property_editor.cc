@@ -110,13 +110,20 @@ createEditor(QWidget *parent,
 	editor->setCurrentIndex(i);
 	return editor;
       }
-    case dooble_charts::Properties::CHART_AXIS_COLOR:
-    case dooble_charts::Properties::CHART_AXIS_GRID_LINE_COLOR:
-    case dooble_charts::Properties::CHART_AXIS_LABELS_COLOR:
-    case dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_COLOR:
-    case dooble_charts::Properties::CHART_AXIS_SHADES_BORDER_COLOR:
-    case dooble_charts::Properties::CHART_AXIS_SHADES_COLOR:
-    case dooble_charts::Properties::CHART_AXIS_TITLE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_SHADES_BORDER_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_SHADES_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_BORDER_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
     case dooble_charts::Properties::CHART_TITLE_COLOR:
       {
@@ -133,8 +140,10 @@ createEditor(QWidget *parent,
 	editor->setText(index.data().toString());
 	return editor;
       }
-    case dooble_charts::Properties::CHART_AXIS_LABELS_FONT:
-    case dooble_charts::Properties::CHART_AXIS_TITLE_FONT:
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_FONT:
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_FONT:
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_FONT:
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_FONT:
     case dooble_charts::Properties::CHART_TITLE_FONT:
       {
 	auto editor = new QPushButton(parent);
@@ -391,7 +400,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::Properties::CHART_AXIS_GRID_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled |
 			   Qt::ItemIsSelectable |
@@ -432,7 +441,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
-	case dooble_charts::Properties::CHART_AXIS_GRID_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled |
 			   Qt::ItemIsSelectable |
@@ -465,6 +474,7 @@ dooble_charts_property_editor_model(QObject *parent):
       auto offset = 4 +
 	chart->rowCount() +
 	chart_axis_x->rowCount() +
+	chart_axis_y->rowCount() +
 	i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -676,13 +686,20 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       if(item)
 	switch(it.key())
 	  {
-	  case dooble_charts::Properties::CHART_AXIS_COLOR:
-	  case dooble_charts::Properties::CHART_AXIS_GRID_LINE_COLOR:
-	  case dooble_charts::Properties::CHART_AXIS_LABELS_COLOR:
-	  case dooble_charts::Properties::CHART_AXIS_MINOR_GRID_LINE_COLOR:
-	  case dooble_charts::Properties::CHART_AXIS_SHADES_BORDER_COLOR:
-	  case dooble_charts::Properties::CHART_AXIS_SHADES_COLOR:
-	  case dooble_charts::Properties::CHART_AXIS_TITLE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_LABELS_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_SHADES_BORDER_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_SHADES_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_X_TITLE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_LABELS_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_SHADES_BORDER_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_SHADES_COLOR:
+	  case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
 	  case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
 	  case dooble_charts::Properties::CHART_TITLE_COLOR:
 	    {
