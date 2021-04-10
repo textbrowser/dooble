@@ -4,9 +4,9 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node19 [label="QTableWidgetItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node19 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="QTableWidgetItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node23 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node0 [label="dooble_accepted_or\l_blocked_domains_item",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__accepted__or__blocked__domains__item.html",tooltip=" "];
-  Node19 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node21 [label="dooble_history_window\l_favorite_item",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__history__window__favorite__item.html",tooltip=" "];
+  Node23 -> Node25 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="dooble_history_window\l_favorite_item",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__history__window__favorite__item.html",tooltip=" "];
 }

@@ -4,15 +4,9 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node49 [label="QDialog",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node49 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node0 [label="dooble_clear_items",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__clear__items.html",tooltip=" "];
-  Node49 -> Node51 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node51 [label="dooble_favorites_popup",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__favorites__popup.html",tooltip=" "];
-  Node49 -> Node52 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node52 [label="dooble_popup_menu",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__popup__menu.html",tooltip=" "];
-  Node49 -> Node53 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node53 [label="dooble_search_engines\l_popup",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__search__engines__popup.html",tooltip=" "];
-  Node49 -> Node54 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node54 [label="dooble_style_sheet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__style__sheet.html",tooltip=" "];
+  Node36 [label="QStandardItemModel",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node36 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="dooble_charts_property\l_editor_model",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__charts__property__editor__model.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="dooble_charts_property\l_editor_model_xyseries",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__charts__property__editor__model__xyseries.html",tooltip=" "];
 }

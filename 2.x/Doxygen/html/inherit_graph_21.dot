@@ -4,7 +4,7 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node17 [label="QTabWidget",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node17 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node0 [label="dooble_tab_widget",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__tab__widget.html",tooltip=" "];
+  Node31 [label="QTabBar",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node31 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="dooble_tab_bar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdooble__tab__bar.html",tooltip=" "];
 }
