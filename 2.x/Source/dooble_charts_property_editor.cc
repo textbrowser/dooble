@@ -436,7 +436,10 @@ dooble_charts_property_editor_model(QObject *parent):
       QList<QStandardItem *> list;
       auto item = new QStandardItem
 	(dooble_charts::s_axis_properties_strings[i]);
-      auto offset = 4 + chart->rowCount() + i;
+      auto offset = 4 +
+	chart_axis_x->rowCount() +
+	chart->rowCount() +
+	i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
