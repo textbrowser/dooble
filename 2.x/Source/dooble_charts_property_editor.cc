@@ -401,6 +401,12 @@ dooble_charts_property_editor_model(QObject *parent):
       switch(dooble_charts::Properties(offset))
 	{
 	case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled |
 			   Qt::ItemIsSelectable |
@@ -442,6 +448,12 @@ dooble_charts_property_editor_model(QObject *parent):
       switch(dooble_charts::Properties(offset))
 	{
 	case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled |
 			   Qt::ItemIsSelectable |
@@ -675,7 +687,8 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 
   QHashIterator<dooble_charts::Properties, QVariant> it
     (chart->properties().
-     unite(chart->x_axis_properties()));
+     unite(chart->x_axis_properties()).
+     unite(chart->y_axis_properties()));
 
   while(it.hasNext())
     {
@@ -707,6 +720,20 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	      item->setText(it.value().toString());
 	      break;
 	    }
+	  case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
 	  case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
 	  case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
 	  case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
