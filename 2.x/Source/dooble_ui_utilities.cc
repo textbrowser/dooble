@@ -73,7 +73,23 @@ QString dooble_ui_utilities::alignment_to_string(const Qt::Alignment alignment)
     }
 }
 
-QString dooble_ui_utilities::pretty_size(qint64 size)
+QString dooble_ui_utilities::orientation_to_string
+(const Qt::Orientation orientation)
+{
+  switch(orientation)
+    {
+    case Qt::Horizontal:
+      {
+	return QObject::tr("Horizontal");
+      }
+    default:
+      {
+	return QObject::tr("Vertical");
+      }
+    }
+}
+
+QString dooble_ui_utilities::pretty_size(const qint64 size)
 {
   if(size < 0)
     return QObject::tr("0 Bytes");

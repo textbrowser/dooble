@@ -27,6 +27,7 @@
 
 #include "dooble_charts.h"
 #include "dooble_charts_property_editor.h"
+#include "dooble_ui_utilities.h"
 
 #include <QMetaType>
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -252,8 +253,8 @@ x_axis_properties(void) const
     m_x_axis->minorGridLineColor();
   properties[dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE] =
     m_x_axis->isMinorGridLineVisible();
-  properties[dooble_charts::Properties::CHART_AXIS_X_ORIENTATION] = m_x_axis->
-    orientation();
+  properties[dooble_charts::Properties::CHART_AXIS_X_ORIENTATION] =
+    dooble_ui_utilities::orientation_to_string(m_x_axis->orientation());
   properties[dooble_charts::Properties::CHART_AXIS_X_REVERSE] = m_x_axis->
     isReverse();
   properties[dooble_charts::Properties::CHART_AXIS_X_SHADES_BORDER_COLOR] =
@@ -309,8 +310,8 @@ y_axis_properties(void) const
     m_y_axis->minorGridLineColor();
   properties[dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE] =
     m_y_axis->isMinorGridLineVisible();
-  properties[dooble_charts::Properties::CHART_AXIS_Y_ORIENTATION] = m_y_axis->
-    orientation();
+  properties[dooble_charts::Properties::CHART_AXIS_Y_ORIENTATION] =
+    dooble_ui_utilities::orientation_to_string(m_y_axis->orientation());
   properties[dooble_charts::Properties::CHART_AXIS_Y_REVERSE] = m_y_axis->
     isReverse();
   properties[dooble_charts::Properties::CHART_AXIS_Y_SHADES_BORDER_COLOR] =
