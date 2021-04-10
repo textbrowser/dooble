@@ -404,6 +404,7 @@ dooble_charts_property_editor_model(QObject *parent):
 	case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_X_REVERSE:
 	case dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
@@ -454,6 +455,7 @@ dooble_charts_property_editor_model(QObject *parent):
 	case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
+	case dooble_charts::Properties::CHART_AXIS_Y_REVERSE:
 	case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
@@ -727,6 +729,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_X_REVERSE:
 	  case dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
@@ -734,6 +737,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
+	  case dooble_charts::Properties::CHART_AXIS_Y_REVERSE:
 	  case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
 	  case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
