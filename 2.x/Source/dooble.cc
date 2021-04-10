@@ -53,6 +53,7 @@
 #include "dooble_hmac.h"
 #include "dooble_page.h"
 #include "dooble_pbkdf2.h"
+#include "dooble_random.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 #include "dooble_ui_utilities.h"
@@ -2165,6 +2166,9 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	 dooble_settings::setting("hash_type").toString());
 
       cryptography.authenticate(salt, salted_password, text);
+      text = dooble_random::random_bytes(ui.password->text().length()).toHex();
+      ui.password->setText
+	(dooble_random::random_bytes(ui.password->text().length()).toHex());
       ui.password->clear();
 
       if(!cryptography.authenticated())
@@ -2321,6 +2325,9 @@ void dooble::slot_authenticate(void)
       auto text(ui.password->text());
 
       s_cryptography->authenticate(salt, salted_password, text);
+      text = dooble_random::random_bytes(ui.password->text().length()).toHex();
+      ui.password->setText
+	(dooble_random::random_bytes(ui.password->text().length()).toHex());
       ui.password->clear();
 
       if(s_cryptography->authenticated())
