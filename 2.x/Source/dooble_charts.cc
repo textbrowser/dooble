@@ -450,6 +450,21 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	  (string_to_chart_animation_options(item->text()));
 	break;
       }
+    case dooble_charts::Properties::CHART_AXIS_X_COLOR:
+      {
+	m_x_axis->setLinePenColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR:
+      {
+	m_x_axis->setGridLineColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
+      {
+	m_x_axis->setGridLineVisible(item->checkState() == Qt::Checked);
+	break;
+      }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
 	QBrush brush(m_chart->backgroundBrush());
