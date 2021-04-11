@@ -230,9 +230,11 @@ x_axis_properties(void) const
     return properties;
 
   properties[dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_HORIZONTAL] =
-    Qt::AlignHorizontal_Mask & m_x_axis->alignment();
+    dooble_ui_utilities::alignment_to_string
+    (Qt::Alignment(Qt::AlignHorizontal_Mask & m_x_axis->alignment()));
   properties[dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_VERTICAL] =
-    Qt::AlignVertical_Mask & m_x_axis->alignment();
+    dooble_ui_utilities::alignment_to_string
+    (Qt::Alignment(Qt::AlignVertical_Mask & m_x_axis->alignment()));
   properties[dooble_charts::Properties::CHART_AXIS_X_COLOR] = m_x_axis->
     linePenColor();
   properties[dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR] =
@@ -287,9 +289,11 @@ y_axis_properties(void) const
     return properties;
 
   properties[dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_HORIZONTAL] =
-    Qt::AlignHorizontal_Mask & m_y_axis->alignment();
+    dooble_ui_utilities::alignment_to_string
+    (Qt::Alignment(Qt::AlignHorizontal_Mask & m_y_axis->alignment()));
   properties[dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_VERTICAL] =
-    Qt::AlignVertical_Mask & m_y_axis->alignment();
+    dooble_ui_utilities::alignment_to_string
+    (Qt::Alignment(Qt::AlignVertical_Mask & m_y_axis->alignment()));
   properties[dooble_charts::Properties::CHART_AXIS_Y_COLOR] = m_y_axis->
     linePenColor();
   properties[dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR] =

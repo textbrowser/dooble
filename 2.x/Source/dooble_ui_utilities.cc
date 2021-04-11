@@ -38,9 +38,21 @@ QString dooble_ui_utilities::alignment_to_string(const Qt::Alignment alignment)
 {
   switch(alignment)
     {
+    case Qt::AlignAbsolute:
+      {
+	return QObject::tr("Absolute");
+      }
+    case Qt::AlignBaseline:
+      {
+	return QObject::tr("Baseline");
+      }
     case Qt::AlignBottom:
       {
 	return QObject::tr("Bottom");
+      }
+    case Qt::AlignCenter:
+      {
+	return QObject::tr("Center");
       }
     case Qt::AlignHCenter:
       {
@@ -68,7 +80,7 @@ QString dooble_ui_utilities::alignment_to_string(const Qt::Alignment alignment)
       }
     default:
       {
-	return "";
+	return QObject::tr("None");
       }
     }
 }
