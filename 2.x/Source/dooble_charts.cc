@@ -465,6 +465,30 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_x_axis->setGridLineVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_ANGLE:
+      {
+	m_x_axis->setLabelsAngle(item->text().toInt());
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_COLOR:
+      {
+	m_x_axis->setLabelsColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  m_x_axis->setLabelsFont(font);
+
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
+      {
+	m_x_axis->setLabelsVisible(item->checkState() == Qt::Checked);
+	break;
+      }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
 	QBrush brush(m_chart->backgroundBrush());
