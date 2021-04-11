@@ -136,6 +136,22 @@ QUrl dooble_ui_utilities::simplified_url(const QUrl &u)
   return url;
 }
 
+Qt::Alignment dooble_ui_utilities::string_to_alignment(const QString &t)
+{
+  QString text(t.trimmed());
+
+  if(text == "Bottom")
+    return Qt::AlignBottom;
+  else if(text == "Left")
+    return Qt::AlignLeft;
+  else if(text == "Right")
+    return Qt::AlignRight;
+  else if(text == "Top")
+    return Qt::AlignTop;
+  else
+    return Qt::AlignCenter;
+}
+
 bool dooble_ui_utilities::allowed_scheme(const QUrl &url)
 {
   auto scheme(url.scheme());

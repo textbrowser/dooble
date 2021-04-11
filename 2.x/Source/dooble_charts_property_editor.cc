@@ -400,6 +400,13 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
+	case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_HORIZONTAL:
+	case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_VERTICAL:
+	  {
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setToolTip(tr("Read-Only"));
+	    break;
+	  }
 	case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
@@ -451,6 +458,13 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
+	case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_HORIZONTAL:
+	case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_VERTICAL:
+	  {
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setToolTip(tr("Read-Only"));
+	    break;
+	  }
 	case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
 	case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:

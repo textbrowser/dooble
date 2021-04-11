@@ -431,6 +431,9 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
     return;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
+  if(!m_x_axis || !m_y_axis)
+    return;
+
   auto property = dooble_charts::Properties
     (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
