@@ -29,8 +29,8 @@
 #include "dooble_charts_property_editor.h"
 #include "dooble_ui_utilities.h"
 
-#include <QMetaType>
 #ifdef DOOBLE_QTCHARTS_PRESENT
+#include <QMetaType>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
