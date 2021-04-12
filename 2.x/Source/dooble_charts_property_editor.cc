@@ -402,6 +402,7 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_HORIZONTAL:
 	case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_VERTICAL:
+	case dooble_charts::Properties::CHART_AXIS_X_ORIENTATION:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	    item->setToolTip(tr("Read-Only"));
@@ -460,6 +461,7 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_HORIZONTAL:
 	case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_VERTICAL:
+	case dooble_charts::Properties::CHART_AXIS_Y_ORIENTATION:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	    item->setToolTip(tr("Read-Only"));

@@ -140,16 +140,26 @@ Qt::Alignment dooble_ui_utilities::string_to_alignment(const QString &t)
 {
   QString text(t.trimmed());
 
-  if(text == "Bottom")
+  if(text == QObject::tr("Bottom"))
     return Qt::AlignBottom;
-  else if(text == "Left")
+  else if(text == QObject::tr("Left"))
     return Qt::AlignLeft;
-  else if(text == "Right")
+  else if(text == QObject::tr("Right"))
     return Qt::AlignRight;
-  else if(text == "Top")
+  else if(text == QObject::tr("Top"))
     return Qt::AlignTop;
   else
     return Qt::AlignCenter;
+}
+
+Qt::Orientation dooble_ui_utilities::string_to_orientation(const QString &t)
+{
+  QString text(t.trimmed());
+
+  if(text == QObject::tr("Horizontal"))
+    return Qt::Horizontal;
+  else
+    return Qt::Vertical;
 }
 
 bool dooble_ui_utilities::allowed_scheme(const QUrl &url)

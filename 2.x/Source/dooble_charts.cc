@@ -489,6 +489,16 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_x_axis->setLabelsVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_COLOR:
+      {
+	m_x_axis->setMinorGridLineColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
+      {
+	m_x_axis->setMinorGridLineVisible(item->checkState() == Qt::Checked);
+	break;
+      }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
 	QBrush brush(m_chart->backgroundBrush());
