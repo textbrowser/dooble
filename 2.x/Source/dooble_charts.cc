@@ -489,6 +489,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_x_axis->setLabelsVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
+      {
+	m_x_axis->setLineVisible(item->checkState() == Qt::Checked);
+	break;
+      }
     case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_COLOR:
       {
 	m_x_axis->setMinorGridLineColor(QColor(item->text()));
@@ -549,6 +554,112 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
     case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
       {
 	m_x_axis->setVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_COLOR:
+      {
+	m_y_axis->setLinePenColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR:
+      {
+	m_y_axis->setGridLineColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
+      {
+	m_y_axis->setGridLineVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_ANGLE:
+      {
+	m_y_axis->setLabelsAngle(item->text().toInt());
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_COLOR:
+      {
+	m_y_axis->setLabelsColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  m_y_axis->setLabelsFont(font);
+
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
+      {
+	m_y_axis->setLabelsVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
+      {
+	m_y_axis->setLineVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_COLOR:
+      {
+	m_y_axis->setMinorGridLineColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
+      {
+	m_y_axis->setMinorGridLineVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_REVERSE:
+      {
+	m_y_axis->setReverse(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_BORDER_COLOR:
+      {
+	m_y_axis->setShadesBorderColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_COLOR:
+      {
+	m_y_axis->setShadesColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
+      {
+	m_y_axis->setShadesVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
+      {
+	auto brush(m_chart->titleBrush());
+
+	brush.setColor(QColor(item->text()));
+	m_y_axis->setTitleBrush(brush);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  m_y_axis->setTitleFont(font);
+
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_TEXT:
+      {
+	m_y_axis->setTitleText(item->text());
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
+      {
+	m_y_axis->setTitleVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
+      {
+	m_y_axis->setVisible(item->checkState() == Qt::Checked);
 	break;
       }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
