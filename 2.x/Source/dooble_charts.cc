@@ -519,9 +519,41 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_x_axis->setShadesVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_COLOR:
+      {
+	auto brush(m_chart->titleBrush());
+
+	brush.setColor(QColor(item->text()));
+	m_x_axis->setTitleBrush(brush);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  m_x_axis->setTitleFont(font);
+
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_TEXT:
+      {
+	m_x_axis->setTitleText(item->text());
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
+      {
+	m_x_axis->setTitleVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
+      {
+	m_x_axis->setVisible(item->checkState() == Qt::Checked);
+	break;
+      }
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
       {
-	QBrush brush(m_chart->backgroundBrush());
+	auto brush(m_chart->backgroundBrush());
 
 	brush.setColor(QColor(item->text()));
 	m_chart->setBackgroundBrush(brush);
@@ -613,7 +645,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::CHART_TITLE_COLOR:
       {
-	QBrush brush(m_chart->titleBrush());
+	auto brush(m_chart->titleBrush());
 
 	brush.setColor(QColor(item->text()));
 	m_chart->setTitleBrush(brush);
