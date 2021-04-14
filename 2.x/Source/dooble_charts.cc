@@ -174,6 +174,34 @@ QChart::ChartTheme dooble_charts::string_to_chart_theme(const QString &t)
 }
 #endif
 
+QHash<QString, QVariant> dooble_charts::properties_for_database(void) const
+{
+  /*
+  ** Produce a map of the properties. If new properties are introduced,
+  ** previous maps will remain consistent.
+  */
+
+  QHash<QString, QVariant> hash;
+  QHashIterator<dooble_charts::Properties, QVariant> it(properties());
+  auto end = sizeof(s_chart_properties_strings) /
+    sizeof(s_chart_properties_strings[0]);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      QString property("");
+
+      if(end > it.key() && it.key() >= 0)
+	property = s_chart_properties_strings[it.key()];
+
+      if(!property.isEmpty())
+	hash[property] = it.value();
+    }
+
+  return hash;
+}
+
 QHash<dooble_charts::Properties, QVariant> dooble_charts::
 properties(void) const
 {
