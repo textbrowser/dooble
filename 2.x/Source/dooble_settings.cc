@@ -99,6 +99,14 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_new_javascript_block_popup_exception(void)));
+  connect(m_ui.password_1,
+	  SIGNAL(textEdited(const QString &)),
+	  this,
+	  SLOT(slot_password_changed(void)));
+  connect(m_ui.password_2,
+	  SIGNAL(textEdited(const QString &)),
+	  this,
+	  SLOT(slot_password_changed(void)));
   connect(m_ui.privacy,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -424,6 +432,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
   restore(true);
   prepare_icons();
+  slot_password_changed();
 }
 
 QString dooble_settings::cookie_policy_string(int index)
@@ -2092,6 +2101,23 @@ void dooble_settings::slot_page_button_clicked(void)
   tool_button->setChecked(true);
 }
 
+void dooble_settings::slot_password_changed(void)
+{
+  auto password_1(m_ui.password_1->text());
+  auto password_2(m_ui.password_2->text());
+
+  if(password_1.isEmpty() || password_1 != password_2)
+    {
+      m_ui.password_1->setStyleSheet("QLineEdit {background-color: #f2dede;}");
+      m_ui.password_2->setStyleSheet(m_ui.password_1->styleSheet());
+    }
+  else
+    {
+      m_ui.password_1->setStyleSheet("QLineEdit {background-color: #90ee90;}");
+      m_ui.password_2->setStyleSheet(m_ui.password_1->styleSheet());
+    }
+}
+
 void dooble_settings::slot_pbkdf2_future_finished(void)
 {
   m_ui.password_1->clear();
@@ -2928,10 +2954,10 @@ void dooble_settings::slot_save_credentials(void)
   if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
     return;
 
-  auto password1(m_ui.password_1->text());
-  auto password2(m_ui.password_2->text());
+  auto password_1(m_ui.password_1->text());
+  auto password_2(m_ui.password_2->text());
 
-  if(password1.isEmpty())
+  if(password_1.isEmpty())
     {
       m_ui.password_1->setFocus();
       QMessageBox::critical
@@ -2939,7 +2965,7 @@ void dooble_settings::slot_save_credentials(void)
       QApplication::processEvents();
       return;
     }
-  else if(password1 != password2)
+  else if(password_1 != password_2)
     {
       m_ui.password_1->selectAll();
       m_ui.password_1->setFocus();
@@ -2999,7 +3025,7 @@ void dooble_settings::slot_save_credentials(void)
 
   QScopedPointer<dooble_pbkdf2> pbkdf2;
 
-  pbkdf2.reset(new dooble_pbkdf2(password1.toUtf8(),
+  pbkdf2.reset(new dooble_pbkdf2(password_1.toUtf8(),
 				 salt,
 				 m_ui.cipher->currentIndex(),
 				 m_ui.hash->currentIndex(),

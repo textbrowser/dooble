@@ -116,6 +116,7 @@ class dooble_settings: public dooble_main_window
   void slot_new_javascript_block_popup_exception(const QUrl &url);
   void slot_new_javascript_block_popup_exception(void);
   void slot_page_button_clicked(void);
+  void slot_password_changed(void);
   void slot_pbkdf2_future_finished(void);
   void slot_populate(void);
   void slot_proxy_type_changed(int index);
