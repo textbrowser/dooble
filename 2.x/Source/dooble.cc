@@ -2284,6 +2284,8 @@ void dooble::slot_authenticate(void)
     slot_show_settings_panel(dooble_settings::PRIVACY_PANEL);
   else
     {
+    repeat_label:
+
       QDialog dialog(this);
       Ui_dooble_authenticate ui;
 
@@ -2382,11 +2384,8 @@ void dooble::slot_authenticate(void)
 	}
       else
 	{
-	  QMessageBox::critical
-	    (this,
-	     tr("Dooble: Error"),
-	     tr("Unable to authenticate the provided password."));
 	  QApplication::processEvents();
+	  goto repeat_label;
 	}
     }
 }
