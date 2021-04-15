@@ -284,6 +284,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["hash_type_index"] = 1;
   s_settings["home_url"] = QUrl::fromUserInput(dooble::ABOUT_BLANK).toEncoded();
   s_settings["icon_set"] = "Material Design";
+  s_settings["icon_set_index"] = 0;
   s_settings["javascript"] = true;
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
