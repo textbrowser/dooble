@@ -27,10 +27,13 @@
 
 #include "dooble_charts.h"
 #include "dooble_charts_property_editor.h"
+#include "dooble_database_utilities.h"
+#include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
-
-#ifdef DOOBLE_QTCHARTS_PRESENT
+ 
 #include <QMetaType>
+#include <QSqlQuery>
+#ifdef DOOBLE_QTCHARTS_PRESENT
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 Q_DECLARE_METATYPE(QChart::AnimationOptions)
@@ -452,6 +455,35 @@ QString dooble_charts::chart_type_to_string(const QChart::ChartType chart_type)
     }
 }
 #endif
+
+void dooble_charts::save(void)
+{
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_charts.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_charts ("
+		   "name TEXT NOT NULL, "
+		   "property TEXT NOT NULL, "
+		   "subset_name TEXT NOT NULL, "
+		   "value TEXT NOT NULL, "
+		   "PRIMARY KEY (name, property, subset_name))");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
 
 void dooble_charts::slot_item_changed(QStandardItem *item)
 {
