@@ -223,10 +223,26 @@ createEditor(QWidget *parent,
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
-	  i = 0;
+	  i = 0; // File
 
 	editor->setCurrentIndex(i);
 	return editor;
+      }
+    case dooble_charts::Properties::LEGEND_ALIGNMENT:
+      {
+	auto editor = new QComboBox(parent);
+	int i = -1;
+
+	editor->addItem(tr("Bottom"));
+	editor->addItem(tr("Left"));
+	editor->addItem(tr("Right"));
+	editor->addItem(tr("Top"));
+	i = editor->findText(index.data().toString());
+
+	if(i == -1)
+	  i = editor->count() - 1; // Top
+
+	editor->setCurrentIndex(i);
       }
     default:
       {
