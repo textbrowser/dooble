@@ -126,6 +126,9 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
     case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
     case dooble_charts::Properties::CHART_TITLE_COLOR:
+    case dooble_charts::Properties::LEGEND_BORDER_COLOR:
+    case dooble_charts::Properties::LEGEND_COLOR:
+    case dooble_charts::Properties::LEGEND_LABEL_COLOR:
       {
 	auto editor = new QPushButton(parent);
 
@@ -145,6 +148,7 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::CHART_AXIS_Y_LABELS_FONT:
     case dooble_charts::Properties::CHART_AXIS_Y_TITLE_FONT:
     case dooble_charts::Properties::CHART_TITLE_FONT:
+    case dooble_charts::Properties::LEGEND_FONT:
       {
 	auto editor = new QPushButton(parent);
 
@@ -536,6 +540,7 @@ dooble_charts_property_editor_model(QObject *parent):
       auto offset = 4 +
 	chart->rowCount() +
 	chart_axis_x->rowCount() +
+	chart_axis_y->rowCount() +
 	data->rowCount() +
 	i;
 
@@ -707,7 +712,8 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
     return;
 
   QHashIterator<dooble_charts::Properties, QVariant> it
-    (chart->properties().
+    (chart->legend_properties().
+     unite(chart->properties()).
      unite(chart->x_axis_properties()).
      unite(chart->y_axis_properties()));
 
@@ -736,6 +742,9 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
 	  case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
 	  case dooble_charts::Properties::CHART_TITLE_COLOR:
+	  case dooble_charts::Properties::LEGEND_BORDER_COLOR:
+	  case dooble_charts::Properties::LEGEND_COLOR:
+	  case dooble_charts::Properties::LEGEND_LABEL_COLOR:
 	    {
 	      item->setBackground(QColor(it.value().toString()));
 	      item->setText(it.value().toString());
@@ -761,6 +770,9 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
 	  case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
 	  case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+	  case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
+	  case dooble_charts::Properties::LEGEND_REVERSE_MARKERS:
+	  case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
 	  case dooble_charts::Properties::LEGEND_VISIBLE:
 	    {
 	      item->setCheckState
