@@ -170,6 +170,8 @@ class dooble_charts: public QWidget
     (const QChart::AnimationOptions chart_animation_options);
   static QString chart_theme_to_string(const QChart::ChartTheme chart_theme);
   static QString chart_type_to_string(const QChart::ChartType chart_type);
+  static QString legend_marker_shape_to_string
+    (const QLegend::MarkerShape marker_shape);
 #endif
   static const QString s_axis_properties_strings[];
   static const QString s_chart_properties_strings[];

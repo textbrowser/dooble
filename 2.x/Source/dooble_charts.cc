@@ -222,7 +222,11 @@ dooble_charts::legend_properties(void) const
   properties[LEGEND_COLOR] = m_legend->color();
   properties[LEGEND_FONT] = m_legend->font();
   properties[LEGEND_LABEL_COLOR] = m_legend->labelColor();
-  properties[LEGEND_MARKER_SHAPE] = m_legend->markerShape();
+  properties[LEGEND_MARKER_SHAPE] = legend_marker_shape_to_string
+    (m_legend->markerShape());
+  properties[LEGEND_REVERSE_MARKERS] = m_legend->reverseMarkers();
+  properties[LEGEND_SHOW_TOOL_TIPS] = m_legend->showToolTips();
+  properties[LEGEND_VISIBLE] = m_legend->isVisible();
 #endif
   return properties;
 }
@@ -455,9 +459,7 @@ QString dooble_charts::chart_theme_to_string
       }
     }
 }
-#endif
 
-#ifdef DOOBLE_QTCHARTS_PRESENT
 QString dooble_charts::chart_type_to_string(const QChart::ChartType chart_type)
 {
   switch(chart_type)
@@ -473,6 +475,30 @@ QString dooble_charts::chart_type_to_string(const QChart::ChartType chart_type)
     default:
       {
 	return tr("Undefined");
+      }
+    }
+}
+
+QString dooble_charts::legend_marker_shape_to_string
+(const QLegend::MarkerShape marker_shape)
+{
+  switch(marker_shape)
+    {
+    case QLegend::MarkerShapeCircle:
+      {
+	return tr("Circle");
+      }
+    case QLegend::MarkerShapeFromSeries:
+      {
+	return tr("From Series");
+      }
+    case QLegend::MarkerShapeRectangle:
+      {
+	return tr("Rectangle");
+      }
+    default:
+      {
+	return tr("Default");
       }
     }
 }
