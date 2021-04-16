@@ -158,6 +158,7 @@ class dooble_charts: public QWidget
 
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
+  QHash<dooble_charts::Properties, QVariant> legend_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
   QHash<dooble_charts::Properties, QVariant> x_axis_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> y_axis_properties(void) const;
@@ -180,6 +181,7 @@ class dooble_charts: public QWidget
 #ifdef DOOBLE_QTCHARTS_PRESENT
   QChart *m_chart;
   QChartView *m_chart_view;
+  QLegend *m_legend;
   QPointer<QAbstractSeries> m_series;
   QPointer<QAbstractAxis> m_x_axis;
   QPointer<QAbstractAxis> m_y_axis;

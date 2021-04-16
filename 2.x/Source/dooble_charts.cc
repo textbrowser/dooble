@@ -121,6 +121,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_chart = new QChart();
   m_chart_view = new QChartView(m_chart);
+  m_legend = m_chart->legend();
 #endif
   m_property_editor = nullptr;
   m_ui.setupUi(this);
@@ -203,6 +204,27 @@ QHash<QString, QVariant> dooble_charts::properties_for_database(void) const
     }
 
   return hash;
+}
+
+QHash<dooble_charts::Properties, QVariant>
+dooble_charts::legend_properties(void) const
+{
+  QHash<dooble_charts::Properties, QVariant> properties;
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  if(!m_legend)
+    return properties;
+
+  properties[LEGEND_ALIGNMENT] = dooble_ui_utilities::alignment_to_string
+    (m_legend->alignment());
+  properties[LEGEND_BACKGROUND_VISIBLE] = m_legend->isBackgroundVisible();
+  properties[LEGEND_BORDER_COLOR] = m_legend->borderColor();
+  properties[LEGEND_COLOR] = m_legend->color();
+  properties[LEGEND_FONT] = m_legend->font();
+  properties[LEGEND_LABEL_COLOR] = m_legend->labelColor();
+  properties[LEGEND_MARKER_SHAPE] = m_legend->markerShape();
+#endif
+  return properties;
 }
 
 QHash<dooble_charts::Properties, QVariant> dooble_charts::
