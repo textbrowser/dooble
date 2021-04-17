@@ -594,8 +594,13 @@ int dooble_settings::site_feature_permission
 
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
+  m_ui.password_1->setText
+    (dooble_random::random_bytes(m_ui.password_1->text().length()).toHex());
   m_ui.password_1->clear();
+  m_ui.password_2->setText
+    (dooble_random::random_bytes(m_ui.password_2->text().length()).toHex());
   m_ui.password_2->clear();
+  slot_password_changed();
   dooble_main_window::closeEvent(event);
 }
 
@@ -2121,8 +2126,13 @@ void dooble_settings::slot_password_changed(void)
 
 void dooble_settings::slot_pbkdf2_future_finished(void)
 {
+  m_ui.password_1->setText
+    (dooble_random::random_bytes(m_ui.password_1->text().length()).toHex());
   m_ui.password_1->clear();
+  m_ui.password_2->setText
+    (dooble_random::random_bytes(m_ui.password_2->text().length()).toHex());
   m_ui.password_2->clear();
+  slot_password_changed();
 
   auto was_canceled = false;
 
