@@ -229,39 +229,45 @@ $(function() {
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <a class="code" href="classdooble__charts.html">dooble_charts</a>(QWidget *parent);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classdooble__charts.html">dooble_charts</a>();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; x_axis_properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; y_axis_properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#ifdef DOOBLE_QTCHARTS_PRESENT</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keyword">static</span> QChart::AnimationOptions string_to_chart_animation_options</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    (<span class="keyword">const</span> QString &amp;t);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keyword">static</span> QChart::ChartTheme string_to_chart_theme(<span class="keyword">const</span> QString &amp;t);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keyword">static</span> QString chart_animation_option_to_string</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    (<span class="keyword">const</span> QChart::AnimationOptions chart_animation_options);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keyword">static</span> QString chart_theme_to_string(<span class="keyword">const</span> QChart::ChartTheme chart_theme);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keyword">static</span> QString chart_type_to_string(<span class="keyword">const</span> QChart::ChartType chart_type);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_axis_properties_strings[];</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_chart_properties_strings[];</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_data_properties_strings[];</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_legend_properties_strings[];</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#ifdef DOOBLE_QTCHARTS_PRESENT</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  QChart *m_chart;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  QChartView *m_chart_view;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  QLineSeries *m_series;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  QValueAxis *m_x_axis;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  QValueAxis *m_y_axis;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  Ui_dooble_charts m_ui;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <a class="code" href="classdooble__charts__property__editor.html">dooble_charts_property_editor</a> *m_property_editor;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; <span class="keyword">protected</span> slots:</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> slot_item_changed(QStandardItem *item);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;};</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; legend_properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; x_axis_properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  QHash&lt;dooble_charts::Properties, QVariant&gt; y_axis_properties(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#ifdef DOOBLE_QTCHARTS_PRESENT</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keyword">static</span> QChart::AnimationOptions string_to_chart_animation_options</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    (<span class="keyword">const</span> QString &amp;t);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keyword">static</span> QChart::ChartTheme string_to_chart_theme(<span class="keyword">const</span> QString &amp;t);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keyword">static</span> QString chart_animation_option_to_string</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    (<span class="keyword">const</span> QChart::AnimationOptions chart_animation_options);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keyword">static</span> QString chart_theme_to_string(<span class="keyword">const</span> QChart::ChartTheme chart_theme);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keyword">static</span> QString chart_type_to_string(<span class="keyword">const</span> QChart::ChartType chart_type);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keyword">static</span> QString legend_marker_shape_to_string</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    (<span class="keyword">const</span> QLegend::MarkerShape marker_shape);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_axis_properties_strings[];</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_chart_properties_strings[];</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_data_properties_strings[];</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> QString s_legend_properties_strings[];</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="keywordtype">void</span> save(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">#ifdef DOOBLE_QTCHARTS_PRESENT</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  QChart *m_chart;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  QChartView *m_chart_view;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  QLegend *m_legend;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  QPointer&lt;QAbstractSeries&gt; m_series;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  QPointer&lt;QAbstractAxis&gt; m_x_axis;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  QPointer&lt;QAbstractAxis&gt; m_y_axis;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  Ui_dooble_charts m_ui;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <a class="code" href="classdooble__charts__property__editor.html">dooble_charts_property_editor</a> *m_property_editor;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  QHash&lt;QString, QVariant&gt; properties_for_database(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; <span class="keyword">protected</span> slots:</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> slot_item_changed(QStandardItem *item);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;};</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassdooble__charts_html"><div class="ttname"><a href="classdooble__charts.html">dooble_charts</a></div><div class="ttdef"><b>Definition:</b> dooble_charts.h:40</div></div>
 <div class="ttc" id="aclassdooble__charts__property__editor_html"><div class="ttname"><a href="classdooble__charts__property__editor.html">dooble_charts_property_editor</a></div><div class="ttdef"><b>Definition:</b> dooble_charts_property_editor.h:89</div></div>
