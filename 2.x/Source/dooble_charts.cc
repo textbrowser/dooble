@@ -879,6 +879,21 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	break;
       }
+    case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
+      {
+	m_legend->setBackgroundVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::LEGEND_BORDER_COLOR:
+      {
+	m_legend->setBorderColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::LEGEND_COLOR:
+      {
+	m_legend->setColor(QColor(item->text()));
+	break;
+      }
     case dooble_charts::Properties::LEGEND_VISIBLE:
       {
 	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
