@@ -30,7 +30,8 @@
 #include "dooble_database_utilities.h"
 #include "dooble_settings.h"
 #include "dooble_ui_utilities.h"
- 
+
+#include <QDir>
 #include <QMetaType>
 #include <QSqlQuery>
 #ifdef DOOBLE_QTCHARTS_PRESENT

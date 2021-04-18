@@ -35,6 +35,7 @@ using namespace QtCharts;
 
 #include "ui_dooble_charts.h"
 
+class QStandardItem;
 class dooble_charts_property_editor;
 
 class dooble_charts: public QWidget

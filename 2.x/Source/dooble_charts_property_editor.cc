@@ -29,6 +29,7 @@
 #include <QComboBox>
 #include <QFontDialog>
 #include <QPlainTextEdit>
+#include <QPushButton>
 #include <QSpinBox>
 
 #include "dooble_charts_property_editor.h"
