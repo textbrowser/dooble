@@ -243,6 +243,24 @@ createEditor(QWidget *parent,
 	  i = editor->count() - 1; // Top
 
 	editor->setCurrentIndex(i);
+	return editor;
+      }
+    case dooble_charts::Properties::LEGEND_MARKER_SHAPE:
+      {
+	auto editor = new QComboBox(parent);
+	int i = -1;
+
+	editor->addItem(tr("Circle"));
+	editor->addItem(tr("Default"));
+	editor->addItem(tr("From Series"));
+	editor->addItem(tr("Rectangle"));
+	i = editor->findText(index.data().toString());
+
+	if(i == -1)
+	  i = editor->count() - 1; // Rectangle
+
+	editor->setCurrentIndex(i);
+	return editor;
       }
     default:
       {

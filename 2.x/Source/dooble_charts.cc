@@ -894,6 +894,24 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	m_legend->setColor(QColor(item->text()));
 	break;
       }
+    case dooble_charts::Properties::LEGEND_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  m_legend->setFont(font);
+
+	break;
+      }
+    case dooble_charts::Properties::LEGEND_LABEL_COLOR:
+      {
+	m_legend->setLabelColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::LEGEND_MARKER_SHAPE:
+      {
+	break;
+      }
     case dooble_charts::Properties::LEGEND_VISIBLE:
       {
 	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
