@@ -396,6 +396,23 @@ y_axis_properties(void) const
 }
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
+QLegend::MarkerShape dooble_charts::string_to_legend_marker_shape
+(const QString &t)
+{
+  QString text(t.trimmed());
+
+  if(text == tr("Circle"))
+    return QLegend::MarkerShapeCircle;
+  else if(text == tr("From Series"))
+    return QLegend::MarkerShapeFromSeries;
+  else if(text == tr("Rectangle"))
+    return QLegend::MarkerShapeRectangle;
+  else
+    return QLegend::MarkerShapeDefault;
+}
+#endif
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
 QString dooble_charts::chart_animation_option_to_string
 (const QChart::AnimationOptions chart_animation_options)
 {
@@ -879,6 +896,12 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	break;
       }
+    case dooble_charts::Properties::LEGEND_ALIGNMENT:
+      {
+	m_legend->setAlignment
+	  (dooble_ui_utilities::string_to_alignment(item->text()));
+	break;
+      }
     case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
       {
 	m_legend->setBackgroundVisible(item->checkState() == Qt::Checked);
@@ -910,6 +933,17 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::LEGEND_MARKER_SHAPE:
       {
+	m_legend->setMarkerShape(string_to_legend_marker_shape(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::LEGEND_REVERSE_MARKERS:
+      {
+	m_legend->setReverseMarkers(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
+      {
+	m_legend->setShowToolTips(item->checkState() == Qt::Checked);
 	break;
       }
     case dooble_charts::Properties::LEGEND_VISIBLE:

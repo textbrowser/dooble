@@ -166,6 +166,7 @@ class dooble_charts: public QWidget
   static QChart::AnimationOptions string_to_chart_animation_options
     (const QString &t);
   static QChart::ChartTheme string_to_chart_theme(const QString &t);
+  static QLegend::MarkerShape string_to_legend_marker_shape(const QString &t);
   static QString chart_animation_option_to_string
     (const QChart::AnimationOptions chart_animation_options);
   static QString chart_theme_to_string(const QChart::ChartTheme chart_theme);
