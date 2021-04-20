@@ -28,6 +28,19 @@
 #include "dooble_charts_property_editor_xyseries.h"
 #include "dooble_charts_xyseries.h"
 
+const QString dooble_charts_xyseries::s_axis_properties_strings[] =
+  {
+   tr("Labels Format"),
+   tr("Maximum"),
+   tr("Minimum"),
+   tr("Minor Tick Count"),
+   tr("Tick Anchor"),
+   tr("Tick Count"),
+   tr("Tick Interval"),
+   tr("Tick Type"),
+   QString("")
+  };
+
 dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
   dooble_charts(parent)
 {
