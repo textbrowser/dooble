@@ -664,7 +664,8 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 	    findItems(tr("Chart X-Axis")) +
 	    findItems(tr("Chart Y-Axis")) +
 	    findItems(tr("Data")) +
-	    findItems(tr("Legend")));
+	    findItems(tr("Legend")) +
+	    findItems(tr("XY Series")));
 
   for(int i = 0; i < list.size(); i++)
     if(list.at(i))
@@ -824,7 +825,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 
   m_tree->setModel(m_model);
 
-  QStandardItem *item = m_model->item_from_property
+  auto item = m_model->item_from_property
     (dooble_charts::Properties::CHART_MARGINS, 0);
 
   if(item && item->parent())
@@ -850,6 +851,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   m_tree->setFirstColumnSpanned(1, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(2, m_tree->rootIndex(), true);
   m_tree->setFirstColumnSpanned(3, m_tree->rootIndex(), true);
+  m_tree->setFirstColumnSpanned(4, m_tree->rootIndex(), true);
   m_tree->expandAll();
   m_tree->resizeColumnToContents(0);
   m_tree->resizeColumnToContents(1);

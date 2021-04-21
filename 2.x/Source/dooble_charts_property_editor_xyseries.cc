@@ -46,22 +46,24 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
       !dooble_charts_xyseries::s_chart_properties_strings[i].isEmpty();
       i++)
     {
-      if(dooble_charts::Properties(i) ==
+      auto offset = dooble_charts::Properties::XY_SERIES_COLOR + i;
+
+      if(dooble_charts::Properties(offset) ==
 	 dooble_charts::Properties::XY_SERIES_X_AXIS)
 	{
 	  chart_x_axis = new QStandardItem
 	    (dooble_charts_xyseries::s_chart_properties_strings[i]);
-	  chart_x_axis->setData(dooble_charts::Properties(i));
+	  chart_x_axis->setData(dooble_charts::Properties(offset));
 	  chart_x_axis->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	  chart->appendRow(chart_x_axis);
 	  continue;
 	}
-      else if(dooble_charts::Properties(i) ==
+      else if(dooble_charts::Properties(offset) ==
 	      dooble_charts::Properties::XY_SERIES_Y_AXIS)
 	{
 	  chart_y_axis = new QStandardItem
 	    (dooble_charts_xyseries::s_chart_properties_strings[i]);
-	  chart_y_axis->setData(dooble_charts::Properties(i));
+	  chart_y_axis->setData(dooble_charts::Properties(offset));
 	  chart_y_axis->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	  chart->appendRow(chart_y_axis);
 	  continue;
@@ -70,7 +72,6 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
       QList<QStandardItem *> list;
       auto item = new QStandardItem
 	(dooble_charts_xyseries::s_chart_properties_strings[i]);
-      auto offset = dooble_charts::Properties::XY_SERIES_COLOR + i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -81,6 +82,46 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
+	case dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE:
+	case dooble_charts::Properties::XY_SERIES_POINT_LABELS_CLIPPING:
+	case dooble_charts::Properties::XY_SERIES_POINT_LABELS_VISIBLE:
+	  {
+	    item->setFlags(Qt::ItemIsEnabled |
+			   Qt::ItemIsSelectable |
+			   Qt::ItemIsUserCheckable);
+	    break;
+	  }
+	case dooble_charts::Properties::XY_SERIES_X_AXIS:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS:
+	  {
+	    break;
+	  }
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_LABEL_FORMAT:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_MAX:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_MIN:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_MINOR_TICK_COUNT:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_ANCHOR:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
+	case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE:
+	  {
+	    list << item;
+	    chart_x_axis->appendRow(list);
+	    continue;
+	  }
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_LABEL_FORMAT:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_MINOR_TICK_COUNT:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_ANCHOR:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_COUNT:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
+	case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE:
+	  {
+	    list << item;
+	    chart_y_axis->appendRow(list);
+	    continue;
+	  }
 	default:
 	  {
 	    break;
@@ -118,4 +159,28 @@ void dooble_charts_property_editor_xyseries::prepare_xy_series
 {
   if(!chart)
     return;
+
+  m_tree->setFirstColumnSpanned(5, m_tree->rootIndex(), true);
+
+  auto item = m_model->item_from_property
+    (dooble_charts::Properties::XY_SERIES_X_AXIS, 0);
+
+  if(item && item->parent())
+    {
+      m_tree->setFirstColumnSpanned
+	(dooble_charts::Properties::XY_SERIES_X_AXIS,
+	 item->parent()->index(),
+	 true);
+    }
+
+  item = m_model->item_from_property
+    (dooble_charts::Properties::XY_SERIES_Y_AXIS, 0);
+
+  if(item && item->parent())
+    {
+      m_tree->setFirstColumnSpanned
+	(dooble_charts::Properties::XY_SERIES_Y_AXIS,
+	 item->parent()->index(),
+	 true);
+    }
 }
