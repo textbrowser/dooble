@@ -48,6 +48,9 @@ class dooble_charts_property_editor_xyseries:
  public:
   dooble_charts_property_editor_xyseries(QTreeView *tree, dooble_charts *chart);
   ~dooble_charts_property_editor_xyseries();
+
+ private:
+  void prepare_xy_series(dooble_charts *chart);
 };
 
 #endif

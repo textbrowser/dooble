@@ -44,9 +44,17 @@ dooble_charts_property_editor_xyseries(QTreeView *tree, dooble_charts *chart):
 {
   m_model = new dooble_charts_property_editor_model_xyseries(this);
   prepare_generic(chart);
+  prepare_xy_series(chart);
 }
 
 dooble_charts_property_editor_xyseries::
 ~dooble_charts_property_editor_xyseries()
 {
+}
+
+void dooble_charts_property_editor_xyseries::prepare_xy_series
+(dooble_charts *chart)
+{
+  if(!chart)
+    return;
 }
