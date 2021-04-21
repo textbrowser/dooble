@@ -26,11 +26,72 @@
 */
 
 #include "dooble_charts_property_editor_xyseries.h"
+#include "dooble_charts_xyseries.h"
 
 dooble_charts_property_editor_model_xyseries::
 dooble_charts_property_editor_model_xyseries(QObject *parent):
   dooble_charts_property_editor_model(parent)
 {
+  /*
+  ** Chart
+  */
+
+  QStandardItem *chart_x_axis = nullptr;
+  QStandardItem *chart_y_axis = nullptr;
+  auto chart = new QStandardItem(tr("XY Series"));
+
+  chart->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+  for(int i = 0;
+      !dooble_charts_xyseries::s_chart_properties_strings[i].isEmpty();
+      i++)
+    {
+      if(dooble_charts::Properties(i) ==
+	 dooble_charts::Properties::XY_SERIES_X_AXIS)
+	{
+	  chart_x_axis = new QStandardItem
+	    (dooble_charts_xyseries::s_chart_properties_strings[i]);
+	  chart_x_axis->setData(dooble_charts::Properties(i));
+	  chart_x_axis->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  chart->appendRow(chart_x_axis);
+	  continue;
+	}
+      else if(dooble_charts::Properties(i) ==
+	      dooble_charts::Properties::XY_SERIES_Y_AXIS)
+	{
+	  chart_y_axis = new QStandardItem
+	    (dooble_charts_xyseries::s_chart_properties_strings[i]);
+	  chart_y_axis->setData(dooble_charts::Properties(i));
+	  chart_y_axis->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  chart->appendRow(chart_y_axis);
+	  continue;
+	}
+
+      QList<QStandardItem *> list;
+      auto item = new QStandardItem
+	(dooble_charts_xyseries::s_chart_properties_strings[i]);
+      auto offset = dooble_charts::Properties::XY_SERIES_COLOR + i;
+
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      list << item;
+      item = new QStandardItem();
+      item->setData(dooble_charts::Properties(offset));
+      item->setFlags
+	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      switch(dooble_charts::Properties(offset))
+	{
+	default:
+	  {
+	    break;
+	  }
+	}
+
+      list << item;
+      chart->appendRow(list);
+    }
+
+  appendRow(chart);
 }
 
 dooble_charts_property_editor_model_xyseries::

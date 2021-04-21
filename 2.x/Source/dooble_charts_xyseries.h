@@ -37,7 +37,7 @@ class dooble_charts_xyseries: public dooble_charts
  public:
   dooble_charts_xyseries(QWidget *parent);
   ~dooble_charts_xyseries();
-  static const QString s_axis_properties_strings[];
+  static const QString s_chart_properties_strings[];
 
  private slots:
   void slot_item_changed(QStandardItem *item);

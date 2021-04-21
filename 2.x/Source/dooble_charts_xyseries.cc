@@ -28,8 +28,25 @@
 #include "dooble_charts_property_editor_xyseries.h"
 #include "dooble_charts_xyseries.h"
 
-const QString dooble_charts_xyseries::s_axis_properties_strings[] =
+const QString dooble_charts_xyseries::s_chart_properties_strings[] =
   {
+   tr("Color"),
+   tr("Points Visible"),
+   tr("Points Labels Clipping"),
+   tr("Points Labels Color"),
+   tr("Points Labels Font"),
+   tr("Points Labels Format"),
+   tr("Points Labels Visible"),
+   tr("X-Axis"),
+   tr("Labels Format"),
+   tr("Maximum"),
+   tr("Minimum"),
+   tr("Minor Tick Count"),
+   tr("Tick Anchor"),
+   tr("Tick Count"),
+   tr("Tick Interval"),
+   tr("Tick Type"),
+   tr("Y-Axis"),
    tr("Labels Format"),
    tr("Maximum"),
    tr("Minimum"),
