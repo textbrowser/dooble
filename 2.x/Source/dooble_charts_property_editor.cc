@@ -87,6 +87,7 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::CHART_MARGINS_LEFT:
     case dooble_charts::Properties::CHART_MARGINS_RIGHT:
     case dooble_charts::Properties::CHART_MARGINS_TOP:
+    case dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE:
       {
 	auto editor = new QSpinBox(parent);
 
@@ -130,6 +131,8 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::LEGEND_BORDER_COLOR:
     case dooble_charts::Properties::LEGEND_COLOR:
     case dooble_charts::Properties::LEGEND_LABEL_COLOR:
+    case dooble_charts::Properties::XY_SERIES_COLOR:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR:
       {
 	auto editor = new QPushButton(parent);
 
@@ -150,6 +153,7 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::CHART_AXIS_Y_TITLE_FONT:
     case dooble_charts::Properties::CHART_TITLE_FONT:
     case dooble_charts::Properties::LEGEND_FONT:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_FONT:
       {
 	auto editor = new QPushButton(parent);
 
@@ -781,6 +785,8 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	  case dooble_charts::Properties::LEGEND_BORDER_COLOR:
 	  case dooble_charts::Properties::LEGEND_COLOR:
 	  case dooble_charts::Properties::LEGEND_LABEL_COLOR:
+	  case dooble_charts::Properties::XY_SERIES_COLOR:
+	  case dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR:
 	    {
 	      item->setBackground(QColor(it.value().toString()));
 	      item->setText(it.value().toString());
