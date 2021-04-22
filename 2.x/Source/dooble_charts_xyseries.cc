@@ -31,12 +31,16 @@
 const QString dooble_charts_xyseries::s_chart_properties_strings[] =
   {
    tr("Color"),
+   tr("Name"),
+   tr("Opacity"),
    tr("Points Visible"),
    tr("Points Labels Clipping"),
    tr("Points Labels Color"),
    tr("Points Labels Font"),
    tr("Points Labels Format"),
    tr("Points Labels Visible"),
+   tr("Use OpenGL"),
+   tr("Visible"),
    tr("X-Axis"),
    tr("Labels Format"),
    tr("Maximum"),
@@ -80,6 +84,23 @@ dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
 
 dooble_charts_xyseries::~dooble_charts_xyseries()
 {
+}
+
+QHash<dooble_charts::Properties, QVariant> dooble_charts_xyseries::
+properties(void) const
+{
+  QHash<dooble_charts::Properties, QVariant> properties
+    (dooble_charts::properties());
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  properties[dooble_charts::XY_SERIES_COLOR] =
+    qobject_cast<QLineSeries *> (m_series)->color();
+  properties[dooble_charts::XY_SERIES_NAME] = m_series->name();
+  properties[dooble_charts::XY_SERIES_OPACITY] = m_series->opacity();
+  properties[dooble_charts::XY_SERIES_POINTS_VISIBLE] =
+    qobject_cast<QLineSeries *> (m_series)->pointsVisible();
+#endif
+  return properties;
 }
 
 void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)

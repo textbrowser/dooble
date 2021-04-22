@@ -85,6 +85,8 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
 	case dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE:
 	case dooble_charts::Properties::XY_SERIES_POINT_LABELS_CLIPPING:
 	case dooble_charts::Properties::XY_SERIES_POINT_LABELS_VISIBLE:
+	case dooble_charts::Properties::XY_SERIES_USE_OPENGL:
+	case dooble_charts::Properties::XY_SERIES_VISIBLE:
 	  {
 	    item->setFlags(Qt::ItemIsEnabled |
 			   Qt::ItemIsSelectable |
@@ -157,8 +159,44 @@ dooble_charts_property_editor_xyseries::
 void dooble_charts_property_editor_xyseries::prepare_xy_series
 (dooble_charts *chart)
 {
-  if(!chart)
+  if(!chart || !m_tree)
     return;
+
+  QHashIterator<dooble_charts::Properties, QVariant> it(chart->properties());
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      auto item = m_model->item_from_property(it.key(), 1);
+
+      if(item)
+	switch(it.key())
+	  {
+	  case dooble_charts::Properties::XY_SERIES_COLOR:
+	  case dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR:
+	    {
+	      item->setBackground(QColor(it.value().toString()));
+	      item->setText(it.value().toString());
+	      break;
+	    }
+	  case dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE:
+	  case dooble_charts::Properties::XY_SERIES_POINT_LABELS_CLIPPING:
+	  case dooble_charts::Properties::XY_SERIES_POINT_LABELS_VISIBLE:
+	  case dooble_charts::Properties::XY_SERIES_USE_OPENGL:
+	  case dooble_charts::Properties::XY_SERIES_VISIBLE:
+	    {
+	      item->setCheckState
+		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);
+	      break;
+	    }
+	  default:
+	    {
+	      item->setText(it.value().toString());
+	      break;
+	    }
+	  }
+    }
 
   m_tree->setFirstColumnSpanned(5, m_tree->rootIndex(), true);
 

@@ -149,12 +149,16 @@ class dooble_charts: public QWidget
    */
 
    XY_SERIES_COLOR,
+   XY_SERIES_NAME,
+   XY_SERIES_OPACITY,
    XY_SERIES_POINTS_VISIBLE,
    XY_SERIES_POINT_LABELS_CLIPPING,
    XY_SERIES_POINT_LABELS_COLOR,
    XY_SERIES_POINT_LABELS_FONT,
    XY_SERIES_POINT_LABELS_FORMAT,
    XY_SERIES_POINT_LABELS_VISIBLE,
+   XY_SERIES_USE_OPENGL,
+   XY_SERIES_VISIBLE,
    XY_SERIES_X_AXIS,
    XY_SERIES_X_AXIS_LABEL_FORMAT,
    XY_SERIES_X_AXIS_MAX,
@@ -178,7 +182,6 @@ class dooble_charts: public QWidget
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
   QHash<dooble_charts::Properties, QVariant> legend_properties(void) const;
-  QHash<dooble_charts::Properties, QVariant> properties(void) const;
   QHash<dooble_charts::Properties, QVariant> x_axis_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> y_axis_properties(void) const;
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -197,6 +200,7 @@ class dooble_charts: public QWidget
   static const QString s_chart_properties_strings[];
   static const QString s_data_properties_strings[];
   static const QString s_legend_properties_strings[];
+  virtual QHash<dooble_charts::Properties, QVariant> properties(void) const;
   void save(void);
 
  protected:

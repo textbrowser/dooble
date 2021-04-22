@@ -174,6 +174,7 @@ createEditor(QWidget *parent,
 	return editor;
       }
     case dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS:
+    case dooble_charts::Properties::XY_SERIES_OPACITY:
       {
 	auto editor = new QDoubleSpinBox(parent);
 
@@ -226,6 +227,7 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
       {
 	auto editor = new QFrame(parent);
+	auto list(index.data().toString().split("/"));
 	auto spin_box_1 = new QSpinBox();
 	auto spin_box_2 = new QSpinBox();
 
@@ -235,8 +237,10 @@ createEditor(QWidget *parent,
 	editor->layout()->addWidget(spin_box_2);
 	spin_box_1->setMinimum(1);
 	spin_box_1->setSuffix(tr(" Bytes"));
+	spin_box_1->setValue(list.value(0).toInt());
 	spin_box_2->setMinimum(1);
 	spin_box_2->setSuffix(tr(" Per Millisecond"));
+	spin_box_2->setValue(list.value(1).toInt());
 	return editor;
       }
     case dooble_charts::Properties::DATA_SOURCE_TYPE:
