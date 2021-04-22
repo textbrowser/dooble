@@ -559,6 +559,20 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setData(dooble_charts::Properties(offset));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      switch(dooble_charts::Properties(offset))
+	{
+	case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
+	  {
+	    item->setToolTip(tr("Absolute File Name / IP-Address:Port"));
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
       list << item;
       data->appendRow(list);
     }
