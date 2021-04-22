@@ -224,7 +224,8 @@ createEditor(QWidget *parent,
 	int i = -1;
 
 	editor->addItem(tr("File"));
-	editor->addItem(tr("IP Address"));
+	editor->addItem(tr("TCP"));
+	editor->addItem(tr("UDP Unicast"));
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
