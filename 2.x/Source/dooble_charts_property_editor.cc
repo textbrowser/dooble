@@ -63,6 +63,11 @@ sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 	size.setHeight(250);
 	break;
       }
+    case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
+      {
+	size.setHeight(50);
+	break;
+      }
     default:
       {
 	break;
@@ -218,14 +223,30 @@ createEditor(QWidget *parent,
 	editor->setPlainText(index.data().toString().trimmed());
 	return editor;
       }
+    case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
+      {
+	auto editor = new QFrame(parent);
+	auto spin_box_1 = new QSpinBox();
+	auto spin_box_2 = new QSpinBox();
+
+	delete editor->layout();
+	editor->setLayout(new QHBoxLayout());
+	editor->layout()->addWidget(spin_box_1);
+	editor->layout()->addWidget(spin_box_2);
+	spin_box_1->setMinimum(1);
+	spin_box_1->setSuffix(tr(" Bytes"));
+	spin_box_2->setMinimum(1);
+	spin_box_2->setSuffix(tr(" Per Millisecond"));
+	return editor;
+      }
     case dooble_charts::Properties::DATA_SOURCE_TYPE:
       {
 	auto editor = new QComboBox(parent);
 	int i = -1;
 
 	editor->addItem(tr("File"));
-	editor->addItem(tr("TCP"));
-	editor->addItem(tr("UDP Unicast"));
+	editor->addItem(tr("TCP Client"));
+	editor->addItem(tr("UDP Unicast Client"));
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
