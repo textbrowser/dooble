@@ -99,6 +99,8 @@ properties(void) const
   properties[dooble_charts::XY_SERIES_OPACITY] = m_series->opacity();
   properties[dooble_charts::XY_SERIES_POINTS_VISIBLE] =
     qobject_cast<QLineSeries *> (m_series)->pointsVisible();
+  properties[dooble_charts::XY_SERIES_POINT_LABELS_CLIPPING] =
+    qobject_cast<QLineSeries *> (m_series)->pointLabelsClipping();
 #endif
   return properties;
 }
