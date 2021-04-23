@@ -93,14 +93,24 @@ properties(void) const
     (dooble_charts::properties());
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  properties[dooble_charts::XY_SERIES_COLOR] =
-    qobject_cast<QLineSeries *> (m_series)->color();
-  properties[dooble_charts::XY_SERIES_NAME] = m_series->name();
-  properties[dooble_charts::XY_SERIES_OPACITY] = m_series->opacity();
-  properties[dooble_charts::XY_SERIES_POINTS_VISIBLE] =
-    qobject_cast<QLineSeries *> (m_series)->pointsVisible();
+  auto series = qobject_cast<QLineSeries *> (m_series);
+
+  properties[dooble_charts::XY_SERIES_COLOR] = series->color();
+  properties[dooble_charts::XY_SERIES_NAME] = series->name();
+  properties[dooble_charts::XY_SERIES_OPACITY] = series->opacity();
+  properties[dooble_charts::XY_SERIES_POINTS_VISIBLE] = series->pointsVisible();
   properties[dooble_charts::XY_SERIES_POINT_LABELS_CLIPPING] =
-    qobject_cast<QLineSeries *> (m_series)->pointLabelsClipping();
+    series->pointLabelsClipping();
+  properties[dooble_charts::XY_SERIES_POINT_LABELS_COLOR] =
+    series->pointLabelsColor();
+  properties[dooble_charts::XY_SERIES_POINT_LABELS_FONT] =
+    series->pointLabelsFont();
+  properties[dooble_charts::XY_SERIES_POINT_LABELS_FORMAT] =
+    series->pointLabelsFormat();
+  properties[dooble_charts::XY_SERIES_POINT_LABELS_VISIBLE] =
+    series->pointLabelsVisible();
+  properties[dooble_charts::XY_SERIES_USE_OPENGL] = series->useOpenGL();
+  properties[dooble_charts::XY_SERIES_VISIBLE] = series->isVisible();
 #endif
   return properties;
 }
