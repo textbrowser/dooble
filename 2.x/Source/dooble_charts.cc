@@ -124,7 +124,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_chart_view = new QChartView(m_chart);
   m_legend = m_chart->legend();
 #endif
-  m_menu = new QMenu(this);
+  m_menu = nullptr;
   m_property_editor = nullptr;
   m_ui.setupUi(this);
   m_ui.splitter->setStretchFactor(0, 1);

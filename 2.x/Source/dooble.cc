@@ -1436,6 +1436,7 @@ void dooble::prepare_standard_menus(void)
   QAction *action = nullptr;
   QMenu *menu = nullptr;
   auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto is_chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
   auto page = current_page();
   auto use_material_icons(dooble_settings::use_material_icons());
 
@@ -1495,6 +1496,25 @@ void dooble::prepare_standard_menus(void)
 	  (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
     }
 
+  menu->addSeparator();
+  menu->addAction
+    (QIcon::fromTheme(use_material_icons + "document-save",
+		      QIcon(QString(":/%1/48/save.png").arg(icon_set))),
+     tr("&Save"),
+     this,
+     SLOT(slot_save(void)),
+     QKeySequence(tr("Ctrl+S")))->setEnabled(is_chart);
+  menu->addSeparator();
+  menu->addAction
+    (QIcon::fromTheme(use_material_icons + "document-print",
+		      QIcon(QString(":/%1/48/print.png").arg(icon_set))),
+     tr("&Print..."),
+     this,
+     SLOT(slot_print(void)),
+     QKeySequence(tr("Ctrl+P")))->setEnabled(is_chart);
+  menu->addAction(tr("Print Pre&view..."),
+		  this,
+		  SLOT(slot_print_preview(void)))->setEnabled(is_chart);
   menu->addSeparator();
   menu->addAction(QIcon::fromTheme(use_material_icons + "application-exit",
 				   QIcon(QString(":/%1/48/exit_dooble.png").
