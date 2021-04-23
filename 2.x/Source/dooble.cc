@@ -39,6 +39,7 @@
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
+#include "dooble_charts.h"
 #include "dooble_charts_xyseries.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
@@ -2059,9 +2060,12 @@ void dooble::slot_about_to_show_main_menu(void)
       menu->clear();
 
       QMenu *m = nullptr;
+      auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
       auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
-      if(page && page->menu())
+      if(chart && chart->menu())
+	m = chart->menu();
+      else if(page && page->menu())
 	m = page->menu();
       else
 	{
