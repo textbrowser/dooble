@@ -81,8 +81,7 @@ static libspoton_error_t initialize_libgcrypt
 (const int secure_memory_pool_size)
 {
   /*
-  ** Initialize the gcrypt library if it has not yet been
-  ** initialized.
+  ** Initialize the gcrypt library if it has not yet been initialized.
   */
 
   libspoton_error_t rerr = LIBSPOTON_ERROR_NONE;
@@ -97,7 +96,7 @@ static libspoton_error_t initialize_libgcrypt
 
       if(err == 0)
 	gcryctl_set_thread_cbs_set = true;
-      else
+      else if(stderr)
 	fprintf(stderr, "libspoton::initialize_libgcrypt(): "
 		"error initializing threads. Proceeding.\n");
     }
@@ -110,8 +109,10 @@ static libspoton_error_t initialize_libgcrypt
 	rerr = LIBSPOTON_ERROR_GCRY_CHECK_VERSION;
       else if(secure_memory_pool_size == 0)
 	{
-	  fprintf(stderr, "libspoton::initialize_libgcrypt(): "
-		  "disabling secure memory.\n");
+	  if(stderr)
+	    fprintf(stderr, "libspoton::initialize_libgcrypt(): "
+		    "disabling secure memory.\n");
+
 	  gcry_control(GCRYCTL_DISABLE_SECMEM, 0);
 	  gcry_control(GCRYCTL_INITIALIZATION_FINISHED, 0);
 	}
@@ -272,7 +273,7 @@ libspoton_error_t libspoton_deregister_kernel
       goto error_label;
     }
 
-  if(sqlite3_bind_int64(stmt, 1, pid) != SQLITE_OK)
+  if(sqlite3_bind_int64(stmt, 1, (sqlite3_int64) pid) != SQLITE_OK)
     {
       rerr = LIBSPOTON_ERROR_SQLITE_BIND_INT64;
       goto error_label;
@@ -332,8 +333,7 @@ libspoton_error_t libspoton_init_a(const char *databasePath,
       libspotonHandle->m_keyLength = keyLength;
 
       if(!(libspotonHandle->m_key =
-	   gcry_calloc_secure(libspotonHandle->m_keyLength,
-			      sizeof(char))))
+	   gcry_calloc_secure(libspotonHandle->m_keyLength, sizeof(char))))
 	{
 	  rerr = LIBSPOTON_ERROR_GCRY_CALLOC_SECURE;
 	  goto error_label;
@@ -426,8 +426,7 @@ libspoton_error_t libspoton_init_b(const char *databasePath,
 	}
 
       if(!(libspotonHandle->m_key =
-	   gcry_calloc_secure(libspotonHandle->m_keyLength,
-			      sizeof(char))))
+	   gcry_calloc_secure(libspotonHandle->m_keyLength, sizeof(char))))
 	{
 	  rerr = LIBSPOTON_ERROR_GCRY_CALLOC_SECURE;
 	  goto error_label;
@@ -558,7 +557,7 @@ libspoton_error_t libspoton_register_kernel
       goto error_label;
     }
 
-  if(sqlite3_bind_int64(stmt, 1, pid) != SQLITE_OK)
+  if(sqlite3_bind_int64(stmt, 1, (sqlite3_int64) pid) != SQLITE_OK)
     {
       rerr = LIBSPOTON_ERROR_SQLITE_BIND_INT64;
       goto error_label;
@@ -651,9 +650,7 @@ libspoton_error_t libspoton_save_url(const char *url,
 	goto error_label;
       }
 
-  rv = libspoton_create_urls_table(libspotonHandle);
-
-  if(rv != SQLITE_OK)
+  if(libspoton_create_urls_table(libspotonHandle) != SQLITE_OK)
     {
       rerr = LIBSPOTON_ERROR_SQLITE_CREATE_URLS_TABLE;
       goto error_label;
@@ -681,7 +678,11 @@ libspoton_error_t libspoton_save_url(const char *url,
 
 	  if(iv)
 	    {
+#ifdef LIBSPOTON_OS_OPENBSD
+	      gcry_cipher_ctl(cipherCtx, GCRYCTL_RESET, NULL, (size_t) 0);
+#else
 	      gcry_cipher_reset(cipherCtx);
+#endif
 	      gcry_fast_random_poll();
 	      gcry_create_nonce(iv, blockLength);
 
@@ -766,14 +767,15 @@ libspoton_error_t libspoton_save_url(const char *url,
 	  encodedBuffer[encodedBufferLength - 1] = lengthArray[3];
 #else
 	  length = (size_t) htonl((uint32_t) length);
-	  memcpy(lengthArray, &length, 4);
-	  memcpy(&encodedBuffer[encodedBufferLength - 4], lengthArray, 4);
+	  memcpy(lengthArray, &length, (size_t) 4);
+	  memcpy
+	    (&encodedBuffer[encodedBufferLength - 4], lengthArray, (size_t) 4);
 #endif
 	  gcry_fast_random_poll();
 
 	  if(gcry_cipher_encrypt(cipherCtx,
 				 encodedBuffer, encodedBufferLength,
-				 0, 0) == 0)
+				 0, (size_t) 0) == 0)
 	    {
 	      if(SIZE_MAX - blockLength >= encodedBufferLength)
 		encodedBufferAndIVLength = blockLength + encodedBufferLength;
@@ -785,8 +787,8 @@ libspoton_error_t libspoton_save_url(const char *url,
 
 	      if(sizeofchar > 0 &&
 		 encodedBufferAndIVLength <= SIZE_MAX / sizeofchar)
-		encodedBufferAndIV = calloc(encodedBufferAndIVLength,
-					    sizeof(char));
+		encodedBufferAndIV = calloc
+		  (encodedBufferAndIVLength, sizeofchar);
 	      else
 		encodedBufferAndIV = 0;
 
