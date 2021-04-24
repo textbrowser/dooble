@@ -233,5 +233,21 @@ void dooble_charts_property_editor_xyseries::prepare_xy_series
 	(dooble_charts::XY_SERIES_X_AXIS - dooble_charts::XY_SERIES_COLOR + 1,
 	 item->index(),
 	 true);
+      item = m_model->item_from_property(dooble_charts::XY_SERIES_Y_AXIS, 0);
+
+      if(item)
+	for(int i = 0;
+	    i < dooble_charts::XY_SERIES_Y_AXIS_TICK_TYPE -
+	        dooble_charts::XY_SERIES_Y_AXIS;
+	    i++)
+	  if(item->child(i, 1))
+	    {
+	      auto property = dooble_charts::Properties
+		(item->child(i, 1)->data(Qt::ItemDataRole(Qt::UserRole + 1)).
+		 toInt());
+
+	      item->child(i, 1)->setText
+		(chart->properties().value(property).toString());
+	    }
     }
 }

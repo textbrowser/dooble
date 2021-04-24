@@ -42,7 +42,7 @@ const QString dooble_charts_xyseries::s_chart_properties_strings[] =
    tr("Use OpenGL"),
    tr("Visible"),
    tr("X-Axis"),
-   tr("Labels Format"),
+   tr("Label Format"),
    tr("Maximum"),
    tr("Minimum"),
    tr("Minor Tick Count"),
@@ -51,7 +51,7 @@ const QString dooble_charts_xyseries::s_chart_properties_strings[] =
    tr("Tick Interval"),
    tr("Tick Type"),
    tr("Y-Axis"),
-   tr("Labels Format"),
+   tr("Label Format"),
    tr("Maximum"),
    tr("Minimum"),
    tr("Minor Tick Count"),
@@ -95,6 +95,10 @@ properties(void) const
 #ifdef DOOBLE_QTCHARTS_PRESENT
   auto series = qobject_cast<QLineSeries *> (m_series);
   auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
+  auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
+
+  if(!series || !x_axis || !y_axis)
+    return properties;
 
   properties[dooble_charts::XY_SERIES_COLOR] = series->color();
   properties[dooble_charts::XY_SERIES_NAME] = series->name();
@@ -125,6 +129,19 @@ properties(void) const
     tickInterval();
   properties[dooble_charts::XY_SERIES_X_AXIS_TICK_TYPE] = tick_type_to_string
     (x_axis->tickType());
+  properties[dooble_charts::XY_SERIES_Y_AXIS_LABEL_FORMAT] = y_axis->
+    labelFormat();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_MAX] = y_axis->max();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_MIN] = y_axis->min();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_MINOR_TICK_COUNT] = y_axis->
+    minorTickCount();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_TICK_ANCHOR] = y_axis->
+    tickAnchor();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_TICK_COUNT] = y_axis->tickCount();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_TICK_INTERVAL] = y_axis->
+    tickInterval();
+  properties[dooble_charts::XY_SERIES_Y_AXIS_TICK_TYPE] = tick_type_to_string
+    (y_axis->tickType());
 #endif
   return properties;
 }
