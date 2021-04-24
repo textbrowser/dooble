@@ -319,6 +319,22 @@ createEditor(QWidget *parent,
 	editor->setCurrentIndex(i);
 	return editor;
       }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE:
+      {
+	auto editor = new QComboBox(parent);
+	int i = -1;
+
+	editor->addItem(tr("Dynamic"));
+	editor->addItem(tr("Fixed"));
+	i = editor->findText(index.data().toString());
+
+	if(i == -1)
+	  i = editor->count() - 1; // Fixed
+
+	editor->setCurrentIndex(i);
+	return editor;
+      }
     default:
       {
 	break;

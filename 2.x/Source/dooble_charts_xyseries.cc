@@ -162,6 +162,17 @@ QString dooble_charts_xyseries::tick_type_to_string
       }
     }
 }
+
+QValueAxis::TickType dooble_charts_xyseries::string_to_tick_type
+(const QString &t)
+{
+  QString text(t.trimmed());
+
+  if(text == tr("Dynamic"))
+    return QValueAxis::TicksDynamic;
+  else
+    return QValueAxis::TicksFixed;
+}
 #endif
 
 void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)

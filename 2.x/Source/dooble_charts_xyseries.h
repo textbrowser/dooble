@@ -40,6 +40,7 @@ class dooble_charts_xyseries: public dooble_charts
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
 #ifdef DOOBLE_QTCHARTS_PRESENT
   static QString tick_type_to_string(const QValueAxis::TickType tick_type);
+  static QValueAxis::TickType string_to_tick_type(const QString &t);
 #endif
   static const QString s_chart_properties_strings[];
 
