@@ -175,6 +175,14 @@ createEditor(QWidget *parent,
       }
     case dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS:
     case dooble_charts::Properties::XY_SERIES_OPACITY:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MAX:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MIN:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_ANCHOR:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_ANCHOR:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
       {
 	auto editor = new QDoubleSpinBox(parent);
 
