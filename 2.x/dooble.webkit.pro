@@ -14,6 +14,14 @@ QT		+= concurrent \
                    webkit
 TEMPLATE	= app
 
+qtHaveModule(charts) {
+DEFINES         += DOOBLE_QTCHARTS_PRESENT
+QT              += charts
+message("The QtCharts module has been discovered.")
+} else {
+warning("The QtCharts module is not present.")
+}
+
 QMAKE_CLEAN     += Dooble
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
