@@ -94,6 +94,7 @@ properties(void) const
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
   auto series = qobject_cast<QLineSeries *> (m_series);
+  auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
 
   properties[dooble_charts::XY_SERIES_COLOR] = series->color();
   properties[dooble_charts::XY_SERIES_NAME] = series->name();
@@ -111,9 +112,40 @@ properties(void) const
     series->pointLabelsVisible();
   properties[dooble_charts::XY_SERIES_USE_OPENGL] = series->useOpenGL();
   properties[dooble_charts::XY_SERIES_VISIBLE] = series->isVisible();
+  properties[dooble_charts::XY_SERIES_X_AXIS_LABEL_FORMAT] = x_axis->
+    labelFormat();
+  properties[dooble_charts::XY_SERIES_X_AXIS_MAX] = x_axis->max();
+  properties[dooble_charts::XY_SERIES_X_AXIS_MIN] = x_axis->min();
+  properties[dooble_charts::XY_SERIES_X_AXIS_MINOR_TICK_COUNT] = x_axis->
+    minorTickCount();
+  properties[dooble_charts::XY_SERIES_X_AXIS_TICK_ANCHOR] = x_axis->
+    tickAnchor();
+  properties[dooble_charts::XY_SERIES_X_AXIS_TICK_COUNT] = x_axis->tickCount();
+  properties[dooble_charts::XY_SERIES_X_AXIS_TICK_INTERVAL] = x_axis->
+    tickInterval();
+  properties[dooble_charts::XY_SERIES_X_AXIS_TICK_TYPE] = tick_type_to_string
+    (x_axis->tickType());
 #endif
   return properties;
 }
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+QString dooble_charts_xyseries::tick_type_to_string
+(const QValueAxis::TickType tick_type)
+{
+  switch(tick_type)
+    {
+    case QValueAxis::TicksDynamic:
+      {
+	return tr("Dynamic");
+      }
+    default:
+      {
+	return tr("Fixed");
+      }
+    }
+}
+#endif
 
 void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 {
