@@ -93,10 +93,28 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::CHART_MARGINS_RIGHT:
     case dooble_charts::Properties::CHART_MARGINS_TOP:
     case dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MINOR_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MINOR_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_COUNT:
       {
 	auto editor = new QSpinBox(parent);
 
-	editor->setRange(0, std::numeric_limits<int>::max());
+	switch(property)
+	  {
+	  case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT:
+	  case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_COUNT:
+	    {
+	      editor->setRange(2, std::numeric_limits<int>::max());
+	      break;
+	    }
+	  default:
+	    {
+	      editor->setRange(0, std::numeric_limits<int>::max());
+	      break;
+	    }
+	  }
+
 	editor->setValue(index.data().toInt());
 	return editor;
       }
