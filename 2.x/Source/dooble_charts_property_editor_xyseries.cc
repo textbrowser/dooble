@@ -200,25 +200,38 @@ void dooble_charts_property_editor_xyseries::prepare_xy_series
 
   m_tree->setFirstColumnSpanned(5, m_tree->rootIndex(), true);
 
-  auto item = m_model->item_from_property
-    (dooble_charts::Properties::XY_SERIES_X_AXIS, 0);
+  auto item = m_model->item(5, 0);
 
-  if(item && item->parent())
+  if(item)
     {
       m_tree->setFirstColumnSpanned
-	(dooble_charts::Properties::XY_SERIES_X_AXIS,
-	 item->parent()->index(),
+	(dooble_charts::XY_SERIES_X_AXIS - dooble_charts::XY_SERIES_COLOR,
+	 item->index(),
 	 true);
+      item = m_model->item_from_property(dooble_charts::XY_SERIES_X_AXIS, 0);
+
+      if(item)
+	for(int i = 0;
+	    i < dooble_charts::XY_SERIES_Y_AXIS -
+	        dooble_charts::XY_SERIES_X_AXIS -
+	        1;
+	    i++)
+	  if(item->child(i, 1))
+	    {
+	      auto property = dooble_charts::Properties
+		(item->child(i, 1)->data(Qt::ItemDataRole(Qt::UserRole + 1)).
+		 toInt());
+
+	      item->child(i, 1)->setText
+		(chart->properties().value(property).toString());
+	    }
     }
 
-  item = m_model->item_from_property
-    (dooble_charts::Properties::XY_SERIES_Y_AXIS, 0);
-
-  if(item && item->parent())
+  if((item = m_model->item(5, 0)))
     {
       m_tree->setFirstColumnSpanned
-	(dooble_charts::Properties::XY_SERIES_Y_AXIS,
-	 item->parent()->index(),
+	(dooble_charts::XY_SERIES_X_AXIS - dooble_charts::XY_SERIES_COLOR + 1,
+	 item->index(),
 	 true);
     }
 }
