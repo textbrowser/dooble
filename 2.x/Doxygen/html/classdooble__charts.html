@@ -77,11 +77,21 @@ $(function() {
 Inheritance diagram for dooble_charts:</div>
 <div class="dyncontent">
 <div class="center"><img src="classdooble__charts__inherit__graph.png" border="0" usemap="#dooble__charts_inherit__map" alt="Inheritance graph"/></div>
+<map name="dooble__charts_inherit__map" id="dooble__charts_inherit__map">
+<area shape="rect" title=" " alt="" coords="33,80,136,107"/>
+<area shape="rect" href="classdooble__charts__xyseries.html" title=" " alt="" coords="5,155,164,181"/>
+<area shape="rect" title=" " alt="" coords="48,5,121,32"/>
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for dooble_charts:</div>
 <div class="dyncontent">
 <div class="center"><img src="classdooble__charts__coll__graph.png" border="0" usemap="#dooble__charts_coll__map" alt="Collaboration graph"/></div>
+<map name="dooble__charts_coll__map" id="dooble__charts_coll__map">
+<area shape="rect" title=" " alt="" coords="5,185,108,212"/>
+<area shape="rect" title=" " alt="" coords="15,5,88,32"/>
+<area shape="rect" href="classdooble__charts__property__editor.html" title=" " alt="" coords="73,81,230,123"/>
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -187,13 +197,40 @@ Public Types</h2></td></tr>
 <b>LEGEND_VISIBLE</b>, 
 <b>XY_SERIES_COLOR</b>, 
 <br />
-&#160;&#160;<b>XY_SERIES_POINTS_VISIBLE</b>, 
+&#160;&#160;<b>XY_SERIES_NAME</b>, 
+<b>XY_SERIES_OPACITY</b>, 
+<b>XY_SERIES_POINTS_VISIBLE</b>, 
 <b>XY_SERIES_POINT_LABELS_CLIPPING</b>, 
-<b>XY_SERIES_POINT_LABELS_COLOR</b>, 
-<b>XY_SERIES_POINT_LABELS_FONT</b>, 
 <br />
-&#160;&#160;<b>XY_SERIES_POINT_LABELS_FORMAT</b>, 
-<b>XY_SERIES_POINT_LABELS_VISIBLE</b>
+&#160;&#160;<b>XY_SERIES_POINT_LABELS_COLOR</b>, 
+<b>XY_SERIES_POINT_LABELS_FONT</b>, 
+<b>XY_SERIES_POINT_LABELS_FORMAT</b>, 
+<b>XY_SERIES_POINT_LABELS_VISIBLE</b>, 
+<br />
+&#160;&#160;<b>XY_SERIES_USE_OPENGL</b>, 
+<b>XY_SERIES_VISIBLE</b>, 
+<b>XY_SERIES_X_AXIS</b>, 
+<b>XY_SERIES_X_AXIS_LABEL_FORMAT</b>, 
+<br />
+&#160;&#160;<b>XY_SERIES_X_AXIS_MAX</b>, 
+<b>XY_SERIES_X_AXIS_MIN</b>, 
+<b>XY_SERIES_X_AXIS_MINOR_TICK_COUNT</b>, 
+<b>XY_SERIES_X_AXIS_TICK_ANCHOR</b>, 
+<br />
+&#160;&#160;<b>XY_SERIES_X_AXIS_TICK_COUNT</b>, 
+<b>XY_SERIES_X_AXIS_TICK_INTERVAL</b>, 
+<b>XY_SERIES_X_AXIS_TICK_TYPE</b>, 
+<b>XY_SERIES_Y_AXIS</b>, 
+<br />
+&#160;&#160;<b>XY_SERIES_Y_AXIS_LABEL_FORMAT</b>, 
+<b>XY_SERIES_Y_AXIS_MAX</b>, 
+<b>XY_SERIES_Y_AXIS_MIN</b>, 
+<b>XY_SERIES_Y_AXIS_MINOR_TICK_COUNT</b>, 
+<br />
+&#160;&#160;<b>XY_SERIES_Y_AXIS_TICK_ANCHOR</b>, 
+<b>XY_SERIES_Y_AXIS_TICK_COUNT</b>, 
+<b>XY_SERIES_Y_AXIS_TICK_INTERVAL</b>, 
+<b>XY_SERIES_Y_AXIS_TICK_TYPE</b>
 <br />
  }</td></tr>
 <tr class="separator:add1ee56e6b9b15a1337cfd46c8523a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,15 +243,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad48e6a05ec58d127060662a429d56311"><td class="memItemLeft" align="right" valign="top"><a id="ad48e6a05ec58d127060662a429d56311"></a>
 QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>legend_properties</b> (void) const</td></tr>
 <tr class="separator:ad48e6a05ec58d127060662a429d56311"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a612bdb491bbe54b2817e9c61fc791f6f"><td class="memItemLeft" align="right" valign="top"><a id="a612bdb491bbe54b2817e9c61fc791f6f"></a>
-QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>properties</b> (void) const</td></tr>
-<tr class="separator:a612bdb491bbe54b2817e9c61fc791f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f3356bffbc530c4a4a907ba356ca77b"><td class="memItemLeft" align="right" valign="top"><a id="a6f3356bffbc530c4a4a907ba356ca77b"></a>
 QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>x_axis_properties</b> (void) const</td></tr>
 <tr class="separator:a6f3356bffbc530c4a4a907ba356ca77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40fbe31ba4baae3b7d5daf03e0903ab6"><td class="memItemLeft" align="right" valign="top"><a id="a40fbe31ba4baae3b7d5daf03e0903ab6"></a>
 QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>y_axis_properties</b> (void) const</td></tr>
 <tr class="separator:a40fbe31ba4baae3b7d5daf03e0903ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5da5aa11ce7f8e966cd2a282f5cab0"><td class="memItemLeft" align="right" valign="top"><a id="aba5da5aa11ce7f8e966cd2a282f5cab0"></a>
+QMenu *&#160;</td><td class="memItemRight" valign="bottom"><b>menu</b> (void)</td></tr>
+<tr class="separator:aba5da5aa11ce7f8e966cd2a282f5cab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a612bdb491bbe54b2817e9c61fc791f6f"><td class="memItemLeft" align="right" valign="top"><a id="a612bdb491bbe54b2817e9c61fc791f6f"></a>
+virtual QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>properties</b> (void) const</td></tr>
+<tr class="separator:a612bdb491bbe54b2817e9c61fc791f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ead69f8816eeb34adae6b85ee21304a"><td class="memItemLeft" align="right" valign="top"><a id="a6ead69f8816eeb34adae6b85ee21304a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (void)</td></tr>
 <tr class="separator:a6ead69f8816eeb34adae6b85ee21304a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,6 +284,9 @@ QHash&lt; QString, QVariant &gt;&#160;</td><td class="memItemRight" valign="bott
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:aa5d491d8d903b6bf145943d74aa11e0f"><td class="memItemLeft" align="right" valign="top"><a id="aa5d491d8d903b6bf145943d74aa11e0f"></a>
+QMenu *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menu</b></td></tr>
+<tr class="separator:aa5d491d8d903b6bf145943d74aa11e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a155fd8c9e11089ecf0fe63e040772f14"><td class="memItemLeft" align="right" valign="top"><a id="a155fd8c9e11089ecf0fe63e040772f14"></a>
 Ui_dooble_charts&#160;</td><td class="memItemRight" valign="bottom"><b>m_ui</b></td></tr>
 <tr class="separator:a155fd8c9e11089ecf0fe63e040772f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
