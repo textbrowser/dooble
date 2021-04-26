@@ -146,6 +146,19 @@ properties(void) const
   return properties;
 }
 
+QHash<QString, QVariant> dooble_charts_xyseries::
+properties_for_database(void) const
+{
+  /*
+  ** Produce a map of the properties. If new properties are introduced,
+  ** previous maps will remain consistent.
+  */
+
+  QHash<QString, QVariant> hash(dooble_charts::properties_for_database());
+
+  return hash;
+}
+
 #ifdef DOOBLE_QTCHARTS_PRESENT
 QString dooble_charts_xyseries::tick_type_to_string
 (const QValueAxis::TickType tick_type)

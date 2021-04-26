@@ -218,7 +218,7 @@ class dooble_charts: public QWidget
 #endif
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;
-  QHash<QString, QVariant> properties_for_database(void) const;
+  virtual QHash<QString, QVariant> properties_for_database(void) const;
 
  protected slots:
   virtual void slot_item_changed(QStandardItem *item);

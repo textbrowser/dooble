@@ -44,6 +44,9 @@ class dooble_charts_xyseries: public dooble_charts
 #endif
   static const QString s_chart_properties_strings[];
 
+ private:
+  QHash<QString, QVariant> properties_for_database(void) const;
+
  private slots:
   void slot_item_changed(QStandardItem *item);
 };
