@@ -2849,6 +2849,7 @@ void dooble_settings::slot_reset(void)
 
   list << "dooble_accepted_or_blocked_domains.db"
        << "dooble_certificate_exceptions.db"
+       << "dooble_charts.db"
        << "dooble_cookies.db"
        << "dooble_downloads.db"
        << "dooble_favicons.db"

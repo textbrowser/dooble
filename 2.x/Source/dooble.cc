@@ -2866,6 +2866,14 @@ void dooble::slot_remove_tab_widget_shortcut(void)
 
 void dooble::slot_save(void)
 {
+  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
+
+  if(chart)
+    {
+      chart->save();
+      return;
+    }
+
   auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
 
   if(!page)
@@ -3620,6 +3628,7 @@ void dooble::slot_vacuum_databases(void)
 
   list << "dooble_accepted_or_blocked_domains.db"
        << "dooble_certificate_exceptions.db"
+       << "dooble_charts.db"
        << "dooble_cookies.db"
        << "dooble_downloads.db"
        << "dooble_favicons.db"

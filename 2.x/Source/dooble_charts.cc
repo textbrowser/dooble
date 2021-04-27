@@ -189,17 +189,12 @@ QHash<QString, QVariant> dooble_charts::properties_for_database(void) const
 
   QHash<QString, QVariant> hash;
   QHashIterator<dooble_charts::Properties, QVariant> it(properties());
-  auto end = sizeof(s_chart_properties_strings) /
-    sizeof(s_chart_properties_strings[0]);
 
   while(it.hasNext())
     {
       it.next();
 
-      QString property("");
-
-      if(end > it.key() && it.key() >= 0)
-	property = s_chart_properties_strings[it.key()];
+      auto property(property_to_name(it.key()));
 
       if(!property.isEmpty())
 	hash[property] = it.value();
@@ -265,6 +260,11 @@ properties(void) const
     margins().right();
   properties[dooble_charts::Properties::CHART_MARGINS_TOP] = m_chart->
     margins().top();
+
+  if(m_property_editor)
+    properties[dooble_charts::Properties::CHART_NAME] = m_property_editor->
+      property(dooble_charts::Properties::CHART_NAME);
+
   properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
     m_chart->isPlotAreaBackgroundVisible();
   properties[dooble_charts::Properties::CHART_THEME] =
@@ -431,7 +431,7 @@ QString dooble_charts::chart_animation_option_to_string
       }
     case QChart::GridAxisAnimations:
       {
-	return tr("Grid");
+	return tr("Grid Axis");
       }
     case QChart::SeriesAnimations:
       {
@@ -528,8 +528,45 @@ QString dooble_charts::legend_marker_shape_to_string
 }
 #endif
 
+QString dooble_charts::property_to_name
+(const dooble_charts::Properties property)
+{
+  switch(property)
+    {
+    case CHART_ANIMATION_DURATION:
+    case CHART_ANIMATION_OPTIONS:
+    case CHART_BACKGROUND_COLOR:
+    case CHART_BACKGROUND_ROUNDNESS:
+    case CHART_BACKGROUND_VISIBLE:
+    case CHART_CHART_TYPE:
+    case CHART_DROP_SHADOW_ENABLED:
+    case CHART_LOCALE:
+    case CHART_LOCALIZE_NUMBERS:
+    case CHART_MARGINS_BOTTOM:
+    case CHART_MARGINS_LEFT:
+    case CHART_MARGINS_RIGHT:
+    case CHART_MARGINS_TOP:
+    case CHART_NAME:
+    case CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+    case CHART_THEME:
+    case CHART_TITLE:
+    case CHART_TITLE_COLOR:
+    case CHART_TITLE_FONT:
+      {
+	return s_chart_properties_strings[property];
+      }
+    default:
+      {
+	break;
+      }
+    }
+
+  return "";
+}
+
 void dooble_charts::save(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   auto database_name(dooble_database_utilities::database_name());
 
   {
@@ -542,6 +579,8 @@ void dooble_charts::save(void)
     if(db.open())
       {
 	QSqlQuery query(db);
+	auto name(properties().value(dooble_charts::Properties::CHART_NAME).
+		  toString().toUtf8());
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_charts ("
 		   "name TEXT NOT NULL, "
@@ -549,12 +588,29 @@ void dooble_charts::save(void)
 		   "subset_name TEXT NOT NULL, "
 		   "value TEXT NOT NULL, "
 		   "PRIMARY KEY (name, property, subset_name))");
+
+	QHashIterator<QString, QVariant> it(properties_for_database());
+
+	while(it.hasNext())
+	  {
+	    it.next();
+	    query.prepare
+	      ("INSERT OR REPLACE INTO dooble_charts "
+	       "(name, property, subset_name, value) "
+	       "VALUES (?, ?, ?, ?)");
+	    query.addBindValue(name);
+	    query.addBindValue(it.key().toUtf8());
+	    query.addBindValue("properties");
+	    query.addBindValue(it.value());
+	    query.exec();
+	  }
       }
 
     db.close();
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_charts::slot_item_changed(QStandardItem *item)
