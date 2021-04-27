@@ -37,7 +37,6 @@
 #ifdef DOOBLE_QTCHARTS_PRESENT
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
-Q_DECLARE_METATYPE(QChart::AnimationOptions)
 #endif
 
 const QString dooble_charts::s_axis_properties_strings[] =
@@ -209,9 +208,6 @@ dooble_charts::legend_properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  if(!m_legend)
-    return properties;
-
   properties[LEGEND_ALIGNMENT] = dooble_ui_utilities::alignment_to_string
     (m_legend->alignment());
   properties[LEGEND_BACKGROUND_VISIBLE] = m_legend->isBackgroundVisible();

@@ -194,4 +194,44 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
     return;
 
   dooble_charts::slot_item_changed(item);
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  auto series = qobject_cast<QLineSeries *> (m_series);
+  auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
+  auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
+
+  if(!series || !x_axis || !y_axis)
+    return;
+
+  auto property = dooble_charts::Properties
+    (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
+
+  switch(property)
+    {
+    case dooble_charts::Properties::XY_SERIES_COLOR:
+      {
+	series->setColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_NAME:
+      {
+	series->setName(item->text());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_OPACITY:
+      {
+	series->setOpacity(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE:
+      {
+	series->setPointsVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    default:
+      {
+	break;
+      }
+    }
+#endif
 }
