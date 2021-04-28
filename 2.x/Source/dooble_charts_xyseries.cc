@@ -228,6 +228,45 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 	series->setPointsVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_CLIPPING:
+      {
+	series->setPointLabelsClipping(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR:
+      {
+	series->setPointLabelsColor(QColor(item->text()));
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_FONT:
+      {
+	QFont font;
+
+	if(font.fromString(item->text()))
+	  series->setPointLabelsFont(font);
+
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_FORMAT:
+      {
+	series->setPointLabelsFormat(item->text());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_VISIBLE:
+      {
+	series->setPointLabelsVisible(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_USE_OPENGL:
+      {
+	series->setUseOpenGL(item->checkState() == Qt::Checked);
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_VISIBLE:
+      {
+	series->setVisible(item->checkState() == Qt::Checked);
+	break;
+      }
     default:
       {
 	break;
