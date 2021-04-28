@@ -297,6 +297,16 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 	x_axis->setTickCount(item->text().toInt());
 	break;
       }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
+      {
+	x_axis->setTickInterval(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE:
+      {
+	x_axis->setTickType(string_to_tick_type(item->text()));
+	break;
+      }
     default:
       {
 	break;
