@@ -267,6 +267,36 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 	series->setVisible(item->checkState() == Qt::Checked);
 	break;
       }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_LABEL_FORMAT:
+      {
+	x_axis->setLabelFormat(item->text());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MAX:
+      {
+	x_axis->setMax(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MIN:
+      {
+	x_axis->setMin(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MINOR_TICK_COUNT:
+      {
+	x_axis->setMinorTickCount(item->text().toInt());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_ANCHOR:
+      {
+	x_axis->setTickAnchor(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT:
+      {
+	x_axis->setTickCount(item->text().toInt());
+	break;
+      }
     default:
       {
 	break;
