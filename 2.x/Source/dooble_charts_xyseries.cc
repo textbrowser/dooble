@@ -307,6 +307,46 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 	x_axis->setTickType(string_to_tick_type(item->text()));
 	break;
       }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_LABEL_FORMAT:
+      {
+	y_axis->setLabelFormat(item->text());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX:
+      {
+	y_axis->setMax(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN:
+      {
+	y_axis->setMin(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MINOR_TICK_COUNT:
+      {
+	y_axis->setMinorTickCount(item->text().toInt());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_ANCHOR:
+      {
+	y_axis->setTickAnchor(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_COUNT:
+      {
+	y_axis->setTickCount(item->text().toInt());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
+      {
+	y_axis->setTickInterval(item->text().toDouble());
+	break;
+      }
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE:
+      {
+	y_axis->setTickType(string_to_tick_type(item->text()));
+	break;
+      }
     default:
       {
 	break;
