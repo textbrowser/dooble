@@ -187,17 +187,34 @@ QHash<QString, QVariant> dooble_charts::properties_for_database(void) const
   */
 
   QHash<QString, QVariant> hash;
-  QHashIterator<dooble_charts::Properties, QVariant> it(properties());
 
-  while(it.hasNext())
-    {
-      it.next();
+  {
+    QHashIterator<dooble_charts::Properties, QVariant> it(properties());
 
-      auto property(property_to_name(it.key()));
+    while(it.hasNext())
+      {
+	it.next();
 
-      if(!property.isEmpty())
-	hash[property] = it.value();
-    }
+	auto property(property_to_name(it.key()));
+
+	if(!property.isEmpty())
+	  hash[property] = it.value();
+      }
+  }
+
+  {
+    QHashIterator<dooble_charts::Properties, QVariant> it(x_axis_properties());
+
+    while(it.hasNext())
+      {
+	it.next();
+
+	auto property(property_to_name(it.key()));
+
+	if(!property.isEmpty())
+	  hash[property] = it.value();
+      }
+  }
 
   return hash;
 }
