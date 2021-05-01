@@ -187,34 +187,41 @@ QHash<QString, QVariant> dooble_charts::properties_for_database(void) const
   */
 
   QHash<QString, QVariant> hash;
+  QHashIterator<dooble_charts::Properties, QVariant> it(properties());
 
-  {
-    QHashIterator<dooble_charts::Properties, QVariant> it(properties());
+  while(it.hasNext())
+    {
+      it.next();
 
-    while(it.hasNext())
-      {
-	it.next();
+      auto property(property_to_name(it.key()));
 
-	auto property(property_to_name(it.key()));
+      if(!property.isEmpty())
+	hash[property] = it.value();
+    }
 
-	if(!property.isEmpty())
-	  hash[property] = it.value();
-      }
-  }
+  return hash;
+}
 
-  {
-    QHashIterator<dooble_charts::Properties, QVariant> it(x_axis_properties());
+QHash<QString, QVariant> dooble_charts::
+x_axis_properties_for_database(void) const
+{
+  /*
+  ** Produce a map of the x-axis properties. If new properties are introduced,
+  ** previous maps will remain consistent.
+  */
 
-    while(it.hasNext())
-      {
-	it.next();
+  QHash<QString, QVariant> hash;
+  QHashIterator<dooble_charts::Properties, QVariant> it(x_axis_properties());
 
-	auto property(property_to_name(it.key()));
+  while(it.hasNext())
+    {
+      it.next();
 
-	if(!property.isEmpty())
-	  hash[property] = it.value();
-      }
-  }
+      auto property(property_to_name(it.key()));
+
+      if(!property.isEmpty())
+	hash[property] = it.value();
+    }
 
   return hash;
 }
@@ -225,18 +232,25 @@ dooble_charts::legend_properties(void) const
   QHash<dooble_charts::Properties, QVariant> properties;
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  properties[LEGEND_ALIGNMENT] = dooble_ui_utilities::alignment_to_string
+  properties[dooble_charts::Properties::LEGEND_ALIGNMENT] =
+    dooble_ui_utilities::alignment_to_string
     (m_legend->alignment());
-  properties[LEGEND_BACKGROUND_VISIBLE] = m_legend->isBackgroundVisible();
-  properties[LEGEND_BORDER_COLOR] = m_legend->borderColor();
-  properties[LEGEND_COLOR] = m_legend->color();
-  properties[LEGEND_FONT] = m_legend->font();
-  properties[LEGEND_LABEL_COLOR] = m_legend->labelColor();
-  properties[LEGEND_MARKER_SHAPE] = legend_marker_shape_to_string
-    (m_legend->markerShape());
-  properties[LEGEND_REVERSE_MARKERS] = m_legend->reverseMarkers();
-  properties[LEGEND_SHOW_TOOL_TIPS] = m_legend->showToolTips();
-  properties[LEGEND_VISIBLE] = m_legend->isVisible();
+  properties[dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE] =
+    m_legend->isBackgroundVisible();
+  properties[dooble_charts::Properties::LEGEND_BORDER_COLOR] =
+    m_legend->borderColor();
+  properties[dooble_charts::Properties::LEGEND_COLOR] = m_legend->color();
+  properties[dooble_charts::Properties::LEGEND_FONT] = m_legend->font();
+  properties[dooble_charts::Properties::LEGEND_LABEL_COLOR] =
+    m_legend->labelColor();
+  properties[dooble_charts::Properties::LEGEND_MARKER_SHAPE] =
+    legend_marker_shape_to_string(m_legend->markerShape());
+  properties[dooble_charts::Properties::LEGEND_REVERSE_MARKERS] =
+    m_legend->reverseMarkers();
+  properties[dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS] =
+    m_legend->showToolTips();
+  properties[dooble_charts::Properties::LEGEND_VISIBLE] =
+    m_legend->isVisible();
 #endif
   return properties;
 }
@@ -546,27 +560,78 @@ QString dooble_charts::property_to_name
 {
   switch(property)
     {
-    case CHART_ANIMATION_DURATION:
-    case CHART_ANIMATION_OPTIONS:
-    case CHART_BACKGROUND_COLOR:
-    case CHART_BACKGROUND_ROUNDNESS:
-    case CHART_BACKGROUND_VISIBLE:
-    case CHART_CHART_TYPE:
-    case CHART_DROP_SHADOW_ENABLED:
-    case CHART_LOCALE:
-    case CHART_LOCALIZE_NUMBERS:
-    case CHART_MARGINS_BOTTOM:
-    case CHART_MARGINS_LEFT:
-    case CHART_MARGINS_RIGHT:
-    case CHART_MARGINS_TOP:
-    case CHART_NAME:
-    case CHART_PLOT_AREA_BACKGROUND_VISIBLE:
-    case CHART_THEME:
-    case CHART_TITLE:
-    case CHART_TITLE_COLOR:
-    case CHART_TITLE_FONT:
+    case dooble_charts::Properties::CHART_ANIMATION_DURATION:
+    case dooble_charts::Properties::CHART_ANIMATION_OPTIONS:
+    case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
+    case dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS:
+    case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
+    case dooble_charts::Properties::CHART_CHART_TYPE:
+    case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
+    case dooble_charts::Properties::CHART_LOCALE:
+    case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
+    case dooble_charts::Properties::CHART_MARGINS_BOTTOM:
+    case dooble_charts::Properties::CHART_MARGINS_LEFT:
+    case dooble_charts::Properties::CHART_MARGINS_RIGHT:
+    case dooble_charts::Properties::CHART_MARGINS_TOP:
+    case dooble_charts::Properties::CHART_NAME:
+    case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
+    case dooble_charts::Properties::CHART_THEME:
+    case dooble_charts::Properties::CHART_TITLE:
+    case dooble_charts::Properties::CHART_TITLE_COLOR:
+    case dooble_charts::Properties::CHART_TITLE_FONT:
       {
 	return s_chart_properties_strings[property];
+      }
+    case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_HORIZONTAL:
+    case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_VERTICAL:
+    case dooble_charts::Properties::CHART_AXIS_X_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_ANGLE:
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_FONT:
+    case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_X_ORIENTATION:
+    case dooble_charts::Properties::CHART_AXIS_X_REVERSE:
+    case dooble_charts::Properties::CHART_AXIS_X_SHADES_BORDER_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_SHADES_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_FONT:
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_TEXT:
+    case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
+      {
+	return s_axis_properties_strings
+	  [property - dooble_charts::Properties::CHART_TITLE_FONT - 1];
+      }
+    case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_HORIZONTAL:
+    case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_VERTICAL:
+    case dooble_charts::Properties::CHART_AXIS_Y_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_ANGLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_FONT:
+    case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_ORIENTATION:
+    case dooble_charts::Properties::CHART_AXIS_Y_REVERSE:
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_BORDER_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_FONT:
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_TEXT:
+    case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
+    case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
+      {
+	break;
       }
     default:
       {
@@ -602,21 +667,42 @@ void dooble_charts::save(void)
 		   "value TEXT NOT NULL, "
 		   "PRIMARY KEY (name, property, subset_name))");
 
-	QHashIterator<QString, QVariant> it(properties_for_database());
+	{
+	  QHashIterator<QString, QVariant> it(properties_for_database());
 
-	while(it.hasNext())
-	  {
-	    it.next();
-	    query.prepare
-	      ("INSERT OR REPLACE INTO dooble_charts "
-	       "(name, property, subset_name, value) "
-	       "VALUES (?, ?, ?, ?)");
-	    query.addBindValue(name);
-	    query.addBindValue(it.key().toUtf8());
-	    query.addBindValue("properties");
-	    query.addBindValue(it.value());
-	    query.exec();
-	  }
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("properties");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
+
+	{
+	  QHashIterator<QString, QVariant> it
+	    (x_axis_properties_for_database());
+
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("x_axis_properties");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
       }
 
     db.close();
