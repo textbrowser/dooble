@@ -226,6 +226,31 @@ x_axis_properties_for_database(void) const
   return hash;
 }
 
+QHash<QString, QVariant> dooble_charts::
+y_axis_properties_for_database(void) const
+{
+  /*
+  ** Produce a map of the y-axis properties. If new properties are introduced,
+  ** previous maps will remain consistent.
+  */
+
+  QHash<QString, QVariant> hash;
+  QHashIterator<dooble_charts::Properties, QVariant> it(y_axis_properties());
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      auto property(property_to_name(it.key()));
+
+      if(!property.isEmpty())
+	hash[property] = it.value();
+    }
+
+  return hash;
+}
+
+
 QHash<dooble_charts::Properties, QVariant>
 dooble_charts::legend_properties(void) const
 {
