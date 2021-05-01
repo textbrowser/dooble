@@ -656,7 +656,8 @@ QString dooble_charts::property_to_name
     case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
     case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
       {
-	break;
+	return s_axis_properties_strings
+	  [property - dooble_charts::Properties::CHART_AXIS_X_VISIBLE - 1];
       }
     default:
       {
@@ -724,6 +725,25 @@ void dooble_charts::save(void)
 	      query.addBindValue(name);
 	      query.addBindValue(it.key().toUtf8());
 	      query.addBindValue("x_axis_properties");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
+
+	{
+	  QHashIterator<QString, QVariant> it
+	    (y_axis_properties_for_database());
+
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("y_axis_properties");
 	      query.addBindValue(it.value());
 	      query.exec();
 	    }
