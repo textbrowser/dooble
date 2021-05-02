@@ -47,6 +47,7 @@ class dooble_charts_xyseries: public dooble_charts
 
  private:
   QHash<QString, QVariant> properties_for_database(void) const;
+  QHash<QString, QVariant> x_axis_properties_for_database(void) const;
   QString property_to_name(const dooble_charts::Properties property) const;
 
  private slots:

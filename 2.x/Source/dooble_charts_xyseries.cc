@@ -172,6 +172,53 @@ properties_for_database(void) const
 	*/
 
 	continue;
+      else if(!(it.key() >= dooble_charts::Properties::XY_SERIES_COLOR &&
+		it.key() <= dooble_charts::Properties::XY_SERIES_VISIBLE))
+	/*
+	** Ignore non-chart properties.
+	*/
+
+	continue;
+
+      auto property(property_to_name(it.key()));
+
+      if(!property.isEmpty())
+	hash[property] = it.value();
+    }
+
+  return hash;
+}
+
+QHash<QString, QVariant> dooble_charts_xyseries::
+x_axis_properties_for_database(void) const
+{
+  /*
+  ** Produce a map of the properties. If new properties are introduced,
+  ** previous maps will remain consistent.
+  */
+
+  QHash<QString, QVariant> hash;
+  QHashIterator<dooble_charts::Properties, QVariant> it(properties());
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(dooble_charts::properties().contains(it.key()))
+	/*
+	** Ignore properties of the base class.
+	*/
+
+	continue;
+      else if(!(it.key() >=
+		dooble_charts::Properties::XY_SERIES_X_AXIS_LABEL_FORMAT &&
+		it.key() <=
+		dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE))
+	/*
+	** Ignore non-x-axis properties.
+	*/
+
+	continue;
 
       auto property(property_to_name(it.key()));
 
@@ -281,21 +328,42 @@ void dooble_charts_xyseries::save(void)
 	auto name(properties().value(dooble_charts::Properties::CHART_NAME).
 		  toString().toUtf8());
 
-	QHashIterator<QString, QVariant> it(properties_for_database());
+	{
+	  QHashIterator<QString, QVariant> it(properties_for_database());
 
-	while(it.hasNext())
-	  {
-	    it.next();
-	    query.prepare
-	      ("INSERT OR REPLACE INTO dooble_charts "
-	       "(name, property, subset_name, value) "
-	       "VALUES (?, ?, ?, ?)");
-	    query.addBindValue(name);
-	    query.addBindValue(it.key().toUtf8());
-	    query.addBindValue("xy_series_properties");
-	    query.addBindValue(it.value());
-	    query.exec();
-	  }
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("xy_series_properties");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
+
+	{
+	  QHashIterator<QString, QVariant> it
+	    (x_axis_properties_for_database());
+
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("xy_series_x_axis_properties");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
       }
 
     db.close();
