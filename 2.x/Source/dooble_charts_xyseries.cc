@@ -25,8 +25,13 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QSqlDatabase>
+#include <QSqlQuery>
+
 #include "dooble_charts_property_editor_xyseries.h"
 #include "dooble_charts_xyseries.h"
+#include "dooble_database_utilities.h"
+#include "dooble_settings.h"
 
 const QString dooble_charts_xyseries::s_chart_properties_strings[] =
   {
@@ -59,7 +64,7 @@ const QString dooble_charts_xyseries::s_chart_properties_strings[] =
    tr("Tick Count"),
    tr("Tick Interval"),
    tr("Tick Type"),
-   QString("")
+   ""
   };
 
 dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
@@ -154,9 +159,78 @@ properties_for_database(void) const
   ** previous maps will remain consistent.
   */
 
-  QHash<QString, QVariant> hash(dooble_charts::properties_for_database());
+  QHash<QString, QVariant> hash;
+  QHashIterator<dooble_charts::Properties, QVariant> it(properties());
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(dooble_charts::properties().contains(it.key()))
+	/*
+	** Ignore properties of the base class.
+	*/
+
+	continue;
+
+      auto property(property_to_name(it.key()));
+
+      if(!property.isEmpty())
+	hash[property] = it.value();
+    }
 
   return hash;
+}
+
+QString dooble_charts_xyseries::property_to_name
+(const dooble_charts::Properties property) const
+{
+  auto name(dooble_charts::property_to_name(property).trimmed());
+
+  if(!name.isEmpty())
+    return name;
+
+  switch(property)
+    {
+    case dooble_charts::Properties::XY_SERIES_COLOR:
+    case dooble_charts::Properties::XY_SERIES_NAME:
+    case dooble_charts::Properties::XY_SERIES_OPACITY:
+    case dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_CLIPPING:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_FONT:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_FORMAT:
+    case dooble_charts::Properties::XY_SERIES_POINT_LABELS_VISIBLE:
+    case dooble_charts::Properties::XY_SERIES_USE_OPENGL:
+    case dooble_charts::Properties::XY_SERIES_VISIBLE:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_LABEL_FORMAT:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MAX:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MIN:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_MINOR_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_ANCHOR:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
+    case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_LABEL_FORMAT:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_MINOR_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_ANCHOR:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_COUNT:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
+    case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE:
+      {
+	return s_chart_properties_strings[property - LEGEND_VISIBLE - 1];
+      }
+    default:
+      {
+	break;
+      }
+    }
+
+  return "";
 }
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -187,6 +261,49 @@ QValueAxis::TickType dooble_charts_xyseries::string_to_tick_type
     return QValueAxis::TicksFixed;
 }
 #endif
+
+void dooble_charts_xyseries::save(void)
+{
+  dooble_charts::save();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_charts.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+	auto name(properties().value(dooble_charts::Properties::CHART_NAME).
+		  toString().toUtf8());
+
+	QHashIterator<QString, QVariant> it(properties_for_database());
+
+	while(it.hasNext())
+	  {
+	    it.next();
+	    query.prepare
+	      ("INSERT OR REPLACE INTO dooble_charts "
+	       "(name, property, subset_name, value) "
+	       "VALUES (?, ?, ?, ?)");
+	    query.addBindValue(name);
+	    query.addBindValue(it.key().toUtf8());
+	    query.addBindValue("xy_series_properties");
+	    query.addBindValue(it.value());
+	    query.exec();
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
 
 void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 {

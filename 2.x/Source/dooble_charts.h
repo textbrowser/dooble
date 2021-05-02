@@ -201,9 +201,13 @@ class dooble_charts: public QWidget
   static const QString s_chart_properties_strings[];
   static const QString s_data_properties_strings[];
   static const QString s_legend_properties_strings[];
-  static QString property_to_name(const dooble_charts::Properties property);
   virtual QHash<dooble_charts::Properties, QVariant> properties(void) const;
-  void save(void);
+  virtual void save(void);
+
+ private:
+  QHash<QString, QVariant> properties_for_database(void) const;
+  QHash<QString, QVariant> x_axis_properties_for_database(void) const;
+  QHash<QString, QVariant> y_axis_properties_for_database(void) const;
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -219,9 +223,8 @@ class dooble_charts: public QWidget
 #endif
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;
-  virtual QHash<QString, QVariant> properties_for_database(void) const;
-  virtual QHash<QString, QVariant> x_axis_properties_for_database(void) const;
-  virtual QHash<QString, QVariant> y_axis_properties_for_database(void) const;
+  virtual QString property_to_name
+    (const dooble_charts::Properties property) const;
 
  protected slots:
   virtual void slot_item_changed(QStandardItem *item);

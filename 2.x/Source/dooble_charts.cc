@@ -63,7 +63,7 @@ const QString dooble_charts::s_axis_properties_strings[] =
    tr("Title Text"),
    tr("Title Visible"),
    tr("Visible"),
-   QString("")
+   ""
   };
 
 const QString dooble_charts::s_chart_properties_strings[] =
@@ -88,7 +88,7 @@ const QString dooble_charts::s_chart_properties_strings[] =
    tr("Title"),
    tr("Title Color"),
    tr("Title Font"),
-   QString(""),
+   "",
   };
 
 const QString dooble_charts::s_data_properties_strings[] =
@@ -98,7 +98,7 @@ const QString dooble_charts::s_data_properties_strings[] =
    tr("Source Read Buffer Size"),
    tr("Source Read Rate"),
    tr("Source Type"),
-   QString("")
+   ""
   };
 
 const QString dooble_charts::s_legend_properties_strings[] =
@@ -113,7 +113,7 @@ const QString dooble_charts::s_legend_properties_strings[] =
    tr("Reverse Markers"),
    tr("Show Tool Tips"),
    tr("Visible"),
-   QString("")
+   ""
   };
 
 dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
@@ -192,6 +192,13 @@ QHash<QString, QVariant> dooble_charts::properties_for_database(void) const
   while(it.hasNext())
     {
       it.next();
+
+      if(!dooble_charts::properties().contains(it.key()))
+	/*
+	** Ignore properties of derived classes.
+	*/
+
+	continue;
 
       auto property(property_to_name(it.key()));
 
@@ -581,7 +588,7 @@ QString dooble_charts::legend_marker_shape_to_string
 #endif
 
 QString dooble_charts::property_to_name
-(const dooble_charts::Properties property)
+(const dooble_charts::Properties property) const
 {
   switch(property)
     {
@@ -690,7 +697,7 @@ void dooble_charts::save(void)
 		   "name TEXT NOT NULL, "
 		   "property TEXT NOT NULL, "
 		   "subset_name TEXT NOT NULL, "
-		   "value TEXT NOT NULL, "
+		   "value TEXT, "
 		   "PRIMARY KEY (name, property, subset_name))");
 
 	{
