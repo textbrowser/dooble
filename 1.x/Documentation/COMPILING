@@ -4,7 +4,8 @@ may work. Qt 4.8.6 and Qt 4.8.7 are supported.
 If header (h) or interface (ui) files have changed, please perform
 a distclean before building Dooble.
 
-OS X developers should consider installing Homebrew. Please see http://brew.sh.
+OS X developers should consider installing Homebrew.
+Please see https://brew.sh.
 
 To verify the version of Qt, issue qmake --version. Qt 5.x project files
 include qt5 in their names. qmake may be an alias for qmake-qt4 or qmake-qt5.
