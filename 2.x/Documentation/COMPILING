@@ -1,0 +1,17 @@
+OS X developers should consider installing Homebrew. Please see
+https://brew.sh.
+
+FreeBSD
+
+qmake or qmake-qt5 -o Makefile dooble.pro
+gmake
+
+Linux
+
+qmake or qmake-qt5 -o Makefile dooble.pro
+make
+
+OS X
+
+qmake -o Makefile dooble.pro
+make
