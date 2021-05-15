@@ -1735,7 +1735,7 @@ void dooble_settings::slot_apply(void)
 	      "Continue?"));
 
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -2566,7 +2566,7 @@ void dooble_settings::slot_remove_all_features_permissions(void)
   mb.setText(tr("Are you sure that you wish to remove all of the "
 		"feature permissions?"));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
@@ -2597,7 +2597,7 @@ void dooble_settings::slot_remove_all_javascript_block_popup_exceptions(void)
       mb.setText(tr("Are you sure that you wish to remove all of the "
 		    "JavaScript pop-up exceptions?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -2636,7 +2636,7 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
       mb.setText(tr("Are you sure that you wish to remove the selected "
 		    "feature permission(s)?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -2751,7 +2751,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
       mb.setText(tr("Are you sure that you wish to remove the selected "
 		    "JavaScript pop-up exception(s)?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -2833,7 +2833,7 @@ void dooble_settings::slot_reset(void)
 	"remove the directory WebEnginePersistentStorage after the reset "
 	"completes."));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
@@ -2891,7 +2891,7 @@ void dooble_settings::slot_reset_credentials(void)
 		"credentials? New session-only credentials "
 		"will be generated and database data will be removed."));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
@@ -2996,7 +2996,7 @@ void dooble_settings::slot_save_credentials(void)
       mb.setText(tr("Are you sure that you wish to prepare new credentials? "
 		    "Existing database data will be removed."));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)

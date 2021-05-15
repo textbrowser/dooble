@@ -228,7 +228,7 @@ void dooble_downloads::delete_selected(void)
       mb.setText
 	(tr("Are you sure that you wish to delete the selected item(s)?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -463,7 +463,7 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 	(tr("Are you sure that you wish to delete all of the "
 	    "finished downloads? Hidden entries will also be removed."));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -510,7 +510,7 @@ void dooble_downloads::slot_delete_row(void)
       mb.setText
 	(tr("Are you sure that you wish to delete the selected entry?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)

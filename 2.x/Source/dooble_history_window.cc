@@ -377,7 +377,7 @@ void dooble_history_window::slot_delete_pages(void)
       (tr("Are you sure that you wish to remove the selected item(s)?"));
 
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)

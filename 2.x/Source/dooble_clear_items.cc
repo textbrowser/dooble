@@ -105,7 +105,7 @@ void dooble_clear_items::slot_clear_items(void)
 	  (tr("Downloads are in progress. If you continue, downloads will "
 	      "be canceled. Are you sure that you wish to proceed?"));
 	mb.setWindowIcon(windowIcon());
-	mb.setWindowModality(Qt::WindowModal);
+	mb.setWindowModality(Qt::ApplicationModal);
 	mb.setWindowTitle(tr("Dooble: Confirmation"));
 
 	if(mb.exec() != QMessageBox::Yes)

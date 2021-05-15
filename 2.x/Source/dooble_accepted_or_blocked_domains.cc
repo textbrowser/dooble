@@ -854,7 +854,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
       mb.setText
 	(tr("Are you sure that you wish to delete all of the exceptions?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -920,7 +920,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
       mb.setText
 	(tr("Are you sure that you wish to delete the selected domain(s)?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
@@ -1003,7 +1003,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
       mb.setText
 	(tr("Are you sure that you wish to delete the selected exception(s)?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)

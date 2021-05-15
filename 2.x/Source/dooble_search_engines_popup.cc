@@ -389,7 +389,7 @@ void dooble_search_engines_popup::slot_delete_selected(void)
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
   mb.setText(tr("Are you sure that you wish to delete the selected entries?"));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)

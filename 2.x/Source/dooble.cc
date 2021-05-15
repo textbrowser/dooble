@@ -365,7 +365,7 @@ bool dooble::can_exit(const dooble::CanExit can_exit)
     (tr("Downloads are in progress. Are you sure that you wish to exit? "
 	"If you exit, downloads will be aborted."));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
@@ -2431,7 +2431,7 @@ void dooble::slot_clear_downloads(void)
   mb.setText
     (tr("Are you sure that you wish to delete all of the finished downloads?"));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
@@ -3611,7 +3611,7 @@ void dooble::slot_vacuum_databases(void)
     (tr("Vacuuming databases may require a significant amount of "
 	"time. Continue?"));
   mb.setWindowIcon(windowIcon());
-  mb.setWindowModality(Qt::WindowModal);
+  mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
 
   if(mb.exec() != QMessageBox::Yes)
@@ -3645,7 +3645,7 @@ void dooble::slot_vacuum_databases(void)
   dialog.setMaximum(list.size());
   dialog.setMinimum(0);
   dialog.setWindowIcon(windowIcon());
-  dialog.setWindowModality(Qt::WindowModal);
+  dialog.setWindowModality(Qt::ApplicationModal);
   dialog.setWindowTitle(tr("Dooble: Vacuuming Databases"));
   dialog.show();
 

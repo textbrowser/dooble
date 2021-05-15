@@ -216,7 +216,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
       mb.setText(tr("Are you sure that you wish to delete the selected "
 		    "exceptions(s)?"));
       mb.setWindowIcon(windowIcon());
-      mb.setWindowModality(Qt::WindowModal);
+      mb.setWindowModality(Qt::ApplicationModal);
       mb.setWindowTitle(tr("Dooble: Confirmation"));
 
       if(mb.exec() != QMessageBox::Yes)
