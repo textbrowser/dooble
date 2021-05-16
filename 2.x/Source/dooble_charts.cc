@@ -690,6 +690,20 @@ QString dooble_charts::property_to_name
 	return s_axis_properties_strings
 	  [property - dooble_charts::Properties::CHART_AXIS_X_VISIBLE - 1];
       }
+    case dooble_charts::Properties::LEGEND_ALIGNMENT:
+    case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
+    case dooble_charts::Properties::LEGEND_BORDER_COLOR:
+    case dooble_charts::Properties::LEGEND_COLOR:
+    case dooble_charts::Properties::LEGEND_FONT:
+    case dooble_charts::Properties::LEGEND_LABEL_COLOR:
+    case dooble_charts::Properties::LEGEND_MARKER_SHAPE:
+    case dooble_charts::Properties::LEGEND_REVERSE_MARKERS:
+    case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
+    case dooble_charts::Properties::LEGEND_VISIBLE:
+      {
+	return s_legend_properties_strings
+	  [property - dooble_charts::Properties::DATA_SOURCE_TYPE - 1];
+      }
     default:
       {
 	break;
@@ -723,6 +737,25 @@ void dooble_charts::save(void)
 		   "subset_name TEXT NOT NULL, "
 		   "value TEXT, "
 		   "PRIMARY KEY (name, property, subset_name))");
+
+	{
+	  QHashIterator<QString, QVariant> it
+	    (legend_properties_for_database());
+
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("legend");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
 
 	{
 	  QHashIterator<QString, QVariant> it(properties_for_database());
