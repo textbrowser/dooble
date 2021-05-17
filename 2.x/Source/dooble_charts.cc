@@ -713,6 +713,15 @@ QString dooble_charts::property_to_name
   return "";
 }
 
+QWidget *dooble_charts::view(void) const
+{
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  return m_chart_view;
+#else
+  return nullptr;
+#endif
+}
+
 void dooble_charts::save(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));

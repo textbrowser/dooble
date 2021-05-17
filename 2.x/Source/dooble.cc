@@ -1813,9 +1813,13 @@ void dooble::print_current_page(void)
 
 void dooble::print_preview(QPrinter *printer)
 {
+  if(!printer)
+    return;
+
+  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
   auto page = current_page();
 
-  if(!page || !printer)
+  if(!chart && !page)
     return;
 
   QEventLoop event_loop;
@@ -2801,9 +2805,15 @@ void dooble::slot_print_preview(void)
   if(m_print_preview)
     return;
 
+  QWidget *widget = nullptr;
+  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
   auto page = current_page();
 
-  if(!page)
+  if(chart)
+    widget = chart->view();
+  else if(page)
+    widget = page->view();
+  else
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2811,7 +2821,7 @@ void dooble::slot_print_preview(void)
 
   QPrinter printer;
   QScopedPointer<QPrintPreviewDialog> print_preview_dialog
-    (new QPrintPreviewDialog(&printer, page->view()));
+    (new QPrintPreviewDialog(&printer, widget));
 
   connect(print_preview_dialog.data(),
 	  &QPrintPreviewDialog::paintRequested,
