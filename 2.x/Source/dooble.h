@@ -46,6 +46,7 @@ class dooble_about;
 class dooble_accepted_or_blocked_domains;
 class dooble_application;
 class dooble_certificate_exceptions;
+class dooble_charts;
 class dooble_cookies;
 class dooble_cookies_window;
 class dooble_cryptography;
@@ -163,6 +164,7 @@ class dooble: public QMainWindow
   void prepare_style_sheets(void);
   void prepare_tab_icons(void);
   void prepare_tab_shortcuts(void);
+  void print(dooble_charts *chart);
   void print(dooble_page *page);
   void print_preview(QPrinter *printer);
   void remove_page_connections(dooble_page *page);

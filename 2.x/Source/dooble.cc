@@ -1784,6 +1784,42 @@ void dooble::prepare_tab_shortcuts(void)
     }
 }
 
+void dooble::print(dooble_charts *chart)
+{
+  if(!chart || !chart->view())
+    return;
+
+  QPrinter printer;
+  QScopedPointer<QPrintDialog> print_dialog;
+
+  print_dialog.reset(new QPrintDialog(&printer, this));
+
+  if(print_dialog->exec() == QDialog::Accepted)
+    {
+      QApplication::processEvents();
+
+      QPainter painter;
+
+      painter.begin(&printer);
+
+      auto view = chart->view();
+      auto xscale = printer.pageRect().width() /
+	static_cast<double> (view->width());
+      auto yscale = printer.pageRect().height() /
+	static_cast<double> (view->height());
+      double scale = qMin(xscale, yscale);
+
+      painter.translate
+	(printer.paperRect().x() + printer.pageRect().width() / 2,
+	 printer.paperRect().y() + printer.pageRect().height() / 2);
+      painter.scale(scale, scale);
+      painter.translate(-view->width() / 2, -view->height() / 2);
+      view->render(&painter);
+    }
+  else
+    QApplication::processEvents();
+}
+
 void dooble::print(dooble_page *page)
 {
   if(!page)
@@ -1825,10 +1861,10 @@ void dooble::print_preview(QPrinter *printer)
   if(chart && chart->view())
     {
       QPainter painter;
-      auto view = chart->view();
 
       painter.begin(printer);
 
+      auto view = chart->view();
       auto xscale = printer->pageRect().width() /
 	static_cast<double> (view->width());
       auto yscale = printer->pageRect().height() /
@@ -2108,7 +2144,7 @@ void dooble::slot_about_to_show_main_menu(void)
 
       QMenu *m = nullptr;
       auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
-      auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+      auto page = current_page();
 
       if(chart && chart->menu())
 	m = chart->menu();
@@ -2503,7 +2539,7 @@ void dooble::slot_close_tab(void)
     }
   else
     {
-      auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+      auto page = current_page();
 
       if(page)
 	{
@@ -2704,7 +2740,7 @@ void dooble::slot_open_favorites_link(const QUrl &url)
      s_search_engines_popup_opened_from_dooble_window == this ||
      !s_search_engines_popup_opened_from_dooble_window)
     {
-      auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+      auto page = current_page();
 
       if(page)
 	page->load(url);
@@ -2820,7 +2856,10 @@ void dooble::slot_populated(void)
 
 void dooble::slot_print(void)
 {
-  print(qobject_cast<dooble_page *> (m_ui.tab->currentWidget()));
+  if(qobject_cast<dooble_charts *> (m_ui.tab->currentWidget()))
+    print(qobject_cast<dooble_charts *> (m_ui.tab->currentWidget()));
+  else
+    print(current_page());
 }
 
 void dooble::slot_print_preview(void)
@@ -2907,7 +2946,7 @@ void dooble::slot_save(void)
       return;
     }
 
-  auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+  auto page = current_page();
 
   if(!page)
     return;
@@ -3406,7 +3445,7 @@ void dooble::slot_show_site_cookies(void)
 {
   if(m_cookies_window)
     {
-      auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+      auto page = current_page();
 
       if(page)
 	m_cookies_window->filter(page->url().host());
@@ -3432,7 +3471,7 @@ void dooble::slot_show_site_cookies(void)
   ** Display this site's cookies.
   */
 
-  auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+  auto page = current_page();
 
   if(page)
     s_cookies_window->filter(page->url().host());
