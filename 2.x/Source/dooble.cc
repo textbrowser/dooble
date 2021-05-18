@@ -1822,35 +1822,53 @@ void dooble::print_preview(QPrinter *printer)
   if(!chart && !page)
     return;
 
-  QEventLoop event_loop;
-  bool result = false;
-  auto print_preview = [&] (bool success)
-		       {
-			 result = success;
-			 event_loop.quit();
-		       };
-
   if(chart && chart->view())
     {
+      QPainter painter;
+      auto view = chart->view();
+
+      painter.begin(printer);
+
+      auto xscale = printer->pageRect().width() /
+	static_cast<double> (view->width());
+      auto yscale = printer->pageRect().height() /
+	static_cast<double> (view->height());
+      double scale = qMin(xscale, yscale);
+
+      painter.translate
+	(printer->paperRect().x() + printer->pageRect().width() / 2,
+	 printer->paperRect().y() + printer->pageRect().height() / 2);
+      painter.scale(scale, scale);
+      painter.translate(-view->width() / 2, -view->height() / 2);
+      view->render(&painter);
     }
   else if(page)
-    page->print_page(printer, std::move(print_preview));
-
-  event_loop.exec();
-
-  if(!result)
     {
-      QPainter painter;
+      QEventLoop event_loop;
+      bool result = false;
+      auto print_preview = [&] (bool success)
+			   {
+			     result = success;
+			     event_loop.quit();
+			   };
 
-      if(painter.begin(printer))
+      page->print_page(printer, std::move(print_preview));
+      event_loop.exec();
+
+      if(!result)
 	{
-	  auto font = painter.font();
+	  QPainter painter;
 
-	  font.setPixelSize(25);
-	  painter.setFont(font);
-	  painter.drawText(QPointF(25, 25), tr("A failure occurred."));
-	  painter.end();
-        }
+	  if(painter.begin(printer))
+	    {
+	      auto font = painter.font();
+
+	      font.setPixelSize(25);
+	      painter.setFont(font);
+	      painter.drawText(QPointF(25, 25), tr("A failure occurred."));
+	      painter.end();
+	    }
+	}
     }
 }
 
