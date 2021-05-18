@@ -1830,7 +1830,12 @@ void dooble::print_preview(QPrinter *printer)
 			 event_loop.quit();
 		       };
 
-  page->print_page(printer, std::move(print_preview));
+  if(chart && chart->view())
+    {
+    }
+  else if(page)
+    page->print_page(printer, std::move(print_preview));
+
   event_loop.exec();
 
   if(!result)
