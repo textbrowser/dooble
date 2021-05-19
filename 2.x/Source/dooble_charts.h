@@ -206,10 +206,12 @@ class dooble_charts: public QWidget
   virtual void save(void);
 
  private:
+  QHash<QString, QVariant> data_properties_for_database(void) const;
   QHash<QString, QVariant> legend_properties_for_database(void) const;
   QHash<QString, QVariant> properties_for_database(void) const;
   QHash<QString, QVariant> x_axis_properties_for_database(void) const;
   QHash<QString, QVariant> y_axis_properties_for_database(void) const;
+  QHash<dooble_charts::Properties, QVariant> data_properties(void) const;
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT

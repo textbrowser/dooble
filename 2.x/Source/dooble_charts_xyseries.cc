@@ -154,11 +154,6 @@ properties(void) const
 QHash<QString, QVariant> dooble_charts_xyseries::
 properties_for_database(void) const
 {
-  /*
-  ** Produce a map of the properties. If new properties are introduced,
-  ** previous maps will remain consistent.
-  */
-
   QHash<QString, QVariant> hash;
   QHashIterator<dooble_charts::Properties, QVariant> it(properties());
 
@@ -192,11 +187,6 @@ properties_for_database(void) const
 QHash<QString, QVariant> dooble_charts_xyseries::
 x_axis_properties_for_database(void) const
 {
-  /*
-  ** Produce a map of the properties. If new properties are introduced,
-  ** previous maps will remain consistent.
-  */
-
   QHash<QString, QVariant> hash;
   QHashIterator<dooble_charts::Properties, QVariant> it(properties());
 
@@ -232,11 +222,6 @@ x_axis_properties_for_database(void) const
 QHash<QString, QVariant> dooble_charts_xyseries::
 y_axis_properties_for_database(void) const
 {
-  /*
-  ** Produce a map of the properties. If new properties are introduced,
-  ** previous maps will remain consistent.
-  */
-
   QHash<QString, QVariant> hash;
   QHashIterator<dooble_charts::Properties, QVariant> it(properties());
 
