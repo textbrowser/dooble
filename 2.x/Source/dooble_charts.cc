@@ -726,6 +726,15 @@ QString dooble_charts::property_to_name
 	return s_axis_properties_strings
 	  [property - dooble_charts::Properties::CHART_AXIS_X_VISIBLE - 1];
       }
+    case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
+    case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
+    case dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE:
+    case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
+    case dooble_charts::Properties::DATA_SOURCE_TYPE:
+      {
+	return s_data_properties_strings
+	  [property - dooble_charts::Properties::CHART_AXIS_Y_VISIBLE - 1];
+      }
     case dooble_charts::Properties::LEGEND_ALIGNMENT:
     case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
     case dooble_charts::Properties::LEGEND_BORDER_COLOR:
@@ -782,6 +791,25 @@ void dooble_charts::save(void)
 		   "subset_name TEXT NOT NULL, "
 		   "value TEXT, "
 		   "PRIMARY KEY (name, property, subset_name))");
+
+	{
+	  QHashIterator<QString, QVariant> it
+	    (data_properties_for_database());
+
+	  while(it.hasNext())
+	    {
+	      it.next();
+	      query.prepare
+		("INSERT OR REPLACE INTO dooble_charts "
+		 "(name, property, subset_name, value) "
+		 "VALUES (?, ?, ?, ?)");
+	      query.addBindValue(name);
+	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue("data");
+	      query.addBindValue(it.value());
+	      query.exec();
+	    }
+	}
 
 	{
 	  QHashIterator<QString, QVariant> it
