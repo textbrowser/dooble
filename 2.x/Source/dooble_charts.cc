@@ -285,6 +285,36 @@ dooble_charts::data_properties(void) const
 {
   QHash<dooble_charts::Properties, QVariant> properties;
 
+  if(m_property_editor)
+    {
+      properties[dooble_charts::Properties::DATA_EXTRACTION_SCRIPT] =
+	m_property_editor->property
+	(dooble_charts::Properties::DATA_EXTRACTION_SCRIPT);
+      properties[dooble_charts::Properties::DATA_SOURCE_ADDRESS] =
+	m_property_editor->property
+	(dooble_charts::Properties::DATA_SOURCE_ADDRESS);
+      properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] =
+	m_property_editor->property
+	(dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE);
+      properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] =
+	m_property_editor->property
+	(dooble_charts::Properties::DATA_SOURCE_READ_RATE);
+      properties[dooble_charts::Properties::DATA_SOURCE_TYPE] =
+	m_property_editor->property
+	(dooble_charts::Properties::DATA_SOURCE_TYPE);
+    }
+  else
+    {
+      properties[dooble_charts::Properties::DATA_EXTRACTION_SCRIPT] =
+	QVariant();
+      properties[dooble_charts::Properties::DATA_SOURCE_ADDRESS] = QVariant();
+      properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] =
+	QVariant();
+      properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] =
+	QVariant();
+      properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = QVariant();
+    }
+
   return properties;
 }
 
