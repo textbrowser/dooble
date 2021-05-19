@@ -144,7 +144,7 @@ dooble_charts::~dooble_charts()
 QChart::AnimationOptions dooble_charts::string_to_chart_animation_options
 (const QString &t)
 {
-  QString text(t.trimmed());
+  auto text(t.trimmed());
 
   if(text == tr("All"))
     return QChart::AllAnimations;
@@ -158,7 +158,7 @@ QChart::AnimationOptions dooble_charts::string_to_chart_animation_options
 
 QChart::ChartTheme dooble_charts::string_to_chart_theme(const QString &t)
 {
-  QString text(t.trimmed());
+  auto text(t.trimmed());
 
   if(text == tr("Blue Cerulean"))
     return QChart::ChartThemeBlueCerulean;
@@ -520,7 +520,7 @@ y_axis_properties(void) const
 QLegend::MarkerShape dooble_charts::string_to_legend_marker_shape
 (const QString &t)
 {
-  QString text(t.trimmed());
+  auto text(t.trimmed());
 
   if(text == tr("Circle"))
     return QLegend::MarkerShapeCircle;
@@ -770,6 +770,7 @@ QWidget *dooble_charts::view(void) const
 void dooble_charts::save(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   auto database_name(dooble_database_utilities::database_name());
 
   {

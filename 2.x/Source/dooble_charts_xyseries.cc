@@ -94,8 +94,7 @@ dooble_charts_xyseries::~dooble_charts_xyseries()
 QHash<dooble_charts::Properties, QVariant> dooble_charts_xyseries::
 properties(void) const
 {
-  QHash<dooble_charts::Properties, QVariant> properties
-    (dooble_charts::properties());
+  auto properties(dooble_charts::properties());
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
   auto series = qobject_cast<QLineSeries *> (m_series);
@@ -325,7 +324,7 @@ QString dooble_charts_xyseries::tick_type_to_string
 QValueAxis::TickType dooble_charts_xyseries::string_to_tick_type
 (const QString &t)
 {
-  QString text(t.trimmed());
+  auto text(t.trimmed());
 
   if(text == tr("Dynamic"))
     return QValueAxis::TicksDynamic;
@@ -338,6 +337,7 @@ void dooble_charts_xyseries::save(void)
 {
   dooble_charts::save();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   auto database_name(dooble_database_utilities::database_name());
 
   {
