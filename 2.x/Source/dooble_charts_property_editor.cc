@@ -358,10 +358,25 @@ void dooble_charts_property_editor_model_delegate::setModelData
   if(qobject_cast<QPushButton *> (editor))
     return;
 
-  auto frame = qobject_cast<QFrame *> (editor);
-
-  if(frame)
+  if(model)
     {
+      auto frame = qobject_cast<QFrame *> (editor);
+
+      if(frame)
+	{
+	  auto spin_box_1 = frame->findChild<QSpinBox *> ("bytes");
+	  auto spin_box_2 = frame->findChild<QSpinBox *> ("milliseconds");
+
+	  if(spin_box_1 && spin_box_2)
+	    {
+	      auto value1 = spin_box_1->value();
+	      auto value2 = spin_box_2->value();
+
+	      model->setData
+		(index, QString("%1 / %2").arg(value1).arg(value2));
+	      return;
+	    }
+	}
     }
 
   QStyledItemDelegate::setModelData(editor, model, index);
