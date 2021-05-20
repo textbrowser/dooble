@@ -102,6 +102,11 @@ createEditor(QWidget *parent,
 
 	switch(property)
 	  {
+	  case dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE:
+	    {
+	      editor->setRange(512, std::numeric_limits<int>::max());
+	      break;
+	    }
 	  case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT:
 	  case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_COUNT:
 	    {
@@ -115,6 +120,8 @@ createEditor(QWidget *parent,
 	    }
 	  }
 
+	editor->setToolTip
+	  (QString("[%1, %2]").arg(editor->minimum()).arg(editor->maximum()));
 	editor->setValue(index.data().toInt());
 	return editor;
       }
@@ -205,6 +212,8 @@ createEditor(QWidget *parent,
 	auto editor = new QDoubleSpinBox(parent);
 
 	editor->setRange(0.0, std::numeric_limits<qreal>::max());
+	editor->setToolTip
+	  (QString("[%1, %2]").arg(editor->minimum()).arg(editor->maximum()));
 	editor->setValue(index.data().toReal());
 	return editor;
       }
@@ -654,7 +663,7 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
 	  {
-	    item->setToolTip(tr("Absolute File Name / IP-Address:Port"));
+	    item->setToolTip(tr("Absolute File Name / URL"));
 	    break;
 	  }
 	default:
