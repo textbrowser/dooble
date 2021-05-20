@@ -262,9 +262,11 @@ createEditor(QWidget *parent,
 	editor->layout()->addWidget(spin_box_1);
 	editor->layout()->addWidget(spin_box_2);
 	spin_box_1->setMinimum(1);
+	spin_box_1->setObjectName("bytes");
 	spin_box_1->setSuffix(tr(" Bytes"));
 	spin_box_1->setValue(list.value(0).toInt());
 	spin_box_2->setMinimum(1);
+	spin_box_2->setObjectName("milliseconds");
 	spin_box_2->setSuffix(tr(" Per Millisecond"));
 	spin_box_2->setValue(list.value(1).toInt());
 	return editor;
@@ -355,6 +357,12 @@ void dooble_charts_property_editor_model_delegate::setModelData
 {
   if(qobject_cast<QPushButton *> (editor))
     return;
+
+  auto frame = qobject_cast<QFrame *> (editor);
+
+  if(frame)
+    {
+    }
 
   QStyledItemDelegate::setModelData(editor, model, index);
 }
