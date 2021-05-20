@@ -277,8 +277,7 @@ createEditor(QWidget *parent,
 	int i = -1;
 
 	editor->addItem(tr("File"));
-	editor->addItem(tr("TCP Client"));
-	editor->addItem(tr("UDP Unicast Client"));
+	editor->addItem(tr("URL"));
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
