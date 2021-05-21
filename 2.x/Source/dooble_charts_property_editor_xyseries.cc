@@ -180,19 +180,14 @@ void dooble_charts_property_editor_xyseries::prepare_xy_series
 	      item->setText(it.value().toString());
 	      break;
 	    }
-	  case dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE:
-	  case dooble_charts::Properties::XY_SERIES_POINT_LABELS_CLIPPING:
-	  case dooble_charts::Properties::XY_SERIES_POINT_LABELS_VISIBLE:
-	  case dooble_charts::Properties::XY_SERIES_USE_OPENGL:
-	  case dooble_charts::Properties::XY_SERIES_VISIBLE:
-	    {
-	      item->setCheckState
-		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);
-	      break;
-	    }
 	  default:
 	    {
-	      item->setText(it.value().toString());
+	      if(Qt::ItemIsUserCheckable & item->flags())
+		item->setCheckState
+		  (it.value().toBool() ? Qt::Checked : Qt::Unchecked);
+	      else
+		item->setText(it.value().toString());
+
 	      break;
 	    }
 	  }

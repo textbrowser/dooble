@@ -905,38 +905,14 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	      item->setText(it.value().toString());
 	      break;
 	    }
-	  case dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_X_REVERSE:
-	  case dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_REVERSE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
-	  case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
-	  case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
-	  case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
-	  case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
-	  case dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE:
-	  case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
-	  case dooble_charts::Properties::LEGEND_REVERSE_MARKERS:
-	  case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
-	  case dooble_charts::Properties::LEGEND_VISIBLE:
-	    {
-	      item->setCheckState
-		(it.value().toBool() ? Qt::Checked : Qt::Unchecked);
-	      break;
-	    }
 	  default:
 	    {
-	      item->setText(it.value().toString());
+	      if(Qt::ItemIsUserCheckable & item->flags())
+		item->setCheckState
+		  (it.value().toBool() ? Qt::Checked : Qt::Unchecked);
+	      else
+		item->setText(it.value().toString());
+
 	      break;
 	    }
 	  }
