@@ -30,8 +30,20 @@
 dooble_charts_file::dooble_charts_file(QObject *parent):
   dooble_charts_iodevice(parent)
 {
+  connect(&m_read_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_timeout(void)));
 }
 
 dooble_charts_file::~dooble_charts_file()
+{
+}
+
+void dooble_charts_file::run(void)
+{
+}
+
+void dooble_charts_file::slot_timeout(void)
 {
 }

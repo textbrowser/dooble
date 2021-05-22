@@ -29,6 +29,7 @@
 #define dooble_charts_iodevice_h
 
 #include <QIODevice>
+#include <QTimer>
 
 class dooble_charts_iodevice: public QIODevice
 {
@@ -43,11 +44,13 @@ class dooble_charts_iodevice: public QIODevice
 
   ~dooble_charts_iodevice()
   {
+    m_read_timer.stop();
   }
 
   void set_read_interval(const int interval)
   {
-    m_read_interval = qMax(1024, interval);
+    m_read_interval = qMax(1, interval);
+    m_read_timer.setInterval(m_read_interval);
   }
 
   void set_read_size(const int size)
@@ -56,6 +59,7 @@ class dooble_charts_iodevice: public QIODevice
   }
 
  protected:
+  QTimer m_read_timer;
   int m_read_interval;
   int m_read_size;
 };
