@@ -30,6 +30,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_certificate_exceptions.h \
                   Source/dooble_certificate_exceptions_menu_widget.h \
                   Source/dooble_charts.h \
+                  Source/dooble_charts_file.h \
                   Source/dooble_charts_iodevice.h \
                   Source/dooble_charts_property_editor.h \
                   Source/dooble_charts_property_editor_xyseries.h \
@@ -77,6 +78,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_certificate_exceptions.cc \
                   Source/dooble_certificate_exceptions_menu_widget.cc \
                   Source/dooble_charts.cc \
+                  Source/dooble_charts_file.cc \
                   Source/dooble_charts_property_editor.cc \
                   Source/dooble_charts_property_editor_xyseries.cc \
                   Source/dooble_charts_xyseries.cc \
