@@ -31,6 +31,7 @@
 #include "dooble_charts_iodevice.h"
 
 #include <QFile>
+#include <QFuture>
 #include <QTimer>
 
 class dooble_charts_file: public dooble_charts_iodevice
@@ -40,8 +41,10 @@ class dooble_charts_file: public dooble_charts_iodevice
  public:
   dooble_charts_file(QObject *parent);
   ~dooble_charts_file();
+  void set_address(const QString &address);
 
  private:
+  QFuture<void> m_future;
   void run(void);
 
  private slots:

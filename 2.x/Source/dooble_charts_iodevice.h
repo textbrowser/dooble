@@ -47,6 +47,11 @@ class dooble_charts_iodevice: public QIODevice
     m_read_timer.stop();
   }
 
+  void set_address(const QString &address)
+  {
+    m_address = address;
+  }
+
   void set_read_interval(const int interval)
   {
     m_read_interval = qMax(1, interval);
@@ -59,6 +64,7 @@ class dooble_charts_iodevice: public QIODevice
   }
 
  protected:
+  QString m_address;
   QTimer m_read_timer;
   int m_read_interval;
   int m_read_size;

@@ -27,6 +27,8 @@
 
 #include "dooble_charts_file.h"
 
+#include <QtConcurrent>
+
 dooble_charts_file::dooble_charts_file(QObject *parent):
   dooble_charts_iodevice(parent)
 {
@@ -46,4 +48,6 @@ void dooble_charts_file::run(void)
 
 void dooble_charts_file::slot_timeout(void)
 {
+  if(!m_future.isFinished())
+    m_future = QtConcurrent::run(this, &dooble_charts_file::run);
 }
