@@ -55,7 +55,7 @@ class dooble_charts_iodevice: public QIODevice
 
   void set_read_size(const int size)
   {
-    m_read_size = size;
+    m_read_size = qMax(1, size);
   }
 
  protected:
