@@ -37,11 +37,27 @@ class dooble_charts_iodevice: public QIODevice
  public:
   dooble_charts_iodevice(QObject *parent):QIODevice(parent)
   {
+    m_read_interval = 256;
+    m_read_size = 1024;
   }
 
   ~dooble_charts_iodevice()
   {
   }
+
+  void set_read_interval(const int interval)
+  {
+    m_read_interval = qMax(1024, interval);
+  }
+
+  void set_read_size(const int size)
+  {
+    m_read_size = size;
+  }
+
+ protected:
+  int m_read_interval;
+  int m_read_size;
 };
 
 #endif
