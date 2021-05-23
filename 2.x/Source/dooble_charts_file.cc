@@ -52,6 +52,24 @@ dooble_charts_file::~dooble_charts_file()
 
 void dooble_charts_file::run(void)
 {
+  QReadLocker lock(&m_address_mutex);
+  auto address(m_address);
+
+  lock.unlock();
+
+  QFile file(address);
+
+  if(file.open(QIODevice::ReadOnly))
+    {
+      QWriteLocker lock(&m_read_offset_mutex);
+      auto read_offset = m_read_offset;
+
+      lock.unlock();
+
+      if(file.seek(read_offset))
+	{
+	}
+    }
 }
 
 void dooble_charts_file::slot_timeout(void)

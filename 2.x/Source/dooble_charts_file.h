@@ -47,6 +47,7 @@ class dooble_charts_file: public dooble_charts_iodevice
  private:
   QAtomicInteger<short> m_finished;
   QFuture<void> m_future;
+  QReadWriteLock m_read_offset_mutex;
   qint64 m_read_offset;
   void run(void);
 
