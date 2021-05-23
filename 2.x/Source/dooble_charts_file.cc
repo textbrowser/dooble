@@ -36,10 +36,18 @@ dooble_charts_file::dooble_charts_file(QObject *parent):
 	  SIGNAL(timeout(void)),
 	  this,
 	  SLOT(slot_timeout(void)));
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  m_finished.store(0);
+#else
+  m_finished.storeRelaxed(0);
+#endif
+  m_read_offset = 0;
 }
 
 dooble_charts_file::~dooble_charts_file()
 {
+  m_future.cancel();
+  m_future.waitForFinished();
 }
 
 void dooble_charts_file::run(void)
@@ -48,6 +56,16 @@ void dooble_charts_file::run(void)
 
 void dooble_charts_file::slot_timeout(void)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  if(m_finished.load())
+#else
+  if(m_finished.loadRelaxed())
+#endif
+    {
+      m_read_timer.stop();
+      return;
+    }
+
   if(!m_future.isFinished())
     m_future = QtConcurrent::run(this, &dooble_charts_file::run);
 }
