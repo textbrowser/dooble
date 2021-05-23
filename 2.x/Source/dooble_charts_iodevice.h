@@ -64,14 +64,18 @@ class dooble_charts_iodevice: public QIODevice
 
   void set_read_size(const int size)
   {
-    m_read_size = qMax(1, size);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    m_read_size.store(qMax(1, size));
+#else
+    m_read_size.storeRelaxed(qMax(1, size));
+#endif
   }
 
  protected:
+  QAtomicInteger<int> m_read_size;
   QString m_address;
   QTimer m_read_timer;
   int m_read_interval;
-  int m_read_size;
 };
 
 #endif
