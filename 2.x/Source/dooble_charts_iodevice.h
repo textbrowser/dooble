@@ -40,12 +40,16 @@ class dooble_charts_iodevice: public QIODevice
   {
     m_read_interval = 256;
     m_read_size = 1024;
+    m_read_size.setInterval(m_read_interval);
   }
 
   ~dooble_charts_iodevice()
   {
     m_read_timer.stop();
   }
+
+  virtual void start(void) = 0;
+  virtual void stop(void) = 0;
 
   void set_address(const QString &address)
   {

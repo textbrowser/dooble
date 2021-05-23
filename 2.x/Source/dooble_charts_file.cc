@@ -51,3 +51,13 @@ void dooble_charts_file::slot_timeout(void)
   if(!m_future.isFinished())
     m_future = QtConcurrent::run(this, &dooble_charts_file::run);
 }
+
+void dooble_charts_file::start(void)
+{
+  m_read_timer.start();
+}
+
+void dooble_charts_file::stop(void)
+{
+  m_read_timer.stop();
+}
