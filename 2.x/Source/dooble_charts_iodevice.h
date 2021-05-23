@@ -29,6 +29,7 @@
 #define dooble_charts_iodevice_h
 
 #include <QIODevice>
+#include <QReadWriteLock>
 #include <QTimer>
 
 class dooble_charts_iodevice: public QIODevice
@@ -53,6 +54,8 @@ class dooble_charts_iodevice: public QIODevice
 
   void set_address(const QString &address)
   {
+    QWriteLocker locker(&m_address_mutex);
+
     m_address = address;
   }
 
@@ -73,6 +76,7 @@ class dooble_charts_iodevice: public QIODevice
 
  protected:
   QAtomicInteger<int> m_read_size;
+  QReadWriteLock m_address_mutex;
   QString m_address;
   QTimer m_read_timer;
   int m_read_interval;

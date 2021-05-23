@@ -460,14 +460,14 @@ QString dooble_settings::zoom_frame_location_string(int index)
 QVariant dooble_settings::setting(const QString &k,
 				  const QVariant &default_value)
 {
-  QReadLocker lock(&s_settings_mutex);
+  QReadLocker locker(&s_settings_mutex);
   auto key(k.toLower().trimmed());
 
   if(!s_settings.contains(key))
     {
       auto  home_path(s_settings.value("home_path").toString());
 
-      lock.unlock();
+      locker.unlock();
 
       auto database_name(dooble_database_utilities::database_name());
       auto value(default_value);
@@ -492,7 +492,7 @@ QVariant dooble_settings::setting(const QString &k,
 	      {
 		value = query.value(0).toString().trimmed();
 
-		QWriteLocker lock(&s_settings_mutex);
+		QWriteLocker locker(&s_settings_mutex);
 
 		s_settings[key] = value;
 	      }
@@ -530,16 +530,16 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
     return false;
   else if(value.isNull())
     {
-      QWriteLocker lock(&s_settings_mutex);
+      QWriteLocker locker(&s_settings_mutex);
 
       s_settings.remove(key.toLower().trimmed());
       return false;
     }
 
-  QWriteLocker lock(&s_settings_mutex);
+  QWriteLocker locker(&s_settings_mutex);
 
   s_settings[key.toLower().trimmed()] = value;
-  lock.unlock();
+  locker.unlock();
 
   auto database_name(dooble_database_utilities::database_name());
   auto ok = false;
