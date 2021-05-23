@@ -30,7 +30,6 @@
 
 #include "dooble_charts_iodevice.h"
 
-#include <QFile>
 #include <QFuture>
 #include <QTimer>
 
