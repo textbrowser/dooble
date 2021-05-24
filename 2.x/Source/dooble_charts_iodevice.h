@@ -39,6 +39,11 @@ class dooble_charts_iodevice: public QIODevice
  public:
   dooble_charts_iodevice(QObject *parent):QIODevice(parent)
   {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    m_finished.store(0);
+#else
+    m_finished.storeRelaxed(0);
+#endif
     m_read_interval = 256;
     m_read_size = 1024;
     m_read_timer.setInterval(m_read_interval);
@@ -49,8 +54,19 @@ class dooble_charts_iodevice: public QIODevice
     m_read_timer.stop();
   }
 
-  virtual void start(void) = 0;
-  virtual void stop(void) = 0;
+  virtual void rewind(void)
+  {
+  }
+
+  virtual void start(void)
+  {
+    m_read_timer.start();
+  }
+
+  virtual void stop(void)
+  {
+    m_read_timer.stop();
+  }
 
   void set_address(const QString &address)
   {
@@ -75,6 +91,7 @@ class dooble_charts_iodevice: public QIODevice
   }
 
  protected:
+  QAtomicInteger<short> m_finished;
   QAtomicInteger<int> m_read_size;
   QReadWriteLock m_address_mutex;
   QString m_address;
