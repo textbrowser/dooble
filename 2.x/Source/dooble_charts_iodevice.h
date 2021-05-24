@@ -80,6 +80,9 @@ class dooble_charts_iodevice: public QIODevice
   QString m_address;
   QTimer m_read_timer;
   int m_read_interval;
+
+ signals:
+  void bytes_read(const QByteArray &bytes);
 };
 
 #endif

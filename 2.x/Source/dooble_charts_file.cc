@@ -68,6 +68,24 @@ void dooble_charts_file::run(void)
 
       if(file.seek(read_offset))
 	{
+	  QByteArray bytes;
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+	  auto read_size = static_cast<qint64> (m_read_size.load());
+#else
+	  auto read_size = static_cast<qint64> (m_read_size.loadRelaxed());
+#endif
+	  qint64 rc = 0;
+
+	  bytes.resize(static_cast<int> (read_size));
+
+	  if((rc = file.read(bytes.data(), read_size)) > 0)
+	    {
+	      QWriteLocker lock(&m_read_offset_mutex);
+
+	      m_read_offset += rc;
+	      lock.unlock();
+	      emit bytes_read(bytes);
+	    }
 	}
     }
 }
