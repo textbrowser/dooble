@@ -61,7 +61,7 @@ void dooble_charts_file::run(void)
 
   if(file.open(QIODevice::ReadOnly))
     {
-      QWriteLocker lock(&m_read_offset_mutex);
+      QReadLocker lock(&m_read_offset_mutex);
       auto read_offset = m_read_offset;
 
       lock.unlock();
@@ -86,6 +86,12 @@ void dooble_charts_file::run(void)
 	      lock.unlock();
 	      emit bytes_read(bytes);
 	    }
+	  else if(rc == 0)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+	    m_finished.store(1);
+#else
+	    m_finished.storeRelaxed(1);
+#endif
 	}
     }
 }
