@@ -2108,7 +2108,8 @@ void dooble::slot_about_to_show_history_menu(void)
   m_ui.menu_history->addAction
     (QIcon::fromTheme(use_material_icons + "deep-history",
 		      QIcon(QString(":/%1/36/history.png").arg(icon_set))),
-     tr("&History"),
+     dooble_settings::setting("pin_history_window").toBool() ?
+     tr("&History") : tr("&History..."),
      this,
      SLOT(slot_show_history(void)))->setShortcut(QKeySequence(tr("Ctrl+H")));
 
