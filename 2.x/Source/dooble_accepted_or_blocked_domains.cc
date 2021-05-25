@@ -776,13 +776,16 @@ void dooble_accepted_or_blocked_domains::show(void)
   dooble_main_window::show();
 }
 
-void dooble_accepted_or_blocked_domains::showNormal(void)
+void dooble_accepted_or_blocked_domains::showNormal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry
       (QByteArray::fromBase64(dooble_settings::
 			      setting("accepted_or_blocked_domains_geometry").
 			      toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   dooble_main_window::showNormal();
 }

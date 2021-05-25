@@ -35,6 +35,7 @@
 #include "dooble_certificate_exceptions_menu_widget.h"
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
+#include "dooble_ui_utilities.h"
 
 dooble_certificate_exceptions::dooble_certificate_exceptions(void):QMainWindow()
 {
@@ -176,13 +177,16 @@ void dooble_certificate_exceptions::show(void)
   QMainWindow::show();
 }
 
-void dooble_certificate_exceptions::showNormal(void)
+void dooble_certificate_exceptions::showNormal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry
       (QByteArray::fromBase64(dooble_settings::
 			      setting("certificate_exceptions_geometry").
 			      toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   QMainWindow::showNormal();
 }

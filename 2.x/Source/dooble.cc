@@ -3082,12 +3082,7 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
       return;
     }
 
-  s_accepted_or_blocked_domains->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget
-      (this, s_accepted_or_blocked_domains);
-
+  s_accepted_or_blocked_domains->showNormal(this);
   s_accepted_or_blocked_domains->activateWindow();
   s_accepted_or_blocked_domains->raise();
 }
@@ -3101,12 +3096,7 @@ void dooble::slot_show_certificate_exceptions(void)
       return;
     }
 
-  s_certificate_exceptions->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget
-      (this, s_certificate_exceptions);
-
+  s_certificate_exceptions->showNormal(this);
   s_certificate_exceptions->activateWindow();
   s_certificate_exceptions->raise();
 }
@@ -3340,10 +3330,6 @@ void dooble::slot_show_history(void)
     }
 
   s_history_window->showNormal(this);
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_history_window);
-
   s_history_window->activateWindow();
   s_history_window->raise();
 }
