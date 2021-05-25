@@ -299,6 +299,9 @@ void dooble_history_window::show(QWidget *parent)
 					   setting("history_window_geometry").
 					   toByteArray()));
 
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
+
   bool was_visible = isVisible();
 
   dooble_main_window::show();
@@ -329,6 +332,9 @@ void dooble_history_window::showNormal(QWidget *parent)
     restoreGeometry(QByteArray::fromBase64(dooble_settings::
 					   setting("history_window_geometry").
 					   toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   bool was_visible = isVisible();
 
