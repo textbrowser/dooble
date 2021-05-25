@@ -248,21 +248,21 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   auto list(QApplication::topLevelWidgets());
 
-  for(int i = 0; (extraw == 0 || extrah == 0) && i < list.size(); i++)
+  for(int i = 0; (extrah == 0 || extraw == 0) && i < list.size(); i++)
     {
       auto current = list.at(i);
 
       if(current->isVisible())
 	{
-	  auto framew = current->geometry().x() - current->x();
 	  auto frameh = current->geometry().y() - current->y();
+	  auto framew = current->geometry().x() - current->x();
 
-	  extraw = qMax(extraw, framew);
 	  extrah = qMax(extrah, frameh);
+	  extraw = qMax(extraw, framew);
         }
     }
 
-  if(extraw == 0 || extrah == 0 || extraw >= 10 || extrah >= 40)
+  if(extrah == 0 || extrah >= 40 || extraw == 0 || extraw >= 10)
     {
       extrah = 40;
       extraw = 10;
