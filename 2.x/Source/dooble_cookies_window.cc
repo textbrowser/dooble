@@ -36,6 +36,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
+#include "dooble_ui_utilities.h"
 
 dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QMainWindow(parent)
@@ -275,7 +276,7 @@ void dooble_cookies_window::show(void)
   QMainWindow::show();
 }
 
-void dooble_cookies_window::showNormal(void)
+void dooble_cookies_window::showNormal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry
@@ -287,6 +288,10 @@ void dooble_cookies_window::showNormal(void)
     (QByteArray::fromBase64(dooble_settings::
 			    setting("dooble_cookies_window_state").
 			    toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
+
   QMainWindow::showNormal();
 }
 

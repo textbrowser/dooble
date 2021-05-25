@@ -3150,11 +3150,7 @@ void dooble::slot_show_cookies(void)
 	  return;
 	}
 
-      m_cookies_window->showNormal();
-
-      if(dooble_settings::setting("center_child_windows").toBool())
-	dooble_ui_utilities::center_window_widget(this, m_cookies_window);
-
+      m_cookies_window->showNormal(this);
       m_cookies_window->activateWindow();
       m_cookies_window->raise();
       return;
@@ -3169,11 +3165,7 @@ void dooble::slot_show_cookies(void)
       return;
     }
 
-  s_cookies_window->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_cookies_window);
-
+  s_cookies_window->showNormal(this);
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
 }
@@ -3444,11 +3436,7 @@ void dooble::slot_show_site_cookies(void)
 	  return;
 	}
 
-      m_cookies_window->showNormal();
-
-      if(dooble_settings::setting("center_child_windows").toBool())
-	dooble_ui_utilities::center_window_widget(this, m_cookies_window);
-
+      m_cookies_window->showNormal(this);
       m_cookies_window->activateWindow();
       m_cookies_window->raise();
       return;
@@ -3470,11 +3458,7 @@ void dooble::slot_show_site_cookies(void)
       return;
     }
 
-  s_cookies_window->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_cookies_window);
-
+  s_cookies_window->showNormal(this);
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
 }
