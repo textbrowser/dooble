@@ -54,10 +54,10 @@ class dooble_downloads: public dooble_main_window
   void clear(void);
   void purge(void);
   void record_download(QWebEngineDownloadItem *download);
+  void showNormal(QWidget *parent);
 
  public slots:
   void show(void);
-  void showNormal(void);
 
  protected:
   void closeEvent(QCloseEvent *event);

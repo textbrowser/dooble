@@ -3227,11 +3227,7 @@ void dooble::slot_show_downloads(void)
       return;
     }
 
-  s_downloads->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_downloads);
-
+  s_downloads->showNormal(this);
   s_downloads->activateWindow();
   s_downloads->raise();
 }
@@ -3248,11 +3244,7 @@ void dooble::slot_show_favorites(void)
       return;
     }
 
-  s_favorites_window->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_favorites_window);
-
+  s_favorites_window->showNormal(this);
   s_favorites_window->activateWindow();
   s_favorites_window->raise();
 }

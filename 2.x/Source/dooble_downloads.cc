@@ -40,6 +40,7 @@
 #include "dooble_downloads.h"
 #include "dooble_downloads_item.h"
 #include "dooble_page.h"
+#include "dooble_ui_utilities.h"
 
 dooble_downloads::dooble_downloads
 (QWebEngineProfile *web_engine_profile, QWidget *parent):
@@ -441,12 +442,15 @@ void dooble_downloads::show(void)
   dooble_main_window::show();
 }
 
-void dooble_downloads::showNormal(void)
+void dooble_downloads::showNormal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry
       (QByteArray::fromBase64(dooble_settings::setting("downloads_geometry").
 			      toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   dooble_main_window::showNormal();
 }

@@ -33,6 +33,7 @@
 #include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
+#include "dooble_ui_utilities.h"
 
 dooble_favorites_popup::dooble_favorites_popup(QWidget *parent):QDialog(parent)
 {
@@ -178,12 +179,15 @@ void dooble_favorites_popup::show(void)
     m_entries_timer.start();
 }
 
-void dooble_favorites_popup::showNormal(void)
+void dooble_favorites_popup::showNormal(QWidget *parent)
 {
-  if(dooble_settings::setting("save_geometry").toBool() && !parent())
+  if(dooble_settings::setting("save_geometry").toBool() && !this->parent())
     restoreGeometry(QByteArray::fromBase64(dooble_settings::
 					   setting("favorites_window_geometry").
 					   toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   QDialog::showNormal();
 
