@@ -335,13 +335,16 @@ void dooble_search_engines_popup::show(void)
   QDialog::show();
 }
 
-void dooble_search_engines_popup::showNormal(void)
+void dooble_search_engines_popup::showNormal(QWidget *parent)
 {
-  if(dooble_settings::setting("save_geometry").toBool() && !parent())
+  if(dooble_settings::setting("save_geometry").toBool() && !this->parent())
     restoreGeometry
       (QByteArray::fromBase64(dooble_settings::
 			      setting("search_engines_window_geometry").
 			      toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   QDialog::showNormal();
 }

@@ -3356,11 +3356,7 @@ void dooble::slot_show_search_engines(void)
       return;
     }
 
-  s_search_engines_window->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_search_engines_window);
-
+  s_search_engines_window->showNormal(this);
   s_search_engines_window->activateWindow();
   s_search_engines_window->raise();
 }
