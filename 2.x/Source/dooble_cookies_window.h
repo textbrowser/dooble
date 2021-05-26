@@ -48,7 +48,7 @@ class dooble_cookies_window: public QMainWindow
   void populate(void);
   void setCookieStore(QWebEngineCookieStore *cookie_store);
   void setCookies(dooble_cookies *cookies);
-  void showNormal(QWidget *parent);
+  void show_normal(QWidget *parent);
 
  public slots:
   void show(void);

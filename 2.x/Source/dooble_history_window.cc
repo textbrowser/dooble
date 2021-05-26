@@ -310,7 +310,7 @@ void dooble_history_window::show(QWidget *parent)
     m_ui.table->prepare_viewport_icons();
 }
 
-void dooble_history_window::showNormal(QWidget *parent)
+void dooble_history_window::show_normal(QWidget *parent)
 {
   m_parent = parent;
 

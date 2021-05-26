@@ -335,7 +335,7 @@ void dooble_search_engines_popup::show(void)
   QDialog::show();
 }
 
-void dooble_search_engines_popup::showNormal(QWidget *parent)
+void dooble_search_engines_popup::show_normal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool() && !this->parent())
     restoreGeometry

@@ -3082,7 +3082,7 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
       return;
     }
 
-  s_accepted_or_blocked_domains->showNormal(this);
+  s_accepted_or_blocked_domains->show_normal(this);
   s_accepted_or_blocked_domains->activateWindow();
   s_accepted_or_blocked_domains->raise();
 }
@@ -3096,7 +3096,7 @@ void dooble::slot_show_certificate_exceptions(void)
       return;
     }
 
-  s_certificate_exceptions->showNormal(this);
+  s_certificate_exceptions->show_normal(this);
   s_certificate_exceptions->activateWindow();
   s_certificate_exceptions->raise();
 }
@@ -3150,7 +3150,7 @@ void dooble::slot_show_cookies(void)
 	  return;
 	}
 
-      m_cookies_window->showNormal(this);
+      m_cookies_window->show_normal(this);
       m_cookies_window->activateWindow();
       m_cookies_window->raise();
       return;
@@ -3165,7 +3165,7 @@ void dooble::slot_show_cookies(void)
       return;
     }
 
-  s_cookies_window->showNormal(this);
+  s_cookies_window->show_normal(this);
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
 }
@@ -3227,7 +3227,7 @@ void dooble::slot_show_downloads(void)
       return;
     }
 
-  s_downloads->showNormal(this);
+  s_downloads->show_normal(this);
   s_downloads->activateWindow();
   s_downloads->raise();
 }
@@ -3244,7 +3244,7 @@ void dooble::slot_show_favorites(void)
       return;
     }
 
-  s_favorites_window->showNormal(this);
+  s_favorites_window->show_normal(this);
   s_favorites_window->activateWindow();
   s_favorites_window->raise();
 }
@@ -3313,7 +3313,7 @@ void dooble::slot_show_history(void)
       return;
     }
 
-  s_history_window->showNormal(this);
+  s_history_window->show_normal(this);
   s_history_window->activateWindow();
   s_history_window->raise();
 }
@@ -3356,7 +3356,7 @@ void dooble::slot_show_search_engines(void)
       return;
     }
 
-  s_search_engines_window->showNormal(this);
+  s_search_engines_window->show_normal(this);
   s_search_engines_window->activateWindow();
   s_search_engines_window->raise();
 }
@@ -3420,7 +3420,7 @@ void dooble::slot_show_site_cookies(void)
 	  return;
 	}
 
-      m_cookies_window->showNormal(this);
+      m_cookies_window->show_normal(this);
       m_cookies_window->activateWindow();
       m_cookies_window->raise();
       return;
@@ -3442,7 +3442,7 @@ void dooble::slot_show_site_cookies(void)
       return;
     }
 
-  s_cookies_window->showNormal(this);
+  s_cookies_window->show_normal(this);
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
 }

@@ -40,7 +40,7 @@ class dooble_favorites_popup: public QDialog
  public:
   dooble_favorites_popup(QWidget *parent);
   void prepare_viewport_icons(void);
-  void showNormal(QWidget *parent);
+  void show_normal(QWidget *parent);
 
  public slots:
   void show(void);

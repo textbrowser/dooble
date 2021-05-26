@@ -51,7 +51,7 @@ class dooble_accepted_or_blocked_domains: public dooble_main_window
   void accept_or_block_domain(const QString &domain, bool replace = true);
   void new_exception(const QString &url);
   void purge(void);
-  void showNormal(QWidget *parent);
+  void show_normal(QWidget *parent);
 
  public slots:
   void show(void);

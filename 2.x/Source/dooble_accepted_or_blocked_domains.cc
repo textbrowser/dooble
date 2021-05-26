@@ -776,7 +776,7 @@ void dooble_accepted_or_blocked_domains::show(void)
   dooble_main_window::show();
 }
 
-void dooble_accepted_or_blocked_domains::showNormal(QWidget *parent)
+void dooble_accepted_or_blocked_domains::show_normal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry

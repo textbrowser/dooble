@@ -42,7 +42,7 @@ class dooble_history_window: public dooble_main_window
   dooble_history_window(void);
   void prepare_viewport_icons(void);
   void show(QWidget *parent);
-  void showNormal(QWidget *parent);
+  void show_normal(QWidget *parent);
 
  protected:
   void closeEvent(QCloseEvent *event);

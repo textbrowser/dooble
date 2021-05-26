@@ -177,7 +177,7 @@ void dooble_certificate_exceptions::show(void)
   QMainWindow::show();
 }
 
-void dooble_certificate_exceptions::showNormal(QWidget *parent)
+void dooble_certificate_exceptions::show_normal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry

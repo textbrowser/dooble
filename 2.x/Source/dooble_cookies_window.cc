@@ -276,7 +276,7 @@ void dooble_cookies_window::show(void)
   QMainWindow::show();
 }
 
-void dooble_cookies_window::showNormal(QWidget *parent)
+void dooble_cookies_window::show_normal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry

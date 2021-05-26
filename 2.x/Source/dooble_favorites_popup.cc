@@ -179,7 +179,7 @@ void dooble_favorites_popup::show(void)
     m_entries_timer.start();
 }
 
-void dooble_favorites_popup::showNormal(QWidget *parent)
+void dooble_favorites_popup::show_normal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool() && !this->parent())
     restoreGeometry(QByteArray::fromBase64(dooble_settings::

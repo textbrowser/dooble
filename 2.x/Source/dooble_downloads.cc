@@ -442,7 +442,7 @@ void dooble_downloads::show(void)
   dooble_main_window::show();
 }
 
-void dooble_downloads::showNormal(QWidget *parent)
+void dooble_downloads::show_normal(QWidget *parent)
 {
   if(dooble_settings::setting("save_geometry").toBool())
     restoreGeometry
