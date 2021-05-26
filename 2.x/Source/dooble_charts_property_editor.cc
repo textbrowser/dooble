@@ -65,11 +65,12 @@ sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
       }
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
       {
-	size.setHeight(50);
+	size.setHeight(qMax(50, size.height()));
 	break;
       }
     default:
       {
+	size.setHeight(qMax(50, size.height()));
 	break;
       }
     }
@@ -269,6 +270,8 @@ createEditor(QWidget *parent,
 	editor->setLayout(new QHBoxLayout());
 	editor->layout()->addWidget(line_edit);
 	editor->layout()->addWidget(push_button);
+	editor->layout()->setContentsMargins(0, 0, 0, 0);
+	editor->layout()->setSpacing(0);
 	line_edit->setText(index.data().toString());
 	return editor;
       }
