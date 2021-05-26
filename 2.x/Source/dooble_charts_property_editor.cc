@@ -70,7 +70,7 @@ sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
       }
     default:
       {
-	size.setHeight(qMax(50, size.height()));
+	size.setHeight(qCeil(1.50 * size.height()));
 	break;
       }
     }
@@ -288,10 +288,12 @@ createEditor(QWidget *parent,
 	editor->layout()->addWidget(spin_box_2);
 	editor->layout()->setContentsMargins(0, 0, 0, 0);
 	editor->layout()->setSpacing(0);
+	spin_box_1->setMaximum(std::numeric_limits<int>::max());
 	spin_box_1->setMinimum(1);
 	spin_box_1->setObjectName("bytes");
 	spin_box_1->setSuffix(tr(" Bytes"));
 	spin_box_1->setValue(list.value(0).trimmed().toInt());
+	spin_box_2->setMaximum(std::numeric_limits<int>::max());
 	spin_box_2->setMinimum(1);
 	spin_box_2->setObjectName("milliseconds");
 	spin_box_2->setSuffix(tr(" Per Millisecond"));
