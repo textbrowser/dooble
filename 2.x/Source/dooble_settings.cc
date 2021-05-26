@@ -51,6 +51,7 @@
 #include "dooble_settings.h"
 #include "dooble_style_sheet.h"
 #include "dooble_text_utilities.h"
+#include "dooble_ui_utilities.h"
 #include "dooble_version.h"
 
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
@@ -1658,7 +1659,7 @@ void dooble_settings::show(void)
   dooble_main_window::show();
 }
 
-void dooble_settings::showNormal(void)
+void dooble_settings::show_normal(QWidget *parent)
 {
   if(!isVisible())
     restore(false);
@@ -1666,6 +1667,9 @@ void dooble_settings::showNormal(void)
   if(setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
 					   toByteArray()));
+
+  if(dooble_settings::setting("center_child_windows").toBool())
+    dooble_ui_utilities::center_window_widget(parent, this);
 
   dooble_main_window::showNormal();
 }

@@ -2565,8 +2565,8 @@ void dooble::slot_create_dialog(dooble_web_engine_view *view)
 
   d->m_is_javascript_dialog = true;
   d->resize(s_vga_size);
-  d->showNormal();
   dooble_ui_utilities::center_window_widget(this, d);
+  d->showNormal();
 }
 
 void dooble::slot_create_tab(dooble_web_engine_view *view)
@@ -2593,8 +2593,8 @@ void dooble::slot_decouple_tab(int index)
       main_window->enable_control_w_shortcut(true);
       main_window->setParent(nullptr);
       main_window->resize(s_vga_size);
-      main_window->show();
       dooble_ui_utilities::center_window_widget(this, main_window);
+      main_window->show();
       prepare_control_w_shortcut();
       prepare_tab_shortcuts();
     }
@@ -3040,11 +3040,11 @@ void dooble::slot_show_about(void)
 	  this,
 	  SLOT(slot_show_release_notes(const QUrl &)),
 	  Qt::UniqueConnection);
+  dooble_ui_utilities::center_window_widget(this, s_about);
+  s_about->showNormal();
   s_about->activateWindow();
   s_about->compute_self_digest();
   s_about->raise();
-  s_about->showNormal();
-  dooble_ui_utilities::center_window_widget(this, s_about);
 }
 
 void dooble::slot_show_accepted_or_blocked_domains(void)
@@ -3393,11 +3393,7 @@ void dooble::slot_show_settings(void)
       return;
     }
 
-  s_settings->showNormal();
-
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(this, s_settings);
-
+  s_settings->show_normal(this);
   s_settings->activateWindow();
   s_settings->raise();
 }

@@ -73,11 +73,11 @@ class dooble_settings: public dooble_main_window
   void set_site_feature_permission(const QUrl &url,
 				   QWebEnginePage::Feature feature,
 				   bool state);
+  void show_normal(QWidget *parent);
   void show_panel(dooble_settings::Panels panel);
 
  public slots:
   void show(void);
-  void showNormal(void);
 
  protected:
   void closeEvent(QCloseEvent *event);
