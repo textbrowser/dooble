@@ -259,6 +259,19 @@ createEditor(QWidget *parent,
 	editor->setPlainText(index.data().toString().trimmed());
 	return editor;
       }
+    case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
+      {
+	auto editor = new QFrame(parent);
+	auto line_edit = new QLineEdit();
+	auto push_button = new QPushButton(tr("Select"));
+
+	delete editor->layout();
+	editor->setLayout(new QHBoxLayout());
+	editor->layout()->addWidget(line_edit);
+	editor->layout()->addWidget(push_button);
+	line_edit->setText(index.data().toString());
+	return editor;
+      }
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
       {
 	auto editor = new QFrame(parent);
@@ -270,14 +283,16 @@ createEditor(QWidget *parent,
 	editor->setLayout(new QHBoxLayout());
 	editor->layout()->addWidget(spin_box_1);
 	editor->layout()->addWidget(spin_box_2);
+	editor->layout()->setContentsMargins(0, 0, 0, 0);
+	editor->layout()->setSpacing(0);
 	spin_box_1->setMinimum(1);
 	spin_box_1->setObjectName("bytes");
 	spin_box_1->setSuffix(tr(" Bytes"));
-	spin_box_1->setValue(list.value(0).toInt());
+	spin_box_1->setValue(list.value(0).trimmed().toInt());
 	spin_box_2->setMinimum(1);
 	spin_box_2->setObjectName("milliseconds");
 	spin_box_2->setSuffix(tr(" Per Millisecond"));
-	spin_box_2->setValue(list.value(1).toInt());
+	spin_box_2->setValue(list.value(1).trimmed().toInt());
 	return editor;
       }
     case dooble_charts::Properties::DATA_SOURCE_TYPE:
