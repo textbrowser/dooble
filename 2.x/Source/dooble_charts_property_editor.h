@@ -63,11 +63,13 @@ class dooble_charts_property_editor_model_delegate: public QStyledItemDelegate
 
  private slots:
   void slot_show_color_dialog(void);
+  void slot_show_file_dialog(void);
   void slot_show_font_dialog(void);
   void slot_text_changed(void);
 
  signals:
   void show_color_dialog(const dooble_charts::Properties property);
+  void show_file_dialog(const dooble_charts::Properties property);
   void show_font_dialog(const dooble_charts::Properties property);
 };
 
@@ -98,6 +100,7 @@ class dooble_charts_property_editor: public QWidget
 
  private slots:
   void slot_show_color_dialog(const dooble_charts::Properties property);
+  void slot_show_file_dialog(const dooble_charts::Properties property);
   void slot_show_font_dialog(const dooble_charts::Properties property);
 
  protected:

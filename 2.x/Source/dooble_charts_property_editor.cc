@@ -266,6 +266,10 @@ createEditor(QWidget *parent,
 	auto line_edit = new QLineEdit();
 	auto push_button = new QPushButton(tr("Select"));
 
+	connect(push_button,
+		SIGNAL(clicked(void)),
+		this,
+		SLOT(slot_show_file_dialog(void)));
 	delete editor->layout();
 	editor->setLayout(new QHBoxLayout());
 	editor->layout()->addWidget(line_edit);
@@ -415,6 +419,15 @@ void dooble_charts_property_editor_model_delegate::slot_show_color_dialog(void)
 
   if(editor)
     emit show_color_dialog
+      (dooble_charts::Properties(editor->property("property").toInt()));
+}
+
+void dooble_charts_property_editor_model_delegate::slot_show_file_dialog(void)
+{
+  auto editor = qobject_cast<QPushButton *> (sender());
+
+  if(editor)
+    emit show_file_dialog
       (dooble_charts::Properties(editor->property("property").toInt()));
 }
 
@@ -841,6 +854,11 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	 SLOT(slot_show_color_dialog(const dooble_charts::Properties)));
       connect
 	(item_delegate,
+	 SIGNAL(show_file_dialog(const dooble_charts::Properties)),
+	 this,
+	 SLOT(slot_show_file_dialog(const dooble_charts::Properties)));
+      connect
+	(item_delegate,
 	 SIGNAL(show_font_dialog(const dooble_charts::Properties)),
 	 this,
 	 SLOT(slot_show_font_dialog(const dooble_charts::Properties)));
@@ -990,6 +1008,25 @@ void dooble_charts_property_editor::slot_show_color_dialog
       item->setBackground(dialog.selectedColor());
       item->setText(dialog.selectedColor().name());
     }
+}
+
+void dooble_charts_property_editor::slot_show_file_dialog
+(const dooble_charts::Properties property)
+{
+  if(!m_model)
+    return;
+
+  auto item = m_model->item_from_property(property, 1);
+
+  if(!item)
+    return;
+
+  QFileDialog dialog(this);
+
+  dialog.selectFile(item->text());
+
+  if(dialog.exec() == QDialog::Accepted)
+    item->setText(dialog.selectedFiles().value(0));
 }
 
 void dooble_charts_property_editor::slot_show_font_dialog
