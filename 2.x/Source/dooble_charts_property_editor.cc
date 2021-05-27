@@ -306,7 +306,6 @@ createEditor(QWidget *parent,
 	int i = -1;
 
 	editor->addItem(tr("File"));
-	editor->addItem(tr("URL"));
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
@@ -683,7 +682,6 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
 	  {
-	    item->setToolTip(tr("Absolute File Name / URL"));
 	    break;
 	  }
 	default:
