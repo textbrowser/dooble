@@ -277,6 +277,7 @@ createEditor(QWidget *parent,
 	editor->layout()->setContentsMargins(0, 0, 0, 0);
 	editor->layout()->setSpacing(0);
 	line_edit->setText(index.data().toString());
+	push_button->setProperty("property", property);
 	return editor;
       }
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
@@ -1026,7 +1027,10 @@ void dooble_charts_property_editor::slot_show_file_dialog
   dialog.selectFile(item->text());
 
   if(dialog.exec() == QDialog::Accepted)
-    item->setText(dialog.selectedFiles().value(0));
+    {
+      item->setText(dialog.selectedFiles().value(0));
+      m_model->setData(item->index(), item->text());
+    }
 }
 
 void dooble_charts_property_editor::slot_show_font_dialog

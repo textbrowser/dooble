@@ -1242,6 +1242,10 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	break;
       }
+    case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
+      {
+	break;
+      }
     case dooble_charts::Properties::LEGEND_ALIGNMENT:
       {
 	m_legend->setAlignment
