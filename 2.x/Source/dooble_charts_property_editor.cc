@@ -263,8 +263,8 @@ createEditor(QWidget *parent,
     case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
       {
 	auto editor = new QFrame(parent);
-	auto line_edit = new QLineEdit();
-	auto push_button = new QPushButton(tr("Select"));
+	auto line_edit = new QLineEdit(editor);
+	auto push_button = new QPushButton(tr("Select"), editor);
 
 	connect(push_button,
 		SIGNAL(clicked(void)),
@@ -285,8 +285,8 @@ createEditor(QWidget *parent,
       {
 	auto editor = new QFrame(parent);
 	auto list(index.data().toString().split("/"));
-	auto spin_box_1 = new QSpinBox();
-	auto spin_box_2 = new QSpinBox();
+	auto spin_box_1 = new QSpinBox(editor);
+	auto spin_box_2 = new QSpinBox(editor);
 
 	delete editor->layout();
 	editor->setLayout(new QHBoxLayout());
@@ -438,7 +438,7 @@ void dooble_charts_property_editor_model_delegate::slot_show_file_dialog(void)
 
   if(editor)
     emit show_file_dialog
-      (dooble_charts::Properties(editor->property("property").toInt()));
+      (editor, dooble_charts::Properties(editor->property("property").toInt()));
 }
 
 void dooble_charts_property_editor_model_delegate::slot_show_font_dialog(void)
@@ -864,9 +864,11 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	 SLOT(slot_show_color_dialog(const dooble_charts::Properties)));
       connect
 	(item_delegate,
-	 SIGNAL(show_file_dialog(const dooble_charts::Properties)),
+	 SIGNAL(show_file_dialog(QPushButton *,
+				 const dooble_charts::Properties)),
 	 this,
-	 SLOT(slot_show_file_dialog(const dooble_charts::Properties)));
+	 SLOT(slot_show_file_dialog(QPushButton *,
+				    const dooble_charts::Properties)));
       connect
 	(item_delegate,
 	 SIGNAL(show_font_dialog(const dooble_charts::Properties)),
@@ -911,7 +913,8 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
     return;
 
   QHashIterator<dooble_charts::Properties, QVariant> it
-    (chart->legend_properties().
+    (chart->data_properties().
+     unite(chart->legend_properties()).
      unite(chart->properties()).
      unite(chart->x_axis_properties()).
      unite(chart->y_axis_properties()));
@@ -949,6 +952,12 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	    {
 	      item->setBackground(QColor(it.value().toString()));
 	      item->setText(it.value().toString());
+	      break;
+	    }
+	  case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
+	    {
+	      item->setText(it.value().toString());
+	      item->setToolTip(item->text());
 	      break;
 	    }
 	  default:
@@ -1021,7 +1030,7 @@ void dooble_charts_property_editor::slot_show_color_dialog
 }
 
 void dooble_charts_property_editor::slot_show_file_dialog
-(const dooble_charts::Properties property)
+(QPushButton *push_button, const dooble_charts::Properties property)
 {
   if(!m_model)
     return;
@@ -1038,7 +1047,21 @@ void dooble_charts_property_editor::slot_show_file_dialog
   if(dialog.exec() == QDialog::Accepted)
     {
       item->setText(dialog.selectedFiles().value(0));
+      item->setToolTip(item->text());
       m_model->setData(item->index(), item->text());
+
+      if(push_button)
+	{
+	  auto frame = qobject_cast<QFrame *> (push_button->parent());
+
+	  if(frame)
+	    {
+	      auto line_edit = frame->findChild<QLineEdit *> ("source");
+
+	      if(line_edit)
+		line_edit->setText(item->text());
+	    }
+	}
     }
 }
 
