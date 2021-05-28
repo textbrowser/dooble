@@ -1036,7 +1036,10 @@ void dooble_charts_property_editor::slot_show_file_dialog
   dialog.selectFile(item->text());
 
   if(dialog.exec() == QDialog::Accepted)
-    item->setText(dialog.selectedFiles().value(0));
+    {
+      item->setText(dialog.selectedFiles().value(0));
+      m_model->setData(item->index(), item->text());
+    }
 }
 
 void dooble_charts_property_editor::slot_show_font_dialog
