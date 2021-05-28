@@ -308,7 +308,8 @@ dooble_charts::data_properties(void) const
       properties[dooble_charts::Properties::DATA_EXTRACTION_SCRIPT] =
 	QVariant();
       properties[dooble_charts::Properties::DATA_SOURCE_ADDRESS] = QVariant();
-      properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] = 512;
+      properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] =
+	512;
       properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] =
 	"1024 / 256";
       properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = "File";
@@ -392,7 +393,7 @@ properties(void) const
     m_chart->titleBrush().color();
   properties[dooble_charts::Properties::CHART_TITLE_FONT] =
     m_chart->titleFont();
-  properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] = 0;
+  properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] = 512;
   properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] = "1024 / 256";
   properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
 #endif

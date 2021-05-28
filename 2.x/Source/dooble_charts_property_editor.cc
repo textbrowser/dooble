@@ -276,6 +276,7 @@ createEditor(QWidget *parent,
 	editor->layout()->addWidget(push_button);
 	editor->layout()->setContentsMargins(0, 0, 0, 0);
 	editor->layout()->setSpacing(0);
+	line_edit->setObjectName("source");
 	line_edit->setText(index.data().toString());
 	push_button->setProperty("property", property);
 	return editor;
@@ -396,6 +397,14 @@ void dooble_charts_property_editor_model_delegate::setModelData
 
       if(frame)
 	{
+	  auto line_edit = frame->findChild<QLineEdit *> ("source");
+
+	  if(line_edit)
+	    {
+	      model->setData(index, line_edit->text());
+	      return;
+	    }
+
 	  auto spin_box_1 = frame->findChild<QSpinBox *> ("bytes");
 	  auto spin_box_2 = frame->findChild<QSpinBox *> ("milliseconds");
 
