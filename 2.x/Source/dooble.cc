@@ -1653,7 +1653,7 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_inject_custom_css(void)))->setEnabled
     (page && page->url().scheme().startsWith("http"));
-  menu->addAction(tr("&Search Engines"),
+  menu->addAction(tr("&Search Engines..."),
 		  this,
 		  SLOT(slot_show_search_engines(void)));
 
