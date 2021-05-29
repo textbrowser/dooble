@@ -777,6 +777,11 @@ void dooble_charts::save(QString &error)
   if(name.isEmpty())
     {
       error = tr("Please provide a chart name.");
+
+      if(m_property_editor)
+	m_property_editor->scroll_to_item
+	  (dooble_charts::Properties::CHART_NAME);
+
       return;
     }
 

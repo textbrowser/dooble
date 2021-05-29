@@ -1007,6 +1007,24 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   m_tree->resizeColumnToContents(1);
 }
 
+void dooble_charts_property_editor::scroll_to_item
+(const dooble_charts::Properties property)
+{
+  if(!m_model)
+    return;
+
+  auto item = m_model->item_from_property(property, 1);
+
+  if(item)
+    {
+      m_tree->scrollTo(item->index(), QAbstractItemView::PositionAtTop);
+
+      if(m_tree->selectionModel())
+	m_tree->selectionModel()->select
+	  (item->index(), QItemSelectionModel::ClearAndSelect);
+    }
+}
+
 void dooble_charts_property_editor::slot_show_color_dialog
 (const dooble_charts::Properties property)
 {

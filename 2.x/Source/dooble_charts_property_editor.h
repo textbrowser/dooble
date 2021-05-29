@@ -98,6 +98,7 @@ class dooble_charts_property_editor: public QWidget
   virtual ~dooble_charts_property_editor();
   QPointer<dooble_charts_property_editor_model> model(void) const;
   QVariant property(const dooble_charts::Properties property);
+  void scroll_to_item(const dooble_charts::Properties property);
 
  private slots:
   void slot_show_color_dialog(const dooble_charts::Properties property);
