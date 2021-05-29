@@ -1628,7 +1628,7 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
-  menu->addAction(tr("Floating Digital &Clock"),
+  menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
 		  SLOT(slot_show_floating_digital_clock(void)));
 

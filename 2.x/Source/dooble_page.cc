@@ -888,7 +888,7 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(show_favorites(void)),
      QKeySequence(tr("Ctrl+B")));
-  menu->addAction(tr("Floating Digital &Clock"),
+  menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
 		  SIGNAL(show_floating_digital_clock(void)));
 

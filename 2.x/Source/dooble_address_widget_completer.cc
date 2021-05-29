@@ -186,8 +186,8 @@ void dooble_address_widget_completer::complete(const QString &text)
 
   if(text.trimmed().isEmpty())
     {
-      int j = qMin(s_model->rowCount(),
-		   static_cast<int> (2 * dooble_page::MAXIMUM_HISTORY_ITEMS));
+      auto j = qMin(s_model->rowCount(),
+		    static_cast<int> (2 * dooble_page::MAXIMUM_HISTORY_ITEMS));
 
       for(int i = 0; i < j; i++)
 	if(s_model->item(i, 0))
