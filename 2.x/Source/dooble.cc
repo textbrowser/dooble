@@ -2943,7 +2943,16 @@ void dooble::slot_save(void)
 
   if(chart)
     {
-      chart->save();
+      QString error("");
+
+      chart->save(error);
+
+      if(!error.isEmpty())
+	{
+	  QMessageBox::critical(this, tr("Dooble: Error"), error);
+	  QApplication::processEvents();
+	}
+
       return;
     }
 

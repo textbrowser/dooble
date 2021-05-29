@@ -769,8 +769,17 @@ QWidget *dooble_charts::view(void) const
 #endif
 }
 
-void dooble_charts::save(void)
+void dooble_charts::save(QString &error)
 {
+  auto name(properties().value(dooble_charts::Properties::CHART_NAME).
+	    toString().trimmed().toUtf8());
+
+  if(name.isEmpty())
+    {
+      error = tr("Please provide a chart name.");
+      return;
+    }
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   auto database_name(dooble_database_utilities::database_name());
@@ -785,8 +794,6 @@ void dooble_charts::save(void)
     if(db.open())
       {
 	QSqlQuery query(db);
-	auto name(properties().value(dooble_charts::Properties::CHART_NAME).
-		  toString().toUtf8());
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_charts ("
 		   "name TEXT NOT NULL, "

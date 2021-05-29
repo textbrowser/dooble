@@ -333,9 +333,9 @@ QValueAxis::TickType dooble_charts_xyseries::string_to_tick_type
 }
 #endif
 
-void dooble_charts_xyseries::save(void)
+void dooble_charts_xyseries::save(QString &error)
 {
-  dooble_charts::save();
+  dooble_charts::save(error);
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   auto database_name(dooble_database_utilities::database_name());

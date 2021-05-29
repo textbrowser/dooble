@@ -43,7 +43,7 @@ class dooble_charts_xyseries: public dooble_charts
   static QValueAxis::TickType string_to_tick_type(const QString &t);
 #endif
   static const QString s_chart_properties_strings[];
-  void save(void);
+  void save(QString &error);
 
  private:
   QHash<QString, QVariant> properties_for_database(void) const;
