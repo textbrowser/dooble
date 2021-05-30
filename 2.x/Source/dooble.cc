@@ -2136,6 +2136,8 @@ void dooble::slot_about_to_show_history_menu(void)
   sub_menu->setEnabled(false);
 #else
   {
+    sub_menu->setStyleSheet("QMenu {menu-scrollable: 1;}");
+
     auto list(chart_names());
 
     if(list.isEmpty())
