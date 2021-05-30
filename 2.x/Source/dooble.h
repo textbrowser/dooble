@@ -198,6 +198,7 @@ class dooble: public QMainWindow
   void slot_new_tab(const QUrl &url);
   void slot_new_tab(void);
   void slot_new_window(void);
+  void slot_open_chart(void);
   void slot_open_favorites_link(const QUrl &url);
   void slot_open_favorites_link_in_new_tab(const QUrl &url);
   void slot_open_link(const QUrl &url);

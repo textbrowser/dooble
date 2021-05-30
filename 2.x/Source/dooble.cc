@@ -302,7 +302,12 @@ QStringList dooble::chart_names(void) const
 
 	if(query.exec("SELECT DISTINCT(name) FROM dooble_charts ORDER BY 1"))
 	  while(query.next())
-	    list << query.value(0).toString().trimmed();
+	    {
+	      auto str(query.value(0).toString().trimmed());
+
+	      if(!str.isEmpty())
+		list << str;
+	    }
       }
 
     db.close();
@@ -2786,6 +2791,10 @@ void dooble::slot_new_tab(void)
 void dooble::slot_new_window(void)
 {
   (new dooble(QUrl(), false))->show();
+}
+
+void dooble::slot_open_chart(void)
+{
 }
 
 void dooble::slot_open_favorites_link(const QUrl &url)
