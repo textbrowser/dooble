@@ -144,8 +144,9 @@ class dooble: public QMainWindow
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
+  QStringList chart_names(void) const;
   static bool cookie_filter
-  (const QWebEngineCookieStore::FilterRequest &filter_request);
+    (const QWebEngineCookieStore::FilterRequest &filter_request);
   bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;
   void connect_signals(void);

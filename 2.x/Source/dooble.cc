@@ -284,6 +284,34 @@ dooble::~dooble()
     m_downloads->abort();
 }
 
+QStringList dooble::chart_names(void) const
+{
+  QStringList list;
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_charts.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	if(query.exec("SELECT DISTINCT(name) FROM dooble_charts ORDER BY 1"))
+	  while(query.next())
+	    list << query.value(0).toString().trimmed();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  return list;
+}
+
 bool dooble::can_exit(const dooble::CanExit can_exit)
 {
   switch(can_exit)
@@ -2100,8 +2128,32 @@ void dooble::slot_about_to_show_history_menu(void)
   QFontMetrics font_metrics(m_ui.menu_history->font());
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto list(s_history->last_n_actions(5 + dooble_page::MAXIMUM_HISTORY_ITEMS));
+  auto sub_menu = new QMenu(tr("Charts"));
   auto use_material_icons(dooble_settings::use_material_icons());
 
+  m_ui.menu_history->addMenu(sub_menu);
+#ifndef DOOBLE_QTCHARTS_PRESENT
+  sub_menu->setEnabled(false);
+#else
+  {
+    auto list(chart_names());
+
+    if(list.isEmpty())
+      sub_menu->setEnabled(false);
+    else
+      for(const auto &i : list)
+	{
+	  auto action = new QAction(i, this);
+
+	  action->setProperty("name", i);
+	  connect(action,
+		  SIGNAL(triggered(void)),
+		  this,
+		  SLOT(slot_open_chart(void)));
+	  sub_menu->addAction(action);
+	}
+  }
+#endif
   m_ui.menu_history->addAction
     (tr("&Clear History"), this, SLOT(slot_clear_history(void)))->setEnabled
     (!list.isEmpty());
