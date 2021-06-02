@@ -2795,6 +2795,10 @@ void dooble::slot_new_window(void)
 
 void dooble::slot_open_chart(void)
 {
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
 }
 
 void dooble::slot_open_favorites_link(const QUrl &url)

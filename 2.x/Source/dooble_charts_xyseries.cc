@@ -353,6 +353,15 @@ void dooble_charts_xyseries::save(QString &error)
 	auto name(properties().value(dooble_charts::Properties::CHART_NAME).
 		  toString().toUtf8());
 
+	query.prepare("INSERT INTO dooble_charts "
+		      "(name, property, subset_name, value) "
+		      "VALUES (?, ?, ?, ?)");
+	query.addBindValue(name);
+	query.addBindValue("chart_type");
+	query.addBindValue("chart_type");
+	query.addBindValue("xyseries");
+	query.exec();
+
 	{
 	  QHashIterator<QString, QVariant> it(properties_for_database());
 
@@ -365,7 +374,7 @@ void dooble_charts_xyseries::save(QString &error)
 		 "VALUES (?, ?, ?, ?)");
 	      query.addBindValue(name);
 	      query.addBindValue(it.key().toUtf8());
-	      query.addBindValue("xy_series_properties");
+	      query.addBindValue("xyseries_properties");
 	      query.addBindValue(it.value());
 	      query.exec();
 	    }
@@ -384,7 +393,7 @@ void dooble_charts_xyseries::save(QString &error)
 		 "VALUES (?, ?, ?, ?)");
 	      query.addBindValue(name);
 	      query.addBindValue(it.key().toUtf8());
-	      query.addBindValue("xy_series_x_axis_properties");
+	      query.addBindValue("xyseries_x_axis_properties");
 	      query.addBindValue(it.value());
 	      query.exec();
 	    }
@@ -403,7 +412,7 @@ void dooble_charts_xyseries::save(QString &error)
 		 "VALUES (?, ?, ?, ?)");
 	      query.addBindValue(name);
 	      query.addBindValue(it.key().toUtf8());
-	      query.addBindValue("xy_series_y_axis_properties");
+	      query.addBindValue("xyseries_y_axis_properties");
 	      query.addBindValue(it.value());
 	      query.exec();
 	    }

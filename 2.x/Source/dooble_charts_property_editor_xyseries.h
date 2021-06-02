@@ -50,7 +50,7 @@ class dooble_charts_property_editor_xyseries:
   ~dooble_charts_property_editor_xyseries();
 
  private:
-  void prepare_xy_series(dooble_charts *chart);
+  void prepare_xyseries(dooble_charts *chart);
 };
 
 #endif
