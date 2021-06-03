@@ -760,6 +760,39 @@ QString dooble_charts::property_to_name
   return "";
 }
 
+QString dooble_charts::type_from_database(const QString &name)
+{
+  QString type("");
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_charts.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare("SELECT value FROM dooble_charts WHERE "
+		      "name = ? AND property = 'chart_type'");
+	query.addBindValue(name.toUtf8());
+
+	if(query.exec() && query.next())
+	  type = query.value(0).toString().trimmed();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+  return type;
+}
+
 QWidget *dooble_charts::view(void) const
 {
 #ifdef DOOBLE_QTCHARTS_PRESENT

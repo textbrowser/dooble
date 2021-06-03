@@ -2799,6 +2799,13 @@ void dooble::slot_open_chart(void)
 
   if(!action)
     return;
+
+  auto type
+    (dooble_charts::type_from_database(action->property("name").toString()));
+
+  if(type == "xyseries")
+    {
+    }
 }
 
 void dooble::slot_open_favorites_link(const QUrl &url)

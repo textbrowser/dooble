@@ -181,6 +181,10 @@ class dooble_charts: public QWidget
 
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();
+  static const QString s_axis_properties_strings[];
+  static const QString s_chart_properties_strings[];
+  static const QString s_data_properties_strings[];
+  static const QString s_legend_properties_strings[];
   QHash<dooble_charts::Properties, QVariant> data_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> legend_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> x_axis_properties(void) const;
@@ -199,10 +203,7 @@ class dooble_charts: public QWidget
   static QString legend_marker_shape_to_string
     (const QLegend::MarkerShape marker_shape);
 #endif
-  static const QString s_axis_properties_strings[];
-  static const QString s_chart_properties_strings[];
-  static const QString s_data_properties_strings[];
-  static const QString s_legend_properties_strings[];
+  static QString type_from_database(const QString &name);
   virtual QHash<dooble_charts::Properties, QVariant> properties(void) const;
   virtual void save(QString &error);
 
