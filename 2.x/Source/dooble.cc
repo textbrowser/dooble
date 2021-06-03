@@ -890,6 +890,35 @@ void dooble::keyPressEvent(QKeyEvent *event)
   QMainWindow::keyPressEvent(event);
 }
 
+void dooble::new_page(dooble_charts *chart)
+{
+  if(!chart)
+    return;
+
+  if(s_application->application_locked())
+    m_ui.tab->addTab(chart, tr("Application Locked"));
+  else
+    m_ui.tab->addTab(chart, tr("XY Series Chart"));
+
+  m_ui.tab->setTabIcon
+    (m_ui.tab->indexOf(chart), dooble_favicons::icon(QUrl())); // Mac too!
+  m_ui.tab->setTabsClosable(tabs_closable());
+
+  if(s_application->application_locked())
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(chart), tr("Application Locked"));
+  else
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(chart), tr("XY Series Chart"));
+
+  if(dooble_settings::setting("access_new_tabs").toBool() ||
+     qobject_cast<QShortcut *> (sender()) ||
+     qobject_cast<dooble_tab_widget *> (sender()) ||
+     !sender())
+    m_ui.tab->setCurrentWidget(chart);
+
+  prepare_control_w_shortcut();
+  prepare_tab_shortcuts();
+}
+
 void dooble::new_page(dooble_page *page)
 {
   if(!page)
@@ -2808,8 +2837,7 @@ void dooble::slot_open_chart(void)
     (dooble_charts::type_from_database(action->property("name").toString()));
 
   if(type == "xyseries")
-    {
-    }
+    new_page(new dooble_charts_xyseries(this));
 }
 
 void dooble::slot_open_favorites_link(const QUrl &url)
@@ -3190,30 +3218,7 @@ void dooble::slot_show_certificate_exceptions(void)
 
 void dooble::slot_show_chart_xyseries(void)
 {
-  auto chart = new dooble_charts_xyseries(this);
-
-  if(s_application->application_locked())
-    m_ui.tab->addTab(chart, tr("Application Locked"));
-  else
-    m_ui.tab->addTab(chart, tr("XY Series Chart"));
-
-  m_ui.tab->setTabIcon
-    (m_ui.tab->indexOf(chart), dooble_favicons::icon(QUrl())); // Mac too!
-  m_ui.tab->setTabsClosable(tabs_closable());
-
-  if(s_application->application_locked())
-    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(chart), tr("Application Locked"));
-  else
-    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(chart), tr("XY Series Chart"));
-
-  if(dooble_settings::setting("access_new_tabs").toBool() ||
-     qobject_cast<QShortcut *> (sender()) ||
-     qobject_cast<dooble_tab_widget *> (sender()) ||
-     !sender())
-    m_ui.tab->setCurrentWidget(chart);
-
-  prepare_control_w_shortcut();
-  prepare_tab_shortcuts();
+  new_page(new dooble_charts_xyseries(this));
 }
 
 void dooble::slot_show_clear_items(void)

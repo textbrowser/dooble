@@ -153,6 +153,7 @@ class dooble: public QMainWindow
   void decouple_support_windows(void);
   void delayed_load(const QUrl &url, dooble_page *page);
   void initialize_static_members(void);
+  void new_page(dooble_charts *chart);
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
   void open_tab_as_new_window(bool is_private, int index);
