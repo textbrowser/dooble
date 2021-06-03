@@ -303,7 +303,11 @@ QStringList dooble::chart_names(void) const
 	if(query.exec("SELECT DISTINCT(name) FROM dooble_charts ORDER BY 1"))
 	  while(query.next())
 	    {
-	      auto str(query.value(0).toString().trimmed());
+	      auto bytes(query.value(0).toByteArray());
+	      auto str
+		(QString::fromUtf8(QByteArray::fromBase64(bytes).constData()));
+
+	      str = str.trimmed();
 
 	      if(!str.isEmpty())
 		list << str;

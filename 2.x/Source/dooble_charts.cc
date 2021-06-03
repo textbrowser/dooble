@@ -779,7 +779,7 @@ QString dooble_charts::type_from_database(const QString &name)
 	query.setForwardOnly(true);
 	query.prepare("SELECT value FROM dooble_charts WHERE "
 		      "name = ? AND property = 'chart_type'");
-	query.addBindValue(name.toUtf8());
+	query.addBindValue(name.toUtf8().toBase64());
 
 	if(query.exec() && query.next())
 	  type = query.value(0).toString().trimmed();
@@ -851,10 +851,10 @@ void dooble_charts::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("data");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
@@ -870,10 +870,10 @@ void dooble_charts::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("legend");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
@@ -888,10 +888,10 @@ void dooble_charts::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("properties");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
@@ -907,10 +907,10 @@ void dooble_charts::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("x_axis_properties");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
@@ -926,10 +926,10 @@ void dooble_charts::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("y_axis_properties");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}

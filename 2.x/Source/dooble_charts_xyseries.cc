@@ -356,7 +356,7 @@ void dooble_charts_xyseries::save(QString &error)
 	query.prepare("INSERT INTO dooble_charts "
 		      "(name, property, subset_name, value) "
 		      "VALUES (?, ?, ?, ?)");
-	query.addBindValue(name);
+	query.addBindValue(name.toBase64());
 	query.addBindValue("chart_type");
 	query.addBindValue("chart_type");
 	query.addBindValue("xyseries");
@@ -372,10 +372,10 @@ void dooble_charts_xyseries::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("xyseries_properties");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
@@ -391,10 +391,10 @@ void dooble_charts_xyseries::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("xyseries_x_axis_properties");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
@@ -410,10 +410,10 @@ void dooble_charts_xyseries::save(QString &error)
 		("INSERT OR REPLACE INTO dooble_charts "
 		 "(name, property, subset_name, value) "
 		 "VALUES (?, ?, ?, ?)");
-	      query.addBindValue(name);
-	      query.addBindValue(it.key().toUtf8());
+	      query.addBindValue(name.toBase64());
+	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("xyseries_y_axis_properties");
-	      query.addBindValue(it.value());
+	      query.addBindValue(it.value().toByteArray().toBase64());
 	      query.exec();
 	    }
 	}
