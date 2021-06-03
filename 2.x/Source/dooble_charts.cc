@@ -802,6 +802,11 @@ QWidget *dooble_charts::view(void) const
 #endif
 }
 
+void dooble_charts::open(const QString &name)
+{
+  Q_UNUSED(name);
+}
+
 void dooble_charts::save(QString &error)
 {
   auto name(properties().value(dooble_charts::Properties::CHART_NAME).

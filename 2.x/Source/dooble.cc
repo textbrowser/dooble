@@ -2837,7 +2837,12 @@ void dooble::slot_open_chart(void)
     (dooble_charts::type_from_database(action->property("name").toString()));
 
   if(type == "xyseries")
-    new_page(new dooble_charts_xyseries(this));
+    {
+      auto chart = new dooble_charts_xyseries(this);
+
+      chart->open(action->property("name").toString());
+      new_page(chart);
+    }
 }
 
 void dooble::slot_open_favorites_link(const QUrl &url)
