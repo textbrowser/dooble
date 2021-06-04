@@ -45,6 +45,8 @@ class dooble_charts_file: public dooble_charts_iodevice
   QFuture<void> m_future;
   QReadWriteLock m_read_offset_mutex;
   qint64 m_read_offset;
+  qint64 readData(char *data, qint64 size);
+  qint64 writeData(const char *data, qint64 size);
   void run(void);
 
  private slots:

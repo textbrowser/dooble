@@ -26,6 +26,7 @@
 */
 
 #include "dooble_charts.h"
+#include "dooble_charts_file.h"
 #include "dooble_charts_property_editor.h"
 #include "dooble_database_utilities.h"
 #include "dooble_settings.h"
@@ -1308,6 +1309,17 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
       {
+	break;
+      }
+    case dooble_charts::Properties::DATA_SOURCE_TYPE:
+      {
+	if(m_iodevice)
+	  m_iodevice->deleteLater();
+
+	if(item->text() == tr("Binary File") ||
+	   item->text() == tr("Text File"))
+	  m_iodevice = new dooble_charts_file(this);
+
 	break;
       }
     case dooble_charts::Properties::LEGEND_ALIGNMENT:

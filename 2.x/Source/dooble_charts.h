@@ -36,6 +36,7 @@ using namespace QtCharts;
 #include "ui_dooble_charts.h"
 
 class QStandardItem;
+class dooble_charts_iodevice;
 class dooble_charts_property_editor;
 
 class dooble_charts: public QWidget
@@ -227,6 +228,7 @@ class dooble_charts: public QWidget
   QPointer<QAbstractAxis> m_x_axis;
   QPointer<QAbstractAxis> m_y_axis;
 #endif
+  QPointer<dooble_charts_iodevice> m_iodevice;
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;
   virtual QString property_to_name

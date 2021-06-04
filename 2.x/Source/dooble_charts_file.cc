@@ -46,6 +46,22 @@ dooble_charts_file::~dooble_charts_file()
   m_future.waitForFinished();
 }
 
+qint64 dooble_charts_file::readData(char *data, qint64 size)
+{
+  if(!data || size <= 0)
+    return -1;
+
+  return 0;
+}
+
+qint64 dooble_charts_file::writeData(const char *data, qint64 size)
+{
+  if(!data || size <= 0)
+    return -1;
+
+  return 0;
+}
+
 void dooble_charts_file::run(void)
 {
   QReadLocker lock(&m_address_mutex);
