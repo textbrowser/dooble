@@ -131,6 +131,18 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_ui.charts_frame->layout()->addWidget(m_chart_view);
 #endif
+  connect(m_ui.play,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_play(void)));
+  connect(m_ui.pause,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_pause(void)));
+  connect(m_ui.stop,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_stop(void)));
 }
 
 dooble_charts::~dooble_charts()
@@ -1358,4 +1370,16 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     }
 #endif
+}
+
+void dooble_charts::slot_play(void)
+{
+}
+
+void dooble_charts::slot_pause(void)
+{
+}
+
+void dooble_charts::slot_stop(void)
+{
 }

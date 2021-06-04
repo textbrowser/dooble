@@ -60,6 +60,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="play">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Play</string>
            </property>
@@ -67,8 +73,27 @@
          </item>
          <item>
           <widget class="QPushButton" name="pause">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Pause</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="stop">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Stop</string>
            </property>
           </widget>
          </item>
