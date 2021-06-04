@@ -1387,12 +1387,18 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 void dooble_charts::slot_play(void)
 {
+  if(m_iodevice)
+    m_iodevice->start();
 }
 
 void dooble_charts::slot_pause(void)
 {
+  if(m_iodevice)
+    m_iodevice->pause();
 }
 
 void dooble_charts::slot_stop(void)
 {
+  if(m_iodevice)
+    m_iodevice->stop();
 }

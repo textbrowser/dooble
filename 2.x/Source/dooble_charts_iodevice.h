@@ -54,6 +54,11 @@ class dooble_charts_iodevice: public QIODevice
     m_read_timer.stop();
   }
 
+  virtual void pause(void)
+  {
+    m_read_timer.stop();
+  }
+
   virtual void rewind(void)
   {
   }
@@ -65,6 +70,11 @@ class dooble_charts_iodevice: public QIODevice
 
   virtual void stop(void)
   {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    m_finished.store(1);
+#else
+    m_finished.storeRelaxed(1);
+#endif
     m_read_timer.stop();
   }
 
