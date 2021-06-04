@@ -311,11 +311,12 @@ createEditor(QWidget *parent,
 	auto editor = new QComboBox(parent);
 	int i = -1;
 
-	editor->addItem(tr("File"));
+	editor->addItem(tr("Binary File"));
+	editor->addItem(tr("Text File"));
 	i = editor->findText(index.data().toString());
 
 	if(i == -1)
-	  i = 0; // File
+	  i = 1; // Text File
 
 	editor->setCurrentIndex(i);
 	return editor;

@@ -324,7 +324,8 @@ dooble_charts::data_properties(void) const
 	512;
       properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] =
 	"1024 / 256";
-      properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = "File";
+      properties[dooble_charts::Properties::DATA_SOURCE_TYPE] =
+	tr("Text File");
     }
 
   return properties;
@@ -407,7 +408,7 @@ properties(void) const
     m_chart->titleFont();
   properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] = 512;
   properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] = "1024 / 256";
-  properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("File");
+  properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("Text File");
 #endif
   return properties;
 }
