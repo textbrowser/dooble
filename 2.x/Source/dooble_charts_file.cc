@@ -37,6 +37,7 @@ dooble_charts_file::dooble_charts_file(QObject *parent):
 	  this,
 	  SLOT(slot_timeout(void)));
   m_read_offset = 0;
+  m_type = tr("Text File");
 }
 
 dooble_charts_file::~dooble_charts_file()

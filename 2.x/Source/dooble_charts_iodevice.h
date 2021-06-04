@@ -90,11 +90,17 @@ class dooble_charts_iodevice: public QIODevice
 #endif
   }
 
+  void set_type(const QString &type)
+  {
+    m_type = type.trimmed();
+  }
+
  protected:
   QAtomicInteger<short> m_finished;
   QAtomicInteger<int> m_read_size;
   QReadWriteLock m_address_mutex;
   QString m_address;
+  QString m_type;
   QTimer m_read_timer;
   int m_read_interval;
 
