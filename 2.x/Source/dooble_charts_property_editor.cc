@@ -302,7 +302,7 @@ createEditor(QWidget *parent,
 	spin_box_2->setMaximum(std::numeric_limits<int>::max());
 	spin_box_2->setMinimum(1);
 	spin_box_2->setObjectName("milliseconds");
-	spin_box_2->setSuffix(tr(" Per Millisecond"));
+	spin_box_2->setSuffix(tr(" Millisecond(s)"));
 	spin_box_2->setValue(list.value(1).trimmed().toInt());
 	return editor;
       }
