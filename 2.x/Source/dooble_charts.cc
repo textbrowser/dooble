@@ -1318,7 +1318,10 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	if(item->text() == tr("Binary File") ||
 	   item->text() == tr("Text File"))
-	  m_iodevice = new dooble_charts_file(this);
+	  {
+	    m_iodevice = new dooble_charts_file(this);
+	    m_iodevice->set_type(item->text());
+	  }
 
 	break;
       }
