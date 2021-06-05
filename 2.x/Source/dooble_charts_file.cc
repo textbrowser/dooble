@@ -94,7 +94,12 @@ void dooble_charts_file::run(const QString &type)
 
 	  bytes.resize(static_cast<int> (read_size));
 
-	  if((rc = file.read(bytes.data(), read_size)) > 0)
+	  if(type == tr("Binary File"))
+	    rc = file.read(bytes.data(), read_size);
+	  else
+	    rc = file.readLine(bytes.data(), read_size);
+
+	  if(rc > 0)
 	    {
 	      QWriteLocker lock(&m_read_offset_mutex);
 
