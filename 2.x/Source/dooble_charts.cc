@@ -1309,6 +1309,9 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
       {
+	if(m_iodevice)
+	  m_iodevice->set_address(item->text());
+
 	break;
       }
     case dooble_charts::Properties::DATA_SOURCE_TYPE:
