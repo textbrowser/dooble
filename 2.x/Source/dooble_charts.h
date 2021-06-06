@@ -33,6 +33,8 @@
 using namespace QtCharts;
 #endif
 
+#include <QPointer>
+
 #include "ui_dooble_charts.h"
 
 class QStandardItem;

@@ -27,10 +27,13 @@
 
 #include <QColorDialog>
 #include <QComboBox>
+#include <QFileDialog>
 #include <QFontDialog>
+#include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QtMath>
 
 #include "dooble_charts_property_editor.h"
 
