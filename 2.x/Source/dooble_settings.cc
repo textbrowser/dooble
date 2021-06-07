@@ -30,6 +30,7 @@
 #include <QMessageBox>
 #include <QNetworkProxy>
 #include <QSqlQuery>
+#include <QToolTip>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include <QtConcurrent>
@@ -2976,18 +2977,20 @@ void dooble_settings::slot_save_credentials(void)
   if(password_1.isEmpty())
     {
       m_ui.password_1->setFocus();
-      QMessageBox::critical
-	(this, tr("Dooble: User Error"), tr("Empty password(s)."));
-      QApplication::processEvents();
+      QToolTip::showText(mapToGlobal(m_ui.password_1->pos()),
+			 tr("Empty password(s)."),
+			 m_ui.password_1,
+			 QRect());
       return;
     }
   else if(password_1 != password_2)
     {
       m_ui.password_1->selectAll();
       m_ui.password_1->setFocus();
-      QMessageBox::critical
-	(this, tr("Dooble: User Error"), tr("Passwords are not equal."));
-      QApplication::processEvents();
+      QToolTip::showText(mapToGlobal(m_ui.password_1->pos()),
+			 tr("Passwords are not equal."),
+			 m_ui.password_1,
+			 QRect());
       return;
     }
 

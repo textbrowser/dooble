@@ -3830,8 +3830,8 @@ void dooble::slot_warn_of_missing_sqlite_driver(void)
       QMessageBox::critical
 	(this,
 	 tr("Dooble: Error"),
-	 tr("Unable to discover the SQLite plugin. This is a serious "
-	    "problem!"));
+	 tr("Unable to discover the SQLite plugin. "
+	    "This is a serious problem!"));
       QApplication::processEvents();
     }
 }
