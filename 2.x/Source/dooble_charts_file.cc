@@ -62,6 +62,17 @@ qint64 dooble_charts_file::writeData(const char *data, qint64 size)
   return 0;
 }
 
+void dooble_charts_file::play(void)
+{
+  {
+    QWriteLocker lock(&m_read_offset_mutex);
+
+    m_read_offset = 0;
+  }
+
+  dooble_charts_iodevice::play();
+}
+
 void dooble_charts_file::run(const QString &type)
 {
   QReadLocker lock(&m_address_mutex);
@@ -131,15 +142,4 @@ void dooble_charts_file::slot_timeout(void)
 
   if(!m_future.isFinished())
     m_future = QtConcurrent::run(this, &dooble_charts_file::run, m_type);
-}
-
-void dooble_charts_file::start(void)
-{
-  {
-    QWriteLocker lock(&m_read_offset_mutex);
-
-    m_read_offset = 0;
-  }
-
-  dooble_charts_iodevice::start();
 }

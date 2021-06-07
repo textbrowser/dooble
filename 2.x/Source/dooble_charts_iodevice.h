@@ -59,13 +59,13 @@ class dooble_charts_iodevice: public QIODevice
     m_read_timer.stop();
   }
 
-  virtual void rewind(void)
-  {
-  }
-
-  virtual void start(void)
+  virtual void play(void)
   {
     m_read_timer.start();
+  }
+
+  virtual void rewind(void)
+  {
   }
 
   virtual void stop(void)

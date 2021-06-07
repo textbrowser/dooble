@@ -1414,7 +1414,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 void dooble_charts::slot_play(void)
 {
   if(m_iodevice)
-    m_iodevice->start();
+    m_iodevice->play();
 }
 
 void dooble_charts::slot_pause(void)
