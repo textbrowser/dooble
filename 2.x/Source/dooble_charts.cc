@@ -1344,6 +1344,10 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	      }
 
 	    m_iodevice->set_type(item->text());
+	    connect(m_iodevice,
+		    SIGNAL(bytes_read(const QByteArray &)),
+		    this,
+		    SLOT(slot_bytes_read(const QByteArray &)));
 	  }
 
 	break;

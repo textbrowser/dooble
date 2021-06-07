@@ -427,6 +427,11 @@ void dooble_charts_xyseries::save(QString &error)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_charts_xyseries::slot_bytes_read(const QByteArray &bytes)
+{
+  Q_UNUSED(bytes);
+}
+
 void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
 {
   if(!item)
