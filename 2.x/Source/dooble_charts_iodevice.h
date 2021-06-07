@@ -91,6 +91,14 @@ class dooble_charts_iodevice: public QIODevice
     m_read_timer.setInterval(m_read_interval);
   }
 
+  void set_read_rate(const QString &rate)
+  {
+    auto list(rate.split('/'));
+
+    set_read_interval(list.value(1).trimmed().toInt());
+    set_read_size(list.value(0).trimmed().toInt());
+  }
+
   void set_read_size(const int size)
   {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))

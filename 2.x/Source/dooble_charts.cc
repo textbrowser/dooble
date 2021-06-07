@@ -1314,6 +1314,13 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	break;
       }
+    case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
+      {
+	if(m_iodevice)
+	  m_iodevice->set_read_rate(item->text());
+
+	break;
+      }
     case dooble_charts::Properties::DATA_SOURCE_TYPE:
       {
 	if(m_iodevice)
@@ -1323,6 +1330,19 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	   item->text() == tr("Text File"))
 	  {
 	    m_iodevice = new dooble_charts_file(this);
+
+	    if(m_property_editor)
+	      {
+		m_iodevice->set_address
+		  (m_property_editor->
+		   property(dooble_charts::Properties::DATA_SOURCE_ADDRESS).
+		   toString());
+		m_iodevice->set_read_rate
+		  (m_property_editor->
+		   property(dooble_charts::Properties::DATA_SOURCE_READ_RATE).
+		   toString());
+	      }
+
 	    m_iodevice->set_type(item->text());
 	  }
 
