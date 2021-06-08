@@ -2507,7 +2507,6 @@ void dooble::slot_authenticate(void)
       auto text(ui.password->text());
 
       s_cryptography->authenticate(salt, salted_password, text);
-      text = dooble_random::random_bytes(ui.password->text().length()).toHex();
       ui.password->setText
 	(dooble_random::random_bytes(ui.password->text().length()).toHex());
       ui.password->clear();
@@ -2564,6 +2563,7 @@ void dooble::slot_authenticate(void)
 	}
       else
 	{
+	  dooble_cryptography::memzero(text);
 	  QApplication::processEvents();
 	  goto repeat_label;
 	}
