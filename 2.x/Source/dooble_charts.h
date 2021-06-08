@@ -217,6 +217,7 @@ class dooble_charts: public QWidget
   QHash<QString, QVariant> properties_for_database(void) const;
   QHash<QString, QVariant> x_axis_properties_for_database(void) const;
   QHash<QString, QVariant> y_axis_properties_for_database(void) const;
+  virtual void create_default_device(void);
 
  protected:
 #ifdef DOOBLE_QTCHARTS_PRESENT

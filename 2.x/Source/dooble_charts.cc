@@ -816,6 +816,30 @@ QWidget *dooble_charts::view(void) const
 #endif
 }
 
+void dooble_charts::create_default_device(void)
+{
+  if(m_iodevice)
+    m_iodevice->deleteLater();
+
+  m_iodevice = new dooble_charts_file(this);
+
+  if(m_property_editor)
+    {
+      m_iodevice->set_address
+	(m_property_editor->
+	 property(dooble_charts::Properties::DATA_SOURCE_ADDRESS).toString());
+      m_iodevice->set_read_rate
+	(m_property_editor->
+	 property(dooble_charts::Properties::DATA_SOURCE_READ_RATE).toString());
+    }
+
+  m_iodevice->set_type(tr("Text File"));
+  connect(m_iodevice,
+	  SIGNAL(bytes_read(const QByteArray &)),
+	  this,
+	  SLOT(slot_bytes_read(const QByteArray &)));
+}
+
 void dooble_charts::open(const QString &name)
 {
   Q_UNUSED(name);
@@ -1329,25 +1353,10 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	if(item->text() == tr("Binary File") ||
 	   item->text() == tr("Text File"))
 	  {
-	    m_iodevice = new dooble_charts_file(this);
+	    create_default_device();
 
-	    if(m_property_editor)
-	      {
-		m_iodevice->set_address
-		  (m_property_editor->
-		   property(dooble_charts::Properties::DATA_SOURCE_ADDRESS).
-		   toString());
-		m_iodevice->set_read_rate
-		  (m_property_editor->
-		   property(dooble_charts::Properties::DATA_SOURCE_READ_RATE).
-		   toString());
-	      }
-
-	    m_iodevice->set_type(item->text());
-	    connect(m_iodevice,
-		    SIGNAL(bytes_read(const QByteArray &)),
-		    this,
-		    SLOT(slot_bytes_read(const QByteArray &)));
+	    if(m_iodevice)
+	      m_iodevice->set_type(item->text());
 	  }
 
 	break;
