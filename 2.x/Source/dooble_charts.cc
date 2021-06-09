@@ -663,6 +663,15 @@ QString dooble_charts::legend_marker_shape_to_string
 }
 #endif
 
+QString dooble_charts::name(void) const
+{
+  if(m_property_editor)
+    return m_property_editor->property
+      (dooble_charts::Properties::CHART_NAME).toString().trimmed();
+  else
+    return "";
+}
+
 QString dooble_charts::property_to_name
 (const dooble_charts::Properties property) const
 {

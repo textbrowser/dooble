@@ -3581,6 +3581,20 @@ void dooble::slot_tab_index_changed(int index)
 
       if(main_window)
 	setWindowTitle(main_window->windowTitle());
+      else
+	{
+	  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->widget(index));
+
+	  if(chart)
+	    {
+	      auto title(chart->name().trimmed());
+
+	      if(!title.isEmpty())
+		setWindowTitle(tr("Charts (%1) - Dooble").arg(title));
+	      else
+		setWindowTitle(tr("Charts - Dooble"));
+	    }
+	}
 
       return;
     }

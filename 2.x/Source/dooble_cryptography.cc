@@ -79,8 +79,7 @@ dooble_cryptography::dooble_cryptography
 }
 
 dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
-					 const QString &hash_type):
-  QObject()
+					 const QString &hash_type):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
