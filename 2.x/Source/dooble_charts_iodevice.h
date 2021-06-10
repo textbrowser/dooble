@@ -31,6 +31,7 @@
 #include <QIODevice>
 #include <QReadWriteLock>
 #include <QTimer>
+#include <QtDebug>
 
 class dooble_charts_iodevice: public QIODevice
 {

@@ -140,6 +140,6 @@ void dooble_charts_file::slot_timeout(void)
       return;
     }
 
-  if(!m_future.isFinished())
+  if(m_future.isFinished())
     m_future = QtConcurrent::run(this, &dooble_charts_file::run, m_type);
 }
