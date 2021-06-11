@@ -130,7 +130,7 @@ class dooble_charts_iodevice: public QIODevice
   int m_read_interval;
 
  signals:
-  void bytes_read(const QByteArray &bytes);
+  void data_ready(const QVector<qreal> &vector);
 };
 
 #endif

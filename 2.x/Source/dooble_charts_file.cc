@@ -27,6 +27,7 @@
 
 #include "dooble_charts_file.h"
 
+#include <QJSEngine>
 #include <QtConcurrent>
 
 dooble_charts_file::dooble_charts_file(QObject *parent):
@@ -118,7 +119,12 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 
 	      m_read_offset += rc;
 	      lock.unlock();
-	      emit bytes_read(bytes.mid(0, static_cast<int> (rc)));
+
+	      QJSValue function = QJSEngine().evaluate(program);
+	      QJSValueList arguments;
+
+	      arguments << bytes.mid(0, static_cast<int> (rc)).constData();
+	      function.call(arguments);
 	    }
 	  else if(rc == 0)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))

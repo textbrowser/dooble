@@ -203,6 +203,7 @@ QT		+= concurrent \
                    gui \
                    network \
                    printsupport \
+                   qml \
                    sql \
 		   webengine \
                    webenginewidgets \
