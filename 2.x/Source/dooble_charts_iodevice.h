@@ -86,9 +86,9 @@ class dooble_charts_iodevice: public QIODevice
     m_address = address;
   }
 
-  void set_extraction_script(const QString &program)
+  void set_data_extraction_script(const QString &program)
   {
-    m_program = program;
+    m_program = program.trimmed();
   }
 
   void set_read_interval(const int interval)

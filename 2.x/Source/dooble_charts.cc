@@ -1340,6 +1340,13 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 	break;
       }
+    case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
+      {
+	if(m_iodevice)
+	  m_iodevice->set_data_extraction_script(item->text());
+
+	break;
+      }
     case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
       {
 	create_default_device();
