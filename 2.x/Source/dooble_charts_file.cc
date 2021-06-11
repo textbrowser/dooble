@@ -116,7 +116,7 @@ void dooble_charts_file::run(const QString &type)
 
 	      m_read_offset += rc;
 	      lock.unlock();
-	      emit bytes_read(bytes);
+	      emit bytes_read(bytes.mid(0, static_cast<int> (rc)));
 	    }
 	  else if(rc == 0)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
