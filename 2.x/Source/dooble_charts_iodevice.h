@@ -86,6 +86,11 @@ class dooble_charts_iodevice: public QIODevice
     m_address = address;
   }
 
+  void set_extraction_script(const QString &program)
+  {
+    m_program = program;
+  }
+
   void set_read_interval(const int interval)
   {
     m_read_interval = qMax(1, interval);
@@ -119,6 +124,7 @@ class dooble_charts_iodevice: public QIODevice
   QAtomicInteger<int> m_read_size;
   QReadWriteLock m_address_mutex;
   QString m_address;
+  QString m_program;
   QString m_type;
   QTimer m_read_timer;
   int m_read_interval;
