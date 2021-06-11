@@ -73,8 +73,10 @@ void dooble_charts_file::play(void)
   dooble_charts_iodevice::play();
 }
 
-void dooble_charts_file::run(const QString &type)
+void dooble_charts_file::run(const QString &program, const QString &type)
 {
+  Q_UNUSED(program);
+
   QReadLocker lock(&m_address_mutex);
   auto address(m_address);
 
@@ -141,5 +143,6 @@ void dooble_charts_file::slot_timeout(void)
     }
 
   if(m_future.isFinished())
-    m_future = QtConcurrent::run(this, &dooble_charts_file::run, m_type);
+    m_future = QtConcurrent::run
+      (this, &dooble_charts_file::run, m_program, m_type);
 }

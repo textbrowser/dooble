@@ -48,7 +48,7 @@ class dooble_charts_file: public dooble_charts_iodevice
   qint64 readData(char *data, qint64 size);
   qint64 writeData(const char *data, qint64 size);
   void play(void);
-  void run(const QString &type);
+  void run(const QString &program, const QString &type);
 
  private slots:
   void slot_timeout(void);
