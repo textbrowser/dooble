@@ -28,6 +28,7 @@
 #include "dooble_charts_file.h"
 
 #include <QJSEngine>
+#include <QJSValueIterator>
 #include <QtConcurrent>
 
 dooble_charts_file::dooble_charts_file(QObject *parent):
@@ -129,6 +130,12 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 
 	      if(!value.isError())
 		{
+		  QJSValueIterator it(value);
+
+		  while(it.hasNext())
+		    {
+		      it.next();
+		    }
 		}
 	    }
 	  else if(rc == 0)

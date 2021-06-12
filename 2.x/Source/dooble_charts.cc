@@ -837,6 +837,10 @@ void dooble_charts::create_default_device(void)
       m_iodevice->set_address
 	(m_property_editor->
 	 property(dooble_charts::Properties::DATA_SOURCE_ADDRESS).toString());
+      m_iodevice->set_data_extraction_script
+	(m_property_editor->
+	 property(dooble_charts::Properties::DATA_EXTRACTION_SCRIPT).
+	 toString());
       m_iodevice->set_read_rate
 	(m_property_editor->
 	 property(dooble_charts::Properties::DATA_SOURCE_READ_RATE).toString());
