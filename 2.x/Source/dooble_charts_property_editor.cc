@@ -215,7 +215,24 @@ createEditor(QWidget *parent,
       {
 	auto editor = new QDoubleSpinBox(parent);
 
-	editor->setRange(0.0, std::numeric_limits<qreal>::max());
+	switch(property)
+	  {
+	  case dooble_charts::Properties::XY_SERIES_X_AXIS_MAX:
+	  case dooble_charts::Properties::XY_SERIES_X_AXIS_MIN:
+	  case dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX:
+	  case dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN:
+	    {
+	      editor->setRange(std::numeric_limits<qreal>::lowest(),
+			       std::numeric_limits<qreal>::max());
+	      break;
+	    }
+	  default:
+	    {
+	      editor->setRange(0.0, std::numeric_limits<qreal>::max());
+	      break;
+	    }
+	  }
+
 	editor->setToolTip
 	  (QString("[%1, %2]").arg(editor->minimum()).arg(editor->maximum()));
 	editor->setValue(index.data().toReal());
