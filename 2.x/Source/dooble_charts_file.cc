@@ -121,8 +121,9 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 	      m_read_offset += rc;
 	      lock.unlock();
 
+	      QJSEngine engine;
 	      QJSValueList arguments;
-	      auto function(QJSEngine().evaluate(program));
+	      auto function(engine.evaluate(program));
 
 	      arguments << bytes.mid(0, static_cast<int> (rc)).constData();
 
