@@ -74,7 +74,7 @@ dooble_charts_xyseries::dooble_charts_xyseries(QWidget *parent):
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_chart->addAxis(m_x_axis = new QValueAxis(this), Qt::AlignBottom);
   m_chart->addAxis(m_y_axis = new QValueAxis(this), Qt::AlignLeft);
-  m_chart->addSeries(m_series = new QLineSeries(this));
+  m_chart->addSeries(m_series = new QScatterSeries(this));
 #endif
   m_property_editor = new dooble_charts_property_editor_xyseries
     (m_ui.properties, this);
@@ -98,7 +98,7 @@ properties(void) const
   auto properties(dooble_charts::properties());
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  auto series = qobject_cast<QLineSeries *> (m_series);
+  auto series = qobject_cast<QScatterSeries *> (m_series);
   auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
   auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
 
@@ -429,7 +429,14 @@ void dooble_charts_xyseries::save(QString &error)
 
 void dooble_charts_xyseries::slot_data_ready(const QVector<qreal> &vector)
 {
-  Q_UNUSED(vector);
+  if(vector.size() != 2)
+    return;
+
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  auto series = qobject_cast<QScatterSeries *> (m_series);
+
+  series->append(vector.at(0), vector.at(1));
+#endif
 }
 
 void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
@@ -440,7 +447,7 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
   dooble_charts::slot_item_changed(item);
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  auto series = qobject_cast<QLineSeries *> (m_series);
+  auto series = qobject_cast<QScatterSeries *> (m_series);
   auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
   auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
 
