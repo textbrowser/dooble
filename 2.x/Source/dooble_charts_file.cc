@@ -120,11 +120,16 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 	      m_read_offset += rc;
 	      lock.unlock();
 
-	      QJSValue function = QJSEngine().evaluate(program);
 	      QJSValueList arguments;
+	      auto function(QJSEngine().evaluate(program));
 
 	      arguments << bytes.mid(0, static_cast<int> (rc)).constData();
-	      function.call(arguments);
+
+	      auto value(function.call(arguments));
+
+	      if(!value.isError())
+		{
+		}
 	    }
 	  else if(rc == 0)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
