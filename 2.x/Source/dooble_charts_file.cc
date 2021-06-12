@@ -132,11 +132,16 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 	      if(!value.isError())
 		{
 		  QJSValueIterator it(value);
+		  QVector<qreal> vector;
 
 		  while(it.hasNext())
 		    {
 		      it.next();
+		      vector.append(it.value().toNumber());
 		    }
+
+		  if(!vector.isEmpty())
+		    emit data_ready(vector);
 		}
 	    }
 	  else if(rc == 0)
