@@ -86,9 +86,13 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 
   QFile file(address);
   QIODevice::OpenMode flags = QIODevice::ReadOnly;
+  qint64 newline_length = 0;
 
   if(type == tr("Text File"))
-    flags |= QIODevice::Text;
+    {
+      flags |= QIODevice::Text;
+      newline_length = 1;
+    }
 
   if(file.open(flags))
     {
@@ -118,7 +122,7 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 	    {
 	      QWriteLocker lock(&m_read_offset_mutex);
 
-	      m_read_offset += rc;
+	      m_read_offset += newline_length + rc;
 	      lock.unlock();
 
 	      QJSEngine engine;
