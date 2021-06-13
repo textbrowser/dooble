@@ -149,7 +149,7 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 		    emit data_ready(vector);
 		}
 	    }
-	  else if(rc == 0)
+	  else if(file.atEnd() || rc == 0)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
 	    m_finished.store(1);
 #else
