@@ -178,3 +178,12 @@ void dooble_charts_file::slot_timeout(void)
     m_future = QtConcurrent::run
       (this, &dooble_charts_file::run, m_program, m_type);
 }
+
+void dooble_charts_file::stop(void)
+{
+  dooble_charts_iodevice::stop();
+
+  QWriteLocker lock(&m_read_offset_mutex);
+
+  m_read_offset = 0;
+}

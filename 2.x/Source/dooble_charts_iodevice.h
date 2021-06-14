@@ -62,6 +62,11 @@ class dooble_charts_iodevice: public QIODevice
 
   virtual void play(void)
   {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    m_finished.store(0);
+#else
+    m_finished.storeRelaxed(0);
+#endif
     m_read_timer.start();
   }
 
