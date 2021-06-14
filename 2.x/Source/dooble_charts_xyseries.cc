@@ -463,19 +463,33 @@ void dooble_charts_xyseries::slot_data_ready(const QVector<qreal> &vector)
   if(!x_axis || !y_axis)
     return;
 
+  auto set = false;
+
   if(x <= x_axis->min())
-    x_axis->setMin(x - 1.0);
+    {
+      set = true;
+      x_axis->setMin(x - 1.0);
+    }
 
   if(x >= x_axis->max())
-    x_axis->setMax(x + 1.0);
+    {
+      set = true;
+      x_axis->setMax(x + 1.0);
+    }
 
   if(y <= y_axis->min())
-    y_axis->setMin(y - 1.0);
+    {
+      set = true;
+      y_axis->setMin(y - 1.0);
+    }
 
   if(y >= y_axis->max())
-    y_axis->setMax(y + 1.0);
+    {
+      set = true;
+      y_axis->setMax(y + 1.0);
+    }
 
-  if(m_property_editor)
+  if(m_property_editor && set)
     {
       m_property_editor->set_property
 	(dooble_charts::Properties::XY_SERIES_X_AXIS_MAX, x_axis->max());
