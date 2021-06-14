@@ -132,6 +132,10 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_ui.charts_frame->layout()->addWidget(m_chart_view);
 #endif
+  connect(m_ui.clear,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_clear(void)));
   connect(m_ui.play,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -996,6 +1000,10 @@ void dooble_charts::save(QString &error)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_charts::slot_clear(void)
+{
 }
 
 void dooble_charts::slot_item_changed(QStandardItem *item)

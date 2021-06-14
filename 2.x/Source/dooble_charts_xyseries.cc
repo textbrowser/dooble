@@ -427,6 +427,16 @@ void dooble_charts_xyseries::save(QString &error)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_charts_xyseries::slot_clear(void)
+{
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  auto series = qobject_cast<QScatterSeries *> (m_series);
+
+  if(series)
+    series->clear();
+#endif
+}
+
 void dooble_charts_xyseries::slot_data_ready(const QVector<qreal> &vector)
 {
   if(vector.size() != 2)

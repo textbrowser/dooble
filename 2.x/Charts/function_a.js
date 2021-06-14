@@ -1,4 +1,4 @@
-(function(a)
+(function(string)
  {
-     return a.split(",");
+     return string.split(",");
  })

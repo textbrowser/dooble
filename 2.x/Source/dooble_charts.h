@@ -239,6 +239,7 @@ class dooble_charts: public QWidget
     (const dooble_charts::Properties property) const;
 
  protected slots:
+  virtual void slot_clear(void);
   virtual void slot_data_ready(const QVector<qreal> &vector) = 0;
   virtual void slot_item_changed(QStandardItem *item);
   virtual void slot_play(void);
