@@ -434,16 +434,24 @@ void dooble_charts_xyseries::slot_data_ready(const QVector<qreal> &vector)
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
   auto series = qobject_cast<QScatterSeries *> (m_series);
-  auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
-  auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
 
-  if(!series || !x_axis || !y_axis)
+  if(!series)
     return;
 
   auto x = vector.at(0);
   auto y = vector.at(1);
 
   series->append(x, y);
+
+  /*
+  ** Automatically adjust the property editor.
+  */
+
+  auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
+  auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
+
+  if(!x_axis || !y_axis)
+    return;
 
   if(x <= x_axis->min())
     x_axis->setMin(x - 1.0);

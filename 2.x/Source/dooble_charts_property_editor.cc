@@ -1060,7 +1060,42 @@ void dooble_charts_property_editor::set_property
   if(item->flags() & Qt::ItemIsUserCheckable)
     item->setCheckState(value.toBool() ? Qt::Checked: Qt::Unchecked);
   else
-    item->setText(value.toString());
+    {
+      switch(property)
+	{
+	case dooble_charts::Properties::CHART_AXIS_X_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_X_LABELS_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_X_MINOR_GRID_LINE_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_X_SHADES_BORDER_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_X_SHADES_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_X_TITLE_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_LABELS_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_MINOR_GRID_LINE_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_SHADES_BORDER_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_SHADES_COLOR:
+	case dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR:
+	case dooble_charts::Properties::CHART_BACKGROUND_COLOR:
+	case dooble_charts::Properties::CHART_TITLE_COLOR:
+	case dooble_charts::Properties::LEGEND_BORDER_COLOR:
+	case dooble_charts::Properties::LEGEND_COLOR:
+	case dooble_charts::Properties::LEGEND_LABEL_COLOR:
+	case dooble_charts::Properties::XY_SERIES_COLOR:
+	case dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR:
+	  {
+	    item->setBackground(QColor(value.toString()));
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
+      item->setText(value.toString());
+    }
 
   m_model->setData(item->index(), value);
 }
