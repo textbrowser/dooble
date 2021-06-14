@@ -334,6 +334,11 @@ QValueAxis::TickType dooble_charts_xyseries::string_to_tick_type
 }
 #endif
 
+void dooble_charts_xyseries::open(const QString &name)
+{
+  dooble_charts::open(name);
+}
+
 void dooble_charts_xyseries::save(QString &error)
 {
   dooble_charts::save(error);
