@@ -839,12 +839,12 @@ find_specific_item(const QString &text) const
 QStandardItem *dooble_charts_property_editor_model::item_from_property
 (const dooble_charts::Properties property, const int column) const
 {
-  auto list(findItems(tr("Chart")) +
-	    findItems(tr("Chart X-Axis")) +
-	    findItems(tr("Chart Y-Axis")) +
-	    findItems(tr("Data")) +
-	    findItems(tr("Legend")) +
-	    findItems(tr("XY Series")));
+  auto list(find_all_child_items(tr("Chart")) +
+	    find_all_child_items(tr("Chart X-Axis")) +
+	    find_all_child_items(tr("Chart Y-Axis")) +
+	    find_all_child_items(tr("Data")) +
+	    find_all_child_items(tr("Legend")) +
+	    find_all_child_items(tr("XY Series")));
 
   for(int i = 0; i < list.size(); i++)
     if(list.at(i))
@@ -1044,6 +1044,25 @@ void dooble_charts_property_editor::scroll_to_item
 	m_tree->selectionModel()->select
 	  (item->index(), QItemSelectionModel::ClearAndSelect);
     }
+}
+
+void dooble_charts_property_editor::set_property
+(const dooble_charts::Properties property, const QVariant &value)
+{
+  if(!m_model)
+    return;
+
+  auto item = m_model->item_from_property(property, 1);
+
+  if(!item)
+    return;
+
+  if(item->flags() & Qt::ItemIsUserCheckable)
+    item->setCheckState(value.toBool() ? Qt::Checked: Qt::Unchecked);
+  else
+    item->setText(value.toString());
+
+  m_model->setData(item->index(), value);
 }
 
 void dooble_charts_property_editor::slot_show_color_dialog

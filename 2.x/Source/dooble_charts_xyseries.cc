@@ -434,8 +434,40 @@ void dooble_charts_xyseries::slot_data_ready(const QVector<qreal> &vector)
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
   auto series = qobject_cast<QScatterSeries *> (m_series);
+  auto x_axis = qobject_cast<QValueAxis *> (m_x_axis);
+  auto y_axis = qobject_cast<QValueAxis *> (m_y_axis);
 
-  series->append(vector.at(0), vector.at(1));
+  if(!series || !x_axis || !y_axis)
+    return;
+
+  auto x = vector.at(0);
+  auto y = vector.at(1);
+
+  series->append(x, y);
+
+  if(x <= x_axis->min())
+    x_axis->setMin(x - 1.0);
+
+  if(x >= x_axis->max())
+    x_axis->setMax(x + 1.0);
+
+  if(y <= y_axis->min())
+    y_axis->setMin(y - 1.0);
+
+  if(y >= y_axis->max())
+    y_axis->setMax(y + 1.0);
+
+  if(m_property_editor)
+    {
+      m_property_editor->set_property
+	(dooble_charts::Properties::XY_SERIES_X_AXIS_MAX, x_axis->max());
+      m_property_editor->set_property
+	(dooble_charts::Properties::XY_SERIES_X_AXIS_MIN, x_axis->min());
+      m_property_editor->set_property
+	(dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX, y_axis->max());
+      m_property_editor->set_property
+	(dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN, y_axis->min());
+    }
 #endif
 }
 
