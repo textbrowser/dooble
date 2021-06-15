@@ -917,9 +917,38 @@ void dooble_charts::open(const QString &name)
 		}
 	      else if(subset_name == "legend")
 		{
-		  if(property == tr("Color"))
+		  if(property == tr("Alignment"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_ALIGNMENT, value);
+		  else if(property == tr("Background Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE,
+		       value);
+		  else if(property == tr("Border Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_BORDER_COLOR, value);
+		  else if(property == tr("Color"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::LEGEND_COLOR, value);
+		  else if(property == tr("Font"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_FONT, value);
+		  else if(property == tr("Label Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_LABEL_COLOR, value);
+		  else if(property == tr("Marker Shape"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_MARKER_SHAPE, value);
+		  else if(property == tr("Reverse Markers"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_REVERSE_MARKERS,
+		       value);
+		  else if(property == tr("Show Tool Tips"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS, value);
+		  else if(property == tr("Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_VISIBLE, value);
 		}
 
 	      qDebug() << property << subset_name;
