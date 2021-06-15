@@ -861,6 +861,9 @@ void dooble_charts::create_default_device(void)
 
 void dooble_charts::open(const QString &name)
 {
+  if(!m_property_editor)
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   auto database_name(dooble_database_utilities::database_name());
@@ -885,9 +888,11 @@ void dooble_charts::open(const QString &name)
 	  while(query.next())
 	    {
 	      auto property
-		(QByteArray::fromBase64(query.value(0).toByteArray()));
+		(QString::fromUtf8(QByteArray::
+				   fromBase64(query.value(0).toByteArray())));
 	      auto value
-		(QByteArray::fromBase64(query.value(1).toByteArray()));
+		(QString::fromUtf8(QByteArray::
+				   fromBase64(query.value(1).toByteArray())));
 	    }
       }
 
