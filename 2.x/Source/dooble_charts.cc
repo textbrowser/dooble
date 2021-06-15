@@ -950,8 +950,35 @@ void dooble_charts::open(const QString &name)
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::LEGEND_VISIBLE, value);
 		}
-
-	      qDebug() << property << subset_name;
+	      else if(subset_name == "properties")
+		{
+		  if(property == tr("Animation Duration"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_ANIMATION_DURATION,
+		       value);
+		  else if(property == tr("Animation Options"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_ANIMATION_OPTIONS,
+		       value);
+		  else if(property == tr("Chart Type"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_CHART_TYPE, value);
+		}
+	      else if(subset_name == "x_axis_properties")
+		{
+		}
+	      else if(subset_name == "y_axis_properties")
+		{
+		}
+	      else if(subset_name == "xyseries_properties")
+		{
+		}
+	      else if(subset_name == "xyseries_x_axis_properties")
+		{
+		}
+	      else if(subset_name == "xyseries_y_axis_properties")
+		{
+		}
 	    }
       }
 
