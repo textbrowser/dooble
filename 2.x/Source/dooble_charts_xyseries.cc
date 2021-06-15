@@ -342,6 +342,10 @@ void dooble_charts_xyseries::open(const QString &name)
 void dooble_charts_xyseries::save(QString &error)
 {
   dooble_charts::save(error);
+
+  if(!error.isEmpty())
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   auto database_name(dooble_database_utilities::database_name());
@@ -363,9 +367,9 @@ void dooble_charts_xyseries::save(QString &error)
 		      "(name, property, subset_name, value) "
 		      "VALUES (?, ?, ?, ?)");
 	query.addBindValue(name.toBase64());
+	query.addBindValue(QString("chart_type").toUtf8().toBase64());
 	query.addBindValue("chart_type");
-	query.addBindValue("chart_type");
-	query.addBindValue("xyseries");
+	query.addBindValue(QString("xyseries").toUtf8().toBase64());
 	query.exec();
 
 	{

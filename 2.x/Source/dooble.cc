@@ -300,7 +300,7 @@ QStringList dooble::chart_names(void) const
       {
 	QSqlQuery query(db);
 
-	if(query.exec("SELECT DISTINCT(name) FROM dooble_charts ORDER BY 1"))
+	if(query.exec("SELECT DISTINCT(name) FROM dooble_charts"))
 	  while(query.next())
 	    {
 	      auto bytes(query.value(0).toByteArray());
@@ -2181,17 +2181,21 @@ void dooble::slot_about_to_show_history_menu(void)
     if(list.isEmpty())
       sub_menu->setEnabled(false);
     else
-      for(const auto &i : list)
-	{
-	  auto action = new QAction(i, this);
+      {
+	std::sort(list.begin(), list.end());
 
-	  action->setProperty("name", i);
-	  connect(action,
-		  SIGNAL(triggered(void)),
-		  this,
-		  SLOT(slot_open_chart(void)));
-	  sub_menu->addAction(action);
-	}
+	for(const auto &i : list)
+	  {
+	    auto action = new QAction(i, this);
+
+	    action->setProperty("name", i);
+	    connect(action,
+		    SIGNAL(triggered(void)),
+		    this,
+		    SLOT(slot_open_chart(void)));
+	    sub_menu->addAction(action);
+	  }
+      }
   }
 #endif
   m_ui.menu_history->addAction

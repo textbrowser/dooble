@@ -805,11 +805,13 @@ QString dooble_charts::type_from_database(const QString &name)
 
 	query.setForwardOnly(true);
 	query.prepare("SELECT value FROM dooble_charts WHERE "
-		      "name = ? AND property = 'chart_type'");
+		      "name = ? AND property = ?");
 	query.addBindValue(name.toUtf8().toBase64());
+	query.addBindValue(QString("chart_type").toUtf8().toBase64());
 
 	if(query.exec() && query.next())
-	  type = query.value(0).toString().trimmed();
+	  type = QString::fromUtf8
+	    (QByteArray::fromBase64(query.value(0).toByteArray()));
       }
 
     db.close();
@@ -859,7 +861,41 @@ void dooble_charts::create_default_device(void)
 
 void dooble_charts::open(const QString &name)
 {
-  Q_UNUSED(name);
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_charts.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare
+	  ("SELECT property, value FROM dooble_charts WHERE name = ?");
+	query.addBindValue(name.toUtf8().toBase64());
+
+	if(query.exec())
+	  while(query.next())
+	    {
+	      auto property
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+	      auto value
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_charts::save(QString &error)
