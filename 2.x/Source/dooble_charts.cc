@@ -881,7 +881,8 @@ void dooble_charts::open(const QString &name)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT property, value FROM dooble_charts WHERE name = ?");
+	  ("SELECT property, subset_name, value FROM dooble_charts "
+	   "WHERE name = ? ORDER BY 2");
 	query.addBindValue(name.toUtf8().toBase64());
 
 	if(query.exec())
@@ -890,9 +891,38 @@ void dooble_charts::open(const QString &name)
 	      auto property
 		(QString::fromUtf8(QByteArray::
 				   fromBase64(query.value(0).toByteArray())));
+	      auto subset_name(query.value(1).toString().trimmed());
 	      auto value
-		(QString::fromUtf8(QByteArray::
-				   fromBase64(query.value(1).toByteArray())));
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
+
+	      if(subset_name == "data")
+		{
+		  if(property == tr("Extraction Script"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::DATA_EXTRACTION_SCRIPT,
+		       value);
+		  else if(property == tr("Source Address"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::DATA_SOURCE_ADDRESS, value);
+		  else if(property == tr("Source Read Buffer Size"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE,
+		       value);
+		  else if(property == tr("Source Read Rate"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::DATA_SOURCE_READ_RATE, value);
+		  else if(property == tr("Source Type"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::DATA_SOURCE_TYPE, value);
+		}
+	      else if(subset_name == "legend")
+		{
+		  if(property == tr("Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::LEGEND_COLOR, value);
+		}
+
+	      qDebug() << property << subset_name;
 	    }
       }
 
