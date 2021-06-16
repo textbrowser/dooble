@@ -255,7 +255,7 @@ y_axis_properties_for_database(void) const
 }
 
 QString dooble_charts_xyseries::property_to_name
-(const dooble_charts::Properties property) const
+(const dooble_charts::Properties property)
 {
   auto name(dooble_charts::property_to_name(property).trimmed());
 

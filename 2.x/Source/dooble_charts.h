@@ -207,6 +207,7 @@ class dooble_charts: public QWidget
   static QString legend_marker_shape_to_string
     (const QLegend::MarkerShape marker_shape);
 #endif
+  static QString property_to_name(const dooble_charts::Properties property);
   static QString type_from_database(const QString &name);
   virtual QHash<dooble_charts::Properties, QVariant> properties(void) const;
   virtual void open(const QString &name);
@@ -235,8 +236,6 @@ class dooble_charts: public QWidget
   QPointer<dooble_charts_iodevice> m_iodevice;
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;
-  virtual QString property_to_name
-    (const dooble_charts::Properties property) const;
 
  protected slots:
   virtual void slot_clear(void);

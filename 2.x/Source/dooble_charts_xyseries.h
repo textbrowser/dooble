@@ -38,6 +38,7 @@ class dooble_charts_xyseries: public dooble_charts
   dooble_charts_xyseries(QWidget *parent);
   ~dooble_charts_xyseries();
   QHash<dooble_charts::Properties, QVariant> properties(void) const;
+  static QString property_to_name(const dooble_charts::Properties property);
 #ifdef DOOBLE_QTCHARTS_PRESENT
   static QString tick_type_to_string(const QValueAxis::TickType tick_type);
   static QValueAxis::TickType string_to_tick_type(const QString &t);
@@ -50,7 +51,6 @@ class dooble_charts_xyseries: public dooble_charts
   QHash<QString, QVariant> properties_for_database(void) const;
   QHash<QString, QVariant> x_axis_properties_for_database(void) const;
   QHash<QString, QVariant> y_axis_properties_for_database(void) const;
-  QString property_to_name(const dooble_charts::Properties property) const;
 
  private slots:
   void slot_clear(void);

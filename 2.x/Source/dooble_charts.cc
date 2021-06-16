@@ -375,8 +375,19 @@ properties(void) const
     animationDuration();
   properties[dooble_charts::Properties::CHART_ANIMATION_OPTIONS] =
     chart_animation_option_to_string(m_chart->animationOptions());
-  properties[dooble_charts::Properties::CHART_BACKGROUND_COLOR] = m_chart->
-    backgroundBrush().color();
+
+  if(m_property_editor)
+    /*
+    ** After an open().
+    */
+
+    properties[dooble_charts::Properties::CHART_BACKGROUND_COLOR] =
+      m_property_editor->property
+      (dooble_charts::Properties::CHART_BACKGROUND_COLOR);
+  else
+    properties[dooble_charts::Properties::CHART_BACKGROUND_COLOR] = m_chart->
+      backgroundBrush().color();
+
   properties[dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS] = m_chart->
     backgroundRoundness();
   properties[dooble_charts::Properties::CHART_BACKGROUND_VISIBLE] = m_chart->
@@ -402,8 +413,18 @@ properties(void) const
     properties[dooble_charts::Properties::CHART_NAME] = m_property_editor->
       property(dooble_charts::Properties::CHART_NAME);
 
-  properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
-    m_chart->isPlotAreaBackgroundVisible();
+  if(m_property_editor)
+    /*
+    ** After an open().
+    */
+
+    properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
+      m_property_editor->property
+      (dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE);
+  else
+    properties[dooble_charts::Properties::CHART_PLOT_AREA_BACKGROUND_VISIBLE] =
+      m_chart->isPlotAreaBackgroundVisible();
+
   properties[dooble_charts::Properties::CHART_THEME] =
     chart_theme_to_string(m_chart->theme());
   properties[dooble_charts::Properties::CHART_TITLE] = m_chart->title();
@@ -674,7 +695,7 @@ QString dooble_charts::name(void) const
 }
 
 QString dooble_charts::property_to_name
-(const dooble_charts::Properties property) const
+(const dooble_charts::Properties property)
 {
   switch(property)
     {
