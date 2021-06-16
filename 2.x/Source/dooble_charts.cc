@@ -1037,6 +1037,9 @@ void dooble_charts::open(const QString &name)
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_MARGINS_TOP, value);
 		}
+	      else if(subset_name == "splitter")
+		m_ui.splitter->restoreState
+		  (QByteArray::fromBase64(query.value(2).toByteArray()));
 	      else if(subset_name == "x_axis_properties")
 		{
 		  if(property == tr("Alignment Horizontal"))
@@ -1272,6 +1275,16 @@ void dooble_charts::save(QString &error)
 		   "subset_name TEXT NOT NULL, "
 		   "value TEXT, "
 		   "PRIMARY KEY (name, property, subset_name))");
+
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_charts "
+	   "(name, property, subset_name, value) "
+	   "VALUES (?, ?, ?, ?)");
+	query.addBindValue(name.toBase64());
+	query.addBindValue(QString("splitter").toUtf8().toBase64());
+	query.addBindValue("splitter");
+	query.addBindValue(m_ui.splitter->saveState().toBase64());
+	query.exec();
 
 	{
 	  QHashIterator<QString, QVariant> it
