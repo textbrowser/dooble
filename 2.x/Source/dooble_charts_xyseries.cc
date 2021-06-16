@@ -385,7 +385,7 @@ void dooble_charts_xyseries::save(QString &error)
 	      query.addBindValue(name.toBase64());
 	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("xyseries_properties");
-	      query.addBindValue(it.value().toByteArray().toBase64());
+	      query.addBindValue(it.value().toString().toUtf8().toBase64());
 	      query.exec();
 	    }
 	}
@@ -404,7 +404,7 @@ void dooble_charts_xyseries::save(QString &error)
 	      query.addBindValue(name.toBase64());
 	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("xyseries_x_axis_properties");
-	      query.addBindValue(it.value().toByteArray().toBase64());
+	      query.addBindValue(it.value().toString().toUtf8().toBase64());
 	      query.exec();
 	    }
 	}
@@ -423,7 +423,7 @@ void dooble_charts_xyseries::save(QString &error)
 	      query.addBindValue(name.toBase64());
 	      query.addBindValue(it.key().toUtf8().toBase64());
 	      query.addBindValue("xyseries_y_axis_properties");
-	      query.addBindValue(it.value().toByteArray().toBase64());
+	      query.addBindValue(it.value().toString().toUtf8().toBase64());
 	      query.exec();
 	    }
 	}

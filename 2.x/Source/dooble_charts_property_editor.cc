@@ -1095,9 +1095,8 @@ void dooble_charts_property_editor::set_property
 	}
 
       item->setText(value.toString());
+      m_model->setData(item->index(), value);
     }
-
-  m_model->setData(item->index(), value);
 }
 
 void dooble_charts_property_editor::slot_show_color_dialog
