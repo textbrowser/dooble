@@ -933,12 +933,24 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   if(!chart || !m_model || !m_tree)
     return;
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  QMultiHash<dooble_charts::Properties, QVariant> hash;
+
+  hash.unite(chart->data_properties());
+  hash.unite(chart->legend_properties());
+  hash.unite(chart->properties());
+  hash.unite(chart->x_axis_properties());
+  hash.unite(chart->y_axis_properties());
+
+  QHashIterator<dooble_charts::Properties, QVariant> it(hash);
+#else
   QHashIterator<dooble_charts::Properties, QVariant> it
     (chart->data_properties().
      unite(chart->legend_properties()).
      unite(chart->properties()).
      unite(chart->x_axis_properties()).
      unite(chart->y_axis_properties()));
+#endif
 
   while(it.hasNext())
     {
