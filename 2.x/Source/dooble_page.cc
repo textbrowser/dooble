@@ -2173,7 +2173,7 @@ void dooble_page::slot_show_popup(void)
 
   auto index = action->property("index").toInt();
 
-  if(index < 0 || index > m_last_javascript_popups.size())
+  if(index < 0 || index >= m_last_javascript_popups.size())
     return;
 
   auto view(m_last_javascript_popups.at(index));
