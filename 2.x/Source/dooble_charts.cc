@@ -1057,7 +1057,7 @@ void dooble_charts::open(const QString &name)
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR,
 		       value);
-		  else if(property == tr("Grid Line Visible"))
+		  else if(property == tr("Grid Visible"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE,
 		       value);
@@ -1145,7 +1145,7 @@ void dooble_charts::open(const QString &name)
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR,
 		       value);
-		  else if(property == tr("Grid Line Visible"))
+		  else if(property == tr("Grid Visible"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE,
 		       value);
