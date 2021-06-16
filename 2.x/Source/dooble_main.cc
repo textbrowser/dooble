@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
       if(sigaction(i, &signal_action, (struct sigaction *) nullptr))
 	std::cerr << "sigaction() failure on " << i << std::endl;
 #else
-      signal(list.at(i), signal_handler);
+      signal(i, signal_handler);
 #endif
     }
 
