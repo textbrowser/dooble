@@ -411,9 +411,6 @@ properties(void) const
     m_chart->titleBrush().color();
   properties[dooble_charts::Properties::CHART_TITLE_FONT] =
     m_chart->titleFont();
-  properties[dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE] = 512;
-  properties[dooble_charts::Properties::DATA_SOURCE_READ_RATE] = "1024 / 256";
-  properties[dooble_charts::Properties::DATA_SOURCE_TYPE] = tr("Text File");
 #endif
   return properties;
 }
@@ -960,9 +957,63 @@ void dooble_charts::open(const QString &name)
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_ANIMATION_OPTIONS,
 		       value);
+		  else if(property == tr("Background Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_BACKGROUND_COLOR,
+		       value);
+		  else if(property == tr("Background Roundness"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS,
+		       value);
+		  else if(property == tr("Background Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_BACKGROUND_VISIBLE,
+		       value);
+		  else if(property == tr("Bottom"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_MARGINS_BOTTOM, value);
 		  else if(property == tr("Chart Type"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_CHART_TYPE, value);
+		  else if(property == tr("Drop Shadow Enabled"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED,
+		       value);
+		  else if(property == tr("Left"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_MARGINS_LEFT, value);
+		  else if(property == tr("Locale"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_LOCALE, value);
+		  else if(property == tr("Localize Numbers"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_LOCALIZE_NUMBERS,
+		       value);
+		  else if(property == tr("Name"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_NAME, value);
+		  else if(property == tr("Plot Area Background Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::
+		       CHART_PLOT_AREA_BACKGROUND_VISIBLE, value);
+		  else if(property == tr("Right"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_MARGINS_RIGHT, value);
+		  else if(property == tr("Theme"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_THEME, value);
+		  else if(property == tr("Title"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_TITLE, value);
+		  else if(property == tr("Title Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_TITLE_COLOR, value);
+		  else if(property == tr("Title Font"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_TITLE_FONT, value);
+		  else if(property == tr("Top"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_MARGINS_TOP, value);
 		}
 	      else if(subset_name == "x_axis_properties")
 		{
