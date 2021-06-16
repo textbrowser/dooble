@@ -1017,6 +1017,13 @@ void dooble_charts::open(const QString &name)
 		}
 	      else if(subset_name == "x_axis_properties")
 		{
+		  if(property == tr("Alignment Horizontal"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::
+		       CHART_AXIS_X_ALIGNMENT_HORIZONTAL, value);
+		  else if(property == tr("Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::CHART_AXIS_X_COLOR, value);
 		}
 	      else if(subset_name == "y_axis_properties")
 		{
