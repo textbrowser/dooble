@@ -252,7 +252,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
     {
       auto current = list.at(i);
 
-      if(current->isVisible())
+      if(current && current->isVisible())
 	{
 	  auto frameh = current->geometry().y() - current->y();
 	  auto framew = current->geometry().x() - current->x();

@@ -658,34 +658,35 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 	  open_as_new_window_action->setEnabled
 	    (count() > 1 && !page->is_private() && tab_at > -1);
 
-	  switch(page->reload_periodically_seconds())
-	    {
-	    case 15:
+	  if(sub_menu->actions().size() >= 5)
+	    switch(page->reload_periodically_seconds())
 	      {
-		sub_menu->actions().at(0)->setChecked(true);
-		break;
+	      case 15:
+		{
+		  sub_menu->actions().at(0)->setChecked(true);
+		  break;
+		}
+	      case 30:
+		{
+		  sub_menu->actions().at(1)->setChecked(true);
+		  break;
+		}
+	      case 45:
+		{
+		  sub_menu->actions().at(2)->setChecked(true);
+		  break;
+		}
+	      case 60:
+		{
+		  sub_menu->actions().at(3)->setChecked(true);
+		  break;
+		}
+	      default:
+		{
+		  sub_menu->actions().at(4)->setChecked(true);
+		  break;
+		}
 	      }
-	    case 30:
-	      {
-		sub_menu->actions().at(1)->setChecked(true);
-		break;
-	      }
-	    case 45:
-	      {
-		sub_menu->actions().at(2)->setChecked(true);
-		break;
-	      }
-	    case 60:
-	      {
-		sub_menu->actions().at(3)->setChecked(true);
-		break;
-	      }
-	    default:
-	      {
-		sub_menu->actions().at(4)->setChecked(true);
-		break;
-	      }
-	    }
 
 	  web_plugins_action->setCheckable(true);
 	  web_plugins_action->setEnabled(tab_at > -1);
