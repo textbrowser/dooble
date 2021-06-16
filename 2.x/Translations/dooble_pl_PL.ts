@@ -179,8 +179,8 @@
     <name>dooble</name>
     <message>
         <location filename="../UI/dooble.ui" line="14"/>
-        <location filename="../Source/dooble.cc" line="3613"/>
-        <location filename="../Source/dooble.cc" line="3735"/>
+        <location filename="../Source/dooble.cc" line="3646"/>
+        <location filename="../Source/dooble.cc" line="3768"/>
         <source>Dooble</source>
         <translation>Dooble</translation>
     </message>
@@ -226,8 +226,8 @@
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="406"/>
-        <location filename="../Source/dooble.cc" line="2595"/>
-        <location filename="../Source/dooble.cc" line="3757"/>
+        <location filename="../Source/dooble.cc" line="2628"/>
+        <location filename="../Source/dooble.cc" line="3790"/>
         <source>Dooble: Confirmation</source>
         <translation>Dooble: Zatwierdzenie</translation>
     </message>
@@ -236,8 +236,8 @@
         <location filename="../Source/dooble.cc" line="475"/>
         <location filename="../Source/dooble.cc" line="899"/>
         <location filename="../Source/dooble.cc" line="908"/>
-        <location filename="../Source/dooble.cc" line="2406"/>
-        <location filename="../Source/dooble.cc" line="2407"/>
+        <location filename="../Source/dooble.cc" line="2439"/>
+        <location filename="../Source/dooble.cc" line="2440"/>
         <source>Application Locked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,7 +270,7 @@
         <location filename="../Source/dooble.cc" line="1453"/>
         <location filename="../Source/dooble.cc" line="1708"/>
         <location filename="../Source/dooble.cc" line="1716"/>
-        <location filename="../Source/dooble.cc" line="2210"/>
+        <location filename="../Source/dooble.cc" line="2243"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1656"/>
-        <location filename="../Source/dooble.cc" line="2169"/>
+        <location filename="../Source/dooble.cc" line="2202"/>
         <source>Charts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -434,63 +434,63 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="1970"/>
+        <location filename="../Source/dooble.cc" line="2003"/>
         <source>A failure occurred.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2202"/>
+        <location filename="../Source/dooble.cc" line="2235"/>
         <source>&amp;Clear History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2330"/>
+        <location filename="../Source/dooble.cc" line="2363"/>
         <source>Dooble: Unlock Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2424"/>
+        <location filename="../Source/dooble.cc" line="2457"/>
         <source>about:blank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2446"/>
-        <location filename="../Source/dooble.cc" line="3576"/>
+        <location filename="../Source/dooble.cc" line="2479"/>
+        <location filename="../Source/dooble.cc" line="3609"/>
         <source>Dooble: Application Locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2592"/>
+        <location filename="../Source/dooble.cc" line="2625"/>
         <source>Are you sure that you wish to delete all of the finished downloads?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3597"/>
+        <location filename="../Source/dooble.cc" line="3630"/>
         <source>Charts (%1) - Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3599"/>
+        <location filename="../Source/dooble.cc" line="3632"/>
         <source>Charts - Dooble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3753"/>
+        <location filename="../Source/dooble.cc" line="3786"/>
         <source>Vacuuming databases may require a significant amount of time. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3786"/>
+        <location filename="../Source/dooble.cc" line="3819"/>
         <source>Vacuuming databases...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3791"/>
+        <location filename="../Source/dooble.cc" line="3824"/>
         <source>Dooble: Vacuuming Databases</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3851"/>
+        <location filename="../Source/dooble.cc" line="3884"/>
         <source>Unable to discover the SQLite plugin. This is a serious problem!</source>
         <translation>Nie można znaleźć wtyczki SQLite. To jest poważny problem!</translation>
     </message>
@@ -557,13 +557,13 @@
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1705"/>
-        <location filename="../Source/dooble.cc" line="2208"/>
+        <location filename="../Source/dooble.cc" line="2241"/>
         <source>&amp;History</source>
         <translation>&amp;Historia</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1713"/>
-        <location filename="../Source/dooble.cc" line="2208"/>
+        <location filename="../Source/dooble.cc" line="2241"/>
         <source>&amp;History...</source>
         <translation>&amp;Historia...</translation>
     </message>
@@ -574,8 +574,8 @@
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1731"/>
-        <location filename="../Source/dooble.cc" line="2284"/>
-        <location filename="../Source/dooble.cc" line="2291"/>
+        <location filename="../Source/dooble.cc" line="2317"/>
+        <location filename="../Source/dooble.cc" line="2324"/>
         <source>Show &amp;Full Screen</source>
         <translation>&amp;Tryb pełnoekranowy</translation>
     </message>
@@ -585,30 +585,30 @@
         <translation>&amp;O programie...</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2281"/>
-        <location filename="../Source/dooble.cc" line="2289"/>
+        <location filename="../Source/dooble.cc" line="2314"/>
+        <location filename="../Source/dooble.cc" line="2322"/>
         <source>Show &amp;Normal Screen</source>
         <translation>Tryb  &amp;normalny</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2521"/>
-        <location filename="../Source/dooble.cc" line="3785"/>
+        <location filename="../Source/dooble.cc" line="2554"/>
+        <location filename="../Source/dooble.cc" line="3818"/>
         <source>Interrupt</source>
         <translation>Przerwanie</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2522"/>
+        <location filename="../Source/dooble.cc" line="2555"/>
         <source>Preparing credentials...</source>
         <translation>Przygotowanie danych logowania...</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="2528"/>
+        <location filename="../Source/dooble.cc" line="2561"/>
         <source>Dooble: Preparing Credentials</source>
         <translation>Dooble: przygotowanie danych logowania</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3067"/>
-        <location filename="../Source/dooble.cc" line="3850"/>
+        <location filename="../Source/dooble.cc" line="3100"/>
+        <location filename="../Source/dooble.cc" line="3883"/>
         <source>Dooble: Error</source>
         <translation>Dooble: Błąd</translation>
     </message>
@@ -617,8 +617,8 @@
         <translation type="vanished">Nieudane uwierzytelnianie dla podanego hasła.</translation>
     </message>
     <message>
-        <location filename="../Source/dooble.cc" line="3616"/>
-        <location filename="../Source/dooble.cc" line="3737"/>
+        <location filename="../Source/dooble.cc" line="3649"/>
+        <location filename="../Source/dooble.cc" line="3770"/>
         <source>%1 - Dooble</source>
         <translation>%1 - Dooble</translation>
     </message>

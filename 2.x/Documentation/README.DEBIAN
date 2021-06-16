@@ -51,18 +51,15 @@ cp -pr ./Data/*.txt ./opt/dooble/Data/.
 cp -pr ./Data/README ./opt/dooble/Data/.
 cp -pr ./qtwebengine_dictionaries ./opt/dooble/.
 find ./opt/dooble/plugins -name '*.so' -exec chmod -x {} \;
-
-Preparing Dooble-x_amd64.deb:
-
 mkdir -p dooble-debian.d/opt
 mkdir -p dooble-debian.d/usr/bin
 mkdir -p dooble-debian.d/usr/share/applications
 mkdir -p dooble-debian.d/usr/share/pixmaps
-cp -p ./dooble.d/2.x/dooble.desktop dooble-debian.d/usr/share/applications/.
-cp -pr ./dooble.d/2.x/DEBIAN dooble-debian.d/.
+cp -p dooble.desktop dooble-debian.d/usr/share/applications/.
+cp -pr DEBIAN dooble-debian.d/.
 cp -r ./opt/dooble dooble-debian.d/opt/.
-cp ./dooble.d/2.x/Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
-cp ./dooble.d/2.x/dooble.sh dooble-debian.d/usr/bin/dooble
+cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
+cp dooble.sh dooble-debian.d/usr/bin/dooble
 fakeroot dpkg-deb --build dooble-debian.d Dooble-2021.07.07_amd64.deb
-debsigs --sign=origin -k 66E6A4C70DA51DCD Dooble-2021.07.07_amd64.deb
 rm -fr ./opt
+rm -fr dooble-debian
