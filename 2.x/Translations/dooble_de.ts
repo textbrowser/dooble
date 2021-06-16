@@ -87,6 +87,58 @@
         <source>Unknown Feature</source>
         <translation>Unbekanntes Feature</translation>
     </message>
+    <message>
+        <source>Absolute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baseline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Justify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">nicht angewandt</translation>
+    </message>
+    <message>
+        <source>Horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble</name>
@@ -256,7 +308,7 @@
     </message>
     <message>
         <source>Unable to authenticate the provided password.</source>
-        <translation>Kann mit dem genannten Passwort nichts authentifizieren.</translation>
+        <translation type="vanished">Kann mit dem genannten Passwort nichts authentifizieren.</translation>
     </message>
     <message>
         <source>Save</source>
@@ -356,7 +408,7 @@
     </message>
     <message>
         <source>Floating Digital &amp;Clock</source>
-        <translation>Schwebende Digital&amp;uhr</translation>
+        <translation type="vanished">Schwebende Digital&amp;uhr</translation>
     </message>
     <message>
         <source>Inject Custom Style Sheet...</source>
@@ -364,7 +416,7 @@
     </message>
     <message>
         <source>&amp;Search Engines</source>
-        <translation>&amp;Suchmaschinen</translation>
+        <translation type="vanished">&amp;Suchmaschinen</translation>
     </message>
     <message>
         <source>&amp;Release Notes</source>
@@ -405,6 +457,46 @@
     <message>
         <source>Dooble: Vacuuming Databases</source>
         <translation>Dooble: Bereinigen der Datenbanken</translation>
+    </message>
+    <message>
+        <source>XY Series Chart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished">&amp;Drucken...</translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view...</source>
+        <translation type="unfinished">Drucke &amp;Vorschau...</translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XY Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Floating Digital &amp;Clock...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Engines...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charts (%1) - Dooble</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charts - Dooble</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -462,11 +554,15 @@ Dooble ist open source Software.
         <translation></translation>
     </message>
     <message>
-        <source>Dooble version %1, Quaternions.</source>
+        <source>The SHA3-512 digest of %1 is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The SHA3-512 digest of %1 is %2.</source>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
+    </message>
+    <message>
+        <source>Dooble version %1, Hyperspace.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -862,6 +958,10 @@ Dooble ist open source Software.
         <source>%1 Row(s)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
+    </message>
 </context>
 <context>
     <name>dooble_certificate_exceptions_menu_widget</name>
@@ -919,6 +1019,596 @@ Dooble ist open source Software.
     <message>
         <source>&amp;Accept Permanent Exception</source>
         <translation>&amp;Akzeptiere permanente Ausnahme</translation>
+    </message>
+</context>
+<context>
+    <name>dooble_charts</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished">Pausieren</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alignment Horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alignment Vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grid Line Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grid Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Grid Line Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Grid Line Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shades Border Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shades Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shades Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animation Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animation Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background Roundness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chart Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop Shadow Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Localize Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Name</translation>
+    </message>
+    <message>
+        <source>Plot Area Background Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Titel</translation>
+    </message>
+    <message>
+        <source>Extraction Script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source Read Buffer Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source Read Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Border Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marker Shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse Markers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Tool Tips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Alle</translation>
+    </message>
+    <message>
+        <source>Grid Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue Cerulean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue Icy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue NCS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown Sand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished">Dunkel</translation>
+    </message>
+    <message>
+        <source>High Contrast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">nicht angewandt</translation>
+    </message>
+    <message>
+        <source>Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cartesian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please provide a chart name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Binary File</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_charts_file</name>
+    <message>
+        <source>Text File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Binary File</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_charts_property_editor_model</name>
+    <message>
+        <source>Property</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Chart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The chart will be saved via the provided name. Please specify a unique value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read-Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chart X-Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chart Y-Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XY Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_charts_property_editor_model_delegate</name>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Alle</translation>
+    </message>
+    <message>
+        <source>Grid Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">nicht angewandt</translation>
+    </message>
+    <message>
+        <source>Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>en_US</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue Cerulean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue Icy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue NCS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown Sand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished">Dunkel</translation>
+    </message>
+    <message>
+        <source>High Contrast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Millisecond(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Binary File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_charts_property_editor_model_xyseries</name>
+    <message>
+        <source>XY Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_charts_xyseries</name>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Name</translation>
+    </message>
+    <message>
+        <source>Opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Labels Clipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Labels Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Labels Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Labels Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Labels Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X-Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Tick Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Anchor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y-Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixed</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1011,6 +1701,10 @@ Dooble ist open source Software.
     <message>
         <source>&amp;Visited Links</source>
         <translation>&amp;Besuchte Links</translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
     </message>
 </context>
 <context>
@@ -1129,6 +1823,10 @@ Dooble ist open source Software.
     <message>
         <source>Delete &amp;Unchecked</source>
         <translation>Lösche die &amp;Deaktivierten</translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
     </message>
 </context>
 <context>
@@ -1339,6 +2037,10 @@ Dooble ist open source Software.
         <source>%1 Row(s)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
+    </message>
 </context>
 <context>
     <name>dooble_floating_digital_clock</name>
@@ -1459,6 +2161,13 @@ Dooble ist open source Software.
     <message>
         <source>%1 Row(s)</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dooble_main_window</name>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
     </message>
 </context>
 <context>
@@ -1925,7 +2634,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Floating Digital &amp;Clock</source>
-        <translation>Schwebende Digital&amp;uhr</translation>
+        <translation type="vanished">Schwebende Digital&amp;uhr</translation>
     </message>
     <message>
         <source>Inject Custom Style Sheet...</source>
@@ -1933,7 +2642,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Search Engines</source>
-        <translation>&amp;Suchmaschinen</translation>
+        <translation type="vanished">&amp;Suchmaschinen</translation>
     </message>
     <message>
         <source>&amp;Release Notes</source>
@@ -1953,6 +2662,22 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XY Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Floating Digital &amp;Clock...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Engines...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2158,6 +2883,10 @@ Domänen</translation>
         <source>%1 Row(s)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
+    </message>
 </context>
 <context>
     <name>dooble_settings</name>
@@ -2203,7 +2932,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Dooble: User Error</source>
-        <translation>Dooble: Nutzer Fehler</translation>
+        <translation type="vanished">Dooble: Nutzer Fehler</translation>
     </message>
     <message>
         <source>Empty password(s).</source>
@@ -2771,7 +3500,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Containers: Accepted / Blocked Domains, Certificate Exceptions, Cookies, Downloads, Favicons, History, Search Engines. All other containers, including the contents of WebEnginePersistentStorage, are not encrypted.</source>
-        <translation>Container: Akzeptierte / blockierte Domains, Zertifikatausnahmen, Cookies, Downloads, Favicons, Verlauf, Suchmaschinen. Alle anderen Container, einschließlich des Inhalts von WebEnginePersistentStorage, werden nicht verschlüsselt.</translation>
+        <translation type="vanished">Container: Akzeptierte / blockierte Domains, Zertifikatausnahmen, Cookies, Downloads, Favicons, Verlauf, Suchmaschinen. Alle anderen Container, einschließlich des Inhalts von WebEnginePersistentStorage, werden nicht verschlüsselt.</translation>
     </message>
     <message>
         <source>Please note that some of the cryptographic algorithms which are included in Dooble were implemented by the author(s) of Dooble. If this is a concern, please do not prepare permanent credentials.</source>
@@ -2901,6 +3630,22 @@ Domänen</translation>
         <source>Favicons</source>
         <translation type="unfinished">Favicons</translation>
     </message>
+    <message>
+        <source>MMAN Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Containers: Accepted / Blocked Domains, Certificate Exceptions, Cookies, Downloads, Favicons, History, Search Engines, Style Sheets. All other containers, including the contents of WebEnginePersistentStorage, are not encrypted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory locking is not available on this system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory locking is provided by mlock() and munlock().</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_style_sheet</name>
@@ -2927,6 +3672,10 @@ Domänen</translation>
     <message>
         <source>Remove</source>
         <translation>Entfernen</translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished">Strg+W</translation>
     </message>
 </context>
 <context>
