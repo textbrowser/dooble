@@ -1869,15 +1869,31 @@ void dooble::print(dooble_charts *chart)
       painter.begin(&printer);
 
       auto view = chart->view();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+      auto xscale = printer.pageLayout().fullRectPixels(printer.resolution()).
+	width() / static_cast<double> (view->width());
+      auto yscale = printer.pageLayout().fullRectPixels(printer.resolution()).
+	height() / static_cast<double> (view->height());
+#else
       auto xscale = printer.pageRect().width() /
 	static_cast<double> (view->width());
       auto yscale = printer.pageRect().height() /
 	static_cast<double> (view->height());
+#endif
       double scale = qMin(xscale, yscale);
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+      painter.translate
+	(printer.pageLayout().fullRectPixels(printer.resolution()).x() +
+	 printer.pageLayout().fullRectPixels(printer.resolution()).width() / 2,
+	 printer.pageLayout().fullRectPixels(printer.resolution()).y() +
+	 printer.pageLayout().fullRectPixels(printer.resolution()).
+	 height() / 2);
+#else
       painter.translate
 	(printer.paperRect().x() + printer.pageRect().width() / 2,
 	 printer.paperRect().y() + printer.pageRect().height() / 2);
+#endif
       painter.scale(scale, scale);
       painter.translate(-view->width() / 2, -view->height() / 2);
       view->render(&painter);
@@ -1931,15 +1947,32 @@ void dooble::print_preview(QPrinter *printer)
       painter.begin(printer);
 
       auto view = chart->view();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+      auto xscale = printer->pageLayout().fullRectPixels(printer->resolution()).
+	width() / static_cast<double> (view->width());
+      auto yscale = printer->pageLayout().fullRectPixels(printer->resolution()).
+	height() / static_cast<double> (view->height());
+#else
       auto xscale = printer->pageRect().width() /
 	static_cast<double> (view->width());
       auto yscale = printer->pageRect().height() /
 	static_cast<double> (view->height());
+#endif
       double scale = qMin(xscale, yscale);
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+      painter.translate
+	(printer->pageLayout().fullRectPixels(printer->resolution()).x() +
+	 printer->pageLayout().fullRectPixels(printer->resolution()).
+	 width() / 2,
+	 printer->pageLayout().fullRectPixels(printer->resolution()).y() +
+	 printer->pageLayout().fullRectPixels(printer->resolution()).
+	 height() / 2);
+#else
       painter.translate
 	(printer->paperRect().x() + printer->pageRect().width() / 2,
 	 printer->paperRect().y() + printer->pageRect().height() / 2);
+#endif
       painter.scale(scale, scale);
       painter.translate(-view->width() / 2, -view->height() / 2);
       view->render(&painter);
