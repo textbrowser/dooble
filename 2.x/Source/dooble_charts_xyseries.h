@@ -54,7 +54,7 @@ class dooble_charts_xyseries: public dooble_charts
 
  private slots:
   void slot_clear(void);
-  void slot_data_ready(const QVector<qreal> &vector);
+  void slot_data_ready(const QVector<double> &vector);
   void slot_item_changed(QStandardItem *item);
 };
 

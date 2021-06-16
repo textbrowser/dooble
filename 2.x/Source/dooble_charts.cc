@@ -872,9 +872,9 @@ void dooble_charts::create_default_device(void)
 
   m_iodevice->set_type(tr("Text File"));
   connect(m_iodevice,
-	  SIGNAL(data_ready(const QVector<qreal> &)),
+	  SIGNAL(data_ready(const QVector<double> &)),
 	  this,
-	  SLOT(slot_data_ready(const QVector<qreal> &)));
+	  SLOT(slot_data_ready(const QVector<double> &)));
 }
 
 void dooble_charts::open(const QString &name)

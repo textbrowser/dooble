@@ -147,6 +147,7 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListUrl> ("QListUrl");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
+  qRegisterMetaType<QVector<qreal> > ("QVector<qreal>");
   qRegisterMetaType<Qt::SortOrder> ("Qt::SortOrder");
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);

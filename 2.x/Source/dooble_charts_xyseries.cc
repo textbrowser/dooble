@@ -446,7 +446,7 @@ void dooble_charts_xyseries::slot_clear(void)
 #endif
 }
 
-void dooble_charts_xyseries::slot_data_ready(const QVector<qreal> &vector)
+void dooble_charts_xyseries::slot_data_ready(const QVector<double> &vector)
 {
   if(vector.size() != 2)
     return;

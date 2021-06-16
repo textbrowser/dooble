@@ -134,7 +134,7 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 	      if(value.isArray() && !value.isError())
 		{
 		  QJSValueIterator it(value);
-		  QVector<qreal> vector;
+		  QVector<double> vector;
 
 		  while(it.hasNext())
 		    {
