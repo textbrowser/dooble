@@ -1023,12 +1023,15 @@ void dooble_charts::open(const QString &name)
 		}
 	      else if(subset_name == "xyseries_properties")
 		{
+		  // Ignore.
 		}
 	      else if(subset_name == "xyseries_x_axis_properties")
 		{
+		  // Ignore.
 		}
 	      else if(subset_name == "xyseries_y_axis_properties")
 		{
+		  // Ignore.
 		}
 	    }
       }
