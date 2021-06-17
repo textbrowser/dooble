@@ -533,6 +533,17 @@ dooble_charts_property_editor_model(QObject *parent):
 
       switch(dooble_charts::Properties(offset))
 	{
+	case dooble_charts::Properties::CHART_ANIMATION_DURATION:
+	  {
+	    item->setToolTip
+	      ("<html>" +
+	       tr("The duration, in milliseconds, of the animations. "
+		  "Please note that theme changes may cause animations. "
+		  "After a chart is loaded from disk, chart properties will "
+		  "be applied after the animations complete.") +
+	       "</html>");
+	    break;
+	  }
 	case dooble_charts::Properties::CHART_BACKGROUND_VISIBLE:
 	case dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED:
 	case dooble_charts::Properties::CHART_LOCALIZE_NUMBERS:
@@ -562,6 +573,15 @@ dooble_charts_property_editor_model(QObject *parent):
 	      ("<html>" +
 	       tr("The chart will be saved via the provided "
 		  "name. Please specify a unique value.") +
+	       "</html>");
+	    break;
+	  }
+	case dooble_charts::Properties::CHART_THEME:
+	  {
+	    item->setToolTip
+	      ("<html>" +
+	       tr("Other chart properties will be applied after the "
+		  "new theme is applied.") +
 	       "</html>");
 	    break;
 	  }

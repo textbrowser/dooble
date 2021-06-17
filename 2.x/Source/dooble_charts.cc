@@ -1780,12 +1780,24 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	*/
 
 	if(m_property_editor)
-	  QTimer::singleShot
-	    (250 +
-	     m_property_editor->property(dooble_charts::Properties::
-					 CHART_ANIMATION_DURATION).toInt(),
-	     this,
-	     SLOT(slot_apply_properties_after_theme_changed(void)));
+	  {
+	    auto chart_animation_options = string_to_chart_animation_options
+	      (m_property_editor->property(dooble_charts::Properties::
+					   CHART_ANIMATION_OPTIONS).toString());
+
+	    if(chart_animation_options == QChart::NoAnimation)
+	      QTimer::singleShot
+		(250,
+		 this,
+		 SLOT(slot_apply_properties_after_theme_changed(void)));
+	    else
+	      QTimer::singleShot
+		(250 +
+		 m_property_editor->property(dooble_charts::Properties::
+					     CHART_ANIMATION_DURATION).toInt(),
+		 this,
+		 SLOT(slot_apply_properties_after_theme_changed(void)));
+	  }
 
 	break;
       }
