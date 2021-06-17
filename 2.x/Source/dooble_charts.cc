@@ -343,16 +343,46 @@ dooble_charts::legend_properties(void) const
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
   properties[dooble_charts::Properties::LEGEND_ALIGNMENT] =
-    dooble_ui_utilities::alignment_to_string
-    (m_legend->alignment());
+    dooble_ui_utilities::alignment_to_string(m_legend->alignment());
   properties[dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE] =
     m_legend->isBackgroundVisible();
-  properties[dooble_charts::Properties::LEGEND_BORDER_COLOR] =
-    m_legend->borderColor();
-  properties[dooble_charts::Properties::LEGEND_COLOR] = m_legend->color();
+
+  if(m_property_editor)
+    /*
+    ** After an open().
+    */
+
+    properties[dooble_charts::Properties::LEGEND_BORDER_COLOR] =
+      m_property_editor->property
+      (dooble_charts::Properties::LEGEND_BORDER_COLOR);
+  else
+    properties[dooble_charts::Properties::LEGEND_BORDER_COLOR] =
+      m_legend->borderColor();
+
+  if(m_property_editor)
+    /*
+    ** After an open().
+    */
+
+    properties[dooble_charts::Properties::LEGEND_COLOR] = m_property_editor->
+      property(dooble_charts::Properties::LEGEND_COLOR);
+  else
+    properties[dooble_charts::Properties::LEGEND_COLOR] = m_legend->color();
+
   properties[dooble_charts::Properties::LEGEND_FONT] = m_legend->font();
-  properties[dooble_charts::Properties::LEGEND_LABEL_COLOR] =
-    m_legend->labelColor();
+
+  if(m_property_editor)
+    /*
+    ** After an open().
+    */
+
+    properties[dooble_charts::Properties::LEGEND_LABEL_COLOR] =
+      m_property_editor->property
+      (dooble_charts::Properties::LEGEND_LABEL_COLOR);
+  else
+    properties[dooble_charts::Properties::LEGEND_LABEL_COLOR] =
+      m_legend->labelColor();
+
   properties[dooble_charts::Properties::LEGEND_MARKER_SHAPE] =
     legend_marker_shape_to_string(m_legend->markerShape());
   properties[dooble_charts::Properties::LEGEND_REVERSE_MARKERS] =
@@ -1826,7 +1856,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::LEGEND_VISIBLE:
       {
-	m_chart->legend()->setVisible(item->checkState() == Qt::Checked);
+	m_legend->setVisible(item->checkState() == Qt::Checked);
 	break;
       }
     default:
