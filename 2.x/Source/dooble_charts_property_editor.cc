@@ -909,6 +909,15 @@ model(void) const
   return m_model;
 }
 
+QStandardItem *dooble_charts_property_editor::item_from_property
+(const dooble_charts::Properties property, const int column) const
+{
+  if(m_model)
+    return m_model->item_from_property(property, column);
+  else
+    return nullptr;
+}
+
 QVariant dooble_charts_property_editor::property
 (const dooble_charts::Properties property)
 {

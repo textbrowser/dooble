@@ -97,6 +97,8 @@ class dooble_charts_property_editor: public QWidget
   dooble_charts_property_editor(QTreeView *tree);
   virtual ~dooble_charts_property_editor();
   QPointer<dooble_charts_property_editor_model> model(void) const;
+  QStandardItem *item_from_property
+    (const dooble_charts::Properties property, const int column) const;
   QVariant property(const dooble_charts::Properties property);
   void scroll_to_item(const dooble_charts::Properties property);
   void set_property(const dooble_charts::Properties property,

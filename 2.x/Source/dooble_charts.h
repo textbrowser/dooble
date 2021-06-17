@@ -219,6 +219,7 @@ class dooble_charts: public QWidget
   QHash<QString, QVariant> properties_for_database(void) const;
   QHash<QString, QVariant> x_axis_properties_for_database(void) const;
   QHash<QString, QVariant> y_axis_properties_for_database(void) const;
+  QHash<dooble_charts::Properties, QVariant> all_properties(void) const;
   virtual void create_default_device(void);
 
  protected:
@@ -244,6 +245,7 @@ class dooble_charts: public QWidget
   virtual void slot_play(void);
   virtual void slot_pause(void);
   virtual void slot_stop(void);
+  void slot_apply_properties_after_theme_changed(void);
 };
 
 #endif
