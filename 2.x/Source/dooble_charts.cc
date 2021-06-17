@@ -925,6 +925,7 @@ void dooble_charts::open(const QString &name)
 
     if(db.open())
       {
+	QHash<dooble_charts::Properties, QString> hash;
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
@@ -947,124 +948,124 @@ void dooble_charts::open(const QString &name)
 	      if(subset_name == "data")
 		{
 		  if(property == tr("Extraction Script"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::DATA_EXTRACTION_SCRIPT,
 		       value);
 		  else if(property == tr("Source Address"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::DATA_SOURCE_ADDRESS, value);
 		  else if(property == tr("Source Read Buffer Size"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::DATA_SOURCE_READ_BUFFER_SIZE,
 		       value);
 		  else if(property == tr("Source Read Rate"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::DATA_SOURCE_READ_RATE, value);
 		  else if(property == tr("Source Type"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::DATA_SOURCE_TYPE, value);
 		}
 	      else if(subset_name == "legend")
 		{
 		  if(property == tr("Alignment"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_ALIGNMENT, value);
 		  else if(property == tr("Background Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE,
 		       value);
 		  else if(property == tr("Border Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_BORDER_COLOR, value);
 		  else if(property == tr("Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_COLOR, value);
 		  else if(property == tr("Font"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_FONT, value);
 		  else if(property == tr("Label Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_LABEL_COLOR, value);
 		  else if(property == tr("Marker Shape"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_MARKER_SHAPE, value);
 		  else if(property == tr("Reverse Markers"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_REVERSE_MARKERS,
 		       value);
 		  else if(property == tr("Show Tool Tips"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS, value);
 		  else if(property == tr("Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::LEGEND_VISIBLE, value);
 		}
 	      else if(subset_name == "properties")
 		{
 		  if(property == tr("Animation Duration"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_ANIMATION_DURATION,
 		       value);
 		  else if(property == tr("Animation Options"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_ANIMATION_OPTIONS,
 		       value);
 		  else if(property == tr("Background Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_BACKGROUND_COLOR,
 		       value);
 		  else if(property == tr("Background Roundness"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_BACKGROUND_ROUNDNESS,
 		       value);
 		  else if(property == tr("Background Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_BACKGROUND_VISIBLE,
 		       value);
 		  else if(property == tr("Bottom"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_MARGINS_BOTTOM, value);
 		  else if(property == tr("Chart Type"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_CHART_TYPE, value);
 		  else if(property == tr("Drop Shadow Enabled"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_DROP_SHADOW_ENABLED,
 		       value);
 		  else if(property == tr("Left"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_MARGINS_LEFT, value);
 		  else if(property == tr("Locale"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_LOCALE, value);
 		  else if(property == tr("Localize Numbers"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_LOCALIZE_NUMBERS,
 		       value);
 		  else if(property == tr("Name"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_NAME, value);
 		  else if(property == tr("Plot Area Background Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_PLOT_AREA_BACKGROUND_VISIBLE, value);
 		  else if(property == tr("Right"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_MARGINS_RIGHT, value);
 		  else if(property == tr("Theme"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::CHART_THEME, value);
 		  else if(property == tr("Title"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_TITLE, value);
 		  else if(property == tr("Title Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_TITLE_COLOR, value);
 		  else if(property == tr("Title Font"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_TITLE_FONT, value);
 		  else if(property == tr("Top"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_MARGINS_TOP, value);
 		}
 	      else if(subset_name == "splitter")
@@ -1073,177 +1074,177 @@ void dooble_charts::open(const QString &name)
 	      else if(subset_name == "x_axis_properties")
 		{
 		  if(property == tr("Alignment Horizontal"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_X_ALIGNMENT_HORIZONTAL, value);
 		  else if(property == tr("Alignment Vertical"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_X_ALIGNMENT_VERTICAL, value);
 		  else if(property == tr("Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_COLOR, value);
 		  else if(property == tr("Grid Line Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_GRID_LINE_COLOR,
 		       value);
 		  else if(property == tr("Grid Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_GRID_VISIBLE,
 		       value);
 		  else if(property == tr("Labels Angle"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_LABELS_ANGLE,
 		       value);
 		  else if(property == tr("Labels Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_LABELS_COLOR,
 		       value);
 		  else if(property == tr("Labels Font"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_LABELS_FONT,
 		       value);
 		  else if(property == tr("Labels Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_LABELS_VISIBLE,
 		       value);
 		  else if(property == tr("Line Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_LINE_VISIBLE,
 		       value);
 		  else if(property == tr("Minor Grid Line Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_X_MINOR_GRID_LINE_COLOR, value);
 		  else if(property == tr("Minor Grid Line Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_X_MINOR_GRID_LINE_VISIBLE, value);
 		  else if(property == tr("Orientation"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_ORIENTATION,
 		       value);
 		  else if(property == tr("Reverse"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_REVERSE, value);
 		  else if(property == tr("Shades Border Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_X_SHADES_BORDER_COLOR, value);
 		  else if(property == tr("Shades Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_SHADES_COLOR,
 		       value);
 		  else if(property == tr("Shades Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_SHADES_VISIBLE,
 		       value);
 		  else if(property == tr("Title Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_TITLE_COLOR,
 		       value);
 		  else if(property == tr("Title Font"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_TITLE_FONT,
 		       value);
 		  else if(property == tr("Title Text"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_TITLE_TEXT,
 		       value);
 		  else if(property == tr("Title Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE,
 		       value);
 		  else if(property == tr("Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_X_VISIBLE, value);
 		}
 	      else if(subset_name == "y_axis_properties")
 		{
 		  if(property == tr("Alignment Horizontal"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_Y_ALIGNMENT_HORIZONTAL, value);
 		  else if(property == tr("Alignment Vertical"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_Y_ALIGNMENT_VERTICAL, value);
 		  else if(property == tr("Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_COLOR, value);
 		  else if(property == tr("Grid Line Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_GRID_LINE_COLOR,
 		       value);
 		  else if(property == tr("Grid Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_GRID_VISIBLE,
 		       value);
 		  else if(property == tr("Labels Angle"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_LABELS_ANGLE,
 		       value);
 		  else if(property == tr("Labels Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_LABELS_COLOR,
 		       value);
 		  else if(property == tr("Labels Font"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_LABELS_FONT,
 		       value);
 		  else if(property == tr("Labels Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_LABELS_VISIBLE,
 		       value);
 		  else if(property == tr("Line Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_LINE_VISIBLE,
 		       value);
 		  else if(property == tr("Minor Grid Line Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_Y_MINOR_GRID_LINE_COLOR, value);
 		  else if(property == tr("Minor Grid Line Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_Y_MINOR_GRID_LINE_VISIBLE, value);
 		  else if(property == tr("Orientation"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_ORIENTATION,
 		       value);
 		  else if(property == tr("Reverse"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_REVERSE, value);
 		  else if(property == tr("Shades Border Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::
 		       CHART_AXIS_Y_SHADES_BORDER_COLOR, value);
 		  else if(property == tr("Shades Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_SHADES_COLOR,
 		       value);
 		  else if(property == tr("Shades Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_SHADES_VISIBLE,
 		       value);
 		  else if(property == tr("Title Color"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_TITLE_COLOR,
 		       value);
 		  else if(property == tr("Title Font"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_TITLE_FONT,
 		       value);
 		  else if(property == tr("Title Text"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_TITLE_TEXT,
 		       value);
 		  else if(property == tr("Title Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE,
 		       value);
 		  else if(property == tr("Visible"))
-		    m_property_editor->set_property
+		    hash.insert
 		      (dooble_charts::Properties::CHART_AXIS_Y_VISIBLE, value);
 		}
 	      else if(subset_name == "xyseries_properties")
@@ -1259,6 +1260,14 @@ void dooble_charts::open(const QString &name)
 		  // Ignore.
 		}
 	    }
+
+	QHashIterator<dooble_charts::Properties, QString> it(hash);
+
+	while(it.hasNext())
+	  {
+	    it.next();
+	    m_property_editor->set_property(it.key(), it.value());
+	  }
       }
 
     db.close();
