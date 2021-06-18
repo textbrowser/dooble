@@ -67,6 +67,7 @@ Completed Items
 - Gopher per-request sockets.
 - Gopher source viewing is disabled.
 - Gopher support.
+- Graphing! Provide TCP channels and custom data parsers.
 - Highlighted address-widget rows.
 - History search.
 - History. Will require a sub-process for removing expired data.
@@ -163,12 +164,12 @@ Remaining Items
 - Allow custom JavaScript per URL.
 - Argon2, per request.
 - Auto-correct addresses.
+- Charts: data source status, removal of recorded curves.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
-- Graphing! Provide TCP channels and custom data parsers.
 - Include date stamps in cookie containers.
 - Search engine icons should be based on host names.
 - Shortcuts browser.

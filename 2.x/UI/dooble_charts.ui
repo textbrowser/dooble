@@ -47,6 +47,9 @@
              <height>0</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Clear the contents of the chart. If the data source is active, data points may be displayed.</string>
+           </property>
            <property name="text">
             <string>Clear</string>
            </property>
@@ -85,6 +88,9 @@
              <width>100</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>Stop acquiring data from the data source.</string>
            </property>
            <property name="text">
             <string>Stop</string>
