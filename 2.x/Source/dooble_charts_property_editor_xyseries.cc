@@ -107,6 +107,19 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
 	case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
 	case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE:
 	  {
+	    switch(dooble_charts::Properties(offset))
+	      {
+	      case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
+		{
+		  item->setToolTip(tr("Dynamic tick type only."));
+		  break;
+		}
+	      default:
+		{
+		  break;
+		}
+	      }
+
 	    list << item;
 	    chart_x_axis->appendRow(list);
 	    continue;
@@ -120,6 +133,19 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
 	case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
 	case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE:
 	  {
+	    switch(dooble_charts::Properties(offset))
+	      {
+	      case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
+		{
+		  item->setToolTip(tr("Dynamic tick type only."));
+		  break;
+		}
+	      default:
+		{
+		  break;
+		}
+	      }
+
 	    list << item;
 	    chart_y_axis->appendRow(list);
 	    continue;
