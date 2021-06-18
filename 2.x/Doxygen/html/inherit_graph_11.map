@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,13,151,39"/>
-<area shape="rect" id="node2" href="$classdooble__charts__property__editor__model.html" title=" " alt="" coords="199,5,356,47"/>
-<area shape="rect" id="node3" href="$classdooble__charts__property__editor__model__xyseries.html" title=" " alt="" coords="404,5,563,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,92,32"/>
+<area shape="rect" id="node2" href="$classdooble__charts__iodevice.html" title=" " alt="" coords="140,5,299,32"/>
+<area shape="rect" id="node3" href="$classdooble__charts__file.html" title=" " alt="" coords="347,5,473,32"/>
 </map>

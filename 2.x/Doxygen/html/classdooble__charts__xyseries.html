@@ -63,6 +63,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classdooble__charts__xyseries-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -99,6 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4ccd28b2de76723aff4c4072ceebfd66"><td class="memItemLeft" align="right" valign="top"><a id="a4ccd28b2de76723aff4c4072ceebfd66"></a>
 QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>properties</b> (void) const</td></tr>
 <tr class="separator:a4ccd28b2de76723aff4c4072ceebfd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf0ed9199d053606c41c3ff1111d04a6"><td class="memItemLeft" align="right" valign="top"><a id="acf0ed9199d053606c41c3ff1111d04a6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>open</b> (const QString &amp;name)</td></tr>
+<tr class="separator:acf0ed9199d053606c41c3ff1111d04a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb9af7df4c729acd6fc6d8e1f659b4d0"><td class="memItemLeft" align="right" valign="top"><a id="afb9af7df4c729acd6fc6d8e1f659b4d0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (QString &amp;error)</td></tr>
 <tr class="separator:afb9af7df4c729acd6fc6d8e1f659b4d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,9 +125,25 @@ QHash&lt; dooble_charts::Properties, QVariant &gt;&#160;</td><td class="memItemR
 <tr class="memitem:aba5da5aa11ce7f8e966cd2a282f5cab0 inherit pub_methods_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="aba5da5aa11ce7f8e966cd2a282f5cab0"></a>
 QMenu *&#160;</td><td class="memItemRight" valign="bottom"><b>menu</b> (void)</td></tr>
 <tr class="separator:aba5da5aa11ce7f8e966cd2a282f5cab0 inherit pub_methods_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb11823848706e9bedb09f13d5f6bc00 inherit pub_methods_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="abb11823848706e9bedb09f13d5f6bc00"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> (void) const</td></tr>
+<tr class="separator:abb11823848706e9bedb09f13d5f6bc00 inherit pub_methods_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a360ad091d955a9284f20ce1bec5fa6bf inherit pub_methods_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a360ad091d955a9284f20ce1bec5fa6bf"></a>
 QWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>view</b> (void) const</td></tr>
 <tr class="separator:a360ad091d955a9284f20ce1bec5fa6bf inherit pub_methods_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ae2102edcaa347653b70f57cedeba5536"><td class="memItemLeft" align="right" valign="top"><a id="ae2102edcaa347653b70f57cedeba5536"></a>
+static QString&#160;</td><td class="memItemRight" valign="bottom"><b>property_to_name</b> (const dooble_charts::Properties property)</td></tr>
+<tr class="separator:ae2102edcaa347653b70f57cedeba5536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classdooble__charts"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classdooble__charts')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classdooble__charts.html">dooble_charts</a></td></tr>
+<tr class="memitem:af0b62354b9c98a7be1dbda825400b529 inherit pub_static_methods_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="af0b62354b9c98a7be1dbda825400b529"></a>
+static QString&#160;</td><td class="memItemRight" valign="bottom"><b>property_to_name</b> (const dooble_charts::Properties property)</td></tr>
+<tr class="separator:af0b62354b9c98a7be1dbda825400b529 inherit pub_static_methods_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c50fb6033f229b6eccc24e38ebf0ab1 inherit pub_static_methods_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a1c50fb6033f229b6eccc24e38ebf0ab1"></a>
+static QString&#160;</td><td class="memItemRight" valign="bottom"><b>type_from_database</b> (const QString &amp;name)</td></tr>
+<tr class="separator:a1c50fb6033f229b6eccc24e38ebf0ab1 inherit pub_static_methods_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -282,13 +302,34 @@ Additional Inherited Members</h2></td></tr>
  }</td></tr>
 <tr class="separator:add1ee56e6b9b15a1337cfd46c8523a89 inherit pub_types_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_slots_classdooble__charts"><td colspan="2" onclick="javascript:toggleInherit('pro_slots_classdooble__charts')"><img src="closed.png" alt="-"/>&#160;Protected Slots inherited from <a class="el" href="classdooble__charts.html">dooble_charts</a></td></tr>
+<tr class="memitem:a5900e54c9f279b6eb9f7e220ccb1c35c inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a5900e54c9f279b6eb9f7e220ccb1c35c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_clear</b> (void)</td></tr>
+<tr class="separator:a5900e54c9f279b6eb9f7e220ccb1c35c inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e719e95db7458b641e32848e3cfe09 inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a37e719e95db7458b641e32848e3cfe09"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_data_ready</b> (const QVector&lt; double &gt; &amp;vector)=0</td></tr>
+<tr class="separator:a37e719e95db7458b641e32848e3cfe09 inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27ff2ef8e83d3dc033223437731ec2ab inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a27ff2ef8e83d3dc033223437731ec2ab"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_item_changed</b> (QStandardItem *item)</td></tr>
 <tr class="separator:a27ff2ef8e83d3dc033223437731ec2ab inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50dbddd6c7c5d98558c7223e485515e7 inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a50dbddd6c7c5d98558c7223e485515e7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_play</b> (void)</td></tr>
+<tr class="separator:a50dbddd6c7c5d98558c7223e485515e7 inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739f96c6f6b9c0606dbd34b1fd6b8e7d inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a739f96c6f6b9c0606dbd34b1fd6b8e7d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_pause</b> (void)</td></tr>
+<tr class="separator:a739f96c6f6b9c0606dbd34b1fd6b8e7d inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2bc24e8001494906e3d706227604b8 inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="acc2bc24e8001494906e3d706227604b8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_stop</b> (void)</td></tr>
+<tr class="separator:acc2bc24e8001494906e3d706227604b8 inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b672752c004e7574da4244ea370e358 inherit pro_slots_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a4b672752c004e7574da4244ea370e358"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>slot_apply_properties_after_theme_changed</b> (void)</td></tr>
+<tr class="separator:a4b672752c004e7574da4244ea370e358 inherit pro_slots_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classdooble__charts"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classdooble__charts')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classdooble__charts.html">dooble_charts</a></td></tr>
 <tr class="memitem:aa5d491d8d903b6bf145943d74aa11e0f inherit pro_attribs_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="aa5d491d8d903b6bf145943d74aa11e0f"></a>
 QMenu *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menu</b></td></tr>
 <tr class="separator:aa5d491d8d903b6bf145943d74aa11e0f inherit pro_attribs_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a148fa3961f52468018792a4928b44054 inherit pro_attribs_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a148fa3961f52468018792a4928b44054"></a>
+QPointer&lt; <a class="el" href="classdooble__charts__iodevice.html">dooble_charts_iodevice</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_iodevice</b></td></tr>
+<tr class="separator:a148fa3961f52468018792a4928b44054 inherit pro_attribs_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a155fd8c9e11089ecf0fe63e040772f14 inherit pro_attribs_classdooble__charts"><td class="memItemLeft" align="right" valign="top"><a id="a155fd8c9e11089ecf0fe63e040772f14"></a>
 Ui_dooble_charts&#160;</td><td class="memItemRight" valign="bottom"><b>m_ui</b></td></tr>
 <tr class="separator:a155fd8c9e11089ecf0fe63e040772f14 inherit pro_attribs_classdooble__charts"><td class="memSeparator" colspan="2">&#160;</td></tr>
