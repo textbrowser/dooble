@@ -803,6 +803,25 @@ dooble_charts_property_editor_model(QObject *parent):
 	  }
 	}
 
+      switch(dooble_charts::Properties(offset))
+	{
+	case dooble_charts::Properties::LEGEND_REVERSE_MARKERS:
+	  {
+	    item->setToolTip
+	      (tr("Reverse order for the markers in the legend."));
+	    break;
+	  }
+	case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
+	  {
+	    item->setToolTip(tr("Show tool tips if the text is truncated."));
+	    break;
+	  }
+	default:
+	  {
+	    break;
+	  }
+	}
+
       list << item;
       legend->appendRow(list);
     }
