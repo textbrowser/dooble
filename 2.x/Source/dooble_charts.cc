@@ -1302,7 +1302,36 @@ void dooble_charts::open(const QString &name)
 		}
 	      else if(subset_name == "xyseries_x_axis_properties")
 		{
-		  // Ignore.
+		  if(property == tr("Label Format"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_X_AXIS_LABEL_FORMAT,
+		       value);
+		  else if(property == tr("Maximum"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_X_AXIS_MAX, value);
+		  else if(property == tr("Minimum"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_X_AXIS_MIN, value);
+		  else if(property == tr("Minor Tick Count"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::
+		       XY_SERIES_X_AXIS_MINOR_TICK_COUNT, value);
+		  else if(property == tr("Tick Anchor"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_ANCHOR,
+		       value);
+		  else if(property == tr("Tick Count"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_COUNT,
+		       value);
+		  else if(property == tr("Tick Interval"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::
+		       XY_SERIES_X_AXIS_TICK_INTERVAL, value);
+		  else if(property == tr("Tick Type"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE,
+		       value);
 		}
 	      else if(subset_name == "xyseries_y_axis_properties")
 		{
