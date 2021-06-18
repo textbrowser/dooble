@@ -164,7 +164,7 @@ Remaining Items
 - Allow custom JavaScript per URL.
 - Argon2, per request.
 - Auto-correct addresses.
-- Charts: data source status, multiple data source,
+- Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
