@@ -1260,7 +1260,45 @@ void dooble_charts::open(const QString &name)
 		}
 	      else if(subset_name == "xyseries_properties")
 		{
-		  // Ignore.
+		  if(property == tr("Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_COLOR, value);
+		  else if(property == tr("Name"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_NAME, value);
+		  else if(property == tr("Opacity"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_OPACITY, value);
+		  else if(property == tr("Point Labels Clipping"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::
+		       XY_SERIES_POINT_LABELS_CLIPPING, value);
+		  else if(property == tr("Point Labels Color"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_POINT_LABELS_COLOR,
+		       value);
+		  else if(property == tr("Point Labels Font"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_POINT_LABELS_FONT,
+		       value);
+		  else if(property == tr("Point Labels Format"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_POINT_LABELS_FORMAT,
+		       value);
+		  else if(property == tr("Point Labels Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::
+		       XY_SERIES_POINT_LABELS_VISIBLE, value);
+		  else if(property == tr("Points Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_POINTS_VISIBLE,
+		       value);
+		  else if(property == tr("Use OpenGL"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_USE_OPENGL, value);
+		  else if(property == tr("Visible"))
+		    m_property_editor->set_property
+		      (dooble_charts::Properties::XY_SERIES_VISIBLE, value);
 		}
 	      else if(subset_name == "xyseries_x_axis_properties")
 		{
@@ -1782,8 +1820,9 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	if(m_property_editor)
 	  {
 	    auto chart_animation_options = string_to_chart_animation_options
-	      (m_property_editor->property(dooble_charts::Properties::
-					   CHART_ANIMATION_OPTIONS).toString());
+	      (m_property_editor->
+	       property(dooble_charts::Properties::CHART_ANIMATION_OPTIONS).
+	       toString());
 
 	    if(chart_animation_options == QChart::NoAnimation)
 	      QTimer::singleShot
@@ -1793,8 +1832,9 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	    else
 	      QTimer::singleShot
 		(250 +
-		 m_property_editor->property(dooble_charts::Properties::
-					     CHART_ANIMATION_DURATION).toInt(),
+		 m_property_editor->
+		 property(dooble_charts::Properties::CHART_ANIMATION_DURATION).
+		 toInt(),
 		 this,
 		 SLOT(slot_apply_properties_after_theme_changed(void)));
 	  }
