@@ -146,7 +146,11 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 		    }
 
 		  if(!vector.isEmpty())
-		    emit data_ready(vector, m_index);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+		    emit data_ready(vector, m_index.load());
+#else
+		    emit data_ready(vector, m_index.loadRelaxed());
+#endif
 		}
 	    }
 	  else if(file.atEnd() || rc == 0)

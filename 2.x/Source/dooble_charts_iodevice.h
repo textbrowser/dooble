@@ -42,10 +42,11 @@ class dooble_charts_iodevice: public QIODevice
   {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     m_finished.store(0);
+    m_index.store(index);
 #else
     m_finished.storeRelaxed(0);
+    m_index.storeRelaxed(index);
 #endif
-    m_index = index;
     m_read_interval = 256;
     m_read_size = 1024;
     m_read_timer.setInterval(m_read_interval);
@@ -127,13 +128,13 @@ class dooble_charts_iodevice: public QIODevice
 
  protected:
   QAtomicInteger<short> m_finished;
+  QAtomicInteger<int> m_index;
   QAtomicInteger<int> m_read_size;
   QReadWriteLock m_address_mutex;
   QString m_address;
   QString m_program;
   QString m_type;
   QTimer m_read_timer;
-  int m_index;
   int m_read_interval;
 
  signals:
