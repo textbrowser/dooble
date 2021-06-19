@@ -307,7 +307,7 @@ all_properties(void) const
   properties.unite(this->properties());
   properties.unite(x_axis_properties());
   properties.unite(y_axis_properties());
-  return properties;
+  return std::move(properties);
 }
 
 QHash<dooble_charts::Properties, QVariant>
