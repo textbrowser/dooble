@@ -92,15 +92,15 @@ Collaboration diagram for dooble_charts_iodevice:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:ac1e08262b98fb5bf4076d940b668f0fa"><td class="memItemLeft" align="right" valign="top"><a id="ac1e08262b98fb5bf4076d940b668f0fa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>data_ready</b> (const QVector&lt; double &gt; &amp;vector)</td></tr>
-<tr class="separator:ac1e08262b98fb5bf4076d940b668f0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e30252296e449ab03e592e66a3b59c7"><td class="memItemLeft" align="right" valign="top"><a id="a8e30252296e449ab03e592e66a3b59c7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data_ready</b> (const QVector&lt; double &gt; &amp;vector, const int index)</td></tr>
+<tr class="separator:a8e30252296e449ab03e592e66a3b59c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac1a3be96f1d64df84b122d3b6ce1959c"><td class="memItemLeft" align="right" valign="top"><a id="ac1a3be96f1d64df84b122d3b6ce1959c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>dooble_charts_iodevice</b> (QObject *parent)</td></tr>
-<tr class="separator:ac1a3be96f1d64df84b122d3b6ce1959c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87d8310ca0e62a1111b465d17010564a"><td class="memItemLeft" align="right" valign="top"><a id="a87d8310ca0e62a1111b465d17010564a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>dooble_charts_iodevice</b> (QObject *parent, const int index)</td></tr>
+<tr class="separator:a87d8310ca0e62a1111b465d17010564a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e9dbec07de9196334341e99e86b3a6a"><td class="memItemLeft" align="right" valign="top"><a id="a1e9dbec07de9196334341e99e86b3a6a"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> (void)</td></tr>
 <tr class="separator:a1e9dbec07de9196334341e99e86b3a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,6 +137,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ac5f2867fbf226b997959e1230c322e7d"><td class="memItemLeft" align="right" valign="top"><a id="ac5f2867fbf226b997959e1230c322e7d"></a>
 QAtomicInteger&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_finished</b></td></tr>
 <tr class="separator:ac5f2867fbf226b997959e1230c322e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade5a5f64c5859ceb029669214a207e78"><td class="memItemLeft" align="right" valign="top"><a id="ade5a5f64c5859ceb029669214a207e78"></a>
+QAtomicInteger&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_index</b></td></tr>
+<tr class="separator:ade5a5f64c5859ceb029669214a207e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4401ce53bd6d96ebe4690211f840969"><td class="memItemLeft" align="right" valign="top"><a id="ab4401ce53bd6d96ebe4690211f840969"></a>
 QAtomicInteger&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_read_size</b></td></tr>
 <tr class="separator:ab4401ce53bd6d96ebe4690211f840969"><td class="memSeparator" colspan="2">&#160;</td></tr>
