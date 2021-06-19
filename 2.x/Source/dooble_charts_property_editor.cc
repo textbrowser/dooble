@@ -173,7 +173,8 @@ createEditor(QWidget *parent,
 	connect(editor,
 		SIGNAL(clicked(void)),
 		this,
-		SLOT(slot_show_color_dialog(void)));
+		SLOT(slot_show_color_dialog(void)),
+		Qt::QueuedConnection);
 	editor->setProperty("property", property);
 	editor->setStyleSheet
 	  (QString("QPushButton {background-color: %1;}").
@@ -194,7 +195,8 @@ createEditor(QWidget *parent,
 	connect(editor,
 		SIGNAL(clicked(void)),
 		this,
-		SLOT(slot_show_font_dialog(void)));
+		SLOT(slot_show_font_dialog(void)),
+		Qt::QueuedConnection);
 	editor->setProperty("property", property);
 	editor->setStyleSheet
 	  (QString("QPushButton {background-color: %1;}").
@@ -295,13 +297,15 @@ createEditor(QWidget *parent,
 	connect(push_button,
 		SIGNAL(clicked(void)),
 		this,
-		SLOT(slot_show_file_dialog(void)));
+		SLOT(slot_show_file_dialog(void)),
+		Qt::QueuedConnection);
 	delete editor->layout();
 	editor->setLayout(new QHBoxLayout());
 	editor->layout()->addWidget(line_edit);
 	editor->layout()->addWidget(push_button);
 	editor->layout()->setContentsMargins(0, 0, 0, 0);
 	editor->layout()->setSpacing(0);
+	line_edit->resize(line_edit->width(), push_button->height());
 	line_edit->setObjectName("source");
 	line_edit->setText(index.data().toString());
 	push_button->setProperty("property", property);
@@ -927,19 +931,22 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	(item_delegate,
 	 SIGNAL(show_color_dialog(const dooble_charts::Properties)),
 	 this,
-	 SLOT(slot_show_color_dialog(const dooble_charts::Properties)));
+	 SLOT(slot_show_color_dialog(const dooble_charts::Properties)),
+	 Qt::QueuedConnection);
       connect
 	(item_delegate,
 	 SIGNAL(show_file_dialog(QPushButton *,
 				 const dooble_charts::Properties)),
 	 this,
 	 SLOT(slot_show_file_dialog(QPushButton *,
-				    const dooble_charts::Properties)));
+				    const dooble_charts::Properties)),
+	 Qt::QueuedConnection);
       connect
 	(item_delegate,
 	 SIGNAL(show_font_dialog(const dooble_charts::Properties)),
 	 this,
-	 SLOT(slot_show_font_dialog(const dooble_charts::Properties)));
+	 SLOT(slot_show_font_dialog(const dooble_charts::Properties)),
+	 Qt::QueuedConnection);
       m_tree->setItemDelegate(item_delegate);
     }
 }

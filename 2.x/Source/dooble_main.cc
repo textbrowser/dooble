@@ -56,6 +56,7 @@ extern "C"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
+#include "dooble_charts.h"
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_downloads.h"
@@ -149,6 +150,7 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
   qRegisterMetaType<QVector<qreal> > ("QVector<qreal>");
   qRegisterMetaType<Qt::SortOrder> ("Qt::SortOrder");
+  qRegisterMetaType<dooble_charts::Properties> ("dooble_charts::Properties");
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
   QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
