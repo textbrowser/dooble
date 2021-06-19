@@ -1333,7 +1333,8 @@ void dooble_charts::open(const QString &name)
 		  else if(property == tr("Tick Interval"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::
-		       XY_SERIES_X_AXIS_TICK_INTERVAL, value);
+		       XY_SERIES_X_AXIS_TICK_INTERVAL,
+		       qMax(0.1, value.toDouble()));
 		  else if(property == tr("Tick Type"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE,
@@ -1366,7 +1367,8 @@ void dooble_charts::open(const QString &name)
 		  else if(property == tr("Tick Interval"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::
-		       XY_SERIES_Y_AXIS_TICK_INTERVAL, value);
+		       XY_SERIES_Y_AXIS_TICK_INTERVAL,
+		       qMax(0.1, value.toDouble()));
 		  else if(property == tr("Tick Type"))
 		    m_property_editor->set_property
 		      (dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE,

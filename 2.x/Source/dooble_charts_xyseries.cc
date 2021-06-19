@@ -637,7 +637,7 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
       {
-	x_axis->setTickInterval(item->text().toDouble());
+	x_axis->setTickInterval(qMax(0.1, item->text().toDouble()));
 	break;
       }
     case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_TYPE:
@@ -677,7 +677,7 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
       {
-	y_axis->setTickInterval(item->text().toDouble());
+	y_axis->setTickInterval(qMax(0.1, item->text().toDouble()));
 	break;
       }
     case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_TYPE:

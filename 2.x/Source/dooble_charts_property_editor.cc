@@ -217,6 +217,12 @@ createEditor(QWidget *parent,
 
 	switch(property)
 	  {
+	  case dooble_charts::Properties::XY_SERIES_X_AXIS_TICK_INTERVAL:
+	  case dooble_charts::Properties::XY_SERIES_Y_AXIS_TICK_INTERVAL:
+	    {
+	      editor->setRange(0.1, std::numeric_limits<qreal>::max());
+	      break;
+	    }
 	  case dooble_charts::Properties::XY_SERIES_X_AXIS_MAX:
 	  case dooble_charts::Properties::XY_SERIES_X_AXIS_MIN:
 	  case dooble_charts::Properties::XY_SERIES_Y_AXIS_MAX:
