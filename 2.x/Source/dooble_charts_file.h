@@ -37,7 +37,7 @@ class dooble_charts_file: public dooble_charts_iodevice
   Q_OBJECT
 
  public:
-  dooble_charts_file(QObject *parent);
+  dooble_charts_file(QObject *parent, const int index);
   ~dooble_charts_file();
   void set_address(const QString &address);
   void stop(void);

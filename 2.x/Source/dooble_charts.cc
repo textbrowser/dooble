@@ -893,30 +893,30 @@ QWidget *dooble_charts::view(void) const
 
 void dooble_charts::create_default_device(void)
 {
-  if(m_iodevice)
-    m_iodevice->deleteLater();
+  if(m_iodevices.value(0, nullptr))
+    m_iodevices.value(0)->deleteLater();
 
-  m_iodevice = new dooble_charts_file(this);
+  m_iodevices.insert(0, new dooble_charts_file(this, 0));
 
   if(m_property_editor)
     {
-      m_iodevice->set_address
+      m_iodevices.value(0)->set_address
 	(m_property_editor->
 	 property(dooble_charts::Properties::DATA_SOURCE_ADDRESS).toString());
-      m_iodevice->set_data_extraction_script
+      m_iodevices.value(0)->set_data_extraction_script
 	(m_property_editor->
 	 property(dooble_charts::Properties::DATA_EXTRACTION_SCRIPT).
 	 toString());
-      m_iodevice->set_read_rate
+      m_iodevices.value(0)->set_read_rate
 	(m_property_editor->
 	 property(dooble_charts::Properties::DATA_SOURCE_READ_RATE).toString());
     }
 
-  m_iodevice->set_type(tr("Text File"));
-  connect(m_iodevice,
-	  SIGNAL(data_ready(const QVector<double> &)),
+  m_iodevices.value(0)->set_type(tr("Text File"));
+  connect(m_iodevices.value(0),
+	  SIGNAL(data_ready(const QVector<double> &, const int)),
 	  this,
-	  SLOT(slot_data_ready(const QVector<double> &)));
+	  SLOT(slot_data_ready(const QVector<double> &, const int)));
 }
 
 void dooble_charts::open(const QString &name)
@@ -942,8 +942,11 @@ void dooble_charts::open(const QString &name)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT property, subset_name, value FROM dooble_charts "
-	   "WHERE name = ? ORDER BY 2");
+	  ("SELECT property, " // 0
+	   "subset_index, "    // 1
+	   "subset_name, "     // 2
+	   "value "            // 3
+	   "FROM dooble_charts WHERE name = ? ORDER BY 2");
 	query.addBindValue(name.toUtf8().toBase64());
 
 	if(query.exec())
@@ -952,10 +955,13 @@ void dooble_charts::open(const QString &name)
 	      auto property
 		(QString::fromUtf8(QByteArray::
 				   fromBase64(query.value(0).toByteArray())));
-	      auto subset_name(query.value(1).toString().trimmed());
+	      auto subset_index = query.value(1).toInt();
+	      auto subset_name(query.value(2).toString().trimmed());
 	      auto value
 		(QString::fromUtf8(QByteArray::
-				   fromBase64(query.value(2).toByteArray())));
+				   fromBase64(query.value(3).toByteArray())));
+
+	      Q_UNUSED(subset_index);
 
 	      if(subset_name == "data")
 		{
@@ -1081,7 +1087,7 @@ void dooble_charts::open(const QString &name)
 		}
 	      else if(subset_name == "splitter")
 		m_ui.splitter->restoreState
-		  (QByteArray::fromBase64(query.value(2).toByteArray()));
+		  (QByteArray::fromBase64(query.value(3).toByteArray()));
 	      else if(subset_name == "x_axis_properties")
 		{
 		  if(property == tr("Alignment Horizontal"))
@@ -1413,6 +1419,7 @@ void dooble_charts::save(QString &error)
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_charts ("
 		   "name TEXT NOT NULL, "
 		   "property TEXT NOT NULL, "
+		   "subset_index INTEGER NOT NULL DEFAULT 0, "
 		   "subset_name TEXT NOT NULL, "
 		   "value TEXT, "
 		   "PRIMARY KEY (name, property, subset_name))");
@@ -1923,8 +1930,8 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       }
     case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
       {
-	if(m_iodevice)
-	  m_iodevice->set_data_extraction_script(item->text());
+	if(m_iodevices.value(0))
+	  m_iodevices.value(0)->set_data_extraction_script(item->text());
 
 	break;
       }
@@ -1932,15 +1939,15 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	create_default_device();
 
-	if(m_iodevice)
-	  m_iodevice->set_address(item->text());
+	if(m_iodevices.value(0))
+	  m_iodevices.value(0)->set_address(item->text());
 
 	break;
       }
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
       {
-	if(m_iodevice)
-	  m_iodevice->set_read_rate(item->text());
+	if(m_iodevices.value(0))
+	  m_iodevices.value(0)->set_read_rate(item->text());
 
 	break;
       }
@@ -1951,8 +1958,8 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	  {
 	    create_default_device();
 
-	    if(m_iodevice)
-	      m_iodevice->set_type(item->text());
+	    if(m_iodevices.value(0))
+	      m_iodevices.value(0)->set_type(item->text());
 	  }
 
 	break;
@@ -2022,18 +2029,39 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 
 void dooble_charts::slot_play(void)
 {
-  if(m_iodevice)
-    m_iodevice->play();
+  QMapIterator<int, QPointer<dooble_charts_iodevice> > it(m_iodevices);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.value())
+	it.value()->play();
+    }
 }
 
 void dooble_charts::slot_pause(void)
 {
-  if(m_iodevice)
-    m_iodevice->pause();
+  QMapIterator<int, QPointer<dooble_charts_iodevice> > it(m_iodevices);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.value())
+	it.value()->pause();
+    }
 }
 
 void dooble_charts::slot_stop(void)
 {
-  if(m_iodevice)
-    m_iodevice->stop();
+  QMapIterator<int, QPointer<dooble_charts_iodevice> > it(m_iodevices);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.value())
+	it.value()->stop();
+    }
 }

@@ -31,8 +31,8 @@
 #include <QJSValueIterator>
 #include <QtConcurrent>
 
-dooble_charts_file::dooble_charts_file(QObject *parent):
-  dooble_charts_iodevice(parent)
+dooble_charts_file::dooble_charts_file(QObject *parent, const int index):
+  dooble_charts_iodevice(parent, index)
 {
   connect(&m_read_timer,
 	  SIGNAL(timeout(void)),
@@ -146,7 +146,7 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 		    }
 
 		  if(!vector.isEmpty())
-		    emit data_ready(vector);
+		    emit data_ready(vector, m_index);
 		}
 	    }
 	  else if(file.atEnd() || rc == 0)

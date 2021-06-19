@@ -38,13 +38,14 @@ class dooble_charts_iodevice: public QIODevice
   Q_OBJECT
 
  public:
-  dooble_charts_iodevice(QObject *parent):QIODevice(parent)
+  dooble_charts_iodevice(QObject *parent, const int index):QIODevice(parent)
   {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     m_finished.store(0);
 #else
     m_finished.storeRelaxed(0);
 #endif
+    m_index = index;
     m_read_interval = 256;
     m_read_size = 1024;
     m_read_timer.setInterval(m_read_interval);
@@ -132,10 +133,11 @@ class dooble_charts_iodevice: public QIODevice
   QString m_program;
   QString m_type;
   QTimer m_read_timer;
+  int m_index;
   int m_read_interval;
 
  signals:
-  void data_ready(const QVector<double> &vector);
+  void data_ready(const QVector<double> &vector, const int index);
 };
 
 #endif

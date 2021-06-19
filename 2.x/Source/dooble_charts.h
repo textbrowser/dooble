@@ -33,6 +33,7 @@
 using namespace QtCharts;
 #endif
 
+#include <QMap>
 #include <QPointer>
 
 #include "ui_dooble_charts.h"
@@ -228,19 +229,22 @@ class dooble_charts: public QWidget
   QChartView *m_chart_view;
   QLegend *m_legend;
 #endif
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  QMap<int, QPointer<QAbstractSeries> > m_series;
+  QMap<int, QPointer<dooble_charts_iodevice> > m_iodevices;
+#endif
   QMenu *m_menu;
 #ifdef DOOBLE_QTCHARTS_PRESENT
-  QPointer<QAbstractSeries> m_series;
   QPointer<QAbstractAxis> m_x_axis;
   QPointer<QAbstractAxis> m_y_axis;
 #endif
-  QPointer<dooble_charts_iodevice> m_iodevice;
   Ui_dooble_charts m_ui;
   dooble_charts_property_editor *m_property_editor;
 
  protected slots:
   virtual void slot_clear(void);
-  virtual void slot_data_ready(const QVector<double> &vector) = 0;
+  virtual void slot_data_ready(const QVector<double> &vector,
+			       const int index) = 0;
   virtual void slot_item_changed(QStandardItem *item);
   virtual void slot_play(void);
   virtual void slot_pause(void);
