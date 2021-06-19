@@ -301,6 +301,7 @@ createEditor(QWidget *parent,
 		SLOT(slot_show_file_dialog(void)),
 		Qt::QueuedConnection);
 	delete editor->layout();
+	editor->setAutoFillBackground(true);
 	editor->setLayout(new QHBoxLayout());
 	editor->layout()->addWidget(line_edit);
 	editor->layout()->addWidget(push_button);
@@ -322,6 +323,7 @@ createEditor(QWidget *parent,
 	auto spin_box_2 = new QSpinBox(editor);
 
 	delete editor->layout();
+	editor->setAutoFillBackground(true);
 	editor->setLayout(new QHBoxLayout());
 	editor->layout()->addWidget(spin_box_1);
 	editor->layout()->addWidget(spin_box_2);

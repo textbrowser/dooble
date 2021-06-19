@@ -62,7 +62,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-top: 0px;"
      "padding-bottom: 0px;"
      "}");
-  m_information->setToolTip(tr("Site Information"));
+  m_information->setToolTip(tr("Site Information (Cookies, etc.)"));
   m_menu = new QMenu(this);
   m_pull_down = new QToolButton(this);
   m_pull_down->setCursor(Qt::ArrowCursor);
