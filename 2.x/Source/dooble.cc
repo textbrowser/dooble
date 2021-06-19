@@ -2232,8 +2232,9 @@ void dooble::slot_about_to_show_history_menu(void)
   }
 #endif
   m_ui.menu_history->addAction
-    (tr("&Clear History"), this, SLOT(slot_clear_history(void)))->setEnabled
-    (!list.isEmpty());
+    (tr("&Clear Browsing History"),
+     this,
+     SLOT(slot_clear_history(void)))->setEnabled(!list.isEmpty());
   m_ui.menu_history->addAction
     (QIcon::fromTheme(use_material_icons + "deep-history",
 		      QIcon(QString(":/%1/36/history.png").arg(icon_set))),
