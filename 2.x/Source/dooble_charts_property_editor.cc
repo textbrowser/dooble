@@ -66,6 +66,7 @@ sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 	size.setHeight(250);
 	break;
       }
+    case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
       {
 	size.setHeight(qMax(50, size.height()));
@@ -305,8 +306,10 @@ createEditor(QWidget *parent,
 	editor->layout()->addWidget(push_button);
 	editor->layout()->setContentsMargins(0, 0, 0, 0);
 	editor->layout()->setSpacing(0);
-	line_edit->resize(line_edit->width(), push_button->height());
 	line_edit->setObjectName("source");
+#ifdef Q_OS_MACOS
+	line_edit->setMinimumHeight(push_button->height());
+#endif
 	line_edit->setText(index.data().toString());
 	push_button->setProperty("property", property);
 	return editor;
