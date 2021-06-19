@@ -521,6 +521,8 @@ void dooble_charts_xyseries::slot_data_ready
       m_property_editor->set_property
 	(dooble_charts::Properties::XY_SERIES_Y_AXIS_MIN, y_axis->min());
     }
+#else
+  Q_UNUSED(index);
 #endif
 }
 

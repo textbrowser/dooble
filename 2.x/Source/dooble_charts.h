@@ -231,8 +231,8 @@ class dooble_charts: public QWidget
 #endif
 #ifdef DOOBLE_QTCHARTS_PRESENT
   QMap<int, QPointer<QAbstractSeries> > m_series;
-  QMap<int, QPointer<dooble_charts_iodevice> > m_iodevices;
 #endif
+  QMap<int, QPointer<dooble_charts_iodevice> > m_iodevices;
   QMenu *m_menu;
 #ifdef DOOBLE_QTCHARTS_PRESENT
   QPointer<QAbstractAxis> m_x_axis;
