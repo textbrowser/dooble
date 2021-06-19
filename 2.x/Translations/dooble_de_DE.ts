@@ -428,7 +428,7 @@
     </message>
     <message>
         <source>&amp;Clear History</source>
-        <translation>&amp;Verlauf löschen</translation>
+        <translation type="vanished">&amp;Verlauf löschen</translation>
     </message>
     <message>
         <source>Dooble: Unlock Dooble</source>
@@ -496,6 +496,10 @@
     </message>
     <message>
         <source>Charts - Dooble</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear Browsing History</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -799,7 +803,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Site Information</source>
-        <translation>Seiten Information</translation>
+        <translation type="vanished">Seiten Information</translation>
     </message>
     <message>
         <source>Show History</source>
@@ -820,6 +824,10 @@ Dooble ist open source Software.
     <message>
         <source>Inject Custom Style Sheet...</source>
         <translation>Injizieren Sie ein benutzerdefiniertes Stylesheet...</translation>
+    </message>
+    <message>
+        <source>Site Information (Cookies, etc.)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1339,6 +1347,78 @@ Dooble ist open source Software.
         <source>Binary File</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clear the contents of the chart. If the data source is active, data points may be displayed after this button is activated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop acquiring data from the data source. For files, also set the current position to 0.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Clipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Tick Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Anchor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick Type</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_charts_file</name>
@@ -1391,6 +1471,22 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>XY Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The duration, in milliseconds, of the animations. Please note that theme changes may cause animations. After a chart is loaded from disk, chart properties will be applied after the animations complete.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other chart properties will be applied after the new theme is applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse order for the markers in the legend.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tool tips if the text is truncated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1515,6 +1611,10 @@ Dooble ist open source Software.
         <source>XY Series</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dynamic tick type only.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_charts_xyseries</name>
@@ -1532,26 +1632,6 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Points Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points Labels Clipping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points Labels Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points Labels Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points Labels Format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points Labels Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1608,6 +1688,26 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Clipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point Labels Visible</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
