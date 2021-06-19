@@ -66,12 +66,6 @@ qint64 dooble_charts_file::writeData(const char *data, qint64 size)
 
 void dooble_charts_file::play(void)
 {
-  {
-    QWriteLocker lock(&m_read_offset_mutex);
-
-    m_read_offset = 0;
-  }
-
   dooble_charts_iodevice::play();
 }
 

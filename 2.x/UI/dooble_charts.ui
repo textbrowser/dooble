@@ -48,7 +48,7 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>Clear the contents of the chart. If the data source is active, data points may be displayed.</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clear the contents of the chart. If the data source is active, data points may be displayed after this button is activated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Clear</string>
@@ -90,7 +90,7 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>Stop acquiring data from the data source.</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop acquiring data from the data source. For files, also set the current position to 0.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Stop</string>
