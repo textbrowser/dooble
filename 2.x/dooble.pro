@@ -242,7 +242,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
-                          -mtune=generic \
                           -pedantic \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -264,7 +263,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
-                          -mtune=generic \
                           -pedantic \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -292,7 +290,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
-                          -mtune=generic \
                           -pedantic \
                           -pie \
                           -std=c++17
