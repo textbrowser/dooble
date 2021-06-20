@@ -47,6 +47,7 @@ cp -p ./Dooble ./opt/dooble/.
 cp -p ./Icons/Logo/dooble.png ./opt/dooble/.
 cp -p ./Qt/qt.conf ./opt/dooble/.
 cp -p ./Translations/*.qm ./opt/dooble/Translations/.
+cp -pr ./Charts ./opt/dooble/.
 cp -pr ./Data/*.txt ./opt/dooble/Data/.
 cp -pr ./Data/README ./opt/dooble/Data/.
 cp -pr ./qtwebengine_dictionaries ./opt/dooble/.
