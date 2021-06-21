@@ -242,7 +242,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
-                          -mtune=generic \
                           -pedantic \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -264,7 +263,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
-                          -mtune=generic \
                           -pedantic \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -292,7 +290,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
-                          -mtune=generic \
                           -pedantic \
                           -pie \
                           -std=c++17
@@ -647,6 +644,8 @@ VERSION         = DOOBLE_VERSION
 }
 
 macx {
+copycharts.files        = Charts/*
+copycharts.path         = /Applications/Dooble.d/Charts
 copydata.files		= Data/*.txt
 copydata.path		= /Applications/Dooble.d/Data
 copydocumentation.extra	= cp ./Documentation/Documents/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
@@ -668,7 +667,8 @@ translations.path	= /Applications/Dooble.d/Translations
 zzz.extra		= chown -Rh root:wheel /Applications/Dooble.d
 zzz.path		= /Applications/Dooble.d
 
-INSTALLS	= copydata \
+INSTALLS	= copycharts \
+                  copydata \
                   copydocumentation \
                   preinstall \
                   copydooble \
