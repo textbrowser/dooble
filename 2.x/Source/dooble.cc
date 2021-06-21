@@ -1809,7 +1809,8 @@ void dooble::prepare_tab_icons(void)
 void dooble::prepare_tab_shortcuts(void)
 {
   for(auto tab_widget_shortcut : m_tab_widget_shortcuts)
-    delete tab_widget_shortcut;
+    if(tab_widget_shortcut)
+      tab_widget_shortcut->deleteLater();
 
   m_tab_widget_shortcuts.clear();
 
