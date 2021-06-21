@@ -10,6 +10,7 @@ mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
 mkdir -p ./opt/dooble/Lib
 mkdir -p ./opt/dooble/Translations
+cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Charts.so.5 ./opt/dooble/Lib/.
 cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Core.so.5 ./opt/dooble/Lib/.
 cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5DBus.so.5 ./opt/dooble/Lib/.
 cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Gui.so.5 ./opt/dooble/Lib/.
