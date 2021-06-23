@@ -19,6 +19,10 @@ DOOBLE_QTCHARTS_PRESENT
 
 Enabled if QtCharts is available.
 
+DOOBLE_REGISTER_GOPHER_SCHEME
+
+Register Gopher support.
+
 DOOBLE_SIMPLE_THEMES
 
 Enable simple themes.

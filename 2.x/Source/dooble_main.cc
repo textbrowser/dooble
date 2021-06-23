@@ -35,7 +35,9 @@
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+#ifdef DOOBLE_REGISTER_GOPHER_SCHEME
 #include <QWebEngineUrlScheme>
+#endif
 #endif
 
 extern "C"
@@ -166,12 +168,14 @@ int main(int argc, char *argv[])
      QVariant(qgetenv("AA_USEHIGHDPIPIXMAPS")).toBool());
 #endif
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+#ifdef DOOBLE_REGISTER_GOPHER_SCHEME
   QWebEngineUrlScheme scheme("gopher");
 
   scheme.setDefaultPort(70);
   scheme.setFlags(QWebEngineUrlScheme::ViewSourceAllowed);
   scheme.setSyntax(QWebEngineUrlScheme::Syntax::HostAndPort);
   QWebEngineUrlScheme::registerScheme(scheme);
+#endif
 #endif
 
   dooble::s_application = new dooble_application(argc, argv);
