@@ -55,6 +55,7 @@ extern "C"
 #endif
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_aes256.h"
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
@@ -90,6 +91,14 @@ int main(int argc, char *argv[])
 {
   qputenv("QT_ENABLE_REGEXP_JIT", "0");
   qputenv("QV4_FORCE_INTERPRETER", "1");
+
+  for(int i = 1; i < argc; i++)
+    if(argv && argv[i] && strcmp(argv[i], "--test-aes") == 0)
+      {
+	dooble_aes256::test1_encrypt_block();
+	dooble_aes256::test1_decrypt_block();
+	dooble_aes256::test1_key_expansion();
+      }
 
 #ifdef Q_OS_MACOS
   struct rlimit rlim = {0, 0};

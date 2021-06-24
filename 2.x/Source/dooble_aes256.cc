@@ -783,9 +783,12 @@ void dooble_aes256::test1_decrypt_block(void)
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
 
+  std::cout << "Decrypting 8ea2b7ca516745bfeafc49904b496089... ";
   std::cout << aes256.decrypt_block
     (QByteArray::fromHex("8ea2b7ca516745bfeafc49904b496089")).toHex().
-    toStdString() << std::endl;
+    toStdString()
+	    << "."
+	    << std::endl;
 }
 
 void dooble_aes256::test1_encrypt_block(void)
@@ -795,9 +798,12 @@ void dooble_aes256::test1_encrypt_block(void)
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
 
+  std::cout << "Encrypting 00112233445566778899aabbccddeeff... ";
   std::cout << aes256.encrypt_block
     (QByteArray::fromHex("00112233445566778899aabbccddeeff")).toHex().
-    toStdString() << std::endl;
+    toStdString()
+	    << "."
+	    << std::endl;
 }
 
 void dooble_aes256::test1_key_expansion(void)
