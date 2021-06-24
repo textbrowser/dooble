@@ -17,11 +17,11 @@ Lock memory into RAM via mman.
 
 DOOBLE_QTCHARTS_PRESENT
 
-Enabled if QtCharts is available.
+Enabled if the QtCharts module is available.
 
 DOOBLE_REGISTER_GOPHER_SCHEME
 
-Register Gopher support.
+Force registration of Gopher scheme.
 
 DOOBLE_SIMPLE_THEMES
 
