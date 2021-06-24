@@ -191,8 +191,11 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
 
-  for(const auto &url : urls)
-    new_page(url, is_private);
+  if(urls.isEmpty())
+    new_page(QUrl(), is_private);
+  else
+    for(const auto &url : urls)
+      new_page(url, is_private);
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
