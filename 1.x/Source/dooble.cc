@@ -282,7 +282,6 @@ int main(int argc, char *argv[])
 
   /*
   ** Prepare the style before creating a QApplication object, per Qt.
-
   */
 
 #ifdef Q_OS_MAC
