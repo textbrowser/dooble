@@ -68,6 +68,7 @@ extern "C"
 #include "dooble_random.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
+#include "dooble_ui_utilities.h"
 
 #include <csignal>
 #include <iostream>
@@ -92,12 +93,29 @@ int main(int argc, char *argv[])
   qputenv("QT_ENABLE_REGEXP_JIT", "0");
   qputenv("QV4_FORCE_INTERPRETER", "1");
 
+  QList<QUrl> urls;
+
   for(int i = 1; i < argc; i++)
-    if(argv && argv[i] && strcmp(argv[i], "--test-aes") == 0)
+    if(argv && argv[i])
       {
-	dooble_aes256::test1_encrypt_block();
-	dooble_aes256::test1_decrypt_block();
-	dooble_aes256::test1_key_expansion();
+	if(strcmp(argv[i], "--load-url") == 0)
+	  {
+	    i += 1;
+
+	    if(i < argc && argv[i])
+	      {
+		QUrl url(QUrl::fromUserInput(argv[i]));
+
+		if(dooble_ui_utilities::allowed_scheme(url))
+		  urls << url;
+	      }
+	  }
+	else if(strcmp(argv[i], "--test-aes") == 0)
+	  {
+	    dooble_aes256::test1_encrypt_block();
+	    dooble_aes256::test1_decrypt_block();
+	    dooble_aes256::test1_key_expansion();
+	  }
       }
 
 #ifdef Q_OS_MACOS
@@ -310,8 +328,8 @@ int main(int argc, char *argv[])
 
   auto arguments(QCoreApplication::arguments());
   auto d = new dooble
-    (QUrl(), arguments.contains("--private") ||
-             dooble::s_settings->setting("private_mode").toBool());
+    (urls, arguments.contains("--private") ||
+           dooble::s_settings->setting("private_mode").toBool());
 
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),

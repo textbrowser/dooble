@@ -135,7 +135,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
   prepare_style_sheets();
 }
 
-dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
+dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 {
   initialize_static_members();
   m_floating_digital_clock_dialog = nullptr;
@@ -191,7 +191,8 @@ dooble::dooble(const QUrl &url, bool is_private):QMainWindow()
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
 
-  new_page(url, is_private);
+  for(const auto &url : urls)
+    new_page(url, is_private);
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
@@ -1011,7 +1012,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
       remove_page_connections(page);
 
       if(is_private)
-	d = new dooble(page->url(), true);
+	d = new dooble(QList<QUrl> () << page->url(), true);
       else
 	d = new dooble(page);
 
@@ -2847,7 +2848,7 @@ void dooble::slot_load_finished(bool ok)
 
 void dooble::slot_new_private_window(void)
 {
-  (new dooble(QUrl(), true))->show();
+  (new dooble(QList<QUrl> () << QUrl(), true))->show();
 }
 
 void dooble::slot_new_tab(const QUrl &url)
@@ -2862,7 +2863,7 @@ void dooble::slot_new_tab(void)
 
 void dooble::slot_new_window(void)
 {
-  (new dooble(QUrl(), false))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false))->show();
 }
 
 void dooble::slot_open_chart(void)
@@ -2916,7 +2917,7 @@ void dooble::slot_open_link(const QUrl &url)
 
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
-  (new dooble(url, true))->show();
+  (new dooble(QList<QUrl> () << url, true))->show();
 }
 
 void dooble::slot_open_link_in_new_tab(const QUrl &url)
@@ -2926,7 +2927,7 @@ void dooble::slot_open_link_in_new_tab(const QUrl &url)
 
 void dooble::slot_open_link_in_new_window(const QUrl &url)
 {
-  (new dooble(url, false))->show();
+  (new dooble(QList<QUrl> () << url, false))->show();
 }
 
 void dooble::slot_open_tab_as_new_private_window(int index)

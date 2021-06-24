@@ -72,7 +72,7 @@ class dooble: public QMainWindow
   };
 
   dooble(QWidget *widget);
-  dooble(const QUrl &url, bool is_private);
+  dooble(const QList<QUrl> &urls, bool is_private);
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   ~dooble();
