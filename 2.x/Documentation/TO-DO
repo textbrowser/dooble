@@ -26,6 +26,8 @@ Completed Items
 - Cookie identifiers.
 - Cookies Window - Toggle Shown.
 - Cookies menu item within Tools.
+- Correct QWebEngineUrlScheme::registerScheme: Scheme "gopher" is a
+  standard scheme. Added DOOBLE_REGISTER_GOPHER_SCHEME.
 - Create /usr/bin dooble file during Debian installation.
 - Creating new tabs and windows requires sophistication.
 - Ctrl + W shortcuts.
@@ -166,8 +168,6 @@ Remaining Items
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
-- Correct QWebEngineUrlScheme::registerScheme: Scheme "gopher" is a
-  standard scheme.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
