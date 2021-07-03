@@ -2,6 +2,7 @@ Dooble is the scientific browser.
 
 <ul>
 <li>A Web browser!</li>
+<li>Application lock.</li>
 <li>Basic themes.</li>
 <li>Compact.</li>
 <li>Cookie crusher.</li>

@@ -111,11 +111,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 
   if(widget)
     {
-      if(m_anonymous_tab_headers)
-	m_ui.tab->addTab(widget, tr("Dooble"));
-      else
-	m_ui.tab->addTab(widget, widget->windowTitle());
-
+      m_ui.tab->addTab(widget, widget->windowTitle());
       m_ui.tab->setCurrentWidget(widget);
       m_ui.tab->setTabIcon(0, widget->windowIcon());
       m_ui.tab->setTabToolTip(0, widget->windowTitle());
@@ -971,13 +967,30 @@ void dooble::new_page(dooble_page *page)
   if(title.isEmpty())
     title = tr("New Tab");
 
-  m_ui.tab->addTab(page, title.replace("&", "&&"));
-  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+  if(m_anonymous_tab_headers)
+    {
+      m_ui.tab->addTab(page, tr("Dooble"));
+      m_ui.tab->setTabIcon
+	(m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
+    }
+  else if(s_application->application_locked())
+    {
+      m_ui.tab->addTab(page, tr("Application Locked"));
+      m_ui.tab->setTabIcon
+	(m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
+    }
+  else
+    {
+      m_ui.tab->addTab(page, title.replace("&", "&&"));
+      m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+    }
+
   m_ui.tab->setTabsClosable(tabs_closable());
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
 
-  if(dooble_settings::setting("access_new_tabs").toBool())
-    m_ui.tab->setCurrentWidget(page);
+  if(!(m_anonymous_tab_headers || s_application->application_locked()))
+    if(dooble_settings::setting("access_new_tabs").toBool())
+      m_ui.tab->setCurrentWidget(page);
 
   if(m_ui.tab->currentWidget() == page)
     {
@@ -1010,7 +1023,13 @@ void dooble::new_page(dooble_web_engine_view *view)
   if(title.isEmpty())
     title = tr("New Tab");
 
-  m_ui.tab->addTab(page, title.replace("&", "&&"));
+  if(m_anonymous_tab_headers)
+    m_ui.tab->addTab(page, tr("Dooble"));
+  else if(s_application->application_locked())
+    m_ui.tab->addTab(page, tr("Application Locked"));
+  else
+    m_ui.tab->addTab(page, title.replace("&", "&&"));
+
   m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
   m_ui.tab->setTabsClosable(tabs_closable());
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
