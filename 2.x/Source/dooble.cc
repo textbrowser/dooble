@@ -2354,6 +2354,7 @@ void dooble::slot_about_to_show_main_menu(void)
 
 void dooble::slot_anonymous_tab_headers(bool state)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_anonymous_tab_headers = state;
 
   for(int i = 0; i < m_ui.tab->count(); i++)
@@ -2365,6 +2366,12 @@ void dooble::slot_anonymous_tab_headers(bool state)
       }
     else
       {
+	auto main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(i));
+
+	if(main_window)
+	  m_ui.tab->setTabText
+	    (m_ui.tab->indexOf(main_window), main_window->windowTitle());
+
 	auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 
 	if(page)
@@ -2389,7 +2396,11 @@ void dooble::slot_anonymous_tab_headers(bool state)
 	    m_ui.tab->setTabText
 	      (m_ui.tab->indexOf(page), text.replace("&", "&&"));
 	  }
+
+	prepare_tab_icons();
       }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_application_locked(bool state, dooble *d)
