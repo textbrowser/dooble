@@ -76,6 +76,7 @@ class dooble: public QMainWindow
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   ~dooble();
+  bool anonymous_tab_headers(void) const;
   bool initialized(void) const;
   bool is_private(void) const;
   dooble_page *current_page(void) const;
@@ -138,6 +139,7 @@ class dooble: public QMainWindow
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
   Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
+  bool m_anonymous_tab_headers;
   bool m_is_javascript_dialog;
   bool m_is_private;
   bool m_print_preview;
@@ -175,6 +177,7 @@ class dooble: public QMainWindow
   void slot_about_to_hide_main_menu(void);
   void slot_about_to_show_history_menu();
   void slot_about_to_show_main_menu(void);
+  void slot_anonymous_tab_headers(bool state);
   void slot_application_locked(bool state, dooble *d);
   void slot_authenticate(void);
   void slot_clear_downloads(void);

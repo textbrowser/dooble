@@ -56,6 +56,7 @@ class dooble_tab_bar: public QTabBar
   void prepare_style_sheets(void);
 
  private slots:
+  void slot_anonymous_tab_headers(void);
   void slot_application_locked(void);
   void slot_close_other_tabs(void);
   void slot_close_tab(void);
@@ -74,6 +75,7 @@ class dooble_tab_bar: public QTabBar
   void slot_webgl(void);
 
  signals:
+  void anonymous_tab_headers(bool state);
   void application_locked(bool state, dooble *d);
   void decouple_tab(int index);
   void new_tab(void);

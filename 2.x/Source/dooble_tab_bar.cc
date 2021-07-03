@@ -343,6 +343,14 @@ void dooble_tab_bar::showEvent(QShowEvent *event)
   emit set_visible_corner_button(true);
 }
 
+void dooble_tab_bar::slot_anonymous_tab_headers(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit anonymous_tab_headers(action->isChecked());
+}
+
 void dooble_tab_bar::slot_application_locked(void)
 {
   auto action = qobject_cast<QAction *> (sender());
@@ -630,6 +638,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   webgl_action->setProperty("point", point);
 
   auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+  dooble *d = nullptr;
   dooble_charts *chart = nullptr;
   dooble_downloads *downloads = nullptr;
   dooble_page *page = nullptr;
@@ -637,6 +646,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   if(tab_widget)
     {
       chart = qobject_cast<dooble_charts *> (tab_widget->widget(tabAt(point)));
+      d = dooble_ui_utilities::find_parent_dooble(this);
       downloads = qobject_cast<dooble_downloads *>
 	(tab_widget->widget(tabAt(point)));
       page = qobject_cast<dooble_page *> (tab_widget->widget(tabAt(point)));
@@ -711,6 +721,11 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
     }
 
   menu.addSeparator();
+  action = menu.addAction(tr("Anonymous Tab Headers"),
+			  this,
+			  SLOT(slot_anonymous_tab_headers(void)));
+  action->setCheckable(true);
+  action->setChecked(d ? d->anonymous_tab_headers() : false);
   action = menu.addAction(tr("&Decouple..."),
 			  this,
 			  SLOT(slot_decouple_tab(void)));

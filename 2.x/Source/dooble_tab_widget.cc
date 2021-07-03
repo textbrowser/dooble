@@ -155,6 +155,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SLOT(slot_about_to_show_history_menu(void)));
   connect(m_tab_bar,
+	  SIGNAL(anonymous_tab_headers(bool)),
+	  this,
+	  SIGNAL(anonymous_tab_headers(bool)));
+  connect(m_tab_bar,
 	  SIGNAL(decouple_tab(int)),
 	  this,
 	  SIGNAL(decouple_tab(int)));

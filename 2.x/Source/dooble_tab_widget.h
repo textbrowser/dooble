@@ -72,6 +72,7 @@ class dooble_tab_widget: public QTabWidget
   void slot_show_right_corner_widget(bool state);
 
  signals:
+  void anonymous_tab_headers(bool state);
   void decouple_tab(int index);
   void empty_tab(void);
   void new_tab(const QUrl &url);

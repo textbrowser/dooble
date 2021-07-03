@@ -95,6 +95,7 @@ static int s_populated = 0;
 dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
+  m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
   m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
@@ -138,6 +139,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 {
   initialize_static_members();
+  m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
   m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
@@ -215,6 +217,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
+  m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
   m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
@@ -248,6 +251,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
+  m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
   m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
@@ -323,6 +327,11 @@ QStringList dooble::chart_names(void) const
 
   QSqlDatabase::removeDatabase(database_name);
   return list;
+}
+
+bool dooble::anonymous_tab_headers(void) const
+{
+  return m_anonymous_tab_headers;
 }
 
 bool dooble::can_exit(const dooble::CanExit can_exit)
@@ -627,6 +636,11 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_main_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(anonymous_tab_headers(bool)),
+	  this,
+	  SLOT(slot_anonymous_tab_headers(bool)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -2336,6 +2350,11 @@ void dooble::slot_about_to_show_main_menu(void)
     }
 
   QApplication::restoreOverrideCursor();
+}
+
+void dooble::slot_anonymous_tab_headers(bool state)
+{
+  m_anonymous_tab_headers = state;
 }
 
 void dooble::slot_application_locked(bool state, dooble *d)
