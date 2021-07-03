@@ -111,7 +111,11 @@ dooble::dooble(QWidget *widget):QMainWindow()
 
   if(widget)
     {
-      m_ui.tab->addTab(widget, widget->windowTitle());
+      if(m_anonymous_tab_headers)
+	m_ui.tab->addTab(widget, tr("Dooble"));
+      else
+	m_ui.tab->addTab(widget, widget->windowTitle());
+
       m_ui.tab->setCurrentWidget(widget);
       m_ui.tab->setTabIcon(0, widget->windowIcon());
       m_ui.tab->setTabToolTip(0, widget->windowTitle());
@@ -476,12 +480,19 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
 
   prepare_page_connections(page);
 
-  if(s_application->application_locked())
+  if(m_anonymous_tab_headers)
+    m_ui.tab->addTab(page, tr("Dooble"));
+  else if(s_application->application_locked())
     m_ui.tab->addTab(page, tr("Application Locked"));
   else
     m_ui.tab->addTab(page, tr("New Tab"));
 
-  m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+  if(m_anonymous_tab_headers || s_application->application_locked())
+    m_ui.tab->setTabIcon
+      (m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
+  else
+    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+
   m_ui.tab->setTabsClosable(tabs_closable());
 
   if(s_application->application_locked())
@@ -913,7 +924,9 @@ void dooble::new_page(dooble_charts *chart)
   if(!chart)
     return;
 
-  if(s_application->application_locked())
+  if(m_anonymous_tab_headers)
+    m_ui.tab->addTab(chart, tr("Dooble"));
+  else if(s_application->application_locked())
     m_ui.tab->addTab(chart, tr("Application Locked"));
   else
     m_ui.tab->addTab(chart, tr("XY Series Chart"));
@@ -2890,13 +2903,16 @@ void dooble::slot_history_favorites_populated(void)
 
 void dooble::slot_icon_changed(const QIcon &icon)
 {
-  if(dooble::s_application->application_locked())
-    return;
-
   auto page = qobject_cast<dooble_page *> (sender());
 
   if(page)
-    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
+    {
+      if(m_anonymous_tab_headers || s_application->application_locked())
+	m_ui.tab->setTabIcon
+	  (m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
+      else
+	m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), icon);
+    }
 }
 
 void dooble::slot_inject_custom_css(void)
@@ -3822,9 +3838,6 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
 void dooble::slot_title_changed(const QString &title)
 {
-  if(s_application->application_locked())
-    return;
-
   auto page = qobject_cast<dooble_page *> (sender());
 
   if(!page)
@@ -3840,10 +3853,14 @@ void dooble::slot_title_changed(const QString &title)
   else
     text = tr("%1 - Dooble").arg(text);
 
-  if(page == m_ui.tab->currentWidget())
-    setWindowTitle(text);
+  if(!(m_anonymous_tab_headers || s_application->application_locked()))
+    {
+      if(page == m_ui.tab->currentWidget())
+	setWindowTitle(text);
 
-  m_ui.tab->setTabText(m_ui.tab->indexOf(page), text.replace("&", "&&"));
+      m_ui.tab->setTabText(m_ui.tab->indexOf(page), text.replace("&", "&&"));
+    }
+
   m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), text);
 }
 
