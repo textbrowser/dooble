@@ -2355,6 +2355,41 @@ void dooble::slot_about_to_show_main_menu(void)
 void dooble::slot_anonymous_tab_headers(bool state)
 {
   m_anonymous_tab_headers = state;
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    if(m_anonymous_tab_headers)
+      {
+	m_ui.tab->setTabIcon(i, dooble_favicons::icon(QUrl()));
+	m_ui.tab->setTabText(i, tr("Dooble"));
+	setWindowTitle(tr("Dooble"));
+      }
+    else
+      {
+	auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+
+	if(page)
+	  {
+	    auto text
+	      (page->title().trimmed().
+	       mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
+
+	    if(text.isEmpty())
+	      text = page->url().toString().mid
+		(0, dooble::Limits::MAXIMUM_URL_LENGTH);
+
+	    if(text.isEmpty())
+	      text = tr("Dooble");
+	    else
+	      text = tr("%1 - Dooble").arg(text);
+
+	    if(page == m_ui.tab->currentWidget())
+	      setWindowTitle(text);
+
+	    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon());
+	    m_ui.tab->setTabText
+	      (m_ui.tab->indexOf(page), text.replace("&", "&&"));
+	  }
+      }
 }
 
 void dooble::slot_application_locked(bool state, dooble *d)
