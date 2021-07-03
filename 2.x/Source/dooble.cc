@@ -1833,6 +1833,12 @@ void dooble::prepare_tab_icons(void)
       if(!main_window)
 	continue;
 
+      if(m_anonymous_tab_headers || s_application->application_locked())
+	{
+	  m_ui.tab->setTabIcon(i, dooble_favicons::icon(QUrl()));
+	  continue;
+	}
+
       if(m_downloads == main_window || main_window == s_downloads)
 	m_ui.tab->setTabIcon
 	  (i, QIcon::fromTheme(use_material_icons + "folder-download",
