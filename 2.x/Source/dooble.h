@@ -166,7 +166,7 @@ class dooble: public QMainWindow
   void prepare_shortcuts(void);
   void prepare_standard_menus(void);
   void prepare_style_sheets(void);
-  void prepare_tab_icons(void);
+  void prepare_tab_icons_text_tool_tips(void);
   void prepare_tab_shortcuts(void);
   void print(dooble_charts *chart);
   void print(dooble_page *page);

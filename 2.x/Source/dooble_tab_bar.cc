@@ -725,7 +725,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  this,
 			  SLOT(slot_anonymous_tab_headers(void)));
   action->setCheckable(true);
-  action->setChecked(d ? d->anonymous_tab_headers() : false);
+  action->setChecked(dooble::s_application->application_locked() ? false :
+		     d ? d->anonymous_tab_headers() : false);
+  action->setEnabled(!dooble::s_application->application_locked());
   action = menu.addAction(tr("&Decouple..."),
 			  this,
 			  SLOT(slot_decouple_tab(void)));
