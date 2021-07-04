@@ -3749,7 +3749,12 @@ void dooble::slot_tab_close_requested(int index)
 
 void dooble::slot_tab_index_changed(int index)
 {
-  if(s_application->application_locked())
+  if(m_anonymous_tab_headers)
+    {
+      setWindowTitle(tr("Dooble"));
+      return;
+    }
+  else if(s_application->application_locked())
     {
       setWindowTitle(tr("Dooble: Application Locked"));
       return;
