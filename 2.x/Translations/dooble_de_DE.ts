@@ -3872,6 +3872,10 @@ Domänen</translation>
         <source>Lock Application</source>
         <translation>Anwendung sperren</translation>
     </message>
+    <message>
+        <source>Anonymous Tab Headers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_tab_widget</name>
