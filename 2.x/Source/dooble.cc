@@ -2923,7 +2923,7 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.date().day()));
 
   auto font(this->font());
-  auto utc(qgetenv("TZ").toLower());
+  auto utc(qgetenv("TZ").toLower().trimmed());
 
   font.setPointSize(25);
   m_floating_digital_clock_ui.clock->repaint();

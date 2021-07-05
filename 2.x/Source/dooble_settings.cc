@@ -176,7 +176,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   else
     {
       QString path("");
-      auto variable(qgetenv("DOOBLE_TRANSLATIONS_PATH"));
+      auto variable(qgetenv("DOOBLE_TRANSLATIONS_PATH").trimmed());
 
       if(!variable.isEmpty())
 	path = QString::fromLocal8Bit(variable.constData());
