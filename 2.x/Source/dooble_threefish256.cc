@@ -40,8 +40,8 @@ extern "C"
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
 
-static const uint8_t *Pi = nullptr;
-static const uint8_t *RPi = nullptr;
+static const size_t Nr = 72;
+static const size_t Nw = 4;
 static const uint8_t Pi_4[4] = {0, 3, 2, 1};
 static const uint8_t RPi_4[4] = {0, 3, 2, 1};
 static const uint8_t R_4[8][2] = {{14, 16},
@@ -52,8 +52,6 @@ static const uint8_t R_4[8][2] = {{14, 16},
 				  {46, 12},
 				  {58, 22},
 				  {32, 32}};
-static size_t Nr = 0;
-static size_t Nw = 0;
 static void bytes_to_words(uint64_t *W,
 			   const char *bytes,
 			   const size_t bytes_size);
@@ -190,9 +188,6 @@ static void threefish_decrypt(char *D,
       return;
     }
 
-  Nr = 72;
-  Nw = 4;
-  RPi = RPi_4;
   threefish_decrypt_implementation(D, K, T, C, C_size, block_size, ok);
 }
 
@@ -220,7 +215,7 @@ static void threefish_decrypt_implementation(char *D,
   auto k = new (std::nothrow) uint64_t[Nw + 1];
   auto s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
   auto v = new (std::nothrow) uint64_t[Nw];
-  uint64_t C240 = 0x1bd11bdaa9fc1a22;
+  const uint64_t C240 = 0x1bd11bdaa9fc1a22;
   uint64_t kNw = C240; // Section 3.3.2.
   uint64_t t[3];
 
@@ -294,7 +289,7 @@ static void threefish_decrypt_implementation(char *D,
 	}
 
       for(size_t i = 0; i < Nw; i++)
-	f[i] = v[RPi[i]];
+	f[i] = v[RPi_4[i]];
 
       for(size_t i = 0; i < Nw / 2; i++)
 	{
@@ -370,9 +365,6 @@ static void threefish_encrypt(char *E,
       return;
     }
 
-  Nr = 72;
-  Nw = 4;
-  Pi = Pi_4;
   threefish_encrypt_implementation(E, K, T, P, P_size, block_size, ok);
 }
 
@@ -400,7 +392,7 @@ static void threefish_encrypt_implementation(char *E,
   auto k = new (std::nothrow) uint64_t[Nw + 1];
   auto s = new (std::nothrow) uint64_t*[Nr / 4 + 1];
   auto v = new (std::nothrow) uint64_t[Nw];
-  uint64_t C240 = 0x1bd11bdaa9fc1a22;
+  const uint64_t C240 = 0x1bd11bdaa9fc1a22;
   uint64_t kNw = C240; // Section 3.3.2.
   uint64_t t[3];
 
@@ -487,7 +479,7 @@ static void threefish_encrypt_implementation(char *E,
 	}
 
       for(size_t i = 0; i < Nw; i++)
-	v[i] = f[Pi[i]];
+	v[i] = f[Pi_4[i]];
 
       memset(f, 0, sizeof(*f) * static_cast<size_t> (Nw));
       delete []f;
