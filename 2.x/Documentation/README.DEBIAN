@@ -65,3 +65,4 @@ cp dooble.sh dooble-debian.d/usr/bin/dooble
 fakeroot dpkg-deb --build dooble-debian.d Dooble-2021.07.05_amd64.deb
 rm -fr ./opt
 rm -fr dooble-debian.d
+make distclean
