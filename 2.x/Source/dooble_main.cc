@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
   qputenv("QV4_FORCE_INTERPRETER", "1");
 
   QList<QUrl> urls;
+  auto test_aes = false;
 
   for(int i = 1; i < argc; i++)
     if(argv && argv[i])
@@ -102,7 +103,7 @@ int main(int argc, char *argv[])
 	  {
 	    i += 1;
 
-	    if(i < argc && argv[i])
+	    if(argc > i && argv[i])
 	      {
 		QUrl url(QUrl::fromUserInput(argv[i]));
 
@@ -111,12 +112,15 @@ int main(int argc, char *argv[])
 	      }
 	  }
 	else if(strcmp(argv[i], "--test-aes") == 0)
-	  {
-	    dooble_aes256::test1_encrypt_block();
-	    dooble_aes256::test1_decrypt_block();
-	    dooble_aes256::test1_key_expansion();
-	  }
+	  test_aes = true;
       }
+
+  if(test_aes)
+    {
+      dooble_aes256::test1_encrypt_block();
+      dooble_aes256::test1_decrypt_block();
+      dooble_aes256::test1_key_expansion();
+    }
 
 #ifdef Q_OS_MACOS
   struct rlimit rlim = {0, 0};
