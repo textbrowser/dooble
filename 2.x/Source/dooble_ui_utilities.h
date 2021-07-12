@@ -52,7 +52,7 @@ class dooble_ui_utilities
     if(!s)
       return;
 
-    volatile unsigned char *v = (unsigned char *) s;
+    volatile auto v = static_cast<unsigned char *> (s);
 
     while(n--)
       *v++ = (unsigned char) c;
