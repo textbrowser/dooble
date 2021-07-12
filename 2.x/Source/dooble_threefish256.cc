@@ -39,6 +39,7 @@ extern "C"
 #include "dooble_cryptography.h"
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
+#include "dooble_ui_utilities.h"
 
 static const size_t Nr = 72;
 static const size_t Nw = 4;
@@ -303,7 +304,7 @@ static void threefish_decrypt_implementation(char *D,
 	  v[i * 2 + 1] = x1;
 	}
 
-      memset(f, 0, sizeof(*f) * static_cast<size_t> (Nw));
+      dooble_ui_utilities::memset(f, 0, sizeof(*f) * static_cast<size_t> (Nw));
       delete []f;
 
       if(d % 4 == 0)
@@ -323,16 +324,17 @@ static void threefish_decrypt_implementation(char *D,
 
   if(Q_LIKELY(k))
     {
-      memset(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
+      dooble_ui_utilities::memset
+	(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
 #ifdef DOOBLE_MMAN_PRESENT
       munlock(k, sizeof(*k) * static_cast<size_t> (Nw + 1));
 #endif
     }
 
-  memset(t, 0, sizeof(t));
+  dooble_ui_utilities::memset(t, 0, sizeof(t));
 
   if(Q_LIKELY(v))
-    memset(v, 0, sizeof(*v) * static_cast<size_t> (Nw));
+    dooble_ui_utilities::memset(v, 0, sizeof(*v) * static_cast<size_t> (Nw));
 
   delete []k;
 
@@ -340,7 +342,8 @@ static void threefish_decrypt_implementation(char *D,
     for(size_t i = 0; i < Nr / 4 + 1; i++)
       {
 	if(Q_LIKELY(s[i]))
-	  memset(s[i], 0, sizeof(*s[i]) * static_cast<size_t> (Nw));
+	  dooble_ui_utilities::memset
+	    (s[i], 0, sizeof(*s[i]) * static_cast<size_t> (Nw));
 
 	delete []s[i];
       }
@@ -481,7 +484,7 @@ static void threefish_encrypt_implementation(char *E,
       for(size_t i = 0; i < Nw; i++)
 	v[i] = f[Pi_4[i]];
 
-      memset(f, 0, sizeof(*f) * static_cast<size_t> (Nw));
+      dooble_ui_utilities::memset(f, 0, sizeof(*f) * static_cast<size_t> (Nw));
       delete []f;
     }
 
@@ -497,16 +500,17 @@ static void threefish_encrypt_implementation(char *E,
 
   if(Q_LIKELY(k))
     {
-      memset(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
+      dooble_ui_utilities::memset
+	(k, 0, sizeof(*k) * static_cast<size_t> (Nw + 1));
 #ifdef DOOBLE_MMAN_PRESENT
       munlock(k, sizeof(*k) * static_cast<size_t> (Nw + 1));
 #endif
     }
 
-  memset(t, 0, sizeof(t));
+  dooble_ui_utilities::memset(t, 0, sizeof(t));
 
   if(Q_LIKELY(v))
-    memset(v, 0, sizeof(*v) * static_cast<size_t> (Nw));
+    dooble_ui_utilities::memset(v, 0, sizeof(*v) * static_cast<size_t> (Nw));
 
   delete []k;
 
@@ -514,7 +518,8 @@ static void threefish_encrypt_implementation(char *E,
     for(size_t i = 0; i < Nr / 4 + 1; i++)
       {
 	if(Q_LIKELY(s[i]))
-	  memset(s[i], 0, sizeof(*s[i]) * static_cast<size_t> (Nw));
+	  dooble_ui_utilities::memset
+	    (s[i], 0, sizeof(*s[i]) * static_cast<size_t> (Nw));
 
 	delete []s[i];
       }

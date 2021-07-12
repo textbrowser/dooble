@@ -43,6 +43,7 @@ extern "C"
 #include "dooble_aes256.h"
 #include "dooble_cryptography.h"
 #include "dooble_random.h"
+#include "dooble_ui_utilities.h"
 
 /*
 ** https://en.wikipedia.org/wiki/Rijndael_S-box
@@ -154,15 +155,17 @@ dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
   m_state[1][0] = m_state[1][1] = m_state[1][2] = m_state[1][3] = 0;
   m_state[2][0] = m_state[2][1] = m_state[2][2] = m_state[2][3] = 0;
   m_state[3][0] = m_state[3][1] = m_state[3][2] = m_state[3][3] = 0;
-  memset(m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
+  dooble_ui_utilities::memset
+    (m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
   key_expansion();
 }
 
 dooble_aes256::~dooble_aes256()
 {
   dooble_cryptography::memzero(m_key);
-  memset(m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
-  memset(m_state, 0, 4 * 4 * sizeof(m_state[0][0]));
+  dooble_ui_utilities::memset
+    (m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
+  dooble_ui_utilities::memset(m_state, 0, 4 * 4 * sizeof(m_state[0][0]));
 #ifdef DOOBLE_MMAN_PRESENT
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
   munlock(m_round_key, 4 * 60 * sizeof(m_round_key[0][0]));
@@ -512,7 +515,7 @@ void dooble_aes256::inv_mix_columns(void)
     xtime_special(0x0e, a[2]) ^ xtime_special(0x0b, a[3]);
   m_state[3][3] = xtime_special(0x0b, a[0]) ^ xtime_special(0x0d, a[1]) ^
     xtime_special(0x09, a[2]) ^ xtime_special(0x0e, a[3]);
-  memset(a, 0, 4 * sizeof(a[0]));
+  dooble_ui_utilities::memset(a, 0, 4 * sizeof(a[0]));
 }
 
 void dooble_aes256::inv_shift_rows(void)
@@ -543,7 +546,7 @@ void dooble_aes256::inv_shift_rows(void)
   m_state[3][(3 + 1) % m_Nb] = temp[1];
   m_state[3][(3 + 2) % m_Nb] = temp[2];
   m_state[3][(3 + 3) % m_Nb] = temp[3];
-  memset(temp, 0, 4 * sizeof(temp[0]));
+  dooble_ui_utilities::memset(temp, 0, 4 * sizeof(temp[0]));
 }
 
 void dooble_aes256::inv_sub_bytes(void)
@@ -618,7 +621,7 @@ void dooble_aes256::key_expansion(void)
       m_round_key[i][1] = m_round_key[i - m_Nk][1] ^ temp[1];
       m_round_key[i][2] = m_round_key[i - m_Nk][2] ^ temp[2];
       m_round_key[i][3] = m_round_key[i - m_Nk][3] ^ temp[3];
-      memset(temp, 0, 4 * sizeof(temp[0]));
+      dooble_ui_utilities::memset(temp, 0, 4 * sizeof(temp[0]));
       i += 1;
     }
 }
@@ -676,8 +679,8 @@ void dooble_aes256::mix_columns(void)
   m_state[1][3] = a[0] ^ b[1] ^ a[2] ^ b[2] ^ a[3];
   m_state[2][3] = a[0] ^ a[1] ^ b[2] ^ a[3] ^ b[3];
   m_state[3][3] = a[0] ^ b[0] ^ a[1] ^ a[2] ^ b[3];
-  memset(a, 0, 4 * sizeof(a[0]));
-  memset(b, 0, 4 * sizeof(b[0]));
+  dooble_ui_utilities::memset(a, 0, 4 * sizeof(a[0]));
+  dooble_ui_utilities::memset(b, 0, 4 * sizeof(b[0]));
 }
 
 void dooble_aes256::set_key(const QByteArray &key)
@@ -703,7 +706,8 @@ void dooble_aes256::set_key(const QByteArray &key)
   m_state[1][0] = m_state[1][1] = m_state[1][2] = m_state[1][3] = 0;
   m_state[2][0] = m_state[2][1] = m_state[2][2] = m_state[2][3] = 0;
   m_state[3][0] = m_state[3][1] = m_state[3][2] = m_state[3][3] = 0;
-  memset(m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
+  dooble_ui_utilities::memset
+    (m_round_key, 0, 4 * 60 * sizeof(m_round_key[0][0]));
   key_expansion();
 }
 
@@ -735,7 +739,7 @@ void dooble_aes256::shift_rows(void)
   m_state[3][1] = temp[1];
   m_state[3][2] = temp[2];
   m_state[3][3] = temp[3];
-  memset(temp, 0, 4 * sizeof(temp[0]));
+  dooble_ui_utilities::memset(temp, 0, 4 * sizeof(temp[0]));
 }
 
 void dooble_aes256::sub_bytes()

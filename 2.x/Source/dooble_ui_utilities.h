@@ -47,7 +47,18 @@ class dooble_ui_utilities
   static void center_window_widget(QWidget *parent, QWidget *widget);
   static void enable_mac_brushed_metal(QWidget *widget);
 
- private:
+  static void memset(void *s, int c, size_t n)
+  {
+    if(!s)
+      return;
+
+    volatile unsigned char *v = (unsigned char *) s;
+
+    while(n--)
+      *v++ = (unsigned char) c;
+  }
+
+private:
   dooble_ui_utilities(void);
 };
 
