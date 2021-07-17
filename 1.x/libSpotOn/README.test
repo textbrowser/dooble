@@ -1,4 +1,0 @@
-The binary produced from test.c is to be used for testing the
-basic functionality of libspoton. A shared.db database will be
-created containing some results. If an error occurs during execution,
-test will display appropriate information to standard output.
