@@ -1,4 +1,4 @@
-*.rb linguist-language=C++
-*.rb linguist-vendored=C++
+* linguist-vendored
+*.cc linguist-vendored=false
 
 Doxygen/* linguist-vendored=true
