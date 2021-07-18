@@ -49,7 +49,7 @@ class dooble_ui_utilities
 
   static void memset(void *s, int c, size_t n)
   {
-    if(!s)
+    if(!n || !s)
       return;
 
     volatile auto v = static_cast<unsigned char *> (s);
