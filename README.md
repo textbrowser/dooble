@@ -22,3 +22,5 @@ Dooble is the scientific browser.
 <li>WebEngine (https://doc.qt.io/qt-5/qtwebengine-overview.html, https://en.wikipedia.org/wiki/Blink_(browser_engine)#Frameworks).</li>
 <li>Windows portable.</li>
 </ul>
+
+![alt text](https://github.com/textbrowser/dooble/blob/master/Images/chart_1.png)
