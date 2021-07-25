@@ -46,14 +46,14 @@ class dooble_settings: public dooble_main_window
 
  public:
   enum Panels
-  {
-    CACHE_PANEL = 0,
-    DISPLAY_PANEL,
-    HISTORY_PANEL,
-    PRIVACY_PANEL,
-    WEB_PANEL,
-    WINDOWS_PANEL
-  };
+    {
+     CACHE_PANEL = 0,
+     DISPLAY_PANEL,
+     HISTORY_PANEL,
+     PRIVACY_PANEL,
+     WEB_PANEL,
+     WINDOWS_PANEL
+    };
 
   dooble_settings(void);
   static QString cookie_policy_string(int index);

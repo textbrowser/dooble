@@ -70,6 +70,7 @@ class dooble_history_window: public dooble_main_window
  private slots:
   void slot_copy_location(void);
   void slot_delete_pages(void);
+  void slot_delete_rows(bool favorites_included, const QModelIndexList &list);
   void slot_enter_pressed(void);
   void slot_favorite_changed(const QUrl &url, bool state);
   void slot_favorites_cleared(void);
@@ -90,6 +91,7 @@ class dooble_history_window: public dooble_main_window
   void slot_splitter_moved(int pos, int index);
 
  signals:
+  void delete_rows(bool favorites_included, const QModelIndexList &list);
   void favorite_changed(const QUrl &url, bool state);
   void open_link(const QUrl &url);
 };

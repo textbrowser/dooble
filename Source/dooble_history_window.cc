@@ -449,6 +449,7 @@ void dooble_history_window::slot_delete_pages(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   std::sort(list.begin(), list.end());
+  emit delete_rows(favorites_included, list);
 
   QList<QUrl> urls;
 
@@ -473,6 +474,25 @@ void dooble_history_window::slot_delete_pages(void)
   QApplication::restoreOverrideCursor();
   prepare_viewport_icons();
   slot_search_timer_timeout();
+}
+
+void dooble_history_window::slot_delete_rows
+(bool favorites_included, const QModelIndexList &list)
+{
+  for(int i = list.size() - 1; i >= 0; i--)
+    {
+      if(!favorites_included)
+	if(list.at(i).data(Qt::CheckStateRole) == Qt::Checked)
+	  continue;
+
+      if(m_ui.table->isRowHidden(list.at(i).row()))
+	continue;
+
+      QUrl url(list.at(i).data(Qt::UserRole).toUrl());
+
+      m_items.remove(url);
+      m_ui.table->removeRow(list.at(i).row());
+    }
 }
 
 void dooble_history_window::slot_enter_pressed(void)

@@ -890,7 +890,17 @@ void dooble::initialize_static_members(void)
     }
 
   if(!s_history_window)
-    s_history_window = new dooble_history_window();
+    {
+      s_history_window = new dooble_history_window();
+      connect(s_history_popup,
+	      SIGNAL(delete_rows(bool, const QModelIndexList &)),
+	      s_history_window,
+	      SLOT(slot_delete_rows(bool, const QModelIndexList &)));
+      connect(s_history_window,
+	      SIGNAL(delete_rows(bool, const QModelIndexList &)),
+	      s_history_popup,
+	      SLOT(slot_delete_rows(bool, const QModelIndexList &)));
+    }
 
   if(!s_search_engines_window)
     {

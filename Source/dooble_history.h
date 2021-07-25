@@ -47,15 +47,15 @@ class dooble_history: public QObject
 
  public:
   enum HistoryItem
-  {
-    FAVICON = 0,
-    FAVORITE,
-    LAST_VISITED,
-    NUMBER_OF_VISITS,
-    TITLE,
-    URL,
-    URL_DIGEST
-  };
+    {
+     FAVICON = 0,
+     FAVORITE,
+     LAST_VISITED,
+     NUMBER_OF_VISITS,
+     TITLE,
+     URL,
+     URL_DIGEST
+    };
 
   dooble_history(void);
   ~dooble_history();

@@ -66,10 +66,10 @@ class dooble: public QMainWindow
 
  public:
   enum Limits
-  {
-    MAXIMUM_TITLE_LENGTH = 1024,
-    MAXIMUM_URL_LENGTH = 2048
-  };
+    {
+     MAXIMUM_TITLE_LENGTH = 1024,
+     MAXIMUM_URL_LENGTH = 2048
+    };
 
   dooble(QWidget *widget);
   dooble(const QList<QUrl> &urls, bool is_private);
@@ -112,10 +112,10 @@ class dooble: public QMainWindow
 
  private:
   enum CanExit
-  {
-    CAN_EXIT_CLOSE_EVENT = 0,
-    CAN_EXIT_SLOT_QUIT_DOOBLE
-  };
+    {
+     CAN_EXIT_CLOSE_EVENT = 0,
+     CAN_EXIT_SLOT_QUIT_DOOBLE
+    };
 
   QDialog *m_floating_digital_clock_dialog;
   QFuture<QList<QByteArray> > m_pbkdf2_future;

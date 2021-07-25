@@ -38,10 +38,10 @@ class dooble_cryptography: public QObject
 
  public:
   enum HashTypes
-  {
-    KECCAK_512,
-    SHA3_512
-  };
+    {
+     KECCAK_512,
+     SHA3_512
+    };
 
   static int s_authentication_key_length;
   static int s_encryption_key_length;
