@@ -319,13 +319,25 @@ void dooble_history_window::show(QWidget *parent)
 	      Qt::UniqueConnection);
     }
 
-  if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("history_window_geometry").
-					   toByteArray()));
+  if(m_floating)
+    {
+      if(dooble_settings::setting("save_geometry").toBool())
+	restoreGeometry
+	  (QByteArray::fromBase64(dooble_settings::
+				  setting("history_popup_geometry").
+				  toByteArray()));
+    }
+  else
+    {
+      if(dooble_settings::setting("save_geometry").toBool())
+	restoreGeometry
+	  (QByteArray::fromBase64(dooble_settings::
+				  setting("history_window_geometry").
+				  toByteArray()));
 
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(parent, this);
+      if(dooble_settings::setting("center_child_windows").toBool())
+	dooble_ui_utilities::center_window_widget(parent, this);
+    }
 
   bool was_visible = isVisible();
 
@@ -353,13 +365,25 @@ void dooble_history_window::show_normal(QWidget *parent)
 	      Qt::UniqueConnection);
     }
 
-  if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("history_window_geometry").
-					   toByteArray()));
+  if(m_floating)
+    {
+      if(dooble_settings::setting("save_geometry").toBool())
+	restoreGeometry
+	  (QByteArray::fromBase64(dooble_settings::
+				  setting("history_popup_geometry").
+				  toByteArray()));
+    }
+  else
+    {
+      if(dooble_settings::setting("save_geometry").toBool())
+	restoreGeometry
+	  (QByteArray::fromBase64(dooble_settings::
+				  setting("history_window_geometry").
+				  toByteArray()));
 
-  if(dooble_settings::setting("center_child_windows").toBool())
-    dooble_ui_utilities::center_window_widget(parent, this);
+      if(dooble_settings::setting("center_child_windows").toBool())
+	dooble_ui_utilities::center_window_widget(parent, this);
+    }
 
   bool was_visible = isVisible();
 
@@ -389,7 +413,8 @@ void dooble_history_window::slot_copy_location(void)
 
 void dooble_history_window::slot_delete_pages(void)
 {
-  QModelIndexList list(m_ui.table->selectionModel()->selectedRows(0));
+  QModelIndexList list
+    (m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
 
   if(list.isEmpty())
     return;
@@ -452,7 +477,8 @@ void dooble_history_window::slot_delete_pages(void)
 
 void dooble_history_window::slot_enter_pressed(void)
 {
-  slot_item_double_clicked(m_ui.table->item(m_ui.table->currentRow(), 0));
+  slot_item_double_clicked
+    (m_ui.table->item(m_ui.table->currentRow(), TableColumns::FAVORITE));
   m_ui.table->setFocus();
 }
 
@@ -463,7 +489,7 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
   if(!item)
     return;
 
-  item = m_ui.table->item(item->row(), 0);
+  item = m_ui.table->item(item->row(), TableColumns::FAVORITE);
 
   if(!item)
     return;
@@ -491,7 +517,7 @@ void dooble_history_window::slot_favorites_cleared(void)
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      auto item = m_ui.table->item(i, 0);
+      auto item = m_ui.table->item(i, TableColumns::FAVORITE);
 
       if(!item)
 	continue;
@@ -518,7 +544,7 @@ void dooble_history_window::slot_history_cleared(void)
 
   for(int i = m_ui.table->rowCount(); i >= 0; i--)
     {
-      auto item = m_ui.table->item(i, 0);
+      auto item = m_ui.table->item(i, TableColumns::FAVORITE);
 
       if(!item)
 	{
@@ -567,7 +593,7 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
 {
   if(!item)
     return;
-  else if(item->column() != 0)
+  else if(item->column() != TableColumns::FAVORITE)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -655,7 +681,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 	item1->setIcon(icon);
     }
 
-  auto item2 = m_ui.table->item(item1->row(), 1);
+  auto item2 = m_ui.table->item(item1->row(), TableColumns::TITLE);
 
   if(item2)
     {
@@ -680,7 +706,7 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
       item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
     }
 
-  auto item3 = m_ui.table->item(item1->row(), 3);
+  auto item3 = m_ui.table->item(item1->row(), TableColumns::LAST_VISITED);
 
   if(item3)
     {
@@ -756,10 +782,14 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   m_ui.table->setSortingEnabled(false);
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
-  m_ui.table->setItem(m_ui.table->rowCount() - 1, 0, item1);
-  m_ui.table->setItem(m_ui.table->rowCount() - 1, 1, item2);
-  m_ui.table->setItem(m_ui.table->rowCount() - 1, 2, item3);
-  m_ui.table->setItem(m_ui.table->rowCount() - 1, 3, item4);
+  m_ui.table->setItem
+    (m_ui.table->rowCount() - 1, TableColumns::FAVORITE, item1);
+  m_ui.table->setItem
+    (m_ui.table->rowCount() - 1, TableColumns::TITLE, item2);
+  m_ui.table->setItem
+    (m_ui.table->rowCount() - 1, TableColumns::LOCATION, item3);
+  m_ui.table->setItem
+    (m_ui.table->rowCount() - 1, TableColumns::LAST_VISITED, item4);
 
   /*
   ** Hide or show the new row.
@@ -857,10 +887,10 @@ void dooble_history_window::slot_populate(void)
       item4->setData(Qt::UserRole, url);
       item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_items[url] = item2;
-      m_ui.table->setItem(i, 0, item1);
-      m_ui.table->setItem(i, 1, item2);
-      m_ui.table->setItem(i, 2, item3);
-      m_ui.table->setItem(i, 3, item4);
+      m_ui.table->setItem(i, TableColumns::FAVORITE, item1);
+      m_ui.table->setItem(i, TableColumns::TITLE, item2);
+      m_ui.table->setItem(i, TableColumns::LOCATION, item3);
+      m_ui.table->setItem(i, TableColumns::LAST_VISITED, item4);
       i += 1;
     }
 
@@ -922,9 +952,9 @@ void dooble_history_window::slot_search_timer_timeout(void)
       m_ui.table->setRowHidden(i, false);
     else
       {
-	auto item1 = m_ui.table->item(i, 1);
-	auto item2 = m_ui.table->item(i, 2);
-	auto item3 = m_ui.table->item(i, 3);
+	auto item1 = m_ui.table->item(i, TableColumns::TITLE);
+	auto item2 = m_ui.table->item(i, TableColumns::LOCATION);
+	auto item3 = m_ui.table->item(i, TableColumns::LAST_VISITED);
 
 	if(!item1 || !item2 || !item3)
 	  {
