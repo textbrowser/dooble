@@ -191,3 +191,4 @@ Unknown Items
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
+- Threefish tweak.

@@ -755,6 +755,11 @@ void dooble::connect_signals(void)
 	  Qt::UniqueConnection);
   connect(this,
 	  SIGNAL(history_cleared(void)),
+	  s_history_popup,
+	  SLOT(slot_history_cleared(void)),
+	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(history_cleared(void)),
 	  s_history_window,
 	  SLOT(slot_history_cleared(void)),
 	  Qt::UniqueConnection);
