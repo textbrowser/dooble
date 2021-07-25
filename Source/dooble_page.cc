@@ -891,6 +891,9 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
 		  SIGNAL(show_floating_digital_clock(void)));
+  menu->addAction(tr("Floating History Popup..."),
+		  this,
+		  SIGNAL(show_floating_history_popup(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
     menu->addAction

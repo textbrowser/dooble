@@ -78,6 +78,7 @@ QPointer<dooble_cookies_window> dooble::s_cookies_window = nullptr;
 QPointer<dooble_cryptography> dooble::s_cryptography = nullptr;
 QPointer<dooble_downloads> dooble::s_downloads = nullptr;
 QPointer<dooble_favorites_popup> dooble::s_favorites_window = nullptr;
+QPointer<dooble_history_window> dooble::s_history_popup = nullptr;
 QPointer<dooble_history_window> dooble::s_history_window = nullptr;
 QPointer<dooble_search_engines_popup> dooble::s_search_engines_window = nullptr;
 QPointer<dooble_settings> dooble::s_settings = nullptr;
@@ -873,6 +874,15 @@ void dooble::initialize_static_members(void)
 	      SLOT(slot_populated(void)));
     }
 
+  if(!s_history_popup)
+    {
+      s_history_popup = new dooble_history_window();
+      s_history_popup->setWindowFlags
+	(Qt::WindowStaysOnTopHint | s_history_popup->windowFlags());
+      s_history_popup->setWindowModality(Qt::NonModal);
+      s_history_popup->setWindowTitle(tr("Dooble: History Popup"));
+    }
+
   if(!s_history_window)
     s_history_window = new dooble_history_window();
 
@@ -1309,6 +1319,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(show_floating_digital_clock(void)),
 	  this,
 	  SLOT(slot_show_floating_digital_clock(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(show_floating_history_popup(void)),
+	  this,
+	  SLOT(slot_show_floating_history_popup(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -1764,6 +1780,9 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
 		  SLOT(slot_show_floating_digital_clock(void)));
+  menu->addAction(tr("Floating History Popup..."),
+		  this,
+		  SLOT(slot_show_floating_history_popup(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
     menu->addAction
@@ -2208,6 +2227,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     this,
 	     SLOT(slot_show_floating_digital_clock(void)));
   disconnect(page,
+	     SIGNAL(show_floating_history_popup(void)),
+	     this,
+	     SLOT(slot_show_floating_history_popup(void)));
+  disconnect(page,
 	     SIGNAL(show_full_screen(void)),
 	     this,
 	     SLOT(slot_show_full_screen(void)));
@@ -2565,6 +2588,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
   s_cookies_window->close();
   s_downloads->close();
   s_favorites_window->close();
+  s_history_popup->close();
   s_history_window->close();
   s_search_engines_window->close();
   s_settings->close();
@@ -3550,6 +3574,22 @@ void dooble::slot_show_floating_digital_clock(void)
     m_floating_digital_clock_timer.start();
 
   slot_floating_digital_dialog_timeout();
+}
+
+void dooble::slot_show_floating_history_popup(void)
+{
+  s_history_popup->prepare_viewport_icons();
+
+  if(s_history_popup->isVisible())
+    {
+      s_history_popup->activateWindow();
+      s_history_popup->raise();
+      return;
+    }
+
+  s_history_popup->show_normal(this);
+  s_history_popup->activateWindow();
+  s_history_popup->raise();
 }
 
 void dooble::slot_show_full_screen(void)

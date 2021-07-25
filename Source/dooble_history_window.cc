@@ -146,6 +146,7 @@ dooble_history_window::dooble_history_window(void):dooble_main_window()
 	  this,
 	  SLOT(slot_show_context_menu(const QPoint &)));
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 

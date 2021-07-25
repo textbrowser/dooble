@@ -92,6 +92,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_downloads> s_downloads;
   static QPointer<dooble_favorites_popup> s_favorites_window;
   static QPointer<dooble_history> s_history;
+  static QPointer<dooble_history_window> s_history_popup;
   static QPointer<dooble_history_window> s_history_window;
   static QPointer<dooble_search_engines_popup> s_search_engines_window;
   static QPointer<dooble_settings> s_settings;
@@ -236,6 +237,7 @@ class dooble: public QMainWindow
   void slot_show_downloads(void);
   void slot_show_favorites(void);
   void slot_show_floating_digital_clock(void);
+  void slot_show_floating_history_popup(void);
   void slot_show_full_screen(void);
   void slot_show_history(void);
   void slot_show_main_menu(void);
