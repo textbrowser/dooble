@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
+    <width>800</width>
     <height>500</height>
    </rect>
   </property>
@@ -43,7 +43,7 @@
           <widget class="QPushButton" name="clear">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>80</width>
              <height>0</height>
             </size>
            </property>
@@ -56,28 +56,62 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="play">
+          <widget class="QToolButton" name="pause">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>80</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QToolButton::checked {background-color: red; color: white;}</string>
+           </property>
+           <property name="text">
+            <string>Pause</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">buttonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="play">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QToolButton:checked {background-color: green; color: white}</string>
            </property>
            <property name="text">
             <string>Play</string>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">buttonGroup</string>
+           </attribute>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pause">
+          <widget class="QToolButton" name="print">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>80</width>
              <height>0</height>
             </size>
            </property>
            <property name="text">
-            <string>Pause</string>
+            <string>Print</string>
+           </property>
+           <property name="popupMode">
+            <enum>QToolButton::InstantPopup</enum>
            </property>
           </widget>
          </item>
@@ -85,7 +119,7 @@
           <widget class="QPushButton" name="save">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>80</width>
              <height>0</height>
             </size>
            </property>
@@ -98,19 +132,28 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="stop">
+          <widget class="QToolButton" name="stop">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>80</width>
              <height>0</height>
             </size>
            </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop acquiring data from the data source. For files, also set the current position to 0.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QToolButton:checked {background-color: orange;}</string>
+           </property>
            <property name="text">
             <string>Stop</string>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">buttonGroup</string>
+           </attribute>
           </widget>
          </item>
          <item>
@@ -156,12 +199,16 @@
  </widget>
  <tabstops>
   <tabstop>clear</tabstop>
-  <tabstop>play</tabstop>
   <tabstop>pause</tabstop>
+  <tabstop>play</tabstop>
+  <tabstop>print</tabstop>
   <tabstop>save</tabstop>
   <tabstop>stop</tabstop>
   <tabstop>properties</tabstop>
  </tabstops>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

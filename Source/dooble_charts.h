@@ -211,6 +211,7 @@ class dooble_charts: public QWidget
   static QString property_to_name(const dooble_charts::Properties property);
   static QString type_from_database(const QString &name);
   virtual QHash<dooble_charts::Properties, QVariant> properties(void) const;
+  virtual void decouple(void);
   virtual void open(const QString &name);
   virtual void save(QString &error);
 

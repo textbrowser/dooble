@@ -127,11 +127,14 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_menu = nullptr;
   m_property_editor = nullptr;
   m_ui.setupUi(this);
-  m_ui.splitter->setStretchFactor(0, 1);
-  m_ui.splitter->setStretchFactor(1, 0);
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_ui.charts_frame->layout()->addWidget(m_chart_view);
 #endif
+  m_ui.print->setVisible(false);
+  m_ui.save->setVisible(false);
+  m_ui.splitter->setStretchFactor(0, 1);
+  m_ui.splitter->setStretchFactor(1, 0);
+  m_ui.stop->setChecked(true);
   connect(m_ui.clear,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -921,6 +924,13 @@ void dooble_charts::create_default_device(void)
 	  SIGNAL(data_ready(const QVector<double> &, const int)),
 	  this,
 	  SLOT(slot_data_ready(const QVector<double> &, const int)));
+}
+
+void dooble_charts::decouple(void)
+{
+  m_ui.print->setVisible(true);
+  m_ui.save->setVisible(true);
+  setVisible(true);
 }
 
 void dooble_charts::open(const QString &name)

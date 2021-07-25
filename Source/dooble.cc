@@ -2914,7 +2914,7 @@ void dooble::slot_decouple_tab(int index)
       main_window->setCentralWidget(charts);
       main_window->setWindowTitle(tr("Dooble: Charts"));
       main_window->resize(s_vga_size);
-      charts->setVisible(true);
+      charts->decouple();
       dooble_ui_utilities::center_window_widget(this, main_window);
       main_window->show();
       prepare_control_w_shortcut();
