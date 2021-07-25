@@ -2902,6 +2902,26 @@ void dooble::slot_create_window(dooble_web_engine_view *view)
 
 void dooble::slot_decouple_tab(int index)
 {
+  auto charts = qobject_cast<dooble_charts *> (m_ui.tab->widget(index));
+
+  if(charts)
+    {
+      auto main_window = new dooble_main_window();
+
+      m_ui.tab->removeTab(index);
+      m_ui.tab->setTabsClosable(tabs_closable());
+      main_window->enable_control_w_shortcut(true);
+      main_window->setCentralWidget(charts);
+      main_window->setWindowTitle(tr("Dooble: Charts"));
+      main_window->resize(s_vga_size);
+      charts->setVisible(true);
+      dooble_ui_utilities::center_window_widget(this, main_window);
+      main_window->show();
+      prepare_control_w_shortcut();
+      prepare_tab_shortcuts();
+      return;
+    }
+
   auto main_window = qobject_cast<dooble_main_window *>
     (m_ui.tab->widget(index));
 

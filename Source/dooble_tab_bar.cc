@@ -639,13 +639,11 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 
   auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
   dooble *d = nullptr;
-  dooble_charts *chart = nullptr;
   dooble_downloads *downloads = nullptr;
   dooble_page *page = nullptr;
 
   if(tab_widget)
     {
-      chart = qobject_cast<dooble_charts *> (tab_widget->widget(tabAt(point)));
       d = dooble_ui_utilities::find_parent_dooble(this);
       downloads = qobject_cast<dooble_downloads *>
 	(tab_widget->widget(tabAt(point)));
@@ -732,9 +730,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 			  this,
 			  SLOT(slot_decouple_tab(void)));
 
-  if(chart)
-    action->setEnabled(false);
-  else if(downloads)
+  if(downloads)
     action->setEnabled(count() > 1 && !downloads->is_private() && tab_at > -1);
   else
     action->setEnabled(count() > 1 && !page && tab_at > -1);
