@@ -53,8 +53,9 @@ public:
   }
 };
 
-dooble_history_window::dooble_history_window(void):dooble_main_window()
+dooble_history_window::dooble_history_window(bool floating):dooble_main_window()
 {
+  m_floating = floating;
   m_parent = nullptr;
   m_save_settings_timer.setInterval(1500);
   m_save_settings_timer.setSingleShot(true);
@@ -63,22 +64,36 @@ dooble_history_window::dooble_history_window(void):dooble_main_window()
   m_ui.setupUi(this);
   m_ui.period->setCurrentRow(0);
   m_ui.period->setStyleSheet("QListWidget {background-color: transparent;}");
-  m_ui.splitter->setStretchFactor(0, 0);
-  m_ui.splitter->setStretchFactor(1, 1);
-  m_ui.splitter->restoreState
-    (QByteArray::fromBase64(dooble_settings::
-			    setting("history_window_splitter_state").
-			    toByteArray()));
+  m_ui.period->setVisible(!m_floating);
+
+  if(!m_floating)
+    {
+      m_ui.splitter->setStretchFactor(0, 0);
+      m_ui.splitter->setStretchFactor(1, 1);
+      m_ui.splitter->restoreState
+	(QByteArray::fromBase64(dooble_settings::
+				setting("history_window_splitter_state").
+				toByteArray()));
+    }
+
+  m_ui.table->horizontalHeader()->setVisible(!m_floating);
   m_ui.table->setWordWrap(false);
   m_ui.table->sortItems(m_ui.table->columnCount() - 1, Qt::DescendingOrder);
 
-  for(int i = 0; i < m_ui.table->columnCount(); i++)
-    m_ui.table->horizontalHeader()->resizeSection
-      (i,
-       qMax(dooble_settings::
-	    setting(QString("history_horizontal_header_section_size_%1").
-		    arg(i)).toInt(),
-	    m_ui.table->horizontalHeader()->minimumSectionSize()));
+  if(m_floating)
+    {
+      m_ui.table->setColumnHidden(TableColumns::FAVORITE, true);
+      m_ui.table->setColumnHidden(TableColumns::LOCATION, true);
+      m_ui.table->setColumnHidden(TableColumns::LAST_VISITED, true);
+    }
+  else
+    for(int i = 0; i < m_ui.table->columnCount(); i++)
+      m_ui.table->horizontalHeader()->resizeSection
+	(i,
+	 qMax(dooble_settings::
+	      setting(QString("history_horizontal_header_section_size_%1").
+		      arg(i)).toInt(),
+	      m_ui.table->horizontalHeader()->minimumSectionSize()));
 
   connect(&m_save_settings_timer,
 	  SIGNAL(timeout(void)),
@@ -191,19 +206,29 @@ void dooble_history_window::resizeEvent(QResizeEvent *event)
 
 void dooble_history_window::save_settings(void)
 {
-  if(dooble_settings::setting("save_geometry").toBool())
-    dooble_settings::set_setting
-      ("history_window_geometry", saveGeometry().toBase64());
+  if(m_floating)
+    {
+      if(dooble_settings::setting("save_geometry").toBool())
+	dooble_settings::set_setting
+	  ("history_popup_geometry", saveGeometry().toBase64());
+    }
+  else
+    {
+      if(dooble_settings::setting("save_geometry").toBool())
+	dooble_settings::set_setting
+	  ("history_window_geometry", saveGeometry().toBase64());
 
-  dooble_settings::set_setting
-    ("history_window_splitter_state", m_ui.splitter->saveState().toBase64());
+      dooble_settings::set_setting
+	("history_window_splitter_state",
+	 m_ui.splitter->saveState().toBase64());
+    }
 }
 
 void dooble_history_window::set_row_hidden(int i)
 {
-  auto item1 = m_ui.table->item(i, 1);
-  auto item2 = m_ui.table->item(i, 2);
-  auto item3 = m_ui.table->item(i, 3);
+  auto item1 = m_ui.table->item(i, TableColumns::TITLE);
+  auto item2 = m_ui.table->item(i, TableColumns::LOCATION);
+  auto item3 = m_ui.table->item(i, TableColumns::LAST_VISITED);
 
   if(!item1 || !item2 || !item3)
     return;
@@ -356,7 +381,7 @@ void dooble_history_window::slot_copy_location(void)
   if(!item)
     return;
 
-  item = m_ui.table->item(item->row(), 2);
+  item = m_ui.table->item(item->row(), TableColumns::LOCATION);
 
   if(item)
     clipboard->setText(item->text());

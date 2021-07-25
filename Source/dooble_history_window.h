@@ -39,7 +39,7 @@ class dooble_history_window: public dooble_main_window
   Q_OBJECT
 
  public:
-  dooble_history_window(void);
+  dooble_history_window(bool floating = false);
   void prepare_viewport_icons(void);
   void show(QWidget *parent);
   void show_normal(QWidget *parent);
@@ -50,11 +50,20 @@ class dooble_history_window: public dooble_main_window
   void resizeEvent(QResizeEvent *event);
 
  private:
+  enum TableColumns
+    {
+     FAVORITE = 0,
+     TITLE = 1,
+     LOCATION = 2,
+     LAST_VISITED = 3
+    };
+
   QHash<QUrl, QTableWidgetItem *> m_items;
   QTimer m_save_settings_timer;
   QTimer m_search_timer;
   QWidget *m_parent;
   Ui_dooble_history_window m_ui;
+  bool m_floating;
   void save_settings(void);
   void set_row_hidden(int i);
 
