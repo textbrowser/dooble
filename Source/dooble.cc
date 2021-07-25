@@ -1044,7 +1044,7 @@ void dooble::new_page(dooble_web_engine_view *view)
     }
   else if(s_application->application_locked())
     {
-      m_ui.tab->addTab(page, tr("Application Locked")); 
+      m_ui.tab->addTab(page, tr("Application Locked"));
       m_ui.tab->setTabToolTip
 	(m_ui.tab->indexOf(page), tr("Application Locked"));
     }
@@ -1688,6 +1688,7 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("Clear Visited Links"),
 		  this,
 		  SLOT(slot_clear_visited_links(void)));
+  menu->addSeparator();
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
@@ -1706,6 +1707,7 @@ void dooble::prepare_standard_menus(void)
        SLOT(slot_show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
 
+  menu->addSeparator();
   menu->addAction(tr("Vacuum Databases"),
 		  this,
 		  SLOT(slot_vacuum_databases(void)));
@@ -1736,6 +1738,7 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SLOT(slot_show_certificate_exceptions(void)));
+  menu->addSeparator();
 
   QMenu *sub_menu = new QMenu(tr("Charts"));
 
@@ -1746,6 +1749,7 @@ void dooble::prepare_standard_menus(void)
 #ifndef DOOBLE_QTCHARTS_PRESENT
   action->setEnabled(false);
 #endif
+  menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
@@ -1778,9 +1782,11 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_show_favorites(void)),
 		  QKeySequence(tr("Ctrl+B")));
+  menu->addSeparator();
   menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
 		  SLOT(slot_show_floating_digital_clock(void)));
+  menu->addSeparator();
   menu->addAction(tr("Floating History Popup..."),
 		  this,
 		  SLOT(slot_show_floating_history_popup(void)));
@@ -1802,10 +1808,12 @@ void dooble::prepare_standard_menus(void)
        SLOT(slot_show_history(void)),
        QKeySequence(tr("Ctrl+H")));
 
+  menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
 		  SLOT(slot_inject_custom_css(void)))->setEnabled
     (page && page->url().scheme().startsWith("http"));
+  menu->addSeparator();
   menu->addAction(tr("&Search Engines..."),
 		  this,
 		  SLOT(slot_show_search_engines(void)));

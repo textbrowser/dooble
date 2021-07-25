@@ -791,6 +791,7 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Clear &Visited Links"),
 		  this,
 		  SLOT(slot_clear_visited_links(void)));
+  menu->addSeparator();
   m_find_action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "edit-find",
 		      QIcon(QString(":/%1/18/find.png").arg(icon_set))),
@@ -798,6 +799,7 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SLOT(slot_show_find(void)),
      QKeySequence(tr("Ctrl+F")));
+  menu->addSeparator();
 
   if(dooble_settings::setting("pin_settings_window").toBool())
     m_settings_action = menu->addAction
@@ -816,6 +818,7 @@ void dooble_page::prepare_standard_menus(void)
        SIGNAL(show_settings(void)),
        QKeySequence(tr("Ctrl+G")));
 
+  menu->addSeparator();
   menu->addAction(tr("Vacuum Databases"),
 		  this,
 		  SIGNAL(vacuum_databases(void)));
@@ -846,6 +849,7 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Certificate &Exceptions..."),
 		  this,
 		  SIGNAL(show_certificate_exceptions(void)));
+  menu->addSeparator();
 
   QMenu *sub_menu = new QMenu(tr("Charts"));
 
@@ -856,6 +860,7 @@ void dooble_page::prepare_standard_menus(void)
 #ifndef DOOBLE_QTCHARTS_PRESENT
   action->setEnabled(false);
 #endif
+  menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
@@ -888,9 +893,11 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(show_favorites(void)),
      QKeySequence(tr("Ctrl+B")));
+  menu->addSeparator();
   menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
 		  SIGNAL(show_floating_digital_clock(void)));
+  menu->addSeparator();
   menu->addAction(tr("Floating History Popup..."),
 		  this,
 		  SIGNAL(show_floating_history_popup(void)));
@@ -912,9 +919,11 @@ void dooble_page::prepare_standard_menus(void)
        SIGNAL(show_history(void)),
        QKeySequence(tr("Ctrl+H")));
 
+  menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
 		  SLOT(slot_inject_custom_css(void)));
+  menu->addSeparator();
   menu->addAction(tr("&Search Engines..."),
 		  this,
 		  SIGNAL(show_search_engines(void)));
