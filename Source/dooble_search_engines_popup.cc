@@ -59,6 +59,12 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
+  m_ui.splitter->setStretchFactor(0, 0);
+  m_ui.splitter->setStretchFactor(1, 1);
+  m_ui.splitter->restoreState
+    (QByteArray::
+     fromBase64(dooble_settings::
+		setting("search_engines_window_splitter_state").toByteArray()));
   m_ui.view->setModel(m_model);
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
@@ -84,6 +90,10 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
 	  SLOT(start(void)));
+  connect(m_ui.splitter,
+	  SIGNAL(splitterMoved(int, int)),
+	  this,
+	  SLOT(slot_splitter_moved(int, int)));
   connect(m_ui.view,
 	  SIGNAL(doubleClicked(const QModelIndex &)),
 	  this,
@@ -278,6 +288,10 @@ void dooble_search_engines_popup::resizeEvent(QResizeEvent *event)
 
 void dooble_search_engines_popup::save_settings(void)
 {
+  dooble_settings::set_setting
+    ("search_engines_window_splitter_state",
+     m_ui.splitter->saveState().toBase64());
+
   if(dooble_settings::setting("save_geometry").toBool())
     dooble_settings::set_setting
       ("search_engines_window_geometry", saveGeometry().toBase64());
@@ -627,4 +641,13 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
 void dooble_search_engines_popup::slot_settings_applied(void)
 {
   prepare_icons();
+}
+
+void dooble_search_engines_popup::slot_splitter_moved(int pos, int index)
+{
+  Q_UNUSED(index);
+  Q_UNUSED(pos);
+  dooble_settings::set_setting
+    ("search_engines_window_splitter_state",
+     m_ui.splitter->saveState().toBase64());
 }

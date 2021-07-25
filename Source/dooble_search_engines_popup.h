@@ -76,6 +76,7 @@ class dooble_search_engines_popup: public QDialog
   void slot_populate(void);
   void slot_search_timer_timeout(void);
   void slot_settings_applied(void);
+  void slot_splitter_moved(int pos, int index);
 
  signals:
   void open_link(const QUrl &url);
