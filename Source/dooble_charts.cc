@@ -144,6 +144,10 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_pause(void)));
+  connect(m_ui.save,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_save(void)));
   connect(m_ui.stop,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -2053,6 +2057,13 @@ void dooble_charts::slot_pause(void)
       if(it.value())
 	it.value()->pause();
     }
+}
+
+void dooble_charts::slot_save(void)
+{
+  QString error("");
+
+  save(error);
 }
 
 void dooble_charts::slot_stop(void)

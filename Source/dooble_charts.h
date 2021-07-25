@@ -248,6 +248,7 @@ class dooble_charts: public QWidget
   virtual void slot_item_changed(QStandardItem *item);
   virtual void slot_play(void);
   virtual void slot_pause(void);
+  virtual void slot_save(void);
   virtual void slot_stop(void);
   void slot_apply_properties_after_theme_changed(void);
 };

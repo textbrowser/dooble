@@ -82,6 +82,22 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="save">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop acquiring data from the data source. For files, also set the current position to 0.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="stop">
            <property name="minimumSize">
             <size>
@@ -139,11 +155,12 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>properties</tabstop>
   <tabstop>clear</tabstop>
   <tabstop>play</tabstop>
   <tabstop>pause</tabstop>
+  <tabstop>save</tabstop>
   <tabstop>stop</tabstop>
+  <tabstop>properties</tabstop>
  </tabstops>
  <resources/>
  <connections/>
