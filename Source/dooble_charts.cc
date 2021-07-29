@@ -131,6 +131,10 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_ui.charts_frame->layout()->addWidget(m_chart_view);
 #endif
   m_ui.print->setVisible(false);
+  m_ui.print->setMenu(new QMenu(this));
+  m_ui.print->menu()->addAction(tr("Print..."), this, SLOT(slot_print(void)));
+  m_ui.print->menu()->addAction
+    (tr("Print Preview..."), this, SLOT(slot_print_preview(void)));
   m_ui.save->setVisible(false);
   m_ui.splitter->setStretchFactor(0, 1);
   m_ui.splitter->setStretchFactor(1, 0);
@@ -147,6 +151,10 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_pause(void)));
+  connect(m_ui.print,
+	  SIGNAL(),
+	  m_ui.print,
+	  SLOT(showMenu(void)));
   connect(m_ui.save,
 	  SIGNAL(clicked(void)),
 	  this,
