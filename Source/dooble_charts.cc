@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "dooble.h"
 #include "dooble_charts.h"
 #include "dooble_charts_file.h"
 #include "dooble_charts_property_editor.h"
@@ -2079,6 +2080,7 @@ void dooble_charts::slot_play(void)
 
 void dooble_charts::slot_print(void)
 {
+  dooble::print(parentWidget(), this);
 }
 
 void dooble_charts::slot_print_preview(void)

@@ -1976,7 +1976,7 @@ void dooble::prepare_tab_shortcuts(void)
     }
 }
 
-void dooble::print(dooble_charts *chart)
+void dooble::print(QWidget *parent, dooble_charts *chart)
 {
   if(!chart || !chart->view())
     return;
@@ -1984,7 +1984,7 @@ void dooble::print(dooble_charts *chart)
   QPrinter printer;
   QScopedPointer<QPrintDialog> print_dialog;
 
-  print_dialog.reset(new QPrintDialog(&printer, this));
+  print_dialog.reset(new QPrintDialog(&printer, parent));
 
   if(print_dialog->exec() == QDialog::Accepted)
     {
@@ -3219,7 +3219,7 @@ void dooble::slot_populated(void)
 void dooble::slot_print(void)
 {
   if(qobject_cast<dooble_charts *> (m_ui.tab->currentWidget()))
-    print(qobject_cast<dooble_charts *> (m_ui.tab->currentWidget()));
+    print(this, qobject_cast<dooble_charts *> (m_ui.tab->currentWidget()));
   else
     print(current_page());
 }

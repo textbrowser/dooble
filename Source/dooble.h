@@ -101,6 +101,7 @@ class dooble: public QMainWindow
     s_url_request_interceptor;
   static QString ABOUT_BLANK;
   static void clean(void);
+  static void print(QWidget *parent, dooble_charts *chart);
   void print_current_page(void);
 
  public slots:
@@ -169,7 +170,6 @@ class dooble: public QMainWindow
   void prepare_style_sheets(void);
   void prepare_tab_icons_text_tool_tips(void);
   void prepare_tab_shortcuts(void);
-  void print(dooble_charts *chart);
   void print(dooble_page *page);
   void print_preview(QPrinter *printer);
   void remove_page_connections(dooble_page *page);
