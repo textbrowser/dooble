@@ -152,7 +152,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 	  this,
 	  SLOT(slot_pause(void)));
   connect(m_ui.print,
-	  SIGNAL(),
+	  SIGNAL(clicked(void)),
 	  m_ui.print,
 	  SLOT(showMenu(void)));
   connect(m_ui.save,
@@ -2051,6 +2051,19 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 #endif
 }
 
+void dooble_charts::slot_pause(void)
+{
+  QMapIterator<int, QPointer<dooble_charts_iodevice> > it(m_iodevices);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.value())
+	it.value()->pause();
+    }
+}
+
 void dooble_charts::slot_play(void)
 {
   QMapIterator<int, QPointer<dooble_charts_iodevice> > it(m_iodevices);
@@ -2064,17 +2077,12 @@ void dooble_charts::slot_play(void)
     }
 }
 
-void dooble_charts::slot_pause(void)
+void dooble_charts::slot_print(void)
 {
-  QMapIterator<int, QPointer<dooble_charts_iodevice> > it(m_iodevices);
+}
 
-  while(it.hasNext())
-    {
-      it.next();
-
-      if(it.value())
-	it.value()->pause();
-    }
+void dooble_charts::slot_print_preview(void)
+{
 }
 
 void dooble_charts::slot_save(void)

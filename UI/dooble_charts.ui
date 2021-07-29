@@ -111,7 +111,7 @@
             <string>Print</string>
            </property>
            <property name="popupMode">
-            <enum>QToolButton::InstantPopup</enum>
+            <enum>QToolButton::MenuButtonPopup</enum>
            </property>
           </widget>
          </item>
