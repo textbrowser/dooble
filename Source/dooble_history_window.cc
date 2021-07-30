@@ -40,6 +40,9 @@
 #include "dooble_history_window.h"
 #include "dooble_ui_utilities.h"
 
+// Perhaps a model-view solution would have been splendid. A floating
+// window is also nice.
+
 class dooble_history_window_favorite_item: public QTableWidgetItem
 {
 public:
