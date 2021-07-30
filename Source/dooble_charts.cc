@@ -35,6 +35,8 @@
 
 #include <QDir>
 #include <QMetaType>
+#include <QPrintPreviewDialog>
+#include <QPrinter>
 #include <QSqlQuery>
 #ifdef DOOBLE_QTCHARTS_PRESENT
 #include <QtCharts/QChart>
@@ -126,6 +128,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_legend = m_chart->legend();
 #endif
   m_menu = nullptr;
+  m_print_preview = false;
   m_property_editor = nullptr;
   m_ui.setupUi(this);
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -1410,6 +1413,12 @@ void dooble_charts::open(const QString &name)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_charts::print_preview(QPrinter *printer)
+{
+  if(!printer)
+    return;
+}
+
 void dooble_charts::save(QString &error)
 {
   auto name(properties().value(dooble_charts::Properties::CHART_NAME).
@@ -2085,6 +2094,27 @@ void dooble_charts::slot_print(void)
 
 void dooble_charts::slot_print_preview(void)
 {
+  if(m_print_preview)
+    return;
+
+  auto widget = view();
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_print_preview = true;
+
+  QPrinter printer;
+  QScopedPointer<QPrintPreviewDialog> print_preview_dialog
+    (new QPrintPreviewDialog(&printer, widget));
+
+  connect(print_preview_dialog.data(),
+	  &QPrintPreviewDialog::paintRequested,
+	  this,
+	  &dooble_charts::print_preview);
+  QApplication::restoreOverrideCursor();
+  print_preview_dialog->exec();
+  QApplication::processEvents();
+  m_print_preview = false;
+
 }
 
 void dooble_charts::slot_save(void)

@@ -38,6 +38,7 @@ using namespace QtCharts;
 
 #include "ui_dooble_charts.h"
 
+class QPrinter;
 class QStandardItem;
 class dooble_charts_iodevice;
 class dooble_charts_property_editor;
@@ -240,7 +241,9 @@ class dooble_charts: public QWidget
   QPointer<QAbstractAxis> m_y_axis;
 #endif
   Ui_dooble_charts m_ui;
+  bool m_print_preview;
   dooble_charts_property_editor *m_property_editor;
+  virtual void print_preview(QPrinter *printer);
 
  protected slots:
   virtual void slot_clear(void);
