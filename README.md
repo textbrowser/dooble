@@ -13,6 +13,7 @@ Dooble is the scientific browser.
 <li>Domain restrictions.</li>
 <li>Favorites.</li>
 <li>Floating digital clock.</li>
+<li>Floating minute history window.</li>
 <li>FreeBSD, Linux, Mac, Windows.</li>
 <li>Gopher support.</li>
 <li>Multiple private instances, including downloads.</li>
