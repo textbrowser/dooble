@@ -1413,12 +1413,6 @@ void dooble_charts::open(const QString &name)
   QApplication::restoreOverrideCursor();
 }
 
-void dooble_charts::print_preview(QPrinter *printer)
-{
-  if(!printer)
-    return;
-}
-
 void dooble_charts::save(QString &error)
 {
   auto name(properties().value(dooble_charts::Properties::CHART_NAME).
@@ -2092,6 +2086,11 @@ void dooble_charts::slot_print(void)
   dooble::print(parentWidget(), this);
 }
 
+void dooble_charts::slot_print_preview(QPrinter *printer)
+{
+  dooble::print_preview(printer, this);
+}
+
 void dooble_charts::slot_print_preview(void)
 {
   if(m_print_preview)
@@ -2107,9 +2106,9 @@ void dooble_charts::slot_print_preview(void)
     (new QPrintPreviewDialog(&printer, widget));
 
   connect(print_preview_dialog.data(),
-	  &QPrintPreviewDialog::paintRequested,
+	  SIGNAL(paintRequested(QPrinter *)),
 	  this,
-	  &dooble_charts::print_preview);
+	  SLOT(slot_print_preview(QPrinter *)));
   QApplication::restoreOverrideCursor();
   print_preview_dialog->exec();
   QApplication::processEvents();

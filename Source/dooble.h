@@ -102,6 +102,7 @@ class dooble: public QMainWindow
   static QString ABOUT_BLANK;
   static void clean(void);
   static void print(QWidget *parent, dooble_charts *chart);
+  static void print_preview(QPrinter *printer, dooble_charts *chart);
   void print_current_page(void);
 
  public slots:
@@ -171,7 +172,6 @@ class dooble: public QMainWindow
   void prepare_tab_icons_text_tool_tips(void);
   void prepare_tab_shortcuts(void);
   void print(dooble_page *page);
-  void print_preview(QPrinter *printer);
   void remove_page_connections(dooble_page *page);
 
  private slots:
@@ -216,6 +216,7 @@ class dooble: public QMainWindow
   void slot_populate_containers_timer_timeout(void);
   void slot_populated(void);
   void slot_print(void);
+  void slot_print_preview(QPrinter *printer);
   void slot_print_preview(void);
   void slot_quit_dooble(void);
   void slot_reload_tab(int index);

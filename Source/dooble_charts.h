@@ -243,7 +243,6 @@ class dooble_charts: public QWidget
   Ui_dooble_charts m_ui;
   bool m_print_preview;
   dooble_charts_property_editor *m_property_editor;
-  virtual void print_preview(QPrinter *printer);
 
  protected slots:
   virtual void slot_clear(void);
@@ -253,6 +252,7 @@ class dooble_charts: public QWidget
   virtual void slot_play(void);
   virtual void slot_pause(void);
   virtual void slot_print(void);
+  virtual void slot_print_preview(QPrinter *printer);
   virtual void slot_print_preview(void);
   virtual void slot_save(void);
   virtual void slot_stop(void);

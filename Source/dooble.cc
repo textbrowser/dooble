@@ -2055,82 +2055,45 @@ void dooble::print_current_page(void)
   print(current_page());
 }
 
-void dooble::print_preview(QPrinter *printer)
+void dooble::print_preview(QPrinter *printer, dooble_charts *chart)
 {
-  if(!printer)
+  if(!chart || !chart->view() || !printer)
     return;
 
-  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
-  auto page = current_page();
+  QPainter painter;
 
-  if(!chart && !page)
-    return;
+  painter.begin(printer);
 
-  if(chart && chart->view())
-    {
-      QPainter painter;
-
-      painter.begin(printer);
-
-      auto view = chart->view();
+  auto view = chart->view();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-      auto xscale = printer->pageLayout().fullRectPixels(printer->resolution()).
-	width() / static_cast<double> (view->width());
-      auto yscale = printer->pageLayout().fullRectPixels(printer->resolution()).
-	height() / static_cast<double> (view->height());
+  auto xscale = printer->pageLayout().fullRectPixels(printer->resolution()).
+    width() / static_cast<double> (view->width());
+  auto yscale = printer->pageLayout().fullRectPixels(printer->resolution()).
+    height() / static_cast<double> (view->height());
 #else
-      auto xscale = printer->pageRect().width() /
-	static_cast<double> (view->width());
-      auto yscale = printer->pageRect().height() /
-	static_cast<double> (view->height());
+  auto xscale = printer->pageRect().width() /
+    static_cast<double> (view->width());
+  auto yscale = printer->pageRect().height() /
+    static_cast<double> (view->height());
 #endif
-      double scale = qMin(xscale, yscale);
+  double scale = qMin(xscale, yscale);
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-      painter.translate
-	(printer->pageLayout().fullRectPixels(printer->resolution()).x() +
-	 printer->pageLayout().fullRectPixels(printer->resolution()).
-	 width() / 2,
-	 printer->pageLayout().fullRectPixels(printer->resolution()).y() +
-	 printer->pageLayout().fullRectPixels(printer->resolution()).
-	 height() / 2);
+  painter.translate
+    (printer->pageLayout().fullRectPixels(printer->resolution()).x() +
+     printer->pageLayout().fullRectPixels(printer->resolution()).
+     width() / 2,
+     printer->pageLayout().fullRectPixels(printer->resolution()).y() +
+     printer->pageLayout().fullRectPixels(printer->resolution()).
+     height() / 2);
 #else
-      painter.translate
-	(printer->paperRect().x() + printer->pageRect().width() / 2,
-	 printer->paperRect().y() + printer->pageRect().height() / 2);
+  painter.translate
+    (printer->paperRect().x() + printer->pageRect().width() / 2,
+     printer->paperRect().y() + printer->pageRect().height() / 2);
 #endif
-      painter.scale(scale, scale);
-      painter.translate(-view->width() / 2, -view->height() / 2);
-      view->render(&painter);
-    }
-  else if(page)
-    {
-      QEventLoop event_loop;
-      bool result = false;
-      auto print_preview = [&] (bool success)
-			   {
-			     result = success;
-			     event_loop.quit();
-			   };
-
-      page->print_page(printer, std::move(print_preview));
-      event_loop.exec();
-
-      if(!result)
-	{
-	  QPainter painter;
-
-	  if(painter.begin(printer))
-	    {
-	      auto font = painter.font();
-
-	      font.setPixelSize(25);
-	      painter.setFont(font);
-	      painter.drawText(QPointF(25, 25), tr("A failure occurred."));
-	      painter.end();
-	    }
-	}
-    }
+  painter.scale(scale, scale);
+  painter.translate(-view->width() / 2, -view->height() / 2);
+  view->render(&painter);
 }
 
 void dooble::remove_page_connections(dooble_page *page)
@@ -3224,6 +3187,49 @@ void dooble::slot_print(void)
     print(current_page());
 }
 
+void dooble::slot_print_preview(QPrinter *printer)
+{
+  if(!printer)
+    return;
+
+  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
+  auto page = current_page();
+
+  if(!chart && !page)
+    return;
+
+  if(chart)
+    print_preview(printer, chart);
+  else if(page)
+    {
+      QEventLoop event_loop;
+      bool result = false;
+      auto print_preview = [&] (bool success)
+			   {
+			     result = success;
+			     event_loop.quit();
+			   };
+
+      page->print_page(printer, std::move(print_preview));
+      event_loop.exec();
+
+      if(!result)
+	{
+	  QPainter painter;
+
+	  if(painter.begin(printer))
+	    {
+	      auto font = painter.font();
+
+	      font.setPixelSize(25);
+	      painter.setFont(font);
+	      painter.drawText(QPointF(25, 25), tr("A failure occurred."));
+	      painter.end();
+	    }
+	}
+    }
+}
+
 void dooble::slot_print_preview(void)
 {
   if(m_print_preview)
@@ -3248,9 +3254,9 @@ void dooble::slot_print_preview(void)
     (new QPrintPreviewDialog(&printer, widget));
 
   connect(print_preview_dialog.data(),
-	  &QPrintPreviewDialog::paintRequested,
+	  SIGNAL(paintRequested(QPrinter *)),
 	  this,
-	  &dooble::print_preview);
+	  SLOT(slot_print_preview(QPrinter *)));
   QApplication::restoreOverrideCursor();
   print_preview_dialog->exec();
   QApplication::processEvents();
