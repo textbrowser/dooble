@@ -134,6 +134,7 @@ Completed Items
 - Save Page pop-up menu item.
 - Save menu item.
 - Send selected text to search engine.
+- Separate 1.x and 2.x.
 - Separate download items.
 - Separating pages renders incorrect page icons.
 - Should favorite links be refreshed whenever favicons are downloaded?
@@ -176,7 +177,6 @@ Remaining Items
 - Include date stamps in cookie containers.
 - Optional testing of Threefish.
 - Search engine icons should be based on host names.
-- Separate 1.x and 2.x.
 - Shortcuts browser.
 - Sign Debian release: new public keys.
 - Translation browser.
