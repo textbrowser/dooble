@@ -656,7 +656,7 @@ void dooble_page::prepare_shortcuts(void)
 	(QKeySequence(Qt::AltModifier + Qt::Key_Right),
 	 this,
 	 SLOT(slot_go_forward(void)));
-      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl++")),
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+=")),
 				   this,
 				   SLOT(slot_zoom_in(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+-")),
