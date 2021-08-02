@@ -142,7 +142,7 @@
          <string>Zoom Reset (Control + 0)</string>
         </property>
         <property name="styleSheet">
-         <string notr="true">QToolButton {background-color: navy; color: white;}</string>
+         <string notr="true">QToolButton {background-color: navy; border-radius: 5px; color: white;}</string>
         </property>
         <property name="text">
          <string>500%</string>
