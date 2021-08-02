@@ -1024,7 +1024,7 @@ void dooble_page::prepare_tool_buttons(void)
 {
 #ifdef Q_OS_MACOS
   foreach(auto tool_button, findChildren<QToolButton *> ())
-    if(m_ui.find_match_case == tool_button)
+    if(m_ui.find_match_case == tool_button || m_ui.zoom_value == tool_button)
       {
       }
     else if(m_ui.backward == tool_button ||
