@@ -158,6 +158,7 @@ Completed Items
 - WebGL option.
 - Windows PRNG.
 - Wobbly progress label.
+- Zoom information.
 - Zoom.
 - linkHovered() is emitted without user interaction.
 - mlock().
@@ -181,7 +182,6 @@ Remaining Items
 - Shortcuts browser.
 - Sign Debian release: new public keys.
 - Translation browser.
-- Zoom information.
 
 Unknown Items
 
