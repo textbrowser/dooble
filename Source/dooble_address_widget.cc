@@ -87,6 +87,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "}");
   m_zoom_information->setText(tr("100%"));
   m_zoom_information->setToolTip(tr("Reset Zoom"));
+  m_zoom_information->setVisible(false);
   connect(dooble::s_application,
 	  SIGNAL(favorites_cleared(void)),
 	  this,
@@ -153,6 +154,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	 frame_width +
 	 5).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
+  setProperty("stylesheet", styleSheet());
 }
 
 QRect dooble_address_widget::information_rectangle(void) const
@@ -579,16 +581,8 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
 
 void dooble_address_widget::slot_zoom_reset(void)
 {
-  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-
   m_zoom_information->setVisible(false);
-  setStyleSheet
-    (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
-     arg(m_favorite->sizeHint().width() +
-	 m_information->sizeHint().width() +
-	 frame_width +
-	 5).
-     arg(m_pull_down->sizeHint().width() + frame_width + 5));
+  slot_zoomed(1.0);
   emit zoom_reset();
 }
 
@@ -610,4 +604,7 @@ void dooble_address_widget::slot_zoomed(qreal percent)
 	 frame_width +
 	 5).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
+
+  if(!m_zoom_information->isVisible())
+    setStyleSheet(property("stylesheet").toString());
 }
