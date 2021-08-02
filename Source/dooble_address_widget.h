@@ -65,7 +65,6 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_favorite;
   QToolButton *m_information;
   QToolButton *m_pull_down;
-  QToolButton *m_zoom_information;
   dooble_address_widget_completer *m_completer;
   dooble_web_engine_view *m_view;
   void prepare_icons(void);

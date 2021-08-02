@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
+    <width>455</width>
     <height>450</height>
    </rect>
   </property>
@@ -137,6 +137,22 @@
        </widget>
       </item>
       <item>
+       <widget class="dooble_tool_button" name="zoom_value">
+        <property name="toolTip">
+         <string>Zoom Reset (Control + 0)</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QToolButton {background-color: navy; color: white;}</string>
+        </property>
+        <property name="text">
+         <string>500%</string>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="dooble_tool_button" name="accepted_or_blocked">
         <property name="toolTip">
          <string>Accepted / Blocked Domains Exception</string>
@@ -161,7 +177,7 @@
       <item>
        <widget class="dooble_tool_button" name="downloads">
         <property name="toolTip">
-         <string>Downloads (Ctrl + D)</string>
+         <string>Downloads (Control + D)</string>
         </property>
         <property name="text">
          <string/>
@@ -183,7 +199,7 @@
       <item>
        <widget class="dooble_tool_button" name="favorites">
         <property name="toolTip">
-         <string>Favorites (Ctrl + B)</string>
+         <string>Favorites (Control + B)</string>
         </property>
         <property name="text">
          <string/>
@@ -636,6 +652,7 @@
   <tabstop>reload</tabstop>
   <tabstop>home</tabstop>
   <tabstop>address</tabstop>
+  <tabstop>zoom_value</tabstop>
   <tabstop>accepted_or_blocked</tabstop>
   <tabstop>downloads</tabstop>
   <tabstop>favorites</tabstop>

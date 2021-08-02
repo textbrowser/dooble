@@ -82,6 +82,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_ui.progress->setVisible(false);
   m_ui.status_bar->setVisible
     (dooble_settings::setting("status_bar_visible").toBool());
+  m_ui.zoom_value->setVisible(false);
 
   if(view)
     {
@@ -237,6 +238,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reload_or_stop(void)));
+  connect(m_ui.zoom_value,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_zoom_reset(void)));
   connect(m_view,
 	  SIGNAL(create_dialog(dooble_web_engine_view *)),
 	  this,
@@ -1050,6 +1055,13 @@ void dooble_page::prepare_tool_buttons(void)
 	("QToolButton {padding-right: 10px;}"
 	 "QToolButton::menu-button {border: none;}");
 #endif
+}
+
+void dooble_page::prepare_zoom_toolbutton(qreal zoom_factor)
+{
+  m_ui.zoom_value->setText
+    (tr("%1%").arg(static_cast<int> (100.0 * zoom_factor)));
+  m_ui.zoom_value->setVisible(zoom_factor < 1 || zoom_factor > 1);
 }
 
 void dooble_page::print_page(QPrinter *printer)
@@ -2250,6 +2262,7 @@ void dooble_page::slot_zoom_in(void)
   auto zoom_factor = qMin(m_view->zoomFactor() + 0.10, 5.0);
 
   m_view->setZoomFactor(zoom_factor);
+  prepare_zoom_toolbutton(zoom_factor);
   emit zoomed(m_view->zoomFactor());
 }
 
@@ -2258,12 +2271,14 @@ void dooble_page::slot_zoom_out(void)
   auto zoom_factor = qMax(m_view->zoomFactor() - 0.10, 0.25);
 
   m_view->setZoomFactor(zoom_factor);
+  prepare_zoom_toolbutton(zoom_factor);
   emit zoomed(m_view->zoomFactor());
 }
 
 void dooble_page::slot_zoom_reset(void)
 {
   m_view->setZoomFactor(1.0);
+  prepare_zoom_toolbutton(1.0);
   emit zoomed(m_view->zoomFactor());
 }
 

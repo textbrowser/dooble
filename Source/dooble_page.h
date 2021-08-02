@@ -122,6 +122,7 @@ class dooble_page: public QWidget
   void prepare_standard_menus(void);
   void prepare_style_sheets(void);
   void prepare_tool_buttons(void);
+  void prepare_zoom_toolbutton(qreal zoom_factor);
   void reset_url(void);
   void show_popup_menu(void);
 
