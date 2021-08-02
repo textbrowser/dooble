@@ -65,6 +65,7 @@ class dooble_address_widget: public QLineEdit
   QToolButton *m_favorite;
   QToolButton *m_information;
   QToolButton *m_pull_down;
+  QToolButton *m_zoom_information;
   dooble_address_widget_completer *m_completer;
   dooble_web_engine_view *m_view;
   void prepare_icons(void);
@@ -83,6 +84,8 @@ class dooble_address_widget: public QLineEdit
   void slot_show_site_information_menu(void);
   void slot_text_edited(const QString &text);
   void slot_url_changed(const QUrl &url);
+  void slot_zoom_reset(void);
+  void slot_zoomed(qreal percent);
 
  signals:
   void favorite_changed(const QUrl &url, bool state);
@@ -92,6 +95,7 @@ class dooble_address_widget: public QLineEdit
   void pull_down_clicked(void);
   void show_certificate_exception(void);
   void show_site_cookies(void);
+  void zoom_reset(void);
 };
 
 #endif

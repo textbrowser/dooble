@@ -161,6 +161,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(show_site_cookies(void)),
 	  this,
 	  SIGNAL(show_site_cookies(void)));
+  connect(m_ui.address,
+	  SIGNAL(zoom_reset(void)),
+	  this,
+	  SLOT(slot_zoom_reset(void)));
   connect(m_ui.backward,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -358,6 +362,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(javascript_allow_popup_exception(const QUrl &)),
 	  dooble::s_settings,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
+  connect(this,
+	  SIGNAL(zoomed(qreal)),
+	  m_ui.address,
+	  SLOT(slot_zoomed(qreal)));
   m_progress_label = new QLabel(m_ui.frame);
   m_progress_label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   m_progress_label->setIndent(5);
