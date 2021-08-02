@@ -54,7 +54,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Zoom In (Control + Shift + +)</string>
+         <string>Zoom In (Control + +)</string>
         </property>
         <property name="text">
          <string>+</string>
