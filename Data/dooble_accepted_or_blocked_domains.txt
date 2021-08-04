@@ -1,3 +1,4 @@
+1-1ads.com
 101com.com
 101order.com
 123freeavatars.com
@@ -125,7 +126,6 @@ ad.eurosport.com
 ad.exyws.org
 ad.flurry.com
 ad.foxnetworks.com
-ad.freecity.de
 ad.grafika.cz
 ad.gt
 ad.hbv.de
@@ -274,6 +274,7 @@ adimg.com.com
 adimg.uimserv.net
 adimg1.chosun.com
 adimgs.sapo.pt
+adingo.jp
 adinjector.net
 adinterax.com
 adisfy.com
@@ -360,6 +361,7 @@ adremedy.com
 adreporting.com
 adrevolver.com
 adriver.ru
+adrolays.de
 adrotate.de
 adrotic.girlonthenet.com
 adrta.com
@@ -490,7 +492,6 @@ ads.formit.cz
 ads.fortunecity.com
 ads.fotosidan.se
 ads.foxnetworks.com
-ads.freecity.de
 ads.friendfinder.com
 ads.gamecity.net
 ads.gamershell.com
@@ -498,7 +499,6 @@ ads.gamespyid.com
 ads.gamigo.de
 ads.gaming-universe.de
 ads.gaming1.com
-ads.gawker.com
 ads.gaypoint.hu
 ads.geekswithblogs.net
 ads.getlucky.com
@@ -799,7 +799,6 @@ adserver.diariodosertao.com.br
 adserver.digitoday.com
 adserver.echdk.pl
 adserver.ekokatu.com
-adserver.freecity.de
 adserver.friendfinder.com
 adserver.generationiron.com
 adserver.gilligan.tech
@@ -908,7 +907,6 @@ adtology.com
 adtoma.com
 adtrace.org
 adtrade.net
-adtrak.net
 adtriplex.com
 adultadvertising.com
 adv-adserver.com
@@ -1015,7 +1013,6 @@ aktrack.pubmatic.com
 alchemist.go2cloud.org
 alclick.com
 alenty.com
-alert.com.mt
 alertafterthought.com
 alexa-sitestats.s3.amazonaws.com
 alexametrics.com
@@ -1041,6 +1038,7 @@ analytics.bitrix.info
 analytics.cloudron.io
 analytics.cohesionapps.com
 analytics.dnsfilter.com
+analytics.emarketer.com
 analytics.ext.go-tellm.com
 analytics.fkz.re
 analytics.google.com
@@ -1077,6 +1075,7 @@ anstrex.com
 anuncios.edicaoms.com.br
 anxiousapples.com
 apathetictheory.com
+api.amplitude.com
 api.intensifier.de
 api.kameleoon.com
 apolloprogram.io
@@ -1459,6 +1458,7 @@ clksite.com
 clktrx.com
 cloisteredhydrant.com
 cloudcoins.biz
+cloudflareinsights.com
 clrstm.com
 cluster.adultworld.com
 clustrmaps.com
@@ -1546,6 +1546,7 @@ crakmedia.com
 craktraffic.com
 crashlytics.com
 crashlyticsreports-pa.googleapis.com
+cratecamera.com
 crawlability.com
 crawlclocks.com
 crazyegg.com
@@ -1630,7 +1631,6 @@ directtrack.com
 discountclick.com
 discreetfield.com
 dispensablestranger.com
-displayadsmedia.com
 disqusads.com
 dist.belnk.com
 distillery.wistia.com
@@ -1701,7 +1701,6 @@ elitedollars.com
 elitetoplist.com
 elthamely.com
 em1.yoursantander.co.uk
-emarketer.com
 emebo.com
 emebo.io
 emerse.com
@@ -1807,6 +1806,7 @@ feedmob.com
 ffxcam.fairfax.com.au
 fimserve.com
 findcommerce.com
+findepended.com
 findyourcasino.com
 fineoffer.net
 fingahvf.top
@@ -2091,7 +2091,6 @@ ipstack.com
 irchan.com
 ireklama.cz
 is-tracking-pixel-api-prod.appspot.com
-itfarm.com
 itop.cz
 its-that-easy.com
 itsptp.com
@@ -2122,6 +2121,7 @@ k.iinfo.cz
 kameleoon.eu
 kanoodle.com
 kargo.com
+karonty.com
 keymedia.hu
 kindads.com
 kissmetrics.com
@@ -2142,8 +2142,6 @@ ktu.sv2.biz
 kubient.com
 l1.britannica.com
 l6b587txj1.com
-ladsreds.com
-ladsup.com
 lakequincy.com
 lameletters.com
 lanistaads.com
@@ -2164,7 +2162,6 @@ leadzupc.com
 leaplunchroom.com
 lemmatechnologies.com
 lettucelimit.com
-levelrate.de
 lever-analytics.com
 lfeeder.com
 lfstmedia.com
@@ -2262,6 +2259,7 @@ marchex.com
 marinsm.com
 markedcrayon.com
 markedpail.com
+market-buster.com
 marketing.888.com
 marketing.hearstmagazines.nl
 marketing.net.brillen.de
@@ -2424,7 +2422,6 @@ naj.sk
 naradxb.com
 nastydollars.com
 nativeroll.tv
-naturalbid.com
 navegg.com
 navigator.io
 navrcholu.cz
@@ -2527,6 +2524,7 @@ openads.friendfinder.com
 openads.org
 openadsnetwork.com
 opentag-stats.qubit.com
+openx.actvtech.com
 openx.angelsgroup.org.uk
 openx.cairo360.com
 openx.kgmedia.eu
@@ -2563,7 +2561,6 @@ p-n.io
 p.nag.ru
 p2r14.com
 padsbrown.com
-padssup.com
 pagead.l.google.com
 pagefair.com
 pagefair.net
@@ -2651,7 +2648,6 @@ popup.msn.com
 popupmoney.com
 popupnation.com
 popuptraffic.com
-porngraph.com
 porntrack.com
 possessivebucket.com
 possibleboats.com
@@ -2670,6 +2666,7 @@ previouspotato.com
 primetime.net
 privatecash.com
 prmtracking.com
+pro-advertising.com
 pro-market.net
 producecopy.com
 producer.getwisdom.io
@@ -2779,6 +2776,7 @@ raresummer.com
 rate.ru
 ratings.lycos.com
 rayjump.com
+re-directme.com
 reachjunction.com
 reactx.com
 readgoldfish.com
@@ -2832,7 +2830,6 @@ retargeter.com
 revcatch.com
 revcontent.com
 reveal.clearbit.com
-revenue.net
 revenuedirect.com
 revenuehits.com
 revive.docmatic.org
@@ -3011,7 +3008,6 @@ smetrics.washingtonpost.com
 smilingwaves.com
 smrtb.com
 snapads.com
-sneakystamp.com
 snoobi.com
 socialspark.com
 softclick.com.br
@@ -3028,6 +3024,7 @@ sovrn.com
 spacash.com
 spaceleadster.com
 spannersalesman.com
+sparklingshelf.com
 sparkstudios.com
 specially4u.net
 specificmedia.co.uk
@@ -3152,6 +3149,7 @@ swan-swan-goose.com
 swimslope.com
 swordfishdc.com
 swordgoose.com
+t.appsflyer.com
 t.bawafx.com
 t.eloqua.com
 t.en25.com
@@ -3234,6 +3232,7 @@ tia.timeinc.net
 ticketaunt.com
 ticklesign.com
 ticksel.com
+tics.techdirt.com
 tidaltv.com
 tidint.pro
 tinybar.com
@@ -3282,13 +3281,11 @@ track.flexlinks.com
 track.flexlinkspro.com
 track.freemmo2017.com
 track.game18click.com
-track.gawker.com
 track.hexcan.com
 track.mailerlite.com
 track.themaccleanup.info
 track.tkbo.com
 track.ultravpn.com
-track.undressingpics.work
 track.unear.net
 track.vcdc.com
 track.viewdeos.com
@@ -3318,7 +3315,6 @@ tracking.ibxlink.com
 tracking.internetstores.de
 tracking.intl.miui.com
 tracking.jiffyworld.com
-tracking.lenddom.com
 tracking.markethero.io
 tracking.miui.com
 tracking.olx-st.com
@@ -3370,7 +3366,6 @@ tribalfusion.com
 trickycelery.com
 triplelift.com
 triptease.io
-trix.net
 trk.bc.shutterfly.com
 trk.bee-data.com
 trk.enemy-adult-scared-there.xyz
@@ -3445,6 +3440,7 @@ velismedia.com
 venetrigni.com
 ventivmedia.com
 venturead.com
+verblife-3.co
 verblife-4.co
 verblife-5.co
 vericlick.com
@@ -3471,6 +3467,7 @@ visual-pagerank.fr
 visualrevenue.com
 vivads.net
 vivtracking.com
+vmmpxl.com
 voicefive.com
 voicevegetable.com
 voluum.com
@@ -3596,6 +3593,7 @@ yieldlab.net
 yieldmanager.com
 yieldmanager.net
 yieldmo.com
+yieldoptimizer.com
 yieldtraffic.com
 yldbt.com
 ymetrica1.com
@@ -3623,5 +3621,4 @@ zmedia.com
 zpu.samsungelectronics.com
 zqtk.net
 zukxd6fkxqn.com
-zy16eoat1w.com
 zzhc.vnet.cn
