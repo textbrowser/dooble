@@ -178,7 +178,7 @@ dictoolbuild.output = $${DICTIONARIES_DIR}/${QMAKE_FILE_BASE}.bdic
 build_deb.bash =
 
 linux {
-exists(/usr/bin/apt) {
+exists(/usr/bin/dpkg-deb) {
 build-deb.commands = Distributions/build_deb.bash
 }
 }
