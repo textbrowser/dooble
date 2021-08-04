@@ -1,11 +1,6 @@
-This is a guide for preparing ./opt/dooble in order to generate a
-Debian package.
+#!/usr/bin/bash
 
-Please do not use README.DEBIAN for other operating systems.
-
-Preparing ./opt/dooble:
-
-cd ~/dooble.d/2.x
+cd ~/Development/dooble.d/
 mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
 mkdir -p ./opt/dooble/Lib
@@ -38,7 +33,7 @@ cp -pr ~/Qt/5.15.2/gcc_64/translations ./opt/dooble/.
 chmod -x,g+w ./opt/dooble/Lib/*
 ~/Qt/5.15.2/gcc_64/bin/lupdate dooble.pro
 ~/Qt/5.15.2/gcc_64/bin/lrelease dooble.pro
-~/Qt/5.15.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j 4
+~/Qt/5.15.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j 10
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
 cp -p ./Documentation/TO-DO ./opt/dooble/Documentation/.

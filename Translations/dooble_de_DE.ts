@@ -502,6 +502,18 @@
         <source>&amp;Clear Browsing History</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dooble: History Popup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Floating History Popup...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -1417,6 +1429,22 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Tick Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished">Drucke</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Speichern</translation>
+    </message>
+    <message>
+        <source>Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Preview...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2650,11 +2678,11 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Downloads (Ctrl + D)</source>
-        <translation>Downloads (Strg + D)</translation>
+        <translation type="vanished">Downloads (Strg + D)</translation>
     </message>
     <message>
         <source>Favorites (Ctrl + B)</source>
-        <translation>Favoriten (Strg + B)</translation>
+        <translation type="vanished">Favoriten (Strg + B)</translation>
     </message>
     <message>
         <source>A dialog from &lt;b&gt;%1&lt;/b&gt; has been blocked.</source>
@@ -2706,7 +2734,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Ctrl++</source>
-        <translation>Strg++</translation>
+        <translation type="vanished">Strg++</translation>
     </message>
     <message>
         <source>Ctrl+-</source>
@@ -2779,6 +2807,34 @@ Dooble ist open source Software.
     <message>
         <source>&amp;Search Engines...</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Reset (Control + 0)</source>
+        <translation type="unfinished">Zoom zurücksetzen (Strg + 0)</translation>
+    </message>
+    <message>
+        <source>500%</source>
+        <translation type="unfinished">100% {500%?}</translation>
+    </message>
+    <message>
+        <source>Downloads (Control + D)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites (Control + B)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Floating History Popup...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1%</source>
+        <translation type="unfinished">%1%</translation>
     </message>
 </context>
 <context>
@@ -2886,7 +2942,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Zoom In (Control + Shift + +)</source>
-        <translation>Zoome herein (Strg + Umschalttaste + +)</translation>
+        <translation type="vanished">Zoome herein (Strg + Umschalttaste + +)</translation>
     </message>
     <message>
         <source>Zoom Reset (Control + 0)</source>
@@ -2895,6 +2951,10 @@ Domänen</translation>
     <message>
         <source>Zoom Out (Control + -)</source>
         <translation>Zoome heraus (Strg + -)</translation>
+    </message>
+    <message>
+        <source>Zoom In (Control + +)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

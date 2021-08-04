@@ -175,6 +175,14 @@ dictoolbuild.input = dict.files
 dictoolbuild.name = ${QMAKE_FILE_IN_BASE} Build
 dictoolbuild.output = $${DICTIONARIES_DIR}/${QMAKE_FILE_BASE}.bdic
 
+build_deb.bash =
+
+linux {
+exists(/usr/bin/apt) {
+build-deb.commands = Distributions/build_deb.bash
+}
+}
+
 unix {
 purge.commands = rm -f Documentation/*~ Source/*~ *~
 } else {
@@ -301,7 +309,7 @@ QMAKE_DISTCLEAN += -r qtwebengine_dictionaries \
                    .qmake.stash \
                    temp
 QMAKE_EXTRA_COMPILERS += dictoolbuild
-QMAKE_EXTRA_TARGETS = dmg doxygen purge
+QMAKE_EXTRA_TARGETS = build-deb dmg doxygen purge
 
 macx {
 ICON            = Icons/Logo/dooble.icns
