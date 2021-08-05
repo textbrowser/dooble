@@ -901,6 +901,11 @@ QString dooble_charts::type_from_database(const QString &name)
   return type;
 }
 
+QWidget *dooble_charts::frame(void) const
+{
+  return m_ui.splitter;
+}
+
 QWidget *dooble_charts::view(void) const
 {
 #ifdef DOOBLE_QTCHARTS_PRESENT

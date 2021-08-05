@@ -2598,7 +2598,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	      m_ui.tab->setTabToolTip(i, tr("XY Series Chart"));
 	    }
 
-	  chart->setVisible(!locked);
+	  chart->frame()->setVisible(!locked);
 	  continue;
 	}
 
