@@ -170,6 +170,7 @@ Remaining Items
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
+- Close chart windows on lock. Confirm first.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
