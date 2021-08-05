@@ -2582,6 +2582,26 @@ void dooble::slot_application_locked(bool state, dooble *d)
 
   for(int i = m_ui.tab->count() - 1; i >= 0; i--)
     {
+      dooble_charts *chart = qobject_cast<dooble_charts *>
+	(m_ui.tab->widget(i));
+
+      if(chart)
+	{
+	  if(locked)
+	    {
+	      m_ui.tab->setTabText(i, tr("Application Locked"));
+	      m_ui.tab->setTabToolTip(i, tr("Application Locked"));
+	    }
+	  else
+	    {
+	      m_ui.tab->setTabText(i, tr("XY Series Chart"));
+	      m_ui.tab->setTabToolTip(i, tr("XY Series Chart"));
+	    }
+
+	  chart->setVisible(!locked);
+	  continue;
+	}
+
       dooble_page *page = nullptr;
 
       if((page = qobject_cast<dooble_page *> (m_ui.tab->widget(i))))
