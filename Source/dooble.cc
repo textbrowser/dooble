@@ -3827,6 +3827,11 @@ void dooble::slot_tab_close_requested(int index)
       return;
     }
 
+  auto chart = qobject_cast<dooble_charts *> (m_ui.tab->widget(index));
+
+  if(chart)
+    chart->deleteLater();
+
   auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(page)
