@@ -2874,6 +2874,7 @@ void dooble::slot_decouple_tab(int index)
       m_ui.tab->removeTab(index);
       m_ui.tab->setTabsClosable(tabs_closable());
       main_window->enable_control_w_shortcut(true);
+      main_window->setAttribute(Qt::WA_DeleteOnClose);
       main_window->setCentralWidget(charts);
       main_window->setWindowTitle(tr("Dooble: Charts"));
       main_window->resize(s_vga_size);
