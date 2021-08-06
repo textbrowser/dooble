@@ -125,6 +125,12 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.progress->setVisible(false);
     }
 
+  m_progress_bar_animation.setDuration(1000);
+  m_progress_bar_animation.setEasingCurve(QEasingCurve::OutCubic);
+  m_progress_bar_animation.setLoopCount(1);
+  m_progress_bar_animation.setPropertyName("value");
+  m_progress_bar_animation.setStartValue(0);
+  m_progress_bar_animation.setTargetObject(m_ui.progress);
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
   m_ui.pause_resume->setVisible(false);
 #endif
@@ -186,6 +192,12 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  m_progress_bar_animation.setDuration(1000);
+  m_progress_bar_animation.setEasingCurve(QEasingCurve::OutCubic);
+  m_progress_bar_animation.setLoopCount(1);
+  m_progress_bar_animation.setPropertyName("value");
+  m_progress_bar_animation.setStartValue(0);
+  m_progress_bar_animation.setTargetObject(m_ui.progress);
 }
 
 dooble_downloads_item::~dooble_downloads_item()
@@ -440,9 +452,13 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 	   arg(dooble_ui_utilities::pretty_size(m_rate)));
 
       m_ui.progress->setMaximum(100);
-      m_ui.progress->setValue
+      m_progress_bar_animation.setEndValue
 	(static_cast<int> (100 * (static_cast<double> (bytes_received) /
 				  static_cast<double> (bytes_total))));
+      m_progress_bar_animation.setStartValue(m_ui.progress->value());
+
+      if(m_progress_bar_animation.state() == QAbstractAnimation::Stopped)
+	m_progress_bar_animation.start();
     }
   else
     {

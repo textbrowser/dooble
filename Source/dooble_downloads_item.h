@@ -28,9 +28,10 @@
 #ifndef dooble_downloads_item_h
 #define dooble_downloads_item_h
 
+#include <QPointer>
+#include <QPropertyAnimation>
 #include <QTime>
 #include <QTimer>
-#include <QPointer>
 #include <QUrl>
 #include <QWidget>
 
@@ -65,6 +66,7 @@ class dooble_downloads_item: public QWidget
  private:
   QPointer<QWebEngineDownloadItem> m_download;
   QPointer<QWebEngineProfile> m_profile;
+  QPropertyAnimation m_progress_bar_animation;
   QString m_download_path;
   QString m_file_name;
   QTime m_last_time;
