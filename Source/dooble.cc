@@ -2650,6 +2650,20 @@ void dooble::slot_application_locked(bool state, dooble *d)
       m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false);
       m_ui.tab->setTabsClosable(false);
       setWindowTitle(tr("Dooble: Application Locked"));
+
+      foreach(auto widget, QApplication::topLevelWidgets())
+	{
+	  auto window = qobject_cast<dooble_main_window *> (widget);
+
+	  if(!window)
+	    continue;
+
+	  if(qobject_cast<dooble_charts *> (window->centralWidget()))
+	    {
+	      window->setAttribute(Qt::WA_DeleteOnClose, false);
+	      window->close();
+	    }
+	}
     }
   else
     {
@@ -2658,6 +2672,20 @@ void dooble::slot_application_locked(bool state, dooble *d)
       m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true);
       m_ui.tab->setTabsClosable(tabs_closable());
       slot_tab_index_changed(m_ui.tab->currentIndex());
+
+      foreach(auto widget, QApplication::topLevelWidgets())
+	{
+	  auto window = qobject_cast<dooble_main_window *> (widget);
+
+	  if(!window)
+	    continue;
+
+	  if(qobject_cast<dooble_charts *> (window->centralWidget()))
+	    {
+	      window->setAttribute(Qt::WA_DeleteOnClose, true);
+	      window->show();
+	    }
+	}
     }
 
   QApplication::restoreOverrideCursor();

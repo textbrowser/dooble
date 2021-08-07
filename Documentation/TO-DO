@@ -17,6 +17,8 @@ Completed Items
 - Bookmarks; favorites.
 - Certificate exceptions panel.
 - Clearing of Visited Links beyond Clear Items. New Edit menu item.
+- Close chart windows on lock. Confirmation not necessary. Windows will
+  not be destroyed.
 - Close non-browser windows via the Esc key.
 - Common methods for creating database tables.
 - Complete default WebEngine context menu.
@@ -170,7 +172,6 @@ Remaining Items
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
-- Close chart windows on lock. Confirm first.
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
