@@ -298,6 +298,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["pin_settings_window"] = true;
   s_settings["save_geometry"] = true;
   s_settings["status_bar_visible"] = true;
+  s_settings["tab_position"] = "north";
   s_settings["theme_color"] = "default";
   s_settings["theme_color_index"] = 2; // Default
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
@@ -1173,6 +1174,11 @@ void dooble_settings::restore(bool read_database)
   m_ui.show_hovered_links_tool_tips->setChecked
     (s_settings.value("show_hovered_links_tool_tips", false).toBool());
 
+  if(s_settings.value("tab_position") == "north")
+    m_ui.tab_position->setCurrentIndex(0);
+  else
+    m_ui.tab_position->setCurrentIndex(1);
+
   if(dooble::s_application->style_name() == "fusion")
     m_ui.theme_color->setCurrentIndex
       (qBound(0,
@@ -2009,6 +2015,12 @@ void dooble_settings::slot_apply(void)
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("show_hovered_links_tool_tips",
 	      m_ui.show_hovered_links_tool_tips->isChecked());
+
+  if(m_ui.tab_position->currentIndex() == 0)
+    set_setting("tab_position", "north");
+  else
+    set_setting("tab_position", "south");
+
   set_setting("theme_color_index", m_ui.theme_color->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());

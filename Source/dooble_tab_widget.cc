@@ -140,6 +140,11 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	}
     }
 
+  if(dooble_settings::setting("tab_position").toString().trimmed() == "north")
+    setTabPosition(QTabWidget::North);
+  else
+    setTabPosition(QTabWidget::South);
+
   m_tab_bar = new dooble_tab_bar(this);
   m_tab_bar->set_corner_widget(m_right_corner_widget);
   connect(dooble::s_settings,

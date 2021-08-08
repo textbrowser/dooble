@@ -3429,6 +3429,11 @@ void dooble::slot_settings_applied(void)
       s_settings->setParent(nullptr);
     }
 
+  if(dooble_settings::setting("tab_position").toString().trimmed() == "north")
+    m_ui.tab->setTabPosition(QTabWidget::North);
+  else
+    m_ui.tab->setTabPosition(QTabWidget::South);
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.tab->setTabsClosable(tabs_closable());
   prepare_control_w_shortcut();
