@@ -1461,10 +1461,8 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   for(int i = 0; i < sizes.size(); i++)
     m_web_engine_profile->settings()->setFontSize(types.at(i), sizes.at(i));
 
-  m_web_engine_profile->setHttpCacheMaximumSize
-    (QWebEngineProfile::defaultProfile()->httpCacheMaximumSize());
-  m_web_engine_profile->setHttpCacheType
-    (QWebEngineProfile::defaultProfile()->httpCacheType());
+  m_web_engine_profile->setHttpCacheMaximumSize(0);
+  m_web_engine_profile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
   m_web_engine_profile->setHttpUserAgent
     (QWebEngineProfile::defaultProfile()->httpUserAgent() +
      " Dooble/" DOOBLE_VERSION_STRING);
@@ -1505,7 +1503,7 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
   m_web_engine_profile->settings()->setAttribute
-    (QWebEngineSettings::LocalStorageEnabled, false);
+    (QWebEngineSettings::LocalStorageEnabled, true);
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::PluginsEnabled,
      QWebEngineSettings::defaultSettings()->
