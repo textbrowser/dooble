@@ -687,9 +687,12 @@ void dooble_page::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
 				   this,
 				   SLOT(slot_reload(void)));
-      m_shortcuts << new QShortcut(QKeySequence(tr("Esc")),
+      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_Escape),
 				   this,
 				   SLOT(slot_escape(void)));
+      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F5),
+				   this,
+				   SLOT(slot_reload(void)));
     }
 }
 
