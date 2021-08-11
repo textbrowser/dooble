@@ -243,7 +243,7 @@
             <item>
              <widget class="QSpinBox" name="cache_size">
               <property name="toolTip">
-               <string>A value of zero will allow QWebEngine to control the size of the cache automatically.</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A value of zero will allow QWebEngine to control the size of the cache automatically. Private windows assume unlimited caches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="suffix">
                <string> MiB</string>
@@ -289,6 +289,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="cache_type">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Private windows store information in memory caches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
               </property>
@@ -355,8 +358,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>637</width>
-               <height>561</height>
+               <width>389</width>
+               <height>570</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
