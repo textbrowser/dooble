@@ -168,6 +168,7 @@ Completed Items
 Remaining Items
 
 - Allow custom JavaScript per URL.
+- Allow opening of multiple favorites via Enter.
 - Argon2, per request.
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
