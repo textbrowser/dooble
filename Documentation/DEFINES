@@ -1,3 +1,8 @@
+DOOBLE_CONFIGURE_SETTINGS_THEME_COLOR
+
+If defined, Dooble will disable or enable the Theme Color widget
+depending upon the application's style.
+
 DOOBLE_COOKIES_REPLACE_HYPHEN_WITH_UNDERSCORE
 
 Replace hyphens with underscores in cookie names.

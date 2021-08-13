@@ -234,6 +234,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	m_ui.language_directory->setVisible(false);
     }
 
+#ifdef DOOBLE_CONFIGURE_SETTINGS_THEME_COLOR
   if(dooble::s_application->style_name() == "fusion")
     {
     }
@@ -256,6 +257,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
       m_ui.theme_color->setEnabled(false);
       m_ui.theme_color->setToolTip(tr("Disabled for non-Fusion themes."));
     }
+#endif
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
   m_ui.webrtc_public_interfaces_only->setEnabled(false);
