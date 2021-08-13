@@ -50,7 +50,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "padding-bottom: 0px;"
      "padding-top: 0px;"
      "}");
-  m_favorite->setToolTip(tr("Favorite"));
+  m_favorite->setToolTip(tr("Empty or invalid URL."));
   m_completer = new dooble_address_widget_completer(this);
   m_information = new QToolButton(this);
   m_information->setCursor(Qt::ArrowCursor);
@@ -258,6 +258,7 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 	(QIcon::fromTheme(use_material_icons + "emblem-default",
 			  QIcon(QString(":/%1/18/bookmark.png").
 				arg(icon_set))));
+      m_favorite->setToolTip(tr("Empty or invalid URL."));
       m_information->setEnabled(false);
       m_information->setIcon
 	(QIcon::fromTheme(use_material_icons + "help-about",
@@ -269,15 +270,21 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
       m_favorite->setEnabled(true);
 
       if(dooble::s_history->is_favorite(url))
-	m_favorite->setIcon
-	  (QIcon::fromTheme(use_material_icons + "emblem-favorite",
-			    QIcon(QString(":/%1/18/bookmarked.png").
-				  arg(icon_set))));
+	{
+	  m_favorite->setIcon
+	    (QIcon::fromTheme(use_material_icons + "emblem-favorite",
+			      QIcon(QString(":/%1/18/bookmarked.png").
+				    arg(icon_set))));
+	  m_favorite->setToolTip(tr("Remove this page from Favorites."));
+	}
       else
-	m_favorite->setIcon
-	  (QIcon::fromTheme(use_material_icons + "emblem-default",
-			    QIcon(QString(":/%1/18/bookmark.png").
-				  arg(icon_set))));
+	{
+	  m_favorite->setIcon
+	    (QIcon::fromTheme(use_material_icons + "emblem-default",
+			      QIcon(QString(":/%1/18/bookmark.png").
+				    arg(icon_set))));
+	  m_favorite->setToolTip(tr("Add this page to Favorites."));
+	}
 
       m_information->setEnabled(true);
       m_information->setIcon
@@ -421,15 +428,21 @@ void dooble_address_widget::slot_favorite_changed(const QUrl &url, bool state)
       auto use_material_icons(dooble_settings::use_material_icons());
 
       if(state)
-	m_favorite->setIcon
-	  (QIcon::fromTheme(use_material_icons + "emblem-favorite",
-			    QIcon(QString(":/%1/18/bookmarked.png").
-				  arg(icon_set))));
+	{
+	  m_favorite->setIcon
+	    (QIcon::fromTheme(use_material_icons + "emblem-favorite",
+			      QIcon(QString(":/%1/18/bookmarked.png").
+				    arg(icon_set))));
+	  m_favorite->setToolTip(tr("Remove this page from Favorites."));
+	}
       else
-	m_favorite->setIcon
-	  (QIcon::fromTheme(use_material_icons + "emblem-default",
-			    QIcon(QString(":/%1/18/bookmark.png").
-				  arg(icon_set))));
+	{
+	  m_favorite->setIcon
+	    (QIcon::fromTheme(use_material_icons + "emblem-default",
+			      QIcon(QString(":/%1/18/bookmark.png").
+				    arg(icon_set))));
+	  m_favorite->setToolTip(tr("Add this page to Favorites."));
+	}
     }
 }
 
@@ -541,14 +554,21 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
   auto use_material_icons(dooble_settings::use_material_icons());
 
   if(dooble::s_history->is_favorite(m_view->url()))
-    m_favorite->setIcon
-      (QIcon::fromTheme(use_material_icons + "emblem-favorite",
-			QIcon(QString(":/%1/18/bookmarked.png").
-			      arg(icon_set))));
+    {
+      m_favorite->setIcon
+	(QIcon::fromTheme(use_material_icons + "emblem-favorite",
+			  QIcon(QString(":/%1/18/bookmarked.png").
+				arg(icon_set))));
+      m_favorite->setToolTip(tr("Remove this page from Favorites."));
+    }
   else
-    m_favorite->setIcon
-      (QIcon::fromTheme(use_material_icons + "emblem-default",
-			QIcon(QString(":/%1/18/bookmark.png").arg(icon_set))));
+    {
+      m_favorite->setIcon
+	(QIcon::fromTheme(use_material_icons + "emblem-default",
+			  QIcon(QString(":/%1/18/bookmark.png").
+				arg(icon_set))));
+      m_favorite->setToolTip(tr("Add this page to Favorites."));
+    }
 
   prepare_containers_for_url(m_view->url());
 }
