@@ -755,6 +755,11 @@ void dooble::connect_signals(void)
 	  Qt::UniqueConnection);
   connect(this,
 	  SIGNAL(history_cleared(void)),
+	  s_application,
+	  SIGNAL(history_cleared(void)),
+	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(history_cleared(void)),
 	  s_history_popup,
 	  SLOT(slot_history_cleared(void)),
 	  Qt::UniqueConnection);
@@ -2842,6 +2847,11 @@ void dooble::slot_clear_downloads(void)
 
 void dooble::slot_clear_history(void)
 {
+  QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+
+  if(m_web_engine_profile)
+    m_web_engine_profile->clearAllVisitedLinks();
+
   s_history->purge_history();
   emit history_cleared();
 }
