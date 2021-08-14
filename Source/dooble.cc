@@ -2330,7 +2330,7 @@ void dooble::slot_about_to_show_history_menu(void)
   m_ui.menu_history->addAction
     (tr("&Clear Browsing History"),
      this,
-     SLOT(slot_clear_history(void)))->setEnabled(!list.isEmpty());
+     SLOT(slot_clear_history(void)));
   m_ui.menu_history->addAction
     (QIcon::fromTheme(use_material_icons + "deep-history",
 		      QIcon(QString(":/%1/36/history.png").arg(icon_set))),
@@ -2859,6 +2859,9 @@ void dooble::slot_clear_history(void)
 void dooble::slot_clear_visited_links(void)
 {
   QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+
+  if(m_web_engine_profile)
+    m_web_engine_profile->clearAllVisitedLinks();
 }
 
 void dooble::slot_close_tab(void)
