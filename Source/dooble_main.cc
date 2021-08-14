@@ -237,19 +237,37 @@ int main(int argc, char *argv[])
 
   if(username.isEmpty())
     dooble_settings::set_setting
-      ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+      ("home_path",
+       home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
   else
-    dooble_settings::set_setting("home_path",
-				 home_dir.absolutePath() +
-				 QDir::separator() +
-				 username + QDir::separator() +
-				 ".dooble_v2");
+    dooble_settings::set_setting
+      ("home_path",
+       home_dir.absolutePath() +
+       QDir::separator() +
+       username +
+       QDir::separator() +
+       ".dooble_v2");
 #else
-  auto home_dir(QDir::home());
+  auto xdg_data_home(qgetenv("XDG_DATA_HOME").trimmed());
 
-  home_dir.mkdir(".dooble_v2");
-  dooble_settings::set_setting
-    ("home_path", home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+  if(xdg_data_home.isEmpty())
+    {
+      auto home_dir(QDir::home());
+
+      home_dir.mkdir(".dooble_v2");
+      dooble_settings::set_setting
+	("home_path",
+	 home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+    }
+  else
+    {
+      QDir home_dir(xdg_data_home);
+
+      home_dir.mkdir("dooble");
+      dooble_settings::set_setting
+	("home_path",
+	 home_dir.absolutePath() + QDir::separator() + "dooble");
+    }
 #endif
 
   /*
