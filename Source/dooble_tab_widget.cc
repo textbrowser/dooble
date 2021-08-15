@@ -260,6 +260,11 @@ dooble_page *dooble_tab_widget::page(int index) const
   return qobject_cast<dooble_page *> (widget(index));
 }
 
+dooble_tab_bar *dooble_tab_widget::tab_bar(void) const
+{
+  return m_tab_bar;
+}
+
 void dooble_tab_widget::prepare_icons(void)
 {
   auto icon_set(dooble_settings::setting("icon_set").toString());

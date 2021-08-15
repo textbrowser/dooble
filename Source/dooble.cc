@@ -57,6 +57,7 @@
 #include "dooble_random.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
+#include "dooble_tab_bar.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_version.h"
 #include "dooble_web_engine_url_request_interceptor.h"
@@ -3710,9 +3711,15 @@ void dooble::slot_show_floating_history_popup(void)
 void dooble::slot_show_full_screen(void)
 {
   if(!isFullScreen())
-    showFullScreen();
+    {
+      m_ui.tab->tab_bar()->setVisible(false);
+      showFullScreen();
+    }
   else
-    showNormal();
+    {
+      m_ui.tab->tab_bar()->setVisible(true);
+      showNormal();
+    }
 }
 
 void dooble::slot_show_history(void)
