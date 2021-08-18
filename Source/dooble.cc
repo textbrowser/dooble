@@ -168,6 +168,10 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 	      SIGNAL(cookie_removed(const QNetworkCookie &)),
 	      m_cookies_window,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
+      connect(m_downloads,
+	      SIGNAL(started(void)),
+	      this,
+	      SLOT(slot_downloads_started(void)));
       connect(m_web_engine_profile->cookieStore(),
 	      SIGNAL(cookieAdded(const QNetworkCookie &)),
 	      m_cookies,
@@ -863,6 +867,10 @@ void dooble::initialize_static_members(void)
 	      SIGNAL(populated(void)),
 	      this,
 	      SLOT(slot_populated(void)));
+      connect(s_downloads,
+	      SIGNAL(started(void)),
+	      this,
+	      SLOT(slot_downloads_started(void)));
     }
 
   if(!s_favorites_window)
@@ -2976,6 +2984,12 @@ void dooble::slot_dooble_credentials_authenticated(bool state)
 	m_authentication_action->setEnabled
 	  (dooble_settings::has_dooble_credentials());
     }
+}
+
+void dooble::slot_downloads_started(void)
+{
+  if(dooble_settings::setting("show_new_downloads").toBool())
+    slot_show_downloads();
 }
 
 #ifdef Q_OS_MAC

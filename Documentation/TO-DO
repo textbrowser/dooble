@@ -41,6 +41,7 @@ Completed Items
 - Determine if the system translation file is adequate.
 - Dictionary option in the Settings window's Web panel.
 - Disable the Theme setting on OS X.
+- Display Downloads panel on new download. Optional.
 - Display cookies in a tree-like structure.
 - Display download rates.
 - Display expected location of Translations in Settings.
@@ -176,7 +177,6 @@ Remaining Items
 - DTLS and Echo-DNS.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
-- Display Downloads panel on new download. Optional.
 - Element-selection option.
 - Fancy completer.
 - Include date stamps in cookie containers.
