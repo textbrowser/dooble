@@ -47,7 +47,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>549</height>
+           <height>546</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -358,8 +358,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>389</width>
-               <height>570</height>
+               <width>642</width>
+               <height>614</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -601,6 +601,16 @@
                   </widget>
                  </item>
                 </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="show_new_downloads">
+                <property name="text">
+                 <string>Show New Downloads</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -893,8 +903,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>674</width>
-               <height>778</height>
+               <width>617</width>
+               <height>820</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1464,8 +1474,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>386</width>
-               <height>1471</height>
+               <width>344</width>
+               <height>1560</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2173,6 +2183,7 @@
   <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
+  <tabstop>show_new_downloads</tabstop>
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>tab_position</tabstop>

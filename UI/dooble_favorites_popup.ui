@@ -19,6 +19,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="authenticate_label">
+     <property name="text">
+      <string>Missing favorites? Authenticating may help!</string>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QComboBox" name="sort_order">
@@ -89,11 +99,11 @@
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
-     <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>200</number>
-     </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>150</number>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>200</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
@@ -113,7 +123,7 @@
        <property name="placeholderText">
         <string>Search Favorites</string>
        </property>
-       <property name="clearButtonEnabled" stdset="0">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
       </widget>
