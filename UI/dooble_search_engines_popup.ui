@@ -134,7 +134,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Personal Search Engines</string>
+          <string>Saved Search Engines</string>
          </property>
         </widget>
        </item>
