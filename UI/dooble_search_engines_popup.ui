@@ -134,7 +134,10 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Saved Search Engines</string>
+          <string>The search engines listed below may be accessed via context menus on pages.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
