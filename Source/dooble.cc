@@ -4171,7 +4171,7 @@ void dooble::slot_vacuum_databases(void)
 
       dialog.repaint();
       QApplication::processEvents();
-      QThread::msleep(250);
+      QThread::msleep(100);
 
       auto database_name(dooble_database_utilities::database_name());
 

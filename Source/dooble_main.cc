@@ -437,8 +437,12 @@ int main(int argc, char *argv[])
   while(!d->initialized())
     splash.repaint();
 
-  splash.finish(nullptr);
-  QTimer::singleShot(1500, d, SLOT(show(void)));
+  splash.showMessage(QObject::tr("Opening Dooble."),
+		     Qt::AlignHCenter | Qt::AlignBottom);
+  splash.repaint();
+  dooble::s_application->processEvents();
+  splash.finish(d);
+  QTimer::singleShot(0, d, SLOT(show(void)));
 
   auto rc = dooble::s_application->exec();
 
