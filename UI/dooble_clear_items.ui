@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>355</height>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,6 +41,13 @@
        <widget class="QCheckBox" name="certificate_exceptions">
         <property name="text">
          <string>&amp;Certificate Exceptions</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="charts">
+        <property name="text">
+         <string>Charts</string>
         </property>
        </widget>
       </item>
@@ -124,6 +131,7 @@
  <tabstops>
   <tabstop>accepted_blocked_domains</tabstop>
   <tabstop>certificate_exceptions</tabstop>
+  <tabstop>charts</tabstop>
   <tabstop>cookies</tabstop>
   <tabstop>download_history</tabstop>
   <tabstop>favicons</tabstop>

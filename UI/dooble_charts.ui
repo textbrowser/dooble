@@ -63,9 +63,6 @@
              <height>0</height>
             </size>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QToolButton::checked {background-color: #d32f2f; color: white;}</string>
-           </property>
            <property name="text">
             <string>Pause</string>
            </property>
@@ -84,9 +81,6 @@
              <width>80</width>
              <height>0</height>
             </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QToolButton:checked {background-color: #1b5e20; color: white}</string>
            </property>
            <property name="text">
             <string>Play</string>
@@ -138,9 +132,6 @@
            </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop acquiring data from the data source. For files, also set the current position to 0.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QToolButton:checked {background-color: #ff6d00;}</string>
            </property>
            <property name="text">
             <string>Stop</string>

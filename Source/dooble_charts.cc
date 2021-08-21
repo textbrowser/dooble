@@ -879,6 +879,8 @@ QString dooble_charts::property_to_name
 
 QString dooble_charts::type_from_database(const QString &name)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   QString type("");
   auto database_name(dooble_database_utilities::database_name());
 
@@ -1420,6 +1422,33 @@ void dooble_charts::open(const QString &name)
 
 	m_property_editor->set_property
 	  (dooble_charts::Properties::CHART_THEME, theme);
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_charts::purge(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_charts.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("DELETE FROM dooble_charts");
       }
 
     db.close();

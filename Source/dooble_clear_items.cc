@@ -33,6 +33,7 @@
 #include "dooble_application.h"
 #include "dooble_certificate_exceptions.h"
 #include "dooble_certificate_exceptions_menu_widget.h"
+#include "dooble_charts.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies.h"
 #include "dooble_downloads.h"
@@ -127,6 +128,9 @@ void dooble_clear_items::slot_clear_items(void)
       dooble::s_certificate_exceptions->purge();
       dooble_certificate_exceptions_menu_widget::purge();
     }
+
+  if(m_ui.charts->isChecked())
+    dooble_charts::purge();
 
   if(m_ui.cookies->isChecked())
     {
