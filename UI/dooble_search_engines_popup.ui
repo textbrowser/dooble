@@ -278,7 +278,7 @@
      <item>
       <widget class="QToolButton" name="delete_selected">
        <property name="toolTip">
-        <string>Delete Selected Search Engine</string>
+        <string>Delete Selected Search Engine(s)</string>
        </property>
        <property name="text">
         <string/>

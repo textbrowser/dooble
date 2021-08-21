@@ -19,16 +19,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="authenticate_label">
-     <property name="text">
-      <string>Missing favorites? Authenticating may help!</string>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QComboBox" name="sort_order">
@@ -151,7 +141,7 @@
      <item>
       <widget class="QToolButton" name="delete_selected">
        <property name="toolTip">
-        <string>Delete Selected Favorite</string>
+        <string>Delete Selected Favorite(s)</string>
        </property>
        <property name="text">
         <string/>
