@@ -172,6 +172,39 @@ void dooble_history_window::closeEvent(QCloseEvent *event)
   dooble_main_window::closeEvent(event);
 }
 
+void dooble_history_window::discover_m_parent(void)
+{
+  if(!m_parent)
+    {
+      /*
+      ** Locate a Dooble window.
+      */
+
+      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+      QWidgetList list(QApplication::topLevelWidgets());
+
+      for(auto i : list)
+	if(qobject_cast<dooble *> (i))
+	  {
+	    m_parent = i;
+	    connect(m_parent,
+		    SIGNAL(destroyed(void)),
+		    this,
+		    SLOT(slot_parent_destroyed(void)),
+		    Qt::UniqueConnection);
+	    connect(this,
+		    SIGNAL(open_link(const QUrl &)),
+		    m_parent,
+		    SLOT(slot_open_link(const QUrl &)),
+		    Qt::UniqueConnection);
+	    break;
+	  }
+
+      QApplication::restoreOverrideCursor();
+    }
+}
+
 void dooble_history_window::keyPressEvent(QKeyEvent *event)
 {
   if(!parent())
@@ -500,9 +533,37 @@ void dooble_history_window::slot_delete_rows
 
 void dooble_history_window::slot_enter_pressed(void)
 {
-  slot_item_double_clicked
-    (m_ui.table->item(m_ui.table->currentRow(), TableColumns::FAVORITE));
+  QModelIndexList list
+    (m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
+
+  if(list.isEmpty())
+    return;
+  else if(list.size() >= 5)
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Open %1 pages?").arg(list.size()));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::ApplicationModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+    }
+
+  discover_m_parent();
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < list.size(); i++)
+    emit open_link(list.at(i).data(Qt::UserRole).toUrl());
+
   m_ui.table->setFocus();
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
@@ -650,36 +711,7 @@ void dooble_history_window::slot_item_double_clicked(QTableWidgetItem *item)
   if(!item)
     return;
 
-  if(!m_parent)
-    {
-      /*
-      ** Locate a Dooble window.
-      */
-
-      QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-      QWidgetList list(QApplication::topLevelWidgets());
-
-      for(auto i : list)
-	if(qobject_cast<dooble *> (i))
-	  {
-	    m_parent = i;
-	    connect(m_parent,
-		    SIGNAL(destroyed(void)),
-		    this,
-		    SLOT(slot_parent_destroyed(void)),
-		    Qt::UniqueConnection);
-	    connect(this,
-		    SIGNAL(open_link(const QUrl &)),
-		    m_parent,
-		    SLOT(slot_open_link(const QUrl &)),
-		    Qt::UniqueConnection);
-	    break;
-	  }
-
-      QApplication::restoreOverrideCursor();
-    }
-
+  discover_m_parent();
   emit open_link(item->data(Qt::UserRole).toUrl());
 }
 

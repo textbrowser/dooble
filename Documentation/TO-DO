@@ -170,6 +170,7 @@ Remaining Items
 
 - Allow custom JavaScript per URL.
 - Allow opening of multiple favorites via Enter.
+- Are containers empty? Remind if credentials exist.
 - Argon2, per request.
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,

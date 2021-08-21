@@ -64,6 +64,7 @@ class dooble_history_window: public dooble_main_window
   QWidget *m_parent;
   Ui_dooble_history_window m_ui;
   bool m_floating;
+  void discover_m_parent(void);
   void save_settings(void);
   void set_row_hidden(int i);
 
