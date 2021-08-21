@@ -33,7 +33,7 @@ cp -pr ~/Qt/5.15.2/gcc_64/translations ./opt/dooble/.
 chmod -x,g+w ./opt/dooble/Lib/*
 ~/Qt/5.15.2/gcc_64/bin/lupdate dooble.pro
 ~/Qt/5.15.2/gcc_64/bin/lrelease dooble.pro
-~/Qt/5.15.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j 10
+~/Qt/5.15.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
 cp -p ./Documentation/TO-DO ./opt/dooble/Documentation/.
@@ -57,7 +57,7 @@ cp -pr DEBIAN dooble-debian.d/.
 cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
-dpkg-deb --build dooble-debian.d Dooble-2021.08.10_amd64.deb
+dpkg-deb --build dooble-debian.d Dooble-2021.08.30_amd64.deb
 rm -fr ./opt
 rm -fr dooble-debian.d
 make distclean
