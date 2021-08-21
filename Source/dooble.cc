@@ -3028,7 +3028,7 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.date().day() < 10 ? "0" : "").
      arg(now.date().day()));
 
-  auto font(this->font());
+  auto font(m_floating_digital_clock_ui.clock->font());
   auto utc(qgetenv("TZ").toLower().trimmed());
 
   font.setPointSize(25);
@@ -3039,6 +3039,9 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.time().toString("hh:mm:ss A")).
      arg(utc == ":utc" ? " UTC" : ""));
   m_floating_digital_clock_ui.clock->update();
+  font = m_floating_digital_clock_ui.date->font();
+  font.setPointSize(15);
+  m_floating_digital_clock_ui.date->setFont(font);
 }
 
 void dooble::slot_history_action_triggered(void)

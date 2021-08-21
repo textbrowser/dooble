@@ -29,6 +29,11 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <family>Courier</family>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QLabel {color: white;}</string>
      </property>
@@ -42,6 +47,11 @@
    </item>
    <item>
     <widget class="QLabel" name="clock">
+     <property name="font">
+      <font>
+       <family>Courier</family>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QLabel {color: white;}</string>
      </property>
