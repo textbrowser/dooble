@@ -127,10 +127,45 @@ void dooble_favorites_popup::closeEvent(QCloseEvent *event)
 
 void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
 {
-  if(event && event->key() == Qt::Key_Escape)
+  if(event)
     {
-      accept();
-      m_entries_timer.stop();
+      if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+	{
+	  auto list(m_ui.view->selectionModel()->selectedRows(1));
+
+	  if(list.isEmpty())
+	    return;
+	  else if(list.size() >= 5)
+	    {
+	      QMessageBox mb(this);
+
+	      mb.setIcon(QMessageBox::Question);
+	      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+	      mb.setText(tr("Open %1 pages?").arg(list.size()));
+	      mb.setWindowIcon(windowIcon());
+	      mb.setWindowModality(Qt::ApplicationModal);
+	      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+	      if(mb.exec() != QMessageBox::Yes)
+		{
+		  QApplication::processEvents();
+		  return;
+		}
+	    }
+
+	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+	  for(int i = 0; i < list.size(); i++)
+	    emit open_link_in_new_tab(list.at(i).data().toString());
+
+	  m_ui.view->setFocus();
+	  QApplication::restoreOverrideCursor();
+	}
+      else if(event->key() == Qt::Key_Escape)
+	{
+	  accept();
+	  m_entries_timer.stop();
+	}
     }
 
   QDialog::keyPressEvent(event);

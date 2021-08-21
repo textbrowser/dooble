@@ -449,8 +449,7 @@ void dooble_history_window::slot_copy_location(void)
 
 void dooble_history_window::slot_delete_pages(void)
 {
-  QModelIndexList list
-    (m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
+  auto list(m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
 
   if(list.isEmpty())
     return;
@@ -533,8 +532,7 @@ void dooble_history_window::slot_delete_rows
 
 void dooble_history_window::slot_enter_pressed(void)
 {
-  QModelIndexList list
-    (m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
+  auto list(m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
 
   if(list.isEmpty())
     return;

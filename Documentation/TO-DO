@@ -7,6 +7,7 @@ Completed Items
 - Accepted / Blocked Domains search.
 - Activate history pull-down on address text change.
 - Allow certificate exceptions.
+- Allow opening of multiple favorites via Enter.
 - Allow removal of unchecked cookies.
 - Allow temporary acceptance of blocked dialogs.
 - Animated Scrolling belongs in the Web section.
@@ -169,7 +170,6 @@ Completed Items
 Remaining Items
 
 - Allow custom JavaScript per URL.
-- Allow opening of multiple favorites via Enter.
 - Are containers empty? Remind if credentials exist.
 - Argon2, per request.
 - Auto-correct addresses.
