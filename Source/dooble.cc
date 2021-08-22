@@ -897,6 +897,7 @@ void dooble::initialize_static_members(void)
     {
       s_history_popup = new dooble_history_window(true);
       s_history_popup->enable_control_w_shortcut(true);
+      s_history_popup->resize(600, 600);
       s_history_popup->setWindowFlags
 	(Qt::WindowStaysOnTopHint | s_history_popup->windowFlags());
       s_history_popup->setWindowModality(Qt::NonModal);
