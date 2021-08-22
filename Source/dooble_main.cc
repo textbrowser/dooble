@@ -280,10 +280,11 @@ int main(int argc, char *argv[])
   splash.setEnabled(false);
   splash.show();
   splash.showMessage
-    (QObject::tr("Initializing Dooble."), Qt::AlignHCenter | Qt::AlignBottom);
+    (QObject::tr("Initializing Dooble's random number generator."),
+     Qt::AlignHCenter | Qt::AlignBottom);
   t.start();
 
-  while(t.elapsed() < 1000)
+  while(t.elapsed() < 500)
     splash.repaint();
 
   dooble_random::initialize();
@@ -429,7 +430,7 @@ int main(int argc, char *argv[])
 		   SIGNAL(populated(void)),
 		   d,
 		   SLOT(slot_populated(void)));
-  splash.showMessage(QObject::tr("Populating containers."),
+  splash.showMessage(QObject::tr("Populating Dooble containers."),
 		     Qt::AlignHCenter | Qt::AlignBottom);
   splash.repaint();
   dooble::s_application->processEvents();
