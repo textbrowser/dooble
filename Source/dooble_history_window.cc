@@ -651,6 +651,9 @@ void dooble_history_window::slot_horizontal_header_section_resized
 {
   Q_UNUSED(oldSize);
 
+  if(m_floating)
+    return;
+
   if(logicalIndex >= 0)
     dooble_settings::set_setting
       (QString("history_horizontal_header_section_size_%1").arg(logicalIndex),
@@ -1111,6 +1114,9 @@ void dooble_history_window::slot_show_context_menu(const QPoint &point)
 
 void dooble_history_window::slot_splitter_moved(int pos, int index)
 {
+  if(m_floating)
+    return;
+
   Q_UNUSED(index);
   Q_UNUSED(pos);
   m_save_settings_timer.start();
