@@ -129,7 +129,9 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
 {
   if(event)
     {
-      if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+      if(event->key() == Qt::Key_Delete)
+	m_ui.delete_selected->click();
+      else if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
 	{
 	  auto list(m_ui.view->selectionModel()->selectedRows(1));
 
