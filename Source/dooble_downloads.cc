@@ -129,6 +129,22 @@ bool dooble_downloads::is_private(void) const
   return QWebEngineProfile::defaultProfile() != m_web_engine_profile;
 }
 
+int dooble_downloads::finished_size(void) const
+{
+  int size = 0;
+
+  for(int i = 0; i < m_ui.table->rowCount(); i++)
+    {
+      auto downloads_item = qobject_cast
+	<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
+
+      if(downloads_item && downloads_item->is_finished())
+	size += 1;
+    }
+
+  return size;
+}
+
 int dooble_downloads::size(void) const
 {
   int size = 0;
@@ -457,7 +473,7 @@ void dooble_downloads::show_normal(QWidget *parent)
 
 void dooble_downloads::slot_clear_finished_downloads(void)
 {
-  if(m_ui.table->rowCount() > 0)
+  if(finished_size() > 0)
     {
       QMessageBox mb(this);
 
@@ -478,6 +494,8 @@ void dooble_downloads::slot_clear_finished_downloads(void)
 
       QApplication::processEvents();
     }
+  else
+    return;
 
   clear();
 }

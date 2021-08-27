@@ -73,6 +73,111 @@
      </layout>
     </item>
     <item>
+     <widget class="QTableWidget" name="table">
+      <property name="tabKeyNavigation">
+       <bool>false</bool>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="verticalScrollMode">
+       <enum>QAbstractItemView::ScrollPerPixel</enum>
+      </property>
+      <property name="horizontalScrollMode">
+       <enum>QAbstractItemView::ScrollPerPixel</enum>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>150</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>200</number>
+      </attribute>
+      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Accepted / Blocked</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Domain</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="dooble_search_widget" name="search">
+        <property name="placeholderText">
+         <string>Search Domains</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="entries_2">
+        <property name="text">
+         <string>0 Row(s)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="add">
+        <property name="text">
+         <string>&amp;Add...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="delete_selected">
+        <property name="text">
+         <string>&amp;Delete Selected</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="import">
+        <property name="text">
+         <string>&amp;Import...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
        <string>Exceptions</string>
@@ -199,111 +304,6 @@
        </item>
       </layout>
      </widget>
-    </item>
-    <item>
-     <widget class="QTableWidget" name="table">
-      <property name="tabKeyNavigation">
-       <bool>false</bool>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-      <property name="verticalScrollMode">
-       <enum>QAbstractItemView::ScrollPerPixel</enum>
-      </property>
-      <property name="horizontalScrollMode">
-       <enum>QAbstractItemView::ScrollPerPixel</enum>
-      </property>
-      <property name="showGrid">
-       <bool>false</bool>
-      </property>
-      <property name="sortingEnabled">
-       <bool>true</bool>
-      </property>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>150</number>
-      </attribute>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>200</number>
-      </attribute>
-      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Accepted / Blocked</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Domain</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="dooble_search_widget" name="search">
-        <property name="placeholderText">
-         <string>Search Domains</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="entries_2">
-        <property name="text">
-         <string>0 Row(s)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="add">
-        <property name="text">
-         <string>&amp;Add...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="delete_selected">
-        <property name="text">
-         <string>&amp;Delete Selected</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="import">
-        <property name="text">
-         <string>&amp;Import...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
     <item>
      <widget class="QGroupBox" name="groupBox_2">
@@ -474,16 +474,16 @@
  <tabstops>
   <tabstop>accept_mode</tabstop>
   <tabstop>block_mode</tabstop>
-  <tabstop>exception</tabstop>
-  <tabstop>add_exception</tabstop>
-  <tabstop>exceptions</tabstop>
-  <tabstop>delete_all_exceptions</tabstop>
-  <tabstop>delete_selected_exceptions</tabstop>
   <tabstop>table</tabstop>
   <tabstop>search</tabstop>
   <tabstop>add</tabstop>
   <tabstop>delete_selected</tabstop>
   <tabstop>import</tabstop>
+  <tabstop>exception</tabstop>
+  <tabstop>add_exception</tabstop>
+  <tabstop>exceptions</tabstop>
+  <tabstop>delete_all_exceptions</tabstop>
+  <tabstop>delete_selected_exceptions</tabstop>
   <tabstop>maximum_session_rejections</tabstop>
   <tabstop>session_rejections</tabstop>
   <tabstop>save_all</tabstop>

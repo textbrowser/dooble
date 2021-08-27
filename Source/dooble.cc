@@ -2825,10 +2825,10 @@ void dooble::slot_clear_downloads(void)
 {
   if(m_downloads)
     {
-      if(m_downloads->size() == 0)
+      if(m_downloads->finished_size() == 0)
 	return;
     }
-  else if(s_downloads->size() == 0)
+  else if(s_downloads->finished_size() == 0)
     return;
 
   QMessageBox mb(this);

@@ -48,6 +48,7 @@ class dooble_downloads: public dooble_main_window
   bool contains(QWebEngineDownloadItem *download) const;
   bool is_finished(void) const;
   bool is_private(void) const;
+  int finished_size(void) const;
   int size(void) const;
   static void create_tables(QSqlDatabase &db);
   void abort(void);
