@@ -233,6 +233,14 @@ void dooble_downloads::delete_selected(void)
   for(int i = list.size() - 1; i >= 0; i--)
     if(m_ui.table->isRowHidden(list.at(i).row()))
       list.removeAt(i);
+    else
+      {
+	auto downloads_item = qobject_cast<dooble_downloads_item *>
+	  (m_ui.table->cellWidget(list.at(i).row(), 0));
+
+	if(downloads_item && !downloads_item->is_finished())
+	  list.removeAt(i);
+      }
 
   if(!list.isEmpty())
     {
