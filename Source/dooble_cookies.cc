@@ -550,9 +550,16 @@ void dooble_cookies::slot_populate(void)
 #endif
 #endif
 	      cookies << c;
+
+	      auto url(QUrl::fromUserInput(c.domain()));
+
+	      if(c.isSecure())
+		url.setScheme("https");
+
+	      c.setDomain("");
 	      count += 1;
 	      is_favorites << is_favorite;
-	      profile->cookieStore()->setCookie(c);
+	      profile->cookieStore()->setCookie(c, url);
 	    }
 
 	if(!cookies.isEmpty() && !is_favorites.isEmpty())
