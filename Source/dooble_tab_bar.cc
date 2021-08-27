@@ -153,7 +153,11 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
   QFontMetrics font_metrics(font());
   static auto tab_height = 15 + font_metrics.height();
 #else
-  static auto tab_height = size.height();
+  static auto tab_height = qBound
+    (0,
+     dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
+     25) +
+    size.height();
 #endif
 
   size.setHeight(tab_height);

@@ -60,6 +60,7 @@ class dooble_settings: public dooble_main_window
   static QString use_material_icons(void);
   static QString zoom_frame_location_string(int index);
   static QStringList s_spell_checker_dictionaries;
+  static QVariant getenv(const QString &n);
   static QVariant setting(const QString &k,
 			  const QVariant &default_value = QVariant(""));
   static bool has_dooble_credentials(void);
@@ -90,8 +91,10 @@ class dooble_settings: public dooble_main_window
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
+  static QMap<QString, QVariant> s_getenv;
   static QMap<QString, QVariant> s_settings;
   static QMultiMap<QUrl, QPair<int, bool> > s_site_features_permissions;
+  static QReadWriteLock s_getenv_mutex;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
   static void create_tables(QSqlDatabase &db);

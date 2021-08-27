@@ -56,8 +56,10 @@
 #include "dooble_version.h"
 
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
+QMap<QString, QVariant> dooble_settings::s_getenv;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QMultiMap<QUrl, QPair<int, bool> > dooble_settings::s_site_features_permissions;
+QReadWriteLock dooble_settings::s_getenv_mutex;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
 QStringList dooble_settings::s_spell_checker_dictionaries;
@@ -461,6 +463,22 @@ QString dooble_settings::zoom_frame_location_string(int index)
 {
   Q_UNUSED(index);
   return "popup_menu";
+}
+
+QVariant dooble_settings::getenv(const QString &n)
+{
+  auto name(n.trimmed());
+
+  if(name.isEmpty())
+    return QVariant();
+
+  QWriteLocker locker(&s_getenv_mutex);
+
+  if(s_getenv.contains(name))
+    return s_getenv.value(name);
+
+  s_getenv[name] = qgetenv(name.toUtf8().constData());
+  return s_getenv.value(name);
 }
 
 QVariant dooble_settings::setting(const QString &k,
