@@ -26,6 +26,7 @@
 */
 
 #include <QMimeData>
+#include <QtMath>
 
 #include "dooble.h"
 #include "dooble_address_widget.h"
@@ -129,7 +130,8 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
   setCompleter(m_completer);
-  setMinimumHeight(sizeHint().height() + sizeHint().height() % 2);
+  setMinimumHeight
+    (qCeil(sizeHint().height() + 0.15 * sizeHint().height()));
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(m_favorite->sizeHint().width() +
