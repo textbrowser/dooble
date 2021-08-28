@@ -133,7 +133,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   setMinimumHeight
     (qBound(0,
 	    dooble_settings::getenv("DOOBLE_ADDRESS_WIDGET_OFFSET").toInt(),
-	    25) +
+	    50) +
      sizeHint().height());
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").

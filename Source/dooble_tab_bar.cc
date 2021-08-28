@@ -156,7 +156,7 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
   static auto tab_height = qBound
     (0,
      dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
-     25) +
+     50) +
     size.height();
 #endif
 
