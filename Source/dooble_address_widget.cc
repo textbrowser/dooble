@@ -132,7 +132,8 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   setCompleter(m_completer);
   setMinimumHeight
     (qBound(0,
-	    dooble_settings::getenv("DOOBLE_ADDRESS_WIDGET_OFFSET").toInt(),
+	    dooble_settings::getenv("DOOBLE_"
+				    "ADDRESS_WIDGET_HEIGHT_OFFSET").toInt(),
 	    50) +
      sizeHint().height());
   setStyleSheet
