@@ -1181,6 +1181,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(close_window(void)),
+	  this,
+	  SLOT(close(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(create_dialog(dooble_web_engine_view *)),
 	  this,
 	  SLOT(slot_create_dialog(dooble_web_engine_view *)),
@@ -1580,6 +1586,9 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+S")),
 				   this,
 				   SLOT(slot_save(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+W")),
+				   this,
+				   SLOT(close(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+T")),
 				   this,
 				   SLOT(slot_new_tab(void)));
@@ -1674,6 +1683,10 @@ void dooble::prepare_standard_menus(void)
 	  (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
     }
 
+  menu->addAction(tr("Close Window"),
+		  this,
+		  SLOT(close(void)),
+		  QKeySequence(tr("Ctrl+Shift+W")));
   menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-save",
@@ -2119,9 +2132,17 @@ void dooble::remove_page_connections(dooble_page *page)
 	     this,
 	     SLOT(slot_authenticate(void)));
   disconnect(page,
+	     SIGNAL(clear_downloads(void)),
+	     this,
+	     SLOT(slot_clear_downloads(void)));
+  disconnect(page,
 	     SIGNAL(close_tab(void)),
 	     this,
 	     SLOT(slot_close_tab(void)));
+  disconnect(page,
+	     SIGNAL(close_window(void)),
+	     this,
+	     SLOT(close(void)));
   disconnect(page,
 	     SIGNAL(create_dialog(dooble_web_engine_view *)),
 	     this,
@@ -2202,6 +2223,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_certificate_exceptions(void)),
 	     this,
 	     SLOT(slot_show_certificate_exceptions(void)));
+  disconnect(page,
+	     SIGNAL(show_chart_xyseries(void)),
+	     this,
+	     SLOT(slot_show_chart_xyseries(void)));
   disconnect(page,
 	     SIGNAL(show_clear_items(void)),
 	     this,

@@ -193,6 +193,7 @@ class dooble_page: public QWidget
   void authenticate(void);
   void clear_downloads(void);
   void close_tab(void);
+  void close_window(void);
   void create_dialog(dooble_web_engine_view *view);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);

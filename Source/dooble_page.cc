@@ -765,6 +765,10 @@ void dooble_page::prepare_standard_menus(void)
 	  (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
     }
 
+  menu->addAction(tr("Close Window"),
+		  this,
+		  SIGNAL(close_window(void)),
+		  QKeySequence(tr("Ctrl+Shift+W")));
   menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-save",
