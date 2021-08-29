@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-cd ~/Development/dooble.d/
 mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
 mkdir -p ./opt/dooble/Lib
@@ -58,6 +57,6 @@ cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
 dpkg-deb --build dooble-debian.d Dooble-2021.08.30_amd64.deb
+make distclean
 rm -fr ./opt
 rm -fr dooble-debian.d
-make distclean

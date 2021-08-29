@@ -5,7 +5,7 @@
     <name>QObject</name>
     <message>
         <source>Initializing Dooble.</source>
-        <translation>Initialisiere Dooble.</translation>
+        <translation type="vanished">Initialisiere Dooble.</translation>
     </message>
     <message>
         <source>Purging temporary favicons.</source>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>Populating containers.</source>
-        <translation>Container bestücken.</translation>
+        <translation type="vanished">Container bestücken.</translation>
     </message>
     <message>
         <source>Desktop Audio Video Capture</source>
@@ -137,6 +137,18 @@
     </message>
     <message>
         <source>Vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing Dooble&apos;s random number generator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Populating Dooble containers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opening Dooble.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -514,6 +526,14 @@
         <source>Dooble: Charts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+Shift+W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -831,7 +851,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Favorit</translation>
+        <translation type="vanished">Favorit</translation>
     </message>
     <message>
         <source>Inject Custom Style Sheet...</source>
@@ -839,6 +859,18 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Site Information (Cookies, etc.)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty or invalid URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove this page from Favorites.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add this page to Favorites.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1834,6 +1866,10 @@ Dooble ist open source Software.
         <source>Ctrl+W</source>
         <translation type="unfinished">Strg+W</translation>
     </message>
+    <message>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_cookies_window</name>
@@ -2135,7 +2171,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Delete Selected Favorite</source>
-        <translation>Lösche ausgewählten Favoriten</translation>
+        <translation type="vanished">Lösche ausgewählten Favoriten</translation>
     </message>
     <message>
         <source>Search Favorites</source>
@@ -2168,6 +2204,14 @@ Dooble ist open source Software.
     <message>
         <source>Ctrl+W</source>
         <translation type="unfinished">Strg+W</translation>
+    </message>
+    <message>
+        <source>Delete Selected Favorite(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open %1 pages?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2290,6 +2334,10 @@ Dooble ist open source Software.
         <source>%1 Row(s)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open %1 pages?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_main_window</name>
@@ -2310,10 +2358,6 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Ctrl+R</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Esc</source>
         <translation></translation>
     </message>
     <message>
@@ -2836,6 +2880,14 @@ Dooble ist open source Software.
         <source>%1%</source>
         <translation type="unfinished">%1%</translation>
     </message>
+    <message>
+        <source>Close Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+W</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_popup_menu</name>
@@ -3017,7 +3069,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Delete Selected Search Engine</source>
-        <translation>Lösche ausgewählte Suchmaschine</translation>
+        <translation type="vanished">Lösche ausgewählte Suchmaschine</translation>
     </message>
     <message>
         <source>Title</source>
@@ -3046,6 +3098,22 @@ Domänen</translation>
     <message>
         <source>Ctrl+W</source>
         <translation type="unfinished">Strg+W</translation>
+    </message>
+    <message>
+        <source>Available Search Engines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please press the Add Checked button to store the checked search engines in your local SQLite database.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The search engines listed below may be accessed via context menus on pages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Search Engine(s)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3156,7 +3224,7 @@ Domänen</translation>
     </message>
     <message>
         <source>A value of zero will allow QWebEngine to control the size of the cache automatically.</source>
-        <translation>Ein Wert von Null erlaubt QWebEngine die Größe des Cache automatisch zu kontrollieren.</translation>
+        <translation type="vanished">Ein Wert von Null erlaubt QWebEngine die Größe des Cache automatisch zu kontrollieren.</translation>
     </message>
     <message>
         <source> MiB</source>
@@ -3804,6 +3872,30 @@ Domänen</translation>
     </message>
     <message>
         <source>Memory locking is provided by mlock() and munlock().</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A value of zero will allow QWebEngine to control the size of the cache automatically. Private windows assume unlimited caches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Private windows store information in memory caches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show New Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tab Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>North</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>South</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
