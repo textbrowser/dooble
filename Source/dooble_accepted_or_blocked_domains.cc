@@ -48,6 +48,13 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
     (dooble_settings::setting("dooble_accepted_or_blocked_domains_"
 			      "maximum_session_rejections", 5000).toInt());
   m_ui.session_rejections->sortItems(1, Qt::AscendingOrder);
+  m_ui.splitter->setStretchFactor(0, 1);
+  m_ui.splitter->setStretchFactor(1, 0);
+  m_ui.splitter->setStretchFactor(2, 0);
+  m_ui.splitter->restoreState
+    (QByteArray::fromBase64(dooble_settings::
+			    setting("dooble_accepted_or_blocked_domains_"
+				    "splitter_state").toByteArray()));
   m_ui.table->sortItems(1, Qt::AscendingOrder);
   connect(&m_search_timer,
 	  SIGNAL(timeout(void)),
@@ -109,6 +116,10 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  SIGNAL(textEdited(const QString &)),
 	  &m_search_timer,
 	  SLOT(start(void)));
+  connect(m_ui.splitter,
+	  SIGNAL(splitterMoved(int, int)),
+	  this,
+	  SLOT(slot_splitter_moved(int, int)));
   connect(this,
 	  SIGNAL(add_session_url(const QUrl &, const QUrl &)),
 	  this,
@@ -1340,4 +1351,14 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
 
   m_ui.entries_2->setText(tr("%1 Row(s)").arg(count));
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_accepted_or_blocked_domains::
+slot_splitter_moved(int pos, int index)
+{
+  Q_UNUSED(index);
+  Q_UNUSED(pos);
+  dooble_settings::set_setting
+    ("dooble_accepted_or_blocked_domains_splitter_state",
+     m_ui.splitter->saveState().toBase64());
 }
