@@ -182,6 +182,9 @@
       <property name="title">
        <string>Exceptions</string>
       </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_15">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_14">
@@ -312,6 +315,9 @@
       </property>
       <property name="title">
        <string>Third-Party Session Rejections</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>

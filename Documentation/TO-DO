@@ -170,6 +170,7 @@ Completed Items
 Remaining Items
 
 - Allow custom JavaScript per URL.
+- Allow hiding of panels in Accepted / Blocked Domains.
 - Are containers empty? Remind if credentials exist.
 - Argon2, per request.
 - Auto-correct addresses.
