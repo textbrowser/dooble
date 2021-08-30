@@ -178,7 +178,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="exceptions_group_box">
       <property name="title">
        <string>Exceptions</string>
       </property>
@@ -309,7 +309,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="third_party_session_rejections_group_box">
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rejected third-party cookie URLs are described in this region. The URLs exist for this session of Dooble only.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>

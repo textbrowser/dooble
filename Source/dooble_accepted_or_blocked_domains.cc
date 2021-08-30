@@ -1098,6 +1098,22 @@ void dooble_accepted_or_blocked_domains::slot_find(void)
   m_ui.search->setFocus();
 }
 
+void dooble_accepted_or_blocked_domains::slot_group_box_clicked(bool checked)
+{
+  auto group_box = qobject_cast<QGroupBox *> (sender());
+
+  if(!group_box)
+    return;
+
+  if(group_box == m_ui.exceptions_group_box)
+    dooble_settings::set_setting
+      ("accepted_or_blocked_domains_exceptions_group_box", checked);
+  else if(group_box == m_ui.third_party_session_rejections_group_box)
+    dooble_settings::set_setting
+      ("accepted_or_blocked_domains_third_party_session_rejections_group_box",
+       checked);
+}
+
 void dooble_accepted_or_blocked_domains::slot_import(void)
 {
   QFileDialog dialog(this);
