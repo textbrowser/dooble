@@ -278,12 +278,15 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
+			  -Warray-bounds=2 \
                           -Wcast-align \
                           -Wcast-qual \
+			  -Wconversion \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
                           -Wformat-overflow=2 \
+			  -Wformat-signedness \
                           -Wformat-truncation=2 \
                           -Wformat=2 \
                           -Wl,-z,relro \
@@ -293,6 +296,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
+			  -Wstringop-overflow=2 \
                           -Wundef \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
