@@ -669,6 +669,12 @@ void dooble_page::prepare_shortcuts(void)
 	(QKeySequence(Qt::AltModifier + Qt::Key_Right),
 	 this,
 	 SLOT(slot_go_forward(void)));
+      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_Escape),
+				   this,
+				   SLOT(slot_escape(void)));
+      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F5),
+				   this,
+				   SLOT(slot_reload(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+=")),
 				   this,
 				   SLOT(slot_zoom_in(void)));
@@ -685,12 +691,6 @@ void dooble_page::prepare_shortcuts(void)
 				   this,
 				   SLOT(slot_open_link(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
-				   this,
-				   SLOT(slot_reload(void)));
-      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_Escape),
-				   this,
-				   SLOT(slot_escape(void)));
-      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F5),
 				   this,
 				   SLOT(slot_reload(void)));
     }
