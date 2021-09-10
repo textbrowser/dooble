@@ -14,7 +14,7 @@ Dooble is the scientific browser.
 <li>Favorites.</li>
 <li>Floating digital clock.</li>
 <li>Floating minute history window.</li>
-<li>FreeBSD, Linux, Mac, Windows.</li>
+<li>FreeBSD, Linux, Mac, OpenBSD, Windows.</li>
 <li>Gopher support.</li>
 <li>Multiple private instances, including downloads.</li>
 <li>Native graphing of data.</li>
