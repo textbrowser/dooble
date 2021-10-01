@@ -314,7 +314,11 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 	item->setIcon(dooble_favicons::icon(icon));
     }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QMapIterator<QString, QAction *> it(m_actions);
+#else
+  QMultiMapIterator<QString, QAction *> it(m_actions);
+#endif
 
   while(it.hasNext())
     {
@@ -448,7 +452,12 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
 		  if(query.exec())
 		    {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 		      QMutableMapIterator<QString, QAction *> it(m_actions);
+#else
+		      QMutableMultiMapIterator<QString, QAction *>
+			it(m_actions);
+#endif
 
 		      while(it.hasNext())
 			{
@@ -507,7 +516,11 @@ void dooble_search_engines_popup::slot_populate(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.search->clear();
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QMutableMapIterator<QString, QAction *> it(m_actions);
+#else
+  QMutableMultiMapIterator<QString, QAction *> it(m_actions);
+#endif
 
   while(it.hasNext())
     {
