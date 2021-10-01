@@ -29,6 +29,8 @@
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QDesktopWidget>
 #include <QWebEngineContextMenuData>
+#else
+#include <QWebEngineContextMenuRequest>
 #endif
 #include <QWebEngineProfile>
 
@@ -302,6 +304,12 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 #else
   if(context_menu_data)
     {
+      if(context_menu_data->linkUrl().isValid())
+	action->setProperty("url", context_menu_data->linkUrl());
+      else if(context_menu_data->mediaUrl().isValid())
+	action->setProperty("url", context_menu_data->mediaUrl());
+      else
+	action->setEnabled(false);
     }
   else
     action->setEnabled(false);
@@ -319,6 +327,18 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	action->setProperty("url", context_menu_data.linkUrl());
       else if(context_menu_data.mediaUrl().isValid())
 	action->setProperty("url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
+#else
+  if(context_menu_data)
+    {
+      if(context_menu_data->linkUrl().isValid())
+	action->setProperty("url", context_menu_data->linkUrl());
+      else if(context_menu_data->mediaUrl().isValid())
+	action->setProperty("url", context_menu_data->mediaUrl());
       else
 	action->setEnabled(false);
     }
@@ -343,6 +363,18 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+#else
+  if(context_menu_data)
+    {
+      if(context_menu_data->linkUrl().isValid())
+	action->setProperty("url", context_menu_data->linkUrl());
+      else if(context_menu_data->mediaUrl().isValid())
+	action->setProperty("url", context_menu_data->mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
 #endif
 
   action = menu->addAction
@@ -357,6 +389,18 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	action->setProperty("url", context_menu_data.linkUrl());
       else if(context_menu_data.mediaUrl().isValid())
 	action->setProperty("url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
+#else
+  if(context_menu_data)
+    {
+      if(context_menu_data->linkUrl().isValid())
+	action->setProperty("url", context_menu_data->linkUrl());
+      else if(context_menu_data->mediaUrl().isValid())
+	action->setProperty("url", context_menu_data->mediaUrl());
       else
 	action->setEnabled(false);
     }
@@ -383,6 +427,18 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	action->setProperty("url", context_menu_data.linkUrl());
       else if(context_menu_data.mediaUrl().isValid())
 	action->setProperty("url", context_menu_data.mediaUrl());
+      else
+	action->setEnabled(false);
+    }
+  else
+    action->setEnabled(false);
+#else
+  if(context_menu_data)
+    {
+      if(context_menu_data->linkUrl().isValid())
+	action->setProperty("url", context_menu_data->linkUrl());
+      else if(context_menu_data->mediaUrl().isValid())
+	action->setProperty("url", context_menu_data->mediaUrl());
       else
 	action->setEnabled(false);
     }
