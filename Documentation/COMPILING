@@ -1,7 +1,7 @@
 OS X developers should consider installing Homebrew. Please see
 https://brew.sh.
 
-Qt 5.15.x is preferred.
+Qt 5.15.x is preferred. Qt 6.2 LTS, if available.
 
 FreeBSD
 
