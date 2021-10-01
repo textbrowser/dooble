@@ -28,6 +28,7 @@
 #ifndef dooble_address_widget_h
 #define dooble_address_widget_h
 
+#include <QIcon>
 #include <QLineEdit>
 #include <QTextLayout>
 #include <QUrl>

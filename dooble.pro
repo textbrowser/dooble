@@ -312,6 +312,9 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -pedantic \
                           -pie \
                           -std=c++17
+versionAtLeast(QT_VERSION, 6.0.0) {
+QMAKE_CXXFLAGS_RELEASE += -Wno-int-in-bool-context
+}
 QMAKE_CXXFLAGS_RELEASE -= -O2
 }
 

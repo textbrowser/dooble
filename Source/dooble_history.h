@@ -30,6 +30,7 @@
 
 #include <QAtomicInteger>
 #include <QFuture>
+#include <QIcon>
 #include <QReadWriteLock>
 #include <QSqlDatabase>
 #include <QTimer>

@@ -1511,7 +1511,7 @@ void dooble_settings::save_fonts(void)
 	QWebEngineSettings::defaultSettings()->setFontSize
 	  (it.key(), it.value().second);
 #else
-	QWebEngineProfile()::defaultProfile()->settings()->setFontSize
+	QWebEngineProfile::defaultProfile()->settings()->setFontSize
 	  (it.key(), it.value().second);
 #endif
 	set_setting(it.value().first, it.value().second);
