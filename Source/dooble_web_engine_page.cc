@@ -84,7 +84,8 @@ QStringList dooble_web_engine_page::chooseFiles
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     case QWebEnginePage::FileSelectUploadFolder:
       {
-	break;
+	return QStringList() << QFileDialog::getExistingDirectory
+	  (view(), tr("Select Directory"), QDir::homePath());
       }
 #endif
     }
