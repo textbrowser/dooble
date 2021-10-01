@@ -40,6 +40,7 @@
 #include "ui_dooble_floating_digital_clock.h"
 
 class QDialog;
+class QPrinter;
 class QWebEngineDownloadItem;
 class QWebEngineProfile;
 class dooble_about;

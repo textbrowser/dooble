@@ -272,7 +272,7 @@ void dooble_cryptography::memzero(QByteArray &bytes)
 void dooble_cryptography::memzero(QString &text)
 {
   for(auto &&i : text)
-    i = 0;
+    i = QChar(0);
 }
 
 void dooble_cryptography::set_authenticated(bool state)

@@ -26,6 +26,7 @@
 */
 
 #include <QDataStream>
+#include <QIODevice>
 #include <QtCore/qmath.h>
 #include <QtDebug>
 

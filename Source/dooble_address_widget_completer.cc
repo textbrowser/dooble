@@ -114,8 +114,8 @@ int dooble_address_widget_completer::levenshtein_distance
   else if(str2.isEmpty())
     return str1.length();
 
-  QChar str1_c = 0;
-  QChar str2_c = 0;
+  QChar str1_c = QChar(0);
+  QChar str2_c = QChar(0);
   QVector<QVector<int> > matrix(str1.length() + 1,
 				QVector<int> (str2.length() + 1));
   int cost = 0;
