@@ -73,13 +73,28 @@ QStringList dooble_web_engine_page::chooseFiles
     {
     case QWebEnginePage::FileSelectOpen:
       {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	return QStringList() << QFileDialog::getOpenFileName
 	  (view(), tr("Select File"), QDir::homePath(), oldFiles.value(0));
+#else
+	return QStringList() << QFileDialog::getOpenFileName
+	  (qobject_cast<QWidget *> (parent()),
+	   tr("Select File"),
+	   QDir::homePath(),
+	   oldFiles.value(0));
+#endif
       }
     case QWebEnginePage::FileSelectOpenMultiple:
       {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	return QFileDialog::getOpenFileNames
 	  (view(), tr("Select Files"), QDir::homePath());
+#else
+	return QFileDialog::getOpenFileNames
+	  (qobject_cast<QWidget *> (parent()),
+	   tr("Select Files"),
+	   QDir::homePath());
+#endif
       }
     }
 

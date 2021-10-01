@@ -115,8 +115,13 @@ void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
 
 	  web_engine_page->runJavaScript
 	    (style_sheet, QWebEngineScript::ApplicationWorld);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  web_engine_page->scripts().remove
 	    (web_engine_page->scripts().findScript(it.key().first));
+#else
+	  web_engine_page->scripts().remove
+	    (web_engine_page->scripts().find(it.key().first));
+#endif
 	}
     }
 
@@ -219,8 +224,12 @@ void dooble_style_sheet::slot_add(void)
   m_ui.style_sheet->setPlainText(m_ui.style_sheet->toPlainText().trimmed());
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
+#else
+  m_web_engine_page->scripts().remove(m_web_engine_page->scripts().find(name));
+#endif
   m_web_engine_page->scripts().insert(web_engine_script);
   s_style_sheets
     [QPair<QString, QUrl> (name, m_web_engine_page->simplified_url())] =
@@ -388,8 +397,12 @@ void dooble_style_sheet::slot_remove(void)
   delete m_ui.names->takeItem(m_ui.names->row(list.at(0)));
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
+#else
+  m_web_engine_page->scripts().remove(m_web_engine_page->scripts().find(name));
+#endif
   s_style_sheets.remove
     (QPair<QString, QUrl> (name, m_web_engine_page->simplified_url()));
 

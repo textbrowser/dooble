@@ -234,7 +234,8 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   QPoint p(0, 0);
   auto w = parent;
-  int extrah = 0; int extraw = 0; int scrn = 0;
+  int extrah = 0;
+  int extraw = 0;
 
   if(w)
     w = w->window();
@@ -242,6 +243,8 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
   QRect desk;
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  int scrn = 0;
+
   if(w)
     scrn = QApplication::desktop()->screenNumber(w);
 #if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)

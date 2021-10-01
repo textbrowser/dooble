@@ -1087,20 +1087,17 @@ void dooble_page::print_page(QPrinter *printer)
 			});
 #else
   m_view->print(printer);
+  delete printer;
 #endif
 }
 
 void dooble_page::print_page
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 (QPrinter *printer, const QWebEngineCallback<bool> &result_callback)
-#else
-(QPrinter *printer)
 #endif
 {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_view->page()->print(printer, result_callback);
-#else
-  m_view->print(printer);
 #endif
 }
 
