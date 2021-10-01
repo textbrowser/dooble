@@ -97,7 +97,7 @@ class dooble_downloads: public dooble_main_window
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   void slot_download_requested(QWebEngineDownloadItem *download);
 #else
-  void slot_download_requested(QWebEngineDownloadItem *download);
+  void slot_download_requested(QWebEngineDownloadRequest *download);
 #endif
   void slot_find(void);
   void slot_open_download_page(void);

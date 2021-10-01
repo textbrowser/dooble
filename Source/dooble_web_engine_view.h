@@ -78,7 +78,11 @@ class dooble_web_engine_view: public QWebEngineView
   void create_dialog_request(dooble_web_engine_view *view);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   void downloadRequested(QWebEngineDownloadItem *download);
+#else
+  void downloadRequested(QWebEngineDownloadRequest *download);
+#endif
   void featurePermissionRequestCanceled(const QUrl &security_origin,
 					QWebEnginePage::Feature feature);
   void featurePermissionRequested(const QUrl &security_origin,

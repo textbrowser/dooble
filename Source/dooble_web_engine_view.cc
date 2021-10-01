@@ -86,10 +86,17 @@ dooble_web_engine_view::dooble_web_engine_view
 	  SLOT(slot_load_progress(int)));
 
   if(QWebEngineProfile::defaultProfile() != m_page->profile())
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     connect(m_page->profile(),
 	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	    this,
 	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)));
+#else
+    connect(m_page->profile(),
+	    SIGNAL(downloadRequested(QWebEngineDownloadRequest *)),
+	    this,
+	    SIGNAL(downloadRequested(QWebEngineDownloadRequest *)));
+#endif
 
   if(!m_page->profile()->urlSchemeHandler("gopher"))
     m_page->profile()->installUrlSchemeHandler
@@ -401,7 +408,11 @@ void dooble_web_engine_view::resizeEvent(QResizeEvent *event)
 
 void dooble_web_engine_view::save(const QString &file_name)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_page->save(file_name, QWebEngineDownloadItem::CompleteHtmlSaveFormat);
+#else
+  m_page->save(file_name, QWebEngineDownloadRequest::CompleteHtmlSaveFormat);
+#endif
 }
 
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
