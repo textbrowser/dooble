@@ -87,6 +87,7 @@ dooble_downloads_item::dooble_downloads_item
 	      SIGNAL(destroyed(void)),
 	      this,
 	      SLOT(slot_finished(void)));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       connect(m_download,
 	      SIGNAL(downloadProgress(qint64, qint64)),
 	      this,
@@ -95,6 +96,16 @@ dooble_downloads_item::dooble_downloads_item
 	      SIGNAL(finished(void)),
 	      this,
 	      SLOT(slot_finished(void)));
+#else
+      connect(m_download,
+	      SIGNAL(isFinishedChanged(void)),
+	      this,
+	      SLOT(slot_finished(void)));
+      connect(m_download,
+	      SIGNAL(receivedBytesChanged(void)),
+	      this,
+	      SLOT(slot_download_progress(void)));
+#endif
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
       QFileInfo file_info(m_download->downloadDirectory() +
@@ -482,6 +493,13 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 
       m_ui.progress->setMaximum(0);
     }
+}
+
+void dooble_downloads_item::slot_download_progress(void)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  slot_download_progress(m_download->receivedBytes(), m_download->totalBytes());
+#endif
 }
 
 void dooble_downloads_item::slot_finished(void)
