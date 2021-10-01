@@ -1103,7 +1103,7 @@ void dooble_page::print_page(QPrinter *printer)
 			});
 #else
   m_view->print(printer);
-  delete printer;
+  QApplication::restoreOverrideCursor();
 #endif
 }
 
