@@ -790,6 +790,7 @@ void dooble_settings::prepare_fonts(void)
     QList<int> list;
     QList<int> sizes;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     sizes << QWebEngineSettings::defaultSettings()->fontSize
              (QWebEngineSettings::DefaultFixedFontSize)
 	  << QWebEngineSettings::defaultSettings()->fontSize
@@ -798,6 +799,16 @@ void dooble_settings::prepare_fonts(void)
              (QWebEngineSettings::MinimumFontSize)
 	  << QWebEngineSettings::defaultSettings()->fontSize
              (QWebEngineSettings::MinimumLogicalFontSize);
+#else
+    sizes << QWebEngineProfile::defaultProfile()->settings()->fontSize
+             (QWebEngineSettings::DefaultFixedFontSize)
+	  << QWebEngineProfile::defaultProfile()->settings()->fontSize
+             (QWebEngineSettings::DefaultFontSize)
+	  << QWebEngineProfile::defaultProfile()->settings()->fontSize
+             (QWebEngineSettings::MinimumFontSize)
+	  << QWebEngineProfile::defaultProfile()->settings()->fontSize
+             (QWebEngineSettings::MinimumLogicalFontSize);
+#endif
     types << QWebEngineSettings::DefaultFixedFontSize
 	  << QWebEngineSettings::DefaultFontSize
 	  << QWebEngineSettings::MinimumFontSize
@@ -816,8 +827,13 @@ void dooble_settings::prepare_fonts(void)
 	  if(list.at(i) <= 0)
 	    list.replace(i, sizes.at(i));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  QWebEngineSettings::defaultSettings()->setFontSize
 	    (types.at(i), list.at(i));
+#else
+	  QWebEngineProfile::defaultProfile()->settings()->setFontSize
+	    (types.at(i), list.at(i));
+#endif
 	}
     }
 
@@ -1354,6 +1370,7 @@ void dooble_settings::restore(bool read_database)
     QWebEngineProfile::defaultProfile()->setSpellCheckLanguages(list);
   }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
@@ -1380,7 +1397,32 @@ void dooble_settings::restore(bool read_database)
 #endif
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
-
+#else
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::AutoLoadImages,
+     m_ui.automatic_loading_of_images->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanAccessClipboard,
+     m_ui.javascript_access_clipboard->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     m_ui.animated_scrolling->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly,
+     m_ui.webrtc_public_interfaces_only->isChecked());
+#endif
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());  
+#endif
   {
     static auto list(QList<QToolButton *> () << m_ui.cache
 		                             << m_ui.display
@@ -1431,8 +1473,13 @@ void dooble_settings::save_fonts(void)
     while(it.hasNext())
       {
 	it.next();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	QWebEngineSettings::defaultSettings()->setFontFamily
 	  (it.key(), it.value().second);
+#else
+	QWebEngineProfile::defaultProfile()->settings()->setFontFamily
+	  (it.key(), it.value().second);
+#endif
 	set_setting(it.value().first, it.value().second);
       }
   }
