@@ -96,6 +96,12 @@ QStringList dooble_web_engine_page::chooseFiles
 	   QDir::homePath());
 #endif
       }
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    case QWebEnginePage::FileSelectUploadFolder:
+      {
+	break;
+      }
+#endif
     }
 
   return QWebEnginePage::chooseFiles(mode, oldFiles, acceptedMimeTypes);

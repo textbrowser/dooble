@@ -517,6 +517,7 @@ void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
 void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 			    const QString &text)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_view->findText
     (text,
      find_flags,
@@ -540,6 +541,8 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
        else
 	 m_ui.find->setPalette(s_palette);
      });
+#else
+#endif
 }
 
 void dooble_page::go_to_backward_item(int index)

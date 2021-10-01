@@ -124,7 +124,16 @@ QWebEngineProfile *dooble_web_engine_view::web_engine_profile(void) const
 
 QSize dooble_web_engine_view::sizeHint(void) const
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   return QApplication::desktop()->screenGeometry(this).size();
+#else
+  auto screen = QGuiApplication::screenAt(pos());
+
+  if(screen)
+    return screen->geometry().size();
+  else
+    return QSize(250, 250);
+#endif
 }
 
 bool dooble_web_engine_view::is_private(void) const
@@ -189,7 +198,11 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
 
 void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   auto menu = m_page->createStandardContextMenu();
+#else
+  auto menu = createStandardContextMenu();
+#endif
 
   if(!menu)
     menu = new QMenu(this);
@@ -268,8 +281,13 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
      this,
      SLOT(slot_open_link_in_current_page(void)));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   auto context_menu_data = m_page->contextMenuData();
+#else
+  auto context_menu_data = lastContextMenuRequest();
+#endif
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(context_menu_data.isValid())
     {
       if(context_menu_data.linkUrl().isValid())
@@ -281,12 +299,20 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+#else
+  if(context_menu_data)
+    {
+    }
+  else
+    action->setEnabled(false);
+#endif
 
   action = menu->addAction
     (tr("Open Link in a New P&rivate Window"),
      this,
      SLOT(slot_open_link_in_new_private_window(void)));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(context_menu_data.isValid())
     {
       if(context_menu_data.linkUrl().isValid())
@@ -298,12 +324,14 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+#endif
 
   action = menu->addAction
     (tr("Open Link in a New &Tab"),
      this,
      SLOT(slot_open_link_in_new_tab(void)));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(context_menu_data.isValid())
     {
       if(context_menu_data.linkUrl().isValid())
@@ -315,12 +343,14 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+#endif
 
   action = menu->addAction
     (tr("Open Link in a &New Window"),
      this,
      SLOT(slot_open_link_in_new_window(void)));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(context_menu_data.isValid())
     {
       if(context_menu_data.linkUrl().isValid())
@@ -332,6 +362,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+#endif
 
   menu->addSeparator();
 
@@ -345,6 +376,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 			     this,
 			     SLOT(slot_accept_or_block_domain(void)));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(context_menu_data.isValid())
     {
       if(context_menu_data.linkUrl().isValid())
@@ -356,6 +388,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
     }
   else
     action->setEnabled(false);
+#endif
 
   if(dooble::s_search_engines_window)
     {
