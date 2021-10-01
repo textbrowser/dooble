@@ -191,12 +191,14 @@ int main(int argc, char *argv[])
   QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL, true);
 #endif
 #else
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QCoreApplication::setAttribute
     (Qt::AA_EnableHighDpiScaling,
      QVariant(qgetenv("AA_ENABLEHIGHDPISCALING")).toBool());
   QCoreApplication::setAttribute
     (Qt::AA_UseHighDpiPixmaps,
      QVariant(qgetenv("AA_USEHIGHDPIPIXMAPS")).toBool());
+#endif
 #endif
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
 #ifdef DOOBLE_REGISTER_GOPHER_SCHEME

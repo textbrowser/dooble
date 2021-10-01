@@ -1012,11 +1012,19 @@ void dooble_history::slot_populate(void)
   }
 
   QApplication::restoreOverrideCursor();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_populate_future = QtConcurrent::run
     (this,
      &dooble_history::populate,
      dooble::s_cryptography->keys().first,
      dooble::s_cryptography->keys().second);
+#else
+  m_populate_future = QtConcurrent::run
+    (&dooble_history::populate,
+     this,
+     dooble::s_cryptography->keys().first,
+     dooble::s_cryptography->keys().second);
+#endif
 }
 
 void dooble_history::slot_populated_favorites
@@ -1084,11 +1092,19 @@ void dooble_history::slot_purge_timer_timeout(void)
   else if(m_purge_future.isRunning())
     return;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_purge_future = QtConcurrent::run
     (this,
      &dooble_history::purge,
      dooble::s_cryptography->keys().first,
      dooble::s_cryptography->keys().second);
+#else
+  m_purge_future = QtConcurrent::run
+    (&dooble_history::purge,
+     this,
+     dooble::s_cryptography->keys().first,
+     dooble::s_cryptography->keys().second);
+#endif
 }
 
 void dooble_history::slot_remove_items(const QListUrl &urls)

@@ -62,6 +62,9 @@ class dooble_web_engine_page: public QWebEnginePage
   QString m_certificate_error;
   QUrl m_certificate_error_url;
   QUrl m_last_clicked_link;
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  QWidget *view(void) const;
+#endif
   Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
 

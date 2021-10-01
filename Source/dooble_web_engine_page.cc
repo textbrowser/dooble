@@ -73,28 +73,13 @@ QStringList dooble_web_engine_page::chooseFiles
     {
     case QWebEnginePage::FileSelectOpen:
       {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	return QStringList() << QFileDialog::getOpenFileName
 	  (view(), tr("Select File"), QDir::homePath(), oldFiles.value(0));
-#else
-	return QStringList() << QFileDialog::getOpenFileName
-	  (qobject_cast<QWidget *> (parent()),
-	   tr("Select File"),
-	   QDir::homePath(),
-	   oldFiles.value(0));
-#endif
       }
     case QWebEnginePage::FileSelectOpenMultiple:
       {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	return QFileDialog::getOpenFileNames
 	  (view(), tr("Select Files"), QDir::homePath());
-#else
-	return QFileDialog::getOpenFileNames
-	  (qobject_cast<QWidget *> (parent()),
-	   tr("Select Files"),
-	   QDir::homePath());
-#endif
       }
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     case QWebEnginePage::FileSelectUploadFolder:
@@ -116,6 +101,13 @@ QUrl dooble_web_engine_page::simplified_url(void) const
 {
   return dooble_ui_utilities::simplified_url(url());
 }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+QWidget *dooble_web_engine_page::view(void) const
+{
+  return qobject_cast<QWidget *> (parent());
+}
+#endif
 
 bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
@@ -181,7 +173,11 @@ bool dooble_web_engine_page::certificateError
 	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
 	    layout->itemAt(i)->widget()->setVisible(false);
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       m_certificate_error = certificateError.errorDescription();
+#else
+      m_certificate_error = certificateError.description();
+#endif
       m_certificate_error_url = url;
 
       if(!m_certificate_error_widget)
@@ -203,7 +199,13 @@ bool dooble_web_engine_page::certificateError
 	      "Please accept or decline the temporary "
 	      "exception.</html>").
 	   arg(url.toString()).
-	   arg(certificateError.errorDescription()));
+	   arg(
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+	       certificateError.errorDescription()
+#else
+	       certificateError.description()
+#endif
+	       ));
       else
 	m_ui.label->setText
 	  (tr("<html>A certificate error occurred while accessing "
@@ -214,7 +216,13 @@ bool dooble_web_engine_page::certificateError
 	      "exception.<br><br>"
 	      "Permanent exceptions may be removed later.</html>").
 	   arg(url.toString()).
-	   arg(certificateError.errorDescription()));
+	   arg(
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+	       certificateError.errorDescription()
+#else
+	       certificateError.description()
+#endif
+	       ));
 
       m_certificate_error_widget->resize(view()->size());
       m_certificate_error_widget->setVisible(true);
@@ -235,7 +243,11 @@ bool dooble_web_engine_page::certificateError
 
       auto url(dooble_ui_utilities::simplified_url(certificateError.url()));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       m_certificate_error = certificateError.errorDescription();
+#else
+      m_certificate_error = certificateError.description();
+#endif
       m_certificate_error_url = url;
 
       if(!m_certificate_error_widget)
@@ -257,7 +269,13 @@ bool dooble_web_engine_page::certificateError
 	    "An exception may not be set because of the severity of the "
 	    "certificate error.</html>").
 	 arg(url.toString()).
-	 arg(certificateError.errorDescription()));
+	 arg(
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+	     certificateError.errorDescription()
+#else
+	     certificateError.description()
+#endif
+	     ));
       m_certificate_error_widget->resize(view()->size());
       m_certificate_error_widget->setVisible(true);
     }

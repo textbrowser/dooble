@@ -173,8 +173,13 @@ void dooble_charts_file::slot_timeout(void)
     return;
 
   if(m_future.isFinished())
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     m_future = QtConcurrent::run
       (this, &dooble_charts_file::run, m_program, m_type);
+#else
+    m_future = QtConcurrent::run
+      (&dooble_charts_file::run, this, m_program, m_type);
+#endif
 }
 
 void dooble_charts_file::stop(void)

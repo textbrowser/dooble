@@ -542,6 +542,8 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 	 m_ui.find->setPalette(s_palette);
      });
 #else
+  Q_UNUSED(find_flags);
+  Q_UNUSED(text);
 #endif
 }
 
@@ -664,6 +666,7 @@ void dooble_page::prepare_shortcuts(void)
 {
   if(m_shortcuts.isEmpty())
     {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       m_shortcuts << new QShortcut
 	(QKeySequence(Qt::AltModifier + Qt::Key_Left),
 	 this,
@@ -672,6 +675,16 @@ void dooble_page::prepare_shortcuts(void)
 	(QKeySequence(Qt::AltModifier + Qt::Key_Right),
 	 this,
 	 SLOT(slot_go_forward(void)));
+#else
+      m_shortcuts << new QShortcut
+	(QKeySequence(Qt::AltModifier | Qt::Key_Left),
+	 this,
+	 SLOT(slot_go_backward(void)));
+      m_shortcuts << new QShortcut
+	(QKeySequence(Qt::AltModifier | Qt::Key_Right),
+	 this,
+	 SLOT(slot_go_forward(void)));
+#endif
       m_shortcuts << new QShortcut(QKeySequence(Qt::Key_Escape),
 				   this,
 				   SLOT(slot_escape(void)));
@@ -1094,15 +1107,13 @@ void dooble_page::print_page(QPrinter *printer)
 #endif
 }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 void dooble_page::print_page
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 (QPrinter *printer, const QWebEngineCallback<bool> &result_callback)
-#endif
 {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_view->page()->print(printer, result_callback);
-#endif
 }
+#endif
 
 void dooble_page::reload(void)
 {

@@ -91,10 +91,17 @@ void dooble_about::compute_self_digest(void)
 {
   m_future.cancel();
   m_future.waitForFinished();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_future = QtConcurrent::run
     (this,
      &dooble_about::compute_self_digest_task,
      QApplication::applicationFilePath());
+#else
+  m_future = QtConcurrent::run
+    (&dooble_about::compute_self_digest_task,
+     this,
+     QApplication::applicationFilePath());
+#endif
 }
 
 void dooble_about::compute_self_digest_task(const QString &file_path)

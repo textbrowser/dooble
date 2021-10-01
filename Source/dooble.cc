@@ -1976,26 +1976,47 @@ void dooble::prepare_tab_shortcuts(void)
 
       if(i == 9)
 	{
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  shortcut = new QShortcut
 	    (Qt::AltModifier + Qt::Key_0,
 	     this,
 	     SLOT(slot_tab_widget_shortcut_activated(void)));
+#else
+	  shortcut = new QShortcut
+	    (Qt::AltModifier | Qt::Key_0,
+	     this,
+	     SLOT(slot_tab_widget_shortcut_activated(void)));
+#endif
 	  m_tab_widget_shortcuts << shortcut;
 	}
       else
 	{
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  shortcut = new QShortcut
 	    (Qt::AltModifier + Qt::Key(Qt::Key_1 + i),
 	     this,
 	     SLOT(slot_tab_widget_shortcut_activated(void)));
+#else
+	  shortcut = new QShortcut
+	    (Qt::AltModifier | Qt::Key(Qt::Key_1 + i),
+	     this,
+	     SLOT(slot_tab_widget_shortcut_activated(void)));
+#endif
 	  m_tab_widget_shortcuts << shortcut;
 
 	  if(i == m_ui.tab->count() - 1)
 	    {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	      shortcut = new QShortcut
 		(Qt::AltModifier + Qt::Key_0,
 		 this,
 		 SLOT(slot_tab_widget_shortcut_activated(void)));
+#else
+	      shortcut = new QShortcut
+		(Qt::AltModifier | Qt::Key_0,
+		 this,
+		 SLOT(slot_tab_widget_shortcut_activated(void)));
+#endif
 	      m_tab_widget_shortcuts << shortcut;
 	    }
 	}
@@ -2595,7 +2616,11 @@ void dooble::slot_application_locked(bool state, dooble *d)
   for(auto shortcut : m_shortcuts)
     if(shortcut)
       {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	if(QKeySequence(Qt::ControlModifier + Qt::Key_W) == shortcut->key())
+#else
+	if(QKeySequence(Qt::ControlModifier | Qt::Key_W) == shortcut->key())
+#endif
 	  shortcut->setEnabled(!locked && tabs_closable());
 	else
 	  shortcut->setEnabled(!locked);
@@ -2813,18 +2838,32 @@ void dooble::slot_authenticate(void)
 	    {
 	    case 0: // Keccak-512
 	      {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 		m_pbkdf2_future = QtConcurrent::run
 		  (pbkdf2.data(),
 		   &dooble_pbkdf2::pbkdf2,
 		   &dooble_hmac::keccak_512_hmac);
+#else
+		m_pbkdf2_future = QtConcurrent::run
+		  (&dooble_pbkdf2::pbkdf2,
+		   pbkdf2.data(),
+		   &dooble_hmac::keccak_512_hmac);
+#endif
 		break;
 	      }
 	    default: // SHA3-512
 	      {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 		m_pbkdf2_future = QtConcurrent::run
 		  (pbkdf2.data(),
 		   &dooble_pbkdf2::pbkdf2,
 		   &dooble_hmac::sha3_512_hmac);
+#else
+		m_pbkdf2_future = QtConcurrent::run
+		  (&dooble_pbkdf2::pbkdf2,
+		   pbkdf2.data(),
+		   &dooble_hmac::sha3_512_hmac);
+#endif
 		break;
 	      }
 	    }
@@ -3308,6 +3347,7 @@ void dooble::slot_print_preview(QPrinter *printer)
     {
       QEventLoop event_loop;
       bool result = false;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       auto print_preview = [&] (bool success)
 			   {
 			     result = success;
@@ -3315,6 +3355,9 @@ void dooble::slot_print_preview(QPrinter *printer)
 			   };
 
       page->print_page(printer, std::move(print_preview));
+#else
+      page->print_page(printer);
+#endif
       event_loop.exec();
 
       if(!result)
@@ -4032,6 +4075,7 @@ void dooble::slot_tab_widget_shortcut_activated(void)
   auto key(shortcut->key());
   int index = -1;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_1)))
     index = 0;
   else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_2)))
@@ -4051,6 +4095,27 @@ void dooble::slot_tab_widget_shortcut_activated(void)
   else if(key.matches(QKeySequence(Qt::AltModifier + Qt::Key_9)))
     index = 8;
   else
+#else
+  if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_1)))
+    index = 0;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_2)))
+    index = 1;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_3)))
+    index = 2;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_4)))
+    index = 3;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_5)))
+    index = 4;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_6)))
+    index = 5;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_7)))
+    index = 6;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_8)))
+    index = 7;
+  else if(key.matches(QKeySequence(Qt::AltModifier | Qt::Key_9)))
+    index = 8;
+  else
+#endif
     index = m_ui.tab->count() - 1;
 
   m_ui.tab->setCurrentIndex(index);

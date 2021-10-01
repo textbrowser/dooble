@@ -1165,12 +1165,21 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		  m_future.waitForFinished();
 		}
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	      m_future = QtConcurrent::run
 		(this,
 		 &dooble_accepted_or_blocked_domains::save,
 		 dooble::s_cryptography->keys().first,
 		 dooble::s_cryptography->keys().second,
 		 m_domains);
+#else
+	      m_future = QtConcurrent::run
+		(&dooble_accepted_or_blocked_domains::save,
+		 this,
+		 dooble::s_cryptography->keys().first,
+		 dooble::s_cryptography->keys().second,
+		 m_domains);
+#endif
 	      QApplication::restoreOverrideCursor();
 
 	      if(m_import_dialog)
