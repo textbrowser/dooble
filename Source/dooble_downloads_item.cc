@@ -27,7 +27,11 @@
 
 #include <QDir>
 #include <QSqlQuery>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QWebEngineDownloadItem>
+#else
+#include <QWebEngineDownloadRequest>
+#endif
 #include <QWebEngineProfile>
 
 #include "dooble.h"
@@ -38,7 +42,11 @@
 #include "dooble_ui_utilities.h"
 
 dooble_downloads_item::dooble_downloads_item
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 (QWebEngineDownloadItem *download,
+#else
+(QWebEngineDownloadRequest *download,
+#endif
  const bool is_private,
  qintptr oid,
  QWidget *parent):QWidget(parent)
@@ -485,16 +493,30 @@ void dooble_downloads_item::slot_finished(void)
 
   if(m_download)
     {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       if(m_download->state() == QWebEngineDownloadItem::DownloadCancelled)
+#else
+      if(m_download->state() == QWebEngineDownloadRequest::DownloadCancelled)
+#endif	
 	m_ui.information->setText
 	  (tr("Canceled - %1").arg(m_download->url().host()));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       else if(m_download->state() == QWebEngineDownloadItem::DownloadCompleted)
+#else
+      else if(m_download->state() ==
+	      QWebEngineDownloadRequest::DownloadCompleted)
+#endif
 	m_ui.information->setText
 	  (tr("Completed - %1 - %2").
 	   arg(m_download->url().host()).
 	   arg(dooble_ui_utilities::pretty_size(m_download->totalBytes())));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       else if(m_download->state() ==
 	      QWebEngineDownloadItem::DownloadInterrupted)
+#else
+      else if(m_download->state() ==
+	      QWebEngineDownloadRequest::DownloadInterrupted)
+#endif
 	m_ui.information->setText
 	  (tr("Interrupted - %1 - %2").
 	   arg(m_download->url().host()).

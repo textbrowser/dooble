@@ -37,7 +37,11 @@
 
 #include "ui_dooble_downloads_item.h"
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 class QWebEngineDownloadItem;
+#else
+class QWebEngineDownloadRequest
+#endif
 class QWebEngineProfile;
 
 class dooble_downloads_item: public QWidget
@@ -45,10 +49,17 @@ class dooble_downloads_item: public QWidget
   Q_OBJECT
 
  public:
-  dooble_downloads_item(QWebEngineDownloadItem *download,
-			const bool is_private,
-			qintptr oid,
-			QWidget *parent);
+  dooble_downloads_item
+    (
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+     QWebEngineDownloadItem *download,
+#else
+     QWebEngineDownloadRequest *download
+#endif
+     const bool is_private,
+     qintptr oid,
+     QWidget *parent
+     );
   dooble_downloads_item(const QString &download_path,
 			const QString &file_name,
 			const QString &information,
@@ -64,7 +75,11 @@ class dooble_downloads_item: public QWidget
   void cancel(void);
 
  private:
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QPointer<QWebEngineDownloadItem> m_download;
+#else
+  QPointer<QWebEngineDownloadRequest> m_download;
+#endif
   QPointer<QWebEngineProfile> m_profile;
   QPropertyAnimation m_progress_bar_animation;
   QString m_download_path;

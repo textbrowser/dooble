@@ -32,7 +32,11 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QStandardPaths>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QWebEngineDownloadItem>
+#else
+#include <QWebEngineDownloadRequest>
+#endif
 #include <QWebEngineProfile>
 
 #include "dooble.h"
@@ -86,10 +90,17 @@ dooble_downloads::dooble_downloads
 	  SLOT(slot_show_context_menu(const QPoint &)));
 
   if(m_web_engine_profile)
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     connect(m_web_engine_profile,
 	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)),
 	    this,
 	    SLOT(slot_download_requested(QWebEngineDownloadItem *)));
+#else
+    connect(m_web_engine_profile,
+	    SIGNAL(downloadRequested(QWebEngineDownloadRequest *)),
+	    this,
+	    SLOT(slot_download_requested(QWebEngineDownloadRequest *)));
+#endif
 
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   m_ui.download_path->setCursorPosition(0);
@@ -104,7 +115,12 @@ QString dooble_downloads::download_path(void) const
   return m_ui.download_path->text();
 }
 
-bool dooble_downloads::contains(QWebEngineDownloadItem *download) const
+bool dooble_downloads::contains
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+(QWebEngineDownloadItem *download) const
+#else
+(QWebEngineDownloadRequest *download) const
+#endif
 {
   return m_downloads.contains(download);
 }
@@ -339,7 +355,12 @@ void dooble_downloads::purge(void)
   slot_search_timer_timeout();
 }
 
-void dooble_downloads::record_download(QWebEngineDownloadItem *download)
+void dooble_downloads::record_download
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+(QWebEngineDownloadItem *download)
+#else
+(QWebEngineDownloadRequest *download)
+#endif
 {
   if(!download)
     return;
@@ -598,7 +619,12 @@ void dooble_downloads::slot_download_finished(void)
   emit finished();
 }
 
-void dooble_downloads::slot_download_requested(QWebEngineDownloadItem *download)
+void dooble_downloads::slot_download_requested
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+(QWebEngineDownloadItem *download)
+#else
+(QWebEngineDownloadRequest *download)
+#endif
 {
   if(!download)
     return;
@@ -609,7 +635,11 @@ void dooble_downloads::slot_download_requested(QWebEngineDownloadItem *download)
 
     return;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(download->state() == QWebEngineDownloadItem::DownloadRequested)
+#else
+  if(download->state() == QWebEngineDownloadRequest::DownloadRequested)
+#endif
     {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
       download->setDownloadDirectory(download_path());

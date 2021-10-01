@@ -35,7 +35,11 @@
 #include "dooble_main_window.h"
 #include "ui_dooble_downloads.h"
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 class QWebEngineDownloadItem;
+#else
+class QWebEngineDownloadRequest;
+#endif
 class QWebEngineProfile;
 
 class dooble_downloads: public dooble_main_window
@@ -45,7 +49,11 @@ class dooble_downloads: public dooble_main_window
  public:
   dooble_downloads(QWebEngineProfile *web_engine_profile, QWidget *parent);
   QString download_path(void) const;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   bool contains(QWebEngineDownloadItem *download) const;
+#else
+  bool contains(QWebEngineDownloadRequest *download) const;
+#endif
   bool is_finished(void) const;
   bool is_private(void) const;
   int finished_size(void) const;
@@ -54,7 +62,11 @@ class dooble_downloads: public dooble_main_window
   void abort(void);
   void clear(void);
   void purge(void);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   void record_download(QWebEngineDownloadItem *download);
+#else
+  void record_download(QWebEngineDownloadRequest *download);
+#endif
   void show_normal(QWidget *parent);
 
  public slots:
@@ -82,7 +94,11 @@ class dooble_downloads: public dooble_main_window
   void slot_download_destroyed(void);
   void slot_download_finished(void);
   void slot_download_path_inspection_timer_timeout(void);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   void slot_download_requested(QWebEngineDownloadItem *download);
+#else
+  void slot_download_requested(QWebEngineDownloadItem *download);
+#endif
   void slot_find(void);
   void slot_open_download_page(void);
   void slot_populate(void);

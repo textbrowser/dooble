@@ -30,6 +30,7 @@
 */
 
 #include <QDataStream>
+#include <QIODevice>
 #include <QtMath>
 #include <iostream>
 
