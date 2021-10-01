@@ -266,7 +266,6 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
   if(screen)
     desk = screen->geometry();
 #endif
-
   auto list(QApplication::topLevelWidgets());
 
   for(int i = 0; (extrah == 0 || extraw == 0) && i < list.size(); i++)
