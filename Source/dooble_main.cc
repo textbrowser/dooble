@@ -222,6 +222,11 @@ int main(int argc, char *argv[])
   QApplication::addLibraryPath("plugins");
   QApplication::setStyle(QStyleFactory::create("Windows"));
 #endif
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  QString dooble_directory(".dooble_v2");
+#else
+  QString dooble_directory(".dooble_qt6");
+#endif
 #if defined(Q_OS_WIN)
   QFileInfo file_info;
   QString username(qgetenv("USERNAME").mid(0, 32).trimmed().constData());
@@ -233,14 +238,14 @@ int main(int argc, char *argv[])
     home_dir = QDir::home();
 
   if(username.isEmpty())
-    home_dir.mkdir(".dooble_v2");
+    home_dir.mkdir(dooble_directory);
   else
-    home_dir.mkdir(username + QDir::separator() + ".dooble_v2");
+    home_dir.mkdir(username + QDir::separator() + dooble_directory);
 
   if(username.isEmpty())
     dooble_settings::set_setting
       ("home_path",
-       home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+       home_dir.absolutePath() + QDir::separator() + dooble_directory);
   else
     dooble_settings::set_setting
       ("home_path",
@@ -248,7 +253,7 @@ int main(int argc, char *argv[])
        QDir::separator() +
        username +
        QDir::separator() +
-       ".dooble_v2");
+       dooble_directory);
 #else
   auto xdg_data_home(qgetenv("XDG_DATA_HOME").trimmed());
 
@@ -256,10 +261,10 @@ int main(int argc, char *argv[])
     {
       auto home_dir(QDir::home());
 
-      home_dir.mkdir(".dooble_v2");
+      home_dir.mkdir(dooble_directory);
       dooble_settings::set_setting
 	("home_path",
-	 home_dir.absolutePath() + QDir::separator() + ".dooble_v2");
+	 home_dir.absolutePath() + QDir::separator() + dooble_directory);
     }
   else
     {
