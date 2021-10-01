@@ -498,7 +498,9 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 void dooble_downloads_item::slot_download_progress(void)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  slot_download_progress(m_download->receivedBytes(), m_download->totalBytes());
+  if(m_download)
+    slot_download_progress
+      (m_download->receivedBytes(), m_download->totalBytes());
 #endif
 }
 
