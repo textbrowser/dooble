@@ -1421,7 +1421,7 @@ void dooble_settings::restore(bool read_database)
      m_ui.webrtc_public_interfaces_only->isChecked());
 #endif
   QWebEngineProfile::defaultProfile()->settings()->setAttribute
-    (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());  
+    (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 #endif
   {
     static auto list(QList<QToolButton *> () << m_ui.cache
@@ -1507,8 +1507,13 @@ void dooble_settings::save_fonts(void)
     while(it.hasNext())
       {
 	it.next();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	QWebEngineSettings::defaultSettings()->setFontSize
 	  (it.key(), it.value().second);
+#else
+	QWebEngineProfile()::defaultProfile()->settings()->setFontSize
+	  (it.key(), it.value().second);
+#endif
 	set_setting(it.value().first, it.value().second);
       }
   }
@@ -1949,6 +1954,7 @@ void dooble_settings::slot_apply(void)
     set_setting("dictionaries", text);
   }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
@@ -1978,6 +1984,35 @@ void dooble_settings::slot_apply(void)
 #endif
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
+#else
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::AutoLoadImages,
+     m_ui.automatic_loading_of_images->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::DnsPrefetchEnabled,
+     m_ui.dns_prefetch->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanAccessClipboard,
+     m_ui.javascript_access_clipboard->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     m_ui.animated_scrolling->isChecked());
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly,
+     m_ui.webrtc_public_interfaces_only->isChecked());
+#endif
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
+#endif
 
   {
     QWriteLocker locker(&s_settings_mutex);
