@@ -2500,7 +2500,11 @@ void dooble_settings::slot_populate(void)
   prepare_table_statistics();
 
   {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     QMapIterator<QUrl, QPair<int, bool> > it(s_site_features_permissions);
+#else
+    QMultiMapIterator<QUrl, QPair<int, bool> > it(s_site_features_permissions);
+#endif
     int i = 0;
 
     while(it.hasNext())
@@ -3087,12 +3091,21 @@ void dooble_settings::slot_save_credentials(void)
 				 m_ui.iterations->value(),
 				 1024));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(m_ui.hash->currentIndex() == 0)
     m_pbkdf2_future = QtConcurrent::run
       (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::keccak_512_hmac);
   else
     m_pbkdf2_future = QtConcurrent::run
       (pbkdf2.data(), &dooble_pbkdf2::pbkdf2, &dooble_hmac::sha3_512_hmac);
+#else
+  if(m_ui.hash->currentIndex() == 0)
+    m_pbkdf2_future = QtConcurrent::run
+      (&dooble_pbkdf2::pbkdf2, pbkdf2.data(), &dooble_hmac::keccak_512_hmac);
+  else
+    m_pbkdf2_future = QtConcurrent::run
+      (&dooble_pbkdf2::pbkdf2, pbkdf2.data(), &dooble_hmac::sha3_512_hmac);
+#endif
 
   m_pbkdf2_future_watcher.setFuture(m_pbkdf2_future);
   connect(m_pbkdf2_dialog,

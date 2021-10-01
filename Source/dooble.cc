@@ -1146,7 +1146,11 @@ void dooble::prepare_control_w_shortcut(void)
 {
   for(auto shortcut : m_shortcuts)
     if(shortcut)
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       if(QKeySequence(Qt::ControlModifier + Qt::Key_W) == shortcut->key())
+#else
+      if(QKeySequence(Qt::ControlModifier | Qt::Key_W) == shortcut->key())
+#endif
 	{
 	  shortcut->setEnabled(tabs_closable());
 	  break;

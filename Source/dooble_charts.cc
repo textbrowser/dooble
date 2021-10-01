@@ -327,23 +327,6 @@ y_axis_properties_for_database(void) const
   return hash;
 }
 
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-QHash<dooble_charts::Properties, QVariant>
-#else
-QMultiHash<dooble_charts::Properties, QVariant>
-#endif
-dooble_charts::all_properties(void) const
-{
-  QMultiHash<dooble_charts::Properties, QVariant> properties;
-
-  properties.unite(data_properties());
-  properties.unite(legend_properties());
-  properties.unite(this->properties());
-  properties.unite(x_axis_properties());
-  properties.unite(y_axis_properties());
-  return std::move(properties);
-}
-
 QHash<dooble_charts::Properties, QVariant>
 dooble_charts::data_properties(void) const
 {
@@ -650,6 +633,19 @@ QLegend::MarkerShape dooble_charts::string_to_legend_marker_shape
 QMenu *dooble_charts::menu(void)
 {
   return m_menu;
+}
+
+QMultiHash<dooble_charts::Properties, QVariant>
+dooble_charts::all_properties(void) const
+{
+  QMultiHash<dooble_charts::Properties, QVariant> properties;
+
+  properties.unite(data_properties());
+  properties.unite(legend_properties());
+  properties.unite(this->properties());
+  properties.unite(x_axis_properties());
+  properties.unite(y_axis_properties());
+  return properties;
 }
 
 #ifdef DOOBLE_QTCHARTS_PRESENT
@@ -1617,7 +1613,12 @@ void dooble_charts::slot_apply_properties_after_theme_changed(void)
 {
   if(m_property_editor)
     {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       QHashIterator<dooble_charts::Properties, QVariant> it(all_properties());
+#else
+      QMultiHashIterator<dooble_charts::Properties, QVariant>
+	it(all_properties());
+#endif
 
       while(it.hasNext())
 	{
