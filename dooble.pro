@@ -4,7 +4,13 @@
 
 cache()
 include(dooble-source.pro)
+
+versionAtLeast(QT_VERSION, 6.2.0) {
+qtPrepareTool(CONVERT_TOOL, ../libexec/qwebengine_convert_dict)
+} else {
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+}
+
 DICTIONARIES_DIR = qtwebengine_dictionaries
 
 macx {
@@ -213,7 +219,6 @@ QT		+= concurrent \
                    printsupport \
                    qml \
                    sql \
-		   webengine \
                    webenginewidgets \
                    widgets \
                    xml
@@ -224,6 +229,10 @@ QT              += charts
 message("The QtCharts module has been discovered.")
 } else {
 warning("The QtCharts module is not present. I'm very sorry!")
+}
+
+qtHaveModule(webengine) {
+QT              += webengine
 }
 
 TEMPLATE	= app
@@ -294,7 +303,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
-                          -Wstrict-overflow=5 \
 			  -Wstringop-overflow=2 \
                           -Wundef \
                           -Wzero-as-null-pointer-constant \
