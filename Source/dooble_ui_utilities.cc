@@ -26,7 +26,9 @@
 */
 
 #include <QApplication>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QDesktopWidget>
+#endif
 #include <QScreen>
 #include <QWidget>
 
@@ -204,12 +206,21 @@ int dooble_ui_utilities::context_menu_width(QWidget *widget)
   if(!widget)
     return 250;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   auto desktopWidget = QApplication::desktop();
 
   if(!desktopWidget)
     return 250;
   else
     return qMax(250, desktopWidget->screenGeometry(widget).width() / 4);
+#else
+  auto screen = QGuiApplication::screenAt(widget->pos());
+
+  if(!screen)
+    return 250;
+  else
+    return qMax(250, screen->geometry().width() / 4);
+#endif
 }
 
 void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
@@ -230,6 +241,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   QRect desk;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   if(w)
     scrn = QApplication::desktop()->screenNumber(w);
 #if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
@@ -244,6 +256,12 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 #else
   desk = QGuiApplication::screens().value(scrn) ?
     QGuiApplication::screens().value(scrn)->geometry() : QRect();
+#endif
+#else
+  auto screen = QGuiApplication::screenAt(widget->pos());
+
+  if(screen)
+    desk = screen->geometry();
 #endif
 
   auto list(QApplication::topLevelWidgets());

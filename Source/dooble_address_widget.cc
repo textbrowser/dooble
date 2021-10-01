@@ -188,9 +188,15 @@ bool dooble_address_widget::event(QEvent *event)
 	}
       else
 	{
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  QKeySequence key_sequence
 	    (dynamic_cast<QKeyEvent *> (event)->modifiers() +
 	     Qt::Key(dynamic_cast<QKeyEvent *> (event)->key()));
+#else
+	  QKeySequence key_sequence
+	    (dynamic_cast<QKeyEvent *> (event)->modifiers() |
+	     Qt::Key(dynamic_cast<QKeyEvent *> (event)->key()));
+#endif
 
 	  if(QKeySequence(Qt::ControlModifier + Qt::Key_L) == key_sequence)
 	    {

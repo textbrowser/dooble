@@ -26,8 +26,10 @@
 */
 
 #include <QContextMenuEvent>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QDesktopWidget>
 #include <QWebEngineContextMenuData>
+#endif
 #include <QWebEngineProfile>
 
 #include "dooble.h"

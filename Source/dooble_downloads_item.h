@@ -40,7 +40,7 @@
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 class QWebEngineDownloadItem;
 #else
-class QWebEngineDownloadRequest
+class QWebEngineDownloadRequest;
 #endif
 class QWebEngineProfile;
 
@@ -54,7 +54,7 @@ class dooble_downloads_item: public QWidget
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
      QWebEngineDownloadItem *download,
 #else
-     QWebEngineDownloadRequest *download
+     QWebEngineDownloadRequest *download,
 #endif
      const bool is_private,
      qintptr oid,

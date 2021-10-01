@@ -84,8 +84,12 @@ class dooble_page: public QWidget
   void inject_custom_css(void);
   void load(const QUrl &url);
   void print_page(QPrinter *printer);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   void print_page(QPrinter *printer,
 		  const QWebEngineCallback<bool> &result_callback);
+#else
+  void print_page(QPrinter *printer);
+#endif
   void reload(void);
   void reload_periodically(int seconds);
   void save(const QString &file_name);
