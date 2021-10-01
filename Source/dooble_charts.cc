@@ -327,8 +327,12 @@ y_axis_properties_for_database(void) const
   return hash;
 }
 
-QHash<dooble_charts::Properties, QVariant> dooble_charts::
-all_properties(void) const
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+QHash<dooble_charts::Properties, QVariant>
+#else
+QMultiHash<dooble_charts::Properties, QVariant>
+#endif
+dooble_charts::all_properties(void) const
 {
   QMultiHash<dooble_charts::Properties, QVariant> properties;
 

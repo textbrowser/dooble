@@ -1008,7 +1008,11 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   hash.unite(chart->x_axis_properties());
   hash.unite(chart->y_axis_properties());
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QHashIterator<dooble_charts::Properties, QVariant> it(hash);
+#else
+  QMultiHashIterator<dooble_charts::Properties, QVariant> it(hash);
+#endif
 #else
   QHashIterator<dooble_charts::Properties, QVariant> it
     (chart->data_properties().

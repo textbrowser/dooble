@@ -78,7 +78,11 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
   QHash<QUrl, char> hash;
   QList<QAction *> list;
   QReadLocker locker(&m_history_mutex);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QMapIterator<QDateTime, QUrl> it(m_history_date_time);
+#else
+  QMultiMapIterator<QDateTime, QUrl> it(m_history_date_time);
+#endif
 
   it.toBack();
 
