@@ -732,7 +732,12 @@ void dooble_settings::prepare_fonts(void)
 	     << QWebEngineSettings::StandardFont;
 
     for(const auto family : families)
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       fonts << QWebEngineSettings::defaultSettings()->fontFamily(family);
+#else
+      fonts << QWebEngineProfile::
+	       defaultProfile()->settings()->fontFamily(family);
+#endif
 
     {
       QReadLocker lock(&s_settings_mutex);
@@ -750,8 +755,13 @@ void dooble_settings::prepare_fonts(void)
 	  if(list.at(i).isEmpty())
 	    list.replace(i, fonts.at(i));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  QWebEngineSettings::defaultSettings()->setFontFamily
 	    (families.at(i), list.at(i));
+#else
+	  QWebEngineProfile::defaultProfile()->settings()->setFontFamily
+	    (families.at(i), list.at(i));
+#endif
 	}
     }
 

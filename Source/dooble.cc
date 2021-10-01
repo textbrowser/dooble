@@ -1455,6 +1455,7 @@ void dooble::prepare_private_web_engine_profile_settings(void)
 	   << QWebEngineSettings::SansSerifFont
 	   << QWebEngineSettings::SerifFont
 	   << QWebEngineSettings::StandardFont;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   fonts << QWebEngineSettings::defaultSettings()->fontFamily(families.at(0))
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(1))
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(2))
@@ -1462,6 +1463,22 @@ void dooble::prepare_private_web_engine_profile_settings(void)
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(4))
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(5))
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(6));
+#else
+  fonts << QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(0))
+	<< QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(1))
+	<< QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(2))
+	<< QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(3))
+	<< QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(4))
+	<< QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(5))
+	<< QWebEngineProfile::
+           defaultProfile()->settings()->fontFamily(families.at(6));
+#endif
 
   for(int i = 0; i < families.size(); i++)
     m_web_engine_profile->settings()->setFontFamily
@@ -1470,6 +1487,7 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   QList<QWebEngineSettings::FontSize> types;
   QList<int> sizes;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   sizes << QWebEngineSettings::defaultSettings()->fontSize
            (QWebEngineSettings::DefaultFixedFontSize)
 	<< QWebEngineSettings::defaultSettings()->fontSize
@@ -1478,6 +1496,16 @@ void dooble::prepare_private_web_engine_profile_settings(void)
            (QWebEngineSettings::MinimumFontSize)
 	<< QWebEngineSettings::defaultSettings()->fontSize
            (QWebEngineSettings::MinimumLogicalFontSize);
+#else
+  sizes << QWebEngineProfile::defaultProfile()->settings()->fontSize
+           (QWebEngineSettings::DefaultFixedFontSize)
+	<< QWebEngineProfile::defaultProfile()->settings()->fontSize
+           (QWebEngineSettings::DefaultFontSize)
+	<< QWebEngineProfile::defaultProfile()->settings()->fontSize
+           (QWebEngineSettings::MinimumFontSize)
+	<< QWebEngineProfile::defaultProfile()->settings()->fontSize
+           (QWebEngineSettings::MinimumLogicalFontSize);
+#endif
   types << QWebEngineSettings::DefaultFixedFontSize
 	<< QWebEngineSettings::DefaultFontSize
 	<< QWebEngineSettings::MinimumFontSize
@@ -1499,6 +1527,7 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   m_web_engine_profile->setSpellCheckEnabled(true);
   m_web_engine_profile->setSpellCheckLanguages
     (QWebEngineProfile::defaultProfile()->spellCheckLanguages());
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::DnsPrefetchEnabled,
      QWebEngineSettings::defaultSettings()->
@@ -1557,6 +1586,64 @@ void dooble::prepare_private_web_engine_profile_settings(void)
     (QWebEngineSettings::XSSAuditingEnabled,
      QWebEngineSettings::defaultSettings()->
      testAttribute(QWebEngineSettings::XSSAuditingEnabled));
+#else
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::DnsPrefetchEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::DnsPrefetchEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::ErrorPageEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::ErrorPageEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::FocusOnNavigationEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::FocusOnNavigationEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::FullScreenSupportEnabled, true);
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanAccessClipboard,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanOpenWindows,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::JavascriptEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::JavascriptEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, true);
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::PluginsEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::PluginsEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::ScreenCaptureEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::ScreenCaptureEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::ScrollAnimatorEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::WebGLEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::WebGLEnabled));
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::WebRTCPublicInterfacesOnly));
+#endif
+  m_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::XSSAuditingEnabled,
+     QWebEngineProfile::defaultProfile()->settings()->
+     testAttribute(QWebEngineSettings::XSSAuditingEnabled));
+#endif
 }
 
 void dooble::prepare_shortcuts(void)

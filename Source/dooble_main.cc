@@ -325,6 +325,7 @@ int main(int argc, char *argv[])
      QDir::separator() +
      "WebEnginePersistentStorage");
   QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
@@ -344,6 +345,24 @@ int main(int argc, char *argv[])
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
 #endif
+#endif
+#else
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::ErrorPageEnabled, true);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::FocusOnNavigationEnabled, true);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::FullScreenSupportEnabled, true);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::JavascriptCanOpenWindows, true);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::LocalStorageEnabled, true);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::ScreenCaptureEnabled, false);
+  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+    (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
 #endif
   splash.showMessage(QObject::tr("Preparing Dooble objects."),
 		     Qt::AlignHCenter | Qt::AlignBottom);
