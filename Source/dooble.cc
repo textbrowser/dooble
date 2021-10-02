@@ -2134,9 +2134,9 @@ void dooble::print(QWidget *parent, dooble_charts *chart)
 
       auto view = chart->view();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-      auto xscale = printer.pageLayout().fullRectPixels(printer.resolution()).
+      auto xscale = printer.pageLayout().paintRectPixels(printer.resolution()).
 	width() / static_cast<double> (view->width());
-      auto yscale = printer.pageLayout().fullRectPixels(printer.resolution()).
+      auto yscale = printer.pageLayout().paintRectPixels(printer.resolution()).
 	height() / static_cast<double> (view->height());
 #else
       auto xscale = printer.pageRect().width() /
@@ -2148,10 +2148,10 @@ void dooble::print(QWidget *parent, dooble_charts *chart)
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
       painter.translate
-	(printer.pageLayout().fullRectPixels(printer.resolution()).x() +
-	 printer.pageLayout().fullRectPixels(printer.resolution()).width() / 2,
-	 printer.pageLayout().fullRectPixels(printer.resolution()).y() +
-	 printer.pageLayout().fullRectPixels(printer.resolution()).
+	(printer.pageLayout().paintRectPixels(printer.resolution()).x() +
+	 printer.pageLayout().paintRectPixels(printer.resolution()).width() / 2,
+	 printer.pageLayout().paintRectPixels(printer.resolution()).y() +
+	 printer.pageLayout().paintRectPixels(printer.resolution()).
 	 height() / 2);
 #else
       painter.translate
@@ -2204,9 +2204,9 @@ void dooble::print_preview(QPrinter *printer, dooble_charts *chart)
 
   auto view = chart->view();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-  auto xscale = printer->pageLayout().fullRectPixels(printer->resolution()).
+  auto xscale = printer->pageLayout().paintRectPixels(printer->resolution()).
     width() / static_cast<double> (view->width());
-  auto yscale = printer->pageLayout().fullRectPixels(printer->resolution()).
+  auto yscale = printer->pageLayout().paintRectPixels(printer->resolution()).
     height() / static_cast<double> (view->height());
 #else
   auto xscale = printer->pageRect().width() /
@@ -2218,11 +2218,11 @@ void dooble::print_preview(QPrinter *printer, dooble_charts *chart)
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   painter.translate
-    (printer->pageLayout().fullRectPixels(printer->resolution()).x() +
-     printer->pageLayout().fullRectPixels(printer->resolution()).
+    (printer->pageLayout().paintRectPixels(printer->resolution()).x() +
+     printer->pageLayout().paintRectPixels(printer->resolution()).
      width() / 2,
-     printer->pageLayout().fullRectPixels(printer->resolution()).y() +
-     printer->pageLayout().fullRectPixels(printer->resolution()).
+     printer->pageLayout().paintRectPixels(printer->resolution()).y() +
+     printer->pageLayout().paintRectPixels(printer->resolution()).
      height() / 2);
 #else
   painter.translate
