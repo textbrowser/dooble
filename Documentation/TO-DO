@@ -185,11 +185,12 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. (Content blocking.)
 - Optional testing of Threefish.
 - Qt 6.2 LTS:
-  Charts
+  Charts (Completed)
   Charts Print Preview
   Downloads (Completed)
   Page Find
   Print Preview
+  Shortcuts (Completed)
 - Search engine icons should be based on host names.
 - Shortcuts browser.
 - Sign Debian release: new public keys.
