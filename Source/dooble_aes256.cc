@@ -339,7 +339,8 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
 
   plaintext.replace
     (plaintext.length() - static_cast<int> (sizeof(int)),
-     static_cast<int> (sizeof(int)), originalLength);
+     static_cast<int> (sizeof(int)),
+     originalLength);
 
   auto iterations = plaintext.length() / m_block_length;
 
