@@ -674,7 +674,7 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
   QByteArray original_length;
   QDataStream out(&original_length, QIODevice::WriteOnly);
 
-  out << bytes.length();
+  out << static_cast<int> (bytes.length());
 
   if(out.status() != QDataStream::Ok)
     return QByteArray();
