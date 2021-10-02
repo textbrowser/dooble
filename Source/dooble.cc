@@ -3436,22 +3436,22 @@ void dooble::slot_print_preview(QPrinter *printer)
     print_preview(printer, chart);
   else if(page)
     {
-      QEventLoop event_loop;
-      bool result = false;
+      auto ok = false;
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+      QEventLoop event_loop;
       auto print_preview = [&] (bool success)
 			   {
-			     result = success;
+			     ok = success;
 			     event_loop.quit();
 			   };
 
       page->print_page(printer, std::move(print_preview));
+      event_loop.exec();
 #else
       page->print_page(printer);
 #endif
-      event_loop.exec();
 
-      if(!result)
+      if(!ok)
 	{
 	  QPainter painter;
 
