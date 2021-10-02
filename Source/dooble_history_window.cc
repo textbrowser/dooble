@@ -1103,7 +1103,7 @@ void dooble_history_window::slot_show_context_menu(const QPoint &point)
 
   menu.addAction(tr("&Copy Location"), this, SLOT(slot_copy_location(void)));
   menu.addSeparator();
-  menu.addAction(tr("&Delete Page(s) (Non-Favorites)"),
+  menu.addAction(tr("Delete Page(s) (Non-Favorites)"),
 		 this,
 		 SLOT(slot_delete_pages(void)));
   menu.addAction(tr("&Delete Page(s)"),

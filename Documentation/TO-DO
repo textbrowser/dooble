@@ -29,6 +29,7 @@ Completed Items
 - Cookie domains without child cookies.
 - Cookie identifiers.
 - Cookies Window - Toggle Shown.
+- Cookies are not always deleted properly.
 - Cookies menu item within Tools.
 - Correct QWebEngineUrlScheme::registerScheme: Scheme "gopher" is a
   standard scheme. Added DOOBLE_REGISTER_GOPHER_SCHEME.
@@ -187,7 +188,9 @@ Remaining Items
 - Qt 6.2 LTS:
   Charts (Completed)
   Charts Print Preview
+  Cryptography
   Downloads (Completed)
+  Gopher
   Page Find
   Print Preview
   Shortcuts (Completed)
@@ -199,7 +202,6 @@ Remaining Items
 Unknown Items
 
 - Certificate information. Requires a WebEngine interface.
-- Cookies are not always deleted properly.
 - HMAC or KMAC.
 - Multiple certificate exceptions.
 - Optional Document Mode.
