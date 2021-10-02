@@ -366,8 +366,10 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::LocalStorageEnabled, true);
   QWebEngineProfile::defaultProfile()->settings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   QWebEngineProfile::defaultProfile()->settings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
+#endif
 #endif
   splash.showMessage(QObject::tr("Preparing Dooble objects."),
 		     Qt::AlignHCenter | Qt::AlignBottom);
