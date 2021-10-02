@@ -2205,16 +2205,16 @@ void dooble::print_preview(QPrinter *printer, dooble_charts *chart)
   auto view = chart->view();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   auto xscale = printer->pageLayout().fullRectPixels(printer->resolution()).
-    width() / static_cast<double> (view->width());
+    width() / view->width();
   auto yscale = printer->pageLayout().fullRectPixels(printer->resolution()).
-    height() / static_cast<double> (view->height());
+    height() / view->height();
 #else
   auto xscale = printer->pageRect().width() /
     static_cast<double> (view->width());
   auto yscale = printer->pageRect().height() /
     static_cast<double> (view->height());
 #endif
-  double scale = qMin(xscale, yscale);
+  auto scale = qMin(xscale, yscale);
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   painter.translate
