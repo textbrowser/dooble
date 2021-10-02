@@ -28,6 +28,9 @@
 #include <QAuthenticator>
 #include <QPrinter>
 #include <QToolTip>
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QWebEngineFindTextResult>
+#endif
 #include <QWebEngineHistoryItem>
 #include <QWebEngineProfile>
 #include <QWidgetAction>
@@ -522,10 +525,20 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
     (text,
      find_flags,
      [=] (bool found)
+#else
+  m_view->findText
+    (text,
+     find_flags,
+     [=] (const QWebEngineFindTextResult &result)
+#endif
      {
        static QPalette s_palette(m_ui.find->palette());
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
        if(!found)
+#else
+       if(result.numberOfMatches() == 0)
+#endif
 	 {
 	   if(!text.isEmpty())
 	     {
@@ -541,10 +554,6 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
        else
 	 m_ui.find->setPalette(s_palette);
      });
-#else
-  Q_UNUSED(find_flags);
-  Q_UNUSED(text);
-#endif
 }
 
 void dooble_page::go_to_backward_item(int index)
