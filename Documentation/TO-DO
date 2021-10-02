@@ -187,11 +187,13 @@ Remaining Items
 - Optional testing of Threefish.
 - Qt 6.2 LTS:
   Charts (Completed)
+  Charts Print
   Charts Print Preview
-  Cryptography
+  Cryptography (Completed)
   Downloads (Completed)
   Gopher
   Page Find
+  Print (Completed)
   Print Preview
   Shortcuts (Completed)
 - Search engine icons should be based on host names.
