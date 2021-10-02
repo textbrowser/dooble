@@ -144,34 +144,44 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
-  auto f = qFloor(static_cast<double> (rect().width()) /
-		  static_cast<double> (qMax(1, count())));
   auto size(QTabBar::tabSizeHint(index));
-  static int maximum_tab_width = 225;
-  static int minimum_tab_width = 125;
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east" || tab_position == "west")
+    {
+    }
+  else
+    {
+      auto f = qFloor(static_cast<double> (rect().width()) /
+		      static_cast<double> (qMax(1, count())));
+      static int maximum_tab_width = 225;
+      static int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
-  QFontMetrics font_metrics(font());
-  static auto tab_height = 15 + font_metrics.height();
+      QFontMetrics font_metrics(font());
+      static auto tab_height = 15 + font_metrics.height();
 #else
-  static auto tab_height = qBound
-    (0,
-     dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
-     50) +
-    size.height();
+      static auto tab_height = qBound
+	(0,
+	 dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
+	 50) +
+	size.height();
 #endif
 
-  size.setHeight(tab_height);
-  size.setWidth(qMin(f, maximum_tab_width));
+      size.setHeight(tab_height);
+      size.setWidth(qMin(f, maximum_tab_width));
 
-  if(count() - 1 == index)
-    {
-      int d = rect().width() - count() * size.width();
+      if(count() - 1 == index)
+	{
+	  int d = rect().width() - count() * size.width();
 
-      if(d > 0)
-	size.setWidth(qMin(d + size.width(), maximum_tab_width));
+	  if(d > 0)
+	    size.setWidth(qMin(d + size.width(), maximum_tab_width));
+	}
+
+      size.setWidth(qMax(minimum_tab_width, size.width()));
     }
 
-  size.setWidth(qMax(minimum_tab_width, size.width()));
   return size;
 }
 

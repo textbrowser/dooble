@@ -1223,8 +1223,15 @@ void dooble_settings::restore(bool read_database)
   m_ui.show_new_downloads->setChecked
     (s_settings.value("show_new_downloads", true).toBool());
 
-  if(s_settings.value("tab_position") == "north")
+  auto tab_position
+    (s_settings.value("tab_position").toString().trimmed());
+
+  if(tab_position == "east")
     m_ui.tab_position->setCurrentIndex(0);
+  else if(tab_position == "south")
+    m_ui.tab_position->setCurrentIndex(2);
+  else if(tab_position == "west")
+    m_ui.tab_position->setCurrentIndex(3);
   else
     m_ui.tab_position->setCurrentIndex(1);
 
@@ -2132,10 +2139,30 @@ void dooble_settings::slot_apply(void)
 	      m_ui.show_hovered_links_tool_tips->isChecked());
   set_setting("show_new_downloads", m_ui.show_new_downloads->isChecked());
 
-  if(m_ui.tab_position->currentIndex() == 0)
-    set_setting("tab_position", "north");
-  else
-    set_setting("tab_position", "south");
+  switch(m_ui.tab_position->currentIndex())
+    {
+    case 0:
+      {
+	set_setting("tab_position", "east");
+	break;
+      }
+    case 1:
+    default:
+      {
+	set_setting("tab_position", "north");
+	break;
+      }
+    case 2:
+      {
+	set_setting("tab_position", "south");
+	break;
+      }
+    case 3:
+      {
+	set_setting("tab_position", "west");
+	break;
+      }
+    }
 
   set_setting("theme_color_index", m_ui.theme_color->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
