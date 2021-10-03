@@ -515,12 +515,12 @@ void dooble_tab_widget::slot_set_visible_corner_button(bool state)
     }
   else
     {
-      m_left_corner_widget->setVisible(state);
-
       if(state)
 	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
       else
 	setCornerWidget(nullptr, Qt::TopLeftCorner);
+
+      m_left_corner_widget->setVisible(state); // Order is important.
     }
 }
 
@@ -577,12 +577,12 @@ void dooble_tab_widget::slot_show_right_corner_widget(bool state)
     }
   else
     {
-      m_right_corner_widget->setVisible(state);
-
       if(state)
 	setCornerWidget(m_right_corner_widget, Qt::TopRightCorner);
       else
 	setCornerWidget(nullptr, Qt::TopRightCorner);
+
+      m_right_corner_widget->setVisible(state); // Order is important.
     }
 }
 
