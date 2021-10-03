@@ -140,18 +140,6 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	}
     }
 
-  auto tab_position
-    (dooble_settings::setting("tab_position").toString().trimmed());
-
-  if(tab_position == "east")
-    setTabPosition(QTabWidget::East);
-  else if(tab_position == "south")
-    setTabPosition(QTabWidget::South);
-  else if(tab_position == "west")
-    setTabPosition(QTabWidget::West);
-  else
-    setTabPosition(QTabWidget::North);
-
   m_tab_bar = new dooble_tab_bar(this);
   m_tab_bar->set_corner_widget(m_right_corner_widget);
   connect(dooble::s_settings,
@@ -207,8 +195,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SIGNAL(tabs_menu_button_clicked(void)));
   prepare_icons();
-  setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
   setTabBar(m_tab_bar);
+  set_tab_position();
 }
 
 QIcon dooble_tab_widget::tabIcon(int index) const
@@ -353,6 +341,37 @@ void dooble_tab_widget::setTabTextColor(int index, const QColor &color)
 void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 {
   QTabWidget::setTabToolTip(index, dooble_ui_utilities::pretty_tool_tip(text));
+}
+
+void dooble_tab_widget::set_tab_position(void)
+{
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east")
+    {
+      setTabPosition(QTabWidget::East);
+    }
+  else if(tab_position == "south")
+    {
+      if(!cornerWidget(Qt::TopLeftCorner))
+	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+
+      setTabPosition(QTabWidget::South);
+    }
+  else if(tab_position == "west")
+    {
+      setTabPosition(QTabWidget::West);
+    }
+  else
+    {
+      if(!cornerWidget(Qt::TopLeftCorner))
+	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+
+      setTabPosition(QTabWidget::North);
+    }
+
+  m_tab_bar->resize(m_tab_bar->sizeHint());
 }
 
 void dooble_tab_widget::slot_about_to_show_history_menu(void)

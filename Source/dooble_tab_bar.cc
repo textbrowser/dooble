@@ -150,6 +150,22 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 
   if(tab_position == "east" || tab_position == "west")
     {
+      auto f = qFloor(static_cast<double> (rect().height()) /
+		      static_cast<double> (qMax(1, count())));
+      static int maximum_tab_height = 225;
+      static int minimum_tab_height = 125;
+
+      size.setHeight(qMin(f, maximum_tab_height));
+
+      if(count() - 1 == index)
+	{
+	  int d = rect().height() - count() * size.height();
+
+	  if(d > 0)
+	    size.setHeight(qMin(d + size.height(), maximum_tab_height));
+	}
+
+      size.setHeight(qMax(minimum_tab_height, size.height()));
     }
   else
     {
@@ -164,11 +180,10 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
       static auto tab_height = qBound
 	(0,
 	 dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
-	 50) +
-	size.height();
+	 50);
 #endif
 
-      size.setHeight(tab_height);
+      size.setHeight(size.height() + tab_height);
       size.setWidth(qMin(f, maximum_tab_width));
 
       if(count() - 1 == index)
