@@ -356,6 +356,18 @@ void dooble_tab_bar::prepare_style_sheets(void)
 
 void dooble_tab_bar::set_corner_widget(QWidget *widget)
 {
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east" || tab_position == "west")
+    {
+      if(m_corner_widget)
+	delete m_corner_widget->layout();
+
+      m_corner_widget = nullptr;
+      return;
+    }
+
   if(m_corner_widget || !widget)
     return;
   else
@@ -368,15 +380,7 @@ void dooble_tab_bar::set_corner_widget(QWidget *widget)
     }
 
   delete m_corner_widget->layout();
-
-  auto tab_position
-    (dooble_settings::setting("tab_position").toString().trimmed());
-
-  if(tab_position == "east" || tab_position == "west")
-    m_corner_widget->setLayout(new QVBoxLayout(this));
-  else
-    m_corner_widget->setLayout(new QHBoxLayout(this));
-
+  m_corner_widget->setLayout(new QHBoxLayout(this));
 #ifdef Q_OS_MACOS
   m_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
 #else
