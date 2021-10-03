@@ -630,6 +630,11 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_about_to_show_history_menu(void)),
 	  Qt::UniqueConnection);
+  connect(m_ui.menu_tabs,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_tabs_menu(void)),
+	  Qt::UniqueConnection);
   connect(m_ui.menu_tools,
 	  SIGNAL(aboutToHide(void)),
 	  this,
@@ -2574,6 +2579,10 @@ void dooble::slot_about_to_show_main_menu(void)
     }
 
   QApplication::restoreOverrideCursor();
+}
+
+void dooble::slot_about_to_show_tabs_menu(void)
+{
 }
 
 void dooble::slot_anonymous_tab_headers(bool state)
