@@ -2583,6 +2583,49 @@ void dooble::slot_about_to_show_main_menu(void)
 
 void dooble::slot_about_to_show_tabs_menu(void)
 {
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.menu_tabs->clear();
+  m_ui.menu_tabs->setStyleSheet("QMenu {menu-scrollable: 1;}");
+
+  auto font_metrics(m_ui.menu_tabs->fontMetrics());
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      QAction *action = nullptr;
+      auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+      auto text(m_ui.tab->tabText(i));
+
+      if(page)
+	action = m_ui.menu_tabs->addAction
+	  (page->icon(),
+	   font_metrics.elidedText(text,
+				   Qt::ElideRight,
+				   dooble_ui_utilities::
+				   context_menu_width(m_ui.menu_tabs)));
+      else
+	action = m_ui.menu_tabs->addAction
+	  (m_ui.tab->tabIcon(i),
+	   font_metrics.elidedText(text,
+				   Qt::ElideRight,
+				   dooble_ui_utilities::
+				   context_menu_width(m_ui.menu_tabs)));
+
+      action->setProperty("index", i);
+      connect(action,
+	      SIGNAL(triggered(void)),
+	      this,
+	      SLOT(slot_set_current_tab(void)));
+
+      if(i == m_ui.tab->currentIndex())
+	{
+	  QFont font(action->font());
+
+	  font.setBold(true);
+	  action->setFont(font);
+	}
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_anonymous_tab_headers(bool state)
