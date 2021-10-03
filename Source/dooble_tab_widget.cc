@@ -501,12 +501,21 @@ void dooble_tab_widget::slot_load_started(void)
 
 void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
-  if(state)
-    setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
-  else
-    setCornerWidget(nullptr, Qt::TopLeftCorner);
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
 
-  m_left_corner_widget->setVisible(state);
+  if(tab_position == "east" || tab_position == "west")
+    {
+    }
+  else
+    {
+      if(state)
+	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+      else
+	setCornerWidget(nullptr, Qt::TopLeftCorner);
+
+      m_left_corner_widget->setVisible(state);
+    }
 }
 
 void dooble_tab_widget::slot_settings_applied(void)

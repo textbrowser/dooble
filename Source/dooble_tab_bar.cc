@@ -356,7 +356,7 @@ void dooble_tab_bar::prepare_style_sheets(void)
 
 void dooble_tab_bar::set_corner_widget(QWidget *widget)
 {
-  if(m_corner_widget)
+  if(m_corner_widget || !widget)
     return;
   else
     m_corner_widget = widget;
