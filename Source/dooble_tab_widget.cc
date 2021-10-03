@@ -99,13 +99,6 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #endif
   m_left_corner_widget->layout()->setSpacing(0);
   m_left_corner_widget->setVisible(true);
-  m_right_corner_widget->setLayout(new QHBoxLayout(this));
-#ifdef Q_OS_MACOS
-  m_right_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
-#else
-  m_right_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
-#endif
-  m_right_corner_widget->layout()->setSpacing(0);
   m_right_corner_widget->setVisible(true);
 
   if(dooble::s_application->style_name() == "fusion")

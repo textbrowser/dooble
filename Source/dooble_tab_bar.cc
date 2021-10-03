@@ -361,6 +361,28 @@ void dooble_tab_bar::set_corner_widget(QWidget *widget)
   else
     m_corner_widget = widget;
 
+  if(m_corner_widget->layout())
+    {
+      m_corner_widget->layout()->removeWidget(m_next_tool_button);
+      m_corner_widget->layout()->removeWidget(m_previous_tool_button);
+    }
+
+  delete m_corner_widget->layout();
+
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east" || tab_position == "west")
+    m_corner_widget->setLayout(new QVBoxLayout(this));
+  else
+    m_corner_widget->setLayout(new QHBoxLayout(this));
+
+#ifdef Q_OS_MACOS
+  m_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
+#else
+  m_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
+#endif
+  m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->layout()->addWidget(m_previous_tool_button);
   m_corner_widget->layout()->addWidget(m_next_tool_button);
   prepare_icons();
