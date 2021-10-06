@@ -9,6 +9,8 @@ cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Core.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6DBus.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Gui.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Network.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6OpenGL.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6OpenGLWidgets.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Positioning.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6PrintSupport.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Qml.so.6 ./opt/dooble/Lib/.

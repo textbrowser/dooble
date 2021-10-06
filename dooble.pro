@@ -231,7 +231,7 @@ message("The QtCharts module has been discovered.")
 warning("The QtCharts module is not present. I'm very sorry!")
 }
 
-qtHaveModule(webengine) {
+lessThan(QT_MAJOR_VERSION, 6) {
 QT              += webengine
 }
 
