@@ -77,7 +77,7 @@ dooble_about::dooble_about(void):QMainWindow()
     (tr("<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
 	"Release Notes</a>"));
   m_ui.version->setText
-    (tr("Dooble version %1, Qubit.").arg(DOOBLE_VERSION_STRING));
+    (tr("Dooble version %1, X.").arg(DOOBLE_VERSION_STRING));
   compute_self_digest();
 }
 
