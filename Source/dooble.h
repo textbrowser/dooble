@@ -32,6 +32,7 @@
 #include <QMainWindow>
 #include <QShortcut>
 #include <QPointer>
+#include <QPrinter>
 #include <QTimer>
 #include <QWebEngineCookieStore>
 
@@ -121,6 +122,7 @@ class dooble: public QMainWindow
     };
 
   QDialog *m_floating_digital_clock_dialog;
+  QEventLoop m_event_loop;
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
 #ifdef Q_OS_MAC
@@ -139,6 +141,7 @@ class dooble: public QMainWindow
   QPointer<dooble_cookies> m_cookies;
   QPointer<dooble_cookies_window> m_cookies_window;
   QPointer<dooble_downloads> m_downloads;
+  QPrinter m_printer;
   QTimer m_floating_digital_clock_timer;
   QTimer m_populate_containers_timer;
   Ui_dooble m_ui;
@@ -219,6 +222,7 @@ class dooble: public QMainWindow
   void slot_populate_containers_timer_timeout(void);
   void slot_populated(void);
   void slot_print(void);
+  void slot_print_finished(bool ok);
   void slot_print_preview(QPrinter *printer);
   void slot_print_preview(void);
   void slot_quit_dooble(void);

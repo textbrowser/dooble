@@ -29,7 +29,6 @@
 #include <QPointer>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
-#include <QPrinter>
 #include <QSqlQuery>
 #include <QWebEngineProfile>
 #include <QtConcurrent>
@@ -3473,6 +3472,30 @@ void dooble::slot_print(void)
     print(current_page());
 }
 
+void dooble::slot_print_finished(bool ok)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  if(!ok)
+    {
+      QPainter painter;
+
+      if(painter.begin(&m_printer))
+	{
+	  auto font = painter.font();
+
+	  font.setPixelSize(25);
+	  painter.setFont(font);
+	  painter.drawText(QPointF(25, 25), tr("A failure occurred."));
+	  painter.end();
+	}
+    }
+
+  m_event_loop.quit();
+#else
+  Q_UNUSED(ok);
+#endif
+}
+
 void dooble::slot_print_preview(QPrinter *printer)
 {
   if(!printer)
@@ -3488,20 +3511,16 @@ void dooble::slot_print_preview(QPrinter *printer)
     print_preview(printer, chart);
   else if(page)
     {
-      auto ok = false;
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      QEventLoop event_loop;
+      auto ok = false;
       auto print_preview = [&] (bool success)
 			   {
 			     ok = success;
-			     event_loop.quit();
+			     m_event_loop.quit();
 			   };
 
       page->print_page(printer, std::move(print_preview));
-      event_loop.exec();
-#else
-      page->print_page(printer);
-#endif
+      m_event_loop.exec();
 
       if(!ok)
 	{
@@ -3517,6 +3536,10 @@ void dooble::slot_print_preview(QPrinter *printer)
 	      painter.end();
 	    }
 	}
+#else
+      page->view()->print(printer);
+      m_event_loop.exec();
+#endif
     }
 }
 
@@ -3539,9 +3562,17 @@ void dooble::slot_print_preview(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_print_preview = true;
 
-  QPrinter printer;
   QScopedPointer<QPrintPreviewDialog> print_preview_dialog
-    (new QPrintPreviewDialog(&printer, widget));
+    (new QPrintPreviewDialog(&m_printer, widget));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  if(page)
+    connect(page->view(),
+	    SIGNAL(printFinished(bool)),
+	    this,
+	    SLOT(slot_print_finished(bool)),
+	    Qt::UniqueConnection);
+#endif
 
   connect(print_preview_dialog.data(),
 	  SIGNAL(paintRequested(QPrinter *)),
