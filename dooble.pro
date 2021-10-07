@@ -190,6 +190,7 @@ build-deb.commands = Distributions/build_deb.bash
 }
 
 unix {
+QMAKE_LFLAGS_RPATH =
 purge.commands = rm -f Documentation/*~ Source/*~ *~
 } else {
 purge.commands =
