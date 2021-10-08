@@ -722,7 +722,7 @@
     <message>
         <location filename="../Source/dooble_about.cc" line="80"/>
         <source>Dooble version %1, X.</source>
-        <translation type="unfinished"></translation>
+        <translation">Dooble-versie: %1, X.</translation>
     </message>
     <message>
         <location filename="../Source/dooble_about.cc" line="141"/>
@@ -3911,7 +3911,7 @@ keerde domeinen</translation>
         <source>North</source>
         <translation>Bovenaan</translation>
         <source>East</source>
-        <translation type="Oosten"></translation>
+        <translation>Oosten</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="666"/>
