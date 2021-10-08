@@ -2150,6 +2150,7 @@ void dooble::print(QWidget *parent, dooble_charts *chart)
 #endif
       double scale = qMin(xscale, yscale);
 
+      painter.scale(scale, scale);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
       painter.translate
 	(printer.pageLayout().paintRectPixels(printer.resolution()).x() +
@@ -2220,6 +2221,7 @@ void dooble::print_preview(QPrinter *printer, dooble_charts *chart)
 #endif
   auto scale = qMin(xscale, yscale);
 
+  painter.scale(scale, scale);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   painter.translate
     (printer->pageLayout().paintRectPixels(printer->resolution()).x() +
