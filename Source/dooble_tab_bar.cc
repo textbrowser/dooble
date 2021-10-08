@@ -144,34 +144,59 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
-  auto f = qFloor(static_cast<double> (rect().width()) /
-		  static_cast<double> (qMax(1, count())));
   auto size(QTabBar::tabSizeHint(index));
-  static int maximum_tab_width = 225;
-  static int minimum_tab_width = 125;
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east" || tab_position == "west")
+    {
+      auto f = qFloor(static_cast<double> (rect().height()) /
+		      static_cast<double> (qMax(1, count())));
+      static int maximum_tab_height = 225;
+      static int minimum_tab_height = 125;
+
+      size.setHeight(qMin(f, maximum_tab_height));
+
+      if(count() - 1 == index)
+	{
+	  int d = rect().height() - count() * size.height();
+
+	  if(d > 0)
+	    size.setHeight(qMin(d + size.height(), maximum_tab_height));
+	}
+
+      size.setHeight(qMax(minimum_tab_height, size.height()));
+    }
+  else
+    {
+      auto f = qFloor(static_cast<double> (rect().width()) /
+		      static_cast<double> (qMax(1, count())));
+      static int maximum_tab_width = 225;
+      static int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
-  QFontMetrics font_metrics(font());
-  static auto tab_height = 15 + font_metrics.height();
+      QFontMetrics font_metrics(font());
+      static auto tab_height = 15 + font_metrics.height();
 #else
-  static auto tab_height = qBound
-    (0,
-     dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
-     50) +
-    size.height();
+      static auto tab_height = qBound
+	(0,
+	 dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
+	 50);
 #endif
 
-  size.setHeight(tab_height);
-  size.setWidth(qMin(f, maximum_tab_width));
+      size.setHeight(size.height() + tab_height);
+      size.setWidth(qMin(f, maximum_tab_width));
 
-  if(count() - 1 == index)
-    {
-      int d = rect().width() - count() * size.width();
+      if(count() - 1 == index)
+	{
+	  int d = rect().width() - count() * size.width();
 
-      if(d > 0)
-	size.setWidth(qMin(d + size.width(), maximum_tab_width));
+	  if(d > 0)
+	    size.setWidth(qMin(d + size.width(), maximum_tab_width));
+	}
+
+      size.setWidth(qMax(minimum_tab_width, size.width()));
     }
 
-  size.setWidth(qMax(minimum_tab_width, size.width()));
   return size;
 }
 
@@ -331,11 +356,25 @@ void dooble_tab_bar::prepare_style_sheets(void)
 
 void dooble_tab_bar::set_corner_widget(QWidget *widget)
 {
-  if(m_corner_widget)
+  if(m_corner_widget || !widget)
     return;
   else
     m_corner_widget = widget;
 
+  if(m_corner_widget->layout())
+    {
+      m_corner_widget->layout()->removeWidget(m_next_tool_button);
+      m_corner_widget->layout()->removeWidget(m_previous_tool_button);
+    }
+
+  delete m_corner_widget->layout();
+  m_corner_widget->setLayout(new QHBoxLayout(this));
+#ifdef Q_OS_MACOS
+  m_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
+#else
+  m_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
+#endif
+  m_corner_widget->layout()->setSpacing(0);
   m_corner_widget->layout()->addWidget(m_previous_tool_button);
   m_corner_widget->layout()->addWidget(m_next_tool_button);
   prepare_icons();

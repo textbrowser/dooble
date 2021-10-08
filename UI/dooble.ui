@@ -45,7 +45,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>32</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -78,8 +78,14 @@
      <string>Hi&amp;story</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu_tabs">
+    <property name="title">
+     <string>T&amp;abs</string>
+    </property>
+   </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
+   <addaction name="menu_tabs"/>
    <addaction name="menu_tools"/>
    <addaction name="menu_view"/>
    <addaction name="menu_history"/>

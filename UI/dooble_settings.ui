@@ -648,7 +648,7 @@
                 <item>
                  <widget class="QComboBox" name="tab_position">
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <property name="sizeAdjustPolicy">
                    <enum>QComboBox::AdjustToContents</enum>
@@ -658,12 +658,22 @@
                   </property>
                   <item>
                    <property name="text">
+                    <string>East</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
                     <string>North</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
                     <string>South</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>West</string>
                    </property>
                   </item>
                  </widget>

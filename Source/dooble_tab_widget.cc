@@ -99,13 +99,6 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 #endif
   m_left_corner_widget->layout()->setSpacing(0);
   m_left_corner_widget->setVisible(true);
-  m_right_corner_widget->setLayout(new QHBoxLayout(this));
-#ifdef Q_OS_MACOS
-  m_right_corner_widget->layout()->setContentsMargins(5, 5, 5, 5);
-#else
-  m_right_corner_widget->layout()->setContentsMargins(5, 0, 5, 0);
-#endif
-  m_right_corner_widget->layout()->setSpacing(0);
   m_right_corner_widget->setVisible(true);
 
   if(dooble::s_application->style_name() == "fusion")
@@ -139,11 +132,6 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 		       arg(theme_color)).name()));
 	}
     }
-
-  if(dooble_settings::setting("tab_position").toString().trimmed() == "north")
-    setTabPosition(QTabWidget::North);
-  else
-    setTabPosition(QTabWidget::South);
 
   m_tab_bar = new dooble_tab_bar(this);
   m_tab_bar->set_corner_widget(m_right_corner_widget);
@@ -200,8 +188,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SIGNAL(tabs_menu_button_clicked(void)));
   prepare_icons();
-  setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
   setTabBar(m_tab_bar);
+  set_tab_position();
 }
 
 QIcon dooble_tab_widget::tabIcon(int index) const
@@ -348,6 +336,41 @@ void dooble_tab_widget::setTabToolTip(int index, const QString &text)
   QTabWidget::setTabToolTip(index, dooble_ui_utilities::pretty_tool_tip(text));
 }
 
+void dooble_tab_widget::set_tab_position(void)
+{
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east")
+    {
+      m_left_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+      setTabPosition(QTabWidget::East);
+    }
+  else if(tab_position == "south")
+    {
+      if(!cornerWidget(Qt::TopLeftCorner))
+	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+
+      setTabPosition(QTabWidget::South);
+    }
+  else if(tab_position == "west")
+    {
+      m_left_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+      setTabPosition(QTabWidget::West);
+    }
+  else
+    {
+      if(!cornerWidget(Qt::TopLeftCorner))
+	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+
+      setTabPosition(QTabWidget::North);
+    }
+
+  m_tab_bar->resize(m_tab_bar->sizeHint());
+}
+
 void dooble_tab_widget::slot_about_to_show_history_menu(void)
 {
   if(dooble::s_history->last_n_actions(1).isEmpty())
@@ -482,12 +505,23 @@ void dooble_tab_widget::slot_load_started(void)
 
 void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
-  if(state)
-    setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
-  else
-    setCornerWidget(nullptr, Qt::TopLeftCorner);
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
 
-  m_left_corner_widget->setVisible(state);
+  if(tab_position == "east" || tab_position == "west")
+    {
+      m_left_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+    }
+  else
+    {
+      if(state)
+	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+      else
+	setCornerWidget(nullptr, Qt::TopLeftCorner);
+
+      m_left_corner_widget->setVisible(state); // Order is important.
+    }
 }
 
 void dooble_tab_widget::slot_settings_applied(void)
@@ -533,12 +567,23 @@ void dooble_tab_widget::slot_settings_applied(void)
 
 void dooble_tab_widget::slot_show_right_corner_widget(bool state)
 {
-  if(state)
-    setCornerWidget(m_right_corner_widget, Qt::TopRightCorner);
-  else
-    setCornerWidget(nullptr, Qt::TopRightCorner);
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
 
-  m_right_corner_widget->setVisible(state);
+  if(tab_position == "east" || tab_position == "west")
+    {
+      m_right_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopRightCorner);
+    }
+  else
+    {
+      if(state)
+	setCornerWidget(m_right_corner_widget, Qt::TopRightCorner);
+      else
+	setCornerWidget(nullptr, Qt::TopRightCorner);
+
+      m_right_corner_widget->setVisible(state); // Order is important.
+    }
 }
 
 void dooble_tab_widget::tabRemoved(int index)

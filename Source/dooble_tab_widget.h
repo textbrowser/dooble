@@ -49,6 +49,7 @@ class dooble_tab_widget: public QTabWidget
   void setTabIcon(int index, const QIcon &icon);
   void setTabTextColor(int index, const QColor &color);
   void setTabToolTip(int index, const QString &text);
+  void set_tab_position(void);
 
  protected:
   void tabRemoved(int index);

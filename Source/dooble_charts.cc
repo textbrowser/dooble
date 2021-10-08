@@ -36,7 +36,6 @@
 #include <QDir>
 #include <QMetaType>
 #include <QPrintPreviewDialog>
-#include <QPrinter>
 #include <QSqlQuery>
 #ifdef DOOBLE_QTCHARTS_PRESENT
 #include <QtCharts/QChart>

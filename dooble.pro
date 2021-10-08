@@ -190,6 +190,7 @@ build-deb.commands = Distributions/build_deb.bash
 }
 
 unix {
+QMAKE_LFLAGS_RPATH =
 purge.commands = rm -f Documentation/*~ Source/*~ *~
 } else {
 purge.commands =
@@ -231,7 +232,7 @@ message("The QtCharts module has been discovered.")
 warning("The QtCharts module is not present. I'm very sorry!")
 }
 
-qtHaveModule(webengine) {
+lessThan(QT_MAJOR_VERSION, 6) {
 QT              += webengine
 }
 

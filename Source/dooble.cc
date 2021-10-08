@@ -29,7 +29,6 @@
 #include <QPointer>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
-#include <QPrinter>
 #include <QSqlQuery>
 #include <QWebEngineProfile>
 #include <QtConcurrent>
@@ -629,6 +628,11 @@ void dooble::connect_signals(void)
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_history_menu(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.menu_tabs,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_tabs_menu(void)),
 	  Qt::UniqueConnection);
   connect(m_ui.menu_tools,
 	  SIGNAL(aboutToHide(void)),
@@ -2146,6 +2150,7 @@ void dooble::print(QWidget *parent, dooble_charts *chart)
 #endif
       double scale = qMin(xscale, yscale);
 
+      painter.scale(scale, scale);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
       painter.translate
 	(printer.pageLayout().paintRectPixels(printer.resolution()).x() +
@@ -2216,6 +2221,7 @@ void dooble::print_preview(QPrinter *printer, dooble_charts *chart)
 #endif
   auto scale = qMin(xscale, yscale);
 
+  painter.scale(scale, scale);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   painter.translate
     (printer->pageLayout().paintRectPixels(printer->resolution()).x() +
@@ -2571,6 +2577,53 @@ void dooble::slot_about_to_show_main_menu(void)
 	}
       else if(m)
 	m->clear();
+    }
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble::slot_about_to_show_tabs_menu(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.menu_tabs->clear();
+  m_ui.menu_tabs->setStyleSheet("QMenu {menu-scrollable: 1;}");
+
+  auto font_metrics(m_ui.menu_tabs->fontMetrics());
+
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      QAction *action = nullptr;
+      auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+      auto text(m_ui.tab->tabText(i));
+
+      if(page)
+	action = m_ui.menu_tabs->addAction
+	  (page->icon(),
+	   font_metrics.elidedText(text,
+				   Qt::ElideRight,
+				   dooble_ui_utilities::
+				   context_menu_width(m_ui.menu_tabs)));
+      else
+	action = m_ui.menu_tabs->addAction
+	  (m_ui.tab->tabIcon(i),
+	   font_metrics.elidedText(text,
+				   Qt::ElideRight,
+				   dooble_ui_utilities::
+				   context_menu_width(m_ui.menu_tabs)));
+
+      action->setProperty("index", i);
+      connect(action,
+	      SIGNAL(triggered(void)),
+	      this,
+	      SLOT(slot_set_current_tab(void)));
+
+      if(i == m_ui.tab->currentIndex())
+	{
+	  QFont font(action->font());
+
+	  font.setBold(true);
+	  action->setFont(font);
+	}
     }
 
   QApplication::restoreOverrideCursor();
@@ -3421,6 +3474,30 @@ void dooble::slot_print(void)
     print(current_page());
 }
 
+void dooble::slot_print_finished(bool ok)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  if(!ok)
+    {
+      QPainter painter;
+
+      if(painter.begin(&m_printer))
+	{
+	  auto font = painter.font();
+
+	  font.setPixelSize(25);
+	  painter.setFont(font);
+	  painter.drawText(QPointF(25, 25), tr("A failure occurred."));
+	  painter.end();
+	}
+    }
+
+  m_event_loop.quit();
+#else
+  Q_UNUSED(ok);
+#endif
+}
+
 void dooble::slot_print_preview(QPrinter *printer)
 {
   if(!printer)
@@ -3436,20 +3513,16 @@ void dooble::slot_print_preview(QPrinter *printer)
     print_preview(printer, chart);
   else if(page)
     {
-      auto ok = false;
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      QEventLoop event_loop;
+      auto ok = false;
       auto print_preview = [&] (bool success)
 			   {
 			     ok = success;
-			     event_loop.quit();
+			     m_event_loop.quit();
 			   };
 
       page->print_page(printer, std::move(print_preview));
-      event_loop.exec();
-#else
-      page->print_page(printer);
-#endif
+      m_event_loop.exec();
 
       if(!ok)
 	{
@@ -3465,6 +3538,10 @@ void dooble::slot_print_preview(QPrinter *printer)
 	      painter.end();
 	    }
 	}
+#else
+      page->view()->print(printer);
+      m_event_loop.exec();
+#endif
     }
 }
 
@@ -3487,9 +3564,17 @@ void dooble::slot_print_preview(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_print_preview = true;
 
-  QPrinter printer;
   QScopedPointer<QPrintPreviewDialog> print_preview_dialog
-    (new QPrintPreviewDialog(&printer, widget));
+    (new QPrintPreviewDialog(&m_printer, widget));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  if(page)
+    connect(page->view(),
+	    SIGNAL(printFinished(bool)),
+	    this,
+	    SLOT(slot_print_finished(bool)),
+	    Qt::UniqueConnection);
+#endif
 
   connect(print_preview_dialog.data(),
 	  SIGNAL(paintRequested(QPrinter *)),
@@ -3618,13 +3703,9 @@ void dooble::slot_settings_applied(void)
       s_settings->setParent(nullptr);
     }
 
-  if(dooble_settings::setting("tab_position").toString().trimmed() == "north")
-    m_ui.tab->setTabPosition(QTabWidget::North);
-  else
-    m_ui.tab->setTabPosition(QTabWidget::South);
-
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.tab->setTabsClosable(tabs_closable());
+  m_ui.tab->set_tab_position();
   prepare_control_w_shortcut();
   prepare_tab_icons_text_tool_tips();
   QApplication::restoreOverrideCursor();

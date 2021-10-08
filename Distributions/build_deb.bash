@@ -4,35 +4,37 @@ mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
 mkdir -p ./opt/dooble/Lib
 mkdir -p ./opt/dooble/Translations
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Charts.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Core.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5DBus.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Gui.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Network.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Positioning.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5PrintSupport.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Qml.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5QmlModels.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Quick.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5QuickWidgets.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Sql.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Svg.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5WebChannel.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5WebEngineCore.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5WebEngineWidgets.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5Widgets.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libQt5XcbQpa.so.5 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libicudata.so.56 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libicui18n.so.56 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/lib/libicuuc.so.56 ./opt/dooble/Lib/.
-cp -p ~/Qt/5.15.2/gcc_64/libexec/QtWebEngineProcess ./opt/dooble/.
-cp -pr ~/Qt/5.15.2/gcc_64/plugins ./opt/dooble/.
-cp -pr ~/Qt/5.15.2/gcc_64/resources ./opt/dooble/.
-cp -pr ~/Qt/5.15.2/gcc_64/translations ./opt/dooble/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Charts.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Core.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6DBus.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Gui.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Network.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6OpenGL.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6OpenGLWidgets.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Positioning.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6PrintSupport.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Qml.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6QmlModels.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Quick.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6QuickWidgets.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Sql.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Svg.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6WebChannel.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6WebEngineCore.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6WebEngineWidgets.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6Widgets.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libQt6XcbQpa.so.6 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libicudata.so.56 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libicui18n.so.56 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/lib/libicuuc.so.56 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.2.0/gcc_64/libexec/QtWebEngineProcess ./opt/dooble/.
+cp -pr ~/Qt/6.2.0/gcc_64/plugins ./opt/dooble/.
+cp -pr ~/Qt/6.2.0/gcc_64/resources ./opt/dooble/.
+cp -pr ~/Qt/6.2.0/gcc_64/translations ./opt/dooble/.
 chmod -x,g+w ./opt/dooble/Lib/*
-~/Qt/5.15.2/gcc_64/bin/lupdate dooble.pro
-~/Qt/5.15.2/gcc_64/bin/lrelease dooble.pro
-~/Qt/5.15.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
+~/Qt/6.2.0/gcc_64/bin/lupdate dooble.pro
+~/Qt/6.2.0/gcc_64/bin/lrelease dooble.pro
+~/Qt/6.2.0/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
 cp -p ./Documentation/TO-DO ./opt/dooble/Documentation/.
@@ -56,7 +58,7 @@ cp -pr DEBIAN dooble-debian.d/.
 cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
-dpkg-deb --build dooble-debian.d Dooble-2021.08.30_amd64.deb
+fakeroot dpkg-deb --build dooble-debian.d Dooble-2021.11.05_amd64.deb
 make distclean
 rm -fr ./opt
 rm -fr dooble-debian.d

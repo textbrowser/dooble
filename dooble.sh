@@ -5,7 +5,7 @@ export AA_USEHIGHDPIPIXMAPS=1
 
 # Maximum of 50.
 
-export DOOBLE_ADDRESS_WIDGET_HEIGHT_OFFSET=10
+export DOOBLE_ADDRESS_WIDGET_HEIGHT_OFFSET=5
 
 # Maximum of 50.
 
@@ -18,7 +18,12 @@ export QT_X11_NO_MITSHM=1
 
 if [ -r ./Dooble ] && [ -x ./Dooble ]
 then
-    exec ./Dooble --disable-reading-from-canvas "$@"
+    # Be careful with SSL errors!
+
+    exec ./Dooble \
+	 --disable-reading-from-canvas \
+	 --ignore-certificate-errors \
+         "$@"
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
 then

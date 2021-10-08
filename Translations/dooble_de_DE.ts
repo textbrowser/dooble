@@ -534,6 +534,10 @@
         <source>Close Window</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>T&amp;abs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_about</name>
@@ -598,7 +602,7 @@ Dooble ist open source Software.
         <translation type="unfinished">Strg+W</translation>
     </message>
     <message>
-        <source>Dooble version %1, Hyperspace.</source>
+        <source>Dooble version %1, Qubit.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2320,7 +2324,7 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>&amp;Delete Page(s) (Non-Favorites)</source>
-        <translation>&amp;Lösche Seite(n) (Nicht-Favoriten)</translation>
+        <translation type="vanished">&amp;Lösche Seite(n) (Nicht-Favoriten)</translation>
     </message>
     <message>
         <source>0 Row(s)</source>
@@ -2336,6 +2340,10 @@ Dooble ist open source Software.
     </message>
     <message>
         <source>Open %1 pages?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Page(s) (Non-Favorites)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3898,6 +3906,14 @@ Domänen</translation>
         <source>South</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>East</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>West</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_style_sheet</name>
@@ -4061,6 +4077,10 @@ Domänen</translation>
     <message>
         <source>Select Files</source>
         <translation>Dateien auswählen</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
