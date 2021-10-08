@@ -602,7 +602,7 @@ Dooble ist open source Software.
         <translation type="unfinished">Strg+W</translation>
     </message>
     <message>
-        <source>Dooble version %1, Qubit.</source>
+        <source>Dooble version %1, X.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
