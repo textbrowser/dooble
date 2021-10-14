@@ -29,11 +29,10 @@ cp -p ~/Qt/6.2.0/gcc_64/lib/libicui18n.so.56 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/lib/libicuuc.so.56 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.0/gcc_64/libexec/QtWebEngineProcess ./opt/dooble/.
 cp -pr ~/Qt/6.2.0/gcc_64/plugins ./opt/dooble/.
-cp -pr ~/Qt/6.2.0/gcc_64/resources ./opt/dooble/.
-cp -pr ~/Qt/6.2.0/gcc_64/translations ./opt/dooble/.
+cp -pr ~/Qt/6.2.0/gcc_64/resources/* ./opt/dooble/.
+cp -pr ~/Qt/6.2.0/gcc_64/translations/*.qm ./opt/dooble/translations/.
+cp -pr ~/Qt/6.2.0/gcc_64/translations/qtwebengine_locales ./opt/dooble/.
 chmod -x,g+w ./opt/dooble/Lib/*
-~/Qt/6.2.0/gcc_64/bin/lupdate dooble.pro
-~/Qt/6.2.0/gcc_64/bin/lrelease dooble.pro
 ~/Qt/6.2.0/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
