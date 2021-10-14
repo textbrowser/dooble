@@ -183,7 +183,7 @@ Remaining Items
 - Element-selection option.
 - Fancy completer.
 - Include date stamps in cookie containers.
-- Inspect all available URLs when intercepting requests. (Content blocking.)
+- Inspect all available URLs when intercepting requests. Content blocking.
 - Optional testing of Threefish.
 - Qt 6.2 LTS:
   Charts (Completed)

@@ -28,6 +28,7 @@ then
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
 then
     export LD_LIBRARY_PATH=/opt/dooble/Lib
+    export QT_PLUGIN_PATH=/opt/dooble/plugins
     cd /opt/dooble && exec ./Dooble --disable-reading-from-canvas "$@"
     exit $?
 else
