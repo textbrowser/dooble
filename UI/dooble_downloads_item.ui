@@ -51,6 +51,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="url">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QProgressBar" name="progress">
        <property name="value">
         <number>0</number>
