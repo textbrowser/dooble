@@ -143,6 +143,7 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.information->setText(tr("The download object is zero. Error!"));
       m_ui.pause_resume->setVisible(false);
       m_ui.progress->setVisible(false);
+      m_ui.url->setVisible(false);
     }
 
   m_progress_bar_animation.setDuration(1000);
