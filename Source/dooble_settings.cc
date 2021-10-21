@@ -1235,6 +1235,7 @@ void dooble_settings::restore(bool read_database)
   else
     m_ui.tab_position->setCurrentIndex(1);
 
+#ifdef DOOBLE_CONFIGURE_SETTINGS_THEME_COLOR
   if(dooble::s_application->style_name() == "fusion")
     m_ui.theme_color->setCurrentIndex
       (qBound(0,
@@ -1245,6 +1246,12 @@ void dooble_settings::restore(bool read_database)
     m_ui.theme_color->setCurrentIndex(2); // Default
   else
     m_ui.theme_color->setCurrentIndex(2); // Default
+#else
+  m_ui.theme_color->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("theme_color_index", 2).toInt(),
+	    m_ui.theme_color->count() - 1));
+#endif
 
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
