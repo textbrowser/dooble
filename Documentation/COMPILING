@@ -1,7 +1,4 @@
-OS X developers should consider installing Homebrew.
-Please see https://brew.sh.
-
-Qt 5.15.x and Qt 6.2 LTS are preferred.
+Qt 5.15 LTS and Qt 6.2 LTS are preferred.
 
 FreeBSD
 
@@ -17,3 +14,7 @@ OS X
 
 qmake -o Makefile dooble.pro
 make
+
+Windows
+
+QtCreator!
