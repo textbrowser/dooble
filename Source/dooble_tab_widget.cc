@@ -281,7 +281,11 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
 			nullptr,
 			m_tab_bar));
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#else
+  side = (side == QTabBar::RightSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#endif
 
   auto label = qobject_cast<QLabel *> (m_tab_bar->tabButton(index, side));
 
@@ -426,10 +430,11 @@ void dooble_tab_widget::slot_load_finished(void)
 			m_tab_bar));
 
 #ifdef Q_OS_MACOS
-  if(dooble::s_application->style_name() == "fusion")
-    side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
-  else
-    side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#else
+  side = (side == QTabBar::RightSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#endif
 #else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
@@ -469,10 +474,11 @@ void dooble_tab_widget::slot_load_started(void)
 			m_tab_bar));
 
 #ifdef Q_OS_MACOS
-  if(dooble::s_application->style_name() == "fusion")
-    side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
-  else
-    side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#else
+  side = (side == QTabBar::RightSide) ? QTabBar::LeftSide : QTabBar::RightSide;
+#endif
 #else
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
