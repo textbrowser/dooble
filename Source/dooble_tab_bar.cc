@@ -175,8 +175,7 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
       static int maximum_tab_width = 225;
       static int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
-      QFontMetrics font_metrics(font());
-      static auto tab_height = 15 + font_metrics.height();
+      static int tab_height = 0;
 #else
       static auto tab_height = qBound
 	(0,
