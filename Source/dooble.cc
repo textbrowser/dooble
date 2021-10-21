@@ -2705,7 +2705,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 
       ui.setupUi(&dialog);
 
-      if(s_application->style_name().contains("macintosh"))
+      if(s_application->style_name() == "macintosh")
 	ui.password->setAttribute(Qt::WA_MacShowFocusRect, false);
 
       connect(ui.authenticate,
@@ -2917,7 +2917,7 @@ void dooble::slot_authenticate(void)
 
       ui.setupUi(&dialog);
 
-      if(s_application->style_name().contains("macintosh"))
+      if(s_application->style_name() == "macintosh")
 	ui.password->setAttribute(Qt::WA_MacShowFocusRect, false);
 
       connect(ui.authenticate,
