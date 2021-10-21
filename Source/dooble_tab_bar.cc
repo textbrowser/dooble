@@ -87,7 +87,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
   setContextMenuPolicy(Qt::CustomContextMenu);
   setDocumentMode(true);
 
-  if(dooble::s_application->style_name() == "fusion")
+  if(dooble::s_application->style_name() == "fusion" ||
+     dooble::s_application->style_name().contains("windows"))
     {
       auto theme_color(dooble_settings::setting("theme_color").toString());
 
@@ -263,7 +264,8 @@ void dooble_tab_bar::prepare_icons(void)
 
 void dooble_tab_bar::prepare_style_sheets(void)
 {
-  if(dooble::s_application->style_name() == "fusion")
+  if(dooble::s_application->style_name() == "fusion" ||
+     dooble::s_application->style_name().contains("windows"))
     {
       QList<QToolButton *> list;
       auto theme_color(dooble_settings::setting("theme_color").toString());

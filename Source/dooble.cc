@@ -1697,7 +1697,7 @@ void dooble::prepare_shortcuts(void)
 				   this,
 				   SLOT(slot_show_full_screen(void)));
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
       for(auto shortcut : m_shortcuts)
 	connect(shortcut,
@@ -1984,7 +1984,8 @@ void dooble::prepare_standard_menus(void)
 
 void dooble::prepare_style_sheets(void)
 {
-  if(s_application->style_name() == "fusion")
+  if(s_application->style_name() == "fusion" ||
+     s_application->style_name().contains("windows"))
     {
       auto theme_color(dooble_settings::setting("theme_color").toString());
 
@@ -1997,8 +1998,8 @@ void dooble::prepare_style_sheets(void)
 	       value(QString("%1-tabbar-background-color").
 		     arg(theme_color)).name()).
 	   arg(dooble_application::s_theme_colors.
-	       value(QString("%1-menubar-text-color").
-		     arg(theme_color)).name()));
+	       value(QString("%1-menubar-text-color").arg(theme_color)).
+	       name()));
     }
 }
 
@@ -2704,7 +2705,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 
       ui.setupUi(&dialog);
 
-      if(s_application->style_name() == "macintosh")
+      if(s_application->style_name().contains("macintosh"))
 	ui.password->setAttribute(Qt::WA_MacShowFocusRect, false);
 
       connect(ui.authenticate,
@@ -2916,7 +2917,7 @@ void dooble::slot_authenticate(void)
 
       ui.setupUi(&dialog);
 
-      if(s_application->style_name() == "macintosh")
+      if(s_application->style_name().contains("macintosh"))
 	ui.password->setAttribute(Qt::WA_MacShowFocusRect, false);
 
       connect(ui.authenticate,
@@ -3201,7 +3202,7 @@ void dooble::slot_downloads_started(void)
     slot_show_downloads();
 }
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 void dooble::slot_enable_shortcut(void)
 {
   auto timer = qobject_cast<QTimer *> (sender());
@@ -3711,7 +3712,7 @@ void dooble::slot_settings_applied(void)
   QApplication::restoreOverrideCursor();
 }
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 void dooble::slot_shortcut_activated(void)
 {
   auto shortcut = qobject_cast<QShortcut *> (sender());

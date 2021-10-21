@@ -268,7 +268,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
                           -Wcast-qual \
-                          -Wdouble-promotion \
                           -Werror \
                           -Wextra \
                           -Wformat=2 \
@@ -276,7 +275,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
-                          -Wundef \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \

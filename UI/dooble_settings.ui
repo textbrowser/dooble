@@ -641,7 +641,7 @@
                    <string>Tab Position</string>
                   </property>
                   <property name="buddy">
-                   <cstring>theme_color</cstring>
+                   <cstring>theme</cstring>
                   </property>
                  </widget>
                 </item>
@@ -698,15 +698,15 @@
                 <item>
                  <widget class="QLabel" name="label_24">
                   <property name="text">
-                   <string>Theme Color</string>
+                   <string>Theme</string>
                   </property>
                   <property name="buddy">
-                   <cstring>theme_color</cstring>
+                   <cstring>theme</cstring>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="theme_color">
+                 <widget class="QComboBox" name="theme">
                   <property name="currentIndex">
                    <number>2</number>
                   </property>
@@ -1483,7 +1483,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-534</y>
+               <y>0</y>
                <width>642</width>
                <height>1690</height>
               </rect>
@@ -2240,7 +2240,7 @@
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>tab_position</tabstop>
-  <tabstop>theme_color</tabstop>
+  <tabstop>theme</tabstop>
   <tabstop>zoom_frame_location</tabstop>
   <tabstop>browsing_history</tabstop>
   <tabstop>visited_links</tabstop>

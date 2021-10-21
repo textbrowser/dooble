@@ -28,8 +28,10 @@
 #include <QDir>
 #include <QElapsedTimer>
 #include <QSplashScreen>
-#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+#if defined(Q_OS_MACOS)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
 #include <QStyleFactory>
+#endif
 #endif
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
@@ -185,8 +187,10 @@ int main(int argc, char *argv[])
   qRegisterMetaType<Qt::SortOrder> ("Qt::SortOrder");
   qRegisterMetaType<dooble_charts::Properties> ("dooble_charts::Properties");
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
   QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#endif
 #ifdef Q_OS_WIN
   QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL, true);
 #endif
@@ -218,9 +222,6 @@ int main(int argc, char *argv[])
   QApplication::setStyle(QStyleFactory::create("Macintosh"));
 #endif
   QDir::setCurrent("/Applications/Dooble.d");
-#elif defined(Q_OS_WIN)
-  QApplication::addLibraryPath("plugins");
-  QApplication::setStyle(QStyleFactory::create("Windows"));
 #endif
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QString dooble_directory(".dooble_v2");

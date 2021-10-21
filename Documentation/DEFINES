@@ -1,8 +1,3 @@
-DOOBLE_CONFIGURE_SETTINGS_THEME_COLOR
-
-If defined, Dooble will disable or enable the Theme Color widget
-depending upon the application's style.
-
 DOOBLE_COOKIES_REPLACE_HYPHEN_WITH_UNDERSCORE
 
 Replace hyphens with underscores in cookie names.
@@ -27,7 +22,3 @@ Enabled if the QtCharts module is available.
 DOOBLE_REGISTER_GOPHER_SCHEME
 
 Force registration of Gopher scheme.
-
-DOOBLE_SIMPLE_THEMES
-
-Enable simple themes.

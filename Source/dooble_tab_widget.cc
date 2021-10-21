@@ -101,7 +101,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_left_corner_widget->setVisible(true);
   m_right_corner_widget->setVisible(true);
 
-  if(dooble::s_application->style_name() == "fusion")
+  if(dooble::s_application->style_name() == "fusion" ||
+     dooble::s_application->style_name().contains("windows"))
     {
       auto theme_color(dooble_settings::setting("theme_color").toString());
 
@@ -526,7 +527,8 @@ void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 
 void dooble_tab_widget::slot_settings_applied(void)
 {
-  if(dooble::s_application->style_name() == "fusion")
+  if(dooble::s_application->style_name() == "fusion" ||
+     dooble::s_application->style_name().contains("windows"))
     {
       auto theme_color(dooble_settings::setting("theme_color").toString());
 

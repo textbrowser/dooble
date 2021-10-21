@@ -1008,8 +1008,8 @@ void dooble_page::prepare_standard_menus(void)
 
 void dooble_page::prepare_style_sheets(void)
 {
-#ifdef DOOBLE_SIMPLE_THEMES
-  if(dooble::s_application->style_name() == "fusion")
+  if(dooble::s_application->style_name() == "fusion" ||
+     dooble::s_application->style_name().contains("windows"))
     {
       auto theme_color(dooble_settings::setting("theme_color").toString());
       static auto link_hovered_style_sheet(m_ui.link_hovered->styleSheet());
@@ -1048,7 +1048,6 @@ void dooble_page::prepare_style_sheets(void)
 		 name()));
 	}
     }
-#endif
 }
 
 void dooble_page::prepare_tool_buttons(void)

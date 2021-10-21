@@ -236,29 +236,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	m_ui.language_directory->setVisible(false);
     }
 
-#ifdef DOOBLE_CONFIGURE_SETTINGS_THEME_COLOR
-  if(dooble::s_application->style_name() == "fusion")
-    {
-    }
-  else if(dooble::s_application->style_name() == "macintosh" ||
-	  dooble::s_application->style_name() == "windows")
-    {
-      m_ui.theme_color->setEnabled(false);
-
-      if(dooble::s_application->style_name() == "macintosh")
-	m_ui.theme_color->setToolTip
-	  (tr("<html>Dooble prefers the Macintosh style on OS X. "
-	      "You may launch "
-	      "Dooble via \"open /Applications/Dooble.d/Dooble.app --args "
-	      "-style Fusion\" to test the Fusion style."));
-      else
-	m_ui.theme_color->setToolTip(tr("Disabled on the Windows theme."));
-    }
-  else
-    {
-      m_ui.theme_color->setEnabled(false);
-      m_ui.theme_color->setToolTip(tr("Disabled for non-Fusion themes."));
-    }
+#ifdef Q_OS_WIN
+#else
+  m_ui.theme->setEnabled(false);
+  m_ui.theme->setToolTip(tr("Windows only."));
 #endif
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
@@ -1235,24 +1216,14 @@ void dooble_settings::restore(bool read_database)
   else
     m_ui.tab_position->setCurrentIndex(1);
 
-#ifdef DOOBLE_CONFIGURE_SETTINGS_THEME_COLOR
-  if(dooble::s_application->style_name() == "fusion")
-    m_ui.theme_color->setCurrentIndex
-      (qBound(0,
-	      s_settings.value("theme_color_index", 2).toInt(),
-	      m_ui.theme_color->count() - 1));
-  else if(dooble::s_application->style_name() == "macintosh" ||
-	  dooble::s_application->style_name() == "windows")
-    m_ui.theme_color->setCurrentIndex(2); // Default
-  else
-    m_ui.theme_color->setCurrentIndex(2); // Default
-#else
-  m_ui.theme_color->setCurrentIndex
+#ifdef Q_OS_WIN
+  m_ui.theme->setCurrentIndex
     (qBound(0,
 	    s_settings.value("theme_color_index", 2).toInt(),
-	    m_ui.theme_color->count() - 1));
+	    m_ui.theme->count() - 1));
+#else
+    m_ui.theme->setCurrentIndex(2); // Default
 #endif
-
   m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
   m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
   m_ui.user_agent->setCursorPosition(0);
@@ -1280,7 +1251,7 @@ void dooble_settings::restore(bool read_database)
     QUrl::fromUserInput(m_ui.home_url->text()).toEncoded();
   s_settings["icon_set"] = "Material Design";
 
-  switch(m_ui.theme_color->currentIndex())
+  switch(m_ui.theme->currentIndex())
     {
     case 0:
       {
@@ -1314,7 +1285,7 @@ void dooble_settings::restore(bool read_database)
       }
     }
 
-  s_settings["theme_color_index"] = m_ui.theme_color->currentIndex();
+  s_settings["theme_color_index"] = m_ui.theme->currentIndex();
   m_ui.utc_time_zone->setChecked
     (s_settings.value("utc_time_zone", false).toBool());
 
@@ -2031,7 +2002,7 @@ void dooble_settings::slot_apply(void)
   {
     QWriteLocker locker(&s_settings_mutex);
 
-    switch(m_ui.theme_color->currentIndex())
+    switch(m_ui.theme->currentIndex())
       {
       case 0:
 	{
@@ -2171,7 +2142,7 @@ void dooble_settings::slot_apply(void)
       }
     }
 
-  set_setting("theme_color_index", m_ui.theme_color->currentIndex());
+  set_setting("theme_color_index", m_ui.theme->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());
   set_setting("user_agent", m_ui.user_agent->text().trimmed());
