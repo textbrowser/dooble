@@ -321,8 +321,10 @@ void dooble_ui_utilities::enable_mac_brushed_metal(QWidget *widget)
     return;
 
 #ifdef Q_OS_MACOS
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   widget->setAttribute
     (Qt::WA_MacBrushedMetal,
      dooble::s_application->style_name().contains("macintosh"));
+#endif
 #endif
 }
