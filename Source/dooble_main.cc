@@ -223,11 +223,7 @@ int main(int argc, char *argv[])
 #endif
   QDir::setCurrent("/Applications/Dooble.d");
 #endif
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  QString dooble_directory(".dooble_v2");
-#else
-  QString dooble_directory(".dooble_qt6");
-#endif
+  QString dooble_directory(".dooble");
 #if defined(Q_OS_WIN)
   QFileInfo file_info;
   QString username(qgetenv("USERNAME").mid(0, 32).trimmed().constData());
