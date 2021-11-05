@@ -30,7 +30,7 @@ cp -p ~/Qt/6.2.1/gcc_64/lib/libicuuc.so.56 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.2.1/gcc_64/libexec/QtWebEngineProcess ./opt/dooble/.
 cp -pr ~/Qt/6.2.1/gcc_64/plugins ./opt/dooble/.
 cp -pr ~/Qt/6.2.1/gcc_64/resources/* ./opt/dooble/.
-cp -pr ~/Qt/6.2.1/gcc_64/translations/*.qm ./opt/dooble/translations/.
+cp -pr ~/Qt/6.2.1/gcc_64/translations/*.qm ./opt/dooble/Translations/.
 cp -pr ~/Qt/6.2.1/gcc_64/translations/qtwebengine_locales ./opt/dooble/.
 chmod -x,g+w ./opt/dooble/Lib/*
 ~/Qt/6.2.1/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
