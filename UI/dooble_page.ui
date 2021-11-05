@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>455</width>
+    <width>495</width>
     <height>450</height>
    </rect>
   </property>
@@ -62,7 +62,7 @@
          </size>
         </property>
         <property name="popupMode">
-         <enum>QToolButton::MenuButtonPopup</enum>
+         <enum>QToolButton::DelayedPopup</enum>
         </property>
         <property name="autoRaise">
          <bool>true</bool>
@@ -84,7 +84,7 @@
          </size>
         </property>
         <property name="popupMode">
-         <enum>QToolButton::MenuButtonPopup</enum>
+         <enum>QToolButton::DelayedPopup</enum>
         </property>
         <property name="autoRaise">
          <bool>true</bool>
@@ -189,7 +189,7 @@
          </size>
         </property>
         <property name="popupMode">
-         <enum>QToolButton::MenuButtonPopup</enum>
+         <enum>QToolButton::DelayedPopup</enum>
         </property>
         <property name="autoRaise">
          <bool>true</bool>

@@ -1060,30 +1060,25 @@ void dooble_page::prepare_tool_buttons(void)
     else if(m_ui.backward == tool_button ||
 	    m_ui.downloads == tool_button ||
 	    m_ui.forward == tool_button)
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
       tool_button->setStyleSheet
-	("QToolButton {border: none; padding-right: 10px;}"
-	 "QToolButton::menu-button {border: none;}");
-#else
-      tool_button->setStyleSheet
-	("QToolButton {border: none; padding-right: 15px;}"
-	 "QToolButton::menu-button {border: none; width: 15px;}");
-#endif
+	("QToolButton {border: none;}"
+	 "QToolButton::menu-indicator {image: none;}");
     else if(m_ui.menu == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none;}"
-	 "QToolButton::menu-arrow {image: none;}"
-	 "QToolButton::menu-button {border: none;}");
+	 "QToolButton::menu-button {border: none;}"
+	 "QToolButton::menu-indicator {image: none;}");
     else
       tool_button->setStyleSheet("QToolButton {border: none;}"
 				 "QToolButton::menu-button {border: none;}");
 #else
   foreach(auto tool_button, findChildren<QToolButton *> ())
     if(m_ui.backward == tool_button ||
-       m_ui.forward == tool_button)
+       m_ui.forward == tool_button ||
+       m_ui.downloads == tool_button)
       tool_button->setStyleSheet
-	("QToolButton {padding-right: 10px;}"
-	 "QToolButton::menu-button {border: none;}");
+	("QToolButton {border: none;}"
+	 "QToolButton::menu-indicator {image: none;}");
 #endif
 }
 
