@@ -133,7 +133,6 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
 #ifdef DOOBLE_QTCHARTS_PRESENT
   m_ui.charts_frame->layout()->addWidget(m_chart_view);
 #endif
-  m_ui.print->setVisible(false);
   m_ui.print->setMenu(new QMenu(this));
   m_ui.print->menu()->addAction(tr("Print..."), this, SLOT(slot_print(void)));
   m_ui.print->menu()->addAction
@@ -143,6 +142,7 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
     ("QToolButton {border: none; padding-right: 15px;}"
      "QToolButton::menu-button {border: none; width: 15px;}");
 #endif
+  m_ui.print->setVisible(false);
   m_ui.save->setVisible(false);
   m_ui.splitter->setStretchFactor(0, 1);
   m_ui.splitter->setStretchFactor(1, 0);
