@@ -28,11 +28,6 @@
 #include <QDir>
 #include <QElapsedTimer>
 #include <QSplashScreen>
-#if defined(Q_OS_MACOS)
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-#include <QStyleFactory>
-#endif
-#endif
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
@@ -218,9 +213,6 @@ int main(int argc, char *argv[])
   dooble::s_application = new dooble_application(argc, argv);
 
 #ifdef Q_OS_MACOS
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-  QApplication::setStyle(QStyleFactory::create("Macintosh"));
-#endif
   QDir::setCurrent("/Applications/Dooble.d");
 #endif
   QString dooble_directory(".dooble");
@@ -342,11 +334,9 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::LocalStorageEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
-#endif
 #endif
 #else
   QWebEngineProfile::defaultProfile()->settings()->setAttribute

@@ -1698,13 +1698,11 @@ void dooble::prepare_shortcuts(void)
 				   SLOT(slot_show_full_screen(void)));
 
 #ifdef Q_OS_MACOS
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
       for(auto shortcut : m_shortcuts)
 	connect(shortcut,
 		SIGNAL(activated(void)),
 		this,
 		SLOT(slot_shortcut_activated(void)));
-#endif
 #endif
     }
 

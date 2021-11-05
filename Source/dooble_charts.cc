@@ -139,15 +139,9 @@ dooble_charts::dooble_charts(QWidget *parent):QWidget(parent)
   m_ui.print->menu()->addAction
     (tr("Print Preview..."), this, SLOT(slot_print_preview(void)));
 #ifdef Q_OS_MACOS
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-  m_ui.print->setStyleSheet
-    ("QToolButton {border: none; padding-right: 10px;}"
-     "QToolButton::menu-button {border: none;}");
-#else
   m_ui.print->setStyleSheet
     ("QToolButton {border: none; padding-right: 15px;}"
      "QToolButton::menu-button {border: none; width: 15px;}");
-#endif
 #endif
   m_ui.save->setVisible(false);
   m_ui.splitter->setStretchFactor(0, 1);

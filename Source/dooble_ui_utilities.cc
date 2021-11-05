@@ -247,19 +247,11 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   if(w)
     scrn = QApplication::desktop()->screenNumber(w);
-#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
-  else if(QApplication::desktop()->isVirtualDesktop())
-    scrn = QApplication::desktop()->screenNumber(QCursor::pos());
-#endif
   else
     scrn = QApplication::desktop()->screenNumber(widget);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
-  desk = QApplication::desktop()->availableGeometry(scrn);
-#else
   desk = QGuiApplication::screens().value(scrn) ?
     QGuiApplication::screens().value(scrn)->geometry() : QRect();
-#endif
 #else
   auto screen = QGuiApplication::screenAt(widget->pos());
 

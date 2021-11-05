@@ -152,9 +152,6 @@ dooble_downloads_item::dooble_downloads_item
   m_progress_bar_animation.setPropertyName("value");
   m_progress_bar_animation.setStartValue(0);
   m_progress_bar_animation.setTargetObject(m_ui.progress);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-  m_ui.pause_resume->setVisible(false);
-#endif
 #ifdef Q_OS_MACOS
   m_ui.cancel->setStyleSheet("QToolButton {border: none;}"
 			     "QToolButton::menu-button {border: none;}");
@@ -180,7 +177,6 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
   m_stalled_timer.setInterval(15000);
   m_url = url;
   m_ui.setupUi(this);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
   connect(m_ui.cancel,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -198,9 +194,6 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 #endif
   m_ui.cancel->setToolTip(tr("Restart"));
   m_ui.cancel->setVisible(true);
-#else
-  m_ui.cancel->setVisible(false);
-#endif
   m_ui.file_name->setText(file_name);
   m_ui.information->setText(information);
   m_ui.pause_resume->setVisible(false);
@@ -451,12 +444,10 @@ void dooble_downloads_item::slot_download_progress(qint64 bytes_received,
 
   auto paused = false;
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   if(m_download)
     if(m_download->isPaused())
       paused = true;
-#endif
 #endif
 
   if(bytes_total > 0)
@@ -545,7 +536,6 @@ void dooble_downloads_item::slot_finished(void)
 	   arg(m_download->url().host()).
 	   arg(dooble_ui_utilities::pretty_size(m_download->receivedBytes())));
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
       connect(m_ui.cancel,
 	      SIGNAL(clicked(void)),
 	      this,
@@ -560,7 +550,6 @@ void dooble_downloads_item::slot_finished(void)
 			  QIcon(QString(":/%1/20/reload.png").arg(icon_set))));
       m_ui.cancel->setToolTip(tr("Restart"));
       m_ui.cancel->setVisible(true);
-#endif
     }
   else
     m_ui.information->setText(tr("Interrupted"));
@@ -571,7 +560,6 @@ void dooble_downloads_item::slot_finished(void)
 
 void dooble_downloads_item::slot_pause_or_resume(void)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   if(m_download)
     {
@@ -614,7 +602,6 @@ void dooble_downloads_item::slot_pause_or_resume(void)
 	}
     }
 #endif
-#endif
 }
 
 void dooble_downloads_item::slot_reload(void)
@@ -629,12 +616,10 @@ void dooble_downloads_item::slot_settings_applied(void)
 
 void dooble_downloads_item::slot_stalled(void)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   if(m_download)
     if(m_download->isPaused())
       return;
-#endif
 #endif
 
   if(m_download && m_download->totalBytes() > 0)
