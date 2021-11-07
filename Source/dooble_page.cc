@@ -1076,9 +1076,7 @@ void dooble_page::prepare_tool_buttons(void)
     if(m_ui.backward == tool_button ||
        m_ui.forward == tool_button ||
        m_ui.downloads == tool_button)
-      tool_button->setStyleSheet
-	("QToolButton {border: none;}"
-	 "QToolButton::menu-indicator {image: none;}");
+      tool_button->setStyleSheet("QToolButton::menu-indicator {image: none;}");
 #endif
 }
 
