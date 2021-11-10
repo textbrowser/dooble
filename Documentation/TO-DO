@@ -182,6 +182,7 @@ Remaining Items
 - Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
+- Generic Debian control file.
 - Include date stamps in cookie containers.
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional testing of Threefish.
