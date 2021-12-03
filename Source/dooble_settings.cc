@@ -1223,6 +1223,7 @@ void dooble_settings::restore(bool read_database)
   m_ui.user_agent->setCursorPosition(0);
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   m_ui.webgl->setChecked(s_settings.value("webgl", true).toBool());
+  m_ui.zoom->setValue(s_settings.value("zoom", 100).toInt());
   m_ui.zoom_frame_location->setCurrentIndex
     (qBound(0,
 	    s_settings.value("zoom_frame_location_index", 0).toInt(),
@@ -2141,6 +2142,7 @@ void dooble_settings::slot_apply(void)
   set_setting("webrtc_public_interfaces_only",
 	      m_ui.webrtc_public_interfaces_only->isChecked());
   set_setting("xss_auditing", m_ui.xss_auditing->isChecked());
+  set_setting("zoom", m_ui.zoom->value());
   set_setting
     ("zoom_frame_location_index", m_ui.zoom_frame_location->currentIndex());
   prepare_icons();

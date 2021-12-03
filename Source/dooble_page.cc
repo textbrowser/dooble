@@ -383,6 +383,12 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   prepare_shortcuts();
   prepare_style_sheets();
   prepare_tool_buttons();
+
+  auto zoom_factor = dooble_settings::setting("zoom").toDouble() / 100.0;
+
+  m_view->setZoomFactor(zoom_factor);
+  prepare_zoom_toolbutton(zoom_factor);
+  emit zoomed(m_view->zoomFactor());
   slot_dooble_credentials_created();
 }
 
@@ -2156,8 +2162,13 @@ void dooble_page::slot_settings_applied(void)
   else
     m_ui.is_private->setVisible(false);
 
+  auto zoom_factor = dooble_settings::setting("zoom").toDouble() / 100.0;
+
+  m_view->setZoomFactor(zoom_factor);
   prepare_icons();
   prepare_style_sheets();
+  prepare_zoom_toolbutton(zoom_factor);
+  emit zoomed(m_view->zoomFactor());
 }
 
 void dooble_page::slot_show_certificate_exception(void)
