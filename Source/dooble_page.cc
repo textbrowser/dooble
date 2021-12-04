@@ -384,7 +384,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   prepare_style_sheets();
   prepare_tool_buttons();
 
-  auto zoom_factor = dooble_settings::setting("zoom").toDouble() / 100.0;
+  auto zoom_factor = dooble_settings::setting("zoom", 100.0).toDouble() / 100.0;
 
   m_view->setZoomFactor(zoom_factor);
   prepare_zoom_toolbutton(zoom_factor);
