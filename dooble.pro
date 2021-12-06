@@ -6,7 +6,11 @@ cache()
 include(dooble-source.pro)
 
 versionAtLeast(QT_VERSION, 6.0.0) {
+win32 {
+qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+else {
 qtPrepareTool(CONVERT_TOOL, ../libexec/qwebengine_convert_dict)
+}
 } else {
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
 }
