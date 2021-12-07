@@ -287,6 +287,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
+QMAKE_LFLAGS += /entry:mainCRTStartup
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
