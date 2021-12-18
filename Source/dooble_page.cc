@@ -801,6 +801,12 @@ void dooble_page::prepare_standard_menus(void)
 		  QKeySequence(tr("Ctrl+Shift+W")));
   menu->addSeparator();
   menu->addAction
+    (QIcon::fromTheme(use_material_icons + "document-export",
+		      QIcon(QString(":/%1/48/export.png").arg(icon_set))),
+     tr("&Export As PNG..."),
+     this,
+     SIGNAL(export_as_png(void)));
+  menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-save",
 		      QIcon(QString(":/%1/48/save.png").arg(icon_set))),
      tr("&Save"),

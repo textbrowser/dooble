@@ -197,6 +197,7 @@ class dooble_charts: public QWidget
   QHash<dooble_charts::Properties, QVariant> x_axis_properties(void) const;
   QHash<dooble_charts::Properties, QVariant> y_axis_properties(void) const;
   QMenu *menu(void);
+  QPixmap pixmap(void) const;
   QString name(void) const;
   QWidget *frame(void) const;
   QWidget *view(void) const;

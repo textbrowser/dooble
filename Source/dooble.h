@@ -199,6 +199,7 @@ class dooble: public QMainWindow
 #ifdef Q_OS_MAC
   void slot_enable_shortcut(void);
 #endif
+  void slot_export_as_png(void);
   void slot_floating_digital_dialog_timeout(void);
   void slot_history_action_triggered(void);
   void slot_history_favorites_populated(void);

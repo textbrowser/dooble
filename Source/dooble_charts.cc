@@ -641,6 +641,15 @@ dooble_charts::all_properties(void) const
   return properties;
 }
 
+QPixmap dooble_charts::pixmap(void) const
+{
+#ifdef DOOBLE_QTCHARTS_PRESENT
+  return m_chart_view->grab();
+#else
+  return QPixmap();
+#endif
+}
+
 #ifdef DOOBLE_QTCHARTS_PRESENT
 QString dooble_charts::chart_animation_option_to_string
 (const QChart::AnimationOptions chart_animation_options)

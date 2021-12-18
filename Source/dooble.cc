@@ -1219,6 +1219,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(export_as_png(void)),
+	  this,
+	  SLOT(slot_export_as_png(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
 	  SLOT(slot_icon_changed(const QIcon &)),
@@ -1782,6 +1788,12 @@ void dooble::prepare_standard_menus(void)
 		  QKeySequence(tr("Ctrl+Shift+W")));
   menu->addSeparator();
   menu->addAction
+    (QIcon::fromTheme(use_material_icons + "document-export",
+		      QIcon(QString(":/%1/48/export.png").arg(icon_set))),
+     tr("&Export As PNG..."),
+     this,
+     SLOT(slot_export_as_png(void)))->setEnabled(is_chart);
+  menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-save",
 		      QIcon(QString(":/%1/48/save.png").arg(icon_set))),
      tr("&Save"),
@@ -2272,6 +2284,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(create_window(dooble_web_engine_view *)),
 	     this,
 	     SLOT(slot_create_window(dooble_web_engine_view *)));
+  disconnect(page,
+	     SIGNAL(export_as_png(void)),
+	     this,
+	     SLOT(slot_export_as_png(void)));
   disconnect(page,
 	     SIGNAL(iconChanged(const QIcon &)),
 	     this,
@@ -3216,6 +3232,38 @@ void dooble::slot_enable_shortcut(void)
   timer->deleteLater();
 }
 #endif
+
+void dooble::slot_export_as_png(void)
+{
+  QFileDialog dialog(this);
+
+  dialog.setDirectory(s_downloads->download_path());
+  dialog.setFileMode(QFileDialog::AnyFile);
+  dialog.setLabelText(QFileDialog::Accept, tr("Select"));
+  dialog.setNameFilter(tr("PNG (*.png)"));
+  dialog.setWindowTitle(tr("Dooble: Export As PNG"));
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      QApplication::processEvents();
+
+      auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
+
+      if(chart)
+	{
+	  auto file_name(dialog.selectedFiles().value(0));
+
+	  if(!file_name.toLower().endsWith(".png"))
+	    file_name.append(".png");
+
+	  auto pixmap(chart->pixmap());
+
+	  pixmap.save(file_name, "PNG", 100);
+	}
+    }
+
+  QApplication::processEvents();
+}
 
 void dooble::slot_floating_digital_dialog_timeout(void)
 {
