@@ -26,6 +26,7 @@
 */
 
 #include <QAuthenticator>
+#include <QPainter>
 #include <QToolTip>
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QWebEngineFindTextResult>
@@ -58,6 +59,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
 			 QWidget *parent):QWidget(parent)
 {
+  m_export_as_png = false;
+  m_export_png_timer.setSingleShot(true);
   m_is_location_frame_user_hidden = false;
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
@@ -108,6 +111,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	m_view->resize(d->size());
     }
 
+  connect(&m_export_png_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_export_as_png_timer_timeout(void)));
   connect(&m_reload_timer,
 	  SIGNAL(timeout(void)),
 	  this,
@@ -365,6 +372,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SLOT(slot_proxy_authentication_required(const QUrl &,
 						  QAuthenticator *,
 						  const QString &)));
+  connect(m_view->page(),
+	  SIGNAL(scrollPositionChanged(const QPointF &)),
+	  this,
+	  SLOT(slot_scroll_position_changed(const QPointF &)));
   connect(this,
 	  SIGNAL(javascript_allow_popup_exception(const QUrl &)),
 	  dooble::s_settings,
@@ -601,6 +612,26 @@ void dooble_page::load(const QUrl &url)
 {
   m_view->stop();
   m_view->load(url);
+}
+
+void dooble_page::prepare_export_as_png(const QString &file_name)
+{
+  m_export_as_png = true;
+  m_export_png_file_name = file_name;
+  m_export_png_timer.start
+    (250 *
+     qMax(m_view->page()->contentsSize().toSize().height(),
+	  m_view->size().height()) / m_view->size().height());
+  m_pixmaps.clear();
+  m_view->page()->runJavaScript
+    (QString("window.scrollBy(0, %1);").arg(m_view->size().height()),
+     [](const QVariant &variant) {Q_UNUSED(variant);
+                                  QApplication::processEvents();});
+
+  QPixmap pixmap(m_view->size());
+
+  m_view->render(&pixmap);
+  m_pixmaps << pixmap.copy();
 }
 
 void dooble_page::prepare_icons(void)
@@ -1539,6 +1570,42 @@ void dooble_page::slot_escape(void)
     }
 }
 
+void dooble_page::slot_export_as_png_timer_timeout(void)
+{
+  m_export_as_png = false;
+
+  QPainter painter;
+  QPixmap pixmap(m_view->page()->contentsSize().toSize());
+  auto remainder = m_view->page()->contentsSize().toSize().height() %
+    m_view->size().height();
+  int y = 0;
+
+  painter.begin(&pixmap);
+  painter.setRenderHint(QPainter::Antialiasing, true);
+
+  for(int i = 0; i < m_pixmaps.size(); i++)
+    {
+      auto p(m_pixmaps.at(i));
+
+      if(i == m_pixmaps.size() - 1)
+	painter.drawPixmap
+	  (QRect(0, y, p.width(), p.height()),
+	   p,
+	   QRect(0, p.height() - remainder, p.width(), p.height()));
+      else
+	painter.drawPixmap
+	  (QRect(0, y, p.width(), p.height()),
+	   p,
+	   QRect(0, 0, p.width(), p.height()));
+
+      y += p.height();
+    }
+
+  m_pixmaps.clear();
+  painter.end();
+  pixmap.save(m_export_png_file_name, "PNG", 100);
+}
+
 void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
 {
   if(state)
@@ -2159,6 +2226,28 @@ void dooble_page::slot_reload_periodically(void)
       stop();
       reload();
     }
+}
+
+void dooble_page::slot_scroll_position_changed(const QPointF &position)
+{
+  Q_UNUSED(position);
+
+  if(!m_export_as_png)
+    return;
+
+  QTimer::singleShot(50, this, SLOT(slot_render_pixmap(void)));
+}
+
+void dooble_page::slot_render_pixmap(void)
+{
+  QPixmap pixmap(m_view->size());
+
+  m_view->render(&pixmap);
+  m_pixmaps << pixmap.copy();
+  m_view->page()->runJavaScript
+    (QString("window.scrollBy(0, %1);").arg(m_view->size().height()),
+     [](const QVariant &variant) {Q_UNUSED(variant);
+                                  QApplication::processEvents();});
 }
 
 void dooble_page::slot_settings_applied(void)

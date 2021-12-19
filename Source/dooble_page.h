@@ -40,6 +40,7 @@
 class QPrinter;
 class QShortcut;
 class QWebEngineSettings;
+class QWebEngineView;
 class dooble;
 class dooble_address_widget;
 class dooble_web_engine_view;
@@ -83,6 +84,7 @@ class dooble_page: public QWidget
   void hide_status_bar(bool state);
   void inject_custom_css(void);
   void load(const QUrl &url);
+  void prepare_export_as_png(const QString &file_name);
   void print_page(QPrinter *printer);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   void print_page(QPrinter *printer,
@@ -100,6 +102,7 @@ class dooble_page: public QWidget
 
  private:
   QLabel *m_progress_label;
+  QList<QPixmap> m_pixmaps;
   QList<QShortcut *> m_shortcuts;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
@@ -107,9 +110,12 @@ class dooble_page: public QWidget
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
+  QString m_export_png_file_name;
+  QTimer m_export_png_timer;
   QTimer m_reload_timer;
   QVector<QPointer<dooble_web_engine_view> > m_last_javascript_popups;
   Ui_dooble_page m_ui;
+  bool m_export_as_png;
   bool m_is_location_frame_user_hidden;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
@@ -143,6 +149,7 @@ class dooble_page: public QWidget
   void slot_downloads_finished(void);
   void slot_downloads_started(void);
   void slot_escape(void);
+  void slot_export_as_png_timer_timeout(void);
   void slot_favorite_changed(const QUrl &url, bool state);
   void slot_feature_permission_allow(void);
   void slot_feature_permission_deny(void);
@@ -177,6 +184,8 @@ class dooble_page: public QWidget
   void slot_reload(void);
   void slot_reload_or_stop(void);
   void slot_reload_periodically(void);
+  void slot_render_pixmap(void);
+  void slot_scroll_position_changed(const QPointF &position);
   void slot_settings_applied(void);
   void slot_show_certificate_exception(void);
   void slot_show_favorites_popup(void);

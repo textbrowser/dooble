@@ -3248,17 +3248,23 @@ void dooble::slot_export_as_png(void)
       QApplication::processEvents();
 
       auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
+      auto file_name(dialog.selectedFiles().value(0));
+
+      if(!file_name.toLower().endsWith(".png"))
+	file_name.append(".png");
 
       if(chart)
 	{
-	  auto file_name(dialog.selectedFiles().value(0));
-
-	  if(!file_name.toLower().endsWith(".png"))
-	    file_name.append(".png");
-
 	  auto pixmap(chart->pixmap());
 
 	  pixmap.save(file_name, "PNG", 100);
+	}
+      else
+	{
+	  auto page = qobject_cast<dooble_page *> (m_ui.tab->currentWidget());
+
+	  if(page)
+	    page->prepare_export_as_png(file_name);
 	}
     }
 
