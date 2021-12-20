@@ -630,8 +630,8 @@ void dooble_page::prepare_export_as_png(const QString &file_name)
 	(tr("Dooble: Exporting Page"));
     }
 
-  m_export_as_png_progress_dialog->show();
   m_export_as_png = false;
+  m_export_as_png_progress_dialog->show();
   m_export_png_file_name = file_name;
   m_view->page()->runJavaScript("window.scrollTo(0, 0);");
   QTimer::singleShot(2500, this, SLOT(slot_scroll_to_top_finished(void)));
