@@ -616,22 +616,25 @@ void dooble_page::load(const QUrl &url)
 
 void dooble_page::prepare_export_as_png(const QString &file_name)
 {
-  m_export_as_png = true;
+  if(!m_export_as_png_progress_dialog)
+    {
+      m_export_as_png_progress_dialog = new QProgressDialog
+	(tr("Exporting the page. Please remain calm."),
+	 QString(),
+	 0,
+	 0,
+	 this,
+	 Qt::Dialog);
+      m_export_as_png_progress_dialog->setWindowModality(Qt::ApplicationModal);
+      m_export_as_png_progress_dialog->setWindowTitle
+	(tr("Dooble: Exporting Page"));
+    }
+
+  m_export_as_png_progress_dialog->show();
+  m_export_as_png = false;
   m_export_png_file_name = file_name;
-  m_export_png_timer.start
-    (250 *
-     qMax(m_view->page()->contentsSize().toSize().height(),
-	  m_view->size().height()) / m_view->size().height());
-  m_pixmaps.clear();
-  m_view->page()->runJavaScript
-    (QString("window.scrollBy(0, %1);").arg(m_view->size().height()),
-     [](const QVariant &variant) {Q_UNUSED(variant);
-                                  QApplication::processEvents();});
-
-  QPixmap pixmap(m_view->size());
-
-  m_view->render(&pixmap);
-  m_pixmaps << pixmap.copy();
+  m_view->page()->runJavaScript("window.scrollTo(0, 0);");
+  QTimer::singleShot(2500, this, SLOT(slot_scroll_to_top_finished(void)));
 }
 
 void dooble_page::prepare_icons(void)
@@ -1604,6 +1607,10 @@ void dooble_page::slot_export_as_png_timer_timeout(void)
   m_pixmaps.clear();
   painter.end();
   pixmap.save(m_export_png_file_name, "PNG", 100);
+  m_view->page()->runJavaScript("window.scrollTo(0, 0);");
+
+  if(m_export_as_png_progress_dialog)
+    m_export_as_png_progress_dialog->close();
 }
 
 void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
@@ -2238,6 +2245,23 @@ void dooble_page::slot_scroll_position_changed(const QPointF &position)
   QTimer::singleShot(50, this, SLOT(slot_render_pixmap(void)));
 }
 
+void dooble_page::slot_scroll_to_top_finished(void)
+{
+  m_export_as_png = true;
+  m_export_png_timer.start
+    (250 *
+     qMax(m_view->page()->contentsSize().toSize().height(),
+	  m_view->size().height()) / m_view->size().height());
+  m_pixmaps.clear();
+  m_view->page()->runJavaScript
+    (QString("window.scrollBy(0, %1);").arg(m_view->size().height()));
+
+  QPixmap pixmap(m_view->size());
+
+  m_view->render(&pixmap);
+  m_pixmaps << pixmap.copy();
+}
+
 void dooble_page::slot_render_pixmap(void)
 {
   QPixmap pixmap(m_view->size());
@@ -2245,9 +2269,7 @@ void dooble_page::slot_render_pixmap(void)
   m_view->render(&pixmap);
   m_pixmaps << pixmap.copy();
   m_view->page()->runJavaScript
-    (QString("window.scrollBy(0, %1);").arg(m_view->size().height()),
-     [](const QVariant &variant) {Q_UNUSED(variant);
-                                  QApplication::processEvents();});
+    (QString("window.scrollBy(0, %1);").arg(m_view->size().height()));
 }
 
 void dooble_page::slot_settings_applied(void)

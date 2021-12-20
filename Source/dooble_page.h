@@ -110,6 +110,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
+  QPointer<QProgressDialog> m_export_as_png_progress_dialog;
   QString m_export_png_file_name;
   QTimer m_export_png_timer;
   QTimer m_reload_timer;
@@ -186,6 +187,7 @@ class dooble_page: public QWidget
   void slot_reload_periodically(void);
   void slot_render_pixmap(void);
   void slot_scroll_position_changed(const QPointF &position);
+  void slot_scroll_to_top_finished(void);
   void slot_settings_applied(void);
   void slot_show_certificate_exception(void);
   void slot_show_favorites_popup(void);
