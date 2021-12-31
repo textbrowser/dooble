@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QPointer>
 #include <QPrintDialog>
