@@ -754,6 +754,9 @@ void dooble_page::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+L")),
 				   this,
 				   SLOT(slot_open_link(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+O")),
+				   this,
+				   SIGNAL(open_local_file(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
 				   this,
 				   SLOT(slot_reload(void)));
@@ -809,6 +812,10 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(new_window(void)),
      QKeySequence(tr("Ctrl+N")));
+  menu->addAction(tr("&Open File..."),
+		  this,
+		  SIGNAL(open_local_file(void)),
+		  QKeySequence(tr("Ctrl+O")));
   menu->addAction(tr("Open UR&L"),
 		  this,
 		  SLOT(slot_open_link(void)),

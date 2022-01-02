@@ -1290,6 +1290,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(open_local_file(void)),
+	  this,
+	  SLOT(slot_open_local_file(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(print(void)),
 	  this,
 	  SLOT(slot_print(void)),
@@ -2329,6 +2335,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(open_link_in_new_window(const QUrl &)),
 	     this,
 	     SLOT(slot_open_link_in_new_window(const QUrl &)));
+  disconnect(page,
+	     SIGNAL(open_local_file(void)),
+	     this,
+	     SLOT(slot_open_local_file(void)));
   disconnect(page,
 	     SIGNAL(print(void)),
 	     this,
@@ -3442,6 +3452,29 @@ void dooble::slot_open_link_in_new_tab(const QUrl &url)
 void dooble::slot_open_link_in_new_window(const QUrl &url)
 {
   (new dooble(QList<QUrl> () << url, false))->show();
+}
+
+void dooble::slot_open_local_file(void)
+{
+  auto page = current_page();
+
+  if(!page)
+    return;
+
+  QFileDialog dialog(this);
+
+  dialog.setDirectory(QDir::home());
+  dialog.setFileMode(QFileDialog::ExistingFile);
+  dialog.setLabelText(QFileDialog::Accept, tr("Open"));
+  dialog.setWindowTitle(tr("Dooble: Open File"));
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      QApplication::processEvents();
+      page->load(QUrl::fromUserInput(dialog.selectedFiles().value(0)));
+    }
+
+  QApplication::processEvents();
 }
 
 void dooble::slot_open_tab_as_new_private_window(int index)

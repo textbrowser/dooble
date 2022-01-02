@@ -222,6 +222,7 @@ class dooble_page: public QWidget
   void open_link_in_new_private_window(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);
   void open_link_in_new_window(const QUrl &url);
+  void open_local_file(void);
   void print(void);
   void print_preview(void);
   void quit_dooble(void);
