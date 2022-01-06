@@ -46,12 +46,6 @@
        </item>
        <item>
         <widget class="QListWidget" name="predefined">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <item>
           <property name="text">
            <string>DuckDuckGo</string>

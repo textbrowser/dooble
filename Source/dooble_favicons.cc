@@ -121,6 +121,82 @@ QIcon dooble_favicons::icon(const QUrl &url)
   return icon;
 }
 
+QIcon dooble_favicons::icon_from_host(const QUrl &url)
+{
+  if(!dooble::s_cryptography)
+    return QIcon(":/Miscellaneous/blank_page.png");
+  else if(url == QUrl::fromUserInput("about:blank") ||
+	  url.isEmpty() ||
+	  !url.isValid())
+    return QIcon(":/Miscellaneous/blank_page.png");
+
+  QIcon icon;
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_favicons.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare("SELECT favicon, OID FROM dooble_favicons WHERE "
+		      "url_host_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.host()).toBase64());
+
+	if(query.exec() && query.next())
+	  if(!query.isNull(0))
+	    {
+	      auto bytes
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      bytes = dooble::s_cryptography->mac_then_decrypt(bytes);
+
+	      if(!bytes.isEmpty())
+		{
+		  QBuffer buffer;
+
+		  buffer.setBuffer(&bytes);
+
+		  if(buffer.open(QIODevice::ReadOnly))
+		    {
+		      QDataStream in(&buffer);
+
+		      in >> icon;
+
+		      if(in.status() != QDataStream::Ok)
+			icon = QIcon();
+
+		      buffer.close();
+		    }
+		}
+	      else
+		dooble_database_utilities::remove_entry
+		  (db,
+		   "dooble_favicons",
+		   query.value(1).toLongLong());
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+
+  if(icon.isNull())
+    icon = QIcon(":/Miscellaneous/blank_page.png");
+
+  return icon;
+}
+
 void dooble_favicons::create_tables(QSqlDatabase &db)
 {
   db.open();

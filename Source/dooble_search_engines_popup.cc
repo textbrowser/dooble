@@ -185,7 +185,8 @@ void dooble_search_engines_popup::add_search_engine
 	    QList<QStandardItem *> list;
 	    auto item = new QStandardItem();
 
-	    action = new QAction(dooble_favicons::icon(url), title, this);
+	    action = new QAction
+	      (dooble_favicons::icon_from_host(url), title, this);
 	    action->setProperty("url", url);
 	    item->setData(url);
 	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -584,7 +585,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	      auto item = new QStandardItem();
 
 	      action = new QAction
-		(dooble_favicons::icon(QUrl::fromEncoded(url)),
+		(dooble_favicons::icon_from_host(QUrl::fromEncoded(url)),
 		 title,
 		 this);
 	      action->setProperty("url", QUrl::fromEncoded(url));
