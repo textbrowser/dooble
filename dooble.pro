@@ -287,7 +287,9 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:win32 {
+versionAtLeast(QT_VERSION, 6.0.0) {
 QMAKE_LFLAGS += /entry:mainCRTStartup
+}
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
