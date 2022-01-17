@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>Unable to discover the SQLite plugin. This is a serious problem!</source>
-        <translation>Das SQLite-Plugin kann nicht erkannt werden. Das ist ein ernstes Problem!</translation>
+        <translation type="vanished">Das SQLite-Plugin kann nicht erkannt werden. Das ist ein ernstes Problem!</translation>
     </message>
     <message>
         <source>Hi&amp;story</source>
@@ -536,6 +536,34 @@
     </message>
     <message>
         <source>T&amp;abs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export As PNG...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PNG (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Export As PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to discover the SQLite driver! Configuration settings will not be saved. This is a serious problem!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2896,6 +2924,26 @@ Dooble ist open source Software.
         <source>Ctrl+Shift+W</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exporting the page. Please remain calm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dooble: Exporting Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export As PNG...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dooble_popup_menu</name>
@@ -3632,7 +3680,7 @@ Domänen</translation>
     </message>
     <message>
         <source>&lt;html&gt;Dooble prefers the Macintosh style on OS X. You may launch Dooble via &quot;open /Applications/Dooble.d/Dooble.app --args -style Fusion&quot; to test the Fusion style.</source>
-        <translation>&lt;html&gt;Dooble bevorzugt den Macintosh-Stil unter OS X. Sie können Dooble über &quot;open /Applications/Dooble.d/Dooble.app --args -style Fusion&quot; starten, um den Fusion-Stil zu testen.</translation>
+        <translation type="vanished">&lt;html&gt;Dooble bevorzugt den Macintosh-Stil unter OS X. Sie können Dooble über &quot;open /Applications/Dooble.d/Dooble.app --args -style Fusion&quot; starten, um den Fusion-Stil zu testen.</translation>
     </message>
     <message>
         <source>Dark</source>
@@ -3644,7 +3692,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Disabled on the Windows theme.</source>
-        <translation>Im Windows-Design deaktiviert.</translation>
+        <translation type="vanished">Im Windows-Design deaktiviert.</translation>
     </message>
     <message>
         <source>Show Hovered Links Tool Tips</source>
@@ -3688,7 +3736,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Qt 5.11.0 and newer are required.</source>
-        <translation>Qt 5.11.0 und neuer sind erforderlich.</translation>
+        <translation type="vanished">Qt 5.11.0 und neuer sind erforderlich.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Limits WebRTC to public IP addresses only. When disabled, WebRTC may also use local network IP addresses but remote hosts can also see your local network IP address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3724,7 +3772,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Theme Color</source>
-        <translation>Themenfarbe</translation>
+        <translation type="vanished">Themenfarbe</translation>
     </message>
     <message>
         <source>Zoom Frame Location</source>
@@ -3836,7 +3884,7 @@ Domänen</translation>
     </message>
     <message>
         <source>Disabled for non-Fusion themes.</source>
-        <translation>Deaktiviert für Nicht-Fusion-Themen.</translation>
+        <translation type="vanished">Deaktiviert für Nicht-Fusion-Themen.</translation>
     </message>
     <message>
         <source>%1 Row(s)</source>
@@ -3912,6 +3960,42 @@ Domänen</translation>
     </message>
     <message>
         <source>West</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable animated, smooth scrolling. Smooth. Otherwise, stepped scrolling is enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hard minimum font size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The default font size for fixed-pitch text.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The default font size for regular text.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The minimum logical font size that is applied when zooming out.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Universal Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows only.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
