@@ -2,8 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>CFBundleExecutable</key>
+    <string>Dooble</string>
+    <key>CFBundleGetInfoString</key>
+    <string>Dooble 2022.01.30</string>
+    <key>CFBundleIconFile</key>
+    <string>dooble.icns</string>
+    <key>CFBundleIdentifier</key>
+    <string>net.sourceforge.dooble</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>2022.01.30</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
     <key>CFBundleURLTypes</key>
     <array>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>FTP URL</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>ftp</string>
+        </array>
+      </dict>
       <dict>
         <key>CFBundleURLName</key>
         <string>HTTP URL</string>
@@ -21,20 +43,6 @@
         </array>
       </dict>
     </array>
-    <key>CFBundleExecutable</key>
-    <string>Dooble</string>
-    <key>CFBundleGetInfoString</key>
-    <string>Dooble 2022.01.30</string>
-    <key>CFBundleIconFile</key>
-    <string>dooble.icns</string>
-    <key>CFBundleIdentifier</key>
-    <string>net.sourceforge.dooble</string>
-    <key>CFBundlePackageType</key>
-    <string>APPL</string>
-    <key>CFBundleShortVersionString</key>
-    <string>2022.01.30</string>
-    <key>CFBundleSignature</key>
-    <string>????</string>
     <key>CFBundleVersion</key>
     <string>2022.01.30</string>
     <key>LSMinimumSystemVersion</key>

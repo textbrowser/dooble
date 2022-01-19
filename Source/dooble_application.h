@@ -52,6 +52,7 @@ class dooble_application: public QApplication
 
  private slots:
   void slot_application_locked(bool state, dooble *d);
+  void slot_open_url(const QUrl &url);
 
  signals:
   void address_widget_populated(void);
