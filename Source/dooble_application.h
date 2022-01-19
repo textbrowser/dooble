@@ -46,9 +46,6 @@ class dooble_application: public QApplication
   void set_application_locked(bool state);
   static void prepare_theme_colors(void);
 
- public slots:
-  void slot_open_url(const QUrl &url);
-
  private:
   QTranslator *m_translator;
   bool m_application_locked;

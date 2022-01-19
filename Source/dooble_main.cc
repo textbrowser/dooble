@@ -213,14 +213,6 @@ int main(int argc, char *argv[])
   dooble::s_application = new dooble_application(argc, argv);
 
 #ifdef Q_OS_MACOS
-  QDesktopServices::setUrlHandler
-    ("ftp", dooble::s_application, "slot_open_url");
-  QDesktopServices::setUrlHandler
-    ("http", dooble::s_application, "slot_open_url");
-  QDesktopServices::setUrlHandler
-    ("https", dooble::s_application, "slot_open_url");
-#endif
-#ifdef Q_OS_MACOS
   QDir::setCurrent("/Applications/Dooble.d");
 #endif
   QString dooble_directory(".dooble");
