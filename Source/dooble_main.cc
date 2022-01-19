@@ -214,11 +214,11 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_MACOS
   QDesktopServices::setUrlHandler
-    ("ftp", dooble::s_application, SLOT(slot_open_url(const QUrl &url)));
+    ("ftp", dooble::s_application, "slot_open_url");
   QDesktopServices::setUrlHandler
-    ("http", dooble::s_application, SLOT(slot_open_url(const QUrl &url)));
+    ("http", dooble::s_application, "slot_open_url");
   QDesktopServices::setUrlHandler
-    ("https", dooble::s_application, SLOT(slot_open_url(const QUrl &url)));
+    ("https", dooble::s_application, "slot_open_url");
 #endif
 #ifdef Q_OS_MACOS
   QDir::setCurrent("/Applications/Dooble.d");
