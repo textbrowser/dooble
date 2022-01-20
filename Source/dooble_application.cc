@@ -137,8 +137,3 @@ void dooble_application::slot_application_locked(bool state, dooble *d)
   m_application_locked = true;
   emit application_locked(state, d);
 }
-
-void dooble_application::slot_open_url(const QUrl &url)
-{
-  new dooble(QList<QUrl> () << url, false);
-}
