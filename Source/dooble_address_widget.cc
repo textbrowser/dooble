@@ -364,7 +364,7 @@ void dooble_address_widget::setText(const QString &text)
 
   auto url(QUrl::fromUserInput(text));
 
-  if(!url.isEmpty() && !url.isLocalFile() && url.isValid())
+  if(!url.isEmpty() && url.isValid())
     {
       QList<QTextLayout::FormatRange> formats;
       QTextCharFormat format;
