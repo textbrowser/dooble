@@ -186,6 +186,7 @@ Remaining Items
 - Generic Debian control file.
 - Include date stamps in cookie containers.
 - Inspect all available URLs when intercepting requests. Content blocking.
+- Local files and address text highlights.
 - Optional referrer.
 - Optional testing of Threefish.
 - Qt 6.2 LTS:
