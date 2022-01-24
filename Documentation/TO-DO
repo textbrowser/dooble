@@ -89,6 +89,7 @@ Completed Items
 - Languages.
 - Link-hover events resize windows.
 - Local Storage option.
+- Local files and address text highlights.
 - Main menu bar visibility.
 - Maximum URL length set to 2048 characters.
 - Maximum title length set to 1024 characters.
@@ -186,7 +187,6 @@ Remaining Items
 - Generic Debian control file.
 - Include date stamps in cookie containers.
 - Inspect all available URLs when intercepting requests. Content blocking.
-- Local files and address text highlights.
 - Optional referrer.
 - Optional testing of Threefish.
 - Qt 6.2 LTS:
