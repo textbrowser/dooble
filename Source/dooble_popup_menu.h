@@ -40,7 +40,7 @@ class dooble_popup_menu:public QDialog
 
  public:
   dooble_popup_menu(qreal zoom_factor, QWidget *parent);
-  void set_accept_on_click(const bool state);
+  void set_accept_on_click(bool state);
 
  private:
   Ui_dooble_popup_menu m_ui;
@@ -49,6 +49,7 @@ class dooble_popup_menu:public QDialog
   void prepare_icons(void);
 
  private slots:
+  void slot_authenticated(bool state);
   void slot_tool_button_clicked(void);
   void slot_zoomed(qreal zoom_factor);
 

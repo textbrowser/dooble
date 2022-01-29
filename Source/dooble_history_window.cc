@@ -167,8 +167,14 @@ dooble_history_window::dooble_history_window(bool floating):dooble_main_window()
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
+dooble_history_window::~dooble_history_window()
+{
+  save_settings();
+}
+
 void dooble_history_window::closeEvent(QCloseEvent *event)
 {
+  save_settings();
   dooble_main_window::closeEvent(event);
 }
 

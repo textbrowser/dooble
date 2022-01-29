@@ -27,6 +27,7 @@
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
+#include "dooble_application.h"
 #include "dooble_clear_items.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
@@ -85,6 +86,10 @@ dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
 #endif
     }
 
+  connect(dooble::s_application,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  this,
+	  SLOT(slot_authenticated(bool)));
   prepare_icons();
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
   slot_zoomed(zoom_factor);
@@ -179,9 +184,14 @@ void dooble_popup_menu::prepare_icons(void)
       }
 }
 
-void dooble_popup_menu::set_accept_on_click(const bool state)
+void dooble_popup_menu::set_accept_on_click(bool state)
 {
   m_accept_on_click = state;
+}
+
+void dooble_popup_menu::slot_authenticated(bool state)
+{
+  m_ui.authenticate->setEnabled(!state);
 }
 
 void dooble_popup_menu::slot_tool_button_clicked(void)

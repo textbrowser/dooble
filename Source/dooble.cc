@@ -2817,6 +2817,9 @@ void dooble::slot_application_locked(bool state, dooble *d)
   if(m_downloads)
     m_downloads->close();
 
+  if(m_popup_menu)
+    m_popup_menu->close();
+
   s_about->close();
   s_accepted_or_blocked_domains->close();
   s_certificate_exceptions->close();
@@ -3705,6 +3708,7 @@ void dooble::slot_quit_dooble(void)
   s_cookies_window->close();
   s_downloads->abort();
   s_history->abort();
+  s_history_popup->deleteLater();
   QApplication::exit(0);
 }
 
