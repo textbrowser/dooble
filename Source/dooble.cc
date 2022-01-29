@@ -4075,7 +4075,7 @@ void dooble::slot_show_floating_history_popup(void)
 void dooble::slot_show_floating_menu(void)
 {
   if(m_popup_menu)
-    m_popup_menu->show();
+    m_popup_menu->close();
 
   auto *page = current_page();
 
