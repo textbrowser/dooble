@@ -1969,14 +1969,14 @@ void dooble::prepare_standard_menus(void)
        QKeySequence(tr("Ctrl+H")));
 
   menu->addSeparator();
-  menu->addAction(tr("Floating &Menu..."),
-		  this,
-		  SLOT(slot_show_floating_menu(void)));
-  menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
 		  SLOT(slot_inject_custom_css(void)))->setEnabled
     (page && page->url().scheme().startsWith("http"));
+  menu->addSeparator();
+  menu->addAction(tr("Page Floating &Menu..."),
+		  this,
+		  SLOT(slot_show_floating_menu(void)));
   menu->addSeparator();
   menu->addAction(tr("&Search Engines..."),
 		  this,

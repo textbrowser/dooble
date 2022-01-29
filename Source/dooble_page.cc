@@ -1068,13 +1068,13 @@ void dooble_page::prepare_standard_menus(void)
        QKeySequence(tr("Ctrl+H")));
 
   menu->addSeparator();
-  menu->addAction(tr("Floating &Menu..."),
-		  this,
-		  SIGNAL(show_floating_menu(void)));
-  menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
 		  SLOT(slot_inject_custom_css(void)));
+  menu->addSeparator();
+  menu->addAction(tr("Page Floating &Menu..."),
+		  this,
+		  SIGNAL(show_floating_menu(void)));
   menu->addSeparator();
   menu->addAction(tr("&Search Engines..."),
 		  this,
