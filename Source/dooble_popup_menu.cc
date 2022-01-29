@@ -90,6 +90,14 @@ dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  this,
 	  SLOT(slot_authenticated(bool)));
+  connect(dooble::s_settings,
+	  SIGNAL(dooble_credentials_authenticated(bool)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
+  connect(dooble::s_settings,
+	  SIGNAL(dooble_credentials_created(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   prepare_icons();
   setWindowFlag(Qt::WindowStaysOnTopHint, true);
   slot_zoomed(zoom_factor);
@@ -191,7 +199,19 @@ void dooble_popup_menu::set_accept_on_click(bool state)
 
 void dooble_popup_menu::slot_authenticated(bool state)
 {
-  m_ui.authenticate->setEnabled(!state);
+  if(!dooble_settings::has_dooble_credentials())
+    m_ui.authenticate->setEnabled(false);
+  else
+    m_ui.authenticate->setEnabled(!state);
+}
+
+void dooble_popup_menu::slot_settings_applied(void)
+{
+  if(!dooble_settings::has_dooble_credentials())
+    m_ui.authenticate->setToolTip
+      (tr("Permanent credentials have not been prepared."));
+  else
+    m_ui.authenticate->setToolTip("");
 }
 
 void dooble_popup_menu::slot_tool_button_clicked(void)
