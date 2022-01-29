@@ -68,7 +68,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
     web_engine_profile;
   m_menu = new QMenu(this);
   m_popup_menu = new dooble_popup_menu(zoom_factor, this);
-  m_popup_menu->resize(m_popup_menu->sizeHint());
+  m_popup_menu->resize(m_popup_menu->minimumSize());
   m_popup_menu->set_accept_on_click(false);
   m_reload_periodically_seconds = 0;
   m_ui.setupUi(this);
