@@ -54,6 +54,7 @@
 #include "dooble_hmac.h"
 #include "dooble_page.h"
 #include "dooble_pbkdf2.h"
+#include "dooble_popup_menu.h"
 #include "dooble_random.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
@@ -1386,6 +1387,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_floating_menu(void)),
+	  this,
+	  SLOT(slot_show_floating_menu(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_full_screen(void)),
 	  this,
 	  SLOT(slot_show_full_screen(void)),
@@ -1962,6 +1969,10 @@ void dooble::prepare_standard_menus(void)
        QKeySequence(tr("Ctrl+H")));
 
   menu->addSeparator();
+  menu->addAction(tr("Floating &Menu..."),
+		  this,
+		  SLOT(slot_show_floating_menu(void)));
+  menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
 		  SLOT(slot_inject_custom_css(void)))->setEnabled
@@ -2399,6 +2410,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_floating_history_popup(void)),
 	     this,
 	     SLOT(slot_show_floating_history_popup(void)));
+  disconnect(page,
+	     SIGNAL(show_floating_menu(void)),
+	     this,
+	     SLOT(slot_show_floating_menu(void)));
   disconnect(page,
 	     SIGNAL(show_full_screen(void)),
 	     this,
@@ -4051,6 +4066,20 @@ void dooble::slot_show_floating_history_popup(void)
   s_history_popup->show_normal(this);
   s_history_popup->activateWindow();
   s_history_popup->raise();
+}
+
+void dooble::slot_show_floating_menu(void)
+{
+  if(m_popup_menu)
+    m_popup_menu->show();
+
+  auto *page = current_page();
+
+  if(page)
+    {
+      m_popup_menu = page->popup_menu();
+      m_popup_menu->show();
+    }
 }
 
 void dooble::slot_show_full_screen(void)

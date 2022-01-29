@@ -43,6 +43,7 @@ class QWebEngineSettings;
 class QWebEngineView;
 class dooble;
 class dooble_address_widget;
+class dooble_popup_menu;
 class dooble_web_engine_view;
 
 class dooble_page: public QWidget
@@ -75,6 +76,7 @@ class dooble_page: public QWidget
   bool is_location_frame_user_hidden(void) const;
   bool is_private(void) const;
   dooble_address_widget *address_widget(void) const;
+  dooble_popup_menu *popup_menu(void) const;
   dooble_web_engine_view *view(void) const;
   int reload_periodically_seconds(void) const;
   void download(const QString &file_name, const QUrl &url);
@@ -120,6 +122,7 @@ class dooble_page: public QWidget
   bool m_is_location_frame_user_hidden;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
+  dooble_popup_menu *m_popup_menu;
   dooble_web_engine_view *m_view;
   int m_reload_periodically_seconds;
   void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);
@@ -238,6 +241,7 @@ class dooble_page: public QWidget
   void show_favorites(void);
   void show_floating_digital_clock(void);
   void show_floating_history_popup(void);
+  void show_floating_menu(void);
   void show_full_screen(void);
   void show_history(void);
   void show_release_notes(void);

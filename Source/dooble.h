@@ -57,6 +57,7 @@ class dooble_favorites_popup;
 class dooble_history;
 class dooble_history_window;
 class dooble_page;
+class dooble_popup_menu;
 class dooble_search_engines_popup;
 class dooble_style_sheet;
 class dooble_web_engine_url_request_interceptor;
@@ -141,6 +142,7 @@ class dooble: public QMainWindow
   QPointer<dooble_cookies> m_cookies;
   QPointer<dooble_cookies_window> m_cookies_window;
   QPointer<dooble_downloads> m_downloads;
+  QPointer<dooble_popup_menu> m_popup_menu;
   QPrinter m_printer;
   QTimer m_floating_digital_clock_timer;
   QTimer m_populate_containers_timer;
@@ -248,6 +250,7 @@ class dooble: public QMainWindow
   void slot_show_favorites(void);
   void slot_show_floating_digital_clock(void);
   void slot_show_floating_history_popup(void);
+  void slot_show_floating_menu(void);
   void slot_show_full_screen(void);
   void slot_show_history(void);
   void slot_show_main_menu(void);

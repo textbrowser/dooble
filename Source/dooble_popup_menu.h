@@ -40,9 +40,11 @@ class dooble_popup_menu:public QDialog
 
  public:
   dooble_popup_menu(qreal zoom_factor, QWidget *parent);
+  void set_accept_on_click(const bool state);
 
  private:
   Ui_dooble_popup_menu m_ui;
+  bool m_accept_on_click;
   dooble *find_parent_dooble(void) const;
   void prepare_icons(void);
 

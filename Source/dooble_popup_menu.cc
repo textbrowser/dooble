@@ -36,6 +36,7 @@
 dooble_popup_menu::dooble_popup_menu(qreal zoom_factor, QWidget *parent):
   QDialog(parent)
 {
+  m_accept_on_click = true;
   m_ui.setupUi(this);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -178,12 +179,19 @@ void dooble_popup_menu::prepare_icons(void)
       }
 }
 
+void dooble_popup_menu::set_accept_on_click(const bool state)
+{
+  m_accept_on_click = state;
+}
+
 void dooble_popup_menu::slot_tool_button_clicked(void)
 {
   if(m_ui.blocked_domains == sender())
     {
       emit show_accepted_or_blocked_domains();
-      accept();
+
+      if(m_accept_on_click)
+	accept();
     }
   else if(m_ui.clear_items == sender())
     {
@@ -195,14 +203,18 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   else if(m_ui.cookies == sender())
     {
       emit show_cookies();
-      accept();
+
+      if(m_accept_on_click)
+	accept();
     }
   else if(m_ui.exit_dooble == sender())
     emit quit_dooble();
   else if(m_ui.history == sender())
     {
       emit show_history();
-      accept();
+
+      if(m_accept_on_click)
+	accept();
     }
   else if(m_ui.new_private_window == sender())
     (new dooble(QList<QUrl> () << QUrl(), true))->show();
@@ -213,7 +225,8 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
       if(d)
 	d->new_page(QUrl(), d->is_private());
 
-      accept();
+      if(m_accept_on_click)
+	accept();
     }
   else if(m_ui.new_window == sender())
     (new dooble(QList<QUrl> () << QUrl(), false))->show();
@@ -227,12 +240,16 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
   else if(m_ui.save_page == sender())
     {
       emit save();
-      accept();
+
+      if(m_accept_on_click)
+	accept();
     }
   else if(m_ui.settings == sender())
     {
       emit show_settings();
-      accept();
+
+      if(m_accept_on_click)
+	accept();
     }
   else if(m_ui.zoom_in == sender())
     emit zoom_in();

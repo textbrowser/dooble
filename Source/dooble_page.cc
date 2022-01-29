@@ -59,12 +59,17 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
 			 QWidget *parent):QWidget(parent)
 {
+  auto zoom_factor = dooble_settings::setting("zoom", 100.0).toDouble() / 100.0;
+
   m_export_as_png = false;
   m_export_png_timer.setSingleShot(true);
   m_is_location_frame_user_hidden = false;
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
   m_menu = new QMenu(this);
+  m_popup_menu = new dooble_popup_menu(zoom_factor, this);
+  m_popup_menu->resize(m_popup_menu->sizeHint());
+  m_popup_menu->set_accept_on_click(false);
   m_reload_periodically_seconds = 0;
   m_ui.setupUi(this);
   m_ui.backward->setEnabled(false);
@@ -139,6 +144,46 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_standard_menus(void)));
+  connect(m_popup_menu,
+	  SIGNAL(authenticate(void)),
+	  this,
+	  SIGNAL(authenticate(void)));
+  connect(m_popup_menu,
+	  SIGNAL(save(void)),
+	  this,
+	  SIGNAL(save(void)));
+  connect(m_popup_menu,
+	  SIGNAL(show_accepted_or_blocked_domains(void)),
+	  this,
+	  SIGNAL(show_accepted_or_blocked_domains(void)));
+  connect(m_popup_menu,
+	  SIGNAL(show_cookies(void)),
+	  this,
+	  SIGNAL(show_cookies(void)));
+  connect(m_popup_menu,
+	  SIGNAL(show_history(void)),
+	  this,
+	  SIGNAL(show_history(void)));
+  connect(m_popup_menu,
+	  SIGNAL(quit_dooble(void)),
+	  this,
+	  SIGNAL(quit_dooble(void)));
+  connect(m_popup_menu,
+	  SIGNAL(show_settings(void)),
+	  this,
+	  SIGNAL(show_settings(void)));
+  connect(m_popup_menu,
+	  SIGNAL(zoom_in(void)),
+	  this,
+	  SLOT(slot_zoom_in(void)));
+  connect(m_popup_menu,
+	  SIGNAL(zoom_out(void)),
+	  this,
+	  SLOT(slot_zoom_out(void)));
+  connect(m_popup_menu,
+	  SIGNAL(zoom_reset(void)),
+	  this,
+	  SLOT(slot_zoom_reset(void)));
   connect(m_ui.accepted_or_blocked,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -382,6 +427,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   connect(this,
 	  SIGNAL(zoomed(qreal)),
+	  m_popup_menu,
+	  SLOT(slot_zoomed(qreal)));
+  connect(this,
+	  SIGNAL(zoomed(qreal)),
 	  m_ui.address,
 	  SLOT(slot_zoomed(qreal)));
   m_progress_label = new QLabel(m_ui.frame);
@@ -394,9 +443,6 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   prepare_shortcuts();
   prepare_style_sheets();
   prepare_tool_buttons();
-
-  auto zoom_factor = dooble_settings::setting("zoom", 100.0).toDouble() / 100.0;
-
   m_view->setZoomFactor(zoom_factor);
   prepare_zoom_toolbutton(zoom_factor);
   emit zoomed(m_view->zoomFactor());
@@ -507,6 +553,11 @@ dooble *dooble_page::find_parent_dooble(void) const
 dooble_address_widget *dooble_page::address_widget(void) const
 {
   return m_ui.address;
+}
+
+dooble_popup_menu *dooble_page::popup_menu(void) const
+{
+  return m_popup_menu;
 }
 
 dooble_web_engine_view *dooble_page::view(void) const
@@ -1016,6 +1067,10 @@ void dooble_page::prepare_standard_menus(void)
        SIGNAL(show_history(void)),
        QKeySequence(tr("Ctrl+H")));
 
+  menu->addSeparator();
+  menu->addAction(tr("Floating &Menu..."),
+		  this,
+		  SIGNAL(show_floating_menu(void)));
   menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
