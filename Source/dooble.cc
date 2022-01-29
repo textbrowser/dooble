@@ -1974,9 +1974,10 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(slot_inject_custom_css(void)))->setEnabled
     (page && page->url().scheme().startsWith("http"));
   menu->addSeparator();
-  menu->addAction(tr("Page Floating &Menu..."),
-		  this,
-		  SLOT(slot_show_floating_menu(void)));
+  menu->addAction
+    (tr("Page Floating &Menu..."),
+     this,
+     SLOT(slot_show_floating_menu(void)))->setEnabled(page);
   menu->addSeparator();
   menu->addAction(tr("&Search Engines..."),
 		  this,
