@@ -125,6 +125,12 @@ dooble *dooble_popup_menu::find_parent_dooble(void) const
   return nullptr;
 }
 
+void dooble_popup_menu::hide_for_non_web_page(bool state)
+{
+  m_ui.print->setEnabled(!state);
+  m_ui.save_page->setEnabled(!state);
+}
+
 void dooble_popup_menu::prepare_icons(void)
 {
   auto icon_set(dooble_settings::setting("icon_set").toString());

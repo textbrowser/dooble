@@ -40,6 +40,7 @@ class dooble_popup_menu:public QDialog
 
  public:
   dooble_popup_menu(qreal zoom_factor, QWidget *parent);
+  void hide_for_non_web_page(bool state);
   void set_accept_on_click(bool state);
 
  private:

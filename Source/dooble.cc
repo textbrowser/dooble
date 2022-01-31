@@ -4295,6 +4295,10 @@ void dooble::slot_tab_close_requested(int index)
 
 void dooble::slot_tab_index_changed(int index)
 {
+  if(m_popup_menu)
+    m_popup_menu->hide_for_non_web_page
+      (!qobject_cast<dooble_page *> (m_ui.tab->widget(index)));
+
   if(m_anonymous_tab_headers)
     {
       setWindowTitle(tr("Dooble"));
@@ -4331,7 +4335,7 @@ void dooble::slot_tab_index_changed(int index)
 
       return;
     }
-  else if(page != m_ui.tab->currentWidget())
+  else if(m_ui.tab->currentWidget() != page)
     {
       page->hide_status_bar
 	(!dooble_settings::setting("status_bar_visible").toBool());
@@ -4342,9 +4346,8 @@ void dooble::slot_tab_index_changed(int index)
     setWindowTitle(tr("Dooble"));
   else
     setWindowTitle
-      (tr("%1 - Dooble").
-       arg(page->title().trimmed().mid(0,
-				       dooble::Limits::MAXIMUM_TITLE_LENGTH)));
+      (tr("%1 - Dooble").arg(page->title().trimmed().
+			     mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH)));
 
   page->hide_status_bar
     (!dooble_settings::setting("status_bar_visible").toBool());
