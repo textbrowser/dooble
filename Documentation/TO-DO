@@ -180,6 +180,7 @@ Remaining Items
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
 - DTLS and Echo-DNS.
+- Default browser on Mac.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
 - Element-selection option.
