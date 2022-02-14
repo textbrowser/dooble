@@ -192,7 +192,8 @@ dooble_settings::dooble_settings(void):dooble_main_window()
       if(!path.endsWith(QDir::separator()))
 	path.append(QDir::separator());
 
-      path.append("dooble_" + QLocale::system().name() + ".qm");
+      path.append
+	("dooble_" + QLocale::system().name().mid(3).toLower() + ".qm");
 
       QFileInfo file_info(path);
 
