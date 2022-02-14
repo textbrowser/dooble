@@ -196,6 +196,7 @@
         <location filename="../Source/dooble.cc" line="4308"/>
         <location filename="../Source/dooble.cc" line="4449"/>
         <source>Dooble</source>
+        <translatorcomment>Attention traductions pas assez précises sur certaines fonctions</translatorcomment>
         <translation>Dooble</translation>
     </message>
     <message>
@@ -402,7 +403,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="1800"/>
         <source>&amp;Export As PNG...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exporter comme un PNG...</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1806"/>
@@ -498,27 +499,27 @@
     <message>
         <location filename="../Source/dooble.cc" line="3253"/>
         <source>Select</source>
-        <translation type="unfinished">Sélectionner</translation>
+        <translation>Sélectionner</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3254"/>
         <source>PNG (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG (*.png)</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3255"/>
         <source>Dooble: Export As PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble : Exporter comme un PNG</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3468"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3469"/>
         <source>Dooble: Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble : Ouvrir le fichier</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3577"/>
@@ -529,7 +530,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="4572"/>
         <source>Unable to discover the SQLite driver! Configuration settings will not be saved. This is a serious problem!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de découvrir le pilote SQLite ! Les paramètres de configuration ne seront pas sauvegardés. Il s&apos;agit d&apos;un problème grave !</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2744"/>
@@ -1540,7 +1541,7 @@
         <location filename="../Source/dooble_charts.cc" line="77"/>
         <location filename="../Source/dooble_charts.cc" line="1081"/>
         <source>Background Roundness</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrondi du fond</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="78"/>
@@ -1614,7 +1615,7 @@
         <location filename="../Source/dooble_charts.cc" line="89"/>
         <location filename="../Source/dooble_charts.cc" line="1112"/>
         <source>Plot Area Background Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Zone de tracé Fond visible</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="90"/>
@@ -1833,7 +1834,7 @@
     <message>
         <location filename="../Source/dooble_charts.cc" line="1324"/>
         <source>Point Labels Clipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Coupure des labels des points</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="1328"/>
@@ -1887,31 +1888,31 @@
         <location filename="../Source/dooble_charts.cc" line="1367"/>
         <location filename="../Source/dooble_charts.cc" line="1401"/>
         <source>Minor Tick Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher compteur minimum</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="1371"/>
         <location filename="../Source/dooble_charts.cc" line="1405"/>
         <source>Tick Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher ancrage</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="1375"/>
         <location filename="../Source/dooble_charts.cc" line="1409"/>
         <source>Tick Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher Compteur</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="1379"/>
         <location filename="../Source/dooble_charts.cc" line="1413"/>
         <source>Tick Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher interval</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="1384"/>
         <location filename="../Source/dooble_charts.cc" line="1418"/>
         <source>Tick Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher type</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts.cc" line="1470"/>
@@ -2200,7 +2201,7 @@
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="43"/>
         <source>Point Labels Clipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Coupure des labels des points</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="44"/>
@@ -2259,31 +2260,31 @@
         <location filename="../Source/dooble_charts_xyseries.cc" line="54"/>
         <location filename="../Source/dooble_charts_xyseries.cc" line="63"/>
         <source>Minor Tick Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher compteur minimum</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="55"/>
         <location filename="../Source/dooble_charts_xyseries.cc" line="64"/>
         <source>Tick Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher ancrage</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="56"/>
         <location filename="../Source/dooble_charts_xyseries.cc" line="65"/>
         <source>Tick Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher Compteur</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="57"/>
         <location filename="../Source/dooble_charts_xyseries.cc" line="66"/>
         <source>Tick Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher interval</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="58"/>
         <location filename="../Source/dooble_charts_xyseries.cc" line="67"/>
         <source>Tick Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher type</translation>
     </message>
     <message>
         <location filename="../Source/dooble_charts_xyseries.cc" line="59"/>
@@ -2476,7 +2477,7 @@
         <location filename="../UI/dooble_cookies_window.ui" line="655"/>
         <location filename="../Source/dooble_cookies_window.cc" line="747"/>
         <source>&amp;All Shown Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tous les modèles vérifié</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="662"/>
@@ -2518,7 +2519,7 @@
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="747"/>
         <source>&amp;All Shown Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tous les modèles Non coché</translation>
     </message>
 </context>
 <context>
@@ -3334,12 +3335,12 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="622"/>
         <source>Exporting the page. Please remain calm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportation de la page. Veuillez rester calme.</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="630"/>
         <source>Dooble: Exporting Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble : Exportation de la page</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="745"/>
@@ -3355,7 +3356,7 @@
         <location filename="../Source/dooble_page.cc" line="757"/>
         <location filename="../Source/dooble_page.cc" line="818"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="798"/>
@@ -3365,7 +3366,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="815"/>
         <source>&amp;Open File...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ouvrir le fichier...</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="819"/>
@@ -3385,7 +3386,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="847"/>
         <source>&amp;Export As PNG...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exporter comme un PNG...</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="919"/>
@@ -3996,7 +3997,7 @@ Domaines</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="701"/>
         <source>Theme</source>
-        <translation type="unfinished">Thème</translation>
+        <translation>Thème</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="721"/>
@@ -4189,7 +4190,7 @@ Domaines</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1495"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable animated, smooth scrolling. Smooth. Otherwise, stepped scrolling is enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activez le défilement animé et fluide. Lisse. Sinon, le défilement par paliers est activé.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1522"/>
@@ -4199,32 +4200,32 @@ Domaines</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1756"/>
         <source>The hard minimum font size.</source>
-        <translation type="unfinished"></translation>
+        <translation>La taille de police minimale dure.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1776"/>
         <source>The default font size for fixed-pitch text.</source>
-        <translation type="unfinished"></translation>
+        <translation>La taille de police par défaut pour le texte à pas fixe.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1786"/>
         <source>The default font size for regular text.</source>
-        <translation type="unfinished"></translation>
+        <translation>La taille de la police par défaut pour le texte normal.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1796"/>
         <source>The minimum logical font size that is applied when zooming out.</source>
-        <translation type="unfinished"></translation>
+        <translation>La taille minimale logique de la police qui est appliquée lors d&apos;un zoom arrière.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2060"/>
         <source>Universal Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom universel</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2070"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2152"/>
@@ -4611,7 +4612,7 @@ Domaines</translation>
     <message>
         <location filename="../Source/dooble_settings.cc" line="242"/>
         <source>Windows only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenêtre seulement.</translation>
     </message>
     <message>
         <location filename="../Source/dooble_settings.cc" line="393"/>
