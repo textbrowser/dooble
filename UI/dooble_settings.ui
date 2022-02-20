@@ -358,8 +358,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>357</width>
-               <height>618</height>
+               <width>642</width>
+               <height>614</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -913,7 +913,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>617</width>
+               <width>642</width>
                <height>820</height>
               </rect>
              </property>
@@ -1483,9 +1483,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1068</y>
+               <y>-1391</y>
                <width>642</width>
-               <height>1730</height>
+               <height>1970</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2130,6 +2130,50 @@
                </layout>
               </item>
               <item>
+               <widget class="QGroupBox" name="groupBox_4">
+                <property name="title">
+                 <string>WebEngine</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_21">
+                 <item>
+                  <widget class="QTableWidget" name="web_engine_settings">
+                   <property name="tabKeyNavigation">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <property name="selectionMode">
+                    <enum>QAbstractItemView::SingleSelection</enum>
+                   </property>
+                   <property name="verticalScrollMode">
+                    <enum>QAbstractItemView::ScrollPerPixel</enum>
+                   </property>
+                   <property name="horizontalScrollMode">
+                    <enum>QAbstractItemView::ScrollPerPixel</enum>
+                   </property>
+                   <property name="sortingEnabled">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="horizontalHeaderStretchLastSection">
+                    <bool>true</bool>
+                   </attribute>
+                   <column>
+                    <property name="text">
+                     <string>Setting</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Value</string>
+                    </property>
+                   </column>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="web_plugins">
                 <property name="text">
                  <string>Web Plugins</string>
@@ -2339,6 +2383,7 @@
   <tabstop>zoom</tabstop>
   <tabstop>user_agent</tabstop>
   <tabstop>reset_user_agent</tabstop>
+  <tabstop>web_engine_settings</tabstop>
   <tabstop>web_plugins</tabstop>
   <tabstop>webgl</tabstop>
   <tabstop>webrtc_public_interfaces_only</tabstop>
