@@ -628,6 +628,10 @@ void dooble_settings::create_tables(QSqlDatabase &db)
   query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
 	     "key TEXT NOT NULL PRIMARY KEY, "
 	     "value TEXT NOT NULL)");
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_webengine_settings ("
+	     "key TEXT NOT NULL PRIMARY KEY, "
+	     "translate INTEGER NOT NULL DEFAULT 0, "
+	     "value TEXT NOT NULL)");
 }
 
 void dooble_settings::keyPressEvent(QKeyEvent *event)
@@ -919,6 +923,41 @@ void dooble_settings::prepare_table_statistics(void)
     (tr("%1 Row(s)").arg(m_ui.features_permissions->rowCount()));
   m_ui.javascript_block_popups_exceptions_entries->setText
     (tr("%1 Row(s)").arg(m_ui.javascript_block_popups_exceptions->rowCount()));
+}
+
+void dooble_settings::prepare_web_engine_settings(void)
+{
+  m_ui.web_engine_settings->setRowCount(0);
+
+  QHash<QString, QString> hash;
+
+  hash["--blink-settings=forceDarkModeEnabled"] = "boolean";
+
+  QHashIterator<QString, QString> it(hash);
+  int i = -1;
+
+  while(it.hasNext())
+    {
+      it.next();
+      m_ui.web_engine_settings->setRowCount
+	(m_ui.web_engine_settings->rowCount() + 1);
+
+      auto item = new QTableWidgetItem(it.key());
+
+      i += 1;
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      item->setToolTip(item->text());
+      m_ui.web_engine_settings->setItem(i, 0, item);
+      item = new QTableWidgetItem();
+      item->setCheckState(Qt::Unchecked);
+      item->setFlags
+	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+      m_ui.web_engine_settings->setItem(i, 1, item);
+      item = new QTableWidgetItem();
+      item->setFlags
+	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.web_engine_settings->setItem(i, 2, item);
+    }
 }
 
 void dooble_settings::purge_database_data(void)
@@ -1419,6 +1458,7 @@ void dooble_settings::restore(bool read_database)
 
   prepare_fonts();
   prepare_proxy(false);
+  prepare_web_engine_settings();
   QApplication::restoreOverrideCursor();
 }
 

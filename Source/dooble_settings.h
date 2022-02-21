@@ -103,6 +103,7 @@ class dooble_settings: public dooble_main_window
   void prepare_icons(void);
   void prepare_proxy(bool save);
   void prepare_table_statistics(void);
+  void prepare_web_engine_settings(void);
   void purge_database_data(void);
   void purge_features_permissions(void);
   void purge_javascript_block_popup_exceptions(void);
