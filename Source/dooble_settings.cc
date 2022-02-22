@@ -954,8 +954,19 @@ void dooble_settings::prepare_web_engine_settings(void)
 	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
       m_ui.web_engine_settings->setItem(i, 1, item);
       item = new QTableWidgetItem();
-      item->setFlags
-	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      if(it.value() == "boolean")
+	{
+	  item->setCheckState(Qt::Unchecked);
+	  item->setFlags
+	    (Qt::ItemIsEnabled |
+	     Qt::ItemIsSelectable |
+	     Qt::ItemIsUserCheckable);
+	}
+      else
+	item->setFlags
+	  (Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
       m_ui.web_engine_settings->setItem(i, 2, item);
     }
 }
