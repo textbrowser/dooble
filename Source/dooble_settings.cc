@@ -927,6 +927,10 @@ void dooble_settings::prepare_table_statistics(void)
 
 void dooble_settings::prepare_web_engine_settings(void)
 {
+  disconnect(m_ui.web_engine_settings,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_web_engine_settings_item_changed(QTableWidgetItem *)));
   m_ui.web_engine_settings->setRowCount(0);
 
   QHash<QString, QString> hash;
@@ -954,6 +958,7 @@ void dooble_settings::prepare_web_engine_settings(void)
 	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
       m_ui.web_engine_settings->setItem(i, 1, item);
       item = new QTableWidgetItem();
+      item->setData(Qt::UserRole, it.key());
 
       if(it.value() == "boolean")
 	{
@@ -969,6 +974,11 @@ void dooble_settings::prepare_web_engine_settings(void)
 
       m_ui.web_engine_settings->setItem(i, 2, item);
     }
+
+  connect(m_ui.web_engine_settings,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_web_engine_settings_item_changed(QTableWidgetItem *)));
 }
 
 void dooble_settings::purge_database_data(void)
@@ -3255,4 +3265,23 @@ void dooble_settings::slot_save_credentials(void)
 	  SLOT(slot_interrupt(void)));
   m_pbkdf2_dialog->exec();
   QApplication::processEvents();
+}
+
+void dooble_settings::slot_web_engine_settings_item_changed
+(QTableWidgetItem *item)
+{
+  if(!item)
+    return;
+
+  if(Qt::ItemIsUserCheckable & item->flags())
+    {
+      auto string(item->data(Qt::UserRole).toString().trimmed());
+
+      if(!string.isEmpty())
+	{
+	  string.append("=");
+	  string.append(item->checkState() != Qt::Checked ? "false" : "true");
+	  qputenv("QTWEBENGINE_CHROMIUM_FLAGS", string.toUtf8().constData());
+	}
+    }
 }
