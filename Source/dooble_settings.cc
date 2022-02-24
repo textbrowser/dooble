@@ -628,7 +628,7 @@ void dooble_settings::create_tables(QSqlDatabase &db)
   query.exec("CREATE TABLE IF NOT EXISTS dooble_settings ("
 	     "key TEXT NOT NULL PRIMARY KEY, "
 	     "value TEXT NOT NULL)");
-  query.exec("CREATE TABLE IF NOT EXISTS dooble_webengine_settings ("
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_web_engine_settings ("
 	     "key TEXT NOT NULL PRIMARY KEY, "
 	     "translate INTEGER NOT NULL DEFAULT 0, "
 	     "value TEXT NOT NULL)");
@@ -954,8 +954,8 @@ void dooble_settings::prepare_web_engine_settings(void)
       m_ui.web_engine_settings->setItem(i, 0, item);
       item = new QTableWidgetItem();
       item->setCheckState(Qt::Unchecked);
-      item->setFlags
-	(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+      item->setToolTip(tr("Not implemented."));
       m_ui.web_engine_settings->setItem(i, 1, item);
       item = new QTableWidgetItem();
       item->setData(Qt::UserRole, it.key());
@@ -3279,9 +3279,35 @@ void dooble_settings::slot_web_engine_settings_item_changed
 
       if(!string.isEmpty())
 	{
-	  string.append("=");
-	  string.append(item->checkState() != Qt::Checked ? "false" : "true");
-	  qputenv("QTWEBENGINE_CHROMIUM_FLAGS", string.toUtf8().constData());
+	  auto database_name(dooble_database_utilities::database_name());
+
+	  {
+	    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	    db.setDatabaseName(setting("home_path").toString() +
+			       QDir::separator() +
+			       "dooble_settings.db");
+
+	    if(db.open())
+	      {
+		create_tables(db);
+
+		QSqlQuery query(db);
+
+		query.exec("PRAGMA synchronous = NORMAL");
+		query.prepare
+		  ("INSERT OR REPLACE INTO dooble_web_engine_settings "
+		   "(key, value) VALUES (?, ?)");
+		query.addBindValue(string);
+		query.addBindValue
+		  (item->checkState() == Qt::Unchecked ? "false" : "true");
+		query.exec();
+	      }
+
+	    db.close();
+	  }
+
+	  QSqlDatabase::removeDatabase(database_name);
 	}
     }
 }

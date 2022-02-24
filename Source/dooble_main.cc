@@ -209,9 +209,6 @@ int main(int argc, char *argv[])
   QWebEngineUrlScheme::registerScheme(scheme);
 #endif
 #endif
-
-  dooble::s_application = new dooble_application(argc, argv);
-
 #ifdef Q_OS_MACOS
   QDir::setCurrent("/Applications/Dooble.d");
 #endif
@@ -265,6 +262,8 @@ int main(int argc, char *argv[])
 	 home_dir.absolutePath() + QDir::separator() + "dooble");
     }
 #endif
+
+  dooble::s_application = new dooble_application(argc, argv);
 
   /*
   ** Create a splash screen.

@@ -1483,9 +1483,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1436</y>
+               <y>-1414</y>
                <width>642</width>
-               <height>1970</height>
+               <height>2042</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1535,6 +1535,13 @@
                  <bool>true</bool>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_18">
+                 <item>
+                  <widget class="QLabel" name="label_44">
+                   <property name="text">
+                    <string>Settings are saved immediately.</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QTableWidget" name="features_permissions">
                    <property name="minimumSize">
@@ -1878,6 +1885,13 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_15">
                     <item>
+                     <widget class="QLabel" name="label_45">
+                      <property name="text">
+                       <string>Settings are saved immediately.</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_14">
                       <item>
                        <widget class="QLabel" name="label_22">
@@ -2135,6 +2149,13 @@
                  <string>WebEngine</string>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_21">
+                 <item>
+                  <widget class="QLabel" name="label_46">
+                   <property name="text">
+                    <string>Settings are saved immediately.</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QTableWidget" name="web_engine_settings">
                    <property name="tabKeyNavigation">
