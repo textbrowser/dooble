@@ -55,6 +55,7 @@
 #include "dooble_ui_utilities.h"
 #include "dooble_version.h"
 
+QHash<QString, QString> dooble_settings::s_web_engine_settings_environment;
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
 QMap<QString, QVariant> dooble_settings::s_getenv;
 QMap<QString, QVariant> dooble_settings::s_settings;
@@ -629,6 +630,7 @@ void dooble_settings::create_tables(QSqlDatabase &db)
 	     "key TEXT NOT NULL PRIMARY KEY, "
 	     "value TEXT NOT NULL)");
   query.exec("CREATE TABLE IF NOT EXISTS dooble_web_engine_settings ("
+	     "environment_variable INTEGER NOT NULL DEFAULT 0, "
 	     "key TEXT NOT NULL PRIMARY KEY, "
 	     "translate INTEGER NOT NULL DEFAULT 0, "
 	     "value TEXT NOT NULL)");
@@ -925,6 +927,38 @@ void dooble_settings::prepare_table_statistics(void)
     (tr("%1 Row(s)").arg(m_ui.javascript_block_popups_exceptions->rowCount()));
 }
 
+void dooble_settings::prepare_web_engine_environment_variables(void)
+{
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare
+	  ("SELECT key, value FROM dooble_web_engine_settings "
+	   "WHERE environment_variable = 1");
+
+	if(query.exec())
+	  while(query.next())
+	    {
+	    }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_settings::prepare_web_engine_settings(void)
 {
   disconnect(m_ui.web_engine_settings,
@@ -933,11 +967,13 @@ void dooble_settings::prepare_web_engine_settings(void)
 	     SLOT(slot_web_engine_settings_item_changed(QTableWidgetItem *)));
   m_ui.web_engine_settings->setRowCount(0);
 
-  QHash<QString, QString> hash;
+  if(s_web_engine_settings_environment.isEmpty())
+    {
+      s_web_engine_settings_environment
+	["--blink-settings=forceDarkModeEnabled"] = "boolean";
+    }
 
-  hash["--blink-settings=forceDarkModeEnabled"] = "boolean";
-
-  QHashIterator<QString, QString> it(hash);
+  QHashIterator<QString, QString> it(s_web_engine_settings_environment);
   int i = -1;
 
   while(it.hasNext())
@@ -3297,7 +3333,13 @@ void dooble_settings::slot_web_engine_settings_item_changed
 		query.exec("PRAGMA synchronous = NORMAL");
 		query.prepare
 		  ("INSERT OR REPLACE INTO dooble_web_engine_settings "
-		   "(key, value) VALUES (?, ?)");
+		   "(environment_variable, key, value) VALUES (?, ?, ?)");
+
+		if(s_web_engine_settings_environment.contains(string))
+		  query.addBindValue(1);
+		else
+		  query.addBindValue(0);
+
 		query.addBindValue(string);
 		query.addBindValue
 		  (item->checkState() == Qt::Unchecked ? "false" : "true");

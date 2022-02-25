@@ -69,6 +69,7 @@ class dooble_settings: public dooble_main_window
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static int site_feature_permission(const QUrl &url,
 				     QWebEnginePage::Feature feature);
+  static void prepare_web_engine_environment_variables(void);
   static void remove_setting(const QString &key);
   void restore(bool read_database);
   void set_site_feature_permission(const QUrl &url,
@@ -90,6 +91,7 @@ class dooble_settings: public dooble_main_window
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
   Ui_dooble_settings m_ui;
+  static QHash<QString, QString> s_web_engine_settings_environment;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
   static QMap<QString, QVariant> s_getenv;
   static QMap<QString, QVariant> s_settings;
