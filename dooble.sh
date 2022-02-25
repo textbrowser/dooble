@@ -23,6 +23,7 @@ then
     exec ./Dooble \
 	 --disable-reading-from-canvas \
 	 --ignore-certificate-errors \
+	 --ignore-ssl-errors \
          "$@"
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]

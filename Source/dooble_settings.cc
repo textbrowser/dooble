@@ -979,6 +979,9 @@ void dooble_settings::prepare_web_engine_settings(void)
     {
       s_web_engine_settings_environment
 	["--blink-settings=forceDarkModeEnabled"] = "boolean";
+      s_web_engine_settings_environment
+	["--ignore-certificate-errors"] = "boolean";
+      s_web_engine_settings_environment["--ignore-ssl-errors"] = "boolean";
     }
 
   QHashIterator<QString, QString> it(s_web_engine_settings_environment);
