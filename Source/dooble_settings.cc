@@ -941,6 +941,7 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
     if(db.open())
       {
 	QSqlQuery query(db);
+	QString string("");
 
 	query.setForwardOnly(true);
 	query.prepare
@@ -950,7 +951,14 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	if(query.exec())
 	  while(query.next())
 	    {
+	      string.append(query.value(0).toString().trimmed());
+	      string.append("=");
+	      string.append(query.value(1).toString().trimmed());
+	      string.append(" ");
 	    }
+
+	qputenv
+	  ("QTWEBENGINE_CHROMIUM_FLAGS", string.trimmed().toUtf8().constData());
       }
 
     db.close();
