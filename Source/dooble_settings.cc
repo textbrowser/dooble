@@ -1026,6 +1026,7 @@ void dooble_settings::prepare_web_engine_settings(void)
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_web_engine_settings_item_changed(QTableWidgetItem *)));
+  m_ui.web_engine_settings->sortItems(0);
 }
 
 void dooble_settings::purge_database_data(void)

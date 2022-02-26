@@ -1483,7 +1483,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1508</y>
+               <y>-1414</y>
                <width>642</width>
                <height>2042</height>
               </rect>
@@ -2172,9 +2172,6 @@
                    </property>
                    <property name="horizontalScrollMode">
                     <enum>QAbstractItemView::ScrollPerPixel</enum>
-                   </property>
-                   <property name="sortingEnabled">
-                    <bool>true</bool>
                    </property>
                    <attribute name="horizontalHeaderDefaultSectionSize">
                     <number>130</number>
