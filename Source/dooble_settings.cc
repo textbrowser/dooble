@@ -929,6 +929,15 @@ void dooble_settings::prepare_table_statistics(void)
 
 void dooble_settings::prepare_web_engine_environment_variables(void)
 {
+  if(s_web_engine_settings_environment.isEmpty())
+    {
+      s_web_engine_settings_environment
+	["--blink-settings=forceDarkModeEnabled"] = "boolean";
+      s_web_engine_settings_environment
+	["--ignore-certificate-errors"] = "singular";
+      s_web_engine_settings_environment["--ignore-ssl-errors"] = "singular";
+    }
+
   auto database_name(dooble_database_utilities::database_name());
 
   {
@@ -951,9 +960,20 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	if(query.exec())
 	  while(query.next())
 	    {
+	      auto singular = s_web_engine_settings_environment.
+		value(query.value(0).toString().trimmed()) == "singular";
+
+	      if(query.value(1).toBool() == false && singular)
+		continue;
+
 	      string.append(query.value(0).toString().trimmed());
-	      string.append("=");
-	      string.append(query.value(1).toString().trimmed());
+
+	      if(!singular)
+		{
+		  string.append("=");
+		  string.append(query.value(1).toString().trimmed());
+		}
+
 	      string.append(" ");
 	    }
 
@@ -975,14 +995,35 @@ void dooble_settings::prepare_web_engine_settings(void)
 	     SLOT(slot_web_engine_settings_item_changed(QTableWidgetItem *)));
   m_ui.web_engine_settings->setRowCount(0);
 
-  if(s_web_engine_settings_environment.isEmpty())
-    {
-      s_web_engine_settings_environment
-	["--blink-settings=forceDarkModeEnabled"] = "boolean";
-      s_web_engine_settings_environment
-	["--ignore-certificate-errors"] = "boolean";
-      s_web_engine_settings_environment["--ignore-ssl-errors"] = "boolean";
-    }
+  QHash<QString, QVariant> values;
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare
+	  ("SELECT key, value FROM dooble_web_engine_settings "
+	   "WHERE environment_variable = 1");
+
+	if(query.exec())
+	  while(query.next())
+	    values[query.value(0).toString()] =
+	      query.value(1).toString().trimmed();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 
   QHashIterator<QString, QString> it(s_web_engine_settings_environment);
   int i = -1;
@@ -1000,21 +1041,20 @@ void dooble_settings::prepare_web_engine_settings(void)
       item->setToolTip(item->text());
       m_ui.web_engine_settings->setItem(i, 0, item);
       item = new QTableWidgetItem();
-      item->setCheckState(Qt::Unchecked);
       item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
       item->setToolTip(tr("Not implemented."));
       m_ui.web_engine_settings->setItem(i, 1, item);
       item = new QTableWidgetItem();
       item->setData(Qt::UserRole, it.key());
 
-      if(it.value() == "boolean")
-	{
-	  item->setCheckState(Qt::Unchecked);
-	  item->setFlags
-	    (Qt::ItemIsEnabled |
-	     Qt::ItemIsSelectable |
-	     Qt::ItemIsUserCheckable);
-	}
+      if(values.value(it.key()).toBool())
+	item->setCheckState(Qt::Checked);
+      else
+	item->setCheckState(Qt::Unchecked);
+
+      if(it.value() == "boolean" || it.value() == "singular")
+	item->setFlags
+	  (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
       else
 	item->setFlags
 	  (Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
