@@ -236,7 +236,7 @@
     <message>
         <location filename="../UI/dooble.ui" line="83"/>
         <source>T&amp;abs</source>
-        <translation type="unfinished"></translation>
+        <translation>T&amp;abbladen</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="421"/>
@@ -402,7 +402,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="1800"/>
         <source>&amp;Export As PNG...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exporteren als png…</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="1806"/>
@@ -498,27 +498,27 @@
     <message>
         <location filename="../Source/dooble.cc" line="3253"/>
         <source>Select</source>
-        <translation type="unfinished">Selecteren</translation>
+        <translation>Selecteren</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3254"/>
         <source>PNG (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG (*.png)</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3255"/>
         <source>Dooble: Export As PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble - Exporteren naar png</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3468"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Openen</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3469"/>
         <source>Dooble: Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble - Bestand openen</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="3577"/>
@@ -529,7 +529,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="4572"/>
         <source>Unable to discover the SQLite driver! Configuration settings will not be saved. This is a serious problem!</source>
-        <translation type="unfinished"></translation>
+        <translation>Het sqlite-stuurprogramma is niet aangetroffen, waardoor de instellingen niet kunnen worden opgeslagen. Dit is een serieus probleem!</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2744"/>
@@ -2936,7 +2936,7 @@
     <message>
         <location filename="../Source/dooble_history_window.cc" line="1106"/>
         <source>Delete Page(s) (Non-Favorites)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina(&apos;s) verwijderen (niet-favorieten)</translation>
     </message>
     <message>
         <source>&amp;Delete Page(s) (Non-Favorites)</source>
@@ -3334,12 +3334,12 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="622"/>
         <source>Exporting the page. Please remain calm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met exporteren van pagina…</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="630"/>
         <source>Dooble: Exporting Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Dooble: bezig met exporteren…</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="745"/>
@@ -3355,7 +3355,7 @@
         <location filename="../Source/dooble_page.cc" line="757"/>
         <location filename="../Source/dooble_page.cc" line="818"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="798"/>
@@ -3365,7 +3365,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="815"/>
         <source>&amp;Open File...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand &amp;openen…</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="819"/>
@@ -3385,7 +3385,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="847"/>
         <source>&amp;Export As PNG...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exporteren naar png…</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="919"/>
@@ -3979,7 +3979,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="666"/>
         <source>North</source>
-        <translation type="unfinished"></translation>
+        <translation>Bovenaan</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="671"/>
@@ -3989,12 +3989,12 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="676"/>
         <source>West</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="701"/>
         <source>Theme</source>
-        <translation type="unfinished">Thema</translation>
+        <translation>Thema</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="721"/>
@@ -4187,7 +4187,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1495"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable animated, smooth scrolling. Smooth. Otherwise, stepped scrolling is enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schakel vloeiend scrollen in, voorzien van een korte animatie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1522"/>
@@ -4197,32 +4197,32 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1756"/>
         <source>The hard minimum font size.</source>
-        <translation type="unfinished"></translation>
+        <translation>De afgedwongen minimale tekstgrootte.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1776"/>
         <source>The default font size for fixed-pitch text.</source>
-        <translation type="unfinished"></translation>
+        <translation>De standaard tekstgrootte van vastebreedtetekst.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1786"/>
         <source>The default font size for regular text.</source>
-        <translation type="unfinished"></translation>
+        <translation>De standaard tekstgrootte van gebruikelijke tekst.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1796"/>
         <source>The minimum logical font size that is applied when zooming out.</source>
-        <translation type="unfinished"></translation>
+        <translation>De minimale logische tekstgrootte na uitzoomen.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2060"/>
         <source>Universal Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Universeel zoomniveau</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2070"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2152"/>
@@ -4609,7 +4609,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../Source/dooble_settings.cc" line="242"/>
         <source>Windows only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen van toepassing op Windows.</translation>
     </message>
     <message>
         <location filename="../Source/dooble_settings.cc" line="393"/>
@@ -4915,7 +4915,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../Source/dooble_web_engine_page.cc" line="88"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een map</translation>
     </message>
     <message>
         <location filename="../Source/dooble_web_engine_page.cc" line="196"/>
