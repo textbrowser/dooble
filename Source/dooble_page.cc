@@ -1622,6 +1622,11 @@ void dooble_page::slot_downloads_started(void)
 			      arg(icon_set))));
 }
 
+void dooble_page::slot_enable_javascript(void)
+{
+  enable_web_setting(QWebEngineSettings::JavascriptEnabled, true);
+}
+
 void dooble_page::slot_escape(void)
 {
   if(m_ui.find->hasFocus())
@@ -2069,6 +2074,21 @@ void dooble_page::slot_load_finished(bool ok)
   m_ui.reload->setToolTip(tr("Reload"));
   emit iconChanged(icon());
   emit titleChanged(title());
+
+  if(dooble_settings::setting("temporarily_disable_javascript", false).toBool())
+    {
+      auto javascript_enabled = true;
+      auto settings = m_view->settings();
+
+      if(settings)
+	javascript_enabled = settings->testAttribute
+	  (QWebEngineSettings::JavascriptEnabled);
+
+      enable_web_setting(QWebEngineSettings::JavascriptEnabled, false);
+
+      if(javascript_enabled)
+	QTimer::singleShot(100, this, SLOT(slot_enable_javascript(void)));
+    }
 }
 
 void dooble_page::slot_load_page(void)

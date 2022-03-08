@@ -1483,9 +1483,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1414</y>
+               <y>-1249</y>
                <width>642</width>
-               <height>2042</height>
+               <height>2070</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2067,6 +2067,16 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="temporarily_disable_javascript">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Disable JavaScript after a page has completed loading (the page-loaded signal has been monitored) and re-enable it shortly after.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Temporarily Disable JavaScript</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_20">
                 <item>
                  <widget class="QLabel" name="label_43">
@@ -2409,6 +2419,7 @@
   <tabstop>remove_selected_javascript_block_popup_exceptions</tabstop>
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
+  <tabstop>temporarily_disable_javascript</tabstop>
   <tabstop>zoom</tabstop>
   <tabstop>user_agent</tabstop>
   <tabstop>reset_user_agent</tabstop>

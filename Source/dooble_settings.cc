@@ -281,6 +281,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["show_new_downloads"] = true;
   s_settings["status_bar_visible"] = true;
   s_settings["tab_position"] = "north";
+  s_settings["temporarily_disable_javascript"] = false;
   s_settings["theme_color"] = "default";
   s_settings["theme_color_index"] = 2; // Default
   s_settings["user_agent"] = QWebEngineProfile::defaultProfile()->
@@ -1359,6 +1360,8 @@ void dooble_settings::restore(bool read_database)
   else
     m_ui.tab_position->setCurrentIndex(1);
 
+  m_ui.temporarily_disable_javascript->setChecked
+    (s_settings.value("temporarily_disable_javascript", false).toBool());
 #ifdef Q_OS_WIN
   m_ui.theme->setCurrentIndex
     (qBound(0,
@@ -2283,6 +2286,8 @@ void dooble_settings::slot_apply(void)
       }
     }
 
+  set_setting("temporarily_disable_javascript",
+	      m_ui.temporarily_disable_javascript->isChecked());
   set_setting("theme_color_index", m_ui.theme->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());

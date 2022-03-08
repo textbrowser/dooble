@@ -152,6 +152,7 @@ class dooble_page: public QWidget
   void slot_dooble_credentials_created(void);
   void slot_downloads_finished(void);
   void slot_downloads_started(void);
+  void slot_enable_javascript(void);
   void slot_escape(void);
   void slot_export_as_png_timer_timeout(void);
   void slot_favorite_changed(const QUrl &url, bool state);
