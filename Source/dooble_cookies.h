@@ -58,7 +58,7 @@ class dooble_cookies: public QObject
  signals:
   void cookie_removed(const QNetworkCookie &cookie);
   void cookies_added(const QList<QNetworkCookie> &cookie,
-		     const QList<bool> &is_favorite);
+		     const QList<int> &is_blocked_or_favorite);
   void populated(void);
 };
 

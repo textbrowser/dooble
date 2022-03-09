@@ -470,8 +470,7 @@ void dooble_history::purge_favorites(void)
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
       auto database_name(dooble_database_utilities::database_name());
-      auto f
-	(dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+      auto f(dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
       auto t(dooble::s_cryptography->hmac(QByteArray("true")).toBase64());
 
       {

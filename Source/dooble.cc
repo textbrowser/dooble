@@ -161,10 +161,10 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
       prepare_private_web_engine_profile_settings();
       connect(m_cookies,
 	      SIGNAL(cookies_added(const QList<QNetworkCookie> &,
-				   const QList<bool> &)),
+				   const QList<int> &)),
 	      m_cookies_window,
 	      SLOT(slot_cookies_added(const QList<QNetworkCookie> &,
-				      const QList<bool> &)));
+				      const QList<int> &)));
       connect(m_cookies,
 	      SIGNAL(cookie_removed(const QNetworkCookie &)),
 	      m_cookies_window,

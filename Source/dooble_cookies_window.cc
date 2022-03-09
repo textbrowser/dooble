@@ -338,7 +338,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 
 void dooble_cookies_window::slot_cookies_added
 (const QList<QNetworkCookie> &cookies,
- const QList<bool> &is_favorites)
+ const QList<int> &is_favorites)
 {
   disconnect(m_ui.tree,
 	     SIGNAL(itemChanged(QTreeWidgetItem *, int)),
@@ -623,10 +623,17 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(item->text(0)).toBase64());
-	query.addBindValue
-	  (dooble::s_cryptography->
-	   hmac(item->checkState(0) == Qt::Checked ?
-		QByteArray("true") : QByteArray("false")).toBase64());
+
+	if(item->checkState(0) == Qt::Checked)
+	  query.addBindValue
+	    (dooble::s_cryptography->hmac(QByteArray("blocked")).toBase64());
+	else if(item->checkState(0) == Qt::PartiallyChecked)
+	  query.addBindValue
+	    (dooble::s_cryptography->hmac(QByteArray("favorite")).toBase64());
+	else
+	  query.addBindValue
+	    (dooble::s_cryptography->hmac(QByteArray("xyz")).toBase64());
+
 	query.exec();
       }
 

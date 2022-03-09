@@ -111,7 +111,7 @@ void dooble_cookies::slot_connect_cookie_added_signal(void)
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
   emit cookies_added
-    (QList<QNetworkCookie> () << cookie, QList<bool> () << false);
+    (QList<QNetworkCookie> () << cookie, QList<int> () << 0);
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -407,7 +407,7 @@ void dooble_cookies::slot_populate(void)
 	create_tables(db);
 
 	QList<QNetworkCookie> cookies;
-	QList<bool> is_favorites;
+	QList<int> is_blocked_or_favorite;
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
@@ -434,20 +434,24 @@ void dooble_cookies::slot_populate(void)
 		}
 
 	      QNetworkCookie cookie;
+	      auto is_blocked = dooble_cryptography::memcmp
+		(dooble::s_cryptography->hmac(QByteArray("blocked")).toBase64(),
+		 query.value(1).toByteArray());
 	      auto is_favorite = dooble_cryptography::memcmp
-		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
+		(dooble::s_cryptography->hmac(QByteArray("favorite")).
+		 toBase64(),
 		 query.value(1).toByteArray());
 
 	      cookie.setDomain(bytes);
 	      cookies << cookie;
-	      is_favorites << is_favorite;
+	      is_blocked_or_favorite << (is_blocked ? 1 : is_favorite ? 2 : 0);
 	    }
 
-	if(!cookies.isEmpty() && !is_favorites.isEmpty())
-	  emit cookies_added(cookies, is_favorites);
+	if(!cookies.isEmpty() && !is_blocked_or_favorite.isEmpty())
+	  emit cookies_added(cookies, is_blocked_or_favorite);
 
 	cookies.clear();
-	is_favorites.clear();
+	is_blocked_or_favorite.clear();
 
 	if(query.exec("SELECT "
 		      "(SELECT favorite_digest FROM dooble_cookies_domains a "
@@ -540,8 +544,13 @@ void dooble_cookies::slot_populate(void)
 		  }
 
 	      auto c(cookie.at(0));
+	      auto is_blocked = dooble_cryptography::memcmp
+		(dooble::s_cryptography->hmac(QByteArray("blocked")).
+		 toBase64(),
+		 query.value(0).toByteArray());
 	      auto is_favorite = dooble_cryptography::memcmp
-		(dooble::s_cryptography->hmac(QByteArray("true")).toBase64(),
+		(dooble::s_cryptography->hmac(QByteArray("favorite")).
+		 toBase64(),
 		 query.value(0).toByteArray());
 
 #ifdef DOOBLE_COOKIES_REPLACE_HYPHEN_WITH_UNDERSCORE
@@ -558,12 +567,12 @@ void dooble_cookies::slot_populate(void)
 
 	      c.setDomain("");
 	      count += 1;
-	      is_favorites << is_favorite;
+	      is_blocked_or_favorite << (is_blocked ? 1 : is_favorite ? 2 : 0);
 	      profile->cookieStore()->setCookie(c, url);
 	    }
 
-	if(!cookies.isEmpty() && !is_favorites.isEmpty())
-	  emit cookies_added(cookies, is_favorites);
+	if(!cookies.isEmpty() && !is_blocked_or_favorite.isEmpty())
+	  emit cookies_added(cookies, is_blocked_or_favorite);
       }
 
     db.close();

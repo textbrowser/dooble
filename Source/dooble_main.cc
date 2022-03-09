@@ -420,10 +420,10 @@ int main(int argc, char *argv[])
 		   SLOT(slot_populated(void)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookies_added(const QList<QNetworkCookie> &,
-					const QList<bool> &)),
+					const QList<int> &)),
 		   dooble::s_cookies_window,
 		   SLOT(slot_cookies_added(const QList<QNetworkCookie> &,
-					   const QList<bool> &)));
+					   const QList<int> &)));
   QObject::connect(dooble::s_cookies,
 		   SIGNAL(cookie_removed(const QNetworkCookie &)),
 		   dooble::s_cookies_window,
