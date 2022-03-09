@@ -71,6 +71,7 @@ class dooble_cookies_window: public QMainWindow
   void save_settings(void);
 
  private slots:
+  void slot_add_blocked_domain(void);
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_cookies_added(const QList<QNetworkCookie> &cookies,
 			  const QList<int> &is_blocked_or_favorite);

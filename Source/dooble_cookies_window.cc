@@ -98,6 +98,14 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  connect(m_ui.add,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_add_blocked_domain(void)));
+  connect(m_ui.block_domain,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_add_blocked_domain(void)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -295,6 +303,12 @@ void dooble_cookies_window::show_normal(QWidget *parent)
     dooble_ui_utilities::center_window_widget(parent, this);
 
   QMainWindow::showNormal();
+}
+
+void dooble_cookies_window::slot_add_blocked_domain(void)
+{
+  if(m_ui.block_domain->text().trimmed().isEmpty())
+    return;
 }
 
 void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
