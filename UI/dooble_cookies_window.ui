@@ -20,6 +20,34 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Block Domain</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="dooble_search_widget" name="block_domain">
+        <property name="placeholderText">
+         <string>Block Domain</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="add">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="label_7">
@@ -707,6 +735,8 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>block_domain</tabstop>
+  <tabstop>add</tabstop>
   <tabstop>domain_filter</tabstop>
   <tabstop>tree</tabstop>
   <tabstop>name</tabstop>
@@ -721,6 +751,7 @@
   <tabstop>toggle_shown</tabstop>
   <tabstop>delete_selected</tabstop>
   <tabstop>delete_shown</tabstop>
+  <tabstop>delete_unchecked</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
