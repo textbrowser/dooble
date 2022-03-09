@@ -73,7 +73,7 @@ class dooble_cookies_window: public QMainWindow
  private slots:
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_cookies_added(const QList<QNetworkCookie> &cookies,
-			  const QList<int> &is_favorites);
+			  const QList<int> &is_blocked_or_favorite);
   void slot_cookies_cleared(void);
   void slot_delete_selected(void);
   void slot_delete_shown(void);

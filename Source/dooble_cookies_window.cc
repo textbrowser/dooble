@@ -46,8 +46,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_is_private = is_private;
   m_purge_domains_timer.setInterval(30000);
   m_ui.setupUi(this);
+  m_ui.blocked->setCheckState(Qt::Checked);
   m_ui.domain->setText("");
   m_ui.expiration_date->setText("");
+  m_ui.favorite->setCheckState(Qt::PartiallyChecked);
   m_ui.name->setText("");
   m_ui.path->setText("");
   m_ui.periodically_purge->setChecked
@@ -338,7 +340,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 
 void dooble_cookies_window::slot_cookies_added
 (const QList<QNetworkCookie> &cookies,
- const QList<int> &is_favorites)
+ const QList<int> &is_blocked_or_favorite)
 {
   disconnect(m_ui.tree,
 	     SIGNAL(itemChanged(QTreeWidgetItem *, int)),
@@ -347,7 +349,6 @@ void dooble_cookies_window::slot_cookies_added
 
   for(int i = 0; i < cookies.size(); i++)
     {
-      auto is_favorite = is_favorites.value(i);
       const auto &cookie(cookies.at(i));
 
       if(!m_top_level_items.contains(cookie.domain()))
@@ -356,8 +357,10 @@ void dooble_cookies_window::slot_cookies_added
 	    (m_ui.tree, QStringList() << cookie.domain());
 	  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
-	  if(is_favorite)
+	  if(is_blocked_or_favorite.at(i) == 1)
 	    item->setCheckState(0, Qt::Checked);
+	  else if(is_blocked_or_favorite.at(i) == 2)
+	    item->setCheckState(0, Qt::PartiallyChecked);
 	  else
 	    item->setCheckState(0, Qt::Unchecked);
 
