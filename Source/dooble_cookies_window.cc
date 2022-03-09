@@ -528,7 +528,10 @@ void dooble_cookies_window::slot_delete_shown(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(!(!item || item->isHidden()))
+      if(!item)
+	continue;
+
+      if(!item->isHidden())
 	list << item;
     }
 
@@ -728,7 +731,10 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(!(!item || item->checkState(0) == Qt::Checked))
+      if(!item)
+	continue;
+
+      if(item->checkState(0) == Qt::Unchecked)
 	list << item;
     }
 

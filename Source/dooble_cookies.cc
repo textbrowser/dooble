@@ -177,7 +177,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 	    query.addBindValue
 	      (dooble::s_cryptography->hmac(cookie.domain()).toBase64());
 	    query.addBindValue
-	      (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	      (dooble::s_cryptography->hmac(QByteArray("xyz")).toBase64());
 	    query.exec();
 	  }
 
@@ -269,7 +269,7 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
 		      "domain_digest NOT IN (SELECT domain_digest FROM "
 		      "dooble_cookies) AND favorite_digest = ?");
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	  (dooble::s_cryptography->hmac(QByteArray("xyz")).toBase64());
 	query.exec();
       }
 
@@ -351,7 +351,7 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
 		      "domain_digest NOT IN (SELECT domain_digest FROM "
 		      "dooble_cookies) AND favorite_digest = ?");
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(QByteArray("false")).toBase64());
+	  (dooble::s_cryptography->hmac(QByteArray("xyz")).toBase64());
 	query.exec();
 	query.exec("PRAGMA foreign_keys = ON");
 
@@ -478,7 +478,7 @@ void dooble_cookies::slot_populate(void)
 		     "domain_digest NOT IN (SELECT domain_digest FROM "
 		     "dooble_cookies) AND favorite_digest = ?");
 		  delete_query.addBindValue
-		    (dooble::s_cryptography->hmac(QByteArray("false")).
+		    (dooble::s_cryptography->hmac(QByteArray("xyz")).
 		     toBase64());
 		  delete_query.exec();
 		  continue;
@@ -499,7 +499,7 @@ void dooble_cookies::slot_populate(void)
 		     "domain_digest NOT IN (SELECT domain_digest FROM "
 		     "dooble_cookies) AND favorite_digest = ?");
 		  delete_query.addBindValue
-		    (dooble::s_cryptography->hmac(QByteArray("false")).
+		    (dooble::s_cryptography->hmac(QByteArray("xyz")).
 		     toBase64());
 		  delete_query.exec();
 		  continue;
@@ -537,7 +537,7 @@ void dooble_cookies::slot_populate(void)
 		       "domain_digest NOT IN (SELECT domain_digest FROM "
 		       "dooble_cookies) AND favorite_digest = ?");
 		    delete_query.addBindValue
-		      (dooble::s_cryptography->hmac(QByteArray("false")).
+		      (dooble::s_cryptography->hmac(QByteArray("xyz")).
 		       toBase64());
 		    delete_query.exec();
 		    continue;
