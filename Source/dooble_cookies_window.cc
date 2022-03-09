@@ -364,7 +364,8 @@ void dooble_cookies_window::slot_cookies_added
 	  item->setData(1, Qt::UserRole, cookie.toRawForm());
 	  item->setFlags(Qt::ItemIsEnabled |
 			 Qt::ItemIsSelectable |
-			 Qt::ItemIsUserCheckable);
+			 Qt::ItemIsUserCheckable |
+			 Qt::ItemIsUserTristate);
 
 	  if(!text.isEmpty())
 	    item->setHidden(!cookie.domain().contains(text));
