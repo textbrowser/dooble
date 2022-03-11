@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QSqlQuery>
 #include <QStatusBar>
 #include <QWebEngineCookieStore>
@@ -156,15 +157,46 @@ bool dooble_cookies_window::is_domain_blocked(const QUrl &url) const
   if(url.isEmpty() || !url.isValid())
     return false;
 
-  auto item = m_top_level_items.value("." + url.host());
+  if(m_ui.block_subhosts->isChecked())
+    {
+      QStringList hosts;
+      auto host(url.host());
 
-  if(item && item->checkState(0) == Qt::Checked)
-    return true;
+      if(!host.startsWith("."))
+	hosts << "." + host;
 
-  item = m_top_level_items.value(url.host());
+      hosts << host;
 
-  if(item && item->checkState(0) == Qt::Checked)
-    return true;
+      while(host.contains('.'))
+	{
+	  auto index = host.indexOf('.');
+
+	  host = host.mid(index + 1);
+
+	  if(!host.isEmpty())
+	    hosts << "." + host << host;
+	}
+
+      foreach(const auto &host, hosts)
+	{
+	  auto item = m_top_level_items.value(host);
+
+	  if(item && item->checkState(0) == Qt::Checked)
+	    return true;
+	}
+    }
+  else
+    {
+      auto item = m_top_level_items.value("." + url.host());
+
+      if(item && item->checkState(0) == Qt::Checked)
+	return true;
+
+      item = m_top_level_items.value(url.host());
+
+      if(item && item->checkState(0) == Qt::Checked)
+	return true;
+    }
 
   return false;
 }
@@ -482,6 +514,33 @@ void dooble_cookies_window::slot_delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  auto list(m_ui.tree->selectedItems());
+
+  if(list.isEmpty())
+    {
+      QApplication::restoreOverrideCursor();
+      return;
+    }
+  else
+    QApplication::restoreOverrideCursor();
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Delete selected?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::ApplicationModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   if(m_cookie_store && m_cookies)
     disconnect(m_cookie_store,
 	       SIGNAL(cookieRemoved(const QNetworkCookie &)),
@@ -490,7 +549,6 @@ void dooble_cookies_window::slot_delete_selected(void)
 
   QList<QNetworkCookie> cookies;
   QStringList domains;
-  auto list(m_ui.tree->selectedItems());
 
   for(auto item : list)
     {
@@ -599,6 +657,30 @@ void dooble_cookies_window::slot_delete_shown(void)
 	list << item;
     }
 
+  if(list.isEmpty())
+    {
+      QApplication::restoreOverrideCursor();
+      return;
+    }
+  else
+    QApplication::restoreOverrideCursor();
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Delete shown?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::ApplicationModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   delete_top_level_items(list);
   QApplication::restoreOverrideCursor();
 }
@@ -617,6 +699,30 @@ void dooble_cookies_window::slot_delete_unchecked(void)
 	list << item;
     }
 
+  if(list.isEmpty())
+    {
+      QApplication::restoreOverrideCursor();
+      return;
+    }
+  else
+    QApplication::restoreOverrideCursor();
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(tr("Delete unchecked?"));
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::ApplicationModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    {
+      QApplication::processEvents();
+      return;
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   delete_top_level_items(list);
   QApplication::restoreOverrideCursor();
 }
