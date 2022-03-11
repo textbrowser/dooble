@@ -3,7 +3,7 @@ Maintainer: f83043e79dc03a0abfbcbc376879a97d66f2cacb@protonmail.ch
 Package: Dooble
 Priority: optional
 Section: Internet
-Version: 2022.02.15
+Version: 2022.03.15
 Description: Dooble Web Browser
  Welcome to the Dooble Web Browser!
  A dooble.desktop file will also be installed in /usr/share/applications/.
