@@ -350,6 +350,40 @@
      </widget>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QComboBox" name="collapse">
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToContents</enum>
+        </property>
+        <item>
+         <property name="text">
+          <string>Collapse All</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Expand All</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QTreeWidget" name="tree">
       <property name="alternatingRowColors">
        <bool>true</bool>
@@ -1018,6 +1052,7 @@
   <tabstop>domain_filter</tabstop>
   <tabstop>blocked</tabstop>
   <tabstop>favorite</tabstop>
+  <tabstop>collapse</tabstop>
   <tabstop>tree</tabstop>
   <tabstop>name</tabstop>
   <tabstop>value</tabstop>

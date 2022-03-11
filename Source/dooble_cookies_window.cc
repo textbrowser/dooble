@@ -106,6 +106,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_add_blocked_domain(void)));
+  connect(m_ui.collapse,
+	  SIGNAL(activated(int)),
+	  this,
+	  SLOT(slot_collapse_all(int)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -263,6 +267,12 @@ void dooble_cookies_window::keyPressEvent(QKeyEvent *event)
 void dooble_cookies_window::resizeEvent(QResizeEvent *event)
 {
   QMainWindow::resizeEvent(event);
+  m_ui.value->setText
+    (m_ui.value->fontMetrics().
+     elidedText(m_ui.value->property("value").toString(),
+		Qt::ElideRight,
+		m_ui.value->width()));
+  m_ui.value->setCursorPosition(0);
   save_settings();
 }
 
@@ -330,6 +340,21 @@ void dooble_cookies_window::slot_add_blocked_domain(void)
     return;
 }
 
+void dooble_cookies_window::slot_collapse_all(int index)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.collapse->blockSignals(true);
+  m_ui.collapse->setCurrentIndex(0);
+  m_ui.collapse->blockSignals(false);
+
+  if(index == 0)
+    m_ui.tree->collapseAll();
+  else
+    m_ui.tree->expandAll();
+
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 {
   auto hash(m_child_items.value(cookie.domain()));
@@ -367,7 +392,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 	    (m_ui.tree->indexOfTopLevelItem(item));
 	}
     }
-  else
+  else if(!cookie.domain().trimmed().isEmpty())
     m_child_items[cookie.domain()] = hash;
 }
 
@@ -383,6 +408,9 @@ void dooble_cookies_window::slot_cookies_added
   for(int i = 0; i < cookies.size(); i++)
     {
       const auto &cookie(cookies.at(i));
+
+      if(cookie.domain().trimmed().isEmpty())
+	continue;
 
       if(!m_top_level_items.contains(cookie.domain()))
 	{
@@ -691,8 +719,12 @@ void dooble_cookies_window::slot_item_selection_changed(void)
     {
       m_ui.domain->setText("");
       m_ui.expiration_date->setText("");
+      m_ui.http_only->setChecked(false);
       m_ui.name->setText("");
       m_ui.path->setText("");
+      m_ui.secure->setChecked(false);
+      m_ui.session->setChecked(false);
+      m_ui.value->setProperty("value", "");
       m_ui.value->setText("");
       return;
     }
@@ -707,8 +739,12 @@ void dooble_cookies_window::slot_item_selection_changed(void)
       m_ui.domain->setText(item->text(0));
       m_ui.domain->setCursorPosition(0);
       m_ui.expiration_date->setText("");
+      m_ui.http_only->setChecked(false);
       m_ui.name->setText("");
       m_ui.path->setText("");
+      m_ui.secure->setChecked(false);
+      m_ui.session->setChecked(false);
+      m_ui.value->setProperty("value", "");
       m_ui.value->setText("");
       return;
     }
@@ -723,6 +759,7 @@ void dooble_cookies_window::slot_item_selection_changed(void)
       m_ui.path->setText("");
       m_ui.secure->setChecked(false);
       m_ui.session->setChecked(false);
+      m_ui.value->setProperty("value", "");
       m_ui.value->setText("");
     }
   else
@@ -738,7 +775,11 @@ void dooble_cookies_window::slot_item_selection_changed(void)
       m_ui.path->setCursorPosition(0);
       m_ui.secure->setChecked(cookie.at(0).isSecure());
       m_ui.session->setChecked(cookie.at(0).isSessionCookie());
-      m_ui.value->setText(cookie.at(0).value());
+      m_ui.value->setProperty("value", cookie.at(0).value());
+      m_ui.value->setText
+	(m_ui.value->fontMetrics().elidedText(cookie.at(0).value(),
+					      Qt::ElideRight,
+					      m_ui.value->width()));
       m_ui.value->setCursorPosition(0);
     }
 }
