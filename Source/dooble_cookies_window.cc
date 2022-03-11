@@ -47,6 +47,8 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_is_private = is_private;
   m_purge_domains_timer.setInterval(30000);
   m_ui.setupUi(this);
+  m_ui.block_subhosts->setChecked
+    (dooble_settings::setting("cookies_block_subhosts").toBool());
   m_ui.blocked->setCheckState(Qt::Checked);
   m_ui.domain->setText("");
   m_ui.expiration_date->setText("");
@@ -107,6 +109,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_add_blocked_domain(void)));
+  connect(m_ui.block_subhosts,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_block_subhosts(bool)));
   connect(m_ui.collapse,
 	  SIGNAL(activated(int)),
 	  this,
@@ -370,6 +376,11 @@ void dooble_cookies_window::slot_add_blocked_domain(void)
 {
   if(m_is_private || m_ui.block_domain->text().trimmed().isEmpty())
     return;
+}
+
+void dooble_cookies_window::slot_block_subhosts(bool state)
+{
+  dooble_settings::set_setting("cookies_block_subhosts", state);
 }
 
 void dooble_cookies_window::slot_collapse_all(int index)
