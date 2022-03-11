@@ -897,6 +897,7 @@ void dooble_cookies_window::slot_item_selection_changed(void)
 	(m_ui.value->fontMetrics().elidedText(cookie.at(0).value(),
 					      Qt::ElideRight,
 					      m_ui.value->width()));
+      m_ui.value->setToolTip(cookie.at(0).value());
       m_ui.value->setCursorPosition(0);
     }
 }
