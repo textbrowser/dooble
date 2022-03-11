@@ -44,6 +44,7 @@ class dooble_cookies_window: public QMainWindow
 
  public:
   dooble_cookies_window(bool is_private, QWidget *parent);
+  bool is_domain_blocked(const QUrl &url) const;
   void filter(const QString &text);
   void populate(void);
   void set_cookie_store(QWebEngineCookieStore *cookie_store);

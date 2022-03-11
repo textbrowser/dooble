@@ -183,9 +183,12 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
       m_cookies_window->set_cookie_store(m_web_engine_profile->cookieStore());
       m_web_engine_profile->cookieStore()->setCookieFilter
-	([](const QWebEngineCookieStore::FilterRequest &filter_request)
+	([this](const QWebEngineCookieStore::FilterRequest &filter_request)
 	 {
-	   if(filter_request.thirdParty)
+	   if(filter_request.thirdParty ||
+	      m_cookies_window->is_domain_blocked(filter_request.
+						  firstPartyUrl) ||
+	      m_cookies_window->is_domain_blocked(filter_request.origin))
 	     return false;
 	   else
 	     return true;
@@ -443,6 +446,10 @@ bool dooble::cookie_filter
 	(filter_request.firstPartyUrl, filter_request.origin);
       return false;
     }
+
+  if(s_cookies_window->is_domain_blocked(filter_request.firstPartyUrl) ||
+     s_cookies_window->is_domain_blocked(filter_request.origin))
+    return false;
 
   return true;
 }

@@ -147,6 +147,24 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   setContextMenuPolicy(Qt::NoContextMenu);
 }
 
+bool dooble_cookies_window::is_domain_blocked(const QUrl &url) const
+{
+  if(url.isEmpty() || !url.isValid())
+    return false;
+
+  auto item = m_top_level_items.value("." + url.host());
+
+  if(item && item->checkState(0) == Qt::Checked)
+    return true;
+
+  item = m_top_level_items.value(url.host());
+
+  if(item && item->checkState(0) == Qt::Checked)
+    return true;
+
+  return false;
+}
+
 void dooble_cookies_window::closeEvent(QCloseEvent *event)
 {
   if(!m_is_private)
@@ -308,7 +326,7 @@ void dooble_cookies_window::show_normal(QWidget *parent)
 
 void dooble_cookies_window::slot_add_blocked_domain(void)
 {
-  if(m_ui.block_domain->text().trimmed().isEmpty())
+  if(m_is_private || m_ui.block_domain->text().trimmed().isEmpty())
     return;
 }
 
