@@ -184,7 +184,7 @@ class dooble_charts: public QWidget
      XY_SERIES_Y_AXIS_TICK_COUNT,
      XY_SERIES_Y_AXIS_TICK_INTERVAL,
      XY_SERIES_Y_AXIS_TICK_TYPE,
-  };
+    };
 
   dooble_charts(QWidget *parent);
   virtual ~dooble_charts();

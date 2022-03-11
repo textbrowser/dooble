@@ -182,7 +182,6 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 	      m_cookies,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
       m_cookies_window->set_cookie_store(m_web_engine_profile->cookieStore());
-
       m_web_engine_profile->cookieStore()->setCookieFilter
 	([](const QWebEngineCookieStore::FilterRequest &filter_request)
 	 {
@@ -819,13 +818,13 @@ void dooble::initialize_static_members(void)
 
   if(!s_accepted_or_blocked_domains)
     {
+      QWebEngineProfile::defaultProfile()->cookieStore()->setCookieFilter
+	(&dooble::cookie_filter);
       s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
       connect(s_accepted_or_blocked_domains,
 	      SIGNAL(populated(void)),
 	      this,
 	      SLOT(slot_populated(void)));
-      QWebEngineProfile::defaultProfile()->cookieStore()->setCookieFilter
-	(&dooble::cookie_filter);
     }
 
   if(!s_certificate_exceptions)
