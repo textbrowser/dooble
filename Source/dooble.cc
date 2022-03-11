@@ -155,7 +155,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
     {
       m_cookies = new dooble_cookies(m_is_private, this);
       m_cookies_window = new dooble_cookies_window(m_is_private, this);
-      m_cookies_window->setCookies(m_cookies);
+      m_cookies_window->set_cookies(m_cookies);
       m_downloads = new dooble_downloads
 	(m_web_engine_profile = new QWebEngineProfile(this), this);
       prepare_private_web_engine_profile_settings();
@@ -181,7 +181,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 	      SIGNAL(cookieRemoved(const QNetworkCookie &)),
 	      m_cookies,
 	      SLOT(slot_cookie_removed(const QNetworkCookie &)));
-      m_cookies_window->setCookieStore(m_web_engine_profile->cookieStore());
+      m_cookies_window->set_cookie_store(m_web_engine_profile->cookieStore());
 
       m_web_engine_profile->cookieStore()->setCookieFilter
 	([](const QWebEngineCookieStore::FilterRequest &filter_request)
@@ -849,9 +849,9 @@ void dooble::initialize_static_members(void)
   if(!s_cookies_window)
     {
       s_cookies_window = new dooble_cookies_window(false, nullptr);
-      s_cookies_window->setCookieStore
+      s_cookies_window->set_cookie_store
 	(QWebEngineProfile::defaultProfile()->cookieStore());
-      s_cookies_window->setCookies(s_cookies);
+      s_cookies_window->set_cookies(s_cookies);
     }
 
   if(!s_cryptography)

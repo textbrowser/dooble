@@ -261,12 +261,13 @@ void dooble_cookies_window::save_settings(void)
     ("dooble_cookies_window_state", saveState().toBase64());
 }
 
-void dooble_cookies_window::setCookieStore(QWebEngineCookieStore *cookie_store)
+void dooble_cookies_window::set_cookie_store
+(QWebEngineCookieStore *cookie_store)
 {
   m_cookie_store = cookie_store;
 }
 
-void dooble_cookies_window::setCookies(dooble_cookies *cookies)
+void dooble_cookies_window::set_cookies(dooble_cookies *cookies)
 {
   m_cookies = cookies;
 }
