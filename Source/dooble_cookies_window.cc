@@ -553,15 +553,8 @@ void dooble_cookies_window::slot_cookies_cleared(void)
 
 void dooble_cookies_window::slot_delete_selected(void)
 {
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
   if(!m_ui.tree->selectionModel()->hasSelection())
-    {
-      QApplication::restoreOverrideCursor();
-      return;
-    }
-  else
-    QApplication::restoreOverrideCursor();
+    return;
 
   QMessageBox mb(this);
 
