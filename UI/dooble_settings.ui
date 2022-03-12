@@ -358,8 +358,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>357</width>
-               <height>618</height>
+               <width>642</width>
+               <height>614</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -913,11 +913,21 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>617</width>
-               <height>820</height>
+               <width>642</width>
+               <height>848</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <widget class="QCheckBox" name="block_third_party_cookies">
+                <property name="text">
+                 <string>Block Third-Party Cookies</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
@@ -1483,7 +1493,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1249</y>
+               <y>0</y>
                <width>642</width>
                <height>2070</height>
               </rect>
@@ -2371,6 +2381,7 @@
   <tabstop>browsing_history</tabstop>
   <tabstop>visited_links</tabstop>
   <tabstop>scrollArea_2</tabstop>
+  <tabstop>block_third_party_cookies</tabstop>
   <tabstop>cookie_policy</tabstop>
   <tabstop>credentials</tabstop>
   <tabstop>cipher</tabstop>

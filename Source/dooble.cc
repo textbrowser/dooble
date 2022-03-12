@@ -185,10 +185,12 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
       m_web_engine_profile->cookieStore()->setCookieFilter
 	([this](const QWebEngineCookieStore::FilterRequest &filter_request)
 	 {
-	   if(filter_request.thirdParty ||
-	      m_cookies_window->is_domain_blocked(filter_request.
-						  firstPartyUrl) ||
-	      m_cookies_window->is_domain_blocked(filter_request.origin))
+	   if(dooble_settings::setting("block_third_party_cookies").toBool() &&
+	      filter_request.thirdParty)
+	     return false;
+	   else if(m_cookies_window->is_domain_blocked(filter_request.
+						       firstPartyUrl) ||
+		   m_cookies_window->is_domain_blocked(filter_request.origin))
 	     return false;
 	   else
 	     return true;
@@ -440,18 +442,18 @@ bool dooble::can_exit(const dooble::CanExit can_exit)
 bool dooble::cookie_filter
 (const QWebEngineCookieStore::FilterRequest &filter_request)
 {
-  if(filter_request.thirdParty)
+  if(dooble_settings::setting("block_third_party_cookies").toBool() &&
+     filter_request.thirdParty)
     {
       emit s_accepted_or_blocked_domains->add_session_url
 	(filter_request.firstPartyUrl, filter_request.origin);
       return false;
     }
-
-  if(s_cookies_window->is_domain_blocked(filter_request.firstPartyUrl) ||
-     s_cookies_window->is_domain_blocked(filter_request.origin))
+  else if(s_cookies_window->is_domain_blocked(filter_request.firstPartyUrl) ||
+	  s_cookies_window->is_domain_blocked(filter_request.origin))
     return false;
-
-  return true;
+  else
+    return true;
 }
 
 bool dooble::initialized(void) const

@@ -252,6 +252,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["auto_load_images"] = true;
   s_settings["block_cipher_type"] = "AES-256";
   s_settings["block_cipher_type_index"] = 0;
+  s_settings["block_third_party_cookies"] = true;
   s_settings["browsing_history_days"] = 15;
   s_settings["cache_size"] = 0;
   s_settings["cache_type_index"] = 0;
@@ -1250,6 +1251,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("animated_scrolling", false).toBool());
   m_ui.automatic_loading_of_images->setChecked
     (s_settings.value("auto_load_images", true).toBool());
+  m_ui.block_third_party_cookies->setChecked
+    (s_settings.value("block_third_party_cookies", true).toBool());
   m_ui.browsing_history->setValue
     (qBound(m_ui.browsing_history->minimum(),
 	    s_settings.value("browsing_history_days", 15).toInt(),
@@ -2216,6 +2219,8 @@ void dooble_settings::slot_apply(void)
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
   set_setting
     ("auto_load_images", m_ui.automatic_loading_of_images->isChecked());
+  set_setting
+    ("block_third_party_cookies", m_ui.block_third_party_cookies->isChecked());
   set_setting("browsing_history_days", m_ui.browsing_history->value());
   set_setting("cache_size", m_ui.cache_size->value());
   set_setting("cache_type_index", m_ui.cache_type->currentIndex());
