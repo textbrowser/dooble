@@ -108,32 +108,39 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  Q_OBJECT</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="classdooble__cookies.html">dooble_cookies</a>(<span class="keywordtype">bool</span> is_private, QObject *parent);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">static</span> QByteArray identifier(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> create_tables(QSqlDatabase &amp;db);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> purge(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">bool</span> m_is_private;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; <span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">void</span> slot_connect_cookie_added_signal(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> slot_cookie_added(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">void</span> slot_cookie_removed(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> slot_delete_cookie(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">void</span> slot_delete_domain(<span class="keyword">const</span> QString &amp;domain);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> slot_delete_items(<span class="keyword">const</span> QList&lt;QNetworkCookie&gt; &amp;cookies,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;             <span class="keyword">const</span> QStringList &amp;domains);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">void</span> slot_populate(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; signals:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> cookie_removed(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> cookies_added(<span class="keyword">const</span> QList&lt;QNetworkCookie&gt; &amp;cookie,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;             <span class="keyword">const</span> QList&lt;int&gt; &amp;is_blocked_or_favorite);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> populated(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">enum</span> BlockedOrFavorite</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     BLOCKED = 1,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     FAVORITE = 2,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     NONE = 0</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="classdooble__cookies.html">dooble_cookies</a>(<span class="keywordtype">bool</span> is_private, QObject *parent);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">static</span> QByteArray identifier(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> create_tables(QSqlDatabase &amp;db);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> purge(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">bool</span> m_is_private;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">void</span> slot_connect_cookie_added_signal(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> slot_cookie_added(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> slot_cookie_removed(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> slot_delete_cookie(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> slot_delete_domain(<span class="keyword">const</span> QString &amp;domain);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> slot_delete_items(<span class="keyword">const</span> QList&lt;QNetworkCookie&gt; &amp;cookies,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;             <span class="keyword">const</span> QStringList &amp;domains);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">void</span> slot_populate(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; signals:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">void</span> cookie_removed(<span class="keyword">const</span> QNetworkCookie &amp;cookie);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> cookies_added(<span class="keyword">const</span> QList&lt;QNetworkCookie&gt; &amp;cookie,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;             <span class="keyword">const</span> QList&lt;int&gt; &amp;is_blocked_or_favorite);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> populated(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassdooble__cookies_html"><div class="ttname"><a href="classdooble__cookies.html">dooble_cookies</a></div><div class="ttdef"><b>Definition:</b> dooble_cookies.h:35</div></div>
 <!-- start footer part -->

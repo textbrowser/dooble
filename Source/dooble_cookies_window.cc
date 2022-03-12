@@ -219,6 +219,9 @@ void dooble_cookies_window::closeEvent(QCloseEvent *event)
 void dooble_cookies_window::delete_top_level_items
 (const QList<QTreeWidgetItem *> &list)
 {
+  if(list.isEmpty())
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   if(m_cookie_store && m_cookies)
@@ -678,20 +681,20 @@ void dooble_cookies_window::slot_delete_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QTreeWidgetItem *> list;
+  auto found = false;
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(!item)
-	continue;
-
-      if(!item->isHidden())
-	list << item;
+      if(item && !item->isHidden())
+	{
+	  found = true;
+	  break;
+	}
     }
 
-  if(list.isEmpty())
+  if(!found)
     {
       QApplication::restoreOverrideCursor();
       return;
@@ -715,13 +718,6 @@ void dooble_cookies_window::slot_delete_shown(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  delete_top_level_items(list);
-  QApplication::restoreOverrideCursor();
-}
-
-void dooble_cookies_window::slot_delete_unchecked(void)
-{
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QList<QTreeWidgetItem *> list;
 
@@ -729,11 +725,34 @@ void dooble_cookies_window::slot_delete_unchecked(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
+      if(item && !item->isHidden())
 	list << item;
     }
 
-  if(list.isEmpty())
+  if(!list.isEmpty())
+    delete_top_level_items(list);
+
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_cookies_window::slot_delete_unchecked(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto found = false;
+
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
+    {
+      auto item = m_ui.tree->topLevelItem(i);
+
+      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
+	{
+	  found = true;
+	  break;
+	}
+    }
+
+  if(!found)
     {
       QApplication::restoreOverrideCursor();
       return;
@@ -757,7 +776,20 @@ void dooble_cookies_window::slot_delete_unchecked(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  delete_top_level_items(list);
+
+  QList<QTreeWidgetItem *> list;
+
+  for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
+    {
+      auto item = m_ui.tree->topLevelItem(i);
+
+      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
+	list << item;
+    }
+
+  if(!list.isEmpty())
+    delete_top_level_items(list);
+
   QApplication::restoreOverrideCursor();
 }
 
