@@ -111,7 +111,8 @@ void dooble_cookies::slot_connect_cookie_added_signal(void)
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
   emit cookies_added
-    (QList<QNetworkCookie> () << cookie, QList<int> () << 0);
+    (QList<QNetworkCookie> ()
+     << cookie, QList<int> () << BlockedOrFavorite::NONE);
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
@@ -444,7 +445,10 @@ void dooble_cookies::slot_populate(void)
 
 	      cookie.setDomain(bytes);
 	      cookies << cookie;
-	      is_blocked_or_favorite << (is_blocked ? 1 : is_favorite ? 2 : 0);
+	      is_blocked_or_favorite <<
+		(is_blocked ? BlockedOrFavorite::BLOCKED :
+		 is_favorite ? BlockedOrFavorite::FAVORITE :
+		 BlockedOrFavorite::NONE);
 	    }
 
 	if(!cookies.isEmpty() && !is_blocked_or_favorite.isEmpty())
@@ -567,7 +571,10 @@ void dooble_cookies::slot_populate(void)
 
 	      c.setDomain(""); // Limit the cookie to the exact server.
 	      count += 1;
-	      is_blocked_or_favorite << (is_blocked ? 1 : is_favorite ? 2 : 0);
+	      is_blocked_or_favorite <<
+		(is_blocked ? BlockedOrFavorite::BLOCKED :
+		 is_favorite ? BlockedOrFavorite::FAVORITE :
+		 BlockedOrFavorite::NONE);
 	      profile->cookieStore()->setCookie(c, url);
 	    }
 

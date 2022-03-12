@@ -37,6 +37,13 @@ class dooble_cookies: public QObject
   Q_OBJECT
 
  public:
+  enum BlockedOrFavorite
+    {
+     BLOCKED = 1,
+     FAVORITE = 2,
+     NONE = 0
+    };
+
   dooble_cookies(bool is_private, QObject *parent);
   static QByteArray identifier(const QNetworkCookie &cookie);
   static void create_tables(QSqlDatabase &db);

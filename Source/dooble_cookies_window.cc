@@ -374,7 +374,9 @@ void dooble_cookies_window::show_normal(QWidget *parent)
 
 void dooble_cookies_window::slot_add_blocked_domain(void)
 {
-  if(m_is_private || m_ui.block_domain->text().trimmed().isEmpty())
+  auto domain(m_ui.block_domain->text().trimmed());
+
+  if(domain.isEmpty() || m_top_level_items.value(domain))
     return;
 }
 
@@ -461,9 +463,11 @@ void dooble_cookies_window::slot_cookies_added
 	    (m_ui.tree, QStringList() << cookie.domain());
 	  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
-	  if(is_blocked_or_favorite.at(i) == 1)
+	  if(is_blocked_or_favorite.at(i) ==
+	     dooble_cookies::BlockedOrFavorite::BLOCKED)
 	    item->setCheckState(0, Qt::Checked);
-	  else if(is_blocked_or_favorite.at(i) == 2)
+	  else if(is_blocked_or_favorite.at(i) ==
+		  dooble_cookies::BlockedOrFavorite::FAVORITE)
 	    item->setCheckState(0, Qt::PartiallyChecked);
 	  else
 	    item->setCheckState(0, Qt::Unchecked);
