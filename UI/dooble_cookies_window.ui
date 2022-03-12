@@ -369,12 +369,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="block_subhosts">
+       <widget class="QCheckBox" name="block_subdomains">
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suppose the URL's host is abc.def.ghi.org. If this option is enabled and an entry such as .ghi.org (or ghi.org) exists and is checked, the cookie will be blocked. Otherwise, the cookie will be blocked if .abc.def.ghi.org (or abc.def.ghi.org) exists and is checked. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>Block Sub-Hosts</string>
+         <string>Block Sub-Domains</string>
         </property>
        </widget>
       </item>
@@ -1063,7 +1063,7 @@
   <tabstop>blocked</tabstop>
   <tabstop>favorite</tabstop>
   <tabstop>collapse</tabstop>
-  <tabstop>block_subhosts</tabstop>
+  <tabstop>block_subdomains</tabstop>
   <tabstop>tree</tabstop>
   <tabstop>name</tabstop>
   <tabstop>value</tabstop>

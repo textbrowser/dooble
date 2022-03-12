@@ -73,7 +73,7 @@ class dooble_cookies_window: public QMainWindow
 
  private slots:
   void slot_add_blocked_domain(void);
-  void slot_block_subhosts(bool state);
+  void slot_block_subdomains(bool state);
   void slot_collapse_all(int index);
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_cookies_added(const QList<QNetworkCookie> &cookies,

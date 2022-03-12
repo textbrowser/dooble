@@ -47,8 +47,8 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_is_private = is_private;
   m_purge_domains_timer.setInterval(30000);
   m_ui.setupUi(this);
-  m_ui.block_subhosts->setChecked
-    (dooble_settings::setting("cookies_block_subhosts").toBool());
+  m_ui.block_subdomains->setChecked
+    (dooble_settings::setting("cookies_block_subdomains").toBool());
   m_ui.blocked->setCheckState(Qt::Checked);
   m_ui.domain->setText("");
   m_ui.expiration_date->setText("");
@@ -109,10 +109,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_add_blocked_domain(void)));
-  connect(m_ui.block_subhosts,
+  connect(m_ui.block_subdomains,
 	  SIGNAL(toggled(bool)),
 	  this,
-	  SLOT(slot_block_subhosts(bool)));
+	  SLOT(slot_block_subdomains(bool)));
   connect(m_ui.collapse,
 	  SIGNAL(activated(int)),
 	  this,
@@ -163,15 +163,15 @@ bool dooble_cookies_window::is_domain_blocked(const QUrl &url) const
   if(url.isEmpty() || !url.isValid())
     return false;
 
-  if(m_ui.block_subhosts->isChecked())
+  if(m_ui.block_subdomains->isChecked())
     {
-      QStringList hosts;
+      QStringList domains;
       auto host(url.host());
 
       if(!host.startsWith("."))
-	hosts << "." + host;
+	domains << "." + host;
 
-      hosts << host;
+      domains << host;
 
       while(host.contains('.'))
 	{
@@ -180,12 +180,12 @@ bool dooble_cookies_window::is_domain_blocked(const QUrl &url) const
 	  host = host.mid(index + 1);
 
 	  if(!host.isEmpty())
-	    hosts << "." + host << host;
+	    domains << "." + host << host;
 	}
 
-      foreach(const auto &host, hosts)
+      foreach(const auto &domain, domains)
 	{
-	  auto item = m_top_level_items.value(host);
+	  auto item = m_top_level_items.value(domain);
 
 	  if(item && item->checkState(0) == Qt::Checked)
 	    return true;
@@ -378,9 +378,9 @@ void dooble_cookies_window::slot_add_blocked_domain(void)
     return;
 }
 
-void dooble_cookies_window::slot_block_subhosts(bool state)
+void dooble_cookies_window::slot_block_subdomains(bool state)
 {
-  dooble_settings::set_setting("cookies_block_subhosts", state);
+  dooble_settings::set_setting("cookies_block_subdomains", state);
 }
 
 void dooble_cookies_window::slot_collapse_all(int index)
