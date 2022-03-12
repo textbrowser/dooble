@@ -565,7 +565,7 @@ void dooble_cookies::slot_populate(void)
 	      if(c.isSecure())
 		url.setScheme("https");
 
-	      c.setDomain("");
+	      c.setDomain(""); // Limit the cookie to the exact server.
 	      count += 1;
 	      is_blocked_or_favorite << (is_blocked ? 1 : is_favorite ? 2 : 0);
 	      profile->cookieStore()->setCookie(c, url);
