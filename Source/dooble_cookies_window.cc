@@ -376,8 +376,34 @@ void dooble_cookies_window::slot_add_blocked_domain(void)
 {
   auto domain(m_ui.block_domain->text().trimmed());
 
-  if(domain.isEmpty() || m_top_level_items.value(domain))
+  if(domain.length() <= 1 || m_top_level_items.value(domain))
     return;
+
+  auto item = new QTreeWidgetItem(m_ui.tree, QStringList() << domain);
+  auto text(m_ui.domain_filter->text().toLower().trimmed());
+
+  item->setCheckState(0, Qt::Checked);
+  item->setFlags(Qt::ItemIsEnabled |
+		 Qt::ItemIsSelectable |
+		 Qt::ItemIsUserCheckable |
+		 Qt::ItemIsUserTristate);
+
+  if(!text.isEmpty())
+    item->setHidden(!domain.contains(text));
+
+  m_top_level_items[domain] = item;
+  disconnect(m_ui.tree,
+	     SIGNAL(itemChanged(QTreeWidgetItem *, int)),
+	     this,
+	     SLOT(slot_item_changed(QTreeWidgetItem *, int)));
+  m_ui.tree->addTopLevelItem(item);
+  m_ui.tree->sortItems
+    (m_ui.tree->sortColumn(), m_ui.tree->header()->sortIndicatorOrder());
+  m_ui.tree->resizeColumnToContents(0);
+  connect(m_ui.tree,
+	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
+	  this,
+	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
 }
 
 void dooble_cookies_window::slot_block_subdomains(bool state)
@@ -529,9 +555,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto list(m_ui.tree->selectedItems());
-
-  if(list.isEmpty())
+  if(!m_ui.tree->selectionModel()->hasSelection())
     {
       QApplication::restoreOverrideCursor();
       return;
@@ -555,6 +579,8 @@ void dooble_cookies_window::slot_delete_selected(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto list(m_ui.tree->selectedItems());
 
   if(m_cookie_store && m_cookies)
     disconnect(m_cookie_store,
