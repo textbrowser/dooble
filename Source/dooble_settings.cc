@@ -508,7 +508,37 @@ QVariant dooble_settings::setting(const QString &k,
       return value;
     }
 
-  return s_settings.value(key, default_value);
+  if(key == "authentication_iteration_count")
+    return qBound
+      (15000, s_settings.value(key, default_value).toInt(), 999999999);
+  else if(key == "block_cipher_type_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
+  else if(key == "browsing_history_days")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 365);
+  else if(key == "cache_size")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 2048);
+  else if(key == "cache_type_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
+  else if(key == "cookie_policy_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 2);
+  else if(key == "favorites_sort_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 2);
+  else if(key == "hash_type_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
+  else if(key == "icon_set_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
+  else if(key == "language_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
+  else if(key == "proxy_port")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 65535);
+  else if(key == "theme_color_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 4);
+  else if(key == "zoom")
+    return qBound(25, s_settings.value(key, default_value).toInt(), 500);
+  else if(key == "zoom_frame_location_index")
+    return qBound(0, s_settings.value(key, default_value).toInt(), 0);
+  else
+    return s_settings.value(key, default_value);
 }
 
 bool dooble_settings::has_dooble_credentials(void)
