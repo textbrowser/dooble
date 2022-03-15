@@ -521,6 +521,9 @@ QVariant dooble_settings::setting(const QString &k,
     return qBound(0, s_settings.value(key, default_value).toInt(), 1);
   else if(key == "cookie_policy_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 2);
+  else if(key == "dooble_accepted_or_blocked_domains_"
+	          "maximum_session_rejections")
+    return qBound(1, s_settings.value(key, default_value).toInt(), 1000000);
   else if(key == "favorites_sort_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 2);
   else if(key == "hash_type_index")
@@ -537,6 +540,8 @@ QVariant dooble_settings::setting(const QString &k,
     return qBound(25, s_settings.value(key, default_value).toInt(), 500);
   else if(key == "zoom_frame_location_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 0);
+  else if(key.startsWith("history_horizontal_header_section_size_"))
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1000000);
   else
     return s_settings.value(key, default_value);
 }

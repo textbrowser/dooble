@@ -97,6 +97,7 @@ Completed Items
 - New Web site.
 - New page context menus (dooble_web_engine_view::contextMenuEvent()).
 - Notify operator of completion of Accepted / Blocked Domains import.
+- Numeric values read from settings must be bounded.
 - OS X bundle.
 - Optional DNT.
 - Optional Visited Links.
@@ -188,7 +189,6 @@ Remaining Items
 - Generic Debian control file.
 - Include date stamps in cookie containers.
 - Inspect all available URLs when intercepting requests. Content blocking.
-- Numeric values read from settings must be bounded.
 - Optional referrer.
 - Optional testing of Threefish.
 - Qt 6.2 LTS:
