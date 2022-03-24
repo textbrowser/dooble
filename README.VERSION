@@ -1,0 +1,8 @@
+The versions must be current!
+
+DEBIAN/control
+Data/Info.plist
+Distributions/build_deb.bash
+Documentation/Dooble.odt
+Documentation/RELEASE-NOTES.html
+Source/dooble_version.h
