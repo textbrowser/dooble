@@ -110,6 +110,13 @@ int main(int argc, char *argv[])
 	  }
 	else if(strcmp(argv[i], "--test-aes") == 0)
 	  test_aes = true;
+	else
+	  {
+	    QUrl url(QUrl::fromUserInput(argv[i]));
+
+	    if(dooble_ui_utilities::allowed_scheme(url))
+	      urls << url;
+	  }
       }
 
   if(test_aes)
