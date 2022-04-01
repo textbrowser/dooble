@@ -1743,12 +1743,18 @@ void dooble::prepare_shortcuts(void)
 
 void dooble::prepare_standard_menus(void)
 {
-  m_menu->clear();
+  auto is_chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
+
+  foreach(const auto action, m_standard_menu_actions)
+    if(action)
+      action->setEnabled(is_chart);
+
+  if(!m_menu->actions().isEmpty())
+    return;
 
   QAction *action = nullptr;
   QMenu *menu = nullptr;
   auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto is_chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
   auto page = current_page();
   auto use_material_icons(dooble_settings::use_material_icons());
 
@@ -1813,30 +1819,38 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(close(void)),
 		  QKeySequence(tr("Ctrl+Shift+W")));
   menu->addSeparator();
-  menu->addAction
+  action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-export",
 		      QIcon(QString(":/%1/48/export.png").arg(icon_set))),
      tr("&Export As PNG..."),
      this,
-     SLOT(slot_export_as_png(void)))->setEnabled(is_chart);
-  menu->addAction
+     SLOT(slot_export_as_png(void)));
+  action->setEnabled(is_chart);
+  m_standard_menu_actions << action;
+  action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-save",
 		      QIcon(QString(":/%1/48/save.png").arg(icon_set))),
      tr("&Save"),
      this,
      SLOT(slot_save(void)),
-     QKeySequence(tr("Ctrl+S")))->setEnabled(is_chart);
+     QKeySequence(tr("Ctrl+S")));
+  action->setEnabled(is_chart);
+  m_standard_menu_actions << action;
   menu->addSeparator();
-  menu->addAction
+  action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-print",
 		      QIcon(QString(":/%1/48/print.png").arg(icon_set))),
      tr("&Print..."),
      this,
      SLOT(slot_print(void)),
-     QKeySequence(tr("Ctrl+P")))->setEnabled(is_chart);
-  menu->addAction(tr("Print Pre&view..."),
-		  this,
-		  SLOT(slot_print_preview(void)))->setEnabled(is_chart);
+     QKeySequence(tr("Ctrl+P")));
+  action->setEnabled(is_chart);
+  m_standard_menu_actions << action;
+  action = menu->addAction(tr("Print Pre&view..."),
+			   this,
+			   SLOT(slot_print_preview(void)));
+  action->setEnabled(is_chart);
+  m_standard_menu_actions << action;
   menu->addSeparator();
   menu->addAction(QIcon::fromTheme(use_material_icons + "application-exit",
 				   QIcon(QString(":/%1/48/exit_dooble.png").
@@ -3252,11 +3266,13 @@ void dooble::slot_dooble_credentials_authenticated(bool state)
     }
 
   m_menu->clear();
+  m_standard_menu_actions.clear();
 }
 
 void dooble::slot_dooble_credentials_created(void)
 {
   m_menu->clear();
+  m_standard_menu_actions.clear();
 }
 
 void dooble::slot_downloads_started(void)
@@ -3796,6 +3812,7 @@ void dooble::slot_set_current_tab(void)
 void dooble::slot_settings_applied(void)
 {
   m_menu->clear();
+  m_standard_menu_actions.clear();
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
   prepare_icons();

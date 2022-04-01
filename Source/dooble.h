@@ -130,6 +130,7 @@ class dooble: public QMainWindow
   QHash<QTimer *, QShortcut *> m_disabled_shortcuts;
 #endif
   QList<QPair<QPointer<dooble_page>, QUrl> > m_delayed_pages;
+  QList<QPointer<QAction> > m_standard_menu_actions;
   QList<QShortcut *> m_shortcuts;
   QList<QShortcut *> m_tab_widget_shortcuts;
   QMenu *m_menu;
