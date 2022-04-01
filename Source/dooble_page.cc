@@ -816,7 +816,8 @@ void dooble_page::prepare_shortcuts(void)
 
 void dooble_page::prepare_standard_menus(void)
 {
-  m_menu->clear();
+  if(!m_menu->actions().isEmpty())
+    return;
 
   QAction *action = nullptr;
   QMenu *menu = nullptr;
@@ -1584,10 +1585,13 @@ void dooble_page::slot_dooble_credentials_authenticated(bool state)
 	m_authentication_action->setEnabled
 	  (dooble_settings::has_dooble_credentials());
     }
+
+  m_menu->clear();
 }
 
 void dooble_page::slot_dooble_credentials_created(void)
 {
+  m_menu->clear();
 }
 
 void dooble_page::slot_downloads_finished(void)
@@ -2356,6 +2360,8 @@ void dooble_page::slot_render_pixmap(void)
 
 void dooble_page::slot_settings_applied(void)
 {
+  m_menu->clear();
+
   if(dooble_settings::setting("denote_private_widgets").toBool())
     m_ui.is_private->setVisible(m_is_private);
   else

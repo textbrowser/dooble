@@ -757,6 +757,10 @@ void dooble::connect_signals(void)
 	  this,
 	  SLOT(slot_settings_applied(void)),
 	  Qt::UniqueConnection);
+  connect(s_settings,
+	  SIGNAL(dooble_credentials_created(void)),
+	  this,
+	  SLOT(slot_dooble_credentials_created(void)));
   connect(this,
 	  SIGNAL(application_locked(bool, dooble *)),
 	  s_application,
@@ -3246,6 +3250,13 @@ void dooble::slot_dooble_credentials_authenticated(bool state)
 	m_authentication_action->setEnabled
 	  (dooble_settings::has_dooble_credentials());
     }
+
+  m_menu->clear();
+}
+
+void dooble::slot_dooble_credentials_created(void)
+{
+  m_menu->clear();
 }
 
 void dooble::slot_downloads_started(void)
@@ -3784,6 +3795,7 @@ void dooble::slot_set_current_tab(void)
 
 void dooble::slot_settings_applied(void)
 {
+  m_menu->clear();
   m_ui.menu_bar->setVisible
     (dooble_settings::setting("main_menu_bar_visible").toBool());
   prepare_icons();
