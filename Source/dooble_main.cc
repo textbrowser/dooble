@@ -234,7 +234,7 @@ int main(int argc, char *argv[])
   if(username.isEmpty())
     home_dir.mkdir(dooble_directory);
   else
-    home_dir.mkdir(username + QDir::separator() + dooble_directory);
+    home_dir.mkpath(username + QDir::separator() + dooble_directory);
 
   if(username.isEmpty())
     dooble_settings::set_setting
