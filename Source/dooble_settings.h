@@ -72,6 +72,7 @@ class dooble_settings: public dooble_main_window
   static void prepare_web_engine_environment_variables(void);
   static void remove_setting(const QString &key);
   void restore(bool read_database);
+  void set_settings_path(const QString &path);
   void set_site_feature_permission(const QUrl &url,
 				   QWebEnginePage::Feature feature,
 				   bool state);

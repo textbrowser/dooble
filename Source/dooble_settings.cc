@@ -1760,6 +1760,11 @@ void dooble_settings::save_settings(void)
     set_setting("settings_geometry", saveGeometry().toBase64());
 }
 
+void dooble_settings::set_settings_path(const QString &path)
+{
+  m_ui.settings_path->setText(path);
+}
+
 void dooble_settings::set_site_feature_permission
 (const QUrl &url, QWebEnginePage::Feature feature, bool state)
 {

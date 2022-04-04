@@ -220,6 +220,7 @@ int main(int argc, char *argv[])
   QDir::setCurrent("/Applications/Dooble.d");
 #endif
   QString dooble_directory(".dooble");
+  QString dooble_settings_path("");
 #if defined(Q_OS_WIN)
   QFileInfo file_info;
   QString username(qgetenv("USERNAME").mid(0, 32).trimmed().constData());
@@ -238,10 +239,12 @@ int main(int argc, char *argv[])
   if(username.isEmpty())
     dooble_settings::set_setting
       ("home_path",
+       dooble_settings_path =
        home_dir.absolutePath() + QDir::separator() + dooble_directory);
   else
     dooble_settings::set_setting
       ("home_path",
+       dooble_settings_path =
        home_dir.absolutePath() +
        QDir::separator() +
        username +
@@ -257,6 +260,7 @@ int main(int argc, char *argv[])
       home_dir.mkdir(dooble_directory);
       dooble_settings::set_setting
 	("home_path",
+	 dooble_settings_path =
 	 home_dir.absolutePath() + QDir::separator() + dooble_directory);
     }
   else
@@ -266,6 +270,7 @@ int main(int argc, char *argv[])
       home_dir.mkdir("dooble");
       dooble_settings::set_setting
 	("home_path",
+	 dooble_settings_path =
 	 home_dir.absolutePath() + QDir::separator() + "dooble");
     }
 #endif
@@ -375,6 +380,7 @@ int main(int argc, char *argv[])
   splash.repaint();
   dooble::s_application->processEvents();
   dooble::s_settings = new dooble_settings();
+  dooble::s_settings->set_settings_path(dooble_settings_path);
 
   auto arguments(QCoreApplication::arguments());
   auto d = new dooble

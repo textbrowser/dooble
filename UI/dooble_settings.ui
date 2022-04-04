@@ -20,6 +20,19 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
+     <widget class="QLabel" name="settings_path">
+      <property name="text">
+       <string>Location</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QScrollArea" name="scrollArea">
@@ -47,7 +60,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>546</height>
+           <height>522</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -358,8 +371,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>614</height>
+               <width>357</width>
+               <height>618</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -913,7 +926,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
+               <width>617</width>
                <height>848</height>
               </rect>
              </property>
@@ -1494,7 +1507,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
+               <width>486</width>
                <height>2070</height>
               </rect>
              </property>
