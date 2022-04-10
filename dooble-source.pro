@@ -170,7 +170,6 @@ TRANSLATIONS    = Translations/dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_Y
                   Translations/dooble_ms.ts \
                   Translations/dooble_mr.ts \
                   Translations/dooble_mt.ts \
-                  Translations/dooble_my-bn.ts \
                   Translations/dooble_nl.ts \
                   Translations/dooble_no.ts \
                   Translations/dooble_np.ts \
@@ -178,7 +177,7 @@ TRANSLATIONS    = Translations/dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_Y
                   Translations/dooble_pl.ts \
                   Translations/dooble_pl_PL.ts \
                   Translations/dooble_pt.ts \
-                  Translations/dooble_pt-BR.ts \
+                  Translations/dooble_pt_BR.ts \
                   Translations/dooble_ps.ts \
                   Translations/dooble_ro.ts \
                   Translations/dooble_ru.ts \
@@ -192,6 +191,6 @@ TRANSLATIONS    = Translations/dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_Y
                   Translations/dooble_th.ts \
                   Translations/dooble_tr.ts \
                   Translations/dooble_vn.ts \
-                  Translations/dooble_zh-CN-simple.ts \
-                  Translations/dooble_zh-TW.ts \
-                  Translations/dooble_zh-CN-traditional.ts
+                  Translations/dooble_zh_CN_simple.ts \
+                  Translations/dooble_zh_TW.ts \
+                  Translations/dooble_zh_CN_traditional.ts
