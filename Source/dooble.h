@@ -71,6 +71,7 @@ class dooble: public QMainWindow
   enum Limits
     {
      MAXIMUM_TITLE_LENGTH = 1024,
+     MAXIMUM_SQL_TEXT_LENGTH = 5000,
      MAXIMUM_URL_LENGTH = 2048
     };
 
