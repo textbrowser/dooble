@@ -864,10 +864,12 @@ void dooble_history::save_item(const QIcon &icon,
 	hash[dooble_history::HistoryItem::TITLE] =
 	  m_history.value(item.url()).value
 	  (dooble_history::HistoryItem::TITLE,
-	   item.title().trimmed().mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
+	   item.title().trimmed().mid
+	   (0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
       else
 	hash[dooble_history::HistoryItem::TITLE] = item.title().trimmed().mid
-	  (0, dooble::Limits::MAXIMUM_TITLE_LENGTH);
+	  (0,
+	   static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH));
 
       hash[dooble_history::HistoryItem::URL] = item.url();
 

@@ -748,11 +748,12 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
   if(item2)
     {
       auto title
-	(item.title().trimmed().mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
+	(item.title().trimmed().
+	 mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
 
       if(title.isEmpty())
 	title = item.url().toString().mid
-	  (0, dooble::Limits::MAXIMUM_URL_LENGTH);
+	  (0, static_cast<int> (dooble::Limits::MAXIMUM_URL_LENGTH));
 
       if(title.isEmpty())
 	title = tr("Dooble");
@@ -795,10 +796,12 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
   auto title
-    (item.title().trimmed().mid(0, dooble::Limits::MAXIMUM_TITLE_LENGTH));
+    (item.title().trimmed().
+     mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
 
   if(title.isEmpty())
-    title = item.url().toString().mid(0, dooble::Limits::MAXIMUM_URL_LENGTH);
+    title = item.url().toString().
+      mid(0, static_cast<int> (dooble::Limits::MAXIMUM_URL_LENGTH));
 
   if(title.isEmpty())
     title = tr("Dooble");
@@ -917,7 +920,8 @@ void dooble_history_window::slot_populate(void)
       dooble_history_window_favorite_item *item1 = nullptr;
 
       if(title.isEmpty())
-	title = url.toString().mid(0, dooble::Limits::MAXIMUM_URL_LENGTH);
+	title = url.toString().mid
+	  (0, static_cast<int> (dooble::Limits::MAXIMUM_URL_LENGTH));
 
       if(title.isEmpty())
 	title = tr("Dooble");

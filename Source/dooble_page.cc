@@ -1535,8 +1535,11 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     {
       if(!m_last_javascript_popups.contains(view))
 	{
-	  if(dooble_page::ConstantsEnum::MAXIMUM_JAVASCRIPT_POPUPS <=
-	     m_last_javascript_popups.size())
+	  auto size = m_last_javascript_popups.size();
+
+	  if(size >=
+	     static_cast<decltype(size)> (dooble_page::ConstantsEnum::
+					  MAXIMUM_JAVASCRIPT_POPUPS))
 	    {
 	      view->deleteLater();
 	      return;
@@ -2200,7 +2203,8 @@ void dooble_page::slot_prepare_backward_menu(void)
   QFontMetrics font_metrics(m_ui.backward->menu()->font());
   auto items
     (m_view->history()->
-     backItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+     backItems(static_cast<int> (dooble_page::ConstantsEnum::
+				 MAXIMUM_HISTORY_ITEMS)));
 
   m_ui.backward->setEnabled(!items.empty());
 
@@ -2232,7 +2236,8 @@ void dooble_page::slot_prepare_forward_menu(void)
   QFontMetrics font_metrics(m_ui.forward->menu()->font());
   auto items
     (m_view->history()->
-     forwardItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+     forwardItems(static_cast<int> (dooble_page::ConstantsEnum::
+				    MAXIMUM_HISTORY_ITEMS)));
 
   m_ui.forward->setEnabled(!items.empty());
 
@@ -2488,7 +2493,10 @@ void dooble_page::slot_show_web_settings_panel(void)
 
 void dooble_page::slot_url_changed(const QUrl &url)
 {
-  if(url.toString().length() > dooble::Limits::MAXIMUM_URL_LENGTH)
+  auto length = url.toString().length();
+
+  if(length >
+     static_cast<decltype(length)> (dooble::Limits::MAXIMUM_URL_LENGTH))
     return;
 
   /*
