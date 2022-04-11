@@ -197,15 +197,14 @@ Remaining Items
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
-- DTLS and Echo-DNS.
 - Default browser on Mac.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
-- Include date stamps in cookie containers.
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional referrer.
+- Prevent SQL query text overflow.
 - Shortcuts browser.
 - South tab and Mac. Qt-ism?
 - Translation browser.
@@ -214,8 +213,10 @@ Unknown Items
 
 - Are containers empty? Remind if credentials exist.
 - Certificate information. Requires a WebEngine interface.
+- DTLS and Echo-DNS.
 - Generic Debian control file. Debian is never current.
 - HMAC or KMAC.
+- Include date stamps in cookie containers.
 - Multiple certificate exceptions.
 - Optional Document Mode.
 - Optional testing of Threefish.
