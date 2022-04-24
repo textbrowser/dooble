@@ -970,6 +970,8 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
       s_web_engine_settings_environment
 	["--blink-settings=forceDarkModeEnabled"] = "boolean";
       s_web_engine_settings_environment
+	["--disable-reading-from-canvas"] = "singular";
+      s_web_engine_settings_environment
 	["--ignore-certificate-errors"] = "singular";
       s_web_engine_settings_environment["--ignore-ssl-errors"] = "singular";
     }
