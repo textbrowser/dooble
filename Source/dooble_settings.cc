@@ -1104,6 +1104,7 @@ void dooble_settings::prepare_web_engine_settings(void)
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_web_engine_settings_item_changed(QTableWidgetItem *)));
+  m_ui.web_engine_settings->resizeColumnToContents(0);
   m_ui.web_engine_settings->sortItems(0);
 }
 
