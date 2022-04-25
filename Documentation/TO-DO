@@ -103,6 +103,7 @@ Completed Items
 - Optional Visited Links.
 - Optional credentials.
 - Optional favicons.
+- Optional testing of Threefish.
 - Pause and resume downloads. Requires Qt support.
 - Pin support windows.
 - Place the Translations directory into the OS X bundle.
@@ -219,7 +220,6 @@ Unknown Items
 - Include date stamps in cookie containers.
 - Multiple certificate exceptions.
 - Optional Document Mode.
-- Optional testing of Threefish.
 - Sign Debian release: new public keys.
 - Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
