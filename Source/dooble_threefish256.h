@@ -42,6 +42,7 @@ class dooble_threefish256: public dooble_block_cipher
   static void test1(void);
   static void test2(void);
   static void test3(void);
+  static void test_performance(void);
   void set_key(const QByteArray &key);
   void set_tweak(const QByteArray &tweak, bool *ok);
 

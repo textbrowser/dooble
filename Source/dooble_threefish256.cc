@@ -26,6 +26,7 @@
 */
 
 #include <QDataStream>
+#include <QElapsedTimer>
 #include <QIODevice>
 #include <QtCore/qmath.h>
 #include <QtDebug>
@@ -842,4 +843,17 @@ void dooble_threefish256::test3(void)
   d = s->decrypt(c);
   qDebug() << "test3 " << (d == p ? "passed" : "failed");
   delete s;
+}
+
+void dooble_threefish256::test_performance(void)
+{
+  QElapsedTimer timer;
+
+  timer.start();
+
+  dooble_threefish256 s(dooble_random::random_bytes(32));
+
+  s.set_tweak("76543210fedcba98", nullptr);
+  s.decrypt(s.encrypt(QByteArray(500000, '1')));
+  qDebug() << "Threefish: " << timer.elapsed() << ".";
 }

@@ -45,7 +45,17 @@ class dooble_block_cipher
   int m_key_length;
   dooble_block_cipher(const QByteArray &key);
   dooble_block_cipher(void);
-  static QByteArray xor_arrays(const QByteArray &a, const QByteArray &b);
+
+  static QByteArray xor_arrays(const QByteArray &a, const QByteArray &b)
+  {
+    QByteArray bytes;
+    auto length = qMin(a.length(), b.length());
+
+    for(int i = 0; i < length; i++)
+      bytes.append(static_cast<char> (a[i] ^ b[i]));
+
+    return bytes;
+  }
 };
 
 #endif

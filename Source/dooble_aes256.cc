@@ -30,7 +30,9 @@
 */
 
 #include <QDataStream>
+#include <QElapsedTimer>
 #include <QIODevice>
+#include <QtDebug>
 #include <QtMath>
 #include <iostream>
 
@@ -836,4 +838,14 @@ void dooble_aes256::test1_key_expansion(void)
 
 	std::cout << std::endl;
       }
+}
+
+void dooble_aes256::test_performance(void)
+{
+  QElapsedTimer timer;
+
+  timer.start();
+  dooble_aes256 aes256(dooble_random::random_bytes(32));
+  aes256.decrypt(aes256.encrypt(QByteArray(500000, '1')));
+  qDebug() << "AES: " << timer.elapsed() << ".";
 }

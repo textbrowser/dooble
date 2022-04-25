@@ -65,6 +65,7 @@ extern "C"
 #include "dooble_random.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
+#include "dooble_threefish256.h"
 #include "dooble_ui_utilities.h"
 
 #include <csignal>
@@ -92,6 +93,8 @@ int main(int argc, char *argv[])
 
   QList<QUrl> urls;
   auto test_aes = false;
+  auto test_aes_performance = false;
+  auto test_threefish_performance = false;
 
   for(int i = 1; i < argc; i++)
     if(argv && argv[i])
@@ -110,6 +113,10 @@ int main(int argc, char *argv[])
 	  }
 	else if(strcmp(argv[i], "--test-aes") == 0)
 	  test_aes = true;
+	else if(strcmp(argv[i], "--test-aes-performance") == 0)
+	  test_aes_performance = true;
+	else if(strcmp(argv[i], "--test-threefish-performance") == 0)
+	  test_threefish_performance = true;
 	else
 	  {
 	    QUrl url(QUrl::fromUserInput(argv[i]));
@@ -125,6 +132,12 @@ int main(int argc, char *argv[])
       dooble_aes256::test1_decrypt_block();
       dooble_aes256::test1_key_expansion();
     }
+
+  if(test_aes_performance)
+    dooble_aes256::test_performance();
+
+  if(test_threefish_performance)
+    dooble_threefish256::test_performance();
 
 #ifdef Q_OS_MACOS
   struct rlimit rlim = {0, 0};

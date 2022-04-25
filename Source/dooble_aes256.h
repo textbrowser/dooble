@@ -48,6 +48,7 @@ class dooble_aes256: public dooble_block_cipher
   static void test1_decrypt_block(void);
   static void test1_encrypt_block(void);
   static void test1_key_expansion(void);
+  static void test_performance(void);
   void set_key(const QByteArray &key);
 
  private:
