@@ -134,6 +134,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SLOT(slot_downloads_started(void)));
   connect(dooble::s_settings,
 	  SIGNAL(applied(void)),
+	  m_popup_menu,
+	  SLOT(slot_settings_applied(void)));
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
   connect(dooble::s_settings,

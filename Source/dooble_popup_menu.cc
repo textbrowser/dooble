@@ -218,6 +218,8 @@ void dooble_popup_menu::slot_settings_applied(void)
       (tr("Permanent credentials have not been prepared."));
   else
     m_ui.authenticate->setToolTip("");
+
+  prepare_icons();
 }
 
 void dooble_popup_menu::slot_tool_button_clicked(void)
