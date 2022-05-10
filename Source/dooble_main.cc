@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
   QList<QUrl> urls;
   auto test_aes = false;
   auto test_aes_performance = false;
+  auto test_threefish = false;
   auto test_threefish_performance = false;
 
   for(int i = 1; i < argc; i++)
@@ -115,6 +116,8 @@ int main(int argc, char *argv[])
 	  test_aes = true;
 	else if(strcmp(argv[i], "--test-aes-performance") == 0)
 	  test_aes_performance = true;
+	else if(strcmp(argv[i], "--test-threefish") == 0)
+	  test_threefish = true;
 	else if(strcmp(argv[i], "--test-threefish-performance") == 0)
 	  test_threefish_performance = true;
 	else
@@ -136,6 +139,13 @@ int main(int argc, char *argv[])
 
   if(test_aes_performance)
     dooble_aes256::test_performance();
+
+  if(test_threefish)
+    {
+      dooble_threefish256::test1();
+      dooble_threefish256::test2();
+      dooble_threefish256::test3();
+    }
 
   if(test_threefish_performance)
     dooble_threefish256::test_performance();

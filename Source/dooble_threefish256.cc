@@ -101,14 +101,16 @@ static void bytes_to_words(uint64_t *W,
 
   for(size_t i = 0; i < bytes_size / 8; i++)
     {
-      b[0] = bytes[i * 8 + 0];
-      b[1] = bytes[i * 8 + 1];
-      b[2] = bytes[i * 8 + 2];
-      b[3] = bytes[i * 8 + 3];
-      b[4] = bytes[i * 8 + 4];
-      b[5] = bytes[i * 8 + 5];
-      b[6] = bytes[i * 8 + 6];
-      b[7] = bytes[i * 8 + 7];
+      auto product = i * 8;
+
+      b[0] = bytes[product + 0];
+      b[1] = bytes[product + 1];
+      b[2] = bytes[product + 2];
+      b[3] = bytes[product + 3];
+      b[4] = bytes[product + 4];
+      b[5] = bytes[product + 5];
+      b[6] = bytes[product + 6];
+      b[7] = bytes[product + 7];
       W[i] = static_cast<uint64_t> (b[0] & 0xff) |
 	(static_cast<uint64_t> (b[1] & 0xff) << 8) |
 	(static_cast<uint64_t> (b[2] & 0xff) << 16) |
@@ -137,7 +139,7 @@ static void mix(const uint64_t x0,
   ** Section 3.3.1.
   */
 
-  uint64_t r = R_4[d % 8][i];
+  auto r = static_cast<uint64_t> (R_4[d % 8][i]);
 
   *y0 = x0 + x1;
 
@@ -165,7 +167,7 @@ static void mix_inverse(const uint64_t y0,
   ** Section 3.3.1.
   */
 
-  uint64_t r = R_4[d % 8][i];
+  auto r = static_cast<uint64_t> (R_4[d % 8][i]);
 
   /*
   ** Please see https://en.wikipedia.org/wiki/Circular_shift.
@@ -276,8 +278,12 @@ static void threefish_decrypt_implementation(char *D,
 	  s[d][i] += t[d % 3];
       }
 
-  for(size_t i = 0; i < Nw; i++)
-    v[i] -= s[Nr / 4][i];
+  {
+    auto quotient = Nr / 4;
+
+    for(size_t i = 0; i < Nw; i++)
+      v[i] -= s[quotient][i];
+  }
 
   for(size_t d = Nr - 1;; d--)
     {
@@ -296,22 +302,27 @@ static void threefish_decrypt_implementation(char *D,
 
       for(size_t i = 0; i < Nw / 2; i++)
 	{
+	  auto product = i * 2;
 	  uint64_t x0 = 0;
 	  uint64_t x1 = 0;
-	  uint64_t y0 = f[i * 2];
-	  uint64_t y1 = f[i * 2 + 1];
+	  uint64_t y0 = f[product];
+	  uint64_t y1 = f[product + 1];
 
 	  mix_inverse(y0, y1, d, i, &x0, &x1, block_size);
-	  v[i * 2] = x0;
-	  v[i * 2 + 1] = x1;
+	  v[product] = x0;
+	  v[product + 1] = x1;
 	}
 
       dooble_ui_utilities::memset(f, 0, sizeof(*f) * static_cast<size_t> (Nw));
       delete []f;
 
       if(d % 4 == 0)
-	for(size_t i = 0; i < Nw; i++)
-	  v[i] -= s[d / 4][i];
+	{
+	  auto quotient = d / 4;
+
+	  for(size_t i = 0; i < Nw; i++)
+	    v[i] -= s[quotient][i];
+	}
 
       if(d == 0)
 	break;
@@ -458,8 +469,12 @@ static void threefish_encrypt_implementation(char *E,
   for(size_t d = 0; d < Nr; d++)
     {
       if(d % 4 == 0)
-	for(size_t i = 0; i < Nw; i++)
-	  v[i] += s[d / 4][i];
+	{
+	  auto quotient = d / 4;
+
+	  for(size_t i = 0; i < Nw; i++)
+	    v[i] += s[quotient][i];
+	}
 
       auto f = new (std::nothrow) uint64_t[Nw];
 
@@ -473,14 +488,15 @@ static void threefish_encrypt_implementation(char *E,
 
       for(size_t i = 0; i < Nw / 2; i++)
 	{
-	  uint64_t x0 = v[i * 2];
-	  uint64_t x1 = v[i * 2 + 1];
+	  auto product = i * 2;
+	  uint64_t x0 = v[product];
+	  uint64_t x1 = v[product + 1];
 	  uint64_t y0 = 0;
 	  uint64_t y1 = 0;
 
 	  mix(x0, x1, d, i, &y0, &y1, block_size);
-	  f[i * 2] = y0;
-	  f[i * 2 + 1] = y1;
+	  f[product] = y0;
+	  f[product + 1] = y1;
 	}
 
       for(size_t i = 0; i < Nw; i++)
@@ -490,8 +506,12 @@ static void threefish_encrypt_implementation(char *E,
       delete []f;
     }
 
-  for(size_t i = 0; i < Nw; i++)
-    v[i] += s[Nr / 4][i];
+  {
+    auto quotient = Nr / 4;
+
+    for(size_t i = 0; i < Nw; i++)
+      v[i] += s[quotient][i];
+  }
 
   words_to_bytes(E, v, Nw);
 
@@ -539,14 +559,16 @@ static void words_to_bytes(char *B,
 
   for(size_t i = 0; i < words_size; i++)
     {
-      B[i * 8 + 0] = static_cast<char> (words[i] & 0xff);
-      B[i * 8 + 1] = static_cast<char> ((words[i] >> 8) & 0xff);
-      B[i * 8 + 2] = static_cast<char> ((words[i] >> 16) & 0xff);
-      B[i * 8 + 3] = static_cast<char> ((words[i] >> 24) & 0xff);
-      B[i * 8 + 4] = static_cast<char> ((words[i] >> 32) & 0xff);
-      B[i * 8 + 5] = static_cast<char> ((words[i] >> 40) & 0xff);
-      B[i * 8 + 6] = static_cast<char> ((words[i] >> 48) & 0xff);
-      B[i * 8 + 7] = static_cast<char> ((words[i] >> 56) & 0xff);
+      auto product = i * 8;
+
+      B[product + 0] = static_cast<char> (words[i] & 0xff);
+      B[product + 1] = static_cast<char> ((words[i] >> 8) & 0xff);
+      B[product + 2] = static_cast<char> ((words[i] >> 16) & 0xff);
+      B[product + 3] = static_cast<char> ((words[i] >> 24) & 0xff);
+      B[product + 4] = static_cast<char> ((words[i] >> 32) & 0xff);
+      B[product + 5] = static_cast<char> ((words[i] >> 40) & 0xff);
+      B[product + 6] = static_cast<char> ((words[i] >> 48) & 0xff);
+      B[product + 7] = static_cast<char> ((words[i] >> 56) & 0xff);
     }
 }
 
