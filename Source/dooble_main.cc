@@ -128,6 +128,7 @@ int main(int argc, char *argv[])
 
   if(test_aes)
     {
+      dooble_aes256::test1();
       dooble_aes256::test1_encrypt_block();
       dooble_aes256::test1_decrypt_block();
       dooble_aes256::test1_key_expansion();

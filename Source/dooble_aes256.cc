@@ -432,39 +432,26 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   return b;
 }
 
-uint8_t dooble_aes256::xtime(uint8_t x)
-{
-  return static_cast<uint8_t> ((x << 1) ^ (((x >> 7) & 1) * 0x1b));
-}
-
-uint8_t dooble_aes256::xtime_special(uint8_t x, uint8_t y)
-{
-  return static_cast<uint8_t>
-    (((x & 1) * y) ^
-     (((x >> 1) & 1) * xtime(y)) ^
-     (((x >> 2) & 1) * xtime(xtime(y))) ^
-     (((x >> 3) & 1) * xtime(xtime(xtime(y)))) ^
-     (((x >> 4) & 1) * xtime(xtime(xtime(xtime(y))))));
-}
-
 void dooble_aes256::add_round_key(size_t c)
 {
-  m_state[0][0] ^= m_round_key[c * m_Nb + 0][0];
-  m_state[0][1] ^= m_round_key[c * m_Nb + 1][0];
-  m_state[0][2] ^= m_round_key[c * m_Nb + 2][0];
-  m_state[0][3] ^= m_round_key[c * m_Nb + 3][0];
-  m_state[1][0] ^= m_round_key[c * m_Nb + 0][1];
-  m_state[1][1] ^= m_round_key[c * m_Nb + 1][1];
-  m_state[1][2] ^= m_round_key[c * m_Nb + 2][1];
-  m_state[1][3] ^= m_round_key[c * m_Nb + 3][1];
-  m_state[2][0] ^= m_round_key[c * m_Nb + 0][2];
-  m_state[2][1] ^= m_round_key[c * m_Nb + 1][2];
-  m_state[2][2] ^= m_round_key[c * m_Nb + 2][2];
-  m_state[2][3] ^= m_round_key[c * m_Nb + 3][2];
-  m_state[3][0] ^= m_round_key[c * m_Nb + 0][3];
-  m_state[3][1] ^= m_round_key[c * m_Nb + 1][3];
-  m_state[3][2] ^= m_round_key[c * m_Nb + 2][3];
-  m_state[3][3] ^= m_round_key[c * m_Nb + 3][3];
+  auto product = c * m_Nb;
+
+  m_state[0][0] ^= m_round_key[product + 0][0];
+  m_state[0][1] ^= m_round_key[product + 1][0];
+  m_state[0][2] ^= m_round_key[product + 2][0];
+  m_state[0][3] ^= m_round_key[product + 3][0];
+  m_state[1][0] ^= m_round_key[product + 0][1];
+  m_state[1][1] ^= m_round_key[product + 1][1];
+  m_state[1][2] ^= m_round_key[product + 2][1];
+  m_state[1][3] ^= m_round_key[product + 3][1];
+  m_state[2][0] ^= m_round_key[product + 0][2];
+  m_state[2][1] ^= m_round_key[product + 1][2];
+  m_state[2][2] ^= m_round_key[product + 2][2];
+  m_state[2][3] ^= m_round_key[product + 3][2];
+  m_state[3][0] ^= m_round_key[product + 0][3];
+  m_state[3][1] ^= m_round_key[product + 1][3];
+  m_state[3][2] ^= m_round_key[product + 2][3];
+  m_state[3][3] ^= m_round_key[product + 3][3];
 }
 
 void dooble_aes256::inv_mix_columns(void)
@@ -579,14 +566,16 @@ void dooble_aes256::key_expansion(void)
 
   while(i < m_Nk)
     {
+      auto product = 4 * i;
+
       m_round_key[i][0] = static_cast<uint8_t>
-	(m_key[static_cast<int> (4 * i + 0)]);
+	(m_key[static_cast<int> (product + 0)]);
       m_round_key[i][1] = static_cast<uint8_t>
-	(m_key[static_cast<int> (4 * i + 1)]);
+	(m_key[static_cast<int> (product + 1)]);
       m_round_key[i][2] = static_cast<uint8_t>
-	(m_key[static_cast<int> (4 * i + 2)]);
+	(m_key[static_cast<int> (product + 2)]);
       m_round_key[i][3] = static_cast<uint8_t>
-	(m_key[static_cast<int> (4 * i + 3)]);
+	(m_key[static_cast<int> (product + 3)]);
       i += 1;
     }
 
@@ -594,23 +583,26 @@ void dooble_aes256::key_expansion(void)
 
   while(i < m_Nb * (m_Nr + 1))
     {
-      temp[0] = m_round_key[i - 1][0];
-      temp[1] = m_round_key[i - 1][1];
-      temp[2] = m_round_key[i - 1][2];
-      temp[3] = m_round_key[i - 1][3];
+      auto difference = i - 1;
+
+      temp[0] = m_round_key[difference][0];
+      temp[1] = m_round_key[difference][1];
+      temp[2] = m_round_key[difference][2];
+      temp[3] = m_round_key[difference][3];
 
       if(m_Nk > 0 && i % m_Nk == 0)
 	{
+	  auto quotient = i / m_Nk;
 	  uint8_t t = temp[0];
 
 	  temp[0] = temp[1];
 	  temp[1] = temp[2];
 	  temp[2] = temp[3];
 	  temp[3] = t;
-	  temp[0] = s_sbox[static_cast<size_t> (temp[0])] ^ s_rcon[i / m_Nk][0];
-	  temp[1] = s_sbox[static_cast<size_t> (temp[1])] ^ s_rcon[i / m_Nk][1];
-	  temp[2] = s_sbox[static_cast<size_t> (temp[2])] ^ s_rcon[i / m_Nk][2];
-	  temp[3] = s_sbox[static_cast<size_t> (temp[3])] ^ s_rcon[i / m_Nk][3];
+	  temp[0] = s_sbox[static_cast<size_t> (temp[0])] ^ s_rcon[quotient][0];
+	  temp[1] = s_sbox[static_cast<size_t> (temp[1])] ^ s_rcon[quotient][1];
+	  temp[2] = s_sbox[static_cast<size_t> (temp[2])] ^ s_rcon[quotient][2];
+	  temp[3] = s_sbox[static_cast<size_t> (temp[3])] ^ s_rcon[quotient][3];
 	  t = 0;
 	}
       else if(m_Nk > 0 && i % m_Nk == 4)
@@ -621,10 +613,11 @@ void dooble_aes256::key_expansion(void)
 	  temp[3] = s_sbox[static_cast<size_t> (temp[3])];
 	}
 
-      m_round_key[i][0] = m_round_key[i - m_Nk][0] ^ temp[0];
-      m_round_key[i][1] = m_round_key[i - m_Nk][1] ^ temp[1];
-      m_round_key[i][2] = m_round_key[i - m_Nk][2] ^ temp[2];
-      m_round_key[i][3] = m_round_key[i - m_Nk][3] ^ temp[3];
+      difference = i - m_Nk;
+      m_round_key[i][0] = m_round_key[difference][0] ^ temp[0];
+      m_round_key[i][1] = m_round_key[difference][1] ^ temp[1];
+      m_round_key[i][2] = m_round_key[difference][2] ^ temp[2];
+      m_round_key[i][3] = m_round_key[difference][3] ^ temp[3];
       dooble_ui_utilities::memset(temp, 0, 4 * sizeof(temp[0]));
       i += 1;
     }
