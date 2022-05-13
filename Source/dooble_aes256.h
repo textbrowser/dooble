@@ -84,7 +84,7 @@ class dooble_aes256: public dooble_block_cipher
   void key_expansion(void);
   void mix_columns(void);
   void shift_rows(void);
-  void sub_bytes();
+  void sub_bytes(void);
 };
 
 #endif

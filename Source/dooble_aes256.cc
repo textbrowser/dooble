@@ -739,7 +739,7 @@ void dooble_aes256::shift_rows(void)
   dooble_ui_utilities::memset(temp, 0, 4 * sizeof(temp[0]));
 }
 
-void dooble_aes256::sub_bytes()
+void dooble_aes256::sub_bytes(void)
 {
   m_state[0][0] = s_sbox[static_cast<size_t> (m_state[0][0])];
   m_state[0][1] = s_sbox[static_cast<size_t> (m_state[0][1])];
