@@ -1726,10 +1726,10 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+W")),
 				   this,
 				   SLOT(slot_close_tab(void)));
-      m_shortcuts << new QShortcut(QKeySequence(tr("F10")),
+      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F10),
 				   this,
 				   SLOT(slot_show_main_menu(void)));
-      m_shortcuts << new QShortcut(QKeySequence(tr("F11")),
+      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F11),
 				   this,
 				   SLOT(slot_show_full_screen(void)));
 
@@ -2021,7 +2021,7 @@ void dooble::prepare_standard_menus(void)
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SLOT(slot_show_full_screen(void)),
-					 QKeySequence(tr("F11")));
+					 QKeySequence(Qt::Key_F11));
 
   /*
   ** Help Menu
