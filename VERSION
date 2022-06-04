@@ -1,0 +1,10 @@
+Please keep the following files current.
+
+DEBIAN/control
+Data/Info.plist
+Distributions/build_deb.bash
+Documentation/Dooble.html
+Documentation/Dooble.odt
+Documentation/Dooble.pdf
+Documentation/RELEASE-NOTES.html
+Source/dooble_version.h
