@@ -45,6 +45,7 @@ class dooble_search_engines_popup: public QDialog
  public:
   dooble_search_engines_popup(QWidget *parent);
   QList<QAction *> actions(void) const;
+  QUrl default_address_bar_engine_url(void) const;
   void prepare_viewport_icons(void);
   void purge(void);
   void set_icon(const QIcon &icon, const QUrl &url);
@@ -62,6 +63,7 @@ class dooble_search_engines_popup: public QDialog
   QMultiMap<QString, QAction *> m_actions;
   QStandardItemModel *m_model;
   QTimer m_search_timer;
+  QUrl m_default_address_bar_engine_url;
   Ui_dooble_search_engines_popup m_ui;
   void add_search_engine(const QByteArray &title, const QUrl &url);
   void create_tables(QSqlDatabase &db);

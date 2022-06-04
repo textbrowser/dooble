@@ -114,6 +114,11 @@ QList<QAction *> dooble_search_engines_popup::actions(void) const
   return m_actions.values();
 }
 
+QUrl dooble_search_engines_popup::default_address_bar_engine_url(void) const
+{
+  return m_default_address_bar_engine_url;
+}
+
 void dooble_search_engines_popup::add_search_engine
 (const QByteArray &title, const QUrl &url)
 {
@@ -536,6 +541,8 @@ void dooble_search_engines_popup::slot_item_changed(QStandardItem *item)
     if(item != m_model->item(i) && m_model->item(i))
       m_model->item(i)->setCheckState(Qt::Unchecked);
 
+  m_default_address_bar_engine_url = item->data().toUrl();
+
   auto database_name(dooble_database_utilities::database_name());
 
   {
@@ -682,6 +689,9 @@ void dooble_search_engines_popup::slot_populate(void)
 		     query.value(3).toLongLong());
 		  continue;
 		}
+
+	      if(m_default_address_bar_engine_url.isEmpty())
+		m_default_address_bar_engine_url = url;
 
 	      QAction *action = nullptr;
 	      QList<QStandardItem *> list;
