@@ -690,9 +690,6 @@ void dooble_search_engines_popup::slot_populate(void)
 		  continue;
 		}
 
-	      if(m_default_address_bar_engine_url.isEmpty())
-		m_default_address_bar_engine_url = url;
-
 	      QAction *action = nullptr;
 	      QList<QStandardItem *> list;
 	      auto item = new QStandardItem();
@@ -706,6 +703,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	      if(check_state == "true" && single_checked)
 		{
 		  item->setCheckState(Qt::Checked);
+		  m_default_address_bar_engine_url = url;
 		  single_checked = false;
 		}
 	      else

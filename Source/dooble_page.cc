@@ -49,6 +49,7 @@
 #include "dooble_history_window.h"
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
+#include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_web_engine_page.h"
@@ -2104,7 +2105,26 @@ void dooble_page::slot_load_finished(bool ok)
 
 void dooble_page::slot_load_page(void)
 {
-  load(QUrl::fromUserInput(m_ui.address->text().trimmed()));
+  auto url(QUrl(m_ui.address->text().trimmed()));
+
+  if(dooble::s_search_engines_window && url.scheme().isEmpty())
+    {
+      auto url(dooble::s_search_engines_window->
+	       default_address_bar_engine_url());
+
+      if(!url.isEmpty() && url.isValid())
+	{
+	  url.setQuery
+	    (url.query().
+	     append(QString("\"%1\"").arg(m_ui.address->text().trimmed())));
+	  load(url);
+	  return;
+	}
+    }
+  else
+    url = QUrl::fromUserInput(m_ui.address->text().trimmed());
+
+  load(url);
 }
 
 void dooble_page::slot_load_progress(int progress)
