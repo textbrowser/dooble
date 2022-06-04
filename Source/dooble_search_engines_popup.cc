@@ -182,6 +182,11 @@ void dooble_search_engines_popup::add_search_engine
 		goto done_label;
 	      }
 
+	    disconnect(m_model,
+		       &QStandardItemModel::itemChanged,
+		       this,
+		       &dooble_search_engines_popup::slot_item_changed);
+
 	    QList<QStandardItem *> list;
 	    auto item = new QStandardItem();
 
@@ -189,7 +194,9 @@ void dooble_search_engines_popup::add_search_engine
 	      (dooble_favicons::icon_from_host(url), title, this);
 	    action->setProperty("url", url);
 	    item->setData(url);
-	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setFlags(Qt::ItemIsEnabled |
+			   Qt::ItemIsSelectable |
+			   Qt::ItemIsUserCheckable);
 	    item->setText(title);
 	    item->setToolTip(item->text());
 	    list << item;
@@ -204,6 +211,10 @@ void dooble_search_engines_popup::add_search_engine
 	    m_model->sort(0);
 	    m_ui.search_engine->clear();
 	    m_ui.title->clear();
+	    connect(m_model,
+		    &QStandardItemModel::itemChanged,
+		    this,
+		    &dooble_search_engines_popup::slot_item_changed);
 	  }
       }
 
@@ -224,9 +235,12 @@ void dooble_search_engines_popup::create_tables(QSqlDatabase &db)
   QSqlQuery query(db);
 
   query.exec("CREATE TABLE IF NOT EXISTS dooble_search_engines ("
+	     "default_address_bar_engine TEXT, "
 	     "title TEXT NOT NULL, "
 	     "url TEXT NOT NULL, "
 	     "url_digest TEXT PRIMARY KEY NOT NULL)");
+  query.exec
+    ("ALTER TABLE dooble_search_engines ADD default_address_bar_engine TEXT");
 }
 
 void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)
@@ -505,6 +519,78 @@ void dooble_search_engines_popup::slot_find(void)
   m_ui.search->setFocus();
 }
 
+void dooble_search_engines_popup::slot_item_changed(QStandardItem *item)
+{
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     !item)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(m_model,
+	     &QStandardItemModel::itemChanged,
+	     this,
+	     &dooble_search_engines_popup::slot_item_changed);
+
+  for(int i = 0; i < m_model->rowCount(); i++)
+    if(item != m_model->item(i) && m_model->item(i))
+      m_model->item(i)->setCheckState(Qt::Unchecked);
+
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_search_engines.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+
+	if(query.exec("SELECT OID FROM dooble_search_engines"))
+	  while(query.next())
+	    {
+	      QSqlQuery update(db);
+
+	      update.prepare("UPDATE dooble_search_engines "
+			     "SET default_address_bar_engine = ? "
+			     "WHERE OID = ?");
+	      update.addBindValue
+		(dooble::s_cryptography->encrypt_then_mac("false").toBase64());
+	      update.addBindValue(query.value(0));
+	      update.exec();
+	    }
+
+	QSqlQuery update(db);
+
+	update.prepare("UPDATE dooble_search_engines "
+		       "SET default_address_bar_engine = ? "
+		       "WHERE url_digest = ?");
+	update.addBindValue
+	  (dooble::s_cryptography->encrypt_then_mac("true").toBase64());
+	update.addBindValue
+	  (dooble::s_cryptography->hmac(item->data().toUrl().toEncoded()).
+	   toBase64());
+	update.exec();
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  connect(m_model,
+	  &QStandardItemModel::itemChanged,
+	  this,
+	  &dooble_search_engines_popup::slot_item_changed);
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_search_engines_popup::slot_populate(void)
 {
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
@@ -546,15 +632,32 @@ void dooble_search_engines_popup::slot_populate(void)
 
     if(db.open())
       {
+	create_tables(db);
+	disconnect(m_model,
+		   &QStandardItemModel::itemChanged,
+		   this,
+		   &dooble_search_engines_popup::slot_item_changed);
+
 	QSqlQuery query(db);
+	auto single_checked = true;
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT title, url, OID FROM dooble_search_engines"))
+	if(query.exec("SELECT default_address_bar_engine, "
+		      "title, "
+		      "url, "
+		      "OID "
+		      "FROM dooble_search_engines"))
 	  while(query.next())
 	    {
-	      auto title
+	      auto check_state
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      check_state = dooble::s_cryptography->mac_then_decrypt
+		(check_state);
+
+	      auto title
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
 
 	      title = dooble::s_cryptography->mac_then_decrypt(title);
 
@@ -563,11 +666,11 @@ void dooble_search_engines_popup::slot_populate(void)
 		  dooble_database_utilities::remove_entry
 		    (db,
 		     "dooble_history",
-		     query.value(2).toLongLong());
+		     query.value(3).toLongLong());
 		  continue;
 		}
 
-	      auto url(QByteArray::fromBase64(query.value(1).toByteArray()));
+	      auto url(QByteArray::fromBase64(query.value(2).toByteArray()));
 
 	      url = dooble::s_cryptography->mac_then_decrypt(url);
 
@@ -576,7 +679,7 @@ void dooble_search_engines_popup::slot_populate(void)
 		  dooble_database_utilities::remove_entry
 		    (db,
 		     "dooble_search_engines",
-		     query.value(2).toLongLong());
+		     query.value(3).toLongLong());
 		  continue;
 		}
 
@@ -589,8 +692,19 @@ void dooble_search_engines_popup::slot_populate(void)
 		 title,
 		 this);
 	      action->setProperty("url", QUrl::fromEncoded(url));
+
+	      if(check_state == "true" && single_checked)
+		{
+		  item->setCheckState(Qt::Checked);
+		  single_checked = false;
+		}
+	      else
+		item->setCheckState(Qt::Unchecked);
+
 	      item->setData(QUrl::fromEncoded(url));
-	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	      item->setFlags(Qt::ItemIsEnabled |
+			     Qt::ItemIsSelectable |
+			     Qt::ItemIsUserCheckable);
 	      item->setIcon(dooble_favicons::icon(action->icon()));
 	      item->setText(title);
 	      item->setToolTip(item->text());
@@ -604,6 +718,11 @@ void dooble_search_engines_popup::slot_populate(void)
 	      m_actions.insert(title, action);
 	      m_model->appendRow(list);
 	    }
+
+	connect(m_model,
+		&QStandardItemModel::itemChanged,
+		this,
+		&dooble_search_engines_popup::slot_item_changed);
       }
 
     db.close();

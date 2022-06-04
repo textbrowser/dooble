@@ -126,9 +126,19 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Please set the default address-bar search engine by checking it.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>The search engines listed below may be accessed via context menus on pages.</string>
+          <string>The search engines may be accessed via context menus on Web pages.</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

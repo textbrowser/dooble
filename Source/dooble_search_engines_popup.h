@@ -35,6 +35,7 @@
 
 #include "ui_dooble_search_engines_popup.h"
 
+class QStandardItem;
 class QStandardItemModel;
 
 class dooble_search_engines_popup: public QDialog
@@ -73,6 +74,7 @@ class dooble_search_engines_popup: public QDialog
   void slot_delete_selected(void);
   void slot_double_clicked(const QModelIndex &index);
   void slot_find(void);
+  void slot_item_changed(QStandardItem *item);
   void slot_populate(void);
   void slot_search_timer_timeout(void);
   void slot_settings_applied(void);
