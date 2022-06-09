@@ -580,8 +580,11 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
 	  series->setPointLabelsFont(font);
+	else
+	  series->setPointLabelsFont(QApplication::font());
 
 	break;
       }
