@@ -1695,8 +1695,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
 	  m_x_axis->setLabelsFont(font);
+	else
+	  m_x_axis->setLabelsFont(QApplication::font());
 
 	break;
       }
@@ -1752,8 +1755,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
 	  m_x_axis->setTitleFont(font);
+	else
+	  m_x_axis->setTitleFont(QApplication::font());
 
 	break;
       }
@@ -1801,8 +1807,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
 	  m_y_axis->setLabelsFont(font);
+	else
+	  m_y_axis->setLabelsFont(QApplication::font());
 
 	break;
       }
@@ -1858,8 +1867,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
 	  m_y_axis->setTitleFont(font);
+	else
+	  m_y_axis->setTitleFont(QApplication::font());
 
 	break;
       }
@@ -2003,7 +2015,10 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
+	  m_chart->setTitleFont(font);
+	else
 	  m_chart->setTitleFont(font);
 
 	break;
@@ -2069,8 +2084,11 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
       {
 	QFont font;
 
-	if(font.fromString(item->text()))
+	if(!item->text().trimmed().isEmpty() &&
+	   font.fromString(item->text().trimmed()))
 	  m_legend->setFont(font);
+	else
+	  m_legend->setFont(QApplication::font());
 
 	break;
       }
