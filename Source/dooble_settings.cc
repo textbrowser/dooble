@@ -773,6 +773,8 @@ void dooble_settings::prepare_fonts(void)
 	  if(list.at(i).isEmpty())
 	    list.replace(i, fonts.at(i));
 
+	  list.replace(i, list.at(i).trimmed());
+
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	  QWebEngineSettings::defaultSettings()->setFontFamily
 	    (families.at(i), list.at(i));
@@ -783,19 +785,46 @@ void dooble_settings::prepare_fonts(void)
 	}
     }
 
-    font.fromString(list.at(0));
+    if(list.at(0).isEmpty() ||
+       !font.fromString(list.at(0)))
+      font = QApplication::font();
+
     m_ui.web_font_cursive->setCurrentFont(font);
-    font.fromString(list.at(1));
+
+    if(list.at(1).isEmpty() ||
+       !font.fromString(list.at(1)))
+      font = QApplication::font();
+
     m_ui.web_font_fantasy->setCurrentFont(font);
-    font.fromString(list.at(2));
+
+    if(list.at(2).isEmpty() ||
+       !font.fromString(list.at(2)))
+      font = QApplication::font();
+
     m_ui.web_font_fixed->setCurrentFont(font);
-    font.fromString(list.at(3));
+
+    if(list.at(3).isEmpty() ||
+       !font.fromString(list.at(3)))
+      font = QApplication::font();
+
     m_ui.web_font_pictograph->setCurrentFont(font);
-    font.fromString(list.at(4));
+
+    if(list.at(4).isEmpty() ||
+       !font.fromString(list.at(4)))
+      font = QApplication::font();
+
     m_ui.web_font_sans_serif->setCurrentFont(font);
-    font.fromString(list.at(5));
+
+    if(list.at(5).isEmpty() ||
+       !font.fromString(list.at(5)))
+      font = QApplication::font();
+
     m_ui.web_font_serif->setCurrentFont(font);
-    font.fromString(list.at(6));
+
+    if(list.at(6).isEmpty() ||
+       !font.fromString(list.at(6)))
+      font = QApplication::font();
+
     m_ui.web_font_standard->setCurrentFont(font);
   }
 
