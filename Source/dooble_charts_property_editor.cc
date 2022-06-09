@@ -1253,8 +1253,11 @@ void dooble_charts_property_editor::slot_show_font_dialog
   QFont font;
   QFontDialog dialog(this);
 
-  if(font.fromString(item->text()))
+  if(!item->text().trimmed().isEmpty() &&
+     font.fromString(item->text().trimmed()))
     dialog.setCurrentFont(font);
+  else
+    dialog.setCurrentFont(QApplication::font());
 
   if(dialog.exec() == QDialog::Accepted)
     item->setText(dialog.selectedFont().toString());
