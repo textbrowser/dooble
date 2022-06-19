@@ -116,7 +116,10 @@ QList<QAction *> dooble_search_engines_popup::actions(void) const
 
 QUrl dooble_search_engines_popup::default_address_bar_engine_url(void) const
 {
-  return m_default_address_bar_engine_url;
+  if(m_default_address_bar_engine_url.isEmpty())
+    return m_predefined_urls.value("DuckDuckGo");
+  else
+    return m_default_address_bar_engine_url;
 }
 
 void dooble_search_engines_popup::add_search_engine
