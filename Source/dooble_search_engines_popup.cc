@@ -579,8 +579,14 @@ void dooble_search_engines_popup::slot_item_changed(QStandardItem *item)
 	update.prepare("UPDATE dooble_search_engines "
 		       "SET default_address_bar_engine = ? "
 		       "WHERE url_digest = ?");
-	update.addBindValue
-	  (dooble::s_cryptography->encrypt_then_mac("true").toBase64());
+
+	if(item->checkState() == Qt::Checked)
+	  update.addBindValue
+	    (dooble::s_cryptography->encrypt_then_mac("true").toBase64());
+	else
+	  update.addBindValue
+	    (dooble::s_cryptography->encrypt_then_mac("false").toBase64());
+
 	update.addBindValue
 	  (dooble::s_cryptography->hmac(item->data().toUrl().toEncoded()).
 	   toBase64());
