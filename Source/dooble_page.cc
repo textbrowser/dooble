@@ -2105,25 +2105,44 @@ void dooble_page::slot_load_finished(bool ok)
 
 void dooble_page::slot_load_page(void)
 {
-  auto url(QUrl(m_ui.address->text().trimmed()));
+  auto str(m_ui.address->text().trimmed());
+  auto url((QUrl(str))); // Special parentheses for compilers.
 
   if(dooble::s_search_engines_window && url.scheme().isEmpty())
     {
-      auto url(dooble::s_search_engines_window->
-	       default_address_bar_engine_url());
-
-      if(!url.isEmpty() && url.isValid())
+      if(str.contains(' ') || str.contains('\t'))
 	{
-	  url.setQuery
-	    (url.query().
-	     append(QString("\"%1\"").arg(m_ui.address->text().trimmed())));
-	  load(url);
-	  return;
-	}
-    }
-  else
-    url = QUrl::fromUserInput(m_ui.address->text().trimmed());
+	search_label:
 
+	  auto url
+	    (dooble::s_search_engines_window->default_address_bar_engine_url());
+
+	  if(!url.isEmpty() && url.isValid())
+	    {
+	      url.setQuery(url.query().append(QString("\"%1\"").arg(str)));
+	      load(url);
+	      return;
+	    }
+	  else // Prevent an endless loop.
+	    {
+	      load(QUrl::fromUserInput(str));
+	      return;
+	    }
+	}
+
+      auto index = str.lastIndexOf('.');
+
+      if(index < str.size() && index > -1)
+	if(str.at(index + 1).isLetterOrNumber())
+	  {
+	    url = QUrl::fromUserInput(str);
+	    goto done_label;
+	  }
+
+      goto search_label;
+    }
+
+ done_label:
   load(url);
 }
 
