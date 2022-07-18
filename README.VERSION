@@ -2,7 +2,7 @@ The versions must be current!
 
 DEBIAN/control
 Data/Info.plist
-Distributions/build_deb.bash
+Distributions/build_debian_amd64.bash
 Documentation/Dooble.odt
 Documentation/RELEASE-NOTES.html
 Source/dooble_version.h
