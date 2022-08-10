@@ -1,12 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,115,112,141"/>
-<area shape="rect" id="node2" href="$classdooble.html" title=" " alt="" coords="211,5,271,32"/>
-<area shape="rect" id="node3" href="$classdooble__about.html" title=" " alt="" coords="192,56,291,83"/>
-<area shape="rect" id="node4" href="$classdooble__certificate__exceptions.html" title=" " alt="" coords="179,107,303,149"/>
-<area shape="rect" id="node5" href="$classdooble__cookies__window.html" title=" " alt="" coords="160,173,323,200"/>
-<area shape="rect" id="node6" href="$classdooble__main__window.html" title=" " alt="" coords="168,224,315,251"/>
-<area shape="rect" id="node7" href="$classdooble__accepted__or__blocked__domains.html" title=" " alt="" coords="380,133,519,174"/>
-<area shape="rect" id="node8" href="$classdooble__downloads.html" title=" " alt="" coords="385,199,514,225"/>
-<area shape="rect" id="node9" href="$classdooble__history__window.html" title=" " alt="" coords="371,249,528,276"/>
-<area shape="rect" id="node10" href="$classdooble__settings.html" title=" " alt="" coords="393,300,506,327"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,115,121,141"/>
+<area shape="rect" id="node2" href="$classdooble.html" title=" " alt="" coords="226,5,293,32"/>
+<area shape="rect" id="node3" href="$classdooble__about.html" title=" " alt="" coords="204,56,315,83"/>
+<area shape="rect" id="node4" href="$classdooble__certificate__exceptions.html" title=" " alt="" coords="190,107,329,149"/>
+<area shape="rect" id="node5" href="$classdooble__cookies__window.html" title=" " alt="" coords="169,173,349,200"/>
+<area shape="rect" id="node6" href="$classdooble__main__window.html" title=" " alt="" coords="178,224,341,251"/>
+<area shape="rect" id="node7" href="$classdooble__accepted__or__blocked__domains.html" title=" " alt="" coords="409,133,561,174"/>
+<area shape="rect" id="node8" href="$classdooble__downloads.html" title=" " alt="" coords="413,199,556,225"/>
+<area shape="rect" id="node9" href="$classdooble__history__window.html" title=" " alt="" coords="397,249,572,276"/>
+<area shape="rect" id="node10" href="$classdooble__settings.html" title=" " alt="" coords="422,300,547,327"/>
 </map>
