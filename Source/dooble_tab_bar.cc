@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QActionGroup>
 #include <QWebEngineSettings>
 #include <QtMath>
 
