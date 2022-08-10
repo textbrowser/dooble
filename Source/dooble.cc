@@ -27,6 +27,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QPainter>
 #include <QPointer>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
