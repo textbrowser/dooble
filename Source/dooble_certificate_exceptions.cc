@@ -141,7 +141,7 @@ void dooble_certificate_exceptions::remove_exception(const QUrl &url)
 
   QList<int> rows;
 
-  for(auto item : list)
+  foreach(auto item, list)
     if(item)
       rows << item->row();
 

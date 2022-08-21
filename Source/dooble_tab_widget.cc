@@ -389,7 +389,7 @@ void dooble_tab_widget::slot_about_to_show_history_menu(void)
 	    last_n_actions(5 + static_cast<int> (dooble_page::
 						 MAXIMUM_HISTORY_ITEMS)));
 
-  for(auto i : list)
+  foreach(auto i, list)
     {
       connect(i,
 	      SIGNAL(triggered(void)),

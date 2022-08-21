@@ -683,7 +683,7 @@ void dooble_downloads::slot_open_download_page(void)
 
   auto list(QApplication::topLevelWidgets());
 
-  for(auto i : list)
+  foreach(auto i, list)
     if(qobject_cast<dooble *> (i) &&
        qobject_cast<dooble *> (i)->isVisible())
       {
@@ -839,7 +839,7 @@ void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 
 	  auto list(QApplication::topLevelWidgets());
 
-	  for(auto i : list)
+	  foreach(auto i, list)
 	    if(qobject_cast<dooble *> (i))
 	      {
 		auto d = qobject_cast<dooble *> (i);

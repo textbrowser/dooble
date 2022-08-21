@@ -329,7 +329,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 			Qt::MatchFixedString | Qt::MatchStartsWith,
 			1));
 
-  for(auto i : list)
+  foreach(auto i, list)
     {
       auto item = i ? m_model->item(i->row(), 0) : nullptr;
 

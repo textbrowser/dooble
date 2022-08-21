@@ -456,11 +456,11 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
 dooble_page::~dooble_page()
 {
-  for(const auto &view : m_last_javascript_popups)
+  foreach(const auto &view, m_last_javascript_popups)
     if(view && view->parent() == this)
       view->deleteLater();
 
-  for(auto shortcut : m_shortcuts)
+  foreach(auto shortcut, m_shortcuts)
     delete shortcut;
 }
 
@@ -1463,7 +1463,7 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   prepare_progress_label_position();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(const auto &view : m_last_javascript_popups)
+  foreach(const auto &view, m_last_javascript_popups)
     if(view && view->parent() == this)
       emit create_dialog(view);
 
@@ -1526,7 +1526,7 @@ void dooble_page::slot_close_javascript_popup_exception_frame(void)
   prepare_progress_label_position();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(const auto &view : m_last_javascript_popups)
+  foreach(const auto &view, m_last_javascript_popups)
     if(view && view->parent() == this)
       view->deleteLater();
 
@@ -2186,7 +2186,7 @@ void dooble_page::slot_load_started(void)
   emit iconChanged(QIcon());
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(const auto &view : m_last_javascript_popups)
+  foreach(const auto &view, m_last_javascript_popups)
     if(view && view->parent() == this)
       view->deleteLater();
 
@@ -2218,7 +2218,7 @@ void dooble_page::slot_only_now_allow_javascript_popup(void)
   prepare_progress_label_position();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(const auto &view : m_last_javascript_popups)
+  foreach(const auto &view, m_last_javascript_popups)
     if(view && view->parent() == this)
       emit create_dialog(view);
 

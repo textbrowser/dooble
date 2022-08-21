@@ -190,7 +190,7 @@ void dooble_history_window::discover_m_parent(void)
 
       QWidgetList list(QApplication::topLevelWidgets());
 
-      for(auto i : list)
+      foreach(auto i, list)
 	if(qobject_cast<dooble *> (i))
 	  {
 	    m_parent = i;

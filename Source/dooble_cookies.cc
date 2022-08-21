@@ -338,7 +338,7 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
 
 	query.exec("PRAGMA synchronous = OFF");
 
-	for(const auto &cookie : cookies)
+	foreach(const auto &cookie, cookies)
 	  {
 	    query.prepare
 	      ("DELETE FROM dooble_cookies WHERE identifier_digest = ?");
@@ -356,7 +356,7 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
 	query.exec();
 	query.exec("PRAGMA foreign_keys = ON");
 
-	for(const auto &domain : domains)
+	foreach(const auto &domain, domains)
 	  {
 	    query.prepare("DELETE FROM dooble_cookies_domains WHERE "
 			  "domain_digest = ?");

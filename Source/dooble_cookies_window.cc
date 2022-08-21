@@ -233,7 +233,7 @@ void dooble_cookies_window::delete_top_level_items
   QList<QNetworkCookie> cookies;
   QStringList domains;
 
-  for(auto item : list)
+  foreach(auto item, list)
     {
       if(!item)
 	continue;
@@ -587,7 +587,7 @@ void dooble_cookies_window::slot_delete_selected(void)
   QList<QNetworkCookie> cookies;
   QStringList domains;
 
-  for(auto item : list)
+  foreach(auto item, list)
     {
       if(!item)
 	continue;

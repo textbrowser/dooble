@@ -217,7 +217,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 
   m_model->clear();
 
-  for(auto item : list)
+  foreach(auto item, list)
     if(item)
       {
 	if(item->icon().isNull())
