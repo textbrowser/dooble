@@ -1,6 +1,7 @@
 The versions must be current!
 
 DEBIAN/control
+DEBIAN-NATIVE/control
 Data/Info.plist
 Distributions/build_debian_amd64.bash
 Documentation/Dooble.odt
