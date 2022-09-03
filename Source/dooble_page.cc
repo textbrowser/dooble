@@ -2108,7 +2108,8 @@ void dooble_page::slot_load_page(void)
   auto str(m_ui.address->text().trimmed());
   auto url((QUrl(str))); // Special parentheses for compilers.
 
-  if(dooble::s_search_engines_window && url.scheme().isEmpty())
+  if((!url.isValid() || url.scheme().isEmpty()) &&
+     dooble::s_search_engines_window)
     {
       if(str.contains(' ') || str.contains('\t'))
 	{
