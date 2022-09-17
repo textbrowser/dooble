@@ -370,7 +370,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-7</y>
+               <y>0</y>
                <width>642</width>
                <height>614</height>
               </rect>
@@ -925,7 +925,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-356</y>
+               <y>0</y>
                <width>642</width>
                <height>866</height>
               </rect>
@@ -1506,7 +1506,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-560</y>
+               <y>-415</y>
                <width>642</width>
                <height>2070</height>
               </rect>
@@ -1756,36 +1756,6 @@
                  </item>
                  <item>
                   <layout class="QGridLayout" name="gridLayout_5">
-                   <item row="0" column="2">
-                    <widget class="QLabel" name="label_40">
-                     <property name="text">
-                      <string>The default font size for regular text.</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="2">
-                    <widget class="QLabel" name="label_41">
-                     <property name="text">
-                      <string>The hard minimum font size.</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="2">
-                    <widget class="QLabel" name="label_39">
-                     <property name="text">
-                      <string>The default font size for fixed-pitch text.</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
                    <item row="1" column="1">
                     <widget class="QSpinBox" name="web_font_size_default_fixed">
                      <property name="minimum">
@@ -1796,32 +1766,8 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="0">
-                    <widget class="QLabel" name="label_36">
-                     <property name="text">
-                      <string>Minimum</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="label_34">
-                     <property name="text">
-                      <string>Default</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QSpinBox" name="web_font_size_default">
-                     <property name="minimum">
-                      <number>1</number>
-                     </property>
-                     <property name="value">
-                      <number>10</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="1">
-                    <widget class="QSpinBox" name="web_font_size_minimum_logical">
+                   <item row="2" column="1">
+                    <widget class="QSpinBox" name="web_font_size_minimum">
                      <property name="minimum">
                       <number>1</number>
                      </property>
@@ -1840,10 +1786,10 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="label_35">
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_36">
                      <property name="text">
-                      <string>Default Fixed</string>
+                      <string>Minimum</string>
                      </property>
                     </widget>
                    </item>
@@ -1854,8 +1800,8 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
-                    <widget class="QSpinBox" name="web_font_size_minimum">
+                   <item row="3" column="1">
+                    <widget class="QSpinBox" name="web_font_size_minimum_logical">
                      <property name="minimum">
                       <number>1</number>
                      </property>
@@ -1863,6 +1809,79 @@
                       <number>10</number>
                      </property>
                     </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QSpinBox" name="web_font_size_default">
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="label_35">
+                     <property name="text">
+                      <string>Default Fixed</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="2">
+                    <widget class="QLabel" name="label_39">
+                     <property name="text">
+                      <string>The default font size for fixed-pitch text.</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="2">
+                    <widget class="QLabel" name="label_41">
+                     <property name="text">
+                      <string>The hard minimum font size.</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="label_40">
+                     <property name="text">
+                      <string>The default font size for regular text.</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_34">
+                     <property name="text">
+                      <string>Default</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <spacer name="horizontalSpacer_19">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </item>
