@@ -71,6 +71,7 @@ void dooble_application::install_translator(void)
   if(dooble_settings::setting("language_index").toInt() == 1) // System
     {
       QString path("");
+      auto name(QLocale::system().name());
       auto ok = false;
       auto variable(qgetenv("DOOBLE_TRANSLATIONS_PATH").trimmed());
 
@@ -81,16 +82,10 @@ void dooble_application::install_translator(void)
 
       if(path.isEmpty())
 	ok = m_translator->load
-	  (QLocale(),
-	   "dooble_" + QLocale::system().name().mid(0, 2),
-	   QString(),
+	  ("dooble_" + name,
 	   QDir::currentPath() + QDir::separator() + "Translations");
       else
-	ok = m_translator->load
-	  (QLocale(),
-	   "dooble_" + QLocale::system().name().mid(0, 2),
-	   QString(),
-	   path);
+	ok = m_translator->load("dooble_" + name, path);
 
       if(ok)
 	installTranslator(m_translator);

@@ -255,12 +255,6 @@
             </item>
             <item>
              <widget class="QSpinBox" name="cache_size">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A value of zero will allow QWebEngine to control the size of the cache automatically. Private windows assume unlimited caches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -376,7 +370,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-104</y>
+               <y>-7</y>
                <width>642</width>
                <height>614</height>
               </rect>
@@ -853,12 +847,6 @@
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
              <widget class="QSpinBox" name="browsing_history">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set to zero to disable the browsing history. If browsing history is disabled, the History window will contain session-only entries.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -1084,12 +1072,6 @@
                    </item>
                    <item row="1" column="2">
                     <widget class="QSpinBox" name="iterations">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="minimum">
                       <number>15000</number>
                      </property>
@@ -1394,12 +1376,6 @@
                      <layout class="QGridLayout" name="gridLayout_3">
                       <item row="0" column="3">
                        <widget class="QSpinBox" name="proxy_port">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
                         <property name="maximum">
                          <number>65535</number>
                         </property>
@@ -1530,7 +1506,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1560</y>
+               <y>-560</y>
                <width>642</width>
                <height>2070</height>
               </rect>
@@ -1780,6 +1756,16 @@
                  </item>
                  <item>
                   <layout class="QGridLayout" name="gridLayout_5">
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="label_40">
+                     <property name="text">
+                      <string>The default font size for regular text.</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="2" column="2">
                     <widget class="QLabel" name="label_41">
                      <property name="text">
@@ -1790,24 +1776,42 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="2">
-                    <widget class="QLabel" name="label_42">
+                   <item row="1" column="2">
+                    <widget class="QLabel" name="label_39">
                      <property name="text">
-                      <string>The minimum logical font size that is applied when zooming out.</string>
+                      <string>The default font size for fixed-pitch text.</string>
                      </property>
                      <property name="wordWrap">
                       <bool>true</bool>
                      </property>
                     </widget>
                    </item>
+                   <item row="1" column="1">
+                    <widget class="QSpinBox" name="web_font_size_default_fixed">
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_36">
+                     <property name="text">
+                      <string>Minimum</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_34">
+                     <property name="text">
+                      <string>Default</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="0" column="1">
                     <widget class="QSpinBox" name="web_font_size_default">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="minimum">
                       <number>1</number>
                      </property>
@@ -1826,44 +1830,10 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0">
-                    <widget class="QLabel" name="label_37">
+                   <item row="3" column="2">
+                    <widget class="QLabel" name="label_42">
                      <property name="text">
-                      <string>Minimum Logical</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QSpinBox" name="web_font_size_default_fixed">
-                     <property name="minimum">
-                      <number>1</number>
-                     </property>
-                     <property name="value">
-                      <number>10</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="label_34">
-                     <property name="text">
-                      <string>Default</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="2">
-                    <widget class="QLabel" name="label_39">
-                     <property name="text">
-                      <string>The default font size for fixed-pitch text.</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="2">
-                    <widget class="QLabel" name="label_40">
-                     <property name="text">
-                      <string>The default font size for regular text.</string>
+                      <string>The minimum logical font size that is applied when zooming out.</string>
                      </property>
                      <property name="wordWrap">
                       <bool>true</bool>
@@ -1877,10 +1847,10 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="0">
-                    <widget class="QLabel" name="label_36">
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="label_37">
                      <property name="text">
-                      <string>Minimum</string>
+                      <string>Minimum Logical</string>
                      </property>
                     </widget>
                    </item>
@@ -1893,19 +1863,6 @@
                       <number>10</number>
                      </property>
                     </widget>
-                   </item>
-                   <item row="0" column="3">
-                    <spacer name="horizontalSpacer_19">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
                    </item>
                   </layout>
                  </item>
@@ -2143,12 +2100,6 @@
                 </item>
                 <item>
                  <widget class="QSpinBox" name="zoom">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
                   <property name="suffix">
                    <string>%</string>
                   </property>

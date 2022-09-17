@@ -334,12 +334,6 @@
           </item>
           <item>
            <widget class="QSpinBox" name="maximum_session_rejections">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Existing entries will not be affected if this value is changed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
