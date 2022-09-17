@@ -371,8 +371,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>614</height>
+               <width>357</width>
+               <height>618</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -926,7 +926,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
+               <width>617</width>
                <height>866</height>
               </rect>
              </property>
@@ -1506,7 +1506,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-415</y>
+               <y>-510</y>
                <width>642</width>
                <height>2070</height>
               </rect>
@@ -1855,6 +1855,12 @@
                    </item>
                    <item row="0" column="2">
                     <widget class="QLabel" name="label_40">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>The default font size for regular text.</string>
                      </property>
