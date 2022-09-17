@@ -83,7 +83,10 @@ void dooble_application::install_translator(void)
       m_translator = new QTranslator(this);
 
       if(m_translator->load("dooble_" + name, path))
-	installTranslator(m_translator);
+	{
+	  if(!installTranslator(m_translator))
+	    qDebug() << "Translator m_translator was not installed.";
+	}
       else
 	qDebug() << "Translation file"
 		 << "dooble_" + name + ".qm"
@@ -92,7 +95,10 @@ void dooble_application::install_translator(void)
       auto other = new QTranslator(this);
 
       if(other->load("qtbase_" + name, path))
-	installTranslator(other);
+	{
+	  if(!installTranslator(other))
+	    qDebug() << "Translator other was not installed.";
+	}
       else
 	qDebug() << "Translation file"
 		 << "qtbase_" + name + ".qm"
