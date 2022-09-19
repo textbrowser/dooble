@@ -63,6 +63,20 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QCheckBox" name="hour_24">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Setting is not retained for future sessions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget {color: white;}
+</string>
+     </property>
+     <property name="text">
+      <string>24-Hour</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources>

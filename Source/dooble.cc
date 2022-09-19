@@ -3369,10 +3369,18 @@ void dooble::slot_floating_digital_dialog_timeout(void)
   font.setPointSize(25);
   m_floating_digital_clock_ui.clock->repaint();
   m_floating_digital_clock_ui.clock->setFont(font);
-  m_floating_digital_clock_ui.clock->setText
-    (QString("%1%2").
-     arg(now.time().toString("hh:mm:ss A")).
-     arg(utc == ":utc" ? " UTC" : ""));
+
+  if(m_floating_digital_clock_ui.hour_24->isChecked())
+    m_floating_digital_clock_ui.clock->setText
+      (QString("%1%2").
+       arg(now.time().toString("hh:mm:ss")).
+       arg(utc == ":utc" ? " UTC" : ""));
+  else
+    m_floating_digital_clock_ui.clock->setText
+      (QString("%1%2").
+       arg(now.time().toString("hh:mm:ss A")).
+       arg(utc == ":utc" ? " UTC" : ""));
+
   m_floating_digital_clock_ui.clock->update();
   font = m_floating_digital_clock_ui.date->font();
   font.setPointSize(15);
@@ -4088,6 +4096,9 @@ void dooble::slot_show_floating_digital_clock(void)
 	(Qt::WindowStaysOnTopHint |
 	 m_floating_digital_clock_dialog->windowFlags());
       m_floating_digital_clock_ui.setupUi(m_floating_digital_clock_dialog);
+      new QShortcut(QKeySequence(tr("Ctrl+W")),
+		    m_floating_digital_clock_dialog,
+		    SLOT(close(void)));
     }
 
   m_floating_digital_clock_dialog->repaint();
