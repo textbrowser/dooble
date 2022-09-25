@@ -2108,7 +2108,10 @@ void dooble_page::slot_load_page(void)
   auto str(m_ui.address->text().trimmed());
   auto url((QUrl(str))); // Special parentheses for compilers.
 
-  if((!url.isValid() || url.scheme().isEmpty()) &&
+  if((!url.isValid() ||
+      str.contains(' ') ||
+      str.contains('\t') ||
+      url.scheme().isEmpty()) &&
      dooble::s_search_engines_window)
     {
       if(str.contains(' ') || str.contains('\t'))
@@ -2120,7 +2123,7 @@ void dooble_page::slot_load_page(void)
 
 	  if(!url.isEmpty() && url.isValid())
 	    {
-	      url.setQuery(url.query().append(QString("\"%1\"").arg(str)));
+	      url.setQuery(url.query().append(QString("%1").arg(str)));
 	      load(url);
 	      return;
 	    }
@@ -2137,6 +2140,10 @@ void dooble_page::slot_load_page(void)
 	if(str.at(index + 1).isLetterOrNumber())
 	  {
 	    url = QUrl::fromUserInput(str);
+
+	    if(!url.isValid() || url.scheme().isEmpty())
+	      goto search_label;
+
 	    goto done_label;
 	  }
 
