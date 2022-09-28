@@ -10,7 +10,7 @@ Dooble is the scientific browser.
 <li>Custom search engines.</li>
 <li>Custom style sheets.</li>
 <li>Documented.</li>
-<li>Domain restrictions.</li>
+<li>Domain restrictions (blocker).</li>
 <li>Favorites.</li>
 <li>Floating digital clock.</li>
 <li>Floating minute history window.</li>
@@ -19,7 +19,7 @@ Dooble is the scientific browser.
 <li>Great for older hardware!</li>
 <li>Many private windows.</li>
 <li>Multiple private instances, including downloads.</li>
-<li>Native graphing of data.</li>
+<li>Native graphing of data for scientific research.</li>
 <li>Original implementations of AES-256, Threefish-256.</li>
 <li>Portable.</li>
 <li>Qt 6.2 LTS!</li>
