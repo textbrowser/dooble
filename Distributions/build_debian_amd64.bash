@@ -11,6 +11,11 @@ if [ ! -x /usr/bin/fakeroot ]; then
     exit 1
 fi
 
+if [ ! -e dooble.pro ]; then
+    echo "Please issue $0 from the primary directory."
+    exit 1
+fi
+
 make distclean 2>/dev/null
 mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
