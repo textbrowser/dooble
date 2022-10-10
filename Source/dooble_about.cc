@@ -67,8 +67,11 @@ dooble_about::dooble_about(void):QMainWindow()
 	"Dooble 3-Clause BSD License</a>"));
 
   auto text
-    (tr("Architecture %1.<br>Qt version %2 (runtime %3).").
+    (tr("Architecture %1.<br>"
+	"Product: %2.<br>"
+	"Qt version %3 (runtime %4).").
      arg(DOOBLE_ARCHITECTURE_STR).
+     arg(QSysInfo::prettyProductName()).
      arg(QT_VERSION_STR).
      arg(qversion));
 
