@@ -26,14 +26,17 @@ then
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
 then
+    echo "Launching an official Dooble."
     export LD_LIBRARY_PATH=/opt/dooble/Lib
     export QT_PLUGIN_PATH=/opt/dooble/plugins
     cd /opt/dooble && exec ./Dooble "$@"
     exit $?
 elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
 then
+    echo "Launching an official Dooble."
     cd /usr/local/dooble && exec ./Dooble "$@"
     exit $?
 else
+    "Cannot find Dooble."
     exit 1
 fi
