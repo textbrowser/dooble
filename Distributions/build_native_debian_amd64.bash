@@ -19,9 +19,7 @@ fi
 make distclean 2>/dev/null
 mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
-mkdir -p ./opt/dooble/Lib
 mkdir -p ./opt/dooble/Translations
-chmod -x,g+w ./opt/dooble/Lib/*
 qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
@@ -34,7 +32,6 @@ cp -p ./Translations/*.qm ./opt/dooble/Translations/.
 cp -pr ./Charts ./opt/dooble/.
 cp -pr ./Data/*.txt ./opt/dooble/Data/.
 cp -pr ./Data/README ./opt/dooble/Data/.
-find ./opt/dooble/plugins -name '*.so' -exec chmod -x {} \;
 mkdir -p dooble-debian.d/opt
 mkdir -p dooble-debian.d/usr/bin
 mkdir -p dooble-debian.d/usr/share/applications
