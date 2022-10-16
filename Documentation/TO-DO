@@ -70,6 +70,7 @@ Completed Items
 - Full-screen.
 - Fusion alterations.
 - Fusion themes.
+- Generic Debian control file. Debian is never current.
 - Global Web plugin option.
 - Global address widget history model.
 - Gopher per-request sockets.
@@ -216,7 +217,6 @@ Unknown Items
 - Are containers empty? Remind if credentials exist.
 - Certificate information. Requires a WebEngine interface.
 - DTLS and Echo-DNS.
-- Generic Debian control file. Debian is never current.
 - HMAC or KMAC.
 - Include date stamps in cookie containers.
 - Multiple certificate exceptions.

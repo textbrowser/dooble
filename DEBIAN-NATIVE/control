@@ -1,4 +1,14 @@
 Architecture: amd64
+Depends: libqt5charts5 (>= 5.15.0),
+	 libqt5core5a (>= 5.15.0),
+	 libqt5gui5 (>= 5.15.0),
+	 libqt5network5 (>= 5.15.0),
+	 libqt5printsupport5 (>= 5.15.0),
+	 libqt5qml5 (>= 5.15.0),
+	 libqt5sql5 (>= 5.15.0),
+	 libqt5webenginecore5 (>= 5.15.0),
+	 libqt5widgets5 (>= 5.15.0),
+         libqt5webenginewidgets5 (>= 5.15.0)
 Maintainer: f83043e79dc03a0abfbcbc376879a97d66f2cacb@protonmail.ch
 Package: Dooble
 Priority: optional
