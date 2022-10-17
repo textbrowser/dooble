@@ -1,0 +1,5 @@
+# Qt 5.15.2, Windows 7!
+# Please note 14.16.27023 and adjust if necessary.
+
+> set PATH=%PATH%;%QTDIR%\bin;"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86"
+> nmake
