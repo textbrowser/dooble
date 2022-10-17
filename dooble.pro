@@ -658,8 +658,10 @@ OBJECTIVE_HEADERS += Source/Cocoainitializer.h
 OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
 }
 
+versionAtLeast(QT_VERSION, 6.2) {
 win32 {
 RC_FILE         = Icons/dooble.rc
+}
 }
 
 UI_HEADERS_DIR  = Source
