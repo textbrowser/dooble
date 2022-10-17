@@ -28,4 +28,4 @@ Dooble is the scientific browser.
 <li>Windows portable.</li>
 </ul>
 
-![alt text](https://github.com/textbrowser/dooble/blob/master/Images/chart_1.png)
+![alt text](https://github.com/textbrowser/dooble/blob/master/Images/dooble_1.png)
