@@ -1,4 +1,4 @@
-Dooble is the scientific browser.
+Dooble is a minimal, scientific, and stable Web browser.
 
 <ul>
 <li>A Web browser!</li>
