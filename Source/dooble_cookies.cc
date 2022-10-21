@@ -111,8 +111,8 @@ void dooble_cookies::slot_connect_cookie_added_signal(void)
 void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 {
   emit cookies_added
-    (QList<QNetworkCookie> ()
-     << cookie, QList<int> () << BlockedOrFavorite::NONE);
+    (QList<QNetworkCookie> () << cookie,
+     QList<int> () << BlockedOrFavorite::NONE);
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;

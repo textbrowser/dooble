@@ -437,7 +437,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
     {
       auto item = m_top_level_items.value(cookie.domain());
 
-      if(item && item->checkState(0) != Qt::Checked)
+      if(item && item->checkState(0) == Qt::Unchecked)
 	{
 	  m_top_level_items.remove(cookie.domain());
 	  delete m_ui.tree->takeTopLevelItem
@@ -459,7 +459,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
       m_child_items.remove(cookie.domain());
       item = m_top_level_items.value(cookie.domain());
 
-      if(item && item->checkState(0) != Qt::Checked)
+      if(item && item->checkState(0) == Qt::Unchecked)
 	{
 	  m_top_level_items.remove(cookie.domain());
 	  delete m_ui.tree->takeTopLevelItem
