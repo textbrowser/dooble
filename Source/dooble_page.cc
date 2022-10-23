@@ -2205,7 +2205,15 @@ void dooble_page::slot_load_started(void)
   if(url().host().isEmpty())
     m_progress_label->setText(tr("Waiting for page..."));
   else
-    m_progress_label->setText(tr("Waiting for %1...").arg(url().host()));
+    {
+      auto url_1(QUrl::fromUserInput(m_ui.address->text()));
+      auto url_2(url());
+
+      if(url_1 != url_2)
+	m_progress_label->setText(tr("Waiting for %1...").arg(url_1.host()));
+      else
+	m_progress_label->setText(tr("Waiting for %1...").arg(url_2.host()));
+    }
 
   m_progress_label->resize(QSize(m_progress_label->sizeHint().width() + 5,
 				 m_progress_label->sizeHint().height()));
