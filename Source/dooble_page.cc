@@ -2209,7 +2209,7 @@ void dooble_page::slot_load_started(void)
       auto url_1(QUrl::fromUserInput(m_ui.address->text()));
       auto url_2(url());
 
-      if(url_1 != url_2)
+      if(url_1.host() != url_2.host())
 	m_progress_label->setText(tr("Waiting for %1...").arg(url_1.host()));
       else
 	m_progress_label->setText(tr("Waiting for %1...").arg(url_2.host()));
