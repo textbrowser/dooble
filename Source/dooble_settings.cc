@@ -738,10 +738,10 @@ void dooble_settings::prepare_application_fonts(void)
 {
   QFont font;
 
-  if(font.fromString(m_ui.display_application_font->text().remove('&')))
-    dooble::s_application->setFont(font);
-  else
+  if(!font.fromString(m_ui.display_application_font->text().remove('&')))
     font = QApplication::font();
+
+  dooble::s_application->setFont(font);
 
   foreach(auto widget, QApplication::allWidgets())
     if(widget)
