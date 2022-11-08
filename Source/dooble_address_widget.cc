@@ -497,7 +497,19 @@ void dooble_address_widget::slot_load_finished(bool ok)
 void dooble_address_widget::slot_load_started(void)
 {
   if(m_view)
-    prepare_containers_for_url(m_view->url());
+    {
+      auto url1(QUrl::fromUserInput(text()));
+      auto url2(m_view->url());
+
+      /*
+      ** Prepare the containers for a future URL.
+      */
+
+      if(url1.host() == url2.host())
+	prepare_containers_for_url(m_view->url());
+      else
+	prepare_containers_for_url(url1);
+    }
 }
 
 void dooble_address_widget::slot_populate
