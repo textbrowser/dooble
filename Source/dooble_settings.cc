@@ -738,20 +738,17 @@ void dooble_settings::prepare_application_fonts(void)
 {
   QFont font;
 
-  if(font.fromString(m_ui.display_application_font->text()))
+  if(font.fromString(m_ui.display_application_font->text().remove('&')))
     dooble::s_application->setFont(font);
   else
     font = QApplication::font();
 
-  if(font.fromString(m_ui.display_application_font->text()))
-    {
-      foreach(auto widget, QApplication::allWidgets())
-	if(widget)
-	  {
-	    widget->setFont(font);
-	    widget->update();
-	  }
-    }
+  foreach(auto widget, QApplication::allWidgets())
+    if(widget)
+      {
+	widget->setFont(font);
+	widget->updateGeometry();
+      }
 }
 
 void dooble_settings::prepare_fonts(void)
@@ -764,7 +761,8 @@ void dooble_settings::prepare_fonts(void)
     (s_settings.value("display_application_font").toString().trimmed());
 
   if(m_ui.display_application_font->text().isEmpty())
-    m_ui.display_application_font->setText(QApplication::font().toString());
+    m_ui.display_application_font->setText
+      (QApplication::font().toString().trimmed());
 
   prepare_application_fonts();
 
@@ -3476,9 +3474,9 @@ void dooble_settings::slot_select_application_font(void)
 {
   QFont font;
   QFontDialog dialog(this);
-  auto string(m_ui.display_application_font->text().trimmed());
+  auto string(m_ui.display_application_font->text());
 
-  if(!string.isEmpty() && font.fromString(string.remove('#')))
+  if(!string.isEmpty() && font.fromString(string.remove('&')))
     dialog.setCurrentFont(font);
   else
     dialog.setCurrentFont(QApplication::font());
@@ -3486,7 +3484,8 @@ void dooble_settings::slot_select_application_font(void)
   if(dialog.exec() == QDialog::Accepted)
     {
       QApplication::processEvents();
-      m_ui.display_application_font->setText(dialog.selectedFont().toString());
+      m_ui.display_application_font->setText
+	(dialog.selectedFont().toString().trimmed());
     }
 }
 
