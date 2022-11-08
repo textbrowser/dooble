@@ -371,8 +371,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>357</width>
-               <height>618</height>
+               <width>642</width>
+               <height>656</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -385,6 +385,40 @@
                  <bool>true</bool>
                 </property>
                </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_21">
+                <item>
+                 <widget class="QLabel" name="label_47">
+                  <property name="text">
+                   <string>Application Font</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>home_url</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="display_application_font">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_22">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
               </item>
               <item>
                <widget class="QCheckBox" name="denote_private_widgets">
@@ -925,8 +959,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>617</width>
+               <y>-356</y>
+               <width>642</width>
                <height>866</height>
               </rect>
              </property>
@@ -2388,6 +2422,7 @@
   <tabstop>cache_type</tabstop>
   <tabstop>scrollArea_4</tabstop>
   <tabstop>allow_closing_of_single_tab</tabstop>
+  <tabstop>display_application_font</tabstop>
   <tabstop>denote_private_widgets</tabstop>
   <tabstop>home_url</tabstop>
   <tabstop>icon_set</tabstop>

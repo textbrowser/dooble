@@ -102,6 +102,7 @@ class dooble_settings: public dooble_main_window
   static QString s_http_user_agent;
   static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
+  void prepare_application_fonts(void);
   void prepare_fonts(void);
   void prepare_icons(void);
   void prepare_proxy(bool save);
@@ -135,6 +136,7 @@ class dooble_settings: public dooble_main_window
   void slot_reset_credentials(void);
   void slot_reset_user_agent(void);
   void slot_save_credentials(void);
+  void slot_select_application_font(void);
   void slot_web_engine_settings_item_changed(QTableWidgetItem *item);
 
  signals:

@@ -26,6 +26,7 @@
 */
 
 #include <QDir>
+#include <QFontDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QNetworkProxy>
@@ -96,6 +97,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
+  connect(m_ui.display_application_font,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_select_application_font(void)));
   connect(m_ui.history,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -729,11 +734,39 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
   save_javascript_block_popup_exception(url, true);
 }
 
+void dooble_settings::prepare_application_fonts(void)
+{
+  QFont font;
+
+  if(font.fromString(m_ui.display_application_font->text()))
+    dooble::s_application->setFont(font);
+  else
+    font = QApplication::font();
+
+  if(font.fromString(m_ui.display_application_font->text()))
+    {
+      foreach(auto widget, QApplication::allWidgets())
+	if(widget)
+	  {
+	    widget->setFont(font);
+	    widget->update();
+	  }
+    }
+}
+
 void dooble_settings::prepare_fonts(void)
 {
   /*
   ** Fonts
   */
+
+  m_ui.display_application_font->setText
+    (s_settings.value("display_application_font").toString().trimmed());
+
+  if(m_ui.display_application_font->text().isEmpty())
+    m_ui.display_application_font->setText(QApplication::font().toString());
+
+  prepare_application_fonts();
 
   {
     QFont font;
@@ -2298,6 +2331,8 @@ void dooble_settings::slot_apply(void)
   set_setting("center_child_windows", m_ui.center_child_windows->isChecked());
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("credentials_enabled", m_ui.credentials->isChecked());
+  set_setting
+    ("display_application_font", m_ui.display_application_font->text());
   set_setting("dns_prefetch", m_ui.dns_prefetch->isChecked());
   set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
@@ -2376,6 +2411,7 @@ void dooble_settings::slot_apply(void)
   set_setting("zoom", m_ui.zoom->value());
   set_setting
     ("zoom_frame_location_index", m_ui.zoom_frame_location->currentIndex());
+  prepare_application_fonts();
   prepare_icons();
   QApplication::restoreOverrideCursor();
   emit applied();
@@ -3434,6 +3470,24 @@ void dooble_settings::slot_save_credentials(void)
 	  SLOT(slot_interrupt(void)));
   m_pbkdf2_dialog->exec();
   QApplication::processEvents();
+}
+
+void dooble_settings::slot_select_application_font(void)
+{
+  QFont font;
+  QFontDialog dialog(this);
+  auto string(m_ui.display_application_font->text().trimmed());
+
+  if(!string.isEmpty() && font.fromString(string.remove('#')))
+    dialog.setCurrentFont(font);
+  else
+    dialog.setCurrentFont(QApplication::font());
+
+  if(dialog.exec() == QDialog::Accepted)
+    {
+      QApplication::processEvents();
+      m_ui.display_application_font->setText(dialog.selectedFont().toString());
+    }
 }
 
 void dooble_settings::slot_web_engine_settings_item_changed

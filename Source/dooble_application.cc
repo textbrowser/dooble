@@ -41,6 +41,10 @@ dooble_application::dooble_application(int &argc, char **argv):
 
   auto font(this->font());
 
+  if(!font.fromString(dooble_settings::
+		      setting("display_application_font").toString()))
+    font = QApplication::font();
+
   font.setStyleStrategy
     (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
   prepare_theme_colors();

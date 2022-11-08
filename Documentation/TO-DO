@@ -13,6 +13,7 @@ Completed Items
 - Allow temporary acceptance of blocked dialogs.
 - Animated Scrolling belongs in the Web section.
 - Apples and shortcuts.
+- Application font in Settings.
 - Application lock.
 - Auto-hide tab bar.
 - Blocked Domains. Show examples. Restrict input.
@@ -196,7 +197,6 @@ Remaining Items
 
 - Additional files are necessary in Debian distribution.
 - Allow custom JavaScript per URL.
-- Application font in Settings.
 - Argon2, per request.
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
