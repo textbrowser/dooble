@@ -196,7 +196,7 @@ Remaining Items
 
 - Additional files are necessary in Debian distribution.
 - Allow custom JavaScript per URL.
-- Application font!
+- Application font in Settings.
 - Argon2, per request.
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
