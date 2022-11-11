@@ -755,7 +755,7 @@
     <message>
         <location filename="../Source/dooble_about.cc" line="70"/>
         <source>Architecture %1.&lt;br&gt;Product: %2.&lt;br&gt;Qt version %3 (runtime %4).</source>
-        <translation>Architecture %1.&lt;br&gt;Produit : %2.&lt;br&gt;version de Qt %3 (temps d&apos;éxecution %4).</translation>
+        <translation>Architecture %1.&lt;br&gt;Produit : %2.&lt;br&gt;version de Qt %3 (version de Qt en cours d&apos;éxecution %4).</translation>
     </message>
     <message>
         <location filename="../Source/dooble_about.cc" line="80"/>
