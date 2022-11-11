@@ -35,6 +35,7 @@ dict_base_paths = af_ZA/af_ZA \
                   en/en_US \
                   en/en_ZA \
                   es/es_ANY \
+                  fr_FR/fr \
                   gd_GB/gd_GB \
                   gl/gl_ES \
                   gug/gug \
@@ -84,6 +85,7 @@ dict_base_paths = af_ZA/af_ZA \
                   en/en_US \
                   en/en_ZA \
                   es/es_ANY \
+                  fr_FR/fr \
                   et_EE/et_EE \
                   gd_GB/gd_GB \
                   gl/gl_ES \
@@ -140,6 +142,7 @@ dict_base_paths = af_ZA/af_ZA \
                   en/en_ZA \
                   es/es_ANY \
                   et_EE/et_EE \
+                  fr_FR/fr \
                   gd_GB/gd_GB \
                   gl/gl_ES \
                   gug/gug \
