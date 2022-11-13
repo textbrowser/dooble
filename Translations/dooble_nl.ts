@@ -480,7 +480,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="2009"/>
         <source>Page Floating &amp;Menu...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwwevend pagina&amp;menu…</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2037"/>
@@ -2391,12 +2391,12 @@
         <location filename="../UI/dooble_cookies_window.ui" line="27"/>
         <location filename="../UI/dooble_cookies_window.ui" line="34"/>
         <source>Block Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Domeinblokkade</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="44"/>
         <source>Add</source>
-        <translation type="unfinished">Toevoegen</translation>
+        <translation>Toevoegen</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="55"/>
@@ -2411,37 +2411,37 @@
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="77"/>
         <source>Legend</source>
-        <translation type="unfinished">Legenda</translation>
+        <translation>Legenda</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="204"/>
         <source>Blocked</source>
-        <translation type="unfinished">Geblokkeerd</translation>
+        <translation>Geblokkeerd</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="332"/>
         <source>Favorite</source>
-        <translation type="unfinished">Favoriet</translation>
+        <translation>Favoriet</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="361"/>
         <source>Collapse All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles inklappen</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="366"/>
         <source>Expand All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles uitklappen</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="374"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suppose the URL&apos;s host is abc.def.ghi.org. If this option is enabled and an entry such as .ghi.org (or ghi.org) exists and is checked, the cookie will be blocked. Otherwise, the cookie will be blocked if .abc.def.ghi.org (or abc.def.ghi.org) exists and is checked. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voorbeeld: de url-host is abc.def.ghi.org. Als deze optie is ingeschakeld en een item als .ghi.org (of ghi.org) bestaat en aangekruist is, dan wordt de cookie geblokkerd. Anders wordt de cookie alleen geblokkerd als .abc.def.ghi.org (of abc.def.ghi.org) bestaat en aangekruist is. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="377"/>
         <source>Block Sub-Domains</source>
-        <translation type="unfinished"></translation>
+        <translation>Subdomeinen blokkeren</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="427"/>
@@ -2562,24 +2562,24 @@
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="566"/>
         <source>Delete selected?</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectie verwijderen?</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="569"/>
         <location filename="../Source/dooble_cookies_window.cc" line="712"/>
         <location filename="../Source/dooble_cookies_window.cc" line="770"/>
         <source>Dooble: Confirmation</source>
-        <translation type="unfinished">Dooble - Bevestiging</translation>
+        <translation>Dooble - Bevestiging</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="709"/>
         <source>Delete shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Getoonde verwijderen?</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="767"/>
         <source>Delete unchecked?</source>
-        <translation type="unfinished"></translation>
+        <translation>Onaangekruiste verwijderen?</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="1011"/>
@@ -3294,7 +3294,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="1081"/>
         <source>Page Floating &amp;Menu...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwwevend pagina&amp;menu…</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="1085"/>
@@ -3814,12 +3814,12 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_search_engines_popup.ui" line="131"/>
         <source>Please set the default address-bar search engine by checking it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel de standaard zoekmachine in door een zoekmachine aan te kruisen.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_search_engines_popup.ui" line="141"/>
         <source>The search engines may be accessed via context menus on Web pages.</source>
-        <translation type="unfinished"></translation>
+        <translation>De zoekmachines kunnen worden opgeroepen middels het rechtermuisknopmenu op websites.</translation>
     </message>
     <message>
         <source>The search engines listed below may be accessed via context menus on pages.</source>
@@ -4028,7 +4028,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="25"/>
         <source>Location</source>
-        <translation type="unfinished">Locatie</translation>
+        <translation>Locatie</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="259"/>
@@ -4145,7 +4145,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="937"/>
         <source>Block Third-Party Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe cookies blokkeren</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="969"/>
@@ -4292,7 +4292,7 @@ keerde domeinen</translation>
         <location filename="../UI/dooble_settings.ui" line="1564"/>
         <location filename="../UI/dooble_settings.ui" line="1900"/>
         <source>Settings are saved immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>De instellingen worden automatisch opgeslagen.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1772"/>
@@ -4573,37 +4573,37 @@ keerde domeinen</translation>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2082"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Disable JavaScript after a page has completed loading (the page-loaded signal has been monitored) and re-enable it shortly after.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schakel JavaScript uit na het laden van een pagina en schakel het kort daarna weer in.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2085"/>
         <source>Temporarily Disable JavaScript</source>
-        <translation type="unfinished"></translation>
+        <translation>JavaScript tijdelijk uitschakelen</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2169"/>
         <source>WebEngine</source>
-        <translation type="unfinished"></translation>
+        <translation>WebEngine</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2175"/>
         <source>Settings are saved immediately. Please restart Dooble if changes are made.</source>
-        <translation type="unfinished"></translation>
+        <translation>De instellingen worden automatisch opgeslagen. Herstart Dooble na het wijzigen van de instellingen.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2207"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Instelling</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2212"/>
         <source>Translate Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewenste waarde</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2217"/>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2248"/>
@@ -4770,7 +4770,7 @@ keerde domeinen</translation>
     <message>
         <location filename="../Source/dooble_settings.cc" line="1112"/>
         <source>Not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet geïmplementeerd.</translation>
     </message>
     <message>
         <location filename="../Source/dooble_settings.cc" line="2029"/>
