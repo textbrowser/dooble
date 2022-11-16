@@ -194,7 +194,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 	  {
 	    if(s_model->item(i, 0)->icon().isNull())
 	      s_model->item(i, 0)->setIcon
-		(dooble_favicons::icon(s_model->item(i, 0)->text()));
+		(dooble_favicons::icon_from_host(s_model->item(i, 0)->text()));
 
 	    list << s_model->item(i, 0);
 	  }
@@ -221,7 +221,7 @@ void dooble_address_widget_completer::complete(const QString &text)
     if(item)
       {
 	if(item->icon().isNull())
-	  item->setIcon(dooble_favicons::icon(item->text()));
+	  item->setIcon(dooble_favicons::icon_from_host(item->text()));
 
 	m_model->setRowCount(m_model->rowCount() + 1);
 	m_model->setItem(m_model->rowCount() - 1, item->clone());
@@ -268,7 +268,7 @@ void dooble_address_widget_completer::set_item_icon(const QIcon &icon,
     if(list.at(0))
       {
 	if(icon.isNull())
-	  list.at(0)->setIcon(dooble_favicons::icon(url));
+	  list.at(0)->setIcon(dooble_favicons::icon_from_host(url));
 	else
 	  list.at(0)->setIcon(icon);
       }

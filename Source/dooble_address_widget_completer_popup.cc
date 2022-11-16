@@ -32,8 +32,9 @@ dooble_address_widget_completer_popup::dooble_address_widget_completer_popup
 {
   setAlternatingRowColors(false);
   setIconSize(QSize(16, 16));
-  setShowGrid(false);
   setMouseTracking(true);
+  setShowGrid(false);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
   setWordWrap(false);
 }

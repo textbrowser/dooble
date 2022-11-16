@@ -580,8 +580,9 @@ void dooble_aes256::key_expansion(void)
     }
 
   uint8_t temp[4];
+  auto iterations = m_Nb * (m_Nr + 1);
 
-  while(i < m_Nb * (m_Nr + 1))
+  while(i < iterations)
     {
       auto difference = i - 1;
 
