@@ -292,7 +292,7 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
   if(!label)
     {
       label = new QLabel(this);
-      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setAlignment(Qt::AlignCenter);
       label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
       m_tab_bar->setTabButton(index, side, nullptr);
       m_tab_bar->setTabButton(index, side, label);
@@ -313,7 +313,7 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
   if(!label)
     {
       label = new QLabel(this);
-      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setAlignment(Qt::AlignCenter);
       label->setFixedSize(QSize(16, 16));
       label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
       m_tab_bar->setTabButton(index, side, nullptr);
@@ -489,7 +489,7 @@ void dooble_tab_widget::slot_load_started(void)
   if(!label)
     {
       label = new QLabel(this);
-      label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      label->setAlignment(Qt::AlignCenter);
       m_tab_bar->setTabButton(index, side, nullptr);
       m_tab_bar->setTabButton(index, side, label);
     }
