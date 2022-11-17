@@ -313,16 +313,20 @@ int main(int argc, char *argv[])
 
   QElapsedTimer t;
   QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
+  auto splash_screen = dooble_settings::setting("splash_screen", true).toBool();
 
-  splash.setEnabled(false);
-  splash.show();
-  splash.showMessage
-    (QObject::tr("Initializing Dooble's random number generator."),
-     Qt::AlignHCenter | Qt::AlignBottom);
-  t.start();
+  if(splash_screen)
+    {
+      splash.setEnabled(false);
+      splash.show();
+      splash.showMessage
+	(QObject::tr("Initializing Dooble's random number generator."),
+	 Qt::AlignHCenter | Qt::AlignBottom);
+      t.start();
 
-  while(t.elapsed() < 500)
-    splash.repaint();
+      while(t.elapsed() < 500)
+	splash.repaint();
+    }
 
   dooble_random::initialize();
   dooble::s_application->processEvents();
@@ -335,17 +339,28 @@ int main(int argc, char *argv[])
   CocoaInitializer cocoa_initializer;
 #endif
   dooble::s_application->install_translator();
-  splash.showMessage
-    (QObject::tr("Purging temporary database entries."),
-     Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
-  dooble::s_application->processEvents();
+
+  if(splash_screen)
+    {
+      splash.showMessage
+	(QObject::tr("Purging temporary database entries."),
+	 Qt::AlignHCenter | Qt::AlignBottom);
+      splash.repaint();
+      dooble::s_application->processEvents();
+    }
+
   dooble_certificate_exceptions_menu_widget::purge_temporary();
   dooble_favicons::purge_temporary();
-  splash.showMessage
-    (QObject::tr("Preparing QWebEngine."), Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
-  dooble::s_application->processEvents();
+
+  if(splash_screen)
+    {
+      splash.showMessage
+	(QObject::tr("Preparing QWebEngine."),
+	 Qt::AlignHCenter | Qt::AlignBottom);
+      splash.repaint();
+      dooble::s_application->processEvents();
+    }
+
   QWebEngineProfile::defaultProfile()->setCachePath
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
@@ -399,10 +414,15 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
 #endif
 #endif
-  splash.showMessage(QObject::tr("Preparing Dooble objects."),
-		     Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
-  dooble::s_application->processEvents();
+
+  if(splash_screen)
+    {
+      splash.showMessage(QObject::tr("Preparing Dooble objects."),
+			 Qt::AlignHCenter | Qt::AlignBottom);
+      splash.repaint();
+      dooble::s_application->processEvents();
+    }
+
   dooble::s_settings = new dooble_settings();
   dooble::s_settings->set_settings_path(dooble_settings_path);
 
@@ -487,19 +507,24 @@ int main(int argc, char *argv[])
 		   SIGNAL(populated(void)),
 		   d,
 		   SLOT(slot_populated(void)));
-  splash.showMessage(QObject::tr("Populating Dooble containers."),
-		     Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
-  dooble::s_application->processEvents();
 
-  while(!d->initialized())
-    splash.repaint();
+  if(splash_screen)
+    {
+      splash.showMessage(QObject::tr("Populating Dooble containers."),
+			 Qt::AlignHCenter | Qt::AlignBottom);
+      splash.repaint();
+      dooble::s_application->processEvents();
 
-  splash.showMessage(QObject::tr("Opening Dooble."),
-		     Qt::AlignHCenter | Qt::AlignBottom);
-  splash.repaint();
-  dooble::s_application->processEvents();
-  splash.finish(d);
+      while(!d->initialized())
+	splash.repaint();
+
+      splash.showMessage(QObject::tr("Opening Dooble."),
+			 Qt::AlignHCenter | Qt::AlignBottom);
+      splash.repaint();
+      dooble::s_application->processEvents();
+      splash.finish(d);
+    }
+
   QTimer::singleShot(0, d, SLOT(show(void)));
 
   auto rc = dooble::s_application->exec();

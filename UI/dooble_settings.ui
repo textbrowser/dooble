@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-146</y>
                <width>642</width>
-               <height>656</height>
+               <height>684</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -681,6 +681,19 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="splash_screen">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display a fancy splash screen during launch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Splash Screen</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_19">
                 <item>
                  <widget class="QLabel" name="label_38">
@@ -959,8 +972,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-356</y>
-               <width>642</width>
+               <y>0</y>
+               <width>617</width>
                <height>866</height>
               </rect>
              </property>
@@ -1540,9 +1553,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-510</y>
-               <width>642</width>
-               <height>2070</height>
+               <y>0</y>
+               <width>486</width>
+               <height>2074</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2435,6 +2448,7 @@
   <tabstop>show_new_downloads</tabstop>
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>
+  <tabstop>splash_screen</tabstop>
   <tabstop>tab_position</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>zoom_frame_location</tabstop>

@@ -1449,6 +1449,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("show_hovered_links_tool_tips", false).toBool());
   m_ui.show_new_downloads->setChecked
     (s_settings.value("show_new_downloads", true).toBool());
+  m_ui.splash_screen->setChecked
+    (s_settings.value("splash_screen", true).toBool());
 
   auto tab_position
     (s_settings.value("tab_position").toString().trimmed());
@@ -2371,6 +2373,7 @@ void dooble_settings::slot_apply(void)
   set_setting("show_hovered_links_tool_tips",
 	      m_ui.show_hovered_links_tool_tips->isChecked());
   set_setting("show_new_downloads", m_ui.show_new_downloads->isChecked());
+  set_setting("splash_screen", m_ui.splash_screen->isChecked());
 
   switch(m_ui.tab_position->currentIndex())
     {
