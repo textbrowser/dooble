@@ -1165,6 +1165,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
       m_ui.tab->removeTab(index);
     }
 
+  m_ui.tab->setCurrentIndex(index);
   m_ui.tab->setTabsClosable(tabs_closable());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
@@ -3175,10 +3176,11 @@ void dooble::slot_close_tab(void)
     }
 
   auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
+  int index = -1;
 
   if(chart)
     {
-      m_ui.tab->removeTab(m_ui.tab->indexOf(chart));
+      m_ui.tab->removeTab(index = m_ui.tab->indexOf(chart));
       chart->deleteLater();
     }
   else
@@ -3187,13 +3189,15 @@ void dooble::slot_close_tab(void)
 
       if(page)
 	{
-	  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+	  m_ui.tab->removeTab(index = m_ui.tab->indexOf(page));
 	  page->deleteLater();
 	}
       else
-	m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
+	m_ui.tab->removeTab
+	  (index = m_ui.tab->indexOf(m_ui.tab->currentWidget()));
     }
 
+  m_ui.tab->setCurrentIndex(index);
   m_ui.tab->setTabsClosable(tabs_closable());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
@@ -3233,6 +3237,7 @@ void dooble::slot_decouple_tab(int index)
       auto main_window = new dooble_main_window();
 
       m_ui.tab->removeTab(index);
+      m_ui.tab->setCurrentIndex(index);
       m_ui.tab->setTabsClosable(tabs_closable());
       main_window->enable_control_w_shortcut(true);
       main_window->setAttribute(Qt::WA_DeleteOnClose);
@@ -3253,6 +3258,7 @@ void dooble::slot_decouple_tab(int index)
   if(main_window)
     {
       m_ui.tab->removeTab(index);
+      m_ui.tab->setCurrentIndex(index);
       m_ui.tab->setTabsClosable(tabs_closable());
       main_window->enable_control_w_shortcut(true);
       main_window->setParent(nullptr);
@@ -3832,6 +3838,8 @@ void dooble::slot_set_current_tab(void)
 
 void dooble::slot_settings_applied(void)
 {
+  auto index = m_ui.tab->currentIndex();
+
   m_menu->clear();
   m_standard_menu_actions.clear();
   m_ui.menu_bar->setVisible
@@ -3869,6 +3877,7 @@ void dooble::slot_settings_applied(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.tab->setCurrentIndex(index);
   m_ui.tab->setTabsClosable(tabs_closable());
   m_ui.tab->set_tab_position();
   prepare_control_w_shortcut();
@@ -4349,6 +4358,7 @@ void dooble::slot_tab_close_requested(int index)
     page->deleteLater();
 
   m_ui.tab->removeTab(index);
+  m_ui.tab->setCurrentIndex(index);
   m_ui.tab->setTabsClosable(tabs_closable());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
@@ -4690,7 +4700,10 @@ void dooble::slot_window_close_requested(void)
   if(!page)
     return;
 
+  auto index = m_ui.tab->indexOf(page);
+
   m_ui.tab->removeTab(m_ui.tab->indexOf(page));
+  m_ui.tab->setCurrentIndex(index);
   m_ui.tab->setTabsClosable(tabs_closable());
   page->deleteLater();
   prepare_control_w_shortcut();
