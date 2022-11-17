@@ -43,9 +43,11 @@ class dooble_gopher: public QWebEngineUrlSchemeHandler
 
  public:
   dooble_gopher(QObject *parent);
+  void set_web_engine_view(dooble_web_engine_view *web_engine_view);
 
  private:
   QPointer<QWebEngineUrlRequestJob> m_request;
+  QPointer<dooble_web_engine_view> m_web_engine_view;
   void requestStarted(QWebEngineUrlRequestJob *request);
 
  private slots:

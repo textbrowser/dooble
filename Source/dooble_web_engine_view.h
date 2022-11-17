@@ -66,6 +66,7 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_certificate_exception_accepted(const QUrl &url);
   void slot_create_dialog_requests(void);
   void slot_load_progress(int progress);
+  void slot_load_started(void);
   void slot_open_link_in_current_page(void);
   void slot_open_link_in_new_private_window(void);
   void slot_open_link_in_new_tab(void);

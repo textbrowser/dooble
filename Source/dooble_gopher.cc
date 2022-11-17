@@ -45,9 +45,7 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
   m_request = request;
 
   auto gopher_implementation = new dooble_gopher_implementation
-    (m_request->requestUrl(),
-     qobject_cast<dooble_web_engine_view *> (parent()),
-     m_request);
+    (m_request->requestUrl(), m_web_engine_view, m_request);
 
   connect(gopher_implementation,
 	  SIGNAL(error(QWebEngineUrlRequestJob::Error)),
@@ -57,6 +55,11 @@ void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 	  SIGNAL(finished(const QByteArray &, bool, bool)),
 	  this,
 	  SLOT(slot_finished(const QByteArray &, bool, bool)));
+}
+
+void dooble_gopher::set_web_engine_view(dooble_web_engine_view *web_engine_view)
+{
+  m_web_engine_view = web_engine_view;
 }
 
 void dooble_gopher::slot_error(QWebEngineUrlRequestJob::Error error)

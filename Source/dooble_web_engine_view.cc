@@ -44,6 +44,7 @@
 dooble_web_engine_view::dooble_web_engine_view
 (QWebEngineProfile *web_engine_profile, QWidget *parent):QWebEngineView(parent)
 {
+  dooble::s_gopher->set_web_engine_view(this);
   m_dialog_requests_timer.setInterval(100);
   m_dialog_requests_timer.setSingleShot(true);
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
@@ -88,6 +89,10 @@ dooble_web_engine_view::dooble_web_engine_view
 	  SIGNAL(loadProgress(int)),
 	  this,
 	  SLOT(slot_load_progress(int)));
+  connect(this,
+	  SIGNAL(loadStarted(void)),
+	  this,
+	  SLOT(slot_load_started(void)));
 
   if(QWebEngineProfile::defaultProfile() != m_page->profile())
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -554,6 +559,11 @@ void dooble_web_engine_view::slot_load_progress(int progress)
 {
   if(progress == 100)
     emit loadFinished(true);
+}
+
+void dooble_web_engine_view::slot_load_started(void)
+{
+  dooble::s_gopher->set_web_engine_view(this);
 }
 
 void dooble_web_engine_view::slot_open_link_in_current_page(void)
