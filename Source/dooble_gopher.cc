@@ -205,13 +205,16 @@ void dooble_gopher_implementation::slot_connected(void)
     }
 
   m_output = output;
-  m_web_engine_view->page()->runJavaScript
-    ("if(document.getElementById(\"input_value\") != null)"
-     "document.getElementById(\"input_value\").value",
-     [this] (const QVariant &result)
-     {
-       m_search = result.toString();
-     });
+
+  if(m_web_engine_view)
+    m_web_engine_view->page()->runJavaScript
+      ("if(document.getElementById(\"input_value\") != null)"
+       "document.getElementById(\"input_value\").value",
+       [this] (const QVariant &result)
+       {
+	 m_search = result.toString();
+       });
+
   m_write_timer.start(500);
 }
 

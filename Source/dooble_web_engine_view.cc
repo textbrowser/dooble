@@ -103,8 +103,7 @@ dooble_web_engine_view::dooble_web_engine_view
 #endif
 
   if(!m_page->profile()->urlSchemeHandler("gopher"))
-    m_page->profile()->installUrlSchemeHandler
-      ("gopher", new dooble_gopher(this));
+    m_page->profile()->installUrlSchemeHandler("gopher", dooble::s_gopher);
 
   setPage(m_page);
 }

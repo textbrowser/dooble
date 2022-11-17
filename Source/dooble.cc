@@ -50,6 +50,7 @@
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_favorites_popup.h"
+#include "dooble_gopher.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_hmac.h"
@@ -81,6 +82,7 @@ QPointer<dooble_cookies_window> dooble::s_cookies_window = nullptr;
 QPointer<dooble_cryptography> dooble::s_cryptography = nullptr;
 QPointer<dooble_downloads> dooble::s_downloads = nullptr;
 QPointer<dooble_favorites_popup> dooble::s_favorites_window = nullptr;
+QPointer<dooble_gopher> dooble::s_gopher = nullptr;
 QPointer<dooble_history_window> dooble::s_history_popup = nullptr;
 QPointer<dooble_history_window> dooble::s_history_window = nullptr;
 QPointer<dooble_search_engines_popup> dooble::s_search_engines_window = nullptr;
@@ -902,6 +904,9 @@ void dooble::initialize_static_members(void)
 	      s_favorites_window,
 	      SLOT(slot_favorites_sorted(void)));
     }
+
+  if(!s_gopher)
+    s_gopher = new dooble_gopher(nullptr);
 
   if(!s_history)
     {

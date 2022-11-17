@@ -54,6 +54,7 @@ class dooble_cookies_window;
 class dooble_cryptography;
 class dooble_downloads;
 class dooble_favorites_popup;
+class dooble_gopher;
 class dooble_history;
 class dooble_history_window;
 class dooble_page;
@@ -95,6 +96,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_cryptography> s_cryptography;
   static QPointer<dooble_downloads> s_downloads;
   static QPointer<dooble_favorites_popup> s_favorites_window;
+  static QPointer<dooble_gopher> s_gopher;
   static QPointer<dooble_history> s_history;
   static QPointer<dooble_history_window> s_history_popup;
   static QPointer<dooble_history_window> s_history_window;
