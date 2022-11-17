@@ -343,6 +343,13 @@ void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 
 void dooble_tab_widget::set_tab_position(void)
 {
+  if(!dooble_settings::setting("show_left_corner_widget").toBool())
+    {
+      m_left_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+      return;
+    }
+
   auto tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
@@ -513,6 +520,12 @@ void dooble_tab_widget::slot_load_started(void)
 
 void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
+  if(!dooble_settings::setting("show_left_corner_widget").toBool())
+    {
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+      return;
+    }
+
   auto tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 

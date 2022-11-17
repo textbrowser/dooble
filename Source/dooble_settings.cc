@@ -283,7 +283,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["pin_history_window"] = true;
   s_settings["pin_settings_window"] = true;
   s_settings["save_geometry"] = true;
+  s_settings["show_hovered_links_tool_tips"] = false;
+  s_settings["show_left_corner_widget"] = true;
   s_settings["show_new_downloads"] = true;
+  s_settings["splash_screen"] = true;
   s_settings["status_bar_visible"] = true;
   s_settings["tab_position"] = "north";
   s_settings["temporarily_disable_javascript"] = false;
@@ -1447,6 +1450,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("save_geometry", true).toBool());
   m_ui.show_hovered_links_tool_tips->setChecked
     (s_settings.value("show_hovered_links_tool_tips", false).toBool());
+  m_ui.show_left_corner_widget->setChecked
+    (s_settings.value("show_left_corner_widget", true).toBool());
   m_ui.show_new_downloads->setChecked
     (s_settings.value("show_new_downloads", true).toBool());
   m_ui.splash_screen->setChecked
@@ -2372,6 +2377,8 @@ void dooble_settings::slot_apply(void)
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("show_hovered_links_tool_tips",
 	      m_ui.show_hovered_links_tool_tips->isChecked());
+  set_setting("show_left_corner_widget",
+	      m_ui.show_left_corner_widget->isChecked());
   set_setting("show_new_downloads", m_ui.show_new_downloads->isChecked());
   set_setting("splash_screen", m_ui.splash_screen->isChecked());
 

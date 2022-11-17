@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-146</y>
+               <y>-174</y>
                <width>642</width>
-               <height>684</height>
+               <height>712</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -648,6 +648,16 @@
                   </widget>
                  </item>
                 </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="show_left_corner_widget">
+                <property name="text">
+                 <string>Show Left-Corner Widget</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -2445,6 +2455,7 @@
   <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
+  <tabstop>show_left_corner_widget</tabstop>
   <tabstop>show_new_downloads</tabstop>
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>

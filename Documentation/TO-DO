@@ -211,6 +211,7 @@ Remaining Items
 - Prevent SQL query text overflow.
 - Shortcuts browser.
 - South tab and Mac. Qt-ism?
+- Tab icons are incorrect for east and west.
 - Translation browser.
 
 Unknown Items
