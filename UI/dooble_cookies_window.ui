@@ -352,23 +352,6 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
-       <widget class="QComboBox" name="collapse">
-        <property name="sizeAdjustPolicy">
-         <enum>QComboBox::AdjustToContents</enum>
-        </property>
-        <item>
-         <property name="text">
-          <string>Collapse All</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Expand All</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
        <widget class="QCheckBox" name="block_subdomains">
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suppose the URL's host is abc.def.ghi.org. If this option is enabled and an entry such as .ghi.org (or ghi.org) exists and is checked, the cookie will be blocked. Otherwise, the cookie will be blocked if .abc.def.ghi.org (or abc.def.ghi.org) exists and is checked. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -419,6 +402,9 @@
       <property name="animated">
        <bool>true</bool>
       </property>
+      <attribute name="headerMinimumSectionSize">
+       <number>150</number>
+      </attribute>
       <attribute name="headerDefaultSectionSize">
        <number>200</number>
       </attribute>
@@ -1062,7 +1048,6 @@
   <tabstop>domain_filter</tabstop>
   <tabstop>blocked</tabstop>
   <tabstop>favorite</tabstop>
-  <tabstop>collapse</tabstop>
   <tabstop>block_subdomains</tabstop>
   <tabstop>tree</tabstop>
   <tabstop>name</tabstop>

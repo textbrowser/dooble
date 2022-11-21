@@ -42,11 +42,23 @@
 dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QMainWindow(parent)
 {
+  m_ui.setupUi(this);
+  m_collapse = new QToolButton(m_ui.tree);
+
+  auto font(m_collapse->font());
+
+  font.setStyleHint(QFont::Courier);
+  m_collapse->resize(25, 25);
+  m_collapse->setCheckable(true);
+  m_collapse->setFont(font);
+  m_collapse->setStyleSheet("QToolButton {border: none;}"
+			    "QToolButton::menu-button {border: none;}");
+  m_collapse->setText(tr("+"));
+  m_collapse->setToolTip(tr("Collapse / Expand"));
   m_domain_filter_timer.setInterval(750);
   m_domain_filter_timer.setSingleShot(true);
   m_is_private = is_private;
   m_purge_domains_timer.setInterval(30000);
-  m_ui.setupUi(this);
   m_ui.block_subdomains->setChecked
     (dooble_settings::setting("cookies_block_subdomains").toBool());
   m_ui.blocked->setCheckState(Qt::Checked);
@@ -63,6 +75,9 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 
   m_ui.toggle_shown->setProperty("state", true);
   m_ui.tool_bar->addWidget(m_ui.periodically_purge);
+  m_ui.tree->header()->setDefaultAlignment(Qt::AlignCenter);
+  m_ui.tree->header()->setMinimumHeight(30);
+  m_ui.tree->setMinimumWidth(200);
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
 
@@ -78,6 +93,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
     (tr("<html>Private cookies exist within "
 	"the scope of this window's parent Dooble window. Neither "
 	"window geometry nor window state will be retained.</html>"));
+  m_collapse->move(5, (m_ui.tree->header()->size().height() - 25) / 2 + 2);
   statusBar()->addPermanentWidget(label);
 
   if(dooble_settings::setting("denote_private_widgets").toBool())
@@ -101,6 +117,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  connect(m_collapse,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_collapse_all(void)));
   connect(m_ui.add,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -113,10 +133,6 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(toggled(bool)),
 	  this,
 	  SLOT(slot_block_subdomains(bool)));
-  connect(m_ui.collapse,
-	  SIGNAL(activated(int)),
-	  this,
-	  SLOT(slot_collapse_all(int)));
   connect(m_ui.delete_selected,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -414,17 +430,20 @@ void dooble_cookies_window::slot_block_subdomains(bool state)
   dooble_settings::set_setting("cookies_block_subdomains", state);
 }
 
-void dooble_cookies_window::slot_collapse_all(int index)
+void dooble_cookies_window::slot_collapse_all(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_ui.collapse->blockSignals(true);
-  m_ui.collapse->setCurrentIndex(0);
-  m_ui.collapse->blockSignals(false);
 
-  if(index == 0)
-    m_ui.tree->collapseAll();
+  if(m_collapse->isChecked())
+    {
+      m_collapse->setText(tr("-"));
+      m_ui.tree->expandAll();
+    }
   else
-    m_ui.tree->expandAll();
+    {
+      m_collapse->setText(tr("+"));
+      m_ui.tree->collapseAll();
+    }
 
   QApplication::restoreOverrideCursor();
 }

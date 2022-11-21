@@ -66,6 +66,7 @@ class dooble_cookies_window: public QMainWindow
   QPointer<dooble_cookies> m_cookies;
   QTimer m_domain_filter_timer;
   QTimer m_purge_domains_timer;
+  QToolButton *m_collapse;
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
   void delete_top_level_items(const QList<QTreeWidgetItem *> &list);
@@ -74,7 +75,7 @@ class dooble_cookies_window: public QMainWindow
  private slots:
   void slot_add_blocked_domain(void);
   void slot_block_subdomains(bool state);
-  void slot_collapse_all(int index);
+  void slot_collapse_all(void);
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_cookies_added(const QList<QNetworkCookie> &cookies,
 			  const QList<int> &is_blocked_or_favorite);
