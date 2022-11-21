@@ -926,6 +926,20 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 
   if(m_tree)
     {
+      m_collapse = new QToolButton(tree);
+
+      auto font(m_collapse->font());
+
+      font.setStyleHint(QFont::Courier);
+      m_collapse->resize(25, 25);
+      m_collapse->setCheckable(true);
+      m_collapse->setChecked(true);
+      m_collapse->setFont(font);
+      m_collapse->setStyleSheet("QToolButton {border: none;}"
+				"QToolButton::menu-button {border: none;}");
+      m_collapse->setText(tr("-"));
+      m_collapse->setToolTip(tr("Collapse / Expand"));
+
       auto item_delegate = m_tree->itemDelegate();
 
       if(item_delegate)
@@ -952,8 +966,18 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	 this,
 	 SLOT(slot_show_font_dialog(const dooble_charts::Properties)),
 	 Qt::QueuedConnection);
+      connect(m_collapse,
+	      SIGNAL(clicked(void)),
+	      this,
+	      SLOT(slot_collapse_all(void)));
+      m_tree->header()->setDefaultAlignment(Qt::AlignCenter);
+      m_tree->header()->setMinimumHeight(30);
       m_tree->setItemDelegate(item_delegate);
+      m_tree->setMinimumWidth(200);
+      m_collapse->move(5, (m_tree->header()->size().height() - 25) / 2 + 2);
     }
+  else
+    m_collapse = nullptr;
 }
 
 dooble_charts_property_editor::~dooble_charts_property_editor()
@@ -1179,6 +1203,27 @@ void dooble_charts_property_editor::set_property
       item->setText(value.toString());
       m_model->setData(item->index(), value);
     }
+}
+
+void dooble_charts_property_editor::slot_collapse_all(void)
+{
+  if(!m_collapse || !m_tree)
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  if(m_collapse->isChecked())
+    {
+      m_collapse->setText(tr("-"));
+      m_tree->expandAll();
+    }
+  else
+    {
+      m_collapse->setText(tr("+"));
+      m_tree->collapseAll();
+    }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_charts_property_editor::slot_show_color_dialog

@@ -177,6 +177,9 @@
          <property name="verticalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
+         <attribute name="headerMinimumSectionSize">
+          <number>175</number>
+         </attribute>
         </widget>
        </item>
       </layout>
