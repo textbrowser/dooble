@@ -970,6 +970,10 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	      SIGNAL(clicked(void)),
 	      this,
 	      SLOT(slot_collapse_all(void)));
+      connect(m_tree->horizontalScrollBar(),
+	      SIGNAL(valueChanged(int)),
+	      this,
+	      SLOT(slot_horizontal_scroll_bar_value_changed(int)));
       m_tree->header()->setDefaultAlignment(Qt::AlignCenter);
       m_tree->header()->setMinimumHeight(30);
       m_tree->setItemDelegate(item_delegate);
@@ -1224,6 +1228,13 @@ void dooble_charts_property_editor::slot_collapse_all(void)
     }
 
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_charts_property_editor::slot_horizontal_scroll_bar_value_changed
+(int value)
+{
+  if(m_collapse)
+    m_collapse->setVisible(m_collapse->rect().right() > value);
 }
 
 void dooble_charts_property_editor::slot_show_color_dialog

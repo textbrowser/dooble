@@ -109,6 +109,7 @@ class dooble_charts_property_editor: public QWidget
 
  private slots:
   void slot_collapse_all(void);
+  void slot_horizontal_scroll_bar_value_changed(int value);
   void slot_show_color_dialog(const dooble_charts::Properties property);
   void slot_show_file_dialog
     (QPushButton *push_button, const dooble_charts::Properties property);
