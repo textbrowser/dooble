@@ -433,24 +433,6 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   slot_password_changed();
 }
 
-QKeySequence dooble_settings::main_menu_bar_visible_shortcut(void)
-{
-  auto index = setting("main_menu_bar_visible_shortcut_index").toInt();
-
-  switch(index)
-    {
-    case 0:
-      {
-	return QKeySequence(Qt::Key_Alt);
-      }
-    case 1:
-    default:
-      {
-	return QKeySequence(Qt::Key_F10);
-      }
-    }
-}
-
 QString dooble_settings::cookie_policy_string(int index)
 {
   if(index == 0)
@@ -641,6 +623,24 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 bool dooble_settings::site_has_javascript_block_popup_exception(const QUrl &url)
 {
   return s_javascript_block_popup_exceptions.value(url, 0) == 1;
+}
+
+int dooble_settings::main_menu_bar_visible_key(void)
+{
+  auto index = setting("main_menu_bar_visible_shortcut_index").toInt();
+
+  switch(index)
+    {
+    case 0:
+      {
+	return Qt::Key_Alt;
+      }
+    case 1:
+    default:
+      {
+	return Qt::Key_F10;
+      }
+    }
 }
 
 int dooble_settings::site_feature_permission

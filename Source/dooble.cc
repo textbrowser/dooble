@@ -977,6 +977,9 @@ void dooble::initialize_static_members(void)
 
 void dooble::keyPressEvent(QKeyEvent *event)
 {
+  if(dooble_settings::main_menu_bar_visible_key() == event->key())
+    slot_show_main_menu();
+
   QMainWindow::keyPressEvent(event);
 }
 
@@ -1733,9 +1736,6 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+W")),
 				   this,
 				   SLOT(slot_close_tab(void)));
-      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F10),
-				   this,
-				   SLOT(slot_show_main_menu(void)));
       m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F11),
 				   this,
 				   SLOT(slot_show_full_screen(void)));

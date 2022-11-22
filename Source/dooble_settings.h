@@ -56,7 +56,6 @@ class dooble_settings: public dooble_main_window
     };
 
   dooble_settings(void);
-  static QKeySequence main_menu_bar_visible_shortcut(void);
   static QString cookie_policy_string(int index);
   static QString use_material_icons(void);
   static QString zoom_frame_location_string(int index);
@@ -68,6 +67,7 @@ class dooble_settings: public dooble_main_window
   static bool has_dooble_credentials_temporary(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
+  static int main_menu_bar_visible_key(void);
   static int site_feature_permission(const QUrl &url,
 				     QWebEnginePage::Feature feature);
   static void prepare_web_engine_environment_variables(void);
