@@ -42,38 +42,47 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
   auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
   m_favorite = new QToolButton(this);
+  m_favorite->setAutoRaise(true);
   m_favorite->setCursor(Qt::ArrowCursor);
   m_favorite->setEnabled(false);
   m_favorite->setIconSize(QSize(18, 18));
+#ifdef Q_OS_MACOS
   m_favorite->setStyleSheet
     ("QToolButton {"
      "border: none;"
      "padding-bottom: 0px;"
      "padding-top: 0px;"
      "}");
+#endif
   m_favorite->setToolTip(tr("Empty or invalid URL."));
   m_completer = new dooble_address_widget_completer(this);
   m_information = new QToolButton(this);
+  m_information->setAutoRaise(true);
   m_information->setCursor(Qt::ArrowCursor);
   m_information->setEnabled(false);
   m_information->setIconSize(QSize(18, 18));
+#ifdef Q_OS_MACOS
   m_information->setStyleSheet
     ("QToolButton {"
      "border: none;"
      "padding-bottom: 0px;"
      "padding-top: 0px;"
      "}");
+#endif
   m_information->setToolTip(tr("Site Information (Cookies, etc.)"));
   m_menu = new QMenu(this);
   m_pull_down = new QToolButton(this);
+  m_pull_down->setAutoRaise(true);
   m_pull_down->setCursor(Qt::ArrowCursor);
   m_pull_down->setIconSize(QSize(18, 18));
+#ifdef Q_OS_MACOS
   m_pull_down->setStyleSheet
     ("QToolButton {"
      "border: none;"
      "padding-bottom: 0px;"
      "padding-top: 0px;"
      "}");
+#endif
   m_pull_down->setToolTip(tr("Show History"));
   m_view = nullptr;
   connect(dooble::s_application,
