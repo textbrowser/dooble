@@ -454,6 +454,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_progress_label = new QLabel(m_ui.frame);
   m_progress_label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   m_progress_label->setIndent(5);
+  m_progress_label->setMinimumHeight
+    (10 + m_progress_label->sizeHint().height());
   m_progress_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   m_progress_label->setStyleSheet("QLabel {background-color: #e0e0e0;}");
   m_progress_label->setVisible(false);
