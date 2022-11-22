@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-174</y>
+               <y>0</y>
                <width>642</width>
-               <height>712</height>
+               <height>724</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -586,17 +586,54 @@
                </layout>
               </item>
               <item>
-               <widget class="QCheckBox" name="main_menu_bar_visible">
-                <property name="toolTip">
-                 <string>If hidden, show via F10.</string>
-                </property>
-                <property name="text">
-                 <string>Main Menu Bar Visible</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
+               <layout class="QHBoxLayout" name="horizontalLayout_22">
+                <item>
+                 <widget class="QCheckBox" name="main_menu_bar_visible">
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If hidden, show via the configured shortcut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="text">
+                   <string>Main Menu Bar Visible</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="main_menu_bar_visible_shortcut">
+                  <property name="currentIndex">
+                   <number>0</number>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Alt</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>F10</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_23">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
               </item>
               <item>
                <widget class="QGroupBox" name="groupBox">
@@ -2451,6 +2488,7 @@
   <tabstop>icon_set</tabstop>
   <tabstop>language</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
+  <tabstop>main_menu_bar_visible_shortcut</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>
   <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>

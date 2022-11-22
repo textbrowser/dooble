@@ -278,6 +278,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["language_index"] = 0;
   s_settings["local_storage"] = true;
   s_settings["main_menu_bar_visible"] = true;
+  s_settings["main_menu_bar_visible_shortcut_index"] = 1; // F10
   s_settings["pin_accepted_or_blocked_window"] = true;
   s_settings["pin_downloads_window"] = true;
   s_settings["pin_history_window"] = true;
@@ -430,6 +431,24 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   restore(true);
   prepare_icons();
   slot_password_changed();
+}
+
+QKeySequence dooble_settings::main_menu_bar_visible_shortcut(void)
+{
+  auto index = setting("main_menu_bar_visible_shortcut_index").toInt();
+
+  switch(index)
+    {
+    case 0:
+      {
+	return QKeySequence(Qt::Key_Alt);
+      }
+    case 1:
+    default:
+      {
+	return QKeySequence(Qt::Key_F10);
+      }
+    }
 }
 
 QString dooble_settings::cookie_policy_string(int index)
@@ -1421,6 +1440,12 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked
     (s_settings.value("main_menu_bar_visible", true).toBool());
+  m_ui.main_menu_bar_visible_shortcut->setCurrentIndex
+    (s_settings.value("main_menu_bar_visible_shortcut_index").toInt());
+
+  if(m_ui.main_menu_bar_visible_shortcut->currentIndex() < 0)
+    m_ui.main_menu_bar_visible_shortcut->setCurrentIndex(1); // F10
+
   m_ui.pages->setCurrentIndex
     (qBound(0,
 	    s_settings.value("settings_page_index", 0).toInt(),
@@ -2368,6 +2393,8 @@ void dooble_settings::slot_apply(void)
   set_setting("language_index", m_ui.language->currentIndex());
   set_setting("local_storage", m_ui.local_storage->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
+  set_setting("main_menu_bar_visible_shortcut_index",
+	      m_ui.main_menu_bar_visible_shortcut->currentIndex());
   set_setting("pin_accepted_or_blocked_window",
 	      m_ui.pin_accepted_or_blocked_domains->isChecked());
   set_setting("pin_downloads_window", m_ui.pin_downloads->isChecked());

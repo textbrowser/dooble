@@ -56,6 +56,7 @@ class dooble_settings: public dooble_main_window
     };
 
   dooble_settings(void);
+  static QKeySequence main_menu_bar_visible_shortcut(void);
   static QString cookie_policy_string(int index);
   static QString use_material_icons(void);
   static QString zoom_frame_location_string(int index);
