@@ -1074,9 +1074,6 @@ void dooble::new_page(dooble_page *page)
 
 void dooble::new_page(dooble_web_engine_view *view)
 {
-  if(view)
-    view->setVisible(true);
-
   auto page = new dooble_page
     (view ? view->web_engine_profile() : m_web_engine_profile.data(),
      view,
@@ -1111,6 +1108,9 @@ void dooble::new_page(dooble_web_engine_view *view)
       m_ui.tab->addTab(page, title.replace("&", "&&"));
       m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
     }
+
+  if(view)
+    view->setVisible(true);
 
   if(m_anonymous_tab_headers || s_application->application_locked())
     m_ui.tab->setTabIcon
