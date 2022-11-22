@@ -178,6 +178,10 @@ class dooble_page: public QWidget
   void slot_load_page(void);
   void slot_load_progress(int progress);
   void slot_load_started(void);
+  void slot_loading(const QUrl &url);
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+  void slot_loading_changed(const QWebEngineLoadingInfo &info);
+#endif
   void slot_only_now_allow_javascript_popup(void);
   void slot_open_link(const QUrl &url);
   void slot_open_link(void);

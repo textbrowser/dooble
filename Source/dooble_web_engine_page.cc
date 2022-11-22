@@ -114,6 +114,7 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
 						     bool isMainFrame)
 {
+  emit loading(url);
   m_last_clicked_link = url;
 
   if(dooble::s_accepted_or_blocked_domains->exception(url))

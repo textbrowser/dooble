@@ -32,6 +32,9 @@
 #include <QWebEngineFindTextResult>
 #endif
 #include <QWebEngineHistoryItem>
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+#include <QWebEngineLoadingInfo>
+#endif
 #include <QWebEngineProfile>
 #include <QWidgetAction>
 
@@ -414,6 +417,16 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(linkHovered(const QString &)),
 	  this,
 	  SLOT(slot_link_hovered(const QString &)));
+  connect(m_view->page(),
+	  SIGNAL(loading(const QUrl &)),
+	  this,
+	  SLOT(slot_loading(const QUrl &)));
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+  connect(m_view->page(),
+	  SIGNAL(loadingChanged(const QWebEngineLoadingInfo &)),
+	  this,
+	  SLOT(slot_loading_changed(const QWebEngineLoadingInfo &)));
+#endif
   connect(m_view->page(),
 	  SIGNAL(proxyAuthenticationRequired(const QUrl &,
 					     QAuthenticator *,
@@ -2075,6 +2088,7 @@ void dooble_page::slot_load_finished(bool ok)
       m_ui.address->setFocus();
     }
 
+  m_progress_label->setVisible(false);
   m_ui.progress->setVisible(false);
 
   auto icon_set(dooble_settings::setting("icon_set").toString());
@@ -2227,6 +2241,27 @@ void dooble_page::slot_load_started(void)
     (QIcon(QString(":/%1/36/stop.png").arg(icon_set)));
   m_ui.reload->setToolTip(tr("Stop Page Load"));
 }
+
+void dooble_page::slot_loading(const QUrl &url)
+{
+  if(url.host().isEmpty())
+    return;
+
+  m_progress_label->setText(tr("Loading %1...").arg(url.host()));
+  m_progress_label->resize
+    (QSize(m_progress_label->sizeHint().width() + 5,
+	   m_progress_label->sizeHint().height()));
+  m_progress_label->setVisible(true);
+  prepare_progress_label_position();
+  QTimer::singleShot(1500, m_progress_label, SLOT(hide(void)));
+}
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+void dooble_page::slot_loading_changed(const QWebEngineLoadingInfo &info)
+{
+  slot_loading(info.url());
+}
+#endif
 
 void dooble_page::slot_only_now_allow_javascript_popup(void)
 {
