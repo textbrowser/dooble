@@ -2034,6 +2034,12 @@ void dooble_page::slot_link_hovered(const QString &url)
 {
   if(url.trimmed().isEmpty())
     {
+      if(!property("is_loading").toBool())
+	{
+	  m_progress_label->clear();
+	  m_progress_label->setVisible(false);
+	}
+
       m_ui.link_hovered->setProperty("text", "");
       m_ui.link_hovered->clear();
       return;
@@ -2062,6 +2068,18 @@ void dooble_page::slot_link_hovered(const QString &url)
 		    qAbs(width() - difference)));
       m_ui.link_hovered->setCursorPosition(0);
     }
+  else if(!property("is_loading").toBool())
+    {
+      auto font_metrics(m_progress_label->fontMetrics());
+
+      m_progress_label->setText
+	(font_metrics.
+	 elidedText(url.trimmed(), Qt::ElideMiddle, qAbs(width() - 15)));
+      m_progress_label->resize
+	(QSize(m_progress_label->sizeHint().width() + 5,
+	       m_progress_label->sizeHint().height()));
+      m_progress_label->setVisible(true);
+    }
 }
 
 void dooble_page::slot_load_finished(bool ok)
@@ -2069,6 +2087,7 @@ void dooble_page::slot_load_finished(bool ok)
   Q_UNUSED(ok);
   dooble_style_sheet::inject
     (qobject_cast<dooble_web_engine_page *> (m_view->page()));
+  setProperty("is_loading", false);
 
   /*
   ** Do not save the favicon. The current page's favicon and the page's
@@ -2088,6 +2107,7 @@ void dooble_page::slot_load_finished(bool ok)
       m_ui.address->setFocus();
     }
 
+  m_progress_label->clear();
   m_progress_label->setVisible(false);
   m_ui.progress->setVisible(false);
 
@@ -2206,6 +2226,7 @@ void dooble_page::slot_load_progress(int progress)
 void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
+  setProperty("is_loading", true);
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   foreach(const auto &view, m_last_javascript_popups)
@@ -2214,7 +2235,6 @@ void dooble_page::slot_load_started(void)
 
   m_last_javascript_popups.clear();
   QApplication::restoreOverrideCursor();
-  m_progress_label->setVisible(true);
 
   if(url().host().isEmpty())
     m_progress_label->setText(tr("Waiting for page..."));
@@ -2231,6 +2251,7 @@ void dooble_page::slot_load_started(void)
 
   m_progress_label->resize(QSize(m_progress_label->sizeHint().width() + 5,
 				 m_progress_label->sizeHint().height()));
+  m_progress_label->setVisible(true);
   m_ui.feature_permission_popup_message->setVisible(false);
   m_ui.javascript_popup_message->setVisible(false);
   prepare_progress_label_position();
