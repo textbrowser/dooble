@@ -2195,7 +2195,7 @@ void dooble_page::slot_load_page(void)
 
 void dooble_page::slot_load_progress(int progress)
 {
-  m_progress_label->setVisible(progress < 1);
+  m_progress_label->setVisible(progress > 0 && progress < 100);
   m_ui.backward->setEnabled(m_view->history()->canGoBack());
   m_ui.forward->setEnabled(m_view->history()->canGoForward());
   m_ui.progress->setValue(progress);
@@ -2237,8 +2237,8 @@ void dooble_page::slot_load_progress(int progress)
 void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
-  setProperty("is_loading", true);
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  setProperty("is_loading", true);
 
   foreach(const auto &view, m_last_javascript_popups)
     if(view && view->parent() == this)
@@ -2255,9 +2255,9 @@ void dooble_page::slot_load_started(void)
       auto url_2(url());
 
       if(url_1.host() != url_2.host())
-	m_progress_label->setText(tr("Waiting for %1...").arg(url_1.host()));
+	m_progress_label->setText(tr("Loading %1...").arg(url_1.host()));
       else
-	m_progress_label->setText(tr("Waiting for %1...").arg(url_2.host()));
+	m_progress_label->setText(tr("Loading %1...").arg(url_2.host()));
     }
 
   m_progress_label->resize(QSize(m_progress_label->sizeHint().width() + 5,
@@ -2285,7 +2285,6 @@ void dooble_page::slot_loading(const QUrl &url)
 	   m_progress_label->sizeHint().height()));
   m_progress_label->setVisible(true);
   prepare_progress_label_position();
-  QTimer::singleShot(1500, m_progress_label, SLOT(hide(void)));
 }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
