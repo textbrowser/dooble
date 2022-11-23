@@ -1093,9 +1093,12 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_inject_custom_css(void)));
   menu->addSeparator();
-  menu->addAction(tr("Page Floating &Menu..."),
-		  this,
-		  SIGNAL(show_floating_menu(void)));
+  menu->addAction
+    (QIcon::fromTheme(use_material_icons + "application-menu",
+		      QIcon(QString(":/%1/36/menu.png").arg(icon_set))),
+     tr("Page Floating &Menu..."),
+     this,
+     SIGNAL(show_floating_menu(void)));
   menu->addSeparator();
   menu->addAction(tr("&Search Engines..."),
 		  this,
