@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-97</y>
                <width>642</width>
-               <height>724</height>
+               <height>752</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -691,6 +691,19 @@
                <widget class="QCheckBox" name="show_left_corner_widget">
                 <property name="text">
                  <string>Show Left-Corner Widget</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="show_loading_gradient">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If the Status Bar is hidden, show a loading gradient in the address bar.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Show Loading Gradient</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -1600,9 +1613,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>486</width>
-               <height>2074</height>
+               <y>-1532</y>
+               <width>642</width>
+               <height>2070</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2283,6 +2296,13 @@
                </layout>
               </item>
               <item>
+               <widget class="QCheckBox" name="web_plugins">
+                <property name="text">
+                 <string>Web Plugins</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QGroupBox" name="groupBox_4">
                 <property name="title">
                  <string>WebEngine</string>
@@ -2339,13 +2359,6 @@
                   </widget>
                  </item>
                 </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="web_plugins">
-                <property name="text">
-                 <string>Web Plugins</string>
-                </property>
                </widget>
               </item>
               <item>
@@ -2494,6 +2507,7 @@
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
   <tabstop>show_left_corner_widget</tabstop>
+  <tabstop>show_loading_gradient</tabstop>
   <tabstop>show_new_downloads</tabstop>
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>
@@ -2558,7 +2572,6 @@
   <tabstop>user_agent</tabstop>
   <tabstop>reset_user_agent</tabstop>
   <tabstop>web_engine_settings</tabstop>
-  <tabstop>web_plugins</tabstop>
   <tabstop>webgl</tabstop>
   <tabstop>webrtc_public_interfaces_only</tabstop>
   <tabstop>xss_auditing</tabstop>

@@ -2204,23 +2204,29 @@ void dooble_page::slot_load_progress(int progress)
     m_ui.address->setPalette(s_address_palette);
   else if(progress < 100)
     {
-      QLinearGradient linear_gradient
-	(0,
-	 m_ui.address->height(),
-	 m_ui.address->width(),
-	 m_ui.address->height());
+      if(dooble_settings::setting("show_loading_gradient").toBool())
+	{
+	  QLinearGradient linear_gradient
+	    (0,
+	     m_ui.address->height(),
+	     m_ui.address->width(),
+	     m_ui.address->height());
 
-      linear_gradient.setColorAt(progress / 100.0, QColor(144, 238, 144));
-      linear_gradient.setColorAt
-	(qBound(progress / 100.0, progress / 100.0 + 0.15, 1.0),
-	 QColor(Qt::white));
+	  linear_gradient.setColorAt(progress / 100.0, QColor(144, 238, 144));
+	  linear_gradient.setColorAt
+	    (qBound(progress / 100.0, progress / 100.0 + 0.15, 1.0),
+	     QColor(Qt::white));
 
-      auto palette(m_ui.address->palette());
+	  auto palette(m_ui.address->palette());
 
-      palette.setBrush(m_ui.address->backgroundRole(), QBrush(linear_gradient));
-      m_ui.address->setPalette(palette);
+	  palette.setBrush
+	    (m_ui.address->backgroundRole(), QBrush(linear_gradient));
+	  m_ui.address->setPalette(palette);
+	}
+      else if(m_ui.address->palette() != s_address_palette)
+	m_ui.address->setPalette(s_address_palette);
     }
-  else
+  else if(m_ui.address->palette() != s_address_palette)
     m_ui.address->setPalette(s_address_palette);
 #endif
 }
