@@ -343,11 +343,13 @@ void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 
 void dooble_tab_widget::set_tab_position(void)
 {
-  if(!dooble_settings::setting("show_left_corner_widget").toBool())
+  auto show_left_corner_widget = dooble_settings::setting
+    ("show_left_corner_widget").toBool();
+
+  if(!show_left_corner_widget)
     {
       m_left_corner_widget->setVisible(false);
       setCornerWidget(nullptr, Qt::TopLeftCorner);
-      return;
     }
 
   auto tab_position
@@ -361,7 +363,7 @@ void dooble_tab_widget::set_tab_position(void)
     }
   else if(tab_position == "south")
     {
-      if(!cornerWidget(Qt::TopLeftCorner))
+      if(!cornerWidget(Qt::TopLeftCorner) && show_left_corner_widget)
 	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
 
       setTabPosition(QTabWidget::South);
@@ -374,7 +376,7 @@ void dooble_tab_widget::set_tab_position(void)
     }
   else
     {
-      if(!cornerWidget(Qt::TopLeftCorner))
+      if(!cornerWidget(Qt::TopLeftCorner) && show_left_corner_widget)
 	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
 
       setTabPosition(QTabWidget::North);
@@ -522,6 +524,7 @@ void dooble_tab_widget::slot_set_visible_corner_button(bool state)
 {
   if(!dooble_settings::setting("show_left_corner_widget").toBool())
     {
+      m_left_corner_widget->setVisible(false);
       setCornerWidget(nullptr, Qt::TopLeftCorner);
       return;
     }
