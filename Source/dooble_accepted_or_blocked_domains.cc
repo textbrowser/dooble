@@ -125,9 +125,9 @@ dooble_accepted_or_blocked_domains::dooble_accepted_or_blocked_domains(void):
 	  this,
 	  SLOT(slot_add_session_url(const QUrl &, const QUrl &)));
   connect(this,
-	  SIGNAL(imported(void)),
+	  SIGNAL(imported(const qint64)),
 	  this,
-	  SLOT(slot_imported(void)));
+	  SLOT(slot_imported(const qint64)));
 
   if(dooble_settings::
      setting("accepted_or_blocked_domains_mode").toString() == "accept")
@@ -562,11 +562,12 @@ void dooble_accepted_or_blocked_domains::save
 {
   if(hash.isEmpty())
     {
-      emit imported();
+      emit imported(0);
       return;
     }
 
   auto database_name(dooble_database_utilities::database_name());
+  qint64 ct = 0;
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -618,7 +619,8 @@ void dooble_accepted_or_blocked_domains::save
 	    else
 	      query.addBindValue(data.toBase64());
 
-	    query.exec();
+	    if(query.exec())
+	      ct += 1;
 	  }
       }
 
@@ -626,7 +628,7 @@ void dooble_accepted_or_blocked_domains::save
   }
 
   QSqlDatabase::removeDatabase(database_name);
-  emit imported();
+  emit imported(ct);
 }
 
 void dooble_accepted_or_blocked_domains::save_blocked_domain
@@ -1203,8 +1205,10 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
   QApplication::processEvents();
 }
 
-void dooble_accepted_or_blocked_domains::slot_imported(void)
+void dooble_accepted_or_blocked_domains::slot_imported(const qint64 ct)
 {
+  Q_UNUSED(ct);
+
   if(m_import_dialog)
     m_import_dialog->deleteLater();
 

@@ -89,7 +89,7 @@ class dooble_accepted_or_blocked_domains: public dooble_main_window
   void slot_exceptions_item_changed(QTableWidgetItem *item);
   void slot_find(void);
   void slot_import(void);
-  void slot_imported(void);
+  void slot_imported(const qint64 ct);
   void slot_item_changed(QTableWidgetItem *item);
   void slot_maximum_entries_changed(int value);
   void slot_new_exception(const QString &url);
@@ -103,7 +103,7 @@ class dooble_accepted_or_blocked_domains: public dooble_main_window
 
  signals:
   void add_session_url(const QUrl &first_party_url, const QUrl &origin_url);
-  void imported(void);
+  void imported(const qint64 ct);
   void populated(void);
 };
 
