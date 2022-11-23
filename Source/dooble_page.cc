@@ -2285,6 +2285,7 @@ void dooble_page::slot_loading(const QUrl &url)
 	   m_progress_label->sizeHint().height()));
   m_progress_label->setVisible(true);
   prepare_progress_label_position();
+  QTimer::singleShot(2500, m_progress_label, SLOT(hide(void)));
 }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
