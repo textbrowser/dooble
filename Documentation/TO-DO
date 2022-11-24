@@ -204,6 +204,8 @@ Remaining Items
 - Default browser on Mac.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
+- Do not reset check states of search engine items on artificial item-changed
+  signals.
 - Element-selection option.
 - Fancy completer.
 - Inspect all available URLs when intercepting requests. Content blocking.
