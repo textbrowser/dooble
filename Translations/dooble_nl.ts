@@ -480,7 +480,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="2009"/>
         <source>Page Floating &amp;Menu...</source>
-        <translation>Zwwevend pagina&amp;menu…</translation>
+        <translation>Zwevende pagina&amp;menu…</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2037"/>
@@ -2436,7 +2436,7 @@
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="374"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suppose the URL&apos;s host is abc.def.ghi.org. If this option is enabled and an entry such as .ghi.org (or ghi.org) exists and is checked, the cookie will be blocked. Otherwise, the cookie will be blocked if .abc.def.ghi.org (or abc.def.ghi.org) exists and is checked. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voorbeeld: de url-host is abc.def.ghi.org. Als deze optie is ingeschakeld en een item als .ghi.org (of ghi.org) bestaat en aangekruist is, dan wordt de cookie geblokkerd. Anders wordt de cookie alleen geblokkerd als .abc.def.ghi.org (of abc.def.ghi.org) bestaat en aangekruist is. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voorbeeld: de url-host is abc.def.ghi.org. Als deze optie is ingeschakeld en een item als .ghi.org (of ghi.org) bestaat en is aangekruist is, dan wordt de cookie geblokeerd. Anders wordt de cookie alleen geblokeerd als .abc.def.ghi.org (of abc.def.ghi.org) bestaat en is aangekruist is. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="377"/>
@@ -3294,7 +3294,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="1081"/>
         <source>Page Floating &amp;Menu...</source>
-        <translation>Zwwevend pagina&amp;menu…</translation>
+        <translation>Zwevende pagina&amp;menu…</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="1085"/>
