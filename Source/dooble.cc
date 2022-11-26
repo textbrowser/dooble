@@ -2618,9 +2618,9 @@ void dooble::slot_about_to_show_main_menu(void)
 
       if(m && m->actions().size() >= 5)
 	{
-	  if(m_ui.menu_edit == menu && m->actions()[1]->menu())
-	    m_ui.menu_edit->addActions(m->actions()[1]->menu()->actions());
-	  else if(m_ui.menu_file == menu && m->actions()[1]->menu())
+	  if(m_ui.menu_edit == menu && m->actions().at(1)->menu())
+	    m_ui.menu_edit->addActions(m->actions().at(1)->menu()->actions());
+	  else if(m_ui.menu_file == menu && m->actions().at(1)->menu())
 	    {
 	      m_ui.menu_file->addActions(m->actions()[0]->menu()->actions());
 
@@ -2629,13 +2629,13 @@ void dooble::slot_about_to_show_main_menu(void)
 	      else if(m_action_close_tab)
 		m_action_close_tab->setEnabled(tabs_closable());
 	    }
-	  else if(m_ui.menu_help == menu && m->actions()[4]->menu())
-	    m_ui.menu_help->addActions(m->actions()[4]->menu()->actions());
-	  else if(m_ui.menu_tools == menu && m->actions()[2]->menu())
-	    m_ui.menu_tools->addActions(m->actions()[2]->menu()->actions());
-	  else if(m_ui.menu_view == menu && m->actions()[3]->menu())
+	  else if(m_ui.menu_help == menu && m->actions().at(4)->menu())
+	    m_ui.menu_help->addActions(m->actions().at(4)->menu()->actions());
+	  else if(m_ui.menu_tools == menu && m->actions().at(2)->menu())
+	    m_ui.menu_tools->addActions(m->actions().at(2)->menu()->actions());
+	  else if(m_ui.menu_view == menu && m->actions().at(3)->menu())
 	    {
-	      m_ui.menu_view->addActions(m->actions()[3]->menu()->actions());
+	      m_ui.menu_view->addActions(m->actions().at(3)->menu()->actions());
 
 	      if(page && page->full_screen_action())
 		{
@@ -3175,11 +3175,10 @@ void dooble::slot_close_tab(void)
     }
 
   auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
-  int index = -1;
 
   if(chart)
     {
-      m_ui.tab->removeTab(index = m_ui.tab->indexOf(chart));
+      m_ui.tab->removeTab(m_ui.tab->indexOf(chart));
       chart->deleteLater();
     }
   else
@@ -3188,12 +3187,11 @@ void dooble::slot_close_tab(void)
 
       if(page)
 	{
-	  m_ui.tab->removeTab(index = m_ui.tab->indexOf(page));
+	  m_ui.tab->removeTab(m_ui.tab->indexOf(page));
 	  page->deleteLater();
 	}
       else
-	m_ui.tab->removeTab
-	  (index = m_ui.tab->indexOf(m_ui.tab->currentWidget()));
+	m_ui.tab->removeTab(m_ui.tab->indexOf(m_ui.tab->currentWidget()));
     }
 
   m_ui.tab->setTabsClosable(tabs_closable());
@@ -3330,7 +3328,7 @@ void dooble::slot_export_as_png(void)
       auto chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
       auto file_name(dialog.selectedFiles().value(0));
 
-      if(!file_name.toLower().endsWith(".png"))
+      if(!file_name.endsWith(".png", Qt::CaseInsensitive))
 	file_name.append(".png");
 
       if(chart)
@@ -4659,7 +4657,7 @@ void dooble::slot_warn_of_missing_sqlite_driver(void)
   auto list(QSqlDatabase::drivers());
 
   foreach(const auto &i, list)
-    if(i.toLower().contains("sqlite"))
+    if(i.contains("sqlite", Qt::CaseInsensitive))
       {
 	found = true;
 	break;
