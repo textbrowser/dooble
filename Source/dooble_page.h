@@ -209,6 +209,7 @@ class dooble_page: public QWidget
   void slot_zoom_in(void);
   void slot_zoom_out(void);
   void slot_zoom_reset(void);
+  void slot_zoomed(void);
 
  signals:
   void authenticate(void);

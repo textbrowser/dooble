@@ -465,8 +465,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   prepare_tool_buttons();
   m_view->setZoomFactor(zoom_factor);
   prepare_zoom_toolbutton(zoom_factor);
-  emit zoomed(m_view->zoomFactor());
   slot_dooble_credentials_created();
+  QTimer::singleShot(1000, this, SLOT(slot_zoomed(void)));
 }
 
 dooble_page::~dooble_page()
@@ -2657,6 +2657,11 @@ void dooble_page::slot_zoom_reset(void)
 {
   m_view->setZoomFactor(1.0);
   prepare_zoom_toolbutton(1.0);
+  emit zoomed(m_view->zoomFactor());
+}
+
+void dooble_page::slot_zoomed(void)
+{
   emit zoomed(m_view->zoomFactor());
 }
 

@@ -279,7 +279,7 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
   if(action)
     action->setText(tr("View Page Source"));
 
-  if(!menu->actions().isEmpty() && !menu->actions().last()->isSeparator())
+  if(!menu->actions().isEmpty() && !menu->actions().constLast()->isSeparator())
     menu->addSeparator();
 
   action = menu->addAction
