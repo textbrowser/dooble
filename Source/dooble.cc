@@ -3975,6 +3975,8 @@ void dooble::slot_show_clear_items(void)
 {
   dooble_clear_items clear_items(this);
 
+  clear_items.resize
+    (clear_items.size().width(), clear_items.minimumSize().height());
   clear_items.exec();
   QApplication::processEvents();
 }
