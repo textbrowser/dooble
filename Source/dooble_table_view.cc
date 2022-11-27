@@ -63,7 +63,7 @@ void dooble_table_view::prepare_viewport_icons(void)
 
   for(int i = a; i <= b; i++)
     {
-      auto item = model->item(i, 0); // Title
+      auto item = model->item(i, static_cast<int> (Columns::Title));
 
       if(!item)
 	continue;

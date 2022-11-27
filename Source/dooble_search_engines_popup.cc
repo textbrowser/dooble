@@ -271,7 +271,15 @@ void dooble_search_engines_popup::prepare_icons(void)
 
 void dooble_search_engines_popup::prepare_viewport_icons(void)
 {
+  disconnect(m_model,
+	     &QStandardItemModel::itemChanged,
+	     this,
+	     &dooble_search_engines_popup::slot_item_changed);
   m_ui.view->prepare_viewport_icons();
+  connect(m_model,
+	  &QStandardItemModel::itemChanged,
+	  this,
+	  &dooble_search_engines_popup::slot_item_changed);
 }
 
 void dooble_search_engines_popup::purge(void)

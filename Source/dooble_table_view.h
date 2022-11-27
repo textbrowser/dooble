@@ -39,6 +39,11 @@ class dooble_table_view: public QTableView
   void prepare_viewport_icons(void);
 
  protected:
+  enum class Columns
+  {
+    Title = 0
+  };
+
   void resizeEvent(QResizeEvent *event);
   void scrollContentsBy(int dx, int dy);
 };
