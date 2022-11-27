@@ -323,6 +323,10 @@ void dooble_search_engines_popup::save_settings(void)
 void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(m_model,
+	     &QStandardItemModel::itemChanged,
+	     this,
+	     &dooble_search_engines_popup::slot_item_changed);
 
   auto list
     (m_model->findItems(dooble_ui_utilities::simplified_url(url).toEncoded(),
@@ -362,6 +366,10 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 	}
     }
 
+  connect(m_model,
+	  &QStandardItemModel::itemChanged,
+	  this,
+	  &dooble_search_engines_popup::slot_item_changed);
   QApplication::restoreOverrideCursor();
 }
 

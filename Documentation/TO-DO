@@ -50,6 +50,8 @@ Completed Items
 - Display download rates.
 - Display expected location of Translations in Settings.
 - Display the menu via a shortcut (F10?).
+- Do not reset check states of search engine items on artificial item-changed
+  signals.
 - Do not store certificate exceptions for private windows.
 - Document the Microsoft Studio compilation process.
 - Documentation.
@@ -204,8 +206,6 @@ Remaining Items
 - Default browser on Mac.
 - Disable JavaScript per domain.
 - Disable proxy for local addresses.
-- Do not reset check states of search engine items on artificial item-changed
-  signals.
 - Element-selection option.
 - Fancy completer.
 - Inspect all available URLs when intercepting requests. Content blocking.
