@@ -173,13 +173,19 @@ void dooble_address_widget_completer::add_item(const QIcon &icon,
   s_urls[url] = item;
 }
 
-void dooble_address_widget_completer::complete(void)
+void dooble_address_widget_completer::complete(const QRect &rect)
 {
-  complete("");
+  Q_UNUSED(rect);
+
+  if(dooble_settings::setting("show_address_widget_completer").toBool())
+    complete("");
 }
 
 void dooble_address_widget_completer::complete(const QString &text)
 {
+  if(!dooble_settings::setting("show_address_widget_completer").toBool())
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   QList<QStandardItem *> list;
@@ -291,7 +297,8 @@ void dooble_address_widget_completer::slot_history_cleared(void)
 
 void dooble_address_widget_completer::slot_text_edited_timeout(void)
 {
-  if(!parent())
+  if(!dooble_settings::setting("show_address_widget_completer").toBool() ||
+     !parent())
     return;
 
   auto text(qobject_cast<dooble_address_widget *> (parent())->text());

@@ -84,6 +84,8 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
      "}");
 #endif
   m_pull_down->setToolTip(tr("Show History"));
+  m_pull_down->setVisible
+    (dooble_settings::setting("show_address_widget_completer").toBool());
   m_view = nullptr;
   connect(dooble::s_application,
 	  SIGNAL(favorites_cleared(void)),
@@ -543,6 +545,8 @@ void dooble_address_widget::slot_return_pressed(void)
 
 void dooble_address_widget::slot_settings_applied(void)
 {
+  m_pull_down->setVisible
+    (dooble_settings::setting("show_address_widget_completer").toBool());
   prepare_icons();
 
   if(m_view)
