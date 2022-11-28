@@ -82,6 +82,10 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SIGNAL(history_cleared(void)),
 	  this,
 	  SLOT(slot_history_cleared(void)));
+  connect(dooble::s_settings,
+	  SIGNAL(applied(void)),
+	  this,
+	  SLOT(slot_settings_applied(void)));
   connect(qobject_cast<dooble_address_widget *> (parent),
 	  SIGNAL(returnPressed(void)),
 	  &m_text_edited_timer,
@@ -96,10 +100,10 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SLOT(slot_clicked(const QModelIndex &)));
   setCaseSensitivity(Qt::CaseInsensitive);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-  setModel(m_model);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
   setWrapAround(false);
+  slot_settings_applied();
 }
 
 dooble_address_widget_completer::~dooble_address_widget_completer()
@@ -293,6 +297,14 @@ void dooble_address_widget_completer::slot_history_cleared(void)
   m_model->clear();
   s_model->clear();
   s_urls.clear();
+}
+
+void dooble_address_widget_completer::slot_settings_applied(void)
+{
+  if(dooble_settings::setting("show_address_widget_completer").toBool())
+    setModel(m_model);
+  else
+    setModel(nullptr);
 }
 
 void dooble_address_widget_completer::slot_text_edited_timeout(void)
