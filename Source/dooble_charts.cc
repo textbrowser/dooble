@@ -26,6 +26,7 @@
 */
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_charts.h"
 #include "dooble_charts_file.h"
 #include "dooble_charts_property_editor.h"
@@ -1699,7 +1700,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	   font.fromString(item->text().trimmed()))
 	  m_x_axis->setLabelsFont(font);
 	else
-	  m_x_axis->setLabelsFont(QApplication::font());
+	  m_x_axis->setLabelsFont(dooble_application::font());
 
 	break;
       }
@@ -1759,7 +1760,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	   font.fromString(item->text().trimmed()))
 	  m_x_axis->setTitleFont(font);
 	else
-	  m_x_axis->setTitleFont(QApplication::font());
+	  m_x_axis->setTitleFont(dooble_application::font());
 
 	break;
       }
@@ -1811,7 +1812,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	   font.fromString(item->text().trimmed()))
 	  m_y_axis->setLabelsFont(font);
 	else
-	  m_y_axis->setLabelsFont(QApplication::font());
+	  m_y_axis->setLabelsFont(dooble_application::font());
 
 	break;
       }
@@ -1871,7 +1872,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	   font.fromString(item->text().trimmed()))
 	  m_y_axis->setTitleFont(font);
 	else
-	  m_y_axis->setTitleFont(QApplication::font());
+	  m_y_axis->setTitleFont(dooble_application::font());
 
 	break;
       }
@@ -2088,7 +2089,7 @@ void dooble_charts::slot_item_changed(QStandardItem *item)
 	   font.fromString(item->text().trimmed()))
 	  m_legend->setFont(font);
 	else
-	  m_legend->setFont(QApplication::font());
+	  m_legend->setFont(dooble_application::font());
 
 	break;
       }

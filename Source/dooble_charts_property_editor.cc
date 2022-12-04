@@ -35,6 +35,7 @@
 #include <QSpinBox>
 #include <QtMath>
 
+#include "dooble_application.h"
 #include "dooble_charts_property_editor.h"
 
 #include <limits>
@@ -1313,7 +1314,7 @@ void dooble_charts_property_editor::slot_show_font_dialog
      font.fromString(item->text().trimmed()))
     dialog.setCurrentFont(font);
   else
-    dialog.setCurrentFont(QApplication::font());
+    dialog.setCurrentFont(dooble_application::font());
 
   if(dialog.exec() == QDialog::Accepted)
     item->setText(dialog.selectedFont().toString());

@@ -389,6 +389,7 @@ void dooble_address_widget::setText(const QString &text)
       QTextLayout::FormatRange host_format_range;
       auto host(url.host());
 
+      format.setFontHintingPreference(QFont::PreferFullHinting);
       format.setFontStyleStrategy(QFont::PreferAntialias);
       format.setFontWeight(QFont::Normal);
       format.setForeground(QColor("#2962ff"));
