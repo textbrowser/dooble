@@ -39,8 +39,6 @@
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
-  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-
   m_favorite = new QToolButton(this);
   m_favorite->setAutoRaise(true);
   m_favorite->setCursor(Qt::ArrowCursor);
@@ -141,12 +139,20 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SLOT(slot_text_edited(const QString &)));
   prepare_icons();
   setCompleter(m_completer);
+
+  auto font(this->font());
+
+  font.setPointSize(font.pointSize() + 1.25);
+  setFont(font);
   setMinimumHeight
     (qBound(0,
 	    dooble_settings::getenv("DOOBLE_"
 				    "ADDRESS_WIDGET_HEIGHT_OFFSET").toInt(),
 	    50) +
      sizeHint().height());
+
+  auto frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+
   setStyleSheet
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(m_favorite->sizeHint().width() +

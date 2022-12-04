@@ -45,6 +45,7 @@ dooble_application::dooble_application(int &argc, char **argv):
 		      setting("display_application_font").toString()))
     font = QApplication::font();
 
+  font.setHintingPreference(QFont::PreferFullHinting);
   font.setStyleStrategy
     (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
   prepare_theme_colors();
