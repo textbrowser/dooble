@@ -63,7 +63,7 @@ dooble_about::dooble_about(void):QMainWindow()
     qversion = "unknown";
 
   m_ui.license->setText
-    (tr("<a href=\"qrc://Documentation/DOOBLE-LICENSE.html\">"
+    (tr("<a href=\"qrc://Documentation/DoobleLicense.html\">"
 	"Dooble 3-Clause BSD License</a>"));
 
   auto text
@@ -77,7 +77,7 @@ dooble_about::dooble_about(void):QMainWindow()
 
   m_ui.local_information->setText(text);
   m_ui.release_notes->setText
-    (tr("<a href=\"qrc://Documentation/RELEASE-NOTES.html\">"
+    (tr("<a href=\"qrc://Documentation/ReleaseNotes.html\">"
 	"Release Notes</a>"));
   m_ui.version->setText
     (tr("Dooble version %1, X.").arg(DOOBLE_VERSION_STRING));

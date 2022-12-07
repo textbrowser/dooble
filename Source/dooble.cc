@@ -4223,7 +4223,7 @@ void dooble::slot_show_release_notes(const QUrl &url)
 void dooble::slot_show_release_notes(void)
 {
   m_ui.tab->setCurrentWidget
-    (new_page(QUrl::fromUserInput("qrc://Documentation/RELEASE-NOTES.html"),
+    (new_page(QUrl::fromUserInput("qrc://Documentation/ReleaseNotes.html"),
 	      m_is_private));
 }
 
