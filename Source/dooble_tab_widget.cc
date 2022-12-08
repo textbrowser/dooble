@@ -272,22 +272,18 @@ void dooble_tab_widget::prepare_icons(void)
 
 void dooble_tab_widget::prepare_tab_label(int index, const QIcon &icon)
 {
-#ifdef Q_OS_MACOS
   auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
 			m_tab_bar));
 
+#ifdef Q_OS_MACOS
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   side = (side == QTabBar::LeftSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 #else
   side = (side == QTabBar::RightSide) ? QTabBar::LeftSide : QTabBar::RightSide;
 #endif
 #else
-  auto side = static_cast<QTabBar::ButtonPosition>
-    (style()->
-     styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, m_tab_bar));
-
   side = (side == QTabBar::LeftSide) ? QTabBar::RightSide : QTabBar::LeftSide;
 #endif
 
@@ -607,6 +603,45 @@ void dooble_tab_widget::slot_settings_applied(void)
 		       arg(theme_color)).name()));
 	}
     }
+
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  auto tab_position
+    (dooble_settings::setting("tab_position").toString().trimmed());
+
+  if(tab_position == "east" || tab_position == "west")
+    {
+      auto side = static_cast<QTabBar::ButtonPosition>
+	(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
+			    nullptr,
+			    m_tab_bar));
+
+#ifdef Q_OS_MACOS
+      side = (side == QTabBar::LeftSide) ?
+	QTabBar::LeftSide : QTabBar::RightSide;
+#else
+      side = (side == QTabBar::LeftSide) ?
+	QTabBar::RightSide : QTabBar::LeftSide;
+#endif
+
+      for(int i = 0; i < count(); i++)
+	{
+	  auto label = qobject_cast<QLabel *> (m_tab_bar->tabButton(i, side));
+
+	  if(label)
+	    {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+	      QTabWidget::setTabIcon(i, label->pixmap(Qt::ReturnByValue));
+#else
+	      QTabWidget::setTabIcon(i, *label->pixmap());
+#endif
+	      label->deleteLater();
+	    }
+
+	  m_tab_bar->setTabButton(i, side, nullptr);
+	  return;
+	}
+    }
+#endif
 
   m_left_corner_widget->setVisible(true);
   m_private_tool_button->setVisible
