@@ -370,7 +370,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-270</y>
                <width>642</width>
                <height>780</height>
               </rect>
@@ -699,6 +699,9 @@
               </item>
               <item>
                <widget class="QCheckBox" name="show_left_corner_widget">
+                <property name="toolTip">
+                 <string>Ignored for East and West tab positions.</string>
+                </property>
                 <property name="text">
                  <string>Show Left-Corner Widget</string>
                 </property>
@@ -1042,8 +1045,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-356</y>
-               <width>642</width>
+               <y>0</y>
+               <width>617</width>
                <height>894</height>
               </rect>
              </property>
@@ -1631,8 +1634,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>2070</height>
+               <width>486</width>
+               <height>2074</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
