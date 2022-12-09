@@ -107,6 +107,7 @@ Completed Items
 - Optional Visited Links.
 - Optional credentials.
 - Optional favicons.
+- Optional referrer.
 - Optional testing of Threefish.
 - Pause and resume downloads. Requires Qt support.
 - Pin support windows.
@@ -210,7 +211,6 @@ Remaining Items
 - Element-selection option.
 - Fancy completer.
 - Inspect all available URLs when intercepting requests. Content blocking.
-- Optional referrer.
 - Prevent SQL query text overflow.
 - Shortcuts browser.
 - South tab and Mac. Qt-ism?

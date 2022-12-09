@@ -1042,9 +1042,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>617</width>
-               <height>866</height>
+               <y>-356</y>
+               <width>642</width>
+               <height>894</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1581,6 +1581,13 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="referrer">
+                <property name="text">
+                 <string>Referrer</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="utc_time_zone">
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please restart Dooble if UTC Time Zone is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1624,8 +1631,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>486</width>
-               <height>2074</height>
+               <width>642</width>
+               <height>2070</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2547,6 +2554,7 @@
   <tabstop>proxy_port</tabstop>
   <tabstop>proxy_user</tabstop>
   <tabstop>proxy_password</tabstop>
+  <tabstop>referrer</tabstop>
   <tabstop>utc_time_zone</tabstop>
   <tabstop>scrollArea_3</tabstop>
   <tabstop>animated_scrolling</tabstop>

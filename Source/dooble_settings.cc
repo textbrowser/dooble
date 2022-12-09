@@ -283,6 +283,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["pin_downloads_window"] = true;
   s_settings["pin_history_window"] = true;
   s_settings["pin_settings_window"] = true;
+  s_settings["referrer"] = false;
   s_settings["save_geometry"] = true;
   s_settings["show_address_widget_completer"] = true;
   s_settings["show_hovered_links_tool_tips"] = false;
@@ -1477,6 +1478,7 @@ void dooble_settings::restore(bool read_database)
 	    m_ui.proxy_type->count() - 1));
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.proxy_user->setCursorPosition(0);
+  m_ui.referrer->setChecked(s_settings.value("referrer", false).toBool());
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", true).toBool());
   m_ui.show_address_widget_completer->setChecked
@@ -2411,6 +2413,7 @@ void dooble_settings::slot_apply(void)
   set_setting("pin_history_window", m_ui.pin_history->isChecked());
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("private_mode", m_ui.private_mode->isChecked());
+  set_setting("referrer", m_ui.referrer->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("show_address_widget_completer",
 	      m_ui.show_address_widget_completer->isChecked());
