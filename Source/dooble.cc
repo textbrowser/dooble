@@ -2707,7 +2707,7 @@ void dooble::slot_about_to_show_tabs_menu(void)
 
       if(i == m_ui.tab->currentIndex())
 	{
-	  QFont font(action->font());
+	  auto font(action->font());
 
 	  font.setBold(true);
 	  action->setFont(font);
@@ -4542,7 +4542,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
 
       if(i == m_ui.tab->currentIndex())
 	{
-	  QFont font(action->font());
+	  auto font(action->font());
 
 	  font.setBold(true);
 	  action->setFont(font);

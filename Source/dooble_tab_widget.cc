@@ -638,7 +638,6 @@ void dooble_tab_widget::slot_settings_applied(void)
 	    }
 
 	  m_tab_bar->setTabButton(i, side, nullptr);
-	  return;
 	}
     }
 #endif
