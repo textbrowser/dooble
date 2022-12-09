@@ -2190,6 +2190,13 @@ void dooble_page::slot_load_page(void)
     }
 
  done_label:
+
+  if(!dooble_ui_utilities::allowed_scheme(url))
+    {
+      url = QUrl::fromUserInput(str);
+      url.setScheme("https");
+    }
+
   load(url);
 }
 
