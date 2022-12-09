@@ -70,6 +70,7 @@ Completed Items
 - Favorites pop-up widget.
 - Favorites search.
 - Filter current site's cookies.
+- Full-screen menu text on Mac is mangled.
 - Full-screen.
 - Fusion alterations.
 - Fusion themes.
@@ -210,7 +211,6 @@ Remaining Items
 - Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
-- Full-screen menu text on Mac is mangled.
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Prevent SQL query text overflow.
 - Shortcuts browser.
