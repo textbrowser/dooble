@@ -1116,7 +1116,7 @@ void dooble_page::prepare_standard_menus(void)
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SIGNAL(show_full_screen(void)),
-					 QKeySequence(Qt::Key_F11));
+					 QKeySequence(tr("Ctrl+F11")));
   menu->addSeparator();
   action = menu->addAction(tr("&Status Bar"),
 			   this,
@@ -1413,10 +1413,16 @@ void dooble_page::slot_about_to_show_standard_menus(void)
 
 void dooble_page::slot_about_to_show_view_menu(void)
 {
+  /*
+  ** Please also review dooble.cc.
+  */
+
+#ifdef Q_OS_MACOS
   auto menu = qobject_cast<QMenu *> (sender());
 
   if(menu)
     menu->setMinimumWidth(menu->sizeHint().width() + 25);
+#endif
 }
 
 void dooble_page::slot_accepted_or_blocked_add_exception(void)

@@ -1741,7 +1741,7 @@ void dooble::prepare_shortcuts(void)
 				   this,
 				   SLOT(slot_close_tab(void)));
       m_shortcuts << new QShortcut
-	(QKeySequence(Qt::Key_F11), this, SLOT(slot_show_full_screen(void)));
+	(QKeySequence(tr("Ctrl+F11")), this, SLOT(slot_show_full_screen(void)));
 
 #ifdef Q_OS_MACOS
       foreach(auto shortcut, m_shortcuts)
@@ -2035,7 +2035,7 @@ void dooble::prepare_standard_menus(void)
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SLOT(slot_show_full_screen(void)),
-					 QKeySequence(Qt::Key_F11));
+					 QKeySequence(tr("Ctrl+F11")));
 
   /*
   ** Help Menu
@@ -2719,10 +2719,16 @@ void dooble::slot_about_to_show_tabs_menu(void)
 
 void dooble::slot_about_to_show_view_menu(void)
 {
+  /*
+  ** Please also review dooble_page.cc.
+  */
+
+#ifdef Q_OS_MACOS
   auto menu = qobject_cast<QMenu *> (sender());
 
   if(menu)
     menu->setMinimumWidth(menu->sizeHint().width() + 25);
+#endif
 }
 
 void dooble::slot_anonymous_tab_headers(bool state)
