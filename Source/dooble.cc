@@ -665,6 +665,11 @@ void dooble::connect_signals(void)
   connect(m_ui.menu_view,
 	  SIGNAL(aboutToShow(void)),
 	  this,
+	  SLOT(slot_about_to_show_view_menu(void)),
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
+  connect(m_ui.menu_view,
+	  SIGNAL(aboutToShow(void)),
+	  this,
 	  SLOT(slot_about_to_show_main_menu(void)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
@@ -1735,19 +1740,8 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+W")),
 				   this,
 				   SLOT(slot_close_tab(void)));
-
-#ifndef Q_OS_MACOS
-      auto shortcut = new QShortcut
+      m_shortcuts << new QShortcut
 	(QKeySequence(Qt::Key_F11), this, SLOT(slot_show_full_screen(void)));
-#else
-      auto shortcut = new QShortcut(this);
-
-      connect(shortcut,
-	      SIGNAL(activated(void)),
-	      this,
-	      SLOT(slot_show_full_screen(void)));
-#endif
-      m_shortcuts << shortcut;
 
 #ifdef Q_OS_MACOS
       foreach(auto shortcut, m_shortcuts)
@@ -2034,16 +2028,14 @@ void dooble::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&View"));
-#ifndef Q_OS_MACOS
+  connect(menu,
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_about_to_show_view_menu(void)));
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SLOT(slot_show_full_screen(void)),
 					 QKeySequence(Qt::Key_F11));
-#else
-  m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
-					 this,
-					 SLOT(slot_show_full_screen(void)));
-#endif
 
   /*
   ** Help Menu
@@ -2723,6 +2715,14 @@ void dooble::slot_about_to_show_tabs_menu(void)
     }
 
   QApplication::restoreOverrideCursor();
+}
+
+void dooble::slot_about_to_show_view_menu(void)
+{
+  auto menu = qobject_cast<QMenu *> (sender());
+
+  if(menu)
+    menu->setMinimumWidth(menu->sizeHint().width() + 25);
 }
 
 void dooble::slot_anonymous_tab_headers(bool state)

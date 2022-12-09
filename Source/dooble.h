@@ -189,6 +189,7 @@ class dooble: public QMainWindow
   void slot_about_to_show_history_menu();
   void slot_about_to_show_main_menu(void);
   void slot_about_to_show_tabs_menu(void);
+  void slot_about_to_show_view_menu(void);
   void slot_anonymous_tab_headers(bool state);
   void slot_application_locked(bool state, dooble *d);
   void slot_authenticate(void);
