@@ -1109,10 +1109,16 @@ void dooble_page::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&View"));
+#ifndef Q_OS_MACOS
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SIGNAL(show_full_screen(void)),
 					 QKeySequence(Qt::Key_F11));
+#else
+  m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
+					 this,
+					 SIGNAL(show_full_screen(void)));
+#endif
   menu->addSeparator();
   action = menu->addAction(tr("&Status Bar"),
 			   this,

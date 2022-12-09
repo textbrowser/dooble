@@ -1735,9 +1735,19 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+W")),
 				   this,
 				   SLOT(slot_close_tab(void)));
-      m_shortcuts << new QShortcut(QKeySequence(Qt::Key_F11),
-				   this,
-				   SLOT(slot_show_full_screen(void)));
+
+#ifndef Q_OS_MACOS
+      auto shortcut = new QShortcut
+	(QKeySequence(Qt::Key_F11), this, SLOT(slot_show_full_screen(void)));
+#else
+      auto shortcut = new QShortcut(this);
+
+      connect(shortcut,
+	      SIGNAL(activated(void)),
+	      this,
+	      SLOT(slot_show_full_screen(void)));
+#endif
+      m_shortcuts << shortcut;
 
 #ifdef Q_OS_MACOS
       foreach(auto shortcut, m_shortcuts)
@@ -2024,10 +2034,16 @@ void dooble::prepare_standard_menus(void)
   */
 
   menu = m_menu->addMenu(tr("&View"));
+#ifndef Q_OS_MACOS
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SLOT(slot_show_full_screen(void)),
 					 QKeySequence(Qt::Key_F11));
+#else
+  m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
+					 this,
+					 SLOT(slot_show_full_screen(void)));
+#endif
 
   /*
   ** Help Menu
