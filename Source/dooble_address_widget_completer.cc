@@ -63,7 +63,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
   if(!s_model)
     s_model = new QStandardItemModel();
 
-  m_model = new QStandardItemModel(this);
+  m_model = new QStandardItemModel(nullptr);
   m_popup = new dooble_address_widget_completer_popup(parent);
   m_popup->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   m_popup->horizontalHeader()->setVisible(false);
@@ -108,6 +108,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
 
 dooble_address_widget_completer::~dooble_address_widget_completer()
 {
+  m_model->deleteLater();
 }
 
 int dooble_address_widget_completer::levenshtein_distance
@@ -302,7 +303,10 @@ void dooble_address_widget_completer::slot_history_cleared(void)
 void dooble_address_widget_completer::slot_settings_applied(void)
 {
   if(dooble_settings::setting("show_address_widget_completer").toBool())
-    setModel(m_model);
+    {
+      if(m_model != model())
+	setModel(m_model);
+    }
   else
     setModel(nullptr);
 }
