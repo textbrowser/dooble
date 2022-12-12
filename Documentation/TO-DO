@@ -176,6 +176,7 @@ Completed Items
 - Simple cleaning of all databases.
 - Smart tab selections via keyboards.
 - Sort history items on population.
+- South tab and Mac. Qt-ism?
 - Store certificate exceptions.
 - Super-fancy icon set.
 - Support windows as pages and non-Dooble icons.
@@ -202,7 +203,6 @@ Remaining Items
 
 - Additional files are necessary in Debian distribution.
 - Allow custom JavaScript per URL.
-- Argon2, per request.
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
@@ -214,20 +214,15 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Prevent SQL query text overflow.
 - Shortcuts browser.
-- South tab and Mac. Qt-ism?
 - Translation browser.
 
 Unknown Items
 
 - Are containers empty? Remind if credentials exist.
-- Certificate information. Requires a WebEngine interface.
-- DTLS and Echo-DNS.
 - HMAC or KMAC.
 - Include date stamps in cookie containers.
 - Multiple certificate exceptions.
 - Optional Document Mode.
-- Sign Debian release: new public keys.
-- Socket states.
 - Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
   OFF.
 - Threefish tweak.
