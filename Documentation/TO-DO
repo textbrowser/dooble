@@ -203,6 +203,7 @@ Remaining Items
 
 - Additional files are necessary in Debian distribution.
 - Allow custom JavaScript per URL.
+- Are containers empty? Remind if credentials exist.
 - Auto-correct addresses.
 - Charts: data source status, multiple data sources,
   removal of recorded curves, reset properties.
@@ -211,18 +212,10 @@ Remaining Items
 - Disable proxy for local addresses.
 - Element-selection option.
 - Fancy completer.
+- HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
+- Optional Document Mode.
 - Prevent SQL query text overflow.
 - Shortcuts browser.
-- Translation browser.
-
-Unknown Items
-
-- Are containers empty? Remind if credentials exist.
-- HMAC or KMAC.
-- Include date stamps in cookie containers.
-- Multiple certificate exceptions.
-- Optional Document Mode.
-- Study SQLITE_FCNTL_CHUNK_SIZE and sqlite3_file_control(). Remove synchronous
-  OFF.
 - Threefish tweak.
+- Translation browser.
