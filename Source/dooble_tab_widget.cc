@@ -365,8 +365,13 @@ void dooble_tab_widget::set_tab_position(void)
     }
   else if(tab_position == "south")
     {
+#ifdef Q_OS_MACOS
+      m_left_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+#else
       if(!cornerWidget(Qt::TopLeftCorner) && show_left_corner_widget)
 	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
+#endif
 
       setTabPosition(QTabWidget::South);
     }
@@ -560,6 +565,15 @@ void dooble_tab_widget::slot_set_visible_corner_button(bool state)
     }
   else
     {
+#ifdef Q_OS_MACOS
+      if(tab_position == "south")
+	{
+	  m_left_corner_widget->setVisible(false);
+	  setCornerWidget(nullptr, Qt::TopLeftCorner);
+	  return;
+	}
+#endif
+
       if(state)
 	setCornerWidget(m_left_corner_widget, Qt::TopLeftCorner);
       else

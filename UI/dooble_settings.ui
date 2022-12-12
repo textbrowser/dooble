@@ -60,7 +60,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>522</height>
+           <height>526</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-270</y>
-               <width>642</width>
-               <height>780</height>
+               <y>-235</y>
+               <width>637</width>
+               <height>743</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -700,7 +700,7 @@
               <item>
                <widget class="QCheckBox" name="show_left_corner_widget">
                 <property name="toolTip">
-                 <string>Ignored for East and West tab positions.</string>
+                 <string>Ignored for East and West tab positions. Ignored by Mac and South tab position.</string>
                 </property>
                 <property name="text">
                  <string>Show Left-Corner Widget</string>
@@ -1046,8 +1046,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>617</width>
-               <height>894</height>
+               <width>561</width>
+               <height>829</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1634,8 +1634,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>486</width>
-               <height>2074</height>
+               <width>465</width>
+               <height>1985</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
