@@ -22,6 +22,7 @@ export QT_X11_NO_MITSHM=1
 if [ -r ./Dooble ] && [ -x ./Dooble ]
 then
     echo "Launching a local Dooble."
+    export LD_LIBRARY_PATH=.
     exec ./Dooble "$@"
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
