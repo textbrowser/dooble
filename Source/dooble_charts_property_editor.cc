@@ -32,6 +32,7 @@
 #include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QPushButton>
+#include <QScrollBar>
 #include <QSpinBox>
 #include <QtMath>
 
