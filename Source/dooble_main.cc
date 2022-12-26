@@ -427,7 +427,7 @@ int main(int argc, char *argv[])
   dooble::s_settings->set_settings_path(dooble_settings_path);
 
   auto arguments(QCoreApplication::arguments());
-  auto d = new dooble
+  auto d = new dooble // Not deleted.
     (urls, arguments.contains("--private") ||
            dooble::s_settings->setting("private_mode").toBool());
 

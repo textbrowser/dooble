@@ -189,6 +189,7 @@ Completed Items
 - Update History icons on filter and sort.
 - Update pull-down menu icons in real-time.
 - User agent.
+- Validate SQLite driver. Already completed.
 - WebEngine context menu should allow for blocking sites.
 - WebEngine fonts.
 - WebGL option.
@@ -219,5 +220,4 @@ Remaining Items
 - Prevent SQL query text overflow.
 - Shortcuts browser.
 - Threefish tweak.
-- Translation browser.
-- Validate SQLite driver.
+- Translations browser.
