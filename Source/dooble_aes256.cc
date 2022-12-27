@@ -688,6 +688,7 @@ void dooble_aes256::set_key(const QByteArray &key)
   munlock(m_round_key, 4 * 60 * sizeof(m_round_key[0][0]));
   munlock(m_state, 4 * 4 * sizeof(m_state[0][0]));
 #endif
+  dooble_cryptography::memzero(m_key);
   m_key = key;
 
   if(m_key.length() < m_key_length)
