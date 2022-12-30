@@ -433,7 +433,7 @@ void dooble_address_widget::set_text_format
 						 value);
     }
 
-  QInputMethodEvent event(QInputMethodEvent(QString(), attributes));
+  QInputMethodEvent event(QString(), attributes);
 
   QApplication::sendEvent(this, &event);
 }
