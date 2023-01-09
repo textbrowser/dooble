@@ -2112,6 +2112,9 @@ void dooble_page::slot_load_finished(bool ok)
     (qobject_cast<dooble_web_engine_page *> (m_view->page()));
   setProperty("is_loading", false);
 
+  if(m_ui.address->text() != m_view->url().toString())
+    m_ui.address->setText(m_view->url().toString());
+
   /*
   ** Do not save the favicon. The current page's favicon and the page's
   ** url may be unrelated.
@@ -2162,16 +2165,20 @@ void dooble_page::slot_load_finished(bool ok)
 
 void dooble_page::slot_load_page(void)
 {
+  auto keyboard_modifiers(QGuiApplication::keyboardModifiers());
   auto str(m_ui.address->text().trimmed());
   auto url((QUrl(str))); // Special parentheses for compilers.
 
   if((!url.isValid() ||
+      Qt::ControlModifier & keyboard_modifiers ||
       str.contains(' ') ||
       str.contains('\t') ||
       url.scheme().isEmpty()) &&
      dooble::s_search_engines_window)
     {
-      if(str.contains(' ') || str.contains('\t'))
+      if(Qt::ControlModifier & keyboard_modifiers ||
+	 str.contains(' ') ||
+	 str.contains('\t'))
 	{
 	search_label:
 
