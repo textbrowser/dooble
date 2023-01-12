@@ -60,7 +60,7 @@
            <x>0</x>
            <y>0</y>
            <width>105</width>
-           <height>526</height>
+           <height>514</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-235</y>
-               <width>637</width>
-               <height>743</height>
+               <y>0</y>
+               <width>642</width>
+               <height>868</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1007,6 +1007,13 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="retain_open_tabs">
+            <property name="text">
+             <string>Retain Open Tabs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="visited_links">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grant write permissions to the local Visited Links file. Links which are included in the Visited Links file will be colored when they are rendered by a page. Please restart Dooble if Visited Links is modified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1046,8 +1053,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>561</width>
-               <height>829</height>
+               <width>681</width>
+               <height>990</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1634,8 +1641,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>465</width>
-               <height>1985</height>
+               <width>556</width>
+               <height>2210</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2537,6 +2544,7 @@
   <tabstop>theme</tabstop>
   <tabstop>zoom_frame_location</tabstop>
   <tabstop>browsing_history</tabstop>
+  <tabstop>retain_open_tabs</tabstop>
   <tabstop>visited_links</tabstop>
   <tabstop>scrollArea_2</tabstop>
   <tabstop>block_third_party_cookies</tabstop>
