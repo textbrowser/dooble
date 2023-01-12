@@ -72,7 +72,7 @@ cp -pr DEBIAN dooble-debian.d/.
 cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
-fakeroot dpkg-deb --build dooble-debian.d Dooble-2022.12.25_amd64.deb
+fakeroot dpkg-deb --build dooble-debian.d Dooble-0000.00.00_amd64.deb
 make distclean
 rm -fr ./opt
 rm -fr dooble-debian.d
