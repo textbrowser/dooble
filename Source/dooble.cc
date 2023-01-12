@@ -306,6 +306,30 @@ dooble::~dooble()
     m_downloads->abort();
 }
 
+QList<QUrl> dooble::all_open_tab_urls(void) const
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  QList<QUrl> list;
+
+  foreach(auto i, QApplication::topLevelWidgets())
+    {
+      auto d = qobject_cast<dooble *> (i);
+
+      if(d)
+	for(int i = 0; i < d->m_ui.tab->count(); i++)
+	  {
+	    auto page = qobject_cast<dooble_page *> (d->m_ui.tab->widget(i));
+
+	    if(page)
+	      list << page->url();
+	  }
+    }
+
+  QApplication::restoreOverrideCursor();
+  return list;
+}
+
 QStringList dooble::chart_names(void) const
 {
   QStringList list;
@@ -3787,6 +3811,9 @@ void dooble::slot_quit_dooble(void)
   s_cookies_window->close();
   s_downloads->abort();
   s_history->abort();
+  s_history->save_open_tabs
+    (dooble_settings::setting("retain_open_tabs").toBool() ?
+     all_open_tab_urls() : QList<QUrl> ());
   s_history_popup->deleteLater();
   QApplication::exit(0);
 }

@@ -136,6 +136,7 @@ class dooble: public QMainWindow
   QList<QPointer<QAction> > m_standard_menu_actions;
   QList<QShortcut *> m_shortcuts;
   QList<QShortcut *> m_tab_widget_shortcuts;
+  QList<QUrl> all_open_tab_urls(void) const;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;

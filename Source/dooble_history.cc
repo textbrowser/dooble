@@ -158,6 +158,9 @@ void dooble_history::create_tables(QSqlDatabase &db)
 	     "title TEXT NOT NULL, "
 	     "url TEXT NOT NULL, "
 	     "url_digest TEXT PRIMARY KEY NOT NULL)");
+  query.exec("CREATE TABLE IF NOT EXISTS dooble_open_tabs ("
+	     "url TEXT NOT NULL, "
+	     "url_digest TEXT PRIMARY KEY NOT NULL)");
 }
 
 void dooble_history::populate(const QByteArray &authentication_key,
@@ -994,6 +997,54 @@ void dooble_history::save_item(const QIcon &icon,
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_history::save_open_tabs(const QList<QUrl> &urls)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_history.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_open_tabs");
+
+	if(dooble::s_cryptography &&
+	   dooble_settings::setting("retain_open_tabs").toBool())
+	  {
+	    foreach(const auto &url, urls)
+	      if(!url.isEmpty() && url.isValid())
+		{
+		  query.prepare
+		    ("INSERT INTO dooble_open_tabs "
+		     "(url, url_digest) VALUES (?, ?)");
+		  query.addBindValue
+		    (dooble::s_cryptography->encrypt_then_mac(url.toEncoded()).
+		     toBase64());
+		  query.addBindValue
+		    (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+		  query.exec();
+		}
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_history::slot_populate(void)

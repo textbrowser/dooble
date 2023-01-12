@@ -76,6 +76,7 @@ class dooble_history: public QObject
   void save_item(const QIcon &icon,
 		 const QWebEngineHistoryItem &item,
 		 bool force);
+  void save_open_tabs(const QList<QUrl> &urls);
 
  private:
   QAtomicInteger<short> m_interrupt;
