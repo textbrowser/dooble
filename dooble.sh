@@ -44,6 +44,6 @@ then
     cd /usr/local/dooble && exec ./Dooble "$@"
     exit $?
 else
-    "Cannot find Dooble."
+    "Cannot find Dooble. Please contact your lovely administrator."
     exit 1
 fi
