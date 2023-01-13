@@ -227,6 +227,7 @@ class dooble: public QMainWindow
   void slot_open_link_in_new_tab(const QUrl &url);
   void slot_open_link_in_new_window(const QUrl &url);
   void slot_open_local_file(void);
+  void slot_open_previous_session_tabs(void);
   void slot_open_tab_as_new_private_window(int index);
   void slot_open_tab_as_new_window(int index);
   void slot_pbkdf2_future_finished(void);

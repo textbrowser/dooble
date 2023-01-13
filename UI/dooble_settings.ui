@@ -1007,9 +1007,9 @@
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="retain_open_tabs">
+           <widget class="QCheckBox" name="retain_session_tabs">
             <property name="text">
-             <string>Retain Open Tabs</string>
+             <string>Retain Session Tabs</string>
             </property>
            </widget>
           </item>
@@ -2544,7 +2544,7 @@
   <tabstop>theme</tabstop>
   <tabstop>zoom_frame_location</tabstop>
   <tabstop>browsing_history</tabstop>
-  <tabstop>retain_open_tabs</tabstop>
+  <tabstop>retain_session_tabs</tabstop>
   <tabstop>visited_links</tabstop>
   <tabstop>scrollArea_2</tabstop>
   <tabstop>block_third_party_cookies</tabstop>
