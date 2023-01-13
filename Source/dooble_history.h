@@ -63,7 +63,7 @@ class dooble_history: public QObject
   QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> >
     history(void) const;
   QList<QAction *> last_n_actions(int n) const;
-  QList<QUrl> previous_session_tabs(void);
+  QList<QUrl> previous_session_tabs(void) const;
   QStandardItemModel *favorites_model(void) const;
   bool is_favorite(const QUrl &url) const;
   void abort(void);

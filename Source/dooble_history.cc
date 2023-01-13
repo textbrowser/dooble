@@ -119,7 +119,7 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
   return list;
 }
 
-QList<QUrl> dooble_history::previous_session_tabs(void)
+QList<QUrl> dooble_history::previous_session_tabs(void) const
 {
   QList<QUrl> list;
 
