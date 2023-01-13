@@ -29,6 +29,11 @@ then
 	export LD_LIBRARY_PATH=Lib
     fi
 
+    if [ -r ./plugins ]
+    then
+	export QT_PLUGIN_PATH=plugins
+    fi
+
     exec ./Dooble "$@"
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]

@@ -13,6 +13,7 @@ mkdir -p ./dooble/Data
 mkdir -p ./dooble/Documentation
 mkdir -p ./dooble/Lib
 mkdir -p ./dooble/Translations
+mkdir -p ./dooble/translations
 cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Charts.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Core.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6DBus.so.6 ./dooble/Lib/.
@@ -38,9 +39,9 @@ cp -p ~/Qt/6.2.4/gcc_64/lib/libicui18n.so.56 ./dooble/Lib/.
 cp -p ~/Qt/6.2.4/gcc_64/lib/libicuuc.so.56 ./dooble/Lib/.
 cp -p ~/Qt/6.2.4/gcc_64/libexec/QtWebEngineProcess ./dooble/.
 cp -pr ~/Qt/6.2.4/gcc_64/plugins ./dooble/.
-cp -pr ~/Qt/6.2.4/gcc_64/resources/* ./dooble/.
+cp -pr ~/Qt/6.2.4/gcc_64/resources ./dooble/.
 cp -pr ~/Qt/6.2.4/gcc_64/translations/*.qm ./dooble/Translations/.
-cp -pr ~/Qt/6.2.4/gcc_64/translations/qtwebengine_locales ./dooble/.
+cp -pr ~/Qt/6.2.4/gcc_64/translations/qtwebengine_locales ./dooble/translations/.
 chmod -x,g+w ./dooble/Lib/*
 ~/Qt/6.2.4/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./dooble/Documentation/.
@@ -50,6 +51,7 @@ cp -p ./Dooble ./dooble/.
 cp -p ./Icons/Logo/dooble.png ./dooble/.
 cp -p ./Qt/qt.conf ./dooble/.
 cp -p ./Translations/*.qm ./dooble/Translations/.
+cp -p ./dooble.sh ./dooble/.
 cp -pr ./Charts ./dooble/.
 cp -pr ./Data/*.txt ./dooble/Data/.
 cp -pr ./Data/README ./dooble/Data/.
