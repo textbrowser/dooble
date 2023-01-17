@@ -780,8 +780,9 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
 void dooble_settings::prepare_application_fonts(void)
 {
   QFont font;
+  auto string(m_ui.display_application_font->text().remove('&').trimmed());
 
-  if(!font.fromString(m_ui.display_application_font->text().remove('&')))
+  if(string.isEmpty() || !font.fromString(string))
     font = dooble_application::font();
 
   dooble::s_application->setFont(font);
@@ -859,44 +860,37 @@ void dooble_settings::prepare_fonts(void)
 	}
     }
 
-    if(list.at(0).isEmpty() ||
-       !font.fromString(list.at(0)))
+    if(list.at(0).isEmpty() || !font.fromString(list.at(0)))
       font = dooble_application::font();
 
     m_ui.web_font_cursive->setCurrentFont(font);
 
-    if(list.at(1).isEmpty() ||
-       !font.fromString(list.at(1)))
+    if(list.at(1).isEmpty() || !font.fromString(list.at(1)))
       font = dooble_application::font();
 
     m_ui.web_font_fantasy->setCurrentFont(font);
 
-    if(list.at(2).isEmpty() ||
-       !font.fromString(list.at(2)))
+    if(list.at(2).isEmpty() || !font.fromString(list.at(2)))
       font = dooble_application::font();
 
     m_ui.web_font_fixed->setCurrentFont(font);
 
-    if(list.at(3).isEmpty() ||
-       !font.fromString(list.at(3)))
+    if(list.at(3).isEmpty() || !font.fromString(list.at(3)))
       font = dooble_application::font();
 
     m_ui.web_font_pictograph->setCurrentFont(font);
 
-    if(list.at(4).isEmpty() ||
-       !font.fromString(list.at(4)))
+    if(list.at(4).isEmpty() || !font.fromString(list.at(4)))
       font = dooble_application::font();
 
     m_ui.web_font_sans_serif->setCurrentFont(font);
 
-    if(list.at(5).isEmpty() ||
-       !font.fromString(list.at(5)))
+    if(list.at(5).isEmpty() || !font.fromString(list.at(5)))
       font = dooble_application::font();
 
     m_ui.web_font_serif->setCurrentFont(font);
 
-    if(list.at(6).isEmpty() ||
-       !font.fromString(list.at(6)))
+    if(list.at(6).isEmpty() || !font.fromString(list.at(6)))
       font = dooble_application::font();
 
     m_ui.web_font_standard->setCurrentFont(font);

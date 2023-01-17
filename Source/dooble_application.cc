@@ -40,9 +40,10 @@ dooble_application::dooble_application(int &argc, char **argv):
   m_translator = nullptr;
 
   auto font(this->font());
+  auto string
+    (dooble_settings::setting("display_application_font").toString().trimmed());
 
-  if(!font.fromString(dooble_settings::
-		      setting("display_application_font").toString()))
+  if(string.isEmpty() || !font.fromString(string))
     font = QApplication::font();
 
   font.setHintingPreference(QFont::PreferFullHinting);
