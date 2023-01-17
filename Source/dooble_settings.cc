@@ -482,13 +482,7 @@ QVariant dooble_settings::setting(const QString &k,
 
   if(!s_settings.contains(key))
     {
-      QString home_path("");
-      auto bytes(qgetenv("DOOBLE_HOME").trimmed());
-
-      if(bytes.isEmpty())
-	home_path = s_settings.value("home_path").toString();
-      else
-	home_path = bytes;
+      auto home_path = s_settings.value("home_path").toString();
 
       locker.unlock();
 
@@ -548,15 +542,6 @@ QVariant dooble_settings::setting(const QString &k,
     return qBound(0, s_settings.value(key, default_value).toInt(), 2);
   else if(key == "hash_type_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 1);
-  else if(key == "home_path")
-    {
-      auto bytes(qgetenv("DOOBLE_HOME").trimmed());
-
-      if(bytes.isEmpty())
-	return s_settings.value("home_path").toString();
-      else
-	return QString(bytes);
-    }
   else if(key == "icon_set_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 1);
   else if(key == "language_index")

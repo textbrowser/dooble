@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
     {
       QDir().mkpath(bytes);
 
-      dooble_settings_path = bytes;
+      dooble_settings::set_setting("home_path", dooble_settings_path = bytes);
     }
 #else
   auto bytes(qgetenv("DOOBLE_HOME").trimmed());
@@ -318,7 +318,7 @@ int main(int argc, char *argv[])
     {
       QDir().mkpath(bytes);
 
-      dooble_settings_path = bytes;
+      dooble_settings::set_setting("home_path", dooble_settings_path = bytes);
     }
 #endif
 
