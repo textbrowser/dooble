@@ -312,11 +312,11 @@ QList<QUrl> dooble::all_open_tab_urls(void) const
 
   QList<QUrl> list;
 
-  foreach(auto i, QApplication::topLevelWidgets())
+  foreach(auto w, QApplication::topLevelWidgets())
     {
-      auto d = qobject_cast<dooble *> (i);
+      auto d = qobject_cast<dooble *> (w);
 
-      if(d)
+      if(d && d->m_is_private == false)
 	for(int i = 0; i < d->m_ui.tab->count(); i++)
 	  {
 	    auto page = qobject_cast<dooble_page *> (d->m_ui.tab->widget(i));
