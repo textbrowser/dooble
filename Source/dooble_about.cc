@@ -31,12 +31,28 @@
 #include <QtConcurrent>
 
 #include "dooble_about.h"
+#include "dooble_swifty.h"
 #include "dooble_version.h"
 
 dooble_about::dooble_about(void):QMainWindow()
 {
+  m_swifty = new swifty
+    (DOOBLE_VERSION_STRING,
+     "#define DOOBLE_VERSION_STRING",
+     QUrl::fromUserInput("https://raw.githubusercontent.com/"
+			 "textbrowser/dooble/master/Source/dooble_version.h"),
+     this);
+  m_swifty->download();
   m_ui.setupUi(this);
   m_ui.digest->clear();
+  connect(m_swifty,
+	  SIGNAL(different(const QString &)),
+	  this,
+	  SLOT(slot_swifty(void)));
+  connect(m_swifty,
+	  SIGNAL(same(void)),
+	  this,
+	  SLOT(slot_swifty(void)));
   connect(m_ui.license,
 	  SIGNAL(linkActivated(const QString &)),
 	  this,
@@ -80,7 +96,8 @@ dooble_about::dooble_about(void):QMainWindow()
     (tr("<a href=\"qrc://Documentation/ReleaseNotes.html\">"
 	"Release Notes</a>"));
   m_ui.version->setText
-    (tr("Dooble version %1, X.").arg(DOOBLE_VERSION_STRING));
+    (tr("Dooble version %1, X. The official version is <b>%1</b>.").
+     arg(DOOBLE_VERSION_STRING));
   compute_self_digest();
 }
 
@@ -150,4 +167,12 @@ void dooble_about::slot_file_digest_computed(const QByteArray &digest)
 void dooble_about::slot_link_activated(const QString &url)
 {
   emit link_activated(QUrl::fromUserInput(url));
+}
+
+void dooble_about::slot_swifty(void)
+{
+  m_ui.version->setText
+    (tr("Dooble version %1, X. The official version is <b>%2</b>.").
+     arg(DOOBLE_VERSION_STRING).
+     arg(m_swifty->newest_version()));
 }

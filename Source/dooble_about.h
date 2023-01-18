@@ -130,6 +130,8 @@
 #endif
 #endif
 
+class swifty;
+
 class dooble_about: public QMainWindow
 {
   Q_OBJECT
@@ -145,11 +147,13 @@ class dooble_about: public QMainWindow
  private:
   QFuture<void> m_future;
   Ui_dooble_about m_ui;
+  swifty *m_swifty;
   void compute_self_digest_task(const QString &file_path);
 
  private slots:
   void slot_file_digest_computed(const QByteArray &digest);
   void slot_link_activated(const QString &url);
+  void slot_swifty(void);
 
  signals:
   void file_digest_computed(const QByteArray &digest);
