@@ -93,6 +93,9 @@
         </item>
         <item>
          <widget class="QLabel" name="version">
+          <property name="styleSheet">
+           <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
+          </property>
           <property name="text">
            <string>Version</string>
           </property>
@@ -113,6 +116,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="site">
+          <property name="styleSheet">
+           <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please visit &lt;a href=&quot;https://textbrowser.github.io/dooble&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;https://textbrowser.github.io/dooble &lt;/span&gt;&lt;/a&gt;for release notes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::LinksAccessibleByMouse</set>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="local_information">
           <property name="styleSheet">
            <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
@@ -127,6 +143,9 @@
         </item>
         <item>
          <widget class="QLabel" name="digest">
+          <property name="styleSheet">
+           <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
+          </property>
           <property name="text">
            <string/>
           </property>

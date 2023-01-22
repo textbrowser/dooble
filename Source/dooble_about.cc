@@ -61,6 +61,10 @@ dooble_about::dooble_about(void):QMainWindow()
 	  SIGNAL(linkActivated(const QString &)),
 	  this,
 	  SLOT(slot_link_activated(const QString &)));
+  connect(m_ui.site,
+	  SIGNAL(linkActivated(const QString &)),
+	  this,
+	  SLOT(slot_link_activated(const QString &)));
   connect(this,
 	  SIGNAL(file_digest_computed(const QByteArray &)),
 	  this,
