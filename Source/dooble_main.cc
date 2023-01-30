@@ -291,9 +291,10 @@ int main(int argc, char *argv[])
   if(bytes.isEmpty())
     {
       QString dooble_directory(".dooble");
+      auto xdg_config_home(qgetenv("XDG_CONFIG_HOME").trimmed());
       auto xdg_data_home(qgetenv("XDG_DATA_HOME").trimmed());
 
-      if(xdg_data_home.isEmpty())
+      if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
 	{
 	  auto home_dir(QDir::home());
 
@@ -305,7 +306,12 @@ int main(int argc, char *argv[])
 	}
       else
 	{
-	  QDir home_dir(xdg_data_home);
+	  QDir home_dir;
+
+	  if(!xdg_config_home.isEmpty())
+	    home_dir = QDir(xdg_config_home);
+	  else
+	    home_dir = QDir(xdg_data_home);
 
 	  home_dir.mkdir("dooble");
 	  dooble_settings::set_setting
