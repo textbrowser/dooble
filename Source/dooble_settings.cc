@@ -242,14 +242,9 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	m_ui.language_directory->setVisible(false);
     }
 
-#ifdef Q_OS_WIN
-#else
-  m_ui.theme->setEnabled(false);
-  m_ui.theme->setToolTip(tr("Windows only."));
-#endif
 #ifdef Q_OS_OS2
   /*
-  ** TODO Temporarily fix UserAgent, see
+  ** Temporarily fix UserAgent.
   ** https://github.com/bitwiseworks/dooble-os2/issues/3
   ** https://github.com/bitwiseworks/qtwebengine-chromium-os2/issues/48
   */
@@ -260,6 +255,11 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent() +
 #endif
     " Dooble/" DOOBLE_VERSION_STRING;
+#ifdef Q_OS_WIN
+#else
+  m_ui.theme->setEnabled(false);
+  m_ui.theme->setToolTip(tr("Windows only."));
+#endif
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
   s_settings["allow_closing_of_single_tab"] = true;
@@ -1057,7 +1057,7 @@ void dooble_settings::prepare_table_statistics(void)
 
 void dooble_settings::prepare_web_engine_environment_variables(void)
 {
-  bool first_time;
+  auto first_time = true;
 
   if((first_time = s_web_engine_settings_environment.isEmpty()))
     {
@@ -1065,12 +1065,12 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	["--blink-settings=forceDarkModeEnabled"] = "boolean";
       s_web_engine_settings_environment["--disable-reading-from-canvas"] =
 	"singular";
+      s_web_engine_settings_environment["--enable-gpu-rasterization"] =
+	"boolean";
       s_web_engine_settings_environment["--enable-zero-copy"] = "boolean";
       s_web_engine_settings_environment["--ignore-certificate-errors"] =
 	"singular";
       s_web_engine_settings_environment["--ignore-gpu-blocklist"] = "boolean";
-      s_web_engine_settings_environment["--enable-gpu-rasterization"] =
-	"boolean";
       s_web_engine_settings_environment["--ignore-ssl-errors"] = "singular";
 #ifdef Q_OS_OS2
       s_web_engine_settings_environment["--single-process"] = "singular";
@@ -1091,7 +1091,7 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	QSqlQuery query(db);
 	QString string("");
 
-      	if (first_time)
+      	if(first_time)
       	  {
 #ifdef Q_OS_OS2
 	     /*
@@ -1099,8 +1099,10 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	     ** due to stability issues with multi-process mode.
 	     */
 
-	     query.exec("INSERT OR IGNORE INTO dooble_web_engine_settings "
-	                "(environment_variable, key, value) VALUES (1, '--single-process', true)");
+	    query.exec
+	      ("INSERT OR IGNORE INTO dooble_web_engine_settings "
+	       "(environment_variable, key, value) VALUES "
+	       "(1, '--single-process', true)");
 #endif
       	  }
 
@@ -1129,12 +1131,14 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	      string.append(" ");
 	    }
 
-	QString old_env = QString::fromLocal8Bit
-	                  (qgetenv("QTWEBENGINE_CHROMIUM_FLAGS")).trimmed();
-	if (!old_env.isEmpty())
+	auto old_environment
+	  (QString::fromLocal8Bit(qgetenv("QTWEBENGINE_CHROMIUM_FLAGS")).
+	   trimmed());
+
+	if(!old_environment.isEmpty())
 	  {
 	    string.prepend(" ");
-	    string.prepend(old_env);
+	    string.prepend(old_environment);
 	  }
 
 	qputenv

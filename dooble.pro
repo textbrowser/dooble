@@ -319,11 +319,10 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -pedantic \
                           -std=c++17
 os2 {
-# -fstack-protector requires manual lib spec
+# -fstack-protector requires manual lib spec.
 LIBS += -lssp
 } else {
-QMAKE_CXXFLAGS_RELEASE += \
-                          -Wl,-z,relro \
+QMAKE_CXXFLAGS_RELEASE += -Wl,-z,relro \
                           -fPIE \
                           -pie \
 }
