@@ -306,7 +306,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
 			  -Wformat-signedness \
                           -Wformat-truncation=2 \
                           -Wformat=2 \
-                          -Wl,-z,relro \
                           -Wlogical-op \
                           -Wno-deprecated-copy \
                           -Woverloaded-virtual \
@@ -315,12 +314,19 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
 			  -Wstringop-overflow=2 \
                           -Wundef \
                           -Wzero-as-null-pointer-constant \
-                          -fPIE \
                           -fstack-protector-all \
                           -fwrapv \
                           -pedantic \
-                          -pie \
                           -std=c++17
+os2 {
+# -fstack-protector requires manual lib spec
+LIBS += -lssp
+} else {
+QMAKE_CXXFLAGS_RELEASE += \
+                          -Wl,-z,relro \
+                          -fPIE \
+                          -pie \
+}
 versionAtLeast(QT_VERSION, 6.0.0) {
 QMAKE_CXXFLAGS_RELEASE += -Wno-int-in-bool-context
 }
