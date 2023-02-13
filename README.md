@@ -14,7 +14,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Favorites.</li>
 <li>Floating digital clock.</li>
 <li>Floating minute history window.</li>
-<li>FreeBSD, Linux, Mac, OpenBSD, Windows.</li>
+<li>FreeBSD, Linux, Mac, OpenBSD, OS/2, Windows.</li>
 <li>Gopher support.</li>
 <li>Great for older hardware!</li>
 <li>Many private windows.</li>
