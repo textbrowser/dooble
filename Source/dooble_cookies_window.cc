@@ -844,9 +844,11 @@ void dooble_cookies_window::slot_find(void)
 
 void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
 {
-  if(column != 0 || !item)
-    return;
-  else if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     !item ||
+     column != 0 ||
+     m_is_private)
     return;
 
   auto database_name("dooble_cookies_window");
@@ -979,7 +981,8 @@ void dooble_cookies_window::slot_item_selection_changed(void)
 void dooble_cookies_window::slot_periodically_purge_temporary_domains
 (bool state)
 {
-  dooble_settings::set_setting("periodically_purge_temporary_domains", state);
+  if(!m_is_private)
+    dooble_settings::set_setting("periodically_purge_temporary_domains", state);
 
   if(state)
     {
