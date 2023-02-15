@@ -67,8 +67,15 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_ui.favorite->setCheckState(Qt::PartiallyChecked);
   m_ui.name->setText("");
   m_ui.path->setText("");
-  m_ui.periodically_purge->setChecked
-    (dooble_settings::setting("periodically_purge_temporary_domains").toBool());
+
+  if(m_is_private)
+    m_ui.periodically_purge->setChecked
+      (dooble_settings::
+       setting("periodically_purge_temporary_domains (private)").toBool());
+  else
+    m_ui.periodically_purge->setChecked
+      (dooble_settings::setting("periodically_purge_temporary_domains").
+       toBool());
 
   if(m_ui.periodically_purge->isChecked())
     m_purge_domains_timer.start();
@@ -981,7 +988,10 @@ void dooble_cookies_window::slot_item_selection_changed(void)
 void dooble_cookies_window::slot_periodically_purge_temporary_domains
 (bool state)
 {
-  if(!m_is_private)
+  if(m_is_private)
+    dooble_settings::set_setting
+      ("periodically_purge_temporary_domains (private)", state);
+  else
     dooble_settings::set_setting("periodically_purge_temporary_domains", state);
 
   if(state)
