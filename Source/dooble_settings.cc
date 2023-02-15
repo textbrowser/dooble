@@ -2138,7 +2138,8 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
 void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
 {
   m_ui.qtwebengine_dictionaries_warning_label->setText
-    (tr("Warning! The directory qtwebengine_dictionaries cannot be accessed."));
+    (tr("<b>Warning!</b> "
+	"The directory qtwebengine_dictionaries cannot be accessed."));
   m_ui.qtwebengine_dictionaries_warning_label->setVisible(false);
 
   auto bytes(qgetenv("QTWEBENGINE_DICTIONARIES_PATH"));
@@ -2174,7 +2175,7 @@ void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
 	  if(!QFileInfo(b).isReadable())
 	    {
 	      m_ui.qtwebengine_dictionaries_warning_label->setText
-		(tr("Warning! %1 cannot be accessed!").arg(b));
+		(tr("<b>Warning!</b> %1 cannot be accessed!").arg(b));
 	      m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
 	      return;
 	    }

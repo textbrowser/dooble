@@ -121,6 +121,9 @@ class dooble_settings: public dooble_main_window
   void showEvent(QShowEvent *event)
   {
     dooble_main_window::showEvent(event);
+
+    if(!m_timer.isActive())
+      m_timer.start();
   }
 
   void show_qtwebengine_dictionaries_warning_label(void);
