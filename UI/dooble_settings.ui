@@ -1640,9 +1640,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>556</width>
-               <height>2210</height>
+               <y>-1302</y>
+               <width>642</width>
+               <height>2240</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2207,6 +2207,17 @@
                  <string>Spell Checkers</string>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                 <item>
+                  <widget class="QLabel" name="qtwebengine_dictionaries_warning_label">
+                   <property name="styleSheet">
+                    <string notr="true">QLabel {background-color: #f2dede; border: 1px solid #ebccd1; color:#a94442;}
+</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Warning!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QListWidget" name="dictionaries">
                    <property name="minimumSize">

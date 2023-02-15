@@ -444,6 +444,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
   restore(true);
   prepare_icons();
+  show_qtwebengine_dictionaries_warning_label();
   slot_password_changed();
 }
 
@@ -2126,6 +2127,23 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
 	break;
       }
     }
+}
+
+void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
+{
+  m_ui.qtwebengine_dictionaries_warning_label->setText
+    (tr("Warning! The directory qtwebengine_dictionaries cannot be accessed."));
+  m_ui.qtwebengine_dictionaries_warning_label->setVisible(false);
+
+  auto bytes(qgetenv("QTWEBENGINE_DICTIONARIES_PATH"));
+
+  if(bytes.trimmed().isEmpty())
+    {
+      if(!QFileInfo("qtwebengine_dictionaries").isReadable())
+	m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
+    }
+  else if(!QFileInfo(bytes).isReadable())
+    m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
 }
 
 void dooble_settings::slot_apply(void)

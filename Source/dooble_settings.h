@@ -115,6 +115,7 @@ class dooble_settings: public dooble_main_window
   void save_fonts(void);
   void save_javascript_block_popup_exception(const QUrl &url, bool state);
   void save_settings(void);
+  void show_qtwebengine_dictionaries_warning_label(void);
 
  private slots:
   void slot_apply(void);
