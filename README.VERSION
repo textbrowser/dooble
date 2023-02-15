@@ -4,6 +4,5 @@ DEBIAN/control
 DEBIAN-NATIVE/control
 Data/Info.plist
 Distributions/*.bash
-Documentation/Dooble.odt
-Documentation/RELEASE-NOTES.html
+Documentation/ReleaseNotes.html
 Source/dooble_version.h
