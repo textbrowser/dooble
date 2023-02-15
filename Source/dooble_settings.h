@@ -34,6 +34,7 @@
 #include <QProgressDialog>
 #include <QReadWriteLock>
 #include <QSqlDatabase>
+#include <QTimer>
 #include <QUrl>
 #include <QWebEnginePage>
 
@@ -92,6 +93,7 @@ class dooble_settings: public dooble_main_window
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
+  QTimer m_timer;
   Ui_dooble_settings m_ui;
   static QHash<QString, QString> s_web_engine_settings_environment;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
@@ -115,12 +117,19 @@ class dooble_settings: public dooble_main_window
   void save_fonts(void);
   void save_javascript_block_popup_exception(const QUrl &url, bool state);
   void save_settings(void);
+
+  void showEvent(QShowEvent *event)
+  {
+    dooble_main_window::showEvent(event);
+  }
+
   void show_qtwebengine_dictionaries_warning_label(void);
 
  private slots:
   void slot_apply(void);
   void slot_clear_cache(void);
   void slot_features_permissions_item_changed(QTableWidgetItem *item);
+  void slot_general_timer_timeout(void);
   void slot_javascript_block_popups_exceptions_item_changed
     (QTableWidgetItem *item);
   void slot_new_javascript_block_popup_exception(const QUrl &url);

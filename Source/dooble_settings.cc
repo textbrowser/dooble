@@ -68,11 +68,16 @@ QStringList dooble_settings::s_spell_checker_dictionaries;
 
 dooble_settings::dooble_settings(void):dooble_main_window()
 {
+  m_timer.setInterval(2500);
   m_ui.setupUi(this);
   connect(&m_pbkdf2_future_watcher,
 	  SIGNAL(finished(void)),
 	  this,
 	  SLOT(slot_pbkdf2_future_finished(void)));
+  connect(&m_timer,
+	  SIGNAL(timeout(void)),
+	  this,
+	  SLOT(slot_general_timer_timeout(void)));
   connect(m_ui.allow_javascript_block_popup_exception,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -675,6 +680,7 @@ int dooble_settings::site_feature_permission
 
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
+  m_timer.stop();
   m_ui.password_1->setText
     (dooble_random::random_bytes(m_ui.password_1->text().length()).toHex());
   m_ui.password_1->clear();
@@ -2139,11 +2145,41 @@ void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
 
   if(bytes.trimmed().isEmpty())
     {
-      if(!QFileInfo("qtwebengine_dictionaries").isReadable())
-	m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
+      bytes = "qtwebengine_dictionaries";
+
+      if(!QFileInfo(bytes).isReadable())
+	{
+	  m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
+	  return;
+	}
     }
   else if(!QFileInfo(bytes).isReadable())
-    m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
+    {
+      m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
+      return;
+    }
+
+  for(int i = 0; i < m_ui.dictionaries->count(); i++)
+    {
+      auto item = m_ui.dictionaries->item(i);
+
+      if(item && item->checkState() == Qt::Checked)
+	{
+	  QString b(bytes);
+
+	  b.append(QDir::separator());
+	  b.append(item->text());
+	  b.append(".bdic");
+
+	  if(!QFileInfo(b).isReadable())
+	    {
+	      m_ui.qtwebengine_dictionaries_warning_label->setText
+		(tr("Warning! %1 cannot be accessed!").arg(b));
+	      m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
+	      return;
+	    }
+	}
+    }
 }
 
 void dooble_settings::slot_apply(void)
@@ -2546,6 +2582,13 @@ void dooble_settings::slot_features_permissions_item_changed
      QWebEnginePage::Feature(item->data(Qt::ItemDataRole(Qt::UserRole + 1)).
 			     toInt()),
      item->checkState() == Qt::Checked);
+}
+
+void dooble_settings::slot_general_timer_timeout(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  show_qtwebengine_dictionaries_warning_label();
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::slot_javascript_block_popups_exceptions_item_changed
