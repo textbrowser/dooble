@@ -302,6 +302,8 @@ dooble::~dooble()
     if(shortcut)
       shortcut->deleteLater();
 
+  m_shortcuts.clear();
+
   if(m_downloads)
     m_downloads->abort();
 }
