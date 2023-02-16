@@ -21,6 +21,12 @@
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <widget class="QLabel" name="settings_path">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Location</string>
       </property>
@@ -371,8 +377,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>868</height>
+               <width>398</width>
+               <height>874</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1640,8 +1646,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1302</y>
-               <width>642</width>
+               <y>0</y>
+               <width>556</width>
                <height>2240</height>
               </rect>
              </property>
