@@ -787,12 +787,16 @@ void dooble_settings::prepare_application_fonts(void)
   if(string.isEmpty() || !font.fromString(string))
     font = dooble_application::font();
 
+  auto before = font.bold();
+
   dooble::s_application->setFont(font);
 
   foreach(auto widget, QApplication::allWidgets())
     if(widget)
       {
+	font.setBold(widget->font().bold());
 	widget->setFont(font);
+	font.setBold(before);
 	widget->updateGeometry();
       }
 }
