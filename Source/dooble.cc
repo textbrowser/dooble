@@ -117,10 +117,10 @@ dooble::dooble(QWidget *widget):QMainWindow()
 
   if(widget)
     {
-      m_ui.tab->addTab(widget, widget->windowTitle());
+      add_tab(widget, widget->windowTitle());
       m_ui.tab->setCurrentWidget(widget);
-      m_ui.tab->setTabIcon(0, widget->windowIcon());
-      m_ui.tab->setTabToolTip(0, widget->windowTitle());
+      m_ui.tab->setTabIcon(m_ui.tab->indexOf(widget), widget->windowIcon());
+      m_ui.tab->setTabToolTip(m_ui.tab->indexOf(widget), widget->windowTitle());
       prepare_tab_icons_text_tool_tips();
       prepare_tab_shortcuts();
     }
@@ -521,11 +521,11 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   prepare_page_connections(page);
 
   if(m_anonymous_tab_headers)
-    m_ui.tab->addTab(page, tr("Dooble"));
+    add_tab(page, tr("Dooble"));
   else if(s_application->application_locked())
-    m_ui.tab->addTab(page, tr("Application Locked"));
+    add_tab(page, tr("Application Locked"));
   else
-    m_ui.tab->addTab(page, tr("New Tab"));
+    add_tab(page, tr("New Tab"));
 
   if(m_anonymous_tab_headers || s_application->application_locked())
     m_ui.tab->setTabIcon
@@ -567,6 +567,17 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
   return page;
+}
+
+void dooble::add_tab(QWidget *widget, const QString &title)
+{
+  if(!widget)
+    return;
+
+  if(dooble_settings::setting("add_tab_behavior_index").toInt() == 1)
+    m_ui.tab->addTab(widget, title);
+  else
+    m_ui.tab->insertTab(m_ui.tab->currentIndex() + 1, widget, title);
 }
 
 void dooble::clean(void)
@@ -1020,11 +1031,11 @@ void dooble::new_page(dooble_charts *chart)
     return;
 
   if(m_anonymous_tab_headers)
-    m_ui.tab->addTab(chart, tr("Dooble"));
+    add_tab(chart, tr("Dooble"));
   else if(s_application->application_locked())
-    m_ui.tab->addTab(chart, tr("Application Locked"));
+    add_tab(chart, tr("Application Locked"));
   else
-    m_ui.tab->addTab(chart, tr("XY Series Chart"));
+    add_tab(chart, tr("XY Series Chart"));
 
   m_ui.tab->setTabIcon
     (m_ui.tab->indexOf(chart), dooble_favicons::icon(QUrl())); // Mac too!
@@ -1070,14 +1081,14 @@ void dooble::new_page(dooble_page *page)
 
   if(m_anonymous_tab_headers)
     {
-      m_ui.tab->addTab(page, tr("Dooble"));
+      add_tab(page, tr("Dooble"));
       m_ui.tab->setTabIcon
 	(m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
       m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
     }
   else if(s_application->application_locked())
     {
-      m_ui.tab->addTab(page, tr("Application Locked"));
+      add_tab(page, tr("Application Locked"));
       m_ui.tab->setTabIcon
 	(m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
       m_ui.tab->setTabToolTip
@@ -1085,7 +1096,7 @@ void dooble::new_page(dooble_page *page)
     }
   else
     {
-      m_ui.tab->addTab(page, title.replace("&", "&&"));
+      add_tab(page, title.replace("&", "&&"));
       m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
       m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
     }
@@ -1128,18 +1139,18 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   if(m_anonymous_tab_headers)
     {
-      m_ui.tab->addTab(page, tr("Dooble"));
+      add_tab(page, tr("Dooble"));
       m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
     }
   else if(s_application->application_locked())
     {
-      m_ui.tab->addTab(page, tr("Application Locked"));
+      add_tab(page, tr("Application Locked"));
       m_ui.tab->setTabToolTip
 	(m_ui.tab->indexOf(page), tr("Application Locked"));
     }
   else
     {
-      m_ui.tab->addTab(page, title.replace("&", "&&"));
+      add_tab(page, title.replace("&", "&&"));
       m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
     }
 
@@ -3978,13 +3989,13 @@ void dooble::slot_show_accepted_or_blocked_domains(void)
     {
       if(m_ui.tab->indexOf(s_accepted_or_blocked_domains) == -1)
 	{
-	  m_ui.tab->addTab(s_accepted_or_blocked_domains,
-			   s_accepted_or_blocked_domains->windowTitle());
+	  add_tab(s_accepted_or_blocked_domains,
+		  s_accepted_or_blocked_domains->windowTitle());
 	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1,
+	    (m_ui.tab->indexOf(s_accepted_or_blocked_domains),
 	     s_accepted_or_blocked_domains->windowIcon());
 	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1,
+	    (m_ui.tab->indexOf(s_accepted_or_blocked_domains),
 	     s_accepted_or_blocked_domains->windowTitle());
 	  prepare_tab_icons_text_tool_tips();
 	}
@@ -4087,11 +4098,11 @@ void dooble::slot_show_downloads(void)
     {
       if(m_ui.tab->indexOf(m_downloads) == -1)
 	{
-	  m_ui.tab->addTab(m_downloads, m_downloads->windowTitle());
+	  add_tab(m_downloads, m_downloads->windowTitle());
 	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, m_downloads->windowIcon());
+	    (m_ui.tab->indexOf(m_downloads), m_downloads->windowIcon());
 	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, m_downloads->windowTitle());
+	    (m_ui.tab->indexOf(m_downloads), m_downloads->windowTitle());
 	  prepare_tab_icons_text_tool_tips();
 	}
 
@@ -4106,11 +4117,11 @@ void dooble::slot_show_downloads(void)
     {
       if(m_ui.tab->indexOf(s_downloads) == -1)
 	{
-	  m_ui.tab->addTab(s_downloads, s_downloads->windowTitle());
+	  add_tab(s_downloads, s_downloads->windowTitle());
 	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, s_downloads->windowIcon());
+	    (m_ui.tab->indexOf(s_downloads), s_downloads->windowIcon());
 	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, s_downloads->windowTitle());
+	    (m_ui.tab->indexOf(s_downloads), s_downloads->windowTitle());
 	  prepare_tab_icons_text_tool_tips();
 	}
 
@@ -4230,11 +4241,13 @@ void dooble::slot_show_history(void)
     {
       if(m_ui.tab->indexOf(s_history_window) == -1)
 	{
-	  m_ui.tab->addTab(s_history_window, s_history_window->windowTitle());
+	  add_tab(s_history_window, s_history_window->windowTitle());
 	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, s_history_window->windowIcon());
+	    (m_ui.tab->indexOf(s_history_window),
+	     s_history_window->windowIcon());
 	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, s_history_window->windowTitle());
+	    (m_ui.tab->indexOf(s_history_window),
+	     s_history_window->windowTitle());
 	  prepare_tab_icons_text_tool_tips();
 	}
 
@@ -4310,11 +4323,11 @@ void dooble::slot_show_settings(void)
     {
       if(m_ui.tab->indexOf(s_settings) == -1)
 	{
-	  m_ui.tab->addTab(s_settings, s_settings->windowTitle());
+	  add_tab(s_settings, s_settings->windowTitle());
 	  m_ui.tab->setTabIcon
-	    (m_ui.tab->count() - 1, s_settings->windowIcon());
+	    (m_ui.tab->indexOf(s_settings), s_settings->windowIcon());
 	  m_ui.tab->setTabToolTip
-	    (m_ui.tab->count() - 1, s_settings->windowTitle());
+	    (m_ui.tab->indexOf(s_settings), s_settings->windowTitle());
 	  prepare_tab_icons_text_tool_tips();
 	  s_settings->restore(false);
 	}

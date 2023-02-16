@@ -165,6 +165,7 @@ class dooble: public QMainWindow
     (const QWebEngineCookieStore::FilterRequest &filter_request);
   bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;
+  void add_tab(QWidget *widget, const QString &title);
   void connect_signals(void);
   void decouple_support_windows(void);
   void delayed_load(const QUrl &url, dooble_page *page);

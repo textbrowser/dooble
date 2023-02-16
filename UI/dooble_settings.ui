@@ -377,11 +377,55 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>398</width>
-               <height>874</height>
+               <width>642</width>
+               <height>912</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <item>
+                 <widget class="QLabel" name="label_48">
+                  <property name="text">
+                   <string>Add Tab Behavior</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="add_tab_behavior">
+                  <property name="currentIndex">
+                   <number>1</number>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>After Current</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>At End</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_24">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
               <item>
                <widget class="QCheckBox" name="allow_closing_of_single_tab">
                 <property name="text">
@@ -2538,6 +2582,7 @@
   <tabstop>clear_cache</tabstop>
   <tabstop>cache_type</tabstop>
   <tabstop>scrollArea_4</tabstop>
+  <tabstop>add_tab_behavior</tabstop>
   <tabstop>allow_closing_of_single_tab</tabstop>
   <tabstop>display_application_font</tabstop>
   <tabstop>denote_private_widgets</tabstop>
@@ -2618,13 +2663,13 @@
   <tabstop>zoom</tabstop>
   <tabstop>user_agent</tabstop>
   <tabstop>reset_user_agent</tabstop>
+  <tabstop>web_plugins</tabstop>
   <tabstop>web_engine_settings</tabstop>
   <tabstop>webgl</tabstop>
   <tabstop>webrtc_public_interfaces_only</tabstop>
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
-  <tabstop>web_plugins</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
