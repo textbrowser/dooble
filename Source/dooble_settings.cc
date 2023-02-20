@@ -220,14 +220,18 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	    m_ui.language_directory->setText
 	      (tr("<b>Warning!</b> The file %1 does not exist. "
 		  "The System option has been disabled. English "
-		  "will be assumed.").
-	       arg(file_info.absoluteFilePath()));
+		  "will be assumed. Please read %2, line %3.").
+	       arg(file_info.absoluteFilePath()).
+	       arg(__FILE__).
+	       arg(__LINE__));
 	  else
 	    m_ui.language_directory->setText
 	      (tr("<b>Warning!</b> The file %1 is not readable. "
 		  "The System option has been disabled. English "
-		  "will be assumed.").
-	       arg(file_info.absoluteFilePath()));
+		  "will be assumed. Please read %2, line %3.").
+	       arg(file_info.absoluteFilePath()).
+	       arg(__FILE__).
+	       arg(__LINE__));
 	}
       else if(file_info.size() <= 1024)
 	{
@@ -240,8 +244,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  m_ui.language_directory->setText
 	    (tr("<b>Warning!</b> The file %1 is perhaps incomplete. "
 		"The System option has been disabled. English "
-		"will be assumed.").
-	     arg(file_info.absoluteFilePath()));
+		"will be assumed. Please read %2, line %3.").
+	     arg(file_info.absoluteFilePath()).
+	     arg(__FILE__).
+	     arg(__LINE__));
 	}
       else
 	m_ui.language_directory->setVisible(false);
@@ -2151,7 +2157,8 @@ void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
 {
   m_ui.qtwebengine_dictionaries_warning_label->setText
     (tr("<b>Warning!</b> "
-	"The directory qtwebengine_dictionaries cannot be accessed."));
+	"The directory qtwebengine_dictionaries cannot be accessed. "
+	"Please read %1, line %2.").arg(__FILE__).arg(__LINE__));
   m_ui.qtwebengine_dictionaries_warning_label->setVisible(false);
 
   auto bytes(qgetenv("QTWEBENGINE_DICTIONARIES_PATH"));
