@@ -293,7 +293,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["features_permissions"] = true;
   s_settings["hash_type"] = "SHA3-512";
   s_settings["hash_type_index"] = 1;
-  s_settings["home_url"] = QUrl::fromUserInput(dooble::ABOUT_BLANK).toEncoded();
+  s_settings["home_url"] = QUrl();
   s_settings["icon_set"] = "Material Design";
   s_settings["icon_set_index"] = 0;
   s_settings["javascript"] = true;
@@ -608,10 +608,13 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
     return false;
   else if(value.isNull())
     {
-      QWriteLocker locker(&s_settings_mutex);
+      if(key != "home_url")
+	{
+	  QWriteLocker locker(&s_settings_mutex);
 
-      s_settings.remove(key.toLower().trimmed());
-      return false;
+	  s_settings.remove(key.toLower().trimmed());
+	  return false;
+	}
     }
 
   QWriteLocker locker(&s_settings_mutex);
@@ -639,7 +642,12 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
 	query.addBindValue(key.toLower().trimmed());
-	query.addBindValue(value.toString().trimmed());
+
+	if(key == "home_url" && value.toString().trimmed().isEmpty())
+	  query.addBindValue("");
+	else
+	  query.addBindValue(value.toString().trimmed());
+
 	ok = query.exec();
       }
 
@@ -1482,7 +1490,7 @@ void dooble_settings::restore(bool read_database)
   if(!url.isEmpty() && url.isValid())
     m_ui.home_url->setText(url.toString());
   else
-    m_ui.home_url->setText(dooble::ABOUT_BLANK);
+    m_ui.home_url->setText("");
 
   m_ui.icon_set->setCurrentIndex
     (qBound(0,
@@ -1603,8 +1611,12 @@ void dooble_settings::restore(bool read_database)
   else
     s_settings["hash_type"] = "SHA3-512";
 
-  s_settings["home_url"] =
-    QUrl::fromUserInput(m_ui.home_url->text()).toEncoded();
+  if(m_ui.home_url->text().trimmed().isEmpty())
+    s_settings["home_url"] = QUrl();
+  else
+    s_settings["home_url"] =
+      QUrl::fromUserInput(m_ui.home_url->text()).toEncoded();
+
   s_settings["icon_set"] = "Material Design";
 
   switch(m_ui.theme->currentIndex())
@@ -2311,9 +2323,6 @@ void dooble_settings::slot_apply(void)
     QWebEngineProfile::defaultProfile()->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
-  if(m_ui.home_url->text().trimmed().isEmpty())
-    m_ui.home_url->setText(dooble::ABOUT_BLANK);
-
   if(m_ui.user_agent->text().trimmed().isEmpty())
     {
       m_ui.user_agent->setText(s_http_user_agent);
@@ -2498,10 +2507,16 @@ void dooble_settings::slot_apply(void)
   set_setting
     ("features_permissions", m_ui.features_permissions_groupbox->isChecked());
 
-  auto url(QUrl::fromUserInput(m_ui.home_url->text().trimmed()));
+  if(m_ui.home_url->text().trimmed().isEmpty())
+    set_setting("home_url", QUrl());
+  else
+    {
+      auto url(QUrl::fromUserInput(m_ui.home_url->text().trimmed()));
 
-  m_ui.home_url->setText(url.toString());
-  set_setting("home_url", url.toEncoded());
+      m_ui.home_url->setText(url.toString());
+      set_setting("home_url", url.toEncoded());
+    }
+
   set_setting("icon_set_index", m_ui.icon_set->currentIndex());
 
   {
