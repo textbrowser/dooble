@@ -2167,6 +2167,18 @@ void dooble_page::slot_load_page(void)
 {
   auto keyboard_modifiers(QGuiApplication::keyboardModifiers());
   auto str(m_ui.address->text().trimmed());
+
+  if(dooble::s_search_engines_window)
+    {
+      auto url(dooble::s_search_engines_window->search_url(str));
+
+      if(!url.isEmpty() && url.isValid())
+	{
+	  load(url);
+	  return;
+	}
+    }
+
   auto url((QUrl(str))); // Special parentheses for compilers.
 
   if((!url.isValid() ||
@@ -2213,6 +2225,8 @@ void dooble_page::slot_load_page(void)
 
       goto search_label;
     }
+  else if(!url.scheme().isEmpty() && dooble::s_search_engines_window)
+    goto search_label;
 
  done_label:
 

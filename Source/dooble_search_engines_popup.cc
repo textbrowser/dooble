@@ -45,7 +45,7 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
 {
   m_model = new QStandardItemModel(this);
   m_model->setHorizontalHeaderLabels
-    (QStringList() << tr("Title") << tr("Search Engine"));
+    (QStringList() << tr("Title") << tr("Search Engine") << tr("Syntax"));
   m_predefined_urls["DuckDuckGo"] = QUrl::fromUserInput
     ("https://duckduckgo.com/?q=");
   m_predefined_urls["Ecosia"] =
@@ -122,8 +122,37 @@ QUrl dooble_search_engines_popup::default_address_bar_engine_url(void) const
     return m_default_address_bar_engine_url;
 }
 
+QUrl dooble_search_engines_popup::search_url(const QString &t) const
+{
+  auto text(t.trimmed());
+
+  if(text.isEmpty())
+    return QUrl();
+
+  for(int i = 0; i < m_model->rowCount(); i++)
+    {
+      auto item1 = m_model->item(i, 1);
+      auto item2 = m_model->item(i, 2);
+
+      if(!item1 || !item2 || item2->text().trimmed().isEmpty())
+	continue;
+
+      if(text.startsWith(item2->text()))
+	{
+	  auto url(item1->data().toUrl());
+
+	  url.setQuery
+	    (url.query().
+	     append(QString("%1").arg(text.mid(item2->text().length()))));
+	  return url;
+	}
+    }
+
+  return QUrl();
+}
+
 void dooble_search_engines_popup::add_search_engine
-(const QByteArray &title, const QUrl &url)
+(const QByteArray &syntax, const QByteArray &title, const QUrl &url)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -144,9 +173,16 @@ void dooble_search_engines_popup::add_search_engine
 
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_search_engines "
-	   "(title, url, url_digest) VALUES (?, ?, ?)");
+	   "(syntax, title, url, url_digest) VALUES (?, ?, ?, ?)");
 
 	QByteArray bytes;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac(syntax);
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
 
 	bytes = dooble::s_cryptography->encrypt_then_mac(title);
 
@@ -201,6 +237,7 @@ void dooble_search_engines_popup::add_search_engine
 	    action = new QAction
 	      (dooble_favicons::icon_from_host(url), title, this);
 	    action->setProperty("url", url);
+	    item->setCheckState(Qt::Unchecked);
 	    item->setData(url);
 	    item->setFlags(Qt::ItemIsEnabled |
 			   Qt::ItemIsSelectable |
@@ -214,10 +251,17 @@ void dooble_search_engines_popup::add_search_engine
 	    item->setText(url.toEncoded());
 	    item->setToolTip(item->text());
 	    list << item;
+	    item = new QStandardItem();
+	    item->setData(url);
+	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setText(syntax);
+	    item->setToolTip(item->text());
+	    list << item;
 	    m_actions.insert(title, action);
 	    m_model->appendRow(list);
 	    m_model->sort(0);
 	    m_ui.search_engine->clear();
+	    m_ui.syntax->clear();
 	    m_ui.title->clear();
 	    connect(m_model,
 		    &QStandardItemModel::itemChanged,
@@ -244,11 +288,14 @@ void dooble_search_engines_popup::create_tables(QSqlDatabase &db)
 
   query.exec("CREATE TABLE IF NOT EXISTS dooble_search_engines ("
 	     "default_address_bar_engine TEXT, "
+	     "syntax TEXT, "
 	     "title TEXT NOT NULL, "
 	     "url TEXT NOT NULL, "
 	     "url_digest TEXT PRIMARY KEY NOT NULL)");
   query.exec
     ("ALTER TABLE dooble_search_engines ADD default_address_bar_engine TEXT");
+  query.exec
+    ("ALTER TABLE dooble_search_engines ADD syntax TEXT");
 }
 
 void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)
@@ -416,7 +463,9 @@ void dooble_search_engines_popup::slot_add_predefined(void)
 
       if(item && item->checkState() == Qt::Checked)
 	add_search_engine
-	  (item->text().toUtf8(), m_predefined_urls.value(item->text()));
+	  (QByteArray(),
+	   item->text().toUtf8(),
+	   m_predefined_urls.value(item->text()));
     }
 
   QApplication::restoreOverrideCursor();
@@ -433,7 +482,9 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   if(url.isEmpty() || !url.isValid())
     return;
 
-  add_search_engine(m_ui.title->text().trimmed().toUtf8(), url);
+  add_search_engine(m_ui.syntax->text().trimmed().toUtf8(),
+		    m_ui.title->text().trimmed().toUtf8(),
+		    url);
 }
 
 void dooble_search_engines_popup::slot_delete_selected(void)
@@ -676,6 +727,7 @@ void dooble_search_engines_popup::slot_populate(void)
 	query.setForwardOnly(true);
 
 	if(query.exec("SELECT default_address_bar_engine, "
+		      "syntax, "
 		      "title, "
 		      "url, "
 		      "OID "
@@ -688,8 +740,13 @@ void dooble_search_engines_popup::slot_populate(void)
 	      check_state = dooble::s_cryptography->mac_then_decrypt
 		(check_state);
 
-	      auto title
+	      auto syntax
 		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      syntax = dooble::s_cryptography->mac_then_decrypt(syntax);
+
+	      auto title
+		(QByteArray::fromBase64(query.value(2).toByteArray()));
 
 	      title = dooble::s_cryptography->mac_then_decrypt(title);
 
@@ -698,11 +755,11 @@ void dooble_search_engines_popup::slot_populate(void)
 		  dooble_database_utilities::remove_entry
 		    (db,
 		     "dooble_history",
-		     query.value(3).toLongLong());
+		     query.value(4).toLongLong());
 		  continue;
 		}
 
-	      auto url(QByteArray::fromBase64(query.value(2).toByteArray()));
+	      auto url(QByteArray::fromBase64(query.value(3).toByteArray()));
 
 	      url = dooble::s_cryptography->mac_then_decrypt(url);
 
@@ -711,7 +768,7 @@ void dooble_search_engines_popup::slot_populate(void)
 		  dooble_database_utilities::remove_entry
 		    (db,
 		     "dooble_search_engines",
-		     query.value(3).toLongLong());
+		     query.value(4).toLongLong());
 		  continue;
 		}
 
@@ -746,6 +803,12 @@ void dooble_search_engines_popup::slot_populate(void)
 	      item->setData(QUrl::fromEncoded(url));
 	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	      item->setText(url);
+	      item->setToolTip(item->text());
+	      list << item;
+	      item = new QStandardItem();
+	      item->setData(QUrl::fromEncoded(url));
+	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	      item->setText(syntax);
 	      item->setToolTip(item->text());
 	      list << item;
 	      m_actions.insert(title, action);
@@ -786,11 +849,13 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
       {
 	auto item1 = model->item(i, 0);
 	auto item2 = model->item(i, 1);
+	auto item3 = model->item(i, 2);
 
-	if(!item1 || !item2)
+	if(!item1 || !item2 || !item3)
 	  m_ui.view->setRowHidden(i, false);
 	else if(item1->text().toLower().contains(text) ||
-		item2->text().toLower().contains(text))
+		item2->text().toLower().contains(text) ||
+		item3->text().toLower().contains(text))
 	  m_ui.view->setRowHidden(i, false);
 	else
 	  {
