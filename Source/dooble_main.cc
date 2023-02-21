@@ -559,5 +559,5 @@ int main(int argc, char *argv[])
   auto rc = dooble::s_application->exec();
 
   dooble::clean();
-  return rc;
+  return static_cast<int> (rc);
 }
