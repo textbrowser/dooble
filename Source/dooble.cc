@@ -552,15 +552,13 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
     page->load(url);
   else
     {
+      auto url
+	(QUrl::fromEncoded(dooble_settings::setting("home_url").toByteArray()));
+
       if(initialized())
-	page->load
-	  (QUrl::fromEncoded(dooble_settings::setting("home_url").
-			     toByteArray()));
+	page->load(url);
       else
-	delayed_load
-	  (QUrl::fromEncoded(dooble_settings::setting("home_url").
-			     toByteArray()),
-	   page);
+	delayed_load(url, page);
     }
 
   page->view()->setVisible(!s_application->application_locked());
