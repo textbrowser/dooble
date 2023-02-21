@@ -126,16 +126,6 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Please set the default address-bar search engine by checking it.</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>The search engines may be accessed via context menus on Web pages.</string>
@@ -148,55 +138,90 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>&amp;Title</string>
-             </property>
-             <property name="buddy">
-              <cstring>title</cstring>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_15">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>&amp;Title</string>
+               </property>
+               <property name="buddy">
+                <cstring>title</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="title">
+               <property name="placeholderText">
+                <string>Search Engine Title</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_23">
+               <property name="text">
+                <string>&amp;URL</string>
+               </property>
+               <property name="buddy">
+                <cstring>search_engine</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="search_engine">
+               <property name="placeholderText">
+                <string>Search Engine URL</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="add">
+               <property name="text">
+                <string>&amp;Add</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="title">
-             <property name="placeholderText">
-              <string>Search Engine Title</string>
-             </property>
-             <property name="clearButtonEnabled">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_22">
-             <property name="text">
-              <string>&amp;URL</string>
-             </property>
-             <property name="buddy">
-              <cstring>search_engine</cstring>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="search_engine">
-             <property name="placeholderText">
-              <string>Search Engine URL</string>
-             </property>
-             <property name="clearButtonEnabled">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="add">
-             <property name="text">
-              <string>&amp;Add</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Address Widget Search Syntax</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="syntax">
+               <property name="placeholderText">
+                <string>Address Widget Search Syntax</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Please set the default address-bar search engine by checking it.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="dooble_table_view" name="view">
@@ -319,6 +344,7 @@
   <tabstop>add_checked</tabstop>
   <tabstop>title</tabstop>
   <tabstop>search_engine</tabstop>
+  <tabstop>syntax</tabstop>
   <tabstop>add</tabstop>
   <tabstop>view</tabstop>
   <tabstop>search</tabstop>
