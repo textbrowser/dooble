@@ -2199,7 +2199,11 @@ void dooble_page::slot_load_page(void)
 
 	  if(!url.isEmpty() && url.isValid())
 	    {
-	      url.setQuery(url.query().append(QString("%1").arg(string)));
+	      if(url.hasQuery())
+		url.setQuery(url.query().append(QString("%1").arg(string)));
+	      else
+		url = QUrl::fromUserInput(url.toString().append(string));
+
 	      load(url);
 	      return;
 	    }

@@ -631,19 +631,10 @@ void dooble_web_engine_view::slot_search(void)
     {
       auto text(action->property("selected_text").toString());
 
-      if(url.query().trimmed().isEmpty())
-	{
-	  auto string(url.toString());
-
-	  string.append(text.trimmed()); // Append trimmed text.
-	  url = QUrl::fromUserInput(string);
-	}
+      if(url.hasQuery())
+	url.setQuery(url.query().append(QString("\"%1\"").arg(text)));
       else
-	{
-	  auto string(url.query().append(QString("\"%1\"").arg(text)));
-
-	  url.setQuery(string);
-	}
+	url = QUrl::fromUserInput(url.toString().append(text.trimmed()));
 
       emit open_link_in_new_tab(url);
     }

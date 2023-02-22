@@ -141,17 +141,13 @@ QUrl dooble_search_engines_popup::search_url(const QString &t) const
 	{
 	  auto url(item1->data().toUrl());
 
-	  if(url.query().trimmed().isEmpty())
-	    {
-	      auto string(url.toString());
-
-	      string.append(text.mid(item2->text().length()));
-	      return QUrl::fromUserInput(string);
-	    }
-	  else
+	  if(url.hasQuery())
 	    url.setQuery
 	      (url.query().
 	       append(QString("%1").arg(text.mid(item2->text().length()))));
+	  else
+	    url = QUrl::fromUserInput
+	      (url.toString().append(text.mid(item2->text().length())));
 
 	  return url;
 	}
