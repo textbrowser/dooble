@@ -143,10 +143,7 @@ QUrl dooble_search_engines_popup::search_url(const QString &t) const
 
 	  if(url.query().trimmed().isEmpty())
 	    {
-	      auto string(url.toString(QUrl::StripTrailingSlash));
-
-	      if(!string.endsWith('/')) // QUrl::StripTrailingSlash may fail.
-		string.append("/");
+	      auto string(url.toString());
 
 	      string.append(text.mid(item2->text().length()));
 	      return QUrl::fromUserInput(string);

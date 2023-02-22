@@ -183,7 +183,7 @@
              <item>
               <widget class="QLineEdit" name="search_engine">
                <property name="toolTip">
-                <string>URL must be unique.</string>
+                <string>URL must be unique. Please provide an exact URL, including a trailing slash if necessary!</string>
                </property>
                <property name="placeholderText">
                 <string>Search Engine URL</string>
