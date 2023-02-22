@@ -2225,7 +2225,9 @@ void dooble_page::slot_load_page(void)
 
       goto search_label;
     }
-  else if(!url.scheme().isEmpty() && dooble::s_search_engines_window)
+  else if(!dooble_ui_utilities::allowed_scheme(url) &&
+	  !url.scheme().isEmpty() &&
+	  dooble::s_search_engines_window)
     goto search_label;
 
  done_label:
