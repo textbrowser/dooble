@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>650</width>
     <height>600</height>
    </rect>
   </property>
@@ -127,6 +127,12 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>The search engines may be accessed via context menus on Web pages.</string>
          </property>
@@ -144,7 +150,7 @@
              <item>
               <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>&amp;Title</string>
+                <string>&amp;Title (Unique)</string>
                </property>
                <property name="buddy">
                 <cstring>title</cstring>
@@ -153,6 +159,9 @@
              </item>
              <item>
               <widget class="QLineEdit" name="title">
+               <property name="toolTip">
+                <string>Title must be unique.</string>
+               </property>
                <property name="placeholderText">
                 <string>Search Engine Title</string>
                </property>
@@ -164,7 +173,7 @@
              <item>
               <widget class="QLabel" name="label_23">
                <property name="text">
-                <string>&amp;URL</string>
+                <string>&amp;URL (Unique)</string>
                </property>
                <property name="buddy">
                 <cstring>search_engine</cstring>
@@ -173,6 +182,9 @@
              </item>
              <item>
               <widget class="QLineEdit" name="search_engine">
+               <property name="toolTip">
+                <string>URL must be unique.</string>
+               </property>
                <property name="placeholderText">
                 <string>Search Engine URL</string>
                </property>
@@ -215,6 +227,12 @@
          </item>
          <item>
           <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="text">
             <string>Please set the default address-bar search engine by checking it.</string>
            </property>

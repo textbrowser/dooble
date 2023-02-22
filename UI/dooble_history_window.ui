@@ -27,6 +27,12 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Private entries are not included. Private Dooble History windows do not exist.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>

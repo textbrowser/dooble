@@ -145,7 +145,9 @@ QUrl dooble_search_engines_popup::search_url(const QString &t) const
 	    {
 	      auto string(url.toString(QUrl::StripTrailingSlash));
 
-	      string.append("/");
+	      if(!string.endsWith('/')) // QUrl::StripTrailingSlash may fail.
+		string.append("/");
+
 	      string.append(text.mid(item2->text().length()));
 	      return QUrl::fromUserInput(string);
 	    }
@@ -165,6 +167,14 @@ void dooble_search_engines_popup::add_search_engine
 (const QByteArray &syntax, const QByteArray &title, const QUrl &url)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  for(int i = 0; i < m_model->rowCount(); i++)
+    if(m_model->item(i, 0) &&
+       m_model->item(i, 0)->text().trimmed() == title.trimmed())
+      {
+	QApplication::restoreOverrideCursor();
+	return;
+      }
 
   auto database_name(dooble_database_utilities::database_name());
 

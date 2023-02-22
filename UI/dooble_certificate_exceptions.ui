@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
+    <width>750</width>
     <height>600</height>
    </rect>
   </property>
@@ -21,6 +21,12 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Please restart Dooble after removing exceptions. Certificate exceptions which have been accepted in private windows are not depicted.</string>
       </property>
