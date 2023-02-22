@@ -141,9 +141,19 @@ QUrl dooble_search_engines_popup::search_url(const QString &t) const
 	{
 	  auto url(item1->data().toUrl());
 
-	  url.setQuery
-	    (url.query().
-	     append(QString("%1").arg(text.mid(item2->text().length()))));
+	  if(url.query().trimmed().isEmpty())
+	    {
+	      auto string(url.toString(QUrl::StripTrailingSlash));
+
+	      string.append("/");
+	      string.append(text.mid(item2->text().length()));
+	      return QUrl::fromUserInput(string);
+	    }
+	  else
+	    url.setQuery
+	      (url.query().
+	       append(QString("%1").arg(text.mid(item2->text().length()))));
+
 	  return url;
 	}
     }
