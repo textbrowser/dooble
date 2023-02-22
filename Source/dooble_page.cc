@@ -2166,11 +2166,11 @@ void dooble_page::slot_load_finished(bool ok)
 void dooble_page::slot_load_page(void)
 {
   auto keyboard_modifiers(QGuiApplication::keyboardModifiers());
-  auto str(m_ui.address->text().trimmed());
+  auto string(m_ui.address->text().trimmed());
 
   if(dooble::s_search_engines_window)
     {
-      auto url(dooble::s_search_engines_window->search_url(str));
+      auto url(dooble::s_search_engines_window->search_url(string));
 
       if(!url.isEmpty() && url.isValid())
 	{
@@ -2179,18 +2179,18 @@ void dooble_page::slot_load_page(void)
 	}
     }
 
-  auto url((QUrl(str))); // Special parentheses for compilers.
+  auto url((QUrl(string))); // Special parentheses for compilers.
 
   if((!url.isValid() ||
       Qt::ControlModifier & keyboard_modifiers ||
-      str.contains(' ') ||
-      str.contains('\t') ||
+      string.contains(' ') ||
+      string.contains('\t') ||
       url.scheme().isEmpty()) &&
      dooble::s_search_engines_window)
     {
       if(Qt::ControlModifier & keyboard_modifiers ||
-	 str.contains(' ') ||
-	 str.contains('\t'))
+	 string.contains(' ') ||
+	 string.contains('\t'))
 	{
 	search_label:
 
@@ -2199,23 +2199,23 @@ void dooble_page::slot_load_page(void)
 
 	  if(!url.isEmpty() && url.isValid())
 	    {
-	      url.setQuery(url.query().append(QString("%1").arg(str)));
+	      url.setQuery(url.query().append(QString("%1").arg(string)));
 	      load(url);
 	      return;
 	    }
 	  else // Prevent an endless loop.
 	    {
-	      load(QUrl::fromUserInput(str));
+	      load(QUrl::fromUserInput(string));
 	      return;
 	    }
 	}
 
-      auto index = str.lastIndexOf('.');
+      auto index = string.lastIndexOf('.');
 
-      if(index < str.size() && index > -1)
-	if(str.at(index + 1).isLetterOrNumber())
+      if(index < string.size() && index > -1)
+	if(string.at(index + 1).isLetterOrNumber())
 	  {
-	    url = QUrl::fromUserInput(str);
+	    url = QUrl::fromUserInput(string);
 
 	    if(!url.isValid() || url.scheme().isEmpty())
 	      goto search_label;
@@ -2234,7 +2234,7 @@ void dooble_page::slot_load_page(void)
 
   if(!dooble_ui_utilities::allowed_url_scheme(url))
     {
-      url = QUrl::fromUserInput(str);
+      url = QUrl::fromUserInput(string);
       url.setScheme("https");
     }
 
