@@ -546,7 +546,7 @@ void dooble_address_widget::slot_return_pressed(void)
 {
   m_completer->popup()->setVisible(false);
 
-  if(dooble_ui_utilities::allowed_scheme(QUrl(text().trimmed())))
+  if(dooble_ui_utilities::allowed_url_scheme(QUrl(text().trimmed())))
     setText(text());
 }
 

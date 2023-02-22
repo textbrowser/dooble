@@ -164,7 +164,7 @@ Qt::Orientation dooble_ui_utilities::string_to_orientation(const QString &t)
     return Qt::Vertical;
 }
 
-bool dooble_ui_utilities::allowed_scheme(const QUrl &url)
+bool dooble_ui_utilities::allowed_url_scheme(const QUrl &url)
 {
   auto scheme(url.scheme());
 

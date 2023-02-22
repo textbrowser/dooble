@@ -2125,9 +2125,9 @@ void dooble_page::slot_load_finished(bool ok)
     dooble::s_history->save_item
       (QIcon(), m_view->history()->currentItem(), true);
 
-  if(!dooble_ui_utilities::allowed_scheme(m_view->url()) ||
-     m_view->url().isEmpty() ||
-     !m_view->url().isValid())
+  if(!dooble_ui_utilities::allowed_url_scheme(m_view->url()) ||
+     !m_view->url().isValid() ||
+     m_view->url().isEmpty())
     {
       m_ui.address->selectAll();
       m_ui.address->setFocus();
@@ -2225,14 +2225,14 @@ void dooble_page::slot_load_page(void)
 
       goto search_label;
     }
-  else if(!dooble_ui_utilities::allowed_scheme(url) &&
+  else if(!dooble_ui_utilities::allowed_url_scheme(url) &&
 	  !url.scheme().isEmpty() &&
 	  dooble::s_search_engines_window)
     goto search_label;
 
  done_label:
 
-  if(!dooble_ui_utilities::allowed_scheme(url))
+  if(!dooble_ui_utilities::allowed_url_scheme(url))
     {
       url = QUrl::fromUserInput(str);
       url.setScheme("https");

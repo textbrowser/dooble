@@ -1305,7 +1305,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 		{
 		  auto first_party_url(QUrl::fromUserInput(item->text()));
 
-		  if(!dooble_ui_utilities::allowed_scheme(first_party_url))
+		  if(!dooble_ui_utilities::allowed_url_scheme(first_party_url))
 		    save_blocked_domain(url.host(), false, true);
 		}
 	    }

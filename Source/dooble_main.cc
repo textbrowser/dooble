@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
 	      {
 		QUrl url(QUrl::fromUserInput(argv[i]));
 
-		if(dooble_ui_utilities::allowed_scheme(url))
+		if(dooble_ui_utilities::allowed_url_scheme(url))
 		  urls << url;
 	      }
 	  }
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 	  {
 	    QUrl url(QUrl::fromUserInput(argv[i]));
 
-	    if(dooble_ui_utilities::allowed_scheme(url))
+	    if(dooble_ui_utilities::allowed_url_scheme(url))
 	      urls << url;
 	  }
       }
