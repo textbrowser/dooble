@@ -160,7 +160,7 @@
              <item>
               <widget class="QLineEdit" name="title">
                <property name="toolTip">
-                <string>Title must be unique.</string>
+                <string>Title must be unique. Value is trimmed.</string>
                </property>
                <property name="placeholderText">
                 <string>Search Engine Title</string>
@@ -213,6 +213,9 @@
              </item>
              <item>
               <widget class="QLineEdit" name="syntax">
+               <property name="toolTip">
+                <string>Value is trimmed.</string>
+               </property>
                <property name="placeholderText">
                 <string>Address Widget Search Syntax</string>
                </property>
