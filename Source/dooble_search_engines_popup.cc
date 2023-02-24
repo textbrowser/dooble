@@ -266,7 +266,8 @@ void dooble_search_engines_popup::add_search_engine
 	    list << item;
 	    item = new QStandardItem();
 	    item->setData(url);
-	    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	    item->setFlags
+	      (Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	    item->setText(syntax);
 	    item->setToolTip(item->text());
 	    list << item;
@@ -595,6 +596,9 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
 void dooble_search_engines_popup::slot_double_clicked(const QModelIndex &index)
 {
+  if(index.isValid() && index.column() == 2) // Syntax?
+    return;
+
   if(QApplication::keyboardModifiers() & Qt::ControlModifier)
     emit open_link_in_new_tab(index.sibling(index.row(), 1).data().toString());
   else
@@ -641,39 +645,60 @@ void dooble_search_engines_popup::slot_item_changed(QStandardItem *item)
 
 	QSqlQuery query(db);
 
-	query.setForwardOnly(true);
+	if(item->column() == 0) // Title
+	  {
+	    query.setForwardOnly(true);
 
-	if(query.exec("SELECT OID FROM dooble_search_engines"))
-	  while(query.next())
-	    {
-	      QSqlQuery update(db);
+	    if(query.exec("SELECT OID FROM dooble_search_engines"))
+	      while(query.next())
+		{
+		  QSqlQuery update(db);
 
-	      update.prepare("UPDATE dooble_search_engines "
-			     "SET default_address_bar_engine = ? "
-			     "WHERE OID = ?");
+		  update.prepare("UPDATE dooble_search_engines "
+				 "SET default_address_bar_engine = ? "
+				 "WHERE OID = ?");
+		  update.addBindValue
+		    (dooble::s_cryptography->encrypt_then_mac("false").
+		     toBase64());
+		  update.addBindValue(query.value(0));
+		  update.exec();
+		}
+
+	    QSqlQuery update(db);
+
+	    update.prepare("UPDATE dooble_search_engines "
+			   "SET default_address_bar_engine = ? "
+			   "WHERE url_digest = ?");
+
+	    if(item->checkState() == Qt::Checked)
+	      update.addBindValue
+		(dooble::s_cryptography->encrypt_then_mac("true").toBase64());
+	    else
 	      update.addBindValue
 		(dooble::s_cryptography->encrypt_then_mac("false").toBase64());
-	      update.addBindValue(query.value(0));
-	      update.exec();
-	    }
 
-	QSqlQuery update(db);
+	    update.addBindValue
+	      (dooble::s_cryptography->hmac(item->data().toUrl().toEncoded()).
+	       toBase64());
+	    update.exec();
+	  }
+	else if(item->column() == 2) // Syntax
+	  {
+	    QSqlQuery update(db);
 
-	update.prepare("UPDATE dooble_search_engines "
-		       "SET default_address_bar_engine = ? "
-		       "WHERE url_digest = ?");
+	    update.prepare("UPDATE dooble_search_engines "
+			   "SET syntax = ? "
+			   "WHERE url_digest = ?");
+	    update.addBindValue
+	      (dooble::s_cryptography->
+	       encrypt_then_mac(item->text().trimmed().toUtf8()).toBase64());
+	    update.addBindValue
+	      (dooble::s_cryptography->hmac(item->data().toUrl().toEncoded()).
+	       toBase64());
 
-	if(item->checkState() == Qt::Checked)
-	  update.addBindValue
-	    (dooble::s_cryptography->encrypt_then_mac("true").toBase64());
-	else
-	  update.addBindValue
-	    (dooble::s_cryptography->encrypt_then_mac("false").toBase64());
-
-	update.addBindValue
-	  (dooble::s_cryptography->hmac(item->data().toUrl().toEncoded()).
-	   toBase64());
-	update.exec();
+	    if(update.exec())
+	      item->setText(item->text().trimmed());
+	  }
       }
 
     db.close();
@@ -820,7 +845,8 @@ void dooble_search_engines_popup::slot_populate(void)
 	      list << item;
 	      item = new QStandardItem();
 	      item->setData(QUrl::fromEncoded(url));
-	      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	      item->setFlags
+		(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	      item->setText(syntax);
 	      item->setToolTip(item->text());
 	      list << item;
@@ -853,7 +879,7 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   auto count = model->rowCount();
-  auto text(m_ui.search->text().toLower().trimmed());
+  auto text(m_ui.search->text().trimmed());
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())
@@ -866,9 +892,9 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
 
 	if(!item1 || !item2 || !item3)
 	  m_ui.view->setRowHidden(i, false);
-	else if(item1->text().toLower().contains(text) ||
-		item2->text().toLower().contains(text) ||
-		item3->text().toLower().contains(text))
+	else if(item1->text().contains(text, Qt::CaseInsensitive) ||
+		item2->text().contains(text, Qt::CaseInsensitive) ||
+		item3->text().contains(text, Qt::CaseInsensitive))
 	  m_ui.view->setRowHidden(i, false);
 	else
 	  {
