@@ -142,7 +142,7 @@ void dooble_about::compute_self_digest_task(const QString &file_path)
 	if(m_future.isCanceled())
 	  break;
 	else
-	  hash.addData(buffer, static_cast<int> (rc));
+	  hash.addData(buffer.mid(0, static_cast<int> (rc)));
     }
 
   file.close();
