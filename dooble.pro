@@ -5,6 +5,9 @@
 cache()
 include(dooble-source.pro)
 
+exists(/usr/local/Cellar/qt/6.4.2_2/share/qt/libexec/qwebengine_convert_dict) {
+CONVERT_TOOL = "/usr/local/Cellar/qt/6.4.2_2/share/qt/libexec/qwebengine_convert_dict"
+} else {
 versionAtLeast(QT_VERSION, 6.0.0) {
 win32 {
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
@@ -13,6 +16,7 @@ qtPrepareTool(CONVERT_TOOL, ../libexec/qwebengine_convert_dict)
 }
 } else {
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+}
 }
 
 DICTIONARIES_DIR = qtwebengine_dictionaries
