@@ -866,6 +866,7 @@ void dooble_tab_bar::tabLayoutChange(void)
   if(dooble::s_application->style_name() == "macintosh")
     {
       prepare_icons();
+      emit show_corner_widget(false);
       return;
     }
 
