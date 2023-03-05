@@ -66,7 +66,7 @@ dict_base_paths = af_ZA/af_ZA \
                   uk_UA/uk_UA \
                   vi/vi_VN
 
-dmg.commands = hdiutil create ~/Dooble.dmg -volname Dooble -srcfolder /Applications/Dooble.d
+dmg.commands = hdiutil create ~/Dooble.dmg -volname Dooble -srcfolder Dooble.d
 } else:unix {
 dict_base_paths = af_ZA/af_ZA \
                   an_ES/an_ES \
@@ -685,27 +685,25 @@ VERSION         = DOOBLE_VERSION
 
 macx {
 copycharts.files        = Charts/*
-copycharts.path         = /Applications/Dooble.d/Charts
+copycharts.path         = Dooble.d/Charts
 copydata.files		= Data/*.txt
-copydata.path		= /Applications/Dooble.d/Data
-copydocumentation.extra	= cp ./Documentation/Documents/*.pdf /Applications/Dooble.d/Documentation/. && cp ./Documentation/TO-DO /Applications/Dooble.d/Documentation/.
-copydocumentation.path	= /Applications/Dooble.d/Documentation
-copydooble.extra	= cp -r ./Dooble.app /Applications/Dooble.d/.
-copydooble.path		= /Applications/Dooble.d
-copyinfoplist.extra	= cp Data/Info.plist /Applications/Dooble.d/Dooble.app/Contents/.
-copyinfoplist.path	= /Applications/Dooble.d
-copywebengine.extra	= cp -r $$[QT_INSTALL_LIBS]/QtWebEngineCore.framework /Applications/Dooble.d/Dooble.app/Contents/Frameworks/.
-copywebengine.path	= /Applications/Dooble.d
-macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt /Applications/Dooble.d/Dooble.app -executable=/Applications/Dooble.d/Dooble.app/Contents/MacOS/Dooble
+copydata.path		= Dooble.d/Data
+copydocumentation.extra	= cp ./Documentation/Documents/*.pdf Dooble.d/Documentation/. && cp ./Documentation/TO-DO Dooble.d/Documentation/.
+copydocumentation.path	= Dooble.d/Documentation
+copydooble.extra	= cp -r ./Dooble.app Dooble.d/.
+copydooble.path		= Dooble.d
+copyinfoplist.extra	= cp Data/Info.plist Dooble.d/Dooble.app/Contents/.
+copyinfoplist.path	= Dooble.d
+copywebengine.extra	= cp -r $$[QT_INSTALL_LIBS]/QtWebEngineCore.framework Dooble.d/Dooble.app/Contents/Frameworks/.
+copywebengine.path	= Dooble.d
+macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt Dooble.d/Dooble.app -executable=Dooble.d/Dooble.app/Contents/MacOS/Dooble
 macdeployqt.path	= Dooble.app
-purgeheaders.extra	= rm -fr /Applications/Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Headers && rm -fr /Applications/Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Headers 
-purgeheaders.path	= /Applications/Dooble.d
-preinstall.extra	= rm -fr /Applications/Dooble.d/Dooble.app
-preinstall.path		= /Applications/Dooble.d
+purgeheaders.extra	= rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Headers && rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Headers 
+purgeheaders.path	= Dooble.d
+preinstall.extra	= rm -fr Dooble.d/Dooble.app
+preinstall.path		= Dooble.d
 translations.files	= Translations/*.qm
-translations.path	= /Applications/Dooble.d/Translations
-zzz.extra		= chown -Rh root:wheel /Applications/Dooble.d
-zzz.path		= /Applications/Dooble.d
+translations.path	= Dooble.d/Translations
 
 INSTALLS	= copycharts \
                   copydata \
@@ -716,8 +714,7 @@ INSTALLS	= copycharts \
 		  copyinfoplist \
 		  copywebengine \
 		  purgeheaders \
-                  translations \
-		  zzz
+                  translations
 }
 
 macx:app_bundle {
