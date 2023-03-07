@@ -126,10 +126,22 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_page_button_clicked(void)));
-  connect(m_ui.proxy_type,
-	  SIGNAL(currentIndexChanged(int)),
+  connect(m_ui.proxy_http,
+	  SIGNAL(toggled(bool)),
 	  this,
-	  SLOT(slot_proxy_type_changed(int)));
+	  SLOT(slot_proxy_type_changed(void)));
+  connect(m_ui.proxy_none,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_proxy_type_changed(void)));
+  connect(m_ui.proxy_socks5,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_proxy_type_changed(void)));
+  connect(m_ui.proxy_system,
+	  SIGNAL(toggled(bool)),
+	  this,
+	  SLOT(slot_proxy_type_changed(void)));
   connect(m_ui.remove_all_features_permissions,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -1030,10 +1042,9 @@ void dooble_settings::prepare_proxy(bool save)
 {
   QNetworkProxyFactory::setUseSystemConfiguration(false);
 
-  if(m_ui.proxy_type->currentIndex() == 1 || // None
-     m_ui.proxy_type->currentIndex() == 3)   // System
+  if(m_ui.proxy_none->isChecked() || m_ui.proxy_system->isChecked())
     {
-      if(m_ui.proxy_type->currentIndex() == 1)
+      if(m_ui.proxy_none->isChecked())
 	{
 	  QNetworkProxy proxy(QNetworkProxy::NoProxy);
 
@@ -1041,12 +1052,6 @@ void dooble_settings::prepare_proxy(bool save)
 	}
       else
 	QNetworkProxyFactory::setUseSystemConfiguration(true);
-
-      m_ui.proxy_frame->setEnabled(false);
-      m_ui.proxy_host->setText("");
-      m_ui.proxy_password->setText("");
-      m_ui.proxy_port->setValue(0);
-      m_ui.proxy_user->setText("");
     }
   else
     {
@@ -1056,14 +1061,13 @@ void dooble_settings::prepare_proxy(bool save)
       proxy.setPassword(m_ui.proxy_password->text());
       proxy.setPort(static_cast<quint16> (m_ui.proxy_port->value()));
 
-      if(m_ui.proxy_type->currentIndex() == 0)
+      if(m_ui.proxy_http->isChecked())
 	proxy.setType(QNetworkProxy::HttpProxy);
       else
 	proxy.setType(QNetworkProxy::Socks5Proxy);
 
       proxy.setUser(m_ui.proxy_user->text().trimmed());
       QNetworkProxy::setApplicationProxy(proxy);
-      m_ui.proxy_frame->setEnabled(true);
     }
 
   if(save)
@@ -1071,7 +1075,16 @@ void dooble_settings::prepare_proxy(bool save)
       set_setting("proxy_host", m_ui.proxy_host->text().trimmed());
       set_setting("proxy_password", m_ui.proxy_password->text());
       set_setting("proxy_port", m_ui.proxy_port->value());
-      set_setting("proxy_type_index", m_ui.proxy_type->currentIndex());
+
+      if(m_ui.proxy_http->isChecked())
+	set_setting("proxy_type_index", 2);
+      else if(m_ui.proxy_none->isChecked())
+	set_setting("proxy_type_index", 0);
+      else if(m_ui.proxy_socks5->isChecked())
+	set_setting("proxy_type_index", 3);
+      else
+	set_setting("proxy_type_index", 1);
+
       set_setting("proxy_user", m_ui.proxy_user->text().trimmed());
     }
 }
@@ -1541,10 +1554,20 @@ void dooble_settings::restore(bool read_database)
   m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
   m_ui.proxy_password->setCursorPosition(0);
   m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
-  m_ui.proxy_type->setCurrentIndex
-    (qBound(0,
-	    s_settings.value("proxy_type_index", 1).toInt(),
-	    m_ui.proxy_type->count() - 1));
+
+  auto index = s_settings.value("proxy_type_index", 0).toInt(); // None
+
+  if(index == 0)
+    m_ui.proxy_none->setChecked(true);
+  else if(index == 1)
+    m_ui.proxy_system->setChecked(true);
+  else if(index == 2)
+    m_ui.proxy_http->setChecked(true);
+  else if(index == 3)
+    m_ui.proxy_socks5->setChecked(true);
+  else
+    m_ui.proxy_none->setChecked(true);
+
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.proxy_user->setCursorPosition(0);
   m_ui.referrer->setChecked(s_settings.value("referrer", false).toBool());
@@ -3130,16 +3153,10 @@ void dooble_settings::slot_populate(void)
   emit populated();
 }
 
-void dooble_settings::slot_proxy_type_changed(int index)
+void dooble_settings::slot_proxy_type_changed(void)
 {
-  if(index == 1 || index == 3) // None, System
-    {
-      m_ui.proxy_frame->setEnabled(false);
-      m_ui.proxy_host->setText("");
-      m_ui.proxy_password->setText("");
-      m_ui.proxy_port->setValue(0);
-      m_ui.proxy_user->setText("");
-    }
+  if(m_ui.proxy_none->isChecked() || m_ui.proxy_system->isChecked())
+    m_ui.proxy_frame->setEnabled(false);
   else
     m_ui.proxy_frame->setEnabled(true);
 }

@@ -141,7 +141,7 @@ class dooble_settings: public dooble_main_window
   void slot_password_changed(void);
   void slot_pbkdf2_future_finished(void);
   void slot_populate(void);
-  void slot_proxy_type_changed(int index);
+  void slot_proxy_type_changed(void);
   void slot_remove_all_features_permissions(void);
   void slot_remove_all_javascript_block_popup_exceptions(void);
   void slot_remove_selected_features_permissions(void);
