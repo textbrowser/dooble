@@ -869,7 +869,8 @@ void dooble_page::prepare_standard_menus(void)
 			    arg(icon_set))),
      tr("New P&rivate Window..."),
      this,
-     SIGNAL(new_private_window(void)));
+     SIGNAL(new_private_window(void)),
+     QKeySequence(tr("Ctrl+Shift+P")));
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "folder-new",
 		      QIcon(QString(":/%1/48/new_tab.png").arg(icon_set))),

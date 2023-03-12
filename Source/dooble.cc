@@ -1766,6 +1766,9 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+S")),
 				   this,
 				   SLOT(slot_save(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+P")),
+				   this,
+				   SLOT(slot_new_private_window(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+W")),
 				   this,
 				   SLOT(close(void)));
@@ -1832,7 +1835,8 @@ void dooble::prepare_standard_menus(void)
 			    arg(icon_set))),
      tr("New P&rivate Window..."),
      this,
-     SLOT(slot_new_private_window(void)));
+     SLOT(slot_new_private_window(void)),
+     QKeySequence(tr("Ctrl+Shift+P")));
   menu->addAction(QIcon::fromTheme(use_material_icons + "folder-new",
 				   QIcon(QString(":/%1/48/new_tab.png").
 					 arg(icon_set))),
