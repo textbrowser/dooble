@@ -482,7 +482,7 @@
     <message>
         <location filename="../Source/dooble.cc" line="2009"/>
         <source>Page Floating &amp;Menu...</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu &amp;flutuante da página...</translation>
     </message>
     <message>
         <location filename="../Source/dooble.cc" line="2037"/>
@@ -2390,12 +2390,12 @@
         <location filename="../UI/dooble_cookies_window.ui" line="27"/>
         <location filename="../UI/dooble_cookies_window.ui" line="34"/>
         <source>Block Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear domínio</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="44"/>
         <source>Add</source>
-        <translation type="unfinished">Adicionar</translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="55"/>
@@ -2410,37 +2410,37 @@
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="77"/>
         <source>Legend</source>
-        <translation type="unfinished">Legenda</translation>
+        <translation>Legenda</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="204"/>
         <source>Blocked</source>
-        <translation type="unfinished">Bloqueado</translation>
+        <translation>Bloqueado</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="332"/>
         <source>Favorite</source>
-        <translation type="unfinished">Favoritos</translation>
+        <translation>Favoritos</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="361"/>
         <source>Collapse All</source>
-        <translation type="unfinished"></translation>
+        <translation>Recolher tudo</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="366"/>
         <source>Expand All</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir tudo</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="374"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suppose the URL&apos;s host is abc.def.ghi.org. If this option is enabled and an entry such as .ghi.org (or ghi.org) exists and is checked, the cookie will be blocked. Otherwise, the cookie will be blocked if .abc.def.ghi.org (or abc.def.ghi.org) exists and is checked. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Supondo que a URL do host seja &quot;abc.def.ghi.org&quot;. Se esta opção estiver habilitada e uma entrada como .ghi.org (ou ghi.org) existir e estiver marcada, o cookie será bloqueado. Caso contrário, o cookie será bloqueado se .&quot;abc.def.ghi.org&quot; (ou &quot;abc.def.ghi.org&quot;) existir e estiver marcado. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="377"/>
         <source>Block Sub-Domains</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear subdomínios</translation>
     </message>
     <message>
         <location filename="../UI/dooble_cookies_window.ui" line="427"/>
@@ -2561,24 +2561,24 @@
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="566"/>
         <source>Delete selected?</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar selecionados?</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="569"/>
         <location filename="../Source/dooble_cookies_window.cc" line="712"/>
         <location filename="../Source/dooble_cookies_window.cc" line="770"/>
         <source>Dooble: Confirmation</source>
-        <translation type="unfinished">Dooble: Confirmação</translation>
+        <translation>Dooble: Confirmação</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="709"/>
         <source>Delete shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar mostrado(s)?</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="767"/>
         <source>Delete unchecked?</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar não marcado(s)?</translation>
     </message>
     <message>
         <location filename="../Source/dooble_cookies_window.cc" line="1011"/>
@@ -3290,7 +3290,7 @@
     <message>
         <location filename="../Source/dooble_page.cc" line="1081"/>
         <source>Page Floating &amp;Menu...</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu &amp;flutuante da página...</translation>
     </message>
     <message>
         <location filename="../Source/dooble_page.cc" line="1085"/>
@@ -3814,12 +3814,12 @@ Domains</source>
     <message>
         <location filename="../UI/dooble_search_engines_popup.ui" line="131"/>
         <source>Please set the default address-bar search engine by checking it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor defina o mecanismo de pesquisa padrão da barra de endereço marcando-o.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_search_engines_popup.ui" line="141"/>
         <source>The search engines may be accessed via context menus on Web pages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Os mecanismos de pesquisa podem ser acessados por meio de menus de contexto em páginas web.</translation>
     </message>
     <message>
         <source>The search engines listed below may be accessed via context menus on pages.</source>
@@ -4028,7 +4028,7 @@ Domains</source>
     <message>
         <location filename="../UI/dooble_settings.ui" line="25"/>
         <source>Location</source>
-        <translation type="unfinished">Localização</translation>
+        <translation>Localização</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="259"/>
@@ -4146,7 +4146,7 @@ Domains</source>
     <message>
         <location filename="../UI/dooble_settings.ui" line="937"/>
         <source>Block Third-Party Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear cookies de terceiros</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="969"/>
@@ -4293,7 +4293,7 @@ Domains</source>
         <location filename="../UI/dooble_settings.ui" line="1564"/>
         <location filename="../UI/dooble_settings.ui" line="1900"/>
         <source>Settings are saved immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração são salvas imediatamente.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="1772"/>
@@ -4571,37 +4571,37 @@ Domains</source>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2082"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Disable JavaScript after a page has completed loading (the page-loaded signal has been monitored) and re-enable it shortly after.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Desativar JavaScript após o carregamento completo de uma página (o sinal de carregamento da página é monitorado) e reativar logo depois.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2085"/>
         <source>Temporarily Disable JavaScript</source>
-        <translation type="unfinished"></translation>
+        <translation>Temporariamente desabilitar JavaScript</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2169"/>
         <source>WebEngine</source>
-        <translation type="unfinished"></translation>
+        <translation>Web Engine</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2175"/>
         <source>Settings are saved immediately. Please restart Dooble if changes are made.</source>
-        <translation type="unfinished"></translation>
+        <translation>As onfigurações foram salvas imediatamente. Por favor reinicie o Dooble se forem feitas alterações.</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2207"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Disposição</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2212"/>
         <source>Translate Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Disposição</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2217"/>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <location filename="../UI/dooble_settings.ui" line="2248"/>
@@ -4752,7 +4752,7 @@ Domains</source>
     <message>
         <location filename="../Source/dooble_settings.cc" line="1112"/>
         <source>Not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não implementado.</translation>
     </message>
     <message>
         <location filename="../Source/dooble_settings.cc" line="2029"/>
