@@ -26,6 +26,7 @@
 */
 
 #include <QAuthenticator>
+#include <QDir>
 #include <QPainter>
 #include <QToolTip>
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
@@ -2241,6 +2242,32 @@ void dooble_page::slot_load_page(void)
     {
       url = QUrl::fromUserInput(string);
       url.setScheme("https");
+    }
+
+  if(url.toString().endsWith('/'))
+    {
+      auto scheme(url.scheme());
+
+      if(url.isLocalFile())
+	{
+	  QDir dir(url.toLocalFile());
+	  auto current(dir.absolutePath());
+
+	  do
+	    {
+	      if(!dir.isRoot())
+		current = dir.absolutePath();
+	    }
+	  while(dir.cdUp());
+
+	  url = QUrl::fromUserInput(current);
+	  url.setScheme(scheme);
+	}
+      else
+	{
+	  url = QUrl::fromUserInput(url.host());
+	  url.setScheme(scheme);
+	}
     }
 
   load(url);

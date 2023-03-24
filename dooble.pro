@@ -695,8 +695,6 @@ copydooble.extra	= cp -r ./Dooble.app Dooble.d/.
 copydooble.path		= Dooble.d
 copyinfoplist.extra	= cp Data/Info.plist Dooble.d/Dooble.app/Contents/.
 copyinfoplist.path	= Dooble.d
-copywebengine.extra	= cp -r $$[QT_INSTALL_LIBS]/QtWebEngineCore.framework Dooble.d/Dooble.app/Contents/Frameworks/.
-copywebengine.path	= Dooble.d
 macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt Dooble.d/Dooble.app -executable=Dooble.d/Dooble.app/Contents/MacOS/Dooble
 macdeployqt.path	= Dooble.app
 purgeheaders.extra	= rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Headers && rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Headers 
@@ -713,7 +711,6 @@ INSTALLS	= copycharts \
                   copydooble \
                   macdeployqt \
 		  copyinfoplist \
-		  copywebengine \
 		  purgeheaders \
                   translations
 }
