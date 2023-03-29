@@ -319,6 +319,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["pin_history_window"] = true;
   s_settings["pin_settings_window"] = true;
   s_settings["referrer"] = false;
+  s_settings["relative_location_character"] = "";
   s_settings["retain_session_tabs"] = false;
   s_settings["save_geometry"] = true;
   s_settings["show_address_widget_completer"] = true;
@@ -1571,6 +1572,8 @@ void dooble_settings::restore(bool read_database)
   m_ui.proxy_user->setText(s_settings.value("proxy_user").toString().trimmed());
   m_ui.proxy_user->setCursorPosition(0);
   m_ui.referrer->setChecked(s_settings.value("referrer", false).toBool());
+  m_ui.relative_location_character->setText
+    (s_settings.value("relative_location_character", "").toString().trimmed());
   m_ui.retain_session_tabs->setChecked
     (s_settings.value("retain_session_tabs", false).toBool());
   m_ui.save_geometry->setChecked
@@ -2565,6 +2568,8 @@ void dooble_settings::slot_apply(void)
   set_setting("pin_settings_window", m_ui.pin_settings->isChecked());
   set_setting("private_mode", m_ui.private_mode->isChecked());
   set_setting("referrer", m_ui.referrer->isChecked());
+  set_setting("relative_location_character",
+	      m_ui.relative_location_character->text().trimmed());
   set_setting("retain_session_tabs", m_ui.retain_session_tabs->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
   set_setting("show_address_widget_completer",

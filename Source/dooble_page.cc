@@ -2244,7 +2244,10 @@ void dooble_page::slot_load_page(void)
       url.setScheme("https");
     }
 
-  if(url.toString().endsWith('/'))
+  auto character
+    (dooble_settings::setting("relative_location_character").toString());
+
+  if(character.length() && url.toString().endsWith(character))
     {
       auto scheme(url.scheme());
 

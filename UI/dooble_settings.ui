@@ -243,7 +243,7 @@
       <item>
        <widget class="QStackedWidget" name="pages">
         <property name="currentIndex">
-         <number>5</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="cache_page">
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1078,7 +1078,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-604</y>
+               <y>0</y>
                <width>681</width>
                <height>1085</height>
               </rect>
@@ -1645,7 +1645,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1782</y>
+               <y>-1506</y>
                <width>642</width>
                <height>2284</height>
               </rect>
@@ -2262,6 +2262,9 @@
                 </item>
                 <item>
                  <widget class="QLineEdit" name="relative_location_character">
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Printable character please! A space character will be ignored. Suppose the character is /. https://www.arduino.cc/reference/en/ will be translated into https://www.arduino.cc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
                   <property name="maxLength">
                    <number>1</number>
                   </property>
