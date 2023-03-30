@@ -308,6 +308,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Werror \
                           -Wextra \
                           -Wformat-overflow=2 \
+                          -Wformat-security \
 			  -Wformat-signedness \
                           -Wformat-truncation=2 \
                           -Wformat=2 \
@@ -319,6 +320,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
 			  -Wstringop-overflow=2 \
                           -Wundef \
                           -Wzero-as-null-pointer-constant \
+                          -fstack-clash-protection \
                           -fstack-protector-all \
                           -fwrapv \
                           -pedantic \

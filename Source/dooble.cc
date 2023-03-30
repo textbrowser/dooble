@@ -2540,6 +2540,14 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SLOT(slot_window_close_requested(void)));
 }
 
+void dooble::setWindowTitle(const QString &text)
+{
+  if(m_is_private)
+    QMainWindow::setWindowTitle(tr("%1 (Private)").arg(text.trimmed()));
+  else
+    QMainWindow::setWindowTitle(text);
+}
+
 void dooble::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())

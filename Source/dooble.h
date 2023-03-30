@@ -185,6 +185,7 @@ class dooble: public QMainWindow
   void prepare_tab_shortcuts(void);
   void print(dooble_page *page);
   void remove_page_connections(dooble_page *page);
+  void setWindowTitle(const QString &text);
 
  private slots:
   void slot_about_to_hide_main_menu(void);
