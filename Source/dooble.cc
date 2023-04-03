@@ -2015,13 +2015,13 @@ void dooble::prepare_standard_menus(void)
 	 this,
 	 SLOT(slot_show_settings(void)));
 #else
-    m_settings_action = menu->addAction
-      (QIcon::fromTheme(use_material_icons + "preferences-system",
-			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
-       tr("Settin&gs"),
-       this,
-       SLOT(slot_show_settings(void)),
-       QKeySequence(tr("Ctrl+G")));
+      m_settings_action = menu->addAction
+	(QIcon::fromTheme(use_material_icons + "preferences-system",
+			  QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
+	 tr("Settin&gs"),
+	 this,
+	 SLOT(slot_show_settings(void)),
+	 QKeySequence(tr("Ctrl+G")));
 #endif
     }
   else
