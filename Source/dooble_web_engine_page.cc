@@ -66,15 +66,15 @@ dooble_web_engine_page::~dooble_web_engine_page()
 
 QStringList dooble_web_engine_page::chooseFiles
 (FileSelectionMode mode,
- const QStringList &oldFiles,
- const QStringList &acceptedMimeTypes)
+ const QStringList &old_files,
+ const QStringList &accepted_mime_types)
 {
   switch(mode)
     {
     case QWebEnginePage::FileSelectOpen:
       {
 	return QStringList() << QFileDialog::getOpenFileName
-	  (view(), tr("Select File"), QDir::homePath(), oldFiles.value(0));
+	  (view(), tr("Select File"), QDir::homePath(), old_files.value(0));
       }
     case QWebEnginePage::FileSelectOpenMultiple:
       {
@@ -88,9 +88,13 @@ QStringList dooble_web_engine_page::chooseFiles
 	  (view(), tr("Select Directory"), QDir::homePath());
       }
 #endif
+    default:
+      {
+	break;
+      }
     }
 
-  return QWebEnginePage::chooseFiles(mode, oldFiles, acceptedMimeTypes);
+  return QWebEnginePage::chooseFiles(mode, old_files, accepted_mime_types);
 }
 
 QUrl dooble_web_engine_page::last_clicked_link(void) const
@@ -112,7 +116,7 @@ QWidget *dooble_web_engine_page::view(void) const
 
 bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     NavigationType type,
-						     bool isMainFrame)
+						     bool is_main_frame)
 {
   emit loading(url);
   m_last_clicked_link = url;
@@ -120,8 +124,8 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
   if(dooble::s_accepted_or_blocked_domains->exception(url))
     return true;
 
+  Q_UNUSED(is_main_frame);
   Q_UNUSED(type);
-  Q_UNUSED(isMainFrame);
 
   auto host(url.host());
   auto mode
@@ -146,11 +150,11 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 }
 
 bool dooble_web_engine_page::certificateError
-(const QWebEngineCertificateError &certificateError)
+(const QWebEngineCertificateError &certificate_error)
 {
-  if(certificateError.isOverridable())
+  if(certificate_error.isOverridable())
     {
-      auto url(dooble_ui_utilities::simplified_url(certificateError.url()));
+      auto url(dooble_ui_utilities::simplified_url(certificate_error.url()));
 
       if(m_is_private)
 	if(profile()->property(("certificate_exception_" + url.toString()).
@@ -176,9 +180,9 @@ bool dooble_web_engine_page::certificateError
 	    layout->itemAt(i)->widget()->setVisible(false);
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      m_certificate_error = certificateError.errorDescription();
+      m_certificate_error = certificate_error.errorDescription();
 #else
-      m_certificate_error = certificateError.description();
+      m_certificate_error = certificate_error.description();
 #endif
       m_certificate_error_url = url;
 
@@ -203,9 +207,9 @@ bool dooble_web_engine_page::certificateError
 	   arg(url.toString()).
 	   arg(
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-	       certificateError.errorDescription()
+	       certificate_error.errorDescription()
 #else
-	       certificateError.description()
+	       certificate_error.description()
 #endif
 	       ));
       else
@@ -220,9 +224,9 @@ bool dooble_web_engine_page::certificateError
 	   arg(url.toString()).
 	   arg(
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-	       certificateError.errorDescription()
+	       certificate_error.errorDescription()
 #else
-	       certificateError.description()
+	       certificate_error.description()
 #endif
 	       ));
 
@@ -243,12 +247,12 @@ bool dooble_web_engine_page::certificateError
 	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
 	    layout->itemAt(i)->widget()->setVisible(false);
 
-      auto url(dooble_ui_utilities::simplified_url(certificateError.url()));
+      auto url(dooble_ui_utilities::simplified_url(certificate_error.url()));
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      m_certificate_error = certificateError.errorDescription();
+      m_certificate_error = certificate_error.errorDescription();
 #else
-      m_certificate_error = certificateError.description();
+      m_certificate_error = certificate_error.description();
 #endif
       m_certificate_error_url = url;
 
@@ -273,9 +277,9 @@ bool dooble_web_engine_page::certificateError
 	 arg(url.toString()).
 	 arg(
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-	     certificateError.errorDescription()
+	     certificate_error.errorDescription()
 #else
-	     certificateError.description()
+	     certificate_error.description()
 #endif
 	     ));
       m_certificate_error_widget->resize(view()->size());

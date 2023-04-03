@@ -864,6 +864,8 @@ void dooble_page::prepare_standard_menus(void)
     m_authentication_action->setEnabled(false);
 
   menu->addSeparator();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "view-private",
 		      QIcon(QString(":/%1/48/new_private_window.png").
@@ -894,11 +896,19 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_open_link(void)),
 		  QKeySequence(tr("Ctrl+L")));
+#endif
   menu->addSeparator();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+  action = m_action_close_tab = menu->addAction(tr("&Close Tab"),
+						QKeySequence(tr("Ctrl+W")),
+						this,
+						SIGNAL(close_tab(void)));
+#else
   action = m_action_close_tab = menu->addAction(tr("&Close Tab"),
 						this,
 						SIGNAL(close_tab(void)),
 						QKeySequence(tr("Ctrl+W")));
+#endif
 
   if(qobject_cast<QStackedWidget *> (parentWidget()))
     {
@@ -910,10 +920,13 @@ void dooble_page::prepare_standard_menus(void)
 	  (qobject_cast<QStackedWidget *> (parentWidget())->count() > 0);
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction(tr("Close Window"),
 		  this,
 		  SIGNAL(close_window(void)),
 		  QKeySequence(tr("Ctrl+Shift+W")));
+#endif
   menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-export",
@@ -921,6 +934,8 @@ void dooble_page::prepare_standard_menus(void)
      tr("&Export As PNG..."),
      this,
      SIGNAL(export_as_png(void)));
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-save",
 		      QIcon(QString(":/%1/48/save.png").arg(icon_set))),
@@ -928,7 +943,10 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(save(void)),
      QKeySequence(tr("Ctrl+S")));
+#endif
   menu->addSeparator();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "document-print",
 		      QIcon(QString(":/%1/48/print.png").arg(icon_set))),
@@ -936,10 +954,13 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(print(void)),
      QKeySequence(tr("Ctrl+P")));
+#endif
   menu->addAction(tr("Print Pre&view..."),
 		  this,
 		  SIGNAL(print_preview(void)));
   menu->addSeparator();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "application-exit",
 		      QIcon(QString(":/%1/48/exit_dooble.png").arg(icon_set))),
@@ -947,6 +968,7 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(quit_dooble(void)),
      QKeySequence(tr("Ctrl+Q")));
+#endif
 
   /*
   ** Edit Menu
@@ -963,6 +985,8 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_clear_visited_links(void)));
   menu->addSeparator();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   m_find_action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "edit-find",
 		      QIcon(QString(":/%1/18/find.png").arg(icon_set))),
@@ -970,24 +994,35 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SLOT(slot_show_find(void)),
      QKeySequence(tr("Ctrl+F")));
+#endif
   menu->addSeparator();
 
   if(dooble_settings::setting("pin_settings_window").toBool())
-    m_settings_action = menu->addAction
-      (QIcon::fromTheme(use_material_icons + "preferences-system",
-			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
-       tr("Settin&gs"),
-       this,
-       SIGNAL(show_settings(void)),
-       QKeySequence(tr("Ctrl+G")));
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
+      m_settings_action = menu->addAction
+	(QIcon::fromTheme(use_material_icons + "preferences-system",
+			  QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
+	 tr("Settin&gs"),
+	 this,
+	 SIGNAL(show_settings(void)),
+	 QKeySequence(tr("Ctrl+G")));
+#endif
+    }
   else
-    m_settings_action = menu->addAction
-      (QIcon::fromTheme(use_material_icons + "preferences-system",
-			QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
-       tr("Settin&gs..."),
-       this,
-       SIGNAL(show_settings(void)),
-       QKeySequence(tr("Ctrl+G")));
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
+      m_settings_action = menu->addAction
+	(QIcon::fromTheme(use_material_icons + "preferences-system",
+			  QIcon(QString(":/%1/18/settings.png").arg(icon_set))),
+	 tr("Settin&gs..."),
+	 this,
+	 SIGNAL(show_settings(void)),
+	 QKeySequence(tr("Ctrl+G")));
+#endif
+    }
 
   menu->addSeparator();
   menu->addAction(tr("Vacuum Databases"),
@@ -1032,6 +1067,8 @@ void dooble_page::prepare_standard_menus(void)
   action->setEnabled(false);
 #endif
   menu->addSeparator();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
@@ -1039,24 +1076,39 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(show_cookies(void)),
      QKeySequence(tr("Ctrl+K")));
+#endif
 
   if(dooble_settings::setting("pin_downloads_window").toBool())
-    menu->addAction
-      (QIcon::fromTheme(use_material_icons + "folder-download",
-			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))),
-       tr("&Downloads"),
-       this,
-       SIGNAL(show_downloads(void)),
-       QKeySequence(tr("Ctrl+D")));
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
+      menu->addAction
+	(QIcon::fromTheme(use_material_icons + "folder-download",
+			  QIcon(QString(":/%1/36/downloads.png").
+				arg(icon_set))),
+	 tr("&Downloads"),
+	 this,
+	 SIGNAL(show_downloads(void)),
+	 QKeySequence(tr("Ctrl+D")));
+#endif
+    }
   else
-    menu->addAction
-      (QIcon::fromTheme(use_material_icons + "folder-download",
-			QIcon(QString(":/%1/36/downloads.png").arg(icon_set))),
-       tr("&Downloads..."),
-       this,
-       SIGNAL(show_downloads(void)),
-       QKeySequence(tr("Ctrl+D")));
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
+      menu->addAction
+	(QIcon::fromTheme(use_material_icons + "folder-download",
+			  QIcon(QString(":/%1/36/downloads.png").
+				arg(icon_set))),
+	 tr("&Downloads..."),
+	 this,
+	 SIGNAL(show_downloads(void)),
+	 QKeySequence(tr("Ctrl+D")));
+#endif
+    }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "emblem-favorite",
 		      QIcon(QString(":/%1/36/favorites.png").arg(icon_set))),
@@ -1064,6 +1116,7 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SIGNAL(show_favorites(void)),
      QKeySequence(tr("Ctrl+B")));
+#endif
   menu->addSeparator();
   menu->addAction(tr("Floating Digital &Clock..."),
 		  this,
@@ -1074,21 +1127,31 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_floating_history_popup(void)));
 
   if(dooble_settings::setting("pin_history_window").toBool())
-    menu->addAction
-      (QIcon::fromTheme(use_material_icons + "deep-history",
-			QIcon(QString(":/%1/36/history.png").arg(icon_set))),
-       tr("&History"),
-       this,
-       SIGNAL(show_history(void)),
-       QKeySequence(tr("Ctrl+H")));
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
+      menu->addAction
+	(QIcon::fromTheme(use_material_icons + "deep-history",
+			  QIcon(QString(":/%1/36/history.png").arg(icon_set))),
+	 tr("&History"),
+	 this,
+	 SIGNAL(show_history(void)),
+	 QKeySequence(tr("Ctrl+H")));
+#endif
+    }
   else
-    menu->addAction
-      (QIcon::fromTheme(use_material_icons + "deep-history",
-			QIcon(QString(":/%1/36/history.png").arg(icon_set))),
-       tr("&History..."),
-       this,
-       SIGNAL(show_history(void)),
-       QKeySequence(tr("Ctrl+H")));
+    {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
+      menu->addAction
+	(QIcon::fromTheme(use_material_icons + "deep-history",
+			  QIcon(QString(":/%1/36/history.png").arg(icon_set))),
+	 tr("&History..."),
+	 this,
+	 SIGNAL(show_history(void)),
+	 QKeySequence(tr("Ctrl+H")));
+#endif
+    }
 
   menu->addSeparator();
   menu->addAction(tr("Inject Custom Style Sheet..."),
@@ -1115,10 +1178,13 @@ void dooble_page::prepare_standard_menus(void)
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_view_menu(void)));
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 0))
+#else
   m_full_screen_action = menu->addAction(tr("Show &Full Screen"),
 					 this,
 					 SIGNAL(show_full_screen(void)),
 					 QKeySequence(tr("Ctrl+F11")));
+#endif
   menu->addSeparator();
   action = menu->addAction(tr("&Status Bar"),
 			   this,

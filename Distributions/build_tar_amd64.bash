@@ -14,36 +14,36 @@ mkdir -p ./dooble/Documentation
 mkdir -p ./dooble/Lib
 mkdir -p ./dooble/Translations
 mkdir -p ./dooble/translations
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Charts.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Core.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6DBus.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Gui.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Network.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6OpenGL.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6OpenGLWidgets.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Positioning.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6PrintSupport.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Qml.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6QmlModels.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Quick.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6QuickWidgets.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Sql.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Svg.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6WebChannel.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6WebEngineCore.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6WebEngineWidgets.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6Widgets.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libQt6XcbQpa.so.6 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libicudata.so.56 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libicui18n.so.56 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/lib/libicuuc.so.56 ./dooble/Lib/.
-cp -p ~/Qt/6.2.4/gcc_64/libexec/QtWebEngineProcess ./dooble/.
-cp -pr ~/Qt/6.2.4/gcc_64/plugins ./dooble/.
-cp -pr ~/Qt/6.2.4/gcc_64/resources ./dooble/.
-cp -pr ~/Qt/6.2.4/gcc_64/translations/*.qm ./dooble/Translations/.
-cp -pr ~/Qt/6.2.4/gcc_64/translations/qtwebengine_locales ./dooble/translations/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Charts.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Core.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6DBus.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Gui.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Network.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6OpenGL.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6OpenGLWidgets.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Positioning.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6PrintSupport.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Qml.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6QmlModels.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Quick.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6QuickWidgets.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Sql.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Svg.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6WebChannel.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6WebEngineCore.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6WebEngineWidgets.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6Widgets.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libQt6XcbQpa.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libicudata.so.56 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libicui18n.so.56 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/lib/libicuuc.so.56 ./dooble/Lib/.
+cp -p ~/Qt/6.5.0/gcc_64/libexec/QtWebEngineProcess ./dooble/.
+cp -pr ~/Qt/6.5.0/gcc_64/plugins ./dooble/.
+cp -pr ~/Qt/6.5.0/gcc_64/resources ./dooble/.
+cp -pr ~/Qt/6.5.0/gcc_64/translations/*.qm ./dooble/Translations/.
+cp -pr ~/Qt/6.5.0/gcc_64/translations/qtwebengine_locales ./dooble/translations/.
 chmod -x,g+w ./dooble/Lib/*
-~/Qt/6.2.4/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
+~/Qt/6.5.0/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./dooble/Documentation/.
 cp -p ./Documentation/KDE ./dooble/Documentation/.
 cp -p ./Documentation/TO-DO ./dooble/Documentation/.
@@ -62,6 +62,6 @@ find ./dooble/plugins -name '*.so' -exec chmod -x {} \;
 
 cp $(ldd ./Dooble | awk '{print $3}' | grep -e '^/') ./dooble/Lib/.
 chmod -x ./dooble/Lib/*.so*
-tar -cvz -f Dooble-2023.04.01.tar.gz ./dooble
+tar -cvz -f Dooble-2023.04.10.tar.gz ./dooble
 make distclean
 rm -fr ./dooble

@@ -50,12 +50,12 @@ class dooble_web_engine_page: public QWebEnginePage
 
  protected:
   QStringList chooseFiles(FileSelectionMode mode,
-			  const QStringList &oldFiles,
-			  const QStringList &acceptedMimeTypes);
+			  const QStringList &old_files,
+			  const QStringList &accepted_mime_types);
   bool acceptNavigationRequest(const QUrl &url,
 			       NavigationType type,
-			       bool isMainFrame);
-  bool certificateError(const QWebEngineCertificateError &certificateError);
+			       bool is_main_frame);
+  bool certificateError(const QWebEngineCertificateError &certificate_error);
 
  private:
   QPointer<QWidget> m_certificate_error_widget;
