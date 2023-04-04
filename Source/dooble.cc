@@ -4417,14 +4417,29 @@ void dooble::slot_show_floating_menu(void)
 
 void dooble::slot_show_full_screen(bool state)
 {
+  auto *page = current_page();
+
   if(state)
     {
+      if(page)
+	{
+	  page->hide_status_bar(true);
+	  page->user_hide_location_frame(true);
+	}
+
       m_ui.menu_bar->setVisible(false);
       m_ui.tab->tab_bar()->setVisible(false);
       showFullScreen();
     }
   else
     {
+      if(page)
+	{
+	  page->hide_status_bar
+	    (!dooble_settings::setting("status_bar_visible").toBool());
+	  page->user_hide_location_frame(false);
+	}
+
       m_ui.menu_bar->setVisible
 	(dooble_settings::setting("main_menu_bar_visible").toBool());
       m_ui.tab->tab_bar()->setVisible(true);
