@@ -249,6 +249,7 @@ class dooble_page: public QWidget
   void show_floating_digital_clock(void);
   void show_floating_history_popup(void);
   void show_floating_menu(void);
+  void show_full_screen(bool state);
   void show_full_screen(void);
   void show_history(void);
   void show_release_notes(void);

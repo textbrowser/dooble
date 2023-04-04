@@ -1458,6 +1458,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(show_full_screen(bool)),
+	  this,
+	  SLOT(slot_show_full_screen(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(show_full_screen(void)),
 	  this,
 	  SLOT(slot_show_full_screen(void)),
@@ -2672,6 +2678,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_floating_menu(void)),
 	     this,
 	     SLOT(slot_show_floating_menu(void)));
+  disconnect(page,
+	     SIGNAL(show_full_screen(bool)),
+	     this,
+	     SLOT(slot_show_full_screen(bool)));
   disconnect(page,
 	     SIGNAL(show_full_screen(void)),
 	     this,
@@ -4402,6 +4412,23 @@ void dooble::slot_show_floating_menu(void)
     {
       m_popup_menu = page->popup_menu();
       m_popup_menu->show();
+    }
+}
+
+void dooble::slot_show_full_screen(bool state)
+{
+  if(state)
+    {
+      m_ui.menu_bar->setVisible(false);
+      m_ui.tab->tab_bar()->setVisible(false);
+      showFullScreen();
+    }
+  else
+    {
+      m_ui.menu_bar->setVisible
+	(dooble_settings::setting("main_menu_bar_visible").toBool());
+      m_ui.tab->tab_bar()->setVisible(true);
+      showNormal();
     }
 }
 

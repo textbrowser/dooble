@@ -95,6 +95,7 @@ class dooble_web_engine_view: public QWebEngineView
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
   void printRequested(void);
 #endif
+  void show_full_screen(bool state);
   void windowCloseRequested(void);
 };
 

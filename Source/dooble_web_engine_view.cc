@@ -82,6 +82,10 @@ dooble_web_engine_view::dooble_web_engine_view
 	  SIGNAL(printRequested(void)));
 #endif
   connect(m_page,
+	  SIGNAL(show_full_screen(bool)),
+	  this,
+	  SIGNAL(show_full_screen(bool)));
+  connect(m_page,
 	  SIGNAL(windowCloseRequested(void)),
 	  this,
 	  SIGNAL(windowCloseRequested(void)));

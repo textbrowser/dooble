@@ -395,6 +395,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(print(void)));
 #endif
   connect(m_view,
+	  SIGNAL(show_full_screen(bool)),
+	  this,
+	  SIGNAL(show_full_screen(bool)));
+  connect(m_view,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SIGNAL(titleChanged(const QString &)));

@@ -330,6 +330,7 @@ void dooble_web_engine_page::slot_full_screen_requested
 (QWebEngineFullScreenRequest full_screen_request)
 {
   full_screen_request.accept();
+  emit show_full_screen(full_screen_request.toggleOn());
 }
 
 void dooble_web_engine_page::slot_load_started(void)

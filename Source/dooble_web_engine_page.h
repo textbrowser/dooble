@@ -78,6 +78,7 @@ class dooble_web_engine_page: public QWebEnginePage
  signals:
   void certificate_exception_accepted(const QUrl &url);
   void loading(const QUrl &url);
+  void show_full_screen(bool state);
 };
 
 #endif

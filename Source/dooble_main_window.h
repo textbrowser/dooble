@@ -51,7 +51,7 @@ class dooble_main_window: public QMainWindow
   {
   }
 
-  void enable_control_w_shortcut(const bool state)
+  void enable_control_w_shortcut(bool state)
   {
     m_control_w->setEnabled(state);
   }
