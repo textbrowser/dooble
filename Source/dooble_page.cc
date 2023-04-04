@@ -1873,14 +1873,26 @@ void dooble_page::slot_enable_javascript(void)
 
 void dooble_page::slot_escape(void)
 {
-  if(m_ui.find->hasFocus())
-    m_ui.find_frame->setVisible(false);
+  auto d = find_parent_dooble();
+
+  if(d && d->isFullScreen())
+    {
+      auto action = m_view->pageAction(QWebEnginePage::ExitFullScreen);
+
+      if(action)
+	action->trigger();
+    }
   else
     {
-      m_ui.address->hide_popup();
-      m_ui.address->prepare_containers_for_url(m_view->url());
-      m_view->stop();
-      reset_url();
+      if(m_ui.find->hasFocus())
+	m_ui.find_frame->setVisible(false);
+      else
+	{
+	  m_ui.address->hide_popup();
+	  m_ui.address->prepare_containers_for_url(m_view->url());
+	  m_view->stop();
+	  reset_url();
+	}
     }
 }
 
