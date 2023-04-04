@@ -1881,6 +1881,8 @@ void dooble_page::slot_escape(void)
 
       if(action)
 	action->trigger();
+      else
+	emit show_full_screen(false);
     }
   else
     {
