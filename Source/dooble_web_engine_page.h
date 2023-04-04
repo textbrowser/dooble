@@ -29,6 +29,7 @@
 #define dooble_web_engine_page_h
 
 #include <QPointer>
+#include <QWebEngineFullScreenRequest>
 #include <QWebEnginePage>
 
 #include "ui_dooble_certificate_exceptions_widget.h"
@@ -70,6 +71,8 @@ class dooble_web_engine_page: public QWebEnginePage
 
  private slots:
   void slot_certificate_exception_accepted(void);
+  void slot_full_screen_requested
+    (QWebEngineFullScreenRequest full_screen_request);
   void slot_load_started(void);
 
  signals:

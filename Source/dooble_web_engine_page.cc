@@ -44,6 +44,10 @@ dooble_web_engine_page::dooble_web_engine_page
   m_certificate_error_url = QUrl();
   m_is_private = is_private;
   connect(this,
+	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
+	  this,
+	  SLOT(slot_full_screen_requested(QWebEngineFullScreenRequest)));
+  connect(this,
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)));
@@ -54,6 +58,10 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 {
   m_certificate_error_url = QUrl();
   m_is_private = false;
+  connect(this,
+	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
+	  this,
+	  SLOT(slot_full_screen_requested(QWebEngineFullScreenRequest)));
   connect(this,
 	  SIGNAL(loadStarted(void)),
 	  this,
@@ -316,6 +324,12 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
       (m_certificate_error, m_certificate_error_url);
 
   emit certificate_exception_accepted(url());
+}
+
+void dooble_web_engine_page::slot_full_screen_requested
+(QWebEngineFullScreenRequest full_screen_request)
+{
+  full_screen_request.accept();
 }
 
 void dooble_web_engine_page::slot_load_started(void)
