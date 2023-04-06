@@ -350,7 +350,7 @@ int main(int argc, char *argv[])
       splash.show();
       splash.showMessage
 	(QObject::tr("Initializing Dooble's random number generator."),
-	 Qt::AlignHCenter | Qt::AlignBottom);
+	 Qt::AlignBottom | Qt::AlignHCenter);
       t.start();
 
       while(t.elapsed() < 500)
@@ -373,7 +373,7 @@ int main(int argc, char *argv[])
     {
       splash.showMessage
 	(QObject::tr("Purging temporary database entries."),
-	 Qt::AlignHCenter | Qt::AlignBottom);
+	 Qt::AlignBottom | Qt::AlignHCenter);
       splash.repaint();
       dooble::s_application->processEvents();
     }
@@ -385,7 +385,7 @@ int main(int argc, char *argv[])
     {
       splash.showMessage
 	(QObject::tr("Preparing QWebEngine."),
-	 Qt::AlignHCenter | Qt::AlignBottom);
+	 Qt::AlignBottom | Qt::AlignHCenter);
       splash.repaint();
       dooble::s_application->processEvents();
     }
@@ -447,7 +447,7 @@ int main(int argc, char *argv[])
   if(splash_screen)
     {
       splash.showMessage(QObject::tr("Preparing Dooble objects."),
-			 Qt::AlignHCenter | Qt::AlignBottom);
+			 Qt::AlignBottom | Qt::AlignHCenter);
       splash.repaint();
       dooble::s_application->processEvents();
     }
@@ -540,7 +540,7 @@ int main(int argc, char *argv[])
   if(splash_screen)
     {
       splash.showMessage(QObject::tr("Populating Dooble containers."),
-			 Qt::AlignHCenter | Qt::AlignBottom);
+			 Qt::AlignBottom | Qt::AlignHCenter);
       splash.repaint();
       dooble::s_application->processEvents();
 
@@ -548,7 +548,7 @@ int main(int argc, char *argv[])
 	splash.repaint();
 
       splash.showMessage(QObject::tr("Opening Dooble."),
-			 Qt::AlignHCenter | Qt::AlignBottom);
+			 Qt::AlignBottom | Qt::AlignHCenter);
       splash.repaint();
       dooble::s_application->processEvents();
       splash.finish(d);
