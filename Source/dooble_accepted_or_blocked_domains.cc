@@ -1196,7 +1196,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		    "continue."),
 		 QMessageBox::Ok,
 		 this);
-	      m_import_dialog->setModal(true);
+	      m_import_dialog->setModal(false);
 	      m_import_dialog->show();
 	    }
 	}
