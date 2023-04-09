@@ -26,7 +26,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Qt 6.2 LTS!</li>
 <li>Qt 6.5 LTS!</li>
 <li>Qt-only dependency.</li>
-<li>WebEngine (https://doc.qt.io/qt-5/qtwebengine-overview.html, https://en.wikipedia.org/wiki/Blink_(browser_engine)#Frameworks).</li>
+<li>WebEngine (https://doc.qt.io/qt-5/qtwebengine-overview.html, https://en.wikipedia.org/wiki/Blink_(browser_engine)#Frameworks, https://www.chromium.org/blink).</li>
 <li>Windows portable.</li>
 </ul>
 
