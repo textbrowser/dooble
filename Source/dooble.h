@@ -106,6 +106,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_web_engine_url_request_interceptor>
     s_url_request_interceptor;
   static QString ABOUT_BLANK;
+  static QString s_default_http_user_agent;
   static void clean(void);
   static void print(QWidget *parent, dooble_charts *chart);
   static void print_preview(QPrinter *printer, dooble_charts *chart);

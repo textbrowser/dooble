@@ -30,6 +30,7 @@
 #include <QShortcut>
 #include <QtConcurrent>
 
+#include "dooble.h"
 #include "dooble_about.h"
 #include "dooble_swifty.h"
 #include "dooble_version.h"
@@ -99,6 +100,7 @@ dooble_about::dooble_about(void):QMainWindow()
   m_ui.release_notes->setText
     (tr("<a href=\"qrc://Documentation/ReleaseNotes.html\">"
 	"Release Notes</a>"));
+  m_ui.user_agent->setText(dooble::s_default_http_user_agent);
   m_ui.version->setText
     (tr("Dooble version %1, X. The official version is <b>%1</b>.").
      arg(DOOBLE_VERSION_STRING));

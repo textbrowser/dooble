@@ -73,7 +73,7 @@ QPointer<dooble> dooble::s_search_engines_popup_opened_from_dooble_window =
 QPointer<dooble_history> dooble::s_history = nullptr;
 QPointer<dooble_about> dooble::s_about = nullptr;
 QPointer<dooble_accepted_or_blocked_domains>
-dooble::s_accepted_or_blocked_domains = nullptr;
+  dooble::s_accepted_or_blocked_domains = nullptr;
 QPointer<dooble_application> dooble::s_application = nullptr;
 QPointer<dooble_certificate_exceptions> dooble::s_certificate_exceptions =
   nullptr;
@@ -89,8 +89,9 @@ QPointer<dooble_search_engines_popup> dooble::s_search_engines_window = nullptr;
 QPointer<dooble_settings> dooble::s_settings = nullptr;
 QPointer<dooble_style_sheet> dooble::s_style_sheet = nullptr;
 QPointer<dooble_web_engine_url_request_interceptor>
-dooble::s_url_request_interceptor = nullptr;
+  dooble::s_url_request_interceptor = nullptr;
 QString dooble::ABOUT_BLANK = "about:blank";
+QString dooble::s_default_http_user_agent = "";
 bool dooble::s_containers_populated = false;
 
 static QSize s_vga_size = QSize(640, 480);

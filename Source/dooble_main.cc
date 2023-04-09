@@ -452,6 +452,8 @@ int main(int argc, char *argv[])
       dooble::s_application->processEvents();
     }
 
+  dooble::s_default_http_user_agent = QWebEngineProfile::defaultProfile()->
+    httpUserAgent();
   dooble::s_settings = new dooble_settings();
   dooble::s_settings->set_settings_path(dooble_settings_path);
 
