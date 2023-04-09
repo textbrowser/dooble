@@ -1137,20 +1137,36 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  QApplication::processEvents();
 	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	  QByteArray data(2048, 0);
+	  QByteArray line(2048, 0);
+	  const qint64 m = static_cast<qint64> (line.size());
 	  qint64 rc = 0;
 
-	  while((rc = file.readLine(data.data(),
-				    static_cast<qint64> (data.length()))) >= 0)
+	  while((rc = file.readLine(line.data(), m)) >= 0)
 	    {
-	      if(data.trimmed().endsWith(".invalid") ||
-		 data.trimmed().startsWith("#"))
+	      auto data(line.mid(0, static_cast<int> (rc)).trimmed());
+
+	      if(data.endsWith(".") ||
+		 data.endsWith(".invalid") ||
+		 data.isEmpty() ||
+		 data.startsWith("!") ||
+		 data.startsWith("#") ||
+		 data.startsWith("@@"))
 		continue;
 
-	      auto url(QUrl::fromUserInput(data.mid(0, static_cast<int> (rc)).
-					   trimmed()));
+	      if(data.endsWith('^'))
+		data = data.mid(0, data.length() - 1);
 
-	      if(!url.isEmpty() && url.isValid())
+	      if(data.startsWith("||"))
+		data = data.mid(2);
+
+	      data = data.trimmed();
+
+	      if(data.endsWith('.') || data.isEmpty() || data.startsWith('.'))
+		continue;
+
+	      auto url(QUrl::fromUserInput(data));
+
+	      if(!url.isEmpty() && !url.host().isEmpty() && url.isValid())
 		m_domains[url.host()] = 1;
 	    }
 
@@ -1196,7 +1212,11 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		    "continue."),
 		 QMessageBox::Ok,
 		 this);
+#ifdef Q_OS_MACOS
 	      m_import_dialog->setModal(false);
+#else
+	      m_import_dialog->setModal(true);
+#endif
 	      m_import_dialog->show();
 	    }
 	}

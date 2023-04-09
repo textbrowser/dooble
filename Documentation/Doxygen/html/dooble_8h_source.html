@@ -200,7 +200,7 @@ $(function() {
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  QEventLoop m_event_loop;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  QFuture&lt;QList&lt;QByteArray&gt; &gt; m_pbkdf2_future;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  QFutureWatcher&lt;QList&lt;QByteArray&gt; &gt; m_pbkdf2_future_watcher;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#ifdef Q_OS_MAC</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#ifdef Q_OS_MACOS</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  QHash&lt;QTimer *, QShortcut *&gt; m_disabled_shortcuts;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  QList&lt;QPair&lt;QPointer&lt;dooble_page&gt;, QUrl&gt; &gt; m_delayed_pages;</div>
@@ -278,7 +278,7 @@ $(function() {
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keywordtype">void</span> slot_dooble_credentials_authenticated(<span class="keywordtype">bool</span> state);</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="keywordtype">void</span> slot_dooble_credentials_created(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="keywordtype">void</span> slot_downloads_started(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="preprocessor">#ifdef Q_OS_MAC</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="preprocessor">#ifdef Q_OS_MACOS</span></div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">void</span> slot_enable_shortcut(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordtype">void</span> slot_export_as_png(<span class="keywordtype">void</span>);</div>
@@ -317,7 +317,7 @@ $(function() {
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keywordtype">void</span> slot_save(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordtype">void</span> slot_set_current_tab(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keywordtype">void</span> slot_settings_applied(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="preprocessor">#ifdef Q_OS_MAC</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="preprocessor">#ifdef Q_OS_MACOS</span></div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="keywordtype">void</span> slot_shortcut_activated(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  <span class="keywordtype">void</span> slot_show_about(<span class="keywordtype">void</span>);</div>

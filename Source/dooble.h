@@ -129,7 +129,7 @@ class dooble: public QMainWindow
   QEventLoop m_event_loop;
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   QHash<QTimer *, QShortcut *> m_disabled_shortcuts;
 #endif
   QList<QPair<QPointer<dooble_page>, QUrl> > m_delayed_pages;
@@ -207,7 +207,7 @@ class dooble: public QMainWindow
   void slot_dooble_credentials_authenticated(bool state);
   void slot_dooble_credentials_created(void);
   void slot_downloads_started(void);
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   void slot_enable_shortcut(void);
 #endif
   void slot_export_as_png(void);
@@ -246,7 +246,7 @@ class dooble: public QMainWindow
   void slot_save(void);
   void slot_set_current_tab(void);
   void slot_settings_applied(void);
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
   void slot_shortcut_activated(void);
 #endif
   void slot_show_about(void);
