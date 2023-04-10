@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>650</width>
-    <height>250</height>
+    <height>355</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -109,6 +109,12 @@
         </item>
         <item>
          <widget class="QLabel" name="information">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="styleSheet">
            <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
           </property>
@@ -125,6 +131,12 @@
         </item>
         <item>
          <widget class="QLabel" name="site">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="styleSheet">
            <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
           </property>
@@ -141,6 +153,12 @@
         </item>
         <item>
          <widget class="QLabel" name="local_information">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="styleSheet">
            <string notr="true">QWidget {background-color: white; color: rgb(0, 0, 0);}</string>
           </property>
@@ -179,6 +197,12 @@
         </item>
         <item>
          <widget class="QLabel" name="user_agent">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
