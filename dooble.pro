@@ -10,7 +10,7 @@ CONVERT_TOOL = "/usr/local/Cellar/qt/6.4.2_2/share/qt/libexec/qwebengine_convert
 } else {
 versionAtLeast(QT_VERSION, 6.0.0) {
 freebsd-* {
-qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+CONVERT_TOOL = "/usr/local/libexec/qt6/qwebengine_convert_dict"
 } else:win32 {
 qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
 } else {
