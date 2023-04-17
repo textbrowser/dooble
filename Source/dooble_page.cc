@@ -688,6 +688,7 @@ void dooble_page::load(const QUrl &url)
 {
   m_view->stop();
   m_view->load(url);
+  m_view->setUrl(url);
 }
 
 void dooble_page::prepare_export_as_png(const QString &file_name)
