@@ -548,7 +548,10 @@ void dooble_web_engine_view::slot_certificate_exception_accepted
 (const QUrl &url)
 {
   if(!url.isEmpty() && url.isValid())
-    load(url);
+    {
+      load(url);
+      setUrl(url); // Set the address widget's text.
+    }
 }
 
 void dooble_web_engine_view::slot_create_dialog_requests(void)
