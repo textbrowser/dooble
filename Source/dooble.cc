@@ -3575,6 +3575,7 @@ void dooble::slot_export_as_png(void)
   dialog.setFileMode(QFileDialog::AnyFile);
   dialog.setLabelText(QFileDialog::Accept, tr("Select"));
   dialog.setNameFilter(tr("PNG (*.png)"));
+  dialog.setOption(QFileDialog::DontUseNativeDialog);
   dialog.setWindowTitle(tr("Dooble: Export As PNG"));
 
   if(dialog.exec() == QDialog::Accepted)
@@ -3797,6 +3798,7 @@ void dooble::slot_open_local_file(void)
   dialog.setDirectory(QDir::home());
   dialog.setFileMode(QFileDialog::ExistingFile);
   dialog.setLabelText(QFileDialog::Accept, tr("Open"));
+  dialog.setOption(QFileDialog::DontUseNativeDialog);
   dialog.setWindowTitle(tr("Dooble: Open File"));
 
   if(dialog.exec() == QDialog::Accepted)

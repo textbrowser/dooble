@@ -901,6 +901,7 @@ void dooble_downloads::slot_select_path(void)
   dialog.setDirectory(QDir::homePath());
   dialog.setFileMode(QFileDialog::Directory);
   dialog.setLabelText(QFileDialog::Accept, tr("Select"));
+  dialog.setOption(QFileDialog::DontUseNativeDialog);
   dialog.setWindowTitle(tr("Dooble: Select Download Path"));
 
   if(dialog.exec() == QDialog::Accepted)

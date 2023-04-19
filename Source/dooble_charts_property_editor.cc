@@ -1275,6 +1275,7 @@ void dooble_charts_property_editor::slot_show_file_dialog
   QFileDialog dialog(this);
 
   dialog.selectFile(item->text());
+  dialog.setOption(QFileDialog::DontUseNativeDialog);
 
   if(dialog.exec() == QDialog::Accepted)
     {
