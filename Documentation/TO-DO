@@ -218,6 +218,7 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional Document Mode.
 - Prevent SQL query text overflow.
+- Review https://doc.qt.io/qt-6/qtwebengine-changes-qt6.html.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
