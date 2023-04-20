@@ -62,7 +62,7 @@ find ./dooble/plugins -name '*.so' -exec chmod -x {} \;
 # Prepare a tar bundle.
 
 cp $(ldd ./Dooble | awk '{print $3}' | grep -e '^/') ./dooble/Lib/.
-chmod -x ./dooble/Lib/*.so*
+chmod -x,g+rw ./dooble/Lib/*
 tar -cvz -f Dooble-2023.04.20.tar.gz ./dooble
 make distclean
 rm -fr ./dooble
