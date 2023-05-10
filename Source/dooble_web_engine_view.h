@@ -63,7 +63,6 @@ class dooble_web_engine_view: public QWebEngineView
 
  private slots:
   void slot_accept_or_block_domain(void);
-  void slot_analyze(void);
   void slot_certificate_exception_accepted(const QUrl &url);
   void slot_create_dialog_requests(void);
   void slot_load_progress(int progress);
@@ -72,11 +71,11 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_open_link_in_new_private_window(void);
   void slot_open_link_in_new_tab(void);
   void slot_open_link_in_new_window(void);
+  void slot_peekaboo(void);
   void slot_search(void);
   void slot_settings_applied(void);
 
  signals:
-  void analyze_text(const QString &text);
   void create_dialog(dooble_web_engine_view *view);
   void create_dialog_request(dooble_web_engine_view *view);
   void create_tab(dooble_web_engine_view *view);
@@ -94,6 +93,7 @@ class dooble_web_engine_view: public QWebEngineView
   void open_link_in_new_private_window(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);
   void open_link_in_new_window(const QUrl &url);
+  void peekaboo_text(const QString &text);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
   void printRequested(void);
 #endif

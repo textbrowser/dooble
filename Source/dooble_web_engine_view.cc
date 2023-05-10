@@ -483,7 +483,10 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 
   menu->addSeparator();
   action = menu->addAction
-    (tr("Analyze Selected Text"), this, SLOT(slot_analyze(void)));
+    (tr("Peekaboo Selected Text"), this, SLOT(slot_peekaboo(void)));
+#ifndef DOOBLE_PEEKABOO
+  action->setEnabled(false);
+#endif
   action->setProperty("selected_text", selectedText());
   menu->exec(mapToGlobal(event->pos()));
   menu->deleteLater();
@@ -546,14 +549,6 @@ void dooble_web_engine_view::set_feature_permission
      feature,
      policy == QWebEnginePage::PermissionGrantedByUser);
   m_page->setFeaturePermission(security_origin, feature, policy);
-}
-
-void dooble_web_engine_view::slot_analyze(void)
-{
-  auto action = qobject_cast<QAction *> (sender());
-
-  if(action)
-    emit analyze_text(action->property("selected_text").toString());
 }
 
 void dooble_web_engine_view::slot_certificate_exception_accepted
@@ -635,6 +630,14 @@ void dooble_web_engine_view::slot_open_link_in_new_tab(void)
 
   if(!url.isEmpty() && url.isValid())
     emit open_link_in_new_tab(url);
+}
+
+void dooble_web_engine_view::slot_peekaboo(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit peekaboo_text(action->property("selected_text").toString());
 }
 
 void dooble_web_engine_view::slot_search(void)
