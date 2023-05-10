@@ -15,6 +15,10 @@ DOOBLE_MMAN_PRESENT
 
 Lock memory into RAM via mman.
 
+DOOBLE_PEEKABOO
+
+Enabled if a special file exists.
+
 DOOBLE_QTCHARTS_PRESENT
 
 Enabled if the QtCharts module is available.
