@@ -481,6 +481,10 @@ void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
 	sub_menu->setEnabled(false);
     }
 
+  menu->addSeparator();
+  action = menu->addAction
+    (tr("Analyze Selected Text"), this, SLOT(slot_analyze(void)));
+  action->setProperty("selected_text", selectedText());
   menu->exec(mapToGlobal(event->pos()));
   menu->deleteLater();
 }
@@ -542,6 +546,14 @@ void dooble_web_engine_view::set_feature_permission
      feature,
      policy == QWebEnginePage::PermissionGrantedByUser);
   m_page->setFeaturePermission(security_origin, feature, policy);
+}
+
+void dooble_web_engine_view::slot_analyze(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit analyze_text(action->property("selected_text").toString());
 }
 
 void dooble_web_engine_view::slot_certificate_exception_accepted
