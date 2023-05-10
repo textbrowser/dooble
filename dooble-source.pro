@@ -18,7 +18,8 @@ FORMS           = UI/dooble.ui \
                   UI/dooble_popup_menu.ui \
                   UI/dooble_search_engines_popup.ui \
                   UI/dooble_settings.ui \
-                  UI/dooble_style_sheet.ui
+                  UI/dooble_style_sheet.ui \
+                  UI/dooble_text_dialog.ui
 
 HEADERS		= Source/dooble.h \
                   Source/dooble_about.h \
