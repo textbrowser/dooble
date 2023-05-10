@@ -21,6 +21,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Multiple private instances, including downloads.</li>
 <li>Native graphing of data for scientific research.</li>
 <li>Original implementations of AES-256, Threefish-256.</li>
+<li>Peek-a-boo.</li>
 <li>Portable.</li>
 <li>Qt LTS!</li>
 <li>Qt-only dependency.</li>
