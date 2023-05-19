@@ -102,7 +102,8 @@ dooble_about::dooble_about(void):QMainWindow()
 	"Release Notes</a>"));
   m_ui.user_agent->setText(dooble::s_default_http_user_agent);
   m_ui.version->setText
-    (tr("Dooble version %1, X. The official version is <b>%1</b>.").
+    (tr("Dooble version %1. Made with love by textbrowser. "
+        "The official version is <b>%1</b>.").
      arg(DOOBLE_VERSION_STRING));
   compute_self_digest();
 }
@@ -178,7 +179,8 @@ void dooble_about::slot_link_activated(const QString &url)
 void dooble_about::slot_swifty(void)
 {
   m_ui.version->setText
-    (tr("Dooble version %1, X. The official version is <b>%2</b>.").
+    (tr("Dooble version %1. Made with love by textbrowser. "
+        "The official version is <b>%2</b>.").
      arg(DOOBLE_VERSION_STRING).
      arg(m_swifty->newest_version()));
 }
