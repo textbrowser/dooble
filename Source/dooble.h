@@ -40,6 +40,13 @@
 #include "ui_dooble.h"
 #include "ui_dooble_floating_digital_clock.h"
 
+#ifdef DOOBLE_PEEKABOO
+extern "C"
+{
+#include <gpgme.h>
+}
+#endif
+
 class QDialog;
 class QPrinter;
 class QWebEngineDownloadItem;
@@ -158,14 +165,22 @@ class dooble: public QMainWindow
   bool m_is_javascript_dialog;
   bool m_is_private;
   bool m_print_preview;
+  static QPointer<dooble> s_dooble;
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
   QStringList chart_names(void) const;
-  static bool cookie_filter
-    (const QWebEngineCookieStore::FilterRequest &filter_request);
   bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;
+  static bool cookie_filter
+    (const QWebEngineCookieStore::FilterRequest &filter_request);
+#ifdef DOOBLE_PEEKABOO
+  static gpgme_error_t peekaboo_passphrase(void *hook,
+					   const char *uid_hint,
+					   const char *passphrase_info,
+					   int prev_was_bad,
+					   int fd);
+#endif
   void add_tab(QWidget *widget, const QString &title);
   void connect_signals(void);
   void decouple_support_windows(void);
@@ -234,6 +249,7 @@ class dooble: public QMainWindow
   void slot_open_tab_as_new_private_window(int index);
   void slot_open_tab_as_new_window(int index);
   void slot_pbkdf2_future_finished(void);
+  void slot_peekaboo_text(const QString &t);
   void slot_populate_containers_timer_timeout(void);
   void slot_populated(void);
   void slot_print(void);

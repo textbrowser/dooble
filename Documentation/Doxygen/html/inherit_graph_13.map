@@ -1,8 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,80,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,136,80,163"/>
 <area shape="rect" id="node2" href="$classdooble__clear__items.html" title=" " alt="" coords="143,5,292,32"/>
 <area shape="rect" id="node3" href="$classdooble__favorites__popup.html" title=" " alt="" coords="128,56,307,83"/>
 <area shape="rect" id="node4" href="$classdooble__popup__menu.html" title=" " alt="" coords="139,107,296,133"/>
 <area shape="rect" id="node5" href="$classdooble__search__engines__popup.html" title=" " alt="" coords="130,158,305,199"/>
 <area shape="rect" id="node6" href="$classdooble__style__sheet.html" title=" " alt="" coords="143,224,291,251"/>
+<area shape="rect" id="node7" href="$classdooble__text__dialog.html" title=" " alt="" coords="144,275,291,301"/>
 </map>

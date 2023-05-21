@@ -50,11 +50,12 @@ var searchData=
   ['dooble_5ftab_5fbar_48',['dooble_tab_bar',['../classdooble__tab__bar.html',1,'']]],
   ['dooble_5ftab_5fwidget_49',['dooble_tab_widget',['../classdooble__tab__widget.html',1,'']]],
   ['dooble_5ftable_5fview_50',['dooble_table_view',['../classdooble__table__view.html',1,'']]],
-  ['dooble_5ftext_5futilities_51',['dooble_text_utilities',['../classdooble__text__utilities.html',1,'']]],
-  ['dooble_5fthreefish256_52',['dooble_threefish256',['../classdooble__threefish256.html',1,'']]],
-  ['dooble_5ftool_5fbutton_53',['dooble_tool_button',['../classdooble__tool__button.html',1,'']]],
-  ['dooble_5fui_5futilities_54',['dooble_ui_utilities',['../classdooble__ui__utilities.html',1,'']]],
-  ['dooble_5fweb_5fengine_5fpage_55',['dooble_web_engine_page',['../classdooble__web__engine__page.html',1,'']]],
-  ['dooble_5fweb_5fengine_5furl_5frequest_5finterceptor_56',['dooble_web_engine_url_request_interceptor',['../classdooble__web__engine__url__request__interceptor.html',1,'']]],
-  ['dooble_5fweb_5fengine_5fview_57',['dooble_web_engine_view',['../classdooble__web__engine__view.html',1,'']]]
+  ['dooble_5ftext_5fdialog_51',['dooble_text_dialog',['../classdooble__text__dialog.html',1,'']]],
+  ['dooble_5ftext_5futilities_52',['dooble_text_utilities',['../classdooble__text__utilities.html',1,'']]],
+  ['dooble_5fthreefish256_53',['dooble_threefish256',['../classdooble__threefish256.html',1,'']]],
+  ['dooble_5ftool_5fbutton_54',['dooble_tool_button',['../classdooble__tool__button.html',1,'']]],
+  ['dooble_5fui_5futilities_55',['dooble_ui_utilities',['../classdooble__ui__utilities.html',1,'']]],
+  ['dooble_5fweb_5fengine_5fpage_56',['dooble_web_engine_page',['../classdooble__web__engine__page.html',1,'']]],
+  ['dooble_5fweb_5fengine_5furl_5frequest_5finterceptor_57',['dooble_web_engine_url_request_interceptor',['../classdooble__web__engine__url__request__interceptor.html',1,'']]],
+  ['dooble_5fweb_5fengine_5fview_58',['dooble_web_engine_view',['../classdooble__web__engine__view.html',1,'']]]
 ];

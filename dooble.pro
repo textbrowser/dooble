@@ -200,6 +200,11 @@ linux {
 exists(/usr/bin/dpkg-deb) {
 build-deb.commands = Distributions/build_deb.bash
 }
+
+exists(/usr/include/gpgme.h) {
+DEFINES += DOOBLE_PEEKABOO
+LIBS += -lgpgme
+}
 }
 
 unix {

@@ -25,9 +25,24 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DOOBLE_VERSION
-#define DOOBLE_VERSION 20230531
-#endif
-#ifndef DOOBLE_VERSION_STRING
-#define DOOBLE_VERSION_STRING "2023.05.31"
+#ifndef dooble_text_dialog_h
+#define dooble_text_dialog_h
+
+#include "ui_dooble_text_dialog.h"
+
+class dooble_text_dialog: public QDialog
+{
+  Q_OBJECT
+
+ public:
+  dooble_text_dialog(QWidget *parent);
+  ~dooble_text_dialog();
+  void set_text(const QString &text);
+  void set_text_color(const QColor &color);
+
+ private:
+  Ui_dooble_text_dialog m_ui;
+  void closeEvent(QCloseEvent *event);
+};
+
 #endif

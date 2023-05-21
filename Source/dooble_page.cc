@@ -388,6 +388,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(open_link_in_new_window(const QUrl &)),
 	  this,
 	  SIGNAL(open_link_in_new_window(const QUrl &)));
+  connect(m_view,
+	  SIGNAL(peekaboo_text(const QString &)),
+	  this,
+	  SIGNAL(peekaboo_text(const QString &)));
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
   connect(m_view,
 	  SIGNAL(printRequested(void)),

@@ -25,9 +25,36 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DOOBLE_VERSION
-#define DOOBLE_VERSION 20230531
-#endif
-#ifndef DOOBLE_VERSION_STRING
-#define DOOBLE_VERSION_STRING "2023.05.31"
-#endif
+#include <QShortcut>
+
+#include "dooble_text_dialog.h"
+
+dooble_text_dialog::dooble_text_dialog(QWidget *parent):QDialog(parent)
+{
+  m_ui.setupUi(this);
+  new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
+}
+
+dooble_text_dialog::~dooble_text_dialog()
+{
+}
+
+void dooble_text_dialog::closeEvent(QCloseEvent *event)
+{
+  QDialog::closeEvent(event);
+  deleteLater();
+}
+
+void dooble_text_dialog::set_text(const QString &text)
+{
+  if(text.trimmed().isEmpty())
+    return;
+
+  m_ui.text->setText(text.trimmed());
+}
+
+void dooble_text_dialog::set_text_color(const QColor &color)
+{
+  m_ui.text->setStyleSheet
+    (QString("QTextEdit {color: %1;}").arg(color.name()));
+}

@@ -61,12 +61,14 @@
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 #include "dooble_tab_bar.h"
+#include "dooble_text_dialog.h"
 #include "dooble_ui_utilities.h"
 #include "dooble_version.h"
 #include "dooble_web_engine_url_request_interceptor.h"
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
+QPointer<dooble> dooble::s_dooble = nullptr;
 QPointer<dooble> dooble::s_favorites_popup_opened_from_dooble_window = nullptr;
 QPointer<dooble> dooble::s_search_engines_popup_opened_from_dooble_window =
   nullptr;
@@ -567,6 +569,47 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   prepare_tab_shortcuts();
   return page;
 }
+
+#ifdef DOOBLE_PEEKABOO
+gpgme_error_t dooble::peekaboo_passphrase(void *hook,
+					  const char *uid_hint,
+					  const char *passphrase_info,
+					  int prev_was_bad,
+					  int fd)
+{
+  Q_UNUSED(hook);
+  Q_UNUSED(passphrase_info);
+  Q_UNUSED(prev_was_bad);
+  Q_UNUSED(uid_hint);
+
+  QString passphrase("");
+  bool ok = true;
+
+  QApplication::restoreOverrideCursor();
+  passphrase = QInputDialog::getText
+    (s_dooble,
+     tr("Dooble: Peekaboo Passphrase"),
+     tr("&Peekaboo Passphrase"),
+     QLineEdit::Password,
+     "",
+     &ok);
+  s_dooble = nullptr;
+
+  if(!ok || passphrase.isEmpty())
+    {
+      dooble_cryptography::memzero(passphrase);
+      return GPG_ERR_NO_PASSPHRASE;
+    }
+
+  Q_UNUSED
+    (gpgme_io_writen(fd,
+		     passphrase.toUtf8().constData(),
+		     static_cast<size_t> (passphrase.toUtf8().length())));
+  Q_UNUSED(gpgme_io_writen(fd, "\n", static_cast<size_t> (1)));
+  dooble_cryptography::memzero(passphrase);
+  return GPG_ERR_NO_ERROR;
+}
+#endif
 
 void dooble::add_tab(QWidget *widget, const QString &title)
 {
@@ -1360,6 +1403,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(open_local_file(void)),
 	  this,
 	  SLOT(slot_open_local_file(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(peekaboo_text(const QString &)),
+	  this,
+	  SLOT(slot_peekaboo_text(const QString &)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -2615,6 +2664,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(open_local_file(void)),
 	     this,
 	     SLOT(slot_open_local_file(void)));
+  disconnect(page,
+	     SIGNAL(peekaboo_text(const QString &)),
+	     this,
+	     SLOT(slot_peekaboo_text(const QString &)));
   disconnect(page,
 	     SIGNAL(print(void)),
 	     this,
@@ -3881,6 +3934,127 @@ void dooble::slot_pbkdf2_future_finished(void)
 	  emit dooble_credentials_authenticated(true);
 	}
     }
+}
+
+void dooble::slot_peekaboo_text(const QString &t)
+{
+#ifdef DOOBLE_PEEKABOO
+  auto text(t.trimmed());
+
+  if(text.isEmpty())
+    return;
+
+  const char begin[] = "-----BEGIN PGP MESSAGE-----";
+  const char end[] = "-----END PGP MESSAGE-----";
+  auto index_1 = text.indexOf(begin);
+  auto index_2 = text.indexOf(end);
+
+  if(index_1 >= 0 && index_1 < index_2)
+    {
+      gpgme_check_version(NULL);
+
+      auto data(text.mid(index_1,
+			 index_2 - index_1 + static_cast<int> (qstrlen(end))).
+		toUtf8());
+      gpgme_ctx_t ctx = NULL;
+      gpgme_error_t error = gpgme_new(&ctx);
+
+      if(error == GPG_ERR_NO_ERROR)
+	{
+	  auto valid_signature = false;
+	  gpgme_data_t ciphertext = NULL;
+	  gpgme_data_t plaintext = NULL;
+
+	  gpgme_set_armor(ctx, 1);
+	  error = gpgme_data_new(&plaintext);
+
+	  if(error == GPG_ERR_NO_ERROR)
+	    error = gpgme_data_new_from_mem
+	      (&ciphertext,
+	       data.constData(),
+	       static_cast<size_t> (data.length()),
+	       1);
+
+	  if(error == GPG_ERR_NO_ERROR)
+	    {
+	      error = gpgme_set_pinentry_mode
+		(ctx, GPGME_PINENTRY_MODE_LOOPBACK);
+	      s_dooble = this;
+	      gpgme_set_passphrase_cb(ctx, &peekaboo_passphrase, NULL);
+	    }
+
+	  if(error == GPG_ERR_NO_ERROR)
+	    error = gpgme_op_decrypt_verify(ctx, ciphertext, plaintext);
+
+	  if(error == GPG_ERR_NO_ERROR)
+	    {
+	      QByteArray bytes(1024, 0);
+	      QString output("");
+	      ssize_t rc = 0;
+
+	      gpgme_data_seek(plaintext, 0, SEEK_SET);
+
+	      while((rc =
+		     gpgme_data_read(plaintext,
+				     bytes.data(),
+				     static_cast<size_t> (bytes.length()))) > 0)
+		{
+		  output.append(bytes.mid(0, static_cast<int> (rc)));
+		}
+
+	      gpgme_verify_result_t result = gpgme_op_verify_result(ctx);
+
+	      if(result)
+		{
+		  gpgme_signature_t signature = result->signatures;
+
+		  if(signature && signature->fpr)
+		    {
+		      gpgme_key_t key = NULL;
+
+		      if(gpgme_get_key(ctx,
+				       signature->fpr,
+				       &key,
+				       0) == GPG_ERR_NO_ERROR)
+			{
+			  if(key->uids && key->uids->email)
+			    {
+			      output.prepend("\n\n");
+			      output.prepend(key->uids->email);
+			    }
+			}
+
+		      gpgme_key_unref(key);
+		    }
+
+		  if((signature && (GPGME_SIGSUM_GREEN &
+				    signature->summary)) ||
+		     (signature && (GPGME_SIGSUM_VALID &
+				    signature->summary)))
+		    valid_signature = true;
+		}
+
+	      if(!output.trimmed().isEmpty())
+		{
+		  auto dialog = new dooble_text_dialog(this);
+
+		  dialog->set_text(output);
+		  dialog->set_text_color
+		    (valid_signature ?
+		     QColor(1, 50, 32) : QColor(255, 75, 0));
+		  dialog->show();
+		}
+	    }
+
+	  gpgme_data_release(ciphertext);
+	  gpgme_data_release(plaintext);
+	}
+
+      gpgme_release(ctx);
+    }
+#else
+  Q_UNUSED(t);
+#endif
 }
 
 void dooble::slot_populate_containers_timer_timeout(void)

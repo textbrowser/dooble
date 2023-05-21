@@ -59,6 +59,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_tab_bar.h \
                   Source/dooble_tab_widget.h \
                   Source/dooble_table_view.h \
+                  Source/dooble_text_dialog.h \
                   Source/dooble_tool_button.h \
                   Source/dooble_version.h \
 		  Source/dooble_web_engine_url_request_interceptor.h \
@@ -110,6 +111,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_tab_bar.cc \
                   Source/dooble_tab_widget.cc \
                   Source/dooble_table_view.cc \
+                  Source/dooble_text_dialog.cc \
                   Source/dooble_text_utilities.cc \
                   Source/dooble_threefish256.cc \
                   Source/dooble_tool_button.cc \
