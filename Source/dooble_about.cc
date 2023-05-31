@@ -43,7 +43,6 @@ dooble_about::dooble_about(void):QMainWindow()
      QUrl::fromUserInput("https://raw.githubusercontent.com/"
 			 "textbrowser/dooble/master/Source/dooble_version.h"),
      this);
-  m_swifty->download();
   m_ui.setupUi(this);
   m_ui.digest->clear();
   connect(m_swifty,
@@ -70,6 +69,7 @@ dooble_about::dooble_about(void):QMainWindow()
 	  SIGNAL(file_digest_computed(const QByteArray &)),
 	  this,
 	  SLOT(slot_file_digest_computed(const QByteArray &)));
+  m_swifty->download();
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 
   QString qversion("");
