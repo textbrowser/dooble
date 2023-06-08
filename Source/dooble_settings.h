@@ -41,6 +41,8 @@
 #include "dooble_main_window.h"
 #include "ui_dooble_settings.h"
 
+class QStandardItemModel;
+
 class dooble_settings: public dooble_main_window
 {
   Q_OBJECT
@@ -73,6 +75,7 @@ class dooble_settings: public dooble_main_window
 				     QWebEnginePage::Feature feature);
   static void prepare_web_engine_environment_variables(void);
   static void remove_setting(const QString &key);
+  void add_shortcut(QObject *object);
   void restore(bool read_database);
   void set_settings_path(const QString &path);
   void set_site_feature_permission(const QUrl &url,
@@ -93,6 +96,7 @@ class dooble_settings: public dooble_main_window
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
   QPointer<QProgressDialog> m_pbkdf2_dialog;
+  QStandardItemModel *m_shortcuts_model;
   QTimer m_timer;
   Ui_dooble_settings m_ui;
   static QHash<QString, QString> s_web_engine_settings_environment;
@@ -109,6 +113,7 @@ class dooble_settings: public dooble_main_window
   void prepare_fonts(void);
   void prepare_icons(void);
   void prepare_proxy(bool save);
+  void prepare_shortcuts(void);
   void prepare_table_statistics(void);
   void prepare_web_engine_settings(void);
   void purge_database_data(void);

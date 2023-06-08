@@ -470,6 +470,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_progress_label->setVisible(false);
   prepare_icons();
   prepare_shortcuts();
+  prepare_standard_menus();
   prepare_style_sheets();
   prepare_tool_buttons();
   m_view->setZoomFactor(zoom_factor);
@@ -1034,6 +1035,13 @@ void dooble_page::prepare_standard_menus(void)
      QKeySequence(tr("Ctrl+Q")));
 #endif
 
+  if(dooble::s_settings)
+    {
+      foreach(auto action, menu->actions())
+	if(action)
+	  dooble::s_settings->add_shortcut(action);
+    }
+
   /*
   ** Edit Menu
   */
@@ -1113,6 +1121,13 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Vacuum Databases"),
 		  this,
 		  SIGNAL(vacuum_databases(void)));
+
+  if(dooble::s_settings)
+    {
+      foreach(auto action, menu->actions())
+	if(action)
+	  dooble::s_settings->add_shortcut(action);
+    }
 
   /*
   ** Tools Menu
@@ -1298,6 +1313,13 @@ void dooble_page::prepare_standard_menus(void)
 		  this,
 		  SIGNAL(show_search_engines(void)));
 
+  if(dooble::s_settings)
+    {
+      foreach(auto action, menu->actions())
+	if(action)
+	  dooble::s_settings->add_shortcut(action);
+    }
+
   /*
   ** View Menu
   */
@@ -1325,6 +1347,13 @@ void dooble_page::prepare_standard_menus(void)
   action->setCheckable(true);
   action->setChecked(dooble_settings::setting("status_bar_visible").toBool());
 
+  if(dooble::s_settings)
+    {
+      foreach(auto action, menu->actions())
+	if(action)
+	  dooble::s_settings->add_shortcut(action);
+    }
+
   /*
   ** Help Menu
   */
@@ -1341,6 +1370,13 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Release Notes"),
 		  this,
 		  SIGNAL(show_release_notes(void)));
+
+  if(dooble::s_settings)
+    {
+      foreach(auto action, menu->actions())
+	if(action)
+	  dooble::s_settings->add_shortcut(action);
+    }
 }
 
 void dooble_page::prepare_style_sheets(void)

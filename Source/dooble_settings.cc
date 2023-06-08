@@ -31,6 +31,7 @@
 #include <QMessageBox>
 #include <QNetworkProxy>
 #include <QSqlQuery>
+#include <QStandardItemModel>
 #include <QToolTip>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
@@ -68,6 +69,9 @@ QStringList dooble_settings::s_spell_checker_dictionaries;
 
 dooble_settings::dooble_settings(void):dooble_main_window()
 {
+  m_shortcuts_model = new QStandardItemModel(this);
+  m_shortcuts_model->setHorizontalHeaderLabels
+    (QStringList() << tr("Action") << tr("Shortcut"));
   m_timer.setInterval(2500);
   m_ui.setupUi(this);
   connect(&m_pbkdf2_future_watcher,
@@ -188,6 +192,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
     (2,
      tr("Persistent cookies are restored from and saved to disk."),
      Qt::ToolTipRole);
+  m_ui.shortcuts->setModel(m_shortcuts_model);
 
   auto language = QLocale::system().language();
 
@@ -709,6 +714,31 @@ int dooble_settings::site_feature_permission
   return -1;
 }
 
+void dooble_settings::add_shortcut(QObject *object)
+{
+  auto action = qobject_cast<QAction *> (object);
+
+  if(action && action->text().trimmed().length() > 0)
+    {
+      auto text(action->text().trimmed());
+
+      if(m_shortcuts_model->findItems(text).isEmpty())
+	{
+	  QList<QStandardItem *> items;
+	  auto item = new QStandardItem(text);
+
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  items << item;
+	  item = new QStandardItem(action->shortcut().toString());
+	  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	  items << item;
+	  m_shortcuts_model->appendRow(items);
+	  m_ui.shortcuts->resizeColumnToContents(0);
+	  m_ui.shortcuts->sortByColumn(0, Qt::AscendingOrder);
+	}
+    }
+}
+
 void dooble_settings::closeEvent(QCloseEvent *event)
 {
   m_timer.stop();
@@ -1088,6 +1118,12 @@ void dooble_settings::prepare_proxy(bool save)
 
       set_setting("proxy_user", m_ui.proxy_user->text().trimmed());
     }
+}
+
+void dooble_settings::prepare_shortcuts(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_settings::prepare_table_statistics(void)

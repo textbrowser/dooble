@@ -370,9 +370,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-502</y>
                <width>642</width>
-               <height>912</height>
+               <height>1214</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -717,6 +717,58 @@
                    <property name="checked">
                     <bool>true</bool>
                    </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBox_5">
+                <property name="title">
+                 <string>Shortcuts</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_22">
+                 <item>
+                  <widget class="QTableView" name="shortcuts">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>250</height>
+                    </size>
+                   </property>
+                   <property name="tabKeyNavigation">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <property name="selectionMode">
+                    <enum>QAbstractItemView::SingleSelection</enum>
+                   </property>
+                   <property name="selectionBehavior">
+                    <enum>QAbstractItemView::SelectRows</enum>
+                   </property>
+                   <property name="verticalScrollMode">
+                    <enum>QAbstractItemView::ScrollPerPixel</enum>
+                   </property>
+                   <property name="horizontalScrollMode">
+                    <enum>QAbstractItemView::ScrollPerPixel</enum>
+                   </property>
+                   <property name="showGrid">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sortingEnabled">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                    <bool>true</bool>
+                   </attribute>
+                   <attribute name="horizontalHeaderStretchLastSection">
+                    <bool>true</bool>
+                   </attribute>
+                   <attribute name="verticalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
                   </widget>
                  </item>
                 </layout>
@@ -1645,8 +1697,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1506</y>
-               <width>642</width>
+               <y>0</y>
+               <width>556</width>
                <height>2284</height>
               </rect>
              </property>
@@ -2587,6 +2639,7 @@
   <tabstop>pin_downloads</tabstop>
   <tabstop>pin_history</tabstop>
   <tabstop>pin_settings</tabstop>
+  <tabstop>shortcuts</tabstop>
   <tabstop>show_address_widget_completer</tabstop>
   <tabstop>show_left_corner_widget</tabstop>
   <tabstop>show_loading_gradient</tabstop>
