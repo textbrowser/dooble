@@ -92,6 +92,7 @@ QPointer<dooble_settings> dooble::s_settings = nullptr;
 QPointer<dooble_style_sheet> dooble::s_style_sheet = nullptr;
 QPointer<dooble_web_engine_url_request_interceptor>
   dooble::s_url_request_interceptor = nullptr;
+QSet<QString> dooble::s_current_url_executables;
 QString dooble::ABOUT_BLANK = "about:blank";
 QString dooble::s_default_http_user_agent = "";
 bool dooble::s_containers_populated = false;
@@ -140,6 +141,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 	s_containers_populated = true;
       }
 
+  parse_command_line_arguments();
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -226,6 +228,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 	s_containers_populated = true;
       }
 
+  parse_command_line_arguments();
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -260,6 +263,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 	s_containers_populated = true;
       }
 
+  parse_command_line_arguments();
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -294,6 +298,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 	s_containers_populated = true;
       }
 
+  parse_command_line_arguments();
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
@@ -333,6 +338,11 @@ QList<QUrl> dooble::all_open_tab_urls(void) const
 
   QApplication::restoreOverrideCursor();
   return list;
+}
+
+QSet<QString> dooble::current_url_executables(void)
+{
+  return s_current_url_executables;
 }
 
 QStringList dooble::chart_names(void) const
@@ -1255,6 +1265,34 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
   m_ui.tab->setTabsClosable(tabs_closable());
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
+}
+
+void dooble::parse_command_line_arguments(void)
+{
+  QSet<QString> executables;
+  auto list(QCoreApplication::arguments());
+
+  for(int i = 0; i < list.size(); i++)
+    if(list.at(i).startsWith("--executable-current-url"))
+      {
+	i += 1;
+
+	if(i < list.size())
+	  executables.insert(list.at(i));
+      }
+
+  if(s_current_url_executables.isEmpty())
+    {
+      QSetIterator<QString> it(executables);
+
+      while(it.hasNext())
+	{
+	  auto string(it.next().trimmed());
+
+	  if(!string.isEmpty())
+	    s_current_url_executables.insert(string);
+	}
+    }
 }
 
 void dooble::prepare_control_w_shortcut(void)

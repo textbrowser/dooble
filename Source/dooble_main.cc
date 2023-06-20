@@ -100,7 +100,9 @@ int main(int argc, char *argv[])
   for(int i = 1; i < argc; i++)
     if(argv && argv[i])
       {
-	if(strcmp(argv[i], "--load-url") == 0)
+	if(strcmp(argv[i], "--executable-current-url") == 0)
+	  i += 1;
+	else if(strcmp(argv[i], "--load-url") == 0)
 	  {
 	    i += 1;
 

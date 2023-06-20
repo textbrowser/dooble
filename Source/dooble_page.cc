@@ -28,6 +28,7 @@
 #include <QAuthenticator>
 #include <QDir>
 #include <QPainter>
+#include <QProcess>
 #include <QToolTip>
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QWebEngineFindTextResult>
@@ -1320,6 +1321,33 @@ void dooble_page::prepare_standard_menus(void)
 	  dooble::s_settings->add_shortcut(action);
     }
 
+  menu->addSeparator();
+
+  auto m = menu->addMenu(tr("Current URL Executable(s)"));
+
+  if(dooble::current_url_executables().isEmpty())
+    m->addAction(tr("Empty"));
+  else
+    {
+      QSetIterator<QString> it(dooble::current_url_executables());
+      QStringList list;
+
+      while(it.hasNext())
+	{
+	  auto string(it.next().trimmed());
+
+	  if(!string.isEmpty())
+	    list << string;
+	}
+
+      std::sort(list.begin(), list.end());
+
+      for(int i = 0; i < list.size(); i++)
+	m->addAction(list.at(i),
+		     this,
+		     SLOT(slot_current_url_executable(void)));
+    }
+
   /*
   ** View Menu
   */
@@ -1851,6 +1879,18 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
   m_ui.javascript_popup_message->setVisible(true);
   prepare_progress_label_position();
+}
+
+void dooble_page::slot_current_url_executable(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  qputenv("DOOBLE_CURRENT_URL_UTF8", url().toString().toUtf8());
+  QProcess::startDetached(action->text(), QStringList() << url().toString());
+  qunsetenv("DOOBLE_CURRENT_URL_UTF8");
 }
 
 void dooble_page::slot_dooble_credentials_authenticated(bool state)
