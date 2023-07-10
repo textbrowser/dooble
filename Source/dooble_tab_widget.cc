@@ -403,6 +403,7 @@ void dooble_tab_widget::slot_about_to_show_history_menu(void)
   QFontMetrics font_metrics(m_add_tab_tool_button->menu()->font());
   auto list(dooble::s_history->
 	    last_n_actions(5 + static_cast<int> (dooble_page::
+						 ConstantsEnum::
 						 MAXIMUM_HISTORY_ITEMS)));
 
   foreach(auto i, list)

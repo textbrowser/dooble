@@ -519,10 +519,11 @@ void dooble_cookies_window::slot_cookies_added
 	  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
 	  if(is_blocked_or_favorite.at(i) ==
-	     dooble_cookies::BlockedOrFavorite::BLOCKED)
+	     static_cast<int> (dooble_cookies::BlockedOrFavorite::BLOCKED))
 	    item->setCheckState(0, Qt::Checked);
 	  else if(is_blocked_or_favorite.at(i) ==
-		  dooble_cookies::BlockedOrFavorite::FAVORITE)
+		  static_cast<int> (dooble_cookies::BlockedOrFavorite::
+				    FAVORITE))
 	    item->setCheckState(0, Qt::PartiallyChecked);
 	  else
 	    item->setCheckState(0, Qt::Unchecked);

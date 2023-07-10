@@ -37,7 +37,7 @@ class dooble_cookies: public QObject
   Q_OBJECT
 
  public:
-  enum BlockedOrFavorite
+  enum class BlockedOrFavorite
     {
      BLOCKED = 1,
      FAVORITE = 2,

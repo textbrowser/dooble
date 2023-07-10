@@ -51,7 +51,7 @@ class dooble_history_window: public dooble_main_window
   void resizeEvent(QResizeEvent *event);
 
  private:
-  enum TableColumns
+  enum class TableColumns
     {
      FAVORITE = 0,
      TITLE = 1,

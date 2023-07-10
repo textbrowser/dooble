@@ -37,7 +37,7 @@ class dooble_cryptography: public QObject
   Q_OBJECT
 
  public:
-  enum HashTypes
+  enum class HashTypes
     {
      KECCAK_512,
      SHA3_512

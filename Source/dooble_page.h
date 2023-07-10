@@ -51,7 +51,7 @@ class dooble_page: public QWidget
   Q_OBJECT
 
  public:
-  enum ConstantsEnum
+  enum class ConstantsEnum
     {
      MAXIMUM_HISTORY_ITEMS = 10,
      MAXIMUM_JAVASCRIPT_POPUPS = 100

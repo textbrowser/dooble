@@ -85,9 +85,12 @@ dooble_history_window::dooble_history_window(bool floating):dooble_main_window()
 
   if(m_floating)
     {
-      m_ui.table->setColumnHidden(TableColumns::FAVORITE, true);
-      m_ui.table->setColumnHidden(TableColumns::LOCATION, true);
-      m_ui.table->setColumnHidden(TableColumns::LAST_VISITED, true);
+      m_ui.table->setColumnHidden
+	(static_cast<int> (TableColumns::FAVORITE), true);
+      m_ui.table->setColumnHidden
+	(static_cast<int> (TableColumns::LOCATION), true);
+      m_ui.table->setColumnHidden
+	(static_cast<int> (TableColumns::LAST_VISITED), true);
     }
   else
     for(int i = 0; i < m_ui.table->columnCount(); i++)
@@ -268,9 +271,10 @@ void dooble_history_window::save_settings(void)
 
 void dooble_history_window::set_row_hidden(int i)
 {
-  auto item1 = m_ui.table->item(i, TableColumns::TITLE);
-  auto item2 = m_ui.table->item(i, TableColumns::LOCATION);
-  auto item3 = m_ui.table->item(i, TableColumns::LAST_VISITED);
+  auto item1 = m_ui.table->item(i, static_cast<int> (TableColumns::TITLE));
+  auto item2 = m_ui.table->item(i, static_cast<int> (TableColumns::LOCATION));
+  auto item3 = m_ui.table->item
+    (i, static_cast<int> (TableColumns::LAST_VISITED));
 
   if(!item1 || !item2 || !item3)
     return;
@@ -447,7 +451,8 @@ void dooble_history_window::slot_copy_location(void)
   if(!item)
     return;
 
-  item = m_ui.table->item(item->row(), TableColumns::LOCATION);
+  item = m_ui.table->item
+    (item->row(), static_cast<int> (TableColumns::LOCATION));
 
   if(item)
     clipboard->setText(item->text());
@@ -455,7 +460,8 @@ void dooble_history_window::slot_copy_location(void)
 
 void dooble_history_window::slot_delete_pages(void)
 {
-  auto list(m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
+  auto list(m_ui.table->selectionModel()->
+	    selectedRows(static_cast<int> (TableColumns::FAVORITE)));
 
   if(list.isEmpty())
     return;
@@ -538,7 +544,8 @@ void dooble_history_window::slot_delete_rows
 
 void dooble_history_window::slot_enter_pressed(void)
 {
-  auto list(m_ui.table->selectionModel()->selectedRows(TableColumns::FAVORITE));
+  auto list(m_ui.table->selectionModel()->
+	    selectedRows(static_cast<int> (TableColumns::FAVORITE)));
 
   if(list.isEmpty())
     return;
@@ -577,7 +584,8 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
   if(!item)
     return;
 
-  item = m_ui.table->item(item->row(), TableColumns::FAVORITE);
+  item = m_ui.table->item
+    (item->row(), static_cast<int> (TableColumns::FAVORITE));
 
   if(!item)
     return;
@@ -605,7 +613,8 @@ void dooble_history_window::slot_favorites_cleared(void)
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     {
-      auto item = m_ui.table->item(i, TableColumns::FAVORITE);
+      auto item = m_ui.table->item
+	(i, static_cast<int> (TableColumns::FAVORITE));
 
       if(!item)
 	continue;
@@ -632,7 +641,8 @@ void dooble_history_window::slot_history_cleared(void)
 
   for(int i = m_ui.table->rowCount(); i >= 0; i--)
     {
-      auto item = m_ui.table->item(i, TableColumns::FAVORITE);
+      auto item = m_ui.table->item
+	(i, static_cast<int> (TableColumns::FAVORITE));
 
       if(!item)
 	{
@@ -684,7 +694,7 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
 {
   if(!item)
     return;
-  else if(item->column() != TableColumns::FAVORITE)
+  else if(item->column() != static_cast<int> (TableColumns::FAVORITE))
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -743,7 +753,8 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
 	item1->setIcon(icon);
     }
 
-  auto item2 = m_ui.table->item(item1->row(), TableColumns::TITLE);
+  auto item2 = m_ui.table->item
+    (item1->row(), static_cast<int> (TableColumns::TITLE));
 
   if(item2)
     {
@@ -769,7 +780,8 @@ void dooble_history_window::slot_item_updated(const QIcon &icon,
       item2->setToolTip(dooble_ui_utilities::pretty_tool_tip(item2->text()));
     }
 
-  auto item3 = m_ui.table->item(item1->row(), TableColumns::LAST_VISITED);
+  auto item3 = m_ui.table->item
+    (item1->row(), static_cast<int> (TableColumns::LAST_VISITED));
 
   if(item3)
     {
@@ -848,13 +860,21 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
   m_ui.table->setSortingEnabled(false);
   m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
   m_ui.table->setItem
-    (m_ui.table->rowCount() - 1, TableColumns::FAVORITE, item1);
+    (m_ui.table->rowCount() - 1,
+     static_cast<int> (TableColumns::FAVORITE),
+     item1);
   m_ui.table->setItem
-    (m_ui.table->rowCount() - 1, TableColumns::TITLE, item2);
+    (m_ui.table->rowCount() - 1,
+     static_cast<int> (TableColumns::TITLE),
+     item2);
   m_ui.table->setItem
-    (m_ui.table->rowCount() - 1, TableColumns::LOCATION, item3);
+    (m_ui.table->rowCount() - 1,
+     static_cast<int> (TableColumns::LOCATION),
+     item3);
   m_ui.table->setItem
-    (m_ui.table->rowCount() - 1, TableColumns::LAST_VISITED, item4);
+    (m_ui.table->rowCount() - 1,
+     static_cast<int> (TableColumns::LAST_VISITED),
+     item4);
 
   /*
   ** Hide or show the new row.
@@ -953,10 +973,14 @@ void dooble_history_window::slot_populate(void)
       item4->setData(Qt::UserRole, url);
       item4->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_items[url] = item2;
-      m_ui.table->setItem(i, TableColumns::FAVORITE, item1);
-      m_ui.table->setItem(i, TableColumns::TITLE, item2);
-      m_ui.table->setItem(i, TableColumns::LOCATION, item3);
-      m_ui.table->setItem(i, TableColumns::LAST_VISITED, item4);
+      m_ui.table->setItem
+	(i, static_cast<int> (TableColumns::FAVORITE), item1);
+      m_ui.table->setItem
+	(i, static_cast<int> (TableColumns::TITLE), item2);
+      m_ui.table->setItem
+	(i, static_cast<int> (TableColumns::LOCATION), item3);
+      m_ui.table->setItem
+	(i, static_cast<int> (TableColumns::LAST_VISITED), item4);
       i += 1;
     }
 
@@ -1018,9 +1042,12 @@ void dooble_history_window::slot_search_timer_timeout(void)
       m_ui.table->setRowHidden(i, false);
     else
       {
-	auto item1 = m_ui.table->item(i, TableColumns::TITLE);
-	auto item2 = m_ui.table->item(i, TableColumns::LOCATION);
-	auto item3 = m_ui.table->item(i, TableColumns::LAST_VISITED);
+	auto item1 = m_ui.table->item
+	  (i, static_cast<int> (TableColumns::TITLE));
+	auto item2 = m_ui.table->item
+	  (i, static_cast<int> (TableColumns::LOCATION));
+	auto item3 = m_ui.table->item
+	  (i, static_cast<int> (TableColumns::LAST_VISITED));
 
 	if(!item1 || !item2 || !item3)
 	  {

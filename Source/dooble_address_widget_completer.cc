@@ -198,7 +198,8 @@ void dooble_address_widget_completer::complete(const QString &text)
   if(text.trimmed().isEmpty())
     {
       auto j = qMin(s_model->rowCount(),
-		    static_cast<int> (2 * dooble_page::MAXIMUM_HISTORY_ITEMS));
+		    2 * static_cast<int> (dooble_page::ConstantsEnum::
+					  MAXIMUM_HISTORY_ITEMS));
 
       for(int i = 0; i < j; i++)
 	if(s_model->item(i, 0))
@@ -223,7 +224,8 @@ void dooble_address_widget_completer::complete(const QString &text)
 	       s_model->item(i, 0));
 
       list << map.values().mid
-	(0, 2 * static_cast<int> (dooble_page::MAXIMUM_HISTORY_ITEMS));
+	(0, 2 * static_cast<int> (dooble_page::ConstantsEnum::
+				  MAXIMUM_HISTORY_ITEMS));
     }
 
   m_model->clear();
@@ -245,6 +247,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 	m_popup->horizontalHeader()->height() +
 	m_popup->rowHeight(0) * qMin(m_model->rowCount(),
 				     static_cast<int> (dooble_page::
+						       ConstantsEnum::
 						       MAXIMUM_HISTORY_ITEMS));
 
       m_popup->setMaximumHeight(height);

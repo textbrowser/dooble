@@ -48,7 +48,7 @@ class dooble_settings: public dooble_main_window
   Q_OBJECT
 
  public:
-  enum Panels
+  enum class Panels
     {
      CACHE_PANEL = 0,
      DISPLAY_PANEL,

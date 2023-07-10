@@ -29,6 +29,7 @@
 #define dooble_h
 
 #include <QFuture>
+#include <QLocalServer>
 #include <QMainWindow>
 #include <QShortcut>
 #include <QPointer>
@@ -76,7 +77,7 @@ class dooble: public QMainWindow
   Q_OBJECT
 
  public:
-  enum Limits
+  enum class Limits
     {
      MAXIMUM_TITLE_LENGTH = 1024,
      MAXIMUM_SQL_TEXT_LENGTH = 5000,
@@ -84,11 +85,12 @@ class dooble: public QMainWindow
     };
 
   dooble(QWidget *widget);
-  dooble(const QList<QUrl> &urls, bool is_private);
+  dooble(const QList<QUrl> &urls, bool is_private, bool attach);
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);
   ~dooble();
   bool anonymous_tab_headers(void) const;
+  bool attached(void) const;
   bool initialized(void) const;
   bool is_private(void) const;
   dooble_page *current_page(void) const;
@@ -129,7 +131,7 @@ class dooble: public QMainWindow
   void keyPressEvent(QKeyEvent *event);
 
  private:
-  enum CanExit
+  enum class CanExit
     {
      CAN_EXIT_CLOSE_EVENT = 0,
      CAN_EXIT_SLOT_QUIT_DOOBLE
@@ -147,6 +149,7 @@ class dooble: public QMainWindow
   QList<QShortcut *> m_shortcuts;
   QList<QShortcut *> m_tab_widget_shortcuts;
   QList<QUrl> all_open_tab_urls(void) const;
+  QLocalServer m_local_server;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
@@ -164,6 +167,7 @@ class dooble: public QMainWindow
   Ui_dooble m_ui;
   Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
   bool m_anonymous_tab_headers;
+  bool m_attached = false;
   bool m_is_javascript_dialog;
   bool m_is_private;
   bool m_print_preview;
@@ -195,6 +199,7 @@ class dooble: public QMainWindow
   void parse_command_line_arguments(void);
   void prepare_control_w_shortcut(void);
   void prepare_icons(void);
+  void prepare_local_server(void);
   void prepare_page_connections(dooble_page *page);
   void prepare_private_web_engine_profile_settings(void);
   void prepare_shortcuts(void);
@@ -236,6 +241,7 @@ class dooble: public QMainWindow
   void slot_icon_changed(const QIcon &icon);
   void slot_inject_custom_css(void);
   void slot_load_finished(bool ok);
+  void slot_new_local_connection(void);
   void slot_new_private_window(void);
   void slot_new_tab(const QUrl &url);
   void slot_new_tab(void);
@@ -260,6 +266,7 @@ class dooble: public QMainWindow
   void slot_print_preview(QPrinter *printer);
   void slot_print_preview(void);
   void slot_quit_dooble(void);
+  void slot_read_local_socket(void);
   void slot_reload_tab(int index);
   void slot_reload_tab_periodically(int index, int seconds);
   void slot_remove_tab_widget_shortcut(void);

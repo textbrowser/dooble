@@ -658,7 +658,8 @@ void dooble_page::go_to_backward_item(int index)
 {
   auto items
     (m_view->history()->
-     backItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+     backItems(static_cast<int> (dooble_page::ConstantsEnum::
+				 MAXIMUM_HISTORY_ITEMS)));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -668,7 +669,8 @@ void dooble_page::go_to_forward_item(int index)
 {
   auto items
     (m_view->history()->
-     forwardItems(dooble_page::ConstantsEnum::MAXIMUM_HISTORY_ITEMS));
+     forwardItems(static_cast<int> (dooble_page::ConstantsEnum::
+				    MAXIMUM_HISTORY_ITEMS)));
 
   if(index >= 0 && index < items.size())
     m_view->history()->goToItem(items.at(index));
@@ -2988,7 +2990,7 @@ void dooble_page::slot_show_status_bar(bool state)
 
 void dooble_page::slot_show_web_settings_panel(void)
 {
-  emit show_settings_panel(dooble_settings::WEB_PANEL);
+  emit show_settings_panel(dooble_settings::Panels::WEB_PANEL);
 }
 
 void dooble_page::slot_url_changed(const QUrl &url)

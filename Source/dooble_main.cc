@@ -92,6 +92,7 @@ int main(int argc, char *argv[])
   qputenv("QV4_FORCE_INTERPRETER", "1");
 
   QList<QUrl> urls;
+  auto attach = false;
   auto test_aes = false;
   auto test_aes_performance = false;
   auto test_threefish = false;
@@ -100,7 +101,9 @@ int main(int argc, char *argv[])
   for(int i = 1; i < argc; i++)
     if(argv && argv[i])
       {
-	if(strcmp(argv[i], "--executable-current-url") == 0)
+	if(strcmp(argv[i], "--attach") == 0)
+	  attach = true;
+	else if(strcmp(argv[i], "--executable-current-url") == 0)
 	  i += 1;
 	else if(strcmp(argv[i], "--load-url") == 0)
 	  {
@@ -461,8 +464,16 @@ int main(int argc, char *argv[])
 
   auto arguments(QCoreApplication::arguments());
   auto d = new dooble // Not deleted.
-    (urls, arguments.contains("--private") ||
-           dooble::s_settings->setting("private_mode").toBool());
+    (urls,
+     arguments.contains("--private") ||
+     dooble::s_settings->setting("private_mode").toBool(),
+     attach);
+
+  if(attach && d->attached())
+    {
+      d->close();
+      return 0;
+    }
 
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),

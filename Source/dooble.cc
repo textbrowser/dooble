@@ -26,6 +26,7 @@
 */
 
 #include <QFileDialog>
+#include <QLocalSocket>
 #include <QMessageBox>
 #include <QPainter>
 #include <QPointer>
@@ -143,11 +144,13 @@ dooble::dooble(QWidget *widget):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
+  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
 
-dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
+dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
+  QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
@@ -215,8 +218,33 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
   if(urls.isEmpty())
     new_page(QUrl(), is_private);
   else
-    foreach(const auto &url, urls)
-      new_page(url, is_private);
+    {
+      if(attach)
+	{
+	  QLocalSocket socket;
+
+	  socket.connectToServer
+	    (dooble_settings::setting("home_path").toString() +
+	     QDir::separator() +
+	     "dooble_local_server");
+
+	  if(socket.waitForConnected(1500))
+	    {
+	      foreach(const auto &url, urls)
+		{
+		  socket.write(url.toEncoded().toBase64());
+		  socket.write("\n");
+		  socket.flush();
+		}
+
+	      m_attached = true;
+	      return;
+	    }
+	}
+
+      foreach(const auto &url, urls)
+	new_page(url, is_private);
+    }
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
@@ -230,6 +258,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
+  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -265,6 +294,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
+  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -300,6 +330,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
+  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -385,6 +416,11 @@ QStringList dooble::chart_names(void) const
 bool dooble::anonymous_tab_headers(void) const
 {
   return m_anonymous_tab_headers;
+}
+
+bool dooble::attached(void) const
+{
+  return m_attached;
 }
 
 bool dooble::can_exit(const dooble::CanExit can_exit)
@@ -1244,7 +1280,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
       remove_page_connections(page);
 
       if(is_private)
-	d = new dooble(QList<QUrl> () << page->url(), true);
+	d = new dooble(QList<QUrl> () << page->url(), true, false);
       else
 	d = new dooble(page);
 
@@ -1312,6 +1348,25 @@ void dooble::prepare_control_w_shortcut(void)
 
 void dooble::prepare_icons(void)
 {
+}
+
+void dooble::prepare_local_server(void)
+{
+  if(m_local_server.isListening())
+    return;
+
+  connect(&m_local_server,
+	  SIGNAL(newConnection(void)),
+	  this,
+	  SLOT(slot_new_local_connection(void)),
+	  Qt::UniqueConnection);
+
+  auto name(dooble_settings::setting("home_path").toString() +
+	    QDir::separator() +
+	    "dooble_local_server");
+
+  QLocalServer::removeServer(name);
+  m_local_server.listen(name);
 }
 
 void dooble::prepare_page_connections(dooble_page *page)
@@ -2858,6 +2913,7 @@ void dooble::slot_about_to_show_history_menu(void)
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto list
     (s_history->last_n_actions(5 + static_cast<int> (dooble_page::
+						     ConstantsEnum::
 						     MAXIMUM_HISTORY_ITEMS)));
   auto sub_menu = new QMenu(tr("Charts"));
   auto use_material_icons(dooble_settings::use_material_icons());
@@ -3335,7 +3391,7 @@ void dooble::slot_authenticate(void)
     return;
 
   if(!dooble_settings::has_dooble_credentials())
-    slot_show_settings_panel(dooble_settings::PRIVACY_PANEL);
+    slot_show_settings_panel(dooble_settings::Panels::PRIVACY_PANEL);
   else
     {
     repeat_label:
@@ -3793,9 +3849,26 @@ void dooble::slot_load_finished(bool ok)
   Q_UNUSED(ok);
 }
 
+void dooble::slot_new_local_connection(void)
+{
+  auto socket = m_local_server.nextPendingConnection();
+
+  if(!socket)
+    return;
+
+  connect(socket,
+	  SIGNAL(disconnected(void)),
+	  socket,
+	  SLOT(deleteLater(void)));
+  connect(socket,
+	  SIGNAL(readyRead(void)),
+	  this,
+	  SLOT(slot_read_local_socket(void)));
+}
+
 void dooble::slot_new_private_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), true))->show();
+  (new dooble(QList<QUrl> () << QUrl(), true, false))->show();
 }
 
 void dooble::slot_new_tab(const QUrl &url)
@@ -3810,7 +3883,7 @@ void dooble::slot_new_tab(void)
 
 void dooble::slot_new_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), false))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false, false))->show();
 }
 
 void dooble::slot_open_chart(void)
@@ -3864,7 +3937,7 @@ void dooble::slot_open_link(const QUrl &url)
 
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, true))->show();
+  (new dooble(QList<QUrl> () << url, true, false))->show();
 }
 
 void dooble::slot_open_link_in_new_tab(const QUrl &url)
@@ -3874,7 +3947,7 @@ void dooble::slot_open_link_in_new_tab(const QUrl &url)
 
 void dooble::slot_open_link_in_new_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, false))->show();
+  (new dooble(QList<QUrl> () << url, false, false))->show();
 }
 
 void dooble::slot_open_local_file(void)
@@ -4247,6 +4320,29 @@ void dooble::slot_quit_dooble(void)
      all_open_tab_urls() : QList<QUrl> ());
   s_history_popup->deleteLater();
   QApplication::exit(0);
+}
+
+void dooble::slot_read_local_socket(void)
+{
+  auto socket = qobject_cast<QLocalSocket *> (sender());
+
+  if(!socket)
+    return;
+
+  QByteArray data;
+
+  while(socket->bytesAvailable() > 0)
+    data.append(socket->readAll());
+
+  auto list(data.split('\n'));
+
+  foreach(const auto &i, list)
+    {
+      auto url(QUrl::fromEncoded(QByteArray::fromBase64(i)));
+
+      if(url.isValid())
+	new_page(url, m_is_private);
+    }
 }
 
 void dooble::slot_reload_tab(int index)

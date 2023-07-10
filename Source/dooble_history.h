@@ -47,7 +47,7 @@ class dooble_history: public QObject
   Q_OBJECT
 
  public:
-  enum HistoryItem
+  enum class HistoryItem
     {
      FAVICON = 0,
      FAVORITE,
@@ -111,5 +111,10 @@ class dooble_history: public QObject
   void populated_favorites(const QListVectorByteArray &favorites);
   void remove_items(const QListUrl &urls);
 };
+
+inline uint qHash(const dooble_history::HistoryItem &key, uint seed)
+{
+  return ::qHash(static_cast<uint> (key), seed);
+}
 
 #endif

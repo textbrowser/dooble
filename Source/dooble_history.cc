@@ -905,7 +905,7 @@ void dooble_history::save_item(const QIcon &icon,
 	value(dooble_history::HistoryItem::NUMBER_OF_VISITS, 1).
 	toULongLong() + 1;
 
-      if(hash.value(FAVORITE).toBool())
+      if(hash.value(dooble_history::HistoryItem::FAVORITE).toBool())
 	hash[dooble_history::HistoryItem::TITLE] =
 	  m_history.value(item.url()).value
 	  (dooble_history::HistoryItem::TITLE,
