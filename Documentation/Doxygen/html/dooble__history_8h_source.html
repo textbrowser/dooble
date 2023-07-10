@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  Q_OBJECT</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">enum</span> HistoryItem</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">enum class</span> HistoryItem</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;     FAVICON = 0,</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;     FAVORITE,</div>
@@ -183,7 +183,12 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordtype">void</span> remove_items(<span class="keyword">const</span> QListUrl &amp;urls);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">inline</span> uint qHash(<span class="keyword">const</span> dooble_history::HistoryItem &amp;key, uint seed)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  return ::qHash(<span class="keyword">static_cast&lt;</span>uint<span class="keyword">&gt;</span> (key), seed);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassdooble__history_html"><div class="ttname"><a href="classdooble__history.html">dooble_history</a></div><div class="ttdef"><b>Definition:</b> dooble_history.h:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

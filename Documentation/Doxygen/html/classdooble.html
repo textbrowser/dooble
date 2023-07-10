@@ -95,7 +95,7 @@ Collaboration diagram for dooble:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a02d98ba545378d2e3e4c25fbdf499808"><td class="memItemLeft" align="right" valign="top"><a id="a02d98ba545378d2e3e4c25fbdf499808"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Limits</b> { <b>MAXIMUM_TITLE_LENGTH</b> = 1024
+<tr class="memitem:a02d98ba545378d2e3e4c25fbdf499808"><td class="memItemLeft" align="right" valign="top"><a id="a02d98ba545378d2e3e4c25fbdf499808"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>Limits</b> { <b>MAXIMUM_TITLE_LENGTH</b> = 1024
 , <b>MAXIMUM_SQL_TEXT_LENGTH</b> = 5000
 , <b>MAXIMUM_URL_LENGTH</b> = 2048
  }</td></tr>
@@ -127,9 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e4c5799965936c9e6c0479e12dc948e"><td class="memItemLeft" align="right" valign="top"><a id="a1e4c5799965936c9e6c0479e12dc948e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>dooble</b> (QWidget *widget)</td></tr>
 <tr class="separator:a1e4c5799965936c9e6c0479e12dc948e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad899f78e7a8b21d47d1d15e1bc1ae84"><td class="memItemLeft" align="right" valign="top"><a id="aad899f78e7a8b21d47d1d15e1bc1ae84"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>dooble</b> (const QList&lt; QUrl &gt; &amp;urls, bool is_private)</td></tr>
-<tr class="separator:aad899f78e7a8b21d47d1d15e1bc1ae84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a397e50a2161039cf759eae4bde08e0"><td class="memItemLeft" align="right" valign="top"><a id="a1a397e50a2161039cf759eae4bde08e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>dooble</b> (const QList&lt; QUrl &gt; &amp;urls, bool is_private, bool attach)</td></tr>
+<tr class="separator:a1a397e50a2161039cf759eae4bde08e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0942c960d14338051afc256b2578539"><td class="memItemLeft" align="right" valign="top"><a id="ad0942c960d14338051afc256b2578539"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>dooble</b> (<a class="el" href="classdooble__page.html">dooble_page</a> *page)</td></tr>
 <tr class="separator:ad0942c960d14338051afc256b2578539"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +139,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a93f8aff2266746b3fe77b389160b4178"><td class="memItemLeft" align="right" valign="top"><a id="a93f8aff2266746b3fe77b389160b4178"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>anonymous_tab_headers</b> (void) const</td></tr>
 <tr class="separator:a93f8aff2266746b3fe77b389160b4178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6357a3f238112fd70f55c2317cf23f75"><td class="memItemLeft" align="right" valign="top"><a id="a6357a3f238112fd70f55c2317cf23f75"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>attached</b> (void) const</td></tr>
+<tr class="separator:a6357a3f238112fd70f55c2317cf23f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f72538b17aa1b399e407f4c48757f11"><td class="memItemLeft" align="right" valign="top"><a id="a6f72538b17aa1b399e407f4c48757f11"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized</b> (void) const</td></tr>
 <tr class="separator:a6f72538b17aa1b399e407f4c48757f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,6 +160,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_current_page</b
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a07cd501177914c105fe3937b19f00eae"><td class="memItemLeft" align="right" valign="top"><a id="a07cd501177914c105fe3937b19f00eae"></a>
+static QSet&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>current_url_executables</b> (void)</td></tr>
+<tr class="separator:a07cd501177914c105fe3937b19f00eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a42d08e17f973973758f1187f27e369"><td class="memItemLeft" align="right" valign="top"><a id="a2a42d08e17f973973758f1187f27e369"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>clean</b> (void)</td></tr>
 <tr class="separator:a2a42d08e17f973973758f1187f27e369"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,6 +225,9 @@ static QPointer&lt; <a class="el" href="classdooble__style__sheet.html">dooble_s
 <tr class="memitem:adf8c8042635c8cf4170a80ef1b329d74"><td class="memItemLeft" align="right" valign="top"><a id="adf8c8042635c8cf4170a80ef1b329d74"></a>
 static QPointer&lt; <a class="el" href="classdooble__web__engine__url__request__interceptor.html">dooble_web_engine_url_request_interceptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>s_url_request_interceptor</b> = nullptr</td></tr>
 <tr class="separator:adf8c8042635c8cf4170a80ef1b329d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7142285c9305e34c051c350a88a41382"><td class="memItemLeft" align="right" valign="top"><a id="a7142285c9305e34c051c350a88a41382"></a>
+static QSet&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>s_current_url_executables</b></td></tr>
+<tr class="separator:a7142285c9305e34c051c350a88a41382"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a386541fb9a078802e3e6c1ecb9096533"><td class="memItemLeft" align="right" valign="top"><a id="a386541fb9a078802e3e6c1ecb9096533"></a>
 static QString&#160;</td><td class="memItemRight" valign="bottom"><b>ABOUT_BLANK</b> = &quot;about:blank&quot;</td></tr>
 <tr class="separator:a386541fb9a078802e3e6c1ecb9096533"><td class="memSeparator" colspan="2">&#160;</td></tr>
