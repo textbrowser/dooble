@@ -215,36 +215,41 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
     m_ui.menu_bar->setVisible
       (dooble_settings::setting("main_menu_bar_visible").toBool());
 
+  if(attach)
+    {
+      QLocalSocket socket;
+
+      socket.connectToServer
+	(dooble_settings::setting("home_path").toString() +
+	 QDir::separator() +
+	 "dooble_local_server");
+
+      if(socket.waitForConnected(1500))
+	{
+	  if(urls.isEmpty())
+	    {
+	      socket.write(QUrl("about:blank").toEncoded().toBase64());
+	      socket.write("\n");
+	      socket.flush();
+	    }
+	  else
+	    foreach(const auto &url, urls)
+	      {
+		socket.write(url.toEncoded().toBase64());
+		socket.write("\n");
+		socket.flush();
+	      }
+
+	  m_attached = true;
+	  return;
+	}
+    }
+
   if(urls.isEmpty())
     new_page(QUrl(), is_private);
   else
-    {
-      if(attach)
-	{
-	  QLocalSocket socket;
-
-	  socket.connectToServer
-	    (dooble_settings::setting("home_path").toString() +
-	     QDir::separator() +
-	     "dooble_local_server");
-
-	  if(socket.waitForConnected(1500))
-	    {
-	      foreach(const auto &url, urls)
-		{
-		  socket.write(url.toEncoded().toBase64());
-		  socket.write("\n");
-		  socket.flush();
-		}
-
-	      m_attached = true;
-	      return;
-	    }
-	}
-
-      foreach(const auto &url, urls)
-	new_page(url, is_private);
-    }
+    foreach(const auto &url, urls)
+      new_page(url, is_private);
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
