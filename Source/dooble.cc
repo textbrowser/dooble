@@ -1371,7 +1371,8 @@ void dooble::prepare_local_server(void)
 	    "dooble_local_server");
 
   QLocalServer::removeServer(name);
-  m_local_server.listen(name);
+  m_local_server.setSocketOptions(QLocalServer::UserAccessOption);
+  m_local_server.listen(name); // After setSocketOptions().
 }
 
 void dooble::prepare_page_connections(dooble_page *page)
