@@ -144,7 +144,6 @@ dooble::dooble(QWidget *widget):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
-  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -263,7 +262,6 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
 
   parse_command_line_arguments();
   prepare_icons();
-  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -299,7 +297,6 @@ dooble::dooble(dooble_page *page):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
-  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -335,7 +332,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 
   parse_command_line_arguments();
   prepare_icons();
-  prepare_local_server();
   prepare_shortcuts();
   prepare_style_sheets();
 }
@@ -1321,6 +1317,8 @@ void dooble::parse_command_line_arguments(void)
 	if(i < list.size())
 	  executables.insert(list.at(i));
       }
+    else if(list.at(i).startsWith("--listen"))
+      prepare_local_server();
 
   if(s_current_url_executables.isEmpty())
     {
@@ -4317,6 +4315,8 @@ void dooble::slot_quit_dooble(void)
   if(m_downloads)
     m_downloads->abort();
 
+  m_local_server.close();
+  m_local_server.removeServer(m_local_server.serverName());
   s_accepted_or_blocked_domains->abort();
   s_cookies_window->close();
   s_downloads->abort();
