@@ -1369,7 +1369,9 @@ void dooble::prepare_local_server(void)
 	    "dooble_local_server");
 
   QLocalServer::removeServer(name);
+#ifdef Q_OS_UNIX
   m_local_server.setSocketOptions(QLocalServer::UserAccessOption);
+#endif
   m_local_server.listen(name); // After setSocketOptions().
 }
 
