@@ -164,6 +164,7 @@ Completed Items
 - Report pages which attempt to open JS dialogs.
 - Restore default functionality of Control + A.
 - Restrict domains.
+- Review https://doc.qt.io/qt-6/qtwebengine-changes-qt6.html.
 - Save Page pop-up menu item.
 - Save menu item.
 - Search engine icons should be based on host names.
@@ -218,7 +219,6 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional Document Mode.
 - Prevent SQL query text overflow.
-- Review https://doc.qt.io/qt-6/qtwebengine-changes-qt6.html.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
