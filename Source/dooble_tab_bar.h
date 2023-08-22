@@ -52,6 +52,7 @@ class dooble_tab_bar: public QTabBar
   QToolButton *m_previous_tool_button;
   QWidget *m_corner_widget;
   bool is_private(void) const;
+  void mouseDoubleClickEvent(QMouseEvent *event);
   void prepare_icons(void);
   void prepare_style_sheets(void);
 

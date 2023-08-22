@@ -229,6 +229,12 @@ void dooble_tab_bar::hideEvent(QHideEvent *event)
   emit set_visible_corner_button(false);
 }
 
+void dooble_tab_bar::mouseDoubleClickEvent(QMouseEvent *event)
+{
+  QTabBar::mouseDoubleClickEvent(event);
+  emit new_tab();
+}
+
 void dooble_tab_bar::prepare_icons(void)
 {
   QList<QToolButton *> list;
