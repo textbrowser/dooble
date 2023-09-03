@@ -1,5 +1,6 @@
 Architecture: amd64
-Depends: libqt5charts5 (>= 5.15.0),
+Depends: libgpgme11 (>= 1.16.0),
+	 libqt5charts5 (>= 5.15.0),
 	 libqt5core5a (>= 5.15.0),
 	 libqt5gui5 (>= 5.15.0),
 	 libqt5network5 (>= 5.15.0),
