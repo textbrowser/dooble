@@ -41,7 +41,8 @@ cp -p ~/Qt/6.5.2/gcc_64/libexec/QtWebEngineProcess ./dooble/.
 cp -pr ~/Qt/6.5.2/gcc_64/plugins ./dooble/.
 cp -pr ~/Qt/6.5.2/gcc_64/resources ./dooble/.
 cp -pr ~/Qt/6.5.2/gcc_64/translations/*.qm ./dooble/Translations/.
-cp -pr ~/Qt/6.5.2/gcc_64/translations/qtwebengine_locales ./dooble/translations/.
+cp -pr ~/Qt/6.5.2/gcc_64/translations/qtwebengine_locales \
+   ./dooble/translations/.
 cp /usr/lib/x86_64-linux-gnu/nss/libsoftokn3.so ./dooble/Lib/.
 chmod -x,g+rw ./dooble/Lib/*
 ~/Qt/6.5.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
