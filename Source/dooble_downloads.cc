@@ -224,7 +224,7 @@ void dooble_downloads::create_tables(QSqlDatabase &db)
 {
   db.open();
 
-  QSqlDatabase query(db);
+  QSqlQuery query(db);
 
   query.exec("CREATE TABLE IF NOT EXISTS dooble_downloads ("
 	     "download_path TEXT NOT NULL, "
