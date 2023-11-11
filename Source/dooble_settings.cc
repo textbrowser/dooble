@@ -291,6 +291,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["accepted_or_blocked_domains_mode"] = "block";
   s_settings["access_new_tabs"] = true;
   s_settings["add_tab_behavior_index"] = 1; // At End
+  s_settings["address_widget_completer_mode_index"] = 1; // Popup
   s_settings["allow_closing_of_single_tab"] = true;
   s_settings["auto_hide_tab_bar"] = false;
   s_settings["auto_load_images"] = true;
@@ -564,6 +565,9 @@ QVariant dooble_settings::setting(const QString &k,
     }
 
   if(key == "add_tab_behavior_index")
+    return qBound
+      (0, s_settings.value(key, default_value).toInt(), 1);
+  else if(key == "address_widget_completer_mode_index")
     return qBound
       (0, s_settings.value(key, default_value).toInt(), 1);
   else if(key == "authentication_iteration_count")
@@ -1492,6 +1496,10 @@ void dooble_settings::restore(bool read_database)
     (qBound(0,
 	    s_settings.value("add_tab_behavior_index", 1).toInt(),
 	    m_ui.add_tab_behavior->count() - 1));
+  m_ui.address_widget_completer_mode->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("address_widget_completer_mode_index", 1).toInt(),
+	    m_ui.address_widget_completer_mode->count() - 1));
   m_ui.allow_closing_of_single_tab->setChecked
     (s_settings.value("allow_closing_of_single_tab", true).toBool());
   m_ui.animated_scrolling->setChecked
@@ -2546,6 +2554,8 @@ void dooble_settings::slot_apply(void)
   save_fonts();
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("add_tab_behavior_index", m_ui.add_tab_behavior->currentIndex());
+  set_setting("address_widget_completer_mode_index",
+	      m_ui.address_widget_completer_mode->currentIndex());
   set_setting("allow_closing_of_single_tab",
 	      m_ui.allow_closing_of_single_tab->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
