@@ -372,7 +372,7 @@
                <x>0</x>
                <y>0</y>
                <width>642</width>
-               <height>1214</height>
+               <height>1258</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -407,6 +407,50 @@
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_24">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_25">
+                <item>
+                 <widget class="QLabel" name="label_50">
+                  <property name="text">
+                   <string>Address Widget Completer Mode</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="address_widget_completer_mode">
+                  <property name="currentIndex">
+                   <number>1</number>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Inline</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Popup</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_26">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -1130,7 +1174,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-644</y>
+               <y>0</y>
                <width>681</width>
                <height>1125</height>
               </rect>
