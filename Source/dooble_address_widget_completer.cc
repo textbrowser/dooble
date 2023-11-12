@@ -238,25 +238,36 @@ void dooble_address_widget_completer::complete(const QString &text)
 
 	m_model->setRowCount(m_model->rowCount() + 1);
 	m_model->setItem(m_model->rowCount() - 1, item->clone());
-	m_popup->setRowHeight(m_model->rowCount() - 1, 36);
+
+	if(completionMode() == QCompleter::UnfilteredPopupCompletion)
+	  m_popup->setRowHeight(m_model->rowCount() - 1, 36);
       }
 
   if(m_model->rowCount() > 0)
     {
-      auto height = 2 * m_popup->frameWidth() +
-	m_popup->horizontalHeader()->height() +
-	m_popup->rowHeight(0) * qMin(m_model->rowCount(),
-				     static_cast<int> (dooble_page::
-						       ConstantsEnum::
-						       MAXIMUM_HISTORY_ITEMS));
+      if(completionMode() == QCompleter::UnfilteredPopupCompletion)
+	{
+	  auto height = 2 * m_popup->frameWidth() +
+	    m_popup->horizontalHeader()->height() +
+	    m_popup->rowHeight(0) *
+	    qMin(m_model->rowCount(),
+		 static_cast<int> (dooble_page::
+				   ConstantsEnum::
+				   MAXIMUM_HISTORY_ITEMS));
 
-      m_popup->setMaximumHeight(height);
-      m_popup->setMinimumHeight(height);
-      setMaxVisibleItems(m_model->rowCount());
-      QCompleter::complete();
-      m_popup->setCurrentIndex(QModelIndex());
+	  m_popup->setMaximumHeight(height);
+	  m_popup->setMinimumHeight(height);
+	  setMaxVisibleItems(m_model->rowCount());
+	  QCompleter::complete();
+	  m_popup->setCurrentIndex(QModelIndex());
+	}
+      else
+	{
+	  setMaxVisibleItems(m_model->rowCount());
+	  QCompleter::complete();
+	}
     }
-  else
+  else if(completionMode() == QCompleter::UnfilteredPopupCompletion)
     m_popup->setVisible(false);
 
   QApplication::restoreOverrideCursor();
@@ -308,10 +319,21 @@ void dooble_address_widget_completer::slot_settings_applied(void)
   if(dooble_settings::setting("show_address_widget_completer").toBool())
     {
       if(m_model != model())
-	setModel(m_model);
+	{
+	  auto mode = dooble_settings::setting
+	    ("address_widget_completer_mode_index").toInt() == 0 ?
+	    QCompleter::InlineCompletion :
+	    QCompleter::UnfilteredPopupCompletion;
+
+	  setCompletionMode(mode);
+	  setModel(m_model);
+	}
     }
   else
-    setModel(nullptr);
+    {
+      setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+      setModel(nullptr);
+    }
 }
 
 void dooble_address_widget_completer::slot_text_edited_timeout(void)
@@ -323,7 +345,12 @@ void dooble_address_widget_completer::slot_text_edited_timeout(void)
   auto text(qobject_cast<dooble_address_widget *> (parent())->text());
 
   if(text.trimmed().isEmpty())
-    m_popup->setVisible(false);
+    {
+      if(completionMode() == QCompleter::UnfilteredPopupCompletion)
+	m_popup->setVisible(false);
+      else
+	complete("");
+    }
   else
     complete(text);
 }

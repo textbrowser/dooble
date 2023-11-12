@@ -83,7 +83,8 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 #endif
   m_pull_down->setToolTip(tr("Show History"));
   m_pull_down->setVisible
-    (dooble_settings::setting("show_address_widget_completer").toBool());
+    (dooble_settings::setting("show_address_widget_completer").toBool() &&
+     m_completer->completionMode() == QCompleter::UnfilteredPopupCompletion);
   m_view = nullptr;
   connect(dooble::s_application,
 	  SIGNAL(favorites_cleared(void)),
@@ -179,7 +180,8 @@ bool dooble_address_widget::event(QEvent *event)
 {
   if(event && event->type() == QEvent::KeyPress)
     {
-      if(dynamic_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab)
+      if(dynamic_cast<QKeyEvent *> (event)->key() == Qt::Key_Tab &&
+	 m_completer->completionMode() == QCompleter::UnfilteredPopupCompletion)
 	{
 	  auto table_view = qobject_cast<QTableView *> (m_completer->popup());
 
@@ -258,7 +260,8 @@ void dooble_address_widget::dropEvent(QDropEvent *event)
 
 void dooble_address_widget::hide_popup(void)
 {
-  m_completer->popup()->hide();
+  if(m_completer->completionMode() == QCompleter::UnfilteredPopupCompletion)
+    m_completer->popup()->hide();
 }
 
 void dooble_address_widget::keyPressEvent(QKeyEvent *event)
@@ -544,7 +547,8 @@ void dooble_address_widget::slot_populate
 
 void dooble_address_widget::slot_return_pressed(void)
 {
-  m_completer->popup()->setVisible(false);
+  if(m_completer->completionMode() == QCompleter::UnfilteredPopupCompletion)
+    m_completer->popup()->setVisible(false);
 
   if(dooble_ui_utilities::allowed_url_scheme(QUrl(text().trimmed())))
     setText(text());
@@ -553,7 +557,8 @@ void dooble_address_widget::slot_return_pressed(void)
 void dooble_address_widget::slot_settings_applied(void)
 {
   m_pull_down->setVisible
-    (dooble_settings::setting("show_address_widget_completer").toBool());
+    (dooble_settings::setting("show_address_widget_completer").toBool() &&
+     m_completer->completionMode() == QCompleter::UnfilteredPopupCompletion);
   prepare_icons();
 
   if(m_view)
