@@ -99,7 +99,9 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  this,
 	  SLOT(slot_clicked(const QModelIndex &)));
   setCaseSensitivity(Qt::CaseInsensitive);
+  setCompletionColumn(0);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+  setFilterMode(Qt::MatchContains);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
   setWrapAround(false);

@@ -372,7 +372,7 @@
                <x>0</x>
                <y>0</y>
                <width>642</width>
-               <height>1258</height>
+               <height>1264</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -447,6 +447,16 @@
                     <string>Popup</string>
                    </property>
                   </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_14">
+                  <property name="text">
+                   <string>New pages only. Existing pages will retain their current completer modes.</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item>
