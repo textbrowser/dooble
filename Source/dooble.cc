@@ -5210,7 +5210,8 @@ void dooble::slot_translate_page(void)
 
   destination.replace("%1", host);
   destination.replace("%2", path);
-  destination.replace("%3", QLocale::languageToString(QLocale().language()));
+  destination.replace
+    ("%3", QLocale::languageToString(QLocale().language()).toLower().mid(0, 2));
   slot_open_link_in_new_tab(destination);
 }
 
