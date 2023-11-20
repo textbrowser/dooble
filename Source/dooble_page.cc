@@ -1318,7 +1318,8 @@ void dooble_page::prepare_standard_menus(void)
   menu->addSeparator();
   menu->addAction(tr("Translate Page (Google)"),
 		  this,
-		  SIGNAL(translate_page(void)));
+		  SIGNAL(translate_page(void)))->setEnabled
+    (QUrl::fromUserInput(dooble::s_google_translate_url).isValid());
 
   if(dooble::s_settings)
     {

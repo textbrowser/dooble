@@ -8,6 +8,11 @@ export AA_USEHIGHDPIPIXMAPS=1
 
 export DOOBLE_ADDRESS_WIDGET_HEIGHT_OFFSET=0
 
+# Must be a valid URL! 1024 characters or fewer.
+
+export DOOBLE_GOOGLE_TRANSLATE_URL="https://%1.translate.goog/\
+%2?_x_tr_sl=auto&_x_tr_tl=%3&_x_tr_hl=%3&_x_tr_pto=wapp"
+
 # Maximum of 50.
 
 export DOOBLE_TAB_HEIGHT_OFFSET=5

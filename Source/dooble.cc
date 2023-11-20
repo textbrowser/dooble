@@ -5202,9 +5202,7 @@ void dooble::slot_translate_page(void)
   if(!page)
     return;
 
-  QString destination
-    ("https://%1.translate.goog/%2"
-     "?_x_tr_sl=auto&_x_tr_tl=%3&_x_tr_hl=%3&_x_tr_pto=wapp");
+  auto destination(dooble::s_google_translate_url);
   auto host(page->url().host().trimmed().replace('.', '-'));
   auto path(page->url().path().trimmed());
 

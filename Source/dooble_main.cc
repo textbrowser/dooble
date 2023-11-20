@@ -71,6 +71,8 @@ extern "C"
 #include <csignal>
 #include <iostream>
 
+QString dooble::s_google_translate_url = "";
+
 static void signal_handler(int signal_number)
 {
   /*
@@ -475,6 +477,8 @@ int main(int argc, char *argv[])
       return 0;
     }
 
+  dooble::s_google_translate_url = qgetenv
+    ("DOOBLE_GOOGLE_TRANSLATE_URL").trimmed().mid(0, 1024);
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),
 		   dooble::s_cookies,
