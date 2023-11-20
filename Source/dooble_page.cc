@@ -1315,6 +1315,10 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("&Search Engines..."),
 		  this,
 		  SIGNAL(show_search_engines(void)));
+  menu->addSeparator();
+  menu->addAction(tr("Translate Page (Google)"),
+		  this,
+		  SIGNAL(translate_page(void)));
 
   if(dooble::s_settings)
     {

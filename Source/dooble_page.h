@@ -260,6 +260,7 @@ class dooble_page: public QWidget
   void show_settings_panel(dooble_settings::Panels panel);
   void show_site_cookies(void);
   void titleChanged(const QString &title);
+  void translate_page(void);
   void vacuum_databases(void);
   void windowCloseRequested(void);
   void zoomed(qreal zoom_factor);
