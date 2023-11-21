@@ -478,7 +478,11 @@ int main(int argc, char *argv[])
     }
 
   dooble::s_google_translate_url = qgetenv
-    ("DOOBLE_GOOGLE_TRANSLATE_URL").trimmed().mid(0, 1024);
+    ("DOOBLE_GOOGLE_TRANSLATE_URL").trimmed().mid(0, 1024).trimmed();
+  dooble::s_google_translate_url = dooble::s_google_translate_url.isEmpty() ?
+    "https://%1.translate.goog/"
+    "%2?_x_tr_sl=auto&_x_tr_tl=%3&_x_tr_hl=%3&_x_tr_pto=wapp" :
+    dooble::s_google_translate_url;
   QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),
 		   dooble::s_cookies,
