@@ -1,3 +1,6 @@
-Dooble supports MacOS 10.12.x and newer, Windows 7 and newer. As for
+Dooble supports MacOS 13 and newer, Windows 10 and newer. As for
 Linux, FreeBSD, OS/2, OpenBSD, a system capable of supporting the latest
 Qt LTS.
+
+Older versions of MacOS and Windows may be functional. I don't have
+the hardware and software to verify.
