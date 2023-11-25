@@ -1,5 +1,5 @@
 # Qt 5.15.2, Windows 7!
 
-> qmake -o Makefile dooble.pro
 > "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
+> qmake -o Makefile dooble.pro
 > nmake
