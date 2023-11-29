@@ -347,13 +347,16 @@ int main(int argc, char *argv[])
   ** Create a splash screen.
   */
 
-  QElapsedTimer t;
-  QSplashScreen splash(QPixmap(":/Miscellaneous/splash.png"));
-  auto splash_screen = dooble_settings::setting("splash_screen", true).toBool();
+  QSplashScreen splash;
+  auto splash_screen = dooble_settings::setting
+    ("splash_screen", true).toBool();
 
   if(splash_screen)
     {
+      QElapsedTimer t;
+
       splash.setEnabled(false);
+      splash.setPixmap(QPixmap(":/Miscellaneous/splash.png"));
       splash.show();
       splash.showMessage
 	(QObject::tr("Initializing Dooble's random number generator."),
