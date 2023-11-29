@@ -112,7 +112,12 @@ class dooble_history: public QObject
   void remove_items(const QListUrl &urls);
 };
 
-inline uint qHash(const dooble_history::HistoryItem &key, uint seed)
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+inline size_t
+#else
+inline uint
+#endif
+qHash(const dooble_history::HistoryItem &key, uint seed)
 {
   return ::qHash(static_cast<uint> (key), seed);
 }
