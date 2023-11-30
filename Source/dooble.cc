@@ -108,7 +108,6 @@ dooble::dooble(QWidget *widget):QMainWindow()
   initialize_static_members();
   m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
-  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = false;
   m_menu = new QMenu(this);
@@ -154,7 +153,6 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
   initialize_static_members();
   m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
-  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = is_private;
   m_menu = new QMenu(this);
@@ -271,7 +269,6 @@ dooble::dooble(dooble_page *page):QMainWindow()
   initialize_static_members();
   m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
-  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
   m_menu = new QMenu(this);
@@ -306,7 +303,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   initialize_static_members();
   m_anonymous_tab_headers = false;
   m_floating_digital_clock_dialog = nullptr;
-  m_floating_digital_clock_timer.start(1000);
   m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
   m_menu = new QMenu(this);
@@ -4709,7 +4705,7 @@ void dooble::slot_show_floating_digital_clock(void)
   m_floating_digital_clock_dialog->update();
 
   if(!m_floating_digital_clock_timer.isActive())
-    m_floating_digital_clock_timer.start();
+    m_floating_digital_clock_timer.start(1000);
 
   slot_floating_digital_dialog_timeout();
 }
