@@ -14,7 +14,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Favorites.</li>
 <li>Floating digital clock.</li>
 <li>Floating minute history window.</li>
-<li>FreeBSD, Linux, MacOS, OS/2, OpenBSD, Windows.</li>
+<li>FreeBSD, Linux, MacOS, OS/2, OpenBSD, PiOS, Windows.</li>
 <li>Functional on a dual-core 1.0 GHz fanless computer.</li>
 <li>Gopher support.</li>
 <li>Great for older hardware!</li>
@@ -26,6 +26,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Portable.</li>
 <li>Qt LTS!</li>
 <li>Qt-only dependency.</li>
+<li>Raspberry PiOS!</li>
 <li>WebEngine (https://doc.qt.io/qt-5/qtwebengine-overview.html, https://en.wikipedia.org/wiki/Blink_(browser_engine)#Frameworks, https://www.chromium.org/blink).</li>
 <li>Windows portable.</li>
 </ul>
