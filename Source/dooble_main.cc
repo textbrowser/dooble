@@ -95,6 +95,7 @@ int main(int argc, char *argv[])
 
   QList<QUrl> urls;
   auto attach = false;
+  auto full_screen = false;
   auto test_aes = false;
   auto test_aes_performance = false;
   auto test_threefish = false;
@@ -107,6 +108,8 @@ int main(int argc, char *argv[])
 	  attach = true;
 	else if(strcmp(argv[i], "--executable-current-url") == 0)
 	  i += 1;
+	else if(strcmp(argv[i], "--full-screen") == 0)
+	  full_screen = true;
 	else if(strcmp(argv[i], "--load-url") == 0)
 	  {
 	    i += 1;
@@ -580,7 +583,10 @@ int main(int argc, char *argv[])
       splash.finish(d);
     }
 
-  QTimer::singleShot(0, d, SLOT(show(void)));
+  if(!full_screen)
+    QTimer::singleShot(0, d, SLOT(show(void)));
+  else
+    QTimer::singleShot(0, d, SLOT(showFullScreen(void)));
 
   auto rc = dooble::s_application->exec();
 
