@@ -110,6 +110,20 @@ int main(int argc, char *argv[])
 	  i += 1;
 	else if(strcmp(argv[i], "--full-screen") == 0)
 	  full_screen = true;
+	else if(strcmp(argv[i], "--help") == 0)
+	  {
+	    qDebug() << "Dooble: ";
+	    qDebug() << " --attach";
+	    qDebug() << " --executable-current-url PROGRAM";
+	    qDebug() << " --fullscreen";
+	    qDebug() << " --help";
+	    qDebug() << " --load-url URL";
+	    qDebug() << " --test-aes";
+	    qDebug() << " --test-aes-performance";
+	    qDebug() << " --test-threefish";
+	    qDebug() << " --test-threefish-performance";
+	    return EXIT_SUCCESS;
+	  }
 	else if(strcmp(argv[i], "--load-url") == 0)
 	  {
 	    i += 1;
