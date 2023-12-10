@@ -697,6 +697,11 @@ void dooble_page::inject_custom_css(void)
   slot_inject_custom_css();
 }
 
+ void dooble_page::javascript_console(void)
+{
+  slot_javascript_console();
+}
+
 void dooble_page::load(const QUrl &url)
 {
   m_view->stop();
@@ -1309,6 +1314,9 @@ void dooble_page::prepare_standard_menus(void)
   menu->addAction(tr("Inject Custom Style Sheet..."),
 		  this,
 		  SLOT(slot_inject_custom_css(void)));
+  menu->addAction(tr("JavaScript Console..."),
+		  this,
+		  SLOT(slot_javascript_console(void)));
   menu->addSeparator();
   menu->addAction
     (QIcon::fromTheme(use_material_icons + "application-menu",
@@ -2364,7 +2372,9 @@ void dooble_page::slot_javascript_console(void)
       m_javascript_console->set_page(m_view->page());
     }
 
-  m_javascript_console->show();
+  m_javascript_console->showNormal();
+  m_javascript_console->raise();
+  m_javascript_console->activateWindow();
 }
 
 void dooble_page::slot_link_hovered(const QString &url)

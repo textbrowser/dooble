@@ -85,6 +85,7 @@ class dooble_page: public QWidget
   void hide_location_frame(bool state);
   void hide_status_bar(bool state);
   void inject_custom_css(void);
+  void javascript_console(void);
   void load(const QUrl &url);
   void prepare_export_as_png(const QString &file_name);
   void print_page(QPrinter *printer);

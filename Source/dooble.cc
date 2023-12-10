@@ -2376,6 +2376,10 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_inject_custom_css(void)))->setEnabled
     (page && page->url().scheme().startsWith("http"));
+  menu->addAction(tr("JavaScript Console..."),
+		  this,
+		  SLOT(slot_javascript_console(void)))->setEnabled
+    (page && page->url().scheme().startsWith("http"));
   menu->addSeparator();
   menu->addAction
     (tr("Page Floating &Menu..."),
@@ -3871,6 +3875,16 @@ void dooble::slot_inject_custom_css(void)
     return;
 
   page->inject_custom_css();
+}
+
+void dooble::slot_javascript_console(void)
+{
+  auto page = current_page();
+
+  if(!page)
+    return;
+
+  page->javascript_console();
 }
 
 void dooble::slot_load_finished(bool ok)
