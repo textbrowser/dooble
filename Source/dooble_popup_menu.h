@@ -28,8 +28,6 @@
 #ifndef dooble_popup_menu_h
 #define dooble_popup_menu_h
 
-#include <QDialog>
-
 #include "ui_dooble_popup_menu.h"
 
 class dooble;

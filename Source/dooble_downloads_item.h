@@ -33,7 +33,6 @@
 #include <QTime>
 #include <QTimer>
 #include <QUrl>
-#include <QWidget>
 
 #include "ui_dooble_downloads_item.h"
 

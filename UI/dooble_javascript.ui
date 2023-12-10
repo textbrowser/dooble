@@ -22,7 +22,7 @@
     <widget class="QPlainTextEdit" name="text"/>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="buttons">
      <property name="standardButtons">
       <set>QDialogButtonBox::Ok</set>
      </property>

@@ -52,6 +52,7 @@
 #include "dooble_favorites_popup.h"
 #include "dooble_history.h"
 #include "dooble_history_window.h"
+#include "dooble_javascript.h"
 #include "dooble_page.h"
 #include "dooble_popup_menu.h"
 #include "dooble_search_engines_popup.h"
@@ -2357,6 +2358,13 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 void dooble_page::slot_javascript_console(void)
 {
+  if(!m_javascript_console)
+    {
+      m_javascript_console = new dooble_javascript(this);
+      m_javascript_console->set_page(m_view->page());
+    }
+
+  m_javascript_console->show();
 }
 
 void dooble_page::slot_link_hovered(const QString &url)

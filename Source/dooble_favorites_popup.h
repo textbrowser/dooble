@@ -28,7 +28,6 @@
 #ifndef dooble_favorites_popup_h
 #define dooble_favorites_popup_h
 
-#include <QDialog>
 #include <QTimer>
 
 #include "ui_dooble_favorites_popup.h"

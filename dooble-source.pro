@@ -13,7 +13,8 @@ FORMS           = UI/dooble.ui \
                   UI/dooble_downloads_item.ui \
                   UI/dooble_favorites_popup.ui \
                   UI/dooble_floating_digital_clock.ui \
-		  UI/dooble_history_window.ui \
+                  UI/dooble_history_window.ui \
+                  UI/dooble_javascript.ui \
                   UI/dooble_page.ui \
                   UI/dooble_popup_menu.ui \
                   UI/dooble_search_engines_popup.ui \
@@ -47,6 +48,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_history.h \
                   Source/dooble_history_table_widget.h \
                   Source/dooble_history_window.h \
+                  Source/dooble_javascript.h \
                   Source/dooble_main_window.h \
                   Source/dooble_page.h \
                   Source/dooble_pbkdf2.h \
@@ -99,6 +101,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_history_table_widget.cc \
                   Source/dooble_history_window.cc \
                   Source/dooble_hmac.cc \
+                  Source/dooble_javascript.cc \
                   Source/dooble_main.cc \
                   Source/dooble_page.cc \
                   Source/dooble_pbkdf2.cc \

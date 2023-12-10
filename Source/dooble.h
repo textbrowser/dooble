@@ -30,7 +30,6 @@
 
 #include <QFuture>
 #include <QLocalServer>
-#include <QMainWindow>
 #include <QShortcut>
 #include <QPointer>
 #include <QPrinter>

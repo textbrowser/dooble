@@ -28,7 +28,6 @@
 #ifndef dooble_certificate_exceptions_h
 #define dooble_certificate_exceptions_h
 
-#include <QMainWindow>
 #include <QTimer>
 
 #include "ui_dooble_certificate_exceptions.h"

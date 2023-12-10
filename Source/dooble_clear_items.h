@@ -28,7 +28,6 @@
 #ifndef dooble_clear_items_h
 #define dooble_clear_items_h
 
-#include <QDialog>
 #include <QTimer>
 
 #include "ui_dooble_clear_items.h"

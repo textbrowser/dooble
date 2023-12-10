@@ -28,7 +28,6 @@
 #ifndef dooble_search_engines_popup_h
 #define dooble_search_engines_popup_h
 
-#include <QDialog>
 #include <QSqlDatabase>
 #include <QTimer>
 #include <QUrl>

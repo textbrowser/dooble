@@ -29,7 +29,6 @@
 #define dooble_about_h
 
 #include <QFuture>
-#include <QMainWindow>
 
 #include "ui_dooble_about.h"
 

@@ -28,7 +28,6 @@
 #ifndef dooble_cookies_window_h
 #define dooble_cookies_window_h
 
-#include <QMainWindow>
 #include <QNetworkCookie>
 #include <QPointer>
 #include <QTimer>

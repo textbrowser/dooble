@@ -28,8 +28,6 @@
 #ifndef dooble_style_sheet_h
 #define dooble_style_sheet_h
 
-#include <QDialog>
-
 #include "ui_dooble_style_sheet.h"
 
 class dooble_web_engine_page;

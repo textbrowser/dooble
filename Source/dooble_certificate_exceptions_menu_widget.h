@@ -30,7 +30,6 @@
 
 #include <QSqlDatabase>
 #include <QUrl>
-#include <QWidget>
 
 #include "ui_dooble_certificate_exceptions_menu_widget.h"
 

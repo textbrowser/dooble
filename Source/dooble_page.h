@@ -32,7 +32,6 @@
 #include <QTimer>
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
-#include <QWidget>
 
 #include "dooble_settings.h"
 #include "ui_dooble_page.h"
@@ -43,6 +42,7 @@ class QWebEngineSettings;
 class QWebEngineView;
 class dooble;
 class dooble_address_widget;
+class dooble_javascript;
 class dooble_popup_menu;
 class dooble_web_engine_view;
 
@@ -113,6 +113,7 @@ class dooble_page: public QWidget
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
   QPointer<QProgressDialog> m_export_as_png_progress_dialog;
+  QPointer<dooble_javascript> m_javascript_console;
   QString m_export_png_file_name;
   QTimer m_export_png_timer;
   QTimer m_reload_timer;
