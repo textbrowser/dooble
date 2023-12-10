@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	    qDebug() << "Dooble";
 	    qDebug() << " --attach";
 	    qDebug() << " --executable-current-url PROGRAM";
-	    qDebug() << " --fullscreen";
+	    qDebug() << " --full-screen";
 	    qDebug() << " --help";
 	    qDebug() << " --load-url URL";
 	    qDebug() << " --test-aes";
