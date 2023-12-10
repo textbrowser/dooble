@@ -2910,6 +2910,11 @@ void dooble::show(void)
 
 void dooble::showFullScreen(void)
 {
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("dooble_geometry").
+					   toByteArray()));
+
   QMainWindow::showFullScreen();
 
   if(!s_warned_of_missing_sqlite_driver)

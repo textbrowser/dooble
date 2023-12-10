@@ -590,6 +590,10 @@ void dooble_address_widget::slot_show_site_information_menu(void)
      this,
      SIGNAL(inject_custom_css(void)));
   menu.addAction
+    (tr("JavaScript Console..."),
+     this,
+     SIGNAL(javascript_console(void)));
+  menu.addAction
     (QIcon::fromTheme(use_material_icons + "preferences-web-browser-cookies",
 		      QIcon(QString(":/%1/48/cookies.png").arg(icon_set))),
      tr("Show Site Coo&kies..."),

@@ -207,6 +207,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_inject_custom_css(void)));
   connect(m_ui.address,
+	  SIGNAL(javascript_console(void)),
+	  this,
+	  SLOT(slot_javascript_console(void)));
+  connect(m_ui.address,
 	  SIGNAL(load_page(const QUrl &)),
 	  this,
 	  SLOT(slot_load_page(void)));
@@ -2349,6 +2353,10 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
     (m_ui.javascript_allow_popup_exception->
      mapToGlobal(m_ui.javascript_allow_popup_exception->rect().bottomLeft()));
   m_ui.javascript_allow_popup_exception->setChecked(false);
+}
+
+void dooble_page::slot_javascript_console(void)
+{
 }
 
 void dooble_page::slot_link_hovered(const QString &url)

@@ -175,6 +175,7 @@ class dooble_page: public QWidget
   void slot_icon_changed(const QIcon &icon);
   void slot_inject_custom_css(void);
   void slot_javascript_allow_popup_exception(void);
+  void slot_javascript_console(void);
   void slot_link_hovered(const QString &url);
   void slot_load_finished(bool ok);
   void slot_load_page(void);
