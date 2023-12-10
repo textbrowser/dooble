@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 	  full_screen = true;
 	else if(strcmp(argv[i], "--help") == 0)
 	  {
-	    qDebug() << "Dooble: ";
+	    qDebug() << "Dooble";
 	    qDebug() << " --attach";
 	    qDebug() << " --executable-current-url PROGRAM";
 	    qDebug() << " --fullscreen";
