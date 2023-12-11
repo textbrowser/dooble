@@ -183,12 +183,17 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordtype">void</span> remove_items(<span class="keyword">const</span> QListUrl &amp;urls);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">inline</span> uint qHash(<span class="keyword">const</span> dooble_history::HistoryItem &amp;key, uint seed)</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  return ::qHash(<span class="keyword">static_cast&lt;</span>uint<span class="keyword">&gt;</span> (key), seed);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#if (QT_VERSION &gt;= QT_VERSION_CHECK(6, 0, 0))</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">inline</span> uint</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;qHash(<span class="keyword">const</span> dooble_history::HistoryItem &amp;key, uint seed)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  return ::qHash(<span class="keyword">static_cast&lt;</span>uint<span class="keyword">&gt;</span> (key), seed);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassdooble__history_html"><div class="ttname"><a href="classdooble__history.html">dooble_history</a></div><div class="ttdef"><b>Definition:</b> dooble_history.h:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
