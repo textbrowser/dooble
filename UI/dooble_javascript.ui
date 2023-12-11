@@ -19,6 +19,13 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
+    <widget class="QLineEdit" name="url">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPlainTextEdit" name="text"/>
    </item>
    <item>
@@ -30,6 +37,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>url</tabstop>
+  <tabstop>text</tabstop>
+ </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
  </resources>

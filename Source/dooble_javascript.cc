@@ -44,7 +44,29 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 
 void dooble_javascript::set_page(QWebEnginePage *page)
 {
-  m_page = page;
+  if(m_page)
+    return;
+  else if(page)
+    {
+      connect(page,
+	      SIGNAL(destroyed(void)),
+	      this,
+	      SLOT(deleteLater(void)));
+      connect(page,
+	      SIGNAL(titleChanged(const QString &)),
+	      this,
+	      SLOT(slot_title_changed(const QString &)));
+      connect(page,
+	      SIGNAL(urlChanged(const QUrl &)),
+	      this,
+	      SLOT(slot_url_changed(const QUrl &)));
+      m_page = page;
+      setWindowTitle
+	(m_page->title().trimmed().isEmpty() ?
+	 tr("Dooble: JavaScript Console") :
+	 tr("%1 - Dooble: JavaScript Console").arg(m_page->title().trimmed()));
+      slot_url_changed(m_page->url());
+    }
 }
 
 void dooble_javascript::slot_execute(void)
@@ -55,4 +77,18 @@ void dooble_javascript::slot_execute(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_page->runJavaScript(m_ui.text->toPlainText().trimmed());
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_javascript::slot_title_changed(const QString &title)
+{
+  setWindowTitle
+    (title.trimmed().isEmpty() ?
+     tr("Dooble: JavaScript Console") :
+     tr("%1 - Dooble: JavaScript Console").arg(title.trimmed()));
+}
+
+void dooble_javascript::slot_url_changed(const QUrl &url)
+{
+  m_ui.url->setText(url.toString());
+  m_ui.url->setCursorPosition(0);
 }

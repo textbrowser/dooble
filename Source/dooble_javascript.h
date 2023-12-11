@@ -48,6 +48,8 @@ class dooble_javascript: public QDialog
 
  private slots:
   void slot_execute(void);
+  void slot_title_changed(const QString &title);
+  void slot_url_changed(const QUrl &url);
 };
 
 #endif

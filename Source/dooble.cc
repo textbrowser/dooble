@@ -2889,10 +2889,10 @@ void dooble::remove_page_connections(dooble_page *page)
 
 void dooble::setWindowTitle(const QString &text)
 {
-  if(m_is_private)
+  if(m_is_private && text.trimmed().length() > 0)
     QMainWindow::setWindowTitle(tr("%1 (Private)").arg(text.trimmed()));
-  else
-    QMainWindow::setWindowTitle(text);
+  else if(text.trimmed().length() > 0)
+    QMainWindow::setWindowTitle(text.trimmed());
 }
 
 void dooble::show(void)
