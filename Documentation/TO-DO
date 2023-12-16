@@ -219,6 +219,8 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional Document Mode.
 - Prevent SQL query text overflow.
+- QSqlDatabase complains (connect() and nullptr) if QApplication is not
+  present in Qt 6.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
