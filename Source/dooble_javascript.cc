@@ -25,11 +25,16 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QPushButton>
 #include <QShortcut>
-#include <QWebEnginePage>
+#include <QSqlQuery>
 
+#include "dooble.h"
+#include "dooble_cryptography.h"
+#include "dooble_database_utilities.h"
 #include "dooble_javascript.h"
+#include "dooble_web_engine_page.h"
 
 dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 {
@@ -39,6 +44,10 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_execute(void)));
+  connect(m_ui.buttons->button(QDialogButtonBox::Save),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_save(void)));
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 }
 
@@ -46,7 +55,7 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 {
   if(m_page)
     return;
-  else if(page)
+  else if(qobject_cast<dooble_web_engine_page *> (page))
     {
       connect(page,
 	      SIGNAL(destroyed(void)),
@@ -60,7 +69,7 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 	      SIGNAL(urlChanged(const QUrl &)),
 	      this,
 	      SLOT(slot_url_changed(const QUrl &)));
-      m_page = page;
+      m_page = qobject_cast<dooble_web_engine_page *> (page);
       setWindowTitle
 	(m_page->title().trimmed().isEmpty() ?
 	 tr("Dooble: JavaScript Console") :
@@ -79,6 +88,59 @@ void dooble_javascript::slot_execute(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_javascript::slot_save(void)
+{
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     !m_page)
+    return;
+
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_javascript ("
+		   "javascript TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT NOT NULL PRIMARY KEY)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_javascript "
+	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray bytes;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (m_ui.text->toPlainText().trimmed().toUtf8()).toBase64();
+	query.addBindValue(bytes);
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (m_page->url().toEncoded());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(m_page->url().toEncoded()).toBase64());
+	query.exec();
+      }
+
+  done_label:
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_javascript::slot_title_changed(const QString &title)
 {
   setWindowTitle
@@ -91,4 +153,48 @@ void dooble_javascript::slot_url_changed(const QUrl &url)
 {
   m_ui.url->setText(url.toString());
   m_ui.url->setCursorPosition(0);
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    {
+      m_ui.text->clear();
+      return;
+    }
+
+  auto database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare
+	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+
+	if(query.exec() && query.next())
+	  {
+	    auto javascript
+	      (QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	    javascript = dooble::s_cryptography->mac_then_decrypt(javascript);
+	    m_ui.text->setPlainText(javascript);
+	  }
+	else
+	  m_ui.text->clear();
+      }
+    else
+      m_ui.text->clear();
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }

@@ -3512,6 +3512,7 @@ void dooble_settings::slot_reset(void)
        << "dooble_downloads.db"
        << "dooble_favicons.db"
        << "dooble_history.db"
+       << "dooble_javascript.db"
        << "dooble_search_engines.db"
        << "dooble_settings.db"
        << "dooble_style_sheets.db";

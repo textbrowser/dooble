@@ -85,13 +85,13 @@ void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
       if(it.key().second == web_engine_page->simplified_url())
 	{
 	  auto style_sheet
-	    (QString::fromLatin1("(function() {"
-				 "css = document.createElement('style');"
-				 "css.id = '%1';"
-				 "css.type = 'text/css';"
-				 "css.innerText = '%2';"
-				 "document.head.appendChild(css);"
-				 "})()").
+	    (QString::fromUtf8("(function() {"
+			       "css = document.createElement('style');"
+			       "css.id = '%1';"
+			       "css.type = 'text/css';"
+			       "css.innerText = '%2';"
+			       "document.head.appendChild(css);"
+			       "})()").
 	     arg(it.key().first).
 	     arg(it.value()));
 	  QWebEngineScript web_engine_script;
@@ -108,10 +108,10 @@ void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
       else
 	{
 	  auto style_sheet
-	    (QString::fromLatin1("(function() {"
-				 "var element = document.getElementById('%1');"
-				 "if(element) element.outerHTML = '';"
-				 "delete element;})()").arg(it.key().first));
+	    (QString::fromUtf8("(function() {"
+			       "var element = document.getElementById('%1');"
+			       "if(element) element.outerHTML = '';"
+			       "delete element;})()").arg(it.key().first));
 
 	  web_engine_page->runJavaScript
 	    (style_sheet, QWebEngineScript::ApplicationWorld);
@@ -199,13 +199,13 @@ void dooble_style_sheet::slot_add(void)
     return;
 
   auto style_sheet
-    (QString::fromLatin1("(function() {"
-			 "css = document.createElement('style');"
-			 "css.id = '%1';"
-			 "css.type = 'text/css';"
-			 "css.innerText = '%2';"
-			 "document.head.appendChild(css);"
-			 "})()").
+    (QString::fromUtf8("(function() {"
+		       "css = document.createElement('style');"
+		       "css.id = '%1';"
+		       "css.type = 'text/css';"
+		       "css.innerText = '%2';"
+		       "document.head.appendChild(css);"
+		       "})()").
      arg(name).
      arg(m_ui.style_sheet->toPlainText().trimmed()));
   QWebEngineScript web_engine_script;
@@ -277,7 +277,7 @@ void dooble_style_sheet::slot_add(void)
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(name.toUtf8()).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (m_ui.style_sheet->toPlainText().trimmed().toLatin1());
+	  (m_ui.style_sheet->toPlainText().trimmed().toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -309,7 +309,7 @@ void dooble_style_sheet::slot_item_selection_changed(void)
 {
   auto list(m_ui.names->selectedItems());
 
-  if(list.isEmpty() || !list.at(0) || !m_web_engine_page)
+  if(!list.value(0) || !m_web_engine_page)
     {
       m_ui.name->clear();
       m_ui.style_sheet->clear();
@@ -386,15 +386,15 @@ void dooble_style_sheet::slot_remove(void)
 
   auto list(m_ui.names->selectedItems());
 
-  if(list.isEmpty() || !list.at(0))
+  if(!list.value(0))
     return;
 
   auto name(list.at(0)->text());
   auto style_sheet
-    (QString::fromLatin1("(function() {"
-			 "var element = document.getElementById('%1');"
-			 "if(element) element.outerHTML = '';"
-			 "delete element;})()").arg(name));
+    (QString::fromUtf8("(function() {"
+		       "var element = document.getElementById('%1');"
+		       "if(element) element.outerHTML = '';"
+		       "delete element;})()").arg(name));
 
   delete m_ui.names->takeItem(m_ui.names->row(list.at(0)));
   m_web_engine_page->runJavaScript

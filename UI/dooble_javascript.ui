@@ -26,12 +26,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QPlainTextEdit" name="text"/>
+    <widget class="QPlainTextEdit" name="text">
+     <property name="placeholderText">
+      <string>Please provide valid JavaScript.</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttons">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Ok|QDialogButtonBox::Save</set>
      </property>
     </widget>
    </item>

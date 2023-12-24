@@ -73,7 +73,11 @@
         </layout>
        </item>
        <item>
-        <widget class="QPlainTextEdit" name="style_sheet"/>
+        <widget class="QPlainTextEdit" name="style_sheet">
+         <property name="placeholderText">
+          <string>Please provide a valid style sheet.</string>
+         </property>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">

@@ -98,7 +98,7 @@
         <string notr="true">QPushButton {background-color: #448aff; border: none; border-radius: 2px; color: white;}</string>
        </property>
        <property name="text">
-        <string>AUTHENTICATE</string>
+        <string>Authenticate</string>
        </property>
       </widget>
      </item>

@@ -33,6 +33,7 @@
 #include "ui_dooble_javascript.h"
 
 class QWebEnginePage;
+class dooble_web_engine_page;
 
 class dooble_javascript: public QDialog
 {
@@ -43,11 +44,12 @@ class dooble_javascript: public QDialog
   void set_page(QWebEnginePage *page);
 
  private:
-  QPointer<QWebEnginePage> m_page;
+  QPointer<dooble_web_engine_page> m_page;
   Ui_dooble_javascript m_ui;
 
  private slots:
   void slot_execute(void);
+  void slot_save(void);
   void slot_title_changed(const QString &title);
   void slot_url_changed(const QUrl &url);
 };
