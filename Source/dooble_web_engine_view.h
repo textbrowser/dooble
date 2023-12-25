@@ -51,7 +51,7 @@ class dooble_web_engine_view: public QWebEngineView
 
  protected:
   QSize sizeHint(void) const;
-  dooble_web_engine_view *createWindow(QWebEnginePage::WebWindowType type);
+  QWebEngineView *createWindow(QWebEnginePage::WebWindowType type);
   void contextMenuEvent(QContextMenuEvent *event);
   void resizeEvent(QResizeEvent *event);
 

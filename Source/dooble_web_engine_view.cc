@@ -127,11 +127,6 @@ dooble_web_engine_view::~dooble_web_engine_view()
       }
 }
 
-QWebEngineProfile *dooble_web_engine_view::web_engine_profile(void) const
-{
-  return m_page->profile();
-}
-
 QSize dooble_web_engine_view::sizeHint(void) const
 {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -146,12 +141,12 @@ QSize dooble_web_engine_view::sizeHint(void) const
 #endif
 }
 
-bool dooble_web_engine_view::is_private(void) const
+QWebEngineProfile *dooble_web_engine_view::web_engine_profile(void) const
 {
-  return m_is_private;
+  return m_page->profile();
 }
 
-dooble_web_engine_view *dooble_web_engine_view::createWindow
+QWebEngineView *dooble_web_engine_view::createWindow
 (QWebEnginePage::WebWindowType type)
 {
   auto view = new dooble_web_engine_view(m_page->profile(), nullptr);
@@ -204,6 +199,11 @@ dooble_web_engine_view *dooble_web_engine_view::createWindow
     }
 
   return view;
+}
+
+bool dooble_web_engine_view::is_private(void) const
+{
+  return m_is_private;
 }
 
 void dooble_web_engine_view::contextMenuEvent(QContextMenuEvent *event)
