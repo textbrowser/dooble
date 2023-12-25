@@ -270,6 +270,7 @@ int main(int argc, char *argv[])
   QDir::setCurrent("/Applications/Dooble.d");
 #endif
   QString dooble_settings_path("");
+  dooble::s_application = new dooble_application(argc, argv);
 #if defined(Q_OS_WIN)
   auto bytes(qgetenv("DOOBLE_HOME").trimmed());
 
@@ -355,12 +356,6 @@ int main(int argc, char *argv[])
 #endif
 
   dooble_settings::prepare_web_engine_environment_variables();
-
-  /*
-  ** Create the application after environment variables are prepared.
-  */
-
-  dooble::s_application = new dooble_application(argc, argv);
 
   /*
   ** Create a splash screen.

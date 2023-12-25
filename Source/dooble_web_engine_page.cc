@@ -105,11 +105,6 @@ QStringList dooble_web_engine_page::chooseFiles
   return QWebEnginePage::chooseFiles(mode, old_files, accepted_mime_types);
 }
 
-QUrl dooble_web_engine_page::last_clicked_link(void) const
-{
-  return m_last_clicked_link;
-}
-
 QUrl dooble_web_engine_page::simplified_url(void) const
 {
   return dooble_ui_utilities::simplified_url(url());
@@ -127,7 +122,6 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
 						     bool is_main_frame)
 {
   emit loading(url);
-  m_last_clicked_link = url;
 
   if(dooble::s_accepted_or_blocked_domains->exception(url))
     return true;
@@ -295,11 +289,6 @@ bool dooble_web_engine_page::certificateError
     }
 
   return false;
-}
-
-void dooble_web_engine_page::reset_last_clicked_link(void)
-{
-  m_last_clicked_link = QUrl();
 }
 
 void dooble_web_engine_page::resize_certificate_error_widget(void)

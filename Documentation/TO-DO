@@ -124,6 +124,8 @@ Completed Items
 - Private-window decorations.
 - Provide immediate digest of current application in About.
 - Proxy details within Privacy.
+- QSqlDatabase complains (connect() and nullptr) if QApplication is not
+  present in Qt 6.
 - Qt 5.10.
 - Qt 6.2 LTS:
   Charts (Completed)
@@ -220,8 +222,6 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional Document Mode.
 - Prevent SQL query text overflow.
-- QSqlDatabase complains (connect() and nullptr) if QApplication is not
-  present in Qt 6.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.

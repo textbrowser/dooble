@@ -44,9 +44,7 @@ class dooble_web_engine_page: public QWebEnginePage
 			 QWidget *parent);
   dooble_web_engine_page(QWidget *parent);
   ~dooble_web_engine_page();
-  QUrl last_clicked_link(void) const;
   QUrl simplified_url(void) const;
-  void reset_last_clicked_link(void);
   void resize_certificate_error_widget(void);
 
  protected:
@@ -62,7 +60,6 @@ class dooble_web_engine_page: public QWebEnginePage
   QPointer<QWidget> m_certificate_error_widget;
   QString m_certificate_error;
   QUrl m_certificate_error_url;
-  QUrl m_last_clicked_link;
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
   QWidget *view(void) const;
 #endif
