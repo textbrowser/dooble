@@ -5,19 +5,19 @@
 cache()
 include(dooble-source.pro)
 
-exists(/usr/local/Cellar/qt/6.4.2_2/share/qt/libexec/qwebengine_convert_dict) {
-CONVERT_TOOL = "/usr/local/Cellar/qt/6.4.2_2/share/qt/libexec/qwebengine_convert_dict"
+exists(/opt/homebrew/Cellar/qt/6.6.1/share/qt/libexec/qwebengine_convert_dict) {
+CT = "/opt/homebrew/Cellar/qt/6.6.1/share/qt/libexec/qwebengine_convert_dict"
 } else {
 versionAtLeast(QT_VERSION, 6.0.0) {
 freebsd-* {
-CONVERT_TOOL = "/usr/local/libexec/qt6/qwebengine_convert_dict"
+CT = "/usr/local/libexec/qt6/qwebengine_convert_dict"
 } else:win32 {
-qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+qtPrepareTool(CT, qwebengine_convert_dict)
 } else {
-qtPrepareTool(CONVERT_TOOL, ../libexec/qwebengine_convert_dict)
+qtPrepareTool(CT, ../libexec/qwebengine_convert_dict)
 }
 } else {
-qtPrepareTool(CONVERT_TOOL, qwebengine_convert_dict)
+qtPrepareTool(CT, qwebengine_convert_dict)
 }
 }
 
@@ -188,7 +188,7 @@ dict.files += $$PWD/Dictionaries/$${base_path}.dic
 }
 
 dictoolbuild.CONFIG = no_link target_predeps
-dictoolbuild.commands = $${CONVERT_TOOL} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
+dictoolbuild.commands = $${CT} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
 dictoolbuild.depends = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.aff
 dictoolbuild.input = dict.files
 dictoolbuild.name = ${QMAKE_FILE_IN_BASE} Build
@@ -340,6 +340,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wl,-z,relro \
                           -fPIE \
                           -pie \
 }
+
 versionAtLeast(QT_VERSION, 6.0.0) {
 QMAKE_CXXFLAGS_RELEASE += -Wno-int-in-bool-context
 }
