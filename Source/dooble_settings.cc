@@ -1177,10 +1177,10 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
       	if(first_time)
       	  {
 #ifdef Q_OS_OS2
-	     /*
-	     ** On OS/2, single-process mode should be default for now
-	     ** due to stability issues with multi-process mode.
-	     */
+	    /*
+	    ** On OS/2, single-process mode should be default for now
+	    ** due to stability issues with multi-process mode.
+	    */
 
 	    query.exec
 	      ("INSERT OR IGNORE INTO dooble_web_engine_settings "
