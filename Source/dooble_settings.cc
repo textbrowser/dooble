@@ -1197,13 +1197,30 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	if(query.exec())
 	  while(query.next())
 	    {
+	      auto key(query.value(0).toString().trimmed());
 	      auto singular = s_web_engine_settings_environment.
-		value(query.value(0).toString().trimmed()) == "singular";
+		value(key) == "singular";
 
 	      if(query.value(1).toBool() == false && singular)
-		continue;
+		{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
+		  if(key == "--disable-reading-from-canvas")
+		    QWebEngineSettings::defaultSettings()->setAttribute
+		      (QWebEngineSettings::ReadingFromCanvasEnabled, false);
+#endif
 
-	      string.append(query.value(0).toString().trimmed());
+		  continue;
+		}
+	      else
+		{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
+		  if(key == "--disable-reading-from-canvas")
+		    QWebEngineSettings::defaultSettings()->setAttribute
+		      (QWebEngineSettings::ReadingFromCanvasEnabled, true);
+#endif
+		}
+
+	      string.append(key);
 
 	      if(!singular)
 		{
