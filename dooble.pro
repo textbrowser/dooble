@@ -333,8 +333,9 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -pedantic \
                           -std=c++17
 os2 {
-# -fstack-protector requires manual lib spec.
 LIBS += -lssp
+QMAKE_CXXFLAGS_RELEASE += -Wstrict-overflow=1
+QMAKE_CXXFLAGS_RELEASE -= -Wstrict-overflow=5
 } else {
 QMAKE_CXXFLAGS_RELEASE += -Wl,-z,relro \
                           -fPIE \
