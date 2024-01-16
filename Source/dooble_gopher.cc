@@ -39,7 +39,7 @@ dooble_gopher::dooble_gopher(QObject *parent):
 
 void dooble_gopher::requestStarted(QWebEngineUrlRequestJob *request)
 {
-  if(m_request == request || !request)
+  if(!request || m_request == request)
     return;
 
   m_request = request;
