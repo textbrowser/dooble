@@ -25,6 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QBuffer>
+#include <QFileInfo>
+
 #include "dooble_jar.h"
 #include "dooble_web_engine_view.h"
 
@@ -71,6 +74,10 @@ void dooble_jar::slot_finished(const QByteArray &bytes)
 	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
       else
 	{
+	  auto buffer = new QBuffer(m_request);
+
+	  buffer->setData(bytes);
+	  m_request->reply("text/html", buffer);
 	}
     }
 }
@@ -80,29 +87,54 @@ dooble_jar_implementation::dooble_jar_implementation
  dooble_web_engine_view *web_engine_view,
  QObject *parent):QProcess(parent)
 {
-  m_url = url;
-  m_web_engine_view = web_engine_view;
-  m_write_timer.setSingleShot(true);
-  connect(&m_write_timer,
-	  SIGNAL(timeout(void)),
-	  this,
-	  SLOT(slot_write_timeout(void)));
   connect(this,
-	  SIGNAL(readyRead(void)),
+	  SIGNAL(finished(int, QProcess::ExitStatus)),
+	  this,
+	  SLOT(slot_finished(int, QProcess::ExitStatus)));
+  connect(this,
+	  SIGNAL(readyReadStandardOutput(void)),
 	  this,
 	  SLOT(slot_ready_read(void)));
+  m_url = url;
+  m_web_engine_view = web_engine_view;
+  start("jar", QStringList() << "tf" << m_url.path());
 }
 
 dooble_jar_implementation::~dooble_jar_implementation()
 {
 }
 
+void dooble_jar_implementation::slot_finished
+(int exit_code, QProcess::ExitStatus exit_status)
+{
+  Q_UNUSED(exit_code);
+  Q_UNUSED(exit_status);
+  m_html = "<html>\n";
+  m_html += "<body bgcolor=\"white\">\n";
+  m_html += "<head>\n";
+  m_html += "</head>\n";
+  m_html += "<title>";
+  m_html += m_url.path().toUtf8();
+  m_html += "</title>\n";
+
+  if(QFileInfo(m_url.path()).isReadable())
+    {
+      foreach(const auto &i, m_content.split('\n'))
+	if(i.trimmed().size() > 0)
+	  {
+	    m_html += i;
+	    m_html += "<br>\n";
+	  }
+    }
+  else
+    m_html += tr("The file %1 is not readable.\n").arg(m_url.path()).toUtf8();
+
+  m_html += "</html>";
+  emit finished(m_html);
+}
+
 void dooble_jar_implementation::slot_ready_read(void)
 {
   while(bytesAvailable() > 0)
     m_content.append(readAll());
-}
-
-void dooble_jar_implementation::slot_write_timeout(void)
-{
 }

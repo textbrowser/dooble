@@ -68,12 +68,11 @@ class dooble_jar_implementation: public QProcess
   QByteArray m_content;
   QByteArray m_html;
   QPointer<dooble_web_engine_view> m_web_engine_view;
-  QTimer m_write_timer;
   QUrl m_url;
 
  private slots:
+  void slot_finished(int exit_code, QProcess::ExitStatus exit_status);
   void slot_ready_read(void);
-  void slot_write_timeout(void);
 
  signals:
   void error(QWebEngineUrlRequestJob::Error error);
