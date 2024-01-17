@@ -97,7 +97,7 @@ dooble_jar_implementation::dooble_jar_implementation
 	  SLOT(slot_ready_read(void)));
   m_url = url;
   m_web_engine_view = web_engine_view;
-  start("jar", QStringList() << "tf" << m_url.path());
+  start("jar", QStringList() << "-f" << m_url.path() << "-t" << "-v");
 }
 
 dooble_jar_implementation::~dooble_jar_implementation()
@@ -127,7 +127,7 @@ void dooble_jar_implementation::slot_finished
 	  }
     }
   else
-    m_html += tr("The file %1 is not readable.\n").arg(m_url.path()).toUtf8();
+    m_html += "The file " + m_url.path().toUtf8() + " is not readable.\n";
 
   m_html += "</html>";
   emit finished(m_html);
