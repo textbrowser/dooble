@@ -110,26 +110,40 @@ void dooble_jar_implementation::slot_finished
   Q_UNUSED(exit_code);
   Q_UNUSED(exit_status);
   m_html = "<html>\n";
-  m_html += "<body bgcolor=\"white\">\n";
   m_html += "<head>\n";
+  m_html += "<style>\n";
+  m_html += "table {border-spacing: 0px;}\n";
+  m_html += "</style>\n";
   m_html += "</head>\n";
+  m_html += "<body bgcolor=\"white\" style=\"font-family: monospace\">\n";
   m_html += "<title>";
   m_html += m_url.path().toUtf8();
   m_html += "</title>\n";
 
   if(QFileInfo(m_url.path()).isReadable())
     {
+      m_html += "<table>\n";
+      m_html += "<tr><th>Size</th><th>Date</th><th>File</th></tr>\n";
+
       foreach(const auto &i, m_content.split('\n'))
 	if(i.trimmed().size() > 0)
 	  {
-	    m_html += i;
-	    m_html += "<br>\n";
+	    m_html += "<tr>\n";
+
+	    auto list(QString(i).trimmed().split(' '));
+
+	    m_html += "<td>" + list.value(0).toUtf8() + "</td>\n";
+	    m_html += "<td>" + list.mid(1, 6).join(' ').toUtf8() + "</td>\n";
+	    m_html += "<td>" + list.value(list.size() - 1).toUtf8() + "</td>\n";
+	    m_html += "</tr>\n";
 	  }
+
+      m_html += "</table>\n";
     }
   else
     m_html += "The file " + m_url.path().toUtf8() + " is not readable.\n";
 
-  m_html += "</html>";
+  m_html += "</body></html>";
   emit finished(m_html);
 }
 
