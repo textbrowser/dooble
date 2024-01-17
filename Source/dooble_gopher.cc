@@ -139,11 +139,11 @@ dooble_gopher_implementation::dooble_gopher_implementation
  QObject *parent):QTcpSocket(parent)
 {
   m_content_type_supported = true;
-  m_web_engine_view = web_engine_view;
   m_is_image = false;
   m_item_type = 0;
   m_seven_count = 0;
   m_url = url;
+  m_web_engine_view = web_engine_view;
 
   if(m_url.port() == -1)
     m_url.setPort(70);

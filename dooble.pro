@@ -230,7 +230,7 @@ DEFINES         += DOOBLE_MMAN_PRESENT
 }
 
 CONFIG		+= qt release warn_on
-DEFINES         += QT_DEPRECATED_WARNINGS
+DEFINES         += DOOBLE_REGISTER_JAR_SCHEME QT_DEPRECATED_WARNINGS
 LANGUAGE	= C++
 QT		+= concurrent \
                    gui \

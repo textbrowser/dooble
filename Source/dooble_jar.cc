@@ -80,8 +80,8 @@ dooble_jar_implementation::dooble_jar_implementation
  dooble_web_engine_view *web_engine_view,
  QObject *parent):QProcess(parent)
 {
-  m_web_engine_view = web_engine_view;
   m_url = url;
+  m_web_engine_view = web_engine_view;
   m_write_timer.setSingleShot(true);
   connect(&m_write_timer,
 	  SIGNAL(timeout(void)),
