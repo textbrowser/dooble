@@ -130,11 +130,14 @@ void dooble_jar_implementation::slot_finished
 	  {
 	    m_html += "<tr>\n";
 
+	    QString file("");
 	    auto list(QString(i).trimmed().split(' '));
 
+	    file = QString("<a href=\"jar://%1?%2\">%2</a>").
+	      arg(m_url.path()).arg(list.value(list.size() - 1));
 	    m_html += "<td>" + list.value(0).toUtf8() + "</td>\n";
 	    m_html += "<td>" + list.mid(1, 6).join(' ').toUtf8() + "</td>\n";
-	    m_html += "<td>" + list.value(list.size() - 1).toUtf8() + "</td>\n";
+	    m_html += "<td>" + file.toUtf8() + "</td>\n";
 	    m_html += "</tr>\n";
 	  }
 
