@@ -37,6 +37,7 @@
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_gopher.h"
+#include "dooble_jar.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_web_engine_page.h"
 #include "dooble_web_engine_view.h"
@@ -45,6 +46,7 @@ dooble_web_engine_view::dooble_web_engine_view
 (QWebEngineProfile *web_engine_profile, QWidget *parent):QWebEngineView(parent)
 {
   dooble::s_gopher->set_web_engine_view(this);
+  dooble::s_jar->set_web_engine_view(this);
   m_dialog_requests_timer.setInterval(100);
   m_dialog_requests_timer.setSingleShot(true);
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
@@ -113,6 +115,9 @@ dooble_web_engine_view::dooble_web_engine_view
 
   if(!m_page->profile()->urlSchemeHandler("gopher"))
     m_page->profile()->installUrlSchemeHandler("gopher", dooble::s_gopher);
+
+  if(!m_page->profile()->urlSchemeHandler("jar"))
+    m_page->profile()->installUrlSchemeHandler("jar", dooble::s_jar);
 
   setPage(m_page);
 }
@@ -570,6 +575,7 @@ void dooble_web_engine_view::slot_load_progress(int progress)
 void dooble_web_engine_view::slot_load_started(void)
 {
   dooble::s_gopher->set_web_engine_view(this);
+  dooble::s_jar->set_web_engine_view(this);
 }
 
 void dooble_web_engine_view::slot_open_link_in_current_page(void)

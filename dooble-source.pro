@@ -48,6 +48,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_history.h \
                   Source/dooble_history_table_widget.h \
                   Source/dooble_history_window.h \
+                  Source/dooble_jar.h \
                   Source/dooble_javascript.h \
                   Source/dooble_main_window.h \
                   Source/dooble_page.h \
@@ -101,6 +102,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_history_table_widget.cc \
                   Source/dooble_history_window.cc \
                   Source/dooble_hmac.cc \
+                  Source/dooble_jar.cc \
                   Source/dooble_javascript.cc \
                   Source/dooble_main.cc \
                   Source/dooble_page.cc \

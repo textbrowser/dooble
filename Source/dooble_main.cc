@@ -32,7 +32,8 @@
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
-#ifdef DOOBLE_REGISTER_GOPHER_SCHEME
+#if defined(DOOBLE_REGISTER_GOPHER_SCHEME) ||	\
+    defined(DOOBLE_REGISTER_JAR_SCHEME)
 #include <QWebEngineUrlScheme>
 #endif
 #endif
@@ -263,6 +264,13 @@ int main(int argc, char *argv[])
   scheme.setDefaultPort(70);
   scheme.setFlags(QWebEngineUrlScheme::ViewSourceAllowed);
   scheme.setSyntax(QWebEngineUrlScheme::Syntax::HostAndPort);
+  QWebEngineUrlScheme::registerScheme(scheme);
+#endif
+#ifdef DOOBLE_REGISTER_JAR_SCHEME
+  QWebEngineUrlScheme scheme("jar");
+
+  scheme.setFlags(QWebEngineUrlScheme::ViewSourceAllowed);
+  scheme.setSyntax(QWebEngineUrlScheme::Syntax::Path);
   QWebEngineUrlScheme::registerScheme(scheme);
 #endif
 #endif

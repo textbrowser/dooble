@@ -173,6 +173,7 @@ bool dooble_ui_utilities::allowed_url_scheme(const QUrl &url)
     scheme == "gopher" ||
     scheme == "http" ||
     scheme == "https" ||
+    scheme == "jar" ||
     scheme == "qrc";
 }
 

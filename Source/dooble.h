@@ -64,6 +64,7 @@ class dooble_favorites_popup;
 class dooble_gopher;
 class dooble_history;
 class dooble_history_window;
+class dooble_jar;
 class dooble_page;
 class dooble_popup_menu;
 class dooble_search_engines_popup;
@@ -108,6 +109,7 @@ class dooble: public QMainWindow
   static QPointer<dooble_history> s_history;
   static QPointer<dooble_history_window> s_history_popup;
   static QPointer<dooble_history_window> s_history_window;
+  static QPointer<dooble_jar> s_jar;
   static QPointer<dooble_search_engines_popup> s_search_engines_window;
   static QPointer<dooble_settings> s_settings;
   static QPointer<dooble_style_sheet> s_style_sheet;

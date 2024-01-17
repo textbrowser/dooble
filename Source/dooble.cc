@@ -55,6 +55,7 @@
 #include "dooble_history.h"
 #include "dooble_history_window.h"
 #include "dooble_hmac.h"
+#include "dooble_jar.h"
 #include "dooble_page.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_popup_menu.h"
@@ -88,6 +89,7 @@ QPointer<dooble_favorites_popup> dooble::s_favorites_window = nullptr;
 QPointer<dooble_gopher> dooble::s_gopher = nullptr;
 QPointer<dooble_history_window> dooble::s_history_popup = nullptr;
 QPointer<dooble_history_window> dooble::s_history_window = nullptr;
+QPointer<dooble_jar> dooble::s_jar = nullptr;
 QPointer<dooble_search_engines_popup> dooble::s_search_engines_window = nullptr;
 QPointer<dooble_settings> dooble::s_settings = nullptr;
 QPointer<dooble_style_sheet> dooble::s_style_sheet = nullptr;
@@ -1067,6 +1069,9 @@ void dooble::initialize_static_members(void)
 	      s_history_popup,
 	      SLOT(slot_delete_rows(bool, const QModelIndexList &)));
     }
+
+  if(!s_jar)
+    s_jar = new dooble_jar(nullptr);
 
   if(!s_search_engines_window)
     {

@@ -26,3 +26,7 @@ Enabled if the QtCharts module is available.
 DOOBLE_REGISTER_GOPHER_SCHEME
 
 Force registration of Gopher scheme.
+
+DOOBLE_REGISTER_JAR_SCHEME
+
+Force registration of Jar scheme.
