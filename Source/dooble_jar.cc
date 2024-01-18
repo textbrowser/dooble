@@ -142,7 +142,7 @@ void dooble_jar_implementation::slot_finished
   m_html = "<html>\n";
   m_html += "<head>\n";
   m_html += "<style>\n";
-  m_html += "table {border-spacing: 0px;}\n";
+  m_html += "td {padding-left: 0px; padding-right: 10px}\n";
   m_html += "</style>\n";
   m_html += "</head>\n";
   m_html += "<body bgcolor=\"white\" style=\"font-family: monospace\">\n";
