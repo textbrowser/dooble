@@ -97,7 +97,12 @@ dooble_jar_implementation::dooble_jar_implementation
 	  SLOT(slot_ready_read(void)));
   m_url = url;
   m_web_engine_view = web_engine_view;
-  start("jar", QStringList() << "-f" << m_url.path() << "-t" << "-v");
+
+  if(m_url.hasQuery())
+    start
+      ("jar", QStringList() << "-f" << m_url.path() << "-x" << m_url.query());
+  else
+    start("jar", QStringList() << "-f" << m_url.path() << "-t" << "-v");
 }
 
 dooble_jar_implementation::~dooble_jar_implementation()
