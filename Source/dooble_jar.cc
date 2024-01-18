@@ -78,15 +78,19 @@ void dooble_jar::slot_finished(const QByteArray &bytes, const bool file)
 	{
 	  if(file)
 	    {
-	      QUrl url;
+	      if(m_web_engine_view)
+		{
+		  QUrl url;
 
-	      url.setPath
-		(QStandardPaths::
-		 standardLocations(QStandardPaths::DesktopLocation).value(0) +
-		 "/Dooble-Jar/" +
-		 bytes);
-	      url.setScheme("file");
-	      m_web_engine_view->setUrl(url);
+		  url.setPath
+		    (QStandardPaths::
+		     standardLocations(QStandardPaths::DesktopLocation).
+		     value(0) +
+		     "/Dooble-Jar/" +
+		     bytes);
+		  url.setScheme("file");
+		  m_web_engine_view->setUrl(url);
+		}
 	    }
 	  else
 	    {
