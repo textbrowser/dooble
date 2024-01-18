@@ -26,6 +26,7 @@
 */
 
 #include <QBuffer>
+#include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
 
@@ -79,7 +80,13 @@ void dooble_jar::slot_finished(const QByteArray &bytes, const bool file)
 	    {
 	      QUrl url;
 
-	      m_request->redirect(url);
+	      url.setPath
+		(QStandardPaths::
+		 standardLocations(QStandardPaths::DesktopLocation).value(0) +
+		 "/Dooble-Jar/" +
+		 bytes);
+	      url.setScheme("file");
+	      m_web_engine_view->setUrl(url);
 	    }
 	  else
 	    {
@@ -97,6 +104,11 @@ dooble_jar_implementation::dooble_jar_implementation
  dooble_web_engine_view *web_engine_view,
  QObject *parent):QProcess(parent)
 {
+  QDir().mkdir
+    (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).
+     value(0) +
+     QDir::separator() +
+     "Dooble-Jar");
   connect(this,
 	  SIGNAL(finished(int, QProcess::ExitStatus)),
 	  this,
@@ -109,7 +121,9 @@ dooble_jar_implementation::dooble_jar_implementation
   m_web_engine_view = web_engine_view;
   setWorkingDirectory
     (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).
-     value(0));
+     value(0) +
+     QDir::separator() +
+     "Dooble-Jar");
 
   if(m_url.hasQuery())
     start
