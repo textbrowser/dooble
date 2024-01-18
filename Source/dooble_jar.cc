@@ -27,6 +27,7 @@
 
 #include <QBuffer>
 #include <QFileInfo>
+#include <QStandardPaths>
 
 #include "dooble_jar.h"
 #include "dooble_web_engine_view.h"
@@ -50,9 +51,9 @@ void dooble_jar::requestStarted(QWebEngineUrlRequestJob *request)
 	  this,
 	  SLOT(slot_error(QWebEngineUrlRequestJob::Error)));
   connect(jar_implementation,
-	  SIGNAL(finished(const QByteArray &)),
+	  SIGNAL(finished(const QByteArray &, const bool)),
 	  this,
-	  SLOT(slot_finished(const QByteArray &)));
+	  SLOT(slot_finished(const QByteArray &, const bool)));
 }
 
 void dooble_jar::set_web_engine_view(dooble_web_engine_view *web_engine_view)
@@ -66,7 +67,7 @@ void dooble_jar::slot_error(QWebEngineUrlRequestJob::Error error)
     m_request->fail(error);
 }
 
-void dooble_jar::slot_finished(const QByteArray &bytes)
+void dooble_jar::slot_finished(const QByteArray &bytes, const bool file)
 {
   if(m_request)
     {
@@ -74,10 +75,19 @@ void dooble_jar::slot_finished(const QByteArray &bytes)
 	m_request->fail(QWebEngineUrlRequestJob::RequestFailed);
       else
 	{
-	  auto buffer = new QBuffer(m_request);
+	  if(file)
+	    {
+	      QUrl url;
 
-	  buffer->setData(bytes);
-	  m_request->reply("text/html", buffer);
+	      m_request->redirect(url);
+	    }
+	  else
+	    {
+	      auto buffer = new QBuffer(m_request);
+
+	      buffer->setData(bytes);
+	      m_request->reply("text/html", buffer);
+	    }
 	}
     }
 }
@@ -97,6 +107,9 @@ dooble_jar_implementation::dooble_jar_implementation
 	  SLOT(slot_ready_read(void)));
   m_url = url;
   m_web_engine_view = web_engine_view;
+  setWorkingDirectory
+    (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).
+     value(0));
 
   if(m_url.hasQuery())
     start
@@ -107,6 +120,7 @@ dooble_jar_implementation::dooble_jar_implementation
 
 dooble_jar_implementation::~dooble_jar_implementation()
 {
+  kill();
 }
 
 void dooble_jar_implementation::slot_finished
@@ -114,6 +128,17 @@ void dooble_jar_implementation::slot_finished
 {
   Q_UNUSED(exit_code);
   Q_UNUSED(exit_status);
+
+  if(m_url.hasQuery())
+    {
+      /*
+      ** Redirect the request.
+      */
+
+      emit finished(m_url.query().toUtf8(), true);
+      return;
+    }
+
   m_html = "<html>\n";
   m_html += "<head>\n";
   m_html += "<style>\n";
@@ -152,7 +177,7 @@ void dooble_jar_implementation::slot_finished
     m_html += "The file " + m_url.path().toUtf8() + " is not readable.\n";
 
   m_html += "</body></html>";
-  emit finished(m_html);
+  emit finished(m_html, false);
 }
 
 void dooble_jar_implementation::slot_ready_read(void)

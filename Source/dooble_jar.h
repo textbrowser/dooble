@@ -51,7 +51,7 @@ class dooble_jar: public QWebEngineUrlSchemeHandler
 
  private slots:
   void slot_error(QWebEngineUrlRequestJob::Error error);
-  void slot_finished(const QByteArray &bytes);
+  void slot_finished(const QByteArray &bytes, const bool file);
 };
 
 class dooble_jar_implementation: public QProcess
@@ -76,7 +76,7 @@ class dooble_jar_implementation: public QProcess
 
  signals:
   void error(QWebEngineUrlRequestJob::Error error);
-  void finished(const QByteArray &bytes);
+  void finished(const QByteArray &bytes, const bool file);
 };
 
 #endif
