@@ -2575,15 +2575,15 @@ void dooble_page::slot_load_page(void)
 
       if(url.isLocalFile())
 	{
-	  QDir dir(url.toLocalFile());
-	  auto current(dir.absolutePath());
+	  QDir directory(url.toLocalFile());
+	  auto current(directory.absolutePath());
 
 	  do
 	    {
-	      if(!dir.isRoot())
-		current = dir.absolutePath();
+	      if(!directory.isRoot())
+		current = directory.absolutePath();
 	    }
-	  while(dir.cdUp());
+	  while(directory.cdUp());
 
 	  url = QUrl::fromUserInput(current);
 	  url.setScheme(scheme);

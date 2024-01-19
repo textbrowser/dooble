@@ -69,6 +69,7 @@ class dooble_jar_implementation: public QProcess
   QByteArray m_html;
   QPointer<dooble_web_engine_view> m_web_engine_view;
   QUrl m_url;
+  void list_directory_contents(void);
 
  private slots:
   void slot_finished(int exit_code, QProcess::ExitStatus exit_status);

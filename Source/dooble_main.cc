@@ -287,28 +287,30 @@ int main(int argc, char *argv[])
       QFileInfo file_info;
       QString dooble_directory(".dooble");
       QString username(qgetenv("USERNAME").mid(0, 32).trimmed().constData());
-      auto home_dir(QDir::current());
+      auto home_directory(QDir::current());
 
-      file_info = QFileInfo(home_dir.absolutePath());
+      file_info = QFileInfo(home_directory.absolutePath());
 
       if(!(file_info.isReadable() && file_info.isWritable()))
-	home_dir = QDir::home();
+	home_directory = QDir::home();
 
       if(username.isEmpty())
-	home_dir.mkdir(dooble_directory);
+	home_directory.mkdir(dooble_directory);
       else
-	home_dir.mkpath(username + QDir::separator() + dooble_directory);
+	home_directory.mkpath(username + QDir::separator() + dooble_directory);
 
       if(username.isEmpty())
 	dooble_settings::set_setting
 	  ("home_path",
 	   dooble_settings_path =
-	   home_dir.absolutePath() + QDir::separator() + dooble_directory);
+	   home_directory.absolutePath() +
+	   QDir::separator() +
+	   dooble_directory);
       else
 	dooble_settings::set_setting
 	  ("home_path",
 	   dooble_settings_path =
-	   home_dir.absolutePath() +
+	   home_directory.absolutePath() +
 	   QDir::separator() +
 	   username +
 	   QDir::separator() +
@@ -331,28 +333,30 @@ int main(int argc, char *argv[])
 
       if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
 	{
-	  auto home_dir(QDir::home());
+	  auto home_directory(QDir::home());
 
-	  home_dir.mkdir(dooble_directory);
+	  home_directory.mkdir(dooble_directory);
 	  dooble_settings::set_setting
 	    ("home_path",
 	     dooble_settings_path =
-	     home_dir.absolutePath() + QDir::separator() + dooble_directory);
+	     home_directory.absolutePath() +
+	     QDir::separator() +
+	     dooble_directory);
 	}
       else
 	{
-	  QDir home_dir;
+	  QDir home_directory;
 
 	  if(!xdg_config_home.isEmpty())
-	    home_dir = QDir(xdg_config_home);
+	    home_directory = QDir(xdg_config_home);
 	  else
-	    home_dir = QDir(xdg_data_home);
+	    home_directory = QDir(xdg_data_home);
 
-	  home_dir.mkdir("dooble");
+	  home_directory.mkdir("dooble");
 	  dooble_settings::set_setting
 	    ("home_path",
 	     dooble_settings_path =
-	     home_dir.absolutePath() + QDir::separator() + "dooble");
+	     home_directory.absolutePath() + QDir::separator() + "dooble");
 	}
     }
   else

@@ -141,13 +141,43 @@ dooble_jar_implementation::~dooble_jar_implementation()
   kill();
 }
 
+void dooble_jar_implementation::list_directory_contents(void)
+{
+  QDir directory(m_url.path());
+  auto list(directory.entryInfoList(QDir::NoFilter, QDir::Name));
+
+  m_html = "<html>\n";
+  m_html += "<head>\n";
+  m_html += "</head>\n";
+  m_html += "<body bgcolor=\"white\" style=\"font-family: monospace\">\n";
+  m_html += "<title>";
+  m_html += m_url.path().toUtf8();
+  m_html += "</title>\n";
+
+  foreach(const auto &i, list)
+    {
+      QString string("");
+
+      string = QString("<a href=\"jar://%1\">%1</a>").arg(i.absoluteFilePath());
+      m_html += string.toUtf8() + "<br>\n";
+    }
+
+  m_html += "</body></html>";
+  emit finished(m_html, false);
+}
+
 void dooble_jar_implementation::slot_finished
 (int exit_code, QProcess::ExitStatus exit_status)
 {
   Q_UNUSED(exit_code);
   Q_UNUSED(exit_status);
 
-  if(m_url.hasQuery())
+  if(QFileInfo(m_url.path()).isDir())
+    {
+      list_directory_contents();
+      return;
+    }
+  else if(m_url.hasQuery())
     {
       /*
       ** Redirect the request.
