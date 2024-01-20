@@ -143,25 +143,40 @@ dooble_jar_implementation::~dooble_jar_implementation()
 
 void dooble_jar_implementation::list_directory_contents(void)
 {
-  QDir directory(m_url.path());
-  auto list(directory.entryInfoList(QDir::NoFilter, QDir::Name));
-
   m_html = "<html>\n";
   m_html += "<head>\n";
+  m_html += "<style>\n";
+  m_html += "td {padding-left: 0px; padding-right: 10px}\n";
+  m_html += "</style>\n";
   m_html += "</head>\n";
   m_html += "<body bgcolor=\"white\" style=\"font-family: monospace\">\n";
   m_html += "<title>";
   m_html += m_url.path().toUtf8();
   m_html += "</title>\n";
+  m_html += "<table>\n";
+  m_html += "<tr><th>Size</th><th>Date Modified</th><th>File</th></tr>\n";
 
-  foreach(const auto &i, list)
+  QDir directory(m_url.path());
+
+  foreach(const auto &i,
+	  directory.entryInfoList(QDir::Dirs | QDir::Files | QDir::Readable,
+				  QDir::Name))
     {
-      QString string("");
+      m_html += "<tr>\n";
 
-      string = QString("<a href=\"jar://%1\">%1</a>").arg(i.absoluteFilePath());
-      m_html += string.toUtf8() + "<br>\n";
+      QString file("");
+
+      file = QString("<a href=\"jar://%1\">%1</a>").
+	arg(i.absoluteFilePath());
+      m_html += "<td>" + QByteArray::number(i.size()) + "</td>\n";
+      m_html += "<td>" +
+	i.lastModified().toString(Qt::ISODate).toUtf8() +
+	"</td>\n";
+      m_html += "<td>" + file.toUtf8() + "</td>\n";
+      m_html += "</tr>\n";
     }
 
+  m_html += "</table>\n";
   m_html += "</body></html>";
   emit finished(m_html, false);
 }
