@@ -129,7 +129,9 @@ dooble_jar_implementation::dooble_jar_implementation
      QDir::separator() +
      "Dooble-Jar");
 
-  if(m_url.hasQuery())
+  if(QFileInfo(m_url.path()).isDir())
+    start("jar", QStringList() << "--version");
+  else if(m_url.hasQuery())
     start
       ("jar", QStringList() << "-f" << m_url.path() << "-x" << m_url.query());
   else
