@@ -2985,23 +2985,40 @@ void dooble::slot_about_to_show_history_menu(void)
       }
   }
 #endif
-  m_ui.menu_history->addAction
+  auto action = m_ui.menu_history->addAction
     (tr("&Clear Browsing History"),
      this,
      SLOT(slot_clear_history(void)));
-  m_ui.menu_history->addAction
+
+  connect(action,
+	  SIGNAL(hovered(void)),
+	  this,
+	  SLOT(slot_history_action_hovered(void)));
+  action = m_ui.menu_history->addAction
     (QIcon::fromTheme(use_material_icons + "deep-history",
 		      QIcon(QString(":/%1/36/history.png").arg(icon_set))),
      dooble_settings::setting("pin_history_window").toBool() ?
      tr("&History") : tr("&History..."),
      this,
-     SLOT(slot_show_history(void)))->setShortcut(QKeySequence(tr("Ctrl+H")));
+     SLOT(slot_show_history(void)));
+  action->setShortcut(QKeySequence(tr("Ctrl+H")));
+  connect(action,
+	  SIGNAL(hovered(void)),
+	  this,
+	  SLOT(slot_history_action_hovered(void)));
 
   if(!list.isEmpty())
     m_ui.menu_history->addSeparator();
 
   foreach(auto i, list)
     {
+      if(!i)
+	continue;
+
+      connect(i,
+	      SIGNAL(hovered(void)),
+	      this,
+	      SLOT(slot_history_action_hovered(void)));
       connect(i,
 	      SIGNAL(triggered(void)),
 	      this,
@@ -3832,6 +3849,19 @@ void dooble::slot_floating_digital_dialog_timeout(void)
   font = m_floating_digital_clock_ui.date->font();
   font.setPointSize(15);
   m_floating_digital_clock_ui.date->setFont(font);
+}
+
+void dooble::slot_history_action_hovered(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(!action)
+    return;
+
+  auto page = current_page();
+
+  if(page && page->view() && page->view()->page())
+    emit page->view()->page()->linkHovered(action->data().toString());
 }
 
 void dooble::slot_history_action_triggered(void)

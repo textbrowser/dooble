@@ -239,6 +239,7 @@ class dooble: public QMainWindow
 #endif
   void slot_export_as_png(void);
   void slot_floating_digital_dialog_timeout(void);
+  void slot_history_action_hovered(void);
   void slot_history_action_triggered(void);
   void slot_history_favorites_populated(void);
   void slot_icon_changed(const QIcon &icon);
