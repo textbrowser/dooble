@@ -130,12 +130,12 @@ dooble_jar_implementation::dooble_jar_implementation
      "Dooble-Jar");
 
   if(QFileInfo(m_url.path()).isDir())
-    start("jar", QStringList() << "--version");
+    start("unzip", QStringList() << "-v");
   else if(m_url.hasQuery())
     start
       ("jar", QStringList() << "-f" << m_url.path() << "-x" << m_url.query());
   else
-    start("jar", QStringList() << "-f" << m_url.path() << "-t" << "-v");
+    start("unzip", QStringList() << "-v" << m_url.path());
 }
 
 dooble_jar_implementation::~dooble_jar_implementation()
@@ -161,7 +161,7 @@ void dooble_jar_implementation::list_directory_contents(void)
   QDir directory(m_url.path());
 
   foreach(const auto &i,
-	  directory.entryInfoList(QDir::Dirs | QDir::Files | QDir::Readable,
+	  directory.entryInfoList(QDir::AllDirs | QDir::Files | QDir::Readable,
 				  QDir::Name))
     {
       m_html += "<tr>\n";
@@ -217,24 +217,55 @@ void dooble_jar_implementation::slot_finished
 
   if(QFileInfo(m_url.path()).isReadable())
     {
+      /*
+      ** Archive: File
+      ** Length Method Size Cmpr Date Time CRC-32 Name
+      ** ------ ------ ---- ---- ---- ---- ------ ----
+      ** ...
+      ** ------ ------ ---- ---- ---- ---- ------ ----
+      ** Total         Total %                    Count
+      */
+
+      auto output(m_content.split('\n'));
+
       m_html += "<table>\n";
-      m_html += "<tr><th>Size</th><th>Date</th><th>File</th></tr>\n";
+      m_html += "<tr>\n";
 
-      foreach(const auto &i, m_content.split('\n'))
+      foreach(const auto &i, output.value(1).split(' '))
 	if(i.trimmed().size() > 0)
-	  {
-	    m_html += "<tr>\n";
+	  m_html += "<th>" + i.trimmed() + "</th>\n";
 
-	    QString file("");
-	    auto list(QString(i).trimmed().split(' '));
+      m_html += "</tr>\n";
 
-	    file = QString("<a href=\"jar://%1?%2\">%2</a>").
-	      arg(m_url.path()).arg(list.value(list.size() - 1));
-	    m_html += "<td>" + list.value(0).toUtf8() + "</td>\n";
-	    m_html += "<td>" + list.mid(1, 6).join(' ').toUtf8() + "</td>\n";
-	    m_html += "<td>" + file.toUtf8() + "</td>\n";
-	    m_html += "</tr>\n";
-	  }
+      for(int i = 3; i < output.size() - 3; i++)
+	{
+	  auto bytes(output.at(i).trimmed());
+
+	  if(bytes.size() > 0)
+	    {
+	      m_html += "<tr>\n";
+
+	      auto list(bytes.split(' '));
+
+	      for(int j = 0; j < list.size(); j++)
+		if(list.at(j).trimmed().size() > 0)
+		  {
+		    if(j == list.size() - 1)
+		      {
+			QString file("");
+
+			file = QString("<a href=\"zip://%1?%2\">%2</a>").
+			  arg(m_url.path()).arg(list.value(j).constData());
+
+			m_html += "<td>" + file.toUtf8() + "</td>\n";
+		      }
+		    else
+		      m_html += "<td>" + list.at(j).trimmed() + "</td>\n";
+		  }
+
+	      m_html += "</tr>\n";
+	    }
+	}
 
       m_html += "</table>\n";
     }
