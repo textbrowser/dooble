@@ -1055,7 +1055,7 @@ void dooble_settings::prepare_icons(void)
 		      QIcon(QString(":/%1/64/windows.png").arg(icon_set))));
 
   QSize size(0, 0);
-  static auto list(QList<QToolButton *> () << m_ui.cache
+  static auto list(QList<QPushButton *> () << m_ui.cache
 		                           << m_ui.display
 		                           << m_ui.history
 		                           << m_ui.privacy
@@ -1063,8 +1063,13 @@ void dooble_settings::prepare_icons(void)
 		                           << m_ui.windows);
 
   foreach(auto i, list)
-    if(i->height() >= size.height() || i->width() >= size.width())
-      size = i->size();
+    {
+      if(i->height() >= size.height() || i->width() >= size.width())
+	size = i->size();
+
+      if(i->styleSheet().isEmpty())
+	i->setStyleSheet("QPushButton {padding: 10px; text-align: left;}");
+    }
 
   size.setHeight(size.height() + 10);
   size.setWidth(size.width() + 10);
@@ -1862,7 +1867,7 @@ void dooble_settings::restore(bool read_database)
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 #endif
   {
-    static auto list(QList<QToolButton *> () << m_ui.cache
+    static auto list(QList<QPushButton *> () << m_ui.cache
 		                             << m_ui.display
 		                             << m_ui.history
 		                             << m_ui.privacy
@@ -2762,12 +2767,12 @@ void dooble_settings::slot_new_javascript_block_popup_exception(void)
 
 void dooble_settings::slot_page_button_clicked(void)
 {
-  auto tool_button = qobject_cast<QToolButton *> (sender());
+  auto tool_button = qobject_cast<QPushButton *> (sender());
 
   if(!tool_button)
     return;
 
-  static auto list(QList<QToolButton *> () << m_ui.cache
+  static auto list(QList<QPushButton *> () << m_ui.cache
 		                           << m_ui.display
 		                           << m_ui.history
 		                           << m_ui.privacy

@@ -26,6 +26,7 @@
 */
 
 #include <QMimeData>
+#include <QToolButton>
 #include <QtMath>
 
 #include "dooble.h"

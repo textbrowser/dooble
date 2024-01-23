@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QToolButton>
+
 #include "dooble.h"
 #include "dooble_search_widget.h"
 

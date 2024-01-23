@@ -71,7 +71,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QToolButton" name="cache">
+           <widget class="QPushButton" name="cache">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -83,8 +83,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>32</width>
+              <height>32</height>
              </size>
             </property>
             <property name="checkable">
@@ -93,13 +93,10 @@
             <property name="checked">
              <bool>true</bool>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="display">
+           <widget class="QPushButton" name="display">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -111,20 +108,17 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>32</width>
+              <height>32</height>
              </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="history">
+           <widget class="QPushButton" name="history">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -136,20 +130,17 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>32</width>
+              <height>32</height>
              </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="privacy">
+           <widget class="QPushButton" name="privacy">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -161,20 +152,17 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>32</width>
+              <height>32</height>
              </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="web">
+           <widget class="QPushButton" name="web">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -186,20 +174,17 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>32</width>
+              <height>32</height>
              </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="windows">
+           <widget class="QPushButton" name="windows">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -211,15 +196,12 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>32</width>
+              <height>32</height>
              </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
             </property>
            </widget>
           </item>
@@ -371,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>1264</height>
+               <width>419</width>
+               <height>1430</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">

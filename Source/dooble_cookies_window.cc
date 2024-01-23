@@ -30,6 +30,7 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QStatusBar>
+#include <QToolButton>
 #include <QWebEngineCookieStore>
 
 #include "dooble.h"
