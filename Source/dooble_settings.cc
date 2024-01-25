@@ -1210,7 +1210,8 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 		{
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
 		  if(key == "--disable-reading-from-canvas")
-		    QWebEngineSettings::defaultSettings()->setAttribute
+		    QWebEngineProfile::defaultProfile()->settings()->
+		      setAttribute
 		      (QWebEngineSettings::ReadingFromCanvasEnabled, false);
 #endif
 
@@ -1220,7 +1221,8 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 		{
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
 		  if(key == "--disable-reading-from-canvas")
-		    QWebEngineSettings::defaultSettings()->setAttribute
+		    QWebEngineProfile::defaultProfile()->settings()->
+		      setAttribute
 		      (QWebEngineSettings::ReadingFromCanvasEnabled, true);
 #endif
 		}
