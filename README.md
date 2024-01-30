@@ -19,6 +19,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Functional on a dual-core 1.0 GHz fanless computer.</li>
 <li>Gopher support.</li>
 <li>Great for older hardware!</li>
+<li>JavaScript Console.</li>
 <li>Many private windows.</li>
 <li>Multiple private instances, including downloads.</li>
 <li>Native graphing of data for scientific research.</li>
