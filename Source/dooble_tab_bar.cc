@@ -674,9 +674,10 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   javascript_action->setEnabled(false);
   javascript_action->setProperty("point", point);
 
-  auto web_plugins_action = menu.addAction(tr("Web &Plugins"),
-					   this,
-					   SLOT(slot_web_plugins(void)));
+  auto web_plugins_action = menu.addAction
+    (tr("Web &Plugins (Flash, PDF, etc.)"),
+     this,
+     SLOT(slot_web_plugins(void)));
 
   web_plugins_action->setEnabled(false);
   web_plugins_action->setProperty("point", point);
