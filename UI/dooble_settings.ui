@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>419</width>
-               <height>1430</height>
+               <width>642</width>
+               <height>1264</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1776,8 +1776,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>556</width>
+               <y>-1506</y>
+               <width>642</width>
                <height>2284</height>
               </rect>
              </property>
@@ -2512,7 +2512,7 @@
               <item>
                <widget class="QCheckBox" name="web_plugins">
                 <property name="text">
-                 <string>Web Plugins</string>
+                 <string>Web Plugins (Flash, PDF, etc.)</string>
                 </property>
                </widget>
               </item>
