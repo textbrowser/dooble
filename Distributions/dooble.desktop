@@ -6,6 +6,7 @@ Comment=Dooble Web Browser
 Exec=/usr/bin/dooble
 GenericName=Dooble Web Browser
 Icon=dooble
+MimeType=text/html;application/xhtml+xml;x-scheme-handler/file;x-scheme-handler/ftp;x-scheme-handler/gopher;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/jar;
 Name=Dooble Web Browser
 StartupNotify=true
 Terminal=false
