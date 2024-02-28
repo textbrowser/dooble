@@ -259,10 +259,12 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	    ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	     "color:#a94442;}");
 	  m_ui.language_directory->setText
-	    (tr("<b>Warning!</b> The file %1 is perhaps incomplete. "
+	    (tr("<b>Warning!</b> The file %1 is perhaps incomplete. It "
+		"contains only %2 bytes. "
 		"The System option has been disabled. English "
-		"will be assumed. Please read %2, line %3.").
+		"will be assumed. Please read %3, line %4.").
 	     arg(file_info.absoluteFilePath()).
+	     arg(file_info.size()).
 	     arg(__FILE__).
 	     arg(__LINE__));
 	}
