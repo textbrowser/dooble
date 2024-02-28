@@ -5,9 +5,14 @@
 cache()
 include(dooble-source.pro)
 
-exists(/opt/homebrew/Cellar/qt/6.6.2/share/qt/libexec/qwebengine_convert_dict) {
-CT = "/opt/homebrew/Cellar/qt/6.6.2/share/qt/libexec/qwebengine_convert_dict"
-} else {
+exists(/opt/homebrew/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict) {
+CT = "/opt/homebrew/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict"
+}
+
+exists(/usr/local/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict) {
+CT = "/usr/local/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict"
+}
+
 versionAtLeast(QT_VERSION, 6.0.0) {
 freebsd-* {
 CT = "/usr/local/libexec/qt6/qwebengine_convert_dict"
@@ -18,7 +23,6 @@ qtPrepareTool(CT, ../libexec/qwebengine_convert_dict)
 }
 } else {
 qtPrepareTool(CT, qwebengine_convert_dict)
-}
 }
 
 DICTIONARIES_DIR = qtwebengine_dictionaries
