@@ -236,6 +236,8 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  if(!file_info.exists())
 	    m_ui.language_directory->setText
 	      (tr("<b>Warning!</b> The file %1 does not exist. "
+		  "Dooble searched DOOBLE_TRANSLATIONS_PATH and "
+		  "the relative Translations directories. "
 		  "The System option has been disabled. English "
 		  "will be assumed. Please read %2, line %3.").
 	       arg(file_info.absoluteFilePath()).
@@ -244,6 +246,8 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  else
 	    m_ui.language_directory->setText
 	      (tr("<b>Warning!</b> The file %1 is not readable. "
+		  "Dooble searched DOOBLE_TRANSLATIONS_PATH and "
+		  "the relative Translations directories. "
 		  "The System option has been disabled. English "
 		  "will be assumed. Please read %2, line %3.").
 	       arg(file_info.absoluteFilePath()).

@@ -44,6 +44,7 @@ then
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
 then
     echo "Launching an official Dooble."
+    export DOOBLE_TRANSLATIONS_PATH=/opt/dooble/Translations
     export LD_LIBRARY_PATH=/opt/dooble/Lib
     export QT_PLUGIN_PATH=/opt/dooble/plugins
     cd /opt/dooble && exec ./Dooble "$@"
@@ -51,6 +52,9 @@ then
 elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
 then
     echo "Launching an official Dooble."
+    export DOOBLE_TRANSLATIONS_PATH=/usr/local/dooble/Translations
+    export LD_LIBRARY_PATH=/usr/local/dooble/Lib
+    export QT_PLUGIN_PATH=/usr/local/dooble/plugins
     cd /usr/local/dooble && exec ./Dooble "$@"
     exit $?
 else
