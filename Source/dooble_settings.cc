@@ -481,8 +481,19 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
   restore(true);
   prepare_icons();
+  prepare_shortcuts();
   show_qtwebengine_dictionaries_warning_label();
   slot_password_changed();
+}
+
+QString dooble_settings::shortcut(const QString &action) const
+{
+  auto item = m_shortcuts_model->findItems(action).value(0);
+
+  if(item && m_shortcuts_model->index(item->row(), 1).isValid())
+    return m_shortcuts_model->index(item->row(), 1).data().toString();
+  else
+    return "";
 }
 
 QString dooble_settings::cookie_policy_string(int index)
@@ -746,6 +757,28 @@ void dooble_settings::add_shortcut(QObject *object)
 	  m_ui.shortcuts->resizeColumnToContents(0);
 	  m_ui.shortcuts->sortByColumn(0, Qt::AscendingOrder);
 	}
+    }
+}
+
+void dooble_settings::add_shortcut
+(const QString &action, const QString &shortcut)
+{
+  if(action.trimmed().isEmpty() || shortcut.trimmed().isEmpty())
+    return;
+
+  if(m_shortcuts_model->findItems(action.trimmed()).isEmpty())
+    {
+      QList<QStandardItem *> items;
+      auto item = new QStandardItem(action.trimmed());
+
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      items << item;
+      item = new QStandardItem(shortcut);
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      items << item;
+      m_shortcuts_model->appendRow(items);
+      m_ui.shortcuts->resizeColumnToContents(0);
+      m_ui.shortcuts->sortByColumn(0, Qt::AscendingOrder);
     }
 }
 
@@ -1138,6 +1171,8 @@ void dooble_settings::prepare_proxy(bool save)
 void dooble_settings::prepare_shortcuts(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  add_shortcut(tr("VIM Scroll Down"), tr("j"));
+  add_shortcut(tr("VIM Scroll Up"), tr("k"));
   QApplication::restoreOverrideCursor();
 }
 
