@@ -33,6 +33,7 @@
 #include <QWebEngineContextMenuRequest>
 #endif
 #include <QWebEngineProfile>
+#include <QWebEngineSettings>
 
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
@@ -119,6 +120,7 @@ dooble_web_engine_view::dooble_web_engine_view
   if(!m_page->profile()->urlSchemeHandler("jar"))
     m_page->profile()->installUrlSchemeHandler("jar", dooble::s_jar);
 
+  prepare_shortcuts();
   setPage(m_page);
 }
 
@@ -499,6 +501,24 @@ void dooble_web_engine_view::download(const QString &file_name, const QUrl &url)
 #endif
 }
 
+void dooble_web_engine_view::prepare_shortcuts(void)
+{
+  if(m_scroll_down)
+    m_scroll_down->deleteLater();
+
+  if(m_scroll_up)
+    m_scroll_up->deleteLater();
+
+  m_scroll_down = new QShortcut
+    (QKeySequence(dooble::s_settings->shortcut(tr("VIM Scroll Down"))),
+     this,
+     SLOT(slot_scroll_down(void)));
+  m_scroll_up = new QShortcut
+    (QKeySequence(dooble::s_settings->shortcut(tr("VIM Scroll Up"))),
+     this,
+     SLOT(slot_scroll_up(void)));
+}
+
 void dooble_web_engine_view::resizeEvent(QResizeEvent *event)
 {
   QWebEngineView::resizeEvent(event);
@@ -636,6 +656,44 @@ void dooble_web_engine_view::slot_peekaboo(void)
 
   if(action)
     emit peekaboo_text(action->property("selected_text").toString());
+}
+
+void dooble_web_engine_view::slot_scroll_down(void)
+{
+  if(!settings())
+    return;
+
+  auto enabled = settings()->testAttribute
+    (QWebEngineSettings::JavascriptEnabled);
+  auto scroll_position = m_page->scrollPosition();
+
+  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+  QApplication::processEvents();
+  m_page->runJavaScript
+    (QString("window.scrollTo(%1, %2);").
+     arg(scroll_position.x()).arg(25.0 + scroll_position.y()));
+  QApplication::processEvents();
+  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, enabled);
+  QApplication::processEvents();
+}
+
+void dooble_web_engine_view::slot_scroll_up(void)
+{
+  if(!settings())
+    return;
+
+  auto enabled = settings()->testAttribute
+    (QWebEngineSettings::JavascriptEnabled);
+  auto scroll_position = m_page->scrollPosition();
+
+  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+  QApplication::processEvents();
+  m_page->runJavaScript
+    (QString("window.scrollTo(%1, %2);").
+     arg(scroll_position.x()).arg(-25.0 + scroll_position.y()));
+  QApplication::processEvents();
+  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, enabled);
+  QApplication::processEvents();
 }
 
 void dooble_web_engine_view::slot_search(void)

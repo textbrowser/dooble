@@ -28,6 +28,8 @@
 #ifndef dooble_web_engine_view_h
 #define dooble_web_engine_view_h
 
+#include <QPointer>
+#include <QShortcut>
 #include <QTimer>
 #include <QWebEngineView>
 
@@ -57,9 +59,12 @@ class dooble_web_engine_view: public QWebEngineView
 
  private:
   QList<dooble_web_engine_view *> m_dialog_requests;
+  QPointer<QShortcut> m_scroll_down;
+  QPointer<QShortcut> m_scroll_up;
   QTimer m_dialog_requests_timer;
   bool m_is_private;
   dooble_web_engine_page *m_page;
+  void prepare_shortcuts(void);
 
  private slots:
   void slot_accept_or_block_domain(void);
@@ -72,6 +77,8 @@ class dooble_web_engine_view: public QWebEngineView
   void slot_open_link_in_new_tab(void);
   void slot_open_link_in_new_window(void);
   void slot_peekaboo(void);
+  void slot_scroll_down(void);
+  void slot_scroll_up(void);
   void slot_search(void);
   void slot_settings_applied(void);
 

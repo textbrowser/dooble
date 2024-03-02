@@ -1171,8 +1171,8 @@ void dooble_settings::prepare_proxy(bool save)
 void dooble_settings::prepare_shortcuts(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  add_shortcut(tr("VIM Scroll Down"), tr("Ctrl+J"));
-  add_shortcut(tr("VIM Scroll Up"), tr("Ctrl+K"));
+  add_shortcut(tr("VIM Scroll Down"), tr("Ctrl+Shift+J"));
+  add_shortcut(tr("VIM Scroll Up"), tr("Ctrl+Shift+K"));
   QApplication::restoreOverrideCursor();
 }
 
