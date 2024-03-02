@@ -543,14 +543,24 @@ void dooble_web_engine_view::scroll(const qreal value)
     (QWebEngineSettings::JavascriptEnabled);
   auto scroll_position = m_page->scrollPosition();
 
-  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
-  QApplication::processEvents();
+  if(!enabled)
+    {
+      settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+      QApplication::processEvents();
+    }
+
   m_page->runJavaScript
     (QString("window.scrollTo(%1, %2);").
      arg(scroll_position.x()).arg(scroll_position.y() + value));
-  QApplication::processEvents();
-  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, enabled);
-  QApplication::processEvents();
+
+  if(!enabled)
+    QApplication::processEvents();
+
+  if(!enabled)
+    {
+      settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, enabled);
+      QApplication::processEvents();
+    }
 }
 
 void dooble_web_engine_view::slot_accept_or_block_domain(void)
