@@ -65,12 +65,15 @@ class dooble_web_engine_page: public QWebEnginePage
 #endif
   Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
+  void prepare_shortcuts(void);
 
  private slots:
   void slot_certificate_exception_accepted(void);
   void slot_full_screen_requested
     (QWebEngineFullScreenRequest full_screen_request);
   void slot_load_started(void);
+  void slot_scroll_down(void);
+  void slot_scroll_up(void);
 
  signals:
   void certificate_exception_accepted(const QUrl &url);

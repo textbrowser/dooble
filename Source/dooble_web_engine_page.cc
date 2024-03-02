@@ -51,6 +51,7 @@ dooble_web_engine_page::dooble_web_engine_page
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)));
+  prepare_shortcuts();
 }
 
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
@@ -66,6 +67,7 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)));
+  prepare_shortcuts();
 }
 
 dooble_web_engine_page::~dooble_web_engine_page()
@@ -344,4 +346,12 @@ void dooble_web_engine_page::slot_load_started(void)
 	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
 	    layout->itemAt(i)->widget()->setVisible(true);
     }
+}
+
+void dooble_web_engine_page::slot_scroll_down(void)
+{
+}
+
+void dooble_web_engine_page::slot_scroll_up(void)
+{
 }
