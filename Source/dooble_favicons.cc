@@ -47,9 +47,9 @@ QIcon dooble_favicons::icon(const QUrl &url)
 {
   if(!dooble::s_cryptography)
     return QIcon(":/Miscellaneous/blank_page.png");
-  else if(url == QUrl::fromUserInput("about:blank") ||
+  else if(url == QUrl::fromUserInput(dooble::ABOUT_BLANK) ||
 	  url.isEmpty() ||
-	  !url.isValid())
+	  url.isValid() == false)
     return QIcon(":/Miscellaneous/blank_page.png");
 
   QIcon icon;
@@ -125,9 +125,9 @@ QIcon dooble_favicons::icon_from_host(const QUrl &url)
 {
   if(!dooble::s_cryptography)
     return QIcon(":/Miscellaneous/blank_page.png");
-  else if(url == QUrl::fromUserInput("about:blank") ||
+  else if(url == QUrl::fromUserInput(dooble::ABOUT_BLANK) ||
 	  url.isEmpty() ||
-	  !url.isValid())
+	  url.isValid() == false)
     return QIcon(":/Miscellaneous/blank_page.png");
 
   QIcon icon;

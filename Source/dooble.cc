@@ -227,7 +227,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
 	{
 	  if(urls.isEmpty())
 	    {
-	      socket.write(QUrl("about:blank").toEncoded().toBase64());
+	      socket.write(QUrl(ABOUT_BLANK).toEncoded().toBase64());
 	      socket.write("\n");
 	      socket.flush();
 	    }
