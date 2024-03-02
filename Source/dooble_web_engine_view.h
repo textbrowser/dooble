@@ -65,6 +65,7 @@ class dooble_web_engine_view: public QWebEngineView
   bool m_is_private;
   dooble_web_engine_page *m_page;
   void prepare_shortcuts(void);
+  void scroll(const qreal value);
 
  private slots:
   void slot_accept_or_block_domain(void);
