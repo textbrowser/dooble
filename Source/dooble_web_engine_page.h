@@ -29,6 +29,7 @@
 #define dooble_web_engine_page_h
 
 #include <QPointer>
+#include <QShortcut>
 #include <QWebEngineFullScreenRequest>
 #include <QWebEnginePage>
 
@@ -57,6 +58,8 @@ class dooble_web_engine_page: public QWebEnginePage
   bool certificateError(const QWebEngineCertificateError &certificate_error);
 
  private:
+  QPointer<QShortcut> m_scroll_down;
+  QPointer<QShortcut> m_scroll_up;
   QPointer<QWidget> m_certificate_error_widget;
   QString m_certificate_error;
   QUrl m_certificate_error_url;

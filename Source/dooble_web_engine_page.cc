@@ -293,6 +293,15 @@ bool dooble_web_engine_page::certificateError
   return false;
 }
 
+void dooble_web_engine_page::prepare_shortcuts(void)
+{
+  if(m_scroll_down)
+    m_scroll_down->deleteLater();
+
+  if(m_scroll_up)
+    m_scroll_up->deleteLater();
+}
+
 void dooble_web_engine_page::resize_certificate_error_widget(void)
 {
   if(m_certificate_error_widget && view())
