@@ -2305,6 +2305,8 @@ void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
   m_ui.qtwebengine_dictionaries_warning_label->setText
     (tr("<b>Warning!</b> "
 	"The directory qtwebengine_dictionaries cannot be accessed. "
+	"Dooble searched QTWEBENGINE_DICTIONARIES_PATH and the relative "
+	"qtwebengine_dictionaries directories. "
 	"Please read %1, line %2.").arg(__FILE__).arg(__LINE__));
   m_ui.qtwebengine_dictionaries_warning_label->setVisible(false);
 
