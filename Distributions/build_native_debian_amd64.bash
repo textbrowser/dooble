@@ -30,6 +30,7 @@ cp -p ./Translations/*.qm ./opt/dooble/Translations/.
 cp -pr ./Charts ./opt/dooble/.
 cp -pr ./Data/*.txt ./opt/dooble/Data/.
 cp -pr ./Data/README ./opt/dooble/Data/.
+cp -pr ./qtwebengine_dictionaries ./opt/dooble/.
 mkdir -p dooble-debian.d/opt
 mkdir -p dooble-debian.d/usr/bin
 mkdir -p dooble-debian.d/usr/share/applications
