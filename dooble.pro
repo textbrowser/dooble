@@ -13,7 +13,7 @@ CT = "/opt/homebrew/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict"
 exists(/usr/local/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict) {
 CT = "/usr/local/Cellar/qt/6.6.2_1/share/qt/libexec/qwebengine_convert_dict"
 }
-else {
+} else {
 versionAtLeast(QT_VERSION, 6.0.0) {
 freebsd-* {
 CT = "/usr/local/libexec/qt6/qwebengine_convert_dict"
