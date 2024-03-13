@@ -319,11 +319,15 @@ void dooble_web_engine_page::slot_full_screen_requested
 (QWebEngineFullScreenRequest full_screen_request)
 {
   if(dooble_settings::setting("full_screen").toBool())
-    full_screen_request.accept();
+    {
+      full_screen_request.accept();
+      emit show_full_screen(full_screen_request.toggleOn());
+    }
   else
-    full_screen_request.reject();
-
-  emit show_full_screen(full_screen_request.toggleOn());
+    {
+      full_screen_request.reject();
+      emit show_full_screen(false);
+    }
 }
 
 void dooble_web_engine_page::slot_load_started(void)
