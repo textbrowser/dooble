@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>1264</height>
+               <width>419</width>
+               <height>1430</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1776,9 +1776,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1506</y>
+               <y>-847</y>
                <width>642</width>
-               <height>2284</height>
+               <height>2316</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2162,6 +2162,19 @@
                   </layout>
                  </item>
                 </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="full_screen">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accept or reject full-screen-mode requests.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Full-Screen Requests</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -2779,6 +2792,7 @@
   <tabstop>web_font_size_default_fixed</tabstop>
   <tabstop>web_font_size_minimum</tabstop>
   <tabstop>web_font_size_minimum_logical</tabstop>
+  <tabstop>full_screen</tabstop>
   <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
@@ -2801,6 +2815,7 @@
   <tabstop>xss_auditing</tabstop>
   <tabstop>center_child_windows</tabstop>
   <tabstop>save_geometry</tabstop>
+  <tabstop>address_widget_completer_mode</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>

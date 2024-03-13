@@ -318,7 +318,11 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 void dooble_web_engine_page::slot_full_screen_requested
 (QWebEngineFullScreenRequest full_screen_request)
 {
-  full_screen_request.accept();
+  if(dooble_settings::setting("full_screen").toBool())
+    full_screen_request.accept();
+  else
+    full_screen_request.reject();
+
   emit show_full_screen(full_screen_request.toggleOn());
 }
 

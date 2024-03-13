@@ -315,6 +315,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["favicons"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["features_permissions"] = true;
+  s_settings["full_screen"] = true;
   s_settings["hash_type"] = "SHA3-512";
   s_settings["hash_type_index"] = 1;
   s_settings["home_url"] = QUrl();
@@ -1603,6 +1604,7 @@ void dooble_settings::restore(bool read_database)
   m_ui.favicons->setChecked(s_settings.value("favicons", true).toBool());
   m_ui.features_permissions_groupbox->setChecked
     (s_settings.value("features_permissions", true).toBool());
+  m_ui.full_screen->setChecked(s_settings.value("full_screen", true).toBool());
   m_ui.hash->setCurrentIndex
     (qBound(0,
 	    s_settings.value("hash_type_index", 1).toInt(), // SHA3-512
@@ -2645,6 +2647,7 @@ void dooble_settings::slot_apply(void)
   set_setting("favicons", m_ui.favicons->isChecked());
   set_setting
     ("features_permissions", m_ui.features_permissions_groupbox->isChecked());
+  set_setting("full_screen", m_ui.full_screen->isChecked());
 
   if(m_ui.home_url->text().trimmed().isEmpty())
     set_setting("home_url", QUrl());
