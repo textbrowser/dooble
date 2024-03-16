@@ -4046,7 +4046,13 @@ void dooble::slot_open_local_file(void)
   if(dialog.exec() == QDialog::Accepted)
     {
       QApplication::processEvents();
-      page->load(QUrl::fromUserInput(dialog.selectedFiles().value(0)));
+
+      auto url(QUrl::fromUserInput(dialog.selectedFiles().value(0)));
+
+      if(QFileInfo(dialog.selectedFiles().value(0)).suffix().toLower() == "jar")
+	url.setScheme("jar");
+
+      page->load(url);
     }
 
   QApplication::processEvents();
