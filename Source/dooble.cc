@@ -26,6 +26,9 @@
 */
 
 #include <QFileDialog>
+#ifdef DOOBLE_PEEKABOO
+#include <QInputDialog>
+#endif
 #include <QLocalSocket>
 #include <QMessageBox>
 #include <QPainter>
