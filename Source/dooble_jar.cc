@@ -254,7 +254,7 @@ void dooble_jar_implementation::slot_finished
 		      {
 			QString file("");
 
-			file = QString("<a href=\"zip://%1?%2\">%2</a>").
+			file = QString("<a href=\"jar://%1?%2\">%2</a>").
 			  arg(m_url.path()).arg(list.value(j).constData());
 
 			m_html += "<td>" + file.toUtf8() + "</td>\n";
