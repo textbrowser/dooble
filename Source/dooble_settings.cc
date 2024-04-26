@@ -2304,21 +2304,22 @@ void dooble_settings::show_panel(dooble_settings::Panels panel)
 
 void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
 {
-  m_ui.qtwebengine_dictionaries_warning_label->setText
-    (tr("<b>Warning!</b> "
-	"The directory qtwebengine_dictionaries cannot be accessed. "
-	"Dooble searched QTWEBENGINE_DICTIONARIES_PATH and the relative "
-	"qtwebengine_dictionaries directories. "
-	"Please read %1, line %2.").arg(__FILE__).arg(__LINE__));
   m_ui.qtwebengine_dictionaries_warning_label->setVisible(false);
 
   auto bytes(qgetenv("QTWEBENGINE_DICTIONARIES_PATH"));
 
   if(bytes.trimmed().isEmpty())
     {
-      bytes = "qtwebengine_dictionaries";
+      auto directory
+	(QDir::currentPath() + QDir::separator() + "qtwebengine_dictionaries");
 
-      if(!QFileInfo(bytes).isReadable())
+      m_ui.qtwebengine_dictionaries_warning_label->setText
+	(tr("<b>Warning!</b> "
+	    "The directory qtwebengine_dictionaries cannot be accessed. "
+	    "Dooble searched %1. Please read %2, line %3.").
+	 arg(directory).arg(__FILE__).arg(__LINE__));
+
+      if(!QFileInfo(directory).isReadable())
 	{
 	  m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
 	  return;
@@ -2326,6 +2327,11 @@ void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
     }
   else if(!QFileInfo(bytes).isReadable())
     {
+      m_ui.qtwebengine_dictionaries_warning_label->setText
+	(tr("<b>Warning!</b> "
+	    "The directory qtwebengine_dictionaries cannot be accessed. "
+	    "Dooble searched %1. Please read %2, line %3.").
+	 arg(bytes.constData()).arg(__FILE__).arg(__LINE__));
       m_ui.qtwebengine_dictionaries_warning_label->setVisible(true);
       return;
     }
