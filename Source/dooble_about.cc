@@ -72,8 +72,8 @@ dooble_about::dooble_about(void):QMainWindow()
   m_swifty->download();
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 
-  QString qversion("");
-  const auto tmp = qVersion();
+  QString qversion{""};
+  const auto tmp{qVersion()};
 
   if(tmp)
     qversion = tmp;
@@ -88,13 +88,13 @@ dooble_about::dooble_about(void):QMainWindow()
 	"Dooble 3-Clause BSD License</a>"));
 
   auto text
-    (tr("Architecture %1.<br>"
+    {tr("Architecture %1.<br>"
 	"Product: %2.<br>"
 	"Qt version %3 (runtime %4).").
      arg(DOOBLE_ARCHITECTURE_STR).
      arg(QSysInfo::prettyProductName()).
      arg(QT_VERSION_STR).
-     arg(qversion));
+     arg(qversion)};
 
   m_ui.local_information->setText(text);
   m_ui.release_notes->setText
@@ -133,13 +133,13 @@ void dooble_about::compute_self_digest(void)
 
 void dooble_about::compute_self_digest_task(const QString &file_path)
 {
-  QByteArray buffer(4096, 0);
-  QCryptographicHash hash(QCryptographicHash::Sha3_512);
-  QFile file(file_path);
+  QByteArray buffer{4096, 0};
+  QCryptographicHash hash{QCryptographicHash::Sha3_512};
+  QFile file{file_path};
 
   if(file.open(QIODevice::ReadOnly))
     {
-      qint64 rc = 0;
+      qint64 rc{0};
 
       while((rc = file.read(buffer.data(), buffer.length())) > 0)
 	if(m_future.isCanceled())
