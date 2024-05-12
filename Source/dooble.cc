@@ -3653,6 +3653,27 @@ void dooble::slot_clone_tab(int index)
      page->is_web_setting_enabled(QWebEngineSettings::WebGLEnabled));
   clone->reload_periodically(page->reload_periodically_seconds());
   clone->user_hide_location_frame(page->is_location_frame_user_hidden());
+
+  QBuffer buffer;
+  QByteArray bytes;
+
+  buffer.setBuffer(&bytes);
+
+  if(buffer.open(QIODevice::WriteOnly))
+    {
+      QDataStream stream(&buffer);
+
+      stream << *(page->view()->page()->history());
+    }
+
+  buffer.close();
+
+  if(buffer.open(QIODevice::ReadOnly))
+    {
+      QDataStream stream(&buffer);
+
+      stream >> *(clone->view()->page()->history());
+    }
 }
 
 void dooble::slot_close_tab(void)
