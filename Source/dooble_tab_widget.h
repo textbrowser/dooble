@@ -75,6 +75,7 @@ class dooble_tab_widget: public QTabWidget
 
  signals:
   void anonymous_tab_headers(bool state);
+  void clone_tab(int index);
   void decouple_tab(int index);
   void empty_tab(void);
   void new_tab(const QUrl &url);

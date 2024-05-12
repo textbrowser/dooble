@@ -153,6 +153,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SIGNAL(anonymous_tab_headers(bool)));
   connect(m_tab_bar,
+	  SIGNAL(clone_tab(int)),
+	  this,
+	  SIGNAL(clone_tab(int)));
+  connect(m_tab_bar,
 	  SIGNAL(decouple_tab(int)),
 	  this,
 	  SIGNAL(decouple_tab(int)));

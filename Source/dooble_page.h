@@ -75,13 +75,14 @@ class dooble_page: public QWidget
   bool is_location_frame_hidden(void) const;
   bool is_location_frame_user_hidden(void) const;
   bool is_private(void) const;
+  bool is_web_setting_enabled(QWebEngineSettings::WebAttribute setting) const;
   dooble_address_widget *address_widget(void) const;
   dooble_popup_menu *popup_menu(void) const;
   dooble_web_engine_view *view(void) const;
   int reload_periodically_seconds(void) const;
   void download(const QString &file_name, const QUrl &url);
-  void enable_web_setting(QWebEngineSettings::WebAttribute setting,
-			  bool state);
+  void enable_web_setting
+    (QWebEngineSettings::WebAttribute setting, bool state);
   void hide_location_frame(bool state);
   void hide_status_bar(bool state);
   void inject_custom_css(void);

@@ -411,6 +411,14 @@ void dooble_tab_bar::slot_application_locked(void)
       (action->isChecked(), dooble_ui_utilities::find_parent_dooble(this));
 }
 
+void dooble_tab_bar::slot_clone_tab(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit clone_tab(tabAt(action->property("point").toPoint()));
+}
+
 void dooble_tab_bar::slot_close_other_tabs(void)
 {
   auto action = qobject_cast<QAction *> (sender());
@@ -813,6 +821,12 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   forward_action->setEnabled(page && page->can_go_forward() && tab_at > -1);
   reload_action->setEnabled(page && tab_at > -1);
   sub_menu->setEnabled(page && tab_at > -1);
+  menu.addSeparator();
+  action = menu.addAction(tr("Clone Tab"),
+			  this,
+			  SLOT(slot_clone_tab(void)));
+  action->setEnabled(page);
+  action->setProperty("point", point);
 
   foreach(auto action, menu.actions())
     if(action != lock_action)

@@ -582,7 +582,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
     m_ui.tab->setTabIcon
       (m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
   else
-    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // MacOS too!
 
   m_ui.tab->setTabsClosable(tabs_closable());
 
@@ -803,6 +803,11 @@ void dooble::connect_signals(void)
 	  SIGNAL(anonymous_tab_headers(bool)),
 	  this,
 	  SLOT(slot_anonymous_tab_headers(bool)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(clone_tab(int)),
+	  this,
+	  SLOT(slot_clone_tab(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
 	  SIGNAL(currentChanged(int)),
@@ -1131,7 +1136,7 @@ void dooble::new_page(dooble_charts *chart)
     add_tab(chart, tr("XY Series Chart"));
 
   m_ui.tab->setTabIcon
-    (m_ui.tab->indexOf(chart), dooble_favicons::icon(QUrl())); // Mac too!
+    (m_ui.tab->indexOf(chart), dooble_favicons::icon(QUrl())); // MacOS too!
   m_ui.tab->setTabsClosable(tabs_closable());
 
   if(s_application->application_locked())
@@ -1190,7 +1195,7 @@ void dooble::new_page(dooble_page *page)
   else
     {
       add_tab(page, title.replace("&", "&&"));
-      m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+      m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // MacOS too!
       m_ui.tab->setTabToolTip(m_ui.tab->indexOf(page), title);
     }
 
@@ -1254,7 +1259,7 @@ void dooble::new_page(dooble_web_engine_view *view)
     m_ui.tab->setTabIcon
       (m_ui.tab->indexOf(page), dooble_favicons::icon(QUrl()));
   else
-    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // Mac too!
+    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon()); // MacOS too!
 
   m_ui.tab->setTabsClosable(tabs_closable());
 
@@ -3623,6 +3628,31 @@ void dooble::slot_clear_visited_links(void)
 
   if(m_web_engine_profile)
     m_web_engine_profile->clearAllVisitedLinks();
+}
+
+void dooble::slot_clone_tab(int index)
+{
+  auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(!page)
+    return;
+
+  auto clone = new_page(page->url(), page->is_private());
+
+  if(!clone)
+    return;
+
+  clone->enable_web_setting
+    (QWebEngineSettings::JavascriptEnabled,
+     page->is_web_setting_enabled(QWebEngineSettings::JavascriptEnabled));
+  clone->enable_web_setting
+    (QWebEngineSettings::PluginsEnabled,
+     page->is_web_setting_enabled(QWebEngineSettings::PluginsEnabled));
+  clone->enable_web_setting
+    (QWebEngineSettings::WebGLEnabled,
+     page->is_web_setting_enabled(QWebEngineSettings::WebGLEnabled));
+  clone->reload_periodically(page->reload_periodically_seconds());
+  clone->user_hide_location_frame(page->is_location_frame_user_hidden());
 }
 
 void dooble::slot_close_tab(void)

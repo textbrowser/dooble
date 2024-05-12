@@ -564,6 +564,17 @@ bool dooble_page::is_private(void) const
   return m_is_private;
 }
 
+bool dooble_page::is_web_setting_enabled
+(QWebEngineSettings::WebAttribute setting) const
+{
+  auto settings = m_view->settings();
+
+  if(settings)
+    return settings->testAttribute(setting);
+  else
+    return false;
+}
+
 dooble *dooble_page::find_parent_dooble(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -611,8 +622,8 @@ void dooble_page::download(const QString &file_name, const QUrl &url)
   m_view->download(file_name, url);
 }
 
-void dooble_page::enable_web_setting(QWebEngineSettings::WebAttribute setting,
-				     bool state)
+void dooble_page::enable_web_setting
+(QWebEngineSettings::WebAttribute setting, bool state)
 {
   auto settings = m_view->settings();
 
