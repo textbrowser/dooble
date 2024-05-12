@@ -282,6 +282,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
+                          -funroll-loops \
                           -fwrapv \
                           -pedantic \
                           -std=c++17
@@ -301,6 +302,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
+                          -funroll-loops \
                           -fwrapv \
                           -pedantic \
                           -std=c++17
@@ -335,6 +337,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wzero-as-null-pointer-constant \
                           -fstack-clash-protection \
                           -fstack-protector-all \
+                          -funroll-loops \
                           -fwrapv \
                           -pedantic \
                           -std=c++17
