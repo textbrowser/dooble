@@ -15,7 +15,7 @@ Linux
 qmake -o Makefile dooble.pro
 make
 
-OS X
+MacOS
 
 qmake -o Makefile dooble.pro
 make
