@@ -46,7 +46,7 @@ Completed Items
 - Depict private cookie windows.
 - Determine if the system translation file is adequate.
 - Dictionary option in the Settings window's Web panel.
-- Disable the Theme setting on OS X.
+- Disable the Theme setting on MacOS.
 - Display Downloads panel on new download. Optional.
 - Display cookies in a tree-like structure.
 - Display download rates.
@@ -97,6 +97,7 @@ Completed Items
 - Link-hover events resize windows.
 - Local Storage option.
 - Local files and address text highlights.
+- MacOS bundle.
 - Main menu bar visibility.
 - Maximum URL length set to 2048 characters.
 - Maximum title length set to 1024 characters.
@@ -105,7 +106,6 @@ Completed Items
 - New page context menus (dooble_web_engine_view::contextMenuEvent()).
 - Notify operator of completion of Accepted / Blocked Domains import.
 - Numeric values read from settings must be bounded.
-- OS X bundle.
 - Optional DNT.
 - Optional Visited Links.
 - Optional credentials.
@@ -114,7 +114,7 @@ Completed Items
 - Optional testing of Threefish.
 - Pause and resume downloads. Requires Qt support.
 - Pin support windows.
-- Place the Translations directory into the OS X bundle.
+- Place the Translations directory into the MacOS bundle.
 - Populate search engine favicons on data changes.
 - Prevent duplicate history items in address widget menu.
 - Print preview.
