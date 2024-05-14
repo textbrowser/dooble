@@ -6,12 +6,12 @@ cache()
 include(dooble-source.pro)
 
 macx {
-exists(/opt/homebrew/Cellar/qt/6.7.0/share/qt/libexec/qwebengine_convert_dict) {
-CT = "/opt/homebrew/Cellar/qt/6.7.0/share/qt/libexec/qwebengine_convert_dict"
+exists(/opt/homebrew/Cellar/qt/6.7.0_1/share/qt/libexec/qwebengine_convert_dict) {
+CT = "/opt/homebrew/Cellar/qt/6.7.0_1/share/qt/libexec/qwebengine_convert_dict"
 }
 
-exists(/usr/local/Cellar/qt/6.7.0/share/qt/libexec/qwebengine_convert_dict) {
-CT = "/usr/local/Cellar/qt/6.7.0/share/qt/libexec/qwebengine_convert_dict"
+exists(/usr/local/Cellar/qt/6.7.0_1/share/qt/libexec/qwebengine_convert_dict) {
+CT = "/usr/local/Cellar/qt/6.7.0_1/share/qt/libexec/qwebengine_convert_dict"
 }
 } else {
 versionAtLeast(QT_VERSION, 6.0.0) {
@@ -292,7 +292,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
                           -Wcast-qual \
-                          -Werror \
                           -Wextra \
                           -Wformat=2 \
                           -Woverloaded-virtual \
