@@ -289,6 +289,8 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &i)
 
       if(page)
 	icon = dooble_favicons::icon(page->url());
+      else
+	icon = dooble_favicons::icon(QUrl());
     }
 
 #ifdef Q_OS_MACOS
