@@ -227,6 +227,7 @@ class dooble: public QMainWindow
   void slot_clear_history(void);
   void slot_clear_visited_links(void);
   void slot_clone_tab(int index);
+  void slot_clone_tab(void);
   void slot_close_tab(void);
   void slot_create_dialog(dooble_web_engine_view *view);
   void slot_create_tab(dooble_web_engine_view *view);

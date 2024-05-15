@@ -1936,6 +1936,9 @@ void dooble::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+S")),
 				   this,
 				   SLOT(slot_save(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+C")),
+				   this,
+				   SLOT(slot_clone_tab(void)));
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+P")),
 				   this,
 				   SLOT(slot_new_private_window(void)));
@@ -3674,6 +3677,11 @@ void dooble::slot_clone_tab(int index)
 
       stream >> *(clone->view()->page()->history());
     }
+}
+
+void dooble::slot_clone_tab(void)
+{
+  slot_clone_tab(m_ui.tab->currentIndex());
 }
 
 void dooble::slot_close_tab(void)
