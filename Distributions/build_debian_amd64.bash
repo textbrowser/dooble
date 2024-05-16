@@ -68,7 +68,7 @@ mkdir -p dooble-debian.d/usr/bin
 mkdir -p dooble-debian.d/usr/share/applications
 mkdir -p dooble-debian.d/usr/share/pixmaps
 cp -p Distributions/dooble.desktop dooble-debian.d/usr/share/applications/.
-cp -pr Distributions/UBUNTU-22.04 dooble-debian.d/DEBIAN
+cp -pr Distributions/UBUNTU-24.04 dooble-debian.d/DEBIAN
 cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble

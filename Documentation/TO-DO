@@ -6,6 +6,7 @@ Completed Items
   exception of host or as-is link, A / B preferences.
 - Accepted / Blocked Domains search.
 - Activate history pull-down on address text change.
+- Additional files are necessary in Debian distribution.
 - Allow certificate exceptions.
 - Allow custom JavaScript per URL. Manual execution required. JavaScript
   Console.
@@ -207,7 +208,6 @@ Completed Items
 
 Remaining Items
 
-- Additional files are necessary in Debian distribution. Speculation.
 - Are containers empty? Remind if credentials exist.
 - Auto-correct addresses.
 - Charts: data source status
