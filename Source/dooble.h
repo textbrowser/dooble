@@ -151,7 +151,6 @@ class dooble: public QMainWindow
   QList<QPointer<QAction> > m_standard_menu_actions;
   QList<QShortcut *> m_shortcuts;
   QList<QShortcut *> m_tab_widget_shortcuts;
-  QList<QUrl> all_open_tab_urls(void) const;
   QLocalServer m_local_server;
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
@@ -178,6 +177,7 @@ class dooble: public QMainWindow
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
+  QList<QUrl> all_open_tab_urls(void) const;
   QStringList chart_names(void) const;
   bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;
