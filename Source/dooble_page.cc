@@ -879,6 +879,9 @@ void dooble_page::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+C")),
 				   this,
 				   SIGNAL(clone(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+R")),
+				   this,
+				   SLOT(slot_reload_bypass_cache(void)));
     }
 }
 
@@ -2839,10 +2842,19 @@ void dooble_page::slot_prepare_reload_menu(void)
 {
   m_ui.reload->menu()->clear();
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+  auto action = m_ui.reload->menu()->addAction
+    (tr("&Reload (Bypass Cache)"),
+     QKeySequence(tr("Ctrl+Shift+R")),
+     this,
+     SLOT(slot_reload_bypass_cache(void)));
+#else
   auto action = m_ui.reload->menu()->addAction
     (tr("&Reload (Bypass Cache)"),
      this,
-     SLOT(slot_reload_bypass_cache(void)));
+     SLOT(slot_reload_bypass_cache(void)),
+     QKeySequence(tr("Ctrl+Shift+R")));
+#endif
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto use_material_icons(dooble_settings::use_material_icons());
 
