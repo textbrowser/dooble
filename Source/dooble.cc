@@ -3655,6 +3655,7 @@ void dooble::slot_clone_tab(int index)
   if(!clone)
     return;
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   clone->enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      page->is_web_setting_enabled(QWebEngineSettings::JavascriptEnabled));
@@ -3687,6 +3688,8 @@ void dooble::slot_clone_tab(int index)
 
       stream >> *(clone->view()->page()->history());
     }
+
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble::slot_clone_tab(void)
