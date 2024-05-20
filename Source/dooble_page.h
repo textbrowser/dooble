@@ -111,6 +111,7 @@ class dooble_page: public QWidget
   QMenu *m_menu;
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
+  QPointer<QAction> m_clone_action;
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
@@ -193,10 +194,12 @@ class dooble_page: public QWidget
   void slot_open_link(void);
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
+  void slot_prepare_reload_menu(void);
   void slot_proxy_authentication_required(const QUrl &url,
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);
   void slot_reload(void);
+  void slot_reload_bypass_cache(void);
   void slot_reload_or_stop(void);
   void slot_reload_periodically(void);
   void slot_render_pixmap(void);
@@ -220,6 +223,7 @@ class dooble_page: public QWidget
  signals:
   void authenticate(void);
   void clear_downloads(void);
+  void clone(void);
   void close_tab(void);
   void close_window(void);
   void create_dialog(dooble_web_engine_view *view);

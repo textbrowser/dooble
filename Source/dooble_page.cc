@@ -97,6 +97,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 
   m_ui.javascript_popup_message->setVisible(false);
   m_ui.progress->setVisible(false);
+  m_ui.reload->setMenu(new QMenu(this));
   m_ui.status_bar->setVisible
     (dooble_settings::setting("status_bar_visible").toBool());
   m_ui.zoom_value->setVisible(false);
@@ -307,6 +308,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reload_or_stop(void)));
+  connect(m_ui.reload->menu(),
+	  SIGNAL(aboutToShow(void)),
+	  this,
+	  SLOT(slot_prepare_reload_menu(void)));
   connect(m_ui.zoom_value,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -748,6 +753,11 @@ void dooble_page::prepare_icons(void)
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto use_material_icons(dooble_settings::use_material_icons());
 
+  if(m_clone_action)
+    m_clone_action->setIcon
+      (QIcon::fromTheme(use_material_icons + "edit-copy",
+			QIcon(QString(":/%1/18/copy.png").arg(icon_set))));
+
   if(m_find_action)
     m_find_action->setIcon
       (QIcon::fromTheme(use_material_icons + "edit-find",
@@ -866,6 +876,9 @@ void dooble_page::prepare_shortcuts(void)
       m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+R")),
 				   this,
 				   SLOT(slot_reload(void)));
+      m_shortcuts << new QShortcut(QKeySequence(tr("Ctrl+Shift+C")),
+				   this,
+				   SIGNAL(clone(void)));
     }
 }
 
@@ -1082,6 +1095,13 @@ void dooble_page::prepare_standard_menus(void)
 		  SLOT(slot_clear_visited_links(void)));
   menu->addSeparator();
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+  m_clone_action = menu->addAction
+    (QIcon::fromTheme(use_material_icons + "edit-copy",
+		      QIcon(QString(":/%1/18/copy.png").arg(icon_set))),
+     tr("Clone Tab"),
+     QKeySequence(tr("Ctrl+Shift+C")),
+     this,
+     SIGNAL(clone(void)));
   m_find_action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "edit-find",
 		      QIcon(QString(":/%1/18/find.png").arg(icon_set))),
@@ -1090,6 +1110,13 @@ void dooble_page::prepare_standard_menus(void)
      this,
      SLOT(slot_show_find(void)));
 #else
+  m_clone_action = menu->addAction
+    (QIcon::fromTheme(use_material_icons + "edit-copy",
+		      QIcon(QString(":/%1/18/copy.png").arg(icon_set))),
+     tr("Clone Tab"),
+     this,
+     SIGNAL(clone(void)),
+     QKeySequence(tr("Ctrl+Shift+C")));
   m_find_action = menu->addAction
     (QIcon::fromTheme(use_material_icons + "edit-find",
 		      QIcon(QString(":/%1/18/find.png").arg(icon_set))),
@@ -1491,7 +1518,8 @@ void dooble_page::prepare_tool_buttons(void)
       }
     else if(m_ui.backward == tool_button ||
 	    m_ui.downloads == tool_button ||
-	    m_ui.forward == tool_button)
+	    m_ui.forward == tool_button ||
+	    m_ui.reload == tool_button)
       tool_button->setStyleSheet
 	("QToolButton {border: none;}"
 	 "QToolButton::menu-indicator {image: none;}");
@@ -1506,8 +1534,9 @@ void dooble_page::prepare_tool_buttons(void)
 #else
   foreach(auto tool_button, findChildren<QToolButton *> ())
     if(m_ui.backward == tool_button ||
+       m_ui.downloads == tool_button ||
        m_ui.forward == tool_button ||
-       m_ui.downloads == tool_button)
+       m_ui.reload == tool_button)
       tool_button->setStyleSheet("QToolButton::menu-indicator {image: none;}");
 #endif
 }
@@ -2806,6 +2835,22 @@ void dooble_page::slot_prepare_forward_menu(void)
     }
 }
 
+void dooble_page::slot_prepare_reload_menu(void)
+{
+  m_ui.reload->menu()->clear();
+
+  auto action = m_ui.reload->menu()->addAction
+    (tr("&Reload (Bypass Cache)"),
+     this,
+     SLOT(slot_reload_bypass_cache(void)));
+  auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto use_material_icons(dooble_settings::use_material_icons());
+
+  action->setIcon
+    (QIcon::fromTheme(use_material_icons + "view-refresh",
+		      QIcon(QString(":/%1/20/reload.png").arg(icon_set))));
+}
+
 void dooble_page::slot_proxy_authentication_required
 (const QUrl &url, QAuthenticator *authenticator, const QString &proxy_host)
 {
@@ -2849,6 +2894,11 @@ void dooble_page::slot_proxy_authentication_required
 void dooble_page::slot_reload(void)
 {
   reload();
+}
+
+void dooble_page::slot_reload_bypass_cache(void)
+{
+  m_view->triggerPageAction(QWebEnginePage::ReloadAndBypassCache);
 }
 
 void dooble_page::slot_reload_or_stop(void)
