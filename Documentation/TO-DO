@@ -222,7 +222,7 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional Document Mode.
 - Prevent SQL query text overflow.
-- Remove const bool, const int, etc from method parameters.
+- Remove const bool, const int, etc. from method parameters.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
