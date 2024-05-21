@@ -127,17 +127,17 @@ int dooble_address_widget_completer::levenshtein_distance
 				QVector<int> (str2.length() + 1));
   int cost = 0;
 
-  for(int i = 0; i <= str1.length(); i++)
+  for(int i = 0; i <= str1.length(); ++i)
     matrix[i][0] = i;
 
-  for(int i = 0; i <= str2.length(); i++)
+  for(int i = 0; i <= str2.length(); ++i)
     matrix[0][i] = i;
 
-  for(int i = 1; i <= str1.length(); i++)
+  for(int i = 1; i <= str1.length(); ++i)
     {
       str1_c = str1.at(i - 1);
 
-      for(int j = 1; j <= str2.length(); j++)
+      for(int j = 1; j <= str2.length(); ++j)
 	{
 	  str2_c = str2.at(j - 1);
 
@@ -203,7 +203,7 @@ void dooble_address_widget_completer::complete(const QString &text)
 		    2 * static_cast<int> (dooble_page::ConstantsEnum::
 					  MAXIMUM_HISTORY_ITEMS));
 
-      for(int i = 0; i < j; i++)
+      for(int i = 0; i < j; ++i)
 	if(s_model->item(i, 0))
 	  {
 	    if(s_model->item(i, 0)->icon().isNull())
@@ -218,7 +218,7 @@ void dooble_address_widget_completer::complete(const QString &text)
       QMultiMap<int, QStandardItem *> map;
       auto c(text.toLower().trimmed());
 
-      for(int i = 0; i < s_model->rowCount(); i++)
+      for(int i = 0; i < s_model->rowCount(); ++i)
 	if(s_model->item(i, 0))
 	  if(s_model->item(i, 0)->text().toLower().contains(c))
 	    map.insert

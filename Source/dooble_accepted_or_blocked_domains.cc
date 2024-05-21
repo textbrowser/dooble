@@ -177,7 +177,7 @@ void dooble_accepted_or_blocked_domains::accept_or_block_domain
 	     this,
 	     SLOT(slot_item_changed(QTableWidgetItem *)));
 
-  for(int i{0}; i < 2; i++)
+  for(int i{0}; i < 2; ++i)
     {
       auto item{new dooble_accepted_or_blocked_domains_item()};
 
@@ -1308,7 +1308,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  for(int i{0}; i < m_ui.session_rejections->rowCount(); i++)
+  for(int i{0}; i < m_ui.session_rejections->rowCount(); ++i)
     {
       auto item{m_ui.session_rejections->item(i, 1)}; // Origin URL
 
@@ -1361,7 +1361,7 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
   auto count{m_ui.table->rowCount()};
   auto text{m_ui.search->text().toLower().trimmed()};
 
-  for(int i{0}; i < m_ui.table->rowCount(); i++)
+  for(int i{0}; i < m_ui.table->rowCount(); ++i)
     if(text.isEmpty())
       m_ui.table->setRowHidden(i, false);
     else

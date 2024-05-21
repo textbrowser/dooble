@@ -49,8 +49,8 @@ static void find_recursive_items(QStandardItem *item,
 
   list << item;
 
-  for(int i = 0; i < item->rowCount(); i++)
-    for(int j = 0; j < item->columnCount(); j++)
+  for(int i = 0; i < item->rowCount(); ++i)
+    for(int j = 0; j < item->columnCount(); ++j)
       find_recursive_items(item->child(i, j), list);
 }
 
@@ -523,7 +523,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   chart->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; !dooble_charts::s_chart_properties_strings[i].isEmpty(); i++)
+  for(int i = 0; !dooble_charts::s_chart_properties_strings[i].isEmpty(); ++i)
     {
       if(dooble_charts::Properties(i) ==
 	 dooble_charts::Properties::CHART_MARGINS)
@@ -626,7 +626,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   chart_axis_x->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); i++)
+  for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); ++i)
     {
       QList<QStandardItem *> list;
       auto item = new QStandardItem
@@ -682,7 +682,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   chart_axis_y->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); i++)
+  for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); ++i)
     {
       QList<QStandardItem *> list;
       auto item = new QStandardItem
@@ -741,7 +741,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   data->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; !dooble_charts::s_data_properties_strings[i].isEmpty(); i++)
+  for(int i = 0; !dooble_charts::s_data_properties_strings[i].isEmpty(); ++i)
     {
       QList<QStandardItem *> list;
       auto item = new QStandardItem
@@ -783,7 +783,7 @@ dooble_charts_property_editor_model(QObject *parent):
 
   legend->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
-  for(int i = 0; !dooble_charts::s_legend_properties_strings[i].isEmpty(); i++)
+  for(int i = 0; !dooble_charts::s_legend_properties_strings[i].isEmpty(); ++i)
     {
       QList<QStandardItem *> list;
       auto item = new QStandardItem
@@ -864,7 +864,7 @@ find_all_child_items(const QString &text) const
 
   QList<QStandardItem *> all;
 
-  for(int i = 0; i < list.size(); i++)
+  for(int i = 0; i < list.size(); ++i)
     {
       auto item = list.at(i);
 
@@ -873,8 +873,8 @@ find_all_child_items(const QString &text) const
 
       all << item;
 
-      for(int j = 0; j < item->rowCount(); j++)
-	for(int k = 0; k < item->columnCount(); k++)
+      for(int j = 0; j < item->rowCount(); ++j)
+        for(int k = 0; k < item->columnCount(); ++k)
 	  find_recursive_items(item->child(j, k), all);
     }
 
@@ -902,9 +902,9 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 	    find_all_child_items(tr("Legend")) +
 	    find_all_child_items(tr("XY Series")));
 
-  for(int i = 0; i < list.size(); i++)
+  for(int i = 0; i < list.size(); ++i)
     if(list.at(i))
-      for(int j = 0; j < list.at(i)->rowCount(); j++)
+      for(int j = 0; j < list.at(i)->rowCount(); ++j)
 	{
 	  auto item = list.at(i)->child(j, column);
 
@@ -1118,7 +1118,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
 	 item->parent()->index(),
 	 true);
 
-      for(int i = 0; i < 4; i++)
+      for(int i = 0; i < 4; ++i)
 	if(item->child(i, 1))
 	  {
 	    auto property = dooble_charts::Properties

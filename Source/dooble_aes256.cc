@@ -193,7 +193,7 @@ QByteArray dooble_aes256::decrypt(const QByteArray &data)
   auto ciphertext(data.mid(iv.length()));
   auto iterations = ciphertext.length() / m_block_length;
 
-  for(int i = 0; i < iterations; i++)
+  for(int i = 0; i < iterations; ++i)
     {
       auto position = i * m_block_length;
 
@@ -346,7 +346,7 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
 
   auto iterations = plaintext.length() / m_block_length;
 
-  for(int i = 0; i < iterations; i++)
+  for(int i = 0; i < iterations; ++i)
     {
       QByteArray p;
       auto position = i * m_block_length;
@@ -402,7 +402,7 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
   m_state[3][3] = static_cast<uint8_t> (b.at(static_cast<int> (3 + 4 * 3)));
   add_round_key(0);
 
-  for(size_t i = 1; i < m_Nr; i++)
+  for(size_t i = 1; i < m_Nr; ++i)
     {
       sub_bytes();
       shift_rows();
@@ -766,7 +766,7 @@ void dooble_aes256::test1(void)
   QByteArray text;
   dooble_aes256 aes256(dooble_random::random_bytes(32));
 
-  text = "for(size_t i = 0; i < 4; i++) "
+  text = "for(size_t i = 0; i < 4; ++i) "
     "{"
     "m_state[i][0] = s_sbox[static_cast<size_t> (m_state[i][0])];"
     "m_state[i][1] = s_sbox[static_cast<size_t> (m_state[i][1])];"
@@ -820,13 +820,13 @@ void dooble_aes256::test1_key_expansion(void)
 			 "1f352c073b6108d72d9810a30914dff4"));
   dooble_aes256 aes256(key);
 
-  for(size_t i = 0; i < 60; i++)
+  for(size_t i = 0; i < 60; ++i)
     if((i >= 8 && i <= 15) ||
        (i >= 52 && i <= 59))
       {
 	std::cout << "i = " << i << " ";
 
-	for(size_t j = 0; j < 4; j++)
+	for(size_t j = 0; j < 4; ++j)
 	  std::cout << QByteArray
 	    (1, static_cast<char> (aes256.m_round_key[i][j])).toHex().
 	    toStdString();

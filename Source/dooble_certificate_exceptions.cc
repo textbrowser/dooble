@@ -317,7 +317,7 @@ void dooble_certificate_exceptions::slot_populate(void)
 		{
 		  QHash<QString, QVariant> hash;
 
-		  for(int i = 0; i < 3; i++)
+		  for(int i = 0; i < 3; ++i)
 		    {
 		      auto data
 			(QByteArray::fromBase64(query.value(i).toByteArray()));
@@ -357,7 +357,7 @@ void dooble_certificate_exceptions::slot_populate(void)
   m_ui.table->setRowCount(list.size());
   m_ui.table->setSortingEnabled(false);
 
-  for(int i = 0; i < list.size(); i++)
+  for(int i = 0; i < list.size(); ++i)
     {
       QTableWidgetItem *item = nullptr;
       const auto &hash(list.at(i));
@@ -391,7 +391,7 @@ void dooble_certificate_exceptions::slot_search_timer_timeout(void)
   auto count = m_ui.table->rowCount();
   auto text(m_ui.search->text().toLower().trimmed());
 
-  for(int i = 0; i < m_ui.table->rowCount(); i++)
+  for(int i = 0; i < m_ui.table->rowCount(); ++i)
     if(text.isEmpty())
       m_ui.table->setRowHidden(i, false);
     else
