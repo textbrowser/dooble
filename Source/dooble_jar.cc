@@ -160,7 +160,7 @@ void dooble_jar_implementation::list_directory_contents(void)
 
   QDir directory(m_url.path());
 
-  foreach(const auto &i,
+  foreach(auto const &i,
 	  directory.entryInfoList(QDir::AllDirs | QDir::Files | QDir::Readable,
 				  QDir::Name))
     {
@@ -231,7 +231,7 @@ void dooble_jar_implementation::slot_finished
       m_html += "<table>\n";
       m_html += "<tr>\n";
 
-      foreach(const auto &i, output.value(1).split(' '))
+      foreach(auto const &i, output.value(1).split(' '))
 	if(i.trimmed().size() > 0)
 	  m_html += "<th>" + i.trimmed() + "</th>\n";
 

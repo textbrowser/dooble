@@ -360,7 +360,7 @@ void dooble_certificate_exceptions::slot_populate(void)
   for(int i = 0; i < list.size(); i++)
     {
       QTableWidgetItem *item = nullptr;
-      const auto &hash(list.at(i));
+      auto const &hash(list.at(i));
 
       item = new QTableWidgetItem(hash.value("url").toString());
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);

@@ -424,7 +424,7 @@ void dooble_address_widget::set_text_format
 {
   QList<QInputMethodEvent::Attribute> attributes;
 
-  foreach(const auto format, formats)
+  foreach(auto const format, formats)
     {
       auto attribute_type = QInputMethodEvent::TextFormat;
       auto length = format.length;
@@ -539,7 +539,7 @@ void dooble_address_widget::slot_populate
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  foreach(const auto &i, list)
+  foreach(auto const &i, list)
     m_completer->add_item(i.first, i.second);
 
   QApplication::restoreOverrideCursor();

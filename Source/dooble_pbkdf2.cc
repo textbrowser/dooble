@@ -155,7 +155,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2
 
   QByteArray bytes;
 
-  foreach(const auto &i, T)
+  foreach(auto const &i, T)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     if(m_interrupt.load())
 #else

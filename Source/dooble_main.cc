@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
        << SIGSEGV
        << SIGTERM;
 
-  foreach(const auto i, list)
+  foreach(auto const i, list)
     {
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS) || defined(Q_OS_UNIX)
       memset(&signal_action, 0, sizeof(struct sigaction));

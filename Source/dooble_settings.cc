@@ -469,7 +469,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	(tr("A valid list of dictionaries has not been prepared."));
     }
   else
-    foreach(const auto &i, s_spell_checker_dictionaries)
+    foreach(auto const &i, s_spell_checker_dictionaries)
       {
 	auto item = new QListWidgetItem(i);
 
@@ -729,7 +729,7 @@ int dooble_settings::site_feature_permission
 
   auto values(s_site_features_permissions.values(url));
 
-  foreach(const auto &value, values)
+  foreach(auto const &value, values)
     if(feature == QWebEnginePage::Feature(value.first) && value.first != -1)
       return value.second ? 1 : 0;
 
@@ -935,7 +935,7 @@ void dooble_settings::prepare_fonts(void)
 	     << QWebEngineSettings::SerifFont
 	     << QWebEngineSettings::StandardFont;
 
-    foreach(const auto family, families)
+    foreach(auto const family, families)
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       fonts << QWebEngineSettings::defaultSettings()->fontFamily(family);
 #else
@@ -2144,7 +2144,7 @@ void dooble_settings::set_site_feature_permission
     {
       auto values(s_site_features_permissions.values(url));
 
-      foreach(const auto &value, values)
+      foreach(auto const &value, values)
 	if(feature == QWebEnginePage::Feature(value.first) &&
 	   value.first != -1)
 	  {
@@ -3593,7 +3593,7 @@ void dooble_settings::slot_reset(void)
        << "dooble_settings.db"
        << "dooble_style_sheets.db";
 
-  foreach(const auto &i, list)
+  foreach(auto const &i, list)
     QFile::remove(setting("home_path").toString() +
 		  QDir::separator() +
 		  i);

@@ -166,7 +166,7 @@ void dooble_zip_implementation::slot_finished
       m_html += "<table>\n";
       m_html += "<tr>\n";
 
-      foreach(const auto &i, output.value(1).split(' '))
+      foreach(auto const &i, output.value(1).split(' '))
 	if(i.trimmed().size() > 0)
 	  m_html += "<th>" + i.trimmed() + "</th>\n";
 

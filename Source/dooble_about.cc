@@ -73,7 +73,7 @@ dooble_about::dooble_about(void):QMainWindow()
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 
   QString qversion{""};
-  const auto tmp{qVersion()};
+  auto const tmp{qVersion()};
 
   if(tmp)
     qversion = tmp;

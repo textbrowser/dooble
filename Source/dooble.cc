@@ -235,7 +235,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
 	      socket.flush();
 	    }
 	  else
-	    foreach(const auto &url, urls)
+	    foreach(auto const &url, urls)
 	      {
 		socket.write(url.toEncoded().toBase64());
 		socket.write("\n");
@@ -250,7 +250,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
   if(urls.isEmpty())
     new_page(QUrl(), is_private);
   else
-    foreach(const auto &url, urls)
+    foreach(auto const &url, urls)
       new_page(url, is_private);
 
   if(!s_containers_populated)
@@ -1973,7 +1973,7 @@ void dooble::prepare_standard_menus(void)
 {
   auto is_chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
 
-  foreach(const auto action, m_standard_menu_actions)
+  foreach(auto const action, m_standard_menu_actions)
     if(action)
       action->setEnabled(is_chart);
 
@@ -2989,7 +2989,7 @@ void dooble::slot_about_to_show_history_menu(void)
       {
 	std::sort(list.begin(), list.end());
 
-	foreach(const auto &i, list)
+	foreach(auto const &i, list)
 	  {
 	    auto action = new QAction(i, this);
 
@@ -3956,7 +3956,7 @@ void dooble::slot_history_action_triggered(void)
 
 void dooble::slot_history_favorites_populated(void)
 {
-  foreach(const auto &pair, m_delayed_pages)
+  foreach(auto const &pair, m_delayed_pages)
     if(pair.first)
       pair.first->load(pair.second);
 
@@ -4135,7 +4135,7 @@ void dooble::slot_open_local_file(void)
 
 void dooble::slot_open_previous_session_tabs(void)
 {
-  foreach(const auto &url, dooble::s_history->previous_session_tabs())
+  foreach(auto const &url, dooble::s_history->previous_session_tabs())
     if(!url.isEmpty() && url.isValid())
       slot_open_link(url);
 }
@@ -4497,7 +4497,7 @@ void dooble::slot_read_local_socket(void)
 
   auto list(data.split('\n'));
 
-  foreach(const auto &i, list)
+  foreach(auto const &i, list)
     {
       auto url(QUrl::fromEncoded(QByteArray::fromBase64(i)));
 
@@ -5405,7 +5405,7 @@ void dooble::slot_vacuum_databases(void)
   dialog.setWindowTitle(tr("Dooble: Vacuuming Databases"));
   dialog.show();
 
-  foreach(const auto &i, list)
+  foreach(auto const &i, list)
     {
       if(dialog.wasCanceled())
 	break;
@@ -5448,7 +5448,7 @@ void dooble::slot_warn_of_missing_sqlite_driver(void)
   auto found = false;
   auto list(QSqlDatabase::drivers());
 
-  foreach(const auto &i, list)
+  foreach(auto const &i, list)
     if(i.contains("sqlite", Qt::CaseInsensitive))
       {
 	found = true;

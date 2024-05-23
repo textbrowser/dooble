@@ -1343,7 +1343,7 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 
   auto list{m_ui.session_rejections->selectionModel()->selectedRows(1)};
 
-  foreach(const auto &i, list)
+  foreach(auto const &i, list)
     {
       auto url{QUrl::fromUserInput(i.data().toString())};
 

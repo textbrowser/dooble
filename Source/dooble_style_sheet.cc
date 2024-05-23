@@ -119,7 +119,7 @@ void dooble_style_sheet::inject(dooble_web_engine_page *web_engine_page)
 	  web_engine_page->scripts().remove
 	    (web_engine_page->scripts().findScript(it.key().first));
 #else
-	  foreach(const auto &script,
+	  foreach(auto const &script,
 		  web_engine_page->scripts().find(it.key().first))
 	    web_engine_page->scripts().remove(script);
 #endif
@@ -229,7 +229,7 @@ void dooble_style_sheet::slot_add(void)
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
 #else
-  foreach(const auto &script, m_web_engine_page->scripts().find(name))
+  foreach(auto const &script, m_web_engine_page->scripts().find(name))
     m_web_engine_page->scripts().remove(script);
 #endif
   m_web_engine_page->scripts().insert(web_engine_script);
@@ -403,7 +403,7 @@ void dooble_style_sheet::slot_remove(void)
   m_web_engine_page->scripts().remove
     (m_web_engine_page->scripts().findScript(name));
 #else
-  foreach(const auto &script, m_web_engine_page->scripts().find(name))
+  foreach(auto const &script, m_web_engine_page->scripts().find(name))
     m_web_engine_page->scripts().remove(script);
 #endif
   s_style_sheets.remove

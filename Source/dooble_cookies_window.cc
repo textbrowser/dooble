@@ -207,7 +207,7 @@ bool dooble_cookies_window::is_domain_blocked(const QUrl &url) const
 	    domains << "." + host << host;
 	}
 
-      foreach(const auto &domain, domains)
+      foreach(auto const &domain, domains)
 	{
 	  auto item = m_top_level_items.value(domain);
 
@@ -508,7 +508,7 @@ void dooble_cookies_window::slot_cookies_added
 
   for(int i = 0; i < cookies.size(); i++)
     {
-      const auto &cookie(cookies.at(i));
+      auto const &cookie(cookies.at(i));
 
       if(cookie.domain().trimmed().isEmpty())
 	continue;
