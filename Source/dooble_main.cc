@@ -211,7 +211,9 @@ int main(int argc, char *argv[])
       sigemptyset(&signal_action.sa_mask);
       signal_action.sa_flags = 0;
 
-      if(sigaction(i, &signal_action, (struct sigaction *) nullptr))
+      if(sigaction(i,
+		   &signal_action,
+		   static_cast<struct sigaction *> (nullptr)))
 	std::cerr << "sigaction() failure on " << i << std::endl;
 #else
       signal(i, signal_handler);
@@ -227,7 +229,8 @@ int main(int argc, char *argv[])
   signal_action.sa_handler = SIG_IGN;
   sigemptyset(&signal_action.sa_mask);
   signal_action.sa_flags = 0;
-  sigaction(SIGPIPE, &signal_action, (struct sigaction *) nullptr);
+  sigaction
+    (SIGPIPE, &signal_action, static_cast<struct sigaction *> (nullptr));
 #endif
   qRegisterMetaType<QAbstractItemModel::LayoutChangeHint>
     ("QAbstractItemModel::LayoutChangeHint");

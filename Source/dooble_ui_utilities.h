@@ -55,7 +55,7 @@ class dooble_ui_utilities
     volatile auto v = static_cast<unsigned char *> (s);
 
     while(n--)
-      *v++ = (unsigned char) c;
+      *v++ = static_cast<unsigned char> (c);
   }
 
 private:
