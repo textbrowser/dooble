@@ -274,6 +274,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Werror \
                           -Wextra \
                           -Wformat=2 \
+                          -Wold-style-cast \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
@@ -294,6 +295,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wcast-qual \
                           -Wextra \
                           -Wformat=2 \
+                          -Wold-style-cast \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
@@ -327,6 +329,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wformat=2 \
                           -Wlogical-op \
                           -Wno-deprecated-copy \
+                          -Wold-style-cast \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
