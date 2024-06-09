@@ -1,4 +1,5 @@
-Apple Silicon requires signed software. We recommend a Homebrew
+Apple Silicon requires signed software and therefore a bundled
+package will be considered tarnished.  We recommend a Homebrew
 solution. Please visit https://brew.sh and install Homebrew.
 
 > brew install git
