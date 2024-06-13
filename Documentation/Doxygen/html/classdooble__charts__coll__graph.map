@@ -1,0 +1,8 @@
+<map id="dooble_charts" name="dooble_charts">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,183,119,208"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="17,5,96,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,44,64,182,59,182,55,45"/>
+<area shape="rect" id="Node000003" href="$classdooble__charts__property__editor.html" title=" " alt="" coords="79,80,253,120"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="85,37,142,78,139,82,82,41"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,131,77,184,73,180,133,127"/>
+</map>

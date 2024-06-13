@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,153,80,179"/>
+<area shape="rect" id="Node000001" href="$classdooble__clear__items.html" title=" " alt="" coords="143,5,292,31"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="52,140,81,89,101,62,126,40,148,28,150,33,130,44,105,66,85,92,57,142"/>
+<area shape="rect" id="Node000002" href="$classdooble__favorites__popup.html" title=" " alt="" coords="128,55,307,80"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="63,141,91,114,127,89,154,78,156,82,129,94,95,118,66,145"/>
+<area shape="rect" id="Node000003" href="$classdooble__javascript.html" title=" " alt="" coords="149,104,286,129"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="93,148,127,138,168,127,169,132,129,143,94,153"/>
+<area shape="rect" id="Node000004" href="$classdooble__popup__menu.html" title=" " alt="" coords="139,153,296,179"/>
+<area shape="poly" id="edge8_Node000000_Node000004" title=" " alt="" coords="94,163,139,163,139,169,94,169"/>
+<area shape="rect" id="Node000005" href="$classdooble__search__engines__popup.html" title=" " alt="" coords="130,203,305,243"/>
+<area shape="poly" id="edge9_Node000000_Node000005" title=" " alt="" coords="94,180,157,201,155,206,92,185"/>
+<area shape="rect" id="Node000006" href="$classdooble__style__sheet.html" title=" " alt="" coords="143,268,291,293"/>
+<area shape="poly" id="edge10_Node000000_Node000006" title=" " alt="" coords="63,188,92,222,129,253,157,265,154,270,127,258,88,226,59,192"/>
+<area shape="rect" id="Node000007" href="$classdooble__text__dialog.html" title=" " alt="" coords="144,317,291,343"/>
+<area shape="poly" id="edge11_Node000000_Node000007" title=" " alt="" coords="55,190,83,248,104,277,130,303,152,315,150,320,126,307,100,281,78,250,50,193"/>
+</map>
