@@ -289,7 +289,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent() +
 #endif
     " Dooble/" DOOBLE_VERSION_STRING;
-#ifdef Q_OS_WIN
+#ifdef Q_OS_WINDOWS
 #else
   m_ui.theme->setEnabled(false);
   m_ui.theme->setToolTip(tr("Windows only."));
@@ -1716,7 +1716,7 @@ void dooble_settings::restore(bool read_database)
 
   m_ui.temporarily_disable_javascript->setChecked
     (s_settings.value("temporarily_disable_javascript", false).toBool());
-#ifdef Q_OS_WIN
+#ifdef Q_OS_WINDOWS
   m_ui.theme->setCurrentIndex
     (qBound(0,
 	    s_settings.value("theme_color_index", 2).toInt(),

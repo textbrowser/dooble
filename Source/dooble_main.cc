@@ -245,12 +245,12 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QVector<qreal> > ("QVector<qreal>");
   qRegisterMetaType<Qt::SortOrder> ("Qt::SortOrder");
   qRegisterMetaType<dooble_charts::Properties> ("dooble_charts::Properties");
-#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+#if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
   QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 #endif
-#ifdef Q_OS_WIN
+#ifdef Q_OS_WINDOWS
   QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL, true);
 #endif
 #else
@@ -282,7 +282,7 @@ int main(int argc, char *argv[])
 #endif
   QString dooble_settings_path("");
   dooble::s_application = new dooble_application(argc, argv);
-#if defined(Q_OS_WIN)
+#if defined(Q_OS_WINDOWS)
   auto bytes(qgetenv("DOOBLE_HOME").trimmed());
 
   if(bytes.isEmpty())

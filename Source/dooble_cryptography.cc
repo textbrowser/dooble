@@ -27,7 +27,7 @@
 
 #include <QCryptographicHash>
 
-#ifndef Q_OS_WIN
+#ifndef Q_OS_WINDOWS
 extern "C"
 {
 #include <sys/mman.h>
