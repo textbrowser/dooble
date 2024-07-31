@@ -112,9 +112,11 @@ class dooble_page: public QWidget
   QPointer<QAction> m_action_close_tab;
   QPointer<QAction> m_authentication_action;
   QPointer<QAction> m_clone_action;
+  QPointer<QAction> m_decreased_page_brightness_action;
   QPointer<QAction> m_find_action;
   QPointer<QAction> m_full_screen_action;
   QPointer<QAction> m_settings_action;
+  QPointer<QAction> m_status_bar_action;
   QPointer<QProgressDialog> m_export_as_png_progress_dialog;
   QPointer<dooble_javascript> m_javascript_console;
   QString m_export_png_file_name;
@@ -231,6 +233,7 @@ class dooble_page: public QWidget
   void create_dialog(dooble_web_engine_view *view);
   void create_tab(dooble_web_engine_view *view);
   void create_window(dooble_web_engine_view *view);
+  void decreased_page_brightness(bool state);
   void dooble_credentials_authenticated(bool state);
   void export_as_png(void);
   void iconChanged(const QIcon &icon);
@@ -269,6 +272,7 @@ class dooble_page: public QWidget
   void show_settings(void);
   void show_settings_panel(dooble_settings::Panels panel);
   void show_site_cookies(void);
+  void status_bar_visible(bool state);
   void titleChanged(const QString &title);
   void translate_page(void);
   void vacuum_databases(void);

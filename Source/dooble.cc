@@ -1438,6 +1438,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(decreased_page_brightness(bool)),
+	  s_application,
+	  SIGNAL(decreased_page_brightness(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
@@ -1670,6 +1676,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
+	  SIGNAL(status_bar_visible(bool)),
+	  s_application,
+	  SIGNAL(status_bar_visible(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
 	  SIGNAL(titleChanged(const QString &)),
 	  this,
 	  SLOT(slot_title_changed(const QString &)),
@@ -1694,9 +1706,21 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(s_application,
+	  SIGNAL(decreased_page_brightness(bool)),
+	  page,
+	  SLOT(slot_decreased_page_brightness(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(s_application,
 	  SIGNAL(dooble_credentials_authenticated(bool)),
 	  page,
 	  SLOT(slot_dooble_credentials_authenticated(bool)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(s_application,
+	  SIGNAL(status_bar_visible(bool)),
+	  page,
+	  SLOT(slot_show_status_bar(bool)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
 }

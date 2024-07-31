@@ -1437,18 +1437,28 @@ void dooble_page::prepare_standard_menus(void)
 					 QKeySequence(tr("Ctrl+F11")));
 #endif
   menu->addSeparator();
-  action = menu->addAction(tr("&Status Bar"),
-			   this,
-			   SLOT(slot_show_status_bar(bool)));
-  action->setCheckable(true);
-  action->setChecked(dooble_settings::setting("status_bar_visible").toBool());
+  m_status_bar_action = menu->addAction(tr("&Status Bar"),
+					this,
+					SLOT(slot_show_status_bar(bool)));
+  m_status_bar_action->setCheckable(true);
+  m_status_bar_action->setChecked
+    (dooble_settings::setting("status_bar_visible").toBool());
+  connect(m_status_bar_action,
+	  SIGNAL(triggered(bool)),
+	  this,
+	  SIGNAL(status_bar_visible(bool)));
   menu->addSeparator();
-  action = menu->addAction(tr("&Decreased Page Brightness"),
-			   this,
-			   SLOT(slot_decreased_page_brightness(bool)));
-  action->setCheckable(true);
-  action->setChecked
+  m_decreased_page_brightness_action = menu->addAction
+    (tr("&Decreased Page Brightness"),
+     this,
+     SLOT(slot_decreased_page_brightness(bool)));
+  m_decreased_page_brightness_action->setCheckable(true);
+  m_decreased_page_brightness_action->setChecked
     (dooble_settings::setting("decreased_page_brightness").toBool());
+  connect(m_decreased_page_brightness_action,
+	  SIGNAL(triggered(bool)),
+	  this,
+	  SIGNAL(decreased_page_brightness(bool)));
 
   if(dooble::s_settings)
     {
@@ -1625,7 +1635,7 @@ void dooble_page::reset_url(void)
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
-  m_brightness->resize(m_view->size());
+  m_brightness->resize(event ? event->size() : m_view->size());
   prepare_progress_label_position(false);
 
   auto font_metrics(m_ui.link_hovered->fontMetrics());
@@ -1975,6 +1985,8 @@ void dooble_page::slot_decreased_page_brightness(bool state)
 {
   dooble_settings::set_setting("decreased_page_brightness", state);
   m_brightness->setVisible(state);
+  m_decreased_page_brightness_action ?
+    m_decreased_page_brightness_action->setChecked(state) : (void) 0;
 }
 
 void dooble_page::slot_dooble_credentials_authenticated(bool state)
@@ -3109,6 +3121,7 @@ void dooble_page::slot_show_pull_down_menu(void)
 void dooble_page::slot_show_status_bar(bool state)
 {
   dooble_settings::set_setting("status_bar_visible", state);
+  m_status_bar_action ? m_status_bar_action->setChecked(state) : (void) 0;
   m_ui.status_bar->setVisible(state);
   prepare_progress_label_position();
 }

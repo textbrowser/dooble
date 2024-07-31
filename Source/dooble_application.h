@@ -57,10 +57,12 @@ class dooble_application: public QApplication
   void address_widget_populated(void);
   void application_locked(bool state, dooble *d);
   void cookies_cleared(void);
+  void decreased_page_brightness(bool state);
   void dooble_credentials_authenticated(bool state);
   void favorites_cleared(void);
   void favorites_sorted(void);
   void history_cleared(void);
+  void status_bar_visible(bool state);
 };
 
 #endif
