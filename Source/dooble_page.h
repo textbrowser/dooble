@@ -121,6 +121,7 @@ class dooble_page: public QWidget
   QTimer m_export_png_timer;
   QTimer m_reload_timer;
   QVector<QPointer<dooble_web_engine_view> > m_last_javascript_popups;
+  QWidget *m_brightness;
   Ui_dooble_page m_ui;
   bool m_export_as_png;
   bool m_is_location_frame_user_hidden;
@@ -154,6 +155,7 @@ class dooble_page: public QWidget
   void slot_close_javascript_popup_exception_frame(void);
   void slot_create_dialog_request(dooble_web_engine_view *view);
   void slot_current_url_executable(void);
+  void slot_decreased_page_brightness(bool state);
   void slot_dooble_credentials_authenticated(bool state);
   void slot_dooble_credentials_created(void);
   void slot_downloads_finished(void);

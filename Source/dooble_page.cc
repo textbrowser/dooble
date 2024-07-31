@@ -471,6 +471,13 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(zoomed(qreal)),
 	  m_ui.address,
 	  SLOT(slot_zoomed(qreal)));
+  m_brightness = new QWidget(m_ui.frame);
+  m_brightness->resize(m_view->size());
+  m_brightness->setAttribute(Qt::WA_TransparentForMouseEvents);
+  m_brightness->setStyleSheet
+    ("QWidget {background-color: rgba(0, 0, 0, 25%);}");
+  m_brightness->setVisible
+    (dooble_settings::setting("decreased_page_brightness").toBool());
   m_progress_label = new QLabel(m_ui.frame);
   m_progress_label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   m_progress_label->setIndent(5);
@@ -1435,6 +1442,13 @@ void dooble_page::prepare_standard_menus(void)
 			   SLOT(slot_show_status_bar(bool)));
   action->setCheckable(true);
   action->setChecked(dooble_settings::setting("status_bar_visible").toBool());
+  menu->addSeparator();
+  action = menu->addAction(tr("&Decreased Page Brightness"),
+			   this,
+			   SLOT(slot_decreased_page_brightness(bool)));
+  action->setCheckable(true);
+  action->setChecked
+    (dooble_settings::setting("decreased_page_brightness").toBool());
 
   if(dooble::s_settings)
     {
@@ -1611,6 +1625,7 @@ void dooble_page::reset_url(void)
 void dooble_page::resizeEvent(QResizeEvent *event)
 {
   QWidget::resizeEvent(event);
+  m_brightness->resize(m_view->size());
   prepare_progress_label_position(false);
 
   auto font_metrics(m_ui.link_hovered->fontMetrics());
@@ -1954,6 +1969,12 @@ void dooble_page::slot_current_url_executable(void)
   qputenv("DOOBLE_CURRENT_URL_UTF8", url().toString().toUtf8());
   QProcess::startDetached(action->text(), QStringList() << url().toString());
   qunsetenv("DOOBLE_CURRENT_URL_UTF8");
+}
+
+void dooble_page::slot_decreased_page_brightness(bool state)
+{
+  dooble_settings::set_setting("decreased_page_brightness", state);
+  m_brightness->setVisible(state);
 }
 
 void dooble_page::slot_dooble_credentials_authenticated(bool state)
@@ -3087,8 +3108,8 @@ void dooble_page::slot_show_pull_down_menu(void)
 
 void dooble_page::slot_show_status_bar(bool state)
 {
-  m_ui.status_bar->setVisible(state);
   dooble_settings::set_setting("status_bar_visible", state);
+  m_ui.status_bar->setVisible(state);
   prepare_progress_label_position();
 }
 
