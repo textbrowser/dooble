@@ -182,7 +182,7 @@ QByteArray dooble_aes256::decrypt(const QByteArray &data)
   ** CBC
   */
 
-  auto iv(data.mid(0, m_block_length));
+  auto const &iv(data.mid(0, m_block_length));
 
   if(Q_UNLIKELY(iv.length() != m_block_length))
     return QByteArray();
@@ -191,11 +191,11 @@ QByteArray dooble_aes256::decrypt(const QByteArray &data)
   QByteArray c;
   QByteArray decrypted;
   auto ciphertext(data.mid(iv.length()));
-  auto iterations = ciphertext.length() / m_block_length;
+  auto const iterations = ciphertext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
     {
-      auto position = i * m_block_length;
+      auto const position = i * m_block_length;
 
       block = decrypt_block(ciphertext.mid(position, m_block_length));
 
@@ -310,7 +310,7 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
   ** CBC
   */
 
-  auto iv(dooble_random::random_bytes(m_block_length));
+  auto const &iv(dooble_random::random_bytes(m_block_length));
 
   if(Q_UNLIKELY(iv.isEmpty()))
     return QByteArray();
@@ -344,12 +344,12 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
      static_cast<int> (sizeof(int)),
      originalLength);
 
-  auto iterations = plaintext.length() / m_block_length;
+  auto const iterations = plaintext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
     {
       QByteArray p;
-      auto position = i * m_block_length;
+      auto const position = i * m_block_length;
 
       p = plaintext.mid(position, m_block_length);
 
@@ -434,7 +434,7 @@ QByteArray dooble_aes256::encrypt_block(const QByteArray &block)
 
 void dooble_aes256::add_round_key(size_t c)
 {
-  auto product = c * m_Nb;
+  auto const product = c * m_Nb;
 
   m_state[0][0] ^= m_round_key[product + 0][0];
   m_state[0][1] ^= m_round_key[product + 1][0];
@@ -566,7 +566,7 @@ void dooble_aes256::key_expansion(void)
 
   while(i < m_Nk)
     {
-      auto product = 4 * i;
+      auto const product = 4 * i;
 
       m_round_key[i][0] = static_cast<uint8_t>
 	(m_key[static_cast<int> (product + 0)]);
@@ -580,7 +580,7 @@ void dooble_aes256::key_expansion(void)
     }
 
   uint8_t temp[4];
-  auto iterations = m_Nb * (m_Nr + 1);
+  auto const iterations = m_Nb * (m_Nr + 1);
 
   while(i < iterations)
     {
@@ -593,8 +593,8 @@ void dooble_aes256::key_expansion(void)
 
       if(m_Nk > 0 && i % m_Nk == 0)
 	{
-	  auto quotient = i / m_Nk;
-	  uint8_t t = temp[0];
+	  auto const quotient = i / m_Nk;
+	  auto t = temp[0];
 
 	  temp[0] = temp[1];
 	  temp[1] = temp[2];
@@ -781,7 +781,7 @@ void dooble_aes256::test1(void)
 
 void dooble_aes256::test1_decrypt_block(void)
 {
-  auto key
+  auto const &key
     (QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
@@ -796,7 +796,7 @@ void dooble_aes256::test1_decrypt_block(void)
 
 void dooble_aes256::test1_encrypt_block(void)
 {
-  auto key
+  auto const &key
     (QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
@@ -815,7 +815,7 @@ void dooble_aes256::test1_key_expansion(void)
   ** Section A.3 of the standard.
   */
 
-  auto key
+  auto const &key
     (QByteArray::fromHex("603deb1015ca71be2b73aef0857d7781"
 			 "1f352c073b6108d72d9810a30914dff4"));
   dooble_aes256 aes256(key);

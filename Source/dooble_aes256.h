@@ -60,14 +60,14 @@ class dooble_aes256: public dooble_block_cipher
   QByteArray decrypt_block(const QByteArray &block);
   QByteArray encrypt_block(const QByteArray &block);
 
-  uint8_t xtime(uint8_t x)
+  static uint8_t xtime(uint8_t x)
   {
     return static_cast<uint8_t> ((x << 1) ^ (((x >> 7) & 1) * 0x1b));
   }
 
-  uint8_t xtime_special(uint8_t x, uint8_t y)
+  static uint8_t xtime_special(uint8_t x, uint8_t y)
   {
-    auto xtime_y = xtime(y);
+    auto const xtime_y = xtime(y);
 
     return static_cast<uint8_t>
       (((x & 1) * y) ^

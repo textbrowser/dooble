@@ -101,7 +101,7 @@ static void bytes_to_words(uint64_t *W,
 
   for(size_t i = 0; i < bytes_size / 8; i++)
     {
-      auto product = i * 8;
+      auto const product = i * 8;
 
       b[0] = bytes[product + 0];
       b[1] = bytes[product + 1];
@@ -139,7 +139,7 @@ static void mix(const uint64_t x0,
   ** Section 3.3.1.
   */
 
-  auto r = static_cast<uint64_t> (R_4[d % 8][i]);
+  auto const r = static_cast<uint64_t> (R_4[d % 8][i]);
 
   *y0 = x0 + x1;
 
@@ -167,7 +167,7 @@ static void mix_inverse(const uint64_t y0,
   ** Section 3.3.1.
   */
 
-  auto r = static_cast<uint64_t> (R_4[d % 8][i]);
+  auto const r = static_cast<uint64_t> (R_4[d % 8][i]);
 
   /*
   ** Please see https://en.wikipedia.org/wiki/Circular_shift.
@@ -282,7 +282,7 @@ static void threefish_decrypt_implementation(char *D,
       }
 
   {
-    auto quotient = Nr / 4;
+    auto const quotient = Nr / 4;
 
     for(size_t i = 0; i < Nw; i++)
       v[i] -= s[quotient][i];
@@ -305,11 +305,11 @@ static void threefish_decrypt_implementation(char *D,
 
       for(size_t i = 0; i < Nw / 2; i++)
 	{
-	  auto product = i * 2;
+	  auto const product = i * 2;
+	  auto const y0 = f[product];
+	  auto const y1 = f[product + 1];
 	  uint64_t x0 = 0;
 	  uint64_t x1 = 0;
-	  uint64_t y0 = f[product];
-	  uint64_t y1 = f[product + 1];
 
 	  mix_inverse(y0, y1, d, i, &x0, &x1, block_size);
 	  v[product] = x0;
@@ -321,7 +321,7 @@ static void threefish_decrypt_implementation(char *D,
 
       if(d % 4 == 0)
 	{
-	  auto quotient = d / 4;
+	  auto const quotient = d / 4;
 
 	  for(size_t i = 0; i < Nw; i++)
 	    v[i] -= s[quotient][i];
@@ -476,7 +476,7 @@ static void threefish_encrypt_implementation(char *E,
     {
       if(d % 4 == 0)
 	{
-	  auto quotient = d / 4;
+	  auto const quotient = d / 4;
 
 	  for(size_t i = 0; i < Nw; i++)
 	    v[i] += s[quotient][i];
@@ -494,9 +494,9 @@ static void threefish_encrypt_implementation(char *E,
 
       for(size_t i = 0; i < Nw / 2; i++)
 	{
-	  auto product = i * 2;
-	  uint64_t x0 = v[product];
-	  uint64_t x1 = v[product + 1];
+	  auto const product = i * 2;
+	  auto const x0 = v[product];
+	  auto const x1 = v[product + 1];
 	  uint64_t y0 = 0;
 	  uint64_t y1 = 0;
 
@@ -513,7 +513,7 @@ static void threefish_encrypt_implementation(char *E,
     }
 
   {
-    auto quotient = Nr / 4;
+    auto const quotient = Nr / 4;
 
     for(size_t i = 0; i < Nw; i++)
       v[i] += s[quotient][i];
@@ -565,7 +565,7 @@ static void words_to_bytes(char *B,
 
   for(size_t i = 0; i < words_size; i++)
     {
-      auto product = i * 8;
+      auto const product = i * 8;
 
       B[product + 0] = static_cast<char> (words[i] & 0xff);
       B[product + 1] = static_cast<char> ((words[i] >> 8) & 0xff);
@@ -598,7 +598,7 @@ QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
   if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
     return QByteArray();
 
-  auto iv(bytes.mid(0, m_key_length));
+  auto const &iv(bytes.mid(0, m_key_length));
 
   if(Q_UNLIKELY(iv.length() != m_key_length))
     return QByteArray();
@@ -607,12 +607,12 @@ QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
   QByteArray c;
   QByteArray decrypted;
   auto ciphertext(bytes.mid(iv.length()));
-  auto iterations = ciphertext.length() / m_block_length;
+  auto const iterations = ciphertext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
     {
+      auto const position = i * m_block_length;
       auto ok = true;
-      auto position = i * m_block_length;
 
       threefish_decrypt
 	(block.data(),
@@ -712,13 +712,13 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
     (plaintext.length() - static_cast<int> (sizeof(int)),
      static_cast<int> (sizeof(int)), original_length);
 
-  auto iterations = plaintext.length() / m_block_length;
+  auto const iterations = plaintext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
     {
       QByteArray p;
+      auto const position = i * m_block_length;
       auto ok = true;
-      auto position = i * m_block_length;
 
       p = plaintext.mid(position, m_block_length);
 
@@ -753,7 +753,7 @@ QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 void dooble_threefish256::set_initialization_vector
 (QByteArray &bytes, bool *ok) const
 {
-  auto iv_length = m_key_length;
+  auto const iv_length = m_key_length;
 
   if(ok)
     *ok = false;
