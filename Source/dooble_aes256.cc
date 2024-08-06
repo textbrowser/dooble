@@ -182,7 +182,7 @@ QByteArray dooble_aes256::decrypt(const QByteArray &data)
   ** CBC
   */
 
-  auto const &iv(data.mid(0, m_block_length));
+  auto const iv(data.mid(0, m_block_length));
 
   if(Q_UNLIKELY(iv.length() != m_block_length))
     return QByteArray();
@@ -310,7 +310,7 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
   ** CBC
   */
 
-  auto const &iv(dooble_random::random_bytes(m_block_length));
+  auto const iv(dooble_random::random_bytes(m_block_length));
 
   if(Q_UNLIKELY(iv.isEmpty()))
     return QByteArray();
@@ -781,7 +781,7 @@ void dooble_aes256::test1(void)
 
 void dooble_aes256::test1_decrypt_block(void)
 {
-  auto const &key
+  auto const key
     (QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
@@ -796,7 +796,7 @@ void dooble_aes256::test1_decrypt_block(void)
 
 void dooble_aes256::test1_encrypt_block(void)
 {
-  auto const &key
+  auto const key
     (QByteArray::fromHex("000102030405060708090a0b0c0d0e0f"
 			 "101112131415161718191a1b1c1d1e1f"));
   dooble_aes256 aes256(key);
@@ -815,7 +815,7 @@ void dooble_aes256::test1_key_expansion(void)
   ** Section A.3 of the standard.
   */
 
-  auto const &key
+  auto const key
     (QByteArray::fromHex("603deb1015ca71be2b73aef0857d7781"
 			 "1f352c073b6108d72d9810a30914dff4"));
   dooble_aes256 aes256(key);

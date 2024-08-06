@@ -508,7 +508,7 @@ void dooble_cookies_window::slot_cookies_added
 
   for(int i = 0; i < cookies.size(); i++)
     {
-      auto const &cookie(cookies.at(i));
+      auto const cookie(cookies.at(i));
 
       if(cookie.domain().trimmed().isEmpty())
 	continue;

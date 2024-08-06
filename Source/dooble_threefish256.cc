@@ -598,7 +598,7 @@ QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
   if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
     return QByteArray();
 
-  auto const &iv(bytes.mid(0, m_key_length));
+  auto const iv(bytes.mid(0, m_key_length));
 
   if(Q_UNLIKELY(iv.length() != m_key_length))
     return QByteArray();
