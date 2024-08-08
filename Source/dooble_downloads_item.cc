@@ -108,11 +108,11 @@ dooble_downloads_item::dooble_downloads_item
 #endif
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-      QFileInfo file_info(m_download->downloadDirectory() +
-			  QDir::separator() +
-			  m_download->downloadFileName());
+      QFileInfo const file_info(m_download->downloadDirectory() +
+				QDir::separator() +
+				m_download->downloadFileName());
 #else
-      QFileInfo file_info(m_download->path());
+      QFileInfo const file_info(m_download->path());
 #endif
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))

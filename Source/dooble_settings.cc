@@ -222,7 +222,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
       path.append("dooble_" + QLocale::system().name() + ".qm");
 
-      QFileInfo file_info(path);
+      QFileInfo const file_info(path);
 
       if(!file_info.exists() || !file_info.isReadable())
 	{

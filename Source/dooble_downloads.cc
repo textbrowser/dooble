@@ -389,7 +389,7 @@ void dooble_downloads::record_download
 	}
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-      QFileInfo file_info(downloads_item->download_path());
+      QFileInfo const file_info(downloads_item->download_path());
 
       if(download->downloadDirectory() ==
 	 file_info.absoluteDir().absolutePath() &&
@@ -585,7 +585,7 @@ void dooble_downloads::slot_download_destroyed(void)
 
 void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
 {
-  QFileInfo file_info(m_ui.download_path->text());
+  QFileInfo const file_info(m_ui.download_path->text());
   auto palette(m_ui.download_path->palette());
   static auto s_palette(m_ui.download_path->palette());
 
@@ -644,7 +644,7 @@ void dooble_downloads::slot_download_requested
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
       download->setDownloadDirectory(download_path());
 #else
-      QFileInfo file_info(download->path());
+      QFileInfo const file_info(download->path());
 
       download->setPath
 	(download_path() + QDir::separator() + file_info.fileName());
