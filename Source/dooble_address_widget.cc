@@ -144,7 +144,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 
   auto font(this->font());
 
-  font.setPointSize(font.pointSize() + 1.25);
+  font.setPointSizeF(1.25 + font.pointSizeF());
   setFont(font);
   setMinimumHeight
     (qBound(0,
