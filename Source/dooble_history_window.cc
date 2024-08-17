@@ -191,7 +191,7 @@ void dooble_history_window::discover_m_parent(void)
 
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-      QWidgetList list(QApplication::topLevelWidgets());
+      auto const list(QApplication::topLevelWidgets());
 
       foreach(auto i, list)
 	if(qobject_cast<dooble *> (i))
@@ -544,8 +544,8 @@ void dooble_history_window::slot_delete_rows
 
 void dooble_history_window::slot_enter_pressed(void)
 {
-  auto list(m_ui.table->selectionModel()->
-	    selectedRows(static_cast<int> (TableColumns::FAVORITE)));
+  auto const list(m_ui.table->selectionModel()->
+		  selectedRows(static_cast<int> (TableColumns::FAVORITE)));
 
   if(list.isEmpty())
     return;
@@ -827,7 +827,7 @@ void dooble_history_window::slot_new_item(const QIcon &icon,
 
   if(dooble::s_history->is_favorite(item.url()))
     {
-      auto icon_set(dooble_settings::setting("icon_set").toString());
+      auto const icon_set(dooble_settings::setting("icon_set").toString());
 
       item1->setCheckState(Qt::Checked);
       item1->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));

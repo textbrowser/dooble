@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
   QString dooble_settings_path("");
   dooble::s_application = new dooble_application(argc, argv);
 #if defined(Q_OS_WINDOWS)
-  auto bytes(qgetenv("DOOBLE_HOME").trimmed());
+  auto const bytes(qgetenv("DOOBLE_HOME").trimmed());
 
   if(bytes.isEmpty())
     {
@@ -326,13 +326,13 @@ int main(int argc, char *argv[])
       dooble_settings::set_setting("home_path", dooble_settings_path = bytes);
     }
 #else
-  auto bytes(qgetenv("DOOBLE_HOME").trimmed());
+  auto const bytes(qgetenv("DOOBLE_HOME").trimmed());
 
   if(bytes.isEmpty())
     {
       QString dooble_directory(".dooble");
-      auto xdg_config_home(qgetenv("XDG_CONFIG_HOME").trimmed());
-      auto xdg_data_home(qgetenv("XDG_DATA_HOME").trimmed());
+      auto const xdg_config_home(qgetenv("XDG_CONFIG_HOME").trimmed());
+      auto const xdg_data_home(qgetenv("XDG_DATA_HOME").trimmed());
 
       if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
 	{
@@ -500,7 +500,7 @@ int main(int argc, char *argv[])
   dooble::s_settings = new dooble_settings();
   dooble::s_settings->set_settings_path(dooble_settings_path);
 
-  auto arguments(QCoreApplication::arguments());
+  auto const arguments(QCoreApplication::arguments());
   auto d = new dooble // Not deleted.
     (urls,
      arguments.contains("--private") ||
@@ -620,7 +620,7 @@ int main(int argc, char *argv[])
   else
     QTimer::singleShot(0, d, SLOT(showFullScreen(void)));
 
-  auto rc = dooble::s_application->exec();
+  auto const rc = dooble::s_application->exec();
 
   dooble::clean();
   return static_cast<int> (rc);

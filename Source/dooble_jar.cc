@@ -226,7 +226,7 @@ void dooble_jar_implementation::slot_finished
       ** Total         Total %                    Count
       */
 
-      auto output(m_content.split('\n'));
+      auto const output(m_content.split('\n'));
 
       m_html += "<table>\n";
       m_html += "<tr>\n";
@@ -239,13 +239,13 @@ void dooble_jar_implementation::slot_finished
 
       for(int i = 3; i < output.size() - 3; i++)
 	{
-	  auto bytes(output.at(i).trimmed());
+	  auto const bytes(output.at(i).trimmed());
 
 	  if(bytes.size() > 0)
 	    {
 	      m_html += "<tr>\n";
 
-	      auto list(bytes.split(' '));
+	      auto const list(bytes.split(' '));
 
 	      for(int j = 0; j < list.size(); j++)
 		if(list.at(j).trimmed().size() > 0)

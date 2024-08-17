@@ -133,7 +133,7 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
 	m_ui.delete_selected->click();
       else if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
 	{
-	  auto list(m_ui.view->selectionModel()->selectedRows(1));
+	  auto const list(m_ui.view->selectionModel()->selectedRows(1));
 
 	  if(list.isEmpty())
 	    return;
@@ -175,8 +175,8 @@ void dooble_favorites_popup::keyPressEvent(QKeyEvent *event)
 
 void dooble_favorites_popup::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.delete_selected->setIcon
     (QIcon::fromTheme(use_material_icons + "edit-delete",
@@ -311,8 +311,8 @@ void dooble_favorites_popup::slot_search_timer_timeout(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  auto const text(m_ui.search->text().toLower().trimmed());
   auto count = model->rowCount();
-  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())
@@ -411,7 +411,7 @@ void dooble_favorites_popup::slot_sort(int index)
 
 void dooble_favorites_popup::slot_sort(void)
 {
-  auto index = m_ui.sort_order->currentIndex();
+  auto const index = m_ui.sort_order->currentIndex();
 
   if(index == 0) // Last Visited
     m_ui.view->sortByColumn(2, Qt::DescendingOrder);

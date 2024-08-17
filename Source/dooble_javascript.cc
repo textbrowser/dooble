@@ -95,7 +95,7 @@ void dooble_javascript::slot_save(void)
      !m_page)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -160,7 +160,7 @@ void dooble_javascript::slot_url_changed(const QUrl &url)
       return;
     }
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);

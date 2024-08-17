@@ -72,7 +72,7 @@ void dooble_cookies::create_tables(QSqlDatabase &db)
 
 void dooble_cookies::purge(void)
 {
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -147,7 +147,7 @@ void dooble_cookies::slot_cookie_added(const QNetworkCookie &cookie)
 
  save_label:
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -215,7 +215,7 @@ void dooble_cookies::slot_cookie_removed(const QNetworkCookie &cookie)
   else if(m_is_private)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -248,7 +248,7 @@ void dooble_cookies::slot_delete_cookie(const QNetworkCookie &cookie)
   else if(m_is_private)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -287,7 +287,7 @@ void dooble_cookies::slot_delete_domain(const QString &domain)
   else if(m_is_private)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -323,7 +323,7 @@ void dooble_cookies::slot_delete_items(const QList<QNetworkCookie> &cookies,
   else if(m_is_private)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -387,8 +387,8 @@ void dooble_cookies::slot_populate(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto database_name(dooble_database_utilities::database_name());
-  auto profile = QWebEngineProfile::defaultProfile();
+  auto const database_name(dooble_database_utilities::database_name());
+  auto const profile = QWebEngineProfile::defaultProfile();
   int count = 0;
 
   disconnect(profile->cookieStore(),
@@ -435,10 +435,10 @@ void dooble_cookies::slot_populate(void)
 		}
 
 	      QNetworkCookie cookie;
-	      auto is_blocked = dooble_cryptography::memcmp
+	      auto const is_blocked = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("blocked")).toBase64(),
 		 query.value(1).toByteArray());
-	      auto is_favorite = dooble_cryptography::memcmp
+	      auto const is_favorite = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("favorite")).
 		 toBase64(),
 		 query.value(1).toByteArray());
@@ -488,7 +488,7 @@ void dooble_cookies::slot_populate(void)
 		  continue;
 		}
 
-	      auto cookie = QNetworkCookie::parseCookies(bytes);
+	      auto const cookie = QNetworkCookie::parseCookies(bytes);
 
 	      if(cookie.isEmpty())
 		{
@@ -510,7 +510,7 @@ void dooble_cookies::slot_populate(void)
 		}
 
 	      auto allow_expired = false;
-	      auto now(QDateTime::currentDateTime());
+	      auto const now(QDateTime::currentDateTime());
 
 	      if(cookie.at(0).isSessionCookie())
 		{
@@ -548,11 +548,11 @@ void dooble_cookies::slot_populate(void)
 		  }
 
 	      auto c(cookie.at(0));
-	      auto is_blocked = dooble_cryptography::memcmp
+	      auto const is_blocked = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("blocked")).
 		 toBase64(),
 		 query.value(0).toByteArray());
-	      auto is_favorite = dooble_cryptography::memcmp
+	      auto const is_favorite = dooble_cryptography::memcmp
 		(dooble::s_cryptography->hmac(QByteArray("favorite")).
 		 toBase64(),
 		 query.value(0).toByteArray());

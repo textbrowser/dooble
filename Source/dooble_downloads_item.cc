@@ -182,8 +182,8 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
 	  this,
 	  SLOT(slot_reload(void)));
 
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.cancel->setIcon
     (QIcon::fromTheme(use_material_icons + "view-refresh",
@@ -259,8 +259,8 @@ void dooble_downloads_item::cancel(void)
 
 void dooble_downloads_item::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.cancel->setIcon
     (QIcon::fromTheme(use_material_icons + "media-playback-stop",
@@ -277,7 +277,7 @@ void dooble_downloads_item::record(void)
      m_is_private)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -312,7 +312,7 @@ void dooble_downloads_item::record(void)
 	  }
 
 	QByteArray bytes;
-	auto file_name(m_ui.file_name->text());
+	auto const file_name(m_ui.file_name->text());
 	auto information(m_ui.information->text());
 
 	query.prepare
@@ -373,7 +373,7 @@ void dooble_downloads_item::record_information(void)
      m_is_private)
     return;
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -386,7 +386,7 @@ void dooble_downloads_item::record_information(void)
       {
 	QByteArray bytes;
 	QSqlQuery query(db);
-	auto information(m_ui.information->text());
+	auto const information(m_ui.information->text());
 
 	query.prepare
 	  ("UPDATE dooble_downloads SET information = ? WHERE OID = ?");
@@ -542,8 +542,8 @@ void dooble_downloads_item::slot_finished(void)
 	      SLOT(slot_reload(void)),
 	      Qt::UniqueConnection);
 
-      auto icon_set(dooble_settings::setting("icon_set").toString());
-      auto use_material_icons(dooble_settings::use_material_icons());
+      auto const icon_set(dooble_settings::setting("icon_set").toString());
+      auto const use_material_icons(dooble_settings::use_material_icons());
 
       m_ui.cancel->setIcon
 	(QIcon::fromTheme(use_material_icons + "view-refresh",
@@ -571,8 +571,8 @@ void dooble_downloads_item::slot_pause_or_resume(void)
       else
 	m_download->pause();
 
-      auto icon_set(dooble_settings::setting("icon_set").toString());
-      auto use_material_icons(dooble_settings::use_material_icons());
+      auto const icon_set(dooble_settings::setting("icon_set").toString());
+      auto const use_material_icons(dooble_settings::use_material_icons());
 
       if(m_download->isPaused())
 	{

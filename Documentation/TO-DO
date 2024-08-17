@@ -223,6 +223,7 @@ Remaining Items
 - Optional Document Mode.
 - Prevent SQL query text overflow.
 - Remove const bool, const int, etc. from method parameters.
+- Review auto and database_name.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.

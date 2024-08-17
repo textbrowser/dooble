@@ -186,8 +186,8 @@ QByteArray dooble_gopher_implementation::plain_to_html(const QByteArray &bytes)
 void dooble_gopher_implementation::slot_connected(void)
 {
   QString output("");
+  auto const query(m_url.query());
   auto path(m_url.path());
-  auto query(m_url.query());
 
   if(path.length() <= 1)
     {
@@ -283,7 +283,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	  m_content.remove(0, bytes.length());
 	  bytes = bytes.trimmed();
 
-	  auto c = bytes.length() > 0 ? bytes.at(0) : '0';
+	  auto const c = bytes.length() > 0 ? bytes.at(0) : '0';
 
 	  if(c == '+' ||
 	     c == '0' ||
@@ -304,7 +304,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 
 	    bytes.remove(0, 1);
 
-	  auto list(bytes.split('\t'));
+	  auto const list(bytes.split('\t'));
 
 	  if(c == '+' ||
 	     c == '0' ||
@@ -336,7 +336,7 @@ void dooble_gopher_implementation::slot_ready_read(void)
 	    }
 	  else if(c == '3' || c == 'i')
  	    {
-	      auto information(list.value(0));
+	      auto const information(list.value(0));
 
 	      if(c == 'i')
  		{

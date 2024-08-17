@@ -587,7 +587,7 @@ void dooble_downloads::slot_download_path_inspection_timer_timeout(void)
 {
   QFileInfo const file_info(m_ui.download_path->text());
   auto palette(m_ui.download_path->palette());
-  static auto s_palette(m_ui.download_path->palette());
+  static auto const s_palette(m_ui.download_path->palette());
 
   if(file_info.isReadable() && file_info.isWritable())
     {
@@ -668,7 +668,8 @@ void dooble_downloads::slot_open_download_page(void)
   if(!action)
     return;
 
-  auto url(action->property("url").toUrl().adjusted(QUrl::RemoveFilename));
+  auto const url
+    (action->property("url").toUrl().adjusted(QUrl::RemoveFilename));
 
   if(url.isEmpty() || !url.isValid())
     return;
@@ -681,7 +682,7 @@ void dooble_downloads::slot_open_download_page(void)
   disconnect(this,
 	     SIGNAL(open_link(const QUrl &)));
 
-  auto list(QApplication::topLevelWidgets());
+  auto const list(QApplication::topLevelWidgets());
 
   foreach(auto i, list)
     if(qobject_cast<dooble *> (i) &&
@@ -745,7 +746,7 @@ void dooble_downloads::slot_populate(void)
 	      QString file_name("");
 	      QString information("");
 	      QUrl url;
-	      auto record(query.record());
+	      auto const record(query.record());
 	      qintptr oid = -1;
 
 	      for(int i = 0; i < record.count(); i++)
@@ -837,7 +838,7 @@ void dooble_downloads::slot_reload(const QString &file_name, const QUrl &url)
 	{
 	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	  auto list(QApplication::topLevelWidgets());
+	  auto const list(QApplication::topLevelWidgets());
 
 	  foreach(auto i, list)
 	    if(qobject_cast<dooble *> (i))
@@ -864,8 +865,8 @@ void dooble_downloads::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  auto const text(m_ui.search->text().toLower().trimmed());
   auto count = m_ui.table->rowCount();
-  auto text(m_ui.search->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
@@ -919,7 +920,7 @@ void dooble_downloads::slot_select_path(void)
 
 void dooble_downloads::slot_show_context_menu(const QPoint &point)
 {
-  auto row = m_ui.table->rowAt(point.y());
+  auto const row = m_ui.table->rowAt(point.y());
 
   if(row < 0)
     return;
@@ -932,7 +933,7 @@ void dooble_downloads::slot_show_context_menu(const QPoint &point)
 
   QAction *action = nullptr;
   QMenu menu(this);
-  auto url(downloads_item->url());
+  auto const url(downloads_item->url());
 
   action = menu.addAction
     (tr("&Copy Download Location"),

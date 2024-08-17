@@ -89,9 +89,9 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
 
-  auto icon_set(dooble_settings::setting("icon_set").toString());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
   auto label = new QLabel();
-  auto use_material_icons(dooble_settings::use_material_icons());
 
   label->setPixmap
     (QIcon::fromTheme(use_material_icons + "view-private",
@@ -199,7 +199,7 @@ bool dooble_cookies_window::is_domain_blocked(const QUrl &url) const
 
       while(host.contains('.'))
 	{
-	  auto index = host.indexOf('.');
+	  auto const index = host.indexOf('.');
 
 	  host = host.mid(index + 1);
 
@@ -287,7 +287,7 @@ void dooble_cookies_window::delete_top_level_items
 
       if(item)
 	{
-	  auto cookie
+	  auto const cookie
 	    (QNetworkCookie::
 	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
@@ -401,13 +401,13 @@ void dooble_cookies_window::show_normal(QWidget *parent)
 
 void dooble_cookies_window::slot_add_blocked_domain(void)
 {
-  auto domain(m_ui.block_domain->text().trimmed());
+  auto const domain(m_ui.block_domain->text().trimmed());
 
   if(domain.length() <= 1 || m_top_level_items.value(domain))
     return;
 
+  auto const text(m_ui.domain_filter->text().toLower().trimmed());
   auto item = new QTreeWidgetItem(m_ui.tree, QStringList() << domain);
-  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
   item->setCheckState(0, Qt::Checked);
   item->setFlags(Qt::ItemIsEnabled |
@@ -515,9 +515,9 @@ void dooble_cookies_window::slot_cookies_added
 
       if(!m_top_level_items.contains(cookie.domain()))
 	{
+	  auto const text(m_ui.domain_filter->text().toLower().trimmed());
 	  auto item = new QTreeWidgetItem
 	    (m_ui.tree, QStringList() << cookie.domain());
-	  auto text(m_ui.domain_filter->text().toLower().trimmed());
 
 	  if(is_blocked_or_favorite.at(i) ==
 	     static_cast<int> (dooble_cookies::BlockedOrFavorite::BLOCKED))
@@ -604,7 +604,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto list(m_ui.tree->selectedItems());
+  auto const list(m_ui.tree->selectedItems());
 
   if(m_cookie_store && m_cookies)
     disconnect(m_cookie_store,
@@ -628,7 +628,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 	  foreach(auto i, item->takeChildren())
 	    if(i)
 	      {
-		auto cookie
+		auto const cookie
 		  (QNetworkCookie::
 		   parseCookies(i->data(1, Qt::UserRole).toByteArray()));
 
@@ -648,7 +648,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 
 	  if(item)
 	    {
-	      auto cookie
+	      auto const cookie
 		(QNetworkCookie::
 		 parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
@@ -667,7 +667,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 	}
       else
 	{
-	  auto cookie
+	  auto const cookie
 	    (QNetworkCookie::
 	     parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
@@ -825,7 +825,7 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto text(m_ui.domain_filter->text().toLower().trimmed());
+  auto const text(m_ui.domain_filter->text().toLower().trimmed());
 
   for(int i = 0; i < m_ui.tree->topLevelItemCount(); i++)
     {
@@ -860,7 +860,7 @@ void dooble_cookies_window::slot_item_changed(QTreeWidgetItem *item, int column)
      m_is_private)
     return;
 
-  auto database_name("dooble_cookies_window");
+  QString const database_name("dooble_cookies_window");
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -933,7 +933,7 @@ void dooble_cookies_window::slot_item_selection_changed(void)
   else
     item->setSelected(true);
 
-  auto cookie
+  auto const cookie
     (QNetworkCookie::parseCookies(item->data(1, Qt::UserRole).toByteArray()));
 
   if(cookie.isEmpty())
@@ -1038,7 +1038,7 @@ void dooble_cookies_window::slot_toggle_shown(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto state = m_ui.toggle_shown->property("state").toBool();
+  auto const state = m_ui.toggle_shown->property("state").toBool();
 
   m_ui.toggle_shown->setProperty("state", !state);
   m_ui.toggle_shown->setText
