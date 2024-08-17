@@ -57,7 +57,7 @@ static void find_recursive_items(QStandardItem *item,
 QSize dooble_charts_property_editor_model_delegate::
 sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-  auto property = dooble_charts::Properties
+  auto const property = dooble_charts::Properties
     (index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
   auto size(QStyledItemDelegate::sizeHint(option, index));
 
@@ -89,7 +89,7 @@ createEditor(QWidget *parent,
 	     const QStyleOptionViewItem &option,
 	     const QModelIndex &index) const
 {
-  auto property = dooble_charts::Properties
+  auto const property = dooble_charts::Properties
     (index.data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
   switch(property)
@@ -319,8 +319,8 @@ createEditor(QWidget *parent,
       }
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
       {
+	auto const list(index.data().toString().split("/"));
 	auto editor = new QFrame(parent);
-	auto list(index.data().toString().split("/"));
 	auto spin_box_1 = new QSpinBox(editor);
 	auto spin_box_2 = new QSpinBox(editor);
 
@@ -448,8 +448,8 @@ void dooble_charts_property_editor_model_delegate::setModelData
 
 	  if(spin_box_1 && spin_box_2)
 	    {
-	      auto value1 = spin_box_1->value();
-	      auto value2 = spin_box_2->value();
+	      auto const value1 = spin_box_1->value();
+	      auto const value2 = spin_box_2->value();
 
 	      model->setData
 		(index, QString("%1 / %2").arg(value1).arg(value2));
@@ -537,9 +537,9 @@ dooble_charts_property_editor_model(QObject *parent):
 	}
 
       QList<QStandardItem *> list;
+      auto const offset = i;
       auto item = new QStandardItem
 	(dooble_charts::s_chart_properties_strings[i]);
-      auto offset = i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -629,9 +629,9 @@ dooble_charts_property_editor_model(QObject *parent):
   for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); i++)
     {
       QList<QStandardItem *> list;
+      auto const offset = 4 + chart->rowCount() + i;
       auto item = new QStandardItem
 	(dooble_charts::s_axis_properties_strings[i]);
-      auto offset = 4 + chart->rowCount() + i;
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -685,12 +685,12 @@ dooble_charts_property_editor_model(QObject *parent):
   for(int i = 0; !dooble_charts::s_axis_properties_strings[i].isEmpty(); i++)
     {
       QList<QStandardItem *> list;
-      auto item = new QStandardItem
-	(dooble_charts::s_axis_properties_strings[i]);
-      auto offset = 4 +
+      auto const offset = 4 +
 	chart_axis_x->rowCount() +
 	chart->rowCount() +
 	i;
+      auto item = new QStandardItem
+	(dooble_charts::s_axis_properties_strings[i]);
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -744,13 +744,13 @@ dooble_charts_property_editor_model(QObject *parent):
   for(int i = 0; !dooble_charts::s_data_properties_strings[i].isEmpty(); i++)
     {
       QList<QStandardItem *> list;
-      auto item = new QStandardItem
-	(dooble_charts::s_data_properties_strings[i]);
-      auto offset = 4 +
+      auto const offset = 4 +
 	chart->rowCount() +
 	chart_axis_x->rowCount() +
 	chart_axis_y->rowCount() +
 	i;
+      auto item = new QStandardItem
+	(dooble_charts::s_data_properties_strings[i]);
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -786,14 +786,14 @@ dooble_charts_property_editor_model(QObject *parent):
   for(int i = 0; !dooble_charts::s_legend_properties_strings[i].isEmpty(); i++)
     {
       QList<QStandardItem *> list;
-      auto item = new QStandardItem
-	(dooble_charts::s_legend_properties_strings[i]);
-      auto offset = 4 +
+      auto const offset = 4 +
 	chart->rowCount() +
 	chart_axis_x->rowCount() +
 	chart_axis_y->rowCount() +
 	data->rowCount() +
 	i;
+      auto item = new QStandardItem
+	(dooble_charts::s_legend_properties_strings[i]);
 
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
@@ -857,7 +857,7 @@ dooble_charts_property_editor_model::~dooble_charts_property_editor_model()
 QList<QStandardItem *> dooble_charts_property_editor_model::
 find_all_child_items(const QString &text) const
 {
-  auto list(findItems(text));
+  auto const list(findItems(text));
 
   if(list.isEmpty())
     return list;
@@ -884,7 +884,7 @@ find_all_child_items(const QString &text) const
 QStandardItem *dooble_charts_property_editor_model::
 find_specific_item(const QString &text) const
 {
-  auto list(findItems(text, Qt::MatchExactly | Qt::MatchRecursive));
+  auto const list(findItems(text, Qt::MatchExactly | Qt::MatchRecursive));
 
   if(!list.isEmpty())
     return list.at(0);
@@ -895,12 +895,12 @@ find_specific_item(const QString &text) const
 QStandardItem *dooble_charts_property_editor_model::item_from_property
 (const dooble_charts::Properties property, const int column) const
 {
-  auto list(find_all_child_items(tr("Chart")) +
-	    find_all_child_items(tr("Chart X-Axis")) +
-	    find_all_child_items(tr("Chart Y-Axis")) +
-	    find_all_child_items(tr("Data")) +
-	    find_all_child_items(tr("Legend")) +
-	    find_all_child_items(tr("XY Series")));
+  auto const list(find_all_child_items(tr("Chart")) +
+		  find_all_child_items(tr("Chart X-Axis")) +
+		  find_all_child_items(tr("Chart Y-Axis")) +
+		  find_all_child_items(tr("Data")) +
+		  find_all_child_items(tr("Legend")) +
+		  find_all_child_items(tr("XY Series")));
 
   for(int i = 0; i < list.size(); i++)
     if(list.at(i))
@@ -911,7 +911,7 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 	  if(!item)
 	    continue;
 
-	  auto p = dooble_charts::Properties
+	  auto const p = dooble_charts::Properties
 	    (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
 	  if(p == property)
@@ -1121,7 +1121,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
       for(int i = 0; i < 4; i++)
 	if(item->child(i, 1))
 	  {
-	    auto property = dooble_charts::Properties
+	    auto const property = dooble_charts::Properties
 	      (item->child(i, 1)->data(Qt::ItemDataRole(Qt::UserRole + 1)).
 	       toInt());
 

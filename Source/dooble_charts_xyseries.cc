@@ -180,7 +180,7 @@ properties_for_database(void) const
 
 	continue;
 
-      auto property(property_to_name(it.key()));
+      auto const property(property_to_name(it.key()));
 
       if(!property.isEmpty())
 	hash[property] = it.value();
@@ -215,7 +215,7 @@ x_axis_properties_for_database(void) const
 
 	continue;
 
-      auto property(property_to_name(it.key()));
+      auto const property(property_to_name(it.key()));
 
       if(!property.isEmpty())
 	hash[property] = it.value();
@@ -250,7 +250,7 @@ y_axis_properties_for_database(void) const
 
 	continue;
 
-      auto property(property_to_name(it.key()));
+      auto const property(property_to_name(it.key()));
 
       if(!property.isEmpty())
 	hash[property] = it.value();
@@ -262,7 +262,7 @@ y_axis_properties_for_database(void) const
 QString dooble_charts_xyseries::property_to_name
 (const dooble_charts::Properties property)
 {
-  auto name(dooble_charts::property_to_name(property).trimmed());
+  auto const name(dooble_charts::property_to_name(property).trimmed());
 
   if(!name.isEmpty())
     return name;
@@ -330,7 +330,7 @@ QString dooble_charts_xyseries::tick_type_to_string
 QValueAxis::TickType dooble_charts_xyseries::string_to_tick_type
 (const QString &t)
 {
-  auto text(t.trimmed());
+  auto const text(t.trimmed());
 
   if(text == tr("Dynamic"))
     return QValueAxis::TicksDynamic;
@@ -353,7 +353,7 @@ void dooble_charts_xyseries::save(QString &error)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -365,8 +365,9 @@ void dooble_charts_xyseries::save(QString &error)
     if(db.open())
       {
 	QSqlQuery query(db);
-	auto name(properties().value(dooble_charts::Properties::CHART_NAME).
-		  toString().toUtf8());
+	auto const name
+	  (properties().value(dooble_charts::Properties::CHART_NAME).
+	   toString().toUtf8());
 
 	query.prepare("INSERT INTO dooble_charts "
 		      "(name, property, subset_name, value) "
@@ -470,8 +471,8 @@ void dooble_charts_xyseries::slot_data_ready
   if(!series)
     return;
 
-  auto x = vector.at(0);
-  auto y = vector.at(1);
+  auto const x = vector.at(0);
+  auto const y = vector.at(1);
 
   series->append(x, y);
 
@@ -542,7 +543,7 @@ void dooble_charts_xyseries::slot_item_changed(QStandardItem *item)
   if(!series || !x_axis || !y_axis)
     return;
 
-  auto property = dooble_charts::Properties
+  auto const property = dooble_charts::Properties
     (item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt());
 
   switch(property)

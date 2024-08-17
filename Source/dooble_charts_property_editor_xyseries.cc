@@ -46,7 +46,7 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
       !dooble_charts_xyseries::s_chart_properties_strings[i].isEmpty();
       i++)
     {
-      auto offset = dooble_charts::Properties::XY_SERIES_COLOR + i;
+      auto const offset = dooble_charts::Properties::XY_SERIES_COLOR + i;
 
       if(dooble_charts::Properties(offset) ==
 	 dooble_charts::Properties::XY_SERIES_X_AXIS)
@@ -241,7 +241,7 @@ void dooble_charts_property_editor_xyseries::prepare_xyseries
 	    i++)
 	  if(item->child(i, 1))
 	    {
-	      auto property = dooble_charts::Properties
+	      auto const property = dooble_charts::Properties
 		(item->child(i, 1)->data(Qt::ItemDataRole(Qt::UserRole + 1)).
 		 toInt());
 
@@ -265,7 +265,7 @@ void dooble_charts_property_editor_xyseries::prepare_xyseries
 	    i++)
 	  if(item->child(i, 1))
 	    {
-	      auto property = dooble_charts::Properties
+	      auto const property = dooble_charts::Properties
 		(item->child(i, 1)->data(Qt::ItemDataRole(Qt::UserRole + 1)).
 		 toInt());
 
