@@ -72,7 +72,7 @@ void dooble_charts_file::play(void)
 void dooble_charts_file::run(const QString &program, const QString &type)
 {
   QReadLocker lock(&m_address_mutex);
-  auto address(m_address);
+  auto const address(m_address);
 
   lock.unlock();
 
@@ -89,7 +89,7 @@ void dooble_charts_file::run(const QString &program, const QString &type)
   if(file.open(flags))
     {
       QReadLocker lock(&m_read_offset_mutex);
-      auto read_offset = m_read_offset;
+      auto const read_offset = m_read_offset;
 
       lock.unlock();
 
@@ -97,9 +97,10 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 	{
 	  QByteArray bytes;
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-	  auto read_size = static_cast<qint64> (m_read_size.load());
+	  auto const read_size = static_cast<qint64> (m_read_size.load());
 #else
-	  auto read_size = static_cast<qint64> (m_read_size.loadRelaxed());
+	  auto const read_size = static_cast<qint64>
+	    (m_read_size.loadRelaxed());
 #endif
 	  qint64 rc = 0;
 
@@ -123,7 +124,7 @@ void dooble_charts_file::run(const QString &program, const QString &type)
 
 	      arguments << bytes.mid(0, static_cast<int> (rc)).constData();
 
-	      auto value(function.call(arguments));
+	      auto const value(function.call(arguments));
 
 	      if(value.isArray() && !value.isError())
 		{

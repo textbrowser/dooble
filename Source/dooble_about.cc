@@ -87,7 +87,7 @@ dooble_about::dooble_about(void):QMainWindow()
     (tr("<a href=\"qrc://Documentation/DoobleLicense.html\">"
 	"Dooble 3-Clause BSD License</a>"));
 
-  auto text
+  auto const text
     {tr("Architecture %1.<br>"
 	"Product: %2.<br>"
 	"Qt version %3 (runtime %4).").

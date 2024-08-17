@@ -295,7 +295,7 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      auto database_name{dooble_database_utilities::database_name()};
+      auto const database_name{dooble_database_utilities::database_name()};
 
       {
         auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -408,7 +408,7 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      auto database_name{dooble_database_utilities::database_name()};
+      auto const database_name{dooble_database_utilities::database_name()};
 
       {
         auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -524,7 +524,7 @@ void dooble_accepted_or_blocked_domains::purge(void)
   m_ui.session_rejections->setRowCount(0);
   m_ui.table->setRowCount(0);
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -566,7 +566,7 @@ void dooble_accepted_or_blocked_domains::save
       return;
     }
 
-  auto database_name{dooble_database_utilities::database_name()};
+  auto const database_name{dooble_database_utilities::database_name()};
   qint64 ct{0};
 
   {
@@ -644,7 +644,7 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -717,7 +717,7 @@ void dooble_accepted_or_blocked_domains::save_exception(const QString &url,
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto database_name{dooble_database_utilities::database_name()};
+  auto const database_name{dooble_database_utilities::database_name()};
 
   {
     auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -820,7 +820,8 @@ void dooble_accepted_or_blocked_domains::slot_add(void)
 
   QApplication::processEvents();
 
-  auto text{QUrl::fromUserInput(dialog.textValue().toLower().trimmed()).host()};
+  auto const text
+    {QUrl::fromUserInput(dialog.textValue().toLower().trimmed()).host()};
 
   if(text.isEmpty())
     return;
@@ -889,7 +890,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_all_exceptions(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  auto database_name{dooble_database_utilities::database_name()};
+  auto const database_name{dooble_database_utilities::database_name()};
 
   {
     auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -952,7 +953,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      auto database_name{dooble_database_utilities::database_name()};
+      auto const database_name{dooble_database_utilities::database_name()};
 
       {
         auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -1036,7 +1037,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      auto database_name{dooble_database_utilities::database_name()};
+      auto const database_name{dooble_database_utilities::database_name()};
 
       {
         auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -1095,7 +1096,7 @@ void dooble_accepted_or_blocked_domains::slot_exceptions_item_changed
   if(item->column() != 0)
     return;
 
-  auto state{item->checkState() == Qt::Checked};
+  auto const state{item->checkState() == Qt::Checked};
 
   item = m_ui.exceptions->item(item->row(), 1);
 
@@ -1165,7 +1166,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	      if(data.endsWith('.') || data.isEmpty() || data.startsWith('.'))
 		continue;
 
-              auto url{QUrl::fromUserInput(data)};
+              auto const url{QUrl::fromUserInput(data)};
 
 	      if(!url.isEmpty() && !url.host().isEmpty() && url.isValid())
 		m_domains[url.host()] = 1;
@@ -1245,7 +1246,7 @@ void dooble_accepted_or_blocked_domains::slot_item_changed
   if(item->column() != 0)
     return;
 
-  auto state{item->checkState() == Qt::Checked};
+  auto const state{item->checkState() == Qt::Checked};
 
   item = m_ui.table->item(item->row(), 1);
 
@@ -1314,7 +1315,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
       if(item)
 	{
-          auto url{QUrl::fromUserInput(item->text())};
+          auto const url{QUrl::fromUserInput(item->text())};
 
 	  if(m_ui.save_all == sender())
 	    save_blocked_domain(url.host(), false, true);
@@ -1324,7 +1325,8 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
 	      if(item)
 		{
-                  auto first_party_url{QUrl::fromUserInput(item->text())};
+                  auto const first_party_url
+		    {QUrl::fromUserInput(item->text())};
 
 		  if(!dooble_ui_utilities::allowed_url_scheme(first_party_url))
 		    save_blocked_domain(url.host(), false, true);
@@ -1341,11 +1343,11 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto list{m_ui.session_rejections->selectionModel()->selectedRows(1)};
+  auto const list{m_ui.session_rejections->selectionModel()->selectedRows(1)};
 
   foreach(auto const &i, list)
     {
-      auto url{QUrl::fromUserInput(i.data().toString())};
+      auto const url{QUrl::fromUserInput(i.data().toString())};
 
       save_blocked_domain(url.host(), false, true);
     }
@@ -1358,8 +1360,8 @@ void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  auto const text{m_ui.search->text().toLower().trimmed()};
   auto count{m_ui.table->rowCount()};
-  auto text{m_ui.search->text().toLower().trimmed()};
 
   for(int i{0}; i < m_ui.table->rowCount(); i++)
     if(text.isEmpty())
