@@ -45,8 +45,8 @@ void dooble_table_view::prepare_viewport_icons(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto a = rowAt(viewport()->rect().topLeft().y());
   auto b = rowAt(viewport()->rect().bottomLeft().y());
+  auto const a = rowAt(viewport()->rect().topLeft().y());
 
   if(b == -1)
     /*

@@ -44,7 +44,7 @@ interceptRequest(QWebEngineUrlRequestInfo &info)
   if(dooble_settings::setting("referrer").toBool() == false)
     info.setHttpHeader("REFERER", "");
 
-  auto mode
+  auto const mode
     (dooble_settings::setting("accepted_or_blocked_domains_mode").toString());
 
   if(dooble::s_accepted_or_blocked_domains->exception(info.firstPartyUrl()))

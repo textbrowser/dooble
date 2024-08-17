@@ -66,7 +66,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 			 dooble_web_engine_view *view,
 			 QWidget *parent):QWidget(parent)
 {
-  auto zoom_factor = dooble_settings::setting("zoom", 100.0).toDouble() / 100.0;
+  auto const zoom_factor = dooble_settings::
+    setting("zoom", 100.0).toDouble() / 100.0;
 
   m_export_as_png = false;
   m_export_png_timer.setSingleShot(true);
@@ -684,7 +685,7 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 
 void dooble_page::go_to_backward_item(int index)
 {
-  auto items
+  auto const items
     (m_view->history()->
      backItems(static_cast<int> (dooble_page::ConstantsEnum::
 				 MAXIMUM_HISTORY_ITEMS)));
@@ -695,7 +696,7 @@ void dooble_page::go_to_backward_item(int index)
 
 void dooble_page::go_to_forward_item(int index)
 {
-  auto items
+  auto const items
     (m_view->history()->
      forwardItems(static_cast<int> (dooble_page::ConstantsEnum::
 				    MAXIMUM_HISTORY_ITEMS)));
@@ -757,8 +758,8 @@ void dooble_page::prepare_export_as_png(const QString &file_name)
 
 void dooble_page::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   if(m_clone_action)
     m_clone_action->setIcon

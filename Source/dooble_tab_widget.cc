@@ -105,7 +105,8 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   if(dooble::s_application->style_name() == "fusion" ||
      dooble::s_application->style_name().contains("windows"))
     {
-      auto theme_color(dooble_settings::setting("theme_color").toString());
+      auto const theme_color
+	(dooble_settings::setting("theme_color").toString());
 
       if(theme_color == "default")
 	{
@@ -261,8 +262,8 @@ dooble_tab_bar *dooble_tab_widget::tab_bar(void) const
 
 void dooble_tab_widget::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   m_add_tab_tool_button->setIcon
     (QIcon::fromTheme(use_material_icons + "list-add",
@@ -304,7 +305,7 @@ void dooble_tab_widget::prepare_tab_label(int index, const QIcon &i)
 #endif
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east" || tab_position == "west")
@@ -361,7 +362,7 @@ void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 
 void dooble_tab_widget::set_tab_position(void)
 {
-  auto show_left_corner_widget = dooble_settings::setting
+  auto const show_left_corner_widget = dooble_settings::setting
     ("show_left_corner_widget").toBool();
 
   if(!show_left_corner_widget)
@@ -370,7 +371,7 @@ void dooble_tab_widget::set_tab_position(void)
       setCornerWidget(nullptr, Qt::TopLeftCorner);
     }
 
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east")
@@ -416,11 +417,12 @@ void dooble_tab_widget::slot_about_to_show_history_menu(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_add_tab_tool_button->menu()->clear();
 
-  QFontMetrics font_metrics(m_add_tab_tool_button->menu()->font());
-  auto list(dooble::s_history->
-	    last_n_actions(5 + static_cast<int> (dooble_page::
-						 ConstantsEnum::
-						 MAXIMUM_HISTORY_ITEMS)));
+  QFontMetrics const font_metrics(m_add_tab_tool_button->menu()->font());
+  auto const list
+    (dooble::s_history->
+     last_n_actions(5 + static_cast<int> (dooble_page::
+					  ConstantsEnum::
+					  MAXIMUM_HISTORY_ITEMS)));
 
   foreach(auto i, list)
     {
@@ -453,7 +455,7 @@ void dooble_tab_widget::slot_history_action_triggered(void)
 void dooble_tab_widget::slot_load_finished(void)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east" || tab_position == "west")
@@ -465,7 +467,7 @@ void dooble_tab_widget::slot_load_finished(void)
   if(!page)
     return;
 
-  auto index = indexOf(page);
+  auto const index = indexOf(page);
   auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
@@ -497,7 +499,7 @@ void dooble_tab_widget::slot_load_finished(void)
 
       if(dooble::s_application->style_name() == "fusion")
 	{
-	  auto icon(label->property("icon").value<QIcon> ());
+	  auto const icon(label->property("icon").value<QIcon> ());
 
 	  label->setPixmap(icon.pixmap(icon.actualSize(QSize(16, 16))));
 	}
@@ -510,14 +512,14 @@ void dooble_tab_widget::slot_load_finished(void)
 void dooble_tab_widget::slot_load_started(void)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east" || tab_position == "west")
     return;
 #endif
 
-  auto index = indexOf(qobject_cast<QWidget *> (sender()));
+  auto const index = indexOf(qobject_cast<QWidget *> (sender()));
   auto side = static_cast<QTabBar::ButtonPosition>
     (style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
 			nullptr,
@@ -572,7 +574,7 @@ void dooble_tab_widget::slot_set_visible_corner_button(bool state)
       return;
     }
 
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east" || tab_position == "west")
@@ -605,7 +607,8 @@ void dooble_tab_widget::slot_settings_applied(void)
   if(dooble::s_application->style_name() == "fusion" ||
      dooble::s_application->style_name().contains("windows"))
     {
-      auto theme_color(dooble_settings::setting("theme_color").toString());
+      auto const theme_color
+	(dooble_settings::setting("theme_color").toString());
 
       if(theme_color == "default")
 	{
@@ -636,7 +639,7 @@ void dooble_tab_widget::slot_settings_applied(void)
     }
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east" || tab_position == "west")
@@ -682,7 +685,7 @@ void dooble_tab_widget::slot_settings_applied(void)
 
 void dooble_tab_widget::slot_show_right_corner_widget(bool state)
 {
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
 
   if(tab_position == "east" || tab_position == "west")

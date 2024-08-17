@@ -91,7 +91,8 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
   if(dooble::s_application->style_name() == "fusion" ||
      dooble::s_application->style_name().contains("windows"))
     {
-      auto theme_color(dooble_settings::setting("theme_color").toString());
+      auto const theme_color
+	(dooble_settings::setting("theme_color").toString());
 
       if(theme_color == "default")
 	setDrawBase(true);
@@ -146,22 +147,22 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
 QSize dooble_tab_bar::tabSizeHint(int index) const
 {
-  auto size(QTabBar::tabSizeHint(index));
-  auto tab_position
+  auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
+  auto size(QTabBar::tabSizeHint(index));
 
   if(tab_position == "east" || tab_position == "west")
     {
-      auto f = qFloor(static_cast<double> (rect().height()) /
-		      static_cast<double> (qMax(1, count())));
-      static int maximum_tab_height = 225;
-      static int minimum_tab_height = 125;
+      auto const f = qFloor(static_cast<double> (rect().height()) /
+			    static_cast<double> (qMax(1, count())));
+      static const int maximum_tab_height = 225;
+      static const int minimum_tab_height = 125;
 
       size.setHeight(qMin(f, maximum_tab_height));
 
       if(count() - 1 == index)
 	{
-	  int d = rect().height() - count() * size.height();
+	  auto const d = rect().height() - count() * size.height();
 
 	  if(d > 0)
 	    size.setHeight(qMin(d + size.height(), maximum_tab_height));
@@ -171,14 +172,14 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
     }
   else
     {
-      auto f = qFloor(static_cast<double> (rect().width()) /
-		      static_cast<double> (qMax(1, count())));
-      static int maximum_tab_width = 225;
-      static int minimum_tab_width = 125;
+      auto const f = qFloor(static_cast<double> (rect().width()) /
+			    static_cast<double> (qMax(1, count())));
+      static const int maximum_tab_width = 225;
+      static const int minimum_tab_width = 125;
 #ifdef Q_OS_MACOS
       static int tab_height = 0;
 #else
-      static auto tab_height = qBound
+      static auto const tab_height = qBound
 	(0,
 	 dooble_settings::getenv("DOOBLE_TAB_HEIGHT_OFFSET").toInt(),
 	 50);
@@ -238,8 +239,8 @@ void dooble_tab_bar::mouseDoubleClickEvent(QMouseEvent *event)
 void dooble_tab_bar::prepare_icons(void)
 {
   QList<QToolButton *> list;
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
   int i = 0;
 
   if(dooble::s_application->style_name() == "macintosh")
@@ -274,8 +275,9 @@ void dooble_tab_bar::prepare_style_sheets(void)
      dooble::s_application->style_name().contains("windows"))
     {
       QList<QToolButton *> list;
-      auto theme_color(dooble_settings::setting("theme_color").toString());
-      static auto s_background_color
+      auto const theme_color
+	(dooble_settings::setting("theme_color").toString());
+      static auto const s_background_color
 	(QWidget::palette().color(QWidget::backgroundRole()));
 
       list << m_next_tool_button << m_previous_tool_button;
@@ -427,7 +429,7 @@ void dooble_tab_bar::slot_close_other_tabs(void)
     {
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-      auto index = tabAt(action->property("point").toPoint());
+      auto const index = tabAt(action->property("point").toPoint());
 
       for(int i = count() - 1; i >= 0; i--)
 	if(i != index)
@@ -559,9 +561,9 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 {
   QAction *action = nullptr;
   QMenu menu(this);
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto tab_at = tabAt(point);
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const tab_at = tabAt(point);
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   action = menu.addAction(tr("&Close Tab"),
 			  this,

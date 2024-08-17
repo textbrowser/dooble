@@ -166,7 +166,7 @@ Qt::Orientation dooble_ui_utilities::string_to_orientation(const QString &t)
 
 bool dooble_ui_utilities::allowed_url_scheme(const QUrl &url)
 {
-  auto scheme(url.scheme());
+  auto const scheme(url.scheme());
 
   return scheme == "file" ||
     scheme == "ftp" ||
@@ -259,7 +259,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
   if(screen)
     desk = screen->geometry();
 #endif
-  auto list(QApplication::topLevelWidgets());
+  auto const list(QApplication::topLevelWidgets());
 
   for(int i = 0; (extrah == 0 || extraw == 0) && i < list.size(); i++)
     {
@@ -267,8 +267,8 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
       if(current && current->isVisible())
 	{
-	  auto frameh = current->geometry().y() - current->y();
-	  auto framew = current->geometry().x() - current->x();
+	  auto const frameh = current->geometry().y() - current->y();
+	  auto const framew = current->geometry().x() - current->x();
 
 	  extrah = qMax(extrah, frameh);
 	  extraw = qMax(extraw, framew);
@@ -283,7 +283,7 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   if(w)
     {
-      auto pp(w->mapToGlobal(QPoint(0, 0)));
+      auto const pp(w->mapToGlobal(QPoint(0, 0)));
 
       p = QPoint(pp.x() + w->width() / 2, pp.y() + w->height() / 2);
     }

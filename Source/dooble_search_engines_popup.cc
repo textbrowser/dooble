@@ -124,7 +124,7 @@ QUrl dooble_search_engines_popup::default_address_bar_engine_url(void) const
 
 QUrl dooble_search_engines_popup::search_url(const QString &t) const
 {
-  auto text(t.trimmed());
+  auto const text(t.trimmed());
 
   if(text.isEmpty())
     return QUrl();
@@ -169,7 +169,7 @@ void dooble_search_engines_popup::add_search_engine
 	return;
       }
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -224,7 +224,7 @@ void dooble_search_engines_popup::add_search_engine
 
 	    if(action)
 	      {
-		auto list
+		auto const list
 		  (m_model->findItems(url.toEncoded(),
 				      Qt::MatchFixedString,
 				      1));
@@ -322,8 +322,8 @@ void dooble_search_engines_popup::keyPressEvent(QKeyEvent *event)
 
 void dooble_search_engines_popup::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.delete_selected->setIcon
     (QIcon::fromTheme(use_material_icons + "edit-delete",
@@ -347,7 +347,7 @@ void dooble_search_engines_popup::purge(void)
 {
   m_model->removeRows(0, m_model->rowCount());
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -397,7 +397,7 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 	     this,
 	     &dooble_search_engines_popup::slot_item_changed);
 
-  auto list
+  auto const list
     (m_model->findItems(dooble_ui_utilities::simplified_url(url).toEncoded(),
 			Qt::MatchFixedString | Qt::MatchStartsWith,
 			1));
@@ -422,10 +422,11 @@ void dooble_search_engines_popup::set_icon(const QIcon &icon, const QUrl &url)
 
       if(it.value())
 	{
-	  auto str1
+	  auto const str1
 	    (dooble_ui_utilities::
 	     simplified_url(it.value()->property("url").toUrl()).toEncoded());
-	  auto str2(dooble_ui_utilities::simplified_url(url).toEncoded());
+	  auto const str2
+	    (dooble_ui_utilities::simplified_url(url).toEncoded());
 
 	  if(str1.startsWith(str2))
 	    {
@@ -491,7 +492,7 @@ void dooble_search_engines_popup::slot_add_search_engine(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
-  auto url(QUrl::fromUserInput(m_ui.search_engine->text()));
+  auto const url(QUrl::fromUserInput(m_ui.search_engine->text()));
 
   if(url.isEmpty() || !url.isValid())
     return;
@@ -529,7 +530,7 @@ void dooble_search_engines_popup::slot_delete_selected(void)
     {
       QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-      auto database_name(dooble_database_utilities::database_name());
+      auto const database_name(dooble_database_utilities::database_name());
 
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -630,7 +631,7 @@ void dooble_search_engines_popup::slot_item_changed(QStandardItem *item)
 
   m_default_address_bar_engine_url = item->data().toUrl();
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -742,7 +743,7 @@ void dooble_search_engines_popup::slot_populate(void)
 
   m_model->removeRows(0, m_model->rowCount());
 
-  auto database_name(dooble_database_utilities::database_name());
+  auto const database_name(dooble_database_utilities::database_name());
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -878,8 +879,8 @@ void dooble_search_engines_popup::slot_search_timer_timeout(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+  auto const text(m_ui.search->text().trimmed());
   auto count = model->rowCount();
-  auto text(m_ui.search->text().trimmed());
 
   for(int i = 0; i < model->rowCount(); i++)
     if(text.isEmpty())

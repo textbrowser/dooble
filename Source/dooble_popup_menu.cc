@@ -133,8 +133,8 @@ void dooble_popup_menu::hide_for_non_web_page(bool state)
 
 void dooble_popup_menu::prepare_icons(void)
 {
-  auto icon_set(dooble_settings::setting("icon_set").toString());
-  auto use_material_icons(dooble_settings::use_material_icons());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
 
   m_ui.authenticate->setIcon
     (QIcon::fromTheme(use_material_icons + "dialog-password",
