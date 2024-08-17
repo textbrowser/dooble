@@ -49,7 +49,7 @@ class dooble_block_cipher
   static QByteArray xor_arrays(const QByteArray &a, const QByteArray &b)
   {
     QByteArray bytes;
-    auto length = qMin(a.length(), b.length());
+    auto const length = qMin(a.length(), b.length());
 
     for(int i = 0; i < length; i++)
       bytes.append(static_cast<char> (a[i] ^ b[i]));

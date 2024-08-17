@@ -106,7 +106,7 @@ class dooble_charts_iodevice: public QIODevice
 
   void set_read_rate(const QString &rate)
   {
-    auto list(rate.split('/'));
+    auto const list(rate.split('/'));
 
     set_read_interval(list.value(1).trimmed().toInt());
     set_read_size(list.value(0).trimmed().toInt());
