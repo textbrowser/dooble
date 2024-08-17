@@ -2989,7 +2989,7 @@ void dooble::slot_about_to_show_history_menu(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.menu_history->clear();
 
-  QFontMetrics font_metrics(m_ui.menu_history->font());
+  QFontMetrics const font_metrics(m_ui.menu_history->font());
   auto icon_set(dooble_settings::setting("icon_set").toString());
   auto list
     (s_history->last_n_actions(5 + static_cast<int> (dooble_page::

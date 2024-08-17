@@ -2813,7 +2813,7 @@ void dooble_page::slot_prepare_backward_menu(void)
 {
   m_ui.backward->menu()->clear();
 
-  QFontMetrics font_metrics(m_ui.backward->menu()->font());
+  QFontMetrics const font_metrics(m_ui.backward->menu()->font());
   auto const items
     (m_view->history()->
      backItems(static_cast<int> (dooble_page::ConstantsEnum::
@@ -2846,7 +2846,7 @@ void dooble_page::slot_prepare_forward_menu(void)
 {
   m_ui.forward->menu()->clear();
 
-  QFontMetrics font_metrics(m_ui.forward->menu()->font());
+  QFontMetrics const font_metrics(m_ui.forward->menu()->font());
   auto const items
     (m_view->history()->
      forwardItems(static_cast<int> (dooble_page::ConstantsEnum::
