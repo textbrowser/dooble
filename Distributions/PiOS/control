@@ -1,6 +1,6 @@
 Architecture: arm64
 Depends: libqt6charts6 (>= 6.0),
-	 libqt6core6 (>= 6.0)
+	 libqt6core6 (>= 6.0),
 	 libqt6gui6 (>= 6.0),
 	 libqt6network6 (>= 6.0),
 	 libqt6printsupport6 (>= 6.0),
