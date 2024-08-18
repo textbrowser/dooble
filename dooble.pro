@@ -319,7 +319,6 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
 			  -Warray-bounds=2 \
                           -Wcast-align \
                           -Wcast-qual \
-                          -Wdangling-reference \
                           -Wdouble-promotion \
                           -Werror \
                           -Wextra \
