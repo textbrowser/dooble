@@ -20,7 +20,13 @@ make distclean 2>/dev/null
 mkdir -p ./opt/dooble/Data
 mkdir -p ./opt/dooble/Documentation
 mkdir -p ./opt/dooble/Translations
-qmake -o Makefile dooble.pro && make -j $(nproc)
+
+if [ -x /usr/bin/qmake6 ]; then
+    qmake6 -o Makefile dooble.pro && make -j $(nproc)
+else
+    qmake -o Makefile dooble.pro && make -j $(nproc)
+fi
+
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
 cp -p ./Documentation/TO-DO ./opt/dooble/Documentation/.
@@ -36,11 +42,23 @@ mkdir -p dooble-debian.d/usr/bin
 mkdir -p dooble-debian.d/usr/share/applications
 mkdir -p dooble-debian.d/usr/share/pixmaps
 cp -p Distributions/dooble.desktop dooble-debian.d/usr/share/applications/.
-cp -pr Distributions/UBUNTU-NATIVE-24.04 dooble-debian.d/DEBIAN
+
+if [ "$(uname -m)" = "aarch64" ]; then
+    cp -pr Distributions/PiOS dooble-debian.d/DEBIAN
+else
+    cp -pr Distributions/UBUNTU-NATIVE-24.04 dooble-debian.d/DEBIAN
+fi
+
 cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
-fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.08.19_amd64.deb
+
+if [ "$(uname -m)" = "aarch64" ]; then
+    fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.08.19_arm64.deb
+else
+    fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.08.19_amd64.deb
+fi
+
 make distclean
 rm -fr ./opt
 rm -fr dooble-debian.d
