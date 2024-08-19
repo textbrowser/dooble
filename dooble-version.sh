@@ -13,7 +13,9 @@ for file in Distributions/*/control; do
 done
 
 for file in Distributions/build*; do
-    sed -i "s/Dooble-.*_/Dooble-$VERSION\_/" $file
+    sed -i \
+    "s/Dooble-[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+/Dooble-$VERSION/" \
+    $file
 done
 
 FILE="Data/Info.plist"
