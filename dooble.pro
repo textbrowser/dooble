@@ -295,12 +295,12 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wcast-qual \
                           -Wextra \
                           -Wformat=2 \
+                          -Wno-c++20-attribute-extensions \
                           -Wold-style-cast \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
                           -Wstrict-overflow=5 \
-                          -Wzero-as-null-pointer-constant \
                           -fPIE \
                           -fstack-protector-all \
                           -funroll-loops \
