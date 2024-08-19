@@ -18,9 +18,9 @@ if [ ! -r Dooble.dmg ]; then
 fi
 
 if [ "$(uname -m)" = "arm64" ]; then
-    mv Dooble.dmg ~/Dooble-2024.08.19_Apple_Silicon.dmg
+    mv Dooble.dmg Dooble-2024.08.19_Apple_Silicon.dmg
 else
-    mv Dooble.dmg ~/Dooble-2024.08.19_Intel.dmg
+    mv Dooble.dmg Dooble-2024.08.19_Intel.dmg
 fi
 
 make distclean 2>/dev/null
