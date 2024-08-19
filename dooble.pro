@@ -74,7 +74,7 @@ dict_base_paths = af_ZA/af_ZA \
                   uk_UA/uk_UA \
                   vi/vi_VN
 
-dmg.commands = hdiutil create ~/Dooble.dmg -volname Dooble -srcfolder Dooble.d
+dmg.commands = hdiutil create Dooble.dmg -volname Dooble -srcfolder Dooble.d
 } else:unix {
 dict_base_paths = af_ZA/af_ZA \
                   an_ES/an_ES \
