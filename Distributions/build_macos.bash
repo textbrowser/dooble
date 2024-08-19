@@ -6,7 +6,7 @@ if [ ! -e dooble.pro ]; then
     exit 1
 fi
 
-if [ ! -x qmake6 ]; then
+if [ ! -x $(which qmake6 2>/dev/null) ]; then
     echo "The qmake6 executable does not exist."
     exit 1
 fi
