@@ -153,6 +153,7 @@ Completed Items
 - Refresh page every 15, 30, 45, or 60 seconds.
 - Release notes.
 - Remove Headers from /Applications/Dooble.d/Dooble.app.
+- Remove const bool, const int, etc. from method parameters. Not necessary.
 - Remove m_history objects in the purge() method.
 - Replace fixed loops in AES.
 - Replace lessThan() with versionAtLeast() in dooble.pro for Qt 5.10.x.
@@ -169,6 +170,7 @@ Completed Items
 - Report pages which attempt to open JS dialogs.
 - Restore default functionality of Control + A.
 - Restrict domains.
+- Review auto and database_name.
 - Review https://doc.qt.io/qt-6/qtwebengine-changes-qt6.html.
 - Save Page pop-up menu item.
 - Save menu item.
@@ -222,8 +224,6 @@ Remaining Items
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Optional Document Mode.
 - Prevent SQL query text overflow.
-- Remove const bool, const int, etc. from method parameters.
-- Review auto and database_name.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
