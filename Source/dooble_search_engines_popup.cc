@@ -159,6 +159,9 @@ QUrl dooble_search_engines_popup::search_url(const QString &t) const
 void dooble_search_engines_popup::add_search_engine
 (const QByteArray &syntax, const QByteArray &title, const QUrl &url)
 {
+  if(!dooble::s_cryptography)
+    return;
+
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   for(int i = 0; i < m_model->rowCount(); i++)
@@ -190,13 +193,19 @@ void dooble_search_engines_popup::add_search_engine
 
 	QByteArray bytes;
 
-	bytes = dooble::s_cryptography->encrypt_then_mac(syntax);
-
-	if(!bytes.isEmpty())
-	  query.addBindValue(bytes.toBase64());
+	if(syntax.trimmed().isEmpty())
+	  bytes = bytes.toBase64();
 	else
-	  goto done_label;
+	  {
+	    bytes = dooble::s_cryptography->encrypt_then_mac(syntax);
 
+	    if(bytes.isEmpty())
+	      goto done_label;
+	    else
+	      bytes = bytes.toBase64();
+	  }
+
+	query.addBindValue(bytes);
 	bytes = dooble::s_cryptography->encrypt_then_mac(title);
 
 	if(!bytes.isEmpty())
