@@ -2569,8 +2569,13 @@ void dooble_page::slot_load_finished(bool ok)
 
 void dooble_page::slot_load_page(void)
 {
-  auto const keyboard_modifiers(QGuiApplication::keyboardModifiers());
   auto const string(m_ui.address->text().trimmed());
+
+  if(dooble::ABOUT_BLANK == string)
+    {
+      load(dooble::ABOUT_BLANK);
+      return;
+    }
 
   if(dooble::s_search_engines_window)
     {
@@ -2583,6 +2588,7 @@ void dooble_page::slot_load_page(void)
 	}
     }
 
+  auto const keyboard_modifiers(QGuiApplication::keyboardModifiers());
   auto url((QUrl(string))); // Special parentheses for compilers.
 
   if((!url.isValid() ||
