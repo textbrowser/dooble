@@ -226,4 +226,5 @@ Remaining Items
 - Prevent SQL query text overflow.
 - Shortcuts browser.
 - Threefish tweak.
+- Too many Homebrew directories in dooble.pro. Remove for MacOS.
 - Translations browser.
