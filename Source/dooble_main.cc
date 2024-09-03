@@ -135,7 +135,14 @@ int main(int argc, char *argv[])
 	      {
 		QUrl url(QUrl::fromUserInput(argv[i]));
 
-		if(url.scheme() == "http")
+		if(url.isValid() == false)
+		  {
+		    QFileInfo file_info(argv[i]);
+
+		    if(file_info.isReadable())
+		      url = QUrl::fromUserInput(file_info.absoluteFilePath());
+		  }
+		else if(url.scheme() == "http")
 		  url.setScheme("https");
 
 		if(dooble_ui_utilities::allowed_url_scheme(url))
@@ -154,7 +161,14 @@ int main(int argc, char *argv[])
 	  {
 	    QUrl url(QUrl::fromUserInput(argv[i]));
 
-	    if(url.scheme() == "http")
+	    if(url.isValid() == false)
+	      {
+		QFileInfo file_info(argv[i]);
+
+		if(file_info.isReadable())
+		  url = QUrl::fromUserInput(file_info.absoluteFilePath());
+	      }
+	    else if(url.scheme() == "http")
 	      url.setScheme("https");
 
 	    if(dooble_ui_utilities::allowed_url_scheme(url))
