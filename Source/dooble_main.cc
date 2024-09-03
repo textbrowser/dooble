@@ -135,6 +135,8 @@ int main(int argc, char *argv[])
 	      {
 		QUrl url(QUrl::fromUserInput(argv[i]));
 
+		url.setScheme("https");
+
 		if(dooble_ui_utilities::allowed_url_scheme(url))
 		  urls << url;
 	      }
@@ -150,6 +152,8 @@ int main(int argc, char *argv[])
 	else
 	  {
 	    QUrl url(QUrl::fromUserInput(argv[i]));
+
+	    url.setScheme("https");
 
 	    if(dooble_ui_utilities::allowed_url_scheme(url))
 	      urls << url;
