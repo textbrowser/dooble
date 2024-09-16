@@ -279,8 +279,8 @@ void dooble_history_window::set_row_hidden(int i)
   if(!item1 || !item2 || !item3)
     return;
 
-  QDateTime period(QDateTime::currentDateTime());
-  QString text(m_ui.search->text().toLower().trimmed());
+  auto const text(m_ui.search->text().toLower().trimmed());
+  auto period(QDateTime::currentDateTime());
 
   switch(m_ui.period->currentRow())
     {
@@ -302,7 +302,7 @@ void dooble_history_window::set_row_hidden(int i)
 	if(m_ui.period->currentRow() == 2)
 	  period = period.addDays(-1);
 
-	QDateTime date_time
+	auto const date_time
 	  (QDateTime::fromString(item3->text(), Qt::ISODate));
 
 	if(date_time.date() == period.date())
@@ -325,7 +325,7 @@ void dooble_history_window::set_row_hidden(int i)
 	if(m_ui.period->currentRow() == 4)
 	  period = period.addMonths(-1);
 
-	QDateTime date_time
+	auto const date_time
 	  (QDateTime::fromString(item3->text(), Qt::ISODate));
 
 	if(date_time.date().month() == period.date().month() &&
@@ -385,7 +385,7 @@ void dooble_history_window::show(QWidget *parent)
 	dooble_ui_utilities::center_window_widget(parent, this);
     }
 
-  bool was_visible = isVisible();
+  auto const was_visible = isVisible();
 
   dooble_main_window::show();
 
@@ -431,7 +431,7 @@ void dooble_history_window::show_normal(QWidget *parent)
 	dooble_ui_utilities::center_window_widget(parent, this);
     }
 
-  bool was_visible = isVisible();
+  auto const was_visible = isVisible();
 
   dooble_main_window::showNormal();
 
@@ -468,7 +468,7 @@ void dooble_history_window::slot_delete_pages(void)
 
   QMessageBox mb(this);
   auto action = qobject_cast<QAction *> (sender());
-  bool favorites_included = false;
+  auto favorites_included = false;
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
@@ -509,7 +509,7 @@ void dooble_history_window::slot_delete_pages(void)
       if(m_ui.table->isRowHidden(list.at(i).row()))
 	continue;
 
-      QUrl url(list.at(i).data(Qt::UserRole).toUrl());
+      auto const url(list.at(i).data(Qt::UserRole).toUrl());
 
       urls << url;
       dooble_address_widget_completer::remove_item(url);
@@ -535,7 +535,7 @@ void dooble_history_window::slot_delete_rows
       if(m_ui.table->isRowHidden(list.at(i).row()))
 	continue;
 
-      QUrl url(list.at(i).data(Qt::UserRole).toUrl());
+      auto const url(list.at(i).data(Qt::UserRole).toUrl());
 
       m_items.remove(url);
       m_ui.table->removeRow(list.at(i).row());
@@ -592,7 +592,7 @@ void dooble_history_window::slot_favorite_changed(const QUrl &url, bool state)
 
   if(state)
     {
-      QString icon_set(dooble_settings::setting("icon_set").toString());
+      auto const icon_set(dooble_settings::setting("icon_set").toString());
 
       item->setCheckState(Qt::Checked);
       item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
@@ -653,7 +653,7 @@ void dooble_history_window::slot_history_cleared(void)
       if(item->checkState() == Qt::Checked)
 	continue;
 
-      QUrl url(item->data(Qt::UserRole).toUrl());
+      auto const url(item->data(Qt::UserRole).toUrl());
 
       m_items.remove(url);
       m_ui.table->removeRow(i);
@@ -705,7 +705,7 @@ void dooble_history_window::slot_item_changed(QTableWidgetItem *item)
 
   if(item->checkState() == Qt::Checked)
     {
-      QString icon_set(dooble_settings::setting("icon_set").toString());
+      auto const icon_set(dooble_settings::setting("icon_set").toString());
 
       item->setIcon(QIcon(QString(":/%1/18/bookmarked.png").arg(icon_set)));
     }
