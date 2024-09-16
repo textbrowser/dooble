@@ -917,7 +917,7 @@ void dooble_history_window::slot_populate(void)
   QHash<QUrl, QHash<dooble_history::HistoryItem, QVariant> > hash
     (dooble::s_history->history());
   QHashIterator<QUrl, QHash<dooble_history::HistoryItem, QVariant> > it(hash);
-  QString icon_set(dooble_settings::setting("icon_set").toString());
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
   int i = 0;
 
   m_ui.entries->setText(tr("%1 Row(s)").arg(hash.size()));
@@ -928,15 +928,16 @@ void dooble_history_window::slot_populate(void)
     {
       it.next();
 
-      QDateTime last_visited
-	(it.value().value(dooble_history::HistoryItem::LAST_VISITED).
-	 toDateTime());
-      QString title
-	(it.value().value(dooble_history::HistoryItem::TITLE).toString());
       QTableWidgetItem *item2 = nullptr;
       QTableWidgetItem *item3 = nullptr;
       QTableWidgetItem *item4 = nullptr;
-      QUrl url(it.value().value(dooble_history::HistoryItem::URL).toUrl());
+      auto const last_visited
+	(it.value().value(dooble_history::HistoryItem::LAST_VISITED).
+	 toDateTime());
+      auto const url
+	(it.value().value(dooble_history::HistoryItem::URL).toUrl());
+      auto title
+	(it.value().value(dooble_history::HistoryItem::TITLE).toString());
       dooble_history_window_favorite_item *item1 = nullptr;
 
       if(title.isEmpty())
@@ -1002,8 +1003,8 @@ void dooble_history_window::slot_search_timer_timeout(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QDateTime period(QDateTime::currentDateTime());
-  QString text(m_ui.search->text().toLower().trimmed());
+  auto const text(m_ui.search->text().toLower().trimmed());
+  auto period(QDateTime::currentDateTime());
 
   switch(m_ui.period->currentRow())
     {
@@ -1075,7 +1076,7 @@ void dooble_history_window::slot_search_timer_timeout(void)
 	  case 1: // Today
 	  case 2: // Yesterday
 	    {
-	      QDateTime date_time
+	      auto const date_time
 		(QDateTime::fromString(item3->text(), Qt::ISODate));
 
 	      if(date_time.date() == period.date())
@@ -1101,7 +1102,7 @@ void dooble_history_window::slot_search_timer_timeout(void)
 	    }
 	  default:
 	    {
-	      QDateTime date_time
+	      auto const date_time
 		(QDateTime::fromString(item3->text(), Qt::ISODate));
 
 	      if(date_time.date().month() == period.date().month() &&

@@ -631,9 +631,8 @@ gpgme_error_t dooble::peekaboo_passphrase(void *hook,
   Q_UNUSED(uid_hint);
 
   QString passphrase("");
-  bool ok = true;
+  auto ok = true;
 
-  QApplication::restoreOverrideCursor();
   passphrase = QInputDialog::getText
     (s_dooble,
      tr("Dooble: Peekaboo Passphrase"),
@@ -4336,8 +4335,7 @@ void dooble::slot_peekaboo_text(const QString &t)
 
 		  dialog->set_text(output);
 		  dialog->set_text_color
-		    (valid_signature ?
-		     QColor(1, 50, 32) : QColor(255, 75, 0));
+		    (valid_signature ? QColor(1, 50, 32) : QColor(255, 75, 0));
 		  dialog->show();
 		}
 	    }
