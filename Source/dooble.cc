@@ -103,8 +103,8 @@ QString dooble::ABOUT_BLANK = "about:blank";
 QString dooble::s_default_http_user_agent = "";
 bool dooble::s_containers_populated = false;
 
-static QSize s_vga_size = QSize(640, 480);
-static bool s_warned_of_missing_sqlite_driver = false;
+static auto s_vga_size = QSize(640, 480);
+static auto s_warned_of_missing_sqlite_driver = false;
 static int EXPECTED_POPULATED_CONTAINERS = 9;
 static int s_populated = 0;
 
@@ -955,7 +955,7 @@ void dooble::delayed_load(const QUrl &url, dooble_page *page)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QPair<QPointer<dooble_page>, QUrl> pair(page, url);
+  QPair<QPointer<dooble_page>, QUrl> const pair(page, url);
 
   if(!m_delayed_pages.contains(pair))
     m_delayed_pages.append(pair);
@@ -2639,7 +2639,7 @@ void dooble::print(QWidget *parent, dooble_charts *chart)
       auto const yscale = printer.pageRect().height() /
 	static_cast<double> (view->height());
 #endif
-      double scale = qMin(xscale, yscale);
+      auto const scale = qMin(xscale, yscale);
 
       painter.scale(scale, scale);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
@@ -3370,8 +3370,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 
   for(int i = m_ui.tab->count() - 1; i >= 0; i--)
     {
-      dooble_charts *chart = qobject_cast<dooble_charts *>
-	(m_ui.tab->widget(i));
+      auto chart = qobject_cast<dooble_charts *> (m_ui.tab->widget(i));
 
       if(chart)
 	{
