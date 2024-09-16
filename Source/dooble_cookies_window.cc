@@ -268,7 +268,7 @@ void dooble_cookies_window::delete_top_level_items
       foreach(auto i, item->takeChildren())
 	if(i)
 	  {
-	    QList<QNetworkCookie> cookie
+	    auto const cookie
 	      (QNetworkCookie::
 	       parseCookies(i->data(1, Qt::UserRole).toByteArray()));
 

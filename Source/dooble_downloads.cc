@@ -330,7 +330,7 @@ void dooble_downloads::purge(void)
   m_ui.search->clear();
   m_ui.table->setRowCount(0);
 
-  QString database_name("dooble_downloads");
+  QString const database_name("dooble_downloads");
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -439,7 +439,7 @@ void dooble_downloads::record_download
 
 void dooble_downloads::remove_entry(qintptr oid)
 {
-  QString database_name("dooble_downloads");
+  QString const database_name("dooble_downloads");
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -715,7 +715,7 @@ void dooble_downloads::slot_populate(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_ui.search->clear();
 
-  QString database_name("dooble_downloads");
+  QString const database_name("dooble_downloads");
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);

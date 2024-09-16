@@ -236,7 +236,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QString database_name("dooble_certificate_exceptions");
+  QString const database_name("dooble_certificate_exceptions");
 
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
@@ -297,7 +297,7 @@ void dooble_certificate_exceptions::slot_populate(void)
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
-      QString database_name("dooble_certificate_exceptions");
+      QString const database_name("dooble_certificate_exceptions");
 
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
