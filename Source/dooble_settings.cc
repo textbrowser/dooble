@@ -3112,7 +3112,7 @@ void dooble_settings::slot_populate(void)
 		  continue;
 		}
 
-	      QUrl url(data3);
+	      QUrl const url(data3);
 
 	      if(url.isEmpty() || !url.isValid())
 		{
@@ -3162,7 +3162,7 @@ void dooble_settings::slot_populate(void)
 		  continue;
 		}
 
-	      QUrl url(data2);
+	      QUrl const url(data2);
 
 	      if(url.isEmpty() || !url.isValid())
 		{

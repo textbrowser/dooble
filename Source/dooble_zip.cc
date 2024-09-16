@@ -77,7 +77,7 @@ void dooble_zip::slot_finished(const QByteArray &bytes, const bool file)
 	{
 	  if(file)
 	    {
-	      QUrl url;
+	      QUrl const url;
 
 	      m_request->redirect(url);
 	    }

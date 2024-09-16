@@ -504,8 +504,7 @@ void dooble_history::purge_favorites(void)
 
       if(m_history.contains(item->text()))
 	{
-	  QHash<dooble_history::HistoryItem,
-		QVariant> hash(m_history.value(item->text()));
+	  auto hash(m_history.value(item->text()));
 
 	  hash[dooble_history::HistoryItem::FAVORITE] = false;
 	  m_history[item->text()] = hash;

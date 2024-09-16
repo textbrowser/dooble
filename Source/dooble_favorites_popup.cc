@@ -264,7 +264,7 @@ void dooble_favorites_popup::slot_delete_selected(void)
   for(int i = list.size() - 1; i >= 0; i--)
     if(!m_ui.view->isRowHidden(list.at(i).row()))
       {
-	QUrl url(list.at(i).data().toString());
+	QUrl const url(list.at(i).data().toString());
 
 	dooble::s_history->remove_favorite(url);
 	emit favorite_changed(url, false);

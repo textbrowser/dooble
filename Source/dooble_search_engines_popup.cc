@@ -557,7 +557,7 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 	    for(int i = list.size() - 1; i >= 0; i--)
 	      if(!m_ui.view->isRowHidden(list.at(i).row()))
 		{
-	          QUrl url(list.at(i).data().toString());
+	          QUrl const url(list.at(i).data().toString());
 
 		  query.prepare
 		    ("DELETE FROM dooble_search_engines WHERE url_digest = ?");
