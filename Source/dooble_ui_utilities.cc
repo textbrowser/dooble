@@ -140,7 +140,7 @@ QUrl dooble_ui_utilities::simplified_url(const QUrl &u)
 
 Qt::Alignment dooble_ui_utilities::string_to_alignment(const QString &t)
 {
-  QString text(t.trimmed());
+  auto const text(t.trimmed());
 
   if(text == QObject::tr("Bottom"))
     return Qt::AlignBottom;
@@ -156,7 +156,7 @@ Qt::Alignment dooble_ui_utilities::string_to_alignment(const QString &t)
 
 Qt::Orientation dooble_ui_utilities::string_to_orientation(const QString &t)
 {
-  QString text(t.trimmed());
+  auto const text(t.trimmed());
 
   if(text == QObject::tr("Horizontal"))
     return Qt::Horizontal;

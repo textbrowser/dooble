@@ -2277,7 +2277,7 @@ void dooble::prepare_standard_menus(void)
 		  SLOT(slot_show_certificate_exceptions(void)));
   menu->addSeparator();
 
-  QMenu *sub_menu = new QMenu(tr("Charts"));
+  auto sub_menu = new QMenu(tr("Charts"));
 
   menu->addMenu(sub_menu);
   action = sub_menu->addAction(tr("XY Series"),

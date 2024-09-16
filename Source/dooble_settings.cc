@@ -278,10 +278,11 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
 #ifdef Q_OS_OS2
   /*
-  ** Temporarily fix UserAgent.
+  ** Temporarily correct UserAgent.
   ** https://github.com/bitwiseworks/dooble-os2/issues/3
   ** https://github.com/bitwiseworks/qtwebengine-chromium-os2/issues/48
   */
+
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_http_user_agent.replace("Unknown", "OS/2");
   s_http_user_agent +=
@@ -3111,7 +3112,7 @@ void dooble_settings::slot_populate(void)
 		  continue;
 		}
 
-	      QUrl url(data3);
+	      QUrl const url(data3);
 
 	      if(url.isEmpty() || !url.isValid())
 		{
@@ -3161,7 +3162,7 @@ void dooble_settings::slot_populate(void)
 		  continue;
 		}
 
-	      QUrl url(data2);
+	      QUrl const url(data2);
 
 	      if(url.isEmpty() || !url.isValid())
 		{

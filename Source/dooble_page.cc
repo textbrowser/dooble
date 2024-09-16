@@ -659,7 +659,7 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
      [=] (const QWebEngineFindTextResult &result)
 #endif
      {
-       static QPalette s_palette(m_ui.find->palette());
+       static auto const s_palette(m_ui.find->palette());
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
        if(!found)
@@ -669,7 +669,7 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 	 {
 	   if(!text.isEmpty())
 	     {
-	       QColor color(240, 128, 128); // Light Coral
+	       QColor const color(240, 128, 128); // Light Coral
 	       auto palette(m_ui.find->palette());
 
 	       palette.setColor(m_ui.find->backgroundRole(), color);
@@ -1219,7 +1219,7 @@ void dooble_page::prepare_standard_menus(void)
 		  SIGNAL(show_certificate_exceptions(void)));
   menu->addSeparator();
 
-  QMenu *sub_menu = new QMenu(tr("Charts"));
+  auto sub_menu = new QMenu(tr("Charts"));
 
   menu->addMenu(sub_menu);
   action = sub_menu->addAction(tr("XY Series"),

@@ -249,7 +249,7 @@ void dooble_address_widget::dropEvent(QDropEvent *event)
 {
   if(event && event->mimeData())
     {
-      QUrl url(event->mimeData()->text());
+      QUrl const url(event->mimeData()->text());
 
       if(!url.isEmpty() && url.isValid())
 	{
