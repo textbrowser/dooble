@@ -282,6 +282,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   ** https://github.com/bitwiseworks/dooble-os2/issues/3
   ** https://github.com/bitwiseworks/qtwebengine-chromium-os2/issues/48
   */
+
   s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
   s_http_user_agent.replace("Unknown", "OS/2");
   s_http_user_agent +=
