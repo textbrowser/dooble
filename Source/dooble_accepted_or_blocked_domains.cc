@@ -644,7 +644,7 @@ void dooble_accepted_or_blocked_domains::save_blocked_domain
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto const database_name(dooble_database_utilities::database_name());
+  auto const database_name{dooble_database_utilities::database_name()};
 
   {
     auto db{QSqlDatabase::addDatabase("QSQLITE", database_name)};
@@ -1140,7 +1140,7 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 	  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
           QByteArray line{2048, 0};
-          const qint64 m{static_cast<qint64> (line.size())};
+          auto const m{static_cast<qint64> (line.size())};
           qint64 rc{0};
 
 	  while((rc = file.readLine(line.data(), m)) >= 0)
