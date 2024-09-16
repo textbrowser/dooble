@@ -190,7 +190,7 @@ QByteArray dooble_aes256::decrypt(const QByteArray &data)
   QByteArray block(m_block_length, 0);
   QByteArray c;
   QByteArray decrypted;
-  auto ciphertext(data.mid(iv.length()));
+  auto const ciphertext(data.mid(iv.length()));
   auto const iterations = ciphertext.length() / m_block_length;
 
   for(int i = 0; i < iterations; i++)
