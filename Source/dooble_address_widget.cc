@@ -426,10 +426,10 @@ void dooble_address_widget::set_text_format
 
   foreach(auto const format, formats)
     {
+      QVariant const value(format.format);
       auto const attribute_type = QInputMethodEvent::TextFormat;
       auto const length = format.length;
       auto const start = format.start;
-      const QVariant &value(format.format);
 
       attributes << QInputMethodEvent::Attribute(attribute_type,
 						 start,
