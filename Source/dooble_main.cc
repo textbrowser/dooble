@@ -133,11 +133,11 @@ int main(int argc, char *argv[])
 
 	    if(argc > i && argv[i])
 	      {
-		QUrl url(QUrl::fromUserInput(argv[i]));
+		auto url(QUrl::fromUserInput(argv[i]));
 
 		if(url.isValid() == false)
 		  {
-		    QFileInfo file_info(argv[i]);
+		    QFileInfo const file_info(argv[i]);
 
 		    if(file_info.isReadable())
 		      url = QUrl::fromUserInput(file_info.absoluteFilePath());
@@ -159,11 +159,11 @@ int main(int argc, char *argv[])
 	  test_threefish_performance = true;
 	else
 	  {
-	    QUrl url(QUrl::fromUserInput(argv[i]));
+	    auto url(QUrl::fromUserInput(argv[i]));
 
 	    if(url.isValid() == false)
 	      {
-		QFileInfo file_info(argv[i]);
+		QFileInfo const file_info(argv[i]);
 
 		if(file_info.isReadable())
 		  url = QUrl::fromUserInput(file_info.absoluteFilePath());
