@@ -278,7 +278,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
 #ifdef Q_OS_OS2
   /*
-  ** Temporarily fix UserAgent.
+  ** Temporarily correct UserAgent.
   ** https://github.com/bitwiseworks/dooble-os2/issues/3
   ** https://github.com/bitwiseworks/qtwebengine-chromium-os2/issues/48
   */
