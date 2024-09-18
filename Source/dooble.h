@@ -28,6 +28,7 @@
 #ifndef dooble_h
 #define dooble_h
 
+#include <QElapsedTimer>
 #include <QFuture>
 #include <QLocalServer>
 #include <QShortcut>
@@ -141,6 +142,7 @@ class dooble: public QMainWindow
     };
 
   QDialog *m_floating_digital_clock_dialog;
+  QElapsedTimer m_elapsed_timer;
   QEventLoop m_event_loop;
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;

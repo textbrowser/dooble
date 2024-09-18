@@ -112,6 +112,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
+  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = false;
@@ -157,6 +158,7 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
+  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = is_private;
@@ -273,6 +275,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
+  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
@@ -307,6 +310,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
+  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
@@ -3947,6 +3951,12 @@ void dooble::slot_floating_digital_dialog_timeout(void)
   font = m_floating_digital_clock_ui.date->font();
   font.setPointSize(15);
   m_floating_digital_clock_ui.date->setFont(font);
+  m_floating_digital_clock_ui.uptime->setText
+    (tr("Uptime: %1 Hours").
+     arg(static_cast<double> (m_elapsed_timer.elapsed()) / 3600000.0,
+	 0,
+	 'f',
+	 2));
 }
 
 void dooble::slot_history_action_hovered(void)
