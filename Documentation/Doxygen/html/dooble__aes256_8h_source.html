@@ -144,14 +144,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  QByteArray decrypt_block(<span class="keyword">const</span> QByteArray &amp;block);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  QByteArray encrypt_block(<span class="keyword">const</span> QByteArray &amp;block);</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  uint8_t xtime(uint8_t x)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keyword">static</span> uint8_t xtime(uint8_t x)</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span> ((x &lt;&lt; 1) ^ (((x &gt;&gt; 7) &amp; 1) * 0x1b));</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  uint8_t xtime_special(uint8_t x, uint8_t y)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">static</span> uint8_t xtime_special(uint8_t x, uint8_t y)</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">auto</span> xtime_y = xtime(y);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">auto</span> <span class="keyword">const</span> xtime_y = xtime(y);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      (((x &amp; 1) * y) ^</div>

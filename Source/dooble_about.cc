@@ -91,7 +91,7 @@ dooble_about::dooble_about(void):QMainWindow()
     {tr("Architecture %1.<br>"
 	"Product: %2.<br>"
 	"Qt version %3 (runtime %4).").
-     arg(DOOBLE_ARCHITECTURE_STR).
+     arg(QSysInfo::currentCpuArchitecture()).
      arg(QSysInfo::prettyProductName()).
      arg(QT_VERSION_STR).
      arg(qversion)};
