@@ -397,7 +397,7 @@ int main(int argc, char *argv[])
   */
 
   QSplashScreen splash;
-  auto splash_screen = dooble_settings::setting
+  auto const splash_screen = dooble_settings::setting
     ("splash_screen", true).toBool();
 
   if(splash_screen)
@@ -418,7 +418,9 @@ int main(int argc, char *argv[])
     }
 
   dooble_random::initialize();
-  dooble::s_application->processEvents();
+
+  if(splash_screen)
+    dooble::s_application->processEvents();
 
 #ifdef Q_OS_MACOS
   /*
