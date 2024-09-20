@@ -2000,7 +2000,7 @@ void dooble::prepare_standard_menus(void)
 {
   auto is_chart = qobject_cast<dooble_charts *> (m_ui.tab->currentWidget());
 
-  foreach(auto const action, m_standard_menu_actions)
+  foreach(auto action, m_standard_menu_actions)
     if(action)
       action->setEnabled(is_chart);
 
