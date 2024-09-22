@@ -101,6 +101,7 @@ int main(int argc, char *argv[])
   auto test_aes_performance = false;
   auto test_threefish = false;
   auto test_threefish_performance = false;
+  int reload_periodically = -1;
 
   for(int i = 1; i < argc; i++)
     if(argv && argv[i])
@@ -120,6 +121,7 @@ int main(int argc, char *argv[])
 	    qDebug() << " --help";
 	    qDebug() << " --listen";
 	    qDebug() << " --load-url URL";
+	    qDebug() << " --reload-periodically TIME";
 	    qDebug() << " --private";
 	    qDebug() << " --test-aes";
 	    qDebug() << " --test-aes-performance";
@@ -147,6 +149,19 @@ int main(int argc, char *argv[])
 
 		if(dooble_ui_utilities::allowed_url_scheme(url))
 		  urls << url;
+	      }
+	  }
+	else if(strcmp(argv[i], "--reload-periodically") == 0)
+	  {
+	    i += 1;
+
+	    if(argc > i && argv[i])
+	      {
+		QString const a(argv[i]);
+		auto ok = false;
+
+		reload_periodically = a.toInt(&ok);
+		reload_periodically = ok ? reload_periodically : -1;
 	      }
 	  }
 	else if(strcmp(argv[i], "--test-aes") == 0)
@@ -527,12 +542,13 @@ int main(int argc, char *argv[])
     (urls,
      arguments.contains("--private") ||
      dooble::s_settings->setting("private_mode").toBool(),
-     attach);
+     attach,
+     reload_periodically);
 
   if(attach && d->attached())
     {
       d->close();
-      return 0;
+      return EXIT_SUCCESS;
     }
 
   dooble::s_google_translate_url = qgetenv

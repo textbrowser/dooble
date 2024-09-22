@@ -153,8 +153,10 @@ dooble::dooble(QWidget *widget):QMainWindow()
   prepare_style_sheets();
 }
 
-dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
-  QMainWindow()
+dooble::dooble(const QList<QUrl> &urls,
+	       bool is_private,
+	       bool attach,
+	       int reload_periodically):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
@@ -250,10 +252,20 @@ dooble::dooble(const QList<QUrl> &urls, bool is_private, bool attach):
     }
 
   if(urls.isEmpty())
-    new_page(QUrl(), is_private);
+    {
+      auto page = new_page(QUrl(), is_private);
+
+      if(page)
+	page->reload_periodically(reload_periodically);
+    }
   else
     foreach(auto const &url, urls)
-      new_page(url, is_private);
+      {
+	auto page = new_page(url, is_private);
+
+	if(page)
+	  page->reload_periodically(reload_periodically);
+      }
 
   if(!s_containers_populated)
     if(s_cryptography->as_plaintext())
@@ -1293,7 +1305,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
       remove_page_connections(page);
 
       if(is_private)
-	d = new dooble(QList<QUrl> () << page->url(), true, false);
+	d = new dooble(QList<QUrl> () << page->url(), true, false, -1);
       else
 	d = new dooble(page);
 
@@ -4054,7 +4066,7 @@ void dooble::slot_new_local_connection(void)
 
 void dooble::slot_new_private_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), true, false))->show();
+  (new dooble(QList<QUrl> () << QUrl(), true, false, -1))->show();
 }
 
 void dooble::slot_new_tab(const QUrl &url)
@@ -4069,7 +4081,7 @@ void dooble::slot_new_tab(void)
 
 void dooble::slot_new_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), false, false))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false, false, -1))->show();
 }
 
 void dooble::slot_open_chart(void)
@@ -4123,7 +4135,7 @@ void dooble::slot_open_link(const QUrl &url)
 
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, true, false))->show();
+  (new dooble(QList<QUrl> () << url, true, false, -1))->show();
 }
 
 void dooble::slot_open_link_in_new_tab(const QUrl &url)
@@ -4133,7 +4145,7 @@ void dooble::slot_open_link_in_new_tab(const QUrl &url)
 
 void dooble::slot_open_link_in_new_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, false, false))->show();
+  (new dooble(QList<QUrl> () << url, false, false, -1))->show();
 }
 
 void dooble::slot_open_local_file(void)

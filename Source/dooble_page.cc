@@ -1619,7 +1619,7 @@ void dooble_page::reload_periodically(int seconds)
       m_reload_periodically_seconds = 0;
       m_reload_timer.stop();
     }
-  else
+  else if(seconds == 15 || seconds == 30 || seconds == 45 || seconds == 60)
     {
       m_reload_periodically_seconds = seconds;
       m_reload_timer.start(1000 * m_reload_periodically_seconds);
