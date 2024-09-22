@@ -125,9 +125,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_web_engine_page.cc \
                   Source/dooble_web_engine_view.cc
 
-TRANSLATIONS    = Translations/dooble_Arab_BH_DZ_EG_IQ_JO_KW_LY_MA_OM_QA_SA_SY_YE.ts \
-                  Translations/dooble_Portuguese_AO_BR_CV_GW_MO_MZ_ST_TL.ts \
-                  Translations/dooble_ae.ts \
+TRANSLATIONS    = Translations/dooble_ae.ts \
                   Translations/dooble_af.ts \
                   Translations/dooble_al.ts \
                   Translations/dooble_al_sq.ts \
