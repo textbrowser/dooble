@@ -234,6 +234,9 @@ dooble::dooble(const QList<QUrl> &urls,
 	{
 	  if(urls.isEmpty())
 	    {
+	      socket.write("--reload-periodically ");
+	      socket.write(QByteArray::number(reload_periodically));
+	      socket.write("\n");
 	      socket.write(QUrl(ABOUT_BLANK).toEncoded().toBase64());
 	      socket.write("\n");
 	      socket.flush();
@@ -241,6 +244,9 @@ dooble::dooble(const QList<QUrl> &urls,
 	  else
 	    foreach(auto const &url, urls)
 	      {
+		socket.write("--reload-periodically ");
+		socket.write(QByteArray::number(reload_periodically));
+		socket.write("\n");
 		socket.write(url.toEncoded().toBase64());
 		socket.write("\n");
 		socket.flush();
@@ -249,6 +255,8 @@ dooble::dooble(const QList<QUrl> &urls,
 	  m_attached = true;
 	  return;
 	}
+      else
+	qDebug() << "Cannot attach to a local Dooble instance.";
     }
 
   if(urls.isEmpty())
@@ -4540,14 +4548,27 @@ void dooble::slot_read_local_socket(void)
   while(socket->bytesAvailable() > 0)
     data.append(socket->readAll());
 
-  auto const list(data.split('\n'));
+  auto const list(data.trimmed().split('\n'));
+  int reload_periodically = -1;
 
   foreach(auto const &i, list)
     {
+      if(i.startsWith("--reload-periodically "))
+	//             0123456789012345678901
+	{
+	  reload_periodically = i.mid(22).toInt();
+	  continue;
+	}
+
       auto const url(QUrl::fromEncoded(QByteArray::fromBase64(i)));
 
-      if(url.isValid())
-	new_page(url, m_is_private);
+      if(url.isEmpty() == false && url.isValid())
+	{
+	  auto page = new_page(url, m_is_private);
+
+	  if(page)
+	    page->reload_periodically(reload_periodically);
+	}
     }
 }
 

@@ -121,8 +121,8 @@ int main(int argc, char *argv[])
 	    qDebug() << " --help";
 	    qDebug() << " --listen";
 	    qDebug() << " --load-url URL";
-	    qDebug() << " --reload-periodically TIME";
 	    qDebug() << " --private";
+	    qDebug() << " --reload-periodically 15, 30, 45, 60";
 	    qDebug() << " --test-aes";
 	    qDebug() << " --test-aes-performance";
 	    qDebug() << " --test-threefish";
