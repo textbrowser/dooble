@@ -255,7 +255,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 	accept();
     }
   else if(m_ui.new_private_window == sender())
-    (new dooble(QList<QUrl> () << QUrl(), true, false, -1))->show();
+    (new dooble(QList<QUrl> () << QUrl(), false, false, true, -1))->show();
   else if(m_ui.new_tab == sender())
     {
       auto d = find_parent_dooble();
@@ -267,7 +267,7 @@ void dooble_popup_menu::slot_tool_button_clicked(void)
 	accept();
     }
   else if(m_ui.new_window == sender())
-    (new dooble(QList<QUrl> () << QUrl(), false, false, -1))->show();
+    (new dooble(QList<QUrl> () << QUrl(), false, false, false, -1))->show();
   else if(m_ui.print == sender())
     {
       auto d = find_parent_dooble();

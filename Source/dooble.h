@@ -87,8 +87,9 @@ class dooble: public QMainWindow
 
   dooble(QWidget *widget);
   dooble(const QList<QUrl> &urls,
-	 bool is_private,
 	 bool attach,
+	 bool disable_javascript,
+	 bool is_private,
 	 int reload_periodically);
   dooble(dooble_page *page);
   dooble(dooble_web_engine_view *view);

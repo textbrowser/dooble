@@ -154,8 +154,9 @@ dooble::dooble(QWidget *widget):QMainWindow()
 }
 
 dooble::dooble(const QList<QUrl> &urls,
-	       bool is_private,
 	       bool attach,
+	       bool disable_javascript,
+	       bool is_private,
 	       int reload_periodically):QMainWindow()
 {
   initialize_static_members();
@@ -234,6 +235,9 @@ dooble::dooble(const QList<QUrl> &urls,
 	{
 	  if(urls.isEmpty())
 	    {
+	      socket.write("--disable-javascript ");
+	      socket.write(QByteArray::number(disable_javascript));
+	      socket.write("\n");
 	      socket.write("--reload-periodically ");
 	      socket.write(QByteArray::number(reload_periodically));
 	      socket.write("\n");
@@ -244,6 +248,9 @@ dooble::dooble(const QList<QUrl> &urls,
 	  else
 	    foreach(auto const &url, urls)
 	      {
+		socket.write("--disable-javascript ");
+		socket.write(QByteArray::number(disable_javascript));
+		socket.write("\n");
 		socket.write("--reload-periodically ");
 		socket.write(QByteArray::number(reload_periodically));
 		socket.write("\n");
@@ -264,7 +271,14 @@ dooble::dooble(const QList<QUrl> &urls,
       auto page = new_page(QUrl(), is_private);
 
       if(page)
-	page->reload_periodically(reload_periodically);
+	{
+	  if(page->
+	     is_web_setting_enabled(QWebEngineSettings::JavascriptEnabled))
+	    page->enable_web_setting
+	      (QWebEngineSettings::JavascriptEnabled, !disable_javascript);
+
+	  page->reload_periodically(reload_periodically);
+	}
     }
   else
     foreach(auto const &url, urls)
@@ -272,7 +286,14 @@ dooble::dooble(const QList<QUrl> &urls,
 	auto page = new_page(url, is_private);
 
 	if(page)
-	  page->reload_periodically(reload_periodically);
+	  {
+	    if(page->
+	       is_web_setting_enabled(QWebEngineSettings::JavascriptEnabled))
+	      page->enable_web_setting
+		(QWebEngineSettings::JavascriptEnabled, !disable_javascript);
+
+	    page->reload_periodically(reload_periodically);
+	  }
       }
 
   if(!s_containers_populated)
@@ -1313,7 +1334,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
       remove_page_connections(page);
 
       if(is_private)
-	d = new dooble(QList<QUrl> () << page->url(), true, false, -1);
+	d = new dooble(QList<QUrl> () << page->url(), false, false, true, -1);
       else
 	d = new dooble(page);
 
@@ -4091,7 +4112,7 @@ void dooble::slot_new_local_connection(void)
 
 void dooble::slot_new_private_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), true, false, -1))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false, false, true, -1))->show();
 }
 
 void dooble::slot_new_tab(const QUrl &url)
@@ -4106,7 +4127,7 @@ void dooble::slot_new_tab(void)
 
 void dooble::slot_new_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), false, false, -1))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false, false, false, -1))->show();
 }
 
 void dooble::slot_open_chart(void)
@@ -4160,7 +4181,7 @@ void dooble::slot_open_link(const QUrl &url)
 
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, true, false, -1))->show();
+  (new dooble(QList<QUrl> () << url, false, false, true, -1))->show();
 }
 
 void dooble::slot_open_link_in_new_tab(const QUrl &url)
@@ -4170,7 +4191,7 @@ void dooble::slot_open_link_in_new_tab(const QUrl &url)
 
 void dooble::slot_open_link_in_new_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, false, false, -1))->show();
+  (new dooble(QList<QUrl> () << url, false, false, false, -1))->show();
 }
 
 void dooble::slot_open_local_file(void)
@@ -4566,12 +4587,19 @@ void dooble::slot_read_local_socket(void)
     data.append(socket->readAll());
 
   auto const list(data.trimmed().split('\n'));
+  auto disable_javascript = false;
   int reload_periodically = -1;
 
   foreach(auto const &i, list)
     {
-      if(i.startsWith("--reload-periodically "))
-	//             0123456789012345678901
+      if(i.startsWith("--disable-javascript "))
+	//             012345678901234567890
+	{
+	  disable_javascript = QVariant(i.mid(21)).toBool();
+	  continue;
+	}
+      else if(i.startsWith("--reload-periodically "))
+	//                  0123456789012345678901
 	{
 	  reload_periodically = i.mid(22).toInt();
 	  continue;
@@ -4584,7 +4612,14 @@ void dooble::slot_read_local_socket(void)
 	  auto page = new_page(url, m_is_private);
 
 	  if(page)
-	    page->reload_periodically(reload_periodically);
+	    {
+	      if(page->
+		 is_web_setting_enabled(QWebEngineSettings::JavascriptEnabled))
+		page->enable_web_setting
+		  (QWebEngineSettings::JavascriptEnabled, !disable_javascript);
+
+	      page->reload_periodically(reload_periodically);
+	    }
 	}
     }
 }

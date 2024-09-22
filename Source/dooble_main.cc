@@ -97,6 +97,7 @@ int main(int argc, char *argv[])
   QList<QUrl> urls;
   QString screen_mode("");
   auto attach = false;
+  auto disable_javascript = false;
   auto test_aes = false;
   auto test_aes_performance = false;
   auto test_threefish = false;
@@ -108,6 +109,8 @@ int main(int argc, char *argv[])
       {
 	if(strcmp(argv[i], "--attach") == 0)
 	  attach = true;
+	else if(strcmp(argv[i], "--disable-javascript") == 0)
+	  disable_javascript = true;
 	else if(strcmp(argv[i], "--executable-current-url") == 0)
 	  i += 1;
 	else if(strcmp(argv[i], "--full-screen") == 0)
@@ -116,6 +119,7 @@ int main(int argc, char *argv[])
 	  {
 	    qDebug() << "Dooble";
 	    qDebug() << " --attach";
+	    qDebug() << " --disable-javascript";
 	    qDebug() << " --executable-current-url PROGRAM";
 	    qDebug() << " --full-screen";
 	    qDebug() << " --help";
@@ -543,9 +547,10 @@ int main(int argc, char *argv[])
   auto const arguments(QCoreApplication::arguments());
   auto d = new dooble // Not deleted.
     (urls,
-     arguments.contains("--private") ||
-     dooble::s_settings->setting("private_mode").toBool(),
      attach,
+     disable_javascript,
+     arguments.contains("--private") || dooble::s_settings->
+                                        setting("private_mode").toBool(),
      reload_periodically);
 
   if(attach && d->attached())
