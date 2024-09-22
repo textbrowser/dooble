@@ -95,8 +95,8 @@ int main(int argc, char *argv[])
   qputenv("QV4_FORCE_INTERPRETER", "1");
 
   QList<QUrl> urls;
+  QString screen_mode("");
   auto attach = false;
-  auto full_screen = false;
   auto test_aes = false;
   auto test_aes_performance = false;
   auto test_threefish = false;
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 	else if(strcmp(argv[i], "--executable-current-url") == 0)
 	  i += 1;
 	else if(strcmp(argv[i], "--full-screen") == 0)
-	  full_screen = true;
+	  screen_mode = "full-screen";
 	else if(strcmp(argv[i], "--help") == 0)
 	  {
 	    qDebug() << "Dooble";
@@ -121,6 +121,7 @@ int main(int argc, char *argv[])
 	    qDebug() << " --help";
 	    qDebug() << " --listen";
 	    qDebug() << " --load-url URL";
+	    qDebug() << " --normal-screen";
 	    qDebug() << " --private";
 	    qDebug() << " --reload-periodically 15, 30, 45, 60";
 	    qDebug() << " --test-aes";
@@ -151,6 +152,8 @@ int main(int argc, char *argv[])
 		  urls << url;
 	      }
 	  }
+	else if(strcmp(argv[i], "--normal-screen") == 0)
+	  screen_mode = "normal-screen";
 	else if(strcmp(argv[i], "--reload-periodically") == 0)
 	  {
 	    i += 1;
@@ -653,10 +656,12 @@ int main(int argc, char *argv[])
       splash.finish(d);
     }
 
-  if(!full_screen)
-    QTimer::singleShot(0, d, SLOT(show(void)));
-  else
+  if(screen_mode == "full-screen")
     QTimer::singleShot(0, d, SLOT(showFullScreen(void)));
+  else if(screen_mode == "normal-screen")
+    QTimer::singleShot(0, d, SLOT(showNormal(void)));
+  else
+    QTimer::singleShot(0, d, SLOT(show(void)));
 
   auto const rc = dooble::s_application->exec();
 

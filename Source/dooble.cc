@@ -3000,6 +3000,23 @@ void dooble::showFullScreen(void)
     }
 }
 
+void dooble::showNormal(void)
+{
+  if(dooble_settings::setting("save_geometry").toBool())
+    restoreGeometry(QByteArray::fromBase64(dooble_settings::
+					   setting("dooble_geometry").
+					   toByteArray()));
+
+  QMainWindow::showNormal();
+
+  if(!s_warned_of_missing_sqlite_driver)
+    {
+      s_warned_of_missing_sqlite_driver = true;
+      QTimer::singleShot
+	(2500, this, SLOT(slot_warn_of_missing_sqlite_driver(void)));
+    }
+}
+
 void dooble::slot_about_to_hide_main_menu(void)
 {
   auto menu = qobject_cast<QMenu *> (sender());

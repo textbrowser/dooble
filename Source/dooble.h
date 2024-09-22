@@ -132,6 +132,7 @@ class dooble: public QMainWindow
  public slots:
   void show(void);
   void showFullScreen(void);
+  void showNormal(void);
 
  protected:
   void closeEvent(QCloseEvent *event);
