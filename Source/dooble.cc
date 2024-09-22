@@ -2990,7 +2990,11 @@ void dooble::showFullScreen(void)
 					   setting("dooble_geometry").
 					   toByteArray()));
 
+#ifdef Q_OS_MACOS
+  setWindowState(Qt::WindowFullScreen);
+#else
   QMainWindow::showFullScreen();
+#endif
 
   if(!s_warned_of_missing_sqlite_driver)
     {
