@@ -1,5 +1,6 @@
-The Translations directory must reside in the directory which houses the Dooble
-executable.
+The Translations directory must reside in the directory which houses
+the Dooble executable.
 
-The environment variable DOOBLE_TRANSLATIONS_PATH may also be used. The variable
-should be set to the absolute path of the Translations directory.
+The environment variable DOOBLE_TRANSLATIONS_PATH may also be used.
+The variable should be set to the absolute path of the Translations
+directory.

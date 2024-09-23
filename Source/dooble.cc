@@ -263,7 +263,7 @@ dooble::dooble(const QList<QUrl> &urls,
 	  return;
 	}
       else
-	qDebug() << "Cannot attach to a local Dooble instance.";
+	qDebug() << tr("Cannot attach to a local Dooble instance.");
     }
 
   if(urls.isEmpty())
