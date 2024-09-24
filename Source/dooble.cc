@@ -73,6 +73,7 @@
 #include "dooble_web_engine_view.h"
 #include "ui_dooble_authenticate.h"
 
+QElapsedTimer dooble::s_elapsed_timer;
 QPointer<dooble> dooble::s_dooble = nullptr;
 QPointer<dooble> dooble::s_favorites_popup_opened_from_dooble_window = nullptr;
 QPointer<dooble> dooble::s_search_engines_popup_opened_from_dooble_window =
@@ -112,7 +113,6 @@ dooble::dooble(QWidget *widget):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
-  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = false;
@@ -161,7 +161,6 @@ dooble::dooble(const QList<QUrl> &urls,
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
-  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = is_private;
@@ -316,7 +315,6 @@ dooble::dooble(dooble_page *page):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
-  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = page ? page->is_private() : false;
@@ -351,7 +349,6 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
 {
   initialize_static_members();
   m_anonymous_tab_headers = false;
-  m_elapsed_timer.start();
   m_floating_digital_clock_dialog = nullptr;
   m_is_javascript_dialog = false;
   m_is_private = view ? view->is_private() : false;
@@ -1074,6 +1071,9 @@ void dooble::initialize_static_members(void)
 	      this,
 	      SLOT(slot_downloads_started(void)));
     }
+
+  if(!s_elapsed_timer.isValid())
+    s_elapsed_timer.start();
 
   if(!s_favorites_window)
     {
@@ -4011,7 +4011,7 @@ void dooble::slot_floating_digital_dialog_timeout(void)
   m_floating_digital_clock_ui.date->setFont(font);
   m_floating_digital_clock_ui.uptime->setText
     (tr("Uptime: %1 Hours").
-     arg(static_cast<double> (m_elapsed_timer.elapsed()) / 3600000.0,
+     arg(static_cast<double> (s_elapsed_timer.elapsed()) / 3600000.0,
 	 0,
 	 'f',
 	 2));

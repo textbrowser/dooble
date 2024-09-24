@@ -100,6 +100,7 @@ class dooble: public QMainWindow
   bool is_private(void) const;
   dooble_page *current_page(void) const;
   dooble_page *new_page(const QUrl &url, bool is_private);
+  static QElapsedTimer s_elapsed_timer;
   static QPointer<dooble_about> s_about;
   static QPointer<dooble_accepted_or_blocked_domains>
     s_accepted_or_blocked_domains;
@@ -147,7 +148,6 @@ class dooble: public QMainWindow
     };
 
   QDialog *m_floating_digital_clock_dialog;
-  QElapsedTimer m_elapsed_timer;
   QEventLoop m_event_loop;
   QFuture<QList<QByteArray> > m_pbkdf2_future;
   QFutureWatcher<QList<QByteArray> > m_pbkdf2_future_watcher;
