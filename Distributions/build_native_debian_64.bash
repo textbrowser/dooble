@@ -3,7 +3,7 @@
 
 if [ ! -x /usr/bin/dpkg-deb ]; then
     echo "Please install dpkg-deb."
-    exit
+    exit 1
 fi
 
 if [ ! -x /usr/bin/fakeroot ]; then
