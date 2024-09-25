@@ -2119,10 +2119,9 @@ void dooble_page::slot_export_as_png_timer_timeout(void)
 
 void dooble_page::slot_favorite_changed(const QUrl &url, bool state)
 {
-  if(state)
-    if(m_view->history()->currentItem().url() == url)
-      dooble::s_history->save_item
-	(m_view->icon(), m_view->history()->currentItem(), true);
+  if(m_view->history()->currentItem().url() == url && state)
+    dooble::s_history->save_item
+      (m_view->icon(), m_view->history()->currentItem(), true);
 }
 
 void dooble_page::slot_feature_permission_allow(void)
@@ -2368,7 +2367,7 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 {
   Q_UNUSED(icon);
 
-  if(dooble::s_history->is_favorite(m_view->url()) || !m_is_private)
+  if(!m_is_private || dooble::s_history->is_favorite(m_view->url()))
     dooble::s_history->save_favicon(m_view->icon(), m_view->url());
 
   if(!m_is_private)
@@ -2524,8 +2523,8 @@ void dooble_page::slot_load_finished(bool ok)
   ** url may be unrelated.
   */
 
-  if(dooble::s_history->
-     is_favorite(m_view->history()->currentItem().url()) || !m_is_private)
+  if(!m_is_private ||
+     dooble::s_history->is_favorite(m_view->history()->currentItem().url()))
     dooble::s_history->save_item
       (QIcon(), m_view->history()->currentItem(), true);
 
