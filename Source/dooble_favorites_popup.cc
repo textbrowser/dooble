@@ -218,7 +218,7 @@ void dooble_favorites_popup::show(void)
 
 void dooble_favorites_popup::show_normal(QWidget *parent)
 {
-  if(dooble_settings::setting("save_geometry").toBool() && !this->parent())
+  if(!this->parent() && dooble_settings::setting("save_geometry").toBool())
     restoreGeometry(QByteArray::fromBase64(dooble_settings::
 					   setting("favorites_window_geometry").
 					   toByteArray()));
