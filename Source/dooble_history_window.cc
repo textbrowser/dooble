@@ -253,7 +253,7 @@ void dooble_history_window::save_settings(void)
 {
   if(m_floating)
     {
-      if(dooble_settings::setting("save_geometry").toBool())
+      if(dooble_settings::setting("save_geometry").toBool() && isVisible())
 	dooble_settings::set_setting
 	  ("history_popup_geometry", saveGeometry().toBase64());
     }
