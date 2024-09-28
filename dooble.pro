@@ -308,7 +308,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -pedantic \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 11.0
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
 } else:win32 {
 versionAtLeast(QT_VERSION, 6.0.0) {
 QMAKE_LFLAGS += /entry:mainCRTStartup
