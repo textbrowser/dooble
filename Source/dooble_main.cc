@@ -179,6 +179,8 @@ int main(int argc, char *argv[])
 	  test_threefish = true;
 	else if(strcmp(argv[i], "--test-threefish-performance") == 0)
 	  test_threefish_performance = true;
+	else if(strcmp(argv[i], "-style") == 0)
+	  i += 1;
 	else
 	  {
 	    auto url(QUrl::fromUserInput(argv[i]));
