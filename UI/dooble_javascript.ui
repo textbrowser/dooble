@@ -21,7 +21,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>The provided JavaScript will be injected into a page if the page's URL host matches the saved URL's host. Injection will occur after a page is loaded.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A saved JavaScript script will be &lt;span style=&quot; font-weight:600;&quot;&gt;automatically injected&lt;/span&gt; into a page &lt;span style=&quot; font-weight:600;&quot;&gt;if the page's URL host matches the saved URL's host&lt;/span&gt;. Injection will occur after a page is loaded. You may also inject a script via the Execute! button.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
