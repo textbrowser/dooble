@@ -49,6 +49,7 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  this,
 	  SLOT(slot_save(void)));
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
+  setModal(false);
 }
 
 void dooble_javascript::set_page(QWebEnginePage *page)
@@ -61,6 +62,10 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 	      SIGNAL(destroyed(void)),
 	      this,
 	      SLOT(deleteLater(void)));
+      connect(page,
+	      SIGNAL(loadFinished(bool)),
+	      this,
+	      SLOT(slot_load_finished(bool)));
       connect(page,
 	      SIGNAL(titleChanged(const QString &)),
 	      this,
@@ -80,12 +85,18 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 
 void dooble_javascript::slot_execute(void)
 {
-  if(!m_page)
+  if(m_page == nullptr || m_ui.text->toPlainText().trimmed().isEmpty())
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_page->runJavaScript(m_ui.text->toPlainText().trimmed());
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_javascript::slot_load_finished(bool state)
+{
+  Q_UNUSED(state);
+  slot_execute();
 }
 
 void dooble_javascript::slot_save(void)
@@ -122,7 +133,7 @@ void dooble_javascript::slot_save(void)
 	  (m_ui.text->toPlainText().trimmed().toUtf8()).toBase64();
 	query.addBindValue(bytes);
 	bytes = dooble::s_cryptography->encrypt_then_mac
-	  (m_page->url().toEncoded());
+	  (m_page->url().host().toUtf8());
 
 	if(!bytes.isEmpty())
 	  query.addBindValue(bytes.toBase64());
@@ -130,7 +141,7 @@ void dooble_javascript::slot_save(void)
 	  goto done_label;
 
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(m_page->url().toEncoded()).toBase64());
+	  (dooble::s_cryptography->hmac(m_page->url().host()).toBase64());
 	query.exec();
       }
 
@@ -177,7 +188,7 @@ void dooble_javascript::slot_url_changed(const QUrl &url)
 	query.prepare
 	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
 	query.addBindValue
-	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
+	  (dooble::s_cryptography->hmac(url.host()).toBase64());
 
 	if(query.exec() && query.next())
 	  {

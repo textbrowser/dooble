@@ -19,6 +19,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>The provided JavaScript will be injected into a page if the page's URL host matches the saved URL's host. Injection will occur after a page is loaded.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLineEdit" name="url">
      <property name="readOnly">
       <bool>true</bool>
