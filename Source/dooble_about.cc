@@ -103,7 +103,7 @@ dooble_about::dooble_about(void):QMainWindow()
   m_ui.user_agent->setText(dooble::s_default_http_user_agent);
   m_ui.version->setText
     (tr("Dooble version %1. Made with love by textbrowser. "
-        "The official version is <b>%1</b>.").
+        "The official version is <b>%2</b>.").
      arg(DOOBLE_VERSION_STRING).
      arg(DOOBLE_VERSION_STRING_LTS));
   compute_self_digest();
