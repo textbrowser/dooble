@@ -39,10 +39,15 @@
 dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 {
   m_script_injected_label = new QLabel(this);
+  m_script_injected_label->resize(QSize(32, 32));
+  m_script_injected_label->setText("&#9989;");
+  m_script_injected_label->setTextFormat(Qt::RichText);
+  m_script_injected_label->setToolTip(tr("Script injected."));
+  m_script_injected_label->setVisible(false);
   m_ui.setupUi(this);
   m_ui.buttons->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
   m_ui.url->setStyleSheet
-    (QString("QLineEdit {padding-left: %1px;}").arg(32));
+    (QString("QLineEdit {padding-left: %1px;}").arg(20));
   connect(m_ui.buttons->button(QDialogButtonBox::Ok),
 	  SIGNAL(clicked(void)),
 	  this,
@@ -58,6 +63,8 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 void dooble_javascript::resizeEvent(QResizeEvent *event)
 {
   QDialog::resizeEvent(event);
+  m_script_injected_label->move(QPoint(10, 1) + m_ui.url->pos());
+  m_script_injected_label->raise();
 }
 
 void dooble_javascript::set_page(QWebEnginePage *page)
@@ -74,6 +81,10 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 	      SIGNAL(loadFinished(bool)),
 	      this,
 	      SLOT(slot_load_finished(bool)));
+      connect(page,
+	      SIGNAL(loadStarted(void)),
+	      m_script_injected_label,
+	      SLOT(hide(void)));
       connect(page,
 	      SIGNAL(titleChanged(const QString &)),
 	      this,
@@ -98,6 +109,7 @@ void dooble_javascript::slot_execute(void)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_page->runJavaScript(m_ui.text->toPlainText().trimmed());
+  m_script_injected_label->setVisible(true);
   QApplication::restoreOverrideCursor();
 }
 
@@ -170,6 +182,7 @@ void dooble_javascript::slot_title_changed(const QString &title)
 
 void dooble_javascript::slot_url_changed(const QUrl &url)
 {
+  m_script_injected_label->setVisible(false);
   m_ui.url->setText(url.toString());
   m_ui.url->setCursorPosition(0);
 
