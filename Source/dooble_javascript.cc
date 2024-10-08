@@ -63,7 +63,10 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 void dooble_javascript::resizeEvent(QResizeEvent *event)
 {
   QDialog::resizeEvent(event);
-  m_script_injected_label->move(QPoint(10, 1) + m_ui.url->pos());
+  m_script_injected_label->move
+    (QPoint(10, qMax(1,
+		     -m_script_injected_label->height() / 2 +
+		     m_ui.url->height() / 2)) + m_ui.url->pos());
   m_script_injected_label->raise();
 }
 
