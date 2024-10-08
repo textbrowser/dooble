@@ -69,13 +69,14 @@ void dooble_search_widget::prepare_icons(void)
 
 void dooble_search_widget::resizeEvent(QResizeEvent *event)
 {
+  QLineEdit::resizeEvent(event);
+
   auto const frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   auto const size1 = m_find_tool_button->sizeHint();
   int d = 0;
 
   d = (rect().height() - (size1.height() - size1.height() % 2)) / 2;
   m_find_tool_button->move(frame_width - rect().left() + 5, rect().top() + d);
-  QLineEdit::resizeEvent(event);
 }
 
 void dooble_search_widget::slot_settings_applied(void)

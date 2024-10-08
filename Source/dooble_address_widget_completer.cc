@@ -86,6 +86,10 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
+  connect(m_popup,
+	  SIGNAL(clicked(const QModelIndex &)),
+	  this,
+	  SLOT(slot_clicked(const QModelIndex &)));
   connect(qobject_cast<dooble_address_widget *> (parent),
 	  SIGNAL(returnPressed(void)),
 	  &m_text_edited_timer,
@@ -94,10 +98,6 @@ dooble_address_widget_completer::dooble_address_widget_completer
 	  SIGNAL(textEdited(const QString &)),
 	  &m_text_edited_timer,
 	  SLOT(start(void)));
-  connect(m_popup,
-	  SIGNAL(clicked(const QModelIndex &)),
-	  this,
-	  SLOT(slot_clicked(const QModelIndex &)));
   setCaseSensitivity(Qt::CaseInsensitive);
   setCompletionColumn(0);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);

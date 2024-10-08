@@ -357,6 +357,8 @@ void dooble_address_widget::prepare_icons(void)
 
 void dooble_address_widget::resizeEvent(QResizeEvent *event)
 {
+  QLineEdit::resizeEvent(event);
+
   auto const frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   auto const size1(m_favorite->sizeHint());
   auto const size2(m_information->sizeHint());
@@ -374,8 +376,6 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
 
   if(selectedText().isEmpty())
     setCursorPosition(0);
-
-  QLineEdit::resizeEvent(event);
 }
 
 void dooble_address_widget::setText(const QString &text)

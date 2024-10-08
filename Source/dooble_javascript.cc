@@ -38,8 +38,11 @@
 
 dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 {
+  m_script_injected_label = new QLabel(this);
   m_ui.setupUi(this);
   m_ui.buttons->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
+  m_ui.url->setStyleSheet
+    (QString("QLineEdit {padding-left: %1px;}").arg(32));
   connect(m_ui.buttons->button(QDialogButtonBox::Ok),
 	  SIGNAL(clicked(void)),
 	  this,
@@ -50,6 +53,11 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SLOT(slot_save(void)));
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   setModal(false);
+}
+
+void dooble_javascript::resizeEvent(QResizeEvent *event)
+{
+  QDialog::resizeEvent(event);
 }
 
 void dooble_javascript::set_page(QWebEnginePage *page)
