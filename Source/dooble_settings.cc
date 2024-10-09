@@ -1204,6 +1204,10 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 
   if((first_time = s_web_engine_settings_environment.isEmpty()))
     {
+      s_web_engine_settings_environment["--allow-insecure-localhost"] =
+	"singular";
+      s_web_engine_settings_environment["--allow-running-insecure-content"] =
+	"singular";
       s_web_engine_settings_environment
 	["--blink-settings=forceDarkModeEnabled"] = "boolean";
       s_web_engine_settings_environment["--disable-reading-from-canvas"] =
@@ -1252,7 +1256,7 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	query.setForwardOnly(true);
 	query.prepare
 	  ("SELECT key, value FROM dooble_web_engine_settings "
-	   "WHERE environment_variable = 1");
+	   "WHERE environment_variable = 1 ORDER BY 1");
 
 	if(query.exec())
 	  while(query.next())
