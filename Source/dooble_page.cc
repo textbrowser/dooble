@@ -2361,6 +2361,79 @@ void dooble_page::slot_feature_permission_requested
       }
     }
 #else
+  switch(feature)
+    {
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+    case QWebEnginePermission::PermissionType::DesktopAudioVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting "
+	      "Desktop Audio Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+#endif
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+    case QWebEnginePermission::PermissionType::DesktopVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Desktop Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+#endif
+    case QWebEnginePermission::PermissionType::Geolocation:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Geo Location access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePermission::PermissionType::MediaAudioCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Media Audio Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePermission::PermissionType::MediaAudioVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting "
+	      "Media Audio Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePermission::PermissionType::MediaVideoCapture:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Media Video Capture access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePermission::PermissionType::MouseLock:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Mouse Lock access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePermission::PermissionType::Notifications:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Notifications access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    default:
+      {
+	m_ui.feature_permission_url->setProperty("feature", -1);
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting access to an unknown feature.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    }
 #endif
 
   m_ui.feature_permission_popup_message->setVisible(true);
