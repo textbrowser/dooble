@@ -2208,7 +2208,9 @@ void dooble_page::slot_feature_permission_requested
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 (const QUrl &security_origin, QWebEnginePage::Feature feature)
 #else
-(const QUrl &security_origin, QWebEnginePermission::PermissionType feature)
+(const QUrl &security_origin,
+ QWebEnginePermission::PermissionType feature,
+ QWebEnginePermission::State &state)
 #endif
 {
   if(!dooble::s_settings->setting("features_permissions").toBool())
@@ -2218,18 +2220,22 @@ void dooble_page::slot_feature_permission_requested
 	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
       m_view->set_feature_permission
-	(security_origin, feature, QWebEnginePermission::State::Denied);
+	(security_origin,
+	 feature,
+	 state = QWebEnginePermission::State::Denied);
 #endif
       return;
     }
-  else if(security_origin.isEmpty() || !security_origin.isValid())
+  else if(!security_origin.isValid() || security_origin.isEmpty())
     {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
       m_view->set_feature_permission
 	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
       m_view->set_feature_permission
-	(security_origin, feature, QWebEnginePermission::State::Denied);
+	(security_origin,
+	 feature,
+	 state = QWebEnginePermission::State::Denied);
 #endif
       return;
     }
@@ -2240,7 +2246,9 @@ void dooble_page::slot_feature_permission_requested
 	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
       m_view->set_feature_permission
-	(security_origin, feature, QWebEnginePermission::State::Denied);
+	(security_origin,
+	 feature,
+	 state = QWebEnginePermission::State::Denied);
 #endif
       return;
     }
@@ -2262,7 +2270,9 @@ void dooble_page::slot_feature_permission_requested
 	  (security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
 	m_view->set_feature_permission
-	  (security_origin, feature, QWebEnginePermission::State::Denied);
+	  (security_origin,
+	   feature,
+	   state = QWebEnginePermission::State::Denied);
 #endif
 	prepare_progress_label_position();
 	return;
@@ -2275,7 +2285,9 @@ void dooble_page::slot_feature_permission_requested
 	  (security_origin, feature, QWebEnginePage::PermissionGrantedByUser);
 #else
 	m_view->set_feature_permission
-	  (security_origin, feature, QWebEnginePermission::State::Granted);
+	  (security_origin,
+	   feature,
+	   state = QWebEnginePermission::State::Granted);
 #endif
 	prepare_progress_label_position();
 	return;
@@ -2952,8 +2964,12 @@ void dooble_page::slot_open_link(void)
 #else
 void dooble_page::slot_permission_requested(QWebEnginePermission permission)
 {
+  auto state = QWebEnginePermission::State::Invalid;
+
   slot_feature_permission_requested
-    (permission.origin(), permission.permissionType());
+    (permission.origin(), permission.permissionType(), state);
+  state == QWebEnginePermission::State::Granted ?
+    permission.grant() : permission.deny();
 }
 #endif
 

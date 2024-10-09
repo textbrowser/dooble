@@ -183,7 +183,8 @@ class dooble_page: public QWidget
      QWebEnginePermission::PermissionType feature);
   void slot_feature_permission_requested
     (const QUrl &security_origin,
-     QWebEnginePermission::PermissionType feature);
+     QWebEnginePermission::PermissionType feature,
+     QWebEnginePermission::State &state);
 #endif
   void slot_find_next(void);
   void slot_find_previous(void);
