@@ -334,6 +334,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(create_window(dooble_web_engine_view *)),
 	  this,
 	  SIGNAL(create_window(dooble_web_engine_view *)));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   connect
     (m_view,
      SIGNAL(featurePermissionRequestCanceled(const QUrl &,
@@ -347,6 +348,8 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_feature_permission_requested(const QUrl &,
 						 QWebEnginePage::Feature)));
+#else
+#endif
   connect(m_view,
 	  SIGNAL(iconChanged(const QIcon &)),
 	  this,
@@ -2139,6 +2142,11 @@ void dooble_page::slot_feature_permission_allow(void)
        QWebEnginePage::Feature(feature),
        QWebEnginePage::PermissionGrantedByUser);
 #else
+  if(feature != -1)
+    m_view->set_feature_permission
+      (m_ui.feature_permission_url->property("security_origin").toUrl(),
+       QWebEnginePermission::PermissionType(feature),
+       QWebEnginePermission::State::Granted);
 #endif
 
   m_ui.feature_permission_url->setProperty("feature", -1);
@@ -2160,6 +2168,11 @@ void dooble_page::slot_feature_permission_deny(void)
        QWebEnginePage::Feature(feature),
        QWebEnginePage::PermissionDeniedByUser);
 #else
+  if(feature != -1)
+    m_view->set_feature_permission
+      (m_ui.feature_permission_url->property("security_origin").toUrl(),
+       QWebEnginePermission::PermissionType(feature),
+       QWebEnginePermission::State::Denied);
 #endif
 
   m_ui.feature_permission_url->setProperty("feature", -1);
@@ -2167,9 +2180,15 @@ void dooble_page::slot_feature_permission_deny(void)
 }
 
 void dooble_page::slot_feature_permission_request_canceled
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 (const QUrl &security_origin, QWebEnginePage::Feature feature)
+#else
+(const QUrl &security_origin, QWebEnginePermission::PermissionType feature)
+#endif
 {
-  if(feature == m_ui.feature_permission_url->property("feature").toInt() &&
+  auto const f = static_cast<int> (feature);
+
+  if(f == m_ui.feature_permission_url->property("feature").toInt() &&
      m_ui.feature_permission_url->property("security_origin").toUrl() ==
      security_origin)
     {
@@ -2179,7 +2198,11 @@ void dooble_page::slot_feature_permission_request_canceled
 }
 
 void dooble_page::slot_feature_permission_requested
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 (const QUrl &security_origin, QWebEnginePage::Feature feature)
+#else
+(const QUrl &security_origin, QWebEnginePermission::PermissionType feature)
+#endif
 {
   if(!dooble::s_settings->setting("features_permissions").toBool())
     {
@@ -2187,6 +2210,8 @@ void dooble_page::slot_feature_permission_requested
       m_view->set_feature_permission
 	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
+      m_view->set_feature_permission
+	(security_origin, feature, QWebEnginePermission::State::Denied);
 #endif
       return;
     }
@@ -2196,6 +2221,8 @@ void dooble_page::slot_feature_permission_requested
       m_view->set_feature_permission
 	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
+      m_view->set_feature_permission
+	(security_origin, feature, QWebEnginePermission::State::Denied);
 #endif
       return;
     }
@@ -2229,6 +2256,8 @@ void dooble_page::slot_feature_permission_requested
 	m_view->set_feature_permission
 	  (security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
+	m_view->set_feature_permission
+	  (security_origin, feature, QWebEnginePermission::State::Denied);
 #endif
 	prepare_progress_label_position();
 	return;
@@ -2240,13 +2269,16 @@ void dooble_page::slot_feature_permission_requested
 	m_view->set_feature_permission
 	  (security_origin, feature, QWebEnginePage::PermissionGrantedByUser);
 #else
+	m_view->set_feature_permission
+	  (security_origin, feature, QWebEnginePermission::State::Granted);
 #endif
 	prepare_progress_label_position();
 	return;
       }
     }
 
-  m_ui.feature_permission_url->setProperty("feature", feature);
+  m_ui.feature_permission_url->setProperty
+    ("feature", static_cast<int> (feature));
   m_ui.feature_permission_url->setProperty("security_origin", security_origin);
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))

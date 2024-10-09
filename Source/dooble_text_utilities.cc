@@ -33,7 +33,7 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 (QWebEnginePage::Feature feature)
 #else
-(QWebEnginePermission::PermissionType permission)
+(QWebEnginePermission::PermissionType feature)
 #endif
 {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
@@ -81,7 +81,7 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
       }
     }
 #else
-  switch(permission)
+  switch(feature)
     {
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
     case QWebEnginePermission::PermissionType::DesktopAudioVideoCapture:
