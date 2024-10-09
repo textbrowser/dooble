@@ -614,6 +614,12 @@ void dooble_web_engine_view::set_feature_permission
     (security_origin,
      feature,
      policy == QWebEnginePermission::State::Granted);
+
+  foreach(auto permission,
+	  m_page->profile()->listPermissionsForOrigin(security_origin))
+    if(feature == permission.permissionType())
+      policy == QWebEnginePermission::State::Granted ?
+	permission.grant() : permission.deny();
 }
 #endif
 
