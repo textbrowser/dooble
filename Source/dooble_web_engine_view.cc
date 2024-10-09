@@ -80,6 +80,10 @@ dooble_web_engine_view::dooble_web_engine_view
 	  SIGNAL(featurePermissionRequested(const QUrl &,
 					    QWebEnginePage::Feature)));
 #else
+  connect(m_page,
+	  SIGNAL(permissionRequested(QWebEnginePermission)),
+	  this,
+	  SIGNAL(permissionRequested(QWebEnginePermission)));
 #endif
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
   connect(m_page,

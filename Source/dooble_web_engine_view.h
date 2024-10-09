@@ -104,10 +104,14 @@ class dooble_web_engine_view: public QWebEngineView
 #else
   void downloadRequested(QWebEngineDownloadRequest *download);
 #endif
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   void featurePermissionRequestCanceled(const QUrl &security_origin,
 					QWebEnginePage::Feature feature);
   void featurePermissionRequested(const QUrl &security_origin,
 				  QWebEnginePage::Feature feature);
+#else
+  void permissionRequested(QWebEnginePermission permission);
+#endif
   void open_link_in_current_page(const QUrl &url);
   void open_link_in_new_private_window(const QUrl &url);
   void open_link_in_new_tab(const QUrl &url);

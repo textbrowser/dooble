@@ -407,6 +407,13 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(peekaboo_text(const QString &)),
 	  this,
 	  SIGNAL(peekaboo_text(const QString &)));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
+#else
+  connect(m_view,
+	  SIGNAL(permissionRequested(QWebEnginePermission)),
+	  this,
+	  SLOT(slot_permission_requested(QWebEnginePermission)));
+#endif
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
   connect(m_view,
 	  SIGNAL(printRequested(void)),
@@ -2228,14 +2235,12 @@ void dooble_page::slot_feature_permission_requested
     }
   else if(m_ui.feature_permission_popup_message->isVisible())
     {
-      /*
-      ** Deny the feature.
-      */
-
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
       m_view->set_feature_permission
 	(security_origin, feature, QWebEnginePage::PermissionDeniedByUser);
 #else
+      m_view->set_feature_permission
+	(security_origin, feature, QWebEnginePermission::State::Denied);
 #endif
       return;
     }
@@ -2869,6 +2874,15 @@ void dooble_page::slot_open_link(void)
   if(m_ui.address->isVisible())
     m_ui.address->setFocus();
 }
+
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
+#else
+void dooble_page::slot_permission_requested(QWebEnginePermission permission)
+{
+  slot_feature_permission_requested
+    (permission.origin(), permission.permissionType());
+}
+#endif
 
 void dooble_page::slot_prepare_backward_menu(void)
 {
