@@ -590,11 +590,14 @@ void dooble_web_engine_view::set_feature_permission
  QWebEnginePage::Feature feature,
  QWebEnginePage::PermissionPolicy policy)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   dooble::s_settings->set_site_feature_permission
     (security_origin,
      feature,
      policy == QWebEnginePage::PermissionGrantedByUser);
   m_page->setFeaturePermission(security_origin, feature, policy);
+#else
+#endif
 }
 
 void dooble_web_engine_view::slot_certificate_exception_accepted

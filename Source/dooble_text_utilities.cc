@@ -30,8 +30,13 @@
 #include "dooble_text_utilities.h"
 
 QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 (QWebEnginePage::Feature feature)
+#else
+(QWebEnginePermission::PermissionType permission)
+#endif
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   switch(feature)
     {
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
@@ -75,6 +80,51 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
 	return QObject::tr("Unknown Feature");
       }
     }
+#else
+  switch(permission)
+    {
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+    case QWebEnginePermission::PermissionType::DesktopAudioVideoCapture:
+      {
+	return QObject::tr("Desktop Audio Video Capture");
+      }
+#endif
+#ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
+    case QWebEnginePermission::PermissionType::DesktopVideoCapture:
+      {
+	return QObject::tr("Desktop Video Capture");
+      }
+#endif
+    case QWebEnginePermission::PermissionType::Geolocation:
+      {
+	return QObject::tr("Geo Location");
+      }
+    case QWebEnginePermission::PermissionType::MediaAudioCapture:
+      {
+	return QObject::tr("Media Audio Capture");
+      }
+    case QWebEnginePermission::PermissionType::MediaAudioVideoCapture:
+      {
+	return QObject::tr("Media Audio Video Capture");
+      }
+    case QWebEnginePermission::PermissionType::MediaVideoCapture:
+      {
+	return QObject::tr("Media Video Capture");
+      }
+    case QWebEnginePermission::PermissionType::MouseLock:
+      {
+	return QObject::tr("Mouse Lock");
+      }
+    case QWebEnginePermission::PermissionType::Notifications:
+      {
+	return QObject::tr("Notifications");
+      }
+    default:
+      {
+	return QObject::tr("Unknown Feature");
+      }
+    }
+#endif
 }
 
 int dooble_text_utilities::visual_length_of_string(const QString &text)

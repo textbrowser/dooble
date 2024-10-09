@@ -29,13 +29,21 @@
 #define dooble_text_utilities_h
 
 #include <QString>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 #include <QWebEnginePage>
+#else
+#include <QWebEnginePermission>
+#endif
 
 class dooble_text_utilities
 {
  public:
   static QString web_engine_page_feature_to_pretty_string
-    (QWebEnginePage::Feature feature);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
+  (QWebEnginePage::Feature feature);
+#else
+  (QWebEnginePermission::PermissionType permission);
+#endif
   static int visual_length_of_string(const QString &text);
 
  private:

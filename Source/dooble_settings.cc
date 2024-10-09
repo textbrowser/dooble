@@ -2122,9 +2122,12 @@ void dooble_settings::set_site_feature_permission
 		     Qt::ItemIsUserCheckable);
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 0, item);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
       item = new QTableWidgetItem
 	(dooble_text_utilities::
 	 web_engine_page_feature_to_pretty_string(feature));
+#else
+#endif
       item->setData(Qt::UserRole, url);
       item->setData(Qt::ItemDataRole(Qt::UserRole + 1), feature);
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -3222,10 +3225,13 @@ void dooble_settings::slot_populate(void)
 		       Qt::ItemIsSelectable |
 		       Qt::ItemIsUserCheckable);
 	m_ui.features_permissions->setItem(i, 0, item);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 	item = new QTableWidgetItem
 	  (dooble_text_utilities::
 	   web_engine_page_feature_to_pretty_string(QWebEnginePage::
 						    Feature(it.value().first)));
+#else
+#endif
 	item->setData(Qt::UserRole, it.key());
 	item->setData(Qt::ItemDataRole(Qt::UserRole + 1), it.value().first);
 	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
