@@ -46,6 +46,10 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
   m_script_injected_label->setVisible(false);
   m_ui.setupUi(this);
   m_ui.buttons_1->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
+  m_ui.buttons_2->button(QDialogButtonBox::Discard)->setText
+    (tr("Delete Selected"));
+  m_ui.buttons_2->button(QDialogButtonBox::Retry)->setText(tr("Refresh"));
+  m_ui.buttons_2->button(QDialogButtonBox::Save)->setText(tr("Save"));
   m_ui.url->setStyleSheet
     (QString("QLineEdit {padding-left: %1px;}").arg(20));
   connect(m_ui.buttons_1->button(QDialogButtonBox::Ok),
@@ -56,6 +60,18 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_save(void)));
+  connect(m_ui.buttons_2->button(QDialogButtonBox::Discard),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_delete_others(void)));
+  connect(m_ui.buttons_2->button(QDialogButtonBox::Retry),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_refresh_others(void)));
+  connect(m_ui.buttons_2->button(QDialogButtonBox::Save),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_save_others(void)));
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   setModal(false);
 }
@@ -105,6 +121,10 @@ void dooble_javascript::set_page(QWebEnginePage *page)
     }
 }
 
+void dooble_javascript::slot_delete_others(void)
+{
+}
+
 void dooble_javascript::slot_execute(void)
 {
   if(m_page == nullptr || m_ui.text->toPlainText().trimmed().isEmpty())
@@ -120,6 +140,10 @@ void dooble_javascript::slot_load_finished(bool state)
 {
   Q_UNUSED(state);
   slot_execute();
+}
+
+void dooble_javascript::slot_refresh_others(void)
+{
 }
 
 void dooble_javascript::slot_save(void)
@@ -173,6 +197,10 @@ void dooble_javascript::slot_save(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_javascript::slot_save_others(void)
+{
 }
 
 void dooble_javascript::slot_title_changed(const QString &title)

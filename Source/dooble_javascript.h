@@ -50,9 +50,12 @@ class dooble_javascript: public QDialog
   void resizeEvent(QResizeEvent *event);
 
  private slots:
+  void slot_delete_others(void);
   void slot_execute(void);
   void slot_load_finished(bool state);
+  void slot_refresh_others(void);
   void slot_save(void);
+  void slot_save_others(void);
   void slot_title_changed(const QString &title);
   void slot_url_changed(const QUrl &url);
 };
