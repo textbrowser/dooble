@@ -45,14 +45,14 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
   m_script_injected_label->setToolTip(tr("Script injected."));
   m_script_injected_label->setVisible(false);
   m_ui.setupUi(this);
-  m_ui.buttons->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
+  m_ui.buttons_1->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
   m_ui.url->setStyleSheet
     (QString("QLineEdit {padding-left: %1px;}").arg(20));
-  connect(m_ui.buttons->button(QDialogButtonBox::Ok),
+  connect(m_ui.buttons_1->button(QDialogButtonBox::Ok),
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_execute(void)));
-  connect(m_ui.buttons->button(QDialogButtonBox::Save),
+  connect(m_ui.buttons_1->button(QDialogButtonBox::Save),
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_save(void)));
