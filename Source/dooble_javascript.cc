@@ -38,12 +38,6 @@
 
 dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 {
-  m_script_injected_label = new QLabel(this);
-  m_script_injected_label->resize(QSize(32, 32));
-  m_script_injected_label->setText("&#9989;");
-  m_script_injected_label->setTextFormat(Qt::RichText);
-  m_script_injected_label->setToolTip(tr("Script injected."));
-  m_script_injected_label->setVisible(false);
   m_ui.setupUi(this);
   m_ui.buttons_1->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
   m_ui.buttons_2->button(QDialogButtonBox::Discard)->setText
@@ -72,6 +66,12 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_save_others(void)));
+  m_script_injected_label = new QLabel(m_ui.url);
+  m_script_injected_label->resize(QSize(32, 32));
+  m_script_injected_label->setText("&#9989;");
+  m_script_injected_label->setTextFormat(Qt::RichText);
+  m_script_injected_label->setToolTip(tr("Script injected."));
+  m_script_injected_label->setVisible(false);
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   setModal(false);
 }
@@ -82,7 +82,7 @@ void dooble_javascript::resizeEvent(QResizeEvent *event)
   m_script_injected_label->move
     (QPoint(10, qMax(1,
 		     -m_script_injected_label->height() / 2 +
-		     m_ui.url->height() / 2)) + m_ui.url->pos());
+		     m_ui.url->height() / 2)));
   m_script_injected_label->raise();
 }
 
