@@ -41,9 +41,9 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
   m_ui.setupUi(this);
   m_ui.buttons_1->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
   m_ui.buttons_2->button(QDialogButtonBox::Discard)->setText
-    (tr("Delete Selected"));
-  m_ui.buttons_2->button(QDialogButtonBox::Retry)->setText(tr("Refresh"));
-  m_ui.buttons_2->button(QDialogButtonBox::Save)->setText(tr("Save"));
+    (tr("&Delete Selected"));
+  m_ui.buttons_2->button(QDialogButtonBox::Retry)->setText(tr("&Refresh"));
+  m_ui.buttons_2->button(QDialogButtonBox::Save)->setText(tr("&Save"));
   m_ui.url->setStyleSheet
     (QString("QLineEdit {padding-left: %1px;}").arg(20));
   connect(m_ui.buttons_1->button(QDialogButtonBox::Ok),
@@ -150,6 +150,8 @@ void dooble_javascript::slot_refresh_others(void)
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
     return;
 
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
   auto const database_name(dooble_database_utilities::database_name());
 
   {
@@ -186,6 +188,7 @@ void dooble_javascript::slot_refresh_others(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
 }
 
 void dooble_javascript::slot_save(void)
