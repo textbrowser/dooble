@@ -144,6 +144,48 @@ void dooble_javascript::slot_load_finished(bool state)
 
 void dooble_javascript::slot_refresh_others(void)
 {
+  m_ui.edit->clear();
+  m_ui.list->clear();
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare("SELECT url FROM dooble_javascript");
+
+	if(query.exec())
+	  {
+	    while(query.next())
+	      {
+		auto url(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+		url = dooble::s_cryptography->mac_then_decrypt(url);
+
+		if(url.isEmpty() == false)
+		  m_ui.list->addItem(url);
+	      }
+
+	    m_ui.list->sortItems();
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_javascript::slot_save(void)
