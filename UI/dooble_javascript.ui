@@ -19,42 +19,88 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A saved JavaScript script will be &lt;span style=&quot; font-weight:600;&quot;&gt;automatically injected&lt;/span&gt; into a page &lt;span style=&quot; font-weight:600;&quot;&gt;if the page's URL host matches the saved URL's host&lt;/span&gt;. Injection will occur after a page is loaded. You may also inject a script via the Execute! button.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <widget class="QTabWidget" name="tab">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="url">
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPlainTextEdit" name="text">
-     <property name="placeholderText">
-      <string>Please provide valid JavaScript.</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttons">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Ok|QDialogButtonBox::Save</set>
-     </property>
+     <widget class="QWidget" name="page_1">
+      <attribute name="title">
+       <string>Current Page</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A saved JavaScript script will be &lt;span style=&quot; font-weight:600;&quot;&gt;automatically injected&lt;/span&gt; into a page &lt;span style=&quot; font-weight:600;&quot;&gt;if the page's URL host matches the saved URL's host&lt;/span&gt;. Injection will occur after a page is loaded. You may also inject a script via the Execute! button.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="url">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="text">
+         <property name="placeholderText">
+          <string>Please provide valid JavaScript.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDialogButtonBox" name="buttons_1">
+         <property name="standardButtons">
+          <set>QDialogButtonBox::Ok|QDialogButtonBox::Save</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <attribute name="title">
+       <string>Saved Scripts</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QListWidget" name="list">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="edit"/>
+       </item>
+       <item>
+        <widget class="QDialogButtonBox" name="buttons_2">
+         <property name="standardButtons">
+          <set>QDialogButtonBox::Discard|QDialogButtonBox::Save</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>url</tabstop>
-  <tabstop>text</tabstop>
- </tabstops>
  <resources>
   <include location="../Icons/icons.qrc"/>
  </resources>
