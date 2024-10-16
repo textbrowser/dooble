@@ -123,6 +123,40 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 
 void dooble_javascript::slot_delete_others(void)
 {
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	foreach(auto item, m_ui.list->selectedItems())
+	  {
+	    query.prepare("DELETE FROM dooble_javascript WHERE url = ?");
+	    query.addBindValue
+	      (dooble::s_cryptography->
+	       encrypt_then_mac(item->text().toUtf8()).toBase64());
+	    query.exec();
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+  slot_refresh_others();
 }
 
 void dooble_javascript::slot_execute(void)
@@ -180,6 +214,7 @@ void dooble_javascript::slot_refresh_others(void)
 		  m_ui.list->addItem(url);
 	      }
 
+	    m_ui.list->scrollToTop();
 	    m_ui.list->sortItems();
 	  }
       }
