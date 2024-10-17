@@ -147,7 +147,9 @@ void dooble_javascript::slot_delete_others(void)
 	    query.addBindValue
 	      (dooble::s_cryptography->
 	       encrypt_then_mac(item->text().toUtf8()).toBase64());
-	    query.exec();
+
+	    if(query.exec())
+	      delete m_ui.list->takeItem(m_ui.list->row(item));
 	  }
       }
 
@@ -156,7 +158,6 @@ void dooble_javascript::slot_delete_others(void)
 
   QSqlDatabase::removeDatabase(database_name);
   QApplication::restoreOverrideCursor();
-  slot_refresh_others();
 }
 
 void dooble_javascript::slot_execute(void)
