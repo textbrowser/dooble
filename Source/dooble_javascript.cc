@@ -66,6 +66,10 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_save_others(void)));
+  connect(m_ui.list,
+	  SIGNAL(itemSelectionChanged(void)),
+	  this,
+	  SLOT(slot_item_selection_changed(void)));
   m_script_injected_label = new QLabel(m_ui.url);
   m_script_injected_label->resize(QSize(32, 32));
   m_script_injected_label->setText("&#9989;");
@@ -177,6 +181,53 @@ void dooble_javascript::slot_load_finished(bool state)
   slot_execute();
 }
 
+void dooble_javascript::slot_item_selection_changed(void)
+{
+  m_ui.edit->clear();
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  auto item = m_ui.list->currentItem();
+
+  if(!item)
+    return;
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare
+	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(item->text()).toBase64());
+
+	if(query.exec() && query.next())
+	  {
+	    auto javascript
+	      (QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	    javascript = dooble::s_cryptography->mac_then_decrypt(javascript);
+	    m_ui.edit->setPlainText(javascript.trimmed());
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_javascript::slot_refresh_others(void)
 {
   m_ui.edit->clear();
@@ -209,10 +260,15 @@ void dooble_javascript::slot_refresh_others(void)
 	      {
 		auto url(QByteArray::fromBase64(query.value(0).toByteArray()));
 
-		url = dooble::s_cryptography->mac_then_decrypt(url);
+		url = dooble::s_cryptography->mac_then_decrypt(url).trimmed();
 
 		if(url.isEmpty() == false)
-		  m_ui.list->addItem(url);
+		  {
+		    auto item = new QListWidgetItem(url);
+
+		    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+		    m_ui.list->addItem(item);
+		  }
 	      }
 
 	    m_ui.list->scrollToTop();
@@ -295,14 +351,12 @@ void dooble_javascript::slot_title_changed(const QString &title)
 void dooble_javascript::slot_url_changed(const QUrl &url)
 {
   m_script_injected_label->setVisible(false);
+  m_ui.text->clear();
   m_ui.url->setText(url.toString());
   m_ui.url->setCursorPosition(0);
 
   if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    {
-      m_ui.text->clear();
-      return;
-    }
+    return;
 
   auto const database_name(dooble_database_utilities::database_name());
 
@@ -329,13 +383,9 @@ void dooble_javascript::slot_url_changed(const QUrl &url)
 	      (QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	    javascript = dooble::s_cryptography->mac_then_decrypt(javascript);
-	    m_ui.text->setPlainText(javascript);
+	    m_ui.text->setPlainText(javascript.trimmed());
 	  }
-	else
-	  m_ui.text->clear();
       }
-    else
-      m_ui.text->clear();
 
     db.close();
   }
