@@ -74,6 +74,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_is_location_frame_user_hidden = false;
   m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
     web_engine_profile;
+  m_javascript_console = new dooble_javascript(this);
   m_menu = new QMenu(this);
   m_popup_menu = new dooble_popup_menu(zoom_factor, this);
   m_popup_menu->resize(m_popup_menu->minimumSize());
@@ -112,6 +113,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   else
     m_view = new dooble_web_engine_view(web_engine_profile, this);
 
+  m_javascript_console->set_page(m_view->page());
   m_ui.address->set_view(m_view);
   m_ui.frame->layout()->addWidget(m_view);
 
@@ -2591,12 +2593,6 @@ void dooble_page::slot_javascript_allow_popup_exception(void)
 
 void dooble_page::slot_javascript_console(void)
 {
-  if(!m_javascript_console)
-    {
-      m_javascript_console = new dooble_javascript(this);
-      m_javascript_console->set_page(m_view->page());
-    }
-
   m_javascript_console->showNormal();
   m_javascript_console->raise();
   m_javascript_console->activateWindow();

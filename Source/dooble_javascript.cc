@@ -339,6 +339,57 @@ void dooble_javascript::slot_save(void)
 
 void dooble_javascript::slot_save_others(void)
 {
+  auto item = m_ui.list->currentItem();
+
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     !item)
+    return;
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("CREATE TABLE IF NOT EXISTS dooble_javascript ("
+		   "javascript TEXT NOT NULL, "
+		   "url TEXT NOT NULL, "
+		   "url_digest TEXT NOT NULL PRIMARY KEY)");
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_javascript "
+	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
+
+	QByteArray bytes;
+
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (m_ui.edit->toPlainText().trimmed().toUtf8()).toBase64();
+	query.addBindValue(bytes);
+	bytes = dooble::s_cryptography->encrypt_then_mac
+	  (item->text().trimmed().toUtf8());
+
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(item->text().trimmed()).toBase64());
+	query.exec();
+      }
+
+  done_label:
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_javascript::slot_title_changed(const QString &title)
