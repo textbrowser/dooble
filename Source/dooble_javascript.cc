@@ -273,6 +273,7 @@ void dooble_javascript::slot_refresh_others(void)
 
 	    m_ui.list->scrollToTop();
 	    m_ui.list->sortItems();
+	    m_ui.list->setCurrentRow(0);
 	  }
       }
 
