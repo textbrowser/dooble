@@ -54,6 +54,7 @@ class dooble_javascript: public QDialog
   void slot_execute(void);
   void slot_item_selection_changed(void);
   void slot_load_finished(bool state);
+  void slot_refresh(void);
   void slot_refresh_others(void);
   void slot_save(void);
   void slot_save_others(void);

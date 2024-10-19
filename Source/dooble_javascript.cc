@@ -40,6 +40,7 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 {
   m_ui.setupUi(this);
   m_ui.buttons_1->button(QDialogButtonBox::Ok)->setText(tr("&Execute!"));
+  m_ui.buttons_1->button(QDialogButtonBox::Retry)->setText(tr("&Refresh"));
   m_ui.buttons_2->button(QDialogButtonBox::Discard)->setText
     (tr("&Delete Selected"));
   m_ui.buttons_2->button(QDialogButtonBox::Retry)->setText(tr("&Refresh"));
@@ -50,6 +51,10 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_execute(void)));
+  connect(m_ui.buttons_1->button(QDialogButtonBox::Retry),
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_refresh(void)));
   connect(m_ui.buttons_1->button(QDialogButtonBox::Save),
 	  SIGNAL(clicked(void)),
 	  this,
@@ -170,7 +175,12 @@ void dooble_javascript::slot_execute(void)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  m_page->runJavaScript(m_ui.text->toPlainText().trimmed());
+  m_page->runJavaScript
+    (m_ui.text->toPlainText().trimmed(),
+     [](const QVariant &value)
+     {
+       qDebug() << value.toString();
+     });
   m_script_injected_label->setVisible(true);
   QApplication::restoreOverrideCursor();
 }
@@ -226,6 +236,17 @@ void dooble_javascript::slot_item_selection_changed(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_javascript::slot_refresh(void)
+{
+  if(!m_page)
+    return;
+
+  auto const state = m_script_injected_label->isVisible();
+
+  slot_url_changed(m_page->url());
+  m_script_injected_label->setVisible(state);
 }
 
 void dooble_javascript::slot_refresh_others(void)
