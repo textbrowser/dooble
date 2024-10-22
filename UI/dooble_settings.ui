@@ -352,9 +352,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>419</width>
-               <height>1430</height>
+               <y>-118</y>
+               <width>642</width>
+               <height>1296</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -655,6 +655,16 @@
                  </spacer>
                 </item>
                </layout>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="lefty_buttons">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display navigation and other buttons on the left-hand side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Lefty Buttons</string>
+                </property>
+               </widget>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_22">
@@ -1167,7 +1177,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>681</width>
+               <width>682</width>
                <height>1125</height>
               </rect>
              </property>
@@ -1776,8 +1786,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-847</y>
-               <width>642</width>
+               <y>0</y>
+               <width>556</width>
                <height>2316</height>
               </rect>
              </property>
@@ -2728,6 +2738,7 @@
   <tabstop>home_url</tabstop>
   <tabstop>icon_set</tabstop>
   <tabstop>language</tabstop>
+  <tabstop>lefty_buttons</tabstop>
   <tabstop>main_menu_bar_visible</tabstop>
   <tabstop>main_menu_bar_visible_shortcut</tabstop>
   <tabstop>pin_accepted_or_blocked_domains</tabstop>

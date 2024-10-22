@@ -325,6 +325,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["javascript"] = true;
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
+  s_settings["lefty_buttons"] = false;
   s_settings["local_storage"] = true;
   s_settings["main_menu_bar_visible"] = true;
   s_settings["main_menu_bar_visible_shortcut_index"] = 1; // F10
@@ -1655,6 +1656,8 @@ void dooble_settings::restore(bool read_database)
 	      s_settings.value("language_index", 0).toInt(),
 	      m_ui.language->count()));
 
+  m_ui.lefty_buttons->setChecked
+    (s_settings.value("lefty_buttons", false).toBool());
   m_ui.local_storage->setChecked
     (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked
@@ -2719,6 +2722,7 @@ void dooble_settings::slot_apply(void)
   set_setting
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting("language_index", m_ui.language->currentIndex());
+  set_setting("lefty_buttons", m_ui.lefty_buttons->isChecked());
   set_setting("local_storage", m_ui.local_storage->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("main_menu_bar_visible_shortcut_index",

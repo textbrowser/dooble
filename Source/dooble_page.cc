@@ -499,6 +499,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_progress_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   m_progress_label->setStyleSheet("QLabel {background-color: #e0e0e0;}");
   m_progress_label->setVisible(false);
+  move_buttons();
   prepare_icons();
   prepare_shortcuts();
   prepare_standard_menus();
@@ -733,7 +734,7 @@ void dooble_page::inject_custom_css(void)
   slot_inject_custom_css();
 }
 
- void dooble_page::javascript_console(void)
+void dooble_page::javascript_console(void)
 {
   slot_javascript_console();
 }
@@ -743,6 +744,74 @@ void dooble_page::load(const QUrl &url)
   m_view->stop();
   m_view->load(url);
   m_view->setUrl(url); // Set the address widget's text.
+}
+
+void dooble_page::move_buttons(void)
+{
+  auto layout = m_ui.top_frame->layout();
+
+  if(!layout)
+    return;
+
+  for(int i = layout->count() - 1; i >= 0; i--)
+    if(layout->itemAt(i))
+      {
+	auto widget = layout->itemAt(i)->widget();
+
+	if(!(qobject_cast<QToolButton *> (widget) ||
+	     qobject_cast<dooble_tool_button *> (widget)))
+	  continue;
+
+	if(m_ui.zoom_value != widget && widget)
+	  layout->removeWidget(widget);
+      }
+
+  for(int i = m_ui.side_layout->count() - 1; i >= 0; i--)
+    if(m_ui.side_layout->itemAt(i))
+      {
+	auto widget = m_ui.side_layout->itemAt(i)->widget();
+
+	if(widget)
+	  m_ui.side_layout->removeWidget(widget);
+	else
+	  delete m_ui.side_layout->takeAt(i);
+      }
+
+  if(dooble_settings::setting("lefty_buttons").toBool() == false)
+    {
+      layout->removeWidget(m_ui.address);
+      layout->removeWidget(m_ui.zoom_value);
+      layout->addWidget(m_ui.backward);
+      layout->addWidget(m_ui.forward);
+      layout->addWidget(m_ui.reload);
+      layout->addWidget(m_ui.home);
+      layout->addWidget(m_ui.address);
+      layout->addWidget(m_ui.zoom_value);
+      layout->addWidget(m_ui.accepted_or_blocked);
+      layout->addWidget(m_ui.downloads);
+      layout->addWidget(m_ui.downloads);
+      layout->addWidget(m_ui.favorites);
+      layout->addWidget(m_ui.favorites);
+      layout->addWidget(m_ui.menu);
+    }
+  else
+    {
+      m_ui.side_layout->addWidget(m_ui.backward);
+      m_ui.side_layout->addWidget(m_ui.forward);
+      m_ui.side_layout->addWidget(m_ui.reload);
+      m_ui.side_layout->addWidget(m_ui.home);
+      m_ui.side_layout->addWidget(m_ui.accepted_or_blocked);
+      m_ui.side_layout->addWidget(m_ui.downloads);
+      m_ui.side_layout->addWidget(m_ui.downloads);
+      m_ui.side_layout->addWidget(m_ui.favorites);
+      m_ui.side_layout->addWidget(m_ui.favorites);
+      m_ui.side_layout->addWidget(m_ui.menu);
+      m_ui.side_layout->addSpacerItem
+	(new QSpacerItem(40,
+			 20,
+			 QSizePolicy::Expanding,
+			 QSizePolicy::Expanding));
+    }
 }
 
 void dooble_page::prepare_export_as_png(const QString &file_name)
@@ -3178,6 +3247,7 @@ void dooble_page::slot_settings_applied(void)
   auto const zoom_factor = dooble_settings::setting("zoom").toDouble() / 100.0;
 
   m_view->setZoomFactor(zoom_factor);
+  move_buttons();
   prepare_icons();
   prepare_style_sheets();
   prepare_zoom_toolbutton(zoom_factor);

@@ -139,6 +139,7 @@ class dooble_page: public QWidget
   void find_text(QWebEnginePage::FindFlags find_flags, const QString &text);
   void go_to_backward_item(int index);
   void go_to_forward_item(int index);
+  void move_buttons(void);
   void prepare_icons(void);
   void prepare_progress_label_position(bool process_events = true);
   void prepare_shortcuts(void);
