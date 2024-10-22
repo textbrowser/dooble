@@ -30,7 +30,14 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="side_layout"/>
+    <layout class="QVBoxLayout" name="side_layout">
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
+    </layout>
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_4">

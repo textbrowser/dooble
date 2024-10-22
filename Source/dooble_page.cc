@@ -793,6 +793,7 @@ void dooble_page::move_buttons(void)
       layout->addWidget(m_ui.favorites);
       layout->addWidget(m_ui.favorites);
       layout->addWidget(m_ui.menu);
+      m_ui.side_layout->setContentsMargins(0, 0, 0, 0);
     }
   else
     {
@@ -811,6 +812,7 @@ void dooble_page::move_buttons(void)
 			 20,
 			 QSizePolicy::Expanding,
 			 QSizePolicy::Expanding));
+      m_ui.side_layout->setContentsMargins(5, 0, 0, 0);
     }
 }
 
