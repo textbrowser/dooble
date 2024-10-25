@@ -25,7 +25,9 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QDir>
 #include <QMimeData>
+#include <QStandardPaths>
 #include <QToolButton>
 #include <QtMath>
 
@@ -70,6 +72,21 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 #endif
   m_information->setToolTip(tr("Site Information (Cookies, etc.)"));
   m_menu = new QMenu(this);
+  m_publish = new QToolButton(this);
+  m_publish->setAutoRaise(true);
+  m_publish->setCursor(Qt::ArrowCursor);
+  m_publish->setEnabled(false);
+  m_publish->setIconSize(QSize(18, 18));
+#ifdef Q_OS_MACOS
+  m_publish->setStyleSheet
+    ("QToolButton {"
+     "border: none;"
+     "padding-bottom: 0px;"
+     "padding-top: 0px;"
+     "}");
+#endif
+  m_publish->setToolTip
+    (tr("Publish Page (%1)").arg(page_publication_directory_name()));
   m_pull_down = new QToolButton(this);
   m_pull_down->setAutoRaise(true);
   m_pull_down->setCursor(Qt::ArrowCursor);
@@ -115,6 +132,10 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_show_site_information_menu(void)));
+  connect(m_publish,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SIGNAL(publish(void)));
   connect(m_pull_down,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -159,6 +180,7 @@ dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
     (QString("QLineEdit {padding-left: %1px; padding-right: %2px;}").
      arg(m_favorite->sizeHint().width() +
 	 m_information->sizeHint().width() +
+	 m_publish->sizeHint().width() +
 	 frame_width +
 	 5).
      arg(m_pull_down->sizeHint().width() + frame_width + 5));
@@ -175,6 +197,18 @@ QSize dooble_address_widget::sizeHint(void) const
 
   size.setHeight(size.height() + 5);
   return size;
+}
+
+QString dooble_address_widget::page_publication_directory_name(void)
+{
+  auto path
+    (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).
+     value(0));
+
+  path.append(QDir::separator());
+  path.append("Dooble Published Pages");
+  QDir().mkdir(path);
+  return path;
 }
 
 bool dooble_address_widget::event(QEvent *event)
@@ -309,6 +343,7 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 	(QIcon::fromTheme(use_material_icons + "help-about",
 			  QIcon(QString(":/%1/18/information.png").
 				arg(icon_set))));
+      m_publish->setEnabled(false);
     }
   else
     {
@@ -336,6 +371,7 @@ void dooble_address_widget::prepare_containers_for_url(const QUrl &url)
 	(QIcon::fromTheme(use_material_icons + "help-about",
 			  QIcon(QString(":/%1/18/information.png").
 				arg(icon_set))));
+      m_publish->setEnabled(true);
     }
 }
 
@@ -350,6 +386,9 @@ void dooble_address_widget::prepare_icons(void)
   m_information->setIcon
     (QIcon::fromTheme(use_material_icons + "help-about",
 		      QIcon(QString(":/%1/18/information.png").arg(icon_set))));
+  m_publish->setIcon
+    (QIcon::fromTheme(use_material_icons + "document-save",
+		      QIcon(QString(":/%1/48/save.png").arg(icon_set))));
   m_pull_down->setIcon
      (QIcon::fromTheme(use_material_icons + "go-down",
 		       QIcon(QString(":/%1/18/pulldown.png").arg(icon_set))));
@@ -362,17 +401,22 @@ void dooble_address_widget::resizeEvent(QResizeEvent *event)
   auto const frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   auto const size1(m_favorite->sizeHint());
   auto const size2(m_information->sizeHint());
-  auto const size3(m_pull_down->sizeHint());
+  auto const size3(m_publish->sizeHint());
+  auto const size4(m_pull_down->sizeHint());
   int d = 0;
 
   d = (rect().height() - (size1.height() - size1.height() % 2)) / 2;
-  m_favorite->move(frame_width - rect().left() + size2.width() + 5,
-		   rect().top() + d);
+  m_favorite->move
+    (frame_width - rect().left() + size2.width() + 5, rect().top() + d);
   d = (rect().height() - (size2.height() - size2.height() % 2)) / 2;
   m_information->move(frame_width - rect().left() + 5, rect().top() + d);
   d = (rect().height() - (size3.height() - size3.height() % 2)) / 2;
+  m_publish->move
+    (frame_width - rect().left() + size1.width() + size2.width() + 5,
+     rect().top() + d);
+  d = (rect().height() - (size4.height() - size4.height() % 2)) / 2;
   m_pull_down->move
-    (rect().right() - frame_width - size3.width() - 5, rect().top() + d);
+    (rect().right() - frame_width - size4.width() - 5, rect().top() + d);
 
   if(selectedText().isEmpty())
     setCursorPosition(0);
@@ -511,6 +555,7 @@ void dooble_address_widget::slot_favorites_populated(void)
 void dooble_address_widget::slot_load_finished(bool ok)
 {
   Q_UNUSED(ok);
+  m_publish->setEnabled(true);
 
   if(m_view)
     prepare_containers_for_url(m_view->url());
@@ -518,6 +563,8 @@ void dooble_address_widget::slot_load_finished(bool ok)
 
 void dooble_address_widget::slot_load_started(void)
 {
+  m_publish->setEnabled(false);
+
   if(m_view)
     {
       auto const url1(QUrl::fromUserInput(text()));

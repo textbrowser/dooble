@@ -221,6 +221,8 @@ class dooble_page: public QWidget
   void slot_proxy_authentication_required(const QUrl &url,
 					  QAuthenticator *authenticator,
 					  const QString &proxy_host);
+  void slot_publish(void);
+  void slot_publish_html(const QString &html);
   void slot_reload(void);
   void slot_reload_bypass_cache(void);
   void slot_reload_or_stop(void);
@@ -255,6 +257,7 @@ class dooble_page: public QWidget
   void decreased_page_brightness(bool state);
   void dooble_credentials_authenticated(bool state);
   void export_as_png(void);
+  void html_ready(const QString &html);
   void iconChanged(const QIcon &icon);
   void javascript_allow_popup_exception(const QUrl &url);
   void loadFinished(bool ok);

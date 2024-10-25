@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QPainter>
 #include <QProcess>
+#include <QTemporaryFile>
 #include <QToolTip>
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QWebEngineFindTextResult>
@@ -219,6 +220,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(load_page(const QUrl &)),
 	  this,
 	  SLOT(slot_load_page(void)));
+  connect(m_ui.address,
+	  SIGNAL(publish(void)),
+	  this,
+	  SLOT(slot_publish(void)));
   connect(m_ui.address,
 	  SIGNAL(returnPressed(void)),
 	  this,
@@ -472,6 +477,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(scrollPositionChanged(const QPointF &)),
 	  this,
 	  SLOT(slot_scroll_position_changed(const QPointF &)));
+  connect(this,
+	  SIGNAL(html_ready(const QString &)),
+	  this,
+	  SLOT(slot_publish_html(const QString &)));
   connect(this,
 	  SIGNAL(javascript_allow_popup_exception(const QUrl &)),
 	  dooble::s_settings,
@@ -3135,9 +3144,9 @@ void dooble_page::slot_proxy_authentication_required
 (const QUrl &url, QAuthenticator *authenticator, const QString &proxy_host)
 {
   if(!authenticator ||
+     !url.isValid() ||
      authenticator->isNull() ||
-     proxy_host.isEmpty() ||
-     !url.isValid())
+     proxy_host.isEmpty())
     {
       if(authenticator)
 	*authenticator = QAuthenticator();
@@ -3168,6 +3177,35 @@ void dooble_page::slot_proxy_authentication_required
     {
       QApplication::processEvents();
       *authenticator = QAuthenticator();
+    }
+}
+
+void dooble_page::slot_publish(void)
+{
+  m_view->page()->toHtml
+    ([this] (const QString &result) mutable {emit html_ready(result);});
+}
+
+void dooble_page::slot_publish_html(const QString &html)
+{
+  QTemporaryFile file
+    (dooble_address_widget::page_publication_directory_name() +
+     QDir::separator() +
+     "DooblePublishedPageXXXXXX.txt");
+
+  if(file.open())
+    {
+      QTextStream stream(&file);
+      auto const title
+	(m_view->title().remove('\n').remove('\r').simplified().trimmed());
+      auto const url
+	(m_view->url().toDisplayString().remove('\n').remove('\r'));
+
+      Q_UNUSED(file.fileName()); // Prevents removal of file.
+      file.setAutoRemove(false);
+      stream << title << Qt::endl;
+      stream << url << Qt::endl;
+      stream << html;
     }
 }
 

@@ -426,8 +426,6 @@ int main(int argc, char *argv[])
 
   if(splash_screen)
     {
-      QElapsedTimer t;
-
       splash.setEnabled(false);
       splash.setPixmap(QPixmap(":/Miscellaneous/splash.png"));
       splash.show();
@@ -435,10 +433,7 @@ int main(int argc, char *argv[])
 	(QObject::tr("Initializing Dooble's random number generator."),
 	 Qt::AlignBottom | Qt::AlignHCenter,
 	 QColor(Qt::white));
-      t.start();
-
-      while(t.elapsed() < 500)
-	splash.repaint();
+      splash.repaint();
     }
 
   dooble_random::initialize();
