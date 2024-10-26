@@ -115,12 +115,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>create_window</b> (<a
 <tr class="memitem:aff9df1914ffc2eb7eb1d9c641b18a9ac" id="r_aff9df1914ffc2eb7eb1d9c641b18a9ac"><td class="memItemLeft" align="right" valign="top"><a id="aff9df1914ffc2eb7eb1d9c641b18a9ac" name="aff9df1914ffc2eb7eb1d9c641b18a9ac"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>downloadRequested</b> (QWebEngineDownloadRequest *download)</td></tr>
 <tr class="separator:aff9df1914ffc2eb7eb1d9c641b18a9ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89c58c9e42dca97439abd3b8d9a11beb" id="r_a89c58c9e42dca97439abd3b8d9a11beb"><td class="memItemLeft" align="right" valign="top"><a id="a89c58c9e42dca97439abd3b8d9a11beb" name="a89c58c9e42dca97439abd3b8d9a11beb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>featurePermissionRequestCanceled</b> (const QUrl &amp;security_origin, QWebEnginePage::Feature feature)</td></tr>
-<tr class="separator:a89c58c9e42dca97439abd3b8d9a11beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c5786ff066d9842d87763c5620d6ba4" id="r_a4c5786ff066d9842d87763c5620d6ba4"><td class="memItemLeft" align="right" valign="top"><a id="a4c5786ff066d9842d87763c5620d6ba4" name="a4c5786ff066d9842d87763c5620d6ba4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>featurePermissionRequested</b> (const QUrl &amp;security_origin, QWebEnginePage::Feature feature)</td></tr>
-<tr class="separator:a4c5786ff066d9842d87763c5620d6ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdec01e82a2d05641e0d5bd4f44169f0" id="r_acdec01e82a2d05641e0d5bd4f44169f0"><td class="memItemLeft" align="right" valign="top"><a id="acdec01e82a2d05641e0d5bd4f44169f0" name="acdec01e82a2d05641e0d5bd4f44169f0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>permissionRequested</b> (QWebEnginePermission permission)</td></tr>
+<tr class="separator:acdec01e82a2d05641e0d5bd4f44169f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa51e3ad472c96a0e93b26554f9ec5c2d" id="r_aa51e3ad472c96a0e93b26554f9ec5c2d"><td class="memItemLeft" align="right" valign="top"><a id="aa51e3ad472c96a0e93b26554f9ec5c2d" name="aa51e3ad472c96a0e93b26554f9ec5c2d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>open_link_in_current_page</b> (const QUrl &amp;url)</td></tr>
 <tr class="separator:aa51e3ad472c96a0e93b26554f9ec5c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,9 +160,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>download</b> (const Q
 <tr class="memitem:acdefea5c10e9c8d372e44e70c532b1ad" id="r_acdefea5c10e9c8d372e44e70c532b1ad"><td class="memItemLeft" align="right" valign="top"><a id="acdefea5c10e9c8d372e44e70c532b1ad" name="acdefea5c10e9c8d372e44e70c532b1ad"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (const QString &amp;file_name)</td></tr>
 <tr class="separator:acdefea5c10e9c8d372e44e70c532b1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed4a86156aee9d7ed6e615107cea4198" id="r_aed4a86156aee9d7ed6e615107cea4198"><td class="memItemLeft" align="right" valign="top"><a id="aed4a86156aee9d7ed6e615107cea4198" name="aed4a86156aee9d7ed6e615107cea4198"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_feature_permission</b> (const QUrl &amp;security_origin, QWebEnginePage::Feature feature, QWebEnginePage::PermissionPolicy policy)</td></tr>
-<tr class="separator:aed4a86156aee9d7ed6e615107cea4198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67acddf3e5abbd3b55660ea2c6c93946" id="r_a67acddf3e5abbd3b55660ea2c6c93946"><td class="memItemLeft" align="right" valign="top"><a id="a67acddf3e5abbd3b55660ea2c6c93946" name="a67acddf3e5abbd3b55660ea2c6c93946"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_feature_permission</b> (const QUrl &amp;security_origin, QWebEnginePermission::PermissionType feature, QWebEnginePermission::State policy)</td></tr>
+<tr class="separator:a67acddf3e5abbd3b55660ea2c6c93946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
