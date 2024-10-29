@@ -62,6 +62,7 @@ class dooble_application: public QApplication
   void favorites_cleared(void);
   void favorites_sorted(void);
   void history_cleared(void);
+  void javascript_scripts_cleared(void);
   void status_bar_visible(bool state);
 };
 

@@ -31,6 +31,7 @@
 #include <QSqlQuery>
 
 #include "dooble.h"
+#include "dooble_application.h"
 #include "dooble_cryptography.h"
 #include "dooble_database_utilities.h"
 #include "dooble_javascript.h"
@@ -47,6 +48,10 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
   m_ui.buttons_2->button(QDialogButtonBox::Save)->setText(tr("&Save"));
   m_ui.url->setStyleSheet
     (QString("QLineEdit {padding-left: %1px;}").arg(20));
+  connect(dooble::s_application,
+	  SIGNAL(javascript_scripts_cleared(void)),
+	  this,
+	  SLOT(slot_javascript_scripts_cleared(void)));
   connect(m_ui.buttons_1->button(QDialogButtonBox::Ok),
 	  SIGNAL(clicked(void)),
 	  this,
@@ -100,7 +105,7 @@ void dooble_javascript::purge(void)
       {
 	QSqlQuery query(db);
 
-	query.prepare("DELETE FROM dooble_javascript");
+	query.exec("DELETE FROM dooble_javascript");
       }
 
     db.close();
@@ -207,6 +212,13 @@ void dooble_javascript::slot_execute(void)
      });
   m_script_injected_label->setVisible(true);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_javascript::slot_javascript_scripts_cleared(void)
+{
+  m_ui.edit->clear();
+  m_ui.list->clear();
+  m_ui.text->clear();
 }
 
 void dooble_javascript::slot_load_finished(bool state)
