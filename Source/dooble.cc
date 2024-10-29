@@ -59,6 +59,7 @@
 #include "dooble_history_window.h"
 #include "dooble_hmac.h"
 #include "dooble_jar.h"
+#include "dooble_javascript.h"
 #include "dooble_page.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_popup_menu.h"
@@ -3497,21 +3498,26 @@ void dooble::slot_application_locked(bool state, dooble *d)
   if(locked)
     {
       m_ui.menu_bar->setVisible(false);
-      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false);
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner) ?
+	m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(false) :
+	(void) 0;
       m_ui.tab->setTabsClosable(false);
       setWindowTitle(tr("Dooble: Application Locked"));
 
       foreach(auto widget, QApplication::topLevelWidgets())
 	{
-	  auto window = qobject_cast<dooble_main_window *> (widget);
+	  auto javascript = qobject_cast<dooble_javascript *> (widget);
 
-	  if(!window)
-	    continue;
+	  if(javascript)
+	    javascript->close();
 
-	  if(qobject_cast<dooble_charts *> (window->centralWidget()))
+	  auto main_window = qobject_cast<dooble_main_window *> (widget);
+
+	  if(main_window &&
+	     qobject_cast<dooble_charts *> (main_window->centralWidget()))
 	    {
-	      window->setAttribute(Qt::WA_DeleteOnClose, false);
-	      window->close();
+	      main_window->setAttribute(Qt::WA_DeleteOnClose, false);
+	      main_window->close();
 	    }
 	}
     }
@@ -3519,7 +3525,9 @@ void dooble::slot_application_locked(bool state, dooble *d)
     {
       m_ui.menu_bar->setVisible
 	(dooble_settings::setting("main_menu_bar_visible").toBool());
-      m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true);
+      m_ui.tab->cornerWidget(Qt::TopLeftCorner) ?
+	m_ui.tab->cornerWidget(Qt::TopLeftCorner)->setEnabled(true) :
+	(void) 0;
       m_ui.tab->setTabsClosable(tabs_closable());
       slot_tab_index_changed(m_ui.tab->currentIndex());
 
