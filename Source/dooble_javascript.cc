@@ -85,6 +85,30 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
   setModal(false);
 }
 
+void dooble_javascript::purge(void)
+{
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.prepare("DELETE FROM dooble_javascript");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
 void dooble_javascript::resizeEvent(QResizeEvent *event)
 {
   QDialog::resizeEvent(event);

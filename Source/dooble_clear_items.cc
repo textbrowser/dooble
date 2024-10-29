@@ -39,6 +39,7 @@
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
 #include "dooble_history.h"
+#include "dooble_javascript.h"
 #include "dooble_search_engines_popup.h"
 #include "dooble_style_sheet.h"
 
@@ -159,6 +160,8 @@ void dooble_clear_items::slot_clear_items(void)
 
   if(m_ui.javascript_scripts->isChecked())
     {
+      dooble_javascript::purge();
+      emit javascript_scripts_cleared();
     }
 
   if(m_ui.search_engines->isChecked())

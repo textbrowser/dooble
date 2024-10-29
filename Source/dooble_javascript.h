@@ -41,6 +41,7 @@ class dooble_javascript: public QDialog
 
  public:
   dooble_javascript(QWidget *parent);
+  static void purge(void);
   void set_page(QWebEnginePage *page);
 
  private:
