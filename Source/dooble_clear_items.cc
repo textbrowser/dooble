@@ -40,6 +40,7 @@
 #include "dooble_favicons.h"
 #include "dooble_history.h"
 #include "dooble_search_engines_popup.h"
+#include "dooble_style_sheet.h"
 
 dooble_clear_items::dooble_clear_items(QWidget *parent):QDialog(parent)
 {
@@ -156,11 +157,18 @@ void dooble_clear_items::slot_clear_items(void)
       emit history_cleared();
     }
 
+  if(m_ui.javascript_scripts->isChecked())
+    {
+    }
+
   if(m_ui.search_engines->isChecked())
     {
       dooble::s_search_engines_window->purge();
       emit search_engines_cleared();
     }
+
+  if(m_ui.style_sheets->isChecked())
+    dooble_style_sheet::purge();
 
   if(m_ui.visited_links->isChecked())
     QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>400</height>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,14 +33,14 @@
       <item>
        <widget class="QCheckBox" name="accepted_blocked_domains">
         <property name="text">
-         <string>Accepted / &amp;Blocked Domains</string>
+         <string>Accepted / Blocked Domains</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="certificate_exceptions">
         <property name="text">
-         <string>&amp;Certificate Exceptions</string>
+         <string>Certificate Exceptions</string>
         </property>
        </widget>
       </item>
@@ -54,49 +54,63 @@
       <item>
        <widget class="QCheckBox" name="cookies">
         <property name="text">
-         <string>Coo&amp;kies</string>
+         <string>Cookies</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="download_history">
         <property name="text">
-         <string>&amp;Download History</string>
+         <string>Download History</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="favicons">
         <property name="text">
-         <string>&amp;Favicons</string>
+         <string>Favicons</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="favorites">
         <property name="text">
-         <string>Fav&amp;orites</string>
+         <string>Favorites</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="history">
         <property name="text">
-         <string>&amp;History</string>
+         <string>History</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="javascript_scripts">
+        <property name="text">
+         <string>JavaScript Scripts</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="search_engines">
         <property name="text">
-         <string>&amp;Search Engines</string>
+         <string>Search Engines</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="style_sheets">
+        <property name="text">
+         <string>Style Sheets</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="visited_links">
         <property name="text">
-         <string>&amp;Visited Links</string>
+         <string>Visited Links</string>
         </property>
        </widget>
       </item>
@@ -137,7 +151,9 @@
   <tabstop>favicons</tabstop>
   <tabstop>favorites</tabstop>
   <tabstop>history</tabstop>
+  <tabstop>javascript_scripts</tabstop>
   <tabstop>search_engines</tabstop>
+  <tabstop>style_sheets</tabstop>
   <tabstop>visited_links</tabstop>
  </tabstops>
  <resources>
