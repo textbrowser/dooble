@@ -729,6 +729,15 @@ void dooble_page::go_to_forward_item(int index)
 
 void dooble_page::hide_location_frame(bool state)
 {
+  for(int i = 0; i < m_ui.side_layout->count(); i++)
+    if(m_ui.side_layout->itemAt(i))
+      {
+	auto widget = m_ui.side_layout->itemAt(i)->widget();
+
+	if(widget)
+	  widget->setVisible(!state);
+      }
+
   m_ui.top_frame->setVisible(!state);
 }
 
