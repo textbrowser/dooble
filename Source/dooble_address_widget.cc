@@ -201,9 +201,7 @@ QSize dooble_address_widget::sizeHint(void) const
 
 QString dooble_address_widget::page_publication_directory_name(void)
 {
-  auto path
-    (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).
-     value(0));
+  auto path(dooble_settings::setting("home_path").toString());
 
   path.append(QDir::separator());
   path.append("Dooble Published Pages");
