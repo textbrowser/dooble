@@ -357,7 +357,12 @@ QMAKE_DISTCLEAN += -r qtwebengine_dictionaries \
                    .qmake.cache \
                    .qmake.stash \
                    temp
+
+isEmpty(CT) {
+} else {
 QMAKE_EXTRA_COMPILERS += dictoolbuild
+}
+
 QMAKE_EXTRA_TARGETS = build-deb dmg doxygen purge
 
 macx {
@@ -713,7 +718,7 @@ copyinfoplist.extra	= cp Data/Info.plist Dooble.d/Dooble.app/Contents/.
 copyinfoplist.path	= Dooble.d
 macdeployqt.extra	= $$[QT_INSTALL_BINS]/macdeployqt Dooble.d/Dooble.app -executable=Dooble.d/Dooble.app/Contents/MacOS/Dooble
 macdeployqt.path	= Dooble.app
-purgeheaders.extra	= rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Headers && rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Headers 
+purgeheaders.extra	= rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Headers && rm -fr Dooble.d/Dooble.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Headers
 purgeheaders.path	= Dooble.d
 preinstall.extra	= rm -fr Dooble.d/Dooble.app
 preinstall.path		= Dooble.d
