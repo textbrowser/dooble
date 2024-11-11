@@ -193,6 +193,7 @@ Completed Items
 - The random-bytes implementation uses a deprecated interface on Windows.
   Replaced with QRandomGenerator.
 - Threefish-256.
+- Too many Homebrew directories in dooble.pro. Remove for MacOS.
 - UTC time zone option (qputenv("TZ", ":UTC")).
 - Update History icons on filter and sort.
 - Update pull-down menu icons in real-time.
@@ -227,5 +228,4 @@ Remaining Items
 - Qt 6.8 LTS Web permissions.
 - Shortcuts browser.
 - Threefish tweak.
-- Too many Homebrew directories in dooble.pro. Remove for MacOS.
 - Translations browser.

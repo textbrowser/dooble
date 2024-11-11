@@ -6,13 +6,7 @@ cache()
 include(dooble-source.pro)
 
 macx {
-exists(/opt/homebrew/Cellar/qt/6.7.2/share/qt/libexec/qwebengine_convert_dict) {
-CT = "/opt/homebrew/Cellar/qt/6.7.2/share/qt/libexec/qwebengine_convert_dict"
-}
-
-exists(/usr/local/Cellar/qt/6.7.2/share/qt/libexec/qwebengine_convert_dict) {
-CT = "/usr/local/Cellar/qt/6.7.2/share/qt/libexec/qwebengine_convert_dict"
-}
+CT = ""
 } else {
 versionAtLeast(QT_VERSION, 6.0.0) {
 freebsd-* {
@@ -738,6 +732,8 @@ INSTALLS	= copycharts \
 }
 
 macx:app_bundle {
+isEmpty(CT) {
+} else {
 for (base_path, dict_base_paths) {
 base_path_splitted = $$split(base_path, /)
 base_name = $$last(base_path_splitted)
@@ -746,4 +742,5 @@ binary_dict_files.files += $${DICTIONARIES_DIR}/$${base_name}.bdic
 
 binary_dict_files.path = Contents/Resources/$$DICTIONARIES_DIR
 QMAKE_BUNDLE_DATA += binary_dict_files
+}
 }
