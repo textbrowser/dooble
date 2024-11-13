@@ -214,12 +214,6 @@ purge.commands = find . -name \'*~*\' -exec rm -f {} \;
 purge.commands =
 }
 
-doxygen.commands =
-
-exists(/usr/bin/doxygen) {
-doxygen.commands = doxygen dooble.doxygen
-}
-
 FILES = /usr/include/linux/mman.h \
         /usr/include/sys/mman.h
 
@@ -363,7 +357,7 @@ isEmpty(CT) {
 QMAKE_EXTRA_COMPILERS += dictoolbuild
 }
 
-QMAKE_EXTRA_TARGETS = build-deb dmg doxygen purge
+QMAKE_EXTRA_TARGETS = build-deb dmg purge
 
 macx {
 ICON            = Icons/Logo/dooble.icns
