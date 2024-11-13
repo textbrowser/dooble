@@ -209,7 +209,7 @@ LIBS += -lgpgme
 
 unix {
 QMAKE_LFLAGS_RPATH =
-purge.commands = find . -name '*~*' -exec rm -f {} \;
+purge.commands = find . -name \'*~*\' -exec rm -f {} \;
 } else {
 purge.commands =
 }
