@@ -6,22 +6,29 @@ cache()
 include(dooble-source.qt-project)
 
 macx {
-CT = ""
+CONVERT_DICT = ""
 } else {
 versionAtLeast(QT_VERSION, 6.0.0) {
 freebsd-* {
-CT = "/usr/local/libexec/qt6/qwebengine_convert_dict"
+CONVERT_DICT = "/usr/local/libexec/qt6/qwebengine_convert_dict"
 } else:win32 {
-qtPrepareTool(CT, qwebengine_convert_dict)
+qtPrepareTool(CONVERT_DICT, qwebengine_convert_dict)
 } else {
-qtPrepareTool(CT, ../libexec/qwebengine_convert_dict)
+qtPrepareTool(CONVERT_DICT, ../libexec/qwebengine_convert_dict)
 }
 } else {
-qtPrepareTool(CT, qwebengine_convert_dict)
+qtPrepareTool(CONVERT_DICT, qwebengine_convert_dict)
 }
 }
 
 DICTIONARIES = $$(DOOBLE_DICTIONARIES_DIRECTORY)
+
+isEmpty(DICTIONARIES) {
+warning("DOOBLE_DICTIONARIES_DIRECTORY does not exist.")
+} else:!exists($$DICTIONARIES) {
+warning("DOOBLE_DICTIONARIES_DIRECTORY does not exist.")
+}
+
 WEB_DICTIONARIES = qtwebengine_dictionaries
 
 macx {
@@ -184,12 +191,15 @@ dict_base_paths = af_ZA/af_ZA \
                   vi/vi_VN
 }
 
+isEmpty(DICTIONARIES) {
+} else:exists($$DICTIONARIES) {
 for(base_path, dict_base_paths) {
 dict.files += $$DICTIONARIES/$${base_path}.dic
 }
+}
 
 dictoolbuild.CONFIG = no_link target_predeps
-dictoolbuild.commands = $${CT} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
+dictoolbuild.commands = $${CONVERT_DICT} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
 dictoolbuild.depends = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.aff
 dictoolbuild.input = dict.files
 dictoolbuild.name = ${QMAKE_FILE_IN_BASE} Build
@@ -353,7 +363,7 @@ QMAKE_DISTCLEAN += -r qtwebengine_dictionaries \
                    .qmake.stash \
                    temp
 
-isEmpty(CT) {
+isEmpty(CONVERT_DICT) {
 } else {
 QMAKE_EXTRA_COMPILERS += dictoolbuild
 }
@@ -732,7 +742,7 @@ INSTALLS	= copycharts \
 }
 
 macx:app_bundle {
-isEmpty(CT) {
+isEmpty(CONVERT_DICT) {
 } else {
 for (base_path, dict_base_paths) {
 base_path_splitted = $$split(base_path, /)
