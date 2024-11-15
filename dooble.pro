@@ -3,7 +3,7 @@
 }
 
 cache()
-include(dooble-source.pro)
+include(dooble-source.qt-project)
 
 macx {
 CT = ""
