@@ -1,14 +1,14 @@
 Architecture: arm64
-Depends: libqt6charts6 (>= 6.0),
-	 libqt6core6 (>= 6.0),
-	 libqt6gui6 (>= 6.0),
-	 libqt6network6 (>= 6.0),
-	 libqt6printsupport6 (>= 6.0),
-	 libqt6qml6 (>= 6.0),
-	 libqt6sql6 (>= 6.0),
-	 libqt6webenginecore6 (>= 6.0),
-	 libqt6webenginewidgets6 (>= 6.0),
-	 libqt6widgets6 (>= 6.0)
+Depends: libqt6charts6,
+	 libqt6core6,
+	 libqt6gui6,
+	 libqt6network6,
+	 libqt6printsupport6,
+	 libqt6qml6,
+	 libqt6sql6,
+	 libqt6webenginecore6,
+	 libqt6webenginewidgets6,
+	 libqt6widgets6
 Maintainer: f83043e79dc03a0abfbcbc376879a97d66f2cacb@protonmail.ch
 Package: Dooble
 Priority: optional
