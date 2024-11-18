@@ -41,9 +41,11 @@ cp -p ~/Qt/6.8.0/gcc_64/lib/libQt6WebEngineCore.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.8.0/gcc_64/lib/libQt6WebEngineWidgets.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.8.0/gcc_64/lib/libQt6Widgets.so.6 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.8.0/gcc_64/lib/libQt6XcbQpa.so.6 ./opt/dooble/Lib/.
-cp -p ~/Qt/6.8.0/gcc_64/lib/libicudata.so.56 ./opt/dooble/Lib/.
-cp -p ~/Qt/6.8.0/gcc_64/lib/libicui18n.so.56 ./opt/dooble/Lib/.
-cp -p ~/Qt/6.8.0/gcc_64/lib/libicuuc.so.56 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.8.0/gcc_64/lib/libicudata.so.73 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.8.0/gcc_64/lib/libicui18n.so.73 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.8.0/gcc_64/lib/libicuio.so.73 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.8.0/gcc_64/lib/libicuuc.so.73 ./opt/dooble/Lib/.
+cp -p ~/Qt/6.8.0/gcc_64/lib/libicuuc.so.73 ./opt/dooble/Lib/.
 cp -p ~/Qt/6.8.0/gcc_64/libexec/QtWebEngineProcess ./opt/dooble/.
 cp -pr ~/Qt/6.8.0/gcc_64/plugins ./opt/dooble/.
 cp -pr ~/Qt/6.8.0/gcc_64/resources/* ./opt/dooble/.
