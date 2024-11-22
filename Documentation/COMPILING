@@ -1,23 +1,21 @@
-Qt LTS is supported.
-
-The WebEngine module must be present!
+Qt LTS is supported. The WebEngine module must be present!
 
 The release bundles are only functional on the systems for which they
 were built. If Dooble fails to launch, please build it from source!
 
 FreeBSD
 
-qmake -o Makefile dooble.pro
+qmake
 gmake
 
 Linux
 
-qmake -o Makefile dooble.pro
+qmake
 make
 
 MacOS
 
-qmake -o Makefile dooble.pro
+qmake
 make
 
 Windows

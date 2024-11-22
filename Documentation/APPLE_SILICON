@@ -7,6 +7,6 @@ solution. Please visit https://brew.sh and install Homebrew.
 > cd
 > git clone https://github.com/textbrowser/dooble dooble.d
 > cd dooble.d
-> qmake -o Makefile dooble.pro
+> qmake
 > make -j 5
 > open ./Dooble.app

@@ -1,4 +1,4 @@
-Preparation:
+Preparation
 
 > gpg --full-generate-key
 > gpg --export -a > Documentation/dooble.asc
