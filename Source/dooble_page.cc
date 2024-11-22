@@ -225,13 +225,13 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  this,
 	  SLOT(slot_publish(void)));
   connect(m_ui.address,
-	  SIGNAL(returnPressed(void)),
-	  this,
-	  SLOT(slot_load_page(void)));
-  connect(m_ui.address,
 	  SIGNAL(pull_down_clicked(void)),
 	  this,
 	  SLOT(slot_show_pull_down_menu(void)));
+  connect(m_ui.address,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_load_page(void)));
   connect(m_ui.address,
 	  SIGNAL(show_certificate_exception(void)),
 	  this,
@@ -240,6 +240,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  SIGNAL(show_site_cookies(void)),
 	  this,
 	  SIGNAL(show_site_cookies(void)));
+  connect(m_ui.address,
+	  SIGNAL(textEdited(const QString &)),
+	  this,
+	  SLOT(slot_address_edited(const QString &)));
   connect(m_ui.address,
 	  SIGNAL(zoom_reset(void)),
 	  this,
@@ -713,8 +717,11 @@ void dooble_page::go_to_backward_item(int index)
 				 MAXIMUM_HISTORY_ITEMS)));
 
   if(index >= 0 && index < items.size())
-    m_view->history()->goToItem(items.at(index));
-}
+    {
+      m_ui.address->set_edited(false);
+      m_view->history()->goToItem(items.at(index));
+    }
+ }
 
 void dooble_page::go_to_forward_item(int index)
 {
@@ -724,7 +731,10 @@ void dooble_page::go_to_forward_item(int index)
 				    MAXIMUM_HISTORY_ITEMS)));
 
   if(index >= 0 && index < items.size())
-    m_view->history()->goToItem(items.at(index));
+    {
+      m_ui.address->set_edited(false);
+      m_view->history()->goToItem(items.at(index));
+    }
 }
 
 void dooble_page::hide_location_frame(bool state)
@@ -759,6 +769,7 @@ void dooble_page::javascript_console(void)
 
 void dooble_page::load(const QUrl &url)
 {
+  m_ui.address->set_edited(false);
   m_view->stop();
   m_view->load(url);
   m_view->setUrl(url); // Set the address widget's text.
@@ -1710,6 +1721,7 @@ void dooble_page::print_page
 void dooble_page::reload(void)
 {
   m_ui.address->setText(m_view->url().toString());
+  m_ui.address->set_edited(false);
   m_view->reload();
 }
 
@@ -1730,6 +1742,7 @@ void dooble_page::reload_periodically(int seconds)
 void dooble_page::reset_url(void)
 {
   m_ui.address->setText(m_view->url().toString());
+  m_ui.address->set_edited(false);
   m_ui.address->selectAll();
 
   if(m_ui.address->isVisible())
@@ -1893,12 +1906,14 @@ void dooble_page::slot_accepted_or_blocked_add_exception(void)
     {
       dooble::s_accepted_or_blocked_domains->new_exception
 	(action->property("host").toString());
+      m_ui.address->set_edited(false);
       m_view->reload();
     }
   else if(action->property("url").isValid())
     {
       dooble::s_accepted_or_blocked_domains->new_exception
 	(action->property("url").toUrl().toString());
+      m_ui.address->set_edited(false);
       m_view->reload();
     }
 }
@@ -1948,6 +1963,12 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
   menu.exec(m_ui.accepted_or_blocked->
 	    mapToGlobal(m_ui.accepted_or_blocked->rect().bottomLeft()));
   m_ui.accepted_or_blocked->setChecked(false);
+}
+
+void dooble_page::slot_address_edited(const QString &text)
+{
+  Q_UNUSED(text);
+  m_ui.address->set_edited(true);
 }
 
 void dooble_page::slot_always_allow_javascript_popup(void)
@@ -2571,11 +2592,13 @@ void dooble_page::slot_find_text_edited(const QString &text)
 
 void dooble_page::slot_go_backward(void)
 {
+  m_ui.address->set_edited(false);
   m_view->history()->back();
 }
 
 void dooble_page::slot_go_forward(void)
 {
+  m_ui.address->set_edited(false);
   m_view->history()->forward();
 }
 
@@ -2746,7 +2769,8 @@ void dooble_page::slot_load_finished(bool ok)
     (qobject_cast<dooble_web_engine_page *> (m_view->page()));
   setProperty("is_loading", false);
 
-  if(m_ui.address->text() != m_view->url().toString())
+  if(m_ui.address->edited() == false &&
+     m_ui.address->text() != m_view->url().toString())
     m_ui.address->setText(m_view->url().toString());
 
   /*
@@ -3427,7 +3451,9 @@ void dooble_page::slot_url_changed(const QUrl &url)
   */
 
   m_ui.address->add_item(QIcon(), m_view->url());
-  m_ui.address->setText(m_view->url().toString());
+
+  if(m_ui.address->edited() == false)
+    m_ui.address->setText(m_view->url().toString());
 }
 
 void dooble_page::slot_zoom_in(void)

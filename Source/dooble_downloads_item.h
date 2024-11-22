@@ -55,7 +55,7 @@ class dooble_downloads_item: public QWidget
 #else
      QWebEngineDownloadRequest *download,
 #endif
-     const bool is_private,
+     bool is_private,
      qintptr oid,
      QWidget *parent
      );

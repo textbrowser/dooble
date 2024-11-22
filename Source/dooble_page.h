@@ -155,9 +155,10 @@ class dooble_page: public QWidget
   void slot_about_to_show_view_menu(void);
   void slot_accepted_or_blocked_add_exception(void);
   void slot_accepted_or_blocked_clicked(void);
+  void slot_address_edited(const QString &text);
   void slot_always_allow_javascript_popup(void);
-  void slot_authentication_required(const QUrl &url,
-				    QAuthenticator *authenticator);
+  void slot_authentication_required
+    (const QUrl &url, QAuthenticator *authenticator);
   void slot_clear_visited_links(void);
   void slot_close_javascript_popup_exception_frame(void);
   void slot_create_dialog_request(dooble_web_engine_view *view);
@@ -218,9 +219,10 @@ class dooble_page: public QWidget
   void slot_prepare_backward_menu(void);
   void slot_prepare_forward_menu(void);
   void slot_prepare_reload_menu(void);
-  void slot_proxy_authentication_required(const QUrl &url,
-					  QAuthenticator *authenticator,
-					  const QString &proxy_host);
+  void slot_proxy_authentication_required
+    (const QUrl &url,
+     QAuthenticator *authenticator,
+     const QString &proxy_host);
   void slot_publish(void);
   void slot_publish_html(const QString &html);
   void slot_reload(void);

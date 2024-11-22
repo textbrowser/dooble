@@ -42,6 +42,7 @@
 
 dooble_address_widget::dooble_address_widget(QWidget *parent):QLineEdit(parent)
 {
+  m_edited = false;
   m_favorite = new QToolButton(this);
   m_favorite->setAutoRaise(true);
   m_favorite->setCursor(Qt::ArrowCursor);
@@ -207,6 +208,11 @@ QString dooble_address_widget::page_publication_directory_name(void)
   path.append("Dooble Published Pages");
   QDir().mkdir(path);
   return path;
+}
+
+bool dooble_address_widget::edited(void) const
+{
+  return m_edited;
 }
 
 bool dooble_address_widget::event(QEvent *event)
@@ -454,6 +460,11 @@ void dooble_address_widget::setText(const QString &text)
 
   prepare_containers_for_url(url);
   setToolTip(QLineEdit::text());
+}
+
+void dooble_address_widget::set_edited(const bool state)
+{
+  m_edited = state;
 }
 
 void dooble_address_widget::set_item_icon(const QIcon &icon, const QUrl &url)

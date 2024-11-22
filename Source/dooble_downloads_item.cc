@@ -47,7 +47,7 @@ dooble_downloads_item::dooble_downloads_item
 #else
 (QWebEngineDownloadRequest *download,
 #endif
- const bool is_private,
+ bool is_private,
  qintptr oid,
  QWidget *parent):QWidget(parent)
 {
