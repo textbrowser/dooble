@@ -662,8 +662,8 @@ void dooble_address_widget::slot_url_changed(const QUrl &url)
 
   auto length = url.toString().length();
 
-  if(length >
-     static_cast<decltype(length)> (dooble::Limits::MAXIMUM_URL_LENGTH))
+  if(length > static_cast<decltype(length)> (dooble::Limits::
+					     MAXIMUM_URL_LENGTH))
     return;
 
   auto const icon_set(dooble_settings::setting("icon_set").toString());
