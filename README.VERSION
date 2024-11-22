@@ -1,9 +1,1 @@
 Please consider dooble-version.sh.
-
-The versions must be current!
-
-Data/Info.plist
-Distributions/*.bash
-Distributions/*/control
-Documentation/ReleaseNotes.html
-Source/dooble_version.h
