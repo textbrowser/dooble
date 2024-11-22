@@ -218,6 +218,8 @@ Remaining Items
 	  removal of recorded curves
 	  reset properties
 - Default browser on MacOS.
+- Detect address field edits and do not write URL after
+  a page receives a new URL.
 - Disable JavaScript per domain.
 - Element-selection option.
 - Fancy completer.
