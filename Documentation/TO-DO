@@ -45,6 +45,8 @@ Completed Items
 - Delete temporary parent cookie domains having zero children.
 - Depict current tab on tabs pull-down menu.
 - Depict private cookie windows.
+- Detect address field edits and do not write URL after
+  a page receives a new URL.
 - Determine if the system translation file is adequate.
 - Dictionary option in the Settings window's Web panel.
 - Disable the Theme setting on MacOS.
@@ -218,8 +220,6 @@ Remaining Items
 	  removal of recorded curves
 	  reset properties
 - Default browser on MacOS.
-- Detect address field edits and do not write URL after
-  a page receives a new URL.
 - Disable JavaScript per domain.
 - Element-selection option.
 - Fancy completer.
