@@ -433,6 +433,7 @@ int main(int argc, char *argv[])
 	 Qt::AlignBottom | Qt::AlignHCenter,
 	 QColor(Qt::white));
       splash.repaint();
+      dooble::s_application->processEvents();
     }
 
   dooble_random::initialize();
