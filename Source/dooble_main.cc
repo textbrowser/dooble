@@ -26,7 +26,6 @@
 */
 
 #include <QDir>
-#include <QElapsedTimer>
 #include <QSplashScreen>
 #include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
