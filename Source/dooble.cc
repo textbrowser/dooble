@@ -909,7 +909,8 @@ void dooble::connect_signals(void)
   connect(s_application,
 	  SIGNAL(application_locked(bool, dooble *)),
 	  this,
-	  SLOT(slot_application_locked(bool, dooble *)));
+	  SLOT(slot_application_locked(bool, dooble *)),
+	  Qt::UniqueConnection);
   connect(s_favorites_window,
 	  SIGNAL(open_link(const QUrl &)),
 	  this,
@@ -923,7 +924,8 @@ void dooble::connect_signals(void)
   connect(s_history,
 	  SIGNAL(populated_favorites(const QListVectorByteArray &)),
 	  this,
-	  SLOT(slot_history_favorites_populated(void)));
+	  SLOT(slot_history_favorites_populated(void)),
+	  Qt::UniqueConnection);
   connect(s_search_engines_window,
 	  SIGNAL(open_link(const QUrl &)),
 	  this,
@@ -942,7 +944,8 @@ void dooble::connect_signals(void)
   connect(s_settings,
 	  SIGNAL(dooble_credentials_created(void)),
 	  this,
-	  SLOT(slot_dooble_credentials_created(void)));
+	  SLOT(slot_dooble_credentials_created(void)),
+	  Qt::UniqueConnection);
   connect(this,
 	  SIGNAL(application_locked(bool, dooble *)),
 	  s_application,
