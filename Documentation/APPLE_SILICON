@@ -8,5 +8,5 @@ solution. Please visit https://brew.sh and install Homebrew.
 > git clone https://github.com/textbrowser/dooble dooble.d
 > cd dooble.d
 > qmake
-> make -j 5
+> make
 > open ./Dooble.app
