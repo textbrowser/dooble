@@ -78,7 +78,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_tabs_menu_button->setIconSize(QSize(18, 18));
 #ifdef Q_OS_MACOS
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {border:none; margin-bottom: 0px; margin-top: 0px;}"
+    ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
 #else
   m_tabs_menu_button->setStyleSheet
