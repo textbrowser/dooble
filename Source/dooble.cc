@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QActionGroup>
 #include <QFileDialog>
 #ifdef DOOBLE_PEEKABOO
 #include <QInputDialog>
@@ -3219,6 +3220,10 @@ void dooble::slot_about_to_show_tabs_menu(void)
   m_ui.menu_tabs->setStyleSheet("QMenu {menu-scrollable: 1;}");
 
   auto const font_metrics(m_ui.menu_tabs->fontMetrics());
+  auto group = m_ui.menu_tabs->findChild<QActionGroup *> ();
+
+  if(!group)
+    group = new QActionGroup(m_ui.menu_tabs);
 
   for(int i = 0; i < m_ui.tab->count(); i++)
     {
@@ -3241,17 +3246,20 @@ void dooble::slot_about_to_show_tabs_menu(void)
 				   dooble_ui_utilities::
 				   context_menu_width(m_ui.menu_tabs)));
 
+      action->setCheckable(true);
       action->setProperty("index", i);
       connect(action,
 	      SIGNAL(triggered(void)),
 	      this,
 	      SLOT(slot_set_current_tab(void)));
+      group->addAction(action);
 
       if(i == m_ui.tab->currentIndex())
 	{
 	  auto font(action->font());
 
 	  font.setBold(true);
+	  action->setChecked(true);
 	  action->setFont(font);
 	}
     }
@@ -5390,6 +5398,7 @@ void dooble::slot_tabs_menu_button_clicked(void)
   menu.setStyleSheet("QMenu {menu-scrollable: 1;}");
 
   auto const font_metrics(menu.fontMetrics());
+  auto group = new QActionGroup(&menu);
 
   for(int i = 0; i < m_ui.tab->count(); i++)
     {
@@ -5412,17 +5421,20 @@ void dooble::slot_tabs_menu_button_clicked(void)
 				   dooble_ui_utilities::
 				   context_menu_width(&menu)));
 
+      action->setCheckable(true);
       action->setProperty("index", i);
       connect(action,
 	      SIGNAL(triggered(void)),
 	      this,
 	      SLOT(slot_set_current_tab(void)));
+      group->addAction(action);
 
       if(i == m_ui.tab->currentIndex())
 	{
 	  auto font(action->font());
 
 	  font.setBold(true);
+	  action->setChecked(true);
 	  action->setFont(font);
 	}
     }
