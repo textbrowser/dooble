@@ -27,7 +27,6 @@
 
 #include <QDir>
 #include <QKeyEvent>
-#include <QListWidgetItem>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QStandardItemModel>

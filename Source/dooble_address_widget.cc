@@ -27,9 +27,7 @@
 
 #include <QDir>
 #include <QMimeData>
-#include <QStandardPaths>
 #include <QToolButton>
-#include <QtMath>
 
 #include "dooble.h"
 #include "dooble_address_widget.h"

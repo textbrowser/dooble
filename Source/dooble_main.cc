@@ -27,7 +27,6 @@
 
 #include <QDir>
 #include <QSplashScreen>
-#include <QWebEngineCookieStore>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))

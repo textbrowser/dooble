@@ -26,10 +26,8 @@
 */
 
 #include <QClipboard>
-#include <QDir>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QSqlQuery>
 
 #include "dooble.h"
 #include "dooble_address_widget_completer.h"

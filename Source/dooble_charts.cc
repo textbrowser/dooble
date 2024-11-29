@@ -35,7 +35,6 @@
 #include "dooble_ui_utilities.h"
 
 #include <QDir>
-#include <QMetaType>
 #include <QPrintPreviewDialog>
 #include <QSqlQuery>
 #ifdef DOOBLE_QTCHARTS_PRESENT
