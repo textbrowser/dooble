@@ -25,6 +25,8 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QBuffer>
+
 #include <cctype>
 
 #include "dooble_gopher.h"

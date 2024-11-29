@@ -28,7 +28,6 @@
 #ifndef dooble_gopher_h
 #define dooble_gopher_h
 
-#include <QBuffer>
 #include <QPointer>
 #include <QTcpSocket>
 #include <QUrl>
