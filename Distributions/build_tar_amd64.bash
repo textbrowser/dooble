@@ -64,6 +64,6 @@ find ./dooble/plugins -name '*.so' -exec chmod -x {} \;
 
 cp $(ldd ./Dooble | awk '{print $3}' | grep -e '^/') ./dooble/Lib/.
 chmod -x,g+rw ./dooble/Lib/*
-tar -cvz -f Dooble-2024.08.19_amd64.tar.gz ./dooble
+tar -cvz -f Dooble-2024.12.25_amd64.tar.gz ./dooble
 make distclean
 rm -fr ./dooble
