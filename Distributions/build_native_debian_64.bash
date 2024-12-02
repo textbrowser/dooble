@@ -54,9 +54,9 @@ cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
 
 if [ "$(uname -m)" = "aarch64" ]; then
-    fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.12.25_arm64.deb
+    fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.12.30_arm64.deb
 else
-    fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.12.25_amd64.deb
+    fakeroot dpkg-deb --build dooble-debian.d Dooble-2024.12.30_amd64.deb
 fi
 
 make distclean
