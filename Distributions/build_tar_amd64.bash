@@ -56,7 +56,7 @@ cp -p ./dooble.sh ./dooble/.
 cp -pr ./Charts ./dooble/.
 cp -pr ./Data/*.txt ./dooble/Data/.
 cp -pr ./Data/README ./dooble/Data/.
-cp -pr ./qtwebengine_dictionaries ./dooble/.
+cp -pr ./qtwebengine_dictionaries ./dooble/. 2>/dev/null
 find ./dooble/plugins -name '*.so' -exec chmod -x {} \;
 
 # Prepare a tar bundle.
