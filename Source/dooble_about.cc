@@ -69,7 +69,7 @@ dooble_about::dooble_about(void):QMainWindow()
 	  this,
 	  SLOT(slot_file_digest_computed(const QByteArray &)));
   dooble_settings::setting("download_version_information").toBool() ?
-    QTimer::singleShot(1500, m_swifty, &swifty::slot_download) : (void) 0;
+    QTimer::singleShot(5000, m_swifty, &swifty::slot_download) : (void) 0;
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
 
   QString qversion{""};
