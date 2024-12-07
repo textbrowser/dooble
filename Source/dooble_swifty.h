@@ -56,7 +56,8 @@ class swifty: public QNetworkAccessManager
     return m_newest_version;
   }
 
-  void download()
+ public slots:
+  void slot_download()
   {
     m_buffer.clear();
 

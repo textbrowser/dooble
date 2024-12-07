@@ -192,6 +192,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
     (2,
      tr("Persistent cookies are restored from and saved to disk."),
      Qt::ToolTipRole);
+  m_ui.download_version_information->setToolTip
+    (tr("<html>Dooble will download the file <b>%1</b> shortly after launch "
+	"and determine if an official version is available. See Help -> "
+	"About.</html>").arg(DOOBLE_VERSION_FILE_URL));
   m_ui.shortcuts->setModel(m_shortcuts_model);
 
   auto const language = QLocale::system().language();
@@ -313,6 +317,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["credentials_enabled"] = false;
   s_settings["denote_private_widgets"] = true;
   s_settings["do_not_track"] = true;
+  s_settings["download_version_information"] = false;
   s_settings["favicons"] = true;
   s_settings["favorites_sort_index"] = 1; // Most Popular
   s_settings["features_permissions"] = true;
@@ -1619,6 +1624,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("dns_prefetch", false).toBool());
   m_ui.do_not_track->setChecked
     (s_settings.value("do_not_track", true).toBool());
+  m_ui.download_version_information->setChecked
+    (s_settings.value("download_version_information", false).toBool());
   m_ui.favicons->setChecked(s_settings.value("favicons", true).toBool());
   m_ui.features_permissions_groupbox->setChecked
     (s_settings.value("features_permissions", true).toBool());
@@ -2688,11 +2695,14 @@ void dooble_settings::slot_apply(void)
   set_setting("cookie_policy_index", m_ui.cookie_policy->currentIndex());
   set_setting("credentials_enabled", m_ui.credentials->isChecked());
   set_setting
+    ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
+  set_setting
     ("display_application_font", m_ui.display_application_font->text());
   set_setting("dns_prefetch", m_ui.dns_prefetch->isChecked());
   set_setting("do_not_track", m_ui.do_not_track->isChecked());
   set_setting
-    ("denote_private_widgets", m_ui.denote_private_widgets->isChecked());
+    ("download_version_information",
+     m_ui.download_version_information->isChecked());
   set_setting("favicons", m_ui.favicons->isChecked());
   set_setting
     ("features_permissions", m_ui.features_permissions_groupbox->isChecked());

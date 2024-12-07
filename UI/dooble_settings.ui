@@ -352,7 +352,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-118</y>
+               <y>0</y>
                <width>642</width>
                <height>1296</height>
               </rect>
@@ -1176,9 +1176,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-350</y>
                <width>682</width>
-               <height>1125</height>
+               <height>1157</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1542,6 +1542,16 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="download_version_information">
+                <property name="text">
+                 <string>Download Version Information After Launch</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="private_mode">
                 <property name="toolTip">
                  <string>Launch Dooble in a private window.</string>
@@ -1787,7 +1797,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>556</width>
+               <width>642</width>
                <height>2316</height>
               </rect>
              </property>
@@ -2772,6 +2782,7 @@
   <tabstop>save_credentials</tabstop>
   <tabstop>reset_credentials</tabstop>
   <tabstop>do_not_track</tabstop>
+  <tabstop>download_version_information</tabstop>
   <tabstop>private_mode</tabstop>
   <tabstop>proxy_none</tabstop>
   <tabstop>proxy_system</tabstop>
