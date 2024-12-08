@@ -178,16 +178,18 @@ void dooble_javascript::slot_delete_others(void)
     if(db.open())
       {
 	QSqlQuery query(db);
+	auto const list(m_ui.list->selectionModel()->selectedRows());
 
-	foreach(auto item, m_ui.list->selectedItems())
+	for(int i = list.size() - 1; i >= 0; i--)
 	  {
 	    query.prepare("DELETE FROM dooble_javascript WHERE url = ?");
 	    query.addBindValue
 	      (dooble::s_cryptography->
-	       encrypt_then_mac(item->text().toUtf8()).toBase64());
+	       encrypt_then_mac(list.at(i).data().toString().toUtf8()).
+	       toBase64());
 
 	    if(query.exec())
-	      delete m_ui.list->takeItem(m_ui.list->row(item));
+	      delete m_ui.list->takeItem(list.at(i).row());
 	  }
       }
 
