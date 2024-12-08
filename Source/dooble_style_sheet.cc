@@ -307,16 +307,16 @@ void dooble_style_sheet::slot_add(void)
 
 void dooble_style_sheet::slot_item_selection_changed(void)
 {
-  auto const list(m_ui.names->selectedItems());
+  auto const list(m_ui.names->selectionModel()->selectedRows());
 
-  if(!list.value(0) || !m_web_engine_page)
+  if(!list.value(0).isValid() || !m_web_engine_page)
     {
       m_ui.name->clear();
       m_ui.style_sheet->clear();
       return;
     }
 
-  m_ui.name->setText(list.at(0)->text());
+  m_ui.name->setText(list.at(0).data().toString());
   m_ui.style_sheet->setPlainText
     (s_style_sheets.
      value(QPair<QString, QUrl> (m_ui.name->text(),
@@ -384,19 +384,19 @@ void dooble_style_sheet::slot_remove(void)
   if(!m_web_engine_page)
     return;
 
-  auto const list(m_ui.names->selectedItems());
+  auto const list(m_ui.names->selectionModel()->selectedRows());
 
-  if(!list.value(0))
+  if(!list.value(0).isValid())
     return;
 
-  auto const name(list.at(0)->text());
+  auto const name(list.at(0).data().toString());
   auto const style_sheet
     (QString::fromUtf8("(function() {"
 		       "var element = document.getElementById('%1');"
 		       "if(element) element.outerHTML = '';"
 		       "delete element;})()").arg(name));
 
-  delete m_ui.names->takeItem(m_ui.names->row(list.at(0)));
+  delete m_ui.names->takeItem(list.at(0).row());
   m_web_engine_page->runJavaScript
     (style_sheet, QWebEngineScript::ApplicationWorld);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
