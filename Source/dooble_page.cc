@@ -3238,7 +3238,7 @@ void dooble_page::slot_publish_html(const QString &html)
       file.setAutoRemove(false);
       stream << title << Qt::endl;
       stream << url << Qt::endl;
-      stream << html;
+      stream << html.toUtf8();
     }
 }
 
