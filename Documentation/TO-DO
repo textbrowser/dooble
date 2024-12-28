@@ -219,6 +219,7 @@ Remaining Items
           multiple data sources
 	  removal of recorded curves
 	  reset properties
+- Completer item selection; see setModel().
 - Default browser on MacOS.
 - Disable JavaScript per domain.
 - Element-selection option.

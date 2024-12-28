@@ -102,6 +102,7 @@ dooble_address_widget_completer::dooble_address_widget_completer
   setCompletionColumn(0);
   setCompletionMode(QCompleter::UnfilteredPopupCompletion);
   setFilterMode(Qt::MatchContains);
+  setModel(m_model);
   setModelSorting(QCompleter::UnsortedModel);
   setPopup(m_popup);
   setWrapAround(false);
@@ -320,21 +321,14 @@ void dooble_address_widget_completer::slot_settings_applied(void)
   if(dooble_settings::setting("show_address_widget_completer").toBool())
     {
       if(m_model != model())
-	{
-	  auto const mode = dooble_settings::setting
-	    ("address_widget_completer_mode_index").toInt() == 0 ?
-	    QCompleter::InlineCompletion :
-	    QCompleter::UnfilteredPopupCompletion;
-
-	  setCompletionMode(mode);
-	  setModel(m_model);
-	}
+	setCompletionMode
+	  (dooble_settings::setting("address_widget_completer_mode_index").
+	   toInt() == 0 ?
+	   QCompleter::InlineCompletion :
+	   QCompleter::UnfilteredPopupCompletion);
     }
   else
-    {
-      setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-      setModel(nullptr);
-    }
+    setCompletionMode(QCompleter::UnfilteredPopupCompletion);
 }
 
 void dooble_address_widget_completer::slot_text_edited_timeout(void)
