@@ -3179,6 +3179,15 @@ void dooble::slot_about_to_show_main_menu(void)
 		page->action_close_tab()->setEnabled(tabs_closable());
 	      else if(m_action_close_tab)
 		m_action_close_tab->setEnabled(tabs_closable());
+
+	      if(m_ui.menu_file->actions().value(10)) // Save?
+		{
+		  auto settings = qobject_cast<dooble_settings *>
+		    (m_ui.tab->currentWidget());
+
+		  if(settings)
+		    m_ui.menu_file->actions().at(10)->setEnabled(true);
+		}
 	    }
 	  else if(m_ui.menu_help == menu && m->actions().at(4)->menu())
 	    m_ui.menu_help->addActions(m->actions().at(4)->menu()->actions());
@@ -4685,15 +4694,24 @@ void dooble::slot_save(void)
 
   auto page = current_page();
 
-  if(!page)
-    return;
+  if(page)
+    {
+      auto file_name(page->url().fileName());
 
-  auto file_name(page->url().fileName());
+      if(file_name.isEmpty())
+	file_name = page->url().host();
 
-  if(file_name.isEmpty())
-    file_name = page->url().host();
+      page->save(s_downloads->download_path() + QDir::separator() + file_name);
+      return;
+    }
 
-  page->save(s_downloads->download_path() + QDir::separator() + file_name);
+  auto settings = qobject_cast<dooble_settings *> (m_ui.tab->currentWidget());
+
+  if(settings)
+    {
+      settings->save();
+      return;
+    }
 }
 
 void dooble::slot_set_current_tab(void)

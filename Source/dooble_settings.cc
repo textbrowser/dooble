@@ -1960,6 +1960,11 @@ void dooble_settings::restore(bool read_database)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_settings::save(void)
+{
+  slot_apply();
+}
+
 void dooble_settings::save_fonts(void)
 {
   /*

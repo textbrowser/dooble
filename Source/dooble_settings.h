@@ -88,6 +88,7 @@ class dooble_settings: public dooble_main_window
   void add_shortcut(QObject *object);
   void add_shortcut(const QString &action, const QString &shortcut);
   void restore(bool read_database);
+  void save(void);
   void set_settings_path(const QString &path);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   void set_site_feature_permission(const QUrl &url,
