@@ -324,7 +324,10 @@ void dooble_address_widget_completer::slot_settings_applied(void)
        toInt() == 0 ?
        QCompleter::InlineCompletion : QCompleter::UnfilteredPopupCompletion);
   else
-    setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    {
+      m_model->clear();
+      setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    }
 }
 
 void dooble_address_widget_completer::slot_text_edited_timeout(void)

@@ -28,6 +28,7 @@ Completed Items
 - Close non-browser windows via the Esc key.
 - Common methods for creating database tables.
 - Complete default WebEngine context menu.
+- Completer item selection; see setModel().
 - Connect downloadRequested() to Downloads for the default profile.
 - Connect favorite_changed() across pages.
 - Cookie domains without child cookies.
@@ -219,7 +220,6 @@ Remaining Items
           multiple data sources
 	  removal of recorded curves
 	  reset properties
-- Completer item selection; see setModel().
 - Default browser on MacOS.
 - Disable JavaScript per domain.
 - Element-selection option.
