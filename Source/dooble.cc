@@ -3273,6 +3273,9 @@ void dooble::slot_about_to_show_tabs_menu(void)
 	}
     }
 
+  if(group->actions().isEmpty())
+    group->deleteLater();
+
   QApplication::restoreOverrideCursor();
 }
 
@@ -5456,6 +5459,9 @@ void dooble::slot_tabs_menu_button_clicked(void)
 	  action->setFont(font);
 	}
     }
+
+  if(group->actions().isEmpty())
+    group->deleteLater();
 
   QApplication::restoreOverrideCursor();
   menu.exec
