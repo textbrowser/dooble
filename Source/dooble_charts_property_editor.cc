@@ -178,7 +178,7 @@ createEditor(QWidget *parent,
 		this,
 		SLOT(slot_show_color_dialog(void)),
 		Qt::QueuedConnection);
-	editor->setProperty("property", property);
+	editor->setProperty("property", static_cast<int> (property));
 	editor->setStyleSheet
 	  (QString("QPushButton {background-color: %1;}").
 	   arg(index.data().toString()));
@@ -200,7 +200,7 @@ createEditor(QWidget *parent,
 		this,
 		SLOT(slot_show_font_dialog(void)),
 		Qt::QueuedConnection);
-	editor->setProperty("property", property);
+	editor->setProperty("property", static_cast<int> (property));
 	editor->setStyleSheet
 	  (QString("QPushButton {background-color: %1;}").
 	   arg(index.data().toString()));
@@ -314,7 +314,7 @@ createEditor(QWidget *parent,
 	line_edit->setMinimumHeight(push_button->height());
 #endif
 	line_edit->setText(index.data().toString());
-	push_button->setProperty("property", property);
+	push_button->setProperty("property", static_cast<int> (property));
 	return editor;
       }
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
@@ -530,7 +530,8 @@ dooble_charts_property_editor_model(QObject *parent):
 	{
 	  chart_margins = new QStandardItem
 	    (dooble_charts::s_chart_properties_strings[i]);
-	  chart_margins->setData(dooble_charts::Properties(i));
+	  chart_margins->setData
+	    (static_cast<int> (dooble_charts::Properties(i)));
 	  chart_margins->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	  chart->appendRow(chart_margins);
 	  continue;
@@ -544,7 +545,7 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(offset));
+      item->setData(static_cast<int> (dooble_charts::Properties(offset)));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -636,7 +637,7 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(offset));
+      item->setData(static_cast<int> (dooble_charts::Properties(offset)));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -695,7 +696,7 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(offset));
+      item->setData(static_cast<int> (dooble_charts::Properties(offset)));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -755,7 +756,7 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(offset));
+      item->setData(static_cast<int> (dooble_charts::Properties(offset)));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -798,7 +799,7 @@ dooble_charts_property_editor_model(QObject *parent):
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(offset));
+      item->setData(static_cast<int> (dooble_charts::Properties(offset)));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -1114,7 +1115,7 @@ void dooble_charts_property_editor::prepare_generic(dooble_charts *chart)
   if(item && item->parent())
     {
       m_tree->setFirstColumnSpanned
-	(dooble_charts::Properties::CHART_MARGINS,
+	(static_cast<int> (dooble_charts::Properties::CHART_MARGINS),
 	 item->parent()->index(),
 	 true);
 

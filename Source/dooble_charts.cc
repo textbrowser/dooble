@@ -793,7 +793,7 @@ QString dooble_charts::property_to_name
     case dooble_charts::Properties::CHART_TITLE_COLOR:
     case dooble_charts::Properties::CHART_TITLE_FONT:
       {
-	return s_chart_properties_strings[property];
+	return s_chart_properties_strings[static_cast<size_t> (property)];
       }
     case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_HORIZONTAL:
     case dooble_charts::Properties::CHART_AXIS_X_ALIGNMENT_VERTICAL:
@@ -818,8 +818,11 @@ QString dooble_charts::property_to_name
     case dooble_charts::Properties::CHART_AXIS_X_TITLE_VISIBLE:
     case dooble_charts::Properties::CHART_AXIS_X_VISIBLE:
       {
-	return s_axis_properties_strings
-	  [property - dooble_charts::Properties::CHART_TITLE_FONT - 1];
+	auto const index = static_cast<size_t> (property) -
+	  static_cast<size_t> (dooble_charts::Properties::CHART_TITLE_FONT) -
+	  static_cast<size_t> (1);
+
+	return s_axis_properties_strings[index];
       }
     case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_HORIZONTAL:
     case dooble_charts::Properties::CHART_AXIS_Y_ALIGNMENT_VERTICAL:
@@ -844,8 +847,12 @@ QString dooble_charts::property_to_name
     case dooble_charts::Properties::CHART_AXIS_Y_TITLE_VISIBLE:
     case dooble_charts::Properties::CHART_AXIS_Y_VISIBLE:
       {
-	return s_axis_properties_strings
-	  [property - dooble_charts::Properties::CHART_AXIS_X_VISIBLE - 1];
+	auto const index = static_cast<size_t> (property) -
+	  static_cast<size_t> (dooble_charts::Properties::
+			       CHART_AXIS_X_VISIBLE) -
+	  static_cast<size_t> (1);
+
+	return s_axis_properties_strings[index];
       }
     case dooble_charts::Properties::DATA_EXTRACTION_SCRIPT:
     case dooble_charts::Properties::DATA_SOURCE_ADDRESS:
@@ -853,8 +860,12 @@ QString dooble_charts::property_to_name
     case dooble_charts::Properties::DATA_SOURCE_READ_RATE:
     case dooble_charts::Properties::DATA_SOURCE_TYPE:
       {
-	return s_data_properties_strings
-	  [property - dooble_charts::Properties::CHART_AXIS_Y_VISIBLE - 1];
+	auto const index = static_cast<size_t> (property) -
+	  static_cast<size_t> (dooble_charts::Properties::
+			       CHART_AXIS_Y_VISIBLE) -
+	  static_cast<size_t> (1);
+
+	return s_data_properties_strings[index];
       }
     case dooble_charts::Properties::LEGEND_ALIGNMENT:
     case dooble_charts::Properties::LEGEND_BACKGROUND_VISIBLE:
@@ -867,8 +878,11 @@ QString dooble_charts::property_to_name
     case dooble_charts::Properties::LEGEND_SHOW_TOOL_TIPS:
     case dooble_charts::Properties::LEGEND_VISIBLE:
       {
-	return s_legend_properties_strings
-	  [property - dooble_charts::Properties::DATA_SOURCE_TYPE - 1];
+	auto const index = static_cast<size_t> (property) -
+	  static_cast<size_t> (dooble_charts::Properties::DATA_SOURCE_TYPE) -
+	  static_cast<size_t> (1);
+
+	return s_legend_properties_strings[index];
       }
     default:
       {

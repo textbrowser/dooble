@@ -46,14 +46,16 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
       !dooble_charts_xyseries::s_chart_properties_strings[i].isEmpty();
       i++)
     {
-      auto const offset = dooble_charts::Properties::XY_SERIES_COLOR + i;
+      auto const offset = i + static_cast<int>
+	(dooble_charts::Properties::XY_SERIES_COLOR);
 
       if(dooble_charts::Properties(offset) ==
 	 dooble_charts::Properties::XY_SERIES_X_AXIS)
 	{
 	  chart_x_axis = new QStandardItem
 	    (dooble_charts_xyseries::s_chart_properties_strings[i]);
-	  chart_x_axis->setData(dooble_charts::Properties(offset));
+	  chart_x_axis->setData
+	    (static_cast<int> (dooble_charts::Properties(offset)));
 	  chart_x_axis->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	  chart->appendRow(chart_x_axis);
 	  continue;
@@ -63,7 +65,8 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
 	{
 	  chart_y_axis = new QStandardItem
 	    (dooble_charts_xyseries::s_chart_properties_strings[i]);
-	  chart_y_axis->setData(dooble_charts::Properties(offset));
+	  chart_y_axis->setData
+	    (static_cast<int> (dooble_charts::Properties(offset)));
 	  chart_y_axis->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	  chart->appendRow(chart_y_axis);
 	  continue;
@@ -76,7 +79,7 @@ dooble_charts_property_editor_model_xyseries(QObject *parent):
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       list << item;
       item = new QStandardItem();
-      item->setData(dooble_charts::Properties(offset));
+      item->setData(static_cast<int> (dooble_charts::Properties(offset)));
       item->setFlags
 	(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 
@@ -228,15 +231,17 @@ void dooble_charts_property_editor_xyseries::prepare_xyseries
   if(item)
     {
       m_tree->setFirstColumnSpanned
-	(dooble_charts::XY_SERIES_X_AXIS - dooble_charts::XY_SERIES_COLOR,
+	(static_cast<int> (dooble_charts::Properties::XY_SERIES_X_AXIS) -
+	 static_cast<int> (dooble_charts::Properties::XY_SERIES_COLOR),
 	 item->index(),
 	 true);
-      item = m_model->item_from_property(dooble_charts::XY_SERIES_X_AXIS, 0);
+      item = m_model->item_from_property
+	(dooble_charts::Properties::XY_SERIES_X_AXIS, 0);
 
       if(item)
 	for(int i = 0;
-	    i < dooble_charts::XY_SERIES_Y_AXIS -
-	        dooble_charts::XY_SERIES_X_AXIS -
+	    i < static_cast<int> (dooble_charts::Properties::XY_SERIES_Y_AXIS) -
+	        static_cast<int> (dooble_charts::Properties::XY_SERIES_X_AXIS) -
 	        1;
 	    i++)
 	  if(item->child(i, 1))
@@ -253,15 +258,19 @@ void dooble_charts_property_editor_xyseries::prepare_xyseries
   if((item = m_model->item(5, 0)))
     {
       m_tree->setFirstColumnSpanned
-	(dooble_charts::XY_SERIES_X_AXIS - dooble_charts::XY_SERIES_COLOR + 1,
+	(static_cast<int> (dooble_charts::Properties::XY_SERIES_X_AXIS) -
+	 static_cast<int> (dooble_charts::Properties::XY_SERIES_COLOR) +
+	 1,
 	 item->index(),
 	 true);
-      item = m_model->item_from_property(dooble_charts::XY_SERIES_Y_AXIS, 0);
+      item = m_model->item_from_property
+	(dooble_charts::Properties::XY_SERIES_Y_AXIS, 0);
 
       if(item)
 	for(int i = 0;
-	    i < dooble_charts::XY_SERIES_Y_AXIS_TICK_TYPE -
-	        dooble_charts::XY_SERIES_Y_AXIS;
+	    i < static_cast<int> (dooble_charts::Properties::
+				  XY_SERIES_Y_AXIS_TICK_TYPE) -
+	        static_cast<int> (dooble_charts::Properties::XY_SERIES_Y_AXIS);
 	    i++)
 	  if(item->child(i, 1))
 	    {

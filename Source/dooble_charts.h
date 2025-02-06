@@ -50,7 +50,7 @@ class dooble_charts: public QWidget
   Q_OBJECT
 
  public:
-  enum Properties
+  enum class Properties
     {
      /*
      ** Chart Properties
@@ -263,5 +263,20 @@ class dooble_charts: public QWidget
   virtual void slot_stop(void);
   void slot_apply_properties_after_theme_changed(void);
 };
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+inline size_t
+#else
+inline uint
+#endif
+qHash(const dooble_charts::Properties &key,
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+      size_t seed)
+#else
+      uint seed)
+#endif
+{
+  return ::qHash(static_cast<uint> (key), seed);
+}
 
 #endif
