@@ -42,7 +42,7 @@ then
 	export QT_PLUGIN_PATH=plugins
     fi
 
-    exec ./Dooble "$@"
+    ./Dooble "$@"
     exit $?
 elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
 then
@@ -51,7 +51,7 @@ then
     export LD_LIBRARY_PATH=/opt/dooble/Lib
     export QTWEBENGINE_DICTIONARIES_PATH=/opt/dooble/$dictionaries
     export QT_PLUGIN_PATH=/opt/dooble/plugins
-    cd /opt/dooble && exec ./Dooble "$@"
+    cd /opt/dooble && ./Dooble "$@"
     exit $?
 elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
 then
@@ -60,7 +60,7 @@ then
     export LD_LIBRARY_PATH=/usr/local/dooble/Lib
     export QTWEBENGINE_DICTIONARIES_PATH=/usr/local/dooble/$dictionaries
     export QT_PLUGIN_PATH=/usr/local/dooble/plugins
-    cd /usr/local/dooble && exec ./Dooble "$@"
+    cd /usr/local/dooble && ./Dooble "$@"
     exit $?
 else
     echo "Cannot find Dooble. Please contact your lovely administrator."
