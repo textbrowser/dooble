@@ -706,7 +706,10 @@ void dooble_search_engines_popup::slot_item_changed(QStandardItem *item)
 	       toBase64());
 
 	    if(update.exec())
-	      item->setText(item->text().trimmed());
+	      {
+		item->setText(item->text().trimmed());
+		item->setToolTip(item->text());
+	      }
 	  }
       }
 
