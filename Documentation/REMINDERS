@@ -186,6 +186,9 @@ Completed Items
 - Signed Debian release.
 - Simple cleaning of all databases.
 - Smart tab selections via keyboards.
+- Some tool tips of lively widgets are not current. Should they be?
+  For example, clearing an address widget does not clear its tool tip.
+  Should it?
 - Sort history items on population.
 - South tab and Mac. Qt-ism?
 - Store certificate exceptions.
@@ -230,8 +233,5 @@ Remaining Items
 - Prevent SQL query text overflow.
 - Qt 6.8 LTS Web permissions.
 - Shortcuts browser.
-- Some tool tips of lively widgets are not current. Should they be?
-  For example, clearing an address widget does not clear its tool tip.
-  Should it?
 - Threefish tweak.
 - Translations browser.
