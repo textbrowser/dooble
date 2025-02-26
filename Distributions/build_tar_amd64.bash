@@ -24,7 +24,9 @@ cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6OpenGLWidgets.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6Positioning.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6PrintSupport.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6Qml.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6QmlMeta.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6QmlModels.so.6 ./dooble/Lib/.
+cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6QmlWorkerScript.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6Quick.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6QuickWidgets.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.2/gcc_64/lib/libQt6Sql.so.6 ./dooble/Lib/.
