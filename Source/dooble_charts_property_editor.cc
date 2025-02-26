@@ -314,6 +314,7 @@ createEditor(QWidget *parent,
 	line_edit->setMinimumHeight(push_button->height());
 #endif
 	line_edit->setText(index.data().toString());
+	line_edit->setToolTip(line_edit->text());
 	push_button->setProperty("property", static_cast<int> (property));
 	return editor;
       }
@@ -440,6 +441,7 @@ void dooble_charts_property_editor_model_delegate::setModelData
 	  if(line_edit)
 	    {
 	      model->setData(index, line_edit->text());
+	      model->setData(index, line_edit->text(), Qt::ToolTipRole);
 	      return;
 	    }
 
@@ -476,7 +478,8 @@ void dooble_charts_property_editor_model_delegate::slot_show_file_dialog(void)
 
   if(editor)
     emit show_file_dialog
-      (editor, dooble_charts::Properties(editor->property("property").toInt()));
+      (editor,
+       dooble_charts::Properties(editor->property("property").toInt()));
 }
 
 void dooble_charts_property_editor_model_delegate::slot_show_font_dialog(void)
@@ -1283,6 +1286,7 @@ void dooble_charts_property_editor::slot_show_file_dialog
       item->setText(dialog.selectedFiles().value(0));
       item->setToolTip(item->text());
       m_model->setData(item->index(), item->text());
+      m_model->setData(item->index(), item->text(), Qt::ToolTipRole);
 
       if(push_button)
 	{
@@ -1293,7 +1297,10 @@ void dooble_charts_property_editor::slot_show_file_dialog
 	      auto line_edit = frame->findChild<QLineEdit *> ("source");
 
 	      if(line_edit)
-		line_edit->setText(item->text());
+		{
+		  line_edit->setText(item->text());
+		  line_edit->setToolTip(line_edit->text());
+		}
 	    }
 	}
     }
