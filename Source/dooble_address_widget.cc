@@ -457,7 +457,6 @@ void dooble_address_widget::setText(const QString &text)
     }
 
   prepare_containers_for_url(url);
-  setToolTip(QLineEdit::text());
 }
 
 void dooble_address_widget::set_edited(const bool state)
