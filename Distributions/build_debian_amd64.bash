@@ -60,7 +60,7 @@ chmod -x,g+w ./opt/dooble/Lib/*
 ~/Qt/6.8.2/gcc_64/bin/qmake -o Makefile dooble.pro && make -j $(nproc)
 cp -p ./Documentation/Documents/*.pdf ./opt/dooble/Documentation/.
 cp -p ./Documentation/KDE ./opt/dooble/Documentation/.
-cp -p ./Documentation/TO-DO ./opt/dooble/Documentation/.
+cp -p ./Documentation/REMINDERS ./opt/dooble/Documentation/.
 cp -p ./Dooble ./opt/dooble/.
 cp -p ./Icons/Logo/dooble.png ./opt/dooble/.
 cp -p ./Qt/qt.conf ./opt/dooble/.
