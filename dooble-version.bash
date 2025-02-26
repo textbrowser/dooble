@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Alexis Megas.
 
 VERSION=$1
