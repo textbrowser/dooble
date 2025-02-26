@@ -30,3 +30,15 @@ Force registration of Gopher scheme.
 DOOBLE_REGISTER_JAR_SCHEME
 
 Force registration of Jar scheme.
+
+DOOBLE_VERSION_FILE_URL
+
+Correct Web location of dooble_version.h.
+
+DOOBLE_VERSION_STRING
+
+Version of Dooble.
+
+DOOBLE_VERSION_STRING_LTS
+
+LTS version of Dooble.

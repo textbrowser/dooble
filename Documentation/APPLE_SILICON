@@ -4,7 +4,6 @@ solution. Please visit https://brew.sh and install Homebrew.
 
 > brew install git
 > brew install qt
-> cd
 > git clone https://github.com/textbrowser/dooble dooble.d
 > cd dooble.d
 > qmake
