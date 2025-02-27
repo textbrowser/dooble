@@ -48,14 +48,6 @@
         <widget class="QListWidget" name="predefined">
          <item>
           <property name="text">
-           <string>DuckDuckGo</string>
-          </property>
-          <property name="checkState">
-           <enum>Checked</enum>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>Ecosia</string>
           </property>
           <property name="checkState">
@@ -64,7 +56,7 @@
          </item>
          <item>
           <property name="text">
-           <string>Google</string>
+           <string>MetaGer</string>
           </property>
           <property name="checkState">
            <enum>Checked</enum>
@@ -72,7 +64,7 @@
          </item>
          <item>
           <property name="text">
-           <string>MetaGer</string>
+           <string>Startpage</string>
           </property>
           <property name="checkState">
            <enum>Checked</enum>
