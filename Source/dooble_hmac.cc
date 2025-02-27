@@ -85,9 +85,8 @@ QByteArray dooble_hmac::sha2_512_hmac(const QByteArray &key,
      QCryptographicHash::Sha512);
 #else
   QMessageAuthenticationCode message_authentication_code
-    (QCryptographicHash::Sha512);
+    (QCryptographicHash::Sha512, key);
 
-  message_authentication_code.setKey(key);
   message_authentication_code.addData(message);
   return message_authentication_code.result();
 #endif
@@ -130,9 +129,8 @@ QByteArray dooble_hmac::sha3_512_hmac(const QByteArray &key,
      QCryptographicHash::Sha3_512);
 #else
   QMessageAuthenticationCode message_authentication_code
-    (QCryptographicHash::Sha3_512);
+    (QCryptographicHash::Sha3_512, key);
 
-  message_authentication_code.setKey(key);
   message_authentication_code.addData(message);
   return message_authentication_code.result();
 #endif
