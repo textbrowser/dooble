@@ -6,6 +6,7 @@ dictionaries=qtwebengine_dictionaries
 
 export AA_ENABLEHIGHDPISCALING=1
 export AA_USEHIGHDPIPIXMAPS=1
+export QT_QPA_PLATFORMTHEME=qt6ct
 
 # Maximum of 50.
 
