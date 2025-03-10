@@ -209,7 +209,6 @@ build_deb.bash =
 
 linux {
 exists(/usr/bin/dpkg-deb) {
-build-deb.commands = Distributions/build_deb.bash
 }
 
 exists(/usr/include/gpgme.h) {
