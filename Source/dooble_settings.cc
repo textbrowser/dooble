@@ -349,6 +349,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["show_new_downloads"] = true;
   s_settings["splash_screen"] = true;
   s_settings["status_bar_visible"] = true;
+  s_settings["tab_document_mode"] = true;
   s_settings["tab_position"] = "north";
   s_settings["temporarily_disable_javascript"] = false;
   s_settings["theme_color"] = "default";
@@ -1729,6 +1730,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("show_new_downloads", true).toBool());
   m_ui.splash_screen->setChecked
     (s_settings.value("splash_screen", true).toBool());
+  m_ui.tab_document_mode->setChecked
+    (s_settings.value("tab_document_mode", true).toBool());
 
   auto const tab_position
     (s_settings.value("tab_position").toString().trimmed());
@@ -2762,6 +2765,7 @@ void dooble_settings::slot_apply(void)
   set_setting("show_loading_gradient", m_ui.show_loading_gradient->isChecked());
   set_setting("show_new_downloads", m_ui.show_new_downloads->isChecked());
   set_setting("splash_screen", m_ui.splash_screen->isChecked());
+  set_setting("tab_document_mode", m_ui.tab_document_mode->isChecked());
 
   switch(m_ui.tab_position->currentIndex())
     {

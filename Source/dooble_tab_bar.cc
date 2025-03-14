@@ -86,7 +86,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
 
   prepare_style_sheets();
   setContextMenuPolicy(Qt::CustomContextMenu);
-  setDocumentMode(true);
+  setDocumentMode(dooble_settings::setting("tab_document_mode").toBool());
 
   if(dooble::s_application->style_name() == "fusion" ||
      dooble::s_application->style_name().contains("windows"))

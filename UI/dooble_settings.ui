@@ -354,7 +354,7 @@
                <x>0</x>
                <y>0</y>
                <width>642</width>
-               <height>1296</height>
+               <height>1328</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -900,6 +900,19 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="tab_document_mode">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display a fancy splash screen during launch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Tab Document Mode</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_19">
                 <item>
                  <widget class="QLabel" name="label_38">
@@ -1176,7 +1189,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-350</y>
+               <y>0</y>
                <width>682</width>
                <height>1157</height>
               </rect>
@@ -1797,7 +1810,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
+               <width>556</width>
                <height>2316</height>
               </rect>
              </property>
@@ -2763,6 +2776,7 @@
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>
   <tabstop>splash_screen</tabstop>
+  <tabstop>tab_document_mode</tabstop>
   <tabstop>tab_position</tabstop>
   <tabstop>theme</tabstop>
   <tabstop>zoom_frame_location</tabstop>

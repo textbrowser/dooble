@@ -111,6 +111,7 @@ Completed Items
 - Notify operator of completion of Accepted / Blocked Domains import.
 - Numeric values read from settings must be bounded.
 - Optional DNT.
+- Optional Document Mode.
 - Optional Visited Links.
 - Optional credentials.
 - Optional favicons.
@@ -229,7 +230,6 @@ Remaining Items
 - Fancy completer.
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
-- Optional Document Mode.
 - Prevent SQL query text overflow.
 - Qt 6.8 LTS Web permissions.
 - Shortcuts browser.

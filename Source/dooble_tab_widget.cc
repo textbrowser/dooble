@@ -680,6 +680,8 @@ void dooble_tab_widget::slot_settings_applied(void)
   m_private_tool_button->setVisible
     (dooble_settings::setting("denote_private_widgets").toBool() &&
      is_private());
+  m_tab_bar->setDocumentMode
+    (dooble_settings::setting("tab_document_mode").toBool());
   prepare_icons();
 }
 
