@@ -76,11 +76,11 @@ class dooble_settings: public dooble_main_window
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static int main_menu_bar_visible_key(void);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
-  static int site_feature_permission(const QUrl &url,
-				     QWebEnginePage::Feature feature);
+  static int site_feature_permission
+    (const QUrl &url, const QWebEnginePage::Feature feature);
 #else
   static int site_feature_permission
-    (const QUrl &url, QWebEnginePermission::PermissionType feature);
+    (const QUrl &url, const QWebEnginePermission::PermissionType feature);
 #endif
   static void prepare_web_engine_environment_variables(void);
   static void remove_setting(const QString &key);
@@ -92,12 +92,12 @@ class dooble_settings: public dooble_main_window
   void set_settings_path(const QString &path);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   void set_site_feature_permission(const QUrl &url,
-				   QWebEnginePage::Feature feature,
+				   const QWebEnginePage::Feature feature,
 				   bool state);
 #else
   void set_site_feature_permission
     (const QUrl &url,
-     QWebEnginePermission::PermissionType feature,
+     const QWebEnginePermission::PermissionType feature,
      bool state);
 #endif
   void show_normal(QWidget *parent);

@@ -2485,6 +2485,14 @@ void dooble_page::slot_feature_permission_requested
 #else
   switch(feature)
     {
+    case QWebEnginePermission::PermissionType::ClipboardReadWrite:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting "
+	      "Clipboard Read / Write access.").
+	   arg(security_origin.toString()));
+	break;
+      }
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
     case QWebEnginePermission::PermissionType::DesktopAudioVideoCapture:
       {
@@ -2508,6 +2516,13 @@ void dooble_page::slot_feature_permission_requested
       {
 	m_ui.feature_permission_url->setText
 	  (tr("The URL <b>%1</b> is requesting Geo Location access.").
+	   arg(security_origin.toString()));
+	break;
+      }
+    case QWebEnginePermission::PermissionType::LocalFontsAccess:
+      {
+	m_ui.feature_permission_url->setText
+	  (tr("The URL <b>%1</b> is requesting Local Fonts access.").
 	   arg(security_origin.toString()));
 	break;
       }

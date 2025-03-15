@@ -595,8 +595,8 @@ void dooble_web_engine_view::slot_accept_or_block_domain(void)
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
 void dooble_web_engine_view::set_feature_permission
 (const QUrl &security_origin,
- QWebEnginePage::Feature feature,
- QWebEnginePage::PermissionPolicy policy)
+ const QWebEnginePage::Feature feature,
+ const QWebEnginePage::PermissionPolicy policy)
 {
   dooble::s_settings->set_site_feature_permission
     (security_origin,
@@ -607,8 +607,8 @@ void dooble_web_engine_view::set_feature_permission
 #else
 void dooble_web_engine_view::set_feature_permission
 (const QUrl &security_origin,
- QWebEnginePermission::PermissionType feature,
- QWebEnginePermission::State policy)
+ const QWebEnginePermission::PermissionType feature,
+ const QWebEnginePermission::State policy)
 {
   dooble::s_settings->set_site_feature_permission
     (security_origin,

@@ -54,12 +54,13 @@ class dooble_web_engine_view: public QWebEngineView
   void save(const QString &file_name);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   void set_feature_permission(const QUrl &security_origin,
-			      QWebEnginePage::Feature feature,
-			      QWebEnginePage::PermissionPolicy policy);
+			      const QWebEnginePage::Feature feature,
+			      const QWebEnginePage::PermissionPolicy policy);
 #else
-  void set_feature_permission(const QUrl &security_origin,
-			      QWebEnginePermission::PermissionType feature,
-			      QWebEnginePermission::State policy);
+  void set_feature_permission
+    (const QUrl &security_origin,
+     const QWebEnginePermission::PermissionType feature,
+     const QWebEnginePermission::State policy);
 #endif
 
  protected:

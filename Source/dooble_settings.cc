@@ -731,9 +731,9 @@ int dooble_settings::main_menu_bar_visible_key(void)
 
 int dooble_settings::site_feature_permission
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
-(const QUrl &url, QWebEnginePage::Feature feature)
+(const QUrl &url, const QWebEnginePage::Feature feature)
 #else
-(const QUrl &url, QWebEnginePermission::PermissionType feature)
+(const QUrl &url, const QWebEnginePermission::PermissionType feature)
 #endif
 {
   if(!s_site_features_permissions.contains(url))
@@ -2123,12 +2123,14 @@ void dooble_settings::set_settings_path(const QString &path)
 
 void dooble_settings::set_site_feature_permission
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
-(const QUrl &url, QWebEnginePage::Feature feature, bool state)
+(const QUrl &url, const QWebEnginePage::Feature feature, bool state)
 #else
-(const QUrl &url, QWebEnginePermission::PermissionType feature, bool state)
+(const QUrl &url,
+ const QWebEnginePermission::PermissionType feature,
+ bool state)
 #endif
 {
-  if(url.isEmpty() || !url.isValid())
+  if(url.isEmpty() || url.isValid() == false)
     return;
   else if(!setting("features_permissions").toBool())
     return;

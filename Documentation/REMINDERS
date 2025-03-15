@@ -150,6 +150,7 @@ Completed Items
   Print Preview (Completed)
   Shortcuts (Completed)
   Web Page Context Menus (Completed)
+- Qt 6.8 LTS Web permissions.
 - Qt's digest class. If DOOBLE_HMAC is not defined, HMACs are computed
   via QMessageAuthenticationCode. Keccak is computed as H(Key || Message).
 - Rapid loading of address widget model icons.
@@ -231,7 +232,6 @@ Remaining Items
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Prevent SQL query text overflow.
-- Qt 6.8 LTS Web permissions.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
