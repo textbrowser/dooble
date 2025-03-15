@@ -83,6 +83,10 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
 #else
   switch(feature)
     {
+    case QWebEnginePermission::PermissionType::ClipboardReadWrite:
+      {
+	return QObject::tr("Clipboard Read / Write");
+      }
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
     case QWebEnginePermission::PermissionType::DesktopAudioVideoCapture:
       {
@@ -98,6 +102,10 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
     case QWebEnginePermission::PermissionType::Geolocation:
       {
 	return QObject::tr("Geo Location");
+      }
+    case QWebEnginePermission::PermissionType::LocalFontsAccess:
+      {
+	return QObject::tr("Local Font Access");
       }
     case QWebEnginePermission::PermissionType::MediaAudioCapture:
       {
