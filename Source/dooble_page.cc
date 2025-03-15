@@ -2573,8 +2573,10 @@ void dooble_page::slot_feature_permission_requested
     }
 #endif
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   m_ui.feature_permission_popup_message->setVisible(true);
   prepare_progress_label_position();
+#endif
 }
 
 void dooble_page::slot_find_next(void)
@@ -3090,8 +3092,31 @@ void dooble_page::slot_permission_requested(QWebEnginePermission permission)
 
   slot_feature_permission_requested
     (permission.origin(), permission.permissionType(), state);
-  state == QWebEnginePermission::State::Granted ?
-    permission.grant() : permission.deny();
+
+  if(state != QWebEnginePermission::State::Invalid)
+    return;
+
+  QMessageBox mb(this);
+
+  mb.setIcon(QMessageBox::Question);
+  mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+  mb.setText(m_ui.feature_permission_url->text());
+  mb.setWindowIcon(windowIcon());
+  mb.setWindowModality(Qt::ApplicationModal);
+  mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+  if(mb.exec() != QMessageBox::Yes)
+    {
+      QApplication::processEvents();
+      permission.deny();
+      slot_feature_permission_deny();
+    }
+  else
+    {
+      QApplication::processEvents();
+      permission.grant();
+      slot_feature_permission_allow();
+    }
 }
 #endif
 
