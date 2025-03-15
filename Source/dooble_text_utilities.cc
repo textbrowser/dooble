@@ -105,7 +105,7 @@ QString dooble_text_utilities::web_engine_page_feature_to_pretty_string
       }
     case QWebEnginePermission::PermissionType::LocalFontsAccess:
       {
-	return QObject::tr("Local Font Access");
+	return QObject::tr("Local Fonts Access");
       }
     case QWebEnginePermission::PermissionType::MediaAudioCapture:
       {
