@@ -34,4 +34,4 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Windows portable.</li>
 </ul>
 
-!(https://github.com/textbrowser/dooble/blob/master/Images/dooble_1.png)
+![](https://github.com/textbrowser/dooble/blob/master/Images/dooble_1.png)
