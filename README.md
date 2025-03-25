@@ -10,6 +10,7 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Cookie crusher.</li>
 <li>Custom search engines.</li>
 <li>Custom style sheets.</li>
+<li>Disable JavaScript at the domain.</li>
 <li>Documented.</li>
 <li>Domain restrictions (blocker).</li>
 <li>Favorites.</li>
@@ -29,8 +30,8 @@ Dooble is a minimal, scientific, and stable Web browser.
 <li>Qt LTS!</li>
 <li>Qt-only dependency.</li>
 <li>Raspberry PiOS!</li>
-<li>WebEngine (https://doc.qt.io/qt-5/qtwebengine-overview.html, https://en.wikipedia.org/wiki/Blink_(browser_engine)#Frameworks, https://www.chromium.org/blink).</li>
+<li>WebEngine (https://doc.qt.io/qt/qtwebengine-overview.html). </li>
 <li>Windows portable.</li>
 </ul>
 
-![alt text](https://github.com/textbrowser/dooble/blob/master/Images/dooble_1.png)
+!(https://github.com/textbrowser/dooble/blob/master/Images/dooble_1.png)

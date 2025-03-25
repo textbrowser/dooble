@@ -262,6 +262,7 @@ class dooble_page: public QWidget
   void html_ready(const QString &html);
   void iconChanged(const QIcon &icon);
   void javascript_allow_popup_exception(const QUrl &url);
+  void javascript_disable(const QUrl &url, bool state);
   void loadFinished(bool ok);
   void loadStarted(void);
   void new_private_window(void);

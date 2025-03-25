@@ -51,9 +51,9 @@ void dooble_zip::requestStarted(QWebEngineUrlRequestJob *request)
 	  this,
 	  SLOT(slot_error(QWebEngineUrlRequestJob::Error)));
   connect(zip_implementation,
-	  SIGNAL(finished(const QByteArray &, const bool)),
+	  SIGNAL(finished(const QByteArray &, bool)),
 	  this,
-	  SLOT(slot_finished(const QByteArray &, const bool)));
+	  SLOT(slot_finished(const QByteArray &, bool)));
 }
 
 void dooble_zip::set_web_engine_view(dooble_web_engine_view *web_engine_view)
@@ -67,7 +67,7 @@ void dooble_zip::slot_error(QWebEngineUrlRequestJob::Error error)
     m_request->fail(error);
 }
 
-void dooble_zip::slot_finished(const QByteArray &bytes, const bool file)
+void dooble_zip::slot_finished(const QByteArray &bytes, bool file)
 {
   if(m_request)
     {

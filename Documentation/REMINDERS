@@ -50,6 +50,7 @@ Completed Items
   a page receives a new URL.
 - Determine if the system translation file is adequate.
 - Dictionary option in the Settings window's Web panel.
+- Disable JavaScript per domain.
 - Disable the Theme setting on MacOS.
 - Display Downloads panel on new download. Optional.
 - Display cookies in a tree-like structure.
@@ -226,7 +227,6 @@ Remaining Items
 	  removal of recorded curves
 	  reset properties
 - Default browser on MacOS.
-- Disable JavaScript per domain.
 - Element-selection option.
 - Fancy completer.
 - HMAC or KMAC.

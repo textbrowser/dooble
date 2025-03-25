@@ -1809,9 +1809,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>556</width>
-               <height>2316</height>
+               <y>-1004</y>
+               <width>642</width>
+               <height>2680</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2238,7 +2238,7 @@
                     <item>
                      <widget class="QLabel" name="label_45">
                       <property name="text">
-                       <string>Settings are saved immediately.</string>
+                       <string>Existing pages must be reloaded. Settings are saved immediately.</string>
                       </property>
                      </widget>
                     </item>
@@ -2357,6 +2357,144 @@
                       </item>
                       <item>
                        <widget class="QPushButton" name="remove_selected_javascript_block_popup_exceptions">
+                        <property name="text">
+                         <string>Remove Selected</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QGroupBox" name="groupBox_6">
+                   <property name="title">
+                    <string>Disable JavaScript</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_23">
+                    <item>
+                     <widget class="QLabel" name="label_51">
+                      <property name="text">
+                       <string>Settings are saved immediately.</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_26">
+                      <item>
+                       <widget class="QLabel" name="label_52">
+                        <property name="text">
+                         <string>New &amp;Domain</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>new_javascript_disable</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="new_javascript_disable">
+                        <property name="toolTip">
+                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please specify a complete URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                        </property>
+                        <property name="placeholderText">
+                         <string>Domain</string>
+                        </property>
+                        <property name="clearButtonEnabled">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="add_javascript_disable">
+                        <property name="text">
+                         <string>Add</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <widget class="QTableWidget" name="javascript_disable">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
+                      </property>
+                      <property name="tabKeyNavigation">
+                       <bool>false</bool>
+                      </property>
+                      <property name="alternatingRowColors">
+                       <bool>true</bool>
+                      </property>
+                      <property name="selectionBehavior">
+                       <enum>QAbstractItemView::SelectRows</enum>
+                      </property>
+                      <property name="verticalScrollMode">
+                       <enum>QAbstractItemView::ScrollPerPixel</enum>
+                      </property>
+                      <property name="horizontalScrollMode">
+                       <enum>QAbstractItemView::ScrollPerPixel</enum>
+                      </property>
+                      <property name="showGrid">
+                       <bool>false</bool>
+                      </property>
+                      <attribute name="horizontalHeaderMinimumSectionSize">
+                       <number>150</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderDefaultSectionSize">
+                       <number>150</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderStretchLastSection">
+                       <bool>true</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderVisible">
+                       <bool>false</bool>
+                      </attribute>
+                      <column>
+                       <property name="text">
+                        <string>Disable</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Domain</string>
+                       </property>
+                      </column>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_27">
+                      <item>
+                       <widget class="QLabel" name="javascript_disable_entries">
+                        <property name="text">
+                         <string>0 Row(s)</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_27">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="remove_all_javascript_disable">
+                        <property name="text">
+                         <string>Remove All</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="remove_selected_javascript_disable">
                         <property name="text">
                          <string>Remove Selected</string>
                         </property>
@@ -2837,6 +2975,11 @@
   <tabstop>javascript_block_popups_exceptions</tabstop>
   <tabstop>remove_all_javascript_block_popup_exceptions</tabstop>
   <tabstop>remove_selected_javascript_block_popup_exceptions</tabstop>
+  <tabstop>new_javascript_disable</tabstop>
+  <tabstop>add_javascript_disable</tabstop>
+  <tabstop>javascript_disable</tabstop>
+  <tabstop>remove_all_javascript_disable</tabstop>
+  <tabstop>remove_selected_javascript_disable</tabstop>
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
   <tabstop>relative_location_character</tabstop>

@@ -109,7 +109,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
     {
       m_view = view;
       m_view->setParent(this);
-      slot_url_changed(m_view->url());
+      slot_url_changed(url());
     }
   else
     m_view = new dooble_web_engine_view(web_engine_profile, this);
@@ -490,6 +490,10 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  dooble::s_settings,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   connect(this,
+	  SIGNAL(javascript_disable(const QUrl &, bool)),
+	  dooble::s_settings,
+	  SLOT(slot_new_javascript_disable(const QUrl &, bool)));
+  connect(this,
 	  SIGNAL(zoomed(qreal)),
 	  m_popup_menu,
 	  SLOT(slot_zoomed(qreal)));
@@ -553,7 +557,7 @@ QFrame *dooble_page::frame(void) const
 QIcon dooble_page::icon(void) const
 {
   if(m_view->icon().isNull())
-    return dooble_favicons::icon(m_view->url());
+    return dooble_favicons::icon(url());
   else
     return m_view->icon();
 }
@@ -668,7 +672,11 @@ void dooble_page::enable_web_setting
   auto settings = m_view->settings();
 
   if(settings)
-    settings->setAttribute(setting, state);
+    {
+      setting == QWebEngineSettings::JavascriptEnabled ?
+	emit javascript_disable(url(), !state) : (void) 0;
+      settings->setAttribute(setting, state);
+    }
 }
 
 void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
@@ -770,6 +778,9 @@ void dooble_page::javascript_console(void)
 
 void dooble_page::load(const QUrl &url)
 {
+  enable_web_setting
+    (QWebEngineSettings::JavascriptEnabled,
+     dooble_settings::site_has_javascript_disabled(url) == false);
   m_ui.address->set_edited(false);
   m_view->stop();
   m_view->load(url);
@@ -1718,7 +1729,10 @@ void dooble_page::print_page
 
 void dooble_page::reload(void)
 {
-  m_ui.address->setText(m_view->url().toString());
+  enable_web_setting
+    (QWebEngineSettings::JavascriptEnabled,
+     dooble_settings::site_has_javascript_disabled(url()) == false);
+  m_ui.address->setText(url().toString());
   m_ui.address->set_edited(false);
   m_view->reload();
 }
@@ -1739,7 +1753,7 @@ void dooble_page::reload_periodically(int seconds)
 
 void dooble_page::reset_url(void)
 {
-  m_ui.address->setText(m_view->url().toString());
+  m_ui.address->setText(url().toString());
   m_ui.address->set_edited(false);
   m_ui.address->selectAll();
 
@@ -1920,18 +1934,18 @@ void dooble_page::slot_accepted_or_blocked_clicked(void)
 {
   QMenu menu(this);
 
-  if(!m_view->url().isEmpty() && m_view->url().isValid())
+  if(!url().isEmpty() && url().isValid())
     {
       menu.addAction
 	(tr("Add only this page as an exception."),
 	 this,
 	 SLOT(slot_accepted_or_blocked_add_exception(void)))->setProperty
-	("url", m_view->url());
+	("url", url());
       menu.addAction
-	(tr("Add the host %1 as an exception.").arg(m_view->url().host()),
+	(tr("Add the host %1 as an exception.").arg(url().host()),
 	 this,
 	 SLOT(slot_accepted_or_blocked_add_exception(void)))->setProperty
-	("host", m_view->url().host());
+	("host", url().host());
     }
   else
     menu.addAction(tr("The page's URL is empty or invalid."));
@@ -1987,7 +2001,7 @@ void dooble_page::slot_always_allow_javascript_popup(void)
   if(action && action->property("url").isValid())
     emit javascript_allow_popup_exception(action->property("url").toUrl());
   else
-    emit javascript_allow_popup_exception(m_view->url());
+    emit javascript_allow_popup_exception(url());
 }
 
 void dooble_page::slot_authentication_required(const QUrl &url,
@@ -2080,10 +2094,10 @@ void dooble_page::slot_create_dialog_request(dooble_web_engine_view *view)
 
   if(m_last_javascript_popups.size() == 1)
     text = tr("A dialog from <b>%1</b> has been blocked.").
-      arg(m_view->url().toString());
+      arg(url().toString());
   else
     text = tr("Dooble blocked %1 dialogs from <b>%2</b>.").
-      arg(m_last_javascript_popups.size()).arg(m_view->url().toString());
+      arg(m_last_javascript_popups.size()).arg(url().toString());
 
   m_ui.javascript_popup_exception_url->setText
     (font_metrics.elidedText(text, Qt::ElideMiddle, width()));
@@ -2190,7 +2204,7 @@ void dooble_page::slot_escape(void)
       else
 	{
 	  m_ui.address->hide_popup();
-	  m_ui.address->prepare_containers_for_url(m_view->url());
+	  m_ui.address->prepare_containers_for_url(url());
 	  m_view->stop();
 	  reset_url();
 	}
@@ -2642,13 +2656,13 @@ void dooble_page::slot_icon_changed(const QIcon &icon)
 {
   Q_UNUSED(icon);
 
-  if(!m_is_private || dooble::s_history->is_favorite(m_view->url()))
-    dooble::s_history->save_favicon(m_view->icon(), m_view->url());
+  if(!m_is_private || dooble::s_history->is_favorite(url()))
+    dooble::s_history->save_favicon(m_view->icon(), url());
 
   if(!m_is_private)
-    dooble_favicons::save_favicon(m_view->icon(), m_view->url());
+    dooble_favicons::save_favicon(m_view->icon(), url());
 
-  m_ui.address->set_item_icon(m_view->icon(), m_view->url());
+  m_ui.address->set_item_icon(m_view->icon(), url());
 }
 
 void dooble_page::slot_inject_custom_css(void)
@@ -2785,8 +2799,8 @@ void dooble_page::slot_load_finished(bool ok)
   setProperty("is_loading", false);
 
   if(m_ui.address->edited() == false &&
-     m_ui.address->text() != m_view->url().toString())
-    m_ui.address->setText(m_view->url().toString());
+     m_ui.address->text() != url().toString())
+    m_ui.address->setText(url().toString());
 
   /*
   ** Do not save the favicon. The current page's favicon and the page's
@@ -2798,9 +2812,9 @@ void dooble_page::slot_load_finished(bool ok)
     dooble::s_history->save_item
       (QIcon(), m_view->history()->currentItem(), true);
 
-  if(!dooble_ui_utilities::allowed_url_scheme(m_view->url()) ||
-     !m_view->url().isValid() ||
-     m_view->url().isEmpty())
+  if(!dooble_ui_utilities::allowed_url_scheme(url()) ||
+     !url().isValid() ||
+     url().isEmpty())
     {
       m_ui.address->selectAll();
       m_ui.address->setFocus();
@@ -3287,6 +3301,9 @@ void dooble_page::slot_reload(void)
 
 void dooble_page::slot_reload_bypass_cache(void)
 {
+  enable_web_setting
+    (QWebEngineSettings::JavascriptEnabled,
+     dooble_settings::site_has_javascript_disabled(url()) == false);
   m_view->triggerPageAction(QWebEnginePage::ReloadAndBypassCache);
 }
 
@@ -3300,9 +3317,7 @@ void dooble_page::slot_reload_or_stop(void)
 
 void dooble_page::slot_reload_periodically(void)
 {
-  if(!m_ui.progress->isVisible() &&
-     !m_view->url().isEmpty() &&
-     m_view->url().isValid())
+  if(!m_ui.progress->isVisible() && !url().isEmpty() && url().isValid())
     {
       stop();
       reload();
@@ -3377,7 +3392,7 @@ void dooble_page::slot_show_certificate_exception(void)
 	  SIGNAL(triggered(void)),
 	  &menu,
 	  SLOT(close(void)));
-  certificate_exceptions_menu_widget->set_url(m_view->url());
+  certificate_exceptions_menu_widget->set_url(url());
   widget_action.setDefaultWidget(certificate_exceptions_menu_widget);
   menu.addAction(&widget_action);
   menu.exec(m_ui.address->
@@ -3478,6 +3493,10 @@ void dooble_page::slot_show_web_settings_panel(void)
 
 void dooble_page::slot_url_changed(const QUrl &url)
 {
+  enable_web_setting
+    (QWebEngineSettings::JavascriptEnabled,
+     dooble_settings::site_has_javascript_disabled(url) == false);
+
   auto length = url.toString().length();
 
   if(length > static_cast<decltype(length)> (dooble::Limits::
