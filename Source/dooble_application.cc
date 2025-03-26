@@ -37,6 +37,7 @@ dooble_application::dooble_application(int &argc, char **argv):
   QApplication(argc, argv)
 {
   m_application_locked = false;
+  m_default_font = QApplication::font();
   m_translator = nullptr;
 
   auto const string
@@ -53,6 +54,11 @@ dooble_application::dooble_application(int &argc, char **argv):
   setAttribute(Qt::AA_DontUseNativeMenuBar);
   setFont(font);
   setWindowIcon(QIcon(":/Logo/dooble.png"));
+}
+
+QFont dooble_application::default_font(void) const
+{
+  return m_default_font;
 }
 
 QString dooble_application::style_name(void) const

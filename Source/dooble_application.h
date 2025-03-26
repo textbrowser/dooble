@@ -29,6 +29,7 @@
 #define dooble_application_h
 
 #include <QApplication>
+#include <QFont>
 
 class QTranslator;
 class dooble;
@@ -40,6 +41,7 @@ class dooble_application: public QApplication
  public:
   static QHash<QString, QColor> s_theme_colors;
   dooble_application(int &argc, char **argv);
+  QFont default_font(void) const;
   QString style_name(void) const;
   bool application_locked(void) const;
   void install_translator(void);
@@ -47,6 +49,7 @@ class dooble_application: public QApplication
   static void prepare_theme_colors(void);
 
  private:
+  QFont m_default_font;
   QTranslator *m_translator;
   bool m_application_locked;
 

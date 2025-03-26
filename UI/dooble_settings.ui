@@ -469,7 +469,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_21">
                 <item>
-                 <widget class="QLabel" name="label_47">
+                 <widget class="QCheckBox" name="application_font">
                   <property name="text">
                    <string>Application Font</string>
                   </property>
@@ -1809,8 +1809,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1004</y>
-               <width>642</width>
+               <y>0</y>
+               <width>556</width>
                <height>2680</height>
               </rect>
              </property>
@@ -2894,6 +2894,7 @@
   <tabstop>scrollArea_4</tabstop>
   <tabstop>add_tab_behavior</tabstop>
   <tabstop>allow_closing_of_single_tab</tabstop>
+  <tabstop>application_font</tabstop>
   <tabstop>display_application_font</tabstop>
   <tabstop>denote_private_widgets</tabstop>
   <tabstop>home_url</tabstop>

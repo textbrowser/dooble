@@ -88,6 +88,7 @@ class dooble_settings: public dooble_main_window
   QString shortcut(const QString &action) const;
   void add_shortcut(QObject *object);
   void add_shortcut(const QString &action, const QString &shortcut);
+  void prepare_application_fonts(void);
   void restore(bool read_database);
   void save(void);
   void set_settings_path(const QString &path);
@@ -131,7 +132,6 @@ class dooble_settings: public dooble_main_window
   static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
   void new_javascript_disable(const QString &d, bool state);
-  void prepare_application_fonts(void);
   void prepare_fonts(void);
   void prepare_icons(void);
   void prepare_proxy(bool save);

@@ -321,6 +321,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["add_tab_behavior_index"] = 1; // At End
   s_settings["address_widget_completer_mode_index"] = 1; // Popup
   s_settings["allow_closing_of_single_tab"] = true;
+  s_settings["application_font"] = false;
   s_settings["auto_hide_tab_bar"] = false;
   s_settings["auto_load_images"] = true;
   s_settings["block_cipher_type"] = "AES-256";
@@ -997,12 +998,21 @@ void dooble_settings::new_javascript_disable(const QString &d, bool state)
 
 void dooble_settings::prepare_application_fonts(void)
 {
-  QFont font;
-  auto const string
-    (m_ui.display_application_font->text().remove('&').trimmed());
+  if(!dooble::s_application)
+    return;
 
-  if(string.isEmpty() || !font.fromString(string))
-    font = dooble_application::font();
+  QFont font;
+
+  if(s_settings.value("application_font", false).toBool())
+    {
+      auto const string
+	(m_ui.display_application_font->text().remove('&').trimmed());
+
+      if(string.isEmpty() || !font.fromString(string))
+	font = dooble_application::font();
+    }
+  else
+    font = dooble::s_application->default_font();
 
   auto const before = font.bold();
 
@@ -1723,6 +1733,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("allow_closing_of_single_tab", true).toBool());
   m_ui.animated_scrolling->setChecked
     (s_settings.value("animated_scrolling", false).toBool());
+  m_ui.application_font->setChecked
+    (s_settings.value("application_font", false).toBool());
   m_ui.automatic_loading_of_images->setChecked
     (s_settings.value("auto_load_images", true).toBool());
   m_ui.block_third_party_cookies->setChecked
@@ -2823,6 +2835,7 @@ void dooble_settings::slot_apply(void)
   set_setting("allow_closing_of_single_tab",
 	      m_ui.allow_closing_of_single_tab->isChecked());
   set_setting("animated_scrolling", m_ui.animated_scrolling->isChecked());
+  set_setting("application_font", m_ui.application_font->isChecked());
   set_setting
     ("auto_load_images", m_ui.automatic_loading_of_images->isChecked());
   set_setting
