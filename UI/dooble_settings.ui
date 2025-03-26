@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>1328</height>
+               <width>419</width>
+               <height>1494</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1809,8 +1809,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>556</width>
+               <y>-873</y>
+               <width>642</width>
                <height>2680</height>
               </rect>
              </property>
@@ -2214,9 +2214,6 @@
                <widget class="QGroupBox" name="javascript">
                 <property name="title">
                  <string>JavaScript</string>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_11">
                  <item>

@@ -167,8 +167,8 @@ QWebEngineView *dooble_web_engine_view::createWindow
 
   if(type == QWebEnginePage::WebBrowserWindow ||
      type == QWebEnginePage::WebDialog)
-    if(dooble_settings::setting("javascript").toBool() &&
-       dooble_settings::setting("javascript_block_popups").toBool())
+    if(dooble_settings::setting("javascript_block_popups").toBool() &&
+       dooble_settings::site_has_javascript_disabled(url()) == false)
       {
 	auto url(QUrl::fromUserInput(this->url().host()));
 

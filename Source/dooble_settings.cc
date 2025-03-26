@@ -345,7 +345,6 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["home_url"] = QUrl();
   s_settings["icon_set"] = "Material Design";
   s_settings["icon_set_index"] = 0;
-  s_settings["javascript"] = true;
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
   s_settings["lefty_buttons"] = false;
@@ -1791,7 +1790,6 @@ void dooble_settings::restore(bool read_database)
 	    m_ui.icon_set->count() - 1));
   m_ui.iterations->setValue
     (s_settings.value("authentication_iteration_count", 15000).toInt());
-  m_ui.javascript->setChecked(s_settings.value("javascript", true).toBool());
   m_ui.javascript_access_clipboard->setChecked
     (s_settings.value("javascript_access_clipboard", false).toBool());
   m_ui.javascript_block_popups->setChecked
@@ -2878,7 +2876,6 @@ void dooble_settings::slot_apply(void)
     s_settings["icon_set"] = "Material Design";
   }
 
-  set_setting("javascript", m_ui.javascript->isChecked());
   set_setting("javascript_access_clipboard",
 	      m_ui.javascript_access_clipboard->isChecked());
   set_setting
