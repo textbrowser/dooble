@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>419</width>
-               <height>1494</height>
+               <width>642</width>
+               <height>1328</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -901,9 +901,6 @@
               </item>
               <item>
                <widget class="QCheckBox" name="tab_document_mode">
-                <property name="toolTip">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display a fancy splash screen during launch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
                 <property name="text">
                  <string>Tab Document Mode</string>
                 </property>
@@ -1809,8 +1806,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-873</y>
-               <width>642</width>
+               <y>0</y>
+               <width>556</width>
                <height>2680</height>
               </rect>
              </property>
