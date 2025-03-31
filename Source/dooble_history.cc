@@ -723,27 +723,25 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 
 void dooble_history::save_favicon(const QIcon &icon, const QUrl &url)
 {
-  {
-    QWriteLocker locker(&m_history_mutex);
+  QWriteLocker locker(&m_history_mutex);
 
-    if(m_history.contains(url))
-      {
-	auto hash(m_history.value(url));
+  if(m_history.contains(url))
+    {
+      auto hash(m_history.value(url));
 
-	if(icon.isNull())
-	  hash[dooble_history::HistoryItem::FAVICON] =
-	    dooble_favicons::icon(url);
-	else
-	  hash[dooble_history::HistoryItem::FAVICON] = icon;
+      if(icon.isNull())
+	hash[dooble_history::HistoryItem::FAVICON] =
+	  dooble_favicons::icon(url);
+      else
+	hash[dooble_history::HistoryItem::FAVICON] = icon;
 
-	m_history[url] = hash;
-	locker.unlock();
-	update_favorite(hash);
-	emit icon_updated
-	  (hash.value(dooble_history::HistoryItem::FAVICON).value<QIcon> (),
-	   url);
-      }
-  }
+      m_history[url] = hash;
+      locker.unlock();
+      update_favorite(hash);
+      emit icon_updated
+	(hash.value(dooble_history::HistoryItem::FAVICON).value<QIcon> (),
+	 url);
+    }
 }
 
 void dooble_history::save_favorite(const QUrl &url, bool state)
