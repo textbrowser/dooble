@@ -372,6 +372,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["theme_color"] = "default";
   s_settings["theme_color_index"] = 2; // Default
   s_settings["user_agent"] = s_http_user_agent;
+  s_settings["web_plugins"] = false;
   s_settings["webgl"] = true;
   s_settings["webrtc_public_interfaces_only"] = true;
   s_settings["zoom_frame_location_index"] = 0;

@@ -54,7 +54,7 @@ dooble_web_engine_page::dooble_web_engine_page
 }
 
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
-  QWebEnginePage(parent)
+  QWebEnginePage(dooble::s_default_web_engine_profile, parent)
 {
   m_certificate_error_url = QUrl();
   m_is_private = false;
