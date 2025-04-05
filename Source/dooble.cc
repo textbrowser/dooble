@@ -76,6 +76,7 @@
 #include "ui_dooble_authenticate.h"
 
 QElapsedTimer dooble::s_elapsed_timer;
+QPointer<QWebEngineProfile> dooble::s_default_web_engine_profile = nullptr;
 QPointer<dooble> dooble::s_dooble = nullptr;
 QPointer<dooble> dooble::s_favorites_popup_opened_from_dooble_window = nullptr;
 QPointer<dooble> dooble::s_search_engines_popup_opened_from_dooble_window =
@@ -721,6 +722,9 @@ void dooble::clean(void)
 
   if(s_about)
     delete s_about;
+
+  if(s_default_web_engine_profile)
+    delete s_default_web_engine_profile;
 }
 
 void dooble::closeEvent(QCloseEvent *event)
@@ -1017,7 +1021,7 @@ void dooble::initialize_static_members(void)
 
   if(!s_accepted_or_blocked_domains)
     {
-      QWebEngineProfile::defaultProfile()->cookieStore()->setCookieFilter
+      s_default_web_engine_profile->cookieStore()->setCookieFilter
 	(&dooble::cookie_filter);
       s_accepted_or_blocked_domains = new dooble_accepted_or_blocked_domains();
       connect(s_accepted_or_blocked_domains,
@@ -1048,7 +1052,7 @@ void dooble::initialize_static_members(void)
     {
       s_cookies_window = new dooble_cookies_window(false, nullptr);
       s_cookies_window->set_cookie_store
-	(QWebEngineProfile::defaultProfile()->cookieStore());
+	(s_default_web_engine_profile->cookieStore());
       s_cookies_window->set_cookies(s_cookies);
     }
 
@@ -1066,7 +1070,7 @@ void dooble::initialize_static_members(void)
   if(!s_downloads)
     {
       s_downloads = new dooble_downloads
-	(QWebEngineProfile::defaultProfile(), nullptr);
+	(s_default_web_engine_profile, nullptr);
       connect(s_downloads,
 	      SIGNAL(populated(void)),
 	      this,
@@ -1155,10 +1159,10 @@ void dooble::initialize_static_members(void)
       s_url_request_interceptor = new
 	dooble_web_engine_url_request_interceptor(nullptr);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
-      QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor
+      s_default_web_engine_profile->setUrlRequestInterceptor
 	(s_url_request_interceptor);
 #else
-      QWebEngineProfile::defaultProfile()->setRequestInterceptor
+      s_default_web_engine_profile->setRequestInterceptor
 	(s_url_request_interceptor);
 #endif
     }
@@ -1802,20 +1806,13 @@ void dooble::prepare_private_web_engine_profile_settings(void)
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(5))
 	<< QWebEngineSettings::defaultSettings()->fontFamily(families.at(6));
 #else
-  fonts << QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(0))
-	<< QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(1))
-	<< QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(2))
-	<< QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(3))
-	<< QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(4))
-	<< QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(5))
-	<< QWebEngineProfile::
-           defaultProfile()->settings()->fontFamily(families.at(6));
+  fonts << s_default_web_engine_profile->settings()->fontFamily(families.at(0))
+	<< s_default_web_engine_profile->settings()->fontFamily(families.at(1))
+	<< s_default_web_engine_profile->settings()->fontFamily(families.at(2))
+	<< s_default_web_engine_profile->settings()->fontFamily(families.at(3))
+	<< s_default_web_engine_profile->settings()->fontFamily(families.at(4))
+	<< s_default_web_engine_profile->settings()->fontFamily(families.at(5))
+	<< s_default_web_engine_profile->settings()->fontFamily(families.at(6));
 #endif
 
   for(int i = 0; i < families.size(); i++)
@@ -1835,13 +1832,13 @@ void dooble::prepare_private_web_engine_profile_settings(void)
 	<< QWebEngineSettings::defaultSettings()->fontSize
            (QWebEngineSettings::MinimumLogicalFontSize);
 #else
-  sizes << QWebEngineProfile::defaultProfile()->settings()->fontSize
+  sizes << s_default_web_engine_profile->settings()->fontSize
            (QWebEngineSettings::DefaultFixedFontSize)
-	<< QWebEngineProfile::defaultProfile()->settings()->fontSize
+	<< s_default_web_engine_profile->settings()->fontSize
            (QWebEngineSettings::DefaultFontSize)
-	<< QWebEngineProfile::defaultProfile()->settings()->fontSize
+	<< s_default_web_engine_profile->settings()->fontSize
            (QWebEngineSettings::MinimumFontSize)
-	<< QWebEngineProfile::defaultProfile()->settings()->fontSize
+	<< s_default_web_engine_profile->settings()->fontSize
            (QWebEngineSettings::MinimumLogicalFontSize);
 #endif
   types << QWebEngineSettings::DefaultFixedFontSize
@@ -1855,7 +1852,7 @@ void dooble::prepare_private_web_engine_profile_settings(void)
   m_web_engine_profile->setHttpCacheMaximumSize(0);
   m_web_engine_profile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
   m_web_engine_profile->setHttpUserAgent
-    (QWebEngineProfile::defaultProfile()->httpUserAgent() +
+    (s_default_web_engine_profile->httpUserAgent() +
      " Dooble/" DOOBLE_VERSION_STRING);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
   m_web_engine_profile->setUrlRequestInterceptor(s_url_request_interceptor);
@@ -1864,7 +1861,7 @@ void dooble::prepare_private_web_engine_profile_settings(void)
 #endif
   m_web_engine_profile->setSpellCheckEnabled(true);
   m_web_engine_profile->setSpellCheckLanguages
-    (QWebEngineProfile::defaultProfile()->spellCheckLanguages());
+    (s_default_web_engine_profile->spellCheckLanguages());
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::DnsPrefetchEnabled,
@@ -1927,29 +1924,29 @@ void dooble::prepare_private_web_engine_profile_settings(void)
 #else
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::DnsPrefetchEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::DnsPrefetchEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::ErrorPageEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::FocusOnNavigationEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::FocusOnNavigationEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::JavascriptCanAccessClipboard));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::JavascriptCanOpenWindows));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::JavascriptEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
@@ -1957,29 +1954,29 @@ void dooble::prepare_private_web_engine_profile_settings(void)
     (QWebEngineSettings::LocalStorageEnabled, true);
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::PluginsEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::PluginsEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::ScreenCaptureEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::ScrollAnimatorEnabled));
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebGLEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::WebGLEnabled));
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::WebRTCPublicInterfacesOnly));
 #endif
   m_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled,
-     QWebEngineProfile::defaultProfile()->settings()->
+     s_default_web_engine_profile->settings()->
      testAttribute(QWebEngineSettings::XSSAuditingEnabled));
 #endif
 }
@@ -3739,7 +3736,7 @@ void dooble::slot_clear_downloads(void)
 
 void dooble::slot_clear_history(void)
 {
-  QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+  s_default_web_engine_profile->clearAllVisitedLinks();
 
   if(m_web_engine_profile)
     m_web_engine_profile->clearAllVisitedLinks();
@@ -3750,7 +3747,7 @@ void dooble::slot_clear_history(void)
 
 void dooble::slot_clear_visited_links(void)
 {
-  QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+  s_default_web_engine_profile->clearAllVisitedLinks();
 
   if(m_web_engine_profile)
     m_web_engine_profile->clearAllVisitedLinks();

@@ -100,7 +100,7 @@ void dooble_cookies::purge(void)
 
 void dooble_cookies::slot_connect_cookie_added_signal(void)
 {
-  connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+  connect(dooble::s_default_web_engine_profile->cookieStore(),
 	  SIGNAL(cookieAdded(const QNetworkCookie &)),
 	  dooble::s_cookies,
 	  SLOT(slot_cookie_added(const QNetworkCookie &)),
@@ -388,7 +388,7 @@ void dooble_cookies::slot_populate(void)
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
   auto const database_name(dooble_database_utilities::database_name());
-  auto const profile = QWebEngineProfile::defaultProfile();
+  auto const profile = dooble::s_default_web_engine_profile;
   int count = 0;
 
   disconnect(profile->cookieStore(),

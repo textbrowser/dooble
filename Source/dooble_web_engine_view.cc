@@ -50,7 +50,7 @@ dooble_web_engine_view::dooble_web_engine_view
   dooble::s_jar->set_web_engine_view(this);
   m_dialog_requests_timer.setInterval(100);
   m_dialog_requests_timer.setSingleShot(true);
-  m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
+  m_is_private = dooble::s_default_web_engine_profile != web_engine_profile &&
     web_engine_profile;
 
   if(m_is_private)
@@ -108,7 +108,7 @@ dooble_web_engine_view::dooble_web_engine_view
 	  this,
 	  SLOT(slot_load_started(void)));
 
-  if(QWebEngineProfile::defaultProfile() != m_page->profile())
+  if(dooble::s_default_web_engine_profile != m_page->profile())
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     connect(m_page->profile(),
 	    SIGNAL(downloadRequested(QWebEngineDownloadItem *)),

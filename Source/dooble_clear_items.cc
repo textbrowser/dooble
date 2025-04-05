@@ -178,7 +178,7 @@ void dooble_clear_items::slot_clear_items(void)
     dooble_style_sheet::purge();
 
   if(m_ui.visited_links->isChecked())
-    QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+    dooble::s_default_web_engine_profile->clearAllVisitedLinks();
 
   QApplication::restoreOverrideCursor();
 }

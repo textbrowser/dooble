@@ -101,6 +101,7 @@ class dooble: public QMainWindow
   dooble_page *current_page(void) const;
   dooble_page *new_page(const QUrl &url, bool is_private);
   static QElapsedTimer s_elapsed_timer;
+  static QPointer<QWebEngineProfile> s_default_web_engine_profile;
   static QPointer<dooble_about> s_about;
   static QPointer<dooble_accepted_or_blocked_domains>
     s_accepted_or_blocked_domains;

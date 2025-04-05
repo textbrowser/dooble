@@ -106,7 +106,7 @@ dooble_downloads::dooble_downloads
   m_ui.download_path->setCursorPosition(0);
   m_ui.download_path->setToolTip(m_ui.download_path->text());
   m_ui.select->setVisible
-    (QWebEngineProfile::defaultProfile() == m_web_engine_profile);
+    (dooble::s_default_web_engine_profile == m_web_engine_profile);
   m_ui.table->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -142,7 +142,7 @@ bool dooble_downloads::is_finished(void) const
 
 bool dooble_downloads::is_private(void) const
 {
-  return QWebEngineProfile::defaultProfile() != m_web_engine_profile;
+  return dooble::s_default_web_engine_profile != m_web_engine_profile;
 }
 
 int dooble_downloads::finished_size(void) const
@@ -406,7 +406,7 @@ void dooble_downloads::record_download
 
   auto downloads_item = new dooble_downloads_item
     (download,
-     QWebEngineProfile::defaultProfile() != m_web_engine_profile,
+     dooble::s_default_web_engine_profile != m_web_engine_profile,
      index,
      this);
 

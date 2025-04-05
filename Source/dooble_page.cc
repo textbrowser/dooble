@@ -73,7 +73,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_export_as_png = false;
   m_export_png_timer.setSingleShot(true);
   m_is_location_frame_user_hidden = false;
-  m_is_private = QWebEngineProfile::defaultProfile() != web_engine_profile &&
+  m_is_private = dooble::s_default_web_engine_profile != web_engine_profile &&
     web_engine_profile;
   m_javascript_console = new dooble_javascript(this);
   m_menu = new QMenu(this);
@@ -2043,7 +2043,7 @@ void dooble_page::slot_authentication_required(const QUrl &url,
 
 void dooble_page::slot_clear_visited_links(void)
 {
-  QWebEngineProfile::defaultProfile()->clearAllVisitedLinks();
+  dooble::s_default_web_engine_profile->clearAllVisitedLinks();
 }
 
 void dooble_page::slot_close_javascript_popup_exception_frame(void)

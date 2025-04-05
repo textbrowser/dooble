@@ -304,11 +304,11 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   ** https://github.com/bitwiseworks/qtwebengine-chromium-os2/issues/48
   */
 
-  s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent();
+  s_http_user_agent = dooble::s_default_web_engine_profile->httpUserAgent();
   s_http_user_agent.replace("Unknown", "OS/2");
   s_http_user_agent +=
 #else
-  s_http_user_agent = QWebEngineProfile::defaultProfile()->httpUserAgent() +
+  s_http_user_agent = dooble::s_default_web_engine_profile->httpUserAgent() +
 #endif
     " Dooble/" DOOBLE_VERSION_STRING;
 #ifdef Q_OS_WINDOWS
@@ -1060,8 +1060,8 @@ void dooble_settings::prepare_fonts(void)
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       fonts << QWebEngineSettings::defaultSettings()->fontFamily(family);
 #else
-      fonts << QWebEngineProfile::
-	       defaultProfile()->settings()->fontFamily(family);
+      fonts << dooble::s_default_web_engine_profile->settings()->fontFamily
+	(family);
 #endif
 
     {
@@ -1086,7 +1086,7 @@ void dooble_settings::prepare_fonts(void)
 	  QWebEngineSettings::defaultSettings()->setFontFamily
 	    (families.at(i), list.at(i));
 #else
-	  QWebEngineProfile::defaultProfile()->settings()->setFontFamily
+	  dooble::s_default_web_engine_profile->settings()->setFontFamily
 	    (families.at(i), list.at(i));
 #endif
 	}
@@ -1147,13 +1147,13 @@ void dooble_settings::prepare_fonts(void)
 	  << QWebEngineSettings::defaultSettings()->fontSize
              (QWebEngineSettings::MinimumLogicalFontSize);
 #else
-    sizes << QWebEngineProfile::defaultProfile()->settings()->fontSize
+    sizes << dooble::s_default_web_engine_profile->settings()->fontSize
              (QWebEngineSettings::DefaultFixedFontSize)
-	  << QWebEngineProfile::defaultProfile()->settings()->fontSize
+	  << dooble::s_default_web_engine_profile->settings()->fontSize
              (QWebEngineSettings::DefaultFontSize)
-	  << QWebEngineProfile::defaultProfile()->settings()->fontSize
+	  << dooble::s_default_web_engine_profile->settings()->fontSize
              (QWebEngineSettings::MinimumFontSize)
-	  << QWebEngineProfile::defaultProfile()->settings()->fontSize
+	  << dooble::s_default_web_engine_profile->settings()->fontSize
              (QWebEngineSettings::MinimumLogicalFontSize);
 #endif
     types << QWebEngineSettings::DefaultFixedFontSize
@@ -1178,7 +1178,7 @@ void dooble_settings::prepare_fonts(void)
 	  QWebEngineSettings::defaultSettings()->setFontSize
 	    (types.at(i), list.at(i));
 #else
-	  QWebEngineProfile::defaultProfile()->settings()->setFontSize
+	  dooble::s_default_web_engine_profile->settings()->setFontSize
 	    (types.at(i), list.at(i));
 #endif
 	}
@@ -1379,7 +1379,7 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 		{
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
 		  if(key == "--disable-reading-from-canvas")
-		    QWebEngineProfile::defaultProfile()->settings()->
+		    dooble::s_default_web_engine_profile->settings()->
 		      setAttribute
 		      (QWebEngineSettings::ReadingFromCanvasEnabled, false);
 #endif
@@ -1390,7 +1390,7 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 		{
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
 		  if(key == "--disable-reading-from-canvas")
-		    QWebEngineProfile::defaultProfile()->settings()->
+		    dooble::s_default_web_engine_profile->settings()->
 		      setAttribute
 		      (QWebEngineSettings::ReadingFromCanvasEnabled, true);
 #endif
@@ -1992,17 +1992,17 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("xss_auditing", false).toBool());
   lock.unlock();
   m_ui.reset_credentials->setEnabled(has_dooble_credentials());
-  QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
+  dooble::s_default_web_engine_profile->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
 
   if(m_ui.cache_type->currentIndex() == 0)
-    QWebEngineProfile::defaultProfile()->setHttpCacheType
+    dooble::s_default_web_engine_profile->setHttpCacheType
       (QWebEngineProfile::MemoryHttpCache);
   else
-    QWebEngineProfile::defaultProfile()->setHttpCacheType
+    dooble::s_default_web_engine_profile->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
-  QWebEngineProfile::defaultProfile()->setHttpUserAgent
+  dooble::s_default_web_engine_profile->setHttpUserAgent
     (m_ui.user_agent->text());
 
   {
@@ -2027,7 +2027,7 @@ void dooble_settings::restore(bool read_database)
 	  item->setCheckState(Qt::Checked);
       }
 
-    QWebEngineProfile::defaultProfile()->setSpellCheckLanguages(list);
+    dooble::s_default_web_engine_profile->setSpellCheckLanguages(list);
   }
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -2056,29 +2056,29 @@ void dooble_settings::restore(bool read_database)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 #else
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      m_ui.animated_scrolling->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly,
      m_ui.webrtc_public_interfaces_only->isChecked());
 #endif
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 #endif
   {
@@ -2141,7 +2141,7 @@ void dooble_settings::save_fonts(void)
 	QWebEngineSettings::defaultSettings()->setFontFamily
 	  (it.key(), it.value().second);
 #else
-	QWebEngineProfile::defaultProfile()->settings()->setFontFamily
+	dooble::s_default_web_engine_profile->settings()->setFontFamily
 	  (it.key(), it.value().second);
 #endif
 	set_setting(it.value().first, it.value().second);
@@ -2175,7 +2175,7 @@ void dooble_settings::save_fonts(void)
 	QWebEngineSettings::defaultSettings()->setFontSize
 	  (it.key(), it.value().second);
 #else
-	QWebEngineProfile::defaultProfile()->settings()->setFontSize
+	dooble::s_default_web_engine_profile->settings()->setFontSize
 	  (it.key(), it.value().second);
 #endif
 	set_setting(it.value().first, it.value().second);
@@ -2657,14 +2657,14 @@ void dooble_settings::slot_apply(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize
+  dooble::s_default_web_engine_profile->setHttpCacheMaximumSize
     (1024 * 1024 * m_ui.cache_size->value());
 
   if(m_ui.cache_type->currentIndex() == 0)
-    QWebEngineProfile::defaultProfile()->setHttpCacheType
+    dooble::s_default_web_engine_profile->setHttpCacheType
       (QWebEngineProfile::MemoryHttpCache);
   else
-    QWebEngineProfile::defaultProfile()->setHttpCacheType
+    dooble::s_default_web_engine_profile->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
   if(m_ui.user_agent->text().trimmed().isEmpty())
@@ -2675,7 +2675,7 @@ void dooble_settings::slot_apply(void)
       m_ui.user_agent->setCursorPosition(0);
     }
 
-  QWebEngineProfile::defaultProfile()->setHttpUserAgent
+  dooble::s_default_web_engine_profile->setHttpUserAgent
     (m_ui.user_agent->text().trimmed());
 
   {
@@ -2697,7 +2697,7 @@ void dooble_settings::slot_apply(void)
 	  }
       }
 
-    QWebEngineProfile::defaultProfile()->setSpellCheckLanguages(list);
+    dooble::s_default_web_engine_profile->setSpellCheckLanguages(list);
     set_setting("dictionaries", text);
   }
 
@@ -2730,32 +2730,32 @@ void dooble_settings::slot_apply(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 #else
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::DnsPrefetchEnabled,
      m_ui.dns_prefetch->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ScrollAnimatorEnabled,
      m_ui.animated_scrolling->isChecked());
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebGLEnabled, m_ui.webgl->isChecked());
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly,
      m_ui.webrtc_public_interfaces_only->isChecked());
 #endif
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::XSSAuditingEnabled, m_ui.xss_auditing->isChecked());
 #endif
 
@@ -2798,7 +2798,7 @@ void dooble_settings::slot_apply(void)
   }
 
   m_ui.user_agent->setText
-    (QWebEngineProfile::defaultProfile()->httpUserAgent());
+    (dooble::s_default_web_engine_profile->httpUserAgent());
   m_ui.user_agent->setToolTip
     ("<html>" + m_ui.user_agent->text() + "</html>");
   m_ui.user_agent->setCursorPosition(0);
@@ -2955,7 +2955,7 @@ void dooble_settings::slot_apply(void)
 
 void dooble_settings::slot_clear_cache(void)
 {
-  QWebEngineProfile::defaultProfile()->clearHttpCache();
+  dooble::s_default_web_engine_profile->clearHttpCache();
 }
 
 void dooble_settings::slot_features_permissions_item_changed

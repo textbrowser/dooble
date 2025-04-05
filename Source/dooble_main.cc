@@ -413,7 +413,8 @@ int main(int argc, char *argv[])
 #endif
 
   dooble_settings::prepare_web_engine_environment_variables();
-  dooble::s_default_http_user_agent = QWebEngineProfile::defaultProfile()->
+  dooble::s_default_web_engine_profile = new QWebEngineProfile("Dooble");
+  dooble::s_default_http_user_agent = dooble::s_default_web_engine_profile->
     httpUserAgent();
   dooble::s_settings = new dooble_settings();
   dooble::s_settings->set_settings_path(dooble_settings_path);
@@ -479,20 +480,20 @@ int main(int argc, char *argv[])
       dooble::s_application->processEvents();
     }
 
-  QWebEngineProfile::defaultProfile()->setCachePath
+  dooble::s_default_web_engine_profile->setCachePath
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
      "WebEngineCache");
-  QWebEngineProfile::defaultProfile()->setHttpCacheMaximumSize(0);
-  QWebEngineProfile::defaultProfile()->setHttpCacheType
+  dooble::s_default_web_engine_profile->setHttpCacheMaximumSize(0);
+  dooble::s_default_web_engine_profile->setHttpCacheType
     (QWebEngineProfile::MemoryHttpCache);
-  QWebEngineProfile::defaultProfile()->setPersistentCookiesPolicy
+  dooble::s_default_web_engine_profile->setPersistentCookiesPolicy
     (QWebEngineProfile::NoPersistentCookies);
-  QWebEngineProfile::defaultProfile()->setPersistentStoragePath
+  dooble::s_default_web_engine_profile->setPersistentStoragePath
     (dooble_settings::setting("home_path").toString() +
      QDir::separator() +
      "WebEnginePersistentStorage");
-  QWebEngineProfile::defaultProfile()->setSpellCheckEnabled(true);
+  dooble::s_default_web_engine_profile->setSpellCheckEnabled(true);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled, true);
@@ -513,22 +514,20 @@ int main(int argc, char *argv[])
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
 #endif
 #else
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ErrorPageEnabled, true);
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::FocusOnNavigationEnabled, true);
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::FullScreenSupportEnabled, true);
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows, true);
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
-    (QWebEngineSettings::LocalStorageEnabled, true);
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
-  QWebEngineProfile::defaultProfile()->settings()->setAttribute
+  dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::WebRTCPublicInterfacesOnly, true);
 #endif
 #endif
@@ -564,11 +563,11 @@ int main(int argc, char *argv[])
     "%2?_x_tr_sl=auto&_x_tr_tl=%3&_x_tr_hl=%3&_x_tr_pto=wapp" :
     dooble::s_google_translate_url;
   dooble::s_settings->prepare_application_fonts();
-  QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+  QObject::connect(dooble::s_default_web_engine_profile->cookieStore(),
 		   SIGNAL(cookieAdded(const QNetworkCookie &)),
 		   dooble::s_cookies,
 		   SLOT(slot_cookie_added(const QNetworkCookie &)));
-  QObject::connect(QWebEngineProfile::defaultProfile()->cookieStore(),
+  QObject::connect(dooble::s_default_web_engine_profile->cookieStore(),
 		   SIGNAL(cookieRemoved(const QNetworkCookie &)),
 		   dooble::s_cookies,
 		   SLOT(slot_cookie_removed(const QNetworkCookie &)));
