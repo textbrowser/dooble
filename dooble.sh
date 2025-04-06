@@ -6,7 +6,13 @@ dictionaries=qtwebengine_dictionaries
 
 export AA_ENABLEHIGHDPISCALING=1
 export AA_USEHIGHDPIPIXMAPS=1
-export QT_QPA_PLATFORMTHEME=qt6ct
+
+if [ ! -z "$(which qt6ct)" ]
+then
+    echo "Exporting QT_QPA_PLATFORMTHEME as qt6ct."
+
+    export QT_QPA_PLATFORMTHEME=qt6ct
+fi
 
 # Maximum of 50.
 
