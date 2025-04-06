@@ -31,10 +31,11 @@
     <title>Dooble Release Notes</title>
     <div class="css">
       <p>
-	<h3><b>Dooble 2025.04.10</b></h3>
-	Welcome to the <b>2025.04.10</b> release of Dooble. Corrections and new features are detailed below.
+	<h3><b>Dooble 2025.04.06</b></h3>
+	Welcome to the <b>2025.04.06</b> release of Dooble. Corrections and new features are detailed below.
 	<ul>
 	  <li>Export QT_QPA_PLATFORMTHEME as qt6ct in dooble.sh only if qt6ct is discovered.</li>
+	  <li>Initialize the default WebEngineProfile object as early as possible. Qt 6.6 and newer introduced QWebEngineSettings::ReadingFromCanvasEnabled. Corrects an abnormal termination.</li>
 	  <li>Support QWebEnginePage::FileSelectSave in QWebEnginePage::chooseFiles().</li>
 	</ul>
       </p>

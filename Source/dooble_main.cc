@@ -412,10 +412,10 @@ int main(int argc, char *argv[])
     }
 #endif
 
-  dooble_settings::prepare_web_engine_environment_variables();
   dooble::s_default_web_engine_profile = new QWebEngineProfile("Dooble");
   dooble::s_default_http_user_agent = dooble::s_default_web_engine_profile->
     httpUserAgent();
+  dooble_settings::prepare_web_engine_environment_variables();
   dooble::s_settings = new dooble_settings();
   dooble::s_settings->set_settings_path(dooble_settings_path);
 
@@ -542,7 +542,7 @@ int main(int argc, char *argv[])
     }
 
   auto const arguments(QCoreApplication::arguments());
-  auto d = new dooble // Not deleted.
+  auto d = new dooble // Deleted during exit.
     (urls,
      attach,
      disable_javascript,

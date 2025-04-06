@@ -720,11 +720,8 @@ void dooble::clean(void)
   ** Only to be called on exit.
   */
 
-  if(s_about)
-    delete s_about;
-
-  if(s_default_web_engine_profile)
-    delete s_default_web_engine_profile;
+  delete s_about;
+  delete s_default_web_engine_profile;
 }
 
 void dooble::closeEvent(QCloseEvent *event)
@@ -4599,6 +4596,11 @@ void dooble::slot_quit_dooble(void)
     (dooble_settings::setting("retain_session_tabs", false).toBool() ?
      all_open_tab_urls() : QList<QUrl> ());
   s_history_popup->deleteLater();
+
+  foreach(auto i, QApplication::topLevelWidgets())
+    if(qobject_cast<dooble *> (i))
+      i->deleteLater();
+
   QApplication::exit(0);
 }
 
