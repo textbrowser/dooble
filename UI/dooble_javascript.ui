@@ -39,6 +39,22 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="status">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {color: green;}</string>
+         </property>
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLineEdit" name="url">
          <property name="readOnly">
           <bool>true</bool>

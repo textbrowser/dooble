@@ -45,10 +45,8 @@ class dooble_javascript: public QDialog
   void set_page(QWebEnginePage *page);
 
  private:
-  QLabel *m_script_injected_label;
   QPointer<dooble_web_engine_page> m_page;
   Ui_dooble_javascript m_ui;
-  void resizeEvent(QResizeEvent *event);
 
  private slots:
   void slot_delete_others(void);

@@ -46,8 +46,8 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
     (tr("&Delete Selected"));
   m_ui.buttons_2->button(QDialogButtonBox::Retry)->setText(tr("&Refresh"));
   m_ui.buttons_2->button(QDialogButtonBox::Save)->setText(tr("&Save"));
-  m_ui.url->setStyleSheet
-    (QString("QLineEdit {padding-left: %1px;}").arg(20));
+  m_ui.status->setText(tr("Script injected."));
+  m_ui.status->setVisible(false);
   connect(dooble::s_application,
 	  SIGNAL(javascript_scripts_cleared(void)),
 	  this,
@@ -80,12 +80,6 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
-  m_script_injected_label = new QLabel(m_ui.url);
-  m_script_injected_label->resize(QSize(32, 32));
-  m_script_injected_label->setText("&#9989;");
-  m_script_injected_label->setTextFormat(Qt::RichText);
-  m_script_injected_label->setToolTip(tr("Script injected."));
-  m_script_injected_label->setVisible(false);
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   setModal(false);
 }
@@ -114,16 +108,6 @@ void dooble_javascript::purge(void)
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_javascript::resizeEvent(QResizeEvent *event)
-{
-  QDialog::resizeEvent(event);
-  m_script_injected_label->move
-    (QPoint(10, qMax(1,
-		     -m_script_injected_label->height() / 2 +
-		     m_ui.url->height() / 2)));
-  m_script_injected_label->raise();
-}
-
 void dooble_javascript::set_page(QWebEnginePage *page)
 {
   if(m_page)
@@ -140,7 +124,7 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 	      SLOT(slot_load_finished(bool)));
       connect(page,
 	      SIGNAL(loadStarted(void)),
-	      m_script_injected_label,
+	      m_ui.status,
 	      SLOT(hide(void)));
       connect(page,
 	      SIGNAL(titleChanged(const QString &)),
@@ -210,9 +194,9 @@ void dooble_javascript::slot_execute(void)
     (m_ui.text->toPlainText().trimmed(),
      [](const QVariant &value)
      {
-       qDebug() << value.toString();
+       Q_UNUSED(value);
      });
-  m_script_injected_label->setVisible(true);
+  m_ui.status->setVisible(true);
   QApplication::restoreOverrideCursor();
 }
 
@@ -281,10 +265,10 @@ void dooble_javascript::slot_refresh(void)
   if(!m_page)
     return;
 
-  auto const state = m_script_injected_label->isVisible();
+  auto const state = m_ui.status->isVisible();
 
   slot_url_changed(m_page->url());
-  m_script_injected_label->setVisible(state);
+  m_ui.status->setVisible(state);
 }
 
 void dooble_javascript::slot_refresh_others(void)
@@ -461,7 +445,7 @@ void dooble_javascript::slot_title_changed(const QString &title)
 
 void dooble_javascript::slot_url_changed(const QUrl &url)
 {
-  m_script_injected_label->setVisible(false);
+  m_ui.status->setVisible(false);
   m_ui.text->clear();
   m_ui.url->setText(url.toString());
   m_ui.url->setCursorPosition(0);
