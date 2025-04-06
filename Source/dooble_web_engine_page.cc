@@ -90,6 +90,13 @@ QStringList dooble_web_engine_page::chooseFiles
 	  (view(), tr("Select Files"), QDir::homePath());
       }
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    case QWebEnginePage::FileSelectSave:
+      {
+	return QStringList() << QFileDialog::getSaveFileName
+	  (view(), tr("Save File"), QDir::homePath(), old_files.value(0));
+      }
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     case QWebEnginePage::FileSelectUploadFolder:
       {
 	return QStringList() << QFileDialog::getExistingDirectory
