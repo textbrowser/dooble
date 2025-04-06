@@ -412,10 +412,15 @@ int main(int argc, char *argv[])
     }
 #endif
 
+  dooble_settings::prepare_web_engine_environment_variables();
   dooble::s_default_web_engine_profile = new QWebEngineProfile("Dooble");
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
+  dooble::s_default_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::ReadingFromCanvasEnabled,
+     dooble_settings::s_reading_from_canvas_enabled);
+#endif
   dooble::s_default_http_user_agent = dooble::s_default_web_engine_profile->
     httpUserAgent();
-  dooble_settings::prepare_web_engine_environment_variables();
   dooble::s_settings = new dooble_settings();
   dooble::s_settings->set_settings_path(dooble_settings_path);
 

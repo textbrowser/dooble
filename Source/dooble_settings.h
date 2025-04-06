@@ -62,6 +62,7 @@ class dooble_settings: public dooble_main_window
      WINDOWS_PANEL
     };
 
+  static bool s_reading_from_canvas_enabled;
   dooble_settings(void);
   static QString cookie_policy_string(int index);
   static QString use_material_icons(void);

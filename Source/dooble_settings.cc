@@ -67,6 +67,7 @@ QReadWriteLock dooble_settings::s_getenv_mutex;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
 QStringList dooble_settings::s_spell_checker_dictionaries;
+bool dooble_settings::s_reading_from_canvas_enabled = true;
 
 dooble_settings::dooble_settings(void):dooble_main_window()
 {
@@ -1379,10 +1380,9 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	      if(query.value(1).toBool() == false && singular)
 		{
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
-		  if(key == "--disable-reading-from-canvas")
-		    dooble::s_default_web_engine_profile->settings()->
-		      setAttribute
-		      (QWebEngineSettings::ReadingFromCanvasEnabled, false);
+		  if(dooble::s_default_web_engine_profile &&
+		     key == "--disable-reading-from-canvas")
+		    s_reading_from_canvas_enabled = false;
 #endif
 
 		  continue;
@@ -1390,10 +1390,9 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	      else
 		{
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
-		  if(key == "--disable-reading-from-canvas")
-		    dooble::s_default_web_engine_profile->settings()->
-		      setAttribute
-		      (QWebEngineSettings::ReadingFromCanvasEnabled, true);
+		  if(dooble::s_default_web_engine_profile &&
+		     key == "--disable-reading-from-canvas")
+		    s_reading_from_canvas_enabled = false;
 #endif
 		}
 
