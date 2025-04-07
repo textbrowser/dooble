@@ -62,7 +62,6 @@ class dooble_settings: public dooble_main_window
      WINDOWS_PANEL
     };
 
-  static bool s_reading_from_canvas_enabled;
   dooble_settings(void);
   static QString cookie_policy_string(int index);
   static QString use_material_icons(void);
@@ -73,6 +72,7 @@ class dooble_settings: public dooble_main_window
 			  const QVariant &default_value = QVariant(""));
   static bool has_dooble_credentials(void);
   static bool has_dooble_credentials_temporary(void);
+  static bool reading_from_canvas_enabled(void);
   static bool set_setting(const QString &key, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static bool site_has_javascript_disabled(const QUrl &url);
@@ -130,6 +130,7 @@ class dooble_settings: public dooble_main_window
   static QReadWriteLock s_getenv_mutex;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
+  static bool s_reading_from_canvas_enabled;
   static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
   void new_javascript_disable(const QString &d, bool state);

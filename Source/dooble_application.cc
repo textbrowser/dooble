@@ -38,7 +38,6 @@ dooble_application::dooble_application(int &argc, char **argv):
 {
   m_application_locked = false;
   m_default_font = QApplication::font();
-  m_translator = nullptr;
 
   auto const string
     (dooble_settings::setting("display_application_font").toString().trimmed());
@@ -90,9 +89,13 @@ void dooble_application::install_translator(void)
       if(path.isEmpty())
 	path = QDir::currentPath() + QDir::separator() + "Translations";
 
+      auto const absolute_path(QFileInfo(path).absoluteFilePath());
+
+      qDebug() << tr("Dooble will search the directory %1 for translation "
+		     "files.").arg(absolute_path);
       m_translator = new QTranslator(this);
 
-      if(m_translator->load(QLocale(), "dooble", "_", path, ".qm"))
+      if(m_translator->load(QLocale(), "dooble", "_", absolute_path, ".qm"))
 	{
 	  if(!installTranslator(m_translator))
 	    qDebug() << tr("Translator m_translator was not installed.");
@@ -102,7 +105,7 @@ void dooble_application::install_translator(void)
 
       auto other = new QTranslator(this);
 
-      if(other->load(QLocale(), "qtbase", "_", path, ".qm"))
+      if(other->load(QLocale(), "qtbase", "_", absolute_path, ".qm"))
 	{
 	  if(!installTranslator(other))
 	    qDebug() << tr("Translator other was not installed.");

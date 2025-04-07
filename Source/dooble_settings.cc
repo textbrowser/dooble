@@ -219,12 +219,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   auto const language = QLocale::system().language();
 
   if(language == QLocale::C || language == QLocale::English)
-    {
-      m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
-				      0,
-				      Qt::ItemDataRole(Qt::UserRole - 1));
-      m_ui.language_directory->setVisible(false);
-    }
+    m_ui.language_directory->setVisible(false);
   else
     {
       QString path("");
@@ -248,9 +243,6 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 
       if(!file_info.exists() || !file_info.isReadable())
 	{
-	  m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
-					  0,
-					  Qt::ItemDataRole(Qt::UserRole - 1));
 	  m_ui.language_directory->setStyleSheet
 	    ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	     "color:#a94442;}");
@@ -260,8 +252,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	      (tr("<b>Warning!</b> The file %1 does not exist. "
 		  "Dooble searched DOOBLE_TRANSLATIONS_PATH and "
 		  "the relative Translations directories. "
-		  "The System option has been disabled. English "
-		  "will be assumed. Please read %2, line %3.").
+		  "English will be assumed. Please read %2, line %3.").
 	       arg(file_info.absoluteFilePath()).
 	       arg(__FILE__).
 	       arg(__LINE__));
@@ -270,25 +261,20 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	      (tr("<b>Warning!</b> The file %1 is not readable. "
 		  "Dooble searched DOOBLE_TRANSLATIONS_PATH and "
 		  "the relative Translations directories. "
-		  "The System option has been disabled. English "
-		  "will be assumed. Please read %2, line %3.").
+		  "English will be assumed. Please read %2, line %3.").
 	       arg(file_info.absoluteFilePath()).
 	       arg(__FILE__).
 	       arg(__LINE__));
 	}
       else if(file_info.size() <= 1024)
 	{
-	  m_ui.language->model()->setData(m_ui.language->model()->index(1, 0),
-					  0,
-					  Qt::ItemDataRole(Qt::UserRole - 1));
 	  m_ui.language_directory->setStyleSheet
 	    ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1;"
 	     "color:#a94442;}");
 	  m_ui.language_directory->setText
 	    (tr("<b>Warning!</b> The file %1 is perhaps incomplete. It "
 		"contains only %2 bytes. "
-		"The System option has been disabled. English "
-		"will be assumed. Please read %3, line %4.").
+		"English will be assumed. Please read %3, line %4.").
 	     arg(file_info.absoluteFilePath()).
 	     arg(file_info.size()).
 	     arg(__FILE__).
@@ -667,6 +653,11 @@ bool dooble_settings::has_dooble_credentials_temporary(void)
 	  setting("authentication_salt").toString().isEmpty() ||
 	  setting("authentication_salted_password").toString().isEmpty()) &&
     setting("credentials_enabled").toBool();
+}
+
+bool dooble_settings::reading_from_canvas_enabled(void)
+{
+  return s_reading_from_canvas_enabled;
 }
 
 bool dooble_settings::set_setting(const QString &key, const QVariant &value)
@@ -1794,15 +1785,10 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("javascript_access_clipboard", false).toBool());
   m_ui.javascript_block_popups->setChecked
     (s_settings.value("javascript_block_popups", true).toBool());
-
-  if(m_ui.language_directory->isVisible())
-    m_ui.language->setCurrentIndex(0);
-  else
-    m_ui.language->setCurrentIndex
-      (qBound(0,
-	      s_settings.value("language_index", 0).toInt(),
-	      m_ui.language->count()));
-
+  m_ui.language->setCurrentIndex
+    (qBound(0,
+	    s_settings.value("language_index", 0).toInt(),
+	    m_ui.language->count()));
   m_ui.lefty_buttons->setChecked
     (s_settings.value("lefty_buttons", false).toBool());
   m_ui.local_storage->setChecked

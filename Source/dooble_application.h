@@ -30,8 +30,8 @@
 
 #include <QApplication>
 #include <QFont>
+#include <QPointer>
 
-class QTranslator;
 class dooble;
 
 class dooble_application: public QApplication
@@ -50,7 +50,7 @@ class dooble_application: public QApplication
 
  private:
   QFont m_default_font;
-  QTranslator *m_translator;
+  QPointer<QTranslator> m_translator;
   bool m_application_locked;
 
  private slots:

@@ -324,6 +324,7 @@ int main(int argc, char *argv[])
 #endif
   QString dooble_settings_path("");
   dooble::s_application = new dooble_application(argc, argv);
+
 #if defined(Q_OS_WINDOWS)
   auto const bytes(qgetenv("DOOBLE_HOME").trimmed());
 
@@ -412,12 +413,13 @@ int main(int argc, char *argv[])
     }
 #endif
 
+  dooble::s_application->install_translator();
   dooble_settings::prepare_web_engine_environment_variables();
   dooble::s_default_web_engine_profile = new QWebEngineProfile("Dooble");
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 6, 0))
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ReadingFromCanvasEnabled,
-     dooble_settings::s_reading_from_canvas_enabled);
+     dooble_settings::reading_from_canvas_enabled());
 #endif
   dooble::s_default_http_user_agent = dooble::s_default_web_engine_profile->
     httpUserAgent();
@@ -460,7 +462,6 @@ int main(int argc, char *argv[])
 
   CocoaInitializer cocoa_initializer;
 #endif
-  dooble::s_application->install_translator();
 
   if(splash_screen)
     {
