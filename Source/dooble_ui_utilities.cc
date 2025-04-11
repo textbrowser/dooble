@@ -226,86 +226,13 @@ int dooble_ui_utilities::context_menu_width(QWidget *widget)
 
 void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 {
-  /*
-  ** Adapted from qdialog.cpp.
-  */
-
-  if(!widget)
+  if(!parent || !widget)
     return;
 
-  QPoint p(0, 0);
-  auto w = parent;
-  int extrah = 0;
-  int extraw = 0;
+  auto geometry(widget->geometry());
 
-  if(w)
-    w = w->window();
-
-  QRect desk;
-
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  int scrn = 0;
-
-  if(w)
-    scrn = QApplication::desktop()->screenNumber(w);
-  else
-    scrn = QApplication::desktop()->screenNumber(widget);
-
-  desk = QGuiApplication::screens().value(scrn) ?
-    QGuiApplication::screens().value(scrn)->geometry() : QRect();
-#else
-  auto screen = QGuiApplication::screenAt(widget->pos());
-
-  if(screen)
-    desk = screen->geometry();
-#endif
-  auto const list(QApplication::topLevelWidgets());
-
-  for(int i = 0; (extrah == 0 || extraw == 0) && i < list.size(); i++)
-    {
-      auto current = list.at(i);
-
-      if(current && current->isVisible())
-	{
-	  auto const frameh = current->geometry().y() - current->y();
-	  auto const framew = current->geometry().x() - current->x();
-
-	  extrah = qMax(extrah, frameh);
-	  extraw = qMax(extraw, framew);
-        }
-    }
-
-  if(extrah == 0 || extrah >= 40 || extraw == 0 || extraw >= 10)
-    {
-      extrah = 40;
-      extraw = 10;
-    }
-
-  if(w)
-    {
-      auto const pp(w->mapToGlobal(QPoint(0, 0)));
-
-      p = QPoint(pp.x() + w->width() / 2, pp.y() + w->height() / 2);
-    }
-  else
-    p = QPoint(desk.x() + desk.width() / 2, desk.y() + desk.height() / 2);
-
-  p = QPoint(p.x() - widget->width() / 2 - extraw,
-	     p.y() - widget->height() / 2 - extrah);
-
-  if(p.x() + extraw + widget->width() > desk.x() + desk.width())
-    p.setX(desk.x() + desk.width() - widget->width() - extraw);
-
-  if(p.x() < desk.x())
-    p.setX(desk.x());
-
-  if(p.y() + extrah + widget->height() > desk.y() + desk.height())
-    p.setY(desk.y() + desk.height() - widget->height() - extrah);
-
-  if(p.y() < desk.y())
-    p.setY(desk.y());
-
-  widget->move(p);
+  geometry.moveCenter(parent->geometry().center());
+  widget->setGeometry(geometry);
 }
 
 void dooble_ui_utilities::enable_mac_brushed_metal(QWidget *widget)
