@@ -231,6 +231,12 @@ void dooble_ui_utilities::center_window_widget(QWidget *parent, QWidget *widget)
 
   auto geometry(widget->geometry());
 
+  if(geometry.isNull())
+    {
+      widget->show();
+      geometry = widget->geometry();
+    }
+
   geometry.moveCenter(parent->geometry().center());
   widget->setGeometry(geometry);
 }
