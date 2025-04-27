@@ -4064,6 +4064,8 @@ void dooble::slot_history_action_triggered(void)
 
   auto page = current_page();
 
+  QApplication::processEvents();
+
   if(page)
     page->load(action->data().toUrl());
   else
@@ -4910,6 +4912,7 @@ void dooble::slot_show_cookies(void)
 
 void dooble::slot_show_documentation(void)
 {
+  QApplication::processEvents();
   m_ui.tab->setCurrentWidget
     (new_page(QUrl::fromUserInput("qrc://Documentation/Dooble.html"),
 	      m_is_private));
@@ -5145,11 +5148,13 @@ void dooble::slot_show_main_menu(void)
 
 void dooble::slot_show_release_notes(const QUrl &url)
 {
+  QApplication::processEvents();
   m_ui.tab->setCurrentWidget(new_page(url, false));
 }
 
 void dooble::slot_show_release_notes(void)
 {
+  QApplication::processEvents();
   m_ui.tab->setCurrentWidget
     (new_page(QUrl::fromUserInput("qrc://Documentation/ReleaseNotes.html"),
 	      m_is_private));
