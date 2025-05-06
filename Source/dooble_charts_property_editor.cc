@@ -1256,7 +1256,7 @@ void dooble_charts_property_editor::slot_show_color_dialog
 
   QColorDialog dialog(this);
 
-  dialog.setCurrentColor(QColor(item->text()));
+  dialog.setCurrentColor(QColor(item->text().remove('&').trimmed()));
 
   if(dialog.exec() == QDialog::Accepted)
     {
