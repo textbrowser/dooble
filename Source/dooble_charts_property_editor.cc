@@ -41,8 +41,8 @@
 
 #include <limits>
 
-static void find_recursive_items(QStandardItem *item,
-				 QList<QStandardItem *> &list)
+static void find_recursive_items
+(QStandardItem *item, QList<QStandardItem *> &list)
 {
   if(!item)
     return;
