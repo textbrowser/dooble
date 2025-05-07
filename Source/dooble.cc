@@ -4019,15 +4019,20 @@ void dooble::slot_floating_digital_dialog_timeout(void)
   m_floating_digital_clock_ui.clock->repaint();
   m_floating_digital_clock_ui.clock->setFont(font);
 
+  QString colon(":");
+
+  if(m_floating_digital_clock_ui.clock->text().contains(":"))
+    colon = " ";
+
   if(m_floating_digital_clock_ui.hour_24->isChecked())
     m_floating_digital_clock_ui.clock->setText
       (QString("%1%2").
-       arg(now.time().toString("hh:mm:ss")).
+       arg(now.time().toString(QString("hh%1mm%1ss").arg(colon))).
        arg(utc == ":utc" ? " UTC" : ""));
   else
     m_floating_digital_clock_ui.clock->setText
       (QString("%1%2").
-       arg(now.time().toString("hh:mm:ss A")).
+       arg(now.time().toString(QString("hh%1mm%1ss A").arg(colon))).
        arg(utc == ":utc" ? " UTC" : ""));
 
   m_floating_digital_clock_ui.clock->update();
