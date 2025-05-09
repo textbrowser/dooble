@@ -3550,6 +3550,15 @@ void dooble_page::stop(void)
 
 void dooble_page::user_hide_location_frame(bool state)
 {
+  for(int i = 0; i < m_ui.side_layout->count(); i++)
+    if(m_ui.side_layout->itemAt(i))
+      {
+	auto widget = m_ui.side_layout->itemAt(i)->widget();
+
+	if(widget)
+	  widget->setVisible(!state);
+      }
+
   m_is_location_frame_user_hidden = state;
   m_ui.top_frame->setVisible(!state);
 }
