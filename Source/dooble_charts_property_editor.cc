@@ -27,7 +27,9 @@
 
 #include <QColorDialog>
 #include <QComboBox>
+#include <QCompleter>
 #include <QFileDialog>
+#include <QFileSystemModel>
 #include <QFontDialog>
 #include <QLineEdit>
 #include <QPlainTextEdit>
