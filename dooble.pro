@@ -207,7 +207,7 @@ dictoolbuild.output = $${WEB_DICTIONARIES}/${QMAKE_FILE_BASE}.bdic
 
 build_deb.bash =
 
-linux {
+linux-* {
 exists(/usr/bin/dpkg-deb) {
 }
 
