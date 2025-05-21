@@ -305,9 +305,6 @@ createEditor(QWidget *parent,
 	completer->setModel(model);
 	line_edit->setClearButtonEnabled(true);
 	line_edit->setCompleter(completer);
-#ifdef Q_OS_MACOS
-	line_edit->setMinimumHeight(push_button->height());
-#endif
  	line_edit->setObjectName("source");
 	line_edit->setText(index.data().toString());
 	line_edit->setToolTip(line_edit->text());
