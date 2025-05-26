@@ -351,6 +351,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["show_left_corner_widget"] = true;
   s_settings["show_loading_gradient"] = true;
   s_settings["show_new_downloads"] = true;
+  s_settings["show_title_bar"] = true;
   s_settings["splash_screen"] = true;
   s_settings["status_bar_visible"] = true;
   s_settings["tab_document_mode"] = true;
@@ -1853,6 +1854,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("show_loading_gradient", true).toBool());
   m_ui.show_new_downloads->setChecked
     (s_settings.value("show_new_downloads", true).toBool());
+  m_ui.show_title_bar->setChecked
+    (s_settings.value("show_title_bar", true).toBool());
   m_ui.splash_screen->setChecked
     (s_settings.value("splash_screen", true).toBool());
   m_ui.tab_document_mode->setChecked
@@ -2891,6 +2894,7 @@ void dooble_settings::slot_apply(void)
 	      m_ui.show_left_corner_widget->isChecked());
   set_setting("show_loading_gradient", m_ui.show_loading_gradient->isChecked());
   set_setting("show_new_downloads", m_ui.show_new_downloads->isChecked());
+  set_setting("show_title_bar", m_ui.show_title_bar->isChecked());
   set_setting("splash_screen", m_ui.splash_screen->isChecked());
   set_setting("tab_document_mode", m_ui.tab_document_mode->isChecked());
 

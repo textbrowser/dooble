@@ -352,9 +352,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-858</y>
                <width>642</width>
-               <height>1328</height>
+               <height>1360</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -880,6 +880,19 @@
                 </property>
                 <property name="text">
                  <string>Show New Tabs</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="show_title_bar">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A hint only. May or may not create the desired results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Show Title Bar</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -2908,6 +2921,7 @@
   <tabstop>show_new_downloads</tabstop>
   <tabstop>show_hovered_links_tool_tips</tabstop>
   <tabstop>access_new_tabs</tabstop>
+  <tabstop>show_title_bar</tabstop>
   <tabstop>splash_screen</tabstop>
   <tabstop>tab_document_mode</tabstop>
   <tabstop>tab_position</tabstop>
@@ -2962,7 +2976,6 @@
   <tabstop>web_font_size_minimum</tabstop>
   <tabstop>web_font_size_minimum_logical</tabstop>
   <tabstop>full_screen</tabstop>
-  <tabstop>javascript</tabstop>
   <tabstop>javascript_access_clipboard</tabstop>
   <tabstop>javascript_block_popups</tabstop>
   <tabstop>new_javascript_block_popup_exception</tabstop>

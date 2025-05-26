@@ -122,6 +122,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
   m_menu = new QMenu(this);
   m_print_preview = false;
   m_ui.setupUi(this);
+  m_window_flags = windowFlags();
   connect_signals();
 
   if(!isFullScreen())
@@ -154,6 +155,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
+  prepare_window_flags();
 }
 
 dooble::dooble(const QList<QUrl> &urls,
@@ -170,6 +172,7 @@ dooble::dooble(const QList<QUrl> &urls,
   m_menu = new QMenu(this);
   m_print_preview = false;
   m_ui.setupUi(this);
+  m_window_flags = windowFlags();
 
   if(m_is_private)
     {
@@ -312,6 +315,7 @@ dooble::dooble(const QList<QUrl> &urls,
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
+  prepare_window_flags();
 }
 
 dooble::dooble(dooble_page *page):QMainWindow()
@@ -324,6 +328,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
   m_menu = new QMenu(this);
   m_print_preview = false;
   m_ui.setupUi(this);
+  m_window_flags = windowFlags();
   connect_signals();
 
   if(!isFullScreen())
@@ -346,6 +351,7 @@ dooble::dooble(dooble_page *page):QMainWindow()
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
+  prepare_window_flags();
 }
 
 dooble::dooble(dooble_web_engine_view *view):QMainWindow()
@@ -358,6 +364,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   m_menu = new QMenu(this);
   m_print_preview = false;
   m_ui.setupUi(this);
+  m_window_flags = windowFlags();
   connect_signals();
 
   if(!isFullScreen())
@@ -380,6 +387,7 @@ dooble::dooble(dooble_web_engine_view *view):QMainWindow()
   prepare_icons();
   prepare_shortcuts();
   prepare_style_sheets();
+  prepare_window_flags();
 }
 
 dooble::~dooble()
@@ -2653,6 +2661,14 @@ void dooble::prepare_tab_shortcuts(void)
     }
 }
 
+void dooble::prepare_window_flags(void)
+{
+  setWindowFlags(m_window_flags);
+  setWindowFlag
+    (Qt::FramelessWindowHint,
+     dooble_settings::setting("show_title_bar").toBool() == false);
+}
+
 void dooble::print(QWidget *parent, dooble_charts *chart)
 {
   if(!chart || !chart->view())
@@ -4774,6 +4790,8 @@ void dooble::slot_settings_applied(void)
   m_ui.tab->set_tab_position();
   prepare_control_w_shortcut();
   prepare_tab_icons_text_tool_tips();
+  prepare_window_flags();
+  show();
   QApplication::restoreOverrideCursor();
 }
 

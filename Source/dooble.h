@@ -174,6 +174,7 @@ class dooble: public QMainWindow
   QPrinter m_printer;
   QTimer m_floating_digital_clock_timer;
   QTimer m_populate_containers_timer;
+  Qt::WindowFlags m_window_flags;
   Ui_dooble m_ui;
   Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
   bool m_anonymous_tab_headers;
@@ -218,6 +219,7 @@ class dooble: public QMainWindow
   void prepare_style_sheets(void);
   void prepare_tab_icons_text_tool_tips(void);
   void prepare_tab_shortcuts(void);
+  void prepare_window_flags(void);
   void print(dooble_page *page);
   void remove_page_connections(dooble_page *page);
   void setWindowTitle(const QString &text);
