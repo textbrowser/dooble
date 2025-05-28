@@ -4791,7 +4791,7 @@ void dooble::slot_settings_applied(void)
   prepare_control_w_shortcut();
   prepare_tab_icons_text_tool_tips();
   prepare_window_flags();
-  show();
+  setVisible(true);
   QApplication::restoreOverrideCursor();
 }
 
