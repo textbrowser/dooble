@@ -68,6 +68,7 @@ class dooble_cookies_window: public QMainWindow
   QToolButton *m_collapse;
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
+  void delete_child_items(const QList<QTreeWidgetItem *> &list);
   void delete_top_level_items(const QList<QTreeWidgetItem *> &list);
   void save_settings(void);
 
