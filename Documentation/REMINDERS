@@ -231,6 +231,7 @@ Remaining Items
 - Fancy completer.
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
+- Per-site agent string.
 - Prevent SQL query text overflow.
 - Shortcuts browser.
 - Threefish tweak.
