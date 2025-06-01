@@ -842,6 +842,7 @@ void dooble_cookies_window::slot_domain_filter_timer_timeout(void)
     }
 
   m_ui.tree->resizeColumnToContents(0);
+  slot_item_selection_changed();
   QApplication::restoreOverrideCursor();
 }
 
@@ -917,7 +918,9 @@ void dooble_cookies_window::slot_item_selection_changed(void)
 {
   auto item = m_ui.tree->currentItem();
 
-  if(!item)
+  if((!item) ||
+     (item->isHidden()) ||
+     (item->parent() && item->parent()->isHidden()))
     {
       m_ui.domain->setText("");
       m_ui.expiration_date->setText("");
