@@ -591,7 +591,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-  mb.setText(tr("Delete selected?"));
+  mb.setText(tr("Delete selected cookie(s)?"));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -644,7 +644,7 @@ void dooble_cookies_window::slot_delete_selected(void)
 	      }
 
 	  item = m_ui.tree->takeTopLevelItem
-	    (m_ui.tree->indexOfTopLevelItem(item));
+	    (m_ui.tree->indexOfTopLevelItem(item)); // The same as item.
 
 	  if(item)
 	    {
@@ -734,7 +734,7 @@ void dooble_cookies_window::slot_delete_shown(void)
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-  mb.setText(tr("Delete shown?"));
+  mb.setText(tr("Delete shown cookie(s)?"));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
@@ -792,7 +792,7 @@ void dooble_cookies_window::slot_delete_unchecked(void)
 
   mb.setIcon(QMessageBox::Question);
   mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-  mb.setText(tr("Delete unchecked?"));
+  mb.setText(tr("Delete unchecked cookie(s)?"));
   mb.setWindowIcon(windowIcon());
   mb.setWindowModality(Qt::ApplicationModal);
   mb.setWindowTitle(tr("Dooble: Confirmation"));
