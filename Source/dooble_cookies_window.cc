@@ -692,7 +692,7 @@ void dooble_cookies_window::slot_delete_shown(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(item && !item->isHidden())
+      if(item && item->isHidden() == false)
 	{
 	  found = true;
 	  break;
@@ -750,7 +750,9 @@ void dooble_cookies_window::slot_delete_unchecked(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
+      if(item &&
+	 item->checkState(0) == Qt::Unchecked &&
+	 item->isHidden() == false)
 	{
 	  found = true;
 	  break;
