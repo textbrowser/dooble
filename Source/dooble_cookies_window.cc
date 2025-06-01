@@ -259,7 +259,7 @@ void dooble_cookies_window::delete_top_level_items
 
   foreach(auto item, list)
     {
-      if(!item)
+      if(!item || m_ui.tree->indexOfTopLevelItem(item) < 0)
 	continue;
 
       m_child_items.remove(item->text(0));
@@ -753,7 +753,7 @@ void dooble_cookies_window::slot_delete_shown(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(item && !item->isHidden())
+      if(item && item->isHidden() == false)
 	list << item;
     }
 
@@ -811,7 +811,9 @@ void dooble_cookies_window::slot_delete_unchecked(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(item && item->checkState(0) == Qt::Unchecked && !item->isHidden())
+      if(item &&
+	 item->checkState(0) == Qt::Unchecked &&
+	 item->isHidden() == false)
 	list << item;
     }
 
@@ -1018,10 +1020,7 @@ void dooble_cookies_window::slot_purge_domains_timer_timeout(void)
     {
       auto item = m_ui.tree->topLevelItem(i);
 
-      if(!item)
-	continue;
-
-      if(item->checkState(0) == Qt::Unchecked)
+      if(item && item->checkState(0) == Qt::Unchecked)
 	list << item;
     }
 
