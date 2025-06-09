@@ -781,6 +781,7 @@ void dooble_page::load(const QUrl &url)
   enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url) == false);
+  web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url));
   m_ui.address->set_edited(false);
   m_view->stop();
   m_view->load(url);
@@ -1732,6 +1733,7 @@ void dooble_page::reload(void)
   enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url()) == false);
+  web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url()));
   m_ui.address->setText(url().toString());
   m_ui.address->set_edited(false);
   m_view->reload();
@@ -3304,6 +3306,7 @@ void dooble_page::slot_reload_bypass_cache(void)
   enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url()) == false);
+  web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url()));
   m_view->triggerPageAction(QWebEnginePage::ReloadAndBypassCache);
 }
 
@@ -3496,6 +3499,7 @@ void dooble_page::slot_url_changed(const QUrl &url)
   enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url) == false);
+  web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url));
 
   auto length = url.toString().length();
 
