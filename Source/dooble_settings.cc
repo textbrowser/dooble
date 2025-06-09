@@ -931,6 +931,7 @@ void dooble_settings::new_javascript_block_popup_exception(const QUrl &url)
   item = new QTableWidgetItem(url.toString());
   item->setData(Qt::UserRole, url);
   item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  item->setToolTip(item->text());
   m_ui.javascript_block_popups_exceptions->setItem
     (m_ui.javascript_block_popups_exceptions->rowCount() - 1, 1, item);
   m_ui.javascript_block_popups_exceptions->sortItems(1);
@@ -2425,6 +2426,7 @@ void dooble_settings::set_site_feature_permission
       item->setData
 	(Qt::ItemDataRole(Qt::UserRole + 1), static_cast<int> (feature));
       item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      item->setToolTip(item->text());
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 2, item);
       m_ui.features_permissions->sortItems(2);
@@ -3179,6 +3181,7 @@ void dooble_settings::slot_new_javascript_disable(const QUrl &url, bool state)
   item = new QTableWidgetItem(domain);
   item->setData(Qt::UserRole, domain);
   item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  item->setToolTip(item->text());
   m_ui.javascript_disable->setItem
     (m_ui.javascript_disable->rowCount() - 1, 1, item);
   m_ui.javascript_disable->sortItems(1);
@@ -3759,6 +3762,7 @@ void dooble_settings::slot_populate(void)
 	item->setData(Qt::UserRole, it.key());
 	item->setData(Qt::ItemDataRole(Qt::UserRole + 1), it.value().first);
 	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	item->setToolTip(item->text());
 	m_ui.features_permissions->setItem(i, 2, item);
 	i += 1;
       }
@@ -4665,6 +4669,7 @@ void dooble_settings::slot_user_agent_item_changed(QTableWidgetItem *item)
 	 this,
 	 SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
       item->setText(s_http_user_agent);
+      item->setToolTip(item->text());
       connect
 	(m_ui.user_agents,
 	 SIGNAL(itemChanged(QTableWidgetItem *)),
