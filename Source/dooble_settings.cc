@@ -4661,23 +4661,19 @@ void dooble_settings::slot_user_agent_item_changed(QTableWidgetItem *item)
 
   auto user_agent(item->text().trimmed());
 
-  if(user_agent.isEmpty())
-    {
-      disconnect
-	(m_ui.user_agents,
-	 SIGNAL(itemChanged(QTableWidgetItem *)),
-	 this,
-	 SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
-      item->setText(s_http_user_agent);
-      item->setToolTip(item->text());
-      connect
-	(m_ui.user_agents,
-	 SIGNAL(itemChanged(QTableWidgetItem *)),
-	 this,
-	 SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
-      user_agent = s_http_user_agent;
-    }
-
+  disconnect
+    (m_ui.user_agents,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
+  user_agent = user_agent.isEmpty() ? s_http_user_agent : user_agent;
+  item->setText(user_agent);
+  item->setToolTip(item->text());
+  connect
+    (m_ui.user_agents,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
   item = m_ui.user_agents->item(item->row(), 0);
 
   if(!item)
