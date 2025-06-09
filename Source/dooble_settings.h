@@ -65,6 +65,7 @@ class dooble_settings: public dooble_main_window
   dooble_settings(void);
   static QString cookie_policy_string(int index);
   static QString use_material_icons(void);
+  static QString user_agent(const QUrl &url);
   static QString zoom_frame_location_string(int index);
   static QStringList s_spell_checker_dictionaries;
   static QVariant getenv(const QString &n);
@@ -121,6 +122,7 @@ class dooble_settings: public dooble_main_window
   QStandardItemModel *m_shortcuts_model;
   QTimer m_timer;
   Ui_dooble_settings m_ui;
+  static QHash<QString, QString> s_user_agents;
   static QHash<QString, QString> s_web_engine_settings_environment;
   static QHash<QString, char> s_javascript_disable;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
@@ -134,6 +136,7 @@ class dooble_settings: public dooble_main_window
   static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
   void new_javascript_disable(const QString &d, bool state);
+  void new_user_agent(const QString &d, const QString &u);
   void prepare_fonts(void);
   void prepare_icons(void);
   void prepare_proxy(bool save);
@@ -144,6 +147,7 @@ class dooble_settings: public dooble_main_window
   void purge_features_permissions(void);
   void purge_javascript_block_popup_exceptions(void);
   void purge_javascript_disable(void);
+  void purge_user_agents(void);
   void save_fonts(void);
   void save_javascript_block_popup_exception(const QUrl &url, bool state);
   void save_settings(void);
@@ -170,6 +174,8 @@ class dooble_settings: public dooble_main_window
   void slot_new_javascript_block_popup_exception(void);
   void slot_new_javascript_disable(const QUrl &url, bool state);
   void slot_new_javascript_disable(void);
+  void slot_new_user_agent(const QString &u, const QUrl &url);
+  void slot_new_user_agent(void);
   void slot_page_button_clicked(void);
   void slot_password_changed(void);
   void slot_pbkdf2_future_finished(void);
@@ -178,14 +184,17 @@ class dooble_settings: public dooble_main_window
   void slot_remove_all_features_permissions(void);
   void slot_remove_all_javascript_block_popup_exceptions(void);
   void slot_remove_all_javascript_disable(void);
+  void slot_remove_all_user_agents(void);
   void slot_remove_selected_features_permissions(void);
   void slot_remove_selected_javascript_block_popup_exceptions(void);
   void slot_remove_selected_javascript_disable(void);
+  void slot_remove_selected_user_agents(void);
   void slot_reset(void);
   void slot_reset_credentials(void);
   void slot_reset_user_agent(void);
   void slot_save_credentials(void);
   void slot_select_application_font(void);
+  void slot_user_agent_item_changed(QTableWidgetItem *item);
   void slot_web_engine_settings_item_changed(QTableWidgetItem *item);
 
  signals:

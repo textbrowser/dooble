@@ -57,6 +57,7 @@
 #include "dooble_ui_utilities.h"
 #include "dooble_version.h"
 
+QHash<QString, QString> dooble_settings::s_user_agents;
 QHash<QString, QString> dooble_settings::s_web_engine_settings_environment;
 QHash<QString, char> dooble_settings::s_javascript_disable;
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
@@ -88,6 +89,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_new_javascript_disable(void)));
+  connect(m_ui.add_user_agent,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_new_user_agent(void)));
   connect(m_ui.allow_javascript_block_popup_exception,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -128,6 +133,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(returnPressed(void)),
 	  this,
 	  SLOT(slot_new_javascript_disable(void)));
+  connect(m_ui.new_user_agent,
+	  SIGNAL(returnPressed(void)),
+	  this,
+	  SLOT(slot_new_user_agent(void)));
   connect(m_ui.password_1,
 	  SIGNAL(textEdited(const QString &)),
 	  this,
@@ -168,6 +177,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_remove_all_javascript_disable(void)));
+  connect(m_ui.remove_all_user_agents,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove_all_user_agents(void)));
   connect(m_ui.remove_selected_features_permissions,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -180,14 +193,14 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_remove_selected_javascript_disable(void)));
+  connect(m_ui.remove_selected_user_agents,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_remove_selected_user_agents(void)));
   connect(m_ui.reset_credentials,
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reset_credentials(void)));
-  connect(m_ui.reset_user_agent,
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(slot_reset_user_agent(void)));
   connect(m_ui.save_credentials,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -526,6 +539,11 @@ QString dooble_settings::use_material_icons(void)
   return setting("icon_set_index") == "0" ? "true" : "";
 }
 
+QString dooble_settings::user_agent(const QUrl &url)
+{
+  return s_user_agents.value(url.host(), s_http_user_agent);
+}
+
 QString dooble_settings::zoom_frame_location_string(int index)
 {
   Q_UNUSED(index);
@@ -858,6 +876,11 @@ void dooble_settings::create_tables(QSqlDatabase &db)
      "url_domain_digest TEXT NOT NULL PRIMARY KEY)");
   query.exec("CREATE TABLE IF NOT EXISTS dooble_settings "
 	     "(key TEXT NOT NULL PRIMARY KEY, value TEXT NOT NULL)");
+  query.exec
+    ("CREATE TABLE IF NOT EXISTS dooble_user_agents "
+     "(url_domain TEXT NOT NULL, "
+     "url_domain_digest TEXT NOT NULL PRIMARY KEY, "
+     "user_agent TEXT NOT NULL)");
   query.exec("CREATE TABLE IF NOT EXISTS dooble_web_engine_settings "
 	     "(environment_variable INTEGER NOT NULL DEFAULT 0, "
 	     "key TEXT NOT NULL PRIMARY KEY, "
@@ -972,6 +995,76 @@ void dooble_settings::new_javascript_disable(const QString &d, bool state)
 	  query.addBindValue(data.toBase64());
 
 	data = dooble::s_cryptography->hmac(domain);
+
+	if(data.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(data.toBase64());
+
+	query.exec();
+      }
+
+  done_label:
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::new_user_agent(const QString &d, const QString &u)
+{
+  auto const domain(d.toLower().trimmed());
+
+  if(domain.isEmpty())
+    return;
+
+  auto user_agent(u.trimmed());
+
+  if(user_agent.isEmpty())
+    user_agent = s_http_user_agent;
+
+  s_user_agents[domain] = user_agent;
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	create_tables(db);
+
+	QSqlQuery query(db);
+
+	query.prepare
+	  ("INSERT OR REPLACE INTO dooble_user_agents "
+	   "(url_domain, url_domain_digest, user_agent) VALUES (?, ?, ?)");
+
+	auto data(dooble::s_cryptography->encrypt_then_mac(domain.toUtf8()));
+
+	if(data.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->hmac(domain);
+
+	if(data.isEmpty())
+	  goto done_label;
+	else
+	  query.addBindValue(data.toBase64());
+
+	data = dooble::s_cryptography->encrypt_then_mac(user_agent.toUtf8());
 
 	if(data.isEmpty())
 	  goto done_label;
@@ -1241,7 +1334,7 @@ void dooble_settings::prepare_proxy(bool save)
     {
       if(m_ui.proxy_none->isChecked())
 	{
-	  QNetworkProxy proxy(QNetworkProxy::NoProxy);
+	  QNetworkProxy const proxy(QNetworkProxy::NoProxy);
 
 	  QNetworkProxy::setApplicationProxy(proxy);
 	}
@@ -1255,12 +1348,9 @@ void dooble_settings::prepare_proxy(bool save)
       proxy.setHostName(m_ui.proxy_host->text().trimmed());
       proxy.setPassword(m_ui.proxy_password->text());
       proxy.setPort(static_cast<quint16> (m_ui.proxy_port->value()));
-
-      if(m_ui.proxy_http->isChecked())
-	proxy.setType(QNetworkProxy::HttpProxy);
-      else
-	proxy.setType(QNetworkProxy::Socks5Proxy);
-
+      proxy.setType
+	(m_ui.proxy_http->isChecked() ?
+	 QNetworkProxy::HttpProxy : QNetworkProxy::Socks5Proxy);
       proxy.setUser(m_ui.proxy_user->text().trimmed());
       QNetworkProxy::setApplicationProxy(proxy);
     }
@@ -1300,6 +1390,8 @@ void dooble_settings::prepare_table_statistics(void)
     (tr("%1 Row(s)").arg(m_ui.javascript_block_popups_exceptions->rowCount()));
   m_ui.javascript_disable_entries->setText
     (tr("%1 Row(s)").arg(m_ui.javascript_disable->rowCount()));
+  m_ui.user_agent_entries->setText
+    (tr("%1 Row(s)").arg(m_ui.user_agents->rowCount()));
 }
 
 void dooble_settings::prepare_web_engine_environment_variables(void)
@@ -1515,14 +1607,18 @@ void dooble_settings::purge_database_data(void)
   dooble_style_sheet::purge();
   m_ui.new_javascript_block_popup_exception->clear();
   m_ui.new_javascript_disable->clear();
+  m_ui.new_user_agent->clear();
   purge_features_permissions();
   purge_javascript_block_popup_exceptions();
   purge_javascript_disable();
+  purge_user_agents();
   s_javascript_block_popup_exceptions.clear();
   s_javascript_disable.clear();
   s_site_features_permissions.clear();
+  s_user_agents.clear();
   slot_remove_all_javascript_block_popup_exceptions();
   slot_remove_all_javascript_disable();
+  slot_remove_all_user_agents();
 }
 
 void dooble_settings::purge_features_permissions(void)
@@ -1607,6 +1703,37 @@ void dooble_settings::purge_javascript_disable(void)
 
 	query.exec("PRAGMA synchronous = OFF");
 	query.exec("DELETE FROM dooble_javascript_disable");
+	query.exec("VACUUM");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+  prepare_table_statistics();
+  QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::purge_user_agents(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.user_agents->setRowCount(0);
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_settings.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.exec("PRAGMA synchronous = OFF");
+	query.exec("DELETE FROM dooble_user_agents");
 	query.exec("VACUUM");
       }
 
@@ -1883,9 +2010,6 @@ void dooble_settings::restore(bool read_database)
 #else
     m_ui.theme->setCurrentIndex(2); // Default
 #endif
-  m_ui.user_agent->setText(s_settings.value("user_agent").toString().trimmed());
-  m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
-  m_ui.user_agent->setCursorPosition(0);
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   m_ui.webgl->setChecked(s_settings.value("webgl", true).toBool());
   m_ui.zoom->setValue(s_settings.value("zoom", 100).toInt());
@@ -1990,9 +2114,6 @@ void dooble_settings::restore(bool read_database)
   else
     dooble::s_default_web_engine_profile->setHttpCacheType
       (QWebEngineProfile::NoCache);
-
-  dooble::s_default_web_engine_profile->setHttpUserAgent
-    (m_ui.user_agent->text());
 
   {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
@@ -2656,17 +2777,6 @@ void dooble_settings::slot_apply(void)
     dooble::s_default_web_engine_profile->setHttpCacheType
       (QWebEngineProfile::NoCache);
 
-  if(m_ui.user_agent->text().trimmed().isEmpty())
-    {
-      m_ui.user_agent->setText(s_http_user_agent);
-      m_ui.user_agent->setToolTip
-	("<html>" + m_ui.user_agent->text() + "</html>");
-      m_ui.user_agent->setCursorPosition(0);
-    }
-
-  dooble::s_default_web_engine_profile->setHttpUserAgent
-    (m_ui.user_agent->text().trimmed());
-
   {
     QString text("");
     QStringList list;
@@ -2785,12 +2895,6 @@ void dooble_settings::slot_apply(void)
 	}
       }
   }
-
-  m_ui.user_agent->setText
-    (dooble::s_default_web_engine_profile->httpUserAgent());
-  m_ui.user_agent->setToolTip
-    ("<html>" + m_ui.user_agent->text() + "</html>");
-  m_ui.user_agent->setCursorPosition(0);
 
   if(m_ui.utc_time_zone->isChecked())
     qputenv("TZ", ":UTC");
@@ -2928,7 +3032,6 @@ void dooble_settings::slot_apply(void)
   set_setting("theme_color_index", m_ui.theme->currentIndex());
   set_setting("utc_time_zone", m_ui.utc_time_zone->isChecked());
   set_setting("visited_links", m_ui.visited_links->isChecked());
-  set_setting("user_agent", m_ui.user_agent->text().trimmed());
   set_setting("web_plugins", m_ui.web_plugins->isChecked());
   set_setting("webgl", m_ui.webgl->isChecked());
   set_setting("webrtc_public_interfaces_only",
@@ -3091,10 +3194,66 @@ void dooble_settings::slot_new_javascript_disable(const QUrl &url, bool state)
 
 void dooble_settings::slot_new_javascript_disable(void)
 {
-  auto const url
-    (QUrl::fromUserInput(m_ui.new_javascript_disable->text().trimmed()));
+  slot_new_javascript_disable
+    (QUrl::fromUserInput(m_ui.new_javascript_disable->text().trimmed()), true);
+}
 
-  slot_new_javascript_disable(url, true);
+void dooble_settings::slot_new_user_agent(const QString &u, const QUrl &url)
+{
+  auto const domain(url.host());
+
+  if(domain.isEmpty())
+    return;
+
+  auto const user_agent(u.trimmed());
+
+  if(user_agent.isEmpty())
+    return;
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto const list
+    (m_ui.user_agents->findItems(domain, Qt::MatchExactly));
+
+  if(!list.isEmpty() && list.at(0))
+    m_ui.user_agents->removeRow(list.at(0)->row());
+
+  disconnect
+    (m_ui.user_agents,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
+  m_ui.new_user_agent->clear();
+  m_ui.user_agents->setRowCount(m_ui.user_agents->rowCount() + 1);
+
+  auto item = new QTableWidgetItem(domain);
+
+  item->setData(Qt::UserRole, domain);
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  item->setToolTip(item->text());
+  m_ui.user_agents->setItem(m_ui.user_agents->rowCount() - 1, 0, item);
+  item = new QTableWidgetItem(user_agent);
+  item->setData(Qt::UserRole, domain);
+  item->setFlags
+    (Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  item->setToolTip(item->text());
+  m_ui.user_agents->setItem(m_ui.user_agents->rowCount() - 1, 1, item);
+  m_ui.user_agents->sortItems(0);
+  connect
+    (m_ui.user_agents,
+     SIGNAL(itemChanged(QTableWidgetItem *)),
+     this,
+     SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
+  prepare_table_statistics();
+  QApplication::restoreOverrideCursor();
+  new_user_agent(url.host(), user_agent);
+}
+
+void dooble_settings::slot_new_user_agent(void)
+{
+  slot_new_user_agent
+    (s_http_user_agent,
+     QUrl::fromUserInput(m_ui.new_user_agent->text().trimmed()));
 }
 
 void dooble_settings::slot_page_button_clicked(void)
@@ -3320,10 +3479,12 @@ void dooble_settings::slot_populate(void)
   m_ui.features_permissions->setRowCount(0);
   m_ui.javascript_block_popups_exceptions->setRowCount(0);
   m_ui.javascript_disable->setRowCount(0);
+  m_ui.user_agents->setRowCount(0);
   prepare_table_statistics();
   s_javascript_block_popup_exceptions.clear();
   s_javascript_disable.clear();
   s_site_features_permissions.clear();
+  s_user_agents.clear();
 
   auto const database_name(dooble_database_utilities::database_name());
   int count_1 = 0;
@@ -3488,6 +3649,41 @@ void dooble_settings::slot_populate(void)
 
 	      s_javascript_disable[data2] = (data1 == "true") ? 1 : 0;
 	    }
+
+	if(query.exec("SELECT url_domain, user_agent, OID "
+		      "FROM dooble_user_agents"))
+	  while(query.next())
+	    {
+	      auto data1
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	      data1 = dooble::s_cryptography->mac_then_decrypt(data1);
+
+	      if(data1.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_user_agents",
+		     query.value(2).toLongLong());
+		  continue;
+		}
+
+	      auto data2
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
+
+	      data2 = dooble::s_cryptography->mac_then_decrypt(data2);
+
+	      if(data2.isEmpty())
+		{
+		  dooble_database_utilities::remove_entry
+		    (db,
+		     "dooble_user_agents",
+		     query.value(2).toLongLong());
+		  continue;
+		}
+
+	      s_user_agents[data1] = data2;
+	    }
       }
 
     db.close();
@@ -3508,10 +3704,15 @@ void dooble_settings::slot_populate(void)
 	     SIGNAL(itemChanged(QTableWidgetItem *)),
 	     this,
 	     SLOT(slot_javascript_disable_item_changed(QTableWidgetItem *)));
+  disconnect(m_ui.user_agents,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
   m_ui.features_permissions->setRowCount(count_1);
   m_ui.javascript_block_popups_exceptions->setRowCount
     (s_javascript_block_popup_exceptions.size());
   m_ui.javascript_disable->setRowCount(s_javascript_disable.size());
+  m_ui.user_agents->setRowCount(s_user_agents.size());
   prepare_table_statistics();
 
   {
@@ -3586,6 +3787,7 @@ void dooble_settings::slot_populate(void)
 	item = new QTableWidgetItem(it.key().toString());
 	item->setData(Qt::UserRole, it.key());
 	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	item->setToolTip(item->text());
 	m_ui.javascript_block_popups_exceptions->setItem(i, 1, item);
 	i += 1;
       }
@@ -3614,7 +3816,32 @@ void dooble_settings::slot_populate(void)
 	item = new QTableWidgetItem(it.key());
 	item->setData(Qt::UserRole, it.key());
 	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	item->setToolTip(item->text());
 	m_ui.javascript_disable->setItem(i, 1, item);
+	i += 1;
+      }
+  }
+
+  {
+    QHashIterator<QString, QString> it(s_user_agents);
+    int i = 0;
+
+    while(it.hasNext())
+      {
+	it.next();
+
+	auto item = new QTableWidgetItem(it.key());
+
+	item->setData(Qt::UserRole, it.key());
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	item->setToolTip(item->text());
+	m_ui.user_agents->setItem(i, 0, item);
+	item = new QTableWidgetItem(it.value());
+	item->setData(Qt::UserRole, it.value());
+	item->setFlags
+	  (Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	item->setToolTip(item->text());
+	m_ui.user_agents->setItem(i, 1, item);
 	i += 1;
       }
   }
@@ -3622,6 +3849,7 @@ void dooble_settings::slot_populate(void)
   m_ui.features_permissions->sortItems(2);
   m_ui.javascript_block_popups_exceptions->sortItems(1);
   m_ui.javascript_disable->sortItems(1);
+  m_ui.user_agents->sortItems(0);
   connect(m_ui.features_permissions,
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
@@ -3636,6 +3864,10 @@ void dooble_settings::slot_populate(void)
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_javascript_disable_item_changed(QTableWidgetItem *)));
+  connect(m_ui.user_agents,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
   QApplication::restoreOverrideCursor();
   emit populated();
 }
@@ -3744,6 +3976,39 @@ void dooble_settings::slot_remove_all_javascript_disable(void)
     return;
 
   purge_javascript_disable();
+}
+
+void dooble_settings::slot_remove_all_user_agents(void)
+{
+  if(m_ui.user_agents->rowCount() > 0 && sender())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to remove all of the "
+		    "user agents?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::ApplicationModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
+    }
+
+  m_ui.user_agents->setRowCount(0);
+  prepare_table_statistics();
+  s_user_agents.clear();
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  purge_user_agents();
 }
 
 void dooble_settings::slot_remove_selected_features_permissions(void)
@@ -4035,6 +4300,90 @@ void dooble_settings::slot_remove_selected_javascript_disable(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_settings::slot_remove_selected_user_agents(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+  auto list(m_ui.user_agents->selectionModel()->selectedRows(0));
+
+  QApplication::restoreOverrideCursor();
+
+  if(!list.isEmpty())
+    {
+      QMessageBox mb(this);
+
+      mb.setIcon(QMessageBox::Question);
+      mb.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+      mb.setText(tr("Are you sure that you wish to remove the selected "
+		    "user agent domains?"));
+      mb.setWindowIcon(windowIcon());
+      mb.setWindowModality(Qt::ApplicationModal);
+      mb.setWindowTitle(tr("Dooble: Confirmation"));
+
+      if(mb.exec() != QMessageBox::Yes)
+	{
+	  QApplication::processEvents();
+	  return;
+	}
+
+      QApplication::processEvents();
+    }
+
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  std::sort(list.begin(), list.end());
+
+  if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
+    {
+      auto const database_name(dooble_database_utilities::database_name());
+
+      {
+	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+	db.setDatabaseName(setting("home_path").toString() +
+			   QDir::separator() +
+			   "dooble_settings.db");
+
+	if(db.open())
+	  {
+	    QSqlQuery query(db);
+
+	    query.exec("PRAGMA synchronous = OFF");
+
+	    for(int i = list.size() - 1; i >= 0; i--)
+	      {
+		query.prepare
+		  ("DELETE FROM dooble_user_agents "
+		   "WHERE url_domain_digest = ?");
+		query.addBindValue
+		  (dooble::s_cryptography->
+		   hmac(list.at(i).data(Qt::UserRole).toString()).toBase64());
+
+		if(query.exec())
+		  {
+		    s_user_agents.remove(list.at(i).data().toString());
+		    m_ui.user_agents->removeRow(list.at(i).row()); // Order.
+		  }
+	      }
+
+	    query.exec("VACUUM");
+	  }
+
+	db.close();
+      }
+
+      QSqlDatabase::removeDatabase(database_name);
+    }
+  else
+    for(int i = list.size() - 1; i >= 0; i--)
+      {
+	s_user_agents.remove(list.at(i).data().toString());
+	m_ui.user_agents->removeRow(list.at(i).row()); // Order.
+      }
+
+  prepare_table_statistics();
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_settings::slot_reset(void)
 {
   QMessageBox mb(this);
@@ -4169,13 +4518,6 @@ void dooble_settings::slot_reset_credentials(void)
   QApplication::restoreOverrideCursor();
 }
 
-void dooble_settings::slot_reset_user_agent(void)
-{
-  m_ui.user_agent->setText(s_http_user_agent);
-  m_ui.user_agent->setToolTip("<html>" + m_ui.user_agent->text() + "</html>");
-  m_ui.user_agent->setCursorPosition(0);
-}
-
 void dooble_settings::slot_save_credentials(void)
 {
   if(m_pbkdf2_dialog || m_pbkdf2_future.isRunning())
@@ -4303,6 +4645,40 @@ void dooble_settings::slot_select_application_font(void)
       m_ui.display_application_font->setText
 	(dialog.selectedFont().toString().trimmed());
     }
+}
+
+void dooble_settings::slot_user_agent_item_changed(QTableWidgetItem *item)
+{
+  if(!item)
+    return;
+
+  if(item->column() != 1)
+    return;
+
+  auto user_agent(item->text().trimmed());
+
+  if(user_agent.isEmpty())
+    {
+      disconnect
+	(m_ui.user_agents,
+	 SIGNAL(itemChanged(QTableWidgetItem *)),
+	 this,
+	 SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
+      item->setText(s_http_user_agent);
+      connect
+	(m_ui.user_agents,
+	 SIGNAL(itemChanged(QTableWidgetItem *)),
+	 this,
+	 SLOT(slot_user_agent_item_changed(QTableWidgetItem *)));
+      user_agent = s_http_user_agent;
+    }
+
+  item = m_ui.user_agents->item(item->row(), 0);
+
+  if(!item)
+    return;
+
+  new_user_agent(item->text(), user_agent);
 }
 
 void dooble_settings::slot_web_engine_settings_item_changed

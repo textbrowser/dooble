@@ -119,6 +119,7 @@ Completed Items
 - Optional referrer.
 - Optional testing of Threefish.
 - Pause and resume downloads. Requires Qt support.
+- Per-site user agent string.
 - Pin support windows.
 - Place the Translations directory into the MacOS bundle.
 - Populate search engine favicons on data changes.
@@ -231,7 +232,6 @@ Remaining Items
 - Fancy completer.
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
-- Per-site agent string.
 - Prevent SQL query text overflow.
 - Shortcuts browser.
 - Threefish tweak.
