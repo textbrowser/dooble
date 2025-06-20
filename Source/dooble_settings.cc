@@ -4427,9 +4427,7 @@ void dooble_settings::slot_reset(void)
        << "dooble_style_sheets.db";
 
   foreach(auto const &i, list)
-    QFile::remove(setting("home_path").toString() +
-		  QDir::separator() +
-		  i);
+    QFile::remove(setting("home_path").toString() + QDir::separator() + i);
 
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();
