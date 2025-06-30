@@ -2748,7 +2748,7 @@ void dooble_page::slot_javascript_console(void)
 
 void dooble_page::slot_link_hovered(const QString &url)
 {
-  if(url.trimmed().isEmpty())
+  if(property("is_loading").toBool() || url.trimmed().isEmpty())
     {
       if(!property("is_loading").toBool())
 	{
@@ -3019,6 +3019,8 @@ void dooble_page::slot_load_started(void)
 {
   emit iconChanged(QIcon());
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  m_ui.link_hovered->setProperty("text", "");
+  m_ui.link_hovered->clear();
   setProperty("is_loading", true);
 
   foreach(auto const &view, m_last_javascript_popups)
@@ -3504,6 +3506,8 @@ void dooble_page::slot_url_changed(const QUrl &url)
   enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url) == false);
+  m_ui.link_hovered->setProperty("text", "");
+  m_ui.link_hovered->clear();
   web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url));
 
   auto length = url.toString().length();
