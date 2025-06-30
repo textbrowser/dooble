@@ -49,6 +49,7 @@ class dooble_tab_widget: public QTabWidget
   void setTabIcon(int index, const QIcon &icon);
   void setTabTextColor(int index, const QColor &color);
   void setTabToolTip(int index, const QString &text);
+  void set_is_cute(bool is_cute);
   void set_tab_position(void);
 
  protected:
@@ -80,6 +81,7 @@ class dooble_tab_widget: public QTabWidget
   void empty_tab(void);
   void new_tab(const QUrl &url);
   void new_tab(void);
+  void open_tab_as_new_cute_window(int index);
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);

@@ -70,6 +70,7 @@ class dooble_page: public QWidget
   QFrame *frame(void) const;
   QIcon icon(void) const;
   QMenu *menu(void);
+  QSizeF contents_size(void) const;
   QString title(void) const;
   QUrl url(void) const;
   QWebEngineProfile *web_engine_profile(void) const;

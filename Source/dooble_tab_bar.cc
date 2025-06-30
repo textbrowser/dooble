@@ -512,6 +512,15 @@ void dooble_tab_bar::slot_next_tab(void)
       m_next_tool_button->setEnabled(tool_button->isEnabled());
 }
 
+void dooble_tab_bar::slot_open_tab_as_new_cute_window(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit open_tab_as_new_cute_window
+      (tabAt(action->property("point").toPoint()));
+}
+
 void dooble_tab_bar::slot_open_tab_as_new_private_window(void)
 {
   auto action = qobject_cast<QAction *> (sender());
@@ -591,11 +600,22 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setProperty("point", point);
   menu.addSeparator();
 
+  auto open_as_new_cute_window_action = menu.addAction
+    (QIcon::fromTheme(use_material_icons + "view-private",
+		      QIcon(QString(":/%1/48/new_window.png").
+			    arg(icon_set))),
+     tr("Open As New Cute Window..."),
+     this,
+     SLOT(slot_open_tab_as_new_cute_window(void)));
+
+  open_as_new_cute_window_action->setEnabled(false);
+  open_as_new_cute_window_action->setProperty("point", point);
+
   auto open_as_new_private_window_action = menu.addAction
     (QIcon::fromTheme(use_material_icons + "view-private",
 		      QIcon(QString(":/%1/48/new_private_window.png").
 			    arg(icon_set))),
-     tr("Open as New P&rivate Window..."),
+     tr("Open As New P&rivate Window..."),
      this,
      SLOT(slot_open_tab_as_new_private_window(void)));
 
@@ -605,7 +625,7 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   auto open_as_new_window_action = menu.addAction
     (QIcon::fromTheme(use_material_icons + "window-new",
 		      QIcon(QString(":/%1/48/new_window.png").arg(icon_set))),
-     tr("Open as &New Window..."),
+     tr("Open As &New Window..."),
      this,
      SLOT(slot_open_tab_as_new_window(void)));
 
@@ -730,6 +750,8 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
 		  SLOT(slot_go_forward(void)));
 	  javascript_action->setCheckable(true);
 	  javascript_action->setEnabled(tab_at > -1);
+	  open_as_new_cute_window_action->setEnabled
+	    (count() > 1 && tab_at > -1);
 	  open_as_new_private_window_action->setEnabled
 	    (count() > 1 && tab_at > -1);
 	  open_as_new_window_action->setEnabled

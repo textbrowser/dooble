@@ -744,7 +744,7 @@ void dooble::closeEvent(QCloseEvent *event)
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if(!m_is_javascript_dialog)
+  if(!m_is_cute && !m_is_javascript_dialog)
     if(dooble_settings::setting("save_geometry").toBool())
       dooble_settings::set_setting
 	("dooble_geometry", saveGeometry().toBase64());
@@ -885,6 +885,11 @@ void dooble::connect_signals(void)
 	  SIGNAL(new_tab(void)),
 	  this,
 	  SLOT(slot_new_tab(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
+	  SIGNAL(open_tab_as_new_cute_window(int)),
+	  this,
+	  SLOT(slot_open_tab_as_new_cute_window(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
 	  SIGNAL(open_tab_as_new_private_window(int)),
@@ -1334,7 +1339,7 @@ void dooble::new_page(dooble_web_engine_view *view)
   prepare_tab_shortcuts();
 }
 
-void dooble::open_tab_as_new_window(bool is_private, int index)
+void dooble::open_tab_as_new_window(bool is_cute, bool is_private, int index)
 {
   if(index < 0 || m_ui.tab->count() <= 1)
     return;
@@ -1352,7 +1357,9 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
       else
 	d = new dooble(page);
 
+      d->set_is_cute(is_cute);
       d->show();
+      is_cute ? d->resize(page->contents_size().toSize()) : (void) 0;
       m_ui.tab->removeTab(m_ui.tab->indexOf(page));
 
       if(is_private)
@@ -1362,6 +1369,7 @@ void dooble::open_tab_as_new_window(bool is_private, int index)
     {
       auto d = new dooble(m_ui.tab->widget(index));
 
+      d->set_is_cute(is_cute);
       d->show();
       m_ui.tab->removeTab(index);
     }
@@ -3002,12 +3010,27 @@ void dooble::setWindowTitle(const QString &text)
     QMainWindow::setWindowTitle(text.trimmed());
 }
 
+void dooble::set_is_cute(bool is_cute)
+{
+  if(is_cute)
+    {
+      current_page() ? current_page()->hide_status_bar(true) : (void) 0;
+      current_page() ? current_page()->reload_periodically(60) : (void) 0;
+      current_page() ?
+	current_page()->user_hide_location_frame(true) : (void) 0;
+      m_is_cute = true;
+      m_ui.menu_bar->setVisible(false);
+      m_ui.tab->set_is_cute(true);
+      m_ui.tab->tabBar()->setVisible(false);
+    }
+}
+
 void dooble::show(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("dooble_geometry").
-					   toByteArray()));
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::setting("dooble_geometry").
+			      toByteArray()));
 
   QMainWindow::show();
 
@@ -3022,9 +3045,9 @@ void dooble::show(void)
 void dooble::showFullScreen(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("dooble_geometry").
-					   toByteArray()));
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::setting("dooble_geometry").
+			      toByteArray()));
 
   QMainWindow::showFullScreen();
 
@@ -3039,9 +3062,9 @@ void dooble::showFullScreen(void)
 void dooble::showNormal(void)
 {
   if(dooble_settings::setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(dooble_settings::
-					   setting("dooble_geometry").
-					   toByteArray()));
+    restoreGeometry
+      (QByteArray::fromBase64(dooble_settings::setting("dooble_geometry").
+			      toByteArray()));
 
   QMainWindow::showNormal();
 
@@ -4279,14 +4302,19 @@ void dooble::slot_open_previous_session_tabs(void)
       slot_open_link(url);
 }
 
+void dooble::slot_open_tab_as_new_cute_window(int index)
+{
+  open_tab_as_new_window(true, m_is_private, index);
+}
+
 void dooble::slot_open_tab_as_new_private_window(int index)
 {
-  open_tab_as_new_window(true, index);
+  open_tab_as_new_window(false, true, index);
 }
 
 void dooble::slot_open_tab_as_new_window(int index)
 {
-  open_tab_as_new_window(false, index);
+  open_tab_as_new_window(false, m_is_private, index);
 }
 
 void dooble::slot_pbkdf2_future_finished(void)
@@ -4601,7 +4629,7 @@ void dooble::slot_quit_dooble(void)
   if(!can_exit(dooble::CanExit::CAN_EXIT_SLOT_QUIT_DOOBLE))
     return;
 
-  if(!m_is_javascript_dialog)
+  if(!m_is_cute && !m_is_javascript_dialog)
     if(dooble_settings::setting("save_geometry").toBool())
       dooble_settings::set_setting
 	("dooble_geometry", saveGeometry().toBase64());

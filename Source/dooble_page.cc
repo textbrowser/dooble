@@ -568,6 +568,11 @@ QMenu *dooble_page::menu(void)
   return m_menu;
 }
 
+QSizeF dooble_page::contents_size(void) const
+{
+  return m_view->page()->contentsSize();
+}
+
 QString dooble_page::title(void) const
 {
   return m_view->title();

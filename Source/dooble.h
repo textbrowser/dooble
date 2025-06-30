@@ -140,6 +140,7 @@ class dooble: public QMainWindow
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
+  void set_is_cute(bool is_cute);
 
  private:
   enum class CanExit
@@ -179,6 +180,7 @@ class dooble: public QMainWindow
   Ui_dooble_floating_digital_clock m_floating_digital_clock_ui;
   bool m_anonymous_tab_headers;
   bool m_attached = false;
+  bool m_is_cute = false;
   bool m_is_javascript_dialog;
   bool m_is_private;
   bool m_print_preview;
@@ -207,7 +209,7 @@ class dooble: public QMainWindow
   void new_page(dooble_charts *chart);
   void new_page(dooble_page *page);
   void new_page(dooble_web_engine_view *view);
-  void open_tab_as_new_window(bool is_private, int index);
+  void open_tab_as_new_window(bool is_cute, bool is_private, int index);
   void parse_command_line_arguments(void);
   void prepare_control_w_shortcut(void);
   void prepare_icons(void);
@@ -272,6 +274,7 @@ class dooble: public QMainWindow
   void slot_open_link_in_new_window(const QUrl &url);
   void slot_open_local_file(void);
   void slot_open_previous_session_tabs(void);
+  void slot_open_tab_as_new_cute_window(int index);
   void slot_open_tab_as_new_private_window(int index);
   void slot_open_tab_as_new_window(int index);
   void slot_pbkdf2_future_finished(void);

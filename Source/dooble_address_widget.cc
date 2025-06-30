@@ -459,7 +459,7 @@ void dooble_address_widget::setText(const QString &text)
   prepare_containers_for_url(url);
 }
 
-void dooble_address_widget::set_edited(const bool state)
+void dooble_address_widget::set_edited(bool state)
 {
   m_edited = state;
 }

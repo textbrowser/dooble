@@ -67,6 +67,7 @@ class dooble_tab_bar: public QTabBar
   void slot_hide_location_frame(void);
   void slot_javascript(void);
   void slot_next_tab(void);
+  void slot_open_tab_as_new_cute_window(void);
   void slot_open_tab_as_new_private_window(void);
   void slot_open_tab_as_new_window(void);
   void slot_previous_tab(void);
@@ -83,6 +84,7 @@ class dooble_tab_bar: public QTabBar
   void clone_tab(int index);
   void decouple_tab(int index);
   void new_tab(void);
+  void open_tab_as_new_cute_window(int index);
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);
   void reload_tab(int index);

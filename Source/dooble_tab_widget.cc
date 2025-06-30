@@ -167,6 +167,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SIGNAL(new_tab(void)));
   connect(m_tab_bar,
+	  SIGNAL(open_tab_as_new_cute_window(int)),
+	  this,
+	  SIGNAL(open_tab_as_new_cute_window(int)));
+  connect(m_tab_bar,
 	  SIGNAL(open_tab_as_new_private_window(int)),
 	  this,
 	  SIGNAL(open_tab_as_new_private_window(int)));
@@ -358,6 +362,18 @@ void dooble_tab_widget::setTabTextColor(int index, const QColor &color)
 void dooble_tab_widget::setTabToolTip(int index, const QString &text)
 {
   QTabWidget::setTabToolTip(index, dooble_ui_utilities::pretty_tool_tip(text));
+}
+
+void dooble_tab_widget::set_is_cute(bool is_cute)
+{
+  if(is_cute)
+    {
+      m_left_corner_widget->setVisible(false);
+      m_right_corner_widget->setVisible(false);
+      setCornerWidget(nullptr, Qt::TopLeftCorner);
+      setCornerWidget(nullptr, Qt::TopRightCorner);
+      setTabPosition(QTabWidget::North);
+    }
 }
 
 void dooble_tab_widget::set_tab_position(void)
