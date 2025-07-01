@@ -29,6 +29,8 @@
 #include <QPushButton>
 #include <QShortcut>
 #include <QSqlQuery>
+#include <QWebEngineProfile>
+#include <QWebEngineScriptCollection>
 
 #include "dooble.h"
 #include "dooble_application.h"
@@ -46,8 +48,6 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
     (tr("&Delete Selected"));
   m_ui.buttons_2->button(QDialogButtonBox::Retry)->setText(tr("&Refresh"));
   m_ui.buttons_2->button(QDialogButtonBox::Save)->setText(tr("&Save"));
-  m_ui.status->setText(tr("Script injected."));
-  m_ui.status->setVisible(false);
   connect(dooble::s_application,
 	  SIGNAL(javascript_scripts_cleared(void)),
 	  this,
@@ -82,6 +82,52 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
 	  SLOT(slot_item_selection_changed(void)));
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   setModal(false);
+}
+
+void dooble_javascript::load(const QUrl &url)
+{
+  m_page ? m_page->scripts().clear() : (void) 0;
+  m_ui.text->clear();
+  m_ui.url->setText(url.toString());
+  m_ui.url->setCursorPosition(0);
+
+  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+    return;
+
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	QSqlQuery query(db);
+
+	query.setForwardOnly(true);
+	query.prepare
+	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(url.host()).toBase64());
+
+	if(query.exec() && query.next())
+	  {
+	    auto javascript
+	      (QByteArray::fromBase64(query.value(0).toByteArray()));
+
+	    javascript = dooble::s_cryptography->mac_then_decrypt(javascript);
+	    m_ui.text->setPlainText(javascript.trimmed());
+	    slot_execute();
+	  }
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
 }
 
 void dooble_javascript::purge(void)
@@ -122,10 +168,6 @@ void dooble_javascript::set_page(QWebEnginePage *page)
 	      SIGNAL(loadFinished(bool)),
 	      this,
 	      SLOT(slot_load_finished(bool)));
-      connect(page,
-	      SIGNAL(loadStarted(void)),
-	      m_ui.status,
-	      SLOT(hide(void)));
       connect(page,
 	      SIGNAL(titleChanged(const QString &)),
 	      this,
@@ -186,18 +228,26 @@ void dooble_javascript::slot_delete_others(void)
 
 void dooble_javascript::slot_execute(void)
 {
-  if(m_page == nullptr || m_ui.text->toPlainText().trimmed().isEmpty())
+  if(m_page == nullptr)
     return;
+  else if(m_ui.text->toPlainText().trimmed().isEmpty())
+    {
+      m_page->scripts().clear();
+      return;
+    }
 
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
   m_page->runJavaScript
-    (m_ui.text->toPlainText().trimmed(),
-     [](const QVariant &value)
-     {
-       Q_UNUSED(value);
-     });
-  m_ui.status->setVisible(true);
-  QApplication::restoreOverrideCursor();
+    (m_ui.text->toPlainText(), QWebEngineScript::ApplicationWorld);
+
+  QWebEngineScript script;
+
+  script.setInjectionPoint(QWebEngineScript::Deferred);
+  script.setName(m_page->url().host());
+  script.setRunsOnSubFrames(true);
+  script.setSourceCode(m_ui.text->toPlainText().trimmed());
+  script.setWorldId(QWebEngineScript::ApplicationWorld);
+  m_page->scripts().remove(script);
+  m_page->scripts().insert(script);
 }
 
 void dooble_javascript::slot_javascript_scripts_cleared(void)
@@ -265,10 +315,7 @@ void dooble_javascript::slot_refresh(void)
   if(!m_page)
     return;
 
-  auto const state = m_ui.status->isVisible();
-
   slot_url_changed(m_page->url());
-  m_ui.status->setVisible(state);
 }
 
 void dooble_javascript::slot_refresh_others(void)
@@ -445,45 +492,5 @@ void dooble_javascript::slot_title_changed(const QString &title)
 
 void dooble_javascript::slot_url_changed(const QUrl &url)
 {
-  m_ui.status->setVisible(false);
-  m_ui.text->clear();
-  m_ui.url->setText(url.toString());
-  m_ui.url->setCursorPosition(0);
-
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
-    return;
-
-  auto const database_name(dooble_database_utilities::database_name());
-
-  {
-    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
-
-    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_javascript.db");
-
-    if(db.open())
-      {
-	QSqlQuery query(db);
-
-	query.setForwardOnly(true);
-	query.prepare
-	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(url.host()).toBase64());
-
-	if(query.exec() && query.next())
-	  {
-	    auto javascript
-	      (QByteArray::fromBase64(query.value(0).toByteArray()));
-
-	    javascript = dooble::s_cryptography->mac_then_decrypt(javascript);
-	    m_ui.text->setPlainText(javascript.trimmed());
-	  }
-      }
-
-    db.close();
-  }
-
-  QSqlDatabase::removeDatabase(database_name);
+  load(url);
 }

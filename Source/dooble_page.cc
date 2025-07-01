@@ -39,6 +39,7 @@
 #include <QWebEngineLoadingInfo>
 #endif
 #include <QWebEngineProfile>
+#include <QWebEngineScriptCollection>
 #include <QWidgetAction>
 
 #include "dooble.h"
@@ -732,6 +733,7 @@ void dooble_page::go_to_backward_item(int index)
 
   if(index >= 0 && index < items.size())
     {
+      m_javascript_console->load(items.at(index).url());
       m_ui.address->set_edited(false);
       m_view->history()->goToItem(items.at(index));
     }
@@ -746,6 +748,7 @@ void dooble_page::go_to_forward_item(int index)
 
   if(index >= 0 && index < items.size())
     {
+      m_javascript_console->load(items.at(index).url());
       m_ui.address->set_edited(false);
       m_view->history()->goToItem(items.at(index));
     }
@@ -787,6 +790,7 @@ void dooble_page::load(const QUrl &url)
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url) == false);
   web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url));
+  m_javascript_console->load(url);
   m_ui.address->set_edited(false);
   m_view->stop();
   m_view->load(url);
@@ -1738,6 +1742,7 @@ void dooble_page::reload(void)
   enable_web_setting
     (QWebEngineSettings::JavascriptEnabled,
      dooble_settings::site_has_javascript_disabled(url()) == false);
+  m_javascript_console->load(url());
   web_engine_profile()->setHttpUserAgent(dooble_settings::user_agent(url()));
   m_ui.address->setText(url().toString());
   m_ui.address->set_edited(false);
@@ -1925,6 +1930,7 @@ void dooble_page::slot_accepted_or_blocked_add_exception(void)
     {
       dooble::s_accepted_or_blocked_domains->new_exception
 	(action->property("host").toString());
+      m_javascript_console->load(url());
       m_ui.address->set_edited(false);
       m_view->reload();
     }
@@ -1932,6 +1938,7 @@ void dooble_page::slot_accepted_or_blocked_add_exception(void)
     {
       dooble::s_accepted_or_blocked_domains->new_exception
 	(action->property("url").toUrl().toString());
+      m_javascript_console->load(url());
       m_ui.address->set_edited(false);
       m_view->reload();
     }
@@ -2628,12 +2635,14 @@ void dooble_page::slot_find_text_edited(const QString &text)
 
 void dooble_page::slot_go_backward(void)
 {
+  m_javascript_console->load(m_view->history()->backItem().url());
   m_ui.address->set_edited(false);
   m_view->history()->back();
 }
 
 void dooble_page::slot_go_forward(void)
 {
+  m_javascript_console->load(m_view->history()->forwardItem().url());
   m_ui.address->set_edited(false);
   m_view->history()->forward();
 }
