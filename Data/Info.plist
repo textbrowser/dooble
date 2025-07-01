@@ -5,7 +5,7 @@
     <key>CFBundleExecutable</key>
     <string>Dooble</string>
     <key>CFBundleGetInfoString</key>
-    <string>Dooble 2024.12.31</string>
+    <string>Dooble 2025.07.04</string>
     <key>CFBundleIconFile</key>
     <string>dooble.icns</string>
     <key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>2024.12.31</string>
+    <string>2025.07.04</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleURLTypes</key>
@@ -44,11 +44,11 @@
       </dict>
     </array>
     <key>CFBundleVersion</key>
-    <string>2024.12.31</string>
+    <string>2025.07.04</string>
     <key>LSMinimumSystemVersion</key>
     <string>10.11</string>
     <key>NOTE</key>
-    <string>Dooble 2024.12.31</string>
+    <string>Dooble 2025.07.04</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>NSSupportsAutomaticGraphicsSwitching</key>
