@@ -726,12 +726,15 @@ void dooble_page::find_text(QWebEnginePage::FindFlags find_flags,
 
 void dooble_page::go_to_backward_item(int index)
 {
+  if(index < 0)
+    return;
+
   auto const items
     (m_view->history()->
      backItems(static_cast<int> (dooble_page::ConstantsEnum::
 				 MAXIMUM_HISTORY_ITEMS)));
 
-  if(index >= 0 && index < items.size())
+  if(index < items.size())
     {
       m_javascript_console->load(items.at(index).url());
       m_ui.address->set_edited(false);
@@ -741,12 +744,15 @@ void dooble_page::go_to_backward_item(int index)
 
 void dooble_page::go_to_forward_item(int index)
 {
+  if(index < 0)
+    return;
+
   auto const items
     (m_view->history()->
      forwardItems(static_cast<int> (dooble_page::ConstantsEnum::
 				    MAXIMUM_HISTORY_ITEMS)));
 
-  if(index >= 0 && index < items.size())
+  if(index < items.size())
     {
       m_javascript_console->load(items.at(index).url());
       m_ui.address->set_edited(false);
