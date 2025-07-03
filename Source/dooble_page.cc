@@ -39,7 +39,6 @@
 #include <QWebEngineLoadingInfo>
 #endif
 #include <QWebEngineProfile>
-#include <QWebEngineScriptCollection>
 #include <QWidgetAction>
 
 #include "dooble.h"
