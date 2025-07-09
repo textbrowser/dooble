@@ -299,10 +299,10 @@ int main(int argc, char *argv[])
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QCoreApplication::setAttribute
     (Qt::AA_EnableHighDpiScaling,
-     QVariant(qgetenv("AA_ENABLEHIGHDPISCALING")).toBool());
+     QVariant(qEnvironmentVariable("AA_ENABLEHIGHDPISCALING")).toBool());
   QCoreApplication::setAttribute
     (Qt::AA_UseHighDpiPixmaps,
-     QVariant(qgetenv("AA_USEHIGHDPIPIXMAPS")).toBool());
+     QVariant(qEnvironmentVariable("AA_USEHIGHDPIPIXMAPS")).toBool());
 #endif
 #endif
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
@@ -326,13 +326,14 @@ int main(int argc, char *argv[])
   dooble::s_application = new dooble_application(argc, argv);
 
 #if defined(Q_OS_WINDOWS)
-  auto const bytes(qgetenv("DOOBLE_HOME").trimmed());
+  auto const bytes(qEnvironmentVariable("DOOBLE_HOME").trimmed());
 
   if(bytes.isEmpty())
     {
       QFileInfo file_info;
       QString dooble_directory(".dooble");
-      QString username(qgetenv("USERNAME").mid(0, 32).trimmed().constData());
+      auto const username
+	(qEnvironmentVariable("USERNAME").mid(0, 128).trimmed());
       auto home_directory(QDir::current());
 
       file_info = QFileInfo(home_directory.absolutePath());
@@ -369,13 +370,15 @@ int main(int argc, char *argv[])
       dooble_settings::set_setting("home_path", dooble_settings_path = bytes);
     }
 #else
-  auto const bytes(qgetenv("DOOBLE_HOME").trimmed());
+  auto const bytes(qEnvironmentVariable("DOOBLE_HOME").trimmed());
 
   if(bytes.isEmpty())
     {
       QString dooble_directory(".dooble");
-      auto const xdg_config_home(qgetenv("XDG_CONFIG_HOME").trimmed());
-      auto const xdg_data_home(qgetenv("XDG_DATA_HOME").trimmed());
+      auto const xdg_config_home
+	(qEnvironmentVariable("XDG_CONFIG_HOME").trimmed());
+      auto const xdg_data_home
+	(qEnvironmentVariable("XDG_DATA_HOME").trimmed());
 
       if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
 	{
@@ -562,7 +565,7 @@ int main(int argc, char *argv[])
       return EXIT_SUCCESS;
     }
 
-  dooble::s_google_translate_url = qgetenv
+  dooble::s_google_translate_url = qEnvironmentVariable
     ("DOOBLE_GOOGLE_TRANSLATE_URL").trimmed().mid(0, 1024).trimmed();
   dooble::s_google_translate_url = dooble::s_google_translate_url.isEmpty() ?
     "https://%1.translate.goog/"

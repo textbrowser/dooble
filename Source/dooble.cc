@@ -4051,7 +4051,7 @@ void dooble::slot_floating_digital_dialog_timeout(void)
      arg(now.date().day() < 10 ? "0" : "").
      arg(now.date().day()));
 
-  auto const utc(qgetenv("TZ").toLower().trimmed());
+  auto const utc(qEnvironmentVariable("TZ").toLower().trimmed());
   auto font(m_floating_digital_clock_ui.clock->font());
 
   font.setPointSize(25);

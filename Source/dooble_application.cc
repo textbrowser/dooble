@@ -81,10 +81,11 @@ void dooble_application::install_translator(void)
   if(dooble_settings::setting("language_index").toInt() == 1) // System
     {
       QString path("");
-      auto const variable(qgetenv("DOOBLE_TRANSLATIONS_PATH").trimmed());
+      auto const variable
+	(qEnvironmentVariable("DOOBLE_TRANSLATIONS_PATH").trimmed());
 
       if(!variable.isEmpty())
-	path = QString::fromLocal8Bit(variable.constData());
+	path = variable;
 
       if(path.isEmpty())
 	path = QDir::currentPath() + QDir::separator() + "Translations";

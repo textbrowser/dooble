@@ -236,10 +236,11 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   else
     {
       QString path("");
-      auto const variable(qgetenv("DOOBLE_TRANSLATIONS_PATH").trimmed());
+      auto const variable
+	(qEnvironmentVariable("DOOBLE_TRANSLATIONS_PATH").trimmed());
 
       if(!variable.isEmpty())
-	path = QString::fromLocal8Bit(variable.constData());
+	path = variable;
       else
 	{
 	  path = QDir::currentPath();
@@ -562,7 +563,7 @@ QVariant dooble_settings::getenv(const QString &n)
   if(s_getenv.contains(name))
     return s_getenv.value(name);
 
-  s_getenv[name] = qgetenv(name.toUtf8().constData());
+  s_getenv[name] = qEnvironmentVariable(name.toUtf8().constData());
   return s_getenv.value(name);
 }
 
@@ -1493,8 +1494,7 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 	    }
 
 	auto const old_environment
-	  (QString::fromLocal8Bit(qgetenv("QTWEBENGINE_CHROMIUM_FLAGS")).
-	   trimmed());
+	  (qEnvironmentVariable("QTWEBENGINE_CHROMIUM_FLAGS").trimmed());
 
 	if(!old_environment.isEmpty())
 	  {
@@ -2617,7 +2617,7 @@ void dooble_settings::show_qtwebengine_dictionaries_warning_label(void)
 {
   m_ui.qtwebengine_dictionaries_warning_label->setVisible(false);
 
-  auto const bytes(qgetenv("QTWEBENGINE_DICTIONARIES_PATH"));
+  auto const bytes(qEnvironmentVariable("QTWEBENGINE_DICTIONARIES_PATH"));
 
   if(bytes.trimmed().isEmpty())
     {
