@@ -4548,6 +4548,9 @@ void dooble::slot_pin_tab(bool state, int index)
       }
 
   m_ui.tab->tabBar()->resize(m_ui.tab->tabBar()->sizeHint());
+  state ?
+    (void) dooble_settings::set_setting("retain_session_tabs", true) :
+    (void) 0;
 }
 
 void dooble::slot_populate_containers_timer_timeout(void)
