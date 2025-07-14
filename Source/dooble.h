@@ -189,7 +189,7 @@ class dooble: public QMainWindow
   static QPointer<dooble> s_favorites_popup_opened_from_dooble_window;
   static QPointer<dooble> s_search_engines_popup_opened_from_dooble_window;
   static bool s_containers_populated;
-  QList<QUrl> all_open_tab_urls(void) const;
+  QList<QPair<QUrl, bool> > all_open_tab_urls(void) const;
   QStringList chart_names(void) const;
   bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;

@@ -405,11 +405,11 @@ dooble::~dooble()
     m_downloads->abort();
 }
 
-QList<QUrl> dooble::all_open_tab_urls(void) const
+QList<QPair<QUrl, bool> > dooble::all_open_tab_urls(void) const
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  QList<QUrl> list;
+  QList<QPair<QUrl, bool> > list;
 
   foreach(auto w, QApplication::topLevelWidgets())
     {
@@ -421,7 +421,7 @@ QList<QUrl> dooble::all_open_tab_urls(void) const
 	    auto page = qobject_cast<dooble_page *> (d->m_ui.tab->widget(i));
 
 	    if(page)
-	      list << page->url();
+	      list << QPair<QUrl, bool> (page->url(), page->is_pinned());
 	  }
     }
 
@@ -4317,9 +4317,13 @@ void dooble::slot_open_local_file(void)
 
 void dooble::slot_open_previous_session_tabs(void)
 {
-  foreach(auto const &url, dooble::s_history->previous_session_tabs())
-    if(!url.isEmpty() && url.isValid())
-      slot_open_link(url);
+  foreach(auto const &pair, dooble::s_history->previous_session_tabs())
+    {
+      auto const url(pair.first);
+
+      if(!url.isEmpty() && url.isValid())
+	slot_pin_tab(pair.second, m_ui.tab->indexOf(new_page(url, false)));
+    }
 }
 
 void dooble::slot_open_tab_as_new_cute_window(int index)
@@ -4697,7 +4701,7 @@ void dooble::slot_quit_dooble(void)
   s_history->abort();
   s_history->save_session_tabs
     (dooble_settings::setting("retain_session_tabs", false).toBool() ?
-     all_open_tab_urls() : QList<QUrl> ());
+     all_open_tab_urls() : QList<QPair<QUrl, bool> > ());
   s_history_popup->deleteLater();
 
   foreach(auto i, QApplication::topLevelWidgets())

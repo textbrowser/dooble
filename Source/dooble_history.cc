@@ -119,9 +119,9 @@ QList<QAction *> dooble_history::last_n_actions(int n) const
   return list;
 }
 
-QList<QUrl> dooble_history::previous_session_tabs(void) const
+QList<QPair<QUrl, bool> > dooble_history::previous_session_tabs(void) const
 {
-  QList<QUrl> list;
+  QList<QPair<QUrl, bool> > list;
 
   if(!dooble::s_cryptography)
     return list;
@@ -139,17 +139,25 @@ QList<QUrl> dooble_history::previous_session_tabs(void) const
       {
 	QSqlQuery query(db);
 
-	if(query.exec("SELECT url FROM dooble_previous_session_tabs"))
+	if(query.exec("SELECT pinned_digest, url "
+		      "FROM dooble_previous_session_tabs"))
 	  while(query.next())
 	    {
 	      auto const bytes
-		(QByteArray::fromBase64(query.value(0).toByteArray()));
+		(QByteArray::fromBase64(query.value(1).toByteArray()));
 	      auto const url
 		(QUrl::fromEncoded(dooble::
 				   s_cryptography->mac_then_decrypt(bytes)));
 
 	      if(!url.isEmpty() && url.isValid())
-		list << url;
+		{
+		  auto const is_pinned = dooble_cryptography::memcmp
+		    (dooble::
+		     s_cryptography->hmac(QByteArray("true")).toBase64(),
+		     query.value(0).toByteArray());
+
+		  list << QPair<QUrl, bool> (url, is_pinned);
+		}
 	    }
 
 	query.exec("DELETE FROM dooble_previous_session_tabs");
@@ -202,8 +210,11 @@ void dooble_history::create_tables(QSqlDatabase &db)
 	     "url TEXT NOT NULL, "
 	     "url_digest TEXT PRIMARY KEY NOT NULL)");
   query.exec("CREATE TABLE IF NOT EXISTS dooble_previous_session_tabs ("
+	     "pinned_digest TEXT NOT NULL, "
 	     "url TEXT NOT NULL, "
 	     "url_digest TEXT PRIMARY KEY NOT NULL)");
+  query.exec
+    ("ALTER TABLE dooble_previous_session_tabs ADD pinned_digest TEXT");
 }
 
 void dooble_history::populate(const QByteArray &authentication_key,
@@ -682,8 +693,7 @@ void dooble_history::remove_items_list(const QList<QUrl> &urls)
 	 url);
       m_history.remove(url);
       locker.unlock();
-      url_digests << dooble::s_cryptography->hmac
-	(url.toEncoded()).toBase64();
+      url_digests << dooble::s_cryptography->hmac(url.toEncoded()).toBase64();
     }
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
@@ -1043,7 +1053,7 @@ void dooble_history::save_item(const QIcon &icon,
   QSqlDatabase::removeDatabase(database_name);
 }
 
-void dooble_history::save_session_tabs(const QList<QUrl> &urls)
+void dooble_history::save_session_tabs(const QList<QPair<QUrl, bool> > &urls)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -1068,19 +1078,28 @@ void dooble_history::save_session_tabs(const QList<QUrl> &urls)
 	if(dooble::s_cryptography &&
 	   dooble_settings::setting("retain_session_tabs").toBool())
 	  {
-	    foreach(auto const &url, urls)
-	      if(!url.isEmpty() && url.isValid())
-		{
-		  query.prepare
-		    ("INSERT INTO dooble_previous_session_tabs "
-		     "(url, url_digest) VALUES (?, ?)");
-		  query.addBindValue
-		    (dooble::s_cryptography->encrypt_then_mac(url.toEncoded()).
-		     toBase64());
-		  query.addBindValue
-		    (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
-		  query.exec();
-		}
+	    for(int i = 0; i < urls.size(); i++)
+	      {
+		auto const url(urls.at(i).first);
+
+		if(!url.isEmpty() && url.isValid())
+		  {
+		    QByteArray is_pinned(urls.at(i).second ? "true" : "false");
+
+		    query.prepare
+		      ("INSERT INTO dooble_previous_session_tabs "
+		       "(pinned_digest, url, url_digest) VALUES (?, ?, ?)");
+		    query.addBindValue
+		      (dooble::s_cryptography->hmac(is_pinned).toBase64());
+		    query.addBindValue
+		      (dooble::s_cryptography->
+		       encrypt_then_mac(url.toEncoded()).toBase64());
+		    query.addBindValue
+		      (dooble::s_cryptography->hmac(url.toEncoded()).
+		       toBase64());
+		    query.exec();
+		  }
+	      }
 	  }
       }
 
