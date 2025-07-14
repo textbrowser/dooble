@@ -555,6 +555,7 @@ int main(int argc, char *argv[])
     (urls,
      attach,
      disable_javascript,
+     false, // Pinned
      arguments.contains("--private") || dooble::s_settings->
                                         setting("private_mode").toBool(),
      reload_periodically);

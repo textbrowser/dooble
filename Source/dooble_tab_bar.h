@@ -32,6 +32,7 @@
 
 class QToolButton;
 class dooble;
+class dooble_page;
 
 class dooble_tab_bar: public QTabBar
 {
@@ -52,6 +53,7 @@ class dooble_tab_bar: public QTabBar
   QToolButton *m_previous_tool_button;
   QWidget *m_corner_widget;
   bool is_private(void) const;
+  dooble_page *page(int index) const;
   void mouseDoubleClickEvent(QMouseEvent *event);
   void mousePressEvent(QMouseEvent *event);
   void prepare_icons(void);
@@ -70,6 +72,7 @@ class dooble_tab_bar: public QTabBar
   void slot_open_tab_as_new_cute_window(void);
   void slot_open_tab_as_new_private_window(void);
   void slot_open_tab_as_new_window(void);
+  void slot_pin_tab(void);
   void slot_previous_tab(void);
   void slot_reload(void);
   void slot_reload_periodically(void);
@@ -87,6 +90,7 @@ class dooble_tab_bar: public QTabBar
   void open_tab_as_new_cute_window(int index);
   void open_tab_as_new_private_window(int index);
   void open_tab_as_new_window(int index);
+  void pin_tab(bool state, int index);
   void reload_tab(int index);
   void reload_tab_periodically(int index, int seconds);
   void set_visible_corner_button(bool state);

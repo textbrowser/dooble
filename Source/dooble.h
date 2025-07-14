@@ -89,6 +89,7 @@ class dooble: public QMainWindow
   dooble(const QList<QUrl> &urls,
 	 bool attach,
 	 bool disable_javascript,
+	 bool is_pinned,
 	 bool is_private,
 	 int reload_periodically);
   dooble(dooble_page *page);
@@ -192,6 +193,7 @@ class dooble: public QMainWindow
   QStringList chart_names(void) const;
   bool can_exit(const dooble::CanExit can_exit);
   bool tabs_closable(void) const;
+  static QString pretty_title_for_page(dooble_page *page);
   static bool cookie_filter
     (const QWebEngineCookieStore::FilterRequest &filter_request);
 #ifdef DOOBLE_PEEKABOO
@@ -279,6 +281,7 @@ class dooble: public QMainWindow
   void slot_open_tab_as_new_window(int index);
   void slot_pbkdf2_future_finished(void);
   void slot_peekaboo_text(const QString &t);
+  void slot_pin_tab(bool state, int index);
   void slot_populate_containers_timer_timeout(void);
   void slot_populated(void);
   void slot_print(void);

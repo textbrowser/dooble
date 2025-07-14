@@ -161,6 +161,7 @@ dooble::dooble(QWidget *widget):QMainWindow()
 dooble::dooble(const QList<QUrl> &urls,
 	       bool attach,
 	       bool disable_javascript,
+	       bool is_pinned,
 	       bool is_private,
 	       int reload_periodically):QMainWindow()
 {
@@ -283,6 +284,7 @@ dooble::dooble(const QList<QUrl> &urls,
 	      (QWebEngineSettings::JavascriptEnabled, !disable_javascript);
 
 	  page->reload_periodically(reload_periodically);
+	  slot_pin_tab(is_pinned, m_ui.tab->indexOf(page));
 	}
     }
   else
@@ -298,6 +300,7 @@ dooble::dooble(const QList<QUrl> &urls,
 		(QWebEngineSettings::JavascriptEnabled, !disable_javascript);
 
 	    page->reload_periodically(reload_periodically);
+	    slot_pin_tab(is_pinned, m_ui.tab->indexOf(page));
 	  }
       }
 
@@ -429,6 +432,27 @@ QList<QUrl> dooble::all_open_tab_urls(void) const
 QSet<QString> dooble::current_url_executables(void)
 {
   return s_current_url_executables;
+}
+
+QString dooble::pretty_title_for_page(dooble_page *page)
+{
+  if(!page)
+    return "";
+
+  auto text
+    (page->title().trimmed().
+     mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
+
+  if(text.isEmpty())
+    text = page->url().toString().mid
+      (0, static_cast<int> (dooble::Limits::MAXIMUM_URL_LENGTH));
+
+  if(text.isEmpty())
+    text = tr("Dooble");
+  else
+    text = tr("%1 - Dooble").arg(text);
+
+  return text;
 }
 
 QStringList dooble::chart_names(void) const
@@ -902,6 +926,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_open_tab_as_new_window(int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(pin_tab(bool, int)),
+	  this,
+	  SLOT(slot_pin_tab(bool, int)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(reload_tab(int)),
 	  this,
 	  SLOT(slot_reload_tab(int)),
@@ -1276,6 +1305,7 @@ void dooble::new_page(dooble_page *page)
 
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
+  slot_pin_tab(page->is_pinned(), m_ui.tab->indexOf(page));
 }
 
 void dooble::new_page(dooble_web_engine_view *view)
@@ -1337,6 +1367,7 @@ void dooble::new_page(dooble_web_engine_view *view)
 
   prepare_control_w_shortcut();
   prepare_tab_shortcuts();
+  slot_pin_tab(view->is_pinned(), m_ui.tab->indexOf(page));
 }
 
 void dooble::open_tab_as_new_window(bool is_cute, bool is_private, int index)
@@ -1353,7 +1384,12 @@ void dooble::open_tab_as_new_window(bool is_cute, bool is_private, int index)
       remove_page_connections(page);
 
       if(is_private)
-	d = new dooble(QList<QUrl> () << page->url(), false, false, true, -1);
+	d = new dooble(QList<QUrl> () << page->url(),
+		       false, // Attach
+		       false, // Disable JavaScript
+		       page->is_pinned(),
+		       true,  // Private
+		       -1);   // Reload Periodically
       else
 	d = new dooble(page);
 
@@ -3270,20 +3306,19 @@ void dooble::slot_about_to_show_tabs_menu(void)
   for(int i = 0; i < m_ui.tab->count(); i++)
     {
       QAction *action = nullptr;
-      auto const text(m_ui.tab->tabText(i));
       auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 
       if(page)
 	action = m_ui.menu_tabs->addAction
 	  (page->icon(),
-	   font_metrics.elidedText(text,
+	   font_metrics.elidedText(pretty_title_for_page(page),
 				   Qt::ElideRight,
 				   dooble_ui_utilities::
 				   context_menu_width(m_ui.menu_tabs)));
       else
 	action = m_ui.menu_tabs->addAction
 	  (m_ui.tab->tabIcon(i),
-	   font_metrics.elidedText(text,
+	   font_metrics.elidedText(m_ui.tab->tabText(i),
 				   Qt::ElideRight,
 				   dooble_ui_utilities::
 				   context_menu_width(m_ui.menu_tabs)));
@@ -3355,25 +3390,16 @@ void dooble::slot_anonymous_tab_headers(bool state)
 
 	if(page)
 	  {
-	    auto text
-	      (page->title().trimmed().
-	       mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
-
-	    if(text.isEmpty())
-	      text = page->url().toString().mid
-		(0, static_cast<int> (dooble::Limits::MAXIMUM_URL_LENGTH));
-
-	    if(text.isEmpty())
-	      text = tr("Dooble");
-	    else
-	      text = tr("%1 - Dooble").arg(text);
-
-	    if(page == m_ui.tab->currentWidget())
-	      setWindowTitle(text);
+	    if(m_ui.tab->currentWidget() == page)
+	      setWindowTitle(pretty_title_for_page(page));
 
 	    m_ui.tab->setTabIcon(m_ui.tab->indexOf(page), page->icon());
+
+	    auto const text
+	      (page->is_pinned() ? "" : pretty_title_for_page(page));
+
 	    m_ui.tab->setTabText
-	      (m_ui.tab->indexOf(page), text.replace("&", "&&"));
+	      (m_ui.tab->indexOf(page), QString(text).replace("&", "&&"));
 	  }
 
 	prepare_tab_icons_text_tool_tips();
@@ -3524,21 +3550,12 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	    }
 	  else
 	    {
-	      auto title
-		(page->title().
-		 trimmed().mid
-		 (0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
-
-	      if(title.isEmpty())
-		title = page->url().toString().mid
-		  (0, static_cast<int> (dooble::Limits::MAXIMUM_URL_LENGTH));
-
-	      if(title.isEmpty())
-		title = tr("about:blank");
+	      auto const text
+		(page->is_pinned() ? "" : pretty_title_for_page(page));
 
 	      m_ui.tab->setTabIcon(i, page->icon());
-	      m_ui.tab->setTabText(i, title.replace("&", "&&"));
-	      m_ui.tab->setTabToolTip(i, title);
+	      m_ui.tab->setTabText(i, QString(text).replace("&", "&&"));
+	      m_ui.tab->setTabToolTip(i, pretty_title_for_page(page));
 	      page->frame()->setFrameShape(QFrame::StyledPanel);
 	      page->hide_location_frame(page->is_location_frame_user_hidden());
 	      page->hide_status_bar
@@ -3839,6 +3856,7 @@ void dooble::slot_clone_tab(int index)
     }
 
   QApplication::restoreOverrideCursor();
+  slot_pin_tab(page->is_pinned(), m_ui.tab->indexOf(clone));
 }
 
 void dooble::slot_clone_tab(void)
@@ -4183,7 +4201,8 @@ void dooble::slot_new_local_connection(void)
 
 void dooble::slot_new_private_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), false, false, true, -1))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false, false, false, true, -1))->
+    show();
 }
 
 void dooble::slot_new_tab(const QUrl &url)
@@ -4198,7 +4217,8 @@ void dooble::slot_new_tab(void)
 
 void dooble::slot_new_window(void)
 {
-  (new dooble(QList<QUrl> () << QUrl(), false, false, false, -1))->show();
+  (new dooble(QList<QUrl> () << QUrl(), false, false, false, false, -1))->
+    show();
 }
 
 void dooble::slot_open_chart(void)
@@ -4252,7 +4272,7 @@ void dooble::slot_open_link(const QUrl &url)
 
 void dooble::slot_open_link_in_new_private_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, false, false, true, -1))->show();
+  (new dooble(QList<QUrl> () << url, false, false, false, true, -1))->show();
 }
 
 void dooble::slot_open_link_in_new_tab(const QUrl &url)
@@ -4262,7 +4282,7 @@ void dooble::slot_open_link_in_new_tab(const QUrl &url)
 
 void dooble::slot_open_link_in_new_window(const QUrl &url)
 {
-  (new dooble(QList<QUrl> () << url, false, false, false, -1))->show();
+  (new dooble(QList<QUrl> () << url, false, false, false, false, -1))->show();
 }
 
 void dooble::slot_open_local_file(void)
@@ -4492,6 +4512,38 @@ void dooble::slot_peekaboo_text(const QString &t)
 #else
   Q_UNUSED(t);
 #endif
+}
+
+void dooble::slot_pin_tab(bool state, int index)
+{
+  auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
+
+  if(!page)
+    return;
+
+  auto const text
+    (m_anonymous_tab_headers ?
+     tr("Dooble") : state ? "" : pretty_title_for_page(page));
+
+  m_ui.tab->setTabText(index, QString(text).replace("&", "&&"));
+  m_ui.tab->set_tab_pinned(state, index);
+  page->set_pinned(state);
+
+  if(index > 0 && state)
+    for(int i = 0; i < m_ui.tab->count(); i++)
+      {
+	auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+
+	if(page && page->is_pinned())
+	  continue;
+	else
+	  {
+	    m_ui.tab->tabBar()->moveTab(index, i);
+	    break;
+	  }
+      }
+
+  m_ui.tab->tabBar()->resize(m_ui.tab->tabBar()->sizeHint());
 }
 
 void dooble::slot_populate_containers_timer_timeout(void)
@@ -5532,8 +5584,9 @@ void dooble::slot_title_changed(const QString &title)
   if(!page)
     return;
 
-  auto text(title.trimmed().
-	    mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
+  auto text
+    (title.trimmed().
+     mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
 
   if(text.isEmpty())
     text = page->url().toString().mid
@@ -5546,10 +5599,12 @@ void dooble::slot_title_changed(const QString &title)
 
   if(!(m_anonymous_tab_headers || s_application->application_locked()))
     {
-      if(page == m_ui.tab->currentWidget())
+      if(m_ui.tab->currentWidget() == page)
 	setWindowTitle(text);
 
-      m_ui.tab->setTabText(m_ui.tab->indexOf(page), text.replace("&", "&&"));
+      m_ui.tab->setTabText
+	(m_ui.tab->indexOf(page),
+	 page->is_pinned() ? "" : text.replace("&", "&&"));
     }
 
   if(s_application->application_locked())

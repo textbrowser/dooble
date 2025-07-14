@@ -51,7 +51,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-indicator {image: none;}");
 #else
   m_add_tab_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}"
      "QToolButton::menu-indicator {image: none;}");
 #endif
@@ -65,7 +65,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_private_tool_button->setStyleSheet
-    ("QToolButton {border: none; margin-bottom: 1px; margin-top: 1px;}"
+    ("QToolButton {border: none; margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_private_tool_button->setToolTip(tr("This is a private window."));
@@ -178,6 +178,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  SIGNAL(open_tab_as_new_window(int)),
 	  this,
 	  SIGNAL(open_tab_as_new_window(int)));
+  connect(m_tab_bar,
+	  SIGNAL(pin_tab(bool, int)),
+	  this,
+	  SIGNAL(pin_tab(bool, int)));
   connect(m_tab_bar,
 	  SIGNAL(reload_tab(int)),
 	  this,
@@ -373,6 +377,42 @@ void dooble_tab_widget::set_is_cute(bool is_cute)
       setCornerWidget(nullptr, Qt::TopLeftCorner);
       setCornerWidget(nullptr, Qt::TopRightCorner);
       setTabPosition(QTabWidget::North);
+    }
+}
+
+void dooble_tab_widget::set_tab_pinned(bool state, int index)
+{
+  auto const static list
+    (QList<QTabBar::ButtonPosition> () << QTabBar::LeftSide
+                                       << QTabBar::RightSide);
+
+  if(state)
+    {
+      for(int i = 0; i < list.size(); i++)
+	{
+	  auto widget = tabBar()->tabButton(index, list.at(i));
+
+	  if(!qobject_cast<QLabel *> (widget))
+	    {
+	      m_close_buttons[page(index)] = widget;
+	      tabBar()->setTabButton(index, list.at(i), nullptr);
+	      break;
+	    }
+	}
+    }
+  else
+    {
+      for(int i = 0; i < list.size(); i++)
+	{
+	  auto widget = tabBar()->tabButton(index, list.at(i));
+
+	  if(!widget)
+	    {
+	      tabBar()->setTabButton
+		(index, list.at(i), m_close_buttons.value(page(index)));
+	      break;
+	    }
+	}
     }
 }
 

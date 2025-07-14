@@ -50,6 +50,7 @@ dooble_web_engine_view::dooble_web_engine_view
   dooble::s_jar->set_web_engine_view(this);
   m_dialog_requests_timer.setInterval(100);
   m_dialog_requests_timer.setSingleShot(true);
+  m_is_pinned = false;
   m_is_private = dooble::s_default_web_engine_profile != web_engine_profile &&
     web_engine_profile;
 
@@ -205,6 +206,11 @@ QWebEngineView *dooble_web_engine_view::createWindow
     }
 
   return view;
+}
+
+bool dooble_web_engine_view::is_pinned(void) const
+{
+  return m_is_pinned;
 }
 
 bool dooble_web_engine_view::is_private(void) const
@@ -622,6 +628,11 @@ void dooble_web_engine_view::set_feature_permission
 	permission.grant() : permission.deny();
 }
 #endif
+
+void dooble_web_engine_view::set_pinned(bool state)
+{
+  m_is_pinned = state;
+}
 
 void dooble_web_engine_view::slot_certificate_exception_accepted
 (const QUrl &url)

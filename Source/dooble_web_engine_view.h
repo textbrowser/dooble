@@ -49,6 +49,7 @@ class dooble_web_engine_view: public QWebEngineView
 			 QWidget *parent);
   ~dooble_web_engine_view();
   QWebEngineProfile *web_engine_profile(void) const;
+  bool is_pinned(void) const;
   bool is_private(void) const;
   void download(const QString &file_name, const QUrl &url);
   void save(const QString &file_name);
@@ -62,6 +63,7 @@ class dooble_web_engine_view: public QWebEngineView
      const QWebEnginePermission::PermissionType feature,
      const QWebEnginePermission::State policy);
 #endif
+  void set_pinned(bool state);
 
  protected:
   QSize sizeHint(void) const;
@@ -74,6 +76,7 @@ class dooble_web_engine_view: public QWebEngineView
   QPointer<QShortcut> m_scroll_down;
   QPointer<QShortcut> m_scroll_up;
   QTimer m_dialog_requests_timer;
+  bool m_is_pinned;
   bool m_is_private;
   dooble_web_engine_page *m_page;
   void prepare_shortcuts(void);

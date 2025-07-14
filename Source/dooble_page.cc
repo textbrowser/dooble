@@ -73,6 +73,7 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
   m_export_as_png = false;
   m_export_png_timer.setSingleShot(true);
   m_is_location_frame_user_hidden = false;
+  m_is_pinned = false;
   m_is_private = dooble::s_default_web_engine_profile != web_engine_profile &&
     web_engine_profile;
   m_javascript_console = new dooble_javascript(this);
@@ -606,6 +607,11 @@ bool dooble_page::can_go_forward(void) const
 bool dooble_page::is_location_frame_user_hidden(void) const
 {
   return m_is_location_frame_user_hidden;
+}
+
+bool dooble_page::is_pinned(void) const
+{
+  return m_is_pinned;
 }
 
 bool dooble_page::is_private(void) const
@@ -1804,6 +1810,12 @@ void dooble_page::resizeEvent(QResizeEvent *event)
 void dooble_page::save(const QString &file_name)
 {
   m_view->save(file_name);
+}
+
+void dooble_page::set_pinned(bool state)
+{
+  m_is_pinned = state;
+  m_view->set_pinned(state);
 }
 
 void dooble_page::show_menu(void)

@@ -79,6 +79,7 @@ class dooble_page: public QWidget
   bool can_go_forward(void) const;
   bool is_location_frame_hidden(void) const;
   bool is_location_frame_user_hidden(void) const;
+  bool is_pinned(void) const;
   bool is_private(void) const;
   bool is_web_setting_enabled(QWebEngineSettings::WebAttribute setting) const;
   dooble_address_widget *address_widget(void) const;
@@ -102,6 +103,7 @@ class dooble_page: public QWidget
   void reload(void);
   void reload_periodically(int seconds);
   void save(const QString &file_name);
+  void set_pinned(bool state);
   void show_menu(void);
   void stop(void);
   void user_hide_location_frame(bool state);
@@ -132,6 +134,7 @@ class dooble_page: public QWidget
   Ui_dooble_page m_ui;
   bool m_export_as_png;
   bool m_is_location_frame_user_hidden;
+  bool m_is_pinned;
   bool m_is_private;
   dooble *find_parent_dooble(void) const;
   dooble_popup_menu *m_popup_menu;

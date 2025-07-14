@@ -52,7 +52,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_next_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_previous_tool_button = new QToolButton(nullptr);
@@ -64,7 +64,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_previous_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
 
@@ -149,10 +149,14 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
 {
   auto const tab_position
     (dooble_settings::setting("tab_position").toString().trimmed());
+  auto page = this->page(index);
   auto size(QTabBar::tabSizeHint(index));
 
   if(tab_position == "east" || tab_position == "west")
     {
+      if(page && page->is_pinned())
+	return size;
+
       auto const f = qFloor(static_cast<double> (rect().height()) /
 			    static_cast<double> (qMax(1, count())));
       static const int maximum_tab_height = 225;
@@ -172,6 +176,9 @@ QSize dooble_tab_bar::tabSizeHint(int index) const
     }
   else
     {
+      if(page && page->is_pinned())
+	return size;
+
       auto const f = qFloor(static_cast<double> (rect().width()) /
 			    static_cast<double> (qMax(1, count())));
       static const int maximum_tab_width = 225;
@@ -222,6 +229,16 @@ bool dooble_tab_bar::is_private(void) const
 
   QApplication::restoreOverrideCursor();
   return false;
+}
+
+dooble_page *dooble_tab_bar::page(int index) const
+{
+  auto tab_widget = qobject_cast<dooble_tab_widget *> (parentWidget());
+
+  if(tab_widget)
+    return qobject_cast<dooble_page *> (tab_widget->widget(index));
+
+  return nullptr;
 }
 
 void dooble_tab_bar::hideEvent(QHideEvent *event)
@@ -536,6 +553,15 @@ void dooble_tab_bar::slot_open_tab_as_new_window(void)
 
   if(action)
     emit open_tab_as_new_window(tabAt(action->property("point").toPoint()));
+}
+
+void dooble_tab_bar::slot_pin_tab(void)
+{
+  auto action = qobject_cast<QAction *> (sender());
+
+  if(action)
+    emit pin_tab
+      (action->isChecked(), tabAt(action->property("point").toPoint()));
 }
 
 void dooble_tab_bar::slot_previous_tab(void)
@@ -856,6 +882,13 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action = menu.addAction(tr("Clone Tab"),
 			  this,
 			  SLOT(slot_clone_tab(void)));
+  action->setEnabled(page);
+  action->setProperty("point", point);
+  action = menu.addAction(tr("Pin Tab"),
+			  this,
+			  SLOT(slot_pin_tab(void)));
+  action->setCheckable(true);
+  action->setChecked(page && page->is_pinned());
   action->setEnabled(page);
   action->setProperty("point", point);
 
