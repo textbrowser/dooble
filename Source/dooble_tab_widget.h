@@ -31,9 +31,10 @@
 #include <QPointer>
 #include <QTabWidget>
 
+#include "dooble_page.h"
+
 class QFrame;
 class QToolButton;
-class dooble_page;
 class dooble_tab_bar;
 
 class dooble_tab_widget: public QTabWidget

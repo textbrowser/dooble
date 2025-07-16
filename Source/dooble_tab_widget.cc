@@ -31,7 +31,6 @@
 #include "dooble.h"
 #include "dooble_application.h"
 #include "dooble_favicons.h"
-#include "dooble_page.h"
 #include "dooble_tab_bar.h"
 #include "dooble_tab_widget.h"
 #include "dooble_ui_utilities.h"
