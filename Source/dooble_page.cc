@@ -2038,7 +2038,7 @@ void dooble_page::slot_always_allow_javascript_popup(void)
 void dooble_page::slot_authentication_required(const QUrl &url,
 					       QAuthenticator *authenticator)
 {
-  if(!authenticator || authenticator->isNull() || !url.isValid())
+  if(!authenticator || !url.isValid() || authenticator->isNull())
     {
       if(authenticator)
 	*authenticator = QAuthenticator();
