@@ -81,7 +81,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {margin-bottom: 1px; margin-top: 1px;}"
+    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_left_corner_widget = new QFrame(this);
