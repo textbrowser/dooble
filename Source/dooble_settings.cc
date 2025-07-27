@@ -51,6 +51,7 @@
 #include "dooble_hmac.h"
 #include "dooble_pbkdf2.h"
 #include "dooble_random.h"
+#include "dooble_scroll_filter.h"
 #include "dooble_settings.h"
 #include "dooble_style_sheet.h"
 #include "dooble_text_utilities.h"
@@ -507,6 +508,12 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	item->setCheckState(Qt::Unchecked);
 	m_ui.dictionaries->addItem(item);
       }
+
+  foreach(auto widget, findChildren<QWidget *> ())
+    if(qobject_cast<QComboBox *> (widget) ||
+       qobject_cast<QDoubleSpinBox *> (widget) ||
+       qobject_cast<QSpinBox *> (widget))
+      widget->installEventFilter(new dooble_scroll_filter(this));
 
   restore(true);
   prepare_icons();

@@ -25,7 +25,7 @@
      </property>
      <widget class="QWidget" name="page_1">
       <attribute name="title">
-       <string>Current Page</string>
+       <string>Current Host</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>

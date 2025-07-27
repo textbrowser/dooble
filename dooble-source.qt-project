@@ -54,6 +54,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_page.h \
                   Source/dooble_pbkdf2.h \
                   Source/dooble_popup_menu.h \
+		  Source/dooble_scroll_filter.h \
                   Source/dooble_search_engines_popup.h \
                   Source/dooble_search_widget.h \
                   Source/dooble_settings.h \
