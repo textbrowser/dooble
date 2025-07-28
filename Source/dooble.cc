@@ -3076,6 +3076,13 @@ void dooble::show(void)
       QTimer::singleShot
 	(2500, this, SLOT(slot_warn_of_missing_sqlite_driver(void)));
     }
+
+  /*
+  ** Repaint the tab bar.
+  */
+
+  m_ui.tab->tabBar()->setVisible(false);
+  m_ui.tab->tabBar()->setVisible(true);
 }
 
 void dooble::showFullScreen(void)
@@ -3093,6 +3100,13 @@ void dooble::showFullScreen(void)
       QTimer::singleShot
 	(2500, this, SLOT(slot_warn_of_missing_sqlite_driver(void)));
     }
+
+  /*
+  ** Repaint the tab bar.
+  */
+
+  m_ui.tab->tabBar()->setVisible(false);
+  m_ui.tab->tabBar()->setVisible(true);
 }
 
 void dooble::showNormal(void)
@@ -3110,6 +3124,13 @@ void dooble::showNormal(void)
       QTimer::singleShot
 	(2500, this, SLOT(slot_warn_of_missing_sqlite_driver(void)));
     }
+
+  /*
+  ** Repaint the tab bar.
+  */
+
+  m_ui.tab->tabBar()->setVisible(false);
+  m_ui.tab->tabBar()->setVisible(true);
 }
 
 void dooble::slot_about_to_hide_main_menu(void)

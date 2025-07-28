@@ -289,6 +289,8 @@ void dooble_tab_bar::prepare_icons(void)
 				  arg(icon_set))));
 
       tool_button->setIconSize(QSize(18, 18));
+      tool_button->setVisible(false); // Force a repaint.
+      tool_button->setVisible(true); // Force a repaint.
     }
 }
 
