@@ -50,7 +50,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-indicator {image: none;}");
 #else
   m_add_tab_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
+    ("QToolButton {border:none; margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}"
      "QToolButton::menu-indicator {image: none;}");
 #endif
@@ -81,9 +81,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_tabs_menu_button->setStyleSheet
-    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
+    ("QToolButton {border: none; margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
+  m_tabs_menu_button->setToolTip(tr("Tabs Menu"));
   m_left_corner_widget = new QFrame(this);
   m_right_corner_widget = new QFrame(this);
   delete m_left_corner_widget->layout();

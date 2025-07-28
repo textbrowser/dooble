@@ -51,7 +51,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_next_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
+    ("QToolButton {border: none; margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
   m_previous_tool_button = new QToolButton(nullptr);
@@ -63,7 +63,7 @@ dooble_tab_bar::dooble_tab_bar(QWidget *parent):QTabBar(parent)
      "QToolButton::menu-button {border: none;}");
 #else
   m_previous_tool_button->setStyleSheet
-    ("QToolButton {margin-bottom: 10px; margin-top: 10px;}"
+    ("QToolButton {border: none; margin-bottom: 10px; margin-top: 10px;}"
      "QToolButton::menu-button {border: none;}");
 #endif
 
