@@ -374,7 +374,6 @@ int main(int argc, char *argv[])
 
   if(bytes.isEmpty())
     {
-      QString dooble_directory(".dooble");
       auto const xdg_config_home
 	(qEnvironmentVariable("XDG_CONFIG_HOME").trimmed());
       auto const xdg_data_home
@@ -382,6 +381,7 @@ int main(int argc, char *argv[])
 
       if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
 	{
+	  QString dooble_directory(".dooble");
 	  auto home_directory(QDir::home());
 
 	  home_directory.mkdir(dooble_directory);

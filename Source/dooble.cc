@@ -4444,7 +4444,6 @@ void dooble::slot_peekaboo_text(const QString &t)
 
       if(error == GPG_ERR_NO_ERROR)
 	{
-	  auto valid_signature = false;
 	  gpgme_data_t ciphertext = NULL;
 	  gpgme_data_t plaintext = NULL;
 
@@ -4473,6 +4472,7 @@ void dooble::slot_peekaboo_text(const QString &t)
 	    {
 	      QByteArray bytes(1024, 0);
 	      QString output("");
+	      auto valid_signature = false;
 	      ssize_t rc = 0;
 
 	      gpgme_data_seek(plaintext, 0, SEEK_SET);

@@ -134,12 +134,12 @@ void dooble_about::compute_self_digest(void)
 
 void dooble_about::compute_self_digest_task(const QString &file_path)
 {
-  QByteArray buffer{4096, 0};
   QCryptographicHash hash{QCryptographicHash::Sha3_512};
   QFile file{file_path};
 
   if(file.open(QIODevice::ReadOnly))
     {
+      QByteArray buffer{4096, 0};
       qint64 rc{0};
 
       while((rc = file.read(buffer.data(), buffer.length())) > 0)
