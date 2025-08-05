@@ -2170,12 +2170,12 @@ void dooble_page::slot_dooble_credentials_authenticated(bool state)
 	  (dooble_settings::has_dooble_credentials());
     }
 
-  m_menu->clear();
+  isVisible() ? m_menu->clear() : (void) 0;
 }
 
 void dooble_page::slot_dooble_credentials_created(void)
 {
-  m_menu->clear();
+  isVisible() ? m_menu->clear() : (void) 0;
 }
 
 void dooble_page::slot_downloads_finished(void)
