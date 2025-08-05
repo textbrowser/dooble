@@ -332,7 +332,8 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wpointer-arith \
                           -Wstack-protector \
 			  -Wstrict-overflow=1 \
-			  -Wstringop-overflow=4 \
+                          -Wstringop-overflow=4 \
+                          -Wtrampolines \
                           -Wundef \
                           -Wzero-as-null-pointer-constant \
                           -fstack-clash-protection \
