@@ -842,6 +842,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_about_to_hide_main_menu(void)),
 	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
   connect(m_ui.menu_history,
+	  SIGNAL(aboutToHide(void)),
+	  this,
+	  SLOT(slot_history_action_hovered(void)),
+	  Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
+  connect(m_ui.menu_history,
 	  SIGNAL(aboutToShow(void)),
 	  this,
 	  SLOT(slot_about_to_show_history_menu(void)),
@@ -4128,15 +4133,15 @@ void dooble::slot_floating_digital_dialog_timeout(void)
 
 void dooble::slot_history_action_hovered(void)
 {
-  auto action = qobject_cast<QAction *> (sender());
-
-  if(!action)
-    return;
-
   auto page = current_page();
 
   if(page && page->view() && page->view()->page())
-    emit page->view()->page()->linkHovered(action->data().toString());
+    {
+      auto action = qobject_cast<QAction *> (sender());
+
+      emit page->view()->page()->linkHovered
+	(action ? action->data().toString() : "");
+    }
 }
 
 void dooble::slot_history_action_triggered(void)
