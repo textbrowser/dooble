@@ -753,6 +753,7 @@ void dooble::clean(void)
   */
 
   delete s_about;
+  delete s_application;
   delete s_default_web_engine_profile;
 }
 
