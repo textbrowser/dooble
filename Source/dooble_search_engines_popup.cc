@@ -547,7 +547,8 @@ void dooble_search_engines_popup::slot_delete_selected(void)
 
 	if(db.open())
 	  {
-	    std::sort(list.begin(), list.end());
+	    std::sort
+	      (list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
 	    QSqlQuery query(db);
 

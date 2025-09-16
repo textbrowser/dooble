@@ -209,7 +209,7 @@ void dooble_certificate_exceptions::slot_delete_selected(void)
     if(m_ui.table->isRowHidden(list.at(i).row()))
       list.removeAt(i);
 
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   QApplication::restoreOverrideCursor();
 

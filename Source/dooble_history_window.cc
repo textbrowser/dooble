@@ -458,8 +458,9 @@ void dooble_history_window::slot_copy_location(void)
 
 void dooble_history_window::slot_delete_pages(void)
 {
-  auto list(m_ui.table->selectionModel()->
-	    selectedRows(static_cast<int> (TableColumns::FAVORITE)));
+  auto list
+    (m_ui.table->selectionModel()->
+     selectedRows(static_cast<int> (TableColumns::FAVORITE)));
 
   if(list.isEmpty())
     return;
@@ -493,7 +494,7 @@ void dooble_history_window::slot_delete_pages(void)
     favorites_included = true;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
   emit delete_rows(favorites_included, list);
 
   QList<QUrl> urls;
@@ -542,8 +543,9 @@ void dooble_history_window::slot_delete_rows
 
 void dooble_history_window::slot_enter_pressed(void)
 {
-  auto const list(m_ui.table->selectionModel()->
-		  selectedRows(static_cast<int> (TableColumns::FAVORITE)));
+  auto const list
+    (m_ui.table->selectionModel()->
+     selectedRows(static_cast<int> (TableColumns::FAVORITE)));
 
   if(list.isEmpty())
     return;

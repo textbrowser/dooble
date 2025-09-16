@@ -42,6 +42,7 @@ class dooble_ui_utilities
   static Qt::Alignment string_to_alignment(const QString &t);
   static Qt::Orientation string_to_orientation(const QString &t);
   static bool allowed_url_scheme(const QUrl &url);
+  static bool sort_by_row(const QModelIndex &a, const QModelIndex &b);
   static dooble *find_parent_dooble(QWidget *widget);
   static int context_menu_width(QWidget *widget);
   static void center_window_widget(QWidget *parent, QWidget *widget);

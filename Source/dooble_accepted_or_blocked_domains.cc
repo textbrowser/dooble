@@ -920,11 +920,11 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
   auto list{m_ui.table->selectionModel()->selectedRows(1)};
 
-  for(int i{static_cast<int>(list.size()) - 1}; i >= 0; i--)
+  for(int i{static_cast<int> (list.size()) - 1}; i >= 0; i--)
     if(m_ui.table->isRowHidden(list.at(i).row()))
       list.removeAt(i);
 
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   QApplication::restoreOverrideCursor();
 
@@ -968,7 +968,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
 
 	    query.exec("PRAGMA synchronous = OFF");
 
-            for(int i{static_cast<int>(list.size()) - 1}; i >= 0; i--)
+            for(int i{static_cast<int> (list.size()) - 1}; i >= 0; i--)
 	      {
 		query.prepare
 		  ("DELETE FROM dooble_accepted_or_blocked_domains "
@@ -993,7 +993,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected(void)
       QSqlDatabase::removeDatabase(database_name);
     }
   else
-    for(int i{static_cast<int>(list.size()) - 1}; i >= 0; i--)
+    for(int i{static_cast<int> (list.size()) - 1}; i >= 0; i--)
       {
 	m_domains.remove(list.at(i).data().toString());
 	m_ui.table->removeRow(list.at(i).row());
@@ -1033,7 +1033,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -1052,7 +1052,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
 
 	    query.exec("PRAGMA synchronous = OFF");
 
-            for(int i{static_cast<int>(list.size()) - 1}; i >= 0; i--)
+            for(int i{static_cast<int> (list.size()) - 1}; i >= 0; i--)
 	      {
 		query.prepare
 		  ("DELETE FROM dooble_accepted_or_blocked_domains_exceptions "
@@ -1077,7 +1077,7 @@ void dooble_accepted_or_blocked_domains::slot_delete_selected_exceptions(void)
       QSqlDatabase::removeDatabase(database_name);
     }
   else
-    for(int i{static_cast<int>(list.size()) - 1}; i >= 0; i--)
+    for(int i{static_cast<int> (list.size()) - 1}; i >= 0; i--)
       {
 	m_exceptions.remove(list.at(i).data().toString());
 	m_ui.exceptions->removeRow(list.at(i).row());

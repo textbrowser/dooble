@@ -259,7 +259,7 @@ void dooble_favorites_popup::slot_delete_selected(void)
 
   QApplication::processEvents();
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   for(int i = list.size() - 1; i >= 0; i--)
     if(!m_ui.view->isRowHidden(list.at(i).row()))

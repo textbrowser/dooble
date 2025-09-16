@@ -4052,7 +4052,7 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -4141,8 +4141,9 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
 {
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  auto list(m_ui.javascript_block_popups_exceptions->
-	    selectionModel()->selectedRows(1));
+  auto list
+    (m_ui.javascript_block_popups_exceptions->
+     selectionModel()->selectedRows(1));
 
   QApplication::restoreOverrideCursor();
 
@@ -4168,7 +4169,7 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -4256,7 +4257,7 @@ void dooble_settings::slot_remove_selected_javascript_disable(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {
@@ -4341,7 +4342,7 @@ void dooble_settings::slot_remove_selected_user_agents(void)
     }
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  std::sort(list.begin(), list.end());
+  std::sort(list.begin(), list.end(), dooble_ui_utilities::sort_by_row);
 
   if(dooble::s_cryptography && dooble::s_cryptography->authenticated())
     {

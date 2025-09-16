@@ -177,6 +177,12 @@ bool dooble_ui_utilities::allowed_url_scheme(const QUrl &url)
     scheme == "qrc";
 }
 
+bool dooble_ui_utilities::sort_by_row
+(const QModelIndex &a, const QModelIndex &b)
+{
+  return a.row() < b.row();
+}
+
 dooble *dooble_ui_utilities::find_parent_dooble(QWidget *widget)
 {
   if(!widget)
