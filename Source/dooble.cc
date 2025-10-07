@@ -3586,7 +3586,8 @@ void dooble::slot_application_locked(bool state, dooble *d)
 	      page->frame()->setFrameShape(QFrame::StyledPanel);
 	      page->hide_location_frame(page->is_location_frame_user_hidden());
 	      page->hide_status_bar
-		(!dooble_settings::setting("status_bar_visible").toBool());
+		(!dooble_settings::setting("status_bar_visible").toBool() ||
+		 m_is_cute);
 	    }
 
 	  page->view()->setVisible(!locked);
@@ -5205,7 +5206,8 @@ void dooble::slot_show_full_screen(bool state)
       if(page)
 	{
 	  page->hide_status_bar
-	    (!dooble_settings::setting("status_bar_visible").toBool());
+	    (!dooble_settings::setting("status_bar_visible").toBool() ||
+	     m_is_cute);
 	  page->user_hide_location_frame(false);
 	}
 
@@ -5471,7 +5473,7 @@ void dooble::slot_tab_index_changed(int index)
   else if(m_ui.tab->currentWidget() != page)
     {
       page->hide_status_bar
-	(!dooble_settings::setting("status_bar_visible").toBool());
+	(!dooble_settings::setting("status_bar_visible").toBool() || m_is_cute);
       return;
     }
 
@@ -5484,7 +5486,7 @@ void dooble::slot_tab_index_changed(int index)
 	   mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH))));
 
   page->hide_status_bar
-    (!dooble_settings::setting("status_bar_visible").toBool());
+    (!dooble_settings::setting("status_bar_visible").toBool() || m_is_cute);
 
   if(!page->address_widget()->hasFocus())
     page->view()->setFocus();
