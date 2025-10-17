@@ -342,12 +342,13 @@ void dooble_javascript::slot_refresh_others(void)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT url FROM dooble_javascript");
+	query.prepare("SELECT url, OID FROM dooble_javascript");
 
 	if(query.exec())
 	  {
 	    while(query.next())
 	      {
+		auto const oid = query.value(0).toLongLong();
 		auto url(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 		url = dooble::s_cryptography->mac_then_decrypt(url).trimmed();
@@ -356,8 +357,20 @@ void dooble_javascript::slot_refresh_others(void)
 		  {
 		    auto item = new QListWidgetItem(url);
 
-		    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+		    item->setFlags
+		      (Qt::ItemIsEditable |
+		       Qt::ItemIsEnabled |
+		       Qt::ItemIsSelectable);
 		    m_ui.list->addItem(item);
+		  }
+		else
+		  {
+		    QSqlQuery query(db);
+
+		    query.prepare
+		      ("DELETE FROM dooble_javascript WHERE OID = ?");
+		    query.addBindValue(oid);
+		    query.exec();
 		  }
 	      }
 
@@ -402,10 +415,9 @@ void dooble_javascript::slot_save(void)
 	  ("INSERT OR REPLACE INTO dooble_javascript "
 	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
 
-	QByteArray bytes;
-
-	bytes = dooble::s_cryptography->encrypt_then_mac
+	auto bytes = dooble::s_cryptography->encrypt_then_mac
 	  (m_ui.text->toPlainText().trimmed().toUtf8()).toBase64();
+
 	query.addBindValue(bytes);
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (m_page->url().host().toUtf8());
@@ -433,7 +445,8 @@ void dooble_javascript::slot_save_others(void)
 
   if(!dooble::s_cryptography ||
      !dooble::s_cryptography->authenticated() ||
-     !item)
+     !item ||
+     item->text().trimmed().isEmpty())
     return;
 
   auto const database_name(dooble_database_utilities::database_name());
@@ -457,10 +470,9 @@ void dooble_javascript::slot_save_others(void)
 	  ("INSERT OR REPLACE INTO dooble_javascript "
 	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
 
-	QByteArray bytes;
-
-	bytes = dooble::s_cryptography->encrypt_then_mac
+	auto bytes = dooble::s_cryptography->encrypt_then_mac
 	  (m_ui.edit->toPlainText().trimmed().toUtf8()).toBase64();
+
 	query.addBindValue(bytes);
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (item->text().trimmed().toUtf8());
