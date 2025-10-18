@@ -361,7 +361,7 @@ void dooble_javascript::slot_refresh_others(void)
 	  {
 	    while(query.next())
 	      {
-		auto const oid = query.value(0).toLongLong();
+		auto const oid = query.value(1).toLongLong();
 		auto url(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 		url = dooble::s_cryptography->mac_then_decrypt(url).trimmed();
