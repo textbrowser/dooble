@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QCryptographicHash>
 #include <QDir>
 #include <QPushButton>
 #include <QShortcut>
@@ -84,6 +85,35 @@ dooble_javascript::dooble_javascript(QWidget *parent):QDialog(parent)
   setModal(false);
 }
 
+void dooble_javascript::execute(const QString &t)
+{
+  if(!m_page)
+    return;
+
+  auto const text(t.trimmed());
+
+  if(text.isEmpty())
+    {
+      m_page->scripts().clear();
+      return;
+    }
+
+  m_page->runJavaScript(text, QWebEngineScript::ApplicationWorld);
+
+  QWebEngineScript script;
+
+  script.setInjectionPoint(QWebEngineScript::Deferred);
+  script.setName
+    (QCryptographicHash::
+     hash(text.toUtf8(), QCryptographicHash::Keccak_512).toBase64() +
+     m_page->url().host());
+  script.setRunsOnSubFrames(true);
+  script.setSourceCode(text);
+  script.setWorldId(QWebEngineScript::ApplicationWorld);
+  m_page->scripts().remove(script);
+  m_page->scripts().insert(script);
+}
+
 void dooble_javascript::load(const QUrl &url)
 {
   m_page ? m_page->scripts().clear() : (void) 0;
@@ -109,19 +139,21 @@ void dooble_javascript::load(const QUrl &url)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
+	  ("SELECT javascript FROM dooble_javascript WHERE "
+	   "url_digest IN (?, ?)");
+	query.addBindValue
+	  (dooble::s_cryptography->hmac(QByteArray("*")).toBase64());
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.host()).toBase64());
 
-	if(query.exec() && query.next())
-	  {
-	    auto javascript
-	      (QByteArray::fromBase64(query.value(0).toByteArray()));
+	if(query.exec())
+	  while(query.next())
+	    {
+	      auto javascript
+		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
-	    javascript = dooble::s_cryptography->mac_then_decrypt(javascript);
-	    m_ui.text->setPlainText(javascript.trimmed());
-	    slot_execute();
-	  }
+	      execute(dooble::s_cryptography->mac_then_decrypt(javascript));
+	    }
       }
 
     db.close();
@@ -228,26 +260,7 @@ void dooble_javascript::slot_delete_others(void)
 
 void dooble_javascript::slot_execute(void)
 {
-  if(m_page == nullptr)
-    return;
-  else if(m_ui.text->toPlainText().trimmed().isEmpty())
-    {
-      m_page->scripts().clear();
-      return;
-    }
-
-  m_page->runJavaScript
-    (m_ui.text->toPlainText(), QWebEngineScript::ApplicationWorld);
-
-  QWebEngineScript script;
-
-  script.setInjectionPoint(QWebEngineScript::Deferred);
-  script.setName(m_page->url().host());
-  script.setRunsOnSubFrames(true);
-  script.setSourceCode(m_ui.text->toPlainText().trimmed());
-  script.setWorldId(QWebEngineScript::ApplicationWorld);
-  m_page->scripts().remove(script);
-  m_page->scripts().insert(script);
+  execute(m_ui.text->toPlainText());
 }
 
 void dooble_javascript::slot_javascript_scripts_cleared(void)

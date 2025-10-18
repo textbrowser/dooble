@@ -48,6 +48,7 @@ class dooble_javascript: public QDialog
  private:
   QPointer<dooble_web_engine_page> m_page;
   Ui_dooble_javascript m_ui;
+  void execute(const QString &t);
 
  private slots:
   void slot_delete_others(void);
