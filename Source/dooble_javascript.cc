@@ -149,7 +149,7 @@ void dooble_javascript::load(const QUrl &url)
 	if(query.exec())
 	  while(query.next())
 	    {
-	      auto javascript
+	      auto const javascript
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	      execute(dooble::s_cryptography->mac_then_decrypt(javascript));
