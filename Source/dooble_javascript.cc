@@ -301,9 +301,8 @@ void dooble_javascript::slot_item_selection_changed(void)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT javascript FROM dooble_javascript WHERE url_digest = ?");
-	query.addBindValue
-	  (dooble::s_cryptography->hmac(item->text()).toBase64());
+	  ("SELECT javascript FROM dooble_javascript WHERE OID = ?");
+	query.addBindValue(item->data(Qt::UserRole).toLongLong());
 
 	if(query.exec() && query.next())
 	  {
@@ -418,19 +417,27 @@ void dooble_javascript::slot_save(void)
     if(db.open())
       {
 	QSqlQuery query(db);
+	auto const text(m_ui.text->toPlainText().trimmed().toUtf8());
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_javascript ("
 		   "javascript TEXT NOT NULL, "
+		   "javascript_digest TEXT NOT NULL, "
 		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL)");
+		   "url_digest TEXT NOT NULL, "
+		   "PRIMARY KEY (javascript_digest, url_digest))");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_javascript "
-	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
+	   "(javascript, javascript_digest, url, url_digest) "
+	   "VALUES (?, ?, ?, ?)");
 
-	auto bytes = dooble::s_cryptography->encrypt_then_mac
-	  (m_ui.text->toPlainText().trimmed().toUtf8()).toBase64();
+	auto bytes = dooble::s_cryptography->encrypt_then_mac(text);
 
-	query.addBindValue(bytes);
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	query.addBindValue(dooble::s_cryptography->hmac(text).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (m_page->url().host().toUtf8());
 
@@ -473,19 +480,27 @@ void dooble_javascript::slot_save_others(void)
     if(db.open())
       {
 	QSqlQuery query(db);
+	auto const text(m_ui.edit->toPlainText().trimmed().toUtf8());
 
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_javascript ("
 		   "javascript TEXT NOT NULL, "
+		   "javascript_digest TEXT NOT NULL, "
 		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL)");
+		   "url_digest TEXT NOT NULL, "
+		   "PRIMARY KEY (javascript_digest, url_digest))");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_javascript "
-	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
+	   "(javascript, javascript_digest, url, url_digest) "
+	   "VALUES (?, ?, ?, ?)");
 
-	auto bytes = dooble::s_cryptography->encrypt_then_mac
-	  (m_ui.edit->toPlainText().trimmed().toUtf8()).toBase64();
+	auto bytes = dooble::s_cryptography->encrypt_then_mac(text);
 
-	query.addBindValue(bytes);
+	if(!bytes.isEmpty())
+	  query.addBindValue(bytes.toBase64());
+	else
+	  goto done_label;
+
+	query.addBindValue(dooble::s_cryptography->hmac(text).toBase64());
 	bytes = dooble::s_cryptography->encrypt_then_mac
 	  (item->text().trimmed().toUtf8());
 
