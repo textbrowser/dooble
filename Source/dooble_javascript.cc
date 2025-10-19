@@ -241,11 +241,8 @@ void dooble_javascript::slot_delete_others(void)
 
 	for(int i = list.size() - 1; i >= 0; i--)
 	  {
-	    query.prepare("DELETE FROM dooble_javascript WHERE url = ?");
-	    query.addBindValue
-	      (dooble::s_cryptography->
-	       encrypt_then_mac(list.at(i).data().toString().toUtf8()).
-	       toBase64());
+	    query.prepare("DELETE FROM dooble_javascript WHERE OID = ?");
+	    query.addBindValue(list.at(i).data(Qt::UserRole));
 
 	    if(query.exec())
 	      delete m_ui.list->takeItem(list.at(i).row());
@@ -371,6 +368,7 @@ void dooble_javascript::slot_refresh_others(void)
 		  {
 		    auto item = new QListWidgetItem(url);
 
+		    item->setData(Qt::UserRole, oid);
 		    item->setFlags
 		      (Qt::ItemIsEditable |
 		       Qt::ItemIsEnabled |
@@ -424,7 +422,7 @@ void dooble_javascript::slot_save(void)
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_javascript ("
 		   "javascript TEXT NOT NULL, "
 		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL PRIMARY KEY)");
+		   "url_digest TEXT NOT NULL)");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_javascript "
 	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
@@ -479,7 +477,7 @@ void dooble_javascript::slot_save_others(void)
 	query.exec("CREATE TABLE IF NOT EXISTS dooble_javascript ("
 		   "javascript TEXT NOT NULL, "
 		   "url TEXT NOT NULL, "
-		   "url_digest TEXT NOT NULL PRIMARY KEY)");
+		   "url_digest TEXT NOT NULL)");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_javascript "
 	   "(javascript, url, url_digest) VALUES (?, ?, ?)");
