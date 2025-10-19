@@ -30,6 +30,7 @@
 #include <QPushButton>
 #include <QShortcut>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QWebEngineProfile>
 #include <QWebEngineScriptCollection>
 
@@ -179,6 +180,34 @@ void dooble_javascript::purge(void)
 	QSqlQuery query(db);
 
 	query.exec("DELETE FROM dooble_javascript");
+      }
+
+    db.close();
+  }
+
+  QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_javascript::remove_table(void)
+{
+  auto const database_name(dooble_database_utilities::database_name());
+
+  {
+    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
+
+    db.setDatabaseName(dooble_settings::setting("home_path").toString() +
+		       QDir::separator() +
+		       "dooble_javascript.db");
+
+    if(db.open())
+      {
+	auto const record(db.record("dooble_javascript"));
+
+	if(!(record.indexOf("javascript_digest") >= 0))
+	  QFile::remove
+	    (dooble_settings::setting("home_path").toString() +
+	     QDir::separator() +
+	     "dooble_javascript.db");
       }
 
     db.close();
@@ -405,6 +434,8 @@ void dooble_javascript::slot_save(void)
      !m_page)
     return;
 
+  remove_table();
+
   auto const database_name(dooble_database_utilities::database_name());
 
   {
@@ -467,6 +498,8 @@ void dooble_javascript::slot_save_others(void)
      !item ||
      item->text().trimmed().isEmpty())
     return;
+
+  remove_table();
 
   auto const database_name(dooble_database_utilities::database_name());
 
