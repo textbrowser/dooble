@@ -153,6 +153,7 @@ void dooble_javascript::load(const QUrl &url)
 		(QByteArray::fromBase64(query.value(0).toByteArray()));
 
 	      execute(dooble::s_cryptography->mac_then_decrypt(javascript));
+	      m_ui.text->setPlainText(javascript);
 	    }
       }
 
