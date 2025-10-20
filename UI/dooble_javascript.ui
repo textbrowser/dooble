@@ -79,7 +79,10 @@
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>An asterisk may set as a host.</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;An &lt;span style=&quot; font-weight:600;&quot;&gt;asterisk&lt;/span&gt; may be set as a host. An entry may be edited by first &lt;span style=&quot; font-weight:600;&quot;&gt;double-clicking&lt;/span&gt; it. The &lt;span style=&quot; font-weight:600;&quot;&gt;primary key&lt;/span&gt; of the database entries in the &lt;span style=&quot; font-weight:600;&quot;&gt;pair (JavaScript Digest, URL Digest)&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
