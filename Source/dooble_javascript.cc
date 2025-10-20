@@ -156,6 +156,14 @@ void dooble_javascript::load(const QUrl &url)
 	      execute(dooble::s_cryptography->mac_then_decrypt(javascript));
 	      m_ui.text->setPlainText(javascript);
 	    }
+
+	if(m_page)
+	  {
+	    m_ui.url->setText
+	      (QString("%1 (%2 Script(s))").
+	       arg(url.toString()).arg(m_page->scripts().count()));
+	    m_ui.url->setCursorPosition(0);
+	  }
       }
 
     db.close();
