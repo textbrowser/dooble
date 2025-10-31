@@ -549,7 +549,7 @@ QString dooble_settings::use_material_icons(void)
 
 QString dooble_settings::user_agent(const QUrl &url)
 {
-  return s_user_agents.value(url.host(), s_http_user_agent);
+  return s_user_agents.value(url.host(), setting("user_agent").toString());
 }
 
 QString dooble_settings::zoom_frame_location_string(int index)
@@ -574,8 +574,8 @@ QVariant dooble_settings::getenv(const QString &n)
   return s_getenv.value(name);
 }
 
-QVariant dooble_settings::setting(const QString &k,
-				  const QVariant &default_value)
+QVariant dooble_settings::setting
+(const QString &k, const QVariant &default_value)
 {
   QReadLocker locker(&s_settings_mutex);
   auto const key(k.toLower().trimmed());
@@ -623,11 +623,9 @@ QVariant dooble_settings::setting(const QString &k,
     }
 
   if(key == "add_tab_behavior_index")
-    return qBound
-      (0, s_settings.value(key, default_value).toInt(), 1);
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
   else if(key == "address_widget_completer_mode_index")
-    return qBound
-      (0, s_settings.value(key, default_value).toInt(), 1);
+    return qBound(0, s_settings.value(key, default_value).toInt(), 1);
   else if(key == "authentication_iteration_count")
     return qBound
       (15000, s_settings.value(key, default_value).toInt(), 999999999);
@@ -641,8 +639,8 @@ QVariant dooble_settings::setting(const QString &k,
     return qBound(0, s_settings.value(key, default_value).toInt(), 1);
   else if(key == "cookie_policy_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 2);
-  else if(key == "dooble_accepted_or_blocked_domains_"
-	          "maximum_session_rejections")
+  else if(key ==
+	  "dooble_accepted_or_blocked_domains_maximum_session_rejections")
     return qBound(1, s_settings.value(key, default_value).toInt(), 1000000);
   else if(key == "favorites_sort_index")
     return qBound(0, s_settings.value(key, default_value).toInt(), 2);
@@ -1898,6 +1896,8 @@ void dooble_settings::restore(bool read_database)
   m_ui.features_permissions_groupbox->setChecked
     (s_settings.value("features_permissions", true).toBool());
   m_ui.full_screen->setChecked(s_settings.value("full_screen", true).toBool());
+  m_ui.global_user_agent->setText
+    (s_settings.value("user_agent", s_http_user_agent).toString().trimmed());
   m_ui.hash->setCurrentIndex
     (qBound(0,
 	    s_settings.value("hash_type_index", 1).toInt(), // SHA3-512
@@ -2016,7 +2016,7 @@ void dooble_settings::restore(bool read_database)
 	    s_settings.value("theme_color_index", 2).toInt(),
 	    m_ui.theme->count() - 1));
 #else
-    m_ui.theme->setCurrentIndex(2); // Default
+  m_ui.theme->setCurrentIndex(2); // Default
 #endif
   m_ui.web_plugins->setChecked(s_settings.value("web_plugins", false).toBool());
   m_ui.webgl->setChecked(s_settings.value("webgl", true).toBool());
@@ -2959,6 +2959,7 @@ void dooble_settings::slot_apply(void)
   set_setting
     ("features_permissions", m_ui.features_permissions_groupbox->isChecked());
   set_setting("full_screen", m_ui.full_screen->isChecked());
+  set_setting("user_agent", m_ui.global_user_agent->text().trimmed());
 
   if(m_ui.home_url->text().trimmed().isEmpty())
     set_setting("home_url", QUrl());
