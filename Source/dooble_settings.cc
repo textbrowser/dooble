@@ -1898,6 +1898,7 @@ void dooble_settings::restore(bool read_database)
   m_ui.full_screen->setChecked(s_settings.value("full_screen", true).toBool());
   m_ui.global_user_agent->setText
     (s_settings.value("user_agent", s_http_user_agent).toString().trimmed());
+  m_ui.global_user_agent->setCursorPosition(0);
   m_ui.hash->setCurrentIndex
     (qBound(0,
 	    s_settings.value("hash_type_index", 1).toInt(), // SHA3-512
