@@ -78,6 +78,28 @@ QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
   return encrypted;
 }
 
+void dooble_xchacha20::quarter_round
+(uint32_t &a, uint32_t &b, uint32_t &c, uint32_t &d)
+{
+  a += b;
+  d ^= a;
+  rotate(d, 16);
+  c += d;
+  b ^= c;
+  rotate(b, 12);
+  a += b;
+  d ^= a;
+  rotate(d, 8);
+  c += d;
+  b ^= c;
+  rotate(b, 7);
+}
+
+void dooble_xchacha20::rotate(uint32_t &x, const uint32_t n)
+{
+  x = (x << n) | (x >> (32 - n));
+}
+
 void dooble_xchacha20::set_key(const QByteArray &key)
 {
 #ifdef DOOBLE_MMAN_PRESENT

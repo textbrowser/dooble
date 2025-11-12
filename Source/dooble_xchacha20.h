@@ -42,6 +42,8 @@ class dooble_xchacha20
  private:
   QByteArray m_key;
   int m_key_length;
+  static void quarter_round(uint32_t &a, uint32_t &b, uint32_t &c, uint32_t &d);
+  static void rotate(uint32_t &x, const uint32_t n);
 };
 
 #endif
