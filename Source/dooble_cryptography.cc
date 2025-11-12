@@ -39,6 +39,7 @@ extern "C"
 #include "dooble_hmac.h"
 #include "dooble_random.h"
 #include "dooble_threefish256.h"
+#include "dooble_xchacha20.h"
 
 int dooble_cryptography::s_authentication_key_length = 64;
 int dooble_cryptography::s_encryption_key_length = 32;
@@ -46,13 +47,13 @@ int dooble_cryptography::s_encryption_key_length = 32;
 dooble_cryptography::dooble_cryptography
 (const QByteArray &authentication_key,
  const QByteArray &encryption_key,
- const QString &block_cipher_type,
+ const QString &cipher_type,
  const QString &hash_type):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = authentication_key;
-  m_block_cipher_type = block_cipher_type.toLower().trimmed();
+  m_cipher_type = cipher_type.toLower().trimmed();
   m_encryption_key = encryption_key;
 
   if(hash_type.toLower().trimmed() == "keccak-512")
@@ -78,14 +79,14 @@ dooble_cryptography::dooble_cryptography
 #endif
 }
 
-dooble_cryptography::dooble_cryptography(const QString &block_cipher_type,
+dooble_cryptography::dooble_cryptography(const QString &cipher_type,
 					 const QString &hash_type):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = dooble_random::random_bytes
     (s_authentication_key_length);
-  m_block_cipher_type = block_cipher_type.toLower().trimmed();
+  m_cipher_type = cipher_type.toLower().trimmed();
   m_encryption_key = dooble_random::random_bytes(s_encryption_key_length);
 
   if(hash_type.toLower().trimmed() == "keccak-512")
@@ -120,18 +121,24 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 
   QByteArray bytes;
 
-  if(m_block_cipher_type == "aes-256")
+  if(m_cipher_type == "aes-256")
     {
       dooble_aes256 aes(m_encryption_key);
 
       bytes = aes.encrypt(data);
     }
-  else
+  else if(m_cipher_type == "threefish-256")
     {
       dooble_threefish256 threefish(m_encryption_key);
 
       threefish.set_tweak("76543210fedcba98", nullptr);
       bytes = threefish.encrypt(data);
+    }
+  else
+    {
+      dooble_xchacha20 xchacha20(m_encryption_key);
+
+      bytes = xchacha20.encrypt(data);
     }
 
   if(!bytes.isEmpty())
@@ -187,14 +194,14 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
   if(!computed_mac.isEmpty() && !mac.isEmpty() &&
      dooble_cryptography::memcmp(computed_mac, mac))
     {
-      if(m_block_cipher_type == "aes-256")
+      if(m_cipher_type == "aes-256")
 	{
 	  dooble_aes256 aes(m_encryption_key);
 
 	  return aes.decrypt
 	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 	}
-      else
+      else if(m_cipher_type == "threefish-256")
 	{
 	  dooble_threefish256 threefish(m_encryption_key);
 
@@ -280,10 +287,10 @@ void dooble_cryptography::set_authenticated(bool state)
   m_authenticated = state;
 }
 
-void dooble_cryptography::set_block_cipher_type
-(const QString &block_cipher_type_index)
+void dooble_cryptography::set_cipher_type
+(const QString &cipher_type_index)
 {
-  m_block_cipher_type = block_cipher_type_index.toLower().trimmed();
+  m_cipher_type = cipher_type_index.toLower().trimmed();
 }
 
 void dooble_cryptography::set_hash_type(const QString &hash_type)

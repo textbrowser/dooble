@@ -217,16 +217,16 @@ QByteArray dooble_aes256::decrypt(const QByteArray &data)
   if(decrypted.isEmpty())
     return decrypted;
 
-  QByteArray originalLength;
+  QByteArray original_length;
 
   if(decrypted.length() > static_cast<int> (sizeof(int)))
-    originalLength = decrypted.mid
+    original_length = decrypted.mid
       (decrypted.length() - static_cast<int> (sizeof(int)),
        static_cast<int> (sizeof(int)));
 
-  if(!originalLength.isEmpty())
+  if(!original_length.isEmpty())
     {
-      QDataStream in(&originalLength, QIODevice::ReadOnly);
+      QDataStream in(&original_length, QIODevice::ReadOnly);
       int s = 0;
 
       in >> s;
@@ -331,8 +331,8 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
        static_cast<int> (qCeil(static_cast<qreal> (plaintext.length()) /
 			       static_cast<qreal> (m_block_length)) + 1), 0);
 
-  QByteArray originalLength;
-  QDataStream out(&originalLength, QIODevice::WriteOnly);
+  QByteArray original_length;
+  QDataStream out(&original_length, QIODevice::WriteOnly);
 
   out << static_cast<int> (data.length());
 
@@ -342,7 +342,7 @@ QByteArray dooble_aes256::encrypt(const QByteArray &data)
   plaintext.replace
     (plaintext.length() - static_cast<int> (sizeof(int)),
      static_cast<int> (sizeof(int)),
-     originalLength);
+     original_length);
 
   auto const iterations = plaintext.length() / m_block_length;
 

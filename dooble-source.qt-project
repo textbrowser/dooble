@@ -124,7 +124,8 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_ui_utilities.cc \
 		  Source/dooble_web_engine_url_request_interceptor.cc \
                   Source/dooble_web_engine_page.cc \
-                  Source/dooble_web_engine_view.cc
+                  Source/dooble_web_engine_view.cc \
+		  Source/dooble_xchacha20.cc \
 
 TRANSLATIONS    = Translations/dooble_ae.ts \
                   Translations/dooble_af.ts \

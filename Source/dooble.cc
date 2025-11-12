@@ -4388,7 +4388,7 @@ void dooble::slot_pbkdf2_future_finished(void)
 
       /*
       ** list[0] - Keys
-      ** list[1] - Block Cipher Type
+      ** list[1] - Cipher Type
       ** list[2] - Hash Type
       ** list[3] - Iteration Count
       ** list[4] - Password
@@ -4400,9 +4400,11 @@ void dooble::slot_pbkdf2_future_finished(void)
 	  s_cryptography->set_authenticated(true);
 
 	  if(list.at(1).toInt() == 0)
-	    s_cryptography->set_block_cipher_type("AES-256");
+	    s_cryptography->set_cipher_type("AES-256");
+	  else if(list.at(1).toInt() == 1)
+	    s_cryptography->set_cipher_type("Threefish-256");
 	  else
-	    s_cryptography->set_block_cipher_type("Threefish-256");
+	    s_cryptography->set_cipher_type("XChaCha20-Poly1305");
 
 	  if(list.at(2).toInt() == 0)
 	    s_cryptography->set_hash_type("Keccak-512");

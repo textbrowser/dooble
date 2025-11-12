@@ -47,9 +47,9 @@ class dooble_cryptography: public QObject
   static int s_encryption_key_length;
   dooble_cryptography(const QByteArray &authentication_key,
 		      const QByteArray &encryption_key,
-		      const QString &block_cipher_type,
+		      const QString &cipher_type,
 		      const QString &hash_type);
-  dooble_cryptography(const QString &block_cipher_type,
+  dooble_cryptography(const QString &cipher_type,
 		      const QString &hash_type);
   ~dooble_cryptography();
   QByteArray encrypt_then_mac(const QByteArray &data) const;
@@ -66,7 +66,7 @@ class dooble_cryptography: public QObject
 		    const QByteArray &salted_password,
 		    const QString &password);
   void set_authenticated(bool state);
-  void set_block_cipher_type(const QString &block_cipher_type);
+  void set_cipher_type(const QString &cipher_type);
   void set_hash_type(const QString &hash_type);
   void set_keys(const QByteArray &authentication_key,
 		const QByteArray &encryption_key);
@@ -74,7 +74,7 @@ class dooble_cryptography: public QObject
  private:
   QByteArray m_authentication_key;
   QByteArray m_encryption_key;
-  QString m_block_cipher_type;
+  QString m_cipher_type;
   bool m_as_plaintext;
   bool m_authenticated;
   dooble_cryptography::HashTypes m_hash_type;

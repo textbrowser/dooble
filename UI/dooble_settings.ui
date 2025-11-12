@@ -352,7 +352,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-858</y>
+               <y>0</y>
                <width>642</width>
                <height>1360</height>
               </rect>
@@ -1199,8 +1199,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-676</y>
-               <width>682</width>
+               <y>0</y>
+               <width>642</width>
                <height>1157</height>
               </rect>
              </property>
@@ -1308,7 +1308,7 @@
                  <item>
                   <widget class="QLabel" name="label_4">
                    <property name="text">
-                    <string>If you would like Dooble to store your data in authentically-encrypted databases, please prepare your credentials. Please note that the Block Cipher setting is retained for permanent credentials only.</string>
+                    <string>If you would like Dooble to store your data in authentically-encrypted databases, please prepare your credentials. Please note that the Cipher setting is retained for permanent credentials only.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>
@@ -1337,7 +1337,7 @@
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_7">
                      <property name="text">
-                      <string>Block Cipher</string>
+                      <string>Cipher</string>
                      </property>
                     </widget>
                    </item>
@@ -1412,6 +1412,11 @@
                      <item>
                       <property name="text">
                        <string>Threefish-256</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>XChaCha20-Poly1305</string>
                       </property>
                      </item>
                     </widget>
@@ -1819,8 +1824,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-2510</y>
-               <width>642</width>
+               <y>0</y>
+               <width>556</width>
                <height>3042</height>
               </rect>
              </property>
