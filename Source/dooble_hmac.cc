@@ -58,7 +58,7 @@ QByteArray dooble_hmac::sha2_512_hmac(const QByteArray &key,
   */
 
   auto k(key);
-  static auto const block_length = 1024 / CHAR_BIT;
+  static auto const block_length = static_cast<int> (1024 / CHAR_BIT);
 
   if(block_length < k.length())
     k = QCryptographicHash::hash(k, QCryptographicHash::Sha512);
@@ -102,7 +102,7 @@ QByteArray dooble_hmac::sha3_512_hmac(const QByteArray &key,
   */
 
   auto k(key);
-  static auto const block_length = 576 / CHAR_BIT;
+  static auto const block_length = static_cast<int> (576 / CHAR_BIT);
 
   if(block_length < k.length())
     k = QCryptographicHash::hash(k, QCryptographicHash::Sha3_512);
