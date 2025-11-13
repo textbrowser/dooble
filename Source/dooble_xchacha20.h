@@ -37,18 +37,15 @@ class dooble_xchacha20
   ~dooble_xchacha20();
   QByteArray decrypt(const QByteArray &data);
   QByteArray encrypt(const QByteArray &data);
+  static QByteArray hchacha20(const QByteArray &key, const QByteArray &nonce);
+  static uint32_t extract_4_bytes(const QByteArray &bytes, const int offset);
+  static void quarter_round(uint32_t &a, uint32_t &b, uint32_t &c, uint32_t &d);
+  static void rotate(uint32_t &x, const uint32_t n);
   void set_key(const QByteArray &key);
 
  private:
   QByteArray m_key;
-  QVector<uint32_t> m_state;
   int m_key_length;
-  static uint32_t extract_4_bytes(const QByteArray &bytes, const int offset);
-  static void quarter_round
-    (uint32_t &a, uint32_t &b, uint32_t &c, uint32_t &d);
-  static void rotate(uint32_t &x, const uint32_t n);
-  void initialize
-    (const QByteArray &key, const QByteArray &nonce, const uint32_t counter);
 };
 
 #endif

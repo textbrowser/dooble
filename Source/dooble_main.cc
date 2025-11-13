@@ -66,6 +66,7 @@ extern "C"
 #include "dooble_style_sheet.h"
 #include "dooble_threefish256.h"
 #include "dooble_ui_utilities.h"
+#include "dooble_xchacha20.h"
 
 #include <csignal>
 #include <iostream>
@@ -100,6 +101,7 @@ int main(int argc, char *argv[])
   auto test_aes_performance = false;
   auto test_threefish = false;
   auto test_threefish_performance = false;
+  auto test_xchacha20 = false;
   int reload_periodically = -1;
 
   for(int i = 1; i < argc; i++)
@@ -130,6 +132,7 @@ int main(int argc, char *argv[])
 	    qDebug() << " --test-aes-performance";
 	    qDebug() << " --test-threefish";
 	    qDebug() << " --test-threefish-performance";
+	    qDebug() << " --test-xchacha20";
 	    return EXIT_SUCCESS;
 	  }
 	else if(strcmp(argv[i], "--load-url") == 0)
@@ -176,6 +179,8 @@ int main(int argc, char *argv[])
 	  test_threefish = true;
 	else if(strcmp(argv[i], "--test-threefish-performance") == 0)
 	  test_threefish_performance = true;
+	else if(strcmp(argv[i], "--test-xchacha20") == 0)
+	  test_xchacha20 = true;
 	else if(strcmp(argv[i], "-style") == 0)
 	  i += 1;
 	else
@@ -217,6 +222,18 @@ int main(int argc, char *argv[])
 
   if(test_threefish_performance)
     dooble_threefish256::test_performance();
+
+  if(test_xchacha20)
+    {
+      auto const key
+	(QByteArray::fromHex("000102030405060708090"
+			     "a0b0c0d0e0f1011121314"
+			     "15161718191a1b1c1d1e1f"));
+      auto const nonce(QByteArray::fromHex("000000090000004a0000000031415927"));
+
+      qDebug() << dooble_xchacha20::hchacha20(key, nonce).toHex();
+      return EXIT_SUCCESS;
+    }
 
 #ifdef Q_OS_MACOS
   struct rlimit rlim = {0, 0};

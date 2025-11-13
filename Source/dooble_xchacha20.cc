@@ -37,7 +37,8 @@ extern "C"
 #include "dooble_xchacha20.h"
 
 /*
-** Read https://www.rfc-editor.org/rfc/rfc8439.html.
+** Read https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-xchacha and
+** https://www.rfc-editor.org/rfc/rfc8439.
 */
 
 dooble_xchacha20::dooble_xchacha20(const QByteArray &key)
@@ -58,7 +59,6 @@ dooble_xchacha20::dooble_xchacha20(const QByteArray &key)
 dooble_xchacha20::~dooble_xchacha20()
 {
   dooble_cryptography::memzero(m_key);
-  dooble_cryptography::memzero(m_state);
 #ifdef DOOBLE_MMAN_PRESENT
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
 #endif
@@ -82,6 +82,45 @@ QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
   return encrypted;
 }
 
+QByteArray dooble_xchacha20::hchacha20
+(const QByteArray &key, const QByteArray &nonce)
+{
+  QVector<uint32_t> state(16);
+
+  state[0] = 0x61707865;
+  state[1] = 0x3320646e;
+  state[2] = 0x79622d32;
+  state[3] = 0x6b206574;
+  state[4] = extract_4_bytes(key, 0);
+  state[5] = extract_4_bytes(key, 4);
+  state[6] = extract_4_bytes(key, 8);
+  state[7] = extract_4_bytes(key, 12);
+  state[8] = extract_4_bytes(key, 16);
+  state[9] = extract_4_bytes(key, 20);
+  state[10] = extract_4_bytes(key, 24);
+  state[11] = extract_4_bytes(key, 28);
+  state[12] = extract_4_bytes(nonce, 0);
+  state[13] = extract_4_bytes(nonce, 4);
+  state[14] = extract_4_bytes(nonce, 8);
+  state[15] = extract_4_bytes(nonce, 12);
+
+  for(int i = 0; i < 10; i++)
+    {
+      quarter_round(state[0], state[4], state[8], state[12]);
+      quarter_round(state[1], state[5], state[9], state[13]);
+      quarter_round(state[2], state[6], state[10], state[14]);
+      quarter_round(state[3], state[7], state[11], state[15]);
+      quarter_round(state[0], state[5], state[10], state[15]);
+      quarter_round(state[1], state[6], state[11], state[12]);
+      quarter_round(state[2], state[7], state[8], state[13]);
+      quarter_round(state[3], state[4], state[9], state[14]);
+    }
+
+  QByteArray data(32, '0');
+
+  return data;
+}
+
 uint32_t dooble_xchacha20::extract_4_bytes
 (const QByteArray &bytes, const int offset)
 {
@@ -92,29 +131,6 @@ uint32_t dooble_xchacha20::extract_4_bytes
       static_cast<uint32_t> (bytes.at(offset + 3) << 24);
   else
     return static_cast<uint32_t> (0);
-}
-
-void dooble_xchacha20::initialize
-(const QByteArray &key, const QByteArray &nonce, const uint32_t counter)
-{
-  dooble_cryptography::memzero(m_state);
-  m_state.resize(16);
-  m_state[0] = 0x61707865;
-  m_state[1] = 0x3320646e;
-  m_state[2] = 0x79622d32;
-  m_state[3] = 0x6b206574;
-  m_state[4] = extract_4_bytes(key, 0);
-  m_state[5] = extract_4_bytes(key, 4);
-  m_state[6] = extract_4_bytes(key, 8);
-  m_state[7] = extract_4_bytes(key, 12);
-  m_state[8] = extract_4_bytes(key, 16);
-  m_state[9] = extract_4_bytes(key, 20);
-  m_state[10] = extract_4_bytes(key, 24);
-  m_state[11] = extract_4_bytes(key, 28);
-  m_state[12] = counter;
-  m_state[13] = extract_4_bytes(nonce, 0);
-  m_state[14] = extract_4_bytes(nonce, 4);
-  m_state[15] = extract_4_bytes(nonce, 8);
 }
 
 void dooble_xchacha20::quarter_round
