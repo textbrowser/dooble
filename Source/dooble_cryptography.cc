@@ -272,8 +272,8 @@ void dooble_cryptography::authenticate(const QByteArray &salt,
 
 void dooble_cryptography::memzero(QByteArray &bytes)
 {
-  for(auto &&byte : bytes)
-    byte = 0;
+  for(auto &&i : bytes)
+    i = 0;
 }
 
 void dooble_cryptography::memzero(QString &text)

@@ -62,6 +62,13 @@ class dooble_cryptography: public QObject
   static bool memcmp(const QByteArray &a, const QByteArray &b);
   static void memzero(QByteArray &bytes);
   static void memzero(QString &text);
+
+  template<class T> static void memzero(QVector<T> &vector)
+  {
+    for(auto &&i : vector)
+      i = T();
+  }
+
   void authenticate(const QByteArray &salt,
 		    const QByteArray &salted_password,
 		    const QString &password);

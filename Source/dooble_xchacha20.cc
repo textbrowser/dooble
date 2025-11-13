@@ -34,8 +34,11 @@ extern "C"
 
 #include "dooble_cryptography.h"
 #include "dooble_random.h"
-#include "dooble_ui_utilities.h"
 #include "dooble_xchacha20.h"
+
+/*
+** Read https://datatracker.ietf.org/doc/html/draft-arciszewski-xchacha-02.
+*/
 
 dooble_xchacha20::dooble_xchacha20(const QByteArray &key)
 {
@@ -55,6 +58,7 @@ dooble_xchacha20::dooble_xchacha20(const QByteArray &key)
 dooble_xchacha20::~dooble_xchacha20()
 {
   dooble_cryptography::memzero(m_key);
+  dooble_cryptography::memzero(m_state);
 #ifdef DOOBLE_MMAN_PRESENT
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
 #endif
@@ -76,6 +80,41 @@ QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
   QByteArray encrypted;
 
   return encrypted;
+}
+
+uint32_t dooble_xchacha20::extract_4_bytes
+(const QByteArray &bytes, const int offset)
+{
+  if(bytes.length() > offset + 3)
+    return static_cast<uint32_t> (bytes.at(offset)) |
+      static_cast<uint32_t> (bytes.at(offset + 1) << 8) |
+      static_cast<uint32_t> (bytes.at(offset + 2) << 16) |
+      static_cast<uint32_t> (bytes.at(offset + 3) << 24);
+  else
+    return static_cast<uint32_t> (0);
+}
+
+void dooble_xchacha20::initialize
+(const QByteArray &key, const QByteArray &nonce, const uint32_t counter)
+{
+  dooble_cryptography::memzero(m_state);
+  m_state.resize(16);
+  m_state[0] = 0x61707865;
+  m_state[1] = 0x3320646e;
+  m_state[2] = 0x79622d32;
+  m_state[3] = 0x6b206574;
+  m_state[4] = extract_4_bytes(key, 0);
+  m_state[5] = extract_4_bytes(key, 4);
+  m_state[6] = extract_4_bytes(key, 8);
+  m_state[7] = extract_4_bytes(key, 12);
+  m_state[8] = extract_4_bytes(key, 16);
+  m_state[9] = extract_4_bytes(key, 20);
+  m_state[10] = extract_4_bytes(key, 24);
+  m_state[11] = extract_4_bytes(key, 28);
+  m_state[12] = counter;
+  m_state[13] = extract_4_bytes(nonce, 0);
+  m_state[14] = extract_4_bytes(nonce, 4);
+  m_state[15] = extract_4_bytes(nonce, 8);
 }
 
 void dooble_xchacha20::quarter_round
