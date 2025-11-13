@@ -37,7 +37,7 @@ extern "C"
 #include "dooble_xchacha20.h"
 
 /*
-** Read https://datatracker.ietf.org/doc/html/draft-arciszewski-xchacha-02.
+** Read https://www.rfc-editor.org/rfc/rfc8439.html.
 */
 
 dooble_xchacha20::dooble_xchacha20(const QByteArray &key)
@@ -85,7 +85,7 @@ QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
 uint32_t dooble_xchacha20::extract_4_bytes
 (const QByteArray &bytes, const int offset)
 {
-  if(bytes.length() > offset + 3)
+  if(bytes.length() > offset + 3 && offset >= 0)
     return static_cast<uint32_t> (bytes.at(offset)) |
       static_cast<uint32_t> (bytes.at(offset + 1) << 8) |
       static_cast<uint32_t> (bytes.at(offset + 2) << 16) |

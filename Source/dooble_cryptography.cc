@@ -126,6 +126,9 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
       dooble_aes256 aes(m_encryption_key);
 
       bytes = aes.encrypt(data);
+
+      if(!bytes.isEmpty())
+	bytes.prepend(hmac(bytes));
     }
   else if(m_cipher_type == "threefish-256")
     {
@@ -133,6 +136,9 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 
       threefish.set_tweak("76543210fedcba98", nullptr);
       bytes = threefish.encrypt(data);
+
+      if(!bytes.isEmpty())
+	bytes.prepend(hmac(bytes));
     }
   else
     {
@@ -140,9 +146,6 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
 
       bytes = xchacha20.encrypt(data);
     }
-
-  if(!bytes.isEmpty())
-    bytes.prepend(hmac(bytes));
 
   return bytes;
 }
@@ -186,29 +189,41 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
   if(m_as_plaintext)
     return data;
 
-  QByteArray computed_mac;
-  auto const mac(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
-
-  computed_mac = hmac(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
-
-  if(!computed_mac.isEmpty() && !mac.isEmpty() &&
-     dooble_cryptography::memcmp(computed_mac, mac))
+  if(m_cipher_type == "aes-256" || m_cipher_type == "threefish-256")
     {
-      if(m_cipher_type == "aes-256")
-	{
-	  dooble_aes256 aes(m_encryption_key);
+      QByteArray computed_mac;
+      auto const mac
+	(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
 
-	  return aes.decrypt
-	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
-	}
-      else if(m_cipher_type == "threefish-256")
-	{
-	  dooble_threefish256 threefish(m_encryption_key);
+      computed_mac = hmac
+	(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
 
-	  threefish.set_tweak("76543210fedcba98", nullptr);
-	  return threefish.decrypt
-	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+      if(!computed_mac.isEmpty() &&
+	 !mac.isEmpty() &&
+	 dooble_cryptography::memcmp(computed_mac, mac))
+	{
+	  if(m_cipher_type == "aes-256")
+	    {
+	      dooble_aes256 aes(m_encryption_key);
+
+	      return aes.decrypt
+		(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+	    }
+	  else
+	    {
+	      dooble_threefish256 threefish(m_encryption_key);
+
+	      threefish.set_tweak("76543210fedcba98", nullptr);
+	      return threefish.decrypt
+		(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+	    }
 	}
+    }
+  else
+    {
+      dooble_xchacha20 xchacha20(m_encryption_key);
+
+      return xchacha20.decrypt(data);
     }
 
   return data;
