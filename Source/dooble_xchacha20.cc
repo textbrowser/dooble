@@ -64,6 +64,18 @@ dooble_xchacha20::~dooble_xchacha20()
 #endif
 }
 
+QByteArray dooble_xchacha20::chacha20_encrypt(const QByteArray &key,
+					      const QByteArray &nonce,
+					      const QByteArray &plaintext,
+					      const uint32_t counter)
+{
+  Q_UNUSED(counter);
+  Q_UNUSED(key);
+  Q_UNUSED(nonce);
+  Q_UNUSED(plaintext);
+  return QByteArray();
+}
+
 QByteArray dooble_xchacha20::decrypt(const QByteArray &data)
 {
   Q_UNUSED(data);
@@ -75,16 +87,25 @@ QByteArray dooble_xchacha20::decrypt(const QByteArray &data)
 
 QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
 {
-  Q_UNUSED(data);
+  /*
+  ** XChaCha20
+  */
 
-  QByteArray encrypted;
+  auto const nonce1(dooble_random::random_bytes(24));
+  auto const nonce2(QByteArray::fromHex("00000000") + nonce1.mid(16));
+  const uint32_t counter = 0;
 
-  return encrypted;
+  return chacha20_encrypt
+    (hchacha20(m_key, nonce1.mid(0, 16)), nonce2, data, counter);
 }
 
 QByteArray dooble_xchacha20::hchacha20
 (const QByteArray &key, const QByteArray &nonce)
 {
+  /*
+  ** HChaCha20
+  */
+
   QVector<uint32_t> state(16);
 
   state[0] = 0x61707865;
@@ -118,6 +139,15 @@ QByteArray dooble_xchacha20::hchacha20
 
   QByteArray data(32, '0');
 
+  infuse_4_bytes(data, 0, state[0]);
+  infuse_4_bytes(data, 4, state[1]);
+  infuse_4_bytes(data, 8, state[2]);
+  infuse_4_bytes(data, 12, state[3]);
+  infuse_4_bytes(data, 16, state[12]);
+  infuse_4_bytes(data, 20, state[13]);
+  infuse_4_bytes(data, 24, state[14]);
+  infuse_4_bytes(data, 28, state[15]);
+  dooble_cryptography::memzero(state);
   return data;
 }
 
@@ -131,6 +161,18 @@ uint32_t dooble_xchacha20::extract_4_bytes
       static_cast<uint32_t> (bytes.at(offset + 3) << 24);
   else
     return static_cast<uint32_t> (0);
+}
+
+void dooble_xchacha20::infuse_4_bytes
+(QByteArray &bytes, const int offset, const uint32_t value)
+{
+  if(bytes.length() > offset + 3 && offset >= 0)
+    {
+      bytes[offset] = value & 0xff;
+      bytes[offset + 1] = (value >> 8) & 0xff;
+      bytes[offset + 2] = (value >> 16) & 0xff;
+      bytes[offset + 3] = (value >> 24) & 0xff;
+    }
 }
 
 void dooble_xchacha20::quarter_round

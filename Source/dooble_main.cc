@@ -229,7 +229,8 @@ int main(int argc, char *argv[])
 	(QByteArray::fromHex("000102030405060708090"
 			     "a0b0c0d0e0f1011121314"
 			     "15161718191a1b1c1d1e1f"));
-      auto const nonce(QByteArray::fromHex("000000090000004a0000000031415927"));
+      auto const nonce
+	(QByteArray::fromHex("000000090000004a0000000031415927"));
 
       qDebug() << dooble_xchacha20::hchacha20(key, nonce).toHex();
       return EXIT_SUCCESS;
