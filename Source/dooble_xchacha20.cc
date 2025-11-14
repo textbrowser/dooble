@@ -32,6 +32,9 @@ extern "C"
 }
 #endif
 
+#include <QtDebug>
+
+#include "dooble_block_cipher.h"
 #include "dooble_cryptography.h"
 #include "dooble_random.h"
 #include "dooble_xchacha20.h"
@@ -64,16 +67,99 @@ dooble_xchacha20::~dooble_xchacha20()
 #endif
 }
 
+QByteArray dooble_xchacha20::chacha20_block
+(const QByteArray &key, const QByteArray &nonce, const uint32_t counter)
+{
+  /*
+  ** ChaCha20 Block
+  */
+
+  QVector<uint32_t> initial_state(16);
+  QVector<uint32_t> state(16);
+
+  state[0] = 0x61707865;
+  state[1] = 0x3320646e;
+  state[2] = 0x79622d32;
+  state[3] = 0x6b206574;
+  state[4] = extract_4_bytes(key, 0);
+  state[5] = extract_4_bytes(key, 4);
+  state[6] = extract_4_bytes(key, 8);
+  state[7] = extract_4_bytes(key, 12);
+  state[8] = extract_4_bytes(key, 16);
+  state[9] = extract_4_bytes(key, 20);
+  state[10] = extract_4_bytes(key, 24);
+  state[11] = extract_4_bytes(key, 28);
+  state[12] = counter;
+  state[13] = extract_4_bytes(nonce, 0);
+  state[14] = extract_4_bytes(nonce, 4);
+  state[15] = extract_4_bytes(nonce, 8);
+
+  for(int i = 0; i < initial_state.size(); i++)
+    initial_state[i] = state[i];
+
+  for(int i = 0; i < 10; i++)
+    {
+      quarter_round(state[0], state[4], state[8], state[12]);
+      quarter_round(state[1], state[5], state[9], state[13]);
+      quarter_round(state[2], state[6], state[10], state[14]);
+      quarter_round(state[3], state[7], state[11], state[15]);
+      quarter_round(state[0], state[5], state[10], state[15]);
+      quarter_round(state[1], state[6], state[11], state[12]);
+      quarter_round(state[2], state[7], state[8], state[13]);
+      quarter_round(state[3], state[4], state[9], state[14]);
+    }
+
+  for(int i = 0; i < initial_state.size(); i++)
+    state[i] += initial_state[i];
+
+  dooble_cryptography::memzero(initial_state);
+
+  QByteArray data(64, '0');
+
+  for(int i = 0; i < state.size(); i++)
+    infuse_4_bytes(data, i * 4, state[i]);
+
+  dooble_cryptography::memzero(state);
+  return data;
+}
+
 QByteArray dooble_xchacha20::chacha20_encrypt(const QByteArray &key,
 					      const QByteArray &nonce,
 					      const QByteArray &plaintext,
 					      const uint32_t counter)
 {
-  Q_UNUSED(counter);
-  Q_UNUSED(key);
-  Q_UNUSED(nonce);
-  Q_UNUSED(plaintext);
-  return QByteArray();
+  QByteArray encrypted;
+
+  for(int i = 0; i <= qFloor(plaintext.length() / 64.0) - 1; i++)
+    {
+      auto const block(plaintext.mid(i * 64, 64));
+      auto const stream(chacha20_block(key, nonce, counter + i));
+
+      encrypted.append(dooble_block_cipher::xor_arrays(block, stream));
+    }
+
+  if(plaintext.length() % 64 != 0)
+    {
+      QByteArray block;
+      auto const i = qFloor(plaintext.length() / 64.0);
+      auto const stream(chacha20_block(key, nonce, counter + i));
+
+      block = plaintext.mid(i * 64, plaintext.length());
+      encrypted.append
+	(dooble_block_cipher::
+	 xor_arrays(block, stream).mid(0, plaintext.length() % 64));
+    }
+
+  return encrypted;
+}
+
+QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
+{
+  Q_UNUSED(data);
+
+  QByteArray decrypted;
+
+  return decrypted;
 }
 
 QByteArray dooble_xchacha20::decrypt(const QByteArray &data)
@@ -85,25 +171,11 @@ QByteArray dooble_xchacha20::decrypt(const QByteArray &data)
   return decrypted;
 }
 
-QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
-{
-  /*
-  ** XChaCha20
-  */
-
-  auto const nonce1(dooble_random::random_bytes(24));
-  auto const nonce2(QByteArray::fromHex("00000000") + nonce1.mid(16));
-  const uint32_t counter = 0;
-
-  return chacha20_encrypt
-    (hchacha20(m_key, nonce1.mid(0, 16)), nonce2, data, counter);
-}
-
-QByteArray dooble_xchacha20::hchacha20
+QByteArray dooble_xchacha20::hchacha20_block
 (const QByteArray &key, const QByteArray &nonce)
 {
   /*
-  ** HChaCha20
+  ** HChaCha20 Block
   */
 
   QVector<uint32_t> state(16);
@@ -149,6 +221,22 @@ QByteArray dooble_xchacha20::hchacha20
   infuse_4_bytes(data, 28, state[15]);
   dooble_cryptography::memzero(state);
   return data;
+}
+
+QByteArray dooble_xchacha20::xchacha20_encrypt
+(const QByteArray &key,
+ const QByteArray &nonce,
+ const QByteArray &plaintext,
+ const uint32_t counter)
+{
+  /*
+  ** XChaCha20 Encrypt
+  */
+
+  auto const chacha20_nonce(QByteArray::fromHex("00000000") + nonce.mid(16));
+  auto const stream(hchacha20_block(key, nonce.mid(0, 16)));
+
+  return chacha20_encrypt(stream, chacha20_nonce, plaintext, counter);
 }
 
 uint32_t dooble_xchacha20::extract_4_bytes

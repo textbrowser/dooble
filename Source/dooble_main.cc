@@ -225,14 +225,120 @@ int main(int argc, char *argv[])
 
   if(test_xchacha20)
     {
-      auto const key
-	(QByteArray::fromHex("000102030405060708090"
-			     "a0b0c0d0e0f1011121314"
-			     "15161718191a1b1c1d1e1f"));
-      auto const nonce
-	(QByteArray::fromHex("000000090000004a0000000031415927"));
+      {
+	// https://www.rfc-editor.org/rfc/rfc8439
 
-      qDebug() << dooble_xchacha20::hchacha20(key, nonce).toHex();
+	auto const key
+	  (QByteArray::fromHex("000102030405060708090"
+			       "a0b0c0d0e0f1011121314"
+			       "15161718191a1b1c1d1e1f"));
+	auto const nonce
+	  (QByteArray::fromHex("000000090000004a00000000"));
+	const uint32_t counter = 1;
+
+	qDebug() << "ChaCha20 Block Computed: "
+		 << dooble_xchacha20::chacha20_block(key, nonce, counter).
+	            toHex()
+		 << ".";
+	qDebug() << "ChaCha20 Block Expected: "
+		 << "\"10f1e7e4d13b5915500fdd1fa32071c4"
+	            "c7d1f4c733c068030422aa9ac3d46c4e"
+	            "d2826446079faa0914c2d705d98b02a2"
+	            "b5129cd1de164eb9cbd083e8a2503c4e\""
+		 << ".";
+      }
+
+      {
+	// https://datatracker.ietf.org/doc/html/rfc8439
+
+	auto const key
+	  (QByteArray::fromHex("000102030405060708090"
+			       "a0b0c0d0e0f1011121314"
+			       "15161718191a1b1c1d1e1f"));
+	auto const nonce
+	  (QByteArray::fromHex("000000000000004a00000000"));
+	auto const plaintext
+	  (QByteArray("Ladies and Gentlemen of the class of '99: "
+		      "If I could offer you only one tip for "
+		      "the future, sunscreen would be it."));
+	const uint32_t counter = 1;
+
+	qDebug() << "ChaCha20 Cipher Computed: "
+		 << dooble_xchacha20::chacha20_encrypt(key,
+						       nonce,
+						       plaintext,
+						       counter).toHex()
+		 << ".";
+	qDebug() << "ChaCha20 Cipher Expected: "
+		 << "\"6e2e359a2568f98041ba0728dd0d6981"
+	            "e97e7aec1d4360c20a27afccfd9fae0b"
+	            "f91b65c5524733ab8f593dabcd62b357"
+	            "1639d624e65152ab8f530c359f0861d8"
+	            "07ca0dbf500d6a6156a38e088a22b65e"
+	            "52bc514d16ccf806818ce91ab7793736"
+	            "5af90bbf74a35be6b40b8eedf2785e42"
+	            "874d\""
+		 << ".";
+      }
+
+      {
+	// https://datatracker.ietf.org/doc/html/draft-arciszewski-xchacha-03
+
+	auto const key
+	  (QByteArray::fromHex("000102030405060708090"
+			       "a0b0c0d0e0f1011121314"
+			       "15161718191a1b1c1d1e1f"));
+	auto const nonce
+	  (QByteArray::fromHex("000000090000004a0000000031415927"));
+
+	qDebug() << "HChaCha20 Block Computed: "
+		 << dooble_xchacha20::hchacha20_block(key, nonce).toHex()
+		 << ".";
+	qDebug() << "HChaCha20 Block Expected: "
+		 << "\"82413b4227b27bfed30e42508a877d73"
+	            "a0f9e4d58a74a853c12ec41326d3ecdc\""
+		 << ".";
+      }
+
+      {
+	// https://datatracker.ietf.org/doc/html/draft-arciszewski-xchacha-03
+
+	auto const key
+	  (QByteArray::fromHex("808182838485868788898"
+			       "a8b8c8d8e8f9091929394"
+			       "95969798999a9b9c9d9e9f"));
+	auto const nonce
+	  (QByteArray::fromHex("404142434445464748494a4b"
+			       "4c4d4e4f5051525354555658"));
+	auto const plaintext
+	  (QByteArray::fromHex("5468652064686f6c65202870726f6e6f756"
+			       "e6365642022646f6c65222920697320616c"
+			       "736f206b6e6f776e2061732074686520417"
+			       "369617469632077696c6420646f672c2072"
+			       "656420646f672c20616e642077686973746"
+			       "c696e6720646f672e204974206973206162"
+			       "6f7574207468652073697a65206f6620612"
+			       "04765726d616e2073686570686572642062"
+			       "7574206c6f6f6b73206d6f7265206c696b6"
+			       "52061206c6f6e672d6c656767656420666f"
+			       "782e205468697320686967686c7920656c7"
+			       "57369766520616e6420736b696c6c656420"
+			       "6a756d70657220697320636c61737369666"
+			       "96564207769746820776f6c7665732c2063"
+			       "6f796f7465732c206a61636b616c732c206"
+			       "16e6420666f78657320696e207468652074"
+			       "61786f6e6f6d69632066616d696c7920436"
+			       "16e696461652e"));
+	const uint32_t counter = 1;
+
+	qDebug() << "XChaCha20 Encrypt: "
+		 << dooble_xchacha20::xchacha20_encrypt(key,
+							nonce,
+							plaintext,
+							counter).toHex()
+		 << ".";
+      }
+
       return EXIT_SUCCESS;
     }
 

@@ -37,10 +37,23 @@ class dooble_xchacha20
   ~dooble_xchacha20();
   QByteArray decrypt(const QByteArray &data);
   QByteArray encrypt(const QByteArray &data);
-  static QByteArray hchacha20(const QByteArray &key, const QByteArray &nonce);
+  static QByteArray chacha20_block(const QByteArray &key,
+				   const QByteArray &nonce,
+				   const uint32_t counter);
+  static QByteArray chacha20_encrypt(const QByteArray &key,
+				     const QByteArray &nonce,
+				     const QByteArray &plaintext,
+				     const uint32_t counter);
+  static QByteArray hchacha20_block(const QByteArray &key,
+				    const QByteArray &nonce);
+  static QByteArray xchacha20_encrypt(const QByteArray &key,
+				      const QByteArray &nonce,
+				      const QByteArray &plaintext,
+				      const uint32_t counter);
   static uint32_t extract_4_bytes(const QByteArray &bytes, const int offset);
-  static void infuse_4_bytes
-    (QByteArray &bytes, const int offset, const uint32_t value);
+  static void infuse_4_bytes(QByteArray &bytes,
+			     const int offset,
+			     const uint32_t value);
   static void quarter_round(uint32_t &a, uint32_t &b, uint32_t &c, uint32_t &d);
   static void rotate(uint32_t &x, const uint32_t n);
   void set_key(const QByteArray &key);
@@ -48,10 +61,6 @@ class dooble_xchacha20
  private:
   QByteArray m_key;
   int m_key_length;
-  static QByteArray chacha20_encrypt(const QByteArray &key,
-				     const QByteArray &nonce,
-				     const QByteArray &plaintext,
-				     const uint32_t counter);
 };
 
 #endif
