@@ -243,16 +243,18 @@ QByteArray dooble_xchacha20::xchacha20_encrypt
 uint32_t dooble_xchacha20::extract_4_bytes
 (const QByteArray &bytes, const int offset)
 {
+  uint32_t value = 0;
+
   if(bytes.length() > offset + 3 && offset >= 0)
-    return static_cast<uint32_t> (bytes.at(offset)) |
-    static_cast<uint32_t> (static_cast<uint8_t> (bytes.at(offset + 1)) << 8) |
-    static_cast<uint32_t> (static_cast<uint8_t> (bytes.at(offset + 2)) << 16) |
-    static_cast<uint32_t> (static_cast<uint8_t> (bytes.at(offset + 3)) << 24);
-  else
     {
-      qDebug() << "Error!";
-      return static_cast<uint32_t> (0);
+      for(int i = 0; i < 4; i++)
+	value |= static_cast<uint32_t>
+	  (static_cast<uint8_t> (bytes[i + offset]) << i * 8);
     }
+  else
+    qDebug() << "Error!";
+
+  return value;
 }
 
 void dooble_xchacha20::infuse_4_bytes
@@ -260,10 +262,8 @@ void dooble_xchacha20::infuse_4_bytes
 {
   if(bytes.length() > offset + 3 && offset >= 0)
     {
-      bytes[offset] = static_cast<char> (value & 0xff);
-      bytes[offset + 1] = static_cast<char> ((value >> 8) & 0xff);
-      bytes[offset + 2] = static_cast<char> ((value >> 16) & 0xff);
-      bytes[offset + 3] = static_cast<char> ((value >> 24) & 0xff);
+      for(int i = 0; i < 4; i++)
+	bytes[i + offset] = static_cast<char> ((value >> i * 8) & 0xff);
     }
   else
     qDebug() << "Error!";

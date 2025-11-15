@@ -228,57 +228,99 @@ int main(int argc, char *argv[])
       {
 	// https://www.rfc-editor.org/rfc/rfc8439
 
-	auto const key
-	  (QByteArray::fromHex("000102030405060708090"
-			       "a0b0c0d0e0f1011121314"
-			       "15161718191a1b1c1d1e1f"));
-	auto const nonce
-	  (QByteArray::fromHex("000000090000004a00000000"));
-	const uint32_t counter = 1;
+	QList<QByteArray> key;
+	QList<QByteArray> nonce;
+	QList<QByteArray> result;
+	const uint32_t counter[] = {1, 2};
 
-	qDebug() << "ChaCha20 Block Computed: "
-		 << dooble_xchacha20::chacha20_block(key, nonce, counter).
-	            toHex()
-		 << ".";
-	qDebug() << "ChaCha20 Block Expected: "
-		 << "\"10f1e7e4d13b5915500fdd1fa32071c4"
-	            "c7d1f4c733c068030422aa9ac3d46c4e"
-	            "d2826446079faa0914c2d705d98b02a2"
-	            "b5129cd1de164eb9cbd083e8a2503c4e\""
-		 << ".";
+	key << QByteArray::fromHex("000102030405060708090"
+				   "a0b0c0d0e0f1011121314"
+				   "15161718191a1b1c1d1e1f");
+	key << QByteArray::fromHex("00ff00000000000000000"
+				   "000000000000000000000"
+				   "0000000000000000000000");
+	nonce << QByteArray::fromHex("000000090000004a00000000");
+	nonce << QByteArray::fromHex("000000000000000000000000");
+	result << QByteArray("10f1e7e4d13b5915500fdd1fa32071c4"
+			     "c7d1f4c733c068030422aa9ac3d46c4e"
+			     "d2826446079faa0914c2d705d98b02a2"
+			     "b5129cd1de164eb9cbd083e8a2503c4e");
+	result << QByteArray("72d54dfbf12ec44b362692df94137f32"
+			     "8fea8da73990265ec1bbbea1ae9af0ca"
+			     "13b25aa26cb4a648cb9b9d1be65b2c09"
+			     "24a66c54d545ec1b7374f4872e99f096");
+
+	for(int i = 0; i < key.size(); i++)
+	  {
+	    qDebug() << "ChaCha20 Block Computed: "
+		     << dooble_xchacha20::chacha20_block(key[i],
+							 nonce[i],
+							 counter[i]).toHex()
+		     << ".";
+	    qDebug() << "ChaCha20 Block Expected: "
+		     << result[i]
+		     << ".";
+	  }
+
       }
 
       {
 	// https://datatracker.ietf.org/doc/html/rfc8439
 
-	auto const key
-	  (QByteArray::fromHex("000102030405060708090"
-			       "a0b0c0d0e0f1011121314"
-			       "15161718191a1b1c1d1e1f"));
-	auto const nonce
-	  (QByteArray::fromHex("000000000000004a00000000"));
-	auto const plaintext
-	  (QByteArray("Ladies and Gentlemen of the class of '99: "
-		      "If I could offer you only one tip for "
-		      "the future, sunscreen would be it."));
-	const uint32_t counter = 1;
+	QList<QByteArray> key;
+	QList<QByteArray> nonce;
+	QList<QByteArray> plaintext;
+	QList<QByteArray> result;
+	const uint32_t counter[] = {1, 42};
 
-	qDebug() << "ChaCha20 Cipher Computed: "
-		 << dooble_xchacha20::chacha20_encrypt(key,
-						       nonce,
-						       plaintext,
-						       counter).toHex()
-		 << ".";
-	qDebug() << "ChaCha20 Cipher Expected: "
-		 << "\"6e2e359a2568f98041ba0728dd0d6981"
-	            "e97e7aec1d4360c20a27afccfd9fae0b"
-	            "f91b65c5524733ab8f593dabcd62b357"
-	            "1639d624e65152ab8f530c359f0861d8"
-	            "07ca0dbf500d6a6156a38e088a22b65e"
-	            "52bc514d16ccf806818ce91ab7793736"
-	            "5af90bbf74a35be6b40b8eedf2785e42"
-	            "874d\""
-		 << ".";
+	key << QByteArray::fromHex("000102030405060708090"
+				   "a0b0c0d0e0f1011121314"
+				   "15161718191a1b1c1d1e1f");
+	key << QByteArray::fromHex("1c9240a5eb55d38af3338"
+				   "88604f6b5f0473917c140"
+				   "2b80099dca5cbc207075c0");
+	nonce << QByteArray::fromHex("000000000000004a00000000");
+	nonce << QByteArray::fromHex("000000000000000000000002");
+	plaintext << QByteArray("Ladies and Gentlemen of the class of '99: "
+				"If I could offer you only one tip for "
+				"the future, sunscreen would be it.");
+	plaintext << QByteArray::fromHex("2754776173206272696c6c69672c2061"
+					 "6e642074686520736c6974687920746f"
+					 "7665730a446964206779726520616e64"
+					 "2067696d626c6520696e207468652077"
+					 "6162653a0a416c6c206d696d73792077"
+					 "6572652074686520626f726f676f7665"
+					 "732c0a416e6420746865206d6f6d6520"
+					 "7261746873206f757467726162652e");
+	result << "6e2e359a2568f98041ba0728dd0d6981"
+	          "e97e7aec1d4360c20a27afccfd9fae0b"
+	          "f91b65c5524733ab8f593dabcd62b357"
+	          "1639d624e65152ab8f530c359f0861d8"
+	          "07ca0dbf500d6a6156a38e088a22b65e"
+	          "52bc514d16ccf806818ce91ab7793736"
+	          "5af90bbf74a35be6b40b8eedf2785e42"
+	          "874d";
+	result << "62e6347f95ed87a45ffae7426f27a1df"
+	          "5fb69110044c0d73118effa95b01e5cf"
+	          "166d3df2d721caf9b21e5fb14c616871"
+	          "fd84c54f9d65b283196c7fe4f60553eb"
+	          "f39c6402c42234e32a356b3e764312a6"
+	          "1a5532055716ead6962568f87d3f3f77"
+	          "04c6a8d1bcd1bf4d50d6154b6da731b1"
+	          "87b58dfd728afa36757a797ac188d1";
+
+	for(int i = 0; i < key.size(); i++)
+	  {
+	    qDebug() << "ChaCha20 Cipher Computed: "
+		     << dooble_xchacha20::chacha20_encrypt(key[i],
+							   nonce[i],
+							   plaintext[i],
+							   counter[i]).toHex()
+		     << ".";
+	    qDebug() << "ChaCha20 Cipher Expected: "
+		     << result[i]
+		     << ".";
+	  }
       }
 
       {
@@ -303,6 +345,17 @@ int main(int argc, char *argv[])
       {
 	// https://datatracker.ietf.org/doc/html/draft-arciszewski-xchacha-03
 
+	QByteArray const result
+	  ("7d0a2e6b7f7c65a236542630294e063b7ab9b555a5d5149aa21e4ae1e4fbce87"
+	   "ecc8e08a8b5e350abe622b2ffa617b202cfad72032a3037e76ffdcdc4376ee05"
+ 	   "3a190d7e46ca1de04144850381b9cb29f051915386b8a710b8ac4d027b8b050f"
+	   "7cba5854e028d564e453b8a968824173fc16488b8970cac828f11ae53cabd201"
+	   "12f87107df24ee6183d2274fe4c8b1485534ef2c5fbc1ec24bfc3663efaa08bc"
+	   "047d29d25043532db8391a8a3d776bf4372a6955827ccb0cdd4af403a7ce4c63"
+	   "d595c75a43e045f0cce1f29c8b93bd65afc5974922f214a40b7c402cdb91ae73"
+	   "c0b63615cdad0480680f16515a7ace9d39236464328a37743ffc28f4ddb324f4"
+	   "d0f5bbdc270c65b1749a6efff1fbaa09536175ccd29fb9e6057b307320d31683"
+	   "8a9c71f70b5b5907a66f7ea49aadc409");
 	auto const key
 	  (QByteArray::fromHex("808182838485868788898"
 			       "a8b8c8d8e8f9091929394"
@@ -331,11 +384,14 @@ int main(int argc, char *argv[])
 			       "16e696461652e"));
 	const uint32_t counter = 1;
 
-	qDebug() << "XChaCha20 Encrypt: "
+	qDebug() << "XChaCha20 Encrypt Computed: "
 		 << dooble_xchacha20::xchacha20_encrypt(key,
 							nonce,
 							plaintext,
 							counter).toHex()
+		 << ".";
+	qDebug() << "XChaCha20 Encrypt Expected: "
+		 << result
 		 << ".";
       }
 
