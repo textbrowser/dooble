@@ -33,6 +33,7 @@ extern "C"
 #endif
 
 #include <QtDebug>
+#include <QtMath>
 
 #include "dooble_block_cipher.h"
 #include "dooble_cryptography.h"
@@ -97,7 +98,7 @@ QByteArray dooble_xchacha20::chacha20_block
   for(int i = 0; i < initial_state.size(); i++)
     initial_state[i] = state[i];
 
-  for(int i = 0; i < 10; i++)
+  for(int i = 1; i <= 10; i++)
     {
       quarter_round(state[0], state[4], state[8], state[12]);
       quarter_round(state[1], state[5], state[9], state[13]);
@@ -244,11 +245,14 @@ uint32_t dooble_xchacha20::extract_4_bytes
 {
   if(bytes.length() > offset + 3 && offset >= 0)
     return static_cast<uint32_t> (bytes.at(offset)) |
-      static_cast<uint32_t> (bytes.at(offset + 1) << 8) |
-      static_cast<uint32_t> (bytes.at(offset + 2) << 16) |
-      static_cast<uint32_t> (bytes.at(offset + 3) << 24);
+    static_cast<uint32_t> (static_cast<uint8_t> (bytes.at(offset + 1)) << 8) |
+    static_cast<uint32_t> (static_cast<uint8_t> (bytes.at(offset + 2)) << 16) |
+    static_cast<uint32_t> (static_cast<uint8_t> (bytes.at(offset + 3)) << 24);
   else
-    return static_cast<uint32_t> (0);
+    {
+      qDebug() << "Error!";
+      return static_cast<uint32_t> (0);
+    }
 }
 
 void dooble_xchacha20::infuse_4_bytes
@@ -256,11 +260,13 @@ void dooble_xchacha20::infuse_4_bytes
 {
   if(bytes.length() > offset + 3 && offset >= 0)
     {
-      bytes[offset] = value & 0xff;
-      bytes[offset + 1] = (value >> 8) & 0xff;
-      bytes[offset + 2] = (value >> 16) & 0xff;
-      bytes[offset + 3] = (value >> 24) & 0xff;
+      bytes[offset] = static_cast<char> (value & 0xff);
+      bytes[offset + 1] = static_cast<char> ((value >> 8) & 0xff);
+      bytes[offset + 2] = static_cast<char> ((value >> 16) & 0xff);
+      bytes[offset + 3] = static_cast<char> ((value >> 24) & 0xff);
     }
+  else
+    qDebug() << "Error!";
 }
 
 void dooble_xchacha20::quarter_round
