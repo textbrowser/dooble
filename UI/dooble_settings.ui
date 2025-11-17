@@ -1416,7 +1416,7 @@
                      </item>
                      <item>
                       <property name="text">
-                       <string>XChaCha20-Poly1305</string>
+                       <string>XChaCha20</string>
                       </property>
                      </item>
                     </widget>
@@ -1825,7 +1825,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>556</width>
+               <width>642</width>
                <height>3042</height>
               </rect>
              </property>

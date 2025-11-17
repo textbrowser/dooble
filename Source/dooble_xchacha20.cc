@@ -41,7 +41,8 @@ extern "C"
 #include "dooble_xchacha20.h"
 
 /*
-** Read https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-xchacha and
+** Read https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-xchacha,
+** https://datatracker.ietf.org/doc/html/rfc7539,
 ** https://www.rfc-editor.org/rfc/rfc8439.
 */
 
