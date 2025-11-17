@@ -394,8 +394,6 @@ int main(int argc, char *argv[])
 		 << result
 		 << ".";
       }
-
-      return EXIT_SUCCESS;
     }
 
 #ifdef Q_OS_MACOS

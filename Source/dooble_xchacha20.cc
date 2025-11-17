@@ -157,11 +157,10 @@ QByteArray dooble_xchacha20::chacha20_encrypt(const QByteArray &key,
 
 QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
 {
-  Q_UNUSED(data);
+  auto const static counter = static_cast<uint32_t> (1);
 
-  QByteArray decrypted;
-
-  return decrypted;
+  return xchacha20_encrypt
+    (m_key, dooble_random::random_bytes(24), data, counter);
 }
 
 QByteArray dooble_xchacha20::decrypt(const QByteArray &data)

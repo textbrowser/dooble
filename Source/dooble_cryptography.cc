@@ -145,6 +145,9 @@ QByteArray dooble_cryptography::encrypt_then_mac(const QByteArray &data) const
       dooble_xchacha20 xchacha20(m_encryption_key);
 
       bytes = xchacha20.encrypt(data);
+
+      if(!bytes.isEmpty())
+	bytes.prepend(hmac(bytes));
     }
 
   return bytes;
