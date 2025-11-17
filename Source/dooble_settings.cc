@@ -2035,7 +2035,7 @@ void dooble_settings::restore(bool read_database)
   else if(m_ui.cipher->currentIndex() == 1)
     s_settings["cipher_type"] = "Threefish-256";
   else
-    s_settings["cipher_type"] = "XChaCha20-Poly1305";
+    s_settings["cipher_type"] = "XChaCha20";
 
   if(m_ui.hash->currentIndex() == 0)
     s_settings["hash_type"] = "Keccak-512";
@@ -3403,7 +3403,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      else if(list.at(1).toInt() == 1)
 		s_settings["cipher_type"] = "Threefish-256";
 	      else
-		s_settings["cipher_type"] = "XChaCha20-Poly1305";
+		s_settings["cipher_type"] = "XChaCha20";
 
 	      if(list.at(2).toInt() == 0)
 		s_settings["hash_type"] = "Keccak-512";
@@ -3440,7 +3440,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 	      else if(list.at(1).toInt() == 1)
 		dooble::s_cryptography->set_cipher_type("Threefish-256");
 	      else
-		dooble::s_cryptography->set_cipher_type("XChaCha20-Poly1305");
+		dooble::s_cryptography->set_cipher_type("XChaCha20");
 
 	      if(list.at(2).toInt() == 0)
 		dooble::s_cryptography->set_hash_type("Keccak-512");

@@ -4404,7 +4404,7 @@ void dooble::slot_pbkdf2_future_finished(void)
 	  else if(list.at(1).toInt() == 1)
 	    s_cryptography->set_cipher_type("Threefish-256");
 	  else
-	    s_cryptography->set_cipher_type("XChaCha20-Poly1305");
+	    s_cryptography->set_cipher_type("XChaCha20");
 
 	  if(list.at(2).toInt() == 0)
 	    s_cryptography->set_hash_type("Keccak-512");
