@@ -41,7 +41,7 @@ dooble_pbkdf2::dooble_pbkdf2
  int iterations_count,
  int output_size):QObject()
 {
-  m_block_cipher_type_index = qBound(0, block_cipher_type_index, 1);
+  m_cipher_type_index = qBound(0, block_cipher_type_index, 2);
   m_hash_type_index = qBound(0, hash_type_index, 1);
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   m_interrupt.store(0);
@@ -173,7 +173,7 @@ QList<QByteArray> dooble_pbkdf2::pbkdf2
     return QList<QByteArray> ();
   else
     return QList<QByteArray> () << bytes
-				<< QByteArray::number(m_block_cipher_type_index)
+				<< QByteArray::number(m_cipher_type_index)
 				<< QByteArray::number(m_hash_type_index)
 				<< QByteArray::number(m_iteration_count)
 				<< m_password
