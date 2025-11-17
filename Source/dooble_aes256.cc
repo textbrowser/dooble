@@ -822,8 +822,7 @@ void dooble_aes256::test1_key_expansion(void)
   dooble_aes256 aes256(key);
 
   for(size_t i = 0; i < 60; i++)
-    if((i >= 8 && i <= 15) ||
-       (i >= 52 && i <= 59))
+    if((i >= 8 && i <= 15) || (i >= 52 && i <= 59))
       {
 	std::cout << "i = " << i << " ";
 
@@ -841,7 +840,9 @@ void dooble_aes256::test_performance(void)
   QElapsedTimer timer;
 
   timer.start();
+
   dooble_aes256 aes256(dooble_random::random_bytes(32));
+
   aes256.decrypt(aes256.encrypt(QByteArray(500000, '1')));
   qDebug() << "AES: " << timer.elapsed() << ".";
 }
