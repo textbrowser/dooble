@@ -146,7 +146,7 @@ QByteArray dooble_xchacha20::chacha20_encrypt(const QByteArray &key,
       auto const i = qFloor(plaintext.length() / 64.0);
       auto const stream(chacha20_block(key, nonce, counter + i));
 
-      block = plaintext.mid(i * 64, plaintext.length());
+      block = plaintext.mid(i * 64);
       encrypted.append
 	(dooble_block_cipher::
 	 xor_arrays(block, stream).mid(0, plaintext.length() % 64));
@@ -157,10 +157,10 @@ QByteArray dooble_xchacha20::chacha20_encrypt(const QByteArray &key,
 
 QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
 {
+  auto const nonce(dooble_random::random_bytes(24));
   auto const static counter = static_cast<uint32_t> (1);
 
-  return xchacha20_encrypt
-    (m_key, dooble_random::random_bytes(24), data, counter);
+  return nonce + xchacha20_encrypt(m_key, nonce, data, counter);
 }
 
 QByteArray dooble_xchacha20::decrypt(const QByteArray &data)
