@@ -142,6 +142,7 @@ dooble_aes256::dooble_aes256(const QByteArray &key):dooble_block_cipher(key)
   m_Nk = 8;
   m_Nr = 14;
   m_block_length = 16; // Or, 128 bits.
+  m_key = key.mid(0, 32);
   m_key_length = 32; // Or, 256 bits.
 
   if(m_key.length() < m_key_length)
@@ -689,7 +690,7 @@ void dooble_aes256::set_key(const QByteArray &key)
   munlock(m_state, 4 * 4 * sizeof(m_state[0][0]));
 #endif
   dooble_cryptography::memzero(m_key);
-  m_key = key;
+  m_key = key.mid(0, 32);
 
   if(m_key.length() < m_key_length)
     m_key.append(m_key_length - m_key.length(), 0);

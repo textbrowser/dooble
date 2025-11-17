@@ -582,6 +582,7 @@ dooble_threefish256::dooble_threefish256(const QByteArray &key):
   dooble_block_cipher(key)
 {
   m_block_length = key.length();
+  m_key = key.mid(0, 32);
   m_key_length = key.length();
 }
 
@@ -781,7 +782,7 @@ void dooble_threefish256::set_key(const QByteArray &key)
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
 #endif
   m_block_length = key.length();
-  m_key = key;
+  m_key = key.mid(0, 32);
   m_key_length = key.length();
 #ifdef DOOBLE_MMAN_PRESENT
   mlock(m_key.constData(), static_cast<size_t> (m_key.length()));

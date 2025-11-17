@@ -224,9 +224,22 @@ QByteArray dooble_cryptography::mac_then_decrypt(const QByteArray &data) const
     }
   else
     {
-      dooble_xchacha20 xchacha20(m_encryption_key);
+      QByteArray computed_mac;
+      auto const mac
+	(data.mid(0, dooble_hmac::preferred_output_size_in_bytes()));
 
-      return xchacha20.decrypt(data);
+      computed_mac = hmac
+	(data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+
+      if(!computed_mac.isEmpty() &&
+	 !mac.isEmpty() &&
+	 dooble_cryptography::memcmp(computed_mac, mac))
+	{
+	  dooble_xchacha20 xchacha20(m_encryption_key);
+
+	  return xchacha20.decrypt
+	    (data.mid(dooble_hmac::preferred_output_size_in_bytes()));
+	}
     }
 
   return data;

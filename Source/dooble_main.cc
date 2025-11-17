@@ -394,6 +394,21 @@ int main(int argc, char *argv[])
 		 << result
 		 << ".";
       }
+
+      {
+	QByteArray ciphertext;
+	auto const
+	  plaintext(QByteArray("If you love Dooble, say so. Creepy."));
+	dooble_xchacha20 xchacha20("This is a wonderful key.");
+
+	ciphertext = xchacha20.encrypt(plaintext);
+	qDebug() << "XChaCha20 Encrypt: "
+		 << ciphertext.toHex()
+		 << ".";
+	qDebug() << "XChaCha20 Decrypt: "
+		 << xchacha20.decrypt(ciphertext)
+		 << ".";
+      }
     }
 
 #ifdef Q_OS_MACOS

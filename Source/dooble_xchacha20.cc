@@ -48,7 +48,7 @@ extern "C"
 
 dooble_xchacha20::dooble_xchacha20(const QByteArray &key)
 {
-  m_key = key;
+  m_key = key.mid(0, 32);
   m_key_length = 32; // Or, 256 bits.
 
   if(m_key.length() < m_key_length)
@@ -165,11 +165,10 @@ QByteArray dooble_xchacha20::encrypt(const QByteArray &data)
 
 QByteArray dooble_xchacha20::decrypt(const QByteArray &data)
 {
-  Q_UNUSED(data);
+  auto const nonce(data.mid(0, 24));
+  auto const static counter = static_cast<uint32_t> (1);
 
-  QByteArray decrypted;
-
-  return decrypted;
+  return xchacha20_encrypt(m_key, nonce, data.mid(24), counter);
 }
 
 QByteArray dooble_xchacha20::hchacha20_block
@@ -297,7 +296,7 @@ void dooble_xchacha20::set_key(const QByteArray &key)
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
 #endif
   dooble_cryptography::memzero(m_key);
-  m_key = key;
+  m_key = key.mid(0, 32);
 
   if(m_key.length() < m_key_length)
     m_key.append(m_key_length - m_key.length(), 0);
