@@ -36,12 +36,12 @@
 dooble_pbkdf2::dooble_pbkdf2
 (const QByteArray &password,
  const QByteArray &salt,
- int block_cipher_type_index,
+ int cipher_type_index,
  int hash_type_index,
  int iterations_count,
  int output_size):QObject()
 {
-  m_cipher_type_index = qBound(0, block_cipher_type_index, 2);
+  m_cipher_type_index = qBound(0, cipher_type_index, 2);
   m_hash_type_index = qBound(0, hash_type_index, 1);
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   m_interrupt.store(0);

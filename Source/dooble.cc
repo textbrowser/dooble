@@ -1105,7 +1105,7 @@ void dooble::initialize_static_members(void)
     {
       if(dooble_settings::setting("credentials_enabled").toBool())
 	s_cryptography = new dooble_cryptography
-	  (dooble_settings::setting("block_cipher_type").toString(),
+	  (dooble_settings::setting("cipher_type").toString(),
 	   dooble_settings::setting("hash_type").toString());
       else
 	s_cryptography = new dooble_cryptography
@@ -3484,7 +3484,7 @@ void dooble::slot_application_locked(bool state, dooble *d)
 			     toByteArray()));
       auto text(ui.password->text());
       dooble_cryptography cryptography
-	(dooble_settings::setting("block_cipher_type").toString(),
+	(dooble_settings::setting("cipher_type").toString(),
 	 dooble_settings::setting("hash_type").toString());
 
       cryptography.authenticate(salt, salted_password, text);
@@ -3688,8 +3688,8 @@ void dooble::slot_authenticate(void)
 
       QApplication::processEvents();
 
-      auto const block_cipher_type_index = dooble_settings::setting
-	("block_cipher_type_index").toInt();
+      auto const cipher_type_index = dooble_settings::setting
+	("cipher_type_index").toInt();
       auto const hash_type_index = dooble_settings::setting
 	("hash_type_index").toInt();
       auto const iteration_count = dooble_settings::setting
@@ -3724,7 +3724,7 @@ void dooble::slot_authenticate(void)
 
 	  pbkdf2.reset(new dooble_pbkdf2(text.toUtf8(),
 					 salt,
-					 block_cipher_type_index,
+					 cipher_type_index,
 					 hash_type_index,
 					 iteration_count,
 					 1024));

@@ -585,7 +585,7 @@ void dooble_accepted_or_blocked_domains::save
 	dooble_cryptography cryptography
           {authentication_key,
 	   encryption_key,
-	   dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("cipher_type").toString(),
            dooble_settings::setting("hash_type").toString()};
 
 	query.exec("PRAGMA synchronous = OFF");

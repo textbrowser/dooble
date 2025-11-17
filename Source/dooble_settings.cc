@@ -1874,10 +1874,21 @@ void dooble_settings::restore(bool read_database)
 	    m_ui.cache_type->count() - 1));
   m_ui.center_child_windows->setChecked
     (s_settings.value("center_child_windows", true).toBool());
-  m_ui.cipher->setCurrentIndex
-    (qBound(0,
-	    s_settings.value("cipher_type_index", 0).toInt(),
-	    m_ui.cipher->count() - 1));
+
+  int index = 0;
+
+  if(s_settings.contains("block_cipher_type_index"))
+    index = qBound
+      (0,
+       s_settings.value("block_cipher_type_index", 0).toInt(),
+       m_ui.cipher->count() - 1);
+  else
+    index = qBound
+      (0,
+       s_settings.value("cipher_type_index", 0).toInt(),
+       m_ui.cipher->count() - 1);
+
+  m_ui.cipher->setCurrentIndex(index);
   m_ui.cookie_policy->setCurrentIndex
     (qBound(0,
 	    s_settings.value("cookie_policy_index", 2).toInt(),
@@ -1957,8 +1968,7 @@ void dooble_settings::restore(bool read_database)
   m_ui.proxy_password->setText(s_settings.value("proxy_password").toString());
   m_ui.proxy_password->setCursorPosition(0);
   m_ui.proxy_port->setValue(s_settings.value("proxy_port", 0).toInt());
-
-  auto const index = s_settings.value("proxy_type_index", 0).toInt(); // None
+  index = s_settings.value("proxy_type_index", 0).toInt(); // None
 
   if(index == 0)
     m_ui.proxy_none->setChecked(true);
@@ -2930,6 +2940,8 @@ void dooble_settings::slot_apply(void)
   }
 
   prepare_proxy(true);
+  remove_setting("block_cipher_type");
+  remove_setting("block_cipher_type_index");
   save_fonts();
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("add_tab_behavior_index", m_ui.add_tab_behavior->currentIndex());

@@ -241,7 +241,7 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
-	   dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("cipher_type").toString(),
 	   dooble_settings::setting("hash_type").toString());
 
 	query.setForwardOnly(true);
@@ -263,15 +263,12 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	      auto last_visited
 		(QByteArray::fromBase64(query.value(1).toByteArray()));
 
-	      last_visited = cryptography.mac_then_decrypt
-		(last_visited);
+	      last_visited = cryptography.mac_then_decrypt(last_visited);
 
 	      if(last_visited.isEmpty())
 		{
 		  dooble_database_utilities::remove_entry
-		    (db,
-		     "dooble_history",
-		     query.value(6).toLongLong());
+		    (db, "dooble_history", query.value(6).toLongLong());
 		  continue;
 		}
 
@@ -406,7 +403,7 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
-	   dooble_settings::setting("block_cipher_type").toString(),
+	   dooble_settings::setting("cipher_type").toString(),
 	   dooble_settings::setting("hash_type").toString());
 
 	query.setForwardOnly(true);
