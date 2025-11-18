@@ -66,8 +66,10 @@ QMap<QString, QVariant> dooble_settings::s_getenv;
 QMap<QString, QVariant> dooble_settings::s_settings;
 QMultiMap<QUrl, QPair<int, bool> > dooble_settings::s_site_features_permissions;
 QReadWriteLock dooble_settings::s_getenv_mutex;
+QReadWriteLock dooble_settings::s_home_path_mutex;
 QReadWriteLock dooble_settings::s_settings_mutex;
 QString dooble_settings::s_http_user_agent;
+QString dooble_settings::s_home_path;
 QStringList dooble_settings::s_spell_checker_dictionaries;
 bool dooble_settings::s_reading_from_canvas_enabled = true;
 
@@ -519,7 +521,129 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   prepare_icons();
   prepare_shortcuts();
   show_qtwebengine_dictionaries_warning_label();
+  set_settings_path();
   slot_password_changed();
+}
+
+QString dooble_settings::prepare_home_path(void)
+{
+  QWriteLocker locker(&s_home_path_mutex);
+
+  if(s_home_path.isEmpty())
+    {
+#if defined(Q_OS_WINDOWS)
+      auto const bytes(qEnvironmentVariable("DOOBLE_HOME").trimmed());
+
+      if(bytes.isEmpty())
+	{
+	  QString dooble_directory(".dooble");
+	  auto const username
+	    (qEnvironmentVariable("USERNAME").mid(0, 128).trimmed());
+	  auto home_directory(QDir::current());
+	  auto const file_info = QFileInfo(home_directory.absolutePath());
+
+	  if(!(file_info.isReadable() && file_info.isWritable()))
+	    home_directory = QDir::home();
+
+	  if(username.isEmpty())
+	    {
+	      if(!home_directory.exists(dooble_directory) &&
+		 !home_directory.mkdir(dooble_directory))
+		qDebug() << tr("Could not create the directory %1 in %2.").
+		  arg(dooble_directory).arg(home_directory.absolutePath());
+	    }
+	  else
+	    {
+	      auto const file_path
+		(username + QDir::separator() + dooble_directory);
+
+	      if(!home_directory.mkpath(file_path))
+		qDebug() << tr("Could not create the directory %1 in %2.").
+		  arg(file_path).arg(home_directory.absolutePath());
+	    }
+
+	  if(username.isEmpty())
+	    s_home_path = home_directory.absolutePath() +
+	      QDir::separator() +
+	      dooble_directory;
+	  else
+	    s_home_path = home_directory.absolutePath() +
+	      QDir::separator() +
+	      username +
+	      QDir::separator() +
+	      dooble_directory;
+	}
+      else
+	{
+	  if(!QDir().mkpath(bytes))
+	    qDebug() << tr("Could not create the directory %1.").arg(bytes);
+	  else
+	    s_home_path = bytes;
+	}
+#else
+      auto const bytes(qEnvironmentVariable("DOOBLE_HOME").trimmed());
+
+      if(bytes.isEmpty())
+	{
+	  auto const xdg_config_home
+	    (qEnvironmentVariable("XDG_CONFIG_HOME").trimmed());
+	  auto const xdg_data_home
+	    (qEnvironmentVariable("XDG_DATA_HOME").trimmed());
+
+	  if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
+	    {
+	      QString const dooble_directory(".dooble");
+	      auto const home_directory(QDir::home());
+
+	      if(!home_directory.exists(dooble_directory) &&
+		 !home_directory.mkdir(dooble_directory))
+		qDebug() << tr("Could not create the directory %1 in %2.").
+		  arg(dooble_directory).arg(home_directory.absolutePath());
+
+	      s_home_path = home_directory.absolutePath() +
+		QDir::separator() +
+		dooble_directory;
+	    }
+	  else
+	    {
+	      QDir home_directory;
+
+	      if(!xdg_config_home.isEmpty())
+		home_directory = QDir(xdg_config_home);
+	      else
+		home_directory = QDir(xdg_data_home);
+
+	      if(!home_directory.exists("dooble") &&
+		 !home_directory.mkdir("dooble"))
+		qDebug() << tr("Could not create the directory %1 in %2.").
+		  arg("dooble").arg(home_directory.absolutePath());
+
+	      s_home_path = home_directory.absolutePath() +
+		QDir::separator() +
+		"dooble";
+	    }
+	}
+      else
+	{
+	  if(!QDir().mkpath(bytes))
+	    qDebug() << tr("Could not create the directory %1.").arg(bytes);
+	  else
+	    s_home_path = bytes;
+	}
+#endif
+    }
+
+  auto const file_info = QFileInfo(s_home_path);
+
+  if(!(file_info.isReadable() && file_info.isWritable()))
+    {
+      s_home_path = QDir::tempPath() + QDir::separator() + "dooble";
+
+      if(!QDir().mkpath(s_home_path))
+	qDebug() << tr("Could not create the directory %1.").arg(s_home_path);
+    }
+
+  return s_home_path;
 }
 
 QString dooble_settings::shortcut(const QString &action) const
@@ -577,24 +701,15 @@ QVariant dooble_settings::getenv(const QString &n)
 QVariant dooble_settings::setting
 (const QString &k, const QVariant &default_value)
 {
-  QReadLocker locker(&s_settings_mutex);
   auto const key(k.toLower().trimmed());
+
+  if(key == "home_path")
+    return prepare_home_path();
+
+  QReadLocker locker(&s_settings_mutex);
 
   if(!s_settings.contains(key))
     {
-      auto home_path = s_settings.value("home_path").toString();
-
-      if(home_path.isEmpty()) // GitHub ticket #269.
-	{
-          auto const variable(qEnvironmentVariable("DOOBLE_HOME").trimmed());
-
-	  if(!variable.isEmpty())
-	    {
-	      QDir().mkpath(variable);
-	      home_path = variable;
-	    }
-	}
-
       locker.unlock();
 
       auto const database_name(dooble_database_utilities::database_name());
@@ -604,7 +719,7 @@ QVariant dooble_settings::setting
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
 	db.setDatabaseName
-	  (home_path + QDir::separator() + "dooble_settings.db");
+	  (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -722,9 +837,8 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -982,9 +1096,8 @@ void dooble_settings::new_javascript_disable(const QString &d, bool state)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1054,9 +1167,8 @@ void dooble_settings::new_user_agent(const QString &d, const QString &u)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1443,9 +1555,8 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1543,9 +1654,8 @@ void dooble_settings::prepare_web_engine_settings(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1648,9 +1758,8 @@ void dooble_settings::purge_features_permissions(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1679,9 +1788,8 @@ void dooble_settings::purge_javascript_block_popup_exceptions(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1710,9 +1818,8 @@ void dooble_settings::purge_javascript_disable(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1741,9 +1848,8 @@ void dooble_settings::purge_user_agents(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1777,9 +1883,8 @@ void dooble_settings::remove_setting(const QString &key)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -1813,9 +1918,8 @@ void dooble_settings::restore(bool read_database)
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	db.setDatabaseName(setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_settings.db");
+	db.setDatabaseName
+	  (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -2116,7 +2220,7 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("visited_links", false).toBool());
 
   {
-    QFile file(s_settings.value("home_path").toString() +
+    QFile file(prepare_home_path() +
 	       QDir::separator() +
 	       "WebEnginePersistentStorage" +
 	       QDir::separator() +
@@ -2343,9 +2447,8 @@ void dooble_settings::save_javascript_block_popup_exception
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -2397,9 +2500,9 @@ void dooble_settings::save_settings(void)
     set_setting("settings_geometry", saveGeometry().toBase64());
 }
 
-void dooble_settings::set_settings_path(const QString &path)
+void dooble_settings::set_settings_path(void)
 {
-  m_ui.settings_path->setText(path);
+  m_ui.settings_path->setText(prepare_home_path());
 }
 
 void dooble_settings::set_site_feature_permission
@@ -2510,9 +2613,8 @@ void dooble_settings::set_site_feature_permission
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -2935,7 +3037,7 @@ void dooble_settings::slot_apply(void)
     qunsetenv("TZ");
 
   {
-    QFile file(setting("home_path").toString() +
+    QFile file(prepare_home_path() +
 	       QDir::separator() +
 	       "WebEnginePersistentStorage" +
 	       QDir::separator() +
@@ -2953,6 +3055,7 @@ void dooble_settings::slot_apply(void)
   prepare_proxy(true);
   remove_setting("block_cipher_type");
   remove_setting("block_cipher_type_index");
+  remove_setting("home_path");
   save_fonts();
   set_setting("access_new_tabs", m_ui.access_new_tabs->isChecked());
   set_setting("add_tab_behavior_index", m_ui.add_tab_behavior->currentIndex());
@@ -3533,9 +3636,8 @@ void dooble_settings::slot_populate(void)
   {
     auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-    db.setDatabaseName(setting("home_path").toString() +
-		       QDir::separator() +
-		       "dooble_settings.db");
+    db.setDatabaseName
+      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
     if(db.open())
       {
@@ -4092,9 +4194,8 @@ void dooble_settings::slot_remove_selected_features_permissions(void)
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	db.setDatabaseName(setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_settings.db");
+	db.setDatabaseName
+	  (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -4209,9 +4310,8 @@ slot_remove_selected_javascript_block_popup_exceptions(void)
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	db.setDatabaseName(setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_settings.db");
+	db.setDatabaseName
+	  (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -4297,9 +4397,8 @@ void dooble_settings::slot_remove_selected_javascript_disable(void)
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	db.setDatabaseName(setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_settings.db");
+	db.setDatabaseName
+	  (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -4382,9 +4481,8 @@ void dooble_settings::slot_remove_selected_user_agents(void)
       {
 	auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	db.setDatabaseName(setting("home_path").toString() +
-			   QDir::separator() +
-			   "dooble_settings.db");
+	db.setDatabaseName
+	  (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	if(db.open())
 	  {
@@ -4466,7 +4564,7 @@ void dooble_settings::slot_reset(void)
        << "dooble_style_sheets.db";
 
   foreach(auto const &i, list)
-    QFile::remove(setting("home_path").toString() + QDir::separator() + i);
+    QFile::remove(prepare_home_path() + QDir::separator() + i);
 
   QApplication::restoreOverrideCursor();
   QApplication::processEvents();
@@ -4736,9 +4834,8 @@ void dooble_settings::slot_web_engine_settings_item_changed
 	  {
 	    auto db = QSqlDatabase::addDatabase("QSQLITE", database_name);
 
-	    db.setDatabaseName(setting("home_path").toString() +
-			       QDir::separator() +
-			       "dooble_settings.db");
+	    db.setDatabaseName
+	      (prepare_home_path() + QDir::separator() + "dooble_settings.db");
 
 	    if(db.open())
 	      {

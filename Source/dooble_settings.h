@@ -93,7 +93,6 @@ class dooble_settings: public dooble_main_window
   void prepare_application_fonts(void);
   void restore(bool read_database);
   void save(void);
-  void set_settings_path(const QString &path);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   void set_site_feature_permission(const QUrl &url,
 				   const QWebEnginePage::Feature feature,
@@ -130,9 +129,12 @@ class dooble_settings: public dooble_main_window
   static QMap<QString, QVariant> s_settings;
   static QMultiMap<QUrl, QPair<int, bool> > s_site_features_permissions;
   static QReadWriteLock s_getenv_mutex;
+  static QReadWriteLock s_home_path_mutex;
   static QReadWriteLock s_settings_mutex;
   static QString s_http_user_agent;
+  static QString s_home_path;
   static bool s_reading_from_canvas_enabled;
+  static QString prepare_home_path(void);
   static void create_tables(QSqlDatabase &db);
   void new_javascript_block_popup_exception(const QUrl &url);
   void new_javascript_disable(const QString &d, bool state);
@@ -151,6 +153,7 @@ class dooble_settings: public dooble_main_window
   void save_fonts(void);
   void save_javascript_block_popup_exception(const QUrl &url, bool state);
   void save_settings(void);
+  void set_settings_path(void);
 
   void showEvent(QShowEvent *event)
   {

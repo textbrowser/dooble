@@ -514,100 +514,7 @@ int main(int argc, char *argv[])
   QWebEngineUrlScheme::registerScheme(scheme);
 #endif
 #endif
-  QString dooble_settings_path("");
   dooble::s_application = new dooble_application(argc, argv);
-
-#if defined(Q_OS_WINDOWS)
-  auto const bytes(qEnvironmentVariable("DOOBLE_HOME").trimmed());
-
-  if(bytes.isEmpty())
-    {
-      QFileInfo file_info;
-      QString dooble_directory(".dooble");
-      auto const username
-	(qEnvironmentVariable("USERNAME").mid(0, 128).trimmed());
-      auto home_directory(QDir::current());
-
-      file_info = QFileInfo(home_directory.absolutePath());
-
-      if(!(file_info.isReadable() && file_info.isWritable()))
-	home_directory = QDir::home();
-
-      if(username.isEmpty())
-	home_directory.mkdir(dooble_directory);
-      else
-	home_directory.mkpath(username + QDir::separator() + dooble_directory);
-
-      if(username.isEmpty())
-	dooble_settings::set_setting
-	  ("home_path",
-	   dooble_settings_path =
-	   home_directory.absolutePath() +
-	   QDir::separator() +
-	   dooble_directory);
-      else
-	dooble_settings::set_setting
-	  ("home_path",
-	   dooble_settings_path =
-	   home_directory.absolutePath() +
-	   QDir::separator() +
-	   username +
-	   QDir::separator() +
-	   dooble_directory);
-    }
-  else
-    {
-      QDir().mkpath(bytes);
-
-      dooble_settings::set_setting("home_path", dooble_settings_path = bytes);
-    }
-#else
-  auto const bytes(qEnvironmentVariable("DOOBLE_HOME").trimmed());
-
-  if(bytes.isEmpty())
-    {
-      auto const xdg_config_home
-	(qEnvironmentVariable("XDG_CONFIG_HOME").trimmed());
-      auto const xdg_data_home
-	(qEnvironmentVariable("XDG_DATA_HOME").trimmed());
-
-      if(xdg_config_home.isEmpty() && xdg_data_home.isEmpty())
-	{
-	  QString dooble_directory(".dooble");
-	  auto home_directory(QDir::home());
-
-	  home_directory.mkdir(dooble_directory);
-	  dooble_settings::set_setting
-	    ("home_path",
-	     dooble_settings_path =
-	     home_directory.absolutePath() +
-	     QDir::separator() +
-	     dooble_directory);
-	}
-      else
-	{
-	  QDir home_directory;
-
-	  if(!xdg_config_home.isEmpty())
-	    home_directory = QDir(xdg_config_home);
-	  else
-	    home_directory = QDir(xdg_data_home);
-
-	  home_directory.mkdir("dooble");
-	  dooble_settings::set_setting
-	    ("home_path",
-	     dooble_settings_path =
-	     home_directory.absolutePath() + QDir::separator() + "dooble");
-	}
-    }
-  else
-    {
-      QDir().mkpath(bytes);
-
-      dooble_settings::set_setting("home_path", dooble_settings_path = bytes);
-    }
-#endif
-
   dooble::s_application->install_translator();
   dooble_settings::prepare_web_engine_environment_variables();
   dooble::s_default_web_engine_profile = new QWebEngineProfile("Dooble");
@@ -619,7 +526,6 @@ int main(int argc, char *argv[])
   dooble::s_default_http_user_agent = dooble::s_default_web_engine_profile->
     httpUserAgent();
   dooble::s_settings = new dooble_settings();
-  dooble::s_settings->set_settings_path(dooble_settings_path);
 
   /*
   ** Create a splash screen.
