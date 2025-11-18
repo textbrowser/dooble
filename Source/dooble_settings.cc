@@ -582,7 +582,18 @@ QVariant dooble_settings::setting
 
   if(!s_settings.contains(key))
     {
-      auto const home_path = s_settings.value("home_path").toString();
+      auto home_path = s_settings.value("home_path").toString();
+
+      if(home_path.isEmpty()) // GitHub ticket #269.
+	{
+          auto const variable(qEnvironmentVariable("DOOBLE_HOME").trimmed());
+
+	  if(!variable.isEmpty())
+	    {
+	      QDir().mkpath(variable);
+	      home_path = variable;
+	    }
+	}
 
       locker.unlock();
 
