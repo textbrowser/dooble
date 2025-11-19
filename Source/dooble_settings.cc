@@ -536,7 +536,7 @@ QString dooble_settings::prepare_home_path(void)
 
       if(bytes.isEmpty())
 	{
-	  QString dooble_directory(".dooble");
+	  QString const dooble_directory(".dooble");
 	  auto const username
 	    (qEnvironmentVariable("USERNAME").mid(0, 128).trimmed());
 	  auto home_directory(QDir::current());
