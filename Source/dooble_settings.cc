@@ -487,10 +487,11 @@ dooble_settings::dooble_settings(void):dooble_main_window()
     ("QLabel {background-color: #f2dede; border: 1px solid #ebccd1; "
      "color:#a94442;}");
   m_ui.mman_message->setText
-    (tr("Memory locking is not available on this system."));
+    (tr("<html>Memory locking <b>is not available</b> on this system.</html>"));
 #else
   m_ui.mman_message->setText
-    (tr("Memory locking is provided by mlock() and munlock()."));
+    (tr("<html>Memory locking is <b>actively provided</b> by "
+	"mlock() and munlock().</html>"));
 #endif
 
   if(s_spell_checker_dictionaries.isEmpty())
