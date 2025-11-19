@@ -230,6 +230,7 @@ Remaining Items
 - Default browser on MacOS.
 - Element-selection option.
 - Fancy completer.
+- Future Poly1305.
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Prevent SQL query text overflow.
