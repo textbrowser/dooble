@@ -631,16 +631,17 @@ QString dooble_settings::prepare_home_path(void)
 	    s_home_path = bytes;
 	}
 #endif
-    }
 
-  auto const file_info = QFileInfo(s_home_path);
+      auto const file_info = QFileInfo(s_home_path);
 
-  if(!(file_info.isReadable() && file_info.isWritable()))
-    {
-      s_home_path = QDir::tempPath() + QDir::separator() + "dooble";
+      if(!(file_info.isReadable() && file_info.isWritable()))
+	{
+	  s_home_path = QDir::tempPath() + QDir::separator() + "dooble";
 
-      if(!QDir().mkpath(s_home_path))
-	qDebug() << tr("Could not create the directory %1.").arg(s_home_path);
+	  if(!QDir().mkpath(s_home_path))
+	    qDebug() << tr("Could not create the directory %1.").
+	      arg(s_home_path);
+	}
     }
 
   return s_home_path;
