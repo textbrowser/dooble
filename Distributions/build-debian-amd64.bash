@@ -79,7 +79,7 @@ cp -pr Distributions/UBUNTU-24.04 dooble-debian.d/DEBIAN
 cp -r ./opt/dooble dooble-debian.d/opt/.
 cp Icons/Logo/dooble.png dooble-debian.d/usr/share/pixmaps/.
 cp dooble.sh dooble-debian.d/usr/bin/dooble
-fakeroot dpkg-deb --build dooble-debian.d Dooble-2025.11.29_amd64.deb
+fakeroot dpkg-deb --build dooble-debian.d Dooble-2025.11.25_amd64.deb
 make distclean
 rm -fr ./opt
 rm -fr dooble-debian.d
