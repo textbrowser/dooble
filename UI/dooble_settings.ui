@@ -1298,7 +1298,7 @@
                  <item>
                   <widget class="QLabel" name="label_26">
                    <property name="text">
-                    <string>Containers: Accepted / Blocked Domains, Certificate Exceptions, Cookies, Downloads, Favicons, History, Search Engines, Style Sheets. All other containers, including the contents of WebEnginePersistentStorage, are not encrypted.</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Containers: Accepted / Blocked Domains, Certificate Exceptions, Cookies, Downloads, Favicons, History, JavaScript Scripts, Search Engines, Style Sheets. All other containers, including the contents of WebEnginePersistentStorage, are not encrypted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>

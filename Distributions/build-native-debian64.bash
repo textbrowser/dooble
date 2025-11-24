@@ -61,10 +61,10 @@ cp dooble.sh dooble-debian.d/usr/bin/dooble
 if [ "$(uname -m)" = "aarch64" ]
 then
     fakeroot dpkg-deb --build dooble-debian.d \
-	     Dooble-2025.07.04_native_arm64.deb
+	     Dooble-2025.11.29_native_arm64.deb
 else
     fakeroot dpkg-deb --build dooble-debian.d \
-	     Dooble-2025.07.04_native_amd64.deb
+	     Dooble-2025.11.29_native_amd64.deb
 fi
 
 make distclean
