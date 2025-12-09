@@ -17,7 +17,7 @@ Lock memory into RAM via mman.
 
 DOOBLE_PEEKABOO
 
-Enabled if a special file exists.
+Enabled if a special file gpgme.h exists.
 
 DOOBLE_QTCHARTS_PRESENT
 
@@ -33,7 +33,7 @@ Force registration of Jar scheme.
 
 DOOBLE_VERSION_FILE_URL
 
-Correct Web location of dooble_version.h.
+Web location of dooble_version.h.
 
 DOOBLE_VERSION_STRING
 
