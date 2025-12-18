@@ -742,6 +742,9 @@ QVariant dooble_settings::setting
 		s_settings[key] = value;
 	      }
 	  }
+	else
+	  qDebug() << tr("Unable to access the database %1.").
+	    arg(db.databaseName());
 
 	db.close();
       }
@@ -860,6 +863,9 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 
 	ok = query.exec();
       }
+    else
+      qDebug() << tr("Unable to access the database %1.").
+	arg(db.databaseName());
 
     db.close();
   }
@@ -2685,10 +2691,11 @@ void dooble_settings::show(void)
     restore(false);
 
   if(setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
-					   toByteArray()));
+    restoreGeometry
+      (QByteArray::fromBase64(setting("settings_geometry").toByteArray()));
 
   dooble_main_window::show();
+  set_settings_path();
 }
 
 void dooble_settings::show_normal(QWidget *parent)
@@ -2697,8 +2704,8 @@ void dooble_settings::show_normal(QWidget *parent)
     restore(false);
 
   if(setting("save_geometry").toBool())
-    restoreGeometry(QByteArray::fromBase64(setting("settings_geometry").
-					   toByteArray()));
+    restoreGeometry
+      (QByteArray::fromBase64(setting("settings_geometry").toByteArray()));
 
   if(dooble_settings::setting("center_child_windows").toBool())
     dooble_ui_utilities::center_window_widget(parent, this);
