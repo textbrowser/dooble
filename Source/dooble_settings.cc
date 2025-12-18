@@ -816,9 +816,11 @@ bool dooble_settings::reading_from_canvas_enabled(void)
   return s_reading_from_canvas_enabled;
 }
 
-bool dooble_settings::set_setting(const QString &key, const QVariant &value)
+bool dooble_settings::set_setting(const QString &k, const QVariant &value)
 {
-  if(key.trimmed().isEmpty())
+  auto const key(k.toLower().trimmed());
+
+  if(key.isEmpty())
     return false;
   else if(value.isNull())
     {
@@ -826,14 +828,14 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 	{
 	  QWriteLocker locker(&s_settings_mutex);
 
-	  s_settings.remove(key.toLower().trimmed());
+	  s_settings.remove(key);
 	  return false;
 	}
     }
 
   QWriteLocker locker(&s_settings_mutex);
 
-  s_settings[key.toLower().trimmed()] = value;
+  s_settings[key] = value;
   locker.unlock();
 
   auto const database_name(dooble_database_utilities::database_name());
@@ -854,7 +856,7 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 	query.exec("PRAGMA synchronous = NORMAL");
 	query.prepare
 	  ("INSERT OR REPLACE INTO dooble_settings (key, value) VALUES (?, ?)");
-	query.addBindValue(key.toLower().trimmed());
+	query.addBindValue(key);
 
 	if(key == "home_url" && value.toString().trimmed().isEmpty())
 	  query.addBindValue("");
@@ -862,6 +864,10 @@ bool dooble_settings::set_setting(const QString &key, const QVariant &value)
 	  query.addBindValue(value.toString().trimmed());
 
 	ok = query.exec();
+
+	if(!ok)
+	  qDebug() << tr("Unable to save the key %1 to the database %2.").
+	    arg(key).arg(db.databaseName());
       }
     else
       qDebug() << tr("Unable to access the database %1.").

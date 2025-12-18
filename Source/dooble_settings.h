@@ -74,7 +74,7 @@ class dooble_settings: public dooble_main_window
   static bool has_dooble_credentials(void);
   static bool has_dooble_credentials_temporary(void);
   static bool reading_from_canvas_enabled(void);
-  static bool set_setting(const QString &key, const QVariant &value);
+  static bool set_setting(const QString &k, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
   static bool site_has_javascript_disabled(const QUrl &url);
   static int main_menu_bar_visible_key(void);
