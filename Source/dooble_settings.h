@@ -96,11 +96,13 @@ class dooble_settings: public dooble_main_window
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
   void set_site_feature_permission(const QUrl &url,
 				   const QWebEnginePage::Feature feature,
+				   bool is_private,
 				   bool state);
 #else
   void set_site_feature_permission
     (const QUrl &url,
      const QWebEnginePermission::PermissionType feature,
+     bool is_private,
      bool state);
 #endif
   void show_normal(QWidget *parent);

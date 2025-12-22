@@ -2521,10 +2521,14 @@ void dooble_settings::set_settings_path(void)
 
 void dooble_settings::set_site_feature_permission
 #if (QT_VERSION < QT_VERSION_CHECK(6, 8, 0))
-(const QUrl &url, const QWebEnginePage::Feature feature, bool state)
+(const QUrl &url,
+ const QWebEnginePage::Feature feature,
+ bool is_private,
+ bool state)
 #else
 (const QUrl &url,
  const QWebEnginePermission::PermissionType feature,
+ bool is_private,
  bool state)
 #endif
 {
@@ -2555,9 +2559,14 @@ void dooble_settings::set_site_feature_permission
       item->setData(Qt::UserRole, url);
       item->setData
 	(Qt::ItemDataRole(Qt::UserRole + 1), static_cast<int> (feature));
-      item->setFlags(Qt::ItemIsEnabled |
-		     Qt::ItemIsSelectable |
-		     Qt::ItemIsUserCheckable);
+
+      if(is_private)
+	item->setFlags(Qt::ItemIsSelectable);
+      else
+	item->setFlags(Qt::ItemIsEnabled |
+		       Qt::ItemIsSelectable |
+		       Qt::ItemIsUserCheckable);
+
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 0, item);
       item = new QTableWidgetItem
@@ -2566,14 +2575,24 @@ void dooble_settings::set_site_feature_permission
       item->setData(Qt::UserRole, url);
       item->setData
 	(Qt::ItemDataRole(Qt::UserRole + 1), static_cast<int> (feature));
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      if(is_private)
+	item->setFlags(Qt::ItemIsSelectable);
+      else
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 1, item);
       item = new QTableWidgetItem(url.toString());
       item->setData(Qt::UserRole, url);
       item->setData
 	(Qt::ItemDataRole(Qt::UserRole + 1), static_cast<int> (feature));
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+      if(is_private)
+	item->setFlags(Qt::ItemIsSelectable);
+      else
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
       item->setToolTip(item->text());
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 2, item);
@@ -2617,7 +2636,9 @@ void dooble_settings::set_site_feature_permission
     (url, QPair<int, bool> (static_cast<int> (feature), state));
   QApplication::restoreOverrideCursor();
 
-  if(!dooble::s_cryptography || !dooble::s_cryptography->authenticated())
+  if(!dooble::s_cryptography ||
+     !dooble::s_cryptography->authenticated() ||
+     is_private)
     return;
 
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -3219,12 +3240,14 @@ void dooble_settings::slot_features_permissions_item_changed
     (item->data(Qt::UserRole).toUrl(),
      QWebEnginePage::Feature(item->data(Qt::ItemDataRole(Qt::UserRole + 1)).
 			     toInt()),
+     false,
      item->checkState() == Qt::Checked);
 #else
   set_site_feature_permission
     (item->data(Qt::UserRole).toUrl(),
      QWebEnginePermission::
      PermissionType(item->data(Qt::ItemDataRole(Qt::UserRole + 1)).toInt()),
+     false,
      item->checkState() == Qt::Checked);
 #endif
 }

@@ -607,6 +607,7 @@ void dooble_web_engine_view::set_feature_permission
   dooble::s_settings->set_site_feature_permission
     (security_origin,
      feature,
+     m_is_private,
      policy == QWebEnginePage::PermissionGrantedByUser);
   m_page->setFeaturePermission(security_origin, feature, policy);
 }
@@ -619,6 +620,7 @@ void dooble_web_engine_view::set_feature_permission
   dooble::s_settings->set_site_feature_permission
     (security_origin,
      feature,
+     m_is_private,
      policy == QWebEnginePermission::State::Granted);
 
   foreach(auto permission,
