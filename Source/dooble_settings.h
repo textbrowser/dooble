@@ -175,7 +175,8 @@ class dooble_settings: public dooble_main_window
   void slot_javascript_disable_item_changed(QTableWidgetItem *item);
   void slot_new_javascript_block_popup_exception(const QUrl &url);
   void slot_new_javascript_block_popup_exception(void);
-  void slot_new_javascript_disable(const QUrl &url, bool state);
+  void slot_new_javascript_disable
+    (const QUrl &url, bool is_private, bool state);
   void slot_new_javascript_disable(void);
   void slot_new_user_agent(const QString &u, const QUrl &url);
   void slot_new_user_agent(void);

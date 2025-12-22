@@ -3297,7 +3297,8 @@ void dooble_settings::slot_new_javascript_block_popup_exception(void)
     (QUrl::fromUserInput(m_ui.new_javascript_block_popup_exception->text()));
 }
 
-void dooble_settings::slot_new_javascript_disable(const QUrl &url, bool state)
+void dooble_settings::slot_new_javascript_disable
+(const QUrl &url, bool is_private, bool state)
 {
   auto const domain(url.host());
 
@@ -3323,16 +3324,30 @@ void dooble_settings::slot_new_javascript_disable(const QUrl &url, bool state)
 
   auto item = new QTableWidgetItem();
 
-  item->setCheckState(state ? Qt::Checked : Qt::Unchecked);
+  if(is_private)
+    item->setCheckState(Qt::Checked);
+  else
+    item->setCheckState(state ? Qt::Checked : Qt::Unchecked);
+
   item->setData(Qt::UserRole, domain);
-  item->setFlags(Qt::ItemIsEnabled |
-		 Qt::ItemIsSelectable |
-		 Qt::ItemIsUserCheckable);
+
+  if(is_private)
+    item->setFlags(Qt::ItemIsSelectable);
+  else
+    item->setFlags(Qt::ItemIsEnabled |
+		   Qt::ItemIsSelectable |
+		   Qt::ItemIsUserCheckable);
+
   m_ui.javascript_disable->setItem
     (m_ui.javascript_disable->rowCount() - 1, 0, item);
   item = new QTableWidgetItem(domain);
   item->setData(Qt::UserRole, domain);
-  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+  if(is_private)
+    item->setFlags(Qt::ItemIsSelectable);
+  else
+    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
   item->setToolTip(item->text());
   m_ui.javascript_disable->setItem
     (m_ui.javascript_disable->rowCount() - 1, 1, item);
@@ -3344,13 +3359,15 @@ void dooble_settings::slot_new_javascript_disable(const QUrl &url, bool state)
      SLOT(slot_javascript_disable_item_changed(QTableWidgetItem *)));
   prepare_table_statistics();
   QApplication::restoreOverrideCursor();
-  new_javascript_disable(domain, state);
+  is_private ? (void) 0 : new_javascript_disable(domain, state);
 }
 
 void dooble_settings::slot_new_javascript_disable(void)
 {
   slot_new_javascript_disable
-    (QUrl::fromUserInput(m_ui.new_javascript_disable->text().trimmed()), true);
+    (QUrl::fromUserInput(m_ui.new_javascript_disable->text().trimmed()),
+     false,
+     true);
 }
 
 void dooble_settings::slot_new_user_agent(const QString &u, const QUrl &url)

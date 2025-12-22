@@ -491,9 +491,9 @@ dooble_page::dooble_page(QWebEngineProfile *web_engine_profile,
 	  dooble::s_settings,
 	  SLOT(slot_new_javascript_block_popup_exception(const QUrl &)));
   connect(this,
-	  SIGNAL(javascript_disable(const QUrl &, bool)),
+	  SIGNAL(javascript_disable(const QUrl &, bool, bool)),
 	  dooble::s_settings,
-	  SLOT(slot_new_javascript_disable(const QUrl &, bool)));
+	  SLOT(slot_new_javascript_disable(const QUrl &, bool, bool)));
   connect(this,
 	  SIGNAL(zoomed(qreal)),
 	  m_popup_menu,
@@ -685,7 +685,7 @@ void dooble_page::enable_web_setting
   if(settings)
     {
       setting == QWebEngineSettings::JavascriptEnabled ?
-	emit javascript_disable(url(), !state) : (void) 0;
+	emit javascript_disable(url(), m_is_private, !state) : (void) 0;
       settings->setAttribute(setting, state);
     }
 }

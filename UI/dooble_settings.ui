@@ -1824,7 +1824,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-1289</y>
                <width>642</width>
                <height>3042</height>
               </rect>
@@ -2388,7 +2388,7 @@
                     <item>
                      <widget class="QLabel" name="label_51">
                       <property name="text">
-                       <string>Settings are saved immediately.</string>
+                       <string>Disabled domains originated from private pages. Settings are saved immediately.</string>
                       </property>
                      </widget>
                     </item>
