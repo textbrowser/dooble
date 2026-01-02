@@ -234,6 +234,7 @@ Remaining Items
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
 - Prevent SQL query text overflow.
+- Replace apt with snap.
 - Shortcuts browser.
 - Threefish tweak.
 - Translations browser.
