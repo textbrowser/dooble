@@ -1,1 +1,3 @@
 https://www.debian.org/doc/manuals/maint-guide/dreq.en.html
+
+> dpkg -S $(objdump -p ./Dooble 2>/dev/null | grep NEEDED) 2>/dev/null
