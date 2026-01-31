@@ -39,7 +39,7 @@ cp -p ~/Qt/6.8.3/gcc_64/lib/libQt6XcbQpa.so.6 ./dooble/Lib/.
 cp -p ~/Qt/6.8.3/gcc_64/lib/libicudata.so.73 ./dooble/Lib/.
 cp -p ~/Qt/6.8.3/gcc_64/lib/libicui18n.so.73 ./dooble/Lib/.
 cp -p ~/Qt/6.8.3/gcc_64/lib/libicuio.so.73 ./dooble/Lib/.
-cp -p ~/Qt/6.8.3/gcc_64/lib/libicuuc.so.73 ./dooble/Lib/.
+cp -p ~/Qt/6.8.3/gcc_64/lib/libicutu.so.73 ./dooble/Lib/.
 cp -p ~/Qt/6.8.3/gcc_64/lib/libicuuc.so.73 ./dooble/Lib/.
 cp -p ~/Qt/6.8.3/gcc_64/libexec/QtWebEngineProcess ./dooble/.
 cp -pr ~/Qt/6.8.3/gcc_64/plugins ./dooble/.
