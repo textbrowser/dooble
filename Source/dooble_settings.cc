@@ -2575,24 +2575,14 @@ void dooble_settings::set_site_feature_permission
       item->setData(Qt::UserRole, url);
       item->setData
 	(Qt::ItemDataRole(Qt::UserRole + 1), static_cast<int> (feature));
-
-      if(is_private)
-	item->setFlags(Qt::ItemIsSelectable);
-      else
-	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 1, item);
       item = new QTableWidgetItem(url.toString());
       item->setData(Qt::UserRole, url);
       item->setData
 	(Qt::ItemDataRole(Qt::UserRole + 1), static_cast<int> (feature));
-
-      if(is_private)
-	item->setFlags(Qt::ItemIsSelectable);
-      else
-	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       item->setToolTip(item->text());
       m_ui.features_permissions->setItem
 	(m_ui.features_permissions->rowCount() - 1, 2, item);
@@ -3365,12 +3355,7 @@ void dooble_settings::slot_new_javascript_disable
     (m_ui.javascript_disable->rowCount() - 1, 0, item);
   item = new QTableWidgetItem(domain);
   item->setData(Qt::UserRole, domain);
-
-  if(is_private)
-    item->setFlags(Qt::ItemIsSelectable);
-  else
-    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   item->setToolTip(item->text());
   m_ui.javascript_disable->setItem
     (m_ui.javascript_disable->rowCount() - 1, 1, item);
