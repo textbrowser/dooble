@@ -352,6 +352,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["javascript_block_popups"] = true;
   s_settings["language_index"] = 0;
   s_settings["lefty_buttons"] = false;
+  s_settings["local_content_can_access_file_urls"] = false;
   s_settings["local_storage"] = true;
   s_settings["main_menu_bar_visible"] = true;
   s_settings["main_menu_bar_visible_shortcut_index"] = 1; // F10
@@ -2068,6 +2069,8 @@ void dooble_settings::restore(bool read_database)
 	    m_ui.language->count()));
   m_ui.lefty_buttons->setChecked
     (s_settings.value("lefty_buttons", false).toBool());
+  m_ui.local_content_can_access_file_urls->setChecked
+    (s_settings.value("local_content_can_access_file_urls", false).toBool());
   m_ui.local_storage->setChecked
     (s_settings.value("local_storage", true).toBool());
   m_ui.main_menu_bar_visible->setChecked
@@ -2300,6 +2303,9 @@ void dooble_settings::restore(bool read_database)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls,
+     m_ui.local_content_can_access_file_urls->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
@@ -2324,6 +2330,9 @@ void dooble_settings::restore(bool read_database)
      m_ui.javascript_access_clipboard->isChecked());
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  dooble::s_default_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls,
+     m_ui.local_content_can_access_file_urls->isChecked());
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   dooble::s_default_web_engine_profile->settings()->setAttribute
@@ -2974,6 +2983,9 @@ void dooble_settings::slot_apply(void)
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls,
+     m_ui.local_content_can_access_file_urls->isChecked());
+  QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::PluginsEnabled, m_ui.web_plugins->isChecked());
@@ -3001,6 +3013,9 @@ void dooble_settings::slot_apply(void)
      m_ui.javascript_access_clipboard->isChecked());
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptEnabled, m_ui.javascript->isChecked());
+  dooble::s_default_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::LocalContentCanAccessFileUrls,
+     m_ui.local_content_can_access_file_urls->isChecked());
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, m_ui.local_storage->isChecked());
   dooble::s_default_web_engine_profile->settings()->setAttribute
@@ -3140,6 +3155,9 @@ void dooble_settings::slot_apply(void)
     ("javascript_block_popups", m_ui.javascript_block_popups->isChecked());
   set_setting("language_index", m_ui.language->currentIndex());
   set_setting("lefty_buttons", m_ui.lefty_buttons->isChecked());
+  set_setting
+    ("local_content_can_access_file_urls",
+     m_ui.local_content_can_access_file_urls->isChecked());
   set_setting("local_storage", m_ui.local_storage->isChecked());
   set_setting("main_menu_bar_visible", m_ui.main_menu_bar_visible->isChecked());
   set_setting("main_menu_bar_visible_shortcut_index",

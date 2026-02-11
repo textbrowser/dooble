@@ -1824,9 +1824,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1208</y>
+               <y>-1623</y>
                <width>642</width>
-               <height>3042</height>
+               <height>3074</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2521,6 +2521,16 @@
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="local_content_can_access_file_urls">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allows locally-loaded documents to access other local URLs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Local Content Can Access File URLs</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="local_storage">
                 <property name="toolTip">
                  <string>HTML5 local storage.</string>
@@ -3124,6 +3134,7 @@
   <tabstop>javascript_disable</tabstop>
   <tabstop>remove_all_javascript_disable</tabstop>
   <tabstop>remove_selected_javascript_disable</tabstop>
+  <tabstop>local_content_can_access_file_urls</tabstop>
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
   <tabstop>relative_location_character</tabstop>
