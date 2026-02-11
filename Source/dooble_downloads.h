@@ -86,6 +86,7 @@ class dooble_downloads: public dooble_main_window
   void delete_selected(void);
   void remove_entry(qintptr oid);
   void save_settings(void);
+  void showEvent(QShowEvent *event);
 
  private slots:
   void slot_clear_finished_downloads(void);

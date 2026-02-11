@@ -50,7 +50,7 @@ dooble_downloads::dooble_downloads
 (QWebEngineProfile *web_engine_profile, QWidget *parent):
   dooble_main_window(parent)
 {
-  m_download_path_inspection_timer.start(2500);
+  m_download_path_inspection_timer.setInterval(2500);
   m_search_timer.setInterval(750);
   m_search_timer.setSingleShot(true);
   m_ui.setupUi(this);
@@ -217,6 +217,7 @@ void dooble_downloads::clear(void)
 void dooble_downloads::closeEvent(QCloseEvent *event)
 {
   dooble_main_window::closeEvent(event);
+  m_download_path_inspection_timer.stop();
   save_settings();
 }
 
@@ -485,6 +486,12 @@ void dooble_downloads::show(void)
 			      toByteArray()));
 
   dooble_main_window::show();
+}
+
+void dooble_downloads::showEvent(QShowEvent *event)
+{
+  dooble_main_window::showEvent(event);
+  m_download_path_inspection_timer.start();
 }
 
 void dooble_downloads::show_normal(QWidget *parent)
