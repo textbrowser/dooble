@@ -611,7 +611,8 @@ int main(int argc, char *argv[])
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows, true);
   QWebEngineSettings::defaultSettings()->setAttribute
-    (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+    (QWebEngineSettings::LocalContentCanAccessFileUrls,
+     dooble_settings::setting("local_content_can_access_file_urls").toBool());
   QWebEngineSettings::defaultSettings()->setAttribute
     (QWebEngineSettings::LocalStorageEnabled, true);
   QWebEngineSettings::defaultSettings()->setAttribute
@@ -630,7 +631,8 @@ int main(int argc, char *argv[])
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanOpenWindows, true);
   dooble::s_default_web_engine_profile->settings()->setAttribute
-    (QWebEngineSettings::LocalContentCanAccessFileUrls, false);
+    (QWebEngineSettings::LocalContentCanAccessFileUrls,
+     dooble_settings::setting("local_content_can_access_file_urls").toBool());
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::ScreenCaptureEnabled, false);
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
