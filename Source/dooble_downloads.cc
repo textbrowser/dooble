@@ -635,7 +635,29 @@ void dooble_downloads::slot_download_requested
 {
   if(!download)
     return;
-  else if(contains(download))
+
+  auto const url(download->url());
+
+  if(url.fileName().endsWith(".desktop", Qt::CaseInsensitive) &&
+     url.isLocalFile())
+    {
+      QFile file(url.toLocalFile());
+
+      if(file.open(QIODevice::ReadOnly))
+	{
+	  auto page = download->page();
+
+	  if(page)
+	    {
+	      download->cancel();
+	      page->setContent
+		(file.readAll(), "text/plain", download->url());
+	      return;
+	    }
+	}
+    }
+
+  if(contains(download))
     /*
     ** Do not cancel the download.
     */
