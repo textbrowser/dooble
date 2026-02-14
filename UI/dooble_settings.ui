@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>1360</height>
+               <width>419</width>
+               <height>1526</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1200,7 +1200,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
+               <width>640</width>
                <height>1157</height>
               </rect>
              </property>
@@ -1824,9 +1824,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1623</y>
+               <y>-1949</y>
                <width>642</width>
-               <height>3074</height>
+               <height>3118</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2632,6 +2632,33 @@
                </layout>
               </item>
               <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_31">
+                <item>
+                 <widget class="QLabel" name="label_56">
+                  <property name="text">
+                   <string>Special Files Suffixes</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="special_files_suffixes">
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Special logic for displaying contents of files having the listed suffixes. For example, desktop files. Please separate values with commas. The text is trimmed and then recorded in lowercase.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="text">
+                   <string>desktop</string>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Special Files Suffixes</string>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
                <widget class="QCheckBox" name="temporarily_disable_javascript">
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Disable JavaScript after a page has completed loading (the page-loaded signal has been monitored) and re-enable it shortly after.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -3138,6 +3165,7 @@
   <tabstop>local_storage</tabstop>
   <tabstop>dictionaries</tabstop>
   <tabstop>relative_location_character</tabstop>
+  <tabstop>special_files_suffixes</tabstop>
   <tabstop>temporarily_disable_javascript</tabstop>
   <tabstop>zoom</tabstop>
   <tabstop>global_user_agent</tabstop>

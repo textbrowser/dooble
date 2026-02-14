@@ -638,7 +638,8 @@ void dooble_downloads::slot_download_requested
 
   auto const url(download->url());
 
-  if(url.fileName().endsWith(".desktop", Qt::CaseInsensitive) &&
+  if(dooble_settings::
+     is_special_file_suffix(QFileInfo(url.fileName()).suffix()) &&
      url.isLocalFile())
     {
       QFile file(url.toLocalFile());

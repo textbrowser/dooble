@@ -61,6 +61,7 @@
 QHash<QString, QString> dooble_settings::s_user_agents;
 QHash<QString, QString> dooble_settings::s_web_engine_settings_environment;
 QHash<QString, char> dooble_settings::s_javascript_disable;
+QHash<QString, char> dooble_settings::s_special_files_suffixes;
 QHash<QUrl, char> dooble_settings::s_javascript_block_popup_exceptions;
 QMap<QString, QVariant> dooble_settings::s_getenv;
 QMap<QString, QVariant> dooble_settings::s_settings;
@@ -370,6 +371,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["show_loading_gradient"] = true;
   s_settings["show_new_downloads"] = true;
   s_settings["show_title_bar"] = true;
+  s_settings["special_files_suffixes"] = "desktop";
   s_settings["splash_screen"] = true;
   s_settings["status_bar_visible"] = true;
   s_settings["tab_document_mode"] = true;
@@ -522,6 +524,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   restore(true);
   prepare_icons();
   prepare_shortcuts();
+  prepare_special_files_suffixes();
   show_qtwebengine_dictionaries_warning_label();
   set_settings_path();
   slot_password_changed();
@@ -810,6 +813,11 @@ bool dooble_settings::has_dooble_credentials_temporary(void)
 	  setting("authentication_salt").toString().isEmpty() ||
 	  setting("authentication_salted_password").toString().isEmpty()) &&
     setting("credentials_enabled").toBool();
+}
+
+bool dooble_settings::is_special_file_suffix(const QString &suffix)
+{
+  return s_special_files_suffixes.contains(suffix.toLower().trimmed());
 }
 
 bool dooble_settings::reading_from_canvas_enabled(void)
@@ -1527,6 +1535,21 @@ void dooble_settings::prepare_shortcuts(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_settings::prepare_special_files_suffixes(void)
+{
+  s_special_files_suffixes.clear();
+
+  auto const text
+    (setting("special_files_suffixes").toString().toLower().trimmed());
+
+  foreach(auto const &i, text.split(','))
+    if(!i.trimmed().isEmpty())
+      s_special_files_suffixes[i.trimmed()] = 0;
+
+  if(s_special_files_suffixes.isEmpty())
+    s_special_files_suffixes["deskop"] = 0;
+}
+
 void dooble_settings::prepare_table_statistics(void)
 {
   m_ui.features_permissions_entries->setText
@@ -2134,6 +2157,9 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("show_new_downloads", true).toBool());
   m_ui.show_title_bar->setChecked
     (s_settings.value("show_title_bar", true).toBool());
+  m_ui.special_files_suffixes->setText
+    (s_settings.value("special_files_suffixes", "desktop").
+     toString().toLower().trimmed());
   m_ui.splash_screen->setChecked
     (s_settings.value("splash_screen", true).toBool());
   m_ui.tab_document_mode->setChecked
@@ -3182,6 +3208,9 @@ void dooble_settings::slot_apply(void)
   set_setting("show_loading_gradient", m_ui.show_loading_gradient->isChecked());
   set_setting("show_new_downloads", m_ui.show_new_downloads->isChecked());
   set_setting("show_title_bar", m_ui.show_title_bar->isChecked());
+  set_setting
+    ("special_files_suffixes",
+     m_ui.special_files_suffixes->text().toLower().trimmed());
   set_setting("splash_screen", m_ui.splash_screen->isChecked());
   set_setting("tab_document_mode", m_ui.tab_document_mode->isChecked());
 
@@ -3225,6 +3254,7 @@ void dooble_settings::slot_apply(void)
     ("zoom_frame_location_index", m_ui.zoom_frame_location->currentIndex());
   prepare_application_fonts();
   prepare_icons();
+  prepare_special_files_suffixes();
   QApplication::restoreOverrideCursor();
   emit applied();
 }

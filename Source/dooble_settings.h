@@ -73,6 +73,7 @@ class dooble_settings: public dooble_main_window
 			  const QVariant &default_value = QVariant(""));
   static bool has_dooble_credentials(void);
   static bool has_dooble_credentials_temporary(void);
+  static bool is_special_file_suffix(const QString &suffix);
   static bool reading_from_canvas_enabled(void);
   static bool set_setting(const QString &k, const QVariant &value);
   static bool site_has_javascript_block_popup_exception(const QUrl &url);
@@ -126,6 +127,7 @@ class dooble_settings: public dooble_main_window
   static QHash<QString, QString> s_user_agents;
   static QHash<QString, QString> s_web_engine_settings_environment;
   static QHash<QString, char> s_javascript_disable;
+  static QHash<QString, char> s_special_files_suffixes;
   static QHash<QUrl, char> s_javascript_block_popup_exceptions;
   static QMap<QString, QVariant> s_getenv;
   static QMap<QString, QVariant> s_settings;
@@ -138,6 +140,7 @@ class dooble_settings: public dooble_main_window
   static bool s_reading_from_canvas_enabled;
   static QString prepare_home_path(void);
   static void create_tables(QSqlDatabase &db);
+  static void prepare_special_files_suffixes(void);
   void new_javascript_block_popup_exception(const QUrl &url);
   void new_javascript_disable(const QString &d, bool state);
   void new_user_agent(const QString &d, const QString &u);
