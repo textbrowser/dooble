@@ -287,6 +287,7 @@ class dooble_page: public QWidget
   void show_chart_xyseries(void);
   void show_clear_items(void);
   void show_cookies(void);
+  void show_dash(void);
   void show_documentation(void);
   void show_downloads(void);
   void show_favorites(void);

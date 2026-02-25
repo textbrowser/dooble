@@ -9,6 +9,7 @@ FORMS           = UI/dooble.ui \
                   UI/dooble_charts.ui \
                   UI/dooble_clear_items.ui \
 		  UI/dooble_cookies_window.ui \
+		  UI/dooble_dash.ui \
                   UI/dooble_downloads.ui \
                   UI/dooble_downloads_item.ui \
                   UI/dooble_favorites_popup.ui \
@@ -41,6 +42,7 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_cookies.h \
                   Source/dooble_cookies_window.h \
                   Source/dooble_cryptography.h \
+		  Source/dooble_dash.h \
                   Source/dooble_downloads.h \
                   Source/dooble_downloads_item.h \
                   Source/dooble_favorites_popup.h \
@@ -93,6 +95,7 @@ SOURCES		= Source/dooble.cc \
                   Source/dooble_cookies.cc \
                   Source/dooble_cookies_window.cc \
                   Source/dooble_cryptography.cc \
+  		  Source/dooble_dash.cc \
                   Source/dooble_database_utilities.cc \
                   Source/dooble_downloads.cc \
                   Source/dooble_downloads_item.cc \

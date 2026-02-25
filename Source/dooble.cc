@@ -51,6 +51,7 @@
 #include "dooble_cookies.h"
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
+#include "dooble_dash.h"
 #include "dooble_database_utilities.h"
 #include "dooble_downloads.h"
 #include "dooble_favicons.h"
@@ -671,7 +672,7 @@ dooble_page *dooble::new_page(const QUrl &url, bool is_private)
   if(dooble_settings::setting("access_new_tabs").toBool() ||
      qobject_cast<QShortcut *> (sender()) ||
      qobject_cast<dooble_tab_widget *> (sender()) ||
-     !sender())
+     sender() == nullptr)
     m_ui.tab->setCurrentWidget(page);
 
   page->hide_location_frame(s_application->application_locked());
@@ -1245,7 +1246,7 @@ void dooble::new_page(dooble_charts *chart)
   if(dooble_settings::setting("access_new_tabs").toBool() ||
      qobject_cast<QShortcut *> (sender()) ||
      qobject_cast<dooble_tab_widget *> (sender()) ||
-     !sender())
+     sender() == nullptr)
     m_ui.tab->setCurrentWidget(chart);
 
   prepare_control_w_shortcut();
@@ -1697,6 +1698,12 @@ void dooble::prepare_page_connections(dooble_page *page)
 	  SIGNAL(show_cookies(void)),
 	  this,
 	  SLOT(slot_show_cookies(void)),
+	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
+					   Qt::UniqueConnection));
+  connect(page,
+	  SIGNAL(show_dash(void)),
+	  this,
+	  SLOT(slot_show_dash(void)),
 	  static_cast<Qt::ConnectionType> (Qt::AutoConnection |
 					   Qt::UniqueConnection));
   connect(page,
@@ -2533,6 +2540,13 @@ void dooble::prepare_standard_menus(void)
   menu->addAction(tr("&Search Engines..."),
 		  this,
 		  SLOT(slot_show_search_engines(void)));
+  menu->addSeparator();
+  action = menu->addAction(tr("Dooble Awesome Shell (DASH)..."),
+			   this,
+			   SLOT(slot_show_dash(void)));
+#ifndef Q_OS_UNIX
+  action->setEnabled(false);
+#endif
 
   /*
   ** View Menu
@@ -2970,6 +2984,10 @@ void dooble::remove_page_connections(dooble_page *page)
 	     SIGNAL(show_cookies(void)),
 	     this,
 	     SLOT(slot_show_cookies(void)));
+  disconnect(page,
+	     SIGNAL(show_dash(void)),
+	     this,
+	     SLOT(slot_show_dash(void)));
   disconnect(page,
 	     SIGNAL(show_documentation(void)),
 	     this,
@@ -5048,6 +5066,37 @@ void dooble::slot_show_cookies(void)
   s_cookies_window->show_normal(this);
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
+}
+
+void dooble::slot_show_dash(void)
+{
+  auto dash = new dooble_dash(this);
+
+  if(m_anonymous_tab_headers)
+    add_tab(dash, tr("Dooble"));
+  else if(s_application->application_locked())
+    add_tab(dash, tr("Application Locked"));
+  else
+    add_tab(dash, tr("Dooble Awesome Shell"));
+
+  m_ui.tab->setTabIcon
+    (m_ui.tab->indexOf(dash), dooble_favicons::icon(QUrl())); // MacOS too!
+  m_ui.tab->setTabsClosable(tabs_closable());
+
+  if(s_application->application_locked())
+    m_ui.tab->setTabToolTip(m_ui.tab->indexOf(dash), tr("Application Locked"));
+  else
+    m_ui.tab->setTabToolTip
+      (m_ui.tab->indexOf(dash), tr("Dooble Awesome Shell"));
+
+  if(dooble_settings::setting("access_new_tabs").toBool() ||
+     qobject_cast<QShortcut *> (sender()) ||
+     qobject_cast<dooble_tab_widget *> (sender()) ||
+     sender() == nullptr)
+    m_ui.tab->setCurrentWidget(dash);
+
+  prepare_control_w_shortcut();
+  prepare_tab_shortcuts();
 }
 
 void dooble::slot_show_documentation(void)

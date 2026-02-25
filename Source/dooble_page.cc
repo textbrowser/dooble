@@ -1559,6 +1559,14 @@ void dooble_page::prepare_standard_menus(void)
 		     SLOT(slot_current_url_executable(void)));
     }
 
+  menu->addSeparator();
+  action = menu->addAction(tr("Dooble Awesome Shell (DASH)..."),
+			   this,
+			   SIGNAL(show_dash(void)));
+#ifndef Q_OS_UNIX
+  action->setEnabled(false);
+#endif
+
   /*
   ** View Menu
   */

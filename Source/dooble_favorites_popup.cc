@@ -276,7 +276,7 @@ void dooble_favorites_popup::slot_delete_selected(void)
 
 void dooble_favorites_popup::slot_double_clicked(const QModelIndex &index)
 {
-  if(QApplication::keyboardModifiers() & Qt::ControlModifier)
+  if(QGuiApplication::keyboardModifiers() & Qt::ControlModifier)
     emit open_link_in_new_tab(index.sibling(index.row(), 1).data().toString());
   else
     emit open_link(index.sibling(index.row(), 1).data().toString());
