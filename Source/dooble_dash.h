@@ -53,7 +53,11 @@ class dooble_dash_textedit: public QTextEdit
 
   void append(const QString &text)
   {
-    QTextEdit::append(text);
+    if(text.isEmpty())
+      QTextEdit::append("");
+    else
+      QTextEdit::append(text + (text.endsWith('\n') ? + "" : "\n"));
+
     display_prompt();
   }
 

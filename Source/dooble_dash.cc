@@ -142,31 +142,6 @@ void dooble_dash_textedit::handle_return_key(void)
 
 void dooble_dash_textedit::handle_tab_key(void)
 {
-  auto const command(current_command());
-
-  if(command.isEmpty())
-    return;
-
-  QMap<QString, char> map;
-
-  if(map.size() == 1)
-    replace_current_command(map.firstKey() + " ");
-  else if(map.size() > 1)
-    {
-      moveCursor(QTextCursor::End);
-
-      QMapIterator<QString, char> it(map);
-      QString string("");
-
-      while(it.hasNext())
-	{
-	  it.next();
-	  string.append(it.key()).append(" ");
-	}
-
-      append(string.trimmed());
-      replace_current_command(command);
-    }
 }
 
 void dooble_dash_textedit::handle_up_key(void)
