@@ -312,6 +312,7 @@ void dooble_dash_textedit::showEvent(QShowEvent *event)
 
 dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 {
+  m_process.setProcessChannelMode(QProcess::SeparateChannels);
   m_process.setProgram("bash");
   m_process.setWorkingDirectory(QDir::currentPath());
   m_shell = "bash";
@@ -323,14 +324,6 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 	  SIGNAL(finished(int, QProcess::ExitStatus)),
 	  this,
 	  SLOT(slot_process_finished(int, QProcess::ExitStatus)));
-  connect(&m_process,
-	  SIGNAL(readyReadStandardError(void)),
-	  this,
-	  SLOT(slot_display_process_text(void)));
-  connect(&m_process,
-	  SIGNAL(readyReadStandardOutput(void)),
-	  this,
-	  SLOT(slot_display_process_text(void)));
   connect(m_ui.text,
 	  SIGNAL(interrupt(void)),
 	  this,
@@ -350,25 +343,6 @@ dooble_dash::~dooble_dash()
 
 void dooble_dash::slot_display_process_text(void)
 {
-  QByteArray bytes;
-
-  do
-    {
-      bytes = m_process.readAllStandardError();
-
-      if(!bytes.isEmpty())
-	m_ui.text->append(bytes);
-    }
-  while(!bytes.isEmpty());
-
-  do
-    {
-      bytes = m_process.readAllStandardOutput();
-
-      if(!bytes.isEmpty())
-	m_ui.text->append(bytes);
-    }
-  while(!bytes.isEmpty());
 }
 
 void dooble_dash::slot_interrupt(void)
@@ -381,7 +355,10 @@ void dooble_dash::slot_process_command(const QString &command)
 {
   if(command.trimmed().isEmpty() ||
      m_process.state() != QProcess::NotRunning)
-    return;
+    {
+      m_ui.text->append("");
+      return;
+    }
 
   m_process.setArguments(QStringList() << m_shell_command_option << command);
   m_process.start();
@@ -393,4 +370,34 @@ void dooble_dash::slot_process_finished
   Q_UNUSED(exit_code);
   Q_UNUSED(exit_status);
   m_ui.text->set_working_directory(m_process.workingDirectory());
+
+  QByteArray bytes;
+  auto appended = false;
+
+  do
+    {
+      bytes = m_process.readAllStandardError();
+
+      if(!bytes.isEmpty())
+	{
+	  appended = true;
+	  m_ui.text->append(bytes);
+	}
+    }
+  while(!bytes.isEmpty());
+
+  do
+    {
+      bytes = m_process.readAllStandardOutput();
+
+      if(!bytes.isEmpty())
+	{
+	  appended = true;
+	  m_ui.text->append(bytes);
+	}
+    }
+  while(!bytes.isEmpty());
+
+  if(!appended)
+    m_ui.text->append("");
 }
