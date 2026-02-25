@@ -121,7 +121,6 @@ void dooble_dash_textedit::handle_interrupt(void)
   replace_current_command(current_command() + "^C");
   append("");
   moveCursor(QTextCursor::End);
-  display_prompt();
   emit interrupt();
 }
 
@@ -135,10 +134,10 @@ void dooble_dash_textedit::handle_return_key(void)
       m_history << command;
       m_history_index = m_history.size();
     }
+  else
+    append("");
 
-  append("");
   moveCursor(QTextCursor::End);
-  display_prompt();
 }
 
 void dooble_dash_textedit::handle_tab_key(void)
@@ -166,8 +165,6 @@ void dooble_dash_textedit::handle_tab_key(void)
 	}
 
       append(string.trimmed());
-      append("");
-      display_prompt();
       replace_current_command(command);
     }
 }
@@ -328,6 +325,7 @@ void dooble_dash_textedit::replace_current_command(const QString &command)
 
 void dooble_dash_textedit::set_working_directory(const QString &text)
 {
+  m_prompt_length = 2 + text.trimmed().length();
   m_working_directory = text.trimmed();
 }
 
@@ -339,11 +337,25 @@ void dooble_dash_textedit::showEvent(QShowEvent *event)
 
 dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 {
+  m_process.setProgram("bash");
+  m_process.setWorkingDirectory(QDir::currentPath());
   m_shell = "bash";
   m_shell_command_option = "-c";
   m_ui.setupUi(this);
   m_ui.text->setCursorWidth(10);
   m_ui.text->setUndoRedoEnabled(false);
+  connect(&m_process,
+	  SIGNAL(finished(int, QProcess::ExitStatus)),
+	  this,
+	  SLOT(slot_process_finished(int, QProcess::ExitStatus)));
+  connect(&m_process,
+	  SIGNAL(readyReadStandardError(void)),
+	  this,
+	  SLOT(slot_display_process_text(void)));
+  connect(&m_process,
+	  SIGNAL(readyReadStandardOutput(void)),
+	  this,
+	  SLOT(slot_display_process_text(void)));
   connect(m_ui.text,
 	  SIGNAL(interrupt(void)),
 	  this,
@@ -361,6 +373,29 @@ dooble_dash::~dooble_dash()
   m_process.waitForFinished();
 }
 
+void dooble_dash::slot_display_process_text(void)
+{
+  QByteArray bytes;
+
+  do
+    {
+      bytes = m_process.readAllStandardError();
+
+      if(!bytes.isEmpty())
+	m_ui.text->append(bytes);
+    }
+  while(!bytes.isEmpty());
+
+  do
+    {
+      bytes = m_process.readAllStandardOutput();
+
+      if(!bytes.isEmpty())
+	m_ui.text->append(bytes);
+    }
+  while(!bytes.isEmpty());
+}
+
 void dooble_dash::slot_interrupt(void)
 {
   m_process.kill();
@@ -373,5 +408,14 @@ void dooble_dash::slot_process_command(const QString &command)
      m_process.state() != QProcess::NotRunning)
     return;
 
-  m_process.start(m_shell, QStringList() << m_shell_command_option << command);
+  m_process.setArguments(QStringList() << m_shell_command_option << command);
+  m_process.start();
+}
+
+void dooble_dash::slot_process_finished
+(int exit_code, QProcess::ExitStatus exit_status)
+{
+  Q_UNUSED(exit_code);
+  Q_UNUSED(exit_status);
+  m_ui.text->set_working_directory(m_process.workingDirectory());
 }

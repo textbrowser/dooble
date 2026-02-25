@@ -51,6 +51,12 @@ class dooble_dash_textedit: public QTextEdit
     display_prompt();
   }
 
+  void append(const QString &text)
+  {
+    QTextEdit::append(text);
+    display_prompt();
+  }
+
   QString history(const int index) const;
   void clear_history(void);
   void print_history(void);
@@ -99,8 +105,10 @@ class dooble_dash: public QDialog
   Ui_dooble_dash m_ui;
 
  private slots:
+  void slot_display_process_text(void);
   void slot_interrupt(void);
   void slot_process_command(const QString &command);
+  void slot_process_finished(int exit_code, QProcess::ExitStatus exit_status);
 };
 
 #endif
