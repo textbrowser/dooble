@@ -475,6 +475,7 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QListPairIconString> ("QListPairIconString");
   qRegisterMetaType<QListUrl> ("QListUrl");
   qRegisterMetaType<QListVectorByteArray> ("QListVectorByteArray");
+  qRegisterMetaType<QProcess::ExitStatus> ("QProcess::ExitStatus");
   qRegisterMetaType<QVector<qreal> > ("QVector<qreal>");
   qRegisterMetaType<Qt::SortOrder> ("Qt::SortOrder");
   qRegisterMetaType<dooble_charts::Properties> ("dooble_charts::Properties");

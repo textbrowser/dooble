@@ -365,6 +365,8 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["relative_location_character"] = "";
   s_settings["retain_session_tabs"] = false;
   s_settings["save_geometry"] = true;
+  s_settings["shell"] = "bash";
+  s_settings["shell_command_option"] = "-c";
   s_settings["show_address_widget_completer"] = true;
   s_settings["show_hovered_links_tool_tips"] = false;
   s_settings["show_left_corner_widget"] = true;

@@ -29,6 +29,7 @@
 #include <QScrollBar>
 
 #include "dooble_dash.h"
+#include "dooble_settings.h"
 
 QString dooble_dash_textedit::current_command(void) const
 {
@@ -300,8 +301,8 @@ void dooble_dash_textedit::replace_current_command(const QString &command)
 
 void dooble_dash_textedit::set_working_directory(const QString &text)
 {
-  m_prompt_length = 2 + text.trimmed().length();
-  m_working_directory = text.trimmed();
+  m_prompt_length = 2 + text.length();
+  m_working_directory = text;
 }
 
 void dooble_dash_textedit::showEvent(QShowEvent *event)
@@ -312,18 +313,19 @@ void dooble_dash_textedit::showEvent(QShowEvent *event)
 
 dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 {
-  m_process.setProcessChannelMode(QProcess::SeparateChannels);
-  m_process.setProgram("bash");
+  m_process.setProcessChannelMode(QProcess::MergedChannels);
+  m_process.setProgram(dooble_settings::setting("shell").toString().trimmed());
   m_process.setWorkingDirectory(QDir::currentPath());
-  m_shell = "bash";
-  m_shell_command_option = "-c";
+  m_shell_command_option = dooble_settings::setting("shell_command_option").
+    toString().trimmed();
   m_ui.setupUi(this);
   m_ui.text->setCursorWidth(10);
   m_ui.text->setUndoRedoEnabled(false);
   connect(&m_process,
 	  SIGNAL(finished(int, QProcess::ExitStatus)),
 	  this,
-	  SLOT(slot_process_finished(int, QProcess::ExitStatus)));
+	  SLOT(slot_process_finished(int, QProcess::ExitStatus)),
+	  Qt::QueuedConnection);
   connect(m_ui.text,
 	  SIGNAL(interrupt(void)),
 	  this,
@@ -331,7 +333,8 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
   connect(m_ui.text,
 	  SIGNAL(process_command(const QString &)),
 	  this,
-	  SLOT(slot_process_command(const QString &)));
+	  SLOT(slot_process_command(const QString &)),
+	  Qt::QueuedConnection);
 }
 
 dooble_dash::~dooble_dash()
@@ -371,33 +374,14 @@ void dooble_dash::slot_process_finished
   Q_UNUSED(exit_status);
   m_ui.text->set_working_directory(m_process.workingDirectory());
 
-  QByteArray bytes;
-  auto appended = false;
-
   do
     {
-      bytes = m_process.readAllStandardError();
+      auto const bytes(m_process.readAllStandardOutput());
 
-      if(!bytes.isEmpty())
-	{
-	  appended = true;
-	  m_ui.text->append(bytes);
-	}
+      if(bytes.isEmpty())
+	break;
+      else
+	m_ui.text->append(bytes);
     }
-  while(!bytes.isEmpty());
-
-  do
-    {
-      bytes = m_process.readAllStandardOutput();
-
-      if(!bytes.isEmpty())
-	{
-	  appended = true;
-	  m_ui.text->append(bytes);
-	}
-    }
-  while(!bytes.isEmpty());
-
-  if(!appended)
-    m_ui.text->append("");
+  while(true);
 }

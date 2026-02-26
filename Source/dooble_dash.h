@@ -104,7 +104,6 @@ class dooble_dash: public QDialog
 
  private:
   QProcess m_process;
-  QString m_shell;
   QString m_shell_command_option;
   Ui_dooble_dash m_ui;
 
