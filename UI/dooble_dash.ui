@@ -10,6 +10,9 @@
     <height>500</height>
    </rect>
   </property>
+  <property name="windowTitle">
+   <string>Dooble: Dooble Awesome Shell</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QFrame" name="frame">

@@ -5517,6 +5517,13 @@ void dooble::slot_tab_index_changed(int index)
 	      else
 		setWindowTitle(tr("Charts - Dooble"));
 	    }
+	  else
+	    {
+	      auto dialog = qobject_cast<QDialog *> (m_ui.tab->widget(index));
+
+	      if(dialog)
+		setWindowTitle(dialog->windowTitle());
+	    }
 	}
 
       return;
