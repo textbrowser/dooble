@@ -372,7 +372,8 @@ void dooble_dash::slot_process_finished
 {
   Q_UNUSED(exit_code);
   Q_UNUSED(exit_status);
-  m_ui.text->set_working_directory(m_process.workingDirectory());
+
+  auto appended = false;
 
   do
     {
@@ -381,7 +382,15 @@ void dooble_dash::slot_process_finished
       if(bytes.isEmpty())
 	break;
       else
-	m_ui.text->append(bytes);
+	{
+	  appended = true;
+	  m_ui.text->append(bytes);
+	}
     }
   while(true);
+
+  if(!appended)
+    m_ui.text->append("");
+
+  m_ui.text->set_working_directory(m_process.workingDirectory());
 }

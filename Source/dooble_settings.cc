@@ -2147,6 +2147,10 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("retain_session_tabs", false).toBool());
   m_ui.save_geometry->setChecked
     (s_settings.value("save_geometry", true).toBool());
+  m_ui.shell->setText
+    ((s_settings.value("shell", "bash").toString().trimmed() +
+      " " +
+      s_settings.value("shell_command_option", "-c").toString()).trimmed());
   m_ui.show_address_widget_completer->setChecked
     (s_settings.value("show_address_widget_completer", true).toBool());
   m_ui.show_hovered_links_tool_tips->setChecked
@@ -3201,6 +3205,11 @@ void dooble_settings::slot_apply(void)
 	      m_ui.relative_location_character->text().trimmed());
   set_setting("retain_session_tabs", m_ui.retain_session_tabs->isChecked());
   set_setting("save_geometry", m_ui.save_geometry->isChecked());
+  set_setting
+    ("shell", m_ui.shell->text().trimmed().split(' ').value(0).trimmed());
+  set_setting
+    ("shell_command_option",
+     m_ui.shell->text().trimmed().split(' ').value(1).trimmed());
   set_setting("show_address_widget_completer",
 	      m_ui.show_address_widget_completer->isChecked());
   set_setting("show_hovered_links_tool_tips",

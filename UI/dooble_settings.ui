@@ -353,8 +353,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>419</width>
-               <height>1526</height>
+               <width>642</width>
+               <height>1404</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -509,6 +509,36 @@
                  <bool>true</bool>
                 </property>
                </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_32">
+                <item>
+                 <widget class="QLabel" name="label_47">
+                  <property name="text">
+                   <string>Dooble Awesome Shell</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>home_url</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="shell">
+                  <property name="toolTip">
+                   <string>For example, &quot;bash -c&quot;. The shell name, a single space, and the shell's option for issuing a command.</string>
+                  </property>
+                  <property name="text">
+                   <string>bash -c</string>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Shell &amp; Shell Command Option</string>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -1200,7 +1230,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>640</width>
+               <width>636</width>
                <height>1157</height>
               </rect>
              </property>
@@ -1824,8 +1854,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1949</y>
-               <width>642</width>
+               <y>0</y>
+               <width>591</width>
                <height>3118</height>
               </rect>
              </property>
@@ -3077,6 +3107,7 @@
   <tabstop>application_font</tabstop>
   <tabstop>display_application_font</tabstop>
   <tabstop>denote_private_widgets</tabstop>
+  <tabstop>shell</tabstop>
   <tabstop>home_url</tabstop>
   <tabstop>icon_set</tabstop>
   <tabstop>language</tabstop>
