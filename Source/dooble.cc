@@ -2541,7 +2541,7 @@ void dooble::prepare_standard_menus(void)
 		  this,
 		  SLOT(slot_show_search_engines(void)));
   menu->addSeparator();
-  action = menu->addAction(tr("Dooble Awesome Shell (DASH)..."),
+  action = menu->addAction(tr("Dooble Awesome Shell (DASH)"),
 			   this,
 			   SLOT(slot_show_dash(void)));
 #ifndef Q_OS_UNIX

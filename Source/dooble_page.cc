@@ -1560,7 +1560,7 @@ void dooble_page::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  action = menu->addAction(tr("Dooble Awesome Shell (DASH)..."),
+  action = menu->addAction(tr("Dooble Awesome Shell (DASH)"),
 			   this,
 			   SIGNAL(show_dash(void)));
 #ifndef Q_OS_UNIX
