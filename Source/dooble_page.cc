@@ -1322,7 +1322,7 @@ void dooble_page::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  menu->addAction(tr("Vacuum Databases"),
+  menu->addAction(tr("Vacuum Databases..."),
 		  this,
 		  SIGNAL(vacuum_databases(void)));
 

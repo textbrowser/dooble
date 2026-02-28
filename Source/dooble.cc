@@ -2354,7 +2354,7 @@ void dooble::prepare_standard_menus(void)
     }
 
   menu->addSeparator();
-  menu->addAction(tr("Vacuum Databases"),
+  menu->addAction(tr("Vacuum Databases..."),
 		  this,
 		  SLOT(slot_vacuum_databases(void)));
 
