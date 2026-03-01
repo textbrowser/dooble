@@ -42,6 +42,7 @@ Completed Items
 - Creating new tabs and windows requires sophistication.
 - Ctrl + W shortcuts.
 - Custom icon sets. Icons from themes.
+- DASH: various shells. BASH included.
 - Debian distribution.
 - Delete temporary parent cookie domains having zero children.
 - Depict current tab on tabs pull-down menu.
@@ -228,7 +229,6 @@ Remaining Items
           multiple data sources
 	  removal of recorded curves
 	  reset properties
-- DASH: various shells. BASH included.
 - Default browser on MacOS.
 - Element-selection option.
 - Fancy completer.
