@@ -65,12 +65,6 @@ bool dooble_dash_textedit::handle_backspace_key(void) const
   return false;
 }
 
-void dooble_dash_textedit::clear_history(void)
-{
-  m_history.clear();
-  m_history_index = 0;
-}
-
 void dooble_dash_textedit::display_prompt(void)
 {
   setTextColor(QColor(0, 0, 139));
@@ -276,18 +270,6 @@ void dooble_dash_textedit::mousePressEvent(QMouseEvent *event)
   Q_UNUSED(event);
 }
 
-void dooble_dash_textedit::print_history(void)
-{
-  if(m_history.isEmpty())
-    {
-      m_history << tr("history ");
-      m_history_index = 1;
-    }
-
-  for(int i = 0; i < m_history.size(); i++)
-    append(QString("%1: %2").arg(i + 1).arg(m_history.at(i)));
-}
-
 void dooble_dash_textedit::replace_current_command(const QString &command)
 {
   auto cursor(textCursor());
@@ -339,13 +321,10 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 
 dooble_dash::~dooble_dash()
 {
+  m_process.closeWriteChannel();
   m_process.kill();
   m_process.terminate();
   m_process.waitForFinished();
-}
-
-void dooble_dash::slot_display_process_text(void)
-{
 }
 
 void dooble_dash::slot_interrupt(void)

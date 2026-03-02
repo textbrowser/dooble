@@ -62,8 +62,6 @@ class dooble_dash_textedit: public QTextEdit
   }
 
   QString history(const int index) const;
-  void clear_history(void);
-  void print_history(void);
   void set_working_directory(const QString &text);
 
  private:
@@ -108,7 +106,6 @@ class dooble_dash: public QDialog
   Ui_dooble_dash m_ui;
 
  private slots:
-  void slot_display_process_text(void);
   void slot_interrupt(void);
   void slot_process_command(const QString &command);
   void slot_process_finished(int exit_code, QProcess::ExitStatus exit_status);
