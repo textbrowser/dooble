@@ -5468,6 +5468,11 @@ void dooble::slot_tab_close_requested(int index)
   if(chart)
     chart->deleteLater();
 
+  auto dash = qobject_cast<dooble_dash *> (m_ui.tab->widget(index));
+
+  if(dash)
+    dash->deleteLater();
+
   auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(index));
 
   if(page)
