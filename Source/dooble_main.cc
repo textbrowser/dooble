@@ -26,6 +26,7 @@
 */
 
 #include <QDir>
+#include <QProcess>
 #include <QSplashScreen>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
