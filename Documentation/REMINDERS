@@ -229,6 +229,7 @@ Remaining Items
           multiple data sources
 	  removal of recorded curves
 	  reset properties
+- DASH: replace QProcess with fork().
 - Default browser on MacOS.
 - Element-selection option.
 - Fancy completer.
