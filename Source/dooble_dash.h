@@ -109,6 +109,7 @@ class dooble_dash: public QDialog
   void slot_interrupt(void);
   void slot_process_command(const QString &command);
   void slot_process_finished(int exit_code, QProcess::ExitStatus exit_status);
+  void slot_process_ready_read(void);
 };
 
 #endif

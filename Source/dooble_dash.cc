@@ -308,6 +308,11 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 	  this,
 	  SLOT(slot_process_finished(int, QProcess::ExitStatus)),
 	  Qt::QueuedConnection);
+  connect(&m_process,
+	  SIGNAL(readyReadStandardOutput(void)),
+	  this,
+	  SLOT(slot_process_ready_read(void)),
+	  Qt::QueuedConnection);
   connect(m_ui.text,
 	  SIGNAL(interrupt(void)),
 	  this,
@@ -317,6 +322,7 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 	  this,
 	  SLOT(slot_process_command(const QString &)),
 	  Qt::QueuedConnection);
+  m_process.start();
 }
 
 dooble_dash::~dooble_dash()
@@ -329,21 +335,37 @@ dooble_dash::~dooble_dash()
 
 void dooble_dash::slot_interrupt(void)
 {
-  m_process.kill();
-  m_process.terminate();
 }
 
 void dooble_dash::slot_process_command(const QString &command)
 {
-  if(command.trimmed().isEmpty() ||
-     m_process.state() != QProcess::NotRunning)
-    {
-      m_ui.text->append("");
-      return;
-    }
+  if(command.trimmed().isEmpty())
+    return;
 
-  m_process.setArguments(QStringList() << m_shell_command_option << command);
-  m_process.start();
+  m_process.write(command.toUtf8().constData());
+  m_process.write("\n");
+}
+
+void dooble_dash::slot_process_ready_read(void)
+{
+  QByteArray bytes;
+  int i = 5;
+
+  do
+    {
+      auto const b(m_process.readAllStandardOutput());
+
+      if(b.isEmpty())
+	{
+	  QApplication::processEvents();
+	  i -= 1;
+	}
+      else
+	bytes.append(b);
+    }
+  while(i >= 0);
+
+  m_ui.text->append(bytes);
 }
 
 void dooble_dash::slot_process_finished
@@ -351,25 +373,5 @@ void dooble_dash::slot_process_finished
 {
   Q_UNUSED(exit_code);
   Q_UNUSED(exit_status);
-
-  auto appended = false;
-
-  do
-    {
-      auto const bytes(m_process.readAllStandardOutput());
-
-      if(bytes.isEmpty())
-	break;
-      else
-	{
-	  appended = true;
-	  m_ui.text->append(bytes);
-	}
-    }
-  while(true);
-
-  if(!appended)
-    m_ui.text->append("");
-
-  m_ui.text->set_working_directory(m_process.workingDirectory());
+  deleteLater();
 }
