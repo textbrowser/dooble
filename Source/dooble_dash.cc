@@ -342,6 +342,10 @@ void dooble_dash::slot_process_command(const QString &command)
   if(command.trimmed().isEmpty())
     return;
 
+  /*
+  ** Some commands will not write to standard output.
+  */
+
   m_process.write(command.toUtf8().constData());
   m_process.write("\n");
 }
