@@ -361,6 +361,7 @@ void dooble_dash::slot_process_command(const QString &command)
   m_process.write((command + " && pwd").toUtf8().constData());
   m_process.write("\n");
   m_process.waitForBytesWritten();
+  m_process.waitForReadyRead(250);
 }
 
 void dooble_dash::slot_process_finished
