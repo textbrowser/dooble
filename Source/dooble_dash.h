@@ -51,7 +51,7 @@ class dooble_dash_textedit: public QTextEdit
     display_prompt();
   }
 
-  void append(const QString &text)
+  void append_with_prompt(const QString &text)
   {
     if(text.isEmpty())
       QTextEdit::append("");
@@ -62,6 +62,7 @@ class dooble_dash_textedit: public QTextEdit
   }
 
   QString history(const int index) const;
+  void display_prompt(void);
   void set_working_directory(const QString &text);
 
  private:
@@ -72,7 +73,6 @@ class dooble_dash_textedit: public QTextEdit
   int m_prompt_length;
   QString current_command(void) const;
   bool handle_backspace_key(void) const;
-  void display_prompt(void);
   void handle_down_key(void);
   void handle_home_key(void);
   void handle_interrupt(void);
@@ -109,7 +109,8 @@ class dooble_dash: public QDialog
   void slot_interrupt(void);
   void slot_process_command(const QString &command);
   void slot_process_finished(int exit_code, QProcess::ExitStatus exit_status);
-  void slot_process_ready_read(void);
+  void slot_process_ready_read_standard_error(void);
+  void slot_process_ready_read_standard_output(void);
 };
 
 #endif

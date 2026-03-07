@@ -114,7 +114,7 @@ void dooble_dash_textedit::handle_home_key(void)
 void dooble_dash_textedit::handle_interrupt(void)
 {
   replace_current_command(current_command() + "^C");
-  append("");
+  append_with_prompt("");
   moveCursor(QTextCursor::End);
   emit interrupt();
 }
@@ -130,7 +130,7 @@ void dooble_dash_textedit::handle_return_key(void)
       m_history_index = m_history.size();
     }
   else
-    append("");
+    append_with_prompt("");
 
   moveCursor(QTextCursor::End);
 }
@@ -295,7 +295,7 @@ void dooble_dash_textedit::showEvent(QShowEvent *event)
 
 dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 {
-  m_process.setProcessChannelMode(QProcess::MergedChannels);
+  m_process.setProcessChannelMode(QProcess::SeparateChannels);
   m_process.setProgram(dooble_settings::setting("shell").toString().trimmed());
   m_process.setWorkingDirectory(QDir::currentPath());
   m_shell_command_option = dooble_settings::setting("shell_command_option").
@@ -309,9 +309,14 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
 	  SLOT(slot_process_finished(int, QProcess::ExitStatus)),
 	  Qt::QueuedConnection);
   connect(&m_process,
+	  SIGNAL(readyReadStandardError(void)),
+	  this,
+	  SLOT(slot_process_ready_read_standard_error(void)),
+	  Qt::QueuedConnection);
+  connect(&m_process,
 	  SIGNAL(readyReadStandardOutput(void)),
 	  this,
-	  SLOT(slot_process_ready_read(void)),
+	  SLOT(slot_process_ready_read_standard_output(void)),
 	  Qt::QueuedConnection);
   connect(m_ui.text,
 	  SIGNAL(interrupt(void)),
@@ -346,14 +351,46 @@ void dooble_dash::slot_process_command(const QString &command)
   ** Some commands will not write to standard output.
   */
 
-  m_process.write(command.toUtf8().constData());
+  m_process.write((command + " && pwd").toUtf8().constData());
   m_process.write("\n");
+  m_process.waitForBytesWritten();
 }
 
-void dooble_dash::slot_process_ready_read(void)
+void dooble_dash::slot_process_finished
+(int exit_code, QProcess::ExitStatus exit_status)
+{
+  Q_UNUSED(exit_code);
+  Q_UNUSED(exit_status);
+  deleteLater();
+}
+
+void dooble_dash::slot_process_ready_read_standard_error(void)
 {
   QByteArray bytes;
-  int i = 5;
+  int i = 500;
+
+  do
+    {
+      auto const b(m_process.readAllStandardError());
+
+      if(b.isEmpty())
+	{
+	  QApplication::processEvents();
+	  i -= 1;
+	}
+      else
+	bytes.append(b);
+    }
+  while(i >= 0);
+
+  if(!bytes.isEmpty())
+    m_ui.text->append_with_prompt(bytes);
+}
+
+void dooble_dash::slot_process_ready_read_standard_output(void)
+{
+  QByteArray bytes;
+  int i = 500;
 
   do
     {
@@ -369,13 +406,21 @@ void dooble_dash::slot_process_ready_read(void)
     }
   while(i >= 0);
 
-  m_ui.text->append(bytes);
-}
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  auto const list(QString(bytes).split('\n', Qt::SkipEmptyParts));
+#else
+  auto const list(QString(bytes).split('\n', QString::SkipEmptyParts));
+#endif
 
-void dooble_dash::slot_process_finished
-(int exit_code, QProcess::ExitStatus exit_status)
-{
-  Q_UNUSED(exit_code);
-  Q_UNUSED(exit_status);
-  deleteLater();
+  for(int i = 0; i < list.size(); i++)
+    {
+      if(i != list.size() - 1)
+	m_ui.text->append(list[i]);
+      else
+	{
+	  m_process.setWorkingDirectory(list[i]);
+	  m_ui.text->set_working_directory(m_process.workingDirectory());
+	  m_ui.text->append_with_prompt("");
+	}
+    }
 }
