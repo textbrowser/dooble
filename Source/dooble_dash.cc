@@ -416,11 +416,13 @@ void dooble_dash::slot_process_ready_read_standard_output(void)
     {
       if(i != list.size() - 1)
 	m_ui.text->append(list[i]);
-      else
+      else if(QFileInfo(list[i]).isDir())
 	{
 	  m_process.setWorkingDirectory(list[i]);
 	  m_ui.text->set_working_directory(m_process.workingDirectory());
 	  m_ui.text->append_with_prompt("");
 	}
+      else
+	m_ui.text->append(list[i]);
     }
 }
