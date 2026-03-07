@@ -398,21 +398,17 @@ void dooble_dash::slot_process_ready_read_standard_error(void)
 void dooble_dash::slot_process_ready_read_standard_output(void)
 {
   QByteArray bytes;
-  int i = 500;
 
   do
     {
       auto const b(m_process.readAllStandardOutput());
 
       if(b.isEmpty())
-	{
-	  QApplication::processEvents();
-	  i -= 1;
-	}
+	QApplication::processEvents();
       else
 	bytes.append(b);
     }
-  while(i >= 0);
+  while(m_process.bytesAvailable() > 0);
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   auto const list(QString(bytes).split('\n', Qt::SkipEmptyParts));
