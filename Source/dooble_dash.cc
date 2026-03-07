@@ -340,6 +340,13 @@ dooble_dash::~dooble_dash()
 
 void dooble_dash::slot_interrupt(void)
 {
+  m_process.blockSignals(true);
+  m_process.closeWriteChannel();
+  m_process.kill();
+  m_process.terminate();
+  m_process.waitForFinished();
+  m_process.blockSignals(false);
+  m_process.start();
 }
 
 void dooble_dash::slot_process_command(const QString &command)
