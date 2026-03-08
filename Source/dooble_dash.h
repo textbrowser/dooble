@@ -39,11 +39,11 @@ class dooble_dash_textedit: public QTextEdit
  public:
   dooble_dash_textedit(QWidget *parent):QTextEdit(parent)
   {
-    auto font(this->font());
+    auto font(this->currentFont());
 
     font.setFamily("Courier");
     font.setPointSizeF(11.5);
-    setFont(font);
+    setCurrentFont(font);
     m_history_index = 0;
     m_prompt_block_number = 0;
     m_prompt_length = 2 + QDir::currentPath().length();
