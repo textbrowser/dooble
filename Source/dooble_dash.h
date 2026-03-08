@@ -43,7 +43,7 @@ class dooble_dash_textedit: public QTextEdit
 
     font.setFamily("Courier");
     font.setPointSizeF(11.5);
-    setCurrentFont(font);
+    setFont(font);
     m_history_index = 0;
     m_prompt_block_number = 0;
     m_prompt_length = 2 + QDir::currentPath().length();
