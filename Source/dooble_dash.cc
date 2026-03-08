@@ -398,17 +398,21 @@ void dooble_dash::slot_process_ready_read_standard_error(void)
 void dooble_dash::slot_process_ready_read_standard_output(void)
 {
   QByteArray bytes;
+  int i = 500;
 
   do
     {
       auto const b(m_process.readAllStandardOutput());
 
       if(b.isEmpty())
-	QApplication::processEvents();
+	{
+	  QApplication::processEvents();
+	  i -= 1;
+	}
       else
 	bytes.append(b);
     }
-  while(m_process.bytesAvailable() > 0);
+  while(i >= 0);
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   auto const list(QString(bytes).split('\n', Qt::SkipEmptyParts));
@@ -417,16 +421,14 @@ void dooble_dash::slot_process_ready_read_standard_output(void)
 #endif
 
   for(int i = 0; i < list.size(); i++)
-    {
-      if(i != list.size() - 1)
-	m_ui.text->append(list[i]);
-      else if(QFileInfo(list[i]).isDir())
-	{
-	  m_process.setWorkingDirectory(list[i]);
-	  m_ui.text->set_working_directory(m_process.workingDirectory());
-	  m_ui.text->append_with_prompt("");
-	}
-      else
-	m_ui.text->append(list[i]);
-    }
+    if(i != list.size() - 1)
+      m_ui.text->append(list[i]);
+    else if(QFileInfo(list[i]).isDir())
+      {
+	m_process.setWorkingDirectory(list[i]);
+	m_ui.text->set_working_directory(m_process.workingDirectory());
+	m_ui.text->append_with_prompt("");
+      }
+    else
+      m_ui.text->append(list[i]);
 }
