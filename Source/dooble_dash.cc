@@ -202,6 +202,10 @@ void dooble_dash_textedit::keyPressEvent(QKeyEvent *event)
 	handle_return_key();
 	return;
       }
+    case Qt::Key_Escape:
+      {
+	return;
+      }
     case Qt::Key_Left:
       {
 	if(handle_backspace_key())
@@ -303,6 +307,15 @@ dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)
   m_ui.setupUi(this);
   m_ui.text->setCursorWidth(10);
   m_ui.text->setUndoRedoEnabled(false);
+  new QShortcut(QKeySequence(tr("Ctrl+=")),
+		this,
+		SLOT(slot_zoom_in(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+-")),
+		this,
+		SLOT(slot_zoom_out(void)));
+  new QShortcut(QKeySequence(tr("Ctrl+0")),
+		this,
+		SLOT(slot_zoom_reset(void)));
   connect(&m_process,
 	  SIGNAL(finished(int, QProcess::ExitStatus)),
 	  this,
@@ -431,4 +444,57 @@ void dooble_dash::slot_process_ready_read_standard_output(void)
       }
     else
       m_ui.text->append(list[i]);
+}
+
+void dooble_dash::slot_zoom_in(void)
+{
+  zoom(1);
+}
+
+void dooble_dash::slot_zoom_out(void)
+{
+  zoom(-1);
+}
+
+void dooble_dash::slot_zoom_reset(void)
+{
+  zoom(0);
+}
+
+void dooble_dash::zoom(const int value)
+{
+  QTextCharFormat format;
+  auto cursor(m_ui.text->textCursor());
+  auto font(m_ui.text->currentFont());
+
+  switch(value)
+    {
+    case -1:
+      {
+	font.setPointSizeF(-1.0 + font.pointSizeF());
+	font.setPointSizeF(font.pointSizeF() < 8.0 ? 8.0 : font.pointSizeF());
+	break;
+      }
+    case 0:
+      {
+	font.setPointSizeF(11.5);
+	break;
+      }
+    case 1:
+      {
+	font.setPointSizeF(1.0 + font.pointSizeF());
+      }
+    default:
+      {
+	break;
+      }
+    }
+
+  cursor.movePosition(QTextCursor::Start);
+  cursor.select(QTextCursor::Document);
+  format.setFont(font);
+  format.setForeground(QColor(0, 0, 139));
+  cursor.setCharFormat(format);
+  m_ui.text->setCurrentFont(font);
+  m_ui.text->setTextColor(format.foreground().color());
 }

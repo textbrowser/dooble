@@ -104,6 +104,7 @@ class dooble_dash: public QDialog
   QProcess m_process;
   QString m_shell_command_option;
   Ui_dooble_dash m_ui;
+  void zoom(const int value);
 
  private slots:
   void slot_interrupt(void);
@@ -111,6 +112,9 @@ class dooble_dash: public QDialog
   void slot_process_finished(int exit_code, QProcess::ExitStatus exit_status);
   void slot_process_ready_read_standard_error(void);
   void slot_process_ready_read_standard_output(void);
+  void slot_zoom_in(void);
+  void slot_zoom_out(void);
+  void slot_zoom_reset(void);
 };
 
 #endif
