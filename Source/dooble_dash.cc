@@ -427,10 +427,13 @@ void dooble_dash::slot_process_ready_read_standard_output(void)
     }
   while(i >= 0);
 
+  if(bytes.trimmed().isEmpty())
+    return;
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-  auto const list(QString(bytes).split('\n', Qt::SkipEmptyParts));
+  auto const list(QString(bytes.trimmed()).split('\n'));
 #else
-  auto const list(QString(bytes).split('\n', QString::SkipEmptyParts));
+  auto const list(QString(bytes.trimmed()).split('\n'));
 #endif
 
   for(int i = 0; i < list.size(); i++)
