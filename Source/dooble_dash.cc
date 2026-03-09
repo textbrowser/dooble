@@ -476,8 +476,7 @@ void dooble_dash::zoom(const int value)
     {
     case -1:
       {
-	font.setPointSizeF(-1.0 + font.pointSizeF());
-	font.setPointSizeF(font.pointSizeF() < 8.0 ? 8.0 : font.pointSizeF());
+	font.setPointSizeF(qMax(8.0, -1.0 + font.pointSizeF()));
 	break;
       }
     case 0:
