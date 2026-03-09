@@ -411,7 +411,7 @@ void dooble_dash::slot_process_ready_read_standard_error(void)
 void dooble_dash::slot_process_ready_read_standard_output(void)
 {
   QByteArray bytes;
-  int i = 500;
+  int i = 10;
 
   do
     {
@@ -419,8 +419,8 @@ void dooble_dash::slot_process_ready_read_standard_output(void)
 
       if(b.isEmpty())
 	{
-	  QApplication::processEvents();
 	  i -= 1;
+	  m_process.waitForReadyRead(1);
 	}
       else
 	bytes.append(b);
@@ -444,6 +444,8 @@ void dooble_dash::slot_process_ready_read_standard_output(void)
       }
     else
       m_ui.text->append(list[i]);
+
+  zoom(2); // Text color.
 }
 
 void dooble_dash::slot_zoom_in(void)
