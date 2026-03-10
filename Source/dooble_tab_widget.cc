@@ -43,7 +43,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_add_tab_tool_button->setIconSize(QSize(18, 18));
   m_add_tab_tool_button->setMenu(new QMenu(this));
   m_add_tab_tool_button->setPopupMode(QToolButton::DelayedPopup);
-#ifdef Q_OS_MACOS
+#if defined Q_OS_MACOS || defined Q_OS_OS2
   m_add_tab_tool_button->setStyleSheet
     ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}"
@@ -58,7 +58,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_private_tool_button = new QToolButton(this);
   m_private_tool_button->setAutoRaise(false);
   m_private_tool_button->setIconSize(QSize(18, 18));
-#ifdef Q_OS_MACOS
+#if defined Q_OS_MACOS || defined Q_OS_OS2
   m_private_tool_button->setStyleSheet
     ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
@@ -75,7 +75,7 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
   m_tabs_menu_button->setArrowType(Qt::NoArrow);
   m_tabs_menu_button->setAutoRaise(true);
   m_tabs_menu_button->setIconSize(QSize(18, 18));
-#ifdef Q_OS_MACOS
+#if defined Q_OS_MACOS || defined Q_OS_OS2
   m_tabs_menu_button->setStyleSheet
     ("QToolButton {border: none; margin-bottom: 0px; margin-top: 0px;}"
      "QToolButton::menu-button {border: none;}");
