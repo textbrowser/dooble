@@ -168,6 +168,25 @@ void dooble_dash_textedit::keyPressEvent(QKeyEvent *event)
 
   switch(event->key())
     {
+    case Qt::Key_A:
+      {
+	auto const modifiers = QGuiApplication::keyboardModifiers();
+
+	if(modifiers & Qt::ControlModifier)
+	  {
+	    auto cursor(textCursor());
+
+	    cursor.movePosition(QTextCursor::StartOfLine);
+	    cursor.movePosition
+	      (QTextCursor::Right, QTextCursor::MoveAnchor, m_prompt_length);
+	    cursor.movePosition
+	      (QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+	    setTextCursor(cursor);
+	    return;
+	  }
+
+	break;
+      }
     case Qt::Key_Backspace:
       {
 	if(handle_backspace_key())
