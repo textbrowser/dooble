@@ -26,6 +26,7 @@
 */
 
 #include <QKeyEvent>
+#include <QMenu>
 #include <QScrollBar>
 
 #include "dooble_dash.h"
@@ -63,6 +64,35 @@ bool dooble_dash_textedit::handle_backspace_key(void) const
     return true;
 
   return false;
+}
+
+void dooble_dash_textedit::contextMenuEvent(QContextMenuEvent *event)
+{
+  if(!event)
+    {
+      QTextEdit::contextMenuEvent(event);
+      return;
+    }
+
+  auto menu = createStandardContextMenu();
+
+  if(!menu)
+    return;
+
+  foreach(auto action, menu->actions())
+    if(action &&
+       action->text().remove('&').contains(tr("select"), Qt::CaseInsensitive))
+      {
+	action->disconnect();
+	connect(action,
+		SIGNAL(triggered(void)),
+		this,
+		SLOT(slot_select_all(void)));
+	break;
+      }
+
+  menu->exec(event->globalPos());
+  menu->deleteLater();
 }
 
 void dooble_dash_textedit::display_prompt(void)
@@ -174,14 +204,7 @@ void dooble_dash_textedit::keyPressEvent(QKeyEvent *event)
 
 	if(modifiers & Qt::ControlModifier)
 	  {
-	    auto cursor(textCursor());
-
-	    cursor.movePosition(QTextCursor::StartOfLine);
-	    cursor.movePosition
-	      (QTextCursor::Right, QTextCursor::MoveAnchor, m_prompt_length);
-	    cursor.movePosition
-	      (QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
-	    setTextCursor(cursor);
+	    slot_select_all();
 	    return;
 	  }
 
@@ -312,6 +335,17 @@ void dooble_dash_textedit::showEvent(QShowEvent *event)
 {
   QTextEdit::showEvent(event);
   setFocus();
+}
+
+void dooble_dash_textedit::slot_select_all(void)
+{
+  auto cursor(textCursor());
+
+  cursor.movePosition(QTextCursor::StartOfLine);
+  cursor.movePosition
+    (QTextCursor::Right, QTextCursor::MoveAnchor, m_prompt_length);
+  cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+  setTextCursor(cursor);
 }
 
 dooble_dash::dooble_dash(QWidget *parent):QDialog(parent)

@@ -73,6 +73,7 @@ class dooble_dash_textedit: public QTextEdit
   int m_prompt_length;
   QString current_command(void) const;
   bool handle_backspace_key(void) const;
+  void contextMenuEvent(QContextMenuEvent *event);
   void handle_down_key(void);
   void handle_home_key(void);
   void handle_interrupt(void);
@@ -84,6 +85,9 @@ class dooble_dash_textedit: public QTextEdit
   void mousePressEvent(QMouseEvent *event);
   void replace_current_command(const QString &command);
   void showEvent(QShowEvent *event);
+
+ private slots:
+  void slot_select_all(void);
 
  signals:
   void interrupt(void);
