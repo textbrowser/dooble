@@ -607,7 +607,7 @@ void dooble_search_engines_popup::slot_double_clicked(const QModelIndex &index)
   if(index.isValid() && index.column() == 2) // Syntax?
     return;
 
-  if(QApplication::keyboardModifiers() & Qt::ControlModifier)
+  if(QGuiApplication::keyboardModifiers() & Qt::ControlModifier)
     emit open_link_in_new_tab(index.sibling(index.row(), 1).data().toString());
   else
     emit open_link(index.sibling(index.row(), 1).data().toString());
