@@ -215,13 +215,11 @@ void dooble_dash_textedit::keyPressEvent(QKeyEvent *event)
       }
     case Qt::Key_Home:
       {
-	if(verticalScrollBar())
+	if((QGuiApplication::keyboardModifiers() & Qt::ControlModifier) &&
+	   (verticalScrollBar()))
 	  {
-	    if(QGuiApplication::keyboardModifiers() & Qt::ControlModifier)
-	      {
-		verticalScrollBar()->setValue(0);
-		return;
-	      }
+	    verticalScrollBar()->setValue(0);
+	    return;
 	  }
 
 	handle_home_key();
