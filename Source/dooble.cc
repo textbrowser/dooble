@@ -450,8 +450,6 @@ QString dooble::pretty_title_for_page(dooble_page *page)
 
   if(text.isEmpty())
     text = tr("Dooble");
-  else
-    text = tr("%1 - Dooble").arg(text);
 
   return text;
 }
@@ -3425,11 +3423,27 @@ void dooble::slot_anonymous_tab_headers(bool state)
       }
     else
       {
+	auto dash = qobject_cast<dooble_dash *> (m_ui.tab->widget(i));
+
+	if(dash)
+	  {
+	    if(dash == m_ui.tab->currentWidget())
+	      setWindowTitle(tr("Dooble: Dooble Awesome Shell"));
+
+	    m_ui.tab->setTabText
+	      (m_ui.tab->indexOf(dash), tr("Dooble Awesome Shell"));
+	  }
+
 	auto main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(i));
 
 	if(main_window)
-	  m_ui.tab->setTabText
-	    (m_ui.tab->indexOf(main_window), main_window->windowTitle());
+	  {
+	    if(m_ui.tab->currentWidget() == main_window)
+	      setWindowTitle(main_window->windowTitle());
+
+	    m_ui.tab->setTabText
+	      (m_ui.tab->indexOf(main_window), main_window->windowTitle());
+	  }
 
 	auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
 
@@ -5505,6 +5519,11 @@ void dooble::slot_tab_index_changed(int index)
 
   if(!page)
     {
+      auto dash = qobject_cast<dooble_dash *> (m_ui.tab->widget(index));
+
+      if(dash)
+	setWindowTitle(tr("Dooble: Dooble Awesome Shell"));
+
       auto main_window = qobject_cast<QMainWindow *> (m_ui.tab->widget(index));
 
       if(main_window)
@@ -5518,9 +5537,9 @@ void dooble::slot_tab_index_changed(int index)
 	      auto const title(chart->name().trimmed());
 
 	      if(!title.isEmpty())
-		setWindowTitle(tr("Charts (%1) - Dooble").arg(title));
+		setWindowTitle(tr("Dooble: Charts - %1").arg(title));
 	      else
-		setWindowTitle(tr("Charts - Dooble"));
+		setWindowTitle(tr("Dooble: Charts"));
 	    }
 	  else
 	    {
@@ -5544,9 +5563,8 @@ void dooble::slot_tab_index_changed(int index)
     setWindowTitle(tr("Dooble"));
   else
     setWindowTitle
-      (tr("%1 - Dooble").
-       arg(page->title().trimmed().
-	   mid(0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH))));
+      (page->title().trimmed().mid
+      (0, static_cast<int> (dooble::Limits::MAXIMUM_TITLE_LENGTH)));
 
   page->hide_status_bar
     (!dooble_settings::setting("status_bar_visible").toBool() || m_is_cute);
@@ -5693,8 +5711,6 @@ void dooble::slot_title_changed(const QString &title)
 
   if(text.isEmpty())
     text = tr("Dooble");
-  else
-    text = tr("%1 - Dooble").arg(text);
 
   if(!(m_anonymous_tab_headers || s_application->application_locked()))
     {

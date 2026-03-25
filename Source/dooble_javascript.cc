@@ -250,7 +250,7 @@ void dooble_javascript::set_page(QWebEnginePage *page)
       setWindowTitle
 	(m_page->title().trimmed().isEmpty() ?
 	 tr("Dooble: JavaScript Console") :
-	 tr("%1 - Dooble: JavaScript Console").arg(m_page->title().trimmed()));
+	 tr("Dooble: JavaScript Console - %1").arg(m_page->title().trimmed()));
       slot_url_changed(m_page->url());
     }
 }
@@ -567,7 +567,7 @@ void dooble_javascript::slot_title_changed(const QString &title)
   setWindowTitle
     (title.trimmed().isEmpty() ?
      tr("Dooble: JavaScript Console") :
-     tr("%1 - Dooble: JavaScript Console").arg(title.trimmed()));
+     tr("Dooble: JavaScript Console - %1").arg(title.trimmed()));
 }
 
 void dooble_javascript::slot_url_changed(const QUrl &url)
