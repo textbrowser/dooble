@@ -96,6 +96,7 @@ int main(int argc, char *argv[])
 
   QList<QUrl> urls;
   QString screen_mode("");
+  QStringList options;
   auto attach = false;
   auto disable_javascript = false;
   auto test_aes = false;
@@ -104,6 +105,22 @@ int main(int argc, char *argv[])
   auto test_threefish_performance = false;
   auto test_xchacha20 = false;
   int reload_periodically = -1;
+
+  options << "--attach"
+	  << "--disable-javascript"
+	  << "--executable-current-url"
+	  << "--full-screen"
+	  << "--help"
+	  << "--listen"
+	  << "--load-url"
+	  << "--normal-screen"
+	  << "--private"
+	  << "--reload-periodically"
+	  << "--test-aes"
+	  << "--test-aes-performance"
+	  << "--test-threefish"
+	  << "--test-threefish-performance"
+	  << "--test-xchacha20";
 
   for(int i = 1; i < argc; i++)
     if(argv && argv[i])
@@ -184,7 +201,7 @@ int main(int argc, char *argv[])
 	  test_xchacha20 = true;
 	else if(strcmp(argv[i], "-style") == 0)
 	  i += 1;
-	else
+	else if(!options.contains(argv[i]))
 	  {
 	    QFileInfo const file_info(argv[i]);
 	    QUrl url;
