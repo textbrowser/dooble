@@ -236,7 +236,7 @@ dooble::dooble(const QList<QUrl> &urls,
       socket.connectToServer
 	(dooble_settings::setting("home_path").toString() +
 	 QDir::separator() +
-	 "dooble_local_server");
+	 "dooble_local_server.socket");
 
       if(socket.waitForConnected(1500))
 	{
@@ -1482,7 +1482,7 @@ void dooble::prepare_local_server(void)
 
   auto const name(dooble_settings::setting("home_path").toString() +
 		  QDir::separator() +
-		  "dooble_local_server");
+		  "dooble_local_server.socket");
 
   QLocalServer::removeServer(name);
 #ifndef Q_OS_OS2
