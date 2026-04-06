@@ -1267,6 +1267,8 @@ void dooble_settings::prepare_application_fonts(void)
 	font.setBold(before);
 	widget->updateGeometry();
       }
+
+  m_ui.scrollArea->setMinimumWidth(50 + m_ui.cache->sizeHint().width());
 }
 
 void dooble_settings::prepare_fonts(void)
