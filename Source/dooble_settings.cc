@@ -2281,8 +2281,10 @@ void dooble_settings::restore(bool read_database)
       file.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
     else
       {
-	file.open(QIODevice::Truncate | QIODevice::WriteOnly);
-	file.setPermissions(QFileDevice::ReadOwner);
+	if(file.open(QIODevice::Truncate | QIODevice::WriteOnly))
+	  file.setPermissions(QFileDevice::ReadOwner);
+	else
+	  qDebug() << tr("Cannot open %1 for writing.").arg(file.fileName());
       }
   }
 
@@ -3122,8 +3124,10 @@ void dooble_settings::slot_apply(void)
       file.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
     else
       {
-	file.open(QIODevice::Truncate | QIODevice::WriteOnly);
-	file.setPermissions(QFileDevice::ReadOwner);
+	if(file.open(QIODevice::Truncate | QIODevice::WriteOnly))
+	  file.setPermissions(QFileDevice::ReadOwner);
+	else
+	  qDebug() << tr("Cannot open %1 for writing.").arg(file.fileName());
       }
   }
 
