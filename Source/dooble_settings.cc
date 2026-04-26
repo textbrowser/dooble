@@ -329,6 +329,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   s_settings["application_font"] = false;
   s_settings["auto_hide_tab_bar"] = false;
   s_settings["auto_load_images"] = true;
+  s_settings["back_forward_cache"] = false;
   s_settings["block_third_party_cookies"] = true;
   s_settings["browsing_history_days"] = 15;
   s_settings["cache_size"] = 0;
@@ -2018,6 +2019,8 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("application_font", false).toBool());
   m_ui.automatic_loading_of_images->setChecked
     (s_settings.value("auto_load_images", true).toBool());
+  m_ui.back_forward_cache->setChecked
+    (s_settings.value("back_forward_cache", false).toBool());
   m_ui.block_third_party_cookies->setChecked
     (s_settings.value("block_third_party_cookies", true).toBool());
   m_ui.browsing_history->setValue
@@ -2361,6 +2364,11 @@ void dooble_settings::restore(bool read_database)
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 10, 0))
+  dooble::s_default_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::BackForwardCacheEnabled,
+     m_ui.back_forward_cache->isChecked());
+#endif
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::JavascriptCanAccessClipboard,
      m_ui.javascript_access_clipboard->isChecked());
@@ -3041,6 +3049,11 @@ void dooble_settings::slot_apply(void)
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::AutoLoadImages,
      m_ui.automatic_loading_of_images->isChecked());
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 10, 0))
+  dooble::s_default_web_engine_profile->settings()->setAttribute
+    (QWebEngineSettings::BackForwardCacheEnabled,
+     m_ui.back_forward_cache->isChecked());
+#endif
   dooble::s_default_web_engine_profile->settings()->setAttribute
     (QWebEngineSettings::DnsPrefetchEnabled,
      m_ui.dns_prefetch->isChecked());
@@ -3146,6 +3159,7 @@ void dooble_settings::slot_apply(void)
   set_setting("application_font", m_ui.application_font->isChecked());
   set_setting
     ("auto_load_images", m_ui.automatic_loading_of_images->isChecked());
+  set_setting("back_forward_cache", m_ui.back_forward_cache->isChecked());
   set_setting
     ("block_third_party_cookies", m_ui.block_third_party_cookies->isChecked());
   set_setting("browsing_history_days", m_ui.browsing_history->value());
