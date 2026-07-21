@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 # https://specifications.freedesktop.org/desktop-entry-spec/latest/apa.html
 
 [Desktop Entry]
