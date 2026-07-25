@@ -35,28 +35,32 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 export QT_X11_NO_MITSHM=1
 
-if [ -r ./Dooble ] && [ -x ./Dooble ]
+if [ -f ./Dooble ] && [ -r ./Dooble ] && [ -x ./Dooble ]
 then
     echo "Launching a local Dooble."
 
     export DOOBLE_TRANSLATIONS_PATH=Translations
     export QTWEBENGINE_DICTIONARIES_PATH=$dictionaries
 
-    if [ -r ./Lib ]
+    if [ -d ./Lib ] && [ -r ./Lib ]
     then
 	export LD_LIBRARY_PATH=Lib
     fi
 
-    if [ -r ./plugins ]
+    if [ -d ./plugins ] && [ -r ./plugins ]
     then
 	export QT_PLUGIN_PATH=plugins
     fi
 
     ./Dooble "$@"
     exit $?
-elif [ -r /opt/dooble/Dooble ] && [ -x /opt/dooble/Dooble ]
+fi
+
+if [ -f /opt/dooble/Dooble ] && \
+   [ -r /opt/dooble/Dooble ] && \
+   [ -x /opt/dooble/Dooble ]
 then
-    echo "Launching an official Dooble."
+    echo "Launching an official Dooble (/opt/dooble)."
 
     export DOOBLE_TRANSLATIONS_PATH=/opt/dooble/Translations
     export LD_LIBRARY_PATH=/opt/dooble/Lib
@@ -65,9 +69,13 @@ then
 
     /opt/dooble/Dooble "$@"
     exit $?
-elif [ -r /usr/local/dooble/Dooble ] && [ -x /usr/local/dooble/Dooble ]
+fi
+
+if [ -f /usr/local/dooble/Dooble ] && \
+   [ -r /usr/local/dooble/Dooble ] && \
+   [ -x /usr/local/dooble/Dooble ]
 then
-    echo "Launching an official Dooble."
+    echo "Launching an official Dooble (/usr/local/dooble)."
 
     export DOOBLE_TRANSLATIONS_PATH=/usr/local/dooble/Translations
     export LD_LIBRARY_PATH=/usr/local/dooble/Lib
@@ -76,7 +84,7 @@ then
 
     /usr/local/dooble/Dooble "$@"
     exit $?
-else
-    echo "Cannot find Dooble. Please contact your lovely administrator."
-    exit 1
 fi
+
+echo "Cannot find Dooble. Please contact your lovely administrator."
+exit 1
