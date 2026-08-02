@@ -102,6 +102,20 @@ int main(int argc, char *argv[])
 	   qEnvironmentVariable("QTWEBENGINE_DICTIONARIES_PATH")).
      toByteArray());
   qputenv("QT_ENABLE_REGEXP_JIT", "0");
+  qputenv
+    ("QT_STYLE_OVERRIDE",
+     QSettings(dooble_settings::setting("home_path").toString() +
+	       QDir::separator() +
+	       "dooble.ini",
+	       QSettings::IniFormat).
+     value("QT_STYLE_OVERRIDE",
+#if defined(Q_OS_MACOS) || defined(Q_OS_WINDOWS)
+	   "Fusion"
+#else
+	   qEnvironmentVariable("QT_STYLE_OVERRIDE")
+#endif
+	   ).toByteArray());
+
   qputenv("QV4_FORCE_INTERPRETER", "1");
 
   QList<QUrl> urls;

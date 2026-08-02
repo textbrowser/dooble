@@ -358,7 +358,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-816</y>
+               <y>-753</y>
                <width>642</width>
                <height>1326</height>
               </rect>
@@ -958,7 +958,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="qt_style_override">
+                 <widget class="QLineEdit" name="style_override">
                   <property name="toolTip">
                    <string>Please restart Dooble if this setting is modified.</string>
                   </property>
@@ -3191,7 +3191,7 @@
   <tabstop>access_new_tabs</tabstop>
   <tabstop>show_title_bar</tabstop>
   <tabstop>splash_screen</tabstop>
-  <tabstop>qt_style_override</tabstop>
+  <tabstop>style_override</tabstop>
   <tabstop>tab_document_mode</tabstop>
   <tabstop>tab_position</tabstop>
   <tabstop>theme</tabstop>

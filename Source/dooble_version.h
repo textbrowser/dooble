@@ -31,7 +31,7 @@
   "textbrowser/dooble/master/Source/dooble_version.h"
 #endif
 #ifndef DOOBLE_VERSION_STRING
-#define DOOBLE_VERSION_STRING "2026.07.09"
+#define DOOBLE_VERSION_STRING "2026.08.19"
 #endif
 #ifndef DOOBLE_VERSION_STRING_LTS
 #define DOOBLE_VERSION_STRING_LTS "2026.07.09"

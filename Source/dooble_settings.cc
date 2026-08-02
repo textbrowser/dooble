@@ -2195,6 +2195,13 @@ void dooble_settings::restore(bool read_database)
      toString().toLower().trimmed());
   m_ui.splash_screen->setChecked
     (s_settings.value("splash_screen", true).toBool());
+  m_ui.style_override->setText
+    (QSettings(dooble_settings::setting("home_path").toString() +
+	       QDir::separator() +
+	       "dooble.ini",
+	       QSettings::IniFormat).
+     value("QT_STYLE_OVERRIDE", qEnvironmentVariable("QT_STYLE_OVERRIDE")).
+     toByteArray());
   m_ui.tab_document_mode->setChecked
     (s_settings.value("tab_document_mode", true).toBool());
 
@@ -2914,9 +2921,15 @@ void dooble_settings::slot_apply(void)
 	    QSettings::IniFormat).
     setValue("QTWEBENGINE_DICTIONARIES_PATH",
 	     m_ui.qtwebengine_dictionaries_path->text().toUtf8());
+  QSettings(dooble_settings::setting("home_path").toString() +
+	    QDir::separator() +
+	    "dooble.ini",
+	    QSettings::IniFormat).
+    setValue("QT_STYLE_OVERRIDE", m_ui.style_override->text().toUtf8());
   qputenv
     ("QTWEBENGINE_DICTIONARIES_PATH",
      m_ui.qtwebengine_dictionaries_path->text().toUtf8());
+  qputenv("QT_STYLE_OVERRIDE", m_ui.style_override->text().toUtf8());
 
   if(m_ui.credentials->isChecked() != setting("credentials_enabled").toBool())
     {
