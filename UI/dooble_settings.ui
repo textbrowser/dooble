@@ -358,9 +358,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-816</y>
                <width>642</width>
-               <height>1286</height>
+               <height>1326</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -949,6 +949,43 @@
                </widget>
               </item>
               <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_33">
+                <item>
+                 <widget class="QLabel" name="label_57">
+                  <property name="text">
+                   <string>Style Override</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="qt_style_override">
+                  <property name="toolTip">
+                   <string>Please restart Dooble if this setting is modified.</string>
+                  </property>
+                  <property name="placeholderText">
+                   <string>QT_STYLE_OVERRIDE</string>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_29">
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
                <widget class="QCheckBox" name="tab_document_mode">
                 <property name="text">
                  <string>Tab Document Mode</string>
@@ -1236,8 +1273,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>642</width>
-               <height>1023</height>
+               <width>581</width>
+               <height>1041</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1859,8 +1896,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1698</y>
-               <width>642</width>
+               <y>0</y>
+               <width>529</width>
                <height>2966</height>
               </rect>
              </property>
@@ -3154,6 +3191,7 @@
   <tabstop>access_new_tabs</tabstop>
   <tabstop>show_title_bar</tabstop>
   <tabstop>splash_screen</tabstop>
+  <tabstop>qt_style_override</tabstop>
   <tabstop>tab_document_mode</tabstop>
   <tabstop>tab_position</tabstop>
   <tabstop>theme</tabstop>
