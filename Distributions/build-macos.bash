@@ -19,6 +19,7 @@ fi
 
 make -j 5
 make install
+codesign --deep --force -s "textbrowser" ./Dooble.d/Dooble.app
 make dmg
 
 if [ ! -r Dooble.dmg ]

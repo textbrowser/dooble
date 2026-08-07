@@ -296,6 +296,10 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
 } else:macx {
+contains(QMAKE_HOST.arch, x86_64) {
+QMAKE_APPLE_DEVICE_ARCHS = arm64 x86_64
+}
+
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
                           -Wcast-align \
