@@ -326,26 +326,25 @@ QMAKE_LFLAGS += /entry:mainCRTStartup
 }
 # Not using QMAKE_CXXFLAGS_RELEASE because it will override O1 and W4.
 msvc:QMAKE_CXXFLAGS_WARN_ON -= /O2 \
-                                /W3
+                               /W3
 msvc:QMAKE_CXXFLAGS_WARN_ON += /O1 \
+                               /W4 \
                                /wd4456 \
-                               /wd4458 \
                                /wd4457 \
-                               /W4
-
-QMAKE_CXXFLAGS_RELEASE += /external:W0 \
-                          /external:anglebrackets \
-                          /GA \
+                               /wd4458
+QMAKE_CXXFLAGS_RELEASE += /GA \
                           /GS \
                           /GT \
+                          /QIntel-jcc-erratum \
+                          /Qspectre-jmp \
+                          /Qspectre-load \
+                          /WX \
+                          /external:W0 \
+                          /external:anglebrackets \
                           /guard:cf \
                           /guard:ehcont \
                           /permissive- \
-                          /QIntel-jcc-erratum \
-                          /Qspectre-load \
-                          /Qspectre-jmp \
-                          /std:c++17 \
-                          /WX
+                          /std:c++17
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
