@@ -43,6 +43,12 @@ dooble_web_engine_page::dooble_web_engine_page
 {
   m_certificate_error_url = QUrl();
   m_is_private = is_private;
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  connect(this,
+	  SIGNAL(certificateError(const QWebEngineCertificateError &)),
+	  this,
+	  SLOT(slot_certificate_error(const QWebEngineCertificateError &)));
+#endif
   connect(this,
 	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
 	  this,
@@ -58,6 +64,12 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 {
   m_certificate_error_url = QUrl();
   m_is_private = false;
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  connect(this,
+	  SIGNAL(certificateError(const QWebEngineCertificateError &)),
+	  this,
+	  SLOT(slot_certificate_error(const QWebEngineCertificateError &)));
+#endif
   connect(this,
 	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
 	  this,
@@ -158,7 +170,15 @@ bool dooble_web_engine_page::acceptNavigationRequest(const QUrl &url,
   return true;
 }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 bool dooble_web_engine_page::certificateError
+(const QWebEngineCertificateError &certificate_error)
+{
+  return certificate_error_implementation(certificate_error);
+}
+#endif
+
+bool dooble_web_engine_page::certificate_error_implementation
 (const QWebEngineCertificateError &certificate_error)
 {
   if(certificate_error.isOverridable())
@@ -305,6 +325,14 @@ void dooble_web_engine_page::resize_certificate_error_widget(void)
   if(m_certificate_error_widget && view())
     m_certificate_error_widget->resize(view()->size());
 }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+void dooble_web_engine_page::slot_certificate_error
+(const QWebEngineCertificateError &certificateError)
+{
+  certificate_error_implementation(certificateError);
+}
+#endif
 
 void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 {

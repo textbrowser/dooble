@@ -728,7 +728,7 @@ gpgme_error_t dooble::peekaboo_passphrase(void *hook,
     (gpgme_io_writen(fd,
 		     passphrase.toUtf8().constData(),
 		     static_cast<size_t> (passphrase.toUtf8().length())));
-  Q_UNUSED(gpgme_io_writen(fd, "\n", static_cast<size_t> (1)));
+  gpgme_io_writen(fd, "\n", static_cast<size_t> (1));
   dooble_cryptography::memzero(passphrase);
   return GPG_ERR_NO_ERROR;
 }

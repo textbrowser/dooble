@@ -3329,7 +3329,7 @@ void dooble_page::slot_publish_html(const QString &html)
       auto const url
 	(m_view->url().toDisplayString().remove('\n').remove('\r'));
 
-      Q_UNUSED(file.fileName()); // Prevents removal of file.
+      file.fileName(); // Prevents removal of file.
       file.setAutoRemove(false);
       stream << title << Qt::endl;
       stream << url << Qt::endl;

@@ -54,7 +54,9 @@ class dooble_web_engine_page: public QWebEnginePage
   bool acceptNavigationRequest(const QUrl &url,
 			       NavigationType type,
 			       bool is_main_frame);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   bool certificateError(const QWebEngineCertificateError &certificate_error);
+#endif
 
  private:
   QPointer<QWidget> m_certificate_error_widget;
@@ -65,8 +67,14 @@ class dooble_web_engine_page: public QWebEnginePage
 #endif
   Ui_dooble_certificate_exceptions_widget m_ui;
   bool m_is_private;
+  bool certificate_error_implementation
+    (const QWebEngineCertificateError &certificate_error);
 
  private slots:
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  void slot_certificate_error
+    (const QWebEngineCertificateError &certificateError);
+#endif
   void slot_certificate_exception_accepted(void);
   void slot_full_screen_requested
     (QWebEngineFullScreenRequest full_screen_request);
