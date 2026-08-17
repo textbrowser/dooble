@@ -45,6 +45,8 @@ dooble_search_engines_popup::dooble_search_engines_popup(QWidget *parent):
   m_model = new QStandardItemModel(this);
   m_model->setHorizontalHeaderLabels
     (QStringList() << tr("Title") << tr("Search Engine") << tr("Syntax"));
+  m_predefined_urls["DuckDuckGo"] =
+    QUrl::fromUserInput("https://duckduckgo.com/?q=");
   m_predefined_urls["Ecosia"] =
     QUrl::fromUserInput("https://www.ecosia.org/search?q=");
   m_predefined_urls["MetaGer"] =
@@ -114,7 +116,7 @@ QList<QAction *> dooble_search_engines_popup::actions(void) const
 QUrl dooble_search_engines_popup::default_address_bar_engine_url(void) const
 {
   if(m_default_address_bar_engine_url.isEmpty())
-    return m_predefined_urls.value("Startpage");
+    return m_predefined_urls.value("DuckDuckGo");
   else
     return m_default_address_bar_engine_url;
 }

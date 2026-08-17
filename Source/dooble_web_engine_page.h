@@ -32,6 +32,9 @@
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QWebEngineCertificateError>
 #endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+#include <QWebEngineFileSystemAccessRequest>
+#endif
 #include <QWebEngineFullScreenRequest>
 #include <QWebEnginePage>
 
@@ -87,6 +90,10 @@ class dooble_web_engine_page: public QWebEnginePage
 #endif
   void slot_certificate_exception_accepted(void);
   void slot_defer_certificate(void);
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+  void slot_file_system_access_requested
+    (QWebEngineFileSystemAccessRequest request);
+#endif
   void slot_full_screen_requested
     (QWebEngineFullScreenRequest full_screen_request);
   void slot_load_started(void);

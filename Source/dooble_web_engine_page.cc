@@ -52,6 +52,14 @@ dooble_web_engine_page::dooble_web_engine_page
 	  this,
 	  SLOT(slot_certificate_error(const QWebEngineCertificateError &)));
 #endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+  connect
+    (this,
+     SIGNAL(fileSystemAccessRequested(QWebEngineFileSystemAccessRequest)),
+     this,
+     SLOT(slot_file_system_access_requested
+	 (QWebEngineFileSystemAccessRequest)));
+#endif
   connect(this,
 	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
 	  this,
@@ -78,6 +86,14 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 	  SIGNAL(certificateError(const QWebEngineCertificateError &)),
 	  this,
 	  SLOT(slot_certificate_error(const QWebEngineCertificateError &)));
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+  connect
+    (this,
+     SIGNAL(fileSystemAccessRequested(QWebEngineFileSystemAccessRequest)),
+     this,
+     SLOT(slot_file_system_access_requested
+	 (QWebEngineFileSystemAccessRequest)));
 #endif
   connect(this,
 	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
@@ -414,6 +430,14 @@ void dooble_web_engine_page::slot_defer_certificate(void)
   m_certificate_error.rejectCertificate();
 #endif
 }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
+void dooble_web_engine_page::slot_file_system_access_requested
+(QWebEngineFileSystemAccessRequest request)
+{
+  request.reject();
+}
+#endif
 
 void dooble_web_engine_page::slot_full_screen_requested
 (QWebEngineFullScreenRequest full_screen_request)
