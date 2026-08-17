@@ -41,6 +41,9 @@ dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
   QWebEnginePage(web_engine_profile, parent)
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_error = QWebEngineCertificateError();
+#endif
   m_certificate_error_url = QUrl();
   m_is_private = is_private;
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
@@ -57,11 +60,17 @@ dooble_web_engine_page::dooble_web_engine_page
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)));
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  connect_certificate_error_signals();
+#endif
 }
 
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(dooble::s_default_web_engine_profile, parent)
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_error = QWebEngineCertificateError();
+#endif
   m_certificate_error_url = QUrl();
   m_is_private = false;
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
@@ -78,6 +87,9 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)));
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  connect_certificate_error_signals();
+#endif
 }
 
 dooble_web_engine_page::~dooble_web_engine_page()
@@ -181,6 +193,10 @@ bool dooble_web_engine_page::certificateError
 bool dooble_web_engine_page::certificate_error_implementation
 (const QWebEngineCertificateError &certificate_error)
 {
+  /*
+  ** Returns true if the certificate should be accepted.
+  */
+
   if(certificate_error.isOverridable())
     {
       auto const url
@@ -210,9 +226,9 @@ bool dooble_web_engine_page::certificate_error_implementation
 	    layout->itemAt(i)->widget()->setVisible(false);
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      m_certificate_error = certificate_error.errorDescription();
+      m_certificate_error_string = certificate_error.errorDescription();
 #else
-      m_certificate_error = certificate_error.description();
+      m_certificate_error_string = certificate_error.description();
 #endif
       m_certificate_error_url = url;
 
@@ -281,9 +297,9 @@ bool dooble_web_engine_page::certificate_error_implementation
 	(dooble_ui_utilities::simplified_url(certificate_error.url()));
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      m_certificate_error = certificate_error.errorDescription();
+      m_certificate_error_string = certificate_error.errorDescription();
 #else
-      m_certificate_error = certificate_error.description();
+      m_certificate_error_string = certificate_error.description();
 #endif
       m_certificate_error_url = url;
 
@@ -320,17 +336,56 @@ bool dooble_web_engine_page::certificate_error_implementation
   return false;
 }
 
+void dooble_web_engine_page::connect_certificate_error_signals(void)
+{
+  connect(this,
+	  SIGNAL(accept_certificate(void)),
+	  this,
+	  SLOT(slot_accept_certificate(void)),
+	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(defer_certificate(void)),
+	  this,
+	  SLOT(slot_defer_certificate(void)),
+	  Qt::UniqueConnection);
+  connect(this,
+	  SIGNAL(reject_certificate(void)),
+	  this,
+	  SLOT(slot_accept_certificate(void)),
+	  Qt::UniqueConnection);
+}
+
 void dooble_web_engine_page::resize_certificate_error_widget(void)
 {
   if(m_certificate_error_widget && view())
     m_certificate_error_widget->resize(view()->size());
 }
 
+void dooble_web_engine_page::slot_accept_certificate(void)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_error.acceptCertificate();
+#endif
+}
+
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 void dooble_web_engine_page::slot_certificate_error
-(const QWebEngineCertificateError &certificateError)
+(const QWebEngineCertificateError &certificate_error)
 {
-  certificate_error_implementation(certificateError);
+  m_certificate_error = certificate_error;
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 8, 0))
+  if(m_certificate_error.isMainFrame() == false)
+    {
+      emit reject_certificate();
+      return;
+    }
+#endif
+
+  if(certificate_error_implementation(certificate_error))
+    emit accept_certificate();
+  else
+    emit defer_certificate();
 }
 #endif
 
@@ -340,16 +395,24 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
     {
       profile()->setProperty
 	(("certificate_exception_" + m_certificate_error_url.toString()).
-	 toStdString().data(), m_certificate_error);
+	 toStdString().data(), m_certificate_error_string);
       profile()->setProperty
 	(("certificate_exception_" + m_certificate_error_url.toString() + "/").
-	 toStdString().data(), m_certificate_error);
+	 toStdString().data(), m_certificate_error_string);
     }
   else
     dooble_certificate_exceptions_menu_widget::exception_accepted
-      (m_certificate_error, m_certificate_error_url);
+      (m_certificate_error_string, m_certificate_error_url);
 
   emit certificate_exception_accepted(url());
+  slot_accept_certificate();
+}
+
+void dooble_web_engine_page::slot_defer_certificate(void)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_error.rejectCertificate();
+#endif
 }
 
 void dooble_web_engine_page::slot_full_screen_requested
@@ -369,7 +432,10 @@ void dooble_web_engine_page::slot_full_screen_requested
 
 void dooble_web_engine_page::slot_load_started(void)
 {
-  m_certificate_error = QString();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_error = QWebEngineCertificateError();
+#endif
+  m_certificate_error_string = QString();
   m_certificate_error_url = QUrl();
 
   if(m_certificate_error_widget)
@@ -389,4 +455,11 @@ void dooble_web_engine_page::slot_load_started(void)
 	  if(layout->itemAt(i) && layout->itemAt(i)->widget())
 	    layout->itemAt(i)->widget()->setVisible(true);
     }
+}
+
+void dooble_web_engine_page::slot_reject_certificate(void)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_error.rejectCertificate();
+#endif
 }
