@@ -41,9 +41,6 @@ dooble_web_engine_page::dooble_web_engine_page
 (QWebEngineProfile *web_engine_profile, bool is_private, QWidget *parent):
   QWebEnginePage(web_engine_profile, parent)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  m_certificate_error = QWebEngineCertificateError();
-#endif
   m_certificate_error_url = QUrl();
   m_is_private = is_private;
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
@@ -76,9 +73,6 @@ dooble_web_engine_page::dooble_web_engine_page
 dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
   QWebEnginePage(dooble::s_default_web_engine_profile, parent)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  m_certificate_error = QWebEngineCertificateError();
-#endif
   m_certificate_error_url = QUrl();
   m_is_private = false;
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
@@ -456,9 +450,6 @@ void dooble_web_engine_page::slot_full_screen_requested
 
 void dooble_web_engine_page::slot_load_started(void)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  m_certificate_error = QWebEngineCertificateError();
-#endif
   m_certificate_error_string = QString();
   m_certificate_error_url = QUrl();
 
