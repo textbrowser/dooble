@@ -62,6 +62,10 @@ dooble_web_engine_page::dooble_web_engine_page
 	  this,
 	  SLOT(slot_full_screen_requested(QWebEngineFullScreenRequest)));
   connect(this,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SLOT(slot_load_finished(bool)));
+  connect(this,
 	  SIGNAL(loadStarted(void)),
 	  this,
 	  SLOT(slot_load_started(void)));
@@ -93,6 +97,10 @@ dooble_web_engine_page::dooble_web_engine_page(QWidget *parent):
 	  SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
 	  this,
 	  SLOT(slot_full_screen_requested(QWebEngineFullScreenRequest)));
+  connect(this,
+	  SIGNAL(loadFinished(bool)),
+	  this,
+	  SLOT(slot_load_finished(bool)));
   connect(this,
 	  SIGNAL(loadStarted(void)),
 	  this,
@@ -354,14 +362,9 @@ void dooble_web_engine_page::connect_certificate_error_signals(void)
 	  SLOT(slot_accept_certificate(void)),
 	  Qt::UniqueConnection);
   connect(this,
-	  SIGNAL(defer_certificate(void)),
-	  this,
-	  SLOT(slot_defer_certificate(void)),
-	  Qt::UniqueConnection);
-  connect(this,
 	  SIGNAL(reject_certificate(void)),
 	  this,
-	  SLOT(slot_accept_certificate(void)),
+	  SLOT(slot_reject_certificate(void)),
 	  Qt::UniqueConnection);
 }
 
@@ -374,7 +377,19 @@ void dooble_web_engine_page::resize_certificate_error_widget(void)
 void dooble_web_engine_page::slot_accept_certificate(void)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  m_certificate_error.acceptCertificate();
+  QMutableMultiHashIterator<QString, QWebEngineCertificateError> it
+    (m_certificate_errors);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.key() == "accept" || it.key() == "defer")
+	{
+	  it.value().acceptCertificate();
+	  it.remove();
+	}
+    }
 #endif
 }
 
@@ -382,20 +397,25 @@ void dooble_web_engine_page::slot_accept_certificate(void)
 void dooble_web_engine_page::slot_certificate_error
 (const QWebEngineCertificateError &certificate_error)
 {
-  m_certificate_error = certificate_error;
-
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 8, 0))
-  if(m_certificate_error.isMainFrame() == false)
+  if(certificate_error.isMainFrame() == false)
     {
+      m_certificate_errors.insert("reject", certificate_error);
       emit reject_certificate();
       return;
     }
 #endif
 
   if(certificate_error_implementation(certificate_error))
-    emit accept_certificate();
+    {
+      m_certificate_errors.insert("accept", certificate_error);
+      emit accept_certificate();
+    }
   else
-    emit defer_certificate();
+    {
+      m_certificate_errors.insert("defer", certificate_error);
+      emit reject_certificate();
+    }
 }
 #endif
 
@@ -416,13 +436,6 @@ void dooble_web_engine_page::slot_certificate_exception_accepted(void)
 
   emit certificate_exception_accepted(url());
   slot_accept_certificate();
-}
-
-void dooble_web_engine_page::slot_defer_certificate(void)
-{
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  m_certificate_error.rejectCertificate();
-#endif
 }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
@@ -448,10 +461,30 @@ void dooble_web_engine_page::slot_full_screen_requested
     }
 }
 
+void dooble_web_engine_page::slot_load_finished(bool ok)
+{
+  Q_UNUSED(ok);
+
+  auto state = true;
+
+  if(m_certificate_error_widget)
+    state = false;
+
+  auto layout = qobject_cast<QLayout *> (view()->layout());
+
+  if(layout)
+    for(int i = 0; i < layout->count(); i++)
+      if(layout->itemAt(i) && layout->itemAt(i)->widget())
+	layout->itemAt(i)->widget()->setVisible(state);
+}
+
 void dooble_web_engine_page::slot_load_started(void)
 {
   m_certificate_error_string = QString();
   m_certificate_error_url = QUrl();
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  m_certificate_errors.clear();
+#endif
 
   if(m_certificate_error_widget)
     {
@@ -463,7 +496,7 @@ void dooble_web_engine_page::slot_load_started(void)
       if(layout)
 	layout->removeWidget(m_certificate_error_widget);
 
-      m_certificate_error_widget->deleteLater();
+      delete m_certificate_error_widget;
 
       if(layout)
 	for(int i = 0; i < layout->count(); i++)
@@ -475,6 +508,20 @@ void dooble_web_engine_page::slot_load_started(void)
 void dooble_web_engine_page::slot_reject_certificate(void)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  m_certificate_error.rejectCertificate();
+  QMutableMultiHashIterator<QString, QWebEngineCertificateError> it
+    (m_certificate_errors);
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      if(it.key() == "defer")
+	it.value().rejectCertificate();
+      else if(it.key() == "reject")
+	{
+	  it.value().rejectCertificate();
+	  it.remove();
+	}
+    }
 #endif
 }

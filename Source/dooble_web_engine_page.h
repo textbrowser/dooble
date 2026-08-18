@@ -29,9 +29,6 @@
 #define dooble_web_engine_page_h
 
 #include <QPointer>
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-#include <QWebEngineCertificateError>
-#endif
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
 #include <QWebEngineFileSystemAccessRequest>
 #endif
@@ -65,12 +62,12 @@ class dooble_web_engine_page: public QWebEnginePage
 #endif
 
  private:
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+  QMultiHash<QString, QWebEngineCertificateError> m_certificate_errors;
+#endif
   QPointer<QWidget> m_certificate_error_widget;
   QString m_certificate_error_string;
   QUrl m_certificate_error_url;
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  QWebEngineCertificateError m_certificate_error;
-#endif
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
   QWidget *view(void) const;
 #endif
@@ -89,20 +86,19 @@ class dooble_web_engine_page: public QWebEnginePage
     (const QWebEngineCertificateError &certificate_error);
 #endif
   void slot_certificate_exception_accepted(void);
-  void slot_defer_certificate(void);
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 4, 0))
   void slot_file_system_access_requested
     (QWebEngineFileSystemAccessRequest request);
 #endif
   void slot_full_screen_requested
     (QWebEngineFullScreenRequest full_screen_request);
+  void slot_load_finished(bool ok);
   void slot_load_started(void);
   void slot_reject_certificate(void);
 
  signals:
   void accept_certificate(void);
   void certificate_exception_accepted(const QUrl &url);
-  void defer_certificate(void);
   void loading(const QUrl &url);
   void reject_certificate(void);
   void show_full_screen(bool state);
