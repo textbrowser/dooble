@@ -17,7 +17,7 @@ else
     exit 1
 fi
 
-make -j 5
+make -j $(sysctl -n hw.ncpu)
 make install
 codesign --deep --force -s "textbrowser" ./Dooble.d/Dooble.app
 make dmg
@@ -30,3 +30,4 @@ fi
 
 mv Dooble.dmg Dooble-2026.08.20_Universal.dmg
 make distclean 2>/dev/null
+rm -fr ./Dooble.d
