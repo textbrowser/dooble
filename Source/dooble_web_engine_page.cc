@@ -406,6 +406,13 @@ void dooble_web_engine_page::slot_certificate_error
     }
 #endif
 
+  if(m_certificate_errors.size() > 0)
+    /*
+    ** Review only a single certificate.
+    */
+
+    return;
+
   if(certificate_error_implementation(certificate_error))
     {
       m_certificate_errors.insert("accept", certificate_error);

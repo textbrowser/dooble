@@ -63,7 +63,8 @@ class dooble_web_engine_page: public QWebEnginePage
 
  private:
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-  QMultiHash<QString, QWebEngineCertificateError> m_certificate_errors;
+  QMultiHash<QString, QWebEngineCertificateError>
+    m_certificate_errors; // Will contain a single entry.
 #endif
   QPointer<QWidget> m_certificate_error_widget;
   QString m_certificate_error_string;
