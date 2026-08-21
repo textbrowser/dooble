@@ -354,6 +354,7 @@ bool dooble_web_engine_page::certificate_error_implementation
   return false;
 }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 void dooble_web_engine_page::connect_certificate_error_signals(void)
 {
   connect(this,
@@ -367,6 +368,7 @@ void dooble_web_engine_page::connect_certificate_error_signals(void)
 	  SLOT(slot_reject_certificate(void)),
 	  Qt::UniqueConnection);
 }
+#endif
 
 void dooble_web_engine_page::resize_certificate_error_widget(void)
 {
