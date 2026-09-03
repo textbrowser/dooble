@@ -3291,7 +3291,7 @@ void dooble::slot_about_to_show_main_menu(void)
 	    m_ui.menu_edit->addActions(m->actions().at(1)->menu()->actions());
 	  else if(m_ui.menu_file == menu && m->actions().at(1)->menu())
 	    {
-	      m_ui.menu_file->addActions(m->actions()[0]->menu()->actions());
+	      m_ui.menu_file->addActions(m->actions().at(0)->menu()->actions());
 
 	      if(page && page->action_close_tab())
 		page->action_close_tab()->setEnabled(tabs_closable());
