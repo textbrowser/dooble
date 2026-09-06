@@ -236,6 +236,7 @@ Remaining Items
 - Future Poly1305.
 - HMAC or KMAC.
 - Inspect all available URLs when intercepting requests. Content blocking.
+- Optional synchronous pragma.
 - Prevent SQL query text overflow.
 - Replace apt with snap.
 - Shortcuts browser.
