@@ -239,6 +239,7 @@ Remaining Items
 - New table widget for miscellaneous options.
 - Optional synchronous pragma.
 - Prevent SQL query text overflow.
+- Reload all tabs!
 - Replace apt with snap.
 - Shortcuts browser.
 - Threefish tweak.
