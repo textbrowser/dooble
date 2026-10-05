@@ -674,6 +674,12 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
      this,
      SLOT(slot_reload(void)));
   reload_action->setProperty("point", point);
+  menu.addAction
+    (QIcon::fromTheme(use_material_icons + "view-refresh",
+		      QIcon(QString(":/%1/20/reload.png").arg(icon_set))),
+     tr("Reload &All Tabs"),
+     this,
+     SIGNAL(reload_all_tabs(void)));
 
   auto action_group = new QActionGroup(&menu);
   auto sub_menu = menu.addMenu(tr("Reload Periodically"));
