@@ -96,6 +96,7 @@ class dooble_tab_bar: public QTabBar
   void reload_tab_periodically(int index, int seconds);
   void set_visible_corner_button(bool state);
   void show_corner_widget(bool state);
+  void stop_loading_all_tabs(void);
 };
 
 #endif

@@ -721,6 +721,11 @@ void dooble_tab_bar::slot_show_context_menu(const QPoint &point)
   action->setProperty("point", point);
   action->setProperty("seconds", 0);
   action_group->addAction(action);
+  menu.addAction
+    (QIcon(QString(":/%1/20/stop.png").arg(icon_set)),
+     tr("Stop Loading All Tabs"),
+     this,
+     SIGNAL(stop_loading_all_tabs(void)));
   menu.addSeparator();
 
   auto back_action = menu.addAction
