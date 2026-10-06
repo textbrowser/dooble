@@ -290,6 +290,7 @@ class dooble: public QMainWindow
   void slot_print_preview(void);
   void slot_quit_dooble(void);
   void slot_read_local_socket(void);
+  void slot_reload_all_tabs(void);
   void slot_reload_tab(int index);
   void slot_reload_tab_periodically(int index, int seconds);
   void slot_remove_tab_widget_shortcut(void);

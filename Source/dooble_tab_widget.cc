@@ -183,6 +183,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  this,
 	  SIGNAL(pin_tab(bool, int)));
   connect(m_tab_bar,
+	  SIGNAL(reload_all_tabs(void)),
+	  this,
+	  SIGNAL(reload_all_tabs(void)));
+  connect(m_tab_bar,
 	  SIGNAL(reload_tab(int)),
 	  this,
 	  SIGNAL(reload_tab(int)));

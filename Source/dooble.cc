@@ -936,6 +936,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_pin_tab(bool, int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(reload_all_tabs(void)),
+	  this,
+	  SLOT(slot_reload_all_tabs(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(reload_tab(int)),
 	  this,
 	  SLOT(slot_reload_tab(int)),
@@ -4830,6 +4835,10 @@ void dooble::slot_read_local_socket(void)
 	    }
 	}
     }
+}
+
+void dooble::slot_reload_all_tabs(void)
+{
 }
 
 void dooble::slot_reload_tab(int index)
