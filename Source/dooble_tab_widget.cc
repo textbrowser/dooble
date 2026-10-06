@@ -202,6 +202,10 @@ dooble_tab_widget::dooble_tab_widget(QWidget *parent):QTabWidget(parent)
 	  SIGNAL(show_corner_widget(bool)),
 	  this,
 	  SLOT(slot_show_right_corner_widget(bool)));
+  connect(m_tab_bar,
+	  SIGNAL(stop_loading_all_tabs(void)),
+	  this,
+	  SIGNAL(stop_loading_all_tabs(void)));
   connect(m_tabs_menu_button,
 	  SIGNAL(clicked(void)),
 	  this,

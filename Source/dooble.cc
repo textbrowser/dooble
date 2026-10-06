@@ -951,6 +951,11 @@ void dooble::connect_signals(void)
 	  SLOT(slot_reload_tab_periodically(int, int)),
 	  Qt::UniqueConnection);
   connect(m_ui.tab,
+	  SIGNAL(stop_loading_all_tabs(void)),
+	  this,
+	  SLOT(slot_stop_loading_all_tabs(void)),
+	  Qt::UniqueConnection);
+  connect(m_ui.tab,
 	  SIGNAL(tabCloseRequested(int)),
 	  this,
 	  SLOT(slot_tab_close_requested(int)),
@@ -4839,6 +4844,13 @@ void dooble::slot_read_local_socket(void)
 
 void dooble::slot_reload_all_tabs(void)
 {
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+
+      if(page)
+	page->reload();
+    }
 }
 
 void dooble::slot_reload_tab(int index)
@@ -5480,6 +5492,17 @@ void dooble::slot_show_site_cookies(void)
   s_cookies_window->show_normal(this);
   s_cookies_window->activateWindow();
   s_cookies_window->raise();
+}
+
+void dooble::slot_stop_loading_all_tabs(void)
+{
+  for(int i = 0; i < m_ui.tab->count(); i++)
+    {
+      auto page = qobject_cast<dooble_page *> (m_ui.tab->widget(i));
+
+      if(page)
+	page->stop();
+    }
 }
 
 void dooble::slot_tab_close_requested(int index)
