@@ -4763,7 +4763,7 @@ void dooble::slot_print_preview(void)
 
 void dooble::slot_quit_dooble(void)
 {
-  if(!can_exit(dooble::CanExit::CAN_EXIT_SLOT_QUIT_DOOBLE))
+  if(sender() && !can_exit(dooble::CanExit::CAN_EXIT_SLOT_QUIT_DOOBLE))
     return;
 
   if(!m_is_cute && !m_is_javascript_dialog)
