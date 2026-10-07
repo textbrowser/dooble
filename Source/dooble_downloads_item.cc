@@ -159,6 +159,7 @@ dooble_downloads_item::dooble_downloads_item
 				   "QToolButton::menu-button {border: none;}");
 #endif
   prepare_icons();
+  set_minimum_url_height();
 }
 
 dooble_downloads_item::dooble_downloads_item(const QString &download_path,
@@ -213,6 +214,7 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
   m_progress_bar_animation.setPropertyName("value");
   m_progress_bar_animation.setStartValue(0);
   m_progress_bar_animation.setTargetObject(m_ui.progress);
+  set_minimum_url_height();
 }
 
 dooble_downloads_item::~dooble_downloads_item()
@@ -406,6 +408,13 @@ void dooble_downloads_item::record_information(void)
   }
 
   QSqlDatabase::removeDatabase(database_name);
+}
+
+void dooble_downloads_item::set_minimum_url_height(void)
+{
+  if(m_ui.url->size().height() < m_ui.url->sizeHint().height())
+    m_ui.url->setMinimumHeight
+      (m_ui.url->heightForWidth(m_ui.url->sizeHint().width()));
 }
 
 void dooble_downloads_item::slot_cancel(void)

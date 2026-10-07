@@ -94,6 +94,7 @@ class dooble_downloads_item: public QWidget
   void prepare_icons(void);
   void record(void);
   void record_information(void);
+  void set_minimum_url_height(void);
 
  private slots:
   void slot_cancel(void);
