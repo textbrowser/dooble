@@ -424,7 +424,6 @@ void dooble_downloads::record_download
     {
       m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
       m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
-      m_ui.table->setRowHeight(m_ui.table->rowCount(), 100);
       m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
       m_ui.table->scrollToBottom();
     }
@@ -768,7 +767,11 @@ void dooble_downloads::slot_populate(void)
 	  if(query.next())
 	    m_ui.table->setRowCount(query.value(0).toInt());
 
-	if(query.exec("SELECT download_path, file_name, information, url, OID "
+	if(query.exec("SELECT SUBSTR(download_path, 1, 4096), "
+		      "SUBSTR(file_name, 1, 4096), "
+		      "SUBSTR(information, 1, 10000), "
+		      "SUBSTR(url, 1, 10000), "
+		      "OID "
 		      "FROM dooble_downloads ORDER BY insert_order"))
 	  while(query.next() && total_rows < m_ui.table->rowCount())
 	    {
@@ -841,7 +844,6 @@ void dooble_downloads::slot_populate(void)
 		      this,
 		      SLOT(slot_reload(const QString &, const QUrl &)));
 	      m_ui.table->setCellWidget(row, 0, downloads_item);
-	      m_ui.table->setRowHeight(row, 100);
 	      m_ui.table->resizeRowToContents(row);
 	      row += 1;
 	      total_rows += 1;
