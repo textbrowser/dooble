@@ -412,9 +412,7 @@ void dooble_downloads_item::record_information(void)
 
 void dooble_downloads_item::set_minimum_url_height(void)
 {
-  if(m_ui.url->size().height() < m_ui.url->sizeHint().height())
-    m_ui.url->setMinimumHeight
-      (m_ui.url->heightForWidth(m_ui.url->sizeHint().width()));
+  m_ui.url->setMinimumHeight(m_ui.url->sizeHint().height());
 }
 
 void dooble_downloads_item::slot_cancel(void)
