@@ -912,8 +912,8 @@ QString dooble_charts::type_from_database(const QString &name)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT value FROM dooble_charts WHERE "
-		      "name = ? AND property = ?");
+	query.prepare("SELECT SUBSTR(value, 1, 10000) "
+		      "FROM dooble_charts WHERE name = ? AND property = ?");
 	query.addBindValue(name.toUtf8().toBase64());
 	query.addBindValue(QString("chart_type").toUtf8().toBase64());
 
@@ -1002,10 +1002,10 @@ void dooble_charts::open(const QString &name)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT property, " // 0
-	   "subset_index, "    // 1
-	   "subset_name, "     // 2
-	   "value "            // 3
+	  ("SELECT SUBSTR(property, 1, 1000), " // 0
+	   "subset_index, "                     // 1
+	   "SUBSTR(subset_name, 1, 1000), "     // 2
+	   "SUBSTR(value, 1, 10000) "           // 3
 	   "FROM dooble_charts WHERE name = ? ORDER BY 2");
 	query.addBindValue(name.toUtf8().toBase64());
 

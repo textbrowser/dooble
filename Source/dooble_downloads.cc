@@ -767,8 +767,8 @@ void dooble_downloads::slot_populate(void)
 	  if(query.next())
 	    m_ui.table->setRowCount(query.value(0).toInt());
 
-	if(query.exec("SELECT SUBSTR(download_path, 1, 4096), "
-		      "SUBSTR(file_name, 1, 4096), "
+	if(query.exec("SELECT SUBSTR(download_path, 1, 5000), "
+		      "SUBSTR(file_name, 1, 5000), "
 		      "SUBSTR(information, 1, 10000), "
 		      "SUBSTR(url, 1, 10000), "
 		      "OID "
