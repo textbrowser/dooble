@@ -413,8 +413,9 @@ void dooble_cookies::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT domain, favorite_digest FROM "
-		      "dooble_cookies_domains"))
+	if(query.exec("SELECT SUBSTR(domain, 1, 10000), "
+		      "SUBSTR(favorite_digest, 1, 1000) "
+		      "FROM dooble_cookies_domains"))
 	  while(query.next())
 	    {
 	      auto bytes
@@ -458,10 +459,11 @@ void dooble_cookies::slot_populate(void)
 	is_blocked_or_favorite.clear();
 
 	if(query.exec("SELECT "
-		      "(SELECT favorite_digest FROM dooble_cookies_domains a "
+		      "(SELECT SUBSTR(favorite_digest, 1, 1000) "
+		      "FROM dooble_cookies_domains a "
 		      "WHERE a.domain_digest = b.domain_digest) "
 		      "AS favorite_digest, "
-		      "raw_form FROM dooble_cookies b"))
+		      "SUBSTR(raw_form, 1, 10000) FROM dooble_cookies b"))
 	  while(query.next())
 	    {
 	      auto bytes

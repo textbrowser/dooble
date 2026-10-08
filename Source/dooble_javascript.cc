@@ -140,8 +140,8 @@ void dooble_javascript::load(const QUrl &url)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT javascript FROM dooble_javascript WHERE "
-	   "url_digest IN (?, ?)");
+	  ("SELECT SUBSTR(javascript, 1, 1000000) "
+	   "FROM dooble_javascript WHERE url_digest IN (?, ?)");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(QByteArray("*")).toBase64());
 	query.addBindValue
@@ -338,7 +338,8 @@ void dooble_javascript::slot_item_selection_changed(void)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT javascript FROM dooble_javascript WHERE OID = ?");
+	  ("SELECT SUBSTR(javascript, 1, 1000000) "
+	   "FROM dooble_javascript WHERE OID = ?");
 	query.addBindValue(item->data(Qt::UserRole).toLongLong());
 
 	if(query.exec() && query.next())
@@ -389,7 +390,8 @@ void dooble_javascript::slot_refresh_others(void)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT url, OID FROM dooble_javascript");
+	query.prepare
+	  ("SELECT SUBSTR(url, 1, 10000), OID FROM dooble_javascript");
 
 	if(query.exec())
 	  {
