@@ -137,7 +137,7 @@ dooble_downloads_item::dooble_downloads_item
       m_stalled_timer.start();
       m_ui.file_name->setText(file_info.fileName());
       m_ui.progress->setMaximum(100);
-      m_ui.url->setText(m_download->url().toString());
+      m_ui.url->setText(m_download->url().host());
       m_url = m_download->url();
 
       if(m_oid == -1)
@@ -210,7 +210,7 @@ dooble_downloads_item::dooble_downloads_item(const QString &download_path,
   m_ui.information->setText(information);
   m_ui.pause_resume->setVisible(false);
   m_ui.progress->setVisible(false);
-  m_ui.url->setText(url.toString());
+  m_ui.url->setText(url.host());
   connect(&m_stalled_timer,
 	  SIGNAL(timeout(void)),
 	  this,

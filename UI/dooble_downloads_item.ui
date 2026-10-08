@@ -36,6 +36,11 @@
      </property>
      <item>
       <widget class="QLabel" name="file_name">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
