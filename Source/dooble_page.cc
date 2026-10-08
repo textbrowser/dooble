@@ -2912,13 +2912,24 @@ void dooble_page::slot_load_page(void)
 	}
     }
 
-  auto const keyboard_modifiers(QGuiApplication::keyboardModifiers());
   auto url((QUrl(string))); // Special parentheses for compilers.
+
+  if(dooble_ui_utilities::allowed_url_scheme(url) &&
+     url.host().isEmpty() == false &&
+     url.isEmpty() == false &&
+     url.isValid())
+    {
+      load(url);
+      return;
+    }
+
+  auto const keyboard_modifiers(QGuiApplication::keyboardModifiers());
 
   if((!url.isValid() ||
       Qt::ControlModifier & keyboard_modifiers ||
       string.contains(' ') ||
       string.contains('\t') ||
+      url.host().isEmpty() ||
       url.scheme().isEmpty()) &&
      dooble::s_search_engines_window)
     {
