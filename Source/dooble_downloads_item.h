@@ -101,6 +101,7 @@ class dooble_downloads_item: public QWidget
   void slot_download_progress(qint64 bytes_received, qint64 bytes_total);
   void slot_download_progress(void);
   void slot_finished(void);
+  void slot_is_paused_changed(void);
   void slot_pause_or_resume(void);
   void slot_reload(void);
   void slot_settings_applied(void);

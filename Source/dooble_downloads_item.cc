@@ -101,6 +101,17 @@ dooble_downloads_item::dooble_downloads_item
 	      SIGNAL(isFinishedChanged(void)),
 	      this,
 	      SLOT(slot_finished(void)));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+      connect(m_download,
+	      SIGNAL(isPausedChanged(bool)),
+	      this,
+	      SLOT(slot_is_paused_changed(void)));
+#else
+      connect(m_download,
+	      SIGNAL(isPausedChanged(void)),
+	      this,
+	      SLOT(slot_is_paused_changed(void)));
+#endif
       connect(m_download,
 	      SIGNAL(receivedBytesChanged(void)),
 	      this,
@@ -565,6 +576,40 @@ void dooble_downloads_item::slot_finished(void)
   emit finished();
 }
 
+void dooble_downloads_item::slot_is_paused_changed(void)
+{
+  if(!m_download)
+    return;
+
+  auto const icon_set(dooble_settings::setting("icon_set").toString());
+  auto const use_material_icons(dooble_settings::use_material_icons());
+
+  if(m_download->isPaused())
+    {
+      m_ui.pause_resume->setIcon
+	(QIcon::fromTheme(use_material_icons + "media-playback-pause",
+			  QIcon(QString(":/%1/20/pause.png").arg(icon_set))));
+      m_ui.pause_resume->setToolTip(tr("Resume"));
+
+      if(m_download->totalBytes() > 0)
+	m_ui.information->setText
+	  (tr("%1 of %2 - Paused").
+	   arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)).
+	   arg(dooble_ui_utilities::pretty_size(m_download->totalBytes())));
+      else
+	m_ui.information->setText
+	  (tr("%1 of Unknown - Paused").
+	   arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)));
+    }
+  else
+    {
+      m_ui.pause_resume->setIcon
+	(QIcon::fromTheme(use_material_icons + "media-playback-start",
+			  QIcon(QString(":/%1/20/resume.png").arg(icon_set))));
+      m_ui.pause_resume->setToolTip(tr("Pause"));
+    }
+}
+
 void dooble_downloads_item::slot_pause_or_resume(void)
 {
 #ifndef DOOBLE_FREEBSD_WEBENGINE_MISMATCH
@@ -577,36 +622,6 @@ void dooble_downloads_item::slot_pause_or_resume(void)
 	}
       else
 	m_download->pause();
-
-      auto const icon_set(dooble_settings::setting("icon_set").toString());
-      auto const use_material_icons(dooble_settings::use_material_icons());
-
-      if(m_download->isPaused())
-	{
-	  m_ui.pause_resume->setIcon
-	    (QIcon::fromTheme(use_material_icons + "media-playback-pause",
-			      QIcon(QString(":/%1/20/pause.png").
-				    arg(icon_set))));
-	  m_ui.pause_resume->setToolTip(tr("Resume"));
-
-	  if(m_download->totalBytes() > 0)
-	    m_ui.information->setText
-	      (tr("%1 of %2 - Paused").
-	       arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)).
-	       arg(dooble_ui_utilities::pretty_size(m_download->totalBytes())));
-	  else
-	    m_ui.information->setText
-	      (tr("%1 of Unknown - Paused").
-	       arg(dooble_ui_utilities::pretty_size(m_last_bytes_received)));
-	}
-      else
-	{
-	  m_ui.pause_resume->setIcon
-	    (QIcon::fromTheme(use_material_icons + "media-playback-start",
-			      QIcon(QString(":/%1/20/resume.png").
-				    arg(icon_set))));
-	  m_ui.pause_resume->setToolTip(tr("Pause"));
-	}
     }
 #endif
 }
