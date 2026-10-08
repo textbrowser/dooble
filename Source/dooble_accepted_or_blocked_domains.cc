@@ -28,6 +28,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
+#include <QShowEvent>
 #include <QSqlQuery>
 #include <QtConcurrent>
 
@@ -395,9 +396,14 @@ void dooble_accepted_or_blocked_domains::populate(void)
 	  SIGNAL(itemChanged(QTableWidgetItem *)),
 	  this,
 	  SLOT(slot_item_changed(QTableWidgetItem *)));
-  m_ui.table->setSortingEnabled(true);
-  m_ui.table->sortItems
-    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+
+  if(isVisible())
+    {
+      m_ui.table->setSortingEnabled(true);
+      m_ui.table->sortItems
+	(1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+    }
+
   QApplication::restoreOverrideCursor();
 }
 
@@ -792,6 +798,14 @@ void dooble_accepted_or_blocked_domains::show(void)
 			      toByteArray()));
 
   dooble_main_window::show();
+}
+
+void dooble_accepted_or_blocked_domains::showEvent(QShowEvent *event)
+{
+  dooble_main_window::showEvent(event);
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortItems
+    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
 }
 
 void dooble_accepted_or_blocked_domains::show_normal(QWidget *parent)

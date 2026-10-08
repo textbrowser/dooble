@@ -78,6 +78,7 @@ class dooble_accepted_or_blocked_domains: public dooble_main_window
   void save_blocked_domain(const QString &domain, bool replace, bool state);
   void save_exception(const QString &url, bool state);
   void save_settings(void);
+  void showEvent(QShowEvent *event);
 
  private slots:
   void slot_add(void);
