@@ -312,7 +312,9 @@ void dooble_accepted_or_blocked_domains::populate(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT domain, state, OID "
+	    if(query.exec("SELECT SUBSTR(domain, 1, 10000), "
+			  "SUBSTR(state, 1, 1000), "
+			  "OID "
 			  "FROM dooble_accepted_or_blocked_domains"))
 	      while(query.next())
 		{
@@ -425,8 +427,11 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT state, url, OID "
-			  "FROM dooble_accepted_or_blocked_domains_exceptions"))
+	    if(query.exec("SELECT SUBSTR(state, 1, 1000), "
+			  "SUBSTR(url, 1, 10000), "
+			  "OID "
+			  "FROM "
+			  "dooble_accepted_or_blocked_domains_exceptions"))
 	      while(query.next())
 		{
 		  auto data1

@@ -463,7 +463,7 @@ void dooble_cookies::slot_populate(void)
 		      "FROM dooble_cookies_domains a "
 		      "WHERE a.domain_digest = b.domain_digest) "
 		      "AS favorite_digest, "
-		      "SUBSTR(raw_form, 1, 10000) FROM dooble_cookies b"))
+		      "SUBSTR(raw_form, 1, 100000) FROM dooble_cookies b"))
 	  while(query.next())
 	    {
 	      auto bytes
