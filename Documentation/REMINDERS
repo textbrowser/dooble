@@ -242,7 +242,7 @@ Remaining Items
 - Prevent SQL query text overflow:
   Source/dooble.cc
   Source/dooble_accepted_or_blocked_domains.cc (Completed)
-  Source/dooble_certificate_exceptions.cc
+  Source/dooble_certificate_exceptions.cc (Completed)
   Source/dooble_certificate_exceptions_menu_widget.cc
   Source/dooble_charts.cc (Completed)
   Source/dooble_cookies.cc (Completed)
@@ -252,7 +252,7 @@ Remaining Items
   Source/dooble_javascript.cc (Completed)
   Source/dooble_search_engines_popup.cc
   Source/dooble_settings.cc
-  Source/dooble_style_sheet.cc
+  Source/dooble_style_sheet.cc (Completed)
 - Replace apt with snap.
 - Shortcuts browser.
 - Threefish tweak.

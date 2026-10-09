@@ -312,7 +312,10 @@ void dooble_certificate_exceptions::slot_populate(void)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT error, exception_accepted, url, OID "
+	    if(query.exec("SELECT SUBSTR(error, 1, 10000), "
+			  "SUBSTR(exception_accepted, 1, 1000), "
+			  "SUBSTR(url, 1, 10000), "
+			  "OID "
 			  "FROM dooble_certificate_exceptions WHERE "
 			  "temporary = 0"))
 	      while(query.next())

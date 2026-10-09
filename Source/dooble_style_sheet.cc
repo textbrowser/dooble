@@ -343,8 +343,11 @@ void dooble_style_sheet::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT name, style_sheet, url, OID FROM "
-		      "dooble_style_sheets"))
+	if(query.exec("SELECT SUBSTR(name, 1, 35000), "
+		      "SUBSTR(style_sheet, 1, 1000000), "
+		      "SUBSTR(url, 1, 10000), "
+		      "OID "
+		      "FROM dooble_style_sheets"))
 	  while(query.next())
 	    {
 	      auto name
