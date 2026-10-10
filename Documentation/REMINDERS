@@ -250,7 +250,7 @@ Remaining Items
   Source/dooble_favicons.cc
   Source/dooble_history.cc
   Source/dooble_javascript.cc (Completed)
-  Source/dooble_search_engines_popup.cc
+  Source/dooble_search_engines_popup.cc (Completed)
   Source/dooble_settings.cc
   Source/dooble_style_sheet.cc (Completed)
 - Replace apt with snap.

@@ -777,10 +777,10 @@ void dooble_search_engines_popup::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT default_address_bar_engine, "
-		      "syntax, "
-		      "title, "
-		      "url, "
+	if(query.exec("SELECT SUBSTR(default_address_bar_engine, 1, 10000), "
+		      "SUBSTR(syntax, 1, 10000), "
+		      "SUBSTR(title, 1, 10000), "
+		      "SUBSTR(url, 1, 10000), "
 		      "OID "
 		      "FROM dooble_search_engines"))
 	  while(query.next())
