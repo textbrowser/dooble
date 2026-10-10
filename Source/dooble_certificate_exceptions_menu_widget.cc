@@ -64,7 +64,7 @@ bool dooble_certificate_exceptions_menu_widget::has_exception(const QUrl &url)
 	QSqlQuery query(db);
 
 	query.setForwardOnly(true);
-	query.prepare("SELECT exception_accepted, OID FROM "
+	query.prepare("SELECT SUBSTR(exception_accepted, 1, 1000), OID FROM "
 		      "dooble_certificate_exceptions WHERE url_digest "
 		      "IN (?, ?)");
 	query.addBindValue
