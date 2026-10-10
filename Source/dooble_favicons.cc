@@ -70,6 +70,7 @@ QIcon dooble_favicons::icon(const QUrl &url)
 
 	query.setForwardOnly(true);
 	query.prepare("SELECT favicon, OID FROM dooble_favicons WHERE "
+		      "LENGTH(favicon) <= 15000 AND "
 		      "url_digest IN (?, ?)");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.toEncoded()).toBase64());
@@ -148,6 +149,7 @@ QIcon dooble_favicons::icon_from_host(const QUrl &url)
 
 	query.setForwardOnly(true);
 	query.prepare("SELECT favicon, OID FROM dooble_favicons WHERE "
+		      "LENGTH(favicon) <= 15000 AND "
 		      "url_host_digest = ?");
 	query.addBindValue
 	  (dooble::s_cryptography->hmac(url.host()).toBase64());

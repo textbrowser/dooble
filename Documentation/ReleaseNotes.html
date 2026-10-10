@@ -36,7 +36,7 @@
 	<ul>
 	  <li>Address widget: load the provided link upon a return-pressed event if the link is valid and the link's scheme is acceptable.</li>
 	  <li>Display a download URL's host instead of the entire URL in Downloads.</li>
-	  <li>Limit retrieved SQLite text via SUBSTR(string, 1 , N). Completes reminder.</li>
+	  <li>Limit retrieved SQLite text via SUBSTR(string, 1 , N). For favicons, LENGTH(blob) must be less than or equal to 15000. Completes reminder.</li>
 	  <li>New tab context menu items for reloading all tabs and stopping all tabs.</li>
 	  <li>Pausing downloads is not immediate. Monitor the isPausedChanged() signal. Corrects icon states.</li>
 	  <li>Prevent double download confirmation prompts when closing Dooble via a close event (not a quit event).</li>
