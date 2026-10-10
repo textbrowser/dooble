@@ -576,7 +576,8 @@ dooble_charts_property_editor_model(QObject *parent):
 	    item->setToolTip
 	      ("<html>" +
 	       tr("The chart will be saved via the provided "
-		  "name. Please specify a unique value.") +
+		  "name. Please specify a unique value. Only the first "
+		  "15000 bytes are retrieved from the SQLite database.") +
 	       "</html>");
 	    break;
 	  }

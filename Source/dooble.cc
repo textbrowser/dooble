@@ -470,7 +470,8 @@ QStringList dooble::chart_names(void) const
       {
 	QSqlQuery query(db);
 
-	if(query.exec("SELECT DISTINCT(name) FROM dooble_charts"))
+	if(query.exec("SELECT DISTINCT(SUBSTR(name, 1, 15000)) "
+		      "FROM dooble_charts"))
 	  while(query.next())
 	    {
 	      auto const bytes(query.value(0).toByteArray());
