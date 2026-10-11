@@ -301,8 +301,6 @@ void dooble_downloads_item::record(void)
 
     if(db.open())
       {
-	dooble_downloads::create_tables(db);
-
 	QSqlQuery query(db);
 
 	/*
@@ -323,6 +321,8 @@ void dooble_downloads_item::record(void)
 	    if(!exists)
 	      query.exec("DROP TABLE dooble_downloads");
 	  }
+
+	dooble_downloads::create_tables(db);
 
 	QByteArray bytes;
 	auto const file_name(m_ui.file_name->text());
