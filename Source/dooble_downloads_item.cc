@@ -139,13 +139,7 @@ dooble_downloads_item::dooble_downloads_item
       m_ui.progress->setMaximum(100);
       m_ui.url->setText(m_download->url().host());
       m_url = m_download->url();
-
-      if(m_oid == -1)
-	/*
-	** New record.
-	*/
-
-	record();
+      record();
     }
   else
     {

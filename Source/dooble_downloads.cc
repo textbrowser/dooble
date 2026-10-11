@@ -370,47 +370,16 @@ void dooble_downloads::record_download
   else
     m_downloads[download] = 0;
 
+  auto downloads_item = new dooble_downloads_item
+    (download,
+     dooble::s_default_web_engine_profile != m_web_engine_profile,
+     -1,
+     this);
+
   connect(download,
 	  SIGNAL(destroyed(void)),
 	  this,
 	  SLOT(slot_download_destroyed(void)));
-
-  dooble_downloads_item *item = nullptr;
-  int index = -1;
-
-  for(int i = m_ui.table->rowCount() - 1; i >= 0; i--)
-    {
-      auto downloads_item =
-	qobject_cast<dooble_downloads_item *> (m_ui.table->cellWidget(i, 0));
-
-      if(!downloads_item)
-	{
-	  m_ui.table->removeRow(i);
-	  continue;
-	}
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-      QFileInfo const file_info(downloads_item->download_path());
-
-      if(download->downloadDirectory() ==
-	 file_info.absoluteDir().absolutePath() &&
-	 download->downloadFileName() == file_info.fileName())
-#else
-      if(download->path() == downloads_item->download_path())
-#endif
-	{
-	  index = i;
-	  item = downloads_item;
-	  break;
-	}
-    }
-
-  auto downloads_item = new dooble_downloads_item
-    (download,
-     dooble::s_default_web_engine_profile != m_web_engine_profile,
-     index,
-     this);
-
   connect(downloads_item,
 	  SIGNAL(finished(void)),
 	  this,
@@ -419,20 +388,10 @@ void dooble_downloads::record_download
 	  SIGNAL(reload(const QString &, const QUrl &)),
 	  this,
 	  SLOT(slot_reload(const QString &, const QUrl &)));
-
-  if(index == -1)
-    {
-      m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
-      m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
-      m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
-      m_ui.table->scrollToBottom();
-    }
-  else
-    {
-      m_ui.table->setCellWidget(index, 0, downloads_item);
-      item->deleteLater();
-    }
-
+  m_ui.table->setRowCount(m_ui.table->rowCount() + 1);
+  m_ui.table->setCellWidget(m_ui.table->rowCount() - 1, 0, downloads_item);
+  m_ui.table->resizeRowToContents(m_ui.table->rowCount() - 1);
+  m_ui.table->scrollToBottom();
   emit started();
   slot_search_timer_timeout();
 }
