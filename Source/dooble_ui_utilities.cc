@@ -36,6 +36,16 @@
 #include "dooble_application.h"
 #include "dooble_ui_utilities.h"
 
+QSize dooble_ui_utilities::q_ceil(const QSize &size, const double factor)
+{
+  return QSize(qCeil(factor * size.width()), qCeil(factor * size.height()));
+}
+
+QSize dooble_ui_utilities::q_min(const QSize &a, const QSize &b)
+{
+  return QSize(qMin(a.width(), b.width()), qMin(a.height(), b.height()));
+}
+
 QString dooble_ui_utilities::alignment_to_string(const Qt::Alignment alignment)
 {
   switch(alignment)

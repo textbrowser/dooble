@@ -4013,7 +4013,7 @@ void dooble::slot_decouple_tab(int index)
       main_window->setAttribute(Qt::WA_DeleteOnClose);
       main_window->setCentralWidget(charts);
       main_window->setWindowTitle(tr("Dooble: Charts"));
-      main_window->resize(s_vga_size);
+      main_window->resize(dooble_ui_utilities::q_ceil(s_vga_size, 1.5));
       charts->decouple();
       dooble_ui_utilities::center_window_widget(this, main_window);
       main_window->show();

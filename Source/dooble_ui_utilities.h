@@ -34,6 +34,8 @@ class dooble;
 class dooble_ui_utilities
 {
  public:
+  static QSize q_ceil(const QSize &size, const double factor);
+  static QSize q_min(const QSize &a, const QSize &b);
   static QString alignment_to_string(const Qt::Alignment alignment);
   static QString orientation_to_string(const Qt::Orientation orientation);
   static QString pretty_size(const qint64 size);
