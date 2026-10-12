@@ -248,13 +248,13 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	query.setForwardOnly(true);
 
 	if(query.exec("SELECT "
-		      "favorite_digest, "  // 0
-		      "last_visited, "     // 1
-		      "number_of_visits, " // 2
-		      "title, "            // 3
-		      "url, "              // 4
-		      "url_digest "        // 5
-		      "OID "               // 6
+		      "SUBSTR(favorite_digest, 1, 1000), "  // 0
+		      "SUBSTR(last_visited, 1, 1000), "     // 1
+		      "SUBSTR(number_of_visits, 1, 1000), " // 2
+		      "SUBSTR(title, 1, 10000), "           // 3
+		      "SUBSTR(url, 1, 10000), "             // 4
+		      "SUBSTR(url_digest, 1, 1000), "       // 5
+		      "OID "                                // 6
 		      "FROM dooble_history"))
 	  while(query.next())
 	    {
