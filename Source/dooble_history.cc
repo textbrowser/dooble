@@ -139,7 +139,8 @@ QList<QPair<QUrl, bool> > dooble_history::previous_session_tabs(void) const
       {
 	QSqlQuery query(db);
 
-	if(query.exec("SELECT pinned_digest, url "
+	if(query.exec("SELECT SUBSTR(pinned_digest, 1, 1000), "
+		      "SUBSTR(url, 1, 10000) "
 		      "FROM dooble_previous_session_tabs"))
 	  while(query.next())
 	    {
@@ -407,7 +408,9 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	   dooble_settings::setting("hash_type").toString());
 
 	query.setForwardOnly(true);
-	query.exec("SELECT last_visited, url, url_digest "
+	query.exec("SELECT SUBSTR(last_visited, 1, 1000), "
+		   "SUBSTR(url, 1, 10000), "
+		   "SUBSTR(url_digest, 1, 1000) "
 		   "FROM dooble_history WHERE favorite_digest = ?");
 	query.addBindValue(cryptography.hmac(QByteArray("false")).toBase64());
 
