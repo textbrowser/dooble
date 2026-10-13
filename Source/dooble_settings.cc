@@ -745,7 +745,8 @@ QVariant dooble_settings::setting
 	    QSqlQuery query(db);
 
 	    query.setForwardOnly(true);
-	    query.prepare("SELECT value FROM dooble_settings WHERE key = ?");
+	    query.prepare("SELECT SUBSTR(value, 1, 15000) "
+			  "FROM dooble_settings WHERE key = ?");
 	    query.addBindValue(key);
 
 	    if(query.exec() && query.next())
@@ -1631,7 +1632,9 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT key, value FROM dooble_web_engine_settings "
+	  ("SELECT SUBSTR(key, 1, 1000), "
+	   "SUBSTR(value, 1, 15000) "
+	   "FROM dooble_web_engine_settings "
 	   "WHERE environment_variable = 1 ORDER BY 1");
 
 	if(query.exec())
@@ -1714,7 +1717,8 @@ void dooble_settings::prepare_web_engine_settings(void)
 
 	query.setForwardOnly(true);
 	query.prepare
-	  ("SELECT key, value FROM dooble_web_engine_settings "
+	  ("SELECT SUBSTR(key, 1, 1000), SUBSTR(value, 1, 15000) "
+	   "FROM dooble_web_engine_settings "
 	   "WHERE environment_variable = 1");
 
 	if(query.exec())
