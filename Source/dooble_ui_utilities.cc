@@ -31,6 +31,7 @@
 #endif
 #include <QScreen>
 #include <QWidget>
+#include <QtMath>
 
 #include "dooble.h"
 #include "dooble_application.h"
