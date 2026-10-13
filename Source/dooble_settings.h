@@ -200,6 +200,7 @@ class dooble_settings: public dooble_main_window
   void slot_remove_selected_user_agents(void);
   void slot_reset(void);
   void slot_reset_credentials(void);
+  void slot_reset_global_user_agent(void);
   void slot_save_credentials(void);
   void slot_select_application_font(void);
   void slot_select_directory(void);

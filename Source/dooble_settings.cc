@@ -210,6 +210,10 @@ dooble_settings::dooble_settings(void):dooble_main_window()
 	  SIGNAL(clicked(void)),
 	  this,
 	  SLOT(slot_reset_credentials(void)));
+  connect(m_ui.reset_global_user_agent,
+	  SIGNAL(clicked(void)),
+	  this,
+	  SLOT(slot_reset_global_user_agent(void)));
   connect(m_ui.save_credentials,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -239,6 +243,7 @@ dooble_settings::dooble_settings(void):dooble_main_window()
   m_ui.qtwebengine_dictionaries_path->setToolTip
     (tr("<html>The setting is recorded in %1.</html>").
      arg(setting("home_path").toString() + QDir::separator() + "dooble.ini"));
+  m_ui.reset_global_user_agent->setText(tr("Reset"));
   m_ui.shortcuts->setModel(m_shortcuts_model);
 
   auto const language = QLocale::system().language();
@@ -4827,6 +4832,11 @@ void dooble_settings::slot_reset_credentials(void)
   dooble_cryptography::memzero(encryption_key);
   emit dooble_credentials_authenticated(false);
   QApplication::restoreOverrideCursor();
+}
+
+void dooble_settings::slot_reset_global_user_agent(void)
+{
+  m_ui.global_user_agent->setText(s_http_user_agent);
 }
 
 void dooble_settings::slot_save_credentials(void)
