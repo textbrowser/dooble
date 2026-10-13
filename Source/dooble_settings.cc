@@ -1636,11 +1636,10 @@ void dooble_settings::prepare_web_engine_environment_variables(void)
       	  }
 
 	query.setForwardOnly(true);
-	query.prepare
-	  ("SELECT SUBSTR(key, 1, 1000), "
-	   "SUBSTR(value, 1, 15000) "
-	   "FROM dooble_web_engine_settings "
-	   "WHERE environment_variable = 1 ORDER BY 1");
+	query.prepare("SELECT SUBSTR(key, 1, 1000), "
+		      "SUBSTR(value, 1, 15000) "
+		      "FROM dooble_web_engine_settings "
+		      "WHERE environment_variable = 1 ORDER BY 1");
 
 	if(query.exec())
 	  while(query.next())
@@ -1989,7 +1988,10 @@ void dooble_settings::restore(bool read_database)
 
 	    query.setForwardOnly(true);
 
-	    if(query.exec("SELECT key, value, OID FROM dooble_settings"))
+	    if(query.exec("SELECT SUBSTR(key, 1, 1000), "
+			  "SUBSTR(value, 1, 15000), "
+			  "OID "
+			  "FROM dooble_settings"))
 	      while(query.next())
 		{
 		  auto const key(query.value(0).toString().toLower().trimmed());
@@ -3824,7 +3826,10 @@ void dooble_settings::slot_populate(void)
 
 	query.setForwardOnly(true);
 
-	if(query.exec("SELECT feature, permission, url, OID "
+	if(query.exec("SELECT SUBSTR(feature, 1, 1000), "
+		      "SUBSTR(permission, 1, 1000), "
+		      "SUBSTR(url, 1, 10000), "
+		      "OID "
 		      "FROM dooble_features_permissions"))
 	  while(query.next())
 	    {
@@ -3888,7 +3893,9 @@ void dooble_settings::slot_populate(void)
 				   data2 == "true" ? true : false));
 	    }
 
-	if(query.exec("SELECT state, url, OID "
+	if(query.exec("SELECT SUBSTR(state, 1, 1000), "
+		      "SUBSTR(url, 1, 10000), "
+		      "OID "
 		      "FROM dooble_javascript_block_popup_exceptions"))
 	  while(query.next())
 	    {
@@ -3935,7 +3942,9 @@ void dooble_settings::slot_populate(void)
 		(data1 == "true") ? 1 : 0;
 	    }
 
-	if(query.exec("SELECT state, url_domain, OID "
+	if(query.exec("SELECT SUBSTR(state, 1, 1000), "
+		      "SUBSTR(url_domain, 1, 10000), "
+		      "OID "
 		      "FROM dooble_javascript_disable"))
 	  while(query.next())
 	    {
@@ -3970,7 +3979,9 @@ void dooble_settings::slot_populate(void)
 	      s_javascript_disable[data2] = (data1 == "true") ? 1 : 0;
 	    }
 
-	if(query.exec("SELECT url_domain, user_agent, OID "
+	if(query.exec("SELECT SUBSTR(url_domain, 1, 10000), "
+		      "SUBSTR(user_agent, 1, 1000), "
+		      "OID "
 		      "FROM dooble_user_agents"))
 	  while(query.next())
 	    {
