@@ -70,7 +70,8 @@ HEADERS		= Source/dooble.h \
                   Source/dooble_version.h \
 		  Source/dooble_web_engine_url_request_interceptor.h \
                   Source/dooble_web_engine_page.h \
-                  Source/dooble_web_engine_view.h
+                  Source/dooble_web_engine_view.h \
+		  Source/dooble_woody.h
 
 RESOURCES       += Documentation/documentation.qrc \
                    Icons/icons.qrc

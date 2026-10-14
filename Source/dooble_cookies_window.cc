@@ -39,23 +39,12 @@
 #include "dooble_cookies_window.h"
 #include "dooble_cryptography.h"
 #include "dooble_ui_utilities.h"
+#include "dooble_woody.h"
 
 dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   QMainWindow(parent)
 {
   m_ui.setupUi(this);
-  m_collapse = new QToolButton(m_ui.tree);
-
-  auto font(m_collapse->font());
-
-  font.setStyleHint(QFont::Courier);
-  m_collapse->resize(25, 25);
-  m_collapse->setCheckable(true);
-  m_collapse->setFont(font);
-  m_collapse->setStyleSheet("QToolButton {border: none;}"
-			    "QToolButton::menu-button {border: none;}");
-  m_collapse->setText(tr("+"));
-  m_collapse->setToolTip(tr("Collapse / Expand"));
   m_domain_filter_timer.setInterval(750);
   m_domain_filter_timer.setSingleShot(true);
   m_is_private = is_private;
@@ -88,6 +77,7 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
   m_ui.tree->setMinimumWidth(200);
   m_ui.tree->sortItems(0, Qt::AscendingOrder);
   m_ui.value->setText("");
+  m_woody = new woody_collapse_expand_tool_button(m_ui.tree);
 
   auto const icon_set(dooble_settings::setting("icon_set").toString());
   auto const use_material_icons(dooble_settings::use_material_icons());
@@ -101,7 +91,6 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
     (tr("<html>Private cookies exist within "
 	"the scope of this window's parent Dooble window. Neither "
 	"window geometry nor window state will be retained.</html>"));
-  m_collapse->move(5, (m_ui.tree->header()->size().height() - 25) / 2 + 2);
   statusBar()->addPermanentWidget(label);
 
   if(dooble_settings::setting("denote_private_widgets").toBool())
@@ -125,10 +114,6 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(applied(void)),
 	  this,
 	  SLOT(slot_settings_applied(void)));
-  connect(m_collapse,
-	  SIGNAL(clicked(void)),
-	  this,
-	  SLOT(slot_collapse_all(void)));
   connect(m_ui.add,
 	  SIGNAL(clicked(void)),
 	  this,
@@ -173,6 +158,10 @@ dooble_cookies_window::dooble_cookies_window(bool is_private, QWidget *parent):
 	  SIGNAL(itemSelectionChanged(void)),
 	  this,
 	  SLOT(slot_item_selection_changed(void)));
+  connect(this,
+	  SIGNAL(added_or_deleted(void)),
+	  this,
+	  SLOT(slot_added_or_deleted(void)));
   new QShortcut(QKeySequence(tr("Ctrl+F")), this, SLOT(slot_find(void)));
   new QShortcut(QKeySequence(tr("Ctrl+W")), this, SLOT(close(void)));
   restoreState
@@ -293,6 +282,7 @@ void dooble_cookies_window::delete_child_items
 	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
   QApplication::restoreOverrideCursor();
+  emit added_or_deleted();
 }
 
 void dooble_cookies_window::delete_top_level_items
@@ -371,6 +361,7 @@ void dooble_cookies_window::delete_top_level_items
 	    SLOT(slot_cookie_removed(const QNetworkCookie &)));
 
   QApplication::restoreOverrideCursor();
+  emit added_or_deleted();
 }
 
 void dooble_cookies_window::filter(const QString &text)
@@ -488,29 +479,20 @@ void dooble_cookies_window::slot_add_blocked_domain(void)
 	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	  this,
 	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
+  emit added_or_deleted();
+}
+
+void dooble_cookies_window::slot_added_or_deleted(void)
+{
+  if(!m_woody->isChecked())
+    m_ui.tree->collapseAll();
+  else
+    m_ui.tree->expandAll();
 }
 
 void dooble_cookies_window::slot_block_subdomains(bool state)
 {
   dooble_settings::set_setting("cookies_block_subdomains", state);
-}
-
-void dooble_cookies_window::slot_collapse_all(void)
-{
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-  if(m_collapse->isChecked())
-    {
-      m_collapse->setText(tr("-"));
-      m_ui.tree->expandAll();
-    }
-  else
-    {
-      m_collapse->setText(tr("+"));
-      m_ui.tree->collapseAll();
-    }
-
-  QApplication::restoreOverrideCursor();
 }
 
 void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
@@ -526,6 +508,7 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
 	  m_top_level_items.remove(cookie.domain());
 	  delete m_ui.tree->takeTopLevelItem
 	    (m_ui.tree->indexOfTopLevelItem(item));
+	  emit added_or_deleted();
 	}
 
       return;
@@ -552,6 +535,8 @@ void dooble_cookies_window::slot_cookie_removed(const QNetworkCookie &cookie)
     }
   else if(!cookie.domain().trimmed().isEmpty())
     m_child_items[cookie.domain()] = hash;
+
+  emit added_or_deleted();
 }
 
 void dooble_cookies_window::slot_cookies_added
@@ -625,6 +610,7 @@ void dooble_cookies_window::slot_cookies_added
 	  SIGNAL(itemChanged(QTreeWidgetItem *, int)),
 	  this,
 	  SLOT(slot_item_changed(QTreeWidgetItem *, int)));
+  emit added_or_deleted();
 }
 
 void dooble_cookies_window::slot_cookies_cleared(void)

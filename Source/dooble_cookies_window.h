@@ -36,6 +36,7 @@
 
 class QWebEngineCookieStore;
 class dooble_cookies;
+class woody_collapse_expand_tool_button;
 
 class dooble_cookies_window: public QMainWindow
 {
@@ -65,17 +66,17 @@ class dooble_cookies_window: public QMainWindow
   QPointer<dooble_cookies> m_cookies;
   QTimer m_domain_filter_timer;
   QTimer m_purge_domains_timer;
-  QToolButton *m_collapse;
   Ui_dooble_cookies_window m_ui;
   bool m_is_private;
+  woody_collapse_expand_tool_button *m_woody;
   void delete_child_items(const QList<QTreeWidgetItem *> &list);
   void delete_top_level_items(const QList<QTreeWidgetItem *> &list);
   void save_settings(void);
 
  private slots:
   void slot_add_blocked_domain(void);
+  void slot_added_or_deleted(void);
   void slot_block_subdomains(bool state);
-  void slot_collapse_all(void);
   void slot_cookie_removed(const QNetworkCookie &cookie);
   void slot_cookies_added(const QList<QNetworkCookie> &cookies,
 			  const QList<int> &is_blocked_or_favorite);
@@ -93,6 +94,7 @@ class dooble_cookies_window: public QMainWindow
   void slot_toggle_shown(void);
 
  signals:
+  void added_or_deleted(void);
   void delete_cookie(const QNetworkCookie &cookie);
   void delete_domain(const QString &domain);
   void delete_items(const QList<QNetworkCookie> &cookies,
