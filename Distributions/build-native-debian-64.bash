@@ -63,10 +63,10 @@ cp dooble.sh dooble-debian.d/usr/bin/dooble
 if [ $architecture = "arm64" ]
 then
     fakeroot dpkg-deb --build dooble-debian.d \
-	     Dooble-2026.10.15_PiOS_arm64.deb
+	     Dooble-2026.10.17_PiOS_arm64.deb
 else
     fakeroot dpkg-deb --build dooble-debian.d \
-	     Dooble-2026.10.15_Kubuntu_amd64.deb
+	     Dooble-2026.10.17_Kubuntu_amd64.deb
 fi
 
 make distclean
