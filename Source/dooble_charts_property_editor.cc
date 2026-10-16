@@ -912,6 +912,7 @@ QStandardItem *dooble_charts_property_editor_model::item_from_property
 dooble_charts_property_editor::
 dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 {
+  m_collapse = nullptr;
   m_tree = tree;
 
   if(m_tree)
@@ -952,6 +953,14 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
 	      SIGNAL(clicked(void)),
 	      this,
 	      SLOT(slot_collapse_all(void)));
+      connect(m_tree,
+	      SIGNAL(collapsed(const QModelIndex &)),
+	      this,
+	      SLOT(slot_tree_collapsed_expanded(const QModelIndex &))),
+      connect(m_tree,
+	      SIGNAL(expanded(const QModelIndex &)),
+	      this,
+	      SLOT(slot_tree_collapsed_expanded(const QModelIndex &)));
       connect(m_tree->horizontalScrollBar(),
 	      SIGNAL(valueChanged(int)),
 	      this,
@@ -962,8 +971,6 @@ dooble_charts_property_editor(QTreeView *tree):QWidget(tree)
       m_tree->setMinimumWidth(200);
       m_collapse->move(5, (m_tree->header()->size().height() - 25) / 2 + 2);
     }
-  else
-    m_collapse = nullptr;
 }
 
 dooble_charts_property_editor::~dooble_charts_property_editor()
@@ -1264,4 +1271,40 @@ void dooble_charts_property_editor::slot_show_font_dialog
 
   if(dialog.exec() == QDialog::Accepted)
     item->setText(dialog.selectedFont().toString());
+}
+
+void dooble_charts_property_editor::slot_tree_collapsed_expanded
+(const QModelIndex &index)
+{
+  Q_UNUSED(index);
+
+  if(!m_collapse || !m_model || !m_tree)
+    return;
+
+  auto const list(m_model->find_all_child_items(tr("Chart")) +
+		  m_model->find_all_child_items(tr("Chart X-Axis")) +
+		  m_model->find_all_child_items(tr("Chart Y-Axis")) +
+		  m_model->find_all_child_items(tr("Data")) +
+		  m_model->find_all_child_items(tr("Legend")) +
+		  m_model->find_all_child_items(tr("XY Series")));
+  int expanded = 0;
+  int total = 0;
+
+  foreach(auto item, list)
+    {
+      auto const index(m_model->indexFromItem(item));
+
+      if(m_model->hasChildren(index))
+	{
+	  if(m_tree->isExpanded(index))
+	    expanded += 1;
+
+	  total += 1;
+	}
+    }
+
+  if(expanded == total)
+    m_collapse->setText(tr("+"));
+  else
+    m_collapse->setText(tr("-"));
 }

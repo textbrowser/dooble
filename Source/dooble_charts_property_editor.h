@@ -80,11 +80,11 @@ class dooble_charts_property_editor_model: public QStandardItemModel
  public:
   dooble_charts_property_editor_model(QObject *parent);
   virtual ~dooble_charts_property_editor_model();
+  QList<QStandardItem *> find_all_child_items(const QString &text) const;
   QStandardItem *item_from_property
     (const dooble_charts::Properties property, const int column) const;
 
  protected:
-  QList<QStandardItem *> find_all_child_items(const QString &text) const;
   QStandardItem *find_specific_item(const QString &text) const;
 };
 
@@ -111,6 +111,7 @@ class dooble_charts_property_editor: public QWidget
   void slot_horizontal_scroll_bar_value_changed(int value);
   void slot_show_color_dialog(const dooble_charts::Properties property);
   void slot_show_font_dialog(const dooble_charts::Properties property);
+  void slot_tree_collapsed_expanded(const QModelIndex &index);
 
  protected:
   QPointer<QTreeView> m_tree;
