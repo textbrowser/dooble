@@ -1303,8 +1303,18 @@ void dooble_charts_property_editor::slot_tree_collapsed_expanded
 	}
     }
 
+  m_collapse->blockSignals(true);
+
   if(expanded == total)
-    m_collapse->setText(tr("+"));
+    {
+      m_collapse->setChecked(true);
+      m_collapse->setText(tr("-"));
+    }
   else
-    m_collapse->setText(tr("-"));
+    {
+      m_collapse->setChecked(false);
+      m_collapse->setText(tr("+"));
+    }
+
+  m_collapse->blockSignals(false);
 }
