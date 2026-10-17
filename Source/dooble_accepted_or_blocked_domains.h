@@ -72,6 +72,7 @@ class dooble_accepted_or_blocked_domains: public dooble_main_window
   void create_tables(QSqlDatabase &db);
   void populate(void);
   void populate_exceptions(void);
+  void populate_table(void);
   void save(const QByteArray &authentication_key,
 	    const QByteArray &encryption_key,
 	    const QHash<QString, char> &hash);

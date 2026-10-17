@@ -473,6 +473,53 @@ void dooble_accepted_or_blocked_domains::populate_exceptions(void)
   QApplication::restoreOverrideCursor();
 }
 
+void dooble_accepted_or_blocked_domains::populate_table(void)
+{
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  disconnect(m_ui.table,
+	     SIGNAL(itemChanged(QTableWidgetItem *)),
+	     this,
+	     SLOT(slot_item_changed(QTableWidgetItem *)));
+  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_domains.size()));
+  m_ui.table->setRowCount(m_domains.size());
+  m_ui.table->setSortingEnabled(false);
+
+  QHashIterator<QString, char> it(m_domains);
+  int i{0};
+
+  while(it.hasNext())
+    {
+      it.next();
+
+      auto item{new dooble_accepted_or_blocked_domains_item()};
+
+      if(it.value())
+	item->setCheckState(Qt::Checked);
+      else
+	item->setCheckState(Qt::Unchecked);
+
+      item->setData(Qt::UserRole, it.key());
+      item->setFlags(Qt::ItemIsEnabled |
+		     Qt::ItemIsSelectable |
+		     Qt::ItemIsUserCheckable);
+      m_ui.table->setItem(i, 0, item);
+      item = new dooble_accepted_or_blocked_domains_item(it.key());
+      item->setData(Qt::UserRole, it.key());
+      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      m_ui.table->setItem(i, 1, item);
+      i += 1;
+    }
+
+  connect(m_ui.table,
+	  SIGNAL(itemChanged(QTableWidgetItem *)),
+	  this,
+	  SLOT(slot_item_changed(QTableWidgetItem *)));
+  m_ui.table->setSortingEnabled(true);
+  m_ui.table->sortItems
+    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
+  QApplication::restoreOverrideCursor();
+}
+
 void dooble_accepted_or_blocked_domains::purge(void)
 {
   m_domains.clear();
@@ -761,49 +808,7 @@ void dooble_accepted_or_blocked_domains::showEvent(QShowEvent *event)
   if(m_ui.table->rowCount() > 0)
     return;
 
-  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-  disconnect(m_ui.table,
-	     SIGNAL(itemChanged(QTableWidgetItem *)),
-	     this,
-	     SLOT(slot_item_changed(QTableWidgetItem *)));
-  m_ui.entries_2->setText(tr("%1 Row(s)").arg(m_domains.size()));
-  m_ui.table->setRowCount(m_domains.size());
-  m_ui.table->setSortingEnabled(false);
-
-  QHashIterator<QString, char> it(m_domains);
-  int i{0};
-
-  while(it.hasNext())
-    {
-      it.next();
-
-      auto item{new dooble_accepted_or_blocked_domains_item()};
-
-      if(it.value())
-	item->setCheckState(Qt::Checked);
-      else
-	item->setCheckState(Qt::Unchecked);
-
-      item->setData(Qt::UserRole, it.key());
-      item->setFlags(Qt::ItemIsEnabled |
-		     Qt::ItemIsSelectable |
-		     Qt::ItemIsUserCheckable);
-      m_ui.table->setItem(i, 0, item);
-      item = new dooble_accepted_or_blocked_domains_item(it.key());
-      item->setData(Qt::UserRole, it.key());
-      item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-      m_ui.table->setItem(i, 1, item);
-      i += 1;
-    }
-
-  connect(m_ui.table,
-	  SIGNAL(itemChanged(QTableWidgetItem *)),
-	  this,
-	  SLOT(slot_item_changed(QTableWidgetItem *)));
-  m_ui.table->setSortingEnabled(true);
-  m_ui.table->sortItems
-    (1, m_ui.table->horizontalHeader()->sortIndicatorOrder());
-  QApplication::restoreOverrideCursor();
+  populate_table();
 }
 
 void dooble_accepted_or_blocked_domains::show_normal(QWidget *parent)
@@ -1252,6 +1257,7 @@ void dooble_accepted_or_blocked_domains::slot_imported(const qint64 ct)
     m_import_dialog->deleteLater();
 
   populate();
+  populate_table();
 }
 
 void dooble_accepted_or_blocked_domains::slot_item_changed
@@ -1354,6 +1360,7 @@ void dooble_accepted_or_blocked_domains::slot_save(void)
 
   QApplication::restoreOverrideCursor();
   populate();
+  populate_table();
 }
 
 void dooble_accepted_or_blocked_domains::slot_save_selected(void)
@@ -1371,6 +1378,7 @@ void dooble_accepted_or_blocked_domains::slot_save_selected(void)
 
   QApplication::restoreOverrideCursor();
   populate();
+  populate_table();
 }
 
 void dooble_accepted_or_blocked_domains::slot_search_timer_timeout(void)
