@@ -1232,8 +1232,8 @@ void dooble_accepted_or_blocked_domains::slot_import(void)
 		 tr("Dooble: Accepted / Blocked Domains Import"),
 		 tr("Importing the domain names. Please be patient. "
 		    "This dialog will be dismissed after the import process "
-		    "completes. If you close this dialog, the process will "
-		    "continue."),
+		    "completes. If you close this dialog, the import process "
+		    "will continue."),
 		 QMessageBox::Ok,
 		 this);
 #ifdef Q_OS_MACOS
