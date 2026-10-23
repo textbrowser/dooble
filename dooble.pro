@@ -307,6 +307,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wextra \
                           -Wformat=2 \
                           -Wno-c++20-attribute-extensions \
+                          -Wno-gnu-include-next \
                           -Wold-style-cast \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
