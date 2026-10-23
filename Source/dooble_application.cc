@@ -50,7 +50,9 @@ dooble_application::dooble_application(int &argc, char **argv):
   font.setStyleStrategy
     (QFont::StyleStrategy(QFont::PreferAntialias | QFont::PreferQuality));
   prepare_theme_colors();
+  setAttribute(Qt::AA_DontUseNativeDialogs);
   setAttribute(Qt::AA_DontUseNativeMenuBar);
+  setAttribute(Qt::AA_NativeWindows, true);
   setFont(font);
   setWindowIcon(QIcon(":/Logo/dooble.png"));
 }
