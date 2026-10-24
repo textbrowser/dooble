@@ -2218,9 +2218,9 @@ void dooble_settings::restore(bool read_database)
     (s_settings.value("splash_screen", true).toBool());
   m_ui.style_override->setCompleter
     (new QCompleter(sort(QStyleFactory::keys()), this));
+  m_ui.style_override->completer()->setCaseSensitivity(Qt::CaseInsensitive);
   m_ui.style_override->completer()->setCompletionMode
     (QCompleter::UnfilteredPopupCompletion);
-  m_ui.style_override->completer()->setCaseSensitivity(Qt::CaseInsensitive);
   m_ui.style_override->setText
     (QSettings(dooble_settings::setting("home_path").toString() +
 	       QDir::separator() +
