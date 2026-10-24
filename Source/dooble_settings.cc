@@ -25,6 +25,7 @@
 ** DOOBLE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QCompleter>
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDialog>
@@ -33,6 +34,7 @@
 #include <QNetworkProxy>
 #include <QSqlQuery>
 #include <QStandardItemModel>
+#include <QStyleFactory>
 #include <QToolTip>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
@@ -74,6 +76,14 @@ QString dooble_settings::s_http_user_agent;
 QString dooble_settings::s_home_path;
 QStringList dooble_settings::s_spell_checker_dictionaries;
 bool dooble_settings::s_reading_from_canvas_enabled = true;
+
+static QStringList sort(const QStringList &list)
+{
+  auto sorted(list);
+
+  std::sort(sorted.begin(), sorted.end());
+  return sorted;
+}
 
 dooble_settings::dooble_settings(void):dooble_main_window()
 {
@@ -2206,6 +2216,11 @@ void dooble_settings::restore(bool read_database)
      toString().toLower().trimmed());
   m_ui.splash_screen->setChecked
     (s_settings.value("splash_screen", true).toBool());
+  m_ui.style_override->setCompleter
+    (new QCompleter(sort(QStyleFactory::keys()), this));
+  m_ui.style_override->completer()->setCompletionMode
+    (QCompleter::UnfilteredPopupCompletion);
+  m_ui.style_override->completer()->setCaseSensitivity(Qt::CaseInsensitive);
   m_ui.style_override->setText
     (QSettings(dooble_settings::setting("home_path").toString() +
 	       QDir::separator() +
