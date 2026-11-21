@@ -52,9 +52,9 @@ class dooble_aes256: public dooble_block_cipher
   void set_key(const QByteArray &key);
 
  private:
-  size_t m_Nb;
-  size_t m_Nk;
-  size_t m_Nr;
+  const size_t static s_Nb = 4;
+  const size_t static s_Nk = 8;
+  const size_t static s_Nr = 14;
   uint8_t m_round_key[60][4] {};
   uint8_t m_state[4][4] {}; // 4 rows, Nb columns.
   QByteArray decrypt_block(const QByteArray &block);
