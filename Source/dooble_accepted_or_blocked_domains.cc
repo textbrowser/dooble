@@ -1303,6 +1303,7 @@ void dooble_accepted_or_blocked_domains::slot_populate(void)
   m_exceptions.clear();
   populate();
   populate_exceptions();
+  isVisible() ? populate_table() : (void) 0;
   emit populated();
 }
 
