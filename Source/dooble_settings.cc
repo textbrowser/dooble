@@ -3753,20 +3753,6 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 
 	  if(ok)
 	    {
-	      dooble::s_cryptography->set_authenticated(true);
-
-	      if(list.at(1).toInt() == 0)
-		dooble::s_cryptography->set_cipher_type("AES-256");
-	      else if(list.at(1).toInt() == 1)
-		dooble::s_cryptography->set_cipher_type("Threefish-256");
-	      else
-		dooble::s_cryptography->set_cipher_type("XChaCha20");
-
-	      if(list.at(2).toInt() == 0)
-		dooble::s_cryptography->set_hash_type("Keccak-512");
-	      else
-		dooble::s_cryptography->set_hash_type("SHA3-512");
-
 	      auto authentication_key
 		(list.value(0).
 		 mid(0, dooble_cryptography::s_authentication_key_length));
@@ -3775,12 +3761,49 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 		 mid(dooble_cryptography::s_authentication_key_length,
 		     dooble_cryptography::s_encryption_key_length));
 
-	      dooble::s_cryptography->set_keys
-		(authentication_key, encryption_key);
-	      dooble_cryptography::memzero(authentication_key);
-	      dooble_cryptography::memzero(encryption_key);
-	      m_ui.reset_credentials->setEnabled(true);
-	      emit dooble_credentials_created();
+	      if(authentication_key.length() !=
+		 dooble_cryptography::s_authentication_key_length)
+		{
+		  error = "authentication_key length is incorrect";
+		  ok = false;
+		}
+
+	      if(dooble_cryptography::s_encryption_key_length !=
+		 encryption_key.length() &&
+		 ok)
+		{
+		  error = "encryption_key length is incorrect";
+		  ok = false;
+		}
+
+	      if(ok)
+		{
+		  dooble::s_cryptography->set_authenticated(true);
+
+		  if(list.at(1).toInt() == 0)
+		    dooble::s_cryptography->set_cipher_type("AES-256");
+		  else if(list.at(1).toInt() == 1)
+		    dooble::s_cryptography->set_cipher_type("Threefish-256");
+		  else
+		    dooble::s_cryptography->set_cipher_type("XChaCha20");
+
+		  if(list.at(2).toInt() == 0)
+		    dooble::s_cryptography->set_hash_type("Keccak-512");
+		  else
+		    dooble::s_cryptography->set_hash_type("SHA3-512");
+
+		  dooble::s_cryptography->set_keys
+		    (authentication_key, encryption_key);
+		  dooble_cryptography::memzero(authentication_key);
+		  dooble_cryptography::memzero(encryption_key);
+		  m_ui.reset_credentials->setEnabled(true);
+		  emit dooble_credentials_created();
+		}
+	      else
+		{
+		  dooble_cryptography::memzero(authentication_key);
+		  dooble_cryptography::memzero(encryption_key);
+		}
 	    }
 	}
       else
