@@ -594,11 +594,13 @@ void dooble_accepted_or_blocked_domains::save
 
         QHashIterator<QString, char> it{hash};
         QSqlQuery query{db};
+	auto ok = false;
 	dooble_cryptography cryptography
           {authentication_key,
 	   encryption_key,
 	   dooble_settings::setting("cipher_type").toString(),
-           dooble_settings::setting("hash_type").toString()};
+           dooble_settings::setting("hash_type").toString(),
+	   ok};
 
 	query.exec("PRAGMA synchronous = OFF");
 

@@ -48,13 +48,15 @@ dooble_cryptography::dooble_cryptography
 (const QByteArray &authentication_key,
  const QByteArray &encryption_key,
  const QString &cipher_type,
- const QString &hash_type):QObject()
+ const QString &hash_type,
+ bool &ok):QObject()
 {
   m_as_plaintext = false;
   m_authenticated = false;
   m_authentication_key = authentication_key;
   m_cipher_type = cipher_type.toLower().trimmed();
   m_encryption_key = encryption_key;
+  ok = true;
 
   if(hash_type.toLower().trimmed() == "keccak-512")
     m_hash_type = dooble_cryptography::HashTypes::KECCAK_512;
@@ -68,6 +70,7 @@ dooble_cryptography::dooble_cryptography
       m_authenticated = true;
       memzero(m_authentication_key);
       memzero(m_encryption_key);
+      ok = false;
     }
 #ifdef DOOBLE_MMAN_PRESENT
   else

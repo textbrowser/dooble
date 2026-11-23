@@ -48,7 +48,8 @@ class dooble_cryptography: public QObject
   dooble_cryptography(const QByteArray &authentication_key,
 		      const QByteArray &encryption_key,
 		      const QString &cipher_type,
-		      const QString &hash_type);
+		      const QString &hash_type,
+		      bool &ok);
   dooble_cryptography(const QString &cipher_type,
 		      const QString &hash_type);
   ~dooble_cryptography();

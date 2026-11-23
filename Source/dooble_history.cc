@@ -239,11 +239,13 @@ void dooble_history::populate(const QByteArray &authentication_key,
 	QSqlQuery query(db);
 	auto const days = dooble_settings::setting
 	  ("browsing_history_days").toInt();
+	auto ok = false;
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
 	   dooble_settings::setting("cipher_type").toString(),
-	   dooble_settings::setting("hash_type").toString());
+	   dooble_settings::setting("hash_type").toString(),
+	   ok);
 
 	query.setForwardOnly(true);
 
@@ -401,11 +403,13 @@ void dooble_history::purge(const QByteArray &authentication_key,
 	create_tables(db);
 
 	QSqlQuery query(db);
+	auto ok = false;
 	dooble_cryptography cryptography
 	  (authentication_key,
 	   encryption_key,
 	   dooble_settings::setting("cipher_type").toString(),
-	   dooble_settings::setting("hash_type").toString());
+	   dooble_settings::setting("hash_type").toString(),
+	   ok);
 
 	query.setForwardOnly(true);
 	query.exec("SELECT SUBSTR(last_visited, 1, 1000), "

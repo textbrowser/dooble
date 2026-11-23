@@ -1118,8 +1118,12 @@ void dooble::initialize_static_members(void)
 	  (dooble_settings::setting("cipher_type").toString(),
 	   dooble_settings::setting("hash_type").toString());
       else
-	s_cryptography = new dooble_cryptography
-	  (QByteArray(), QByteArray(), "AES-256", "SHA3-512");
+	{
+	  auto ok = false;
+
+	  s_cryptography = new dooble_cryptography
+	    (QByteArray(), QByteArray(), "AES-256", "SHA3-512", ok);
+	}
     }
 
   if(!s_downloads)
