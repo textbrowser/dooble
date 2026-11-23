@@ -204,7 +204,7 @@ QString dooble_address_widget::page_publication_directory_name(void)
 
   path.append(QDir::separator());
   path.append("Dooble Published Pages");
-  QDir().mkdir(path);
+  QDir().mkpath(path);
   return path;
 }
 

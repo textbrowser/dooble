@@ -579,7 +579,7 @@ QString dooble_settings::prepare_home_path(void)
 	  if(username.isEmpty())
 	    {
 	      if(!home_directory.exists(dooble_directory) &&
-		 !home_directory.mkdir(dooble_directory))
+		 !home_directory.mkpath(dooble_directory))
 		qDebug() << tr("Could not create the directory %1 in %2.").
 		  arg(dooble_directory).arg(home_directory.absolutePath());
 	    }
@@ -627,7 +627,7 @@ QString dooble_settings::prepare_home_path(void)
 	      auto const home_directory(QDir::home());
 
 	      if(!home_directory.exists(dooble_directory) &&
-		 !home_directory.mkdir(dooble_directory))
+		 !home_directory.mkpath(dooble_directory))
 		qDebug() << tr("Could not create the directory %1 in %2.").
 		  arg(dooble_directory).arg(home_directory.absolutePath());
 
@@ -645,7 +645,7 @@ QString dooble_settings::prepare_home_path(void)
 		home_directory = QDir(xdg_data_home);
 
 	      if(!home_directory.exists("dooble") &&
-		 !home_directory.mkdir("dooble"))
+		 !home_directory.mkpath("dooble"))
 		qDebug() << tr("Could not create the directory %1 in %2.").
 		  arg("dooble").arg(home_directory.absolutePath());
 

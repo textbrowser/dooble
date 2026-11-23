@@ -108,7 +108,7 @@ dooble_jar_implementation::dooble_jar_implementation
  dooble_web_engine_view *web_engine_view,
  QObject *parent):QProcess(parent)
 {
-  QDir().mkdir
+  QDir().mkpath
     (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).
      value(0) +
      QDir::separator() +

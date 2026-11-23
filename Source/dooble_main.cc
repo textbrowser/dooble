@@ -48,9 +48,6 @@ extern "C"
 #endif
 }
 
-#ifdef Q_OS_MACOS
-#include "CocoaInitializer.h"
-#endif
 #include "dooble.h"
 #include "dooble_accepted_or_blocked_domains.h"
 #include "dooble_aes256.h"
@@ -597,14 +594,6 @@ int main(int argc, char *argv[])
 
   if(splash_screen)
     dooble::s_application->processEvents();
-
-#ifdef Q_OS_MACOS
-  /*
-  ** Eliminate pool errors on MacOS.
-  */
-
-  CocoaInitializer cocoa_initializer;
-#endif
 
   if(splash_screen)
     {

@@ -198,19 +198,18 @@ dict.files += $$DICTIONARIES/$${base_path}.dic
 }
 }
 
-dictoolbuild.CONFIG = no_clean no_link target_predeps
+build_deb.bash        =
+dictoolbuild.CONFIG   = no_clean no_link target_predeps
 dictoolbuild.commands = $${CONVERT_DICT} ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
-dictoolbuild.depends = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.aff
-dictoolbuild.input = dict.files
-dictoolbuild.name = ${QMAKE_FILE_IN_BASE} Build
-dictoolbuild.output = $${WEB_DICTIONARIES}/${QMAKE_FILE_BASE}.bdic
-
-build_deb.bash =
+dictoolbuild.depends  = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.aff
+dictoolbuild.input    = dict.files
+dictoolbuild.name     = ${QMAKE_FILE_IN_BASE} Build
+dictoolbuild.output   = $${WEB_DICTIONARIES}/${QMAKE_FILE_BASE}.bdic
 
 freebsd-* {
 exists(/usr/local/include/gpgme.h) {
 DEFINES += DOOBLE_PEEKABOO
-LIBS += -lgpgme
+LIBS    += -lgpgme
 message("Discovered gpgme.h. Peekaboo activated!")
 }
 }
@@ -221,14 +220,14 @@ exists(/usr/bin/dpkg-deb) {
 
 exists(/usr/include/gpgme.h) {
 DEFINES += DOOBLE_PEEKABOO
-LIBS += -lgpgme
+LIBS    += -lgpgme
 message("Discovered gpgme.h. Peekaboo activated!")
 }
 }
 
 unix {
 QMAKE_LFLAGS_RPATH =
-purge.commands = find . -name \'*~*\' -exec rm -f {} \;
+purge.commands = find . -name \'*~*\' -exec rm -f {} \\;
 } else {
 purge.commands =
 }
@@ -236,40 +235,41 @@ purge.commands =
 FILES = /usr/include/linux/mman.h \
         /usr/include/sys/mman.h
 
-for(file, FILES):exists($$file):{DEFINES += DOOBLE_MMAN_PRESENT}
-
-macx {
-DEFINES         += DOOBLE_MMAN_PRESENT
+for(file, FILES):exists($$file) {
+DEFINES += DOOBLE_MMAN_PRESENT
 }
 
-CONFIG		+= qt release warn_on
-DEFINES         += DOOBLE_REGISTER_JAR_SCHEME
-LANGUAGE	= C++
-QT		+= concurrent \
-                   gui \
-                   network \
-                   printsupport \
-                   qml \
-                   sql \
-                   webenginewidgets \
-                   widgets \
-                   xml
+macx {
+DEFINES += DOOBLE_MMAN_PRESENT
+}
+
+CONFIG	 += qt release warn_on
+DEFINES  += DOOBLE_REGISTER_JAR_SCHEME
+LANGUAGE = C++
+QT	 += concurrent \
+            gui \
+            network \
+            printsupport \
+            qml \
+            sql \
+            webenginewidgets \
+            widgets \
+            xml
 
 qtHaveModule(charts) {
-DEFINES         += DOOBLE_QTCHARTS_PRESENT
-QT              += charts
+DEFINES += DOOBLE_QTCHARTS_PRESENT
+QT      += charts
 message("The QtCharts module has been discovered.")
 } else {
 warning("The QtCharts module is not present. I'm very sorry!")
 }
 
 lessThan(QT_MAJOR_VERSION, 6) {
-QT              += webengine
+QT += webengine
 }
 
-TEMPLATE	= app
-
-QMAKE_CLEAN     += Dooble
+QMAKE_CLEAN += Dooble
+TEMPLATE    = app
 
 freebsd-* {
 # Enable only if FreeBSD's Qt and WebEngine versions differ.
@@ -320,6 +320,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -pedantic \
                           -std=c++17
 QMAKE_CXXFLAGS_RELEASE -= -O2
+
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
 } else:win32 {
 versionAtLeast(QT_VERSION, 6.0.0) {
@@ -349,7 +350,7 @@ QMAKE_CXXFLAGS_RELEASE += /GA \
 } else {
 QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Wall \
-			  -Warray-bounds=2 \
+                          -Warray-bounds=2 \
                           -Wcast-align \
                           -Wcast-qual \
                           -Wdouble-promotion \
@@ -366,7 +367,7 @@ QMAKE_CXXFLAGS_RELEASE += -O3 \
                           -Woverloaded-virtual \
                           -Wpointer-arith \
                           -Wstack-protector \
-			  -Wstrict-overflow=1 \
+                          -Wstrict-overflow=1 \
                           -Wstringop-overflow=4 \
                           -Wtrampolines \
                           -Wundef \
@@ -403,21 +404,15 @@ QMAKE_EXTRA_COMPILERS += dictoolbuild
 QMAKE_EXTRA_TARGETS = build-deb dmg purge
 
 macx {
-ICON            = Icons/Logo/dooble.icns
+ICON = Icons/Logo/dooble.icns
 }
 
-INCLUDEPATH	+= Source
-
-macx {
-LIBS		+= -framework Cocoa
-}
-
+INCLUDEPATH    += Source
+MOC_DIR        = Temporary/moc
+OBJECTS_DIR    = Temporary/obj
 PRE_TARGETDEPS =
-
-MOC_DIR = Temporary/moc
-OBJECTS_DIR = Temporary/obj
-RCC_DIR = Temporary/rcc
-UI_DIR = Temporary/ui
+RCC_DIR        = Temporary/rcc
+UI_DIR         = Temporary/ui
 
 macx {
 DISTFILES += $$DICTIONARIES/af_ZA/af_ZA.aff \
@@ -724,22 +719,16 @@ DISTFILES += $$DICTIONARIES/af_ZA/af_ZA.aff \
              $$DICTIONARIES/vi/vi_VN.dic
 }
 
-macx {
-OBJECTIVE_HEADERS += Source/Cocoainitializer.h
-OBJECTIVE_SOURCES += Source/Cocoainitializer.mm
-}
-
 win32 {
-RC_FILE         = Icons/dooble.rc
+RC_FILE = Icons/dooble.rc
 }
 
-UI_HEADERS_DIR  = Source
-
-PROJECTNAME	= Dooble
-TARGET		= Dooble
+PROJECTNAME    = Dooble
+TARGET	       = Dooble
+UI_HEADERS_DIR = Source
 
 !win32 {
-VERSION         = DOOBLE_VERSION
+VERSION = DOOBLE_VERSION
 }
 
 macx {
@@ -762,23 +751,23 @@ preinstall.path		= Dooble.d
 translations.files	= Translations/*.qm
 translations.path	= Dooble.d/Translations
 
-INSTALLS	= copycharts \
-                  copydata \
-                  copydocumentation \
-                  preinstall \
-                  copydooble \
-                  macdeployqt \
-		  copyinfoplist \
-		  purgeheaders \
-                  translations
+INSTALLS = copycharts \
+           copydata \
+           copydocumentation \
+           preinstall \
+           copydooble \
+           macdeployqt \
+           copyinfoplist \
+           purgeheaders \
+           translations
 }
 
 macx:app_bundle {
 isEmpty(CONVERT_DICT) {
 } else {
 for (base_path, dict_base_paths) {
-base_path_splitted = $$split(base_path, /)
-base_name = $$last(base_path_splitted)
+base_path_splitted      = $$split(base_path, /)
+base_name               = $$last(base_path_splitted)
 binary_dict_files.files += $${WEB_DICTIONARIES}/$${base_name}.bdic
 }
 
