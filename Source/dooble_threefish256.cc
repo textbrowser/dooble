@@ -185,14 +185,6 @@ static void threefish_decrypt(char *D,
 			      const size_t block_size,
 			      bool *ok)
 {
-  if(Q_UNLIKELY(!C || C_size == 0 || !D || !K || !T || block_size == 0))
-    {
-      if(ok)
-	*ok = false;
-
-      return;
-    }
-
   threefish_decrypt_implementation(D, K, T, C, C_size, block_size, ok);
 }
 
@@ -204,7 +196,7 @@ static void threefish_decrypt_implementation(char *D,
 					     const size_t block_size,
 					     bool *ok)
 {
-  if(Q_UNLIKELY(!C || C_size == 0 || !D || !K || !T || block_size == 0))
+  if(!C || !D || !K || !T || C_size != block_size / 8)
     {
       if(ok)
 	*ok = false;
@@ -376,14 +368,6 @@ static void threefish_encrypt(char *E,
 			      const size_t block_size,
 			      bool *ok)
 {
-  if(Q_UNLIKELY(!E || !K || !P || P_size == 0 || !T || block_size == 0))
-    {
-      if(ok)
-	*ok = false;
-
-      return;
-    }
-
   threefish_encrypt_implementation(E, K, T, P, P_size, block_size, ok);
 }
 
@@ -395,7 +379,7 @@ static void threefish_encrypt_implementation(char *E,
 					     const size_t block_size,
 					     bool *ok)
 {
-  if(Q_UNLIKELY(!E || !K || !T || !P || P_size == 0 || block_size == 0))
+  if(!E || !K || !P || !T || P_size != block_size / 8)
     {
       if(ok)
 	*ok = false;
@@ -581,7 +565,7 @@ static void words_to_bytes(char *B,
 dooble_threefish256::dooble_threefish256(const QByteArray &key):
   dooble_block_cipher(key)
 {
-  m_block_length = key.length();
+  m_block_length = 32;
   m_key = key.mid(0, 32);
   m_key_length = key.length();
 }
@@ -596,7 +580,7 @@ dooble_threefish256::~dooble_threefish256()
 
 QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
 {
-  if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
+  if(Q_UNLIKELY(m_key.length() != 32 || m_tweak.isEmpty()))
     return QByteArray();
 
   auto const iv(bytes.mid(0, m_key_length));
@@ -674,7 +658,7 @@ QByteArray dooble_threefish256::decrypt(const QByteArray &bytes)
 
 QByteArray dooble_threefish256::encrypt(const QByteArray &bytes)
 {
-  if(Q_UNLIKELY(m_key.isEmpty() || m_tweak.isEmpty()))
+  if(Q_UNLIKELY(m_key.length() != 32 || m_tweak.isEmpty()))
     return QByteArray();
 
   QByteArray iv;
@@ -781,7 +765,7 @@ void dooble_threefish256::set_key(const QByteArray &key)
 #ifdef DOOBLE_MMAN_PRESENT
   munlock(m_key.constData(), static_cast<size_t> (m_key.length()));
 #endif
-  m_block_length = key.length();
+  m_block_length = 32;
   m_key = key.mid(0, 32);
   m_key_length = key.length();
 #ifdef DOOBLE_MMAN_PRESENT
