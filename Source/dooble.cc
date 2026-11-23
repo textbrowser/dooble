@@ -4446,20 +4446,6 @@ void dooble::slot_pbkdf2_future_finished(void)
 
       if(list.size() == 6)
 	{
-	  s_cryptography->set_authenticated(true);
-
-	  if(list.at(1).toInt() == 0)
-	    s_cryptography->set_cipher_type("AES-256");
-	  else if(list.at(1).toInt() == 1)
-	    s_cryptography->set_cipher_type("Threefish-256");
-	  else
-	    s_cryptography->set_cipher_type("XChaCha20");
-
-	  if(list.at(2).toInt() == 0)
-	    s_cryptography->set_hash_type("Keccak-512");
-	  else
-	    s_cryptography->set_hash_type("SHA3-512");
-
 	  auto authentication_key
 	    (list.at(0).
 	     mid(0, dooble_cryptography::s_authentication_key_length));
@@ -4468,10 +4454,35 @@ void dooble::slot_pbkdf2_future_finished(void)
 	     mid(dooble_cryptography::s_authentication_key_length,
 		 dooble_cryptography::s_encryption_key_length));
 
-	  s_cryptography->set_keys(authentication_key, encryption_key);
+	  if(authentication_key.length() ==
+	     dooble_cryptography::s_authentication_key_length &&
+	     dooble_cryptography::s_encryption_key_length ==
+	     encryption_key.length())
+	    {
+	      s_cryptography->set_authenticated(true);
+
+	      if(list.at(1).toInt() == 0)
+		s_cryptography->set_cipher_type("AES-256");
+	      else if(list.at(1).toInt() == 1)
+		s_cryptography->set_cipher_type("Threefish-256");
+	      else if(list.at(1).toInt() == 2)
+		s_cryptography->set_cipher_type("XChaCha20");
+	      else
+		s_cryptography->set_cipher_type("AES-256");
+
+	      if(list.at(2).toInt() == 0)
+		s_cryptography->set_hash_type("Keccak-512");
+	      else
+		s_cryptography->set_hash_type("SHA3-512");
+
+	      auto ok = false;
+
+	      s_cryptography->set_keys(authentication_key, encryption_key, ok);
+	      emit dooble_credentials_authenticated(true);
+	    }
+
 	  dooble_cryptography::memzero(authentication_key);
 	  dooble_cryptography::memzero(encryption_key);
-	  emit dooble_credentials_authenticated(true);
 	}
     }
 }

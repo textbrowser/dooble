@@ -61,12 +61,13 @@ dooble_cryptography::dooble_cryptography
   else
     m_hash_type = dooble_cryptography::HashTypes::SHA3_512;
 
-  if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
+  if(m_authentication_key.length() != s_authentication_key_length ||
+     m_encryption_key.length() != s_encryption_key_length)
     {
       m_as_plaintext = true;
       m_authenticated = true;
-      m_authentication_key.clear();
-      m_encryption_key.clear();
+      memzero(m_authentication_key);
+      memzero(m_encryption_key);
     }
 #ifdef DOOBLE_MMAN_PRESENT
   else
@@ -305,12 +306,16 @@ void dooble_cryptography::memzero(QByteArray &bytes)
 {
   for(auto &&i : bytes)
     i = 0;
+
+  bytes.clear();
 }
 
 void dooble_cryptography::memzero(QString &text)
 {
   for(auto &&i : text)
     i = QChar(0);
+
+  text.clear();
 }
 
 void dooble_cryptography::set_authenticated(bool state)
@@ -333,7 +338,8 @@ void dooble_cryptography::set_hash_type(const QString &hash_type)
 }
 
 void dooble_cryptography::set_keys(const QByteArray &authentication_key,
-				   const QByteArray &encryption_key)
+				   const QByteArray &encryption_key,
+				   bool &ok)
 {
 #ifdef DOOBLE_MMAN_PRESENT
   munlock(m_authentication_key.constData(),
@@ -343,13 +349,16 @@ void dooble_cryptography::set_keys(const QByteArray &authentication_key,
 #endif
   m_authentication_key = authentication_key;
   m_encryption_key = encryption_key;
+  ok = true;
 
-  if(m_authentication_key.isEmpty() || m_encryption_key.isEmpty())
+  if(m_authentication_key.length() != s_authentication_key_length ||
+     m_encryption_key.length() != s_encryption_key_length)
     {
       m_as_plaintext = true;
       m_authenticated = true;
-      m_authentication_key.clear();
-      m_encryption_key.clear();
+      memzero(m_authentication_key);
+      memzero(m_encryption_key);
+      ok = false;
     }
   else
     {

@@ -3025,6 +3025,8 @@ void dooble_settings::slot_apply(void)
       dooble::s_cryptography->set_cipher_type("AES-256");
       dooble::s_cryptography->set_hash_type("SHA3-512");
 
+      auto ok = false;
+
       if(m_ui.credentials->isChecked())
 	{
 	  /*
@@ -3039,14 +3041,15 @@ void dooble_settings::slot_apply(void)
 	     random_bytes(dooble_cryptography::s_encryption_key_length));
 
 	  dooble::s_cryptography->set_authenticated(false);
-	  dooble::s_cryptography->set_keys(authentication_key, encryption_key);
+	  dooble::s_cryptography->set_keys
+	    (authentication_key, encryption_key, ok);
 	  dooble_cryptography::memzero(authentication_key);
 	  dooble_cryptography::memzero(encryption_key);
 	  emit dooble_credentials_authenticated(false);
 	}
       else
 	{
-	  dooble::s_cryptography->set_keys(QByteArray(), QByteArray());
+	  dooble::s_cryptography->set_keys(QByteArray(), QByteArray(), ok);
 	  emit dooble_credentials_authenticated(true);
 	}
 
@@ -3784,8 +3787,10 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 		    dooble::s_cryptography->set_cipher_type("AES-256");
 		  else if(list.at(1).toInt() == 1)
 		    dooble::s_cryptography->set_cipher_type("Threefish-256");
-		  else
+		  else if(list.at(1).toInt() == 2)
 		    dooble::s_cryptography->set_cipher_type("XChaCha20");
+		  else
+		    dooble::s_cryptography->set_cipher_type("AES-256");
 
 		  if(list.at(2).toInt() == 0)
 		    dooble::s_cryptography->set_hash_type("Keccak-512");
@@ -3793,7 +3798,7 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 		    dooble::s_cryptography->set_hash_type("SHA3-512");
 
 		  dooble::s_cryptography->set_keys
-		    (authentication_key, encryption_key);
+		    (authentication_key, encryption_key, ok);
 		  dooble_cryptography::memzero(authentication_key);
 		  dooble_cryptography::memzero(encryption_key);
 		  m_ui.reset_credentials->setEnabled(true);
@@ -3803,6 +3808,23 @@ void dooble_settings::slot_pbkdf2_future_finished(void)
 		{
 		  dooble_cryptography::memzero(authentication_key);
 		  dooble_cryptography::memzero(encryption_key);
+		  remove_setting("authentication_iteration_count");
+		  remove_setting("authentication_salt");
+		  remove_setting("authentication_salted_password");
+		  remove_setting("cipher_type");
+		  remove_setting("cipher_type_index");
+		  remove_setting("credentials_enabled");
+		  remove_setting("hash_type");
+		  remove_setting("hash_type_index");
+
+		  {
+		    QWriteLocker locker(&s_settings_mutex);
+
+		    s_settings["cipher_type"] = "AES-256";
+		    s_settings["cipher_type_index"] = 0;
+		    s_settings["hash_type"] = "SHA3-512";
+		    s_settings["hash_type_index"] = 1;
+		  }
 		}
 	    }
 	}
@@ -4872,11 +4894,12 @@ void dooble_settings::slot_reset_credentials(void)
      random_bytes(dooble_cryptography::s_authentication_key_length));
   auto encryption_key
     (dooble_random::random_bytes(dooble_cryptography::s_encryption_key_length));
+  auto ok = false;
 
   dooble::s_cryptography->set_authenticated(false);
   dooble::s_cryptography->set_cipher_type("AES-256");
   dooble::s_cryptography->set_hash_type("SHA3-512");
-  dooble::s_cryptography->set_keys(authentication_key, encryption_key);
+  dooble::s_cryptography->set_keys(authentication_key, encryption_key, ok);
   dooble_cryptography::memzero(authentication_key);
   dooble_cryptography::memzero(encryption_key);
   emit dooble_credentials_authenticated(false);

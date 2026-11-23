@@ -76,7 +76,8 @@ class dooble_cryptography: public QObject
   void set_cipher_type(const QString &cipher_type);
   void set_hash_type(const QString &hash_type);
   void set_keys(const QByteArray &authentication_key,
-		const QByteArray &encryption_key);
+		const QByteArray &encryption_key,
+		bool &ok);
 
  private:
   QByteArray m_authentication_key;
