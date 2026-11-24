@@ -49,6 +49,8 @@ class swifty: public QNetworkAccessManager
 
   ~swifty()
   {
+    if(m_reply)
+      m_reply->abort();
   }
 
   QString newest_version(void) const
@@ -62,14 +64,17 @@ class swifty: public QNetworkAccessManager
     m_buffer.clear();
 
     if(m_reply)
-      m_reply->deleteLater();
+      {
+	m_reply->deleteLater();
+	m_reply = nullptr;
+      }
 
     if(m_current_version.isEmpty() ||
        m_search_for_string.isEmpty() ||
        m_url.isEmpty() ||
        m_url.isValid() == false)
       {
-	qDebug() << tr("Invalid configuration.");
+	qDebug() << tr("Invalid swifty configuration.");
 	return;
       }
 
@@ -110,7 +115,10 @@ class swifty: public QNetworkAccessManager
 	version = version.replace('"', "").trimmed();
 
 	if(version.isEmpty())
-	  return;
+	  {
+	    qDebug() << "Empty version discovered by swifty.";
+	    return;
+	  }
 
 	if(m_current_version != version)
 	  {
