@@ -42,8 +42,8 @@ class swifty: public QNetworkAccessManager
 	 const QUrl &url,
 	 QObject *parent):QNetworkAccessManager(parent)
   {
-    m_current_version = m_newest_version = current_version;
-    m_search_for_string = search_for_string;
+    m_current_version = m_newest_version = current_version.trimmed();
+    m_search_for_string = search_for_string.trimmed();
     m_url = url;
   }
 
@@ -64,6 +64,15 @@ class swifty: public QNetworkAccessManager
     if(m_reply)
       m_reply->deleteLater();
 
+    if(m_current_version.isEmpty() ||
+       m_search_for_string.isEmpty() ||
+       m_url.isEmpty() ||
+       m_url.isValid() == false)
+      {
+	qDebug() << tr("Invalid configuration.");
+	return;
+      }
+
     m_reply = get(QNetworkRequest(m_url));
     connect(m_reply,
 	    SIGNAL(finished(void)),
@@ -82,22 +91,26 @@ class swifty: public QNetworkAccessManager
   QString m_newest_version;
   QString m_search_for_string;
   QUrl m_url;
+  const static int MAXIMUM = 5000;
 
- private slots:
-  void slot_finished(void)
+  void notify(void)
   {
-    if(m_reply)
-      m_reply->deleteLater();
-
-    auto const index = m_buffer.indexOf(m_search_for_string.toUtf8());
+    auto index = m_buffer.indexOf(m_search_for_string.toUtf8());
 
     if(index >= 0)
       {
 	auto version = m_buffer.mid
 	  (index + m_search_for_string.toUtf8().length());
 
-	version = version.mid(0, version.indexOf('\n')).replace('"', "").
-	  trimmed();
+	index = version.indexOf('\n');
+
+	if(index > 0)
+	  version = version.mid(0, index);
+
+	version = version.replace('"', "").trimmed();
+
+	if(version.isEmpty())
+	  return;
 
 	if(m_current_version != version)
 	  {
@@ -109,10 +122,28 @@ class swifty: public QNetworkAccessManager
       }
   }
 
+ private slots:
+  void slot_finished(void)
+  {
+    notify();
+
+    if(m_reply)
+      {
+	m_reply->deleteLater();
+	m_reply = nullptr;
+      }
+  }
+
   void slot_ready_read(void)
   {
-    while(m_reply && m_reply->bytesAvailable() > 0)
+    if(!m_reply)
+      return;
+
+    while(MAXIMUM > m_buffer.length() && m_reply->bytesAvailable() > 0)
       m_buffer.append(m_reply->readAll());
+
+    if(MAXIMUM > m_buffer.length())
+      m_reply->abort();
   }
 
  signals:
