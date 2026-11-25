@@ -269,7 +269,7 @@ bool dooble_cryptography::memcmp(const QByteArray &a, const QByteArray &b)
   QByteArray c1;
   QByteArray c2;
   auto const length = qMax(a.length(), b.length());
-  quint8 rc = 0;
+  auto rc = static_cast<quint64> (a.length() ^ b.length());
 
   c1 = a.leftJustified(length, 0);
   c2 = b.leftJustified(length, 0);
@@ -277,7 +277,7 @@ bool dooble_cryptography::memcmp(const QByteArray &a, const QByteArray &b)
   for(int i = 0; i < length; i++)
     rc |= static_cast<quint8> (c1[i]) ^ static_cast<quint8> (c2[i]);
 
-  return a.length() == b.length() && rc == 0;
+  return rc == 0;
 }
 
 void dooble_cryptography::authenticate(const QByteArray &salt,
