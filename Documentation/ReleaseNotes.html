@@ -36,6 +36,8 @@
 	  <li>AES-256: constant m_Nb, m_Nk, m_Nr variables.</li>
 	  <li>AES-256: replaced N * sizeof(array member[0]) with sizeof(array member).</li>
 	  <li>AES-256: s_rcon[11][4] instead of s_rcon[][11].</li>
+	  <li>Corrected dooble_cryptography::memcmp(): compare
+	    the sizes of the original byte arrays. Also replaced quint64 with quint8.</li>
 	  <li>New swifty version-download file.</li>
 	  <li>Populate table items in Accepted / Blocked Domains after authentication if the table is visible.</li>
 	  <li>Prefer QDir()::mkpath() instead of QDir::mkdir().</li>
